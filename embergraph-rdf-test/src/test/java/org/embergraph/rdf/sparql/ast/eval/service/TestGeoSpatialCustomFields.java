@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite for GeoSpatial service feature aiming at the definition of custom fields
+/*
+* Data driven test suite for GeoSpatial service feature aiming at the definition of custom fields
  * (possibly combined with predefined fields).
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -77,7 +77,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z) index, where we additionally extract values from the index.
    */
   public void testCustomFieldsXYZ02() throws Exception {
@@ -90,7 +90,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (TIME,x,y,z) index, where we additionally extract values from the
    * index.
    */
@@ -104,7 +104,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z,TIME,LAT,LON) index, where we additionally extract values
    * from the index.
    */
@@ -118,7 +118,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z,TIME,LAT,LON) index, where we additionally extract a single
    * value from the index.
    */
@@ -132,7 +132,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z,TIME,LAT,LON) index, where we additionally extract a single
    * value from the index.
    */
@@ -146,7 +146,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z,TIME,LAT,LON) index, where we additionally extract a single
    * value from the index.
    */
@@ -160,7 +160,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z,TIME,LAT,LON) index, where we additionally extract a single
    * value from the index.
    */
@@ -174,7 +174,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z,TIME,LAT,LON) index, where we additionally extract a single
    * value from the index.
    */
@@ -188,7 +188,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z,TIME,LAT,LON) index, where we additionally extract a single
    * value from the index.
    */
@@ -202,7 +202,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z,TIME,LAT,LON) index, where we additionally extract a single
    * value from the index.
    */
@@ -216,7 +216,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z) index, with just the field order definition inverted in the
    * query.
    */
@@ -241,7 +241,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (TIME,x,y,z) index, with just the field order definition inverted in
    * the query.
    */
@@ -266,7 +266,7 @@ public class TestGeoSpatialCustomFields extends AbstractDataDrivenSPARQLTestCase
         .runTest();
   }
 
-  /**
+  /*
    * Simple basic test case for (x,y,z,TIME,LAT,LON) index, with just the field order definition
    * inverted in the query.
    */

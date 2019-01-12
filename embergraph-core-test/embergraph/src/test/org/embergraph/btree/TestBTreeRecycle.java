@@ -28,8 +28,8 @@ import junit.framework.TestCase2;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for recycling of B+Tree records.
+/*
+* Test suite for recycling of B+Tree records.
  *
  * <p>Note: Due to the pattern by which a {@link BTree} is created, it is always loaded from an
  * existing checkpoint.
@@ -49,8 +49,8 @@ public class TestBTreeRecycle extends TestCase2 {
     super(name);
   }
 
-  //    /**
-  //     * Helper class overrides {@link #recycle(long)} in order to observe
+  //    /*
+//     * Helper class overrides {@link #recycle(long)} in order to observe
   //     * recycling events.
   //     */
   //    private static class RecycleListenerBTree extends BTree {
@@ -70,7 +70,7 @@ public class TestBTreeRecycle extends TestCase2 {
   /** Helper class overrides {@link IRawStore#delete(long)} to notice delete events. */
   private static class RawStoreDeleteListener extends SimpleMemoryRawStore {
 
-    /**
+    /*
      * A set of addresses which SHOULD be deleted. The basic pattern is that you add addresses to
      * this collection before the operation which will cause those addresses to be recycled. You
      * then do that operation. You then verify that the collection is empty. Addresses which are NOT
@@ -79,7 +79,7 @@ public class TestBTreeRecycle extends TestCase2 {
      */
     private final Set<Long> addrs = new HashSet<Long>();
 
-    /**
+    /*
      * Add an address which should be deleted to the set of such addresses.
      *
      * @param addr An address which should be deleted.

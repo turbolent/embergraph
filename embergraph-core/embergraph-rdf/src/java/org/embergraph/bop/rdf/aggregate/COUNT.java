@@ -30,8 +30,8 @@ import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * Operator computes the number of non-null values over the presented binding sets for the given
+/*
+* Operator computes the number of non-null values over the presented binding sets for the given
  * variable.
  *
  * <p>Note: COUNT(*) is the cardinality of the solution multiset. COUNT(DISTINCT *) is the
@@ -57,7 +57,7 @@ public class COUNT extends AggregateBase<IV> {
     super(/*FunctionCode.COUNT,*/ distinct, expr);
   }
 
-  /**
+  /*
    * The running aggregate value.
    *
    * <p>Note: This field is guarded by the monitor on the {@link COUNT} instance.
@@ -67,7 +67,7 @@ public class COUNT extends AggregateBase<IV> {
   /** The first error encountered since the last {@link #reset()}. */
   private transient Throwable firstCause = null;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: COUNT() returns ZERO if there are no non-error solutions presented. This assumes that
@@ -132,7 +132,7 @@ public class COUNT extends AggregateBase<IV> {
 
   }
 
-  /**
+  /*
    * COUNT does not need to actually see the materialized values, or even the IVs. COUNT(DISTINCT)
    * does need to see the IVs, but they still do not need to be materialized.
    */
@@ -141,8 +141,8 @@ public class COUNT extends AggregateBase<IV> {
     return INeedsMaterialization.Requirement.NEVER;
   }
 
-  // /**
-  // * Overridden to allow <code>COUNT(*)</code>.
+  // /*
+// * Overridden to allow <code>COUNT(*)</code>.
   // */
   // @Override
   // final public boolean isWildcardAllowed() {

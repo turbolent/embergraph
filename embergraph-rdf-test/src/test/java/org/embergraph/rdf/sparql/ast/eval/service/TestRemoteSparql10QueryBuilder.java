@@ -59,8 +59,8 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.MapBindingSet;
 
-/**
- * Test suite for the {@link RemoteSparql10QueryBuilder}.
+/*
+* Test suite for the {@link RemoteSparql10QueryBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestRemoteServiceCallImpl.java 6060 2012-03-02 16:07:38Z thompsonbry $
@@ -107,8 +107,8 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     }
   }
 
-  //    /**
-  //     * Wrap as an {@link IConstant}.
+  //    /*
+//     * Wrap as an {@link IConstant}.
   //     *
   //     * @param iv
   //     *            The {@link IV}.
@@ -263,7 +263,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A test where a single fully bound triple pattern is presented.
    *
    * <p>Note: It is possible to optimize this as an ASK query, but only when there is a single
@@ -414,7 +414,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in which there are some BINDINGS to be passed through. The set of bindings
    * covers the different types of RDF {@link Value} and also exercises the prefix declarations.
    * This test does NOT use blank nodes in the BINDINGS.
@@ -623,7 +623,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are not correlated.
    */
@@ -740,7 +740,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated. There is only one solution to be flowed
    * into the remote service.
@@ -857,7 +857,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated but there is only one solution to be
    * vectored so we will impose a FILTER on the remote service to enforce that correlation. This
@@ -995,7 +995,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated and there is more than one solution to be
    * vectored so we MUST impose a FILTER on the remote service to enforce that correlation.
@@ -1124,7 +1124,7 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated so we MUST impose a constraint on the
    * remote service to enforce that correlation. However, there is another solution in which the two
@@ -1247,8 +1247,8 @@ public class TestRemoteSparql10QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  //    /**
-  //     * A variant test where a blank node is used in the graph pattern. The blank
+  //    /*
+//     * A variant test where a blank node is used in the graph pattern. The blank
   //     * node is translated internally into an anonymous variable. However, the
   //     * name of that anonymous variable is NOT a legal name for a SPARQL variable
   //     * (this is done in order to avoid potential conflicts with variables used

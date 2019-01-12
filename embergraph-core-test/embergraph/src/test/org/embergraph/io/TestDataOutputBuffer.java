@@ -25,8 +25,8 @@ import java.io.IOException;
 import junit.framework.TestCase2;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for {@link DataOutputBuffer}.
+/*
+* Test suite for {@link DataOutputBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -158,7 +158,7 @@ public class TestDataOutputBuffer extends TestCase2 {
     assertEquals(0, key.length);
   }
 
-  /**
+  /*
    * Test ability to reset the key buffer (simply zeros the #of valid bytes in the buffer without
    * touching the buffer itself).
    */

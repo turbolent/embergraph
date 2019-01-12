@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -44,8 +44,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.IRule;
 
-/**
- * {@link MappedProgram} is used to produce the full closure and fast closure programs and is
+/*
+* {@link MappedProgram} is used to produce the full closure and fast closure programs and is
  * responsible, together with {@link TMUtility}, for mapping those rules across the permutations of
  * the [database/focusStore] views.
  *

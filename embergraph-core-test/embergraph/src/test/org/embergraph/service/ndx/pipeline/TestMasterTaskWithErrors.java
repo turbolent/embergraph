@@ -29,8 +29,8 @@ import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.util.InnerCause;
 
-/**
- * Unit tests for error handling in the control logic used by {@link AbstractMasterTask} and
+/*
+* Unit tests for error handling in the control logic used by {@link AbstractMasterTask} and
  * friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -44,7 +44,7 @@ public class TestMasterTaskWithErrors extends AbstractMasterTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test verifies correct shutdown and error reporting when a subtask fails.
    *
    * @throws InterruptedException

@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.list.adapter;
 
 import cern.colt.list.AbstractIntList;
-/**
- * Adapter that permits an {@link cern.colt.list.AbstractIntList} to be viewed and treated as a JDK
+/*
+* Adapter that permits an {@link cern.colt.list.AbstractIntList} to be viewed and treated as a JDK
  * 1.2 {@link java.util.AbstractList}. Makes the contained list compatible with the JDK 1.2
  * Collections Framework.
  *
@@ -25,7 +25,7 @@ public class IntListAdapter extends java.util.AbstractList implements java.util.
   public IntListAdapter(AbstractIntList content) {
     this.content = content;
   }
-  /**
+  /*
    * Inserts the specified element at the specified position in this list (optional operation).
    * Shifts the element currently at that position (if any) and any subsequent elements to the right
    * (adds one to their indices).
@@ -45,7 +45,7 @@ public class IntListAdapter extends java.util.AbstractList implements java.util.
     content.beforeInsert(index, value(element));
     modCount++;
   }
-  /**
+  /*
    * Returns the element at the specified position in this list.
    *
    * @param index index of element to return.
@@ -60,7 +60,7 @@ public class IntListAdapter extends java.util.AbstractList implements java.util.
   protected static Object object(int element) {
     return new Integer(element);
   }
-  /**
+  /*
    * Removes the element at the specified position in this list (optional operation). Shifts any
    * subsequent elements to the left (subtracts one from their indices). Returns the element that
    * was removed from the list.
@@ -78,7 +78,7 @@ public class IntListAdapter extends java.util.AbstractList implements java.util.
     modCount++;
     return old;
   }
-  /**
+  /*
    * Replaces the element at the specified position in this list with the specified element
    * (optional operation).
    *
@@ -99,7 +99,7 @@ public class IntListAdapter extends java.util.AbstractList implements java.util.
     content.set(index, value(element));
     return old;
   }
-  /**
+  /*
    * Returns the number of elements in this list.
    *
    * @return the number of elements in this list.

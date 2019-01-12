@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.journal;
 
-/**
- * An interface implemented by a persistence capable data structure such as a btree so that it can
+/*
+* An interface implemented by a persistence capable data structure such as a btree so that it can
  * participate in the commit protocol for the store.
  *
  * <p>This interface is invoked by {@link Journal#commit()} for each registered {@link ICommitter}.
@@ -30,7 +30,7 @@ package org.embergraph.journal;
  */
 public interface ICommitter {
 
-  /**
+  /*
    * Flush dirty state to the store in preparation for an atomic commit and return the address from
    * which the persistence capable data structure may be reloaded.
    *
@@ -39,14 +39,14 @@ public interface ICommitter {
    *     reloaded. If no changes have been made then the previous address should be returned as it
    *     is still valid.
    */
-  public long handleCommit(long commitTime);
+  long handleCommit(long commitTime);
 
-  /**
+  /*
    * Mark an {@link ICommitter} as invalid. This will prevent it from allowing any writes through to
    * the backing store.
    *
    * @param t A cause (required).
    * @see https://jira.blazegraph.com/browse/BLZG-1953
    */
-  public void invalidate(Throwable t);
+  void invalidate(Throwable t);
 }

@@ -37,8 +37,8 @@ import org.openrdf.query.resultio.QueryResultParseException;
 import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultParser;
 
-/**
- * Parser for SPARQL-1.1 JSON Results Format documents
+/*
+* Parser for SPARQL-1.1 JSON Results Format documents
  *
  * @see <a href="http://www.w3.org/TR/sparql11-results-json/">SPARQL 1.1 Query Results JSON
  *     Format</a>
@@ -62,7 +62,7 @@ public class EmbergraphSPARQLResultsJSONParser extends SPARQLJSONParserBase
     super();
   }
 
-  /**
+  /*
    * Construct a parser with a specific {@link ValueFactory}.
    *
    * @param valueFactory The factory to use to create values.
@@ -101,7 +101,7 @@ public class EmbergraphSPARQLResultsJSONParser extends SPARQLJSONParserBase
   }
 
   protected Value parseValue(final String bindingStr, final JsonParser jp)
-      throws QueryResultParseException, JsonParseException, IOException {
+      throws QueryResultParseException, IOException {
 
     String lang = null;
     String type = null;
@@ -150,7 +150,7 @@ public class EmbergraphSPARQLResultsJSONParser extends SPARQLJSONParserBase
 
       final Resource s = (Resource) sid.get(SUBJECT);
       final URI p = (URI) sid.get(PREDICATE);
-      final Value o = (Value) sid.get(OBJECT);
+      final Value o = sid.get(OBJECT);
       final Resource c = (Resource) sid.get(CONTEXT);
 
       if (s == null) {

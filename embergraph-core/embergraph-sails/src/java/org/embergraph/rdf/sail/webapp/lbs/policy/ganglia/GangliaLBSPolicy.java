@@ -37,8 +37,8 @@ import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
 import org.embergraph.rdf.sail.webapp.lbs.ServiceScore;
 
-/**
- * Stochastically proxy the request to the services based on their load.
+/*
+* Stochastically proxy the request to the services based on their load.
  *
  * <p>Note: This {@link IHALoadBalancerPolicy} has a dependency on the {@link GangliaPlugIn}. The
  * {@link GangliaPlugIn} must be setup to listen to the Ganglia protocol and build up an in-memory
@@ -73,15 +73,15 @@ public class GangliaLBSPolicy extends AbstractHostLBSPolicy {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Servlet <code>init-param</code> values understood by the {@link GangliaLBSPolicy}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface InitParams extends AbstractHostLBSPolicy.InitParams {}
 
-  //    /**
-  //     * Place into descending order by load_one.
+  //    /*
+//     * Place into descending order by load_one.
   //     * <p>
   //     * Note: We do not rely on the ordering imposed by this comparator. Instead,
   //     * we filter the hosts for those that correspond to the joined services in
@@ -127,7 +127,7 @@ public class GangliaLBSPolicy extends AbstractHostLBSPolicy {
     super.destroy();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation queries the in-memory model of the cluster that is built up and
@@ -203,8 +203,8 @@ public class GangliaLBSPolicy extends AbstractHostLBSPolicy {
           break;
         }
 
-        /*
-         * Note: This recognizes the local host name as well as the
+      /*
+       * Note: This recognizes the local host name as well as the
          * canonical hostname. ganglia defaults to reporting the local
          * name of the host. embergraph defaults to using the canonical
          * name of the host. To make things line up, we check for a

@@ -2,8 +2,8 @@ package org.embergraph.search;
 
 import org.apache.log4j.Logger;
 
-/**
- * Single-token implementation of {@link IHitCollector} backed by a simple array of hits.
+/*
+* Single-token implementation of {@link IHitCollector} backed by a simple array of hits.
  *
  * @author mikepersonick
  * @param <V> The generic type of the document identifier.
@@ -15,7 +15,7 @@ public class SingleTokenHitCollector<V extends Comparable<V>> implements IHitCol
   /** The pre-allocated array (allocated using the range count of the search. */
   final Hit<V>[] hits;
 
-  /**
+  /*
    * The current index into the array (also representes the true number of hits, which could be
    * different (less) than the allocated number due to delete records).
    */

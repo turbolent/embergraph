@@ -23,8 +23,8 @@ package org.embergraph.rdf.internal;
 
 import junit.framework.TestCase2;
 
-/**
- * Test suite for xsd:nonPositiveInteger, xsd:negativeInteger, xsd:nonNegativeInteger, and
+/*
+* Test suite for xsd:nonPositiveInteger, xsd:negativeInteger, xsd:nonNegativeInteger, and
  * xsd:positiveInteger.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

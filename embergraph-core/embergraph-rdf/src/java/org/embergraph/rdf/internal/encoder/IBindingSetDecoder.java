@@ -26,8 +26,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Interface for decoding {@link IBindingSet}s comprised of {@link IV}s.
+/*
+* Interface for decoding {@link IBindingSet}s comprised of {@link IV}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -38,7 +38,7 @@ public interface IBindingSetDecoder {
   /** Return <code>true</code> iff the {@link IVCache} associations are preserved by the encoder. */
   boolean isValueCache();
 
-  /**
+  /*
    * Decode an {@link IBindingSet}.
    *
    * <p>The resolution step can be deferred when the decoded {@link IBindingSet} does not require
@@ -59,7 +59,7 @@ public interface IBindingSetDecoder {
   IBindingSet decodeSolution(
       final byte[] val, final int off, final int len, final boolean resolveCachedValues);
 
-  /**
+  /*
    * Resolve any {@link IV}s in the solution for which there are cached {@link EmbergraphValue}s to
    * those values. This method may be used to resolve {@link IVCache} associations for {@link
    * IBindingSet}s NOT produced by {@link #decodeSolution(byte[], int, int, boolean)}. For example,

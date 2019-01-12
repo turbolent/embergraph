@@ -20,8 +20,8 @@ package org.embergraph.ha.msg;
 import java.util.UUID;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Message used to read a record from an {@link IRawStore} managed by a remote service. Services
+/*
+* Message used to read a record from an {@link IRawStore} managed by a remote service. Services
  * MUST NOT refer this message to another service. If the read can not be satisfied, for example
  * because the {@link IRawStore} has been released or because there is a checksum error when reading
  * on the {@link IRawStore}, then that exception should be thrown back to the caller.
@@ -31,7 +31,7 @@ public interface IHAReadRequest extends IHAMessage {
   /** The quorum token for which the read was issued. */
   long getQuorumToken();
 
-  /**
+  /*
    * The {@link UUID} identifying the {@link IRawStore} for which the record was requested
    * (optional, defaults to the current Journal).
    *

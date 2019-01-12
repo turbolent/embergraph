@@ -69,8 +69,8 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.concurrent.ExecutionHelper;
 
-/**
- * Full text indexing and search support.
+/*
+* Full text indexing and search support.
  *
  * <p>The basic data model consists of documents, fields in documents, and tokens extracted by an
  * analyzer from those fields.
@@ -221,14 +221,14 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     return ndx;
   }
 
-  /**
+  /*
    * Options understood by the {@link FullTextIndex}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface Options {
 
-    /**
+    /*
      * <code>indexer.overwrite</code> - boolean option (default <code>true</code>) controls the
      * behavior when a write is requested on the index and the {term,doc,field} tuple which forms
      * the key is already present in the index. When <code>true</code>, the new value will be
@@ -241,7 +241,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
     String DEFAULT_OVERWRITE = "true";
 
-    /**
+    /*
      * Specify the collator {@link StrengthEnum strength} for the full-text index (default {@value
      * StrengthEnum#Primary}).
      *
@@ -255,7 +255,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
     String DEFAULT_INDEXER_COLLATOR_STRENGTH = StrengthEnum.Primary.toString();
 
-    /**
+    /*
      * The maximum time in milliseconds that the search engine will await completion of the tasks
      * reading on each of the query terms (default {@value #DEFAULT_INDEXER_TIMEOUT}). A value of
      * ZERO (0) means NO timeout and is equivalent to a value of {@link Long#MAX_VALUE}. If the
@@ -266,7 +266,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
     String DEFAULT_INDEXER_TIMEOUT = "0";
 
-    /**
+    /*
      * When <code>true</code>, the <code>fieldId</code> is stored as part of the key (default
      * {@value #DEFAULT_FIELDS_ENABLED}). When <code>false</code>, each key will be four bytes
      * shorter. Applications which do not use <code>fieldId</code> are should disable it when
@@ -276,8 +276,8 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
     String DEFAULT_FIELDS_ENABLED = "false";
 
-    //        /**
-    //         * When <code>true</code>, the <code>localTermWeight</code> is stored
+    //        /*
+//         * When <code>true</code>, the <code>localTermWeight</code> is stored
     //         * using double-precision. When <code>false</code>, it is stored using
     //         * single-precision.
     //         */
@@ -286,7 +286,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     //
     //        String DEFAULT_DOUBLE_PRECISION = "false";
 
-    /**
+    /*
      * The name of the {@link IAnalyzerFactory} class which will be used to obtain analyzers when
      * tokenizing documents and queries (default {@value #DEFAULT_ANALYZER_FACTORY_CLASS}). The
      * specified class MUST implement {@link IAnalyzerFactory} and MUST have a constructor with the
@@ -300,7 +300,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
     String DEFAULT_ANALYZER_FACTORY_CLASS = DefaultAnalyzerFactory.class.getName();
 
-    /**
+    /*
      * We keep a small hit cache based on search parameters: search string + prefixMatch +
      * matchAllTerms. This defines the size of that cache. The value should remain small.
      */
@@ -308,7 +308,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
     String DEFAULT_HIT_CACHE_SIZE = "10";
 
-    /**
+    /*
      * We keep a small hit cache based on search parameters: search string + prefixMatch +
      * matchAllTerms. This defines the timeout for values in that cache (in milliseconds). The value
      * should remain small.
@@ -331,18 +331,18 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
   /** @see Options#INDEXER_TIMEOUT */
   private final long timeout;
 
-  //    /**
-  //     * @see Options#FIELDS_ENABLED
+  //    /*
+//     * @see Options#FIELDS_ENABLED
   //     */
   //    private final boolean fieldsEnabled;
   //
-  //    /**
-  //     * @see Options#DOUBLE_PRECISION
+  //    /*
+//     * @see Options#DOUBLE_PRECISION
   //     */
   //    private final boolean doublePrecision;
   //
-  //    /**
-  //     * Return the value configured by the {@link Options#FIELDS_ENABLED}
+  //    /*
+//     * Return the value configured by the {@link Options#FIELDS_ENABLED}
   //     * property.
   //     */
   //    public boolean isFieldsEnabled() {
@@ -363,18 +363,18 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
   /** See {@link Options#HIT_CACHE_SIZE}. */
   private final ConcurrentWeakValueCacheWithTimeout<FullTextQuery, Hit<V>[]> cache;
 
-  //    /**
-  //     * @see Options#DOCID_FACTORY_CLASS
+  //    /*
+//     * @see Options#DOCID_FACTORY_CLASS
   //     */
   //    private final IKeyBuilderExtension<V> docIdFactory;
 
-  //    /**
-  //     * The concrete {@link IRecordBuilder} instance.
+  //    /*
+//     * The concrete {@link IRecordBuilder} instance.
   //     */
   //    private final IRecordBuilder<V> recordBuilder;
   //
-  //    /**
-  //     * Return the object responsible for encoding and decoding the tuples
+  //    /*
+//     * Return the object responsible for encoding and decoding the tuples
   //     * in the full text index.
   //     */
   //    public final IRecordBuilder<V> getRecordBuilder() {
@@ -402,7 +402,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
   //
   //    }
 
-  /**
+  /*
    * Ctor specified by {@link DefaultResourceLocator}.
    *
    * @param client The client. Configuration information is obtained from the client. See {@link
@@ -498,10 +498,10 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
       try {
 
         final Constructor<? extends IAnalyzerFactory> ctor =
-            cls.getConstructor(new Class[] {FullTextIndex.class});
+            cls.getConstructor(FullTextIndex.class);
 
         // save reference.
-        analyzerFactory = ctor.newInstance(new Object[] {this});
+        analyzerFactory = ctor.newInstance(this);
 
       } catch (Exception ex) {
 
@@ -517,7 +517,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
   }
 
-  /**
+  /*
    * Conditionally registers the necessary index(s).
    *
    * @throws IllegalStateException if the client does not have write access.
@@ -633,7 +633,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     }
   }
 
-  /**
+  /*
    * Return the token analyzer to be used for the given language code.
    *
    * @param languageCode The language code or <code>null</code> to use the default {@link Locale}.
@@ -644,7 +644,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     return analyzerFactory.getAnalyzer(languageCode, filterStopwords);
   }
 
-  /**
+  /*
    * Return a {@link ThreadLocal} {@link IKeyBuilder} instance configured to support full text
    * indexing and search.
    *
@@ -655,7 +655,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     return getIndex().getIndexMetadata().getKeyBuilder();
   }
 
-  /**
+  /*
    * See {@link #index(TokenBuffer, long, int, String, Reader, boolean)}.
    *
    * <p>Uses a default filterStopwords value of <code>true</code>.
@@ -670,7 +670,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     index(buffer, docId, fieldId, languageCode, r, true /* filterStopwords */);
   }
 
-  /**
+  /*
    * Index a field in a document.
    *
    * <p>Note: This method does NOT force a write on the indices. If the <i>buffer</i> overflows,
@@ -736,7 +736,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
       log.info("Indexed " + n + " tokens: docId=" + docId + ", fieldId=" + fieldId);
   }
 
-  /**
+  /*
    * Tokenize text using an {@link Analyzer} that is appropriate to the specified language family.
    *
    * @param languageCode The language code -or- <code>null</code> to use the default {@link
@@ -764,7 +764,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     return tokenStream;
   }
 
-  /**
+  /*
    * Performs a full text search against indexed documents returning a hit list.
    *
    * <p>The basic algorithm computes cosine between the term-frequency vector of the query and the
@@ -892,8 +892,8 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
 
       if (buffer.size() == 0) {
 
-        /*
-         * There were no terms after stopword extration.
+      /*
+       * There were no terms after stopword extration.
          */
 
         log.warn("No terms after stopword extraction: query=" + query);
@@ -1344,8 +1344,8 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
           log.info("Interrupted - only partial results will be returned.");
         }
 
-        /*
-         * Yes, let's toss it.  We were getting into a situation
+      /*
+       * Yes, let's toss it.  We were getting into a situation
          * where the ExecutionHelper above received an interrupt
          * but we still went through the heavy-weight filtering
          * operations below (matchExact or matchRegex).
@@ -1361,7 +1361,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     return hits.getHits();
   }
 
-  /**
+  /*
    * Subclasses can override this method to do exact match processing. This involves materializing
    * the hits into their original text values and checking for the query string in the materialized
    * value. Not possible from the base class. The value-centric RDF version can use the lexicon to
@@ -1372,7 +1372,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Subclasses can override this method to do regex post-processing. This involves materializing
    * the hits into their original text values and checking against the regex string in the
    * materialized value. Not possible from the base class. The value-centric RDF version can use the

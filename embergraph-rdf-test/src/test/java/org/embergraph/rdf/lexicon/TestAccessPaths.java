@@ -43,8 +43,8 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IKeyOrder;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for {@link LexiconRelation#newAccessPath(IIndexManager, IPredicate, IKeyOrder)}.
+/*
+* Test suite for {@link LexiconRelation#newAccessPath(IIndexManager, IPredicate, IKeyOrder)}.
  *
  * <p>Note: If you query with {@link IV} or {@link EmbergraphValue} already cached (on one another
  * or in the termsCache) then the cached value will be returned.
@@ -106,8 +106,8 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
       terms.add(largeLiteral = f.createLiteral(TestAddTerms.getVeryLargeLiteral()));
 
       if (store.getLexiconRelation().isStoreBlankNodes()) {
-        /*
-         * Note: Blank nodes will not round trip through the lexicon
+      /*
+       * Note: Blank nodes will not round trip through the lexicon
          * unless the "told bnodes" is enabled.
          */
         terms.add(f.createBNode());
@@ -141,7 +141,7 @@ public class TestAccessPaths extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test the access path.
    *
    * @param expected The {@link EmbergraphValue} with its {@link IV}.

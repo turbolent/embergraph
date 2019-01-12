@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.keys;
 
-/**
- * An interface for generating unsigned byte[] sort keys.
+/*
+* An interface for generating unsigned byte[] sort keys.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -32,11 +32,11 @@ package org.embergraph.btree.keys;
  */
 public interface ISortKeyBuilder<E> {
 
-  /**
+  /*
    * Return an unsigned byte[] sort key.
    *
    * @param e Some object (required).
    * @return The unsigned byte[] sort key.
    */
-  public byte[] getSortKey(E e);
+  byte[] getSortKey(E e);
 }

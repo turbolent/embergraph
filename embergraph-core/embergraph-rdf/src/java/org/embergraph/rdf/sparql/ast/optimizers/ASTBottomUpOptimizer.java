@@ -72,8 +72,8 @@ import org.embergraph.rdf.sparql.ast.explainhints.BottomUpSemanticsExplainHint;
 import org.embergraph.rdf.sparql.ast.explainhints.IExplainHint;
 import org.embergraph.rdf.sparql.ast.explainhints.UnsatisfiableMinusExplainHint;
 
-/**
- * Rewrites aspects of queries where bottom-up evaluation would produce
+/*
+* Rewrites aspects of queries where bottom-up evaluation would produce
  * different results. This includes joins which are not "well designed" as
  * defined in section 4.2 of "Semantics and Complexity of SPARQL", 2006, Jorge
  * Prez et al and also FILTERs on variables whose bindings are not in scope.
@@ -276,7 +276,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryNode, bindingSets);
   }
 
-  /**
+  /*
    * We are looking for queries of the form:
    *
    * <pre>
@@ -293,7 +293,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
       final List<JoinGroupNode> badlyDesignedLeftJoins) {
 
     // Check all join groups.
-    final Iterator<JoinGroupNode> itr = BOpUtility.visitAll((BOp) whereClause, JoinGroupNode.class);
+    final Iterator<JoinGroupNode> itr = BOpUtility.visitAll(whereClause, JoinGroupNode.class);
 
     while (itr.hasNext()) {
 
@@ -312,7 +312,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Identify problem variables. These are variables appear in joins within an optional
    * <i>group</i>, but which do appear in joins in the groups's parent but do appear in joins in
    * some parent of that parent.
@@ -465,7 +465,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * If the {@link JoinGroupNode} qualifies as a badly designed left join then lift it into a {@link
    * NamedSubqueryRoot} and replace it with a {@link NamedSubqueryInclude}.
    *
@@ -487,7 +487,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
     final JoinGroupNode pp = p.getParentJoinGroup();
 
     if (pp == null)
-      /**
+      /*
        * BLZG-1760: in case we have multiple OPTIONALs nested inside one group, we may enter this
        * method multiple times and, as replacement is taking place in the first one, there's nothing
        * that needs to be done in following iterations, so just return.
@@ -561,7 +561,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
 
     } else {
 
-      /**
+      /*
        * Replace with named subquery INCLUDE.
        *
        * <p>Note: we can not do that starting from pp, since pp is the parent join group node (which
@@ -591,7 +591,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Examine each {@link JoinGroupNode} in the query and each FILTER in each {@link JoinGroupNode}.
    * If the filter depends on a variable which is not in scope then we must rewrite the AST in order
    * to preserve bottom up evaluation semantics.
@@ -617,7 +617,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
       final IBindingSet[] bindingSets) {
 
     final Set<IVariable<?>> globallyScopedVars =
-        context == null ? (Set) Collections.emptySet() : context.getGloballyScopedVariables();
+        context == null ? Collections.emptySet() : context.getGloballyScopedVariables();
 
     // Map for renamed variables.
     final Map<IVariable<?> /* old */, IVariable<?> /* new */> map =
@@ -634,8 +634,8 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
       final JoinGroupNode group = itr.next();
 
       if (sa.findParent(group) instanceof FilterNode) {
-        /*
-         * Skip EXISTS and NOT EXISTS graph patterns when they are
+      /*
+       * Skip EXISTS and NOT EXISTS graph patterns when they are
          * visited directly. These are handled when we visit the join
          * group containing the FILTER in which they appear.
          *
@@ -655,8 +655,8 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
       }
 
       if (sa.findParent(group) instanceof ArbitraryLengthPathNode) {
-        /*
-         * Skip the filters in an ALP subgroup.  Although evaluated
+      /*
+       * Skip the filters in an ALP subgroup.  Although evaluated
          * as a subgroup, an ALP node is logically not really a subgroup.
          */
         continue;
@@ -681,8 +681,8 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
 
       if (group.isOptional()) {
 
-        /*
-         * "A FILTER inside an OPTIONAL can reference a variable
+      /*
+       * "A FILTER inside an OPTIONAL can reference a variable
          * bound in the required part of the OPTIONAL."
          *
          * Note: This is ONLY true when the [group] is OPTIONAL.
@@ -731,8 +731,8 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
         if (rewriteUnboundVariablesInFilter(
             context, maybeBound, map, nodeParent, filter.getValueExpressionNode())) {
 
-          /*
-           * Re-generate the IVE for this filter.
+        /*
+       * Re-generate the IVE for this filter.
            */
 
           // Recursively clear the old value expression.
@@ -752,8 +752,8 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
           final GlobalAnnotations globals =
               new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
 
-          /**
-           * Re-generate the value expression. Note that this must be done recursively in the
+        /*
+       * Re-generate the value expression. Note that this must be done recursively in the
            * general case, e.g in the case of nested FILTER [NOT] EXISTS nodes. See for instance
            * ticket BLZG-1281 for an example query.
            */
@@ -783,7 +783,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * If a FILTER depends on a variable which is not in scope for that filter then that variable will
    * always be unbound in that scope. However, we can not fail the entire filter since it could use
    * <code>BOUND(var)</code>. This takes the approach of rewriting the FILTER to use an anonymous
@@ -877,7 +877,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
     return true;
   }
 
-  /**
+  /*
    * Handle MINUS when it appears without shared variables. We just get rid of the MINUS group since
    * it can not interact with the parent group without shared variables (without shared variables,
    * nothing joins and if nothing joins then nothing is removed from the parent).
@@ -912,8 +912,8 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
        */
       if (childGroup.isMinus()) {
 
-        /**
-         * The static condition under which we can drop the MINUS is that the left and right
+      /*
+       * The static condition under which we can drop the MINUS is that the left and right
          * variables do not overlap, satisfying the condition that the intersection of the left and
          * right variables is empty; for a justification, see
          * http://www.w3.org/TR/sparql11-query/#sparqlAlgebra
@@ -944,8 +944,8 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
 
           ((IGroupNode) group).removeChild(childGroup);
 
-          /**
-           * BLZG-1627: the group has one member less now, so we decrease the arity to avoid running
+        /*
+       * BLZG-1627: the group has one member less now, so we decrease the arity to avoid running
            * out of bounds.
            */
           arity--;

@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 
-/**
- * Retains history for N periods, where the period is expressed in milliseconds.
+/*
+* Retains history for N periods, where the period is expressed in milliseconds.
  *
  * <p>This class is thread-safe.
  *
@@ -18,7 +18,7 @@ public class History<T> {
 
   protected static final Logger log = Logger.getLogger(History.class);
 
-  /**
+  /*
    * The period in milliseconds between each sample in the buffer. The buffer will not accept the
    * next sample until this period has elapsed.
    */
@@ -27,7 +27,7 @@ public class History<T> {
     return period;
   }
 
-  /**
+  /*
    * The source {@link History} which feeds this one.
    *
    * @return The source {@link History} -or- <code>null</code> iff this is the base {@link History}.
@@ -70,7 +70,7 @@ public class History<T> {
     return data.getClass().getComponentType();
   }
 
-  /**
+  /*
    * Takes a snapshot of the samples in the {@link History} and then visits those samples.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -96,7 +96,7 @@ public class History<T> {
       return n;
     }
 
-    /**
+    /*
      * The timestamp associated with the first sample.
      *
      * @return The timestamp -or- <code>-1</code> if there are no samples.
@@ -108,7 +108,7 @@ public class History<T> {
       return _timestamps[0];
     }
 
-    /**
+    /*
      * The timestamp associated with the last sample.
      *
      * @return The timestamp -or- <code>-1</code> if there are no samples.
@@ -322,11 +322,11 @@ public class History<T> {
 
       current++;
 
-      return (IHistoryEntry<T>) entry.clone();
+      return entry.clone();
     }
 
-    //        /**
-    //         * Return the current sample (the one which was last visited by
+    //        /*
+//         * Return the current sample (the one which was last visited by
     //         * {@link #next()}).
     //         *
     //         * @throws IllegalStateException
@@ -347,7 +347,7 @@ public class History<T> {
     }
   }
 
-  /**
+  /*
    * Return a snapshot of the most recent value in the buffer -or- <code>null</code> if there are no
    * samples in the buffer.
    */
@@ -419,7 +419,7 @@ public class History<T> {
     };
   }
 
-  /**
+  /*
    * Visits a snapshot of the samples in the buffer in timestamp order. This includes all
    * non-missing samples over the last N periods, where N is the capacity of the buffer.
    */
@@ -464,7 +464,7 @@ public class History<T> {
     return sb.toString();
   }
 
-  /**
+  /*
    * Computes the average of the samples.
    *
    * @return The average -or- <code>null</code> if the samples are not numbers (no average is
@@ -477,7 +477,7 @@ public class History<T> {
     return getAverage(capacity);
   }
 
-  /**
+  /*
    * Compute the average of the samples over the last N reporting periods.
    *
    * @param nperiods The #of reporting periods over which the average is to be computed. E.g., last
@@ -579,7 +579,7 @@ public class History<T> {
     return valueOf(total / n);
   }
 
-  /**
+  /*
    * Convert a double to an instance of the generic type parameter for this class.
    *
    * @param d The double value.
@@ -597,7 +597,7 @@ public class History<T> {
     throw new AssertionError();
   }
 
-  /**
+  /*
    * Adds a sample to the history. The sample is placed into a slot in this history that reflects
    * its <i>timestamp</i>.
    *
@@ -648,8 +648,8 @@ public class History<T> {
 
       if ((lastLogicalSlot - logicalSlot) >= capacity) {
 
-        /*
-         * Note: OneShot counters will trigger this response. The
+      /*
+       * Note: OneShot counters will trigger this response. The
          * problem is that the counter value initially arrives for a
          * host when the first service starts on that host. If hours or
          * days later you then run a task on that service, perhaps an
@@ -762,8 +762,8 @@ public class History<T> {
 
         if (ps == 0 && sink != null) {
 
-          /*
-           * Overflow.
+        /*
+       * Overflow.
            *
            * Note: The overflow point is designed to be on an even
            * period boundary for the next level of aggregation.
@@ -781,8 +781,8 @@ public class History<T> {
         if (data[ps] != null) {
 
           if (!overwrite) {
-            /*
-             * Note: Overwrite is not always desirable - there is a
+          /*
+       * Note: Overwrite is not always desirable - there is a
              * ctor option to disable it.
              */
             throw new RuntimeException(
@@ -828,8 +828,8 @@ public class History<T> {
 
       if (size > capacity) {
 
-        /*
-                     * FIXME I am seeing this exception after a few days of run
+      /*
+       * FIXME I am seeing this exception after a few days of run
                      * time. The [size] appears to grow by one every minute.
                      * 2/22/09. The stack trace is emerging out of the LBS update
                      * task, but the problem is clearly in the History class itself:
@@ -861,7 +861,7 @@ public class History<T> {
     lastLogicalSlot = Math.max(lastLogicalSlot, logicalSlot);
   }
 
-  /**
+  /*
    * Constructor used at the base collection period.
    *
    * @param data An array whose size is the capacity of the history buffer. The contents of the
@@ -904,7 +904,7 @@ public class History<T> {
     _numeric = (_long || _double);
   }
 
-  /**
+  /*
    * Constructor used when aggregating from another collection period.
    *
    * @param capacity The #of slots in the history.
@@ -963,7 +963,7 @@ public class History<T> {
 
   private History<T> sink;
 
-  /**
+  /*
    * The sink on which the history writes when it overflows -or- <code>null</code> if no sink has
    * been assigned (it is assigned by the alternate ctor).
    */
@@ -984,7 +984,7 @@ public class History<T> {
   /** Number of valid samples in the buffer. */
   private int size = 0;
 
-  /**
+  /*
    * The last logical slot in the buffer in which a sample was written and <code>-1</code> until the
    * first sample has been written.
    *

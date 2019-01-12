@@ -27,8 +27,8 @@ import java.util.UUID;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Tests for some fence posts for an index supporting delete markers and having a {@link
+/*
+* Tests for some fence posts for an index supporting delete markers and having a {@link
  * LocalPartitionMetadata} that declares its legal key range.
  *
  * @todo test with keys that are outside of and on the partition boundaries.
@@ -47,7 +47,7 @@ public class TestIndexPartitionFencePosts extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Tests basics with an index partition.
    *
    * @throws Exception

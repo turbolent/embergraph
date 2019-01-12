@@ -26,8 +26,8 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-/**
- * Abstract Test class for Blueprints client test coverage. Creates a new KB, Loads a Graph, closes
+/*
+* Abstract Test class for Blueprints client test coverage. Creates a new KB, Loads a Graph, closes
  * it, re-opens, and validates the same number of edges and vertices exist. Implementations do this
  * for the different client connection and persistence methods, i.e. EmbergraphGraphClient,
  * EmbergraphGraphEmbedded, etc.
@@ -57,14 +57,14 @@ public abstract class AbstractTestEmbergraphGraphFactory extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * ADD test specific method to generate a new graph from a file.
    *
    * @return
    */
   protected abstract EmbergraphGraph getNewGraph(String file) throws Exception;
 
-  /**
+  /*
    * ADD test-specific method to load a graph from the file.
    *
    * @param file
@@ -132,7 +132,7 @@ public abstract class AbstractTestEmbergraphGraphFactory extends TestCase {
     return retval;
   }
 
-  /**
+  /*
    * Create a new journal, load some data, close it, and then re-open and validate the total count
    * of edges and vertices.
    *
@@ -172,7 +172,7 @@ public abstract class AbstractTestEmbergraphGraphFactory extends TestCase {
     deleteFile(testJnl);
   }
 
-  /**
+  /*
    * Open an existing journal and validate the count equals the loadCount parameter. Tests that the
    * graph is persisted to disk.
    *

@@ -26,8 +26,8 @@ import it.unimi.dsi.bits.BitVector;
 import java.nio.ByteBuffer;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link ByteBufferBitVector}.
+/*
+* Test suite for {@link ByteBufferBitVector}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -90,7 +90,7 @@ public class TestByteBufferBitVector extends TestCase2 {
     assertEquals(false, v.getBoolean(0));
   }
 
-  /**
+  /*
    * Correct rejection and assumptions for ctor accepting offset and length options.
    *
    * @todo this tests with an even byte offset. Try w/ only a few bits offset.

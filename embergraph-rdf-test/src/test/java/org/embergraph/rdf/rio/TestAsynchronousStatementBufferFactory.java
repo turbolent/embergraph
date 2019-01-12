@@ -45,8 +45,8 @@ import org.embergraph.service.EmbeddedClient;
 import org.embergraph.service.IEmbergraphClient;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Test suite for {@link AsynchronousStatementBufferFactory}. To run this test by itself specify
+/*
+* Test suite for {@link AsynchronousStatementBufferFactory}. To run this test by itself specify
  * <code>-DtestClass=org.embergraph.rdf.store.TestScaleOutTripleStoreWithEmbeddedFederation</code> .
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -73,7 +73,7 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
   private static final long unbufferedStatementThreshold = 5000L; // Long.MAX_VALUE;
   private static final long rejectedExecutionDelay = 250L; // milliseconds.
 
-  /**
+  /*
    * SHOULD be <code>true</code> since the whole point of this is higher concurrency. If you set
    * this to <code>false</code> to explore some issue, then change it back to <code>true</code> when
    * you are done!
@@ -191,7 +191,7 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
     doLoadAndVerifyTest(resource, p);
   }
 
-  /**
+  /*
    * Test with the "little.ttl" data set in quads mode (triples data loaded into a quads mode kb).
    */
   public void test_loadAndVerify_little_ttl_quadsMode() throws Exception {
@@ -237,7 +237,7 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
     doLoadAndVerifyTest(resource, p);
   }
 
-  /**
+  /*
    * Test with the "broken.rdf" data set (does not contain valid RDF). This tests that the factory
    * will shutdown correctly if there are processing errors.
    *
@@ -308,7 +308,7 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
     doLoadAndVerifyTest(file, p);
   }
 
-  /**
+  /*
    * Uses a modest file (~40k statements). This is BSBM data so it has some BLOBs in it. This loads
    * the data in quads mode.
    */
@@ -323,8 +323,8 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
     doLoadAndVerifyTest(file, p);
   }
 
-  //	/**
-  //	 * LUBM U(1).
+  //	/*
+//	 * LUBM U(1).
   //	 * <p>
   //	 * Note: This unit test can hang under JDK 1.6.0_17 if you have been running
   //	 * the entire test suite and you do not specify <code>-XX:+UseMembar</code>
@@ -340,8 +340,8 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
   //
   //    }
 
-  //    /**
-  //     * Do not leave this unit test in -- it takes too long to validate the
+  //    /*
+//     * Do not leave this unit test in -- it takes too long to validate the
   //     * loaded data: LUBM U(10)
   //     */
   //    public void test_loadAndVerify_U10() throws Exception {
@@ -352,7 +352,7 @@ public class TestAsynchronousStatementBufferFactory extends AbstractRIOTestCase 
   //
   //    }
 
-  /**
+  /*
    * Test loads an RDF/XML resource into a database and then verifies by re-parse that all expected
    * statements were made persistent in the database.
    *

@@ -25,8 +25,8 @@ import java.rmi.Remote;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 
-/**
- * A non-remote interface for a service which will participate in a quorum as a member service (as
+/*
+* A non-remote interface for a service which will participate in a quorum as a member service (as
  * opposed to a client service that merely watches the quorum). The methods on this interface are
  * aware of the service {@link UUID} of the member service and can report on its role and
  * relationships in the {@link Quorum}. In order to <em>act</em> on the distributed quorum state,
@@ -41,7 +41,7 @@ import java.util.concurrent.ExecutorService;
  */
 public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumStateChangeListener {
 
-  /**
+  /*
    * The identifier for this service (the quorum member). Each quorum member is a physical service
    * instance of some highly available logical service.
    *
@@ -49,7 +49,7 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumS
    */
   UUID getServiceId();
 
-  /**
+  /*
    * Return the local service implementation object (NOT the RMI proxy for that object).
    *
    * <p>A service operating as a {@link QuorumMember} has both {@link Remote} interface and a
@@ -64,7 +64,7 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumS
    */
   S getService();
 
-  /**
+  /*
    * An {@link ExecutorService} which may be used by the {@link QuorumMember} to run various
    * asynchronous tasks.
    */
@@ -73,14 +73,14 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumS
   /** Return the actor for this {@link QuorumMember}. */
   QuorumActor<S, QuorumMember<S>> getActor();
 
-  /**
+  /*
    * Return <code>true</code>if the quorum recognizes the service as a member of that quorum. The
    * quorum token is not required for this method because membership status does not change with a
    * quorum meet or break.
    */
   boolean isMember();
 
-  /**
+  /*
    * Return <code>true</code> if quorum recognizes the service is part of the write pipeline. The
    * quorum token is not required for this method because pipeline status does not change with a
    * quorum meet or break. Once a service is receiving synchronous messages from a {@link Quorum} it
@@ -89,7 +89,7 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumS
    */
   boolean isPipelineMember();
 
-  /**
+  /*
    * Return <code>true</code> iff the quorum is highly available and this node is last one in the
    * write pipeline (it will not return true for a singleton quorum where the only node is the
    * master).
@@ -98,7 +98,7 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumS
    */
   boolean isLastInChain(long token);
 
-  /**
+  /*
    * Return <code>true</code> if the service is joined with the quorum.
    *
    * <p>Note: This method DOES NOT throw an exception if the quorum is not met, but it will not
@@ -108,7 +108,7 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumS
    */
   boolean isJoinedMember(long token);
 
-  /**
+  /*
    * Return <code>true</code> iff this node is the quorum leader. The quorum leader is the only node
    * which will accept writes. Note that is always <code>true</code> when the {@link
    * #replicationFactor()} is ONE (1).
@@ -117,7 +117,7 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumS
    */
   boolean isLeader(long token);
 
-  /**
+  /*
    * Return <code>true</code> iff this node is a quorum follower. This is <code>true</code> of all
    * nodes in a {@link Q} except for the leader.
    *
@@ -125,7 +125,7 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumS
    */
   boolean isFollower(long token);
 
-  /**
+  /*
    * Assert that this is the quorum leader.
    *
    * @param token The quorum token for which the request was made.
@@ -135,7 +135,7 @@ public interface QuorumMember<S extends Remote> extends QuorumClient<S>, QuorumS
    */
   void assertLeader(final long token);
 
-  /**
+  /*
    * Return the {@link UUID} of the service (if any) downstream from this service in the write
    * pipeline.
    *

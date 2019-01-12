@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-/**
- * An instance of this class is thrown if an {@link AbstractBufferStrategy#overflow(long)} request
+/*
+* An instance of this class is thrown if an {@link AbstractBufferStrategy#overflow(long)} request
  * is denied.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ public class OverflowException extends RuntimeException {
     super(cause);
   }
 
-  /**
+  /*
    * @param message
    * @param cause
    */

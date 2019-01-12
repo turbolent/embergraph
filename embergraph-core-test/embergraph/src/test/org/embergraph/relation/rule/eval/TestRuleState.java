@@ -35,8 +35,8 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.QueryOptions;
 import org.embergraph.relation.rule.Rule;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Mike Personick</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestRuleState extends TestCase2 {

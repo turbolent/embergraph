@@ -26,8 +26,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 
-/**
- * Class supporting operations on variable length byte[] keys.
+/*
+* Class supporting operations on variable length byte[] keys.
  *
  * <p>Comparison operations that accept a starting offset are used when the byte[]s are known to
  * share a leading prefix that may be skipped during comparison.
@@ -61,13 +61,13 @@ public class BytesUtil {
   /** An empty <code>byte[][]</code>. */
   public static final byte[][] EMPTY2 = new byte[0][];
 
-  /**
+  /*
    * Flag set iff JNI linking succeeds. When this flag is false we run with the pure Java
    * implementations of these methods. When the flag is true, the JNI versions are used.
    */
   static boolean linked = false;
 
-  /**
+  /*
    * JNI routines are not invoked unless we will compare byte[]s with at least this many potential
    * bytes to compare (the actual# may be much less of course since comparisons may fail fast).
    */
@@ -102,7 +102,7 @@ public class BytesUtil {
     }
   }
 
-  /**
+  /*
    * Attempt to load the JNI library.
    *
    * <p>Note: this is done automatically if the optional boolean system property <code>
@@ -137,7 +137,7 @@ public class BytesUtil {
     return linked;
   }
 
-  /**
+  /*
    * True iff the two arrays compare as equal. This is somewhat optimized in that it tests the array
    * lengths first, assumes that it is being used on sorted data and therefore compares the last
    * bytes first, and does not convert the bytes to unsigned integers before testing for equality.
@@ -175,7 +175,7 @@ public class BytesUtil {
     return true;
   }
 
-  /**
+  /*
    * Byte-wise comparison of byte[]s (the arrays are treated as arrays of unsigned bytes).
    *
    * @param a A byte[].
@@ -223,8 +223,8 @@ public class BytesUtil {
     return alen - blen;
   }
 
-  // /**
-  // * Byte-wise comparison of a {@link ByteBuffer} and a byte[]. The data are
+  // /*
+// * Byte-wise comparison of a {@link ByteBuffer} and a byte[]. The data are
   // * treated as arrays of unsigned bytes. The {@link ByteBuffer} position,
   // * limit and mark are unchanged by this procedure.
   // *
@@ -252,8 +252,8 @@ public class BytesUtil {
   // return alen - blen;
   // }
 
-  // /**
-  // * Byte-wise comparison of byte[]s (the arrays are treated as arrays of
+  // /*
+// * Byte-wise comparison of byte[]s (the arrays are treated as arrays of
   // * unsigned bytes).
   // *
   // * @param aoff
@@ -284,7 +284,7 @@ public class BytesUtil {
   // return (alen - aoff) - (blen - boff);
   // }
 
-  /**
+  /*
    * Byte-wise comparison of byte[]s (the arrays are treated as arrays of unsigned bytes).
    *
    * @param aoff The offset into <i>a</i> at which the comparison will begin.
@@ -322,7 +322,7 @@ public class BytesUtil {
     return alen - blen;
   }
 
-  /**
+  /*
    * Return the #of leading bytes in common. This is used to compute the prefix for a node or leaf,
    * which is formed by the leading bytes in common between the first and last key for a node or
    * leaf.
@@ -348,7 +348,7 @@ public class BytesUtil {
     return i;
   }
 
-  /**
+  /*
    * Return a new byte[] containing the leading bytes in common between two byte[]s. This is often
    * used to compute the minimum length separator key.
    *
@@ -367,7 +367,7 @@ public class BytesUtil {
     return prefix;
   }
 
-  /**
+  /*
    * Computes the successor of a variable length byte array by appending a unsigned zero(0) byte to
    * the end of the array.
    *
@@ -385,7 +385,7 @@ public class BytesUtil {
     return tmp;
   }
 
-  /**
+  /*
    * The keys in the nodes of a btree are known as <i>separator keys</i>. The role of the separator
    * keys is to direct search towards the leaf in which a key exists or would exist by always
    * searching the first child having a separator key that is greater than or equal to the search
@@ -472,7 +472,7 @@ public class BytesUtil {
     return tmp;
   }
 
-  /**
+  /*
    * Formats a key as a series of comma delimited unsigned bytes.
    *
    * @param key The key.
@@ -485,7 +485,7 @@ public class BytesUtil {
     return toString(key, 0, key.length);
   }
 
-  /**
+  /*
    * Formats a key as a series of comma delimited unsigned bytes.
    *
    * @param key The key.
@@ -507,7 +507,7 @@ public class BytesUtil {
 
       // as an unsigned integer.
       // sb.append(Integer.toHexString(key[i] & 0xff));
-      sb.append(Integer.toString(key[i] & 0xff));
+      sb.append((key[i] & 0xff));
     }
 
     sb.append("]");
@@ -517,7 +517,7 @@ public class BytesUtil {
 
   private static transient String NULL = "null";
 
-  /**
+  /*
    * Formats the data into a {@link String}.
    *
    * @param data An array of unsigned byte arrays.
@@ -548,7 +548,7 @@ public class BytesUtil {
     return sb.toString();
   }
 
-  /**
+  /*
    * Binary search on an array whose members are variable length unsigned byte[]s.
    *
    * @param keys The buffer.
@@ -603,7 +603,7 @@ public class BytesUtil {
     return -(offset + 1);
   }
 
-  /**
+  /*
    * Compares two unsigned byte[]s.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -619,7 +619,7 @@ public class BytesUtil {
     }
   }
 
-  /**
+  /*
    * Return <code>true</code> if the <i>key</i> lies inside of the optional half-open range
    * constraint.
    *
@@ -668,7 +668,7 @@ public class BytesUtil {
     return true;
   }
 
-  /**
+  /*
    * This method forces the load of the JNI library and tries to execute the JNI methods.
    *
    * <p>In order to use the JNI library under Windows, you must specify the JNI library location
@@ -710,7 +710,7 @@ public class BytesUtil {
     System.out.println("JNI library routines Ok.");
   }
 
-  /**
+  /*
    * Return the #of bytes required to bit code the specified #of bits.
    *
    * @param nbits The #of bit flags.
@@ -729,7 +729,7 @@ public class BytesUtil {
 
   }
 
-  /**
+  /*
    * Return the index of the byte in which the bit with the given index is encoded.
    *
    * @param bitIndex The bit index.
@@ -740,7 +740,7 @@ public class BytesUtil {
     return ((int) (bitIndex / 8));
   }
 
-  /**
+  /*
    * Return the offset within the byte in which the bit is coded of the bit (this is just the
    * remainder <code>bitIndex % 8</code>).
    *
@@ -755,7 +755,7 @@ public class BytesUtil {
     return 7 - ((int) bitIndex) % 8;
   }
 
-  /**
+  /*
    * Get the value of a bit.
    *
    * <p>Note, the computation of the bit offset is intentionally aligned with {@link
@@ -775,7 +775,7 @@ public class BytesUtil {
     return (b & mask) != 0;
   }
 
-  /**
+  /*
    * Set the value of a bit - this is NOT thread-safe (contention for the byte in the backing buffer
    * can cause lost updates).
    *
@@ -804,7 +804,7 @@ public class BytesUtil {
     return oldValue;
   }
 
-  /**
+  /*
    * An array of 32-bit mask values. The index in the array is the #of bits of the hash code to be
    * considered. The value at that index in the array is the mask to be applied to mask off to zero
    * the high bits of the hash code which are to be ignored.
@@ -819,7 +819,7 @@ public class BytesUtil {
     for (int i = 0; i < 33; i++) masks32[i] = getMSBMask(i);
   }
 
-  /**
+  /*
    * Return a bit mask which reveals only the MSB (Most Significant Bits) N bits of an int32 value.
    *
    * @param nbits The #of bits to be revealed.
@@ -844,7 +844,7 @@ public class BytesUtil {
     return mask;
   }
 
-  /**
+  /*
    * Mask off all but the MSB <i>nbits</i> of the hash value and shift them down such that the
    * masked bits appear at bits (nbits:0] of the returned value. This is used to index into a
    * dictionary page based on the revealed bits.
@@ -865,7 +865,7 @@ public class BytesUtil {
     return x;
   }
 
-  /**
+  /*
    * Mask off all but the LSB <i>nbits</i> of the hash value.
    *
    * @param h The hash value.
@@ -882,7 +882,7 @@ public class BytesUtil {
     return v;
   }
 
-  /**
+  /*
    * Return the n-bit integer corresponding to the inclusive bit range of the byte[]. Bit ZERO (0)
    * is the Most Significant Bit (MSB). Bit positions increase from zero up to <code>
    * a.length * 8 - 1</code>. The return value is an int32 and the bit range must not be greater
@@ -1098,7 +1098,7 @@ public class BytesUtil {
     return ret;
   }
 
-  /**
+  /*
    * Some benchmarks seem to indicate that altGetBits32 is faster than getBits for smaller byte
    * counts. OTOH the cost of the redirection may outweigh any benefit.
    */
@@ -1110,7 +1110,7 @@ public class BytesUtil {
     }
   }
 
-  /**
+  /*
    * Return the n-bit integer corresponding to the inclusive bit range of the byte[]. Bit ZERO (0)
    * is the Most Significant Bit (MSB). Bit positions increase from zero up to <code>31</code>. The
    * return value is an int32 and the bit range must not be greater than 32 bits.
@@ -1145,7 +1145,7 @@ public class BytesUtil {
 
     final int last = off + len - 1; // index of the last bit (inclusive).
     final int rshift = 31 - last; // right shift to word align.
-    int w = (int) (a >>> rshift); // int32 result.
+    int w = (a >>> rshift); // int32 result.
     int mask = masks32[32 - len]; // lookup mask with [len] LSB ZEROs.
     mask = ~mask; // flip bits to get [len] LSB ONEs.
     w &= mask; // mask off the lower [len] bits (handles sign extension and
@@ -1153,7 +1153,7 @@ public class BytesUtil {
     return w;
   }
 
-  /**
+  /*
    * Return the binary representation of the unsigned byte[].
    *
    * @param b The unsigned byte[].
@@ -1181,7 +1181,7 @@ public class BytesUtil {
   /** binary digits. */
   private static final char[] bits = {'0', '1'};
 
-  /**
+  /*
    * Decode a string of the form <code>[0-9]+(k|kb|m|mb|g|gb)?</code>, returning the number of
    * bytes. When a suffix indicates kilobytes, megabytes, or gigabytes then the returned value is
    * scaled accordingly. The suffix is NOT case sensitive.
@@ -1225,7 +1225,7 @@ public class BytesUtil {
   private static final Pattern PATTERN_BYTE_COUNT =
       Pattern.compile("([0-9]+)(k|kb|m|mb|g|gb)?", Pattern.CASE_INSENSITIVE);
 
-  /**
+  /*
    * Return a byte[] having the data in the {@link ByteBuffer} from the {@link
    * ByteBuffer#position()} to the {@link ByteBuffer#limit()}. The position, limit, and mark are not
    * affected by this operation. When the {@link ByteBuffer} has a backing array, the array offset
@@ -1241,7 +1241,7 @@ public class BytesUtil {
     return toArray(b, false /* forceCopy */, null /* dst */);
   }
 
-  /**
+  /*
    * Return a byte[] having the data in the {@link ByteBuffer} from the {@link
    * ByteBuffer#position()} to the {@link ByteBuffer#limit()}. The position, limit, and mark are not
    * affected by this operation.
@@ -1300,7 +1300,7 @@ public class BytesUtil {
     'c', 'd', 'e', 'f'
   };
 
-  /**
+  /*
    * Utility to convert an int array to a hex string
    *
    * @param buf The data.
@@ -1320,7 +1320,7 @@ public class BytesUtil {
     return toHexString(buf, buf.length);
   }
 
-  /**
+  /*
    * Utility to convert a byte array to a hex string.
    *
    * @param buf The data.
@@ -1333,7 +1333,7 @@ public class BytesUtil {
     return toHexString(buf, buf.length);
   }
 
-  /**
+  /*
    * Utility to display byte array of maximum i bytes as hexString.
    *
    * @param buf The data.
@@ -1354,7 +1354,7 @@ public class BytesUtil {
     return out.toString();
   }
 
-  /**
+  /*
    * Formats hex dta into 64 byte rows.
    *
    * @param sb Where to format the data.
@@ -1372,7 +1372,7 @@ public class BytesUtil {
     }
   }
 
-  /**
+  /*
    * Return the data in the buffer. When possible, the backing array is returned. Otherwise, a new
    * byte[] is allocated, the data are copied into the array, and the new array is returned.
    */
@@ -1408,7 +1408,7 @@ public class BytesUtil {
     return a;
   }
 
-  /**
+  /*
    * Converts a byte array into a binary string. Useful for debugging.
    *
    * @param zOrderByteArray

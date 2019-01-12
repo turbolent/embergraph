@@ -9,8 +9,8 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
 
-/**
- * Implementation used to write on the {@link JoinTask#getSolutionBuffer()} for the last join
+/*
+* Implementation used to write on the {@link JoinTask#getSolutionBuffer()} for the last join
  * dimension. The solution buffer is either an {@link IBlockingBuffer} (for query) or a buffer that
  * writes on the head relation for the rule (for mutation).
  *
@@ -21,7 +21,7 @@ import org.embergraph.relation.rule.eval.ISolution;
 class UnsynchronizedSolutionBuffer<E extends IBindingSet> extends UnsynchronizedOutputBuffer<E> {
 
   private final IJoinNexus joinNexus;
-  /**
+  /*
    * An optional filter on the generated {@link ISolution}s. This filter is obtained from {@link
    * IJoinNexus#getSolutionFilter()}. When non-<code>null</code>, {@link
    * #handleChunk(IBindingSet[])} applies the filter to keep {@link ISolution}s licensed by the
@@ -42,7 +42,7 @@ class UnsynchronizedSolutionBuffer<E extends IBindingSet> extends Unsynchronized
     this.solutionFilter = joinNexus.getSolutionFilter();
   }
 
-  /**
+  /*
    * Generate a chunk of {@link ISolution}s for the accepted {@link IBindingSet}s and add those
    * those {@link ISolution}s to the {@link JoinTask#getSolutionBuffer()}. For query, that will be a
    * (proxy for) the {@link IJoinNexus#newQueryBuffer()} created by the {@link JoinMasterTask}. For

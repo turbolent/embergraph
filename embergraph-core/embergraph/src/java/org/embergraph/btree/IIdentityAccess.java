@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.btree;
 
-/**
- * An interface that declares how we access the persistent identity of an object.
+/*
+* An interface that declares how we access the persistent identity of an object.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -29,26 +29,26 @@ package org.embergraph.btree;
 public interface IIdentityAccess {
 
   /** Null reference for the store (zero). */
-  public final long NULL = 0L;
+  long NULL = 0L;
 
-  /**
+  /*
    * The persistent identity.
    *
    * @exception IllegalStateException if the object is not persistent.
    */
-  public long getIdentity() throws IllegalStateException;
+  long getIdentity() throws IllegalStateException;
 
   /** True iff the object is persistent. */
-  public boolean isPersistent();
+  boolean isPersistent();
 
   /** True iff an object has been logically deleted. */
-  public boolean isDeleted();
+  boolean isDeleted();
 
-  /**
+  /*
    * Deletes the persistence capable object. Both transient and persistent objects may be logically
    * deleted. If the object is persistent then its space on the store is deallocated.
    *
    * @throws IllegalStateException if the object is already deleted.
    */
-  public void delete() throws IllegalStateException;
+  void delete() throws IllegalStateException;
 }

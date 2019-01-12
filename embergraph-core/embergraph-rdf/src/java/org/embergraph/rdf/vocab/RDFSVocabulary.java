@@ -37,8 +37,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-/**
- * A {@link Vocabulary} including well-known {@link Value}s for {@link RDF}, {@link RDFS}, {@link
+/*
+* A {@link Vocabulary} including well-known {@link Value}s for {@link RDF}, {@link RDFS}, {@link
  * OWL}, {@link DCAllVocabularyDecl Dublin Core}, {@link SKOSVocabularyDecl SKOS}, {@link
  * FOAFVocabularyDecl FOAF}, {@link XMLSchema}, and {@link Sesame}.
  *
@@ -53,7 +53,7 @@ public class RDFSVocabulary extends BaseVocabulary {
     super();
   }
 
-  /**
+  /*
    * Used by {@link AbstractTripleStore#create()}.
    *
    * @param namespace The namespace of the KB instance.

@@ -19,8 +19,8 @@ package org.embergraph.ha.pipeline;
 
 import java.io.IOException;
 
-/**
- * An exception thrown by the {@link HAReceiveService} when replication to the downstream service
+/*
+* An exception thrown by the {@link HAReceiveService} when replication to the downstream service
  * fails. The root cause can be an RMI error (can not connect or connection lost), a socket channel
  * write error (can not connect, connection lost, etc.), or even a transitive error from further
  * down the write pipeline. This exception DOES NOT decisively indicate the problem is with the

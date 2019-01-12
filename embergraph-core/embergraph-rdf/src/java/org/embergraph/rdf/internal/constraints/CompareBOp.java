@@ -38,8 +38,8 @@ import org.openrdf.query.algebra.Compare.CompareOp;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 
-/**
- * Perform open-world value comparison operations per the SPARQL spec (the LT operator). This does
+/*
+* Perform open-world value comparison operations per the SPARQL spec (the LT operator). This does
  * NOT implement the broader ordering for ORDER BY. That is handled by {@link IVComparator}.
  *
  * @see <a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321/#op_lt">&lt;</a>
@@ -189,7 +189,7 @@ public class CompareBOp extends XSDBooleanIVValueExpression implements INeedsMat
       }
     }
 
-    /**
+    /*
      * Handle LiteralExtensionIVs that support comparison with built-in datatypes. These types are
      * handled by conversion into a built-in datatype, which can be checked by Sesame's
      * QueryEvaluationUtil.
@@ -198,7 +198,7 @@ public class CompareBOp extends XSDBooleanIVValueExpression implements INeedsMat
     Literal l2 = null;
     if (left instanceof LiteralExtensionIV || right instanceof LiteralExtensionIV) {
 
-      /**
+      /*
        * We caught the case where both left and right are LiteralExtensionIVs earlier, so we can be
        * sure that exactly one of the is a LiteralExtensionIVs.
        */
@@ -326,7 +326,7 @@ public class CompareBOp extends XSDBooleanIVValueExpression implements INeedsMat
     }
   }
 
-  /**
+  /*
    * The CompareBOp can work with non-materialized terms in the case of inline numerical compare
    * operations. It is only when the bop encounters non-inlined numerics or needs to compare strings
    * that it needs materialized terms.

@@ -32,8 +32,8 @@ import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
-/**
- * An analyzer intended for the term-completion use case; particularly for technical vocabularies
+/*
+* An analyzer intended for the term-completion use case; particularly for technical vocabularies
  * and concept schemes.
  *
  * <p>This analyzer generates several index terms for each word in the input. These are intended to
@@ -76,7 +76,7 @@ public class TermCompletionAnalyzer extends Analyzer {
   private final Pattern discard;
   private final boolean alwaysDiscard;
 
-  /**
+  /*
    * Divide the input into words and short tokens as with {@link #TermCompletionAnalyzer(Pattern,
    * Pattern)}. Each term is generated, and then an additional term is generated with softHypens
    * (defined by the pattern), removed. If the alwaysRemoveSoftHypens flag is true, then the first
@@ -102,7 +102,7 @@ public class TermCompletionAnalyzer extends Analyzer {
       alwaysDiscard = true;
     }
   }
-  /**
+  /*
    * Divide the input into words, separated by the wordBoundary, and return a token for each whole
    * word, and then generate further tokens for each word by removing prefixes up to and including
    * each successive match of subWordBoundary
@@ -114,7 +114,7 @@ public class TermCompletionAnalyzer extends Analyzer {
     this(wordBoundary, subWordBoundary, null, true);
   }
 
-  /**
+  /*
    * This classes has three processes going on all driven from the {@link #increment()} method.
    *
    * <p>One process is that of iterating over the words in the input: - the words are identified in
@@ -133,7 +133,7 @@ public class TermCompletionAnalyzer extends Analyzer {
     final String[] words;
     final CharTermAttribute termAtt;
 
-    char currentWord[] = new char[] {};
+    char[] currentWord = new char[]{};
     Matcher softMatcher;
     int currentWordIx = -1;
 
@@ -213,7 +213,7 @@ public class TermCompletionAnalyzer extends Analyzer {
       reader.mark(Integer.MAX_VALUE);
       int length = (int) reader.skip(Integer.MAX_VALUE);
       reader.reset();
-      char fileContent[] = new char[length];
+      char[] fileContent = new char[length];
       reader.read(fileContent);
       reader.reset();
       return new String(fileContent);

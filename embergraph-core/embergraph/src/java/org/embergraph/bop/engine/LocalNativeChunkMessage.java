@@ -14,8 +14,8 @@ import org.embergraph.relation.accesspath.ThickCloseableIterator;
 import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 
-/**
- * A chunk of intermediate results stored on the native heap which are ready to be consumed by some
+/*
+* A chunk of intermediate results stored on the native heap which are ready to be consumed by some
  * {@link BOp} in a specific query.
  *
  * <p>Note: This class is only used in query evaluation for the standalone database.
@@ -45,13 +45,13 @@ public class LocalNativeChunkMessage implements IChunkMessage<IBindingSet> {
   /** The solutions (or null if the chunk was empty). */
   private final SolutionSetStream ssstr;
 
-  /**
+  /*
    * The memory manager on which the solutions were stored (this is an allocation context and can be
    * destroyed without destroying the parent memory manager).
    */
   private final MemStore mmgr;
 
-  /**
+  /*
    * The #of bytes of data written onto the {@link SolutionSetStream} for the {@link IChunkMessage}.
    */
   private final long byteCount;

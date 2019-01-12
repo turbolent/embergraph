@@ -26,8 +26,8 @@ package org.embergraph.journal;
 import java.util.concurrent.TimeoutException;
 import org.embergraph.relation.AbstractResource;
 
-/**
- * Interface named synchronous distributed locks without deadlock detection.
+/*
+* Interface named synchronous distributed locks without deadlock detection.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -54,7 +54,7 @@ import org.embergraph.relation.AbstractResource;
  */
 public interface IResourceLockService {
 
-  /**
+  /*
    * Acquire an exclusive lock on the named resource. The request will block until the lock is
    * available.
    *
@@ -62,9 +62,9 @@ public interface IResourceLockService {
    * @return The lock.
    * @throws RuntimeException wrapping {@link InterruptedException} or {@link TimeoutException}
    */
-  public IResourceLock acquireLock(String namespace);
+  IResourceLock acquireLock(String namespace);
 
-  /**
+  /*
    * Acquire an exclusive lock the named resource. The request will block until the lock is
    * available or the timeout expires.
    *
@@ -75,6 +75,6 @@ public interface IResourceLockService {
    * @throws TimeoutException
    * @throws InterruptedException
    */
-  public IResourceLock acquireLock(String namespace, long timeout)
+  IResourceLock acquireLock(String namespace, long timeout)
       throws InterruptedException, TimeoutException;
 }

@@ -27,8 +27,8 @@ import it.unimi.dsi.parser.BulletParser;
 import it.unimi.dsi.parser.Element;
 import java.util.Map;
 
-/**
- * A default, do-nothing-at-all callback.
+/*
+* A default, do-nothing-at-all callback.
  *
  * <p>Callbacks can inherit from this class and forget about methods they are not interested in.
  *
@@ -40,7 +40,7 @@ public class DefaultCallback implements Callback {
 
   protected DefaultCallback() {}
 
-  /**
+  /*
    * Returns the singleton instance of the default callback.
    *
    * @return the singleton instance of the default callback.

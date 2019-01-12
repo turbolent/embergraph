@@ -1,7 +1,7 @@
 package org.embergraph.bop;
 
-/**
- * Exception thrown when a {@link BOp} appears more than once in an operator tree (operator trees
+/*
+* Exception thrown when a {@link BOp} appears more than once in an operator tree (operator trees
  * must not contain loops and operator instances may not appear more than once unless they are an
  * {@link IConstant} or an {@link IVariable}).
  *

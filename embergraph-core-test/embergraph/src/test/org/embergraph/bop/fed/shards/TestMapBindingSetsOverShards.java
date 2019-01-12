@@ -55,8 +55,8 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.Dechunkerator;
 
-/**
- * Unit tests for {@link MapBindingSetsOverShardsBuffer}.
+/*
+* Unit tests for {@link MapBindingSetsOverShardsBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestMapBindingSetsOverShards.java 3448 2010-08-18 20:55:58Z thompsonbry $
@@ -94,7 +94,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     super.tearDown();
   }
 
-  /**
+  /*
    * Create and populate relation in the {@link #namespace}.
    *
    * @throws IOException
@@ -137,7 +137,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     rel.insert(new ChunkedArrayIterator<E>(a.length, a, null /* keyOrder */));
   }
 
-  /**
+  /*
    * Verify the expected {@link PartitionLocator}s.
    *
    * @throws IOException
@@ -190,7 +190,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     assertFalse(itr.hasNext());
   }
 
-  /**
+  /*
    * Verify the data are in the expected shards.
    *
    * @throws IOException
@@ -228,33 +228,31 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     // partition0
     assertEquals(
         2L,
-        ((Long)
-                dataService0
-                    .submit(
-                        ITx.UNISOLATED,
-                        DataService.getIndexPartitionName(name, 0 /* partitionId */),
-                        new RangeCountProcedure(
-                            true /* exact */,
-                            false /* deleted */,
-                            null /* fromKey */,
-                            null /* toKey */))
-                    .get())
+        dataService0
+            .submit(
+                ITx.UNISOLATED,
+                DataService.getIndexPartitionName(name, 0 /* partitionId */),
+                new RangeCountProcedure(
+                    true /* exact */,
+                    false /* deleted */,
+                    null /* fromKey */,
+                    null /* toKey */))
+            .get()
             .longValue());
 
     // partition1
     assertEquals(
         3L,
-        ((Long)
-                dataService1
-                    .submit(
-                        ITx.UNISOLATED,
-                        DataService.getIndexPartitionName(name, 1 /* partitionId */),
-                        new RangeCountProcedure(
-                            true /* exact */,
-                            false /* deleted */,
-                            null /* fromKey */,
-                            null /* toKey */))
-                    .get())
+        dataService1
+            .submit(
+                ITx.UNISOLATED,
+                DataService.getIndexPartitionName(name, 1 /* partitionId */),
+                new RangeCountProcedure(
+                    true /* exact */,
+                    false /* deleted */,
+                    null /* fromKey */,
+                    null /* toKey */))
+            .get()
             .longValue());
 
     //        {
@@ -287,7 +285,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
 
   }
 
-  /**
+  /*
    * Unit test verifies that binding sets are correctly mapped over shards when the target access
    * path will be fully bound.
    *
@@ -357,7 +355,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
         new Predicate<E>(
             new BOp[] {x, y},
             NV.asMap(
-                new NV[] {new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})}));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
@@ -431,7 +429,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     }
   }
 
-  /**
+  /*
    * Unit test verifies that binding sets are correctly mapped over shards when only one component
    * of the key is bound (the key has two components, this unit test only binds the first component
    * in the key).
@@ -497,7 +495,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
         new Predicate<E>(
             new BOp[] {x, y},
             NV.asMap(
-                new NV[] {new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})}));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
@@ -571,7 +569,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     }
   }
 
-  /**
+  /*
    * A unit test where no variables are bound. This should cause the binding sets to be mapped
    * across all shards.
    *
@@ -602,7 +600,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
         new Predicate<E>(
             new BOp[] {x, y},
             NV.asMap(
-                new NV[] {new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})}));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
@@ -684,7 +682,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     }
   }
 
-  /**
+  /*
    * Mock class under test
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -696,7 +694,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     /** The capacity of the output buffer. */
     private final int outputBufferCapacity;
 
-    /**
+    /*
      * @param fed
      * @param pred
      * @param timestamp
@@ -723,8 +721,8 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
       return new AbstractArrayBuffer<IBindingSet[]>(
           outputBufferCapacity, IBindingSet[].class, null /* filter */) {
 
-        /**
-         * Puts a copy of the locator and the binding set chunk onto a list for examination by the
+      /*
+       * Puts a copy of the locator and the binding set chunk onto a list for examination by the
          * test harness.
          */
         @Override
@@ -743,7 +741,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
       };
     }
 
-    /**
+    /*
      * A list of the binding set chunks which were flushed out. Each chunk is paired with the {@link
      * PartitionLocator} onto which the binding sets in that chunk were mapped.
      */

@@ -25,8 +25,8 @@ package org.embergraph.service.master;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-/**
- * Interface used by client tasks to notify the master about the outcome of each resource tasked to
+/*
+* Interface used by client tasks to notify the master about the outcome of each resource tasked to
  * that client. The interface extends {@link Remote} since it is invoked from the client tasks
  * against a proxy for the master.
  *
@@ -38,20 +38,20 @@ import java.rmi.RemoteException;
  */
 public interface INotifyOutcome<V, L> extends Remote {
 
-  /**
+  /*
    * Invoked each time a client tasks completes processing for some resource.
    *
    * @param resource The resource identifier.
    * @param locator The client locator.
    */
-  public void success(final V resource, final L locator) throws RemoteException;
+  void success(final V resource, final L locator) throws RemoteException;
 
-  /**
+  /*
    * Invoked each time a client tasks encounters an error when processing some resource.
    *
    * @param resource The resource identifier.
    * @param locator The client locator.
    * @param t The exception.
    */
-  public void error(final V resource, final L locator, final Throwable t) throws RemoteException;
+  void error(final V resource, final L locator, final Throwable t) throws RemoteException;
 }

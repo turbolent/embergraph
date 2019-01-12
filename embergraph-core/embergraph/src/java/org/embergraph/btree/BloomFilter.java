@@ -36,8 +36,8 @@ import org.embergraph.io.LongPacker;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Encapsulates the actual implementation class and provides the protocol for (de-)serialization.
+/*
+* Encapsulates the actual implementation class and provides the protocol for (de-)serialization.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -50,7 +50,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
   /** */
   private static final long serialVersionUID = -4011582802868293737L;
 
-  /**
+  /*
    * The implementation object. This is cleared by {@link #disable()}.
    *
    * @serial
@@ -66,7 +66,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
   /** The target error rate when there are {@link #n} index entries (from the ctor). */
   private double p;
 
-  /**
+  /*
    * The #of index entries at which the filter will have reached its maximum error rate (from the
    * ctor).
    *
@@ -81,7 +81,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return n;
   }
 
-  /**
+  /*
    * The target error rate when there are {@link #getN()} index entries (from the ctor).
    *
    * <p>Note: This class does not know the actual false positive error rate. However, that is
@@ -92,7 +92,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return p;
   }
 
-  /**
+  /*
    * The false positive error rate estimated as <code>2^-d</code>, where <i>d</i> is the #of hash
    * functions. This will be close to but typically not exactly the same as the value of {@link
    * #getP()} specified to the ctor.
@@ -105,7 +105,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return Math.pow(2, -filter.d());
   }
 
-  /**
+  /*
    * The #of index entries at which the filter will have reached its maximum error rate (from the
    * ctor).
    */
@@ -117,7 +117,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
   /** De-serialization ctor. */
   public BloomFilter() {}
 
-  /**
+  /*
    * Ctor specifies <code>maxN := n * 2</code>.
    *
    * @param n The expected #of index entries.
@@ -128,7 +128,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     this(n, p, n * 2);
   }
 
-  /**
+  /*
    * @param n The expected #of index entries.
    * @param p The target error rate.
    * @param maxN The #of index entries at which the filter will have reached its maximum error rate.
@@ -179,7 +179,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return filter.m();
   }
 
-  /**
+  /*
    * Return the #of hash functions required to achieve the specified error rate. If <code>p</code>
    * is the probability of a false positive and <code>d</code> is the #of hash functions, then
    *
@@ -209,7 +209,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return d;
   }
 
-  /**
+  /*
    * Return the bit length required to provision a filter having the specified #of hash functions
    * and the target capacity. This is
    *
@@ -230,7 +230,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return bitLength;
   }
 
-  /**
+  /*
    * This returns the #of index entries at which the bloom filter will have the specified
    * <em>expected</em> error rate. The probability of a false positive is
    *
@@ -341,7 +341,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
    * Persistence protocol.
    */
 
-  /**
+  /*
    * Address that can be used to read this object from the store.
    *
    * <p>Note: This is not persisted since we do not have the address until after we have written out
@@ -352,7 +352,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
   /** Presumed clean until {@link #add(byte[])} indicates that the filter state was changed. */
   private transient boolean dirty = false;
 
-  /**
+  /*
    * Address that can be used to read this object from the store.
    *
    * <p>Note: This is not a persistent property. However the value is set when the record is read
@@ -363,7 +363,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return addr;
   }
 
-  /**
+  /*
    * Read a bloom filter record from the store.
    *
    * @param store the store.
@@ -384,7 +384,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return filter;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the state of the filter has been modified but not yet written onto
    * the store. The filter is presumed clean when created or when it is read from the store. The
    * filter will remain clean until {@link #add(byte[])} returns <code>true</code>, indicating that
@@ -395,8 +395,8 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return dirty;
   }
 
-  //    /**
-  //     * Marks the filter as dirty.
+  //    /*
+//     * Marks the filter as dirty.
   //     */
   //    final protected void setDirty() {
   //
@@ -404,7 +404,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
   //
   //    }
 
-  /**
+  /*
    * Writes the bloom filter on the store and clears the {@link #isDirty()} flag.
    *
    * <p>Note: This also sets the address on {@link #addr} as a side-effect, but the address is NOT
@@ -433,7 +433,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     return addr;
   }
 
-  /**
+  /*
    * Disables the bloom filter associated with the index. A disabled bloom filter can not be
    * persisted and will not respond to queries or permit mutations.
    *
@@ -465,7 +465,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
 
   private transient boolean enabled = true;
 
-  /**
+  /*
    * Return <code>true</code> unless the bloom filter has been disabled.
    *
    * <p>Note: A bloom filter may be disabled is the #of index entries has exceeded the maximum
@@ -480,7 +480,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
 
   private static final transient int VERSION0 = 0x0;
 
-  /**
+  /*
    * Note: On read, the {@link #addr} is set to <code>0L</code>, the {@link #dirty} flag is cleared,
    * and {@link #enabled} flag is set. It's necessary to override serialization otherwise java will
    * default the {@link #enabled} flag to <code>false</code> when an object is de-serialized -
@@ -511,7 +511,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     enabled = true;
   }
 
-  /**
+  /*
    * @param out
    * @throws IOException
    */
@@ -536,7 +536,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
   /** Counters are not persistent. */
   public transient BloomFilterCounters counters = new BloomFilterCounters();
 
-  /**
+  /*
    * Counters for bloom filter access and notification of false positives.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -557,7 +557,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
     /** #of false positives from the bloom filter in contains/lookup(key). */
     public int nbloomFalsePos = 0;
 
-    /**
+    /*
      * @todo summarize when the {@link BTreeCounters} are summarized.
      * @param o
      */
@@ -569,7 +569,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
       nbloomFalsePos += o.nbloomFalsePos;
     }
 
-    /**
+    /*
      * The effective acceptance rate for the bloom filter (<code>1 - rejectRate</code>). This is the
      * rate at which the bloom filter reports that the key is in the index. False positives occur
      * when the filter accepts a key and the index is consulted but the key is not found in the
@@ -582,7 +582,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
       return 1 - getBloomRejectionRate();
     }
 
-    /**
+    /*
      * The effective rejection rate (correct rejection rate) for the bloom filter. Bloom filters do
      * not make false negative errors, so any time the filter rejects a key we assume that it was a
      * correct rejection.
@@ -596,7 +596,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
       return (nbloomRejects / (double) nbloomTest);
     }
 
-    /**
+    /*
      * The effective error rate (false positive rate) for the bloom filter. A false positive is an
      * instance where the bloom filter reports that the key is in the index but a read against the
      * index demonstrates that the key does not exist in the index. False positives are in the
@@ -611,7 +611,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
       return (nbloomFalsePos / (double) nbloomTest);
     }
 
-    /**
+    /*
      * Return a {@link CounterSet} reporting on the various counters tracked in the instance fields
      * of this class.
      *
@@ -685,7 +685,7 @@ public class BloomFilter implements IBloomFilter, Externalizable {
       return getCounters().asXML(null /* filter */);
     }
 
-    /**
+    /*
      * Returns a human readable representation of the bloom filter performance, including the
      * correct rejection rate and the false positive rate to date (or at least since the bloom
      * filter was read from the store).

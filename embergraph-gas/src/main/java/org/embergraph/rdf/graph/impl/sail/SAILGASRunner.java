@@ -28,8 +28,8 @@ import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 import org.openrdf.sail.memory.MemoryStore;
 
-/**
- * Class for running GAS performance tests against the SAIL.
+/*
+* Class for running GAS performance tests against the SAIL.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -97,9 +97,7 @@ public class SAILGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
     @Override
     public boolean handleArg(final AtomicInteger i, final String[] args) {
-      if (super.handleArg(i, args)) {
-        return true;
-      }
+      return super.handleArg(i, args);
       //            final String arg = args[i.get()];
       //            if (arg.equals("-bufferMode")) {
       //                final String s = args[i.incrementAndGet()];
@@ -110,7 +108,6 @@ public class SAILGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
       //            } else {
       //                return false;
       //            }
-      return false;
     }
 
     @Override
@@ -164,10 +161,10 @@ public class SAILGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
   protected IGraphAccessor newGraphAccessor() {
 
     return new SAILGraphAccessor(
-        getOptionData().cxn, false /* includeInferred */, new Resource[0] /* defaultContext */);
+        getOptionData().cxn, false /* includeInferred */  /* defaultContext */);
   }
 
-  /**
+  /*
    * Performance testing harness.
    *
    * @see #GASRunner(String[])

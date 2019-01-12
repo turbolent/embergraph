@@ -11,7 +11,7 @@ import org.embergraph.service.IService;
 /** Interface for a node participating in the exchange of NIO buffers to support query execution. */
 public interface IQueryPeer extends Remote {
 
-  /**
+  /*
    * The {@link UUID} of the service in which this {@link QueryEngine} is running.
    *
    * @return The {@link UUID} of the service in which this {@link QueryEngine} is running -or- a
@@ -21,7 +21,7 @@ public interface IQueryPeer extends Remote {
    */
   UUID getServiceUUID() throws RemoteException;
 
-  /**
+  /*
    * Declare a query to a peer. This message is sent to the peer before any other message for that
    * query and declares the query and the query controller with which the peer must communicate
    * during query evaluation.
@@ -35,7 +35,7 @@ public interface IQueryPeer extends Remote {
    */
   void declareQuery(IQueryDecl queryDecl) throws RemoteException;
 
-  /**
+  /*
    * Notify a service that a buffer having data for some {@link BOp} in some running query is
    * available. The receiver may request the data when they are ready. If the query is cancelled,
    * then the sender will drop the buffer.
@@ -45,7 +45,7 @@ public interface IQueryPeer extends Remote {
    */
   void bufferReady(IChunkMessage<IBindingSet> msg) throws RemoteException;
 
-  /**
+  /*
    * Notify a service that the query has been terminated. The peer MUST NOT cancel the query
    * synchronously as that can lead to a deadlock with the query controller. Instead, the peer
    * should queue a task to cancel the query and then return.

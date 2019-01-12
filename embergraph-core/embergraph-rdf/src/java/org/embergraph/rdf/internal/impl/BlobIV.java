@@ -29,8 +29,8 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Implementation for any kind of RDF {@link Value} when the value is not being inlined, but
+/*
+* Implementation for any kind of RDF {@link Value} when the value is not being inlined, but
  * primarily used with large RDF {@link Value}s. Instances of this class can represent {@link URI}s,
  * {@link BNode}s (if they are not being inlined), or {@link Literal}s (including datatype literals
  * if they are not being inlined). The representation of the {@link BlobIV} is simply the key in the
@@ -63,8 +63,8 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
     return AbstractIV.toFlags(vte, false /* inline */, true /* extension */, DTE.XSDBoolean);
   }
 
-  ////    /**
-  ////     * {@inheritDoc}
+  ////    /*
+////     * {@inheritDoc}
   ////     * <p>
   ////     * This checks the hashCode and the counter, both of which must decode to
   ////     * ZERO (0). The {@link VTE} may be any of the possible {@link VTE}s. "null"
@@ -84,13 +84,13 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   //
   //	}
   //
-  //	/**
-  //	 * Singleton for a "null" {@link IV}.
+  //	/*
+//	 * Singleton for a "null" {@link IV}.
   //	 */
   //	final public static transient BlobIV<?> NullIV = BlobIV.mockIV(VTE.URI);
   //
-  //	/**
-  //	 * Create a mock {@link IV} having the indicated {@link VTE} which will
+  //	/*
+//	 * Create a mock {@link IV} having the indicated {@link VTE} which will
   //	 * report <code>true</code> for {@link #isNullIV()}. This is used by some
   //	 * code patterns where we need to associate a {@link EmbergraphValue} not in
   //	 * the database with an {@link IV} on a temporary basis.
@@ -128,7 +128,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
     return tmp;
   }
 
-  /**
+  /*
    * @param vte The {@link VTE}.
    * @param hash The hash code.
    * @param counter The counter.
@@ -138,7 +138,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
     this(BlobIV.toFlags(vte), hash, counter);
   }
 
-  /**
+  /*
    * @param flags The flags byte.
    * @param hash The hash code.
    * @param counter The counter.
@@ -152,7 +152,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
     this.counter = counter;
   }
 
-  /**
+  /*
    * Human readable representation includes the term identifier, whether this is a URI, Literal,
    * Blank node, or Statement identifier and the datatype URI if one is assigned. <code>
    * TermId(<i>hashCode</i>:<i>counter</i>:[U|L|B])
@@ -165,7 +165,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
     return "BlobIV(" + hashCode() + ":" + counter() + ":" + getVTE().getCharCode() + ")";
   }
 
-  /**
+  /*
    * Decodes the output of {@link #toString()}, returning a new {@link BlobIV} .
    *
    * @param s The string representation.
@@ -199,8 +199,8 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
     return tmp;
   }
 
-  //    /**
-  //     * Callers must explicitly populate the value cache.
+  //    /*
+//     * Callers must explicitly populate the value cache.
   //     * <p>
   //     * {@inheritDoc}
   //     */
@@ -211,8 +211,8 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   //
   //    }
   //
-  //    /**
-  //     * Operation is not supported because this {@link IV} type is not 100%
+  //    /*
+//     * Operation is not supported because this {@link IV} type is not 100%
   //     * inline. You MUST explicitly set the value cache.
   //     * <p>
   //     * {@inheritDoc}
@@ -229,14 +229,13 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
       final BlobIV<?> t = (BlobIV<?>) o;
       if (this.hash != t.hash) return false;
       if (this.counter != t.counter) return false;
-      if (this.flags() != t.flags()) return false;
-      return true;
+      return this.flags() == t.flags();
       //			return BytesUtil.bytesEqual(data, ((TermId<?>) o).data);
     }
     return false;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -284,7 +283,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to entirely take over the encoding of the key from the {@link BlobIV}. Note that
@@ -305,8 +304,8 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
     return keyBuilder;
   }
 
-  //	/**
-  //	 * Override default serialization to send the cached {@link EmbergraphValue}.
+  //	/*
+//	 * Override default serialization to send the cached {@link EmbergraphValue}.
   //	 */
   //	private void writeObject(final java.io.ObjectOutputStream out)
   //			throws IOException {
@@ -317,8 +316,8 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   //
   //	}
   //
-  //	/**
-  //	 * Override default serialization to recover the cached {@link EmbergraphValue}
+  //	/*
+//	 * Override default serialization to recover the cached {@link EmbergraphValue}
   //	 * .
   //	 */
   //	@SuppressWarnings("unchecked")
@@ -336,7 +335,7 @@ public class BlobIV<V extends EmbergraphValue> extends AbstractNonInlineExtensio
   //
   //	}
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Creates a unique blank node ID based on the {@link BlobIV}'s internal data.

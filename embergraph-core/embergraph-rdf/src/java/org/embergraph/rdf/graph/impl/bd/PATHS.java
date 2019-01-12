@@ -45,8 +45,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * PATHS is an iterative graph traversal operation. The frontier is expanded iteratively until no
+/*
+* PATHS is an iterative graph traversal operation. The frontier is expanded iteratively until no
  * new vertices are discovered, or until the target vertices have all been reached. Each vertex is
  * marked with its depth and with a list of all predecessors and their edges to the vertex. This
  * algorithm is useful for creating a complete connected subgraph between a source and a set of
@@ -59,7 +59,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
   public static class VS {
 
-    /**
+    /*
      * <code>-1</code> until visited. When visited, set to the current round in order to assign each
      * vertex its traversal depth.
      *
@@ -71,14 +71,14 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
      */
     private final AtomicInteger depth = new AtomicInteger(-1);
 
-    /**
+    /*
      * The predecessors are the source vertices to visit a given target vertex. Each one has a list
      * of edges along which they were able to reach this vertex.
      */
     private final Map<Value, Set<URI>> predecessors =
         Collections.synchronizedMap(new LinkedHashMap<Value, Set<URI>>());
 
-    /**
+    /*
      * The depth at which this vertex was first visited (origin ZERO) and <code>-1</code> if the
      * vertex has not been visited.
      */
@@ -94,7 +94,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
       return predecessors;
     }
 
-    /**
+    /*
      * Add a predecessor (might have already been added) and the edge along which the predecessor
      * discovered this vertex.
      */
@@ -112,7 +112,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
       edges.add(edge);
     }
 
-    /**
+    /*
      * Note: This marks the vertex at the current traversal depth.
      *
      * @return <code>true</code> if the vertex was visited for the first time in this round and the
@@ -225,7 +225,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
     return true;
   }
 
-  /**
+  /*
    * The remote vertex is scheduled for activation unless it has already been visited.
    *
    * <p>Note: We are scattering to out-edges. Therefore, this vertex is {@link
@@ -265,7 +265,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
     return true;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -342,8 +342,8 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
               final IVariable<?>[] outVars,
               final IBindingSet bs) {
 
-            /*
-             * We want to return a different set of edges depending on
+          /*
+       * We want to return a different set of edges depending on
              * which predecessor the caller is asking about.  We can
              * find that information in the binding set.
              */
@@ -365,7 +365,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
             if (predIV instanceof Value) {
 
-              predVal = (Value) predIV;
+              predVal = predIV;
 
             } else if (predIV.hasValue()) {
 
@@ -378,8 +378,8 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
             final VS vs = state.getState(u);
 
-            /*
-             * Return the edges for this predecessor.
+          /*
+       * Return the edges for this predecessor.
              */
             return new LinkedList<Value>(vs.predecessors().get(predVal));
           }
@@ -402,8 +402,8 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
               final IVariable<?>[] outVars,
               final IBindingSet bs) {
 
-            /*
-             * We want to return a different set of edges depending on
+          /*
+       * We want to return a different set of edges depending on
              * which predecessor the caller is asking about.  We can
              * find that information in the binding set.
              */
@@ -425,7 +425,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
 
             if (predIV instanceof Value) {
 
-              predVal = (Value) predIV;
+              predVal = predIV;
 
             } else if (predIV.hasValue()) {
 
@@ -444,7 +444,7 @@ public class PATHS extends BaseGASProgram<PATHS.VS, PATHS.ES, Void>
     return tmp;
   }
 
-  /**
+  /*
    * Additional {@link IBindingExtractor.IBinder}s exposed by {@link PATHS}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

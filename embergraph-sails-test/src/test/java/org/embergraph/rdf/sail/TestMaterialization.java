@@ -69,20 +69,20 @@ public class TestMaterialization extends ProxyEmbergraphSailTestCase {
 
         final ValueFactory vf = sail.getValueFactory();
 
-        /*
-         * Create some terms.
+      /*
+       * Create some terms.
          */
         final URI X = vf.createURI(BD.NAMESPACE + "X");
         final Literal label = vf.createLiteral("John");
 
-        /*
-         * Create some statements.
+      /*
+       * Create some statements.
          */
         cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
         cxn.add(X, RDFS.LABEL, label);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -129,7 +129,7 @@ public class TestMaterialization extends ProxyEmbergraphSailTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -147,20 +147,20 @@ public class TestMaterialization extends ProxyEmbergraphSailTestCase {
 
         final ValueFactory vf = sail.getValueFactory();
 
-        /*
-         * Create some terms.
+      /*
+       * Create some terms.
          */
         final URI X = vf.createURI(BD.NAMESPACE + "X");
         final Literal label = vf.createLiteral("John");
 
-        /*
-         * Create some statements.
+      /*
+       * Create some statements.
          */
         cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
         cxn.add(X, RDFS.LABEL, label);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -210,7 +210,7 @@ public class TestMaterialization extends ProxyEmbergraphSailTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -228,20 +228,20 @@ public class TestMaterialization extends ProxyEmbergraphSailTestCase {
 
         final ValueFactory vf = sail.getValueFactory();
 
-        /*
-         * Create some terms.
+      /*
+       * Create some terms.
          */
         final URI X = vf.createURI(BD.NAMESPACE + "X");
         final Literal label = vf.createLiteral("John");
 
-        /*
-         * Create some statements.
+      /*
+       * Create some statements.
          */
         cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
         cxn.add(X, RDFS.LABEL, label);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -293,7 +293,7 @@ public class TestMaterialization extends ProxyEmbergraphSailTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 }

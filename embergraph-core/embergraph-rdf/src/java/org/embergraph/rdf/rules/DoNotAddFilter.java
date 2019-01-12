@@ -29,8 +29,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Filter keeps matched triple patterns generated OUT of the database.
+/*
+* Filter keeps matched triple patterns generated OUT of the database.
  *
  * <p>Note: {@link StatementEnum#Explicit} triples are always rejected by this filter so that
  * explicitly asserted triples will always be stored in the database.
@@ -58,7 +58,7 @@ public class DoNotAddFilter<E extends ISPO> extends SPOFilter<E> {
   private final IV rdfsResource;
   private final boolean forwardChainRdfTypeRdfsResource;
 
-  /**
+  /*
    * @param vocab The {@link Vocabulary}
    * @param axioms The {@link Axioms}.
    * @param forwardChainRdfTypeRdfsResource <code>true</code> if we generate the entailments for (x
@@ -114,7 +114,7 @@ public class DoNotAddFilter<E extends ISPO> extends SPOFilter<E> {
 
   private boolean accept(final ISPO o) {
 
-    final ISPO spo = (ISPO) o;
+    final ISPO spo = o;
 
     if (spo.s().isLiteral()) {
 
@@ -157,17 +157,10 @@ public class DoNotAddFilter<E extends ISPO> extends SPOFilter<E> {
       return false;
     }
 
-    if (!forwardChainRdfTypeRdfsResource
-        && IVUtility.equals(spo.p(), rdfType)
-        && IVUtility.equals(spo.o(), rdfsResource)) {
+    // reject (?x, rdf:type, rdfs:Resource )
+    return forwardChainRdfTypeRdfsResource
+        || !IVUtility.equals(spo.p(), rdfType)
+        || !IVUtility.equals(spo.o(), rdfsResource);// Accept everything else.
 
-      // reject (?x, rdf:type, rdfs:Resource )
-
-      return false;
-    }
-
-    // Accept everything else.
-
-    return true;
   }
 }

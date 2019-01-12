@@ -25,8 +25,8 @@ package org.embergraph.counters;
 
 import java.net.InetAddress;
 
-/**
- * The set of core (required) counters that must be reported for all platforms. The items declared
+/*
+* The set of core (required) counters that must be reported for all platforms. The items declared
  * on this interface are relative path names for {@link ICounterSet}s and {@link ICounter}s. The
  * root for the path is generally the fully qualified domain name of a host (as reported by {@link
  * InetAddress#getCanonicalHostName()}, a federation, or a service.
@@ -43,19 +43,19 @@ public interface IRequiredHostCounters extends ICounterHierarchy {
    * INFO
    */
 
-  /**
+  /*
    * The name of the operating system running on the platform as reported by {@link
    * System#getProperty(String)} for the <code>os.name</code> property.
    */
   String Info_OperatingSystemName = Info + ps + "Operating System Name";
 
-  /**
+  /*
    * The version of the operating system running on the platform as reported by {@link
    * System#getProperty(String)} for the <code>os.version</code> property.
    */
   String Info_OperatingSystemVersion = Info + ps + "Operating System Version";
 
-  /**
+  /*
    * System architecture as reported by {@link System#getProperty(String)} for the <code>os.arch
    * </code> property.
    */
@@ -84,7 +84,7 @@ public interface IRequiredHostCounters extends ICounterHierarchy {
    * LogicalDisk
    */
 
-  /**
+  /*
    * Percentage of the disk space that is free (unused) [0.0:1.0].
    *
    * @todo This should only be monitoring local disk since NAS will typically be shared across a
@@ -104,4 +104,4 @@ public interface IRequiredHostCounters extends ICounterHierarchy {
 
   /** Disk bytes written per second for the host (vmstat). */
   String PhysicalDisk_BytesWrittenPerSec = PhysicalDisk + ps + "Bytes Written Per Second";
-};
+}

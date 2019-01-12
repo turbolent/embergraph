@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.ha.msg;
 
-/**
- * Message communicates the state of the current write set on the quorum leader.
+/*
+* Message communicates the state of the current write set on the quorum leader.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -30,7 +30,7 @@ public interface IHAWriteSetStateResponse extends IHAMessage {
   /** The last commit time associated with the then current commit point. */
   long getLastCommitTime();
 
-  /**
+  /*
    * The write cache buffer sequence number (reset to ZERO (0) for the first message after each
    * commit and incremented for each buffer sent by the leader).
    */

@@ -31,8 +31,8 @@ import org.embergraph.journal.TimestampUtility;
 import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.ITPV;
 
-/**
- * Test operations on the file metadata index for the {@link EmbergraphFileSystem}.
+/*
+* Test operations on the file metadata index for the {@link EmbergraphFileSystem}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Create a binary file and verifies its metadata and content.
    *
    * @throws IOException
@@ -74,7 +74,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
 
     Document actual = repo.read(id);
 
-    assertEquals("version", 0, ((RepositoryDocumentImpl) actual).getVersion());
+    assertEquals("version", 0, actual.getVersion());
 
     assertEquals("user property", "bar", actual.getProperty("foo"));
 
@@ -83,7 +83,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
     assertEquals("content", content, read(actual.getInputStream()));
   }
 
-  /**
+  /*
    * Create a text file and verify its metadata and content.
    *
    * @throws IOException
@@ -114,7 +114,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
 
     Document actual = repo.read(id);
 
-    assertEquals("version", 0, ((RepositoryDocumentImpl) actual).getVersion());
+    assertEquals("version", 0, actual.getVersion());
 
     assertEquals("Content-Type", mimeType, actual.getContentType());
 
@@ -168,7 +168,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
     assertEquals("size", metadata.size(), actual.size());
   }
 
-  /**
+  /*
    * Create an empty file and write some data on it. Then update its metadata, verify the new
    * metadata and the updated version, and then write some data on the new version. Verify the both
    * file versions can be read.
@@ -270,14 +270,14 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
        */
       {
 
-        /*
-         * all metadata for the file up to (but excluding) the create
+      /*
+       * all metadata for the file up to (but excluding) the create
          * time for version1.
          */
         ITPS tps = repo.readMetadata(id, createTime1 - 1L);
 
-        /*
-         * The version property for version0. This should have been
+      /*
+       * The version property for version0. This should have been
          * overwritten to be deleted (a null) immediately before the new
          * file version was created.
          */
@@ -288,7 +288,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
     }
   }
 
-  /**
+  /*
    * Test of delete a file version verifies that the old version is marked as deleted and that the
    * data for that version are deleted as well. The test also verifies that the deleted file version
    * metadata and data remain readable.

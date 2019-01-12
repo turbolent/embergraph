@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.service;
 
-/**
- * Configurable options for a remote service end point.
+/*
+* Configurable options for a remote service end point.
  *
  * @see RemoteServiceFactoryImpl
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -48,7 +48,7 @@ public class RemoteServiceOptions extends ServiceOptionsBase {
   //
   //    }
 
-  /**
+  /*
    * Note: The default is <code>false</code>. This supports use cases where the end points are
    * read/write databases and http caching must be defeated in order to gain access to the most
    * recent committed state of the end point.
@@ -80,7 +80,7 @@ public class RemoteServiceOptions extends ServiceOptionsBase {
     return getSPARQLVersion().equals(SPARQLVersion.SPARQL_10);
   }
 
-  /**
+  /*
    * When <code>true</code>, use GET for query and otherwise use POST (default {@value
    * #DEFAULT_IS_GET}). POST can often handle larger queries than GET due to limits at the HTTP
    * client layer and will defeat http caching and thus provide a current view of the committed
@@ -98,7 +98,7 @@ public class RemoteServiceOptions extends ServiceOptionsBase {
     this.isGET = newValue;
   }
 
-  /**
+  /*
    * The <code>Accept</code> header.
    *
    * @return The header -or- <code>null</code> if the default header should be used.
@@ -108,7 +108,7 @@ public class RemoteServiceOptions extends ServiceOptionsBase {
     return acceptStr;
   }
 
-  /**
+  /*
    * Set a non-default <code>Accept</code> header.
    *
    * @param newValue The new value -or- <code>null</code> to clear the old value.

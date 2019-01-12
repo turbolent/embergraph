@@ -15,8 +15,8 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package cutthecrap.utils.striterators;
 
-/**
- * **************************************************************************** Derived from Filter,
+/*
+* **************************************************************************** Derived from Filter,
  * and excludes a single object from the iteration.
  */
 public class ExclusionFilter extends Filter {
@@ -26,7 +26,7 @@ public class ExclusionFilter extends Filter {
     m_exclude = exclude;
   }
 
-  /**
+  /*
    * ********************************************************************* Just make sure that the
    * current object is not the one to be excluded.
    */

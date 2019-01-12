@@ -45,8 +45,8 @@ import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * An abstraction corresponding to a set of elements using some schema (think a table containing a
+/*
+* An abstraction corresponding to a set of elements using some schema (think a table containing a
  * set of rows). Each relation is backed by one or more indices and knows how to return the {@link
  * IAccessPath} that is most efficient given an {@link IPredicate} expressing a query against the
  * {@link IRelation}.
@@ -63,14 +63,14 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
   /** The service used to run asynchronous or parallel tasks for the {@link IRelation}. */
   ExecutorService getExecutorService();
 
-  /**
+  /*
    * Return the class for the generic type of this relation. This information is used to dynamically
    * create arrays of that generic type.
    */
   Class<E> getElementClass();
 
-  //    /**
-  //     * Create and return a new element. The element is constructed from the
+  //    /*
+//     * Create and return a new element. The element is constructed from the
   //     * predicate given the bindings. Typically, this is used when generating an
   //     * {@link ISolution} for an {@link IRule} during either a query or mutation
   //     * operations. The element is NOT inserted into the relation.
@@ -89,7 +89,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
   //     */
   //    E newElement(IPredicate<E> predicate, IBindingSet bindingSet);
 
-  /**
+  /*
    * Create and return a new element. The element is constructed from the ordered list of variables
    * and constants. Variables are replaced using the given the bindings. The element is NOT inserted
    * into the relation.
@@ -105,7 +105,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
    */
   E newElement(List<BOp> args, IBindingSet bindingSet);
 
-  /**
+  /*
    * Return the fully qualified name of each index maintained by this relation.
    *
    * @return An immutable set of the index names for the relation.
@@ -120,13 +120,13 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
   /** Return the {@link IKeyOrder} for the primary index for the relation. */
   IKeyOrder<E> getPrimaryKeyOrder();
 
-  /**
+  /*
    * Return the {@link IKeyOrder}s corresponding to the registered indices for this relation.
    * [rather than getIndexNames?]
    */
   Iterator<IKeyOrder<E>> getKeyOrders();
 
-  /**
+  /*
    * Return the {@link IKeyOrder} for the predicate corresponding to the perfect access path. A
    * perfect access path is one where the bound values in the predicate form a prefix in the key
    * space of the corresponding index.
@@ -145,7 +145,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
    */
   IKeyOrder<E> getKeyOrder(IPredicate<E> predicate);
 
-  /**
+  /*
    * Return the best {@link IAccessPath} for a relation given a predicate with zero or more unbound
    * variables.
    *
@@ -174,7 +174,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
    */
   IAccessPath<E> getAccessPath(IPredicate<E> predicate);
 
-  /**
+  /*
    * Return the {@link IAccessPath} for an {@link IRelation} using the specified {@link IKeyOrder}.
    *
    * @param keyOrder Identifies which index to use (required).
@@ -184,7 +184,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
    */
   IAccessPath<E> getAccessPath(IKeyOrder<E> keyOrder, IPredicate<E> predicate);
 
-  /**
+  /*
    * Return the {@link IAccessPath} for an {@link IRelation} using the specified {@link
    * IIndexManager} and {@link IKeyOrder} (core impl).
    *
@@ -239,8 +239,8 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
   IAccessPath<E> getAccessPath(
       IIndexManager localIndexManager, IKeyOrder<E> keyOrder, IPredicate<E> predicate);
 
-  //    /**
-  //     * This handles a request for an access path that is restricted to a
+  //    /*
+//     * This handles a request for an access path that is restricted to a
   //     * specific index partition. This access path is used with the scale-out
   //     * JOIN strategy, which distributes join tasks onto each index partition
   //     * from which it needs to read. Those tasks constrain the predicate to only
@@ -272,7 +272,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
   //    IAccessPath<E> getAccessPathForIndexPartition(IIndexManager indexManager,
   //            IPredicate<E> predicate);
 
-  /**
+  /*
    * The fully qualified name of the index.
    *
    * @param keyOrder The natural index order.
@@ -280,7 +280,7 @@ public interface IRelation<E> extends ILocatableResource<IRelation<E>> {
    */
   String getFQN(IKeyOrder<? extends E> keyOrder);
 
-  /**
+  /*
    * Return the index for associated with the specified {@link IKeyOrder} this view of the relation.
    *
    * @param keyOrder The natural index order.

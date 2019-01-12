@@ -5,8 +5,8 @@ import org.embergraph.btree.keys.ISortKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.util.Bytes;
 
-/**
- * Class produces unsigned byte[] sort keys for {@link ISPO}s. This implementation is NOT
+/*
+* Class produces unsigned byte[] sort keys for {@link ISPO}s. This implementation is NOT
  * thread-safe.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

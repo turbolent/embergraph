@@ -33,8 +33,8 @@ import java.util.Iterator;
 import junit.framework.TestCase2;
 import org.embergraph.sparse.TPS.TPV;
 
-/**
- * Test of {@link TPS} (property timestamp set implementation).
+/*
+* Test of {@link TPS} (property timestamp set implementation).
  *
  * @todo write tests for {@link TPS#iterator()}
  * @todo write tests for {@link TPS#asMap(long, org.embergraph.sparse.TPS.INameFilter)}
@@ -61,7 +61,7 @@ public class TestTPS extends TestCase2 implements IRowStoreConstants {
   final long t3 = 30L;
   final long tmax = Long.MAX_VALUE;
 
-  /**
+  /*
    * Test get/set semantics. This tests retrieval of the most current value for a property when (a)
    * none was ever bound; (b) it was bound once; (c) when it was bound and then rebound using the
    * same timestamp; (d) it was bound and then rebound using an earlier timestamp; (e) when it was
@@ -252,7 +252,7 @@ public class TestTPS extends TestCase2 implements IRowStoreConstants {
     assertEquals("bar", tps.get("foo", t1).getValue());
   }
 
-  /**
+  /*
    * Tests a series of bindings for one property.
    *
    * @throws ClassNotFoundException
@@ -275,7 +275,7 @@ public class TestTPS extends TestCase2 implements IRowStoreConstants {
     assertRoundTrip(tps);
   }
 
-  /**
+  /*
    * Tests a series of bindings for one property where each binding of the property uses a different
    * {@link ValueType}.
    */
@@ -416,7 +416,7 @@ public class TestTPS extends TestCase2 implements IRowStoreConstants {
     }
   }
 
-  /**
+  /*
    * Test helper for (de-)serialization tests.
    *
    * @param expected
@@ -482,7 +482,7 @@ public class TestTPS extends TestCase2 implements IRowStoreConstants {
     assertEquals(msg + ".primaryKeyType", expected.getPrimaryKeyType(), actual.getPrimaryKeyType());
   }
 
-  /**
+  /*
    * Asserts the same schema and the same tuples.
    *
    * @param expected

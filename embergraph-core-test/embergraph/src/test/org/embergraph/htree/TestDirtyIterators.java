@@ -24,8 +24,8 @@ package org.embergraph.htree;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for iterators that visit only dirty nodes or leaves. This suite relies on (and to some
+/*
+* Test suite for iterators that visit only dirty nodes or leaves. This suite relies on (and to some
  * extent validates) both node and leaf IO and copy-on-write mechanisms.
  *
  * @see DirectoryPage#childIterator(boolean)
@@ -45,7 +45,7 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test ability to visit the direct dirty children of a node. For this test we only verify that
    * the dirty child iterator will visit the same children as the normal child iterator. This is
    * true since we never evict a node onto the store during this test (the index is setup to throw
@@ -107,7 +107,7 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
         assertSameIterator(new AbstractPage[] {a}, htree.root.childIterator(true /* onlyDirty */));
       }
 
-      /**
+      /*
        * Insert another tuple to force some splits.
        *
        * <p>The expected post-condition is:
@@ -133,7 +133,7 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
         final DirectoryPage a = (DirectoryPage) htree.root.getChild(0);
         final BucketPage b = (BucketPage) htree.root.getChild(1);
         final BucketPage c = (BucketPage) htree.root.getChild(2);
-        assertTrue(c == (BucketPage) htree.root.getChild(3));
+        assertTrue(c == htree.root.getChild(3));
 
         assertSameIterator(
             new AbstractPage[] {a, b, c}, htree.root.childIterator(false /* onlyDirty */));
@@ -148,7 +148,7 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Test ability to visit the direct dirty children of a node. This test works by explicitly
    * writing out either the root node or a leaf and verifying that the dirty children iterator
    * correctly visits only those children that should be marked as dirty after the others have been
@@ -177,7 +177,7 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
 
       final HTree htree = getHTree(store, 2 /* addressBits */);
 
-      /**
+      /*
        * Insert another tuple to force some splits. The expected post-condition is:
        *
        * <pre>
@@ -207,22 +207,22 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
         assertEquals("nleaves", 2, htree.getLeafCount());
         assertEquals("nentries", 5, htree.getEntryCount());
 
-        final DirectoryPage root = (DirectoryPage) htree.root;
+        final DirectoryPage root = htree.root;
         final DirectoryPage a = (DirectoryPage) htree.root.getChild(0);
         final BucketPage b = (BucketPage) htree.root.getChild(1);
         final BucketPage c = (BucketPage) htree.root.getChild(2);
-        assertTrue(c == (BucketPage) htree.root.getChild(3));
+        assertTrue(c == htree.root.getChild(3));
         final DirectoryPage d = (DirectoryPage) a.getChild(0);
         final BucketPage e = (BucketPage) a.getChild(1);
         final BucketPage f = (BucketPage) a.getChild(2);
-        assertTrue(f == (BucketPage) a.getChild(3));
+        assertTrue(f == a.getChild(3));
         final BucketPage g = (BucketPage) d.getChild(0);
         final BucketPage h = (BucketPage) d.getChild(1);
         final BucketPage i = (BucketPage) d.getChild(2);
-        assertTrue(i == (BucketPage) d.getChild(3));
+        assertTrue(i == d.getChild(3));
 
-        /*
-         * Verify that iterator visits all direct children (all direct
+      /*
+       * Verify that iterator visits all direct children (all direct
          * children are dirty).
          */
 
@@ -246,8 +246,8 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
             new AbstractPage[] {g, h, i, d, e, f, a, b, c, root},
             htree.root.postOrderNodeIterator(true /* dirtyOnly */));
 
-        /*
-         * write (b) onto the store and verify that it is no longer
+      /*
+       * write (b) onto the store and verify that it is no longer
          * visited by the dirty child iterator for its parent.
          */
         htree.writeNodeRecursive(b);
@@ -266,8 +266,8 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
             new AbstractPage[] {g, h, i, d, e, f, a, c, root},
             htree.root.postOrderNodeIterator(true /* dirtyOnly */));
 
-        /*
-         * write (c) onto the store and verify that it is no longer
+      /*
+       * write (c) onto the store and verify that it is no longer
          * visited by the dirty child iterator for its parent.
          */
         htree.writeNodeRecursive(c);
@@ -285,8 +285,8 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
             new AbstractPage[] {g, h, i, d, e, f, a, root},
             htree.root.postOrderNodeIterator(true /* dirtyOnly */));
 
-        /*
-         * write (d) onto the store and verify that it is no longer
+      /*
+       * write (d) onto the store and verify that it is no longer
          * visited by the dirty child iterator for its parent.
          */
         // before we write out (d).
@@ -313,8 +313,8 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
             new AbstractPage[] {e, f, a, root},
             htree.root.postOrderNodeIterator(true /* dirtyOnly */));
 
-        /*
-         * write (f) onto the store and verify that it is no longer
+      /*
+       * write (f) onto the store and verify that it is no longer
          * visited by the dirty child iterator for its parent (a).
          */
         htree.writeNodeRecursive(f);
@@ -331,8 +331,8 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
             new AbstractPage[] {e, a, root},
             htree.root.postOrderNodeIterator(true /* dirtyOnly */));
 
-        /*
-         * write (a) onto the store and verify that it is no longer
+      /*
+       * write (a) onto the store and verify that it is no longer
          * visited by the dirty child iterator for its parent.
          */
         htree.writeNodeRecursive(a);
@@ -356,7 +356,7 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
         assertTrue(g.isPersistent());
       }
 
-      /**
+      /*
        * insert a duplicate key (3). this goes into (g) which becomes full but is not split. verify
        * that the children of the parent (d) are unchanged but that (g) is no longer persistent and
        * is now dirty. Since the parent (d) of (g) was persistent, copy-on-write was also invoked
@@ -392,15 +392,15 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
         final DirectoryPage a = (DirectoryPage) htree.root.getChild(0);
         final BucketPage b = (BucketPage) htree.root.getChild(1);
         final BucketPage c = (BucketPage) htree.root.getChild(2);
-        assertTrue(c == (BucketPage) htree.root.getChild(3));
+        assertTrue(c == htree.root.getChild(3));
         final DirectoryPage d = (DirectoryPage) a.getChild(0);
         final BucketPage e = (BucketPage) a.getChild(1);
         final BucketPage f = (BucketPage) a.getChild(2);
-        assertTrue(f == (BucketPage) a.getChild(3));
+        assertTrue(f == a.getChild(3));
         final BucketPage g = (BucketPage) d.getChild(0);
         final BucketPage h = (BucketPage) d.getChild(1);
         final BucketPage i = (BucketPage) d.getChild(2);
-        assertTrue(i == (BucketPage) d.getChild(3));
+        assertTrue(i == d.getChild(3));
 
         assertTrue(d.isDirty());
         assertFalse(d.isPersistent());
@@ -428,8 +428,8 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
             new AbstractPage[] {g, d, a, root},
             htree.root.postOrderNodeIterator(true /* dirtyOnly */));
 
-        /*
-         * Write the root node of the tree onto the store.
+      /*
+       * Write the root node of the tree onto the store.
          */
         htree.writeNodeRecursive(htree.root);
 
@@ -464,8 +464,8 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
     }
   }
 
-  //    /**
-  //     * Test ability to visit the dirty nodes of the tree in a post-order
+  //    /*
+//     * Test ability to visit the dirty nodes of the tree in a post-order
   //     * traversal. This version of the test verifies that the dirty post-order
   //     * iterator will visit the same nodes as the normal post-order iterator
   //     * since all nodes are dirty.
@@ -635,8 +635,8 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Test ability to visit the dirty nodes of the tree in a post-order
+  //    /*
+//     * Test ability to visit the dirty nodes of the tree in a post-order
   //     * traversal. This version of the test writes out some nodes and/or leaves
   //     * in order to verify that the post-order iterator will visit only those
   //     * nodes and leaves that are currently dirty. Note that writing out a node

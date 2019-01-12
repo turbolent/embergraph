@@ -2,15 +2,15 @@ package org.embergraph.bop.cost;
 
 import java.io.Serializable;
 
-/**
- * A report on the expected cost of an index key range scan.
+/*
+* A report on the expected cost of an index key range scan.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ScanCostReport implements Serializable {
 
-  /**
+  /*
    * @todo should be either Externalizable and explicitly managed versioning or Serializable with a
    *     public interface for versioning.
    */
@@ -25,7 +25,7 @@ public class ScanCostReport implements Serializable {
   /** The expected cost of the scan (milliseconds). */
   public final double cost;
 
-  /**
+  /*
    * @param rangeCount The fast range count.
    * @param cost The expected cost for the scan (milliseconds).
    */
@@ -42,7 +42,7 @@ public class ScanCostReport implements Serializable {
     this.cost = cost;
   }
 
-  /**
+  /*
    * @param rangeCount The fast range count.
    * @param shardCount The #of index partitions in the scan.
    * @param cost The expected cost for the scan (milliseconds).

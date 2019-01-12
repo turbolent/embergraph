@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt;
 
-/**
- * Array manipulations; complements <tt>java.util.Arrays</tt>.
+/*
+* Array manipulations; complements <tt>java.util.Arrays</tt>.
  *
  * @see java.util.Arrays
  * @see cern.colt.Sorting
@@ -19,7 +19,7 @@ package cern.colt;
 public class Arrays extends Object {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Arrays() {}
-  /**
+  /*
    * Ensures that a given array can hold up to <tt>minCapacity</tt> elements.
    *
    * <p>Returns the identical array if it can hold at least the number of elements specified.
@@ -44,7 +44,7 @@ public class Arrays extends Object {
     }
     return newArray;
   }
-  /**
+  /*
    * Ensures that a given array can hold up to <tt>minCapacity</tt> elements.
    *
    * <p>Returns the identical array if it can hold at least the number of elements specified.
@@ -69,7 +69,7 @@ public class Arrays extends Object {
     }
     return newArray;
   }
-  /**
+  /*
    * Ensures that a given array can hold up to <tt>minCapacity</tt> elements.
    *
    * <p>Returns the identical array if it can hold at least the number of elements specified.
@@ -95,7 +95,7 @@ public class Arrays extends Object {
     }
     return newArray;
   }
-  /**
+  /*
    * Ensures that a given array can hold up to <tt>minCapacity</tt> elements.
    *
    * <p>Returns the identical array if it can hold at least the number of elements specified.
@@ -120,7 +120,7 @@ public class Arrays extends Object {
     }
     return newArray;
   }
-  /**
+  /*
    * Ensures that a given array can hold up to <tt>minCapacity</tt> elements.
    *
    * <p>Returns the identical array if it can hold at least the number of elements specified.
@@ -145,7 +145,7 @@ public class Arrays extends Object {
     }
     return newArray;
   }
-  /**
+  /*
    * Ensures that a given array can hold up to <tt>minCapacity</tt> elements.
    *
    * <p>Returns the identical array if it can hold at least the number of elements specified.
@@ -170,7 +170,7 @@ public class Arrays extends Object {
     }
     return newArray;
   }
-  /**
+  /*
    * Ensures that a given array can hold up to <tt>minCapacity</tt> elements.
    *
    * <p>Returns the identical array if it can hold at least the number of elements specified.
@@ -195,7 +195,7 @@ public class Arrays extends Object {
     }
     return newArray;
   }
-  /**
+  /*
    * Ensures that a given array can hold up to <tt>minCapacity</tt> elements.
    *
    * <p>Returns the identical array if it can hold at least the number of elements specified.
@@ -220,7 +220,7 @@ public class Arrays extends Object {
     }
     return newArray;
   }
-  /**
+  /*
    * Ensures that a given array can hold up to <tt>minCapacity</tt> elements.
    *
    * <p>Returns the identical array if it can hold at least the number of elements specified.
@@ -245,7 +245,7 @@ public class Arrays extends Object {
     }
     return newArray;
   }
-  /**
+  /*
    * Returns a string representation of the specified array. The string representation consists of a
    * list of the arrays's elements, enclosed in square brackets (<tt>"[]"</tt>). Adjacent elements
    * are separated by the characters <tt>", "</tt> (comma and space).
@@ -263,7 +263,7 @@ public class Arrays extends Object {
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the specified array. The string representation consists of a
    * list of the arrays's elements, enclosed in square brackets (<tt>"[]"</tt>). Adjacent elements
    * are separated by the characters <tt>", "</tt> (comma and space).
@@ -281,7 +281,7 @@ public class Arrays extends Object {
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the specified array. The string representation consists of a
    * list of the arrays's elements, enclosed in square brackets (<tt>"[]"</tt>). Adjacent elements
    * are separated by the characters <tt>", "</tt> (comma and space).
@@ -299,7 +299,7 @@ public class Arrays extends Object {
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the specified array. The string representation consists of a
    * list of the arrays's elements, enclosed in square brackets (<tt>"[]"</tt>). Adjacent elements
    * are separated by the characters <tt>", "</tt> (comma and space).
@@ -317,7 +317,7 @@ public class Arrays extends Object {
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the specified array. The string representation consists of a
    * list of the arrays's elements, enclosed in square brackets (<tt>"[]"</tt>). Adjacent elements
    * are separated by the characters <tt>", "</tt> (comma and space).
@@ -335,7 +335,7 @@ public class Arrays extends Object {
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the specified array. The string representation consists of a
    * list of the arrays's elements, enclosed in square brackets (<tt>"[]"</tt>). Adjacent elements
    * are separated by the characters <tt>", "</tt> (comma and space).
@@ -353,7 +353,7 @@ public class Arrays extends Object {
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the specified array. The string representation consists of a
    * list of the arrays's elements, enclosed in square brackets (<tt>"[]"</tt>). Adjacent elements
    * are separated by the characters <tt>", "</tt> (comma and space).
@@ -371,7 +371,7 @@ public class Arrays extends Object {
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the specified array. The string representation consists of a
    * list of the arrays's elements, enclosed in square brackets (<tt>"[]"</tt>). Adjacent elements
    * are separated by the characters <tt>", "</tt> (comma and space).
@@ -389,7 +389,7 @@ public class Arrays extends Object {
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the specified array. The string representation consists of a
    * list of the arrays's elements, enclosed in square brackets (<tt>"[]"</tt>). Adjacent elements
    * are separated by the characters <tt>", "</tt> (comma and space).
@@ -407,7 +407,7 @@ public class Arrays extends Object {
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Ensures that the specified array cannot hold more than <tt>maxCapacity</tt> elements. An
    * application can use this operation to minimize array storage.
    *
@@ -419,13 +419,13 @@ public class Arrays extends Object {
    */
   public static byte[] trimToCapacity(byte[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      byte oldArray[] = array;
+      byte[] oldArray = array;
       array = new byte[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
     return array;
   }
-  /**
+  /*
    * Ensures that the specified array cannot hold more than <tt>maxCapacity</tt> elements. An
    * application can use this operation to minimize array storage.
    *
@@ -437,13 +437,13 @@ public class Arrays extends Object {
    */
   public static char[] trimToCapacity(char[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      char oldArray[] = array;
+      char[] oldArray = array;
       array = new char[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
     return array;
   }
-  /**
+  /*
    * Ensures that the specified array cannot hold more than <tt>maxCapacity</tt> elements. An
    * application can use this operation to minimize array storage.
    *
@@ -455,13 +455,13 @@ public class Arrays extends Object {
    */
   public static double[] trimToCapacity(double[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      double oldArray[] = array;
+      double[] oldArray = array;
       array = new double[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
     return array;
   }
-  /**
+  /*
    * Ensures that the specified array cannot hold more than <tt>maxCapacity</tt> elements. An
    * application can use this operation to minimize array storage.
    *
@@ -473,13 +473,13 @@ public class Arrays extends Object {
    */
   public static float[] trimToCapacity(float[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      float oldArray[] = array;
+      float[] oldArray = array;
       array = new float[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
     return array;
   }
-  /**
+  /*
    * Ensures that the specified array cannot hold more than <tt>maxCapacity</tt> elements. An
    * application can use this operation to minimize array storage.
    *
@@ -491,13 +491,13 @@ public class Arrays extends Object {
    */
   public static int[] trimToCapacity(int[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      int oldArray[] = array;
+      int[] oldArray = array;
       array = new int[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
     return array;
   }
-  /**
+  /*
    * Ensures that the specified array cannot hold more than <tt>maxCapacity</tt> elements. An
    * application can use this operation to minimize array storage.
    *
@@ -509,13 +509,13 @@ public class Arrays extends Object {
    */
   public static long[] trimToCapacity(long[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      long oldArray[] = array;
+      long[] oldArray = array;
       array = new long[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
     return array;
   }
-  /**
+  /*
    * Ensures that the specified array cannot hold more than <tt>maxCapacity</tt> elements. An
    * application can use this operation to minimize array storage.
    *
@@ -527,13 +527,13 @@ public class Arrays extends Object {
    */
   public static Object[] trimToCapacity(Object[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      Object oldArray[] = array;
+      Object[] oldArray = array;
       array = new Object[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
     return array;
   }
-  /**
+  /*
    * Ensures that the specified array cannot hold more than <tt>maxCapacity</tt> elements. An
    * application can use this operation to minimize array storage.
    *
@@ -545,13 +545,13 @@ public class Arrays extends Object {
    */
   public static short[] trimToCapacity(short[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      short oldArray[] = array;
+      short[] oldArray = array;
       array = new short[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
     return array;
   }
-  /**
+  /*
    * Ensures that the specified array cannot hold more than <tt>maxCapacity</tt> elements. An
    * application can use this operation to minimize array storage.
    *
@@ -563,7 +563,7 @@ public class Arrays extends Object {
    */
   public static boolean[] trimToCapacity(boolean[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      boolean oldArray[] = array;
+      boolean[] oldArray = array;
       array = new boolean[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }

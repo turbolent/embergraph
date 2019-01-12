@@ -2,8 +2,8 @@ package org.embergraph.btree;
 
 import org.embergraph.rawstore.WormAddressManager;
 
-/**
- * Address manager supporting offsets that are encoded for one of several regions in an {@link
+/*
+* Address manager supporting offsets that are encoded for one of several regions in an {@link
  * IndexSegmentStore}. The regions are identified by a {@link IndexSegmentRegion}, which gets
  * encoded into the offset component of the address. The offsets are relative to the start of the
  * identified regions. The {@link IndexSegmentCheckpoint} record gives the start of each region.
@@ -26,7 +26,7 @@ import org.embergraph.rawstore.WormAddressManager;
  */
 public class IndexSegmentAddressManager extends WormAddressManager {
 
-  /**
+  /*
    * The offset within the file of the start of the leaves region. All leaves are written densely on
    * the file beginning at this offset.
    */
@@ -35,7 +35,7 @@ public class IndexSegmentAddressManager extends WormAddressManager {
   /** #of bytes in the leaves region. */
   protected final long extentLeaves;
 
-  /**
+  /*
    * The offset within the file of the start of the node region. All nodes are written densely on
    * the file beginning at this offset. The child addresses for a node are relative to this offset
    * and are automatically adjusted during decoding by this class.
@@ -45,7 +45,7 @@ public class IndexSegmentAddressManager extends WormAddressManager {
   /** #of bytes in the nodes region. */
   protected final long extentNodes;
 
-  /**
+  /*
    * The offset within the file of the start of the blob region. All blob records are written
    * densely on the file beginning at this offset. The blob addresses stored in a leaf are relative
    * to this offset and are automatically adjusted during decoding by this class.
@@ -78,7 +78,7 @@ public class IndexSegmentAddressManager extends WormAddressManager {
     this.maxOffset = checkpoint.length;
   }
 
-  /**
+  /*
    * Return the region relative to which this address was encoded.
    *
    * <p>Note: ANY address MAY be encoded relative to the {@link IndexSegmentRegion#BASE} region.
@@ -99,7 +99,7 @@ public class IndexSegmentAddressManager extends WormAddressManager {
     return region;
   }
 
-  /**
+  /*
    * Decodes the offset to extract the {@link IndexSegmentRegion} and then applies the appropriate
    * offset for that region in order to convert the offset into an absolute offset into the store.
    */
@@ -190,7 +190,7 @@ public class IndexSegmentAddressManager extends WormAddressManager {
     return offset;
   }
 
-  /**
+  /*
    * Returns a representation of the address with the decoded offset and the region to which that
    * offset is relative.
    */
@@ -216,7 +216,7 @@ public class IndexSegmentAddressManager extends WormAddressManager {
 
   }
 
-  /**
+  /*
    * Return <code>true</code> IFF the starting address lies entirely within the region dedicated to
    * the B+Tree nodes.
    */
@@ -234,7 +234,7 @@ public class IndexSegmentAddressManager extends WormAddressManager {
     return isNodeAddr;
   }
 
-  /**
+  /*
    * Return <code>true</code> IFF the starting address lies entirely within the region dedicated to
    * the B+Tree leaves.
    */

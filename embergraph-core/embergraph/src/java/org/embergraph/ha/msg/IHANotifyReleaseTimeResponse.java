@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-/**
- * Message from the leader providing the followers with the new agreed on earliest visible commit
+/*
+* Message from the leader providing the followers with the new agreed on earliest visible commit
  * point.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -26,8 +26,8 @@ package org.embergraph.ha.msg;
 public interface IHANotifyReleaseTimeResponse extends IHAMessage {
 
   /** The earliest visible commit time. */
-  public long getCommitTime();
+  long getCommitTime();
 
   /** The earliest visible commit counter. */
-  public long getCommitCounter();
+  long getCommitCounter();
 }

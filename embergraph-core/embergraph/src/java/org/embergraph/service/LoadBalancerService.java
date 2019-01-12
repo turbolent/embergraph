@@ -47,8 +47,8 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCounters;
 import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 
-/**
- * The {@link LoadBalancerService} collects a variety of performance counters from hosts and
+/*
+* The {@link LoadBalancerService} collects a variety of performance counters from hosts and
  * services, identifies over- and under- utilized hosts and services based on the collected data and
  * reports those to {@link DataService} s so that they can auto-balance, and acts as a clearing
  * house for WARN and URGENT alerts for hosts and services.
@@ -116,14 +116,14 @@ public abstract class LoadBalancerService extends AbstractService
 
   protected final String ps = ICounterSet.pathSeparator;
 
-  /**
+  /*
    * Used to read {@link CounterSet} XML. This must support overwrite since new data arrives every
    * minute and eventually the ring buffer must overwrite old values. In addition, this may support
    * multiple levels of aggregation so that minutes may be rolled into hours and hours into days.
    */
   private final IInstrumentFactory instrumentFactory = DefaultInstrumentFactory.OVERWRITE_60M;
 
-  /**
+  /*
    * Service join timeout in milliseconds - used when we need to wait for a service to join before
    * we can recommend an under-utilized service.
    *
@@ -137,7 +137,7 @@ public abstract class LoadBalancerService extends AbstractService
   /** Used to await a service join when there are no services. */
   protected final Condition joined = lock.newCondition();
 
-  /**
+  /*
    * The active hosts (one or more services).
    *
    * @todo get rid of hosts that are no longer active. e.g., we no longer receive {@link
@@ -151,7 +151,7 @@ public abstract class LoadBalancerService extends AbstractService
   protected ConcurrentHashMap<UUID /* serviceUUID */, ServiceScore> activeDataServices =
       new ConcurrentHashMap<UUID, ServiceScore>();
 
-  /**
+  /*
    * Scores for the hosts in ascending order (least utilized to most utilized).
    *
    * <p>This array is initially <code>null</code> and gets updated periodically by the {@link
@@ -160,7 +160,7 @@ public abstract class LoadBalancerService extends AbstractService
    */
   protected AtomicReference<HostScore[]> hostScores = new AtomicReference<HostScore[]>(null);
 
-  /**
+  /*
    * Scores for the services in ascending order (least utilized to most utilized).
    *
    * <p>This array is initially <code>null</code> and gets updated periodically by the {@link
@@ -172,7 +172,7 @@ public abstract class LoadBalancerService extends AbstractService
   protected AtomicReference<ServiceScore[]> serviceScores =
       new AtomicReference<ServiceScore[]>(null);
 
-  /**
+  /*
    * The #of {@link UpdateTask}s which have run so far.
    *
    * @see Options#INITIAL_ROUND_ROBIN_UPDATE_COUNT
@@ -180,7 +180,7 @@ public abstract class LoadBalancerService extends AbstractService
    */
   protected long nupdates = 0;
 
-  /**
+  /*
    * The #of updates during which {@link #getUnderUtilizedDataServices(int, int, UUID)} will apply a
    * round robin policy.
    *
@@ -191,14 +191,14 @@ public abstract class LoadBalancerService extends AbstractService
   /** Used to make round-robin assignments. */
   private final RoundRobinServiceLoadHelper roundRobinServiceLoadHelper;
 
-  /**
+  /*
    * The directory in which the service will log the {@link CounterSet}s and {@link Event}s.
    *
    * @see Options#LOG_DIR
    */
   protected final File logDir;
 
-  /**
+  /*
    * <code>true</code> iff the LBS will refrain from writing state on the disk. This option causes
    * the LBS to use an in memory {@link #eventStore}. In addition, it will refuse to write counter
    * snapshots when this option is specified.
@@ -216,7 +216,7 @@ public abstract class LoadBalancerService extends AbstractService
     return new Properties(properties);
   }
 
-  /**
+  /*
    * Return the canonical hostname of the client in the context of a RMI request. If the request is
    * not remote then return the canonical hostname for this host.
    */
@@ -237,7 +237,7 @@ public abstract class LoadBalancerService extends AbstractService
   /** A one-up counter of the #of times the {@link CounterSet} was written onto a log file. */
   private int logFileCount = 0;
 
-  /**
+  /*
    * The #of minutes of history that will be smoothed into an average when {@link UpdateTask}
    * updates the {@link HostScore}s and the {@link ServiceScore}s.
    *
@@ -250,7 +250,7 @@ public abstract class LoadBalancerService extends AbstractService
 
   protected final EventReceiver eventReceiver;
 
-  /**
+  /*
    * Options understood by the {@link LoadBalancerService}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -262,7 +262,7 @@ public abstract class LoadBalancerService extends AbstractService
    */
   public interface Options {
 
-    /**
+    /*
      * The load balancer service will use a round robin approach to recommending under-utilized
      * services until this the load balancer has re-computed the service scores N times (default
      * {@value #DEFAULT_INITIAL_ROUND_ROBIN_UPDATE_COUNT}). This makes it more likely that the
@@ -274,13 +274,13 @@ public abstract class LoadBalancerService extends AbstractService
     String INITIAL_ROUND_ROBIN_UPDATE_COUNT =
         LoadBalancerService.class.getName() + ".initialRoundRobinUpdateCount";
 
-    /**
+    /*
      * The default gives you a few minutes after you setup the federation in which newly registered
      * indices will be allocated based on a round-robin.
      */
     String DEFAULT_INITIAL_ROUND_ROBIN_UPDATE_COUNT = "5";
 
-    /**
+    /*
      * The delay between scheduled invocations of the {@link UpdateTask}.
      *
      * <p>Note: the {@link AbstractStatisticsCollector} implementations SHOULD sample at one minute
@@ -297,7 +297,7 @@ public abstract class LoadBalancerService extends AbstractService
     /** The default {@link #UPDATE_DELAY}. */
     String DEFAULT_UPDATE_DELAY = "" + (60 * 1000);
 
-    /**
+    /*
      * The #of minutes of history that will be smoothed into an average when {@link UpdateTask}
      * updates the {@link HostScore}s and the {@link ServiceScore}s (default {@value
      * #DEFAULT_HISTORY_MINUTES}).
@@ -308,7 +308,7 @@ public abstract class LoadBalancerService extends AbstractService
 
     String DEFAULT_HISTORY_MINUTES = "5";
 
-    /**
+    /*
      * When <code>true</code> the load balancer will not record any state on the disk (neither
      * events nor counters). The default is <code>false</code>. This option is used by some unit
      * tests to simplify cleanup.
@@ -317,7 +317,7 @@ public abstract class LoadBalancerService extends AbstractService
 
     String DEFAULT_TRANSIENT = "false";
 
-    /**
+    /*
      * The path of the data directory for the load balancer. The load balancer will log a copy of
      * the counters every time it runs its {@link UpdateTask}. It will also log {@link Event}s
      * received from other services here. By default, the load balancer will use the directory in
@@ -327,7 +327,7 @@ public abstract class LoadBalancerService extends AbstractService
 
     String DEFAULT_LOG_DIR = ".";
 
-    /**
+    /*
      * The delay in milliseconds between writes of the {@link CounterSet} on a log file (default is
      * {@value #DEFAULT_LOG_DELAY}, which is equivalent to one hour).
      */
@@ -335,7 +335,7 @@ public abstract class LoadBalancerService extends AbstractService
 
     String DEFAULT_LOG_DELAY = "" + 1000 * 60 * 60;
 
-    /**
+    /*
      * The maximum #of distinct log files to retain (default is one week based on a {@link
      * #LOG_DELAY} equivalent to one hour).
      */
@@ -343,7 +343,7 @@ public abstract class LoadBalancerService extends AbstractService
 
     String DEFAULT_LOG_MAX_FILES = "" + 24 * 7;
 
-    /**
+    /*
      * Service join timeout in milliseconds - used when we need to wait for a service to join before
      * we can recommend an under-utilized service.
      */
@@ -351,7 +351,7 @@ public abstract class LoadBalancerService extends AbstractService
 
     String DEFAULT_SERVICE_JOIN_TIMEOUT = "" + (3 * 1000);
 
-    /**
+    /*
      * The maximum age of an {@link Event} that will be keep "on the books". Events older than this
      * are purged. An error is logged if an event is purged before its end() event arrives. This
      * generally indicates a code path where {@link Event#end()} is not getting called but could
@@ -365,7 +365,7 @@ public abstract class LoadBalancerService extends AbstractService
     String DEFAULT_EVENT_HISTORY_MILLIS = "" + (60 * 60 * 1000);
   }
 
-  /**
+  /*
    * Note: The load balancer MUST NOT collect host statistics unless it is the only service running
    * on that host. Normally it relies on another service running on the same host to collect
    * statistics for that host and those statistics are then reported to the load balancer and
@@ -499,8 +499,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (isTransient) {
 
-        /*
-         * Use an in-memory store.
+      /*
+       * Use an in-memory store.
          */
 
         final Properties p = new Properties();
@@ -511,8 +511,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       } else {
 
-        /*
-         * Use a restart-safe store.
+      /*
+       * Use a restart-safe store.
          */
 
         final Properties p = new Properties();
@@ -653,7 +653,7 @@ public abstract class LoadBalancerService extends AbstractService
     return ILoadBalancerService.class;
   }
 
-  /**
+  /*
    * Normalizes the {@link ServiceScore}s and set them in place.
    *
    * @param a The new service scores.
@@ -705,7 +705,7 @@ public abstract class LoadBalancerService extends AbstractService
     LoadBalancerService.this.hostScores.set(a);
   }
 
-  /**
+  /*
    * Normalizes the {@link ServiceScore}s and set them in place.
    *
    * @param a The new service scores.
@@ -757,7 +757,7 @@ public abstract class LoadBalancerService extends AbstractService
     LoadBalancerService.this.serviceScores.set(a);
   }
 
-  /**
+  /*
    * Computes and updates the {@link ServiceScore}s based on an examination of aggregated
    * performance counters.
    *
@@ -780,7 +780,7 @@ public abstract class LoadBalancerService extends AbstractService
    */
   protected class UpdateTask implements Runnable {
 
-    /**
+    /*
      * Note: The logger is named for this class, but since it is an inner class the name uses a "$"
      * delimiter (vs a ".") between the outer and the inner class names.
      */
@@ -845,8 +845,8 @@ public abstract class LoadBalancerService extends AbstractService
           continue;
         }
 
-        /*
-         * Compute the score for that host.
+      /*
+       * Compute the score for that host.
          */
         HostScore score;
         try {
@@ -857,8 +857,8 @@ public abstract class LoadBalancerService extends AbstractService
 
           log.error("Problem computing host score: " + hostname, ex);
 
-          /*
-           * Keep the old score if we were not able to compute a new
+        /*
+       * Keep the old score if we were not able to compute a new
            * score.
            *
            * Note: if the returned value is null then the host was
@@ -874,8 +874,8 @@ public abstract class LoadBalancerService extends AbstractService
           }
         }
 
-        /*
-         * Add to collection of scores.
+      /*
+       * Add to collection of scores.
          */
         scores.add(score);
       }
@@ -895,7 +895,7 @@ public abstract class LoadBalancerService extends AbstractService
       setHostScores(a);
     }
 
-    /**
+    /*
      * (Re-)compute the utilization score for each active service.
      *
      * <p>Note: There is a dependency on {@link AbstractFederation#getServiceCounterPathPrefix(UUID,
@@ -966,8 +966,8 @@ public abstract class LoadBalancerService extends AbstractService
 
             final CounterSet serviceCounterSet = (CounterSet) itrs.next();
 
-            /*
-             * Note: [name] on serviceCounterSet is the serviceUUID.
+          /*
+       * Note: [name] on serviceCounterSet is the serviceUUID.
              *
              * Note: This creates a dependency on
              * AbstractFederation#getServiceCounterPathPrefix(...)
@@ -991,8 +991,8 @@ public abstract class LoadBalancerService extends AbstractService
 
             if (!activeDataServices.containsKey(serviceUUID)) {
 
-              /*
-               * Note: Only data services are entered in this map,
+            /*
+       * Note: Only data services are entered in this map,
                * so this filters out the non-dataServices from the
                * load balancer's computations.
                */
@@ -1000,8 +1000,8 @@ public abstract class LoadBalancerService extends AbstractService
               continue;
             }
 
-            /*
-             * Compute the score for that service.
+          /*
+       * Compute the score for that service.
              */
             ServiceScore score;
             try {
@@ -1012,8 +1012,8 @@ public abstract class LoadBalancerService extends AbstractService
 
               log.error("Problem computing service score: " + serviceCounterSet.getPath(), ex);
 
-              /*
-               * Keep the old score if we were not able to compute
+            /*
+       * Keep the old score if we were not able to compute
                * a new score.
                *
                * Note: if the returned value is null then the
@@ -1031,8 +1031,8 @@ public abstract class LoadBalancerService extends AbstractService
               }
             }
 
-            /*
-             * Add to collection of scores.
+          /*
+       * Add to collection of scores.
              */
             scores.add(score);
           }
@@ -1058,7 +1058,7 @@ public abstract class LoadBalancerService extends AbstractService
       setServiceScores(a);
     }
 
-    /**
+    /*
      * Compute the score for a host.
      *
      * <p>The host scores MUST reflect critical resource exhaustion, especially DISK free space,
@@ -1255,7 +1255,7 @@ public abstract class LoadBalancerService extends AbstractService
       bytesFormat.setGroupingUsed(true);
     }
 
-    /**
+    /*
      * Compute the score for a service.
      *
      * <p>Note: utilization is defined in terms of transient system resources : CPU, IO (DISK and
@@ -1489,7 +1489,7 @@ public abstract class LoadBalancerService extends AbstractService
       }
     }
 
-    /**
+    /*
      * Return the average of the counter having the given path over the last <i>minutes</i> minutes.
      *
      * @param counterSet
@@ -1523,8 +1523,8 @@ public abstract class LoadBalancerService extends AbstractService
 
         } else {
 
-          /*
-           * When the LBS is run as an embedded process it can wind up
+        /*
+       * When the LBS is run as an embedded process it can wind up
            * having the performance counters collected within its
            * process in which case it will not have histories for the
            * data and we just return the current value.
@@ -1542,7 +1542,7 @@ public abstract class LoadBalancerService extends AbstractService
       }
     }
 
-    /**
+    /*
      * Sets up reporting for the computed per-host and per-service scores. These counters are
      * reported under the service {@link UUID} for the {@link LoadBalancerService} itself. This
      * makes it easy to consult the scores for the various hosts and services.
@@ -1643,8 +1643,8 @@ public abstract class LoadBalancerService extends AbstractService
         synchronized (tmpScores) {
           for (ServiceScore ss : activeDataServices.values()) {
 
-            /*
-             * @todo use serviceName, but it has embedded slashes
+          /*
+       * @todo use serviceName, but it has embedded slashes
              * (in embergraph-jini) just like a path which makes life
              * difficult.
              */
@@ -1680,8 +1680,8 @@ public abstract class LoadBalancerService extends AbstractService
         synchronized (tmpFormula) {
           for (ServiceScore ss : activeDataServices.values()) {
 
-            /*
-             * @todo use serviceName, but it has embedded slashes
+          /*
+       * @todo use serviceName, but it has embedded slashes
              * (in embergraph-jini) just like a path which makes life
              * difficult.
              */
@@ -1716,7 +1716,7 @@ public abstract class LoadBalancerService extends AbstractService
       } // service scores.
     } // end method
 
-    /**
+    /*
      * Writes the counters on a file.
      *
      * @see Options
@@ -1740,7 +1740,7 @@ public abstract class LoadBalancerService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Writes the counters on a file.
    *
    * @param basename The basename of the file. The file will be written in the {@link #logDir}.
@@ -1759,7 +1759,7 @@ public abstract class LoadBalancerService extends AbstractService
     logCounters(file);
   }
 
-  /**
+  /*
    * Writes the counters on a file.
    *
    * @param file The file. If the file exists it will be overwritten.
@@ -1799,7 +1799,7 @@ public abstract class LoadBalancerService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Logs the counters on a file created using {@link File#createTempFile(String, String, File)} in
    * the log directory.
    *
@@ -1825,7 +1825,7 @@ public abstract class LoadBalancerService extends AbstractService
     logCounters();
   }
 
-  /**
+  /*
    * Notify the {@link LoadBalancerService} that a new service is available.
    *
    * <p>Note: Embedded services must invoke this method <em>directly</em> when they start up.
@@ -1867,8 +1867,8 @@ public abstract class LoadBalancerService extends AbstractService
       try {
         fed = getFederation();
       } catch (IllegalStateException t) {
-        /*
-         * Note: Indicates that the federation is closed.
+      /*
+       * Note: Indicates that the federation is closed.
          */
         return;
       }
@@ -1893,8 +1893,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (IDataService.class == serviceIface) {
 
-        /*
-         * Add to set of known services.
+      /*
+       * Add to set of known services.
          *
          * Only data services are registered as [activeServices] since
          * we only make load balancing decisions for the data services.
@@ -1910,8 +1910,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (getServiceUUID() != null) {
 
-        /*
-         * Create node for the joined service's history in the load
+      /*
+       * Create node for the joined service's history in the load
          * balancer's counter set. This just gives eager feedback in the
          * LBS's counter set if you are using the httpd service to watch
          * for service joins.
@@ -1937,7 +1937,7 @@ public abstract class LoadBalancerService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Notify the {@link LoadBalancerService} that a service is no longer available.
    *
    * <p>Note: Embedded services must invoke this method <em>directly</em> when they shut down.
@@ -1968,8 +1968,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (info != null) {
 
-        /*
-         * @todo remove history from counters - path is
+      /*
+       * @todo remove history from counters - path is
          * /host/serviceUUID? Consider scheduling removal after a few
          * hours or just sweeping periodically for services with no
          * updates in the last N hours so that people have access to
@@ -1989,7 +1989,7 @@ public abstract class LoadBalancerService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Accepts the event, either updates the existing event with the same {@link UUID} or adds the
    * event to the set of recent events, and then prunes the set of recent events so that all
    * completed events older than {@link #eventHistoryMillis} are discarded.
@@ -2029,8 +2029,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (!serviceUUID.equals(getServiceUUID())) {
 
-        /*
-         * Don't do this for the load balancer itself!
+      /*
+       * Don't do this for the load balancer itself!
          *
          * @todo the LBS probably should not bother to notify() itself.
          */
@@ -2256,7 +2256,7 @@ public abstract class LoadBalancerService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Impl. runs with {@link #lock}.
    *
    * @param minCount
@@ -2346,8 +2346,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       if (minCount == 0) {
 
-        /*
-         * Since there was no minimum #of services demanded by the
+      /*
+       * Since there was no minimum #of services demanded by the
          * caller, we return [null].
          */
 
@@ -2358,8 +2358,8 @@ public abstract class LoadBalancerService extends AbstractService
 
       } else {
 
-        /*
-         * We do not have ANY active and scored non-excluded services
+      /*
+       * We do not have ANY active and scored non-excluded services
          * and [minCount GT ZERO]. In this case we use a he variant that
          * does not use scores and that awaits a service join.
          */
@@ -2395,7 +2395,7 @@ public abstract class LoadBalancerService extends AbstractService
         .getUnderUtilizedDataServices(minCount, maxCount, exclude);
   }
 
-  /**
+  /*
    * Integration with the {@link LoadBalancerService}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2411,7 +2411,7 @@ public abstract class LoadBalancerService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Integration with the {@link LoadBalancerService}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2450,7 +2450,7 @@ public abstract class LoadBalancerService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Integration with the {@link LoadBalancerService}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

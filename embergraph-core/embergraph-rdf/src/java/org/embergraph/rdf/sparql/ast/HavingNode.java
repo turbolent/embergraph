@@ -28,8 +28,8 @@ import org.embergraph.rdf.internal.constraints.SPARQLConstraint;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * AST node for a HAVING clause.
+/*
+* AST node for a HAVING clause.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

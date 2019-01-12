@@ -45,8 +45,8 @@ import org.embergraph.rwstore.sector.MemoryManager;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.PseudoRandom;
 
-/**
- * A simple demonstration which may be used to compare the {@link HTree} performance against a Java
+/*
+* A simple demonstration which may be used to compare the {@link HTree} performance against a Java
  * collections class such as {@link HashMap} or {@link LinkedHashMap}. This demonstration is focused
  * on the performance curve when inserting a large number of keys into a collection. The Java
  * collection classes are faster for small numbers of keys, but the {@link HTree} rapidly out
@@ -71,7 +71,7 @@ public class HTreeVersusHashMapDemo {
 
   private static final Logger log = Logger.getLogger(HTreeVersusHashMapDemo.class);
 
-  /**
+  /*
    * Provision and return an {@link HTree} instance.
    *
    * @param store The backing store.
@@ -125,7 +125,7 @@ public class HTreeVersusHashMapDemo {
   /** Interface for reporting on progress. */
   interface IReport {
 
-    /**
+    /*
      * Report hook.
      *
      * @param nops The #of operations performed.
@@ -183,7 +183,7 @@ public class HTreeVersusHashMapDemo {
     private final Map<Object, Object> c;
     private final IReport report;
 
-    /**
+    /*
      * @param nkeys The #of keys to insert.
      * @param vectorSize The #of keys which are sorted (vectored) as per the {@link HTree} variant.
      * @param seed The random generator seed.
@@ -280,7 +280,7 @@ public class HTreeVersusHashMapDemo {
     private final int writeRetentionQueueCapacity;
     private final IReport report;
 
-    /**
+    /*
      * @param nkeys The #of keys to insert.
      * @param vectorSize The #of keys which are sorted (vectored) to improve IO efficiency.
      * @param seed The random generator seed.
@@ -409,7 +409,7 @@ public class HTreeVersusHashMapDemo {
     }
   }
 
-  /**
+  /*
    * Random numbers in a half-open range (does not cover all 32-bit values (no negative values)).
    */
   private static class RandomGenerator implements IGenerator {
@@ -437,7 +437,7 @@ public class HTreeVersusHashMapDemo {
     public PseudoRandomGenerator(final int range) {
       this(range, 0 /*next*/);
     }
-    /**
+    /*
      * @param range The half-open range (0:range].
      * @param next The next value to visit.
      */

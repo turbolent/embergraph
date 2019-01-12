@@ -21,8 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.log4j.Logger;
 
-/**
- * Provides a basic implementation of a {@link ISnapshotFactory} to be used with non-HA operations
+/*
+* Provides a basic implementation of a {@link ISnapshotFactory} to be used with non-HA operations
  * to provide online backup capabilities.
  *
  * <p>This is exposed via the REST API via the {@link StatusServlet}.
@@ -67,7 +67,7 @@ public class BasicSnapshotFactory implements ISnapshotFactory {
     this.compress = compress;
   }
 
-  /**
+  /*
    * Utility to get the absolute path of a file if passed a relative one.
    *
    * @param file
@@ -87,7 +87,7 @@ public class BasicSnapshotFactory implements ISnapshotFactory {
     return ret;
   }
 
-  /**
+  /*
    * For the default implementation don't append the commit point to the file.
    *
    * <p>In non-HA mode, the system does not have the responsibility to manage and restore from

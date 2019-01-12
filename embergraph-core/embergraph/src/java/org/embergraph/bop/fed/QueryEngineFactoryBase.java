@@ -19,8 +19,8 @@ import org.embergraph.service.ManagedResourceService;
 import org.embergraph.service.ResourceService;
 import org.embergraph.util.config.NicUtil;
 
-/**
- * Default {@link IQueryEngineFactory} implementation.
+/*
+* Default {@link IQueryEngineFactory} implementation.
  *
  * @author bryan
  */
@@ -33,7 +33,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
   // this constructor.
   public QueryEngineFactoryBase() {}
 
-  /**
+  /*
    * Weak value cache to enforce the singleton pattern for standalone journals.
    *
    * <p>Note: The backing hard reference queue is disabled since we do not want to keep any {@link
@@ -43,7 +43,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
   private static ConcurrentWeakValueCache<IBTreeManager, QueryEngine> standaloneQECache =
       new ConcurrentWeakValueCache<IBTreeManager, QueryEngine>(0 /* queueCapacity */);
 
-  /**
+  /*
    * Weak value cache to enforce the singleton pattern for {@link IEmbergraphClient}s (the data
    * services are query engine peers rather than controllers and handle their own query engine
    * initialization so as to expose their resources to other peers).
@@ -110,7 +110,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     return queryEngine;
   }
 
-  /**
+  /*
    * Initialize a new query engine for the journal.
    *
    * @param indexManager The journal.
@@ -152,7 +152,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     return queryEngine;
   }
 
-  /**
+  /*
    * Initialize a new query engine for the federation.
    *
    * @param fed The federation.
@@ -185,8 +185,8 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
         queryEngineStore =
             new Journal(p) {
 
-              /**
-               * Locator resources on the federation NOT the embedded Journal used by the query
+            /*
+       * Locator resources on the federation NOT the embedded Journal used by the query
                * controller.
                */
               @Override
@@ -243,7 +243,7 @@ public class QueryEngineFactoryBase implements IQueryEngineFactory {
     /** The local {@link ResourceService} for the query engine. */
     final ManagedResourceService queryEngineResourceService;
 
-    /**
+    /*
      * @param thisService
      * @param fed
      * @param indexManager

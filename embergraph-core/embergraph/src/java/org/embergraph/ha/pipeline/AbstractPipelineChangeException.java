@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.ha.pipeline;
 
-/**
- * A quorum related exception dealing with the write replication pipeline.
+/*
+* A quorum related exception dealing with the write replication pipeline.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

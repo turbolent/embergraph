@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random.sampling;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Space and time efficiently computes a sorted <i>Simple Random Sample Without Replacement
+/*
+* Space and time efficiently computes a sorted <i>Simple Random Sample Without Replacement
  * (SRSWOR)</i>, that is, a sorted set of <tt>n</tt> random numbers from an interval of <tt>N</tt>
  * numbers; Example: Computing <tt>n=3</tt> random numbers from the interval <tt>[1,50]</tt> may
  * yield the sorted random set <tt>(7,13,47)</tt>. Since we are talking about a set (sampling
@@ -129,7 +129,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
   long my_low;
   RandomEngine my_RandomGenerator;
   // static long negalphainv; // just to determine once and for all the best value for negalphainv
-  /**
+  /*
    * Constructs a random sampler that computes and delivers sorted random sets in blocks. A set
    * block can be retrieved with method <tt>nextBlock</tt>. Successive calls to method
    * <tt>nextBlock</tt> will deliver as many random numbers as required.
@@ -160,7 +160,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
     return copy;
   }
   /** Tests this class. */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     long n = Long.parseLong(args[0]);
     long N = Long.parseLong(args[1]);
     long low = Long.parseLong(args[2]);
@@ -170,7 +170,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
     test(n, N, low, chunkSize, times);
     // testNegAlphaInv(args);
   }
-  /**
+  /*
    * Computes the next <tt>count</tt> random numbers of the sorted random set specified on instance
    * construction and fills them into <tt>values</tt>, starting at index <tt>fromIndex</tt>.
    *
@@ -196,7 +196,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
     my_N = my_N - lastSample - 1 + my_low;
     my_low = lastSample + 1;
   }
-  /**
+  /*
    * Efficiently computes a sorted random set of <tt>count</tt> elements from the interval
    * <tt>[low,low+N-1]</tt>. Since we are talking about a random set, no element will occur more
    * than once.
@@ -328,7 +328,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
       for (; --count >= 0; ) values[fromIndex++] = ++chosen;
     }
   }
-  /**
+  /*
    * Efficiently computes a sorted random set of <tt>count</tt> elements from the interval
    * <tt>[low,low+N-1]</tt>. Since we are talking about a random set, no element will occur more
    * than once.
@@ -383,7 +383,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
       rejectMethodD(n, N, count, low, values, fromIndex, randomGenerator);
     }
   }
-  /**
+  /*
    * Computes a sorted random set of <tt>count</tt> elements from the interval
    * <tt>[low,low+N-1]</tt>. Since we are talking about a random set, no element will occur more
    * than once.
@@ -442,7 +442,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
       values[fromIndex] = chosen;
     }
   }
-  /**
+  /*
    * Efficiently computes a sorted random set of <tt>count</tt> elements from the interval
    * <tt>[low,low+N-1]</tt>. Since we are talking about a random set, no element will occur more
    * than once.
@@ -562,7 +562,7 @@ public class RandomSampler extends cern.colt.PersistentObject {
       }
     }
   }
-  /**
+  /*
    * Tests the methods of this class. To do benchmarking, comment the lines printing stuff to the
    * console.
    */
@@ -603,11 +603,11 @@ public class RandomSampler extends cern.colt.PersistentObject {
     System.out.println("single run took " + timer.elapsedTime() / times);
     System.out.println("Good bye.\n");
   }
-  /**
+  /*
    * Tests different values for negaalphainv. Result: J.S. Vitter's recommendation for
    * negalphainv=-13 is also good in the JDK 1.2 environment.
    */
-  protected static void testNegAlphaInv(String args[]) {
+  protected static void testNegAlphaInv(String[] args) {
     /*
     long N = Long.parseLong(args[0]);
     int chunkSize = Integer.parseInt(args[1]);

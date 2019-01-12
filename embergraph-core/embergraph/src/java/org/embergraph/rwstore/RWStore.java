@@ -111,8 +111,8 @@ import org.embergraph.service.AbstractTransactionService;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.ChecksumError;
 
-/**
- * Storage class
+/*
+* Storage class
  *
  * <p>Provides an interface to allocating storage within a disk file.
  *
@@ -231,7 +231,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
   private static final transient Logger log = Logger.getLogger(RWStore.class);
 
-  /**
+  /*
    * @see http://sourceforge.net/apps/trac/bigdata/ticket/443 (Logger for RWStore transaction
    *     service and recycler)
    */
@@ -240,7 +240,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   /** Options understood by the {@link RWStore}. */
   public interface Options {
 
-    /**
+    /*
      * Option defines the Allocation block sizes for the RWStore. The values defined are multiplied
      * by 64 to provide the actual allocations. The list of allocations should be ',' delimited and
      * in increasing order. This array is written into the store so changing the values does not
@@ -261,7 +261,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
      */
     String ALLOCATION_SIZES = RWStore.class.getName() + ".allocationSizes";
 
-    /**
+    /*
      * Note: The default allocation sizes SHOULD NOT provide for allocation slots larger than an 8k
      * page. This can lead to large allocation slots when a B+Tree index is sparsely populated (less
      * efficient prefix compression) followed by a gradual reduction in the average page size with
@@ -288,7 +288,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     // 233, 377, 610, 987, 1597, 2584, 4181 };
     // private static final int[] ALLOC_SIZES = { 1, 2, 4, 8, 16, 32, 64, 128 };
 
-    /**
+    /*
      * Option defines the initial size of the meta bits region and effects how rapidly this region
      * will grow (default {@value #DEFAULT_META_BITS_SIZE}).
      *
@@ -301,7 +301,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     @Deprecated String DEFAULT_META_BITS_SIZE = "9";
 
-    /**
+    /*
      * Defines whether the metabits should be allocated an explicit demispace (default) or if not,
      * then to use a standard Allocation (which limits the metabits size to the maximum
      * FixedAllocator slot size).
@@ -312,7 +312,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     String DEFAULT_META_BITS_DEMI_SPACE = "false";
 
-    /**
+    /*
      * Defines whether blobs, which are stored in multiple slot locations, are read concurrently
      * using Async NIO. This was introduced specifically to reduce commit latency in scenarios where
      * large transactions can lead to very large deferred free lists (>> 10 million addresses),
@@ -324,7 +324,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
      */
     String READ_BLOBS_ASYNC = RWStore.class.getName() + ".readBlobsAsync";
 
-    /**
+    /*
      * Note: Windows does not handle async IO channel reopens in the same fashion as Linux, leading
      * to "overlapping file exceptions" and other weirdness. Therefore this option is explicitly
      * disabled by default on Windows.
@@ -334,7 +334,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
      */
     String DEFAULT_READ_BLOBS_ASYNC = SystemUtil.isWindows() ? "false" : "true";
 
-    /**
+    /*
      * Defines the number of bits that must be free in a FixedAllocator for it to be added to the
      * free list. This is used to ensure a level of locality when making large numbers of
      * allocations within a single commit.
@@ -345,7 +345,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     String DEFAULT_FREE_BITS_THRESHOLD = "300";
 
-    /**
+    /*
      * Defines the size of a slot that defines it as a small slot.
      *
      * <p>Any slot equal to or less than this is considered a small slot and its availability for
@@ -359,7 +359,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
      */
     String SMALL_SLOT_TYPE = RWStore.class.getName() + ".smallSlotType";
 
-    /**
+    /*
      * Enable the small slot optimization by default.
      *
      * @see BLZG-1596 (Enable small slot optimization by default)
@@ -367,7 +367,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     String DEFAULT_SMALL_SLOT_TYPE = "1024"; // standard default
     //        String DEFAULT_SMALL_SLOT_TYPE = "0"; // initial default to no special processing
 
-    /**
+    /*
      * The #of free bits required to be free in a "small slot" allocator before it is automatically
      * returned to the free list. Once the small slot waste threshold comes into play, the small
      * slot allocator for a given slot size having the maximum free bits will be automatically
@@ -379,7 +379,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     String DEFAULT_SMALL_SLOT_THRESHOLD = "4096"; // 50% of available bits
 
-    /**
+    /*
      * We have introduced extra parameters to adjust allocator usage if we notice that a significant
      * amount of storage is wasted.
      *
@@ -400,7 +400,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     String DEFAULT_SMALL_SLOT_WASTE_CHECK_ALLOCATORS =
         "100"; // Check waste when more than 100 allocators
 
-    /**
+    /*
      * Once there are at least {@link #SMALL_SLOT_WASTE_CHECK_ALLOCATORS} for a given slot size,
      * then the {@link #SMALL_SLOT_HIGH_WASTE} specifies the maximum percentage of waste that will
      * be allowed for that slot size. This prevents the amount of waste for small slot allocators
@@ -431,7 +431,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     String DEFAULT_SMALL_SLOT_HIGH_WASTE = "20.0f"; // 1638 bits: 20% waste, less than 80% usage
 
-    /**
+    /*
      * When <code>true</code>, scattered writes which are strictly ascending will be coalesced
      * within a buffer and written out as a single IO (default {@value
      * #DEFAULT_DOUBLE_BUFFER_WRITES}). This improves write performance for SATA, SAS, and even SSD.
@@ -440,16 +440,16 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     String DEFAULT_DOUBLE_BUFFER_WRITES = "true";
 
-    //        /**
-    //         * When <code>true</code> fills recycled storage with a recognizable
+    //        /*
+//         * When <code>true</code> fills recycled storage with a recognizable
     //         * byte pattern.
     //         */
     //        String OVERWRITE_DELETE = RWStore.class.getName() + ".overwriteDelete";
     //
     //        String DEFAULT_OVERWRITE_DELETE = "false";
     //
-    //        /**
-    //         * When <code>true</code> the RWStore will protect any address from
+    //        /*
+//         * When <code>true</code> the RWStore will protect any address from
     //         * recycling, and generate an exception if the address is subsequently
     //         * accessed
     //         */
@@ -465,7 +465,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
   private static final String ERR_WRITE_CACHE_CREATE = "Unable to create write cache service";
 
-  /**
+  /*
    * The fixed size of any allocator on the disk in bytes. The #of allocations managed by an
    * allocator is this value times 8 because each slot uses one bit in the allocator. When an
    * allocator is allocated, the space on the persistent heap is reserved for all slots managed by
@@ -476,7 +476,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
   //  // from 32 bits, need 13 to hold max offset of 8 * 1024, leaving 19 for number of blocks: 256K
   //  static final int BLOCK_INDEX_BITS = 19;
-  /**
+  /*
    * The #of low bits in a latched address that encode the offset of the bit in a {@link
    * FixedAllocator}. The {@link FixedAllocator} will map the bit onto an allocation slot.
    *
@@ -508,15 +508,15 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //  protected int m_transactionCount;
   //  private boolean m_committing;
 
-  //    /**
-  //     * When <code>true</code> the allocations will not actually be recycled
+  //    /*
+//     * When <code>true</code> the allocations will not actually be recycled
   //     * until after a store restart. When <code>false</code>, the allocations are
   //     * recycled once they satisfy the history retention requirement.
   //     */
   //  private boolean m_preserveSession = false;
   //  private boolean m_readOnly;
 
-  /**
+  /*
    * The UUID of the backing store.
    *
    * @see #initfromRootBlock(IRootBlockView)
@@ -524,21 +524,21 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   private UUID m_storeUUID;
 
-  /**
+  /*
    * lists of total alloc blocks.
    *
    * @todo examine concurrency and lock usage for {@link #m_alloc} and the rest of these lists.
    */
   private final ArrayList<FixedAllocator> m_allocs;
 
-  /**
+  /*
    * A fixed length array of lists of free {@link FixedAllocator}s with one entry in the array for
    * each configured allocator size. An allocator is put onto this free list when it is initially
    * created. When the store is opened, it will be added to this list if {@link Allocator#hasFree()}
    * returns true. It will be removed when it has no free space remaining. It will be added back to
    * the free list when its free slots exceeds a configured threshold.
    */
-  private ArrayList<FixedAllocator> m_freeFixed[];
+  private ArrayList<FixedAllocator>[] m_freeFixed;
 
   //  /** lists of free blob allocators. */
   // private final ArrayList<BlobAllocator> m_freeBlobs;
@@ -553,7 +553,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
   private final Quorum<?, ?> m_quorum;
 
-  /**
+  /*
    * The #of buffers that will be used by the {@link WriteCacheService}.
    *
    * @see org.embergraph.journal.Options#WRITE_CACHE_BUFFER_COUNT
@@ -563,7 +563,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   /** @see org.embergraph.journal.Options#WRITE_CACHE_MIN_CLEAN_LIST_SIZE */
   private final int m_minCleanListSize;
 
-  /**
+  /*
    * The #of read buffers that will be used by the {@link WriteCacheService}.
    *
    * @see org.embergraph.journal.Options#READ_CACHE_BUFFER_COUNT
@@ -579,7 +579,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   /** @see org.embergraph.journal.Options#HOT_CACHE_SIZE */
   private final int m_hotCacheSize;
 
-  /**
+  /*
    * The key for the {@link CompressorRegistry} which identifies the {@link IRecordCompressor} to be
    * applied (optional).
    *
@@ -587,14 +587,14 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   private final String m_compressorKey;
 
-  /**
+  /*
    * Note: This is not final because we replace the {@link WriteCacheService} during {@link
    * #reset(long)} in order to propagate the then current quorum token to the {@link
    * WriteCacheService}.
    */
   private RWWriteCacheService m_writeCacheService;
 
-  /**
+  /*
    * Return the then current {@link WriteCacheService} object.
    *
    * @see IHABufferStrategy#getWriteCacheService()
@@ -608,7 +608,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * The actual allocation sizes as read from the store.
    *
    * @see #DEFAULT_ALLOCATION_SIZES
@@ -624,7 +624,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   /** We allow blob headers so the maximum blob size is Integer.MAX_VALUE. */
   final int m_maxBlobAllocSize = Integer.MAX_VALUE;
 
-  /**
+  /*
    * This lock is used to exclude readers/writers performing IOs against the backing file when the
    * extent of the backing file is about to be changed. Readers and writers take the {@link
    * ReadLock}. The {@link WriteLock} is taken when the file extent must be changed. This is a
@@ -639,7 +639,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   private final ReentrantReadWriteLock m_extensionLock = new ReentrantReadWriteLock();
 
-  /**
+  /*
    * An explicit allocation lock supports exclusive access for allocator mutation and shared access
    * for readers.
    *
@@ -656,14 +656,14 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * creating new allocation areas, but significant contention may be avoided.
    */
   private final ReentrantReadWriteLock m_allocationLock = new ReentrantReadWriteLock();
-  /**
+  /*
    * Lock used for exclusive access to the allocators.
    *
    * <p>Note: Historically, this lock was only required for mutation and readers did not content for
    * a lock.
    */
   private final WriteLock m_allocationWriteLock = m_allocationLock.writeLock();
-  /**
+  /*
    * Lock used for shared access to allocators.
    *
    * <p>Note: Historically the allocators were unprotected for shared acccess (readers) and
@@ -682,7 +682,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   private final ReadLock m_allocationReadLock = m_allocationLock.readLock();
 
-  /**
+  /*
    * The deferredFreeList is simply an array of releaseTime,freeListAddrs stored at commit.
    *
    * <p>Note that when the deferredFreeList is saved, ONLY thefreeListAddrs are stored, NOT the
@@ -699,7 +699,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //  private static final int MAX_DEFERRED_FREE = 4094; // fits in 16k block
   private final long m_minReleaseAge;
 
-  /**
+  /*
    * The #of open transactions (read-only or read-write).
    *
    * <p>This is guarded by the {@link #m_allocationLock}.
@@ -710,7 +710,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //  private final ArrayList<Integer> m_currentTxnFreeList = new ArrayList<Integer>();
   private final PSOutputStream m_deferredFreeOut;
 
-  /**
+  /*
    * Used to transparently re-open the backing channel if it has been closed by an interrupt during
    * an IO.
    */
@@ -726,8 +726,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   /** <code>true</code> iff the backing store is open. */
   private volatile boolean m_open = true;
 
-  //    /**
-  //     * If m_blacklist is non-null then a request to blacklist as address will
+  //    /*
+//     * If m_blacklist is non-null then a request to blacklist as address will
   //     * add the address to the blacklist.
   //     *
   //     * When a blacklisted address is freed and is re-allocated, the re-allocation
@@ -771,7 +771,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       return compressorKey;
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Note: The performance counters for writes to the disk are reported by the {@link
@@ -812,9 +812,9 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       // No longer valid
       // RWStore.this.removeAddress(latchedAddr);
     }
-  };
+  }
 
-  /**
+  /*
    * The ALLOC_SIZES must be initialized from either the file or the properties associated with the
    * fileMetadataView
    *
@@ -1015,8 +1015,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       if (m_rb.getNextOffset() == 0) { // if zero then new file
         setAllocations(fileMetadata);
 
-        /*
-         * FIXME Martyn, the code paths here are crazy complicated.
+      /*
+       * FIXME Martyn, the code paths here are crazy complicated.
          * defaultInit() is also invoked from initFromRootBlock().
          * Simplify this. BBT
          */
@@ -1092,7 +1092,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Called from WriteCache.resetRecordMapFromBuffer
    *
    * <p>If a FixedAllocator already exists for the address then just set the address as active,
@@ -1140,8 +1140,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
       if (size > 0) {
 
-        /*
-         * This is a real allocation.
+      /*
+       * This is a real allocation.
          */
 
         alloc.setAddressExternal(latchedAddr);
@@ -1153,7 +1153,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Called from WriteCache.resetRecordMapFromBuffer
    *
    * <p>Must clear the bit in the allocator.
@@ -1190,7 +1190,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Create and return a new {@link RWWriteCacheService} instance. The caller is responsible for
    * closing out the old one and must be holding the appropriate locks when it switches in the new
    * instance.
@@ -1305,7 +1305,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Basic check on key root block validity
    *
    * @param rbv
@@ -1366,12 +1366,12 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     //            return ret == 0 ? -(1 + META_ALLOCATION) : ret;
     //        }
 
-    /**
+    /*
      * Used to transparently re-open the backing channel if it has been closed by an interrupt
      * during an IO.
      */
     private final ReopenFileChannel m_reopener;
-    /**
+    /*
      * Meta-Allocations stored as {int address; int[8] bits}, so each block holds 8*32=256
      * allocation slots of 1K totaling 256K.
      *
@@ -1446,7 +1446,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Should be called where previously initFileSpec was used.
    *
    * <p>Rather than reading from file, instead reads from the current root block.
@@ -1497,8 +1497,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
       if (m_nextAllocation == 0) {
 
-        /*
-         * Skip the first 32K in the file. The root blocks live here but
+      /*
+       * Skip the first 32K in the file. The root blocks live here but
          * nothing else.
          */
 
@@ -1559,8 +1559,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         // The byte offset of the metabits region in the file.
         rawmbaddr >>= 16;
 
-        /*
-         * Read the metabits block, including a header and the int32[]
+      /*
+       * Read the metabits block, including a header and the int32[]
          * that encodes both startAddrs and bit vectors.
          */
         final byte[] buf = new byte[metaBitsStore * 4];
@@ -1632,13 +1632,13 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Uses System.arraycopy rather than clone() to duplicate the metaBits to the metaTransientBits,
    * which will be faster.
    */
   private void syncMetaTransients() {
     if (m_metaTransientBits == null || m_metaTransientBits.length != m_metaBits.length) {
-      m_metaTransientBits = (int[]) m_metaBits.clone();
+      m_metaTransientBits = m_metaBits.clone();
     } else {
       System.arraycopy(m_metaBits, 0, m_metaTransientBits, 0, m_metaTransientBits.length);
     }
@@ -1697,7 +1697,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //
   //  }
 
-  /**
+  /*
    * ******************************************************************* make sure resource is
    * closed!
    */
@@ -1713,7 +1713,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     if (log.isInfoEnabled())
       log.info("readAllocationBlocks, m_metaBits.length: " + m_metaBits.length);
 
-    /**
+    /*
      * Allocators are sorted in StartAddress order (which MUST be the order they were created and
      * therefore will correspond to their index) The comparator also checks for equality, which
      * would indicate an error in the metaAllocation if two allocation blocks were loaded for the
@@ -1752,7 +1752,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   }
 
   private FixedAllocator readAllocator(final long addr) throws IOException {
-    final byte buf[] = new byte[ALLOC_BLOCK_SIZE];
+    final byte[] buf = new byte[ALLOC_BLOCK_SIZE];
 
     FileChannelUtility.readAll(m_reopener, ByteBuffer.wrap(buf), addr);
 
@@ -1792,7 +1792,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return fa;
   }
 
-  /**
+  /*
    * Computes the slot size index given the absolute slot size.
    *
    * <p>If the slotSizes are [1,2,4] this corresponds to absolute sizes by multiplying by 64 of [64,
@@ -1817,7 +1817,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return slotSizeIndex;
   }
 
-  /**
+  /*
    * Required for HA to support post commit message to synchronize allocators with new state. By
    * this time the new allocator state will have been flushed to the disk, so should be 1) On disk,
    * 2) Probably in OS cache and 3) Possibly in the WriteCache.
@@ -1866,7 +1866,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Called from ContextAllocation when no free FixedAllocator is immediately available. First the
    * free list will be checked to see if one is available, otherwise it will be created. When the
    * calling ContextAllocation is released, its allocators will be added to the global free lists.
@@ -1976,7 +1976,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   private volatile int m_frees = 0;
   private volatile long m_nativeAllocBytes = 0;
 
-  /**
+  /*
    * Alternative method signature returning a ByteBuffer rather than receiving a byte array.
    *
    * <p>If a blob then an extra byte array is required in which to build the data, but otherwise
@@ -1995,7 +1995,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     try {
       // must allow for checksum
       if (sze > (m_maxFixedAlloc - 4) || m_writeCacheService == null) {
-        final byte buf[] = new byte[sze + 4]; // 4 bytes for checksum
+        final byte[] buf = new byte[sze + 4]; // 4 bytes for checksum
 
         getData(rwaddr, buf, 0, sze + 4);
 
@@ -2014,8 +2014,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         try {
           return m_writeCacheService.read(paddr, sze + 4);
         } catch (Throwable e) {
-          /*
-           * Note: ClosedByInterruptException can be thrown out of
+        /*
+       * Note: ClosedByInterruptException can be thrown out of
            * FileChannelUtility.readAll(), typically because the LIMIT on
            * a query was satisfied, but we do not want to log that as an
            * error.
@@ -2029,7 +2029,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * If the buf[] size is greater than the maximum fixed allocation, then the direct read will be
    * the blob header record. In this case we should hand over the streaming to a PSInputStream.
    *
@@ -2039,12 +2039,12 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * <p>If it is a BlobAllocation, then the BlobAllocation address points to the address of the
    * BlobHeader record.
    */
-  public void getData(final long addr, final byte buf[]) {
+  public void getData(final long addr, final byte[] buf) {
 
     getData(addr, buf, 0, buf.length);
   }
 
-  /**
+  /*
    * Set the option below to true to enable asynchronous reads of blob data. The aim is to reduce
    * latency when reading blobs from disk as it will enable the disk controllers to re-order IO
    * requests nd where possible process in parallel. This should benefit all Blob reads but
@@ -2055,7 +2055,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   private final boolean m_readBlobsAsync;
 
-  public void getData(final long addr, final byte buf[], final int offset, final int length) {
+  public void getData(final long addr, final byte[] buf, final int offset, final int length) {
 
     assertOpen();
 
@@ -2224,8 +2224,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
         assert paddr > 0;
 
-        /**
-         * Check WriteCache first
+      /*
+       * Check WriteCache first
          *
          * <p>Note that the buffer passed in should include the checksum value, so the cached data
          * is 4 bytes less than the buffer size.
@@ -2261,8 +2261,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
             buf[offset + i] = in[i];
           }
           m_cacheReads++;
-          /*
-           * Hit on the write cache.
+        /*
+       * Hit on the write cache.
            *
            * Update the store counters.
            */
@@ -2332,8 +2332,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       } catch (PhysicalAddressResolutionException e) {
         throw new IllegalArgumentException("Unable to read data: " + e, e);
       } catch (Throwable e) {
-        /*
-         * Note: ClosedByInterruptException can be thrown out of
+      /*
+       * Note: ClosedByInterruptException can be thrown out of
          * FileChannelUtility.readAll(), typically because the LIMIT on
          * a query was satisfied, but we do not want to log that as an
          * error.
@@ -2346,8 +2346,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  //    /**
-  //     * Convenience check for thoseA batch invoice public methods that must be restricted if a
+  //    /*
+//     * Convenience check for thoseA batch invoice public methods that must be restricted if a
   // rebuild is in progress
   //     */
   //  private void assertNoRebuild() {
@@ -2398,7 +2398,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     free(laddr, sze, null /* AlocationContext */);
   }
   //  private long m_unsafeFrees = 0;
-  /**
+  /*
    * free
    *
    * <p>If the address is greater than zero than it is interpreted as a physical address and the
@@ -2435,8 +2435,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       } else {
         final FixedAllocator alloc = getBlockByAddress(addr);
 
-        /*
-         * There are a few conditions here. If the context owns the
+      /*
+       * There are a few conditions here. If the context owns the
          * allocator and the allocation was made by this context then it
          * can be freed immediately. The problem comes when the context
          * is null and the allocator is NOT owned, BUT there are active
@@ -2453,8 +2453,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
          * there are open read-only transactions.
          */
         if (m_minReleaseAge == 0) {
-          /*
-           * The session protection is complicated by the mix of
+        /*
+       * The session protection is complicated by the mix of
            * transaction protection and isolated AllocationContexts.
            *
            * If this is the first use of an IAllocationContext then
@@ -2520,7 +2520,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return m_minReleaseAge;
   }
 
-  /**
+  /*
    * Session protection can only be used in preference to deferred frees when the minReleaseAge is
    * zero. If so then two protection states are checked: either a positive activeTxCount incremented
    * by the TransactionManager or if there are active AllocationContexts.
@@ -2553,7 +2553,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return m_minReleaseAge == 0 && (m_activeTxCount > 0 || !m_contexts.isEmpty());
   }
 
-  /**
+  /*
    * Sessions will only be used to protect transactions and read-only views when the m_minReleaseAge
    * is no zero, otherwise the deferredFree approach will be used.
    *
@@ -2688,8 +2688,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         if (!alloc.isCommitted(addrOffset)) {
           m_writeCacheService.clearWrite(pa, addr);
           //                    m_writeCache.overwrite(pa, sze);
-          /*
-           * Pass the size of the allocator, NOT the size of the
+        /*
+       * Pass the size of the allocator, NOT the size of the
            * allocation.
            *
            * @see <a
@@ -2716,7 +2716,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * We need to remove entries from the historicalIndexCache for checkpoint records when the
    * allocations associated with those checkpoint records are freed.
    *
@@ -2742,7 +2742,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * alloc
    *
    * <p>Alloc always allocates from a FixedAllocation. Blob allocations are implemented using
@@ -2804,13 +2804,13 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
           final ArrayList<FixedAllocator> list = m_freeFixed[i];
           if (list.size() == 0) {
-            /*
-             * No allocator on the free list for that slot size.
+          /*
+       * No allocator on the free list for that slot size.
              */
             final FixedAllocator candidate;
             if (size < this.cSmallSlot) {
-              /*
-               * Check to see if can locate a good enough
+            /*
+       * Check to see if can locate a good enough
                * Allocator
                *
                * @see BLZG-1278 (Small slot optimization to
@@ -2825,8 +2825,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
               candidate.addToFreeList();
               allocator = candidate;
             } else {
-              /*
-               * We need a new allocator.
+            /*
+       * We need a new allocator.
                */
               allocator = new FixedAllocator(this, block);
 
@@ -2895,7 +2895,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * For a small slot size only, look for an existing allocator that has a sufficient percentage of
    * free bits and add it to the free list. If this test fails then the caller must allocate a new
    * allocator.
@@ -2973,7 +2973,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return i;
   }
 
-  /**
+  /*
    * ************************************************************************** The base realloc
    * method that returns a stream for writing to rather than handle the reallocation immediately.
    */
@@ -2983,7 +2983,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return PSOutputStream.getNew(this, m_maxFixedAlloc, null);
   }
 
-  /**
+  /*
    * ************************************************************************** Called by
    * PSOutputStream to make to actual allocation or directly by lower level API clients.
    *
@@ -2993,7 +2993,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * <p>TODO: Instead of using PSOutputStream, manage allocations written to the WriteCacheService,
    * building BlobHeader as you go.
    */
-  public long alloc(final byte buf[], final int size, final IAllocationContext context) {
+  public long alloc(final byte[] buf, final int size, final IAllocationContext context) {
 
     m_allocationWriteLock.lock();
     try {
@@ -3091,8 +3091,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //      return alloc(buf, buf.length);
   //  }
 
-  //  /**
-  //   * Must handle valid possibility that a request to start/commit transaction
+  //  /*
+//   * Must handle valid possibility that a request to start/commit transaction
   //   * could be made within a commitCallback request
   //   */
   //  synchronized public void startTransaction() {
@@ -3152,7 +3152,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //    		return fibslug(n-1) + fibslug(n-2);
   //    }
 
-  /**
+  /*
    * The semantics of reset are to revert unisolated writes to committed state.
    *
    * <p>Unisolated writes must also be removed from the write cache.
@@ -3185,7 +3185,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       }
 
       boolean isolatedWrites = false;
-      /**
+      /*
        * Clear all allocators, not just dirty allocators, since we also need to reset the transient
        * bits associated with session protection.
        *
@@ -3200,8 +3200,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       syncMetaTransients();
 
       if (!isolatedWrites) {
-        /**
-         * Now we should be able to unwind any unused allocators and unused alloc blocks. An unused
+      /*
+       * Now we should be able to unwind any unused allocators and unused alloc blocks. An unused
          * allocator is one with no diskAddr (never committed). But it may be more difficult to
          * determine if an alloc block has never been used, for that we really need to know what the
          * nextAllocationOffset was at the previous commit. This could be cached as
@@ -3240,8 +3240,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       }
 
       if (m_quorum != null) {
-        /**
-         * When the RWStore is part of an HA quorum, we need to close out and then reopen the
+      /*
+       * When the RWStore is part of an HA quorum, we need to close out and then reopen the
          * WriteCacheService every time the quorum token is changed. For convienence, this is
          * handled by extending the semantics of abort() on the Journal and reset() on the RWStore.
          *
@@ -3250,8 +3250,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         m_writeCacheService.close();
         m_writeCacheService = newWriteCacheService();
       } else if (m_writeCacheService != null) {
-        /*
-         * Note: We DO NOT need to reset() the WriteCacheService. If a
+      /*
+       * Note: We DO NOT need to reset() the WriteCacheService. If a
          * record was already flushed to the disk, then it is on the
          * disk and clearing the record from the cache will not change
          * that. If the record has not yet been flushed to the disk,
@@ -3290,7 +3290,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //      return m_transactionCount > 0;
   //  }
 
-  /**
+  /*
    * writeMetaBits must be called after all allocations have been made, the last one being the
    * allocation for the metabits themselves (allowing for an extension!).
    *
@@ -3314,7 +3314,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * @throws IOException
    */
   private void writeMetaBits() throws IOException {
-    final byte buf[] = genMetabitsData();
+    final byte[] buf = genMetabitsData();
 
     /*
      * Note: this address is set by commit() prior to calling
@@ -3355,7 +3355,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     // the cDefaultMetaBitsSize is also written since this can now be
     //  parameterized.
     final int len = 4 * (cMetaHdrFields + m_allocSizes.length + m_metaBits.length);
-    final byte buf[] = new byte[len];
+    final byte[] buf = new byte[len];
 
     final FixedOutputStream str = new FixedOutputStream(buf);
     try {
@@ -3399,7 +3399,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return requiresCommit();
   }
 
-  /**
+  /*
    * Object recording the undo state for the {@link RWStore#commit()} ... {@link
    * RWStore#postCommit()} sequence. The {@link CommitState} must either {@link
    * CommitState#commit()} or {@link CommitState#reset()}. Those {@link CommitState} methods are
@@ -3440,7 +3440,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * @see <a href="http://trac.blazegraph.com/ticket/973" >RWStore commit is not robust to internal
    *     failure.</a>
    */
@@ -3515,7 +3515,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
           // Call immediateFree - no need to defer freeof metaBits, this
           //  has to stop somewhere!
           // No more allocations must be made
-          immediateFree((int) m_metaBitsAddr, oldMetaBitsSize);
+          immediateFree(m_metaBitsAddr, oldMetaBitsSize);
         }
 
         m_metaBitsAddr = nmbaddr;
@@ -3549,7 +3549,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       if (log.isDebugEnabled()) {
         final long mbaddr;
         if (m_metaBitsAddr < 0) {
-          mbaddr = physicalAddress((int) m_metaBitsAddr);
+          mbaddr = physicalAddress(m_metaBitsAddr);
         } else {
           mbaddr = convertAddr(-m_metaBitsAddr); // maximum 48 bit address range
         }
@@ -3664,7 +3664,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return m_allocationWriteLock;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Commits the FixedAllocator bits
@@ -3791,8 +3791,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
        * @see https://sourceforge.net/apps/trac/bigdata/ticket/480
        */
       if (m_lastDeferredReleaseTime >= latestReleasableTime) {
-        /**
-         * Note: Added for HA. I have observed both values equal to ZERO. Since we add ONE (1) to
+      /*
+       * Note: Added for HA. I have observed both values equal to ZERO. Since we add ONE (1) to
          * the lastDeferredReleaseTime it MUST BE LT the latestReleasableTime or we will get a
          * "toKey LT fromKey" exception.
          *
@@ -3809,7 +3809,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * @return conservative requirement for metabits storage, mindful that the request to allocate the
    *     metabits may require an increase in the number of allocation blocks and therefore an
    *     extension to the number of metabits.
@@ -3835,7 +3835,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   private volatile int m_fileSize;
 
   private volatile int m_nextAllocation;
-  /**
+  /*
    * The value of nextAllocation at commit is cached and used in reset() to unwind new
    * FixedAllocators and/or AllocBlocks
    */
@@ -3849,7 +3849,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * Meta Allocator
    */
 
-  /**
+  /*
    * MetaBits HEADER version must be changed when the header or allocator serialization changes
    *
    * <p>Use BCD-style numbering so 0x0200 == 2.00 0x0320 == 3.20
@@ -3859,7 +3859,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * using metaBits demi-space
    */
   private final int cVersion = 0x0400;
-  /**
+  /*
    * The {@link #cVersion} value corresponding to the use of the demi-space for the metabits.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/936">Support larger metabit allocations</a>
@@ -3867,7 +3867,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   private final int cVersionDemispace = 0x0500;
 
-  /**
+  /*
    * cReservedMetaBits is the reserved space in the metaBits header to alloc for binary
    * compatibility moving forward.
    *
@@ -3876,7 +3876,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   static final int cReservedMetaBits = 20;
 
-  /**
+  /*
    * MetaBits Header 0 int version 1-2 int[2] long deferredFree 3 int defaultMetaBitsSize 4 int
    * length of allocation sizes 5-6 int[2] storage stats addr + 20 reserved
    */
@@ -3887,14 +3887,14 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   private volatile int m_metaBitsSize;
 
   private volatile boolean m_useMetabitsDemispace = true;
-  /**
+  /*
    * Package private since is uded by FixedAllocators
    *
    * @see Options#META_BITS_SIZE
    */
   final int cDefaultFreeBitsThreshold;
 
-  /**
+  /*
    * The smallSlotThreshold, when activated, is intended to ensure improve the opportunity for write
    * elissions (to mechanical disks) whilst also reducing the read-backs on current generation
    * (2014-15) SSDs that can impact write throughput. Given that the objective is to statistically
@@ -3919,16 +3919,18 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   int cSmallSlotWasteCheckAllocators = 100; // @see from Options#SMALL_SLOT_WASTE_CHECK_ALLOCATORS
   float cSmallSlotHighWaste = 0.2f; // @see from Options#SMALL_SLOT_HIGH_WASTE
 
-  /** Each "metaBit" is a file region */
-  private int m_metaBits[];
+  /*
+   * Each "metaBit" is a file region
+   */
+  private int[] m_metaBits;
 
-  private int m_metaTransientBits[];
+  private int[] m_metaTransientBits;
   // volatile private int m_metaStartAddr;
   private volatile int m_metaBitsAddr;
   // @todo javadoc please.
   private volatile boolean m_recentAlloc = false;
 
-  /**
+  /*
    * Return the address of a contiguous region on the persistent heap.
    *
    * @param size The size of that region (this is not bytes, but something a bit more complicated).
@@ -3964,7 +3966,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * meta allocation/free
    *
    * <p>Allocates persistent store for allocation blocks.
@@ -4031,7 +4033,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return bit;
   }
 
-  /**
+  /*
    * Search the metabits for a bit that is free for allocation of space that an allocator could
    * write on.
    *
@@ -4077,7 +4079,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     m_writeCacheService.clearWrite(metaBit2Addr(bit), 0 /*latchedAddr*/);
   }
 
-  /**
+  /*
    * The metabits are encoded in {@link #cDefaultMetaBitsSize} int runs as follows
    *
    * <pre>
@@ -4148,7 +4150,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return ret;
   }
 
-  /**
+  /*
    * Convert an implicitly scaled int32 offset into the backing file into an int64 address into the
    * backing file.
    *
@@ -4169,7 +4171,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Convert an int64 address into the backing file into an int32 offset that is implicitly scaled
    * by {@link #ALLOCATION_SCALEUP}.
    *
@@ -4185,7 +4187,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
   private volatile boolean m_extendingFile = false;
 
-  /**
+  /*
    * extendFile will extend by 10% and round up to be a multiple of 16k
    *
    * <p>The allocation blocks must also be moved. Note that it would be a bad idea if these were
@@ -4234,7 +4236,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     if (m_extendingFile) {
       throw new IllegalStateException("File concurrently extended");
     }
-    /**
+    /*
      * Note: Synchronous flush of the WriteCacheService should not be required. It has been
      * commented out in support of
      *
@@ -4291,7 +4293,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     final int index = bitnum / 32;
     final int bit = bitnum % 32;
 
-    bits[(int) index] |= 1 << bit;
+    bits[index] |= 1 << bit;
   }
 
   static boolean tstBit(final int[] bits, final int bitnum) {
@@ -4302,7 +4304,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       throw new IllegalArgumentException(
           "Accessing bit index: " + index + " of array length: " + bits.length);
 
-    return (bits[(int) index] & 1 << bit) != 0;
+    return (bits[index] & 1 << bit) != 0;
   }
 
   static void clrBit(final int[] bits, final int bitnum) {
@@ -4354,7 +4356,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     long m_reservedSlots;
     long m_filledSlots;
   }
-  /**
+  /*
    * Utility debug outputing the allocator array, showing index, start address and alloc type/size
    *
    * <p>Collected statistics are against each Allocation Block size: total number of slots | store
@@ -4419,7 +4421,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Given a physical address (byte offset on the store), return true if that address could be
    * managed by an allocated block.
    *
@@ -4436,12 +4438,12 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return getBlockByAddress(addr) != null;
   }
 
-  /**
+  /*
    * *************************************************************************** Address
    * transformation: latched2Physical
    */
 
-  /**
+  /*
    * Return the byte offset in the file.
    *
    * @param addr The latched address.
@@ -4485,7 +4487,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Return the byte offset in the file.
    *
    * @param addr A latched address.
@@ -4496,7 +4498,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return physicalAddress(addr, false /* nocheck */);
   }
 
-  /**
+  /*
    * ****************************************************************************** handle dual
    * address format, if addr is positive then it is the physical address, so the Allocators must be
    * searched.
@@ -4521,7 +4523,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return alloc;
   }
 
-  /**
+  /*
    * Get the {@link FixedAllocator} for a latched address.
    *
    * @param addr The latched address.
@@ -4540,7 +4542,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return m_allocs.get(index);
   }
 
-  /**
+  /*
    * Return the bit index into a {@link FixedAllocator}.
    *
    * <p>Note: This is directly encoded by the latched address. You do not need to know which {@link
@@ -4554,7 +4556,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return (-addr) & OFFSET_BITS_MASK; // OFFSET_BITS
   }
 
-  /**
+  /*
    * The {@link RWStore} always generates negative address values.
    *
    * @return whether the address given is a native IStore address
@@ -4571,7 +4573,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return m_recentAlloc;
   }
 
-  /**
+  /*
    * Since we need to store the absolute address and the size can be a maximum of 64K, the absolute
    * address is limited to 48 bits, setting the maximum address as 140T, which is sufficient.
    *
@@ -4581,7 +4583,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     long ret = 0;
 
     if (m_metaBitsAddr < 0) {
-      ret = physicalAddress((int) m_metaBitsAddr);
+      ret = physicalAddress(m_metaBitsAddr);
     } else {
       // long ret = physicalAddress((int) m_metaBitsAddr);
       ret = convertAddr(-m_metaBitsAddr); // maximum 48 bit address range
@@ -4610,13 +4612,13 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   /** @return the address of the metaBits */
   public long getMetaBitsStoreAddress() {
     if (m_metaBitsAddr < 0) {
-      return physicalAddress((int) m_metaBitsAddr);
+      return physicalAddress(m_metaBitsAddr);
     } else {
       return convertAddr(-m_metaBitsAddr); // maximum 48 bit address range
     }
   }
 
-  /**
+  /*
    * @return long representation of metaStartAddr PLUS the size where addr + size is fileSize (not
    *     necessarily physical size)
    */
@@ -4678,7 +4680,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return m_nativeAllocBytes;
   }
 
-  /**
+  /*
    * A Blob Allocator maintains a list of Blob headers. The allocator stores up to 255 blob headers
    * plus a checksum. When a request is made to read the blob data, the blob allocator retrieves the
    * blob header and reads the data from that into the passed byte array.
@@ -4755,7 +4757,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //    }
 
   public Allocator getAllocator(final int i) {
-    return (Allocator) m_allocs.get(i);
+    return m_allocs.get(i);
   }
 
   /** Simple implementation for a {@link RandomAccessFile} to handle the direct backing store. */
@@ -4774,7 +4776,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     private volatile AsynchronousFileChannel asyncChannel;
 
-    private int asyncChannelOpenCount = 0;;
+    private int asyncChannelOpenCount = 0;
 
     public ReopenFileChannel(final File file, final RandomAccessFile raf, final boolean readOnly)
         throws IOException {
@@ -4854,8 +4856,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         if (raf != null) {
           final FileChannel channel = raf.getChannel();
           if (channel.isOpen()) {
-            /*
-             * The channel is still open. If you are allowing
+          /*
+       * The channel is still open. If you are allowing
              * concurrent reads on the channel, then this could
              * indicate that two readers each found the channel
              * closed and that one was able to re-open the channel
@@ -4882,7 +4884,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * If the current file extent is different from the required extent then the call is made to
    * {@link #extendFile(int)}.
    *
@@ -4958,7 +4960,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       final Iterator<FixedAllocator> allocs = m_allocs.iterator();
       while (allocs.hasNext()) {
         final FixedAllocator alloc = allocs.next();
-        allocated += ((FixedAllocator) alloc).getFileStorage();
+        allocated += alloc.getFileStorage();
       }
       return allocated;
     } finally {
@@ -4966,7 +4968,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Computes the amount of utilised storage
    *
    * @return the amount of storage to alloted slots in the allocation blocks
@@ -4989,7 +4991,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Adds the address for later freeing to the deferred free list.
    *
    * <p>If the allocation is for a BLOB then the sze is also stored
@@ -5005,8 +5007,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         m_deferredFreeOut.writeInt(-rwaddr);
         m_deferredFreeOut.writeInt(sze);
 
-        /*
-         * rather than write out blob address, instead flatten the blob addresses and
+      /*
+       * rather than write out blob address, instead flatten the blob addresses and
          * write all to remove the latency on commit caused by reading potentially many blob headers.
          *
          * This idea was propposed to support BLZG-641/BLZG-1663 to redcue commit latency.
@@ -5126,7 +5128,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Provided with the address of a block of addresses to be freed
    *
    * @param blockAddr
@@ -5185,7 +5187,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return totalFreed;
   }
 
-  /**
+  /*
    * Provided with an iterator of CommitRecords, process each and free any deferred deletes
    * associated with each.
    *
@@ -5279,7 +5281,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return totalFreed;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The {@link ContextAllocation} object manages a freeList of associated allocators and an
@@ -5313,7 +5315,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * The ContextAllocation object manages a freeList of associated allocators and an overall list of
    * allocators. When the context is aborted then allocations made by that context should be
    * released. See {@link AllocBlock #abortShadow}
@@ -5339,7 +5341,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * The ContextAllocation class manages a set of Allocators.
    *
    * <p>A ContextAllocation can have a parent ContextAllocation such that when it is released it
@@ -5349,7 +5351,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   static class ContextAllocation {
     private final RWStore m_store;
-    private final ArrayList<FixedAllocator> m_freeFixed[];
+    private final ArrayList<FixedAllocator>[] m_freeFixed;
 
     private final ArrayList<FixedAllocator> m_allFixed;
 
@@ -5387,7 +5389,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     }
 
-    /**
+    /*
      * For frees made against a shadowed FixedAlocator that is NOT owned by the context, the
      * physical free must be deferred until the context is deshadowed or aborted.
      *
@@ -5397,12 +5399,12 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       m_deferredFrees.add(encodeAddr);
     }
 
-    /**
+    /*
      * Must return the shadowed allocators to the parent/global environment, resetting the freeList
      * association.
      */
     void release() {
-      final ArrayList<FixedAllocator> freeFixed[] =
+      final ArrayList<FixedAllocator>[] freeFixed =
           m_parent != null ? m_parent.m_freeFixed : m_store.m_freeFixed;
 
       final IAllocationContext pcontext = m_parent == null ? null : m_parent.m_context;
@@ -5441,7 +5443,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
 
     void abort() {
-      final ArrayList<FixedAllocator> freeFixed[] =
+      final ArrayList<FixedAllocator>[] freeFixed =
           m_parent != null ? m_parent.m_freeFixed : m_store.m_freeFixed;
 
       final IAllocationContext pcontext = m_parent == null ? null : m_parent.m_context;
@@ -5482,7 +5484,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       return free.get(0); // take first in list
     }
 
-    /**
+    /*
      * @param i - the block-index for the allocator required
      * @return
      */
@@ -5495,7 +5497,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * A map of the {@link IAllocationContext}s.
    *
    * <p>Note: This map must be thread-safe since it is referenced from various methods outside of
@@ -5567,7 +5569,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return m_maxFixedAlloc;
   }
 
-  /**
+  /*
    * This can be called as part of the HA downstream replication.
    *
    * <p>FIXME: If part of downstream replication then the current metabits held by the RWStore will
@@ -5622,8 +5624,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         // Update the root block.
         FileChannelUtility.writeAll(m_reopener, data, pos);
 
-        /*
-         * Generally, you want to force the file data to the disk here.
+      /*
+       * Generally, you want to force the file data to the disk here.
          * The file metadata MIGHT not matter since we always force it
          * to the disk when we change the file size (unless the file
          * system updates other aspects of file metadata during normal
@@ -5692,7 +5694,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return tmp;
   }
 
-  /**
+  /*
    * Striped performance counters for {@link IRawStore} access, including operations that read or
    * write through to the underlying media.
    *
@@ -5732,8 +5734,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     public volatile long nwrites;
 
     // This is reported by the WriteCacheService.
-    //        /**
-    //         * #of write requests that write through to the backing file.
+    //        /*
+//         * #of write requests that write through to the backing file.
     //         */
     //        public volatile long ndiskWrite;
 
@@ -5747,8 +5749,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     public volatile long bytesWritten;
 
     // This is reported by the WriteCacheService.
-    //        /**
-    //         * #of bytes that have been written on the disk.
+    //        /*
+//         * #of bytes that have been written on the disk.
     //         */
     //        public volatile long bytesWrittenOnDisk;
 
@@ -5756,8 +5758,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     public volatile long elapsedWriteNanos;
 
     // This is reported by the WriteCacheService.
-    //        /**
-    //         * Total elapsed time for writing on the disk.
+    //        /*
+//         * Total elapsed time for writing on the disk.
     //         */
     //        public volatile long elapsedDiskWriteNanos;
 
@@ -5889,8 +5891,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       // IRawStore API
       {
 
-        /*
-         * reads
+      /*
+       * reads
          */
 
         root.addCounter(
@@ -5944,8 +5946,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
               }
             });
 
-        /*
-         * writes
+      /*
+       * writes
          */
 
         root.addCounter(
@@ -6016,8 +6018,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       {
         final CounterSet disk = root.makePath("disk");
 
-        /*
-         * read
+      /*
+       * read
          */
 
         disk.addCounter(
@@ -6076,8 +6078,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
               }
             });
 
-        /*
-         * write
+      /*
+       * write
          */
 
         //                disk.addCounter("nwrites", new Instrument<Long>() {
@@ -6128,8 +6130,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         //                    }
         //                });
 
-        /*
-         * other
+      /*
+       * other
          */
 
         disk.addCounter(
@@ -6179,7 +6181,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return storeCounters.get();
   }
 
-  /**
+  /*
    * Replaces the {@link StoreCounters} object.
    *
    * @param storeCounters The new {@link Counter}s.
@@ -6192,7 +6194,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     this.storeCounters.set(storeCounters);
   }
 
-  /**
+  /*
    * Return interesting information about the write cache and file operations.
    *
    * @todo allocations data? user extent allocated? user extent used? etc.
@@ -6318,7 +6320,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return remoteWriteFuture;
   }
 
-  /**
+  /*
    * @see IHABufferStrategy#sendRawBuffer(IHARebuildRequest, long, long, long, long, int,
    *     ByteBuffer)
    */
@@ -6446,8 +6448,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
         if (sequence == 0L && nbytes == bufferCapacity && remaining > bufferCapacity) {
 
-          /*
-           * Adjust the first block so the remainder will be
+        /*
+       * Adjust the first block so the remainder will be
            * aligned on the bufferCapacity boundaries (IO
            * efficiency).
            */
@@ -6501,7 +6503,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Read on the backing file. {@link ByteBuffer#remaining()} bytes will be read into the caller's
    * buffer, starting at the specified offset in the backing file.
    *
@@ -6619,7 +6621,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Debug ONLY method added to permit unit tests to be written that the native transaction counter
    * is correctly decremented to zero. The returned value is ONLY valid while holding the {@link
    * #m_allocationLock}. Therefore this method MAY NOT be used reliably outside of code that can
@@ -6643,7 +6645,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return getBlock(addr).getBlockSize();
   }
 
-  /**
+  /*
    * lockAddress adds the address passed to a lock list. This is for debug only and is not intended
    * to be used generally for the live system.
    *
@@ -6667,8 +6669,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return m_writeCacheService.getCounters();
   }
 
-  //  /**
-  //   * If historical data is maintained then this will return the earliest time for which
+  //  /*
+//   * If historical data is maintained then this will return the earliest time for which
   //   * data can be safely retrieved.
   //   *
   //   * @return time of last release
@@ -6694,7 +6696,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the allocation having that address is flagged as committed. The
    * caller must be holding the allocation lock in order for the result to remain valid outside of
    * the method call.
@@ -6744,7 +6746,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return PSOutputStream.getNew(this, m_maxFixedAlloc, context);
   }
 
-  /**
+  /*
    * Low level routine used when we replace the root blocks of an empty journal in HA with those
    * from the leader.
    *
@@ -6806,7 +6808,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Called from {@link AbstractJournal} commit2Phase to ensure that a downstream HA quorum member
    * ensures it is able to read committed data that has been streamed directly to the backing store.
    *
@@ -7034,8 +7036,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
           if (m_nextAllocation == 0) {
 
-            /*
-             * Skip the first 32K in the file. The root blocks live here but
+          /*
+       * Skip the first 32K in the file. The root blocks live here but
              * nothing else.
              */
 
@@ -7092,20 +7094,20 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     //      }
   }
 
-  /**
+  /*
    * Simple class to collect up DeleteBlockStats and returned by checkDeleteBlocks, called from
    * DumpJournal.
    */
   public static class DeleteBlockStats {
-    private int m_commitRecords = 0;;
+    private int m_commitRecords = 0;
     private int m_addresses = 0;
     private int m_blobs = 0;
     private int m_badAddresses = 0;
     private final HashMap<Integer, Integer> m_freed = new HashMap<Integer, Integer>();
     /** The latched address of each address that appears more than once across the delete blocks. */
     private final Set<Integer> m_duplicates = new LinkedHashSet<Integer>();
-    //        /**
-    //         * The hexstring version of the data associated with the addresses that
+    //        /*
+//         * The hexstring version of the data associated with the addresses that
     //         * are present more than once in the delete blocks.
     //         */
     //      private final ArrayList<String> m_dupData = new ArrayList<String>();
@@ -7125,7 +7127,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       return m_badAddresses;
     }
 
-    /**
+    /*
      * Return the latched addresses that appear more than once in the delete blocks across the
      * commit records.
      */
@@ -7148,8 +7150,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
         for (int latchedAddr : m_duplicates) {
           //                  final int latchedAddr = m_duplicates.get(i);
           sb.append("\nDuplicate: latchedAddr=" + latchedAddr + "\n");
-          /*
-           * Note: Now dumped by DumpJournal.
+        /*
+       * Note: Now dumped by DumpJournal.
            */
           //                    final byte[] data;
           //                    try {
@@ -7222,7 +7224,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return stats;
   }
 
-  /**
+  /*
    * Utility method to verify the deferred delete blocks.
    *
    * @param blockAddr The address of a deferred delete block.
@@ -7232,7 +7234,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   private void checkDeferrals(
       final long blockAddr, final long commitTime, final DeleteBlockStats stats) {
 
-    /**
+    /*
      * Debug flag. When true, writes all frees onto stderr so they can be read into a worksheet for
      * analysis.
      */
@@ -7298,7 +7300,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * A low level utility method that reads directly from the backing {@link FileChannel}.
    *
    * <p>Note: The latched address does not encode the actual length of the data. Therefore, all data
@@ -7373,8 +7375,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
   //  private HARebuildRequest m_rebuildRequest = null;
 
-  //    /**
-  //     * Only blacklist the addr if not already available, in other words
+  //    /*
+//     * Only blacklist the addr if not already available, in other words
   //     * a blacklisted address only makes sense if it for previously
   //     * committed data and not instantly recyclable.
   //     */
@@ -7508,7 +7510,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * This alternative implementation checks only the live allocations
    *
    * @param snapshot
@@ -7544,7 +7546,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Used as part of the rebuild protocol
    *
    * @throws IOException
@@ -7587,8 +7589,8 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     return sb.toString();
   }
-  //    /**
-  //     *
+  //    /*
+//     *
   //     * @return whether WCS is flushed
   //     *
   //     * @see IBufferStrategy#isFlushed()
@@ -7661,7 +7663,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
   }
 
-  /**
+  /*
    * Can be used to determine if an address is within an allocated slot.
    *
    * @param addr
@@ -7682,7 +7684,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return ret;
   }
 
-  /**
+  /*
    * Forces a reset of the metabits allocation on the next commit.
    *
    * <p>Note that a side-effect of this is that there will be a memory leak of either a
@@ -7713,7 +7715,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     return m_metaBitsAddr > 0;
   }
 
-  /**
+  /*
    * Add the address/byte[] to the snapshot representing the metabits allocaiton data
    *
    * @throws IOException
@@ -7721,7 +7723,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   public void snapshotMetabits(final ISnapshotData tm) throws IOException {
     final long mba;
     if (m_metaBitsAddr < 0) {
-      mba = physicalAddress((int) m_metaBitsAddr);
+      mba = physicalAddress(m_metaBitsAddr);
     } else {
       // long ret = physicalAddress((int) m_metaBitsAddr);
       mba = convertAddr(-m_metaBitsAddr); // maximum 48 bit address range

@@ -33,8 +33,8 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.service.ndx.NopAggregator;
 
-/**
- * Batch conditional insert operation (putIfAbsent).
+/*
+* Batch conditional insert operation (putIfAbsent).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see BLZG-1539 (putIfAbsent)
@@ -59,7 +59,7 @@ public class BatchPutIfAbsent extends AbstractKeyArrayIndexProcedure<ResultBuffe
     return false;
   }
 
-  /**
+  /*
    * Factory for {@link BatchPutIfAbsent} procedures.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -67,14 +67,14 @@ public class BatchPutIfAbsent extends AbstractKeyArrayIndexProcedure<ResultBuffe
   public static class BatchPutIfAbsentConstructor
       extends AbstractKeyArrayIndexProcedureConstructor<BatchPutIfAbsent> {
 
-    /**
+    /*
      * Singleton requests the return of the old values that were overwritten in the index by the
      * operation.
      */
     public static final BatchPutIfAbsentConstructor RETURN_OLD_VALUES =
         new BatchPutIfAbsentConstructor(true);
 
-    /**
+    /*
      * Singleton does NOT request the return of the old values that were overwritten in the index by
      * the operation.
      */
@@ -112,7 +112,7 @@ public class BatchPutIfAbsent extends AbstractKeyArrayIndexProcedure<ResultBuffe
   /** De-serialization ctor. */
   public BatchPutIfAbsent() {}
 
-  /**
+  /*
    * Create a batch insert operation.
    *
    * <p>Batch insert operation of N tuples presented in sorted order. This operation can be very
@@ -141,7 +141,7 @@ public class BatchPutIfAbsent extends AbstractKeyArrayIndexProcedure<ResultBuffe
     this.returnOldValues = returnOldValues;
   }
 
-  /**
+  /*
    * Applies the operator using {@link ISimpleBTree#putIfAbsent(byte[], byte[])}
    *
    * @param ndx
@@ -165,7 +165,7 @@ public class BatchPutIfAbsent extends AbstractKeyArrayIndexProcedure<ResultBuffe
 
       final byte[] val = vals.get(i);
 
-      final byte[] old = (byte[]) ndx.putIfAbsent(key, val);
+      final byte[] old = ndx.putIfAbsent(key, val);
 
       if (returnOldValues) {
 

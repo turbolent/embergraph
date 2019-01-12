@@ -45,8 +45,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for methods supporting static analysis of the variables, including whether a variable
+/*
+* Test suite for methods supporting static analysis of the variables, including whether a variable
  * MUST be bound, MIGHT be bound, or is NOT bound. The static analysis centers around {@link
  * GraphPatternGroup}s. Methods are provided for both the group itself, the group and its parent
  * groups, and the group and its child groups.
@@ -79,7 +79,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
   private static final Set<IVariable<?>> EMPTY_SET = Collections.emptySet();
 
-  /**
+  /*
    * Unit test of static analysis for variables which must be bound by a query. This involves
    * checking the WHERE clause and the projection for the query.
    *
@@ -111,7 +111,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
             queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
   }
 
-  /**
+  /*
    * Unit test of static analysis for variables which must be bound by a query. This involves
    * checking the WHERE clause and the projection for the query. In this case, a constant is
    * projected out of the query in addition to the bindings produced by the WHERE clause.
@@ -149,7 +149,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
             queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
   }
 
-  /**
+  /*
    * Unit test of static analysis for variables with a named subquery. This test verifies that we
    * observe the variables projected by the subquery, but not those which it uses internally.
    *
@@ -195,7 +195,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
             queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
   }
 
-  /**
+  /*
    * Unit test of static analysis for variables with a SPARQL 1.1 subquery. This test verifies that
    * we observe the variables projected by the subquery, but not those which it uses internally.
    *
@@ -243,7 +243,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
             queryRoot.getWhereClause(), new LinkedHashSet<IVariable<?>>(), true /* recursive */));
   }
 
-  /**
+  /*
    * Unit test of static analysis for a SERVICE call.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/816" > Wildcard projection ignores variables
@@ -304,7 +304,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for computing the join variables for a named subquery based on the analysis of the
    * bindings which MUST be produced by the subquery and those which MUST be bound on entry into the
    * group in which the subquery solution set is included within the main query.
@@ -387,7 +387,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Static analysis of TCK query:
    *
    * <pre>
@@ -435,7 +435,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
         sa.getDefinitelyIncomingBindings(whereClause, new LinkedHashSet<IVariable<?>>()));
   }
 
-  /**
+  /*
    * Static analysis of TCK query:
    *
    * <pre>
@@ -531,7 +531,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Static analysis of TCK query:
    *
    * <pre>
@@ -746,7 +746,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Join-scope - 1 (aka var-scope-join-1).
    *
    * <pre>
@@ -922,7 +922,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for analysis of a {@link ServiceNode}. The analysis of a {@link ServiceNode} is just
    * the analysis of the graph pattern reported by {@link ServiceNode#getGraphPattern()}.
    *
@@ -1019,7 +1019,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite for predicting the join variables for a SERVICE call.
    *
    * <pre>
@@ -1066,7 +1066,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
 
     final StaticAnalysis sa = new StaticAnalysis(queryRoot);
 
-    /**
+    /*
      * Locate the various pieces of the AST.
      *
      * <pre>
@@ -1496,7 +1496,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test of static analysis methods as they pertain to a MINUS group. Unlike OPTIONAL, the
    * variables in the left and right hand side of a MINUS operator are not visible to one another.
    * This has implications for (a) MINUS operators where the right hand side does not share any
@@ -1605,7 +1605,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Variant test for a MINUS operator without shared variables.
    *
    * <pre>
@@ -1715,7 +1715,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Variant test for query mixing MINUS and OPTIONAL groups.
    *
    * <pre>
@@ -1930,7 +1930,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Variant test for query mixing normal child join groups and OPTIONAL join groups.
    *
    * <pre>
@@ -2162,7 +2162,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link StaticAnalysis#getProjectedVars(IGroupMemberNode, GraphPatternGroup,
    * QueryBase, Set, Set)} . This unit test is a based on <code>
    * embergraph-perf/CI/govtrack/queries/query10.rq</code>
@@ -2390,7 +2390,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for static analysis of the MUST and MIGHT bound variables for a subquery.
    *
    * <pre>
@@ -2466,7 +2466,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Variant with optional group binding <code>?a</code> (so <code>?b</code> is MIGHT be bound).
    *
    * <pre>
@@ -2627,7 +2627,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for static analysis of the MUST and MIGHT bound variables for a query involving a
    * select expression which could result in an error. Note that this query is NOT an aggregation
    * query so the error will fail the solution.
@@ -2751,7 +2751,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for static analysis of the MUST and MIGHT bound variables for a query involving a
    * select expression which depends on a variable which is not definitely bound.
    *
@@ -2893,7 +2893,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for static analysis of the MUST and MIGHT bound variables for a subquery involving
    * aggregation and a select expression ("The result of an Aggregate which returns an error, is an
    * error, but the SELECT expression result of projecting an error is unbound").
@@ -3028,7 +3028,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for locating a reference go a {@link GraphPatternGroup} which appears as an
    * annotation of another node. This covers {@link UnionNode} and {@link JoinGroupNode} when
    * appearing as children of a {@link QueryRoot}'s whereClause.
@@ -3104,7 +3104,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     assertTrue(queryRoot == sa.findParent(whereClause));
   }
 
-  /**
+  /*
    * This verifies the ability to locate the parent of a graph group in a {@link SubqueryRoot}.
    *
    * <pre>
@@ -3174,7 +3174,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     assertTrue(whereClause == subqueryRoot.getParent());
   }
 
-  /**
+  /*
    * This verifies the ability to locate the parent of a graph group in a {@link NamedSubqueryRoot}.
    *
    * <pre>
@@ -3253,7 +3253,7 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     assertTrue(whereClause == include.getParent());
   }
 
-  /**
+  /*
    * Unit test for locating a reference go a {@link GraphPatternGroup} which appears as an
    * annotation of another node. This covers {@link UnionNode} and {@link JoinGroupNode} when
    * appearing as children of a {@link QueryRoot}'s whereClause.
@@ -3329,8 +3329,8 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
     assertTrue(queryRoot == sa.findParent(whereClause));
   }
 
-  //    /**
-  //     * Unit test for whether or not a variable is "in-scope" in some part of the
+  //    /*
+//     * Unit test for whether or not a variable is "in-scope" in some part of the
   //     * AST.
   //     *
   //     * <pre>
@@ -3402,8 +3402,8 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
   //
   //    }
   //
-  //    /**
-  //     * <code>?v</code> is also in scope when it appears in an OPTIONAL group
+  //    /*
+//     * <code>?v</code> is also in scope when it appears in an OPTIONAL group
   //     *
   //     * <pre>
   //     * PREFIX :    <http://example/>
@@ -3420,8 +3420,8 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
   //
   //   }
   //
-  //    /**
-  //     * This test examines a DAWG/TCK query based on a badly formed left join
+  //    /*
+//     * This test examines a DAWG/TCK query based on a badly formed left join
   //     * pattern:
   //     *
   //     * <pre>
@@ -3451,8 +3451,8 @@ public class TestStaticAnalysis extends AbstractASTEvaluationTestCase {
   //
   //    }
   //
-  //    /**
-  //     *
+  //    /*
+//     *
   //     * TODO The test suite should cover all of the bottom-up examples so we can
   //     * work out what the right behavior of this method is in each case. It
   //     * should also cover the EXISTS graph pattern, SERVICE graph pattern, and

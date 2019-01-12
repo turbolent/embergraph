@@ -30,8 +30,8 @@ import org.embergraph.relation.accesspath.AbstractElementBuffer.DeleteBuffer;
 import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.DeleteSolutionBuffer;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
-/**
- * A buffer for {@link SPO}s which causes the corresponding statements (and their {@link
+/*
+* A buffer for {@link SPO}s which causes the corresponding statements (and their {@link
  * Justification}s) be retracted from the database when it is {@link #flush()}ed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -47,7 +47,7 @@ public class SPORetractionBuffer extends AbstractSPOBuffer {
   /** Optional change log for change notification. */
   protected final IChangeLog changeLog;
 
-  /**
+  /*
    * @param store The database from which the statement will be removed when the buffer is {@link
    *     #flush()}ed.
    * @param capacity The capacity of the retraction buffer.
@@ -60,7 +60,7 @@ public class SPORetractionBuffer extends AbstractSPOBuffer {
     this(store, capacity, computeClosureForStatementIdentifiers, null /* changeLog */);
   }
 
-  /**
+  /*
    * @param store The database from which the statement will be removed when the buffer is {@link
    *     #flush()}ed.
    * @param capacity The capacity of the retraction buffer.

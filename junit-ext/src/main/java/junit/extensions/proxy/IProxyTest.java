@@ -21,22 +21,22 @@ package junit.extensions.proxy;
 import junit.framework.Test;
 import junit.framework.TestCase;
 
-/**
- * A {@link Test} that holds a reference to a delegate. Normally the delegate will extend {@link
+/*
+* A {@link Test} that holds a reference to a delegate. Normally the delegate will extend {@link
  * TestCase} to provide, possibly persistent, implementation specific logic for establishing test
  * fixtures. The delegate is normally an instance of your concrete implementation specific test
  * harness with access to any required configuration data, e.g., a properties file.
  */
 public interface IProxyTest extends Test {
 
-  /**
+  /*
    * Sets the delegate. {@link ProxyTestSuite} uses this method to set the delegate on each test
    * class instance that it creates that implements the {@link IProxyTest} interface.
    */
-  public void setDelegate(Test delegate);
+  void setDelegate(Test delegate);
 
-  /**
+  /*
    * Returns the reference to the delegate or <code>null</code> if the delegate was not established.
    */
-  public Test getDelegate();
+  Test getDelegate();
 }

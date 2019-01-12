@@ -1,7 +1,7 @@
 package org.embergraph.config;
 
-/**
- * Instance thrown if there is a problem with a property value.
+/*
+* Instance thrown if there is a problem with a property value.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -55,6 +55,7 @@ package org.embergraph.rdf.sparql.ast.eval;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -65,8 +66,8 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * The idea here is that the subclasses provide the data for the test (i.e. the triples, the query
+/*
+* The idea here is that the subclasses provide the data for the test (i.e. the triples, the query
  * and the results) inline and not in separate files. One goal is to reduce the level of redundant
  * comments that can be out of sync.
  *
@@ -108,7 +109,7 @@ public abstract class AbstractInlineSELECTTestCase extends AbstractDataAndSPARQL
           store, astContainer, new QueryBindingSet(), null /* dataset */);
     }
 
-    /**
+    /*
      * See http://stackoverflow.com/a/7716231/2276263
      *
      * @param testURI
@@ -120,7 +121,7 @@ public abstract class AbstractInlineSELECTTestCase extends AbstractDataAndSPARQL
       if (log.isInfoEnabled()) log.info("\nquery:\n" + queryStr);
     }
 
-    /**
+    /*
      * Load some RDF data.
      *
      * @param data The in-line data to be loaded.
@@ -136,7 +137,7 @@ public abstract class AbstractInlineSELECTTestCase extends AbstractDataAndSPARQL
 
       data = ttlPrefixes() + data;
 
-      byte utf8Data[] = data.getBytes("utf-8");
+      byte[] utf8Data = data.getBytes(StandardCharsets.UTF_8);
       final InputStream is = new ByteArrayInputStream(utf8Data);
       String uri = FILL_IN_URI;
 

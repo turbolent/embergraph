@@ -23,54 +23,54 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-/**
- * Shared abstraction layer for both {@link ICounterSet} and {@link ICounter}.
+/*
+* Shared abstraction layer for both {@link ICounterSet} and {@link ICounter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ICounterNode {
 
-  /**
+  /*
    * The immediate parent in the hierarchy -or- <code>null</code> iff this is the root of the
    * hierarchy.
    */
-  public ICounterSet getParent();
+  ICounterSet getParent();
 
   /** The local name (does not include the path from the root). */
-  public String getName();
+  String getName();
 
   /** Complete path from the root inclusive of the local name. */
-  public String getPath();
+  String getPath();
 
   /** Depth of this node in the hierarchy, where the depth of the root is ZERO (0). */
-  public int getDepth();
+  int getDepth();
 
   /** The root of the hierarchy. */
-  public ICounterSet getRoot();
+  ICounterSet getRoot();
 
   /** <code>true</code> iff this is the root of the hierarchy. */
-  public boolean isRoot();
+  boolean isRoot();
 
   /** <code>true</code> iff this is a collection of counters. */
-  public boolean isCounterSet();
+  boolean isCounterSet();
 
   /** <code>true</code> iff this is a counter. */
-  public boolean isCounter();
+  boolean isCounter();
 
-  /**
+  /*
    * Return the directly attached object by name.
    *
    * @param name The counter name.
    * @return The object.
    */
-  public ICounterNode getChild(String name);
+  ICounterNode getChild(String name);
 
-  /**
+  /*
    * Return the object described by the path.
    *
    * @param path The path.
    * @return The object or <code>null</code> if nothing exists for that path.
    */
-  public ICounterNode getPath(String path);
+  ICounterNode getPath(String path);
 }

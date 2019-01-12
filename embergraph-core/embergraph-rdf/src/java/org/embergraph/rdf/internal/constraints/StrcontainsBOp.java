@@ -24,8 +24,8 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * @see http://www.w3.org/2005/xpath-functions#contains
+/*
+* @see http://www.w3.org/2005/xpath-functions#contains
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */

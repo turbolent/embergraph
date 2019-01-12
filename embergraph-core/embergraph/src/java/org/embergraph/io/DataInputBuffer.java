@@ -28,8 +28,8 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * A fast implementation of DataInput designed to read from a byte[].
+/*
+* A fast implementation of DataInput designed to read from a byte[].
  *
  * @see DataOutputBuffer
  * @see DataInputStream
@@ -44,18 +44,18 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
   /** The original value of {@link #off}. */
   private int origin;
 
-  /**
+  /*
    * The current offset in the buffer. This is incremented each time any data is read from the
    * buffer.
    */
   private int off;
 
-  /**
+  /*
    * The exclusive index of the last byte in the buffer having valid data (up to limit-1 is valid).
    */
   private int limit;
 
-  /**
+  /*
    * Prepare for reading from the byte[].
    *
    * @param buf The source data.
@@ -71,7 +71,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
     this.limit = buf.length;
   }
 
-  /**
+  /*
    * Prepare for reading from the byte[].
    *
    * @param buf The source data.
@@ -95,7 +95,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
     this.limit = off + len;
   }
 
-  /**
+  /*
    * Prepare for reading from the buffer. The bytes between the {@link ByteArrayBuffer#pos()} and
    * the {@link ByteArrayBuffer#limit()} will be read.
    *
@@ -112,7 +112,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
     this.limit = buf.limit;
   }
 
-  /**
+  /*
    * Replaces the buffer and resets the offset to zero (0).
    *
    * @param buf The new buffer.
@@ -130,7 +130,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
     return buf;
   }
 
-  /**
+  /*
    * Replaces the buffer and reset the offset and length to the specified values.
    *
    * @param buf The new buffer.
@@ -150,7 +150,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
     this.limit = off + len;
   }
 
-  /**
+  /*
    * Replaces the buffer reference with {@link ByteArrayBuffer#array()} and resets the offset and
    * length to the {@link ByteArrayBuffer#pos()} and the {@link ByteArrayBuffer#limit()}
    * respectively.
@@ -178,7 +178,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
 
     if (off >= limit) throw new EOFException();
 
-    return buf[off++] == 0 ? false : true;
+    return buf[off++] != 0;
   }
 
   @Override
@@ -362,7 +362,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
    * unpack unsigned long integer.
    */
 
-  /**
+  /*
    * Convenience method unpacks long and throws an exception if the value exceeds {@link
    * Integer#MAX_VALUE}.
    *
@@ -378,7 +378,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
     return (int) v;
   }
 
-  /**
+  /*
    * Unpack a long value from the current buffer position.
    *
    * @return The long value.
@@ -416,7 +416,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
    * unpack unsigned short integer.
    */
 
-  /**
+  /*
    * Unpack a non-negative short value from the input stream.
    *
    * @param is The input stream.
@@ -439,7 +439,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
       // high bit is clear.
       v = b; // interpret the byte as a short value.
     }
-    return (short) v;
+    return v;
   }
 
   /*
@@ -450,7 +450,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
    * nodes in the B+Tree.
    */
 
-  /**
+  /*
    * Report the position of the stream within its slice (relative to the original offset for the
    * backing buffer)
    */
@@ -459,7 +459,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
     return off - origin;
   }
 
-  /**
+  /*
    * Reposition the stream within its slice (relative to the original offset for the backing
    * buffer).
    */

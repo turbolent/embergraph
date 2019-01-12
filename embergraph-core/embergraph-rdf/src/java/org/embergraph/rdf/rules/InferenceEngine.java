@@ -36,8 +36,8 @@ import org.embergraph.relation.rule.eval.ActionEnum;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 
-/**
- * Flyweight object encapsulates some configuration state and provides methods to compute or update
+/*
+* Flyweight object encapsulates some configuration state and provides methods to compute or update
  * the closure of the database. An instance of this is obtained from {@link
  * AbstractTripleStore#getInferenceEngine()}.
  *
@@ -66,7 +66,7 @@ public class InferenceEngine {
   /** The database whose closure is being maintained. */
   public final AbstractTripleStore database;
 
-  /**
+  /*
    * A filter for keeping certain entailments out of the database. It is configured based on how the
    * {@link InferenceEngine} is configured.
    *
@@ -74,15 +74,15 @@ public class InferenceEngine {
    */
   public final DoNotAddFilter doNotAddFilter;
 
-  /**
+  /*
    * Options for the {@link InferenceEngine}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options {
+  public interface Options {
 
-    /**
+    /*
      * When <code>true</code> (default {@value #DEFAULT_FORWARD_RDF_TYPE_RDFS_RESOURCE}) <code>
      * (?x rdf:type rdfs:Resource)</code> entailments are computed AND stored in the database. When
      * <code>false</code>, rules that produce those entailments are turned off such that they are
@@ -101,7 +101,7 @@ public class InferenceEngine {
 
     String DEFAULT_FORWARD_RDF_TYPE_RDFS_RESOURCE = "false";
 
-    /**
+    /*
      * When <code>true</code> (default {@value #DEFAULT_FORWARD_CHAIN_OWL_SAMEAS_CLOSURE}) the
      * reflexive entailments for <code>owl:sameAs</code> are computed by forward chaining and stored
      * in the database unless {@link
@@ -115,7 +115,7 @@ public class InferenceEngine {
 
     String DEFAULT_FORWARD_CHAIN_OWL_SAMEAS_CLOSURE = "true";
 
-    /**
+    /*
      * When <code>true</code> (default {@value #DEFAULT_FORWARD_CHAIN_OWL_SAMEAS_PROPERTIES}) the
      * entailments that replication properties between instances that are identified as "the same"
      * using <code>owl:sameAs</code> will be forward chained and stored in the database. When <code>
@@ -139,7 +139,7 @@ public class InferenceEngine {
 
     String DEFAULT_FORWARD_CHAIN_OWL_SAMEAS_PROPERTIES = "true";
 
-    /**
+    /*
      * When <code>true</code> (default {@value #DEFAULT_FORWARD_CHAIN_OWL_EQUIVALENT_PROPERTY}) the
      * entailments for <code>owl:equivilantProperty</code> are computed by forward chaining and
      * stored in the database. When <code>false</code>, rules that produce those entailments are
@@ -153,7 +153,7 @@ public class InferenceEngine {
 
     String DEFAULT_FORWARD_CHAIN_OWL_EQUIVALENT_PROPERTY = "true";
 
-    /**
+    /*
      * When <code>true</code> (default {@value #DEFAULT_FORWARD_CHAIN_OWL_EQUIVALENT_CLASS}) the
      * entailments for <code>owl:equivilantClass</code> are computed by forward chaining and stored
      * in the database. When <code>false</code>, rules that produce those entailments are turned off
@@ -167,7 +167,7 @@ public class InferenceEngine {
 
     String DEFAULT_FORWARD_CHAIN_OWL_EQUIVALENT_CLASS = "true";
 
-    /**
+    /*
      * When <code>true</code> (default {@value #FORWARD_CHAIN_OWL_INVERSE_OF}) the entailments for
      * <code>owl:InverseOf</code> are computed by forward chaining and stored in the database. When
      * <code>false</code>, rules that produce those entailments are turned off such that they are
@@ -179,7 +179,7 @@ public class InferenceEngine {
 
     String DEFAULT_FORWARD_CHAIN_OWL_INVERSE_OF = "true";
 
-    /**
+    /*
      * When <code>true</code> (default {@value #DEFAULT_FORWARD_CHAIN_OWL_TRANSITIVE_PROPERTY}) the
      * entailments for <code>owl:TransitiveProperty</code> are computed by forward chaining and
      * stored in the database. When <code>false</code>, rules that produce those entailments are
@@ -191,7 +191,7 @@ public class InferenceEngine {
 
     String DEFAULT_FORWARD_CHAIN_OWL_TRANSITIVE_PROPERTY = "true";
 
-    /**
+    /*
      * When <code>true</code> (default {@value #DEFAULT_FORWARD_CHAIN_OWL_HAS_VALUE}) the
      * entailments for <code>owl:hasValue</code> are computed by forward chaining and stored in the
      * database. When <code>false</code>, rules that produce those entailments are turned off such
@@ -203,7 +203,7 @@ public class InferenceEngine {
 
     String DEFAULT_FORWARD_CHAIN_OWL_HAS_VALUE = "true";
 
-    /**
+    /*
      * When <code>true</code> (default {@value #DEFAULT_FORWARD_CHAIN_OWL_SYMMETRIC_PROPERTY}) the
      * entailments for <code>owl:SymmetricProperty</code> are computed by forward chaining and
      * stored in the database. When <code>false</code>, rules that produce those entailments are
@@ -215,7 +215,7 @@ public class InferenceEngine {
 
     String DEFAULT_FORWARD_CHAIN_OWL_SYMMETRIC_PROPERTY = "true";
 
-    /**
+    /*
      * When <code>true</code> (default {@value
      * #DEFAULT_ENABLE_OWL_FUNCTIONAL_AND_INVERSE_FUNCTIONAL_PROPERTY} ) the data is tested for
      * violations of owl:FunctionalProperty and owl:InverseFunctionalProperty. When this is enabled,
@@ -227,7 +227,7 @@ public class InferenceEngine {
     String DEFAULT_ENABLE_OWL_FUNCTIONAL_AND_INVERSE_FUNCTIONAL_PROPERTY = "true";
   }
 
-  /**
+  /*
    * Configure {@link InferenceEngine} using the properties used to configure the database.
    *
    * @param database The database.
@@ -371,7 +371,7 @@ public class InferenceEngine {
             database.getVocabulary(), database.getAxioms(), forwardChainRdfTypeRdfsResource);
   }
 
-  /**
+  /*
    * The object that generates the {@link Program}s that we use to maintain the closure of the
    * database.
    *
@@ -380,7 +380,7 @@ public class InferenceEngine {
    */
   private BaseClosure baseClosure = null;
 
-  /**
+  /*
    * Set based on {@link Options#FORWARD_CHAIN_RDF_TYPE_RDFS_RESOURCE}. When <code>true</code> the
    * {@link InferenceEngine} is configured to forward chain and store entailments of the form <code>
    * (x rdf:type rdfs:Resource)</code>. When <code>false</code>, those entailments are computed at
@@ -388,7 +388,7 @@ public class InferenceEngine {
    */
   protected final boolean forwardChainRdfTypeRdfsResource;
 
-  /**
+  /*
    * Set based on {@link Options#FORWARD_CHAIN_OWL_SAMEAS_CLOSURE}. When <code>true</code> we will
    * forward chain and store the reflexive and transitive closure of <code>owl:sameAs</code> using
    * {@link RuleOwlSameAs1} and {@link RuleOwlSameAs2}.
@@ -398,7 +398,7 @@ public class InferenceEngine {
    */
   protected final boolean forwardChainOwlSameAsClosure;
 
-  /**
+  /*
    * Set based on {@link Options#FORWARD_CHAIN_OWL_SAMEAS_PROPERTIES}. When <code>true</code>, we
    * will forward chain {@link RuleOwlSameAs2} and {@link RuleOwlSameAs3} which replicate properties
    * on individuals identified as the "same" by <code>owl:sameAs</code>. When <code>false</code>, we
@@ -406,56 +406,56 @@ public class InferenceEngine {
    */
   protected final boolean forwardChainOwlSameAsProperties;
 
-  /**
+  /*
    * Set based on {@link Options#FORWARD_CHAIN_OWL_EQUIVALENT_PROPERTY}. When <code>true</code>, we
    * will forward chain and store those entailments. When <code>false</code>, those entailments will
    * NOT be available.
    */
   protected final boolean forwardChainOwlEquivalentProperty;
 
-  /**
+  /*
    * Set based on {@link Options#FORWARD_CHAIN_OWL_EQUIVALENT_CLASS}. When <code>true</code>, we
    * will forward chain and store those entailments. When <code>false</code>, those entailments will
    * NOT be available.
    */
   protected final boolean forwardChainOwlEquivalentClass;
 
-  /**
+  /*
    * Set based on {@link Options#FORWARD_CHAIN_OWL_INVERSE_OF}. When <code>true</code>, we will
    * forward chain and store those entailments. When <code>false</code>, those entailments will NOT
    * be available.
    */
   protected final boolean forwardChainOwlInverseOf;
 
-  /**
+  /*
    * Set based on {@link Options#FORWARD_CHAIN_OWL_TRANSITIVE_PROPERTY}. When <code>true</code>, we
    * will forward chain and store those entailments. When <code>false</code>, those entailments will
    * NOT be available.
    */
   protected final boolean forwardChainOwlTransitiveProperty;
 
-  /**
+  /*
    * Set based on {@link Options#FORWARD_CHAIN_OWL_HAS_VALUE}. When <code>true</code>, we will
    * forward chain and store those entailments. When <code>false</code>, those entailments will NOT
    * be available.
    */
   protected final boolean forwardChainOwlHasValue;
 
-  /**
+  /*
    * Set based on {@link Options#FORWARD_CHAIN_OWL_SYMMETRIC_PROPERTY}. When <code>true</code>, we
    * will forward chain and store those entailments. When <code>false</code>, those entailments will
    * NOT be available.
    */
   protected final boolean forwardChainOwlSymmetricProperty;
 
-  /**
+  /*
    * Set based on {@link Options#ENABLE_OWL_FUNCTIONAL_AND_INVERSE_FUNCTIONAL_PROPERTY}. When <code>
    * true</code>, we will test for violations of owl:FunctionalProperty and
    * owl:InverseFunctionalProperty.
    */
   protected final boolean enableOwlFunctionalAndInverseFunctionalProperty;
 
-  /**
+  /*
    * Compute the forward closure of a focusStore against the database using the algorithm selected
    * by {@link AbstractTripleStore.Options#CLOSURE_CLASS}.
    *
@@ -486,7 +486,7 @@ public class InferenceEngine {
     return computeClosure(focusStore, database.isJustify());
   }
 
-  /**
+  /*
    * This variant allows you to explicitly NOT generate {@link Justification}s for the computed
    * entailments. It is used by the {@link TruthMaintenance} class as part of the algorithm for
    * truth maintenance when retracting statements from the database. It SHOULD NOT be used for any

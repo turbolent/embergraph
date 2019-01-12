@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * The COPY operation is a shortcut for inserting all data from an input graph into a destination
+/*
+* The COPY operation is a shortcut for inserting all data from an input graph into a destination
  * graph. Data from the input graph is not affected, but data from the destination graph, if any, is
  * removed before insertion.
  *
@@ -53,7 +53,7 @@ public class CopyGraph extends AbstractFromToGraphManagement {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

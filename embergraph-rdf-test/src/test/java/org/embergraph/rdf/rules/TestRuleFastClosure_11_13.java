@@ -30,8 +30,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test suite for {@link AbstractRuleFastClosure_11_13}.
+/*
+* Test suite for {@link AbstractRuleFastClosure_11_13}.
  *
  * @see RuleFastClosure11
  * @see RuleFastClosure13
@@ -48,7 +48,7 @@ public class TestRuleFastClosure_11_13 extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Tests {@link RuleFastClosure11} with the minimum data required to compute a single entailment.
    */
   public void test_RuleFastForwardClosure11() throws Exception {
@@ -109,7 +109,7 @@ public class TestRuleFastClosure_11_13 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Tests {@link RuleFastClosure13} with the minimum data required to compute a single entailment.
    *
    * @throws Exception

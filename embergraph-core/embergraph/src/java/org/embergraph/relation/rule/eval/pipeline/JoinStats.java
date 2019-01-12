@@ -14,8 +14,8 @@ import org.embergraph.relation.rule.eval.IRuleState;
 import org.embergraph.relation.rule.eval.RuleStats;
 import org.embergraph.relation.rule.eval.pipeline.JoinTask.AccessPathTask;
 
-/**
- * Statistics about processing for a single join dimension as reported by a single {@link JoinTask}.
+/*
+* Statistics about processing for a single join dimension as reported by a single {@link JoinTask}.
  * Each {@link JoinTask} handles a single index partition, so the {@link JoinStats} for those index
  * partitions need to be aggregated by the {@link JoinMasterTask}.
  *
@@ -27,7 +27,7 @@ public class JoinStats implements Serializable {
   /** */
   private static final long serialVersionUID = 9028650921831777131L;
 
-  /**
+  /*
    * The timestamp associated with the start of execution for the join dimension. This is not
    * aggregated. The timestamp is assigned when the {@link JoinStats} object is created. That
    * corresponds either to the start of the distributed {@link JoinMasterTask} execution (aggregated
@@ -35,7 +35,7 @@ public class JoinStats implements Serializable {
    */
   public final long startTime;
 
-  /**
+  /*
    * The index partition for which these statistics were collected or -1 if the statistics are
    * aggregated across index partitions.
    */
@@ -44,7 +44,7 @@ public class JoinStats implements Serializable {
   /** The index in the evaluation order whose statistics are reported here. */
   public final int orderIndex;
 
-  /**
+  /*
    * The maximum observed fan in for this join dimension (maximum #of sources observed writing on
    * any join task for this join dimension). Since join tasks may be closed and new join tasks
    * re-opened for the same query, join dimension and index partition, and since each join task for
@@ -53,7 +53,7 @@ public class JoinStats implements Serializable {
    */
   public int fanIn;
 
-  /**
+  /*
    * The maximum observed fan out for this join dimension (maximum #of sinks on which any join task
    * is writing for this join dimension). Since join tasks may be closed and new join tasks
    * re-opened for the same query, join dimension and index partition, and since each join task for
@@ -62,7 +62,7 @@ public class JoinStats implements Serializable {
    */
   public int fanOut;
 
-  /**
+  /*
    * The #of index partitions for which join tasks were created for this join dimension. This is
    * computed by explicitly tracking the distinct index partition identifiers reported for the join
    * dimension. This is the "real" fan out for the prior join dimension.
@@ -78,14 +78,14 @@ public class JoinStats implements Serializable {
   /** The #of binding sets read from all source {@link JoinTask}s. */
   public long bindingSetsIn;
 
-  /**
+  /*
    * The #of {@link IAccessPath}s read. This will differ from {@link #bindingSetIn} iff the same
    * {@link IBindingSet} is read from more than one source and the {@link JoinTask} is able to
    * recognize the duplication and collapse it by removing the duplicate(s).
    */
   public long accessPathCount;
 
-  /**
+  /*
    * The #of duplicate {@link IAccessPath}s that were eliminated by a {@link JoinTask}. Duplicate
    * {@link IAccessPath}s arise when the source {@link JoinTask}(s) generate the bindings on the
    * {@link IPredicate} for a join dimension. Duplicates are detected by a {@link JoinTask} when it
@@ -107,7 +107,7 @@ public class JoinStats implements Serializable {
   /** #of elements visited over all chunks. */
   public long elementCount;
 
-  /**
+  /*
    * The #of {@link IBindingSet}s written onto the next join dimension (aka the #of solutions
    * written iff this is the last join dimension).
    *
@@ -118,13 +118,13 @@ public class JoinStats implements Serializable {
    */
   public long bindingSetsOut;
 
-  /**
+  /*
    * The #of {@link IBindingSet} chunks written onto the next join dimension (aka the #of solutions
    * written iff this is the last join dimension in the evaluation order).
    */
   public long bindingSetChunksOut;
 
-  /**
+  /*
    * The mutationCount is the #of solutions output by a {@link JoinTask}(s) for the last join
    * dimension of a mutation operation that were not already present in the target relation. This
    * value is always zero (0L) for query.
@@ -139,7 +139,7 @@ public class JoinStats implements Serializable {
    */
   public AtomicLong mutationCount = new AtomicLong();
 
-  /**
+  /*
    * Ctor variant used by the {@link JoinMasterTask} to aggregate statistics across the index
    * partitions for a given join dimension.
    *
@@ -150,7 +150,7 @@ public class JoinStats implements Serializable {
     this(-1, orderIndex);
   }
 
-  /**
+  /*
    * Ctor variant used by a {@link JoinTask} to self-report.
    *
    * @param partitionId The index partition identifier.
@@ -255,7 +255,7 @@ public class JoinStats implements Serializable {
 
   private static final transient String sep = ", ";
 
-  /**
+  /*
    * Formats the array of {@link JoinStats} into a CSV table view.
    *
    * @param rule The {@link IRule} whose {@link JoinStats} are being reported.
@@ -294,24 +294,24 @@ public class JoinStats implements Serializable {
 
       sb.append(dateFormat.format(s.startTime).replace(sep, " ") + sep);
       sb.append(ruleNameStr + sep);
-      sb.append(Integer.toString(s.orderIndex) + sep);
+      sb.append(s.orderIndex + sep);
       //            sb.append(Integer.toString(s.partitionId)+sep); // always -1 when aggregated.
       sb.append(ruleState.getKeyOrder()[tailIndex].toString().replace(sep, " ") + sep);
       sb.append(ruleState.getNVars()[tailIndex] + sep);
       sb.append(ruleState.getPlan().rangeCount(tailIndex) + sep);
-      sb.append(Integer.toString(s.fanIn) + sep);
-      sb.append(Integer.toString(s.fanOut) + sep);
-      sb.append(Integer.toString(s.partitionCount) + sep);
-      sb.append(Long.toString(s.bindingSetChunksIn) + sep);
-      sb.append(Long.toString(s.bindingSetsIn) + sep);
-      sb.append(Long.toString(s.accessPathCount) + sep);
-      sb.append(Long.toString(s.accessPathDups) + sep);
-      sb.append(Long.toString(s.chunkCount) + sep);
-      sb.append(Long.toString(s.elementCount) + sep);
-      sb.append(Long.toString(s.bindingSetsOut) + sep);
-      sb.append(Long.toString(s.bindingSetChunksOut) + sep);
-      sb.append(Long.toString(s.mutationCount.get()) + sep);
-      sb.append(Integer.toString(tailIndex) + sep);
+      sb.append(s.fanIn + sep);
+      sb.append(s.fanOut + sep);
+      sb.append(s.partitionCount + sep);
+      sb.append(s.bindingSetChunksIn + sep);
+      sb.append(s.bindingSetsIn + sep);
+      sb.append(s.accessPathCount + sep);
+      sb.append(s.accessPathDups + sep);
+      sb.append(s.chunkCount + sep);
+      sb.append(s.elementCount + sep);
+      sb.append(s.bindingSetsOut + sep);
+      sb.append(s.bindingSetChunksOut + sep);
+      sb.append(s.mutationCount.get() + sep);
+      sb.append(tailIndex + sep);
       sb.append(rule.getTail(tailIndex).toString().replace(sep, " ") + "\n");
     }
 

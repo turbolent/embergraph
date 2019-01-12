@@ -26,14 +26,14 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.apache.log4j.Logger;
 
-/**
- * This class provides set of utilities for encoding and decoding HTTP headers and doubles as the
+/*
+* This class provides set of utilities for encoding and decoding HTTP headers and doubles as the
  * base class for all classes that implement support for a specific HTTP header, such as {@link
  * LinkHeader}, {@link AcceptHeader}, etc.
  */
 public class HTTPHeaderUtility {
 
-  /**
+  /*
    * The {@link Logger} for HTTP header operations, including parsing and serialization. The {@link
    * Logger} is named for this class. It should be used by all derived classes.
    */
@@ -62,14 +62,14 @@ public class HTTPHeaderUtility {
   //             | "/" | "[" | "]" | "?" | "="
   //             | "{" | "}" | SP | HT
 
-  /**
+  /*
    * Matches an HTTP <code>token</code>, which consists of one or more of any CHAR except <code>CTL
    * </code> or <code>separator</code>.
    */
   protected static final String httpTokenPattern =
       "[^\\p{Cntrl}\\(\\)<>@,;:\\\\\\\"/\\[\\]\\?=\\{\\}\\s\\x09]+";
 
-  /**
+  /*
    * The text for a {@link Pattern} matching an HTTP <code>quoted-string</code>.
    *
    * <p>From HTTP/1.1:
@@ -105,9 +105,8 @@ public class HTTPHeaderUtility {
 
     if (c >= 0 && c <= 31) return true;
 
-    if (c == 127) return true;
+    return c == 127;
 
-    return false;
   }
 
   /** Returns true iff the character is an HTTP <code>separator</code> character. */
@@ -139,7 +138,7 @@ public class HTTPHeaderUtility {
     return false;
   }
 
-  /**
+  /*
    * Matches an HTTP <code>token</code>, which consists of one or more of any CHAR except <code>CTL
    * </code> or <code>separator</code>.
    */
@@ -163,7 +162,7 @@ public class HTTPHeaderUtility {
     return true;
   }
 
-  /**
+  /*
    * The text for a {@link Pattern} matching an HTTP <code>quoted-string</code>.
    *
    * <p>From HTTP/1.1:
@@ -192,7 +191,7 @@ public class HTTPHeaderUtility {
    */
   protected static final String qs = "\\\"(?:\\\\\"|[^\\p{Cntrl}\\\"])*\\\"";
 
-  /**
+  /*
    * Pattern used to match the type/subtype of a MIME expression. The matched groups are numbered by
    * the opening parentheses in the pattern. The different matching groups are:
    *
@@ -205,7 +204,7 @@ public class HTTPHeaderUtility {
    */
   protected static Pattern m_p1 = null;
 
-  /**
+  /*
    * Pattern used to match the optional parameters of a MIME expression. The matched groups are
    * numbered by the opening parentheses in the pattern. The source for the pattern is the
    * parameters as identified by {@link #m_p1}. The different matching groups are:
@@ -242,15 +241,13 @@ public class HTTPHeaderUtility {
        * should not be propagated.
        */
 
-      AssertionError err = new AssertionError("Could not compile regex patterns.");
-
-      err.initCause(ex);
+      AssertionError err = new AssertionError("Could not compile regex patterns.", ex);
 
       throw err;
     }
   }
 
-  /**
+  /*
    * Returns the MIME type parameter value as either an HTTP <code>token</code> or HTTP <code>
    * quoted-string</code> depending on whether or not it contains any characters that need to be
    * escaped.
@@ -282,7 +279,7 @@ public class HTTPHeaderUtility {
     return (didEscape || force) ? "\"" + sb.toString() + "\"" : sb.toString();
   }
 
-  /**
+  /*
    * If the value is an HTTP <code>quoted-string</code> then we strip of the quote characters now
    * and translate any escaped characters into themselves, e.g., '\"' => '"'. Otherwise returns
    * <i>value</i>.
@@ -350,7 +347,7 @@ public class HTTPHeaderUtility {
     return sb.toString();
   }
 
-  /**
+  /*
    * HTTP permits headers whose grammar is a comma delimited list to be specified multiple times in
    * an HTTP request. This method propertly combines the specified values need into a {@link String}
    * containing a comma-delimited list that preserves the order in which the header values were

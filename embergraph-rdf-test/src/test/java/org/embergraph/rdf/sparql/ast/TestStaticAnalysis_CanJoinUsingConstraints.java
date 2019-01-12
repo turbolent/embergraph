@@ -31,8 +31,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 
-/**
- * This test suite is built around around BSBM Q5. Each test has an existing join path and a new
+/*
+* This test suite is built around around BSBM Q5. Each test has an existing join path and a new
  * vertex to be added to the join path. The question is whether or not the vertex <em>can join</em>
  * with the join path using one or more shared variable(s). This tests a method used to
  * incrementally grow a join path when it is dynamically decided that an {@link IJoinNode} may be
@@ -78,7 +78,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends AbstractASTEvalu
     return TermId.mockIV(VTE.URI);
   }
 
-  /**
+  /*
    * Unit tests to verify that arguments are validated.
    *
    * @see StaticAnalysis#canJoinUsingConstraints(IJoinNode[], IJoinNode, FilterNode[])
@@ -190,8 +190,8 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends AbstractASTEvalu
         assertTrue(sa.canJoin(t0, t1));
         assertTrue(sa.canJoin(t1, t0));
         if (t0 != t1) {
-          /*
-           * Test join path extension, but not when the vertex used to
+        /*
+       * Test join path extension, but not when the vertex used to
            * extend the path is already present in the join path.
            */
           assertTrue(
@@ -273,7 +273,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends AbstractASTEvalu
             ));
   }
 
-  /**
+  /*
    * Unit test examines the predicates without shared variables and verifies (a) that joins are not
    * permitted when the constraints are not considered; and (b) that joins are permitted when the
    * constraints are considered.
@@ -342,7 +342,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends AbstractASTEvalu
             ));
   }
 
-  /**
+  /*
    * Unit test examines the predicates without shared variables and verifies (a) that joins are not
    * permitted when the constraints are not considered; and (b) that joins are permitted when the
    * constraints are considered.
@@ -499,7 +499,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends AbstractASTEvalu
     assertSameConstraints(expected, actual);
   }
 
-  /**
+  /*
    * <code>[5  6  0  2  1  4 3]</code>.
    *
    * <p>FIXME The above join path produces a false ZERO result for the query and all of the join
@@ -546,7 +546,7 @@ public class TestStaticAnalysis_CanJoinUsingConstraints extends AbstractASTEvalu
     assertSameConstraints(expected, actual);
   }
 
-  /**
+  /*
    * Verifies that the right set of constraints is attached at each of the vertices of a join path.
    * Comparison of {@link FilterNode} instances is by reference.
    *

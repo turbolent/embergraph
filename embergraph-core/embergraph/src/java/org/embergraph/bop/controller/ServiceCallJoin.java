@@ -69,8 +69,8 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.LatchedExecutor;
 import org.openrdf.query.BindingSet;
 
-/**
- * Vectored pipeline join of the source solution(s) with solutions from a a SERVICE invocation. This
+/*
+* Vectored pipeline join of the source solution(s) with solutions from a a SERVICE invocation. This
  * operator may be used to invoke: (a) internal, embergraph-aware services; (b) internal openrdf
  * aware services; and (c) remote services.
  *
@@ -99,14 +99,14 @@ public class ServiceCallJoin extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * Optional constraints to be applied to each solution.
      *
      * @see JoinAnnotations#CONSTRAINTS
      */
     String CONSTRAINTS = JoinAnnotations.CONSTRAINTS;
 
-    /**
+    /*
      * The {@link ServiceNode} modeling the SERVICE clause to be invoked.
      *
      * <p>Note: This presence of the {@link ServiceNode} as an attribute on the {@link
@@ -118,7 +118,7 @@ public class ServiceCallJoin extends PipelineOp {
      */
     String SERVICE_NODE = ServiceCallJoin.class.getName() + ".serviceNode";
 
-    /**
+    /*
      * The namespace of the {@link AbstractTripleStore} instance (not the namespace of the lexicon
      * relation). This resource will be located and made available to the {@link ServiceCall}.
      */
@@ -127,7 +127,7 @@ public class ServiceCallJoin extends PipelineOp {
     /** The timestamp of the {@link AbstractTripleStore} view to be located. */
     String TIMESTAMP = ServiceCallJoin.class.getName() + ".timestamp";
 
-    /**
+    /*
      * The join variables. This is used to establish a correlation between the solutions vectored
      * into the SERVICE call and the solutions flowing out of the SERVICE call.
      *
@@ -141,7 +141,7 @@ public class ServiceCallJoin extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -178,7 +178,7 @@ public class ServiceCallJoin extends PipelineOp {
     return new BaseJoinStats();
   }
 
-  /**
+  /*
    * Evaluates the {@link ServiceCall} for each source binding set. If the outer operator is
    * interrupted, then the {@link ServiceCall} is cancelled (by closing its iterator). If a {@link
    * ServiceCall} fails, then that error is propagated back to the outer operator.
@@ -269,10 +269,10 @@ public class ServiceCallJoin extends PipelineOp {
         doServiceCallWithExpression();
       }
 
-      return (Void) null;
+      return null;
     }
 
-    /**
+    /*
      * The value expression for the SERVICE reference is a constant (fast path).
      *
      * @throws Exception
@@ -329,7 +329,7 @@ public class ServiceCallJoin extends PipelineOp {
       }
     }
 
-    /**
+    /*
      * The SERVICE reference value expression is not a constant.
      *
      * <p>We need to evaluate the value expression for each source solution and group the solutions
@@ -373,8 +373,8 @@ public class ServiceCallJoin extends PipelineOp {
             serviceCallChunk.addSourceSolution(bset);
           }
 
-          /*
-           * Submit vectored service calls to each target service in
+        /*
+       * Submit vectored service calls to each target service in
            * parallel.
            *
            * Note: Parallelism evaluation of multiple services can
@@ -420,8 +420,8 @@ public class ServiceCallJoin extends PipelineOp {
 
             for (FutureTask<Void> ft : tasks) {
 
-              /*
-               * Each service request is faced with the same
+            /*
+       * Each service request is faced with the same
                * timeout.
                */
 
@@ -461,7 +461,7 @@ public class ServiceCallJoin extends PipelineOp {
       }
     }
 
-    /**
+    /*
      * Return a {@link ServiceCall} which may be used to talk to a service at that URI.
      *
      * @param serviceURI The service URI.
@@ -479,7 +479,7 @@ public class ServiceCallJoin extends PipelineOp {
     /** Invoke a SERVICE. */
     private class ServiceCallTask implements Callable<Void> {
 
-      /**
+      /*
        * The source binding set. This will be copied to the output if there are no solutions for the
        * subquery (optional join semantics).
        */
@@ -527,8 +527,8 @@ public class ServiceCallJoin extends PipelineOp {
         ICloseableIterator<IBindingSet[]> serviceSolutionItr = null;
         try {
 
-          /*
-           * Invoke the service.
+        /*
+       * Invoke the service.
            *
            * Note: Returns [null] IFF SILENT and SERVICE ERROR.
            */
@@ -537,8 +537,8 @@ public class ServiceCallJoin extends PipelineOp {
 
           if (serviceSolutionItr != null) {
 
-            /*
-             * Do a hash join of the source solutions with the
+          /*
+       * Do a hash join of the source solutions with the
              * solutions from the service, outputting any solutions
              * which join.
              *
@@ -554,8 +554,8 @@ public class ServiceCallJoin extends PipelineOp {
           if (serviceSolutionItr != null) serviceSolutionItr.close();
         }
 
-        /*
-         * Note: This only handles Normal and Optional. Normal is used
+      /*
+       * Note: This only handles Normal and Optional. Normal is used
          * unless the SERVICE is SILENT.
          *
          * The semantics of SILENT are that it returns an "empty"
@@ -589,7 +589,7 @@ public class ServiceCallJoin extends PipelineOp {
         return null;
       }
 
-      /**
+      /*
        * Invoke the SERVICE.
        *
        * @param serviceCall
@@ -637,8 +637,8 @@ public class ServiceCallJoin extends PipelineOp {
         } catch (Throwable t) {
 
           if (silent && !InnerCause.isInnerCause(t, InterruptedException.class)) {
-            /*
-             * If the SILENT attribute was specified, then do not
+          /*
+       * If the SILENT attribute was specified, then do not
              * halt the query if there is an error.
              *
              * Note: The query must still be interruptable so we do
@@ -657,33 +657,33 @@ public class ServiceCallJoin extends PipelineOp {
 
       /** Evaluate a embergraph aware "service" call in the same JVM. */
       private ICloseableIterator<IBindingSet> doEmbergraphServiceCall(
-          final EmbergraphServiceCall serviceCall, final IBindingSet left[]) throws Exception {
+          final EmbergraphServiceCall serviceCall, final IBindingSet[] left) throws Exception {
 
         return serviceCall.call(left);
       }
 
       /** Evaluate an openrdf "service" call in the same JVM. */
       private ICloseableIterator<IBindingSet> doExternalMockIVServiceCall(
-          final MockIVReturningServiceCall serviceCall, final IBindingSet left[]) throws Exception {
+          final MockIVReturningServiceCall serviceCall, final IBindingSet[] left) throws Exception {
 
         return doNonEmbergraphMockIVServiceCall(serviceCall, left);
       }
 
       /** Evaluate an generic service producing mock IVs. */
       private ICloseableIterator<IBindingSet> doExternalServiceCall(
-          final ExternalServiceCall serviceCall, final IBindingSet left[]) throws Exception {
+          final ExternalServiceCall serviceCall, final IBindingSet[] left) throws Exception {
 
         return doNonEmbergraphSesameServiceCall(serviceCall, left);
       }
 
       /** Evaluate an remote SPARQL service call. */
       private ICloseableIterator<IBindingSet> doRemoteServiceCall(
-          final RemoteServiceCall serviceCall, final IBindingSet left[]) throws Exception {
+          final RemoteServiceCall serviceCall, final IBindingSet[] left) throws Exception {
 
         return doNonEmbergraphSesameServiceCall(serviceCall, left);
       }
 
-      /**
+      /*
        * The "openrdf" internal and REMOTE SPARQL invocations look the same at this abstraction. The
        * differences are hidden in the {@link ServiceCall} objects.
        *
@@ -692,15 +692,15 @@ public class ServiceCallJoin extends PipelineOp {
        * @return The solutions.
        */
       private ICloseableIterator<IBindingSet> doNonEmbergraphSesameServiceCall(
-          final ServiceCall<BindingSet> serviceCall, final IBindingSet left[]) throws Exception {
+          final ServiceCall<BindingSet> serviceCall, final IBindingSet[] left) throws Exception {
 
         final LexiconRelation lex = db.getLexiconRelation();
 
         // Convert IBindingSet[] to openrdf BindingSet[].
         final BindingSet[] left2 = ServiceCallUtility.convert(lex, projectedVars, left);
 
-        /*
-         * Note: This operation is "at-once" over the service solutions.
+      /*
+       * Note: This operation is "at-once" over the service solutions.
          * It could be turned into a "chunked" operator over those
          * solutions. That would make sense if the service was capable
          * of delivering a very large number of solutions.
@@ -721,8 +721,8 @@ public class ServiceCallJoin extends PipelineOp {
           if (results != null) results.close();
         }
 
-        /*
-         * Batch resolve EmbergraphValues to IVs. This is necessary in
+      /*
+       * Batch resolve EmbergraphValues to IVs. This is necessary in
          * order to have subsequent JOINs succeed when they join on
          * variables which are bound to terms which are in the
          * lexicon.
@@ -737,7 +737,7 @@ public class ServiceCallJoin extends PipelineOp {
         return new ChunkedArrayIterator<IBindingSet>(embergraphSolutionChunk);
       }
 
-      /**
+      /*
        * Service call against a (non sesame based) external endpoint.
        *
        * @param serviceCall The object which will make the service call.
@@ -745,10 +745,10 @@ public class ServiceCallJoin extends PipelineOp {
        * @return The solutions.
        */
       private ICloseableIterator<IBindingSet> doNonEmbergraphMockIVServiceCall(
-          final ServiceCall<IBindingSet> serviceCall, final IBindingSet left[]) throws Exception {
+          final ServiceCall<IBindingSet> serviceCall, final IBindingSet[] left) throws Exception {
 
-        /**
-         * Note: a MockTermResolverOp will be wrapped around this service in
+      /*
+       * Note: a MockTermResolverOp will be wrapped around this service in
          * AST2BopUtitlity.addService(), so we don't need to care about dictionary resolving mocked
          * URIs here, but just call the service.
          */

@@ -123,8 +123,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * The {@link LexiconRelation} handles all things related to the indices mapping external RDF {@link
+/*
+* The {@link LexiconRelation} handles all things related to the indices mapping external RDF {@link
  * Value}s onto {@link IV}s (internal values)s and provides methods for efficient materialization of
  * external RDF {@link Value}s from {@link IV}s.
  *
@@ -305,7 +305,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return (Class<IInlineURIFactory>) cls;
   }
 
-  /**
+  /*
    * Note: The term:id and id:term indices MUST use unisolated write operation to ensure consistency
    * without write-write conflicts. The only exception would be a read-historical view.
    *
@@ -340,8 +340,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
                   AbstractTripleStore.Options.DEFAULT_TEXT_INDEX));
 
       if (textIndex) {
-        /*
-         * Explicitly disable overwrite for the full text index associated
+      /*
+       * Explicitly disable overwrite for the full text index associated
          * with the lexicon. By default, the full text index will replace
          * the existing tuple for a key. We turn this property off because
          * the RDF values are immutable as is the mapping from an RDF value
@@ -385,7 +385,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
                   AbstractTripleStore.Options.BLOBS_THRESHOLD,
                   AbstractTripleStore.Options.DEFAULT_BLOBS_THRESHOLD));
 
-      /**
+      /*
        * Note: Integer.MAX_VALUE disables the BLOBS index.
        *
        * @see <a href="https://github.com/SYSTAP/bigdata-gpu/issues/25">Disable BLOBS indexing
@@ -502,8 +502,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
       if (commitTime != null && TimestampUtility.isReadOnly(timestamp)) {
 
-        /*
-         * Shared for read-only views from sample commit time. Sharing
+      /*
+       * Shared for read-only views from sample commit time. Sharing
          * allows us to reuse the same instances of the term cache for
          * queries reading from the same commit point. The cache size is
          * automatically increased to take advantage of the fact that it
@@ -519,8 +519,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
       } else {
 
-        /*
-         * Unshared for any other view of the triple store.
+      /*
+       * Unshared for any other view of the triple store.
          */
         termCache =
             new TermCache<IV<?, ?>, EmbergraphValue>(
@@ -598,8 +598,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
       final IExtensionFactory xFactory;
       try {
 
-        /*
-         * Setup the extension factory.
+      /*
+       * Setup the extension factory.
          */
         final Class<IExtensionFactory> xfc = determineExtensionFactoryClass();
 
@@ -614,8 +614,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
       final IInlineURIFactory uriFactory;
       try {
 
-        /*
-         * Setup the inline URI factory.
+      /*
+       * Setup the inline URI factory.
          */
         final Class<IInlineURIFactory> urifc = determineInlineURIFactoryClass();
 
@@ -652,7 +652,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
   }
 
-  /**
+  /*
    * The canonical {@link EmbergraphValueFactoryImpl} reference (JVM wide) for the lexicon
    * namespace.
    */
@@ -704,8 +704,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
       super.create();
 
       if (textIndex && inlineTextLiterals && maxInlineTextLength > (4 * Bytes.kilobyte32)) {
-        /*
-         * Log message if full text index is enabled and we are inlining
+      /*
+       * Log message if full text index is enabled and we are inlining
          * textual literals and MAX_INLINE_TEXT_LENGTH is GT some
          * threshold value (e.g., 4096). This combination represents an
          * unreasonable configuration due to the data duplication in the
@@ -822,14 +822,14 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
   /** The reference to the TERMS index. */
   private volatile IIndex blobs;
 
-  /**
+  /*
    * When <code>true</code> a full text index is maintained.
    *
    * @see AbstractTripleStore.Options#TEXT_INDEX
    */
   private boolean textIndex;
 
-  /**
+  /*
    * When <code>true</code> a secondary subject-centric full text index is maintained.
    *
    * @see AbstractTripleStore.Options#SUBJECT_CENTRIC_TEXT_INDEX
@@ -837,15 +837,15 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
    */
   @Deprecated private final boolean subjectCentricTextIndex;
 
-  /**
+  /*
    * When <code>true</code> the kb is using told blank nodes semantics.
    *
    * @see AbstractTripleStore.Options#STORE_BLANK_NODES
    */
   private final boolean storeBlankNodes;
 
-  //    /**
-  //     * The maximum character length of an RDF {@link Value} before it will be
+  //    /*
+//     * The maximum character length of an RDF {@link Value} before it will be
   //     * inserted into the {@link LexiconKeyOrder#BLOBS} index rather than the
   //     * {@link LexiconKeyOrder#TERM2ID} and {@link LexiconKeyOrder#ID2TERM}
   //     * indices.
@@ -857,41 +857,41 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
   /** @see AbstractTripleStore.Options#TERMID_BITS_TO_REVERSE */
   private final int termIdBitsToReverse;
 
-  /**
+  /*
    * Are xsd datatype primitive and numeric literals being inlined into the statement indices.
    *
    * <p>{@link AbstractTripleStore.Options#INLINE_XSD_DATATYPE_LITERALS}
    */
   private final boolean inlineLiterals;
 
-  /**
+  /*
    * Are textual literals being inlined into the statement indices.
    *
    * <p>{@link AbstractTripleStore.Options#INLINE_TEXT_LITERALS}
    */
   private final boolean inlineTextLiterals;
 
-  /**
+  /*
    * The maximum length of <code>xsd:string</code> literals which will be inlined into the statement
    * indices. The {@link XSDStringExtension} is registered when GT ZERO.
    */
   private final int maxInlineTextLength;
 
-  /**
+  /*
    * Are bnodes being inlined into the statement indices.
    *
    * <p>{@link AbstractTripleStore.Options#INLINE_BNODES}
    */
   private final boolean inlineBNodes;
 
-  /**
+  /*
    * Are xsd:dateTime literals being inlined into the statement indices.
    *
    * <p>{@link AbstractTripleStore.Options#INLINE_DATE_TIMES}
    */
   private final boolean inlineDateTimes;
 
-  /**
+  /*
    * When <code>true</code>, XSD datatype literals which do not validate against their datatype will
    * be rejected rather than inlined.
    *
@@ -899,13 +899,13 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
    */
   private final boolean rejectInvalidXSDValues;
 
-  /**
+  /*
    * When <code>false</code>, raw records will not be used to store the lexical forms of the RDF
    * Values {@link AbstractTripleStore.Options#ENABLE_RAW_RECORDS_SUPPORT}.
    */
   private final boolean enableRawRecordsSupport;
 
-  /**
+  /*
    * The default time zone to be used for decoding inline xsd:datetime literals from the statement
    * indices. Will use the current timezeon unless otherwise specified using {@link
    * AbstractTripleStore.Options#DEFAULT_INLINE_DATE_TIMES_TIMEZONE}.
@@ -924,7 +924,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return maxInlineTextLength;
   }
 
-  /**
+  /*
    * Return <code>true</code> if xsd:datetime literals are being inlined into the statement indices.
    */
   public final boolean isInlineDateTimes() {
@@ -938,7 +938,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return inlineDateTimesTimeZone;
   }
 
-  /**
+  /*
    * The #of low bits from the term identifier that are reversed and rotated into the high bits when
    * it is assigned.
    *
@@ -949,7 +949,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return termIdBitsToReverse;
   }
 
-  /**
+  /*
    * <code>true</code> iff blank nodes are being stored in the lexicon's forward index.
    *
    * @see AbstractTripleStore.Options#STORE_BLANK_NODES
@@ -959,7 +959,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return storeBlankNodes;
   }
 
-  /**
+  /*
    * <code>true</code> iff the (value centric) full text index is enabled.
    *
    * @see AbstractTripleStore.Options#TEXT_INDEX
@@ -969,7 +969,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return textIndex;
   }
 
-  /**
+  /*
    * <code>true</code> iff the subject-centric full text index is enabled.
    *
    * @see AbstractTripleStore.Options#SUBJECT_CENTRIC_TEXT_INDEX
@@ -1013,8 +1013,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
           final long timestamp = getTimestamp();
 
           if (TimestampUtility.isReadWriteTx(timestamp)) {
-            /*
-             * We always use the unisolated view of the lexicon
+          /*
+       * We always use the unisolated view of the lexicon
              * indices for mutation and the lexicon indices do NOT
              * set the [isolatable] flag even if the kb supports
              * full tx isolation. This is because we use an
@@ -1051,8 +1051,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
           final long timestamp = getTimestamp();
 
           if (TimestampUtility.isReadWriteTx(timestamp)) {
-            /*
-             * We always use the unisolated view of the lexicon
+          /*
+       * We always use the unisolated view of the lexicon
              * indices for mutation and the lexicon indices do NOT
              * set the [isolatable] flag even if the kb supports
              * full tx isolation. This is because we use an
@@ -1089,8 +1089,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
           final long timestamp = getTimestamp();
 
           if (TimestampUtility.isReadWriteTx(timestamp)) {
-            /*
-             * We always use the unisolated view of the lexicon
+          /*
+       * We always use the unisolated view of the lexicon
              * indices for mutation and the lexicon indices do NOT
              * set the [isolatable] flag even if the kb supports
              * full tx isolation. This is because we use an
@@ -1117,7 +1117,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return blobs;
   }
 
-  /**
+  /*
    * A factory returning the softly held singleton for the {@link FullTextIndex}.
    *
    * @see AbstractTripleStore.Options#TEXT_INDEX
@@ -1166,7 +1166,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return viewRef.get();
   }
 
-  /**
+  /*
    * A factory returning the softly held singleton for the {@link FullTextIndex} representing the
    * subject-centric full text index.
    *
@@ -1217,7 +1217,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return viewRef2.get();
   }
 
-  /**
+  /*
    * Return the {@link IndexMetadata} for the TERM2ID index.
    *
    * @param name The name of the index.
@@ -1232,7 +1232,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return metadata;
   }
 
-  /**
+  /*
    * Return the {@link IndexMetadata} for the ID2TERM index.
    *
    * @param name The name of the index.
@@ -1275,7 +1275,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return metadata;
   }
 
-  /**
+  /*
    * Return the {@link IndexMetadata} for the TERMS index.
    *
    * @param name The name of the index.
@@ -1328,7 +1328,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return LexiconKeyOrder.BLOBS;
   }
 
-  /**
+  /*
    * Note : this method is part of the mutation api. it is primarily (at this point, only) invoked
    * by the rule execution layer and, at present, no rules can entail terms into the lexicon.
    *
@@ -1344,7 +1344,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return EmbergraphValue.class;
   }
 
-  /**
+  /*
    * Note : this method is part of the mutation api. it is primarily (at this point, only) invoked
    * by the rule execution layer and, at present, no rules can entail terms into the lexicon.
    *
@@ -1355,7 +1355,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Note : this method is part of the mutation api. it is primarily (at this point, only) invoked
    * by the rule execution layer and, at present, no rules can entail terms into the lexicon.
    *
@@ -1366,7 +1366,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * A scan of all literals having the given literal as a prefix.
    *
    * @param lit A literal.
@@ -1384,7 +1384,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return prefixScan(new Literal[] {lit});
   }
 
-  /**
+  /*
    * A scan of all literals having any of the given literals as a prefix.
    *
    * @param lits An array of literals.
@@ -1404,7 +1404,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
       log.info("#lits=" + lits.length);
     }
 
-    /**
+    /*
      * The KeyBuilder used to form the prefix keys.
      *
      * <p>Note: The prefix keys are formed with PRIMARY strength. This is necessary in order to
@@ -1480,7 +1480,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return termIdIterator;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see IDatatypeURIResolver
@@ -1529,7 +1529,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
   }
 
-  /**
+  /*
    * Return <code>true</code> iff this {@link Value} would be stored in the {@link
    * LexiconKeyOrder#BLOBS} index.
    *
@@ -1560,8 +1560,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return false;
   }
 
-  //    /**
-  //     * Return the threshold at which a literal would be stored in the
+  //    /*
+//     * Return the threshold at which a literal would be stored in the
   //     * {@link LexiconKeyOrder#BLOBS} index.
   //     *
   //     * @see AbstractTripleStore.Options#BLOBS_THRESHOLD
@@ -1572,7 +1572,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
   //
   //    }
 
-  /**
+  /*
    * Batch insert of terms into the database.
    *
    * <p>Note: Duplicate {@link EmbergraphValue} references and {@link EmbergraphValue}s that already
@@ -1611,8 +1611,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
       for (int i = 0; i < numTerms; i++) {
         final EmbergraphValue tmp = vf.asValue(values[i]);
         if (tmp != values[i]) {
-          /*
-           * Note: When the EmbergraphValue does not belong to this
+        /*
+       * Note: When the EmbergraphValue does not belong to this
            * namespace the IV can not be set on the EmbergraphValue as a
            * side-effect.
            */
@@ -1658,8 +1658,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
       if (getInlineIV(v) == null) {
 
-        /*
-         * Value can not be inlined. We need to figure out which index
+      /*
+       * Value can not be inlined. We need to figure out which index
          * we need to use for this Value.
          *
          * Note: This also identifies duplicates (whether they are the
@@ -1690,8 +1690,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
       } else if (!readOnly && this.textIndex && v instanceof EmbergraphLiteral) {
 
-        /*
-         * Some inline IVs will be text indexed per the
+      /*
+       * Some inline IVs will be text indexed per the
          * LexiconConfiguration.
          */
         final URI dt = ((EmbergraphLiteral) v).getDatatype();
@@ -1831,8 +1831,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
       final long _begin = System.currentTimeMillis();
 
       try {
-        /*
-         * Note: a[] is in BLOBS index order at this point and can
+      /*
+       * Note: a[] is in BLOBS index order at this point and can
          * contain both duplicates and terms that already have term
          * identifiers and therefore are already in the index.
          *
@@ -1910,8 +1910,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
       {
 
-        /*
-         * Sort terms based on their assigned termId (when interpreted
+      /*
+       * Sort terms based on their assigned termId (when interpreted
          * as unsigned long integers).
          *
          * Note: We sort before the index writes since we will co-thread
@@ -1940,8 +1940,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
         if (textIndex) {
 
-          /*
-           * Note: terms[] is in termId order at this point and can
+        /*
+       * Note: terms[] is in termId order at this point and can
            * contain both duplicates and terms that already have term
            * identifiers and therefore are already in the index.
            *
@@ -1968,8 +1968,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
           tasks.add(new FullTextIndexWriterTask(getSearchEngine(), ndistinct /* capacity */, itr));
         }
 
-        /*
-         * Co-thread the reverse index writes and the search index
+      /*
+       * Co-thread the reverse index writes and the search index
          * writes.
          */
         try {
@@ -1992,7 +1992,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
   }
 
-  /**
+  /*
    * Utility method to (re-)build the full text index. This is a high latency operation for a
    * database of any significant size. You must be using the unisolated view of the {@link
    * AbstractTripleStore} for this operation. {@link AbstractTripleStore.Options#TEXT_INDEX} must be
@@ -2079,10 +2079,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
                         protected boolean isValid(final ITuple<EmbergraphValue> obj) {
                           @SuppressWarnings("rawtypes")
                           final IV iv = (IV) tupSer.deserializeKey(obj);
-                          if (iv != null && iv.isLiteral()) {
-                            return true;
-                          }
-                          return false;
+                          return iv != null && iv.isLiteral();
                         }
                       }))
               .addFilter(
@@ -2132,10 +2129,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
                         protected boolean isValid(final ITuple<EmbergraphValue> obj) {
                           @SuppressWarnings("rawtypes")
                           final IV iv = (IV) tupSer.deserializeKey(obj);
-                          if (iv != null && iv.isLiteral()) {
-                            return true;
-                          }
-                          return false;
+                          return iv != null && iv.isLiteral();
                         }
                       }))
               .addFilter(
@@ -2182,7 +2176,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     global.write(RelationSchema.INSTANCE, map);
   }
 
-  /**
+  /*
    * Batch resolution of internal values to {@link EmbergraphValue}s.
    *
    * @param ivs An collection of internal values
@@ -2204,7 +2198,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return getTerms(ivs, 4000 /* termsChunkSize */, 4000 /* blobsChunkSize */);
   }
 
-  /**
+  /*
    * Utility method to (re-)build the subject-based full text index. This is a high latency
    * operation for a database of any significant size. You must be using the unisolated view of the
    * {@link AbstractTripleStore} for this operation. {@link AbstractTripleStore.Options#TEXT_INDEX}
@@ -2305,10 +2299,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
                         protected boolean isValid(final ITuple<ISPO> obj) {
                           final ISPO spo = (ISPO) tupSer.deserializeKey(obj);
-                          if (spo.o().isLiteral()) {
-                            return true;
-                          }
-                          return false;
+                          return spo.o().isLiteral();
                         }
                       }))
               .addFilter(
@@ -2487,7 +2478,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
   //
   //    }
 
-  /**
+  /*
    * Batch resolution of internal values to {@link EmbergraphValue}s.
    *
    * @param ivs An collection of internal values
@@ -2715,7 +2706,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return ret;
   }
 
-  /**
+  /*
    * Add the terms inside a SID to the collection of IVs to materialize if they are not already
    * there.
    */
@@ -2737,7 +2728,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
   }
 
-  /**
+  /*
    * Add the terms inside a SID to the collection of IVs to materialize if they are not already
    * there.
    */
@@ -2760,7 +2751,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
   }
 
-  /**
+  /*
    * We need to cache the EmbergraphValues on the IV components within the SidIV so that the SidIV
    * can materialize itself into a EmbergraphBNode properly.
    */
@@ -2781,7 +2772,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
   }
 
-  /**
+  /*
    * We need to cache the EmbergraphValues on the IV components within the SidIV so that the SidIV
    * can materialize itself into a EmbergraphBNode properly.
    */
@@ -2798,7 +2789,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
   }
 
-  /**
+  /*
    * Recently resolved term identifiers are cached to improve performance when externalizing
    * statements.
    *
@@ -2846,13 +2837,13 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
   /** The {@link Vocabulary} implementation class. */
   private final Vocabulary vocab;
 
-  /**
+  /*
    * The {@link ILexiconConfiguration} instance, which will determine how terms are encoded and
    * decoded in the key space.
    */
   private final ILexiconConfiguration<EmbergraphValue> lexiconConfiguration;
 
-  /**
+  /*
    * Constant for the {@link LexiconRelation} namespace component.
    *
    * <p>Note: To obtain the fully qualified name of an index in the {@link LexiconRelation} you need
@@ -2863,7 +2854,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
    */
   public static final transient String NAME_LEXICON_RELATION = "lex";
 
-  /**
+  /*
    * Handles non-inline {@link IV}s by synthesizing a {@link EmbergraphBNode} using {@link
    * IV#bnodeId()} (iff told bnodes support is enabled and the {@link IV} represents a blank node)
    * and testing the {@link #termCache term cache} otherwise.
@@ -2910,7 +2901,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return termCache.get(iv);
   }
 
-  /**
+  /*
    * Note: {@link BNode}s are not stored in the reverse lexicon and are recognized using {@link
    * AbstractTripleStore#isBNode(long)}.
    *
@@ -2937,7 +2928,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return getValue(iv, true);
   }
 
-  /**
+  /*
    * When readFromIndex=false, only handles inline, NULL, bnodes, SIDs, and the termCache - does not
    * attempt to read from disk.
    *
@@ -3039,7 +3030,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return value;
   }
 
-  /**
+  /*
    * <strong>WARNING DO NOT USE OUTSIDE OF THE UNIT TESTS: </strong> This method is extremely
    * inefficient for scale-out as it does one RMI per request!
    *
@@ -3072,7 +3063,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return iv;
   }
 
-  /**
+  /*
    * Attempt to convert the value to an inline internal value. If the caller provides a {@link
    * EmbergraphValue} and this method is successful, then the {@link IV} will be set as a
    * side-effect on the {@link EmbergraphValue}.
@@ -3087,7 +3078,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return getLexiconConfiguration().createInlineIV(value);
   }
 
-  /**
+  /*
    * This method assumes we've already exhausted all other possibilities and need to go to the index
    * for the {@link IV}. It is "optimized" for the lookup of a single {@link Value}. Note, however,
    * that single value lookup is NOT efficient. {@link #getTerms(Collection)} SHOULD be used for
@@ -3109,7 +3100,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return getTermIV(value);
   }
 
-  /**
+  /*
    * <strong>WARNING DO NOT USE OUTSIDE OF THE UNIT TESTS OR CAREFULLY VETTED CODE: </strong> This
    * method is extremely inefficient for scale-out as it does one RMI per request!
    *
@@ -3167,7 +3158,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return iv;
   }
 
-  /**
+  /*
    * <strong>WARNING DO NOT USE OUTSIDE OF THE UNIT TESTS OR CAREFULLY VETTED CODE: </strong> This
    * method is extremely inefficient for scale-out as it does one RMI per request!
    */
@@ -3231,7 +3222,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return iv;
   }
 
-  /**
+  /*
    * Visits all RDF {@link Value}s in the {@link LexiconKeyOrder#BLOBS} index in {@link BlobIV}
    * order (efficient index scan).
    */
@@ -3254,7 +3245,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
             });
   }
 
-  /**
+  /*
    * Return the {@link #lexiconConfiguration} instance. Used to determine how to encode and decode
    * terms in the key space.
    */
@@ -3263,7 +3254,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     return lexiconConfiguration;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation examines the predicate, looking at the {@link LexiconKeyOrder#SLOT_IV}
@@ -3320,7 +3311,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     throw new UnsupportedOperationException(p.toString());
   }
 
-  /**
+  /*
    * Necessary for lexicon joins, which are injected into query plans as necessary by the query
    * planner. You can use a {@link LexPredicate} to perform either a forward ({@link
    * EmbergraphValue} to {@link IV}) or reverse ( {@link IV} to {@link EmbergraphValue}) lookup.
@@ -3378,8 +3369,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     switch (accessPattern) {
       case FullyBound:
         {
-          /*
-           * Special case first verifies that the IV and Value are consistent
+        /*
+       * Special case first verifies that the IV and Value are consistent
            * and then falls through to IVBound, which is a point lookup
            * against the TERMS index.
            */
@@ -3391,8 +3382,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
           if (VTE.valueOf(val) != iv.getVTE()) {
 
-            /*
-             * The VTE is not consistent so the access path is provably
+          /*
+       * The VTE is not consistent so the access path is provably
              * empty.
              */
 
@@ -3401,16 +3392,16 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
           if (val.hashCode() != iv.hashCode()) {
 
-            /*
-             * The hashCode is not consistent so the access path is
+          /*
+       * The hashCode is not consistent so the access path is
              * provably empty.
              */
 
             return new EmptyAccessPath<EmbergraphValue>();
           }
 
-          /*
-           * Fall through.
+        /*
+       * Fall through.
            */
 
         }
@@ -3444,8 +3435,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
 
           if (!storeBlankNodes && iv.isBNode()) {
 
-            /*
-             * Blank nodes do not unify with themselves unless you are using
+          /*
+       * Blank nodes do not unify with themselves unless you are using
              * told blank nodes semantics.
              */
 
@@ -3501,8 +3492,8 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
         }
       case NoneBound:
         {
-          /*
-           * TODO Could be supported. This is a full index scan on both the
+        /*
+       * TODO Could be supported. This is a full index scan on both the
            * IV2TERM and BLOBS indices.
            */
         }

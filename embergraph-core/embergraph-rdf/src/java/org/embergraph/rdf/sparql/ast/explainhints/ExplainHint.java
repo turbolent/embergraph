@@ -22,8 +22,8 @@ package org.embergraph.rdf.sparql.ast.explainhints;
 
 import org.embergraph.bop.BOp;
 
-/**
- * Abstract base class for explain hints, providing a common base implementations, to be reused in
+/*
+* Abstract base class for explain hints, providing a common base implementations, to be reused in
  * concrete subclasses.
  *
  * @author <a href="ms@metaphacts.com">Michael Schmidt</a>
@@ -31,7 +31,7 @@ import org.embergraph.bop.BOp;
  */
 public abstract class ExplainHint implements IExplainHint {
 
-  /**
+  /*
    * By default, the links are composed according to the following scheme: a link to the Wiki's
    * Explain summary page, where we have a subsection named according to the {@link
    * #getExplainHintType()}. This is, whenever you implement a new {@link ExplainHint} subclass,

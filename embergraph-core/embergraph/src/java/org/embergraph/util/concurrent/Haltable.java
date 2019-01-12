@@ -43,8 +43,8 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.util.InnerCause;
 
-/**
- * Abstract base class for tasks whose processing may be halted asynchronously. While this bears
+/*
+* Abstract base class for tasks whose processing may be halted asynchronously. While this bears
  * some resemblance to {@link Future}, this class is used in contexts where the process to be halted
  * does not map nicely into a {@link Callable} or {@link Runnable} and hence can not be modeled
  * using a {@link FutureTask}.
@@ -61,13 +61,13 @@ public class Haltable<V> implements IHaltable<V> {
 
   private static final transient Logger log = Logger.getLogger(Haltable.class);
 
-  //    /**
-  //     * Exception used to indicate a {@link #cancel(boolean) cancelled}
+  //    /*
+//     * Exception used to indicate a {@link #cancel(boolean) cancelled}
   //     * computation.
   //     */
   //    private static final Throwable CANCELLED = new InterruptedException("CANCELLED");
 
-  /**
+  /*
    * Lock guarding the {@link #halted} condition and the various non-volatile, non-atomic fields.
    */
   private final Lock lock = new ReentrantLock();
@@ -81,13 +81,13 @@ public class Haltable<V> implements IHaltable<V> {
   /** The first cause as set by {@link #halt(Throwable)}. */
   private volatile Throwable firstCause = null;
 
-  /**
+  /*
    * Flag is set <code>true</code> if the process was halted by a {@link Throwable} not included in
    * the set of normal termination causes.
    */
   private volatile boolean error = false;
 
-  /**
+  /*
    * Flag is set <code>true</code> if the process was halted by a {@link Throwable} indicating a
    * deadline expiration.
    *
@@ -126,7 +126,7 @@ public class Haltable<V> implements IHaltable<V> {
     }
   }
 
-  /**
+  /*
    * Halt (exception thrown). <strong>The caller is responsible for throwing the cause out of their
    * own context.</strong>
    *
@@ -139,8 +139,8 @@ public class Haltable<V> implements IHaltable<V> {
     lock.lock();
     try {
       if (didHalt = !halt) {
-        /*
-         * This is the first cause.
+      /*
+       * This is the first cause.
          */
         // note the first cause (and handle an illegal null if found).
         firstCause = (cause != null ? cause : new IllegalArgumentException());
@@ -169,7 +169,7 @@ public class Haltable<V> implements IHaltable<V> {
     return cause;
   }
 
-  /**
+  /*
    * Return unless processing has been halted. The method should be invoked from within the
    * execution of the process itself so that it may notice asynchronous termination. It will throw
    * out the wrapped first cause if the process is halted.
@@ -184,8 +184,8 @@ public class Haltable<V> implements IHaltable<V> {
 
     if (halt) {
       if (firstCause == null) {
-        /*
-         * Note: this is an error since there is an expectation by the
+      /*
+       * Note: this is an error since there is an expectation by the
          * process when it invokes halted() that the process is still
          * running (since it invoked halted() it must be running). Since
          * it is running,
@@ -270,7 +270,7 @@ public class Haltable<V> implements IHaltable<V> {
     return halt;
   }
 
-  /**
+  /*
    * Return <code>true</code> if the process was halted by a {@link Throwable} not included in the
    * set of known normal termination causes.
    */
@@ -321,7 +321,7 @@ public class Haltable<V> implements IHaltable<V> {
     return firstCause;
   }
 
-  /**
+  /*
    * Return <code>true</code> if the {@link Throwable} is a known normal termination cause for the
    * process. The method inspects the stack trace, examining both the outer and {@link InnerCause}s.
    * The following causes are interpreted as normal termination:
@@ -350,11 +350,10 @@ public class Haltable<V> implements IHaltable<V> {
    */
   protected boolean isNormalTerminationCause(final Throwable cause) {
     if (isTerminationByInterrupt(cause)) return true;
-    if (InnerCause.isInnerCause(cause, RejectedExecutionException.class)) return true;
-    return false;
+    return InnerCause.isInnerCause(cause, RejectedExecutionException.class);
   }
 
-  /**
+  /*
    * Note: There is a special exemption for {@link QueryTimeoutException}. This can not be
    * interpreted as "normal" termination since we want the exception to be thrown out and then
    * turned into the corresponding openrdf exception. However, we do not want to log a full stack
@@ -364,10 +363,7 @@ public class Haltable<V> implements IHaltable<V> {
    *     at operator start/stop. </a>
    */
   protected boolean isDeadlineTerminationCause(final Throwable cause) {
-    if (InnerCause.isInnerCause(cause, QueryTimeoutException.class)) {
-      return true;
-    }
-    return false;
+    return InnerCause.isInnerCause(cause, QueryTimeoutException.class);
   }
 
   public static boolean isTerminationByInterrupt(final Throwable cause) {
@@ -375,7 +371,7 @@ public class Haltable<V> implements IHaltable<V> {
     if (InnerCause.isInnerCause(cause, InterruptedException.class)) return true;
     if (InnerCause.isInnerCause(cause, CancellationException.class)) return true;
     if (InnerCause.isInnerCause(cause, ClosedByInterruptException.class)) return true;
-    if (InnerCause.isInnerCause(cause, BufferClosedException.class)) return true;
+    return InnerCause.isInnerCause(cause, BufferClosedException.class);
     /*
      * Note: We can not treat this as normal termination or the query will
      * fail to report out the openrdf QueryInterruptedException.
@@ -383,10 +379,9 @@ public class Haltable<V> implements IHaltable<V> {
     //        if (InnerCause.isInnerCause(cause, QueryTimeoutException.class))
     //            return true;
 
-    return false;
   }
 
-  /**
+  /*
    * This logs all unexpected causes @ WARN (anything not reported as normal termination by {@link
    * #isNormalTerminationCause(Throwable)}), not just the first cause. All exceptions are logged @
    * TRACE. If the firstCause is an error (as opposed to something which originated as an interrupt)

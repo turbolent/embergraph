@@ -47,8 +47,8 @@ import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Rewrites any {@link ProjectionNode} with a wild card into the set of variables visible to the
+/*
+* Rewrites any {@link ProjectionNode} with a wild card into the set of variables visible to the
  * {@link QueryBase} having that projection. This is done first for the {@link NamedSubqueriesNode}
  * and then depth-first for the WHERE clause. Only variables projected by a subquery will be
  * projected by the parent query.
@@ -88,7 +88,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
             (Iterator<QueryBase>)
                 new Striterator(
                         BOpUtility.postOrderIteratorWithAnnotations(
-                            (BOp) subqueryRoot.getWhereClause()))
+                            subqueryRoot.getWhereClause()))
                     .addTypeFilter(QueryBase.class);
 
         while (itr.hasNext()) {
@@ -117,7 +117,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
       final Iterator<QueryBase> itr =
           (Iterator<QueryBase>)
               new Striterator(
-                      BOpUtility.postOrderIteratorWithAnnotations((BOp) queryRoot.getWhereClause()))
+                      BOpUtility.postOrderIteratorWithAnnotations(queryRoot.getWhereClause()))
                   .addTypeFilter(QueryBase.class);
 
       while (itr.hasNext()) {
@@ -134,7 +134,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryRoot, bindingSets);
   }
 
-  /**
+  /*
    * Rewrite the projection for the {@link QueryBase}.
    *
    * @param sa {@link StaticAnalysis} helper.
@@ -156,7 +156,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
       @SuppressWarnings("unchecked")
       final Iterator<NamedSubqueryInclude> itr =
           (Iterator<NamedSubqueryInclude>)
-              new Striterator(BOpUtility.postOrderIteratorWithAnnotations((BOp) gpg))
+              new Striterator(BOpUtility.postOrderIteratorWithAnnotations(gpg))
                   .addTypeFilter(NamedSubqueryInclude.class);
 
       while (itr.hasNext()) {
@@ -203,7 +203,7 @@ public class ASTWildcardProjectionOptimizer implements IASTOptimizer {
 
       for (IVariable<?> var : varSet) {
 
-        if (!((Var) var).isAnonymous()) p2.addProjectionVar(new VarNode(var.getName()));
+        if (!var.isAnonymous()) p2.addProjectionVar(new VarNode(var.getName()));
       }
     }
   }

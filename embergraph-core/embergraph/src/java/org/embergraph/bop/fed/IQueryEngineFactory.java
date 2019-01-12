@@ -8,8 +8,8 @@ import org.embergraph.journal.TemporaryStore;
 import org.embergraph.service.DataService;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * Factory for a {@link QueryEngine} or derived class.
+/*
+* Factory for a {@link QueryEngine} or derived class.
  *
  * @author bryan
  * @see QueryEngineFactory#getInstance()
@@ -18,7 +18,7 @@ import org.embergraph.service.IEmbergraphFederation;
  */
 public interface IQueryEngineFactory {
 
-  /**
+  /*
    * Singleton factory test (does not create the query controller) for standalone or scale-out.
    *
    * @param indexManager The database.
@@ -27,7 +27,7 @@ public interface IQueryEngineFactory {
    */
   QueryEngine getExistingQueryController(IBTreeManager indexManager);
 
-  /**
+  /*
    * Singleton factory for standalone or scale-out.
    *
    * @param indexManager The database.
@@ -35,7 +35,7 @@ public interface IQueryEngineFactory {
    */
   QueryEngine getQueryController(IIndexManager indexManager);
 
-  /**
+  /*
    * Singleton factory for standalone.
    *
    * @param indexManager The index manager. Can be a {@link TemporaryStore} or {@link Journal}.
@@ -43,7 +43,7 @@ public interface IQueryEngineFactory {
    */
   QueryEngine getStandaloneQueryController(IBTreeManager indexManager);
 
-  /**
+  /*
    * New query controller for scale-out.
    *
    * <p>Note: This is NOT used for the {@link QueryEngine} that is embedded within the {@link

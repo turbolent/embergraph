@@ -25,8 +25,8 @@ import java.util.Iterator;
 import java.util.Vector;
 import junit.framework.TestCase2;
 
-/**
- * Abstract base class for cache policy test defines some test harness helper methods and utility
+/*
+* Abstract base class for cache policy test defines some test harness helper methods and utility
  * classes.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -44,7 +44,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Test helper used to generate expected data for testing cache behavior.
    *
    * @version $Id$
@@ -85,7 +85,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Method verifies that the <i>actual </i> {@link Iterator}produces the expected objects in the
    * expected order. Objects are compared <strong>by reference </strong>. Errors are reported if too
    * few or too many objects are produced, etc.
@@ -124,7 +124,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that the cache iterator visit {@link ICacheEntry}instances that are consistent with the
    * expected entries in both order and data. The data consistency requirements are: (a) same
    * oid/key (compared by value); same value object associated with that key (compared by
@@ -134,7 +134,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
    * @param expected Array of expected cache entry objects in expected order.
    * @param actual Iterator visiting {@link ICacheEntry}objects.
    */
-  public void assertSameEntryOrdering(String msg, ICacheEntry expected[], Iterator actual) {
+  public void assertSameEntryOrdering(String msg, ICacheEntry[] expected, Iterator actual) {
 
     int i = 0;
 
@@ -181,7 +181,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Dumps the contents of the cache on {@link System#err} using {@link
    * ICachePolicy#entryIterator()}.
    */
@@ -206,7 +206,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * You set whether or not a cache event is expected and what the expected data will be for that
    * event. If an event occurs when none is expected then an exception is thrown. If an event occurs
    * with unexpected data then an exception is thrown. Otherwise the listener silently accepts the
@@ -224,7 +224,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
 
     private Vector<Event<K, T>> events = new Vector<Event<K, T>>();
 
-    /**
+    /*
      * Verify that event data is consistent with our expectations.
      *
      * @exception IllegalStateException If we already have an event.
@@ -243,13 +243,13 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
       if (events.size() == 0) {
         throw new IllegalStateException("No expected events: " + entry);
       }
-      Event e = (Event) events.remove(0); // pop off next event.
+      Event e = events.remove(0); // pop off next event.
       assertEquals("oid", e.expectedOid, entry.getKey());
       assertTrue("obj", e.expectedObj == entry.getObject()); // compare by reference not equals().
       assertEquals("dirty", e.expectedDirty, entry.isDirty());
     }
 
-    /**
+    /*
      * Sets the listener to expect an event with the given object identifier and object.
      *
      * @param oid The expected object identifier.
@@ -279,7 +279,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
       allowEvents();
     }
 
-    /**
+    /*
      * Causes an {@link IllegalStateException} to be thrown from the listener if an event is
      * received.
      *
@@ -297,7 +297,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * Clear the last event so that a new event may be accepted. An exception is thrown if no event
      * has been received so that this method may be used to test for the absence of an expected
      * event.
@@ -312,7 +312,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Implementation always throws an exception.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -324,7 +324,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Abstract fixture factory for the cache policy. The use of this fixture factory makes it
    * possible for us to reuse the test suite for the LRU cache policy on the weak reference cache
    * since the latter is required to delegate the ordering of the cache to an inner hard reference
@@ -341,7 +341,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
    */
   public abstract ICachePolicy getCachePolicy(int capacity);
 
-  /**
+  /*
    * Test verifies that LRU ordering is correctly maintained on a series of insert, update, and
    * remove operations and that eviction notices are fired as necessary.
    *

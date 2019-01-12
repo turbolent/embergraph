@@ -29,8 +29,8 @@ import org.embergraph.rdf.sparql.ast.GroupMemberNodeBase;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Trac733 shows some strange behavior, this test case is intended to explore that.
+/*
+* Trac733 shows some strange behavior, this test case is intended to explore that.
  *
  * <p>The basic issues concerns the order of execution of arbitrary length propery paths and other
  * bits of the query. The observed behavior was that adding additional braces, changing the grouping
@@ -76,16 +76,16 @@ public class TestALPPinTrac773 extends AbstractOptimizerTestCase {
         alpp2 = alpp2(zero_or_one_to_one_or_more);
       }
 
-      /**
+      /*
        * Adjusted order due to changes made in history branch. The computation of
        * ArbitraryLengthPathNode.getEstimatedCardinality() has changed, causing triple patterns to
        * have precedence over unbounded path expressions. See
        * https://jira.blazegraph.com/browse/BLZG-858 / trac #733.
        */
-      final GroupMemberNodeBase<?> gmn[] =
+      final GroupMemberNodeBase<?>[] gmn =
           (sym.equals("?"))
-              ? new GroupMemberNodeBase[] {alpp1, spn1, alpp2, spn2}
-              : new GroupMemberNodeBase[] {spn2, alpp2, spn1, alpp1};
+              ? new GroupMemberNodeBase[]{alpp1, spn1, alpp2, spn2}
+              : new GroupMemberNodeBase[]{spn2, alpp2, spn1, alpp1};
 
       expected = select(varNode(z), where(gmn));
       varCount = 0;
@@ -146,16 +146,16 @@ public class TestALPPinTrac773 extends AbstractOptimizerTestCase {
                   statementPatternNode(leftVar(), constantNode(d), rightVar(), 3135),
                   SUBGROUP_OF_ALP));
 
-      /**
+      /*
        * Adjusted order due to changes made in history branch. The computation of
        * ArbitraryLengthPathNode.getEstimatedCardinality() has changed, causing triple patterns to
        * have precedence over unbounded path expressions. See
        * https://jira.blazegraph.com/browse/BLZG-858 / trac #733.
        */
-      final GroupMemberNodeBase<?> gmn[] =
+      final GroupMemberNodeBase<?>[] gmn =
           (sym.equals("?"))
-              ? new GroupMemberNodeBase[] {alpp1, spn1, alpp2, spn2}
-              : new GroupMemberNodeBase[] {spn2, alpp2, spn1, alpp1};
+              ? new GroupMemberNodeBase[]{alpp1, spn1, alpp2, spn2}
+              : new GroupMemberNodeBase[]{spn2, alpp2, spn1, alpp1};
 
       expected = select(varNode(z), where(gmn));
       varCount = 0;

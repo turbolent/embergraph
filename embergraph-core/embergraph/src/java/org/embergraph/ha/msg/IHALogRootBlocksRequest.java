@@ -17,12 +17,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-/**
- * Message requesting that the data from an HA Log. The data will be sent over the write pipeline.
+/*
+* Message requesting that the data from an HA Log. The data will be sent over the write pipeline.
  */
 public interface IHALogRootBlocksRequest extends IHAMessage {
 
-  /**
+  /*
    * The commit counter is used to identify the desired commit point (the commit counter of the
    * closing root block).
    */

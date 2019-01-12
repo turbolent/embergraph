@@ -39,7 +39,7 @@ public class IsMaterializedBOp extends XSDBooleanIVValueExpression {
 
   public interface Annotations extends XSDBooleanIVValueExpression.Annotations {
 
-    /**
+    /*
      * If <code>true</code>, only accept variable bindings for <code>x</code> that have a
      * materialized RDF {@link EmbergraphValue}. If <code>false</code>, only accept those that
      * don't.
@@ -47,7 +47,7 @@ public class IsMaterializedBOp extends XSDBooleanIVValueExpression {
     String MATERIALIZED = IsMaterializedBOp.class.getName() + ".materialized";
   }
 
-  /**
+  /*
    * @param x The variable.
    * @param materialized If <code>true</code>, only accept variable bindings for <code>x</code> that
    *     have a materialized RDF {@link EmbergraphValue}. If <code>false</code>, only accept those

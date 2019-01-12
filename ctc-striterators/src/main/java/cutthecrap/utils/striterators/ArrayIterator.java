@@ -18,8 +18,8 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Supports standard iteration over an object Array, allowing this to be used as a source for a
+/*
+* Supports standard iteration over an object Array, allowing this to be used as a source for a
  * <code>Striterator</code>.
  */
 public class ArrayIterator<T> implements Iterator<T> {

@@ -54,7 +54,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
     super(name);
   }
 
-  /**
+  /*
    * Given:
    *
    * <pre>
@@ -111,9 +111,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       where.addChild(
           new StatementPatternNode(new VarNode("a"), new ConstantNode(a), new ConstantNode(a)));
@@ -150,9 +148,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       // post-filter
       where.addChild(
@@ -160,9 +156,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       given.setProjection(projection);
       given.setWhereClause(where);
@@ -182,9 +176,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       final StatementPatternNode eSPN =
           new StatementPatternNode(new VarNode("e"), new ConstantNode(e), new ConstantNode(e));
@@ -221,9 +213,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       // post-filter
       where.addChild(
@@ -231,9 +221,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       expected.setProjection(projection);
       expected.setWhereClause(where);
@@ -249,7 +237,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with non-SP joins. Given:
    *
    * <pre>
@@ -310,9 +298,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       where.addChild(
           new StatementPatternNode(new VarNode("a"), new ConstantNode(a), new ConstantNode(a)));
@@ -357,9 +343,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       // post-filter
       where.addChild(
@@ -367,9 +351,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       given.setProjection(projection);
       given.setWhereClause(where);
@@ -389,9 +371,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("x"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       {
         final JoinGroupNode serviceGroup = new JoinGroupNode();
@@ -437,9 +417,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("y"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       // post-filter
       where.addChild(
@@ -447,9 +425,7 @@ public class TestASTRunFirstRunLastOptimizer extends AbstractASTEvaluationTestCa
               new FunctionNode(
                   FunctionRegistry.GT,
                   null,
-                  new ValueExpressionNode[] {
-                    new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER)))
-                  })));
+                  new VarNode("z"), new ConstantNode(makeIV(new LiteralImpl("0", XSD.INTEGER))))));
 
       expected.setProjection(projection);
       expected.setWhereClause(where);

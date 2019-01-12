@@ -34,8 +34,8 @@ import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
 import org.embergraph.journal.ITx;
 import org.embergraph.util.NT;
 
-/**
- * Extends the {@link ConcurrentWeakValueCache} to track the earliest timestamp from which any local
+/*
+* Extends the {@link ConcurrentWeakValueCache} to track the earliest timestamp from which any local
  * {@link IIndex} view is reading. This timestamp is reported by {@link #getRetentionTime()}. The
  * {@link StoreManager} uses this in {@link StoreManager#purgeOldResources()} to provide a "read
  * lock" such that resources for in use views are not released.
@@ -49,7 +49,7 @@ public class IndexCache<H extends ILocalBTreeView>
   // @todo remove debug flag?
   private static final boolean debug = false;
 
-  /**
+  /*
    * The earliest timestamp that must be retained for the read-historical indices in the cache,
    * {@link Long#MAX_VALUE} if there a NO read-historical indices in the cache, and (-1L) if the
    * value is not known and must be computed by scanning the index cache.
@@ -61,7 +61,7 @@ public class IndexCache<H extends ILocalBTreeView>
    */
   private final AtomicLong retentionTime = new AtomicLong(-1L);
 
-  /**
+  /*
    * @param cacheCapacity The capacity of the backing hard reference queue.
    * @param cacheTimeoutMillis The timeout (milliseconds) before an entry which has not been touched
    *     is cleared from the cache.
@@ -71,7 +71,7 @@ public class IndexCache<H extends ILocalBTreeView>
     super(cacheCapacity, TimeUnit.MILLISECONDS.toNanos(cacheTimeoutMillis));
   }
 
-  /**
+  /*
    * The earliest timestamp that MUST be retained for the read-historical indices in the cache and
    * {@link Long#MAX_VALUE} if there are NO read-historical indices in the cache.
    *
@@ -188,7 +188,7 @@ public class IndexCache<H extends ILocalBTreeView>
     return super.putIfAbsent(k, v);
   }
 
-  /**
+  /*
    * Overridden to clear the {@link #retentionTime} if the map entry corresponding to that timestamp
    * is being removed from the map.
    */
@@ -198,8 +198,8 @@ public class IndexCache<H extends ILocalBTreeView>
     synchronized (retentionTime) {
       if (retentionTime.get() == k.getTimestamp()) {
 
-        /*
-         * Removed the earliest timestamp so we will need to
+      /*
+       * Removed the earliest timestamp so we will need to
          * explicitly search for the new minimum timestamp.
          */
 

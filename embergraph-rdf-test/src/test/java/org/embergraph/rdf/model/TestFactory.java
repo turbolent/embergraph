@@ -33,8 +33,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Unit tests for {@link EmbergraphValueFactoryImpl}.
+/*
+* Unit tests for {@link EmbergraphValueFactoryImpl}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -88,7 +88,7 @@ public class TestFactory extends TestCase2 {
     assertTrue(v1 == v2);
   }
 
-  /**
+  /*
    * Unit test for {@link ValueFactory#createLiteral(String, URI)} when the datatype URI is <code>
    * null</code>.
    *
@@ -103,7 +103,7 @@ public class TestFactory extends TestCase2 {
     assertEquals(12, l1.intValue());
   }
 
-  /**
+  /*
    * Unit test for {@link ValueFactory#createLiteral(XMLGregorianCalendar)}.
    *
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/117
@@ -123,7 +123,7 @@ public class TestFactory extends TestCase2 {
         "http://www.w3.org/2001/XMLSchema#date", vf.createLiteral(cal).getDatatype().stringValue());
   }
 
-  /**
+  /*
    * Unit test verifies that a new {@link EmbergraphValue} instance is returned when {@link
    * EmbergraphValueFactory#asValue(org.openrdf.model.Value)} is invoked with a {@link
    * EmbergraphValue} whose {@link IV} is a "dummmy" IV (aka a "mock" IV). A "dummy" or "mock"

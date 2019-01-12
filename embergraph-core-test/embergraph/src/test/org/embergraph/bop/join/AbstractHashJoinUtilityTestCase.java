@@ -58,8 +58,8 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for both {@link HTreeHashJoinUtility} and {@link JVMHashJoinUtility}.
+/*
+* Test suite for both {@link HTreeHashJoinUtility} and {@link JVMHashJoinUtility}.
  *
  * <p>TODO Unit test of optional solutions
  *
@@ -106,7 +106,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       leon = makeIV(new LiteralImpl("Leon"));
     }
 
-    /**
+    /*
      * Return a (Mock) IV for a Value.
      *
      * @param v The value.
@@ -123,7 +123,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
 
     private long nextId = 1L; // Note: First id MUST NOT be 0L !!!
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -154,7 +154,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       return left;
     }
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -217,7 +217,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * <pre>
    * @prefix  :       <http://example/> .
    * @prefix  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -253,7 +253,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       aliceLabel = makeIV(new LiteralImpl("Alice"));
     }
 
-    /**
+    /*
      * Return a (Mock) IV for a Value.
      *
      * @param v The value.
@@ -270,7 +270,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
 
     private long nextId = 1L; // Note: First id MUST NOT be 0L !!!
 
-    /**
+    /*
      * Reading from access path
      *
      * <pre>
@@ -298,7 +298,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       return left;
     }
 
-    /**
+    /*
      * Reading from access path
      *
      * <pre>
@@ -325,7 +325,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Setup for NOT EXISTS problem.
    *
    * <pre>
@@ -362,7 +362,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       five = makeIV(new LiteralImpl("5.0", XSD.DECIMAL));
     }
 
-    /**
+    /*
      * Return a (Mock) IV for a Value.
      *
      * @param v The value.
@@ -379,7 +379,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
 
     private long nextId = 1L; // Note: First id MUST NOT be 0L !!!
 
-    /**
+    /*
      * Reading from access path having this data and binding <code>?a</code> and <code>?n</code>
      *
      * <pre>
@@ -411,7 +411,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       return left;
     }
 
-    /**
+    /*
      * Reading from access path having this data and binding <code>?a</code> and <code>?m</code>
      *
      * <pre>
@@ -497,7 +497,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     public MockPipelineOp(final BOp[] args, final NV... anns) {
 
       super(args, NV.asMap(anns));
-    };
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -507,7 +507,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test helper for required or optional join tests.
    *
    * @param joinType
@@ -598,7 +598,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Factory for {@link IHashJoinUtility} instances under test.
    *
    * @param op The operator from which much of the state will be initialized.
@@ -780,7 +780,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     doHashJoinTest(JoinTypeEnum.Normal, joinVars, selectVars, constraints, left, right, expected);
   }
 
-  /**
+  /*
    * Unit test of a required MERGE JOIN involving two sources. The join variable is <code>?a</code>.
    * One source has <code>(?a,?x)</code>. The other has <code>(?a,?y)</code>. For this test, all
    * solutions having the same value for the join variable will join (there are no join constraints
@@ -882,7 +882,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         };
     assertEquals(8, otherSolutions.length);
 
-    /**
+    /*
      * The expected solutions to the join.
      *
      * <p>The source solutions are:
@@ -1054,7 +1054,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test for optional merge join. This is based on the same data as the non-optional merge join
    * test above.
    */
@@ -1135,7 +1135,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         };
     assertEquals(8, otherSolutions.length);
 
-    /**
+    /*
      * The expected solutions to the join.
      *
      * <p>The source solutions are:
@@ -1328,7 +1328,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     mergeJoin03(true, true);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1409,7 +1409,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
         };
     assertEquals(1, moreSolutions.length);
 
-    /**
+    /*
      * The expected solutions to the join.
      *
      * <p>The source solutions are:
@@ -1643,7 +1643,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * @param first The instances from which the required joins will be reported if the join is
    *     OPTIONAL.
    * @param others The other instances. There must be at least two instances to be joined when
@@ -1669,7 +1669,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     assertSameSolutionsAnyOrder(expected, outputBuffer.iterator());
   }
 
-  /**
+  /*
    * Unit test for EXISTS based on Sesame <code>sparql1-exists-01</code>.
    *
    * <pre>
@@ -1734,7 +1734,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     doHashJoinTest(JoinTypeEnum.Exists, joinVars, selectVars, constraints, left, right, expected);
   }
 
-  /**
+  /*
    * Unit tests for NOT EXISTS based on Sesame <code>sparql11-exists-05</code> .
    *
    * <pre>
@@ -1811,8 +1811,8 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
    * MINUS join operator.
    */
 
-  //    /**
-  //     * Unit tests for NOT EXISTS based on Sesame <code>sparql11-exists-06</code>
+  //    /*
+//     * Unit tests for NOT EXISTS based on Sesame <code>sparql11-exists-06</code>
   //     * . This uses the same data as the previous test (and has the same
   //     * solutions), but the query is slightly different and includes a FILTER
   //     * inside of the EXISTS graph pattern.
@@ -1884,7 +1884,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
   //
   //    }
 
-  /**
+  /*
    * Setup a problem based on the following query, which is <code>service02</code> from the openrdf
    * SPARQL 1.1 Federated Query test suite.
    *
@@ -1940,7 +1940,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       label = makeIV(new LiteralImpl("SPARQL 1.1 Basic Federated Query"));
     }
 
-    /**
+    /*
      * Return a (Mock) IV for a Value.
      *
      * @param v The value.
@@ -1957,7 +1957,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
 
     private long nextId = 1L; // Note: First id MUST NOT be 0L !!!
 
-    /**
+    /*
      * Solutions for end point 1.
      *
      * <pre>
@@ -1992,7 +1992,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       return left;
     }
 
-    /**
+    /*
      * Solutions for end point 2.
      *
      * <pre>
@@ -2020,7 +2020,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       return right;
     }
 
-    /**
+    /*
      * Solutions for the ServiceCallJoin with end point 2. It combines the first left solution with
      * the first (and only) right solution.
      *
@@ -2092,7 +2092,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     doHashJoinTest(JoinTypeEnum.Normal, joinVars, selectVars, constraints, left, right, expected);
   }
 
-  /**
+  /*
    * Unit test for the OPTIONAL GROUP hash join for {@link JoinSetup_service02}. This is the
    * optional JOIN performed between the solutions from the 1st SERVICE and the solutions from the
    * 2nd SERVICE. The solutions to this join are the solutions to the query, except that some
@@ -2124,7 +2124,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     // The right solutions (the hash index).
     final List<IBindingSet> left = setup.getServiceCall2JoinSolutions();
 
-    /**
+    /*
      * This is the OPTIONAL solution in the original query. It should not be produced for the
      * problem which we are setting up here since we are modeling the ServiceCallJoin.
      *
@@ -2165,7 +2165,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     doHashJoinTest(JoinTypeEnum.Optional, joinVars, selectVars, constraints, left, right, expected);
   }
 
-  /**
+  /*
    * Setup a problem based on the following query, which is <code>service04</code> from the openrdf
    * SPARQL 1.1 Federated Query test suite.
    *
@@ -2244,7 +2244,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       aliceEmail = makeIV(new LiteralImpl("alice@example.org"));
     }
 
-    /**
+    /*
      * Return a (Mock) IV for a Value.
      *
      * @param v The value.
@@ -2261,7 +2261,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
 
     private long nextId = 1L; // Note: First id MUST NOT be 0L !!!
 
-    /**
+    /*
      * Solutions for the local access path (?s ?p1 ?o1)
      *
      * <pre>
@@ -2327,7 +2327,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       return left;
     }
 
-    /**
+    /*
      * Solutions for end point 1.
      *
      * <pre>
@@ -2359,7 +2359,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       return left;
     }
 
-    /**
+    /*
      * Solutions for the ServiceCallJoin with end point 2. It combines the solutions from the local
      * access path (left) with the solutions from endpoint1 (right).
      *
@@ -2409,7 +2409,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
       return right;
     }
 
-    /**
+    /*
      * The OPTIONAL group join will return the UNION the solutions from the SERVICE which did join,
      * which is {@link #getServiceCallJoinSolutions()}, with the solutions from the local access
      * path which did not join.
@@ -2486,7 +2486,7 @@ public abstract class AbstractHashJoinUtilityTestCase extends TestCase {
     doHashJoinTest(JoinTypeEnum.Normal, joinVars, selectVars, constraints, left, right, expected);
   }
 
-  /**
+  /*
    * Unit test for the OPTIONAL hash join for {@link JoinSetup_service04}. The solutions for the
    * query are just the PROJECTION of (?s ?o1 ?o2) for this join.
    */

@@ -17,8 +17,8 @@ package cutthecrap.utils.striterators;
 
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link Filter}.
+/*
+* Test suite for {@link Filter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -26,8 +26,8 @@ package org.embergraph.service;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 
-/**
- * A (transient) property set associated with some kinds of services.
+/*
+* A (transient) property set associated with some kinds of services.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

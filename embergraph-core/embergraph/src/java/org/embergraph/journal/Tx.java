@@ -47,8 +47,8 @@ import org.embergraph.service.DataService;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * A transaction.
+/*
+* A transaction.
  *
  * <p>A transaction is a context in which the application can access and perform operations on fully
  * named indices. Writes on the named indices accessed by the transaction are accumulated in a
@@ -104,7 +104,7 @@ public class Tx implements ITx {
   protected static final String NOT_COMMITTED = "Transaction is not committed";
   protected static final String IS_COMPLETE = "Transaction is complete";
 
-  /**
+  /*
    * This {@link Lock} is used to obtain exclusive access during certain operations, including
    * creating the temporary store and isolating a view of a named index. Exclusive access is
    * required since multiple concurrent operations MAY execute for the same transaction.
@@ -113,15 +113,15 @@ public class Tx implements ITx {
    */
   public final ReentrantLock lock = new ReentrantLock();
 
-  //    /**
-  //     * Used for some handshaking in the commit protocol.
+  //    /*
+//     * Used for some handshaking in the commit protocol.
   //     */
   //    final private AbstractLocalTransactionManager localTransactionManager;
 
   /** Used to locate the named indices that the transaction isolates. */
   private final IResourceManager resourceManager;
 
-  /**
+  /*
    * The start startTime assigned to this transaction.
    *
    * <p>Note: Transaction {@link #startTime} and {@link #revisionTime}s are assigned by the {@link
@@ -129,7 +129,7 @@ public class Tx implements ITx {
    */
   private final long startTime;
 
-  /**
+  /*
    * The timestamp of the commit point against which this transaction is reading.
    *
    * <p>Note: This is not currently available on a cluster. In that context, we wind up with the
@@ -149,13 +149,13 @@ public class Tx implements ITx {
   /** <code>true</code> iff this is a read-only transaction. */
   private final boolean readOnly;
 
-  /**
+  /*
    * The revisionTime assigned to the transaction when it was validated and merged down onto the
    * global state.
    */
   private long revisionTime = 0L;
 
-  /**
+  /*
    * The <i>revisionTime</i> assigned to the transaction when it was validated and merged down onto
    * the global state.
    *
@@ -180,14 +180,14 @@ public class Tx implements ITx {
 
   private final AtomicReference<RunState> runState = new AtomicReference<RunState>();
 
-  //    /**
-  //     * A temporary store used to hold write sets for read-write transactions. It
+  //    /*
+//     * A temporary store used to hold write sets for read-write transactions. It
   //     * is null if the transaction is read-only and will remain null in any case
   //     * until its first use.
   //     */
   //    private IRawStore tmpStore = null;
 
-  /**
+  /*
    * Indices isolated by this transactions.
    *
    * <p>Note: This must be thread-safe to support concurrent operations for the same transaction
@@ -195,7 +195,7 @@ public class Tx implements ITx {
    */
   private final ConcurrentHashMap<String, ILocalBTreeView> indices;
 
-  /**
+  /*
    * Create a transaction reading from the most recent committed state not later than the specified
    * startTime.
    *
@@ -274,7 +274,7 @@ public class Tx implements ITx {
     ResourceManager.openTx(startTime);
   }
 
-  /**
+  /*
    * Change the {@link RunState}.
    *
    * @param newval The new {@link RunState}.
@@ -303,7 +303,7 @@ public class Tx implements ITx {
     return hashCode;
   }
 
-  /**
+  /*
    * True iff they are the same object or have the same start timestamp.
    *
    * @param o Another transaction object.
@@ -363,7 +363,7 @@ public class Tx implements ITx {
         + "}";
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The value is valid as of the instant that the run state is inspected. The caller must
@@ -378,7 +378,7 @@ public class Tx implements ITx {
     return runState.get() == RunState.Active;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The value is valid as of the instant that the run state is inspected. The caller must
@@ -393,7 +393,7 @@ public class Tx implements ITx {
     return runState.get() == RunState.Prepared;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The value is valid as of the instant that the run state is inspected. The caller must
@@ -410,7 +410,7 @@ public class Tx implements ITx {
     return runState == RunState.Committed || runState == RunState.Aborted;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The value is valid as of the instant that the run state is inspected. The caller must
@@ -425,7 +425,7 @@ public class Tx implements ITx {
     return runState.get() == RunState.Committed;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The value is valid as of the instant that the run state is inspected. The caller must
@@ -440,8 +440,8 @@ public class Tx implements ITx {
     return runState.get() == RunState.Aborted;
   }
 
-  //    /**
-  //     * Abort the transaction.
+  //    /*
+//     * Abort the transaction.
   //     *
   //     * @throws IllegalStateException
   //     *             if the transaction is already complete.
@@ -470,7 +470,7 @@ public class Tx implements ITx {
   //
   //    }
 
-  /**
+  /*
    * Validate the write set of the named indices isolated transaction and merge down that write set
    * onto the corresponding unisolated indices but DOES NOT commit the data. The {@link RunState} is
    * NOT changed by this method.
@@ -505,8 +505,8 @@ public class Tx implements ITx {
 
       try {
 
-        /*
-         * Validate against the current state of the various indices on
+      /*
+       * Validate against the current state of the various indices on
          * write the transaction has written.
          */
 
@@ -515,8 +515,8 @@ public class Tx implements ITx {
           throw new ValidationError();
         }
 
-        /*
-         * Merge each isolated index into the global scope. This also
+      /*
+       * Merge each isolated index into the global scope. This also
          * marks the tuples on which the transaction has written with
          * the [revisionTime]. This operation MUST succeed (at a logical
          * level) since we have already validated (neither read-write
@@ -638,7 +638,7 @@ public class Tx implements ITx {
   //
   //    }
 
-  /**
+  /*
    * This method must be invoked any time a transaction completes in order to release resources held
    * by that transaction.
    */
@@ -681,7 +681,7 @@ public class Tx implements ITx {
 
   }
 
-  /**
+  /*
    * @todo This might need to be a full {@link Journal} using {@link BufferMode#Temporary} in order
    *     to have concurrency control for the isolated named indices. This would let us leverage the
    *     existing {@link WriteExecutorService} for handling concurrent operations within a
@@ -720,7 +720,7 @@ public class Tx implements ITx {
 
   }
 
-  /**
+  /*
    * Invoked when a writable transaction prepares in order to validate its write sets (one per
    * isolated index).
    *
@@ -770,7 +770,7 @@ public class Tx implements ITx {
     return true;
   }
 
-  /**
+  /*
    * {@link Callable} checkpoints an index.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -799,8 +799,8 @@ public class Tx implements ITx {
 
       try {
 
-        /*
-         * Note: this is the live version of the named index. We need to
+      /*
+       * Note: this is the live version of the named index. We need to
          * merge down onto the live version of the index, not onto some
          * historical state.
          */
@@ -809,24 +809,24 @@ public class Tx implements ITx {
 
         if (sources == null) {
 
-          /*
-           * Note: This should not happen since we just validated the
+        /*
+       * Note: This should not happen since we just validated the
            * index.
            */
 
           throw new AssertionError();
         }
 
-        /*
-         * Copy the validated write set for this index down onto the
+      /*
+       * Copy the validated write set for this index down onto the
          * corresponding unisolated index, updating version counters, delete
          * markers, and values as necessary in the unisolated index.
          */
 
         isolated.mergeDown(revisionTime, sources);
 
-        /*
-         * Write a checkpoint so that everything is on the disk. This
+      /*
+       * Write a checkpoint so that everything is on the disk. This
          * reduces both the latency for the commit and the possibilities for
          * error.
          */
@@ -844,7 +844,7 @@ public class Tx implements ITx {
     }
   }
 
-  /**
+  /*
    * Invoked during commit processing to merge down the write set from each index isolated by this
    * transactions onto the corresponding unisolated index on the database. This method invoked iff a
    * transaction has successfully prepared and hence is known to have validated successfully. The
@@ -910,7 +910,7 @@ public class Tx implements ITx {
     }
   }
 
-  /**
+  /*
    * Return a named index. The index will be isolated at the same level as this transaction. Changes
    * on the index will be made restart-safe iff the transaction successfully commits.
    *
@@ -975,8 +975,8 @@ public class Tx implements ITx {
 
       if (sources == null) {
 
-        /*
-         * The named index was not registered as of the transaction
+      /*
+       * The named index was not registered as of the transaction
          * ground state.
          */
 

@@ -12,8 +12,8 @@ import cern.colt.list.DoubleArrayList;
 import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.random.sampling.RandomSamplingAssistant;
-/**
- * Approximate quantile finding algorithm for known <tt>N</tt> requiring only one pass and little
+/*
+* Approximate quantile finding algorithm for known <tt>N</tt> requiring only one pass and little
  * main memory; computes quantiles over a sequence of <tt>double</tt> elements.
  *
  * <p>Needs as input the following parameters:
@@ -54,7 +54,7 @@ class KnownDoubleQuantileEstimator extends DoubleQuantileEstimator {
   protected RandomSamplingAssistant samplingAssistant;
   protected double samplingRate; // see method sampleNextElement()
   protected long N; // see method sampleNextElement()
-  /**
+  /*
    * Constructs an approximate quantile finder with b buffers, each having k elements.
    *
    * @param b the number of buffers
@@ -79,7 +79,7 @@ class KnownDoubleQuantileEstimator extends DoubleQuantileEstimator {
     setUp(b, k);
     this.clear();
   }
-  /**
+  /*
    * @param infinities the number of infinities to fill.
    * @param buffer the buffer into which the infinities shall be filled.
    */
@@ -112,7 +112,7 @@ class KnownDoubleQuantileEstimator extends DoubleQuantileEstimator {
     int minLevel = bufferSet._getMinLevelOfFullOrPartialBuffers();
     return bufferSet._getFullOrPartialBuffersWithLevel(minLevel);
   }
-  /**
+  /*
    * Removes all elements from the receiver. The receiver will be empty after this call returns, and
    * its memory requirements will be close to zero.
    */
@@ -129,7 +129,7 @@ class KnownDoubleQuantileEstimator extends DoubleQuantileEstimator {
               Arithmetic.floor(N / samplingRate), N, assist.getRandomGenerator());
     }
   }
-  /**
+  /*
    * Returns a deep copy of the receiver.
    *
    * @return a deep copy of the receiver.
@@ -175,7 +175,7 @@ class KnownDoubleQuantileEstimator extends DoubleQuantileEstimator {
     }
     return phis;
   }
-  /**
+  /*
    * Computes the specified quantile elements over the values previously added.
    *
    * @param phis the quantiles for which elements are to be computed. Each phi must be in the
@@ -218,7 +218,7 @@ class KnownDoubleQuantileEstimator extends DoubleQuantileEstimator {
     // now you can continue filling the remaining values, if any.
     return quantileElements;
   }
-  /**
+  /*
    * Reading off quantiles requires to fill some +infinity, -infinity values to make a partial
    * buffer become full.
    *

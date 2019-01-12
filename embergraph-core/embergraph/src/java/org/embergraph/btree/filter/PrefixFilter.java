@@ -12,8 +12,8 @@ import org.embergraph.btree.keys.StrengthEnum;
 import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Filter visits all {@link ITuple}s whose keys begin with any of the specified prefix(s). The filer
+/*
+* Filter visits all {@link ITuple}s whose keys begin with any of the specified prefix(s). The filer
  * accepts a key or an array of keys that define the key prefix(s) whose completions will be
  * visited. It efficiently forms the successor of each key prefix, performs a key-range scan of the
  * key prefix, and (if more than one key prefix is given), seeks to the start of the next key-range
@@ -91,7 +91,7 @@ public class PrefixFilter<E> extends FilterBase implements ITupleFilter<E> {
   /** The array of key prefixes to be scanned. */
   private final byte[][] keyPrefix;
 
-  /**
+  /*
    * Completion scan with a single prefix. The iterator will visit all tuples having the given key
    * prefix.
    *
@@ -102,7 +102,7 @@ public class PrefixFilter<E> extends FilterBase implements ITupleFilter<E> {
     this(new byte[][] {keyPrefix});
   }
 
-  /**
+  /*
    * Completion scan with an array of key prefixes. The iterator will visit all tuples having the
    * first key prefix, then all tuples having the next key prefix, etc. until all key prefixes have
    * been evaluated.
@@ -133,7 +133,7 @@ public class PrefixFilter<E> extends FilterBase implements ITupleFilter<E> {
 
   private static class PrefixFilterator<E> implements ITupleIterator<E> {
 
-    /**
+    /*
      * The source iterator. The lower bound for the source iterator should be the first key prefix.
      * The upper bound should be the fixed length successor of the last key prefix (formed by adding
      * one bit, not by appending a <code>nul</code> byte).
@@ -144,7 +144,7 @@ public class PrefixFilter<E> extends FilterBase implements ITupleFilter<E> {
 
     private final PrefixFilter<E> filter;
 
-    /**
+    /*
      * The index of the key prefix that is currently being scanned. The entire scan is complete when
      * index == keyPrefix.length.
      */
@@ -156,7 +156,7 @@ public class PrefixFilter<E> extends FilterBase implements ITupleFilter<E> {
     /** The current tuple. */
     private ITuple<E> current = null;
 
-    /**
+    /*
      * Completion scan.
      *
      * @param src The source iterator.

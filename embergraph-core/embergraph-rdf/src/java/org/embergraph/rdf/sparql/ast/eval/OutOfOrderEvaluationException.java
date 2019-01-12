@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * An instance of this exception is thrown if out of order evaluation of solutions is observed in an
+/*
+* An instance of this exception is thrown if out of order evaluation of solutions is observed in an
  * evaluation context which does not permit this (the RTO).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

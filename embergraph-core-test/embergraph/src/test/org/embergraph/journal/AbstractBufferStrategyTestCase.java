@@ -29,8 +29,8 @@ import org.embergraph.rawstore.AbstractRawStoreTestCase;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
-/**
- * Base class for writing test cases for the different {@link IBufferStrategy} implementations.
+/*
+* Base class for writing test cases for the different {@link IBufferStrategy} implementations.
  *
  * @todo write tests for {@link IBufferStrategy#transferTo(java.io.RandomAccessFile)}. This code is
  *     currently getting "checked" by the {@link IndexSegmentBuilder}.
@@ -94,7 +94,7 @@ public abstract class AbstractBufferStrategyTestCase extends AbstractRawStoreTes
   //
   //    }
 
-  /**
+  /*
    * Unit test for {@link AbstractBufferStrategy#overflow(long)}. The test verifies that the extent
    * and the user extent are correctly updated after an overflow.
    */
@@ -191,7 +191,7 @@ public abstract class AbstractBufferStrategyTestCase extends AbstractRawStoreTes
     }
   }
 
-  /**
+  /*
    * Write random bytes on the store.
    *
    * @param store The store.
@@ -261,7 +261,7 @@ public abstract class AbstractBufferStrategyTestCase extends AbstractRawStoreTes
     return addr;
   }
 
-  /**
+  /*
    * Test verifies that a write over the remaining extent triggers an overflow. The test also makes
    * sure that the existing data is recoverable and that the new data is also recoverable (when the
    * buffer is extended it is typically copied while the length of a file is simply changed).

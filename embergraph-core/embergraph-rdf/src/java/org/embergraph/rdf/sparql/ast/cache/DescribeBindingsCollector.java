@@ -29,8 +29,8 @@ import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 
-/**
- * Collects and reports the distinct bindings observed on some set of variables.
+/*
+* Collects and reports the distinct bindings observed on some set of variables.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -44,7 +44,7 @@ public class DescribeBindingsCollector
   private final CloseableIteration<BindingSet, QueryEvaluationException> src;
   private boolean open = true;
 
-  /**
+  /*
    * @param originalVars The set of variables whose distinct bound values will be reported.
    * @param describedResources The set of distinct bound values for those variables (a high
    *     concurrency, thread-safe set).

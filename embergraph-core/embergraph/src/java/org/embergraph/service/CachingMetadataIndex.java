@@ -35,8 +35,8 @@ import org.embergraph.journal.TimestampUtility;
 import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 import org.embergraph.mdi.PartitionLocator;
 
-/**
- * Implementation caches all locators and then updates them on demand as stale locators are
+/*
+* Implementation caches all locators and then updates them on demand as stale locators are
  * discovered.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -47,7 +47,7 @@ public class CachingMetadataIndex extends CacheOnceMetadataIndex {
   /** The delegate from which we refresh our local copy when we see stale locators. */
   private final NoCacheMetadataIndexView delegate;
 
-  /**
+  /*
    * Note: This class must impose synchronization on access to the B+Tree caching the locators. That
    * synchronization is required since the class will re-fetch locators on demand in {@link
    * #staleLocator(PartitionLocator)}. Since the fetched locators will be written onto the B+Tree
@@ -58,7 +58,7 @@ public class CachingMetadataIndex extends CacheOnceMetadataIndex {
    */
   private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
-  /**
+  /*
    * Cache the index partition metadata in the client.
    *
    * @param name The name of the scale-out index.
@@ -207,7 +207,7 @@ public class CachingMetadataIndex extends CacheOnceMetadataIndex {
     return rangeIterator(fromKey, toKey, 0 /* capacity */, IRangeQuery.DEFAULT, null /*filter*/);
   }
 
-  /**
+  /*
    * FIXME this is wrong. The {@link #delegate} must be a {@link UnisolatedReadWriteIndex} in order
    * to provide correct locking for the iterator. The class may have to be refactored in order to
    * permit the behavior to be gated by an {@link UnisolatedReadWriteIndex}.

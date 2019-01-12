@@ -27,8 +27,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NamedSolutionSetRefUtility;
 import org.embergraph.bop.engine.IRunningQuery;
 
-/**
- * An interface specifying the information required to locate a named solution set.
+/*
+* An interface specifying the information required to locate a named solution set.
  *
  * <p>Note: There are two basic ways to locate named solution sets. Either they are attached to the
  * {@link IQueryAttributes} of an {@link IRunningQuery} (query local) -or- they are located using
@@ -40,13 +40,13 @@ import org.embergraph.bop.engine.IRunningQuery;
  */
 public interface INamedSolutionSetRef extends Serializable {
 
-  /**
+  /*
    * The {@link UUID} of the {@link IRunningQuery} which generated the named solution set. When non-
    * <code>null</code>, this is where you need to look to find the data.
    */
   UUID getQueryId();
 
-  /**
+  /*
    * The namespace associated with the KB view -or- <code>null</code> if the named solution set is
    * attached to an {@link IRunningQuery}.
    *
@@ -55,20 +55,20 @@ public interface INamedSolutionSetRef extends Serializable {
    */
   String getNamespace();
 
-  /**
+  /*
    * The timestamp associated with the KB view.
    *
    * <p>Note: This MUST be ignored if {@link #getNamespace()} returns <code>null</code>.
    */
   long getTimestamp();
 
-  /**
+  /*
    * The application level name for the named solution set (as used in a SPARQL query or update
    * operation).
    */
   String getLocalName();
 
-  /**
+  /*
    * Return the fully qualified name of the named solution set. This is the name that is used to
    * resolve the named solution set against a durable store or cache.
    *
@@ -79,13 +79,13 @@ public interface INamedSolutionSetRef extends Serializable {
    */
   String getFQN();
 
-  /**
+  /*
    * The ordered set of variables that specifies the ordered set of components in the key for the
    * desired index over the named solution set (required, but may be an empty array).
    */
   IVariable[] getJoinVars();
 
-  /**
+  /*
    * Return a human readable representation which can be decoded by {@link
    * NamedSolutionSetRefUtility#valueOf(String)}.
    */

@@ -19,8 +19,8 @@ package org.embergraph.bop.joinGraph.rto;
 
 import java.util.Comparator;
 
-/**
- * Places edges into order by ascending estimated cardinality. Edges which are not weighted are
+/*
+* Places edges into order by ascending estimated cardinality. Edges which are not weighted are
  * ordered to the end.
  *
  * <p>TODO unit tests, including with unweighted edges.

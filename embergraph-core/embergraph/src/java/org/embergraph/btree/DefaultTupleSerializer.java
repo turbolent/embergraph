@@ -38,8 +38,8 @@ import org.embergraph.btree.raba.codec.FrontCodedRabaCoder.DefaultFrontCodedRaba
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.io.SerializerUtil;
 
-/**
- * Default implementation uses the {@link KeyBuilder} to format the object as a key and uses Java
+/*
+* Default implementation uses the {@link KeyBuilder} to format the object as a key and uses Java
  * default serialization for the value. You only need to subclass this if you want to use custom
  * (de-)serialization of the value, custom conversion of the application key to an unsigned byte[],
  * or if you have a special type of application key such that you are able to decode the unsigned
@@ -54,7 +54,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
   /** */
   private static final long serialVersionUID = 2211020411074955099L;
 
-  /**
+  /*
    * The default for {@link IKeyBuilderFactory}.
    *
    * @deprecated by {@link IndexMetadata.Options#KEY_BUILDER_FACTORY}
@@ -64,7 +64,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
     return new DefaultKeyBuilderFactory(new Properties());
   }
 
-  /**
+  /*
    * The default for {@link #getLeafKeysCoder()} (compression for the keys stored in a leaf).
    *
    * @deprecated by {@link IndexMetadata.Options#LEAF_KEYS_CODER}
@@ -76,7 +76,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
 
   }
 
-  /**
+  /*
    * The default for {@link #getLeafValuesCoder()} (compression for the values stored in a leaf).
    *
    * @deprecated by {@link IndexMetadata.Options#LEAF_VALUES_CODER}
@@ -103,7 +103,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
     return leafValsCoder;
   }
 
-  /**
+  /*
    * Override the {@link #getLeafKeysCoder()}. It is NOT safe to change this value once data have
    * been stored in an {@link IIndex} using another value as existing data MAY become unreadable.
    *
@@ -116,7 +116,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
     this.leafKeysCoder = leafKeysCoder;
   }
 
-  /**
+  /*
    * Override the {@link #getLeafValuesCoder()}. It is NOT safe to change this value once data have
    * been stored in an {@link IIndex} using another value as existing data MAY become unreadable.
    *
@@ -129,7 +129,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
     this.leafValsCoder = valuesCoder;
   }
 
-  /**
+  /*
    * Factory for a new instance using default values for the {@link #getKeyBuilder()}, the {@link
    * #getLeafKeysCoder()}, and the {@link #getLeafValuesCoder()}.
    */
@@ -147,7 +147,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
   /** De-serialization ctor <em>only</em>. */
   public DefaultTupleSerializer() {}
 
-  /**
+  /*
    * @param keyBuilderFactory The {@link IKeyBuilderFactory}, which will be automatically wrapped up
    *     by a {@link ThreadLocalKeyBuilderFactory}.
    */
@@ -190,7 +190,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
     return sb.toString();
   }
 
-  /**
+  /*
    * A thread-local {@link IKeyBuilder} instance.
    *
    * <p>Note: By default, the {@link #getKeyBuilder()} uses whatever default is in place on the
@@ -249,7 +249,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
     return getKeyBuilder().reset().append(obj).getKey();
   }
 
-  /**
+  /*
    * Serializes the object as a byte[] using Java default serialization.
    *
    * @param obj The object to be serialized (MAY be <code>null</code>).
@@ -262,7 +262,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
     return SerializerUtil.serialize(obj);
   }
 
-  /**
+  /*
    * De-serializes an object from the {@link ITuple#getValue() value} stored in the tuple (ignores
    * the key stored in the tuple).
    */
@@ -275,7 +275,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
     return (V) SerializerUtil.deserialize(tuple.getValue());
   }
 
-  /**
+  /*
    * This is an unsupported operation. Additional information is required to either decode the
    * internal unsigned byte[] keys or to extract the key from the de-serialized value (if it is
    * being stored in that value). You can either write your own {@link ITupleSerializer} or you can
@@ -290,7 +290,7 @@ public class DefaultTupleSerializer<K extends Object, V extends Object>
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * The initial version.
    *
    * <p>Note: Explicit versioning for the {@link DefaultTupleSerializer} was introduced with

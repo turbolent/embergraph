@@ -31,8 +31,8 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
 
-/**
- * This just strips the {@link QueryHints#QUERYID} out of the AST. The {@link
+/*
+* This just strips the {@link QueryHints#QUERYID} out of the AST. The {@link
  * Embergraph2ASTSPARQLParser} is responsible for traversing the AST and, if it finds the {@link
  * QueryHints#QUERYID}, attaching it to the {@link ASTContainer}'s query hints {@link Properties}
  * object.

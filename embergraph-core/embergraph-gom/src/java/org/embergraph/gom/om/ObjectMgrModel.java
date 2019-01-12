@@ -47,8 +47,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-/**
- * Base class for {@link IObjectManager} implementations. This class handles {@link IObjectManager}
+/*
+* Base class for {@link IObjectManager} implementations. This class handles {@link IObjectManager}
  * protocol for maintaining an transaction edit list. Concrete implementations need to provide for
  * communication with the database (either remote or embedded) and the DESCRIBE (aka Object) cache.
  *
@@ -67,21 +67,21 @@ public abstract class ObjectMgrModel implements IObjectManager {
   /** Object Creation and ID Management patterns. */
   private final IIDGenerator m_idGenerator;
 
-  /**
+  /*
    * The "running object table." Dirty objects are wired into this table by the existence of a hard
    * reference in the {@link #m_dirtyGPOs} list. The keys are either {@link Resource}s or {@link
    * Statement}s.
    */
   private final ConcurrentWeakValueCache<Object, IGPO> m_dict;
 
-  /**
+  /*
    * This is only for the predicates and provides the guarantee that we can reference test on
    * predicates within the scope of a given object manager.
    */
   private final ConcurrentHashMap<EmbergraphURI, EmbergraphURI> m_internedKeys =
       new ConcurrentHashMap<EmbergraphURI, EmbergraphURI>();
 
-  /**
+  /*
    * We need to maintain a dirty list in order to pin object references that are dirty. On commit,
    * we need to send the retracts and the asserts in a single operation. The GPO.GPOEntry tracks
    * those individual asserts and retracts.
@@ -92,7 +92,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
 
   private final URI s_nmeMgr;
 
-  /**
+  /*
    * A lock for things which need to be serialized, initially just the native transaction stuff.
    * Avoid using "synchronized(this)" or the synchronized keyword as that forces everything to
    * contend for the same lock. If you can use different locks for different types of things then
@@ -100,7 +100,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
    */
   private final Lock lock = new ReentrantLock();
 
-  /**
+  /*
    * Default to maximum dirty list size to lock out any incremental flushing.
    *
    * <p>Note: Incremental eviction breaks the ACID contract for updates. Thus, the dirty list should
@@ -111,7 +111,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
   /** The native transaction counter. */
   private int m_transactionCounter = 0;
 
-  /**
+  /*
    * @param endpoint The SPARQL endpoint that can be used to communicate with the database.
    * @param valueFactory The value factory.
    */
@@ -153,7 +153,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     return m_valueFactory;
   }
 
-  /**
+  /*
    * Intern a predicate (internal API). This provides the guarantee that we can use reference tests
    * (<code>==</code>) for URIs within the scope of a given object manager.
    *
@@ -174,7 +174,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     return uri;
   }
 
-  /**
+  /*
    * Make a best effort attempt to use the {@link Resource} associated with an {@link IGPO} in the
    * running object table
    *
@@ -196,7 +196,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     return t;
   }
 
-  /**
+  /*
    * GPOs are added to the dirty list when initially modified. The dirty list is not bounded. Large
    * updates should be done using the RDF and SPARQL layer which do not have this implicit scaling
    * limit.
@@ -289,7 +289,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
           "Flush took " + (System.currentTimeMillis() - start) + "ms for " + count + " objects");
   }
 
-  /**
+  /*
    * Flush statements to be inserted and removed to the backing store..
    *
    * @param insertList The list of statements to be added.
@@ -317,7 +317,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     return ret;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>FIXME This is using the {@link String} representation of the {@link Statement} as the blank
@@ -414,7 +414,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     return initGPO(null /* gpo */, itr);
   }
 
-  /**
+  /*
    * Initialize one or more {@link IGPO}s from a collection of statements.
    *
    * @param gpo The gpo (optional). When given, only the specified {@link IGPO} will be initialized.
@@ -431,7 +431,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
 
     if (gpo != null) {
 
-      map = Collections.singletonMap((Resource) gpo.getId(), (IGPO) gpo);
+      map = Collections.singletonMap(gpo.getId(), gpo);
 
     } else {
 
@@ -453,8 +453,8 @@ public abstract class ObjectMgrModel implements IObjectManager {
 
         if (id != null) {
 
-          /*
-           * Initializing some specific gpo provided by the caller.
+        /*
+       * Initializing some specific gpo provided by the caller.
            */
 
           if (subject.equals(id)) {
@@ -469,8 +469,8 @@ public abstract class ObjectMgrModel implements IObjectManager {
 
         } else {
 
-          /*
-           * Initial GPOs for all resources visited.
+        /*
+       * Initial GPOs for all resources visited.
            */
           {
             final GPO tmp = (GPO) getGPO(subject);
@@ -548,8 +548,8 @@ public abstract class ObjectMgrModel implements IObjectManager {
     }
   }
 
-  //    /**
-  //     * Hook for extended commit processing.
+  //    /*
+//     * Hook for extended commit processing.
   //     */
   //	protected abstract void doCommit();
 
@@ -583,8 +583,8 @@ public abstract class ObjectMgrModel implements IObjectManager {
     }
   }
 
-  //	/**
-  //	 * Hook for extended rollback processing.
+  //	/*
+//	 * Hook for extended rollback processing.
   //	 */
   //	abstract protected void doRollback();
 
@@ -608,7 +608,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     gpo.remove();
   }
 
-  /**
+  /*
    * Simple save/recall interface that the ObjectManager provides to simplify other pattern
    * implementations. Internally it uses a NameManager GPO
    */
@@ -618,7 +618,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     getGPO(s_nmeMgr).setValue(key, value);
   }
 
-  /**
+  /*
    * Simple save/recall interface that the ObjectManager provides to simplify other pattern
    * implementations. Internally it uses a NameManager GPO
    */
@@ -639,7 +639,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     }
   }
 
-  /**
+  /*
    * Return the list of names that have been used to save references. These are the properties of
    * the internal NameManager.
    */
@@ -662,7 +662,7 @@ public abstract class ObjectMgrModel implements IObjectManager {
     m_dirtyGPOs.clear();
   }
 
-  /**
+  /*
    * Encode a URL, Literal, or blank node for inclusion in a SPARQL query to be sent to the remote
    * service.
    *

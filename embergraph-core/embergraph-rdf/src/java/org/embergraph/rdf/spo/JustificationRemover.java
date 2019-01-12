@@ -14,8 +14,8 @@ import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.rdf.inf.Justification;
 import org.embergraph.util.Bytes;
 
-/**
- * Class writes on the justification index, removing all {@link Justification}s for each statement
+/*
+* Class writes on the justification index, removing all {@link Justification}s for each statement
  * specified by the caller.
  *
  * <p>Note: There is only one index for {@link Justification}s. The keys all use the {s,p,o} of the

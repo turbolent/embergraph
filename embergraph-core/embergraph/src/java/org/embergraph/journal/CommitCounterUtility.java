@@ -26,8 +26,8 @@ import java.util.Formatter;
 import org.apache.log4j.Logger;
 import org.embergraph.ha.halog.IHALogReader;
 
-/**
- * Utility class for operations on files that are named using a commit counter.
+/*
+* Utility class for operations on files that are named using a commit counter.
  *
  * <p>The commit counter based files are arranged in a heirarchial directory structure with 3 digits
  * per directory and 7 directory levels. These levels are labeled with depths <code>[0..6]</code>.
@@ -44,7 +44,7 @@ public class CommitCounterUtility {
 
   private static final Logger log = Logger.getLogger(CommitCounterUtility.class);
 
-  /**
+  /*
    * The number of base-10 digits per directory level. This allows children having labels <code>
    * 000...999</code>. Thus there are <code>1000</code> children per directory.
    */
@@ -59,7 +59,7 @@ public class CommitCounterUtility {
   /** The depth of a leaf directory. */
   private static final int LEAF_DIR_DEPTH = 6;
 
-  /**
+  /*
    * The #of digits (21) in the base file name for a commit counter as formatted by {@link
    * #getCommitCounterStr(long)}.
    *
@@ -67,14 +67,14 @@ public class CommitCounterUtility {
    */
   private static final int BASENAME_DIGITS = 21;
 
-  /**
+  /*
    * The {@link Formatter} string that is used to generate the base name of the files in the leaf
    * directories. This string represents the commit counter value with leading zeros. The leading
    * zeros are relied upon to impose an ordering over the base names of the files using a sort.
    */
   private static final String FORMAT_STR = "%0" + BASENAME_DIGITS + "d";
 
-  /**
+  /*
    * The #of digits (21) in the base file name for a commit counter as formatted by {@link
    * #getCommitCounterStr(long)}.
    *
@@ -85,7 +85,7 @@ public class CommitCounterUtility {
     return BASENAME_DIGITS;
   }
 
-  /**
+  /*
    * The number of base-10 digits per directory level ( {@value #DIGITS_PER_DIR}). This allows
    * children having labels <code>000...999</code>. Thus there are <code>1000</code> children per
    * directory.
@@ -113,7 +113,7 @@ public class CommitCounterUtility {
     return LEAF_DIR_DEPTH;
   }
 
-  /**
+  /*
    * Return the name of the {@link File} associated with the commitCounter.
    *
    * @param dir The directory spanning all such files.
@@ -154,7 +154,7 @@ public class CommitCounterUtility {
     return file;
   }
 
-  /**
+  /*
    * Format the commit counter with leading zeros such that it will be lexically ordered in the file
    * system.
    *
@@ -177,7 +177,7 @@ public class CommitCounterUtility {
     return basename;
   }
 
-  /**
+  /*
    * Parse out the commitCounter from the file name.
    *
    * @param name The file name
@@ -204,7 +204,7 @@ public class CommitCounterUtility {
     return commitCounter;
   }
 
-  /**
+  /*
    * Return the basename of the file (strip off the extension).
    *
    * @param name The file name.
@@ -218,7 +218,7 @@ public class CommitCounterUtility {
     return basename;
   }
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself. Only files recognized by {@link #getFileFilter()} will be deleted.
    *
@@ -279,7 +279,7 @@ public class CommitCounterUtility {
     }
   }
 
-  /**
+  /*
    * Find and return the {@link File} associated with the greatest commit counter. This uses a
    * reverse order search to locate the most recent file very efficiently.
    *
@@ -333,7 +333,7 @@ public class CommitCounterUtility {
     return null;
   }
 
-  /**
+  /*
    * Impose a reverse sort on files.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -34,8 +34,8 @@ import org.embergraph.service.proxy.ClientAsynchronousIterator;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * A factory for {@link DistributedJoinTask}s. The factory either creates a new {@link
+/*
+* A factory for {@link DistributedJoinTask}s. The factory either creates a new {@link
  * DistributedJoinTask} or returns the pre-existing {@link DistributedJoinTask} for the given {@link
  * JoinMasterTask} instance (as identified by its {@link UUID}), <i>orderIndex</i>, and
  * <i>partitionId</i>. When the desired join task pre-exists, factory will invoke {@link
@@ -101,14 +101,14 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
 
   final IKeyOrder[] keyOrders;
 
-  /**
+  /*
    * A list of variables required for each tail, by tailIndex. Used to filter downstream variable
    * binding sets.
    */
   final IVariable[][] requiredVars;
 
-  //    /**
-  //     * Set by the {@link DataService} which recognized that this class
+  //    /*
+//     * Set by the {@link DataService} which recognized that this class
   //     * implements the {@link IDataServiceCallable}.
   //     */
   //    private transient DataService dataService;
@@ -132,7 +132,7 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
         + "}";
   }
 
-  /**
+  /*
    * @param scaleOutIndexName
    * @param rule
    * @param joinNexusFactory
@@ -184,7 +184,7 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
     this.requiredVars = requiredVars;
   }
 
-  /**
+  /*
    * Either starts a new {@link DistributedJoinTask} and returns its {@link Future} or returns the
    * {@link Future} of an existing {@link DistributedJoinTask} for the same {@link
    * DistributedJoinMasterTask} instance, <i>orderIndex</i>, and <i>partitionId</i>.
@@ -241,8 +241,8 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
 
         } else {
 
-          /*
-           * Create a new join task (the old one has decided that it
+        /*
+       * Create a new join task (the old one has decided that it
            * will not accept any new sources).
            */
 
@@ -258,8 +258,8 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
 
       } else {
 
-        /*
-         * There is no join task in the session so we create one now.
+      /*
+       * There is no join task in the session so we create one now.
          */
 
         // new task.
@@ -331,7 +331,7 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
     return joinTaskFuture;
   }
 
-  /**
+  /*
    * @param masterUUID The master UUID should be cached locally by the JoinTask so that invoking
    *     this method does not require RMI.
    * @param orderIndex
@@ -344,7 +344,7 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
     return masterUUID + "/" + orderIndex + "/" + partitionId;
   }
 
-  /**
+  /*
    * The index view that we need for the {@link DistributedJoinTask} is on the {@link IndexManager}
    * class, not the live {@link ManagedJournal}. Looking on the live journal we will only see the
    * mutable {@link BTree} and not the entire index partition view. However, {@link IndexManager}
@@ -473,7 +473,7 @@ public class JoinTaskFactoryTask extends DataServiceCallable<Future> {
       return dataService.getFederation().getCounters();
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>TODO Implement. Probably delegate to the local DS n2a index so this does a DS local n2a

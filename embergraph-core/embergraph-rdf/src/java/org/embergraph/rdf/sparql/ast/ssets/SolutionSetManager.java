@@ -39,8 +39,8 @@ import org.embergraph.relation.AbstractResource;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 import org.embergraph.striterator.CloseableIteratorWrapper;
 
-/**
- * A manager for named SOLUTION SETS scoped by some namespace and timestamp.
+/*
+* A manager for named SOLUTION SETS scoped by some namespace and timestamp.
  *
  * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=SPARQL_Update">
  *     SPARQL Update </a>
@@ -90,8 +90,8 @@ public class SolutionSetManager implements ISolutionSetManager {
     return store;
   }
 
-  //    /**
-  //     * MVCC VIEWS: Convert over to Name2Addr and layered resolution with
+  //    /*
+//     * MVCC VIEWS: Convert over to Name2Addr and layered resolution with
   //     * appropriate concurrency control at each layer.
   //     *
   //     * <pre>
@@ -184,7 +184,7 @@ public class SolutionSetManager implements ISolutionSetManager {
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: Explicit close is not safe. We want to destroy to cached solution sets if the
@@ -197,7 +197,7 @@ public class SolutionSetManager implements ISolutionSetManager {
 
   }
 
-  /**
+  /*
    * Return the fully qualified name of the named solution set.
    *
    * @param localName The local (aka application) name.
@@ -265,7 +265,7 @@ public class SolutionSetManager implements ISolutionSetManager {
 
   }
 
-  /**
+  /*
    * Return the named solution set.
    *
    * @param fqn The fully qualified name.
@@ -286,8 +286,8 @@ public class SolutionSetManager implements ISolutionSetManager {
       final long ts;
       if (getStore() instanceof IJournal) {
 
-        /*
-         * Optimized code path uses the readsOnCommitTime to improve
+      /*
+       * Optimized code path uses the readsOnCommitTime to improve
          * caching.
          */
 
@@ -299,8 +299,8 @@ public class SolutionSetManager implements ISolutionSetManager {
 
       } else {
 
-        /**
-         * Note: This code path is used by the TemporaryStore and possibly ResourceManager (for a
+      /*
+       * Note: This code path is used by the TemporaryStore and possibly ResourceManager (for a
          * data service). The [store] reference here is always the local index manager. Thus it can
          * not be an IEmbergraphFederation.
          *
@@ -380,7 +380,7 @@ public class SolutionSetManager implements ISolutionSetManager {
     writeSolutions(sset, src);
   }
 
-  /**
+  /*
    * Create iff it does not exist.
    *
    * @param solutionSet The name.
@@ -399,7 +399,7 @@ public class SolutionSetManager implements ISolutionSetManager {
 
     final StreamIndexMetadata md = new StreamIndexMetadata(fqn, UUID.randomUUID());
 
-    /**
+    /*
      * TODO GIST : We should not have to do this here. See Checkpoint.create() and
      * SolutionSetStream.create() for why this is necessary.
      *
@@ -476,7 +476,7 @@ public class SolutionSetManager implements ISolutionSetManager {
     return sset.get();
   }
 
-  /**
+  /*
    * Return the default metadata used when a named solution set is declared implicitly rather than
    * explicitly.
    *

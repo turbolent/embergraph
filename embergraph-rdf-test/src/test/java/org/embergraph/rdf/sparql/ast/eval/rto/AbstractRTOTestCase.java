@@ -43,8 +43,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
-/**
- * Data driven test suite for the Runtime Query Optimizer (RTO).
+/*
+* Data driven test suite for the Runtime Query Optimizer (RTO).
  *
  * <p>Note: We reduce the stochastic behavior of the algorithm by using non-random sampling
  * techniques. However, the main correctness issues for the RTO are the handling of different kinds
@@ -105,7 +105,7 @@ public class AbstractRTOTestCase extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Helper class supports inspection of the terminated {@link IRunningQuery}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -142,7 +142,7 @@ public class AbstractRTOTestCase extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Helper to run the test and examine the RTO determined solution.
    *
    * @param expected The expected join ordering.
@@ -154,7 +154,7 @@ public class AbstractRTOTestCase extends AbstractDataDrivenSPARQLTestCase {
     assertSameJoinOrder(Collections.singletonList(expected), helper);
   }
 
-  /**
+  /*
    * Helper to run the test and examine the RTO determined solution.
    *
    * @param expectedOrders The expected join ordering(s)

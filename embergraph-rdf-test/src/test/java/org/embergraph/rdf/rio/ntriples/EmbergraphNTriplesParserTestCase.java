@@ -14,8 +14,8 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-/**
- * JUnit test for the N-Triples parser.
+/*
+* JUnit test for the N-Triples parser.
  *
  * @author Arjohn Kampman
  */
@@ -33,7 +33,7 @@ public abstract class EmbergraphNTriplesParserTestCase extends TestCase2 {
 
   private static String NTRIPLES_TEST_FILE_WITH_SIDS = "test-sids.nt";
 
-  /**
+  /*
    * TODO This file is not legal NTRIPLES. It has "_" and "-" in the blank node IDs. Those
    * characters are not legal in NTRIPLES within a blank node ID. The parser has been hacked to
    * comply with this file. See the parser for what would need to be changed to remove this

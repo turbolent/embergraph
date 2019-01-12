@@ -37,8 +37,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Abstract base class with some useful defaults.
+/*
+* Abstract base class with some useful defaults.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <VS>
@@ -49,8 +49,8 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
 
   private static final Logger log = Logger.getLogger(BaseGASProgram.class);
 
-  //    /**
-  //     * If the vertex is actually an edge, then return the decoded edge.
+  //    /*
+//     * If the vertex is actually an edge, then return the decoded edge.
   //     *
   //     * @see GASUtil#decodeStatement(Value)
   //     */
@@ -60,7 +60,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
   //
   //    }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default implementation returns {@link #getGatherEdges()} and the {@link
@@ -83,7 +83,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     return edges;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default gathers on the {@link EdgesEnum#InEdges}.
@@ -94,7 +94,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     return EdgesEnum.InEdges;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default scatters on the {@link EdgesEnum#OutEdges}.
@@ -105,7 +105,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     return EdgesEnum.OutEdges;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default implementation populates the frontier IFF this is an {@link
@@ -128,8 +128,8 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     }
   }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     * <p>
   //     * The default implementation is a NOP.
   //     */
@@ -140,7 +140,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
   //
   //    }
 
-  /**
+  /*
    * Populate the initial frontier using all vertices in the graph.
    *
    * @param ctx The graph evaluation context.
@@ -187,7 +187,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     }
   }
 
-  /**
+  /*
    * Populate the initial frontier using all vertices in the graph.
    *
    * @param ctx The graph evaluation context.
@@ -210,7 +210,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     gasState.setFrontier(ctx, initialFrontier);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default is a NOP.
@@ -225,7 +225,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
 
   //    public Factory<Value, VS> getVertexStateFactory();
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default implementation returns <code>null</code>. Override this if the algorithm uses
@@ -237,7 +237,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     return null;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default implementation returns <code>true</code>. Override this if you know whether or
@@ -249,7 +249,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     return true;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default returns <code>true</code>.
@@ -260,7 +260,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     return true;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -295,7 +295,7 @@ public abstract class BaseGASProgram<VS, ES, ST> implements IGASProgram<VS, ES, 
     return tmp;
   }
 
-  /**
+  /*
    * Interface declares symbolic constants for the {@link IBindingExtractor.IBinder}s reported by
    * {@link BaseGASProgram#getBinderList()}.
    *

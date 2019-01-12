@@ -1,7 +1,7 @@
 package org.embergraph.service.ndx.pipeline;
 
-/**
- * Extends {@link KVOList} to provide handshaking with a {@link KVOLatch}.
+/*
+* Extends {@link KVOList} to provide handshaking with a {@link KVOLatch}.
  *
  * <p>Note: {@link IDuplicateRemover}s MUST create a list from the identified duplicates so that the
  * {@link KVOLatch} of each duplicate as well as the original are decremented after a successful
@@ -18,7 +18,7 @@ public class KVOC<O> extends KVOList<O> {
   /** The latch. */
   private final KVOLatch latch;
 
-  /**
+  /*
    * @param key The unsigned byte[] key (required).
    * @param val The byte[] value (optional).
    * @param obj The paired application object (optional).
@@ -35,7 +35,7 @@ public class KVOC<O> extends KVOList<O> {
     this.latch = latch;
   }
 
-  /**
+  /*
    * Extended to decrement the {@link KVOLatch}. This inherits from {@link KVOList}, which maps
    * {@link KVOList#done()} over the list of duplicates. This ensures that all latches are
    * decremented once the original value has been successfully written onto an index partition.

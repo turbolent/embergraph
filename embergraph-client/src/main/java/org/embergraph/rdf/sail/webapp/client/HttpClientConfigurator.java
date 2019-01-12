@@ -23,8 +23,8 @@ package org.embergraph.rdf.sail.webapp.client;
 
 import org.eclipse.jetty.client.HttpClient;
 
-/**
- * Factory for {@link HttpClient}.
+/*
+* Factory for {@link HttpClient}.
  *
  * @see Options
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,20 +33,20 @@ public class HttpClientConfigurator {
 
   public interface Options {
 
-    /**
+    /*
      * This is the name of an optional System property that may be used to override the {@link
      * IHttpClientFactory} implementation class (default {@value
      * #DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS}).
      */
-    public static final String CONNECTION_MANAGER_FACTORY_CLASS =
+    String CONNECTION_MANAGER_FACTORY_CLASS =
         HttpClientConfigurator.class.getName();
 
     /** The name of the default {@link IHttpClientFactory} implementation class. */
-    public static final String DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS =
+    String DEFAULT_CONNECTION_MANAGER_FACTORY_CLASS =
         DefaultHttpClientFactory.class.getName();
   }
 
-  /**
+  /*
    * Allow a user configurable factory to allow the override of the HttpClient(s) it will return.
    *
    * @see #CONNECTION_MANAGER_FACTORY_CLASS

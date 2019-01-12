@@ -20,8 +20,8 @@ package org.embergraph.rdf.sail.webapp;
 import java.io.IOException;
 import junit.framework.Test;
 
-/**
- * While writing this comment, early January 2014, the status is that the two interesting tests both
+/*
+* While writing this comment, early January 2014, the status is that the two interesting tests both
  * fail and are disabled {@link #xtestMassageServiceCall()} and {@link
  * #xtestMassageServiceNested1Call()}
  *
@@ -43,7 +43,7 @@ public class TestService794 extends AbstractProtocolTest {
         TestService794.class, "test.*", TestMode.quads, TestMode.sids, TestMode.triples);
   }
 
-  /**
+  /*
    * Execute an ASK query including a SERVICE keyword which gets sent back to this server. The test
    * succeeeds if the query returns true, and fails otherwise
    *
@@ -88,7 +88,7 @@ public class TestService794 extends AbstractProtocolTest {
         "} }");
   }
 
-  /**
+  /*
    * This one is currently broken, see trac794
    *
    * <p>Note also there is something unintersting with syntax going wrong with some expressions like

@@ -30,8 +30,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
-/**
- * Pattern using a {@link FutureTask} to force synchronization only on tasks waiting for the same
+/*
+* Pattern using a {@link FutureTask} to force synchronization only on tasks waiting for the same
  * computation. This is based on Java Concurrency in Practice, page 108.
  *
  * <p>Concrete implementations MUST provide a means to limit the size of the {@link #cache}. Because
@@ -71,8 +71,8 @@ public abstract class Memoizer<A, V> implements Computable<A, V> {
         if (f == null) {
           willRun = true; // Note: MUST set before running!
           f = ft;
-          /*
-           * Note: MAY throw out RuntimeException but WILL set
+        /*
+       * Note: MAY throw out RuntimeException but WILL set
            * exception on FutureTask. Thus the thread which invokes
            * ft.run() will have any uncaught exception tossed out of
            * ft.run() while other threads will see that exception
@@ -87,8 +87,8 @@ public abstract class Memoizer<A, V> implements Computable<A, V> {
         // remove cancelled task iff still our task.
         cache.remove(arg, f);
       } catch (InterruptedException e) {
-        /*
-         * Wrap the exception to indicate whether or not the interrupt
+      /*
+       * Wrap the exception to indicate whether or not the interrupt
          * occurred in the thread of the caller that executed the
          * FutureTask in its thread. This is being done as an aid to
          * diagnosing situations where f.get() throws out an
@@ -101,8 +101,8 @@ public abstract class Memoizer<A, V> implements Computable<A, V> {
         if (!willRun) {
           //                        && InnerCause.isInnerCause(e,
           //                                InterruptedException.class)) {
-          /*
-           * Since the task was executed by another thread (ft.run()),
+        /*
+       * Since the task was executed by another thread (ft.run()),
            * remove the task and retry.
            *
            * Note: Basically, what has happened is that the thread

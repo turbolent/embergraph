@@ -20,8 +20,8 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 
-/**
- * The metadata and metric state for a ganglia service, including the metadata for all known metrics
+/*
+* The metadata and metric state for a ganglia service, including the metadata for all known metrics
  * and the metrics for all known metrics on all known hosts.
  */
 public class GangliaState implements IGangliaState {
@@ -34,7 +34,7 @@ public class GangliaState implements IGangliaState {
   /** The factory used to create declarations for new metrics. */
   private final IGangliaMetadataFactory metadataFactory;
 
-  /**
+  /*
    * Canonicalizing map for metric declarations.
    *
    * <p>TODO If this were a weak value map then we could automatically age out metadata declarations
@@ -47,7 +47,7 @@ public class GangliaState implements IGangliaState {
   private final ConcurrentHashMap<String /* metricName */, IGangliaMetadataMessage /* decl */>
       metadata;
 
-  /**
+  /*
    * The current state for all known hosts.
    *
    * <p>The timestamped value for each known metric together with the metadata declaration for that
@@ -60,7 +60,7 @@ public class GangliaState implements IGangliaState {
           ConcurrentHashMap<String /* mungedMetricName */, TimestampMetricValue>>
       knownHosts;
 
-  /**
+  /*
    * @param hostName The name of this host.
    * @param metadataFactory The factory used to create declarations for new metrics.
    */
@@ -87,7 +87,7 @@ public class GangliaState implements IGangliaState {
     return hostName;
   }
 
-  /**
+  /*
    * The factory used to create declarations for new metrics and resolve received declarations to
    * objects with a richer behavior (such as value translation and scaling).
    */
@@ -124,7 +124,7 @@ public class GangliaState implements IGangliaState {
     return metadata.get(metricName);
   }
 
-  /**
+  /*
    * Atomically declare/resolve the metadata for a metric (thread-safe).
    *
    * @param decl The declaration.
@@ -160,7 +160,7 @@ public class GangliaState implements IGangliaState {
     return tmp;
   }
 
-  /**
+  /*
    * Get the counters for the specified host (thread-safe, atomically consistent).
    *
    * <p>Note: This method is private since the API can not otherwise provide a guarantee that the
@@ -236,7 +236,7 @@ public class GangliaState implements IGangliaState {
     return tmp;
   }
 
-  /**
+  /*
    * Purge all metrics for any host whose heartbeat has not been updated in at the last dmax seconds
    * and any counter which has not been updated within its dmax seconds.
    *
@@ -260,7 +260,7 @@ public class GangliaState implements IGangliaState {
     }
   }
 
-  /**
+  /*
    * Purge host if heartbeat is older than dmax. If no heartbeat is recorded, then this looks for
    * the most recent metric from that host and purges the host if that metric is older than dmax.
    *
@@ -346,7 +346,7 @@ public class GangliaState implements IGangliaState {
     return false;
   }
 
-  /**
+  /*
    * Scan all metrics for the given host, purging any whose declared DMax has been exceeded.
    *
    * @param hostName The host name.
@@ -379,8 +379,8 @@ public class GangliaState implements IGangliaState {
 
       if (age > dmax) {
 
-        /*
-         * This metric has not been updated recently. Drop it.
+      /*
+       * This metric has not been updated recently. Drop it.
          */
         hostCounters.remove(tmv.getMetadata().getMetricName(), tmv);
 
@@ -397,7 +397,7 @@ public class GangliaState implements IGangliaState {
     }
   }
 
-  /**
+  /*
    * Drop counters for the named host.
    *
    * <p>Note:There may be some interactions if another thread is currently in the middle of adding a

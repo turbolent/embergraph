@@ -41,8 +41,8 @@ import org.embergraph.btree.Tuple;
 import org.embergraph.btree.isolation.IsolatedFusedView;
 import org.embergraph.util.InnerCause;
 
-/**
- * Test suite for fully-isolated read-write transactions.
+/*
+* Test suite for fully-isolated read-write transactions.
  *
  * @todo verify with writes on multiple indices (partial ordering over the commits)
  * @todo verify partial ordering imposed on concurrent operations on the same tx for indices
@@ -59,8 +59,8 @@ public class TestTx extends ProxyTestCase<Journal> {
     super(name);
   }
 
-  //    /**
-  //     * Writes some interesting constants on {@link System#err}.
+  //    /*
+//     * Writes some interesting constants on {@link System#err}.
   //     */
   //    public void test_constants() {
   //
@@ -73,7 +73,7 @@ public class TestTx extends ProxyTestCase<Journal> {
   //
   //    }
 
-  /**
+  /*
    * Test verifies that a transaction may start when there are (a) no commits on the journal; and
    * (b) no indices have been registered.
    *
@@ -103,7 +103,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Verify that an index is not visible in the tx unless the native transaction in which it is
    * registered has already committed before the tx starts.
    */
@@ -152,7 +152,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test verifies that you always get the same object back when you ask for an isolated named
    * index. This is important both to conserve resources and since the write set is in the isolated
    * index -- you lose it and it is gone.
@@ -201,7 +201,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Create a journal, setup an index, write an entry on that index, and commit the store. Setup a
    * transaction and verify that we can isolate that index and read the written value. Write a value
    * on the unisolated index and verify that it is not visible within the transaction.
@@ -222,8 +222,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-        /*
-         * register the index, write an entry on the unisolated index,
+      /*
+       * register the index, write an entry on the unisolated index,
          * and commit the journal.
          */
 
@@ -246,8 +246,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-        /*
-         * verify that the write is visible in a transaction that starts
+      /*
+       * verify that the write is visible in a transaction that starts
          * after the commit.
          */
 
@@ -255,13 +255,13 @@ public class TestTx extends ProxyTestCase<Journal> {
 
         assertTrue(index.contains(k1));
 
-        assertEquals(v1, (byte[]) index.lookup(k1));
+        assertEquals(v1, index.lookup(k1));
       }
 
       {
 
-        /*
-         * obtain the unisolated index and write another entry and
+      /*
+       * obtain the unisolated index and write another entry and
          * commit the journal.
          */
 
@@ -277,8 +277,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-        /*
-         * verify that the entry written on the unisolated index is not
+      /*
+       * verify that the entry written on the unisolated index is not
          * visible to the transaction that started before that write.
          */
 
@@ -306,8 +306,8 @@ public class TestTx extends ProxyTestCase<Journal> {
         log.debug("tx1: " + tx1 + ", tx2: " + tx2 + "\n" + showCRI(journal));
 
       {
-        /*
-         * start another transaction and verify that the 2nd committed
+      /*
+       * start another transaction and verify that the 2nd committed
          * write is now visible to that transaction.
          */
 
@@ -363,7 +363,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     return out.toString();
   }
 
-  /**
+  /*
    * Test verifies that an isolated write is visible inside of a transaction (tx1) but not in a
    * concurrent transaction (tx2) and not in the unisolated index until the tx1 commits. Once the
    * tx1 commits, the write is visible in the unisolated index. The write never becomes visible in
@@ -385,8 +385,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-        /*
-         * register an index and commit the journal.
+      /*
+       * register an index and commit the journal.
          */
 
         IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
@@ -414,8 +414,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       {
 
-        /*
-         * Write an entry in tx1.
+      /*
+       * Write an entry in tx1.
          *
          * Verify that the entry is not visible in the unisolated index
          * or in the index as isolated by tx2.
@@ -436,8 +436,8 @@ public class TestTx extends ProxyTestCase<Journal> {
         // not visible in the unisolated index.
         assertFalse(journal.getIndex(name).contains(k1));
 
-        /*
-         * Commit tx1.
+      /*
+       * Commit tx1.
          *
          * Verify that the write is still not visible in tx2 but that it
          * is now visible in the unisolated index.
@@ -458,7 +458,7 @@ public class TestTx extends ProxyTestCase<Journal> {
 
         // check the version timestamp in the unisolated index.
         {
-          final BTree btree = ((BTree) journal.getIndex(name));
+          final BTree btree = journal.getIndex(name);
 
           final ITuple<?> tuple = btree.lookup(k1, new Tuple(btree, IRangeQuery.ALL));
 
@@ -466,15 +466,15 @@ public class TestTx extends ProxyTestCase<Journal> {
 
           assertFalse(tuple.isDeletedVersion());
 
-          /*
-           * Verify that the revisionTime was written onto the tuple
+        /*
+       * Verify that the revisionTime was written onto the tuple
            * in the post-commit view of the unisolated index.
            */
           assertEquals("revisionTime", localState.getRevisionTime(), tuple.getVersionTimestamp());
         }
 
-        /*
-         * write a conflicting entry in tx2 and verify that validation
+      /*
+       * write a conflicting entry in tx2 and verify that validation
          * of tx2 fails.
          */
 
@@ -484,7 +484,7 @@ public class TestTx extends ProxyTestCase<Journal> {
         {
           final IsolatedFusedView isolatedView = (IsolatedFusedView) journal.getIndex(name, tx2);
 
-          final BTree btree = ((BTree) journal.getIndex(name));
+          final BTree btree = journal.getIndex(name);
 
           Tuple<?> tuple = btree.lookup(k1, new Tuple(btree, IRangeQuery.ALL));
 
@@ -494,8 +494,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
           assertFalse(tuple.isDeletedVersion());
 
-          /*
-           * Verify the versionTimestamp on the tuple in the view
+        /*
+       * Verify the versionTimestamp on the tuple in the view
            * isolated by [tx2]. It should now be the start time for
            * tx2 since we just overwrote that tuple.
            */
@@ -522,7 +522,7 @@ public class TestTx extends ProxyTestCase<Journal> {
 
   // Delete object.
 
-  /**
+  /*
    * Two transactions (tx0, tx1) are created. A version (v0) is written onto tx0 for a key (id0).
    * The test verifies the write and verifies that the write is not visible in tx1. The v0 is then
    * deleted from tx0 and then another version (v1) is written on tx0 under the same key. Both
@@ -538,8 +538,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       final String name = "abc";
 
       {
-        /*
-         * register an index and commit the journal.
+      /*
+       * register an index and commit the journal.
          */
         IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
@@ -624,7 +624,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Two transactions (tx0, tx1) are created. A version (v0) is written onto tx0 for a key (id0).
    * The test verifies the write and verifies that the write is not visible in tx1. The v0 is then
    * deleted from tx0 and then another version (v1) is written on tx0 under the same key and
@@ -640,8 +640,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       final String name = "abc";
 
       {
-        /*
-         * register an index and commit the journal.
+      /*
+       * register an index and commit the journal.
          */
         IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
@@ -681,7 +681,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertFalse(journal.getIndex(name, tx1).contains(id0));
 
       // delete the version.
-      assertEquals(v0, (byte[]) journal.getIndex(name, tx0).remove(id0));
+      assertEquals(v0, journal.getIndex(name, tx0).remove(id0));
 
       // no longer visible in that transaction.
       assertFalse(journal.getIndex(name, tx0).contains(id0));
@@ -706,7 +706,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       /*
        * Delete v1.
        */
-      assertEquals(v1, (byte[]) journal.getIndex(name, tx0).remove(id0));
+      assertEquals(v1, journal.getIndex(name, tx0).remove(id0));
 
       // Still not visible in concurrent transaction.
       assertFalse(journal.getIndex(name, tx1).contains(id0));
@@ -745,7 +745,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Two transactions (tx0, tx1) are created. A version (v0) is written onto tx0 for a key (id0).
    * The test verifies the write and verifies that the write is not visible in tx1. The v0 is then
    * deleted from tx0. Another version (v1) is written on tx1 under the same key and isolation is
@@ -762,8 +762,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       final String name = "abc";
 
       {
-        /*
-         * register an index and commit the journal.
+      /*
+       * register an index and commit the journal.
          */
         IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
@@ -803,7 +803,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertFalse(journal.getIndex(name, tx1).contains(id0));
 
       // delete the version.
-      assertEquals(v0, (byte[]) journal.getIndex(name, tx0).remove(id0));
+      assertEquals(v0, journal.getIndex(name, tx0).remove(id0));
 
       // no longer visible in that transaction.
       assertFalse(journal.getIndex(name, tx0).contains(id0));
@@ -838,7 +838,7 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       // (id0,v1) is now visible in global scope.
       assertTrue(journal.getIndex(name).contains(id0));
-      assertEquals(v1, (byte[]) journal.getIndex(name).lookup(id0));
+      assertEquals(v1, journal.getIndex(name).lookup(id0));
 
     } finally {
 
@@ -850,7 +850,7 @@ public class TestTx extends ProxyTestCase<Journal> {
    * Transaction semantics tests.
    */
 
-  /**
+  /*
    * Simple test of commit semantics (no conflict). Four transactions are started: tx0, which starts
    * first. tx1 which starts next and on which we will write one data version; tx2, which begins
    * after tx1 but before tx1 commits - the change will NOT be visible in this transaction; and tx3,
@@ -907,7 +907,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertNull(journal.getIndex(name, tx1).insert(id1, v0));
 
       // data version visible in tx1.
-      assertEquals(v0, (byte[]) journal.getIndex(name, tx1).lookup(id1));
+      assertEquals(v0, journal.getIndex(name, tx1).lookup(id1));
 
       // data version not visible in global scope.
       assertNull(journal.getIndex(name).lookup(id1));
@@ -926,7 +926,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertEquals("commitCounter", 2L, journal.getCommitRecord().getCommitCounter());
 
       // data version now visible in global scope.
-      assertEquals(v0, (byte[]) journal.getIndex(name).lookup(id1));
+      assertEquals(v0, journal.getIndex(name).lookup(id1));
 
       // new transaction - commit is visible in this scope.
       final long tx3 = journal.newTx(ITx.UNISOLATED);
@@ -948,7 +948,7 @@ public class TestTx extends ProxyTestCase<Journal> {
        */
 
       // data version visible in the new tx (tx3).
-      assertEquals(v0, (byte[]) journal.getIndex(name, tx3).lookup(id1));
+      assertEquals(v0, journal.getIndex(name, tx3).lookup(id1));
 
       /*
        * commit tx0 - nothing was written, no conflict should result.
@@ -967,7 +967,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       assertEquals("commitCounter", 2L, journal.getCommitRecord().getCommitCounter());
 
       // data version in global scope was not changed by any other commit.
-      assertEquals(v0, (byte[]) journal.getIndex(name).lookup(id1));
+      assertEquals(v0, journal.getIndex(name).lookup(id1));
 
     } finally {
 
@@ -975,7 +975,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test in which a transaction deletes a pre-existing version (that is, a version that existed in
    * global scope when the transaction was started).
    */
@@ -1042,7 +1042,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Unit test written to verify that a read-only tx gets the same view of an index when it has the
    * same ground state as another read-only tx. That view should be a simple {@link BTree} rather
    * than an {@link IsolatedFusedView}.
@@ -1064,8 +1064,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       {
         final IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
-        /*
-         * Note: Thie tests w/ and w/o isolation. Isolation is NOT
+      /*
+       * Note: Thie tests w/ and w/o isolation. Isolation is NOT
          * required for this. We are testing the semantics of read-only
          * transactions and those are available for indices which do NOT
          * support isolation as well as those which do.
@@ -1166,8 +1166,8 @@ public class TestTx extends ProxyTestCase<Journal> {
       {
         final IndexMetadata indexMetadata = new IndexMetadata("testIndex", UUID.randomUUID());
 
-        /*
-         * Note: You MUST explicitly enable transaction processing for a
+      /*
+       * Note: You MUST explicitly enable transaction processing for a
          * B+Tree when you register the index. Transaction processing
          * requires that the index maintain both per-tuple delete
          * markers and per-tuple version identifiers. While scale-out
@@ -1212,8 +1212,8 @@ public class TestTx extends ProxyTestCase<Journal> {
           nok++;
         } catch (ExecutionException ex) {
           if (InnerCause.isInnerCause(ex, ValidationError.class)) {
-            /*
-             * Normal exception. There was a conflict and one or the
+          /*
+       * Normal exception. There was a conflict and one or the
              * transactions could not be committed.
              */
             System.out.println(
@@ -1251,7 +1251,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Task performs random CRUD operations, range counts, and range scans isolated by a transaction
    * and commits when it is done.
    *
@@ -1271,7 +1271,7 @@ public class TestTx extends ProxyTestCase<Journal> {
     // #of distinct keys for this task.
     final int range = 1000;
 
-    /**
+    /*
      * @param jnl The journal.
      * @param indexName The name of the index.
      * @param nops The #of operations to execute against that {@link BTree}.
@@ -1283,7 +1283,7 @@ public class TestTx extends ProxyTestCase<Journal> {
       this.nops = nops;
     }
 
-    /**
+    /*
      * Starts a read-write transaction, obtains a view of the B+Tree isolated by the transaction,
      * performs a series of operations on the isolated view, and then commits the transaction.
      *
@@ -1304,8 +1304,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
       try {
 
-        /*
-         * Obtain a view of the index isolated by the transaction.
+      /*
+       * Obtain a view of the index isolated by the transaction.
          */
         final IIndex ndx = jnl.getIndex(indexName, txid);
 
@@ -1313,8 +1313,8 @@ public class TestTx extends ProxyTestCase<Journal> {
 
           switch (r.nextInt(4)) {
             case 0:
-              /*
-               * write on the index, inserting or updating the value
+            /*
+       * write on the index, inserting or updating the value
                * for the key.
                */
               ndx.insert("key#" + r.nextInt(range), r.nextLong());
@@ -1324,21 +1324,21 @@ public class TestTx extends ProxyTestCase<Journal> {
               ndx.remove("key#" + r.nextInt(range));
               break;
             case 2:
-              /*
-               * lookup a key in the index.
+            /*
+       * lookup a key in the index.
                */
               ndx.lookup("key#" + r.nextInt(range));
               break;
             case 3:
-              /*
-               * range count the index.
+            /*
+       * range count the index.
                */
               ndx.rangeCount();
               break;
             case 4:
               {
-                /*
-                 * run a range iterator over the index.
+              /*
+       * run a range iterator over the index.
                  */
                 final Iterator<ITuple<?>> itr = ndx.rangeIterator();
                 while (itr.hasNext()) {

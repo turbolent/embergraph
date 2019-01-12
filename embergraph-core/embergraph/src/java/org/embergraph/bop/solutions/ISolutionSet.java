@@ -31,8 +31,8 @@ import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.stream.Stream;
 
-/**
- * Interface for durable solution sets.
+/*
+* Interface for durable solution sets.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO Provide {@link ISolutionSet} implementations derived from {@link HTree} and {@link
@@ -48,16 +48,16 @@ import org.embergraph.stream.Stream;
  */
 public interface ISolutionSet extends ICheckpointProtocol {
 
-  /**
+  /*
    * Return the {@link ISolutionSetStats} for the saved solution set. This may be used for query
    * planning and should not require the backing solutions to be materialized.
    *
    * @return The {@link ISolutionSetStats}.
    */
-  public ISolutionSetStats getStats();
+  ISolutionSetStats getStats();
 
-  //    /**
-  //     * Return the CREATE schema for the solution set (this is the metadata used
+  //    /*
+//     * Return the CREATE schema for the solution set (this is the metadata used
   //     * to provision the characteristics of the solution set).
   //     *
   //     * TODO This should be stored in a "root" on the checkpoint record.
@@ -65,20 +65,20 @@ public interface ISolutionSet extends ICheckpointProtocol {
   //    public ISPO[] getDeclation();
 
   /** Visit all entries in the index in the natural order of the index. */
-  public ICloseableIterator<IBindingSet> scan();
+  ICloseableIterator<IBindingSet> scan();
 
   /** Return an {@link ICloseableIterator} reading the solutions from the stream. */
-  public ICloseableIterator<IBindingSet[]> get();
+  ICloseableIterator<IBindingSet[]> get();
 
-  /**
+  /*
    * Replace the contents of the stream with the solutions read from the source.
    *
    * @param src The source.
    */
-  public void put(final ICloseableIterator<IBindingSet[]> src);
+  void put(final ICloseableIterator<IBindingSet[]> src);
 
-  //    /**
-  //     * The {@link IVariable[]} specifying the join variables (required). The
+  //    /*
+//     * The {@link IVariable[]} specifying the join variables (required). The
   //     * order of the entries is used when forming the as-bound keys for the hash
   //     * table. Duplicate elements and null elements are not permitted.
   //     *

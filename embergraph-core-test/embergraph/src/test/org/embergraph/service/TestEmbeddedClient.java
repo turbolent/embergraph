@@ -31,8 +31,8 @@ import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.ndx.ClientIndexView;
 
-/**
- * Test suite for the {@link EmbeddedClient}.
+/*
+* Test suite for the {@link EmbeddedClient}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -184,7 +184,7 @@ public class TestEmbeddedClient extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Test of the routine responsible for identifying the split points in an ordered set of keys for
    * a batch index operation. Note that the routine requires access to the partition definitions in
    * the form of a {@link MetadataIndex} in order to identify the split points in the keys[].

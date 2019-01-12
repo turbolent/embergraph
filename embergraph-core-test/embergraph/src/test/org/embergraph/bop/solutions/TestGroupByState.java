@@ -44,8 +44,8 @@ import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
-/**
- * Test suite for {@link GroupByState}.
+/*
+* Test suite for {@link GroupByState}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -186,7 +186,7 @@ public class TestGroupByState extends TestCase2 {
     assertEquals("simpleHaving", expected.isSimpleHaving(), actual.isSimpleHaving());
   }
 
-  /**
+  /*
    * Unit test with SELECT clause having one value expression, which is a simple variable also
    * appearing as the sole value expression in the GROUP_BY clause.
    *
@@ -231,7 +231,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with SELECT clause having one value expression, which is a simple variable also
    * appearing as the sole value expression in the GROUP_BY clause. However, in this case we rename
    * the variable when it is projected out of the SELECT expression.
@@ -279,7 +279,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with simple aggregate function in SELECT clause.
    *
    * <pre>
@@ -332,7 +332,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with simple aggregate function in SELECT clause and no GROUP BY clause (the
    * aggregation is taken across all solutions as if they were a single group).
    *
@@ -382,7 +382,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test for references to aggregate declared in GROUP_BY with AS.
    *
    * <pre>
@@ -434,7 +434,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test verifies that a constant within a group by clause does not cause the group by clause
    * to be interpreted as an aggregate.
    *
@@ -485,7 +485,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -541,7 +541,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -600,7 +600,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -663,7 +663,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Verify that a reference to a variable defined by a previous select expression is allowed and
    * that the select dependency is recognized.
    *
@@ -725,7 +725,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Forward references to a variable are not allowed.
    *
    * <pre>
@@ -764,7 +764,7 @@ public class TestGroupByState extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link IGroupByState#isAnyDistinct()) where the DISTINCT
    * keyword appears within an {@link IAggregate} in the SELECT clause.
    * <pre>
@@ -820,7 +820,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test for {@link IGroupByState#isAnyDistinct()) where the DISTINCT
    * keyword appears within an {@link IAggregate} in the SELECT clause.
    * <pre>
@@ -880,7 +880,7 @@ public class TestGroupByState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test when projecting a constant
    *
    * <pre>

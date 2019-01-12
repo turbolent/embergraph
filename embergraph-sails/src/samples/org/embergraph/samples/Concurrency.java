@@ -27,8 +27,8 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * This class demonstrates concurrent reading and writing with the U10 data set on the scale-out
+/*
+* This class demonstrates concurrent reading and writing with the U10 data set on the scale-out
  * architecture. One thread writes the U10 data files, doing a commit after every file (this is not
  * the fastest way to perform load, as it simulates incremental updates vs bulk load). Another
  * thread asks for the number of "FullProfessors" every three seconds. You can watch the number of
@@ -47,7 +47,7 @@ public class Concurrency {
   private static final String query =
       "select ?x where { ?x <" + RDF.TYPE + "> <" + LUBM.FULL_PROFESSOR + "> . }";
 
-  /**
+  /*
    * Manage the control flow of the program. Open a embergraph repository, kick off the writer, kick
    * off the readers, wait for the writer to complete, kill the readers, wait for the readers to
    * complete, shutdown the repository.
@@ -170,7 +170,7 @@ public class Concurrency {
     /** The embergraph repository */
     private EmbergraphSailRepository repo;
 
-    /**
+    /*
      * Construct the writer task.
      *
      * @param fed the embergraph repository
@@ -180,7 +180,7 @@ public class Concurrency {
       this.repo = repo;
     }
 
-    /**
+    /*
      * Opens the triple store and writes the LUBM ontology and U10 data files. Does a commit after
      * every file, which is not the most efficient way to bulk load, but simulates incremental
      * updates.
@@ -198,7 +198,7 @@ public class Concurrency {
       }
     }
 
-    /**
+    /*
      * Load the LUBM ontology and U10 data into a Sesame Repository.
      *
      * @param repo the sesame repository
@@ -270,7 +270,7 @@ public class Concurrency {
     }
   }
 
-  /**
+  /*
    * A reader task to issue concurrent queries. Asks for the # of full professors every three
    * seconds.
    */
@@ -282,7 +282,7 @@ public class Concurrency {
     /** Allows the reader to be stopped gracefully. */
     private volatile boolean kill = false;
 
-    /**
+    /*
      * Create the reader.
      *
      * @param fed the embergraph repository
@@ -298,7 +298,7 @@ public class Concurrency {
       this.kill = true;
     }
 
-    /**
+    /*
      * Opens a read-committed view of the triple store using the last commit point and issues a
      * query for a list of all LUBM full professors. Does this every few seconds until killed.
      */
@@ -320,7 +320,7 @@ public class Concurrency {
       }
     }
 
-    /**
+    /*
      * Issue the query.
      *
      * @throws Exception

@@ -69,7 +69,7 @@ public class SimpleNode implements Node {
     }
   }
 
-  /**
+  /*
    * Replaces this node with the supplied one in the AST.
    *
    * @param newNode The replacement node.
@@ -92,7 +92,7 @@ public class SimpleNode implements Node {
     return children.get(i);
   }
 
-  /**
+  /*
    * Gets the (first) child of this node that is of the specific type.
    *
    * @param type The type of the child node that should be returned.
@@ -156,7 +156,7 @@ public class SimpleNode implements Node {
     return prefix + toString();
   }
 
-  /**
+  /*
    * Writes a tree-like representation of this node and all of its subnodes (recursively) to the
    * supplied Appendable.
    */
@@ -171,7 +171,7 @@ public class SimpleNode implements Node {
     }
   }
 
-  /**
+  /*
    * Writes a tree-like representation of this node and all of its subnodes (recursively) and
    * returns it as a string.
    */

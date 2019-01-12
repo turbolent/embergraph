@@ -26,8 +26,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.service.ServiceFactory;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
-/**
- * Base class for abstract services, providing base implementation for getRequiredBound and
+/*
+* Base class for abstract services, providing base implementation for getRequiredBound and
  * getDesiredBound methods (which can be overridden by subclasses).
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -35,7 +35,7 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
  */
 public abstract class AbstractServiceFactoryBase implements ServiceFactory {
 
-  /**
+  /*
    * Default implementation for method {@link ServiceFactory#getRequiredBound(ServiceNode)},
    * allowing for simple services where all variables used inside the service are considered
    * "outgoing". As a consequence, when building upon this default implementation, the Service will
@@ -46,7 +46,7 @@ public abstract class AbstractServiceFactoryBase implements ServiceFactory {
     return new HashSet<IVariable<?>>();
   }
 
-  /**
+  /*
    * Default implementation for method {@link ServiceFactory#getDesiredBound(ServiceNode)}, allowing
    * for simple services where all variables used inside the service are considered "outgoing". As a
    * consequence, when building upon this default implementation, the Service will be executed

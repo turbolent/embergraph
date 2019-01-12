@@ -64,8 +64,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.concurrent.ShutdownHelper;
 
-/**
- * A service which permits resources (managed files or buffers) identified by a {@link UUID} to be
+/*
+* A service which permits resources (managed files or buffers) identified by a {@link UUID} to be
  * read by a remote service. This class runs one thread to accept connections and thread pool to
  * send data.
  *
@@ -116,8 +116,8 @@ public abstract class ResourceService {
   /** The Internet socket address at which the service is accepting connections. */
   private final InetSocketAddress addr;
 
-  //    /**
-  //     * The port on which the service is accepting connections.
+  //    /*
+//     * The port on which the service is accepting connections.
   //     */
   //    public final int port;
 
@@ -136,8 +136,8 @@ public abstract class ResourceService {
     return addr;
   }
 
-  //    /**
-  //     * Constructor uses the default nic, any free port, and the default request
+  //    /*
+//     * Constructor uses the default nic, any free port, and the default request
   //     * service pool size.
   //     *
   //     * @throws IOException
@@ -148,8 +148,8 @@ public abstract class ResourceService {
   //
   //    }
   //
-  //    /**
-  //     * Constructor uses the default nic and request service pool size.
+  //    /*
+//     * Constructor uses the default nic and request service pool size.
   //     *
   //     * @param port
   //     *            The port on which to start the service or ZERO (0) to use any
@@ -163,8 +163,8 @@ public abstract class ResourceService {
   //
   //    }
   //
-  //    /**
-  //     * Constructor uses a non-loopback address on the default nic.
+  //    /*
+//     * Constructor uses a non-loopback address on the default nic.
   //     *
   //     * @param port
   //     *            The port on which to start the service or ZERO (0) to use any
@@ -188,7 +188,7 @@ public abstract class ResourceService {
   //
   //    }
 
-  /**
+  /*
    * Create and start the service.
    *
    * @param addr The IP address and port at which the service will accept connections. The port MAY
@@ -221,25 +221,23 @@ public abstract class ResourceService {
     if (requestServicePoolSize == 0) {
 
       requestService =
-          (ThreadPoolExecutor)
-              Executors.newCachedThreadPool(
-                  new DaemonThreadFactory(getClass().getName() + ".requestService"));
+          Executors.newCachedThreadPool(
+              new DaemonThreadFactory(getClass().getName() + ".requestService"));
 
     } else {
 
       requestService =
-          (ThreadPoolExecutor)
-              Executors.newFixedThreadPool(
-                  requestServicePoolSize,
-                  new DaemonThreadFactory(getClass().getName() + ".requestService"));
+          Executors.newFixedThreadPool(
+              requestServicePoolSize,
+              new DaemonThreadFactory(getClass().getName() + ".requestService"));
     }
 
     // Begin accepting connections.
     acceptService.submit(new AcceptTask());
   }
 
-  //    /**
-  //     * Return an unused port.
+  //    /*
+//     * Return an unused port.
   //     *
   //     * @param suggestedPort
   //     *            The suggested port.
@@ -271,7 +269,7 @@ public abstract class ResourceService {
     super.finalize();
   }
 
-  /**
+  /*
    * Wait until the service is running.
    *
    * @param timeout The timeout.
@@ -320,7 +318,7 @@ public abstract class ResourceService {
   private final Lock lock = new ReentrantLock();
   private final Condition running = lock.newCondition();
 
-  /**
+  /*
    * Class handles the accept of new connections. Only a single instance of this task will be
    * executed over the life of the service. Each connection runs a {@link RequestTask}. The
    * connection requests a resource using its {@link UUID}. If the resource is available, etc., then
@@ -346,8 +344,8 @@ public abstract class ResourceService {
 
         while (open) {
 
-          /*
-           * Hand off request to a pool of worker threads.
+        /*
+       * Hand off request to a pool of worker threads.
            *
            * Note: The Future of this task is ignored. If there is a
            * problem a message is logged, the client socket is closed,
@@ -388,7 +386,7 @@ public abstract class ResourceService {
     return open;
   }
 
-  /**
+  /*
    * @todo Is there a possible lock ordering problem with synchronized {@link #shutdown()} and
    *     {@link #shutdownNow()} methods and the internal {@link #lock}?
    */
@@ -474,7 +472,7 @@ public abstract class ResourceService {
 
     private final byte b;
 
-    private StatusEnum(final int b) {
+    StatusEnum(final int b) {
 
       this.b = (byte) b;
     }
@@ -500,12 +498,12 @@ public abstract class ResourceService {
   }
 
   /** Type safe enumeration of the kinds of resources which can be served. */
-  public static enum ResourceTypeEnum {
+  public enum ResourceTypeEnum {
     FILE(0),
     BUFFER(1);
     private final byte b;
 
-    private ResourceTypeEnum(final int b) {
+    ResourceTypeEnum(final int b) {
       this.b = (byte) b;
     }
 
@@ -526,7 +524,7 @@ public abstract class ResourceService {
     }
   }
 
-  /**
+  /*
    * Handles a request and is run (by the caller) on a worker thread pool.
    *
    * <p>The request consists of the following fields:
@@ -571,7 +569,7 @@ public abstract class ResourceService {
     /** The client socket. */
     private final Socket s;
 
-    /**
+    /*
      * Set true once we sent the status code and any associated data in the header.
      *
      * <p>Note: Once we send the status and the header (file length) we flush the output stream and
@@ -588,7 +586,7 @@ public abstract class ResourceService {
       counters.requestCount.increment();
     }
 
-    /**
+    /*
      * Note: {@link OverlappingFileLockException}s can arise when there are concurrent requests to
      * obtain a shared lock on the same file. Personally, I think that this is a bug since the lock
      * requests are shared and should be processed without deadlock. However, the code handles this
@@ -653,15 +651,15 @@ public abstract class ResourceService {
 
       } catch (SentErrorException ex) {
 
-        /*
-         * This exception is thrown by sendError(). We don't have to do
+      /*
+       * This exception is thrown by sendError(). We don't have to do
          * anything since an error response was already sent.
          */
 
       } catch (Throwable t) {
 
-        /*
-         * Something unexpected. If possible we will send an error
+      /*
+       * Something unexpected. If possible we will send an error
          * response. Otherwise we just close the client socket.
          */
 
@@ -709,7 +707,7 @@ public abstract class ResourceService {
       }
     }
 
-    /**
+    /*
      * Send an error response.
      *
      * @param e The error code.
@@ -758,7 +756,7 @@ public abstract class ResourceService {
       throw new SentErrorException();
     }
 
-    /**
+    /*
      * Prepare and send a file.
      *
      * @param uuid The identifier for the file resource.
@@ -793,8 +791,8 @@ public abstract class ResourceService {
       final FileLock fileLock;
       try {
 
-        /*
-         * Seek a shared lock on the file. This will prevent it from
+      /*
+       * Seek a shared lock on the file. This will prevent it from
          * being deleted while we are sending its data and it will also
          * prevent us from sending a file on which someone else has a
          * write lock. If we can't get a shared lock then no worries.
@@ -813,8 +811,8 @@ public abstract class ResourceService {
 
           if (!fileLock.isShared()) {
 
-            /*
-             * Do NOT hold the file lock if it is exclusive
+          /*
+       * Do NOT hold the file lock if it is exclusive
              * (shared lock requests convert to exclusive lock
              * requests on some platforms). We do not want to
              * prevent others from accessing this resource,
@@ -826,8 +824,8 @@ public abstract class ResourceService {
 
         } catch (OverlappingFileLockException ex) {
 
-          /*
-           * Note: OverlappingFileLockException can be thrown when
+        /*
+       * Note: OverlappingFileLockException can be thrown when
            * there are concurrent requests to obtain the same
            * shared lock. I consider this a JDK bug. It should be
            * possible to service both requests without deadlock.
@@ -862,8 +860,8 @@ public abstract class ResourceService {
 
         try {
 
-          /*
-           * Close the FileChannel.
+        /*
+       * Close the FileChannel.
            *
            * Note: This will release the FileLock if one was acquired.
            */
@@ -878,7 +876,7 @@ public abstract class ResourceService {
       }
     }
 
-    /**
+    /*
      * Prepare and send a {@link ByteBuffer}. The bytes from the {@link ByteBuffer#position()} to
      * the {@link ByteBuffer#limit()} will be send. The position and limit are not modified.
      *
@@ -936,7 +934,7 @@ public abstract class ResourceService {
       }
     }
 
-    /**
+    /*
      * Sends given resource to the socket.
      *
      * @param uuid The {@link UUID} which identifies the resource (from the request).
@@ -1075,7 +1073,7 @@ public abstract class ResourceService {
     }
   }
 
-  /**
+  /*
    * An instance of this exception is thrown internally if an error response is sent. The exception
    * is trapped and ignored. The purpose of the exception is to recognize that the error response
    * has already been handled.
@@ -1086,7 +1084,7 @@ public abstract class ResourceService {
     private static final long serialVersionUID = 0L;
   }
 
-  /**
+  /*
    * Return file identified by the {@link UUID}.
    *
    * @param uuid
@@ -1095,7 +1093,7 @@ public abstract class ResourceService {
    */
   protected abstract File getResource(final UUID uuid) throws Exception;
 
-  /**
+  /*
    * Return {@link ByteBuffer} identified by the {@link UUID}.
    *
    * @param uuid
@@ -1105,7 +1103,7 @@ public abstract class ResourceService {
    */
   protected abstract ByteBuffer getBuffer(final UUID uuid) throws Exception;
 
-  /**
+  /*
    * Client for a {@link BufferService} reads a single resource from the specified service, writing
    * it into the local file system.
    *
@@ -1233,7 +1231,7 @@ public abstract class ResourceService {
     }
   }
 
-  /**
+  /*
    * Task sends a request for a file's data and then receives the data onto a local file.
    *
    * @todo Receive file's data using NIO to transfer from a {@link FileChannel} to the caller using
@@ -1247,7 +1245,7 @@ public abstract class ResourceService {
 
     final File file;
 
-    /**
+    /*
      * @param addr The Internet address and port at which the service from which the resource will
      *     be read is accepting connections.
      * @param port The port at which to connect to the service from which the resource will be read.
@@ -1274,7 +1272,7 @@ public abstract class ResourceService {
       return file;
     }
 
-    /**
+    /*
      * Return the {@link File} on which the resource was written. If the operation fails, then the
      * caller is responsible deciding whether or not the {@link File} specified to the constructor
      * needs to be deleted.
@@ -1339,7 +1337,7 @@ public abstract class ResourceService {
     }
   }
 
-  /**
+  /*
    * Class sends a request for a remote {@link ByteBuffer} and then receives the data into a local
    * {@link ByteBuffer}.
    *
@@ -1354,7 +1352,7 @@ public abstract class ResourceService {
 
     final ByteBuffer outbuf;
 
-    /**
+    /*
      * @param addr The Internet address and port at which to connect the service from which the
      *     resource will be read.
      * @param id The id that identifies the source ByteBuffer.
@@ -1380,7 +1378,7 @@ public abstract class ResourceService {
       return outbuf;
     }
 
-    /**
+    /*
      * Issue a request to the remote service for the {@link ByteBuffer} on that service which was
      * identified to the constructor and then accept the data into the local {@link ByteBuffer}
      * provided to the constructor.
@@ -1439,7 +1437,7 @@ public abstract class ResourceService {
     }
   } // class ReadBufferTask
 
-  /**
+  /*
    * Performance counters for the {@link ResourceService}.
    *
    * @todo could also monitor the accept and request thread pools. The latter is the more
@@ -1474,7 +1472,7 @@ public abstract class ResourceService {
     /** A lock used to make updates to {@link #maxWriteSize} atomic. */
     private final Object maxWriteSizeLock = new Object();
 
-    /**
+    /*
      * #of nanoseconds sending data (this will double count time for data that are served
      * concurrently to different receivers).
      */
@@ -1486,8 +1484,8 @@ public abstract class ResourceService {
 
         root = new CounterSet();
 
-        /*
-         * #of requests and their status outcome counters.
+      /*
+       * #of requests and their status outcome counters.
          */
         {
           final CounterSet tmp = root.makePath("status");
@@ -1525,8 +1523,8 @@ public abstract class ResourceService {
               });
         }
 
-        /*
-         * writes (A write is a response where we try to write the file
+      /*
+       * writes (A write is a response where we try to write the file
          * on the socket).
          */
         {

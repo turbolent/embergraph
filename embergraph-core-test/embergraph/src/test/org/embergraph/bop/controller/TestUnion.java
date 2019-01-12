@@ -47,8 +47,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
-/**
- * Test suite for {@link Union}.
+/*
+* Test suite for {@link Union}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestUnionBindingSets.java 3500 2010-09-03 00:27:45Z thompsonbry $
@@ -127,7 +127,7 @@ public class TestUnion extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verifies that the UNION of two operators is computed. The operators do not route around the
    * UNION, so their solutions are copied to the UNION and from the UNION to onto the top-level
    * query buffer. For this test variant, both subqueries run using their default inputs, which is a
@@ -145,33 +145,28 @@ public class TestUnion extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(StartOp.Annotations.BOP_ID, startId1),
-                  new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(StartOp.Annotations.BOP_ID, startId1),
+                new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final BOp startOp2 =
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(StartOp.Annotations.BOP_ID, startId2),
-                  new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(StartOp.Annotations.BOP_ID, startId2),
+                new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final BOp unionOp =
         new Union(
             new BOp[0],
             NV.asMap(
-                new NV[] {
-                  new NV(Union.Annotations.BOP_ID, unionId),
-                  new NV(Union.Annotations.SUBQUERIES, new BOp[] {startOp1, startOp2}),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                  //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
-                  //                                BOpEvaluationContext.CONTROLLER),
-                  //                        new NV(Union.Annotations.CONTROLLER, true),
-                }));
+                new NV(Union.Annotations.BOP_ID, unionId),
+                new NV(Union.Annotations.SUBQUERIES, new BOp[] {startOp1, startOp2}),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
+                //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
+                //                                BOpEvaluationContext.CONTROLLER),
+                //                        new NV(Union.Annotations.CONTROLLER, true),
+            ));
 
     final BOp query = unionOp;
 
@@ -197,33 +192,28 @@ public class TestUnion extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(StartOp.Annotations.BOP_ID, startId1),
-                  new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(StartOp.Annotations.BOP_ID, startId1),
+                new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final BOp startOp2 =
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(StartOp.Annotations.BOP_ID, startId2),
-                  new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(StartOp.Annotations.BOP_ID, startId2),
+                new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final BOp unionOp =
         new Union(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Union.Annotations.BOP_ID, unionId),
-                  new NV(Union.Annotations.SUBQUERIES, new BOp[] {startOp1, startOp2}),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                  //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
-                  //                                BOpEvaluationContext.CONTROLLER),
-                  //                        new NV(Union.Annotations.CONTROLLER, true),
-                }));
+                new NV(Union.Annotations.BOP_ID, unionId),
+                new NV(Union.Annotations.SUBQUERIES, new BOp[] {startOp1, startOp2}),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
+                //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
+                //                                BOpEvaluationContext.CONTROLLER),
+                //                        new NV(Union.Annotations.CONTROLLER, true),
+            ));
 
     final BOp query = unionOp;
 
@@ -247,7 +237,7 @@ public class TestUnion extends TestCase2 {
     AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected, runningQuery);
   }
 
-  /**
+  /*
    * Verifies that the UNION of two operators is computed.
    *
    * @throws Exception
@@ -281,33 +271,28 @@ public class TestUnion extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(StartOp.Annotations.BOP_ID, startId1),
-                  new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(StartOp.Annotations.BINDING_SETS, bindingSets1)
-                }));
+                new NV(StartOp.Annotations.BOP_ID, startId1),
+                new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(StartOp.Annotations.BINDING_SETS, bindingSets1)));
 
     final BOp startOp2 =
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(StartOp.Annotations.BOP_ID, startId2),
-                  new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(StartOp.Annotations.BINDING_SETS, bindingSets2)
-                }));
+                new NV(StartOp.Annotations.BOP_ID, startId2),
+                new NV(StartOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(StartOp.Annotations.BINDING_SETS, bindingSets2)));
 
     final BOp unionOp =
         new Union(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Union.Annotations.BOP_ID, unionId),
-                  new NV(Union.Annotations.SUBQUERIES, new BOp[] {startOp1, startOp2})
-                  //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
-                  //                                BOpEvaluationContext.CONTROLLER),
-                  //                        new NV(Union.Annotations.CONTROLLER, true),
-                }));
+                new NV(Union.Annotations.BOP_ID, unionId),
+                new NV(Union.Annotations.SUBQUERIES, new BOp[] {startOp1, startOp2})
+                //                        new NV(Union.Annotations.EVALUATION_CONTEXT,
+                //                                BOpEvaluationContext.CONTROLLER),
+                //                        new NV(Union.Annotations.CONTROLLER, true),
+            ));
 
     final BOp sliceOp =
         new SliceOp(

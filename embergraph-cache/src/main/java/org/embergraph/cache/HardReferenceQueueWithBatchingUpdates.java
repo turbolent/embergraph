@@ -28,8 +28,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * A variant relying on thread-local {@link IHardReferenceQueue}s to batch updates and thus minimize
+/*
+* A variant relying on thread-local {@link IHardReferenceQueue}s to batch updates and thus minimize
  * thread contention for the lock required to synchronize calls to {@link #add(Object)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -50,7 +50,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   /** The concurrency level of the cache. */
   private final int concurrencyLevel;
 
-  /**
+  /*
    * When <code>true</code> true thread-local buffers will be used. Otherwise, striped locks will be
    * used and each lock will protect its own buffer.
    *
@@ -65,7 +65,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   //    private final Semaphore[] permits;
   private final Lock[] permits;
 
-  /**
+  /*
    * The {@link BatchQueue}s protected by the striped locks and <code>null</code> if per-thread
    * {@link BatchQueue}s are being used.
    */
@@ -84,7 +84,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   /** The capacity of the thread-local {@link BatchQueue}. */
   private final int threadLocalQueueCapacity;
 
-  /**
+  /*
    * When our inner queue has this many entries we will invoke tryLock() and batch the updates if we
    * can barge in on the lock.
    */
@@ -99,14 +99,14 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   /** The shared queue. Touches are batched onto this queue by the {@link #threadLocalQueues}. */
   private final IHardReferenceQueue<T> sharedQueue;
 
-  /**
+  /*
    * The listener to which cache eviction notices are reported by the thread- local queues. This
    * listener is responsible for adding the evicted reference to the {@link #sharedQueue}.
    */
   private final HardReferenceQueueEvictionListener<T> threadLocalQueueEvictionListener;
 
-  //    /**
-  //     * @param listener
+  //    /*
+//     * @param listener
   //     *            The eviction listener (sees only evictions from the outer
   //     *            class).
   //     * @param capacity
@@ -128,7 +128,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   //
   //    }
 
-  /**
+  /*
    * Designated constructor.
    *
    * @param sharedQueue The backing {@link IHardReferenceQueue}.
@@ -192,8 +192,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
     this.threadLocalQueueEvictionListener =
         new HardReferenceQueueEvictionListener<T>() {
 
-          /**
-           * Add the reference to the backing queue for the outer class. The caller MUST hold the
+        /*
+       * Add the reference to the backing queue for the outer class. The caller MUST hold the
            * outer class lock.
            */
           public void evicted(final IHardReferenceQueue<T> cache, final T ref) {
@@ -240,7 +240,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
     }
   }
 
-  /**
+  /*
    * Return a thread-local queue which may be used to batch updates to this {@link
    * HardReferenceQueueWithBatchingUpdates}. The returned queue will combine calls to {@link
    * IHardReferenceQueue#add(Object)} in a thread-local array, batching updates from the array to
@@ -279,8 +279,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
                       batchedUpdatedListener))
           != null) {
 
-        /*
-         * Note: Since the key is the thread it is not possible for there to
+      /*
+       * Note: Since the key is the thread it is not possible for there to
          * be a concurrent put of an entry under the same key so we do not
          * have to use putIfAbsent().
          */
@@ -292,8 +292,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
     return tmp;
   }
 
-  //    /**
-  //     * Acquire a {@link BatchQueue} from an internal array of {@link BatchQueue}
+  //    /*
+//     * Acquire a {@link BatchQueue} from an internal array of {@link BatchQueue}
   //     * instances using a striped lock pattern.
   //     */
   //    private BatchQueue<T> acquire() throws InterruptedException {
@@ -308,8 +308,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   //
   //    }
   //
-  //    /**
-  //     * Release a {@link BatchQueue} obtained using {@link #acquire()}.
+  //    /*
+//     * Release a {@link BatchQueue} obtained using {@link #acquire()}.
   //     *
   //     * @param b
   //     *            The {@link BatchQueue}.
@@ -329,8 +329,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
   public int size() {
     return sharedQueue.size();
   }
-  //    /**
-  //     * Reports the combined size of the thread-local queue plus the shared
+  //    /*
+//     * Reports the combined size of the thread-local queue plus the shared
   //     * queue.
   //     */
   //    public int size() {
@@ -376,7 +376,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Adds the reference to the thread-local queue, returning <code>true</code> iff the queue was
    * modified as a result.
    *
@@ -464,7 +464,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
     return h;
   }
 
-  /**
+  /*
    * Offers the reference to the thread-local queue, returning <code>true</code> iff the queue was
    * modified as a result. This is non-blocking unless the thread-local queue is full. If the
    * thread-local queue is full, the existing references will be batched first onto the shared
@@ -477,7 +477,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
 
   }
 
-  /**
+  /*
    * Discards the thread-local buffers and clears the backing ring buffer.
    *
    * <p>Note: This method can have side-effects from asynchronous operations if the queue is still
@@ -546,7 +546,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
 
   }
 
-  /**
+  /*
    * Inner class provides thread-local batching of updates to the outer {@link HardReferenceQueue}.
    * This can substantially decrease the contention for the lock required to provide safe access to
    * the outer {@link HardReferenceQueue} during updates.
@@ -562,7 +562,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
     private final HardReferenceQueueEvictionListener<T> listener;
     private final IBatchedUpdateListener<T> batchedUpdatedListener;
 
-    /**
+    /*
      * @param id The identifier for this instance (used with striped locks).
      * @param nscan
      * @param capacity
@@ -601,7 +601,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
       return nscan;
     }
 
-    /**
+    /*
      * Add a reference to the cache. If the reference was recently added to the cache then this is a
      * NOP. Otherwise the reference is appended to the cache. If a reference is appended to the
      * cache and then cache is at capacity, then the LRU reference is first evicted from the cache.
@@ -642,7 +642,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
       return super.offer(ref);
     }
 
-    /**
+    /*
      * Extended to batch the updates to the base class for the outer class when the inner queue is
      * half full (tryLock()) and when the inner queue is full (lock()).
      */
@@ -655,8 +655,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
 
         if (lock.tryLock()) {
 
-          /*
-           * Batch evict all references to the outer class's queue.
+        /*
+       * Batch evict all references to the outer class's queue.
            */
 
           try {
@@ -682,8 +682,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
       // @todo why does this fail if written as (size == capacity)???
       if (size + 1 == capacity) {
 
-        /*
-         * If at capacity, batch evict all references to the outer
+      /*
+       * If at capacity, batch evict all references to the outer
          * class's queue.
          */
 
@@ -731,7 +731,7 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
       return true;
     }
 
-    /**
+    /*
      * Evict all references, starting with the LRU reference and proceeding to the MRU reference.
      *
      * @param clearRefs When true, the reference are actually cleared from the cache. This may be
@@ -744,8 +744,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
       //            assert lock.isHeldByCurrentThread();
       if (clearRefs) {
 
-        /*
-         * Evict all references, clearing each as we go.
+      /*
+       * Evict all references, clearing each as we go.
          */
 
         while (!isEmpty()) { // count > 0 ) {
@@ -755,8 +755,8 @@ public class HardReferenceQueueWithBatchingUpdates<T> implements IHardReferenceQ
 
       } else {
 
-        /*
-         * Generate eviction notices in LRU to MRU order but do NOT clear
+      /*
+       * Generate eviction notices in LRU to MRU order but do NOT clear
          * the references.
          */
 

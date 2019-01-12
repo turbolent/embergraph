@@ -34,8 +34,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpBase;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTALPServiceOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.StaticOptimizer;
 
-/**
- * A special kind of AST node that represents the SPARQL 1.1 arbitrary length path operator. This
+/*
+* A special kind of AST node that represents the SPARQL 1.1 arbitrary length path operator. This
  * node has a single child arg - a JoinGroupNode consisting of other operators (the path) that must
  * be run to fixed point. This node also has several annotations that define the schematics (the
  * left and right sides and the lower and upper bounds) of the arbitrary length path.
@@ -62,7 +62,7 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
     /** The right transitivity variable. */
     String TRANSITIVITY_VAR_RIGHT = Annotations.class.getName() + ".transitivityVarRight";
 
-    /**
+    /*
      * The lower bound on the number of rounds to run. Can be zero (0) or one (1). A lower bound of
      * zero is a special kind of path - the Zero Length Path. A zero length path connects a vertex
      * to itself (in graph parlance). In the context of arbitrary length paths it means we bind the
@@ -76,13 +76,13 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
     /** The middle term - can be a variable or a constant. */
     String MIDDLE_TERM = Annotations.class.getName() + ".middleTerm";
 
-    /**
+    /*
      * The variable representing the visited edge. Bound using the binding from the middle term.
      * Only used by ALP service when projecting edges.
      */
     String EDGE_VAR = Annotations.class.getName() + ".edgeVar";
 
-    /**
+    /*
      * A set of intermediate variables (VarNodes) used by the ALP node that should be dropped from
      * the solutions after each round.
      */
@@ -197,7 +197,7 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
     setProperty(Annotations.EDGE_VAR, edgeVar);
   }
 
-  /**
+  /*
    * Set the vars that should be dropped after each round.
    *
    * @see Annotations#DROP_VARS
@@ -206,7 +206,7 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
     super.setProperty(Annotations.DROP_VARS, dropVars);
   }
 
-  /**
+  /*
    * Add a var that should be dropped after each round.
    *
    * @see Annotations#DROP_VARS
@@ -215,7 +215,7 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
     dropVars().add(dropVar);
   }
 
-  /**
+  /*
    * Get the vars that should be dropped after each round.
    *
    * @see Annotations#DROP_VARS
@@ -261,7 +261,7 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
     return producedBindings;
   }
 
-  /**
+  /*
    * Return the set of variables used by this ALP node (statement pattern terms and inside filters).
    * Used to determine what needs to be projected into the op.
    */
@@ -307,7 +307,7 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
     addVar(t, producedBindings, false);
   }
 
-  /**
+  /*
    * This handles the special case where we've wrapped a Var with a Constant because we know it's
    * bound, perhaps by the exogenous bindings. If we don't handle this case then we get the join
    * vars wrong.
@@ -443,8 +443,8 @@ public class ArbitraryLengthPathNode extends GroupMemberNodeBase<ArbitraryLength
         final long estCard =
             pathExpr.getProperty(AST2BOpBase.Annotations.ESTIMATED_CARDINALITY, Long.MAX_VALUE);
 
-        /**
-         * The upper bound tells us how often the pattern will be executed, we multiply it with the
+      /*
+       * The upper bound tells us how often the pattern will be executed, we multiply it with the
          * estimated cardinality and add the zero match adjustment.
          */
         if (estCard < Long.MAX_VALUE) {

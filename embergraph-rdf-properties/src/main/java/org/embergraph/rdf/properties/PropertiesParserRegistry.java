@@ -54,8 +54,8 @@ package org.embergraph.rdf.properties;
 import info.aduna.lang.service.FileFormatServiceRegistry;
 import org.openrdf.rio.RDFParserFactory;
 
-/**
- * A registry that keeps track of the available {@link RDFParserFactory}s.
+/*
+* A registry that keeps track of the available {@link RDFParserFactory}s.
  *
  * @author Bryan Thompson
  */
@@ -64,7 +64,7 @@ public class PropertiesParserRegistry
 
   private static PropertiesParserRegistry defaultRegistry;
 
-  /**
+  /*
    * Gets the default {@link PropertiesParserRegistry}.
    *
    * @return The default registry.

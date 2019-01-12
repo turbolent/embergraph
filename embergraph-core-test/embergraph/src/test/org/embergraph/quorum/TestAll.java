@@ -31,8 +31,8 @@ import junit.framework.TestSuite;
 import junit.textui.ResultPrinter;
 import org.apache.log4j.Logger;
 
-/**
- * Aggregates test suites in increasing dependency order.
+/*
+* Aggregates test suites in increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -85,7 +85,7 @@ public class TestAll extends TestCase {
     return suite;
   }
 
-  /**
+  /*
    * Run the test suite many times.
    *
    * @param args The #of times to run the test suite (defaults to 100).

@@ -25,8 +25,8 @@ package org.embergraph.striterator;
 
 import java.util.NoSuchElementException;
 
-/**
- * An extension of {@link IChunkedIterator} interface that knows about natural traversal orders and
+/*
+* An extension of {@link IChunkedIterator} interface that knows about natural traversal orders and
  * how to re-order the elements that are being visited to support JOINs where the natural order for
  * the access paths is different for the left- and right-hand side of the JOIN.
  *
@@ -36,15 +36,15 @@ import java.util.NoSuchElementException;
  */
 public interface IChunkedOrderedIterator<R> extends IChunkedIterator<R> {
 
-  /**
+  /*
    * The natural order in which elements are being visited.
    *
    * @return The natural order in which the elements are being visited -or- <code>null</code> if not
    *     known.
    */
-  public IKeyOrder<R> getKeyOrder();
+  IKeyOrder<R> getKeyOrder();
 
-  /**
+  /*
    * Return the next "chunk" of elements. The elements will be in the specified order. If {@link
    * #getKeyOrder()} would return non-<code>null</code> and the request order corresponds to the
    * value that would be returned by {@link #getKeyOrder()} then the elements in the next chunk are
@@ -56,5 +56,5 @@ public interface IChunkedOrderedIterator<R> extends IChunkedIterator<R> {
    * @throws NoSuchElementException if the iterator is exhausted.
    * @throws IllegalArgumentException if the <i>keyOrder</i> is <code>null</code>.
    */
-  public R[] nextChunk(IKeyOrder<R> keyOrder);
+  R[] nextChunk(IKeyOrder<R> keyOrder);
 }

@@ -34,8 +34,8 @@ import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 
-/**
- * Base class for static analysis.
+/*
+* Base class for static analysis.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -54,7 +54,7 @@ public class StaticAnalysisBase {
     return queryRoot;
   }
 
-  /**
+  /*
    * @param queryRoot The root of the query. We need to have this on hand in order to resolve {@link
    *     NamedSubqueryInclude}s during static analysis.
    * @param evaluationContext The evaluation context provides access to the {@link
@@ -70,7 +70,7 @@ public class StaticAnalysisBase {
     this.evaluationContext = evaluationContext;
   }
 
-  /**
+  /*
    * Return the distinct variables in the operator tree, including on those on annotations attached
    * to operators. Variables projected by a subquery are included, but not variables within the
    * WHERE clause of the subquery. Variables projected by a {@link NamedSubqueryInclude} are also
@@ -86,7 +86,7 @@ public class StaticAnalysisBase {
     return getSpannedVariables(op, true /* filters */, varSet);
   }
 
-  /**
+  /*
    * Return the distinct variables in the operator tree. Variables projected by a subquery are
    * included, but not variables within the WHERE clause of the subquery. Variables projected by a
    * {@link NamedSubqueryInclude} are also reported, but not those used within the WHERE clause of
@@ -201,8 +201,8 @@ public class StaticAnalysisBase {
 
         final ISolutionSetStats stats = getSolutionSetStats(name);
 
-        /*
-         * Note: This is all variables which are bound in ANY solution.
+      /*
+       * Note: This is all variables which are bound in ANY solution.
          * It MAY include variables which are NOT bound in some
          * solutions.
          */
@@ -247,7 +247,7 @@ public class StaticAnalysisBase {
     return varSet;
   }
 
-  /**
+  /*
    * Return the corresponding {@link NamedSubqueryRoot}.
    *
    * @param name The name of the solution set.
@@ -269,7 +269,7 @@ public class StaticAnalysisBase {
     return nsr;
   }
 
-  /**
+  /*
    * Return the corresponding {@link NamedSubqueryRoot}.
    *
    * <p>Note: You can not resolve pre-existing named solution sets with this method, only those
@@ -298,7 +298,7 @@ public class StaticAnalysisBase {
     return null;
   }
 
-  /**
+  /*
    * Return the {@link ISolutionSetStats} for the named solution set.
    *
    * <p>Note: This does NOT report on {@link NamedSubqueryRoot}s for the query. It only checks the
@@ -319,7 +319,7 @@ public class StaticAnalysisBase {
     return evaluationContext.getSolutionSetStats(name);
   }
 
-  /**
+  /*
    * Add all variables spanned by the operator.
    *
    * <p><strong>WARNING:</strong> This method does not consider the variable scoping rules. It is
@@ -331,7 +331,7 @@ public class StaticAnalysisBase {
    */
   protected void addAll(final Set<IVariable<?>> bindings, final IGroupMemberNode op) {
 
-    final Iterator<IVariable<?>> it = BOpUtility.getSpannedVariables((BOp) op);
+    final Iterator<IVariable<?>> it = BOpUtility.getSpannedVariables(op);
 
     while (it.hasNext()) {
 
@@ -339,8 +339,8 @@ public class StaticAnalysisBase {
     }
   }
 
-  //    /**
-  //     * Add all variables on the {@link ProjectionNode} of the subquery to the
+  //    /*
+//     * Add all variables on the {@link ProjectionNode} of the subquery to the
   //     * set of distinct variables visible within the scope of the parent query.
   //     *
   //     * @param subquery
@@ -366,7 +366,7 @@ public class StaticAnalysisBase {
   //
   //    }
 
-  /**
+  /*
    * Return <code>true</code> if the {@link FilterNode} is fully bound for the given variables.
    *
    * @param f The {@link FilterNode}
@@ -381,20 +381,15 @@ public class StaticAnalysisBase {
 
     fvars.removeAll(vars);
 
-    if (fvars.isEmpty()) {
+    /*
+     * The variables for this filter are all present in the given set of
+     * variables.
+     */
+    return fvars.isEmpty();
 
-      /*
-       * The variables for this filter are all present in the given set of
-       * variables.
-       */
-
-      return true;
-    }
-
-    return false;
   }
 
-  /**
+  /*
    * Return any variables appearing in the Subject, Predicate, or Object position (the Context
    * position is ignored).
    *
@@ -407,7 +402,7 @@ public class StaticAnalysisBase {
 
     for (int i = 0; i < 3; i++) {
 
-      final TermNode tmp = (TermNode) sp.get(0);
+      final TermNode tmp = sp.get(0);
 
       if (tmp.isVariable()) {
 

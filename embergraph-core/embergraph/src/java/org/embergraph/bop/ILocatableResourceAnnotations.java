@@ -21,15 +21,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-/**
- * Annotations to locate a resource.
+/*
+* Annotations to locate a resource.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ILocatableResourceAnnotations extends ITimestampAnnotations {
 
-  /**
+  /*
    * The name of the relation on which the predicate will read.
    *
    * <p>FIXME Change this to be a scalar value. It is currently an array for backwards

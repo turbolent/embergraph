@@ -12,8 +12,8 @@ import cern.colt.matrix.DoubleFactory1D;
 import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * Eigenvalues and eigenvectors of a real matrix <tt>A</tt>.
+/*
+* Eigenvalues and eigenvectors of a real matrix <tt>A</tt>.
  *
  * <p>If <tt>A</tt> is symmetric, then <tt>A = V*D*V'</tt> where the eigenvalue matrix <tt>D</tt> is
  * diagonal and the eigenvector matrix <tt>V</tt> is orthogonal. I.e. <tt>A =
@@ -28,42 +28,42 @@ import cern.colt.matrix.DoubleMatrix2D;
  */
 public class EigenvalueDecomposition implements java.io.Serializable {
   static final long serialVersionUID = 1020;
-  /**
+  /*
    * Row and column dimension (square matrix).
    *
    * @serial matrix dimension.
    */
   private int n;
 
-  /**
+  /*
    * Symmetry flag.
    *
    * @serial internal symmetry flag.
    */
   private boolean issymmetric;
 
-  /**
+  /*
    * Arrays for internal storage of eigenvalues.
    *
    * @serial internal storage of eigenvalues.
    */
   private double[] d, e;
 
-  /**
+  /*
    * Array for internal storage of eigenvectors.
    *
    * @serial internal storage of eigenvectors.
    */
   private double[][] V;
 
-  /**
+  /*
    * Array for internal storage of nonsymmetric Hessenberg form.
    *
    * @serial internal storage of nonsymmetric Hessenberg form.
    */
   private double[][] H;
 
-  /**
+  /*
    * Working storage for nonsymmetric algorithm.
    *
    * @serial working storage for nonsymmetric algorithm.
@@ -73,7 +73,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
   // Complex scalar division.
 
   private transient double cdivr, cdivi;
-  /**
+  /*
    * Constructs and returns a new eigenvalue decomposition object; The decomposed matrices can be
    * retrieved via instance methods of the returned decomposition object. Checks for symmetry, then
    * constructs the eigenvalue decomposition.
@@ -137,7 +137,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
       cdivi = (r * xi - xr) / d;
     }
   }
-  /**
+  /*
    * Returns the block diagonal eigenvalue matrix, <tt>D</tt>.
    *
    * @return <tt>D</tt>
@@ -157,7 +157,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
     }
     return DoubleFactory2D.dense.make(D);
   }
-  /**
+  /*
    * Returns the imaginary parts of the eigenvalues.
    *
    * @return imag(diag(D))
@@ -165,7 +165,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
   public DoubleMatrix1D getImagEigenvalues() {
     return DoubleFactory1D.dense.make(e);
   }
-  /**
+  /*
    * Returns the real parts of the eigenvalues.
    *
    * @return real(diag(D))
@@ -173,7 +173,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
   public DoubleMatrix1D getRealEigenvalues() {
     return DoubleFactory1D.dense.make(d);
   }
-  /**
+  /*
    * Returns the eigenvector matrix, <tt>V</tt>
    *
    * @return <tt>V</tt>
@@ -713,7 +713,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
       }
     }
   }
-  /**
+  /*
    * Returns a String with (propertyName, propertyValue) pairs. Useful for debugging or to quickly
    * get the rough picture. For example,
    *
@@ -732,28 +732,28 @@ public class EigenvalueDecomposition implements java.io.Serializable {
 
     buf.append("realEigenvalues = ");
     try {
-      buf.append(String.valueOf(this.getRealEigenvalues()));
+      buf.append(this.getRealEigenvalues());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\nimagEigenvalues = ");
     try {
-      buf.append(String.valueOf(this.getImagEigenvalues()));
+      buf.append(this.getImagEigenvalues());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nD = ");
     try {
-      buf.append(String.valueOf(this.getD()));
+      buf.append(this.getD());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nV = ");
     try {
-      buf.append(String.valueOf(this.getV()));
+      buf.append(this.getV());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

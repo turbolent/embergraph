@@ -65,8 +65,8 @@ import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Builds an {@link IndexSegment} given a source btree and a target branching factor. There are two
+/*
+* Builds an {@link IndexSegment} given a source btree and a target branching factor. There are two
  * main use cases:
  *
  * <ol>
@@ -183,7 +183,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** Logger. */
   private static final Logger log = Logger.getLogger(IndexSegmentBuilder.class);
 
-  /**
+  /*
    * Error message when the #of tuples in the {@link IndexSegment} would exceed {@link
    * Integer#MAX_VALUE}.
    *
@@ -205,19 +205,19 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** The value specified to the ctor. */
   public final long entryCount;
 
-  /**
+  /*
    * The iterator specified to the ctor. This is the source for the keys and values that will be
    * written onto the generated {@link IndexSegment}.
    */
   private final ITupleIterator<?> entryIterator;
 
-  /**
+  /*
    * The commit time associated with the view from which the {@link IndexSegment} is being generated
    * (from the ctor). This value is written into {@link IndexSegmentCheckpoint#commitTime}.
    */
   public final long commitTime;
 
-  /**
+  /*
    * <code>true</code> iff the generated {@link IndexSegment} will incorporate all state for the
    * source index (partition) as of the specified <i>commitTime</i>.
    *
@@ -229,19 +229,19 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** The name of the index or index partition for which the build is being performed. */
   final String name;
 
-  /**
+  /*
    * A copy of the metadata object provided to the ctor. This object is further modified before
    * being written on the {@link IndexSegmentStore}.
    */
   public final IndexMetadata metadata;
 
-  /**
+  /*
    * <code>true</code> iff the source index is isolatable (supports both deletion markers and
    * version timestamps).
    */
   final boolean isolatable;
 
-  /**
+  /*
    * <code>true</code> iff the source index has delete markers enabled.
    *
    * <p>Note: delete markers are ONLY copied for an incremental build (when {@link #compactingMerge}
@@ -252,7 +252,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** <code>true</code> iff the source index has tuple revision timestamps enabled. */
   final boolean versionTimestamps;
 
-  /**
+  /*
    * <code>true</code> iff the source index has raw records enabled.
    *
    * <p>Note: raw records will be copied into the BLOBS region of the index segment and the address
@@ -261,7 +261,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    */
   final boolean rawRecords;
 
-  /**
+  /*
    * A buffer used to encode a raw record address for a mutable {@link BTree} and otherwise <code>
    * null</code>.
    */
@@ -270,7 +270,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** The unique identifier for the generated {@link IndexSegment} resource. */
   public final UUID segmentUUID;
 
-  /**
+  /*
    * The cache for the generated {@link IndexSegmentStore}. When non- <code>null</code> the
    * generated {@link INodeData} objects will be placed into the cache, which is backed by a shared
    * LRU. This helps to reduce latency when an index partition built or merge operation finishes and
@@ -297,7 +297,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** Used to serialize the nodes and leaves of the output tree. */
   private final NodeSerializer nodeSer;
 
-  /**
+  /*
    * Note: The offset bits on the {@link IndexSegmentFileStore} does NOT have to agree with the
    * offset bits on the source store. However, it must be large enough to handle the large branching
    * factors typically associated with an {@link IndexSegment} vs a {@link BTree}. Further, if blobs
@@ -309,7 +309,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    */
   final int offsetBits = WormAddressManager.SCALE_OUT_OFFSET_BITS;
 
-  /**
+  /*
    * The {@link IAddressManager} used to form addresses for the generated file. Addresses are formed
    * from a byteCount and an <em>encoded</em> offset comprised of a relative offset into a known
    * region and the region identifier.
@@ -322,7 +322,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** The bloom filter iff we build one (errorRate != 0.0). */
   final IBloomFilter bloomFilter;
 
-  /**
+  /*
    * When <code>true</code> record level checksums will be used in the generated file.
    *
    * <p>FIXME This can not be enabled until we factor out the direct use of the {@link WriteCache}
@@ -342,7 +342,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** Used to compute record level checksums when {@link #useChecksums} is <code>true</code>. */
   private final ChecksumUtility checker = new ChecksumUtility();
 
-  /**
+  /*
    * The file on which the {@link IndexSegment} is written. The file is closed regardless of the
    * outcome of the operation.
    */
@@ -357,8 +357,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     return checkpoint;
   }
 
-  //    /**
-  //     * The buffer used to hold leaves so that they can be evicted en mass onto a
+  //    /*
+//     * The buffer used to hold leaves so that they can be evicted en mass onto a
   //     * region of the {@link #outFile}.
   //     *
   //     * @deprecated This forces us to do IO twice for the leaves. They should be
@@ -372,14 +372,14 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   //     */
   //    private TemporaryRawStore leafBuffer;
 
-  /**
+  /*
    * This is used to buffer the leaves written onto the output file for greater efficiency.
    *
    * <p>FIXME Use a WriteCacheService which will hide this complexity and give better throughput.
    */
   private WriteCache.FileChannelWriteCache leafWriteCache;
 
-  /**
+  /*
    * Class combines the address at which a node is written onto the output file (relative to the
    * start of the nodes region) with the coded data record for the node.
    *
@@ -396,25 +396,25 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * The buffer used to hold nodes so that they can be evicted en mass onto a region of the {@link
    * #outFile}. This is conditionally enabled depending on whether #bufferNodes is true.
    */
   private TemporaryRawStore nodeBuffer;
 
-  /**
+  /*
    * When the nodes are to be fully buffered they are added into this list in the order in which
    * they are generated.
    */
   private List<NodeMetadata> nodeList;
 
-  /**
+  /*
    * When <code>true</code> the generated nodes will be fully buffered in RAM. Otherwise they will
    * be buffered on the {@link #nodeBuffer} and then transferred to the output file en mass.
    */
   protected final boolean bufferNodes;
 
-  /**
+  /*
    * The optional buffer used to hold records referenced by index entries. This is opened if the
    * index uses raw records -or- if the index specifies and {@link IOverflowHandler}.
    */
@@ -422,7 +422,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
   private final IOverflowHandler overflowHandler;
 
-  /**
+  /*
    * The encoded address of the first leaf written on the {@link IndexSegmentStore} (there is always
    * at least one, even if it is the root leaf).
    *
@@ -430,7 +430,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    */
   private long addrFirstLeaf = 0L;
 
-  /**
+  /*
    * The encoded address of the last leaf written on the {@link IndexSegmentStore} (there is always
    * at least one, even if it is the root leaf).
    *
@@ -438,15 +438,15 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    */
   private long addrLastLeaf = 0L;
 
-  //    /**
-  //     * The offset in the output file of the last leaf written onto that file.
+  //    /*
+//     * The offset in the output file of the last leaf written onto that file.
   //     * Together with {@link #lastLeafSize} this is used to compute the
   //     * address of the prior leaf.
   //     */
   //    long lastLeafOffset = -1L;
   //
-  //    /**
-  //     * The size in bytes of the last leaf written onto the output file (the size
+  //    /*
+//     * The size in bytes of the last leaf written onto the output file (the size
   //     * of the compressed record that is actually written onto the output file
   //     * NOT the size of the serialized leaf before it is compressed). Together
   //     * with {@link #lastLeafOffset} this is used to compute the address of the
@@ -454,7 +454,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   //     */
   //    int lastLeafSize = -1;
 
-  /**
+  /*
    * Tracks the maximum length of any serialized node or leaf. This is used to fill in one of the
    * {@link IndexSegmentCheckpoint} fields.
    */
@@ -463,7 +463,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** The #of tuples written for the output tree. */
   long ntuplesWritten;
 
-  /**
+  /*
    * The #of nodes written for the output tree. This will be zero if all entries fit into a root
    * leaf.
    */
@@ -472,14 +472,14 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** The #of leaves written for the output tree. */
   int nleavesWritten = 0;
 
-  /**
+  /*
    * The #of nodes or leaves that have been written out in each level of the tree.
    *
    * @see IndexSegmentPlan#numInLevel
    */
-  final int writtenInLevel[];
+  final int[] writtenInLevel;
 
-  /**
+  /*
    * The stack of nodes that are currently being populated. The first N-1 elements in this array are
    * always nodes while the last element is always a leaf ({@link #leaf} is the same reference as
    * the last element in this array). The nodes and the leaf in this array are reused rather than
@@ -487,7 +487,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    */
   final AbstractSimpleNodeData[] stack;
 
-  /**
+  /*
    * The current leaf that is being populated from the source btree. This leaf is reused for each
    * output leaf rather than being reallocated. In the degenerate case when the output btree is a
    * single root leaf then this will be that leaf. This reference is always the same as the last
@@ -501,7 +501,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** The timestamp in milliseconds when {@link #call()} was invoked. */
   private long begin_build;
 
-  /**
+  /*
    * The timestamp in milliseconds when {@link #call()} was invoked -or- ZERO (0L) if {@link
    * #call()} has not been invoked.
    */
@@ -510,19 +510,19 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     return begin_build;
   }
 
-  /**
+  /*
    * The time to setup the index build, including the generation of the index plan and the
    * initialization of some helper objects.
    */
   public final long elapsed_setup;
 
-  /**
+  /*
    * The time to write the nodes and leaves into their respective buffers, not including the time to
    * transfer those buffered onto the output file.
    */
   public long elapsed_build;
 
-  /**
+  /*
    * The time to write the nodes and leaves from their respective buffers onto the output file and
    * synch and close that output file.
    */
@@ -534,7 +534,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** The data throughput rate in megabytes per second. */
   public float mbPerSec;
 
-  /**
+  /*
    * Builder factory will build an {@link IndexSegment} from an index (partition). Delete markers
    * are propagated to the {@link IndexSegment} unless <i>compactingMerge</i> is <code>true</code>.
    *
@@ -639,7 +639,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * A two pass build algorithm. The first pass is used to obtain an exact entry count for the view.
    * Based on that exact range count we can compute a plan for a balanced B+Tree. A second pass over
    * the view is required to populate the output B+Tree. This flavor also buffers the leaves and
@@ -739,7 +739,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         bufferNodes);
   }
 
-  /**
+  /*
    * A one pass algorithm which materializes the tuples in RAM, computing the exact tuple count as
    * it goes. This is faster than the two-pass algorithm and is a better choice when the source view
    * and the output index segment are within the normal ranges for an index partition, e.g., an
@@ -864,8 +864,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (hasDeleteMarkers && tuple.isDeletedVersion()) {
 
-        /*
-         * Note: When delete markers are used, the array will be
+      /*
+       * Note: When delete markers are used, the array will be
          * pre-populated with [false] so we only have to set the flag on
          * the tuples that are actually deleted.
          */
@@ -873,8 +873,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       } else {
 
-        /*
-         * Note: If the source has raw records for some values, then
+      /*
+       * Note: If the source has raw records for some values, then
          * this will cause those records to be materialized within the
          * single massive root leaf. From there, the data will be
          * written onto the index segment file.
@@ -909,7 +909,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         bufferNodes);
   }
 
-  /**
+  /*
    * Variant using an array of objects in the desired order. A single root leaf is generated from
    * those objects. The root leaf is then fed into the algorithm to efficient construct the
    * corresponding read-only {@link IndexSegment}.
@@ -1116,7 +1116,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         bufferNodes);
   }
 
-  /**
+  /*
    * A more flexible factory for an {@link IndexSegment} build which permits override of the index
    * segment branching factor, replacement of the {@link IndexMetadata}, and the use of the caller's
    * iterator.
@@ -1186,7 +1186,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         bufferNodes);
   }
 
-  /**
+  /*
    * Designated constructor sets up a build of an {@link IndexSegment} for some caller defined
    * read-only view.
    *
@@ -1304,8 +1304,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (pmd != null) {
 
-        /*
-         * Copy the local partition metadata, but do not include the
+      /*
+       * Copy the local partition metadata, but do not include the
          * resource metadata identifying the resources that comprise the
          * index partition view. that information is only stored on the
          * BTree, not on the IndexSegment.
@@ -1473,8 +1473,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
        */
       nodeSer =
           new NodeSerializer(
-              /*
-               * Note: it does not seem like there should be any
+            /*
+       * Note: it does not seem like there should be any
                * interaction between various IAddressSerializer strategies
                * and the manner in which we encode the region (BASE, NODE,
                * or BLOB) into the offset of addresses for the index
@@ -1738,7 +1738,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * Scan the source tuple iterator in key order writing output leaves onto the index segment file
    * with the new branching factor. We also track a stack of nodes that are being written out
    * concurrently on a temporary channel.
@@ -1801,8 +1801,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
         if (i > 0 && j == 0) {
 
-          /*
-           * Every time (after the first) that we enter a new leaf we
+        /*
+       * Every time (after the first) that we enter a new leaf we
            * need to record its first key as a separatorKey in the
            * appropriate parent.
            *
@@ -1845,7 +1845,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
   }
 
-  /**
+  /*
    * Copy a tuple into the current leaf at the given index.
    *
    * @param j The index in the leaf to which the tuple will be copied.
@@ -1890,8 +1890,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (overflowHandler != null) {
 
-        /*
-         * Provide the handler with the opportunity to copy
+      /*
+       * Provide the handler with the opportunity to copy
          * the blob's data onto the buffer and re-write the
          * value, which is presumably the blob reference.
          */
@@ -1900,8 +1900,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       } else {
 
-        /*
-         * Note: If the source index uses raw records then this will
+      /*
+       * Note: If the source index uses raw records then this will
          * return the materialized value from the raw record.
          */
 
@@ -1952,7 +1952,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     leaf.vals.nvalues++;
   }
 
-  /**
+  /*
    * This is invoked for the first tuple visited to make sure that the iterator is reporting the
    * data we need.
    */
@@ -2015,7 +2015,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * Flush a node or leaf that has been closed (no more data will be added).
    *
    * <p>Note: When a node or leaf is flushed we write it out to obtain its address and set that
@@ -2081,7 +2081,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     writtenInLevel[h]++;
   }
 
-  /**
+  /*
    * Record the persistent address of a child on its parent and the #of entries spanned by that
    * child. If all children on the parent become assigned then the parent is closed.
    *
@@ -2201,7 +2201,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * The {@link #stack} contains nodes which are reused for each node or leaf at a given level in
    * the generated B+Tree. This method prepares a node in the stack for reuse.
    */
@@ -2239,7 +2239,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * Copies the first key of a new leaf as a separatorKey for the appropriate parent (if any) of
    * that leaf. This must be invoked when the first key is set on that leaf. However, it must not be
    * invoked on the first leaf.
@@ -2276,7 +2276,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     addSeparatorKey(parent, separatorKey);
   }
 
-  /**
+  /*
    * Copies the separatorKey into the appropriate parent (if any). This method is self-recursive.
    *
    * @param parent A node which is a parent of the current leaf or an ancestor of the node which is
@@ -2328,7 +2328,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * Return the parent of a node or leaf in the {@link #stack}.
    *
    * @param node The node or leaf.
@@ -2344,7 +2344,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     return (SimpleNodeData) stack[node.level - 1];
   }
 
-  /**
+  /*
    * Write the node or leaf onto the appropriate output channel.
    *
    * @return The address that may be used to read the node or leaf from the file. Note that the
@@ -2356,7 +2356,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     return node.isLeaf() ? writeLeaf((SimpleLeafData) node) : writeNode((SimpleNodeData) node);
   }
 
-  /**
+  /*
    * Code the leaf, obtaining its address, update the prior/next addr of the previous leaf, and
    * write that previous leaf onto the output file.
    *
@@ -2404,8 +2404,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (nleavesWritten > 0) {
 
-        /*
-         * Update the previous leaf, but only for the 2nd+ leaf.
+      /*
+       * Update the previous leaf, but only for the 2nd+ leaf.
          */
 
         if (log.isDebugEnabled())
@@ -2430,8 +2430,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         // view onto the coded record for the prior leaf.
         final ByteBuffer bufLastLeaf = lastLeafData.data().asByteBuffer();
 
-        /*
-         * Patch representation of the previous leaf.
+      /*
+       * Patch representation of the previous leaf.
          *
          * Note: This patches the coded record using the ByteBuffer view
          * of that record. However, the change is made to the backing
@@ -2450,8 +2450,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
         if (storeCache != null) {
 
-          /*
-           * Insert the coded, patched record for the prior leaf into
+        /*
+       * Insert the coded, patched record for the prior leaf into
            * cache.
            */
 
@@ -2529,8 +2529,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (storeCache != null) {
 
-        /*
-         * Insert the coded, patched record for the prior leaf into
+      /*
+       * Insert the coded, patched record for the prior leaf into
          * cache.
          */
 
@@ -2549,12 +2549,12 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
     leafAddrFactory.addAndGet(nbytes);
 
-    final long addr1 = addressManager.toAddr((int) nbytes, offset);
+    final long addr1 = addressManager.toAddr(nbytes, offset);
 
     return addr1;
   }
 
-  /**
+  /*
    * The address factory for the leaves. Note that addresses are relative to the start of the leaf
    * region, not the start of the output file.
    */
@@ -2583,8 +2583,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
         // write leaf on the cache.
         if (!leafWriteCache.write(offset, data, chk)) {
 
-          /*
-           * The leaf is larger than the write cache, so we will write
+        /*
+       * The leaf is larger than the write cache, so we will write
            * it directly onto the output file.
            *
            * @todo This is tested by the larger random builds, but we
@@ -2602,7 +2602,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * "Allocates" a node address when we will buffer the nodes in RAM.
    *
    * @throws UnsupportedOperationException if we are not buffering nodes in RAM.
@@ -2615,18 +2615,18 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
     nodeAddrFactory.addAndGet(nbytes);
 
-    final long addr1 = addressManager.toAddr((int) nbytes, offset);
+    final long addr1 = addressManager.toAddr(nbytes, offset);
 
     return addr1;
   }
 
-  /**
+  /*
    * The address factory for the nodes used when we will buffer the nodes in RAM. Note that
    * addresses are relative to the start of the node region, not the start of the output file.
    */
   private final AtomicLong nodeAddrFactory = new AtomicLong(0L);
 
-  /**
+  /*
    * Encode the address of a leaf.
    *
    * <p>Note: This updates {@link #maxNodeOrLeafLength} as a side-effect.
@@ -2666,7 +2666,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   /** The address of the previous leaf, but encoded for the generated {@link IndexSegmentStore}. */
   private long addrPriorLeaf = 0L;
 
-  /**
+  /*
    * The address of the last leaf allocated (but not yet written out).
    *
    * <p>Note: This address is NOT encoded for the {@link IndexSegmentStore}. Instead, it is encoded
@@ -2677,8 +2677,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    */
   private long bufLastLeafAddr = 0L;
 
-  //    /**
-  //     * Buffer holds a copy of the serialized representation of the last leaf.
+  //    /*
+//     * Buffer holds a copy of the serialized representation of the last leaf.
   //     * This buffer is reset and written by {@link #writeLeaf(SimpleLeafData)}.
   //     * The contents of this buffer are used by {@link #writePriorLeaf(long)} to
   //     * write out the serialized representation of the previous leaf in key order
@@ -2686,7 +2686,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
   //     * The buffer is automatically reallocated if it is too small for a leaf.
   //     */
   //    private ByteBuffer bufLastLeaf = ByteBuffer.allocate(10 * Bytes.kilobyte32);
-  /**
+  /*
    * Buffer holds a copy of the coded representation of the last leaf. This buffer is written by
    * {@link #writeLeaf(SimpleLeafData)}. The contents of this buffer are used to write out the
    * serialized representation of the previous leaf in key order after it has been patched to
@@ -2696,7 +2696,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    */
   private ILeafData lastLeafData;
 
-  /**
+  /*
    * Code and write the node onto the {@link #nodeBuffer}.
    *
    * @return An <em>relative</em> address that must be correctly decoded before you can read the
@@ -2764,7 +2764,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     return addr;
   }
 
-  /**
+  /*
    * Writes the complete file format for the index segment. The file is divided up as follows:
    *
    * <ol>
@@ -2922,8 +2922,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
        */
       if (nodeBuffer != null) {
 
-        /*
-         * Seek to the start of the nodes region (the write cache does
+      /*
+       * Seek to the start of the nodes region (the write cache does
          * not change the file position when it writes onto the file so
          * we need to explicitly seek to the desired location).
          */
@@ -2944,8 +2944,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       } else if (nodeList != null) {
 
-        /*
-         * Write the nodes onto the output file.
+      /*
+       * Write the nodes onto the output file.
          *
          * Note: The addresses are relative to the start of the nodes
          * region, so we adjust the write cache using the offset to the
@@ -3026,8 +3026,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       } else {
 
-        /*
-         * The tree consists of just a root leaf.
+      /*
+       * The tree consists of just a root leaf.
          */
 
         // This MUST be 0L if there are no leaves.
@@ -3101,8 +3101,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (storeCache != null) {
 
-        /*
-         * Insert the record into the cache.
+      /*
+       * Insert the record into the cache.
          */
 
         storeCache.putIfAbsent(addrBloom, bloomFilter);
@@ -3135,8 +3135,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       if (storeCache != null) {
 
-        /*
-         * Insert the record into the cache.
+      /*
+       * Insert the record into the cache.
          */
 
         storeCache.putIfAbsent(addrMetadata, metadata);
@@ -3203,8 +3203,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
           new IndexSegmentCheckpoint(
               addressManager.getOffsetBits(),
               plan.height, // will always be correct.
-              (int) nleavesWritten, // actual #of leaves written.
-              (int) nnodesWritten, // actual #of nodes written.
+              nleavesWritten, // actual #of leaves written.
+              nnodesWritten, // actual #of nodes written.
               ntuplesWritten, // actual #of tuples written.
               maxNodeOrLeafLength,
               offsetLeaves,
@@ -3239,7 +3239,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * The description of the constructed {@link IndexSegment} resource.
    *
    * @throws IllegalStateException if requested before the build operation is complete.
@@ -3256,7 +3256,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
   private SegmentMetadata segmentMetadata = null;
 
-  /**
+  /*
    * Abstract base class for classes used to construct and serialize nodes and leaves written onto
    * the index segment.
    *
@@ -3264,7 +3264,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    */
   protected abstract static class AbstractSimpleNodeData implements IAbstractNodeData {
 
-    /**
+    /*
      * The level in the output tree for this node or leaf (origin zero). The root is always at level
      * zero (0).
      */
@@ -3275,7 +3275,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     /** Mutable keys (directly managed by the {@link IndexSegmentBuilder}). */
     final MutableKeyBuffer keys;
 
-    /**
+    /*
      * The max/max version timestamp for the node/leaf. These data are only used when the B+Tree is
      * maintaining per tuple revision timestamps.
      */
@@ -3283,7 +3283,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
     long maximumVersionTimestamp;
 
-    /**
+    /*
      * We precompute the #of children to be assigned to each node and the #of values to be assigned
      * to each leaf and store that value in this field. While the field name is "max", this is the
      * exact that must be assigned to the node.
@@ -3309,7 +3309,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
       this.maximumVersionTimestamp = Long.MIN_VALUE;
     }
 
-    /**
+    /*
      * @param max The #of children to be assigned to this node -or- the #of tuples to be assigned to
      *     a leaf.
      */
@@ -3334,7 +3334,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
       return keys;
     }
 
-    /**
+    /*
      * Yes (however, note that the {@link IndexSegmentBuilder} directly accesses and modified the
      * internal data structures).
      */
@@ -3369,7 +3369,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * A class that can be used to (de-)serialize the data for a leaf without any of the logic for
    * operations on the leaf.
    *
@@ -3468,7 +3468,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
       return rawRecords != null;
     }
 
-    /**
+    /*
      * Yes - the caller maintains the necessary information and then updates the coded {@link
      * ReadOnlyLeafData} record once we have the address of the next record.
      */
@@ -3477,7 +3477,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
       return true;
     }
 
-    /**
+    /*
      * @throws UnsupportedOperationException since the data are maintained externally and patched on
      *     the coded records by the {@link IndexSegmentBuilder}.
      */
@@ -3486,7 +3486,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
       throw new UnsupportedOperationException();
     }
 
-    /**
+    /*
      * @throws UnsupportedOperationException since the data are maintained externally and patched on
      *     the coded records by the {@link IndexSegmentBuilder}.
      */
@@ -3496,7 +3496,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * A class that can be used to (de-)serialize the data for a node without any of the logic for
    * operations on the node.
    *
@@ -3513,14 +3513,14 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
     // mutable.
 
-    /**
+    /*
      * The relative address at which this node was written on the temporary channel. This is a
      * negative integer. If you flip the sign then it encodes a relative offset to the start of the
      * index node block and the correct size for the compressed node.
      */
     long addr = 0L;
 
-    /**
+    /*
      * The address at which the child nodes were written. This is a negative integer iff the child
      * is a node and a positive integer iff the child is a leaf. When it is a negative integer, you
      * must flip the sign to obtain a relative offset to the start of the index node block and the
@@ -3529,7 +3529,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
      */
     final long[] childAddr;
 
-    /**
+    /*
      * This tracks the #of defined values in {@link #childAddr} separately from the #of defined
      * keys. The reason that we do this is that the logic for handling a leaf eviction and recording
      * the address of the child and the separator key for the _next_ child requires an awareness of
@@ -3577,7 +3577,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
       this.hasVersionTimestamps = hasVersionTimestamps;
     }
 
-    /**
+    /*
      * Reset counters and flags so that the node may be reused.
      *
      * @param max The new limit on the #of children to fill on this node.
@@ -3642,7 +3642,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * A tuple iterator backed by a mutable leaf. This implementation is used when we materialize the
    * view in RAM in a single leaf and then do the build over that. The implementation always returns
    * the pre-allocated byte[] for the key or value in order to avoid redundant allocations. This is
@@ -3657,7 +3657,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
     private final boolean hasVersionTimestamp, hasDeleteMarkers, visitDeleted;
 
-    /**
+    /*
      * Directly exposes the data from the {@link MutableLeafData}.
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -3773,7 +3773,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     /** The first index to NOT visit. */
     private final int toIndex;
 
-    /**
+    /*
      * @param leaf The leaf whose entries will be traversed (required).
      * @param fromKey The first key whose entry will be visited or <code>null</code> if the lower
      *     bound on the key traversal is not constrained.
@@ -3799,7 +3799,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
       toIndex = leaf.getKeyCount();
     }
 
-    /**
+    /*
      * Examines the entry at {@link #i}. If it passes the criteria for an entry to visit then return
      * true. Otherwise increment the {@link #i} until either all entries in this leaf have been
      * exhausted -or- the an entry is identified that passes the various criteria.
@@ -3808,8 +3808,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
       for (; i >= fromIndex && i < toIndex; i++) {
 
-        /*
-         * Skip deleted entries unless specifically requested.
+      /*
+       * Skip deleted entries unless specifically requested.
          */
         if (hasDeleteMarkers && !visitDeleted && leaf.getDeleteMarker(i)) {
 
@@ -3847,7 +3847,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * Identifies which build method to use.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -3856,21 +3856,21 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
    */
   enum BuildEnum {
 
-    /**
+    /*
      * Do two passes over the source iterator. The first pass will compute the exact range count.
      * The second pass will build the {@link IndexSegment}. The two pass algorithm uses less memory
      * and can be highly efficient when using {@link IndexSegmentMultiBlockIterator} since it will
      * read the data from any source {@link IndexSegment}(s) at the disk transfer rate.
      */
     TwoPass,
-    /**
+    /*
      * Fully buffer the tuples from the {@link IndexSegment} into memory in a single pass over the
      * source index. This approach does less IO, but requires more memory in the Java heap.
      */
-    FullyBuffered;
+    FullyBuffered
   }
 
-  /**
+  /*
    * Prints the usage and then exits.
    *
    * @param args The command line args.
@@ -3893,7 +3893,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     System.exit(exitCode);
   }
 
-  /**
+  /*
    * Driver for index segment build against a named index on a local journal.
    *
    * @param args <code>[opts] journal [name]*</code>, where <i>journal</i> is the name of the
@@ -4182,8 +4182,8 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
 
         if (verify) {
 
-          /*
-           * Verify the generated index segment against the source
+        /*
+       * Verify the generated index segment against the source
            * B+Tree.
            */
 
@@ -4238,7 +4238,7 @@ public class IndexSegmentBuilder implements Callable<IndexSegmentCheckpoint> {
     }
   }
 
-  /**
+  /*
    * Verifies that the iterators visit tuples having the same data in the same order.
    *
    * @param expectedItr

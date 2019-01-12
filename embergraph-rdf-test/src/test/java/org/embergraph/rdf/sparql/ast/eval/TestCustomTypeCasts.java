@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast.eval;
 import org.embergraph.rdf.internal.constraints.XsdLongBOp;
 import org.embergraph.rdf.internal.constraints.XsdUnsignedLongBOp;
 
-/**
- * Test suite for standard type cast function such as {@link XsdLongBOp} and {@link
+/*
+* Test suite for standard type cast function such as {@link XsdLongBOp} and {@link
  * XsdUnsignedLongBOp}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -39,7 +39,7 @@ public class TestCustomTypeCasts extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Casting to xsd:long (non-standard extension).
    *
    * @throws Exception
@@ -55,7 +55,7 @@ public class TestCustomTypeCasts extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Casting to xsd:unsignedLong (non-standard extension).
    *
    * @throws Exception

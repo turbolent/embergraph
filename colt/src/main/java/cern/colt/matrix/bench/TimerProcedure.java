@@ -8,12 +8,12 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.matrix.bench;
 
-/**
- * Interface that represents a procedure object: a procedure that takes a single argument and does
+/*
+* Interface that represents a procedure object: a procedure that takes a single argument and does
  * not return a value.
  */
 interface TimerProcedure {
-  /**
+  /*
    * Applies a procedure to an argument. Optionally can return a boolean flag to inform the object
    * calling the procedure.
    *
@@ -25,7 +25,7 @@ interface TimerProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public void apply(cern.colt.Timer element);
+  void apply(cern.colt.Timer element);
   /** Prepare parameters before calling apply() */
-  public void init();
+  void init();
 }

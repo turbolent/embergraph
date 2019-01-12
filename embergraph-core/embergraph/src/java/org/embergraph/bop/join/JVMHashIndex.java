@@ -32,8 +32,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.solutions.JVMDistinctBindingSetsOp;
 import org.embergraph.counters.CAT;
 
-/**
- * A hash index for {@link IBindingSet}s that supports duplicate solutions and hit counts. The hit
+/*
+* A hash index for {@link IBindingSet}s that supports duplicate solutions and hit counts. The hit
  * counts are used to detect {@link IBindingSet}s that do not join for OPTIONAL, MINUS, and related
  * kinds of "negation" joins.
  *
@@ -51,8 +51,8 @@ public class JVMHashIndex {
   /** Note: If joinVars is an empty array, then the solutions will all hash to ONE (1). */
   private static final int ONE = 1;
 
-  //    /**
-  //     * Return the hash code which will be used as the key given the ordered
+  //    /*
+//     * Return the hash code which will be used as the key given the ordered
   //     * as-bound values for the join variables.
   //     *
   //     * @param joinVars
@@ -102,7 +102,7 @@ public class JVMHashIndex {
   //
   //    }
 
-  /**
+  /*
    * Return an array of constants corresponding to the as-bound values of the join variables for the
    * given solution.
    *
@@ -143,8 +143,8 @@ public class JVMHashIndex {
 
         if (!indexSolutionsHavingUnboundJoinVars) {
 
-          /*
-           * Drop solution having an unbound join variable.
+        /*
+       * Drop solution having an unbound join variable.
            */
 
           if (log.isDebugEnabled())
@@ -165,7 +165,7 @@ public class JVMHashIndex {
     return new Key(h, vals);
   }
 
-  /**
+  /*
    * Wrapper for the keys in the hash table. This is necessary for the hash table to compare the
    * keys as equal and also provides efficiencies in the hash code and equals() methods.
    */
@@ -208,7 +208,7 @@ public class JVMHashIndex {
     /** The input solution. */
     public final IBindingSet solution;
 
-    /**
+    /*
      * The #of hits on that solution. This may be used to detect solutions that did not join. E.g.,
      * by scanning and reporting out all solutions where {@link #nhits} is ZERO (0L).
      */
@@ -228,7 +228,7 @@ public class JVMHashIndex {
     }
   } // class SolutionHit
 
-  /**
+  /*
    * A group of solutions having the same as-bound values for the join vars. Each solution is paired
    * with a hit counter so we can support OPTIONAL semantics for the join.
    */
@@ -237,7 +237,7 @@ public class JVMHashIndex {
     /** The hash code for this collision bucket. */
     private final int hashCode;
 
-    /**
+    /*
      * A set of solutions (and their hit counters) which have the same as-bound values for the join
      * variables.
      */
@@ -262,7 +262,7 @@ public class JVMHashIndex {
       solutions.add(new SolutionHit(solution));
     }
 
-    /**
+    /*
      * Add the solution to the bucket iff the solutions is not already present in the bucket.
      *
      * <p>Note: There is already a hash index in place on the join variables when we are doing a
@@ -339,7 +339,7 @@ public class JVMHashIndex {
       return hashCode;
     }
 
-    /**
+    /*
      * Return <code>true</code> iff this {@link Bucket} is empty (if there are no solutions in the
      * bucket).
      */
@@ -349,7 +349,7 @@ public class JVMHashIndex {
     }
   } // Bucket
 
-  /**
+  /*
    * The join variables (required, but may be empty). The order of the entries is used when forming
    * the as-bound keys for the hash table. Duplicate elements and null elements are not permitted.
    * If no join variables are specified, then the join will consider the N x M cross product,
@@ -359,7 +359,7 @@ public class JVMHashIndex {
    */
   private final IVariable<?>[] keyVars;
 
-  /**
+  /*
    * When <code>true</code>, we allow solutions to be stored in the hash index that have unbound
    * variables for the {@link #keyVars}. When <code>false</code>, such solutions are dropped.
    *
@@ -376,7 +376,7 @@ public class JVMHashIndex {
   /** The backing map - this is NOT thread safe. */
   private final Map<Key, Bucket> map;
 
-  /**
+  /*
    * @param keyVars The variables that are used to form the keys in the hash index (required, but
    *     may be empty). The order of the entries is used when forming the as-bound keys for the hash
    *     table. Duplicate elements and null elements are not permitted. If no join variables are
@@ -421,7 +421,7 @@ public class JVMHashIndex {
     this.keyVars = keyVars;
   }
 
-  /**
+  /*
    * Add the solution to the index.
    *
    * @param bset The {@link IBindingSet}.
@@ -498,7 +498,7 @@ public class JVMHashIndex {
     return key;
   }
 
-  /**
+  /*
    * Add the solution to the index iff the solution is not already present in the index.
    *
    * @param bset The solution.
@@ -521,18 +521,14 @@ public class JVMHashIndex {
 
     } else {
 
-      if (b.addDistinct(bset)) {
-
-        // Existing bucket not having this solution.
-        return true;
-      }
+      // Existing bucket not having this solution.
+      return b.addDistinct(bset);
 
       // Existing bucket with duplicate solution.
-      return false;
     }
   }
 
-  /**
+  /*
    * Return the hash {@link Bucket} into which the given solution is mapped.
    *
    * <p>Note: The caller must apply an appropriate join constraint in order to correctly reject
@@ -562,7 +558,7 @@ public class JVMHashIndex {
     return map.values().iterator();
   }
 
-  /**
+  /*
    * The #of buckets in the hash index. Each bucket has a distinct hash code. Hash collisions can
    * cause solutions that are distinct in their {@link #keyVars} to nevertheless be mapped into the
    * same hash bucket.

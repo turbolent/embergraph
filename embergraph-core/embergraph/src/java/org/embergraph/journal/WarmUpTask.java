@@ -38,8 +38,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
-/**
- * Helper class to warm up the indices associated with various namespaces on the journal.
+/*
+* Helper class to warm up the indices associated with various namespaces on the journal.
  *
  * @author bryan
  * @see <a href="http://trac.bigdata.com/ticket/1050" > pre-heat the journal on startup </a>
@@ -57,19 +57,19 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
   /** The journal. */
   private final Journal journal;
 
-  /**
+  /*
    * A list of zero or more namespaces to be warmed up (optional). When <code>null</code> or empty,
    * all namespaces will be warmed up.
    */
   private final List<String> namespaces;
 
-  /**
+  /*
    * The commit time to be warmed up and -or- {@link ITx#READ_COMMITTED} to warm up the last commit
    * point on the journal.
    */
   private final long timestamp;
 
-  /**
+  /*
    * The #of threads that will be used to scan the pages in the indices associated with those
    * namespaces (GTE ONE). The #of threads that will be used to scan the pages in the indices
    * associated with those namespaces (GTE ONE). The indices will be scanned with one thread per
@@ -83,14 +83,14 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
   /** when <code>true</code> the leaves of the indices will also be read. */
   private final boolean visitLeaves;
 
-  /**
+  /*
    * Used to collect statistics obtained as a side-effect of the warmup procedure.
    *
    * <p>Note: This collection is ordered and is NOT thread-safe.
    */
   private final Map<String, BaseIndexStats> statsMap = new TreeMap<String, BaseIndexStats>();
 
-  /**
+  /*
    * @param journal The journal.
    * @param namespaces A list of zero or more namespaces to be warmed up (optional). When <code>null
    *     </code> or empty, all namespaces will be warmed up.
@@ -195,8 +195,8 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
         for (FutureTask<BaseIndexStats> ft : tasks) {
           // The statistics from scanning a single index.
           final BaseIndexStats stats = ft.get();
-          /*
-           * Add those statistics to our collection.
+        /*
+       * Add those statistics to our collection.
            *
            * Note: collection is not thread safe, but this logic is single
            * threaded.
@@ -215,8 +215,8 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
       final long elapsed = System.nanoTime() - begin;
 
       if (log.isInfoEnabled()) {
-        /*
-         * Write out warmup statistics (summary and detail).
+      /*
+       * Write out warmup statistics (summary and detail).
          */
         final StringWriter strw = new StringWriter(statsMap.size() * Bytes.kilobyte32);
         strw.append(
@@ -241,7 +241,7 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
     }
   } // call()
 
-  /**
+  /*
    * Warm up a single index.
    *
    * @param name The name of the index.
@@ -260,8 +260,8 @@ public class WarmUpTask implements Callable<Map<String, BaseIndexStats>> {
 
       if (InnerCause.isInnerCause(t, ClassNotFoundException.class)) {
 
-        /*
-         * This is typically a tuple serializer that has a dependency on an
+      /*
+       * This is typically a tuple serializer that has a dependency on an
          * application class that is not present in the CLASSPATH. Add the
          * necessary dependency(s) and you should no longer see this
          * message.

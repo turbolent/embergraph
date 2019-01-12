@@ -76,8 +76,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * An object which describes which kinds of RDF Values are inlined into the statement indices and
+/*
+* An object which describes which kinds of RDF Values are inlined into the statement indices and
  * how other RDF Values are coded into the lexicon.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -86,7 +86,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
 
   private static final Logger log = Logger.getLogger(LexiconConfiguration.class);
 
-  /**
+  /*
    * The maximum character length of an RDF {@link Value} before it will be inserted into the {@link
    * LexiconKeyOrder#BLOBS} index rather than the {@link LexiconKeyOrder#TERM2ID} and {@link
    * LexiconKeyOrder#ID2TERM} indices.
@@ -106,7 +106,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
       BigInteger.valueOf(1L << 33)
           .multiply(BigInteger.valueOf(1L << 33).subtract(BigInteger.valueOf(1)));
 
-  /**
+  /*
    * <code>true</code> if xsd primitive and numeric xsd datatype literals will be inlined.
    *
    * @see AbstractTripleStore.Options#INLINE_XSD_DATATYPE_LITERALS
@@ -119,14 +119,14 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
   /** Configuration of geospatial datatypes. */
   final GeoSpatialConfig geoSpatialConfig;
 
-  /**
+  /*
    * <code>true</code> if textual literals will be inlined.
    *
    * @see AbstractTripleStore.Options#INLINE_TEXT_LITERALS
    */
   private final boolean inlineTextLiterals;
 
-  /**
+  /*
    * The maximum length of a Unicode string which may be inlined into the statement indices. This
    * applies to blank node IDs, literal labels (including the {@link XSDStringExtension}), local
    * names of {@link URI}s, etc.
@@ -135,7 +135,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
    */
   private final int maxInlineTextLength;
 
-  /**
+  /*
    * <code>true</code> if (conforming) blank nodes will inlined.
    *
    * @see AbstractTripleStore.Options#INLINE_BNODES
@@ -166,26 +166,26 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
   /** The inline URI factory for the lexicon. */
   private final IInlineURIFactory uriFactory;
 
-  /**
+  /*
    * Mapping from the {@link IV} for the datatype URI of a registered extension to the {@link
    * IExtension}.
    */
   @SuppressWarnings("rawtypes")
   private final Map<IV, IExtension<? extends EmbergraphValue>> iv2ext;
 
-  /**
+  /*
    * Mapping from the string value of the datatype URI for a registered extension to the {@link
    * IExtension}.
    */
   private final Map<String, IExtension<? extends EmbergraphValue>> datatype2ext;
 
-  /**
+  /*
    * The set of inline datatypes that should be included in the text index even though they are
    * inline and not normally text indexed.
    */
   private final Set<URI> inlineDatatypesToTextIndex;
 
-  /**
+  /*
    * The set of registered {@link IMathOpHandler}s.
    *
    * @see BLZG-1592 (ConcurrentModificationException in MathBOp when using expression in BIND)
@@ -363,7 +363,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     /*
      * TODO Make this configurable.
      */
-    this.inlineDatatypesToTextIndex = new LinkedHashSet<URI>(Arrays.asList(new URI[] {XSD.IPV4}));
+    this.inlineDatatypesToTextIndex = new LinkedHashSet<URI>(Arrays.asList(XSD.IPV4));
 
     /*
      * Note: These collections are read-only so we do NOT need additional
@@ -494,7 +494,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     return iv;
   }
 
-  /**
+  /*
    * If the {@link URI} can be inlined into the statement indices for this {@link
    * LexiconConfiguration}, then return its inline {@link IV}.
    *
@@ -542,11 +542,11 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
       return new FullyInlineURIIV<EmbergraphURI>(value);
     }
 
-    final String localName = ((URI) value).getLocalName();
+    final String localName = value.getLocalName();
 
     if (localName.length() < maxInlineTextLength) {
 
-      final String namespace = ((URI) value).getNamespace();
+      final String namespace = value.getNamespace();
 
       final IV<EmbergraphURI, ?> namespaceIV = vocab.get(new URIImpl(namespace));
 
@@ -563,7 +563,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     return null;
   }
 
-  /**
+  /*
    * Inflate the localName portion of an inline URI using its storage delegate.
    *
    * @param namespace the uris's prefix
@@ -576,7 +576,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     return uriFactory.getLocalNameFromDelegate(namespace, delegate);
   }
 
-  /**
+  /*
    * If the {@link Literal} can be inlined into the statement indices for this {@link
    * LexiconConfiguration}, then return its inline {@link IV}.
    *
@@ -625,7 +625,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     return null;
   }
 
-  /**
+  /*
    * Test the registered {@link IExtension} handlers. If one handles this datatype, then delegate to
    * that {@link IExtension}.
    *
@@ -673,7 +673,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     }
   }
 
-  /**
+  /*
    * If the total length of the Unicode components of the {@link Literal} is less than {@link
    * #maxInlineTextLength} then return an fully inline version of the {@link Literal}.
    *
@@ -703,7 +703,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     return null;
   }
 
-  /**
+  /*
    * Attempt to inline an xsd datatype corresponding to either an intrinsic datatype, including a
    * java primitive (int, long, float, etc.) or of the special cases (BigDecimal, BigInteger). Both
    * the {@link DTE} and the {@link DTEExtension} enums will be checked to see if either one
@@ -750,19 +750,19 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     try {
 
       if (dtex != null) {
-        /*
-         * Handle an extended intrinsic datatype.
+      /*
+       * Handle an extended intrinsic datatype.
          */
         switch (dtex) {
           case IPV4:
-            /*
-             * Extension for IPv4. Throws UnknownHostException if not
+          /*
+       * Extension for IPv4. Throws UnknownHostException if not
              * parseable as an IPv4.
              */
             return new IPv4AddrIV<EmbergraphLiteral>(v);
           case PACKED_LONG:
-            /*
-             * Extension for packed long value in the range [0;72057594037927935L].
+          /*
+       * Extension for packed long value in the range [0;72057594037927935L].
              */
             return new PackedLongIV<EmbergraphLiteral>(v);
           default:
@@ -844,7 +844,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     }
   }
 
-  /**
+  /*
    * The unsigned parse must range check since it uses a parser for a higher value type before
    * casting.
    */
@@ -893,7 +893,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     return pv.subtract(BigInteger.valueOf(Long.MIN_VALUE)).longValue();
   }
 
-  /**
+  /*
    * If the {@link BNode} can be inlined into the statement indices for this {@link
    * LexiconConfiguration}, then return its inline {@link IV}.
    *
@@ -933,8 +933,8 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
 
       } catch (Exception ex) {
 
-        /*
-         * String id could not be converted to a UUID. Fall through.
+      /*
+       * String id could not be converted to a UUID. Fall through.
          */
 
       }
@@ -961,8 +961,8 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
 
       } catch (Exception ex) {
 
-        /*
-         * String id could not be converted to an Integer. Fall
+      /*
+       * String id could not be converted to an Integer. Fall
          * through.
          */
 
@@ -982,7 +982,7 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     return null;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the {@link VTE} / {@link DTE} combination will be inlined within
    * the statement indices using native inlining mechanisms (not {@link IExtension} handlers) based
    * solely on the consideration of the {@link VTE} and {@link DTE} (the length of the {@link Value}
@@ -1002,8 +1002,8 @@ public class LexiconConfiguration<V extends EmbergraphValue> implements ILexicon
     }
   }
 
-  //    /**
-  //     * Hack for supported {@link DTE}s (this is here because we do not support
+  //    /*
+//     * Hack for supported {@link DTE}s (this is here because we do not support
   //     * the unsigned variants yet).
   //     *
   //     * @param dte

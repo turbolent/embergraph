@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInput;
 
-/**
- * Fast special purpose serialization onto a managed byte[] buffer conforming to the {@link
+/*
+* Fast special purpose serialization onto a managed byte[] buffer conforming to the {@link
  * DataOutput} API.
  *
  * <p>Note: The base classes provide all of the same functionality without declaring {@link
@@ -56,7 +56,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     super(initialCapacity);
   }
 
-  /**
+  /*
    * @param len The #of bytes of data already in the provided buffer.
    * @param buf The buffer, with <i>len</i> pre-existing bytes of valid data. The buffer reference
    *     is used directly rather than making a copy of the data.
@@ -66,7 +66,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     super(len /* pos */, buf.length /* readLimit */, buf);
   }
 
-  /**
+  /*
    * Reads the entire input stream into the buffer. The data are then available in {@link #buf} from
    * position 0 (inclusive) through position {@link #pos} (exclusive).
    */
@@ -87,7 +87,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     }
   }
 
-  /**
+  /*
    * Reads the entire input stream into the buffer. The data are then available in {@link #buf} from
    * position 0 (inclusive) through position {@link #pos} (exclusive).
    */
@@ -114,7 +114,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
     return (DataOutputBuffer) super.reset();
   }
 
-  /**
+  /*
    * Read <i>len</i> bytes into the buffer.
    *
    * @param in The input source.
@@ -243,8 +243,8 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
   }
 
   // This inefficiency has been fixed.
-  //    /**
-  //     * @todo This is not wildly efficient (it would be fine if
+  //    /*
+//     * @todo This is not wildly efficient (it would be fine if
   //     *       DataOutputStream#writeUTF(String str, DataOutput out)} was public)
   //     *       but the use cases for serializing the nodes and leaves of a btree
   //     *       do not suggest any requirement for Unicode (if you assume that the
@@ -282,7 +282,7 @@ public class DataOutputBuffer extends ByteArrayBuffer implements DataOutput {
 
   }
 
-  /**
+  /*
    * Version of {@link #writeUTF(String)} which wraps the {@link IOException}.
    *
    * @param str The string.

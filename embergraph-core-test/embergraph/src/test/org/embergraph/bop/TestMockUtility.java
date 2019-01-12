@@ -34,15 +34,15 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * Mock utility for test cases.
+/*
+* Mock utility for test cases.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class TestMockUtility {
 
-  /**
+  /*
    * Creates a mocked local triple (memory) store with the given namespace, with unisolated
    * transactions.
    *
@@ -65,7 +65,7 @@ public class TestMockUtility {
     return kb;
   }
 
-  /**
+  /*
    * Creates a mocked context associated with the given abstract triple store, with index manager
    * properly initialized.
    *

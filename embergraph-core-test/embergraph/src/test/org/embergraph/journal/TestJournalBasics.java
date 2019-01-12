@@ -26,8 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Aggregates all tests into something approximately increasing dependency order. Most of the tests
+/*
+* Aggregates all tests into something approximately increasing dependency order. Most of the tests
  * that are aggregated are proxied test suites and will therefore run with the configuration of the
  * test class running that suite.
  *
@@ -46,7 +46,7 @@ public class TestJournalBasics extends TestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Aggregates the test suites into something approximating increasing dependency. This is designed
    * to run as a <em>proxy test suite</em> in which all tests are run using a common configuration
    * and a delegation mechanism. You MUST add the returned {@link Test} into a properly configured

@@ -26,8 +26,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 
-/**
- * Abstract base class for MERGE JOIN implementations.
+/*
+* Abstract base class for MERGE JOIN implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public abstract class AbstractMergeJoin extends PipelineOp {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * @param args
    * @param annotations
    */

@@ -37,8 +37,8 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
-/**
- * BTree mapping commit times to {@link ICommitRecord}s. The keys are the long integers
+/*
+* BTree mapping commit times to {@link ICommitRecord}s. The keys are the long integers
  * corresponding to the timestamps assigned to commit points in the store. The values are {@link
  * Entry} objects recording the commit time of the index and the address of the {@link
  * ICommitRecord} for that commit time. A canonicalizing cache is maintained such that the caller
@@ -50,7 +50,7 @@ public class CommitRecordIndex extends BTree {
   /** Instance used to encode the timestamp into the key. */
   private final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
 
-  /**
+  /*
    * A weak value cache for {@link ICommitRecord}s. Note that lookup may be by exact match -or- by
    * the record have the largest timestamp LTE to the given probe. For the latter, we have to
    * determine the timestamp of the matching record and use that to test the cache (after we have
@@ -64,7 +64,7 @@ public class CommitRecordIndex extends BTree {
   private final WeakValueCache<Long, ICommitRecord> cache =
       new WeakValueCache<Long, ICommitRecord>(new LRUCache<Long, ICommitRecord>(10));
 
-  /**
+  /*
    * Create a new instance.
    *
    * @param store The backing store.
@@ -94,7 +94,7 @@ public class CommitRecordIndex extends BTree {
     return (CommitRecordIndex) BTree.createTransient(metadata);
   }
 
-  /**
+  /*
    * Load from the store.
    *
    * @param store The backing store.
@@ -112,7 +112,7 @@ public class CommitRecordIndex extends BTree {
   /** Used to (de-)serialize {@link Entry}s (NOT thread-safe). */
   private final Entry.EntrySerializer ser;
 
-  /**
+  /*
    * Encodes the commit time into a key.
    *
    * @param commitTime The commit time.
@@ -126,7 +126,7 @@ public class CommitRecordIndex extends BTree {
     return keyBuilder.reset().append(commitTime).getKey();
   }
 
-  /**
+  /*
    * Existence test for a commit record with the specified commit timestamp (exact match).
    *
    * @param commitTime The commit timestamp.
@@ -138,7 +138,7 @@ public class CommitRecordIndex extends BTree {
     return super.contains(getKey(commitTime));
   }
 
-  /**
+  /*
    * Return the {@link ICommitRecord} with the given timestamp (exact match).
    *
    * @param commitTime The commit time.
@@ -180,7 +180,7 @@ public class CommitRecordIndex extends BTree {
     return commitRecord;
   }
 
-  /**
+  /*
    * Return the {@link ICommitRecord} having the largest timestamp that is less than or equal to the
    * given timestamp. This is used primarily to locate the commit record that will serve as the
    * ground state for a transaction having <i>timestamp</i> as its start time. In this context the
@@ -219,7 +219,7 @@ public class CommitRecordIndex extends BTree {
     return valueAtIndex(index);
   }
 
-  /**
+  /*
    * Find the first commit record strictly greater than the timestamp.
    *
    * @param timestamp The timestamp.
@@ -251,7 +251,7 @@ public class CommitRecordIndex extends BTree {
     return valueAtIndex(index);
   }
 
-  /**
+  /*
    * Return the commit record at the index.
    *
    * @param index The index.
@@ -269,7 +269,7 @@ public class CommitRecordIndex extends BTree {
     return fetchCommitRecord(entry);
   }
 
-  /**
+  /*
    * Materialize a commit record, from cache if possible.
    *
    * <p>Note: This DOES NOT perform lookup of the commit time!
@@ -306,7 +306,7 @@ public class CommitRecordIndex extends BTree {
     return commitRecord;
   }
 
-  /**
+  /*
    * Find the index of the {@link ICommitRecord} having the largest timestamp that is less than or
    * equal to the given timestamp.
    *
@@ -350,7 +350,7 @@ public class CommitRecordIndex extends BTree {
     }
   }
 
-  /**
+  /*
    * Re-load a commit record from the store.
    *
    * @param store The store.
@@ -362,7 +362,7 @@ public class CommitRecordIndex extends BTree {
     return CommitRecordSerializer.INSTANCE.deserialize(store.read(addr));
   }
 
-  /**
+  /*
    * Add an entry for a commit record.
    *
    * @param commitRecordAddr The address at which that commit record was written on the store.
@@ -403,7 +403,7 @@ public class CommitRecordIndex extends BTree {
     }
   }
 
-  /**
+  /*
    * An entry in the persistent index.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -428,7 +428,7 @@ public class CommitRecordIndex extends BTree {
       return super.toString() + "{commitTime=" + commitTime + ",addr=" + addr + "}";
     }
 
-    /**
+    /*
      * Used to (de-)serialize {@link Entry}s (NOT thread-safe).
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -438,7 +438,7 @@ public class CommitRecordIndex extends BTree {
       /** Private buffer used within sychronized contexts to serialize {@link Entry}s. */
       private final DataOutputBuffer out = new DataOutputBuffer(Bytes.SIZEOF_LONG * 2);
 
-      /**
+      /*
        * Serialize an {@link Entry}.
        *
        * @param entry The entry.
@@ -455,7 +455,7 @@ public class CommitRecordIndex extends BTree {
         return out.toByteArray();
       }
 
-      /**
+      /*
        * De-serialize an {@link Entry}.
        *
        * @param is The serialized data.
@@ -479,7 +479,7 @@ public class CommitRecordIndex extends BTree {
     }
   }
 
-  /**
+  /*
    * Encapsulates key and value formation for the {@link CommitRecordIndex}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -500,7 +500,7 @@ public class CommitRecordIndex extends BTree {
       this.ser = new Entry.EntrySerializer();
     }
 
-    /**
+    /*
      * Ctor when creating a new instance.
      *
      * @param keyBuilderFactory
@@ -523,7 +523,7 @@ public class CommitRecordIndex extends BTree {
       return id;
     }
 
-    /**
+    /*
      * Return the unsigned byte[] key for a commit time.
      *
      * @param obj A commit time.
@@ -531,10 +531,10 @@ public class CommitRecordIndex extends BTree {
     @Override
     public byte[] serializeKey(Object obj) {
 
-      return getKeyBuilder().reset().append((Long) obj).getKey();
+      return getKeyBuilder().reset().append(obj).getKey();
     }
 
-    /**
+    /*
      * Return the byte[] value an {@link Entry}.
      *
      * @param entry An Entry.

@@ -23,8 +23,8 @@ package it.unimi.dsi.util;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectFunction;
 
-/**
- * A map from prefixes to string intervals (and possibly <i>vice versa</i>).
+/*
+* A map from prefixes to string intervals (and possibly <i>vice versa</i>).
  *
  * <p>Instances of this class provide the services of a {@link StringMap}, but by assuming the
  * strings are lexicographically ordered, they can provide further information by exposing a
@@ -43,18 +43,18 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectFunction;
  * @since 0.9.2
  */
 public interface PrefixMap<S extends CharSequence> extends StringMap<S> {
-  /**
+  /*
    * Returns a function mapping prefixes to ranges of strings.
    *
    * @return a function mapping prefixes to ranges of strings.
    */
-  public Object2ObjectFunction<CharSequence, Interval> rangeMap();
+  Object2ObjectFunction<CharSequence, Interval> rangeMap();
 
-  /**
+  /*
    * Returns a function mapping ranges of strings to common prefixes (optional operation).
    *
    * @return a function mapping ranges of strings to common prefixes, or <code>null</code> if this
    *     map does not support prefixes.
    */
-  public Object2ObjectFunction<Interval, S> prefixMap();
+  Object2ObjectFunction<Interval, S> prefixMap();
 }

@@ -46,8 +46,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.relation.accesspath.TupleObjectResolver;
 import org.embergraph.util.Bytes;
 
-/**
- * Class capable of receiving {@link Event}s from remote services. Start events are maintained in a
+/*
+* Class capable of receiving {@link Event}s from remote services. Start events are maintained in a
  * cache until their corresponding end event is received at which point they are propagated to an
  * {@link EventBTree} which is used for reporting purposes.
  *
@@ -55,7 +55,7 @@ import org.embergraph.util.Bytes;
  */
 public class EventReceiver implements IEventReceivingService, IEventReportingService {
 
-  /**
+  /*
    * Logs {@link Event}s in a tab-delimited format @ INFO.
    *
    * <p>Note: If you enable more detailed logging (DEBUG, etc). then that will get mixed up with
@@ -64,13 +64,13 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
    */
   protected static final transient Logger log = Logger.getLogger(EventReceiver.class);
 
-  /**
+  /*
    * The maximum age of an {@link Event} that will be keep "on the books". Events older than this
    * are purged.
    */
   protected final long eventHistoryMillis;
 
-  /**
+  /*
    * Basically a ring buffer of events without a capacity limit and with random access by the event
    * {@link UUID}. New events are added to the collection by {@link #notifyEvent(Event)}. That
    * method also scans the head of the collection, purging any events that are older than the
@@ -82,7 +82,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
    */
   protected final LinkedHashMap<UUID, Event> eventCache;
 
-  /**
+  /*
    * The completed events are removed from the {@link #eventCache} and written onto the {@link
    * #eventBTree}. This is done in order to get the events out of memory and onto disk and to
    * decouple the {@link IEventReceivingService} from the {@link IEventReportingService}.
@@ -92,7 +92,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
   /** The {@link ITupleSerializer} reference is cached. */
   private final ITupleSerializer<Long, Event> tupleSer;
 
-  /**
+  /*
    * @param eventHistoryMillis The maximum age of an {@link Event} that will be keep "on the books".
    *     Events older than this are purged. An error is logged if an event is purged before its
    *     end() event arrives. This generally indicates a code path where {@link Event#end()} is not
@@ -133,7 +133,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
     return ndx.writeLock();
   }
 
-  /**
+  /*
    * A {@link BTree} whose keys are event start times and whose values are the serialized {@link
    * Event}s.
    *
@@ -141,7 +141,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
    */
   public static class EventBTree extends BTree {
 
-    /**
+    /*
      * @param store
      * @param checkpoint
      * @param metadata
@@ -152,7 +152,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
       super(store, checkpoint, metadata, readOnly);
     }
 
-    /**
+    /*
      * Create a new instance.
      *
      * @param store The backing store.
@@ -182,7 +182,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
       return (EventBTree) BTree.createTransient(metadata);
     }
 
-    /**
+    /*
      * Encapsulates key and value formation for the {@link EventBTree}.
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -199,7 +199,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
         super();
       }
 
-      /**
+      /*
        * Ctor when creating a new instance.
        *
        * @param keyBuilderFactory
@@ -220,7 +220,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
         return id;
       }
 
-      /**
+      /*
        * Return the unsigned byte[] key for a timestamp.
        *
        * @param obj A timestamp.
@@ -228,12 +228,12 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
       @Override
       public byte[] serializeKey(Object obj) {
 
-        return getKeyBuilder().reset().append((Long) obj).getKey();
+        return getKeyBuilder().reset().append(obj).getKey();
       }
     }
   }
 
-  /**
+  /*
    * Accepts the event, either updates the existing event with the same {@link UUID} or adds the
    * event to the set of recent events, and then prunes the set of recent events so that all
    * completed events older than {@link #eventHistoryMillis} are discarded.
@@ -259,8 +259,8 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
 
       if (t == null) {
 
-        /*
-         * Add to the cache (prevents retriggering if end() was called
+      /*
+       * Add to the cache (prevents retriggering if end() was called
          * before the start() event was sent by the client.
          */
         eventCache.put(e.eventUUID, e);
@@ -276,8 +276,8 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
 
       } else {
 
-        /*
-         * There is a event in the cache which has not yet been flagged
+      /*
+       * There is a event in the cache which has not yet been flagged
          * as [complete]. We update the event's endTime and the details
          * with from the new event and flag it as [complete], log it,
          * and record it on the B+Tree.
@@ -308,7 +308,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
     }
   }
 
-  /**
+  /*
    * Any completed events which are older (LT) than the cutoff point (now - {@link
    * #eventHistoryMillis}} are discarded.
    */
@@ -334,8 +334,8 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
 
       if (!t.isComplete()) {
 
-        /*
-         * This presumes that events should complete within the
+      /*
+       * This presumes that events should complete within the
          * event history retention period. A failure to receive the
          * end() event most likely indicates that the client has a
          * code path where end() is not invoked for the event.
@@ -352,7 +352,7 @@ public class EventReceiver implements IEventReceivingService, IEventReportingSer
           "There are " + eventCache.size() + " events : cutoff=" + cutoff + ", #pruned " + npruned);
   }
 
-  /**
+  /*
    * Logs the completed event using a tab-delimited format @ INFO on {@link #log}. Generally, {@link
    * #log} should be directed to a file for post-mortem analysis of the events, e.g., by importing
    * the file into a worksheet, using a pivot table, etc.

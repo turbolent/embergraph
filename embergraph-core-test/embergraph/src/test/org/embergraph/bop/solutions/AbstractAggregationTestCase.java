@@ -69,8 +69,8 @@ import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.embergraph.rwstore.sector.IMemoryManager;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
-/**
- * Abstract base class for testing {@link GroupByOp} operator implementations.
+/*
+* Abstract base class for testing {@link GroupByOp} operator implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -117,13 +117,13 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * The {@link IQueryContext} - operators which require access to the {@link IMemoryManager} MUST
    * explicitly setup and tear down this field.
    */
   protected IQueryContext queryContext = null;
 
-  /**
+  /*
    * Factory for {@link GroupByOp} to be tested.
    *
    * @param select The SELECT clause.
@@ -136,7 +136,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IValueExpression<?>[] groupBy,
       final IConstraint[] having);
 
-  /**
+  /*
    * Return <code>true</code> iff the fixture will be a pipelined aggregation operator as defined by
    * {@link GroupByOp#isPipelinedAggregationOp()}. This is used to conditionally modify the behavior
    * of certain tests to verify correct rejection rather of aggregation requests which can not be
@@ -144,7 +144,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
    */
   protected abstract boolean isPipelinedAggregationOp();
 
-  /**
+  /*
    * Unit test of SELECT expression which projects a variable projected by a GROUP_BY expression.
    *
    * <pre>
@@ -165,7 +165,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             null // having.
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -176,15 +176,15 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org1}),
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org1}),
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org1}),
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org2})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org1}),
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org1}),
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org1}),
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org2})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -193,10 +193,10 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2
      * </pre>
      */
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org1}),
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org2})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org1}),
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org2})
         };
 
     final BOpStats stats = query.newStats();
@@ -245,7 +245,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Unit test of SELECT expression which projects a variable projected by a GROUP_BY expression.
    *
    * <pre>
@@ -268,7 +268,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             null // having.
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -279,15 +279,15 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org1}),
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org1}),
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org1}),
-          new ListBindingSet(new IVariable<?>[] {org}, new IConstant[] {org2})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org1}),
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org1}),
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org1}),
+            new ListBindingSet(new IVariable<?>[]{org}, new IConstant[]{org2})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -296,10 +296,10 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2
      * </pre>
      */
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {newVar}, new IConstant[] {org1}),
-          new ListBindingSet(new IVariable<?>[] {newVar}, new IConstant[] {org2})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{newVar}, new IConstant[]{org1}),
+            new ListBindingSet(new IVariable<?>[]{newVar}, new IConstant[]{org2})
         };
 
     final BOpStats stats = query.newStats();
@@ -348,7 +348,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -431,7 +431,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             null // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -442,23 +442,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -475,11 +475,11 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 =
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, totalPrice}, new IConstant[] {org1, _price21}),
-          new ListBindingSet(new IVariable<?>[] {org, totalPrice}, new IConstant[] {org2, _price7})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, totalPrice}, new IConstant[]{org1, _price21}),
+            new ListBindingSet(new IVariable<?>[]{org, totalPrice}, new IConstant[]{org2, _price7})
         };
 
     final BOpStats stats = query.newStats();
@@ -529,7 +529,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -617,7 +617,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             null // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -628,23 +628,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -661,12 +661,12 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 =
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, totalPrice, z}, new IConstant[] {org1, _price21, price12}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, totalPrice, z}, new IConstant[] {org2, _price7, price12})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, totalPrice, z}, new IConstant[]{org1, _price21, price12}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, totalPrice, z}, new IConstant[]{org2, _price7, price12})
         };
 
     final BOpStats stats = query.newStats();
@@ -717,7 +717,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -812,7 +812,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             new IConstraint[] {totalPriceConstraint} // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -823,23 +823,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -852,9 +852,9 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 =
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {org, totalPrice}, new IConstant[] {org1, _price21})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{org, totalPrice}, new IConstant[]{org1, _price21})
         };
 
     final BOpStats stats = query.newStats();
@@ -905,7 +905,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -999,7 +999,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             new IConstraint[] {totalPriceConstraint} // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -1010,23 +1010,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, blue}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, blue}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -1039,9 +1039,9 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 =
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {org, totalPrice}, new IConstant[] {org2, _price7})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{org, totalPrice}, new IConstant[]{org2, _price7})
         };
 
     final BOpStats stats = query.newStats();
@@ -1091,7 +1091,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -1178,7 +1178,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             null // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -1189,23 +1189,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, blue}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, blue}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -1219,16 +1219,16 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price7 =
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(7)));
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {
-                org,
-              },
-              new IConstant[] {
-                org1,
-              }),
-          new ListBindingSet(new IVariable<?>[] {org, totalPrice}, new IConstant[] {org2, _price7})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{
+                    org,
+                },
+                new IConstant[]{
+                    org1,
+                }),
+            new ListBindingSet(new IVariable<?>[]{org, totalPrice}, new IConstant[]{org2, _price7})
         };
 
     final BOpStats stats = query.newStats();
@@ -1279,7 +1279,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -1368,7 +1368,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             new IConstraint[] {totalPriceConstraint} // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -1379,23 +1379,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -1408,9 +1408,9 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price28 =
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(28)));
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {totalPrice}, new IConstant[] {_price28})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{totalPrice}, new IConstant[]{_price28})
         };
 
     final BOpStats stats = query.newStats();
@@ -1460,7 +1460,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -1544,7 +1544,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             new IConstraint[] {totalPriceConstraint} // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -1555,24 +1555,24 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     /** THERE ARE NO SOLUTIONS. */
-    final IBindingSet expected[] = new IBindingSet[] {};
+    final IBindingSet[] expected = new IBindingSet[]{};
 
     final BOpStats stats = query.newStats();
 
@@ -1622,7 +1622,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(0, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -1707,7 +1707,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             null // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -1718,23 +1718,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -1747,9 +1747,9 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price28 =
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(28)));
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {totalPrice}, new IConstant[] {_price28})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{totalPrice}, new IConstant[]{_price28})
         };
 
     final BOpStats stats = query.newStats();
@@ -1800,7 +1800,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -1885,7 +1885,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             null // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -1896,23 +1896,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -1925,9 +1925,9 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price21 =
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(21)));
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {totalPrice}, new IConstant[] {_price21})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{totalPrice}, new IConstant[]{_price21})
         };
 
     if (isPipelinedAggregationOp()) {
@@ -1992,7 +1992,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -2074,7 +2074,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             null // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -2085,23 +2085,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -2117,9 +2117,9 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(4L)));
 
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {totalCount}, new IConstant[] {_totalCount})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{totalCount}, new IConstant[]{_totalCount})
         };
 
     final BOpStats stats = query.newStats();
@@ -2170,7 +2170,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -2253,7 +2253,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
             null // having
             );
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -2265,26 +2265,26 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
-    /**
+    /*
      * The expected solutions:
      *
      * <pre>
@@ -2300,9 +2300,9 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
         new Constant<XSDIntegerIV<EmbergraphLiteral>>(
             new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(4L)));
 
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {totalCount}, new IConstant[] {_totalCount})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{totalCount}, new IConstant[]{_totalCount})
         };
 
     if (isPipelinedAggregationOp()) {
@@ -2367,7 +2367,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -2469,7 +2469,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
               new IConstraint[] {totalPriceConstraint} // having
               );
 
-      /**
+      /*
        * The test data:
        *
        * <pre>
@@ -2480,23 +2480,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth1, book1, price9}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth1, book2, price5}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth2, book3, price7}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org2, auth3, book4, price7})
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth1, book1, price9}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth1, book2, price5}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth2, book3, price7}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org2, auth3, book4, price7})
           };
 
-      /**
+      /*
        * The expected solutions:
        *
        * <pre>
@@ -2509,9 +2509,9 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price140 =
           new Constant<XSDIntegerIV<EmbergraphLiteral>>(
               new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(140)));
-      final IBindingSet expected[] =
-          new IBindingSet[] {
-            new ListBindingSet(new IVariable<?>[] {totalPrice}, new IConstant[] {_price140})
+      final IBindingSet[] expected =
+          new IBindingSet[]{
+              new ListBindingSet(new IVariable<?>[]{totalPrice}, new IConstant[]{_price140})
           };
 
       if (isPipelinedAggregationOp()) {
@@ -2580,7 +2580,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Based on an example in the SPARQL 1.1 Working Draft.
    *
    * <pre>
@@ -2684,7 +2684,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
               new IConstraint[] {totalPriceConstraint} // having
               );
 
-      /**
+      /*
        * The test data:
        *
        * <pre>
@@ -2695,23 +2695,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth1, book1, price9}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth1, book2, price5}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth2, book3, price7}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org2, auth3, book4, price7})
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth1, book1, price9}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth1, book2, price5}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth2, book3, price7}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org2, auth3, book4, price7})
           };
 
-      /**
+      /*
        * The expected solutions:
        *
        * <pre>
@@ -2728,12 +2728,12 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price14 =
           new Constant<XSDIntegerIV<EmbergraphLiteral>>(
               new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(14)));
-      final IBindingSet expected[] =
-          new IBindingSet[] {
-            new ListBindingSet(
-                new IVariable<?>[] {org, totalPrice}, new IConstant[] {org1, _price84}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, totalPrice}, new IConstant[] {org2, _price14})
+      final IBindingSet[] expected =
+          new IBindingSet[]{
+              new ListBindingSet(
+                  new IVariable<?>[]{org, totalPrice}, new IConstant[]{org1, _price84}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, totalPrice}, new IConstant[]{org2, _price14})
           };
 
       if (isPipelinedAggregationOp()) {
@@ -2802,7 +2802,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * A test in which there is a select dependency without there also being
    * nested aggregates. This test will detect a failure to propagate bindings
    * from eacn computed aggregate such that they are visible to the rest of
@@ -2912,7 +2912,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
               new IConstraint[] {totalPriceConstraint} // having
               );
 
-      /**
+      /*
        * The test data:
        *
        * <pre>
@@ -2923,23 +2923,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth1, book1, price9}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth1, book2, price5}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth2, book3, price7}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org2, auth3, book4, price7})
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth1, book1, price9}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth1, book2, price5}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth2, book3, price7}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org2, auth3, book4, price7})
           };
 
-      /**
+      /*
        * The expected solutions:
        *
        * <pre>
@@ -2955,11 +2955,11 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price56 =
           new Constant<XSDIntegerIV<EmbergraphLiteral>>(
               new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(56)));
-      final IBindingSet expected[] =
-          new IBindingSet[] {
-            new ListBindingSet(
-                new IVariable<?>[] {totalPrice, inflatedPrice},
-                new IConstant[] {_price28, _price56})
+      final IBindingSet[] expected =
+          new IBindingSet[]{
+              new ListBindingSet(
+                  new IVariable<?>[]{totalPrice, inflatedPrice},
+                  new IConstant[]{_price28, _price56})
           };
 
       final BOpStats stats = query.newStats();
@@ -3014,7 +3014,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * A test in which there is a select dependency without there also being
    * nested aggregates. This test will detect a failure to propagate bindings
    * from eacn computed aggregate such that they are visible to the rest of
@@ -3125,7 +3125,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
               null // having
               );
 
-      /**
+      /*
        * The test data:
        *
        * <pre>
@@ -3136,23 +3136,23 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth1, book1, price9}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth1, book2, price5}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org1, auth2, book3, price7}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, auth, book, lprice},
-                new IConstant[] {org2, auth3, book4, price7})
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth1, book1, price9}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth1, book2, price5}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org1, auth2, book3, price7}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, auth, book, lprice},
+                  new IConstant[]{org2, auth3, book4, price7})
           };
 
-      /**
+      /*
        * The expected solutions:
        *
        * <pre>
@@ -3175,14 +3175,14 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
       final IConstant<XSDIntegerIV<EmbergraphLiteral>> _price42 =
           new Constant<XSDIntegerIV<EmbergraphLiteral>>(
               new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(42)));
-      final IBindingSet expected[] =
-          new IBindingSet[] {
-            new ListBindingSet(
-                new IVariable<?>[] {org, totalPrice, inflatedPrice},
-                new IConstant[] {org1, _price21, _price42}),
-            new ListBindingSet(
-                new IVariable<?>[] {org, totalPrice, inflatedPrice},
-                new IConstant[] {org2, _price7, _price14})
+      final IBindingSet[] expected =
+          new IBindingSet[]{
+              new ListBindingSet(
+                  new IVariable<?>[]{org, totalPrice, inflatedPrice},
+                  new IConstant[]{org1, _price21, _price42}),
+              new ListBindingSet(
+                  new IVariable<?>[]{org, totalPrice, inflatedPrice},
+                  new IConstant[]{org2, _price7, _price14})
           };
 
       final BOpStats stats = query.newStats();
@@ -3237,7 +3237,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Based on
    * https://www.w3.org/2009/sparql/docs/tests/data-sparql11/grouping/group03.rq
    *
@@ -3302,7 +3302,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
 
       // SAMPLE(?v) AS ?S
       final IValueExpression<IV> sampleVAsS =
-          new Bind(S, new SAMPLE(false /* distinct */, (IValueExpression<IV>) v));
+          new Bind(S, new SAMPLE(false /* distinct */, v));
 
       final GroupByOp query =
           newFixture(
@@ -3311,7 +3311,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
               null // having
               );
 
-      /**
+      /*
        * The test data:
        *
        * <pre>
@@ -3320,13 +3320,13 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
        *     s2   2
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ListBindingSet(new IVariable<?>[] {w, s, v}, new IConstant[] {num9, s1, num1}),
-            new ListBindingSet(new IVariable<?>[] {s, v}, new IConstant[] {s2, num2})
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ListBindingSet(new IVariable<?>[]{w, s, v}, new IConstant[]{num9, s1, num1}),
+              new ListBindingSet(new IVariable<?>[]{s, v}, new IConstant[]{s2, num2})
           };
 
-      /**
+      /*
        * The expected solutions:
        *
        * <pre>
@@ -3337,10 +3337,10 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
        *
        * </pre>
        */
-      final IBindingSet expected[] =
-          new IBindingSet[] {
-            new ListBindingSet(new IVariable<?>[] {w, S}, new IConstant[] {num9, num1}),
-            new ListBindingSet(new IVariable<?>[] {S}, new IConstant[] {num2})
+      final IBindingSet[] expected =
+          new IBindingSet[]{
+              new ListBindingSet(new IVariable<?>[]{w, S}, new IConstant[]{num9, num1}),
+              new ListBindingSet(new IVariable<?>[]{S}, new IConstant[]{num2})
           };
 
       final BOpStats stats = query.newStats();
@@ -3392,7 +3392,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
     }
   } // test_aggregation_groupBy_by_error_values1()
 
-  /**
+  /*
    * Based on
    * https://www.w3.org/2009/sparql/docs/tests/data-sparql11/grouping/group05.rq
    *
@@ -3466,7 +3466,7 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
               null // having
               );
 
-      /**
+      /*
        * The test data:
        *
        * <pre>
@@ -3476,14 +3476,14 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
        *     s3   1
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ListBindingSet(new IVariable<?>[] {w, s, v}, new IConstant[] {num9, s1, num1}),
-            new ListBindingSet(new IVariable<?>[] {s, v}, new IConstant[] {s2, num2}),
-            new ListBindingSet(new IVariable<?>[] {s, v}, new IConstant[] {s3, num1})
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ListBindingSet(new IVariable<?>[]{w, s, v}, new IConstant[]{num9, s1, num1}),
+              new ListBindingSet(new IVariable<?>[]{s, v}, new IConstant[]{s2, num2}),
+              new ListBindingSet(new IVariable<?>[]{s, v}, new IConstant[]{s3, num1})
           };
 
-      /**
+      /*
        * The expected solutions:
        *
        * <pre>
@@ -3495,11 +3495,11 @@ public abstract class AbstractAggregationTestCase extends TestCase2 {
        *
        * </pre>
        */
-      final IBindingSet expected[] =
-          new IBindingSet[] {
-            new ListBindingSet(new IVariable<?>[] {s, w}, new IConstant[] {s1, num9}),
-            new ListBindingSet(new IVariable<?>[] {s}, new IConstant[] {s2}),
-            new ListBindingSet(new IVariable<?>[] {s}, new IConstant[] {s3})
+      final IBindingSet[] expected =
+          new IBindingSet[]{
+              new ListBindingSet(new IVariable<?>[]{s, w}, new IConstant[]{s1, num9}),
+              new ListBindingSet(new IVariable<?>[]{s}, new IConstant[]{s2}),
+              new ListBindingSet(new IVariable<?>[]{s}, new IConstant[]{s3})
           };
 
       final BOpStats stats = query.newStats();

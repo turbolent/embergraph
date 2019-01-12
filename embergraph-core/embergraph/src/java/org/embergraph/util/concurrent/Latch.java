@@ -31,8 +31,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 import org.embergraph.util.InnerCause;
 
-/**
- * A synchronization aid that allows one or more threads to await a counter becoming zero. Once the
+/*
+* A synchronization aid that allows one or more threads to await a counter becoming zero. Once the
  * counter reaches zero, all waiting threads are released. Threads may invoke {@link #await()} any
  * time after the counter has been incremented. They will not be released until the counter is zero.
  * The typical pattern is to incrementing the counter before some operation and the decrement the
@@ -72,7 +72,7 @@ public class Latch {
     this(null /* name */, null /* lock */);
   }
 
-  /**
+  /*
    * @param lock The lock to be used (optional). When none is specified, a new lock will be
    *     allocated. The caller MAY choose to specify the lock in order to avoid nested lock designs
    *     by using the same lock inside the {@link Latch} and in some outer context.
@@ -82,7 +82,7 @@ public class Latch {
     this(null /* name */, lock);
   }
 
-  /**
+  /*
    * @param name An optional name that will be displayed by {@link #toString()} along with the
    *     current counter value.
    * @param lock The lock to be used (optional). When none is specified, a new lock will be
@@ -104,7 +104,7 @@ public class Latch {
     return counter.get();
   }
 
-  /**
+  /*
    * Increments the internal counter.
    *
    * @return The post-increment value of the counter.
@@ -128,7 +128,7 @@ public class Latch {
     }
   }
 
-  /**
+  /*
    * Adds the delta to the internal counter.
    *
    * @return The post-increment value of the counter.
@@ -170,7 +170,7 @@ public class Latch {
     }
   }
 
-  /**
+  /*
    * Decrements the internal counter and releases the blocked thread(s) if the counter reaches zero.
    *
    * @return The post-decrement value.
@@ -257,7 +257,7 @@ public class Latch {
     }
   }
 
-  /**
+  /*
    * Invoked when the latch reaches zero after any threads blocked at {@link #await(long, TimeUnit)}
    * have been released. This may be overridden to perform additional processing, such as moving an
    * associated object onto another queue.
@@ -268,7 +268,7 @@ public class Latch {
    */
   protected void signal() throws InterruptedException {}
 
-  /**
+  /*
    * Await the counter to become zero unless interrupted.
    *
    * @throws InterruptedException
@@ -278,7 +278,7 @@ public class Latch {
     await(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
   }
 
-  /**
+  /*
    * Await the counter to become zero, but no longer than the timeout.
    *
    * @param timeout The timeout.

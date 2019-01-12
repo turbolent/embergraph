@@ -33,8 +33,8 @@ import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.SubqueryFunctionNodeBase;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic plans: vectored
+/*
+* Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic plans: vectored
  * sub-plan and subquery with LIMIT ONE. Each plan has its advantages.
  *
  * @see FilterExistsModeEnum

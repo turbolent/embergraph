@@ -33,8 +33,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.sail.SailConnection;
 
-/**
- * Test class for GATHER.
+/*
+* Test class for GATHER.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -47,7 +47,7 @@ public class TestGather extends AbstractSailGraphTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Mock gather class uses a UNION for SUM to test the GATHER semantics. The gathered edge set is
    * then APPLYed to the vertex and becomes the state of that vertex.
    *
@@ -177,7 +177,7 @@ public class TestGather extends AbstractSailGraphTestCase {
 
       return true;
     }
-  };
+  }
 
   public void testGather_inEdges() throws Exception {
 
@@ -220,7 +220,7 @@ public class TestGather extends AbstractSailGraphTestCase {
     }
   }
 
-  /**
+  /*
    * Start on a known vertex. Do one iteration. Verify that the GATHER populated the data structures
    * on the mock object with the appropriate collections.
    *
@@ -254,8 +254,8 @@ public class TestGather extends AbstractSailGraphTestCase {
         // Do one round.
         gasContext.doRound(new GASStats());
 
-        /*
-         * Lookup the state for the starting vertex (this should be the
+      /*
+       * Lookup the state for the starting vertex (this should be the
          * only vertex whose state was modified since we did only one
          * round).
          */

@@ -48,8 +48,8 @@ import org.embergraph.relation.rule.eval.Solution;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for writing, reading, chasing and retracting {@link Justification}s.
+/*
+* Test suite for writing, reading, chasing and retracting {@link Justification}s.
  *
  * @todo test the comparator. it is especially important that that all justifications for the same
  *     entailment are clustered.
@@ -79,7 +79,7 @@ public class TestJustifications extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Creates a {@link Justification}, writes it on the store using {@link
    * RDFJoinNexus#newInsertBuffer(IMutableRelation)}, verifies that we can read it back from the
    * store, and then retracts the justified statement and verifies that the justification was also
@@ -148,8 +148,8 @@ public class TestJustifications extends AbstractRuleTestCase {
       {
         final IBindingSet bindingSet = joinNexus.newBindingSet(rule);
 
-        /*
-         * Note: rdfs1 is implemented using a distinct term scan. This
+      /*
+       * Note: rdfs1 is implemented using a distinct term scan. This
          * has the effect of leaving the variables that do not appear in
          * the head of the rule unbound. Therefore we DO NOT bind those
          * variables here in the test case and they will be represented
@@ -162,21 +162,21 @@ public class TestJustifications extends AbstractRuleTestCase {
 
         final ISolution solution = new Solution(joinNexus, rule, bindingSet);
 
-        /*
-         * Verify the justification that will be built from that
+      /*
+       * Verify the justification that will be built from that
          * solution.
          */
         {
           jst = new Justification(solution);
 
-          /*
-           * Verify the bindings on the head of the rule as
+        /*
+       * Verify the bindings on the head of the rule as
            * represented by the justification.
            */
           assertEquals(expectedEntailment, jst.getHead());
 
-          /*
-           * Verify the bindings on the tail of the rule as
+        /*
+       * Verify the bindings on the tail of the rule as
            * represented by the justification. Again, note that the
            * variables that do not appear in the head of the rule are
            * left unbound for rdfs1 as a side-effect of evaluation
@@ -250,8 +250,8 @@ public class TestJustifications extends AbstractRuleTestCase {
 
       try {
 
-        /*
-         * The inference (A rdf:type rdf:property) is grounded by the
+      /*
+       * The inference (A rdf:type rdf:property) is grounded by the
          * explicit statement (U A Y).
          */
 
@@ -268,8 +268,8 @@ public class TestJustifications extends AbstractRuleTestCase {
         // add the statement (U A Y) to the focusStore.
         focusStore.addStatements(new SPO[] {new SPO(U, A, Y, StatementEnum.Explicit)}, 1);
 
-        /*
-         * The inference is no longer grounded since we have declared
+      /*
+       * The inference is no longer grounded since we have declared
          * that we are also retracting its grounds.
          */
         assertFalse(
@@ -284,8 +284,8 @@ public class TestJustifications extends AbstractRuleTestCase {
 
       } finally {
 
-        /*
-         * Destroy the temp kb, but not the backing TemporaryStore. That
+      /*
+       * Destroy the temp kb, but not the backing TemporaryStore. That
          * will be destroyed when we destroy the IndexManager associated
          * with the main store (below).
          */

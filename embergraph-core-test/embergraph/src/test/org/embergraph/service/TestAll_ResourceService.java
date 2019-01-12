@@ -25,8 +25,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Test suite for {@link ResourceService} and friends.
+/*
+* Test suite for {@link ResourceService} and friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

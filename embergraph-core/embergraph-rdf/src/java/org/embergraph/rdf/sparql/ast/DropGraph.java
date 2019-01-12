@@ -25,8 +25,8 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * The DROP operation removes the specified graph(s) from the Graph Store.
+/*
+* The DROP operation removes the specified graph(s) from the Graph Store.
  *
  * <pre>
  * DROP  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS %VARNAME)
@@ -45,7 +45,7 @@ public class DropGraph extends AbstractOneGraphManagement {
 
   public interface Annotations extends AbstractOneGraphManagement.Annotations {
 
-    /**
+    /*
      * Boolean property (default {@value #DEFAULT_ALL_GRAPHS}) which is <code>true</code> iff ALL
      * GRAPHS should be effected by this operation.
      */
@@ -53,7 +53,7 @@ public class DropGraph extends AbstractOneGraphManagement {
 
     boolean DEFAULT_ALL_GRAPHS = false;
 
-    /**
+    /*
      * Boolean property (default {@value #DEFAULT_ALL_GRAPHS}) which is <code>true</code> iff ALL
      * SOLUTION SETS should be effected by this operation.
      */
@@ -78,7 +78,7 @@ public class DropGraph extends AbstractOneGraphManagement {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

@@ -25,8 +25,8 @@ import java.math.BigInteger;
 import java.text.NumberFormat;
 import org.embergraph.btree.IndexSegmentAddressManager;
 
-/**
- * Encapsulates logic for operations on an opaque long integer comprising an byte offset and a byte
+/*
+* Encapsulates logic for operations on an opaque long integer comprising an byte offset and a byte
  * count suitable for use in a WORM (Write Once, Read Many) {@link IRawStore}. Both the byte offset
  * and the byte count of the record are stored directly in the opaque identifier. Note that the
  * maximum byte offset only indirectly governs the maximum #of records that can be written on a
@@ -51,7 +51,7 @@ public class WormAddressManager implements IAddressManager {
   /** Used to represent a null reference by {@link #toString(long)}. */
   protected static final String _NULL_ = "NULL";
 
-  /**
+  /*
    * The minimum #of bits that may be used to encode an offset as an unsigned integer (31). This
    * value MUST be used when the {@link IRawStore} implementation is backed by an in-memory array
    * since an array index may not have more than 31 unsigned bits (the equivalent of 32 signed
@@ -59,14 +59,14 @@ public class WormAddressManager implements IAddressManager {
    */
   public static final int MIN_OFFSET_BITS = 31;
 
-  /**
+  /*
    * The maximum #of bits that may be used to encode an offset (this leaves 4 bits for the byte
    * count, so the maximum record size is only 16 bytes). This is not a useful record size for BTree
    * data, but it might be useful for some custom data structures.
    */
   public static final int MAX_OFFSET_BITS = 60;
 
-  /**
+  /*
    * The #of offset bits that allows byte offsets of up to 4,398,046,511,103 (4 terabytes minus one)
    * and a maximum record size of 4,194,303 (4 megabytes minus one).
    *
@@ -78,7 +78,7 @@ public class WormAddressManager implements IAddressManager {
    */
   public static final int SCALE_UP_OFFSET_BITS = 42;
 
-  /**
+  /*
    * The #of offset bits that must be used in order to support 64M (67,108,864 bytes) blobs (38).
    *
    * <p>This is a good value when deploying a scale-out solution. For the scale-out deployment
@@ -99,7 +99,7 @@ public class WormAddressManager implements IAddressManager {
   /** The maximum offset that can be stored in a 64-bit integer given the {@link #offsetBits}. */
   final long maxOffset;
 
-  /**
+  /*
    * The maximum byte count that can be stored in a 64-bit integer given the {@link #byteCountBits}.
    *
    * <p>Note that this is a long since we are treating the stored values as _unsigned_ so 32-bits
@@ -141,7 +141,7 @@ public class WormAddressManager implements IAddressManager {
     }
   }
 
-  /**
+  /*
    * Range checks the #of offset bits.
    *
    * @param offsetBits The #of offset bits.
@@ -164,7 +164,7 @@ public class WormAddressManager implements IAddressManager {
     return true;
   }
 
-  /**
+  /*
    * Compute the maximum byte count (aka record size) allowed for a given #of bits dedicated to the
    * byte offset.
    *
@@ -192,8 +192,8 @@ public class WormAddressManager implements IAddressManager {
     }
   }
 
-  //    /**
-  //     * Allows byte offsets of up to 4T and record lengths of up to 4M (it
+  //    /*
+//     * Allows byte offsets of up to 4T and record lengths of up to 4M (it
   //     * allocates {@link #DEFAULT_OFFSET_BITS} to the offset).
   //     */
   //    protected WormAddressManager() {
@@ -202,7 +202,7 @@ public class WormAddressManager implements IAddressManager {
   //
   //    }
 
-  /**
+  /*
    * Construct an {@link IAddressManager} that will allocate a specified #of bits to the offset and
    * use the remaining bits for the byte count component.
    *
@@ -269,7 +269,7 @@ public class WormAddressManager implements IAddressManager {
 
   }
 
-  /**
+  /*
    * Range check the byte count.
    *
    * @param nbytes The byte count.
@@ -290,7 +290,7 @@ public class WormAddressManager implements IAddressManager {
     return true;
   }
 
-  /**
+  /*
    * Range check the byte offset.
    *
    * @param offset The byte offset.
@@ -322,7 +322,7 @@ public class WormAddressManager implements IAddressManager {
     //
     //        }
 
-    return ((long) offset) << byteCountBits | nbytes;
+    return offset << byteCountBits | nbytes;
   }
 
   public final int getByteCount(final long addr) {
@@ -340,8 +340,8 @@ public class WormAddressManager implements IAddressManager {
     return getOffset(addr);
   }
 
-  //    /**
-  //     * Breaks an address into its offset and size and packs each component
+  //    /*
+//     * Breaks an address into its offset and size and packs each component
   //     * separately. This provides much better packing then writing the entire
   //     * address as a long integer since each component tends to be a small
   //     * positive integer value. When the byte count will fit into a non-negative
@@ -499,7 +499,7 @@ public class WormAddressManager implements IAddressManager {
     return sb.toString();
   }
 
-  /**
+  /*
    * Displays a table of offset bits and the corresponding maximum byte offset and maximum byte
    * count (aka record size) that a store may address for a given #of offset bits. This table may be
    * used to choose how to parameterize the {@link WormAddressManager} and hence a {@link IRawStore}

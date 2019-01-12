@@ -18,8 +18,8 @@ package org.embergraph.rdf.graph;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
-/**
- * Abstract interface for GAS programs.
+/*
+* Abstract interface for GAS programs.
  *
  * @param <VS> The generic type for the per-vertex state. This is scoped to the computation of the
  *     {@link IGASProgram}.
@@ -36,15 +36,15 @@ import org.openrdf.model.Value;
 public interface IGASProgram<VS, ES, ST>
     extends IGASOptions<VS, ES, ST>, IBindingExtractor<VS, ES, ST> {
 
-  /**
+  /*
    * One time initialization before the {@link IGASProgram} is executed.
    *
    * @param ctx The evaluation context.
    */
   void before(IGASContext<VS, ES, ST> ctx);
 
-  //    /**
-  //     * Return a default reduction that will be applied after the
+  //    /*
+//     * Return a default reduction that will be applied after the
   //     * {@link IGASProgram} is executed.
   //     *
   //     * @return The default reduction -or- <code>null</code> if no such reduction
@@ -52,7 +52,7 @@ public interface IGASProgram<VS, ES, ST>
   //     */
   //    <T> IReducer<VS, ES, ST, T> getDefaultAfterOp();
 
-  /**
+  /*
    * Callback to initialize the state for each vertex in the initial frontier before the first
    * iteration. A typical use case is to set the distance of the starting vertex to ZERO (0).
    *
@@ -62,7 +62,7 @@ public interface IGASProgram<VS, ES, ST>
    */
   void initVertex(IGASContext<VS, ES, ST> ctx, IGASState<VS, ES, ST> state, Value u);
 
-  /**
+  /*
    * GATHER is a map/reduce over the edges of the vertex. The SUM provides pair-wise reduction over
    * the edges visited by the GATHER.
    *
@@ -84,7 +84,7 @@ public interface IGASProgram<VS, ES, ST>
    */
   ST gather(IGASState<VS, ES, ST> state, Value u, Statement e);
 
-  /**
+  /*
    * SUM is a pair-wise reduction that is applied during the GATHER.
    *
    * @param left An edge state accumulant.
@@ -99,7 +99,7 @@ public interface IGASProgram<VS, ES, ST>
    */
   ST sum(final IGASState<VS, ES, ST> state, ST left, ST right);
 
-  /**
+  /*
    * Apply the reduced aggregation computed by GATHER + SUM to the vertex.
    *
    * @param u The vertex.
@@ -120,7 +120,7 @@ public interface IGASProgram<VS, ES, ST>
    */
   VS apply(IGASState<VS, ES, ST> state, Value u, ST sum);
 
-  /**
+  /*
    * Return <code>true</code> iff the vertex should run its SCATTER phase. This may be used to avoid
    * visiting the edges if it is known (e.g., based on the APPLY) that the vertex has not changed.
    * This can save a substantial amount of effort.
@@ -131,14 +131,14 @@ public interface IGASProgram<VS, ES, ST>
    */
   boolean isChanged(IGASState<VS, ES, ST> state, Value u);
 
-  /**
+  /*
    * @param state
    * @param u The vertex for which the scatter will being performed.
    * @param e The edge.
    */
   void scatter(IGASState<VS, ES, ST> state, IGASScheduler sch, Value u, Statement e);
 
-  /**
+  /*
    * Return <code>true</code> iff the algorithm should continue. This is invoked after every
    * iteration, once the new frontier has been computed and {@link IGASState#round()} has been
    * advanced. An implementation may simply return <code>true</code>, in which case the algorithm

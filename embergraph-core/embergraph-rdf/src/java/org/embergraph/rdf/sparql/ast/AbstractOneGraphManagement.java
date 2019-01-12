@@ -25,8 +25,8 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.spo.ISPO;
 
-/**
- * Any of the operations which acts on a single target graph.
+/*
+* Any of the operations which acts on a single target graph.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public abstract class AbstractOneGraphManagement extends GraphManagement {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

@@ -18,10 +18,10 @@ package org.embergraph.ganglia;
 /** Interface for handling Ganglia messages. */
 public interface IGangliaMessageHandler {
 
-  /**
+  /*
    * Invoked to notify the listener when a message is received.
    *
    * @param msg The message.
    */
-  public void accept(IGangliaMessage msg);
+  void accept(IGangliaMessage msg);
 }

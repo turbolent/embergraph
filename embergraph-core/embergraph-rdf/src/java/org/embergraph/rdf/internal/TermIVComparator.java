@@ -3,8 +3,8 @@ package org.embergraph.rdf.internal;
 import java.util.Comparator;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Places {@link EmbergraphValue}s into an ordering determined by their assigned {@link
+/*
+* Places {@link EmbergraphValue}s into an ordering determined by their assigned {@link
  * EmbergraphValue#getIV() IVs} (internal values).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -15,7 +15,7 @@ public class TermIVComparator implements Comparator<EmbergraphValue> {
 
   public static final transient Comparator<EmbergraphValue> INSTANCE = new TermIVComparator();
 
-  /**
+  /*
    * Note: comparison avoids possible overflow of <code>long</code> by not computing the difference
    * directly.
    */

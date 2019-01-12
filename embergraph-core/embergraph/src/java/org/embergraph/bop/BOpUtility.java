@@ -51,8 +51,8 @@ import org.embergraph.rdf.sparql.ast.ProjectionNode;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.striterator.CloseableIteratorWrapper;
 
-/**
- * Operator utility class.
+/*
+* Operator utility class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -68,7 +68,7 @@ public class BOpUtility {
     return new Striterator(new SingleValueIterator(op)).append(preOrderIterator2(0, op));
   }
 
-  /**
+  /*
    * Visits the children (recursively) using pre-order traversal, but does NOT visit this node.
    *
    * @param stack
@@ -90,26 +90,26 @@ public class BOpUtility {
 
               private static final long serialVersionUID = 1L;
 
-              /*
-               * Expand each child in turn.
+            /*
+       * Expand each child in turn.
                */
               protected Iterator expand(final Object childObj) {
 
-                /*
-                 * A child of this node.
+              /*
+       * A child of this node.
                  */
 
                 final BOp child = (BOp) childObj;
 
-                /*
-                 * TODO The null child reference which can occur here is the [c]
+              /*
+       * TODO The null child reference which can occur here is the [c]
                  * of the StatementPatternNode. We might want to make [c] an
                  * anonymous variable instead of having a [null].
                  */
                 if (child != null && child.arity() > 0) {
 
-                  /*
-                   * The child is a Node (has children).
+                /*
+       * The child is a Node (has children).
                    *
                    * Visit the children (recursive pre-order traversal).
                    */
@@ -124,8 +124,8 @@ public class BOpUtility {
 
                 } else {
 
-                  /*
-                   * The child is a leaf.
+                /*
+       * The child is a leaf.
                    */
 
                   // Visit the leaf itself.
@@ -142,7 +142,7 @@ public class BOpUtility {
     return new Striterator(postOrderIterator2(op)).append(new SingleValueIterator(op));
   }
 
-  /**
+  /*
    * Visits the children (recursively) using post-order traversal, but does NOT visit this node.
    *
    * @param context
@@ -163,26 +163,26 @@ public class BOpUtility {
 
               private static final long serialVersionUID = 1L;
 
-              /*
-               * Expand each child in turn.
+            /*
+       * Expand each child in turn.
                */
               protected Iterator expand(final Object childObj) {
 
-                /*
-                 * A child of this node.
+              /*
+       * A child of this node.
                  */
 
                 final BOp child = (BOp) childObj;
 
-                /*
-                 * TODO The null child reference which can occur here is the [c]
+              /*
+       * TODO The null child reference which can occur here is the [c]
                  * of the StatementPatternNode. We might want to make [c] an
                  * anonymous variable instead of having a [null].
                  */
                 if (child != null && child.arity() > 0) {
 
-                  /*
-                   * The child is a Node (has children).
+                /*
+       * The child is a Node (has children).
                    *
                    * Visit the children (recursive post-order traversal).
                    */
@@ -197,8 +197,8 @@ public class BOpUtility {
 
                 } else {
 
-                  /*
-                   * The child is a leaf.
+                /*
+       * The child is a leaf.
                    */
 
                   // Visit the leaf itself.
@@ -208,7 +208,7 @@ public class BOpUtility {
             });
   }
 
-  /**
+  /*
    * Visit all annotations which are {@link BOp}s (non-recursive).
    *
    * @param op An operator.
@@ -229,7 +229,7 @@ public class BOpUtility {
             });
   }
 
-  /**
+  /*
    * Recursive pre-order traversal of the operator tree with visitation of all operator annotations.
    * The annotations for an operator are visited before its children are visited. Only annotations
    * whose values are {@link BOp}s are visited. Annotation {@link BOp}s are also recursively visited
@@ -255,8 +255,8 @@ public class BOpUtility {
                 // visit the node.
                 final Striterator itr = new Striterator(new SingleValueIterator(op));
 
-                /*
-                 * FIXME In order to visit the annotations as NV pairs
+              /*
+       * FIXME In order to visit the annotations as NV pairs
                  * we need to modify this part of the expander pattern,
                  * perhaps just by pushing the appropriate NV object
                  * onto the stack? Or maybe just push the attribute name
@@ -285,7 +285,7 @@ public class BOpUtility {
             });
   }
 
-  /**
+  /*
    * Recursive post-order traversal of the operator tree with visitation of all operator
    * annotations. The annotations for an operator are visited before its children are visited. Only
    * annotations whose values are {@link BOp}s are visited. Annotation {@link BOp}s are also
@@ -354,7 +354,7 @@ public class BOpUtility {
 
   }
 
-  /**
+  /*
    * Return the distinct variables recursively using a pre-order traversal present whether in the
    * operator tree or on annotations attached to operators.
    *
@@ -379,7 +379,7 @@ public class BOpUtility {
         .makeUnique();
   }
 
-  /**
+  /*
    * Return an {@link List} containing the {@link IVariable}s visited by the iterator.
    *
    * @param it The iterator.
@@ -414,7 +414,7 @@ public class BOpUtility {
     return c;
   }
 
-  /**
+  /*
    * Return an array containing the {@link IVariable}s visited by the iterator.
    *
    * @param it The iterator.
@@ -425,7 +425,7 @@ public class BOpUtility {
     return toList(it).toArray(new IVariable[] {});
   }
 
-  /**
+  /*
    * Return a list containing references to all nodes of the given type (recursive, including
    * annotations).
    *
@@ -451,7 +451,7 @@ public class BOpUtility {
     return list;
   }
 
-  /**
+  /*
    * Return the sole instance of the specified class.
    *
    * @param op The root of the traversal.
@@ -468,7 +468,7 @@ public class BOpUtility {
     return ret;
   }
 
-  /**
+  /*
    * Return an iterator visiting references to all nodes of the given type (recursive, including
    * annotations).
    *
@@ -492,7 +492,7 @@ public class BOpUtility {
             });
   }
 
-  /**
+  /*
    * Return the variables from the operator's arguments.
    *
    * @param op The operator.
@@ -514,8 +514,8 @@ public class BOpUtility {
             });
   }
 
-  //    /**
-  //     * Return the variables from the operator's arguments.
+  //    /*
+//     * Return the variables from the operator's arguments.
   //     *
   //     * @param op
   //     *            The operator.
@@ -548,7 +548,7 @@ public class BOpUtility {
   //
   //    }
 
-  /**
+  /*
    * The #of arguments to this operation which are variables. This method does not report on
    * variables in child nodes nor on variables in attached {@link IConstraint}, etc.
    */
@@ -562,7 +562,7 @@ public class BOpUtility {
     return nvars;
   }
 
-  /**
+  /*
    * Return an index from the {@link BOp.Annotations#BOP_ID} to the {@link BOp} for each spanned
    * {@link PipelineOp}. {@link BOp}s without identifiers are not indexed. It is an error a
    * non-{@link PipelineOp} is encountered.
@@ -600,8 +600,8 @@ public class BOpUtility {
       final Integer id = (Integer) t.getProperty(Annotations.BOP_ID);
       final BOp conflict = map.put(id, t);
       if (conflict != null) {
-        /*
-         * BOp appears more than once. This is not allowed for
+      /*
+       * BOp appears more than once. This is not allowed for
          * pipeline operators. If you are getting this exception for
          * a non-pipeline operator, you should remove the bopId.
          */
@@ -633,8 +633,8 @@ public class BOpUtility {
     return Collections.unmodifiableMap(map);
   }
 
-  //    /**
-  //     * Lookup the first operator in the specified conditional binding group and
+  //    /*
+//     * Lookup the first operator in the specified conditional binding group and
   //     * return its bopId.
   //     *
   //     * @param query
@@ -684,7 +684,7 @@ public class BOpUtility {
   //        return null;
   //    }
 
-  /**
+  /*
    * Return the parent of the operator in the operator tree (this does not search the annotations,
    * just the children).
    *
@@ -723,7 +723,7 @@ public class BOpUtility {
     return null;
   }
 
-  /**
+  /*
    * Return the left-deep child of the operator.
    *
    * <p>Note: This does not protect against loops in the operator tree.
@@ -756,7 +756,7 @@ public class BOpUtility {
     }
   }
 
-  /**
+  /*
    * Return the effective default sink.
    *
    * @param bop The operator.
@@ -784,7 +784,7 @@ public class BOpUtility {
     return sink;
   }
 
-  /**
+  /*
    * Return a list containing the evaluation order for the pipeline. Only the child operands are
    * visited. Operators in subqueries are not visited since they will be assigned {@link BOpStats}
    * objects when they are run as a subquery. The evaluation order is given by the depth-first
@@ -820,7 +820,7 @@ public class BOpUtility {
     order.add(bopId);
   }
 
-  /**
+  /*
    * Combine chunks drawn from an iterator into a single chunk. This is useful when materializing
    * intermediate results for an all-at-once operator.
    *
@@ -929,7 +929,7 @@ public class BOpUtility {
   /** An empty {@link IBindingSet}[]. */
   public static final IBindingSet[] EMPTY_CHUNK = new IBindingSet[0];
 
-  /**
+  /*
    * Wrap the solutions with an {@link ICloseableIterator}.
    *
    * @param bindingSets The solutions.
@@ -941,7 +941,7 @@ public class BOpUtility {
         new SingleValueIterator<IBindingSet[]>(bindingSets));
   }
 
-  /**
+  /*
    * Pretty print a bop.
    *
    * @param bop The bop.
@@ -1010,7 +1010,7 @@ public class BOpUtility {
     }
   }
 
-  /**
+  /*
    * Returns a string that may be used to indent a dump of the nodes in the tree.
    *
    * @param height The height.
@@ -1021,8 +1021,8 @@ public class BOpUtility {
     return CoreBaseBOp.indent(height);
   }
 
-  //    /**
-  //     * Verify that all bops from the identified <i>startId</i> to the root are
+  //    /*
+//     * Verify that all bops from the identified <i>startId</i> to the root are
   //     * {@link PipelineOp}s and have an assigned {@link BOp.Annotations#BOP_ID}.
   //     * This is required in order for us to be able to target messages to those
   //     * operators.
@@ -1043,7 +1043,7 @@ public class BOpUtility {
   //
   //    }
 
-  /**
+  /*
    * Check constraints.
    *
    * @param constraints
@@ -1076,7 +1076,7 @@ public class BOpUtility {
     return true;
   }
 
-  /**
+  /*
    * Copy binding sets from the source to the sink(s).
    *
    * <p>Note: You MUST use {@link IBlockingBuffer#flush()} to flush the sink(s) in order for the
@@ -1139,7 +1139,7 @@ public class BOpUtility {
     return nout;
   }
 
-  /**
+  /*
    * Return a dense array containing only those {@link IBindingSet}s which satisfy the constraints.
    *
    * @param chunk A chunk of binding sets.
@@ -1209,8 +1209,8 @@ public class BOpUtility {
           final IConstant oval = bindingSet.get(var);
 
           if (oval != null) {
-            /*
-             * This is a paranoia assertion. We should never be in a
+          /*
+       * This is a paranoia assertion. We should never be in a
              * position where merging in a binding could overwrite
              * an existing binding with an inconsistent value.
              */
@@ -1250,8 +1250,8 @@ public class BOpUtility {
     return t;
   }
 
-  //	/**
-  //	 * Inject (or replace) an {@link Integer} "rowId" column. This does not have
+  //	/*
+//	 * Inject (or replace) an {@link Integer} "rowId" column. This does not have
   //	 * a side-effect on the source {@link IBindingSet}s.
   //	 *
   //	 * @param var
@@ -1285,7 +1285,7 @@ public class BOpUtility {
   //
   //	}
 
-  /**
+  /*
    * Return an ordered array of the bopIds associated with an ordered array of predicates (aka a
    * join path).
    *
@@ -1308,7 +1308,7 @@ public class BOpUtility {
     return b;
   }
 
-  /**
+  /*
    * Return the variable references shared by two operators. All variables spanned by either {@link
    * BOp} are considered, regardless of whether they appear as operands or within annotations.
    *
@@ -1382,7 +1382,7 @@ public class BOpUtility {
     return sharedVars;
   }
 
-  /**
+  /*
    * Return a copy of the subquery in which each {@link IAggregate} function is a distinct instance.
    * This prevents inappropriate sharing of state across invocations of the subquery.
    *
@@ -1459,7 +1459,7 @@ public class BOpUtility {
     }
   }
 
-  /**
+  /*
    * Deep copy. All bops will be distinct instances having the same data for their arguments and
    * their annotations. Annotations which are bops are also deep copied.
    */
@@ -1537,8 +1537,8 @@ public class BOpUtility {
 
       if (copy instanceof GroupNodeBase<?>) {
 
-        /*
-         * Patch up the parent references.
+      /*
+       * Patch up the parent references.
          */
 
         for (int i = 0; i < arity; i++) {
@@ -1557,7 +1557,7 @@ public class BOpUtility {
     }
   }
 
-  /**
+  /*
    * Combine two arrays of constraints. Either may be <code>null</code> or empty. If both were
    * <code>null</code> or empty, then a <code>null</code> will be returned.
    *
@@ -1584,7 +1584,7 @@ public class BOpUtility {
     return list.isEmpty() ? null : list.toArray(new IConstraint[list.size()]);
   }
 
-  /**
+  /*
    * Counts the number of occurrences of a BOp inside another BOp.
    *
    * @param op the BOp to scan for occurrences of inner

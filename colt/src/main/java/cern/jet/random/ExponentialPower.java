@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Exponential Power distribution.
+/*
+* Exponential Power distribution.
  *
  * <p>Valid parameter ranges: <tt>tau &gt;= 1</tt>.
  *
@@ -39,7 +39,7 @@ public class ExponentialPower extends AbstractContinousDistribution {
 
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static ExponentialPower shared = new ExponentialPower(1.0, makeDefaultGenerator());
-  /**
+  /*
    * Constructs an Exponential Power distribution. Example: tau=1.0.
    *
    * @throws IllegalArgumentException if <tt>tau &lt; 1.0</tt>.
@@ -52,7 +52,7 @@ public class ExponentialPower extends AbstractContinousDistribution {
   public double nextDouble() {
     return nextDouble(this.tau);
   }
-  /**
+  /*
    * Returns a random number from the distribution; bypasses the internal state.
    *
    * @throws IllegalArgumentException if <tt>tau &lt; 1.0</tt>.
@@ -90,7 +90,7 @@ public class ExponentialPower extends AbstractContinousDistribution {
     if (u < 0.0) return x;
     else return -x;
   }
-  /**
+  /*
    * Sets the distribution parameter.
    *
    * @throws IllegalArgumentException if <tt>tau &lt; 1.0</tt>.
@@ -99,7 +99,7 @@ public class ExponentialPower extends AbstractContinousDistribution {
     if (tau < 1.0) throw new IllegalArgumentException();
     this.tau = tau;
   }
-  /**
+  /*
    * Returns a random number from the distribution.
    *
    * @throws IllegalArgumentException if <tt>tau &lt; 1.0</tt>.
@@ -113,7 +113,7 @@ public class ExponentialPower extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + tau + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

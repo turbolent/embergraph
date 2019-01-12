@@ -27,7 +27,7 @@ public class HostReportComparator implements Comparator<IHostReport>, Serializab
   private final String metricName;
   private final boolean asc;
 
-  /**
+  /*
    * @param metricName The name of the metric which is used to impose an order on the {@link
    *     IHostReport}s.
    * @param asc <code>true</code> for an ascending sort and <code>false</code> for a descending

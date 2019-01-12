@@ -26,8 +26,8 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for the {@link IIndex#getCounter()} interface.
+/*
+* Test suite for the {@link IIndex#getCounter()} interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

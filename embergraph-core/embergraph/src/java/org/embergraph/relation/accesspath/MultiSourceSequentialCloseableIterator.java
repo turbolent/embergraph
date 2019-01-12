@@ -28,8 +28,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 
-/**
- * Class allows new sources to be attached dynamically. If the existing sources are drained then the
+/*
+* Class allows new sources to be attached dynamically. If the existing sources are drained then the
  * iterator will {@link #close()} itself so that new sources can no longer be attached.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ public class MultiSourceSequentialCloseableIterator<E> implements IMultiSourceCl
   private final Queue<ICloseableIterator<E>> sources =
       new LinkedBlockingQueue<ICloseableIterator<E>>();
 
-  /**
+  /*
    * The current inner iterator. When <code>null</code> the outer iterator has been closed and will
    * not deliver any more results and will not accept any new sources.
    *
@@ -100,7 +100,7 @@ public class MultiSourceSequentialCloseableIterator<E> implements IMultiSourceCl
     }
   }
 
-  /**
+  /*
    * If the current source is not exhausted, then return it immediately. Otherwise, return the next
    * source which is not exhausted. If no such sources are available, then {@link #close()} the
    * iterator. The decision to accept another source or to close the iterator is made atomic by the
@@ -115,7 +115,7 @@ public class MultiSourceSequentialCloseableIterator<E> implements IMultiSourceCl
     // current is known to be [null].
     lock.lock();
     try {
-      /**
+      /*
        * Close iterator which has been consumed.
        *
        * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/706" >
@@ -154,7 +154,7 @@ public class MultiSourceSequentialCloseableIterator<E> implements IMultiSourceCl
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @todo Due to the inherent non-atomicity of the while(hasNext()) next() idiom, it is possible

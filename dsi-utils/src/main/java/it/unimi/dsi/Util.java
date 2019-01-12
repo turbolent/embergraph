@@ -27,8 +27,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-/**
- * All-purpose static-method container class.
+/*
+* All-purpose static-method container class.
  *
  * @author Sebastiano Vigna
  * @since 0.1
@@ -40,7 +40,7 @@ public final class Util {
   private static final java.text.NumberFormat FORMAT_DOUBLE =
       new java.text.DecimalFormat("#,##0.00");
 
-  /**
+  /*
    * Formats a number.
    *
    * <p>This method formats a double separating thousands and printing just two fractional digits.
@@ -56,7 +56,7 @@ public final class Util {
   /** A reasonable format for integers. */
   private static final java.text.NumberFormat FORMAT_LONG = new java.text.DecimalFormat("#,###");
 
-  /**
+  /*
    * Formats a number.
    *
    * <p>This method formats a long separating thousands.
@@ -69,7 +69,7 @@ public final class Util {
     return FORMAT_LONG.format(l, s, new java.text.FieldPosition(0)).toString();
   }
 
-  /**
+  /*
    * Formats a size.
    *
    * <p>This method formats a long using suitable unit multipliers (e.g., <samp>K</samp>,
@@ -86,7 +86,7 @@ public final class Util {
     return Long.toString(l);
   }
 
-  /**
+  /*
    * Formats a binary size.
    *
    * <p>This method formats a long using suitable unit binary multipliers (e.g., <samp>Ki</samp>,
@@ -105,7 +105,7 @@ public final class Util {
     return Long.toString(l);
   }
 
-  /**
+  /*
    * Checks whether Log4J is properly configuring by searching for appenders in all loggers.
    *
    * @return whether Log4J is configured (or, at least, an educated guess).
@@ -120,7 +120,7 @@ public final class Util {
     return false;
   }
 
-  /**
+  /*
    * Ensures that Log4J is configured, by invoking, if necessary, {@link
    * org.apache.log4j.BasicConfigurator#configure()}, and setting the root logger level to {@link
    * Level#INFO}.
@@ -131,7 +131,7 @@ public final class Util {
     ensureLog4JIsConfigured(klass, Level.INFO);
   }
 
-  /**
+  /*
    * Ensures that Log4J is configured, by invoking, if necessary, {@link
    * org.apache.log4j.BasicConfigurator#configure()}, and setting the root logger level to <code>
    * level</code>.
@@ -152,7 +152,7 @@ public final class Util {
     }
   }
 
-  /**
+  /*
    * Ensures that Log4J is configured, by invoking, if necessary, {@link
    * org.apache.log4j.BasicConfigurator#configure()}, and setting the root logger level to {@link
    * Level#INFO}.
@@ -161,7 +161,7 @@ public final class Util {
     ensureLog4JIsConfigured(null, Level.INFO);
   }
 
-  /**
+  /*
    * Ensures that Log4J is configured, by invoking, if necessary, {@link
    * org.apache.log4j.BasicConfigurator#configure()}, and setting the root logger level to a
    * specified logging level.
@@ -172,7 +172,7 @@ public final class Util {
     ensureLog4JIsConfigured(null, level);
   }
 
-  /**
+  /*
    * Calls Log4J's {@link Logger#getLogger(java.lang.Class)} method and then {@link
    * #ensureLog4JIsConfigured()}.
    *
@@ -185,7 +185,7 @@ public final class Util {
     return logger;
   }
 
-  /**
+  /*
    * Calls Log4J's {@link Logger#getLogger(java.lang.Class)} method and then {@link
    * #ensureLog4JIsConfigured()} with argument {@link Level#DEBUG}.
    *
@@ -200,7 +200,7 @@ public final class Util {
 
   private static final Runtime RUNTIME = Runtime.getRuntime();
 
-  /**
+  /*
    * Returns true if less then 5% of the available memory is free.
    *
    * @return true if less then 5% of the available memory is free.
@@ -209,7 +209,7 @@ public final class Util {
     return availableMemory() * 100 < RUNTIME.totalMemory() * 5;
   }
 
-  /**
+  /*
    * Returns the amount of available memory (free memory plus never allocated memory).
    *
    * @return the amount of available memory, in bytes.
@@ -218,7 +218,7 @@ public final class Util {
     return RUNTIME.freeMemory() + (RUNTIME.maxMemory() - RUNTIME.totalMemory());
   }
 
-  /**
+  /*
    * Returns the percentage of available memory (free memory plus never allocated memory).
    *
    * @return the percentage of available memory.

@@ -75,8 +75,8 @@ import org.openrdf.query.Update;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryResult;
 
-/**
- * A base class for a Blueprints wrapper around a embergraph back-end.
+/*
+* A base class for a Blueprints wrapper around a embergraph back-end.
  *
  * @author mikepersonick
  */
@@ -92,7 +92,7 @@ public abstract class EmbergraphGraph implements Graph {
 
   public interface Options {
 
-    /**
+    /*
      * Allow multiple edges with the same edge id. Useful for assigning by-reference properties
      * (e.g. vertex type).
      */
@@ -105,7 +105,7 @@ public abstract class EmbergraphGraph implements Graph {
     String MAX_QUERY_TIME = EmbergraphGraph.class.getName() + ".maxQueryTime";
   }
 
-  /**
+  /*
    * Max Query Time used to globally set the query timeout.
    *
    * <p>Default is 0 (unlimited)
@@ -162,13 +162,13 @@ public abstract class EmbergraphGraph implements Graph {
     return factory;
   }
 
-  /**
+  /*
    * Different implementations will return different types of connections depending on the mode
    * (client/server, embedded, read-only, etc.)
    */
   public abstract RepositoryConnection cxn() throws Exception;
 
-  /**
+  /*
    * Return a single-valued property for an edge or vertex.
    *
    * @see {@link EmbergraphElement}
@@ -178,7 +178,7 @@ public abstract class EmbergraphGraph implements Graph {
     return getProperty(uri, factory.toPropertyURI(prop));
   }
 
-  /**
+  /*
    * Return a single-valued property for an edge or vertex.
    *
    * @see {@link EmbergraphElement}
@@ -197,15 +197,15 @@ public abstract class EmbergraphGraph implements Graph {
 
           if (!result.hasNext()) {
 
-            /*
-             * Single value.
+          /*
+       * Single value.
              */
             return getProperty(stmt.getObject());
 
           } else {
 
-            /*
-             * Multi-value, use a list.
+          /*
+       * Multi-value, use a list.
              */
             final List<Object> list = new LinkedList<Object>();
 
@@ -247,8 +247,8 @@ public abstract class EmbergraphGraph implements Graph {
     return o;
   }
 
-  //    /**
-  //     * Return a multi-valued property for an edge or vertex.
+  //    /*
+//     * Return a multi-valued property for an edge or vertex.
   //     *
   //     * TODO get rid of me
   //     *
@@ -260,8 +260,8 @@ public abstract class EmbergraphGraph implements Graph {
   //
   //    }
   //
-  //    /**
-  //     * Return a multi-valued property for an edge or vertex.
+  //    /*
+//     * Return a multi-valued property for an edge or vertex.
   //     *
   //     * TODO get rid of me
   //     *
@@ -300,7 +300,7 @@ public abstract class EmbergraphGraph implements Graph {
   //
   //    }
 
-  /**
+  /*
    * Return the property names for an edge or vertex.
    *
    * @see {@link EmbergraphElement}
@@ -346,7 +346,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Remove all values for a particular property on an edge or vertex.
    *
    * @see {@link EmbergraphElement}
@@ -356,7 +356,7 @@ public abstract class EmbergraphGraph implements Graph {
     return removeProperty(uri, factory.toPropertyURI(prop));
   }
 
-  /**
+  /*
    * Remove all values for a particular property on an edge or vertex.
    *
    * @see {@link EmbergraphElement}
@@ -376,7 +376,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Set a single-value property on an edge or vertex (remove the old value first).
    *
    * @see {@link EmbergraphElement}
@@ -419,8 +419,8 @@ public abstract class EmbergraphGraph implements Graph {
     return literals;
   }
 
-  //    /**
-  //     * Set a single-value property on an edge or vertex (remove the old
+  //    /*
+//     * Set a single-value property on an edge or vertex (remove the old
   //     * value first).
   //     *
   //     * @see {@link EmbergraphElement}
@@ -449,7 +449,7 @@ public abstract class EmbergraphGraph implements Graph {
   //
   //    }
 
-  /**
+  /*
    * Set a multi-value property on an edge or vertex (remove the old values first).
    *
    * @see {@link EmbergraphElement}
@@ -490,8 +490,8 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  //    /**
-  //     * ADD a property on an edge or vertex (multi-value property extension).
+  //    /*
+//     * ADD a property on an edge or vertex (multi-value property extension).
   //     *
   //     * @see {@link EmbergraphElement}
   //     */
@@ -501,8 +501,8 @@ public abstract class EmbergraphGraph implements Graph {
   //
   //    }
   //
-  //    /**
-  //     * ADD a property on an edge or vertex (multi-value property extension).
+  //    /*
+//     * ADD a property on an edge or vertex (multi-value property extension).
   //     *
   //     * @see {@link EmbergraphElement}
   //     */
@@ -693,7 +693,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Find edges based on the from and to vertices and the edge labels, all optional parameters (can
    * be null). The edge labels can be null to include all labels.
    *
@@ -714,7 +714,7 @@ public abstract class EmbergraphGraph implements Graph {
     return new EdgeIterable(stmts);
   }
 
-  /**
+  /*
    * Translates the request to a high-performance SPARQL query:
    *
    * <p>construct { ?from ?edge ?to . } where { ?edge rdf:type <Edge> .
@@ -760,7 +760,7 @@ public abstract class EmbergraphGraph implements Graph {
     return stmts;
   }
 
-  /**
+  /*
    * Find edges based on a SPARQL construct query. The query MUST construct edge statements:
    *
    * <p>construct { ?from ?edge ?to } where { ... }
@@ -780,7 +780,7 @@ public abstract class EmbergraphGraph implements Graph {
     return new EdgeIterable(stmts);
   }
 
-  /**
+  /*
    * Find vertices based on the supplied from and to vertices and the edge labels. One or the other
    * (from and to) must be null (wildcard), but not both. Use getEdges() for wildcards on both the
    * from and to. The edge labels can be null to include all labels.
@@ -809,7 +809,7 @@ public abstract class EmbergraphGraph implements Graph {
     return new VertexIterable(stmts, from == null);
   }
 
-  /**
+  /*
    * Find vertices based on a SPARQL construct query. If the subject parameter is true, the vertices
    * will be taken from the subject position of the constructed statements, otherwise they will be
    * taken from the object position.
@@ -829,7 +829,7 @@ public abstract class EmbergraphGraph implements Graph {
     return new VertexIterable(stmts, subject);
   }
 
-  /**
+  /*
    * Find edges with the supplied property value.
    *
    * <p>construct { ?from ?edge ?to . } where { ?edge <prop> <val> . ?from ?edge ?to . }
@@ -933,7 +933,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Providing an override implementation for our GraphQuery to avoid the low-performance scan and
    * filter paradigm. See {@link EmbergraphGraphQuery}.
    */
@@ -975,7 +975,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Remove a vertex and its edges and properties.
    *
    * <p>TODO FIXME I am not fully removing dependent edges.
@@ -1008,7 +1008,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Translate a collection of Embergraph statements into an iteration of Blueprints vertices.
    *
    * @author mikepersonick
@@ -1071,7 +1071,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Translate a collection of Embergraph statements into an iteration of Blueprints edges.
    *
    * @author mikepersonick
@@ -1134,7 +1134,7 @@ public abstract class EmbergraphGraph implements Graph {
     return new FusedIterable<T>(args);
   }
 
-  /**
+  /*
    * Fuse two iterables together into one. Useful for combining IN and OUT edges for a vertex.
    *
    * @author mikepersonick
@@ -1182,7 +1182,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Project a subgraph using a SPARQL query.
    *
    * <p>Warning: You MUST close this iterator when finished.
@@ -1191,7 +1191,7 @@ public abstract class EmbergraphGraph implements Graph {
     return this.project(queryStr, UUID.randomUUID().toString());
   }
 
-  /**
+  /*
    * Project a subgraph using a SPARQL query.
    *
    * <p>This version allows passing an external system ID to allow association between queries in
@@ -1246,8 +1246,8 @@ public abstract class EmbergraphGraph implements Graph {
 
     } catch (Exception ex) {
       if (queryId != null) {
-        /*
-         * In case the exception happens during evaluate().
+      /*
+       * In case the exception happens during evaluate().
          */
         finalizeQuery(queryId);
       }
@@ -1286,7 +1286,7 @@ public abstract class EmbergraphGraph implements Graph {
   protected EmbergraphGraphAtom toGraphAtom(final Statement stmt) {
 
     final URI s = (URI) stmt.getSubject();
-    final URI p = (URI) stmt.getPredicate();
+    final URI p = stmt.getPredicate();
     final Value o = stmt.getObject();
 
     return toGraphAtom(s, p, o);
@@ -1307,8 +1307,8 @@ public abstract class EmbergraphGraph implements Graph {
       if (p.equals(factory.getTypeURI())
           && (o.equals(factory.getVertexURI()) || o.equals(factory.getEdgeURI()))) {
 
-        /*
-         * Element type.
+      /*
+       * Element type.
          */
         if (o.equals(factory.getVertexURI())) {
           atom = new ExistenceAtom(sid, ElementType.VERTEX);
@@ -1318,8 +1318,8 @@ public abstract class EmbergraphGraph implements Graph {
 
       } else {
 
-        /*
-         * Edge.
+      /*
+       * Edge.
          */
         final String oid = factory.fromURI((URI) o);
         atom = new EdgeAtom(pid, sid, oid);
@@ -1332,16 +1332,16 @@ public abstract class EmbergraphGraph implements Graph {
        */
       if (p.equals(factory.getLabelURI())) {
 
-        /*
-         * Edge label.
+      /*
+       * Edge label.
          */
         final String label = factory.fromLiteral((Literal) o).toString();
         atom = new EdgeLabelAtom(sid, label);
 
       } else {
 
-        /*
-         * Property.
+      /*
+       * Property.
          */
         final Object oval = factory.fromLiteral((Literal) o);
         atom = new PropertyAtom(sid, pid, oval);
@@ -1351,7 +1351,7 @@ public abstract class EmbergraphGraph implements Graph {
     return atom;
   }
 
-  /**
+  /*
    * Select results using a SPARQL query.
    *
    * <p>Warning: You MUST close this iterator when finished.
@@ -1361,7 +1361,7 @@ public abstract class EmbergraphGraph implements Graph {
     return this.select(queryStr, UUID.randomUUID().toString());
   }
 
-  /**
+  /*
    * Select results using a SPARQL query.
    *
    * <p>Warning: You MUST close this iterator when finished.
@@ -1385,7 +1385,7 @@ public abstract class EmbergraphGraph implements Graph {
 
     try {
 
-      final TupleQuery query = (TupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
+      final TupleQuery query = cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
 
       setMaxQueryTime(query);
 
@@ -1412,8 +1412,8 @@ public abstract class EmbergraphGraph implements Graph {
 
     } catch (Exception ex) {
       if (queryId != null) {
-        /*
-         * In case the exception happens during evaluate().
+      /*
+       * In case the exception happens during evaluate().
          */
         finalizeQuery(queryId);
       }
@@ -1474,7 +1474,7 @@ public abstract class EmbergraphGraph implements Graph {
     try {
 
       final BooleanQuery query =
-          (BooleanQuery) cxn.prepareBooleanQuery(QueryLanguage.SPARQL, queryStr);
+          cxn.prepareBooleanQuery(QueryLanguage.SPARQL, queryStr);
 
       setMaxQueryTime(query);
 
@@ -1498,8 +1498,8 @@ public abstract class EmbergraphGraph implements Graph {
 
     } finally {
       if (queryId != null) {
-        /*
-         * In case the exception happens during evaluate().
+      /*
+       * In case the exception happens during evaluate().
          */
         finalizeQuery(queryId);
       }
@@ -1540,7 +1540,7 @@ public abstract class EmbergraphGraph implements Graph {
           + "    ?sid ?action ?time . \n"
           + "}";
 
-  /**
+  /*
    * If history is enabled, return an iterator of historical graph edits related to any of the
    * supplied ids. To enable history, make sure the database is in statement identifiers mode and
    * that the RDR History class is enabled.
@@ -1589,7 +1589,7 @@ public abstract class EmbergraphGraph implements Graph {
 
     try {
 
-      final TupleQuery query = (TupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
+      final TupleQuery query = cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr);
 
       if (query instanceof EmbergraphSailTupleQuery
           && cxn instanceof EmbergraphSailRepositoryConnection) {
@@ -1614,8 +1614,8 @@ public abstract class EmbergraphGraph implements Graph {
 
     } catch (Exception ex) {
       if (queryId != null) {
-        /*
-         * In case the exception happens during evaluate().
+      /*
+       * In case the exception happens during evaluate().
          */
         finalizeQuery(queryId);
       }
@@ -1701,13 +1701,13 @@ public abstract class EmbergraphGraph implements Graph {
     FEATURES.supportsThreadedTransactions = false;
   }
 
-  //    /**
-  //     * You MUST close this iterator when finished with it.
+  //    /*
+//     * You MUST close this iterator when finished with it.
   //     */
   //    public static interface CloseableIterator<T> extends Iterator<T> {
   //
-  //        /**
-  //         * Release any resources associated with this iterator.
+  //        /*
+//         * Release any resources associated with this iterator.
   //         */
   //        void close();
   //
@@ -1724,7 +1724,7 @@ public abstract class EmbergraphGraph implements Graph {
       this.queryId = null;
     }
 
-    /**
+    /*
      * Allows you to pass a query UUID to perform a tear down when it exits.
      *
      * @param it
@@ -1747,7 +1747,7 @@ public abstract class EmbergraphGraph implements Graph {
     @Override
     public E next() {
       try {
-        return (E) it.next();
+        return it.next();
       } catch (Exception ex) {
         throw new RuntimeException(ex);
       }
@@ -1785,28 +1785,28 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Return a Collection of running queries
    *
    * @return
    */
   public abstract Collection<RunningQuery> getRunningQueries();
 
-  /**
+  /*
    * Kill a running query specified by the UUID. Do nothing if the query has completed.
    *
    * @param queryId
    */
   public abstract void cancel(UUID queryId);
 
-  /**
+  /*
    * Kill a running query specified by the UUID String. Do nothing if the query has completed.
    *
    * @param String uuid
    */
   public abstract void cancel(String uuid);
 
-  /**
+  /*
    * Kill a running query specified by the RunningQuery object. Do nothing if the query has
    * completed.
    *
@@ -1814,7 +1814,7 @@ public abstract class EmbergraphGraph implements Graph {
    */
   public abstract void cancel(RunningQuery r);
 
-  /**
+  /*
    * Return the {@link RunningQuery} for a currently executing SPARQL QUERY or UPDATE request.
    *
    * @param queryId2 The {@link UUID} for the request.
@@ -1822,7 +1822,7 @@ public abstract class EmbergraphGraph implements Graph {
    */
   public abstract RunningQuery getQueryById(final UUID queryId2);
 
-  /**
+  /*
    * Return the {@link RunningQuery} for a currently executing SPARQL QUERY or UPDATE request.
    *
    * @param queryId2 The {@link UUID} for the request.
@@ -1830,7 +1830,7 @@ public abstract class EmbergraphGraph implements Graph {
    */
   public abstract RunningQuery getQueryByExternalId(final String extQueryId);
 
-  /**
+  /*
    * Embedded clients can override this to access query management capabilities.
    *
    * @param cxn
@@ -1843,7 +1843,7 @@ public abstract class EmbergraphGraph implements Graph {
       QueryType queryType,
       String extQueryId);
 
-  /**
+  /*
    * Wrapper method to clean up query and throw exception is interrupted.
    *
    * @param queryId
@@ -1866,14 +1866,14 @@ public abstract class EmbergraphGraph implements Graph {
     }
   }
 
-  /**
+  /*
    * Embedded clients can override this to access query management capabilities.
    *
    * @param absQuery
    */
   protected abstract void tearDownQuery(UUID queryId);
 
-  /**
+  /*
    * Helper method to determine if a query was cancelled.
    *
    * @param queryId

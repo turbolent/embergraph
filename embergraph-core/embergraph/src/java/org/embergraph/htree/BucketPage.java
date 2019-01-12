@@ -41,8 +41,8 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.BytesUtil;
 
-/**
- * An {@link HTree} bucket page (leaf). The bucket page is comprised of one or more buddy hash
+/*
+* An {@link HTree} bucket page (leaf). The bucket page is comprised of one or more buddy hash
  * buckets. The #of buddy hash buckets is determined by the address bits of the hash tree and the
  * global depth of the bucket page.
  *
@@ -100,7 +100,7 @@ import org.embergraph.util.BytesUtil;
  */
 class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
 
-  /**
+  /*
    * The data record. {@link MutableBucketData} is used for all mutation operations. {@link
    * ReadOnlyLeafData} is used when the {@link BucketPage} is made persistent. A read-only data
    * record is automatically converted into a {@link MutableBucketData} record when a mutation
@@ -209,7 +209,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     return data.isReadOnly();
   }
 
-  /**
+  /*
    * Create a new empty bucket.
    *
    * @param htree A reference to the owning {@link HTree}.
@@ -233,7 +233,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
             htree.rawRecords);
   }
 
-  /**
+  /*
    * Deserialization constructor - {@link #globalDepth} MUST be set by the caller.
    *
    * @param htree
@@ -249,7 +249,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     setIdentity(addr);
   }
 
-  /**
+  /*
    * Copy constructor.
    *
    * @param src The source node (must be immutable).
@@ -338,7 +338,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
 
   }
 
-  /**
+  /*
    * Return <code>true</code> if there is at lease one tuple in the buddy hash bucket for the
    * specified key.
    *
@@ -358,7 +358,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     return index >= 0;
   }
 
-  /**
+  /*
    * There is no reason why the number of slots in a BucketPage should be the same as the number in
    * a DirectoryPage.
    *
@@ -369,7 +369,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     // return 1 << htree.addressBits;
   }
 
-  /**
+  /*
    * Return the first value found in the buddy hash bucket for the specified key.
    *
    * @param key The key.
@@ -393,7 +393,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     return getValues().get(index);
   }
 
-  /**
+  /*
    * @param buf
    * @return a byte array representing the data view of the ByteBuffer
    */
@@ -444,7 +444,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     return si < 0 ? -1 : si;
   }
 
-  /**
+  /*
    * Return an iterator which will visit each tuple in the buddy hash bucket for the specified key.
    *
    * @param key The key.
@@ -461,7 +461,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     return new BuddyBucketTupleIterator(key, this); // , buddyOffset);
   }
 
-  /**
+  /*
    * Insert the tuple into the buddy bucket.
    *
    * @param key The key (all bits, all bytes).
@@ -601,7 +601,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     return true;
   }
 
-  /**
+  /*
    * Checks to see if the value supplied should be converted to a raw record, and if so converts it.
    *
    * @param val - value to be checked
@@ -620,7 +620,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     }
   }
 
-  /**
+  /*
    * Insert used when addLevel() is invoked to copy a tuple from an existing bucket page into
    * another bucket page. This method is very similar to {@link #insert(byte[], byte[],
    * DirectoryPage, int)}. The critical differences are: (a) it correctly handles raw records (they
@@ -734,7 +734,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     throw new AssertionError();
   }
 
-  /**
+  /*
    * Return an iterator visiting all the non-deleted, non-empty tuples on this {@link BucketPage}.
    */
   ITupleIterator tuples() {
@@ -765,7 +765,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
       }
     }
 
-    /**
+    /*
      * Scan to the next non-empty slot in the current {@link BucketPage}.
      *
      * @return <code>true</code> iff there is a non-empty slot on the current {@link BucketPage}.
@@ -806,7 +806,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     }
   }
 
-  /**
+  /*
    * Visits this leaf if unless it is not dirty and the flag is true, in which case the returned
    * iterator will not visit anything.
    *
@@ -868,7 +868,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     sb.append("\n");
   }
 
-  /**
+  /*
    * Pretty print a value from the tuple at the specified slot on the page.
    *
    * @param index The slot on the page.
@@ -927,7 +927,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     return keyStr + "=>" + valStr;
   }
 
-  /**
+  /*
    * Human readable representation of the {@link ILeafData} plus transient information associated
    * with the {@link BucketPage}.
    */
@@ -1023,7 +1023,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     stats.visit(htree, this);
   }
 
-  /**
+  /*
    * From the current bit resolution, determines how many extra bits are required to ensure the
    * current set of bucket values can be split.
    *
@@ -1058,7 +1058,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
       final boolean bitset = BytesUtil.getBit(keys.get(0), testPrefix);
       for (int t = 1; t < nkeys; t++) {
         final byte[] k = keys.get(t);
-        if (bitset != (k == null ? false : BytesUtil.getBit(keys.get(t), testPrefix))) {
+        if (bitset != (k != null && BytesUtil.getBit(keys.get(t), testPrefix))) {
           return testPrefix - currentResolution;
         }
       }
@@ -1068,8 +1068,8 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     return -1;
   }
 
-  //	/**
-  //	 * To insert in a BucketPage must handle split
+  //	/*
+//	 * To insert in a BucketPage must handle split
   //	 *
   //	 * @see org.embergraph.htree.AbstractPage#insertRawTuple(byte[], byte[], int)
   //	 */
@@ -1187,7 +1187,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
   //
   //	}
 
-  /**
+  /*
    * Convenience method returns the byte[] for the given index in the leaf. If the tuple at that
    * index is a raw record, then the record is read from the backing store. More efficient
    * operations should be performed when copying the value into a tuple.
@@ -1369,7 +1369,7 @@ class BucketPage extends AbstractPage implements ILeafData, IRawRecordAccess {
     return ret;
   }
 
-  /**
+  /*
    * Since the BucketPage orders its keys the first key will be the "lowest" in sort order.
    *
    * @return first key value

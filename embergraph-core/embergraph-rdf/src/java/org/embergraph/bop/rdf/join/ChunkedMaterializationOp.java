@@ -45,8 +45,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.store.EmbergraphBindingSetResolverator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * A vectored materialization operator based on pretty much the same logic as {@link
+/*
+* A vectored materialization operator based on pretty much the same logic as {@link
  * EmbergraphBindingSetResolverator}. However, this class caches the resolved {@link
  * EmbergraphValue} reference on the {@link IV} while the {@link EmbergraphBindingSetResolverator}
  * replaces the {@link IV} in the solution with the {@link EmbergraphValue}. Also, this class does
@@ -63,7 +63,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * The {@link IVariable}[] identifying the variables to be materialized. When <code>null</code>
      * or not specified, ALL variables will be materialized. This may not be an empty array as that
      * would imply that there is no need to use this operator.
@@ -81,7 +81,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
     boolean DEFAULT_MATERIALIZE_INLINE_IVS = false;
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -109,7 +109,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
     this(args, NV.asMap(annotations));
   }
 
-  /**
+  /*
    * @param vars The variables to be materialized. Materialization is only attempted for those
    *     variables which are actually bound in given solution.
    * @param namespace The namespace of the {@link LexiconRelation}.
@@ -124,7 +124,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
         new NV(Annotations.TIMESTAMP, timestamp));
   }
 
-  /**
+  /*
    * Return the variables to be materialized.
    *
    * @return The variables to be materialized -or- <code>null</code> iff all variables should be
@@ -136,7 +136,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
     return (IVariable<?>[]) getProperty(Annotations.VARS);
   }
 
-  /**
+  /*
    * When <code>true</code>, inline {@link IV}s are also materialized.
    *
    * @see Annotations#MATERIALIZE_INLINE_IVS
@@ -217,7 +217,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
     }
   } // ChunkTask
 
-  /**
+  /*
    * Resolve a chunk of {@link IBindingSet}s into a chunk of {@link IBindingSet}s in which {@link
    * IV}s have been resolved to {@link EmbergraphValue}s.
    *
@@ -250,7 +250,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
             ? chunkIn.length
             : ((required.length == 0) ? 1 : chunkIn.length * required.length);
 
-    /**
+    /*
      * In the following map we store, for each IV, the constant that was associated with this IV; we
      * later use these constants canonically. -> see https://jira.blazegraph.com/browse/BLZG-1591
      */
@@ -351,8 +351,8 @@ public class ChunkedMaterializationOp extends PipelineOp {
     return chunkOut;
   }
 
-  //    /**
-  //     * Either add the IV to the list if it needs materialization, or else
+  //    /*
+//     * Either add the IV to the list if it needs materialization, or else
   //     * delegate to {@link #handleSid(SidIV, Collection, boolean)} if it's a
   //     * SidIV.
   //     */
@@ -372,8 +372,8 @@ public class ChunkedMaterializationOp extends PipelineOp {
   //
   //    }
   //
-  //    /**
-  //     * Sids need to be handled specially because their individual ISPO
+  //    /*
+//     * Sids need to be handled specially because their individual ISPO
   //     * components might need materialization.
   //     */
   //    static private void handleSid(final SidIV<?> sid,
@@ -401,7 +401,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
   //
   //    }
 
-  /**
+  /*
    * Resolve the term identifiers in the {@link IBindingSet} using the map populated when we fetched
    * the current chunk.
    *
@@ -445,15 +445,15 @@ public class ChunkedMaterializationOp extends PipelineOp {
           continue;
         }
 
-        final IV<?, ?> iv = (IV<?, ?>) c.get();
+        final IV<?, ?> iv = c.get();
 
         if (iv == null) {
 
           continue;
         }
 
-        /**
-         * As per https://jira.blazegraph.com/browse/BLZG-1591, we distinguish between inline IVs
+      /*
+       * As per https://jira.blazegraph.com/browse/BLZG-1591, we distinguish between inline IVs
          * (which have already been resolved as a side effect of the preceding getTerms() call) and
          * for which we thus can substitute in a canonical version of the constant from which it was
          * derived and non-inline IVs (the old code path) for which we conditionally set the IV
@@ -504,8 +504,8 @@ public class ChunkedMaterializationOp extends PipelineOp {
 
         final EmbergraphValue value = terms.get(iv);
 
-        /**
-         * As per https://jira.blazegraph.com/browse/BLZG-1591, we distinguish between inline IVs
+      /*
+       * As per https://jira.blazegraph.com/browse/BLZG-1591, we distinguish between inline IVs
          * (which have already been resolved as a side effect of the preceding getTerms() call) and
          * for which we thus can substitute in a canonical version of the constant from which it was
          * derived and non-inline IVs (the old code path) for which we conditionally set the IV
@@ -534,7 +534,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
     return bindingSetOut;
   }
 
-  /**
+  /*
    * If the {@link EmbergraphValue} is non-null, then set it on the
    * {@link IVCache} interface.
    *

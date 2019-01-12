@@ -26,14 +26,14 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * {@link IAccessPath} implementation for an {@link SPORelation}.
+/*
+* {@link IAccessPath} implementation for an {@link SPORelation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class SPOAccessPath extends AccessPath<ISPO> {
 
-  /**
+  /*
    * @param relation (optional).
    * @param indexManager (required)
    * @param timestamp
@@ -49,7 +49,7 @@ public class SPOAccessPath extends AccessPath<ISPO> {
     super(relation, localIndexManager, predicate, keyOrder);
   }
 
-  /**
+  /*
    * Strengthens the return type.
    *
    * <p>{@inheritDoc}
@@ -62,7 +62,7 @@ public class SPOAccessPath extends AccessPath<ISPO> {
     return this;
   }
 
-  /**
+  /*
    * Strengthened return type.
    *
    * <p>{@inheritDoc}
@@ -73,7 +73,7 @@ public class SPOAccessPath extends AccessPath<ISPO> {
     return (SPORelation) super.getRelation();
   }
 
-  /**
+  /*
    * Strengthened return type.
    *
    * <p>{@inheritDoc}
@@ -84,8 +84,8 @@ public class SPOAccessPath extends AccessPath<ISPO> {
     return (SPOPredicate) super.getPredicate();
   }
 
-  //    /**
-  //     * Strengthened return type.
+  //    /*
+//     * Strengthened return type.
   //     * <p>
   //     * {@inheritDoc}
   //     */
@@ -97,7 +97,7 @@ public class SPOAccessPath extends AccessPath<ISPO> {
   //
   //    }
 
-  /**
+  /*
    * Overridden to delegate to {@link AbstractTripleStore#removeStatements(IChunkedOrderedIterator)}
    * in order to (a) write on all access paths; (b) handle statement identifiers, including truth
    * maintenance for statement identifiers; and (c) if justifications are being maintained, then
@@ -110,8 +110,8 @@ public class SPOAccessPath extends AccessPath<ISPO> {
     return getRelation().getContainer().removeStatements(iterator());
   }
 
-  //    /**
-  //     * Return a new {@link SPOAccessPath} where the context position has been
+  //    /*
+//     * Return a new {@link SPOAccessPath} where the context position has been
   //     * bound to the specified constant. The context position MUST be a variable.
   //     * All instances of that variable will be replaced by the specified
   //     * constant. This is used to constrain an access path to each graph in the
@@ -136,8 +136,8 @@ public class SPOAccessPath extends AccessPath<ISPO> {
   //
   //    }
   //
-  //    /**
-  //     * Return a new {@link SPOAccessPath} where the given position has been
+  //    /*
+//     * Return a new {@link SPOAccessPath} where the given position has been
   //     * bound to the specified constant. The given position MUST be a variable.
   //     * All instances of that variable will be replaced by the specified
   //     * constant.
@@ -234,8 +234,8 @@ public class SPOAccessPath extends AccessPath<ISPO> {
   //
   //    }
   //
-  //    /**
-  //     * Return a new {@link SPOAccessPath} where the given positions have been bound to the
+  //    /*
+//     * Return a new {@link SPOAccessPath} where the given positions have been bound to the
   // specified constants. The given positions MUST all be variables. All
   //     * instances of that variable will be replaced by the specified constant.
   //     * <p>

@@ -63,8 +63,8 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.helpers.StatementCollector;
 
-/**
- * Test suite for high-level query against a graph containing statements about statements.
+/*
+* Test suite for high-level query against a graph containing statements about statements.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -89,8 +89,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
     return properties;
   }
 
-  //    /**
-  //     * Overriden to cause the backing store to be deleted.
+  //    /*
+//     * Overriden to cause the backing store to be deleted.
   //     */
   //    protected void tearDown() throws Exception {
   //
@@ -195,8 +195,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
   //
   //    }
 
-  //    /**
-  //     * This runs a hand-coded query corresponding to a SPARQL query using the
+  //    /*
+//     * This runs a hand-coded query corresponding to a SPARQL query using the
   //     * {@link BD#SEARCH} magic predicate.
   //     *
   //     * <pre>
@@ -298,7 +298,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
   //
   //    }
 
-  /**
+  /*
    * Unit test used to track down a commit problem.
    *
    * @throws Exception
@@ -654,7 +654,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
   //
   //    }
 
-  /**
+  /*
    * FIXME This should be migrated to the data-driven test suite in {@link TestSearch}.
    *
    * @see TestSearch
@@ -667,7 +667,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
 
       try {
 
@@ -701,8 +701,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
         cxn.add(s7, RDFS.LABEL, l7);
         cxn.add(s8, RDFS.LABEL, l8);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -2136,7 +2136,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
   //
   //    }
 
-  /**
+  /*
    * FIXME This should be migrated to the data-driven test suite in {@link TestSearch}.
    *
    * @see TestSearch
@@ -2149,7 +2149,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
 
       try {
 
@@ -2183,8 +2183,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
         cxn.add(s7, RDFS.LABEL, l7);
         cxn.add(s8, RDFS.LABEL, l8);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -2392,8 +2392,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
   //
   //    }
 
-  //    /**
-  //     * Process a query in min/max rank chunks, with a goal of reaching the
+  //    /*
+//     * Process a query in min/max rank chunks, with a goal of reaching the
   //     * number of snippets specified by numSnippets.
   //     *
   //     * @param cxn
@@ -2524,7 +2524,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
   		  FILTER (?category2 = <http://www.ms2w.com/ontologies/autocad/AutoCADBlock>  || ?category2 = <http://www.ms2w.com/ontologies/autocad/AutoCADBlockAttribute>  || ?category2 = <http://www.ms2w.com/ontologies/autocad/AutoCADBlockReference>  || ?category2 = <http://www.ms2w.com/ontologies/autocad/AutoCADFile>  || ?category2 = <http://www.ms2w.com/ontologies/autocad/AutoCADTable>  || ?category2 = <http://www.ms2w.com/ontologies/autocad/AutoCADTitleBlock>  || ?category2 = <http://www.ms2w.com/ontologies/file/Directory>  || ?category2 = <http://www.ms2w.com/ontologies/file/File>  || ?category2 = <http://www.ms2w.com/ontologies/pdffile/PdfAnnotation>  || ?category2 = <http://www.ms2w.com/ontologies/pdffile/PdfFile>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmDocumentAssembly>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmTableTypeBOM>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/Component>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/Configuration>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmDocumentDrawing>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmBOMTableTypeIndented>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmDocumentPart>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmBOMTableTypePartsOnly>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmTableTypeRevision>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmToolboxCopiedPart>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmToolboxStandardPart>  || ?category2 = <http://www.ms2w.com/ontologies/solidworks/20091023/swDmBOMTableTypeTopLevelOnly> ) .
   	*/
 
-  /**
+  /*
    * FIXME This should be migrated to the data-driven test suite in {@link TestSearch}.
    *
    * @see TestSearch
@@ -2537,7 +2537,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
 
       try {
 
@@ -2571,8 +2571,8 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
         cxn.add(s7, RDFS.LABEL, l7);
         cxn.add(s8, RDFS.LABEL, l8);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */

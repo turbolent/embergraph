@@ -17,7 +17,7 @@ package org.embergraph.ganglia;
 
 public class GangliaMunge {
 
-  /**
+  /*
    * Munge a metric name so that it is suitable for use in a filesystem (ganglia stores metric names
    * and host names in the file system but does not munge them well itself). In particular, any
    * non-word characters (other than '.', '-' and similar things which are legal in file names) are
@@ -45,7 +45,7 @@ public class GangliaMunge {
     return s;
   }
 
-  /**
+  /*
    * Combines the group name and the local name to obtain the fully qualified metric name. Both
    * names are munged before they are combined.
    *

@@ -50,8 +50,8 @@ import org.openrdf.query.parser.sparql.manifest.SPARQLQueryTest;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryException;
 
-/**
- * Test harness for running the SPARQL test suites against an {@link EmbeddedFederation}.
+/*
+* Test harness for running the SPARQL test suites against an {@link EmbeddedFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -71,7 +71,7 @@ public class EmbergraphEmbeddedFederationSparqlTest extends EmbergraphSparqlTest
     super(testURI, name, queryFileURL, resultFileURL, dataSet, laxCardinality, checkOrder);
   }
 
-  /**
+  /*
    * Skip the dataset tests for now until we can figure out what is wrong with them.
    *
    * <p>FIXME Fix the dataset tests. There is some problem in how the data to be loaded into the
@@ -99,7 +99,7 @@ public class EmbergraphEmbeddedFederationSparqlTest extends EmbergraphSparqlTest
 
     //        suite1 = filterOutTests(suite1, "property-paths");
 
-    /**
+    /*
      * BSBM BI use case query 5
      *
      * <p>bsbm-bi-q5
@@ -300,7 +300,7 @@ public class EmbergraphEmbeddedFederationSparqlTest extends EmbergraphSparqlTest
   private IEmbergraphClient<?> client;
   private IEmbergraphFederation<?> fed;
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself.
    *

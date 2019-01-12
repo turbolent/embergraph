@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -143,7 +143,7 @@ public class TestMIMEType extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test helper method attempts to parse a MIME expression and then validates the parse against the
    * provided {@link Criteria} and then tests for round-trip fidelity as well.
    */
@@ -445,7 +445,7 @@ public class TestMIMEType extends TestCase {
     doRejectionTest("*/plain", IllegalArgumentException.class);
   }
 
-  /**
+  /*
    * test_LWS_# : test suite for correct acceptance and correct rejection of (linear whitespace).
    * Linear white space (LWS) MUST NOT be used between the type and subtype, nor between an
    * attribute and its value.
@@ -519,7 +519,7 @@ public class TestMIMEType extends TestCase {
   // ********************** matches *****************************
   // ************************************************************
 
-  /**
+  /*
    * Test verifies that a specific MIME type matches the same MIME type when the latter is expressed
    * as a {@link String}.
    */
@@ -528,7 +528,7 @@ public class TestMIMEType extends TestCase {
     assertTrue(new MIMEType("text/xml").matches("text/xml"));
   }
 
-  /**
+  /*
    * Test verifies that a specific MIME type matches the same MIME type when the latter is expressed
    * as a {@link MIMEType}.
    */
@@ -543,7 +543,7 @@ public class TestMIMEType extends TestCase {
     assertTrue(new MIMEType("text/*").matches(new MIMEType("text/plain;foo=bar")));
   }
 
-  /**
+  /*
    * Test should succeed since the MIME parameters are being ignored, but it would succeed even if
    * the MIME parameters were being compared.
    */
@@ -552,7 +552,7 @@ public class TestMIMEType extends TestCase {
     assertTrue(new MIMEType("text/xml").matches(new MIMEType("text/xml;foo=bar")));
   }
 
-  /**
+  /*
    * Verifies that the MIME parameters are not compared since the test would fail if they were being
    * compared.
    */
@@ -565,7 +565,7 @@ public class TestMIMEType extends TestCase {
   // ********************** equals ******************************
   // ************************************************************
 
-  /**
+  /*
    * Test helper method for testing the {@link MIMEType#equals( Object o )} implementation.
    *
    * <p>Note: This does NOT accept {@link String} MIME type expressions so that it may be reused as
@@ -588,7 +588,7 @@ public class TestMIMEType extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test helper method for testing the {@link MIMEType#equals( Object o )} implementation.
    *
    * <p>Note: This does NOT accept {@link String} MIME type expressions so that it may be reused as
@@ -643,7 +643,7 @@ public class TestMIMEType extends TestCase {
     doNotEqualTest(new MIMEType("text/xml"), new MIMEType("application/xml"));
   }
 
-  /**
+  /*
    * This case shows that the default parameter "q" is NOT recognized by the base {@link MIMEType}
    * class. However that default parameter SHOULD be recognized by the {@link AcceptMIMEType} -
    * which is tested by {@link TestAcceptMIMEType}.
@@ -656,7 +656,7 @@ public class TestMIMEType extends TestCase {
   // ************************ spans *****************************
   // ************************************************************
 
-  /**
+  /*
    * Test helper method for testing the {@link MIMEType#spans( Object o, boolean compareParams )}
    * implementation.
    *
@@ -705,7 +705,7 @@ public class TestMIMEType extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test helper method for testing the {@link MIMEType#spans( Object o, boolean compareParams )}
    * implementation.
    *
@@ -747,7 +747,7 @@ public class TestMIMEType extends TestCase {
         );
   }
 
-  /**
+  /*
    * Tests that <code>A spans B</code> and <code>B spans A</code> when <code>A == B</code> and A and
    * B both specify the same MIME type parameters (same MIME type expressions).
    */
@@ -758,7 +758,7 @@ public class TestMIMEType extends TestCase {
         );
   }
 
-  /**
+  /*
    * Tests that the spans implementation correctly ignores the specified MIME type parameters when
    * we ask it to.
    */
@@ -769,7 +769,7 @@ public class TestMIMEType extends TestCase {
         );
   }
 
-  /**
+  /*
    * Tests that <code>A spans B</code> and that <code>B does not
    * span A</code> when B has same type and subtype but also specifies one or more parameters which
    * are not included in A.
@@ -800,7 +800,7 @@ public class TestMIMEType extends TestCase {
         (new MIMEType("text/*;a=a;b=a"), new MIMEType("text/xml;a=a"), true);
   }
 
-  /**
+  /*
    * This test series is based on an example in RFC 1616, section 14.1, page 63. The example is
    * meant to demonstrate the meaning of increasing specificity (or increasing generality) for
    * media-ranges and is presented in conjunction with the section on the <code>Accept</code>

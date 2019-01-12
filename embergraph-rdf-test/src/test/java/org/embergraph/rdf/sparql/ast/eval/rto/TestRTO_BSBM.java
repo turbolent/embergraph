@@ -29,8 +29,8 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
-/**
- * Data driven test suite for the Runtime Query Optimizer (RTO) using BSBM data and queries based on
+/*
+* Data driven test suite for the Runtime Query Optimizer (RTO) using BSBM data and queries based on
  * BSBM.
  *
  * <p>Note: BSBM is parameterized. We can generate more queries against the pc100 data set easily
@@ -190,7 +190,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
     assertSameJoinOrder(expected, helper);
   }
 
-  /**
+  /*
    * BSBM Q4 against pc100.
    *
    * <p>Note: This query has TWO join groups that are sufficiently complex to run the RTO. However,
@@ -217,7 +217,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
     assertSameJoinOrder(expected, helper);
   }
 
-  /**
+  /*
    * BSBM Q5 on the pc100 data set.
    *
    * <p>FIXME FAILS if we disallow out of order evaluation when doing cutoff joins.
@@ -274,7 +274,7 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
     assertSameJoinOrder(expectedOrders, helper);
   }
 
-  /**
+  /*
    * A modified version BSBM Q7 on pc100 which is the simplest form of the query that causes the RTO
    * to fail with the "No stats" assertion error. This is basically just an OPTIONAL {} join group.
    *
@@ -376,8 +376,8 @@ public class TestRTO_BSBM extends AbstractRTOTestCase {
    * larger runs -- OOM on laptop when running under Eclipse.
    */
 
-  //    /**
-  //     * BSBM Q1 against pc1000 (OOM on laptop).
+  //    /*
+//     * BSBM Q1 against pc1000 (OOM on laptop).
   //     */
   //    public void _test_BSBM_Q1_pc1000() throws Exception {
   //

@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Contains methods for conveniently generating pseudo-random numbers from special distributions
+/*
+* Contains methods for conveniently generating pseudo-random numbers from special distributions
  * such as the Burr, Cauchy, Erlang, Geometric, Lambda, Laplace, Logistic, Weibull, etc.
  *
  * <p><b>About this class:</b>
@@ -43,7 +43,7 @@ public class Distributions {
   protected Distributions() {
     throw new RuntimeException("Non instantiable");
   }
-  /**
+  /*
    * Returns the probability distribution function of the discrete geometric distribution.
    *
    * <p><tt>p(k) = p * (1-p)^k</tt> for <tt> k &gt;= 0</tt>.
@@ -57,7 +57,7 @@ public class Distributions {
     if (k < 0) throw new IllegalArgumentException();
     return p * Math.pow(1 - p, k);
   }
-  /**
+  /*
    * Returns a random number from the Burr II, VII, VIII, X Distributions.
    *
    * <p><b>Implementation:</b> Inversion method. This is a port of <tt>burr1.c</tt> from the <A
@@ -72,7 +72,7 @@ public class Distributions {
    * @param nr the number of the burr distribution (e.g. 2,7,8,10).
    */
   public static double nextBurr1(double r, int nr, RandomEngine randomGenerator) {
-    /**
+    /*
      * **************************************************************** * Burr II, VII, VIII, X
      * Distributions - Inversion * *
      * ***************************************************************** * FUNCTION : - burr1
@@ -103,7 +103,7 @@ public class Distributions {
     }
     return 0;
   }
-  /**
+  /*
    * Returns a random number from the Burr III, IV, V, VI, IX, XII distributions.
    *
    * <p><b>Implementation:</b> Inversion method. This is a port of <tt>burr2.c</tt> from the <A
@@ -119,7 +119,7 @@ public class Distributions {
    * @param nr the number of the burr distribution (e.g. 3,4,5,6,9,12).
    */
   public static double nextBurr2(double r, double k, int nr, RandomEngine randomGenerator) {
-    /**
+    /*
      * **************************************************************** * Burr III, IV, V, VI, IX,
      * XII Distribution - Inversion * *
      * ***************************************************************** * FUNCTION : - burr2
@@ -161,7 +161,7 @@ public class Distributions {
     }
     return 0;
   }
-  /**
+  /*
    * Returns a cauchy distributed random number from the standard Cauchy distribution C(0,1). <A
    * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node25.html#SECTION000250000000000000000"> math
    * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosc.html#Cauchy Distribution">
@@ -189,7 +189,7 @@ public class Distributions {
     for (int i = 0; i < k; i++) prod *= randomGenerator.raw();
     return -Math.log(prod) / a;
   }
-  /**
+  /*
    * Returns a discrete geometric distributed random number; <A
    * HREF="http://www.statsoft.com/textbook/glosf.html#Geometric Distribution">Definition</A>.
    *
@@ -202,7 +202,7 @@ public class Distributions {
    *     <p>
    */
   public static int nextGeometric(double p, RandomEngine randomGenerator) {
-    /**
+    /*
      * **************************************************************** * Geometric Distribution -
      * Inversion * * ***************************************************************** * On
      * generating random numbers of a discrete distribution by * Inversion normally sequential
@@ -219,7 +219,7 @@ public class Distributions {
     double u = randomGenerator.raw();
     return (int) (Math.log(u) / Math.log(1.0 - p));
   }
-  /**
+  /*
    * Returns a lambda distributed random number with parameters l3 and l4.
    *
    * <p><b>Implementation:</b> Inversion method. This is a port of <tt>lamin.c</tt> from the <A
@@ -240,7 +240,7 @@ public class Distributions {
     double x = l_sign * (Math.exp(Math.log(u) * l3) - Math.exp(Math.log(1.0 - u) * l4));
     return x;
   }
-  /**
+  /*
    * Returns a Laplace (Double Exponential) distributed random number from the standard Laplace
    * distribution L(0,1).
    *
@@ -257,7 +257,7 @@ public class Distributions {
     if (u > 0) return -Math.log(1.0 - u);
     else return Math.log(1.0 + u);
   }
-  /**
+  /*
    * Returns a random number from the standard Logistic distribution Log(0,1).
    *
    * <p><b>Implementation:</b> Inversion method. This is a port of <tt>login.c</tt> from the <A
@@ -267,7 +267,7 @@ public class Distributions {
     double u = randomGenerator.raw();
     return (-Math.log(1.0 / u - 1.0));
   }
-  /**
+  /*
    * Returns a power-law distributed random number with the given exponent and lower cutoff.
    *
    * @param alpha the exponent
@@ -276,7 +276,7 @@ public class Distributions {
   public static double nextPowLaw(double alpha, double cut, RandomEngine randomGenerator) {
     return cut * Math.pow(randomGenerator.raw(), 1.0 / (alpha + 1.0));
   }
-  /**
+  /*
    * Returns a random number from the standard Triangular distribution in (-1,1).
    *
    * <p><b>Implementation:</b> Inversion method. This is a port of <tt>tra.c</tt> from the <A
@@ -285,7 +285,7 @@ public class Distributions {
    * <p>
    */
   public static double nextTriangular(RandomEngine randomGenerator) {
-    /**
+    /*
      * **************************************************************** * Triangular Distribution -
      * Inversion: x = +-(1-sqrt(u)) * *
      * ***************************************************************** * FUNCTION : - tra samples
@@ -298,7 +298,7 @@ public class Distributions {
     if (u <= 0.5) return (Math.sqrt(2.0 * u) - 1.0); /* -1 <= x <= 0 */
     else return (1.0 - Math.sqrt(2.0 * (1.0 - u))); /*  0 <= x <= 1 */
   }
-  /**
+  /*
    * Returns a weibull distributed random number. Polar method. See Simulation, Modelling & Analysis
    * by Law & Kelton, pp259
    */
@@ -307,7 +307,7 @@ public class Distributions {
     // See Simulation, Modelling & Analysis by Law & Kelton, pp259
     return Math.pow(beta * (-Math.log(1.0 - randomGenerator.raw())), 1.0 / alpha);
   }
-  /**
+  /*
    * Returns a zipfian distributed random number with the given skew.
    *
    * <p>Algorithm from page 551 of: Devroye, Luc (1986) `Non-uniform random variate generation',

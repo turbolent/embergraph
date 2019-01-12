@@ -12,8 +12,8 @@ import cern.colt.function.LongObjectProcedure;
 import cern.colt.function.LongProcedure;
 import cern.colt.list.LongArrayList;
 import cern.colt.list.ObjectArrayList;
-/**
- * Abstract base class for hash maps holding (key,value) associations of type
+/*
+* Abstract base class for hash maps holding (key,value) associations of type
  * <tt>(long-->Object)</tt>. First see the <a href="package-summary.html">package summary</a> and
  * javadoc <a href="package-tree.html">tree view</a> to get the broad picture.
  *
@@ -30,7 +30,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
   // public static int hashCollisions = 0; // for debug only
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected AbstractLongObjectMap() {}
-  /**
+  /*
    * Returns <tt>true</tt> if the receiver contains the specified key.
    *
    * @return <tt>true</tt> if the receiver contains the specified key.
@@ -43,7 +43,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
           }
         });
   }
-  /**
+  /*
    * Returns <tt>true</tt> if the receiver contains the specified value. Tests for identity.
    *
    * @return <tt>true</tt> if the receiver contains the specified value.
@@ -56,7 +56,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
           }
         });
   }
-  /**
+  /*
    * Returns a deep copy of the receiver; uses <code>clone()</code> and casts the result.
    *
    * @return a deep copy of the receiver.
@@ -64,7 +64,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
   public AbstractLongObjectMap copy() {
     return (AbstractLongObjectMap) clone();
   }
-  /**
+  /*
    * Compares the specified object with this map for equality. Returns <tt>true</tt> if the given
    * object is also a map and the two maps represent the same mappings. More formally, two maps
    * <tt>m1</tt> and <tt>m2</tt> represent the same mappings iff
@@ -115,7 +115,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
               }
             });
   }
-  /**
+  /*
    * Applies a procedure to each key of the receiver, if any. Note: Iterates over the keys in no
    * particular order. Subclasses can define a particular order, for example, "sorted by key". All
    * methods which <i>can</i> be expressed in terms of this method (most methods can) <i>must
@@ -129,7 +129,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
    *     <tt>true</tt> otherwise.
    */
   public abstract boolean forEachKey(LongProcedure procedure);
-  /**
+  /*
    * Applies a procedure to each (key,value) pair of the receiver, if any. Iteration order is
    * guaranteed to be <i>identical</i> to the order used by method {@link
    * #forEachKey(LongProcedure)}.
@@ -147,7 +147,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
           }
         });
   }
-  /**
+  /*
    * Returns the value associated with the specified key. It is often a good idea to first check
    * with {@link #containsKey(long)} whether the given key has a value associated or not, i.e.
    * whether there exists an association for the given key or not.
@@ -156,7 +156,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
    * @return the value associated with the specified key; <tt>null</tt> if no such key is present.
    */
   public abstract Object get(long key);
-  /**
+  /*
    * Returns the first key the given value is associated with. It is often a good idea to first
    * check with {@link #containsValue(Object)} whether there exists an association from a key to
    * this value. Search order is guaranteed to be <i>identical</i> to the order used by method
@@ -180,7 +180,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     if (notFound) return Long.MIN_VALUE;
     return foundKey[0];
   }
-  /**
+  /*
    * Returns a list filled with all keys contained in the receiver. The returned list has a size
    * that equals <tt>this.size()</tt>. Iteration order is guaranteed to be <i>identical</i> to the
    * order used by method {@link #forEachKey(LongProcedure)}.
@@ -194,7 +194,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     keys(list);
     return list;
   }
-  /**
+  /*
    * Fills all keys contained in the receiver into the specified list. Fills the list, starting at
    * index 0. After this call returns the specified list has a new size that equals
    * <tt>this.size()</tt>. Iteration order is guaranteed to be <i>identical</i> to the order used by
@@ -214,7 +214,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
           }
         });
   }
-  /**
+  /*
    * Fills all keys <i>sorted ascending by their associated value</i> into the specified list. Fills
    * into the list, starting at index 0. After this call returns the specified list has a new size
    * that equals <tt>this.size()</tt>. Primary sort criterium is "value", secondary sort criterium
@@ -228,7 +228,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
   public void keysSortedByValue(final LongArrayList keyList) {
     pairsSortedByValue(keyList, new ObjectArrayList(size()));
   }
-  /**
+  /*
    * Fills all pairs satisfying a given condition into the specified lists. Fills into the lists,
    * starting at index 0. After this call returns the specified lists both have a new size, the
    * number of pairs satisfying the condition. Iteration order is guaranteed to be <i>identical</i>
@@ -266,7 +266,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
           }
         });
   }
-  /**
+  /*
    * Fills all keys and values <i>sorted ascending by key</i> into the specified lists. Fills into
    * the lists, starting at index 0. After this call returns the specified lists both have a new
    * size that equals <tt>this.size()</tt>.
@@ -285,7 +285,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
       valueList.setQuick(i, get(keyList.getQuick(i)));
     }
   }
-  /**
+  /*
    * Fills all keys and values <i>sorted ascending by value according to natural ordering</i> into
    * the specified lists. Fills into the lists, starting at index 0. After this call returns the
    * specified lists both have a new size that equals <tt>this.size()</tt>. Primary sort criterium
@@ -321,7 +321,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     cern.colt.function.IntComparator comp =
         new cern.colt.function.IntComparator() {
           public int compare(int a, int b) {
-            int ab = ((Comparable) v[a]).compareTo((Comparable) v[b]);
+            int ab = ((Comparable) v[a]).compareTo(v[b]);
             return ab < 0 ? -1 : ab > 0 ? 1 : (k[a] < k[b] ? -1 : (k[a] == k[b] ? 0 : 1));
             // return v[a]<v[b] ? -1 : v[a]>v[b] ? 1 : (k[a]<k[b] ? -1 : (k[a]==k[b] ? 0 : 1));
           }
@@ -329,7 +329,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
 
     cern.colt.GenericSorting.quickSort(0, keyList.size(), comp, swapper);
   }
-  /**
+  /*
    * Associates the given key with the given value. Replaces any old <tt>(key,someOtherValue)</tt>
    * association, if existing.
    *
@@ -340,14 +340,14 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
    *     associated value.
    */
   public abstract boolean put(long key, Object value);
-  /**
+  /*
    * Removes the given key with its associated element from the receiver, if present.
    *
    * @param key the key to be removed from the receiver.
    * @return <tt>true</tt> if the receiver contained the specified key, <tt>false</tt> otherwise.
    */
   public abstract boolean removeKey(long key);
-  /**
+  /*
    * Returns a string representation of the receiver, containing the String representation of each
    * key-value pair, sorted ascending by key.
    */
@@ -360,15 +360,15 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     int maxIndex = theKeys.size() - 1;
     for (int i = 0; i <= maxIndex; i++) {
       long key = theKeys.get(i);
-      buf.append(String.valueOf(key));
+      buf.append(key);
       buf.append("->");
-      buf.append(String.valueOf(get(key)));
+      buf.append(get(key));
       if (i < maxIndex) buf.append(", ");
     }
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the receiver, containing the String representation of each
    * key-value pair, sorted ascending by value, according to natural ordering.
    */
@@ -381,15 +381,15 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     int maxIndex = theKeys.size() - 1;
     for (int i = 0; i <= maxIndex; i++) {
       long key = theKeys.get(i);
-      buf.append(String.valueOf(key));
+      buf.append(key);
       buf.append("->");
-      buf.append(String.valueOf(get(key)));
+      buf.append(get(key));
       if (i < maxIndex) buf.append(", ");
     }
     buf.append("]");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a list filled with all values contained in the receiver. The returned list has a size
    * that equals <tt>this.size()</tt>. Iteration order is guaranteed to be <i>identical</i> to the
    * order used by method {@link #forEachKey(LongProcedure)}.
@@ -403,7 +403,7 @@ public abstract class AbstractLongObjectMap extends AbstractMap {
     values(list);
     return list;
   }
-  /**
+  /*
    * Fills all values contained in the receiver into the specified list. Fills the list, starting at
    * index 0. After this call returns the specified list has a new size that equals
    * <tt>this.size()</tt>. Iteration order is guaranteed to be <i>identical</i> to the order used by

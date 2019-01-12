@@ -30,8 +30,8 @@ import org.embergraph.quorum.QuorumMember;
 import org.embergraph.quorum.QuorumStateChangeListenerBase;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * {@link QuorumRead} implementation.
+/*
+* {@link QuorumRead} implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -52,7 +52,7 @@ public class QuorumReadImpl<S extends HAReadGlue> extends QuorumStateChangeListe
   /** Used to implement a round-robin policy. */
   private final AtomicInteger nextIndex = new AtomicInteger();
 
-  /**
+  /*
    * Return the {@link UUID} of the joined service to which this service will direct a failover
    * read. The default implementation uses a round-robin policy.
    *
@@ -86,7 +86,7 @@ public class QuorumReadImpl<S extends HAReadGlue> extends QuorumStateChangeListe
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @todo If this blocks awaiting a quorum, then make sure that it is not invoked in a context

@@ -33,8 +33,8 @@ import org.openrdf.repository.sail.SailRepositoryConnection;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.memory.MemoryStore;
 
-/**
- * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
+/*
+* @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestSesameMultiGraphs {

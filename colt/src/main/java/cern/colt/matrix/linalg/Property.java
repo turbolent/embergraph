@@ -11,8 +11,10 @@ package cern.colt.matrix.linalg;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
-/**
- * Tests matrices for linear algebraic properties (equality, tridiagonality, symmetry, singularity,
+import cern.jet.math.Functions;
+
+/*
+* Tests matrices for linear algebraic properties (equality, tridiagonality, symmetry, singularity,
  * etc).
  *
  * <p>Except where explicitly indicated, all methods involving equality tests (<tt>==</tt>) allow
@@ -204,7 +206,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return buf.toString();
   }
-  /**
+  /*
    * Checks whether the given matrix <tt>A</tt> is <i>rectangular</i>.
    *
    * @throws IllegalArgumentException if <tt>A.rows() < A.columns()</tt>.
@@ -215,7 +217,7 @@ public class Property extends cern.colt.PersistentObject {
           "Matrix must be rectangular: " + cern.colt.matrix.doublealgo.Formatter.shape(A));
     }
   }
-  /**
+  /*
    * Checks whether the given matrix <tt>A</tt> is <i>square</i>.
    *
    * @throws IllegalArgumentException if <tt>A.rows() != A.columns()</tt>.
@@ -229,7 +231,7 @@ public class Property extends cern.colt.PersistentObject {
   public double density(DoubleMatrix2D A) {
     return A.cardinality() / (double) A.size();
   }
-  /**
+  /*
    * Returns whether all cells of the given matrix <tt>A</tt> are equal to the given value. The
    * result is <tt>true</tt> if and only if <tt>A != null</tt> and <tt>! (Math.abs(value - A[i]) >
    * tolerance())</tt> holds for all coordinates.
@@ -251,7 +253,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * Returns whether both given matrices <tt>A</tt> and <tt>B</tt> are equal. The result is
    * <tt>true</tt> if <tt>A==B</tt>. Otherwise, the result is <tt>true</tt> if and only if both
    * arguments are <tt>!= null</tt>, have the same size and <tt>! (Math.abs(A[i] - B[i]) >
@@ -279,7 +281,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * Returns whether all cells of the given matrix <tt>A</tt> are equal to the given value. The
    * result is <tt>true</tt> if and only if <tt>A != null</tt> and <tt>! (Math.abs(value -
    * A[row,col]) > tolerance())</tt> holds for all coordinates.
@@ -306,7 +308,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * Returns whether both given matrices <tt>A</tt> and <tt>B</tt> are equal. The result is
    * <tt>true</tt> if <tt>A==B</tt>. Otherwise, the result is <tt>true</tt> if and only if both
    * arguments are <tt>!= null</tt>, have the same number of columns and rows and <tt>!
@@ -337,7 +339,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * Returns whether all cells of the given matrix <tt>A</tt> are equal to the given value. The
    * result is <tt>true</tt> if and only if <tt>A != null</tt> and <tt>! (Math.abs(value -
    * A[slice,row,col]) > tolerance())</tt> holds for all coordinates.
@@ -366,7 +368,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * Returns whether both given matrices <tt>A</tt> and <tt>B</tt> are equal. The result is
    * <tt>true</tt> if <tt>A==B</tt>. Otherwise, the result is <tt>true</tt> if and only if both
    * arguments are <tt>!= null</tt>, have the same number of columns, rows and slices, and <tt>!
@@ -401,7 +403,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * Modifies the given matrix square matrix <tt>A</tt> such that it is diagonally dominant by row
    * and column, hence non-singular, hence invertible. For testing purposes only.
    *
@@ -416,8 +418,8 @@ public class Property extends cern.colt.PersistentObject {
       A.setQuick(i, i, 0);
     }
     for (int i = min; --i >= 0; ) {
-      double rowSum = A.viewRow(i).aggregate(F.plus, F.abs);
-      double colSum = A.viewColumn(i).aggregate(F.plus, F.abs);
+      double rowSum = A.viewRow(i).aggregate(Functions.plus, Functions.abs);
+      double colSum = A.viewColumn(i).aggregate(Functions.plus, Functions.abs);
       A.setQuick(i, i, Math.max(rowSum, colSum) + i + 1);
     }
   }
@@ -425,7 +427,7 @@ public class Property extends cern.colt.PersistentObject {
   protected static String get(cern.colt.list.ObjectArrayList list, int index) {
     return ((String) list.get(index));
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>diagonal</i> if <tt>A[i,j] == 0</tt> whenever <tt>i != j</tt>. Matrix
    * may but need not be square.
    */
@@ -441,7 +443,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>diagonally dominant by column</i> if the absolute value of each
    * diagonal element is larger than the sum of the absolute values of the off-diagonal elements in
    * the corresponding column. <tt>returns true if for all i: abs(A[i,i]) &gt; Sum(abs(A[j,i])); j
@@ -456,11 +458,11 @@ public class Property extends cern.colt.PersistentObject {
     for (int i = min; --i >= 0; ) {
       double diag = Math.abs(A.getQuick(i, i));
       diag += diag;
-      if (diag <= A.viewColumn(i).aggregate(F.plus, F.abs)) return false;
+      if (diag <= A.viewColumn(i).aggregate(Functions.plus, Functions.abs)) return false;
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>diagonally dominant by row</i> if the absolute value of each diagonal
    * element is larger than the sum of the absolute values of the off-diagonal elements in the
    * corresponding row. <tt>returns true if for all i: abs(A[i,i]) &gt; Sum(abs(A[i,j])); j !=
@@ -475,11 +477,11 @@ public class Property extends cern.colt.PersistentObject {
     for (int i = min; --i >= 0; ) {
       double diag = Math.abs(A.getQuick(i, i));
       diag += diag;
-      if (diag <= A.viewRow(i).aggregate(F.plus, F.abs)) return false;
+      if (diag <= A.viewRow(i).aggregate(Functions.plus, Functions.abs)) return false;
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is an <i>identity</i> matrix if <tt>A[i,i] == 1</tt> and all other cells
    * are zero. Matrix may but need not be square.
    */
@@ -497,7 +499,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>lower bidiagonal</i> if <tt>A[i,j]==0</tt> unless <tt>i==j ||
    * i==j+1</tt>. Matrix may but need not be square.
    */
@@ -515,7 +517,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>lower triangular</i> if <tt>A[i,j]==0</tt> whenever <tt>i &lt;
    * j</tt>. Matrix may but need not be square.
    */
@@ -531,7 +533,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>non-negative</i> if <tt>A[i,j] &gt;= 0</tt> holds for all cells.
    *
    * <p>Note: Ignores tolerance.
@@ -546,7 +548,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A square matrix <tt>A</tt> is <i>orthogonal</i> if <tt>A*transpose(A) = I</tt>.
    *
    * @throws IllegalArgumentException if <tt>!isSquare(A)</tt>.
@@ -557,7 +559,7 @@ public class Property extends cern.colt.PersistentObject {
         A.zMult(A, null, 1, 0, false, true),
         cern.colt.matrix.DoubleFactory2D.dense.identity(A.rows()));
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>positive</i> if <tt>A[i,j] &gt; 0</tt> holds for all cells.
    *
    * <p>Note: Ignores tolerance.
@@ -572,13 +574,13 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>singular</i> if it has no inverse, that is, iff <tt>det(A)==0</tt>.
    */
   public boolean isSingular(DoubleMatrix2D A) {
     return !(Math.abs(Algebra.DEFAULT.det(A)) >= tolerance());
   }
-  /**
+  /*
    * A square matrix <tt>A</tt> is <i>skew-symmetric</i> if <tt>A = -transpose(A)</tt>, that is
    * <tt>A[i,j] == -A[j,i]</tt>.
    *
@@ -601,7 +603,7 @@ public class Property extends cern.colt.PersistentObject {
   public boolean isSquare(DoubleMatrix2D A) {
     return A.rows() == A.columns();
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>strictly lower triangular</i> if <tt>A[i,j]==0</tt> whenever <tt>i
    * &lt;= j</tt>. Matrix may but need not be square.
    */
@@ -617,7 +619,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>strictly triangular</i> if it is triangular and its diagonal elements
    * all equal 0. Matrix may but need not be square.
    */
@@ -631,7 +633,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>strictly upper triangular</i> if <tt>A[i,j]==0</tt> whenever <tt>i
    * &gt;= j</tt>. Matrix may but need not be square.
    */
@@ -647,7 +649,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>symmetric</i> if <tt>A = tranpose(A)</tt>, that is <tt>A[i,j] ==
    * A[j,i]</tt>.
    *
@@ -657,14 +659,14 @@ public class Property extends cern.colt.PersistentObject {
     checkSquare(A);
     return equals(A, A.viewDice());
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>triangular</i> iff it is either upper or lower triangular. Matrix may
    * but need not be square.
    */
   public boolean isTriangular(DoubleMatrix2D A) {
     return isLowerTriangular(A) || isUpperTriangular(A);
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>tridiagonal</i> if <tt>A[i,j]==0</tt> whenever <tt>Math.abs(i-j) >
    * 1</tt>. Matrix may but need not be square.
    */
@@ -682,7 +684,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>unit triangular</i> if it is triangular and its diagonal elements all
    * equal 1. Matrix may but need not be square.
    */
@@ -696,7 +698,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>upper bidiagonal</i> if <tt>A[i,j]==0</tt> unless <tt>i==j ||
    * i==j-1</tt>. Matrix may but need not be square.
    */
@@ -714,7 +716,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return true;
   }
-  /**
+  /*
    * A matrix <tt>A</tt> is <i>upper triangular</i> if <tt>A[i,j]==0</tt> whenever <tt>i &gt;
    * j</tt>. Matrix may but need not be square.
    */
@@ -734,7 +736,7 @@ public class Property extends cern.colt.PersistentObject {
   public boolean isZero(DoubleMatrix2D A) {
     return equals(A, 0);
   }
-  /**
+  /*
    * The <i>lower bandwidth</i> of a square matrix <tt>A</tt> is the maximum <tt>i-j</tt> for which
    * <tt>A[i,j]</tt> is nonzero and <tt>i &gt; j</tt>. A <i>banded</i> matrix has a "band" about the
    * diagonal. Diagonal, tridiagonal and triangular matrices are special cases.
@@ -759,7 +761,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return 0;
   }
-  /**
+  /*
    * Returns the <i>semi-bandwidth</i> of the given square matrix <tt>A</tt>. A <i>banded</i> matrix
    * has a "band" about the diagonal. It is a matrix with all cells equal to zero, with the possible
    * exception of the cells along the diagonal line, the <tt>k</tt> diagonal lines above the
@@ -918,7 +920,7 @@ public class Property extends cern.colt.PersistentObject {
     }
     return 1;
   }
-  /**
+  /*
    * Sets the tolerance to <tt>Math.abs(newTolerance)</tt>.
    *
    * @throws UnsupportedOperationException if <tt>this==DEFAULT || this==ZERO || this==TWELVE</tt>.
@@ -934,7 +936,7 @@ public class Property extends cern.colt.PersistentObject {
   public double tolerance() {
     return tolerance;
   }
-  /**
+  /*
    * Returns summary information about the given matrix <tt>A</tt>. That is a String with
    * (propertyName, propertyValue) pairs. Useful for debugging or to quickly get the rough picture
    * of a matrix. For example,
@@ -1200,7 +1202,7 @@ public class Property extends cern.colt.PersistentObject {
 
     return buf.toString();
   }
-  /**
+  /*
    * The <i>upper bandwidth</i> of a square matrix <tt>A</tt> is the maximum <tt>j-i</tt> for which
    * <tt>A[i,j]</tt> is nonzero and <tt>j &gt; i</tt>. A <i>banded</i> matrix has a "band" about the
    * diagonal. Diagonal, tridiagonal and triangular matrices are special cases.

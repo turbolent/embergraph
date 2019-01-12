@@ -33,8 +33,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.io.ByteCountInputStream;
 import org.embergraph.io.ByteCountOutputStream;
 
-/**
- * BOCU-1 version.
+/*
+* BOCU-1 version.
  *
  * @see http://userguide.icu-project.org/conversion/compression
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

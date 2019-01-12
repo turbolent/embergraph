@@ -30,8 +30,8 @@ import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.test.MockTermIdFactory;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
@@ -48,7 +48,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
   private MockTermIdFactory termIdFactory;
 
-  /**
+  /*
    * Decode a key from one of the statement indices. The components of the key are returned in the
    * order in which they appear in the key. The caller must reorder those components using their
    * knowledge of which index is being decoded in order to reconstruct the corresponding RDF
@@ -63,7 +63,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
     return IVUtility.decode(key, arity);
   }
 
-  /**
+  /*
    * Encodes an array of {@link IV}s and then decodes them and verifies that the decoded values are
    * equal-to the original values.
    *
@@ -102,7 +102,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "values differ @ index="
-                  + Integer.toString(i)
+                  + i
                   + " : expected="
                   + expected
                   + ", actual="
@@ -113,7 +113,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "hashCodes differ @ index="
-                  + Integer.toString(i)
+                  + i
                   + " : expected="
                   + expected
                   + "(hash="
@@ -149,7 +149,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "hashCodes differ @ index="
-                  + Integer.toString(i)
+                  + i
                   + " : expected="
                   + expected
                   + "(hash="
@@ -183,7 +183,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "hashCodes differ @ index="
-                  + Integer.toString(i)
+                  + i
                   + " : expected="
                   + expected
                   + "(hash="
@@ -217,7 +217,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "hashCodes differ @ index="
-                  + Integer.toString(i)
+                  + i
                   + " : expected="
                   + expected
                   + "(hash="
@@ -255,7 +255,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
     return termIdFactory.newTermId(vte);
   }
 
-  /**
+  /*
    * Verify the comparator for some set of {@link IV}s.
    *
    * @param e
@@ -303,8 +303,8 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
       if (!expectedIV.equals(actualIV)) {
 
-        /*
-         * The IV's Comparable does not agree with the required unsigned
+      /*
+       * The IV's Comparable does not agree with the required unsigned
          * byte[] ordering semantics.
          */
 

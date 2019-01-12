@@ -25,8 +25,8 @@ import it.unimi.dsi.fastutil.objects.ObjectArrays;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * A multiple input stream.
+/*
+* A multiple input stream.
  *
  * <p>Instances of this class encapsulate a sequence of input streams. When one of the streams is
  * exhausted, the multiple stream behaves as if on an end of file. However, after calling {@link
@@ -45,7 +45,7 @@ public class MultipleInputStream extends InputStream {
   /** The current input stream. */
   private InputStream currStream;
 
-  /**
+  /*
    * Creates a new multiple input stream by encapsulating a nonempty fragment of an array of input
    * streams.
    *
@@ -64,7 +64,7 @@ public class MultipleInputStream extends InputStream {
     currStream = inputStream[curr];
   }
 
-  /**
+  /*
    * Returns an input stream encapsulating a nonempty fragment of an array of input streams.
    *
    * @param inputStream an array of input streams, that will be encapsulated.
@@ -79,7 +79,7 @@ public class MultipleInputStream extends InputStream {
     return new MultipleInputStream(inputStream, offset, length);
   }
 
-  /**
+  /*
    * Returns an input stream encapsulating a nonempty array of input streams.
    *
    * <p>Note that if <code>inputStream.length</code> is 1 this method will return the only stream

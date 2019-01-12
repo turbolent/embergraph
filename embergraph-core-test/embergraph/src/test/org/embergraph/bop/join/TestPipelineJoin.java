@@ -55,8 +55,8 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
-/**
- * Unit tests for the {@link PipelineJoin} operator.
+/*
+* Unit tests for the {@link PipelineJoin} operator.
  *
  * <p>Note: The logic to map binding sets over shards is tested independently.
  *
@@ -131,7 +131,7 @@ public class TestPipelineJoin extends TestCase2 {
     super.tearDown();
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single {@link IBindingSet}.
    *
    * @param bindingSet the binding set.
@@ -143,7 +143,7 @@ public class TestPipelineJoin extends TestCase2 {
         new IBindingSet[][] {new IBindingSet[] {bindingSet}});
   }
 
-  /**
+  /*
    * Unit test for a pipeline join without shared variables and fed by a single empty binding set.
    *
    * @throws ExecutionException
@@ -159,11 +159,9 @@ public class TestPipelineJoin extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
         new PipelineJoin<E>(
@@ -225,7 +223,7 @@ public class TestPipelineJoin extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Unit test for a join without shared variables with multiple source solutions.
    *
    * @throws InterruptedException
@@ -246,11 +244,9 @@ public class TestPipelineJoin extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
         new PipelineJoin<E>(
@@ -331,7 +327,7 @@ public class TestPipelineJoin extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Unit test for a join with shared variables with multiple source solutions (the source solutions
    * already have a bound value for the shared variable so the join turns into a point test).
    *
@@ -348,11 +344,9 @@ public class TestPipelineJoin extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
         new PipelineJoin<E>(
@@ -423,7 +417,7 @@ public class TestPipelineJoin extends TestCase2 {
     assertEquals(2L, stats.accessPathUnitsIn.get());
   }
 
-  /**
+  /*
    * Unit test for a pipeline join in which we expect duplicate access paths to be eliminated.
    *
    * @throws ExecutionException
@@ -443,11 +437,9 @@ public class TestPipelineJoin extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
         new PipelineJoin<E>(
@@ -522,7 +514,7 @@ public class TestPipelineJoin extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Unit test for a join with an {@link IConstraint}. The constraint is used to filter out one of
    * the solutions where "Mary" is the present in the first column of the relation.
    *
@@ -550,11 +542,9 @@ public class TestPipelineJoin extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), y},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
         new PipelineJoin<E>(
@@ -617,7 +607,7 @@ public class TestPipelineJoin extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Unit test for a join which selects a subset of the variables to pass along.
    *
    * <p>Note: The order of the expected solutions for this test depends on the order of the keys
@@ -647,11 +637,9 @@ public class TestPipelineJoin extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
         new PipelineJoin<E>(
@@ -724,7 +712,7 @@ public class TestPipelineJoin extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Unit tests for optional joins. For an optional join, an alternative sink may be specified for
    * the join. When specified, it is used if the join fails (if not specified, the binding sets
    * which do not join are forwarded to the primary sink). Binding sets which join go to the primary
@@ -749,12 +737,10 @@ public class TestPipelineJoin extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), x},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
         new PipelineJoin<E>(
@@ -831,7 +817,7 @@ public class TestPipelineJoin extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Unit test for an optional {@link PipelineJoin} when the {@link BOpContext#getSink2()
    * alternative sink} is specified.
    *
@@ -854,12 +840,10 @@ public class TestPipelineJoin extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), x},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
         new PipelineJoin<E>(
@@ -946,7 +930,7 @@ public class TestPipelineJoin extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Unit tests for optional joins with a constraint. The constraint is applied to test each
    * solution which joins. Solutions which do not join, or which join but fail the constraint, are
    * passed along as "optional" solutions.
@@ -965,12 +949,10 @@ public class TestPipelineJoin extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), x},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> query =
         new PipelineJoin<E>(

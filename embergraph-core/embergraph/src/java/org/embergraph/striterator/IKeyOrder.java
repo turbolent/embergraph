@@ -26,8 +26,8 @@ import org.embergraph.bop.IElement;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.keys.IKeyBuilder;
 
-/**
- * An interface representing the natural traversal orders for the different indices for some class
+/*
+* An interface representing the natural traversal orders for the different indices for some class
  * of relation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +45,7 @@ public interface IKeyOrder<E> {
   /** The base name for the index. */
   String getIndexName();
 
-  /**
+  /*
    * Return the index of the slot in the {@link IPredicate} which appears at the specified position
    * in the key.
    *
@@ -58,7 +58,7 @@ public interface IKeyOrder<E> {
    * New methods.
    */
 
-  /**
+  /*
    * Return the key for an element of the relation.
    *
    * @param keyBuilder The object which will be used to construct the key.
@@ -73,7 +73,7 @@ public interface IKeyOrder<E> {
    */
   byte[] getKey(IKeyBuilder keyBuilder, E element);
 
-  /**
+  /*
    * Return the inclusive lower bound which would be used for a query against this {@link IKeyOrder}
    * for the given {@link IPredicate}.
    *
@@ -84,7 +84,7 @@ public interface IKeyOrder<E> {
    */
   byte[] getFromKey(IKeyBuilder keyBuilder, IPredicate<E> predicate);
 
-  /**
+  /*
    * Return the exclusive upper bound which would be used for a query against this {@link IKeyOrder}
    * for the given {@link IPredicate}.
    *

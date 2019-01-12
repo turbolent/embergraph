@@ -25,8 +25,8 @@ package org.embergraph.service.ndx.pipeline;
 
 import org.embergraph.util.concurrent.Latch;
 
-/**
- * A synchronization aid that allows one or more threads to await asynchronous writes on one or more
+/*
+* A synchronization aid that allows one or more threads to await asynchronous writes on one or more
  * scale-out indices. Once the counter reaches zero, all waiting threads are released. The counter
  * is decremented automatically once a {@link KVOC} has been successfully written onto an index by
  * an asynchronous write operation. This class may also be used as a synchronization aid independent

@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.util.Random;
 import junit.framework.TestCase;
 
-/**
- * Test suite for packing and unpacking unsigned short integers using the {@link DataInputBuffer}
+/*
+* Test suite for packing and unpacking unsigned short integers using the {@link DataInputBuffer}
  * and the {@link ByteArrayBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -48,7 +48,7 @@ public class TestShortPacker extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unpacks a short value.
    *
    * @param expected The expected long value.
@@ -157,10 +157,10 @@ public class TestShortPacker extends TestCase {
   }
 
   private interface ShortGenerator {
-    public short nextShort();
+    short nextShort();
   }
 
-  /**
+  /*
    * All long values in sequence starting from the given start value and using the given increment.
    *
    * @author thompsonbry
@@ -185,7 +185,7 @@ public class TestShortPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * Random short values (16 bits of random short), including negatives, with a uniform
    * distribution.
    *
@@ -204,7 +204,7 @@ public class TestShortPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * Run a large #of pack/unpack operations on a sequence of short values to demonstrate correctness
    * in that sequence. The sequence is the short values from -1 to {@link Short#MAX_VALUE} by one
    * (dense coverage).
@@ -217,7 +217,7 @@ public class TestShortPacker extends TestCase {
     doStressTest(Short.MAX_VALUE + 1, new Sequence((short) -1, (short) 1));
   }
 
-  /**
+  /*
    * Run a large #of random pack/unpack operations to sample the space while showing correctness on
    * those samples.
    *
@@ -229,7 +229,7 @@ public class TestShortPacker extends TestCase {
     doStressTest(0xffff, new RandomShort(new Random()));
   }
 
-  /**
+  /*
    * Returns the #of bytes into which a short value was packed based on the first byte.
    *
    * @param firstByte The first byte.
@@ -247,7 +247,7 @@ public class TestShortPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * Run a stress test. Writes some information of possible interest onto System.err.
    *
    * @param ntrials #of trials.
@@ -326,7 +326,7 @@ public class TestShortPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * This test packs the data using the {@link ShortPacker} and unpacks it using a {@link
    * DataInputBuffer}.
    */
@@ -349,8 +349,8 @@ public class TestShortPacker extends TestCase {
 
       for (int i = 0; i < limit; i++) {
 
-        /*
-         * Random non-negative short integer. 1% of the time we will use
+      /*
+       * Random non-negative short integer. 1% of the time we will use
          * 0 instead.
          */
 
@@ -386,7 +386,7 @@ public class TestShortPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * This test packs the data using a {@link DataOutputBuffer} and unpacks it using the {@link
    * ShortPacker}.
    */
@@ -407,8 +407,8 @@ public class TestShortPacker extends TestCase {
 
       for (int i = 0; i < limit; i++) {
 
-        /*
-         * Random non-negative short integer. 1% of the time we will use
+      /*
+       * Random non-negative short integer. 1% of the time we will use
          * 0L instead.
          */
 

@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random.engine;
 
 import java.util.Date;
-/**
- * Quick medium quality uniform pseudo-random number generator.
+/*
+* Quick medium quality uniform pseudo-random number generator.
  *
  * <p>Produces uniformly distributed <tt>int</tt>'s and <tt>long</tt>'s in the closed intervals
  * <tt>[Integer.MIN_VALUE,Integer.MAX_VALUE]</tt> and <tt>[Long.MIN_VALUE,Long.MAX_VALUE]</tt>,
@@ -42,14 +42,14 @@ import java.util.Date;
 public class DRand extends RandomEngine {
   private int current;
   public static final int DEFAULT_SEED = 1;
-  /**
+  /*
    * Constructs and returns a random number generator with a default seed, which is a
    * <b>constant</b>.
    */
   public DRand() {
     this(DEFAULT_SEED);
   }
-  /**
+  /*
    * Constructs and returns a random number generator with the given seed.
    *
    * @param seed should not be 0, in such a case <tt>DRand.DEFAULT_SEED</tt> is substituted.
@@ -57,7 +57,7 @@ public class DRand extends RandomEngine {
   public DRand(int seed) {
     setSeed(seed);
   }
-  /**
+  /*
    * Constructs and returns a random number generator seeded with the given date.
    *
    * @param d typically <tt>new java.util.Date()</tt>
@@ -65,7 +65,7 @@ public class DRand extends RandomEngine {
   public DRand(Date d) {
     this((int) d.getTime());
   }
-  /**
+  /*
    * Returns a 32 bit uniformly distributed random number in the closed interval
    * <tt>[Integer.MIN_VALUE,Integer.MAX_VALUE]</tt> (including <tt>Integer.MIN_VALUE</tt> and
    * <tt>Integer.MAX_VALUE</tt>).
@@ -76,7 +76,7 @@ public class DRand extends RandomEngine {
 
     return current;
   }
-  /**
+  /*
    * Sets the receiver's seed. This method resets the receiver's entire internal state. The
    * following condition must hold: <tt>seed &gt;= 0 && seed &lt; (2<sup>32</sup>-1) / 4</tt>.
    *

@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Von Mises distribution.
+/*
+* Von Mises distribution.
  *
  * <p>Valid parameter ranges: <tt>k &gt; 0</tt>.
  *
@@ -39,7 +39,7 @@ public class VonMises extends AbstractContinousDistribution {
 
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static VonMises shared = new VonMises(1.0, makeDefaultGenerator());
-  /**
+  /*
    * Constructs a Von Mises distribution. Example: k=1.0.
    *
    * @throws IllegalArgumentException if <tt>k &lt;= 0.0</tt>.
@@ -52,13 +52,13 @@ public class VonMises extends AbstractContinousDistribution {
   public double nextDouble() {
     return nextDouble(this.my_k);
   }
-  /**
+  /*
    * Returns a random number from the distribution; bypasses the internal state.
    *
    * @throws IllegalArgumentException if <tt>k &lt;= 0.0</tt>.
    */
   public double nextDouble(double k) {
-    /**
+    /*
      * **************************************************************** * Von Mises Distribution -
      * Acceptance Rejection * * ***************************************************************** *
      * FUNCTION : - mwc samples a random number from the von Mises * distribution ( -Pi <= x <= Pi)
@@ -91,7 +91,7 @@ public class VonMises extends AbstractContinousDistribution {
     return (randomGenerator.raw() > 0.5) ? Math.acos(w) : -Math.acos(w); // Random sign
     // 0 <= x <= Pi : -Pi <= x <= 0
   }
-  /**
+  /*
    * Sets the distribution parameter.
    *
    * @throws IllegalArgumentException if <tt>k &lt;= 0.0</tt>.
@@ -100,7 +100,7 @@ public class VonMises extends AbstractContinousDistribution {
     if (k <= 0.0) throw new IllegalArgumentException();
     this.my_k = k;
   }
-  /**
+  /*
    * Returns a random number from the distribution.
    *
    * @throws IllegalArgumentException if <tt>k &lt;= 0.0</tt>.
@@ -114,7 +114,7 @@ public class VonMises extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + my_k + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

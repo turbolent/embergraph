@@ -4,8 +4,8 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Allows pushback of the most recently visited element onto the iterator.
+/*
+* Allows pushback of the most recently visited element onto the iterator.
  *
  * <p>Note: There is no corresponding {@link IFilter} pattern for this class since you need the
  * interface offered by the {@link PushbackIterator} in order to use pushback.
@@ -21,7 +21,7 @@ public class PushbackIterator<E> implements Iterator<E>, ICloseableIterator<E> {
   /** The most recent element visited by the iterator. */
   private E current;
 
-  /**
+  /*
    * When non-<code>null</code>, this element was pushed back and is the next element to be visited.
    */
   private E buffer;
@@ -62,7 +62,7 @@ public class PushbackIterator<E> implements Iterator<E>, ICloseableIterator<E> {
     return tmp;
   }
 
-  /**
+  /*
    * Push the value onto the internal buffer. It will be returned by the next call to {@link
    * #next()}.
    *

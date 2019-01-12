@@ -22,8 +22,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.ICounterSet;
 
-/**
- * {@link IPlugin} for collecting statistics from the operating system.
+/*
+* {@link IPlugin} for collecting statistics from the operating system.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -33,7 +33,7 @@ public class PlatformStatsPlugIn implements IPlugIn<Journal, AbstractStatisticsC
 
   public interface Options extends AbstractStatisticsCollector.Options {
 
-    /**
+    /*
      * Boolean option for the collection of statistics from the underlying operating system (default
      * {@value #DEFAULT_COLLECT_PLATFORM_STATISTICS}).
      *
@@ -44,14 +44,14 @@ public class PlatformStatsPlugIn implements IPlugIn<Journal, AbstractStatisticsC
     String DEFAULT_COLLECT_PLATFORM_STATISTICS = "false";
   }
 
-  /**
+  /*
    * Collects interesting statistics on the host and process.
    *
    * @see Options#COLLECT_PLATFORM_STATISTICS
    */
   private AbstractStatisticsCollector platformStatisticsCollector = null;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Start collecting performance counters from the OS (if enabled).
@@ -100,7 +100,7 @@ public class PlatformStatsPlugIn implements IPlugIn<Journal, AbstractStatisticsC
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>NOP - Collection is on the JVM and the OS. If it is shutdown with each {@link Journal}

@@ -40,7 +40,7 @@ public final class Element {
   /** The content model for this element. */
   final ReferenceLinkedOpenHashSet<Element> contentModel;
 
-  /**
+  /*
    * Creates a new element with the specified name. The element is assumed to break the flow, and
    * neither being simple nor having implicit closure.
    *
@@ -50,7 +50,7 @@ public final class Element {
     this(name, true, false, false);
   }
 
-  /**
+  /*
    * Creates a new element with the specified name and flags. The element is assumed not to have
    * implicit closure.
    *
@@ -62,7 +62,7 @@ public final class Element {
     this(name, breaksFlow, isSimple, false);
   }
 
-  /**
+  /*
    * Creates a new element.
    *
    * @param name the name of the type of the new element.
@@ -83,7 +83,7 @@ public final class Element {
     this.contentModel = new ReferenceLinkedOpenHashSet<Element>(Hash.DEFAULT_INITIAL_SIZE, .5f);
   }
 
-  /**
+  /*
    * Returns the name of this element.
    *
    * @return the name of this element.

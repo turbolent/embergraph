@@ -26,8 +26,8 @@ package org.embergraph.service.ndx.pipeline;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
-/**
- * Class exists solely to make it easier to write the unit tests by aligning the various generic
+/*
+* Class exists solely to make it easier to write the unit tests by aligning the various generic
  * types across the master, the subtask, and their statistics objects.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -43,7 +43,7 @@ public abstract class MockSubtask<
         M extends MockMaster<H, O, E, S, L, HS>>
     extends AbstractSubtask<HS, M, E, L> {
 
-  /**
+  /*
    * @param master
    * @param locator
    * @param buffer

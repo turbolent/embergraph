@@ -11,7 +11,9 @@ package cern.colt.matrix;
 import cern.colt.matrix.impl.DenseDoubleMatrix2D;
 import cern.colt.matrix.impl.RCDoubleMatrix2D;
 import cern.colt.matrix.impl.SparseDoubleMatrix2D;
-/**
+import cern.jet.math.Functions;
+
+/*
 Factory for convenient construction of 2-d matrices holding <tt>double</tt> 
   cells. Also provides convenient methods to compose (concatenate) and decompose 
   (split) matrices from/to constituent blocks. </p>
@@ -75,18 +77,18 @@ F.random(4,4);
 @version 1.0, 09/24/99
 */
 public class DoubleFactory2D extends cern.colt.PersistentObject {
-	/**
-	 * A factory producing dense matrices.
+	/*
+* A factory producing dense matrices.
 	 */
 	public static final DoubleFactory2D dense  = new DoubleFactory2D();
 
-	/**
-	 * A factory producing sparse hash matrices.
+	/*
+* A factory producing sparse hash matrices.
 	 */
 	public static final DoubleFactory2D sparse = new DoubleFactory2D();
 
-	/**
-	 * A factory producing sparse row compressed matrices.
+	/*
+* A factory producing sparse row compressed matrices.
 	 */
 	public static final DoubleFactory2D rowCompressed = new DoubleFactory2D();
 	
@@ -94,11 +96,11 @@ public class DoubleFactory2D extends cern.colt.PersistentObject {
 	 * A factory producing sparse row compressed modified matrices.
 	 */
 	//public static final DoubleFactory2D rowCompressedModified = new DoubleFactory2D();
-/**
- * Makes this class non instantiable, but still let's others inherit from it.
+/*
+* Makes this class non instantiable, but still let's others inherit from it.
  */
 protected DoubleFactory2D() {}
-/**
+/*
 C = A||B; Constructs a new matrix which is the column-wise concatenation of two other matrices.
 <pre>
 0 1 2
@@ -125,7 +127,7 @@ public DoubleMatrix2D appendColumns(DoubleMatrix2D A, DoubleMatrix2D B) {
 	matrix.viewPart(0,ac,r,bc).assign(B);
 	return matrix;
 }
-/**
+/*
 C = A||B; Constructs a new matrix which is the row-wise concatenation of two other matrices.
 <pre>
 0 1 
@@ -156,7 +158,7 @@ public DoubleMatrix2D appendRows(DoubleMatrix2D A, DoubleMatrix2D B) {
 	matrix.viewPart(ar,0,br,c).assign(B);
 	return matrix;
 }
-/**
+/*
 Constructs a matrix with cells having ascending values.
 For debugging purposes.
 Example:
@@ -167,9 +169,9 @@ Example:
 */
 public DoubleMatrix2D ascending(int rows, int columns) {
 	cern.jet.math.Functions F = cern.jet.math.Functions.functions;
-	return descending(rows,columns).assign(F.chain(F.neg,F.minus(columns*rows)));
+	return descending(rows,columns).assign(Functions.chain(Functions.neg, Functions.minus(columns*rows)));
 }
-/**
+/*
 Checks whether the given array is rectangular, that is, whether all rows have the same number of columns.
 @throws IllegalArgumentException if the array is not rectangular.
 */
@@ -182,7 +184,7 @@ protected static void checkRectangularShape(double[][] array) {
 		}
 	}
 }
-/**
+/*
 Checks whether the given array is rectangular, that is, whether all rows have the same number of columns.
 @throws IllegalArgumentException if the array is not rectangular.
 */
@@ -195,7 +197,7 @@ protected static void checkRectangularShape(DoubleMatrix2D[][] array) {
 		}
 	}
 }
-/**
+/*
 Constructs a block matrix made from the given parts.
 The inverse to method {@link #decompose(DoubleMatrix2D[][], DoubleMatrix2D)}.
 <p>
@@ -359,7 +361,7 @@ public DoubleMatrix2D compose(DoubleMatrix2D[][] parts) {
 	
 	return matrix;
 }
-/**
+/*
 Constructs a diagonal block matrix from the given parts (the <i>direct sum</i> of two matrices).
 That is the concatenation
 <pre>
@@ -378,7 +380,7 @@ public DoubleMatrix2D composeDiagonal(DoubleMatrix2D A, DoubleMatrix2D B) {
 	sum.viewPart(ar,ac,br,bc).assign(B);
 	return sum;
 }
-/**
+/*
 Constructs a diagonal block matrix from the given parts.
 The concatenation has the form
 <pre>
@@ -396,7 +398,7 @@ public DoubleMatrix2D composeDiagonal(DoubleMatrix2D A, DoubleMatrix2D B, Double
 	diag.viewPart(A.rows()+B.rows(),A.columns()+B.columns(),C.rows(),C.columns()).assign(C);
 	return diag;
 }
-/**
+/*
 Splits a block matrix into its constituent blocks; Copies blocks of a matrix into the given parts.
 The inverse to method {@link #compose(DoubleMatrix2D[][])}.
 <p>
@@ -525,8 +527,8 @@ public void decompose(DoubleMatrix2D[][] parts, DoubleMatrix2D matrix) {
 	}
 	
 }
-/**
- * Demonstrates usage of this class.
+/*
+* Demonstrates usage of this class.
  */
 public void demo1() {
 System.out.println("\n\n");
@@ -573,8 +575,8 @@ System.out.println("\n"+compose(parts4));
 //System.out.println("\n"+cern.colt.matrixpattern.Converting.toHTML(make(parts4).toString()));
 
 }
-/**
- * Demonstrates usage of this class.
+/*
+* Demonstrates usage of this class.
  */
 public void demo2() {
 System.out.println("\n\n");
@@ -634,7 +636,7 @@ System.out.println("\n"+make(parts4));
 //System.out.println("\n"+cern.colt.matrixpattern.Converting.toHTML(make(parts4).toString()));
 */
 }
-/**
+/*
 Constructs a matrix with cells having descending values.
 For debugging purposes.
 Example:
@@ -653,7 +655,7 @@ public DoubleMatrix2D descending(int rows, int columns) {
 	}
 	return matrix;
 }
-/**
+/*
 Constructs a new diagonal matrix whose diagonal elements are the elements of <tt>vector</tt>.
 Cells values are copied. The new matrix is not a view.
 Example:
@@ -673,7 +675,7 @@ public DoubleMatrix2D diagonal(DoubleMatrix1D vector) {
 	}
 	return diag;
 }
-/**
+/*
 Constructs a new vector consisting of the diagonal elements of <tt>A</tt>.
 Cells values are copied. The new vector is not a view.
 Example:
@@ -694,8 +696,8 @@ public DoubleMatrix1D diagonal(DoubleMatrix2D A) {
 	}
 	return diag;
 }
-/**
- * Constructs an identity matrix (having ones on the diagonal and zeros elsewhere).
+/*
+* Constructs an identity matrix (having ones on the diagonal and zeros elsewhere).
  */
 public DoubleMatrix2D identity(int rowsAndColumns) {
 	DoubleMatrix2D matrix = make(rowsAndColumns,rowsAndColumns);
@@ -704,8 +706,8 @@ public DoubleMatrix2D identity(int rowsAndColumns) {
 	}
 	return matrix;
 }
-/**
- * Constructs a matrix with the given cell values.
+/*
+* Constructs a matrix with the given cell values.
  * <tt>values</tt> is required to have the form <tt>values[row][column]</tt>
  * and have exactly the same number of columns in every row.
  * <p>
@@ -727,7 +729,7 @@ The values are copied.
 @param rows  the number of rows.
 @exception  IllegalArgumentException <tt>values.length</tt> must be a multiple of <tt>rows</tt>.
 */
-public DoubleMatrix2D make(double values[], int rows) {
+public DoubleMatrix2D make(double[] values, int rows) {
 	int columns = (rows != 0 ? values.length/rows : 0);
 	if (rows*columns != values.length) 
 		throw new IllegalArgumentException("Array length must be a multiple of m.");
@@ -740,8 +742,8 @@ public DoubleMatrix2D make(double values[], int rows) {
 	}
 	return matrix;
 }
-/**
- * Constructs a matrix with the given shape, each cell initialized with zero.
+/*
+* Constructs a matrix with the given shape, each cell initialized with zero.
  */
 public DoubleMatrix2D make(int rows, int columns) {
 	if (this==sparse) return new SparseDoubleMatrix2D(rows,columns);
@@ -749,26 +751,26 @@ public DoubleMatrix2D make(int rows, int columns) {
 	//if (this==rowCompressedModified) return new RCMDoubleMatrix2D(rows,columns);
 	else return new DenseDoubleMatrix2D(rows,columns);
 }
-/**
- * Constructs a matrix with the given shape, each cell initialized with the given value.
+/*
+* Constructs a matrix with the given shape, each cell initialized with the given value.
  */
 public DoubleMatrix2D make(int rows, int columns, double initialValue) {
 	if (initialValue == 0) return make(rows,columns);
 	return make(rows,columns).assign(initialValue);
 }
-/**
- * Constructs a 1d matrix of the right dynamic type.
+/*
+* Constructs a 1d matrix of the right dynamic type.
  */
 protected DoubleMatrix1D make1D(int size) {
 	return make(0,0).like1D(size);
 }
-/**
- * Constructs a matrix with uniformly distributed values in <tt>(0,1)</tt> (exclusive).
+/*
+* Constructs a matrix with uniformly distributed values in <tt>(0,1)</tt> (exclusive).
  */
 public DoubleMatrix2D random(int rows, int columns) {
 	return make(rows,columns).assign(cern.jet.math.Functions.random());
 }
-/**
+/*
 C = A||A||..||A; Constructs a new matrix which is duplicated both along the row and column dimension.
 Example:
 <pre>
@@ -792,8 +794,8 @@ public DoubleMatrix2D repeat(DoubleMatrix2D A, int rowRepeat, int columnRepeat) 
 	}
 	return matrix;
 }
-/**
- * Constructs a randomly sampled matrix with the given shape.
+/*
+* Constructs a randomly sampled matrix with the given shape.
  * Randomly picks exactly <tt>Math.round(rows*columns*nonZeroFraction)</tt> cells and initializes them to <tt>value</tt>, all the rest will be initialized to zero.
  * Note that this is not the same as setting each cell with probability <tt>nonZeroFraction</tt> to <tt>value</tt>.
  * Note: The random seed is a constant.
@@ -805,8 +807,8 @@ public DoubleMatrix2D sample(int rows, int columns, double value, double nonZero
 	sample(matrix,value,nonZeroFraction);
 	return matrix;
 }
-/**
- * Modifies the given matrix to be a randomly sampled matrix.
+/*
+* Modifies the given matrix to be a randomly sampled matrix.
  * Randomly picks exactly <tt>Math.round(rows*columns*nonZeroFraction)</tt> cells and initializes them to <tt>value</tt>, all the rest will be initialized to zero.
  * Note that this is not the same as setting each cell with probability <tt>nonZeroFraction</tt> to <tt>value</tt>.
  * Note: The random seed is a constant.
@@ -830,8 +832,8 @@ public DoubleMatrix2D sample(DoubleMatrix2D matrix, double value, double nonZero
 	cern.jet.random.sampling.RandomSamplingAssistant sampler = new cern.jet.random.sampling.RandomSamplingAssistant(n,size,new cern.jet.random.engine.MersenneTwister());
 	for (int i=0; i < size; i++) {
 		if (sampler.sampleNextElement()) {
-			int row = (int) (i/columns);
-			int column = (int) (i%columns);
+			int row = (i/columns);
+			int column = (i%columns);
 			matrix.set(row,column, value);
 		}
 	}

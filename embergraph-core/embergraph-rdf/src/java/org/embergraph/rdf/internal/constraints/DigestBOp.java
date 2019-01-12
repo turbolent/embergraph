@@ -17,6 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal.constraints;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Map;
 import org.embergraph.bop.BOp;
@@ -30,8 +31,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.model.Literal;
 
-/**
- * A Digest expression involving a {@link IValueExpression} operand. The operation to be applied to
+/*
+* A Digest expression involving a {@link IValueExpression} operand. The operation to be applied to
  * the operands is specified by the {@link DigestBOp.Annotations#OP} annotation.
  */
 public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterialization {
@@ -40,7 +41,7 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
 
   public interface Annotations extends IVValueExpression.Annotations {
 
-    /**
+    /*
      * The operation to be applied to the left operand (required). The value of this annotation is a
      * {@link DigestOp}, such as {@link DigestOp#MD5}.
      *
@@ -55,10 +56,10 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
     SHA224,
     SHA256,
     SHA384,
-    SHA512;
+    SHA512
   }
 
-  /**
+  /*
    * @param left The left operand.
    * @param right The right operand.
    * @param op The annotation specifying the operation to be performed on those operands.
@@ -71,7 +72,7 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
     this(new BOp[] {left}, anns(globals, new NV(Annotations.OP, op)));
   }
 
-  /**
+  /*
    * Required shallow copy constructor.
    *
    * @param args The operands.
@@ -87,7 +88,7 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
     }
   }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * @param op
@@ -155,7 +156,7 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
           default:
             throw new UnsupportedOperationException();
         }
-        byte[] bytes = label.getBytes("UTF-8");
+        byte[] bytes = label.getBytes(StandardCharsets.UTF_8);
         md.update(bytes);
         byte[] digest = md.digest();
         final EmbergraphLiteral str = getValueFactory().createLiteral(toHexString(digest));

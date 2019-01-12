@@ -43,8 +43,8 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
 
   private static final Logger log = Logger.getLogger(GASState.class);
 
-  // /**
-  // * The {@link GASEngine} on which the {@link IGASProgram} will be run.
+  // /*
+// * The {@link GASEngine} on which the {@link IGASProgram} will be run.
   // */
   // private final GASEngine gasEngine;
 
@@ -60,7 +60,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
   /** Factory for the edge state objects. */
   private final Factory<Statement, ES> esf;
 
-  /**
+  /*
    * The set of vertices that were identified in the current iteration.
    *
    * <p>Note: This data structure is reused for each round.
@@ -71,7 +71,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
    */
   private final IStaticFrontier frontier;
 
-  /**
+  /*
    * Used to schedule the new frontier and then compact it onto {@link #frontier} at the end of the
    * round.
    */
@@ -80,7 +80,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
   /** The current evaluation round. */
   private final AtomicInteger round = new AtomicInteger(0);
 
-  /**
+  /*
    * The state associated with each visited vertex.
    *
    * <p>TODO Offer scalable backend with high throughput, e.g., using a batched striped lock as per
@@ -89,13 +89,13 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
    */
   protected final ConcurrentMap<Value, VS> vertexState = new ConcurrentHashMap<Value, VS>();
 
-  /**
+  /*
    * TODO EDGE STATE: state needs to be configurable. When disabled, leave this as <code>null</code>
    * .
    */
   protected final ConcurrentMap<Statement, ES> edgeState = null;
 
-  /**
+  /*
    * Provides access to the backing graph. Used to decode vertices and edges for {@link
    * #traceState()}.
    */
@@ -143,7 +143,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
     this.valueComparator = new ValueComparator();
   }
 
-  /**
+  /*
    * Provides access to the backing graph. Used to decode vertices and edges for {@link
    * #traceState()}.
    */
@@ -301,7 +301,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
     scheduler.clear();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>FIXME REDUCE : parallelize with nthreads. The reduce operations are often lightweight, so
@@ -360,7 +360,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
    * FIXME TESTS: We need a test suite for compliance of these methods.
    */
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>FIXME We can optimize this to use reference testing if we are careful in the GATHER and
@@ -392,7 +392,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
     return !isEdge(e);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The openrdf implementation does not support link attributes and this method always returns
@@ -405,7 +405,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
     return false;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The openrdf implementation does not support link attributes and this method always returns

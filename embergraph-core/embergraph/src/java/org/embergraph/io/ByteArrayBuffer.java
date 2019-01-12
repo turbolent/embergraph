@@ -34,8 +34,8 @@ import java.nio.ByteBuffer;
 import org.apache.log4j.Logger;
 import org.embergraph.util.BytesUtil;
 
-/**
- * A view on a mutable byte[] that may be extended.
+/*
+* A view on a mutable byte[] that may be extended.
  *
  * <p>Note: The backing byte[] slice always has an {@link IDataRecord#off() offset} of ZERO (0) and
  * a {@link IDataRecord#len() length} equal to the capacity of the backing byte[]. The {@link
@@ -66,13 +66,13 @@ public class ByteArrayBuffer extends OutputStream
   /** The default capacity of the buffer. */
   public static final int DEFAULT_INITIAL_CAPACITY = 128; // 1024;
 
-  /**
+  /*
    * The backing byte[]. This is re-allocated whenever the capacity of the buffer is too small and
    * reused otherwise.
    */
   byte[] buf;
 
-  /**
+  /*
    * {@inheritDoc} This is re-allocated whenever the capacity of the buffer is too small and reused
    * otherwise.
    */
@@ -93,7 +93,7 @@ public class ByteArrayBuffer extends OutputStream
     return buf.length;
   }
 
-  /**
+  /*
    * Throws exception unless the value is non-negative.
    *
    * @param msg The exception message.
@@ -108,7 +108,7 @@ public class ByteArrayBuffer extends OutputStream
     return v;
   }
 
-  /**
+  /*
    * Creates a buffer with an initial capacity of {@value #DEFAULT_INITIAL_CAPACITY} bytes. The
    * position and the read limit will zero. The capacity of the buffer will be automatically
    * extended as required.
@@ -118,7 +118,7 @@ public class ByteArrayBuffer extends OutputStream
     this(DEFAULT_INITIAL_CAPACITY);
   }
 
-  /**
+  /*
    * Creates a buffer with the specified initial capacity. The position and the read limit will be
    * zero. The capacity of the buffer will be automatically extended as required.
    *
@@ -132,7 +132,7 @@ public class ByteArrayBuffer extends OutputStream
         new byte[assertNonNegative("initialCapacity", initialCapacity)]);
   }
 
-  /**
+  /*
    * Ensure that at least <i>len</i> bytes are free in the buffer starting at <i>pos</i>. The {@link
    * #buf buffer} may be grown by this operation but it will not be truncated.
    *
@@ -152,7 +152,7 @@ public class ByteArrayBuffer extends OutputStream
     ensureCapacity(pos + len);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @todo this can be potentially overridden in a derived class to only copy those bytes up to the
@@ -189,7 +189,7 @@ public class ByteArrayBuffer extends OutputStream
     return buf == null ? 0 : buf.length;
   }
 
-  /**
+  /*
    * Return the new capacity for the buffer (default is always large enough and will normally double
    * the buffer capacity each time it overflows).
    *
@@ -207,7 +207,7 @@ public class ByteArrayBuffer extends OutputStream
     return capacity;
   }
 
-  /**
+  /*
    * Trims the backing byte[] to an exact fit by making a copy of the data in the buffer and returns
    * the old byte[]. All bytes between {@link #off()} and {@link #limit()} are copied into the exact
    * fit byte[].
@@ -381,7 +381,7 @@ public class ByteArrayBuffer extends OutputStream
     return Double.longBitsToDouble(getLong(pos));
   }
 
-  /**
+  /*
    * Return a copy of the data written on the buffer (the bytes in [0:pos]).
    *
    * @return A new array containing data in the buffer.
@@ -406,13 +406,13 @@ public class ByteArrayBuffer extends OutputStream
    * Sequential operations (position, limit, capacity)
    */
 
-  /**
+  /*
    * A non-negative integer specifying the #of bytes of data in the buffer that contain valid data
    * starting from position zero(0).
    */
   int pos = 0;
 
-  /**
+  /*
    * The read limit (there is no write limit on the buffer since the capacity will be automatically
    * extended on overflow). The read limit is always incremented by an append on the end of the
    * buffer.
@@ -422,13 +422,13 @@ public class ByteArrayBuffer extends OutputStream
    */
   int limit;
 
-  /**
+  /*
    * An optional mark to which the buffer can be rewound and <code>0</code> if the mark has never
    * been set.
    */
   private int mark = 0;
 
-  /**
+  /*
    * Create a new buffer backed by the given array. The initial capacity will be the size of the
    * given byte[]. The mark will be zero. The capacity of the buffer will be automatically extended
    * as required.
@@ -468,7 +468,7 @@ public class ByteArrayBuffer extends OutputStream
     return pos;
   }
 
-  /**
+  /*
    * Set the position in the buffer (does not change the limit).
    *
    * @param pos The new position, must be in [0:{@link #capacity()}).
@@ -489,7 +489,7 @@ public class ByteArrayBuffer extends OutputStream
     return v;
   }
 
-  /**
+  /*
    * The read limit (there is no write limit on the buffer since the capacity will be automatically
    * extended on overflow).
    */
@@ -498,7 +498,7 @@ public class ByteArrayBuffer extends OutputStream
     return limit;
   }
 
-  /**
+  /*
    * Sets the position to zero but leaves the read limit at the old position. After invoking this
    * method you can use relative get methods to read all data up to the read limit.
    */
@@ -515,7 +515,7 @@ public class ByteArrayBuffer extends OutputStream
     pos = 0;
   }
 
-  /**
+  /*
    * Prepares the buffer for new data by resetting the position and limit to zero.
    *
    * @return This buffer.
@@ -532,7 +532,7 @@ public class ByteArrayBuffer extends OutputStream
     ensureCapacity(this.pos + len);
   }
 
-  /**
+  /*
    * Sets the mark.
    *
    * @return the old mark (initially zero).
@@ -546,7 +546,7 @@ public class ByteArrayBuffer extends OutputStream
     return tmp;
   }
 
-  /**
+  /*
    * Rewinds the buffer to the mark. Does not change the limit.
    *
    * @return The new {@link #pos()}.
@@ -558,7 +558,7 @@ public class ByteArrayBuffer extends OutputStream
     return pos;
   }
 
-  /**
+  /*
    * Relative copy of data into <i>this</i> buffer.
    *
    * @param src The source.
@@ -582,7 +582,7 @@ public class ByteArrayBuffer extends OutputStream
     return n;
   }
 
-  /**
+  /*
    * Relative copy data from the <strong>current position</strong> of the source buffer up to its
    * read limit into <i>this</i> buffer.
    *
@@ -602,7 +602,7 @@ public class ByteArrayBuffer extends OutputStream
     return n;
   }
 
-  /**
+  /*
    * Relative copy data from the <strong>origin</strong> (offset ZERO) of the source buffer up to
    * its read limit into <i>this</i> buffer.
    *
@@ -622,7 +622,7 @@ public class ByteArrayBuffer extends OutputStream
     return n;
   }
 
-  /**
+  /*
    * Wraps up a reference to the data in a {@link ByteBuffer} between the position and the limit.
    *
    * @return A {@link ByteBuffer} encapsulating a reference to the data in the current buffer. The
@@ -634,7 +634,7 @@ public class ByteArrayBuffer extends OutputStream
     return ByteBuffer.wrap(buf, pos, limit);
   }
 
-  /**
+  /*
    * Relative method advances the position and the limit by <i>len</i> bytes (this simulates a
    * relative <i>put</i> method, but does not write any data).
    *
@@ -651,7 +651,7 @@ public class ByteArrayBuffer extends OutputStream
     this.limit = this.pos;
   }
 
-  /**
+  /*
    * Relative <i>put</i> method for writing a byte[] on the buffer.
    *
    * @param b The byte[].
@@ -665,7 +665,7 @@ public class ByteArrayBuffer extends OutputStream
     this.limit = this.pos;
   }
 
-  /**
+  /*
    * Relative <i>put</i> method for writing a byte[] on the buffer.
    *
    * @param b The byte[].
@@ -681,7 +681,7 @@ public class ByteArrayBuffer extends OutputStream
     this.limit = this.pos;
   }
 
-  /**
+  /*
    * Relative <i>put</i> method for writing a byte value.
    *
    * @param v The value.
@@ -694,7 +694,7 @@ public class ByteArrayBuffer extends OutputStream
     limit = ++pos;
   }
 
-  /**
+  /*
    * Relative <i>get</i> method for reading a byte value.
    *
    * @return The value.
@@ -816,7 +816,7 @@ public class ByteArrayBuffer extends OutputStream
    * Pack unsigned long integer.
    */
 
-  /**
+  /*
    * Packs a non-negative long value into the minimum #of bytes in which the value can be
    * represented and writes those bytes onto the buffer. The first byte determines whether or not
    * the long value was packed and, if packed, how many bytes were required to represent the packed
@@ -852,8 +852,8 @@ public class ByteArrayBuffer extends OutputStream
   /** Private buffer for packing long integers. */
   private final byte[] pbuf = new byte[8];
 
-  //    /**
-  //     * Return the #of non-zero nibbles, counting from the first non-zero nibble
+  //    /*
+//     * Return the #of non-zero nibbles, counting from the first non-zero nibble
   //     * in the long value. A value of <code>0L</code> is considered to be one
   //     * nibble for our purposes.
   //     *
@@ -889,7 +889,7 @@ public class ByteArrayBuffer extends OutputStream
    * Pack unsigned short integer.
    */
 
-  /**
+  /*
    * Packs a non-negative short value into one or two bytes and writes them on the buffer. A short
    * in [0:127] is packed into one byte. Larger values are packed into two bytes. The high bit of
    * the first byte is set if the value was packed into two bytes. If the bit is set, clear the high
@@ -927,8 +927,8 @@ public class ByteArrayBuffer extends OutputStream
   //     * unpack unsigned long integer.
   //     */
   //
-  //    /**
-  //     * Unpack a long value from the current buffer position, incrementing the
+  //    /*
+//     * Unpack a long value from the current buffer position, incrementing the
   //     * buffer position as a side-effect.
   //     *
   //     * @return The long value.
@@ -971,8 +971,8 @@ public class ByteArrayBuffer extends OutputStream
   //     * unpack unsigned short integer.
   //     */
   //
-  //    /**
-  //     * Unpack a non-negative short value from the input stream, incrementing
+  //    /*
+//     * Unpack a non-negative short value from the input stream, incrementing
   //     * the buffer position as a side-effect.
   //     *
   //     * @param is
@@ -1070,7 +1070,7 @@ public class ByteArrayBuffer extends OutputStream
 
   public long position() throws IOException {
 
-    return (int) pos;
+    return pos;
   }
 
   public void position(long v) throws IOException {
@@ -1101,7 +1101,7 @@ public class ByteArrayBuffer extends OutputStream
     return BytesUtil.setBit(buf, bitIndex, value);
   }
 
-  /**
+  /*
    * Skip forward or backward the specified number of bytes.
    *
    * @param nbytes The #of bytes to skip (MAY be negative).
@@ -1118,7 +1118,7 @@ public class ByteArrayBuffer extends OutputStream
     return pos;
   }
 
-  /**
+  /*
    * Return a slice of the backing buffer. The slice will always reference the current backing
    * {@link #array()}, even when the buffer is extended and the array reference is replaced. The
    * {@link #pos()} and {@link #limit()} are ignored by this method.
@@ -1132,7 +1132,7 @@ public class ByteArrayBuffer extends OutputStream
     return new SliceImpl(off, len);
   }
 
-  /**
+  /*
    * A slice of the outer {@link ByteArrayBuffer}. The slice will always reflect the backing {@link
    * #array()} for the instance of the outer class.
    *
@@ -1155,7 +1155,7 @@ public class ByteArrayBuffer extends OutputStream
 
       return ByteArrayBuffer.this.array();
     }
-  };
+  }
 
   /*
    * Note: These methods are not included here because the conflicting
@@ -1164,16 +1164,16 @@ public class ByteArrayBuffer extends OutputStream
    * context.
    */
 
-  //    /**
-  //     */
+  //    /*
+//     */
   //    public DataInput getInputData() {
   //
   //        return new DataInputBuffer(buf, pos(), pos() + limit());
   //
   //    }
   //
-  //    /**
-  //     * Return a bit stream reading on the data between the {@link #pos()} and
+  //    /*
+//     * Return a bit stream reading on the data between the {@link #pos()} and
   //     * the {@link #limit()}.
   //     */
   //    public InputBitStream getInputBitStream() {
@@ -1183,8 +1183,8 @@ public class ByteArrayBuffer extends OutputStream
   //
   //    }
   //
-  //    /**
-  //     * Write the data between the {@link #pos()} and the {@link #limit()} onto
+  //    /*
+//     * Write the data between the {@link #pos()} and the {@link #limit()} onto
   //     * the stream.
   //     */
   //    final public void writeOn(final OutputStream os) throws IOException {
@@ -1193,8 +1193,8 @@ public class ByteArrayBuffer extends OutputStream
   //
   //    }
   //
-  //    /**
-  //     * Write the data between the {@link #pos()} and the {@link #limit()} onto
+  //    /*
+//     * Write the data between the {@link #pos()} and the {@link #limit()} onto
   //     * the stream.
   //     */
   //    final public void writeOn(final DataOutput out) throws IOException {
@@ -1203,7 +1203,7 @@ public class ByteArrayBuffer extends OutputStream
   //
   //    }
 
-  /**
+  /*
    * Return a bit stream which will write on this buffer. The stream will begin at the current
    * {@link #pos()}.
    *

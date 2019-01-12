@@ -20,8 +20,8 @@ package org.embergraph.util;
 import it.unimi.dsi.bits.BitVector;
 import java.nio.ByteBuffer;
 
-/**
- * Simple helper class to work with bits inside a byte. Useful for classes that have a lot of
+/*
+* Simple helper class to work with bits inside a byte. Useful for classes that have a lot of
  * boolean properties or pointers to enums that can be more compactly represented as a series of bit
  * flags. See SPO.
  *
@@ -29,7 +29,7 @@ import java.nio.ByteBuffer;
  */
 public class Bits {
 
-  /**
+  /*
    * Set a bit inside a byte.
    *
    * @param bits the original byte
@@ -52,7 +52,7 @@ public class Bits {
     return b;
   }
 
-  /**
+  /*
    * Get a bit from inside a byte.
    *
    * @param bits the byte
@@ -68,7 +68,7 @@ public class Bits {
     return (bits & (0x1 << i)) != 0;
   }
 
-  /**
+  /*
    * Get a new byte, masking off all but the bits specified by m.
    *
    * @param bits the original byte
@@ -93,7 +93,7 @@ public class Bits {
     return b;
   }
 
-  /**
+  /*
    * Useful for debugging.
    *
    * @param bits the byte

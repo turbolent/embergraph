@@ -20,8 +20,8 @@ package org.embergraph.service.ndx;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.service.Split;
 
-/**
- * NOP aggregator does nothing and returns <code>null</code>. This is used for parallelizing
+/*
+* NOP aggregator does nothing and returns <code>null</code>. This is used for parallelizing
  * operations that require a result handler to stripe them against the index.
  *
  * @author bryan

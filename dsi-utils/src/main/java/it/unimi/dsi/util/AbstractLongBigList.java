@@ -26,8 +26,8 @@ import it.unimi.dsi.fastutil.longs.AbstractLongListIterator;
 import it.unimi.dsi.fastutil.longs.LongListIterator;
 import java.util.NoSuchElementException;
 
-/**
- * An abstract implementation of a {@link LongBigList}. Concrete subclasses must provide just {@link
+/*
+* An abstract implementation of a {@link LongBigList}. Concrete subclasses must provide just {@link
  * LongBigList#length() length()} and {@link LongBigList#getLong(long) getLong()}.
  */
 public abstract class AbstractLongBigList extends AbstractLongList implements LongBigList {
@@ -186,8 +186,8 @@ public abstract class AbstractLongBigList extends AbstractLongList implements Lo
         public void remove() {
           if (last == -1) throw new IllegalStateException();
           LongSubBigList.this.removeLong(last);
-          /*
-           * If the last operation was a next(), we are removing an element *before* us, and we
+        /*
+       * If the last operation was a next(), we are removing an element *before* us, and we
            * must decrease pos correspondingly.
            */
           if (last < pos) pos--;

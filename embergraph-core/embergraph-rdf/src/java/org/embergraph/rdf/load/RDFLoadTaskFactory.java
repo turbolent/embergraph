@@ -9,8 +9,8 @@ import org.embergraph.service.ILoadBalancerService;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Factory for tasks for loading RDF resources into a database.
+/*
+* Factory for tasks for loading RDF resources into a database.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -18,7 +18,7 @@ import org.openrdf.rio.RDFFormat;
 public class RDFLoadTaskFactory<S extends Statement, T extends Runnable>
     extends AbstractRDFTaskFactory<S, T> {
 
-  /**
+  /*
    * @param db
    * @param bufferCapacity
    * @param verifyData
@@ -44,7 +44,7 @@ public class RDFLoadTaskFactory<S extends Statement, T extends Runnable>
         new LoadStatementBufferFactory<S>(db, bufferCapacity));
   }
 
-  /**
+  /*
    * @param db
    * @param verifyData
    * @param deleteAfter if the file should be deleted once it has been loaded.
@@ -64,7 +64,7 @@ public class RDFLoadTaskFactory<S extends Statement, T extends Runnable>
     super(db, parserOptions, deleteafter, fallback, factory);
   }
 
-  /**
+  /*
    * Sets up some additional counters for reporting by the client to the {@link
    * ILoadBalancerService}.
    *
@@ -140,7 +140,7 @@ public class RDFLoadTaskFactory<S extends Statement, T extends Runnable>
     return counterSet;
   }
 
-  /**
+  /*
    * Report totals.
    *
    * <p>Note: these totals reflect the actual state of the database, not just the #of triples

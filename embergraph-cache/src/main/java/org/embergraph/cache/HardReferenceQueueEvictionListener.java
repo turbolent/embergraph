@@ -1,7 +1,7 @@
 package org.embergraph.cache;
 
-/**
- * Interface for reporting cache evictions.
+/*
+* Interface for reporting cache evictions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -9,7 +9,7 @@ package org.embergraph.cache;
  */
 public interface HardReferenceQueueEvictionListener<T> {
 
-  /**
+  /*
    * Notice that a reference is being evicted from the cache. This notice does NOT imply that the
    * cache no longer holds a reference to this object, neither does it imply that the object is
    * dirty.
@@ -17,5 +17,5 @@ public interface HardReferenceQueueEvictionListener<T> {
    * @param cache The cache on which the listener is registered.
    * @param ref The reference that is being evicted from the cache.
    */
-  public void evicted(IHardReferenceQueue<T> cache, T ref);
+  void evicted(IHardReferenceQueue<T> cache, T ref);
 }

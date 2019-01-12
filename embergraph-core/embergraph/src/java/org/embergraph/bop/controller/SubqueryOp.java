@@ -47,8 +47,8 @@ import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * Pipelined join with subquery.
+/*
+* Pipelined join with subquery.
  *
  * <p>For each binding set presented, this operator executes a subquery. Any solutions produced by
  * the subquery are copied to the default sink. If no solutions are produced and {@link
@@ -105,7 +105,7 @@ public class SubqueryOp extends PipelineOp {
 
   public interface Annotations extends SubqueryJoinAnnotations {
 
-    /**
+    /*
      * When non-<code>null</code>, the {@link IVariable} which will be bound to <code>true</code>
      * iff there is at least one solution for the subquery. When specified, {@link #SELECT} SHOULD
      * be <code>null</code> in order to project all bindings from the parent's context into the
@@ -115,7 +115,7 @@ public class SubqueryOp extends PipelineOp {
      */
     String ASK_VAR = Annotations.class.getName() + ".askVar";
 
-    /**
+    /*
      * The {@link IVariable}[] projected by the subquery (optional).
      *
      * <p>Rule: A variable within a subquery is distinct from the same name variable outside of the
@@ -136,7 +136,7 @@ public class SubqueryOp extends PipelineOp {
      */
     String SELECT = SubqueryJoinAnnotations.SELECT;
 
-    /**
+    /*
      * Boolean annotation should be <code>true</code> if the subquery is an aggregate (default
      * {@value #DEFAULT_IS_AGGREGATE}).
      *
@@ -154,7 +154,7 @@ public class SubqueryOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -201,7 +201,7 @@ public class SubqueryOp extends PipelineOp {
     return new FutureTask<Void>(new ControllerTask(this, context));
   }
 
-  /**
+  /*
    * Evaluates the subquery for each source binding set. If the controller operator is interrupted,
    * then the subqueries are cancelled. If a subquery fails, then all subqueries are cancelled.
    */
@@ -214,7 +214,7 @@ public class SubqueryOp extends PipelineOp {
     private final boolean aggregate;
     /** The subquery which is evaluated for each input binding set. */
     private final PipelineOp subquery;
-    /**
+    /*
      * Bound to true or false depending on whether or not there are solutions for the subquery
      * (optional).
      */
@@ -288,7 +288,7 @@ public class SubqueryOp extends PipelineOp {
       }
     }
 
-    /**
+    /*
      * Run a subquery.
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -298,7 +298,7 @@ public class SubqueryOp extends PipelineOp {
       /** The evaluation context for the parent query. */
       private final BOpContext<IBindingSet> parentContext;
 
-      /**
+      /*
        * The source binding set. This will be copied to the output if there are no solutions for the
        * subquery (optional join semantics).
        */
@@ -316,8 +316,8 @@ public class SubqueryOp extends PipelineOp {
 
         if (aggregate) {
 
-          /*
-           * Note: We need to have distinct IAggregates in subqueries
+        /*
+       * Note: We need to have distinct IAggregates in subqueries
            * since they have internal state. This makes a copy of the
            * subquery in which each IAggregate function is a distinct
            * instance. This prevents inappropriate sharing of state
@@ -336,8 +336,8 @@ public class SubqueryOp extends PipelineOp {
 
       public IRunningQuery call() throws Exception {
 
-        /*
-         * Binding set in which only the projected variables are
+      /*
+       * Binding set in which only the projected variables are
          * visible. (if selectVars is empty, then all variables remain
          * visible.).
          */
@@ -382,8 +382,8 @@ public class SubqueryOp extends PipelineOp {
 
             if (askVar != null) {
 
-              /*
-               * For an ASK style subquery, we are only interested
+            /*
+       * For an ASK style subquery, we are only interested
                * in whether or not at least one solution exists.
                */
 
@@ -438,8 +438,8 @@ public class SubqueryOp extends PipelineOp {
 
           if (ncopied == 0L && joinType.isOptional()) {
 
-            /*
-             * Since there were no solutions for the subquery, copy
+          /*
+       * Since there were no solutions for the subquery, copy
              * the original binding set to the appropriate sink and
              * do NOT apply the constraints.
              */
@@ -458,8 +458,8 @@ public class SubqueryOp extends PipelineOp {
         } catch (Throwable t) {
 
           if (runningSubquery == null || runningSubquery.getCause() != null) {
-            /*
-             * If things fail before we start the subquery, or if a
+          /*
+       * If things fail before we start the subquery, or if a
              * subquery fails (due to abnormal termination), then
              * propagate the error to the parent and rethrow the
              * first cause error out of the subquery.

@@ -43,8 +43,8 @@ import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 
-/**
- * Interface for clients of a {@link IEmbergraphFederation}.
+/*
+* Interface for clients of a {@link IEmbergraphFederation}.
  *
  * <p>An application uses a {@link IEmbergraphClient} to connect to an {@link
  * IEmbergraphFederation}. Once connected, the application uses the {@link IEmbergraphFederation}
@@ -80,7 +80,7 @@ import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
  */
 public interface IEmbergraphClient<T> {
 
-  /**
+  /*
    * Connect to a embergraph federation. If the client is already connected, then the existing
    * connection is returned.
    *
@@ -89,14 +89,14 @@ public interface IEmbergraphClient<T> {
    */
   IEmbergraphFederation<T> connect();
 
-  /**
+  /*
    * Return the connected federation,
    *
    * @throws IllegalStateException if the client is not connected.
    */
   IEmbergraphFederation<T> getFederation();
 
-  /**
+  /*
    * Disconnect from the embergraph federation.
    *
    * <p>Normal shutdown allows any existing client requests to federation services to complete but
@@ -118,35 +118,35 @@ public interface IEmbergraphClient<T> {
   /** Return <code>true</code> iff the client is connected to a federation. */
   boolean isConnected();
 
-  /**
+  /*
    * The configured #of threads in the client's thread pool.
    *
    * @see Options#CLIENT_THREAD_POOL_SIZE
    */
   int getThreadPoolSize();
 
-  /**
+  /*
    * The default capacity when a client issues a range query request.
    *
    * @see Options#CLIENT_RANGE_QUERY_CAPACITY
    */
   int getDefaultRangeQueryCapacity();
 
-  /**
+  /*
    * When <code>true</code> requests for non-batch API operations will throw exceptions.
    *
    * @see Options#CLIENT_BATCH_API_ONLY
    */
   boolean getBatchApiOnly();
 
-  /**
+  /*
    * The maximum #of retries when an operation results in a {@link StaleLocatorException}.
    *
    * @see Options#CLIENT_MAX_STALE_LOCATOR_RETRIES
    */
   int getMaxStaleLocatorRetries();
 
-  /**
+  /*
    * The maximum #of tasks that may be submitted in parallel for a single user request.
    *
    * @see Options#CLIENT_MAX_PARALLEL_TASKS_PER_REQUEST
@@ -156,21 +156,21 @@ public interface IEmbergraphClient<T> {
   /** @see Options#CLIENT_READ_CONSISTENT */
   boolean isReadConsistent();
 
-  /**
+  /*
    * The timeout in milliseconds for a task submitted to an {@link IDataService}.
    *
    * @see Options#CLIENT_TASK_TIMEOUT
    */
   long getTaskTimeout();
 
-  /**
+  /*
    * The capacity of the client's {@link IIndex} proxy cache.
    *
    * @see Options#CLIENT_INDEX_CACHE_CAPACITY
    */
   int getIndexCacheCapacity();
 
-  /**
+  /*
    * The timeout in milliseconds for stale entries in the client's {@link IIndex} proxy cache.
    *
    * @see Options#CLIENT_INDEX_CACHE_TIMEOUT
@@ -180,7 +180,7 @@ public interface IEmbergraphClient<T> {
   /** An object wrapping the properties used to configure the client. */
   Properties getProperties();
 
-  /**
+  /*
    * Configuration options for {@link IEmbergraphClient}s.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -188,7 +188,7 @@ public interface IEmbergraphClient<T> {
    */
   interface Options {
 
-    /**
+    /*
      * The #of threads in the client thread pool -or- ZERO (0) if the size of the thread pool is not
      * fixed (default is <code>0</code>). The thread pool is used to parallelize requests issued by
      * the client.
@@ -203,7 +203,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_CLIENT_THREAD_POOL_SIZE = "0";
 
-    /**
+    /*
      * The maximum #of times that a client will retry an operation which resulted in a {@link
      * StaleLocatorException} (default {@value #DEFAULT_CLIENT_MAX_STALE_LOCATOR_RETRIES}).
      *
@@ -221,7 +221,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_CLIENT_MAX_STALE_LOCATOR_RETRIES = "100";
 
-    /**
+    /*
      * <code>true</code> iff globally consistent read operations are desired for READ-COMMITTED or
      * UNISOLATED iterators or index procedures mapped across more than one index partition.
      *
@@ -238,7 +238,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_CLIENT_READ_CONSISTENT = "true";
 
-    /**
+    /*
      * The maximum #of tasks that will be created and submitted in parallel for a single application
      * request (default {@value #DEFAULT_CLIENT_MAX_PARALLEL_TASKS_PER_REQUEST}). Multiple tasks are
      * created for an application request whenever that request spans more than a single index
@@ -255,7 +255,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_CLIENT_MAX_PARALLEL_TASKS_PER_REQUEST = "100";
 
-    /**
+    /*
      * The timeout in milliseconds for a task submitting to an {@link IDataService} (default {@value
      * #DEFAULT_CLIENT_TASK_TIMEOUT}).
      *
@@ -263,7 +263,7 @@ public interface IEmbergraphClient<T> {
      */
     String CLIENT_TASK_TIMEOUT = IEmbergraphClient.class.getName() + "taskTimeout";
 
-    /**
+    /*
      * The default timeout in milliseconds.
      *
      * @see #CLIENT_TASK_TIMEOUT
@@ -271,7 +271,7 @@ public interface IEmbergraphClient<T> {
     String DEFAULT_CLIENT_TASK_TIMEOUT = "" + Long.MAX_VALUE;
     //        String DEFAULT_CLIENT_TASK_TIMEOUT = ""+20*1000L;
 
-    /**
+    /*
      * The default capacity used when a client issues a range query request (default {@value
      * #DEFAULT_CLIENT_RANGE_QUERY_CAPACITY}).
      *
@@ -283,7 +283,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_CLIENT_RANGE_QUERY_CAPACITY = "10000";
 
-    /**
+    /*
      * A boolean property which controls whether or not the non-batch API will log errors complete
      * with stack traces (default {@value #DEFAULT_CLIENT_BATCH_API_ONLY}). This may be used to
      * locating code that needs to be re-written to use {@link IIndexProcedure}s in order to obtain
@@ -293,7 +293,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_CLIENT_BATCH_API_ONLY = "false";
 
-    /**
+    /*
      * The capacity of the {@link HardReferenceQueue} backing the {@link IResourceLocator}
      * maintained by the {@link IEmbergraphClient}. The capacity of this cache indirectly controls
      * how many {@link ILocatableResource}s the {@link IEmbergraphClient} will hold open.
@@ -311,7 +311,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_CLIENT_LOCATOR_CACHE_CAPACITY = "20";
 
-    /**
+    /*
      * The timeout in milliseconds for stale entries in the {@link IResourceLocator} cache -or- ZERO
      * (0) to disable the timeout (default {@value #DEFAULT_LOCATOR_CACHE_TIMEOUT}). When this
      * timeout expires, the reference for the entry in the backing {@link HardReferenceQueue} will
@@ -323,7 +323,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_CLIENT_LOCATOR_CACHE_TIMEOUT = "" + (60 * 1000);
 
-    /**
+    /*
      * The capacity of the LRU cache of {@link IIndex} proxies held by the client (default {@value
      * #DEFAULT_CLIENT_INDEX_CACHE_CAPACITY}). The capacity of this cache indirectly controls how
      * long an {@link IIndex} proxy will be cached. The main reason for keeping an {@link IIndex} in
@@ -341,7 +341,7 @@ public interface IEmbergraphClient<T> {
     /** The default for the {@link #CLIENT_INDEX_CACHE_CAPACITY} option. */
     String DEFAULT_CLIENT_INDEX_CACHE_CAPACITY = "20";
 
-    /**
+    /*
      * The time in milliseconds before an entry in the clients index cache will be cleared from the
      * backing {@link HardReferenceQueue} (default {@value #DEFAULT_INDEX_CACHE_TIMEOUT}). This
      * property controls how long the client's index cache will retain an {@link IIndex} which has
@@ -352,8 +352,8 @@ public interface IEmbergraphClient<T> {
     String DEFAULT_CLIENT_INDEX_CACHE_TIMEOUT = "" + (60 * 1000); // One minute.
 
     // Now handled by TemporaryStoreFactory.Options.
-    //        /**
-    //         * The maximum extent for a {@link TemporaryStore} before a new
+    //        /*
+//         * The maximum extent for a {@link TemporaryStore} before a new
     //         * {@link TemporaryStore} will be created by
     //         * {@link IIndexStore#getTempStore()} for an {@link IEmbergraphClient}
     //         * (default {@value #DEFAULT_TEMP_STORE_MAXIMUM_EXTENT}).
@@ -363,7 +363,7 @@ public interface IEmbergraphClient<T> {
     //
     //        String DEFAULT_TEMP_STORE_MAXIMUM_EXTENT = "" + (5 * Bytes.gigabyte);
 
-    /**
+    /*
      * Boolean option for the collection of statistics from the underlying operating system (default
      * {@value #DEFAULT_COLLECT_PLATFORM_STATISTICS}).
      *
@@ -374,7 +374,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_COLLECT_PLATFORM_STATISTICS = "true";
 
-    /**
+    /*
      * Boolean option for the collection of statistics from the various queues using to run tasks
      * (default {@link #DEFAULT_COLLECT_QUEUE_STATISTICS}).
      *
@@ -384,7 +384,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_COLLECT_QUEUE_STATISTICS = "true";
 
-    /**
+    /*
      * The delay between reports of performance counters to the {@link ILoadBalancerService} in
      * milliseconds ( {@value #DEFAULT_REPORT_DELAY}). When ZERO (0L), performance counter reporting
      * will be disabled.
@@ -396,7 +396,7 @@ public interface IEmbergraphClient<T> {
     /** The default {@link #REPORT_DELAY}. */
     String DEFAULT_REPORT_DELAY = "" + (60 * 1000);
 
-    /**
+    /*
      * When <code>true</code>, all collected performance counters are reported (default {@value
      * #DEFAULT_REPORT_ALL)}. Otherwise only the {@link
      * QueryUtil#getRequiredPerformanceCountersFilter()} will be reported. Reporting all performance
@@ -408,7 +408,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_REPORT_ALL = "false";
 
-    /**
+    /*
      * Integer option specifies the port on which an httpd service will be started that exposes the
      * {@link CounterSet} for the client (default {@value #DEFAULT_HTTPD_PORT}). When ZERO (0), a
      * random port will be used. The httpd service may be disabled by specifying <code>-1</code> as
@@ -440,7 +440,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_GANGLIA_LISTEN_PORT = Integer.toString(IGangliaDefaults.DEFAULT_PORT);
 
-    /**
+    /*
      * When <code>true</code>, the embedded {@link GangliaService} will listen on to the specified
      * multicast group.
      *
@@ -453,7 +453,7 @@ public interface IEmbergraphClient<T> {
 
     // Report
 
-    /**
+    /*
      * When <code>true</code>, the embedded {@link GangliaService} will report performance metrics
      * to the specified gmetad server(s).
      *
@@ -464,7 +464,7 @@ public interface IEmbergraphClient<T> {
 
     String DEFAULT_GANGLIA_REPORT = "true";
 
-    /**
+    /*
      * An list of the metric servers (<code>gmetad</code> instances) to which metrics will be sent.
      * The default is to send metrics to the well known multicast group for ganglia. Zero or more
      * hosts may be specified, separated by whitespace or commas. The port for each host is optional

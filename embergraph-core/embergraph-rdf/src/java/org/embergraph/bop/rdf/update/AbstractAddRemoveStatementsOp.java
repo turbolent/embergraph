@@ -39,8 +39,8 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 
-/**
- * Abstract base class for operations which add or remove statements from the statement indices.
+/*
+* Abstract base class for operations which add or remove statements from the statement indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -64,7 +64,7 @@ public abstract class AbstractAddRemoveStatementsOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -73,7 +73,7 @@ public abstract class AbstractAddRemoveStatementsOp extends PipelineOp {
     super(args, annotations);
   }
 
-  /**
+  /*
    * Return the {@link Set} of distinct {@link ISPO}s extracted from the source solutions.
    *
    * @param context The query engine context.
@@ -119,12 +119,12 @@ public abstract class AbstractAddRemoveStatementsOp extends PipelineOp {
 
       if (itr instanceof ICloseableIterator<?>) {
 
-        ((ICloseableIterator<?>) itr).close();
+        itr.close();
       }
     }
   }
 
-  /**
+  /*
    * Return an {@link ISPO} constructed from the source solution.
    *
    * @param bset The source solution.
@@ -143,7 +143,7 @@ public abstract class AbstractAddRemoveStatementsOp extends PipelineOp {
         type);
   }
 
-  /**
+  /*
    * Return the bound value for the variable.
    *
    * @param v The variable.
@@ -165,7 +165,7 @@ public abstract class AbstractAddRemoveStatementsOp extends PipelineOp {
       return null;
     }
 
-    final IV _s = (IV) constant.get();
+    final IV _s = constant.get();
 
     return _s;
   }

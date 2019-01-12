@@ -31,8 +31,8 @@ import org.embergraph.util.Bytes;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Data Type Enumeration (DTE) is a class which declares the known intrinsic data types, provides
+/*
+* Data Type Enumeration (DTE) is a class which declares the known intrinsic data types, provides
  * for extensibility to new data types, and provides for data types which either can not be inlined
  * or are not being inlined. The intrinsic data types are those having natural orders which can be
  * encoded into an unsigned byte[] key and decoded without loss. Whether or not a given data type is
@@ -75,7 +75,7 @@ import org.openrdf.model.Value;
  */
 public enum DTE {
 
-  /**
+  /*
    * The "inline" value is a boolean (xsd:boolean). Only the distinct points in the xsd:boolean
    * value space are represented. xsd:boolean has multiple lexical forms which map onto "true" and
    * "false". Those distinctions are not preserved.
@@ -131,7 +131,7 @@ public enum DTE {
   /** The "inline" value is an xsd:integer, which is equivalent to {@link BigInteger}. */
   XSDInteger((byte) 11, 0 /* variable length */, BigInteger.class, XSD.INTEGER, DTEFlags.NUMERIC),
 
-  /**
+  /*
    * The "inline" value is an xsd:decimal. This is mostly equivalent to {@link BigDecimal}, but
    * unlike that Java class, xsd:decimal DOES NOT preserve the precision of the value. (This fact is
    * convenient for indices since {@link BigDecimal} has, among other things, many distinct
@@ -144,14 +144,14 @@ public enum DTE {
    * custom intrinsic data types.
    */
 
-  /**
+  /*
    * The "inline" value is a {@link UUID}.
    *
    * @see http://lists.xml.org/archives/xml-dev/201003/msg00027.html
    */
   UUID((byte) 13, Bytes.SIZEOF_UUID, UUID.class, XSD.UUID, DTEFlags.NOFLAGS),
 
-  /**
+  /*
    * The "inline" value is a compressed Unicode string. This is decodable compressed encoding rather
    * than a Unicode sort key. It is suitable for representing "small" Unicode values directly within
    * the statement indices. "Small" is configurable, but should not be overly large. The tradeoff is
@@ -180,7 +180,7 @@ public enum DTE {
    */
   XSDString((byte) 14, 0 /* len */, String.class, XSD.STRING, DTEFlags.NOFLAGS),
 
-  /**
+  /*
    * This provides an extension of the intrinsic data types. Its code corresponds to 0xf, which is
    * to say all four bits are on. When this code is used, you must interpret the next byte using
    * {@link DTEExtension}.
@@ -195,7 +195,7 @@ public enum DTE {
    */
   Extension((byte) 15, 0 /* len */, Void.class, null /* datatype */, DTEFlags.NOFLAGS);
 
-  /**
+  /*
    * @param v The code for the data type.
    * @param len The length of the inline value -or- ZERO (0) if the value has a variable length
    *     (xsd:integer, xsd:decimal).
@@ -203,7 +203,7 @@ public enum DTE {
    * @param datatype The well-known URI for the data type.
    * @param flags Some bit flags. See {@link #NUMERIC}, {@link #UNSIGNED_NUMERIC}, etc.
    */
-  private DTE(
+  DTE(
       final byte v, final int len, final Class<?> cls, final URI datatypeURI, final int flags) {
     this.v = v;
     this.len = len;
@@ -258,7 +258,7 @@ public enum DTE {
     }
   }
 
-  /**
+  /*
    * Return the {@link DTE} for the datatype {@link URI}.
    *
    * @param datatype The datatype {@link URI}.
@@ -317,7 +317,7 @@ public enum DTE {
   /** The code for the data type. */
   final byte v;
 
-  /**
+  /*
    * The length of the inline value -or- ZERO (0) if the value has a variable length (xsd:integer,
    * xsd:decimal).
    */
@@ -329,7 +329,7 @@ public enum DTE {
   /** The well-known URI for the data type. */
   private final URI datatypeURI;
 
-  /**
+  /*
    * Some bit flags.
    *
    * @see #NUMERIC
@@ -342,7 +342,7 @@ public enum DTE {
     return v;
   }
 
-  /**
+  /*
    * The length of the data type value when represented as a component in an unsigned byte[] key
    * -or- ZERO iff the key component has a variable length for that data type.
    */
@@ -363,7 +363,7 @@ public enum DTE {
     return datatypeURI;
   }
 
-  /**
+  /*
    * <code>true</code> for any of the numeric data types (xsd:byte, xsd:unsignedByte, xsd:short,
    * xsd:unsignedShort, xsd:int, xsd:unsignedInt, xsd:long, xsd:unsignedLong, xsd:float, xsd:double,
    * xsd:integer, and xsd:decimal).
@@ -373,7 +373,7 @@ public enum DTE {
     return (flags & DTEFlags.NUMERIC) != 0;
   }
 
-  /**
+  /*
    * <code>true</code> for an signed numeric datatype ( xsd:byte, xsd:short, xsd:int, xsd:long,
    * xsd:float, xsd:double, xsd:integer, and xsd:decimal).
    */
@@ -382,7 +382,7 @@ public enum DTE {
     return isNumeric() && !isUnsignedNumeric();
   }
 
-  /**
+  /*
    * <code>true</code> for an unsigned numeric datatype ( xsd:unsignedByte, xsd:unsignedShort,
    * xsd:unsignedInt, xsd:unsignedLong).
    */
@@ -396,7 +396,7 @@ public enum DTE {
     return flags == DTEFlags.UNSIGNED_NUMERIC;
   }
 
-  /**
+  /*
    * This is <code>!isBigNumeric()</code> and is <code>true</code> for any of the fixed length
    * numeric data types (<code>xsd:byte, xsd:unsignedByte,
    * xsd:short, xsd:unsignedShort, xsd:int, xsd:unsignedInt, xsd:long,

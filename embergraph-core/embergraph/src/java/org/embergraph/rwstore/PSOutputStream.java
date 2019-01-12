@@ -29,8 +29,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.rawstore.IAllocationContext;
 import org.embergraph.rawstore.IPSOutputStream;
 
-/**
- * ********************************************************************** PSOutputStream
+/*
+* ********************************************************************** PSOutputStream
  *
  * <p>Provides stream interface direct to the low-level store.
  *
@@ -110,7 +110,7 @@ public class PSOutputStream extends IPSOutputStream {
     return ret;
   }
 
-  /**
+  /*
    * ***************************************************************** maintains pool of streams -
    * in a normal situation there will only me a single stream continually re-used, but with some
    * patterns there could be many streams. For this reason it is worth checking that the pool is not
@@ -164,7 +164,7 @@ public class PSOutputStream extends IPSOutputStream {
     m_next = str;
   }
 
-  /**
+  /*
    * ************************************************************** resets private state variables
    * for reuse of stream
    */
@@ -193,7 +193,7 @@ public class PSOutputStream extends IPSOutputStream {
     m_blobHdrIdx = 0;
   }
 
-  /**
+  /*
    * ************************************************************** write a single byte
    *
    * <p>this is the one place where the blob threshold is handled and its done one byte at a time so
@@ -227,7 +227,7 @@ public class PSOutputStream extends IPSOutputStream {
     m_bytesWritten++;
   }
 
-  /**
+  /*
    * ************************************************************** write a single 4 byte integer
    */
   public void writeInt(final int b) throws IOException {
@@ -244,12 +244,12 @@ public class PSOutputStream extends IPSOutputStream {
     writeInt(lo);
   }
 
-  /**
+  /*
    * ************************************************************** write byte array to the buffer
    *
    * <p>we need to be able to efficiently handle large arrays beyond size of the blobThreshold, so
    */
-  public void write(final byte b[], final int off, final int len) throws IOException {
+  public void write(final byte[] b, final int off, final int len) throws IOException {
     if (m_store == null) {
       throw new IllegalStateException(ERR_NO_STORE);
     }
@@ -271,7 +271,7 @@ public class PSOutputStream extends IPSOutputStream {
     }
   }
 
-  /**
+  /*
    * ************************************************************** utility method that extracts
    * data from the input stream
    *
@@ -283,7 +283,7 @@ public class PSOutputStream extends IPSOutputStream {
       throw new IllegalStateException(ERR_ALREADY_SAVED);
     }
 
-    final byte b[] = new byte[512];
+    final byte[] b = new byte[512];
 
     int r = instr.read(b);
     while (r == 512) {
@@ -296,7 +296,7 @@ public class PSOutputStream extends IPSOutputStream {
     }
   }
 
-  /**
+  /*
    * ************************************************************** on save() the current buffer is
    * allocated and written to the store, and the address of its location returned If saving as Blob
    * then addr must index to the BlobAllocator that then points to the BlobHeader
@@ -406,8 +406,8 @@ public class PSOutputStream extends IPSOutputStream {
   }
 }
 
-/**
- * ********************************************* Jython test
+/*
+* ********************************************* Jython test
  *
  * <p>from cutthecrap.gpo.client import OMClient; from cutthecrap.gpo import *; from java.io import
  * *;

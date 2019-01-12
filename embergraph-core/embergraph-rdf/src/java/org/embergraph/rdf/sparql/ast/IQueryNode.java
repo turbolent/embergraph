@@ -11,9 +11,9 @@ import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 /** This is the basic interface for any AST operator that appears in the query plan. */
 public interface IQueryNode extends BOp {
 
-  public interface Annotations {
+  interface Annotations {
 
-    /**
+    /*
      * An optional {@link Properties} object specifying query hints which apply to <i>this</i> AST
      * node.
      *
@@ -30,7 +30,7 @@ public interface IQueryNode extends BOp {
     String QUERY_HINTS = "queryHints";
   }
 
-  /**
+  /*
    * A string representation of a recursive structure with pretty-print indent.
    *
    * @param indent

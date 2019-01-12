@@ -31,8 +31,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * Unit test template for use in submission of bugs.
+/*
+* Unit test template for use in submission of bugs.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -73,7 +73,7 @@ public class TestTicket1889_2 extends TestTicket1889 {
     return properties;
   }
 
-  /**
+  /*
    * Prepares data containing blank nodes, loads it into triplestore, then run an update, which
    * creates additional statements with blank nodes resulting number of statements loaded should be
    * 2*n. Total number of blank nodes will be n+k.

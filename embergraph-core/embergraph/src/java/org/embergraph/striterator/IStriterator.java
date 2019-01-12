@@ -27,8 +27,8 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-/**
- * Streaming iterator pattern ala Martyn Cutcher with generics.
+/*
+* Streaming iterator pattern ala Martyn Cutcher with generics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -40,29 +40,29 @@ import java.util.Iterator;
 public interface IStriterator<I extends Iterator<E>, E>
     extends ICloseableIterator<E>, Enumeration<E> {
 
-  /**
+  /*
    * Stack a filter on the source iterator.
    *
    * @param filter The filter.
    * @return The filtered iterator.
    */
-  public IStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
+  IStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
 
-  /**
+  /*
    * Visits elements that are instances of the specified class.
    *
    * @param cls The class.
    * @return The filtered iterator.
    */
-  public IStriterator<I, E> addInstanceOfFilter(Class<E> cls);
+  IStriterator<I, E> addInstanceOfFilter(Class<E> cls);
 
-  /**
+  /*
    * Appends the given iterator when this iterator is exhausted.
    *
    * @param src Another iterator.
    * @return The combined iterator.
    */
-  public IStriterator<I, E> append(I src);
+  IStriterator<I, E> append(I src);
 
   //    public IStriterator<I,E> exclude(Object object);
   //

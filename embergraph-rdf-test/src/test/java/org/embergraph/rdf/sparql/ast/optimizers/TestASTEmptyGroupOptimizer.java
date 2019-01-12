@@ -55,8 +55,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTEmptyGroupOptimizer}.
+/*
+* Test suite for {@link ASTEmptyGroupOptimizer}.
  *
  * <p>TODO Test for removal of empty UNIONs. Empty UNIONs can arise through pruning based on unknown
  * IVs, or filters which are provably false. However, I would expect the pruning logic to eliminate
@@ -75,7 +75,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -177,7 +177,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Unit test for
    *
    * <pre>
@@ -219,7 +219,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Unit test for
    *
    * <pre>
@@ -259,7 +259,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Unit test verifies that the rewrite of an embedded sole GRAPH pattern is the lifting of that
    * GRAPH pattern (rather than replacing it with an empty non-GRAPH group).
    *
@@ -310,7 +310,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * For this AST we need to replace the root {@link JoinGroupNode} with its child {@link
    * UnionNode}. This means setting the child {@link UnionNode} as the whereClause on the {@link
    * QueryBase}.
@@ -419,7 +419,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * For this AST we need to left the {@link UnionNode} up to replace its empty parent {@link
    * JoinGroupNode}. The difference between this test and test 05 is that the parent is not the root
    * of the where clause.
@@ -559,7 +559,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Rewrite:
    *
    * <pre>
@@ -703,7 +703,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given:
    *
    * <pre>
@@ -767,7 +767,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
                 new FunctionNode(
                     FunctionRegistry.EQ,
                     null /* scalarValues */,
-                    new ValueExpressionNode[] {new VarNode("v"), new ConstantNode(ONE)})));
+                    new VarNode("v"), new ConstantNode(ONE))));
       }
     }
 
@@ -801,7 +801,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
                 new FunctionNode(
                     FunctionRegistry.EQ,
                     null /* scalarValues */,
-                    new ValueExpressionNode[] {new VarNode("v"), new ConstantNode(ONE)})));
+                    new VarNode("v"), new ConstantNode(ONE))));
       }
     }
 
@@ -815,7 +815,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Verify that we do not lift something out of an optional group as that would destroy the
    * optional semantics of the thing lifted.
    *
@@ -927,7 +927,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1115,7 +1115,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1218,7 +1218,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Top-level UNION optimizations. We should look at the plan after join attachment. If there is
    * just a child union (because either there is no filter or because there is a filter and it was
    * attached to the union) then we should either lift the UNION and evaluate it directly or (if we
@@ -1339,7 +1339,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1443,7 +1443,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1556,7 +1556,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1675,7 +1675,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1807,7 +1807,7 @@ public class TestASTEmptyGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * A test case where we can not eliminate an empty join group in a UNION.
    *
    * <pre>

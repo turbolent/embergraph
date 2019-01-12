@@ -27,8 +27,8 @@ import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Class for inline RDF blank nodes.
+/*
+* Class for inline RDF blank nodes.
  *
  * <p>{@inheritDoc}
  *

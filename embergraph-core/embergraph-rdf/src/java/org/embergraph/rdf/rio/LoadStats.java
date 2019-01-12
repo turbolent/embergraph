@@ -22,8 +22,8 @@ package org.embergraph.rdf.rio;
 import org.embergraph.counters.CAT;
 import org.embergraph.rdf.inf.ClosureStats;
 
-/**
- * Used to report statistics when loading data.
+/*
+* Used to report statistics when loading data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -36,7 +36,7 @@ public class LoadStats {
 
   private transient volatile long lastReportTime = 0l;
 
-  /**
+  /*
    * The internal with which this class will log on {@link System#out} in milliseconds (it is set to
    * every 10 minutes). This helps to track progress on very large data loads.
    */

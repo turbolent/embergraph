@@ -20,8 +20,8 @@ import org.embergraph.rdf.graph.impl.GASState;
 import org.embergraph.rdf.graph.impl.GASStats;
 import org.openrdf.model.Value;
 
-/**
- * Base class for running performance tests.
+/*
+* Base class for running performance tests.
  *
  * @param <VS> The generic type for the per-vertex state. This is scoped to the computation of the
  *     {@link IGASProgram}.
@@ -38,7 +38,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
 
   private static final Logger log = Logger.getLogger(GASRunnerBase.class);
 
-  /**
+  /*
    * Configured options for the {@link GASRunner}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -52,14 +52,14 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
     public long seed = DEFAULT_SEED;
     /** Random number generated used for sampling the starting vertices. Set by #init(). */
     public Random r = null;
-    /**
+    /*
      * The #of runs per initial condition. For algorithms that use a single starting vertex (BFS,
      * SSSP, etc.), there will be a total of <code>nruns * nsamples</code> runs. For algorithms that
      * populate the initial frontier with all vertices (e.g., CC, PR), there will be a total of
      * <code>nruns</code>.
      */
     public int nruns = DEFAULT_NRUNS;
-    /**
+    /*
      * The #of random starting vertices to use for algorithms that use a single starting vertex in
      * the initial frontier and otherwise ignored.
      */
@@ -68,7 +68,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
     public int nthreads = DEFAULT_NTHREADS;
     /** The analytic class to be executed. */
     public Class<IGASProgram<VS, ES, ST>> analyticClass;
-    /**
+    /*
      * The {@link IGASSchedulerImpl} class to use.
      *
      * <p>TODO Override or always? If always, then where to get the default?
@@ -92,7 +92,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
       r = new Random(seed);
     }
 
-    /**
+    /*
      * Shutdown any resources, including the connection to the backend.
      *
      * <p>Note: This method must be safe. It may be called if {@link #init()} fails. It may be
@@ -100,7 +100,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
      */
     public void shutdown() {}
 
-    /**
+    /*
      * Return <code>true</code>iff one or more arguments can be parsed starting at the specified
      * index.
      *
@@ -113,7 +113,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
       return false;
     }
 
-    /**
+    /*
      * Print the optional message on stderr, print the usage information on stderr, and then force
      * the program to exit with the given status code.
      *
@@ -132,7 +132,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
       System.exit(status);
     }
 
-    /**
+    /*
      * Extension hook for reporting at the end of the test run.
      *
      * @param sb A buffer into which more information may be appended.
@@ -159,7 +159,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
   /** Factory for the {@link IGASEngine}. */
   protected abstract IGASEngine newGASEngine();
 
-  /**
+  /*
    * Load files into the backend if they can not be assumed to already exist (a typical pattern is
    * that files are loaded into an empty KB instance, but not loaded into a pre-existing one).
    *
@@ -167,7 +167,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
    */
   protected abstract void loadFiles() throws Exception;
 
-  /**
+  /*
    * Run a GAS analytic against some data set.
    *
    * @param args USAGE:<br>
@@ -289,13 +289,13 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
   /** Return an instance of the {@link IGASProgram} to be evaluated. */
   protected IGASProgram<VS, ES, ST> newGASProgram() {
 
-    final Class<IGASProgram<VS, ES, ST>> cls = (Class<IGASProgram<VS, ES, ST>>) opt.analyticClass;
+    final Class<IGASProgram<VS, ES, ST>> cls = opt.analyticClass;
 
     try {
 
-      final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor(new Class[] {});
+      final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor();
 
-      final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance(new Object[] {});
+      final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance();
 
       return gasProgram;
 
@@ -305,7 +305,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
     }
   }
 
-  /**
+  /*
    * Run the test.
    *
    * <p>This provides a safe pattern for either loading data into a temporary journal, which is then
@@ -337,7 +337,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
     }
   }
 
-  /**
+  /*
    * Run the analytic.
    *
    * @return The performance statistics for the run.
@@ -439,7 +439,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
         if (frontierEnum == FrontierEnum.AllVertices) {
 
           // Run analytic.
-          final IGASStats stats = (IGASStats) gasContext.call();
+          final IGASStats stats = gasContext.call();
 
           total.add(stats);
 
@@ -450,8 +450,8 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
 
         } else {
 
-          /*
-           * The initial frontier is a single vertex. Choose it
+        /*
+       * The initial frontier is a single vertex. Choose it
            * from the sampled vertices.
            */
 
@@ -462,11 +462,11 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
             gasState.setFrontier(gasContext, startingVertex);
 
             // Run analytic.
-            final IGASStats stats = (IGASStats) gasContext.call();
+            final IGASStats stats = gasContext.call();
 
             if (stats.getFrontierSize() == 1) {
-              /*
-               * The starting vertex was not actually connected to any
+            /*
+       * The starting vertex was not actually connected to any
                * other vertices by the traversal performed by the GAS
                * program.
                */
@@ -507,7 +507,7 @@ public abstract class GASRunnerBase<VS, ES, ST> implements Callable<IGASStats> {
       sb.append(", nthreads=" + opt.nthreads);
       sb.append(
           ", scheduler="
-              + ((GASState<VS, ES, ST>) gasState).getScheduler().getClass().getSimpleName());
+              + gasState.getScheduler().getClass().getSimpleName());
       sb.append(", gasEngine=" + gasEngine.getClass().getSimpleName());
       opt.report(sb); // extension hook.
       // performance results.

@@ -11,8 +11,8 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.IBufferAccess;
 import org.embergraph.util.BytesUtil;
 
-/**
- * A fast iterator based on multi-block IO for the {@link IndexSegment}. This iterator is designed
+/*
+* A fast iterator based on multi-block IO for the {@link IndexSegment}. This iterator is designed
  * for operations which will fully visit either all leaves in the {@link IndexSegment} or a
  * key-range corresponding to a substantial proportion of those leaves. A direct {@link ByteBuffer}
  * is allocated from the caller's {@link DirectBufferPool} and an IO request is issued against the
@@ -70,7 +70,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
    * Tuple stuff.
    */
 
-  /**
+  /*
    * <code>true</code> iff the iterator is exhausted (the last tuple has been read from the last
    * leaf).
    */
@@ -79,7 +79,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
   /** The current {@link Tuple} for the {@link #tupleItr}. */
   private final Tuple<E> tuple;
 
-  /**
+  /*
    * Iterator used to scan each leaf in turn. It is <code>null</code> if there is no {@link
    * #currentLeaf} or if the {@link #currentLeaf} is exhausted.
    */
@@ -92,7 +92,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
   /** The address of the first leaf to be read. */
   private final long firstLeafAddr;
 
-  /**
+  /*
    * The address of the last leaf to be read.
    *
    * <p>Note that the last byte to be read is obtained from {@link
@@ -100,7 +100,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
    */
   private final long lastLeafAddr;
 
-  /**
+  /*
    * The current leaf -or- <code>null</code> if no leaves have been read. The address of the current
    * leaf is available from {@link Leaf#getIdentity()}. The address of the next leaf is available
    * from {@link Leaf#getNextAddr()}.
@@ -111,7 +111,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
    * Block stuff.
    */
 
-  /**
+  /*
    * The byte offset of the current block in the {@link IndexSegment}. Together with the {@link
    * #blockLength}, this is used to determine which leaves may be addressed within the block, when
    * we need to read another block in order to address a leaf, etc.
@@ -131,7 +131,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
   /** The #of blocks read so far. */
   private long blockReadCount = 0;
 
-  /**
+  /*
    * @param seg The {@link IndexSegment}.
    * @param pool The pool from which a direct {@link ByteBuffer} will be acquired and into which
    *     blocks will be read from the backing file.
@@ -207,7 +207,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
     this.blockLength = 0;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This is extended to ensure that the buffer is released back to the {@link DirectBufferPool}.
@@ -244,7 +244,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
     }
   }
 
-  /**
+  /*
    * Return the current leaf.
    *
    * @return The current leaf -or- <code>null</code> iff no leaves have been read from the {@link
@@ -272,7 +272,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Return <code>true</code> iff another tuple is available.
    *
    * @return
@@ -303,7 +303,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
     return false;
   }
 
-  /**
+  /*
    * Return the next leaf from the {@link #buffer}. If the next leaf is not in the buffer, read the
    * next block of leaves from the backing file.
    *
@@ -358,7 +358,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
     return leaf;
   }
 
-  /**
+  /*
    * Read a leaf from the {@link #buffer}.
    *
    * @param addr The address of the leaf.
@@ -405,7 +405,7 @@ public class IndexSegmentMultiBlockIterator<E> implements ITupleIterator<E> {
     return new ImmutableLeaf(seg, addr, data);
   }
 
-  /**
+  /*
    * Read as many leaves from the backing from into the buffer as will fit using a multi-block IO.
    *
    * <p>Note: This implementation ensures that at least one full leaf will be read into the block

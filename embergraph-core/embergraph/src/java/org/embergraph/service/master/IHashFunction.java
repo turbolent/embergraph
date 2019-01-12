@@ -24,8 +24,8 @@ package org.embergraph.service.master;
 
 import java.io.Serializable;
 
-/**
- * A hash function.
+/*
+* A hash function.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -33,11 +33,11 @@ import java.io.Serializable;
  */
 public interface IHashFunction<V> extends Serializable {
 
-  /**
+  /*
    * Return the hash code of the value.
    *
    * @param value The value.
    * @return The hash code.
    */
-  public int hashFunction(V value);
+  int hashFunction(V value);
 }

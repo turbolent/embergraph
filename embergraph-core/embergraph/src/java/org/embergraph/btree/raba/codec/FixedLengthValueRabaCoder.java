@@ -33,8 +33,8 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * This class does not offer any compression. It merely stores byte[][] whose individual elements
+/*
+* This class does not offer any compression. It merely stores byte[][] whose individual elements
  * have a fixed length specified in the constructor in a manner suitable for fast random access.
  * This is useful if the values are a fixed length, application specific coding is either not
  * obvious or not desired, and you wish to emphasize speed of data access over compression. This
@@ -69,7 +69,7 @@ import org.embergraph.util.BytesUtil;
  */
 public class FixedLengthValueRabaCoder implements IRabaCoder, Externalizable {
 
-  /**
+  /*
    * This is the historical implicit value. It has been made into an explicit value since the {@link
    * IRabaCoder} API change to support duplicate keys for the HTree caused a change in the implict
    * computed value.
@@ -113,7 +113,7 @@ public class FixedLengthValueRabaCoder implements IRabaCoder, Externalizable {
   /** De-serialization ctor. */
   public FixedLengthValueRabaCoder() {}
 
-  /**
+  /*
    * Designated constructor.
    *
    * @param len The length of the byte[] value for each non-<code>null</code> tuple. {@link IRaba}s
@@ -149,7 +149,7 @@ public class FixedLengthValueRabaCoder implements IRabaCoder, Externalizable {
   /** The byte offset to the bit flags coding the nulls. */
   private static final int O_NULLS = O_SIZE + SIZEOF_SIZE;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Instances of this class will reject {@link IRaba} instances having non- <code>null</code>
@@ -205,8 +205,8 @@ public class FixedLengthValueRabaCoder implements IRabaCoder, Externalizable {
 
           } else if (raba.length(i) != len) {
 
-            /*
-             * All non-null values must have the length specified to
+          /*
+       * All non-null values must have the length specified to
              * the constructor, so this is a runtime error.
              */
 
@@ -256,7 +256,7 @@ public class FixedLengthValueRabaCoder implements IRabaCoder, Externalizable {
     return new CodedRabaImpl(len, data);
   }
 
-  /**
+  /*
    * Class provides in place access to the "coded" logical byte[][].
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

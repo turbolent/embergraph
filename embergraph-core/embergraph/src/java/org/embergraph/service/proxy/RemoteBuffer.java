@@ -26,8 +26,8 @@ import java.io.IOException;
 import java.rmi.Remote;
 import org.embergraph.relation.accesspath.IBuffer;
 
-/**
- * {@link Remote} interface declaring the API of {@link IBuffer} but also declaring that each
+/*
+* {@link Remote} interface declaring the API of {@link IBuffer} but also declaring that each
  * methods throws {@link IOException} in order to be compatible with {@link Remote} and {@link
  * Exporter}. Of course, this means that this interface can not extend {@link IBuffer}!
  *
@@ -36,13 +36,13 @@ import org.embergraph.relation.accesspath.IBuffer;
  */
 public interface RemoteBuffer<E> extends Remote {
 
-  public int size() throws IOException;
+  int size() throws IOException;
 
-  public boolean isEmpty() throws IOException;
+  boolean isEmpty() throws IOException;
 
-  public void add(E e) throws IOException;
+  void add(E e) throws IOException;
 
-  public long flush() throws IOException;
+  long flush() throws IOException;
 
-  public void reset() throws IOException;
+  void reset() throws IOException;
 }

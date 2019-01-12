@@ -3,8 +3,8 @@ package org.embergraph.bop.engine;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/**
- * Delegate pattern cancels the {@link IRunningQuery} when the iterator is {@link #close() closed}
+/*
+* Delegate pattern cancels the {@link IRunningQuery} when the iterator is {@link #close() closed}
  * and signals normal completion of the query once the iterator is exhausted.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -27,8 +27,8 @@ import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.IndexSegmentStore;
 import org.embergraph.service.ResourceService;
 
-/**
- * Various kinds of subtasks for asynchronous index partition overflow tasks.
+/*
+* Various kinds of subtasks for asynchronous index partition overflow tasks.
  *
  * @see OverflowActionEnum
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -38,20 +38,20 @@ public enum OverflowSubtaskEnum {
 
   /** Corresponds to the total overflow task for an index partition. */
   Total,
-  /**
+  /*
    * Operation responsible for the atomic update of the index partition view as part of any of the
    * asynchronous overflow tasks
    *
    * @see OverflowActionEnum
    */
   AtomicUpdate,
-  /**
+  /*
    * Operation responsible for deciding how many of the sources in the view will be used for an
    * incremental build operation. When all sources are accepted, the build will actually be a
    * compacting merge and deleted tuples will be purged from the index partition.
    */
   ChooseView,
-  /**
+  /*
    * Copying historical data from the old journal.
    *
    * @deprecated by {@link MoveTask}
@@ -59,20 +59,20 @@ public enum OverflowSubtaskEnum {
   CopyHistory,
   /** Registering a new index partition. */
   RegisterIndex,
-  /**
+  /*
    * Operation copying an {@link IndexSegment} using the {@link ResourceService}.
    *
    * @deprecated by {@link MoveTask}
    */
   SendIndexSegment,
-  /**
+  /*
    * The overall operation submitted to the target data service during a MOVE in which it receives
    * the data for the source index partition and registers the target index partition.
    */
   ReceiveIndexPartition,
-  /**
+  /*
    * The operation in which an {@link IndexSegmentStore} file is received by the target data service
    * as part of a MOVE operation.
    */
-  ReceiveIndexSegment;
+  ReceiveIndexSegment
 }

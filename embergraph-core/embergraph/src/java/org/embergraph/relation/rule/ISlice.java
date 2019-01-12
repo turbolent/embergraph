@@ -26,8 +26,8 @@ package org.embergraph.relation.rule;
 import java.io.Serializable;
 import org.embergraph.relation.accesspath.IAccessPath;
 
-/**
- * Indicates the first solution to be returned to the caller (offset) and the #of solutions to be
+/*
+* Indicates the first solution to be returned to the caller (offset) and the #of solutions to be
  * returned (limit).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -35,13 +35,13 @@ import org.embergraph.relation.accesspath.IAccessPath;
  */
 public interface ISlice extends Serializable {
 
-  /**
+  /*
    * The first solution to be returned to the caller. A value of ZERO (0) indicates that all
    * solutions should be returned.
    */
-  public long getOffset();
+  long getOffset();
 
-  /**
+  /*
    * The maximum #of solutions to be returned to the caller. A value of {@link Long#MAX_VALUE}
    * indicates that there is no limit.
    *
@@ -49,11 +49,11 @@ public interface ISlice extends Serializable {
    *     of ZERO (0L) is interpreted as NO limit and a limit of {@link Long#MAX_VALUE} is
    *     interpreted as ZERO (0L) (that is, also no limit).
    */
-  public long getLimit();
+  long getLimit();
 
-  /**
+  /*
    * The index of the last solution that we will generate (OFFSET + LIMIT). If OFFSET + LIMIT would
    * be greater than {@link Long#MAX_VALUE}, then use {@link Long#MAX_VALUE} instead.
    */
-  public long getLast();
+  long getLast();
 }

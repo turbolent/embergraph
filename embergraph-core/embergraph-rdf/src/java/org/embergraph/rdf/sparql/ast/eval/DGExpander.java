@@ -30,8 +30,8 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
-/**
- * Parallel subquery for a default graph access path. An expander pattern is used to ensure that the
+/*
+* Parallel subquery for a default graph access path. An expander pattern is used to ensure that the
  * "DISTINCT SPO" constraint is applied across the subqueries rather than to each subquery
  * individually.
  *
@@ -51,7 +51,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
 
   private final long estimatedRangeCount;
 
-  /**
+  /*
    * @param maxParallel
    * @param graphs A dense ordered array of {@link IV}s.
    * @param estimatedRangeCount The estimated range count for the subquery operation across those
@@ -98,7 +98,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
         + "}";
   }
 
-  /**
+  /*
    * Inner class evaluates the access path for each context using limited parallelism, discarding
    * the context argument for each {@link ISPO}, and filtering out duplicate triples based on their
    * (s,p,o) term identifiers.
@@ -169,7 +169,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
     //
     //        }
 
-    /**
+    /*
      * Unsupported operation.
      *
      * <p>Note: this could be implemented by delegation but it is not used from the context of
@@ -195,7 +195,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
     //
     //        }
 
-    /**
+    /*
      * This is the common entry point for all iterator implementations.
      *
      * @todo Consider an alternative implementation using fully parallel evaluation of the access
@@ -224,7 +224,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
       return new ChunkedWrappedIterator<ISPO>(src);
     }
 
-    /**
+    /*
      * Iterator implementation based on limited parallelism over the iterators for the {@link
      * IAccessPath} associated with each graph in the default graphs set and using a {@link BTree}
      * to filter out duplicate (s,p,o) tuples.
@@ -243,7 +243,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
       private final CAT nAPsWithHits = new CAT();
       private final CAT nhits = new CAT();
 
-      /**
+      /*
        * @todo buffer chunks of {@link #ISPO}s for more efficiency (lock amortization) and better
        *     alignment with the chunked source iterators. (It used to be that the only issue was
        *     {@link #hasNext()} having to maintain a chunk of known distinct tuples to be visited,
@@ -255,7 +255,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
       /** The source iterator. */
       private final ICloseableIterator<ISPO> src;
 
-      /**
+      /*
        * @param offset
        * @param limit
        * @param capacity
@@ -273,8 +273,8 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
         FutureTask<Void> future = null;
         try {
 
-          /*
-           * Note: We do NOT get() this Future. This task will run
+        /*
+       * Note: We do NOT get() this Future. This task will run
            * asynchronously.
            *
            * The Future is canceled IF (hopefully WHEN) the iterator
@@ -299,8 +299,8 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
           // submit task for execution.
           sourceAccessPath.getIndexManager().getExecutorService().submit(future);
 
-          /*
-           * The outer access path will impose the "DISTINCT SPO"
+        /*
+       * The outer access path will impose the "DISTINCT SPO"
            * constraint.
            */
           // /*
@@ -340,8 +340,8 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
 
       public void close() {
 
-        /*
-         * Close the iterator, interrupting the running task if
+      /*
+       * Close the iterator, interrupting the running task if
          * necessary.
          */
 
@@ -379,7 +379,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
         throw new UnsupportedOperationException();
       }
 
-      /**
+      /*
        * Return task which will submit tasks draining the iterators for each access path onto the
        * caller's buffer.
        *
@@ -391,7 +391,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
         return new RunIteratorsTask(buffer);
       }
 
-      /**
+      /*
        * Inner {@link Callable} queues up the {@link DrainIteratorTask}s on the {@link Executor}.
        */
       private final class RunIteratorsTask implements Callable<Void> {
@@ -442,7 +442,7 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
         }
       }
 
-      /**
+      /*
        * Inner callable runs an iterator for a specific access path, draining the iterator onto the
        * blocking buffer.
        *
@@ -465,8 +465,8 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
 
           if (log.isDebugEnabled()) log.debug("Running iterator: c=" + termId);
 
-          /*
-           * Clear various annotations from source predicate.
+        /*
+       * Clear various annotations from source predicate.
            *
            * expander: we are the expander.
            *
@@ -477,15 +477,14 @@ public class DGExpander implements IAccessPathExpander<ISPO> {
            * [c].
            */
           final Predicate<ISPO> sourcePred =
-              (Predicate<ISPO>)
-                  sourceAccessPath
-                      .getPredicate()
-                      .clearAnnotations(
-                          new String[] {
-                            IPredicate.Annotations.ACCESS_PATH_EXPANDER,
-                            IPredicate.Annotations.ACCESS_PATH_FILTER,
-                            // IPredicate.Annotations.KEY_ORDER
-                          });
+              sourceAccessPath
+                  .getPredicate()
+                  .clearAnnotations(
+                      new String[] {
+                        IPredicate.Annotations.ACCESS_PATH_EXPANDER,
+                        IPredicate.Annotations.ACCESS_PATH_FILTER,
+                        // IPredicate.Annotations.KEY_ORDER
+                      });
 
           // Bind the graph onto the context position variable.
           final Predicate<ISPO> asBound =

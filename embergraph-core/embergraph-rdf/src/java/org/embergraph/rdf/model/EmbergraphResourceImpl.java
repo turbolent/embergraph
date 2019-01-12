@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -42,14 +42,14 @@ package org.embergraph.rdf.model;
 
 import org.embergraph.rdf.internal.IV;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class EmbergraphResourceImpl extends EmbergraphValueImpl
     implements EmbergraphResource {
 
-  /**
+  /*
    * @param valueFactory The factory that is creating this object (optional).
    * @param iv The internal value (optional).
    */

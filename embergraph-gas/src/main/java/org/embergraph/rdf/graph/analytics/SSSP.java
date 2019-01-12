@@ -36,8 +36,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * SSSP (Single Source, Shortest Path). This analytic computes the shortest path to each connected
+/*
+* SSSP (Single Source, Shortest Path). This analytic computes the shortest path to each connected
  * vertex in the graph starting from the given vertex. Only connected vertices are visited by this
  * implementation (the frontier never leaves the connected component in which the starting vertex is
  * located).
@@ -52,7 +52,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
 
   private static final Logger log = Logger.getLogger(SSSP.class);
 
-  /**
+  /*
    * The length of an edge.
    *
    * <p>FIXME RDR: This should be modified to use link weights with RDR. We need a pattern to get
@@ -72,7 +72,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
 
   public static class VS {
 
-    /**
+    /*
      * The minimum observed distance (in hops) from the source to this vertex and initially {@link
      * Integer#MAX_VALUE}. When this value is modified, the {@link #changed} flag is set as a
      * side-effect.
@@ -82,8 +82,8 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
      */
     private Double dist = Double.MAX_VALUE;
 
-    //        /**
-    //         * Note: This flag is cleared by apply() and then conditionally set
+    //        /*
+//         * Note: This flag is cleared by apply() and then conditionally set
     //         * iff the {@link #dist()} is replaced by the new value from the
     //         * gather.  Thus, if the gather does not reduce the value, then the
     //         * propagation of the algorithm is halted. However, this causes the
@@ -94,7 +94,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     //         */
     //        private boolean changed = false;
 
-    /**
+    /*
      * The predecessor is the source vertex to visit a given target vertex with the minimum observed
      * distance.
      */
@@ -106,8 +106,8 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
       return predecessor.get();
     }
 
-    //        /**
-    //         * Set the distance for the vertex to ZERO. This is done for the
+    //        /*
+//         * Set the distance for the vertex to ZERO. This is done for the
     //         * starting vertex.
     //         */
     //        public void zero() {
@@ -117,8 +117,8 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     //            }
     //        }
 
-    //        /**
-    //         * Return <code>true</code> if the {@link #dist()} was updated by the
+    //        /*
+//         * Return <code>true</code> if the {@link #dist()} was updated by the
     //         * last APPLY.
     //         */
     //        public boolean isChanged() {
@@ -127,7 +127,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     //            }
     //        }
 
-    /**
+    /*
      * The current estimate of the minimum distance from the starting vertex to this vertex and
      * {@link Integer#MAX_VALUE} until this vertex is visited.
      */
@@ -160,8 +160,8 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
 
     }
 
-    //        /**
-    //         * Update the vertex state to the minimum of the combined sum and its
+    //        /*
+//         * Update the vertex state to the minimum of the combined sum and its
     //         * current state.
     //         *
     //         * @param u
@@ -195,7 +195,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     //
     //        }
 
-    /**
+    /*
      * Update the vertex state to the new (reduced) distance.
      *
      * @param predecessor The vertex that propagated the update to this vertex.
@@ -261,7 +261,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     return EdgesEnum.OutEdges;
   }
 
-  /**
+  /*
    * Set the {@link VS#dist()} to ZERO (0).
    *
    * <p>{@inheritDoc}
@@ -277,7 +277,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     us.setStartingVertex();
   }
 
-  /**
+  /*
    * <code>src.dist + edge_length (1)</code>
    *
    * <p>{@inheritDoc}
@@ -354,7 +354,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
   //
   //    }
 
-  /**
+  /*
    * The remote vertex is scheduled the weighted edge from this vertex to the remote vertex plus the
    * weight on this vertex is less than the weight on the remote vertex.
    */
@@ -420,7 +420,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     return true;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -474,7 +474,7 @@ public class SSSP extends BaseGASProgram<SSSP.VS, SSSP.ES, Integer /* dist */>
     return tmp;
   }
 
-  /**
+  /*
    * Additional {@link IBindingExtractor.IBinder}s exposed by {@link SSSP}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -1,7 +1,7 @@
 package org.embergraph.bfs;
 
-/**
- * Thrown when the identified document already exists.
+/*
+* Thrown when the identified document already exists.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

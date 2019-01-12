@@ -14,8 +14,8 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 
-/**
- * <p>An {@link IBindingSet} based on a {@link LinkedList}. Since {@link Var}s may
+/*
+* <p>An {@link IBindingSet} based on a {@link LinkedList}. Since {@link Var}s may
  * be compared using <code>==</code> this should be faster than a hash map for
  * most operations unless the binding set has a large number of entries.
  * </p><p>
@@ -79,10 +79,10 @@ public class ListBindingSet implements IBindingSet {
     public String toString() {
       return var + "=" + val;
     }
-  };
+  }
 
-  //	/**
-  //	 * The stack of symbol tables. Each symbol table is a mapping from an
+  //	/*
+//	 * The stack of symbol tables. Each symbol table is a mapping from an
   //	 * {@link IVariable} onto its non-<code>null</code> bound {@link IConstant}.
   //	 * The stack is initialized with an empty symbol table. Symbol tables may be
   //	 * pushed onto the stack or popped off of the stack, but the stack MAY NOT
@@ -190,7 +190,7 @@ public class ListBindingSet implements IBindingSet {
     current = new LinkedList<E>();
   }
 
-  /**
+  /*
    * Alternative constructor.
    *
    * @param vars A copy is made of the data.
@@ -213,7 +213,7 @@ public class ListBindingSet implements IBindingSet {
     }
   }
 
-  /**
+  /*
    * Copy constructor (used by clone, copy).
    *
    * @param src The source to be copied.
@@ -254,7 +254,7 @@ public class ListBindingSet implements IBindingSet {
     current = contents;
   }
 
-  /**
+  /*
    * Return a copy of the source list. The copy will use new {@link E}s to represent the bindings so
    * changes to the copy will not effect the source.
    *
@@ -297,7 +297,7 @@ public class ListBindingSet implements IBindingSet {
     return dst;
   }
 
-  /**
+  /*
    * Return a copy of the source list minus entries assigning error values (Constant.errorValue() or
    * its copies). The copy will use new {@link E}s to represent the bindings so changes to the copy
    * will not effect the source.

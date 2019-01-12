@@ -28,8 +28,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.apache.log4j.Logger;
 import org.embergraph.Banner;
 
-/**
- * Abstract base class for {@link IEmbergraphClient} implementations.
+/*
+* Abstract base class for {@link IEmbergraphClient} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -300,7 +300,7 @@ public abstract class AbstractClient<T> implements IEmbergraphClient<T> {
     return delegate.get();
   }
 
-  /**
+  /*
    * Set the delegate for the federation.
    *
    * @param delegate The delegate.
@@ -343,7 +343,7 @@ public abstract class AbstractClient<T> implements IEmbergraphClient<T> {
 
   }
 
-  /**
+  /*
    * Extended to {@link IEmbergraphClient#disconnect(boolean)} if the client is still connected when
    * it is finalized.
    */

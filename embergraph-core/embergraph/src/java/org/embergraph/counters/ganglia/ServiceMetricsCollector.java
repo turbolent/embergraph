@@ -10,8 +10,8 @@ import org.embergraph.ganglia.GangliaMunge;
 import org.embergraph.ganglia.IGangliaMetricsCollector;
 import org.embergraph.ganglia.IGangliaMetricsReporter;
 
-/**
- * Reflects collected service metrics to ganglia.
+/*
+* Reflects collected service metrics to ganglia.
  *
  * <pre>
  * /192.168.1.10/test-context-7/CPU/% Processor Time=0.0

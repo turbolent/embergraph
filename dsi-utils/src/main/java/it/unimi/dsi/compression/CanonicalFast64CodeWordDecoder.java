@@ -26,8 +26,8 @@ import it.unimi.dsi.io.InputBitStream;
 import java.io.IOException;
 import java.io.Serializable;
 
-/**
- * A fast table-based decoder for canonical Huffman codes supporting only codes with limited (less
+/*
+* A fast table-based decoder for canonical Huffman codes supporting only codes with limited (less
  * than 64 bits) codewords. We use the technique described by Daniel S. Hirschberg and Debra A.
  * Lelewer, &ldquo;Efficient Decoding of Prefix Codes&rdquo;, <i>Comm. ACM</i>, 33(4):
  * 449&minus;459, 1990.
@@ -37,14 +37,14 @@ public final class CanonicalFast64CodeWordDecoder implements Decoder, Serializab
 
   /** The last codeword in each block of same-length codewords, plus one. */
   private final long[] lastCodeWordPlusOne;
-  /**
+  /*
    * An array parallel to {@link #lastCodeWordPlusOne} specifying the increment in length between
    * codeword lengths (without repetitions). In particular, the first entry is the length of the
    * first block of same-length codewords, the second entry is the difference in length between the
    * second and the first block of same-length codewords, and so on.
    */
   private final int[] lengthIncrement;
-  /**
+  /*
    * An array parallel to {@link #lastCodeWordPlusOne} specifying how many codewords we have up to a
    * certain block (included).
    */
@@ -52,7 +52,7 @@ public final class CanonicalFast64CodeWordDecoder implements Decoder, Serializab
   /** The symbol assigned to each code word. */
   private final int[] symbol;
 
-  /**
+  /*
    * Creates a new codeword-based decoder using the given vector of codewords lengths and a symbol
    * array.
    *
@@ -107,7 +107,7 @@ public final class CanonicalFast64CodeWordDecoder implements Decoder, Serializab
     }
   }
 
-  /**
+  /*
    * Reads a specified number of bits from a Boolean iterator and stores them into a long.
    *
    * @param iterator a Boolean iterator.

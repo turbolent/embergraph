@@ -29,8 +29,8 @@ import org.embergraph.counters.Instrument;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.util.concurrent.TaskCounters;
 
-/**
- * Counters used for sync RPC on scale-out indices.
+/*
+* Counters used for sync RPC on scale-out indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -43,14 +43,14 @@ public class IndexSyncRPCCounters extends TaskCounters {
   /** The #of redirects ({@link StaleLocatorException}s) that were handled. */
   public long redirectCount = 0L;
 
-  /**
+  /*
    * The #of requests which have been submitted. This counter is incremented when the task is
    * actually dispatched via RMI to the data service so it will not reflect tasks which are in the
    * client's queue.
    */
   public long requestCount = 0L;
 
-  /**
+  /*
    * The #of elements in a synchronous RPC request. Single point requests are reported as ONE (1)
    * element out. Key-range requests are NOT reported under this counter (they correspond to
    * iterators and range counts). Key-array requests report the #of tuples in the request (they
@@ -76,7 +76,7 @@ public class IndexSyncRPCCounters extends TaskCounters {
     return (requestCount == 0L ? 0 : serviceNanoTime.get() / (double) requestCount);
   }
 
-  /**
+  /*
    * The average #of elements (tuples) per request. Because {@link #elementsOut} and {@link
    * #requestCount} are incremented when the request is submitted, this reflects both the completed
    * requests and any requests which might be outstanding.

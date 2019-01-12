@@ -38,8 +38,8 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.test.MockTermIdFactory;
 
-/**
- * Test suite for approaches to value compression for statement indices. The values exist if either
+/*
+* Test suite for approaches to value compression for statement indices. The values exist if either
  * statement identifiers or truth maintenance is being used, otherwise NO values are associated with
  * the keys in the statement indices. For statement identifiers, the value is the SID (int64). For
  * truth maintenance, the value is the {@link StatementEnum}. If statement identifiers and truth
@@ -92,7 +92,7 @@ public class TestSPOValueCoders extends TestCase2 {
     return factory.newTermId(VTE.URI);
   }
 
-  /**
+  /*
    * Return an array of {@link SPO}s.
    *
    * @param n The #of elements in the array.
@@ -169,7 +169,7 @@ public class TestSPOValueCoders extends TestCase2 {
   //
   //    }
 
-  /**
+  /*
    * Simple tests for {@link FastRDFValueCoder2}.
    *
    * <p>Note: this does not cover nulls or overrides, but the stress tests covers both.
@@ -233,7 +233,7 @@ public class TestSPOValueCoders extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Do a round-trip test test.
    *
    * @param a The array of {@link SPO}s.

@@ -30,8 +30,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 
-/**
- * Unit tests for {@link OR}.
+/*
+* Unit tests for {@link OR}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -23,30 +23,30 @@ package it.unimi.dsi.bits;
 
 import java.io.Serializable;
 
-/**
- * A generic transformation from objects of a given type to bit vector. Most useful when adding
+/*
+* A generic transformation from objects of a given type to bit vector. Most useful when adding
  * strings, etc. to a trie.
  */
 public interface TransformationStrategy<T> extends Serializable {
-  /**
+  /*
    * Returns a bit vector representation of the given object.
    *
    * @param object the object to be turned into bit representation.
    * @return a bit vector representation of <code>object</code>.
    */
-  public BitVector toBitVector(T object);
+  BitVector toBitVector(T object);
 
-  /**
+  /*
    * The (approximate) number of bits occupied by this transformation.
    *
    * @return the (approximate) number of bits occupied by this transformation.
    */
-  public long numBits();
+  long numBits();
 
-  /**
+  /*
    * Returns a copy of this transformation strategy.
    *
    * @return a copy of this transformation strategy.
    */
-  public TransformationStrategy<T> copy();
+  TransformationStrategy<T> copy();
 }

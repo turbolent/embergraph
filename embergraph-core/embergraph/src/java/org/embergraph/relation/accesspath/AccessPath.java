@@ -83,8 +83,8 @@ import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Abstract base class for type-specific {@link IAccessPath} implementations.
+/*
+* Abstract base class for type-specific {@link IAccessPath} implementations.
  *
  * <p>Note: Filters should be specified when the {@link IAccessPath} is constructed so that they
  * will be evaluated on the data service rather than materializing the elements and then filtering
@@ -117,13 +117,13 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
   /** Predicate (the resource name on the predicate is the relation namespace). */
   protected final IPredicate<R> predicate;
 
-  /**
+  /*
    * The description of the index partition iff the {@link #predicate} is constrained to an index
    * partition and <code>null</code> otherwise.
    */
   final LocalPartitionMetadata pmd;
 
-  /**
+  /*
    * Index order (the relation namespace plus the index order and the option partitionId constraint
    * on the predicate identify the index).
    */
@@ -151,7 +151,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return hasFilter;
   }
 
-  /**
+  /*
    * <code>true</code> iff all elements in the predicate which are required to generate the key are
    * bound to constants.
    */
@@ -172,7 +172,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return chunkOfChunksCapacity;
   }
 
-  /**
+  /*
    * The maximum <em>limit</em> that is allowed for a fully-buffered read. The {@link
    * #asynchronousIterator(Iterator)} will always be used above this limit.
    *
@@ -187,7 +187,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
    */
   protected static final int MAX_FULLY_BUFFERED_READ_LIMIT = 10000000;
 
-  /**
+  /*
    * We cache some stuff for historical reads.
    *
    * <p>Note: We cache results on a per-{@link IAccessPath} basis rather than a per-{@link IIndex}
@@ -200,7 +200,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
    */
   private final boolean historicalRead;
 
-  /**
+  /*
    * For {@link #historicalRead}s only, the range count is cached once it is computed. It is also
    * set if we discover using {@link #isEmpty()} or {@link #iterator(long, long, int)} that the
    * {@link IAccessPath} is empty. Likewise, those methods test this flag to see if we have proven
@@ -208,7 +208,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
    */
   private long rangeCount = -1L;
 
-  /**
+  /*
    * The filter derived from optional {@link IPredicate.Annotations#INDEX_LOCAL_FILTER}. If there
    * are shared variables in the {@link IPredicate} then a {@link SameVariableConstraint} is added
    * regardless of whether the {@link IPredicate} specified a filter or not.
@@ -225,7 +225,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
   private final byte[] toKey;
 
-  /**
+  /*
    * The key corresponding to the inclusive lower bound for the {@link IAccessPath} <code>null
    * </code> if there is no lower bound.
    */
@@ -234,7 +234,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return fromKey;
   }
 
-  /**
+  /*
    * The key corresponding to the exclusive upper bound for the {@link IAccessPath} -or- <code>null
    * </code> if there is no upper bound.
    */
@@ -249,7 +249,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return keyOrder;
   }
 
-  /**
+  /*
    * @param relation The relation for the access path (optional). The <i>relation</> is not
    *     specified when requested an {@link IAccessPath} for a specific index partition in order to
    *     avoid forcing the materialization of the {@link IRelation}.
@@ -282,7 +282,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     final boolean remoteAccessPath =
         predicate.getProperty(
             IPredicate.Annotations.REMOTE_ACCESS_PATH,
-            partitionId == -1 ? IPredicate.Annotations.DEFAULT_REMOTE_ACCESS_PATH : false);
+            partitionId == -1 && IPredicate.Annotations.DEFAULT_REMOTE_ACCESS_PATH);
 
     /*
      * Chose the right index manger. If relation.getIndexManager() is not
@@ -337,8 +337,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     if (partitionId != -1) {
 
       if (remoteAccessPath) {
-        /*
-         * A request for a specific shard is not compatible with a
+      /*
+       * A request for a specific shard is not compatible with a
          * request for a remote access path.
          */
         throw new RuntimeException(
@@ -362,15 +362,15 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       try {
         // MUST be a local index view.
-        ndx = (ILocalBTreeView) indexManager.getIndex(name, timestamp);
+        ndx = indexManager.getIndex(name, timestamp);
       } catch (Throwable t) {
         throw new RuntimeException(predicate.toString(), t);
       }
 
       if (ndx == null) {
 
-        /*
-         * Some possible root causes for failing to find a shard on a DS
+      /*
+       * Some possible root causes for failing to find a shard on a DS
          * are listed below. You should verify that the addressed shard
          * was actually present on the addressed data service as of the
          * effect read time of the request.
@@ -466,7 +466,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
     this.ndx = ndx;
 
-    /**
+    /*
      * See AST2BOpUtility.toPredicate(). It is responsible for copying these annotations from the
      * StatementPatternNode onto the Predicate so they can influence the behavior of the AccessPath.
      *
@@ -521,8 +521,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       if (sameVarConstraint != null) {
 
-        /*
-         * Stack filters.
+      /*
+       * Stack filters.
          */
         final FilterBase tmp = new NOPFilter();
 
@@ -582,7 +582,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     if (!didInit) throw new IllegalStateException();
   }
 
-  /**
+  /*
    * Required post-ctor initialization.
    *
    * @return <i>this</i>
@@ -636,7 +636,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return ndx;
   }
 
-  /**
+  /*
    * @todo for scale-out, it may be better to implement {@link #isEmpty()} without specifying a
    *     capacity of ONE (1) and then caching the returned iterator. This could avoid an expensive
    *     RMI test if we invoke {@link #iterator()} shortly after {@link #isEmpty()} returns <code>
@@ -683,8 +683,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     }
   }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     *
   //     * @see https://sourceforge.net/apps/trac/bigdata/ticket/209 (Access path
   //     *      should visit solutions for high level query).
@@ -698,7 +698,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
   //
   //    }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/209 (Access path should visit solutions
@@ -727,7 +727,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
   //
   //    }
 
-  /**
+  /*
    * @throws RejectedExecutionException if the iterator is run asynchronously and the {@link
    *     ExecutorService} is shutdown or has a maximum capacity and is saturated.
    *     <p>FIXME Support both offset and limit for asynchronous iterators. right now this will
@@ -913,8 +913,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       if (rangeCountRemaining <= 0) {
 
-        /*
-         * Since the range count is an upper bound we KNOW that the
+      /*
+       * Since the range count is an upper bound we KNOW that the
          * iterator would not visit anything.
          */
 
@@ -1005,7 +1005,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     }
   }
 
-  /**
+  /*
    * Fully buffers all elements that would be visited by the {@link IAccessPath} iterator.
    *
    * @param accessPath The access path (including the triple pattern).
@@ -1084,7 +1084,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return new ChunkedArrayIterator<R>(nused, buffer, keyOrder);
   }
 
-  /**
+  /*
    * Asynchronous read using a {@link BlockingBuffer}.
    *
    * @param src The source iterator.
@@ -1105,7 +1105,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
      */
     final BlockingBuffer<R[]> buffer = new BlockingBuffer<R[]>(chunkOfChunksCapacity);
 
-    /**
+    /*
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">BlockingBuffer.close()
      *     does not unblock threads </a>
      */
@@ -1122,7 +1122,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return new ChunkConsumerIterator<R>(buffer.iterator(), keyOrder);
   }
 
-  /**
+  /*
    * Consumes elements from the source iterator, converting them into chunks on a {@link
    * BlockingBuffer}. The consumer will drain the chunks from the buffer.
    *
@@ -1138,7 +1138,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
     private final BlockingBuffer<R[]> buffer;
 
-    /**
+    /*
      * @param src The source iterator visiting elements read from the relation.
      * @param buffer The buffer onto which chunks of those elements will be written.
      */
@@ -1231,8 +1231,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
 
       if (hasFilter) {
 
-        /*
-         * If there is a filter, then we need to visit the elements and
+      /*
+       * If there is a filter, then we need to visit the elements and
          * apply the filter to those elements.
          *
          * FIXME If the filter is properly driven through to the indices
@@ -1278,7 +1278,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return n;
   }
 
-  /**
+  /*
    * Note: the range count is cached for a historical read to reduce round trips to the DataService.
    */
   private final long historicalRangeCount(final byte[] fromKey, final byte[] toKey) {
@@ -1316,7 +1316,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return ndx.rangeIterator(fromKey, toKey, capacity, flags, filter);
   }
 
-  /**
+  /*
    * This implementation removes all tuples that would be visited by the access path from the
    * backing index.
    *
@@ -1355,7 +1355,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return n;
   }
 
-  /**
+  /*
    * Return an estimate of the cost of a scan on the predicate.
    *
    * @param pred The predicate.
@@ -1405,7 +1405,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     throw new UnsupportedOperationException("index=" + ndx);
   }
 
-  /**
+  /*
    * Return the estimated cost of an index scan on a local {@link BTree}.
    *
    * @param btree The {@link BTree}.
@@ -1415,7 +1415,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
       final DiskCostModel diskCostModel, final BTree btree, final long rangeCount) {
 
     // BTree is its own statistics view.
-    final IBTreeStatistics stats = (BTree) btree;
+    final IBTreeStatistics stats = btree;
 
     // Estimate cost based on random seek per node/leaf.
     final double cost =
@@ -1429,7 +1429,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return new ScanCostReport(rangeCount, cost);
   }
 
-  /**
+  /*
    * Return the estimated cost of a key-range scan for a local B+Tree view. This handles both {@link
    * IsolatedFusedView} (transactions) and {@link FusedView} (shards).
    *
@@ -1487,7 +1487,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return new ScanCostReport(rangeCount, cost);
   }
 
-  /**
+  /*
    * Return the estimated cost of a key-range scan on a remote view of a scale-out index.
    *
    * @param ndx The scale-out index.
@@ -1544,10 +1544,9 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
        * Delegate the operation to the remote shard.
        */
 
-      return (ScanCostReport)
-          ndx.submit(
-              fromKey == null ? BytesUtil.EMPTY : fromKey,
-              new EstimateShardScanCost(rangeCount, fromKey, toKey));
+      return ndx.submit(
+          fromKey == null ? BytesUtil.EMPTY : fromKey,
+          new EstimateShardScanCost(rangeCount, fromKey, toKey));
     }
 
     /*
@@ -1581,7 +1580,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
     return new ScanCostReport(rangeCount, partitionCount, cost);
   }
 
-  /**
+  /*
    * Procedure to estimate the cost of an index range scan on a remote shard.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1622,7 +1621,7 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
    * Cost models.
    */
 
-  /**
+  /*
    * The cost model associated with the disk on which the indices are stored. For a {@link Journal},
    * this is just the cost model of the backing disk. For the federation, this should be an average
    * cost model.
@@ -1640,8 +1639,8 @@ public class AccessPath<R> implements IAccessPath<R>, IBindingSetAccessPath<R> {
    */
   private static final DiskCostModel diskCostModel = DiskCostModel.DEFAULT;
 
-  //	/**
-  //	 * Dumps the locators for an index of a relation.
+  //	/*
+//	 * Dumps the locators for an index of a relation.
   //	 *
   //	 * @param fed
   //	 * @param namespace

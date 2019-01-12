@@ -3,8 +3,8 @@ package org.embergraph.counters.render;
 import java.util.regex.Pattern;
 import org.embergraph.counters.query.HistoryTable;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class HistoryTableRenderer implements IRenderer {
@@ -15,7 +15,7 @@ public abstract class HistoryTableRenderer implements IRenderer {
 
   protected final ValueFormatter formatter;
 
-  /**
+  /*
    * @param tbl
    * @param pattern Used to identify capturing groups and extract column labels.
    * @param formatter

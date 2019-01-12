@@ -29,8 +29,8 @@ import java.util.Iterator;
 import java.util.Map;
 import junit.framework.TestCase2;
 
-/**
- * Unit tests for {@link Resolver}.
+/*
+* Unit tests for {@link Resolver}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

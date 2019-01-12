@@ -59,8 +59,8 @@ import org.embergraph.sparse.GlobalRowStoreHelper;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.NT;
 
-/**
- * Generic implementation relies on a ctor for the resource with the following method signature:
+/*
+* Generic implementation relies on a ctor for the resource with the following method signature:
  *
  * <pre>
  * public NAME ( IIndexManager indexManager, String namespace, Long timestamp, Properties properties )
@@ -112,7 +112,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
   /** Cache for recently located resources. */
   private final transient ConcurrentWeakValueCache<NT, T> resourceCache;
 
-  /**
+  /*
    * Cache for recently materialized properties from the GRS.
    *
    * <p>Note: Due to the manner in which the property sets are materialized from the {@link
@@ -121,7 +121,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
    */
   final /*private*/ transient ConcurrentWeakValueCache<NT, Map<String, Object>> propertyCache;
 
-  /**
+  /*
    * Special property used to record the {@link IRawStore#getUUID() UUID} of the backing {@link
    * IIndexManager} on which the property set for some namespace was discovered.
    */
@@ -130,7 +130,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
   /** Provides locks on a per-namespace basis for higher concurrency. */
   private final transient NamedLock<String> namedLock = new NamedLock<String>();
 
-  /**
+  /*
    * The default #of recently located resources whose hard references will be retained by the {@link
    * LRUCache}.
    */
@@ -139,7 +139,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
   /** The default timeout for stale entries in milliseconds. */
   protected static final transient long DEFAULT_CACHE_TIMEOUT = (10 * 1000);
 
-  /**
+  /*
    * Ctor uses {@link #DEFAULT_CACHE_CAPACITY} and {@link #DEFAULT_CACHE_TIMEOUT}.
    *
    * @param indexManager
@@ -152,7 +152,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     this(indexManager, delegate, DEFAULT_CACHE_CAPACITY, DEFAULT_CACHE_TIMEOUT);
   }
 
-  /**
+  /*
    * @param indexManager
    * @param delegate Optional {@link IResourceLocator} to which unanswered requests are then
    *     delegated.
@@ -316,7 +316,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     }
   }
 
-  /**
+  /*
    * Handle a cache miss.
    *
    * @param nt The (namespace, timestamp) tuple.
@@ -341,8 +341,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       if (delegate != null) {
 
-        /*
-         * A delegate was specified, so see if the delegate can resolve
+      /*
+       * A delegate was specified, so see if the delegate can resolve
          * this request.
          */
 
@@ -411,7 +411,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     return resource;
   }
 
-  /**
+  /*
    * Note: Caller is synchronized for this <i>namespace</i>.
    *
    * @param namespace The namespace for the resource.
@@ -426,8 +426,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     synchronized (seeAlso) { // FIXME Probably a read/write lock since [seeAlso] normally empty.
       for (IIndexManager indexManager : seeAlso.keySet()) {
 
-        /*
-         * read properties from the global row store for the default
+      /*
+       * read properties from the global row store for the default
          * index manager.
          */
         Properties properties = null;
@@ -440,8 +440,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
           if (indexManager instanceof TemporaryStore) {
 
-            /*
-             * Note: Asynchronous close is common for temporary
+          /*
+       * Note: Asynchronous close is common for temporary
              * stores since they can be asynchronously closed
              * and removed from the [seeAlso] weak value cache.
              */
@@ -450,8 +450,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
           } else {
 
-            /*
-             * Other stores should more typically remain open, but
+          /*
+       * Other stores should more typically remain open, but
              * they could be closed asynchronously for valid
              * reasons.
              */
@@ -524,7 +524,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     return properties;
   }
 
-  /**
+  /*
    * Return the {@link Properties} that will be used to configure the {@link IRelation} instance.
    * The {@link RelationSchema#CLASS} property MUST be defined and specified the runtime class that
    * will be instantiated.
@@ -580,15 +580,15 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       if (indexManager instanceof IJournal) {
 
-        /*
-         * For a Journal, find the commitTime backing that read-only
+      /*
+       * For a Journal, find the commitTime backing that read-only
          * view.
          */
 
         final IJournal journal = (IJournal) indexManager;
 
-        /*
-         * Note: Using the local transaction manager to resolve a
+      /*
+       * Note: Using the local transaction manager to resolve a
          * read-only transaction identifer to the ITx object and then
          * retrieving the readsOnCommitTime from that ITx is a
          * non-blocking code path. It is preferrable to looking up the
@@ -613,15 +613,15 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
           if (commitRecord == null) {
 
-            /*
-             * No data for that timestamp.
+          /*
+       * No data for that timestamp.
              */
 
             return null;
           }
 
-          /*
-           * Find the timestamp associated with that commit record.
+        /*
+       * Find the timestamp associated with that commit record.
            *
            * Note: We also save commitTime2 to stuff into the properties,
            * thereby revealing the commitTime backing the resource view
@@ -633,8 +633,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       } else {
 
-        /*
-         * Federation, TemporaryStore, etc.
+      /*
+       * Federation, TemporaryStore, etc.
          *
          * Note: The TemporaryStore lacks a history mechanism.
          *
@@ -686,8 +686,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       if (cachedMap != null) {
 
-        /*
-         * Property cache hit.
+      /*
+       * Property cache hit.
          */
 
         // Save reference to the property set.
@@ -696,8 +696,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       } else {
 
-        /*
-         * Property cache miss.
+      /*
+       * Property cache miss.
          */
 
         propertyCacheHit = false;
@@ -752,16 +752,16 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       if (timestamp == ITx.UNISOLATED) {
 
-        /*
-         * The unisolated view.
+      /*
+       * The unisolated view.
          */
 
         rowStore = indexManager.getGlobalRowStore();
 
       } else if (timestamp == ITx.READ_COMMITTED) {
 
-        /*
-         * View for the last commit time.
+      /*
+       * View for the last commit time.
          */
 
         rowStore = indexManager.getGlobalRowStore(indexManager.getLastCommitTime());
@@ -785,8 +785,8 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
         } else {
 
-          /*
-           * TODO This should use the readsOnCommitTime on the cluster
+        /*
+       * TODO This should use the readsOnCommitTime on the cluster
            * as well.
            *
            * @see https://sourceforge.net/apps/trac/bigdata/ticket/266
@@ -855,7 +855,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     return properties;
   }
 
-  /**
+  /*
    * Create a new view of the relation.
    *
    * @param indexManager The {@link IIndexManager} that will be used to resolve the named indices
@@ -883,12 +883,11 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       ctor =
           cls.getConstructor(
-              new Class[] {
-                IIndexManager.class,
-                String.class, // relation namespace
-                Long.class, // timestamp of the view
-                Properties.class // configuration properties.
-              });
+              IIndexManager.class,
+              String.class, // relation namespace
+              Long.class, // timestamp of the view
+              Properties.class // configuration properties.
+          );
 
     } catch (Exception e) {
 
@@ -900,7 +899,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
 
       r =
           ctor.newInstance(
-              new Object[] {indexManager, nt.getName(), nt.getTimestamp(), properties});
+              indexManager, nt.getName(), nt.getTimestamp(), properties);
 
       r.init();
 
@@ -917,7 +916,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     }
   }
 
-  /**
+  /*
    * Places the instance into the cache iff there is no existing instance in the cache for the same
    * resource and timestamp.
    *
@@ -1065,7 +1064,7 @@ public class DefaultResourceLocator<T extends ILocatableResource<T>>
     if (log.isInfoEnabled()) log.info("Cleared resource cache");
   }
 
-  /**
+  /*
    * Causes the {@link IIndexManager} to be tested when attempting to resolve a resource
    * identifiers. The {@link IIndexManager} will be automatically cleared from the set of {@link
    * IIndexManager}s to be tested if its reference is cleared by the JVM. If it becomes closed

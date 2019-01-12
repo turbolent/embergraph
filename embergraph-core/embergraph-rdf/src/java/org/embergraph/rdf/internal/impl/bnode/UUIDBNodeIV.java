@@ -25,8 +25,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 import org.openrdf.model.BNode;
 
-/**
- * Class for inline RDF blank nodes. Blank nodes MUST be based on UUIDs in order to be lined.
+/*
+* Class for inline RDF blank nodes. Blank nodes MUST be based on UUIDs in order to be lined.
  *
  * <p>{@inheritDoc}
  *

@@ -12,8 +12,8 @@ import cern.colt.map.AbstractIntObjectMap;
 import cern.colt.map.OpenIntObjectHashMap;
 import cern.colt.matrix.ObjectMatrix1D;
 import cern.colt.matrix.ObjectMatrix2D;
-/**
- * Sparse hashed 2-d matrix holding <tt>Object</tt> elements. First see the <a
+/*
+* Sparse hashed 2-d matrix holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -83,7 +83,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
    * The elements of the matrix.
    */
   protected AbstractIntObjectMap elements;
-  /**
+  /*
    * Constructs a matrix with a copy of the given values. <tt>values</tt> is required to have the
    * form <tt>values[row][column]</tt> and have exactly the same number of columns in every row.
    *
@@ -98,7 +98,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
     this(values.length, values.length == 0 ? 0 : values[0].length);
     assign(values);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of rows and columns and default memory usage. All
    * entries are initially <tt>null</tt>.
    *
@@ -110,7 +110,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
   public SparseObjectMatrix2D(int rows, int columns) {
     this(rows, columns, rows * (columns / 1000), 0.2, 0.5);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of rows and columns using memory as specified. All
    * entries are initially <tt>null</tt>. For details related to memory usage see {@link
    * cern.colt.map.OpenIntObjectHashMap}.
@@ -132,7 +132,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
     setUp(rows, columns);
     this.elements = new OpenIntObjectHashMap(initialCapacity, minLoadFactor, maxLoadFactor);
   }
-  /**
+  /*
    * Constructs a view with the given parameters.
    *
    * @param rows the number of rows the matrix shall have.
@@ -164,7 +164,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
     if (this.isNoView) return this.elements.size();
     else return super.cardinality();
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of non-zero cells without
    * needing to allocate new internal memory. If necessary, allocates new internal memory and
    * increases the capacity of the receiver.
@@ -179,7 +179,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
   public void ensureCapacity(int minCapacity) {
     this.elements.ensureCapacity(minCapacity);
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -198,7 +198,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
     // manually inlined:
     return this.elements.get(rowZero + row * rowStride + columnZero + column * columnStride);
   }
-  /**
+  /*
    * Returns <tt>true</tt> if both matrices share common cells. More formally, returns <tt>true</tt>
    * if at least one of the following conditions is met
    *
@@ -218,7 +218,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
     }
     return false;
   }
-  /**
+  /*
    * Returns the position of the given coordinate within the (virtual or non-virtual) internal
    * 1-dimensional array.
    *
@@ -230,7 +230,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
     // manually inlined for speed:
     return rowZero + row * rowStride + columnZero + column * columnStride;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of rows and columns. For example, if the receiver is an instance of
    * type <tt>DenseObjectMatrix2D</tt> the new matrix must also be of type
@@ -246,7 +246,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
   public ObjectMatrix2D like(int rows, int columns) {
     return new SparseObjectMatrix2D(rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseObjectMatrix2D</tt> the new matrix must be of type <tt>DenseObjectMatrix1D</tt>, if
@@ -259,7 +259,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
   public ObjectMatrix1D like1D(int size) {
     return new SparseObjectMatrix1D(size);
   }
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, sharing the
    * same cells. For example, if the receiver is an instance of type <tt>DenseObjectMatrix2D</tt>
    * the new matrix must be of type <tt>DenseObjectMatrix1D</tt>, if the receiver is an instance of
@@ -275,7 +275,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
   protected ObjectMatrix1D like1D(int size, int offset, int stride) {
     return new SparseObjectMatrix1D(size, this.elements, offset, stride);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -297,7 +297,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
     if (value == null) this.elements.removeKey(index);
     else this.elements.put(index, value);
   }
-  /**
+  /*
    * Releases any superfluous memory created by explicitly putting zero values into cells formerly
    * having non-zero values; An application can use this operation to minimize the storage of the
    * receiver.
@@ -322,7 +322,7 @@ public class SparseObjectMatrix2D extends ObjectMatrix2D {
   public void trimToSize() {
     this.elements.trimToSize();
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param rowOffsets the offsets of the visible elements.

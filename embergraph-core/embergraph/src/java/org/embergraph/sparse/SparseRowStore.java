@@ -43,8 +43,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.RelationSchema;
 import org.embergraph.service.ndx.IClientIndex;
 
-/**
- * A client-side class that knows how to use an {@link IIndex} to provide an efficient data model in
+/*
+* A client-side class that knows how to use an {@link IIndex} to provide an efficient data model in
  * which a logical row is stored as one or more entries in the {@link IIndex}. Operations are
  * provided for atomic read and write of logical row. While the scan operations are always
  * consistent (they will never reveal data from a row that undergoing concurrent modification), they
@@ -124,13 +124,13 @@ public class SparseRowStore implements IRowStoreConstants {
 
   protected static final Logger log = Logger.getLogger(SparseRowStore.class);
 
-  //    /**
-  //     * True iff the {@link #log} level is INFO or less.
+  //    /*
+//     * True iff the {@link #log} level is INFO or less.
   //     */
   //    final protected boolean INFO = log.isInfoEnabled();
   //
-  //    /**
-  //     * True iff the {@link #log} level is DEBUG or less.
+  //    /*
+//     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final protected boolean DEBUG = log.isDebugEnabled();
 
@@ -144,7 +144,7 @@ public class SparseRowStore implements IRowStoreConstants {
     return ndx;
   }
 
-  /**
+  /*
    * Create a client-side abstraction that treats an {@link IIndex} as a {@link SparseRowStore}.
    *
    * <p>Note: When creating the backing index you MUST specify the split handler to ensure that
@@ -172,8 +172,8 @@ public class SparseRowStore implements IRowStoreConstants {
     this.ndx = ndx;
   }
 
-  //    /**
-  //     * Used to encode and decode tuples for the {@link SparseRowStore} index.
+  //    /*
+//     * Used to encode and decode tuples for the {@link SparseRowStore} index.
   //     * Each tuple corresponds to a {@link ITPV timestamped property value} for
   //     * some {@link Schema}.
   //     *
@@ -192,8 +192,8 @@ public class SparseRowStore implements IRowStoreConstants {
   //     */
   //    public class TPVTupleSerializer implements ITupleSerializer {
   //
-  //        /**
-  //         * De-serialization ctor.
+  //        /*
+//         * De-serialization ctor.
   //         */
   //        public TPVTupleSerializer() {
   //
@@ -211,8 +211,8 @@ public class SparseRowStore implements IRowStoreConstants {
   //            return key;
   //        }
   //
-  //        /**
-  //         * De-serializes as much of the key as possible.
+  //        /*
+//         * De-serializes as much of the key as possible.
   //         *
   //         * @see KeyDecoder
   //         */
@@ -272,7 +272,7 @@ public class SparseRowStore implements IRowStoreConstants {
     }
   }
 
-  /**
+  /*
    * Verifies the writeTime.
    *
    * @param writeTime
@@ -302,7 +302,7 @@ public class SparseRowStore implements IRowStoreConstants {
     }
   }
 
-  /**
+  /*
    * Return the current binding for the named property.
    *
    * @param schema The {@link Schema} governing the logical row.
@@ -325,7 +325,7 @@ public class SparseRowStore implements IRowStoreConstants {
     return tps.get(name).getValue();
   }
 
-  /**
+  /*
    * Read the most recent logical row from the index.
    *
    * @param schema The {@link Schema} governing the logical row.
@@ -349,7 +349,7 @@ public class SparseRowStore implements IRowStoreConstants {
     return tps.asMap();
   }
 
-  /**
+  /*
    * Read the most recent logical row from the index.
    *
    * @param schema The {@link Schema} governing the logical row.
@@ -375,7 +375,7 @@ public class SparseRowStore implements IRowStoreConstants {
     return tps.asMap();
   }
 
-  /**
+  /*
    * Read a logical row from the index.
    *
    * @param schema The {@link Schema} governing the logical row.
@@ -437,10 +437,10 @@ public class SparseRowStore implements IRowStoreConstants {
     final byte[] key = schema.fromKey(ndx.getIndexMetadata().getKeyBuilder(), primaryKey).getKey();
 
     // Submit the atomic read operation.
-    return (TPS) ndx.submit(key, proc);
+    return ndx.submit(key, proc);
   }
 
-  /**
+  /*
    * Atomic write with atomic read-back of the post-update state of the logical row.
    *
    * <p>Note: In order to cause a column value for row to be deleted you MUST specify a <code>null
@@ -462,7 +462,7 @@ public class SparseRowStore implements IRowStoreConstants {
         .asMap();
   }
 
-  /**
+  /*
    * Atomic write with atomic read-back of the post-update state of the logical row.
    *
    * @param schema The {@link Schema} governing the logical row.
@@ -481,7 +481,7 @@ public class SparseRowStore implements IRowStoreConstants {
         .asMap();
   }
 
-  /**
+  /*
    * Atomic write with atomic read of the then current post-condition state of the logical row.
    *
    * <p>Note: In order to cause a column value for row to be deleted you MUST specify a <code>null
@@ -536,7 +536,7 @@ public class SparseRowStore implements IRowStoreConstants {
     return write(schema, propertySet, MIN_TIMESTAMP, CURRENT_ROW, writeTime, filter, precondition);
   }
 
-  /**
+  /*
    * Atomic write with atomic read of the post-condition state of the logical row.
    *
    * <p>Note: In order to cause a column value for row to be deleted you MUST specify a <code>null
@@ -642,10 +642,10 @@ public class SparseRowStore implements IRowStoreConstants {
 
     final byte[] key = schema.fromKey(ndx.getIndexMetadata().getKeyBuilder(), primaryKey).getKey();
 
-    return (TPS) ndx.submit(key, proc);
+    return ndx.submit(key, proc);
   }
 
-  /**
+  /*
    * Atomic delete of all property values for the current logical row.
    *
    * @param schema The schema.
@@ -658,7 +658,7 @@ public class SparseRowStore implements IRowStoreConstants {
         schema, primaryKey, MIN_TIMESTAMP, CURRENT_ROW, AUTO_TIMESTAMP_UNIQUE, null /* filter */);
   }
 
-  /**
+  /*
    * Atomic delete of all property values for the logical row. The property values are read
    * atomically, each property value that is read is then overwritten with a <code>null</code>, and
    * the read property values are returned.
@@ -708,10 +708,10 @@ public class SparseRowStore implements IRowStoreConstants {
 
     final byte[] key = schema.fromKey(ndx.getIndexMetadata().getKeyBuilder(), primaryKey).getKey();
 
-    return (TPS) ndx.submit(key, proc);
+    return ndx.submit(key, proc);
   }
 
-  /**
+  /*
    * A logical row scan. Each logical row will be read atomically. Only the current bindings for
    * property values will be returned.
    *
@@ -730,7 +730,7 @@ public class SparseRowStore implements IRowStoreConstants {
         null /* filter */);
   }
 
-  /**
+  /*
    * A logical row scan. Each logical row will be read atomically. Only the current bindings for
    * property values will be returned.
    *
@@ -748,7 +748,7 @@ public class SparseRowStore implements IRowStoreConstants {
         schema, fromKey, toKey, 0 /* capacity */, MIN_TIMESTAMP, CURRENT_ROW, null /* filter */);
   }
 
-  /**
+  /*
    * A logical row scan. Each logical row will be read atomically. Only the current bindings for
    * property values will be returned.
    *
@@ -767,7 +767,7 @@ public class SparseRowStore implements IRowStoreConstants {
         schema, fromKey, toKey, 0 /* capacity */, MIN_TIMESTAMP, CURRENT_ROW, filter);
   }
 
-  /**
+  /*
    * A logical row scan. Each logical row will be read atomically.
    *
    * @param schema The {@link Schema} governing the logical row.
@@ -869,14 +869,14 @@ public class SparseRowStore implements IRowStoreConstants {
             });
   }
 
-  /**
+  /*
    * Options for the {@link SparseRowStore}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface Options {
 
-    /**
+    /*
      * The schema name was originally written using a Unicode sort key. However, the JDK can
      * generate Unicode sort keys with embedded nuls which in turn will break the logic to detect
      * the end of the schema name in the key. In order to accommodate this behavior, the schema name
@@ -895,7 +895,7 @@ public class SparseRowStore implements IRowStoreConstants {
     /** @see https://sourceforge.net/apps/trac/bigdata/ticket/107 */
     String DEFAULT_SCHEMA_NAME_UNICODE_CLEAN = "true";
 
-    /**
+    /*
      * The primary key was originally written using a Unicode sort key. However, the JDK generates
      * Unicode sort keys with embedded nuls and that broke the logic to detect the end of the
      * Unicode primary keys. In order to accommodate this behavior, the Unicode primary key is now
@@ -915,7 +915,7 @@ public class SparseRowStore implements IRowStoreConstants {
     String DEFAULT_PRIMARY_KEY_UNICODE_CLEAN = "true";
   }
 
-  /**
+  /*
    * This is a global option since it was always <code>false</code> for historical stores.
    *
    * @see Options#SCHEMA_NAME_UNICODE_CLEAN
@@ -926,7 +926,7 @@ public class SparseRowStore implements IRowStoreConstants {
               SparseRowStore.Options.SCHEMA_NAME_UNICODE_CLEAN,
               SparseRowStore.Options.DEFAULT_SCHEMA_NAME_UNICODE_CLEAN));
 
-  /**
+  /*
    * This is a global option since it was always <code>false</code> for historical stores.
    *
    * @see Options#PRIMARY_KEY_UNICODE_CLEAN
@@ -937,7 +937,7 @@ public class SparseRowStore implements IRowStoreConstants {
               SparseRowStore.Options.PRIMARY_KEY_UNICODE_CLEAN,
               SparseRowStore.Options.DEFAULT_PRIMARY_KEY_UNICODE_CLEAN));
 
-  /**
+  /*
    * List of namespaces, defined in the row store.
    *
    * @param tx The transaction identifier -or- <code>timestamp</code> if the {@link IIndexManager}

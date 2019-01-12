@@ -23,8 +23,8 @@ package org.embergraph.bop.engine;
 
 import java.util.UUID;
 
-/**
- * Extended metadata for operator evaluation messages also indicates the on which the operator will
+/*
+* Extended metadata for operator evaluation messages also indicates the on which the operator will
  * be / was evaluated.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

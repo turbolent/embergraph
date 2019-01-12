@@ -51,8 +51,8 @@ import org.embergraph.testutil.ExperimentDriver.Result;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.NV;
 
-/**
- * Stress test of the group commit mechanism. This class may be used to tune the performance of a
+/*
+* Stress test of the group commit mechanism. This class may be used to tune the performance of a
  * variety of parameters that effect the throughput of group commit. There are other stress tests
  * that show the throughput for more complex tasks or for isolated tasks (transactions). This test
  * focuses purely on the group commit mechanism itself.
@@ -86,7 +86,7 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
     super(arg0);
   }
 
-  /**
+  /*
    * Measures the maximum rate at which a single thread can register named indices. This provides an
    * approximate lower bound for throughput using group commit and the same index creation task. The
    * actual throughput could be somewhat higher or lower since access to the index in which the
@@ -153,7 +153,7 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
     }
   }
 
-  /**
+  /*
    * Measures the maximum rate at which two threads can register named indices. This provides a good
    * approximation for the throughput using group commit and the same index creation task when the
    * thread pool has two threads.
@@ -282,7 +282,7 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
     }
   }
 
-  /**
+  /*
    * Runs a single condition.
    *
    * @throws Exception
@@ -330,25 +330,25 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
 
   }
 
-  /**
+  /*
    * Options understood by this stress test.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface TestOptions extends Options {
+  public interface TestOptions extends Options {
 
     /** The timeout for the test (seconds). */
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
     /** The #of tasks to submit. */
-    public static final String NTASKS = "ntasks";
+    String NTASKS = "ntasks";
 
-    /**
+    /*
      * The #of records to insert into the index -or- ZERO (0) to only create the index (default 0).
      */
-    public static final String NINSERT = "NINSERT";
+    String NINSERT = "NINSERT";
 
-    public static final String DEFAULT_NINSERT = "0";
+    String DEFAULT_NINSERT = "0";
   }
 
   @Override
@@ -446,8 +446,8 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
             if (isInnerCause(ex, InterruptedException.class)
                 || isInnerCause(ex, ClosedByInterruptException.class)) {
 
-              /*
-               * Note: Tasks will be interrupted if a timeout
+            /*
+       * Note: Tasks will be interrupted if a timeout
                * occurs when attempting to run the submitted tasks
                * - this is normal.
                */
@@ -532,7 +532,7 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
   @Override
   public void tearDownComparisonTest() throws Exception {}
 
-  /**
+  /*
    * Run the stress test configured in the code.
    *
    * @param args
@@ -589,14 +589,14 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
     }
   }
 
-  /**
+  /*
    * Experiment generation utility class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public static class GenerateExperiment extends ExperimentDriver {
 
-    /**
+    /*
      * Generates an XML file that can be run by {@link ExperimentDriver}.
      *
      * @param args

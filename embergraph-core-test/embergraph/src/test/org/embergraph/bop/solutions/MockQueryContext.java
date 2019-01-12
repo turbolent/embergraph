@@ -29,8 +29,8 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rwstore.sector.IMemoryManager;
 import org.embergraph.rwstore.sector.MemoryManager;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class MockQueryContext implements IQueryContext {

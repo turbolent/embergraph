@@ -25,8 +25,8 @@ import java.util.Iterator;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * AST node models an ORDER BY clause.
+/*
+* AST node models an ORDER BY clause.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -54,7 +54,7 @@ public class OrderByNode extends SolutionModifierBase implements Iterable<OrderB
 
   public void addExpr(final OrderByExpr orderBy) {
 
-    addArg((BOp) orderBy);
+    addArg(orderBy);
   }
 
   public boolean removeOrderBy(final OrderByExpr orderBy) {

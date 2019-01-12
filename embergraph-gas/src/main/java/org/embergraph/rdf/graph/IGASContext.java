@@ -21,8 +21,8 @@ import java.util.concurrent.ExecutionException;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Execution context for an {@link IGASProgram}. This is distinct from the {@link IGASEngine} so we
+/*
+* Execution context for an {@link IGASProgram}. This is distinct from the {@link IGASEngine} so we
  * can support distributed evaluation and concurrent evaluation of multiple {@link IGASProgram}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -51,7 +51,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
   /** The graph access object. */
   IGraphAccessor getGraphAccessor();
 
-  /**
+  /*
    * Specify the traversal direction for the {@link IGASProgram}.
    *
    * <p>The value specified here is used to determine how the {@link EdgesEnum} will be interpreted
@@ -65,7 +65,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
   /** Return a type safe value indicating the traversal direction for the {@link IGASProgram}. */
   TraversalDirectionEnum getTraversalDirection();
 
-  /**
+  /*
    * Specify the maximum number of iterations for the algorithm. A value of ONE means that the
    * algorithm will halt after the first round.
    *
@@ -77,7 +77,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
   /** Return the maximum number iterations for the algorithm. */
   int getMaxIterations();
 
-  /**
+  /*
    * Specify the maximum number of vertices that may be visited. The algorithm will halt if this
    * value is exceeded.
    *
@@ -86,13 +86,13 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
    */
   void setMaxVisited(int newValue);
 
-  /**
+  /*
    * Return the maximum number of vertices that may be visited. The algorithm will halt if this
    * value is exceeded.
    */
   int getMaxVisited();
 
-  /**
+  /*
    * Return non-<code>null</code> iff there is a single link type to be visited. This corresponds to
    * a view of the graph as sparse connectivity matrix. The {@link IGASEngine} can optimize
    * traversal patterns using the <code>POS</code> index.
@@ -106,7 +106,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
    */
   URI getLinkType();
 
-  /**
+  /*
    * Set an optional restriction on the type of the visited links.
    *
    * <p>Note: When this option is used, the scatter and gather will not visit the property set for
@@ -118,7 +118,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
    */
   void setLinkType(URI linkType);
 
-  /**
+  /*
    * Return non-<code>null</code> iff there is a single link attribute type to be visited. This
    * imposes a restriction on which link attributes are considered by the algorithm. The link
    * attribute type restriction may be (and often is) paired with a link type restriction.
@@ -128,7 +128,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
    */
   URI getLinkAttributeType();
 
-  /**
+  /*
    * Imposes an optional restriction on which link attributes are considered by the algorithm. The
    * link attribute type restriction may be (and often is) paired with a link type restriction.
    *
@@ -138,7 +138,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
    */
   void setLinkAttributeType(URI linkType);
 
-  /**
+  /*
    * Set an optional {@link IReducer} that will run after the {@link IGASProgram} is terminated.
    * This may be used to extract results from the visited vertices.
    *
@@ -146,14 +146,14 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
    */
   <T> void setRunAfterOp(IReducer<VS, ES, ST, T> afterOp);
 
-  /**
+  /*
    * Return an optional {@link IReducer} that will run after the {@link IGASProgram} is terminated.
    * This may be used to extract results from the visited vertices.
    */
   <T> IReducer<VS, ES, ST, T> getRunAfterOp();
 
-  //    /**
-  //     * Hook to impose a constraint on the visited edges and/or property values.
+  //    /*
+//     * Hook to impose a constraint on the visited edges and/or property values.
   //     *
   //     * @param itr
   //     *            The iterator visiting those edges and/or property values.
@@ -170,13 +170,13 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
   //     */
   //    IStriterator getConstrainEdgeFilter(IStriterator eitr);
 
-  /**
+  /*
    * Execute one iteration.
    *
    * @param stats Used to report statistics about the execution of the algorithm.
    * @return true iff the new frontier is empty.
    */
-  boolean doRound(IGASStats stats) throws Exception, ExecutionException, InterruptedException;
+  boolean doRound(IGASStats stats) throws Exception;
 
   /** Execute the associated {@link IGASProgram}. */
   @Override
@@ -185,14 +185,14 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
   /** Set the target vertices for the program (if any). */
   void setTargetVertices(Value[] targetVertices);
 
-  /**
+  /*
    * Get the target vertices for the program (if any).
    *
    * @return
    */
   Set<Value> getTargetVertices();
 
-  /**
+  /*
    * Specify the maximum number of iterations for the algorithm to continue once all the target
    * vertices have been reached. Default is for the program to run until completion without regard
    * to whether the target vertices have been reached or not. A value of ZERO will stop the program
@@ -202,7 +202,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
    */
   void setMaxIterationsAfterTargets(int newValue);
 
-  /**
+  /*
    * Return the maximum number iterations for the algorithm to continue once all the target vertices
    * have been reached.
    */

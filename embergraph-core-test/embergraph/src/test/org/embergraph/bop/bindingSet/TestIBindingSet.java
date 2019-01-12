@@ -33,8 +33,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.io.SerializerUtil;
 
-/**
- * Unit tests for {@link IBindingSet}.
+/*
+* Unit tests for {@link IBindingSet}.
  *
  * <p>Note:
  *
@@ -429,11 +429,11 @@ public abstract class TestIBindingSet extends TestCase2 {
    * Hooks for testing specific implementations.
    */
 
-  protected abstract IBindingSet newBindingSet(IVariable<?> vars[], IConstant<?> vals[]);
+  protected abstract IBindingSet newBindingSet(IVariable<?>[] vars, IConstant<?>[] vals);
 
   protected abstract IBindingSet newBindingSet(int size);
 
-  /**
+  /*
    * Compare actual and expected, where the latter is expressed using (vars,vals).
    *
    * <p>Note: This does not follow the junit pattern for asserts, which puts the expected data
@@ -444,7 +444,7 @@ public abstract class TestIBindingSet extends TestCase2 {
    * @param vals
    */
   protected void assertEqual(
-      final IBindingSet actual, final IVariable<?> vars[], final IConstant<?> vals[]) {
+      final IBindingSet actual, final IVariable<?>[] vars, final IConstant<?>[] vals) {
 
     assertEquals("size", actual.size(), vars.length);
 

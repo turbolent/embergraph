@@ -32,8 +32,8 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 import org.embergraph.relation.accesspath.IAccessPath;
 
-/**
- * A hash join against an {@link IAccessPath} based on the Java collections classes. Source
+/*
+* A hash join against an {@link IAccessPath} based on the Java collections classes. Source
  * solutions are buffered on the Java collection on each evaluation pass. Once ALL source solutions
  * have been buffered, the hash join will run a single pass over the {@link IAccessPath} for the
  * target {@link IPredicate}. For some queries, this can be more efficient than probing as-bound
@@ -66,7 +66,7 @@ public class JVMHashJoinOp<E> extends HashJoinOp<E> implements ISingleThreadedOp
     this(args, NV.asMap(annotations));
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -88,7 +88,7 @@ public class JVMHashJoinOp<E> extends HashJoinOp<E> implements ISingleThreadedOp
     return new JVMHashJoinUtility(this, joinType);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The {@link JVMHashJoinOp} executes the hash join for each chunk of intermediate solutions

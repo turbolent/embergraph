@@ -17,8 +17,8 @@ package cutthecrap.utils.striterators;
 
 import java.util.Iterator;
 
-/**
- * A filter which is initially a NOP. You can add other filters to this to stack them.
+/*
+* A filter which is initially a NOP. You can add other filters to this to stack them.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

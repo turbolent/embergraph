@@ -19,8 +19,8 @@ package org.embergraph.rdf.sail.webapp;
 
 import org.openrdf.repository.RepositoryException;
 
-/**
- * Exception thrown when a named data set is addressed and does not exist.
+/*
+* Exception thrown when a named data set is addressed and does not exist.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -29,8 +29,8 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-/**
- * Translate a low-performance Blueprints GraphQuery into a high-performance SPARQL query.
+/*
+* Translate a low-performance Blueprints GraphQuery into a high-performance SPARQL query.
  *
  * @author mikepersonick
  */
@@ -40,7 +40,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
 
   /** These are the only Predicate implementations we handle currently. */
   protected static List<Class> knownPredicates =
-      Arrays.<Class>asList(
+      Arrays.asList(
           EmbergraphPredicate.class,
           com.tinkerpop.blueprints.Query.Compare.class,
           com.tinkerpop.blueprints.Contains.class,
@@ -61,7 +61,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
   /** URI used for labeling edges. */
   protected final URI LABEL;
 
-  /**
+  /*
    * The list of criteria. Embergraph's query optimizer will re-order the criteria based on
    * selectivity and execute for maximum performance and minimum IO.
    */
@@ -78,7 +78,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     this.LABEL = graph.getValueFactory().getLabelURI();
   }
 
-  /**
+  /*
    * Filter out elements that do not have a property with provided key.
    *
    * <p>?s <key> ?value
@@ -92,7 +92,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     return this;
   }
 
-  /**
+  /*
    * Filter out elements that have a property with provided key.
    *
    * <p>?s ?p ?o . filter not exists { ?s <key> ?value } .
@@ -106,7 +106,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     return this;
   }
 
-  /**
+  /*
    * Filter out elements that do not have a property value equal to provided value.
    *
    * <p>?s <key> <value> .
@@ -121,7 +121,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     return this;
   }
 
-  /**
+  /*
    * Filter out elements that have a property value equal to provided value.
    *
    * <p>?s ?p ?o . filter not exists { ?s <key> <value> } .
@@ -136,7 +136,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     return this;
   }
 
-  /**
+  /*
    * Filter out the element if it does not have a property with a comparable value.
    *
    * @param key the key of the property
@@ -153,7 +153,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     return this;
   }
 
-  /**
+  /*
    * Filter out the element if it does not have a property with a comparable value.
    *
    * @param key the key of the property
@@ -168,7 +168,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     return has(key, compare, value);
   }
 
-  /**
+  /*
    * Filter out the element of its property value is not within the provided interval.
    *
    * @param key the key of the property
@@ -182,7 +182,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     return has(key, EmbergraphPredicate.GTE, startValue).has(key, EmbergraphPredicate.LT, endValue);
   }
 
-  /**
+  /*
    * Filter out the element if the take number of incident/adjacent elements to retrieve has already
    * been reached.
    *
@@ -195,7 +195,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     return this;
   }
 
-  /**
+  /*
    * Execute the query and return the matching edges.
    *
    * @return the unfiltered incident edges
@@ -212,7 +212,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     }
   }
 
-  /**
+  /*
    * Execute the query and return the vertices on the other end of the matching edges.
    *
    * @return the unfiltered adjacent vertices
@@ -401,7 +401,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     return sb.toString();
   }
 
-  /**
+  /*
    * Standard criterion for filtering by the existence of a property and optional value.
    *
    * @author mikepersonick
@@ -439,8 +439,8 @@ public class EmbergraphGraphQuery implements GraphQuery {
 
       if (pred == EmbergraphPredicate.IN && ((Collection<?>) val).size() == 1) {
 
-        /*
-         * Simple optimization to replace a single value IN with
+      /*
+       * Simple optimization to replace a single value IN with
          * a simple EQ.
          */
         this.val = ((Collection<?>) val).iterator().next();
@@ -458,7 +458,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
     }
   }
 
-  /**
+  /*
    * Criterion for filtering by the non-existence of a property and optional value. Uses SPARQL
    * filter not exists {}.
    *

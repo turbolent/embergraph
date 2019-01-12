@@ -27,8 +27,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Random;
 
-/**
- * Unit tests for copying streams into the repository and reading them back.
+/*
+* Unit tests for copying streams into the repository and reading them back.
  *
  * <p>Note: Copying streams is basically a sequence of atomic append operations. {@link
  * TestAppendBlock} is responsible for covering the behavior of the atomic append operation,
@@ -71,7 +71,7 @@ public class TestCopyStream extends AbstractRepositoryTestCase {
     assertEquals("data", expected, actual);
   }
 
-  /**
+  /*
    * Test copy of an empty stream resulting in one block.
    *
    * @throws IOException
@@ -96,7 +96,7 @@ public class TestCopyStream extends AbstractRepositoryTestCase {
     assertEquals("data", expected, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Test copy of an stream containing exactly one byte less than a full block of data.
    *
    * @throws IOException
@@ -125,7 +125,7 @@ public class TestCopyStream extends AbstractRepositoryTestCase {
     assertEquals("data", expected, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Test copy of an stream containing exactly one block's data.
    *
    * @throws IOException
@@ -154,7 +154,7 @@ public class TestCopyStream extends AbstractRepositoryTestCase {
     assertEquals("data", expected, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Test copy of an stream containing exactly one byte more than a full block of data.
    *
    * @throws IOException
@@ -183,7 +183,7 @@ public class TestCopyStream extends AbstractRepositoryTestCase {
     assertEquals("data", expected, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Stress test writing small streams of random length (from zero bytes to a full block in length).
    *
    * @throws IOException
@@ -257,7 +257,7 @@ public class TestCopyStream extends AbstractRepositoryTestCase {
             + " trials");
   }
 
-  /**
+  /*
    * Test the ability to write a stream onto the index that is automatically partitioned into
    * blocks.
    *
@@ -298,7 +298,7 @@ public class TestCopyStream extends AbstractRepositoryTestCase {
     assertEquals("data", expected, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Stress test writing large streams of random length.
    *
    * @throws IOException

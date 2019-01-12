@@ -25,8 +25,8 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * GETSTMTS test suite for not resolved numeric IVs in Bind.
+/*
+* GETSTMTS test suite for not resolved numeric IVs in Bind.
  *
  * @see <a href="http://jira.blazegraph.com/browse/BLZG-1717" > IV not resolved </a>
  */

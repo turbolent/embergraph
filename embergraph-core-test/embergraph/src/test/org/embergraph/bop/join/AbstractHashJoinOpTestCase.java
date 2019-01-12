@@ -65,8 +65,8 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * Common base class for hash join with access path unit tests.
+/*
+* Common base class for hash join with access path unit tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: AbstractHashJoinOpTestCase.java 5499 2011-11-03 19:49:10Z thompsonbry $
@@ -179,7 +179,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single {@link IBindingSet}.
    *
    * @param bindingSet the binding set.
@@ -191,7 +191,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
         new IBindingSet[][] {new IBindingSet[] {bindingSet}});
   }
 
-  /**
+  /*
    * Return a new join operator instance for the test.
    *
    * @param args
@@ -214,7 +214,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
    * Tests
    */
 
-  /**
+  /*
    * Unit test for a simple join. There are two source solutions. Each binds the join variable
    * (there is only one join variable, which is [x]). The access path is run once and visits two
    * elements, yielding as-bound solutions. The hash map containing the buffered source solutions is
@@ -238,11 +238,9 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query = newJoin(new BOp[] {}, joinId, joinVars, predOp, queryId);
 
@@ -335,7 +333,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for a simple join. There are two source solutions. Each binds the join variable
    * (there is only one join variable, which is [x]). The access path is run once and visits two
    * elements, yielding as-bound solutions. The hash map containing the buffered source solutions is
@@ -364,11 +362,9 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query = newJoin(new BOp[] {}, joinId, joinVars, predOp, queryId);
 
@@ -479,11 +475,9 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         newJoin(
@@ -608,11 +602,9 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.john), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         newJoin(
@@ -713,7 +705,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit tests for optional joins, including a constraint on solutions which join.
    *
    * @throws ExecutionException
@@ -737,18 +729,16 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.paul), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
-                  // constraint x != Luke
-                  new NV(
-                      PipelineJoin.Annotations.CONSTRAINTS,
-                      new IConstraint[] {
-                        Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
-                      }),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
+                // constraint x != Luke
+                new NV(
+                    PipelineJoin.Annotations.CONSTRAINTS,
+                    new IConstraint[] {
+                      Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
+                    }),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         newJoin(
@@ -758,7 +748,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
             pred,
             queryId);
 
-    /**
+    /*
      * Setup the source.
      *
      * <p>bset1: This has nothing bound and can not join since the join variable is not bound.
@@ -853,7 +843,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for an optional {@link PipelineJoin} when the {@link BOpContext#getSink2()
    * alternative sink} is specified (simple variant of the unit test above).
    *
@@ -877,18 +867,16 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
               new Constant<IV>(setup.paul), new Constant<IV>(setup.knows), x
             },
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
-                  // constraint x != Luke
-                  new NV(
-                      PipelineJoin.Annotations.CONSTRAINTS,
-                      new IConstraint[] {
-                        Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
-                      }),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Predicate.Annotations.OPTIONAL, Boolean.TRUE),
+                // constraint x != Luke
+                new NV(
+                    PipelineJoin.Annotations.CONSTRAINTS,
+                    new IConstraint[] {
+                      Constraint.wrap(new NEConstant(x, new Constant<IV>(setup.luke)))
+                    }),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         newJoin(
@@ -898,7 +886,7 @@ public abstract class AbstractHashJoinOpTestCase extends TestCase2 {
             pred,
             queryId);
 
-    /**
+    /*
      * Setup the source.
      *
      * <p>bset1: This has nothing bound and can not join since the join variable is not bound.

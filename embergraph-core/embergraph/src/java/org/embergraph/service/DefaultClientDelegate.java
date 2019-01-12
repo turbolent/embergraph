@@ -8,8 +8,8 @@ import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.httpd.CounterSetHTTPD;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
-/**
- * Default {@link IFederationDelegate} implementation used by a standard client. This may be
+/*
+* Default {@link IFederationDelegate} implementation used by a standard client. This may be
  * extended or replaced using {@link AbstractClient#setDelegate(IFederationDelegate)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -25,7 +25,7 @@ public class DefaultClientDelegate<T> implements IFederationDelegate<T> {
 
   private final T clientOrService;
 
-  /**
+  /*
    * @param client The client (before it connects to the federation).
    * @param clientOrService The client or service connected to the federation. This MAY be <code>
    *     null</code> but then {@link #getService()} will also return <code>null</code>.
@@ -52,7 +52,7 @@ public class DefaultClientDelegate<T> implements IFederationDelegate<T> {
     return uuid;
   }
 
-  /**
+  /*
    * Return a stable identifier for this client based on the name of the implementation class, the
    * hostname, and the hash code of the client (readable and likely to be unique, but uniqueness is
    * not guaranteed).

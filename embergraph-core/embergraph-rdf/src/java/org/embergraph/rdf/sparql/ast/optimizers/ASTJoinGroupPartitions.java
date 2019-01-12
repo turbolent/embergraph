@@ -30,8 +30,8 @@ import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfoMap;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 
-/**
- * Class representing an ordered list of {@link ASTJoinGroupPartition}s.
+/*
+* Class representing an ordered list of {@link ASTJoinGroupPartition}s.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public class ASTJoinGroupPartitions {
   /** The ordered list (main data structure). */
   List<ASTJoinGroupPartition> partitions;
 
-  /**
+  /*
    * Constructor, creating partitions for a list of {@link IGroupMemberNode} objects along OPTIONAL
    * and MINUS nodes. The idea of this partitioning is that we are not freely allowed to reorder
    * nodes across partitions.
@@ -68,7 +68,7 @@ public class ASTJoinGroupPartitions {
 
       final Boolean isOptionalOrMinus = StaticAnalysis.isMinusOrOptional(node);
 
-      /**
+      /*
        * Either add the node to the non-optional non-minus node list or assign it to the temporary
        * tmpOptionalOrMinus variable.
        */
@@ -78,7 +78,7 @@ public class ASTJoinGroupPartitions {
         tmpOptionalOrMinus = node;
       }
 
-      /**
+      /*
        * If the tmpOptionalOrMinus node has been set or we reached the end, we build and record the
        * partition and reset the temporary variables.
        */
@@ -130,7 +130,7 @@ public class ASTJoinGroupPartitions {
     return res;
   }
 
-  /**
+  /*
    * Places the node at the first possible position across all partitions.
    *
    * @param node
@@ -142,7 +142,7 @@ public class ASTJoinGroupPartitions {
 
       final ASTJoinGroupPartition partition = partitions.get(i);
 
-      /**
+      /*
        * Try to place the node in the partition. As long as we do not reach the last partition
        * (i<partitions.size()-1), we must require that all required variables of the node are bound,
        * i.e. the "right" position might be in a later partition.

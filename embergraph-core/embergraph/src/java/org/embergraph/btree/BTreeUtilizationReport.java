@@ -23,8 +23,8 @@ package org.embergraph.btree;
 
 import java.io.Serializable;
 
-/**
- * A btree utilization report.
+/*
+* A btree utilization report.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

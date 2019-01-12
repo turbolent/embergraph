@@ -25,8 +25,8 @@ package org.embergraph.relation.accesspath;
 
 import java.util.concurrent.Future;
 
-/**
- * An {@link IBuffer} that may be closed. Instances of this interface are normally drained by a
+/*
+* An {@link IBuffer} that may be closed. Instances of this interface are normally drained by a
  * worker thread.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -34,7 +34,7 @@ import java.util.concurrent.Future;
  */
 public interface IRunnableBuffer<E> extends IBuffer<E> {
 
-  /**
+  /*
    * Add an element to the buffer.
    *
    * <p>Note: This method is constrained to throw the specified exception if the buffer has been
@@ -43,31 +43,31 @@ public interface IRunnableBuffer<E> extends IBuffer<E> {
    * @param e The element
    * @throws BufferClosedException if the buffer has been {@link #close()}d.
    */
-  public void add(E e);
+  void add(E e);
 
   /** Return <code>true</code> if the buffer is open. */
-  public boolean isOpen();
+  boolean isOpen();
 
-  /**
+  /*
    * Signal that no more data will be written on this buffer (this is required in order for the
    * iterator to know when no more data will be made available).
    */
-  public void close();
+  void close();
 
-  /**
+  /*
    * Signal abnormal termination of the process writing on the buffer. The buffer will be closed.
    * The iterator will report the <i>cause</i> via a wrapped exception the next time any method on
    * its interface is invoked. The internal queue may be cleared once this method is invoked.
    *
    * @param cause The exception thrown by the processing writing on the buffer.
    */
-  public void abort(Throwable cause);
+  void abort(Throwable cause);
 
-  /**
+  /*
    * The {@link Future} for the worker task.
    *
    * @return The {@link Future} -or- <code>null</code> if no {@link Future} has been set.
    * @todo There should be a generic type for this.
    */
-  public Future getFuture();
+  Future getFuture();
 }

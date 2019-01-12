@@ -48,8 +48,8 @@ import org.embergraph.util.BytesUtil;
 import org.embergraph.util.concurrent.LatchedExecutor;
 import org.embergraph.util.concurrent.Memoizer;
 
-/**
- * A non-leaf node.
+/*
+* A non-leaf node.
  *
  * <h2>Per-child min/max revision timestamps and timestamp revision filtering</h2>
  *
@@ -72,7 +72,7 @@ import org.embergraph.util.concurrent.Memoizer;
  */
 public class Node extends AbstractNode<Node> implements INodeData {
 
-  /**
+  /*
    * The data record. {@link MutableNodeData} is used for all mutation operations. {@link
    * ReadOnlyNodeData} is used when the {@link Node} is made persistent. A read-only data record is
    * automatically converted into a {@link MutableNodeData} record when a mutation operation is
@@ -85,7 +85,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
    */
   INodeData data;
 
-  /**
+  /*
    * Weak references to child nodes (may be nodes or leaves). The capacity of this array is m, where
    * m is the {@link #branchingFactor}. Valid indices are in [0:nkeys+1] since nchildren := nkeys+1
    * for a {@link Node}.
@@ -103,8 +103,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
    */
   transient /* volatile */ Reference<AbstractNode<?>>[] childRefs;
 
-  // /**
-  // * An array of objects used to provide a per-child lock in order to allow
+  // /*
+// * An array of objects used to provide a per-child lock in order to allow
   // * maximum concurrency in {@link #getChild(int)}.
   // * <p>
   // * Note: this array is not allocated for a mutable btree since the caller
@@ -148,7 +148,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return btree.branchingFactor - 1;
   }
 
-  /**
+  /*
    * Range check a child index.
    *
    * @param index The index of a child in [0:nkeys+1].
@@ -162,7 +162,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return true;
   }
 
-  /**
+  /*
    * Return the {@link Reference} for the child. This is part of the internal API.
    *
    * @param index The index of the child.
@@ -192,7 +192,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return false;
   }
 
-  /**
+  /*
    * The result depends on the backing {@link INodeData} implementation. The {@link Node} will be
    * mutable when it is first created and is made immutable when it is persisted. If there is a
    * mutation operation, the backing {@link INodeData} is automatically converted into a mutable
@@ -258,7 +258,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return data.hasVersionTimestamps();
   }
 
-  /**
+  /*
    * Apply the delta to the per-child count for this node and then recursively ascend up the tree
    * applying the delta to all ancestors of this node. This is invoked solely by the methods that
    * add and remove entries from a leaf as those are the only methods that change the #of entries
@@ -311,7 +311,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     }
   }
 
-  /**
+  /*
    * Update the {@link #getMinimumVersionTimestamp()} and {@link #getMaximumVersionTimestamp()}.
    * This is invoked when the min/max in the child has changed without a corresponding change to the
    * #of spanned tuples. E.g., when an insert() causes a tuple to be updated rather than added.
@@ -338,7 +338,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     }
   }
 
-  /**
+  /*
    * De-serialization constructor.
    *
    * <p>Note: The de-serialization constructor (and ONLY the de-serialization constructor) ALWAYS
@@ -413,7 +413,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
   }
 
-  /**
+  /*
    * This constructor is used when splitting the a root {@link Leaf} or a root {@link Node}. The
    * resulting node has a single child reference and NO keys. The #of entries allocated to the child
    * is the #of remaining in that child <em>after</em> the split.
@@ -480,7 +480,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     // #of entries from the old root _after_ the split.
     data.childEntryCounts[0] =
         (oldRoot.isLeaf()
-            ? ((Leaf) oldRoot).getKeyCount()
+            ? oldRoot.getKeyCount()
             : ((Node) oldRoot).getSpannedTupleCount());
 
     // dirtyChildren.add(oldRoot);
@@ -565,7 +565,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     }
   }
 
-  /**
+  /*
    * Copy constructor.
    *
    * @param src The source node (must be immutable).
@@ -637,8 +637,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
        */
       if (child != null && (btree.store == null || child.identity != triggeredByChildId)) {
 
-        /*
-         * Copy on write should never trigger for a dirty node and only
+      /*
+       * Copy on write should never trigger for a dirty node and only
          * a dirty node can have dirty children.
          */
         assert !child.isDirty();
@@ -665,7 +665,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     data = null;
   }
 
-  /**
+  /*
    * This method must be invoked on a parent to notify the parent that the child has become
    * persistent. The method scans the weak references for the children, finds the index for the
    * specified child, and then sets the corresponding index in the array of child keys. The child is
@@ -697,7 +697,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
   }
 
-  /**
+  /*
    * Invoked by {@link #copyOnWrite()} to clear the persistent address for a child on a cloned
    * parent and set the reference to the cloned child.
    *
@@ -731,8 +731,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
       if (data.childAddr[i] == oldChildAddr) {
 
-        /*
-         * Note: We can not check anything which depends on
+      /*
+       * Note: We can not check anything which depends on
          * oldChild.data since that field was cleared when we cloned the
          * oldChild to obtain a mutable node/leaf. Since
          * oldChild.isPersistent() does not capture the correct
@@ -894,7 +894,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return ret;
   }
 
-  /**
+  /*
    * Range check an index into the keys of the node.
    *
    * @param entryIndex The key index.
@@ -917,7 +917,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return true;
   }
 
-  /**
+  /*
    * Recursive search for the key at the specified entry index.
    *
    * @param entryIndex The index of the entry (relative to the first entry spanned by this node).
@@ -957,7 +957,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return child.keyAt(remaining);
   }
 
-  /**
+  /*
    * Recursive search for the value at the specified entry index.
    *
    * @param entryIndex The index of the entry (relative to the first entry spanned by this node).
@@ -998,7 +998,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     child.valueAt(remaining, tuple);
   }
 
-  /**
+  /*
    * Return the index of the child to be searched.
    *
    * <p>The interpretation of the key index for a node is as follows. When searching nodes of the
@@ -1079,7 +1079,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     }
   }
 
-  /**
+  /*
    * Split an over-capacity node (a node with <code>maxKeys+1</code> keys), creating a new
    * rightSibling. The splitIndex is <code>(maxKeys+1)/2</code> . The key at the splitIndex is the
    * separatorKey. Unlike when we split a {@link Leaf}, the separatorKey is lifted into the parent
@@ -1170,8 +1170,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
       if (i + 1 < nchildren) {
 
-        /*
-         * Note: keys[nchildren-1] is undefined.
+      /*
+       * Note: keys[nchildren-1] is undefined.
          */
         // rightSibling.setKey(j, getKey(i));
         rightSibling.copyKey(j, this.getKeys(), i);
@@ -1195,8 +1195,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
       if (tmp != null) {
 
-        /*
-         * The child node is in memory.
+      /*
+       * The child node is in memory.
          *
          * Update its parent reference.
          */
@@ -1266,7 +1266,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return rightSibling;
   }
 
-  /**
+  /*
    * Redistributes a key from the specified sibling into this node in order to bring this node up to
    * the minimum #of keys. This also updates a separator key in the parent for the right most of
    * (this, sibling).
@@ -1479,7 +1479,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     }
   }
 
-  /**
+  /*
    * Merge the keys and values from the sibling into this node, delete the sibling from the store
    * and remove the sibling from the parent. This will trigger recursive {@link AbstractNode#join()}
    * if the parent node is now deficient. While this changes the #of entries spanned by the current
@@ -1698,7 +1698,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     p.removeChild(s);
   }
 
-  /**
+  /*
    * Invoked by {@link AbstractNode#split()} to insert a key and reference for a child created when
    * another child of this node is split. This method has no effect on the #of entries spanned by
    * the parent. *
@@ -1796,7 +1796,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     data.childAddr[childIndex + 1] = NULL;
 
     final long childEntryCount = // child.getSpannedTupleCount();
-        (child.isLeaf() ? ((Leaf) child).getKeyCount() : ((Node) child).getSpannedTupleCount());
+        (child.isLeaf() ? child.getKeyCount() : ((Node) child).getSpannedTupleCount());
 
     data.childEntryCounts[childIndex + 1] = childEntryCount;
 
@@ -1838,7 +1838,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     if (btree.debug) assertInvariants();
   }
 
-  /**
+  /*
    * Return the left sibling. This is used by implementations of {@link AbstractNode#join()} to
    * explore their left sibling.
    *
@@ -1885,7 +1885,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     }
   }
 
-  /**
+  /*
    * Return the right sibling of the specified child of a common parent. This method is invoked on
    * the parent, passing in one child and returning its right sibling under that common parent (if
    * any). This is used by implementations of {@link AbstractNode#join()} to explore their right
@@ -1934,7 +1934,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     }
   }
 
-  /**
+  /*
    * Return the index of the child among the direct children of this node.
    *
    * @param child The child.
@@ -1986,7 +1986,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     throw new IllegalArgumentException("Not our child : child=" + child);
   }
 
-  /**
+  /*
    * Invoked when a non-root node or leaf has no more keys to detach the child from its parent. If
    * the node becomes deficient, then the node is joined with one of its immediate siblings. If the
    * node is the root of the tree, then the root of the tree is also updated. The child is deleted
@@ -2207,8 +2207,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
     }
   }
 
-  // /**
-  // * This is invoked by {@link #removeChild(AbstractNode)} when the node is
+  // /*
+// * This is invoked by {@link #removeChild(AbstractNode)} when the node is
   // * reduced to a single child in order to replace the reference to the node
   // * on its parent with the reference to the node's sole remaining child.
   // *
@@ -2264,7 +2264,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
   // }
 
-  /**
+  /*
    * Return the child node or leaf at the specified index in this node. If the node is not in memory
    * then it is read from the store.
    *
@@ -2390,7 +2390,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return btree.loadChild(this, index);
   }
 
-  /**
+  /*
    * Method conditionally reads the child at the specified index from the backing store and sets its
    * reference on the appropriate element of {@link #childRefs}. This method assumes that external
    * mechanisms guarantee that no other thread is requesting the same child via this method at the
@@ -2525,8 +2525,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return child;
   }
 
-  // /**
-  // * Static helper method allocates the per-child lock objects.
+  // /*
+// * Static helper method allocates the per-child lock objects.
   // * <p>
   // * Note that the mutable {@link BTree} imposes a single-threaded
   // constraint
@@ -2605,7 +2605,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
   //
   // }
 
-  /**
+  /*
    * Return the right-most child of this node.
    *
    * @param nodesOnly when <code>true</code> the search will halt at the right-most non-leaf.
@@ -2633,7 +2633,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     return ((Node) child).getRightMostChild(nodesOnly);
   }
 
-  /**
+  /*
    * Iterator visits children, recursively expanding each child with a post-order traversal of its
    * children and finally visits this node itself.
    */
@@ -2655,7 +2655,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
         .append(new SingleValueIterator(this));
   }
 
-  /**
+  /*
    * Iterator visits children in the specified half-open key range, recursively expanding each child
    * with a post-order traversal of its children and finally visits this node itself.
    */
@@ -2701,13 +2701,13 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
               private static final long serialVersionUID = 1L;
 
-              /*
-               * Expand each child in turn.
+            /*
+       * Expand each child in turn.
                */
               protected Iterator expand(Object childObj) {
 
-                /*
-                 * A child of this node.
+              /*
+       * A child of this node.
                  */
 
                 final AbstractNode child = (AbstractNode) childObj;
@@ -2719,8 +2719,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
                 if (child instanceof Node) {
 
-                  /*
-                   * The child is a Node (has children).
+                /*
+       * The child is a Node (has children).
                    */
 
                   // BTree.log.debug("child is node: " + child);
@@ -2736,8 +2736,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
                 } else {
 
-                  /*
-                   * The child is a leaf.
+                /*
+       * The child is a leaf.
                    */
 
                   // BTree.log.debug("child is leaf: " + child);
@@ -2779,21 +2779,21 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
               private static final long serialVersionUID = 1L;
 
-              /*
-               * Expand each child in turn.
+            /*
+       * Expand each child in turn.
                */
               protected Iterator expand(final Object childObj) {
 
-                /*
-                 * A child of this node.
+              /*
+       * A child of this node.
                  */
 
                 final AbstractNode child = (AbstractNode) childObj;
 
                 if (child instanceof Node) {
 
-                  /*
-                   * The child is a Node (has children).
+                /*
+       * The child is a Node (has children).
                    *
                    * Visit the children (recursive post-order
                    * traversal).
@@ -2806,8 +2806,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
                   // append this node in post-order position.
                   itr.append(new SingleValueIterator(child));
 
-                  /*
-                   * Note: getReadExecutor() is not defined for IJournal. If
+                /*
+       * Note: getReadExecutor() is not defined for IJournal. If
                    * we want to support the read executor pre-fetch pattern
                    * then the code needs to be updated to use IJournal and
                    * IJournal needs to expose getReadExecutor.
@@ -2815,8 +2815,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
                   if ((btree.store instanceof Journal)
                       && (((Journal) btree.store).getReadExecutor() != null)) {
 
-                    /*
-                     * Prefetch any child leaves we need to visit
+                  /*
+       * Prefetch any child leaves we need to visit
                      * and prefetch the right sibling of the node we
                      * are about to visit if the iterator will span
                      * that node as well.
@@ -2828,8 +2828,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
                 } else {
 
-                  /*
-                   * The child is a leaf.
+                /*
+       * The child is a leaf.
                    */
 
                   // BTree.log.debug("child is leaf: " + child);
@@ -2841,7 +2841,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
             });
   }
 
-  /**
+  /*
    * When we visit a node whose children are leaves, schedule memoization of those leaves whose
    * separator key in the node is LT the toKey (non-blocking). If the rightSibling of the node would
    * be visited by the iterator, then prefetch of the rightSibling is also scheduled.
@@ -2955,7 +2955,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     }
   }
 
-  /**
+  /*
    * If the caller's <i>toKey</i> is GT the separator keys for the children of this node then the
    * iterator will need to visit the rightSibling of the node and this method will schedule the
    * memoization of the node's rightSibling in order to reduce the IO latency when the iterator
@@ -3046,7 +3046,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
         });
   }
 
-  /**
+  /*
    * Iterator visits the direct child nodes in the external key ordering.
    *
    * @param dirtyNodesOnly When true, only the direct dirty child nodes will be visited.
@@ -3233,8 +3233,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
       if (i > nkeys) {
 
-        /*
-         * Scanning past the last valid child index.
+      /*
+       * Scanning past the last valid child index.
          */
 
         if (!isReadOnly() && ((MutableNodeData) data).childAddr[i] != NULL) {
@@ -3261,8 +3261,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
       } else {
 
-        /*
-         * Scanning a valid child index.
+      /*
+       * Scanning a valid child index.
          *
          * Note: This is not fetching the child if it is not in memory
          * -- perhaps it should using its persistent id?
@@ -3273,8 +3273,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
         if (child != null) {
 
           if (child.parent == null || child.parent.get() == null) {
-            /*
-             * the reference to the parent MUST exist since the we
+          /*
+       * the reference to the parent MUST exist since the we
              * are the parent and therefore the parent is strongly
              * reachable.
              */
@@ -3303,7 +3303,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
           final long childSpannedEntryCount =
               (child.isLeaf()
-                  ? ((Leaf) child).getKeyCount()
+                  ? child.getKeyCount()
                   : ((Node) child).getSpannedTupleCount());
 
           if (getChildEntryCount(i) != childSpannedEntryCount) {
@@ -3321,8 +3321,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
           }
 
           if (child.isDirty()) {
-            /*
-             * Dirty child. The parent of a dirty child MUST also be
+          /*
+       * Dirty child. The parent of a dirty child MUST also be
              * dirty.
              */
             if (!isDirty()) {
@@ -3357,8 +3357,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
             // ok = false;
             // }
           } else {
-            /*
-             * Clean child (ie, persistent). The parent of a clean
+          /*
+       * Clean child (ie, persistent). The parent of a clean
              * child may be either clear or dirty.
              */
             if (getChildAddr(i) == NULL) {
@@ -3406,8 +3406,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
           if (i <= nkeys) {
 
-            /*
-             * This let's us dump a tree with some kinds of
+          /*
+       * This let's us dump a tree with some kinds of
              * structural problems (missing child reference or key).
              */
 
@@ -3421,8 +3421,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
           } else {
 
-            /*
-             * We expect null child entries beyond nkeys+1.
+          /*
+       * We expect null child entries beyond nkeys+1.
              */
 
           }
@@ -3430,8 +3430,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
           continue;
         }
 
-        /*
-         * Note: this works around the assert test for the index in
+      /*
+       * Note: this works around the assert test for the index in
          * getChild(index) but is not able/willing to follow a childKey
          * to a child that is not memory resident.
          */
@@ -3488,8 +3488,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
             if (nkeys == 0) {
 
-              /*
-               * Note: a node with zero keys is valid. It MUST
+            /*
+       * Note: a node with zero keys is valid. It MUST
                * have a single child. Such nodes arise when
                * splitting a node in a btree of order m := 3 when
                * the splitIndex is computed as m/2-1 = 0. This is
@@ -3497,8 +3497,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
                */
 
             } else {
-              /*
-               * Note: All keys on the first child MUST be LT the
+            /*
+       * Note: All keys on the first child MUST be LT the
                * first key on this node.
                */
               final byte[] k0 = getKeys().get(0);
@@ -3563,8 +3563,8 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
           } else {
 
-            /*
-             * While there is a child for the last index of a node,
+          /*
+       * While there is a child for the last index of a node,
              * there is no key for that index.
              */
 

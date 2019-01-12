@@ -25,8 +25,8 @@ import org.embergraph.rdf.sail.webapp.XMLBuilder.Node;
 import org.openrdf.model.Resource;
 import org.openrdf.repository.RepositoryResult;
 
-/**
- * Task to report the contexts used by a QUADS mode KB instance.
+/*
+* Task to report the contexts used by a QUADS mode KB instance.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

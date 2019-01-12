@@ -25,8 +25,8 @@ import java.util.Iterator;
 import java.util.Map;
 import org.embergraph.cache.ConcurrentWeakValueCache;
 
-/**
- * A pattern for a canonicalizing factory based on a map with weak values.
+/*
+* A pattern for a canonicalizing factory based on a map with weak values.
  *
  * @param <KEY>
  * @param <VAL>
@@ -39,7 +39,7 @@ public abstract class CanonicalFactory<KEY, VAL, STATE> {
   //	private WeakValueCache<KEY, VAL> cache;
   private ConcurrentWeakValueCache<KEY, VAL> cache;
 
-  /**
+  /*
    * @param queueCapacity The capacity of the backing hard reference queue. This places a lower
    *     bound on the #of instances which will be retained by the factory.
    */
@@ -49,7 +49,7 @@ public abstract class CanonicalFactory<KEY, VAL, STATE> {
     cache = new ConcurrentWeakValueCache<KEY, VAL>(queueCapacity);
   }
 
-  /**
+  /*
    * Canonical factory pattern.
    *
    * @param key The key.
@@ -94,7 +94,7 @@ public abstract class CanonicalFactory<KEY, VAL, STATE> {
     }
   }
 
-  /**
+  /*
    * Remove an entry from the cache.
    *
    * <p>Note: It is sometimes necessary to clear a cache entry. For example, if a persistent
@@ -111,7 +111,7 @@ public abstract class CanonicalFactory<KEY, VAL, STATE> {
     cache.remove(key);
   }
 
-  /**
+  /*
    * Create an instance which will be associated with the key in the {@link CanonicalFactory}.
    *
    * @param key The key.
@@ -126,7 +126,7 @@ public abstract class CanonicalFactory<KEY, VAL, STATE> {
     cache.clear();
   }
 
-  /**
+  /*
    * An iterator that visits the entries in the map. You must test the weak reference for each entry
    * in order to determine whether its value has been cleared as of the moment that you request that
    * value. The entries visited by the iterator are not "touched" so the use of the iterator will

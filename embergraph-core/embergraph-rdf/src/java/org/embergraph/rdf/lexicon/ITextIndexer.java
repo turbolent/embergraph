@@ -31,8 +31,8 @@ import org.embergraph.search.Hiterator;
 import org.embergraph.search.IHit;
 import org.openrdf.model.Value;
 
-/**
- * Abstraction for the text indexer for RDF {@link Value}s allowing either the built-in embergraph
+/*
+* Abstraction for the text indexer for RDF {@link Value}s allowing either the built-in embergraph
  * {@link FullTextIndex} or support for Lucene, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -41,15 +41,15 @@ import org.openrdf.model.Value;
  */
 public interface ITextIndexer<A extends IHit> {
 
-  public void create();
+  void create();
 
-  public void destroy();
+  void destroy();
 
   /*
    * Moved to IValueCentricTextIndexer
    */
-  //    /**
-  //     * <p>
+  //    /*
+//     * <p>
   //     * Add the terms to the full text index so that we can do fast lookup of the
   //     * corresponding term identifiers. Only literals are tokenized. Literals
   //     * that have a language code property are parsed using a tokenizer
@@ -69,25 +69,25 @@ public interface ITextIndexer<A extends IHit> {
   //    public void index(int capacity, Iterator<EmbergraphValue> valuesIterator);
 
   /** Return <code>true</code> iff datatype literals are being indexed. */
-  public boolean getIndexDatatypeLiterals();
+  boolean getIndexDatatypeLiterals();
 
-  /**
+  /*
    * Do a free text search.
    *
    * @param query The query.
    * @return The result set.
    */
-  public Hiterator<A> search(final FullTextQuery query);
+  Hiterator<A> search(final FullTextQuery query);
 
-  /**
+  /*
    * Count free text search results.
    *
    * @param query The query.
    * @return The result count.
    */
-  public int count(final FullTextQuery query);
+  int count(final FullTextQuery query);
 
-  public static class FullTextQuery implements Serializable {
+  class FullTextQuery implements Serializable {
 
     /** */
     private static final long serialVersionUID = 4159873519447769476L;
@@ -185,7 +185,7 @@ public interface ITextIndexer<A extends IHit> {
           TimeUnit.MILLISECONDS);
     }
 
-    /**
+    /*
      * Construct a full text query.
      *
      * @param query The query (it will be parsed into tokens).
@@ -332,9 +332,9 @@ public interface ITextIndexer<A extends IHit> {
         if (other.query != null) return false;
       } else if (!query.equals(other.query)) return false;
       if (matchRegex == null) {
-        if (other.matchRegex != null) return false;
-      } else if (!matchRegex.equals(other.matchRegex)) return false;
-      return true;
+        return other.matchRegex == null;
+      } else
+        return matchRegex.equals(other.matchRegex);
     }
   }
 }

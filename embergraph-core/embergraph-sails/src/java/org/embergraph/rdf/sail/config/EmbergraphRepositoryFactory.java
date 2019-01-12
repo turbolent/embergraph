@@ -8,8 +8,8 @@ import org.openrdf.repository.config.RepositoryConfigException;
 import org.openrdf.repository.config.RepositoryFactory;
 import org.openrdf.repository.config.RepositoryImplConfig;
 
-/**
- * A {@link RepositoryFactory} that creates {@link EmbergraphSailRepository}s based on RDF
+/*
+* A {@link RepositoryFactory} that creates {@link EmbergraphSailRepository}s based on RDF
  * configuration data.
  */
 public class EmbergraphRepositoryFactory implements RepositoryFactory {

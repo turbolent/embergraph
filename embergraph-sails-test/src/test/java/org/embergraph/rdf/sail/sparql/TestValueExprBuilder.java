@@ -41,8 +41,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ValueExprBuilder}.
+/*
+* Test suite for {@link ValueExprBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestEmbergraphExprBuilder.java 5063 2011-08-21 16:13:03Z thompsonbry $
@@ -58,7 +58,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     super(name);
   }
 
-  /**
+  /*
    * Simple variable rename in select expression.
    *
    * <pre>
@@ -81,7 +81,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    * SELECT using math expression.
    *
    * <pre>
@@ -102,9 +102,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.ADD,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"), new VarNode("o")
-                  })));
+                  // args
+                  new VarNode("s"), new VarNode("o"))));
       expected.setProjection(projection);
     }
 
@@ -113,7 +112,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    * Select using comparison expression.
    *
    * <pre>
@@ -134,9 +133,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.LT,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"), new VarNode("o")
-                  })));
+                  // args
+                  new VarNode("s"), new VarNode("o"))));
       expected.setProjection(projection);
     }
 
@@ -165,7 +163,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    * Unit test with BNode. Should be rewritten as an anonymous variable.
    *
    * <p>Note: a bare blank node may not appear in the SELECT expression with (bnode as ?x) so we
@@ -246,7 +244,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -267,9 +265,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.COUNT,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s")
-                  })));
+                  // args
+                  new VarNode("s"))));
       expected.setProjection(projection);
     }
 
@@ -278,7 +275,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -299,11 +296,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.COUNT,
                   Collections.singletonMap(
-                      AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE), // scalar
+                      AggregateBase.Annotations.DISTINCT, Boolean.TRUE), // scalar
                   // values.
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s")
-                  })));
+                  // args
+                  new VarNode("s"))));
       expected.setProjection(projection);
     }
 
@@ -312,7 +308,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -333,9 +329,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.COUNT,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("*")
-                  })));
+                  // args
+                  new VarNode("*"))));
       expected.setProjection(projection);
     }
 
@@ -344,7 +339,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -365,11 +360,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.COUNT,
                   Collections.singletonMap(
-                      AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE), // scalar
+                      AggregateBase.Annotations.DISTINCT, Boolean.TRUE), // scalar
                   // values.
-                  new ValueExpressionNode[] { // args
-                    new VarNode("*")
-                  })));
+                  // args
+                  new VarNode("*"))));
       expected.setProjection(projection);
     }
 
@@ -378,7 +372,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -399,9 +393,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.ADD,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"), new VarNode("o")
-                  })));
+                  // args
+                  new VarNode("s"), new VarNode("o"))));
       expected.setProjection(projection);
     }
 
@@ -410,7 +403,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -430,9 +423,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.COALESCE,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"), new VarNode("p"), new VarNode("o")
-                  })));
+                  // args
+                  new VarNode("s"), new VarNode("p"), new VarNode("o"))));
       expected.setProjection(projection);
     }
 
@@ -441,7 +433,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -462,9 +454,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.IF,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"), new VarNode("p"), new VarNode("o")
-                  })));
+                  // args
+                  new VarNode("s"), new VarNode("p"), new VarNode("o"))));
       expected.setProjection(projection);
     }
 
@@ -473,7 +464,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -493,9 +484,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.REGEX,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("o"), new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
-                  })));
+                  // args
+                  new VarNode("o"), new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))))));
       expected.setProjection(projection);
     }
 
@@ -504,7 +494,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -525,11 +515,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.REGEX,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("o"),
-                    new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
-                    new ConstantNode(makeIV(valueFactory.createLiteral("i"))),
-                  })));
+                  // args
+                  new VarNode("o"),
+                  new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
+                  new ConstantNode(makeIV(valueFactory.createLiteral("i"))))));
       expected.setProjection(projection);
     }
 
@@ -538,7 +527,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    * IN with empty arg list
    *
    * <pre>
@@ -561,9 +550,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.IN,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"),
-                  })));
+                  // args
+                  new VarNode("s"))));
       expected.setProjection(projection);
     }
 
@@ -572,7 +560,7 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected.getProjection(), actual.getProjection());
   }
 
-  /**
+  /*
    * IN with a non-empty arg list
    *
    * <pre>
@@ -595,9 +583,8 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.IN,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"), new VarNode("p"), new VarNode("o")
-                  })));
+                  // args
+                  new VarNode("s"), new VarNode("p"), new VarNode("o"))));
       expected.setProjection(projection);
     }
 

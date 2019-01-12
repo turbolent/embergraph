@@ -25,15 +25,15 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.embergraph.btree.filter.TupleFilter;
 
-/**
- * Interface visits {@link ITuple}s populated with the data and metadata for visited index entries.
+/*
+* Interface visits {@link ITuple}s populated with the data and metadata for visited index entries.
  *
  * @see IRangeQuery
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ITupleIterator<E> extends Iterator<ITuple<E>> {
 
-  /**
+  /*
    * Advance the iterator and return the {@link ITuple} from which you can extract the data and
    * metadata for next entry.
    *
@@ -46,5 +46,5 @@ public interface ITupleIterator<E> extends Iterator<ITuple<E>> {
    * @throws NoSuchElementException if there is no next entry.
    */
   @Override
-  public ITuple<E> next();
+  ITuple<E> next();
 }

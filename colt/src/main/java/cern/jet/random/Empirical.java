@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Empirical distribution.
+/*
+* Empirical distribution.
  *
  * <p>The probability distribution function (pdf) must be provided by the user as an array of
  * positive real numbers. The pdf does not need to be provided in the form of relative
@@ -43,7 +43,7 @@ public class Empirical extends AbstractContinousDistribution {
 
   public static final int LINEAR_INTERPOLATION = 0;
   public static final int NO_INTERPOLATION = 1;
-  /**
+  /*
    * Constructs an Empirical distribution. The probability distribution function (pdf) is an array
    * of positive real numbers. It need not be provided in the form of relative probabilities,
    * absolute probabilities are also accepted. The <tt>pdf</tt> must satisfy both of the following
@@ -70,7 +70,7 @@ public class Empirical extends AbstractContinousDistribution {
     if (k >= cdf.length - 1) return 1.0;
     return cdf[k];
   }
-  /**
+  /*
    * Returns a deep copy of the receiver; the copy will produce identical sequences. After this call
    * has returned, the copy and the receiver have equal but separate state.
    *
@@ -78,7 +78,7 @@ public class Empirical extends AbstractContinousDistribution {
    */
   public Object clone() {
     Empirical copy = (Empirical) super.clone();
-    if (this.cdf != null) copy.cdf = (double[]) this.cdf.clone();
+    if (this.cdf != null) copy.cdf = this.cdf.clone();
     return copy;
   }
   /** Returns a random number from the distribution. */
@@ -128,7 +128,7 @@ public class Empirical extends AbstractContinousDistribution {
     if (k < 0 || k >= cdf.length - 1) return 0.0;
     return cdf[k - 1] - cdf[k];
   }
-  /**
+  /*
    * Sets the distribution parameters. The <tt>pdf</tt> must satisfy both of the following
    * conditions
    *
@@ -183,7 +183,7 @@ public class Empirical extends AbstractContinousDistribution {
         + interpolation
         + ")";
   }
-  /**
+  /*
    * Not yet commented.
    *
    * @return int

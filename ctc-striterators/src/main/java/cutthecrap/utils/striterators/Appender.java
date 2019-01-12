@@ -18,8 +18,8 @@ package cutthecrap.utils.striterators;
 
 import java.util.Iterator;
 
-/**
- * Appender
+/*
+* Appender
  *
  * <p>Used with Appenderator by Striterator to filter returned objects.
  */
@@ -36,7 +36,7 @@ public class Appender extends FilterBase {
 
   @Override
   public final Iterator filterOnce(Iterator src, Object context) {
-    return new Appenderator(src, context, (Iterator) m_xtra);
+    return new Appenderator(src, context, m_xtra);
   }
 
   // -------------------------------------------------------------

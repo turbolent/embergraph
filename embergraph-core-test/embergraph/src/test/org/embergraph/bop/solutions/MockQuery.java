@@ -29,7 +29,7 @@ public class MockQuery extends PipelineOp {
   private static final long serialVersionUID = 1L;
 
   public MockQuery() {
-    super(new BOp[] {}, NV.asMap(new NV[] {}));
+    super(new BOp[] {}, NV.asMap());
   }
 
   @Override

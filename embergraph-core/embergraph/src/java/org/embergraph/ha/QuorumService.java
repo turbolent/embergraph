@@ -26,8 +26,8 @@ import org.embergraph.journal.IRootBlockView;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumMember;
 
-/**
- * A non-remote interface for a member service in a {@link Quorum} defining methods to support
+/*
+* A non-remote interface for a member service in a {@link Quorum} defining methods to support
  * service specific high availability operations such as reading on another member of the quorum,
  * the 2-phase quorum commit protocol, replicating writes, etc.
  *
@@ -57,27 +57,27 @@ public interface QuorumService<S extends HAGlue>
   /** Return the lastCommitCounter for this service (based on its current root block). */
   long getLastCommitCounter();
 
-  /**
+  /*
    * Return the service directory. This directory has various metadata about the service process,
    * but it might not contain either the data or the HA log files.
    */
   File getServiceDir();
 
-  //    /**
-  //     * Return the directory in which we are logging the write blocks.
+  //    /*
+//     * Return the directory in which we are logging the write blocks.
   //     */
   //    File getHALogDir();
 
   /** Return the best guess at the process identifier for this process. */
   int getPID();
 
-  /**
+  /*
    * Return the configured timeout in milliseconds that the leader will await the other services to
    * prepare for a 2-phase commit.
    */
   long getPrepareTimeout();
 
-  /**
+  /*
    * Install root blocks on the local service. This is used for a few different conditions in HA.
    *
    * <ol>
@@ -98,7 +98,7 @@ public interface QuorumService<S extends HAGlue>
    */
   void installRootBlocks(final IRootBlockView rootBlock0, final IRootBlockView rootBlock1);
 
-  /**
+  /*
    * Enter an error state. The error state should take whatever corrective actions are necessary in
    * order to prepare the service for continued operations.
    */

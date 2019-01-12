@@ -20,8 +20,8 @@ package org.embergraph.bop.solutions;
 
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 
-/**
- * A collection of tests for various implementations of GroupByOp. Unlike the unit tests in {@link
+/*
+* A collection of tests for various implementations of GroupByOp. Unlike the unit tests in {@link
  * AbstractAggregationTestCase }, this test suite provides higher coverage in terms of the covered
  * feature combinations, but weaker focus because it simply parses and runs the test queries from
  * files, so interference from other modules is likely. Also, the choice of the particular {@link
@@ -91,7 +91,7 @@ public class TestGroupByOp extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * SELECT?w (SAMPLE(?v) AS ?S) (STR(?w) AS ?wstr) { ?s :p ?v . OPTIONAL { ?s :q ?w } } GROUP BY ?w
    */
   public void test_ticket_1202e() throws Exception {
@@ -105,7 +105,7 @@ public class TestGroupByOp extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * SELECT?w (COUNT(DISTINCT ?v) AS ?S) (STR(?w) AS ?wstr) { ?s :p ?v . OPTIONAL { ?s :q ?w } }
    * GROUP BY ?w
    */
@@ -132,7 +132,7 @@ public class TestGroupByOp extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * SELECT?s ?w (COUNT(DISTINCT ?v) AS ?c) (STR(?w) AS ?wstr) { ?s :p ?v . OPTIONAL { ?s :q ?w } }
    * GROUP BY ?s ?w
    */
@@ -159,7 +159,7 @@ public class TestGroupByOp extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * SELECT?w (COUNT(DISTINCT ?v) AS ?S) (?w AS ?u) { ?s :p ?v . OPTIONAL { ?s :q ?w } } GROUP BY ?w
    */
   public void test_ticket_1202j() throws Exception {
@@ -185,7 +185,7 @@ public class TestGroupByOp extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * SELECT?s ?w (COUNT(DISTINCT ?v) AS ?c) (?w AS ?u) { ?s :p ?v . OPTIONAL { ?s :q ?w } } GROUP BY
    * ?s ?w
    */

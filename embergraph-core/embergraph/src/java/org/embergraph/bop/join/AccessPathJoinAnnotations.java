@@ -24,8 +24,8 @@ package org.embergraph.bop.join;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.accesspath.IAccessPath;
 
-/**
- * Interface declares additional annotations for joins against an {@link IAccessPath} (versus a
+/*
+* Interface declares additional annotations for joins against an {@link IAccessPath} (versus a
  * subquery or temporary solution set).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,7 +33,7 @@ import org.embergraph.relation.accesspath.IAccessPath;
  */
 public interface AccessPathJoinAnnotations extends JoinAnnotations {
 
-  /**
+  /*
    * The {@link IPredicate} which is used to generate the {@link IAccessPath}s during the join.
    *
    * <p>Note: Scale-out relies on this annotation when mapping intermediate results across the

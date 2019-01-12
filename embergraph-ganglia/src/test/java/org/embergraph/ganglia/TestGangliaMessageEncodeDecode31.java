@@ -20,8 +20,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import junit.framework.TestCase;
 import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
-/**
- * Test suite for encode/decode of the Ganglia 3.1 wire format messages. The messages in this test
+/*
+* Test suite for encode/decode of the Ganglia 3.1 wire format messages. The messages in this test
  * suite were derived from a mixture of capture (via {@link #main(String[])} and mock messages
  * generated using <code>gmetric</code> with known characteristics.
  */
@@ -248,7 +248,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
     }
   }
 
-  /**
+  /*
    * Verify that we can encode and decode a record.
    *
    * @param decl The metadata declaration IFF the <i>expected</i> record is an {@link
@@ -315,7 +315,7 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
     return actualData;
   }
 
-  /**
+  /*
    * Utility for capturing data records from the wire and identifying errors in decode/encode of
    * {@link IGangliaMessage}. This captures both the packet and the decoded record. If there is a
    * decode/encode problem, then the raw packet data, the relevant metadata declaration (if any),
@@ -413,14 +413,14 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
     {
       if (msg.isMetricMetadata()) {
 
-        /*
-         * Add it to the state so we can resolve it when we need to
+      /*
+       * Add it to the state so we can resolve it when we need to
          * round trip a metric message below.
          */
         gangliaState.putIfAbsent((IGangliaMetadataMessage) msg);
 
-        /*
-         * Format the message and extract it into a byte[].
+      /*
+       * Format the message and extract it into a byte[].
          */
         messageGenerator.writeMetadata(xdr, (IGangliaMetadataMessage) msg);
 
@@ -435,8 +435,8 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 
       } else if (msg.isMetricRequest()) {
 
-        /*
-         * Format the message and extract it into a byte[].
+      /*
+       * Format the message and extract it into a byte[].
          */
         messageGenerator.writeRequest(xdr, (IGangliaRequestMessage) msg);
 
@@ -455,8 +455,8 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 
         if (decl != null) {
 
-          /*
-           * Format the message and extract it into a byte[].
+        /*
+       * Format the message and extract it into a byte[].
            */
           messageGenerator.writeMetric(xdr, decl, (IGangliaMetricMessage) msg);
 
@@ -471,8 +471,8 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 
         } else {
 
-          /*
-           * We can not encode a metric value record w/o a
+        /*
+       * We can not encode a metric value record w/o a
            * declaration.
            */
           actual = null;
@@ -517,8 +517,8 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 
       if (msg.isMetricValue()) {
 
-        /*
-         * The metadata message which provides the declaration for that
+      /*
+       * The metadata message which provides the declaration for that
          * metric record.
          */
         final IGangliaMetadataMessage decl = gangliaState.getMetadata(msg.getMetricName());
@@ -535,8 +535,8 @@ public class TestGangliaMessageEncodeDecode31 extends TestCase {
 
       if (roundTripError) {
 
-        /*
-         * If we fail to encode record the record correctly, then write
+      /*
+       * If we fail to encode record the record correctly, then write
          * out the data that we generated when we tried to encode the
          * record.
          */

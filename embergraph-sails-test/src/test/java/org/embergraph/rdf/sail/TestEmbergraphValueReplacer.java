@@ -40,8 +40,8 @@ import org.openrdf.query.impl.MapBindingSet;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
-/**
- * Test suite for the logic which rewrites a query, replacing {@link Value} constants with {@link
+/*
+* Test suite for the logic which rewrites a query, replacing {@link Value} constants with {@link
  * EmbergraphValue} constants which have been resolved against the database.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -72,7 +72,7 @@ public class TestEmbergraphValueReplacer extends ProxyEmbergraphSailTestCase {
     return props;
   }
 
-  /**
+  /*
    * Unit test for bindings passed into a query which are not used by the query.
    *
    * @throws RepositoryException
@@ -91,13 +91,13 @@ public class TestEmbergraphValueReplacer extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       try {
 
         cxn.setAutoCommit(false);
 
-        /*
-         * Add a statement so the query does not get short circuited
+      /*
+       * Add a statement so the query does not get short circuited
          * because some of the terms in the query are undefined in the
          * database.
          */
@@ -107,8 +107,8 @@ public class TestEmbergraphValueReplacer extends ProxyEmbergraphSailTestCase {
 
         final TupleQuery q = cxn.prepareTupleQuery(QueryLanguage.SPARQL, query);
 
-        /*
-         * Setup some bindings.
+      /*
+       * Setup some bindings.
          */
         // bind to a term in the database.
         q.setBinding("a", new URIImpl("s:1"));
@@ -117,8 +117,8 @@ public class TestEmbergraphValueReplacer extends ProxyEmbergraphSailTestCase {
         // bind to a term NOT found in the database.
         q.setBinding("notused", new LiteralImpl("lit"));
 
-        /*
-         * Evaluate the query and verify that the correct solution
+      /*
+       * Evaluate the query and verify that the correct solution
          * is produced.
          */
         final Collection<BindingSet> expected = new LinkedList<BindingSet>();

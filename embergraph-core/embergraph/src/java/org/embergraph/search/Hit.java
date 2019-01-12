@@ -3,8 +3,8 @@ package org.embergraph.search;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 
-/**
- * Metadata about a search result.
+/*
+* Metadata about a search result.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -29,7 +29,7 @@ public class Hit<V extends Comparable<V>> implements IHit<V>, Comparable<Hit<V>>
   /** Rank order for this hit */
   private int rank;
 
-  /**
+  /*
    * Ctor used in conjunction with a {@link ConcurrentHashMap} to insert objects into the result
    * set.
    *
@@ -115,7 +115,7 @@ public class Hit<V extends Comparable<V>> implements IHit<V>, Comparable<Hit<V>>
     return "Hit{docId" + docId + ",nterms=" + getTermCount() + ",cosine=" + cosine + "}";
   }
 
-  /**
+  /*
    * Sorts {@link Hit}s into decreasing cosine order with ties broken by the the <code>docId</code>.
    */
   public int compareTo(final Hit<V> o) {

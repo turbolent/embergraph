@@ -6,8 +6,8 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.DataService;
 
-/**
- * The object returned by {@link MoveIndexPartitionTask}.
+/*
+* The object returned by {@link MoveIndexPartitionTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -18,7 +18,7 @@ public class MoveResult extends AbstractResult {
 
   public final int newPartitionId;
 
-  /**
+  /*
    * The name of the new index partition on the target data service.
    *
    * <p>Note: {@link AbstractResult#name} is the name of the source index partition that was moved
@@ -29,14 +29,14 @@ public class MoveResult extends AbstractResult {
   public final PartitionLocator oldLocator;
   public final PartitionLocator newLocator;
 
-  /**
+  /*
    * <code>false</code> until the target index partition is registered in the MDS. This is used to
    * decide whether or not we need to rollback a change in the MDS if the atomic update task fails
    * during the commit.
    */
   protected final AtomicBoolean registeredInMDS = new AtomicBoolean(false);
 
-  /**
+  /*
    * @param name The name of the source index partition.
    * @param indexMetadata The index metadata object for the source index partition.
    * @param targetDataServiceUUID The data service {@link UUID} for the target data service.

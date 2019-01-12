@@ -31,8 +31,8 @@ import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.mdi.IResourceMetadata;
 
-/**
- * An object that delegates its {@link IIndex} interface.
+/*
+* An object that delegates its {@link IIndex} interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

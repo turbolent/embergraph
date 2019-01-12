@@ -33,8 +33,8 @@ import org.embergraph.rdf.sparql.ast.explainhints.IExplainHint;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTQueryHintOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
-/**
- * Base class for the AST.
+/*
+* Base class for the AST.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public class ASTBase extends ModifiableBOpBase {
 
   public interface Annotations extends ModifiableBOpBase.Annotations {
 
-    /**
+    /*
      * An optional {@link Properties} object specifying query hints which apply to <i>this</i> AST
      * node.
      *
@@ -64,7 +64,7 @@ public class ASTBase extends ModifiableBOpBase {
      */
     String QUERY_HINTS = "queryHints";
 
-    /**
+    /*
      * An optional {@link ExplainHints} object specifying hints to be exposed to the user when
      * requesting an explanation of the query.
      */
@@ -82,7 +82,7 @@ public class ASTBase extends ModifiableBOpBase {
     super(args, annotations);
   }
 
-  /**
+  /*
    * Return the query hints for this AST node.
    *
    * @return The query hints -or- <code>null</code> if none have been declared.
@@ -92,7 +92,7 @@ public class ASTBase extends ModifiableBOpBase {
     return (Properties) getProperty(Annotations.QUERY_HINTS);
   }
 
-  /**
+  /*
    * Return the explain hints associated with this AST node
    *
    * @return The explain hints -or- <code>null</code> if none have been declared.
@@ -101,7 +101,7 @@ public class ASTBase extends ModifiableBOpBase {
     return (ExplainHints) getProperty(Annotations.EXPLAIN_HINTS);
   }
 
-  /**
+  /*
    * Return the value of the query hint.
    *
    * @param name The name of the query hint.
@@ -112,7 +112,7 @@ public class ASTBase extends ModifiableBOpBase {
     return getQueryHint(name, null /*defaultValue*/);
   }
 
-  /**
+  /*
    * Return the value of the query hint.
    *
    * @param name The name of the query hint.
@@ -128,7 +128,7 @@ public class ASTBase extends ModifiableBOpBase {
     return queryHints.getProperty(name, defaultValue);
   }
 
-  /**
+  /*
    * Return the boolean value of the query hint.
    *
    * @param name The name of the query hint.
@@ -139,7 +139,7 @@ public class ASTBase extends ModifiableBOpBase {
     return Boolean.valueOf(getQueryHint(name, defaultValue));
   }
 
-  /**
+  /*
    * Return the boolean value of the query hint.
    *
    * @param name The name of the query hint.
@@ -150,7 +150,7 @@ public class ASTBase extends ModifiableBOpBase {
     return Boolean.valueOf(getQueryHint(name, Boolean.toString(defaultValue)));
   }
 
-  /**
+  /*
    * Return the Integer value of the query hint.
    *
    * @param name The name of the query hint.
@@ -161,7 +161,7 @@ public class ASTBase extends ModifiableBOpBase {
     return Integer.valueOf(getQueryHint(name, Integer.toString(defaultValue)));
   }
 
-  /**
+  /*
    * Set the query hints.
    *
    * @param queryHints The query hints (may be <code>null</code>).
@@ -172,7 +172,7 @@ public class ASTBase extends ModifiableBOpBase {
     setProperty(Annotations.QUERY_HINTS, queryHints);
   }
 
-  /**
+  /*
    * Add an explain hint to the query.
    *
    * @param explainHint the hint to add, ignored if null
@@ -192,7 +192,7 @@ public class ASTBase extends ModifiableBOpBase {
     }
   }
 
-  /**
+  /*
    * Set a query hint.
    *
    * @param name The property name for the query hint.
@@ -215,7 +215,7 @@ public class ASTBase extends ModifiableBOpBase {
     queryHints.setProperty(name, value);
   }
 
-  /**
+  /*
    * Replace all occurrences of the old value with the new value in both the arguments and
    * annotations of this operator (recursive). A match is identified by reference {@link
    * #equals(Object)}.

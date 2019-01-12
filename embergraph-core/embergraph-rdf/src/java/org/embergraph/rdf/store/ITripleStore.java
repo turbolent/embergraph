@@ -37,8 +37,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Interface for a triple -or- quad store.
+/*
+* Interface for a triple -or- quad store.
  *
  * <p>Note: This API does NOT implement a Truth Maintenance (TM) strategy and by itself only
  * supports "explicit" triples. If the knowledge base is NOT to store any entailments then the
@@ -63,14 +63,14 @@ import org.openrdf.model.Value;
  */
 public interface ITripleStore {
 
-  /**
+  /*
    * The #of named graphs.
    *
    * @throws UnsupportedOperationException unless this is a quad store.
    */
   long getNamedGraphCount();
 
-  /**
+  /*
    * The #of triples in the named graph, or in the database if <i>c</i> is not specified.
    *
    * @param c The context (optional).
@@ -79,7 +79,7 @@ public interface ITripleStore {
    */
   long getStatementCount(Resource c);
 
-  /**
+  /*
    * The #of triples in the store.
    *
    * @return The #of statements in the database. When either transactions or key-range partitioned
@@ -89,7 +89,7 @@ public interface ITripleStore {
    */
   long getStatementCount();
 
-  /**
+  /*
    * The #of triples in the store.
    *
    * @param exact When <code>true</code> the result will be an exact count, which may require a full
@@ -101,7 +101,7 @@ public interface ITripleStore {
    */
   long getStatementCount(boolean exact);
 
-  /**
+  /*
    * The #of triples in the named graph or in the database if no context is specified.
    *
    * @param c The context (optional).
@@ -113,7 +113,7 @@ public interface ITripleStore {
    */
   long getStatementCount(Resource c, boolean exact);
 
-  /**
+  /*
    * The #of RDF {@link Value}s in the lexicon (this is not specific to any named graph).
    *
    * <p>This may be an estimate when using partitioned indices.
@@ -123,7 +123,7 @@ public interface ITripleStore {
    */
   long getTermCount();
 
-  /**
+  /*
    * The #of URIs in the lexicon (this is not specific to any named graph).
    *
    * <p>This may be an estimate when using partitioned indices.
@@ -133,7 +133,7 @@ public interface ITripleStore {
    */
   long getURICount();
 
-  /**
+  /*
    * The #of Literals in the lexicon (this is not specific to any named graph).
    *
    * <p>This may be an estimate when using partitioned indices.
@@ -143,7 +143,7 @@ public interface ITripleStore {
    */
   long getLiteralCount();
 
-  /**
+  /*
    * The #of BNodes in the lexicon (this is not specific to any named graph).
    *
    * <p>This may be an estimate when using partitioned indices.
@@ -156,7 +156,7 @@ public interface ITripleStore {
    */
   long getBNodeCount();
 
-  /**
+  /*
    * Add a single {@link StatementEnum#Explicit} statement by lookup and/or insert into the various
    * indices (non-batch api).
    *
@@ -183,7 +183,7 @@ public interface ITripleStore {
   /** @deprecated by {@link #addStatement(Resource, URI, Value, Resource)} */
   void addStatement(Resource s, URI p, Value o);
 
-  /**
+  /*
    * Return true if the triple pattern matches any statements in the store (non-batch API).
    *
    * <p>Note: This does not verify whether or not the statement is explicit.
@@ -198,7 +198,7 @@ public interface ITripleStore {
   /** @deprecated by {@link #hasStatement(Resource, URI, Value, Resource)} */
   boolean hasStatement(Resource s, URI p, Value o);
 
-  /**
+  /*
    * Return the statement from the database matching the fully bound query.
    *
    * <p>Note: If the parameters are from an {@link AbstractTripleStore} using a different lexicon
@@ -219,7 +219,7 @@ public interface ITripleStore {
   /** @deprecated by {@link #getStatement(Resource, URI, Value, Resource)} */
   EmbergraphStatement getStatement(Resource s, URI p, Value o);
 
-  /**
+  /*
    * Return an iterator that will visit all {@link EmbergraphStatement}s in the database matching
    * the triple pattern.
    *
@@ -234,7 +234,7 @@ public interface ITripleStore {
   /** @deprecated by {@link #getStatements(Resource, URI, Value, Resource)} */
   EmbergraphStatementIterator getStatements(Resource s, URI p, Value o);
 
-  /**
+  /*
    * Converts a {@link EmbergraphValue} to a Sesame {@link Value} object.
    *
    * @param value Either a {@link EmbergraphValue}, a Sesame {@link Value} object, or <code>null
@@ -244,7 +244,7 @@ public interface ITripleStore {
    */
   EmbergraphValue asValue(Value value);
 
-  /**
+  /*
    * Unconditionally removes statement(s) matching the triple pattern (NO truth maintenance).
    *
    * @param s The subject (optional).
@@ -258,7 +258,7 @@ public interface ITripleStore {
   /** @deprecated by {@link #removeStatements(Resource, URI, Value, Resource)} */
   long removeStatements(Resource s, URI p, Value o);
 
-  /**
+  /*
    * Returns an {@link IAccessPath} matching the triple pattern.
    *
    * @param s The subject (optional).
@@ -276,7 +276,7 @@ public interface ITripleStore {
   /** @deprecated by {@link #getAccessPath(Resource, URI, Value, Resource)} */
   IAccessPath<ISPO> getAccessPath(Resource s, URI p, Value o);
 
-  /**
+  /*
    * Wraps an {@link IChunkedOrderedIterator} as a {@link EmbergraphStatementIterator}.
    *
    * <p>Note: The object visited will be {@link EmbergraphStatementImpl}s.
@@ -288,7 +288,7 @@ public interface ITripleStore {
    */
   EmbergraphStatementIterator asStatementIterator(IChunkedOrderedIterator<ISPO> src);
 
-  /**
+  /*
    * Convert an internal {@link ISPO} into a Sesame {@link Statement}.
    *
    * <p>Note: The object returned will be a {@link EmbergraphStatement}
@@ -298,7 +298,7 @@ public interface ITripleStore {
    */
   EmbergraphStatement asStatement(ISPO spo);
 
-  /**
+  /*
    * Return a {@link DataLoader} singleton configured using the properties that were used to
    * configure the database.
    *
@@ -306,7 +306,7 @@ public interface ITripleStore {
    */
   DataLoader getDataLoader();
 
-  /**
+  /*
    * Return an {@link InferenceEngine} singleton configured using the properties that were used to
    * configure the database.
    *
@@ -317,7 +317,7 @@ public interface ITripleStore {
    */
   InferenceEngine getInferenceEngine();
 
-  /**
+  /*
    * Discard the write set.
    *
    * <p>Note: The semantics of this operation depend on whether the database is embedded (discards
@@ -326,7 +326,7 @@ public interface ITripleStore {
    */
   void abort();
 
-  /**
+  /*
    * Commit changes on the database.
    *
    * <p>Note: The semantics of this operation depend on whether the database is embedded (does a

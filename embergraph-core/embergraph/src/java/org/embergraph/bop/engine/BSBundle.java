@@ -23,8 +23,8 @@ package org.embergraph.bop.engine;
 
 import java.util.Comparator;
 
-/**
- * An immutable class capturing the evaluation context of an operator against a shard.
+/*
+* An immutable class capturing the evaluation context of an operator against a shard.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -66,7 +66,7 @@ public class BSBundle implements Comparable<BSBundle> {
     return bopId == t.bopId && shardId == t.shardId;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This orders the {@link BSBundle}s by reverse {@link #bopId} and by {@link #shardId} if the

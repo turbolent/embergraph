@@ -52,8 +52,8 @@ import org.embergraph.resources.ResourceManager;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.MillisecondTimestampFactory;
 
-/**
- * Centralized transaction manager service. In response to a client request, the transaction manager
+/*
+* Centralized transaction manager service. In response to a client request, the transaction manager
  * will distribute prepare/commit or abort operations to all data services on which writes were made
  * by a transaction. The transaction manager also provides global timestamps required for
  * non-transactional commit points and various other purposes.
@@ -74,7 +74,7 @@ public abstract class AbstractTransactionService extends AbstractService
 
   //    protected static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Options understood by this service.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -82,7 +82,7 @@ public abstract class AbstractTransactionService extends AbstractService
    */
   public interface Options {
 
-    /**
+    /*
      * How long you want to hold onto the database history (in milliseconds) or {@link
      * Long#MAX_VALUE} for an (effectively) immortal database. The {@link ITransactionService}
      * tracks the timestamp corresponding to the earliest running transaction (if any). When such a
@@ -114,7 +114,7 @@ public abstract class AbstractTransactionService extends AbstractService
      */
     String MIN_RELEASE_AGE = AbstractTransactionService.class.getName() + ".minReleaseAge";
 
-    /**
+    /*
      * Minimum release age is zero (0). A value of ZERO (0) implies that any history not required
      * for the read-committed view is released each time the {@link ResourceManager} overflows.
      */
@@ -139,7 +139,7 @@ public abstract class AbstractTransactionService extends AbstractService
     /** Immortal database (the release time is set to {@link Long#MAX_VALUE}). */
     String MIN_RELEASE_AGE_NEVER = "" + Long.MAX_VALUE;
 
-    /**
+    /*
      * Default minimum release age is ONE(1L) milliseconds (only the last commit point will be
      * retained after a full compacting merge). This causes the RWStore to use its recycler mode by
      * default rather than its session protection mode.
@@ -170,7 +170,7 @@ public abstract class AbstractTransactionService extends AbstractService
   /** A copy of the callers properties. */
   private final Properties properties;
 
-  /**
+  /*
    * The minimum age in milliseconds before history may be released.
    *
    * @see Options#MIN_RELEASE_AGE
@@ -183,7 +183,7 @@ public abstract class AbstractTransactionService extends AbstractService
     return new Properties(properties);
   }
 
-  /**
+  /*
    * A hash map containing all active transactions. A transaction that is preparing will remain in
    * this collection until it has completed (aborted or committed). The key is the txId of the
    * transaction.
@@ -193,7 +193,7 @@ public abstract class AbstractTransactionService extends AbstractService
    */
   private final ConcurrentHashMap<Long, TxState> activeTx = new ConcurrentHashMap<Long, TxState>();
 
-  /**
+  /*
    * Return the {@link TxState} associated with the specified transition identifier.
    *
    * <p>Note: This method is an internal API. The caller must adhere to the internal synchronization
@@ -249,7 +249,7 @@ public abstract class AbstractTransactionService extends AbstractService
     return runState;
   }
 
-  /**
+  /*
    * Change the {@link TxServiceRunState}.
    *
    * @param newval The new value.
@@ -272,7 +272,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Polite shutdown. New transactions will not start. This method will block until existing
    * transactions (both read-write and read-only) are complete (either aborted or committed).
    */
@@ -321,7 +321,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Wait until active transactions complete.
    *
    * @param logTimeout The timeout between {@link #logTimeout(long, TimeUnit)} messages.
@@ -381,7 +381,7 @@ public abstract class AbstractTransactionService extends AbstractService
     } // while(true)
   }
 
-  /**
+  /*
    * Logs periodic messages during shutdown.
    *
    * @param elapsed The elapsed time since shutdown was requested.
@@ -401,7 +401,7 @@ public abstract class AbstractTransactionService extends AbstractService
             + getReadOnlyActiveCount());
   }
 
-  /**
+  /*
    * Fast shutdown (not immediate since it must abort active transactions).
    *
    * <p>New transactions will not start and active transactions will be aborted. Transactions which
@@ -450,8 +450,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
         if (state == null) {
 
-          /*
-           * Note: concurrent removal or clearing of the weak
+        /*
+       * Note: concurrent removal or clearing of the weak
            * reference is possible.
            */
 
@@ -486,8 +486,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
           state.lock.unlock();
 
-          /*
-           * Note: We are already holding the outer lock so we do not
+        /*
+       * Note: We are already holding the outer lock so we do not
            * need to acquire it here.
            */
           updateReleaseTime(Math.abs(state.tx), null /* deactivatedTx */);
@@ -509,7 +509,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Immediate/fast shutdown of the service and then destroys any persistent state associated with
    * the service.
    */
@@ -564,7 +564,7 @@ public abstract class AbstractTransactionService extends AbstractService
 
   }
 
-  /**
+  /*
    * Private version is also used by {@link #start()}.
    *
    * <p>TODO Why is this synchronized(this)? The timestamp factory is synchronized internally and
@@ -577,7 +577,7 @@ public abstract class AbstractTransactionService extends AbstractService
   /** The last timestamp issued. */
   private volatile long lastTimestamp;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: There is an upper bound of one read-write transaction that may be created per
@@ -652,7 +652,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * A lock used to serialize certain operations that must be atomic with respect to the state of
    * the transaction service. Mostly this is used to serialize the assignment of transaction
    * identifiers and the update of the release time as transactions complete.
@@ -708,8 +708,8 @@ public abstract class AbstractTransactionService extends AbstractService
     return readWriteActiveCount.get();
   }
 
-  //    /**
-  //     * The minimum over the absolute values of the active transactions.
+  //    /*
+//     * The minimum over the absolute values of the active transactions.
   //     * <p>
   //     * Note: This is a transaction identifier. It is NOT the commitTime on which
   //     * that transaction is reading.
@@ -722,7 +722,7 @@ public abstract class AbstractTransactionService extends AbstractService
   //
   //    }
 
-  /**
+  /*
    * Return the {@link TxState} for the earliest active Tx -or- <code>null</code> if there is no
    * active tx.
    *
@@ -743,7 +743,7 @@ public abstract class AbstractTransactionService extends AbstractService
     return earliestOpenTx;
   }
 
-  /**
+  /*
    * The earliest open transaction.
    *
    * <p>Note: This field is guarded by the {@link #lock}. However, it is declared <code>volatile
@@ -754,7 +754,7 @@ public abstract class AbstractTransactionService extends AbstractService
    */
   private volatile TxState earliestOpenTx = null;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see Options#MIN_RELEASE_AGE
@@ -787,7 +787,7 @@ public abstract class AbstractTransactionService extends AbstractService
   //          ? immediate : earliestTxStartTime;
   //  }
 
-  /**
+  /*
    * Sets the new release time.
    *
    * <p>Note: For a joined service in HA (the leader or a follower), the release time is set by the
@@ -821,7 +821,7 @@ public abstract class AbstractTransactionService extends AbstractService
     this.releaseTime = newValue;
   }
 
-  /**
+  /*
    * This method was introduced to compute the effective timestamp of the pinned history in support
    * of the HA TXS. It <strong>ignores</strong> the <code>releaseTime</code> and reports the minimum
    * of <code>now - minReleaseAge</code> and the readsOnCommitTime of the earliest active Tx. If the
@@ -912,7 +912,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Adds the transaction from to the local tables.
    *
    * @param state The transaction.
@@ -929,8 +929,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
       if (this.earliestOpenTx == null || Math.abs(state.tx) < Math.abs(this.earliestOpenTx.tx)) {
 
-        /*
-         * This is the earliest open transaction. This is defined as the
+      /*
+       * This is the earliest open transaction. This is defined as the
          * transaction whose readsOnCommitTime is LTE all other
          * transactions and whose absolute txId value is LT all other
          * transactions. Since we assign the txIds in intervals GTE the
@@ -945,8 +945,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
       synchronized (startTimeIndex) {
 
-        /*
-         * Note: Using the absolute value of the assigned timestamp so
+      /*
+       * Note: Using the absolute value of the assigned timestamp so
          * that the index is ordered earliest to most recent. This means
          * that the absolute value of the timestamps must be unique,
          * otherwise this will throw out an exception.
@@ -991,7 +991,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Return the commit time on which the transaction is reading.
    *
    * <p>Note: This method is exposed primarily for the unit tests.
@@ -1009,7 +1009,7 @@ public abstract class AbstractTransactionService extends AbstractService
     return state.readsOnCommitTime;
   }
 
-  /**
+  /*
    * Removes the transaction from the local tables.
    *
    * <p>Note: The caller MUST own {@link TxState#lock} across this method and MUST then do
@@ -1082,7 +1082,7 @@ public abstract class AbstractTransactionService extends AbstractService
 
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the release time consensus protocol is being used to update the
    * releaseTime (HA and this service is either a leader or a follower). Return <code>false</code>
    * iff the service should locally manage its own release time (non-HA and HA when the service is
@@ -1100,7 +1100,7 @@ public abstract class AbstractTransactionService extends AbstractService
     return false;
   }
 
-  /**
+  /*
    * This method MUST be invoked each time a transaction completes with the absolute value of the
    * transaction identifier that has just been deactivated. The method will remove the transaction
    * entry in the ordered set of running transactions ({@link #startTimeIndex}).
@@ -1212,8 +1212,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
           if (tmp == null) {
 
-            /*
-             * Transaction is no longer active (and no longer in the
+          /*
+       * Transaction is no longer active (and no longer in the
              * activeTx map).
              */
 
@@ -1259,8 +1259,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
       } else {
 
-        /*
-         * There are no commit points and there are no active
+      /*
+       * There are no commit points and there are no active
          * transactions.
          */
 
@@ -1357,7 +1357,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * The basic implementation advances the release time periodically as commits occur even when
    * there are no transactions in use.
    *
@@ -1379,7 +1379,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * If there are NO active transactions and the current releaseTime is LT (commitTime-1) then
    * compute and set the new releaseTime.
    *
@@ -1437,7 +1437,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Return the minimum #of milliseconds of history that must be preserved.
    *
    * @todo This centralizes the value for the minimum amount of history that will be preserved
@@ -1453,7 +1453,7 @@ public abstract class AbstractTransactionService extends AbstractService
     return minReleaseAge;
   }
 
-  /**
+  /*
    * A transient index whose keys are the <strong>absolute value</strong> of the start times of all
    * active transactions. The values are the commit times on which the corresponding transaction is
    * reading.
@@ -1467,7 +1467,7 @@ public abstract class AbstractTransactionService extends AbstractService
    */
   private final TxId2CommitTimeIndex startTimeIndex = TxId2CommitTimeIndex.createTransient();
 
-  /**
+  /*
    * Assign a transaction identifier for a new transaction.
    *
    * @param timestamp The timestamp.
@@ -1566,7 +1566,7 @@ public abstract class AbstractTransactionService extends AbstractService
     return getStartTime(timestamp);
   }
 
-  /**
+  /*
    * Assign a distinct timestamp to a historical read that will read from the commit point
    * identified by the specified timestamp.
    *
@@ -1636,7 +1636,7 @@ public abstract class AbstractTransactionService extends AbstractService
     return new TxState(txId, readsOnCommitTime);
   }
 
-  /**
+  /*
    * Find the commit time from which the tx will read (largest commitTime LTE timestamp).
    *
    * @param timestamp The timestamp.
@@ -1644,7 +1644,7 @@ public abstract class AbstractTransactionService extends AbstractService
    */
   protected abstract long findCommitTime(long timestamp);
 
-  /**
+  /*
    * Return the commit time for the successor of that commit point have the specified timestamp (a
    * commit time strictly GT the given value).
    *
@@ -1653,7 +1653,7 @@ public abstract class AbstractTransactionService extends AbstractService
    */
   protected abstract long findNextCommitTime(long commitTime);
 
-  /**
+  /*
    * Find a valid, unused timestamp.
    *
    * <p>Note: Any timestamp in the half-open range [commitTime:nextCommitTime) MAY be assigned as
@@ -1679,8 +1679,8 @@ public abstract class AbstractTransactionService extends AbstractService
 
         if (activeTx.containsKey(t) || activeTx.containsKey(-t)) {
 
-          /*
-           * Note: We do not accept an active read-only startTime.
+        /*
+       * Note: We do not accept an active read-only startTime.
            *
            * Note: We do not accept a start time that corresponds to
            * the absolute value of an active read-write transaction
@@ -1731,7 +1731,7 @@ public abstract class AbstractTransactionService extends AbstractService
   @Override
   public abstract long getLastCommitTime();
 
-  /**
+  /*
    * Implementation must abort the tx on the journal (standalone) or on each data service
    * (federation) on which it has written.
    *
@@ -1756,7 +1756,7 @@ public abstract class AbstractTransactionService extends AbstractService
    */
   protected abstract void abortImpl(final TxState state) throws Exception;
 
-  /**
+  /*
    * Implementation must either single-phase commit (standalone journal or a transaction that only
    * writes on a single data service) or 2-/3-phase commit (distributed transaction running on a
    * federation).
@@ -1857,8 +1857,8 @@ public abstract class AbstractTransactionService extends AbstractService
             deactivateTx(state);
           }
         } finally {
-          /*
-           * Note: This avoids a lock ordering problem by releasing
+        /*
+       * Note: This avoids a lock ordering problem by releasing
            * the inner lock (state.lock) before acquiring the order
            * lock.
            */
@@ -1867,8 +1867,8 @@ public abstract class AbstractTransactionService extends AbstractService
             lock.lock();
             try {
               updateReleaseTime(Math.abs(state.tx), state /*deactivatedTx*/);
-              /*
-               * Note: signalAll() is required. See code that
+            /*
+       * Note: signalAll() is required. See code that
                * searches the half-open range for a
                * read-historical timestamp. It waits on this
                * signal, but there can be more than one request
@@ -1953,8 +1953,8 @@ public abstract class AbstractTransactionService extends AbstractService
             deactivateTx(state);
           }
         } finally {
-          /*
-           * Note: This avoids a lock ordering problem by releasing
+        /*
+       * Note: This avoids a lock ordering problem by releasing
            * the inner lock (state.lock) before acquiring the order
            * lock.
            */
@@ -1963,8 +1963,8 @@ public abstract class AbstractTransactionService extends AbstractService
             lock.lock();
             try {
               updateReleaseTime(Math.abs(state.tx), state /*deactivatedTx*/);
-              /*
-               * Note: signalAll() is required. See code that
+            /*
+       * Note: signalAll() is required. See code that
                * searches the half-open range for a
                * read-historical timestamp. It waits on this
                * signal, but there can be more than one request
@@ -1985,7 +1985,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Transaction state as maintained by the {@link ITransactionService}.
    *
    * <p>Note: The commitTime and revisionTime are requested by the local transaction manager for
@@ -1997,7 +1997,7 @@ public abstract class AbstractTransactionService extends AbstractService
     /** The transaction identifier. */
     public final long tx;
 
-    /**
+    /*
      * The commit time associated with the commit point against which this transaction will read.
      * This will be <code>0</code> IFF there are no commit points yet. Otherwise it is a real commit
      * time associated with some existing commit point.
@@ -2007,7 +2007,7 @@ public abstract class AbstractTransactionService extends AbstractService
     /** <code>true</code> iff the transaction is read-only. */
     private final boolean readOnly;
 
-    /**
+    /*
      * The run state of the transaction
      *
      * <p>Note: This field is guarded by the {@link #lock}. It is [volatile] to make the state
@@ -2016,7 +2016,7 @@ public abstract class AbstractTransactionService extends AbstractService
      */
     private volatile RunState runState = RunState.Active;
 
-    /**
+    /*
      * Change the {@link RunState}.
      *
      * @param newval The new {@link RunState}.
@@ -2050,7 +2050,7 @@ public abstract class AbstractTransactionService extends AbstractService
       return readsOnCommitTime;
     }
 
-    /**
+    /*
      * The commit time assigned to a distributed read-write transaction during the commit protocol
      * and otherwise ZERO (0L).
      *
@@ -2058,7 +2058,7 @@ public abstract class AbstractTransactionService extends AbstractService
      */
     private long commitTime = 0L;
 
-    /**
+    /*
      * The commit time assigned to a distributed read-write transaction during the commit protocol.
      *
      * @return The assigned commit time.
@@ -2079,7 +2079,7 @@ public abstract class AbstractTransactionService extends AbstractService
       return commitTime;
     }
 
-    /**
+    /*
      * Sets the assigned commit time.
      *
      * @param commitTime The assigned commit time.
@@ -2104,7 +2104,7 @@ public abstract class AbstractTransactionService extends AbstractService
       this.commitTime = commitTime;
     }
 
-    /**
+    /*
      * The set of {@link DataService}s on which a read-write transaction has been started and <code>
      * null</code> if this is not a read-write transaction.
      *
@@ -2112,7 +2112,7 @@ public abstract class AbstractTransactionService extends AbstractService
      */
     private final Set<UUID /* dataService */> dataServices;
 
-    /**
+    /*
      * The set of named resources that the transaction has declared across all {@link IDataService}s
      * on which it has written and <code>null</code> if this is not a read-write transaction.
      *
@@ -2130,7 +2130,7 @@ public abstract class AbstractTransactionService extends AbstractService
       return resources.toArray(new String[] {});
     }
 
-    /**
+    /*
      * Return <code>true</code> iff the dataService identified by the {@link UUID} is one on which
      * this transaction has been started.
      *
@@ -2149,7 +2149,7 @@ public abstract class AbstractTransactionService extends AbstractService
       return dataServices.contains(dataServiceUUID);
     }
 
-    /**
+    /*
      * The set of {@link DataService}s on which the transaction has written.
      *
      * @throws IllegalStateException if not a read-write transaction.
@@ -2163,7 +2163,7 @@ public abstract class AbstractTransactionService extends AbstractService
       return dataServices.toArray(new UUID[] {});
     }
 
-    /**
+    /*
      * A per-transaction lock used to serialize operations on a given transaction. You need to hold
      * this lock for most of the operations on this class, including any access to the {@link
      * RunState}.
@@ -2174,7 +2174,7 @@ public abstract class AbstractTransactionService extends AbstractService
      */
     protected final ReentrantLock lock = new ReentrantLock();
 
-    /**
+    /*
      * @param tx The assigned transaction identifier.
      * @param readCommitTime The commit time associated with the commit point against which this
      *     transaction will read (may be ZERO if there are no commit points, must not be negative).
@@ -2210,7 +2210,7 @@ public abstract class AbstractTransactionService extends AbstractService
 
     private final int hashCode;
 
-    /**
+    /*
      * True iff they are the same object or have the same start timestamp.
      *
      * @param o Another transaction object.
@@ -2227,7 +2227,7 @@ public abstract class AbstractTransactionService extends AbstractService
       return tx == t.getStartTimestamp();
     }
 
-    /**
+    /*
      * Declares resources on a data service instance on which the transaction will write.
      *
      * @param dataService The data service identifier.
@@ -2257,8 +2257,8 @@ public abstract class AbstractTransactionService extends AbstractService
         log.info("dataService=" + dataService + ", resource=" + Arrays.toString(resource));
     }
 
-    //        /**
-    //         * Return <code>true</code> if the transaction is read-only or if a
+    //        /*
+//         * Return <code>true</code> if the transaction is read-only or if a
     //         * read-write transaction has not been started on any
     //         * {@link IDataService}s.
     //         * <p>
@@ -2277,7 +2277,7 @@ public abstract class AbstractTransactionService extends AbstractService
     //
     //        }
 
-    /**
+    /*
      * Return the #of {@link IDataService}s on which a read-write transaction has executed an
      * operation.
      *
@@ -2294,7 +2294,7 @@ public abstract class AbstractTransactionService extends AbstractService
       return dataServices.size();
     }
 
-    /**
+    /*
      * Return <code>true</code> iff a read-write transaction has started on more than one {@link
      * IDataService}.
      */
@@ -2384,7 +2384,7 @@ public abstract class AbstractTransactionService extends AbstractService
     }
   }
 
-  /**
+  /*
    * Verifies that {@link #nextTimestamp()} will not report a time before {@link
    * #getLastCommitTime()} and then changes the {@link TxServiceRunState} to {@link
    * TxServiceRunState#Running}.

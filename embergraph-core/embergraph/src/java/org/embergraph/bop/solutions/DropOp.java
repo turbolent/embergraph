@@ -34,8 +34,8 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * Operator drops the identified variables from the solutions
+/*
+* Operator drops the identified variables from the solutions
  *
  * @see ProjectionOp
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -48,7 +48,7 @@ public class DropOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * An {@link IVariable}[] identifying the variables to be DROPPED in the {@link IBindingSet}s
      * written out by the operator (required, must be a non-empty array).
      */
@@ -60,7 +60,7 @@ public class DropOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */

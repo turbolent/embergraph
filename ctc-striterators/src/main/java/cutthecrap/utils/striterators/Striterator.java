@@ -23,8 +23,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Striterator - transformation and mapping patterns over java {@link Iterator} s.
+/*
+* Striterator - transformation and mapping patterns over java {@link Iterator} s.
  *
  * <p>Allows wrapping of an iterator so that extensions may add type specific next<Type> methods.
  *
@@ -61,7 +61,7 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
     this(new EnumIterator(src));
   }
 
-  /**
+  /*
    * @param src
    * @param filters
    */
@@ -119,8 +119,8 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
   public IStriterator addFilter(final IFilter filter) {
     if (filters == null) {
       synchronized (this) {
-        /*
-         * Note: double-checked locking pattern and volatile field are
+      /*
+       * Note: double-checked locking pattern and volatile field are
          * used to ensure visibility in combination with lazy create of
          * the backing list.
          */
@@ -169,7 +169,7 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
     addFilter(
         new Filter() {
           public boolean isValid(Object obj) {
-            return obj == null ? false : obj.getClass() == obj;
+            return obj != null && obj.getClass() == obj;
           }
         });
 
@@ -194,7 +194,7 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
     return addFilter(new Appender(iter));
   }
 
-  /**
+  /*
    * map the clients method against the Iteration, the Method MUST take a single Object valued
    * parameter *
    */
@@ -213,7 +213,7 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
     return sb.toString();
   }
 
-  /**
+  /*
    * If this Striterator has not been overriden then return the source iterator, or even better, try
    * and recurse to the nested tailOp if available.
    *
@@ -236,7 +236,7 @@ public class Striterator implements IStriterator, ITailOp, ICloseableIterator {
     }
   }
 
-  /**
+  /*
    * The base close implementation ends the iteration with no other side-effects.
    *
    * <p>Users should override this method for any required side-effects but must also invoke this

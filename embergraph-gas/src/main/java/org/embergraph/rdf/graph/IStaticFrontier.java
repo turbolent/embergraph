@@ -18,14 +18,14 @@ package org.embergraph.rdf.graph;
 import java.util.Iterator;
 import org.openrdf.model.Value;
 
-/**
- * Interface abstracts the fixed frontier as known on entry into a new round.
+/*
+* Interface abstracts the fixed frontier as known on entry into a new round.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IStaticFrontier extends Iterable<Value> {
 
-  /**
+  /*
    * The number of vertices in the frontier.
    *
    * <p>TODO Long? Or just do not allow in scale-out?
@@ -35,7 +35,7 @@ public interface IStaticFrontier extends Iterable<Value> {
   /** Return <code>true</code> if the frontier is known to be empty. */
   boolean isEmpty();
 
-  /**
+  /*
    * Return <code>true</code> iff the frontier is known to be compact (no duplicate vertices).
    *
    * <p>Note: If the frontier is not compact, then the {@link IGASEngine} may optionally elect to
@@ -48,7 +48,7 @@ public interface IStaticFrontier extends Iterable<Value> {
    */
   boolean isCompact();
 
-  /**
+  /*
    * Reset the frontier from the supplied vertices.
    *
    * @param minCapacity The minimum capacity of the new frontier. (A minimum capacity is specified

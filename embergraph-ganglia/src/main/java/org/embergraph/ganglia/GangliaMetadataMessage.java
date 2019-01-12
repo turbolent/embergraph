@@ -18,8 +18,8 @@ package org.embergraph.ganglia;
 import java.util.Arrays;
 import java.util.Map;
 
-/**
- * A ganglia metric metadata (aka declaration) record.
+/*
+* A ganglia metric metadata (aka declaration) record.
  *
  * <p>This record must be sent if a service is reporting a metric for the first time. In addition,
  * ganglia resends the metadata records periodically by tracking their age (but <code>
@@ -252,7 +252,7 @@ public class GangliaMetadataMessage extends AbstractGangliaMessage
     return getMetricName().hashCode();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default implementation is an identity transform. In order for this method to be applied
@@ -271,7 +271,7 @@ public class GangliaMetadataMessage extends AbstractGangliaMessage
     return value;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default implementation returns <code>true</code> iff the two values are not equals().

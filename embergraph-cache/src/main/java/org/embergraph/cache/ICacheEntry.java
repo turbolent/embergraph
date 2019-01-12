@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.cache;
 
-/**
- * Interface for hard reference cache entries exposes a <i>dirty</i> flag in addition to the object
+/*
+* Interface for hard reference cache entries exposes a <i>dirty</i> flag in addition to the object
  * identifier and object reference.
  *
  * @author thompsonbry
@@ -38,12 +38,12 @@ package org.embergraph.cache;
 public interface ICacheEntry<K, T> extends IWeakRefCacheEntry<K, T> {
 
   /** Return true iff the object associated with this entry is dirty. */
-  public boolean isDirty();
+  boolean isDirty();
 
-  /**
+  /*
    * Set the dirty flag.
    *
    * @param dirty true iff the object associated with this entry is dirty.
    */
-  public void setDirty(boolean dirty);
+  void setDirty(boolean dirty);
 }

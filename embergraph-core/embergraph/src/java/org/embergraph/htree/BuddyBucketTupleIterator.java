@@ -9,8 +9,8 @@ import org.embergraph.btree.LeafTupleIterator;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Iterator visits all tuples in a buddy bucket having the desired key.
+/*
+* Iterator visits all tuples in a buddy bucket having the desired key.
  *
  * <p>Note: This implementation is NOT thread-safe.
  */
@@ -24,7 +24,7 @@ class BuddyBucketTupleIterator<E> implements ITupleIterator<E> {
   //		private final int buddyOffset;
   /** The index of the last slot in the buddy bucket. */
   private final int lastSlot;
-  /**
+  /*
    * The index of the next slot to be visited. This is set by the constructor to the first slot and
    * the tuple at that slot is pre-fetched.
    */
@@ -65,7 +65,7 @@ class BuddyBucketTupleIterator<E> implements ITupleIterator<E> {
     tuple = new Tuple<E>(bucket.htree, IRangeQuery.DEFAULT);
   }
 
-  /**
+  /*
    * Examines the entry at {@link #index}. If it passes the criteria for an entry to visit then
    * return true. Otherwise increment the {@link #index} until either all entries in this leaf have
    * been exhausted -or- the an entry is identified that passes the various criteria.
@@ -123,7 +123,7 @@ class BuddyBucketTupleIterator<E> implements ITupleIterator<E> {
     return tuple;
   }
 
-  /**
+  /*
    * Operation is not supported.
    *
    * <p>TODO ITupleCursor and delete-behind are two ways to achieve this. See {@link

@@ -37,8 +37,8 @@ import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Flatten nested (non-optional,non-minus) JoinGroupNodes whenever possible.
+/*
+* Flatten nested (non-optional,non-minus) JoinGroupNodes whenever possible.
  *
  * <p>JoinGroupNode { JoinGroupNode [context=VarNode(sid)] { StatementPatternNode(VarNode(a),
  * VarNode(b), VarNode(c), VarNode(sid)) [scope=NAMED_CONTEXTS] } StatementPatternNode(VarNode(sid),

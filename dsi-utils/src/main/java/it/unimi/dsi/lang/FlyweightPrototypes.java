@@ -23,15 +23,15 @@ import java.lang.reflect.Array;
  *
  */
 
-/**
- * A class providing static methods and objects that do useful things with {@linkplain
+/*
+* A class providing static methods and objects that do useful things with {@linkplain
  * it.unimi.dsi.lang.FlyweightPrototype flyweight protoypes}.
  */
 public class FlyweightPrototypes {
 
   protected FlyweightPrototypes() {}
 
-  /**
+  /*
    * Creates a flyweight copy of an array of {@linkplain it.unimi.dsi.lang.FlyweightPrototype
    * flyweight prototypes}.
    *
@@ -49,7 +49,7 @@ public class FlyweightPrototypes {
     return result;
   }
 
-  /**
+  /*
    * Creates a flyweight copy of the given object, or returns <code>null</code> if the given object
    * is <code>null</code>.
    *

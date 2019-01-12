@@ -6,8 +6,8 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.fed.FederatedRunningQuery;
 import org.embergraph.service.ResourceService;
 
-/**
- * A message describing a chunk of intermediate results which are available for processing. There
+/*
+* A message describing a chunk of intermediate results which are available for processing. There
  * are several implementations of this interface supporting same-JVM messages, thick RMI messages,
  * and RMI messages where the payload is materialized using NIO transfers from the {@link
  * ResourceService}.
@@ -19,7 +19,7 @@ import org.embergraph.service.ResourceService;
  */
 public interface IChunkMessage<E> extends IOpMessage {
 
-  /**
+  /*
    * The proxy for the query controller.
    *
    * @deprecated This forces us to serialize and send the proxy for the query controller on a
@@ -39,14 +39,14 @@ public interface IChunkMessage<E> extends IOpMessage {
    */
   IQueryClient getQueryController();
 
-  /**
+  /*
    * The UUID of the query controller (the {@link IQueryClient} to which the query was submitted).
    *
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/475
    */
   UUID getQueryControllerId();
 
-  /**
+  /*
    * Return true iff the {@link IChunkMessage} is for the last evaluation pass of an operator. The
    * last evaluation pass for an operator must be requested using an annotation. When it is
    * requested, the operator will be invoked one more time for each node or shard on which it was
@@ -60,14 +60,14 @@ public interface IChunkMessage<E> extends IOpMessage {
   /** Return <code>true</code> if the chunk is materialized on the receiver. */
   boolean isMaterialized();
 
-  /**
+  /*
    * Materialize the chunk on the receiver.
    *
    * @param runningQuery The running query.
    */
   void materialize(FederatedRunningQuery runningQuery);
 
-  /**
+  /*
    * Release all resources associated with this chunk. If the source has been opened, then ensure
    * that it is closed. If the data has been materialized, then discard the materialized data.
    */

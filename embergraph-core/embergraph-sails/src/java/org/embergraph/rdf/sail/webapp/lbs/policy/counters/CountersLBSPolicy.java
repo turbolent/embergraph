@@ -52,8 +52,8 @@ import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
 import org.embergraph.rdf.sail.webapp.lbs.ServiceScore;
 
-/**
- * Stochastically proxy the request to the services based on their load.
+/*
+* Stochastically proxy the request to the services based on their load.
  *
  * <p>Note: This {@link IHALoadBalancerPolicy} has a dependency on the {@link PlatformStatsPlugIn}.
  * The plugin must be setup to publish out performance counters using the {@link CounterServlet}.
@@ -72,14 +72,14 @@ public class CountersLBSPolicy extends AbstractHostLBSPolicy {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Servlet <code>init-param</code> values understood by the {@link CountersLBSPolicy}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface InitParams extends AbstractHostLBSPolicy.InitParams {}
 
-  /**
+  /*
    * The most recent host metrics for each host running a service of interest.
    *
    * <p>TODO Does not track per-service metrics unless we change to the service {@link UUID} as the
@@ -112,7 +112,7 @@ public class CountersLBSPolicy extends AbstractHostLBSPolicy {
     super.destroy();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation issues HTTP requests to obtain the up to date performance counters for
@@ -205,7 +205,7 @@ public class CountersLBSPolicy extends AbstractHostLBSPolicy {
     return cm;
   }
 
-  /**
+  /*
    * Do an HTTP GET to the remote service and return the platform performance metrics for that
    * service.
    *
@@ -260,8 +260,8 @@ public class CountersLBSPolicy extends AbstractHostLBSPolicy {
 
       try {
 
-        /*
-         * Note: This will throw a runtime exception if the source
+      /*
+       * Note: This will throw a runtime exception if the source
          * contains more than 60 minutes worth of history data.
          */
         counterSet.readXML(is, DefaultInstrumentFactory.NO_OVERWRITE_60M, null /* filter */);
@@ -289,7 +289,7 @@ public class CountersLBSPolicy extends AbstractHostLBSPolicy {
     }
   }
 
-  /**
+  /*
    * Connect to an HTTP end point.
    *
    * @param opts The connection options.

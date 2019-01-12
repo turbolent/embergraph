@@ -57,8 +57,8 @@ import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 
-/**
- * Abstract base class for DISTINCT SOLUTIONS test suites.
+/*
+* Abstract base class for DISTINCT SOLUTIONS test suites.
  *
  * <p>TODO Write a unit test in which some variables are unbound.
  *
@@ -174,7 +174,7 @@ public abstract class AbstractDistinctSolutionsTestCase extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * Return a (Mock) IV for a Value.
      *
      * @param v The value.
@@ -196,7 +196,7 @@ public abstract class AbstractDistinctSolutionsTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Factory for a DISTINCT SOLUTIONS operator.
    *
    * @param args
@@ -205,7 +205,7 @@ public abstract class AbstractDistinctSolutionsTestCase extends TestCase2 {
    */
   protected abstract PipelineOp newDistinctBindingSetsOp(final BOp[] args, final NV... anns);
 
-  /**
+  /*
    * Unit test for distinct.
    *
    * @throws ExecutionException

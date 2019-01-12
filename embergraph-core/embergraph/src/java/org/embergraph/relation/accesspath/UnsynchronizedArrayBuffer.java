@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-/**
- * An unsynchronized buffer backed by a fixed capacity array that migrates references onto the
+/*
+* An unsynchronized buffer backed by a fixed capacity array that migrates references onto the
  * caller's buffer (which is normally thread-safe) using {@link IBuffer#add(int)}.
  *
  * <p><strong>This implementation is NOT thread-safe.</strong>
@@ -37,7 +37,7 @@ public class UnsynchronizedArrayBuffer<E> extends AbstractUnsynchronizedArrayBuf
   /** The buffer onto which chunks are evicted by {@link #overflow()}. */
   private final IBuffer<E[]> target;
 
-  /**
+  /*
    * @param target The target buffer onto which the elements will be flushed.
    * @param cls The component type of the backing array.
    * @param capacity The capacity of the backing buffer.
@@ -48,7 +48,7 @@ public class UnsynchronizedArrayBuffer<E> extends AbstractUnsynchronizedArrayBuf
     this(target, capacity, cls, null /* filter */);
   }
 
-  /**
+  /*
    * @param target The target buffer onto which chunks of elements will be flushed.
    * @param cls The component type of the backing array.
    * @param capacity The capacity of the backing buffer.

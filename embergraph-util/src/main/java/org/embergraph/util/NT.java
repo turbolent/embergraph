@@ -2,8 +2,8 @@ package org.embergraph.util;
 
 import java.io.Serializable;
 
-/**
- * The name of an {@link org.embergraph.btree.IIndex} or an {@link
+/*
+* The name of an {@link org.embergraph.btree.IIndex} or an {@link
  * org.embergraph.relation.IRelation} and a timestamp. This is used as a key for a {@link
  * org.embergraph.cache.WeakValueCache} to provide a canonicalizing mapping for index views or
  * relation views.
@@ -32,7 +32,7 @@ public class NT implements Serializable {
     return timestamp;
   }
 
-  /**
+  /*
    * @param name The name of an {@link org.embergraph.btree.IIndex} or an {@link
    *     org.embergraph.relation.IRelation}.
    * @param timestamp The timestamp associated with the view.
@@ -77,9 +77,7 @@ public class NT implements Serializable {
 
     if (this.timestamp != o.timestamp) return false;
 
-    if (!this.name.equals(o.name)) return false;
-
-    return true;
+    return this.name.equals(o.name);
   }
 
   @Override

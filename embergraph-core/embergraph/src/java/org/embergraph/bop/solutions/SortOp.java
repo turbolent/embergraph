@@ -27,8 +27,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.PipelineOp;
 
-/**
- * Base class for operators which sort binding sets.
+/*
+* Base class for operators which sort binding sets.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -40,14 +40,14 @@ public abstract class SortOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * An {@link ISortOrder}[] specifying an ordered list of {@link IValueExpression}s on which the
      * sort will be imposed and the order (ascending or descending) for each {@link
      * IValueExpression}.
      */
     String SORT_ORDER = SortOp.class.getName() + ".sortOrder";
 
-    /**
+    /*
      * The {@link Comparator} used to compare individual as-bound / computed values within binding
      * sets. This will be wrapped up with a comparator which knows how to compare the different
      * values within the binding sets based on the declared {@link #SORT_ORDER}.
@@ -60,7 +60,7 @@ public abstract class SortOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */

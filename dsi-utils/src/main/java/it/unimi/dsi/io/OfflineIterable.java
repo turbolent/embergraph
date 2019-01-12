@@ -34,8 +34,8 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 
-/**
- * An iterable that offers elements that were previously stored offline using specialized
+/*
+* An iterable that offers elements that were previously stored offline using specialized
  * serialization methods. At construction, you provide a {@linkplain
  * #OfflineIterable(it.unimi.dsi.io.OfflineIterable.Serializer, Object) serializer} that establishes
  * how elements are written offline; after that, you can {@linkplain #add(Object) add elements} one
@@ -133,23 +133,23 @@ public class OfflineIterable<T, U extends T> implements Iterable<U>, SafelyClose
 
   /** Determines a strategy to serialize and deserialize elements. */
   public interface Serializer<A, B extends A> {
-    /**
+    /*
      * Writes out an element.
      *
      * @param x the element to be written.
      * @param dos the stream where the element should be written.
      * @throws IOException if an exception occurs while writing.
      */
-    public void write(A x, DataOutputStream dos) throws IOException;
+    void write(A x, DataOutputStream dos) throws IOException;
 
-    /**
+    /*
      * Reads an element.
      *
      * @param dis the stream whence the element should be read.
      * @param x the object where the element will be read.
      * @throws IOException if an exception occurs while reading.
      */
-    public void read(DataInputStream dis, B x) throws IOException;
+    void read(DataInputStream dis, B x) throws IOException;
   }
 
   /** The serializer used to store and read the elements of this iterable. */
@@ -165,7 +165,7 @@ public class OfflineIterable<T, U extends T> implements Iterable<U>, SafelyClose
   /** Whether this iterable has been closed. */
   private boolean closed = false;
 
-  /**
+  /*
    * Creates an offline iterable with given serializer.
    *
    * @param serializer the serializer to be used.
@@ -181,7 +181,7 @@ public class OfflineIterable<T, U extends T> implements Iterable<U>, SafelyClose
     dos = new DataOutputStream(new FastBufferedOutputStream(new FileOutputStream(file)));
   }
 
-  /**
+  /*
    * Adds a new element at the end of this iterable.
    *
    * @param x the element to be added.
@@ -192,7 +192,7 @@ public class OfflineIterable<T, U extends T> implements Iterable<U>, SafelyClose
     size++;
   }
 
-  /**
+  /*
    * Adds all the elements of the given iterable at the end of this iterable.
    *
    * @param it the iterable producing the elements to be added.
@@ -237,7 +237,7 @@ public class OfflineIterable<T, U extends T> implements Iterable<U>, SafelyClose
     }
   }
 
-  /**
+  /*
    * Returns the number of elements added so far, unless it is too big to fit in an integer (in
    * which case this method will throw an exception).
    *
@@ -251,7 +251,7 @@ public class OfflineIterable<T, U extends T> implements Iterable<U>, SafelyClose
     return (int) length;
   }
 
-  /**
+  /*
    * Returns the number of elements added so far.
    *
    * @return the number of elements added so far.

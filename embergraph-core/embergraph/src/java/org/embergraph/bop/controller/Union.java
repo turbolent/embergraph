@@ -26,8 +26,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.NV;
 
-/**
- * UNION()[maxParallel(default all); subqueries=ops]
+/*
+* UNION()[maxParallel(default all); subqueries=ops]
  *
  * <pre>
  * UNION([],{subqueries=[a,b,c]})
@@ -44,7 +44,7 @@ public class Union extends AbstractSubqueryOp {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -53,7 +53,7 @@ public class Union extends AbstractSubqueryOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args

@@ -28,8 +28,8 @@ import junit.framework.Test;
 import org.embergraph.journal.Options;
 import org.embergraph.rdf.axioms.NoAxioms;
 
-/**
- * Proxy test suite for {@link LocalTripleStore} in quad-store mode.
+/*
+* Proxy test suite for {@link LocalTripleStore} in quad-store mode.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -101,7 +101,7 @@ public class TestLocalQuadStore extends AbstractTestCase {
     return LocalTripleStore.getInstance(properties);
   }
 
-  /**
+  /*
    * Re-open the same backing store.
    *
    * @param store the existing store.

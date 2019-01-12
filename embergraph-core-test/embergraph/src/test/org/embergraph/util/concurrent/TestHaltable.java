@@ -28,8 +28,8 @@ import java.util.concurrent.TimeoutException;
 import junit.framework.TestCase2;
 import org.embergraph.util.InnerCause;
 
-/**
- * Test suite for {@link Haltable}.
+/*
+* Test suite for {@link Haltable}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class TestHaltable extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Unit test where the {@link Haltable} is cancelled.
    *
    * @throws ExecutionException
@@ -73,7 +73,7 @@ public class TestHaltable extends TestCase2 {
     assertTrue(InnerCause.isInnerCause(f.getAsThrownCause(), InterruptedException.class));
   }
 
-  /**
+  /*
    * Unit test where the {@link Haltable} returns the result of its computation.
    *
    * @throws ExecutionException

@@ -49,8 +49,8 @@ import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 import org.embergraph.service.Split;
 import org.embergraph.util.BytesUtil;
 
-/**
- * This unisolated operation inserts terms into the <em>term:id</em> index, assigning identifiers to
+/*
+* This unisolated operation inserts terms into the <em>term:id</em> index, assigning identifiers to
  * terms as a side-effect. The use of this operation MUST be followed by the the use of {@link
  * Id2TermWriteProc} to ensure that the reverse mapping from id to term is defined before any
  * statements are inserted using the assigned term identifiers. The client MUST NOT make assertions
@@ -121,7 +121,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
   //        }
   //    }
 
-  /**
+  /*
    * Flag enables optional ground truth verification. It is only enabled at the DEBUG level IFF this
    * flag is ALSO set.
    *
@@ -153,7 +153,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
   /** */
   private static final long serialVersionUID = -4736465754523655679L;
 
-  /**
+  /*
    * Serialized as extended metadata. When <code>true</code> unknown terms are NOT added to the
    * database.
    */
@@ -165,7 +165,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     return readOnly;
   }
 
-  /**
+  /*
    * Serialized as extended metadata. When <code>true</code> blank nodes are stored in the lexicon's
    * forward index.
    */
@@ -243,7 +243,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     }
   }
 
-  /**
+  /*
    * For each term whose serialized key is mapped to the current index partition, lookup the term in
    * the <em>terms</em> index. If it is there then note its assigned termId. Otherwise, use the
    * partition local counter to assign the term identifier, note the term identifier so that it can
@@ -300,8 +300,8 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       if (!storeBlankNodes && code == ITermIndexCodes.TERM_CODE_BND) {
 
-        /*
-         * Do not enter blank nodes into the forward index.
+      /*
+       * Do not enter blank nodes into the forward index.
          *
          * For this case, we just assign a term identifier and leave it
          * at that. If two different documents by some chance happen to
@@ -320,8 +320,8 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
         } else {
 
-          /*
-           * Assign a term identifier.
+        /*
+       * Assign a term identifier.
            *
            * Note: The TermIdEncoder is ONLY used in scale-out.
            */
@@ -335,8 +335,8 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       } else {
 
-        /*
-         * Lookup in the forward index (URIs, Literals, and SIDs)
+      /*
+       * Lookup in the forward index (URIs, Literals, and SIDs)
          *
          * Note: Also handles BNodes iff storeBlankNodes is true
          *
@@ -356,8 +356,8 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
           } else {
 
-            /*
-             * Assign a term identifier.
+          /*
+       * Assign a term identifier.
              *
              * Note: The TermIdEncoder is ONLY used in scale-out.
              */
@@ -511,7 +511,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     scaleOutTermIdBitsToReverse = (int) in.readByte();
   }
 
-  /**
+  /*
    * Writes metadata (not the keys or values, but just other metadata used by the procedure).
    *
    * <p>The default implementation writes <code>toIndex - fromIndex</code>, which is the #of keys.
@@ -550,7 +550,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     }
   }
 
-  /**
+  /*
    * Object encapsulates the discovered / assigned term identifiers and provides efficient
    * serialization for communication of those data to the client.
    *
@@ -614,7 +614,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     }
   }
 
-  /**
+  /*
    * {@link Split}-wise aggregation followed by combining the results across those splits in order
    * to return an aggregated result whose iv[] is 1:1 with the original keys[][].
    */
@@ -624,7 +624,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     return new TermResultAggregator(getKeys().size());
   }
 
-  /**
+  /*
    * Aggregator collects the individual results in an internal ordered map and assembles the final
    * result when it is requested from the individual results. With this approach there is no
    * overhead or contention when the results are being produced in parallel and they can be combined
@@ -634,7 +634,7 @@ public class Term2IdWriteProc extends AbstractKeyArrayIndexProcedure<Result>
    */
   private class TermResultAggregator extends AbstractLocalSplitResultAggregator<Result> {
 
-    /**
+    /*
      * @param size The #of elements in the request (which is the same as the cardinality of the
      *     aggregated result).
      */

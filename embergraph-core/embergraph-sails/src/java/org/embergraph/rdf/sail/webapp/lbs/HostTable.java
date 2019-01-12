@@ -19,21 +19,21 @@ package org.embergraph.rdf.sail.webapp.lbs;
 
 import java.util.Arrays;
 
-/**
- * Class bundles together the set of {@link HostScore}s for services that are joined with the met
+/*
+* Class bundles together the set of {@link HostScore}s for services that are joined with the met
  * quorum and the {@link HostScore} for this service (iff it is joined with the met quorum).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class HostTable {
 
-  /**
+  /*
    * The most recent score for this host -or- <code>null</code> iff there is not score for this
    * host.
    */
   public final HostScore thisHost;
 
-  /**
+  /*
    * The table of pre-scored hosts -or- <code>null</code> iff there are no host scores. Only hosts
    * that have services that are joined with the met quorum will appear in this table.
    */

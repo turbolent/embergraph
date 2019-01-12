@@ -34,8 +34,8 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 
-/**
- * Unit test of the {@link StoreManager} when adding and deleting journals and index segments.
+/*
+* Unit test of the {@link StoreManager} when adding and deleting journals and index segments.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -50,7 +50,7 @@ public class TestAddDeleteResource extends AbstractResourceManagerTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Test verifies add and delete of a journal.
    *
    * @throws IOException
@@ -96,7 +96,7 @@ public class TestAddDeleteResource extends AbstractResourceManagerTestCase {
     }
   }
 
-  /**
+  /*
    * Test verifies add and delete of an index segment.
    *
    * @throws Exception

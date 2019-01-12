@@ -16,8 +16,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/**
- * Note: Portions of this file are copyright by Aduna.
+/*
+* Note: Portions of this file are copyright by Aduna.
  *
  * <p>Copyright Aduna (http://www.aduna-software.com/) (c) 1997-2007.
  *
@@ -39,8 +39,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.model.Literal;
 
-/**
- * A math expression involving a left and right IValueExpression operand. The operation to be
+/*
+* A math expression involving a left and right IValueExpression operand. The operation to be
  * applied to the operands is specified by the {@link Annotations#OP} annotation.
  */
 public final class MathBOp extends IVValueExpression implements INeedsMaterialization {
@@ -52,7 +52,7 @@ public final class MathBOp extends IVValueExpression implements INeedsMaterializ
 
   public interface Annotations extends IVValueExpression.Annotations {
 
-    /**
+    /*
      * The operation to be applied to the left and right operands (required). The value of this
      * annotation is a {@link MathOp}, such as {@link MathOp#PLUS}.
      *
@@ -87,7 +87,7 @@ public final class MathBOp extends IVValueExpression implements INeedsMaterializ
     }
   }
 
-  /**
+  /*
    * @param left The left operand.
    * @param right The right operand.
    * @param op The annotation specifying the operation to be performed on those operands.
@@ -101,7 +101,7 @@ public final class MathBOp extends IVValueExpression implements INeedsMaterializ
     this(new BOp[] {left, right}, anns(globals, new NV(Annotations.OP, op)));
   }
 
-  /**
+  /*
    * Required shallow copy constructor.
    *
    * @param args The operands.
@@ -121,7 +121,7 @@ public final class MathBOp extends IVValueExpression implements INeedsMaterializ
     }
   }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * @param op
@@ -233,7 +233,7 @@ public final class MathBOp extends IVValueExpression implements INeedsMaterializ
     return h;
   }
 
-  /**
+  /*
    * The MathBOp can work on inline numerics. It is only when the operands evaluate to non-inline
    * numerics that this bop needs materialization.
    */

@@ -33,8 +33,8 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Vocabulary declarations covering the PubChem data from {@link
+/*
+* Vocabulary declarations covering the PubChem data from {@link
  * https://pubchem.ncbi.nlm.nih.gov/rdf/}.
  *
  * @author <a href="ms@metaphacts.com">Michael Schmidt</a>

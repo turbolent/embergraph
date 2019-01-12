@@ -22,8 +22,8 @@ package org.embergraph.btree;
 
 import java.util.NoSuchElementException;
 
-/**
- * Visits the values of a {@link Leaf} in the external key ordering. There is exactly one value per
+/*
+* Visits the values of a {@link Leaf} in the external key ordering. There is exactly one value per
  * key for a leaf node.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -63,7 +63,7 @@ public class LeafTupleIterator<E> implements ITupleIterator<E> {
     this(leaf, tuple, null, null);
   }
 
-  /**
+  /*
    * @param leaf The leaf whose entries will be traversed (required).
    * @param tuple Used to hold the output values (required).
    * @param fromKey The first key whose entry will be visited or <code>null</code> if the lower
@@ -141,7 +141,7 @@ public class LeafTupleIterator<E> implements ITupleIterator<E> {
     index = fromIndex;
   }
 
-  /**
+  /*
    * Examines the entry at {@link #index}. If it passes the criteria for an entry to visit then
    * return true. Otherwise increment the {@link #index} until either all entries in this leaf have
    * been exhausted -or- the an entry is identified that passes the various criteria.
@@ -190,7 +190,7 @@ public class LeafTupleIterator<E> implements ITupleIterator<E> {
     return tuple;
   }
 
-  /**
+  /*
    * This operation is not supported.
    *
    * <p>Note: There are two ways in which you can achieve the semantics of {@link #remove()}. One is

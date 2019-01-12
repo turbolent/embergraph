@@ -63,7 +63,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
     AbstractBTreeTestCase.assertSameLeafData(expected, actual);
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -74,7 +74,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
     assertSameIteratorAnyOrder("", expected, actual);
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -126,7 +126,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Return a new {@link HTree} backed by a simple transient store that will NOT evict leaves or
    * nodes onto the store. The leaf cache will be large and cache evictions will cause exceptions if
    * they occur. This provides an indication if cache evictions are occurring so that the tests of
@@ -189,21 +189,21 @@ public class AbstractHTreeTestCase extends TestCase2 {
       // override the HTree class.
       metadata.setHTreeClassName(NoEvictionHTree.class.getName());
 
-      return (NoEvictionHTree) HTree.create(store, metadata);
+      return HTree.create(store, metadata);
     }
 
     // Will support incremental eviction and persistence.
     return HTree.create(store, metadata);
   }
 
-  /**
+  /*
    * Specifies a {@link NoEvictionListener}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   private static class NoEvictionHTree extends HTree {
 
-    /**
+    /*
      * @param store
      * @param checkpoint
      * @param metadata
@@ -221,7 +221,7 @@ public class AbstractHTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * FIXME Write test helper assertSameHTree(). See the code below for a starting point.
    *
    * @param expected
@@ -269,8 +269,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
     }
   }
 
-  //	/**
-  //	 * A suite of tests designed to verify that one htree correctly represents
+  //	/*
+//	 * A suite of tests designed to verify that one htree correctly represents
   //	 * the information present in a ground truth htree. The test verifies the
   //	 * #of entries, the keys and values, and lookup by key. The address bits,
   //	 * #of nodes and #of leaves may differ (the test does not presume that the
@@ -398,8 +398,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Compares the total ordering of two B+Trees as revealed by their range
+  //    /*
+//     * Compares the total ordering of two B+Trees as revealed by their range
   //     * iterators
   //     *
   //     * @param expected
@@ -512,8 +512,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Extract all keys and values from the btree in key order.  The caller must
+  //    /*
+//     * Extract all keys and values from the btree in key order.  The caller must
   //     * correctly dimension the arrays before calling this method.
   //     *
   //     * @param btree
@@ -552,8 +552,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Tests the performance of random {@link IIndex#lookup(Object)}s on the
+  //    /*
+//     * Tests the performance of random {@link IIndex#lookup(Object)}s on the
   //     * btree. This vets the separator keys and the childAddr and/or childRef
   //     * arrays since those are responsible for lookup.
   //     *
@@ -618,8 +618,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Tests the performance of random lookups of keys and values by entry
+  //    /*
+//     * Tests the performance of random lookups of keys and values by entry
   //     * index. This vets the separator keys and childRef/childAddr arrays, which
   //     * are used to lookup the entry index for a key, and also vets the
   //     * childEntryCount[] array, since that is responsible for lookup by entry
@@ -677,8 +677,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Method verifies that the <i>actual</i> {@link ITupleIterator} produces the
+  //    /*
+//     * Method verifies that the <i>actual</i> {@link ITupleIterator} produces the
   //     * expected values in the expected order. Errors are reported if too few or
   //     * too many values are produced, etc.
   //     */
@@ -688,8 +688,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Method verifies that the <i>actual</i> {@link ITupleIterator} produces
+  //    /*
+//     * Method verifies that the <i>actual</i> {@link ITupleIterator} produces
   //     * the expected values in the expected order. Errors are reported if too few
   //     * or too many values are produced, etc.
   //     */
@@ -766,8 +766,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Verifies the data in the two indices using a batch-oriented key range
+  //    /*
+//     * Verifies the data in the two indices using a batch-oriented key range
   //     * scans (this can be used to verify a key-range partitioned scale-out index
   //     * against a ground truth index) - only the keys and values of non-deleted
   //     * index entries in the <i>expected</i> index are inspected.  Deleted index
@@ -786,8 +786,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Verifies that the iterators visit tuples having the same data in the same
+  //    /*
+//     * Verifies that the iterators visit tuples having the same data in the same
   //     * order.
   //     *
   //     * @param expectedItr
@@ -836,8 +836,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //
   //    }
 
-  //   /**
-  //    * Moved to test suite - requires scans.
+  //   /*
+//    * Moved to test suite - requires scans.
   //    *
   //    * Note: This is only used for an informational message by a stress test. It
   //    * could easily be replaced by dumpPages() which is part of the standard API
@@ -850,22 +850,22 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //            + activeBucketPages(htree) + " of " + BucketPage.createdPages;
   //   }
   //
-  //   /**
-  //    * Moved to test suite - requires scans.
+  //   /*
+//    * Moved to test suite - requires scans.
   //    */
   //   private final int activeBucketPages(final HTree htree) {
   //      return activeBucketPages(htree.getRoot());
   //   }
   //
-  //   /**
-  //    * Moved to test suite - requires scans.
+  //   /*
+//    * Moved to test suite - requires scans.
   //    */
   //   private final int activeDirectoryPages(final HTree htree) {
   //      return activeDirectoryPages(htree.getRoot());
   //   }
   //
-  //   /**
-  //    * Moved to test suite - requires scans.
+  //   /*
+//    * Moved to test suite - requires scans.
   //    */
   //   private int activeBucketPages(final DirectoryPage directoryPage) {
   //      int ret = 0;
@@ -883,8 +883,8 @@ public class AbstractHTreeTestCase extends TestCase2 {
   //      return ret;
   //   }
   //
-  //   /**
-  //    * Moved to test suite - requires scans.
+  //   /*
+//    * Moved to test suite - requires scans.
   //    */
   //   private int activeDirectoryPages(final DirectoryPage directoryPage) {
   //      int ret = 1;

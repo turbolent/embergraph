@@ -25,8 +25,8 @@ import it.unimi.dsi.fastutil.objects.Object2LongFunction;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import java.io.Serializable;
 
-/**
- * A map from strings to numbers (and possibly <i>vice versa</i>).
+/*
+* A map from strings to numbers (and possibly <i>vice versa</i>).
  *
  * <p>String maps represent mappings from strings (actually, any subclass of {@link CharSequence})
  * to numbers; they can support {@linkplain #list() reverse mapping}, too. The latter has usually
@@ -48,7 +48,7 @@ import java.io.Serializable;
 public interface StringMap<S extends CharSequence>
     extends Object2LongFunction<CharSequence>, Serializable {
 
-  /**
+  /*
    * Returns a list view of the domain of this string map (optional operation).
    *
    * <p>Note that the list view acts as an inverse of the mapping implemented by this map.
@@ -56,5 +56,5 @@ public interface StringMap<S extends CharSequence>
    * @return a list view of the domain of this string map, or <code>null</code> if this map does not
    *     support this operation.
    */
-  public ObjectList<? extends S> list();
+  ObjectList<? extends S> list();
 }

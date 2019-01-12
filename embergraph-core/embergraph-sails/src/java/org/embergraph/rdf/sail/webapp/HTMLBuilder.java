@@ -20,8 +20,8 @@ package org.embergraph.rdf.sail.webapp;
 import java.io.IOException;
 import java.io.Writer;
 
-/**
- * Variant of {@link XMLBuilder} for HTML output.
+/*
+* Variant of {@link XMLBuilder} for HTML output.
  *
  * @author Martyn Cutcher
  */

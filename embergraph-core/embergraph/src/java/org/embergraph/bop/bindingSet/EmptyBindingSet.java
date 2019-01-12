@@ -32,8 +32,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
-/**
- * An immutable empty binding set.
+/*
+* An immutable empty binding set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public final class EmptyBindingSet implements IBindingSet, Serializable {
 
   private EmptyBindingSet() {}
 
-  /**
+  /*
    * @todo Clone returns the same object, which is immutable. Since we use clone when binding, it
    *     might be better to return a mutable object.
    */
@@ -108,9 +108,8 @@ public final class EmptyBindingSet implements IBindingSet, Serializable {
 
     final IBindingSet o = (IBindingSet) t;
 
-    if (o.size() == 0) return true;
+    return o.size() == 0;
 
-    return false;
   }
 
   /** The hash code of an empty binding set is always zero. */

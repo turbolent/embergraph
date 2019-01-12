@@ -8,12 +8,12 @@ that both that copyright notice and this permission notice appear in supporting 
 CERN makes no representations about the suitability of this software for any purpose.
 It is provided "as is" without expressed or implied warranty.
 */
-/**
- * Interface that represents a procedure object: a procedure that takes two arguments and does not
+/*
+* Interface that represents a procedure object: a procedure that takes two arguments and does not
  * return a value.
  */
 public interface DoubleDoubleProcedure {
-  /**
+  /*
    * Applies a procedure to two arguments. Optionally can return a boolean flag to inform the object
    * calling the procedure.
    *
@@ -26,5 +26,5 @@ public interface DoubleDoubleProcedure {
    * @param second second argument passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public abstract boolean apply(double first, double second);
+  boolean apply(double first, double second);
 }

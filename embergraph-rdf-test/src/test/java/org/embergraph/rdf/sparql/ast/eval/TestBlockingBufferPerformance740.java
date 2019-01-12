@@ -30,7 +30,7 @@ public class TestBlockingBufferPerformance740 extends AbstractDataDrivenSPARQLTe
     super(name);
   }
 
-  /**
+  /*
    * This test measures the percent utilization by comparing CPU time with wall clock time. The test
    * fails if this is less than 80%. Obviously, the expected value is greater for machines with more
    * CPUs, the test does not take this into account.
@@ -66,7 +66,7 @@ public class TestBlockingBufferPerformance740 extends AbstractDataDrivenSPARQLTe
         }
       }
 
-      /**
+      /*
        * This is a pretty optimistic implementation ... it does not deal with threads dying. It
        * seems to suffice for this test though.
        *

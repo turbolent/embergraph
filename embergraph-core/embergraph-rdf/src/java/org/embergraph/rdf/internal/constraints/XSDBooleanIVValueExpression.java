@@ -27,8 +27,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 
-/**
- * Base class for RDF value expression BOps that happen to evaluate to an {@link XSDBooleanIV}.
+/*
+* Base class for RDF value expression BOps that happen to evaluate to an {@link XSDBooleanIV}.
  * These are operators such as Compare, Is*, And, Or, etc.
  */
 public abstract class XSDBooleanIVValueExpression extends IVValueExpression<XSDBooleanIV> {
@@ -36,7 +36,7 @@ public abstract class XSDBooleanIVValueExpression extends IVValueExpression<XSDB
   /** */
   private static final long serialVersionUID = -7068219781217676085L;
 
-  /**
+  /*
    * If the operand is not known to evaluate to a boolean, wrap it with an {@link EBVBOp}.
    *
    * @return An operand which is known to evaluate to an {@link XSDBooleanIV}.
@@ -48,7 +48,7 @@ public abstract class XSDBooleanIVValueExpression extends IVValueExpression<XSDB
         : new EBVBOp(ve);
   }
 
-  /**
+  /*
    * None of the xsd:boolean IV value expressions require access to the ValueFactory or
    * LexiconConfiguration.
    */
@@ -78,7 +78,7 @@ public abstract class XSDBooleanIVValueExpression extends IVValueExpression<XSDB
     return XSDBooleanIV.valueOf(accept(bs));
   }
 
-  /**
+  /*
    * Implement this method.
    *
    * @param bs The source solution.

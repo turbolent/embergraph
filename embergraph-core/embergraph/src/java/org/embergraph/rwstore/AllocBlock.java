@@ -23,8 +23,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.io.writecache.WriteCacheService;
 import org.embergraph.rwstore.RWStore.AllocationStats;
 
-/**
- * Bit maps for an allocator. The allocator is a bit map managed as int[]s.
+/*
+* Bit maps for an allocator. The allocator is a bit map managed as int[]s.
  *
  * @todo change to make {@link #m_transients}, {@link #m_live}, and {@link #m_commit} final fields
  *     and then modify {@link FixedAllocator} to use {@link System#arraycopy(Object, int, Object,
@@ -40,12 +40,12 @@ public class AllocBlock {
   private static final boolean s_islogDebug = log.isDebugEnabled();
   private static final boolean s_islogTrace = log.isTraceEnabled();
 
-  /**
+  /*
    * The FixedAllocator owning this block. The callback reference is needed to allow the AllocBlock
    * to determine the session state and whether to clear the transient bits.
    */
   final FixedAllocator m_allocator;
-  /**
+  /*
    * The address of the data managed by the {@link AllocBlock} -or- ZERO (0) if {@link AllocBlock}
    * has not yet been allocated on the persistent heap. Note that the space for the allocation slots
    * managed by an {@link AllocBlock} is not reserved until the {@link AllocBlock} is allocated on
@@ -54,30 +54,32 @@ public class AllocBlock {
   int m_addr;
   /** The dimension of the arrays, which is the #of allocation slots divided by 32 (sizeof(int)). */
   private final int m_ints;
-  /**
+  /*
    * The bits that were allocated in the previous commit. They can be freed in the current native
    * transaction but they can not be reallocated until the next native transaction.
    */
-  int m_commit[];
-  /**
+  int[] m_commit;
+  /*
    * If used as a shadow allocator, then the _commit is saved to m_saveCommit and m_transients is
    * copied to m_commit.
    */
-  int m_saveCommit[];
-  /** For a shadow, the isolated frees need to be tracked to facillitate reset. */
-  int m_isoFrees[];
-  /**
+  int[] m_saveCommit;
+  /*
+   * For a shadow, the isolated frees need to be tracked to facillitate reset.
+   */
+  int[] m_isoFrees;
+  /*
    * Just the newly allocated bits. This will be copied onto {@link #m_commit} when the current
    * native transaction commits.
    */
-  final int m_live[];
-  /**
+  final int[] m_live;
+  /*
    * All of the bits from the commit point on entry to the current native transaction plus any newly
    * allocated bits.
    */
-  int m_transients[];
-  //	/**
-  //	 * Used to clear an address on the {@link WriteCacheService} if it has been
+  int[] m_transients;
+  //	/*
+//	 * Used to clear an address on the {@link WriteCacheService} if it has been
   //	 * freed.
   //	 */
   //	private final RWWriteCacheService m_writeCache;
@@ -187,7 +189,7 @@ public class AllocBlock {
     return RWStore.convertAddr(m_addr) + ((long) m_allocator.m_size * bit);
   }
 
-  /**
+  /*
    * The shadow, if non-null defines the context for this request.
    *
    * <p>If an existing shadow is registered, then the allocation fails immediately.
@@ -216,7 +218,7 @@ public class AllocBlock {
     }
   }
 
-  /**
+  /*
    * Called as part of HA downstream synchronization
    *
    * @param bit
@@ -272,7 +274,7 @@ public class AllocBlock {
     }
   }
 
-  /**
+  /*
    * Store m_commit bits in m_saveCommit then duplicate transients to m_commit.
    *
    * <p>This ensures, that while shadowed, the allocator will not re-use storage that was allocated
@@ -293,7 +295,7 @@ public class AllocBlock {
     m_commit = m_transients.clone();
   }
 
-  /**
+  /*
    * The transient bits will have been added to correctly, we now just need to restore the commit
    * bits from the m_saveCommit, to allow re-allocation of non-committed storage.
    */
@@ -303,7 +305,7 @@ public class AllocBlock {
     // m_saveCommit = null;
   }
 
-  /**
+  /*
    * Must release allocations made by this allocator.
    *
    * <p>The commit bits are the old transient bits, so any allocated bits set in live, but not in
@@ -369,7 +371,7 @@ public class AllocBlock {
     return freebits;
   }
 
-  /**
+  /*
    * When resetting an alloc block to committed unisolated state, care must be taken to protect any
    * isolated writes. This is indicated by a non-null m_saveCommit array which is set when a
    * ContextAlocation takes ownership of the parent FixedAllocator.
@@ -385,8 +387,8 @@ public class AllocBlock {
     for (int i = 0; i < m_live.length; i++) {
       final int startBit = i * 32;
       if (m_saveCommit == null) {
-        /*
-         * Simply set live and transients to the commit bits
+      /*
+       * Simply set live and transients to the commit bits
          *
          * But remember to clear out any buffered writes in the cache
          * first!  New allocations determined by comparing
@@ -398,8 +400,8 @@ public class AllocBlock {
         m_live[i] = m_commit[i];
         m_transients[i] = m_commit[i];
       } else {
-        /*
-         * Example
+      /*
+       * Example
          *
          * C1: 1100
          * T1: 1110 (single unisolated allocation)
@@ -441,7 +443,7 @@ public class AllocBlock {
     }
   }
 
-  /**
+  /*
    * When a session is active, the transient bits do not equate to an ORing of the committed bits
    * and the live bits, but rather an ORing of the live with all the committed bits since the start
    * of the session. When the session is released, the state is restored to an ORing of the live and
@@ -475,7 +477,7 @@ public class AllocBlock {
     return freebits;
   }
 
-  /**
+  /*
    * Releases entries in the {@link WriteCacheService} which are no longer committed but which were
    * committed as of the previous commit point. This is invoked as part of the commit protocol.
    *
@@ -561,7 +563,7 @@ public class AllocBlock {
     return freebits;
   }
 
-  /**
+  /*
    * transients frees as defined by those bits set in transients but NOT set in live
    *
    * @return number of transient frees

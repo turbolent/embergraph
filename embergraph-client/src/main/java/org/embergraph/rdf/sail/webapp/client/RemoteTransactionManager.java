@@ -27,8 +27,8 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.ext.DefaultHandler2;
 
-/**
- * Remote client for the Transaction Management API.
+/*
+* Remote client for the Transaction Management API.
  *
  * @author bryan
  * @since 1.5.2
@@ -37,20 +37,20 @@ import org.xml.sax.ext.DefaultHandler2;
  */
 public class RemoteTransactionManager {
 
-  /**
+  /*
    * The constant that SHOULD used to request a read/write transaction. The transaction will read on
    * the current commit point on the database at the time that the request is processed by the
    * server.
    */
   public static final long UNISOLATED = 0L;
 
-  /**
+  /*
    * The constant that should be used to request a read-only transaction against the current commit
    * point on the database at the time that the request is processed by the server.
    */
   public static final long READ_COMMITTED = -1L;
 
-  /**
+  /*
    * Return <code>true</code> iff the transaction identifier would be associated with a read/write
    * transaction. This is a purely syntactic check of the numerical value of the transaction
    * identifier. Negative transaction identifiers are read/write transactions.
@@ -64,7 +64,7 @@ public class RemoteTransactionManager {
 
   private final RemoteRepositoryManager mgr;
 
-  /**
+  /*
    * Flyweight constructor for stateless transaction manager client.
    *
    * @param remoteRepositoryManager
@@ -115,7 +115,7 @@ public class RemoteTransactionManager {
     }
   }
 
-  /**
+  /*
    * Note: It is not possible to establish a canonical factory pattern for a {@link RemoteTx}
    * because we can not be certain that we are not accessing the same REST API through different
    * URls and because we can not be certain that different URLs are not in fact the same REST API.
@@ -135,7 +135,7 @@ public class RemoteTransactionManager {
     /** The commit time on which the transaction will read. */
     private final long readsOnCommitTime;
 
-    /**
+    /*
      * Flag indicates whether the client believes the transaction to be active. Note that the
      * transaction could have been aborted by the server, so the client's belief could be incorrect.
      * The client uses this information to refuse to attempt operations if it believes that the
@@ -187,7 +187,7 @@ public class RemoteTransactionManager {
       return txId > 0;
     }
 
-    /**
+    /*
      * Look at the {@link #active} flag and throw an exception if the client already believes that
      * the transaction is not active.
      */
@@ -230,7 +230,7 @@ public class RemoteTransactionManager {
     }
   }
 
-  /**
+  /*
    * CREATE-TX: Create a transaction on the server.
    *
    * <dl>
@@ -311,7 +311,7 @@ public class RemoteTransactionManager {
     }
   }
 
-  /**
+  /*
    * STATUS-TX: Return information about a transaction, including whether or not it is active.
    *
    * @param txId The transaction identifier.
@@ -322,7 +322,7 @@ public class RemoteTransactionManager {
   public IRemoteTxState0 statusTx(final long txId) throws RemoteTransactionNotFoundException {
 
     final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + Long.toString(txId));
+        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
 
     opts.method = "POST";
 
@@ -355,7 +355,7 @@ public class RemoteTransactionManager {
     }
   }
 
-  /**
+  /*
    * <code>PREPARE-TX</code>: Validate a transaction on the server.
    *
    * @param txId The transaction identifier.
@@ -372,7 +372,7 @@ public class RemoteTransactionManager {
     }
 
     final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + Long.toString(txId));
+        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
 
     opts.method = "POST";
 
@@ -416,7 +416,7 @@ public class RemoteTransactionManager {
     }
   }
 
-  /**
+  /*
    * ABORT-TX
    *
    * @param txId The transaction identifier.
@@ -424,7 +424,7 @@ public class RemoteTransactionManager {
   private void abortTx(final long txId) throws RemoteTransactionNotFoundException {
 
     final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + Long.toString(txId));
+        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
 
     opts.method = "POST";
 
@@ -465,7 +465,7 @@ public class RemoteTransactionManager {
     }
   }
 
-  /**
+  /*
    * COMMIT-TX:
    *
    * @param txId The transaction identifier.
@@ -477,7 +477,7 @@ public class RemoteTransactionManager {
       throws RemoteTransactionNotFoundException, RemoteTransactionValidationException {
 
     final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + Long.toString(txId));
+        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
 
     opts.method = "POST";
 

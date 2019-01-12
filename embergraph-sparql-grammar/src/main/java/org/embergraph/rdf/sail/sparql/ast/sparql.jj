@@ -66,7 +66,7 @@ public class SyntaxTreeBuilder/*@bgen(jjtree)*/implements SyntaxTreeBuilderTreeC
 
 /*@egen*/
 
-    /**
+    /*
      * Parses the supplied SPARQL query and builds a syntax tree from it.
      *
      * @param query A SPARQL query string.
@@ -88,7 +88,7 @@ public class SyntaxTreeBuilder/*@bgen(jjtree)*/implements SyntaxTreeBuilderTreeC
         return container;
     }
 
-    /**
+    /*
      * Parses the supplied SPARQL update sequence and builds a syntax tree from it.
      *
      * @param sequence A SPARQL update sequence string.
@@ -105,7 +105,7 @@ public class SyntaxTreeBuilder/*@bgen(jjtree)*/implements SyntaxTreeBuilderTreeC
         return seq;
     }
     
-    /**
+    /*
      * Trims <tt>n</tt> character from the start and end of the supplied string.
      */
     private static String _trimString(String s, int n) {

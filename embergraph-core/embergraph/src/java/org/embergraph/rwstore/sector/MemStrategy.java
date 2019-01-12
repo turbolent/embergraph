@@ -43,8 +43,8 @@ import org.embergraph.rawstore.IPSOutputStream;
 import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.rwstore.IRawTx;
 
-/**
- * A buffer implementation backed by an {@link IMemoryManager}.
+/*
+* A buffer implementation backed by an {@link IMemoryManager}.
  *
  * @author <a href="mailto:matyncutcher@users.sourceforge.net">Martyn Cutcher</a>
  * @version $Id$
@@ -474,7 +474,7 @@ public class MemStrategy implements IBufferStrategy, IRWStrategy, IAllocationMan
   //		throw new UnsupportedOperationException();
   //	}
 
-  /**
+  /*
    * FIXME There are two unit tests for the {@link MemStore} which are failing due to this method
    * not being implemented. Those methods are using an abstract task within an isolated action
    * journal context.

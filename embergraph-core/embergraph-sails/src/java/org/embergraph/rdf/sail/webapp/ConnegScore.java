@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.webapp;
 
-/**
- * Helper class used to rank content types based on their quality scores.
+/*
+* Helper class used to rank content types based on their quality scores.
  *
  * @param <E>
  */
@@ -43,7 +43,7 @@ public class ConnegScore<E> implements Comparable<ConnegScore<E>> {
     this.format = format;
   }
 
-  /**
+  /*
    * The higher the <code>q</code> score the better the match with the user agent's preference. A
    * mime type without an explicit <code>q</code> score has an implicit score of <code>1</code>.
    *
@@ -77,8 +77,6 @@ public class ConnegScore<E> implements Comparable<ConnegScore<E>> {
 
     if (this.format != t.format) return false;
 
-    if (this.q != t.q) return false;
-
-    return true;
+    return this.q == t.q;
   }
 }

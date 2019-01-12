@@ -42,8 +42,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 // import org.semanticweb.yars.nx.namespace.XSD;
 
-/**
- * Test suite for {@link ISolutionSetStats}.
+/*
+* Test suite for {@link ISolutionSetStats}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestSolutionSetStats.java 6099 2012-03-09 16:35:55Z thompsonbry $
@@ -59,7 +59,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Implement this method to test a specific {@link ISolutionSetStats} class.
    *
    * @param bindingSets The solutions to be analyzer.
@@ -78,7 +78,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     return new Constant<T>(val);
   }
 
-  /**
+  /*
    * Turn an array of variables into a {@link Set} of variables.
    *
    * @param vars The array.
@@ -160,7 +160,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with a single solution having a single bound variable where the bound variable does
    * NOT have its {@link IVCache} association set.
    */
@@ -193,7 +193,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with a single solution having a single bound variable and where the bound variable
    * has its {@link IVCache} association set.
    */
@@ -226,7 +226,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with a single solution having a two bound variables. One of the variables has its
    * {@link IVCache} set and the other does not.
    */
@@ -263,7 +263,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with two solutions having two variables which are bound in both solutions and where
    * the {@link IVCache} is set for all variables in all solutions.
    */
@@ -313,7 +313,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with two solutions having two variables which are bound in both solutions, but in
    * this case the {@link IVCache} is not always set for all variables.
    */
@@ -363,7 +363,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with two solutions having two variables which are bound in every solution plus one
    * variable which is bound in just one of the solutions. The {@link IVCache} association is set
    * for all bound variables in each solution.
@@ -419,7 +419,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with two solutions having two variables which are bound in every solution plus one
    * variable which is bound in just one of the solutions. The {@link IVCache} association is not
    * set for all bound variables in each solution.
@@ -475,7 +475,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with two solutions having two variables which are bound in every solution plus one
    * variable which is bound in just one of the solutions (this is the same as the previous test
    * except that it presents the solutions in a different order to test the logic which detects
@@ -532,7 +532,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with two solutions having two variables which are bound in every solution plus one
    * variable which is bound in just one of the solutions (this is the same as the previous test
    * except that it presents the solutions in a different order to test the logic which detects
@@ -646,7 +646,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Unit test with three solutions having two variables which are bound in every solution to the
    * same value plus one variable which is bound to a different value in every solution.
    */
@@ -715,7 +715,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     assertSameStats(expected, actual);
   }
 
-  /**
+  /*
    * Compare two {@link ISolutionSetStats}.
    *
    * @param expected
@@ -746,7 +746,7 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     /** The set of variables observed across all solutions. */
     protected final Set<IVariable> usedVars;
 
-    /**
+    /*
      * The set of variables which are NOT bound in at least one solution (e.g., MAYBE bound
      * semantics).
      */
@@ -755,13 +755,13 @@ public abstract class AbstractSolutionSetStatsTestCase extends TestCase2 {
     /** The set of variables which are bound in ALL solutions. */
     protected final Set<IVariable> alwaysBound;
 
-    /**
+    /*
      * The set of variables whose bound values always have their {@link IVCache} assertion set (if
      * the variable is bound).
      */
     protected final Set<IVariable> materialized;
 
-    /**
+    /*
      * The set of variables which are effective constants (they are bound in every solution and
      * always to the same value) together with their constant bindings.
      */

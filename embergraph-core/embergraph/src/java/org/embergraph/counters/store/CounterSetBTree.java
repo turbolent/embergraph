@@ -60,8 +60,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.Bytes;
 
-/**
- * An API encapsulating for writing and querying counter sets. The data are written onto an {@link
+/*
+* An API encapsulating for writing and querying counter sets. The data are written onto an {@link
  * IIndex}. The {@link IIndex} may be local or remote.
  *
  * <p>The multipart key is used. The first component is the milliseconds of the associated timestamp
@@ -106,7 +106,7 @@ public class CounterSetBTree extends BTree {
 
   protected static final transient Logger log = Logger.getLogger(CounterSetBTree.class);
 
-  /**
+  /*
    * @param store
    * @param checkpoint
    * @param metadata
@@ -119,7 +119,7 @@ public class CounterSetBTree extends BTree {
 
   private static final transient int INITIAL_CAPACITY = Bytes.kilobyte32;
 
-  /**
+  /*
    * Create a new instance.
    *
    * @param store The backing store.
@@ -149,7 +149,7 @@ public class CounterSetBTree extends BTree {
     return (CounterSetBTree) BTree.createTransient(metadata);
   }
 
-  /**
+  /*
    * A representation of a timestamped performance counter value as stored in the {@link
    * CounterSetBTree}. The minutes, path, and timestamp fields are recovered from the key. The
    * counter value is recovered from the value.
@@ -185,7 +185,7 @@ public class CounterSetBTree extends BTree {
           + "}";
     }
 
-    /**
+    /*
      * Return the depth of the path in the performance counter hierarchy (counts the #of '/'
      * characters in the path).
      *
@@ -203,7 +203,7 @@ public class CounterSetBTree extends BTree {
     }
   }
 
-  /**
+  /*
    * Encapsulates key and value formation. The key is formed from the minutes, the path, and the
    * timestamp. The value is the performance counter value for a specific timestamp.
    *
@@ -222,7 +222,7 @@ public class CounterSetBTree extends BTree {
       super();
     }
 
-    /**
+    /*
      * Ctor when creating a new instance.
      *
      * @param keyBuilderFactory
@@ -232,7 +232,7 @@ public class CounterSetBTree extends BTree {
       super(keyBuilderFactory);
     }
 
-    /**
+    /*
      * Return the unsigned byte[] key.
      *
      * @param obj An {@link ICounter} or {@link Entry}.
@@ -278,7 +278,7 @@ public class CounterSetBTree extends BTree {
           .getKey();
     }
 
-    /**
+    /*
      * Overridden to serialize just {@link Entry#value} as the value component of the B+Tree tuple.
      */
     @Override
@@ -306,7 +306,7 @@ public class CounterSetBTree extends BTree {
     }
   }
 
-  /**
+  /*
    * Handles efficient writes of counters with {@link History} data. The shape of the data is
    * changed so that the resulting writes on the BTree will be ordered. This is both faster and also
    * results in a smaller size on the size (since leaves are not updated once they are written to
@@ -390,7 +390,7 @@ public class CounterSetBTree extends BTree {
     }
   }
 
-  /**
+  /*
    * Writes the <strong>current</strong> value of each visited {@link ICounter} on the store.
    *
    * <p>Note: This presumes that the counters are associated with scalar values (rather than {@link
@@ -452,7 +452,7 @@ public class CounterSetBTree extends BTree {
     }
   }
 
-  /**
+  /*
    * <strong>The toTime needs to be ONE (1) <i>unit</i> beyond the time of interest since the
    * minutes come first in the key. If you do not follow this rule then you can miss out on the last
    * <i>unit</i> worth of data.</strong>
@@ -582,8 +582,8 @@ public class CounterSetBTree extends BTree {
 
       if (fromTime < entry.timestamp || toTime >= entry.timestamp) {
 
-        /*
-         * Due to the leading [minutes] field in the key there can be
+      /*
+       * Due to the leading [minutes] field in the key there can be
          * some underscan and overscan of the index. Therefore we filter
          * to ensure that only timestamps which are strictly within the
          * specified milliseconds are extracted.
@@ -664,7 +664,7 @@ public class CounterSetBTree extends BTree {
     return counters;
   }
 
-  /**
+  /*
    * Return the timestamp associated with the first performance counter value.
    *
    * @return The timestamp -or- 0L if there are no performance counter values.
@@ -680,7 +680,7 @@ public class CounterSetBTree extends BTree {
         .timestamp;
   }
 
-  /**
+  /*
    * Return the timestamp associated with the last performance counter value.
    *
    * @return The timestamp -or- 0L if there are no performance counter values.

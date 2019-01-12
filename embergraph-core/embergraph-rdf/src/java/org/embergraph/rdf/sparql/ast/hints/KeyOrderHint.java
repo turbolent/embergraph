@@ -28,8 +28,8 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 
-/**
- * Query hint used to indicate that a hash join agaist an access path should be used for a given
+/*
+* Query hint used to indicate that a hash join agaist an access path should be used for a given
  * statement pattern node.
  */
 final class KeyOrderHint extends AbstractQueryHint<SPOKeyOrder> {

@@ -32,8 +32,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.relation.AbstractRelation;
 
-/**
- * Helper class.
+/*
+* Helper class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -41,7 +41,7 @@ public class GlobalRowStoreHelper {
 
   public static final transient String GLOBAL_ROW_STORE_INDEX = "__globalRowStore";
 
-  /**
+  /*
    * Note: It is important that this reference is not exposed since that can break isolation when
    * using group commit by allowing the GRS index to be registered from within a task .
    *
@@ -61,7 +61,7 @@ public class GlobalRowStoreHelper {
     this.indexManager = indexManager;
   }
 
-  /**
+  /*
    * @return The unisolated view of the GRS index
    * @see <a href="http://trac.blazegraph.com/ticket/867">NSS concurrency problem with list
    *     namespaces and create namespace </a>
@@ -76,7 +76,7 @@ public class GlobalRowStoreHelper {
     //        if (globalRowStore == null)
     {
 
-      /**
+      /*
        * The GRS view needs to be protected by an UnisolatedReadWriteIndex.
        *
        * @see <a href="http://trac.blazegraph.com/ticket/867">NSS concurrency problem with list
@@ -91,8 +91,8 @@ public class GlobalRowStoreHelper {
 
         try {
 
-          /*
-           * Note: This specifies an split handler that keeps the
+        /*
+       * Note: This specifies an split handler that keeps the
            * logical row together. This is a hard requirement. The
            * atomic read/update guarantee depends on this.
            *
@@ -105,8 +105,8 @@ public class GlobalRowStoreHelper {
 
           // Ensure that splits do not break logical rows.
           indexMetadata.setSplitHandler(LogicalRowSplitHandler.INSTANCE);
-          /*
-           * This is now handled by using the UTF8 encoding of the primary key regardless
+        /*
+       * This is now handled by using the UTF8 encoding of the primary key regardless
            * of the collator mode chosen (this fixes the problem with embedded nuls).
            */
           //                    if (CollatorEnum.JDK.toString().equals(
@@ -136,8 +136,8 @@ public class GlobalRowStoreHelper {
           throw new RuntimeException(ex);
         }
 
-        /**
-         * The live view of the global row store must be wrapped by an UnisolatedReadWriteIndex on a
+      /*
+       * The live view of the global row store must be wrapped by an UnisolatedReadWriteIndex on a
          * Journal.
          *
          * @see http://sourceforge.net/apps/trac/bigdata/ticket/616 (Row store read/update not
@@ -159,7 +159,7 @@ public class GlobalRowStoreHelper {
     return globalRowStore;
   }
 
-  /**
+  /*
    * Note: The hard reference to the unisolated view of the GSR is no longer cached.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/1132">GlobalRowStoreHelper can hold hard
@@ -167,7 +167,7 @@ public class GlobalRowStoreHelper {
    */
   //    private transient SparseRowStore globalRowStore;
 
-  /**
+  /*
    * Return a view of the global row store as of the specified timestamp IFF the backing index
    * exists as of that timestamp.
    */
@@ -183,7 +183,7 @@ public class GlobalRowStoreHelper {
 
     final IIndex ndx;
 
-    /**
+    /*
      * The live view of the global row store must be wrapped by an UnisolatedReadWriteIndex on a
      * Journal.
      *

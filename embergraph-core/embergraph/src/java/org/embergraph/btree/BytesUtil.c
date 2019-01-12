@@ -126,8 +126,8 @@ See http://weblogs.java.net/blog/kellyohair/archive/2006/01/index.html for this 
 #include <stdio.h>
 #include "com_embergraph_btree_BytesUtil.h"
 
-/**
- * Bit-wise comparison of unsigned byte[]s.
+/*
+* Bit-wise comparison of unsigned byte[]s.
  * 
  * @param a A byte[].
  * 
@@ -208,8 +208,8 @@ JNIEXPORT jint JNICALL Java_org_embergraph_btree_BytesUtil__1compareBytes
 
 }
 
-/**
- * Byte-wise comparison of byte[]s (the arrays are treated as arrays of
+/*
+* Byte-wise comparison of byte[]s (the arrays are treated as arrays of
  * unsigned bytes).
  * 
  * @param aoff The offset into <i>a</i> at which the comparison will

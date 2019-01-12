@@ -22,8 +22,8 @@ package org.embergraph.btree.proc;
 
 import org.embergraph.service.Split;
 
-/**
- * An interface for handling results obtained when an {@link IIndexProcedure} is parallelized across
+/*
+* An interface for handling results obtained when an {@link IIndexProcedure} is parallelized across
  * either a local index or partitions of a scale-out index.
  *
  * @param <R> The type of the result from applying the procedure to a single key-range (or {@link
@@ -37,7 +37,7 @@ import org.embergraph.service.Split;
  */
 public interface IResultHandler<R extends Object, A extends Object> {
 
-  /**
+  /*
    * Method is invoked for each result and is responsible for combining the results in whatever
    * manner is meaningful for the procedure. Implementations of this method MUST be
    * <strong>thread-safe</strong> since the procedure MAY be applied in parallel when it spans more
@@ -46,8 +46,8 @@ public interface IResultHandler<R extends Object, A extends Object> {
    * @param result The result from applying the procedure to a single index partition.
    * @param split The {@link Split} that generated that result.
    */
-  public void aggregate(R result, Split split);
+  void aggregate(R result, Split split);
 
   /** Return the aggregated results as an implementation dependent object. */
-  public A getResult();
+  A getResult();
 }

@@ -21,8 +21,8 @@ import java.util.UUID;
 import junit.framework.TestCase2;
 import org.embergraph.util.ClocksNotSynchronizedException;
 
-/**
- * Test suite for {@link ClocksNotSynchronizedException}. The basic pattern of events is as follows:
+/*
+* Test suite for {@link ClocksNotSynchronizedException}. The basic pattern of events is as follows:
  *
  * <pre>
  * leader   : t1          : timestamp before gather() messages are sent to followers.
@@ -77,7 +77,7 @@ public class TestClockSkewDetection extends TestCase2 {
     serviceId1 = serviceId2 = null;
   }
 
-  /**
+  /*
    * Helper calls through to assertBefore().
    *
    * @param t1
@@ -88,7 +88,7 @@ public class TestClockSkewDetection extends TestCase2 {
     ClocksNotSynchronizedException.assertBefore(serviceId1, serviceId2, t1, t2, maxSkew);
   }
 
-  /**
+  /*
    * Helper fails if assertBefore() succeeds.
    *
    * @param t1
@@ -150,7 +150,7 @@ public class TestClockSkewDetection extends TestCase2 {
    * Tests where [t1 GTE t2].
    */
 
-  /**
+  /*
    * Tests where the delta is LT {@value #maxSkew} and <code>t1 GTE t2</code>.
    *
    * <p>Note: This is a test for a "fuzzy" sense of "before". We explicitly allow for some clock

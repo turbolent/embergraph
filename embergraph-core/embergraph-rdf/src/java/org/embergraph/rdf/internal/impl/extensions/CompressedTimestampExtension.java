@@ -34,8 +34,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Effective, packed representation of timestamps typed as <code>
+/*
+* Effective, packed representation of timestamps typed as <code>
  * <http://www.embergraph.org/rdf/datatype#compressedTimestamp></code>. Builds on the {@link
  * PackedLongIV} datatype for representing timestamps, thus supporting the range
  * [0;72057594037927935L].

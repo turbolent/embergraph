@@ -490,7 +490,7 @@ public class LinkedBlockingDequeTest extends JSR166TestCase {
     }
   }
 
-  /**
+  /*
    * addAll of a collection with any null elements throws NPE after possibly adding some elements
    */
   public void testAddAll3() {
@@ -901,7 +901,7 @@ public class LinkedBlockingDequeTest extends JSR166TestCase {
     t.join();
   }
 
-  /**
+  /*
    * timed pollFirst before a delayed offerFirst fails; after offerFirst succeeds; on interruption
    * throws
    */
@@ -1114,7 +1114,7 @@ public class LinkedBlockingDequeTest extends JSR166TestCase {
     t.join();
   }
 
-  /**
+  /*
    * timed poll before a delayed offerLast fails; after offerLast succeeds; on interruption throws
    */
   public void testTimedPollWithOfferLast() throws InterruptedException {

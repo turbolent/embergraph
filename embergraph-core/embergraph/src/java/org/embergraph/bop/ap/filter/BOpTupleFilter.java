@@ -33,8 +33,8 @@ import org.embergraph.btree.Tuple;
 import org.embergraph.btree.filter.TupleFilter;
 import org.embergraph.btree.filter.TupleFilter.TupleFilterator;
 
-/**
- * Filter supporting {@link ITupleIterator}s.
+/*
+* Filter supporting {@link ITupleIterator}s.
  *
  * <p><strong>Warning: Unlike {@link BOpFilter}, this class correctly uses a second {@link Tuple}
  * instance to perform filtering.<strong> This is necessary since the {@link Tuple} instance for the
@@ -57,14 +57,14 @@ public abstract class BOpTupleFilter<E> extends BOpFilterBase {
   /** */
   private static final long serialVersionUID = 1L;
 
-  //    /**
-  //     * Deserialization.
+  //    /*
+//     * Deserialization.
   //     */
   //    public BOpFilter() {
   //        super();
   //    }
 
-  /**
+  /*
    * Deep copy.
    *
    * @param op
@@ -73,7 +73,7 @@ public abstract class BOpTupleFilter<E> extends BOpFilterBase {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy.
    *
    * @param args
@@ -89,7 +89,7 @@ public abstract class BOpTupleFilter<E> extends BOpFilterBase {
     return new TupleFilterator((ITupleIterator<E>) src, context, new FilterImpl());
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the object should be accepted.
    *
    * @param obj The object.

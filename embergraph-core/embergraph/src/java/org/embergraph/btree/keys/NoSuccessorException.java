@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.btree.keys;
 
-/**
- * An instance of this class is thrown where there is no successor to a value within its value
+/*
+* An instance of this class is thrown where there is no successor to a value within its value
  * space.
  */
 public class NoSuccessorException extends RuntimeException {

@@ -32,8 +32,8 @@ import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 import org.embergraph.service.ndx.NopAggregator;
 
-/**
- * Unisolated write operation makes consistent assertions on the <em>id:term</em> index based on the
+/*
+* Unisolated write operation makes consistent assertions on the <em>id:term</em> index based on the
  * data developed by the {@link Term2IdWriteProc} operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -44,7 +44,7 @@ public class Id2TermWriteProc extends AbstractKeyArrayIndexProcedure<Void>
   /** */
   private static final long serialVersionUID = -5480378815444534653L;
 
-  /**
+  /*
    * Enables validation that a pre-assigned term identifier is being consistently mapped onto the
    * same term. Errors are reported if, for example, the index has a record that a term identifier
    * is mapped onto one URL but the procedure was invoked with a different URI paired to that term
@@ -122,7 +122,7 @@ public class Id2TermWriteProc extends AbstractKeyArrayIndexProcedure<Void>
     }
   }
 
-  /**
+  /*
    * Conditionally inserts each key-value pair into the index. The keys are the term identifiers.
    * The values are the terms as serialized by {@link EmbergraphValueSerializer}. Since a
    * conditional insert is used, the operation does not cause terms that are already known to the
@@ -273,7 +273,7 @@ public class Id2TermWriteProc extends AbstractKeyArrayIndexProcedure<Void>
     return null;
   }
 
-  /**
+  /*
    * Nothing is returned, so nothing to aggregate, but uses a {@link NopAggregator} to preserve
    * striping against a local index.
    */

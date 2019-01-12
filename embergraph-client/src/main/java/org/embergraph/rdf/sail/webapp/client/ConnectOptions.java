@@ -26,7 +26,7 @@ import org.apache.http.HttpEntity;
 /** Options for the HTTP connection. */
 public class ConnectOptions extends AbstractConnectOptions {
 
-  /**
+  /*
    * Request entity.
    *
    * <p>TODO This field is read/written by the {@link RemoteRepository}. We should try to
@@ -37,7 +37,7 @@ public class ConnectOptions extends AbstractConnectOptions {
 
   private volatile String requestURL;
 
-  /**
+  /*
    * Return the effective request URL
    *
    * @param contextPath The context path of the web application.
@@ -51,8 +51,8 @@ public class ConnectOptions extends AbstractConnectOptions {
     if (requestURL == null) {
 
       if (useLBS) {
-        /*
-         * Use the HA load balancer.
+      /*
+       * Use the HA load balancer.
          */
         // Index of the WebApp ContextPath in the serviceURL.
         final int startContextPath = serviceURL.indexOf(contextPath);
@@ -78,7 +78,7 @@ public class ConnectOptions extends AbstractConnectOptions {
     return requestURL;
   }
 
-  /**
+  /*
    * Return the best URL for error reporting purposes. This is the <code>serviceURL</code> provided
    * to the constructor unless the {@link #getRequestURL(String, boolean)} has been set, in which
    * case that is returned instead.

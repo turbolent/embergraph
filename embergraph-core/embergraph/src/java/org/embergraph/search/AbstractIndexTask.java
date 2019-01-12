@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
 
-/**
- * Set up the from and to keys for the {@link ReadIndexTask} and {@link CountIndexTask}.
+/*
+* Set up the from and to keys for the {@link ReadIndexTask} and {@link CountIndexTask}.
  *
  * @param <V> The generic type of the document identifier.
  */
@@ -20,7 +20,7 @@ public abstract class AbstractIndexTask<V extends Comparable<V>> {
   protected final byte[] fromKey;
   protected final byte[] toKey;
 
-  /**
+  /*
    * Setup a task that will perform a range scan for entries matching the search term.
    *
    * @param termText The term text for the search term.

@@ -40,15 +40,15 @@ import org.embergraph.counters.IInstrument;
 import org.embergraph.counters.IRequiredHostCounters;
 import org.embergraph.counters.ProcessReaderHelper;
 
-/**
- * Collects some counters using <code>vmstat</code>.
+/*
+* Collects some counters using <code>vmstat</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class VMStatCollector extends AbstractProcessCollector
     implements ICounterHierarchy, IRequiredHostCounters, IHostCounters {
 
-  /**
+  /*
    * Inner class integrating the current values with the {@link ICounterSet} hierarchy.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -83,7 +83,7 @@ public class VMStatCollector extends AbstractProcessCollector
     }
   }
 
-  /**
+  /*
    * Double precision counter with scaling factor.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -113,7 +113,7 @@ public class VMStatCollector extends AbstractProcessCollector
     }
   }
 
-  /**
+  /*
    * Map containing the current values for the configured counters. The keys are paths into the
    * {@link CounterSet}. The values are the data most recently read from <code>vmstat</code>.
    */
@@ -122,7 +122,7 @@ public class VMStatCollector extends AbstractProcessCollector
   /** The timestamp associated with the most recently collected values. */
   private final AtomicLong lastModified = new AtomicLong(System.currentTimeMillis());
 
-  /**
+  /*
    * <code>true</code> iff you want collect the user time, system time, and IO WAIT time using
    * vmstat (as opposed to sar).
    */
@@ -132,7 +132,7 @@ public class VMStatCollector extends AbstractProcessCollector
   // Note: Exposed to the test suite.
   static final Pattern pattern = Pattern.compile("\\s+");
 
-  /**
+  /*
    * @param interval The interval for the collected statistics.
    * @param cpuStats <code>true</code> iff you want collect the user time, system time, and IO WAIT
    *     time using vmstat (as opposed to sar).
@@ -238,7 +238,7 @@ public class VMStatCollector extends AbstractProcessCollector
     return new VMStatReader();
   }
 
-  /**
+  /*
    * Sample output for <code>vmstat -n 1</code>, where <code>-n</code> suppresses the repeat of the
    * header and <code>1</code> is the interval.
    *
@@ -392,8 +392,8 @@ public class VMStatCollector extends AbstractProcessCollector
 
         } catch (Exception ex) {
 
-          /*
-           * Issue warning for parsing problems.
+        /*
+       * Issue warning for parsing problems.
            */
 
           log.warn(ex.getMessage() + "\nheader: " + header + "\n  data: " + data, ex);

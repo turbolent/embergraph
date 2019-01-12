@@ -44,8 +44,8 @@ import org.embergraph.service.Split;
 import org.embergraph.test.MockTermIdFactory;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for the {@link XXXCShardSplitHandler}.
+/*
+* Test suite for the {@link XXXCShardSplitHandler}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -76,7 +76,7 @@ public class TestXXXCShardSplitHandler extends AbstractTestSegSplitter {
     factory = null;
   }
 
-  /**
+  /*
    * Register a {@link BTree} against the journal, generate some data and commit the data.
    *
    * <p>Note: this uses {@link IV}[4] values to generate the keys, which is just like the statement
@@ -305,8 +305,8 @@ public class TestXXXCShardSplitHandler extends AbstractTestSegSplitter {
           assertTrue(BytesUtil.bytesEqual(separatorKey, tmp));
         }
 
-        /*
-         * Lookup the indexOf the prefix in the source B+Tree. For this
+      /*
+       * Lookup the indexOf the prefix in the source B+Tree. For this
          * unit test (and for the quad store indices) it will be an
          * insertion point (the separator key is a triple but the index
          * holds quads so the separator key will not be in the index).

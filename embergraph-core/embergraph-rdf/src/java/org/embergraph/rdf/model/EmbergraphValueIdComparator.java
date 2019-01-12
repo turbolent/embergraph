@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -43,8 +43,8 @@ package org.embergraph.rdf.model;
 import java.util.Comparator;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * Places {@link EmbergraphValue}s into an ordering determined by their assigned {@link
+/*
+* Places {@link EmbergraphValue}s into an ordering determined by their assigned {@link
  * EmbergraphValue#getIV() term identifiers}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -55,7 +55,7 @@ public class EmbergraphValueIdComparator implements Comparator<EmbergraphValue> 
   public static final transient Comparator<EmbergraphValue> INSTANCE =
       new EmbergraphValueIdComparator();
 
-  /**
+  /*
    * Note: comparison avoids possible overflow of <code>long</code> by not computing the difference
    * directly.
    */

@@ -25,8 +25,8 @@ package org.embergraph.relation.locator;
 
 import org.embergraph.btree.IIndex;
 
-/**
- * A locatable resource. Resources have a unique namespace and can be resolved and a view
+/*
+* A locatable resource. Resources have a unique namespace and can be resolved and a view
  * materialized using an {@link IResourceLocator}. There is a timestamp associated with the resource
  * - the timestamp is used to request {@link IIndex} views for the resource. There is a presumption
  * that resources are essentially logical "index containers".
@@ -37,23 +37,23 @@ import org.embergraph.btree.IIndex;
  */
 public interface ILocatableResource<T> {
 
-  /**
+  /*
    * Deferred initialization method is automatically invoked when the resource is materialized by
    * the {@link IResourceLocator}. The implementation is encouraged to strengthen the return type.
    */
-  public ILocatableResource<T> init();
+  ILocatableResource<T> init();
 
   /** The identifying namespace. */
-  public String getNamespace();
+  String getNamespace();
 
   /** The timestamp associated with the view of the resource. */
-  public long getTimestamp();
+  long getTimestamp();
 
-  /**
+  /*
    * The identifier for the containing resource.
    *
    * @return The identifier of the containing resource -or- <code>null</code> if there is no
    *     containing resource.
    */
-  public String getContainerNamespace();
+  String getContainerNamespace();
 }

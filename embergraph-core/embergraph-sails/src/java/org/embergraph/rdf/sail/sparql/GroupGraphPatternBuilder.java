@@ -70,8 +70,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Visitor handles the <code>GroupGraphPattern</code> production (aka the "WHERE" clause). This
+/*
+* Visitor handles the <code>GroupGraphPattern</code> production (aka the "WHERE" clause). This
  * includes <code>SubSelect</code> and <code>GraphPatternNotTriples</code>. ASTWhereClause has
  * GroupGraphPattern child which is a (SelectQuery (aka subquery)), GraphPattern (BasicGraphPattern
  * aka JoinGroup or GraphPatternNotTriples). The <code>TriplesBlock</code> is handled by the {@link
@@ -111,7 +111,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     return group;
   }
 
-  /**
+  /*
    * <code>( SelectQuery | GraphPattern )</code> - this is the common path for SubSelect and graph
    * patterns.
    *
@@ -151,8 +151,8 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
 
       if (node.jjtGetParent() instanceof ASTWhereClause) {
 
-        /**
-         * SubSelect as the WHERE clause. In this case the outer graph pattern group is a
+      /*
+       * SubSelect as the WHERE clause. In this case the outer graph pattern group is a
          * JoinGroupNode the SubSelect is embedded within an inner JoinGroupNode.
          *
          * <pre>
@@ -170,8 +170,8 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
 
       } else {
 
-        /**
-         * SubSelect embedded under the WHERE clause within its own graph pattern group by the {
+      /*
+       * SubSelect embedded under the WHERE clause within its own graph pattern group by the {
          * SELECT ... } syntax. For example
          *
          * <pre>
@@ -246,7 +246,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     return ret2;
   }
 
-  /**
+  /*
    * Note: while openrdf lifts the filters out of the optional, we do not need to do this per MikeP.
    */
   @Override
@@ -265,7 +265,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
 
     if (tmp instanceof SubqueryRoot) {
 
-      /**
+      /*
        * Sub-Select
        *
        * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/806>Incorrect computation of
@@ -290,7 +290,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     return null;
   }
 
-  /**
+  /*
    * MINUS is modeled very much like OPTIONAL in the embergraph AST. It is a {@link JoinGroupNode}
    * which is annotated to indicate the negation semantics.
    *
@@ -365,7 +365,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     return null;
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -485,7 +485,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     return null;
   }
 
-  /**
+  /*
    * A BIND (or FILTER) can appear in an {@link ASTBasicGraphPattern}.
    *
    * @return The {@link AssignmentNode} for the BIND -or- the
@@ -534,7 +534,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     return bind;
   }
 
-  /**
+  /*
    * @return An object which encapsulates both the ordered set of variables for which bindings exist
    *     and the set of binding sets. The bindings are {@link EmbergraphValue}s. They must be
    *     translated into {@link IV} through a batch resolution process before they can be passed
@@ -583,7 +583,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     }
   }
 
-  /**
+  /*
    * A LET is just an alternative syntax for BIND
    *
    * @return The {@link AssignmentNode}.
@@ -608,7 +608,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
     return bind;
   }
 
-  /**
+  /*
    * A FILTER. The filter is attached to the {@link #graphPattern}. However, it is also returned
    * from this method. The {@link ASTHavingClause} uses the return value.
    *
@@ -694,7 +694,7 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
   //        return null;
   //    }
 
-  /**
+  /*
    * SPARQL 1.1 SERVICE.
    *
    * <p>Note: The prefix declarations are attached to the {@link ASTServiceGraphPattern} by the
@@ -752,6 +752,6 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
 
     graphPattern.add(serviceNode);
 
-    return (Void) null;
+    return null;
   }
 }

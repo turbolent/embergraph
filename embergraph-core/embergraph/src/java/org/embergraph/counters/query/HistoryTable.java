@@ -8,8 +8,8 @@ import org.embergraph.counters.ICounter;
 import org.embergraph.counters.IHistoryEntry;
 import org.embergraph.counters.PeriodEnum;
 
-/**
- * A class representing one or more performance counter histories where those histories have been
+/*
+* A class representing one or more performance counter histories where those histories have been
  * aligned so that the individual timestamps for the performance counter values in each row are
  * aligned.
  *
@@ -25,13 +25,13 @@ public class HistoryTable {
   /** The selected counters. */
   public final ICounter[] a;
 
-  /**
+  /*
    * Identifies the history to be written for each of the selected counters by its based reporting
    * period.
    */
   public final PeriodEnum basePeriod;
 
-  /**
+  /*
    * @param a The selected counters.
    * @param basePeriod Identifies the history to be written for each of the selected counters by its
    *     based reporting period.
@@ -247,20 +247,20 @@ public class HistoryTable {
     }
   }
 
-  /**
+  /*
    * The logical slot into which the first sample falls for each of the specified counters. This is
    * just <code>timestamp/period</code> for the sample.
    */
   final long[] firstLogicalSlot;
 
-  /**
+  /*
    * The logical slots are adjusted to a common base (origin zero) by subtracting out the logical
    * slot of the counter with the earliest timestamp for any of the specified counters - this is the
    * value of {@link #firstLogicalSlot} at the {@link #firstSampleTimeIndex}.
    */
   final long logicalSlotOffset;
 
-  /**
+  /*
    * The index of the row into which the first sample for a counter falls is given by
    *
    * <pre>
@@ -280,31 +280,31 @@ public class HistoryTable {
   /** The most recent timestamp in the selected history units for any of the specified counters. */
   public final long lastTimestamp;
 
-  /**
+  /*
    * The index of the counter in the specified array having the greatest number of samples for the
    * selected history units.
    */
   final int maxSamplesIndex;
 
-  /**
+  /*
    * The index of the counter in the specified array whose first sample timestamp was selected as
    * the {@link #firstTimestamp} for the table.
    */
   final int firstSampleTimeIndex;
 
-  /**
+  /*
    * The index of the counter in the specified array whose last sample timestamp was selected as the
    * {@link #lastTimestamp} for the table.
    */
   final int lastSampleTimeIndex;
 
-  /**
+  /*
    * The index of the counter in the specified array with the greatest #of samples for the selected
    * history units.
    */
   final int maxSamples;
 
-  /**
+  /*
    * The #of rows in the table. This can be more than the #of samples. It is in fact the max(
    * sampleCount + rowOffset) for each counters.
    */
@@ -319,7 +319,7 @@ public class HistoryTable {
   /** The #of milliseconds in each unit for {@link #units}. */
   public final long period;
 
-  /**
+  /*
    * An array of the performance counter values. The first index is the row. The second index is the
    * column and is correlated with the array specified to the ctor. The rows of the performance
    * counters in the caller's array are aligned by first deciding which counter has the earliest
@@ -333,7 +333,7 @@ public class HistoryTable {
    */
   public final IHistoryEntry[][] data;
 
-  /**
+  /*
    * Return the timestamp for the row, which is the timestamp of first sample which would be allowed
    * into the logical slot for that row.
    *

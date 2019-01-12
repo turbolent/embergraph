@@ -40,8 +40,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.spo.SPO;
 import org.openrdf.model.URI;
 
-/**
- * Test suite for {@link IVComparator}.
+/*
+* Test suite for {@link IVComparator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -169,7 +169,7 @@ public class TestIVComparator extends TestCase2 {
     assertLT(c.compare(null, v.sid1));
   }
 
-  /**
+  /*
    * Unit test verifies the broad ordering which puts unbound values LT blank nodes LT uris LT
    * literals.
    */
@@ -206,7 +206,7 @@ public class TestIVComparator extends TestCase2 {
     assertEQ(c.compare(v.inline_xsd_byte1, v.inline_xsd_byte1));
   }
 
-  /**
+  /*
    * Unit test of the relative ordering of blank nodes (they are ordered by the {@link IV}'s natural
    * order in order to cause the same {@link IV}s to be groups).
    *
@@ -295,7 +295,7 @@ public class TestIVComparator extends TestCase2 {
     assertLT(c.compare(v.noninline_plain_lit1, v.noninline_plain_lit2));
   }
 
-  /**
+  /*
    * Unit test of order for language code literals having different language codes. The ordering is
    * lexiographic by language code and then by label within each language code.
    */
@@ -312,7 +312,7 @@ public class TestIVComparator extends TestCase2 {
     assertLT(c.compare(v.noninline_languageCode_de_lit1, v.noninline_languageCode_de_lit2));
   }
 
-  /**
+  /*
    * Unit test verifies the order imposed across the different datatypes (but not within those
    * datatypes).
    *
@@ -344,8 +344,8 @@ public class TestIVComparator extends TestCase2 {
     assertLT(c.compare(v.inline_xsd_dateTime1, v.noninline_xsd_string_lit1));
   }
 
-  //    /**
-  //     * Unit test comparing different kinds of inline and non-inline {@link IV}s.
+  //    /*
+//     * Unit test comparing different kinds of inline and non-inline {@link IV}s.
   //     */
   //    public void test_inline_with_noninline() {
   //

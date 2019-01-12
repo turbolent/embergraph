@@ -39,8 +39,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.task.AbstractApiTask;
 import org.embergraph.util.config.NicUtil;
 
-/**
- * Unit tests for the {@link NanoSparqlServer} with a focus on the ability to override the init
+/*
+* Unit tests for the {@link NanoSparqlServer} with a focus on the ability to override the init
  * parameters, the default http port, etc. This test suite is written without the proxy mechanisms
  * to make this easier to debug.
  *
@@ -128,7 +128,7 @@ public class TestNanoSparqlServer extends TestCase2 {
   private RemoteRepositoryManager m_repo;
   private HttpClient m_client;
 
-  /**
+  /*
    * Simple start/kill in which we verify that the default KB was NOT created and that the
    * explicitly create KB instance can still be resolved. This is basically a test of the ability to
    * override the init parameters in <code>web.xml</code> to specify the {@link

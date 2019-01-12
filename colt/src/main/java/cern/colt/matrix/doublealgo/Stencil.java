@@ -12,8 +12,8 @@ import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix2DProcedure;
 import cern.colt.matrix.DoubleMatrix3D;
 import cern.colt.matrix.DoubleMatrix3DProcedure;
-/**
- * Stencil operations. For efficient finite difference operations. Applies a function to a moving
+/*
+* Stencil operations. For efficient finite difference operations. Applies a function to a moving
  * <tt>3 x 3</tt> or <tt>3 x 3 x 3</tt> window. Build on top of
  * <tt>matrix.zAssignXXXNeighbors(...)</tt>. You can specify how many iterations shall at most be
  * done, a convergence condition when iteration shall be terminated, and how many iterations shall
@@ -26,7 +26,7 @@ import cern.colt.matrix.DoubleMatrix3DProcedure;
 public class Stencil extends Object {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Stencil() {}
-  /**
+  /*
    * 27 point stencil operation. Applies a function to a moving <tt>3 x 3 x 3</tt> window.
    *
    * @param A the matrix to operate on.
@@ -62,7 +62,7 @@ public class Stencil extends Object {
     }
     return i;
   }
-  /**
+  /*
    * 9 point stencil operation. Applies a function to a moving <tt>3 x 3</tt> window.
    *
    * @param A the matrix to operate on.

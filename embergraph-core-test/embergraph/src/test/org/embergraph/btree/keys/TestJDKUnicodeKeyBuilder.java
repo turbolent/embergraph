@@ -26,8 +26,8 @@ package org.embergraph.btree.keys;
 import java.util.Properties;
 import org.embergraph.btree.keys.KeyBuilder.Options;
 
-/**
- * @todo test factory methods for configuring various parameters.
+/*
+* @todo test factory methods for configuring various parameters.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */

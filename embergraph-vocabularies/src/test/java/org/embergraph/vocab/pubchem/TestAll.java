@@ -28,8 +28,8 @@ import junit.framework.TestSuite;
 import org.embergraph.rdf.store.ITripleStore;
 import org.embergraph.rdf.store.TestLocalTripleStore;
 
-/**
- * Runs tests for each {@link ITripleStore} implementation.
+/*
+* Runs tests for each {@link ITripleStore} implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -9,8 +9,8 @@ import org.embergraph.striterator.ChunkedResolvingIterator;
 import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * Base class for {@link IBuffer} whose target is a mutation (insert, delete, or update) of some
+/*
+* Base class for {@link IBuffer} whose target is a mutation (insert, delete, or update) of some
  * {@link IMutableRelation}.
  *
  * <p><strong>Note that this buffers chunks of {@link ISolution}s NOT relation elements.</strong>
@@ -39,7 +39,7 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
     this.relation = relation;
   }
 
-  /**
+  /*
    * Combines chunks of solutions together into a single chunk and then delegates to {@link
    * #flush(IChunkedOrderedIterator)}.
    *
@@ -83,8 +83,8 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
     return flush(itr);
   }
 
-  //    /**
-  //     *
+  //    /*
+//     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
   //     * @version $Id$
   //     * @param <E>
@@ -122,7 +122,7 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
   //
   //    }
 
-  /**
+  /*
    * Concrete implementations must process the {@link ISolution}s, causing the appropriate mutation
    * on the target {@link IRelation}.
    *
@@ -135,7 +135,7 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
    */
   protected abstract long flush(IChunkedOrderedIterator<ISolution<R>> itr);
 
-  /**
+  /*
    * Buffer writes on {@link IMutableRelation#insert(IChunkedIterator)} when it is {@link #flush()
    * flushed}.
    *
@@ -145,7 +145,7 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
    */
   public static class InsertSolutionBuffer<E> extends AbstractSolutionBuffer<E> {
 
-    /**
+    /*
      * @param capacity
      * @param relation
      */
@@ -171,7 +171,7 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
     }
   }
 
-  /**
+  /*
    * Buffer writes on {@link IMutableRelation#delete(IChunkedOrderedIterator)} when it is {@link
    * #flush() flushed}.
    *
@@ -181,7 +181,7 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
    */
   public static class DeleteSolutionBuffer<E> extends AbstractSolutionBuffer<E> {
 
-    /**
+    /*
      * @param capacity
      * @param relation
      */
@@ -219,8 +219,8 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
     }
   }
 
-  //    /**
-  //     * Buffer writes on
+  //    /*
+//     * Buffer writes on
   //     * {@link IMutableRelation#update(IChunkedOrderedIterator, ITransform)} when it is
   //     * {@link #flush() flushed}.
   //     *
@@ -233,8 +233,8 @@ public abstract class AbstractSolutionBuffer<R> extends AbstractArrayBuffer<ISol
   //
   //        private final ITransform<E> transform;
   //
-  //        /**
-  //         * @param capacity
+  //        /*
+//         * @param capacity
   //         * @param relation
   //         */
   //        public UpdateSolutionBuffer(int capacity, IMutableRelation<E> relation,

@@ -34,8 +34,8 @@ import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Vectored insert operator for RDF Statements. The solutions flowing through this operator MUST
+/*
+* Vectored insert operator for RDF Statements. The solutions flowing through this operator MUST
  * bind the <code>s</code>, <code>p</code>, <code>o</code>, and (depending on the database mode) MAY
  * bind the <code>c</code> variable. Those variables correspond to the Subject, Predicate, Object,
  * and Context/Graph position of an RDF {@link Statement} respectively. On input, the variables must

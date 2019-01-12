@@ -28,8 +28,8 @@ import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.IIndexProcedure;
 import org.embergraph.btree.proc.IParallelizableIndexProcedure;
 
-/**
- * Marker interface for procedures responsible for writing on an {@link IIndex} in order to satisfy
+/*
+* Marker interface for procedures responsible for writing on an {@link IIndex} in order to satisfy
  * an {@link IMutableRelation} write. Many relations maintain multiple index orders. There is
  * generally one such procedure for each index order. These procedures generally accept <code>
  * byte[][]</code> keys and values and therefore should extend {@link

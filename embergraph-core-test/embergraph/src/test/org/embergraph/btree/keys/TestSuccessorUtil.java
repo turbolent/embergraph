@@ -24,8 +24,8 @@ package org.embergraph.btree.keys;
 import java.util.Arrays;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link SuccessorUtil}.
+/*
+* Test suite for {@link SuccessorUtil}.
  *
  * @todo finish the double precision tests per the single precision tests, e.g., for
  *     successor(double), etc.
@@ -82,19 +82,19 @@ public class TestSuccessorUtil extends TestCase2 {
     assertTrue(SuccessorUtil.DNEG_ZERO == SuccessorUtil.DPOS_ZERO);
   }
 
-  //    /**
-  //     * The double precision number that is one less than zero in the double
+  //    /*
+//     * The double precision number that is one less than zero in the double
   //     * precision value space.
   //     */
   //    final protected double dm1 = Double.longBitsToDouble(UnicodeKeyBuilder.d2l(0d)-1);
   //
-  //    /**
-  //     * The double precision number that is one more than zero in the double
+  //    /*
+//     * The double precision number that is one more than zero in the double
   //     * precision value space.
   //     */
   //    final protected double DPOS_ONE = Double.longBitsToDouble(UnicodeKeyBuilder.d2l(0d)-1);
 
-  /**
+  /*
    * The value space for <code>float</code> and <code>double</code> is complex. The "next" floating
    * point value is defined in terms of the next bit pattern for the underlying floating point
    * representation. Also, we have to be aware of the trade off between precision and magnitude, the
@@ -131,7 +131,7 @@ public class TestSuccessorUtil extends TestCase2 {
         Float.intBitsToFloat(1073741826));
   }
 
-  /**
+  /*
    * Now verify the successor for each of the data points that we verified in the previous test as
    * being successors in the float value space.
    */
@@ -146,7 +146,7 @@ public class TestSuccessorUtil extends TestCase2 {
     assertZeroUlps(2.00000048f, SuccessorUtil.successor(2.00000024f));
   }
 
-  /**
+  /*
    * Test a few values from the middle of the negative region of the value space. The successor is
    * formed by subtracting one from the integer representation when in the negative value space.
    */
@@ -164,7 +164,7 @@ public class TestSuccessorUtil extends TestCase2 {
     assertZeroUlps(neg2, SuccessorUtil.successor(neg1));
   }
 
-  /**
+  /*
    * Verifies some data points that we use in the next test. These test data were derived from:
    *
    * <p><a href="http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm">
@@ -215,7 +215,7 @@ public class TestSuccessorUtil extends TestCase2 {
         Float.intBitsToFloat(-2147483645));
   }
 
-  /**
+  /*
    * Verifies that the successor function imposes the correct ordering as we approach and cross zero
    * from the positive region of the value space into the negative region of the value space. Note
    * that the value set includes not only the finite nonzero values, NaN values, and positive
@@ -315,7 +315,7 @@ public class TestSuccessorUtil extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verifies that there is no successor for negative infinity.
    *
    * @todo Alternatively, we could make the successor the largest negative floating point value - if

@@ -10,8 +10,8 @@ package cern.colt.matrix.impl;
 
 import cern.colt.matrix.ObjectMatrix1D;
 import cern.colt.matrix.ObjectMatrix2D;
-/**
- * Dense 1-d matrix (aka <i>vector</i>) holding <tt>Object</tt> elements. First see the <a
+/*
+* Dense 1-d matrix (aka <i>vector</i>) holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -37,7 +37,7 @@ import cern.colt.matrix.ObjectMatrix2D;
 public class DenseObjectMatrix1D extends ObjectMatrix1D {
   /** The elements of this matrix. */
   protected Object[] elements;
-  /**
+  /*
    * Constructs a matrix with a copy of the given values. The values are copied. So subsequent
    * changes in <tt>values</tt> are not reflected in the matrix, and vice-versa.
    *
@@ -47,7 +47,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     this(values.length);
     assign(values);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of cells. All entries are initially <tt>0</tt>.
    *
    * @param size the number of cells the matrix shall have.
@@ -57,7 +57,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     setUp(size);
     this.elements = new Object[size];
   }
-  /**
+  /*
    * Constructs a matrix view with the given parameters.
    *
    * @param size the number of cells the matrix shall have.
@@ -72,7 +72,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     this.elements = elements;
     this.isNoView = false;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>values</tt>. <tt>values</tt> is required to have
    * the same number of cells as the receiver.
    *
@@ -94,7 +94,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[i] = function(x[i])</tt>. (Iterates
    * downwards from <tt>[size()-1]</tt> to <tt>[0]</tt>).
    *
@@ -127,7 +127,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     }
     return this;
   }
-  /**
+  /*
    * Replaces all cell values of the receiver with the values of another matrix. Both matrices must
    * have the same size. If both matrices share the same cells (as is the case if they are views
    * derived from the same matrix) and intersect in an ambiguous way, then replaces <i>as if</i>
@@ -172,7 +172,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[i] = function(x[i],y[i])</tt>. (Iterates
    * downwards from <tt>[size()-1]</tt> to <tt>[0]</tt>).
    *
@@ -227,7 +227,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     }
     return this;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>index</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -254,7 +254,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     }
     return false;
   }
-  /**
+  /*
    * Returns the position of the element with the given relative rank within the (virtual or
    * non-virtual) internal 1-dimensional array. You may want to override this method for
    * performance.
@@ -266,7 +266,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     // return _offset(_rank(rank));
     return zero + rank * stride;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified size. For example, if the receiver is an instance of type
    * <tt>DenseObjectMatrix1D</tt> the new matrix must also be of type <tt>DenseObjectMatrix1D</tt>,
@@ -280,7 +280,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
   public ObjectMatrix1D like(int size) {
     return new DenseObjectMatrix1D(size);
   }
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseObjectMatrix1D</tt> the new matrix must be of type <tt>DenseObjectMatrix2D</tt>, if
@@ -294,7 +294,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
   public ObjectMatrix2D like2D(int rows, int columns) {
     return new DenseObjectMatrix2D(rows, columns);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>index</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -310,7 +310,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     // manually inlined:
     elements[zero + index * stride] = value;
   }
-  /**
+  /*
    * Swaps each element <tt>this[i]</tt> with <tt>other[i]</tt>.
    *
    * @throws IllegalArgumentException if <tt>size() != other.size()</tt>.
@@ -341,7 +341,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     }
     return;
   }
-  /**
+  /*
    * Fills the cell values into the specified 1-dimensional array. The values are copied. So
    * subsequent changes in <tt>values</tt> are not reflected in the matrix, and vice-versa. After
    * this call returns the array <tt>values</tt> has the form <br>
@@ -354,7 +354,7 @@ public class DenseObjectMatrix1D extends ObjectMatrix1D {
     if (this.isNoView) System.arraycopy(this.elements, 0, values, 0, this.elements.length);
     else super.toArray(values);
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param offsets the offsets of the visible elements.

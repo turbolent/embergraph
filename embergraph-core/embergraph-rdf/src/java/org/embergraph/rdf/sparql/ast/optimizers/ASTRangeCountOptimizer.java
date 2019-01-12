@@ -43,8 +43,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
-/**
- * Attach range counts to all statement patterns in the query.
+/*
+* Attach range counts to all statement patterns in the query.
  *
  * @author mikepersonick
  */
@@ -70,7 +70,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
     }
   }
 
-  /**
+  /*
    * Use the {@link SPORelation} from the database to grab the appropriate range counts for the
    * {@link StatementPatternNode}s. Only tries to attach them if the annotation {@link
    * Annotations#ESTIMATED_CARDINALITY} is not already attached to the node. This makes it possible
@@ -130,7 +130,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
     }
   }
 
-  /**
+  /*
    * Task unconditionally obtains the range count for the {@link StatementPatternNode}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -162,7 +162,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
     }
   }
 
-  /**
+  /*
    * For testing purposes we can override this method.
    *
    * @param sp
@@ -232,7 +232,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
     sp.setProperty(Annotations.ORIGINAL_INDEX, ap.getKeyOrder());
   }
 
-  /**
+  /*
    * Helper method grabs the IV out of the TermNode, doing the appropriate NULL and constant/var
    * checks.
    *
@@ -260,7 +260,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
 
     if (term != null && term.isConstant()) {
 
-      final IV iv = ((IConstant<IV>) term.getValueExpression()).get();
+      final IV iv = term.getValueExpression().get();
 
       if (iv == null) {
 
@@ -276,7 +276,7 @@ public class ASTRangeCountOptimizer extends AbstractJoinGroupOptimizer implement
     }
   }
 
-  /**
+  /*
    * Return the exogenous bindings.
    *
    * <p>Note: This is considering only a single exogenous solution. It can not really use more than

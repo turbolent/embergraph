@@ -23,8 +23,8 @@ import java.util.concurrent.locks.Lock;
 import org.embergraph.rawstore.IAllocationContext;
 import org.embergraph.rawstore.IStreamStore;
 
-/**
- * The {@link IStore} interface provides persistent storage abstraction for fixed size allocations
+/*
+* The {@link IStore} interface provides persistent storage abstraction for fixed size allocations
  * and allocation recycling.
  */
 public interface IStore extends IAllocationManager, IStreamStore, IHistoryManager {
@@ -34,38 +34,38 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //	 **/
   //	public boolean preserveSessionData();
 
-  /**
+  /*
    * Writes data on the store.
    *
    * @return the allocated address
    */
-  public long alloc(byte buf[], int size, IAllocationContext context);
+  long alloc(byte[] buf, int size, IAllocationContext context);
 
-  /**
+  /*
    * Frees allocated storage (clears the bit to enable recycling after the next commit).
    *
    * @param addr the storage address to be freed
    */
-  public void free(long addr, int size);
+  void free(long addr, int size);
 
-  /**
+  /*
    * Optionally return a {@link Lock} that must be used (when non- <code>null</code>) to make the
    * {@link #commit()} / {@link #postCommit()} strategy atomic.
    */
-  public Lock getCommitLock();
+  Lock getCommitLock();
 
-  /**
+  /*
    * Global commit on the backing store. Previously committed data which has been marked as {@link
    * #free(long, int)} is now available for recycling. However, recycling can not occur if session
    * protection is active.
    */
-  public void commit();
+  void commit();
 
-  /**
+  /*
    * Hook that supports synchronization with an external commit before which a rollback to
    * "pre-commit" state is supported.
    */
-  public void postCommit();
+  void postCommit();
 
   //	/**************************************************************
   //	 * Odd method needed by PSInputStream to fetch data of unknown
@@ -81,21 +81,21 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //	 **/
   //	public int getDataSize(long addr, byte buf[]);
 
-  /**
+  /*
    * Read data of a known size from the store.
    *
    * @param addr the address of the data
    * @param buf the buffer of the size required!
    */
-  public void getData(long addr, byte buf[]);
+  void getData(long addr, byte[] buf);
 
-  /**
+  /*
    * ************************************************************
    *
    * @param addr - the address
    * @return the size of the slot associated
    */
-  public int getAssociatedSlotSize(int addr);
+  int getAssociatedSlotSize(int addr);
 
   //	/**************************************************************
   //	 * Given a physical address (byte offset on the store), return true
@@ -105,37 +105,37 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //	 **/
   //	public boolean verify(long a);
 
-  //	/**
-  //	 * The {@link RWStore} always generates negative address values.
+  //	/*
+//	 * The {@link RWStore} always generates negative address values.
   //	 *
   //	 * @return whether the address given is a native IStore address
   //	 */
   //	public boolean isNativeAddress(long value);
 
-  //	/**
-  //	 * useful in debug situations
+  //	/*
+//	 * useful in debug situations
   //	 *
   //	 * @return store allocation and usage statistics
   //	 */
   //	public String getStats(boolean full);
 
   /** Close the backing storage. */
-  public void close();
+  void close();
 
-  //	/**
-  //	 * Needed by PSOutputStream for BLOB buffer chaining.
+  //	/*
+//	 * Needed by PSOutputStream for BLOB buffer chaining.
   //	 */
   //	public int bufferChainOffset();
 
-  /**
+  /*
    * Retrieves store file. Can be used to delete the store after the IStore has been released
    *
    * @return the File object
    */
-  public File getStoreFile();
+  File getStoreFile();
 
-  //	/**
-  //	 * Called by the PSOutputStream to register the header block of a blob. The
+  //	/*
+//	 * Called by the PSOutputStream to register the header block of a blob. The
   //	 * store must return a new address that is used to retrieve the blob header.
   //	 * This double indirection is required to be able to manage the blobs, since
   //	 * the blob header itself is of variable size and is handled by the standard
@@ -148,8 +148,8 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //	 */
   //	public int registerBlob(int addr);
 
-  //    /**
-  //     * Return an output stream which can be used to write on the backing store.
+  //    /*
+//     * Return an output stream which can be used to write on the backing store.
   //     * You can recover the address used to read back the data from the
   //     * {@link IPSOutputStream}.
   //     *
@@ -157,8 +157,8 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //     */
   //    public IPSOutputStream getOutputStream();
   //
-  //    /**
-  //     * Return an output stream which can be used to write on the backing store
+  //    /*
+//     * Return an output stream which can be used to write on the backing store
   //     * within the given allocation context. You can recover the address used to
   //     * read back the data from the {@link IPSOutputStream}.
   //     *
@@ -171,13 +171,13 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //     */
   //    public IPSOutputStream getOutputStream(final IAllocationContext context);
   //
-  //    /**
-  //     * @return an input stream for the data for provided address
+  //    /*
+//     * @return an input stream for the data for provided address
   //     */
   //    public InputStream getInputStream(long addr);
 
-  //    /**
-  //     * Call made from AbstractJournal to register the cache used. This can then
+  //    /*
+//     * Call made from AbstractJournal to register the cache used. This can then
   //     * be accessed to clear entries when storage is made available for
   //     * re-cycling.
   //     * <p>
@@ -194,8 +194,8 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //            ConcurrentWeakValueCache<Long, ICommitter> historicalIndexCache,
   //            int byteCount);
 
-  //    /**
-  //     * Saves the current list of delete blocks, returning the address allocated.
+  //    /*
+//     * Saves the current list of delete blocks, returning the address allocated.
   //     * This can be used later to retrieve the addresses of allocations to be
   //     * freed.
   //     *
@@ -209,8 +209,8 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //     */
   //    public long saveDeferrals();
   //
-  //    /**
-  //     * Called prior to commit, so check whether storage can be freed and then
+  //    /*
+//     * Called prior to commit, so check whether storage can be freed and then
   //     * whether the deferred header needs to be saved.
   //     * <p>
   //     * Note: The caller MUST be holding the {@link #m_allocationLock}.
@@ -222,8 +222,8 @@ public interface IStore extends IAllocationManager, IStreamStore, IHistoryManage
   //     */
   //    public int checkDeferredFrees(AbstractJournal abstractJournal);
 
-  //    /**
-  //     * A hook used to support session protection by incrementing and
+  //    /*
+//     * A hook used to support session protection by incrementing and
   //     * decrementing a transaction counter within the {@link IStore}. As long as
   //     * a transaction is active we can not release data which is currently marked
   //     * as freed but was committed at the point the session started.

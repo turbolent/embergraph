@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.jet.random.engine;
 
-/**
- * Abstract base class for uniform pseudo-random number generating engines.
+/*
+* Abstract base class for uniform pseudo-random number generating engines.
  *
  * <p>Most probability distributions are obtained by using a <b>uniform</b> pseudo-random number
  * generation engine followed by a transformation to the desired distribution. Thus, subclasses of
@@ -42,28 +42,28 @@ public abstract class RandomEngine extends cern.colt.PersistentObject
     implements cern.colt.function.DoubleFunction, cern.colt.function.IntFunction {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected RandomEngine() {}
-  /**
+  /*
    * Equivalent to <tt>raw()</tt>. This has the effect that random engines can now be used as
    * function objects, returning a random number upon function evaluation.
    */
   public double apply(double dummy) {
     return raw();
   }
-  /**
+  /*
    * Equivalent to <tt>nextInt()</tt>. This has the effect that random engines can now be used as
    * function objects, returning a random number upon function evaluation.
    */
   public int apply(int dummy) {
     return nextInt();
   }
-  /**
+  /*
    * Constructs and returns a new uniform random number engine seeded with the current time.
    * Currently this is {@link cern.jet.random.engine.MersenneTwister}.
    */
   public static RandomEngine makeDefault() {
     return new cern.jet.random.engine.MersenneTwister((int) System.currentTimeMillis());
   }
-  /**
+  /*
    * Returns a 64 bit uniformly distributed random number in the open unit interval <code>(0.0,1.0)
    * </code> (excluding 0.0 and 1.0).
    */
@@ -97,7 +97,7 @@ public abstract class RandomEngine extends cern.colt.PersistentObject
     	nextLong == -2L-100000L            --> 0.49999999999999456
     */
   }
-  /**
+  /*
    * Returns a 32 bit uniformly distributed random number in the open unit interval <code>
    * (0.0f,1.0f)</code> (excluding 0.0f and 1.0f).
    */
@@ -111,13 +111,13 @@ public abstract class RandomEngine extends cern.colt.PersistentObject
     // --> in (0.0f,1.0f)
     return nextFloat;
   }
-  /**
+  /*
    * Returns a 32 bit uniformly distributed random number in the closed interval
    * <tt>[Integer.MIN_VALUE,Integer.MAX_VALUE]</tt> (including <tt>Integer.MIN_VALUE</tt> and
    * <tt>Integer.MAX_VALUE</tt>);
    */
   public abstract int nextInt();
-  /**
+  /*
    * Returns a 64 bit uniformly distributed random number in the closed interval
    * <tt>[Long.MIN_VALUE,Long.MAX_VALUE]</tt> (including <tt>Long.MIN_VALUE</tt> and
    * <tt>Long.MAX_VALUE</tt>).
@@ -126,7 +126,7 @@ public abstract class RandomEngine extends cern.colt.PersistentObject
     // concatenate two 32-bit strings into one 64-bit string
     return ((nextInt() & 0xFFFFFFFFL) << 32) | ((nextInt() & 0xFFFFFFFFL));
   }
-  /**
+  /*
    * Returns a 32 bit uniformly distributed random number in the open unit interval <code>(0.0,1.0)
    * </code> (excluding 0.0 and 1.0).
    */

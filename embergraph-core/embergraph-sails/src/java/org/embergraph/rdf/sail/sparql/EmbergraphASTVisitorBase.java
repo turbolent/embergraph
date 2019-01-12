@@ -46,8 +46,8 @@ import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Base class for AST visitor impls.
+/*
+* Base class for AST visitor impls.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @openrdf
@@ -61,7 +61,7 @@ public abstract class EmbergraphASTVisitorBase extends ASTVisitorBase {
     this.context = context;
   }
 
-  /**
+  /*
    * Return the depth of the node in the parse tree. The depth is ZERO (0) if the node does not have
    * a parent.
    *
@@ -80,7 +80,7 @@ public abstract class EmbergraphASTVisitorBase extends ASTVisitorBase {
     return i;
   }
 
-  /**
+  /*
    * Return a white space string which may be used to indent the node to its depth in the parse
    * tree.
    *
@@ -92,7 +92,7 @@ public abstract class EmbergraphASTVisitorBase extends ASTVisitorBase {
     return indent(depth(node));
   }
 
-  /**
+  /*
    * Returns a string that may be used to indent a dump of the nodes in the tree.
    *
    * @param depth The indentation depth.
@@ -140,7 +140,7 @@ public abstract class EmbergraphASTVisitorBase extends ASTVisitorBase {
    * Productions used by different ASTVisitor facets.
    */
 
-  /**
+  /*
    * Note: openrdf uses the {@link BlankNodeVarProcessor} create anonymous variables from blank
    * nodes and then flags those as anonymous variables in this step.
    */
@@ -203,7 +203,7 @@ public abstract class EmbergraphASTVisitorBase extends ASTVisitorBase {
     return node.getValue();
   }
 
-  /**
+  /*
    * Builds a fresh {@link GroupGraphPattern} that inherits the scope for the given node. This is
    * done by looking up the scope of the given node by following its ancestor chain, to identify
    * whether the node has some named graph ancestors. If so, the scope from the enclosing named
@@ -233,7 +233,7 @@ public abstract class EmbergraphASTVisitorBase extends ASTVisitorBase {
     return new GroupGraphPattern();
   }
 
-  /**
+  /*
    * Returns the enclosing ASTGraphGraphPattern ancestor-or-self for the given node, or null if none
    * exists.
    *

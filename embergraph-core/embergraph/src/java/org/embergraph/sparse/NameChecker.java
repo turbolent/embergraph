@@ -24,8 +24,8 @@ package org.embergraph.sparse;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Utility class validates column and schema name constraints.
+/*
+* Utility class validates column and schema name constraints.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -35,7 +35,7 @@ public class NameChecker {
   /** The constraint on schema and column names. */
   public static final Pattern pattern_name = Pattern.compile("[\\w._\\-/]+");
 
-  /**
+  /*
    * Assert that the string is valid as the name of a schema. Names must be alphanumeric and may
    * also include any of {<code>.</code>, <code>_</code>, <code>-</code>, or <code>/</code>}.
    *
@@ -55,7 +55,7 @@ public class NameChecker {
     if (!m.matches()) throw new IllegalArgumentException();
   }
 
-  /**
+  /*
    * Assert that the string is valid as the name of a column. Names must be alphanumeric and may
    * also include any of {<code>.</code>, <code>_</code>, or <code>/</code>}.
    *

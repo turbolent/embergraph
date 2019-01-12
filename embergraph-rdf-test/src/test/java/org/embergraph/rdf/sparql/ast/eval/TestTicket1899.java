@@ -23,8 +23,8 @@ import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Test suite for a NotMaterializedException caused by HTree hash index built. The test is defined
+/*
+* Test suite for a NotMaterializedException caused by HTree hash index built. The test is defined
  * over geospatial data, which gives us LiteralExtensionIVs allowing to reproduce the problem.
  *
  * @see <a href="https://jira.blazegraph.com/browse/BLZG-1899">NotMaterializedException caused by

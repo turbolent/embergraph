@@ -53,8 +53,8 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * Proxied test suite for the Multi-Tenancy API.
+/*
+* Proxied test suite for the Multi-Tenancy API.
  *
  * <p>TODO Verify that the URLs in the VoID and ServiceDescription are correct for both the default
  * sparql end point and for each namespace specific sparql end point. We have to correctly
@@ -79,7 +79,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
         TestMode.quads);
   }
 
-  /**
+  /*
    * A model of a VoID summary of a data set.
    *
    * <p>Note: This contains just the information which is provided for the NSS method which
@@ -87,7 +87,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
    * Service Description for a specific end point.
    */
   static class VoidSummary {
-    /**
+    /*
      * The {@link Graph} from which the summary was extracted. The summary is specific to the data
      * set identified to the constructor. The {@link Graph} MAY contain descriptions of many data
      * sets.
@@ -102,7 +102,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
     /** The sparql end point URL(s) for the data set. */
     final List<URI> sparqlEndpoint = new LinkedList<URI>();
 
-    /**
+    /*
      * @param dataset The {@link Resource} used to model the data set in the {@link Graph}.
      * @param g The {@link Graph} containing the description of that data set.
      */
@@ -142,7 +142,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
     }
   }
 
-  /**
+  /*
    * Return an index over the {@link VoidSummary} collection using the namespace of the data set as
    * the key for the index.
    *
@@ -161,7 +161,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
     return map;
   }
 
-  /**
+  /*
    * Extract the VoID summary of the known data sets.
    *
    * @return The VoID summary of the known data sets.
@@ -236,7 +236,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
 
   }
 
-  /**
+  /*
    * Verify the ability to obtain the effective configuration properties for the default data set.
    *
    * <p>FIXME Should /properties also work or just namespace/kb/properties?
@@ -379,7 +379,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
     }
   }
 
-  /**
+  /*
    * Unit test creates one (or more) namespaces, verifies that we can list the namespaces, verifies
    * that we can obtain the effective properties for each namespace, verifies that we can obtain the
    * ServiceDescription for the namespaces, verifies that we can Query/Update each namespace, and
@@ -401,7 +401,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
     doTestCreate(namespace2);
   }
 
-  /**
+  /*
    * Test for correct URL encoding of the namespace in the URL requests.
    *
    * @throws Exception
@@ -424,7 +424,7 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
     doTestCreate(namespace2);
   }
 
-  /**
+  /*
    * Test verifies rejecting an incorrect string as a namespace name.
    *
    * @throws Exception
@@ -579,8 +579,8 @@ public class TestMultiTenancyAPI<S extends IIndexManager> extends AbstractTestNa
               .evaluate();
         }
 
-        /*
-         * TODO Test the other REST API methods
+      /*
+       * TODO Test the other REST API methods
          * (InsertServlet,DeleteServlet). This will verify that the
          * servlet routing is correct for all of those parts of the API
          * (this could also be done by running the base NSS test suite

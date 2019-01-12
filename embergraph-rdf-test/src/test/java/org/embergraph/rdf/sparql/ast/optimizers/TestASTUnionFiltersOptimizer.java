@@ -40,8 +40,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for {@link ASTUnionFiltersOptimizer}.
+/*
+* Test suite for {@link ASTUnionFiltersOptimizer}.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id: TestASTEmptyGroupOptimizer.java 5302 2011-10-07 14:28:03Z thompsonbry $
@@ -113,16 +113,14 @@ public class TestASTUnionFiltersOptimizer extends AbstractOptimizerTestCase {
                   new FunctionNode(
                       FunctionRegistry.OR,
                       null /*scalarValues*/,
-                      new ValueExpressionNode[] {
-                        new FunctionNode(
-                            FunctionRegistry.SAME_TERM,
-                            null /*scalarValues*/,
-                            new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t1)}),
-                        new FunctionNode(
-                            FunctionRegistry.SAME_TERM,
-                            null /*scalarValues*/,
-                            new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t2)})
-                      }))));
+                      new FunctionNode(
+                          FunctionRegistry.SAME_TERM,
+                          null /*scalarValues*/,
+                          new VarNode("type"), new ConstantNode(t1)),
+                      new FunctionNode(
+                          FunctionRegistry.SAME_TERM,
+                          null /*scalarValues*/,
+                          new VarNode("type"), new ConstantNode(t2))))));
 
       given.setProjection(projection);
       given.setWhereClause(where);
@@ -151,16 +149,14 @@ public class TestASTUnionFiltersOptimizer extends AbstractOptimizerTestCase {
               new FunctionNode(
                   FunctionRegistry.OR,
                   null /*scalarValues*/,
-                  new ValueExpressionNode[] {
-                    new FunctionNode(
-                        FunctionRegistry.SAME_TERM,
-                        null /*scalarValues*/,
-                        new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t1)}),
-                    new FunctionNode(
-                        FunctionRegistry.SAME_TERM,
-                        null /*scalarValues*/,
-                        new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t2)})
-                  })));
+                  new FunctionNode(
+                      FunctionRegistry.SAME_TERM,
+                      null /*scalarValues*/,
+                      new VarNode("type"), new ConstantNode(t1)),
+                  new FunctionNode(
+                      FunctionRegistry.SAME_TERM,
+                      null /*scalarValues*/,
+                      new VarNode("type"), new ConstantNode(t2)))));
 
       final JoinGroupNode right = new JoinGroupNode();
       right.addChild(
@@ -174,16 +170,14 @@ public class TestASTUnionFiltersOptimizer extends AbstractOptimizerTestCase {
               new FunctionNode(
                   FunctionRegistry.OR,
                   null /*scalarValues*/,
-                  new ValueExpressionNode[] {
-                    new FunctionNode(
-                        FunctionRegistry.SAME_TERM,
-                        null /*scalarValues*/,
-                        new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t1)}),
-                    new FunctionNode(
-                        FunctionRegistry.SAME_TERM,
-                        null /*scalarValues*/,
-                        new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t2)})
-                  })));
+                  new FunctionNode(
+                      FunctionRegistry.SAME_TERM,
+                      null /*scalarValues*/,
+                      new VarNode("type"), new ConstantNode(t1)),
+                  new FunctionNode(
+                      FunctionRegistry.SAME_TERM,
+                      null /*scalarValues*/,
+                      new VarNode("type"), new ConstantNode(t2)))));
 
       union.addChild(left);
       union.addChild(right);

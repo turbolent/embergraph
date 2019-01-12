@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.embergraph.util.concurrent.ThreadPoolExecutorBaseStatisticsTask;
 
-/**
- * Plugin for sampling the {@link ExecutorService}. This collects interesting statistics about the
+/*
+* Plugin for sampling the {@link ExecutorService}. This collects interesting statistics about the
  * thread pool for reporting to the load balancer service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -37,7 +37,7 @@ public class QueueStatsPlugIn implements IPlugIn<Journal, ThreadPoolExecutorBase
   /** Performance counters options. */
   public interface Options {
 
-    /**
+    /*
      * Boolean option for the collection of statistics from the various queues using to run tasks
      * (default {@link #DEFAULT_COLLECT_QUEUE_STATISTICS}).
      */
@@ -46,7 +46,7 @@ public class QueueStatsPlugIn implements IPlugIn<Journal, ThreadPoolExecutorBase
     String DEFAULT_COLLECT_QUEUE_STATISTICS = "false";
   }
 
-  /**
+  /*
    * Collects interesting statistics on the {@link ExecutorService}.
    *
    * <p>Note: Guarded by synchronized(this).
@@ -55,14 +55,14 @@ public class QueueStatsPlugIn implements IPlugIn<Journal, ThreadPoolExecutorBase
    */
   private ThreadPoolExecutorBaseStatisticsTask queueSampleTask = null;
 
-  /**
+  /*
    * The {@link ScheduledFuture} for the task.
    *
    * <p>Note: Guarded by synchronized(this).
    */
   private ScheduledFuture<?> scheduledFuture = null;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Setup sampling on the client's thread pool.
@@ -123,9 +123,7 @@ public class QueueStatsPlugIn implements IPlugIn<Journal, ThreadPoolExecutorBase
   public boolean isRunning() {
 
     synchronized (this) {
-      if (scheduledFuture == null || scheduledFuture.isDone()) return false;
-
-      return true;
+      return scheduledFuture != null && !scheduledFuture.isDone();
     }
   }
 }

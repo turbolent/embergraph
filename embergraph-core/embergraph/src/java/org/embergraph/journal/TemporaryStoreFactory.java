@@ -35,8 +35,8 @@ import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.InnerCause;
 
-/**
- * Helper class for {@link IIndexStore#getTempStore()}. This class is very light weight.
+/*
+* Helper class for {@link IIndexStore#getTempStore()}. This class is very light weight.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -45,26 +45,26 @@ public class TemporaryStoreFactory {
 
   private static final transient Logger log = Logger.getLogger(TemporaryStoreFactory.class);
 
-  /**
+  /*
    * Configuration options for the {@link TemporaryStoreFactory}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface Options {
 
-    /**
+    /*
      * The directory within which the {@link TemporaryStore}s will be created. The default is
      * whichever directory is specified by the Java system property <code>java.io.tmpdir</code>.
      */
     String TMP_DIR = TemporaryStoreFactory.class.getName() + ".tmpDir";
 
-    /**
+    /*
      * The Java system property whose value is the default directory for the {@link TemporaryStore}s
      * created by this factory ( <code>java.io.tmpdir</code>).
      */
     String JAVA_TMP_DIR_PROPERTY = "java.io.tmpdir";
 
-    /**
+    /*
      * The #of bits in a 64-bit long integer identifier that are used to encode the byte offset of a
      * record in the store as an unsigned integer. The default is {@link
      * WormAddressManager#SCALE_UP_OFFSET_BITS}.
@@ -76,7 +76,7 @@ public class TemporaryStoreFactory {
 
     String DEFAULT_OFFSET_BITS = "" + WormAddressManager.SCALE_UP_OFFSET_BITS;
 
-    /**
+    /*
      * The maximum extent of the existing {@link TemporaryStore} before {@link
      * Journal#getTempStore()} will return a new {@link TemporaryStore} instance (default {@value
      * #DEFAULT_TEMPORARY_STORE_MAX_EXTENT}).
@@ -92,7 +92,7 @@ public class TemporaryStoreFactory {
      */
     String MAX_EXTENT = TemporaryStoreFactory.class.getName() + ".maxExtent";
 
-    /**
+    /*
      * The default maximum extent ({@value #DEFAULT_MAX_EXTENT}). A new {@link TemporaryStore} will
      * be created by {@link #getTempStore()} when the extent of the current {@link TemporaryStore}
      * reaches this value. However, the temporary store will continue to grow as long as there are
@@ -116,7 +116,7 @@ public class TemporaryStoreFactory {
     String DEFAULT_MAX_EXTENT = "" + (1 * Bytes.gigabyte);
   }
 
-  /**
+  /*
    * The current {@link TemporaryStore}. This is initially <code>null</code>. If there are no strong
    * references to the current {@link TemporaryStore} then this reference can be cleared by GC and
    * the store will be automatically closed and its backing file deleted on the disk.
@@ -126,20 +126,20 @@ public class TemporaryStoreFactory {
   /** The directory within which the temporary files will be created. */
   private final File tmpDir;
 
-  /**
+  /*
    * The offset bits for the {@link TemporaryStore} instances.
    *
    * @see WormAddressManager
    */
   private final int offsetBits;
 
-  /**
+  /*
    * The maximum extent of the current {@link TemporaryStore} before a new instance will be returned
    * by {@link #getTempStore()}.
    */
   private final long maxExtent;
 
-  /**
+  /*
    * Constructor uses the Java system properties to configure the factory. The {@link Options} may
    * be used to override the defaults if specified in the environment or on the JVM command line.
    */
@@ -152,7 +152,7 @@ public class TemporaryStoreFactory {
         Long.valueOf(System.getProperty(Options.MAX_EXTENT, Options.DEFAULT_MAX_EXTENT)));
   }
 
-  /**
+  /*
    * Constructor uses the caller's properties object to configure the factory.
    *
    * @param properties Properties used to configure the factory.
@@ -167,7 +167,7 @@ public class TemporaryStoreFactory {
         Long.valueOf(properties.getProperty(Options.MAX_EXTENT, Options.DEFAULT_MAX_EXTENT)));
   }
 
-  /**
+  /*
    * Constructor uses the caller's values to configure the factory.
    *
    * @param tmpDir The directory within which the {@link TemporaryStore} files will be created.
@@ -203,7 +203,7 @@ public class TemporaryStoreFactory {
     }
   }
 
-  /**
+  /*
    * Return a {@link TemporaryStore}. If there is no existing {@link TemporaryStore} then a new
    * instance is returned. If there is an existing {@link TemporaryStore} and its extent is greater
    * then the configured maximum extent then a new {@link TemporaryStore} will be created and
@@ -231,7 +231,7 @@ public class TemporaryStoreFactory {
     return t;
   }
 
-  /**
+  /*
    * Weak value cache of the open temporary stores. Temporary stores are automatically cleared from
    * this cache after they have become only weakly reachable. Temporary stores are closed by a
    * finalizer, and are deleted when closed. It is possible that a temporary store will not be

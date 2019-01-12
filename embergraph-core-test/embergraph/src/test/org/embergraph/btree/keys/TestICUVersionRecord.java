@@ -25,8 +25,8 @@ import com.ibm.icu.util.VersionInfo;
 import junit.framework.TestCase2;
 import org.embergraph.io.SerializerUtil;
 
-/**
- * Test suite for {@link ICUVersionRecord}
+/*
+* Test suite for {@link ICUVersionRecord}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

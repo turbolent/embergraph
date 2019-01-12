@@ -10,8 +10,8 @@ import org.embergraph.sparse.IRowStoreConstants;
 import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.ITPV;
 
-/**
- * A read-only view of a {@link Document} that has been read from a {@link EmbergraphFileSystem}.
+/*
+* A read-only view of a {@link Document} that has been read from a {@link EmbergraphFileSystem}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -22,13 +22,13 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
 
   private final String id;
 
-  /**
+  /*
    * The result of the atomic read on the file's metadata. This representation is significantly
    * richer than the current set of property values.
    */
   final ITPS tps;
 
-  /**
+  /*
    * The current version identifer -or- <code>-1</code> iff there is no current version for the file
    * (including when there is no record of any version for the file).
    */
@@ -37,7 +37,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
   /** The property set for the current file version. */
   private final Map<String, Object> metadata;
 
-  /**
+  /*
    * Read the metadata for the current version of the file from the repository.
    *
    * @param id The file identifier.
@@ -61,14 +61,14 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
 
       if (tmp.getValue() != null) {
 
-        /*
-         * Note the current version identifer.
+      /*
+       * Note the current version identifer.
          */
 
         this.version = (Integer) tmp.getValue();
 
-        /*
-         * Save a simplifed view of the propery set for the current
+      /*
+       * Save a simplifed view of the propery set for the current
          * version.
          */
 
@@ -78,8 +78,8 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
 
       } else {
 
-        /*
-         * No current version.
+      /*
+       * No current version.
          */
 
         this.version = -1;
@@ -124,7 +124,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
     }
   }
 
-  /**
+  /*
    * Read the metadata for the current version of the file from the repository.
    *
    * @param id The file identifier.
@@ -143,7 +143,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
                 null /* filter */));
   }
 
-  /**
+  /*
    * Assert that a version of the file existed when this view was constructed.
    *
    * @throws IllegalStateException unless a version of the file existed at the time that this view
@@ -169,7 +169,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
     return (Integer) metadata.get(FileMetadataSchema.VERSION);
   }
 
-  /**
+  /*
    * Note: This is obtained from the earliest available timestamp of the {@link
    * FileMetadataSchema#ID} property.
    */
@@ -218,7 +218,7 @@ public class RepositoryDocumentImpl implements DocumentHeader, Document {
     return metadataUpdateTime;
   }
 
-  /**
+  /*
    * Return an array containing all non-eradicated values of the {@link FileMetadataSchema#VERSION}
    * property for this file as of the time that this view was constructed.
    *

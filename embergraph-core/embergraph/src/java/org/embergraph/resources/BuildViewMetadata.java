@@ -11,8 +11,8 @@ import org.embergraph.btree.IndexSegment;
 import org.embergraph.btree.view.FusedView;
 import org.embergraph.service.Event;
 
-/**
- * Helper class examines an index partition view and returns a view for which we can quickly do an
+/*
+* Helper class examines an index partition view and returns a view for which we can quickly do an
  * incremental build. The given view is always the real index partition view. The identified view
  * will include one or more of the sources in the given view. The first component of the given view
  * is always included in the identified view and will be the {@link BTree} from a journal.
@@ -41,7 +41,7 @@ class BuildViewMetadata {
   /** #of sources in the accepted view. */
   public final int naccepted;
 
-  /**
+  /*
    * <code>true</code> iff all sources were incorporated into the accepted view, in which case the
    * build will be a compacting merge and deleted tuples will be purged.
    */
@@ -53,7 +53,7 @@ class BuildViewMetadata {
   /** #of index segments incorporated into the accepted view. */
   public final int segmentCount;
 
-  /**
+  /*
    * The sum of the entryCount for each source incorporated into the accepted view. The entryCount
    * will reflect both deleted and undeleted tuples for that source. There may also exist a tuple
    * for the same key in more than one source. Therefore this does not give the #of distinct tuples
@@ -84,7 +84,7 @@ class BuildViewMetadata {
     return sb.toString();
   }
 
-  /**
+  /*
    * Figure out which sources we want to include. We MUST always include the 1st source in the view
    * since that is the mutable BTree on the old journal. We continue to include sources in the view
    * until incorporating a source into the view would exceed the specified thresholds. We stop there
@@ -125,16 +125,16 @@ class BuildViewMetadata {
       long sumSegBytes = 0L;
       for (int i = 1; i < sources.length; i++) {
 
-        /*
-         * Values for this source (2nd+ source only).
+      /*
+       * Values for this source (2nd+ source only).
          */
         final AbstractBTree s = sources[i];
         final long entryCount = s.getEntryCount();
         final boolean isJournal = !(s instanceof IndexSegment);
         final long segBytes = (isJournal ? 0L : s.getStore().size());
 
-        /*
-         * Terminate if too much data to include in an incremental
+      /*
+       * Terminate if too much data to include in an incremental
          * build.
          */
         // final int BUILD_MAX_JOURNAL_COUNT = 3;
@@ -145,8 +145,8 @@ class BuildViewMetadata {
         // break;
         if (sumSegBytes + segBytes > maxSumSegBytes) break;
 
-        /*
-         * Update the running totals.
+      /*
+       * Update the running totals.
          */
         sumEntryCount += entryCount;
 
@@ -181,7 +181,7 @@ class BuildViewMetadata {
 
       if (naccepted == 1) {
 
-        acceptedView = (BTree) accepted.get(0);
+        acceptedView = accepted.get(0);
 
       } else {
 

@@ -9,8 +9,8 @@ import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-/**
- * {@link Serializable} class wraps a {@link RemoteFuture} delegating methods through to the {@link
+/*
+* {@link Serializable} class wraps a {@link RemoteFuture} delegating methods through to the {@link
  * Future} on the remote service while masquerading {@link IOException}s so that we can implement
  * the {@link Future} API.
  *
@@ -38,7 +38,7 @@ public class ClientFuture<T> implements Future<T>, Serializable {
     this.proxy = proxy;
   }
 
-  /**
+  /*
    * Note: I have observed problems where an attempt to cancel a remote future fails when DGC is
    * enabled. The stack trace looks like:
    *

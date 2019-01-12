@@ -15,8 +15,8 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph.impl.util;
 
-/**
- * An interface for a managed int[]. Implementations of this interface may permit transparent
+/*
+* An interface for a managed int[]. Implementations of this interface may permit transparent
  * extension of the managed int[].
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -27,7 +27,7 @@ public interface IManagedIntArray extends IIntArraySlice {
   /** Return the capacity of the backing buffer. */
   int capacity();
 
-  /**
+  /*
    * Ensure that the buffer capacity is a least <i>capacity</i> total values. The buffer may be
    * grown by this operation but it will not be truncated.
    *

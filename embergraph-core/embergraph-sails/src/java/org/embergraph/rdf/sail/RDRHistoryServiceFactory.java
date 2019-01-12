@@ -102,7 +102,7 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
     throw new UnsupportedOperationException("deprecated");
   }
 
-  /**
+  /*
    * Make sure we've got the right stuff in there - two statement patterns plus optional filters.
    */
   private void verifyGroup(final GraphPatternGroup<IGroupMemberNode> group) {
@@ -112,7 +112,7 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
     }
   }
 
-  /**
+  /*
    * Register an {@link IChangeLog} listener that will manage the maintenance of the describe cache.
    */
   @Override
@@ -238,8 +238,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
 
         final IStriterator sitr = new Striterator(titr);
 
-        /*
-         * Resolve ITuple -> ISPO.
+      /*
+       * Resolve ITuple -> ISPO.
          */
         sitr.addFilter(
             new Resolver() {
@@ -252,8 +252,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
               }
             });
 
-        /*
-         * Filter against bound terms.
+      /*
+       * Filter against bound terms.
          */
         sitr.addFilter(
             new Filter() {
@@ -262,8 +262,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
               @Override
               public boolean isValid(final Object e) {
                 toIVs((ISPO) e, ivs);
-                /*
-                 * Compare against the asBound predicate.
+              /*
+       * Compare against the asBound predicate.
                  */
                 for (int i = 0; i < 5; i++) {
                   final IVariableOrConstant term = asBound.get(i);
@@ -278,8 +278,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
               }
             });
 
-        /*
-         * Resolve ISPO -> IBindingSet (one to many).
+      /*
+       * Resolve ISPO -> IBindingSet (one to many).
          */
         sitr.addFilter(
             new Expander() {
@@ -296,8 +296,8 @@ public class RDRHistoryServiceFactory implements CustomServiceFactory {
                       @Override
                       protected Object resolve(final Object e) {
                         final IBindingSet bs = ((IBindingSet) e).clone();
-                        /*
-                         * Bind variables in the result.
+                      /*
+       * Bind variables in the result.
                          */
                         for (int i = 0; i < 5; i++) {
                           final IVariableOrConstant term = asBound.get(i);

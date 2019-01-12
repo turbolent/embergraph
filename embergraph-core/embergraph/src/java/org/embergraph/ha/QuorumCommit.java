@@ -25,8 +25,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 import org.embergraph.quorum.Quorum;
 
-/**
- * A non-remote interface for a member service in a {@link Quorum} defining methods to support
+/*
+* A non-remote interface for a member service in a {@link Quorum} defining methods to support
  * service the 2-phase quorum commit protocol.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -38,7 +38,7 @@ public interface QuorumCommit<S extends HACommitGlue> { // extends QuorumService
    * quorum commit.
    */
 
-  /**
+  /*
    * Used by the leader to send a message to each joined service in the quorum instructing it to
    * flush all writes to the backing channel, and acknowledge "yes" if ready to commit. If the
    * service can not prepare for any reason, then it must return "no". The service must save a copy
@@ -50,7 +50,7 @@ public interface QuorumCommit<S extends HACommitGlue> { // extends QuorumService
   PrepareResponse prepare2Phase(PrepareRequest req)
       throws InterruptedException, TimeoutException, IOException;
 
-  /**
+  /*
    * Used by the leader to send a message to each joined service in the quorum telling it to commit
    * using the root block from the corresponding {@link #prepare2Phase(PrepareRequest) prepare}
    * message. The commit MAY NOT go forward unless both the current quorum token and the
@@ -59,7 +59,7 @@ public interface QuorumCommit<S extends HACommitGlue> { // extends QuorumService
    */
   CommitResponse commit2Phase(CommitRequest req) throws IOException, InterruptedException;
 
-  /**
+  /*
    * Used by the leader to send a message to each service joined with the quorum telling it to
    * discard its write set, reloading all state from the last root block. If the node has not
    * observed the corresponding "prepare" message then it should ignore this message.

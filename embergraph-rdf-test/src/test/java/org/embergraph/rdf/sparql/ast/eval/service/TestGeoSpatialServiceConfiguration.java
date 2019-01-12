@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite testing configurability of GeoSpatial service. The query set is a subset
+/*
+* Data driven test suite testing configurability of GeoSpatial service. The query set is a subset
  * of queries from {@link TestGeoSpatialServiceEvaluation}, with possible modifications to account
  * for the changed configuration.
  *
@@ -45,7 +45,7 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
     super(name);
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -61,7 +61,7 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
         .runTest();
   }
 
-  /**
+  /*
    * Compared to the circle01* queries, the query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -81,7 +81,7 @@ public class TestGeoSpatialServiceConfiguration extends AbstractDataDrivenSPARQL
         .runTest();
   }
 
-  /**
+  /*
    * Verify precision handling, which is changed in the configuration to be 6 for the first
    * component and 5 for the second one. See {@link
    * TestGeoSpatialServiceEvaluation#testInRectangleQuery08()} for baseline.

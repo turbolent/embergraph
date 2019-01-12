@@ -27,8 +27,8 @@ import org.embergraph.io.DirectBufferPoolAllocator.Allocation;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocation;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
 
-/**
- * Test suite for {@link DirectBufferPoolAllocator}.
+/*
+* Test suite for {@link DirectBufferPoolAllocator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -62,7 +62,7 @@ public class TestDirectBufferPoolAllocator extends TestCase2 {
     fixture.close();
   }
 
-  /**
+  /*
    * Unit test verifies that {@link IAllocationContext}s created for different keys are distinct.
    */
   public void test_allocationContextsAreDistinct() {
@@ -88,7 +88,7 @@ public class TestDirectBufferPoolAllocator extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Opens the allocator, creates an {@link IAllocationContext}, obtains an {@link IAllocation} from
    * that context, and then releases the {@link IAllocationContext}. The test also verifies that the
    * {@link ByteBuffer} was released back to the {@link DirectBufferPool}.
@@ -161,8 +161,8 @@ public class TestDirectBufferPoolAllocator extends TestCase2 {
     }
   }
 
-  //    /**
-  //     * @todo Write a unit test to look for a memory leak in the backing
+  //    /*
+//     * @todo Write a unit test to look for a memory leak in the backing
   //     *       {@link DirectBufferPool} as allocations are released from the
   //     *       {@link DirectBufferPoolAllocator}. However, not that the
   //     *       {@link DirectBufferPool} DOES NOT release buffers back to the JVM
@@ -176,7 +176,7 @@ public class TestDirectBufferPoolAllocator extends TestCase2 {
   //
   //    }
 
-  /**
+  /*
    * Unit tests for multiple allocations within the same. This verifies both the the manner in which
    * the position and limit are updated as we walk through the buffer.
    *
@@ -219,8 +219,8 @@ public class TestDirectBufferPoolAllocator extends TestCase2 {
     }
   }
 
-  //    /**
-  //     * @todo write a unit test for
+  //    /*
+//     * @todo write a unit test for
   //     *       {@link DirectBufferPoolAllocator#put(byte[], IAllocation[])}.
   //     */
   //    public void test_put() {

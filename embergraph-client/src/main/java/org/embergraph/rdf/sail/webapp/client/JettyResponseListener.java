@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -43,13 +44,13 @@ public class JettyResponseListener extends InputStreamResponseListener {
   private volatile Response m_response;
   private volatile InputStream m_cachedStream = null;
 
-  /**
+  /*
    * Note: This is the default content encoding for <code>text/*</code> per Section 3.7.1
    * Canonicalization and Text Defaults of the HTTP 1.1 specification.
    */
   private static final String ISO_8859_1 = "ISO-8859-1";
 
-  /**
+  /*
    * @param request
    * @param queryTimeoutMillis the timeout in milliseconds (if non-positive, then an infinite
    *     timeout is used).
@@ -60,7 +61,7 @@ public class JettyResponseListener extends InputStreamResponseListener {
     this.queryTimeoutMillis = queryTimeoutMillis <= 0L ? Long.MAX_VALUE : queryTimeoutMillis;
   }
 
-  /**
+  /*
    * Blocks (up to a timeout) for the response to arrive (http status code, etc.)
    *
    * @throws IOException if there is a problem, if there is a timeout, etc.
@@ -82,7 +83,7 @@ public class JettyResponseListener extends InputStreamResponseListener {
     }
   }
 
-  /**
+  /*
    * Return the value of the <code>Content-Type</code> header.
    *
    * @return
@@ -96,7 +97,7 @@ public class JettyResponseListener extends InputStreamResponseListener {
     return headers.get(HttpHeader.CONTENT_TYPE);
   }
 
-  /**
+  /*
    * Return the content encoding specified by the <code>charset</code> MIME parameter for the <code>
    * Content-Type</code> header and <code>null</code> if that MIME type parameter was not specified.
    *
@@ -157,13 +158,13 @@ public class JettyResponseListener extends InputStreamResponseListener {
     {
       final String contentEncoding = getContentEncoding();
       if (contentEncoding != null) {
-        /*
-         * Explicit content encoding.
+      /*
+       * Explicit content encoding.
          */
         r = new InputStreamReader(getInputStream(), contentEncoding);
       } else if (getContentType() != null && getContentType().startsWith("text/")) {
-        /**
-         * Note: Per Section 3.7.1 Canonicalization and Text Defaults of the HTTP 1.1 specification:
+      /*
+       * Note: Per Section 3.7.1 Canonicalization and Text Defaults of the HTTP 1.1 specification:
          *
          * <p>The "charset" parameter is used with some media types to define the character set
          * (section 3.4) of the data. When no explicit charset parameter is provided by the sender,
@@ -172,10 +173,10 @@ public class JettyResponseListener extends InputStreamResponseListener {
          * its subsets MUST be labeled with an appropriate charset value. See section 3.4.1 for
          * compatibility problems.
          */
-        r = new InputStreamReader(getInputStream(), ISO_8859_1);
+        r = new InputStreamReader(getInputStream(), StandardCharsets.ISO_8859_1);
       } else {
-        /*
-         * Also per that section, no default otherwise.
+      /*
+       * Also per that section, no default otherwise.
          */
         r = new InputStreamReader(getInputStream());
       }
@@ -226,7 +227,7 @@ public class JettyResponseListener extends InputStreamResponseListener {
     return m_cachedStream;
   }
 
-  /**
+  /*
    * Abort the request/response. The request is associated with the http request/response is
    * aborted. If we already have the response, then it's {@link InputStream} is closed.
    */
@@ -236,7 +237,7 @@ public class JettyResponseListener extends InputStreamResponseListener {
     abort(new IOException());
   }
 
-  /**
+  /*
    * Abort the request/response. The request is associated with the http request/response is
    * aborted. If we already have the response, then it's {@link InputStream} is closed.
    *

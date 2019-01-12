@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
-/**
- * Base class for collection of performance counters as reported by a native process.
+/*
+* Base class for collection of performance counters as reported by a native process.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public abstract class AbstractProcessCollector implements IStatisticsCollector {
 
   protected ActiveProcess activeProcess;
 
-  /**
+  /*
    * @param interval The interval at which the performance counters will be read in milliseconds.
    */
   public AbstractProcessCollector(final int interval) {
@@ -62,7 +62,7 @@ public abstract class AbstractProcessCollector implements IStatisticsCollector {
     env.put("LC_NUMERIC", "C");
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Creates the {@link ActiveProcess} and the {@link

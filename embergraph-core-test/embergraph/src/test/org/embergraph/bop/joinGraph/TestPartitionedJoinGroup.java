@@ -36,8 +36,8 @@ import org.embergraph.bop.ap.Predicate;
 import org.embergraph.bop.constraint.Constraint;
 import org.embergraph.bop.constraint.NEConstant;
 
-/**
- * Unit tests for {@link PartitionedJoinGroup}.
+/*
+* Unit tests for {@link PartitionedJoinGroup}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -223,8 +223,8 @@ public class TestPartitionedJoinGroup extends TestCase2 {
                 new int[] {p1.getId(), p0.getId()}, false // pathIsComplete
                 ));
 
-        /*
-         * c1 is applied when x is bound. x is bound by p0. p0 is the
+      /*
+       * c1 is applied when x is bound. x is bound by p0. p0 is the
          * last predicate in this join path, so c1 is attached to p0.
          */
         assertEquals(
@@ -233,8 +233,8 @@ public class TestPartitionedJoinGroup extends TestCase2 {
                 new int[] {p0.getId()}, false // pathIsComplete
                 ));
 
-        /*
-         * c2 is applied when y is bound. y is bound by p1. p1 is the
+      /*
+       * c2 is applied when y is bound. y is bound by p1. p1 is the
          * last predicate in this join path, p1 is the last predicate in
          * this join path so c2 is attached to p1.
          */
@@ -250,7 +250,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * A test when there are optional joins involved. In this test, we again start with LUBM Q2, but
    * the predicates which would bind <code>z</code> are both marked as optional. This should shift
    * the constraint on [z] into the tail plan as well.
@@ -408,15 +408,15 @@ public class TestPartitionedJoinGroup extends TestCase2 {
     }
   }
 
-  //    /**
-  //     * @todo test with headPlan (actually, I think that we will remove
+  //    /*
+//     * @todo test with headPlan (actually, I think that we will remove
   //     * the head plan from the PartitionedJoinGraph).
   //     */
   //    public void test_something_headPlan() {
   //        fail("write tests");
   //    }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -429,7 +429,7 @@ public class TestPartitionedJoinGroup extends TestCase2 {
     assertSameIteratorAnyOrder("", expected, actual);
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".

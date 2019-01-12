@@ -30,8 +30,8 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.htree.HTree;
 import org.embergraph.relation.accesspath.IBuffer;
 
-/**
- * Interface for hash index build and hash join operations.
+/*
+* Interface for hash index build and hash join operations.
  *
  * <h2>Use cases</h2>
  *
@@ -65,7 +65,7 @@ public interface IHashJoinUtility {
   /** Return the type safe enumeration indicating what kind of operation is to be performed. */
   JoinTypeEnum getJoinType();
 
-  /**
+  /*
    * The variable bound based on whether or not a solution survives an "EXISTS" graph pattern
    * (optional).
    *
@@ -73,28 +73,28 @@ public interface IHashJoinUtility {
    */
   IVariable<?> getAskVar();
 
-  /**
+  /*
    * The join variables.
    *
    * @see HashJoinAnnotations#JOIN_VARS
    */
   IVariable<?>[] getJoinVars();
 
-  /**
+  /*
    * The variables to be retained (optional, all variables are retained if not specified).
    *
    * @see JoinAnnotations#SELECT
    */
   IVariable<?>[] getSelectVars();
 
-  /**
+  /*
    * Returns true if the projection outputs the distinct join vars (in that case, the variables
    * delivered by {{@link #getSelectVars()} will be ignored, might even be uninitialized). See
    * {@link HashJoinAnnotations#OUTPUT_DISTINCT_JVs}.
    */
-  public boolean isOutputDistinctJoinVars();
+  boolean isOutputDistinctJoinVars();
 
-  /**
+  /*
    * The join constraints (optional).
    *
    * @see JoinAnnotations#CONSTRAINTS
@@ -110,7 +110,7 @@ public interface IHashJoinUtility {
   /** Discard the hash index. */
   void release();
 
-  /**
+  /*
    * Buffer solutions on a hash index.
    *
    * <p>When <code>optional:=true</code>, solutions which do not have a binding for one or more of
@@ -124,7 +124,7 @@ public interface IHashJoinUtility {
    */
   long acceptSolutions(ICloseableIterator<IBindingSet[]> itr, BOpStats stats);
 
-  /**
+  /*
    * Filter solutions, writing only the DISTINCT solutions onto the sink.
    *
    * @param itr The source solutions.
@@ -135,7 +135,7 @@ public interface IHashJoinUtility {
   long filterSolutions(
       ICloseableIterator<IBindingSet[]> itr, BOpStats stats, IBuffer<IBindingSet> sink);
 
-  /**
+  /*
    * Do a hash join between a stream of source solutions (left) and a hash index (right). For each
    * left solution, the hash index (right) is probed for possible matches (solutions whose as-bound
    * values for the join variables produce the same hash code). Possible matches are tested for
@@ -158,7 +158,7 @@ public interface IHashJoinUtility {
   void hashJoin(
       ICloseableIterator<IBindingSet[]> leftItr, BOpStats stats, IBuffer<IBindingSet> outputBuffer);
 
-  /**
+  /*
    * Variant hash join method allows the caller to impose different constraints or additional
    * constraints. This is used to impose join constraints when a solution set is joined back into a
    * query based on the join filters in the join group in which the solution set is included.
@@ -179,7 +179,7 @@ public interface IHashJoinUtility {
       IBuffer<IBindingSet> outputBuffer,
       IConstraint[] constraints);
 
-  /**
+  /*
    * Perform an N-way merge join. For an OPTIONAL join, <i>this</i> instance is understood to be the
    * index having the "required" solutions.
    *
@@ -224,7 +224,7 @@ public interface IHashJoinUtility {
   /** Checkpoint the generated hash index such that it becomes safe for concurrent readers. */
   void saveSolutionSet();
 
-  /**
+  /*
    * Identify and output the optional solutions. This is used with OPTIONAL and NOT EXISTS.
    *
    * <p>Optionals are identified using a <i>joinSet</i> containing each right solution which joined
@@ -236,7 +236,7 @@ public interface IHashJoinUtility {
    */
   void outputOptionals(IBuffer<IBindingSet> outputBuffer);
 
-  /**
+  /*
    * Output the solutions buffered in the hash index. This is used when an operator is building a
    * hash index for use by a downstream operator.
    *
@@ -244,7 +244,7 @@ public interface IHashJoinUtility {
    */
   void outputSolutions(IBuffer<IBindingSet> out);
 
-  /**
+  /*
    * Return an {@link Iterator} that visits all solutions in the index (index scan). The visited
    * solutions MAY contain variables that would not be projected out of the hash join.
    *
@@ -256,7 +256,7 @@ public interface IHashJoinUtility {
    */
   ICloseableIterator<IBindingSet> indexScan();
 
-  /**
+  /*
    * Output the solutions which joined. This is used with EXISTS.
    *
    * @param out Where to write the solutions.

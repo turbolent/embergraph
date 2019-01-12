@@ -21,8 +21,8 @@ package org.apache.system;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * Parses the Windows XP environment.
+/*
+* Parses the Windows XP environment.
  *
  * @author <a href="mailto:dev@avalon.apache.org">Avalon Development Team</a>
  * @version $Id$
@@ -59,7 +59,7 @@ public final class WindowsXP implements CPUParser {
     return m_processors;
   }
 
-  /**
+  /*
    * Return the cpu info for the processors (assuming symetric multiprocessing which means that all
    * CPUs are identical). The format is:
    *

@@ -19,8 +19,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.spo;
 
-/**
- * Factory for the single element <code>byte[]</code> used for the value of an RDF Statement in one
+/*
+* Factory for the single element <code>byte[]</code> used for the value of an RDF Statement in one
  * of the statement indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -40,7 +40,7 @@ public class RDFValueFactory {
     return table;
   }
 
-  /**
+  /*
    * Return the B+Tree value for an RDF Statement given its byte value.
    *
    * @param i The byte value of the Statement.

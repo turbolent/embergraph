@@ -41,8 +41,8 @@ import org.embergraph.util.BytesUtil;
 
 // import java.net.SocketOption;
 
-/**
- * Test suite for basic socket behaviors.
+/*
+* Test suite for basic socket behaviors.
  *
  * <p>Note: Tests in this suite should use direct byte buffers (non-heap NIO) buffers in order
  * accurately model the conditions that embergraph uses for write replication. If you use heap
@@ -66,8 +66,8 @@ public class TestSocketsDirect extends TestCase3 {
   }
 
   // FIXME RESTORE WHEN WE MOVE TO JAVA 7.
-  //    /**
-  //     * Writes out the available options for the client and server socket.
+  //    /*
+//     * Writes out the available options for the client and server socket.
   //     *
   //     * @throws IOException
   //     */
@@ -135,7 +135,7 @@ public class TestSocketsDirect extends TestCase3 {
   //
   //    }
 
-  /**
+  /*
    * Simple test of connecting to a server socket and the failure to connect to a port not
    * associated with a server socket.
    *
@@ -171,8 +171,8 @@ public class TestSocketsDirect extends TestCase3 {
       // Now the first Client SocketChannel
       final SocketChannel cs1 = SocketChannel.open();
       try {
-        /*
-         * Note: true if connection made. false if connection in
+      /*
+       * Note: true if connection made. false if connection in
          * progress.
          */
         final boolean immediate1 = cs1.connect(serverAddr1);
@@ -214,7 +214,7 @@ public class TestSocketsDirect extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * Test of a large write on a socket to understand what happens when the write is greater than the
    * combined size of the client send buffer and the server receive buffer and the server side of
    * the socket is either not accepted or already shutdown.
@@ -253,8 +253,8 @@ public class TestSocketsDirect extends TestCase3 {
       // Now the first Client SocketChannel
       final SocketChannel cs = SocketChannel.open();
       try {
-        /*
-         * Note: true if connection made. false if connection in
+      /*
+       * Note: true if connection made. false if connection in
          * progress.
          */
         final boolean immediate = cs.connect(serverAddr);
@@ -265,8 +265,8 @@ public class TestSocketsDirect extends TestCase3 {
           }
         }
 
-        /*
-         * Attempt to write data. The server socket is not yet accepted.
+      /*
+       * Attempt to write data. The server socket is not yet accepted.
          * This should hit a timeout.
          */
         assertTimeout(10L, TimeUnit.SECONDS, new WriteBufferTask(cs, ByteBuffer.wrap(largeBuffer)));
@@ -283,7 +283,7 @@ public class TestSocketsDirect extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * The use of threaded tasks in the send/receive service makes it difficult to observer the socket
    * state changes.
    *
@@ -337,8 +337,8 @@ public class TestSocketsDirect extends TestCase3 {
       }
 
       {
-        /*
-         * InputStream for server side of socket connection - set below and
+      /*
+       * InputStream for server side of socket connection - set below and
          * then reused outside of the try/finally block.
          */
         InputStream instr = null;
@@ -347,8 +347,8 @@ public class TestSocketsDirect extends TestCase3 {
         final SocketChannel cs1 = SocketChannel.open();
         try {
 
-          /*
-           * Note: true if connection made. false if connection in
+        /*
+       * Note: true if connection made. false if connection in
            * progress.
            */
           final boolean immediate1 = cs1.connect(serverAddr);
@@ -360,8 +360,8 @@ public class TestSocketsDirect extends TestCase3 {
 
           assertTrue(ss.getChannel() == null);
 
-          /*
-           * We are connected.
+        /*
+       * We are connected.
            */
 
           final ByteBuffer src = ByteBuffer.wrap(data);
@@ -369,8 +369,8 @@ public class TestSocketsDirect extends TestCase3 {
           // Write some data on the client socket.
           cs1.write(src);
 
-          /*
-           * Accept client's connection on server (after connect and
+        /*
+       * Accept client's connection on server (after connect and
            * write).
            */
           final Socket readSckt1 = accept(ss);
@@ -387,8 +387,8 @@ public class TestSocketsDirect extends TestCase3 {
 
           assertTrue(ss.getChannel() == null);
 
-          /*
-           * Attempting to read more returns ZERO because there is
+        /*
+       * Attempting to read more returns ZERO because there is
            * nothing in the buffer and the connection is still open on
            * the client side.
            *
@@ -399,8 +399,8 @@ public class TestSocketsDirect extends TestCase3 {
           assertEquals(0, instr.available());
           // assertEquals(0, instr.read(dst));
 
-          /*
-           * Now write some more data into the channel and *then*
+        /*
+       * Now write some more data into the channel and *then*
            * close it.
            */
           cs1.write(ByteBuffer.wrap(data));
@@ -412,8 +412,8 @@ public class TestSocketsDirect extends TestCase3 {
           assertTrue(readSckt1.isConnected());
           assertFalse(readSckt1.isClosed());
 
-          /*
-           * Now try writing some more data. This should be disallowed
+        /*
+       * Now try writing some more data. This should be disallowed
            * since we closed the client side of the socket.
            */
           try {
@@ -423,8 +423,8 @@ public class TestSocketsDirect extends TestCase3 {
             // expected
           }
 
-          /*
-           * Since we closed the client side of the socket, when we
+        /*
+       * Since we closed the client side of the socket, when we
            * try to read more data on the server side of the
            * connection. The data that we already buffered is still
            * available on the server side of the socket.
@@ -436,8 +436,8 @@ public class TestSocketsDirect extends TestCase3 {
             assertTrue(BytesUtil.bytesEqual(data, dst));
           }
 
-          /*
-           * We have drained the buffered data. There is no more
+        /*
+       * We have drained the buffered data. There is no more
            * buffered data and client side is closed, so an attempt to
            * read more data on the server side of the socket will
            * return EOF (-1).
@@ -448,8 +448,8 @@ public class TestSocketsDirect extends TestCase3 {
           readSckt1.close();
           assertTrue(readSckt1.isClosed());
 
-          /*
-           * Still reports EOF after the accepted server socket is
+        /*
+       * Still reports EOF after the accepted server socket is
            * closed.
            */
           assertEquals(-1, instr.read(dst));
@@ -492,8 +492,8 @@ public class TestSocketsDirect extends TestCase3 {
         instr2.read(dst);
         assertTrue(BytesUtil.bytesEqual(data, dst));
 
-        /*
-         * Question: Can a downstream close be detected upstream?
+      /*
+       * Question: Can a downstream close be detected upstream?
          *
          * Answer: No. Closing the server socket does not tell the
          * client that the socket was closed.
@@ -523,8 +523,8 @@ public class TestSocketsDirect extends TestCase3 {
           assertTrue(cs2.isOpen()); // yes.
         }
 
-        /*
-         * Now write some more to the socket. We have closed the
+      /*
+       * Now write some more to the socket. We have closed the
          * accepted connection on the server socket. Our observations
          * show that the 1st write succeeds. The second write then fails
          * with 'IOException: "Broken pipe"'
@@ -563,8 +563,8 @@ public class TestSocketsDirect extends TestCase3 {
           }
         }
 
-        /*
-         * Having closed the input, without a new connect request we
+      /*
+       * Having closed the input, without a new connect request we
          * should not be able to accept the new write since the data
          * were written on a different client connection.
          */
@@ -584,7 +584,7 @@ public class TestSocketsDirect extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * Confirms that multiple clients can communicate with same Server
    *
    * @throws IOException
@@ -709,7 +709,7 @@ public class TestSocketsDirect extends TestCase3 {
     return av.get();
   }
 
-  /**
+  /*
    * Fail the test if the {@link Callable} completes before the specified timeout.
    *
    * @param timeout
@@ -741,7 +741,7 @@ public class TestSocketsDirect extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * Throws {@link AssertionFailedError} if the {@link Callable} does not succeed within the
    * timeout.
    *
@@ -766,7 +766,7 @@ public class TestSocketsDirect extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * Task writes the data on the client {@link SocketChannel}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

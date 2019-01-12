@@ -29,8 +29,8 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.geospatial.GeoSpatialSearchException;
 
-/**
- * Correct rejection test for GeoSpatial data, making sure that appropriate error messages are
+/*
+* Correct rejection test for GeoSpatial data, making sure that appropriate error messages are
  * thrown in cases where we encounter data format problems or service calls are not properly
  * configured.
  *
@@ -757,7 +757,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
     throw new RuntimeException("Expected to run into exception.");
   }
 
-  /**
+  /*
    * Test case where we aim at extracting the location value, but the index contains no location.
    */
   public void testCRLocationValueButNoLocation() throws Exception {
@@ -782,7 +782,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
     throw new RuntimeException("Expected to run into exception.");
   }
 
-  /**
+  /*
    * Test case where we aim at extracting the locationAndTime value, but the index contains no
    * location.
    */
@@ -808,7 +808,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
     throw new RuntimeException("Expected to run into exception.");
   }
 
-  /**
+  /*
    * Test case where we aim at extracting the locationAndTime value, but the index contains no time.
    */
   public void testCRLocationAndTimeValueButNoTime() throws Exception {
@@ -833,7 +833,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
     throw new RuntimeException("Expected to run into exception.");
   }
 
-  /**
+  /*
    * Test case where we aim at extracting the latitude value, but the index contains no location.
    */
   public void testCRLatValueButNoLocation() throws Exception {
@@ -858,7 +858,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
     throw new RuntimeException("Expected to run into exception.");
   }
 
-  /**
+  /*
    * Test case where we aim at extracting the longitude value, but the index contains no location.
    */
   public void testCRLonValueButNoLocation() throws Exception {
@@ -906,7 +906,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
     throw new RuntimeException("Expected to run into exception.");
   }
 
-  /**
+  /*
    * Test case where we aim at extracting the distance, but the index contains no
    * latitude/longitude.
    */
@@ -932,7 +932,7 @@ public class TestGeoSpatialCorrectRejection extends AbstractDataDrivenSPARQLTest
     throw new RuntimeException("Expected to run into exception.");
   }
 
-  /**
+  /*
    * Test case where we aim at extracting the distance, but the index contains no
    * latitude/longitude.
    */

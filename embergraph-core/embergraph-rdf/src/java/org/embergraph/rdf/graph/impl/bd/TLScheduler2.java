@@ -35,8 +35,8 @@ import org.embergraph.rdf.graph.impl.util.ManagedArray;
 import org.embergraph.rdf.graph.util.GASUtil;
 import org.openrdf.model.Value;
 
-/**
- * This scheduler uses thread-local buffers ({@link LinkedHashSet}) to track the distinct vertices
+/*
+* This scheduler uses thread-local buffers ({@link LinkedHashSet}) to track the distinct vertices
  * scheduled by each execution thread. After the computation round, those per-thread segments of the
  * frontier are combined into a single global, compact, and ordered frontier. To maximize the
  * parallel activity, the per-thread frontiers are sorted using N threads (one per segment).
@@ -49,14 +49,14 @@ public class TLScheduler2 implements IGASSchedulerImpl {
 
   private static final Logger log = Logger.getLogger(TLScheduler2.class);
 
-  /**
+  /*
    * Class bundles a reusable, extensible array for sorting the thread-local frontier.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   private static class MySTScheduler extends STScheduler {
 
-    /**
+    /*
      * This is used to sort the thread-local frontier (that is, the frontier for a single thread).
      * The backing array will grow as necessary and is reused in each round.
      *
@@ -102,8 +102,8 @@ public class TLScheduler2 implements IGASSchedulerImpl {
 
       if (old != null) {
 
-        /*
-         * We should not have a key collision since this is based on the
+      /*
+       * We should not have a key collision since this is based on the
          * threadId.
          */
 
@@ -217,7 +217,7 @@ public class TLScheduler2 implements IGASSchedulerImpl {
                 final IArraySlice<Value> orderedSegment =
                     GASImplUtil.compactAndSort(t.getVertices(), t.tmp);
                 f2.copyIntoResetFrontier(off[index], orderedSegment);
-                return (Void) null;
+                return null;
               }
             });
       }
@@ -250,8 +250,8 @@ public class TLScheduler2 implements IGASSchedulerImpl {
 
   }
 
-  //    /**
-  //     * Now merge sort the ordered frontier segments and populate the new
+  //    /*
+//     * Now merge sort the ordered frontier segments and populate the new
   //     * frontier.
   //     *
   //     * @param nsources

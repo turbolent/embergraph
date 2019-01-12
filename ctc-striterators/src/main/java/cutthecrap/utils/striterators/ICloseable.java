@@ -18,18 +18,18 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
  */
 package cutthecrap.utils.striterators;
 
-/**
- * Interface for objects which can have resources which must be explicitly closed (typically
+/*
+* Interface for objects which can have resources which must be explicitly closed (typically
  * iterators).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ICloseable {
 
-  /**
+  /*
    * Closes the object, releasing any associated resources. This method MAY be invoked safely if the
    * object is already closed. Implementations of this interface MUST invoke {@link #close()} once
    * it is known that the object will no longer be used.
    */
-  public void close();
+  void close();
 }

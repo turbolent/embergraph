@@ -41,8 +41,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 
-/**
- * DataSetJoin(left)[var=g; graphs={graphIds}]
+/*
+* DataSetJoin(left)[var=g; graphs={graphIds}]
  *
  * <p>SPARQL specific join of the source binding sets with an inline access path allowing <i>var</i>
  * to take on the given graphIds values. This join operator is useful when the multiplicity of the
@@ -65,14 +65,14 @@ public class DataSetJoin extends PipelineOp {
     /** The variable to be bound. */
     String VAR = DataSetJoin.class.getName() + ".var";
 
-    /**
+    /*
      * The {@link Set} of {@link IV}s to be bound. A {@link LinkedHashSet} should be used for
      * efficiency since it provides fast ordered scans and fast point tests.
      */
     String GRAPHS = DataSetJoin.class.getName() + ".graphs";
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -82,7 +82,7 @@ public class DataSetJoin extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -182,7 +182,7 @@ public class DataSetJoin extends PipelineOp {
       }
     }
 
-    /**
+    /*
      * Join source binding set chunk with {@link #graphs}.
      *
      * @param chunk A chunk of {@link IBindingSet}s from the source.
@@ -198,8 +198,8 @@ public class DataSetJoin extends PipelineOp {
 
         if (val == null) {
 
-          /*
-           * When the value is unbound, we output the cross product.
+        /*
+       * When the value is unbound, we output the cross product.
            */
 
           for (IV c : graphs) {
@@ -213,8 +213,8 @@ public class DataSetJoin extends PipelineOp {
 
         } else {
 
-          /*
-           * When the value is bound the binding set will be output
+        /*
+       * When the value is bound the binding set will be output
            * iff the bound value for the variable is found in the
            * specified graphs.
            */

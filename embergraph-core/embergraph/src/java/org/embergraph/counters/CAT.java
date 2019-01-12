@@ -28,8 +28,8 @@ import java.io.ObjectOutput;
 import java.util.concurrent.atomic.AtomicLong;
 import org.cliffc.high_scale_lib.ConcurrentAutoTable;
 
-/**
- * An alias for the high-scale-lib counter implementation. {@link CAT}s are useful when a counter is
+/*
+* An alias for the high-scale-lib counter implementation. {@link CAT}s are useful when a counter is
  * extremely hot for updates and adaptively expand their internal state to minimize thread
  * contention. However, they can do more work than an {@link AtomicLong} on read since they must
  * scan an internal table to aggregate updates from various threads.
@@ -53,7 +53,7 @@ public class CAT /*extends ConcurrentAutoTable*/ implements Externalizable {
     cat = new ConcurrentAutoTable();
   }
 
-  /**
+  /*
    * Add the value to the counter.
    *
    * @see ConcurrentAutoTable#add(long)
@@ -62,7 +62,7 @@ public class CAT /*extends ConcurrentAutoTable*/ implements Externalizable {
     cat.add(x);
   }
 
-  /**
+  /*
    * Decrement the value of the counter.
    *
    * @see ConcurrentAutoTable#decrement()
@@ -71,7 +71,7 @@ public class CAT /*extends ConcurrentAutoTable*/ implements Externalizable {
     cat.decrement();
   }
 
-  /**
+  /*
    * Increment the value of the counter.
    *
    * @see ConcurrentAutoTable#increment()
@@ -80,7 +80,7 @@ public class CAT /*extends ConcurrentAutoTable*/ implements Externalizable {
     cat.increment();
   }
 
-  /**
+  /*
    * Set the value of the counter.
    *
    * @see ConcurrentAutoTable#set(long)
@@ -89,7 +89,7 @@ public class CAT /*extends ConcurrentAutoTable*/ implements Externalizable {
     cat.set(x);
   }
 
-  /**
+  /*
    * Current value of the counter.
    *
    * @see ConcurrentAutoTable#get()
@@ -98,7 +98,7 @@ public class CAT /*extends ConcurrentAutoTable*/ implements Externalizable {
     return cat.get();
   }
 
-  /**
+  /*
    * Estimate the current value of the counter.
    *
    * @see ConcurrentAutoTable#estimate_get()

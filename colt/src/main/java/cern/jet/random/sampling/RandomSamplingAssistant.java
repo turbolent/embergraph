@@ -10,8 +10,8 @@ package cern.jet.random.sampling;
 
 import cern.colt.list.BooleanArrayList;
 import cern.jet.random.engine.RandomEngine;
-/**
- * Conveniently computes a stable <i>Simple Random Sample Without Replacement (SRSWOR)</i>
+/*
+* Conveniently computes a stable <i>Simple Random Sample Without Replacement (SRSWOR)</i>
  * subsequence of <tt>n</tt> elements from a given input sequence of <tt>N</tt> elements; Example:
  * Computing a sublist of <tt>n=3</tt> random elements from a list <tt>(1,...,50)</tt> may yield the
  * sublist <tt>(7,13,47)</tt>. The subsequence is guaranteed to be <i>stable</i>, i.e. elements
@@ -33,7 +33,7 @@ public class RandomSamplingAssistant extends cern.colt.PersistentObject {
   protected long n;
 
   static final int MAX_BUFFER_SIZE = 200;
-  /**
+  /*
    * Constructs a random sampler that samples <tt>n</tt> random elements from an input sequence of
    * <tt>N</tt> elements.
    *
@@ -70,7 +70,7 @@ public class RandomSamplingAssistant extends cern.colt.PersistentObject {
     return this.sampler.my_RandomGenerator;
   }
   /** Tests random sampling. */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     long n = Long.parseLong(args[0]);
     long N = Long.parseLong(args[1]);
     // test(n,N);
@@ -87,7 +87,7 @@ public class RandomSamplingAssistant extends cern.colt.PersistentObject {
     }
     return sample;
   }
-  /**
+  /*
    * Returns whether the next element of the input sequence shall be sampled (picked) or not.
    *
    * @return <tt>true</tt> if the next element shall be sampled (picked), <tt>false</tt> otherwise.
@@ -107,7 +107,7 @@ public class RandomSamplingAssistant extends cern.colt.PersistentObject {
 
     return true;
   }
-  /**
+  /*
    * Tests the methods of this class. To do benchmarking, comment the lines printing stuff to the
    * console.
    */
@@ -127,7 +127,7 @@ public class RandomSamplingAssistant extends cern.colt.PersistentObject {
     System.out.println("sample=" + sample);
     System.out.println("Good bye.\n");
   }
-  /**
+  /*
    * Tests the methods of this class. To do benchmarking, comment the lines printing stuff to the
    * console.
    */
@@ -156,7 +156,7 @@ public class RandomSamplingAssistant extends cern.colt.PersistentObject {
 
     System.out.println("Good bye.\n");
   }
-  /**
+  /*
    * Returns whether the next elements of the input sequence shall be sampled (picked) or not. one
    * is chosen from the first block, one from the second, ..., one from the last block.
    *

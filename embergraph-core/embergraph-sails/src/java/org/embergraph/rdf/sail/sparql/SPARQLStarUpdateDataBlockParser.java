@@ -33,8 +33,8 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.helpers.StatementCollector;
 
-/**
- * An extension of {@link SPARQLUpdateDataBlockParser} that processes data in the format specified
+/*
+* An extension of {@link SPARQLUpdateDataBlockParser} that processes data in the format specified
  * in the SPARQL* grammar. This format is almost completely compatible with
  * SPARQLUpdateDataBlockParser, except:
  *
@@ -49,7 +49,7 @@ public class SPARQLStarUpdateDataBlockParser extends SPARQLUpdateDataBlockParser
 
   private String baseURI;
 
-  /**
+  /*
    * Namespaces mapping, collected from PREFIX statements, should be passed in to recursive SPARQL*
    * parsing. Original namespaceTable variable is private to {@link RDFParserBase} and could not be
    * accessed from this class.
@@ -60,7 +60,7 @@ public class SPARQLStarUpdateDataBlockParser extends SPARQLUpdateDataBlockParser
    * Constructors *
    *--------------*/
 
-  /**
+  /*
    * Creates a new parser that will use the supplied ValueFactory to create RDF model objects.
    *
    * @param valueFactory A ValueFactory.
@@ -70,7 +70,7 @@ public class SPARQLStarUpdateDataBlockParser extends SPARQLUpdateDataBlockParser
     this.namespaceTable = new HashMap<>();
   }
 
-  /**
+  /*
    * Creates a new parser that will use the supplied ValueFactory and prefix mapping to create RDF
    * model objects.
    *
@@ -177,7 +177,7 @@ public class SPARQLStarUpdateDataBlockParser extends SPARQLUpdateDataBlockParser
     }
   }
 
-  /**
+  /*
    * Overriding setBaseURI to keep base URI value for SPARQL* parsing as
    * org.openrdf.rio.helpers.RDFParserBase.baseURI is a private field
    */

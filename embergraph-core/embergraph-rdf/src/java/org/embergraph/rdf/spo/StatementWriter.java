@@ -8,8 +8,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * Writes statements on all the statement indices in parallel.
+/*
+* Writes statements on all the statement indices in parallel.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -30,7 +30,7 @@ public class StatementWriter implements Callable<Long> {
 
   private final IChangeLog changeLog;
 
-  /**
+  /*
    * @param database
    *            The database. If statement identifiers are being generated
    *            then they will always be added using the lexicon associated
@@ -89,7 +89,7 @@ public class StatementWriter implements Callable<Long> {
     this.changeLog = changeLog;
   }
 
-  /**
+  /*
    * Writes on the statement indices (parallel, batch api).
    *
    * @return The elapsed time for the operation.

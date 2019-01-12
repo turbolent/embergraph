@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Uniform distribution; <A
+/*
+* Uniform distribution; <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node292.html#SECTION0002920000000000000000"> Math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosu.html#Uniform Distribution">
  * animated definition</A>.
@@ -30,7 +30,7 @@ public class Uniform extends AbstractContinousDistribution {
 
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static Uniform shared = new Uniform(makeDefaultGenerator());
-  /**
+  /*
    * Constructs a uniform distribution with the given minimum and maximum, using a {@link
    * cern.jet.random.engine.MersenneTwister} seeded with the given seed.
    */
@@ -56,42 +56,42 @@ public class Uniform extends AbstractContinousDistribution {
   public boolean nextBoolean() {
     return randomGenerator.raw() > 0.5;
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the open interval <tt>(min,max)</tt>
    * (excluding <tt>min</tt> and <tt>max</tt>).
    */
   public double nextDouble() {
     return min + (max - min) * randomGenerator.raw();
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the open interval <tt>(from,to)</tt>
    * (excluding <tt>from</tt> and <tt>to</tt>). Pre conditions: <tt>from &lt;= to</tt>.
    */
   public double nextDoubleFromTo(double from, double to) {
     return from + (to - from) * randomGenerator.raw();
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the open interval <tt>(from,to)</tt>
    * (excluding <tt>from</tt> and <tt>to</tt>). Pre conditions: <tt>from &lt;= to</tt>.
    */
   public float nextFloatFromTo(float from, float to) {
     return (float) nextDoubleFromTo(from, to);
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the closed interval <tt>[min,max]</tt>
    * (including <tt>min</tt> and <tt>max</tt>).
    */
   public int nextInt() {
     return nextIntFromTo((int) Math.round(min), (int) Math.round(max));
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the closed interval <tt>[from,to]</tt>
    * (including <tt>from</tt> and <tt>to</tt>). Pre conditions: <tt>from &lt;= to</tt>.
    */
   public int nextIntFromTo(int from, int to) {
     return (int) ((long) from + (long) ((1L + (long) to - (long) from) * randomGenerator.raw()));
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the closed interval <tt>[from,to]</tt>
    * (including <tt>from</tt> and <tt>to</tt>). Pre conditions: <tt>from &lt;= to</tt>.
    */
@@ -155,7 +155,7 @@ public class Uniform extends AbstractContinousDistribution {
       return shared.nextBoolean();
     }
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the open interval <tt>(0,1)</tt> (excluding
    * <tt>0</tt> and <tt>1</tt>).
    */
@@ -164,7 +164,7 @@ public class Uniform extends AbstractContinousDistribution {
       return shared.nextDouble();
     }
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the open interval <tt>(from,to)</tt>
    * (excluding <tt>from</tt> and <tt>to</tt>). Pre conditions: <tt>from &lt;= to</tt>.
    */
@@ -173,7 +173,7 @@ public class Uniform extends AbstractContinousDistribution {
       return shared.nextDoubleFromTo(from, to);
     }
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the open interval <tt>(from,to)</tt>
    * (excluding <tt>from</tt> and <tt>to</tt>). Pre conditions: <tt>from &lt;= to</tt>.
    */
@@ -182,7 +182,7 @@ public class Uniform extends AbstractContinousDistribution {
       return shared.nextFloatFromTo(from, to);
     }
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the closed interval <tt>[from,to]</tt>
    * (including <tt>from</tt> and <tt>to</tt>). Pre conditions: <tt>from &lt;= to</tt>.
    */
@@ -191,7 +191,7 @@ public class Uniform extends AbstractContinousDistribution {
       return shared.nextIntFromTo(from, to);
     }
   }
-  /**
+  /*
    * Returns a uniformly distributed random number in the closed interval <tt>[from,to]</tt>
    * (including <tt>from</tt> and <tt>to</tt>). Pre conditions: <tt>from &lt;= to</tt>.
    */
@@ -200,7 +200,7 @@ public class Uniform extends AbstractContinousDistribution {
       return shared.nextLongFromTo(from, to);
     }
   }
-  /**
+  /*
    * Sets the uniform random number generation engine shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generation engine to be shared.

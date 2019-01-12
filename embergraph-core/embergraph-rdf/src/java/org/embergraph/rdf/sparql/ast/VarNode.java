@@ -7,8 +7,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * Used to represent a variable in the AST.
+/*
+* Used to represent a variable in the AST.
  *
  * <p>Note: Unlike {@link Var}, this class does NOT support reference testing for equality. Multiple
  * {@link VarNode} instances MAY exist for the same {@link IVariable}. You must either compare the
@@ -23,7 +23,7 @@ public class VarNode extends TermNode {
 
   public interface Annotations extends TermNode.Annotations {
 
-    /**
+    /*
      * Annotation marks anonymous variables (a variable created by the interpretation of the parse
      * tree, AST, etc rather than one given directly in the original query).
      */
@@ -39,8 +39,8 @@ public class VarNode extends TermNode {
      * about the visibility of variables as well, which is just too much
      * effort.
      */
-    //        /**
-    //		 * Annotation marks a variable which is a statement identifier.
+    //        /*
+//		 * Annotation marks a variable which is a statement identifier.
     //		 *
     //		 * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/526">
     //		 *      Reification Done Right</a>
@@ -81,7 +81,7 @@ public class VarNode extends TermNode {
 
   }
 
-  /**
+  /*
    * Return <code>true</code> if this is an anonymous variable (anonymous variables are introduced
    * during a rewrite of the query in which blank nodes are replaced by anonymous variables). This
    * marker is useful mainly when reading the AST tree as an aid to understanding where a given
@@ -92,7 +92,7 @@ public class VarNode extends TermNode {
     return getProperty(Annotations.ANONYMOUS, Annotations.DEFAULT_ANONYMOUS);
   }
 
-  /**
+  /*
    * Mark this as an anonymous variable (one introduced during a query rewrite in place of a blank
    * node).
    *
@@ -105,8 +105,8 @@ public class VarNode extends TermNode {
     ((Var) getValueExpression()).setAnonymous(anonymous);
   }
 
-  //	/**
-  //	 * Return <code>true</code> if this is an SID variable (a variable which
+  //	/*
+//	 * Return <code>true</code> if this is an SID variable (a variable which
   //	 * binds statement identifiers composed from triples). This marker is useful
   //	 * mainly when reading the AST tree as an aid to understanding where a given
   //	 * variable came from in the original query.
@@ -117,8 +117,8 @@ public class VarNode extends TermNode {
   //
   //	}
   //
-  //	/**
-  //	 * Mark this as an SID variable (one which represents a triple reference
+  //	/*
+//	 * Mark this as an SID variable (one which represents a triple reference
   //	 * pattern).
   //	 *
   //	 * @param val
@@ -135,7 +135,7 @@ public class VarNode extends TermNode {
     return getProperty(Annotations.SOLUTION_SET, Annotations.DEFAULT_SOLUTION_SET);
   }
 
-  /**
+  /*
    * Mark this as a variable which actually conveys the name of a solution set.
    *
    * @param <code>true</code> if the variable represents a solution set name.

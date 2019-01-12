@@ -26,35 +26,35 @@ import java.io.Reader;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParser;
 
-/**
- * Interface for parsing RDF data using the Sesame RIO parser.
+/*
+* Interface for parsing RDF data using the Sesame RIO parser.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRioLoader {
 
-  public long getStatementsAdded();
+  long getStatementsAdded();
 
-  public long getInsertTime();
+  long getInsertTime();
 
-  public long getInsertRate();
+  long getInsertRate();
 
-  /**
+  /*
    * Register a listener.
    *
    * @param l The listener.
    */
-  public void addRioLoaderListener(RioLoaderListener l);
+  void addRioLoaderListener(RioLoaderListener l);
 
-  /**
+  /*
    * Remove a listener.
    *
    * @param l The listener.
    */
-  public void removeRioLoaderListener(RioLoaderListener l);
+  void removeRioLoaderListener(RioLoaderListener l);
 
-  /**
+  /*
    * Parse RDF data.
    *
    * @param reader The source from which the data will be read.
@@ -64,7 +64,7 @@ public interface IRioLoader {
    * @param options Options to be applied to the {@link RDFParser}.
    * @throws Exception
    */
-  public void loadRdf(
+  void loadRdf(
       Reader reader,
       String baseURL,
       RDFFormat rdfFormat,
@@ -72,7 +72,7 @@ public interface IRioLoader {
       RDFParserOptions options)
       throws Exception;
 
-  /**
+  /*
    * Parse RDF data.
    *
    * @param is The source from which the data will be read.
@@ -82,7 +82,7 @@ public interface IRioLoader {
    * @param options Options to be applied to the {@link RDFParser}.
    * @throws Exception
    */
-  public void loadRdf(
+  void loadRdf(
       InputStream is,
       String baseURI,
       RDFFormat rdfFormat,

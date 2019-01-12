@@ -44,8 +44,8 @@ import org.embergraph.sparse.GlobalRowStoreHelper;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
-/**
- * Base class for task-oriented concurrency. Directly derived classes are suitable for internal
+/*
+* Base class for task-oriented concurrency. Directly derived classes are suitable for internal
  * tasks (stored queries, stored procedures, etc) while REST API tasks are based on a specialized
  * subclass that also provides for access to the HTTP request and response.
  *
@@ -105,7 +105,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
         + "}";
   }
 
-  /**
+  /*
    * @param namespace The namespace of the target KB instance.
    * @param timestamp The timestamp of the view of that KB instance.
    */
@@ -114,7 +114,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
     this(namespace, timestamp, false /* requiresGRS */);
   }
 
-  /**
+  /*
    * @param namespace The namespace of the target KB instance.
    * @param timestamp The timestamp of the view of that KB instance.
    * @param isGRSRequired True iff a lock must be obtain on the Global Row Store (GRS). For example,
@@ -143,8 +143,8 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
     return tmp;
   }
 
-  //    /**
-  //    * Return a view of the {@link AbstractTripleStore} for the namespace and
+  //    /*
+//    * Return a view of the {@link AbstractTripleStore} for the namespace and
   //    * timestamp associated with this task.
   //    *
   //    * @return The {@link AbstractTripleStore} -or- <code>null</code> if none is
@@ -156,8 +156,8 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
   //
   //   }
   //
-  //    /**
-  //     * Return a view of the {@link AbstractTripleStore} for the given namespace
+  //    /*
+//     * Return a view of the {@link AbstractTripleStore} for the given namespace
   //     * that will read on the commit point associated with the given timestamp.
   //     *
   //     * @param namespace
@@ -180,7 +180,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
   //
   //    }
 
-  /**
+  /*
    * Return a connection transaction, which may be either read-only or support mutation depending on
    * the timestamp associated with the task's view. When the timestamp is associated with a
    * historical commit point, this will be a read-only connection. When it is associated with the
@@ -202,7 +202,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
     return getQueryConnection(namespace, timestamp);
   }
 
-  /**
+  /*
    * This version uses the namespace and timestamp provided by the caller.
    *
    * @param namespace
@@ -223,7 +223,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
 
     if (TimestampUtility.isReadOnly(timestamp)) {
 
-      return (EmbergraphSailRepositoryConnection) repo.getReadOnlyConnection(timestamp);
+      return repo.getReadOnlyConnection(timestamp);
     }
 
     // Read-write connection.
@@ -250,7 +250,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
     return conn;
   }
 
-  /**
+  /*
    * Return a connection for the namespace. If the task is associated with either a read/write
    * transaction or an {@link ITx#UNISOLATED} view of the indices, the connection may be used to
    * read or write on the namespace. Otherwise the connection will be read-only.
@@ -303,7 +303,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
     public void close() {}
   }
 
-  /**
+  /*
    * Submit a task and return a {@link Future} for that task. The task will be run on the
    * appropriate executor service depending on the nature of the backing database and the view
    * required by the task.
@@ -374,7 +374,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
 
     } else {
 
-      /**
+      /*
        * Run on the ConcurrencyManager of the Journal.
        *
        * <p>Mutation operations will be scheduled based on the pre-declared locks and will have
@@ -413,7 +413,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
     }
   }
 
-  /**
+  /*
    * Return the set of locks that the task must acquire in order to operate on the specified
    * namespace.
    *

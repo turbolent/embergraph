@@ -28,8 +28,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * The query hint governing the choice of the number of initial edges for the exploration of join
+/*
+* The query hint governing the choice of the number of initial edges for the exploration of join
  * paths in the join graph.
  *
  * @see JGraph

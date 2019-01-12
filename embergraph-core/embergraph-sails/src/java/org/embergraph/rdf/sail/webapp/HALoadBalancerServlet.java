@@ -46,8 +46,8 @@ import org.embergraph.util.StackInfoReport;
 
 // import org.embergraph.journal.jini.ha.HAJournal;
 
-/**
- * The HA Load Balancer servlet provides a transparent proxy for requests arriving its configured
+/*
+* The HA Load Balancer servlet provides a transparent proxy for requests arriving its configured
  * URL pattern (the "external" interface for the load balancer) to the root of the web application.
  *
  * <p>When successfully deployed, requests having prefix corresponding to the URL pattern for the
@@ -85,8 +85,8 @@ public class HALoadBalancerServlet extends ProxyServlet {
      * why the PREFIX init-param has been commented out.  It no longer maps
      * directly into a simple concept within the LBS servlet.
      */
-    //        /**
-    //         * The prefix at which the load balancer is deployed (its URL pattern,
+    //        /*
+//         * The prefix at which the load balancer is deployed (its URL pattern,
     //         * less any wildcard). This is typically
     //         *
     //         * <pre>
@@ -98,19 +98,19 @@ public class HALoadBalancerServlet extends ProxyServlet {
     //         */
     //        String PREFIX = "prefix";
 
-    /**
+    /*
      * The fully qualified class name of the load balancer policy (optional - the default is {@value
      * #DEFAULT_POLICY}). This must be an instance of {@link IHALoadBalancerPolicy} .
      */
     String POLICY = "policy";
 
-    /**
+    /*
      * The default {@link IHALoadBalancerPolicy} proxies all updates to the quorum leader and
      * forwards all other requests to the local service.
      */
     String DEFAULT_POLICY = NOPLBSPolicy.class.getName();
 
-    /**
+    /*
      * The fully qualified class name of an {@link IHARequestURIRewriter} (optional - the default is
      * {@value #DEFAULT_REWRITER}). This must be an instance of {@link IHARequestURIRewriter}. This
      * may be used to impose application specific Request-URI rewrite semantics when a request will
@@ -129,7 +129,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
   /** There is no {@link IHALoadBalancerPolicy} currently declared. */
   private static final RuntimeException CAUSE_NO_LBS_POLICY = new RuntimeException("No LBS policy");
 
-  /**
+  /*
    * The <code>Request-URI</code> does not map to either {@link #PATH_LEADER} or {@link #PATH_READ}.
    */
   private static final RuntimeException CAUSE_BAD_REQUEST_URI =
@@ -139,7 +139,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
   private static final RuntimeException CAUSE_NO_REWRITER_POLICY =
       new RuntimeException("No rewriter policy");
 
-  /**
+  /*
    * The destination could not be validated.
    *
    * @see #validateDestination(String, int)
@@ -152,7 +152,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     super();
   }
 
-  /**
+  /*
    * The initial prefix and is formed as
    *
    * <pre>
@@ -165,25 +165,25 @@ public class HALoadBalancerServlet extends ProxyServlet {
    */
   private String prefix;
 
-  /**
+  /*
    * The URI path component that follows the servlet context-path to identify a request that will be
    * handled by the load balancer component.
    */
   private static final String PATH_LBS = "/LBS";
 
-  /**
+  /*
    * The URI path component that follows the {@link #prefix} to identify a request that will target
    * the quorum leader.
    */
   private static final String PATH_LEADER = "/leader";
 
-  /**
+  /*
    * The URI path component that follows the {@link #prefix} to identify a request that should be
    * load balanced over the leader + followers.
    */
   private static final String PATH_READ = "/read";
 
-  /**
+  /*
    * The configured {@link IHALoadBalancerPolicy} and <code>null</code> iff the load balancer is
    * disabled. If the LBS is not enabled, then it will strip its prefix from the URL requestURI and
    * do a servlet forward to the resulting requestURI. This allows the webapp to start even if the
@@ -194,7 +194,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
   private final AtomicReference<IHALoadBalancerPolicy> policyRef =
       new AtomicReference<IHALoadBalancerPolicy>();
 
-  /**
+  /*
    * The {@link IHARequestURIRewriter} that rewrites the original Request-URI into a Request-URI for
    * the target service to which the request will be proxied.
    *
@@ -209,14 +209,14 @@ public class HALoadBalancerServlet extends ProxyServlet {
   /** The number of requests that were proxied some service. */
   private final CAT nproxy = new CAT();
 
-  /**
+  /*
    * The number of requests for which {@link #rewriteURI(HttpServletRequest)} trapped an error.
    *
    * <p>Note: Such requests wind up being forwarded to the local service.
    */
   private final CAT nerror = new CAT();
 
-  /**
+  /*
    * Change the {@link IHALoadBalancerPolicy} associated with this instance of this servlet. The new
    * policy will be installed iff it can be initialized successfully. The old policy will be
    * destroyed iff the new policy is successfully installed.
@@ -238,7 +238,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     return policyRef.get();
   }
 
-  /**
+  /*
    * Change the {@link IHARequestURIRewriter} associated with this instance of this servlet. The new
    * policy will be installed iff it can be initialized successfully. The old policy will be
    * destroyed iff the new policy is successfully installed.
@@ -254,7 +254,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     setHAPolicy(newValue, rewriterRef);
   }
 
-  /**
+  /*
    * Change the {@link IHAPolicyLifeCycle} associated with this instance of this servlet. The new
    * policy will be installed iff it can be initialized successfully. The old policy will be
    * destroyed iff the new policy is successfully installed.
@@ -328,7 +328,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Extended to setup the as-configured {@link IHALoadBalancerPolicy}.
@@ -464,7 +464,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     }
   }
 
-  /**
+  /*
    * Set the current {@link IHALoadBalancerPolicy} for all {@link HALoadBalancerServlet} instances
    * for the caller specified {@link ServletContext}.
    *
@@ -491,7 +491,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     }
   }
 
-  /**
+  /*
    * Return the {@link IHALoadBalancerPolicy}s that are in force for the active {@link
    * HALoadBalancerServlet} instances.
    *
@@ -538,7 +538,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
         + "}";
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Extended to destroy the as-configured {@link IHALoadBalancerPolicy}.
@@ -573,7 +573,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     super.destroy();
   }
 
-  /**
+  /*
    * Return the configured value of the named parameter. This method checks the environment
    * variables first for a fully qualified value for the parameter using
    * <i>owningClass</i>.<i>name</i> (or just <i>name</i> if <i>owningClass</i> is <code>null</code>
@@ -605,16 +605,16 @@ public class HALoadBalancerServlet extends ProxyServlet {
       // Look at ServletConfig for the configured value.
       if (owningClass == HALoadBalancerServlet.class) {
 
-        /*
-         * The HALoadBalancerServlet does not use a namespace prefix for
+      /*
+       * The HALoadBalancerServlet does not use a namespace prefix for
          * its web.xml declarations.
          */
         s = servletConfig.getInitParameter(name);
 
       } else {
 
-        /*
-         * The other policy objects DO use their owningClass as a
+      /*
+       * The other policy objects DO use their owningClass as a
          * namespace prefix. This is done to avoid collisions among the
          * different policy classes.
          */
@@ -631,7 +631,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     return s;
   }
 
-  /**
+  /*
    * Create an instance of some type based on the servlet init parameters.
    *
    * <p>Note: The configuration parameter MAY also be specified as <code>
@@ -669,7 +669,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
       throw new IllegalArgumentException(name + ":: " + s + " must extend " + iface.getName());
 
     try {
-      t = (T) cls.newInstance();
+      t = cls.newInstance();
     } catch (InstantiationException e) {
       throw new ServletException(e);
     } catch (IllegalAccessException e) {
@@ -733,7 +733,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     super.service(request, response);
   }
 
-  /**
+  /*
    * Strip off the <code>/LBS</code> prefix from the requestURI and forward the request to the
    * servlet at the resulting requestURI. This forwarding effectively disables the LBS but still
    * allows requests which target the LBS to succeed against the webapp on the same host.
@@ -823,7 +823,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     }
   }
 
-  /**
+  /*
    * Return the full prefix (including <code>/leader</code> or <code>/read</code> as appropriate).
    *
    * @param isLeaderRequest <code>true</code> iff this is a leader request.
@@ -838,7 +838,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     return full_prefix;
   }
 
-  /**
+  /*
    * Wrapper invokes {@link #doRewriteURI(HttpServletRequest)} and handles any thrown exceptions.
    *
    * @see #doRewriteURI(HttpServletRequest)
@@ -898,7 +898,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     }
   }
 
-  /**
+  /*
    * Hook allows the servlet to rewrite the request.
    *
    * <p>For update requests, rewrite the requestURL to the service that is the quorum leader. For
@@ -944,8 +944,8 @@ public class HALoadBalancerServlet extends ProxyServlet {
       if (log.isDebugEnabled()) log.debug("proxyToRequestURI=" + proxyToRequestURI);
 
       if (proxyToRequestURI == null) {
-        /*
-         * The LBS policy made a choice not to rewrite this request (not
+      /*
+       * The LBS policy made a choice not to rewrite this request (not
          * an error, but a deliberate choice).
          */
         return null;
@@ -984,7 +984,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     return rewrittenURI;
   }
 
-  /**
+  /*
    * Note: This offers an opportunity to handle a failure where we were unable to rewrite the
    * request to some service, e.g., because the quorum is not met. The implementation is overridden
    * to forward the request to the local service. The local service will then generate an
@@ -1016,7 +1016,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to provide more information about the error. The implementation is derived from
@@ -1053,7 +1053,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
     asyncContext.complete();
   }
 
-  /**
+  /*
    * Return <code>true</code> iff this is an UPDATE request that must be proxied to the quorum
    * leader.
    *

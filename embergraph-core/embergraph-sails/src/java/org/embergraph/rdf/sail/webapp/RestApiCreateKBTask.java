@@ -48,8 +48,8 @@ class RestApiCreateKBTask extends AbstractDelegateRestApiTask<Void> {
           getIndexManager().getResourceLocator().locate(namespace, ITx.UNISOLATED) != null;
 
       if (exists) {
-        /*
-         * The namespace already exists.
+      /*
+       * The namespace already exists.
          *
          * Note: The response code is defined as 409 (Conflict) since 1.3.2.
          */
@@ -67,7 +67,7 @@ class RestApiCreateKBTask extends AbstractDelegateRestApiTask<Void> {
      * Note: The response code is defined as 201 (Created) since 1.3.2.
      */
 
-    /**
+    /*
      * Generate the absolute location of the new resource.
      *
      * @see <a href="http://trac.bigdata.com/ticket/1187">CREATE DATA SET does not report Location

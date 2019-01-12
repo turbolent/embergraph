@@ -162,8 +162,8 @@ import org.openrdf.sail.UpdateContext;
 // import org.openrdf.IsolationLevel;
 // import org.openrdf.IsolationLevels;
 
-/**
- * Sesame <code>2.x</code> integration.
+/*
+* Sesame <code>2.x</code> integration.
  *
  * <p>Read-write operations use {@link #getConnection()}to obtain a mutable view. This delegates to
  * either {@link #getUnisolatedConnection()} or {@link #getReadWriteConnection()} depending on how
@@ -233,14 +233,14 @@ public class EmbergraphSail extends SailBase implements Sail {
   private static final String ERR_OPENRDF_QUERY_MODEL =
       "Support is no longer provided for UpdateExpr or TupleExpr evaluation. Please make sure you are using a EmbergraphSailRepository.  It will use the embergraph native evaluation model.";
 
-  /**
+  /*
    * Additional parameters understood by the Sesame 2.x SAIL implementation.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface Options extends org.embergraph.rdf.store.AbstractTripleStore.Options {
 
-    /**
+    /*
      * This optional boolean property may be used to specify whether or not RDFS entailments are
      * maintained by eager closure of the knowledge base (the default is <code>true</code>). This
      * property only effects data loaded through the {@link Sail}.
@@ -251,8 +251,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
     String DEFAULT_TRUTH_MAINTENANCE = "true";
 
-    //        /**
-    //         * The property whose value is the name of the {@link ITripleStore}
+    //        /*
+//         * The property whose value is the name of the {@link ITripleStore}
     //         * implementation that will be instantiated. This may be used to select
     //         * either the {@link LocalTripleStore} (default) or the
     //         * {@link TempTripleStore} in combination
@@ -265,7 +265,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     //        /** @deprecated */
     //        public static final String DEFAULT_STORE_CLASS = LocalTripleStore.class.getName();
 
-    /**
+    /*
      * The capacity of the statement buffer used to absorb writes. If this capacity is exceeded,
      * then an incremental flush will push assertions and/or retractions to the statement indices.
      *
@@ -282,7 +282,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
     String DEFAULT_BUFFER_CAPACITY = "10000";
 
-    /**
+    /*
      * Optional property specifying the capacity of blocking queue used by the {@link
      * StatementBuffer} -or- ZERO (0) to disable the blocking queue and perform synchronous writes
      * (default is {@value #DEFAULT_QUEUE_CAPACITY} statements). The blocking queue holds parsed
@@ -295,7 +295,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
     String DEFAULT_QUEUE_CAPACITY = "10";
 
-    /**
+    /*
      * Option (default <code>true</code>) may be used to explicitly disable query-time expansion for
      * entailments NOT computed during closure. In particular, this may be used to disable the query
      * time expansion of (x rdf:type rdfs:Resource) and owl:sameAs.
@@ -312,7 +312,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
     String DEFAULT_QUERY_TIME_EXPANDER = "true";
 
-    /**
+    /*
      * Option (default <code>false</code>) determines whether the {@link
      * SailConnection#size(Resource[])} method returns an exact size or an upper bound. Exact size
      * is a very expensive operation.
@@ -321,7 +321,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
     String DEFAULT_EXACT_SIZE = "false";
 
-    /**
+    /*
      * Options (default <code>false</code>) added only to pass the Sesame test suites. DO NOT EVER
      * USE AUTO-COMMIT WITH BIGDATA!
      */
@@ -329,7 +329,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
     String DEFAULT_ALLOW_AUTO_COMMIT = "false";
 
-    /**
+    /*
      * Options (default <code>false</code>) creates the SPO relation with isolatable indices to
      * allow read/write transactions.
      */
@@ -337,7 +337,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
     String DEFAULT_ISOLATABLE_INDICES = "false";
 
-    /**
+    /*
      * Option specifies the namespace of the designed KB instance (default {@value
      * #DEFAULT_NAMESPACE}).
      */
@@ -345,7 +345,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
     String DEFAULT_NAMESPACE = "kb";
 
-    /**
+    /*
      * Option specifies the algorithm used to compute DESCRIBE responses (optional).
      *
      * @see QueryHints#DESCRIBE_MODE
@@ -353,7 +353,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     String DESCRIBE_MODE = EmbergraphSail.class.getPackage().getName() + ".describeMode";
 
-    /**
+    /*
      * Option specifies the iteration limit for the algorithm used to compute DESCRIBE responses
      * (optional).
      *
@@ -363,7 +363,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     String DESCRIBE_ITERATION_LIMIT =
         EmbergraphSail.class.getPackage().getName() + ".describeIterationLimit";
 
-    /**
+    /*
      * Option specifies the statement limit for the algorithm used to compute DESCRIBE responses
      * (optional).
      *
@@ -373,7 +373,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     String DESCRIBE_STATEMENT_LIMIT =
         EmbergraphSail.class.getPackage().getName() + ".describeIterationStatementLimit";
 
-    /**
+    /*
      * The name of the default value used for the {@link Journal.Options#FILE} property by the
      * {@link EmbergraphSail#EmbergraphSail()} convenience constructor.
      *
@@ -381,7 +381,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     String DEFAULT_FILE = "embergraph" + JNL;
 
-    /**
+    /*
      * This optional boolean property may be used to specify whether quads in triple mode are
      * rejected (true) or loaded while silently stripping off the context (false). In the latter
      * case, the fireSailChangedEvent will report back the original statements, i.e. including the
@@ -403,13 +403,13 @@ public class EmbergraphSail extends SailBase implements Sail {
 
   //    final protected static boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * @see http://sourceforge.net/apps/trac/bigdata/ticket/443 (Logger for RWStore transaction
    *     service and recycler)
    */
   private static final Logger txLog = Logger.getLogger("org.embergraph.txLog");
 
-  /**
+  /*
    * Sesame has the notion of a "null" graph which we use for the quad store mode. Any time you
    * insert a statement into a quad store and the context position is not specified, it is actually
    * inserted into this "null" graph. If SPARQL <code>DATASET</code> is not specified, then all
@@ -423,13 +423,13 @@ public class EmbergraphSail extends SailBase implements Sail {
    */
   public static final transient URI NULL_GRAPH = BD.NULL_GRAPH;
 
-  /**
+  /*
    * The index manager associated with the database (when there is a focus store and a main
    * database, then this is the focus store index manager).
    */
   private final IIndexManager indexManager;
 
-  /**
+  /*
    * The as-configured Embergraph namespace for the {@link EmbergraphSail}.
    *
    * @see Options#NAMESPACE
@@ -441,13 +441,13 @@ public class EmbergraphSail extends SailBase implements Sail {
   /** A value factory associated with the namespace for the {@link EmbergraphSail}. */
   private final EmbergraphValueFactory valueFactory;
 
-  /**
+  /*
    * <code>true</code> iff the {@link EmbergraphSail} has been {@link #initialize()}d and not {@link
    * #shutDown()}.
    */
   private boolean openSail;
 
-  /**
+  /*
    * Set <code>true</code> by ctor variants that open/create the database but not by those that
    * connect to an existing database. This helps to provide the illusion of a dedicated purpose SAIL
    * for those ctor variants.
@@ -463,7 +463,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     Unisolated
   }
 
-  /**
+  /*
    * Field is used to cache whether or not the namespace uses isolatable indices. Initially, this is
    * not known. The value becomes known once we successfully resolve the namespace. It is cleared if
    * the namespace is destroyed.
@@ -471,7 +471,7 @@ public class EmbergraphSail extends SailBase implements Sail {
   private final AtomicReference<KnownIsolatableEnum> knownIsolatable =
       new AtomicReference<KnownIsolatableEnum>(KnownIsolatableEnum.Unknown);
 
-  /**
+  /*
    * Transient (in the sense of non-restart-safe) map of namespace prefixes to namespaces. This map
    * is thread-safe and shared across all {@link EmbergraphSailConnection} instances and across all
    * transactions.
@@ -481,7 +481,7 @@ public class EmbergraphSail extends SailBase implements Sail {
   /** The query engine. */
   private final QueryEngine queryEngine;
 
-  /**
+  /*
    * Return the embergraph namespace associated with the {@link EmbergraphSail}.
    *
    * @see Options#NAMESPACE
@@ -492,7 +492,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     return namespace;
   }
 
-  /**
+  /*
    * The index manager associated with the database (when there is a focus store and a main
    * database, then this is the focus store index manager).
    *
@@ -528,7 +528,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     this(getDefaultProperties());
   }
 
-  /**
+  /*
    * Create or open a database instance configured using the specified properties.
    *
    * @see Options
@@ -551,7 +551,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Check properties to make sure that they are consistent.
    *
    * @param properties The properties.
@@ -644,8 +644,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (tm) {
 
-        /*
-         * Note: Truth maintenance is not supported for quads at this
+      /*
+       * Note: Truth maintenance is not supported for quads at this
          * time.
          */
         throw new UnsupportedOperationException(
@@ -654,7 +654,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Constructor used to wrap an existing {@link AbstractTripleStore} instance.
    *
    * <p>Note: Since BLZG-2041, this delegates through to the core constructor which accepts
@@ -667,7 +667,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     this(database, database.getIndexManager());
   }
 
-  /**
+  /*
    * Core ctor. You must use this variant for a scale-out triple store.
    *
    * <p>To create a {@link EmbergraphSail} backed by an {@link IEmbergraphFederation} use the {@link
@@ -687,7 +687,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     this(database.getNamespace(), database.getIndexManager(), mainIndexManager);
   }
 
-  /**
+  /*
    * Constructor used when the namespace and index manager are known (standard use case).
    *
    * @param namespace The namespace.
@@ -698,7 +698,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     this(namespace, indexManager, indexManager);
   }
 
-  /**
+  /*
    * Core constructor.
    *
    * <p>Note: Scale-out is shard-wise ACID. To create a {@link EmbergraphSail} backed by an {@link
@@ -760,7 +760,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     //        this.runstate = RunstateEnum.Active;
   }
 
-  /**
+  /*
    * @throws IllegalStateException if the {@link EmbergraphSail} has not been {@link #initialize()}d
    *     or has been {@link #shutDown()}.
    */
@@ -769,7 +769,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     if (!openSail) throw new IllegalStateException();
   }
 
-  /**
+  /*
    * Return <code>true</code> if the {@link EmbergraphSail} has been {@link #initialize()}d and has
    * not been {@link #shutDown()}.
    */
@@ -778,7 +778,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     return openSail;
   }
 
-  /**
+  /*
    * Create a the configured namespace.
    *
    * @param properties The configuration properties for the namespace.
@@ -795,7 +795,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     AbstractApiTask.submitApiTask(indexManager, new CreateKBTask(namespace, properties)).get();
   }
 
-  /**
+  /*
    * Destroy the configured namespace.
    *
    * @throws SailException
@@ -812,7 +812,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     AbstractApiTask.submitApiTask(indexManager, new DestroyKBTask(namespace)).get();
   }
 
-  /**
+  /*
    * Return true iff the namespace exists at the moment when this check is performed.
    *
    * <p>Note: It is not possible to use this with any guarantees that the namespace still exists
@@ -889,7 +889,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     //        }
   }
 
-  /**
+  /*
    * If the backing database was created/opened by the {@link EmbergraphSail} then it is closed.
    * Otherwise this is a NOP.
    */
@@ -906,8 +906,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
           final EmbergraphValueFactoryImpl vf = ((EmbergraphValueFactoryImpl) getValueFactory());
 
-          /*
-           * Discard the value factory for the lexicon's namespace.
+        /*
+       * Discard the value factory for the lexicon's namespace.
            * iff the backing Journal will also be closed.
            *
            * Note: This is only possible when the Journal will also be
@@ -917,8 +917,8 @@ public class EmbergraphSail extends SailBase implements Sail {
            */
           vf.remove();
 
-          /*
-           * Discard all term cache entries for the lexicon's
+        /*
+       * Discard all term cache entries for the lexicon's
            * namespace with the same caveat as above for the
            * backing Journal.
            */
@@ -937,7 +937,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * <strong>DO NOT INVOKE FROM APPLICATION CODE</strong> - this method deletes the KB instance and
    * destroys the backing database instance. It is used to help tear down unit tests.
    */
@@ -958,7 +958,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * A {@link EmbergraphValueFactory}
    *
    * <p>{@inheritDoc}
@@ -972,7 +972,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
   }
 
-  /**
+  /*
    * Return false iff the Sail can not provide a writable connection.
    *
    * <p>{@inheritDoc}
@@ -994,7 +994,7 @@ public class EmbergraphSail extends SailBase implements Sail {
 
   }
 
-  /**
+  /*
    * Return a read-write {@link SailConnection}. This is used for both read-write transactions and
    * the UNISOLATED connection.
    *
@@ -1013,8 +1013,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (knownIsolatable.get() == KnownIsolatableEnum.Unknown) {
 
-        /*
-         * Resolve whether or not the namespace supports isolatation.
+      /*
+       * Resolve whether or not the namespace supports isolatation.
          *
          * Note: This pattern is eventually consistent.  At most one
          * thread will resolve the data race in the case where the
@@ -1064,7 +1064,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>If the triple store was provisioned to support full read/write transactions then this is
@@ -1103,16 +1103,16 @@ public class EmbergraphSail extends SailBase implements Sail {
     return (EmbergraphSailConnection) super.getConnection();
   }
 
-  //    /**
-  //     * Cache for the {@link #lock}s.
+  //    /*
+//     * Cache for the {@link #lock}s.
   //     */
   //    final static private transient ConcurrentWeakValueCache<String/*namespace*/,
   // ReentrantReadWriteLock> locks
   //    = new ConcurrentWeakValueCacheWithTimeout<String, ReentrantReadWriteLock>(
   //            20/*cacheCapacity*/, TimeUnit.MILLISECONDS.toNanos(10000/*cacheTimeout*/));
   //
-  //    /**
-  //     * Used to coordinate between read/write transactions and the unisolated
+  //    /*
+//     * Used to coordinate between read/write transactions and the unisolated
   //     * connection.
   //     * <p>
   //     * In terms of the SAIL, we do need to prevent people from using (and
@@ -1134,7 +1134,7 @@ public class EmbergraphSail extends SailBase implements Sail {
   //     */
   //    final private ReentrantReadWriteLock lock;
 
-  /**
+  /*
    * Return an unisolated connection to the database. The unisolated connection supports fast,
    * scalable updates against the database. The unisolated connection is ACID when used with a local
    * {@link Journal} and shard-wise ACID when used with an {@link IEmbergraphFederation}.
@@ -1221,7 +1221,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Abstract base class permits some patterns in which the {@link Callable} owns the locks required
    * to obtain the unisolated connection. This is used by the {@link CreateKBTask} which needs those
    * locks, but which can not acquire the {@link EmbergraphSailConnection} yet since the namespace
@@ -1275,7 +1275,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Obtain the locks required by the unisolated connection and invoke the caller's lambda.
    *
    * @param lambda The caller's lambda
@@ -1300,8 +1300,8 @@ public class EmbergraphSail extends SailBase implements Sail {
     boolean ok = false;
     try {
       if (getIndexManager() instanceof Journal) {
-        /*
-         * acquire permit from Journal.
+      /*
+       * acquire permit from Journal.
          *
          * Note: The [instanceof Journal] test here is correct. What happens
          * is that an unisolated AbstractTask that is submitted through the
@@ -1340,7 +1340,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Return a read-only connection based on the last commit point. This method is atomic with
    * respect to the commit protocol.
    *
@@ -1356,7 +1356,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     return getReadOnlyConnection(ITx.READ_COMMITTED);
   }
 
-  /**
+  /*
    * Obtain a read-historical view that reads from the specified commit point. This view is safe for
    * concurrent readers and will not update if there are concurrent writes.
    *
@@ -1375,7 +1375,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Return a read-only connection backed by a read-only transaction. The transaction will be closed
    * when the connection is closed.
    *
@@ -1417,7 +1417,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Return a connection backed by a read-write transaction.
    *
    * @throws InterruptedException
@@ -1450,8 +1450,8 @@ public class EmbergraphSail extends SailBase implements Sail {
     final long txId = txService.newTx(ITx.UNISOLATED); // read/write tx on lastCommitTime.
     try {
       if (getIndexManager() instanceof Journal) {
-        /*
-         * acquire permit from Journal.
+      /*
+       * acquire permit from Journal.
          *
          * Note: The [instanceof Journal] test here is correct. What happens
          * is that an unisolated AbstractTask that is submitted through the
@@ -1514,7 +1514,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     return queryEngine;
   }
 
-  /**
+  /*
    * Inner class implements the {@link SailConnection}. Some additional functionality is available
    * on this class, including {@link #computeClosure()}.
    *
@@ -1526,7 +1526,7 @@ public class EmbergraphSail extends SailBase implements Sail {
    */
   public class EmbergraphSailConnection implements NotifyingSailConnection {
 
-    /**
+    /*
      * The database view.
      *
      * @see #attach(long)
@@ -1542,7 +1542,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     /** Set for Unisolated and ReadWrite connections. */
     protected Access access;
 
-    /**
+    /*
      * <code>true</code> iff the {@link EmbergraphSail} can support truth maintenance, however truth
      * maintenance may be conditionally suppressed for a {@link EmbergraphSailConnection} in order
      * to allow people to temporarily disable when batching updates into the Sail.
@@ -1551,21 +1551,21 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private final boolean truthMaintenanceIsSupportable;
 
-    /**
+    /*
      * The configured capacity for the statement buffer(s).
      *
      * @see Options#BUFFER_CAPACITY
      */
     private final int bufferCapacity;
 
-    /**
+    /*
      * The configured capacity for blocking queue backing the statement buffer(s).
      *
      * @see Options#QUEUE_CAPACITY
      */
     private final int queueCapacity;
 
-    /**
+    /*
      * When true, the SAIL is in the "quads" mode.
      *
      * @see AbstractTripleStore.Options#QUADS
@@ -1575,7 +1575,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     /** When <code>true</code> the SAIL is backed by an {@link IEmbergraphFederation}. */
     protected final boolean scaleOut;
 
-    /**
+    /*
      * When true, SAIL will compute entailments at query time that were excluded from forward
      * closure.
      *
@@ -1583,7 +1583,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private final boolean queryTimeExpander;
 
-    /**
+    /*
      * When true, SAIL will compute an exact size in the {@link SailConnection#size(Resource[])}
      * method.
      *
@@ -1591,7 +1591,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private final boolean exactSize;
 
-    /**
+    /*
      * When true, auto-commit is allowed. Do not ever use auto-commit, this is purely used to pass
      * the Sesame test suites.
      *
@@ -1599,14 +1599,14 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private final boolean allowAutoCommit;
 
-    /**
+    /*
      * When true, read/write transactions are allowed.
      *
      * @see {@link Options#ISOLATABLE_INDICES}
      */
     protected final boolean isolatable;
 
-    /**
+    /*
      * Specifies whether quads in triple mode are rejected (true) or loaded while silently stripping
      * off the context (false). In the latter case, the fireSailChangedEvent will report back the
      * original statements, i.e. including the context, although the latter was not stored
@@ -1614,7 +1614,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private final boolean rejectQuadsInTripleMode;
 
-    /**
+    /*
      * When true, the RDFS closure will be maintained.
      *
      * <p>Note: This property can be changed dynamically.
@@ -1624,7 +1624,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private boolean truthMaintenance;
 
-    /**
+    /*
      * non-<code>null</code> iff truth maintenance is being performed.
      *
      * @see EmbergraphSail.Options#TRUTH_MAINTENANCE
@@ -1632,21 +1632,21 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private TruthMaintenance tm;
 
-    /**
+    /*
      * Used to buffer statements that are being asserted.
      *
      * @see #getAssertionBuffer()
      */
     private StatementBuffer<Statement> assertBuffer;
 
-    /**
+    /*
      * Used to buffer statements being retracted.
      *
      * @see #getRetractionBuffer()
      */
     private StatementBuffer<Statement> retractBuffer;
 
-    /**
+    /*
      * Set to <code>true</code> if we {@link #flush()} either of the {@link StatementBuffer}s. The
      * flag reflects whether or not the buffered writes were propagated to the underlying indices.
      * For some database modes those writes will be buffered by the indices and then incrementally
@@ -1662,7 +1662,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     protected boolean dirty = false;
 
-    /**
+    /*
      * A canonicalizing mapping for blank nodes whose life cycle is the same as that of the {@link
      * SailConnection}.
      *
@@ -1676,7 +1676,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private Map<String, EmbergraphBNode> bnodes;
 
-    /**
+    /*
      * A reverse mapping from the assigned internal values for blank nodes to the {@link
      * EmbergraphBNodeImpl} object. This is used to resolve blank nodes recovered during query from
      * within the same {@link SailConnection} without loosing the blank node identifier. This
@@ -1684,8 +1684,8 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private Map<IV, EmbergraphBNode> bnodes2;
 
-    //        /**
-    //         * Used to coordinate between read/write transactions and the unisolated
+    //        /*
+//         * Used to coordinate between read/write transactions and the unisolated
     //         * view.
     //         */
     //        private final Lock lock;
@@ -1693,7 +1693,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     /** <code>true</code> iff this is the UNISOLATED connection (only one of those at a time). */
     private final boolean unisolated;
 
-    /**
+    /*
      * Critical section support in case rollback is not completed cleanly, in which case calls to
      * commit() will fail until a clean {@link #rollback()} is made.
      *
@@ -1702,7 +1702,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private final AtomicBoolean rollbackRequired = new AtomicBoolean(false);
 
-    /**
+    /*
      * The as-configured properties for the {@link EmbergraphSail}.
      *
      * @see BLZG-2041 (EmbergraphSail should not locate the AbstractTripleStore until a connection
@@ -1710,7 +1710,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private final Properties properties;
 
-    /**
+    /*
      * Return the as-configured properties for the {@link EmbergraphSail}.
      *
      * @see BLZG-2041 (EmbergraphSail should not locate the AbstractTripleStore until a connection
@@ -1721,7 +1721,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return properties;
     }
 
-    /**
+    /*
      * Return <code>true</code> if the SAIL is using a "quads" mode database.
      *
      * @see AbstractTripleStore.Options#QUADS
@@ -1731,7 +1731,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return quads;
     }
 
-    /**
+    /*
      * Return <code>true</code> iff the SAIL is using a namespace that has been configured to
      * support isolatable indices.
      *
@@ -1760,8 +1760,8 @@ public class EmbergraphSail extends SailBase implements Sail {
       return EmbergraphSail.this;
     }
 
-    //        /**
-    //         * The inference engine if the SAIL is using one.
+    //        /*
+//         * The inference engine if the SAIL is using one.
     //         * <p>
     //         * Note: Requesting this object will cause the axioms to be written onto the
     //         * database if they are not already present. If this is a read-only view and
@@ -1775,7 +1775,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     //
     //        }
 
-    /**
+    /*
      * Return the assertion buffer.
      *
      * <p>The assertion buffer is used to buffer statements that are being asserted so as to
@@ -1815,7 +1815,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return assertBuffer;
     }
 
-    /**
+    /*
      * Return the retraction buffer (truth maintenance only).
      *
      * <p>The retraction buffer is used by the {@link SailConnection} API IFF truth maintenance is
@@ -1875,7 +1875,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return retractBuffer;
     }
 
-    /**
+    /*
      * Any kind of connection (core constructor).
      *
      * @param timestampOrTxId Either a commit time or a read/write transaction identifier.
@@ -1916,8 +1916,8 @@ public class EmbergraphSail extends SailBase implements Sail {
           // truthMaintenance
           if (database.getAxioms() instanceof NoAxioms || quads || scaleOut) {
 
-            /*
-             * If there is no axioms model then inference is not enabled and
+          /*
+       * If there is no axioms model then inference is not enabled and
              * truth maintenance is disabled automatically.
              */
 
@@ -1964,8 +1964,8 @@ public class EmbergraphSail extends SailBase implements Sail {
         // queryTimeExpander
         if (scaleOut) {
 
-          /*
-           * Note: Query time expanders are not supported in scale-out. They
+        /*
+       * Note: Query time expanders are not supported in scale-out. They
            * involve an expander pattern on the IAccessPath and that is not
            * compatible with local reads against sharded indices.
            */
@@ -2046,7 +2046,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       listeners = readOnly ? null : new CopyOnWriteArraySet<ISPARQLUpdateListener>();
     }
 
-    /**
+    /*
      * Unisolated connections.
      *
      * @param lock
@@ -2059,7 +2059,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       attach(ITx.UNISOLATED);
     }
 
-    /**
+    /*
      * Per-connection initialization. This method must be invoked after the constructor so that the
      * connection is otherwise initialized.
      *
@@ -2076,8 +2076,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (!isReadOnly()) {
 
-        /*
-         * Give each registered ServiceFactory instance an opportunity to
+      /*
+       * Give each registered ServiceFactory instance an opportunity to
          * intercept the start of this connection.
          */
 
@@ -2101,8 +2101,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
         if (this.changeLog != null) {
 
-          /*
-           * Note: The read/write tx will also do this after each
+        /*
+       * Note: The read/write tx will also do this after each
            * commit since it always starts a newTx() when the last one
            * is done.
            *
@@ -2120,7 +2120,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return this;
     }
 
-    /**
+    /*
      * When true, the RDFS closure will be maintained by the {@link EmbergraphSailConnection}
      * implementation (but not by methods that go around the {@link EmbergraphSailConnection}).
      *
@@ -2137,7 +2137,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return truthMaintenanceIsSupportable && unisolated;
     }
 
-    /**
+    /*
      * Enable or suppress incremental truth maintenance for this {@link EmbergraphSailConnection}.
      * Truth maintenance MUST be configured and this MUST be the {@link ITx#UNISOLATED} connection.
      *
@@ -2179,8 +2179,8 @@ public class EmbergraphSail extends SailBase implements Sail {
       synchronized (this) {
         if (this.truthMaintenance != newValue) {
 
-          /*
-           * Since the state of the flag has changed, any buffered
+        /*
+       * Since the state of the flag has changed, any buffered
            * assertions or retractions MUST be synchronously flushed
            * so they are processed either with or without incremental
            * truth maintenance as appropriate for the current state of
@@ -2190,8 +2190,8 @@ public class EmbergraphSail extends SailBase implements Sail {
           flush();
         }
 
-        /*
-         * Now that any buffered assertions or retractions have been
+      /*
+       * Now that any buffered assertions or retractions have been
          * flushed, we go ahead and change the state of the flag.
          */
 
@@ -2203,7 +2203,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       }
     }
 
-    /**
+    /*
      * Attach to a new database view. Useful for transactions.
      *
      * @param timestampOrTxId The timestamp or the transaction identifier for the view of the
@@ -2254,8 +2254,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
         if (log.isInfoEnabled()) log.info("Read-write view");
 
-        /*
-         * Note: A ConcurrentHashMap is used in case the SAIL has
+      /*
+       * Note: A ConcurrentHashMap is used in case the SAIL has
          * concurrent threads which are processing RDF/XML statements
          * and therefore could in principle require concurrent access to
          * this map. ConcurrentHashMap is preferred to
@@ -2271,8 +2271,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
         if (truthMaintenance) {
 
-          /*
-           * Setup the object that will be used to maintain the
+        /*
+       * Setup the object that will be used to maintain the
            * closure of the database.
            */
 
@@ -2285,7 +2285,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       }
     }
 
-    /**
+    /*
      * The implementation object.
      *
      * @return The backing {@link AbstractTripleStore} or <code>null</code> if an unisolated
@@ -2297,7 +2297,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return database;
     }
 
-    /**
+    /*
      * When true, SAIL will compute entailments at query time that were excluded from forward
      * closure.
      *
@@ -2320,7 +2320,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return unisolated;
     }
 
-    /**
+    /*
      * Used by the RepositoryConnection to determine whether or not to allow auto-commits.
      *
      * @see Options#ALLOW_AUTO_COMMIT
@@ -2345,13 +2345,13 @@ public class EmbergraphSail extends SailBase implements Sail {
      * Note: SailBase appears to handle the SailChangedListener api.
      */
 
-    /**
+    /*
      * Vector of transient {@link SailConnectionListener}s registered with this SAIL. The field is
      * set back to <code>null</code> whenever there are no more listeners.
      */
     private Vector<SailConnectionListener> m_listeners = null;
 
-    /**
+    /*
      * Note: This method is <strong>strongly discouraged</strong> as it imposes an extremely high
      * burden on the database requiring the materialization at the client of every statement to be
      * added or removed from the database in the scope of this {@link SailConnection}. Further,
@@ -2395,8 +2395,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (m_listeners.isEmpty()) {
 
-        /*
-         * Note: Since the price of notifying listeners is so high the
+      /*
+       * Note: Since the price of notifying listeners is so high the
          * listeners vector is explicitly set to null so that we can
          * test whether or not listeners need to be notified simply by
          * testing m_listeners != null.
@@ -2406,7 +2406,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       }
     }
 
-    /**
+    /*
      * Notifies {@link SailConnectionListener}s if one or more statements have been added to or
      * removed from the repository using the SAIL methods:
      *
@@ -2439,7 +2439,7 @@ public class EmbergraphSail extends SailBase implements Sail {
        */
 
       final SailConnectionListener[] listeners =
-          (SailConnectionListener[]) m_listeners.toArray(new SailConnectionListener[] {});
+          m_listeners.toArray(new SailConnectionListener[] {});
 
       for (int i = 0; i < listeners.length; i++) {
 
@@ -2525,7 +2525,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return new NamespaceIterator(namespaces.entrySet().iterator());
     }
 
-    /**
+    /*
      * Namespace iterator.
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2570,7 +2570,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * Statement CRUD
      */
 
-    /**
+    /*
      * Sesame has a concept of a "null" graph. Any statement inserted whose context position is NOT
      * bound will be inserted into the "null" graph. Statements inserted into the "null" graph are
      * visible from the SPARQL default graph, when no data set is specified (in this case all
@@ -2590,8 +2590,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (contexts.length == 0) {
 
-        /*
-         * Operate on just the nullGraph.
+      /*
+       * Operate on just the nullGraph.
          *
          * Note: When no contexts are specified, the intention for
          * addStatements() is that a statement with no associated
@@ -2619,8 +2619,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (!isOpen()) {
 
-        /*
-         * Note: While this exception is not declared by the javadoc,
+      /*
+       * Note: While this exception is not declared by the javadoc,
          * it is required by the Sesame TCK.
          */
         throw new IllegalStateException();
@@ -2678,8 +2678,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (contexts.length == 0) {
 
-        /*
-         * Operates on all contexts.
+      /*
+       * Operates on all contexts.
          *
          * Note: This deliberately removes the statements from each
          * access path rather than doing a drop/add on the triple/quad
@@ -2688,9 +2688,9 @@ public class EmbergraphSail extends SailBase implements Sail {
 
         database
             .getAccessPath(
-                (Resource) null /* s */,
-                (URI) null /* p */,
-                (Value) null /* o */,
+                null /* s */,
+                null /* p */,
+                null /* o */,
                 (Resource) null /* c */)
             .removeAll();
 
@@ -2699,8 +2699,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (contexts.length == 1 && contexts[0] == null) {
 
-        /*
-         * Operate on just the nullGraph, or on the sole graph if not in
+      /*
+       * Operate on just the nullGraph, or on the sole graph if not in
          * quads mode.
          */
 
@@ -2725,7 +2725,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return;
     }
 
-    /**
+    /*
      * Clears all buffered statements in the {@link #assertBuffer} and in the optional {@link
      * #retractBuffer}. If {@link #truthMaintenance} is enabled, then the backing tempStores are
      * also closed and deleted. The buffer references are set to <code>null</code> and the buffers
@@ -2768,7 +2768,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       if (bnodes2 != null) bnodes2.clear();
     }
 
-    /**
+    /*
      * Count the statements in the specified contexts. Returns an exact size or an upper bound
      * depending on the value of {@link Options#EXACT_SIZE}. Exact size is an extremely expensive
      * operation, which we turn off by default. In default mode, an upper bound is given for the
@@ -2785,7 +2785,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return size(exactSize, contexts);
     }
 
-    /**
+    /*
      * Note: This method is quite expensive since it must materialize all statement in either the
      * database or in the specified context(s) and then filter for the explicit statements in order
      * to obtain an exact count. See {@link AbstractTripleStore#getStatementCount()} or {@link
@@ -2819,8 +2819,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
         if (contexts.length == 1 && contexts[0] == null) {
 
-          /*
-           * Operate on just the nullGraph (or on the sole graph if not in
+        /*
+       * Operate on just the nullGraph (or on the sole graph if not in
            * quads mode).
            */
 
@@ -2847,8 +2847,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
         } else if (contexts.length == 1 && contexts[0] == null) {
 
-          /*
-           * Operate on just the nullGraph (or on the sole graph if not in
+        /*
+       * Operate on just the nullGraph (or on the sole graph if not in
            * quads mode).
            */
 
@@ -2889,8 +2889,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       } else if (contexts.length == 1 && contexts[0] == null) {
 
-        /*
-         * Operate on just the nullGraph, or on the sole graph if not in
+      /*
+       * Operate on just the nullGraph, or on the sole graph if not in
          * quads mode.
          */
 
@@ -2915,8 +2915,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (m_listeners != null) {
 
-        /*
-         * FIXME to support the SailConnectionListener we need to
+      /*
+       * FIXME to support the SailConnectionListener we need to
          * pre-materialize the explicit statements that are to be
          * deleted and then notify the listener for each such explicit
          * statement. Since that is a lot of work, make sure that we do
@@ -2931,16 +2931,16 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (getTruthMaintenance()) {
 
-        /*
-         * Since we are doing truth maintenance we need to copy the
+      /*
+       * Since we are doing truth maintenance we need to copy the
          * matching "explicit" statements into a temporary store rather
          * than deleting them directly. This uses the internal API to
          * copy the statements to the temporary store without
          * materializing them as Sesame Statement objects.
          */
 
-        /*
-         * Obtain a chunked iterator using the triple pattern that
+      /*
+       * Obtain a chunked iterator using the triple pattern that
          * visits only the explicit statements.
          */
         final IChunkedOrderedIterator<ISPO> itr =
@@ -2956,15 +2956,15 @@ public class EmbergraphSail extends SailBase implements Sail {
         // Copy explicit statements to tempStore.
         n = tempStore.addStatements(tempStore, true /* copyOnly */, itr, null /* filter */);
 
-        /*
-         * Nothing more happens until the commit or incremental write
+      /*
+       * Nothing more happens until the commit or incremental write
          * flushes the retraction buffer and runs TM.
          */
 
       } else {
 
-        /*
-         * Since we are not doing truth maintenance, just remove the
+      /*
+       * Since we are not doing truth maintenance, just remove the
          * statements from the database (synchronous, batch api, not
          * buffered).
          */
@@ -3000,8 +3000,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (m_listeners != null) {
 
-        /*
-         * FIXME to support the SailConnectionListener we need to
+      /*
+       * FIXME to support the SailConnectionListener we need to
          * pre-materialize the explicit statements that are to be
          * deleted and then notify the listener for each such explicit
          * statement. Since that is a lot of work, make sure that we do
@@ -3016,16 +3016,16 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (getTruthMaintenance()) {
 
-        /*
-         * Since we are doing truth maintenance we need to copy the
+      /*
+       * Since we are doing truth maintenance we need to copy the
          * matching "explicit" statements into a temporary store rather
          * than deleting them directly. This uses the internal API to
          * copy the statements to the temporary store without
          * materializing them as Sesame Statement objects.
          */
 
-        /*
-         * Obtain a chunked iterator using the triple pattern that
+      /*
+       * Obtain a chunked iterator using the triple pattern that
          * visits only the explicit statements.
          */
         final IChunkedOrderedIterator<ISPO> itr = combineAndIterate(preds, numPreds);
@@ -3036,15 +3036,15 @@ public class EmbergraphSail extends SailBase implements Sail {
         // Copy explicit statements to tempStore.
         n = tempStore.addStatements(tempStore, true /* copyOnly */, itr, null /* filter */);
 
-        /*
-         * Nothing more happens until the commit or incremental write
+      /*
+       * Nothing more happens until the commit or incremental write
          * flushes the retraction buffer and runs TM.
          */
 
       } else {
 
-        /*
-         * Since we are not doing truth maintenance, just remove the
+      /*
+       * Since we are not doing truth maintenance, just remove the
          * statements from the database (synchronous, batch api, not
          * buffered).
          */
@@ -3116,8 +3116,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (m_listeners != null) {
 
-        /*
-         * FIXME to support the SailConnectionListener we need to
+      /*
+       * FIXME to support the SailConnectionListener we need to
          * pre-materialize the explicit statements that are to be
          * deleted and then notify the listener for each such explicit
          * statement. Since that is a lot of work, make sure that we do
@@ -3132,16 +3132,16 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (getTruthMaintenance()) {
 
-        /*
-         * Since we are doing truth maintenance we need to copy the
+      /*
+       * Since we are doing truth maintenance we need to copy the
          * matching "explicit" statements into a temporary store rather
          * than deleting them directly. This uses the internal API to
          * copy the statements to the temporary store without
          * materializing them as Sesame Statement objects.
          */
 
-        /*
-         * Obtain a chunked iterator using the triple pattern that
+      /*
+       * Obtain a chunked iterator using the triple pattern that
          * visits only the explicit statements.
          */
         final IChunkedOrderedIterator<ISPO> itr =
@@ -3153,15 +3153,15 @@ public class EmbergraphSail extends SailBase implements Sail {
         // Copy explicit statements to tempStore.
         n = tempStore.addStatements(tempStore, true /* copyOnly */, itr, null /* filter */);
 
-        /*
-         * Nothing more happens until the commit or incremental write
+      /*
+       * Nothing more happens until the commit or incremental write
          * flushes the retraction buffer and runs TM.
          */
 
       } else {
 
-        /*
-         * Since we are not doing truth maintenance, just remove the
+      /*
+       * Since we are not doing truth maintenance, just remove the
          * statements from the database (synchronous, batch api, not
          * buffered).
          */
@@ -3233,8 +3233,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (m_listeners != null) {
 
-        /*
-         * FIXME to support the SailConnectionListener we need to
+      /*
+       * FIXME to support the SailConnectionListener we need to
          * pre-materialize the explicit statements that are to be
          * deleted and then notify the listener for each such explicit
          * statement. Since that is a lot of work, make sure that we do
@@ -3249,16 +3249,16 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (getTruthMaintenance()) {
 
-        /*
-         * Since we are doing truth maintenance we need to copy the
+      /*
+       * Since we are doing truth maintenance we need to copy the
          * matching "explicit" statements into a temporary store rather
          * than deleting them directly. This uses the internal API to
          * copy the statements to the temporary store without
          * materializing them as Sesame Statement objects.
          */
 
-        /*
-         * Obtain a chunked iterator using the triple pattern that
+      /*
+       * Obtain a chunked iterator using the triple pattern that
          * visits only the explicit statements.
          */
         final IChunkedOrderedIterator<ISPO> itr = new ChunkedArrayIterator<ISPO>(numStmts, stmts);
@@ -3269,15 +3269,15 @@ public class EmbergraphSail extends SailBase implements Sail {
         // Copy explicit statements to tempStore.
         n = tempStore.addStatements(tempStore, true /* copyOnly */, itr, null /* filter */);
 
-        /*
-         * Nothing more happens until the commit or incremental write
+      /*
+       * Nothing more happens until the commit or incremental write
          * flushes the retraction buffer and runs TM.
          */
 
       } else {
 
-        /*
-         * Since we are not doing truth maintenance, just remove the
+      /*
+       * Since we are not doing truth maintenance, just remove the
          * statements from the database (synchronous, batch api, not
          * buffered).
          */
@@ -3404,8 +3404,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (database.getSPORelation().oneAccessPath) {
 
-        /*
-         * The necessary index does not exist (we would have to scan
+      /*
+       * The necessary index does not exist (we would have to scan
          * everything and filter to obtain a distinct set).
          */
 
@@ -3466,8 +3466,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
         @Override
         public void remove() throws SailException {
-          /*
-           * Note: remove is not supported. The semantics would
+        /*
+       * Note: remove is not supported. The semantics would
            * require that we removed all statements for the last
            * visited context.
            */
@@ -3484,7 +3484,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * transaction support.
      */
 
-    /**
+    /*
      * Note: The semantics depend on the {@link Options#STORE_CLASS}. See {@link
      * ITripleStore#abort()}.
      */
@@ -3528,7 +3528,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       }
     }
 
-    /**
+    /*
      * Set to <code>true</code> if we {@link #flush()} either of the {@link StatementBuffer}s. The
      * flag reflects whether or not the buffered writes were propagated to the underlying indices.
      * For some database modes those writes will be buffered by the indices and then incrementally
@@ -3539,7 +3539,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return dirty;
     }
 
-    /**
+    /*
      * Commit the write set.
      *
      * <p>Note: The semantics depend on the {@link Options#STORE_CLASS}. See {@link
@@ -3550,7 +3550,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     public synchronized long commit2() throws SailException {
 
-      /**
+      /*
        * If a call to rollback does not complete cleanly, then rollbackRequired will be set and no
        * updates will be allowed.
        *
@@ -3591,7 +3591,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return commitTime;
     }
 
-    /**
+    /*
      * Commit the write set.
      *
      * <p>Note: The semantics depend on the {@link Options#STORE_CLASS}. See {@link
@@ -3609,7 +3609,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return openConn;
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Note: If writes have been applied through the {@link EmbergraphSailConnection} and neither
@@ -3643,8 +3643,8 @@ public class EmbergraphSail extends SailBase implements Sail {
       final IIndexManager im = getIndexManager();
 
       if (isDirty()) {
-        /*
-         * Do implicit rollback() of a dirty connection.
+      /*
+       * Do implicit rollback() of a dirty connection.
          *
          * Note: DO NOT invoke rollback unless the indices are dirty.
          * Discarding the unisolated indices will throw out a LOT of
@@ -3707,7 +3707,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       }
     }
 
-    /**
+    /*
      * Must check to see whether the lock is held by the currnet Thread to determine whether it can
      * be unlocked.
      */
@@ -3739,7 +3739,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       super.finalize();
     }
 
-    /**
+    /*
      * Flush the statement buffers. The {@link EmbergraphSailConnection} heavily buffers assertions
      * and retractions. Either a {@link #flush()} or a {@link #commit()} is required before
      * executing any operations directly against the backing {@link AbstractTripleStore} so that the
@@ -3753,7 +3753,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       flushStatementBuffers(true /* flushAssertBuffer */, true /* flushRetractBuffer */);
     }
 
-    /**
+    /*
      * Flush pending assertions and/or retractions to the database using efficient batch operations.
      * If {@link #getTruthMaintenance()} returns <code>true</code> this method will also handle
      * truth maintenance.
@@ -3842,7 +3842,7 @@ public class EmbergraphSail extends SailBase implements Sail {
           context == null ? new Resource[] {} : new Resource[] {context});
     }
 
-    /**
+    /*
      * Note: if the context is <code>null</code>, then you will see data from each context in a quad
      * store, including anything in the {@link EmbergraphSail#NULL_GRAPH}.
      */
@@ -3858,8 +3858,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (!isOpen()) {
 
-        /*
-         * Note: While this exception is not declared by the javadoc,
+      /*
+       * Note: While this exception is not declared by the javadoc,
          * it is required by the Sesame TCK.
          */
         throw new IllegalStateException();
@@ -3890,8 +3890,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (contexts.length == 1 && contexts[0] == null) {
 
-        /*
-         * Operate on just the nullGraph, or on the sole graph if not in
+      /*
+       * Operate on just the nullGraph, or on the sole graph if not in
          * quads mode.
          */
 
@@ -3952,8 +3952,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (accessPath instanceof EmptyAccessPath) {
 
-        /*
-         * One of the Values was unknown so the access path will be empty.
+      /*
+       * One of the Values was unknown so the access path will be empty.
          *
          * Note: This is true even if we are doing some backchaining.
          */
@@ -3980,8 +3980,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       if (backchain) {
 
-        /*
-         * Obtain an iterator that will generate any missing entailments
+      /*
+       * Obtain an iterator that will generate any missing entailments
          * at query time. The behavior of the iterator depends on how
          * the InferenceEngine was configured.
          */
@@ -3995,8 +3995,8 @@ public class EmbergraphSail extends SailBase implements Sail {
 
       } else {
 
-        /*
-         * Otherwise we only return the statements actually present in
+      /*
+       * Otherwise we only return the statements actually present in
          * the database.
          *
          * Note: An ExplicitSPOFilter is set above that enforces this.
@@ -4046,7 +4046,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     //
     //        }
 
-    /**
+    /*
      * Return <code>true</code> iff a statement exists matching the supplied constraints.
      *
      * <p>This code path is optimized for cases where isolatable indices are not in use and where
@@ -4077,30 +4077,25 @@ public class EmbergraphSail extends SailBase implements Sail {
        */
       final boolean fastRangeCountOk;
       if (isIsolatable()) {
-        /*
-         * The indices are isolatable. This means that fast range counts are
+      /*
+       * The indices are isolatable. This means that fast range counts are
          * not exact. Therefore we have to scan the index.
          */
         fastRangeCountOk = false;
       } else {
-        /*
-         * The indices are not isolatable so fast range counts are exact.
+      /*
+       * The indices are not isolatable so fast range counts are exact.
          */
         if (includeInferred) {
-          /*
-           * Inferences are being counted so a fast range count will be
+        /*
+       * Inferences are being counted so a fast range count will be
            * correct.
            */
           fastRangeCountOk = true;
-        } else if (tripleStore.getAxioms().getClass() == NoAxioms.class) {
-          /*
-           * Inferences are not being maintained so a fast range count will be
-           * exact.
-           */
-          fastRangeCountOk = true;
-        } else {
-          fastRangeCountOk = false;
-        }
+        } else /*
+         * Inferences are not being maintained so a fast range count will be
+         * exact.
+         */fastRangeCountOk = tripleStore.getAxioms().getClass() == NoAxioms.class;
       }
 
       if (fastRangeCountOk) {
@@ -4108,12 +4103,12 @@ public class EmbergraphSail extends SailBase implements Sail {
         if (contexts.length == 0) {
 
           // Operates on all contexts.
-          return tripleStore.hasStatement(s, p, o, (Resource) null /* c */);
+          return tripleStore.hasStatement(s, p, o, null /* c */);
 
         } else if (contexts.length == 1 && contexts[0] == null) {
 
-          /*
-           * Operate on just the nullGraph, or on the sole graph if not in
+        /*
+       * Operate on just the nullGraph, or on the sole graph if not in
            * quads mode.
            */
 
@@ -4148,7 +4143,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       }
     }
 
-    /**
+    /*
      * Computes the closure of the triple store for RDF(S)+ entailments.
      *
      * <p>This computes the closure of the database. This can be used if you do NOT enable truth
@@ -4174,7 +4169,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       database.getInferenceEngine().computeClosure(null /* focusStore */);
     }
 
-    /**
+    /*
      * Removes all "inferred" statements from the database and the proof chains (if any) associated
      * with those inferences (does NOT commit the database).
      */
@@ -4200,8 +4195,8 @@ public class EmbergraphSail extends SailBase implements Sail {
      * Update
      */
 
-    //        /**
-    //         * Embergraph now uses an internal query model which differs significantly
+    //        /*
+//         * Embergraph now uses an internal query model which differs significantly
     //         * from the Sesame query model. Support is not provided for
     //         * {@link UpdateExpr} evaluation. SPARQL UPDATE requests must be
     //         * prepared and evaluated using a
@@ -4226,7 +4221,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * High-level query.
      */
 
-    /**
+    /*
      * Embergraph now uses an internal query model which differs significantly from the Sesame query
      * model. Support is no longer provided for {@link TupleExpr} evaluation. SPARQL queries must be
      * prepared and evaluated using a {@link EmbergraphSailRepositoryConnection}.
@@ -4243,7 +4238,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       throw new SailException(ERR_OPENRDF_QUERY_MODEL);
     }
 
-    /**
+    /*
      * Evaluate a embergraph query model.
      *
      * @param queryRoot The query model.
@@ -4284,7 +4279,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       }
     }
 
-    /**
+    /*
      * Set the change log on the SAIL connection. See {@link IChangeLog} and {@link IChangeRecord}.
      *
      * @param changeLog the change log
@@ -4304,7 +4299,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       this.changeLog.addDelegate(changeLog);
     }
 
-    /**
+    /*
      * Remove a change log from the SAIL connection. See {@link IChangeLog} and {@link
      * IChangeRecord}.
      *
@@ -4404,7 +4399,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      * @see org.openrdf.sail.SailConnection#begin()
      */
 
-    /**
+    /*
      * NOP.
      *
      * <p>{@inheritDoc}
@@ -4412,7 +4407,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     @Override
     public void begin() throws SailException {}
 
-    /**
+    /*
      * NOP.
      *
      * <p>{@inheritDoc}
@@ -4424,7 +4419,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     //
     //		}
 
-    /**
+    /*
      * Always returns <code>true</code>.
      *
      * <p>Note: Embergraph does not expose its internal transaction state to the sail (the concept
@@ -4439,7 +4434,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       return true;
     }
 
-    /**
+    /*
      * NOP - the internal transaction model is not exposed to the {@link SailConnection}.
      *
      * <p>Note: Full read/write transactions do have a prepare()/commit() model interallly based on
@@ -4504,7 +4499,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     /** The transaction id. */
     private long tx;
 
-    /**
+    /*
      * Constructor for a new fully isolated read/write transaction. This constructor uses the caller
      * supplied read/write transaction from the journal's transaction service and attaches this SAIL
      * connection to the new view of the database.
@@ -4575,7 +4570,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       }
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>A specialized commit that goes through the transaction service available on the journal's
@@ -4641,7 +4636,7 @@ public class EmbergraphSail extends SailBase implements Sail {
       }
     }
 
-    /**
+    /*
      * A specialized rollback that goes through the transaction service available on the journal's
      * transaction manager. Once the abort happens, a new read/write transaction is automatically
      * started so that this connection can continue to absorb writes.
@@ -4705,7 +4700,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     /** The transaction id. */
     private long tx;
 
-    /**
+    /*
      * When <code>true</code>, uses a read-historical operation rather than a read-only transaction
      * to read against a cluster.
      *
@@ -4727,7 +4722,7 @@ public class EmbergraphSail extends SailBase implements Sail {
      */
     private final boolean clusterCacheBugFix;
 
-    /**
+    /*
      * Constructor starts a new transaction. It Obtains a new read-only transaction from the
      * journal's transaction service, and attach this SAIL connection to the new view of the
      * database.
@@ -4757,8 +4752,8 @@ public class EmbergraphSail extends SailBase implements Sail {
       this.tx = timestampOrTxId;
     }
 
-    //        /**
-    //         * Obtain a new read-only transaction from the journal's transaction
+    //        /*
+//         * Obtain a new read-only transaction from the journal's transaction
     //         * service, and attach this SAIL connection to the new view of the
     //         * database.
     //         *
@@ -4813,8 +4808,8 @@ public class EmbergraphSail extends SailBase implements Sail {
     ////
     ////                        } else {
     //
-    ////                            /**
-    ////                             * TODO This can happen in HA because the TxState is
+    ////                            /*
+////                             * TODO This can happen in HA because the TxState is
     ////                             * not available yet on the followers.
     ////                             *
     ////                             * @see <a
@@ -4871,7 +4866,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     //
     //                    }
 
-    /**
+    /*
      * NOP
      *
      * @return <code>0L</code> since nothing was committed.

@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bfs;
 
-/**
- * Test suite for {@link EmbergraphFileSystem#deleteAll(String, String)}.
+/*
+* Test suite for {@link EmbergraphFileSystem#deleteAll(String, String)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

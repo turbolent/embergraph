@@ -31,8 +31,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.journal.Options;
 import org.embergraph.journal.ProxyTestCase;
 
-/**
- * Delegate for {@link ProxyTestCase}s for services running against a {@link Journal}.
+/*
+* Delegate for {@link ProxyTestCase}s for services running against a {@link Journal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -62,7 +62,7 @@ public class TestJournal extends AbstractJournalTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Note: Since the write cache is a direct ByteBuffer we have to make it very small (or disable it
    * entirely) when running the test suite or the JVM will run out of memory - this is exactly the
    * same (Sun) bug which motivates us to reuse the same ByteBuffer when we overflow a journal using
@@ -71,7 +71,7 @@ public class TestJournal extends AbstractJournalTestCase {
    */
   private static final boolean writeCacheEnabled = true; // 512;
 
-  /**
+  /*
    * Extends the basic behavior to force a commit of the {@link Journal}. This makes the {@link
    * Journal} appear to have "auto-commit" semantics from the perspective of the unit tests that are
    * written to the assumption that the {@link IIndexManager} is an {@link IEmbergraphFederation}.

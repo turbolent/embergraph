@@ -68,8 +68,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * A write buffer for absorbing the output of the RIO parser or other {@link Statement} source and
+/*
+* A write buffer for absorbing the output of the RIO parser or other {@link Statement} source and
  * writing that output onto an {@link AbstractTripleStore} using the batch API.
  *
  * <p>Note: there is a LOT of {@link Value} duplication in parsed RDF and we get a significant
@@ -105,31 +105,31 @@ public class StatementBuffer<S extends Statement>
   /** #of valid entries in {@link #stmts}. */
   protected int numStmts;
 
-  /**
+  /*
    * The total number of statements accepted by the {@link StatementBuffer}. This can include
    * statements that are currently buffered as well as those that have already been queued or
    * written. This is a running total and does not attempt to avoid counting duplicates.
    */
   private long numTotalStmts;
 
-  /**
+  /*
    * @todo consider tossing out these counters - they only add complexity to the code in {@link
    *     #handleStatement(Resource, URI, Value, StatementEnum)}.
    */
   protected int numURIs, numLiterals, numBNodes;
 
-  /**
+  /*
    * The #of blank nodes which appear in the context position and zero (0) if statement identifiers
    * are not enabled.
    */
   protected int numSIDs;
 
-  /**
+  /*
    * Map used to filter out duplicate terms. The use of this map provides a ~40% performance gain.
    */
   private final Map<Value, EmbergraphValue> distinctTermMap;
 
-  /**
+  /*
    * A canonicalizing map for blank nodes. This map MUST be cleared before you begin to add
    * statements to the buffer from a new "source" otherwise it will co-reference blank nodes from
    * distinct sources. The life cycle of the map is the life cycle of the document being loaded, so
@@ -137,7 +137,7 @@ public class StatementBuffer<S extends Statement>
    */
   private Map<String, EmbergraphBNode> bnodes;
 
-  /**
+  /*
    * The #of blank nodes, which are not resolved and thus will require adding to values array while
    * running {@link #incrementalWrite()}
    *
@@ -146,7 +146,7 @@ public class StatementBuffer<S extends Statement>
    */
   private int bnodesTotalCount;
 
-  /**
+  /*
    * The #of blank nodes, which were resolved and thus will not require adding to values array while
    * running {@link #incrementalWrite()} This variable is made volatile, as it is updated from
    * {@link DrainQueueCallable} and should be available at the time of access from {@link
@@ -157,7 +157,7 @@ public class StatementBuffer<S extends Statement>
    */
   private volatile int bnodesResolvedCount;
 
-  /**
+  /*
    * Statements which use blank nodes in their {s,p,o} positions must be deferred when statement
    * identifiers are enabled until (a) either the blank node is observed in the context position of
    * a statement; or (b) {@link #flush()} is invoked, indicating that no more data will be loaded
@@ -168,14 +168,14 @@ public class StatementBuffer<S extends Statement>
    */
   private Set<EmbergraphStatement> deferredStmts;
 
-  /**
+  /*
    * RDR statements. Map to a bnode used in other statements. Need to defer both the reified
    * statement (since it comes in piecemeal) and the statements about it (since we need to make sure
    * the ground version is present).
    */
   private Map<EmbergraphBNodeImpl, ReifiedStmt> reifiedStmts;
 
-  /**
+  /*
    * <code>true</code> if statement identifiers are enabled.
    *
    * <p>Note: This is set by the ctor but temporarily overridden during {@link
@@ -186,7 +186,7 @@ public class StatementBuffer<S extends Statement>
    */
   private boolean statementIdentifiers;
 
-  /**
+  /*
    * When non-<code>null</code> the statements will be written on this store. When <code>null</code>
    * the statements are written onto the {@link #database}. (This is used to support incremental
    * truth maintenance.)
@@ -200,7 +200,7 @@ public class StatementBuffer<S extends Statement>
     return statementStore;
   }
 
-  /**
+  /*
    * The database that will be used to resolve terms. When {@link #statementStore} is <code>null
    * </code>, statements will be written into this store as well.
    */
@@ -209,7 +209,7 @@ public class StatementBuffer<S extends Statement>
   /** The arity of the SPORelation for the {@link #getDatabase()}. */
   private final int arity;
 
-  /**
+  /*
    * The database that will be used to resolve terms. When {@link #getStatementStore()} is <code>
    * null</code>, statements will be written into this store as well.
    */
@@ -229,13 +229,13 @@ public class StatementBuffer<S extends Statement>
   private final EmbergraphURI RDF_STATEMENT;
   private final EmbergraphURI RDF_TYPE;
 
-  /**
+  /*
    * The maximum #of Statements, URIs, Literals, or BNodes that the buffer can hold. The minimum
    * capacity is three (3) since that corresponds to a single triple where all terms are URIs.
    */
   private final int bufferCapacity;
 
-  /**
+  /*
    * The maximum #of Statements, URIs, Literals, or BNodes that the buffer can hold. The minimum
    * capacity is three (3) since that corresponds to a single triple where all terms are URIs.
    */
@@ -244,13 +244,13 @@ public class StatementBuffer<S extends Statement>
     return bufferCapacity;
   }
 
-  //    /**
-  //     * When true only distinct terms are stored in the buffer (this is always
+  //    /*
+//     * When true only distinct terms are stored in the buffer (this is always
   //     * true since this condition always outperforms the alternative).
   //     */
   //    protected final boolean distinct = true;
 
-  /**
+  /*
    * The capacity of the optional {@link #queue} used to overlap the parser with the index writer
    * -or- ZERO (0) iff the queue is disabled and index writes will be synchronous and alternate with
    * the parser (the historical behavior).
@@ -269,7 +269,7 @@ public class StatementBuffer<S extends Statement>
   /** The #of batches written onto the database. */
   private int batchWriteCount;
 
-  /**
+  /*
    * When non-null, this is a deque that will be used allow the parser to race ahead. Once the
    * writes on the statement indices are done, the queue can be drained to a thread that will then
    * merge the batches and batch them through to the database.
@@ -279,13 +279,13 @@ public class StatementBuffer<S extends Statement>
    */
   private final LinkedBlockingQueue<Batch<S>> queue;
 
-  /**
+  /*
    * When non-null, this is a single threaded executor that will be used to drain {@link #queue} and
    * batch updates through to the database.
    */
   private final Executor executor;
 
-  /**
+  /*
    * When the {@link #queue} is being used, this is the {@link Future} of the current task (if any)
    * that is writing the current {@link Batch} onto the database.
    *
@@ -294,7 +294,7 @@ public class StatementBuffer<S extends Statement>
    */
   private volatile FutureTask<Void> ft;
 
-  /**
+  /*
    * The capacity of the optional queue used to overlap the parser with the index writer -or- ZERO
    * (0) iff the queue is disabled and index writes will be synchronous and alternate with the
    * parser (the historical behavior).
@@ -453,7 +453,7 @@ public class StatementBuffer<S extends Statement>
     return counters;
   }
 
-  /**
+  /*
    * When invoked, the {@link StatementBuffer} will resolve terms against the lexicon, but not enter
    * new terms into the lexicon. This mode can be used to efficiently resolve terms to {@link SPO}s.
    *
@@ -471,7 +471,7 @@ public class StatementBuffer<S extends Statement>
 
   private boolean readOnly = false;
 
-  /**
+  /*
    * Set an {@link IChangeLog} listener that will be notified about each statement actually written
    * onto the backing store.
    *
@@ -482,13 +482,13 @@ public class StatementBuffer<S extends Statement>
     this.changeLog = changeLog;
   }
 
-  /**
+  /*
    * When non-null, this is an {@link IChangeLog} listener that will be notified about each
    * statement actually written onto the backing store.
    */
   private IChangeLog changeLog;
 
-  /**
+  /*
    * Note: The use of this interface is NOT encouraged. It is used to hook the axioms in {@link
    * org.embergraph.rdf.axioms.BaseAxioms}. Ideally this could be backed out in favor of using the
    * {@link IChangeLog} but I was not able to make that work out very easily.
@@ -499,7 +499,7 @@ public class StatementBuffer<S extends Statement>
    */
   public interface IWrittenSPOArray {
 
-    /**
+    /*
      * A callback that is invoked with the statements actually written onto the backing store. The
      * default implementation is a NOP.
      *
@@ -511,7 +511,7 @@ public class StatementBuffer<S extends Statement>
 
   protected IWrittenSPOArray didWriteCallback = null;
 
-  /**
+  /*
    * Create a buffer that converts Sesame {@link Value} objects to {@link SPO} s and writes on the
    * <i>database</i> when it is {@link #flush()}ed. This may be used to perform efficient batch
    * write of Sesame {@link Value}s or {@link Statement}s onto the <i>database</i>. If you already
@@ -532,7 +532,7 @@ public class StatementBuffer<S extends Statement>
     this(null /* statementStore */, database, capacity, queueCapacity);
   }
 
-  /**
+  /*
    * Create a buffer that writes on a {@link TempTripleStore} when it is {@link #flush()}ed. This
    * variant is used during truth maintenance since the terms are written on the database lexicon
    * but the statements are asserted against the {@link TempTripleStore}.
@@ -624,7 +624,7 @@ public class StatementBuffer<S extends Statement>
     getDistinctTerm(RDF_STATEMENT, true);
     getDistinctTerm(RDF_TYPE, true);
 
-    /**
+    /*
      * TODO BLZG-1522. There is some odd interaction with SIDS that causes a thrown exception from
      * EmbergraphBNodeImpl.getIV() when the queue is used with sids....
      *
@@ -669,7 +669,7 @@ public class StatementBuffer<S extends Statement>
     }
   }
 
-  /**
+  /*
    * Added to ensure that the {@link FutureTask} is cancelled in case the caller does not shutdown
    * the {@link StatementBuffer} normally.
    */
@@ -681,8 +681,8 @@ public class StatementBuffer<S extends Statement>
     }
   }
 
-  //	/**
-  //	 * Evict a batch (blocking put, but spins to look for an error in
+  //	/*
+//	 * Evict a batch (blocking put, but spins to look for an error in
   //	 * {@link Future} for the thread draining the queue.
   //	 *
   //	 * @param batch
@@ -727,7 +727,7 @@ public class StatementBuffer<S extends Statement>
   //
   //	}
 
-  /**
+  /*
    * Drains {@link Batch}es from the queue and writes on the database.
    *
    * @author bryan
@@ -771,7 +771,7 @@ public class StatementBuffer<S extends Statement>
       return null;
     } // call()
 
-    /**
+    /*
      * There is more in the queue. Drain it. Watch out for that poison pill!
      *
      * <p>Note: Maximum from drainTo() is queueCapacity. Plus 1 since we already have one batch on
@@ -817,8 +817,8 @@ public class StatementBuffer<S extends Statement>
 
       if (avail.size() == 1) {
 
-        /*
-         * Safety check. Do not merge a single batch.
+      /*
+       * Safety check. Do not merge a single batch.
          */
         final BatchResult batchResult = avail.get(0).writeNow();
         bnodesResolvedCount += batchResult.getNumBNodesResolved();
@@ -835,7 +835,7 @@ public class StatementBuffer<S extends Statement>
     }
   } // DrainQueueCallable
 
-  /**
+  /*
    * Signals the end of a source and causes all buffered statements to be written.
    *
    * <p>Note: The source limits the scope within which blank nodes are co-referenced by their IDs.
@@ -892,8 +892,8 @@ public class StatementBuffer<S extends Statement>
     return 0L;
   }
 
-  //    /**
-  //     * Processes the {@link #deferredStmts deferred statements}.
+  //    /*
+//     * Processes the {@link #deferredStmts deferred statements}.
   //     * <p>
   //     * When statement identifiers are enabled the processing of statements using
   //     * blank nodes in their subject or object position must be deferred until we
@@ -1160,7 +1160,7 @@ public class StatementBuffer<S extends Statement>
   //
   //    }
 
-  /**
+  /*
    * Clears all buffered data, including the canonicalizing mapping for blank nodes and deferred
    * provenance statements.
    */
@@ -1202,7 +1202,7 @@ public class StatementBuffer<S extends Statement>
     }
   }
 
-  /**
+  /*
    * @todo could be replaced with {@link EmbergraphValueFactory
    */
   @Override
@@ -1225,7 +1225,7 @@ public class StatementBuffer<S extends Statement>
     }
   }
 
-  /**
+  /*
    * Invoked by {@link #incrementalWrite()} to clear terms and statements which have been written in
    * preparation for buffering more writes. This does NOT discard either the canonicalizing mapping
    * for blank nodes NOR any deferred statements.
@@ -1288,8 +1288,8 @@ public class StatementBuffer<S extends Statement>
 
       if (ft == null || ft.isDone() /* BLZG-1813 */) {
 
-        /*
-         * If the future is done, get the future, and
+      /*
+       * If the future is done, get the future, and
          * propogate any exceptions.
          *
          * @see BLZG-1813
@@ -1300,8 +1300,8 @@ public class StatementBuffer<S extends Statement>
 
             ft.get(); // get the future.
 
-            /*
-             * Fall through. New Future will be created below.
+          /*
+       * Fall through. New Future will be created below.
              */
 
           } catch (InterruptedException e) {
@@ -1315,8 +1315,8 @@ public class StatementBuffer<S extends Statement>
           }
         }
 
-        /*
-         * Note: Lazily initialized since reset() does not make the
+      /*
+       * Note: Lazily initialized since reset() does not make the
          * StatementBuffer object invalid for further use.
          */
 
@@ -1338,7 +1338,7 @@ public class StatementBuffer<S extends Statement>
     }
   }
 
-  /**
+  /*
    * A utility class to merge {@link Batch}es together while maintaining their distinct {@link
    * Value}[]s.
    *
@@ -1357,7 +1357,7 @@ public class StatementBuffer<S extends Statement>
 
     MergeUtility() {}
 
-    /**
+    /*
      * Merge a set of batches together.
      *
      * @param avail The available batches.
@@ -1422,7 +1422,7 @@ public class StatementBuffer<S extends Statement>
         for (Batch<S> sb : avail) {
           for (int i = 0; i < sb.numStmts; i++, n++) {
             // Create new statement using distinct values.
-            final EmbergraphStatement stmt = (EmbergraphStatement) sb.stmts[i];
+            final EmbergraphStatement stmt = sb.stmts[i];
             final EmbergraphResource s = (EmbergraphResource) getDistinctTerm(stmt.getSubject());
             final EmbergraphURI p = (EmbergraphURI) getDistinctTerm(stmt.getPredicate());
             final EmbergraphValue o = getDistinctTerm(stmt.getObject());
@@ -1450,7 +1450,7 @@ public class StatementBuffer<S extends Statement>
           );
     } // merge()
 
-    /**
+    /*
      * Canonicalizing mapping for a term when merging {@link Batch}es together. This is simpler than
      * the general case since we have already handled blank nodes, SIDs, etc. in the outer context.
      *
@@ -1474,8 +1474,8 @@ public class StatementBuffer<S extends Statement>
 
       if (existingTerm != null) {
 
-        /*
-         * Term already exists, do not add.
+      /*
+       * Term already exists, do not add.
          */
         return existingTerm;
       }
@@ -1497,7 +1497,7 @@ public class StatementBuffer<S extends Statement>
     }
   }
 
-  /**
+  /*
    * Result of the {@link Batch} execution, consists of #of statements written to the database and
    * #of bnodes, which do have their IVs assigned after incremental write
    *
@@ -1523,7 +1523,7 @@ public class StatementBuffer<S extends Statement>
     }
   }
 
-  /**
+  /*
    * A batch of statements together with their distinct values to be written onto the database.
    *
    * @author bryan
@@ -1602,7 +1602,7 @@ public class StatementBuffer<S extends Statement>
       this.stmts = stmts;
     }
 
-    /**
+    /*
      * @param sb
      * @param avoidCloningIfPossible When false, the backing arrays are cloned in order to allow
      *     them to be cleared by the caller. When true, values backing array will be used as-is if
@@ -1709,15 +1709,15 @@ public class StatementBuffer<S extends Statement>
       }
 
       if (cloned) {
-        /*
-         * The data was cloned, so reset the statement of the buffer in
+      /*
+       * The data was cloned, so reset the statement of the buffer in
          * the outer context (but not the bnodes nor deferred stmts).
          */
         sb._clear();
       }
     }
 
-    /**
+    /*
      * Flush the batch.
      *
      * @return A summary of the #of statements actually written and blank nodes actually resolved.
@@ -1824,7 +1824,7 @@ public class StatementBuffer<S extends Statement>
       }
     }
 
-    /**
+    /*
      * Adds the statements to each index (batch api, NO truth maintenance).
      *
      * <p>Pre-conditions: The {s,p,o} term identifiers for each {@link EmbergraphStatement} are
@@ -1987,7 +1987,7 @@ public class StatementBuffer<S extends Statement>
       return nwritten;
     }
 
-    /**
+    /*
      * Adds the statements to each index (batch api, NO truth maintenance).
      *
      * @param database The database that will be used to resolve terms. When <i>statementStore</i>
@@ -2041,7 +2041,7 @@ public class StatementBuffer<S extends Statement>
     }
   } // class Batch
 
-  /**
+  /*
    * Add an "explicit" statement to the buffer (flushes on overflow, no context).
    *
    * @param s
@@ -2054,7 +2054,7 @@ public class StatementBuffer<S extends Statement>
     add(s, p, o, null, StatementEnum.Explicit);
   }
 
-  /**
+  /*
    * Add an "explicit" statement to the buffer (flushes on overflow).
    *
    * @param s
@@ -2068,7 +2068,7 @@ public class StatementBuffer<S extends Statement>
     add(s, p, o, c, StatementEnum.Explicit);
   }
 
-  /**
+  /*
    * Add a statement to the buffer (core impl, flushes on overflow).
    *
    * @param s
@@ -2087,8 +2087,8 @@ public class StatementBuffer<S extends Statement>
         // THIS IS THE CORRECT ACTION!
         incrementalWrite();
       } else {
-        /*
-         * This will flush all blank nodes. It may be necessary on very
+      /*
+       * This will flush all blank nodes. It may be necessary on very
          * large files. It also resets the blank node and deferred
          * statement maps afterwards (since they are set to null by
          * reset()).
@@ -2114,7 +2114,7 @@ public class StatementBuffer<S extends Statement>
         (e instanceof EmbergraphStatement ? ((EmbergraphStatement) e).getStatementType() : null));
   }
 
-  /**
+  /*
    * Returns true if the bufferQueue has less than three slots remaining for any of the value arrays
    * (URIs, Literals, or BNodes) or if there are no slots remaining in the statements array. Under
    * those conditions adding another statement to the bufferQueue could cause an overflow.
@@ -2128,12 +2128,11 @@ public class StatementBuffer<S extends Statement>
     // This check takes into account dynamically calculated #of unresolved bnodes,
     // which will get added to values array while running incrementalWrite
     // @see https://jira.blazegraph.com/browse/BLZG-1708
-    if (numValues + bnodesTotalCount - bnodesResolvedCount + arity > values.length) return true;
+    return numValues + bnodesTotalCount - bnodesResolvedCount + arity > values.length;
 
-    return false;
   }
 
-  /**
+  /*
    * Canonicalizing mapping for a term.
    *
    * <p>Note: Blank nodes are made canonical with the scope of the source from which the data are
@@ -2168,10 +2167,10 @@ public class StatementBuffer<S extends Statement>
             valueFactory.createStatement(
                 (EmbergraphResource) getDistinctTerm(stmt.getSubject(), true),
                 (EmbergraphURI) getDistinctTerm(stmt.getPredicate(), true),
-                (EmbergraphValue) getDistinctTerm(stmt.getObject(), true)));
+                getDistinctTerm(stmt.getObject(), true)));
 
-        /*
-         * Do not "add if absent".  This is not a real term, just a
+      /*
+       * Do not "add if absent".  This is not a real term, just a
          * composition of other terms.
          */
         return bnode;
@@ -2183,8 +2182,8 @@ public class StatementBuffer<S extends Statement>
 
         if (bnodes == null) {
 
-          /*
-           * Allocating canonicalizing map for blank nodes. Note:
+        /*
+       * Allocating canonicalizing map for blank nodes. Note:
            * Using linked hash map since we have to iterate over this
            * in order to decide how many resolved and unresolved blank
            * nodes remain in the map per
@@ -2207,8 +2206,8 @@ public class StatementBuffer<S extends Statement>
 
           if (existingBNode != null) {
 
-            /*
-             * Return existing blank node with same ID, do not
+          /*
+       * Return existing blank node with same ID, do not
              * add since not absent.
              */
             return existingBNode;
@@ -2258,8 +2257,8 @@ public class StatementBuffer<S extends Statement>
           }
         }
 
-        /*
-         * Term already exists, do not add.
+      /*
+       * Term already exists, do not add.
          */
         return existingTerm;
       }
@@ -2317,7 +2316,7 @@ public class StatementBuffer<S extends Statement>
     }
   }
 
-  /**
+  /*
    * Adds the values and the statement into the buffer.
    *
    * @param _s The subject.
@@ -2408,8 +2407,8 @@ public class StatementBuffer<S extends Statement>
 
       } else if (equals(o, RDF_STATEMENT) && equals(p, RDF_TYPE)) {
 
-        /*
-         * Ignore these statements.
+      /*
+       * Ignore these statements.
          *
          * _:sid rdf:type rdf:Statement .
          */
@@ -2516,7 +2515,7 @@ public class StatementBuffer<S extends Statement>
     public ReifiedStmt() {}
 
     public boolean isFullyBound(final int arity) {
-      return s != null && p != null && o != null && (arity > 3 ? c != null : true);
+      return s != null && p != null && o != null && (arity <= 3 || c != null);
     }
 
     @Override

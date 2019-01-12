@@ -25,7 +25,7 @@ import java.util.UUID;
 
 public interface ServiceLookup<S extends Remote> {
 
-  /**
+  /*
    * Return the remote interface used to perform HA operations on a member of quorum.
    *
    * @param serviceId The {@link UUID} associated with the service.

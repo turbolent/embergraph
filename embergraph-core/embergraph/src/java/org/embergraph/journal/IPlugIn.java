@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.journal;
 
-/**
- * Interface for a "plug in" that can be registered with a {@link Journal}.
+/*
+* Interface for a "plug in" that can be registered with a {@link Journal}.
  *
  * <p>TODO Support at {@link IIndexManager} interface? E.g., for the federation as well as the
  * journal.
@@ -27,23 +27,23 @@ package org.embergraph.journal;
  */
 public interface IPlugIn<M extends IIndexManager, S> {
 
-  /**
+  /*
    * Start the service.
    *
    * @param indexManager
    */
-  public void startService(M indexManager);
+  void startService(M indexManager);
 
-  /**
+  /*
    * Stop the service.
    *
    * @param immediateShutdown <code>true</code> if the service should be stopped immediately.
    */
-  public void stopService(boolean immediateShutdown);
+  void stopService(boolean immediateShutdown);
 
   /** Return the service. */
-  public S getService();
+  S getService();
 
   /** Return true iff the service is running. */
-  public boolean isRunning();
+  boolean isRunning();
 }

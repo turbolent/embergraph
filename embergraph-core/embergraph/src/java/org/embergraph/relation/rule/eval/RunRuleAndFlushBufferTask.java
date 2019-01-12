@@ -5,8 +5,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IRule;
 
-/**
- * Helper class is used for sequential {@link IRule} step execution. It runs an {@link IStepTask}
+/*
+* Helper class is used for sequential {@link IRule} step execution. It runs an {@link IStepTask}
  * and then {@link IBuffer#flush()}s the {@link IBuffer} on which the {@link IStepTask} wrote its
  * {@link ISolution}s.
  *
@@ -25,7 +25,7 @@ public class RunRuleAndFlushBufferTask implements IStepTask, Serializable {
   private final IStepTask stepTask;
   private final IBuffer<ISolution[]> buffer;
 
-  /**
+  /*
    * @param stepTask A task.
    * @param buffer A thread-safe buffer containing chunks of {@link ISolution}s computed by that
    *     task.

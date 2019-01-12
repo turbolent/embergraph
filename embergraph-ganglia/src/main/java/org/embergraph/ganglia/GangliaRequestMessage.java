@@ -15,8 +15,8 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * A ganglia request for a metric.
+/*
+* A ganglia request for a metric.
  *
  * <p>Ganglia sends out request messages when a service wants to obtain fresh metrics. The gmond
  * instances handle the request by clearing the timestamp associated with the metric. This causes
@@ -90,9 +90,7 @@ public class GangliaRequestMessage extends AbstractGangliaMessage
 
     if (!getMetricName().equals(t.getMetricName())) return false;
 
-    if (isSpoof() != t.isSpoof()) return false;
-
-    return true;
+    return isSpoof() == t.isSpoof();
   }
 
   @Override

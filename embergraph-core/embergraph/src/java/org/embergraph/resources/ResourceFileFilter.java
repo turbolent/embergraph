@@ -7,8 +7,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.journal.IResourceManager;
 import org.embergraph.resources.ResourceManager.Options;
 
-/**
- * The default implementation accepts directories under the configured {@link
+/*
+* The default implementation accepts directories under the configured {@link
  * IResourceManager#getDataDir()} and files with either {@link org.embergraph.journal.Options#JNL}
  * or {@link org.embergraph.journal.Options#SEG} file extensions.
  *
@@ -36,7 +36,7 @@ public class ResourceFileFilter implements FileFilter {
     this.resourceManager = resourceManager;
   }
 
-  /**
+  /*
    * Override this method to extend the filter.
    *
    * @param f A file passed to {@link #accept(File)}

@@ -49,8 +49,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for the {@link ASTNamedSubqueryOptimizer}.
+/*
+* Test suite for the {@link ASTNamedSubqueryOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestASTNamedSubqueryOptimizer.java 6281 2012-04-12 17:27:36Z thompsonbry $
@@ -73,7 +73,7 @@ public class TestASTNamedSubqueryOptimizer extends AbstractASTEvaluationTestCase
     super(name);
   }
 
-  /**
+  /*
    * Unit test for computing the join variables for a named subquery based on the analysis of the
    * bindings which MUST be produced by the subquery and those which MUST be bound on entry into the
    * group in which the subquery solution set is included within the main query.
@@ -254,7 +254,7 @@ public class TestASTNamedSubqueryOptimizer extends AbstractASTEvaluationTestCase
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Variant of {@link #test_static_analysis_join_vars()} where the order of the {@link
    * StatementPatternNode} and the {@link NamedSubqueryInclude} in the main WHERE clause is reversed
    * such that there are no join variables for the INCLUDE.
@@ -426,7 +426,7 @@ public class TestASTNamedSubqueryOptimizer extends AbstractASTEvaluationTestCase
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * This unit test is a based on <code>embergraph-perf/CI/govtrack/queries/query10.rq</code>
    *
    * <pre>

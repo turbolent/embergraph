@@ -32,8 +32,8 @@ import org.embergraph.io.ByteBufferInputStream;
 import org.embergraph.rawstore.IBlock;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Chunked range iterator running against a local index or index view.
+/*
+* Chunked range iterator running against a local index or index view.
  *
  * <p>Note: When {@link IRangeQuery#REMOVEALL} is specified without the {@link IRangeQuery#CURSOR}
  * flag, the iterator will populate its buffers up to the capacity and then delete behind once the
@@ -55,7 +55,7 @@ public class ChunkedLocalRangeIterator<E> extends AbstractChunkedTupleIterator<E
   /** Iff {@link IRangeQuery#CURSOR} was specified. */
   private final boolean cursor;
 
-  /**
+  /*
    * @param fromKey
    * @param toKey
    * @param capacity
@@ -129,7 +129,7 @@ public class ChunkedLocalRangeIterator<E> extends AbstractChunkedTupleIterator<E
     return new ResultSet(ndx, limit, tmpFlags, itr);
   }
 
-  /**
+  /*
    * Visits the next tuple, queuing it for removal unless {@link IRangeQuery#CURSOR} was specified,
    * in which case it is deleted immediately.
    *
@@ -146,8 +146,8 @@ public class ChunkedLocalRangeIterator<E> extends AbstractChunkedTupleIterator<E
 
       if (!cursor) {
 
-        /*
-         * Queue the key for removal IFF CURSOR was NOT specified.
+      /*
+       * Queue the key for removal IFF CURSOR was NOT specified.
          */
 
         remove();
@@ -227,7 +227,7 @@ public class ChunkedLocalRangeIterator<E> extends AbstractChunkedTupleIterator<E
     }
   }
 
-  /**
+  /*
    * Always returns 0L. This value is ignored by {@link #getResultSet(long, byte[], byte[], int,
    * int, ITupleFilter)}.
    */
@@ -237,7 +237,7 @@ public class ChunkedLocalRangeIterator<E> extends AbstractChunkedTupleIterator<E
     return 0L;
   }
 
-  /**
+  /*
    * Returns <code>true</code> since the read will be consistent (it reads against the same index
    * object for each {@link ResultSet}) but the values returned by {@link #getTimestamp()} and
    * {@link #getReadTime()} are ignored by {@link #getResultSet(long, byte[], byte[], int, int,

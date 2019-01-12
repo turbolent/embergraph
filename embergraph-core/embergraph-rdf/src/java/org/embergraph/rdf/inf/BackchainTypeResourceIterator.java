@@ -49,8 +49,8 @@ import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Provides backward chaining for (x rdf:type rdfs:Resource).
+/*
+* Provides backward chaining for (x rdf:type rdfs:Resource).
  *
  * <p>Note: You only need to do this on read from a high level query language since the rest of the
  * RDFS rules will run correctly without the (x rdf:type rdfs:Resource) entailments being present.
@@ -81,7 +81,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
   /** The subject(s) whose (s rdf:type rdfs:Resource) entailments will be visited. */
   private PushbackIterator<IV> resourceIds;
 
-  /**
+  /*
    * An iterator reading on the {@link SPOKeyOrder#POS} index. The predicate is bound to <code>
    * rdf:type</code> and the object is bound to <code>rdfs:Resource</code>. If the subject was given
    * to the ctor, then it will also be bound. The iterator visits the term identifier for the
@@ -93,7 +93,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
   private boolean open = true;
 
-  /**
+  /*
    * This is set each time by {@link #nextChunk()} and inspected by {@link #nextChunk(IKeyOrder)} in
    * order to decide whether the chunk needs to be sorted.
    */
@@ -102,7 +102,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
   /** The last {@link ISPO} visited by {@link #next()}. */
   private ISPO current = null;
 
-  /**
+  /*
    * Returns a suitably configured {@link BackchainTypeResourceIterator} -or- <i>src</i> iff the
    * <i>accessPath</i> does not require the materialization of <code>(x rdf:type rdfs:Resource)
    * </code> entailments.
@@ -262,12 +262,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
                     final SPO o = (SPO) arg0;
 
-                    if (o.p.equals(rdfType) && o.o.equals(rdfsResource)) {
-
-                      return false;
-                    }
-
-                    return true;
+                    return !o.p.equals(rdfType) || !o.o.equals(rdfsResource);
                   }
                 });
 
@@ -281,7 +276,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
     return term == null || term.isVar() ? null : term.get();
   }
 
-  /**
+  /*
    * Create an iterator that will visit all statements in the source iterator and also backchain any
    * entailments of the form (x rdf:type rdfs:Resource) which are valid for the given triple
    * pattern.
@@ -373,19 +368,14 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
       _src.close();
     }
 
-    if (resourceIds.hasNext()) {
-
-      // still consuming the subjects iterator.
-
-      return true;
-    }
+    // still consuming the subjects iterator.
+    return resourceIds.hasNext();
 
     // the subjects iterator is also exhausted so we are done.
 
-    return false;
   }
 
-  /**
+  /*
    * Visits all {@link SPO}s visited by the source iterator and then begins to backchain ( x
    * rdf:type: rdfs:Resource ) statements.
    *
@@ -431,8 +421,8 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
         if (cmp < 0) {
 
-          /*
-           * Consuming from [resourceIds] (the term identifier ordered
+        /*
+       * Consuming from [resourceIds] (the term identifier ordered
            * LT the next term identifier from [posItr]).
            *
            * There is NOT an explicit statement from [posItr], so emit
@@ -445,8 +435,8 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
         } else {
 
-          /*
-           * Consuming from [posItr].
+        /*
+       * Consuming from [posItr].
            *
            * There is an explicit statement for the current term
            * identifer from [resourceIds].
@@ -454,8 +444,8 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
           if (cmp != 0) {
 
-            /*
-             * Since [resourceIds] and [posItr] are NOT visiting the
+          /*
+       * Since [resourceIds] and [posItr] are NOT visiting the
              * same term identifier, we pushback on [resourceIds].
              *
              * Note: When they DO visit the same term identifier
@@ -471,8 +461,8 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
 
       } else {
 
-        /*
-         * [posItr] is exhausted so just emit inferences based on
+      /*
+       * [posItr] is exhausted so just emit inferences based on
          * [resourceIds].
          */
 
@@ -494,7 +484,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
     }
   }
 
-  /**
+  /*
    * Note: This method preserves the {@link IKeyOrder} of the source iterator iff it is reported by
    * {@link #getKeyOrder()}. Otherwise chunks read from the source iterator will be in whatever
    * order that iterator is using while chunks containing backchained entailments will be in {@link
@@ -601,7 +591,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
     return stmts;
   }
 
-  /**
+  /*
    * Note: You can not "remove" the backchained entailments. If the last statement visited by {@link
    * #next()} is "explicit" then the request is delegated to the source iterator.
    */
@@ -624,7 +614,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
     current = null;
   }
 
-  /**
+  /*
    * Reads on two iterators visiting elements in some natural order and visits their order
    * preserving merge (no duplicates).
    *
@@ -738,7 +728,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
     }
   }
 
-  /**
+  /*
    * Filterator style construct that allows push back of a single visited element.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -757,7 +747,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
     }
   }
 
-  /**
+  /*
    * Implementation class for {@link PushbackFilter}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -771,7 +761,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
     /** The most recent element visited by the iterator. */
     private E current;
 
-    /**
+    /*
      * When non-<code>null</code>, this element was pushed back and is the next element to be
      * visited.
      */
@@ -813,7 +803,7 @@ public class BackchainTypeResourceIterator implements IChunkedOrderedIterator<IS
       return tmp;
     }
 
-    /**
+    /*
      * Push the value onto the internal buffer. It will be returned by the next call to {@link
      * #next()}.
      *

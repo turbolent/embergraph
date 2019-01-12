@@ -34,8 +34,8 @@ import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 
-/**
- * Operator computes the running sum over the presented binding sets for the given variable. A
+/*
+* Operator computes the running sum over the presented binding sets for the given variable. A
  * missing value does not contribute towards the sum.
  *
  * @author thompsonbry
@@ -60,7 +60,7 @@ public class AVERAGE extends AggregateBase<IV> implements INeedsMaterialization 
     super(distinct, expr);
   }
 
-  /**
+  /*
    * The running aggregate value.
    *
    * <p>Note: SUM() returns ZERO if there are no non-error solutions presented. This assumes that
@@ -173,7 +173,7 @@ public class AVERAGE extends AggregateBase<IV> implements INeedsMaterialization 
     return aggregated;
   }
 
-  /**
+  /*
    * Note: {@link AVERAGE} only works on numerics. If they are inline, then that is great. Otherwise
    * it will handle a materialized numeric literal and do type promotion, which always results in a
    * signed inline number IV and then operate on that.

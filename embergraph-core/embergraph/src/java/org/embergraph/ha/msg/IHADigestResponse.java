@@ -20,14 +20,14 @@ package org.embergraph.ha.msg;
 import java.util.UUID;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Message used to communicate the digest of a backing store.
+/*
+* Message used to communicate the digest of a backing store.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHADigestResponse extends IHAMessage {
 
-  /**
+  /*
    * The {@link UUID} identifying the {@link IRawStore} for which the record was requested
    * (optional, defaults to the current Journal).
    *

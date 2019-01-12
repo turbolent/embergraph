@@ -25,17 +25,17 @@ import java.util.List;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTAttachJoinFiltersOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
 
-/**
- * A marker interface for any kind of AST Node which joins stuff.
+/*
+* A marker interface for any kind of AST Node which joins stuff.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IJoinNode extends IBindingProducerNode {
 
-  public interface Annotations {
+  interface Annotations {
 
-    /**
+    /*
      * A {@link List} of {@link FilterNode}s for constraints which MUST run <em>with</em> the JOIN.
      */
     String FILTERS = "filters";
@@ -45,7 +45,7 @@ public interface IJoinNode extends IBindingProducerNode {
 
     boolean DEFAULT_OPTIONAL = false;
 
-    /**
+    /*
      * When <code>true</code>, the join group has the semantics of a SPARQL MINUS operator and only
      * those solutions in the parent group which do NOT join with this group will be output.
      */
@@ -54,7 +54,7 @@ public interface IJoinNode extends IBindingProducerNode {
     boolean DEFAULT_MINUS = false;
   }
 
-  /**
+  /*
    * Return whether or not this is an join with "optional" semantics. Optional joins may or may not
    * produce variable bindings, but will not reduce the incoming solutions based on whether or not
    * they bind.
@@ -64,7 +64,7 @@ public interface IJoinNode extends IBindingProducerNode {
   /** Return <code>true</code> iff this is a join group representing a SPARQL MINUS operator. */
   boolean isMinus();
 
-  /**
+  /*
    * Return the FILTER(s) associated with this {@link IJoinNode}. Such filters will be run with the
    * JOIN for this statement pattern. As such, they MUST NOT rely on materialization of variables
    * which would not have been bound before that JOIN.

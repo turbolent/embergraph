@@ -26,8 +26,8 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
 
-/**
- * Delegation pattern for an {@link ITransactionService}.
+/*
+* Delegation pattern for an {@link ITransactionService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -17,17 +17,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal;
 
-/**
- * Utility for inline URI Handlers that have a namespace and a suffix
+/*
+* Utility for inline URI Handlers that have a namespace and a suffix
  *
  * @author beebs
  */
 public interface ISuffixedURIHandler {
 
-  /**
+  /*
    * Returns the suffix for the handler
    *
    * @return
    */
-  public String getSuffix();
+  String getSuffix();
 }

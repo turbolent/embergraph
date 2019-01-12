@@ -25,8 +25,8 @@ import java.util.UUID;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 
-/**
- * Test suite for fully isolated read-only transactions reading from a caller specified start time.
+/*
+* Test suite for fully isolated read-only transactions reading from a caller specified start time.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -56,8 +56,8 @@ public class TestReadOnlyTx<S extends Journal> extends ProxyTestCase<S> {
       final long ts1;
       {
 
-        /*
-         * register an index, write on the index, and commit the journal.
+      /*
+       * register an index, write on the index, and commit the journal.
          */
         IndexMetadata md = new IndexMetadata(name, UUID.randomUUID());
 
@@ -74,8 +74,8 @@ public class TestReadOnlyTx<S extends Journal> extends ProxyTestCase<S> {
 
       {
 
-        /*
-         * create a read-only transaction, verify that we can read the
+      /*
+       * create a read-only transaction, verify that we can read the
          * value written on the index but that we can not write on the
          * index.
          */
@@ -86,7 +86,7 @@ public class TestReadOnlyTx<S extends Journal> extends ProxyTestCase<S> {
 
         assertNotNull(ndx);
 
-        assertEquals((byte[]) v1, (byte[]) ndx.lookup(k1));
+        assertEquals(v1, ndx.lookup(k1));
 
         try {
           ndx.insert(k1, new byte[] {1, 2, 3});
@@ -100,8 +100,8 @@ public class TestReadOnlyTx<S extends Journal> extends ProxyTestCase<S> {
 
       {
 
-        /*
-         * do it again, but this time we will abort the read-only
+      /*
+       * do it again, but this time we will abort the read-only
          * transaction.
          */
 
@@ -111,7 +111,7 @@ public class TestReadOnlyTx<S extends Journal> extends ProxyTestCase<S> {
 
         assertNotNull(ndx);
 
-        assertEquals((byte[]) v1, (byte[]) ndx.lookup(k1));
+        assertEquals(v1, ndx.lookup(k1));
 
         try {
           ndx.insert(k1, new byte[] {1, 2, 3});

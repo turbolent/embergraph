@@ -24,8 +24,8 @@ package org.embergraph.btree;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.MutableKeyBuffer;
 
-/**
- * Test code that chooses the child to search during recursive traversal of the separator keys to
+/*
+* Test code that chooses the child to search during recursive traversal of the separator keys to
  * find a leaf in which a key would be found.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -92,8 +92,8 @@ public class TestFindChild extends AbstractBTreeTestCase {
     assertEquals(3, node.findChild(new byte[] {13}));
   }
 
-  //    /**
-  //     * A test of {@link Node#findChild(int searchKeyOffset, byte[] searchKey)}
+  //    /*
+//     * A test of {@link Node#findChild(int searchKeyOffset, byte[] searchKey)}
   //     * with non-zero offsets.
   //     */
   //    public void test_node_findChild02() {

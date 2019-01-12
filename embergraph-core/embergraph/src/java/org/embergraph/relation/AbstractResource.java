@@ -66,8 +66,8 @@ import org.embergraph.relation.rule.eval.ProgramTask;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.GlobalRowStoreUtil;
 
-/**
- * Base class for locatable resources.
+/*
+* Base class for locatable resources.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -96,7 +96,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
   private final int maxParallelSubqueries;
   //    private final boolean nestedSubquery;
 
-  /**
+  /*
    * The capacity of the buffers accumulating chunks from concurrent producers.
    *
    * @see Options#CHUNK_OF_CHUNKS_CAPACITY
@@ -107,7 +107,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return chunkOfChunksCapacity;
   }
 
-  /**
+  /*
    * The target chunk size.
    *
    * @see Options#CHUNK_CAPACITY
@@ -118,7 +118,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return chunkCapacity;
   }
 
-  /**
+  /*
    * The timeout in milliseconds that the {@link BlockingBuffer} will wait for another chunk to
    * combine with the current chunk before returning the current chunk. This may be ZERO (0) to
    * disable the chunk combiner.
@@ -131,7 +131,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return chunkTimeout;
   }
 
-  /**
+  /*
    * If the estimated range count for an {@link IAccessPath#iterator(long,long, int)} is LTE this
    * threshold then do a fully buffered (synchronous) read. Otherwise we will do an asynchronous
    * read.
@@ -144,7 +144,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return fullyBufferedReadThreshold;
   }
 
-  /**
+  /*
    * When <code>true</code>, rule sets will be forced to execute sequentially even when they are not
    * flagged as a sequential program.
    *
@@ -156,7 +156,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return forceSerialExecution;
   }
 
-  /**
+  /*
    * The maximum #of subqueries for the first join dimension that will be issued in parallel. Use
    * ZERO(0) to avoid submitting tasks to the {@link ExecutorService} entirely and ONE (1) to submit
    * a single task at a time to the {@link ExecutorService}.
@@ -169,7 +169,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return maxParallelSubqueries;
   }
 
-  /**
+  /*
    * Options for locatable resources.
    *
    * @todo most of these options effect asynchronous iterators, access path behavior, and join
@@ -180,9 +180,9 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options {
+  public interface Options {
 
-    /**
+    /*
      * Set the maximum #of chunks from concurrent producers that can be buffered before an {@link
      * IBuffer} containing chunks of {@link ISolution}s would block (default {@link
      * #DEFAULT_CHUNK_OF_CHUNKS_CAPACITY}). This is used to provision a {@link BlockingQueue} for
@@ -195,14 +195,14 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
      */
     String CHUNK_OF_CHUNKS_CAPACITY = BlockingBuffer.class.getName() + ".chunkOfChunksCapacity";
 
-    /**
+    /*
      * Default for {@link #CHUNK_OF_CHUNKS_CAPACITY}
      *
      * @deprecated by {@link BOp} annotations.
      */
     String DEFAULT_CHUNK_OF_CHUNKS_CAPACITY = "10"; // was 1000
 
-    /**
+    /*
      * Sets the capacity of the {@link IBuffer}s used to accumulate a chunk when evaluating rules,
      * etc (default {@value #CHUNK_CAPACITY}). Note that many processes use a {@link BlockingBuffer}
      * to accumulate "chunks of chunks".
@@ -212,7 +212,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
      */
     String CHUNK_CAPACITY = IBuffer.class.getName() + ".chunkCapacity";
 
-    /**
+    /*
      * Default for {@link #CHUNK_CAPACITY}
      *
      * <p>Note: This used to be 20k, but chunks of chunks works better than just a large chunk.
@@ -221,7 +221,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
      */
     String DEFAULT_CHUNK_CAPACITY = "100"; // was 100
 
-    /**
+    /*
      * The timeout in milliseconds that the {@link BlockingBuffer} will wait for another chunk to
      * combine with the current chunk before returning the current chunk (default {@link
      * #DEFAULT_CHUNK_TIMEOUT}). This may be ZERO (0) to disable the chunk combiner.
@@ -230,7 +230,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
      */
     String CHUNK_TIMEOUT = BlockingBuffer.class.getName() + ".chunkTimeout";
 
-    /**
+    /*
      * The default for {@link #CHUNK_TIMEOUT}.
      *
      * @todo this is probably much larger than we want. Try 10ms.
@@ -238,7 +238,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
      */
     String DEFAULT_CHUNK_TIMEOUT = "10"; // was 1000
 
-    /**
+    /*
      * If the estimated rangeCount for an {@link AccessPath#iterator()} is LTE this threshold then
      * use a fully buffered (synchronous) iterator. Otherwise use an asynchronous iterator whose
      * capacity is governed by {@link #CHUNK_OF_CHUNKS_CAPACITY}.
@@ -248,7 +248,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     String FULLY_BUFFERED_READ_THRESHOLD =
         AccessPath.class.getName() + ".fullyBufferedReadThreadshold";
 
-    /**
+    /*
      * Default for {@link #FULLY_BUFFERED_READ_THRESHOLD}
      *
      * @todo figure out how good this value is.
@@ -256,7 +256,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
      */
     String DEFAULT_FULLY_BUFFERED_READ_THRESHOLD = "200"; // ""+20*Bytes.kilobyte32;
 
-    /**
+    /*
      * When <code>true</code> ({@value #DEFAULT_FORCE_SERIAL_EXECUTION}), rule sets will be forced
      * to execute sequentially even when they are not flagged as a sequential program.
      *
@@ -300,7 +300,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     /** @deprecated by {@link BOp} annotations. */
     String DEFAULT_FORCE_SERIAL_EXECUTION = "true";
 
-    /**
+    /*
      * The maximum #of subqueries for the first join dimension that will be issued in parallel. Use
      * ZERO(0) to avoid submitting tasks to the {@link ExecutorService} entirely and ONE (1) to
      * submit a single task at a time to the {@link ExecutorService}.
@@ -322,7 +322,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     this(null /* container */, indexManager, namespace, timestamp, properties);
   }
 
-  /**
+  /*
    * Alternative version used when a resource exists within some container. The additional
    * <i>container</i> argument provides access to the container before the container has been
    * written to the global row store.
@@ -422,7 +422,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return containerNamespace;
   }
 
-  /**
+  /*
    * Return the container.
    *
    * @return The container -or- <code>null</code> if there is no container.
@@ -460,7 +460,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return timestamp;
   }
 
-  /**
+  /*
    * The commit time from which a read-only view was materialized (if known) and otherwise <code>
    * null</code>.
    *
@@ -471,7 +471,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return commitTime;
   }
 
-  /**
+  /*
    * Wrap and return the properties specified to the ctor. Wrapping the {@link Properties} object
    * prevents inadvertent side-effects.
    */
@@ -480,7 +480,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return new Properties(properties);
   }
 
-  /**
+  /*
    * Return the {@link Properties} object without wrapping it. This method can be used in those
    * cases where you need to access non-String property values. The caller is responsible for
    * avoiding mutation to the returned Properties object.
@@ -496,7 +496,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return properties;
   }
 
-  /**
+  /*
    * Return the object used to locate indices, relations, and relation containers and to execute
    * operations on those resources.
    *
@@ -542,7 +542,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return this;
   }
 
-  /**
+  /*
    * @todo Lock service supporting shared locks, leases and lease renewal, escalation of shared
    *     locks to exclusive locks, deadlock detection, and possibly a resource hierarchy. Leases
    *     should be Callable objects that are submitted by the client to its executor service so that
@@ -629,8 +629,8 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     {
       if (indexManager instanceof IJournal || indexManager instanceof IEmbergraphFederation) {
 
-        /*
-         * Note: No cache associated with a TemporaryStore (since no
+      /*
+       * Note: No cache associated with a TemporaryStore (since no
          * QueryEngine is associated with a TemporaryStore).
          *
          * Note: If the cache is remote, then we need to create the
@@ -644,8 +644,8 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
         final QueryEngine queryEngine =
             QueryEngineFactory.getInstance().getQueryController(indexManager);
 
-        /*
-         * Connect to the cache provider.
+      /*
+       * Connect to the cache provider.
          *
          * Note: This will create the cache if it does not exist. At all
          * other places in the code we use getExistingSparqlCache() to
@@ -667,7 +667,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     indexManager.getResourceLocator().discard(this, true /* destroyed */);
   }
 
-  /**
+  /*
    * Acquires an exclusive lock for the {@link #getNamespace()}.
    *
    * @return the lock.
@@ -679,7 +679,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return indexManager.getResourceLockService().acquireLock(getNamespace());
   }
 
-  /**
+  /*
    * Release the lock.
    *
    * @param resourceLock The lock.
@@ -689,7 +689,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     resourceLock.unlock();
   }
 
-  /**
+  /*
    * Resolve the property value using the {@link IIndexManager}, the namespace of the resource, and
    * the {@link Properties} instance to be tested as hidden parameters.
    *
@@ -703,7 +703,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
     return Configuration.getProperty(indexManager, properties, namespace, localName, defaultValue);
   }
 
-  /**
+  /*
    * Resolves, parses, and validates the property value.
    *
    * @param name The property name.
@@ -717,8 +717,8 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
         indexManager, properties, namespace, name, defaultValue, validator);
   }
 
-  //    /**
-  //     * Sets the property on the underlying properties object but DOES NOT set
+  //    /*
+//     * Sets the property on the underlying properties object but DOES NOT set
   //     * the property on the global row store (GRS). This method may be used when
   //     * a resource is newly created in order to cache objects which are persisted
   //     * on the GRS.

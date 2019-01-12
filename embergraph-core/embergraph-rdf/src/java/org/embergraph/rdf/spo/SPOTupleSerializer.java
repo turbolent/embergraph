@@ -37,8 +37,8 @@ import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.StatementEnum;
 
-/**
- * (De-)serializes {@link SPO}s for statement indices.
+/*
+* (De-)serializes {@link SPO}s for statement indices.
  *
  * <p>Note: the encoded key for a statement is formed from the 64-bit <code>long</code> term
  * identifier for the subject, predicate, and object positions of the statement. Each statement
@@ -67,8 +67,8 @@ public class SPOTupleSerializer extends DefaultTupleSerializer<SPO, SPO> {
   /** If true, explicit SPOs decoded from index tuples will have a sid attached. */
   private boolean sids;
 
-  //    /**
-  //     * Used to format the value.
+  //    /*
+//     * Used to format the value.
   //     */
   //    private final transient ByteArrayBuffer buf = new ByteArrayBuffer(0);
 
@@ -80,7 +80,7 @@ public class SPOTupleSerializer extends DefaultTupleSerializer<SPO, SPO> {
   /** De-serialization constructor. */
   public SPOTupleSerializer() {}
 
-  /**
+  /*
    * Create an {@link ITupleSerializer} for the indicated access path.
    *
    * @param keyOrder The access path.
@@ -90,7 +90,7 @@ public class SPOTupleSerializer extends DefaultTupleSerializer<SPO, SPO> {
     this(keyOrder, sids, getDefaultLeafKeysCoder(), getDefaultValuesCoder());
   }
 
-  /**
+  /*
    * Create an {@link ITupleSerializer} for the indicated access path.
    *
    * @param keyOrder The access path.
@@ -124,7 +124,7 @@ public class SPOTupleSerializer extends DefaultTupleSerializer<SPO, SPO> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Forms the statement key.
    *
    * @param spo The statement.
@@ -135,7 +135,7 @@ public class SPOTupleSerializer extends DefaultTupleSerializer<SPO, SPO> {
     return keyOrder.encodeKey(getKeyBuilder(), spo);
   }
 
-  /**
+  /*
    * Variant duplicates the behavior of {@link #serializeVal(SPO)} to provide support for non-{@link
    * SPO} {@link ISPO}s.
    */
@@ -157,7 +157,7 @@ public class SPOTupleSerializer extends DefaultTupleSerializer<SPO, SPO> {
         spo.isOverride(), spo.getUserFlag(), spo.getStatementType());
   }
 
-  /**
+  /*
    * Return the byte[] that would be written into a statement index for this {@link SPO}, including
    * the optional {@link StatementEnum#MASK_OVERRIDE} bit. If the statement identifier is non-null
    * then it will be included in the returned byte[].
@@ -271,8 +271,8 @@ public class SPOTupleSerializer extends DefaultTupleSerializer<SPO, SPO> {
     switch (version) {
       case VERSION0:
         keyOrder = SPOKeyOrder.valueOf(in.readByte());
-        /*
-         * New version is not backwards compatible with old journals that
+      /*
+       * New version is not backwards compatible with old journals that
          * used sids.
          */
         sids = false;

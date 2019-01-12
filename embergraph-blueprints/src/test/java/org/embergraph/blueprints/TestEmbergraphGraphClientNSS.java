@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.blueprints;
 
-/**
- * Test class for EmbergraphGraphClient against an embedded NSS provided for test suite coverage of
+/*
+* Test class for EmbergraphGraphClient against an embedded NSS provided for test suite coverage of
  * clients.
  *
  * @author beebs

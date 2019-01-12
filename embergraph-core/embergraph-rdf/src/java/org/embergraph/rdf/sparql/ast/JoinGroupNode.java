@@ -38,14 +38,14 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
 
   interface Annotations extends GroupNodeBase.Annotations {
 
-    /**
+    /*
      * The graph variable or constant iff this {@link JoinGroupNode} models a GraphPatternGroup.
      * When not present, your have to read up the parent chain to locate the dominating graph
      * context.
      */
     String CONTEXT = "context";
 
-    /**
+    /*
      * A property that may be set by a query hint. When set, the value is a {@link
      * QueryOptimizerEnum}.
      *
@@ -54,7 +54,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
      */
     String OPTIMIZER = QueryHints.OPTIMIZER;
 
-    /**
+    /*
      * An optional boolean that indicates whether this {@link JoinGroupNode} is the subgroup of an
      * {@link ArbitraryLengthPathNode}. The default of this annotation is {@value
      * #DEFAULT_IS_SUBGROUP_OF_ALP_NODE} (see: {@link #DEFAULT_IS_SUBGROUP_OF_ALP_NODE}).
@@ -64,7 +64,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     boolean DEFAULT_IS_SUBGROUP_OF_ALP_NODE = false;
   }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * <p><strong>Note: There is a nasty potential for a conflict here. This constructor is part of
@@ -128,7 +128,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     setOptional(optional);
   }
 
-  /**
+  /*
    * Construct a possibly optional group having the specified child as its initial member.
    *
    * @param optional <code>true</code> iff the group is optional.
@@ -143,7 +143,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     addChild(child);
   }
 
-  /**
+  /*
    * Construct a GRAPH group having the specified child as its initial member.
    *
    * @param context The variable or constant for the GRAPH group.
@@ -158,7 +158,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     addChild(child);
   }
 
-  /**
+  /*
    * Set the context for a GroupGraphPattern.
    *
    * @param context The context (may be <code>null</code>).
@@ -168,7 +168,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     setProperty(Annotations.CONTEXT, context);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to return the context associated with this {@link JoinGroupNode} if it is defined
@@ -207,7 +207,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     setProperty(Annotations.MINUS, minus);
   }
 
-  /**
+  /*
    * Returns the property {@link Annotations#IS_SUBGROUP_OF_ALP_NODE} of this {@link JoinGroupNode}.
    */
   public final boolean isSubgroupOfALPNode() {
@@ -221,7 +221,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     setProperty(Annotations.IS_SUBGROUP_OF_ALP_NODE, isSubgroup);
   }
 
-  /**
+  /*
    * Return the {@link QueryOptimizerEnum} that is in effect for this {@link JoinGroupNode}. This
    * will be the value specified through {@link QueryHints#OPTIMIZER} and otherwise the default
    * value given by {@link QueryHints#DEFAULT_OPTIMIZER}.
@@ -286,7 +286,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     return getChildren(NamedSubqueryInclude.class);
   }
 
-  /**
+  /*
    * Return any <code>LET x:= expr</code> or <code>(expr AS ?x)</code> nodes in <i>this</i> group
    * (these are modeled in exactly the same way by the AST {@link AssignmentNode}).
    *
@@ -304,7 +304,7 @@ public class JoinGroupNode extends GraphPatternGroup<IGroupMemberNode> {
     return getChildren(FilterNode.class);
   }
 
-  /**
+  /*
    * Return the set of IN filters for this group.
    *
    * <p>FIXME We need to move away from the DataSetJoin class and replace it with an IPredicate to

@@ -30,8 +30,8 @@ import java.io.IOException;
 import java.util.Random;
 import junit.framework.TestCase;
 
-/**
- * Test suite for packing and unpacking unsigned long integers using the {@link DataInputBuffer} and
+/*
+* Test suite for packing and unpacking unsigned long integers using the {@link DataInputBuffer} and
  * the {@link ByteArrayBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -49,7 +49,7 @@ public class TestLongPacker extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unpacks a long.
    *
    * @param expected The expected long value.
@@ -74,7 +74,7 @@ public class TestLongPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * Given the first byte of a packed long value, return the #of bytes into which that value was
    * packed (including this one).
    *
@@ -299,10 +299,10 @@ public class TestLongPacker extends TestCase {
   }
 
   private interface LongGenerator {
-    public long nextLong();
+    long nextLong();
   }
 
-  /**
+  /*
    * All long values in sequence starting from the given start value and using the given increment.
    *
    * @author thompsonbry
@@ -327,7 +327,7 @@ public class TestLongPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * Random long values (64 bits of random long), including negatives, with a uniform distribution.
    *
    * @author thompsonbry
@@ -345,8 +345,8 @@ public class TestLongPacker extends TestCase {
     }
   }
 
-  //    /**
-  //     * Random non-negative long values (64 bits of random long) with a uniform
+  //    /*
+//     * Random non-negative long values (64 bits of random long) with a uniform
   //     * distribution.
   //     *
   //     * @author thompsonbry
@@ -366,7 +366,7 @@ public class TestLongPacker extends TestCase {
   //
   //    }
 
-  /**
+  /*
    * Random non-negative long values with between 1 and 63 bits of leading zeros. The advantage of
    * this random number generator is that it can look for edge conditions based on the #of leading
    * zeros in the value to be packed.
@@ -414,7 +414,7 @@ public class TestLongPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * Run a large #of pack/unpack operations on a sequence of long values to demonstrate correctness
    * in that sequence. The sequence is the long values from -1 to 1M by one (dense coverage).
    *
@@ -426,7 +426,7 @@ public class TestLongPacker extends TestCase {
     doStressTest(1000000, new Sequence(-1, 1));
   }
 
-  /**
+  /*
    * Run a large #of random pack/unpack operations to sample the space while showing correctness on
    * those samples. The amount of compression due to packing for this test is <em>very</em> small
    * since all bits are equally likely to be non-zero, so the #of bytes required on average to pack
@@ -440,7 +440,7 @@ public class TestLongPacker extends TestCase {
     doStressTest(1000000, new RandomLong(new Random()));
   }
 
-  /**
+  /*
    * Run a large #of random pack/unpack operations to sample the space while showing correctness on
    * those samples. The samples are drawn from the non-negative longs and have a random number of
    * leading bits set to zero. Since the values are non-negative there will always be at least one
@@ -454,7 +454,7 @@ public class TestLongPacker extends TestCase {
     doStressTest(1000000, new RandomNonNegativeLeadingZerosLong(new Random()));
   }
 
-  /**
+  /*
    * Run a stress test. Writes some information of possible interest onto System.err.
    *
    * @param ntrials #of trials.
@@ -532,7 +532,7 @@ public class TestLongPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * This test packs the data using the {@link LongPacker} and unpacks it using a {@link
    * DataInputBuffer}.
    */
@@ -587,7 +587,7 @@ public class TestLongPacker extends TestCase {
     }
   }
 
-  /**
+  /*
    * This test packs the data using a {@link DataOutputBuffer} and unpacks it using the {@link
    * LongPacker}.
    */

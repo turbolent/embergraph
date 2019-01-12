@@ -31,8 +31,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for owl:transtitiveProperty processing.
+/*
+* Test suite for owl:transtitiveProperty processing.
  *
  * <pre>
  * (a rdf:type owl:TransitiveProperty), (x a y), (y a z) -&gt; (x a z)
@@ -54,7 +54,7 @@ public class TestRuleOwlTransitiveProperty extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test where the data satisifies the rule exactly once.
    *
    * <pre>

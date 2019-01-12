@@ -87,8 +87,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterRegistry;
 
-/**
- * SPARQL Query (GET/POST) and SPARQL UPDATE handler (POST).
+/*
+* SPARQL Query (GET/POST) and SPARQL UPDATE handler (POST).
  *
  * @author martyncutcher
  * @author thompsonbry
@@ -100,7 +100,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
   private static final transient Logger log = Logger.getLogger(QueryServlet.class);
 
-  /**
+  /*
    * The name of the parameter/attribute that contains the SPARQL query.
    *
    * <p>Note: This can be either a URL query parameter or a servlet request attribute. The latter is
@@ -108,7 +108,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
    */
   static final transient String ATTR_QUERY = "query";
 
-  /**
+  /*
    * The name of the parameter/attribute that contains boolean flag to suppress incremental truth
    * maintenance.
    *
@@ -117,7 +117,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
    */
   static final transient String ATTR_TRUTH_MAINTENANCE = "suppressTruthMaintenance";
 
-  /**
+  /*
    * The name of the parameter/attribute that contains boolean flag to include inferred statements
    * while evaluating queries or returning statements.
    *
@@ -131,25 +131,25 @@ public class QueryServlet extends EmbergraphRDFServlet {
   /** The name of the URL query parameter that indicates an ESTCARD request (fast range count). */
   static final transient String ATTR_ESTCARD = "ESTCARD";
 
-  /**
+  /*
    * The name of the URL query parameter that indicates an HASSTMT request (test for the existence
    * of one or more statements matching a triple pattern).
    */
   static final transient String ATTR_HASSTMT = "HASSTMT";
 
-  /**
+  /*
    * The name of the URL query parameter that indicates an GETSTMTS request (retrieve statements
    * from a store)
    */
   static final transient String ATTR_GETSTMTS = "GETSTMTS";
 
-  /**
+  /*
    * The name of the URL query parameter that indicates an request to return all contexts in the
    * database.
    */
   static final transient String ATTR_CONTEXTS = "CONTEXTS";
 
-  /**
+  /*
    * The name of the URL query parameter that indicates a shards report request (scale-out only).
    */
   static final transient String ATTR_SHARDS = "SHARDS";
@@ -157,7 +157,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
   /** The name of the URL query parameter that indicates a request for a random {@link UUID}. */
   static final transient String ATTR_UUID = "uuid";
 
-  /**
+  /*
    * The name of the URL query parameter which is any of:
    *
    * <dl>
@@ -189,8 +189,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
    */
   static final transient String ATTR_TIMESTAMP = "timestamp";
 
-  //    /**
-  //     * The name of the request attribute for the {@link AbstractQueryTask}.
+  //    /*
+//     * The name of the request attribute for the {@link AbstractQueryTask}.
   //     */
   //    static private final transient String ATTR_QUERY_TASK = "QueryTask";
 
@@ -288,7 +288,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Generate and send a UUID as a <code>text/plain</code> response entity. This is intended for use
    * by JavaScript clients that want to generate new URLs locally. JavaScript does not provide an
    * easy means to generate UUIDs, so we've added one to the server.
@@ -299,7 +299,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     buildAndCommitResponse(resp, HTTP_OK, MIME_TEXT_PLAIN, UUID.randomUUID().toString());
   }
 
-  /**
+  /*
    * Generate a SPARQL 1.1 Service Description for the addressed triple store or quad store.
    *
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/500
@@ -307,7 +307,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
   private void doServiceDescription(final HttpServletRequest req, final HttpServletResponse resp)
       throws IOException {
 
-    /**
+    /*
      * Protect the entire operation with a transaction.
      *
      * @see <a href="http://trac.blazegraph.com/ticket/867">NSS concurrency problem with list
@@ -321,8 +321,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
           getEmbergraphRDFContext().getTripleStore(getNamespace(req), tx);
 
       if (tripleStore == null) {
-        /*
-         * There is no such triple/quad store instance.
+      /*
+       * There is no such triple/quad store instance.
          */
         buildAndCommitNamespaceNotFoundResponse(req, resp);
         return;
@@ -356,7 +356,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Handles SPARQL UPDATE.
    *
    * <pre>
@@ -427,7 +427,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     private final EmbergraphRDFContext context;
     private final Map<String, Value> bindings;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      */
@@ -490,8 +490,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
         {
 
-          /*
-           * Attempt to construct a task which we can use to evaluate
+        /*
+       * Attempt to construct a task which we can use to evaluate
            * the query.
            */
 
@@ -513,8 +513,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
           updateTask.updateFuture = ft;
 
-          /*
-           * Begin executing the query (asynchronous).
+        /*
+       * Begin executing the query (asynchronous).
            *
            * Note: UPDATEs currently contend with QUERYs against the
            * same thread pool.
@@ -527,8 +527,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
           success = true;
         }
 
-        /**
-         * Note: The SPARQL UPDATE is already committed. This is done in the UpdateTask class when
+      /*
+       * Note: The SPARQL UPDATE is already committed. This is done in the UpdateTask class when
          * we execute the following code
          *
          * <pre>
@@ -617,7 +617,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Helper task for the SPARQL QUERY.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -678,8 +678,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
         conn = getQueryConnection();
 
         {
-          /*
-           * Setup task to execute the query. The task is executed on
+        /*
+       * Setup task to execute the query. The task is executed on
            * a thread pool. This bounds the possible concurrency of
            * query execution (as opposed to queries accepted for
            * eventual execution).
@@ -692,8 +692,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
           final OutputStream os = resp.getOutputStream();
 
-          /*
-           * Attempt to construct a task which we can use to evaluate
+        /*
+       * Attempt to construct a task which we can use to evaluate
            * the query.
            */
 
@@ -732,16 +732,16 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
           if (log.isTraceEnabled()) log.trace("Will run query: " + queryStr);
 
-          /*
-           * Setup the response headers.
+        /*
+       * Setup the response headers.
            */
 
           resp.setStatus(HTTP_OK);
 
           if (queryTask.explain) {
 
-            /*
-             * Send back an explanation of the query execution, not
+          /*
+       * Send back an explanation of the query execution, not
              * the query results.
              */
 
@@ -761,8 +761,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
           } else {
 
-            /*
-             * Send back the query results.
+          /*
+       * Send back the query results.
              */
 
             resp.setContentType(queryTask.mimeType);
@@ -774,8 +774,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
             }
 
             if (isAttachment(queryTask.mimeType)) {
-              /*
-               * Mark this as an attachment (rather than inline).
+            /*
+       * Mark this as an attachment (rather than inline).
                * This is just a hint to the user agent. How the
                * user agent handles this hint is up to it.
                */
@@ -786,8 +786,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
             if (TimestampUtility.isCommitTime(queryTask.timestamp)) {
 
-              /*
-               * A read against a commit time or a read-only tx.
+            /*
+       * A read against a commit time or a read-only tx.
                * Such results SHOULD be cached because the data
                * from which the response was constructed have
                * snapshot isolation. (Note: It is possible that
@@ -841,7 +841,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   } // SparqlQueryTask.
 
-  /**
+  /*
    * The SPARQL query.
    *
    * <p>Note: This can be attached as a request attribute. That supports a linked data GET by
@@ -867,7 +867,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     return req.getParameter(ATTR_UPDATE);
   }
 
-  /**
+  /*
    * Sends an explanation for the query rather than the query results. The query is still run, but
    * the query statistics are reported instead of the query results.
    *
@@ -938,8 +938,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
         // Check once more.
         queryId2 = queryTask.queryId2;
         if (queryId2 == null) {
-          /*
-           * This should have been assigned unless the query failed
+        /*
+       * This should have been assigned unless the query failed
            * during the setup.
            */
           throw new AssertionError();
@@ -1215,16 +1215,16 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
       try {
 
-        /*
-         * Wait for the Future. If the query fails, then note the
+      /*
+       * Wait for the Future. If the query fails, then note the
          * exception but do NOT rethrow it. The exception will get
          * painted into the page.
          */
 
         ft.get();
 
-        /*
-         * Note: An InterruptedException here is NOT caught. It means
+      /*
+       * Note: An InterruptedException here is NOT caught. It means
          * that this Thread was interrupted rather than the Query.
          */
 
@@ -1251,8 +1251,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
 
       if (q == null) {
 
-        /*
-         * This can happen if we fail to get the IRunningQuery reference
+      /*
+       * This can happen if we fail to get the IRunningQuery reference
          * before the query terminates. E.g., if the query runs too
          * quickly there is a data race and the reference may not be
          * available anymore.
@@ -1282,8 +1282,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
             .text(q.isCancelled() ? ", CANCELLED." : ".")
             .close();
 
-        /*
-         * Format query statistics as a table.
+      /*
+       * Format query statistics as a table.
          *
          * Note: This is writing on the Writer so it goes directly into
          * the HTML document we are building for the client.
@@ -1307,7 +1307,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Estimate the cardinality of an access path (fast range count).
    *
    * @param req
@@ -1378,7 +1378,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Helper task for the ESTCARD query.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1453,7 +1453,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   } // ESTCARD task.
 
-  /**
+  /*
    * Return <code>true</code> iff at least one matching statement exists in the namespace.
    *
    * @param req
@@ -1525,7 +1525,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Helper task for the HASSTMT query.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1796,7 +1796,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Private API reports the shards against which the access path would read.
    *
    * @param req
@@ -1847,7 +1847,7 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Task to report on the SHARDS used by a scale-out deployment.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2020,8 +2020,8 @@ public class QueryServlet extends EmbergraphRDFServlet {
     }
   }
 
-  //    /**
-  //     * Test the SPARQL cache.
+  //    /*
+//     * Test the SPARQL cache.
   //     */
   //    private void doCache(final HttpServletRequest req,
   //            final HttpServletResponse resp) throws IOException {

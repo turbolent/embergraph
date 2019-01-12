@@ -52,8 +52,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for the {@link ASTSubGroupJoinVarOptimizer}.
+/*
+* Test suite for the {@link ASTSubGroupJoinVarOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -68,7 +68,7 @@ public class TestASTSubGroupJoinVarOptimizer extends AbstractASTEvaluationTestCa
     super(name);
   }
 
-  /**
+  /*
    * Unit test for assigning join variables to sub-groups.
    *
    * <pre>
@@ -187,8 +187,8 @@ public class TestASTSubGroupJoinVarOptimizer extends AbstractASTEvaluationTestCa
                     FunctionRegistry.SAMPLE,
                     Collections.singletonMap(
                         AggregateBase.Annotations.DISTINCT,
-                        (Object) Boolean.FALSE) /* scalarValues */,
-                    new ValueExpressionNode[] {new VarNode("_var9")})));
+                        Boolean.FALSE) /* scalarValues */,
+                    new VarNode("_var9"))));
         projection.addProjectionVar(new VarNode("_var2"));
         projection.addProjectionVar(new VarNode("_var3"));
 
@@ -289,8 +289,8 @@ public class TestASTSubGroupJoinVarOptimizer extends AbstractASTEvaluationTestCa
                   FunctionRegistry.SAMPLE,
                   Collections.singletonMap(
                       AggregateBase.Annotations.DISTINCT,
-                      (Object) Boolean.FALSE) /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("_var9")})));
+                      Boolean.FALSE) /* scalarValues */,
+                  new VarNode("_var9"))));
       projection.addProjectionVar(new VarNode("_var2"));
       projection.addProjectionVar(new VarNode("_var3"));
 

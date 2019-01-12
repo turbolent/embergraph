@@ -48,8 +48,8 @@ import org.embergraph.relation.accesspath.ThickCloseableIterator;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * A factory for a service that simulates the VALUES syntax in SPARQL:
+/*
+* A factory for a service that simulates the VALUES syntax in SPARQL:
  *
  * <p>service bd:values { # service params bd:serviceParam bd:values.var ?var . bd:serviceParam
  * bd:values.val "val1" . bd:serviceParam bd:values.val "val2" . ... }
@@ -62,7 +62,7 @@ public class ValuesServiceFactory extends AbstractServiceFactory {
   public static final URI SERVICE_KEY = new URIImpl(BD.NAMESPACE + "values");
 
   /** The service params for this service. */
-  public static interface ValuesParams {
+  public interface ValuesParams {
 
     /** The limit on the sample. */
     URI VAR = new URIImpl(SERVICE_KEY.stringValue() + ".var");
@@ -108,7 +108,7 @@ public class ValuesServiceFactory extends AbstractServiceFactory {
     return new ValuesCall(store, getServiceOptions(), serviceParams);
   }
 
-  /**
+  /*
    * Verify that there is only a single statement pattern node and that the service parameters are
    * valid.
    */
@@ -162,7 +162,7 @@ public class ValuesServiceFactory extends AbstractServiceFactory {
     }
   }
 
-  /**
+  /*
    * Note: This has the {@link AbstractTripleStore} reference attached. This is not a {@link
    * Serializable} object. It MUST run on the query controller.
    */

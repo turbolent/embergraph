@@ -27,8 +27,8 @@ import java.util.Random;
 import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
-/**
- * Generate <i>n</i> random and distinct URIs. This distribution has a shared prefix followed by
+/*
+* Generate <i>n</i> random and distinct URIs. This distribution has a shared prefix followed by
  * some random bytes representing an integer value. There are no <code>null</code>s, even for the
  * B+Tree values.
  *
@@ -71,7 +71,7 @@ public class RandomURIGenerator implements IRabaGenerator {
     return data;
   }
 
-  /**
+  /*
    * Generate <i>n</i> random and distinct URIs. This distribution has a shared prefix followed by
    * some random bytes representing an integer value.
    *
@@ -87,7 +87,7 @@ public class RandomURIGenerator implements IRabaGenerator {
 
     for (int i = 0; i < data.length; i++) {
 
-      data[i] = TestKeyBuilder.asSortKey(ns + String.valueOf(lastCounter));
+      data[i] = TestKeyBuilder.asSortKey(ns + lastCounter);
 
       final int inc = r.nextInt(100) + 1;
 

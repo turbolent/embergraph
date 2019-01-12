@@ -23,8 +23,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Set;
 import org.embergraph.bop.IVariable;
 
-/**
- * Interface describing constraints and desiderata w.r.t. variable bindings that should, must, or
+/*
+* Interface describing constraints and desiderata w.r.t. variable bindings that should, must, or
  * must not be present at the time when executing the construct.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -32,7 +32,7 @@ import org.embergraph.bop.IVariable;
  */
 public interface IVariableBindingRequirements {
 
-  /**
+  /*
    * Return the variables used in the node that *must* be bound prior to evaluating the node. For
    * instance, when evaluation a SPARQL 1.1 service and the endpoint is specified through a
    * variable, then this variable must be bound in order to identify the endpoint to which the query
@@ -49,9 +49,9 @@ public interface IVariableBindingRequirements {
    *
    * @return the set of variables that must be bound prior to evaluation
    */
-  public Set<IVariable<?>> getRequiredBound(final StaticAnalysis sa);
+  Set<IVariable<?>> getRequiredBound(final StaticAnalysis sa);
 
-  /**
+  /*
    * Get variables that are not required to be bound, but desired in the sense that we want them to
    * be bound when evaluating the construct. In general, the more variables are bound, the better,
    * but this might differ for certain constructs. Should only report variables that are *not*
@@ -59,5 +59,5 @@ public interface IVariableBindingRequirements {
    *
    * @return the set of variables that are desires to be bound, but not required
    */
-  public Set<IVariable<?>> getDesiredBound(final StaticAnalysis sa);
+  Set<IVariable<?>> getDesiredBound(final StaticAnalysis sa);
 }

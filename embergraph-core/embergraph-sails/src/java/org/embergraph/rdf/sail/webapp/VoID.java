@@ -48,8 +48,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Helper class for VoID descriptions.
+/*
+* Helper class for VoID descriptions.
  *
  * @see <a href="http://www.w3.org/TR/void/" > Describing Linked Datasets with the VoID Vocabulary
  *     </a>
@@ -69,8 +69,8 @@ public class VoID {
   /** The value factory used to create values for the service description graph {@link #g}. */
   private final ValueFactory f;
 
-  //    /**
-  //     * The resource which models the service.
+  //    /*
+//     * The resource which models the service.
   //     */
   //    protected final BNode aService;
 
@@ -80,7 +80,7 @@ public class VoID {
   /** The resource which models the default graph in the data set. */
   private final BNode aDefaultGraph;
 
-  /**
+  /*
    * @param g Where to assemble the description.
    * @param tripleStore The KB instance to be described.
    * @param serviceURI The SPARQL service end point.
@@ -118,7 +118,7 @@ public class VoID {
     this.aDefaultGraph = f.createBNode("defaultGraph");
   }
 
-  /**
+  /*
    * Describe the default data set (the one identified by the namespace associated with the {@link
    * AbstractTripleStore}.
    *
@@ -142,7 +142,7 @@ public class VoID {
     // Also present the namespace in an unambiguous manner.
     g.add(aDataset, SD.KB_NAMESPACE, f.createLiteral(namespace));
 
-    /**
+    /*
      * Service end point for this namespace.
      *
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/689" > Missing URL encoding in
@@ -223,8 +223,8 @@ public class VoID {
 
         while (itr2.hasNext()) {
 
-          /*
-           * Describe this named graph.
+        /*
+       * Describe this named graph.
            *
            * Note: This is using the predicate and class partition
            * statistics from the default graph (RDF merge) to identify
@@ -262,7 +262,7 @@ public class VoID {
     }
   }
 
-  /**
+  /*
    * Describe the vocabularies which are in use in the KB based on the predicate partition
    * statistics.
    *
@@ -302,7 +302,7 @@ public class VoID {
     }
   }
 
-  /**
+  /*
    * Describe a named or default graph.
    *
    * @param graph The named graph.
@@ -371,7 +371,7 @@ public class VoID {
 
     private EmbergraphValue val;
 
-    /**
+    /*
      * Return the associated {@link EmbergraphValue}.
      *
      * <p>Note: A resolution set is necessary if you want to attach the {@link EmbergraphValue} to
@@ -416,7 +416,7 @@ public class VoID {
     }
   }
 
-  /**
+  /*
    * Return an array of the distinct predicates in the KB ordered by their descending frequency of
    * use. The {@link IV}s in the returned array will have been resolved to the corresponding {@link
    * EmbergraphURI}s which can be accessed using {@link IV#getValue()}.
@@ -488,7 +488,7 @@ public class VoID {
     }
   }
 
-  /**
+  /*
    * Return the predicate partition statistics for the named graph.
    *
    * @param kb The KB instance.
@@ -534,7 +534,7 @@ public class VoID {
     return a;
   }
 
-  /**
+  /*
    * Return an efficient statistical summary for the class partitions. The SPARQL query for this is
    *
    * <pre>
@@ -637,7 +637,7 @@ public class VoID {
     }
   }
 
-  /**
+  /*
    * Return the class partition statistics for the named graph.
    *
    * @param kb The KB instance.

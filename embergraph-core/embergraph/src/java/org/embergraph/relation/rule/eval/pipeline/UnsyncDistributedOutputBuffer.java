@@ -10,8 +10,8 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * Unsynchronized buffer maps the {@link IBindingSet}s across the index partition(s) for the target
+/*
+* Unsynchronized buffer maps the {@link IBindingSet}s across the index partition(s) for the target
  * scale-out index when it overflows.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,7 +33,7 @@ class UnsyncDistributedOutputBuffer<E extends IBindingSet>
 
   final IEmbergraphFederation<?> fed;
 
-  /**
+  /*
    * @param fed
    * @param joinTask
    * @param capacity
@@ -58,7 +58,7 @@ class UnsyncDistributedOutputBuffer<E extends IBindingSet>
     this.nextTailIndex = joinTask.getTailIndex(nextOrderIndex);
   }
 
-  /**
+  /*
    * Maps the chunk of {@link IBindingSet}s across the index partition(s) for the sink join
    * dimension.
    *

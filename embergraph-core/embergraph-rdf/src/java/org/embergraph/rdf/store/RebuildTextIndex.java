@@ -33,7 +33,7 @@ import org.embergraph.journal.Options;
 /** A utility class to rebuild text index in an {@link AbstractTripleStore}. */
 public class RebuildTextIndex {
 
-  /**
+  /*
    * Utility method to rebuid text index in a local journal.
    *
    * @param args <code>[-namespace <i>namespace</i>] [-forceCreate] propertyFile</code> where

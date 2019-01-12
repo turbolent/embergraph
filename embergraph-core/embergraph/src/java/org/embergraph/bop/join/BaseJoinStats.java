@@ -25,8 +25,8 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.counters.CAT;
 import org.embergraph.relation.accesspath.IAccessPath;
 
-/**
- * Extended to expose counters shared by various join operators (some join operators may define more
+/*
+* Extended to expose counters shared by various join operators (some join operators may define more
  * counters as well).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -39,13 +39,13 @@ public class BaseJoinStats extends BOpStats {
 
   public BaseJoinStats() {}
 
-  /**
+  /*
    * The #of duplicate access paths which were detected and filtered out. This will be ZERO (0L)
    * unless the join operator can coalesce access paths.
    */
   public final CAT accessPathDups = new CAT();
 
-  /**
+  /*
    * The #of access paths which were evaluated. Each access path corresponds to one or more input
    * binding sets having the same binding pattern for the variables appearing in the access path.
    *

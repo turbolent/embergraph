@@ -31,8 +31,8 @@ import org.embergraph.rdf.internal.constraints.MathUtility;
 import org.embergraph.rdf.internal.impl.literal.NumericIV;
 import org.openrdf.model.Literal;
 
-/**
- * Operator computes the running sum over the presented binding sets for the given variable. A
+/*
+* Operator computes the running sum over the presented binding sets for the given variable. A
  * missing value does not contribute towards the sum.
  *
  * @author thompsonbry
@@ -57,7 +57,7 @@ public class SUM extends AggregateBase<IV> implements INeedsMaterialization {
     super(distinct, expr);
   }
 
-  /**
+  /*
    * The running aggregate value.
    *
    * <p>Note: SUM() returns ZERO if there are no non-error solutions presented. This assumes that
@@ -120,8 +120,8 @@ public class SUM extends AggregateBase<IV> implements INeedsMaterialization {
 
       if (iv != null) {
 
-        /*
-         * Aggregate non-null literal values.
+      /*
+       * Aggregate non-null literal values.
          */
 
         final Literal lit = IVValueExpression.asLiteral(iv);
@@ -163,7 +163,7 @@ public class SUM extends AggregateBase<IV> implements INeedsMaterialization {
     return aggregated;
   }
 
-  /**
+  /*
    * Note: {@link SUM} only works on numerics. If they are inline, then that is great. Otherwise it
    * will handle a materialized numeric literal and do type promotion, which always results in a
    * signed inline number IV and then operate on that.

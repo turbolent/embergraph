@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -52,8 +52,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Test suite for the {@link DistinctTermAdvancer}.
+/*
+* Test suite for the {@link DistinctTermAdvancer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -68,7 +68,7 @@ public class TestDistinctTermScan extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * FIXME The distinct term scan has been moved into {@link AbstractRuleDistinctTermScan} and needs
    * to be evaluated in that context.
    */

@@ -65,7 +65,6 @@ public class TestServiceWhiteList extends TestCase2 {
             .evaluate();
 
     int resCount = 0;
-    ;
     while (res.hasNext()) {
       res.next();
       resCount++;

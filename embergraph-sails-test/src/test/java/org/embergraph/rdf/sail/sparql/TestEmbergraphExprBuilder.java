@@ -55,8 +55,8 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.DatasetImpl;
 
-/**
- * Test suite for {@link EmbergraphExprBuilder}.
+/*
+* Test suite for {@link EmbergraphExprBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestEmbergraphExprBuilder.java 5073 2011-08-23 00:33:54Z thompsonbry $
@@ -72,7 +72,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     super(name);
   }
 
-  /**
+  /*
    * Unit test for simple SELECT query
    *
    * <pre>
@@ -112,7 +112,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for SELECT DISTINCT
    *
    * <pre>
@@ -152,7 +152,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for SELECT REDUCED
    *
    * <pre>
@@ -192,7 +192,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for GROUP BY in SELECT query with a bare variable in the group by clause.
    *
    * <pre>
@@ -243,7 +243,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
 
   }
 
-  /**
+  /*
    * Unit test for GROUP BY in SELECT query with BIND(expr AS var).
    *
    * <pre>
@@ -282,7 +282,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
       final GroupByNode groupBy = new GroupByNode();
       expected.setGroupBy(groupBy);
       groupBy.addExpr(
-          new AssignmentNode(new VarNode("z"), (IValueExpressionNode) new VarNode("o")));
+          new AssignmentNode(new VarNode("z"), new VarNode("o")));
     }
 
     /*
@@ -296,7 +296,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
 
   }
 
-  /**
+  /*
    * Unit test for GROUP BY in SELECT query with function call without "AS".
    *
    * <pre>
@@ -338,7 +338,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
           new FunctionNode(
               FunctionRegistry.STR,
               null /* scalarValues */,
-              new ValueExpressionNode[] {new VarNode("o")});
+              new VarNode("o"));
       // Note: anonymous variable.
       final VarNode anonvar1 = new VarNode("-groupBy-1");
       anonvar1.setAnonymous(true);
@@ -356,7 +356,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
 
   }
 
-  /**
+  /*
    * Unit test for HAVING clause (with an implicit group consisting of all solutions).
    *
    * <pre>
@@ -397,9 +397,8 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
           new FunctionNode(
               FunctionRegistry.GT,
               null, // scalarValues
-              new ValueExpressionNode[] { // args
-                new VarNode("o"), new VarNode("s")
-              }));
+              // args
+              new VarNode("o"), new VarNode("s")));
     }
 
     /*
@@ -413,7 +412,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
 
   }
 
-  /**
+  /*
    * Unit test for ORDER BY in SELECT query.
    *
    * <pre>
@@ -456,7 +455,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for ORDER BY in SELECT query using a value expression rather than a bare variable
    * (this exercises the delegation to the {@link ValueExprBuilder}).
    *
@@ -496,7 +495,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
           new FunctionNode(
               FunctionRegistry.STR,
               null /* scalarValues */,
-              new ValueExpressionNode[] {new VarNode("s")});
+              new VarNode("s"));
       orderBy.addExpr(new OrderByExpr(funct, false /* ascending */));
     }
 
@@ -505,7 +504,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for SELECT query with a wildcard (<code>*</code>).
    *
    * <pre>
@@ -544,7 +543,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for SLICE in SELECT query.
    *
    * <pre>
@@ -592,7 +591,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple ASK query. (Applications can use the ASK form to test whether or not a
    * query pattern has a solution. No information is returned about the possible query solutions,
    * just whether or not a solution exists. EXISTS() is basically an ASK subquery.)
@@ -635,7 +634,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple DESCRIBE query. (The main differences between DESCRIBE and SELECT is that
    * the DESCRIBE query allows only a simple list of variables or IRIs in place of the select
    * expressions and involves an implicit CONSTRUCT. Both DESCRIBE and SELECT allow the same
@@ -682,7 +681,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for <code>DESCRIBE *</code> query.
    *
    * <pre>
@@ -726,7 +725,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for <code>DESCRIBE</code> query for an IRI.
    *
    * <p>Note: There is no "where clause" for this query. One must be added when the query semantics
@@ -769,7 +768,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for <code>DESCRIBE</code> query where a mixture of variables and IRIs are used in the
    * projection.
    *
@@ -821,7 +820,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple CONSTRUCT query.
    *
    * <pre>
@@ -869,7 +868,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A construct query with some constants in the template (not ground triples, just RDF Values).
    *
    * @throws MalformedQueryException
@@ -920,7 +919,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * The construct where shortcut form.
    *
    * @throws MalformedQueryException
@@ -970,7 +969,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1075,7 +1074,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A variant of the above test where one of the URIs in the default / named graph declarations is
    * not a graph in the KB.
    *
@@ -1171,7 +1170,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for blank node "[]" syntax.
    *
    * <pre>

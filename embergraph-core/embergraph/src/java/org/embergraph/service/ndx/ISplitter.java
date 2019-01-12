@@ -29,8 +29,8 @@ import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.Split;
 
-/**
- * Interface for finding the {@link Split}s for an ordered set of unsigned byte[] keys. Each key
+/*
+* Interface for finding the {@link Split}s for an ordered set of unsigned byte[] keys. Each key
  * MUST be fully specified, e.g., point lookup. This algorithm does NOT handle cases where multiple
  * partitions must be scanned because they share the same prefix as the key.
  *
@@ -53,7 +53,7 @@ import org.embergraph.service.Split;
  */
 public interface ISplitter {
 
-  /**
+  /*
    * Identify the {@link Split}s for an ordered array of keys such that there is one {@link Split}
    * per index partition spanned by the data.
    *
@@ -70,7 +70,7 @@ public interface ISplitter {
   LinkedList<Split> splitKeys(
       final long ts, final int fromIndex, final int toIndex, final byte[][] keys);
 
-  /**
+  /*
    * Identify the {@link Split}s for an ordered {@link KVO}[] such that there is one {@link Split}
    * per index partition spanned by the data.
    *

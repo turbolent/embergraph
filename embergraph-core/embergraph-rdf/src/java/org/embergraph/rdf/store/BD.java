@@ -32,8 +32,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.SESAME;
 
-/**
- * A vocabulary for embergraph specific extensions.
+/*
+* A vocabulary for embergraph specific extensions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -42,7 +42,7 @@ public interface BD {
   /** The namespace used for embergraph specific extensions. */
   String NAMESPACE = "http://www.embergraph.org/rdf#";
 
-  /**
+  /*
    * The name of a per-statement attribute whose value is recognized in RDF/XML as the statement
    * identifier for statement described by the element on which it appears. The <code>embergraph:sid
    * </code> attribute is allowed on elements describing RDF statements and serves as a
@@ -66,7 +66,7 @@ public interface BD {
    */
   URI SID = new URIImpl(NAMESPACE + "sid");
 
-  /**
+  /*
    * The name of a per-statement attribute whose indicates whether the statement is an axiom,
    * inference, or explicit in the knowledge base. This attribute is strictly informative for
    * clients and is ignored when loading data into a knowledge base.
@@ -88,7 +88,7 @@ public interface BD {
    */
   URI STATEMENT_TYPE = new URIImpl(NAMESPACE + "statementType");
 
-  /**
+  /*
    * The URI for the "DESCRIBE" service.
    *
    * @see DescribeServiceFactory
@@ -96,7 +96,7 @@ public interface BD {
    */
   URI DESCRIBE = new URIImpl(NAMESPACE + "describe");
 
-  /**
+  /*
    * Sesame has the notion of a "null" graph. Any time you insert a statement into a quad store and
    * the context position is not specified, it is actually inserted into this "null" graph. If
    * SPARQL <code>DATASET</code> is not specified, then all contexts are queried and you will see
@@ -139,7 +139,7 @@ public interface BD {
    */
   URI NULL_GRAPH = new URIImpl(NAMESPACE + "nullGraph");
 
-  /**
+  /*
    * A predicate used to model the membership of a virtual graph. The following assertions declare
    * the membership of a virtual graph as the graphs (:g1,:g2).
    *
@@ -167,8 +167,8 @@ public interface BD {
    */
   URI VIRTUAL_GRAPH = new URIImpl(NAMESPACE + "virtualGraph");
 
-  //    /**
-  //     * We need the ability to do atomic add+drop in one operation via the
+  //    /*
+//     * We need the ability to do atomic add+drop in one operation via the
   //     * remoting interface.  Thus we need the ability to place
   //     * statements to add and to delete in the same serialized document sent
   //     * across the wire.  This separator key, when included in a comment, will
@@ -177,7 +177,7 @@ public interface BD {
   //     */
   //    URI ATOMIC_UPDATE_SEPARATOR_KEY = new URIImpl(NAMESPACE + "atomicUpdateSeparatorKey");
 
-  /**
+  /*
    * URI that can be used as the Subject of magic triple patterns for embergraph SERVICEs. There may
    * be zero or more such triple patterns. The Predicate (key) and Object (val) positions for those
    * triple patterns are extracted into a {@link ServiceParams} object. For each key, there may be
@@ -195,7 +195,7 @@ public interface BD {
    */
   URI SERVICE_PARAM = new URIImpl(NAMESPACE + "serviceParam");
 
-  /**
+  /*
    * The well-known URI of the ALP SERVICE extension.
    *
    * @see ASTALPServiceOptimizer

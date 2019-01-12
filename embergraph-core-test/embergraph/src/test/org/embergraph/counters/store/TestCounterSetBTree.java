@@ -41,8 +41,8 @@ import org.embergraph.counters.Instrument;
 import org.embergraph.counters.PeriodEnum;
 import org.xml.sax.SAXException;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestCounterSetBTree extends TestCase2 {
@@ -55,7 +55,7 @@ public class TestCounterSetBTree extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * FIXME work through unit tests for writing counters and for querying for the use cases covered
    * by the httpd interface.
    */
@@ -128,7 +128,7 @@ public class TestCounterSetBTree extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Unit test reads some known data from a local test resource.
    *
    * @throws SAXException

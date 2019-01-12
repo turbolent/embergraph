@@ -15,12 +15,12 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * Factory associates the {@link IGangliaMetadataMessage} with the {@link IGangliaMetricMessage}.
+/*
+* Factory associates the {@link IGangliaMetadataMessage} with the {@link IGangliaMetricMessage}.
  */
 public class RichMetricFactory {
 
-  /**
+  /*
    * Method creates an {@link IGangliaMetricMessage} which is consistent with the supplied {@link
    * IGangliaMetadataMessage}.
    *

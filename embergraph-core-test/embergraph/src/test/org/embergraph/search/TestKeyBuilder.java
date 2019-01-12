@@ -32,8 +32,8 @@ import org.embergraph.btree.keys.StrengthEnum;
 import org.embergraph.search.FullTextIndex.Options;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Unit tests for key formation for the {@link FullTextIndex}.
+/*
+* Unit tests for key formation for the {@link FullTextIndex}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public class TestKeyBuilder extends AbstractSearchTest {
     super(arg0);
   }
 
-  /**
+  /*
    * Return a suitable {@link IKeyBuilder}.
    *
    * <p>Note: Just like the {@link FullTextIndex}, this overrides the collator strength property to
@@ -83,7 +83,7 @@ public class TestKeyBuilder extends AbstractSearchTest {
 
   private IKeyBuilder keyBuilder;
 
-  /**
+  /*
    * Unit test verifies the relative sort order of a term and its successor, of a prefix of that
    * term and its successor, and that the prefix and the successor of the prefix are ordered before
    * and after the term and its successor respectively.
@@ -185,7 +185,7 @@ public class TestKeyBuilder extends AbstractSearchTest {
     assertTrue(BytesUtil.compareBytes(k1s, k0s) > 0);
   }
 
-  /**
+  /*
    * Succeeds iff a LT b.
    *
    * @param a
@@ -200,7 +200,7 @@ public class TestKeyBuilder extends AbstractSearchTest {
     fail("cmp=" + cmp + ", a=" + BytesUtil.toString(a) + ", b=" + BytesUtil.toString(b));
   }
 
-  /**
+  /*
    * Succeeds iff a GT b.
    *
    * @param a

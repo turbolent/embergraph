@@ -30,8 +30,8 @@ import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * Type-safe enumeration capturing the primary uses cases for rule execution.
+/*
+* Type-safe enumeration capturing the primary uses cases for rule execution.
  *
  * <p>The uses cases here reduce to two basic variants: (a) Query using a read-consistent view; and
  * (b) Rules that write on a database. The latter has two twists: for {@link #TruthMaintenance} the
@@ -103,7 +103,7 @@ import org.embergraph.service.IEmbergraphFederation;
  */
 public enum RuleContextEnum {
 
-  /**
+  /*
    * Database at once closure is the most efficient way to compute the closure over the model theory
    * for the KB. In general, database-at-once closure is requested when you bulk load a large amount
    * of data into a knowledge base. You request database-at-once closure using {@link
@@ -120,7 +120,7 @@ public enum RuleContextEnum {
    */
   DatabaseAtOnceClosure,
 
-  /**
+  /*
    * Truth maintenance must be used when you <em>incrementally</em> assert or retract a set of
    * <em>explicit</em> (or told) statements (or assertions or triples). Each time new assertions are
    * made or retracted the closure of the knowledge base must be updated, causing entailments (or
@@ -163,7 +163,7 @@ public enum RuleContextEnum {
    */
   TruthMaintenance,
 
-  /**
+  /*
    * High-level queries (SPARQL) can in general be translated into a rule that is directly executed
    * by the embergraph rule execution layer. This provides extremely efficient query answering. The
    * same approach can be used with custom rule evaluation - there is no difference once it gets
@@ -178,5 +178,5 @@ public enum RuleContextEnum {
    * <p>New readers SHOULD use a read-consistent timestamp that reflects the desired (generally,
    * most recent) commit point corresponding to a closure of the knowledge base.
    */
-  HighLevelQuery;
+  HighLevelQuery
 }

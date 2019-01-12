@@ -24,8 +24,8 @@ package org.embergraph.journal;
 import java.util.Random;
 import junit.framework.TestCase;
 
-/**
- * Defines some helper methods for testing {@link ICommitRecord}s.
+/*
+* Defines some helper methods for testing {@link ICommitRecord}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -40,7 +40,7 @@ public abstract class AbstractCommitRecordTestCase extends TestCase {
 
   Random r = new Random();
 
-  /**
+  /*
    * Compare two {@link ICommitRecord}s for equality in their data.
    *
    * @param expected

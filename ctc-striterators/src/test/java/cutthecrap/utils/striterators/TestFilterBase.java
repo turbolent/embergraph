@@ -18,8 +18,8 @@ package cutthecrap.utils.striterators;
 import java.util.Iterator;
 import junit.framework.TestCase;
 
-/**
- * Test suite for {@link FilterBase}.
+/*
+* Test suite for {@link FilterBase}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -100,7 +100,7 @@ public class TestFilterBase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test creation of iterator without filter chain. make sure that the context is passed through.
    */
   public void test_filter() {
@@ -119,7 +119,7 @@ public class TestFilterBase extends TestCase {
     assertTrue("filter", actual.filter == fixture);
   }
 
-  /**
+  /*
    * Test creation of iterator with filter chain. Make sure that the create order is correct and
    * that the context is passed through to each iterator. The iterators are assembled in FIFO order,
    * so the iterator stack winds up being LIFO.

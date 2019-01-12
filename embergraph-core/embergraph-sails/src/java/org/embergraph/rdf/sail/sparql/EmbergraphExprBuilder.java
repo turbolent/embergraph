@@ -100,8 +100,8 @@ import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.optimizers.IASTOptimizer;
 
-/**
- * Top-level expression builder for SPARQL.
+/*
+* Top-level expression builder for SPARQL.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -116,7 +116,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     super(context);
   }
 
-  /**
+  /*
    * This is the top-level entry point for a SPARQL query.
    *
    * <p>Note: {@link ASTBaseDecl} and {@link ASTPrefixDecl}s are available from the {@link
@@ -140,7 +140,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
   // ASTQuery visitor methods for SELECT, ASK, DESCRIBE and CONSTRUCT.
 
-  /**
+  /*
    * This is the entry point for both a top-level SELECT and a SubSelect.
    *
    * @return The method returns either a {@link QueryRoot} or a {@link SubqueryRoot} depending on
@@ -211,7 +211,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     return queryRoot;
   }
 
-  /**
+  /*
    * DESCRIBE query.
    *
    * <p>Note: The openrdf parser has a "Describe" production which is not in the SPARQL 1.1 grammar
@@ -246,7 +246,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     return queryRoot;
   }
 
-  /**
+  /*
    * This is the "projection" part of the DESCRIBE query. This code marks the query as a "DESCRIBE"
    * and generates and attaches a {@link ProjectionNode} to the {@link QueryBase}. The {@link
    * ProjectionNode} uses an assignment node to bind an anonymous variable for a IRI. Variables are
@@ -277,8 +277,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       for (int i = 0; i < nchildren; i++) {
 
-        /*
-         * Note: Delegates to the ValueExprBuilder. Can visit VarNode or
+      /*
+       * Note: Delegates to the ValueExprBuilder. Can visit VarNode or
          * ConstantNode(IV<URI,_>).
          */
 
@@ -300,7 +300,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     return null;
   }
 
-  /**
+  /*
    * Handle a CONSTRUCT query.
    *
    * <p>This builds a {@link ConstructNode} which is a model of the statement patterns in the
@@ -351,8 +351,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
               "CONSTRUCT WHERE only permits statement patterns in the WHERE clause.");
         }
 
-        /*
-         * Add a copy of each statement pattern into the CONSTRUCT node.
+      /*
+       * Add a copy of each statement pattern into the CONSTRUCT node.
          */
 
         final StatementPatternNode sp =
@@ -398,7 +398,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
       final AssignmentNode expr =
           (AssignmentNode) node.jjtGetChild(i).jjtAccept(this, null /* data */);
 
-      groupBy.addExpr((AssignmentNode) expr);
+      groupBy.addExpr(expr);
     }
 
     return groupBy;
@@ -447,7 +447,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
   // private helper methods.
 
-  /**
+  /*
    * Handle the optional WITH SelectQuery AS NAME clause(s). These are a SPARQL 1.1 extension for
    * named temporary solution sets.
    *
@@ -465,7 +465,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       // Check for any instances of this child.
       final ASTNamedSubquery aNamedSubquery =
-          (ASTNamedSubquery) astQuery.jjtGetChild(ASTNamedSubquery.class);
+          astQuery.jjtGetChild(ASTNamedSubquery.class);
 
       if (aNamedSubquery == null) {
 
@@ -523,7 +523,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     }
   }
 
-  /**
+  /*
    * Return the appropriate {@link QueryBase} instance. If the parent of the {@link ASTQuery} is an
    * {@link ASTQueryContainer} then this will return {@link QueryRoot}. Otherwise it will return
    * {@link SubqueryRoot}.
@@ -551,7 +551,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     return new SubqueryRoot(queryType);
   }
 
-  /**
+  /*
    * Handle a SELECT clause. The {@link ProjectionNode} will be attached to the {@link
    * IProjectionDecl}.
    *
@@ -583,8 +583,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       while (itr.hasNext()) {
 
-        /*
-         * The last argument of the children is the Var. Anything before
+      /*
+       * The last argument of the children is the Var. Anything before
          * that is an ArgList which must be interpreted in its own
          * right.
          *
@@ -623,7 +623,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     }
   }
 
-  /**
+  /*
    * Handle the optional WHERE clause. (For example, DESCRIBE may be used without a WHERE clause.)
    *
    * <p>Note: This delegates the translation to a helper visitor. A SubSelect will wind up delegated
@@ -652,7 +652,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     }
   }
 
-  /**
+  /*
    * Handle an optional GROUP BY clause.
    *
    * @param astQuery The AST query node. This is an abstract base class. There are concrete
@@ -671,7 +671,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     queryRoot.setGroupBy(groupBy);
   }
 
-  /**
+  /*
    * Handle an optional HAVING clause.
    *
    * @param astQuery The AST query node. This is an abstract base class. There are concrete
@@ -701,7 +701,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     }
   }
 
-  /**
+  /*
    * Handle an optional ORDER BY clause.
    *
    * @param astQuery The AST query node. This is an abstract base class. There are concrete
@@ -726,7 +726,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     }
   }
 
-  /**
+  /*
    * Handle an optional LIMIT/OFFSET.
    *
    * @param astQuery The AST query node. This is an abstract base class. There are concrete
@@ -751,7 +751,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     }
   }
 
-  /**
+  /*
    * Handle an optional BINDINGS clause.
    *
    * @param astQuery The AST query node. This is an abstract base class. There are concrete
@@ -783,7 +783,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     }
   }
 
-  /**
+  /*
    * @return An object which encapsulates both the ordered set of variables for which bindings exist
    *     and the set of binding sets. The bindings are {@link EmbergraphValue}s. They must be
    *     translated into {@link IV} through a batch resolution process before they can be passed
@@ -829,7 +829,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     }
   }
 
-  /**
+  /*
    * Note: {@link EmbergraphValue}s have already been resolved to {@link IV}s.
    *
    * @param data The ordered variables for which bindings must be given.
@@ -856,8 +856,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       if (ve == null) {
 
-        /*
-         * No binding for the current variable in this binding set.
+      /*
+       * No binding for the current variable in this binding set.
          */
 
         continue;
@@ -882,7 +882,7 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
     }
   }
 
-  /**
+  /*
    * Verify the various conditions that must be met when a query uses GROUP BY or when a query uses
    * aggregates in a PROJECTION.
    *
@@ -950,8 +950,8 @@ public class EmbergraphExprBuilder extends GroupGraphPatternBuilder {
 
       try {
 
-        /*
-         * Delegate logic to validate the aggregate query.
+      /*
+       * Delegate logic to validate the aggregate query.
          */
 
         new GroupByState(projectExprs, groupByExprs, havingExprs);

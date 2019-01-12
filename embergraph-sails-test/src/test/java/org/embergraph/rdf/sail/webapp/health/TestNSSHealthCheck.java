@@ -56,8 +56,8 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.config.NicUtil;
 
-/**
- * Utility test suite provides a health check for a deployed instance.
+/*
+* Utility test suite provides a health check for a deployed instance.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -75,7 +75,7 @@ public class TestNSSHealthCheck extends TestCase2 {
   /** The client-API wrapper to the NSS. */
   protected RemoteRepositoryManager m_repo;
 
-  /**
+  /*
    * The effective {@link NanoSparqlServer} http end point (including the ContextPath).
    *
    * <pre>
@@ -84,7 +84,7 @@ public class TestNSSHealthCheck extends TestCase2 {
    */
   protected String m_serviceURL;
 
-  /**
+  /*
    * The URL of the root of the web application server. This does NOT include the ContextPath for
    * the webapp.
    *
@@ -301,7 +301,7 @@ public class TestNSSHealthCheck extends TestCase2 {
     @SuppressWarnings("unused")
     private final String requestURI;
 
-    /**
+    /*
      * @param name
      * @param requestURI The URL of the embergraph web application.
      */
@@ -322,7 +322,7 @@ public class TestNSSHealthCheck extends TestCase2 {
     return suite;
   }
 
-  /**
+  /*
    * bare URL of the server
    *
    * <pre>
@@ -343,7 +343,7 @@ public class TestNSSHealthCheck extends TestCase2 {
     assertTrue(content.contains(JUNIT_TEST_MARKER_INDEX_HTML));
   }
 
-  /**
+  /*
    * URL with correct context path
    *
    * <pre>
@@ -360,7 +360,7 @@ public class TestNSSHealthCheck extends TestCase2 {
     assertTrue(content.contains(JUNIT_TEST_MARKER_INDEX_HTML));
   }
 
-  /**
+  /*
    * URL with context path and index.html reference
    *
    * <pre>
@@ -381,7 +381,7 @@ public class TestNSSHealthCheck extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * The <code>favicon.ico</code> file.
    *
    * @see <a href="http://www.w3.org/2005/10/howto-favicon">How to add a favicon </a>
@@ -403,8 +403,8 @@ public class TestNSSHealthCheck extends TestCase2 {
     doGET(m_serviceURL + "/counters");
   }
 
-  // /**
-  // * The <code>/namespace/</code> servlet responds (multi-tenancy API).
+  // /*
+// * The <code>/namespace/</code> servlet responds (multi-tenancy API).
   // */
   // public void test_webapp_structure_namespace() throws Exception {
 
@@ -412,7 +412,7 @@ public class TestNSSHealthCheck extends TestCase2 {
 
   // }
 
-  /**
+  /*
    * The fully qualified URL for <code>index.html</code>
    *
    * <pre>
@@ -448,7 +448,7 @@ public class TestNSSHealthCheck extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Connect to the NSS end point and run a test suite designed to verify the health of that
    * instance.
    *

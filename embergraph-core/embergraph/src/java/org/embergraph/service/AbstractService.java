@@ -30,8 +30,8 @@ import org.embergraph.Banner;
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 
-/**
- * Abstract base class defines protocols for setting the service {@link UUID}, etc.
+/*
+* Abstract base class defines protocols for setting the service {@link UUID}, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -59,7 +59,7 @@ public abstract class AbstractService implements IService {
     serviceName = getServiceIface().getName() + "@" + getHostname() + "#" + hashCode();
   }
 
-  /**
+  /*
    * This method must be invoked to set the service {@link UUID}.
    *
    * <p>Note: This method gets invoked at different times depending on whether the service is
@@ -97,7 +97,7 @@ public abstract class AbstractService implements IService {
   /** Return the most interesting interface for the service. */
   public abstract Class getServiceIface();
 
-  /**
+  /*
    * Starts the {@link AbstractService}.
    *
    * <p>Note: A {@link #start()} is required in order to give subclasses an opportunity to be fully
@@ -118,8 +118,8 @@ public abstract class AbstractService implements IService {
     return AbstractStatisticsCollector.fullyQualifiedHostName;
   }
 
-  //    /**
-  //     * Shuts down the {@link #getFederation()} used by this service.
+  //    /*
+//     * Shuts down the {@link #getFederation()} used by this service.
   //     */
   public synchronized void shutdown() {
 
@@ -131,8 +131,8 @@ public abstract class AbstractService implements IService {
 
   }
 
-  //    /**
-  //     * Shuts down the {@link #getFederation()} used by this service.
+  //    /*
+//     * Shuts down the {@link #getFederation()} used by this service.
   //     */
   public synchronized void shutdownNow() {
 
@@ -156,7 +156,7 @@ public abstract class AbstractService implements IService {
     shutdownNow();
   }
 
-  /**
+  /*
    * Note: This is overridden in the jini integration to return a configured name for the service.
    */
   public String getServiceName() {
@@ -164,7 +164,7 @@ public abstract class AbstractService implements IService {
     return serviceName;
   }
 
-  /**
+  /*
    * Sets up the {@link MDC} logging context. You should do this on every client facing point of
    * entry and then call {@link #clearLoggingContext()} in a <code>finally</code> clause. You can
    * extend this method to add additional context.

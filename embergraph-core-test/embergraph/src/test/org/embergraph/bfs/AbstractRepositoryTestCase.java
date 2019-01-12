@@ -34,8 +34,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.service.AbstractEmbeddedFederationTestCase;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractRepositoryTestCase extends AbstractEmbeddedFederationTestCase {
@@ -87,7 +87,7 @@ public class AbstractRepositoryTestCase extends AbstractEmbeddedFederationTestCa
     super.tearDown();
   }
 
-  /**
+  /*
    * Read a stream into a byte[].
    *
    * <p>Note: The stream is closed as a side-effect.
@@ -131,7 +131,7 @@ public class AbstractRepositoryTestCase extends AbstractEmbeddedFederationTestCa
     return baos.toByteArray();
   }
 
-  /**
+  /*
    * Suck the character data from the reader into a string.
    *
    * @param reader

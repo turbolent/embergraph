@@ -31,7 +31,7 @@ public class InferenceBVE extends BOpBase implements BooleanValueExpression {
     super(op);
   }
 
-  /**
+  /*
    * For inference rules, we want to trap unbound variable exceptions and allow the solution
    * through.
    */

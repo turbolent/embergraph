@@ -28,8 +28,8 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Vocabulary and namespace for FOAF, not including terms marked as "archaic".
+/*
+* Vocabulary and namespace for FOAF, not including terms marked as "archaic".
  *
  * @see http://xmlns.com/foaf/spec/
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

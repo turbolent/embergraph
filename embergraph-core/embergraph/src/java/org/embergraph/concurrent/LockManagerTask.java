@@ -25,8 +25,8 @@ import java.util.Arrays;
 import java.util.concurrent.Callable;
 import org.apache.log4j.Logger;
 
-/**
- * Class encapsulates handshaking with the {@link LockManager} for an operation requiring exclusive
+/*
+* Class encapsulates handshaking with the {@link LockManager} for an operation requiring exclusive
  * access to one or more resources and that are willing to pre-declare their resource requirements.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -57,7 +57,7 @@ public class LockManagerTask<R extends Comparable<R>, T> implements Callable<T> 
     return lockManager;
   }
 
-  /**
+  /*
    * The resource(s) that are pre-declared by the task. {@link #call()} will ensure that the task as
    * a lock on these resources before it invokes {@link #run()} to execution the task.
    */
@@ -106,7 +106,7 @@ public class LockManagerTask<R extends Comparable<R>, T> implements Callable<T> 
     return lockTimeout;
   }
 
-  /**
+  /*
    * @param lockManager The lock manager.
    * @param resource The resource(s) to be locked.
    * @param target The {@link Runnable} target that will be invoked iff the locks are successfully
@@ -136,7 +136,7 @@ public class LockManagerTask<R extends Comparable<R>, T> implements Callable<T> 
     this.target = target;
   }
 
-  /**
+  /*
    * Attempt to acquire locks on resources required by the task.
    *
    * <p>Up to {@link #getMaxLockTries()} attempts will be made.
@@ -181,8 +181,8 @@ public class LockManagerTask<R extends Comparable<R>, T> implements Callable<T> 
           lockManager.ntimeout.incrementAndGet();
         }
 
-        /*
-         * Release any locks granted since we did not get all of the
+      /*
+       * Release any locks granted since we did not get all of the
          * locks that we were seeking.
          */
 
@@ -195,7 +195,7 @@ public class LockManagerTask<R extends Comparable<R>, T> implements Callable<T> 
     }
   }
 
-  /**
+  /*
    * Acquires pre-declared locks and then runs the operation identified to the constructor.
    *
    * @return <code>null</code>

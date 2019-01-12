@@ -4,8 +4,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class VerifyStatementBufferFactory implements IStatementBufferFactory {

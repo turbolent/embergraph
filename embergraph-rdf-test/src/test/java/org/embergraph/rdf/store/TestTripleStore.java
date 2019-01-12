@@ -61,8 +61,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-/**
- * Test basic features of the {@link ITripleStore} API.
+/*
+* Test basic features of the {@link ITripleStore} API.
  *
  * @todo Add tests of race condition where two threads attempt to: (1) add the same term(s); (2)
  *     resolve the same term(s). While the {@link Term2IdWriteProc} and {@link Id2TermWriteProc}
@@ -86,8 +86,8 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     super(name);
   }
 
-  //    /**
-  //     * Verify that {@link AbstractTripleStore#isLiteral(long)} and friends all
+  //    /*
+//     * Verify that {@link AbstractTripleStore#isLiteral(long)} and friends all
   //     * reported <code>false</code> for {@link IRawTripleStore#NULL}.
   //     */
   //    public void test_bitFlagsReportFalseForNULL() {
@@ -99,7 +99,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
   //
   //    }
 
-  /**
+  /*
    * Test helper verifies that the term is not in the lexicon, adds the term to the lexicon,
    * verifies that the term can be looked up by its assigned term identifier, verifies that the term
    * is now in the lexicon, and verifies that adding the term again returns the same term
@@ -352,7 +352,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test presents an array of {@link EmbergraphValue}s that contains duplicates and verifies
    * that the assigned term identifiers are consistent.
    */
@@ -417,7 +417,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that {@link EmbergraphValue}s whose term identifiers have already been
    * assigned are unchanged by {@link LexiconRelation#addTerms(EmbergraphValue[], int, boolean)}.
    *
@@ -505,8 +505,8 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
    * Note: This has been commented out to clean up CI, but the issue still
    * needs to be resolved.
    */
-  //    /**
-  //     * FIXME AbstractTripleStore#getBNodeCount() is not well behaved. For at
+  //    /*
+//     * FIXME AbstractTripleStore#getBNodeCount() is not well behaved. For at
   //     * least the BLOBS index we will have lots of bnode values in the index if a
   //     * lot of bnodes have been inserted (this can only occur for large bnode IDs
   //     * so it is a bit of an odd case). However, getBNodeCount() is documented as
@@ -593,7 +593,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     doTestRangeCounts(properties);
   }
 
-  /**
+  /*
    * Test helper for verifying the correct reporting of range counts from the lexicon.
    *
    * @param properties
@@ -680,8 +680,8 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
 
         assertEquals("#lits", nliterals, store.getLiteralCount());
 
-        /*
-         * Note: Even when we are not using told bnodes, we still insert
+      /*
+       * Note: Even when we are not using told bnodes, we still insert
          * the blank nodes into the lexicon and they should be reported
          * back here? With the standard bnodes semantics, inserting the
          * same BNode object multiple times will cause a new BNode to be
@@ -706,7 +706,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link ITripleStore#addStatement(Resource, URI, Value)} and {@link
    * ITripleStore#hasStatement(Resource, URI, Value)}.
    */
@@ -755,8 +755,8 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
       final IV x_termId;
       {
 
-        /*
-         * Make sure that lookup with a different instance succeeds (this
+      /*
+       * Make sure that lookup with a different instance succeeds (this
          * defeats the caching of the termId on the _Value).
          */
 
@@ -889,7 +889,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Verify that we can locate a statement that we add to the database using each statement index.
    */
   public void test_addLookup_nativeAPI() {
@@ -1068,7 +1068,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability to add and remove statements using both fully bound and partly bound triple
    * patterns using the native API.
    */
@@ -1191,7 +1191,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability to add and remove statements using both fully bound and partly bound triple
    * patterns using the Sesame compatible API.
    */
@@ -1251,7 +1251,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link
    * IRawTripleStore#removeStatements(org.embergraph.relation.accesspath.IChunkedOrderedIterator)}
    */
@@ -1323,7 +1323,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test of the batched parallel resolution of triple patterns.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/866" > Efficient batch remove of a collection

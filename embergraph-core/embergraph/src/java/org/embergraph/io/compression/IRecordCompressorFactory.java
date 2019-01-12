@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.io.compression;
 
-/**
- * A factory for {@link IRecordCompressor}s.
+/*
+* A factory for {@link IRecordCompressor}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -32,5 +32,5 @@ package org.embergraph.io.compression;
 public interface IRecordCompressorFactory<A extends IRecordCompressor> {
 
   /** Return an {@link IRecordCompressor} instance. */
-  public A getInstance();
+  A getInstance();
 }

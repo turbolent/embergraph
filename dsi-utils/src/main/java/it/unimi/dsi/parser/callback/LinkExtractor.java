@@ -30,15 +30,15 @@ import it.unimi.dsi.util.TextPattern;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * A callback extracting links.
+/*
+* A callback extracting links.
  *
  * <p>This callbacks extracts links existing in the web page. The links are then accessible in
  * {@link #urls} (a set of {@link String}s). Note that we guarantee that the iteration order in the
  * set is exactly the order in which links have been met (albeit copies appear just once).
  */
 public class LinkExtractor extends DefaultCallback {
-  /**
+  /*
    * The pattern prefixing the URL in a <samp>META </samp> <samp>HTTP-EQUIV </samp> element of
    * refresh type.
    */
@@ -48,13 +48,13 @@ public class LinkExtractor extends DefaultCallback {
   /** The URLs resulting from the parsing process. */
   public final Set<String> urls = new ObjectLinkedOpenHashSet<String>();
 
-  /**
+  /*
    * The URL contained in the first <samp>META </samp> <samp>HTTP-EQUIV </samp> element of refresh
    * type (if any).
    */
   private String metaRefresh = null;
 
-  /**
+  /*
    * The URL contained in the first <samp>META </samp> <samp>HTTP-EQUIV </samp> element of location
    * type (if any).
    */
@@ -63,7 +63,7 @@ public class LinkExtractor extends DefaultCallback {
   /** The URL contained in the first <samp>BASE </samp> element (if any). */
   private String base = null;
 
-  /**
+  /*
    * Configure the parser to parse elements and certain attributes.
    *
    * <p>The required attributes are <samp>SRC </samp>, <samp>HREF </samp>, <samp>HTTP-EQUIV </samp>,
@@ -129,7 +129,7 @@ public class LinkExtractor extends DefaultCallback {
     return true;
   }
 
-  /**
+  /*
    * Returns the URL specified by <samp>META </samp> <samp>HTTP-EQUIV </samp> elements of location
    * type. More precisely, this method returns a non- <code>null</code> result iff there is at least
    * one <samp>META HTTP-EQUIV </samp> element specifying a location URL (if there is more than one,
@@ -142,7 +142,7 @@ public class LinkExtractor extends DefaultCallback {
     return metaLocation;
   }
 
-  /**
+  /*
    * Returns the URL specified by the <samp>BASE </samp> element. More precisely, this method
    * returns a non- <code>null</code> result iff there is at least one <samp>BASE </samp> element
    * specifying a derelativisation URL (if there is more than one, we keep the first one).
@@ -153,7 +153,7 @@ public class LinkExtractor extends DefaultCallback {
     return base;
   }
 
-  /**
+  /*
    * Returns the URL specified by <samp>META </samp> <samp>HTTP-EQUIV </samp> elements of refresh
    * type. More precisely, this method returns a non- <code>null</code> result iff there is at least
    * one <samp>META HTTP-EQUIV </samp> element specifying a refresh URL (if there is more than one,

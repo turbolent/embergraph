@@ -28,8 +28,8 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Vocabulary and namespace for VOID.
+/*
+* Vocabulary and namespace for VOID.
  *
  * @see <a href="http://www.w3.org/TR/void/">Describing Linked Datasets with the VoiD Vocabulary
  *     </a>

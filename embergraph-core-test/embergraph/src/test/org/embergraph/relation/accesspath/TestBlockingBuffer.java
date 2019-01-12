@@ -38,8 +38,8 @@ import junit.framework.TestCase2;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.InnerCause;
 
-/**
- * Test suite for {@link BlockingBuffer} and its {@link IAsynchronousIterator}.
+/*
+* Test suite for {@link BlockingBuffer} and its {@link IAsynchronousIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -64,7 +64,7 @@ public class TestBlockingBuffer extends TestCase2 {
     super.tearDown();
   }
 
-  /**
+  /*
    * Basic test of the ability to add to a buffer with a fixed capacity queue and to drain the
    * elements from the queue including tests of the non-blocking aspects of the API.
    *
@@ -123,14 +123,14 @@ public class TestBlockingBuffer extends TestCase2 {
             new Runnable() {
               public void run() {
 
-                /*
-                 * add another element - should block until we take an element
+              /*
+       * add another element - should block until we take an element
                  * using the iterator.
                  */
                 buffer.add(e2);
 
-                /*
-                 * itr.hasNext() will block until the buffer is closed.
+              /*
+       * itr.hasNext() will block until the buffer is closed.
                  */
                 buffer.close();
               }
@@ -166,7 +166,7 @@ public class TestBlockingBuffer extends TestCase2 {
     consumerFuture.get(100, TimeUnit.MILLISECONDS);
   }
 
-  /**
+  /*
    * Test that a thread blocked on add() will be unblocked by {@link BlockingBuffer#close()}. For
    * this test, there is no consumer and there is a single producer. We just fill up the buffer and
    * when it is full, we verify that the producer is blocked. We then use {@link
@@ -233,8 +233,8 @@ public class TestBlockingBuffer extends TestCase2 {
 
         if (!InnerCause.isInnerCause(ex, BufferClosedException.class)) {
 
-          /*
-           * Should have thrown a BufferClosedException.
+        /*
+       * Should have thrown a BufferClosedException.
            */
 
           fail("Unexpected cause: " + ex, ex);
@@ -249,7 +249,7 @@ public class TestBlockingBuffer extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test that a thread blocked on add() will be unblocked by {@link BlockingBuffer#close()}. For
    * this test, there is no consumer and there is a single producer. We just fill up the buffer and
    * when it is full, we verify that the producer is blocked. We then use the object returned by
@@ -300,7 +300,7 @@ public class TestBlockingBuffer extends TestCase2 {
     try {
 
       // Wrap computation as FutureTask.
-      ft = new FutureTask<Void>(new Producer(), (Void) null /* result */);
+      ft = new FutureTask<Void>(new Producer(), null /* result */);
 
       /*
        * Set the Future on the BlockingBuffer. This is how it will notice
@@ -350,7 +350,7 @@ public class TestBlockingBuffer extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test that threads blocked on add() will be unblocked by {@link BlockingBuffer#close()}. A pool
    * of producer threads run. A (smaller) pool of (slower) consumer thread(s) also runs. The {@link
    * BlockingBuffer} is closed once the producer threads begin to block. We then verify that all
@@ -526,8 +526,8 @@ public class TestBlockingBuffer extends TestCase2 {
       service.shutdownNow();
 
       if (!consumerFuture.isDone() || !producerFuture.isDone()) {
-        /*
-         * Note: If the service does not terminate after a timeout then
+      /*
+       * Note: If the service does not terminate after a timeout then
          * we have a hung thread on add().
          */
         service.awaitTermination(5 /* timeout */, TimeUnit.SECONDS);

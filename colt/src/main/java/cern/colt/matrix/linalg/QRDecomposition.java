@@ -10,9 +10,10 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
+import cern.jet.math.Functions;
 
-/**
- * For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the QR decomposition is an <tt>m x
+/*
+* For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the QR decomposition is an <tt>m x
  * n</tt> orthogonal matrix <tt>Q</tt> and an <tt>n x n</tt> upper triangular matrix <tt>R</tt> so
  * that <tt>A = Q*R</tt>.
  *
@@ -23,7 +24,7 @@ import cern.colt.matrix.DoubleMatrix2D;
  */
 public class QRDecomposition implements java.io.Serializable {
   static final long serialVersionUID = 1020;
-  /**
+  /*
    * Array for internal storage of decomposition.
    *
    * @serial internal array storage.
@@ -31,7 +32,7 @@ public class QRDecomposition implements java.io.Serializable {
   private DoubleMatrix2D QR;
   // private double[][] QR;
 
-  /**
+  /*
    * Row and column dimensions.
    *
    * @serial column dimension.
@@ -39,13 +40,13 @@ public class QRDecomposition implements java.io.Serializable {
    */
   private int m, n;
 
-  /**
+  /*
    * Array for internal storage of diagonal of R.
    *
    * @serial diagonal of R.
    */
   private DoubleMatrix1D Rdiag;
-  /**
+  /*
    * Constructs and returns a new QR decomposition object; computed by Householder reflections; The
    * decomposed matrices can be retrieved via instance methods of the returned decomposition object.
    *
@@ -121,7 +122,7 @@ public class QRDecomposition implements java.io.Serializable {
       Rdiag.setQuick(k, -nrm);
     }
   }
-  /**
+  /*
    * Returns the Householder vectors <tt>H</tt>.
    *
    * @return A lower trapezoidal matrix whose columns define the householder reflections.
@@ -129,7 +130,7 @@ public class QRDecomposition implements java.io.Serializable {
   public DoubleMatrix2D getH() {
     return Algebra.DEFAULT.trapezoidalLower(QR.copy());
   }
-  /**
+  /*
    * Generates and returns the (economy-sized) orthogonal factor <tt>Q</tt>.
    *
    * @return <tt>Q</tt>
@@ -146,13 +147,13 @@ public class QRDecomposition implements java.io.Serializable {
           DoubleMatrix1D Qcolj = Q.viewColumn(j).viewPart(k, m - k);
           double s = QRcolk.zDotProduct(Qcolj);
           s = -s / QR.getQuick(k, k);
-          Qcolj.assign(QRcolk, F.plusMult(s));
+          Qcolj.assign(QRcolk, Functions.plusMult(s));
         }
       }
     }
     return Q;
   }
-  /**
+  /*
    * Returns the upper triangular factor, <tt>R</tt>.
    *
    * @return <tt>R</tt>
@@ -168,7 +169,7 @@ public class QRDecomposition implements java.io.Serializable {
     }
     return R;
   }
-  /**
+  /*
    * Returns whether the matrix <tt>A</tt> has full rank.
    *
    * @return true if <tt>R</tt>, and hence <tt>A</tt>, has full rank.
@@ -179,7 +180,7 @@ public class QRDecomposition implements java.io.Serializable {
     }
     return true;
   }
-  /**
+  /*
    * Least squares solution of <tt>A*X = B</tt>; <tt>returns X</tt>.
    *
    * @param B A matrix with as many rows as <tt>A</tt> and any number of columns.
@@ -227,7 +228,7 @@ public class QRDecomposition implements java.io.Serializable {
     }
     return X.viewPart(0, 0, n, nx);
   }
-  /**
+  /*
    * Returns a String with (propertyName, propertyValue) pairs. Useful for debugging or to quickly
    * get the rough picture. For example,
    *
@@ -246,28 +247,28 @@ public class QRDecomposition implements java.io.Serializable {
 
     buf.append("hasFullRank = ");
     try {
-      buf.append(String.valueOf(this.hasFullRank()));
+      buf.append(this.hasFullRank());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nH = ");
     try {
-      buf.append(String.valueOf(this.getH()));
+      buf.append(this.getH());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nQ = ");
     try {
-      buf.append(String.valueOf(this.getQ()));
+      buf.append(this.getQ());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nR = ");
     try {
-      buf.append(String.valueOf(this.getR()));
+      buf.append(this.getR());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
@@ -275,7 +276,7 @@ public class QRDecomposition implements java.io.Serializable {
     buf.append("\n\npseudo inverse(A) = ");
     try {
       buf.append(
-          String.valueOf(this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(QR.rows()))));
+          this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(QR.rows())));
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

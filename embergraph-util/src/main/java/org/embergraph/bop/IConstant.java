@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-/**
- * A constant.
+/*
+* A constant.
  *
  * <p>Note: {@link IConstant} does not implement {@link Comparable} for two reasons:
  *

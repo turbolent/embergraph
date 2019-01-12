@@ -8,12 +8,12 @@ that both that copyright notice and this permission notice appear in supporting 
 CERN makes no representations about the suitability of this software for any purpose.
 It is provided "as is" without expressed or implied warranty.
 */
-/**
- * Interface that represents a function object: a function that takes 5 arguments and returns a
+/*
+* Interface that represents a function object: a function that takes 5 arguments and returns a
  * single value.
  */
 public interface Double5Function {
-  /**
+  /*
    * Applies a function to two arguments.
    *
    * @param a the first argument passed to the function.
@@ -23,5 +23,5 @@ public interface Double5Function {
    * @param e the fifth argument passed to the function.
    * @return the result of the function.
    */
-  public abstract double apply(double a, double b, double c, double d, double e);
+  double apply(double a, double b, double c, double d, double e);
 }

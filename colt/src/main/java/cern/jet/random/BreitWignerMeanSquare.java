@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Mean-square BreitWigner distribution; See the <A
+/*
+* Mean-square BreitWigner distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node23.html#SECTION000230000000000000000"> math
  * definition</A>.
  *
@@ -31,7 +31,7 @@ public class BreitWignerMeanSquare extends BreitWigner {
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static BreitWigner shared =
       new BreitWignerMeanSquare(1.0, 0.2, 1.0, makeDefaultGenerator());
-  /**
+  /*
    * Constructs a mean-squared BreitWigner distribution.
    *
    * @param cut </tt>cut==Double.NEGATIVE_INFINITY</tt> indicates "don't cut".
@@ -41,7 +41,7 @@ public class BreitWignerMeanSquare extends BreitWigner {
     super(mean, gamma, cut, randomGenerator);
     this.uniform = new Uniform(randomGenerator);
   }
-  /**
+  /*
    * Returns a deep copy of the receiver; the copy will produce identical sequences. After this call
    * has returned, the copy and the receiver have equal but separate state.
    *
@@ -52,7 +52,7 @@ public class BreitWignerMeanSquare extends BreitWigner {
     if (this.uniform != null) copy.uniform = new Uniform(copy.randomGenerator);
     return copy;
   }
-  /**
+  /*
    * Returns a mean-squared random number from the distribution; bypasses the internal state.
    *
    * @param cut </tt>cut==Double.NEGATIVE_INFINITY</tt> indicates "don't cut".
@@ -74,7 +74,7 @@ public class BreitWignerMeanSquare extends BreitWigner {
       return Math.sqrt(Math.max(0.0, mean * mean + mean * displ));
     }
   }
-  /**
+  /*
    * Returns a random number from the distribution.
    *
    * @param cut </tt>cut==Double.NEGATIVE_INFINITY</tt> indicates "don't cut".
@@ -84,7 +84,7 @@ public class BreitWignerMeanSquare extends BreitWigner {
       return shared.nextDouble(mean, gamma, cut);
     }
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

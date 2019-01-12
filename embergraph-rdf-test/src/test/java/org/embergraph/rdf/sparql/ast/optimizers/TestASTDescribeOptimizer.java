@@ -51,8 +51,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for the {@link ASTDescribeOptimizer}.
+/*
+* Test suite for the {@link ASTDescribeOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -69,7 +69,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for the AST rewrite of a simple describe query
    *
    * <pre>
@@ -261,7 +261,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for the AST rewrite of a simple describe query
    *
    * <pre>
@@ -461,7 +461,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for the AST rewrite of a simple describe query
    *
    * <pre>
@@ -665,7 +665,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for the AST rewrite of a simple describe query involving an IRI and a variable bound
    * by a WHERE clause. The IRI in this case was chosen such that it would NOT be selected by the
    * WHERE clause.
@@ -903,7 +903,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * <code>DESCRIBE *</code> is a short hand for all variables in the query.
    *
    * <pre>
@@ -1115,7 +1115,7 @@ public class TestASTDescribeOptimizer extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * This query is illegal since there are no variables to be described.
    *
    * <pre>

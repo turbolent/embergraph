@@ -29,8 +29,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Vocabulary and namespace for RDFS.
+/*
+* Vocabulary and namespace for RDFS.
  *
  * @see http://www.w3.org/2000/01/rdf-schema#
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

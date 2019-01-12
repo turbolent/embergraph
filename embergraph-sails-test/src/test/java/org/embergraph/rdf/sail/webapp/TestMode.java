@@ -39,7 +39,7 @@ enum TestMode {
   quads,
   /** Plain triples mode with incremental truth maintenance enabled by default. */
   triplesPlusTruthMaintenance;
-  /**
+  /*
    * Return <code>true</code> iff it is possible to setup truth maintenance for this configuration.
    */
   public boolean isTruthMaintenanceSupported() {
@@ -56,7 +56,7 @@ enum TestMode {
     return getProperties(new Properties());
   }
 
-  /**
+  /*
    * Override the caller's properties object with the settings required to establish the {@link
    * TestMode}. To avoid side-effects <>
    *

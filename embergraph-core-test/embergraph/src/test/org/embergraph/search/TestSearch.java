@@ -29,8 +29,8 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 
-/**
- * Test suite using examples based on <a
+/*
+* Test suite using examples based on <a
  * href="http://www.ec-securehost.com/SIAM/SE17.html"><i>Understanding Search Engines</i></a> by
  * Barry and Browne. I recommend the book as a good overview of search engine basis and an excellent
  * reader for latent semantic indexing (Barry was one of the original people involved with LSI).
@@ -51,7 +51,7 @@ public class TestSearch extends AbstractSearchTest {
     super(name);
   }
 
-  /**
+  /*
    * Note: the examples have been modified to only expose the terms that were accepted by the
    * indexer used in the book. Since the authors were using stemming, the examples are pre-stemmed.
    * This just reduces the complexity of the system under test.
@@ -154,7 +154,7 @@ public class TestSearch extends AbstractSearchTest {
     }
   }
 
-  /**
+  /*
    * Compares the hit list to the expected hit list.
    *
    * <p>Note: Ties on cosine are broken by sorting the ties into increasing order by docId.

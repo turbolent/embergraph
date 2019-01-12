@@ -25,8 +25,8 @@ import java.io.Serializable;
 import org.embergraph.bop.BOp;
 import org.embergraph.counters.CAT;
 
-/**
- * Statistics associated with the evaluation of a {@link BOp}. These statistics are per {@link BOp}.
+/*
+* Statistics associated with the evaluation of a {@link BOp}. These statistics are per {@link BOp}.
  * The top-level {@link BOp} will reflect the throughput for the entire pipeline.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -37,14 +37,14 @@ public class BOpStats implements Serializable {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * The elapsed time (milliseconds) for the corresponding operation. When aggregated, this will
    * generally exceed the wall time since concurrent processes are nearly always used during query
    * evaluation.
    */
   public final CAT elapsed = new CAT();
 
-  /**
+  /*
    * The #of instances of a given operator which have been started (and successully terminated) for
    * a given query. This provides interesting information about the #of task instances for each
    * operator which were required to execute a query.
@@ -70,7 +70,7 @@ public class BOpStats implements Serializable {
   public final CAT unitsOut = new CAT();
   //    final public AtomicLong unitsOut = new AtomicLong();
 
-  /**
+  /*
    * The #of error which were masked by the semantics of the query.
    *
    * <p>Note: SPARQL type errors in aggregations often cause bindings or solutions to fail without
@@ -79,7 +79,7 @@ public class BOpStats implements Serializable {
    */
   public final CAT typeErrors = new CAT();
 
-  /**
+  /*
    * The #of tuples written onto a relation (not an index).
    *
    * <p>Note: This mutation counts should reflect the #of tuples written on a relation rather than
@@ -97,7 +97,7 @@ public class BOpStats implements Serializable {
    */
   public final CAT mutationCount = new CAT();
 
-  /**
+  /*
    * Constructor.
    *
    * <p>Note: Do not pre-increment {@link #opCount}. See {@link #add(BOpStats)} and {@link
@@ -112,7 +112,7 @@ public class BOpStats implements Serializable {
 
   }
 
-  /**
+  /*
    * Combine the statistics (addition), but do NOT add to self.
    *
    * @param o Another statistics object.
@@ -149,7 +149,7 @@ public class BOpStats implements Serializable {
     return sb.toString();
   }
 
-  /**
+  /*
    * Extension hook for {@link #toString()}.
    *
    * @param sb Where to write the additional state.

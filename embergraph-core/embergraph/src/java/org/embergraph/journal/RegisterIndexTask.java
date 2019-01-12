@@ -26,8 +26,8 @@ import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.service.IDataService;
 
-/**
- * Register a named index (unisolated write operation).
+/*
+* Register a named index (unisolated write operation).
  *
  * <p>Note: The return value of {@link #doTask()} is the {@link UUID} of the named index. You can
  * test this value to determine whether the index was created based on the supplied {@link IIndex}
@@ -44,7 +44,7 @@ public class RegisterIndexTask extends AbstractTask<UUID> {
 
   private final IndexMetadata metadata;
 
-  /**
+  /*
    * @param journal
    * @param name The name under which to register the index.
    * @param metadata The index metadata.
@@ -63,7 +63,7 @@ public class RegisterIndexTask extends AbstractTask<UUID> {
     this.metadata = metadata;
   }
 
-  /**
+  /*
    * Create the named index if it does not exist.
    *
    * @return The {@link UUID} of the named index.

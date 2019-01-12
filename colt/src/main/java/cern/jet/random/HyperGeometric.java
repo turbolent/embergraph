@@ -10,8 +10,8 @@ package cern.jet.random;
 
 import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
-/**
- * HyperGeometric distribution; See the <A HREF="http://library.advanced.org/10030/6atpdvah.htm">
+/*
+* HyperGeometric distribution; See the <A HREF="http://library.advanced.org/10030/6atpdvah.htm">
  * math definition</A>
  *
  * <p>The hypergeometric distribution with parameters <tt>N</tt>, <tt>n</tt> and <tt>s</tt> is the
@@ -287,7 +287,7 @@ public class HyperGeometric extends AbstractDiscreteDistribution {
   }
   /** Returns a random number from the distribution; bypasses the internal state. */
   protected int nextInt(int N, int M, int n, RandomEngine randomGenerator) {
-    /**
+    /*
      * **************************************************************** * Hypergeometric
      * Distribution - Patchwork Rejection/Inversion * *
      * ***************************************************************** * The basic algorithms work
@@ -357,7 +357,7 @@ public class HyperGeometric extends AbstractDiscreteDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + my_N + "," + my_s + "," + my_n + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

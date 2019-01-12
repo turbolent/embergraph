@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.IIndex;
 
-/**
- * Supports the chunk-at-a-time filter and conversion operations. Chunk-at-a-time operations are
+/*
+* Supports the chunk-at-a-time filter and conversion operations. Chunk-at-a-time operations are
  * potentially much more efficient as they allow for ordered reads and ordered writes on {@link
  * IIndex}s.
  *
@@ -31,7 +31,7 @@ public class ChunkedConvertingIterator<E, F> implements IChunkedOrderedIterator<
 
   private int pos = 0;
 
-  /**
+  /*
    * Ctor when the element type is NOT being changed during conversion. This ctor uses the {@link
    * IKeyOrder} reported by the source {@link IChunkedOrderedIterator}. This will result in runtime
    * exceptions if the generic types of the source and converted iterators differ.
@@ -45,7 +45,7 @@ public class ChunkedConvertingIterator<E, F> implements IChunkedOrderedIterator<
     this(src, converter, (IKeyOrder<F>) src.getKeyOrder());
   }
 
-  /**
+  /*
    * Variant ctor when you are also converting the element type.
    *
    * @param src The source iterator.
@@ -70,7 +70,7 @@ public class ChunkedConvertingIterator<E, F> implements IChunkedOrderedIterator<
     this.keyOrder = keyOrder;
   }
 
-  /**
+  /*
    * Applies the chunk-at-a-time converter. The converted chunk MAY contain a different number of
    * elements. If it does not contain any elements then another chunk will be fetched from the
    * source iterator by {@link #hasNext()}.
@@ -212,7 +212,7 @@ public class ChunkedConvertingIterator<E, F> implements IChunkedOrderedIterator<
     return chunk;
   }
 
-  /**
+  /*
    * Not supported.
    *
    * @throws UnsupportedOperationException always.

@@ -25,8 +25,8 @@ import java.util.Iterator;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * Base class for AST nodes which model an ordered list of value expressions.
+/*
+* Base class for AST nodes which model an ordered list of value expressions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

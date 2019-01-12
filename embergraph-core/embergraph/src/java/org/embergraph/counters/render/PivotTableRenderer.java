@@ -10,8 +10,8 @@ import org.embergraph.counters.query.HistoryTable;
 import org.embergraph.counters.query.PivotTable;
 import org.embergraph.counters.query.URLQueryModel;
 
-/**
- * Writes out a pivot table containing the histories for the selected counters. Sample output is:
+/*
+* Writes out a pivot table containing the histories for the selected counters. Sample output is:
  *
  * <pre>
  * Minutes  Timestamp    hostname indexName   indexPartitionName  readSecs    writeSecs   leafSplits  tailSplits

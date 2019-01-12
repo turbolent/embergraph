@@ -26,8 +26,8 @@ package org.embergraph.service;
 import java.io.Serializable;
 import java.util.concurrent.Callable;
 
-/**
- * Interface for {@link Callable}s which require access to the {@link IEmbergraphFederation} when
+/*
+* Interface for {@link Callable}s which require access to the {@link IEmbergraphFederation} when
  * running on an {@link IRemoteExecutor}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -35,7 +35,7 @@ import java.util.concurrent.Callable;
  */
 public interface IFederationCallable extends Serializable {
 
-  /**
+  /*
    * Invoked before the task is executed to provide a reference to the {@link IEmbergraphFederation}
    * for the service on which the task is executing.
    *
@@ -46,7 +46,7 @@ public interface IFederationCallable extends Serializable {
    */
   void setFederation(IEmbergraphFederation<?> fed);
 
-  /**
+  /*
    * Return the {@link IEmbergraphFederation} reference.
    *
    * @return The federation and never <code>null</code>.

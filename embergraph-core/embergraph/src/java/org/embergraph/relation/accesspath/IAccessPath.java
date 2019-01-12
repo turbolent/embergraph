@@ -33,8 +33,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * An abstraction for efficient reads of {@link IElement}s from a {@link IRelation} using the index
+/*
+* An abstraction for efficient reads of {@link IElement}s from a {@link IRelation} using the index
  * selected by an {@link IPredicate} constraint. Like their {@link #iterator()}, implementations of
  * this interface are NOT required to be thread-safe. They are designed for a single-threaded
  * consumer.
@@ -46,18 +46,18 @@ import org.embergraph.striterator.IKeyOrder;
 public interface IAccessPath<R> extends IAbstractAccessPath<R> { // extends Iterable<R> {
 
   /** The order in which the elements will be visited. */
-  public IKeyOrder<R> getKeyOrder();
+  IKeyOrder<R> getKeyOrder();
 
-  /**
+  /*
    * The index selected for the access path.
    *
    * <p>Note: The access path may incorporate additional constraints from the specified {@link
    * IPredicate} that are not present on the {@link IIndex} returned by this method.
    */
-  public IIndex getIndex();
+  IIndex getIndex();
 
-  //    /**
-  //     * The raw iterator for traversing the selected index within the key range
+  //    /*
+//     * The raw iterator for traversing the selected index within the key range
   //     * implied by {@link IPredicate}.
   //     * <p>
   //     * Note: The access path may incorporate additional constraints from the
@@ -66,7 +66,7 @@ public interface IAccessPath<R> extends IAbstractAccessPath<R> { // extends Iter
   //     */
   //    public ITupleIterator<R> rangeIterator();
 
-  /**
+  /*
    * An iterator visiting elements using the natural order of the index selected for the {@link
    * IPredicate}. This is equivalent to
    *
@@ -85,10 +85,10 @@ public interface IAccessPath<R> extends IAbstractAccessPath<R> { // extends Iter
    * @return The iterator.
    * @see IRelation#getAccessPath(IPredicate)
    */
-  public IChunkedOrderedIterator<R> iterator();
+  IChunkedOrderedIterator<R> iterator();
 
-  //    /**
-  //     * An iterator visiting elements using the natural order of the index
+  //    /*
+//     * An iterator visiting elements using the natural order of the index
   //     * selected for the {@link IPredicate}.
   //     *
   //     * @param limit
@@ -107,7 +107,7 @@ public interface IAccessPath<R> extends IAbstractAccessPath<R> { // extends Iter
   //     */
   //    public IChunkedOrderedIterator<R> iterator(int limit, int capacity);
 
-  /**
+  /*
    * An iterator visiting elements using the natural order of the index selected for the {@link
    * IPredicate}.
    *
@@ -137,10 +137,10 @@ public interface IAccessPath<R> extends IAbstractAccessPath<R> { // extends Iter
    *     the {@link IAccessPath}. This way they will be correctly applied when {@link #isEmpty()} is
    *     implemented using the {@link #iterator()} to determine if any elements can be visited.
    */
-  public IChunkedOrderedIterator<R> iterator(long offset, long limit, int capacity);
+  IChunkedOrderedIterator<R> iterator(long offset, long limit, int capacity);
 
-  //    /**
-  //     * Remove all elements selected by the {@link IPredicate} (optional
+  //    /*
+//     * Remove all elements selected by the {@link IPredicate} (optional
   //     * operation).
   //     *
   //     * @return The #of elements that were removed.

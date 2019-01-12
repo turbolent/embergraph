@@ -15,8 +15,8 @@ import org.embergraph.rdf.rio.RDFParserOptions;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Tasks either loads a RDF resource or verifies that the told triples found in that resource are
+/*
+* Tasks either loads a RDF resource or verifies that the told triples found in that resource are
  * present in the database. The difference between data load and data verify is just the behavior of
  * the {@link IStatementBuffer}.
  *
@@ -59,7 +59,7 @@ public class SingleResourceReaderTask implements Runnable {
         + "}";
   }
 
-  /**
+  /*
    * Note: Updates to <i>toldTriples</i> MUST NOT occur unless the task succeeds, otherwise tasks
    * which error and then retry will cause double-counting.
    *
@@ -131,7 +131,7 @@ public class SingleResourceReaderTask implements Runnable {
     toldTriples.addAndGet(loadStats.toldTriples.get());
   }
 
-  /**
+  /*
    * Reads an RDF resource and either loads it into the database or verifies that the triples in the
    * resource are found in the database.
    */

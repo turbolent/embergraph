@@ -31,8 +31,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Abstract base class implements mutation operators and search. A concrete subclass need only
+/*
+* Abstract base class implements mutation operators and search. A concrete subclass need only
  * indicate if it is mutable, searchable, or allows nulls by overriding the appropriate methods.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -43,7 +43,7 @@ public abstract class AbstractRaba implements IRaba {
   /** The inclusive lower bound of the view. */
   protected final int fromIndex;
 
-  /**
+  /*
    * The exclusive upper bound of the view.
    *
    * <p>Note: This field is NOT final since it is modified by a subclass which permits mutation.
@@ -56,7 +56,7 @@ public abstract class AbstractRaba implements IRaba {
   /** The backing array. */
   protected final byte[][] a;
 
-  /**
+  /*
    * Create a view of a byte[][]. All elements in the array are visible in the view.
    *
    * @param a The backing byte[][].
@@ -66,7 +66,7 @@ public abstract class AbstractRaba implements IRaba {
     this(0 /* fromIndex */, a.length /* toIndex */, a.length /* capacity */, a);
   }
 
-  /**
+  /*
    * Create a view from a slice of a byte[][].
    *
    * @param fromIndex The index of the first element in the byte[][] which is visible in the view
@@ -229,7 +229,7 @@ public abstract class AbstractRaba implements IRaba {
     }
   }
 
-  /**
+  /*
    * @param a A byte[] to be inserted or set on the {@link IRaba}.
    * @throws IllegalArgumentException if the <code>byte[]</code> is <code>null</code> and the
    *     implementation does not permit <code>null</code>s to be stored.
@@ -327,7 +327,7 @@ public abstract class AbstractRaba implements IRaba {
     return toString(this);
   }
 
-  /**
+  /*
    * If {@link IRaba#isKeys()} is <code>true</code> then represents the elements as <code>
    * unsigned byte[]</code>s. Otherwise represents the elements as <code>signed byte[]</code>s.
    */
@@ -375,7 +375,7 @@ public abstract class AbstractRaba implements IRaba {
     return sb.toString();
   }
 
-  /**
+  /*
    * Resize the buffer, copying up to <i>n</i> references to the existing data into a new view
    * backed by a new byte[][]. <code>fromIndex</code> will be zero in the new view.
    *
@@ -413,7 +413,7 @@ public abstract class AbstractRaba implements IRaba {
     try {
 
       final Constructor<? extends AbstractRaba> ctor =
-          getClass().getConstructor(new Class[] {byte[].class});
+          getClass().getConstructor(byte[].class);
 
       return ctor.newInstance(new Object[] {a});
 

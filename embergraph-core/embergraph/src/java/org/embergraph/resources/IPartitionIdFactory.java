@@ -25,8 +25,8 @@ package org.embergraph.resources;
 
 import org.embergraph.service.IMetadataService;
 
-/**
- * An interface which shields callers from handling RMI exceptions and which allows the use of mock
+/*
+* An interface which shields callers from handling RMI exceptions and which allows the use of mock
  * implementations when you do not really want to assign partition identifiers using the {@link
  * IMetadataService#nextPartitionId(String)}.
  *
@@ -36,11 +36,11 @@ import org.embergraph.service.IMetadataService;
  */
 public interface IPartitionIdFactory {
 
-  /**
+  /*
    * Return the next index partition identifier for the given scale-out index.
    *
    * @param scaleOutIndexName The name of the scale-out index.
    * @return The next partition identifier for that scale-out index.
    */
-  public int nextPartitionId(final String scaleOutIndexName);
+  int nextPartitionId(final String scaleOutIndexName);
 }

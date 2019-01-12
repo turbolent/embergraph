@@ -23,8 +23,8 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * ********************************************************************** PSInputStream
+/*
+* ********************************************************************** PSInputStream
  *
  * <p>Unlike the original PSInputStream this does not incrementally read from the store but rather
  * immediate maps the ByteBuffers to the in-memory storage.
@@ -96,7 +96,7 @@ public class PSInputStream extends InputStream {
     return rdlen;
   }
 
-  public synchronized int read(final byte dst[], final int off, final int len) throws IOException {
+  public synchronized int read(final byte[] dst, final int off, final int len) throws IOException {
     if (m_size == 0) {
       return -1;
     }

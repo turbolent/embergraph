@@ -54,8 +54,8 @@ import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Optimizes <code>
+/*
+* Optimizes <code>
  * SELECT (COUNT(*) as ?count) ?z WHERE {  ?x rdf:type ?z  } GROUP BY ?z
  * </code> and similar patterns using an O(N) algorithm, where N is the number of distinct
  * solutions.
@@ -94,7 +94,7 @@ public class ASTSimpleGroupByAndCountOptimizer implements IASTOptimizer {
     final IBindingSet[] bindingSets = input.getBindingSets();
 
     if (context.getAbstractTripleStore().getSPORelation().indicesHaveDeleteMarkers()) {
-      /**
+      /*
        * Disallow for optimization when using delete markers.
        *
        * <p>The presence of deleteMarkers means that the fast-range count will be turned into a
@@ -118,8 +118,8 @@ public class ASTSimpleGroupByAndCountOptimizer implements IASTOptimizer {
     if (context.getAbstractTripleStore().isQuads()) {
       boolean ok = false;
       if (dataset == null || dataset.getNamedGraphs() == null) {
-        /*
-         * The dataset is all graphs.
+      /*
+       * The dataset is all graphs.
          */
         ok = true;
       }
@@ -149,7 +149,7 @@ public class ASTSimpleGroupByAndCountOptimizer implements IASTOptimizer {
 
     // rewrite the top-level select
 
-    /**
+    /*
      * https://jira.blazegraph.com/browse/BLZG-618, failure of
      * http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg06 mentioned in
      * one of the comments: we are not allowed to do the fast range count optimization if the query
@@ -163,7 +163,7 @@ public class ASTSimpleGroupByAndCountOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryNode, bindingSets);
   }
 
-  /**
+  /*
    * Attempt to rewrite the SELECT.
    *
    * @param context
@@ -177,7 +177,7 @@ public class ASTSimpleGroupByAndCountOptimizer implements IASTOptimizer {
       final QueryRoot queryRoot,
       final QueryBase queryBase) {
 
-    /**
+    /*
      * The prerequisites for the optimizer, which we check in the following, are as follows:
      *
      * <p>(C1) Query must be a SELECT query
@@ -342,7 +342,7 @@ public class ASTSimpleGroupByAndCountOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Once we reach this point, we're sure that the optimization is applicable, we now rewrite the
      * query plan accordingly; the following needs to be done:
      *

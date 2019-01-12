@@ -27,8 +27,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import junit.framework.TestCase2;
 import org.embergraph.btree.keys.KVO;
 
-/**
- * Test suite for {@link DefaultDuplicateRemover}.
+/*
+* Test suite for {@link DefaultDuplicateRemover}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -75,7 +75,7 @@ public class TestDefaultDuplicateRemover extends TestCase2 {
     assertTrue(t4 == b[3]);
   }
 
-  /**
+  /*
    * Test of filter which removes writes having the same reference (the reference test is used to
    * avoid the key and value comparison).
    */
@@ -115,7 +115,7 @@ public class TestDefaultDuplicateRemover extends TestCase2 {
     assertTrue(t4 == b[3]);
   }
 
-  /**
+  /*
    * Helper class uses an atomic counter to record the #of visited instances when {@link #done()} is
    * invoked.
    *
@@ -127,7 +127,7 @@ public class TestDefaultDuplicateRemover extends TestCase2 {
 
     private final AtomicInteger counter;
 
-    /**
+    /*
      * @param key
      * @param val
      * @param obj
@@ -145,7 +145,7 @@ public class TestDefaultDuplicateRemover extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that the duplicates are maintained on a {@link KVOList}, including the case
    * where a series or more than one duplicate is identified to verify that the linked list is
    * constructed correctly.

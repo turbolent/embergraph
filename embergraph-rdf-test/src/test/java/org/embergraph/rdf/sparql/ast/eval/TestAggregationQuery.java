@@ -25,8 +25,8 @@ import org.embergraph.bop.solutions.AbstractAggregationTestCase;
 import org.embergraph.bop.solutions.GroupByRewriter;
 import org.embergraph.bop.solutions.GroupByState;
 
-/**
- * Data driven test suite for aggregation queries.
+/*
+* Data driven test suite for aggregation queries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class TestAggregationQuery extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * A basic aggregation query.
    *
    * <pre>
@@ -82,7 +82,7 @@ public class TestAggregationQuery extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -106,7 +106,7 @@ public class TestAggregationQuery extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -131,7 +131,7 @@ public class TestAggregationQuery extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Query correctly returns one row having a value of ZERO (0) for the count since there are no
    * solutions in the data that match the query.
    *
@@ -155,7 +155,7 @@ public class TestAggregationQuery extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Variation of the query above using COUNT(DISTINCT) should also return one solution having a
    * binding of ZERO (0) for the count.
    *

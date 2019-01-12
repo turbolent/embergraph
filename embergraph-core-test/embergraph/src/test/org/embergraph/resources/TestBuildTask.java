@@ -50,8 +50,8 @@ import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.resources.ResourceManager.Options;
 
-/**
- * Basic test of building an index segment from an index partition on overflow.
+/*
+* Basic test of building an index segment from an index partition on overflow.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -78,7 +78,7 @@ public class TestBuildTask extends AbstractResourceManagerTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Test generates an {@link IndexSegment} from an ordered subset of the sources specified for the
    * fused view of an index partition. The resulting {@link IndexSegment} is a partial replacement
    * for the historical view and must retain the most recent tuple or delete marker written for any
@@ -204,8 +204,8 @@ public class TestBuildTask extends AbstractResourceManagerTestCase {
         // overflow must be disallowed as a task pre-condition.
         resourceManager.overflowAllowed.compareAndSet(true, false);
 
-        /*
-         * Submit task and await result (metadata describing the new
+      /*
+       * Submit task and await result (metadata describing the new
          * index segment).
          */
         result = concurrencyManager.submit(task).get();
@@ -257,7 +257,7 @@ public class TestBuildTask extends AbstractResourceManagerTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test of a build conducted against a historical snapshot of a view created by {@link
    * BTree#createViewCheckpoint()}.
    *
@@ -351,8 +351,8 @@ public class TestBuildTask extends AbstractResourceManagerTestCase {
 
               final long priorCommitTime = view.getMutableBTree().createViewCheckpoint();
 
-              /*
-               * Done. The new view will be seen by any task executing
+            /*
+       * Done. The new view will be seen by any task executing
                * after this one within the commit group and by any task
                * starting after the group commit iff the commit is
                * successful.
@@ -459,13 +459,13 @@ public class TestBuildTask extends AbstractResourceManagerTestCase {
 
       try {
 
-        /*
-         * Overflow must be disallowed as a task pre-condition.
+      /*
+       * Overflow must be disallowed as a task pre-condition.
          */
         resourceManager.overflowAllowed.compareAndSet(true, false);
 
-        /*
-         * Submit task and await result (metadata describing the new
+      /*
+       * Submit task and await result (metadata describing the new
          * index segment).
          */
         result = concurrencyManager.submit(task).get();

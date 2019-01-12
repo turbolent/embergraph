@@ -28,8 +28,8 @@ import org.embergraph.rdf.sparql.ast.IQueryNode;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Sets the {@link PipelineOp.Annotations#NUM_TASKS_PER_THREAD} annotation of an operator.
+/*
+* Sets the {@link PipelineOp.Annotations#NUM_TASKS_PER_THREAD} annotation of an operator.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

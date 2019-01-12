@@ -26,8 +26,8 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Packing utility for non-negative <code>short</code> values.
+/*
+* Packing utility for non-negative <code>short</code> values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -38,7 +38,7 @@ public class ShortPacker {
     super();
   }
 
-  /**
+  /*
    * Packs a non-negative short value into one or two bytes and writes them on <i>os </i>. A short
    * in [0:127] is packed into one byte. Larger values are packed into two bytes. The high bit of
    * the first byte is set if the value was packed into two bytes. If the bit is set, clear the high
@@ -67,7 +67,7 @@ public class ShortPacker {
     }
   }
 
-  /**
+  /*
    * Unpack a non-negative short value from the input stream.
    *
    * @param is The input stream.
@@ -86,10 +86,10 @@ public class ShortPacker {
       // high bit is clear.
       v = b; // interpret the byte as a short value.
     }
-    return (short) v;
+    return v;
   }
 
-  /**
+  /*
    * Unpack a non-negative short value from the input stream.
    *
    * @param is The input stream.
@@ -108,10 +108,10 @@ public class ShortPacker {
       // high bit is clear.
       v = b; // interpret the byte as a short value.
     }
-    return (short) v;
+    return v;
   }
 
-  /**
+  /*
    * Read a byte from an {@link InputStream} ala {@link DataInput#readByte()}
    *
    * @param is The input stream.
@@ -128,7 +128,7 @@ public class ShortPacker {
     return (byte) (v & 0xff);
   }
 
-  /**
+  /*
    * Returns the #of bytes into which a short value was packed based on the first byte.
    *
    * @param firstByte The first byte.

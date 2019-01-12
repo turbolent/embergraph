@@ -28,8 +28,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-/**
- * A bit vector implementation based on arrays of longs.
+/*
+* A bit vector implementation based on arrays of longs.
  *
  * <p>The main goal of this class is to be fast and flexible. It implements a lightweight, fast,
  * open, optimized, reuse-oriented version of bit vectors. Instances of this class represent a bit
@@ -88,24 +88,24 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
 
   /** The number of bits in this vector. */
   protected long length;
-  /**
+  /*
    * The backing array of this vector. Bit 0 of the first element contains bit 0 of the bit vector,
    * bit 1 of the second element contains bit {@link #BITS_PER_WORD} of the bit vector and so on.
    */
   protected transient long[] bits;
 
-  /**
+  /*
    * Returns the number of words that are necessary to hold the given number of bits.
    *
    * @param size a number of bits.
    * @return the number of words that are necessary to hold the given number of bits.
    */
   protected static final int numWords(final long size) {
-    if (ASSERTS) assert (size + WORD_MASK) >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
+    assert !ASSERTS || (size + WORD_MASK) >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
     return (int) ((size + WORD_MASK) >>> LOG2_BITS_PER_WORD);
   }
 
-  /**
+  /*
    * Return the index of the word that holds a bit of specified index.
    *
    * @param index the index of a bit, or -1.
@@ -113,11 +113,11 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
    *     -1.
    */
   protected static final int word(final long index) {
-    if (ASSERTS) assert index >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
+    assert !ASSERTS || index >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
     return (int) (index >> LOG2_BITS_PER_WORD);
   }
 
-  /**
+  /*
    * Returns the inside-word index of the bit that would hold the bit of specified index.
    *
    * <p>Note that bit 0 is positioned in word 0, index 0, bit 1 in word 0, index 1, &hellip;, bit
@@ -131,7 +131,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return (int) (index & WORD_MASK);
   }
 
-  /**
+  /*
    * Returns a mask having a 1 exactly at the bit {@link #bit(long) bit(index)}.
    *
    * @param index the index of a bit
@@ -145,7 +145,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     this.bits = capacity > 0 ? new long[numWords(capacity)] : LongArrays.EMPTY_ARRAY;
   }
 
-  /**
+  /*
    * Creates a new empty bit vector of given capacity. The resulting vector will be able to contain
    * <code>capacity</code> bits without reallocations of the backing array.
    *
@@ -159,7 +159,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return new LongArrayBitVector(capacity);
   }
 
-  /**
+  /*
    * Creates a new empty bit vector. No allocation is actually performed.
    *
    * @return a new bit vector with no capacity.
@@ -168,7 +168,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return new LongArrayBitVector(0);
   }
 
-  /**
+  /*
    * Creates a new empty bit vector of given length.
    *
    * @param length the size (in bits) of the new bit vector.
@@ -177,7 +177,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return new LongArrayBitVector(length).length(length);
   }
 
-  /**
+  /*
    * Creates a new bit vector with given bits.
    *
    * @param bit a list of bits that will be set in the newly created bit vector.
@@ -196,7 +196,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return length;
   }
 
-  /**
+  /*
    * Ensures that this bit vector can hold the specified number of bits.
    *
    * <p>This method uses {@link LongArrays#grow(long[], int, int)} to ensure that there is enough
@@ -256,7 +256,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     if (length % Long.SIZE != 0) bits[fullWords] ^= (1L << length % Long.SIZE) - 1;
   }
 
-  /**
+  /*
    * Reduces as must as possible the size of the backing array.
    *
    * @return true if some trimming was actually necessary.
@@ -267,7 +267,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return true;
   }
 
-  /**
+  /*
    * Sets the size of this bit vector to 0.
    *
    * <p>Note that this method does not try to reallocate that backing array. If you want to force
@@ -328,7 +328,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return copy;
   }
 
-  /**
+  /*
    * Returns this bit vector.
    *
    * @return this bit vector.
@@ -337,7 +337,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return this;
   }
 
-  /**
+  /*
    * Returns a copy of the given bit vector.
    *
    * <p>This method uses {@link BitVector#getLong(long, long)} on {@link Long#SIZE} boundaries to
@@ -577,7 +577,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return this;
   }
 
-  /**
+  /*
    * Wraps the given array of longs in a bit vector for the given number of bits.
    *
    * <p>Note that all bits in <code>array</code> beyond that of index <code>size</code> must be
@@ -608,7 +608,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return result;
   }
 
-  /**
+  /*
    * Wraps the given array of longs in a bit vector.
    *
    * @param array an array of longs.
@@ -619,7 +619,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     return wrap(array, array.length * Long.SIZE);
   }
 
-  /**
+  /*
    * Returns a cloned copy of this bit vector.
    *
    * <p>This method is functionally equivalent to {@link #copy()}, except that {@link #copy()} trims
@@ -680,11 +680,11 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     long h = 0x9e3779b97f4a7c13L ^ length;
     final int numWords = numWords(length);
     for (int i = 0; i < numWords; i++) h ^= (h << 5) + bits[i] + (h >>> 2);
-    if (ASSERTS) assert (int) ((h >>> 32) ^ h) == super.hashCode();
+    assert !ASSERTS || (int) ((h >>> 32) ^ h) == super.hashCode();
     return (int) ((h >>> 32) ^ h);
   }
 
-  /**
+  /*
    * A list-of-integers view of a bit vector.
    *
    * <p>This class implements in the obvious way a view of a bit vector as a list of integers of
@@ -724,7 +724,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
       if (width == 0) return 0;
       if (width != Long.SIZE && value > fullMask)
         throw new IllegalArgumentException("Value too large: " + value);
-      final long bits[] = bitVector.bits;
+      final long[] bits = bitVector.bits;
       final long start = index * width;
       final int startWord = word(start);
       final int endWord = word(start + width - 1);
@@ -735,7 +735,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
         oldValue = bits[startWord] >>> startBit & fullMask;
         bits[startWord] &= ~(fullMask << startBit);
         bits[startWord] |= value << startBit;
-        if (ASSERTS) assert value == (bits[startWord] >>> startBit & fullMask);
+        assert !ASSERTS || value == (bits[startWord] >>> startBit & fullMask);
       } else {
         // Here startBit > 0.
         oldValue =
@@ -745,10 +745,9 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
         bits[endWord] &= -(1L << width - BITS_PER_WORD + startBit);
         bits[endWord] |= value >>> BITS_PER_WORD - startBit;
 
-        if (ASSERTS)
-          assert value
-              == (bits[startWord] >>> startBit
-                  | bits[endWord] << (BITS_PER_WORD - startBit) & fullMask);
+        assert !ASSERTS || value
+            == (bits[startWord] >>> startBit
+            | bits[endWord] << (BITS_PER_WORD - startBit) & fullMask);
       }
       return oldValue;
     }

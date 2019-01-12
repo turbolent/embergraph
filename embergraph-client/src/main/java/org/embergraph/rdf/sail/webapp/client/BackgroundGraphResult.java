@@ -24,8 +24,8 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParser;
 
-/**
- * Provides concurrent access to statements as they are being parsed.
+/*
+* Provides concurrent access to statements as they are being parsed.
  *
  * @author James Leigh
  */
@@ -85,7 +85,7 @@ public class BackgroundGraphResult implements GraphQueryResult, Runnable, RDFHan
     }
   }
 
-  /**
+  /*
    * Lock used to coordinate interrupt/clear of {@link #parserThread}. Without this lock there is a
    * data race between {@link #run()} clearing the {@link #parserThread} reference and {@link
    * #close()} interrupting the {@link Thread}. It also prevents us from interrupting the {@link
@@ -96,7 +96,7 @@ public class BackgroundGraphResult implements GraphQueryResult, Runnable, RDFHan
    */
   private final Lock lock = new ReentrantLock();
 
-  /**
+  /*
    * Set the {@link #parserThread} to the caller's {@link Thread}. This is invoked from {@link
    * #run()}.
    */
@@ -109,7 +109,7 @@ public class BackgroundGraphResult implements GraphQueryResult, Runnable, RDFHan
     }
   }
 
-  /**
+  /*
    * Interrupt the {@link #parserThread} iff it is set. This is invoked from {@link #close()}. The
    * lock prevents a data race between the interrupt and the clear of the reference.
    */
@@ -125,7 +125,7 @@ public class BackgroundGraphResult implements GraphQueryResult, Runnable, RDFHan
     }
   }
 
-  /**
+  /*
    * Clear the reference to the parser thread. This is also invoked from {@link #run()}. Once this
    * method has been called, the flow of control has left the parser and there is no longer a reason
    * to interrupt it in {@link #close()}.

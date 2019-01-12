@@ -6,8 +6,8 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleIterator;
 
-/**
- * Filter allows mutation of the visited {@link ITuple}s.
+/*
+* Filter allows mutation of the visited {@link ITuple}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -29,7 +29,7 @@ public abstract class TupleUpdater<E> extends TupleFilter<E> {
     return new Updaterator((ITupleCursor<E>) src, context, this);
   }
 
-  /**
+  /*
    * You may implement this method to update the state of the visited tuple in the backing index.
    *
    * <p>Note: If you modify <i>tuple</i> then that modification will be visitible to the consumer of

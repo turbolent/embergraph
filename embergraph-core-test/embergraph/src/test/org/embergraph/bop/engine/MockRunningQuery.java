@@ -36,8 +36,8 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.rwstore.sector.IMemoryManager;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * Mock object.
+/*
+* Mock object.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -52,7 +52,7 @@ public class MockRunningQuery implements IRunningQuery {
 
   private final IQueryContext queryContext;
 
-  /**
+  /*
    * Note: This constructor DOES NOT check its arguments so unit tests may be written with the
    * minimum dependencies
    *

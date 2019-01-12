@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -48,8 +48,8 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 
-/**
- * A constraint that a variable may only take on the bindings enumerated by some set.
+/*
+* A constraint that a variable may only take on the bindings enumerated by some set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -59,14 +59,14 @@ public class INHashMap<T> extends INConstraint<T> {
   /** */
   private static final long serialVersionUID = 8032412126003678642L;
 
-  /**
+  /*
    * The variable (cached).
    *
    * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
    */
   private transient volatile IVariable<T> var;
 
-  /**
+  /*
    * The sorted data (cached).
    *
    * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
@@ -83,7 +83,7 @@ public class INHashMap<T> extends INConstraint<T> {
     super(args, annotations);
   }
 
-  /**
+  /*
    * @param x Some variable.
    * @param set A set of legal term identifiers providing a constraint on the allowable values for
    *     that variable.
@@ -93,9 +93,7 @@ public class INHashMap<T> extends INConstraint<T> {
     super(
         new BOp[] {},
         NV.asMap(
-            new NV[] {
-              new NV(Annotations.VARIABLE, x), new NV(Annotations.SET, set),
-            }));
+            new NV(Annotations.VARIABLE, x), new NV(Annotations.SET, set)));
   }
 
   private void init() {

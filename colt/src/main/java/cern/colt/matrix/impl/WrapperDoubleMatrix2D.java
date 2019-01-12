@@ -10,8 +10,8 @@ package cern.colt.matrix.impl;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * 2-d matrix holding <tt>double</tt> elements; either a view wrapping another matrix or a matrix
+/*
+* 2-d matrix holding <tt>double</tt> elements; either a view wrapping another matrix or a matrix
  * whose views are wrappers.
  *
  * @author wolfgang.hoschek@cern.ch
@@ -22,7 +22,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
    * The elements of the matrix.
    */
   protected DoubleMatrix2D content;
-  /**
+  /*
    * Constructs a matrix with a copy of the given values. <tt>values</tt> is required to have the
    * form <tt>values[row][column]</tt> and have exactly the same number of columns in every row.
    *
@@ -37,14 +37,14 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
     if (newContent != null) setUp(newContent.rows(), newContent.columns());
     this.content = newContent;
   }
-  /**
+  /*
    * Returns the content of this matrix if it is a wrapper; or <tt>this</tt> otherwise. Override
    * this method in wrappers.
    */
   protected DoubleMatrix2D getContent() {
     return content;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -59,7 +59,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
   public double getQuick(int row, int column) {
     return content.getQuick(row, column);
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of rows and columns. For example, if the receiver is an instance of
    * type <tt>DenseDoubleMatrix2D</tt> the new matrix must also be of type
@@ -75,7 +75,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
   public DoubleMatrix2D like(int rows, int columns) {
     return content.like(rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix2D</tt> the new matrix must be of type <tt>DenseDoubleMatrix1D</tt>, if
@@ -88,7 +88,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
   public DoubleMatrix1D like1D(int size) {
     return content.like1D(size);
   }
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, sharing the
    * same cells. For example, if the receiver is an instance of type <tt>DenseDoubleMatrix2D</tt>
    * the new matrix must be of type <tt>DenseDoubleMatrix1D</tt>, if the receiver is an instance of
@@ -104,7 +104,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
   protected DoubleMatrix1D like1D(int size, int offset, int stride) {
     throw new InternalError(); // should never get called
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -119,7 +119,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
   public void setQuick(int row, int column, double value) {
     content.setQuick(row, column, value);
   }
-  /**
+  /*
    * Constructs and returns a new <i>slice view</i> representing the rows of the given column. The
    * returned view is backed by this matrix, so changes in the returned view are reflected in this
    * matrix, and vice-versa. To obtain a slice view on subranges, construct a sub-ranging view
@@ -146,7 +146,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
   public DoubleMatrix1D viewColumn(int column) {
     return viewDice().viewRow(column);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i> along the column axis. What used to be column
    * <tt>0</tt> is now column <tt>columns()-1</tt>, ..., what used to be column <tt>columns()-1</tt>
    * is now column <tt>0</tt>. The returned view is backed by this matrix, so changes in the
@@ -187,7 +187,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
         };
     return view;
   }
-  /**
+  /*
    * Constructs and returns a new <i>dice (transposition) view</i>; Swaps axes; example: 3 x 4
    * matrix --> 4 x 3 matrix. The view has both dimensions exchanged; what used to be columns become
    * rows, what used to be rows become columns. In other words:
@@ -232,7 +232,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
     view.columns = rows;
     return view;
   }
-  /**
+  /*
    * Constructs and returns a new <i>sub-range view</i> that is a <tt>height x width</tt> sub matrix
    * starting at <tt>[row,column]</tt>.
    *
@@ -275,7 +275,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
 
     return view;
   }
-  /**
+  /*
    * Constructs and returns a new <i>slice view</i> representing the columns of the given row. The
    * returned view is backed by this matrix, so changes in the returned view are reflected in this
    * matrix, and vice-versa. To obtain a slice view on subranges, construct a sub-ranging view
@@ -303,7 +303,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
     checkRow(row);
     return new DelegateDoubleMatrix1D(this, row);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i> along the row axis. What used to be row
    * <tt>0</tt> is now row <tt>rows()-1</tt>, ..., what used to be row <tt>rows()-1</tt> is now row
    * <tt>0</tt>. The returned view is backed by this matrix, so changes in the returned view are
@@ -344,7 +344,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
         };
     return view;
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding the indicated
    * cells. There holds <tt>view.rows() == rowIndexes.length, view.columns() ==
    * columnIndexes.length</tt> and <tt>view.get(i,j) ==
@@ -413,7 +413,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
 
     return view;
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param rowOffsets the offsets of the visible elements.
@@ -423,7 +423,7 @@ class WrapperDoubleMatrix2D extends DoubleMatrix2D {
   protected DoubleMatrix2D viewSelectionLike(int[] rowOffsets, int[] columnOffsets) {
     throw new InternalError(); // should never be called
   }
-  /**
+  /*
    * Constructs and returns a new <i>stride view</i> which is a sub matrix consisting of every i-th
    * cell. More specifically, the view has <tt>this.rows()/rowStride</tt> rows and
    * <tt>this.columns()/columnStride</tt> columns holding cells

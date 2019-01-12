@@ -24,8 +24,8 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * A read-only {@link IRaba} that exposes a limited sub-range of a backing {@link IRaba}.
+/*
+* A read-only {@link IRaba} that exposes a limited sub-range of a backing {@link IRaba}.
  *
  * @author bryan
  * @see BLZG-1537 (Schedule more IOs when loading data)
@@ -41,7 +41,7 @@ public class SubRangeRaba implements IRaba {
   /** The #of visible entries in this view of the delegate. */
   private final int size;
 
-  /**
+  /*
    * @param delegate The delegate
    * @param fromIndex The inclusive lower bound in the delegate.
    * @param toIndex The exclusive upper bound in the delegate.
@@ -88,7 +88,7 @@ public class SubRangeRaba implements IRaba {
     return size == 0;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>It is assumed that the delegate is full and this view does not allow mutation, so this
@@ -180,7 +180,7 @@ public class SubRangeRaba implements IRaba {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws UnsupportedOperationException always.
@@ -197,8 +197,8 @@ public class SubRangeRaba implements IRaba {
     throw new UnsupportedOperationException();
   }
 
-  //	/**
-  //	 * {@inheritDoc}
+  //	/*
+//	 * {@inheritDoc}
   //	 *
   //	 * @return The adjusted search position into this key range.
   //	 *

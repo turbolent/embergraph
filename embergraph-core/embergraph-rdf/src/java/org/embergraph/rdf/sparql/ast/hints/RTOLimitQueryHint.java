@@ -28,8 +28,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * The query hint governing the initial sample size for the RTO optimizer.
+/*
+* The query hint governing the initial sample size for the RTO optimizer.
  *
  * @see JGraph
  * @see QueryHints#RTO_LIMIT

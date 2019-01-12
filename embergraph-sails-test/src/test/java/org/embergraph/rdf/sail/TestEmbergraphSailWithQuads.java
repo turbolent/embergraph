@@ -34,8 +34,8 @@ import org.embergraph.rdf.sail.tck.EmbergraphSparqlFullRWTxTest;
 import org.embergraph.rdf.sail.tck.EmbergraphSparqlTest;
 import org.embergraph.rdf.sail.tck.EmbergraphStoreTest;
 
-/**
- * Test suite for the {@link EmbergraphSail} with quads enabled. The provenance mode is disabled.
+/*
+* Test suite for the {@link EmbergraphSail} with quads enabled. The provenance mode is disabled.
  * Inference is disabled. This version of the test suite uses the pipeline join algorithm.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -150,8 +150,8 @@ public class TestEmbergraphSailWithQuads extends AbstractEmbergraphSailTestCase 
 
       try {
 
-        /*
-         * suite() will call suiteLTSWithPipelineJoins() and then
+      /*
+       * suite() will call suiteLTSWithPipelineJoins() and then
          * filter out the dataset tests, which we don't need right now
          */
         //                tckSuite.addTest(EmbergraphSparqlTest.suiteLTSWithPipelineJoins());

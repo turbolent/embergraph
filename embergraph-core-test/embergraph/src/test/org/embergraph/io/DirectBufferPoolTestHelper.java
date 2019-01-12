@@ -25,8 +25,8 @@ import junit.extensions.proxy.IProxyTest;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
-/**
- * Some helper methods for CI.
+/*
+* Some helper methods for CI.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -35,7 +35,7 @@ public class DirectBufferPoolTestHelper {
 
   private static final Logger log = Logger.getLogger(DirectBufferPoolTestHelper.class);
 
-  /**
+  /*
    * Verify that any buffers acquired by the test have been released.
    *
    * <p>Note: This clears the counter as a side effect to prevent a cascade of tests from being
@@ -46,7 +46,7 @@ public class DirectBufferPoolTestHelper {
     checkBufferPools(test, null /*delegate*/);
   }
 
-  /**
+  /*
    * Verify that any buffers acquired by the test have been released (variant when using an {@link
    * IProxyTest}).
    *

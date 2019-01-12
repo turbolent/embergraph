@@ -58,8 +58,8 @@ import java.util.Properties;
 public interface PropertiesWriter {
 
   /** Gets the {@link PropertiesFormat} that this {@link PropertiesWriter} uses. */
-  public PropertiesFormat getFormat();
+  PropertiesFormat getFormat();
 
   /** Write the properties object. */
-  public void write(Properties properties) throws IOException;
+  void write(Properties properties) throws IOException;
 }

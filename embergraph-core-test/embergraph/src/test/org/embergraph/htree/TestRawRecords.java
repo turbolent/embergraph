@@ -8,8 +8,8 @@ import org.embergraph.io.TestCase3;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Unit tests for a {@link HTree} with raw record support enabled (this is where a large <code>
+/*
+* Unit tests for a {@link HTree} with raw record support enabled (this is where a large <code>
  * byte[]</code> value is written directly onto the backing store rather than being stored within
  * the leaf).
  *
@@ -23,7 +23,7 @@ public class TestRawRecords extends AbstractHTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for the insert of a large <code>byte[]</code> value into an index such that it is
    * represented as a raw record on the backing store rather than inline within the B+Tree leaf.
    */
@@ -59,7 +59,7 @@ public class TestRawRecords extends AbstractHTreeTestCase {
       assertEquals(1, htree.getLeafCount());
 
       // examine the root.
-      final DirectoryPage root = (DirectoryPage) htree.getRoot();
+      final DirectoryPage root = htree.getRoot();
 
       // all references should be to the same bucket page.
       final BucketPage bucket = (BucketPage) root.childRefs[0].get();
@@ -86,8 +86,8 @@ public class TestRawRecords extends AbstractHTreeTestCase {
    * not yet support on the HTree.
    */
 
-  //	/**
-  //	 * Unit test in which we update a small value (inline within the leaf) with
+  //	/*
+//	 * Unit test in which we update a small value (inline within the leaf) with
   //	 * a large value (stored as a raw record).
   //	 */
   //	public void test_updateSmallValueWithLargeValue() {
@@ -168,8 +168,8 @@ public class TestRawRecords extends AbstractHTreeTestCase {
   //
   //	}
   //
-  //	/**
-  //	 * Unit test in which we update a large value (represented directly on the
+  //	/*
+//	 * Unit test in which we update a large value (represented directly on the
   //	 * backing store) with a small value (inline within the leaf). The test
   //	 * verifies that the original large value is deleted.
   //	 */
@@ -232,8 +232,8 @@ public class TestRawRecords extends AbstractHTreeTestCase {
   //
   //	}
   //
-  //	/**
-  //	 * Unit test in which we update a large value (represented directly on the
+  //	/*
+//	 * Unit test in which we update a large value (represented directly on the
   //	 * backing store) with another large value (also represented directly on the
   //	 * store). The test verifies that the original large value is deleted.
   //	 */
@@ -305,8 +305,8 @@ public class TestRawRecords extends AbstractHTreeTestCase {
   //
   //	}
   //
-  //	/**
-  //	 * Unit test in which we insert a large value (represented directly on the
+  //	/*
+//	 * Unit test in which we insert a large value (represented directly on the
   //	 * backing store) and then delete the key under which that value was stored.
   //	 * The test verifies that the original large value is deleted.
   //	 */
@@ -362,8 +362,8 @@ public class TestRawRecords extends AbstractHTreeTestCase {
   //
   //	}
   //
-  //	/**
-  //	 * Helper class is used to watch for deletes of raw records from the backing
+  //	/*
+//	 * Helper class is used to watch for deletes of raw records from the backing
   //	 * store.
   //	 *
   //	 * @author thompsonbry

@@ -34,8 +34,8 @@ import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.EmptyBindingSet;
 
-/**
- * Utility class constructs a valid SPARQL query for a remote <code>SPARQL 1.0</code> end point (no
+/*
+* Utility class constructs a valid SPARQL query for a remote <code>SPARQL 1.0</code> end point (no
  * <code>BINDINGS</code> clause and does not support SELECT expressions or BIND()).
  *
  * <p>Note: This class functions by adding <code>FILTER (sameTerm(?var,bound-value))</code>
@@ -62,14 +62,14 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
 
   private final AST2SPARQLUtil util;
 
-  /**
+  /*
    * The distinct variables "projected" by the SERVICE group graph pattern. The order of this set is
    * not important, but the variables must be distinct.
    */
   private final Set<IVariable<?>> projectedVars;
 
-  //    /**
-  //     * This is a vectored implementation.
+  //    /*
+//     * This is a vectored implementation.
   //     */
   //    @Override
   //    public boolean isVectored() {
@@ -156,8 +156,8 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
     {
       sb.append("SELECT ");
       if (projectedVars.isEmpty()) {
-        /*
-         * Note: This is a dubious hack for openrdf federated query
+      /*
+       * Note: This is a dubious hack for openrdf federated query
          * testEmptyServiceBlock. Since there are no variables in the
          * service clause, it was sending an invalid SELECT expression.
          * It is now hacked to send a "*" instead.
@@ -201,8 +201,8 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
       for (int k = 0; k < bindingSets.length; k++) {
         final BindingSet bset = bindingSets[k];
         if (bindingSets.length > 1) {
-          /*
-           * UNION of SERVICE patterns.
+        /*
+       * UNION of SERVICE patterns.
            */
           if (k == 0) {
             // Open the first UNION.
@@ -212,14 +212,14 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
             sb.append("\n} UNION {\n");
           }
         }
-        /*
-         * Set of variables which are correlated through shared blank
+      /*
+       * Set of variables which are correlated through shared blank
          * nodes -or- null  if there are no such correlated variables.
          */
         final Map<BNode, Set<String /* vars */>> bnodes = getCorrelatedVarsMap(bset);
         if (bnodes != null) {
-          /*
-           * Impose a same-term constraint for all variables which are
+        /*
+       * Impose a same-term constraint for all variables which are
            * bound to the same blank node.
            */
           for (Set<String> sameTermVars : bnodes.values()) {
@@ -237,8 +237,8 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
           }
         }
         for (Binding b : bset) {
-          /*
-           * Add FILTER to bind each (non-blank node) value.
+        /*
+       * Add FILTER to bind each (non-blank node) value.
            */
           final String name = b.getName();
           final Value v = b.getValue();
@@ -246,8 +246,8 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
           //                    if (v instanceof BNode && bnodes != null
           //                            && ((sameTermVars = bnodes.get((BNode) v)) != null)) {
           if (!(v instanceof BNode)) {
-            /*
-             * Blank nodes are not permitted a function arguments.
+          /*
+       * Blank nodes are not permitted a function arguments.
              * Therefore we need to handle them through sameTerm()
              * for the correlated variables.
              *
@@ -277,8 +277,8 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
             //                         */
             //                        bnodes.put((BNode) v, (Set) Collections.emptySet());
             //                    } else {
-            /*
-             * Blank nodes are not permitted a function arguments.
+          /*
+       * Blank nodes are not permitted a function arguments.
              * Therefore we need to handle them through sameTerm()
              * for the correlated variables (the code block above
              * handles this).
@@ -350,8 +350,8 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
     return q;
   }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     * <p>
   //     * This implementation returns it's argument.
   //     */
@@ -362,7 +362,7 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
   //
   //    }
 
-  /**
+  /*
    * Return a correlated blank node / variables map.
    *
    * <p>Note: This is necessary because we can not have a blank node in a FunctionCall in SPARQL.
@@ -386,8 +386,8 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
       if (cvars == null) {
         bnodes.put(bnd, cvars = new LinkedHashSet<String>());
       } else {
-        /*
-         * Correlated. This blank node is already the binding for some
+      /*
+       * Correlated. This blank node is already the binding for some
          * other variable in this solution.
          *
          * Note: A FILTER can be used to enforce a same-term constraint
@@ -396,8 +396,8 @@ public class RemoteSparql10QueryBuilder implements IRemoteSparqlQueryBuilder {
          */
       }
       if (!cvars.add(b.getName())) {
-        /*
-         * This would imply the same variable was bound more
+      /*
+       * This would imply the same variable was bound more
          * than once in the solution.
          */
         throw new AssertionError();

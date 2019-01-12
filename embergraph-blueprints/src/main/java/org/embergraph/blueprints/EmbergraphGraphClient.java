@@ -31,8 +31,8 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryType;
 
-/**
- * This is a thin-client implementation of a Blueprints wrapper around the client library that
+/*
+* This is a thin-client implementation of a Blueprints wrapper around the client library that
  * interacts with the NanoSparqlServer. This is a functional implementation suitable for writing
  * POCs - it is not a high performance implementation by any means (currently does not support
  * caching or batched update). Does have a single "bulk upload" operation that wraps a method on
@@ -61,7 +61,7 @@ public class EmbergraphGraphClient extends EmbergraphGraph {
 
   transient EmbergraphSailRemoteRepositoryConnection cxn;
 
-  /**
+  /*
    * @param sparqlEndpointURL The URL of the SPARQL end point. This will be used to read and write
    *     on the graph using the blueprints API.
    */
@@ -70,7 +70,7 @@ public class EmbergraphGraphClient extends EmbergraphGraph {
     this(sparqlEndpointURL, EmbergraphRDFFactory.INSTANCE);
   }
 
-  /**
+  /*
    * @param sparqlEndpointURL The URL of the SPARQL end point. This will be used to read and write
    *     on the graph using the blueprints API.
    * @param factory The {@link BlueprintsValueFactory}.
@@ -93,7 +93,7 @@ public class EmbergraphGraphClient extends EmbergraphGraph {
     this(repo, EmbergraphRDFFactory.INSTANCE);
   }
 
-  /**
+  /*
    * Core implementation.
    *
    * @param repo The {@link EmbergraphSailRemoteRepository} for the desired graph.
@@ -115,7 +115,7 @@ public class EmbergraphGraphClient extends EmbergraphGraph {
     this.repo.getRemoteRepository().postGraphML(file);
   }
 
-  /**
+  /*
    * Get a {@link EmbergraphSailRemoteRepositoryConnection}.
    *
    * <p>TODO Review this now that we support read/write tx for

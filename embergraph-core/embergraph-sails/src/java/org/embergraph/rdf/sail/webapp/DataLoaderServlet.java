@@ -42,8 +42,8 @@ import org.embergraph.rdf.store.DataLoader.ClosureEnum;
 import org.embergraph.rdf.store.DataLoader.MyLoadStats;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Provides {@link org.embergraph.rdf.store.DataLoader} via the REST API.
+/*
+* Provides {@link org.embergraph.rdf.store.DataLoader} via the REST API.
  *
  * <p>See BLZG-1713
  *
@@ -96,7 +96,7 @@ public class DataLoaderServlet extends EmbergraphRDFServlet {
     m_restServlet.doPost(req, resp);
   }
 
-  /**
+  /*
    * Provides {@link org.embergraph.rdf.store.DataLoader} via the REST API.
    *
    * @author beebs@systap.com
@@ -215,7 +215,7 @@ public class DataLoaderServlet extends EmbergraphRDFServlet {
     final String namespace =
         props.getProperty("namespace", EmbergraphSail.Options.DEFAULT_NAMESPACE);
 
-    /**
+    /*
      * Zero or more files or directories containing the data to be loaded. This should be a comma
      * delimited list. The files must be readable by the web application.
      */
@@ -290,7 +290,7 @@ public class DataLoaderServlet extends EmbergraphRDFServlet {
         "DATALOADER-SERVLET: Loaded " + namespace + " with properties: " + propertyFile);
   }
 
-  /**
+  /*
    * {@link AbstractRestApiTask} to invoke the {@link DataLoader} in a way that supports
    * concurrency. See BLZG-1768.
    */
@@ -302,7 +302,7 @@ public class DataLoaderServlet extends EmbergraphRDFServlet {
     /** Properties file for the build loader */
     private final Properties props;
 
-    /**
+    /*
      * Create a new {@link AbstractRestApiTask} that invokes the {@link DataLoader}.
      *
      * @param req The {@link HttpServletRequest} used for the request
@@ -353,7 +353,7 @@ public class DataLoaderServlet extends EmbergraphRDFServlet {
       // Compute the RDF(S)+ closure. (Optional)
       final boolean closure = getBooleanProperty(props, "closure", false);
 
-      /**
+      /*
        * Files will be renamed to either <code>.good</code> or <code>.fail</code> as they are
        * processed. The files will remain in the same directory.
        */
@@ -478,7 +478,7 @@ public class DataLoaderServlet extends EmbergraphRDFServlet {
 
         reportModifiedCount(nmodified.get(), elapsed);
 
-        return (Void) null;
+        return null;
 
       } finally {
 

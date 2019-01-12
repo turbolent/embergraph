@@ -23,8 +23,8 @@ import junit.framework.TestSuite;
 import org.embergraph.rdf.sparql.ast.QuadsOperationInTriplesModeException;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Test suite asserting that queries containint quads constructs (named graphs) are rejected in
+/*
+* Test suite asserting that queries containint quads constructs (named graphs) are rejected in
  * triples mode (at parsing phase), but go through in quads mode.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/1105">SPARQL UPDATE should have nice error
@@ -66,7 +66,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
       return properties;
     }
 
-    /**
+    /*
      * Query: <code>
      * INSERT DATA
      * {
@@ -95,7 +95,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
       throw new RuntimeException("Exception expected, but not encountered");
     }
 
-    /**
+    /*
      * Query: <code>
      * INSERT
      * { <http://example/s>  <http://example/p> <http://example/o> }
@@ -126,7 +126,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
       throw new RuntimeException("Exception expected, but not encountered");
     }
 
-    /**
+    /*
      * Query: <code>
      * INSERT
      * { <http://example/s>  <http://example/p> <http://example/o> }
@@ -157,7 +157,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
       throw new RuntimeException("Exception expected, but not encountered");
     }
 
-    /**
+    /*
      * Query: <code>
      * DELETE
      * { <http://example/s>  <http://example/p> <http://example/o> }
@@ -188,7 +188,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
       throw new RuntimeException("Exception expected, but not encountered");
     }
 
-    /**
+    /*
      * Query: <code>
      * DELETE
      * { <http://example/s>  <http://example/p> <http://example/o> }
@@ -219,7 +219,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
       throw new RuntimeException("Exception expected, but not encountered");
     }
 
-    /**
+    /*
      * Query: <code>
      * INSERT { <http://example/s>  <http://example/p> <http://example/o> }
      * USING <http://example/c>
@@ -246,7 +246,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
       throw new RuntimeException("Exception expected, but not encountered");
     }
 
-    /**
+    /*
      * Query: <code>
      * SELECT ?s ?p ?o
      * FROM NAMED <http://example/c>
@@ -275,7 +275,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
       throw new RuntimeException("Exception expected, but not encountered");
     }
 
-    /**
+    /*
      * Query: <code>
      * SELECT ?s ?p ?o
      * WHERE { GRAPH <http://www.example/c> { ?s ?p ?o } }
@@ -301,7 +301,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
       throw new RuntimeException("Exception expected, but not encountered");
     }
 
-    /**
+    /*
      * Query: <code>
      * SELECT ?s ?p ?o
      * WHERE { GRAPH ?g { ?s ?p ?o } }
@@ -333,7 +333,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
   /** Quads mode test suite. */
   public static class TestQuadsModeAPs extends TestTicket1105 {
 
-    /**
+    /*
      * Query: <code>
      * INSERT DATA
      * {
@@ -353,7 +353,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
           );
     }
 
-    /**
+    /*
      * Query: <code>
      * INSERT
      * { <http://example/s>  <http://example/p> <http://example/o> }
@@ -375,7 +375,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
           );
     }
 
-    /**
+    /*
      * Query: <code>
      * INSERT
      * { <http://example/s>  <http://example/p> <http://example/o> }
@@ -397,7 +397,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
           );
     }
 
-    /**
+    /*
      * Query: <code>
      * DELETE
      * { <http://example/s>  <http://example/p> <http://example/o> }
@@ -419,7 +419,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
           );
     }
 
-    /**
+    /*
      * Query: <code>
      * DELETE
      * { <http://example/s>  <http://example/p> <http://example/o> }
@@ -441,7 +441,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
           );
     }
 
-    /**
+    /*
      * Query: <code>
      * INSERT { <http://example/s>  <http://example/p> <http://example/o> }
      * USING <http://example/c>
@@ -459,7 +459,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
           );
     }
 
-    /**
+    /*
      * Query: <code>
      * SELECT ?s ?p ?o
      * FROM NAMED <http://example/c>
@@ -479,7 +479,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
           .runTest();
     }
 
-    /**
+    /*
      * Query: <code>
      * SELECT ?s ?p ?o
      * WHERE { GRAPH <http://www.example/c> { ?s ?p ?o } }
@@ -498,7 +498,7 @@ public class TestTicket1105 extends AbstractDataDrivenSPARQLTestCase {
           .runTest();
     }
 
-    /**
+    /*
      * Query: <code>
      * SELECT ?s ?p ?o
      * WHERE { GRAPH ?g { ?s ?p ?o } }

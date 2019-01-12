@@ -18,7 +18,7 @@ package cutthecrap.utils.striterators;
 /** Interface for managing push/pop of context in a striterator. */
 public interface IContextMgr {
 
-  /**
+  /*
    * Hook gives the implementation an opportunity to push context onto a stack.
    *
    * @param context The context object.

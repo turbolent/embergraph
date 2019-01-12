@@ -58,8 +58,8 @@ import org.embergraph.service.IMetadataService;
 import org.embergraph.service.MetadataService;
 import org.embergraph.service.ResourceService;
 
-/**
- * Task moves an index partition to another {@link IDataService}.
+/*
+* Task moves an index partition to another {@link IDataService}.
  *
  * <p>This task runs as a historical read operation and copy the view of the index partition as of
  * the lastCommitTime of old journal to another {@link IDataService}. Once that historical view has
@@ -138,13 +138,13 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
 
   private final ViewMetadata vmd;
 
-  /**
+  /*
    * {@link UUID} of the target {@link IDataService} (the one to which the index partition will be
    * moved).
    */
   private final UUID targetDataServiceUUID;
 
-  /**
+  /*
    * The partition identifier for the target index partition that will be created by the move (RMI).
    */
   final int newPartitionId;
@@ -158,7 +158,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
   /** The event corresponding to this action. */
   private final Event e;
 
-  /**
+  /*
    * @param vmd Metadata for the source index partition view.
    * @param targetDataServiceUUID The UUID for the target data service.
    */
@@ -202,7 +202,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
     vmd.clearRef();
   }
 
-  /**
+  /*
    * Builds a compact index segment from the historical view as of the last commit time on the old
    * journal and then submits an atomic update operation to move the source index partition to the
    * target data service.
@@ -225,8 +225,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
         // view of the source index partition.
         final ILocalBTreeView src = getIndex(vmd.name);
 
-        /*
-         * Do a compacting merge of the historical view in order to
+      /*
+       * Do a compacting merge of the historical view in order to
          * obtain a dense index segment.
          *
          * Note: This will also apply the overflow handler, so any blobs
@@ -251,8 +251,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
 
       } finally {
 
-        /*
-         * While we still need to copy the buffered writes on the live
+      /*
+       * While we still need to copy the buffered writes on the live
          * journal to the target index partition, at this point we no
          * longer require the source index partition view (the view on
          * the old journal) so we clear our references for that index.
@@ -282,8 +282,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
 
       if (historicalWritesBuildResult != null) {
 
-        /*
-         * At this point the index segment was either MOVEd to the
+      /*
+       * At this point the index segment was either MOVEd to the
          * target data service or there was an error. Either way, we now
          * remove the index segment store's UUID from the retentionSet
          * so it will be subject to the release policy of the
@@ -291,8 +291,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
          */
         resourceManager.retentionSetRemove(historicalWritesBuildResult.segmentMetadata.getUUID());
 
-        /*
-         * Delete the index segment since it is no longer required and
+      /*
+       * Delete the index segment since it is no longer required and
          * was not incorporated into a view used by this data service.
          */
         resourceManager.deleteResource(
@@ -303,7 +303,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
     }
   }
 
-  /**
+  /*
    * Submits an {@link AtomicUpdate} and awaits and returns its outcome.
    *
    * @param resourceManager The resource manager.
@@ -340,7 +340,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
         .get();
   }
 
-  /**
+  /*
    * Moves an index partition from this data service to another data service.
    *
    * <p>This is an "atomic update" operation. It moves an index segment (supplied by the caller)
@@ -386,7 +386,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
     private final Event parentEvent;
     //        private final InetAddress thisInetAddr;
 
-    /**
+    /*
      * @param resourceManager The resource manager.
      * @param sourceIndexName The name of the source index partition.
      * @param historicalWritesBuildResult An index segment containing all data for the source view
@@ -429,7 +429,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
       //            }
     }
 
-    /**
+    /*
      * Atomic update (move).
      *
      * @return A {@link MoveResult} describing the operation (this is returned mainly for historical
@@ -475,8 +475,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
                 pmd.getLeftSeparatorKey(),
                 pmd.getRightSeparatorKey());
 
-        /*
-         * Build an index segment from the buffered writes on the live
+      /*
+       * Build an index segment from the buffered writes on the live
          * journal for the source index partition.
          *
          * Note: DO NOT specify a compacting merge. That presumes that
@@ -512,8 +512,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
           if (targetDataService == null)
             throw new Exception("No such data service: " + targetDataServiceUUID);
 
-          /*
-           * Submit task to the target data service that will copy the
+        /*
+       * Submit task to the target data service that will copy the
            * index segment store resources onto that data service and
            * register the target index partition using the given
            * IndexMetadata and the copied index segment store files.
@@ -575,14 +575,14 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
             }
           }
 
-          /*
-           * The source index partition has been moved. All we need to
+        /*
+       * The source index partition has been moved. All we need to
            * do is drop the source index partition and notify clients
            * that their locators for that key range are stale.
            */
 
-          /*
-           * The index manager will notify tasks that index partition
+        /*
+       * The index manager will notify tasks that index partition
            * has moved.
            *
            * Note: At this point, if the commit for this task fails,
@@ -591,8 +591,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
            */
           resourceManager.setIndexPartitionGone(getOnlyResource(), StaleLocatorReason.Move);
 
-          /*
-           * Drop the old index partition.
+        /*
+       * Drop the old index partition.
            *
            * Note: This action is rolled back automatically if this
            * task fails. The consequence of this here is that the
@@ -623,8 +623,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
 
         if (bufferedWritesBuildResult != null) {
 
-          /*
-           * At this point the index segment was either MOVEd to the
+        /*
+       * At this point the index segment was either MOVEd to the
            * target data service or there was an error. Either way, we
            * now remove the index segment store's UUID from the
            * retentionSet so it will be subject to the release policy
@@ -632,8 +632,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
            */
           resourceManager.retentionSetRemove(bufferedWritesBuildResult.segmentMetadata.getUUID());
 
-          /*
-           * Delete the index segment containing the buffer writes
+        /*
+       * Delete the index segment containing the buffer writes
            * since it no longer required by this data service.
            */
           resourceManager.deleteResource(
@@ -644,7 +644,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
       }
     }
 
-    /**
+    /*
      * Invoked to rollback a partial move operation.
      *
      * <p>This handles all cases from a completely successful move where only the RMI conveying the
@@ -679,8 +679,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
        */
       try {
 
-        /*
-         * Figure out whether the target index partition was registered.
+      /*
+       * Figure out whether the target index partition was registered.
          *
          * Note: An UNISOLATED request and a custom IIndexProcedure
          * (which IS NOT marked as read-only) are used deliberately.
@@ -694,16 +694,15 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
          * but we lack its Future.
          */
         final IndexMetadata tmp =
-            (IndexMetadata)
-                targetDataService
-                    .submit(
-                        ITx.UNISOLATED, targetIndexName, new IsIndexRegistered_UsingWriteService())
-                    .get();
+            targetDataService
+                .submit(
+                    ITx.UNISOLATED, targetIndexName, new IsIndexRegistered_UsingWriteService())
+                .get();
 
         if (tmp == null) {
 
-          /*
-           * This guards against a potential API change where
+        /*
+       * This guards against a potential API change where
            * AbstractTask#getIndex(String) would report [null] rather
            * than throwing a NoSuchIndexException.
            */
@@ -720,8 +719,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
 
         if (ex.getCause() instanceof NoSuchIndexException) {
 
-          /*
-           * The target index partition was not registered.
+        /*
+       * The target index partition was not registered.
            */
 
           // fall through
@@ -751,8 +750,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
 
         if (mdsWasUpdated) {
 
-          /*
-           * Rollback the MDS using a compensating action.
+        /*
+       * Rollback the MDS using a compensating action.
            */
           try {
 
@@ -783,7 +782,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
     }
   }
 
-  /**
+  /*
    * Method used to test whether or not the target index partition was successfully registered on
    * the target data service. This class explicitly uses the write service in order to guarantee
    * that it can not execute until the "receive" operation is complete.
@@ -802,7 +801,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
       return ndx.getIndexMetadata();
     }
 
-    /**
+    /*
      * Note: This procedure is deliberately marked as NOT read-only. This ensures that the procedure
      * will not execute until it has the exclusive write lock for the index.
      */
@@ -812,7 +811,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
     }
   }
 
-  /**
+  /*
    * Receives an index partition comprised of a historical index segment store and an index segment
    * store containing the buffered writes and registers the index partition on the data service on
    * which this procedure is executed. This class is actually a {@link Serializable} wrapper which
@@ -835,7 +834,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
     private final InetSocketAddress addr;
     //        final private int port;
 
-    /**
+    /*
      * @param sourceIndexMetadata The index metadata for the source index partition.
      * @param sourceDataServiceUUID
      * @param targetIndexPartitionId The index partition identifier assigned to the target index
@@ -919,8 +918,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
 
       } finally {
 
-        /*
-         * Regardless of whether the move was successful or not, we now
+      /*
+       * Regardless of whether the move was successful or not, we now
          * remove from the received index segment stores from the
          * retention set so that these resources become releaseable.
          */
@@ -932,7 +931,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
     }
   }
 
-  /**
+  /*
    * Task submitted to the {@link ConcurrencyManager} on the target data service handles all the
    * work required to receive the data for the index partition and register the new index partition
    * on the target data service and in the {@link IMetadataService}.
@@ -961,7 +960,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
     final InetSocketAddress addr;
     //        final int port;
 
-    /**
+    /*
      * @param resourceManager The resource manager (on the data service).
      * @param targeIndexName The name of the target index partition.
      * @param sourceIndexMetadata The index metadata for the source index partition.
@@ -1018,7 +1017,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
       this.parentEvent.addDetail("summary", this.summary);
     }
 
-    /**
+    /*
      * Copies the history and the buffered writes for the source index partition into the local
      * {@link StoreManager}, registers the new index partition using those resources in its view,
      * and notifies the {@link IMetadataService} of the move.
@@ -1086,7 +1085,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
       }
     }
 
-    /**
+    /*
      * This transfers the specified resource into its local data directory and registers it with the
      * local {@link ResourceManager}.
      *
@@ -1122,8 +1121,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
         // make sure that the parent directory exists.
         file.getParentFile().mkdirs();
 
-        /*
-         * Construct the metadata describing the index segment that we
+      /*
+       * Construct the metadata describing the index segment that we
          * are going to receive.
          */
         final SegmentMetadata targetSegmentMetadata =
@@ -1169,7 +1168,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
       }
     }
 
-    /**
+    /*
      * Register the target index partition on this (the target) data service.
      *
      * @param historySegmentMetadata The metadata for the received index segment containing the
@@ -1198,8 +1197,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
         // the partition metadata for the source index partition.
         final LocalPartitionMetadata oldpmd = newMetadata.getPartitionMetadata();
 
-        /*
-         * Note: We DO NOT specify the sourcePartitionId on the new
+      /*
+       * Note: We DO NOT specify the sourcePartitionId on the new
          * index partition's view since the view will be made live
          * within this UNISOLATED task. Using this approach does not
          * allow a gap when the move is in progress since it runs as a
@@ -1211,8 +1210,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
                 -1, // The source partition identifier (unused here).
                 oldpmd.getLeftSeparatorKey(),
                 oldpmd.getRightSeparatorKey(),
-                /*
-                 * Define the view for the target index partition.
+              /*
+       * Define the view for the target index partition.
                  */
                 new IResourceMetadata[] {
                   // The live journal (no data for this index partition yet).
@@ -1227,16 +1226,16 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
                 //                        ,oldpmd.getHistory() + summary + " "
                 ));
 
-        /*
-         * Create the BTree to aborb writes for the target index
+      /*
+       * Create the BTree to aborb writes for the target index
          * partition. The metadata for this BTree was configured above
          * and is associated with a view that captures all data received
          * from the source index partition.
          */
         final BTree btree = BTree.create(getJournal(), newMetadata);
 
-        /*
-         * Register the BTree on this data service.
+      /*
+       * Register the BTree on this data service.
          */
         registerIndex(targetIndexName, btree);
 
@@ -1245,8 +1244,8 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
               "Registered new index partition on target data service: targetIndexName="
                   + targetIndexName);
 
-        /*
-         * Formulate a MoveResult containing the information that we
+      /*
+       * Formulate a MoveResult containing the information that we
          * need to update the MDS.
          */
 
@@ -1280,7 +1279,7 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
       }
     }
 
-    /**
+    /*
      * Notifies the {@link IMetadataService} that the index partition has been moved. Once the
      * {@link IMetadataService} has been notified, new requests for the key range will be able to
      * discover the target index partition. However, tasks already in the queue on the source data

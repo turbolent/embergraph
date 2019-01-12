@@ -30,8 +30,8 @@ import org.embergraph.io.DataInputBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
-/**
- * Test suite for {@link IVUnicode}.
+/*
+* Test suite for {@link IVUnicode}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -129,7 +129,7 @@ public class TestIVUnicode extends TestCase2 {
     doEncodeDecodeTest(new String[] {"en", "embergraph"});
   }
 
-  private void doEncodeDecodeTest(final String expected[]) throws IOException {
+  private void doEncodeDecodeTest(final String[] expected) throws IOException {
 
     // buffer for encode result.
     final DataOutputBuffer out = new DataOutputBuffer();
@@ -286,7 +286,7 @@ public class TestIVUnicode extends TestCase2 {
               + elapsed);
   }
 
-  /**
+  /*
    * A bunch of words derived from a stopwords list that are used to generate random strings
    * comprised of a redundant set of terms. This approach was chosen in order to give the
    * compression algorithm some realistic data on which to work.
@@ -866,7 +866,7 @@ public class TestIVUnicode extends TestCase2 {
         "zero"
       };
 
-  /**
+  /*
    * IVs must be able to report their correct mutual order. This test verifies that the encoded
    * Unicode representation has the same natural order as Java {@link String}.
    */

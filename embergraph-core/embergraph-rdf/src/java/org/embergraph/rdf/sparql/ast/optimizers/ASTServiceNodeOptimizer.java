@@ -48,8 +48,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.store.BDS;
 
-/**
- * Rewrites the WHERE clause of each query by lifting out {@link ServiceNode}s into a named
+/*
+* Rewrites the WHERE clause of each query by lifting out {@link ServiceNode}s into a named
  * subquery. Recursively rewrites the WHERE clause of any named subquery such that there is no more
  * than one {@link ServiceNode} in that subquery by lifting out additional {@link ServiceNode}s into
  * new named subqueries.
@@ -139,7 +139,7 @@ public class ASTServiceNodeOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryNode, bindingSets);
   }
 
-  /**
+  /*
    * For each {@link ServiceNode}, create a new {@link NamedSubqueryRoot} which runs that service
    * call replace the {@link ServiceNode} in the original parent with a {@link
    * NamedSubqueryInclude}.
@@ -193,7 +193,7 @@ public class ASTServiceNodeOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Lift out the {@link ServiceNode} into a new {@link NamedSubqueryRoot}, replacing it in the
    * parent with a {@link NamedSubqueryInclude}. The result looks as follows, except that the
    * spanned variables in the {@link ServiceNode}s graph pattern are projected rather than using a
@@ -236,7 +236,7 @@ public class ASTServiceNodeOptimizer implements IASTOptimizer {
 
         final Set<IVariable<?>> varSet =
             sa.getSpannedVariables(
-                (BOp) serviceNode.getGraphPattern(), new LinkedHashSet<IVariable<?>>());
+                serviceNode.getGraphPattern(), new LinkedHashSet<IVariable<?>>());
 
         for (IVariable<?> var : varSet) {
 

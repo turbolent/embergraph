@@ -56,8 +56,8 @@ import org.embergraph.util.concurrent.TaskCounters;
 import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 import org.embergraph.util.concurrent.WriteTaskCounters;
 
-/**
- * Supports concurrent operations against named indices. Historical read and read-committed tasks
+/*
+* Supports concurrent operations against named indices. Historical read and read-committed tasks
  * run with full concurrency. For unisolated tasks, the {@link ConcurrencyManager} uses a {@link
  * NonBlockingLockManager} to identify a schedule of operations such that access to an unisolated
  * named index is always single threaded while access to distinct unisolated named indices MAY be
@@ -97,24 +97,24 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
   private static final Logger log = Logger.getLogger(ConcurrencyManager.class);
 
-  //    /**
-  //     * True iff the {@link #log} level is INFO or less.
+  //    /*
+//     * True iff the {@link #log} level is INFO or less.
   //     */
   //    final protected static boolean INFO = log.isInfoEnabled();
   //
-  //    /**
-  //     * True iff the {@link #log} level is DEBUG or less.
+  //    /*
+//     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final private static boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Options for the {@link ConcurrentManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface Options extends IServiceShutdown.Options {
+  public interface Options extends IServiceShutdown.Options {
 
-    /**
+    /*
      * The #of threads in the pool handling concurrent transactions.
      *
      * @see #DEFAULT_TX_SERVICE_CORE_POOL_SIZE
@@ -125,7 +125,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     /** The default #of threads in the transaction service thread pool. */
     String DEFAULT_TX_SERVICE_CORE_POOL_SIZE = "0";
 
-    /**
+    /*
      * The #of threads in the pool handling concurrent unisolated read requests on named indices
      * -or- ZERO (0) if the size of the thread pool is not fixed (default is <code>0</code>).
      *
@@ -134,14 +134,14 @@ public class ConcurrencyManager implements IConcurrencyManager {
     String READ_SERVICE_CORE_POOL_SIZE =
         ConcurrencyManager.class.getName() + ".readService.corePoolSize";
 
-    /**
+    /*
      * The default #of threads in the read service thread pool.
      *
      * @see #READ_SERVICE_CORE_POOL_SIZE
      */
     String DEFAULT_READ_SERVICE_CORE_POOL_SIZE = "0";
 
-    /**
+    /*
      * The minimum #of threads in the pool handling concurrent unisolated write on named indices
      * (default is {@value #DEFAULT_WRITE_SERVICE_CORE_POOL_SIZE}). The size of the thread pool will
      * automatically grow to meet the possible concurrency of the submitted tasks up to the
@@ -168,7 +168,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     /** The default minimum #of threads in the write service thread pool. */
     String DEFAULT_WRITE_SERVICE_CORE_POOL_SIZE = "10";
 
-    /**
+    /*
      * The maximum #of threads allowed in the pool handling concurrent unisolated write on named
      * indices (default is {@value #DEFAULT_WRITE_SERVICE_CORE_POOL_SIZE}.
      *
@@ -183,7 +183,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     /** The default for the maximum #of threads in the write service thread pool. */
     String DEFAULT_WRITE_SERVICE_MAXIMUM_POOL_SIZE = "50";
 
-    /**
+    /*
      * The time in milliseconds that the {@link WriteExecutorService} will keep alive excess worker
      * threads (those beyond the core pool size).
      */
@@ -192,7 +192,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
     String DEFAULT_WRITE_SERVICE_KEEP_ALIVE_TIME = "60000";
 
-    /**
+    /*
      * When true, the write service will be prestart all of its worker threads (default {@value
      * #DEFAULT_WRITE_SERVICE_PRESTART_ALL_CORE_THREADS}).
      *
@@ -204,7 +204,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     /** The default for {@link #WRITE_SERVICE_PRESTART_ALL_CORE_THREADS}. */
     String DEFAULT_WRITE_SERVICE_PRESTART_ALL_CORE_THREADS = "false";
 
-    /**
+    /*
      * The maximum capacity of the write service queue before newly submitted tasks will be rejected
      * -or- ZERO (0) to use a {@link SynchronousQueue} (default
      * {@value.#DEFAULT_WRITE_SERVICE_SYNCHRONOUS_QUEUE_CAPACITY}).
@@ -231,7 +231,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     /** The default maximum depth of the write service queue (0). */
     String DEFAULT_WRITE_SERVICE_QUEUE_CAPACITY = "0";
 
-    /**
+    /*
      * The timeout in milliseconds that the the {@link WriteExecutorService} will await other tasks
      * to join the commit group (default {@value #DEFAULT_WRITE_SERVICE_GROUP_COMMIT_TIMEOUT}). When
      * ZERO (0), group commit is disabled since the first task to join the commit group will NOT
@@ -244,7 +244,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
     String DEFAULT_WRITE_SERVICE_GROUP_COMMIT_TIMEOUT = "100";
 
-    /**
+    /*
      * The time in milliseconds that a group commit will await an exclusive lock on the write
      * service in order to perform synchronous overflow processing (default {@value
      * #DEFAULT_WRITE_SERVICE_OVERFLOW_LOCK_REQUEST_TIMEOUT}). This lock is requested IFF overflow
@@ -278,7 +278,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
   /** <code>true</code> until the service is shutdown. */
   private volatile boolean open = true;
 
-  /**
+  /*
    * Pool of threads for handling concurrent read/write transactions on named indices. Distinct
    * transactions are not inherently limited in their concurrency, but concurrent operations within
    * a single transaction MUST obtain an exclusive lock on the isolated index(s) on the temporary
@@ -292,7 +292,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
    */
   private final ThreadPoolExecutor txWriteService;
 
-  /**
+  /*
    * Pool of threads for handling concurrent unisolated read operations on named indices using
    * <strong>historical</strong> data. Unisolated read operations from historical data are not
    * inherently limited in their concurrency and do not conflict with unisolated writers. The size
@@ -307,7 +307,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
    */
   private final ThreadPoolExecutor readService;
 
-  /**
+  /*
    * Pool of threads for handling concurrent unisolated write operations on named indices and
    * namespaces spanning multiple named indices (via hierarchical locking). Unisolated writes are
    * always performed against the current state of the named index. Unisolated writes for the same
@@ -320,7 +320,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
    */
   private final WriteExecutorService writeService;
 
-  /**
+  /*
    * When <code>true</code> the {@link #sampleService} will be used run {@link
    * ThreadPoolExecutorStatisticsTask}s that collect statistics on the {@link #readService}, {@link
    * #writeService}, and the {@link #txWriteService}.
@@ -333,8 +333,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
   /** The timeout for {@link #shutdown()} -or- ZERO (0L) to wait for ever. */
   private final long shutdownTimeout;
 
-  //    /**
-  //     * An object wrapping the properties specified to the ctor.
+  //    /*
+//     * An object wrapping the properties specified to the ctor.
   //     */
   //    public Properties getProperties() {
   //
@@ -385,7 +385,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     return open;
   }
 
-  /**
+  /*
    * Shutdown the thread pools (running tasks will run to completion, but no new tasks will start).
    */
   @Override
@@ -473,7 +473,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     if (log.isInfoEnabled()) log.info("Done: elapsed=" + elapsed + "ms");
   }
 
-  /**
+  /*
    * Immediate shutdown (running tasks are canceled rather than being permitted to complete).
    *
    * @see #shutdown()
@@ -502,7 +502,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     if (log.isInfoEnabled()) log.info("Done: elapsed=" + elapsed + "ms");
   }
 
-  /**
+  /*
    * (Re-)open a journal supporting concurrent operations.
    *
    * @param properties See {@link ConcurrencyManager.Options}.
@@ -849,7 +849,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
   /** Counters for the {@link #readService}. */
   protected final TaskCounters countersHR = new TaskCounters();
 
-  /**
+  /*
    * Sampling instruments for the various queues giving us the moving average of the queue length.
    */
   private final ThreadPoolExecutorStatisticsTask writeServiceQueueStatisticsTask;
@@ -857,13 +857,13 @@ public class ConcurrencyManager implements IConcurrencyManager {
   private final ThreadPoolExecutorStatisticsTask txWriteServiceQueueStatisticsTask;
   private final ThreadPoolExecutorStatisticsTask readServiceQueueStatisticsTask;
 
-  /**
+  /*
    * Interface defines and documents the counters and counter namespaces for the {@link
    * ConcurrencyManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface IConcurrencyManagerCounters {
+  public interface IConcurrencyManagerCounters {
 
     /** The service to which historical read tasks are submitted. */
     String ReadService = "Read Service";
@@ -871,14 +871,14 @@ public class ConcurrencyManager implements IConcurrencyManager {
     /** The service to which isolated write tasks are submitted. */
     String TXWriteService = "Transaction Write Service";
 
-    /**
+    /*
      * The service to which {@link ITx#UNISOLATED} tasks are submitted. This is the service that
      * handles commit processing. Tasks submitted to this service are required to declare resource
      * lock(s) and must acquire those locks before they can begin executing.
      */
     String writeService = "Unisolated Write Service";
 
-    /**
+    /*
      * The performance counters for the object which manages the resource locks a {@link
      * WriteExecutorService}. These counters are reported as children of the {@link
      * WriteExecutorService}'s counters.
@@ -886,7 +886,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     String LockManager = "LockManager";
   }
 
-  /**
+  /*
    * Reports the elapsed time since the service was started.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -941,8 +941,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
             .makePath(IConcurrencyManagerCounters.writeService)
             .attach(writeServiceQueueStatisticsTask.getCounters());
 
-        /*
-         * The lock manager for the write service.
+      /*
+       * The lock manager for the write service.
          */
         countersRoot
             .makePath(
@@ -959,7 +959,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
   }
   //    private CounterSet countersRoot;
 
-  /**
+  /*
    * Submit a task (asynchronous). Tasks will execute asynchronously in the appropriate thread pool
    * with as much concurrency as possible.
    *
@@ -1038,8 +1038,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
       if (task.isReadWriteTx) {
 
-        /*
-         * A task that reads from historical data and writes on isolated
+      /*
+       * A task that reads from historical data and writes on isolated
          * indices backed by a temporary store. Concurrency control is
          * required for the isolated indices on the temporary store, but
          * not for the reads against the historical data.
@@ -1056,8 +1056,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
       } else {
 
-        /*
-         * A task that reads from and writes on "live" indices. The live
+      /*
+       * A task that reads from and writes on "live" indices. The live
          * indices are NOT thread-safe. Concurrency control provides a
          * partial order over the executing tasks such that there is
          * never more than one task with access to a given live index.
@@ -1075,7 +1075,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     }
   }
 
-  /**
+  /*
    * Logs a warning if a new task is started when the journal is over-extended. This is invoked from
    * the logic which dispatches tasks to the <em>readService</em>. This is because the asynchronous
    * overflow tasks run on the readService, so that is what is most interesting when the journal is
@@ -1100,7 +1100,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     }
   }
 
-  /**
+  /*
    * Return the overextension multiplier for the journal. This is the ratio of the bytes written on
    * the journal against its nominal maximum extent. For example, an overextension of two means that
    * the journal has reached twice is nominal maximum extent. This is zero unless we are running in
@@ -1131,7 +1131,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     return ((double) journal.size()) / journal.getMaximumExtent();
   }
 
-  /**
+  /*
    * Submit a task to a service, dynamically imposing latency on the caller based on the #of tasks
    * already in the queue for that service.
    *
@@ -1189,8 +1189,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
       if (!(queue instanceof SynchronousQueue)) {
 
-        /*
-         * Note: SynchronousQueue is used when there is no limit on the
+      /*
+       * Note: SynchronousQueue is used when there is no limit on the
          * #of workers, e.g., when using
          * Executors.newCachedThreadPool(). The SynchronousQueue has a
          * ZERO capacity. Therefore the logic to test the remaining
@@ -1206,8 +1206,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
           try {
 
-            /*
-             * Note: Any delay here what so ever causes the #of
+          /*
+       * Note: Any delay here what so ever causes the #of
              * tasks in a commit group to be governed primarily by
              * the CORE pool size.
              */
@@ -1245,8 +1245,8 @@ public class ConcurrencyManager implements IConcurrencyManager {
     return ft;
   }
 
-  //   /**
-  //    * Actively running for the {@link WriteExecutorService}.
+  //   /*
+//    * Actively running for the {@link WriteExecutorService}.
   //    *
   //    * FIXME This is really just the same as those tasks actively executing on
   //    * the {@link WriteExecutorService}. It does not include tasks that are
@@ -1258,7 +1258,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
   //    */
   //    private final ThreadGuard writeServiceThreadGuard = new ThreadGuard();
 
-  /**
+  /*
    * Cancel any running or queued tasks on the {@link WriteExecutorService}.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/753" > HA doLocalAbort() should interrupt NSS
@@ -1275,7 +1275,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
 
   }
 
-  /**
+  /*
    * When <code>true</code> imposes dynamic latency on arriving tasks in {@link
    * #submitWithDynamicLatency(AbstractTask, ExecutorService, TaskCounters)}.
    *
@@ -1287,7 +1287,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
    */
   private static final boolean backoff = false;
 
-  /**
+  /*
    * Executes the given tasks, returning a list of Futures holding their status and results when all
    * complete. Note that a completed task could have terminated either normally or by throwing an
    * exception. The results of this method are undefined if the given collection is modified while
@@ -1364,7 +1364,7 @@ public class ConcurrencyManager implements IConcurrencyManager {
     }
   }
 
-  /**
+  /*
    * Executes the given tasks, returning a list of Futures holding their status and results when all
    * complete or the timeout expires, whichever happens first. Note that a completed task could have
    * terminated either normally or by throwing an exception. The results of this method are

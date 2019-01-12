@@ -50,8 +50,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.ASTDeferredIVResolution;
 import org.openrdf.query.MalformedQueryException;
 
-/**
- * Test suite for {@link ASTOrderByAggregateFlatteningOptimizer}. All test queries in the suite
+/*
+* Test suite for {@link ASTOrderByAggregateFlatteningOptimizer}. All test queries in the suite
  * contain ORDER BY with one or more aggregates, and the tested optimizer simplifies them by
  * introducing aliases for the aggregates.
  *
@@ -163,8 +163,8 @@ public class TestASTOrderByAggregateFlatteningOptimizer extends AbstractASTEvalu
 
     final IValueExpression<IV> expr2 = ((Bind) assignments[1]).getExpr();
     assertTrue(expr2 instanceof COUNT);
-    assertTrue(((COUNT) expr2).get(0) instanceof Var);
-    assertEquals("s", ((Var) ((COUNT) expr2).get(0)).getName());
+    assertTrue(expr2.get(0) instanceof Var);
+    assertEquals("s", ((Var) expr2.get(0)).getName());
 
     // Check
     // group by VarNode(o)
@@ -223,7 +223,7 @@ public class TestASTOrderByAggregateFlatteningOptimizer extends AbstractASTEvalu
     assertEquals("o", ((VarNode) pattern.o()).getValueExpression().getName());
   } // test_orderByAggregateFlatteningOptimizer_simple_case_1()
 
-  /**
+  /*
    * Covers DESC and ASC, mixing aggregates and plain variables in ORDER BY, multiple aggregates in
    * ORDER BY, aggregates before plain variables in ORDER BY, multiple projection variables.
    */
@@ -351,8 +351,8 @@ public class TestASTOrderByAggregateFlatteningOptimizer extends AbstractASTEvalu
 
     final IValueExpression<IV> expr3 = ((Bind) assignments[2]).getExpr();
     assertTrue(expr3 instanceof MAX);
-    assertTrue(((MAX) expr3).get(0) instanceof Var);
-    assertEquals("z", ((Var) ((MAX) expr3).get(0)).getName());
+    assertTrue(expr3.get(0) instanceof Var);
+    assertEquals("z", ((Var) expr3.get(0)).getName());
 
     //       Check ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z))[
     // FunctionNode.scalarVals=null,
@@ -371,8 +371,8 @@ public class TestASTOrderByAggregateFlatteningOptimizer extends AbstractASTEvalu
 
     final IValueExpression<IV> expr4 = ((Bind) assignments[3]).getExpr();
     assertTrue(expr4 instanceof COUNT);
-    assertTrue(((COUNT) expr4).get(0) instanceof Var);
-    assertEquals("z", ((Var) ((COUNT) expr4).get(0)).getName());
+    assertTrue(expr4.get(0) instanceof Var);
+    assertEquals("z", ((Var) expr4.get(0)).getName());
 
     // Check
     // group by VarNode(x) VarNode(y)

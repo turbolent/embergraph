@@ -25,8 +25,8 @@ import net.jini.url.httpmd.HttpmdUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-/**
- * Utility class that provides a set of static convenience methods related to configuration and
+/*
+* Utility class that provides a set of static convenience methods related to configuration and
  * deployment of the Embergraph services. Although useful in general, the methods in this utility
  * class may be particularly useful when employed from within a Jini configuration file.
  *
@@ -36,7 +36,7 @@ public class ConfigurationUtil {
 
   private static final Logger logger = LogUtil.getLog4jLogger(ConfigurationUtil.class);
 
-  /**
+  /*
    * Concatenates the given <code>String</code> arrays, returning the result in a new <code>String
    * </code> array.
    */
@@ -47,7 +47,7 @@ public class ConfigurationUtil {
     return result;
   }
 
-  /**
+  /*
    * Creates and returns a <code>String</code> array consisting of the contents of the given <code>
    * prevArgList</code> and the arguments reference in the given <code>argString</code>.
    *
@@ -61,7 +61,7 @@ public class ConfigurationUtil {
     return concat(prevArgList, newArgs);
   }
 
-  /**
+  /*
    * Using the given parameters in the appropriate manner, this method constructs and returns a
    * <code>String</code> whose value is a valid Java RMI <i>codebase</i> specification. This method
    * returns a codebase supporting one of two possible protocols: the standard <i>http</i> protocol,
@@ -165,7 +165,6 @@ public class ConfigurationUtil {
       String httpmdUrl =
           "httpmd://" + ipAddr + ":" + port + "/" + jarFile + ";" + mdAlgorithm + "=0";
       codebase = HttpmdUtil.computeDigestCodebase(srcRoot, httpmdUrl);
-      ;
     } else { // use httpmd
       codebase = "http://" + ipAddr + ":" + port + "/" + jarFile;
     }
@@ -174,7 +173,7 @@ public class ConfigurationUtil {
     return codebase;
   }
 
-  /**
+  /*
    * Convenience method that ultimately calls the primary 5-argument version of this method. This
    * method allows one to input a <code>String</code> value for the port to use when constructing
    * the codebase; which can be useful when invoking this method from a Jini configuration file.
@@ -188,7 +187,7 @@ public class ConfigurationUtil {
     return computeCodebase(name, jarFile, Integer.parseInt(port), srcRoot, mdAlgorithm);
   }
 
-  /**
+  /*
    * Convenient three-argument version of <code>computeCodebase</code> that will always return a
    * codebase <code>String</code> represented in standard <i>http</i> protocol format.
    */
@@ -196,7 +195,7 @@ public class ConfigurationUtil {
     return computeCodebase(name, jarFile, port, null, null);
   }
 
-  /**
+  /*
    * Convenient three-argument version of <code>computeCodebase</code> that takes a <code>String
    * </code> value for the <code>port</code> parameter, always return a codebase <code>String</code>
    * represented in standard <i>http</i> protocol format.

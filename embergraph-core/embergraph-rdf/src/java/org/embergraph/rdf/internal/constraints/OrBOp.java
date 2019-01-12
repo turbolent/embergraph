@@ -27,8 +27,8 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 
-/**
- * Imposes the constraint <code>x OR y</code>. Each operand of this operator must evaluate to a
+/*
+* Imposes the constraint <code>x OR y</code>. Each operand of this operator must evaluate to a
  * boolean. If the operand is not known to evaluate to a boolean, it is wrapped with an {@link
  * EBVBOp}.
  */
@@ -65,7 +65,7 @@ public class OrBOp extends XSDBooleanIVValueExpression {
     return (IValueExpression<? extends XSDBooleanIV>) super.get(i);
   }
 
-  /**
+  /*
    * Follows semantics from SPARQL spec - "Testing Values".
    *
    * <p>see http://www.w3.org/TR/rdf-sparql-query/#tests section 11.2

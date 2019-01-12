@@ -25,8 +25,8 @@ import java.util.Properties;
 import junit.extensions.proxy.IProxyTest;
 import junit.framework.Test;
 
-/**
- * This class provides proxy delegation logic for abstract methods declared by {@link
+/*
+* This class provides proxy delegation logic for abstract methods declared by {@link
  * AbstractTestCase} and is used to extend the set of tests that will be applied to all
  * implementations of the generic object model Java API. If you want to test a new implementation,
  * you MUST extend the {@link AbstractTestCase} instead and implement its abstract methods for your
@@ -62,7 +62,7 @@ public abstract class ProxyTestCase extends AbstractTestCase implements IProxyTe
     return m_delegate;
   }
 
-  /**
+  /*
    * Returns the delegate after first making sure that it is non-null and extends {@link
    * AbstractTestCase}.
    */
@@ -140,7 +140,7 @@ public abstract class ProxyTestCase extends AbstractTestCase implements IProxyTe
     return getOurDelegate().getProperties();
   }
 
-  /**
+  /*
    * Create a triple store instance using the delegate and using the properties as configured by the
    * delegate.
    */
@@ -148,7 +148,7 @@ public abstract class ProxyTestCase extends AbstractTestCase implements IProxyTe
     return getOurDelegate().getStore(getProperties());
   }
 
-  /**
+  /*
    * Create a triple store instance using the delegate using the specified properties (typically
    * overriding one or more properties).
    */

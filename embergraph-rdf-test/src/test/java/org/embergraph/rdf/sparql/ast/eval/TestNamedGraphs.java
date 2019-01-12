@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast.eval;
 import org.embergraph.rdf.internal.IV;
 import org.openrdf.query.Dataset;
 
-/**
- * Test suite for named and default graph stuff.
+/*
+* Test suite for named and default graph stuff.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -37,7 +37,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * A series of quads mode unit tests for named and default graph query of a data set containing a
    * single triple.
    */
@@ -54,7 +54,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This version of the query specifies a FROM clause and hence causes the {@link Dataset} to
    * become non-<code>null</code> but does not specify any FROM NAMED clauses. However, this query
    * (like all the others in this series) is only querying the named graphs.
@@ -108,7 +108,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
    * Ported from org.embergraph.rdf.sail.TestNamedGraphs
    */
 
-  /**
+  /*
    * 8.2.1 Specifying the Default Graph
    * <p>
    * Each FROM clause contains an IRI that indicates a graph to be used to
@@ -149,7 +149,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * 8.2.3 Combining FROM and FROM NAMED
    * <p>
    * The FROM clause and FROM NAMED clause can be used in the same query.
@@ -211,7 +211,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * 8.3.1 Accessing Graph Names
    *
    * The following two graphs will be used in examples:
@@ -283,7 +283,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * 8.3.2 Restricting by Graph IRI
    *
    * The following two graphs will be used in examples:
@@ -352,7 +352,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * 8.3.3 Restricting Possible Graph IRIs
    *
    * The following two graphs will be used in examples:
@@ -449,7 +449,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
    * sail package.
    */
 
-  /**
+  /*
    * One graph in the defaultGraphs set, but the specified graph has no data. There should be no
    * solutions.
    */
@@ -466,7 +466,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * The data set is not specified. The query will run against the "default" defaultGraph. For
    * Sesame, I am assuming that the query is run against the RDF merge of all graphs, including the
    * null graph. Rather than expanding the access path, we put a distinct triple filter on the
@@ -488,7 +488,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Two graphs (c1,c2) are used. There should be one solution.
    *
    * <p>There is a second solution if c4 is considered, but it should not be since it is not in the
@@ -510,7 +510,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Named graph query finds everyone who loves someone and the graph in which that relationship was
    * asserted.
    *
@@ -535,7 +535,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Named graph query finds everyone who loves someone and the state in which they live. Each side
    * of the join is drawn from one of the two named graphs (the graph variables are bound).
    */
@@ -552,7 +552,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Named graph query finds everyone who loves someone and the graph in which that relationship was
    * asserted, and the state in which they live.
    *
@@ -580,7 +580,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unit test for case where there is a single named group which will be visited by the query. In
    * this case, the decision tree says that we should bind the context position to the {@link IV}
    * for that graph in order to restrict the query to exactly the desired graph (rather than using
@@ -603,7 +603,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Note: This is a duplicate of <a href="http://trac.blazegraph.com/ticket/792>GRAPH ?g { FILTER
    * NOT EXISTS { ?s ?p ?o } } not respecting ?g </a>
    *
@@ -622,7 +622,7 @@ public class TestNamedGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unit test of a work around for {@link #test_named_graphs_ticket_888()}.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/888>GRAPH ignored by FILTER NOT EXISTS </a>

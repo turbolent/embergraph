@@ -29,7 +29,7 @@ public interface IGraphFixture {
   /** Destroy the provisioned {@link Sail}. */
   void destroy() throws Exception;
 
-  /**
+  /*
    * Load a graph into the test harness.
    *
    * @param resource Zero or more resources to be loaded.
@@ -39,7 +39,7 @@ public interface IGraphFixture {
 
   IGASEngine newGASEngine(int nthreads);
 
-  /**
+  /*
    * @param cxn A connection that will be used to read on the graph.
    * @return TODO DYNAMIC GRAPHS: This does not support dynamic graph patterns because the view is
    *     determined by the connection that is supplied. For embergraph, dynamic graphs are achieved

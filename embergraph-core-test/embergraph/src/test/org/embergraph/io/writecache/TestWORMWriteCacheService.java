@@ -75,8 +75,8 @@ import org.embergraph.quorum.QuorumActor;
 import org.embergraph.quorum.QuorumMember;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for the {@link WriteCacheService} using pure append writes.
+/*
+* Test suite for the {@link WriteCacheService} using pure append writes.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestWriteCacheService.java 2866 2010-05-18 18:36:35Z thompsonbry $
@@ -113,7 +113,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
    * Shared setup values.
    */
 
-  /**
+  /*
    * The #of records to write. 10k is small and the file system cache can often absorb the data
    * immediately. 100k is reasonable.
    */
@@ -123,13 +123,13 @@ public class TestWORMWriteCacheService extends TestCase3 {
   /** The #of records to write for an RW store. */
   static final int nrecsRW = nrecs;
 
-  /**
+  /*
    * The maximum size of a normal record. The database averages 1k per record (WORM) and 4-8k per
    * record (RW).
    */
   static final int maxreclen = Bytes.kilobyte32;
 
-  /**
+  /*
    * The percentage of records which are larger than the {@link WriteCache} buffer capacity. These
    * records are written using a different code path.
    */
@@ -172,7 +172,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
       return ((QuorumPipeline<HAPipelineGlue>) member).receiveAndReplicate(req, snd, msg);
     }
 
-    /**
+    /*
      * Note: This is not being invoked due to the implementation of {@link
      * QuorumActor#reorganizePipeline} in {@link MockQuorumFixture}.
      */
@@ -257,7 +257,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
     private final S serviceImpl;
 
-    /**
+    /*
      * The #of write cache blocks received by this service. If a service is running as the quorum
      * leader, then it WILL NOT report the write cache blocks which it sends here.
      */
@@ -293,8 +293,8 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
                   if (msg.getChk() != actualChk) {
 
-                    /*
-                     * Note: This is how we validate the write pipeline. The
+                  /*
+       * Note: This is how we validate the write pipeline. The
                      * HAReceiveService also has basically the same logic,
                      * so this is not really adding much (if any) value
                      * here. Everyone is using the same ChecksumUtility, so
@@ -464,7 +464,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   } // MockQuorumMemberImpl
 
-  /**
+  /*
    * A test which looks for deadlock conditions (one buffer).
    *
    * @throws InterruptedException
@@ -515,7 +515,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test which looks for deadlock conditions (one buffer).
    *
    * @throws InterruptedException
@@ -572,7 +572,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test which looks for starvation conditions (2 buffers).
    *
    * @throws InterruptedException
@@ -623,7 +623,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test which looks for starvation conditions (2 buffers).
    *
    * @throws InterruptedException
@@ -680,7 +680,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A high throughput configuration with record level checksums.
    *
    * @throws InterruptedException
@@ -732,7 +732,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A high throughput configuration with record level checksums.
    *
    * @throws InterruptedException
@@ -791,7 +791,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A high throughput configuration with record level checksums and whole buffer checksums.
    *
    * @throws InterruptedException
@@ -843,7 +843,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A high throughput configuration with record level checksums and whole buffer checksums.
    *
    * @throws InterruptedException
@@ -902,7 +902,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 2 running services, one buffer, and one record written.
    *
@@ -995,7 +995,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * FIXME This method is being used to disable some unit tests for the dynamic reorganization of
    * the write pipeline which are causing CI to deadlock. The issue appears to be related to quorum
    * dynamics, especially, and perhaps only, when we have to reorganize the pipeline in order for it
@@ -1016,7 +1016,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
   }
 
-  /**
+  /*
    * FIXME This method is being used to disable the write cache service tests which involve highly
    * available services (k>1). I've disabled these tests for now since they occasionally result in
    * CI deadlocks.
@@ -1031,7 +1031,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     return false;
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 2 running services, one buffer, and one record written where the leader
    * must reorganize the write pipeline when it is elected.
@@ -1143,7 +1143,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 3 running services, one buffer, and one record written where the leader
    * must reorganize the write pipeline when it is elected.
@@ -1277,7 +1277,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * Martyn wrote:
    *
    * <pre>
@@ -1324,7 +1324,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 2 running services, one buffer, and one record written.
    *
@@ -1423,7 +1423,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 2 running services, one buffer and the default #of records written and the
    * default percentage of large records.
@@ -1516,7 +1516,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 2 running services, one buffer and the default #of records written and the
    * default percentage of large records.
@@ -1616,7 +1616,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 2 running services, two buffers and the default #of records written and the
    * default percentage of large records.
@@ -1709,7 +1709,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 2 running services, two buffers and the default #of records written and the
    * default percentage of large records.
@@ -1810,7 +1810,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
       fixture.terminate();
     }
   }
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 2 running services, two buffers and the default #of records written and the
    * default percentage of large records.
@@ -1910,7 +1910,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 3 running services, six buffers and the default #of records written and the
    * default percentage of large records.
@@ -2009,7 +2009,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A test of the write pipeline driving from the {@link WriteCacheService} of the leader using a
    * quorum with k := 3, 3 running services, six buffers and the default #of records written and the
    * default percentage of large records.
@@ -2115,7 +2115,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * A stress test for the {@link WriteCacheService}.
    *
    * @param nbuffers The #of {@link WriteCache} buffers.
@@ -2291,7 +2291,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
        */
       if (storeType == StoreTypeEnum.RW) {
 
-        final int order[] = getRandomOrder(nrecs);
+        final int[] order = getRandomOrder(nrecs);
 
         final MockRecord[] tmp = new MockRecord[nrecs];
 
@@ -2338,8 +2338,8 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
         if (rec.nbytes > WRITE_CACHE_BUFFER_CAPACITY) nlarge++;
 
-        /*
-         * Write the record.
+      /*
+       * Write the record.
          *
          * Note: The buffer is duplicated in order to prevent a
          * side-effect on its position().
@@ -2498,7 +2498,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
   /** A random number generated - the seed is NOT fixed. */
   protected final Random r = new Random();
 
-  /**
+  /*
    * Returns random data that will fit in N bytes. N is chosen randomly in 1:256.
    *
    * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> of random length and having
@@ -2511,7 +2511,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     return getRandomData(nbytes);
   }
 
-  /**
+  /*
    * Returns random data that will fit in <i>nbytes</i>.
    *
    * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> having random contents.
@@ -2525,8 +2525,8 @@ public class TestWORMWriteCacheService extends TestCase3 {
     return ByteBuffer.wrap(bytes);
   }
 
-  //    /**
-  //     * Simple implementation for unit tests.
+  //    /*
+//     * Simple implementation for unit tests.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
   //     *         Thompson</a>
@@ -2577,7 +2577,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
   //
   //    }
 
-  /**
+  /*
    * An allocation to be written at some offset on a backing channel.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2590,7 +2590,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     /** The data (bytes from the position to the limit). */
     final ByteBuffer data;
 
-    /**
+    /*
      * The #of bytes in the application portion of the record (this DOES NOT include the optional
      * checksum field at the end of the record).
      */
@@ -2613,7 +2613,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
           + "}";
     }
 
-    /**
+    /*
      * @param offset The file offset.
      * @param data The data (bytes between the position and the limit).
      * @param chksum The checksum of the data.
@@ -2630,7 +2630,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * Create and return an array of {@link MockRecord}s. The records will be assigned to a dense
    * region in the file, beginning with the given file offset.
    *
@@ -2665,8 +2665,8 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
       if (r.nextDouble() < largeRecordRate) {
 
-        /*
-         * large record.
+      /*
+       * large record.
          */
         nbytes = WRITE_CACHE_BUFFER_CAPACITY * (r.nextInt(3) + 1);
 
@@ -2735,7 +2735,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
       if (!file.delete()) log.warn("Could not delete file: " + file);
     }
 
-    /**
+    /*
      * Read some data out of the file.
      *
      * @param off The offset of the record.
@@ -2758,8 +2758,8 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-        /*
-         * The channel is still open. If you are allowing concurrent
+      /*
+       * The channel is still open. If you are allowing concurrent
          * reads on the channel, then this could indicate that two
          * readers each found the channel closed and that one was able
          * to re-open the channel before the other such that the channel
@@ -2791,14 +2791,14 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
       return raf.getChannel();
     }
-  };
+  }
 
   /*
    * HA pipeline tests.
    */
 
-  //    /**
-  //     * Return an open port on current machine. Try the suggested port first. If
+  //    /*
+//     * Return an open port on current machine. Try the suggested port first. If
   //     * suggestedPort is zero, just select a random port
   //     */
   //    private static int getPort(final int suggestedPort) throws IOException {

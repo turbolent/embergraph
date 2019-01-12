@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * BreitWigner (aka Lorentz) distribution; See the <A
+/*
+* BreitWigner (aka Lorentz) distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node23.html#SECTION000230000000000000000"> math
  * definition</A>. A more general form of the Cauchy distribution.
  *
@@ -32,7 +32,7 @@ public class BreitWigner extends AbstractContinousDistribution {
 
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static BreitWigner shared = new BreitWigner(1.0, 0.2, 1.0, makeDefaultGenerator());
-  /**
+  /*
    * Constructs a BreitWigner distribution.
    *
    * @param cut </tt>cut==Double.NEGATIVE_INFINITY</tt> indicates "don't cut".
@@ -45,7 +45,7 @@ public class BreitWigner extends AbstractContinousDistribution {
   public double nextDouble() {
     return nextDouble(mean, gamma, cut);
   }
-  /**
+  /*
    * Returns a random number from the distribution; bypasses the internal state.
    *
    * @param cut </tt>cut==Double.NEGATIVE_INFINITY</tt> indicates "don't cut".
@@ -66,7 +66,7 @@ public class BreitWigner extends AbstractContinousDistribution {
       return mean + displ;
     }
   }
-  /**
+  /*
    * Sets the mean, gamma and cut parameters.
    *
    * @param cut </tt>cut==Double.NEGATIVE_INFINITY</tt> indicates "don't cut".
@@ -76,7 +76,7 @@ public class BreitWigner extends AbstractContinousDistribution {
     this.gamma = gamma;
     this.cut = cut;
   }
-  /**
+  /*
    * Returns a random number from the distribution.
    *
    * @param cut </tt>cut==Double.NEGATIVE_INFINITY</tt> indicates "don't cut".
@@ -90,7 +90,7 @@ public class BreitWigner extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + mean + "," + gamma + "," + cut + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

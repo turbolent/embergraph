@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Tests covering the geospatial default configuration, i.e. that the default datatypes are properly
+/*
+* Tests covering the geospatial default configuration, i.e. that the default datatypes are properly
  * registered on startup, and the defaults for the geospatial service configuration are properly
  * taken over.
  *
@@ -59,7 +59,7 @@ public class TestGeoSpatialDefaults extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Non-geospatial ?s ?p ?o query retrieving ?s
    *
    * @throws Exception
@@ -70,7 +70,7 @@ public class TestGeoSpatialDefaults extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Non-geospatial ?s ?p ?o query with FILTER retrieving ?s and ?o
    *
    * @throws Exception

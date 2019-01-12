@@ -25,8 +25,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link XMLBuilder}.
+/*
+* Test suite for {@link XMLBuilder}.
  *
  * @author martyncutcher
  * @version $Id$

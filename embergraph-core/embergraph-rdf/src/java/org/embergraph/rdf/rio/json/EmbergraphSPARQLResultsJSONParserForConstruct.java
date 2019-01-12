@@ -38,8 +38,8 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.helpers.RDFParserBase;
 
-/**
- * Parser for SPARQL-1.1 JSON Results Format documents
+/*
+* Parser for SPARQL-1.1 JSON Results Format documents
  *
  * @see <a href="http://www.w3.org/TR/sparql11-results-json/">SPARQL 1.1 Query Results JSON
  *     Format</a>
@@ -125,7 +125,7 @@ public class EmbergraphSPARQLResultsJSONParserForConstruct extends RDFParserBase
 
     final Resource s = (Resource) bs.getValue("subject");
     final URI p = (URI) bs.getValue("predicate");
-    final Value o = (Value) bs.getValue("object");
+    final Value o = bs.getValue("object");
     final Resource c = bs.hasBinding("context") ? (Resource) bs.getValue("context") : null;
 
     final Statement stmt = valueFactory.createStatement(s, p, o, c);

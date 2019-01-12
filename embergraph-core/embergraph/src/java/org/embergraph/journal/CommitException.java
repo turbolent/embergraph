@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.journal;
 
-/**
- * Exception thrown when there is a commit failure, especially for the group commit mechanisms.
+/*
+* Exception thrown when there is a commit failure, especially for the group commit mechanisms.
  *
  * @author bryan
  */

@@ -40,8 +40,8 @@ import org.embergraph.quorum.AbstractQuorumMember;
 import org.embergraph.service.proxy.ThickFuture;
 import org.embergraph.util.InnerCause;
 
-/**
- * Abstract implementation provides the logic for distributing messages for the quorum 2-phase
+/*
+* Abstract implementation provides the logic for distributing messages for the quorum 2-phase
  * commit protocol, failover reads, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -63,7 +63,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
 
   private final QuorumReadImpl<S> readImpl;
 
-  /**
+  /*
    * @param logicalServiceId The identifier of the logical service.
    * @param serviceId The {@link UUID} for this service (a physical instance of the logical
    *     service).
@@ -172,7 +172,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
   @Override
   public abstract S getService(UUID serviceId);
 
-  /**
+  /*
    * FIXME Return the {@link IResourceManager}, {@link Journal}, [@link DataService}, etc. Probably
    * rename to getResourceManager().
    */
@@ -232,7 +232,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
     return pipelineImpl.resetPipeline(req);
   }
 
-  /**
+  /*
    * Core implementation handles the message and payload when received on a service.
    *
    * <p>Note: Replication of the message and payload is handled by the caller. The implementation of
@@ -248,7 +248,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
   protected abstract void handleReplicatedWrite(
       IHASyncRequest req, IHAWriteMessage msg, ByteBuffer data) throws Exception;
 
-  /**
+  /*
    * Core implementation of callback for monitoring progress of replicated writes.
    *
    * @param req The synchronization request (optional). When non- <code>null</code> the message and
@@ -266,7 +266,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
       final int rem)
       throws Exception;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The default implementation is a NOP.
@@ -279,7 +279,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The default implementation is a NOP.
@@ -291,7 +291,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The default implementation is a NOP.
@@ -375,7 +375,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
     return readImpl.readFromQuorum(storeId, addr);
   }
 
-  /**
+  /*
    * Called from ErrorTask in HAJournalServer to ensure that events are processed before entering
    * SeekConsensus.
    *
@@ -387,7 +387,7 @@ public abstract class QuorumServiceBase<S extends HAGlue, L extends AbstractJour
     pipelineImpl.processEvents();
   }
 
-  /**
+  /*
    * Cancel the requests on the remote services (RMI). This is a best effort implementation. Any RMI
    * related errors are trapped and ignored in order to be robust to failures in RMI when we try to
    * cancel the futures.

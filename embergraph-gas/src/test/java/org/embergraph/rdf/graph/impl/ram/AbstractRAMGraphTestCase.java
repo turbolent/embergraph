@@ -53,7 +53,7 @@ public class AbstractRAMGraphTestCase extends AbstractGraphTestCase {
     return (RAMGraphFixture) super.getGraphFixture();
   }
 
-  /**
+  /*
    * A small foaf data set relating some of the project contributors (triples mode data).
    *
    * @see {@value #smallGraph}
@@ -63,7 +63,7 @@ public class AbstractRAMGraphTestCase extends AbstractGraphTestCase {
 
     private final URI rdfType, rdfsLabel, foafKnows, foafPerson, mike, bryan, martyn, dc;
 
-    /**
+    /*
      * The data:
      *
      * <pre>

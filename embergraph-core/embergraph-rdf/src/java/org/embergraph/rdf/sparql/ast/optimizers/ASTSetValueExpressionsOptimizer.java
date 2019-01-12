@@ -45,8 +45,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
-/**
- * Visit all the value expression nodes and convert them into value expressions using {@link
+/*
+* Visit all the value expression nodes and convert them into value expressions using {@link
  * AST2BOpUtility#toVE(String, IValueExpressionNode)}. If a value expression can be evaluated to a
  * constant, then it is replaced by that constant.
  *
@@ -84,8 +84,8 @@ public class ASTSetValueExpressionsOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(query, bindingSets);
   }
 
-  //    /**
-  //     * Original version caches to avoid side-effects and visits all VENs both
+  //    /*
+//     * Original version caches to avoid side-effects and visits all VENs both
   //     * explicitly and recursively through toVE().
   //     */
   //    private void convert1(final String lex, final QueryRoot query) {
@@ -114,7 +114,7 @@ public class ASTSetValueExpressionsOptimizer implements IASTOptimizer {
   //
   //    }
 
-  /**
+  /*
    * "Optimized" version visits only the nodes in the AST which can have VENs and then invokes
    * toVE() only for each top-level VEN. This works out to be just {@link AssignmentNode}s, {@link
    * FilterNode}s, and {@link OrderByExpr}s. All of those are marked by the {@link
@@ -146,8 +146,7 @@ public class ASTSetValueExpressionsOptimizer implements IASTOptimizer {
                     //                            return true;
                     if (obj instanceof IValueExpressionNodeContainer) return true;
                     if (obj instanceof HavingNode) return true;
-                    if (obj instanceof StatementPatternNode) return true;
-                    return false;
+                    return obj instanceof StatementPatternNode;
                   }
                 });
 

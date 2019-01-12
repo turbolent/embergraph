@@ -20,8 +20,8 @@ package org.embergraph.service;
 
 import org.embergraph.mdi.IPartitionMetadata;
 
-/**
- * Describes a "split" of keys for a batch operation. This is used in scale-out where the operation
+/*
+* Describes a "split" of keys for a batch operation. This is used in scale-out where the operation
  * is parallelized across multiple index partitions. It is also used within a single index partition
  * when an operation that has a lot of keys in its keys[] is parallelized over sub-key-ranges of
  * that keys[].
@@ -42,7 +42,7 @@ public class Split {
   /** The #of keys in this split (toIndex - fromIndex). */
   public final int ntuples;
 
-  /**
+  /*
    * Create a representation of a split point without specifying the from/to tuple index.
    *
    * @param pmd The metadata for the index partition within which the keys in this split lie.
@@ -52,7 +52,7 @@ public class Split {
     this(pmd, 0 /* fromIndexIgnored */, 0 /* toIndexIgnored */);
   }
 
-  /**
+  /*
    * Create a representation of a split point.
    *
    * @param pmd The metadata for the index partition within which the keys in this split lie
@@ -80,7 +80,7 @@ public class Split {
     this.ntuples = toIndex - fromIndex; // @todo this is off by one? (to - from + 1)?
   }
 
-  /**
+  /*
    * Hash code is based on the {@link IPartitionMetadata} hash code if given (if is always present
    * for scale-out client requests) and otherwise {@link #fromIndex} (for example, when
    * parallelizing operations within a single index per BLGZ-1537).
@@ -118,9 +118,7 @@ public class Split {
 
     if (ntuples != o.ntuples) return false;
 
-    if (!pmd.equals(o.pmd)) return false;
-
-    return true;
+    return pmd.equals(o.pmd);
   }
 
   /** Human friendly representation. */

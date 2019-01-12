@@ -34,8 +34,8 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
 
-/**
- * Utility to return the PID of the JVM.
+/*
+* Utility to return the PID of the JVM.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public class PIDUtil {
 
   //    static protected final boolean INFO = log.isInfoEnabled();
 
-  /**
+  /*
    * Return the PID of the Java VM under Linux using bash.
    *
    * @return The PID.
@@ -114,7 +114,7 @@ public class PIDUtil {
     }
   }
 
-  /**
+  /*
    * Return the JVM PID.
    *
    * @throws UnsupportedOperationException if the pid can not be extracted.
@@ -141,7 +141,7 @@ public class PIDUtil {
 
   private static final Pattern pidPattern = Pattern.compile("^([0-9]+)@");
 
-  /**
+  /*
    * Tries each of the methods in this class and returns the PID as reported by the first method
    * that succeeds. The order in which the methods are tried SHOULD reflect the likelyhood that the
    * method will get it right.
@@ -165,7 +165,7 @@ public class PIDUtil {
     return getPIDWithRuntimeMXBean();
   }
 
-  /**
+  /*
    * Utility for checking which method works on your platform.
    *
    * @param args

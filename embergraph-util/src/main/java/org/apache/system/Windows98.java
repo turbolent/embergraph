@@ -21,8 +21,8 @@ package org.apache.system;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * Parses the Windows 98 environment--the same class should work for other Windows versions, but I
+/*
+* Parses the Windows 98 environment--the same class should work for other Windows versions, but I
  * only have one to test. Windows 9x environments can only use one processor--even if there are more
  * installed in the system.
  *
@@ -53,7 +53,7 @@ public final class Windows98 implements CPUParser {
     return m_processors;
   }
 
-  /**
+  /*
    * Return the cpu info for the processors (assuming symetric multiprocessing which means that all
    * CPUs are identical). The format is:
    *

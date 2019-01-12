@@ -40,8 +40,8 @@ import org.embergraph.io.compression.NOPRecordCompressor;
 import org.embergraph.rawstore.IAddressManager;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * An instance of this class is used to serialize and de-serialize the {@link INodeData}s and {@link
+/*
+* An instance of this class is used to serialize and de-serialize the {@link INodeData}s and {@link
  * ILeafData}s of an {@link AbstractBTree}. Leaf and non-leaf records have different serialization
  * formats, but their leading bytes use the same format so that you can tell by inspection whether a
  * buffer contains a leaf or a non-leaf node. The header of the record uses a fixed length format so
@@ -69,13 +69,13 @@ import org.embergraph.rawstore.IRawStore;
  */
 public class NodeSerializer {
 
-  /**
+  /*
    * An object that knows how to construct {@link Node}s and {@link Leaf}s from {@link INodeData}
    * and {@link ILeafData} objects.
    */
   protected final INodeFactory nodeFactory;
 
-  /**
+  /*
    * When <code>true</code> the {@link NodeSerializer} instance will refuse to {@link
    * #encode(IAbstractNodeData)} nodes or leaves (this keeps us from allocating the {@link
    * #_writeBuffer}). Note that this MUST be <code>false</code> for a transient B+Tree so we can
@@ -112,7 +112,7 @@ public class NodeSerializer {
     return recordCompressorFactory.getInstance();
   }
 
-  /**
+  /*
    * Used to serialize the nodes and leaves of the tree. This is pre-allocated based on the
    * estimated maximum size of a node or leaf and grows as necessary when it overflows. The same
    * buffer instance is used to serialize all nodes and leaves of the tree.
@@ -134,7 +134,7 @@ public class NodeSerializer {
 
   private final int initialBufferCapacity;
 
-  /**
+  /*
    * The default initial capacity multiplier for the (de-)serialization buffer. The total initial
    * buffer capacity is this value times the {@link #branchingFactor}.
    */
@@ -147,7 +147,7 @@ public class NodeSerializer {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Designated constructor.
    *
    * @param nodeFactory An object that knows how to construct {@link INodeData}s and {@link
@@ -221,7 +221,7 @@ public class NodeSerializer {
     }
   }
 
-  /**
+  /*
    * Releases any buffers. They will be automatically reallocated if the {@link NodeSerializer} is
    * used again.
    */
@@ -232,7 +232,7 @@ public class NodeSerializer {
     _writeCompressor = null;
   }
 
-  /**
+  /*
    * Allocates {@link #_writeBuffer} with {@link #initialBufferCapacity}.
    *
    * @throws UnsupportedOperationException if the {@link NodeSerializer} does not permit writes.
@@ -256,7 +256,7 @@ public class NodeSerializer {
             : recordCompressorFactory.getInstance();
   }
 
-  /**
+  /*
    * Report the current write buffer capacity -or- the {@link #initialBufferCapacity} if the write
    * buffer is not allocated.
    */
@@ -274,7 +274,7 @@ public class NodeSerializer {
     return tmp.capacity();
   }
 
-  /**
+  /*
    * Decode an {@link INodeData} or {@link ILeafData} record, wrapping the underlying data record
    * (thread-safe). The decision to decode as an {@link INodeData} or {@link ILeafData} instance is
    * made based on inspection of the first byte byte in the supplied buffer, which codes for a node,
@@ -312,7 +312,7 @@ public class NodeSerializer {
     return leafCoder.decode(slice);
   }
 
-  /**
+  /*
    * Wrap an {@link INodeData} or {@link ILeafData} instance as a {@link Node} or a {@link Leaf}.
    * This DOES NOT set the parent of the new {@link Node} or {@link Leaf}.
    *
@@ -339,7 +339,7 @@ public class NodeSerializer {
     }
   }
 
-  /**
+  /*
    * Encode a node or leaf and return a coded instance of the persistent data for that node or leaf
    * backed by an exact fit byte[] (NOT thread-safe). The operation writes on an internal buffer
    * which is automatically extended as required.
@@ -400,7 +400,7 @@ public class NodeSerializer {
     return codedNode;
   }
 
-  /**
+  /*
    * Encode a node or leaf onto an internal buffer and return that buffer (NOT thread-safe). This is
    * a slight optimization of {@link #encodeLive(IAbstractNodeData)} which is used when the written
    * node or leaf will not be reused, e.g., by the {@link IndexSegmentBuilder} . The operation
@@ -445,7 +445,7 @@ public class NodeSerializer {
     }
   }
 
-  /**
+  /*
    * Update the serialization of a leaf to set the prior and next leaf references and change its
    * serialization type from {@link #TYPE_LEAF} to {@link #TYPE_LINKED_LEAF}.
    *

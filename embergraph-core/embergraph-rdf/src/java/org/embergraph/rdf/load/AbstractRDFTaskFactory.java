@@ -9,8 +9,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Factory for tasks for loading RDF resources into a database or validating RDF resources against a
+/*
+* Factory for tasks for loading RDF resources into a database or validating RDF resources against a
  * database.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -31,7 +31,7 @@ public class AbstractRDFTaskFactory<S extends Statement, T extends Runnable>
   /** The timestamp set when {@link #notifyEnd()} is invoked. */
   private long endTime;
 
-  /**
+  /*
    * Notify that the factory will begin running tasks. This sets the {@link #beginTime} used by
    * {@link #elapsed()} to report the run time of the tasks.
    */
@@ -42,7 +42,7 @@ public class AbstractRDFTaskFactory<S extends Statement, T extends Runnable>
     beginTime = System.currentTimeMillis();
   }
 
-  /**
+  /*
    * Notify that the factory is done running tasks (for now). This places a cap on the time reported
    * by {@link #elapsed()}.
    *
@@ -56,7 +56,7 @@ public class AbstractRDFTaskFactory<S extends Statement, T extends Runnable>
     assert beginTime <= endTime;
   }
 
-  /**
+  /*
    * The elapsed time, counting only the time between {@link #notifyStart()} and {@link
    * #notifyEnd()}.
    */
@@ -79,7 +79,7 @@ public class AbstractRDFTaskFactory<S extends Statement, T extends Runnable>
     }
   }
 
-  /**
+  /*
    * An attempt will be made to determine the interchange syntax using {@link RDFFormat}. If no
    * determination can be made then the loader will presume that the files are in the format
    * specified by this parameter (if any). Files whose format can not be determined will be logged
@@ -100,13 +100,13 @@ public class AbstractRDFTaskFactory<S extends Statement, T extends Runnable>
     return bufferFactory;
   }
 
-  /**
+  /*
    * #of told triples loaded into the database by successfully completed {@link
    * SingleResourceReaderTask}s.
    */
   final AtomicLong toldTriples = new AtomicLong(0);
 
-  /**
+  /*
    * Guess at the {@link RDFFormat}.
    *
    * @param filename Some filename.

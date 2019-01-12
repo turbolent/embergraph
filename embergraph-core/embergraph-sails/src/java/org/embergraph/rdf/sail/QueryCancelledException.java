@@ -20,8 +20,8 @@ package org.embergraph.rdf.sail;
 
 import java.util.UUID;
 
-/**
- * Exception thrown when a query is explicitly cancelled. Used to support the embedded graph
+/*
+* Exception thrown when a query is explicitly cancelled. Used to support the embedded graph
  * cancellation.
  *
  * @author beebs

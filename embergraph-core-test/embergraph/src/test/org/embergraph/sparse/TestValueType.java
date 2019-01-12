@@ -26,8 +26,8 @@ import java.util.Date;
 import java.util.Random;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link ValueType}.
+/*
+* Test suite for {@link ValueType}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -164,7 +164,7 @@ public class TestValueType extends TestCase2 {
     assertTrue(o.equals(o2));
   }
 
-  /**
+  /*
    * Serializable object with simple state.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

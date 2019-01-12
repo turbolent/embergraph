@@ -38,8 +38,8 @@ import org.embergraph.relation.rule.eval.ActionEnum;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
-/**
- * Factory for {@link RDFJoinNexus} objects.
+/*
+* Factory for {@link RDFJoinNexus} objects.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -68,7 +68,7 @@ public class RDFJoinNexusFactory extends AbstractJoinNexusFactory {
     sb.append(", isOwlSameAsUsed=" + isOwlSameAsUsed);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @param justify if justifications are required.

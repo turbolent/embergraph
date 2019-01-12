@@ -8,17 +8,17 @@ that both that copyright notice and this permission notice appear in supporting 
 CERN makes no representations about the suitability of this software for any purpose.
 It is provided "as is" without expressed or implied warranty.
 */
-/**
- * Interface that represents a function object: a function that takes 27 arguments and returns a
+/*
+* Interface that represents a function object: a function that takes 27 arguments and returns a
  * single value.
  */
 public interface Double27Function {
-  /**
+  /*
    * Applies a function to 27 arguments.
    *
    * @return the result of the function.
    */
-  public abstract double apply(
+  double apply(
       double a000,
       double a001,
       double a002,

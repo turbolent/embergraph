@@ -21,8 +21,8 @@ import org.embergraph.counters.IHostCounters;
 import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
 
-/**
- * Best effort computation of a workload score based on CPU Utilization and IO Wait defined as
+/*
+* Best effort computation of a workload score based on CPU Utilization and IO Wait defined as
  * follows:
  *
  * <pre>

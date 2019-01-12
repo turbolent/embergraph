@@ -44,8 +44,8 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.config.LogUtil;
 import org.embergraph.util.config.NicUtil;
 
-/**
- * Class has a static method which writes a copyright banner on stdout once per JVM. This method is
+/*
+* Class has a static method which writes a copyright banner on stdout once per JVM. This method is
  * invoked from several core classes in order to ensure that the copyright banner is always written
  * out on embergraph startup.
  *
@@ -60,7 +60,7 @@ public class Banner {
 
   private static final String fullyQualifiedHostName;
 
-  /**
+  /*
    * Returns fully qualified host name from static initialization.
    *
    * <p>Moved from AbstractStatisticsCollector for BLZG-1497.
@@ -71,7 +71,7 @@ public class Banner {
     return fullyQualifiedHostName;
   }
 
-  /**
+  /*
    * Environment variables understood by the {@link Banner} class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -88,7 +88,7 @@ public class Banner {
     String LOG4J_MBEANS_DISABLE = "org.embergraph.jmx.log4j.disable";
   }
 
-  /**
+  /*
    * This static code block is responsible obtaining the canonical hostname.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/886" >Provide workaround for bad reverse DNS
@@ -104,8 +104,8 @@ public class Banner {
       log.warn("Hostname override: hostname=" + s);
     } else {
       try {
-        /*
-         * Note: This should be the host *name* NOT an IP address of a
+      /*
+       * Note: This should be the host *name* NOT an IP address of a
          * preferred Ethernet adaptor.
          */
         s = InetAddress.getLocalHost().getCanonicalHostName();
@@ -129,8 +129,8 @@ public class Banner {
       final boolean nocatch = Boolean.getBoolean(Options.NOCATCH);
 
       if (!nocatch) {
-        /*
-         * Set a logger for any uncaught exceptions.
+      /*
+       * Set a logger for any uncaught exceptions.
          */
         Thread.setDefaultUncaughtExceptionHandler(
             new UncaughtExceptionHandler() {
@@ -200,7 +200,7 @@ public class Banner {
 
           final Class<?> cls = Class.forName("org.embergraph.jmx.JMXLog4jMBeanUtil");
 
-          final Method m = cls.getMethod("registerLog4jMBeans", new Class[] {});
+          final Method m = cls.getMethod("registerLog4jMBeans");
 
           // Optionally register a log4j MBean.
           m.invoke(null /* obj */);
@@ -215,7 +215,7 @@ public class Banner {
     }
   }
 
-  /**
+  /*
    * If logging is not configured for [org.embergraph] then we set a default log level @ WARN. This
    * is critical for good performance.
    */
@@ -237,8 +237,8 @@ public class Banner {
 
       } catch (Throwable t) {
 
-        /*
-         * Note: The SLF4J bridge can cause a NoSuchMethodException to
+      /*
+       * Note: The SLF4J bridge can cause a NoSuchMethodException to
          * be thrown out of Logger.setLevel(). We trap this exception
          * and log a message @ ERROR. It is critical that embergraph
          * logging is properly configured as logging at INFO for
@@ -262,43 +262,43 @@ public class Banner {
     } // if(log.getLevel() == null)
   }
 
-  /**
+  /*
    * An interface which declares the keys for the map returned by {@link Banner#getBuildInfo()} .
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface BuildInfoMeta {
     /** The embergraph release version. */
-    static final String buildVersion = "buildVersion";
+    String buildVersion = "buildVersion";
     /** The source code revision. */
-    static final String svnRevision = "svnRevision";
+    String svnRevision = "svnRevision";
     /** The source code repository URL for the branch. */
-    static final String svnURL = "svnURL";
+    String svnURL = "svnURL";
     /** The timestamp of the build. */
-    static final String buildTimestamp = "buildTimestamp";
+    String buildTimestamp = "buildTimestamp";
     /** The username that performed the build. */
-    static final String buildUser = "buildUser";
+    String buildUser = "buildUser";
     /** The hostname on which the build was performed. */
-    static final String buildHost = "buildHost";
+    String buildHost = "buildHost";
     /** The OS architecture on which the build was performed. */
-    static final String osArch = "osArch";
+    String osArch = "osArch";
     /** The OS name on which the build was performed. */
-    static final String osName = "osName";
+    String osName = "osName";
     /** The OS version on which the build was performed. */
-    static final String osVersion = "osVersion";
+    String osVersion = "osVersion";
     /** The string representing the git build branch. */
-    static final String gitBranch = "gitBranch";
-    /**
+    String gitBranch = "gitBranch";
+    /*
      * The string representing the git build commit.
      *
      * <p>This is the output of git git rev-parse --verify HEAD
      *
      * <p>See BLZG-1688
      */
-    static final String gitCommit = "gitCommit";
+    String gitCommit = "gitCommit";
   }
 
-  /**
+  /*
    * Method used to discover and report on the embergraph build information. A <code>
    * org.embergraph.BuildInfo</code> class is built when the JAR is created. However, it may not be
    * present when running under an IDE from the source code and, therefore, there MUST NOT be any
@@ -326,7 +326,7 @@ public class Banner {
     return buildInfoRef.get();
   }
 
-  /**
+  /*
    * Utility class to get the static string variables for a given class name.
    *
    * @param className
@@ -402,7 +402,7 @@ public class Banner {
     return s.toString();
   }
 
-  /**
+  /*
    * Attempts to return the build version (aka the release version) from the <code>
    * org.embergraph.BuildInfo</code> class. This class is generated by <code>build.xml</code> and is
    * NOT available from the IDE. It is correct discovered using reflection.
@@ -426,7 +426,7 @@ public class Banner {
     return banner;
   }
 
-  /**
+  /*
    * Outputs the banner and exits.
    *
    * @param args Ignored.

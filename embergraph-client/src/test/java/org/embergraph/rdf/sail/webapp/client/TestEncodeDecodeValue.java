@@ -32,8 +32,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for utility class to encode and decode RDF Values for interchange via the REST API.
+/*
+* Test suite for utility class to encode and decode RDF Values for interchange via the REST API.
  *
  * @see EncodeDecodeValue
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -78,7 +78,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     assertEquals(new LiteralImpl("ab\"c"), EncodeDecodeValue.decodeValue("\"ab\"c\""));
   }
 
-  /**
+  /*
    * Unit tests for a literal which uses single quotes in its encoded form. For example <code>'abc'
    * </code>.
    */
@@ -131,7 +131,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     doTest("<http://www.embergraph.org/<>/foo>", new URIImpl("http://www.embergraph.org/<>/foo"));
   }
 
-  /**
+  /*
    * This demonstrates how things could go wrong. This is a pretty likely scenario and definitely
    * needs to be fixed. The code point for the double quote is 0x0022. The code point for the single
    * quote is 0x0027. The code point for &gt; is 0x003E. The code point for &lt; is 0x003C.
@@ -144,7 +144,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     doTest("\"ab&c<>\"", new LiteralImpl("ab&c<>"));
   }
 
-  /**
+  /*
    * Round trip encode/decode test.
    *
    * @param expectedString The expected external form.
@@ -170,7 +170,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
    * Test suite for encode/decode of openrdf style contexts.
    */
 
-  /**
+  /*
    * Test case for <code>foo(s,p,o,(Resource[]) null)</code>. This is case is disallowed.
    *
    * @see org.embergraph.rdf.store.BD#NULL_GRAPH
@@ -196,7 +196,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test case for <code>foo(s,p,o)</code>. This is case is equivalent to
    * <code>foo(s,p,o,new Resource[0]). It is allowed and refers
    * to all named graphs.
@@ -216,7 +216,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     assertEquals(new Resource[0], decoded);
   }
 
-  /**
+  /*
    * Test case for <code>foo(s,p,o,(Resource)null)</code>. This is case is
    * equivalent to
    * <code>foo(s,p,o,new Resource[]{null}). It is allowed and refers
@@ -237,7 +237,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     assertEquals(new Resource[] {null}, decoded);
   }
 
-  /**
+  /*
    * Test case for <code>foo(s,p,o,(Resource)null)</code>. This is case is
    * equivalent to
    * <code>foo(s,p,o,new Resource[]{null}). It is allowed and refers
@@ -261,7 +261,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     assertEquals(new Resource[] {null}, decoded);
   }
 
-  /**
+  /*
    * Test case for <code>foo(s,p,o,x,y,z)</code>. This is case is equivalent to
    * <code>foo(s,p,o,new Resource[]{x,y,z}). It is allowed and refers
    * to the specified named graphs.
@@ -287,7 +287,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     assertEquals(new Resource[] {x, y, z}, decoded);
   }
 
-  /**
+  /*
    * Test case for <code>foo(s,p,o,x,null,z)</code>. This is case is equivalent
    * to <code>foo(s,p,o,new Resource[]{x,null,z}). It is allowed and refers
    * to the named graph (x), the null graph, and the named graph (z).
@@ -312,7 +312,7 @@ public class TestEncodeDecodeValue extends TestCase2 {
     assertEquals(new Resource[] {x, null, z}, decoded);
   }
 
-  /**
+  /*
    * Test case for <code>foo(s,p,o,x,null,z)</code>. This is case is equivalent
    * to <code>foo(s,p,o,new Resource[]{x,null,z}). It is allowed and refers
    * to the named graph (x), the null graph, and the named graph (z).

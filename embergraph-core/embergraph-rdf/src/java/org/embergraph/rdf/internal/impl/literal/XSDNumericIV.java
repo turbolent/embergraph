@@ -27,8 +27,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.util.Bytes;
 import org.openrdf.model.Literal;
 
-/**
- * Implementation for inline <code>xsd:byte</code>, <code>xsd:short</code>, <code>xsd:int</code>,
+/*
+* Implementation for inline <code>xsd:byte</code>, <code>xsd:short</code>, <code>xsd:int</code>,
  * <code>xsd:long</code>, <code>xsd:float</code>, <code>xsd:decimal</code>.
  */
 public class XSDNumericIV<V extends EmbergraphLiteral> extends NumericIV<V, Number>

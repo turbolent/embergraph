@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.apache.system.SystemUtil;
 
-/**
- * Reports on the kernel version for a linux (or OSX) host.
+/*
+* Reports on the kernel version for a linux (or OSX) host.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public class KernelVersion {
     return "{version=" + version + ", major=" + major + ", minor=" + minor + "}";
   }
 
-  /**
+  /*
    * Return the version of the Linux kernel as reported by <code>uname</code>
    *
    * @return The {@link KernelVersion}
@@ -70,8 +70,8 @@ public class KernelVersion {
 
       } else {
 
-        /*
-         * Attempt uname -r at with this path, but this is an unknown
+      /*
+       * Attempt uname -r at with this path, but this is an unknown
          * OS.
          */
         commands.add("/bin/uname");
@@ -125,7 +125,7 @@ public class KernelVersion {
     }
   }
 
-  /**
+  /*
    * Prints the data reported by {@link KernelVersion#get()}.
    *
    * @param args ignored.

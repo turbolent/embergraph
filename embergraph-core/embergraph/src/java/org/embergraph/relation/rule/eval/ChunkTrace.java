@@ -26,8 +26,8 @@ package org.embergraph.relation.rule.eval;
 import org.embergraph.relation.rule.eval.pipeline.JoinMasterTask;
 import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 
-/**
- * Utility class that may be used to trace the chunks accepted for join processing for each
+/*
+* Utility class that may be used to trace the chunks accepted for join processing for each
  * predicate. The output has the form
  *
  * <pre>
@@ -42,7 +42,7 @@ import org.embergraph.relation.rule.eval.pipeline.JoinTask;
  */
 public class ChunkTrace {
 
-  /**
+  /*
    * Zero to enable the {@link System#err} trace of chunks accepted for each join dimension -or-
    * <code>-1</code> to disable. This field is the column count of the output and is used to wrap
    * the output so as to not cause eclipse undue distress with long lines.
@@ -56,7 +56,7 @@ public class ChunkTrace {
 
     if (col >= 0) {
 
-      final String s = Integer.toString(orderIndex) + "[" + Integer.toString(chunk.length) + "]";
+      final String s = orderIndex + "[" + chunk.length + "]";
 
       System.err.print(s);
 

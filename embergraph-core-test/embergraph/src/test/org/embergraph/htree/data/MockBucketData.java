@@ -9,7 +9,7 @@ public class MockBucketData extends MockLeafData { // implements IBucketData {
   //	private final int lengthMSB;
   //	private final int[] hashCodes;
 
-  /**
+  /*
    * @param keys
    * @param vals
    */
@@ -29,7 +29,7 @@ public class MockBucketData extends MockLeafData { // implements IBucketData {
         null /* rawRecords */); // lengthMSB, hashCodes);
   }
 
-  /**
+  /*
    * @param keys
    * @param vals
    * @param deleteMarkers
@@ -83,8 +83,8 @@ public class MockBucketData extends MockLeafData { // implements IBucketData {
   //
   //	}
   //
-  //	/**
-  //	 * Visits the index of each bucket entry having a matching hash code.
+  //	/*
+//	 * Visits the index of each bucket entry having a matching hash code.
   //	 */
   //	private class HashMatchIterator implements Iterator<Integer> {
   //

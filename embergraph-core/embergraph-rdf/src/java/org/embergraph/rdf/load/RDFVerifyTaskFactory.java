@@ -5,8 +5,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Statement;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Factory for tasks for verifying a database against RDF resources.
+/*
+* Factory for tasks for verifying a database against RDF resources.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

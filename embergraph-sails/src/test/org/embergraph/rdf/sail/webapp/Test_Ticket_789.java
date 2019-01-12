@@ -37,8 +37,8 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.DatasetImpl;
 
-/**
- * Test suite for remote support of Sesame API Query methods (setBinding, setDataset,
+/*
+* Test suite for remote support of Sesame API Query methods (setBinding, setDataset,
  * setIncludeInferred) and support of contexts in getStatements
  *
  * @author igorkim

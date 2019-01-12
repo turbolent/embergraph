@@ -25,8 +25,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Test suite.
+/*
+* Test suite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -57,7 +57,7 @@ public class TestAll_AST extends TestCase {
      */
     suite.addTestSuite(TestTriplePatternBuilder.class);
 
-    /**
+    /*
      * Test suite for the proposed standardization of "reification done right".
      *
      * @see <a href="http://trac.bigdata.com/ticket/526">Reification done right </a>

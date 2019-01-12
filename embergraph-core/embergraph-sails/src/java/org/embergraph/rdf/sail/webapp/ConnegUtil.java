@@ -34,8 +34,8 @@ import org.openrdf.query.resultio.BooleanQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Helper class for content negotiation.
+/*
+* Helper class for content negotiation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -92,7 +92,7 @@ public class ConnegUtil {
 
   private final ConnegScore<?>[] scores;
 
-  /**
+  /*
    * A utility method to check for a format string query parameter and update the mimetype for
    * sending back results. This is to enable the use of the ?format=json style of interaction. See
    * Trac Ticket #984.
@@ -147,7 +147,7 @@ public class ConnegUtil {
     return acceptHeaderValue;
   }
 
-  /**
+  /*
    * A utility method to check for a format string query parameter and update the mimetype for
    * sending back results. This is to enable the use of the ?format=json style of interaction. See
    * Trac Ticket #984.
@@ -273,7 +273,7 @@ public class ConnegUtil {
     Arrays.sort(this.scores);
   }
 
-  /**
+  /*
    * Return the best {@link RDFFormat} from the <code>Accept</code> header, where "best" is measured
    * by the <code>q</code> parameter.
    *
@@ -285,7 +285,7 @@ public class ConnegUtil {
     return getRDFFormat(null /* fallback */);
   }
 
-  /**
+  /*
    * Return the best {@link RDFFormat} from the <code>Accept</code> header, where "best" is measured
    * by the <code>q</code> parameter.
    *
@@ -305,7 +305,7 @@ public class ConnegUtil {
     return fallback;
   }
 
-  /**
+  /*
    * Return the best {@link TupleQueryResultFormat} from the <code>Accept</code> header, where
    * "best" is measured by the <code>q</code> parameter.
    *
@@ -317,7 +317,7 @@ public class ConnegUtil {
     return getTupleQueryResultFormat(null /* fallback */);
   }
 
-  /**
+  /*
    * Return the best {@link TupleQueryResultFormat} from the <code>Accept</code> header, where
    * "best" is measured by the <code>q</code> parameter.
    *
@@ -338,7 +338,7 @@ public class ConnegUtil {
     return fallback;
   }
 
-  /**
+  /*
    * Return the best {@link BooleanQueryResultFormat} from the <code>Accept</code> header, where
    * "best" is measured by the <code>q</code> parameter.
    *
@@ -350,7 +350,7 @@ public class ConnegUtil {
     return getBooleanQueryResultFormat(null /* fallback */);
   }
 
-  /**
+  /*
    * Return the best {@link BooleanQueryResultFormat} from the <code>Accept</code> header, where
    * "best" is measured by the <code>q</code> parameter.
    *
@@ -372,7 +372,7 @@ public class ConnegUtil {
     return fallback;
   }
 
-  /**
+  /*
    * Return the best {@link PropertiesFormat} from the <code>Accept</code> header, where "best" is
    * measured by the <code>q</code> parameter.
    *
@@ -384,7 +384,7 @@ public class ConnegUtil {
     return getPropertiesFormat(null /* fallback */);
   }
 
-  /**
+  /*
    * Return the best {@link PropertiesFormat} from the <code>Accept</code> header, where "best" is
    * measured by the <code>q</code> parameter.
    *
@@ -405,7 +405,7 @@ public class ConnegUtil {
     return fallback;
   }
 
-  /**
+  /*
    * Return the best {@link CounterSetFormat} from the <code>Accept</code> header, where "best" is
    * measured by the <code>q</code> parameter.
    *
@@ -417,7 +417,7 @@ public class ConnegUtil {
     return getCounterSetFormat(null /* fallback */);
   }
 
-  /**
+  /*
    * Return the best {@link RDCountersFormatFFormat} from the <code>Accept</code> header, where
    * "best" is measured by the <code>q</code> parameter.
    *
@@ -438,7 +438,7 @@ public class ConnegUtil {
     return fallback;
   }
 
-  /**
+  /*
    * Return an ordered list of the {@link ConnegScore}s for MIME Types which are consistent with the
    * desired format type.
    *

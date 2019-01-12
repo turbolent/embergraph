@@ -29,8 +29,8 @@ import org.embergraph.btree.AbstractBTreeTupleCursor.MutableBTreeTupleCursor;
 import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test ability to traverse tuples using an {@link ITupleCursor} while the SAME THREAD is used to
+/*
+* Test ability to traverse tuples using an {@link ITupleCursor} while the SAME THREAD is used to
  * insert, update, or remove tuples from a mutable {@link BTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -199,7 +199,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
     }
   }
 
-  /**
+  /*
    * Test for update (the tuple state must be re-copied from the index).
    *
    * <p>Note that copy-on-write is handled differently even when the trigger is an update (vs an
@@ -327,7 +327,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for concurrent modification resulting from insert() and remove() including (a) where
    * the root leaf is split by the insert() and (b) where remove() causes an underflow that triggers
    * a join of the leaf with its sibling forcing the underflow of the parent such that the leaf then
@@ -425,7 +425,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for copy-on-write (the leaf is clean and then an update, insert, or remove is
    * requested which forces copy-on-write to clone the leaf). The listener needs to notice the event
    * and relocate itself within the BTree.
@@ -496,7 +496,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
     }
   }
 
-  /**
+  /*
    * Test examines the behavior of the cursor when delete markers are enabled and the cursor is
    * willing to visited deleted tuples. Since delete markers are enabled remove() will actually be
    * an update that sets the delete marker on the tuple and clears the value associated with that
@@ -551,7 +551,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
     }
   }
 
-  /**
+  /*
    * Test examines the behavior of the cursor when delete markers are enabled and the cursor is NOT
    * willing to visited deleted tuples. Since delete markers are enabled remove() will actually be
    * an update that sets the delete marker on the tuple and clears the value associated with that
@@ -611,7 +611,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
     }
   }
 
-  /**
+  /*
    * Test verifies that an iterator which is scanning in forward order can be exhausted when it
    * reaches the end of the visitable tuples but that a visitable tuple inserted after the current
    * cursor position will be noticed by {@link ITupleCursor#hasNext()} and visited.
@@ -647,7 +647,7 @@ public class TestMutableBTreeCursors extends AbstractBTreeCursorTestCase {
     }
   }
 
-  /**
+  /*
    * Test verifies that an iterator which is scanning in reverse order can be exhausted when it
    * reaches the end of the visitable tuples but that a visitable tuple inserted after the current
    * cursor position will be noticed by {@link ITupleCursor#hasPrior()} and visited.

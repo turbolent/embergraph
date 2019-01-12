@@ -31,8 +31,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.repository.RepositoryConnection;
 
-/**
- * Proxied test suite for the ESTCARD method (estimated cardinality aka fast range counts) and
+/*
+* Proxied test suite for the ESTCARD method (estimated cardinality aka fast range counts) and
  * related operations at the {@link RepositoryConnection} that tunnel through to the same REST API
  * method (getContexts(), size()).
  *
@@ -225,7 +225,7 @@ public class Test_REST_ESTCARD<S extends IIndexManager> extends AbstractTestNano
     assertEquals(3, contexts.size());
   }
 
-  /**
+  /*
    * @see <a href="http://trac.bigdata.com/ticket/1127">Extend ESTCARD method for exact range counts
    *     </a>
    */
@@ -250,7 +250,7 @@ public class Test_REST_ESTCARD<S extends IIndexManager> extends AbstractTestNano
       return p;
     }
 
-    /**
+    /*
      * Test the ESTCARD method when statements have been added, committed, and then removed from a
      * namespace that supports fully isolated read/write transactions.
      */

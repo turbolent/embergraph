@@ -23,8 +23,8 @@ package org.embergraph.quorum;
 
 import java.util.UUID;
 
-/**
- * {@link QuorumStateChangeListener} provides NOP method implementations.
+/*
+* {@link QuorumStateChangeListener} provides NOP method implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha;
 
-/**
- * An enumeration of HA status values. The set of enumerated states available here is intentionally
+/*
+* An enumeration of HA status values. The set of enumerated states available here is intentionally
  * a simplification of the internal states of the HA service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -29,5 +29,5 @@ public enum HAStatusEnum {
   /** Ready to handle requests as a quorum follower. */
   Follower,
   /** Not ready to handle HA read/write requests. */
-  NotReady;
+  NotReady
 }

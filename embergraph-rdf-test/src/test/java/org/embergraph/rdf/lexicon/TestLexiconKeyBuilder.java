@@ -42,8 +42,8 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-/**
- * Test suite for {@link LexiconKeyBuilder}.
+/*
+* Test suite for {@link LexiconKeyBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -60,7 +60,7 @@ public class TestLexiconKeyBuilder extends TestCase2 {
 
   private LexiconKeyBuilder fixture = null;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The {@link LexiconKeyBuilder} will wind up configured with the default {@link Locale}
@@ -84,7 +84,7 @@ public class TestLexiconKeyBuilder extends TestCase2 {
     super.tearDown();
   }
 
-  /**
+  /*
    * Tests encode of a key and the decode of its "code" byte.
    *
    * @see ITermIndexCodes
@@ -103,7 +103,7 @@ public class TestLexiconKeyBuilder extends TestCase2 {
         ITermIndexCodes.TERM_CODE_DTL, fixture.value2Key(new LiteralImpl("abc", XSD.BOOLEAN))[0]);
   }
 
-  /**
+  /*
    * Tests the gross ordering over the different kinds of {@link Value}s but deliberately does not
    * pay attention to the sort key ordering for string data.
    *
@@ -457,7 +457,7 @@ public class TestLexiconKeyBuilder extends TestCase2 {
     assertTrue(BytesUtil.compareBytes(k2, k3) < 0);
   }
 
-  /**
+  /*
    * Test verifies the ordering among URIs, Literals, and BNodes. This ordering is important when
    * batching terms of these different types into the term index since you want to insert the type
    * types according to this order for the best performance.
@@ -478,7 +478,7 @@ public class TestLexiconKeyBuilder extends TestCase2 {
     assertTrue(BytesUtil.compareBytes(k2, k3) < 0);
   }
 
-  /**
+  /*
    * This is an odd issue someone reported for the trunk. There are two version of a plain Literal
    * <code>Brian McCarthy</code>, but it appears that one of the two versions has a leading bell
    * character when you decode the Unicode byte[]. I think that this is actually an issue with the

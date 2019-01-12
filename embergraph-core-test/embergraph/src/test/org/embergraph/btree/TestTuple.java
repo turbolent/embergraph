@@ -5,8 +5,8 @@ import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.rawstore.IBlock;
 
-/**
- * Test helper for a tuple with static data.
+/*
+* Test helper for a tuple with static data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

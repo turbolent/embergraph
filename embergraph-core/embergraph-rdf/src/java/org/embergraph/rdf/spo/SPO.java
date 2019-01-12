@@ -41,8 +41,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Represents a triple, triple+SID, or quad. When used to represent a triple, the statement
+/*
+* Represents a triple, triple+SID, or quad. When used to represent a triple, the statement
  * identifier MAY be set on the triple after the object has been instantiated. When used to
  * represent a quad, the context position SHOULD be treated as immutable and {@link
  * #setStatementIdentifier(IV)} will reject arguments if they can not be validated as statement
@@ -72,7 +72,7 @@ public class SPO implements ISPO, java.io.Serializable {
   @SuppressWarnings("rawtypes")
   private final IV c;
 
-  /**
+  /*
    * The statement identifier (optional).
    *
    * <p>Note: this is not final since we create it only on demand.
@@ -80,33 +80,33 @@ public class SPO implements ISPO, java.io.Serializable {
   @SuppressWarnings("rawtypes")
   private IV sid = null;
 
-  //    /**
-  //     * Statement type (inferred, explicit, or axiom).
+  //    /*
+//     * Statement type (inferred, explicit, or axiom).
   //     */
   //    private StatementEnum type;
   //
-  //    /**
-  //     * User flag
+  //    /*
+//     * User flag
   //     */
   //    private boolean userFlag;
   //
-  //    /**
-  //     * Override flag used for downgrading statements during truth maintenance.
+  //    /*
+//     * Override flag used for downgrading statements during truth maintenance.
   //     */
   //    private transient boolean override = false;
   //
   ////    private transient boolean modified = false;
   //    private transient ModifiedEnum modified = ModifiedEnum.NONE;
   //
-  //   /**
-  //    * If sidable, we will lazily instantiate a sid when requested via
+  //   /*
+//    * If sidable, we will lazily instantiate a sid when requested via
   //    * {@link #c()}, {@link #getStatementIdentifier()}, and {@link SPO#get(int)}
   //    * with a parameter of 3. This should reduce heap pressure by only creating
   //    * sids on-demand on an as-needed basis.
   //    */
   //    private boolean sidable = false;
 
-  /**
+  /*
    * Bit flags used to represent statement type, user flag, override, modified enum, and sidable
    * flag. Much more compact representation.
    */
@@ -115,7 +115,7 @@ public class SPO implements ISPO, java.io.Serializable {
   /** Denotes which bit to find the StatementType within the {@link #flags}. Type takes two bits. */
   private static int TYPE_BIT = 0;
 
-  /**
+  /*
    * Denotes which bit to find the ModifiedEnum within the {@link #flags}. Modified takes two bits.
    */
   private static int MODIFIED_BIT = 3;
@@ -126,8 +126,8 @@ public class SPO implements ISPO, java.io.Serializable {
   /** Denotes which bit to find the override flag within the {@link #flags}. */
   private static int OVERRIDE_BIT = 6;
 
-  //    /**
-  //	 * Denotes which bit to find the sidable flag within the {@link #flags}.
+  //    /*
+//	 * Denotes which bit to find the sidable flag within the {@link #flags}.
   //	 */
   //    private static int SIDABLE_BIT = 7;
 
@@ -219,7 +219,7 @@ public class SPO implements ISPO, java.io.Serializable {
     return override();
   }
 
-  /**
+  /*
    * Triple constructor for a statement whose type is NOT known.
    *
    * <p>Note: This is primarily used when you want to discover the type of the statement.
@@ -235,7 +235,7 @@ public class SPO implements ISPO, java.io.Serializable {
     type(null);
   }
 
-  /**
+  /*
    * Quads constructor.
    *
    * @param s
@@ -252,7 +252,7 @@ public class SPO implements ISPO, java.io.Serializable {
     type(null);
   }
 
-  /**
+  /*
    * Construct a triple.
    *
    * <p>Note: When the statement is {@link StatementEnum#Inferred} you MUST also construct the
@@ -274,7 +274,7 @@ public class SPO implements ISPO, java.io.Serializable {
     type(type);
   }
 
-  /**
+  /*
    * Quads constructor with {@link StatementEnum}.
    *
    * @param s
@@ -294,7 +294,7 @@ public class SPO implements ISPO, java.io.Serializable {
     type(type);
   }
 
-  /**
+  /*
    * Variant to create an {@link SPO} from constants (used by the unit tests).
    *
    * @param s
@@ -311,7 +311,7 @@ public class SPO implements ISPO, java.io.Serializable {
     this(s.get(), p.get(), o.get(), type);
   }
 
-  /**
+  /*
    * Variant to create an SPO from a predicate - the {@link StatementEnum} and statement identifier
    * are not specified. This may be used as a convenience to extract the {s, p, o, c} from an {@link
    * IPredicate} or from an {@link IAccessPath} when the predicate is not known to be an {@link
@@ -352,7 +352,7 @@ public class SPO implements ISPO, java.io.Serializable {
     }
   }
 
-  /**
+  /*
    * Construct a triple from {@link EmbergraphValue}s and the specified statement type.
    *
    * @param s
@@ -369,7 +369,7 @@ public class SPO implements ISPO, java.io.Serializable {
     this(s.getIV(), p.getIV(), o.getIV(), type);
   }
 
-  /**
+  /*
    * Construct a triple/quad from a {@link EmbergraphStatement}. The term identifiers and statement
    * type information available on the {@link EmbergraphStatement} will be used to initialize the
    * {@link SPO}.
@@ -409,7 +409,7 @@ public class SPO implements ISPO, java.io.Serializable {
     return userFlag();
   }
 
-  /**
+  /*
    * Set the user flag bit on this SPO.
    *
    * @parm userFlag boolean flag
@@ -422,7 +422,7 @@ public class SPO implements ISPO, java.io.Serializable {
 
   private int hashCode = 0;
 
-  /**
+  /*
    * Hash code for the (s,p,o) per Sesame's {@link Statement#hashCode()}. It DOES NOT consider the
    * context position.
    */
@@ -463,7 +463,7 @@ public class SPO implements ISPO, java.io.Serializable {
     return equals((ISPO) o);
   }
 
-  /**
+  /*
    * True iff the {@link ISPO}s are the same object or if the same term identifiers are assigned for
    * the subject, predicate and object positions, and the same {@link StatementEnum} are the same.
    *
@@ -480,7 +480,7 @@ public class SPO implements ISPO, java.io.Serializable {
         && type() == stmt2.getStatementType();
   }
 
-  /**
+  /*
    * Return a representation of the statement using the term identifiers (the identifiers are NOT
    * resolved to terms).
    *
@@ -496,7 +496,7 @@ public class SPO implements ISPO, java.io.Serializable {
         + " >";
   }
 
-  /**
+  /*
    * Represents the term identifier together with its type (literal, bnode, uri, or statement
    * identifier).
    *
@@ -511,7 +511,7 @@ public class SPO implements ISPO, java.io.Serializable {
     return iv.toString();
   }
 
-  /**
+  /*
    * Resolves the term identifiers to terms against the store and returns a representation of the
    * statement using {@link IRawTripleStore#toString(IV, IV, IV)}.
    *
@@ -749,21 +749,21 @@ public class SPO implements ISPO, java.io.Serializable {
     flags = Bits.set(flags, OVERRIDE_BIT, override);
   }
 
-  //	/**
-  //	 * Sidable is hiding in the 7 bit of the flags.
+  //	/*
+//	 * Sidable is hiding in the 7 bit of the flags.
   //	 */
   //	private boolean sidable() {
   //		return Bits.get(flags, SIDABLE_BIT);
   //	}
   //
-  //	/**
-  //	 * Sidable is hiding in the 7 bit of the flags.
+  //	/*
+//	 * Sidable is hiding in the 7 bit of the flags.
   //	 */
   //	private void sidable(final boolean sidable) {
   //		flags = Bits.set(flags, SIDABLE_BIT, sidable);
   //	}
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This methods rely on the fact that IV implements Value. The returned IV will act like
@@ -777,7 +777,7 @@ public class SPO implements ISPO, java.io.Serializable {
     return (Resource) c();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This methods rely on the fact that IV implements Value. The returned IV will act like
@@ -788,10 +788,10 @@ public class SPO implements ISPO, java.io.Serializable {
    */
   @Override
   public Value getObject() {
-    return (Value) o();
+    return o();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This methods rely on the fact that IV implements Value. The returned IV will act like
@@ -805,7 +805,7 @@ public class SPO implements ISPO, java.io.Serializable {
     return (URI) p();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This methods rely on the fact that IV implements Value. The returned IV will act like

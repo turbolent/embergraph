@@ -29,8 +29,8 @@ import org.embergraph.journal.IResourceManager;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.service.Split;
 
-/**
- * A fly-weight wrapper that does not permit write operations and reads through onto an underlying
+/*
+* A fly-weight wrapper that does not permit write operations and reads through onto an underlying
  * {@link IIndex}.
  *
  * <p>Note: use this class sparingly. An index loaded from a historical commit point will always be
@@ -53,7 +53,7 @@ public class ReadOnlyIndex extends DelegateIndex {
     return super.getIndexMetadata().clone();
   }
 
-  /**
+  /*
    * {@link IResourceMetadata}[] is cloned to disallow modification (the {@link IResourceMetadata}
    * instances in the array are all dynamically created so changes to them do not propagate back to
    * the index).
@@ -105,8 +105,8 @@ public class ReadOnlyIndex extends DelegateIndex {
     return new ReadOnlyEntryIterator(super.rangeIterator(fromKey, toKey, capacity, flags, filter));
   }
 
-  //    /**
-  //     * Overridden to ensure that procedure is applied against read-only view and
+  //    /*
+//     * Overridden to ensure that procedure is applied against read-only view and
   //     * not the {@link DelegateIndex}.
   //     */
   //    @Override
@@ -116,8 +116,8 @@ public class ReadOnlyIndex extends DelegateIndex {
   //
   //    }
   //
-  //    /**
-  //     * Overridden to ensure that procedure is applied against read-only view and
+  //    /*
+//     * Overridden to ensure that procedure is applied against read-only view and
   //     * not the {@link DelegateIndex}.
   //     */
   //    @Override
@@ -135,7 +135,7 @@ public class ReadOnlyIndex extends DelegateIndex {
   //
   //    }
 
-  /**
+  /*
    * Overridden to ensure that procedure is applied against read-only view and not the {@link
    * DelegateIndex}.
    */

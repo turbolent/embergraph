@@ -31,8 +31,8 @@ import org.embergraph.rdf.internal.impl.uri.URIExtensionIV;
 import org.embergraph.rdf.internal.impl.uri.VocabURIByteIV;
 import org.junit.Test;
 
-/**
- * Encode/decode unit tests for {@link LiteralArrayIV}.
+/*
+* Encode/decode unit tests for {@link LiteralArrayIV}.
  *
  * @author <a href="mailto:mike@systap.com">Mike Personick</a>
  * @version $Id$

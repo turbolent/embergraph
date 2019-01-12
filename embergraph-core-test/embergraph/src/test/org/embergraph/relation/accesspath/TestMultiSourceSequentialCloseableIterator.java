@@ -31,8 +31,8 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for the {@link MultiSourceSequentialCloseableIterator}.
+/*
+* Test suite for the {@link MultiSourceSequentialCloseableIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -123,7 +123,7 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
     assertFalse(itr.add(new ThickAsynchronousIterator<String>(new String[] {"b"})));
   }
 
-  /**
+  /*
    * Verify that the iterator notices if it is asynchronously closed.
    *
    * @throws InterruptedException
@@ -174,7 +174,7 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that the iterator closes all sources iterators when it is closed.
    *
    * @throws InterruptedException
@@ -210,7 +210,7 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
     assertFalse(itr.hasNext());
   }
 
-  /**
+  /*
    * Verify that sources are closed when there is more than one source.
    *
    * @throws InterruptedException
@@ -262,7 +262,7 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
 
     private transient boolean open = true;
 
-    /**
+    /*
      * Index of the last element visited by {@link #next()} and <code>-1</code> if NO elements have
      * been visited.
      */
@@ -271,7 +271,7 @@ public class TestMultiSourceSequentialCloseableIterator extends TestCase2 {
     /** The array of elements to be visited by the iterator. */
     private final E[] a;
 
-    /**
+    /*
      * Create a thick iterator.
      *
      * @param a The array of elements to be visited by the iterator (may be empty, but may not be

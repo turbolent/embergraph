@@ -33,8 +33,8 @@ import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.IDataService;
 
-/**
- * A client-side view of a scale-out index.
+/*
+* A client-side view of a scale-out index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ import org.embergraph.service.IDataService;
 public interface IScaleOutClientIndex
     extends IClientIndex, ISplitter, IAsynchronousWriteBufferFactory {
 
-  /**
+  /*
    * Resolve the data service to which the index partition is mapped.
    *
    * @param pmd The index partition locator.
@@ -52,7 +52,7 @@ public interface IScaleOutClientIndex
    */
   IDataService getDataService(final PartitionLocator pmd);
 
-  /**
+  /*
    * Returns an iterator that will visit the {@link PartitionLocator}s for the specified scale-out
    * index key range.
    *
@@ -70,7 +70,7 @@ public interface IScaleOutClientIndex
   Iterator<PartitionLocator> locatorScan(
       final long ts, final byte[] fromKey, final byte[] toKey, final boolean reverseScan);
 
-  /**
+  /*
    * Notifies the client that a {@link StaleLocatorException} was received. The client will use this
    * information to refresh the {@link IMetadataIndex}.
    *
@@ -83,7 +83,7 @@ public interface IScaleOutClientIndex
   void staleLocator(
       final long ts, final PartitionLocator locator, final StaleLocatorException cause);
 
-  /**
+  /*
    * Return a {@link ThreadLocal} {@link AtomicInteger} whose value is the recursion depth of the
    * current {@link Thread}. This is initially zero when the task is submitted by the application.
    * The value incremented when a task results in a {@link StaleLocatorException} and is decremented

@@ -27,8 +27,8 @@ import java.io.Serializable;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.IRule;
 
-/**
- * A factory for objects that handle the execution of an {@link IRule}. This interface is {@link
+/*
+* A factory for objects that handle the execution of an {@link IRule}. This interface is {@link
  * Serializable} since instances of the interface must travel with the {@link IRule} to which they
  * are attached.
  *
@@ -37,7 +37,7 @@ import org.embergraph.relation.rule.IRule;
  */
 public interface IRuleTaskFactory extends Serializable {
 
-  /**
+  /*
    * The object will be used to evaluate the rule for the {@link IRule}.
    *
    * @param rule The rule (MAY have been specialized since it was declared).
@@ -46,5 +46,5 @@ public interface IRuleTaskFactory extends Serializable {
    *     must be written.
    * @return <code>null</code> unless custom evaluation is desired.
    */
-  public IStepTask newTask(IRule rule, IJoinNexus joinNexus, IBuffer<ISolution[]> buffer);
+  IStepTask newTask(IRule rule, IJoinNexus joinNexus, IBuffer<ISolution[]> buffer);
 }

@@ -30,8 +30,8 @@ import org.embergraph.btree.raba.MutableValueBuffer;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
-/**
- * This "codes" a raba as a {@link MutableKeyBuffer} or {@link MutableValueBuffer} depending on
+/*
+* This "codes" a raba as a {@link MutableKeyBuffer} or {@link MutableValueBuffer} depending on
  * whether it represents B+Tree keys or values. This class is used by some unit tests as a
  * convenience for establishing a baseline for the performance of {@link ICodedRaba}s against the
  * core mutable {@link IRaba} implementations actually used by {@link Node} and {@link Leaf}.
@@ -101,7 +101,7 @@ public class MutableRabaCoder implements IRabaCoder {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * {@link MutableKeyBuffer} with mock implementation of {@link ICodedRaba} methods.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -124,7 +124,7 @@ public class MutableRabaCoder implements IRabaCoder {
     }
   }
 
-  /**
+  /*
    * {@link MutableValueBuffer} with mock implementation of {@link ICodedRaba} methods.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

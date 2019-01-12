@@ -31,8 +31,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 
-/**
- * Operator combines the string values over the presented binding sets for the given variable.
+/*
+* Operator combines the string values over the presented binding sets for the given variable.
  * Missing values are ignored. The initial value is an empty plain literal.
  *
  * @author thompsonbry
@@ -45,9 +45,9 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
   public interface Annotations extends AggregateBase.Annotations {
 
     /** The namespace of the lexicon relation. */
-    public String NAMESPACE = GROUP_CONCAT.class.getName() + ".namespace";
+    String NAMESPACE = GROUP_CONCAT.class.getName() + ".namespace";
 
-    /**
+    /*
      * Required string property provides the separator used when combining the {@link
      * IValueExpression} computed for each solution within the group.
      *
@@ -55,23 +55,23 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
      */
     String SEPARATOR = "separator";
 
-    /**
+    /*
      * The maximum #of values to concatenate (positive integer and <code>-1</code> to indicate no
      * bound) (default {@value #DEFAULT_VALUE_LIMIT})
      */
     String VALUE_LIMIT = GROUP_CONCAT.class.getName() + ".valueLimit";
 
     /** The default indicates no limit. */
-    final int DEFAULT_VALUE_LIMIT = -1;
+    int DEFAULT_VALUE_LIMIT = -1;
 
-    /**
+    /*
      * The maximum #of characters permitted in the generated value (positive integer and <code>-1
      * </code> to indicate no bound) (default {@value #DEFAULT_CHARACTER_LIMIT}).
      */
     String CHARACTER_LIMIT = GROUP_CONCAT.class.getName() + ".characterLimit";
 
     /** The default indicates no limit. */
-    final int DEFAULT_CHARACTER_LIMIT = -1;
+    int DEFAULT_CHARACTER_LIMIT = -1;
   }
 
   public GROUP_CONCAT(GROUP_CONCAT op) {
@@ -89,7 +89,7 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
 
   }
 
-  /**
+  /*
    * @param var The variable whose values will be combined.
    * @param sep The separator string (note that a space (0x20) is the default in the SPARQL
    *     recommendation).
@@ -147,21 +147,21 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
 
   protected transient EmbergraphValueFactory vf;
 
-  /**
+  /*
    * The running concatenation of observed bound values.
    *
    * <p>Note: This field is guarded by the monitor on the {@link GROUP_CONCAT} instance.
    */
   private transient StringBuilder aggregated = null;
 
-  /**
+  /*
    * The #of values in {@link #aggregated}.
    *
    * <p>Note: This field is guarded by the monitor on the {@link GROUP_CONCAT} instance.
    */
   private transient long nvalues = 0;
 
-  /**
+  /*
    * <code>false</code> unless either the value limit and/or the character length limit has been
    * exceeded.
    */
@@ -182,7 +182,7 @@ public class GROUP_CONCAT extends AggregateBase<IV> implements INeedsMaterializa
     cache();
   }
 
-  /**
+  /*
    * Cache stuff.
    *
    * <p>Note: The {@link PipelinedAggregationOp} does NOT invoke {@link #reset()} so we have to

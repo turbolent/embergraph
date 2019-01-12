@@ -30,8 +30,8 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.service.DistributedTransactionService.SnapshotHelper;
 
-/**
- * Unit tests for {@link SnapshotHelper}.
+/*
+* Unit tests for {@link SnapshotHelper}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -112,7 +112,7 @@ public class TestSnapshotHelper extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Return an array containing the ordered keys in the {@link CommitTimeIndex}.
    *
    * @param ndx

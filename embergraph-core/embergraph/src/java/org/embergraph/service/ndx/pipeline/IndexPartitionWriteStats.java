@@ -1,7 +1,7 @@
 package org.embergraph.service.ndx.pipeline;
 
-/**
- * Statistics reported for each index partition.
+/*
+* Statistics reported for each index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

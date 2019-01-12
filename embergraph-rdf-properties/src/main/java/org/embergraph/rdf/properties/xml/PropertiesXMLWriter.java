@@ -59,8 +59,8 @@ import org.apache.commons.io.output.WriterOutputStream;
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesWriter;
 
-/**
- * {@link PropertiesFormat} XML writer.
+/*
+* {@link PropertiesFormat} XML writer.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -68,7 +68,7 @@ public class PropertiesXMLWriter implements PropertiesWriter {
 
   private final OutputStream os;
 
-  /**
+  /*
    * Creates a new {@link PropertiesXMLWriter} that will write to the supplied {@link OutputStream}.
    *
    * @param out The OutputStream to write the {@link Properties} document to.
@@ -78,7 +78,7 @@ public class PropertiesXMLWriter implements PropertiesWriter {
     this.os = out;
   }
 
-  /**
+  /*
    * Creates a new {@link PropertiesXMLWriter} that will write to the supplied {@link Writer}.
    *
    * @param writer The {@link Writer} to write the {@link Properties} document to.

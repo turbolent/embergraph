@@ -68,8 +68,8 @@ import org.embergraph.util.BytesUtil;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * A factory for a statement pattern slicing service. It accepts a group with a single triple
+/*
+* A factory for a statement pattern slicing service. It accepts a group with a single triple
  * pattern in it:
  *
  * <pre>
@@ -99,7 +99,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
   public static final URI SERVICE_KEY = new URIImpl(BD.NAMESPACE + "slice");
 
   /** The service params for this service. */
-  public static interface SliceParams {
+  public interface SliceParams {
 
     /** The offset into the range. */
     URI OFFSET = new URIImpl(SERVICE_KEY.stringValue() + ".offset");
@@ -117,7 +117,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
     URI RANGE = new URIImpl(SERVICE_KEY.stringValue() + ".range");
   }
 
-  /**
+  /*
    * Keep a timeout cache of start and end indices for a give predicate. Typically these slice calls
    * happen multiple times in a row in a very short time period, so it's best to not have to go back
    * to the index every time for this information.
@@ -180,7 +180,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
     return new SliceCall(store, sp, serviceOptions, serviceParams);
   }
 
-  /**
+  /*
    * Verify that there is only a single statement pattern node and that the service parameters are
    * valid.
    */
@@ -252,7 +252,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
     return sp;
   }
 
-  /**
+  /*
    * Note: This has the {@link AbstractTripleStore} reference attached. This is not a {@link
    * Serializable} object. It MUST run on the query controller.
    */
@@ -283,7 +283,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
       this.serviceParams = serviceParams;
     }
 
-    /**
+    /*
      * Run a slice over an access path. Currently only implemented to work with zero or one incoming
      * bindings, and all variables in the incoming binding must be in use in the statement pattern.
      */
@@ -366,15 +366,14 @@ public class SliceServiceFactory extends AbstractServiceFactory {
       // Create the predicate.
       @SuppressWarnings("unchecked")
       final IPredicate<ISPO> pred =
-          (IPredicate<ISPO>)
-              db.getSPORelation()
-                  .getPredicate(
-                      getTerm(sp, bs, 0),
-                      getTerm(sp, bs, 1),
-                      getTerm(sp, bs, 2),
-                      getTerm(sp, bs, 3),
-                      null,
-                      rangeBOp);
+          db.getSPORelation()
+              .getPredicate(
+                  getTerm(sp, bs, 0),
+                  getTerm(sp, bs, 1),
+                  getTerm(sp, bs, 2),
+                  getTerm(sp, bs, 3),
+                  null,
+                  rangeBOp);
 
       if (pred == null) {
 
@@ -557,7 +556,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
       return new ThickCloseableIterator<IBindingSet>(bSets, i);
     }
 
-    /**
+    /*
      * Get the IV in the statement pattern at the specified position, or get the value from the
      * binding set for the variable at that position. Return null if not bound in either place.
      */
@@ -569,7 +568,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
 
       if (t.isConstant()) {
 
-        return ((IConstant<IV>) t.getValueExpression()).get();
+        return t.getValueExpression().get();
 
       } else {
 
@@ -586,7 +585,7 @@ public class SliceServiceFactory extends AbstractServiceFactory {
       }
     }
 
-    /**
+    /*
      * Use the index to find the index of the tuple for the specified key (or the index of the next
      * real tuple after the specified key).
      */

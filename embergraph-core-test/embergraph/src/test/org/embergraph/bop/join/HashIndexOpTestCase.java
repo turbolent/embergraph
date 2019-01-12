@@ -39,8 +39,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 
-/**
- * Abstract test suite for {@link HashIndexOp} implementations.
+/*
+* Abstract test suite for {@link HashIndexOp} implementations.
  *
  * <p>TODO Test variant with non-empty join vars.
  *
@@ -92,7 +92,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Factory for the {@link HashIndexOp} implementations.
    *
    * @param namespace The namespace of the lexicon relation (required by the ivCache for the {@link
@@ -105,7 +105,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
   protected abstract SolutionSetHashJoinOp newSolutionSetHashJoinOp(
       final BOp[] args, final NV... anns);
 
-  /**
+  /*
    * Combines the two arrays, appending the contents of the 2nd array to the contents of the first
    * array.
    *
@@ -136,7 +136,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
     return c;
   }
 
-  /**
+  /*
    * A simple test of a {@link HashIndexOp} followed by a {@link SolutionSetHashJoinOp}. In practice
    * we should never follow the {@link HashIndexOp} immediately with a {@link SolutionSetHashJoinOp}
    * as this is basically a complex NOP. However, this does provide a simple test of the most basic
@@ -223,7 +223,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
     AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected, runningQuery);
   }
 
-  /**
+  /*
    * Unit test of variant with an OPTIONAL join.
    *
    * <p>Note: Since there are no intervening joins or filters, this produces the same output as the
@@ -311,7 +311,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
     AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected, runningQuery);
   }
 
-  /**
+  /*
    * Test variant where the index is built from a {@link SolutionSetStream} available as an
    * attribute to the {@link IRunningQuery}.
    *
@@ -403,16 +403,14 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
         new ValidateIndexOp(
             new BOp[] {op},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, 2),
-                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  //                        new NV(PipelineOp.Annotations.LAST_PASS, true),
-                  //                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),
-                  new NV(PipelineOp.Annotations.PIPELINED, false),
-                  new NV(ValidateIndexOp.Annotations.EXPECTED_SOLUTIONS, solutionsToIndex),
-                  new NV(ValidateIndexOp.Annotations.NAMED_SET_SOURCE_REF, namedSolutionSetSource),
-                  new NV(ValidateIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet),
-                }));
+                new NV(BOp.Annotations.BOP_ID, 2),
+                new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                //                        new NV(PipelineOp.Annotations.LAST_PASS, true),
+                //                        new NV(PipelineOp.Annotations.MAX_PARALLEL,1),
+                new NV(PipelineOp.Annotations.PIPELINED, false),
+                new NV(ValidateIndexOp.Annotations.EXPECTED_SOLUTIONS, solutionsToIndex),
+                new NV(ValidateIndexOp.Annotations.NAMED_SET_SOURCE_REF, namedSolutionSetSource),
+                new NV(ValidateIndexOp.Annotations.NAMED_SET_REF, namedSolutionSet)));
 
     final PipelineOp query = op2;
 
@@ -449,7 +447,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
     AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expected, runningQuery);
   }
 
-  /**
+  /*
    * Operator is used to validate the {@link HashIndexOp} by verifying the contents of the generated
    * index before the life cycle of the index is ended (when the {@link IRunningQuery} ends, the
    * memory manager associated with the query is cleared and the index data will no longer be
@@ -464,7 +462,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
       /** Identifies the solutions that should have been indexed by the {@link HashIndexOp}. */
       String NAMED_SET_SOURCE_REF = HashIndexOp.Annotations.NAMED_SET_SOURCE_REF;
 
-      /**
+      /*
        * Identifies the index that is the output of the {@link HashIndexOp}. This is the index that
        * we will validate.
        */
@@ -509,7 +507,7 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
         this.context = context;
       }
 
-      /**
+      /*
        * We need to verify that the named solution set was created and attached to the query and
        * that the correct solutions were placed into the index.
        */
@@ -539,16 +537,16 @@ public abstract class HashIndexOpTestCase extends TestCase2 {
         assertNotNull(
             "Source not found: " + namedSetSourceRef, queryAttributes2.get(namedSetSourceRef));
 
-        /*
-         * Verify that the generated index has the correct solutions.
+      /*
+       * Verify that the generated index has the correct solutions.
          */
         final IHashJoinUtility tmp = (IHashJoinUtility) queryAttributes2.get(namedSetRef);
 
         // Verify index scan against expected solutions.
         AbstractQueryEngineTestCase.assertSameSolutionsAnyOrder(expectedSolutions, tmp.indexScan());
 
-        /*
-         * Copy the source solutions to the sink.
+      /*
+       * Copy the source solutions to the sink.
          */
         BOpUtility.copy(
             context.getSource(),

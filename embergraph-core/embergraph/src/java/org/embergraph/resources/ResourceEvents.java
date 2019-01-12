@@ -35,8 +35,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.journal.TimestampUtility;
 
-/**
- * Class encapsulates reporting API for resource (index and store files) events.
+/*
+* Class encapsulates reporting API for resource (index and store files) events.
  *
  * <p>Resource consumption events include
  *
@@ -77,7 +77,7 @@ import org.embergraph.journal.TimestampUtility;
  */
 public class ResourceEvents {
 
-  /**
+  /*
    * Logger.
    *
    * @todo change the logger configuration to write on a JMS queue or JINI discovered service in
@@ -85,13 +85,13 @@ public class ResourceEvents {
    */
   private static final Logger log = Logger.getLogger(ResourceEvents.class);
 
-  //    /**
-  //     * True iff the {@link #log} level is DEBUG or less.
+  //    /*
+//     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final protected static boolean DEBUG = log.isDebugEnabled();
   //
-  //    /**
-  //     * True iff the {@link #log} level is log.isInfoEnabled() or less.
+  //    /*
+//     * True iff the {@link #log} level is log.isInfoEnabled() or less.
   //     */
   //    final protected static boolean log.isInfoEnabled() = log.isInfoEnabled();
 
@@ -99,7 +99,7 @@ public class ResourceEvents {
 
   static NumberFormat fpf;
 
-  /**
+  /*
    * Leading zeros without commas used to format the partition identifiers into index segment file
    * names. This uses 10 digits, which is enough to represent {@link Integer#MAX_VALUE}.
    */
@@ -123,7 +123,7 @@ public class ResourceEvents {
     leadingZeros.setGroupingUsed(false);
   }
 
-  /**
+  /*
    * Report opening of a mutable unisolated named index on an {@link IJournal}.
    *
    * @param name The index name.
@@ -133,7 +133,7 @@ public class ResourceEvents {
     if (log.isInfoEnabled()) log.info("name=" + name);
   }
 
-  /**
+  /*
    * Report closing of a mutable unisolated named index on an {@link IJournal}.
    *
    * @param name The index name.
@@ -147,7 +147,7 @@ public class ResourceEvents {
     if (log.isInfoEnabled()) log.info("name=" + name);
   }
 
-  /**
+  /*
    * Report drop of a named unisolated index.
    *
    * @param name The index name.
@@ -161,8 +161,8 @@ public class ResourceEvents {
    * Index segment reporting.
    */
 
-  //    /**
-  //     * Report that an {@link IndexSegment} has been opened.
+  //    /*
+//     * Report that an {@link IndexSegment} has been opened.
   //     *
   //     * @param name
   //     *            The index name or null if this is not a named index.
@@ -188,8 +188,8 @@ public class ResourceEvents {
   //
   //    }
   //
-  //    /**
-  //     * Report that an {@link IndexSegment} has been closed.
+  //    /*
+//     * Report that an {@link IndexSegment} has been closed.
   //     *
   //     * @param filename
   //     *
@@ -213,7 +213,7 @@ public class ResourceEvents {
    * on the data service.
    */
 
-  /**
+  /*
    * Report the start of a new transaction.
    *
    * @param startTime Both the transaction identifier and its global start time.
@@ -224,7 +224,7 @@ public class ResourceEvents {
     if (log.isInfoEnabled()) log.info(TimestampUtility.toString(startTime));
   }
 
-  /**
+  /*
    * Report completion of a transaction.
    *
    * @param tx The transaction identifier.
@@ -247,7 +247,7 @@ public class ResourceEvents {
               + (revisionTime - tx));
   }
 
-  /**
+  /*
    * Report the isolation of a named index by a transaction.
    *
    * @param startTime The transaction identifier.
@@ -274,7 +274,7 @@ public class ResourceEvents {
    * Journal file reporting.
    */
 
-  /**
+  /*
    * Report the opening of an {@link IJournal} resource.
    *
    * @param filename The filename or null iff the journal was not backed by a file.
@@ -287,7 +287,7 @@ public class ResourceEvents {
       log.info("filename=" + filename + ", #bytes=" + nbytes + ", mode=" + bufferMode);
   }
 
-  /**
+  /*
    * Report the extension of an {@link IJournal}.
    *
    * @param filename The filename or null iff the journal was not backed by a file.
@@ -301,7 +301,7 @@ public class ResourceEvents {
     if (log.isInfoEnabled()) log.info("filename=" + filename + ", #bytes=" + nbytes);
   }
 
-  /**
+  /*
    * Report close of an {@link IJournal} resource.
    *
    * @param filename The filename or null iff the journal was not backed by a file.
@@ -311,7 +311,7 @@ public class ResourceEvents {
     if (log.isInfoEnabled()) log.info("filename=" + filename);
   }
 
-  /**
+  /*
    * Report deletion of an {@link IJournal} resource.
    *
    * @param filename The filename or null iff the journal was not backed by a file.

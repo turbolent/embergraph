@@ -26,8 +26,8 @@ import it.unimi.dsi.bits.LongArrayBitVector;
 import java.io.Serializable;
 import java.util.Random;
 
-/**
- * A Bloom filter for integers.
+/*
+* A Bloom filter for integers.
  *
  * <p>Instances of this class represent a set of integers (with false positives) using a Bloom
  * filter. Because of the way Bloom filters work, you cannot remove elements.
@@ -68,7 +68,7 @@ public class IntBloomFilter implements Serializable {
 
   private static final boolean DEBUG = false;
 
-  /**
+  /*
    * Creates a new Bloom filter with given number of hash functions and expected number of elements.
    *
    * @param n the expected number of elements.
@@ -92,7 +92,7 @@ public class IntBloomFilter implements Serializable {
     }
   }
 
-  /**
+  /*
    * Hashes the given integer with the given hash function.
    *
    * @param x an integer.
@@ -104,7 +104,7 @@ public class IntBloomFilter implements Serializable {
     return (((a[k] * x) ^ b[k]) & 0x7FFFFFFFFFFFFFFFL) % m;
   }
 
-  /**
+  /*
    * Checks whether the given integer is in this filter.
    *
    * <p>Note that this method may return true on an integer that has not been added to the filter.
@@ -122,7 +122,7 @@ public class IntBloomFilter implements Serializable {
     return true;
   }
 
-  /**
+  /*
    * Adds an integer to the filter.
    *
    * @param x an integer.

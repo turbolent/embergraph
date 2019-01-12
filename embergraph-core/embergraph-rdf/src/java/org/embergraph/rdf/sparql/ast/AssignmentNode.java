@@ -10,8 +10,8 @@ import org.embergraph.bop.ModifiableBOpBase;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
-/**
- * AST node models the assignment of a value expression to a variable
+/*
+* AST node models the assignment of a value expression to a variable
  *
  * <pre>
  * BIND( valueExpr AS ?var )
@@ -29,7 +29,7 @@ public class AssignmentNode extends GroupMemberValueExpressionNodeBase
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * @param var The variable which will be bound.
    * @param ve The value expression to be computed.
    */
@@ -52,7 +52,7 @@ public class AssignmentNode extends GroupMemberValueExpressionNodeBase
     if (!(args[0] instanceof VarNode)) throw new IllegalArgumentException();
   }
 
-  /**
+  /*
    * The variable onto which the assignment is bound (as a {@link VarNode}).
    *
    * @return For <code>BIND(valueExpr AS ?var)</code> this returns <code>?var</code> as a {@link
@@ -63,7 +63,7 @@ public class AssignmentNode extends GroupMemberValueExpressionNodeBase
     return (VarNode) get(0);
   }
 
-  /**
+  /*
    * The variable onto which the assignment is bound (as an {@link IVariable}).
    *
    * @return For <code>BIND(valueExpr AS ?var)</code> this returns <code>?var</code> as an {@link
@@ -75,7 +75,7 @@ public class AssignmentNode extends GroupMemberValueExpressionNodeBase
     return getVarNode().getValueExpression();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO Review. I believe that AssignmentNode.getValueExpression() should always return the

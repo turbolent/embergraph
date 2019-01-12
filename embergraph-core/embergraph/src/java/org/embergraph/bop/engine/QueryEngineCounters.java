@@ -26,8 +26,8 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.Instrument;
 
-/**
- * {@link QueryEngine} performance counters.
+/*
+* {@link QueryEngine} performance counters.
  *
  * @author thompsonbry
  */
@@ -36,7 +36,7 @@ public class QueryEngineCounters implements ICounterSetAccess {
   /** The #of queries which have been executed (set on completion). */
   protected final CAT queryStartCount = new CAT();
 
-  /**
+  /*
    * The #of queries which have been executed (set on completion).
    *
    * <p>Note: This counts both normal and abnormal query termination.
@@ -46,7 +46,7 @@ public class QueryEngineCounters implements ICounterSetAccess {
   /** The #of instances of the query which terminated abnormally. */
   protected final CAT queryErrorCount = new CAT();
 
-  /**
+  /*
    * The total elapsed time (millis) for evaluation queries. This is the wall clock time per query.
    * The aggregated wall clock time per query will sum to greater than the elapsed wall clock time
    * in any interval where there is more than one query running concurrently.
@@ -58,8 +58,8 @@ public class QueryEngineCounters implements ICounterSetAccess {
    * tasks.
    */
 
-  // /**
-  // * The #of non-empty work queues.
+  // /*
+// * The #of non-empty work queues.
   // */
   // final CAT workQueueCount = new CAT();
 
@@ -69,7 +69,7 @@ public class QueryEngineCounters implements ICounterSetAccess {
   /** The #of times that a work queue has blocked. */
   protected final CAT blockedWorkQueueRunningTotal = new CAT();
 
-  /**
+  /*
    * The total number of chunks of solutions currently buffered for the input queues for operators
    * on the query engine (regardless of whether the native heap or the managed object heap is being
    * used).
@@ -78,7 +78,7 @@ public class QueryEngineCounters implements ICounterSetAccess {
    */
   protected final CAT bufferedChunkMessageCount = new CAT();
 
-  /**
+  /*
    * The total number of bytes for solutions currently buffered on the <strong>native heap</strong>
    * for the input queues for operators on the query engine.
    *
@@ -95,7 +95,7 @@ public class QueryEngineCounters implements ICounterSetAccess {
   /** The #of operator evaluation tasks (chunk tasks) which have ended. */
   protected final CAT operatorHaltCount = new CAT();
 
-  /**
+  /*
    * The size of the deadline queue.
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/772">Query timeout only checked

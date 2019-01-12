@@ -35,8 +35,8 @@ import org.openrdf.query.Dataset;
 import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.sail.SailException;
 
-/**
- * Extended to expose the connection used to execute the SPARQL UPDATE request.
+/*
+* Extended to expose the connection used to execute the SPARQL UPDATE request.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -57,7 +57,7 @@ public class AST2BOpUpdateContext extends AST2BOpContext {
 
   private Dataset dataset;
 
-  /**
+  /*
    * The timestamp associated with the commit point for the update and <code>-1</code> until there
    * is a commit.
    */
@@ -73,7 +73,7 @@ public class AST2BOpUpdateContext extends AST2BOpContext {
     this.includeInferred = includeInferred;
   }
 
-  /**
+  /*
    * The timestamp associated with the commit point for the update and <code>-1</code> if until
    * there is a commit.
    */
@@ -87,7 +87,7 @@ public class AST2BOpUpdateContext extends AST2BOpContext {
     this.commitTime.set(commitTime);
   }
 
-  /**
+  /*
    * @param astContainer
    * @param db
    * @throws SailException
@@ -105,7 +105,7 @@ public class AST2BOpUpdateContext extends AST2BOpContext {
     this.f = (EmbergraphValueFactory) sail.getValueFactory();
   }
 
-  /**
+  /*
    * The timestamp associated with the update operation (either a read/write transaction or {@link
    * ITx#UNISOLATED}.
    */
@@ -115,7 +115,7 @@ public class AST2BOpUpdateContext extends AST2BOpContext {
     return conn.getTripleStore().getTimestamp();
   }
 
-  /**
+  /*
    * Return the {@link BD#NULL_GRAPH} with the {@link IVCache} resolved and set.
    *
    * <p>FIXME This should always be part of the Vocabulary and the IVCache should be set (which is

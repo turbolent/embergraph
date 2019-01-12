@@ -25,8 +25,8 @@ package org.embergraph.striterator;
 
 import java.util.Iterator;
 
-/**
- * Chunked ordered streaming iterator.
+/*
+* Chunked ordered streaming iterator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -39,7 +39,7 @@ public class ChunkedOrderedStriterator<I extends IChunkedOrderedIterator<E>, E>
     super(src);
   }
 
-  /**
+  /*
    * Wraps the source iterator as a chunked ordered iterator.
    *
    * @param chunkSize The chunk size.
@@ -63,7 +63,7 @@ public class ChunkedOrderedStriterator<I extends IChunkedOrderedIterator<E>, E>
     return src.nextChunk(keyOrder);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Strengthened return type.

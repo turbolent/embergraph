@@ -36,8 +36,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test for {@link RuleRdfs03}. Also see {@link TestRuleRdfs07}.
+/*
+* Test for {@link RuleRdfs03}. Also see {@link TestRuleRdfs07}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -54,7 +54,7 @@ public class TestRuleRdfs03 extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Literals may not appear in the subject position, but an rdfs4b entailment can put them there
    * unless you explicitly filter it out.
    *

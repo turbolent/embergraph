@@ -41,8 +41,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * Stress test for {@link SliceOp} in which a large number of small chunks are fed into the query
+/*
+* Stress test for {@link SliceOp} in which a large number of small chunks are fed into the query
  * such that the concurrency constraints of the slice are stress tested. {@link
  * SliceOp#isSharedState()} returns <code>true</code> so each invocation of the same {@link SliceOp}
  * operator instance should use the same {@link SliceStats} object. This test will fail if that is
@@ -98,7 +98,7 @@ public class TestQueryEngine_Slice extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single, chunk containing all of the
    * specified {@link IBindingSet}s.
    *
@@ -129,7 +129,7 @@ public class TestQueryEngine_Slice extends TestCase2 {
     doSliceTest(500L /* offset */, 1500L /* limit */, timeout, ntrials, poolSize);
   }
 
-  /**
+  /*
    * @param timeout
    * @param ntrials
    * @param poolSize
@@ -168,24 +168,20 @@ public class TestQueryEngine_Slice extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, startId),
-                  new NV(
-                      MemorySortOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, startId),
+                new NV(
+                    MemorySortOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final SliceOp query =
         new SliceOp(
             new BOp[] {startOp},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.SHARED_STATE, true),
-                  new NV(SliceOp.Annotations.OFFSET, offset),
-                  new NV(SliceOp.Annotations.LIMIT, limit),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.SHARED_STATE, true),
+                new NV(SliceOp.Annotations.OFFSET, offset),
+                new NV(SliceOp.Annotations.LIMIT, limit),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     final UUID queryId = UUID.randomUUID();
     final IRunningQuery q =

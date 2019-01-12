@@ -28,8 +28,8 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.lexicon.ITextIndexer.FullTextQuery;
 
-/**
- * Simple test verifies that the {@link FullTextIndex} data are restart safe.
+/*
+* Simple test verifies that the {@link FullTextIndex} data are restart safe.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

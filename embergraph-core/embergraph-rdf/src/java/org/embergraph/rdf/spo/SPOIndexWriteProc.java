@@ -36,8 +36,8 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Procedure for batch insert on a single statement index (or index partition).
+/*
+* Procedure for batch insert on a single statement index (or index partition).
  *
  * <p>The key for each statement encodes the {s:p:o} of the statement in the order that is
  * appropriate for the index (SPO, POS, OSP, etc). The key is written unchanged on the index.
@@ -77,7 +77,7 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
   /** De-serialization constructor. */
   public SPOIndexWriteProc() {}
 
-  /**
+  /*
    * @param fromIndex
    * @param toIndex
    * @param keys
@@ -104,7 +104,7 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
 
     final boolean reportMutation;
 
-    /**
+    /*
      * Instance reports back which statements were modified (inserted into the index or updated on
      * the index). The return value of the procedure is a {@link ResultBitBuffer}. The mutation
      * count
@@ -112,7 +112,7 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
     public static IndexWriteProcConstructor REPORT_MUTATION =
         new IndexWriteProcConstructor(true /* reportMutation */);
 
-    /**
+    /*
      * Instance does not report by which statements were modified (inserted into the index or
      * updated on the index). The return value of the RPC is a {@link Long} mutation count.
      */
@@ -144,7 +144,7 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
     }
   }
 
-  /**
+  /*
    * @return The #of statements actually written on the index as an {@link Long} -or- a {@link
    *     ResultBitBuffer} IFF <code>reportMutations := true</code>.
    */
@@ -163,7 +163,7 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
         (SPOTupleSerializer) ndx.getIndexMetadata().getTupleSerializer();
 
     // true iff logging is enabled and this is the primary (SPO/SPOC) index.
-    final boolean isPrimaryIndex = INFO ? tupleSer.getKeyOrder().isPrimaryIndex() : false;
+    final boolean isPrimaryIndex = INFO && tupleSer.getKeyOrder().isPrimaryIndex();
 
     // Array used to report by which statements were modified by this operation.
     final ModifiedEnum[] modified = reportMutation ? new ModifiedEnum[n] : null;
@@ -216,8 +216,8 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
 
       if (oldval == null) {
 
-        /*
-         * Statement is NOT pre-existing.
+      /*
+       * Statement is NOT pre-existing.
          */
 
         ndx.insert(key, tupleSer.serializeVal(/*tmp,*/ false /* override */, userFlag, newType));
@@ -232,8 +232,8 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
 
       } else {
 
-        /*
-         * Statement is pre-existing.
+      /*
+       * Statement is pre-existing.
          */
 
         // old statement type.
@@ -266,8 +266,8 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
 
           if (oldType != newType) {
 
-            /*
-             * We are downgrading a statement from explicit to
+          /*
+       * We are downgrading a statement from explicit to
              * inferred during TM.
              */
 
@@ -354,8 +354,8 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
     }
   }
 
-  //    /**
-  //     * Used by {@link #decodeStatementIdentifier(StatementEnum, byte[])}
+  //    /*
+//     * Used by {@link #decodeStatementIdentifier(StatementEnum, byte[])}
   //     */
   //    private transient final DataInputBuffer vbuf = new DataInputBuffer(
   //            new byte[] {});

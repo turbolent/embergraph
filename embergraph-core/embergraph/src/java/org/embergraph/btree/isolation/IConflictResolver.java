@@ -27,8 +27,8 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.Tx;
 
-/**
- * An interface invoked during backward validation when a write-write conflict has been detected.
+/*
+* An interface invoked during backward validation when a write-write conflict has been detected.
  * The implementation must either resolve the write-write conflict by returning a new version in
  * which the conflict is resolved or report an unresolvable conflict, in which case backward
  * validation will force the transaction to abort.
@@ -63,7 +63,7 @@ import org.embergraph.journal.Tx;
  */
 public interface IConflictResolver extends Serializable {
 
-  /**
+  /*
    * Resolve a write-write conflict between a committed version on the journal and the current
    * version within a transaction that is validating.
    *
@@ -73,6 +73,6 @@ public interface IConflictResolver extends Serializable {
    *     conflict exists.
    * @return true iff the conflict was resolved.
    */
-  public boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple)
+  boolean resolveConflict(IIndex writeSet, ITuple txTuple, ITuple currentTuple)
       throws Exception;
 }

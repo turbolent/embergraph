@@ -1,15 +1,15 @@
 package org.embergraph.search;
 
-/**
- * Mutable metadata for the occurrences of a term within a field of some document.
+/*
+* Mutable metadata for the occurrences of a term within a field of some document.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TermMetadata implements ITermMetadata {
 
-  //    /**
-  //     * The token.
+  //    /*
+//     * The token.
   //     */
   //    private final String token;
 

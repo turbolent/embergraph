@@ -40,8 +40,8 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStarJoin;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
-/**
- * The evaluation order is determined by analysis of the propagation of bindings. The most selective
+/*
+* The evaluation order is determined by analysis of the propagation of bindings. The most selective
  * predicate is chosen first (having the fewest unbound variables with ties broken by a range count
  * on the data) and "fake" bindings are propagated to the other predicates in the tail. This process
  * is repeated until all variables are bound and an evaluation order has been determined.
@@ -70,7 +70,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
 
   private static final transient long NO_SHARED_VARS = Long.MAX_VALUE - 3;
 
-  /**
+  /*
    * The computed evaluation order. The elements in this array are the order in which each tail
    * predicate will be evaluated. The index into the array is the index of the tail predicate whose
    * evaluation order you want. So <code>[2,0,1]</code> says that the predicates will be evaluated
@@ -94,7 +94,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return order;
   }
 
-  /**
+  /*
    * Cache of the computed range counts for the predicates in the tail. The elements of this array
    * are initialized to -1L, which indicates that the range count has NOT been computed. Range
    * counts are computed on demand and MAY be zero. Only an approximate range count is obtained.
@@ -110,7 +110,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
   /** Keeps track of which tails have been used already and which still need to be evaluated. */
   private transient boolean[ /*tailIndex*/] used;
 
-  /**
+  /*
    * <code>true</code> iff the rule was proven to have no solutions.
    *
    * @todo this is not being computed.
@@ -122,7 +122,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return empty;
   }
 
-  /**
+  /*
    * Computes an evaluation plan for the rule.
    *
    * @param joinNexus The join nexus.
@@ -133,7 +133,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     this(joinNexus.getRangeCountFactory(), rule);
   }
 
-  /**
+  /*
    * Computes an evaluation plan for the rule.
    *
    * @param rangeCountFactory The range count factory.
@@ -300,7 +300,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     }
   }
 
-  /**
+  /*
    * Start by looking at every possible initial join. Take every tail and match it with every other
    * tail to find the lowest possible cardinality. See {@link
    * #computeJoinCardinality(org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlan2.IJoinDimension,
@@ -409,7 +409,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return new Join(t1, minT2, minJoinCardinality, vars);
   }
 
-  /**
+  /*
    * Similar to {@link #getFirstJoin()}, but we have one join dimension already calculated.
    *
    * @param d1 the first join dimension
@@ -471,7 +471,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return new Join(d1, minTail, minJoinCardinality, vars);
   }
 
-  /**
+  /*
    * Return the range count for the predicate, ignoring any bindings. The range count for the tail
    * predicate is cached the first time it is requested and returned from the cache thereafter. The
    * range counts are requested using the "non-exact" range count query, so the range counts are
@@ -491,8 +491,8 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
 
       if (expander != null && expander.runFirst()) {
 
-        /*
-         * Note: runFirst() essentially indicates that the cardinality
+      /*
+       * Note: runFirst() essentially indicates that the cardinality
          * of the predicate in the data is to be ignored. Therefore we
          * do not request the actual range count and just return -1L as
          * a marker indicating that the range count is not available.
@@ -509,7 +509,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return rangeCount[tailIndex];
   }
 
-  /**
+  /*
    * Return the cardinality of a particular tail, which is the range count if not optional and
    * infinite if optional.
    */
@@ -526,7 +526,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return Arrays.toString(getOrder());
   }
 
-  /**
+  /*
    * This is the secret sauce. There are three possibilities for computing the join cardinality,
    * which we are defining as the upper-bound for solutions for a particular join. First, if there
    * are no shared variables then the cardinality will just be the simple sum of the cardinality of
@@ -564,8 +564,8 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
         joinCardinality = Math.min(d1.getCardinality(), d2.getCardinality());
       } else {
         // shared vars and unshared vars - take the max
-        /*
-         * This modification to the join planner results in
+      /*
+       * This modification to the join planner results in
          * significantly faster queries for the bsbm benchmark (3x - 5x
          * overall). It takes a more optimistic perspective on the
          * intersection of two statement patterns, predicting that this
@@ -606,7 +606,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return joinCardinality;
   }
 
-  /**
+  /*
    * Get the named variables for a given tail. Is there a better way to do this?
    *
    * @param tail the tail
@@ -624,7 +624,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return vars;
   }
 
-  /**
+  /*
    * Look for shared variables.
    *
    * @param d1 the first join dimension
@@ -640,7 +640,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return false;
   }
 
-  /**
+  /*
    * Look for unshared variables.
    *
    * @param d1 the first join dimension
@@ -661,7 +661,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     return false;
   }
 
-  /**
+  /*
    * A join dimension can be either a tail, or a previous join. Either way we need to know its
    * cardinality, its variables, and its tails.
    */
@@ -675,7 +675,7 @@ public class DefaultEvaluationPlan2 implements IEvaluationPlan {
     boolean isOptional();
   }
 
-  /**
+  /*
    * A join implementation of a join dimension. The join can consist of two tails, or one tail and
    * another join. Theoretically it could be two joins as well, which might be a future optimization
    * worth thinking about.

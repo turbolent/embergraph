@@ -30,8 +30,8 @@ import org.embergraph.counters.ICounter;
 import org.embergraph.counters.query.ICounterSelector;
 import org.embergraph.counters.query.URLQueryModel;
 
-/**
- * Renders the selected counters using the counter set XML representation - the client can apply
+/*
+* Renders the selected counters using the counter set XML representation - the client can apply
  * XSLT as desired to style the XML.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -47,7 +47,7 @@ public class XMLRenderer implements IRenderer {
   /** The selected character set encoding. */
   private final String charset;
 
-  /**
+  /*
    * @param model Describes the state of the controller (e.g., as parsed from the URL query
    *     parameters).
    * @param counterSelector Selects the counters to be rendered.

@@ -26,15 +26,15 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.Instrument;
 
-/**
- * Counters related to the usage of GeoSpatial services
+/*
+* Counters related to the usage of GeoSpatial services
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class GeoSpatialCounters implements ICounterSetAccess {
 
-  /**
+  /*
    * The #of GeoSpatial service searches executed. Note that a single query may trigger multiple
    * search requests.
    */
@@ -49,7 +49,7 @@ public class GeoSpatialCounters implements ICounterSetAccess {
   /** The #of misses when scanning the search range. */
   protected final CAT zOrderIndexMisses = new CAT();
 
-  /**
+  /*
    * The time spent in bigmin calculations (not including the subsequent advancement of the cursor)
    */
   protected final CAT bigMinCalculationTime = new CAT();
@@ -57,7 +57,7 @@ public class GeoSpatialCounters implements ICounterSetAccess {
   /** The time spent in verifying whether detected values are actually in the geospatial range. */
   protected final CAT rangeCheckCalculationTime = new CAT();
 
-  /**
+  /*
    * The time spent in evaluating the filter on top (such as filtering for whether a point lies in a
    * given circle).
    */

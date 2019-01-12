@@ -49,8 +49,8 @@ import org.embergraph.service.DataService;
 import org.embergraph.service.ndx.DataServiceTupleIterator;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * Test suite for the {@link IConcurrencyManager} interface on the {@link Journal}.
+/*
+* Test suite for the {@link IConcurrencyManager} interface on the {@link Journal}.
  *
  * @todo write test cases that submit various kinds of operations and verify the correctness of
  *     those individual operations. refactor the services package to do this, including things such
@@ -68,7 +68,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     super(name);
   }
 
-  /**
+  /*
    * Test ability to create a {@link Journal} and then shut it down (in particular this is testing
    * shutdown of the thread pool on the {@link ConcurrencyManager}).
    */
@@ -100,7 +100,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Submits an unisolated task to the read service and verifies that it executes.
    *
    * @throws InterruptedException
@@ -122,8 +122,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
           journal.submit(
               new AbstractTask<String>(journal, ITx.READ_COMMITTED, resource) {
 
-                /**
-                 * The task just sets a boolean value and returns the name of the sole resource. It
+              /*
+       * The task just sets a boolean value and returns the name of the sole resource. It
                  * does not actually read anything.
                  */
                 @Override
@@ -158,7 +158,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Submits an unisolated task to the write service and verifies that it executes.
    *
    * @throws InterruptedException
@@ -180,8 +180,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
           journal.submit(
               new AbstractTask<String>(journal, ITx.UNISOLATED, resource) {
 
-                /**
-                 * The task just sets a boolean value and returns the name of the sole resource. It
+              /*
+       * The task just sets a boolean value and returns the name of the sole resource. It
                  * does not actually read or write on anything.
                  */
                 @Override
@@ -216,7 +216,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Submits an read-only task to the transaction service and verifies that it executes.
    *
    * @todo this test is somewhat odd since there are no commits on the journal when we request a
@@ -246,8 +246,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
           journal.submit(
               new AbstractTask<String>(journal, tx, resource) {
 
-                /**
-                 * The task just sets a boolean value and returns the name of the sole resource. It
+              /*
+       * The task just sets a boolean value and returns the name of the sole resource. It
                  * does not actually read or write on anything.
                  */
                 @Override
@@ -285,7 +285,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Submits a read-committed task to the transaction service and verifies that it executes.
    *
    * @throws InterruptedException
@@ -312,8 +312,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
           journal.submit(
               new AbstractTask<String>(journal, tx, resource) {
 
-                /**
-                 * The task just sets a boolean value and returns the name of the sole resource. It
+              /*
+       * The task just sets a boolean value and returns the name of the sole resource. It
                  * does not actually read or write on anything.
                  */
                 @Override
@@ -358,7 +358,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Submits a read-write task with an empty write set to the transaction service and verifies that
    * it executes.
    *
@@ -385,8 +385,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
           journal.submit(
               new AbstractTask<String>(journal, tx, resource) {
 
-                /**
-                 * The task just sets a boolean value and returns the name of the sole resource. It
+              /*
+       * The task just sets a boolean value and returns the name of the sole resource. It
                  * does not actually read or write on anything.
                  */
                 @Override
@@ -426,7 +426,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Submits an unisolated task to the write service. The task just sleeps. We then verify that we
    * can interrupt that task using {@link Future#cancel(boolean)} with <code>
    * mayInterruptWhileRunning := true</code> and that an appropriate exception is thrown in the main
@@ -468,8 +468,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
 
                       if (log.isInfoEnabled()) log.info("Interrupted.");
 
-                      /*
-                       * Note: If you simply continue processing rather
+                    /*
+       * Note: If you simply continue processing rather
                        * than throwing an exception then the interrupt is
                        * _ignored_.
                        */
@@ -477,8 +477,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
                       throw new InterruptedException("Task was interrupted");
                     }
 
-                    /*
-                     * Note: this will notice if the Thread is interrupted.
+                  /*
+       * Note: this will notice if the Thread is interrupted.
                      */
 
                     Thread.sleep(Long.MAX_VALUE);
@@ -527,7 +527,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Submits an unisolated task to the write service. The task just sleeps. We then verify that we
    * can terminate that task using {@link Future#cancel(boolean)} with <code>
    * mayInterruptWhileRunning := false</code> and that an appropriate exception is thrown in the
@@ -568,8 +568,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
           journal.submit(
               new AbstractTask<Void>(journal, ITx.UNISOLATED, resource) {
 
-                /**
-                 * The task just sets a boolean value and then runs an infinite loop,
+              /*
+       * The task just sets a boolean value and then runs an infinite loop,
                  * <strong>ignoring interrupts</strong>.
                  */
                 @Override
@@ -657,8 +657,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   // * closing the index).
   // *
   // */
-  //    /**
-  //     * This task verifies that an abort will wait until all running tasks
+  //    /*
+//     * This task verifies that an abort will wait until all running tasks
   //     * complete (ie, join the "abort group") before aborting.
   //     * <p>
   //     * If the abort occurs while task(s) are still running then actions by those
@@ -693,8 +693,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   //
   //            final Lock lock = new ReentrantLock();
   //
-  //            /**
-  //             * Used to force an abort.
+  //            /*
+//             * Used to force an abort.
   //             */
   //            class PrivateException extends RuntimeException {
   //
@@ -709,8 +709,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   //            Future<Object> f1 = journal.submit(new AbstractTask(journal,
   //                    ITx.UNISOLATED, resource) {
   //
-  //                /**
-  //                 */
+  //                /*
+//                 */
   //                protected Object doTask() throws Exception {
   //
   //                    runState.compareAndSet(0, 1);
@@ -853,7 +853,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   //
   //    }
 
-  /**
+  /*
    * Verify that an {@link AbstractTask} correctly rejects an attempt to submit the same instance
    * twice. This is important since the base class has various items of state that are not
    * thread-safe and are not designed to be reusable.
@@ -921,8 +921,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   /*
    * @todo revisit this unit test.  It's semantics appear to have aged.
    */
-  //    /**
-  //     * Test verifies that an {@link ITx#UNISOLATED} task failure does not cause
+  //    /*
+//     * Test verifies that an {@link ITx#UNISOLATED} task failure does not cause
   //     * concurrent writers to abort. The test also verifies that the
   //     * {@link Checkpoint} record for the named index is NOT updated since none
   //     * of the tasks write anything on the index.
@@ -1105,7 +1105,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   //
   //    }
 
-  /**
+  /*
    * Test verifies that a write on an index will cause the index to be checkpointed when the task
    * completes.
    */
@@ -1160,8 +1160,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   /*
    * @todo revisit this unit test.  It's semantics appear to have aged.
    */
-  //    /**
-  //     * Test verifies that a task failure causes accessed indices to be rolled
+  //    /*
+//     * Test verifies that a task failure causes accessed indices to be rolled
   //     * back to their last checkpoint.
   //     *
   //     * FIXME write test where a task registers an index and then throws an
@@ -1420,7 +1420,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   //
   //    }
 
-  /**
+  /*
    * A class used to force aborts on tasks and then recognize the abort by the {@link
    * ForcedAbortException} from the uni
    *
@@ -1432,8 +1432,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
     private static final long serialVersionUID = 1L;
   }
 
-  //    /**
-  //     * Correctness test of task retry when another task causes a commit group to
+  //    /*
+//     * Correctness test of task retry when another task causes a commit group to
   //     * be discarded.
   //     *
   //     * @todo implement retry and maxLatencyFromSubmit and move the tests for
@@ -1485,8 +1485,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
 
   //     Note: I can not think of any way to write this test.
   //
-  //    /**
-  //     * This test verifies that unisolated reads are against the last committed
+  //    /*
+//     * This test verifies that unisolated reads are against the last committed
   //     * state of the index(s), that they do NOT permit writes, and that
   //     * concurrent writers on the same named index(s) do NOT conflict.
   //     */
@@ -1544,8 +1544,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   //        Future<Object> future = journal.submit(new AbstractIndexTask(journal,
   //                ITx.UNISOLATED, true/*readOnly*/, resource) {
   //
-  //            /**
-  //             * The task just sets a boolean value and returns the name of the
+  //            /*
+//             * The task just sets a boolean value and returns the name of the
   //             * sole resource. It does not actually read anything.
   //             */
   //            protected Object doTask() throws Exception {
@@ -1579,7 +1579,7 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
   //
   //    }
 
-  /**
+  /*
    * A stress test that runs concurrent {@link ITx#READ_COMMITTED} readers and {@link
    * ITx#UNISOLATED} writers and verifies that readers are able to transparently continue to read
    * against the named indices if the backing {@link FileChannel} is closed by an interrupt noticed
@@ -1639,8 +1639,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
                 + NWRITES
                 + " records each");
 
-        /**
-         * Does an {@link ITx#READ_COMMITTED} index scan on a named index using the last committed
+      /*
+       * Does an {@link ITx#READ_COMMITTED} index scan on a named index using the last committed
          * state of the named index.
          *
          * <p>Note: The expectation is that the read tasks WILL NOT throw exceptions related to the
@@ -1689,14 +1689,14 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
           }
         }
 
-        /*
-         * Runs a sequence of write operations that interrupt themselves.
+      /*
+       * Runs a sequence of write operations that interrupt themselves.
          */
         final ExecutorService writerService =
             Executors.newSingleThreadExecutor(new DaemonThreadFactory());
 
-        /*
-         * Submit tasks to the single threaded service that will in turn
+      /*
+       * Submit tasks to the single threaded service that will in turn
          * feed them on by one to the journal's writeService. When run on
          * the journal's writeService the tasks will interrupt themselves
          * and, depending on whether or not the interrupt occurs during a
@@ -1717,8 +1717,8 @@ public class TestConcurrentJournal extends ProxyTestCase<Journal> {
               });
         }
 
-        /*
-         * Submit concurrent reader tasks and wait for them to run for a
+      /*
+       * Submit concurrent reader tasks and wait for them to run for a
          * while.
          */
         {

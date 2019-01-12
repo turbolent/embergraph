@@ -22,8 +22,8 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test {@link HTree} with duplicate keys.
+/*
+* Test {@link HTree} with duplicate keys.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/763" > Stochastic Results With
  *     Analytic Query Mode </a>
@@ -40,7 +40,7 @@ public class TestDuplicates extends AbstractHTreeTestCase {
 
   //    private static final boolean bufferNodes = true;
 
-  /**
+  /*
    * Tests the ability to store values against duplicate keys.
    *
    * @throws IOException
@@ -121,7 +121,7 @@ public class TestDuplicates extends AbstractHTreeTestCase {
     doTest(10, 5000);
   }
 
-  /**
+  /*
    * Test helper for a test based on duplicate keys. The test is designed to verify that the keys
    * are stored correctly and that a scan of the records having that key returns all entries stored
    * under that key.
@@ -216,7 +216,7 @@ public class TestDuplicates extends AbstractHTreeTestCase {
   //
   //	}
 
-  /**
+  /*
    * Return the #of entries having the specified key.
    *
    * @param htree The index.
@@ -234,7 +234,7 @@ public class TestDuplicates extends AbstractHTreeTestCase {
     return count;
   }
 
-  /**
+  /*
    * Simple test where the keys and the values are dups.
    *
    * @throws IOException

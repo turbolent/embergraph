@@ -34,8 +34,8 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Utility class to dump the TERMS index of a triple store.
+/*
+* Utility class to dump the TERMS index of a triple store.
  *
  * @author thompsonbry
  */
@@ -56,7 +56,7 @@ public class DumpLexicon {
     System.err.println("usage: (-tuples) <namespace> <filename>");
   }
 
-  /**
+  /*
    * Open the {@link IIndexManager} identified by the property file.
    *
    * @param propertyFile The property file (for a standalone embergraph instance) or the jini
@@ -124,7 +124,7 @@ public class DumpLexicon {
     return indexManager;
   }
 
-  /**
+  /*
    * @param args <code>(-tuples) &lt;namespace&gt; &lt;filename&gt;</code> <br>
    *     where <i>namespace</i> is the namespace of the {@link LexiconRelation}. Use <code>kb.lex
    *     </code> if you have not overridden the namespace of the {@link AbstractTripleStore}. <br>
@@ -241,15 +241,15 @@ public class DumpLexicon {
     }
   }
 
-  //  /**
-  //  * Dumps the lexicon in a variety of ways (test suites only).
+  //  /*
+//  * Dumps the lexicon in a variety of ways (test suites only).
   //  */
   // public StringBuilder dumpTerms() {
   //
   //     final StringBuilder sb = new StringBuilder(Bytes.kilobyte32 * 4);
   //
-  //     /**
-  //      * Dumps the terms in term order.
+  //     /*
+//      * Dumps the terms in term order.
   //      */
   //     sb.append("---- terms in term order ----\n");
   //     for( Iterator<Value> itr = termIterator(); itr.hasNext(); ) {
@@ -270,7 +270,7 @@ public class DumpLexicon {
   //
   // }
 
-  /**
+  /*
    * Dumps the lexicon in a variety of ways.
    *
    * @param store
@@ -304,14 +304,14 @@ public class DumpLexicon {
 
           final ITuple<?> tuple = itr.next();
 
-          /*
-           * The sort key for the term. This is not readily decodable.
+        /*
+       * The sort key for the term. This is not readily decodable.
            * See LexiconKeyBuilder for specifics.
            */
           final byte[] key = tuple.getKey();
 
-          /*
-           * Decode the TermIV.
+        /*
+       * Decode the TermIV.
            */
           final TermId<?> iv = (TermId<?>) IVUtility.decode(tuple.getValue());
 
@@ -338,8 +338,8 @@ public class DumpLexicon {
         }
       }
 
-      // /**
-      // * Dumps the term:id index.
+      // /*
+// * Dumps the term:id index.
       // */
       // for( Iterator<BlobIV> itr =
       // store.getLexiconRelation().termsIndexScan(); itr.hasNext(); ) {
@@ -348,8 +348,8 @@ public class DumpLexicon {
       //
       // }
 
-      // /**
-      // * Dumps the id:term index.
+      // /*
+// * Dumps the id:term index.
       // */
       // for( Iterator<Value> itr =
       // store.getLexiconRelation().idTermIndexScan(); itr.hasNext(); ) {
@@ -358,8 +358,8 @@ public class DumpLexicon {
       //
       // }
 
-      // /**
-      // * Dumps the terms in term order.
+      // /*
+// * Dumps the terms in term order.
       // */
       // for( Iterator<Value> itr =
       // store.getLexiconRelation().termIterator(); itr.hasNext(); ) {
@@ -381,7 +381,7 @@ public class DumpLexicon {
     }
   }
 
-  /**
+  /*
    * Dump the lexicon.
    *
    * @param r The lexicon relation.
@@ -403,7 +403,7 @@ public class DumpLexicon {
     return w.getBuffer();
   }
 
-  /**
+  /*
    * Dump the BLOBS index.
    *
    * @param namespace
@@ -422,7 +422,7 @@ public class DumpLexicon {
     return w.getBuffer();
   }
 
-  /**
+  /*
    * Core implementation for dumping the BLOBS index.
    *
    * @param w Where to write the data.
@@ -505,7 +505,7 @@ public class DumpLexicon {
             maxCollisionCounter = counter;
           }
 
-          final int bin = (int) (counter / BIN_SIZE);
+          final int bin = (counter / BIN_SIZE);
 
           bins[bin]++;
         }

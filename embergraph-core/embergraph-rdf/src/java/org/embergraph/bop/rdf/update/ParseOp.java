@@ -76,8 +76,8 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-/**
- * Operator parses a RDF data source, writing bindings which represent statements onto the output
+/*
+* Operator parses a RDF data source, writing bindings which represent statements onto the output
  * sink. This operator is compatible with the {@link ChunkedResolutionOp} and the {@link
  * InsertStatementsOp}.
  *
@@ -132,7 +132,7 @@ public class ParseOp extends PipelineOp {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Note: {@link BOp.Annotations#TIMEOUT} is respected to limit the read time on an HTTP
    * connection.
    *
@@ -151,7 +151,7 @@ public class ParseOp extends PipelineOp {
     /** The base URI for that data source (defaults to the {@link #SOURCE_URI}). */
     String BASE_URI = ParseOp.class.getName() + ".baseUri";
 
-    /**
+    /*
      * The target graph (optional).
      *
      * <p>Note: This is ignored unless we are in quads mode. If we are in quads mode and the data is
@@ -164,8 +164,8 @@ public class ParseOp extends PipelineOp {
 
     boolean DEFAULT_SILENT = false;
 
-    //        /**
-    //         * Optional property specifying the capacity of the
+    //        /*
+//         * Optional property specifying the capacity of the
     //         * {@link StatementBuffer} (default is {@value #DEFAULT_BUFFER_CAPACITY}
     //         * statements).
     //         */
@@ -173,7 +173,7 @@ public class ParseOp extends PipelineOp {
     //
     //        int DEFAULT_BUFFER_CAPACITY = 100000;
 
-    /**
+    /*
      * The name of the fallback {@link RDFFormat} (default {@link #DEFAULT_FALLBACK}).
      *
      * <p>Note: {@link RDFFormat} is not {@link Serializable}, so this annotation must be the format
@@ -183,7 +183,7 @@ public class ParseOp extends PipelineOp {
 
     String DEFAULT_FALLBACK = RDFFormat.RDFXML.getName();
 
-    /**
+    /*
      * When <code>true</code>, the context position will be stripped from the statements. This may
      * be used to remove context from quads data when loading into a triples or SIDs mode database.
      * It may also be used to force quads data into a specific context in quads mode.
@@ -197,13 +197,13 @@ public class ParseOp extends PipelineOp {
 
     boolean DEFAULT_USES_CACHE = true;
 
-    /**
+    /*
      * The {@link BufferedReader}'s internal buffer size (default is {@value
      * #DEFAULT_READ_BUFFER_SIZE}).
      */
     String READ_BUFFER_SIZE = ParseOp.class.getName() + ".readBufferSize";
 
-    /**
+    /*
      * Note: 8k is the default buffer size for {@link BufferedReader} so this default is the same as
      * not specifying an override.
      */
@@ -254,7 +254,7 @@ public class ParseOp extends PipelineOp {
     private final String baseUri;
     private final URI targetUri;
 
-    /**
+    /*
      * When true, attempt to resolve the resource against CLASSPATH.
      *
      * <p>TODO Should we permit this?
@@ -280,7 +280,7 @@ public class ParseOp extends PipelineOp {
     /** Output chunk size. */
     private final int chunkCapacity;
 
-    /**
+    /*
      * TODO Javadoc for annotations (which need to be defined) and interaction with the triple store
      * properties.
      */
@@ -306,13 +306,13 @@ public class ParseOp extends PipelineOp {
     //        /** StatementBuffer capacity. */
     //        private final int bufferCapacity;
     //
-    //        /**
-    //         * The object used to compute entailments for the database.
+    //        /*
+//         * The object used to compute entailments for the database.
     //         */
     //        private final InferenceEngine inferenceEngine;
     //
-    //        /**
-    //         * The object used to compute entailments for the database.
+    //        /*
+//         * The object used to compute entailments for the database.
     //         */
     //        public InferenceEngine getInferenceEngine() {
     //
@@ -320,21 +320,21 @@ public class ParseOp extends PipelineOp {
     //
     //        }
     //
-    //        /**
-    //         * Used to buffer writes.
+    //        /*
+//         * Used to buffer writes.
     //         *
     //         * @see #getAssertionBuffer()
     //         */
     //        private StatementBuffer<?> buffer;
     //
-    //        /**
-    //         * The object used to maintain the closure for the database iff
+    //        /*
+//         * The object used to maintain the closure for the database iff
     //         * incremental truth maintenance is enabled.
     //         */
     //        private final TruthMaintenance tm;
     //
-    //        /**
-    //         * Return the assertion buffer.
+    //        /*
+//         * Return the assertion buffer.
     //         * <p>
     //         * The assertion buffer is used to buffer statements that are being
     //         * asserted so as to maximize the opportunity for batch writes. Truth
@@ -467,15 +467,15 @@ public class ParseOp extends PipelineOp {
       {
         final Properties properties = database.getProperties();
 
-        /*
-         * Initialize the parser options based on the database
+      /*
+       * Initialize the parser options based on the database
          * properties.
          */
 
         this.parserOptions = new RDFParserOptions(properties);
 
-        /*
-         * Now do explicit annotations which override anything we picked
+      /*
+       * Now do explicit annotations which override anything we picked
          * up above.
          */
 
@@ -504,8 +504,8 @@ public class ParseOp extends PipelineOp {
             && op.getProperty(Options.PRESERVE_BNODE_IDS) == null
             && database.getLexiconRelation().isStoreBlankNodes()) {
 
-          /*
-           * Note: preserveBNodeIDs is overridden based on whether or
+        /*
+       * Note: preserveBNodeIDs is overridden based on whether or
            * not the target is storing the blank node identifiers
            * (unless the property was explicitly set - this amounts to
            * a conditional default).
@@ -526,8 +526,8 @@ public class ParseOp extends PipelineOp {
 
       try {
 
-        /*
-         * The expected format based on the file name component of the
+      /*
+       * The expected format based on the file name component of the
          * URL.
          */
         fmt = RDFFormat.forFileName(uriStr, fallback);
@@ -541,8 +541,8 @@ public class ParseOp extends PipelineOp {
 
           if (is == null) {
 
-            /*
-             * Searching for the resource from the root of the class
+          /*
+       * Searching for the resource from the root of the class
              * returned by getClass() (relative to the class'
              * package) failed. Next try searching for the desired
              * resource from the root of the jar; that is, search
@@ -555,8 +555,8 @@ public class ParseOp extends PipelineOp {
 
         if (is == null) {
 
-          /*
-           * TODO Refactor to use the apache http components and
+        /*
+       * TODO Refactor to use the apache http components and
            * provide for managed connection pools, authentication,
            * etc. However, make sure that we preserve the ability to
            * read from the local file system.
@@ -566,21 +566,21 @@ public class ParseOp extends PipelineOp {
 
           final URL url = new URL(uriStr);
 
-          conn = (URLConnection) url.openConnection();
+          conn = url.openConnection();
 
           final HttpURLConnection conn2 =
               (conn instanceof HttpURLConnection) ? (HttpURLConnection) conn : null;
 
           if (conn2 != null) {
 
-            /*
-             * Only if using HTTP.
+          /*
+       * Only if using HTTP.
              */
 
             conn2.setRequestMethod("GET");
 
-            /*
-             * Set the AcceptHeader based on the expected format.
+          /*
+       * Set the AcceptHeader based on the expected format.
              */
             final String acceptHeader;
             {
@@ -631,14 +631,14 @@ public class ParseOp extends PipelineOp {
           is = conn.getInputStream();
         }
 
-        /*
-         * Obtain a buffered reader on the input stream.
+      /*
+       * Obtain a buffered reader on the input stream.
          */
 
         if (contentEncoding == null) {
 
-          /*
-           * Assume the default content encoding if we have no better
+        /*
+       * Assume the default content encoding if we have no better
            * information.
            */
 
@@ -675,7 +675,7 @@ public class ParseOp extends PipelineOp {
       return null;
     }
 
-    /**
+    /*
      * @param source
      * @param baseURL
      * @param rdfFormat
@@ -772,8 +772,8 @@ public class ParseOp extends PipelineOp {
 
         if (context != null) {
 
-          /*
-           * Bind [c] if available regardless of the database mode.
+        /*
+       * Bind [c] if available regardless of the database mode.
            * This stops people from loading quads data into a triples
            * or SIDs database in a way which throws away the context
            * when they are not expecting that.

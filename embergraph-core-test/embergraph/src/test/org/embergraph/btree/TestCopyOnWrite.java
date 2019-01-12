@@ -24,8 +24,8 @@ package org.embergraph.btree;
 import org.apache.log4j.Level;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
-/**
- * Test suite for copy-on-write semantics. Among other things the tests in this suite are
+/*
+* Test suite for copy-on-write semantics. Among other things the tests in this suite are
  * responsible for verifying the contents of {@link Node#childAddr}[] and that the parent reference
  * on a clean child was updated to point to the cloned parent when the child is "stolen" by the
  * cloned parent.
@@ -43,7 +43,7 @@ public class TestCopyOnWrite extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test copy-on-write for a tree of height 1 (two levels). This test works by explicitly writing
    * out either the root node or a leaf and verifying that the persistent and dirty state of each
    * node or leaf. Note that this does not force the eviction of nodes or leaves but rather requests
@@ -199,7 +199,7 @@ public class TestCopyOnWrite extends AbstractBTreeTestCase {
     assertChildKeys(new long[] {0, b1.getIdentity()}, c1);
   }
 
-  /**
+  /*
    * Test copy on write for a tree of height 2 (three levels). Copy on write propagates up from the
    * leaf where we make the mutation and causes any immutable parents to be cloned as well. Nodes
    * and leaves that have been cloned by copy-on-write are distinct objects from their immutable

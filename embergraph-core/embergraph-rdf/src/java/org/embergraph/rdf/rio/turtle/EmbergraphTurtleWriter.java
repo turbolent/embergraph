@@ -14,15 +14,15 @@ import org.openrdf.model.BNode;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.turtle.TurtleWriter;
 
-/**
- * An implementation of the RDFWriter interface that writes RDF documents in Turtle format. The
+/*
+* An implementation of the RDFWriter interface that writes RDF documents in Turtle format. The
  * Turtle format is defined in <a href="http://www.dajobe.org/2004/01/turtle/">in this document</a>.
  *
  * @openrdf
  */
 public class EmbergraphTurtleWriter extends TurtleWriter implements RDFWriter {
 
-  /**
+  /*
    * Creates a new TurtleWriter that will write to the supplied OutputStream.
    *
    * @param out The OutputStream to write the Turtle document to.
@@ -31,7 +31,7 @@ public class EmbergraphTurtleWriter extends TurtleWriter implements RDFWriter {
     super(out);
   }
 
-  /**
+  /*
    * Creates a new TurtleWriter that will write to the supplied Writer.
    *
    * @param writer The Writer to write the Turtle document to.

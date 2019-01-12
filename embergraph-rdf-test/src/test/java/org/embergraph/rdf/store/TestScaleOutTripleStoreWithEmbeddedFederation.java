@@ -32,8 +32,8 @@ import org.embergraph.service.DataService;
 import org.embergraph.service.EmbeddedClient;
 import org.embergraph.service.EmbeddedFederation;
 
-/**
- * Proxy test suite for {@link ScaleOutTripleStore} running against an {@link EmbeddedFederation}.
+/*
+* Proxy test suite for {@link ScaleOutTripleStore} running against an {@link EmbeddedFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -125,7 +125,7 @@ public class TestScaleOutTripleStoreWithEmbeddedFederation extends AbstractTestC
   /** An embedded federation is setup and torn down per unit test. */
   EmbeddedClient client;
 
-  /**
+  /*
    * Data files are placed into a directory named by the test. If the directory exists, then it is
    * removed before the federation is set up.
    */
@@ -189,7 +189,7 @@ public class TestScaleOutTripleStoreWithEmbeddedFederation extends AbstractTestC
     return store;
   }
 
-  /**
+  /*
    * Re-open the same backing store.
    *
    * @param store the existing store.
@@ -212,7 +212,7 @@ public class TestScaleOutTripleStoreWithEmbeddedFederation extends AbstractTestC
 
     // The data directory for the embedded federation.
     final File file =
-        ((EmbeddedFederation) ((ScaleOutTripleStore) store).getIndexManager()).getDataDir();
+        ((EmbeddedFederation) store.getIndexManager()).getDataDir();
 
     // Set the file property explicitly.
     properties.setProperty(EmbeddedClient.Options.DATA_DIR, file.toString());

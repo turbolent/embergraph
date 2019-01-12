@@ -11,8 +11,8 @@ package cern.colt.matrix.linalg;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 import java.util.concurrent.RecursiveAction;
-/**
- * Parallel implementation of the Basic Linear Algebra System for symmetric multi processing boxes.
+/*
+* Parallel implementation of the Basic Linear Algebra System for symmetric multi processing boxes.
  * Currently only a few algorithms are parallelised; the others are fully functional, but run in
  * sequential mode. Parallelised are:
  *
@@ -74,7 +74,7 @@ import java.util.concurrent.RecursiveAction;
  * @version 0.9, 16/04/2000
  */
 public class SmpBlas implements Blas {
-  /**
+  /*
    * The public global parallel blas; initialized via {@link #allocateBlas}. Do not modify this
    * variable via other means (it is public).
    */
@@ -88,7 +88,7 @@ public class SmpBlas implements Blas {
   protected int maxThreads;
 
   protected static int NN_THRESHOLD = 30000;
-  /**
+  /*
    * Constructs a blas using a maximum of <tt>maxThreads<tt> threads; each executing the given
    * sequential algos.
    */
@@ -98,7 +98,7 @@ public class SmpBlas implements Blas {
     this.smp = new Smp(maxThreads);
     // Smp.smp = new Smp(maxThreads);
   }
-  /**
+  /*
    * Sets the public global variable <tt>SmpBlas.smpBlas</tt> to a blas using a maximum of
    * <tt>maxThreads</tt> threads, each executing the given sequential algorithm; <tt>maxThreads</tt>
    * is normally the number of CPUs. Call this method at the very beginning of your program.
@@ -371,7 +371,7 @@ public class SmpBlas implements Blas {
     seqBlas.drot(x, y, c, s);
   }
 
-  public void drotg(double a, double b, double rotvec[]) {
+  public void drotg(double a, double b, double[] rotvec) {
     seqBlas.drotg(a, b, rotvec);
   }
 

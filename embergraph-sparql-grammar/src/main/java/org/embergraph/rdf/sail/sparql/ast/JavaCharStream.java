@@ -2,8 +2,8 @@
 /* JavaCCOptions:STATIC=false,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.embergraph.rdf.sail.sparql.ast;
 
-/**
- * An implementation of interface CharStream, where the stream is assumed to contain only ASCII
+/*
+* An implementation of interface CharStream, where the stream is assumed to contain only ASCII
  * characters (with java-like unicode escape processing).
  */
 public class JavaCharStream {
@@ -62,8 +62,8 @@ public class JavaCharStream {
   int bufsize;
   int available;
   int tokenBegin;
-  protected int bufline[];
-  protected int bufcolumn[];
+  protected int[] bufline;
+  protected int[] bufcolumn;
 
   protected int column = 0;
   protected int line = 1;
@@ -90,8 +90,8 @@ public class JavaCharStream {
 
   protected void ExpandBuff(boolean wrapAround) {
     char[] newbuffer = new char[bufsize + 2048];
-    int newbufline[] = new int[bufsize + 2048];
-    int newbufcolumn[] = new int[bufsize + 2048];
+    int[] newbufline = new int[bufsize + 2048];
+    int[] newbufcolumn = new int[bufsize + 2048];
 
     try {
       if (wrapAround) {
@@ -292,7 +292,7 @@ public class JavaCharStream {
   }
 
   @Deprecated
-  /**
+  /*
    * @deprecated
    * @see #getEndColumn
    */
@@ -301,7 +301,7 @@ public class JavaCharStream {
   }
 
   @Deprecated
-  /**
+  /*
    * @deprecated
    * @see #getEndLine
    */

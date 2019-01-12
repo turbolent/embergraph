@@ -27,8 +27,8 @@ import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.rdf.sail.model.RunningQuery;
 
-/**
- * This class encapsulate functionality that is common to the REST API and Embedded Graph
+/*
+* This class encapsulate functionality that is common to the REST API and Embedded Graph
  * deployments.
  *
  * @author beebs
@@ -62,7 +62,7 @@ public class QueryCancellationHelper {
     }
   }
 
-  /**
+  /*
    * Attempt to cancel a running SPARQL Query
    *
    * @param queryEngine
@@ -98,7 +98,7 @@ public class QueryCancellationHelper {
     return false;
   }
 
-  /**
+  /*
    * Attempt to cancel a running SPARQL UPDATE request.
    *
    * @param context
@@ -122,8 +122,8 @@ public class QueryCancellationHelper {
 
       } catch (RuntimeException ex) {
 
-        /*
-         * Ignore.
+      /*
+       * Ignore.
          *
          * Either the IRunningQuery has already terminated or this is an
          * UPDATE rather than a QUERY.
@@ -184,10 +184,7 @@ public class QueryCancellationHelper {
 
     if (f != null) {
 
-      if (f.cancel(true /* mayInterruptIfRunning */)) {
-
-        return true;
-      }
+      return f.cancel(true /* mayInterruptIfRunning */);
     }
 
     // Either not found or found but not running when cancelled.

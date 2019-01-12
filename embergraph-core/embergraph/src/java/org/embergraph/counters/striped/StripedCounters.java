@@ -27,8 +27,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.system.SystemUtil;
 import org.embergraph.counters.CounterSet;
 
-/**
- * Abstract base class and template for striped counters designed for high concurrency with eventual
+/*
+* Abstract base class and template for striped counters designed for high concurrency with eventual
  * consistency and approximate read back without CAS contention.
  *
  * <p>Each instance of this class in use by the application is backed by an array of N instances
@@ -54,7 +54,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
   /** #of releases before we post the counters to the parent. */
   protected /*private*/ int batchSize;
 
-  /**
+  /*
    * Decremented by {@link #release()} - when ZERO (0) we post the counters to the {@link #parent}
    * and reset to the {@link #batchSize}
    */
@@ -75,7 +75,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
   /** Cached value of {@link #threadHash()} as computed by the parent in {@link #acquire()}. */
   private int threadHash;
 
-  /**
+  /*
    * Acquire a "stripe" counters object. The selected stripe is based on {@link Thread#hashCode()}.
    * The chances of a contention with a concurrent thread are <code>(1.0/nstripes)</code>.
    *
@@ -109,7 +109,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
     parent.locks[threadHash].unlock();
   }
 
-  /**
+  /*
    * Required public zero argument constructor provides no concurrency control. Instances created
    * with this constructor are used (internally) in a variety of contexts where striped locks are
    * not appropriate and may be used by the application as well if striped locks are not necessary.
@@ -121,7 +121,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
     batchSize = n = 1;
   }
 
-  /**
+  /*
    * Create a striped counters object using <code>numProcessors*2</code> stripes and the specified
    * <i>batchSize</i>.
    *
@@ -133,7 +133,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
     this(SystemUtil.numProcessors() * 2, batchSize);
   }
 
-  /**
+  /*
    * Create a striped counters object.
    *
    * @param nstripes The #of stripes. Each stripe is protected by a lock. The stripe is selected by
@@ -166,7 +166,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
   //        this.batchSize = n = batchSize;
   //    }
 
-  /**
+  /*
    * Create an instance of the same class using the public zero-argument constructor for that class.
    *
    * @return The new instance.
@@ -176,7 +176,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
 
     try {
 
-      final Constructor<?> ctor = getClass().getConstructor(new Class[] {});
+      final Constructor<?> ctor = getClass().getConstructor();
 
       return (T) ctor.newInstance(new Object[] {});
 
@@ -190,7 +190,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
    * Methods which must be extended by derived classes.
    */
 
-  /**
+  /*
    * Adds counters to the current counters.
    *
    * @param o The other counters.
@@ -204,7 +204,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
 
   }
 
-  /**
+  /*
    * Returns a new {@link StripedCounters} containing the current counter values minus the given
    * counter values.
    *
@@ -228,7 +228,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
   /** Clear the counter values back to zero. */
   public void clear() {}
 
-  /**
+  /*
    * Return a new, empty {@link CounterSet}. This method must be extended to attach the various
    * performance counters to that {@link CounterSet}.
    */

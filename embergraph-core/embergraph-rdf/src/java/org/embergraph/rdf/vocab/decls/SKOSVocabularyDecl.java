@@ -28,8 +28,8 @@ import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Vocabulary and namespace for SKOS.
+/*
+* Vocabulary and namespace for SKOS.
  *
  * @see http://www.w3.org/2004/02/skos/core#
  * @see http://www.w3.org/TR/skos-reference/skos.html

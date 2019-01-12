@@ -9,8 +9,8 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rawstore.IBlock;
 import org.embergraph.util.Bytes;
 
-/**
- * Reads from blocks visited by a range scan for a file and version.
+/*
+* Reads from blocks visited by a range scan for a file and version.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -26,7 +26,7 @@ public class FileVersionInputStream extends InputStream {
   /** The current block# whose data are being read. */
   private long block;
 
-  /**
+  /*
    * A buffer holding the current block's data. This is initially filled from the first block by the
    * ctor. When no more data is available it is set to <code>null</code> to indicate that the input
    * stream has been exhausted.
@@ -71,7 +71,7 @@ public class FileVersionInputStream extends InputStream {
     nextBlock();
   }
 
-  /**
+  /*
    * Reads the next block of data from the iterator and sets it on the internal buffer. If the
    * iterator is exhausted then the internal buffer is set to <code>null</code>.
    *

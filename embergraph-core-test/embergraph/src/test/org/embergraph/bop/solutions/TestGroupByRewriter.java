@@ -43,8 +43,8 @@ import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
-/**
- * Test suite for {@link GroupByRewriter}.
+/*
+* Test suite for {@link GroupByRewriter}.
  *
  * <p>Note: This test suite is actually written at the {@link
  * GroupByRewriter#rewrite(IValueExpression, IVariableFactory, LinkedHashMap)} and {@link
@@ -150,7 +150,7 @@ public class TestGroupByRewriter extends TestCase2 {
    * Unit tests at the rewrite() level.
    */
 
-  /**
+  /*
    * Test that a bare variable is NOT rewritten.
    *
    * <pre>
@@ -169,7 +169,7 @@ public class TestGroupByRewriter extends TestCase2 {
     assertTrue(actualAggExpr.isEmpty());
   }
 
-  /**
+  /*
    * Test that a bare constant is NOT rewritten.
    *
    * <pre>
@@ -188,7 +188,7 @@ public class TestGroupByRewriter extends TestCase2 {
     assertTrue(actualAggExpr.isEmpty());
   }
 
-  /**
+  /*
    * Test lifting of bare {@link IAggregate} expression:
    *
    * <pre>
@@ -243,7 +243,7 @@ public class TestGroupByRewriter extends TestCase2 {
     assertEquals(expectedAggExpr, actualAggExpr);
   }
 
-  /**
+  /*
    * Test that {@link IAggregate} expressions are also lifted out of a HAVING clause.
    *
    * <pre>
@@ -298,7 +298,7 @@ public class TestGroupByRewriter extends TestCase2 {
     assertEquals(expectedAggExpr, actualAggExpr);
   }
 
-  /**
+  /*
    * Test elimination of duplicate {@link IAggregate} expressions.</br>
    *
    * <pre>
@@ -355,7 +355,7 @@ public class TestGroupByRewriter extends TestCase2 {
     assertEquals(expectedAggExpr, actualAggExpr);
   }
 
-  /**
+  /*
    * Test lifting of {@link IAggregate} expressions within value expressions:
    *
    * <pre>
@@ -412,7 +412,7 @@ public class TestGroupByRewriter extends TestCase2 {
     assertEquals(expectedAggExpr, actualAggExpr);
   }
 
-  /**
+  /*
    * Test lifting of nested {@link IAggregate} expressions:
    *
    * <pre>

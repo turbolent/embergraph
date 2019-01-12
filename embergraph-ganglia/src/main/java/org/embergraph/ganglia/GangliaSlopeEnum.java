@@ -15,8 +15,8 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * This slope is a metadata parameter which ganglia carries for the rrdtool integration. Slope
+/*
+* This slope is a metadata parameter which ganglia carries for the rrdtool integration. Slope
  * appears to be essentially a hint provided to rrdtool which effects the visualization of the data.
  */
 public enum GangliaSlopeEnum {
@@ -29,13 +29,13 @@ public enum GangliaSlopeEnum {
   negative(2),
   /** Interpolate on any value change. */
   both(3),
-  /**
+  /*
    * Used (by Ganglia) for things like <code>heartbeat</code> and <code>location</code>. (Location
    * is reported with <code>units := (x,y,z)</code>.)
    */
   unspecified(4);
 
-  private GangliaSlopeEnum(final int v) {
+  GangliaSlopeEnum(final int v) {
     this.v = v;
   }
 

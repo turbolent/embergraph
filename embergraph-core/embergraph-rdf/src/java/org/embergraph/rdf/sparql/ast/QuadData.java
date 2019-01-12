@@ -27,8 +27,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpUtility;
 import org.embergraph.rdf.spo.ISPO;
 
-/**
- * Recursive container for ground {@link StatementPatternNode}s. This is used for {@link InsertData}
+/*
+* Recursive container for ground {@link StatementPatternNode}s. This is used for {@link InsertData}
  * and {@link DeleteData}. It gets flattened out and turned into an {@link ISPO}[].
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -48,7 +48,7 @@ public class QuadData extends AbstractStatementContainer<IStatementContainer>
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */
@@ -59,10 +59,10 @@ public class QuadData extends AbstractStatementContainer<IStatementContainer>
 
   public QuadData(final IStatementContainer child) {
 
-    this(new BOp[] {(BOp) child}, null);
+    this(new BOp[] {child}, null);
   }
 
-  /**
+  /*
    * Flatten the {@link QuadData} into a simple {@link ConstructNode}. The {@link ConstructNode} MAY
    * use variables as well as constants and supports the context position, so this is really a quads
    * construct template.
@@ -88,7 +88,7 @@ public class QuadData extends AbstractStatementContainer<IStatementContainer>
     return template;
   }
 
-  /**
+  /*
    * Flatten the {@link StatementPatternNode}s into the caller's {@link JoinGroupNode}.
    *
    * @param container The caller's container.
@@ -146,8 +146,8 @@ public class QuadData extends AbstractStatementContainer<IStatementContainer>
 
       if (i >= 10) {
 
-        /**
-         * Truncate the description.
+      /*
+       * Truncate the description.
          *
          * <p>Note: People sometimes push a LOT of data through with a DeleteInsertWhere operation.
          * This truncates the description to avoid problems with log files or the echo of the update

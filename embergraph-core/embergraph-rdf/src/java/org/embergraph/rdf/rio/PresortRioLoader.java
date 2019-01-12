@@ -24,33 +24,33 @@ import org.openrdf.model.Value;
 import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 
-/**
- * Statement handler for the RIO RDF Parser that writes on a {@link StatementBuffer}.
+/*
+* Statement handler for the RIO RDF Parser that writes on a {@link StatementBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class PresortRioLoader extends BasicRioLoader implements RDFHandler {
 
-  /**
+  /*
    * Used to buffer RDF {@link Value}s and {@link Statement}s emitted by the RDF parser (the value
    * is supplied by the ctor).
    */
   protected final IStatementBuffer<?> buffer;
 
-  /**
+  /*
    * When true, the <i>buffer</i> will be flushed when the end of the input is reached.
    *
    * @see BLZG-1562 (DataLoader.Options.FLUSH does not defer flush of StatementBuffer)
    */
   private final boolean flush;
 
-  /**
+  /*
    * The value that will be used for the graph/context co-ordinate when loading data represented in
    * a triple format into a quad store.
    */
   private EmbergraphURI defaultGraphURI = null;
 
-  /**
+  /*
    * Sets up parser to load RDF.
    *
    * @param buffer The buffer used to collect, sort, and write statements onto the database.
@@ -60,7 +60,7 @@ public class PresortRioLoader extends BasicRioLoader implements RDFHandler {
     this(buffer, true /* flush */);
   }
 
-  /**
+  /*
    * @param buffer The buffer onto which the parsed statements will be written.
    * @param flush When true, the <i>buffer</i> will be flushed when the end of the input is reached.
    * @see BLZG-1562 (DataLoader.Options.FLUSH does not defer flush of StatementBuffer)
@@ -74,7 +74,7 @@ public class PresortRioLoader extends BasicRioLoader implements RDFHandler {
     this.flush = flush;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>bulk insert the buffered data into the store iff <code>flush:=true</code>

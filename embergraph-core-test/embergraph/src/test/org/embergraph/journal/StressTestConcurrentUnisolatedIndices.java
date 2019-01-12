@@ -47,8 +47,8 @@ import org.embergraph.testutil.ExperimentDriver.Result;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.NV;
 
-/**
- * Stress tests for concurrent processing of operations on named unisolated indices.
+/*
+* Stress tests for concurrent processing of operations on named unisolated indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -138,7 +138,7 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
     }
   }
 
-  /**
+  /*
    * A stress test of concurrent writers on one or more named indices.
    *
    * @param journal The database.
@@ -281,8 +281,8 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
         if (isInnerCause(ex, InterruptedException.class)
             || isInnerCause(ex, ClosedByInterruptException.class)) {
 
-          /*
-           * Note: Tasks will be interrupted if a timeout occurs when
+        /*
+       * Note: Tasks will be interrupted if a timeout occurs when
            * attempting to run the submitted tasks - this is normal.
            */
 
@@ -382,7 +382,7 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
       return super.getTaskName() + "#" + trial;
     }
 
-    /**
+    /*
      * Executes random operation on a named unisolated index.
      *
      * @return null
@@ -399,8 +399,8 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
 
       try {
 
-        /*
-         * First, mark each index in the [btrees] concurrent hash map
+      /*
+       * First, mark each index in the [btrees] concurrent hash map
          * with the thread in which this task instance is executing.
          *
          * Note: These marks will be cleared by a finally {} clause
@@ -426,8 +426,8 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
           indices[i] = getJournal().getIndex(name);
         }
 
-        /*
-         * Random write operations on the named index(s).
+      /*
+       * Random write operations on the named index(s).
          */
         for (int i = 0; i < nops; i++) {
 
@@ -460,8 +460,8 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
 
       } finally {
 
-        /*
-         * Clear the marks from the concurrent hash map which associate
+      /*
+       * Clear the marks from the concurrent hash map which associate
          * the named resources (the indices) with the thread in which
          * this test was executing.
          */
@@ -488,7 +488,7 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
     }
   } // class WriteTask
 
-  /**
+  /*
    * Thrown by a {@link Writer} if it is selected for abort based on the {@link
    * TestOptions#FAILURE_RATE}.
    *
@@ -500,7 +500,7 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
     private static final long serialVersionUID = 5032559382234334218L;
   }
 
-  /**
+  /*
    * Runs a single instance of the test as configured in the code.
    *
    * @todo try running the test out more than 30 seconds. Note that a larger journal maximum extent
@@ -572,49 +572,49 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
   }
 
   /** Additional properties understood by this test. */
-  public static interface TestOptions extends ConcurrencyManager.Options {
+  public interface TestOptions extends ConcurrencyManager.Options {
 
     /** The timeout for the test (seconds). */
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
-    /**
+    /*
      * The #of named resources from which {@link Writer}s may choosen the indices on which they will
      * write.
      */
-    public static final String NRESOURCES = "nresources";
+    String NRESOURCES = "nresources";
 
-    /**
+    /*
      * The minimum #of locks that a writer will obtain (0 or more, but a writer with zero locks will
      * not write on anything).
      */
-    public static final String MIN_LOCKS = "minLocks";
+    String MIN_LOCKS = "minLocks";
 
-    /**
+    /*
      * The maximum #of locks that a writer will obtain (LTE {@link #NRESOURCES}). A writer will
      * write on each resource that it locks.
      */
-    public static final String MAX_LOCKS = "maxLocks";
+    String MAX_LOCKS = "maxLocks";
 
     /** The #of trials (aka transactions) to run. */
-    public static final String NTRIALS = "ntrials";
+    String NTRIALS = "ntrials";
 
-    /**
+    /*
      * The length of the keys used in the test. This directly impacts the likelyhood of a
      * write-write conflict. Shorter keys mean more conflicts. However, note that conflicts are only
      * possible when there are at least two concurrent clients running.
      */
-    public static final String KEYLEN = "keyLen";
+    String KEYLEN = "keyLen";
 
     /** The #of operations in each trial. */
-    public static final String NOPS = "nops";
+    String NOPS = "nops";
 
-    /**
+    /*
      * The failure rate [0.0:1.0]. A {@link Writer} aborts by throwing a {@link SpuriousException}.
      */
-    public static final String FAILURE_RATE = "failureRate";
+    String FAILURE_RATE = "failureRate";
   }
 
-  /**
+  /*
    * Setup and run a test.
    *
    * @param properties There are no "optional" properties - you must make sure that each property
@@ -646,14 +646,14 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
     return result;
   }
 
-  /**
+  /*
    * Experiment generation utility class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public static class GenerateExperiment extends ExperimentDriver {
 
-    /**
+    /*
      * Generates an XML file that can be run by {@link ExperimentDriver}.
      *
      * @param args

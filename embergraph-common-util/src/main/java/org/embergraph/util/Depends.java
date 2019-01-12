@@ -26,8 +26,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Class provides static information about project dependencies.
+/*
+* Class provides static information about project dependencies.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class Depends {
 
     /** The license URL. */
     String licenseURL();
-  };
+  }
 
   private static class OrderByName implements Comparator<Dependency> {
 
@@ -157,7 +157,7 @@ public class Depends {
 
   private static final Dep apacheHttpMime = new ApacheDep("httpmime", "http://hc.apache.org/");
 
-  /**
+  /*
    * Note: This embergraph module is under a different license (Apache 2.0) than the other
    * embergraph modules.
    */
@@ -204,7 +204,7 @@ public class Depends {
           "http://code.google.com/p/flot/",
           "http://www.opensource.org/licenses/mit-license.php");
 
-  /**
+  /*
    * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses. (We use the
    * MIT license).
    */
@@ -243,7 +243,7 @@ public class Depends {
           "http://elonen.iki.fi/code/nanohttpd/",
           "http://elonen.iki.fi/code/nanohttpd/#license");
 
-  /**
+  /*
    * Dual licensed under apache 2.0 and Eclipse Public License 1.0. We use the Apache 2.0 license.
    *
    * @see http://www.eclipse.org/jetty/licenses.php

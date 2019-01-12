@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-/**
- * Interface for bloom filter implementations using an unsigned byte[] key.
+/*
+* Interface for bloom filter implementations using an unsigned byte[] key.
  *
  * <p>Bloom filters give a 100% guarantee when reporting that a key was NOT found but only a
  * statistical guarantee when reporting that a key was found. Therefore if either {@link
@@ -36,7 +36,7 @@ package org.embergraph.btree;
  */
 public interface IBloomFilter {
 
-  /**
+  /*
    * Adds the key to the filter.
    *
    * @param key The key.
@@ -45,9 +45,9 @@ public interface IBloomFilter {
    * @throws IllegalArgumentException if <i>key</i> is <code>null</code>.
    * @throws UnsupportedOperationException if the filter does not allow mutation.
    */
-  public boolean add(byte[] key);
+  boolean add(byte[] key);
 
-  /**
+  /*
    * Test the filter for the key <strong>a <code>true</code> return DOES NOT guarantee that the key
    * has been added to the filter while a <code>false</code> return guarantees that the key HAS NOT
    * been added to the filter</strong>.
@@ -58,12 +58,12 @@ public interface IBloomFilter {
    *     filter can guarantee that the key has not been added to the filter.
    * @throws IllegalArgumentException if <i>key</i> is <code>null</code>.
    */
-  public boolean contains(byte[] key);
+  boolean contains(byte[] key);
 
-  /**
+  /*
    * Notify the bloom filter that a false positive was observed for a key that for which {@link
    * #add(byte[])} reported <code>true</code> (the key was in fact not in the index). This method
    * exists solely for reporting and tracking the actual error rate of the bloom filter.
    */
-  public void falsePos();
+  void falsePos();
 }

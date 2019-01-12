@@ -59,8 +59,8 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 import org.embergraph.counters.ICounterSet;
 
-/**
- * Formats for {@link ICounterSet}s.
+/*
+* Formats for {@link ICounterSet}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -121,7 +121,7 @@ public class CounterSetFormat extends FileFormat implements Iterable<CounterSetF
     register(XML);
   }
 
-  /**
+  /*
    * Creates a new RDFFormat object.
    *
    * @param name The name of the RDF file format, e.g. "RDF/XML".
@@ -142,7 +142,7 @@ public class CounterSetFormat extends FileFormat implements Iterable<CounterSetF
     super(name, mimeTypes, charset, fileExtensions);
   }
 
-  /**
+  /*
    * Tries to determine the appropriate file format based on the a MIME type that describes the
    * content type.
    *
@@ -157,7 +157,7 @@ public class CounterSetFormat extends FileFormat implements Iterable<CounterSetF
     return forMIMEType(mimeType, null);
   }
 
-  /**
+  /*
    * Tries to determine the appropriate file format based on the a MIME type that describes the
    * content type. The supplied fallback format will be returned when the MIME type was not
    * recognized.

@@ -27,13 +27,13 @@ import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestTransactionSupport extends ProxyTestCase {
 
-  /**
+  /*
    * Aggregates the test suites into something approximating increasing dependency. This is designed
    * to run as a <em>proxy test suite</em> in which all tests are run using a common configuration
    * and a delegatation mechanism. You MUST add the returned {@link Test} into a properly configured

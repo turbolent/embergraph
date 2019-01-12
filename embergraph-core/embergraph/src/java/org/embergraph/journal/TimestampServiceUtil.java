@@ -26,8 +26,8 @@ package org.embergraph.journal;
 import java.io.IOException;
 import org.apache.log4j.Logger;
 
-/**
- * Robust request for a timestamp from an {@link ITimestampService}.
+/*
+* Robust request for a timestamp from an {@link ITimestampService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -36,7 +36,7 @@ public class TimestampServiceUtil {
 
   protected static Logger log = Logger.getLogger(TimestampServiceUtil.class);
 
-  /**
+  /*
    * Utility method retries several times if there is a problem before throwing a {@link
    * RuntimeException}.
    *

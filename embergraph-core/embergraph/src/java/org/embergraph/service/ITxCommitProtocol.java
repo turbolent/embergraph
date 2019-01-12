@@ -28,8 +28,8 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.journal.ITransactionService;
 import org.embergraph.journal.ValidationError;
 
-/**
- * Remote interface by which the {@link ITransactionService} manages the state of transactions on
+/*
+* Remote interface by which the {@link ITransactionService} manages the state of transactions on
  * the distributed {@link IDataService}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -37,7 +37,7 @@ import org.embergraph.journal.ValidationError;
  */
 public interface ITxCommitProtocol extends Remote {
 
-  /**
+  /*
    * Notify a data service that it MAY release data required to support views for up to the
    * specified <i>releaseTime </i>. This is the mechanism by which read locks are released. In
    * effect, a read lock is a requirement that the releaseTime not be advanced as far as the start
@@ -48,9 +48,9 @@ public interface ITxCommitProtocol extends Remote {
    * @throws IllegalStateException if the read lock is set to a time earlier than its current value.
    * @throws IOException if there is an RMI problem.
    */
-  public void setReleaseTime(long releaseTime) throws IOException;
+  void setReleaseTime(long releaseTime) throws IOException;
 
-  /**
+  /*
    * Request abort of the transaction by the data service. This message is sent in response to
    * {@link ITransactionService#abort(long)} to each {@link IDataService} on which the transaction
    * has written. It is NOT sent for read-only transactions since they have no local state on the
@@ -60,9 +60,9 @@ public interface ITxCommitProtocol extends Remote {
    * @throws IllegalArgumentException if the transaction has not been started on this data service.
    * @throws IOException if there is an RMI problem.
    */
-  public void abort(long tx) throws IOException;
+  void abort(long tx) throws IOException;
 
-  /**
+  /*
    * Request commit of the transaction by the data service. In the case where the transaction is
    * entirely contained on the data service this method may be used to both prepare (validate) and
    * commit the transaction (a single phase commit). Otherwise a 2-/3- phase commit is required and
@@ -76,10 +76,10 @@ public interface ITxCommitProtocol extends Remote {
    * @throws ExecutionException This will wrap a {@link ValidationError} if validation fails.
    * @throws IOException if there is an RMI problem.
    */
-  public long singlePhaseCommit(long tx)
+  long singlePhaseCommit(long tx)
       throws InterruptedException, ExecutionException, IOException;
 
-  /**
+  /*
    * Request that the {@link IDataService} participate in a 3-phase commit.
    *
    * <p>When the {@link IDataService} is sent the {@link #prepare(long, long)} message it executes a
@@ -206,10 +206,10 @@ public interface ITxCommitProtocol extends Remote {
    *     <p>Failing that, we will need to exclude other tasks (or at least other distributed commit
    *     processing tasks) from the commit group.
    */
-  public void prepare(long tx, long revisionTime) throws Throwable, IOException;
+  void prepare(long tx, long revisionTime) throws Throwable, IOException;
 
-  //    /**
-  //     * Cancel a 2-phase commit.
+  //    /*
+//     * Cancel a 2-phase commit.
   //     *
   //     * @param tx
   //     *            The transaction identifier.

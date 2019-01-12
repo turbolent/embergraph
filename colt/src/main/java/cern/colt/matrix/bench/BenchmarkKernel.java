@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.matrix.bench;
 
-/**
- * Not yet documented.
+/*
+* Not yet documented.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 10-Nov-99

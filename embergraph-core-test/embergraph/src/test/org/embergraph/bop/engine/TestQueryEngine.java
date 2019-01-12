@@ -69,8 +69,8 @@ import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
-/**
- * Test suite for the {@link QueryEngine} against a local database instance.
+/*
+* Test suite for the {@link QueryEngine} against a local database instance.
  *
  * <p>Note: The {@link BOp}s are unit tested separately. This test suite is focused on interactions
  * when {@link BOp}s are chained together in a query, such as a sequence of pipeline joins, a slice
@@ -155,7 +155,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Starts and stops the {@link QueryEngine}, but does not validate the semantics of shutdown()
    * versus shutdownNow() since we need to be evaluating query mixes in order to verify the
    * semantics of those operations.
@@ -168,7 +168,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
 
   }
 
-  /**
+  /*
    * Test the ability to run a query which does nothing and produces no solutions.
    *
    * @throws Exception
@@ -180,12 +180,10 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)));
 
     final UUID queryId = UUID.randomUUID();
     final IRunningQuery runningQuery = queryEngine.eval(queryId, query, new ListBindingSet());
@@ -237,7 +235,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability run a simple join without a {@link StartOp}. An empty binding set[] is fed
    * into the join. The join probes the index once for "Mary" and binds "Paul" when it does so.
    * There there is one solution, which is "value=Paul".
@@ -260,11 +258,9 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         new PipelineJoin<E>(
@@ -316,7 +312,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability run a simple join. There are three operators. One feeds an empty binding set[]
    * into the join, another is the predicate for the access path on which the join will read (it
    * probes the index once for "Mary" and binds "Paul" when it does so), and the third is the join
@@ -334,20 +330,16 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<E> pred =
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp query =
         new PipelineJoin<E>(
@@ -410,7 +402,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability run a simple join when multiple binding sets are submitted as the initial
    * input. The access path associated with the join does not have any constants but the join picks
    * up bindings from the input binding sets and uses them to constrain the access path.
@@ -439,23 +431,19 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(PipelineOp.Annotations.CHUNK_CAPACITY, 1),
-                  new NV(PipelineOp.Annotations.CHUNK_OF_CHUNKS_CAPACITY, nsources),
-                  new NV(PipelineOp.Annotations.MAX_MESSAGES_PER_TASK, 1),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(PipelineOp.Annotations.CHUNK_CAPACITY, 1),
+                new NV(PipelineOp.Annotations.CHUNK_OF_CHUNKS_CAPACITY, nsources),
+                new NV(PipelineOp.Annotations.MAX_MESSAGES_PER_TASK, 1),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<E> predOp =
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> joinOp =
         new PipelineJoin<E>(
@@ -468,18 +456,17 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
             new BOp[] {joinOp},
             // slice annotations
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                  //                        new NV(
-                  //
-                  // QueryEngineTestAnnotations.COMBINE_RECEIVED_CHUNKS,
-                  //                                false),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
+                //                        new NV(
+                //
+                // QueryEngineTestAnnotations.COMBINE_RECEIVED_CHUNKS,
+                //                                false),
+            ));
 
     final PipelineOp query = sliceOp;
 
@@ -596,7 +583,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Test verifies the ability close the iterator draining a result set before the query has
    * finished executing and also verify that the query is correctly terminated.
    *
@@ -632,24 +619,20 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(PipelineOp.Annotations.CHUNK_CAPACITY, 1),
-                  new NV(PipelineOp.Annotations.CHUNK_OF_CHUNKS_CAPACITY, nsources),
-                  new NV(PipelineOp.Annotations.MAX_MESSAGES_PER_TASK, 1),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(PipelineOp.Annotations.CHUNK_CAPACITY, 1),
+                new NV(PipelineOp.Annotations.CHUNK_OF_CHUNKS_CAPACITY, nsources),
+                new NV(PipelineOp.Annotations.MAX_MESSAGES_PER_TASK, 1),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineDelayOp delayOp =
         new PipelineDelayOp(
             new BOp[] {startOp},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, delayId),
-                  new NV(PipelineDelayOp.Annotations.DELAY, 2000L /*ms*/),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(BOp.Annotations.BOP_ID, delayId),
+                new NV(PipelineDelayOp.Annotations.DELAY, 2000L /*ms*/),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)));
 
     // the source data.
     final IBindingSet[] source =
@@ -696,8 +679,8 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  //    /**
-  //     * Test the ability of the query engine to defer the evaluation of a one
+  //    /*
+//     * Test the ability of the query engine to defer the evaluation of a one
   //     * shot operator until all inputs are available for that operator.
   //     *
   //     * @todo We could do this using a mock operator and feeding a bunch of
@@ -712,7 +695,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
   //
   //    }
 
-  /**
+  /*
    * Unit test runs chunks into a slice without a limit. This verifies that the query terminates
    * properly even though the slice is willing to accept more data.
    *
@@ -739,35 +722,32 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(PipelineOp.Annotations.CHUNK_CAPACITY, 1),
-                  new NV(PipelineOp.Annotations.CHUNK_OF_CHUNKS_CAPACITY, nsources),
-                  new NV(PipelineOp.Annotations.MAX_MESSAGES_PER_TASK, 1),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(PipelineOp.Annotations.CHUNK_CAPACITY, 1),
+                new NV(PipelineOp.Annotations.CHUNK_OF_CHUNKS_CAPACITY, nsources),
+                new NV(PipelineOp.Annotations.MAX_MESSAGES_PER_TASK, 1),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final SliceOp sliceOp =
         new SliceOp(
             new BOp[] {startOp},
             // slice annotations
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.OFFSET, 0L),
-                  new NV(SliceOp.Annotations.LIMIT, Long.MAX_VALUE),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                  //                                        // Require the chunked running query
-                  // impl.
-                  //                                        new
-                  // NV(QueryEngine.Annotations.RUNNING_QUERY_CLASS,
-                  //
-                  // ChunkedRunningQuery.class.getName()),
-                }));
+                new NV(BOp.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.OFFSET, 0L),
+                new NV(SliceOp.Annotations.LIMIT, Long.MAX_VALUE),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)
+                //                                        // Require the chunked running query
+                // impl.
+                //                                        new
+                // NV(QueryEngine.Annotations.RUNNING_QUERY_CLASS,
+                //
+                // ChunkedRunningQuery.class.getName()),
+            ));
 
     // the source data.
     final IBindingSet[] source =
@@ -837,8 +817,8 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
       assertEquals((long) nsources, stats.unitsIn.get());
       assertEquals((long) nsources, stats.unitsOut.get());
       if (runningQuery instanceof ChunkedRunningQuery) {
-        /*
-         * The unit test setup will result in four distinct chunks
+      /*
+       * The unit test setup will result in four distinct chunks
          * being presented to the SliceOp and four distinct invocations
          * of the ChunkTask for that SliceOp.
          */
@@ -857,7 +837,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Run a join with a slice. The slice is always evaluated on the query controller so adding it to
    * the query plan touches a slightly different code path from adding another join (joins are
    * evaluated shardwise, at least in scale-out).
@@ -885,20 +865,16 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<E> predOp =
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> joinOp =
         new PipelineJoin<E>(
@@ -911,16 +887,14 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
             new BOp[] {joinOp},
             // slice annotations
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.OFFSET, 0L),
-                  new NV(SliceOp.Annotations.LIMIT, 2L),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(BOp.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.OFFSET, 0L),
+                new NV(SliceOp.Annotations.LIMIT, 2L),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)));
 
     // the expected solutions.
     final IBindingSet[] expected =
@@ -1026,10 +1000,8 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     /*
      *
@@ -1042,13 +1014,12 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                  //                        new NV(Predicate.Annotations.KEY_ORDER,
-                  //                                R.primaryKeyOrder),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)
+                //                        new NV(Predicate.Annotations.KEY_ORDER,
+                //                                R.primaryKeyOrder),
+            ));
 
     final PipelineJoin<E> joinOp =
         new PipelineJoin<E>(
@@ -1067,14 +1038,12 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
             new BOp[] {joinOp},
             // slice annotations
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)));
 
     // the expected solutions (order is not reliable due to concurrency).
     final IBindingSet[] expected =
@@ -1175,7 +1144,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability run a query requiring two joins.
    *
    * @todo Verify join constraints (e.g., x == y or x != y).
@@ -1193,30 +1162,24 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<?> pred1Op =
         new Predicate<E>(
             new IVariableOrConstant[] {Var.var("x"), Var.var("y")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId1),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId1),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred2Op =
         new Predicate<E>(
             new IVariableOrConstant[] {Var.var("y"), Var.var("z")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId2),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId2),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp join1Op =
         new PipelineJoin<E>(
@@ -1319,7 +1282,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * A stress test of {@link #test_query_join2()} which runs a fixed number of presentations in a
    * single thread.
    *
@@ -1346,7 +1309,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Concurrent stress test of {@link #test_queryJoin2()} which runs a fixed number of trials on a
    * pool of N=10 threads.
    *
@@ -1363,7 +1326,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     doStressTest(timeout, ntrials, poolSize);
   }
 
-  /**
+  /*
    * @param timeout
    * @param ntrials
    * @param poolSize
@@ -1401,7 +1364,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
                   }
                 }
               },
-              (Void) null);
+              null);
 
       futures.add(ft);
 
@@ -1466,7 +1429,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     return nsuccess;
   }
 
-  /**
+  /*
    * Unit test for optional join. Two joins are used and target a {@link SliceOp}. The 2nd join is
    * marked as optional. Intermediate results which do not succeed on the optional join are
    * forwarded to the {@link SliceOp} which is the target specified by the {@link
@@ -1490,31 +1453,25 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<?> pred1Op =
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId1),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId1),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred2Op =
         new Predicate<E>(
             new IVariableOrConstant[] {y, z},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId2),
-                  new NV(Predicate.Annotations.OPTIONAL, true),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId2),
+                new NV(Predicate.Annotations.OPTIONAL, true),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp join1Op =
         new PipelineJoin<E>(
@@ -1545,14 +1502,12 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new SliceOp(
             new BOp[] {condOp},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, sliceId),
-                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(BOp.Annotations.BOP_ID, sliceId),
+                new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)));
 
     final PipelineOp query = sliceOp;
 
@@ -1595,8 +1550,8 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
                   new Constant<String>("Leon"),
                   new Constant<String>("Paul")
                 }),
-            /*
-             * No. The CONSTRAINT on the 2nd join [x == y] filters all
+          /*
+       * No. The CONSTRAINT on the 2nd join [x == y] filters all
              * solutions. For solutions where the optional join fails, [y] is
              * not bound. Since [y] is part of the constraint on that join we DO
              * NOT observe those solutions which only join on the first access
@@ -1686,7 +1641,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link ConditionalRoutingOp}. This test case tests when the condition is true
    * (the joins are not skipped) in which case the test (and results) are essentially identical to
    * test_query_join2().
@@ -1768,7 +1723,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link ConditionalRoutingOp}. This test case tests when the condition is false
    * (the joins are skipped).
    */
@@ -1849,7 +1804,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Helper method to initialize a BOp tree that includes a ConditionalRoutinOp
    *
    * @param condition the condition to be tested in the ConditionalalRoutingOp
@@ -1870,41 +1825,33 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<?> pred1Op =
         new Predicate<E>(
             new IVariableOrConstant[] {Var.var("x"), Var.var("y")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId1),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId1),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred2Op =
         new Predicate<E>(
             new IVariableOrConstant[] {Var.var("y"), Var.var("z")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId2),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId2),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final ConditionalRoutingOp cond =
         new ConditionalRoutingOp(
             new BOp[] {startOp},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, condId),
-                  new NV(PipelineOp.Annotations.SINK_REF, joinId1),
-                  new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId),
-                  new NV(ConditionalRoutingOp.Annotations.CONDITION, condition),
-                }));
+                new NV(BOp.Annotations.BOP_ID, condId),
+                new NV(PipelineOp.Annotations.SINK_REF, joinId1),
+                new NV(PipelineOp.Annotations.ALT_SINK_REF, sliceId),
+                new NV(ConditionalRoutingOp.Annotations.CONDITION, condition)));
 
     final PipelineOp join1Op =
         new PipelineJoin<E>(
@@ -1922,14 +1869,12 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
         new SliceOp(
             new BOp[] {join2Op},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, sliceId),
-                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(BOp.Annotations.BOP_ID, sliceId),
+                new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, StandaloneChunkHandler.TEST_INSTANCE)));
 
     final PipelineOp query = sliceOp;
 
@@ -1953,7 +1898,7 @@ public class TestQueryEngine extends AbstractQueryEngineTestCase {
     return runningQuery;
   }
 
-  /**
+  /*
    * Test the LatchExecutor to verify reliable progression with multiple threads contending to add
    * tasks.
    *

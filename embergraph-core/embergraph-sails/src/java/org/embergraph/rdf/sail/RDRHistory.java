@@ -41,8 +41,8 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * This is an experimental feature that captures history using the change log mechanism and RDR. For
+/*
+* This is an experimental feature that captures history using the change log mechanism and RDR. For
  * each relevant change event (subclasses can decide relevance), a new triple is added to the
  * database, where the subject is the original statement, the predicate is the change action (added
  * or removed), and the object is the commit time.
@@ -78,7 +78,7 @@ public class RDRHistory implements IChangeLog {
   /** IV for the "removed" term. */
   private IV<?, ?> removed = null;
 
-  /**
+  /*
    * Dummy timestamp to use as change events come in. Will be replaced by actual commit time when
    * the transaction is committed.
    */
@@ -93,7 +93,7 @@ public class RDRHistory implements IChangeLog {
     this.database = database;
   }
 
-  /**
+  /*
    * Give subclasses the opportunity for any initialization, including obtaining the IVs for the
    * "added" and "removed" terms.
    */
@@ -222,7 +222,7 @@ public class RDRHistory implements IChangeLog {
     getOrCreateBuffer().add(spo);
   }
 
-  /**
+  /*
    * Subclasses can override this to only record history on certain change events.
    *
    * @param record change event
@@ -256,7 +256,7 @@ public class RDRHistory implements IChangeLog {
   @Override
   public void transactionPrepare() {}
 
-  /**
+  /*
    * Copy the statements from the temp store into the database, replacing the object position of
    * each statement with the commit time, then close out the temp store.
    */
@@ -310,8 +310,8 @@ public class RDRHistory implements IChangeLog {
       }
 
       if ((buffer.counter - removes.counter) == 0) {
-        /*
-         * Nothing written (net) to the temp store.
+      /*
+       * Nothing written (net) to the temp store.
          */
         return;
       }

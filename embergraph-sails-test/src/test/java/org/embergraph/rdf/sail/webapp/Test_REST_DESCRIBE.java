@@ -37,8 +37,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Proxied test suite.
+/*
+* Proxied test suite.
  *
  * @param <S> TODO Should test GET as well as POST (this requires that we configured the client
  *     differently).
@@ -109,7 +109,7 @@ public class Test_REST_DESCRIBE<S extends IIndexManager> extends AbstractTestNan
     doDescribeTest("POST", RDFFormat.TRIX);
   }
 
-  /**
+  /*
    * I am not quite sure about the origin of this test. It appears to have been related to the
    * conversion from apache http to jetty for the client API. I think that it was probably developed
    * by Martyn. bbt.

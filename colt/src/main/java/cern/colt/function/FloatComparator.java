@@ -8,8 +8,8 @@ that both that copyright notice and this permission notice appear in supporting 
 CERN makes no representations about the suitability of this software for any purpose.
 It is provided "as is" without expressed or implied warranty.
 */
-/**
- * A comparison function which imposes a <i>total ordering</i> on some collection of elements.
+/*
+* A comparison function which imposes a <i>total ordering</i> on some collection of elements.
  * Comparators can be passed to a sort method (such as <tt>cern.colt.Sorting.quickSort</tt>) to
  * allow precise control over the sort order.
  *
@@ -26,7 +26,7 @@ It is provided "as is" without expressed or implied warranty.
  * @see cern.colt.Sorting
  */
 public interface FloatComparator {
-  /**
+  /*
    * Compares its two arguments for order. Returns a negative integer, zero, or a positive integer
    * as the first argument is less than, equal to, or greater than the second.
    *
@@ -46,7 +46,7 @@ public interface FloatComparator {
    *     equal to, or greater than the second.
    */
   int compare(float o1, float o2);
-  /**
+  /*
    * Indicates whether some other object is &quot;equal to&quot; this Comparator. This method must
    * obey the general contract of <tt>Object.equals(Object)</tt>. Additionally, this method can
    * return <tt>true</tt> <i>only</i> if the specified Object is also a comparator and it imposes

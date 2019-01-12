@@ -31,8 +31,8 @@ import java.util.TreeMap;
 import junit.framework.TestCase2;
 import org.embergraph.util.CSVReader.Header;
 
-/**
- * Test suite for {@link CSVReader}.
+/*
+* Test suite for {@link CSVReader}.
  *
  * @todo test "correct" default intepretation of more kinds of formats by {@link
  *     Header#parseValue(String)}.
@@ -68,7 +68,7 @@ public class TestCSVReader extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test reads from a tab-delimited file <code>test.csv</code> with headers in the first row and
    * two rows of data.
    *
@@ -143,7 +143,7 @@ public class TestCSVReader extends TestCase2 {
     assertFalse(r.hasNext());
   }
 
-  /**
+  /*
    * Test reads from a tab-delimited file <code>test-no-headers.csv</code> with NO headers and two
    * rows of data.
    *
@@ -217,7 +217,7 @@ public class TestCSVReader extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Form data structure modeling an expected (parsed) row.
    *
    * @param headers The headers.

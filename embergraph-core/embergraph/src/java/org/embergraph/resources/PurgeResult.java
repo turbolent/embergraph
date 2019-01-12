@@ -7,8 +7,8 @@ import org.embergraph.journal.CommitRecordIndex;
 import org.embergraph.journal.ITransactionService;
 import org.embergraph.service.Params;
 
-/**
- * A class that captures the results of {@link StoreManager#purgeOldResources()}.
+/*
+* A class that captures the results of {@link StoreManager#purgeOldResources()}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -27,7 +27,7 @@ public class PurgeResult implements Serializable, Params {
   /** The release time as reported by the {@link ITransactionService}. */
   public final long givenReleaseTime;
 
-  /**
+  /*
    * The earliest timestamp that MUST be retained for the read-historical indices in the cache and
    * {@link Long#MAX_VALUE} if there are NO read-historical indices in the cache.
    */
@@ -36,13 +36,13 @@ public class PurgeResult implements Serializable, Params {
   /** The chosen release time. */
   public final long choosenReleaseTime;
 
-  /**
+  /*
    * The earliest commit time that was preserved by the purge operation (you can still read on this
    * commit point after the purge).
    */
   public final long commitTimeToPreserve;
 
-  /**
+  /*
    * The #of resources (journals and index segments) that are dependencies for index views from the
    * {@link #commitTimeToPreserve} until the {@link #lastCommitTime}.
    */
@@ -66,19 +66,19 @@ public class PurgeResult implements Serializable, Params {
   /** The #of bytes under management after the purge. */
   public final long bytesAfterCount;
 
-  /**
+  /*
    * Elapsed time in milliseconds required to scan the {@link CommitRecordIndex} for each historical
    * journal in order to identify the set of resources "in use" resources.
    */
   final long elapsedScanCommitIndicesTime;
 
-  /**
+  /*
    * Elapsed time in milliseconds required to delete the resources which have been identified as
    * being no longer required.
    */
   final long elapsedDeleteResourcesTime;
 
-  /**
+  /*
    * Total elapsed time in milliseconds for the purge resources operation. This includes both the
    * {@link #elapsedScanCommitIndicesTime} and the {@link #elapsedDeleteResourcesTime}.
    */

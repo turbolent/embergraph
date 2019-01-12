@@ -52,8 +52,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * Task for executing a program when all of the indices for the relation are co-located on the same
+/*
+* Task for executing a program when all of the indices for the relation are co-located on the same
  * {@link DataService}.
  *
  * @todo Named result sets. This would provide a means to run a IRuleTask and cache the output for
@@ -90,22 +90,22 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 
   private final IStep step;
 
-  /**
+  /*
    * Serializable field specified when the {@link ProgramTask} will be submitted (via RMI or not) to
    * a {@link DataService}. A new {@link IJoinNexus} is instantiated in the execution context on the
    * {@link DataService} from this field.
    */
   private final IJoinNexusFactory joinNexusFactory;
 
-  /**
+  /*
    * Note: NOT serialized! The {@link IIndexManager} will be set by {@link
    * #setDataService(DataService)} if this object submitted using {@link
    * DataService#submit(Callable)}.
    */
   private transient IIndexManager indexManager;
 
-  //    /**
-  //     * Note: NOT serialized!
+  //    /*
+//     * Note: NOT serialized!
   //     */
   //    private transient DataService dataService;
 
@@ -117,7 +117,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
     this.indexManager = dataService.getFederation();
   }
 
-  /**
+  /*
    * Variant when the task will be submitted using {@link IDataService#submit(Callable)} (efficient
    * since all indices will be local, but the indices must not be partitioned and must all exist on
    * the target {@link DataService}).
@@ -151,7 +151,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
     this.indexManager = null;
   }
 
-  /**
+  /*
    * Variant when the task will be executed directly by the caller.
    *
    * @param action
@@ -183,7 +183,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
     this.indexManager = indexManager;
   }
 
-  /**
+  /*
    * Execute the program.
    *
    * <p>Note: There is no natural order for high-level query. Also, unless stable evaluation is
@@ -210,16 +210,16 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 
         if (!step.isRule() && ((IProgram) step).isClosure()) {
 
-          /*
-           * Compute closure of a flat set of rules.
+        /*
+       * Compute closure of a flat set of rules.
            */
 
           totals = executeClosure((IProgram) step);
 
         } else if (util.isClosureProgram(step)) {
 
-          /*
-           * Compute closure of a program that embedded closure
+        /*
+       * Compute closure of a program that embedded closure
            * operations.
            */
 
@@ -227,8 +227,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 
         } else {
 
-          /*
-           * Execute a mutation operation that does not use closure.
+        /*
+       * Execute a mutation operation that does not use closure.
            */
 
           totals = executeMutation(step);
@@ -242,16 +242,16 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 
         if ((!step.isRule() && ((IProgram) step).isClosure()) || util.isClosureProgram(step)) {
 
-          /*
-           * The step is either a closure program or embeds a closure
+        /*
+       * The step is either a closure program or embeds a closure
            * program.
            */
 
           throw new UnsupportedOperationException("Closure only allowed for mutation.");
         }
 
-        /*
-         * Execute a query.
+      /*
+       * Execute a query.
          */
         return new ChunkConsumerIterator<ISolution>(executeQuery(step));
       }
@@ -262,7 +262,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
     }
   }
 
-  /**
+  /*
    * Execute the {@link IStep} as a query.
    *
    * @param step The {@link IStep}.
@@ -356,7 +356,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
     }
   }
 
-  /**
+  /*
    * Run a mutation {@link IStep}. The {@link IStep} may consist of many sub-{@link IStep}s.
    *
    * <p>Note: If you specify {@link ITx#READ_COMMITTED} for mutation operations when using a
@@ -395,8 +395,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
 
       if (indexManager instanceof IEmbergraphFederation<?>) {
 
-        /*
-         * Advance the read-consistent timestamp so that any writes from
+      /*
+       * Advance the read-consistent timestamp so that any writes from
          * the previous rules or the last round are now visible.
          *
          * Note: The federation has shard-wise autoCommit semantics
@@ -408,8 +408,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
         final long lastCommitTime = indexManager.getLastCommitTime();
 
         try {
-          /*
-           * A read-only tx reading from the lastCommitTime.
+        /*
+       * A read-only tx reading from the lastCommitTime.
            *
            * Note: This provides a read-lock on the commit time from
            * which the mutation task will read.
@@ -433,8 +433,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
           && indexManager instanceof Journal
           && ((Journal) indexManager).getBufferStrategy().getBufferMode() == BufferMode.DiskRW) {
 
-        /*
-         * Do a commit and then advance the read-consistent timestamp so
+      /*
+       * Do a commit and then advance the read-consistent timestamp so
          * that any writes from the previous rules or the last round are
          * now visible.
          *
@@ -452,8 +452,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
         // force a commit before running the mutation rule.
         final long lastCommitTime = jnl.commit();
 
-        /*
-         * A read-only tx reading from the commit point we just
+      /*
+       * A read-only tx reading from the commit point we just
          * introduced.
          *
          * Note: This provides a read-lock on the commit time from which
@@ -488,8 +488,8 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
     } finally {
 
       if (tx != 0L) {
-        /*
-         * Terminate the read-only tx (releases the read-lock).
+      /*
+       * Terminate the read-only tx (releases the read-lock).
          */
         if (indexManager instanceof IEmbergraphFederation<?>) {
           try {
@@ -504,7 +504,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
     }
   }
 
-  /**
+  /*
    * Computes the closure of a set of {@link IRule}s until the relation(s) on which they are writing
    * reach a "fixed point".
    *
@@ -637,7 +637,7 @@ public class ProgramTask extends DataServiceCallable<Object> implements IProgram
     return totals;
   }
 
-  /**
+  /*
    * Execute an {@link IProgram} containing one or more sub-{@link IProgram} that are closure
    * operations. The top-level program must not be a closure operation. All steps above the closure
    * operations will be run in a sequence. The closure operations themselves will be executed using

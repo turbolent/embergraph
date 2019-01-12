@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * A Graph Update operation.
+/*
+* A Graph Update operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -45,7 +45,7 @@ public abstract class GraphUpdate extends Update {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

@@ -35,8 +35,8 @@ import org.embergraph.service.fts.FulltextSearchHit;
 import org.embergraph.service.fts.FulltextSearchHiterator;
 import org.embergraph.service.fts.IFulltextSearch;
 
-/**
- * Implementation based on the built-in keyword search capabilities for embergraph.
+/*
+* Implementation based on the built-in keyword search capabilities for embergraph.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -87,7 +87,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
       final String[] params = searchParams.split("&");
       for (int i = 0; i < params.length; i++) {
         if (params[i] != null) {
-          String kv[] = params[i].split("=");
+          String[] kv = params[i].split("=");
           if (kv.length == 2 && kv[0] != null && !(kv[0].isEmpty())) {
             if (!(kv[0].equals("wt"))) {
               try {
@@ -133,7 +133,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
     return constructFulltextSearchList(json, query);
   }
 
-  /**
+  /*
    * Constructs a list of fulltext search results from a Solr json result string.
    *
    * @param solrResultsJSON
@@ -208,7 +208,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
     return searchHits.toArray(new FulltextSearchHit[searchHits.size()]);
   }
 
-  /**
+  /*
    * Flattens a JSON result item, i.e. if the item is an array, it is (non-recursively) flattened,
    * applying toString() to sub items, otherwise toString() is called directly.
    *

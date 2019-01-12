@@ -47,8 +47,8 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Statement;
 
-/**
- * Utility class for comparing graphs for equality, bulk export, etc.
+/*
+* Utility class for comparing graphs for equality, bulk export, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -57,7 +57,7 @@ public class TripleStoreUtility {
 
   protected static final Logger log = Logger.getLogger(TripleStoreUtility.class);
 
-  /**
+  /*
    * Compares two RDF graphs for equality (same statements).
    *
    * <p>Note: This does NOT handle bnodes, which much be treated as variables for RDF semantics.
@@ -191,25 +191,22 @@ public class TripleStoreUtility {
     if (log.isInfoEnabled()) log.info(s);
   }
 
-  /**
+  /*
    * Visits <i>expected</i> {@link EmbergraphStatement}s not found in <i>actual</i>.
    *
    * @param expected
    * @param actual
    * @return An iterator visiting {@link EmbergraphStatement}s present in <i>expected</i> but not
    *     found in <i>actual</i>.
-   * @throws ExecutionException
-   * @throws InterruptedException
    */
   public static ICloseableIterator<EmbergraphStatement> notFoundInTarget(
-      final AbstractTripleStore expected, final AbstractTripleStore actual)
-      throws InterruptedException, ExecutionException {
+      final AbstractTripleStore expected, final AbstractTripleStore actual) {
 
     /*
      * The source access path is a full scan of the SPO index.
      */
     final IAccessPath<ISPO> expectedAccessPath =
-        expected.getAccessPath((IV) null, (IV) null, (IV) null);
+        expected.getAccessPath((IV) null, null, null);
 
     /*
      * Efficiently convert SPOs to EmbergraphStatements (externalizes
@@ -227,8 +224,8 @@ public class TripleStoreUtility {
         new StatementBuffer2<Statement, EmbergraphStatement>(
             actual, true /* readOnly */, capacity) {
 
-          /**
-           * Statements not found in [actual] are written on the BlockingBuffer.
+        /*
+       * Statements not found in [actual] are written on the BlockingBuffer.
            *
            * @return The #of statements that were not found.
            */
@@ -269,7 +266,7 @@ public class TripleStoreUtility {
           }
         };
 
-    /**
+    /*
      * Run task. The task consumes externalized statements from [expected] and writes statements not
      * found in [actual] onto the blocking buffer.
      */
@@ -297,8 +294,8 @@ public class TripleStoreUtility {
               itr2.close();
             }
 
-            /*
-             * Flush everything in the StatementBuffer so that it
+          /*
+       * Flush everything in the StatementBuffer so that it
              * shows up in the BlockingBuffer's iterator().
              */
 
@@ -310,7 +307,7 @@ public class TripleStoreUtility {
           }
         };
 
-    /**
+    /*
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">BlockingBuffer.close()
      *     does not unblock threads </a>
      */
@@ -332,7 +329,7 @@ public class TripleStoreUtility {
     return buffer.iterator();
   }
 
-  /**
+  /*
    * Exports all statements found in the data and all backchained entailments for the <i>db</i> into
    * a {@link TempTripleStore}. This may be used to compare graphs purely in their data by
    * pre-generation of all backchained entailments.
@@ -394,7 +391,7 @@ public class TripleStoreUtility {
     return tmp;
   }
 
-  /**
+  /*
    * Compares two {@link LocalTripleStore}s
    *
    * @param args filename filename (namespace)

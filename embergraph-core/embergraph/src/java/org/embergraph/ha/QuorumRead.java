@@ -26,8 +26,8 @@ import java.util.UUID;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * A non-remote interface for a member service in a {@link Quorum} defining methods to support
+/*
+* A non-remote interface for a member service in a {@link Quorum} defining methods to support
  * reading on another member of the quorum.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -35,7 +35,7 @@ import org.embergraph.rawstore.IRawStore;
  */
 public interface QuorumRead<S extends HAReadGlue> { // extends QuorumService<S> {
 
-  /**
+  /*
    * Used by any service joined with the quorum to read a record from another service joined with
    * the quorum in order to work around a "bad read" as identified by a checksum error on the local
    * service.

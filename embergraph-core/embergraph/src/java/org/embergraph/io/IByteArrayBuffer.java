@@ -28,8 +28,8 @@ package org.embergraph.io;
 import it.unimi.dsi.fastutil.io.RepositionableStream;
 import java.nio.ByteBuffer;
 
-/**
- * An interface for reading from and accessing a managed byte[] with access methods similar to those
+/*
+* An interface for reading from and accessing a managed byte[] with access methods similar to those
  * of {@link ByteBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -38,7 +38,7 @@ import java.nio.ByteBuffer;
  */
 public interface IByteArrayBuffer extends IDataRecord, IManagedByteArray {
 
-  /**
+  /*
    * The backing byte[] WILL be transparently replaced if the buffer capacity is extended.
    * {@inheritDoc}
    */
@@ -53,7 +53,7 @@ public interface IByteArrayBuffer extends IDataRecord, IManagedByteArray {
   /** The capacity of the buffer. */
   int capacity();
 
-  /**
+  /*
    * The current position in the buffer.
    *
    * <p>Note: The method name was choose to avoid a collision with {@link
@@ -61,7 +61,7 @@ public interface IByteArrayBuffer extends IDataRecord, IManagedByteArray {
    */
   int pos();
 
-  /**
+  /*
    * The read limit (there is no write limit on the buffer since the capacity will be automatically
    * extended on overflow).
    */

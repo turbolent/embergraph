@@ -28,8 +28,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Abstract base class for non-inline {@link IV}s which use the extension bit and distinguish
+/*
+* Abstract base class for non-inline {@link IV}s which use the extension bit and distinguish
  * themselves by an {@link #getExtensionByte() extension byte} following the flags byte.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +45,7 @@ public abstract class AbstractNonInlineExtensionIV<V extends EmbergraphValue, T>
     super(flags);
   }
 
-  /**
+  /*
    * @param vte
    * @param dte
    */
@@ -54,7 +54,7 @@ public abstract class AbstractNonInlineExtensionIV<V extends EmbergraphValue, T>
     super(vte, true /* extension */, dte);
   }
 
-  /**
+  /*
    * Return the extension byte for this type of non-inline IV.
    *
    * @see INonInlineExtensionCodes

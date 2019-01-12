@@ -23,8 +23,8 @@ package org.embergraph.journal;
 
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Interface for low-level operations on a store supporting an atomic commit. Persistent
+/*
+* Interface for low-level operations on a store supporting an atomic commit. Persistent
  * implementations of this interface are restart-safe.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,9 +33,9 @@ import org.embergraph.rawstore.IRawStore;
 public interface IAtomicStore extends IRawStore {
 
   /** Abandon the current write set (synchronous). */
-  public void abort();
+  void abort();
 
-  /**
+  /*
    * Atomic commit (synchronous).
    *
    * <p>Note: if the commit fails (by throwing any kind of exception) then you MUST invoke {@link
@@ -46,17 +46,17 @@ public interface IAtomicStore extends IRawStore {
    * @exception IllegalStateException if the store is not open.
    * @exception IllegalStateException if the store is not writable.
    */
-  public long commit();
+  long commit();
 
-  /**
+  /*
    * Return <code>true</code> if the store has been modified since the last {@link #commit()} or
    * {@link #abort()}.
    *
    * @return true if store has been modified since last {@link #commit()} or {@link #abort()}.
    */
-  public boolean isDirty();
+  boolean isDirty();
 
-  /**
+  /*
    * Set a persistence capable data structure for callback during the commit protocol.
    *
    * <p>Note: the committers must be reset after restart or whenever
@@ -65,25 +65,25 @@ public interface IAtomicStore extends IRawStore {
    *     recorded.
    * @param committer The committer.
    */
-  public void setCommitter(int index, ICommitter committer);
+  void setCommitter(int index, ICommitter committer);
 
-  /**
+  /*
    * The last address stored in the specified root slot as of the last committed state of the store.
    *
    * @param index The index of the root address to be retrieved.
    * @return The address stored at that index.
    * @exception IndexOutOfBoundsException if the index is negative or too large.
    */
-  public long getRootAddr(int index);
+  long getRootAddr(int index);
 
-  /**
+  /*
    * Return a read-only view of the current root block.
    *
    * @return The current root block.
    */
-  public IRootBlockView getRootBlockView();
+  IRootBlockView getRootBlockView();
 
-  /**
+  /*
    * Return the {@link ICommitRecord} for the most recent committed state whose commit timestamp is
    * less than or equal to <i>timestamp</i>. This is used by a {@link Tx transaction} to locate the
    * committed state that is the basis for its operations.
@@ -93,7 +93,7 @@ public interface IAtomicStore extends IRawStore {
    *     less than or equal to <i>timestamp</i> -or- <code>null</code> iff there are no {@link
    *     ICommitRecord}s that satisfy the probe.
    */
-  public ICommitRecord getCommitRecord(long timestamp);
+  ICommitRecord getCommitRecord(long timestamp);
 
   /*
    * These methods have been removed from the public interface. They were only
@@ -101,8 +101,8 @@ public interface IAtomicStore extends IRawStore {
    * implementations.
    */
 
-  //	/**
-  //	 * Return the root block view associated with the commitRecord for the
+  //	/*
+//	 * Return the root block view associated with the commitRecord for the
   //	 * provided commit time.  This requires accessing the next commit record
   //	 * since it is the previous root block that is referenced from each record.
   //	 *
@@ -114,8 +114,8 @@ public interface IAtomicStore extends IRawStore {
   //	 */
   //	public IRootBlockView getRootBlock(final long commitTime);
   //
-  //	/**
-  //	 *
+  //	/*
+//	 *
   //	 * @param startTime from which to begin iteration
   //	 *
   //	 * @return an iterator over the committed root blocks

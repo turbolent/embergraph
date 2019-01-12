@@ -61,8 +61,8 @@ import org.embergraph.rwstore.sector.IMemoryManager;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.concurrent.Memoizer;
 
-/**
- * {@link IRunningQuery} implementation based on the assignment of {@link IChunkMessage}(s) to an
+/*
+* {@link IRunningQuery} implementation based on the assignment of {@link IChunkMessage}(s) to an
  * operator task. Operators (other than those with "operator-at-once" evaluation semantics) will
  * typically executed multiple times, consuming at least one {@link IChunkMessage} each time they
  * are evaluated. {@link IChunkMessage}s target a specific operator (bopId) and shard (shardId). In
@@ -87,7 +87,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
   /** Logger for the {@link ChunkTask}. */
   private static final Logger chunkTaskLog = Logger.getLogger(ChunkTask.class);
 
-  /**
+  /*
    * Used to map {@link IBindingSet}s across the federation or to migrate solutions from the managed
    * object heap onto the native heap.
    *
@@ -95,14 +95,14 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
    */
   private final IChunkHandler chunkHandler;
 
-  /**
+  /*
    * A collection of (bopId,partitionId) keys mapped onto a collection of operator task evaluation
    * contexts for currently executing operators for this query.
    */
   private final ConcurrentHashMap<BSBundle, ConcurrentHashMap<ChunkFutureTask, ChunkFutureTask>>
       operatorFutures;
 
-  /**
+  /*
    * A map of unbounded work queues for each (bopId,partitionId). Empty queues are removed from the
    * map.
    *
@@ -124,14 +124,14 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
    */
   private final ConcurrentMap<BSBundle, BlockingQueue<IChunkMessage<IBindingSet>>> operatorQueues;
 
-  /**
+  /*
    * Set to <code>true</code> to make {@link #operatorQueues} and ordered map. When <code>true
    * </code>, {@link #consumeChunk()} will have an ordered bias in how it schedules work. [The
    * historical behavior is present when this is <code>false</code>.]
    */
   private static final boolean orderedOperatorQueueMap = false;
 
-  /**
+  /*
    * FIXME It appears that this is Ok based on a single unit test known to fail when {@link
    * #removeMapOperatorQueueEntries} is <code>true</code>, but I expect that a similar concurrency
    * problem could also exist for the {@link #operatorFutures} even through it does not produce a
@@ -139,14 +139,14 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
    */
   private static final boolean removeMapOperatorFutureEntries = false;
 
-  /**
+  /*
    * FIXME See operatorQueues for why removing the map entries appears to cause problems. This is
    * problem is demonstrated by TestQueryEngine#test_query_slice_noLimit() when {@link
    * PipelineOp.Annotations#PIPELINE_QUEUE_CAPACITY} is ONE (1).
    */
   private static final boolean removeMapOperatorQueueEntries = false;
 
-  /**
+  /*
    * When <code>true</code> the {@link IHaltOpMessage} is queued on an {@link Executor} and will be
    * delivered asynchronously to the query controller. When <code>false</code> the message is
    * delivered in the same thread that ran the {@link ChunkTask}. This has implications for the
@@ -161,8 +161,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
    */
   private static final boolean asynchronousHaltMessage = true;
 
-  //    /**
-  //     * The chunks available for immediate processing (they must have been
+  //    /*
+//     * The chunks available for immediate processing (they must have been
   //     * materialized).
   //     * <p>
   //     * Note: This is package private so it will be visible to the
@@ -171,7 +171,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
   //    final/* private */BlockingQueue<IChunkMessage<IBindingSet>> chunksIn = new
   // LinkedBlockingDeque<IChunkMessage<IBindingSet>>();
 
-  /**
+  /*
    * @param queryEngine The {@link QueryEngine} on which the query is running. In scale-out, a query
    *     is typically instantiated on many {@link QueryEngine}s.
    * @param queryId The identifier for that query.
@@ -215,7 +215,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   }
 
-  /**
+  /*
    * Make a chunk of binding sets available for consumption by the query.
    *
    * <p>Note: this is invoked by {@link QueryEngine#acceptChunk(IChunkMessage)}
@@ -250,8 +250,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
       if (queue == null) {
 
-        /*
-         * There is no input queue for this operator, so we create one
+      /*
+       * There is no input queue for this operator, so we create one
          * now while we are holding the lock. If the target is a
          * pipelined operator, then we impose a limit on the #of
          * messages which may be buffered for that operator. If the
@@ -279,8 +279,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
         // Add to the collection of operator input queues.
         if (operatorQueues.put(bundle, queue) != null) {
 
-          /*
-           * There must not be an entry for this operator. We checked
+        /*
+       * There must not be an entry for this operator. We checked
            * for this above. Nobody else should be adding entries into
            * the [operatorQueues] map.
            */
@@ -329,7 +329,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}.
    *
    * <p>Examines the input queue for each (bopId,partitionId). If there is work available and no
@@ -349,7 +349,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   }
 
-  /**
+  /*
    * Overridden to attempt to consume another chunk each time an operator reports that it has halted
    * evaluation. This is necessary because the haltOp() message can arrive asynchronously, so we
    * need to test the work queues in case there are "at-once" operators awaiting the termination of
@@ -366,7 +366,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   }
 
-  /**
+  /*
    * Examine the input queue for the (bopId,partitionId). If there is work available, then drain the
    * work queue and submit a task to consume that work. This handles {@link
    * PipelineOp.Annotations#MAX_PARALLEL}, {@link PipelineOp.Annotations#PIPELINED}, and {@link
@@ -412,8 +412,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
         }
       }
       if (nrunning >= maxParallel) {
-        /*
-         * Defer concurrent execution for the same (bopId,shardId) since
+      /*
+       * Defer concurrent execution for the same (bopId,shardId) since
          * there are already at lease [maxParallel] instances of this
          * operator running for that (bopId,shardId).
          */
@@ -553,8 +553,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       boolean atOnceReady = false;
       if (!pipelined) {
         if (!isAtOnceReady(bundle.bopId)) {
-          /*
-           * This operator is not pipelined, so we need to wait until
+        /*
+       * This operator is not pipelined, so we need to wait until
            * all of its input solutions have been materialized (no
            * prior operator in the pipeline is running or has inputs
            * available which could cause it to run).
@@ -580,8 +580,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       final List<IChunkMessage<IBindingSet>> accepted =
           new LinkedList<IChunkMessage<IBindingSet>>();
       try {
-        /*
-         * Note: Once we drain these messages from the work queue we are
+      /*
+       * Note: Once we drain these messages from the work queue we are
          * responsible for calling release() on them.
          */
         queue.drainTo(accepted, pipelined ? maxMessagesPerTask : Integer.MAX_VALUE);
@@ -606,8 +606,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
           if (removeMapOperatorQueueEntries)
             if (queue != operatorQueues.remove(bundle)) throw new AssertionError();
         } else if (pipelined) {
-          /*
-           * After removing the maximum amount from a pipelined operator,
+        /*
+       * After removing the maximum amount from a pipelined operator,
            * the work queue is still not empty.
            */
           if (INFO)
@@ -623,8 +623,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
                     + ", runState="
                     + runStateString());
         }
-        /*
-         * Combine the messages into a single source to be consumed by a
+      /*
+       * Combine the messages into a single source to be consumed by a
          * task.
          */
         int nassigned = 1;
@@ -637,8 +637,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
                 //                    && maxParallel == 1
                 //                    && isOperatorDone(bundle.bopId)
                 && firstChunk.isLastInvocation();
-        /*
-         * Note: There is no longer any reliance on the IAsynchronous
+      /*
+       * Note: There is no longer any reliance on the IAsynchronous
          * Iterator API here. It is perfectly sufficient to only
          * implement ICloseableIterator. Query operator and chunk
          * message implementations should be revisited with this
@@ -665,8 +665,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
           solutionsAccepted = na;
         }
         if (nassigned != naccepted) throw new AssertionError();
-        /*
-         * Create task to consume that source.
+      /*
+       * Create task to consume that source.
          */
         final ChunkFutureTask cft;
         try {
@@ -684,8 +684,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
           // normal termination - swallow the exception.
           return false;
         }
-        /*
-         * Save the Future for this task. Together with the logic above this
+      /*
+       * Save the Future for this task. Together with the logic above this
          * may be used to limit the #of concurrent tasks per (bopId,shardId)
          * to one for a given query.
          */
@@ -694,8 +694,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
           operatorFutures.put(bundle, map);
         }
         map.put(cft, cft);
-        /*
-         * Submit task for execution (asynchronous).
+      /*
+       * Submit task for execution (asynchronous).
          */
         if (INFO)
           log.info(
@@ -722,7 +722,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   }
 
-  /**
+  /*
    * Ensure messages are {@link IChunkMessage#release() released()}. Nothing is thrown unless the
    * {@link Throwable} has a root cause which indicates an interrupt.
    *
@@ -751,7 +751,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   }
 
-  /**
+  /*
    * A {@link FutureTask} which conditionally schedules another task for the same (bopId,
    * partitionId) once this the wrapped {@link ChunkTask} is done. This is similar to the {@link
    * Memoizer} pattern. This class coordinates with the {@link #operatorFutures}, which maintains a
@@ -798,8 +798,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
       } finally {
 
-        /*
-         * This task is done executing so remove its Future before we
+      /*
+       * This task is done executing so remove its Future before we
          * attempt to schedule another task for the same
          * (bopId,partitionId).
          */
@@ -818,7 +818,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   }
 
-  /**
+  /*
    * Wraps the {@link ChunkTask} and handles various handshaking with the {@link
    * ChunkedRunningQuery} and the {@link RunState} on the query controller. Since starting and
    * stopping a {@link ChunkTask} requires handshaking with the query controller (and thus can
@@ -845,8 +845,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       final QueryEngineCounters c = queryEngine.counters;
       try {
 
-        /*
-         * Notify query controller that operator task will start (sync
+      /*
+       * Notify query controller that operator task will start (sync
          * notification).
          *
          * Note: This is potentially an RMI back to the controller. It
@@ -871,8 +871,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
                     //                                lastPassRequested
                     ));
 
-        /*
-         * Run the operator task.
+      /*
+       * Run the operator task.
          */
         final long begin = System.currentTimeMillis();
         try {
@@ -897,8 +897,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
       } catch (Throwable ex1) {
 
-        /*
-         * Mark the query as halted on this node regardless of whether
+      /*
+       * Mark the query as halted on this node regardless of whether
          * we are able to communicate with the query controller.
          *
          * Note: Invoking halt(t) here will log an error. This logged
@@ -921,7 +921,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     } // runOnce()
   }
 
-  /**
+  /*
    * Send a {@link IHaltOpMessage}. Whether the delivery is synchronous or not depends on {@link
    * #asynchronousHaltMessage}. If this is the controller and we are using synchronous message
    * delivery, then the message is delivered directly to {@link
@@ -948,8 +948,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
     if (asynchronousHaltMessage) {
       try {
-        /*
-         * Queue a task to send the halt message to the query controller
+      /*
+       * Queue a task to send the halt message to the query controller
          * (asynchronous notification).
          */
         final SendHaltMessageTask sendTask =
@@ -974,7 +974,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   }
 
-  /**
+  /*
    * Runnable evaluates an operator for some chunk of inputs. In scale-out, the operator may be
    * evaluated against some partition of a scale-out index.
    */
@@ -986,7 +986,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     /** The index of the bop which is being evaluated. */
     private final int bopId;
 
-    /**
+    /*
      * The index partition against which the operator is being evaluated and <code>-1</code> if the
      * operator is not being evaluated against a shard.
      */
@@ -995,7 +995,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     /** The operator which is being evaluated. */
     private final BOp bop;
 
-    /**
+    /*
      * The index of the operator which is the default sink for outputs generated by this evaluation.
      * This is the {@link BOp.Annotations#BOP_ID} of the parent of this operator. This will be
      * <code>null</code> if the operator does not have a parent and is not a query since no outputs
@@ -1003,7 +1003,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
      */
     private final Integer sinkId;
 
-    /**
+    /*
      * The index of the operator which is the alternative sink for outputs generated by this
      * evaluation. This is <code>null</code> unless the operator explicitly specifies an alternative
      * sink using either {@link PipelineOp.Annotations#ALT_SINK_REF} or {@link
@@ -1011,13 +1011,13 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
      */
     private final Integer altSinkId;
 
-    /**
+    /*
      * The sink on which outputs destined for the {@link #sinkId} operator will be written and
      * <code>null</code> if {@link #sinkId} is <code>null</code>.
      */
     private final IBlockingBuffer<IBindingSet[]> sink;
 
-    /**
+    /*
      * The sink on which outputs destined for the {@link #altSinkId} operator will be written and
      * <code>null</code> if {@link #altSinkId} is <code>null</code>.
      */
@@ -1026,7 +1026,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     /** The evaluation context for this operator. */
     private final BOpContext<IBindingSet> context;
 
-    /**
+    /*
      * {@link FutureTask} which evaluates the operator (evaluation is delegated to this {@link
      * FutureTask}).
      */
@@ -1058,7 +1058,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
           + "}";
     }
 
-    /**
+    /*
      * Core implementation.
      *
      * <p>This looks up the {@link BOp} which is the target for the message in the {@link
@@ -1176,8 +1176,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       //                    .getProperty(PipelineOp.Annotations.CONDITIONAL_GROUP);
 
       if (p == null) {
-        /*
-         * The top-most operator in the query plan is the last operator
+      /*
+       * The top-most operator in the query plan is the last operator
          * in evaluation order. It MUST run on the query controller.
          * This is required in order for it to add solutions to the
          * query buffer. The QueryEngine verifies this before it
@@ -1210,8 +1210,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       if (altSinkId == null) {
         altSink = null;
         // } else if(altSinkId.equals(sinkId)){
-        /*
-         * @todo Note: The optimization when altSink:=sink is now only
+      /*
+       * @todo Note: The optimization when altSink:=sink is now only
          * possible when the groupId is not changing during the
          * transition.
          */
@@ -1249,7 +1249,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       if ((ft = op.eval(context)) == null) throw new RuntimeException("No future: " + op);
     }
 
-    /**
+    /*
      * Factory returns the {@link IBlockingBuffer} on which the operator should write its outputs
      * which target the specified <i>sinkId</i>.
      *
@@ -1283,8 +1283,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       try {
         ft.run(); // run
         ft.get(); // verify success
-        /*
-         * If the operator ran successfully, then it should have flushed
+      /*
+       * If the operator ran successfully, then it should have flushed
          * its sink(s) and closed them.
          */
         if (sink != null) {
@@ -1296,8 +1296,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
           altSink.close();
         }
       } catch (Throwable t) {
-        /*
-         * Ensure query halts.
+      /*
+       * Ensure query halts.
          *
          * Note: This is where we attach the metadata about the operator
          * and query for which the error was observed.
@@ -1309,16 +1309,16 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
         }
         // otherwise ignore exception (normal completion).
       } finally {
-        /*
-         * Ensure that the source is closed.
+      /*
+       * Ensure that the source is closed.
          *
          * TODO This is not being guarded by a lock so we might not
          * safely publish the state change to the source iterator when
          * it is closed.
          */
         context.getSource().close();
-        /**
-         * Ensure that the task is cancelled.
+      /*
+       * Ensure that the task is cancelled.
          *
          * <p>Note: This does not appear to be necessary. I am observing the interrupt of the
          * operator evaluation task regardless.
@@ -1335,7 +1335,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     } // call()
   } // class ChunkTask
 
-  /**
+  /*
    * A delegation pattern which does not pass on the {@link #close()} method. This is used to
    * prevent a {@link PipelineOp} from accidentally closing the query buffer.
    */
@@ -1375,7 +1375,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   } // class NoCloseBuffer
 
-  /**
+  /*
    * Class traps {@link #add(IBindingSet[])} to handle the {@link IBindingSet} [] chunks as they are
    * generated by the running operator task, invoking {@link
    * ChunkedRunningQuery#handleOutputChunk(BOp, int, IBlockingBuffer)} for each generated chunk to
@@ -1395,8 +1395,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
     private final int sinkId;
 
-    //        /**
-    //         * The desired chunk size.
+    //        /*
+//         * The desired chunk size.
     //         */
     //        private final int chunkCapacity;
 
@@ -1405,7 +1405,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
     /** The maximum desired chunk size (150% of the {@link #chunkCapacity}) */
     private final int maxChunkSize;
-    /**
+    /*
      * When <code>true</code>, the buffer MAY reorder solutions. When <code>false</code>, it MUST
      * NOT.
      */
@@ -1417,20 +1417,20 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
     private volatile boolean open = true;
 
-    /**
+    /*
      * A list of small chunks that will be combined into a single chunk. The solutions in this list
      * are always evicted by {@link #flush()}.
      */
     private List<IBindingSet[]> smallChunks = null;
 
-    /**
+    /*
      * The #of elements in the {@link #smallChunks} buffer. Each element is an {@link IBindingSet},
      * so this is the number of solutions that have not yet been flushed through because we have not
      * yet made up a single decent sized chunk.
      */
     private int chunkSize = 0;
 
-    /**
+    /*
      * @param q
      * @param bopId
      * @param sinkId
@@ -1461,7 +1461,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       this.maxChunkSize = chunkCapacity + (chunkCapacity >> 1); // 150%
     }
 
-    /**
+    /*
      * Handle sink output, sending appropriate chunk message(s). This method MUST NOT block since
      * that will deadlock the caller.
      *
@@ -1479,13 +1479,13 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       if (!open) throw new BufferClosedException();
 
       if (SolutionsLog.INFO) {
-        SolutionsLog.log(q.getQueryId(), q.getBOp(bopId), bopId, partitionId, (IBindingSet[]) e);
+        SolutionsLog.log(q.getQueryId(), q.getBOp(bopId), bopId, partitionId, e);
       }
 
       if (false) {
 
-        /*
-         * Note: Do this INSTEAD if you want to complete disable both
+      /*
+       * Note: Do this INSTEAD if you want to complete disable both
          * reordering and chunk combination. This should ONLY be used
          * for debugging. Chunk combination is an important throughput
          * enhancer.
@@ -1508,7 +1508,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       }
     } // add()
 
-    /**
+    /*
      * We are allowed to reorder the solutions.
      *
      * <p>This will reorder solutions by outputting the current chunk immediately if it is GTE 50%
@@ -1523,8 +1523,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
       if (e.length < minChunkSize) {
 
-        /*
-         * The caller's array is significantly smaller than the target
+      /*
+       * The caller's array is significantly smaller than the target
          * chunk size. Append the caller's array to the internal list
          * and return immediately. The buffered chunks will be copied
          * through either in a subsequent add() or in flush().
@@ -1551,7 +1551,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       outputChunk(e);
     }
 
-    /**
+    /*
      * We are not allowed to reorder the solutions.
      *
      * <p>This always outputs solutions in the same order that they are added. In order to avoid
@@ -1566,8 +1566,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       synchronized (this) {
         if (chunkSize + e.length > maxChunkSize) {
 
-          /*
-           * The combined chunk would be too large for the buffer.
+        /*
+       * The combined chunk would be too large for the buffer.
            */
 
           // Flush the buffer.
@@ -1575,8 +1575,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
           if (e.length > minChunkSize) {
 
-            /*
-             * The internal buffer is empty. The chunk is big
+          /*
+       * The internal buffer is empty. The chunk is big
              * enough. Sent it through immediately.
              */
 
@@ -1586,8 +1586,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
           }
         }
 
-        /*
-         * Add the chunk to the internal buffer.
+      /*
+       * Add the chunk to the internal buffer.
          */
 
         if (smallChunks == null) smallChunks = new LinkedList<IBindingSet[]>();
@@ -1598,7 +1598,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
       } // synchronized(this)
     }
 
-    /**
+    /*
      * Output a chunk, updating the counters.
      *
      * @param e The chunk.
@@ -1706,7 +1706,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   } // class HandleChunkBuffer
 
-  /**
+  /*
    * {@link Runnable} sends the {@link IQueryClient} a message indicating that some query has halted
    * on some node. This is used to send such messages asynchronously.
    *
@@ -1741,8 +1741,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     public void run() {
       try {
         if (q.isController()) {
-          /*
-           * Local method call.
+        /*
+       * Local method call.
            *
            * Note: This MUST NOT be done using RMI when the operator
            * is using shared state to provide live statistics update
@@ -1761,8 +1761,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
         }
       } catch (Throwable e) {
         if (!isRootCauseInterrupt(e)) {
-          /*
-           * @see https://sourceforge.net/apps/trac/bigdata/ticket/479
+        /*
+       * @see https://sourceforge.net/apps/trac/bigdata/ticket/479
            */
           log.error("Could not notify query controller: " + e, e);
         }
@@ -1785,8 +1785,8 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
 
       for (ChunkFutureTask f : set.keySet()) {
 
-        /*
-         * Note: This can wind up setting the interrupt status on the
+      /*
+       * Note: This can wind up setting the interrupt status on the
          * thread in which it is called. For example, SLICE will call
          * halt(), which calls AbstractRunningQuery#cancel(), which
          * calls this method. Since the SliceOp() is still running it's
@@ -1823,7 +1823,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     }
   }
 
-  /**
+  /*
    * Return a summary of the work queue for the operators in this query (non-blocking).
    *
    * @return A map whose keys are the operator identifiers and whose values provide summary
@@ -1868,7 +1868,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
     return map;
   }
 
-  /**
+  /*
    * Factory returns the effective {@link IChunkHandler} for this query.
    *
    * @param queryEngine
@@ -1884,7 +1884,7 @@ public class ChunkedRunningQuery extends AbstractRunningQuery {
         QueryEngine.Annotations.CHUNK_HANDLER, QueryHints.DEFAULT_QUERY_ENGINE_CHUNK_HANDLER);
   }
 
-  /**
+  /*
    * Return the effective {@link IChunkHandler} for this query.
    *
    * @see BLZG-533 Vector query engine on native heap.

@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.ha.HACommitGlue;
 import org.embergraph.journal.IRootBlockView;
 
-/**
- * Message used by the {@link HACommitGlue} interface to indicate that the recipient should save a
+/*
+* Message used by the {@link HACommitGlue} interface to indicate that the recipient should save a
  * reference to the caller's root block, flush writes to the backing channel and acknowledge "yes"
  * if ready to commit. If the node can not prepare for any reason, then it must return "no".
  *
@@ -33,7 +33,7 @@ public interface IHA2PhasePrepareMessage extends IHA2PhaseCommitProtocolMessage 
   /** The consensus release time from the GATHER. */
   IHANotifyReleaseTimeResponse getConsensusReleaseTime();
 
-  /**
+  /*
    * <code>true</code> iff the service was recognized as being joined with the met quorum at the
    * time that the GATHER message was prepared.
    *
@@ -44,7 +44,7 @@ public interface IHA2PhasePrepareMessage extends IHA2PhaseCommitProtocolMessage 
    */
   boolean isGatherService();
 
-  /**
+  /*
    * <code>true</code> iff the service was recognized as being joined with the met quorum at the
    * time that the PREPARE message was prepared.
    *
@@ -69,7 +69,7 @@ public interface IHA2PhasePrepareMessage extends IHA2PhaseCommitProtocolMessage 
   /** The unit for the timeout. */
   TimeUnit getUnit();
 
-  /**
+  /*
    * When <code>true</code>, always vote note.
    *
    * <p>Note: This is for unit tests only.

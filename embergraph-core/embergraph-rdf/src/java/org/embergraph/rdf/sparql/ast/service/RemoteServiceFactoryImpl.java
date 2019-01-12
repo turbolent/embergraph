@@ -29,8 +29,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.rdf.sparql.ast.eval.AbstractServiceFactoryBase;
 
-/**
- * A factory for service calls against remote SPARQL end points. You can control the way in which
+/*
+* A factory for service calls against remote SPARQL end points. You can control the way in which
  * embergraph handles SPARQL 1.1 Federated Query for a remote SPARQL end point by: (1) create an
  * instance of this class for the SPARQL end point; (2) customize the {@link RemoteServiceOptions};
  * and (3) add it to this {@link ServiceRegistry}. You can also subclass this class if you want to
@@ -44,7 +44,7 @@ public class RemoteServiceFactoryImpl extends AbstractServiceFactoryBase {
 
   private final RemoteServiceOptions serviceOptions;
 
-  /**
+  /*
    * Create a {@link ServiceFactory} for remote SPARQL end points.
    *
    * @param isSparql11 <code>true</code> if the end points support SPARQL 1.1.
@@ -56,7 +56,7 @@ public class RemoteServiceFactoryImpl extends AbstractServiceFactoryBase {
     this.serviceOptions.setSPARQLVersion(sparqlVersion);
   }
 
-  /**
+  /*
    * Create a {@link ServiceFactory} for remote SPARQL end points.
    *
    * @param serviceOptions The configuration options for the end points.
@@ -80,7 +80,7 @@ public class RemoteServiceFactoryImpl extends AbstractServiceFactoryBase {
     return serviceOptions;
   }
 
-  /**
+  /*
    * In order to be able to evaluate the SPARQL 1.1 remote service, the endpoint URIs must be known.
    * Everything else is desired, but not required, and nothing is forbidden.
    */

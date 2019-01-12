@@ -53,8 +53,8 @@ import org.openrdf.model.Resource;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for the proposed standardization of "reification done right".
+/*
+* Test suite for the proposed standardization of "reification done right".
  *
  * @see https://sourceforge.net/apps/trac/bigdata/ticket/526 (Reification done right)
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -104,7 +104,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     return properties;
   }
 
-  /**
+  /*
    * Unit test for a triple reference pattern using an explicit BIND().
    *
    * <pre>
@@ -189,7 +189,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test verifies that blank nodes may not appear in a triple pattern reference (the semantics
    * of this are explicitly ruled out by the extension).
    */
@@ -212,7 +212,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     }
   }
 
-  /**
+  /*
    * Unit test verifies that blank nodes may not appear in a triple pattern reference (the semantics
    * of this are explicitly ruled out by the extension).
    */
@@ -235,7 +235,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     }
   }
 
-  /**
+  /*
    * Unit test for a triple reference pattern without variables. There is an implicit variable which
    * must be assigned when we translate this construct.
    *
@@ -330,7 +330,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A unit test when the triple reference pattern recursively embeds another triple reference
    * pattern in the subject position. The nesting needs to be unpacked into a series of SP( <<...>>
    * AS ?sidVar) expressions.
@@ -412,7 +412,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A unit test when the triple reference pattern recursively embeds another triple reference
    * pattern in the object position. The nesting needs to be unpacked into a series of SP(s,p,o) AS
    * ?sidVar expressions.
@@ -496,7 +496,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A unit test when the triple reference pattern is a constant.
    *
    * <pre>
@@ -580,7 +580,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A unit test when the triple reference pattern is a constant.
    *
    * <pre>
@@ -653,7 +653,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A unit test when the triple reference pattern is a constant.
    *
    * <pre>
@@ -723,7 +723,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A unit test when the triple reference pattern is a constant.
    *
    * <pre>
@@ -798,7 +798,7 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -844,13 +844,13 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
       // SP(:s :p d) as ?sid1) .
       final EmbergraphStatement s1 =
           valueFactory.createStatement(
-              (EmbergraphResource) s, (EmbergraphURI) p, (EmbergraphValue) d);
+              s, p, d);
       final EmbergraphBNode sid1 = valueFactory.createBNode(s1);
 
       // SP(?sid, :p, 5).
       final EmbergraphStatement s2 =
           valueFactory.createStatement(
-              (Resource) sid1, (EmbergraphURI) order, (EmbergraphValue) five);
+              sid1, order, five);
       final EmbergraphStatement[] data = new EmbergraphStatement[] {s1, s2};
       op.setData(data);
     }

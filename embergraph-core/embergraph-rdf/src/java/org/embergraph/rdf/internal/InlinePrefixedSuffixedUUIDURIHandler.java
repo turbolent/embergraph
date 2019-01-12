@@ -3,8 +3,8 @@ package org.embergraph.rdf.internal;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * Inline URI Handler to handle URI's in the form of a UUID with a prefix and a suffix such as:
+/*
+* Inline URI Handler to handle URI's in the form of a UUID with a prefix and a suffix such as:
  *
  * <pre>
  *   http://blazegraph.com/element/prefix_1ae004cf-0f48-469f-8a94-01339afaec41_SUFFIX

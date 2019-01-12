@@ -44,8 +44,8 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * A read-only {@link IAccessPath} that backchains certain inferences.
+/*
+* A read-only {@link IAccessPath} that backchains certain inferences.
  *
  * <p>Note: Low level methods may not behave quite as expected since some elements will be generated
  * by the backchainer and hence present in the underlying {@link SPORelation}. See the notes on the
@@ -65,7 +65,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
   private final AbstractTripleStore database;
   private final IAccessPath<ISPO> accessPath;
 
-  /**
+  /*
    * Message thread related to the introduction of this property and possible side-effects when
    * computing closure.
    *
@@ -90,7 +90,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
    */
   private Boolean isOwlSameAsUsed;
 
-  /**
+  /*
    * @param database The database whose entailments will be backchained.
    * @param accessPath The source {@link IAccessPath}.
    */
@@ -99,7 +99,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
     this(database, accessPath, null);
   }
 
-  /**
+  /*
    * @param database The database whose entailments will be backchained.
    * @param accessPath The source {@link IAccessPath}.
    * @param isOwlSameAsUsed When non-<code>null</code>, this {@link Boolean} indicates whether the
@@ -162,7 +162,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Visits elements in the source {@link IAccessPath} plus all entailments licensed by the
@@ -174,8 +174,8 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
     return iterator(0L /* offset */, 0L /* limit */, 0 /* capacity */);
   }
 
-  //    /**
-  //     * Visits elements in the source {@link IAccessPath} plus all entailments
+  //    /*
+//     * Visits elements in the source {@link IAccessPath} plus all entailments
   //     * licensed by the {@link InferenceEngine} as configured.
   //     */
   //    public IChunkedOrderedIterator<ISPO> iterator(final int limit,
@@ -185,7 +185,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
   //
   //    }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @todo handle non-zero offset and larger limits?
@@ -203,8 +203,8 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
     //
     //    }
     //
-    //    /**
-    //     * Visits elements in the source {@link IAccessPath} plus all entailments
+    //    /*
+//     * Visits elements in the source {@link IAccessPath} plus all entailments
     //     * licensed by the {@link InferenceEngine} as configured.
     //     */
     //    public IChunkedOrderedIterator<ISPO> iterator(final int limit,
@@ -237,8 +237,8 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
 
       if (isOwlSameAsUsed != null && !isOwlSameAsUsed.booleanValue()) {
 
-        /*
-         * The caller asserted that no owl:sameAs assertions exist in
+      /*
+       * The caller asserted that no owl:sameAs assertions exist in
          * the KB, so we do not need to backchain owl:sameAs.
          */
 
@@ -250,8 +250,8 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
 
         if (isOwlSameAsUsed == null) {
 
-          /*
-           * The caller did not specify whether or not there are
+        /*
+       * The caller did not specify whether or not there are
            * owl:sameAs assertions in the data so we have to test the
            * data ourselves.
            */
@@ -261,8 +261,8 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
 
         if (isOwlSameAsUsed.booleanValue()) {
 
-          /*
-           * No owl:sameAs assertions in the KB, so we do not need to
+        /*
+       * No owl:sameAs assertions in the KB, so we do not need to
            * backchain owl:sameAs.
            */
 
@@ -447,7 +447,7 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
   }
   */
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>When <code>exact == false</code> this does not count the backchained entailments. When
@@ -483,8 +483,8 @@ public class BackchainAccessPath implements IAccessPath<ISPO> {
     return n;
   }
 
-  //    /**
-  //     * Delegated to the source {@link IAccessPath} (does not visit any
+  //    /*
+//     * Delegated to the source {@link IAccessPath} (does not visit any
   //     * entailments).
   //     */
   //    @Override

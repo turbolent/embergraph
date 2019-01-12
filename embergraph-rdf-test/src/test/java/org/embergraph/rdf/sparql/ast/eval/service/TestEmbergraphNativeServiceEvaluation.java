@@ -33,8 +33,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Data driven test suite for SPARQL 1.1 Federated Query against an internal, embergraph "aware"
+/*
+* Data driven test suite for SPARQL 1.1 Federated Query against an internal, embergraph "aware"
  * service (similar to our integrated full text search facility).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -54,7 +54,7 @@ public class TestEmbergraphNativeServiceEvaluation extends AbstractDataDrivenSPA
     super(name);
   }
 
-  /**
+  /*
    * A simple SERVICE query against an INTERNAL service. The service adds in a single solution which
    * restricts the set of solutions for the overall query.
    *
@@ -118,7 +118,7 @@ public class TestEmbergraphNativeServiceEvaluation extends AbstractDataDrivenSPA
     }
   }
 
-  /**
+  /*
    * A simple SERVICE query against an INTERNAL service. The service provides three solutions, two
    * of which join with the remainder of the query.
    *

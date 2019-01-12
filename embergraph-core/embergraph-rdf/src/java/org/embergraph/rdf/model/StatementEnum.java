@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.model;
 
-/**
- * The basic statement types are: axioms, explicit, inferred.
+/*
+* The basic statement types are: axioms, explicit, inferred.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -38,7 +38,7 @@ public enum StatementEnum {
   /** A statement that was inferred from the explicit statements by the appropriate model theory. */
   Inferred((byte) 2),
 
-  /**
+  /*
    * An explicit statement that was deleted but is being maintained in the statement indices for
    * history.
    */
@@ -46,7 +46,7 @@ public enum StatementEnum {
 
   private final byte code;
 
-  private StatementEnum(final byte code) {
+  StatementEnum(final byte code) {
 
     this.code = code;
   }
@@ -56,7 +56,7 @@ public enum StatementEnum {
     return code;
   }
 
-  /**
+  /*
    * Max returns the value that is first in the total order
    *
    * <ul>
@@ -82,7 +82,7 @@ public enum StatementEnum {
     }
   }
 
-  /**
+  /*
    * Decode a byte into a {@link StatementEnum}.
    *
    * <p>Note: The override bit is masked off during this operation.
@@ -139,7 +139,7 @@ public enum StatementEnum {
     return new byte[] {code};
   }
 
-  /**
+  /*
    * A bit mask used to isolate the bit that indicates that the existing statement type should be
    * overridden thereby allowing the downgrade of a statement from explicit to inferred.
    */
@@ -148,7 +148,7 @@ public enum StatementEnum {
   /** A user bit mask used by applications to flag statements. */
   public static final int MASK_USER_FLAG = 0x1 << 2;
 
-  /**
+  /*
    * Return <code>true</code> iff the user bit is set.
    *
    * @param b The byte.
@@ -158,7 +158,7 @@ public enum StatementEnum {
     return (b & StatementEnum.MASK_USER_FLAG) != 0;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the override bit is set.
    *
    * @param b The byte.

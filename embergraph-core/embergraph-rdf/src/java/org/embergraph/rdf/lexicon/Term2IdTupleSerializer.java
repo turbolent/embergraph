@@ -35,8 +35,8 @@ import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.openrdf.model.Value;
 
-/**
- * Handles the term:id index (forward mapping for the lexicon). The keys are unsigned byte[]s
+/*
+* Handles the term:id index (forward mapping for the lexicon). The keys are unsigned byte[]s
  * representing a total order for the RDF {@link Value} space. The index assigns term identifiers,
  * and those term identifiers are stored in the values of the index.
  *
@@ -54,7 +54,7 @@ public class Term2IdTupleSerializer extends DefaultTupleSerializer {
     super();
   }
 
-  /**
+  /*
    * Configures the {@link IKeyBuilderFactory} from the caller's <i>properties</i>.
    *
    * @param properties
@@ -64,7 +64,7 @@ public class Term2IdTupleSerializer extends DefaultTupleSerializer {
     this(new DefaultKeyBuilderFactory(properties));
   }
 
-  /**
+  /*
    * Uses the caller's {@link IKeyBuilderFactory}.
    *
    * @param keyBuilderFactory
@@ -98,7 +98,7 @@ public class Term2IdTupleSerializer extends DefaultTupleSerializer {
     return new LexiconKeyBuilder(getKeyBuilder());
   }
 
-  /**
+  /*
    * Return a {@link LexiconKeyBuilder} that is setup with collation strength PRIMARY.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/974" > Name2Addr.indexNameScan(prefix) uses
@@ -113,7 +113,7 @@ public class Term2IdTupleSerializer extends DefaultTupleSerializer {
     return new LexiconKeyBuilder(getPrimaryKeyBuilder());
   }
 
-  /**
+  /*
    * You can not decode the term:id keys since they include Unicode sort keys and that is a lossy
    * transform.
    *
@@ -125,7 +125,7 @@ public class Term2IdTupleSerializer extends DefaultTupleSerializer {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Return the unsigned byte[] key for an RDF {@link Value}.
    *
    * @param obj The RDF {@link Value}.
@@ -136,7 +136,7 @@ public class Term2IdTupleSerializer extends DefaultTupleSerializer {
     return getLexiconKeyBuilder().value2Key((Value) obj);
   }
 
-  /**
+  /*
    * Return the byte[] value, which is a term identifier written as a packed long integer.
    *
    * @param obj A term identifier expressed as a {@link TermId}.
@@ -157,7 +157,7 @@ public class Term2IdTupleSerializer extends DefaultTupleSerializer {
     return key;
   }
 
-  /**
+  /*
    * De-serializes the {@link ITuple} as a {@link IV} whose value is the term identifier associated
    * with the key. The key itself is not decodable.
    */

@@ -27,8 +27,8 @@ import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Value;
 
-/**
- * Efficiently resolve term identifiers in Embergraph {@link IBindingSet}s to RDF {@link
+/*
+* Efficiently resolve term identifiers in Embergraph {@link IBindingSet}s to RDF {@link
  * EmbergraphValue}s.
  *
  * @see ChunkedMaterializationOp
@@ -48,7 +48,7 @@ public class EmbergraphBindingSetResolverator
   private final int termsChunkSize;
   private final int blobsChunkSize;
 
-  /**
+  /*
    * @param db Used to resolve term identifiers to {@link Value} objects.
    * @param src The source iterator (will be closed when this iterator is closed).
    * @param queryId The query {@link UUID} (for logging on the {@link SolutionsLog}).
@@ -90,7 +90,7 @@ public class EmbergraphBindingSetResolverator
     return (EmbergraphBindingSetResolverator) super.start(service);
   }
 
-  /**
+  /*
    * Resolve a chunk of {@link IBindingSet}s into a chunk of {@link IBindingSet}s in which term
    * identifiers have been resolved to {@link EmbergraphValue}s.
    */
@@ -100,7 +100,7 @@ public class EmbergraphBindingSetResolverator
     return resolveChunk(/*required, */ state.getLexiconRelation(), chunk);
   }
 
-  /**
+  /*
    * Resolve a chunk of {@link IBindingSet}s into a chunk of {@link IBindingSet}s in which term
    * identifiers have been resolved to {@link EmbergraphValue}s.
    *
@@ -117,7 +117,7 @@ public class EmbergraphBindingSetResolverator
     return resolveChunk(queryId, lex, chunk, required, termsChunkSize, blobsChunkSize);
   }
 
-  /**
+  /*
    * Public entry point for batch resolution.
    *
    * @param queryId The query {@link UUID} (for logging on the {@link SolutionsLog}).
@@ -263,7 +263,7 @@ public class EmbergraphBindingSetResolverator
     }
   }
 
-  /**
+  /*
    * Add the IV to the list of terms to materialize, and also delegate to {@link #handleSid(SidIV,
    * Collection, boolean)} if it's a SidIV.
    */
@@ -277,7 +277,7 @@ public class EmbergraphBindingSetResolverator
     ids.add(iv);
   }
 
-  /**
+  /*
    * Sids need to be handled specially because their individual ISPO components might need
    * materialization as well.
    */
@@ -297,7 +297,7 @@ public class EmbergraphBindingSetResolverator
     }
   }
 
-  /**
+  /*
    * Resolve the term identifiers in the {@link IBindingSet} using the map populated when we fetched
    * the current chunk and return the {@link IBindingSet} for that solution in which term
    * identifiers have been resolved to their corresponding {@link EmbergraphValue}s.

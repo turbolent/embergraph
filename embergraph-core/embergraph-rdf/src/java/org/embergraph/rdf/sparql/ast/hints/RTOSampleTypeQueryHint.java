@@ -29,8 +29,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * The query hint governing the choice of the sampling bais for the RTO optimizer.
+/*
+* The query hint governing the choice of the sampling bais for the RTO optimizer.
  *
  * @see JGraph
  * @see SampleType

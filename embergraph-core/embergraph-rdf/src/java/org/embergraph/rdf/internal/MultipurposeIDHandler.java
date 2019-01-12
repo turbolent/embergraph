@@ -28,7 +28,7 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 /** Inline URI handler for IDs of multiple types. */
 public class MultipurposeIDHandler extends InlineURIHandler {
 
-  /**
+  /*
    * Maximum length of string text to inline if the localName cannot be parsed into a UUID, Numeric,
    * or IPv4 address.
    */
@@ -38,7 +38,7 @@ public class MultipurposeIDHandler extends InlineURIHandler {
     this(namespace, Integer.MAX_VALUE);
   }
 
-  /**
+  /*
    * Supply the maximum length of string text to inline if the localName cannot be parsed into a
    * UUID, Numeric, or IPv4 address.
    */

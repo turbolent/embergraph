@@ -26,8 +26,8 @@ import it.unimi.dsi.compression.PrefixCoder;
 import it.unimi.dsi.fastutil.chars.Char2IntMap;
 import it.unimi.dsi.fastutil.chars.Char2IntOpenHashMap;
 
-/**
- * A transformation strategy mapping strings using a {@linkplain PrefixCodec prefix-free encoder}.
+/*
+* A transformation strategy mapping strings using a {@linkplain PrefixCodec prefix-free encoder}.
  *
  * <p>The actual encoding must be provided via a map from characters to symbols, and a set of
  * codewords. The default return value of the map will be used for unknown characters.
@@ -42,7 +42,7 @@ public class PrefixCoderTransformationStrategy implements TransformationStrategy
   protected final Char2IntOpenHashMap char2symbol;
   protected final boolean prefixFree;
 
-  /**
+  /*
    * Create a new transformation strategy based on a prefix-free coder.
    *
    * @param coder a prefix-free coder.

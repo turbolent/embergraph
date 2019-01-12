@@ -49,8 +49,8 @@ import org.embergraph.rdf.util.DumpLexicon;
 import org.embergraph.util.BytesUtil;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-/**
- * Test suite for low-level operations on the BLOBS index.
+/*
+* Test suite for low-level operations on the BLOBS index.
  *
  * @author thompsonbry
  */
@@ -62,7 +62,7 @@ public class TestBlobsIndex extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for generation of sort keys from {@link EmbergraphValue}s to be represented as {@link
    * BlobIV}s.
    */
@@ -139,8 +139,8 @@ public class TestBlobsIndex extends TestCase2 {
     }
   }
 
-  //	/**
-  //	 * Unit test for creating the TERMS index.
+  //	/*
+//	 * Unit test for creating the TERMS index.
   //	 */
   //	public void test_termsIndex_create() {
   //
@@ -189,7 +189,7 @@ public class TestBlobsIndex extends TestCase2 {
   //
   //	}
 
-  /**
+  /*
    * Return the {@link IndexMetadata} for the TERMS index.
    *
    * @param name The name of the index.
@@ -238,7 +238,7 @@ public class TestBlobsIndex extends TestCase2 {
     return metadata;
   }
 
-  /**
+  /*
    * Create a TERMS index.
    *
    * @param namespace The namespace of the TERMS index (e.g., for "kb.lex" the fully qualified name
@@ -278,7 +278,7 @@ public class TestBlobsIndex extends TestCase2 {
     return ndx;
   }
 
-  /**
+  /*
    * Unit test for lookup and adding values to the TERMS index when blank nodes are NOT stored in
    * the TERMS index.
    */
@@ -287,7 +287,7 @@ public class TestBlobsIndex extends TestCase2 {
     doTermsIndexAddLookupTest(false /* toldBNodes */);
   }
 
-  /**
+  /*
    * Unit test for lookup and adding values to the TERMS index when blank nodes are stored in the
    * TERMS index (told bnodes semantics).
    */
@@ -296,7 +296,7 @@ public class TestBlobsIndex extends TestCase2 {
     doTermsIndexAddLookupTest(true /* toldBNodes */);
   }
 
-  /**
+  /*
    * Test helper exercises the basic operations on the TERMS index, including (a) scanning a
    * collision buckets to resolve {@link EmbergraphValue}s from their prefix keys; (b) adding a
    * {@link EmbergraphValue}s to the TERMS index; and (c) point lookups using an {@link IV} as a
@@ -395,8 +395,8 @@ public class TestBlobsIndex extends TestCase2 {
         // Note: [nunknown] is only set on read.
         assertEquals(0, stats.nunknown.get());
 
-        /*
-         * Verify that the IV is a fully qualified key for the TERMS
+      /*
+       * Verify that the IV is a fully qualified key for the TERMS
          * index.
          */
         final IKeyBuilder keyBuilder = h.newKeyBuilder();
@@ -465,8 +465,8 @@ public class TestBlobsIndex extends TestCase2 {
       // Finally, verify that the assigned IVs are discovered on lookup.
       {
 
-        /*
-         * Setup an array of the expected IVs and clear out the old IVs
+      /*
+       * Setup an array of the expected IVs and clear out the old IVs
          * on the EmbergraphValue objects.
          *
          * Note: Since we can not clear the IV once it has been set, this
@@ -540,7 +540,7 @@ public class TestBlobsIndex extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test with standard blank nodes semantics verifies that separate writes on the TERMS index
    * using the same BNode ID result in distinct keys being assigned (blank nodes do not unify).
    */
@@ -566,8 +566,8 @@ public class TestBlobsIndex extends TestCase2 {
       final IV[] ivs1;
       {
 
-        /*
-         * Generate Values that we will use to read and write on the
+      /*
+       * Generate Values that we will use to read and write on the
          * TERMS index.
          */
         final EmbergraphValue[] values;
@@ -616,8 +616,8 @@ public class TestBlobsIndex extends TestCase2 {
       final IV[] ivs2;
       {
 
-        /*
-         * Generate Values that we will use to read and write on the
+      /*
+       * Generate Values that we will use to read and write on the
          * TERMS index (we need distinct instances since the IV once
          * set can not be cleared from the EmbergraphValue).
          */
@@ -702,8 +702,8 @@ public class TestBlobsIndex extends TestCase2 {
    * could override it explicitly.
    */
 
-  //    /**
-  //     * Unit test with a no collisions.
+  //    /*
+//     * Unit test with a no collisions.
   //     */
   //    public void test_noCollisions() {
   //
@@ -711,8 +711,8 @@ public class TestBlobsIndex extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Unit test with a small number of collisions.
+  //    /*
+//     * Unit test with a small number of collisions.
   //     */
   //    public void test_someCollisions() {
   //
@@ -720,8 +720,8 @@ public class TestBlobsIndex extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Unit test with a the maximum number of collisions.
+  //    /*
+//     * Unit test with a the maximum number of collisions.
   //     */
   //    public void test_lotsOfCollisions() {
   //
@@ -729,8 +729,8 @@ public class TestBlobsIndex extends TestCase2 {
   //
   //	}
   //
-  //	/**
-  //	 * Unit test with a too many collisions.
+  //	/*
+//	 * Unit test with a too many collisions.
   //	 */
   //	public void test_tooManyCollisions() {
   //
@@ -744,8 +744,8 @@ public class TestBlobsIndex extends TestCase2 {
   //
   //	}
   //
-  //	/**
-  //	 * Test helper attempts to insert the given number of {@link EmbergraphValue}s
+  //	/*
+//	 * Test helper attempts to insert the given number of {@link EmbergraphValue}s
   //	 * into the terms index. If the maximum collision bucket size is reached,
   //	 * then the exception is thrown back to the caller.
   //	 * <p>
@@ -899,7 +899,7 @@ public class TestBlobsIndex extends TestCase2 {
   //
   //	}
 
-  /**
+  /*
    * Create a TERMS index, put some data into it, and verify that we can use the {@link
    * BlobsTupleSerializer} to access that data, including handling of the NullIV.
    */
@@ -991,8 +991,8 @@ public class TestBlobsIndex extends TestCase2 {
 
           assertEquals(value, actualValue);
 
-          /*
-           * TODO It should be possible to test more of the tupleSer
+        /*
+       * TODO It should be possible to test more of the tupleSer
            * directly. E.g., by running an iterator over the tuples
            * and visiting them.
            */
@@ -1006,8 +1006,8 @@ public class TestBlobsIndex extends TestCase2 {
     }
   }
 
-  //	/**
-  //	 * Mock variant of
+  //	/*
+//	 * Mock variant of
   //	 * {@link TermsIndexHelper#generateKVOs(EmbergraphValueSerializer, EmbergraphValue[], int)}
   //	 * which uses a constant value for the assigned hash codes.
   //	 *

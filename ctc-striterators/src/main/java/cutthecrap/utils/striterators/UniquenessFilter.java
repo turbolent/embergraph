@@ -18,8 +18,8 @@ package cutthecrap.utils.striterators;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * **************************************************************************** UniquenessFilter
+/*
+* **************************************************************************** UniquenessFilter
  *
  * <p>Derived from Filter, and ensures no duplication, not to be used with large sets!
  *
@@ -33,7 +33,7 @@ public class UniquenessFilter extends Filter {
 
   public UniquenessFilter() {}
 
-  /**
+  /*
    * ********************************************************************* Just make sure that the
    * current object has not already been returned
    */

@@ -23,27 +23,27 @@ package org.embergraph.rdf.sail.webapp.client;
 
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * A prepared tuple query against a {@link JettyeRemoteRepository}.
+/*
+* A prepared tuple query against a {@link JettyeRemoteRepository}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IPreparedTupleQuery extends IPreparedQuery {
 
-  /**
+  /*
    * Evaluate the tuple query.
    *
    * @return The result.
    * @throws Exception
    */
-  public TupleQueryResult evaluate() throws Exception;
+  TupleQueryResult evaluate() throws Exception;
 
-  /**
+  /*
    * Evaluate the tuple query, notify the specified listener when complete.
    *
    * @param listener The query listener.
    * @return The result.
    * @throws Exception
    */
-  public TupleQueryResult evaluate(IPreparedQueryListener listener) throws Exception;
+  TupleQueryResult evaluate(IPreparedQueryListener listener) throws Exception;
 }

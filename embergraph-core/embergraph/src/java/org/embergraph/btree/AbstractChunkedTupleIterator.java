@@ -38,8 +38,8 @@ import org.embergraph.journal.TimestampUtility;
 import org.embergraph.rawstore.IBlock;
 import org.embergraph.util.BytesUtil;
 
-/**
- * A chunked iterator that proceeds a {@link ResultSet} at a time. This introduces the concept of a
+/*
+* A chunked iterator that proceeds a {@link ResultSet} at a time. This introduces the concept of a
  * {@link #continuationQuery()} so that the iterator can materialize the tuples using a sequence of
  * queries that progresses through the index until all tuples in the key range have been visited.
  *
@@ -55,13 +55,13 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
 
   protected static final transient boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Error message used by {@link #getKey()} when the iterator was not provisioned to request keys
    * from the data service.
    */
   protected static final transient String ERR_NO_KEYS = "Keys not requested";
 
-  /**
+  /*
    * Error message used by {@link #getValue()} when the iterator was not provisioned to request
    * values from the data service.
    */
@@ -76,7 +76,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
   /** This controls the #of results per data service query. */
   protected final int capacity;
 
-  /**
+  /*
    * These flags control whether keys and/or values are requested. If neither keys nor values are
    * requested, then this is just a range count operation and you might as well use rangeCount
    * instead.
@@ -89,7 +89,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
   /** The #of range query operations executed. */
   protected int nqueries = 0;
 
-  /**
+  /*
    * The current result set. For each index partition spanned by the overall key range supplied by
    * the client, we will issue at least one range query against that index partition. Once all
    * entries in a result set have been consumed by the client, we test the result set to see whether
@@ -114,7 +114,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
    */
   protected ResultSet rset = null;
 
-  /**
+  /*
    * The timestamp for the operation as specified by the ctor (this is used for remote index queries
    * but when running against a local index).
    */
@@ -129,7 +129,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
     return commitTime;
   }
 
-  /**
+  /*
    * When <code>true</code> the {@link #getCommitTime()} will be used to ensure that {@link
    * #continuationQuery()}s run against the same commit point <em>for the local index partition</em>
    * thereby producing a read consistent view even when the iterator is {@link ITx#READ_COMMITTED}.
@@ -140,7 +140,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
    */
   protected abstract boolean getReadConsistent();
 
-  /**
+  /*
    * Return the timestamp used for {@link #continuationQuery()}s. The value returned depends on
    * whether or not {@link #getReadConsistent()} is <code>true</code>. When consistent reads are
    * required the timestamp will be the {@link ResultSet#getCommitTime()} for the initial {@link
@@ -156,8 +156,8 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
 
       if (commitTime == 0L) {
 
-        /*
-         * The commitTime is not yet available (nothing has been read).
+      /*
+       * The commitTime is not yet available (nothing has been read).
          */
 
         throw new IllegalStateException();
@@ -172,13 +172,13 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
   /** The #of enties visited so far. */
   protected long nvisited = 0;
 
-  /**
+  /*
    * The index of the last entry visited in the current {@link ResultSet}. This is reset to <code>-1
    * </code> each time we obtain a new {@link ResultSet}.
    */
   protected int lastVisited = -1;
 
-  /**
+  /*
    * When true, the entire key range specified by the client has been visited and the iterator is
    * exhausted (i.e., all done).
    */
@@ -190,7 +190,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
     return nqueries;
   }
 
-  /**
+  /*
    * The #of entries visited so far (not the #of entries scanned, which can be much greater if a
    * filter is in use).
    */
@@ -199,7 +199,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
     return nvisited;
   }
 
-  /**
+  /*
    * The capacity used by default when the caller specified <code>0</code> as the capacity for the
    * iterator.
    */
@@ -231,7 +231,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
     this.filter = filter;
   }
 
-  /**
+  /*
    * Abstract method must return the next {@link ResultSet} based on the supplied parameter values.
    *
    * @param timestamp
@@ -284,7 +284,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
     }
   }
 
-  /**
+  /*
    * Issues a "continuation" query against the same index. This is invoked iff there are no entries
    * left to visit in the current {@link ResultSet} but {@link ResultSet#isExhausted()} is [false],
    * indicating that there is more data available.
@@ -356,7 +356,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
     deleteBehind();
   }
 
-  /**
+  /*
    * This gets set by {@link #continuationQuery()} to the value of the key for the then current
    * {@link #tuple}. This is used by {@link #remove()} in the edge case where {@link #lastVisited}
    * is <code>-1</code> because a continuation query has been issued but {@link #next()} has not yet
@@ -364,7 +364,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
    */
   protected byte[] lastVisitedKeyInPriorResultSet;
 
-  /**
+  /*
    * There are three levels at which we need to test in order to determine if the total iterator is
    * exhausted. First, we need to test to see if there are more entries remaining in the current
    * {@link ResultSet}. If not and the {@link ResultSet} is NOT {@link ResultSet#isExhausted()
@@ -446,7 +446,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
   /** The last tuple returned by #next(). */
   private ResultSetTuple tuple = null;
 
-  /**
+  /*
    * An {@link ITuple} that draws its data from a {@link ResultSet}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -622,7 +622,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
     }
   }
 
-  /**
+  /*
    * Queues a request to remove the entry under the most recently visited key. If the iterator is
    * exhausted then the entry will be deleted immediately. Otherwise the requests will be queued
    * until the current {@link ResultSet} is exhausted and then a batch delete will be done for the
@@ -671,7 +671,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
 
   private ArrayList<byte[]> removeList;
 
-  /**
+  /*
    * Method flushes any queued deletes. You MUST do this if you are only processing part of the
    * buffered capacity of the iterator and you are are deleting some index entries. Failure to
    * {@link #flush()} under these circumstances will result in some buffered deletes never being
@@ -691,7 +691,7 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
     removeList.clear();
   }
 
-  /**
+  /*
    * Batch delete the index entries identified by <i>keys</i> and clear the list.
    *
    * @param n The #of keys to be deleted.
@@ -699,14 +699,14 @@ public abstract class AbstractChunkedTupleIterator<E> implements ITupleIterator<
    */
   protected abstract void deleteBehind(int n, Iterator<byte[]> keys);
 
-  /**
+  /*
    * Delete the index entry identified by <i>key</i>.
    *
    * @param key A key.
    */
   protected abstract void deleteLast(byte[] key);
 
-  /**
+  /*
    * Return an object that may be used to read the block from the backing store per the contract for
    * {@link ITuple#readBlock(long)}
    *

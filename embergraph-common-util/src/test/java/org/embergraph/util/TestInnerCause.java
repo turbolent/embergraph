@@ -26,8 +26,8 @@ package org.embergraph.util;
 import java.io.IOException;
 import junit.framework.TestCase;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestInnerCause extends TestCase {
@@ -95,7 +95,7 @@ public class TestInnerCause extends TestCase {
     assertNull(getInnerCause(t, IOException.class));
   }
 
-  /**
+  /*
    * Does not find cause when it is on top of the stack trace and not either the desired type or a
    * subclass of the desired type.
    */
@@ -136,7 +136,7 @@ public class TestInnerCause extends TestCase {
     assertNull(getInnerCause(t, IOException.class));
   }
 
-  /**
+  /*
    * Does not find an inner cause that is neither the specified type nor a subtype of the specified
    * type.
    */

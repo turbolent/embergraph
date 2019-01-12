@@ -43,8 +43,8 @@ import org.openrdf.repository.sail.SailRepositoryConnection;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
-/**
- * Class with support for a variety of embergraph specific extensions,
+/*
+* Class with support for a variety of embergraph specific extensions,
  *
  * <p>{@inheritDoc}
  *
@@ -87,7 +87,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     return (EmbergraphValueFactory) super.getValueFactory();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This code path is optimized for cases where isolatable indices are not in use and where
@@ -154,7 +154,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     throw new MalformedQueryException("Unsupported language: " + ql);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/448">SPARQL 1.1 Update </a>
@@ -165,13 +165,13 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
 
     if (ql == QueryLanguage.SPARQL) {
 
-      return (Update) prepareNativeSPARQLUpdate(ql, update, baseURI);
+      return prepareNativeSPARQLUpdate(ql, update, baseURI);
     }
 
     throw new MalformedQueryException("Unsupported language: " + ql);
   }
 
-  /**
+  /*
    * Parse a SPARQL query
    *
    * @param ql The {@link QueryLanguage}.
@@ -214,7 +214,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     }
   }
 
-  /**
+  /*
    * Parse a SPARQL UPDATE request.
    *
    * @param ql The {@link QueryLanguage}.
@@ -258,7 +258,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     return getSailConnection().isUnisolated();
   }
 
-  /**
+  /*
    * Commit, returning the timestamp associated with the new commit point.
    *
    * <p>Note: auto-commit is an EXTREMELY bad idea. Performance will be terrible. The database will
@@ -271,7 +271,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
   public long commit2() throws RepositoryException {
 
     // auto-commit is heinously inefficient
-    if (isAutoCommit() && !((EmbergraphSailConnection) getSailConnection()).getAllowAutoCommit()) {
+    if (isAutoCommit() && !getSailConnection().getAllowAutoCommit()) {
 
       throw new RepositoryException("please set autoCommit to false");
     }
@@ -286,7 +286,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: auto-commit is an EXTREMELY bad idea. Performance will be terrible. The database will
@@ -300,7 +300,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     commit2();
   }
 
-  /**
+  /*
    * Flush the statement buffers. The {@link EmbergraphSailConnection} heavily buffers assertions
    * and retractions. Either a {@link #flush()} or a {@link #commit()} is required before executing
    * any operations directly against the backing {@link AbstractTripleStore} so that the buffered
@@ -315,7 +315,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
 
     try {
 
-      ((EmbergraphSailConnection) getSailConnection()).flush();
+      getSailConnection().flush();
 
     } catch (Exception ex) {
 
@@ -323,16 +323,16 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     }
   }
 
-  /**
+  /*
    * Return the backing {@link AbstractTripleStore} object. Caution MUST be used when accessing this
    * object as the access goes around the SAIL API.
    */
   public AbstractTripleStore getTripleStore() {
 
-    return ((EmbergraphSailConnection) getSailConnection()).getTripleStore();
+    return getSailConnection().getTripleStore();
   }
 
-  /**
+  /*
    * Computes the closure of the triple store for RDF(S)+ entailments.
    *
    * <p>This computes the closure of the database. This can be used if you do NOT enable truth
@@ -353,7 +353,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
 
     try {
 
-      ((EmbergraphSailConnection) getSailConnection()).computeClosure();
+      getSailConnection().computeClosure();
 
     } catch (Exception ex) {
 
@@ -361,7 +361,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     }
   }
 
-  /**
+  /*
    * Removes all "inferred" statements from the database (does NOT commit the database).
    *
    * @throws RepositoryException
@@ -370,7 +370,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
 
     try {
 
-      ((EmbergraphSailConnection) getSailConnection()).removeAllEntailments();
+      getSailConnection().removeAllEntailments();
 
     } catch (Exception ex) {
 
@@ -378,7 +378,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     }
   }
 
-  /**
+  /*
    * Set the change log on the SAIL connection. See {@link IChangeLog} and {@link IChangeRecord}.
    *
    * @param log the change log
@@ -388,7 +388,7 @@ public class EmbergraphSailRepositoryConnection extends SailRepositoryConnection
     getSailConnection().addChangeLog(log);
   }
 
-  /**
+  /*
    * Remove a change log from the SAIL connection. See {@link IChangeLog} and {@link IChangeRecord}.
    *
    * @param log the change log

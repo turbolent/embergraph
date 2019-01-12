@@ -81,7 +81,7 @@ public class TestHTree_init extends AbstractHTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Basic test for correct construction of the initial state of an {@link HTree} when used without
    * a backing {@link IRawStore}.
    */

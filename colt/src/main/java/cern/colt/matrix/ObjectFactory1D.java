@@ -10,8 +10,8 @@ package cern.colt.matrix;
 
 import cern.colt.matrix.impl.DenseObjectMatrix1D;
 import cern.colt.matrix.impl.SparseObjectMatrix1D;
-/**
- * Factory for convenient construction of 1-d matrices holding <tt>Object</tt> cells. Use idioms
+/*
+* Factory for convenient construction of 1-d matrices holding <tt>Object</tt> cells. Use idioms
  * like <tt>ObjectFactory1D.dense.make(1000)</tt> to construct dense matrices,
  * <tt>ObjectFactory1D.sparse.make(1000)</tt> to construct sparse matrices.
  *
@@ -39,7 +39,7 @@ public class ObjectFactory1D extends cern.colt.PersistentObject {
   public static final ObjectFactory1D sparse = new ObjectFactory1D();
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected ObjectFactory1D() {}
-  /**
+  /*
    * C = A||B; Constructs a new matrix which is the concatenation of two other matrices. Example:
    * <tt>0 1</tt> append <tt>3 4</tt> --> <tt>0 1 3 4</tt>.
    */
@@ -66,7 +66,7 @@ public class ObjectFactory1D extends cern.colt.PersistentObject {
 
     return vector;
   }
-  /**
+  /*
    * Constructs a matrix with the given cell values. The values are copied. So subsequent changes in
    * <tt>values</tt> are not reflected in the matrix, and vice-versa.
    *
@@ -85,7 +85,7 @@ public class ObjectFactory1D extends cern.colt.PersistentObject {
   public ObjectMatrix1D make(int size, Object initialValue) {
     return make(size).assign(initialValue);
   }
-  /**
+  /*
    * Constructs a matrix from the values of the given list. The values are copied. So subsequent
    * changes in <tt>values</tt> are not reflected in the matrix, and vice-versa.
    *
@@ -98,7 +98,7 @@ public class ObjectFactory1D extends cern.colt.PersistentObject {
     for (int i = size; --i >= 0; ) vector.set(i, values.get(i));
     return vector;
   }
-  /**
+  /*
    * C = A||A||..||A; Constructs a new matrix which is concatenated <tt>repeat</tt> times. Example:
    *
    * <pre>
@@ -115,7 +115,7 @@ public class ObjectFactory1D extends cern.colt.PersistentObject {
     }
     return matrix;
   }
-  /**
+  /*
    * Constructs a list from the given matrix. The values are copied. So subsequent changes in
    * <tt>values</tt> are not reflected in the list, and vice-versa.
    *

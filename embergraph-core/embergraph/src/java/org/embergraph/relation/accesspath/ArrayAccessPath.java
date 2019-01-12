@@ -35,7 +35,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
   /** Array of elements */
   private final E[] e;
 
-  /**
+  /*
    * Ctor variant does not specify the {@link #getPredicate()} or the {@link #getKeyOrder()} and
    * those methods will throw an {@link UnsupportedOperationException} if invoked.
    */
@@ -44,7 +44,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
     this(e, null /* predicate */, null /* keyOrder */);
   }
 
-  /**
+  /*
    * Note: the {@link #getPredicate()} and {@link #getKeyOrder()} and methods will throw an {@link
    * UnsupportedOperationException} if the corresponding argument is null.
    */
@@ -57,7 +57,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
     this.e = e;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws UnsupportedOperationException unless the caller specified an {@link IPredicate} to the
@@ -71,7 +71,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
     return predicate;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws UnsupportedOperationException unless the caller specified an {@link IKeyOrder} to the
@@ -85,7 +85,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
     return keyOrder;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws UnsupportedOperationException since no index is associated with this array
@@ -96,7 +96,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns <code>true</code> when the array of elements is empty.
@@ -107,7 +107,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
     return e.length == 0;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns the size of the array of elements.
@@ -118,8 +118,8 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
     return e.length;
   }
 
-  //    /**
-  //     * @throws UnsupportedOperationException
+  //    /*
+//     * @throws UnsupportedOperationException
   //     *             since no index is associated with this array
   //     */
   //    @Override
@@ -129,7 +129,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
   //
   //    }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Visits the entire array of elements.
@@ -140,8 +140,8 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
     return iterator(0L /* offset */, 0L /* limit */, 0 /* capacity */);
   }
 
-  //    /**
-  //     * Visits the array of elements up to the specified limit.
+  //    /*
+//     * Visits the array of elements up to the specified limit.
   //     */
   //    public IChunkedOrderedIterator<E> iterator(final int limit,
   //    		final int capacity) {
@@ -150,7 +150,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
   //
   //    }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Visits the array of elements from the specified offset up to the specified limit.
@@ -218,7 +218,7 @@ public class ArrayAccessPath<E> implements IAccessPath<E> {
     return new ChunkedArrayIterator<E>(a);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Does nothing and always returns ZERO(0).

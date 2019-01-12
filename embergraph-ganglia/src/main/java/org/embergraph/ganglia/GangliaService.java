@@ -38,8 +38,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Logger;
 import org.embergraph.ganglia.util.DaemonThreadFactory;
 
-/**
- * A full ganglia-aware service suitable for embedding with a Java application. The service listens
+/*
+* A full ganglia-aware service suitable for embedding with a Java application. The service listens
  * for metrics declarations (ganglia metadata records), metric data, and metric requests. Metric
  * requests are honored as is the restart protocol necessary to avoid multicast storms. In addition
  * to its role as a listener, the service multicasts metric declarations and metrics obtained either
@@ -117,7 +117,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
   /** When <code>true</code> the service will report metrics to the configured ganglia network. */
   private final boolean report;
 
-  /**
+  /*
    * When <code>true</code> the service will NOT transmit any packets. This makes it possible to run
    * the service, including the listener, without having any side effect on the state of the ganglia
    * network.
@@ -128,14 +128,14 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
    */
   private final boolean mock;
 
-  /**
+  /*
    * The duration in seconds of the quiet period after a ganglia service start.
    *
    * @see IGangliaDefaults#QUIET_PERIOD
    */
   private final int quietPeriod;
 
-  /**
+  /*
    * The waiting period in seconds before the first reporting pass.
    *
    * <p>Note: The core ganglia metrics will be self-declared once this period has expired if they
@@ -148,7 +148,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
   /** The delay in seconds between ganglia host heartbeat messages. */
   private final int heartbeatInterval;
 
-  /**
+  /*
    * The interval at which we monitor the metrics which are collected on this node. When we examine
    * a metric, its current value is copied into {@link #gangliaState}. A metric update will be sent
    * at that time if the metric has never been published (timestamp is zero) or if TMax might expire
@@ -158,14 +158,14 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
    */
   private final int monitoringInterval;
 
-  /**
+  /*
    * The period after which a host which has not been updated will have its metrics deleted from the
    * {@link GangliaState}.
    */
   @SuppressWarnings("unused")
   private final int globalDMax;
 
-  /**
+  /*
    * Object which knows how to generate {@link IGangliaMetricMessage}s which are consistent with the
    * {@link IGangliaMetadataMessage} for a given metric.
    */
@@ -177,7 +177,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
   /** Object which knows how to generate the ganglia wire format from an {@link IGangliaMessage}. */
   private final IGangliaMessageEncoder messageEncoder;
 
-  /**
+  /*
    * The known metadata (shared across all hosts) and the current metric values (for each known
    * host).
    */
@@ -193,7 +193,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
    * Host report stuff
    */
 
-  /**
+  /*
    * The default set of metrics used when generating a host report. This set of metrics is the same
    * as the metrics reported by <code>gstat</code>.
    */
@@ -213,7 +213,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
         "gexec"
       };
 
-  /**
+  /*
    * Return a copy of the default metrics used to generate {@link IHostReport} s.
    *
    * @see #getHostReport()
@@ -227,7 +227,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
   private static final Comparator<IHostReport> defaultHostReportComparator =
       new HostReportComparator("load_one", false /* asc */);
 
-  /**
+  /*
    * Simple constructor uses the defaults for everything <strong>except the heartbeart</strong>.
    *
    * <p>Note: The heartbeat is set to ZERO (0) under the assumption that <code>gmond</code> will be
@@ -266,7 +266,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
                 IGangliaDefaults.DEFAULT_DMAX)));
   }
 
-  /**
+  /*
    * Core constructor for an embedded {@link GangliaService} - see
    * {@link #run()} to actually run the service.
    *
@@ -387,7 +387,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     this.gangliaState = new GangliaState(hostName, metadataFactory);
   }
 
-  /**
+  /*
    * Return the time in seconds since the last service start.
    *
    * @throws IllegalStateException if the service is not running.
@@ -404,7 +404,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - t);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff this service is in its quite period.
    *
    * <p>Ganglia has a quiet period for 10m after a service start. During that quiet period a
@@ -424,9 +424,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
     if (f == null) return false;
 
-    if (f.isDone()) return false;
-
-    return true;
+    return !f.isDone();
   }
 
   /** Run the ganglia service. */
@@ -482,8 +480,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
         if (heartbeatInterval > 0) {
 
-          /*
-           * Heartbeat for the host.
+        /*
+       * Heartbeat for the host.
            *
            * Note: When ZERO (0), we assume that gmond is running and
            * that it will take care of this metric for us.
@@ -516,8 +514,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
       if (listen) {
 
-        /*
-         * Blocks while the listener is running or until this thread is
+      /*
+       * Blocks while the listener is running or until this thread is
          * interrupted.
          */
 
@@ -525,8 +523,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
       } else {
 
-        /*
-         * Wait until the server is terminated.
+      /*
+       * Wait until the server is terminated.
          */
 
         synchronized (keepAlive) {
@@ -561,8 +559,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
       }
 
       if (gangliaSender != null) {
-        /*
-         * Send through a mock message. The GangliaListener can be
+      /*
+       * Send through a mock message. The GangliaListener can be
          * blocked in DatagramSocket.receive(). This will get it
          * unblocked so it can exit in a timely manner.
          *
@@ -613,27 +611,27 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
       if (msg.isMetricRequest()) {
 
-        /*
-         * Metadata request.
+      /*
+       * Metadata request.
          */
         if (isQuietPeriod()) {
-          /*
-           * Ignore requests during the quiet period.
+        /*
+       * Ignore requests during the quiet period.
            *
            * TODO Review the quite period behavior.  Is this correct?
            */
           return;
         }
 
-        /*
-         * Lookup the metric value for *this* host.
+      /*
+       * Lookup the metric value for *this* host.
          */
         final TimestampMetricValue tmv = gangliaState.getMetric(hostName, msg.getMetricName());
 
         if (tmv != null && tmv.getTimestamp() != 0L) {
 
-          /*
-           * If the requested metric is known on this host then we
+        /*
+       * If the requested metric is known on this host then we
            * reset it now. The next time we sample that metric it will
            * have a timestamp of ZERO (0) and will be sent out to all
            * listeners. Since the timestamp is ZERO (0) (rather than a
@@ -648,8 +646,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
       } else if (msg.isMetricMetadata()) {
 
-        /*
-         * Handle metadata message.
+      /*
+       * Handle metadata message.
          *
          * TODO Allow a pattern for metrics that we will accept. Do not
          * store the declaration unless it satisfies that pattern.
@@ -662,15 +660,15 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
       } else if (msg.isMetricValue()) {
 
-        /*
-         * TODO Allow a pattern for metrics that we will accept. Do not
+      /*
+       * TODO Allow a pattern for metrics that we will accept. Do not
          * store the declaration unless it satisfies that pattern.
          */
 
         if (gangliaState.getMetadata(msg.getMetricName()) == null) {
 
-          /*
-           * Request the metadata for the metric.
+        /*
+       * Request the metadata for the metric.
            *
            * Note: We will not accept the metric record into our
            * internal state until we have received a metadata record
@@ -684,8 +682,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
           return;
         }
 
-        /*
-         * Update the counters for the appropriate host.
+      /*
+       * Update the counters for the appropriate host.
          *
          * Note: At this point we have verified that we have a metadata
          * declaration on hand for this metric so we can go ahead and
@@ -700,8 +698,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
         // Guaranteed non-null since metadata decl exists for metric.
         assert tmv != null;
 
-        /*
-         * Update the value.
+      /*
+       * Update the value.
          *
          * Note: The return value is ignored. Since the metric was
          * received over the wire we ignore the age of the metric rather
@@ -719,7 +717,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     }
   }
 
-  /**
+  /*
    * Queue an {@link IGangliaMessage} to be sent to the network.
    *
    * @param msg The message.
@@ -735,21 +733,21 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
       try {
 
         if (mock) {
-          /*
-           * Do not actually send anything.
+        /*
+       * Do not actually send anything.
            */
           if (log.isInfoEnabled()) log.info(msg);
         } else {
-          /*
-           * Submit a task to send the message.
+        /*
+       * Submit a task to send the message.
            */
           service.submit(new SendMessage31(msg));
         }
 
       } catch (RejectedExecutionException ex) {
 
-        /*
-         * Note: This is the expected behavior if the sendService has
+      /*
+       * Note: This is the expected behavior if the sendService has
          * been asynchronously closed.
          *
          * Note: If you see this while the GangliaService is live then
@@ -804,11 +802,11 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
         tmp.sendMessage(tmp.xdr);
       }
 
-      return (Void) null;
+      return null;
     }
   }
 
-  /**
+  /*
    * Class sends out a heartbeat metric for this host.
    *
    * <p>Note: The problem with both the {@link GangliaService} and gmond issuing heartbeats for the
@@ -826,8 +824,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
         IGangliaMetadataMessage decl = gangliaState.getMetadata("heartbeat");
 
         if (decl == null) {
-          /*
-           * Inject an appropriate metadata declaration for the
+        /*
+       * Inject an appropriate metadata declaration for the
            * heartbeat.
            */
           decl =
@@ -835,8 +833,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
                   GangliaCoreMetricDecls.heartbeat(hostName, heartbeatInterval));
         }
 
-        /*
-         * Note: The heartbeat is a UINT32 parameter and expresses the
+      /*
+       * Note: The heartbeat is a UINT32 parameter and expresses the
          * start time of the service in seconds since the epoch.
          *
          * Note: The message generator will handle the conversion of the
@@ -856,8 +854,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
       } catch (Throwable t) {
 
-        /*
-         * Note: Do NOT throw anything out of this task. It will cause
+      /*
+       * Note: Do NOT throw anything out of this task. It will cause
          * the task to not be re-executed and metrics reporting will
          * halt!
          */
@@ -867,7 +865,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     }
   }
 
-  /**
+  /*
    * Class will delete hosts from which we have not heard in {@link #globalDMax} seconds and
    * individual metrics whose DMax has been exceeded.
    *
@@ -893,8 +891,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
       } catch (Throwable t) {
 
-        /*
-         * Note: Do NOT throw anything out of this task. It will cause
+      /*
+       * Note: Do NOT throw anything out of this task. It will cause
          * the task to not be re-executed and metrics reporting will
          * halt!
          */
@@ -911,8 +909,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
       try {
 
-        /*
-         * Note: If the user code responsible for gathering metrics
+      /*
+       * Note: If the user code responsible for gathering metrics
          * blocks then metrics will no longer be updated.
          *
          * TODO One way to make this more robust is to have a scheduled
@@ -926,8 +924,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
         gatherMetrics();
 
-        /*
-         * You can uncomment this to log out periodic host reports.
+      /*
+       * You can uncomment this to log out periodic host reports.
          */
         //				final IHostReport[] hostReports = getHostReport();
         //
@@ -938,8 +936,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
       } catch (Throwable t) {
 
-        /*
-         * Note: Do NOT throw anything out of this task. It will cause
+      /*
+       * Note: Do NOT throw anything out of this task. It will cause
          * the task to not be re-executed and metrics reporting will
          * halt!
          */
@@ -976,7 +974,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
   private final CopyOnWriteArraySet<IGangliaMetricsCollector> metricCollectors =
       new CopyOnWriteArraySet<IGangliaMetricsCollector>();
 
-  /**
+  /*
    * Register a metrics collector.
    *
    * @param c The collector.
@@ -989,7 +987,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return metricCollectors.add(c);
   }
 
-  /**
+  /*
    * Remove a metrics collector.
    *
    * @param c The collector.
@@ -1002,7 +1000,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return metricCollectors.remove(c);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This routine is typically invoked by {@link IGangliaMetricsCollector}s. However, you can
@@ -1056,8 +1054,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
           }
         }
 
-        /*
-         * Lookup the current value for the metric.
+      /*
+       * Lookup the current value for the metric.
          *
          * Note: At this point we are guaranteed that a metadata
          * declaration exists so the return value must be non-null.
@@ -1073,8 +1071,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
         if (tmv.getTimestamp() == 0L) {
 
-          /*
-           * Send metadata record.
+        /*
+       * Send metadata record.
            *
            * TODO Since the captured metadata record might have
            * originated on another host, we should build a new
@@ -1089,8 +1087,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
         // Update the current metric value.
         if (tmv.setValue(value)) {
 
-          /*
-           * Send the metric record.
+        /*
+       * Send the metric record.
            *
            * Note: Either the metric value has never been transmitted,
            * or it has changed significantly, or TMax might expire if
@@ -1113,7 +1111,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     }
   }
 
-  /**
+  /*
    * The name of the host on which this {@link GangliaService} is running as it will be reported
    * through {@link IGangliaMessage}s to other ganglia services.
    */
@@ -1122,7 +1120,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return hostName;
   }
 
-  /**
+  /*
    * The soft-state as maintained using the ganglia protocol and including any metrics collected by
    * this host regardless of whether they are being reported to other hosts.
    */
@@ -1131,7 +1129,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return gangliaState;
   }
 
-  /**
+  /*
    * Return the factory for metric declarations. If you supply a {@link GangliaMetadataFactory}
    * instance to the constructor (which is the default behavior for the reduced constructor) then
    * you can extend the default behavior in order to get nice metadata declarations for your
@@ -1142,7 +1140,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return gangliaState.getMetadataFactory();
   }
 
-  /**
+  /*
    * Return a host report based on the current state (similar to <code>gstat -a</code>).
    *
    * <p>Note: The report will not be accurate immediately as the {@link GangliaService} needs to
@@ -1153,7 +1151,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return getHostReport(defaultHostReportOn, defaultHostReportComparator);
   }
 
-  /**
+  /*
    * Return a host report based on the current state (similar to <code>gstat -a</code>).
    *
    * <p>Note: The report will not be accurate immediately as the {@link GangliaService} needs to
@@ -1173,7 +1171,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return getHostReport(hosts, reportOn, comparator);
   }
 
-  /**
+  /*
    * Return a host report based on the current state (similar to <code>gstat -a</code>).
    *
    * <p>Note: The report will not be accurate immediately as the {@link GangliaService} needs to
@@ -1251,7 +1249,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return a;
   }
 
-  /**
+  /*
    * The name of an environment variable whose value will be used as the canoncial host name for the
    * host running this JVM. This information is used by the {@link GangliaService}, which is
    * responsible for obtaining and reporting the canonical hostname for host metrics reporting.
@@ -1261,7 +1259,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
    */
   public static final String HOSTNAME = "org.embergraph.hostname";
 
-  /**
+  /*
    * The name for this host.
    *
    * @see #HOSTNAME
@@ -1278,8 +1276,8 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
       log.warn("Hostname override: hostname=" + s);
     } else {
       try {
-        /*
-         * Note: This should be the host *name* NOT an IP address of a
+      /*
+       * Note: This should be the host *name* NOT an IP address of a
          * preferred Ethernet adaptor.
          */
         s = InetAddress.getLocalHost().getCanonicalHostName();
@@ -1296,7 +1294,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
     return s;
   }
 
-  /**
+  /*
    * Runs a {@link GangliaService} as a standalone application.
    *
    * <p>Note: This routine is mainly for test as the primary purpose of the {@link GangliaService}

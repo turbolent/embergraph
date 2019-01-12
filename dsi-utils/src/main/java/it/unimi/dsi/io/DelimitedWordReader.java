@@ -28,8 +28,8 @@ import it.unimi.dsi.fastutil.chars.CharSets;
 import it.unimi.dsi.lang.MutableString;
 import java.io.Reader;
 
-/**
- * A word reader that breaks words on a given set of characters.
+/*
+* A word reader that breaks words on a given set of characters.
  *
  * <p>This class is a simple subclass of {@link FastBufferedReader}. It overwrites {@link
  * #isWordConstituent(char)} so that word constituents are defined negatively by a set of
@@ -53,7 +53,7 @@ public class DelimitedWordReader extends FastBufferedReader {
     delimiters.add('\r');
   }
 
-  /**
+  /*
    * Creates a new delimited word reader with a given buffer size and set of delimiters. The wrapped
    * reader will have to be set later using {@link #setReader(Reader)}.
    *
@@ -66,7 +66,7 @@ public class DelimitedWordReader extends FastBufferedReader {
     addCrLf();
   }
 
-  /**
+  /*
    * Creates a new delimited word reader with a buffer of {@link #DEFAULT_BUFFER_SIZE} characters.
    * The wrapped reader will have to be set later using {@link #setReader(Reader)}.
    *
@@ -77,7 +77,7 @@ public class DelimitedWordReader extends FastBufferedReader {
     addCrLf();
   }
 
-  /**
+  /*
    * Creates a new delimited word reader with a buffer of {@link #DEFAULT_BUFFER_SIZE} characters.
    * The wrapped reader will have to be set later using {@link #setReader(Reader)}.
    *
@@ -88,7 +88,7 @@ public class DelimitedWordReader extends FastBufferedReader {
     this(new CharOpenHashSet(delimiters.toCharArray()));
   }
 
-  /**
+  /*
    * Creates a new delimited word reader with a given buffer size and set of delimiters. The wrapped
    * reader will have to be set later using {@link #setReader(Reader)}.
    *
@@ -100,7 +100,7 @@ public class DelimitedWordReader extends FastBufferedReader {
     this(Integer.parseInt(bufferSize), new CharOpenHashSet(delimiters.toCharArray()));
   }
 
-  /**
+  /*
    * Creates a new delimited word reader by wrapping a given reader with a given buffer size and
    * using a set of delimiters.
    *
@@ -114,7 +114,7 @@ public class DelimitedWordReader extends FastBufferedReader {
     addCrLf();
   }
 
-  /**
+  /*
    * Creates a new delimited word reader by wrapping a given reader with a buffer of {@link
    * #DEFAULT_BUFFER_SIZE} characters using a given set of delimiters.
    *
@@ -127,7 +127,7 @@ public class DelimitedWordReader extends FastBufferedReader {
     addCrLf();
   }
 
-  /**
+  /*
    * Creates a new delimited word reader by wrapping a given fragment of a character array and using
    * a set delimiters.
    *
@@ -145,7 +145,7 @@ public class DelimitedWordReader extends FastBufferedReader {
     addCrLf();
   }
 
-  /**
+  /*
    * Creates a new delimited word reader by wrapping a given character array and using a set
    * delimiters.
    *
@@ -161,7 +161,7 @@ public class DelimitedWordReader extends FastBufferedReader {
     addCrLf();
   }
 
-  /**
+  /*
    * Creates a new delimited word reader by wrapping a given mutable string and using a set of
    * delimiters.
    *
@@ -183,7 +183,7 @@ public class DelimitedWordReader extends FastBufferedReader {
 
   public String toString() {
     final String className = getClass().getName();
-    CharOpenHashSet additionalDelimiters = (CharOpenHashSet) delimiters.clone();
+    CharOpenHashSet additionalDelimiters = delimiters.clone();
     additionalDelimiters.remove('\n');
     additionalDelimiters.remove('\r');
     String delimiters = new String(additionalDelimiters.toCharArray());

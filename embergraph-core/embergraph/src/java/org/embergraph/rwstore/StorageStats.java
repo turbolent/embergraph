@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import org.embergraph.rwstore.sector.SectorAllocator;
 
-/**
- * Maintains stats on the RWStore allocations, useful for tuning Allocator sizes and tracking store
+/*
+* Maintains stats on the RWStore allocations, useful for tuning Allocator sizes and tracking store
  * efficiency.
  *
  * <p>It can also track reallocation patterns that are lost in static snapshots of current usage.
@@ -169,23 +169,23 @@ public class StorageStats {
     int m_allocators;
     /** SlotsReserved: The #of slots in this slot size which have had storage reserved for them. */
     long m_totalSlots;
-    /**
+    /*
      * SlotsAllocated: Cumulative allocation of slots to date in this slot size (regardless of the
      * transaction outcome).
      */
     long m_slotAllocations;
-    /**
+    /*
      * SlotsRecycled: Cumulative recycled slots to date in this slot size (regardless of the
      * transaction outcome).
      */
     long m_slotDeletes;
-    /**
+    /*
      * The user bytes in use across all allocations for this slot size (does not consider recycled
      * or deleted slots).
      */
     long m_sizeAllocations;
-    //		/**
-    //		 * The user bytes that were in use across all allocations for this slot
+    //		/*
+//		 * The user bytes that were in use across all allocations for this slot
     //		 * size that have been recycled / deleted.
     //		 * <p>
     //		 * Note: Per BLZG-1551, this value is not tracked accurately!
@@ -312,7 +312,7 @@ public class StorageStats {
       return m_totalSlots - usedSlots();
     }
 
-    /**
+    /*
      * BytesAppData: The #of bytes in the allocated slots which are used by application data
      * (including the record checksum).
      *
@@ -327,7 +327,7 @@ public class StorageStats {
       //			return m_sizeAllocations - m_sizeDeletes;
     }
 
-    /**
+    /*
      * %SlotWaste: How well the application data fits in the slots
      * (BytesAppData/(SlotsInUse*AllocatorSize)).
      */
@@ -359,7 +359,7 @@ public class StorageStats {
       return localWaste.divide(totalWaste, 2, RoundingMode.HALF_UP).floatValue();
     }
 
-    /**
+    /*
      * BytesReserved: The space reserved on the backing file for those allocation slots
      * (AllocatorSlots * SlotsReserved).
      */
@@ -375,7 +375,7 @@ public class StorageStats {
       m_allocators++;
     }
 
-    /**
+    /*
      * SlotsChurn: A measure of how frequently slots of this size are re-allocated provided by
      * slotsAllocated/slotsReserved. This metric is higher when there are more allocations made
      * against a given #of slots reserved.
@@ -391,7 +391,7 @@ public class StorageStats {
       return slotsAllocated.divide(slotsReserved, 2, RoundingMode.HALF_UP).floatValue();
     }
 
-    /**
+    /*
      * %SlotsUnused: The percentage of slots of this size which are not in use
      * (1-(SlotsInUse/SlotsReserved)).
      */
@@ -406,7 +406,7 @@ public class StorageStats {
       return used.divide(total, 2, RoundingMode.HALF_UP).floatValue();
     }
 
-    /**
+    /*
      * %SlotsAllocated: SlotsAllocated/(Sum of SlotsAllocated across all slot sizes).
      *
      * @param totalAllocations The #of allocations across all slot sizes.
@@ -423,7 +423,7 @@ public class StorageStats {
       return used.divide(total, 2, RoundingMode.HALF_UP).floatValue();
     }
 
-    /**
+    /*
      * %SlotsInUse: SlotsInUse / (total SlotsInUse across all slots sizes).
      *
      * @param totalInuse The total of SlotsInUse across all slot sizes.
@@ -443,7 +443,7 @@ public class StorageStats {
       return used.divide(total, 2, RoundingMode.HALF_UP).floatValue();
     }
 
-    /**
+    /*
      * MeanAllocation: (total application bytes used across all allocations for this slot size) /
      * SlotsAllocated
      *
@@ -485,7 +485,7 @@ public class StorageStats {
     m_blobBuckets.add(new BlobBucket(Integer.MAX_VALUE)); // catch all
   }
 
-  /**
+  /*
    * @param instr restore from reopen
    * @throws IOException
    */
@@ -582,7 +582,7 @@ public class StorageStats {
     register(alloc, false);
   }
 
-  /**
+  /*
    * Collected statistics are against each Allocation Block size:
    *
    * <dl>
@@ -730,7 +730,7 @@ public class StorageStats {
     }
   }
 
-  /**
+  /*
    * Helper method returns the ratio <code>(usedData/totalData)</code> as a percentage.
    *
    * @param usedData

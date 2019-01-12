@@ -29,8 +29,8 @@ import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.service.Split;
 
-/**
- * Interface for mutable B+-Tree mapping arbitrary non-null keys to arbitrary values.
+/*
+* Interface for mutable B+-Tree mapping arbitrary non-null keys to arbitrary values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -38,9 +38,9 @@ public interface IIndex
     extends ISimpleBTree, IAutoboxBTree, IRangeQuery, IIndexLocalCounter, ICounterSetAccess {
 
   /** The description of the resources comprising the index view. */
-  public IResourceMetadata[] getResourceMetadata();
+  IResourceMetadata[] getResourceMetadata();
 
-  /**
+  /*
    * The metadata for the index. This is full of good stuff about the index.
    *
    * <p>Note: The same method is exposed by {@link ICheckpointProtocol}. It is also exposed here in
@@ -49,17 +49,17 @@ public interface IIndex
    *
    * @see ICheckpointProtocol#getIndexMetadata()
    */
-  public IndexMetadata getIndexMetadata();
+  IndexMetadata getIndexMetadata();
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Interesting performance counters and other statistics about the index.
    */
   @Override
-  public CounterSet getCounters();
+  CounterSet getCounters();
 
-  /**
+  /*
    * Submits an index procedure that operations on a single key to the appropriate index partition
    * returning the result of that procedure.
    *
@@ -67,9 +67,9 @@ public interface IIndex
    * @param proc The procedure.
    * @return The value returned by {@link IIndexProcedure#apply(IIndex)}
    */
-  public <T> T submit(byte[] key, ISimpleIndexProcedure<T> proc);
+  <T> T submit(byte[] key, ISimpleIndexProcedure<T> proc);
 
-  /**
+  /*
    * The procedure will be transparently applied against each index partition spanned by the given
    * key range.
    *
@@ -84,13 +84,13 @@ public interface IIndex
    * @param resultHandler When defined, results from each procedure application will be reported to
    *     this object.
    */
-  public void submit(
+  void submit(
       byte[] fromKey,
       byte[] toKey,
       final IKeyRangeIndexProcedure proc,
       final IResultHandler handler);
 
-  /**
+  /*
    * Runs a procedure against an index.
    *
    * <p>Note: This may be used to send custom logic together with the data to a remote index or
@@ -115,7 +115,7 @@ public interface IIndex
    *     result across the shards from the client's result handler. See BLZG-1537.
    * @see BLZG-1537 (Schedule more IOs when loading data)
    */
-  public void submit(
+  void submit(
       int fromIndex,
       int toIndex,
       byte[][] keys,

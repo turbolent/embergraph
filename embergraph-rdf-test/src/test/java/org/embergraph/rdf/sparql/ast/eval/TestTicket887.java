@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test suite for a heisenbug involving BIND. Unlike the other issues this sometimes happens, and is
+/*
+* Test suite for a heisenbug involving BIND. Unlike the other issues this sometimes happens, and is
  * sometimes OK, so we run the test in a loop 20 times.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/708">Heisenbug </a>
@@ -31,7 +31,7 @@ public class TestTicket887 extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>

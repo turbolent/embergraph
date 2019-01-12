@@ -27,8 +27,8 @@ import java.util.Arrays;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
-/**
- * A factory for {@link IEvaluationPlan}s that uses a caller specified evaluation order.
+/*
+* A factory for {@link IEvaluationPlan}s that uses a caller specified evaluation order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

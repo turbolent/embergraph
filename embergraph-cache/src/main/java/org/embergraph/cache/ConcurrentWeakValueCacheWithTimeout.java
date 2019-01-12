@@ -25,8 +25,8 @@ package org.embergraph.cache;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Extends the basic behavior to clear stale references from a backing hard reference queue. The
+/*
+* Extends the basic behavior to clear stale references from a backing hard reference queue. The
  * weak reference values for entries whose hard reference is cleared from the backing hard reference
  * queue WILL NOT be cleared from this map as long as those references remain strongly reachable.
  *
@@ -36,7 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ConcurrentWeakValueCacheWithTimeout<K, V> extends ConcurrentWeakValueCache<K, V> {
 
-  /**
+  /*
    * Ctor variant using a {@link SynchronizedHardReferenceQueueWithTimeout} with the specified
    * capacity and timeout for stale references.
    *
@@ -47,7 +47,7 @@ public class ConcurrentWeakValueCacheWithTimeout<K, V> extends ConcurrentWeakVal
     this(queueCapacity, 0.75f /* loadFactor */, 16 /* concurrencyLevel */, timeout);
   }
 
-  /**
+  /*
    * Ctor variant using a {@link SynchronizedHardReferenceQueueWithTimeout} with the specified
    * capacity, timeout for stale references, and the specified concurrency level for the inner
    * {@link ConcurrentHashMap} used by this class.

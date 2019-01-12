@@ -37,14 +37,14 @@ import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.striterator.Chunkerator;
 
-/**
- * Utility class for {@link INamedSolutionSetRef}s.
+/*
+* Utility class for {@link INamedSolutionSetRef}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class NamedSolutionSetRefUtility {
 
-  /**
+  /*
    * Factory for {@link INamedSolutionSetRef}s that will be resolved against the {@link
    * IRunningQuery} identified by the specified <i>queryId</i>.
    *
@@ -74,7 +74,7 @@ public class NamedSolutionSetRefUtility {
     return new NamedSolutionSetRef(queryId, namedSet, joinVars);
   }
 
-  /**
+  /*
    * Factory for {@link INamedSolutionSetRef}s that will be resolved against a KB view identified by
    * a <i>namespace</i> and <i>timestamp</i>.
    *
@@ -105,7 +105,7 @@ public class NamedSolutionSetRefUtility {
     return new NamedSolutionSetRef(namespace, timestamp, localName, joinVars);
   }
 
-  /**
+  /*
    * Parses the {@link INamedSolutionSetRef#toString()} representation, returning an instance of
    * that interface.
    *
@@ -178,7 +178,7 @@ public class NamedSolutionSetRefUtility {
     throw new IllegalArgumentException(s);
   }
 
-  /**
+  /*
    * Return the fully qualified name for a named solution set NOT attached to a query.
    *
    * <p>Note: this includes the namespace (to keep the named solution sets distinct for different KB
@@ -231,7 +231,7 @@ public class NamedSolutionSetRefUtility {
     return sb.toString();
   }
 
-  /**
+  /*
    * The prefix that may be used to identify all named solution sets belonging to the specified KB
    * namespace.
    *
@@ -249,7 +249,7 @@ public class NamedSolutionSetRefUtility {
     return sb;
   }
 
-  /**
+  /*
    * The prefix that may be used to identify all named solution sets belonging to the specified KB
    * namespace and having the specified localName. This may be used to find the different indices
    * over the same named solution set when there is more than one index order for that named
@@ -270,8 +270,8 @@ public class NamedSolutionSetRefUtility {
     return sb;
   }
 
-  //    /**
-  //     * Resolve the pre-existing named solution set returning its
+  //    /*
+//     * Resolve the pre-existing named solution set returning its
   //     * {@link ISolutionSetStats}.
   //     *
   //     * @param sparqlCache
@@ -292,8 +292,8 @@ public class NamedSolutionSetRefUtility {
   //
   //    }
   //
-  //    /**
-  //     * Resolve the pre-existing named solution set returning an iterator that
+  //    /*
+//     * Resolve the pre-existing named solution set returning an iterator that
   //     * will visit the solutions (access path scan).
   //     *
   //     * @return An iterator that will visit the solutions in the named solution
@@ -314,7 +314,7 @@ public class NamedSolutionSetRefUtility {
   //
   //    }
 
-  /**
+  /*
    * Resolve the pre-existing named solution set returning its {@link ISolutionSetStats}.
    *
    * @param sparqlCache
@@ -397,7 +397,7 @@ public class NamedSolutionSetRefUtility {
     return ((ISolutionSet) index).getStats();
   }
 
-  /**
+  /*
    * Resolve the pre-existing named solution set returning an iterator that will visit the solutions
    * (access path scan).
    *

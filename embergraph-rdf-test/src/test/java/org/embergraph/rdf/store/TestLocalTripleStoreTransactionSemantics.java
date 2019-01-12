@@ -16,8 +16,8 @@ import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.Statement;
 
-/**
- * Test suite for the transaction semantics of the {@link LocalTripleStore}.
+/*
+* Test suite for the transaction semantics of the {@link LocalTripleStore}.
  *
  * <p>FIXME This test suite should be used for any backend as long as full tx are supported on that
  * backend. So, LTS, LDS and eventually EDS and JDS.
@@ -67,8 +67,8 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
     }
   }
 
-  //    /**
-  //     * Test the commit semantics in the context of a read-committed view of the
+  //    /*
+//     * Test the commit semantics in the context of a read-committed view of the
   //     * database.
   //     */
   //    public void test_commit() {
@@ -190,7 +190,7 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
     }
   }
 
-  /**
+  /*
    * A unit test for some of the basic functionality for a triple store or quad store using full
    * transactions.
    *
@@ -353,8 +353,8 @@ public class TestLocalTripleStoreTransactionSemantics extends ProxyTestCase {
         // visible in the new read-write tx.
         assertTrue(tx5View.hasStatement(john, loves, mary));
 
-        /*
-         * Now add the same statement in tx3.  We should be able to
+      /*
+       * Now add the same statement in tx3.  We should be able to
          * reconcile the "write-write" conflict and commit this tx
          * without trouble.
          */

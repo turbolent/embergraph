@@ -37,8 +37,8 @@ import org.embergraph.btree.proc.BatchInsert.BatchInsertConstructor;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
 
-/**
- * Test suite for the ability to re-open an {@link EmbeddedFederation}.
+/*
+* Test suite for the ability to re-open an {@link EmbeddedFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -63,7 +63,7 @@ public class TestRestartSafe extends AbstractEmbeddedFederationTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Test creates a new embedded federation (this is done in setUp() by the super class), registers
    * a scale-out index with the metadata service having an index partition on each of the data
    * services and then writes some data such that there is data for that scale-out index on each of

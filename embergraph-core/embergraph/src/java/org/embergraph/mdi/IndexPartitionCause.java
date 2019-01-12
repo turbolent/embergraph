@@ -6,8 +6,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import org.embergraph.resources.ResourceManager;
 
-/**
- * Encapsulate the reason why an index partition was created and the synchronous overflow counter of
+/*
+* Encapsulate the reason why an index partition was created and the synchronous overflow counter of
  * the data service on which the index partition was created as of that action. This information may
  * be used to support heuristics which refuse to move an index partition which was recently moved or
  * to join an index partition which was recently split, etc.
@@ -20,13 +20,13 @@ public class IndexPartitionCause implements Externalizable {
   /** */
   private static final long serialVersionUID = 4643434468430418713L;
 
-  /**
+  /*
    * Typesafe enumeration of reasons why an index partition was created.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static enum CauseEnum {
+  public enum CauseEnum {
 
     /** The initial registration of a scale-out index. */
     Register((byte) 0),
@@ -40,7 +40,7 @@ public class IndexPartitionCause implements Externalizable {
     /** An index partition was moved to another data service. */
     Move((byte) 3);
 
-    private CauseEnum(final byte code) {
+    CauseEnum(final byte code) {
       this.code = code;
     }
 
@@ -73,14 +73,14 @@ public class IndexPartitionCause implements Externalizable {
     return cause;
   }
 
-  /**
+  /*
    * The value of the synchronous overflow counter at the time that the index partition was created.
    */
   public long getSynchronousOverflowCounter() {
     return synchronousOverflowCounter;
   }
 
-  /**
+  /*
    * The lastCommitTime for the live journal. Note that this will be 0L if no commits have been
    * performed on the journal. This makes the "time" less robust than the overflow counter.
    */
@@ -127,7 +127,7 @@ public class IndexPartitionCause implements Externalizable {
   /** De-serialization ctor. */
   public IndexPartitionCause() {}
 
-  /**
+  /*
    * @param cause The reason why the index partition was created.
    * @param synchronousOverflowCounter The value of the counter at the time that the index partition
    *     was created.

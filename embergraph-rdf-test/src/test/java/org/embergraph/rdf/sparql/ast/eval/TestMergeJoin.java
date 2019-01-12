@@ -26,8 +26,8 @@ import org.embergraph.bop.join.AbstractHashJoinUtilityTestCase;
 import org.embergraph.bop.join.AbstractMergeJoin;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 
-/**
- * Data driven test suite.
+/*
+* Data driven test suite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ public class TestMergeJoin extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test of a required merge-join against a query which has the right "shape" to be recognized as a
    * merge join without a dependency on structural rewrites of the query.
    *
@@ -98,7 +98,7 @@ public class TestMergeJoin extends AbstractDataDrivenSPARQLTestCase {
         BOpUtility.visitAll(astContainer.getQueryPlan(), AbstractMergeJoin.class).hasNext());
   }
 
-  /**
+  /*
    * Variant of the test above in which we disable the merge join with a query hint and verify that
    * the merge join operator was NOT used in the query plan.
    */
@@ -119,7 +119,7 @@ public class TestMergeJoin extends AbstractDataDrivenSPARQLTestCase {
         BOpUtility.visitAll(astContainer.getQueryPlan(), AbstractMergeJoin.class).hasNext());
   }
 
-  /**
+  /*
    * Test of an optional merge-join.
    *
    * <p>Note: This test is against the same data that we use to test the low level merge join code.

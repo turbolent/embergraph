@@ -29,8 +29,8 @@ import org.embergraph.relation.IRelation;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
-/**
- * Default implementation.
+/*
+* Default implementation.
  *
  * @todo use a cache per relation and timestamp. Track the actual range counts for a predicate as
  *     bound in a query vs those predicated for the predicate. The actual counts can also vary if
@@ -58,7 +58,7 @@ public class DefaultRangeCountFactory implements IRangeCountFactory {
     this.joinNexus = joinNexus;
   }
 
-  /**
+  /*
    * Return the range count for the predicate. The range counts are requested using the "non-exact"
    * range count query, so the range counts are actually the upper bound. However, if the upper
    * bound is ZERO (0) then the range count really is ZERO (0).

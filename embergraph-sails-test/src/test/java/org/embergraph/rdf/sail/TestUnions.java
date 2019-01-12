@@ -39,8 +39,8 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.query.resultio.sparqlxml.SPARQLResultsXMLWriter;
 
-/**
- * Unit tests the UNION aspects of the {@link EmbergraphSail} implementation.
+/*
+* Unit tests the UNION aspects of the {@link EmbergraphSail} implementation.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -75,7 +75,7 @@ public class TestUnions extends QuadsTestCase {
   /** dc11:creator */
   final URI DC11_CREATOR = new URIImpl(DC11 + "creator");
 
-  /**
+  /*
    * Tests mapping of UNIONS in SPARQL onto unions in embergraph rules.
    *
    * @throws Exception
@@ -86,7 +86,7 @@ public class TestUnions extends QuadsTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        (EmbergraphSailRepositoryConnection) repo.getConnection();
+        repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -113,7 +113,7 @@ public class TestUnions extends QuadsTestCase {
 
       /**/
       if (log.isInfoEnabled()) {
-        log.info(((EmbergraphSailRepositoryConnection) cxn).getTripleStore().dumpStore());
+        log.info(cxn.getTripleStore().dumpStore());
       }
 
       {
@@ -160,7 +160,7 @@ public class TestUnions extends QuadsTestCase {
     }
   }
 
-  /**
+  /*
    * Tests mapping of UNIONS in SPARQL onto unions in embergraph rules.
    *
    * @throws Exception
@@ -171,7 +171,7 @@ public class TestUnions extends QuadsTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        (EmbergraphSailRepositoryConnection) repo.getConnection();
+        repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {

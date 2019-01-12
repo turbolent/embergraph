@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal;
 
-/**
- * Support for the picky xpath math functions: abs, ceiling, floor, and round.
+/*
+* Support for the picky xpath math functions: abs, ceiling, floor, and round.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -34,7 +34,7 @@ public class XPathMathFunctions {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Returns the smallest (closest to negative infinity) number with no fractional part that is not
    * less than the value of $arg. If type of $arg is one of the four numeric types xs:float,
    * xs:double, xs:decimal or xs:integer the type of the result is the same as the type of $arg. If

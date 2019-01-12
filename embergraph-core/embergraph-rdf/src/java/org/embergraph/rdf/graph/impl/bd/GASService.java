@@ -76,8 +76,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * A SERVICE that exposes {@link IGASProgram}s for SPARQL execution.
+/*
+* A SERVICE that exposes {@link IGASProgram}s for SPARQL execution.
  *
  * <p>For example, the following would run a depth-limited BFS traversal:
  *
@@ -133,13 +133,13 @@ public class GASService extends CustomServiceFactoryBase {
     /** Used as the subject in the GAS SERVICE invocation pattern. */
     URI PROGRAM = new URIImpl(NAMESPACE + "program");
 
-    /**
+    /*
      * Magic predicate identifies the fully qualified class name of the {@link IGASProgram} to be
      * executed.
      */
     URI GAS_CLASS = new URIImpl(NAMESPACE + "gasClass");
 
-    /**
+    /*
      * The #of threads that will be used to expand the frontier in each iteration of the algorithm
      * (optional, default {@value #DEFAULT_NTHREADS}).
      *
@@ -149,7 +149,7 @@ public class GASService extends CustomServiceFactoryBase {
 
     int DEFAULT_NTHREADS = 4;
 
-    /**
+    /*
      * This option determines the traversal direction semantics for the {@link IGASProgram} against
      * the graph, including whether the the edges of the graph will be interpreted as directed (
      * {@link TraversalDirectionEnum#Forward} (which is the default), {@link
@@ -162,7 +162,7 @@ public class GASService extends CustomServiceFactoryBase {
 
     TraversalDirectionEnum DEFAULT_DIRECTED_TRAVERSAL = TraversalDirectionEnum.Forward;
 
-    /**
+    /*
      * The maximum #of iterations for the GAS program (optional, default {@value
      * #DEFAULT_MAX_ITERATIONS}).
      *
@@ -173,7 +173,7 @@ public class GASService extends CustomServiceFactoryBase {
 
     int DEFAULT_MAX_ITERATIONS = Integer.MAX_VALUE;
 
-    /**
+    /*
      * The maximum #of iterations for the GAS program after the targets have been reached (optional,
      * default {@value #DEFAULT_MAX_ITERATIONS_AFTER_TARGETS}). Default behavior is to not stop once
      * the targets are reached.
@@ -185,7 +185,7 @@ public class GASService extends CustomServiceFactoryBase {
 
     int DEFAULT_MAX_ITERATIONS_AFTER_TARGETS = Integer.MAX_VALUE;
 
-    /**
+    /*
      * The maximum #of vertices in the visited set for the GAS program (optional, default {@value
      * #DEFAULT_MAX_VISITED}).
      *
@@ -196,7 +196,7 @@ public class GASService extends CustomServiceFactoryBase {
 
     int DEFAULT_MAX_VISITED = Integer.MAX_VALUE;
 
-    /**
+    /*
      * An optional constraint on the types of links that will be visited by the algorithm.
      *
      * <p>Note: When this option is used, the scatter and gather will not visit the property set for
@@ -207,7 +207,7 @@ public class GASService extends CustomServiceFactoryBase {
      */
     URI LINK_TYPE = new URIImpl(NAMESPACE + "linkType");
 
-    /**
+    /*
      * An optional constraint on the types of the link attributes that will be visited by the
      * algorithm - the use of this option is required if you want to process some specific link
      * weight rather than the simple topology of the graph.
@@ -216,7 +216,7 @@ public class GASService extends CustomServiceFactoryBase {
      */
     URI LINK_ATTR_TYPE = new URIImpl(NAMESPACE + "linkAttrType");
 
-    /**
+    /*
      * The {@link IGASScheduler} (default is {@link #DEFAULT_SCHEDULER}). Class must implement
      * {@link IGASSchedulerImpl}.
      */
@@ -224,7 +224,7 @@ public class GASService extends CustomServiceFactoryBase {
 
     Class<? extends IGASSchedulerImpl> DEFAULT_SCHEDULER = CHMScheduler.class;
 
-    /**
+    /*
      * Magic predicate used to specify one (or more) vertices in the initial frontier.
      *
      * <p>Note: Algorithms such as {@link CC} and {@link PR} automatically place all vertices into
@@ -232,7 +232,7 @@ public class GASService extends CustomServiceFactoryBase {
      */
     URI IN = new URIImpl(NAMESPACE + "in");
 
-    /**
+    /*
      * Magic predicate used to specify one (or more) target vertices. This may be used in
      * combination with algorithms that compute paths in a graph to filter the visited vertices
      * after the traversal in order to remove any vertex that is not part of a path to one or more
@@ -253,7 +253,7 @@ public class GASService extends CustomServiceFactoryBase {
      */
     URI TARGET = new URIImpl(NAMESPACE + "target");
 
-    /**
+    /*
      * Magic predicate used to specify a variable that will become bound to each vertex in the
      * visited set for the analytic. {@link #OUT} is always bound to the visited vertices. The other
      * "out" variables are bound to state associated with the visited vertices in an algorithm
@@ -288,18 +288,16 @@ public class GASService extends CustomServiceFactoryBase {
   private static List<URI> OUT_VARS =
       Collections.unmodifiableList(
           Arrays.asList(
-              new URI[] {
-                Options.OUT,
-                Options.OUT1,
-                Options.OUT2,
-                Options.OUT3,
-                Options.OUT4,
-                Options.OUT5,
-                Options.OUT6,
-                Options.OUT7,
-                Options.OUT8,
-                Options.OUT9
-              }));
+              Options.OUT,
+              Options.OUT1,
+              Options.OUT2,
+              Options.OUT3,
+              Options.OUT4,
+              Options.OUT5,
+              Options.OUT6,
+              Options.OUT7,
+              Options.OUT8,
+              Options.OUT9));
 
   private final EmbergraphNativeServiceOptions serviceOptions;
 
@@ -318,7 +316,7 @@ public class GASService extends CustomServiceFactoryBase {
     serviceOptions.setRunFirst(true);
   }
 
-  /**
+  /*
    * The known URIs.
    *
    * <p>Note: We can recognize anything in {@link Options#NAMESPACE}, but the predicate still has to
@@ -340,7 +338,7 @@ public class GASService extends CustomServiceFactoryBase {
     return serviceOptions;
   }
 
-  /**
+  /*
    * NOP
    *
    * <p>{@inheritDoc}
@@ -367,7 +365,7 @@ public class GASService extends CustomServiceFactoryBase {
     return new GASServiceCall(store, params.getServiceNode(), getServiceOptions());
   }
 
-  /**
+  /*
    * Execute the service call (run the GAS program).
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -420,13 +418,12 @@ public class GASService extends CustomServiceFactoryBase {
 
       this.traversalDirection =
           TraversalDirectionEnum.valueOf(
-              ((Literal)
-                      getOnlyArg(
-                          Options.PROGRAM,
-                          Options.TRAVERSAL_DIRECTION,
-                          store
-                              .getValueFactory()
-                              .createLiteral(Options.DEFAULT_DIRECTED_TRAVERSAL.name())))
+              getOnlyArg(
+                  Options.PROGRAM,
+                  Options.TRAVERSAL_DIRECTION,
+                  store
+                      .getValueFactory()
+                      .createLiteral(Options.DEFAULT_DIRECTED_TRAVERSAL.name()))
                   .stringValue());
 
       this.maxIterations =
@@ -535,7 +532,7 @@ public class GASService extends CustomServiceFactoryBase {
       }
     }
 
-    /**
+    /*
      * Return the variable associated with the first instandce of the specified subject and
      * predicate in the service's graph pattern. Only the simple {@link StatementPatternNode}s are
      * visited.
@@ -579,7 +576,7 @@ public class GASService extends CustomServiceFactoryBase {
       return null; // not found.
     }
 
-    /**
+    /*
      * Return the object bindings from the service's graph pattern for the specified subject and
      * predicate. Only the simple {@link StatementPatternNode}s are visited.
      *
@@ -637,7 +634,7 @@ public class GASService extends CustomServiceFactoryBase {
       return tmp.toArray(new Value[tmp.size()]);
     }
 
-    /**
+    /*
      * Return the sole {@link Value} for the given s and p.
      *
      * @param s The subject.
@@ -657,7 +654,7 @@ public class GASService extends CustomServiceFactoryBase {
       return tmp[0];
     }
 
-    /**
+    /*
      * Return the sole {@link Value} for the given s and p and the default value if no value was
      * explicitly provided.
      *
@@ -682,7 +679,7 @@ public class GASService extends CustomServiceFactoryBase {
       return serviceOptions;
     }
 
-    /**
+    /*
      * Execute the GAS program.
      *
      * <p>{@inheritDoc}
@@ -735,8 +732,8 @@ public class GASService extends CustomServiceFactoryBase {
 
         if (initialFrontier != null) {
 
-          /*
-           * FIXME Why can't we pass in the Value (with a defined IV)
+        /*
+       * FIXME Why can't we pass in the Value (with a defined IV)
            * and not the IV? This should work. Passing in the IV is
            * against the grain of the API and the generalized
            * abstraction as Values. Of course, having the IV is
@@ -751,12 +748,12 @@ public class GASService extends CustomServiceFactoryBase {
         }
 
         // Run the analytic.
-        final IGASStats stats = (IGASStats) gasContext.call();
+        final IGASStats stats = gasContext.call();
 
         if (targetVertices != null && gasProgram instanceof IPredecessor) {
 
-          /*
-           * Remove vertices from the visited set that are not on a
+        /*
+       * Remove vertices from the visited set that are not on a
            * path leading to at least one of the specified target
            * vertices.
            *
@@ -784,14 +781,14 @@ public class GASService extends CustomServiceFactoryBase {
           sb.append(", nthreads=" + nthreads);
           sb.append(
               ", scheduler="
-                  + ((GASState<VS, ES, ST>) gasState).getScheduler().getClass().getSimpleName());
+                  + gasState.getScheduler().getClass().getSimpleName());
           sb.append(", gasEngine=" + gasEngine.getClass().getSimpleName());
           sb.append(", stats=" + stats);
           log.info(sb.toString());
         }
 
-        /*
-         * Bind output variables (if any).
+      /*
+       * Bind output variables (if any).
          */
 
         final IBindingSet[] out =
@@ -827,7 +824,7 @@ public class GASService extends CustomServiceFactoryBase {
       return tmp;
     }
 
-    /**
+    /*
      * Class used to report {@link IBindingSet}s to the {@link GASService}. {@link IGASProgram}s can
      * customize the way in which they interpret the declared variables by subclassing this class.
      *
@@ -842,7 +839,7 @@ public class GASService extends CustomServiceFactoryBase {
     public static class BindingSetReducer<VS, ES, ST>
         implements IReducer<VS, ES, ST, IBindingSet[]> {
 
-      /**
+      /*
        * The declared output variables (the ones that the caller wants to extract). Any position
        * that will not be extracted is a <code>null</code>.
        */
@@ -862,7 +859,7 @@ public class GASService extends CustomServiceFactoryBase {
       /** The collected solutions. */
       private final List<IBindingSet> tmp = new LinkedList<IBindingSet>();
 
-      /**
+      /*
        * @param outVars The declared output variables (the ones that the caller wants to extract).
        *     Any position that will not be extracted is a <code>null</code>.
        */
@@ -915,8 +912,8 @@ public class GASService extends CustomServiceFactoryBase {
 
             } else if (vals.size() == 1) {
 
-              /*
-               * Bind the single value, leave the parent in the
+            /*
+       * Bind the single value, leave the parent in the
                * bSets.
                */
 
@@ -928,8 +925,8 @@ public class GASService extends CustomServiceFactoryBase {
 
             } else {
 
-              /*
-               * Remove the parent from the bSets, for each new
+            /*
+       * Remove the parent from the bSets, for each new
                * value, clone the parent, bind the value, and add
                * the new solution to the bSets
                */
@@ -964,12 +961,12 @@ public class GASService extends CustomServiceFactoryBase {
         if (val instanceof IV) {
 
           // The value is already an IV.
-          bs.set(var, new Constant((IV) val));
+          bs.set(var, new Constant(val));
 
         } else {
 
-          /*
-           * The Value is a EmbergraphValueImpl (if the bind() method
+        /*
+       * The Value is a EmbergraphValueImpl (if the bind() method
            * used the supplied ValueFactory). We need to convert
            * it to an IV and this code ASSUMES that we can do this
            * using an inline IV with the as configured KB. (This
@@ -1014,9 +1011,9 @@ public class GASService extends CustomServiceFactoryBase {
 
       try {
 
-        final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor(new Class[] {});
+        final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor();
 
-        final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance(new Object[] {});
+        final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance();
 
         return gasProgram;
 

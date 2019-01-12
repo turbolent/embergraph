@@ -27,8 +27,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 
-/**
- * Helper class for normal shutdown of an {@link ExecutorService}.
+/*
+* Helper class for normal shutdown of an {@link ExecutorService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -40,7 +40,7 @@ public class ShutdownHelper {
   /** Elapsed nanos (updated each time in the loop until terminated). */
   private long elapsed;
 
-  /**
+  /*
    * Issues the {@link ExecutorService#shutdown()} request and then waits until all tasks running on
    * that service have terminated.
    *
@@ -57,7 +57,7 @@ public class ShutdownHelper {
     this(executorService, Long.MAX_VALUE /* logTimeout */, TimeUnit.SECONDS /* unit */);
   }
 
-  /**
+  /*
    * Issues the {@link ExecutorService#shutdown()} request and then waits until all tasks running on
    * that service have terminated.
    *
@@ -129,7 +129,7 @@ public class ShutdownHelper {
     } // while(true)
   }
 
-  /**
+  /*
    * The elapsed nanoseconds since the {@link ExecutorService#shutdown()} was initiated. This value
    * is updated every 100ms until the service is terminated.
    */
@@ -138,7 +138,7 @@ public class ShutdownHelper {
     return elapsed;
   }
 
-  /**
+  /*
    * Invoked each time the <i>logTimeout</i> expires awaiting the service termination. The default
    * implementation is a NOP, but it may be overriden in order to log a message, etc.
    */

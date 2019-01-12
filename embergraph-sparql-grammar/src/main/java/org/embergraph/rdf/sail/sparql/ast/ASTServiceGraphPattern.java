@@ -43,7 +43,7 @@ public class ASTServiceGraphPattern extends SimpleNode {
     return this.silent;
   }
 
-  /**
+  /*
    * Return the full text image of the SERVICE clause, including the SERVICE keyword and everything
    * through the closing <code>}</code>.
    *

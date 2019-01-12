@@ -29,14 +29,14 @@ import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
 
-/**
- * Abstract base class provides default behavior for generating keys for a given index order.
+/*
+* Abstract base class provides default behavior for generating keys for a given index order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public abstract class AbstractKeyOrder<E> implements IKeyOrder<E> {
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>FIXME This needs to be reconciled with {@link ITupleSerializer#serializeKey(Object)}. For
@@ -121,7 +121,7 @@ public abstract class AbstractKeyOrder<E> implements IKeyOrder<E> {
     return key == null ? null : SuccessorUtil.successor(key);
   }
 
-  /**
+  /*
    * Encodes an value into the key. This implementation uses the default behavior of {@link
    * IKeyBuilder}. If you need to specialize how a value gets encoded into the key then you can
    * override this method.

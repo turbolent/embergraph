@@ -28,8 +28,8 @@ import org.embergraph.rdf.sail.webapp.client.MiniMime;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Default dispatch pattern for a core REST API.
+/*
+* Default dispatch pattern for a core REST API.
  *
  * @author Martyn Cutcher
  */
@@ -180,8 +180,8 @@ public class RESTServlet extends EmbergraphRDFServlet {
 
       if (m_describeServlet != null) {
 
-        /*
-         * Test the DESCRIBE cache.
+      /*
+       * Test the DESCRIBE cache.
          */
 
         req.setAttribute(DescribeCacheServlet.ATTR_DESCRIBE_URIS, Collections.singleton(uri));
@@ -212,7 +212,7 @@ public class RESTServlet extends EmbergraphRDFServlet {
     m_queryServlet.doGet(req, resp);
   }
 
-  /**
+  /*
    * A query can be submitted with a POST if a query parameter is provided. Otherwise delegate to
    * the {@link InsertServlet} or {@link DeleteServlet} as appropriate.
    */
@@ -283,7 +283,7 @@ public class RESTServlet extends EmbergraphRDFServlet {
     return contentType != null && mimeType.equals(new MiniMime(contentType).getMimeType());
   }
 
-  /**
+  /*
    * A PUT request always delegates to the {@link UpdateServlet}.
    *
    * <p>Note: The semantics of PUT are "DELETE+INSERT" for the API. PUT is not support for just

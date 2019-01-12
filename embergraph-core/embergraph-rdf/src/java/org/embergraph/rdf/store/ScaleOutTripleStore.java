@@ -26,8 +26,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.locator.DefaultResourceLocator;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * Implementation of an {@link ITripleStore} as a client of an {@link IEmbergraphFederation}.
+/*
+* Implementation of an {@link ITripleStore} as a client of an {@link IEmbergraphFederation}.
  *
  * <h2>Deployment choices</h2>
  *
@@ -63,7 +63,7 @@ import org.embergraph.service.IEmbergraphFederation;
  */
 public class ScaleOutTripleStore extends AbstractTripleStore {
 
-  /**
+  /*
    * Ctor specified by {@link DefaultResourceLocator}
    *
    * <p>Note: KB is NOT created automatically.
@@ -94,8 +94,8 @@ public class ScaleOutTripleStore extends AbstractTripleStore {
 
   }
 
-  //    /**
-  //     * Drops the indices for the {@link ITripleStore}.
+  //    /*
+//     * Drops the indices for the {@link ITripleStore}.
   //     */
   //    public void __tearDownUnitTest() {
   //

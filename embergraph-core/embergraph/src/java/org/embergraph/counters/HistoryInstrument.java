@@ -2,8 +2,8 @@ package org.embergraph.counters;
 
 import org.apache.log4j.Logger;
 
-/**
- * A history instrument which aggregates samples into a circular buffer with a specified sample
+/*
+* A history instrument which aggregates samples into a circular buffer with a specified sample
  * period. Old samples are overwritten (or cleared in the case of missed samples) only as new
  * samples arrive. The value reported for a given moment is the average of the samples which were
  * aggregated into the same slot in the underlying {@link History}.
@@ -28,7 +28,7 @@ public class HistoryInstrument<T> implements IInstrument<T> {
     return minutes;
   }
 
-  /**
+  /*
    * Return the {@link History} for the specified base period.
    *
    * @param basePeriod The base period.
@@ -75,8 +75,8 @@ public class HistoryInstrument<T> implements IInstrument<T> {
     }
   }
 
-  //    /**
-  //     *
+  //    /*
+//     *
   //     * @param minutes
   //     *            An array of the desired data type. If the array does not have
   //     *            60 elements then a new array of the same type will be created.
@@ -128,9 +128,9 @@ public class HistoryInstrument<T> implements IInstrument<T> {
     if (sample == null) return -1L;
 
     return sample.lastModified();
-  };
+  }
 
-  /**
+  /*
    * Adds the sample to the history. Samples in the same slot are averaged.
    *
    * @param timestamp The timestamp.

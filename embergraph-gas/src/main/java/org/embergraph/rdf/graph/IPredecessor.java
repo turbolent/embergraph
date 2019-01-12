@@ -17,8 +17,8 @@ package org.embergraph.rdf.graph;
 
 import org.openrdf.model.Value;
 
-/**
- * A interface for {@link IGASProgram}s that compute paths and track a predecessor relationship
+/*
+* A interface for {@link IGASProgram}s that compute paths and track a predecessor relationship
  * among the visited vertices. This interface can be used to eliminate vertices from the visited set
  * that are not on a path to a set of specified target vertices.
  *
@@ -26,7 +26,7 @@ import org.openrdf.model.Value;
  */
 public interface IPredecessor<VS, ES, ST> {
 
-  /**
+  /*
    * Remove any vertices from the visited set that do not line on path that leads to at least one of
    * the target vertices.
    *
@@ -34,5 +34,5 @@ public interface IPredecessor<VS, ES, ST> {
    * @param targetVertices An array of zero or more target vertices.
    * @throws IllegalArgumentException if either argument is <code>null</code>.
    */
-  public void prunePaths(final IGASContext<VS, ES, ST> ctx, final Value[] targetVertices);
+  void prunePaths(final IGASContext<VS, ES, ST> ctx, final Value[] targetVertices);
 }

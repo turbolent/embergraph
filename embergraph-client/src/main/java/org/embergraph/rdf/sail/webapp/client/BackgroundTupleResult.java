@@ -22,8 +22,8 @@ import org.openrdf.query.resultio.QueryResultParseException;
 import org.openrdf.query.resultio.TupleQueryResultParser;
 import org.openrdf.repository.sparql.query.QueueCursor;
 
-/**
- * Provides concurrent access to tuple results as they are being parsed.
+/*
+* Provides concurrent access to tuple results as they are being parsed.
  *
  * @author James Leigh
  */
@@ -58,7 +58,7 @@ public class BackgroundTupleResult extends TupleQueryResultImpl
       final QueueCursor<BindingSet> queue,
       final TupleQueryResultParser parser,
       final InputStream in) {
-    super(Collections.<String>emptyList(), queue);
+    super(Collections.emptyList(), queue);
     this.queue = queue;
     this.parser = parser;
     this.in = in;

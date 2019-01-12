@@ -50,8 +50,8 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
-/**
- * Handler for DELETE by query (DELETE verb) and DELETE by data (POST).
+/*
+* Handler for DELETE by query (DELETE verb) and DELETE by data (POST).
  *
  * @author martyncutcher
  */
@@ -62,7 +62,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
 
   private static final transient Logger log = Logger.getLogger(DeleteServlet.class);
 
-  /**
+  /*
    * Note: includedInferred is false because inferences can not be deleted (they are retracted by
    * truth maintenance when they can no longer be proven).
    */
@@ -126,8 +126,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
 
       if (getIndexManager().isGroupCommit()) {
 
-        /*
-         * When group commit is enabled we must fully materialize the
+      /*
+       * When group commit is enabled we must fully materialize the
          * solutions from the query and then delete them. This is because
          * intermediate checkpoints of the indices would otherwise not be
          * visible if we were reading on the last commit time rather than
@@ -148,8 +148,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
 
       } else {
 
-        /*
-         * When group commit is NOT enabled we can use an approach that
+      /*
+       * When group commit is NOT enabled we can use an approach that
          * streams solutions from the last commit point into the DELETE
          * operation. This is more scalable since it is a streaming
          * operation.
@@ -175,7 +175,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * An approach based on streaming the query results from the last commit time. This approach is
    * NOT compatible with group commit since it will not observe any mutations that have been applied
    * since the last commit point when it reads on the last commit time.
@@ -196,7 +196,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     private final boolean suppressTruthMaintenance;
     private final Map<String, Value> bindings;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      * @param baseURI The base URI for the operation.
@@ -266,8 +266,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
           final EmbergraphRDFContext context =
               EmbergraphServlet.getEmbergraphRDFContext(req.getServletContext());
 
-          /*
-           * Note: pipe is drained by this thread to consume the query
+        /*
+       * Note: pipe is drained by this thread to consume the query
            * results, which are the statements to be deleted.
            */
           final PipedOutputStream os = new PipedOutputStream();
@@ -377,7 +377,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     }
   } // class DeleteWithQueryStreamingTask
 
-  /**
+  /*
    * An approach based on fully materializing the
    *
    * <p>TODO We should use the HTree here for a more scalable buffer if the analytic mode is enabled
@@ -396,7 +396,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     private final boolean suppressTruthMaintenance;
     private final Map<String, Value> bindings;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      * @param baseURI The base URI for the operation.
@@ -465,8 +465,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
           final EmbergraphRDFContext context =
               EmbergraphServlet.getEmbergraphRDFContext(req.getServletContext());
 
-          /*
-           * Note: pipe is drained by this thread to consume the query
+        /*
+       * Note: pipe is drained by this thread to consume the query
            * results, which are the statements to be deleted.
            */
           final PipedOutputStream os = new PipedOutputStream();
@@ -616,7 +616,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
 
     if (log.isInfoEnabled()) log.info("Request body: " + contentType);
 
-    /**
+    /*
      * There is a request body, so let's try and parse it.
      *
      * <p><a href="https://sourceforge.net/apps/trac/bigdata/ticket/620">UpdateServlet fails to
@@ -700,7 +700,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     private final Resource[] defaultContext;
     private final RDFParserFactory rdfParserFactory;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      * @param baseURI The base URI for the operation.
@@ -765,8 +765,8 @@ public class DeleteServlet extends EmbergraphRDFServlet {
 
         rdfParser.setRDFHandler(new RemoveStatementHandler(conn, nmodified, defaultContext));
 
-        /*
-         * Run the parser, which will cause statements to be deleted.
+      /*
+       * Run the parser, which will cause statements to be deleted.
          */
         rdfParser.parse(req.getInputStream(), baseURI);
 
@@ -845,8 +845,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     private void doRemoveStatement(final Statement stmt) throws SailException {
 
       final Resource[] c =
-          (Resource[])
-              (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
+          (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
 
       conn.removeStatements(stmt.getSubject(), stmt.getPredicate(), stmt.getObject(), c);
 
@@ -885,8 +884,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     public void handleStatement(final Statement stmt) throws RDFHandlerException {
 
       final Resource[] c =
-          (Resource[])
-              (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
+          (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
 
       try {
 
@@ -976,7 +974,7 @@ public class DeleteServlet extends EmbergraphRDFServlet {
     private final Resource[] c;
     private final boolean suppressTruthMaintenance;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      * @param baseURI The base URI for the operation.

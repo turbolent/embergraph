@@ -44,8 +44,8 @@ import org.embergraph.resources.IndexManager;
 import org.embergraph.util.config.NicUtil;
 import org.embergraph.util.httpd.Config;
 
-/**
- * Utility class provides a simple SPARQL end point with a REST API.
+/*
+* Utility class provides a simple SPARQL end point with a REST API.
  *
  * @author thompsonbry
  * @author martyncutcher
@@ -66,13 +66,13 @@ public class NanoSparqlServer {
 
   public interface SystemProperties {
 
-    /**
+    /*
      * The name of the system property that can be used to override the default HTTP port in the
      * bundled <code>jetty.xml</code> file.
      */
     String JETTY_PORT = "jetty.port";
 
-    /**
+    /*
      * The name of the system property that can be used to override the location of the <code>
      * jetty.xml</code> file that will be used to configure jetty (default {@value
      * #DEFAULT_JETTY_XML}).
@@ -83,14 +83,14 @@ public class NanoSparqlServer {
      */
     String JETTY_XML = "jettyXml";
 
-    /**
+    /*
      * The default value works when deployed under the IDE with the <code>embergraph-war/src</code>
      * directory on the classpath. When deploying outside of that context, the value needs to be set
      * explicitly.
      */
     String DEFAULT_JETTY_XML = "jetty.xml";
 
-    /**
+    /*
      * The timeout in seconds that we will await the start of the jetty {@link Server} (default
      * {@value #DEFAULT_JETTY_START_TIMEOUT}).
      */
@@ -98,13 +98,13 @@ public class NanoSparqlServer {
 
     String DEFAULT_JETTY_STARTUP_TIMEOUT = "10";
 
-    /**
+    /*
      * When <code>true</code>, the state of jetty will be dumped onto a logger after the server
      * start.
      */
     String JETTY_DUMP_START = "jetty.dump.start";
 
-    /**
+    /*
      * This property specifies the resource path for the web application. In order for this
      * mechanism to work, the <code>jetty.xml</code> file MUST contain a line which allows the
      * resourceBase of the web application to be set from an environment variable. For example:
@@ -164,7 +164,7 @@ public class NanoSparqlServer {
      */
     String JETTY_RESOURCE_BASE = "jetty.resourceBase";
 
-    /**
+    /*
      * The location of the <code>override-web.xml</code> resource. The default is given in <code>
      * jetty.xml</code> and serves to locate the resource when deployed under an IDE. If not
      * explicitly given, value of the environment variable is set by the same logic that sets the
@@ -178,7 +178,7 @@ public class NanoSparqlServer {
      */
     String JETTY_OVERRIDE_WEB_XML = "jetty.overrideWebXml";
 
-    /**
+    /*
      * The location to over propertyFile used to create the servlet. This to allow overriding the
      * default value via passing a Java Property at the command line.
      */
@@ -188,7 +188,7 @@ public class NanoSparqlServer {
     String JETTY_HOME = "jetty.home";
   }
 
-  /**
+  /*
    * Run an httpd service exposing a SPARQL endpoint. The service will respond to the following URL
    * paths:
    *
@@ -422,7 +422,7 @@ public class NanoSparqlServer {
     server.join();
   }
 
-  /**
+  /*
    * Await a {@link Server} start up to a timeout.
    *
    * @parma server The {@link Server} to start.
@@ -476,8 +476,8 @@ public class NanoSparqlServer {
         System.err.println(msg);
         log.fatal(msg);
         if (server != null) {
-          /*
-           * Support the jetty dump-after-start semantics.
+        /*
+       * Support the jetty dump-after-start semantics.
            */
           if (Boolean.getBoolean(SystemProperties.JETTY_DUMP_START)) {
             log.warn(server.dump());
@@ -519,7 +519,7 @@ public class NanoSparqlServer {
     }
   }
 
-  /**
+  /*
    * Utility method to get the host for the currently running NSS. If {@link NicUtil} returns a null
    * pointer, it is set to the value of {@link Config#DEFAULT_HOST}.
    *
@@ -539,7 +539,7 @@ public class NanoSparqlServer {
     return hostAddr;
   }
 
-  /**
+  /*
    * Start the embedded {@link Server}.
    *
    * <p>Note: The port override argument given here is applied by setting the {@link
@@ -565,7 +565,7 @@ public class NanoSparqlServer {
     return newInstance(port, jettyXml, indexManager, initParams);
   }
 
-  /**
+  /*
    * Start the embedded {@link Server}.
    *
    * <p>Note: The port override argument given here is applied by setting the {@link
@@ -609,7 +609,7 @@ public class NanoSparqlServer {
     }
   }
 
-  /**
+  /*
    * Variant used when you already have the {@link IIndexManager}.
    *
    * <p>When the optional {@link IIndexManager} argument is specified, it will be set as an
@@ -758,7 +758,7 @@ public class NanoSparqlServer {
     return jettyXmlUrl;
   }
 
-  /**
+  /*
    * Search (a) the local file system; and (b) the classpath for the web application. If the
    * resource is located, then set the [jetty.resourceBase] property. This search sequence gives
    * preference to the local file system and then searches the classpath (which jetty does not known
@@ -806,8 +806,8 @@ public class NanoSparqlServer {
 
       } else {
 
-        /*
-         * Check the classpath.
+      /*
+       * Check the classpath.
          *
          * Note: When checking the classpath we need to test different
          * resources depending on whether we are running under the
@@ -816,8 +816,8 @@ public class NanoSparqlServer {
         URL tmp = null;
         String src = null;
         if (tmp == null) {
-          /**
-           * Eclipse IDE class path.
+        /*
+       * Eclipse IDE class path.
            *
            * <p>Note: This is what gets found when running under eclipse. The URL will be in the
            * configured build directory for the eclipse project. So, something like:
@@ -838,8 +838,8 @@ public class NanoSparqlServer {
         //                    tmp = classLoader // JAR class path.
         //                            .getResource(src = "/embergraph-war/src/WEB-INF/web.xml");
         if (tmp == null) {
-          /**
-           * JAR class path (system class loader).
+        /*
+       * JAR class path (system class loader).
            *
            * <p>Note: This is what gets located when we run from the command line (outside of
            * eclipse). The resulting JAR URL will be something like:
@@ -866,8 +866,8 @@ public class NanoSparqlServer {
 
       if (resourceBaseURL != null) {
 
-        /*
-         * We found the resource either in the file system or in the
+      /*
+       * We found the resource either in the file system or in the
          * classpath.
          *
          * Explicitly set the discovered value on the jetty.resourceBase
@@ -918,7 +918,7 @@ public class NanoSparqlServer {
               + System.getProperty(SystemProperties.JETTY_OVERRIDE_WEB_XML));
   }
 
-  /**
+  /*
    * Convenience method to prune last substring occurance from URL.
    *
    * @param src
@@ -933,7 +933,7 @@ public class NanoSparqlServer {
     return t;
   }
 
-  /**
+  /*
    * Configure the webapp (overrides, IIndexManager, etc.)
    *
    * <p>Note: These overrides are achieved by setting the {@link WebAppContext} attribute named
@@ -981,7 +981,7 @@ public class NanoSparqlServer {
     }
   }
 
-  /**
+  /*
    * Return the {@link WebAppContext} for the {@link Server}.
    *
    * @param server The {@link Server}.
@@ -1000,7 +1000,7 @@ public class NanoSparqlServer {
     return wac;
   }
 
-  /**
+  /*
    * Best effort attempt to return the port at which the local jetty {@link Server} is receiving
    * http connections.
    *
@@ -1027,7 +1027,7 @@ public class NanoSparqlServer {
     return ((ServerConnector) a[0]).getLocalPort();
   }
 
-  /**
+  /*
    * Print the optional message on stderr, print the usage information on stderr, and then force the
    * program to exit with the given status code.
    *

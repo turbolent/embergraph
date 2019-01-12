@@ -26,8 +26,8 @@ import org.embergraph.journal.RWStrategy;
 import org.embergraph.rdf.sail.webapp.client.IPreparedSparqlUpdate;
 import org.embergraph.rwstore.RWStore;
 
-/**
- * Tests that are RWStore specific.
+/*
+* Tests that are RWStore specific.
  *
  * @author bryan
  * @param <S>
@@ -50,7 +50,7 @@ public class TestRWStoreTxBehaviors<S extends IIndexManager>
         TestMode.triples);
   }
 
-  /**
+  /*
    * Unit test verifies that the native journal transaction counter for the RWStore is properly
    * closed for SPARQL UPDATE. This bug was introduced when addressing <a
    * href="http://trac.blazegraph.com/ticket/1026>SPARQL UPDATE with runtime errors causes problems

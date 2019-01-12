@@ -27,8 +27,8 @@ import org.embergraph.btree.BTree;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * A mutable {@link IRelation}. The relation must maintain any secondary indices under mutation.
+/*
+* A mutable {@link IRelation}. The relation must maintain any secondary indices under mutation.
  *
  * <p>The methods declared by this interface return a "mutation count" - the mutation count MUST be
  * exact and MUST NOT count overwrites that do not change the state of the tuple (the same key and
@@ -48,15 +48,15 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
  */
 public interface IMutableRelation<E> extends IRelation<E>, IMutableResource<IRelation<E>> {
 
-  /**
+  /*
    * Write elements on the relation.
    *
    * @param itr An iterator visiting the elements to be written.
    * @return The #of elements that were actually written on the relation.
    */
-  public long insert(IChunkedOrderedIterator<E> itr);
+  long insert(IChunkedOrderedIterator<E> itr);
 
-  /**
+  /*
    * Remove elements from the relation.
    *
    * @param itr An iterator visiting the elements to be removed. Existing elements in the relation
@@ -64,5 +64,5 @@ public interface IMutableRelation<E> extends IRelation<E>, IMutableResource<IRel
    *     relation.
    * @return The #of elements that were actually removed from the relation.
    */
-  public long delete(IChunkedOrderedIterator<E> itr);
+  long delete(IChunkedOrderedIterator<E> itr);
 }

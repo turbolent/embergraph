@@ -25,8 +25,8 @@ import it.unimi.dsi.bits.Fast;
 import it.unimi.dsi.fastutil.chars.CharList;
 import it.unimi.dsi.lang.MutableString;
 
-/**
- * QuickSearch matching against a constant string.
+/*
+* QuickSearch matching against a constant string.
  *
  * <p>The {@linkplain java.util.regex regular expression facilities} of the Java API are a powerful
  * tool; however, when searching for a <em>constant</em> pattern many algorithms can increase of
@@ -59,7 +59,7 @@ import it.unimi.dsi.lang.MutableString;
 public class TextPattern implements java.io.Serializable, CharSequence {
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Enables case-insensitive matching.
    *
    * <p>By default, case-insensitive matching assumes that only characters in the ASCII charset are
@@ -70,7 +70,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
    */
   public static final int CASE_INSENSITIVE = 1;
 
-  /**
+  /*
    * Enables Unicode-aware case folding.
    *
    * <p>When this flag is specified then case-insensitive matching, when enabled by the
@@ -97,7 +97,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
   /** A bit mask equal to the length of {@link #badCharShift} minus 1. */
   private transient int mask;
 
-  /**
+  /*
    * A cached shift value for computing one of the hashes. It is equal to 16 minus the base 2
    * logarithm of the length of {@link #badCharShift}.
    */
@@ -105,13 +105,13 @@ public class TextPattern implements java.io.Serializable, CharSequence {
 
   /** Whether this pattern is case sensitive. */
   private boolean caseSensitive;
-  /**
+  /*
    * Whether this pattern uses optimised ASCII downcasing (as opposed to the correct Unicode
    * downcasing procedure).
    */
   private boolean asciiCase;
 
-  /**
+  /*
    * Creates a new case-sensitive {@link TextPattern} object that can be used to search for the
    * given pattern.
    *
@@ -121,7 +121,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     this(pattern, 0);
   }
 
-  /**
+  /*
    * Creates a new {@link TextPattern} object that can be used to search for the given pattern.
    *
    * @param pattern the constant pattern to search for.
@@ -150,7 +150,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return !asciiCase;
   }
 
-  /**
+  /*
    * A fast, optimised method to lower case just ASCII letters.
    *
    * @param c a character.
@@ -161,7 +161,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return c >= 'A' && c <= 'Z' ? (char) (c + 32) : c;
   }
 
-  /**
+  /*
    * A method to downcase correctly Unicode characters optimised for ASCII letters.
    *
    * @param c a character.
@@ -298,7 +298,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return new MutableString(pattern, from, to - from + 1);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this one-character pattern in the specified
    * character array, starting at the specified index.
    *
@@ -328,7 +328,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     }
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this one-character pattern in the specified
    * character sequence, starting at the specified index.
    *
@@ -356,7 +356,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     }
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this one-character pattern in the specified byte
    * array, seen as an ISO-8859-1 string, starting at the specified index.
    *
@@ -382,7 +382,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     }
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given character array.
    *
    * @param array the character array to look in.
@@ -393,7 +393,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return search(array, 0, array.length);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given character array starting
    * from a given index.
    *
@@ -406,7 +406,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return search(array, from, array.length);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given character array between
    * given indices.
    *
@@ -504,7 +504,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     }
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given character sequence.
    *
    * @param s the character sequence to look in.
@@ -515,7 +515,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return search(s, 0, s.length());
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given character sequence
    * starting from a given index.
    *
@@ -528,7 +528,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return search(s, from, s.length());
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given character sequence
    * between given indices.
    *
@@ -626,7 +626,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     }
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given byte array.
    *
    * @param a the byte array to look in.
@@ -637,7 +637,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return search(a, 0, a.length);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given byte array starting from
    * a given index.
    *
@@ -651,7 +651,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return search(a, from, a.length);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given byte array between given
    * indices.
    *
@@ -749,7 +749,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     }
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given character list.
    *
    * @param list the character list to look in.
@@ -760,7 +760,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return search(list, 0, list.size());
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given character list starting
    * from a given index.
    *
@@ -773,7 +773,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return search(list, from, list.size());
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of this pattern in the given character list between
    * given indices.
    *
@@ -871,7 +871,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     }
   }
 
-  /**
+  /*
    * Compares this text pattern to another object.
    *
    * <p>This method will return <code>true</code> iff its argument is a <code>TextPattern</code>
@@ -891,7 +891,7 @@ public class TextPattern implements java.io.Serializable, CharSequence {
     return false;
   }
 
-  /**
+  /*
    * Returns a hash code for this text pattern.
    *
    * <p>The hash code of a text pattern is the same as that of a <code>String</code> with the same

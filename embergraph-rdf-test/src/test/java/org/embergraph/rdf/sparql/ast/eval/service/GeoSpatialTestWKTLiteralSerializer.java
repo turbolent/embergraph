@@ -27,8 +27,8 @@ import org.embergraph.service.geospatial.GeoSpatialDefaultLiteralSerializer;
 import org.embergraph.service.geospatial.GeoSpatialSearchException;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Test serializer for WKT literals of the form Point(lat,lon). Note that this is a dummy
+/*
+* Test serializer for WKT literals of the form Point(lat,lon). Note that this is a dummy
  * implementation for tests only, assuming there are no whitespaces contained in the literal, etc.
  *
  * @author msc

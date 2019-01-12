@@ -25,15 +25,15 @@ package org.embergraph.resources;
 
 import java.lang.ref.SoftReference;
 
-/**
- * Base class for the prepare phase which reads on the old journal.
+/*
+* Base class for the prepare phase which reads on the old journal.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractPrepareTask<T> extends AbstractResourceManagerTask<T> {
 
-  /**
+  /*
    * @param resourceManager
    * @param timestamp
    * @param resource
@@ -43,7 +43,7 @@ public abstract class AbstractPrepareTask<T> extends AbstractResourceManagerTask
     super(resourceManager, timestamp, resource);
   }
 
-  /**
+  /*
    * @param resourceManager
    * @param timestamp
    * @param resource
@@ -53,7 +53,7 @@ public abstract class AbstractPrepareTask<T> extends AbstractResourceManagerTask
     super(resourceManager, timestamp, resource);
   }
 
-  /**
+  /*
    * Method is responsible for clearing the {@link SoftReference}s held by {@link ViewMetadata} for
    * the source view(s) on the old journal.
    *

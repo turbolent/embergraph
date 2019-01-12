@@ -26,8 +26,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Value;
 
-/**
- * Interface for managing the {@link EmbergraphValue} cached on an {@link IV}.
+/*
+* Interface for managing the {@link EmbergraphValue} cached on an {@link IV}.
  *
  * <p>This interface is designed to support the query plan generator. The {@link EmbergraphValue} is
  * cached when a query plan decides that the materialized value is required for a downstream
@@ -44,7 +44,7 @@ import org.openrdf.model.Value;
  */
 public interface IVCache<V extends EmbergraphValue, T> {
 
-  /**
+  /*
    * If the value is not already cached, then inflate an inline RDF value to a {@link
    * EmbergraphValue} and cache it on a private field.
    *
@@ -66,7 +66,7 @@ public interface IVCache<V extends EmbergraphValue, T> {
    */
   V asValue(final LexiconRelation lex) throws UnsupportedOperationException;
 
-  /**
+  /*
    * Set the {@link EmbergraphValue} on the cache.
    *
    * <p>Note: This is normally invoked by {@link #asValue(LexiconRelation)} during a lexicon join
@@ -77,7 +77,7 @@ public interface IVCache<V extends EmbergraphValue, T> {
    */
   V setValue(final V val);
 
-  /**
+  /*
    * Return a pre-materialized RDF {@link EmbergraphValue} which has been cached on this {@link IV}
    * by a previous invocation of {@link #asValue(LexiconRelation)}.
    *
@@ -86,8 +86,8 @@ public interface IVCache<V extends EmbergraphValue, T> {
    */
   V getValue() throws NotMaterializedException;
 
-  //	/**
-  //	 * Drop the cached {@link EmbergraphValue}. This is a NOP if the cache is
+  //	/*
+//	 * Drop the cached {@link EmbergraphValue}. This is a NOP if the cache is
   //	 * empty.
   //	 *
   //	 * @deprecated There is a concurrency problem with this method for any IV for
@@ -102,7 +102,7 @@ public interface IVCache<V extends EmbergraphValue, T> {
   //	 */
   //    void dropValue();
 
-  /**
+  /*
    * Return a copy of this {@link IV}.
    *
    * <p>Note: This method exists to defeat the hard reference from the {@link IV} to the cached
@@ -121,7 +121,7 @@ public interface IVCache<V extends EmbergraphValue, T> {
    */
   IV<V, T> clone(boolean clearCache);
 
-  /**
+  /*
    * Returns true if the RDF {@link EmbergraphValue} has been pre-materialized and cached on this
    * {@link IV}.
    */

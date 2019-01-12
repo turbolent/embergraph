@@ -29,8 +29,8 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Default implementation of a {@link BlueprintsValueFactory} for converting blueprints data to RDF
+/*
+* Default implementation of a {@link BlueprintsValueFactory} for converting blueprints data to RDF
  * and back again. Uses simple namespacing and URL encoding to round trip URIs.
  *
  * @author mikepersonick
@@ -177,8 +177,8 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
 
       if (property.equals("label")) {
 
-        /*
-         * Label is a reserved property for edge labels, we use
+      /*
+       * Label is a reserved property for edge labels, we use
          * rdfs:label for that.
          */
         return RDFS.LABEL;
@@ -194,8 +194,8 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
     }
   }
 
-  //	/**
-  //	 * Returns true if the URI is part of the vertex namespace.
+  //	/*
+//	 * Returns true if the URI is part of the vertex namespace.
   //	 */
   ////    @Override
   //	public boolean isVertex(final URI uri) {
@@ -206,8 +206,8 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
   //
   //	}
   //
-  //	/**
-  //	 * Returns true if the URI is part of the edge namespace.
+  //	/*
+//	 * Returns true if the URI is part of the edge namespace.
   //	 */
   ////	@Override
   //	public boolean isEdge(final URI uri) {
@@ -218,8 +218,8 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
   //
   //	}
   //
-  //    /**
-  //     * Returns true if the URI is part of the property namespace.
+  //    /*
+//     * Returns true if the URI is part of the property namespace.
   //     */
   ////    @Override
   //    public boolean isProperty(final URI uri) {
@@ -228,8 +228,8 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
   //
   //    }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     */
   //	@Override
   //	public String fromVertexURI(final URI uri) {
@@ -238,8 +238,8 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
   //
   //	}
   //
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     */
   //	@Override
   //	public String fromEdgeURI(final URI uri) {
@@ -248,8 +248,8 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
   //
   //	}
   //
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     */
   //	@Override
   //	public String fromPropertyURI(final URI uri) {
@@ -276,7 +276,7 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Supports: Float, Double, Integer, Long, Boolean, Short, Byte, and String.
@@ -312,7 +312,7 @@ public class DefaultBlueprintsValueFactory implements BlueprintsValueFactory {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Return a graph property from a datatyped literal using its XSD datatype.

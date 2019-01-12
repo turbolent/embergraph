@@ -44,8 +44,8 @@ import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder.RabaCodingSetup
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for the {@link CanonicalHuffmanRabaCoder}.
+/*
+* Test suite for the {@link CanonicalHuffmanRabaCoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -65,7 +65,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     rabaCoder = CanonicalHuffmanRabaCoder.INSTANCE;
   }
 
-  /**
+  /*
    * Format the code book as a multi-line string.
    *
    * @param codeWords The code words.
@@ -103,7 +103,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     doRoundTripTest(frequency);
   }
 
-  /**
+  /*
    * This test was written to a bug in {@link HuffmanCodec}, which has since been fixed.
    *
    * <pre>
@@ -121,7 +121,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     doRoundTripTest(frequency);
   }
 
-  /**
+  /*
    * This test was written to a bug in {@link HuffmanCodec}, which has since been fixed.
    *
    * <pre>
@@ -139,7 +139,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     doRoundTripTest(frequency);
   }
 
-  /**
+  /*
    * Stress test with random frequency distributions of between 2 and 256 distinct symbols.
    * Frequencies MAY be zero for some symbols. Tests with zero and one symbols are done separately
    * since both cases have errors.
@@ -169,7 +169,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     }
   }
 
-  /**
+  /*
    * This verifies that a code book constructed from a given set of frequencies may be reconstructed
    * from the cord word bit lengths, given in a non-decreasing order, together with the symbols in a
    * correlated array.
@@ -202,7 +202,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     }
   }
 
-  /**
+  /*
    * Stress test with 256 distinct symbols (corresponding to byte values in the application). A
    * large percentage of all symbols have a zero frequency code, which models the expected patterns
    * of B+Tree keys.
@@ -234,7 +234,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     }
   }
 
-  /**
+  /*
    * Simple test with a known symbol frequency distribution.
    *
    * @throws IOException
@@ -246,7 +246,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     doRecoderRoundTripTest(frequency);
   }
 
-  /**
+  /*
    * Verify we can regenerate the {@link Fast64CodeWordCoder} from the code word[]. This is tested
    * by coding and decoding random symbol sequences. For this test we need to reconstruct the {@link
    * Fast64CodeWordCoder}. To do that, we need to use the codeWord[] and create a long[] having the
@@ -257,7 +257,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
    *     are found in the keys of a B+Tree.
    * @throws IOException
    */
-  public void doRecoderRoundTripTest(final int frequency[]) throws IOException {
+  public void doRecoderRoundTripTest(final int[] frequency) throws IOException {
 
     final DecoderInputs decoderInputs = new DecoderInputs();
 
@@ -328,7 +328,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for processing an empty {@link IRaba} representing B+Tree keys.
    *
    * <p>For an empty {@link IRaba}, {@link RabaCodingSetup} actually assigns <code>null</code> for
@@ -361,7 +361,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
 
   }
 
-  /**
+  /*
    * Unit test for processing an {@link IRaba} representing B+Tree keys suitable to setup the data
    * for compression.
    *
@@ -394,7 +394,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
         setup.decoderInputs().getSymbols());
   }
 
-  /**
+  /*
    * Unit test for processing an {@link IRaba} representing B+Tree values suitable to setup the data
    * for compression.
    *
@@ -424,7 +424,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
         setup.decoderInputs().getSymbols());
   }
 
-  /**
+  /*
    * Unit test for processing an empty {@link IRaba} representing B+Tree values.
    *
    * <p>For an empty {@link IRaba}, {@link RabaCodingSetup} actually assigns <code>null</code> for
@@ -458,7 +458,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
 
   }
 
-  /**
+  /*
    * Verify that we can round-trip the data required to reconstruct the decoder.
    *
    * @param decoderInputs
@@ -515,7 +515,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     }
   }
 
-  /**
+  /*
    * @param shortestCodeWord
    * @param lengths
    * @param
@@ -539,7 +539,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
     }
   }
 
-  /**
+  /*
    * A stress test for compatibility with {@link InputBitStream}. An array is filled with random
    * bits and the behavior of {@link InputBitStream} and {@link BytesUtil#getBits(byte[], int, int)}
    * is compared on a number of randomly selected bit slices.
@@ -567,7 +567,7 @@ public class TestCanonicalHuffmanRabaCoder extends AbstractRabaCoderTestCase {
 
     for (int i = 0; i < limit; i++) {
 
-      /**
+      /*
        * Start of the bit slice.
        *
        * <p>Note: I added the max(x,1) after observing the following exception during one CI run:

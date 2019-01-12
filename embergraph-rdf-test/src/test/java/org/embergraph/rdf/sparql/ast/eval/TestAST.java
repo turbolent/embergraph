@@ -23,8 +23,8 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
-/**
- * Port of unit tests originally written at the AST layer.
+/*
+* Port of unit tests originally written at the AST layer.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -39,7 +39,7 @@ public class TestAST extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -54,7 +54,7 @@ public class TestAST extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("ast_01").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -69,7 +69,7 @@ public class TestAST extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("ast_01b").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -81,7 +81,7 @@ public class TestAST extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("ast_01c").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -93,7 +93,7 @@ public class TestAST extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("ast_01d").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -114,7 +114,7 @@ public class TestAST extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("ast_02").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -132,7 +132,7 @@ public class TestAST extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("ast_02b").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -151,7 +151,7 @@ public class TestAST extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("ast_03").runTest();
   }
 
-  /**
+  /*
    * Unit test developed to demonstrate a problem where the incorrect materialization requirements
    * are computed.
    *

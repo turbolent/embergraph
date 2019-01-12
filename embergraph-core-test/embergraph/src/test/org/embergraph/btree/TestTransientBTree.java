@@ -33,8 +33,8 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Unit tests for transient {@link BTree}s (no backing store).
+/*
+* Unit tests for transient {@link BTree}s (no backing store).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test the ability to create a transient {@link BTree} (one not backed by a persistence store).
    */
   public void test_createTransient() {
@@ -92,7 +92,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
     assertEquals(0, btree.getEntryCount());
   }
 
-  /**
+  /*
    * Test inserts a bunch of data into a transient {@link BTree} and verifies that eviction of dirty
    * nodes and leaves does not result in errors arising from an attempt to persist their state on
    * the (non-existent) backing store.
@@ -140,7 +140,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
 
   }
 
-  /**
+  /*
    * Test verifies that the nodes and leaves become weakly reachable once they have been deleted.
    *
    * <p>The test builds up a modest amount of data in the {@link BTree} using a small branching
@@ -256,7 +256,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
     fail("Did not clear references after " + limit + " passes");
   }
 
-  /**
+  /*
    * Return the #of entries in the collection whose references have been cleared.
    *
    * @param refs
@@ -279,7 +279,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
     return n;
   }
 
-  /**
+  /*
    * Tests various methods that deal with persistence and makes sure that we have reasonable error
    * messages.
    */
@@ -306,7 +306,7 @@ public class TestTransientBTree extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * This is the same as {@link #test_delete()} but the {@link BTree} is backed by an {@link
    * IRawStore}.
    *

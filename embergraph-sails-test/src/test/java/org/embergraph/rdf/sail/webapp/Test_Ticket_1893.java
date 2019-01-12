@@ -30,8 +30,8 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryException;
 
-/**
- * This test checks if plain literals and string literals are properly indexed in FTS, and also
+/*
+* This test checks if plain literals and string literals are properly indexed in FTS, and also
  * rebuild text index produces properly indexed FTS.
  *
  * @see https://jira.blazegraph.com/browse/BLZG-1893
@@ -58,7 +58,7 @@ public class Test_Ticket_1893 extends AbstractProtocolTest {
           + "  ?s ?p ?o .\n"
           + "}";
 
-  /**
+  /*
    * Execute an ASK query including a SERVICE keyword which gets sent back to this server. The test
    * succeeeds if the query returns true, and fails otherwise
    *

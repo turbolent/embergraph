@@ -10,8 +10,8 @@ package cern.colt.list;
 
 import cern.colt.bitvector.BitVector;
 import cern.colt.bitvector.QuickBitVector;
-/**
- * Resizable compressed list holding numbers; based on the fact that a value in a given interval
+/*
+* Resizable compressed list holding numbers; based on the fact that a value in a given interval
  * need not take more than <tt>log(max-min+1)</tt> bits; implemented with a
  * <tt>cern.colt.bitvector.BitVector</tt>. First see the <a href="package-summary.html">package
  * summary</a> and javadoc <a href="package-tree.html">tree view</a> to get the broad picture.
@@ -79,7 +79,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
   protected int bitsPerElement;
   protected long[] bits;
   protected int capacity;
-  /**
+  /*
    * Constructs an empty list with the specified initial capacity and the specified range of values
    * allowed to be hold in this list. Legal values are in the range [minimum,maximum], all
    * inclusive.
@@ -92,7 +92,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
   public MinMaxNumberList(long minimum, long maximum, int initialCapacity) {
     this.setUp(minimum, maximum, initialCapacity);
   }
-  /**
+  /*
    * Appends the specified element to the end of this list.
    *
    * @param element element to be appended to this list.
@@ -107,7 +107,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
         this.bits, element - this.minValue, i, i + this.bitsPerElement - 1);
     size++;
   }
-  /**
+  /*
    * Appends the elements <tt>elements[from]</tt> (inclusive), ..., <tt>elements[to]</tt>
    * (inclusive) to the receiver.
    *
@@ -137,7 +137,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
   public int bitsPerElement() {
     return this.bitsPerElement;
   }
-  /**
+  /*
    * Returns the number of bits necessary to store values in the range <tt>[minimum,maximum]</tt>.
    */
   public static int bitsPerElement(long minimum, long maximum) {
@@ -153,7 +153,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
     }
     return bits;
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of elements without needing to
    * allocate new internal memory. If necessary, allocates new internal memory and increases the
    * capacity of the receiver.
@@ -171,7 +171,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
       this.capacity = newCapacity;
     }
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver; <b>WARNING:</b> Does not check
    * preconditions. Provided with invalid parameters this method may return invalid elements without
    * throwing any exception! <b>You should only use this method when you are absolutely sure that
@@ -184,7 +184,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
     int i = index * this.bitsPerElement;
     return this.minValue + QuickBitVector.getLongFromTo(this.bits, i, i + this.bitsPerElement - 1);
   }
-  /**
+  /*
    * Copies all elements between index <tt>from</tt> (inclusive) and <tt>to</tt> (inclusive) into
    * <tt>part</tt>, starting at index <tt>partFrom</tt> within <tt>part</tt>. Elements are only
    * copied if a corresponding flag within <tt>qualificants</tt> is set. More precisely:
@@ -232,7 +232,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
       }
     }
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element;
    * <b>WARNING:</b> Does not check preconditions. Provided with invalid parameters this method may
    * access invalid indexes without throwing any exception! <b>You should only use this method when
@@ -247,14 +247,14 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
     QuickBitVector.putLongFromTo(
         this.bits, element - this.minValue, i, i + this.bitsPerElement - 1);
   }
-  /**
+  /*
    * Sets the size of the receiver without modifying it otherwise. This method should not release or
    * allocate new memory but simply set some instance variable like <tt>size</tt>.
    */
   protected void setSizeRaw(int newSize) {
     super.setSizeRaw(newSize);
   }
-  /**
+  /*
    * Sets the receiver to an empty list with the specified initial capacity and the specified range
    * of values allowed to be hold in this list. Legal values are in the range [minimum,maximum], all
    * inclusive.
@@ -272,7 +272,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
     this.capacity = initialCapacity;
     this.size = 0;
   }
-  /**
+  /*
    * This method was created in VisualAge.
    *
    * @param minValue long
@@ -280,7 +280,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
    * @param initialCapacity int
    */
   protected void setUpBitsPerEntry(long minimum, long maximum) {
-    this.bitsPerElement = this.bitsPerElement(minimum, maximum);
+    this.bitsPerElement = bitsPerElement(minimum, maximum);
     if (this.bitsPerElement != 64) {
       this.minValue = minimum;
       // overflow or underflow in calculating "1+maxValue-minValue"
@@ -290,16 +290,15 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
     } else {
       this.minValue = 0;
     }
-    ;
   }
-  /**
+  /*
    * Returns the receiver seen as bitvector. WARNING: The bitvector and the receiver share the
    * backing bits. Modifying one of them will affect the other.
    */
   public BitVector toBitVector() {
     return new BitVector(this.bits, this.capacity * bitsPerElement);
   }
-  /**
+  /*
    * Trims the capacity of the receiver to be the receiver's current size. An application can use
    * this operation to minimize the storage of the receiver.
    */
@@ -312,7 +311,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
       this.capacity = size;
     }
   }
-  /**
+  /*
    * deprecated Returns the minimum element legal to the stored in the receiver. Remark: This does
    * not mean that such a minimum element is currently contained in the receiver.
    *

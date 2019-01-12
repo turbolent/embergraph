@@ -31,8 +31,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.relation.locator.DefaultResourceLocator;
 
-/**
- * A triple store based on the <em>embergraph</em> architecture. This class offers extremely low
+/*
+* A triple store based on the <em>embergraph</em> architecture. This class offers extremely low
  * latency for index operations. All indices are local (in-process) objects and there are no
  * concurrency controls, so point tests on the indices are extremely efficient. Significant
  * parallelism is achieved by paying careful attention to the concurrency constraints imposed by the
@@ -134,14 +134,14 @@ public class LocalTripleStore extends AbstractLocalTripleStore {
   //
   //    }
 
-  /**
+  /*
    * Options understood by the {@link LocalTripleStore}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface Options extends AbstractTripleStore.Options {}
+  public interface Options extends AbstractTripleStore.Options {}
 
-  /**
+  /*
    * Ctor specified by {@link DefaultResourceLocator}.
    *
    * @param indexManager (must be an {@link IJournal}).
@@ -186,7 +186,7 @@ public class LocalTripleStore extends AbstractLocalTripleStore {
     }
   }
 
-  /**
+  /*
    * Create or re-open a triple store using a local embedded database.
    *
    * <p>Note: This is only used by the test suites.
@@ -249,8 +249,8 @@ public class LocalTripleStore extends AbstractLocalTripleStore {
 
         if (lts == null) {
 
-          /*
-           * This should only occur if there is a concurrent destroy,
+        /*
+       * This should only occur if there is a concurrent destroy,
            * which is highly unlikely to say the least.
            */
           throw new RuntimeException("Concurrent create/destroy: " + namespace);
@@ -303,7 +303,7 @@ public class LocalTripleStore extends AbstractLocalTripleStore {
 
   }
 
-  /**
+  /*
    * When using an {@link ITx#UNISOLATED} view, this store is NOT safe for write operations
    * concurrent with either readers or writers. However, it does support concurrent readers for
    * {@link ITx#READ_COMMITTED} and read-historical views.

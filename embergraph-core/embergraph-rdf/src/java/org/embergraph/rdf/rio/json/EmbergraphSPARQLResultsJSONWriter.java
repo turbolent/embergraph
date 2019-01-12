@@ -26,8 +26,8 @@ import org.openrdf.query.QueryResultHandlerException;
 import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultWriter;
 
-/**
- * A TupleQueryResultWriter that writes query results in the <a
+/*
+* A TupleQueryResultWriter that writes query results in the <a
  * href="http://www.w3.org/TR/rdf-sparql-json-res/">SPARQL Query Results JSON Format</a>.
  */
 public class EmbergraphSPARQLResultsJSONWriter extends SPARQLJSONWriterBase

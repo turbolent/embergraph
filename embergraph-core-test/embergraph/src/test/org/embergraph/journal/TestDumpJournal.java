@@ -44,8 +44,8 @@ import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
-/**
- * Test suite for {@link DumpJournal}.
+/*
+* Test suite for {@link DumpJournal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -112,7 +112,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which a single index has been registered with random data on the index.
    */
   public void test_journal_oneIndexRandomData()
@@ -153,7 +153,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with an HTree.
    *
    * @see <a href="http://trac.bigdata.com/ticket/1229" > DumpJournal fails on non-BTree classes
@@ -236,7 +236,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with an {@link SolutionSetStream}.
    *
    * @see <a href="http://trac.bigdata.com/ticket/1229" > DumpJournal fails on non-BTree classes
@@ -254,8 +254,8 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
 
       {
         final StreamIndexMetadata md = new StreamIndexMetadata(NAME, UUID.randomUUID());
-        /**
-         * TODO GIST : We should not have to do this here. See Checkpoint.create() and
+      /*
+       * TODO GIST : We should not have to do this here. See Checkpoint.create() and
          * SolutionSetStream.create() for why this is necessary.
          *
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/585 (GIST)
@@ -295,7 +295,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which many indices have been registered and populated with random data.
    */
   public void test_journal_manyIndicesRandomData()
@@ -457,7 +457,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link DumpJournal} with concurrent updates against the backing store. This is
    * intended primarily to detect failures to protect against the recycling model associated with
    * the {@link IRWStrategy}.
@@ -550,7 +550,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
                   true /* dumpIndices */,
                   false /* showTuples */);
 
-          return (Void) null;
+          return null;
         }
       }
 
@@ -566,8 +566,8 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
         @Override
         public Void call() throws Exception {
 
-          /*
-           * Now write some more data, going through a series of commit
+        /*
+       * Now write some more data, going through a series of commit
            * points. This let's us check access to historical commit points.
            */
           for (int j = 0; j < 10; j++) {
@@ -604,7 +604,7 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
             log.info("Did commit");
           }
 
-          return (Void) null;
+          return null;
         }
       }
 
@@ -643,8 +643,8 @@ public class TestDumpJournal extends ProxyTestCase<Journal> {
         int ndone = 0;
         for (FutureTask<Void> ft : tasksAll) {
 
-          /*
-           * Check Future.
+        /*
+       * Check Future.
            *
            * Note: sanity check for test termination w/ timeout.
            */

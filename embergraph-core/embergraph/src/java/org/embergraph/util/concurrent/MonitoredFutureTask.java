@@ -22,8 +22,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import org.apache.log4j.Logger;
 
-/**
- * Helper task for monitoring the results of otherwise unwatched tasks.
+/*
+* Helper task for monitoring the results of otherwise unwatched tasks.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <T>
@@ -40,7 +40,7 @@ public class MonitoredFutureTask<T> extends FutureTask<T> {
     super(runnable, result);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Hooked to notice when the task is done.

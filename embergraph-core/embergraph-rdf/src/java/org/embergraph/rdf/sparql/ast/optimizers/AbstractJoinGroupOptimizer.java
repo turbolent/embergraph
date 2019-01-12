@@ -60,7 +60,7 @@ public abstract class AbstractJoinGroupOptimizer implements IASTOptimizer {
     this.optimizeServiceNodes = optimizeServiceNodes;
   }
 
-  /**
+  /*
    * Top-level optimize method. Will locate the relevant top-level {@link GraphPatternGroup} nodes
    * (where clause, named subqueries) and delegate to the {@link #optimize(AST2BOpContext,
    * StaticAnalysis, GraphPatternGroup)} method.
@@ -118,7 +118,7 @@ public abstract class AbstractJoinGroupOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryNode, bindingSets);
   }
 
-  /**
+  /*
    * Optimize a particular {@link GraphPatternGroup}. If the group happens to be a {@link
    * JoinGroupNode}, this method will delegate to the {@link #optimize(AST2BOpContext,
    * StaticAnalysis, JoinGroupNode)} method, which is the method that subclasses should override to
@@ -197,8 +197,8 @@ public abstract class AbstractJoinGroupOptimizer implements IASTOptimizer {
               ((ConstantNode) alpNode.right()).getValueExpression());
         }
 
-        /*
-         * The transitivity vars are unique to the alpNode, so we don't
+      /*
+       * The transitivity vars are unique to the alpNode, so we don't
          * need to merge, simple addition will do fine.
          */
 
@@ -225,7 +225,7 @@ public abstract class AbstractJoinGroupOptimizer implements IASTOptimizer {
 
         @SuppressWarnings("unchecked")
         final GraphPatternGroup<IGroupMemberNode> childGroup =
-            (GraphPatternGroup<IGroupMemberNode>) serviceNode.getGraphPattern();
+            serviceNode.getGraphPattern();
 
         optimize(ctx, sa, bSets, childGroup);
       }

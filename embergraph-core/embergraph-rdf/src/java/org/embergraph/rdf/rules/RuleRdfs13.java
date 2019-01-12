@@ -23,8 +23,8 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * rdfs13:
+/*
+* rdfs13:
  *
  * <pre>
  *  (?u rdfs:subClassOf rdfs:Literal) :-

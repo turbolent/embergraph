@@ -15,8 +15,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.util.NT;
 
-/**
- * Abstract base class providing caching for {@link IIndex} like objects. A canonicalizing cache is
+/*
+* Abstract base class providing caching for {@link IIndex} like objects. A canonicalizing cache is
  * used with weak references to the {@link IIndex}s back by a hard reference LRU cache. This tends
  * to keep around views that are reused while letting references for unused views be cleared by the
  * garbage collector in a timely manner.
@@ -29,7 +29,7 @@ public abstract class AbstractIndexCache<T extends IRangeQuery> {
 
   protected static final Logger log = Logger.getLogger(AbstractIndexCache.class);
 
-  /**
+  /*
    * A canonicalizing cache for the client's {@link IIndex} proxy objects. The keys are {@link NT}
    * objects which represent both the name of the index and the timestamp for the index view. The
    * values are the {@link IIndex} proxy objects.
@@ -41,7 +41,7 @@ public abstract class AbstractIndexCache<T extends IRangeQuery> {
 
   private final NamedLock<NT> indexCacheLock = new NamedLock<NT>();
 
-  /**
+  /*
    * @param capacity The capacity of the backing LRU hard reference cache.
    * @param timeout The timeout in milliseconds for stale entries in the cache.
    * @see IEmbergraphClient.Options#CLIENT_INDEX_CACHE_CAPACITY
@@ -56,7 +56,7 @@ public abstract class AbstractIndexCache<T extends IRangeQuery> {
             capacity, TimeUnit.MILLISECONDS.toNanos(timeout));
   }
 
-  /**
+  /*
    * Method is invoked on a cache miss and returns a view of the described index.
    *
    * @param name
@@ -65,7 +65,7 @@ public abstract class AbstractIndexCache<T extends IRangeQuery> {
    */
   protected abstract T newView(final String name, final long timestamp);
 
-  /**
+  /*
    * Request a view of an index. If there is a cache miss then a new view will be created.
    *
    * <p>Note: {@link ITx#READ_COMMITTED} views are cached. Read-committed semantics are obtained by
@@ -131,7 +131,7 @@ public abstract class AbstractIndexCache<T extends IRangeQuery> {
     }
   }
 
-  /**
+  /*
    * Drop the {@link ITx#UNISOLATED} and {@link ITx#READ_COMMITTED} entries for the named index from
    * the cache.
    *
@@ -159,8 +159,8 @@ public abstract class AbstractIndexCache<T extends IRangeQuery> {
 
         if (ndx == null) {
 
-          /*
-           * The entry under the key has been cleared so we just skip
+        /*
+       * The entry under the key has been cleared so we just skip
            * over this entry. Entries associated with a value whose
            * weak reference has been cleared will be automatically
            * removed from the map - we don't need to worry about them

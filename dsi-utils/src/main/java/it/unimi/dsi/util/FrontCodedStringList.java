@@ -46,12 +46,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.zip.GZIPInputStream;
 
-/**
- * Compact storage of strings using front-coding compression.
+/*
+* Compact storage of strings using front-coding compression.
  *
  * <p>This class stores a list of strings using front-coding compression (of course, the compression
  * will be reasonable only if the list is sorted, but you could also use instances of this class
@@ -85,7 +86,7 @@ public class FrontCodedStringList extends AbstractObjectList<MutableString>
   /** Whether this front-coded list is UTF-8 encoded. */
   protected final boolean utf8;
 
-  /**
+  /*
    * Creates a new front-coded string list containing the character sequences returned by the given
    * iterator.
    *
@@ -106,11 +107,7 @@ public class FrontCodedStringList extends AbstractObjectList<MutableString>
                 }
 
                 public byte[] next() {
-                  try {
-                    return words.next().toString().getBytes("UTF-8");
-                  } catch (java.io.UnsupportedEncodingException cantHappen) {
-                    return null;
-                  }
+                  return words.next().toString().getBytes(StandardCharsets.UTF_8);
                 }
               },
               ratio);
@@ -136,7 +133,7 @@ public class FrontCodedStringList extends AbstractObjectList<MutableString>
     }
   }
 
-  /**
+  /*
    * Creates a new front-coded string list containing the character sequences contained in the given
    * collection.
    *
@@ -149,7 +146,7 @@ public class FrontCodedStringList extends AbstractObjectList<MutableString>
     this(c.iterator(), ratio, utf8);
   }
 
-  /**
+  /*
    * Returns whether this front-coded string list is storing its strings as UTF-8 encoded bytes.
    *
    * @return true if this front-coded string list is keeping its data as an array of UTF-8 encoded
@@ -159,7 +156,7 @@ public class FrontCodedStringList extends AbstractObjectList<MutableString>
     return utf8;
   }
 
-  /**
+  /*
    * Returns the ratio of the underlying front-coded list.
    *
    * @return the ratio of the underlying front-coded list.
@@ -168,7 +165,7 @@ public class FrontCodedStringList extends AbstractObjectList<MutableString>
     return utf8 ? byteFrontCodedList.ratio() : charFrontCodedList.ratio();
   }
 
-  /**
+  /*
    * Returns the element at the specified position in this front-coded as a mutable string.
    *
    * @param index an index in the list.
@@ -182,7 +179,7 @@ public class FrontCodedStringList extends AbstractObjectList<MutableString>
             : charFrontCodedList.getArray(index));
   }
 
-  /**
+  /*
    * Returns the element at the specified position in this front-coded list by storing it in a
    * mutable string.
    *

@@ -23,8 +23,8 @@ package org.embergraph.rdf.sparql.ast;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticBindingsOptimizer;
 
-/**
- * Class for wrapping a query node and an associated binding set (as starting point for evaluating
+/*
+* Class for wrapping a query node and an associated binding set (as starting point for evaluating
  * the query). Mainly used in the context of the AST optimizer pipeline. Typically, these optimizers
  * do only modify the AST, but in some cases they may involve manipulation of the binding sets (see
  * for instance the {@link ASTStaticBindingsOptimizer}).

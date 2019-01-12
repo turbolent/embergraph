@@ -18,8 +18,8 @@ import org.openrdf.model.impl.GraphImpl;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.rio.RDFWriter;
 
-/**
- * Collects statements written onto the {@link RDFWriter} interface and adds/replaces the DESCRIBE
+/*
+* Collects statements written onto the {@link RDFWriter} interface and adds/replaces the DESCRIBE
  * of the {@link Resource} specified to the constructor.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -32,7 +32,7 @@ public class DescribeCacheUpdater
   /** The cache to be updated. */
   private final IDescribeCache cache;
 
-  /**
+  /*
    * The {@link EmbergraphValue}s that become bound for the projection of the original DESCRIBE
    * query. We will collect all statements having a described resource as either a subject or an
    * object.
@@ -43,13 +43,13 @@ public class DescribeCacheUpdater
    */
   private final Set<EmbergraphValue> describedResources;
 
-  /**
+  /*
    * The source iterator visiting the statements that are the description of the projected
    * resources.
    */
   private final CloseableIteration<EmbergraphStatement, QueryEvaluationException> src;
 
-  /**
+  /*
    * The statements to be inserted into the cache as the description of that {@link IV}.
    *
    * <p>TODO This is not scalable to very large numbers of described resources nor to resources with
@@ -62,7 +62,7 @@ public class DescribeCacheUpdater
 
   private boolean open = true;
 
-  /**
+  /*
    * @param cache The cache to be updated.
    * @param describedResources The {@link EmbergraphValue}s that become bound for the projection of
    *     the original DESCRIBE query. We will collect all statements having a described resource as
@@ -98,8 +98,8 @@ public class DescribeCacheUpdater
 
       try {
 
-        /*
-         * Update the DESCRIBE cache IFF the iterator is exhausted
+      /*
+       * Update the DESCRIBE cache IFF the iterator is exhausted
          * by normal means (versus a thrown exception from the
          * source iterator).
          */
@@ -116,7 +116,7 @@ public class DescribeCacheUpdater
     return false;
   }
 
-  /**
+  /*
    * TODO In order to support CBD, we will also have to recognize statements that describe blank
    * nodes that are part of the description of a described resource as belonging to that described
    * resource. This is necessary in order to capture the transitive closure of the resource
@@ -161,7 +161,7 @@ public class DescribeCacheUpdater
     return stmt;
   }
 
-  /**
+  /*
    * Associate the statement with the resource. It is part of the description of that resource.
    *
    * @param describedResource A resource that is being described.

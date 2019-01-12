@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast;
 
-/**
- * A marker interface for {@link IQueryNode}s which are capable of producing bindings. This makes
+/*
+* A marker interface for {@link IQueryNode}s which are capable of producing bindings. This makes
  * life easier for code which does static analysis of the AST.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

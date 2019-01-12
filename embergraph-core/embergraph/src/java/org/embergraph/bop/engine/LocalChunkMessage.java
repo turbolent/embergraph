@@ -8,8 +8,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.fed.FederatedRunningQuery;
 import org.embergraph.relation.accesspath.ThickCloseableIterator;
 
-/**
- * A chunk of intermediate results which are ready to be consumed by some {@link BOp} in a specific
+/*
+* A chunk of intermediate results which are ready to be consumed by some {@link BOp} in a specific
  * query.
  *
  * <p>Note: This class is only used in query evaluation for the standalone database.
@@ -105,7 +105,7 @@ public class LocalChunkMessage implements IChunkMessage<IBindingSet> {
     this(queryController, queryId, bopId, partitionId, new IBindingSet[][] {bsets});
   }
 
-  /**
+  /*
    * TODO There are a few unit tests which rely on the ability to push multiple chunks through the
    * query engine, otherwise this could be changed to an IBindingSet[] by flattening the caller's
    * IBindingSet[][] when given. Doing this could simplify some other things in the API since any
@@ -210,7 +210,7 @@ public class LocalChunkMessage implements IChunkMessage<IBindingSet> {
     }
   }
 
-  /**
+  /*
    * Return an {@link ICloseableIterator} that will read a single, chunk containing all of the
    * specified {@link IBindingSet}s.
    *

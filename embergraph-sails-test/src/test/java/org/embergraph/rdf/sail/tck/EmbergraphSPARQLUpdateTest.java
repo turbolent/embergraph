@@ -49,8 +49,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * Integration with the openrdf SPARQL 1.1 update test suite.
+/*
+* Integration with the openrdf SPARQL 1.1 update test suite.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531" > SPARQL UPDATE for NAMED
  *     SOLUTION SETS </a>
@@ -67,7 +67,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
   //        super(name);
   //    }
 
-  /**
+  /*
    * Note: This field MUST be cleared in tearDown or a hard reference will be retained to the
    * backend until the end of CI!
    */
@@ -95,7 +95,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     backend.destroy();
   }
 
-  /**
+  /*
    * Note: This method may be overridden in order to run the test suite against other variations of
    * the embergraph backend.
    */
@@ -204,7 +204,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     logger.debug("dataset loaded.");
   }
 
-  /**
+  /*
    * Unit test for isolation semantics for a sequences of updates.
    *
    * @throws UpdateExecutionException
@@ -286,7 +286,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     assertTrue(con.hasStatement(null, null, null, true, (Resource) gout));
   }
 
-  /**
+  /*
    * Unit test for
    *
    * <pre>
@@ -342,7 +342,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     assertTrue(msg, con.hasStatement(null, null, null, true, two));
   }
 
-  /**
+  /*
    * In the ticket, the source file contains the following triples. In this test, those are triples
    * are written into the graph using INSERT DATA rather than LOAD so this test can be
    * self-contained.
@@ -433,7 +433,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     //        System.err.println("##### INITIAL DATA IN DATABASE");
     //        debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
 
-    /**
+    /*
      * Load into graphA (note: file is "file:///tmp/junk.ttl" in the ticket).
      *
      * <pre>
@@ -465,7 +465,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
 
     //        debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
 
-    /**
+    /*
      * Verify that all three triples are in graphA:
      *
      * <pre>
@@ -478,7 +478,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
       assertEquals("graphA", 3L, countSolutions(query));
     }
 
-    /**
+    /*
      * Now delete some triples from graphA while inserting the deleted triples into tempGraph:
      *
      * <pre>
@@ -508,7 +508,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     //        System.err.println("##### DATA IN DATABASE AFTER DELETE + INSERT");
     //        debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
 
-    /**
+    /*
      * graphA should have one triple remaining:
      *
      * <pre>
@@ -529,7 +529,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     }
   }
 
-  /**
+  /*
    * Variant of test 571 without blank nodes.
    *
    * @throws RepositoryException
@@ -556,7 +556,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     //        System.err.println("##### INITIAL DATA IN DATABASE");
     //        debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
 
-    /**
+    /*
      * Load into graphA (note: file is "file:///tmp/junk.ttl" in the ticket).
      *
      * <pre>
@@ -588,7 +588,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     //        System.err.println("##### DATA IN DATABASE AFTER INSERT");
     //        debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
 
-    /**
+    /*
      * Verify that all three triples are in graphA:
      *
      * <pre>
@@ -601,7 +601,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
       assertEquals("graphA", 3L, countSolutions(query));
     }
 
-    /**
+    /*
      * Now delete some triples from graphA while inserting the deleted triples into tempGraph:
      *
      * <pre>
@@ -631,7 +631,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     //        System.err.println("##### DATA IN DATABASE AFTER DELETE + INSERT");
     //        debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
 
-    /**
+    /*
      * graphA should have one triple remaining:
      *
      * <pre>
@@ -652,7 +652,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     }
   }
 
-  /**
+  /*
    * This test is based on a forum post. This post provided an example of an issue with Unicode
    * case-folding in the REGEX operator and a means to encode the Unicode characters to avoid doubt
    * about which characters were transmitted and receieved.
@@ -714,7 +714,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
             f.createURI(ns, "mike"), RDFS.LABEL, f.createLiteral("Michael Personick"), true));
   }
 
-  /**
+  /*
    * Count solutions for a TupleQuery.
    *
    * @param query The SPARQL query.

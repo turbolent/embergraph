@@ -25,15 +25,15 @@ package org.embergraph.counters;
 
 import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 
-/**
- * Used to read in {@link CounterSet} XML, aggregating data into {@link HistoryInstrument}s.
+/*
+* Used to read in {@link CounterSet} XML, aggregating data into {@link HistoryInstrument}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DefaultInstrumentFactory implements IInstrumentFactory {
 
-  /**
+  /*
    * Instance supports overwrite, so the ring buffer will eventually overwrite old values as new
    * values arrive. Minutes are migrated onto hours and hours are migrated onto days. Up to 30 days
    * of data will be retained.
@@ -50,7 +50,7 @@ public class DefaultInstrumentFactory implements IInstrumentFactory {
 
   private final boolean overwrite;
 
-  /**
+  /*
    * @param nslots The #of units of the period to be retained by the {@link History}.
    * @param period The period in which those units are measured.
    * @param overwrite If the {@link History} may serve as a ring buffer.
@@ -120,5 +120,5 @@ public class DefaultInstrumentFactory implements IInstrumentFactory {
   static class StringInstrument extends Instrument<String> {
 
     public void sample() {}
-  };
+  }
 }

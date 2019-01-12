@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test suite for UNION and MINUS combined, see https://sourceforge.net/apps/trac/bigdata/ticket/767
+/*
+* Test suite for UNION and MINUS combined, see https://sourceforge.net/apps/trac/bigdata/ticket/767
  */
 public class TestUnionMinus extends AbstractInlineSELECTTestCase {
 

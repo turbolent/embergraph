@@ -4,8 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.lucene.analysis.Token;
 
-/**
- * Models the term-frequency data associated with a single field of some document.
+/*
+* Models the term-frequency data associated with a single field of some document.
  *
  * @param <V> The generic type of the document identifier.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -39,7 +39,7 @@ public class TermFrequencyData<V extends Comparable<V>> {
     add(token);
   }
 
-  /**
+  /*
    * Add a {@link Token}.
    *
    * @param token The token.
@@ -83,7 +83,7 @@ public class TermFrequencyData<V extends Comparable<V>> {
     return totalTermCount;
   }
 
-  /**
+  /*
    * Computes the normalized term-frequency vector. This is a unit vector whose magnitude is <code>
    * 1.0</code>. The magnitude of the term frequency vector is computed using the integer term
    * frequency values reported by {@link TermMetadata#termFreq()}. The normalized values are then

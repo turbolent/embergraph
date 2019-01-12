@@ -28,7 +28,7 @@ public class HALogRequest implements IHALogRequest {
   private final long commitCounter;
   //    private final boolean incremental;
 
-  /**
+  /*
    * @param serviceId The {@link UUID} of the service that made the request.
    * @param commitCounter The commit counter used to identify the desired commit point (the commit
    *     counter of the closing root block).

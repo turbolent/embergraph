@@ -27,8 +27,8 @@ import java.nio.channels.spi.AbstractInterruptibleChannel;
 import java.nio.channels.spi.AbstractSelectableChannel;
 import junit.framework.TestCase;
 
-/**
- * Test class uses non-blocking I/O to communicate between collection of clients and a single page
+/*
+* Test class uses non-blocking I/O to communicate between collection of clients and a single page
  * server backed by test data. This test is designed to exercise features of the nio package and to
  * stress test a non-blocking design for a custom client-server protocol.
  *
@@ -128,15 +128,15 @@ public class TestPageServer extends TestCase {
 
   //    public static Logger log = Logger.getLogger(TestPageServer.class);
   //
-  //    /**
-  //     * Port used for the tests.
+  //    /*
+//     * Port used for the tests.
   //     */
   //    private int port = 8089;
   //
   //    Random r = new Random();
   //
-  //    /**
-  //     *
+  //    /*
+//     *
   //     */
   //    public TestPageServer() {
   //        super();
@@ -153,8 +153,8 @@ public class TestPageServer extends TestCase {
   ////    public void tearDown() throws Exception {
   ////    }
   //
-  //    /**
-  //     * Verify that we can create and shutdown a page server. We do this twice to
+  //    /*
+//     * Verify that we can create and shutdown a page server. We do this twice to
   //     * make sure that the page server is closing its connection.
   //     */
   //
@@ -178,8 +178,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Verify that we can create page server, connect to it using a client and
+  //    /*
+//     * Verify that we can create page server, connect to it using a client and
   //     * shutdown the client. We verify that attempting to send another request to
   //     * the page server and results in an appropriate exception.  We then shutdown
   //     * the page server as well.
@@ -219,8 +219,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Verify that a client attempting to connect to a socket that is not
+  //    /*
+//     * Verify that a client attempting to connect to a socket that is not
   //     * running a page server will timeout with an appropriate exception.
   //     */
   //    public void test_timeoutPageServer() throws IOException {
@@ -240,8 +240,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Verify that a WRITE operation correctly reports an error when the client
+  //    /*
+//     * Verify that a WRITE operation correctly reports an error when the client
   //     * sends the incorrect amount of data.
   //     *
   //     * @todo expand test to check all arguments for WRITE.
@@ -299,8 +299,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Verify that a client can a page (should be zeros).
+  //    /*
+//     * Verify that a client can a page (should be zeros).
   //     *
   //     * @todo parameterize test on page size and try range of legal page sizes
   //     *       and check illegal page sizes for correct rejection by the client
@@ -336,8 +336,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Verify that a client will be redirected if they attempt to read a page
+  //    /*
+//     * Verify that a client will be redirected if they attempt to read a page
   //     * belonging to a segment not found on the page server.
   //     *
   //     * @todo The {@link PageClient}does not handle redirects in any interesting
@@ -393,8 +393,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Verify that a client can write a page and read it back.
+  //    /*
+//     * Verify that a client can write a page and read it back.
   //     */
   //    public void test_readWritePages() throws IOException {
   //
@@ -433,8 +433,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * A stress test with random reads and writes of random data onto random
+  //    /*
+//     * A stress test with random reads and writes of random data onto random
   //     * pages in the segment. This does NOT attempt to extend the segment.
   //     *
   //     * @todo parameterize this test and vary the page size in the allowable
@@ -514,8 +514,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Test creates a large number of clients, each running in its own thread.
+  //    /*
+//     * Test creates a large number of clients, each running in its own thread.
   //     * Each client executes random operations against a single page server using
   //     * some appropriate probability distribution. Those operations need to
   //     * include connecting and disconnecting so that we can measure latency in
@@ -547,8 +547,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * <p>
+  //    /*
+//     * <p>
   //     * Compares byte[]s by value (not reference).
   //     * </p>
   //     * <p>
@@ -568,8 +568,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * <p>
+  //    /*
+//     * <p>
   //     * Compares byte[]s by value (not reference).
   //     * </p>
   //     * <p>
@@ -628,8 +628,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Test class for page server design. The page server uses non-blocking I/O
+  //    /*
+//     * Test class for page server design. The page server uses non-blocking I/O
   //     * and divides its work among several threads:
   //     * <dl>
   //     * <dt>acceptor</dt>
@@ -665,29 +665,29 @@ public class TestPageServer extends TestCase {
   //
   //    public static class PageServer {
   //
-  //        /**
-  //         * The "segments" that are being served.
+  //        /*
+//         * The "segments" that are being served.
   //         */
   //        final Segment[] segments;
   //
-  //        /**
-  //         * The thread that accepts new client connections.
+  //        /*
+//         * The thread that accepts new client connections.
   //         */
   //        final AcceptorThread acceptor;
   //
-  //        /**
-  //         * The thread that responds to client requests.
+  //        /*
+//         * The thread that responds to client requests.
   //         */
   //        final ResponderThread responder;
   //
-  //        /**
-  //         * The thread that logs statistics.
+  //        /*
+//         * The thread that logs statistics.
   //         */
   //        final private StatisticsThread statistics = new StatisticsThread(
   //                30 * 1000);
   //
-  //        /**
-  //         * Create and start the server.
+  //        /*
+//         * Create and start the server.
   //         *
   //         * @param port
   //         *            The port on which to listen for client connections.
@@ -725,8 +725,8 @@ public class TestPageServer extends TestCase {
   //
   //        }
   //
-  //        /**
-  //         * The server is broken down into threads for accepting connections,
+  //        /*
+//         * The server is broken down into threads for accepting connections,
   //         * responding to requests, and collecting statistics.
   //         */
   //        private void start() {
@@ -735,8 +735,8 @@ public class TestPageServer extends TestCase {
   //            acceptor.start();
   //        }
   //
-  //        /**
-  //         * A FIFO queue of accepted connections from clients that have not yet
+  //        /*
+//         * A FIFO queue of accepted connections from clients that have not yet
   //         * entered into read-write interaction with the {@link PageServer}. New
   //         * client connections are placed onto the queue when they are accepted
   //         * by the {@link PageServer}. They are popped off of the queue by the
@@ -749,22 +749,22 @@ public class TestPageServer extends TestCase {
   //         */
   //        public static class AcceptedConnectionQueue {
   //
-  //            /**
-  //             * FIFO queue of accepted client connections awaiting migration to
+  //            /*
+//             * FIFO queue of accepted client connections awaiting migration to
   //             * the read-write selector.
   //             */
   //            final private LinkedList _connections = new LinkedList();
   //
-  //            /**
-  //             * The read-write selector. This selector is notified whenever there
+  //            /*
+//             * The read-write selector. This selector is notified whenever there
   //             * is a new client connection on this queue. The thread handling the
   //             * selector is responsible for initiating the protocol with the
   //             * newly accepted clients.
   //             */
   //            final private Selector _readWriteSelector;
   //
-  //            /**
-  //             * Create an ordered list for accepted connections.
+  //            /*
+//             * Create an ordered list for accepted connections.
   //             *
   //             * @param readWriteSelector
   //             *            The selector that is notified for new connections.
@@ -776,8 +776,8 @@ public class TestPageServer extends TestCase {
   //                _readWriteSelector = readWriteSelector;
   //            }
   //
-  //            /**
-  //             * Adds the accepted channel to the list of accepted connections and
+  //            /*
+//             * Adds the accepted channel to the list of accepted connections and
   //             * notifies the selector using {@link Selector#wakeup()}.
   //             *
   //             * @param acceptedChannel
@@ -788,8 +788,8 @@ public class TestPageServer extends TestCase {
   //                _readWriteSelector.wakeup();
   //            }
   //
-  //            /**
-  //             * Pops off and returns an accepted channel (FIFO queue).
+  //            /*
+//             * Pops off and returns an accepted channel (FIFO queue).
   //             *
   //             * @return An accepted channel or <code>null</code> if there are
   //             *         no accepted channels waiting in the queue.
@@ -802,8 +802,8 @@ public class TestPageServer extends TestCase {
   //
   //        } // AcceptedConnectionQueue
   //
-  //        /**
-  //         * A thread that waits for new client connections. Connections are
+  //        /*
+//         * A thread that waits for new client connections. Connections are
   //         * pushed onto the {@link AcceptedConnectionQueue}as they arrive and
   //         * the {@link ResponderThread}is notified.
   //         *
@@ -812,35 +812,35 @@ public class TestPageServer extends TestCase {
   //
   //        public static class AcceptorThread extends Thread {
   //
-  //            /**
-  //             * The server socket on which we accept new connections.
+  //            /*
+//             * The server socket on which we accept new connections.
   //             */
   //            final private ServerSocketChannel ssc;
   //
-  //            /**
-  //             * The selector for the socket on which we accept new connections.
+  //            /*
+//             * The selector for the socket on which we accept new connections.
   //             */
   //            final private Selector connectSelector;
   //
-  //            /**
-  //             * A FIFO queue onto which we place accepted connections. Items on
+  //            /*
+//             * A FIFO queue onto which we place accepted connections. Items on
   //             * this queue are absorbed by the {@link ResponderThread}.
   //             */
   //            final private AcceptedConnectionQueue acceptedConnectionsQueue;
   //
-  //            /**
-  //             * A thread containing counters used to track interesting events.
+  //            /*
+//             * A thread containing counters used to track interesting events.
   //             */
   //            final private StatisticsThread statistics;
   //
-  //            /**
-  //             * The {@link #run()}method will terminate when this becomes
+  //            /*
+//             * The {@link #run()}method will terminate when this becomes
   //             * <code>true</code>
   //             */
   //            private volatile boolean shutdown = false;
   //
-  //            /**
-  //             * Create a new thread to accept client connections.
+  //            /*
+//             * Create a new thread to accept client connections.
   //             *
   //             * @param connectSelector
   //             *            The selector that is used to detect new client
@@ -895,8 +895,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * The thread runs in a loop accepting connections. The loop blocks
+  //            /*
+//             * The thread runs in a loop accepting connections. The loop blocks
   //             * in {@link Selector#select()}until at least one new connection is
   //             * available. If the {@link Selector}on which we are accepting
   //             * connections is closed then the loop will terminate.
@@ -956,8 +956,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Accepts new client connections by reading their keys from the
+  //            /*
+//             * Accepts new client connections by reading their keys from the
   //             * selector.
   //             *
   //             * @throws IOException
@@ -994,8 +994,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Tell the acceptor thread to stop running and release the server
+  //            /*
+//             * Tell the acceptor thread to stop running and release the server
   //             * socket (synchronous operation). Once the thread stops running the
   //             * page server will no longer accept new connections.
   //             */
@@ -1022,8 +1022,8 @@ public class TestPageServer extends TestCase {
   //
   //        }
   //
-  //        /**
-  //         * <p>
+  //        /*
+//         * <p>
   //         * Daemon thread periodically logs {@link PageServer}statistics.
   //         * </p>
   //         * <p>
@@ -1045,8 +1045,8 @@ public class TestPageServer extends TestCase {
   //
   //        public static class StatisticsThread extends Thread {
   //
-  //            /**
-  //             * Time to sleep between logging events.
+  //            /*
+//             * Time to sleep between logging events.
   //             */
   //            private long _millis;
   //
@@ -1067,8 +1067,8 @@ public class TestPageServer extends TestCase {
   //            volatile long responder_commit    = 0L;
   //            volatile long responder_abort     = 0L;
   //
-  //            /**
-  //             * Create a thread to log statistics. The page server starts the
+  //            /*
+//             * Create a thread to log statistics. The page server starts the
   //             * thread and then increments on the created thread in response to
   //             * page server events. The {@link #run()}method periodically logs
   //             * those counters.
@@ -1117,8 +1117,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Log statistics.
+  //            /*
+//             * Log statistics.
   //             */
   //            public void writeStatistics() {
   //                log.info("Acceptor: IOErrors=" + acceptor_IOErrors
@@ -1131,8 +1131,8 @@ public class TestPageServer extends TestCase {
   //                        + responder_clientStreamsClosed);
   //            }
   //
-  //            /**
-  //             * This is a daemon thread and will just go away. However an
+  //            /*
+//             * This is a daemon thread and will just go away. However an
   //             * explicit shutdown logs the final statisitics.
   //             */
   //
@@ -1156,8 +1156,8 @@ public class TestPageServer extends TestCase {
   //
   //        }
   //
-  //        /**
-  //         * <p>
+  //        /*
+//         * <p>
   //         * While non-blocking I/O does not block, the server must also not poll
   //         * in a tight loop waiting to read from or write to a client. The
   //         * buffers and control state in this class are used to avoid such
@@ -1196,13 +1196,13 @@ public class TestPageServer extends TestCase {
   //            static private Charset ascii = Charset.forName("US-ASCII");
   ////            static private CharsetDecoder asciiDecoder = ascii.newDecoder();
   //
-  //            /**
-  //             * The channel for IO with the client.
+  //            /*
+//             * The channel for IO with the client.
   //             */
   //            final SocketChannel _channel;
   //
-  //            /**
-  //             * <p>
+  //            /*
+//             * <p>
   //             * True if reading a request and false if writing a response.
   //             * </p>
   //             * <p>
@@ -1226,8 +1226,8 @@ public class TestPageServer extends TestCase {
   //             */
   //            private boolean reading = true;
   //
-  //            /**
-  //             * <p>
+  //            /*
+//             * <p>
   //             * A {@link ByteBuffer}is allocated with the maximum capacity for
   //             * the protocol version {@link Protocol_0_1#SZ_MAX_REQUEST}and
   //             * attached to the {@link SelectionKey}. Since a request may arrive
@@ -1237,8 +1237,8 @@ public class TestPageServer extends TestCase {
   //             */
   //            private ByteBuffer request;
   //
-  //            /**
-  //             * <p>
+  //            /*
+//             * <p>
   //             * Note: This buffer is also used for variable length response
   //             * headers and as such is generally the first element of the {@link
   //             * #resourceBuffers} array. The field is public since the caller
@@ -1260,8 +1260,8 @@ public class TestPageServer extends TestCase {
   //             */
   //            private ByteBuffer responseHeader;
   //
-  //            /**
-  //             * An array of one or more buffers containing a response. A
+  //            /*
+//             * An array of one or more buffers containing a response. A
   //             * scattering write is performed and data is written from each
   //             * buffer in sequence in which there is {@link Buffer#remaining()}
   //             * data. The total #of bytes available before the response is
@@ -1272,23 +1272,23 @@ public class TestPageServer extends TestCase {
   //             */
   //            private ByteBuffer[] responseBuffers;
   //
-  //            /**
-  //             * The total #of bytes available before the response is written.
+  //            /*
+//             * The total #of bytes available before the response is written.
   //             * This field is set when a new response is buffered and is not
   //             * modified during the write of that response on the channel.
   //             */
   //            private long responseLength;
   //
-  //            /**
-  //             * The total #of bytes of the response that have been written on the
+  //            /*
+//             * The total #of bytes of the response that have been written on the
   //             * channel. When this field equals {@link #responseLength}the
   //             * entire response has been written and the control state should be
   //             * flipped to read the next request from the channel.
   //             */
   //            private long responseWritten;
   //
-  //            /**
-  //             * This method is invoked before the server begins writing the
+  //            /*
+//             * This method is invoked before the server begins writing the
   //             * response. The #of bytes remaining in each of the buffers is
   //             * computed and saved on {@link #responseLength}and the
   //             * {@link #reading}flag is set to <code>false</code>. The server
@@ -1348,8 +1348,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Write out more data from a buffered response to the client. If
+  //            /*
+//             * Write out more data from a buffered response to the client. If
   //             * all buffered data has been written, then flip the channel over so
   //             * that we can read the next request from that client.
   //             */
@@ -1414,8 +1414,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Send an error response.
+  //            /*
+//             * Send an error response.
   //             *
   //             * @param key
   //             *            The selection key.
@@ -1504,8 +1504,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Allocate the buffers and control state for managing non-blocking
+  //            /*
+//             * Allocate the buffers and control state for managing non-blocking
   //             * IO for requests and responses on a channel. Each instance of this
   //             * class is {@link SelectorKey#attached(Object) attached}to the
   //             * {@link SelectorKey}for a specific client.
@@ -1550,8 +1550,8 @@ public class TestPageServer extends TestCase {
   //
   //        }
   //
-  //        /**
-  //         * Thread reads requests and writes responses.
+  //        /*
+//         * Thread reads requests and writes responses.
   //         */
   //        public static class ResponderThread extends Thread {
   //
@@ -1559,33 +1559,33 @@ public class TestPageServer extends TestCase {
   //
   //            final private Selector readWriteSelector;
   //
-  //            /**
-  //             * A list of connections that were accepted by the
+  //            /*
+//             * A list of connections that were accepted by the
   //             * {@link AcceptorThread} and need to be picked up by the
   //             * {@link ResponderThread}.
   //             */
   //            final private AcceptedConnectionQueue acceptedConnections;
   //
-  //            /**
-  //             * The thread on which we increment counters for interesting events.
+  //            /*
+//             * The thread on which we increment counters for interesting events.
   //             */
   //            final private StatisticsThread statistics;
   //
-  //            /**
-  //             * Map from {@link OId}to {@link Segment}. The keys of the map
+  //            /*
+//             * Map from {@link OId}to {@link Segment}. The keys of the map
   //             * have had their page and slot components masked off.
   //             */
   //
   //            final private HashMap segmentTable = new HashMap();
   //
-  //            /**
-  //             * The {@link #run()}method will terminate when this becomes
+  //            /*
+//             * The {@link #run()}method will terminate when this becomes
   //             * <code>true</code>
   //             */
   //            private volatile boolean shutdown = false;
   //
-  //            /**
-  //             * Create a thread to handle the client-sever protocol.
+  //            /*
+//             * Create a thread to handle the client-sever protocol.
   //             *
   //             * @param readWriteSelector
   //             *            The selector on which we detect client events.
@@ -1642,8 +1642,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Thread runs in a loop registering new client connections,
+  //            /*
+//             * Thread runs in a loop registering new client connections,
   //             * blocking on {@link Selector#select()}for one or more requests,
   //             * and then processing new client requests. A client request may
   //             * arrive in multiple chunks and those chunks are assembled into a
@@ -1761,8 +1761,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * <p>
+  //            /*
+//             * <p>
   //             * Accepts new {@link SocketChannel client connections}in a FIFO
   //             * manner from the {@link AcceptedConnectionQueue}provided to the
   //             * constructor, registers them with our selector and attaches a key
@@ -1801,8 +1801,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Read a request from a channel and appends it into a per channel
+  //            /*
+//             * Read a request from a channel and appends it into a per channel
   //             * buffer object. When the complete request has been buffered it is
   //             * then dispatched.
   //             *
@@ -1878,8 +1878,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Handle the request. This first examine the request to see if it
+  //            /*
+//             * Handle the request. This first examine the request to see if it
   //             * is complete. If the request is complete and well formed, then its
   //             * semantics are executed. If the request is incomplete and not
   //             * ill-formed then the method will return <code>false</code> and
@@ -2019,8 +2019,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * <p>
+  //            /*
+//             * <p>
   //             * Return the segment fronted by this page server that logically
   //             * contains the specified page.
   //             * </p>
@@ -2076,8 +2076,8 @@ public class TestPageServer extends TestCase {
   //
   //            }
   //
-  //            /**
-  //             * Shutdown the responder thread (synchronous operation). This
+  //            /*
+//             * Shutdown the responder thread (synchronous operation). This
   //             * method blocks until the responder thread halts. Clients are not
   //             * explicitly closed. They should detect when the channel with the
   //             * server shuts down and close the socket from their end in order to
@@ -2106,8 +2106,8 @@ public class TestPageServer extends TestCase {
   //
   //        }
   //
-  //        /**
-  //         * Shutdown the page server.
+  //        /*
+//         * Shutdown the page server.
   //         */
   //
   //        public void shutdown() throws IOException {
@@ -2121,8 +2121,8 @@ public class TestPageServer extends TestCase {
   //        }
   //
   //
-  //        /**
-  //         * Used to indicate that a segment is not available from this page
+  //        /*
+//         * Used to indicate that a segment is not available from this page
   //         * server.
   //         *
   //         * @version $Id$
@@ -2148,8 +2148,8 @@ public class TestPageServer extends TestCase {
   //
   //        }
   //
-  //        /**
-  //         * Used to indicate errors in a request made by a client of the server.
+  //        /*
+//         * Used to indicate errors in a request made by a client of the server.
   //         *
   //         * @version $Id$
   //         * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
@@ -2176,8 +2176,8 @@ public class TestPageServer extends TestCase {
   //
   //    } // PageServer
   //
-  //    /**
-  //     * A simulated segment containing a fixed number of fixed size pages.  The
+  //    /*
+//     * A simulated segment containing a fixed number of fixed size pages.  The
   //     * page data is stored in memory and is not persistent.
   //     *
   //     * @version $Id$
@@ -2187,30 +2187,30 @@ public class TestPageServer extends TestCase {
   //    public static class Segment
   //    {
   //
-  //        /**
-  //         * The segment identifier as a long integer. The page and slot
+  //        /*
+//         * The segment identifier as a long integer. The page and slot
   //         * components are ZERO. The partition and segment components are
   //         * significant.
   //         */
   //        final private OId segmentId;
   //
-  //        /**
-  //         * The page size for the segment.
+  //        /*
+//         * The page size for the segment.
   //         */
   //        final private int pageSize;
   //
-  //        /**
-  //         * The #of pages in the segment.
+  //        /*
+//         * The #of pages in the segment.
   //         */
   //        final private int numPages;
   //
-  //        /**
-  //         * The contents of each page in the segment.
+  //        /*
+//         * The contents of each page in the segment.
   //         */
   //        final private byte[][] pages;
   //
-  //        /**
-  //         * The segment identifier as a long integer. The page and slot
+  //        /*
+//         * The segment identifier as a long integer. The page and slot
   //         * components are ZERO. The partition and segment components are
   //         * significant.
   //         */
@@ -2218,22 +2218,22 @@ public class TestPageServer extends TestCase {
   //            return segmentId;
   //        }
   //
-  //        /**
-  //         * The page size for the segment.
+  //        /*
+//         * The page size for the segment.
   //         */
   //        public int getPageSize() {
   //            return pageSize;
   //        }
   //
-  //        /**
-  //         * The #of pages in the segment.
+  //        /*
+//         * The #of pages in the segment.
   //         */
   //        public int getNumPages() {
   //            return numPages;
   //        }
   //
-  //        /**
-  //         * Return a _copy_ of the page data (prevents corruption).
+  //        /*
+//         * Return a _copy_ of the page data (prevents corruption).
   //         * @param pageId
   //         * @return
   //         */
@@ -2241,8 +2241,8 @@ public class TestPageServer extends TestCase {
   //            return (byte[])pages[ pageId ].clone();
   //        }
   //
-  //        /**
-  //         * Save a _copy_ of the page data (prevents corruption).
+  //        /*
+//         * Save a _copy_ of the page data (prevents corruption).
   //         * @param pageId
   //         * @param data
   //         */
@@ -2253,8 +2253,8 @@ public class TestPageServer extends TestCase {
   //            pages[ pageId ] = (byte[]) data.clone();
   //        }
   //
-  //        /**
-  //         * Create a transient in-memory segment.
+  //        /*
+//         * Create a transient in-memory segment.
   //         *
   //         * @param segmentId
   //         *            The segment identifier.
@@ -2293,8 +2293,8 @@ public class TestPageServer extends TestCase {
   //
   //    } // Segment
   //
-  //    /**
-  //     * <p>
+  //    /*
+//     * <p>
   //     * Client used to test the page server.
   //     * </p>
   //     * <p>
@@ -2330,20 +2330,20 @@ public class TestPageServer extends TestCase {
   //     */
   //    public static class PageClient implements IPageServer {
   //
-  //        /**
-  //         * The channel over which the client is communicating to the page server.
+  //        /*
+//         * The channel over which the client is communicating to the page server.
   //         */
   //        final private SocketChannel channel;
   //
-  //        /**
-  //         * Buffer used for formatting requests and reading responses.  It must
+  //        /*
+//         * Buffer used for formatting requests and reading responses.  It must
   //         * be {@link Buffer#clear() cleared} before writing each request and before
   //         * reading each response.
   //         */
   //        private ByteBuffer buf = ByteBuffer.allocate(Protocol_0_1.SZ_MAX_REQUEST);
   //
-  //        /**
-  //         * Opens a connection to a page server on this host using the indicated
+  //        /*
+//         * Opens a connection to a page server on this host using the indicated
   //         * port. The channel is configured for <strong>blocking </strong> I/O.
   //         * The rationale here is that the client is single threaded and its
   //         * operations are synchronous so the use of non-blocking I/O does not
@@ -2521,8 +2521,8 @@ public class TestPageServer extends TestCase {
   //            throw new UnsupportedOperationException();
   //        }
   //
-  //        /**
-  //         * Read the response from the server. Any error conditions or redirects
+  //        /*
+//         * Read the response from the server. Any error conditions or redirects
   //         * are logged at appropriate levels. A normal response is handled
   //         * according to the semantics of the operation.
   //         *
@@ -2705,8 +2705,8 @@ public class TestPageServer extends TestCase {
   //
   //        }
   //
-  //        /**
-  //         * <p>
+  //        /*
+//         * <p>
   //         * Read the status line from the response.
   //         * </p>
   //         * <p>
@@ -2828,8 +2828,8 @@ public class TestPageServer extends TestCase {
   //        private Charset ascii = Charset.forName("US-ASCII");
   //        private CharsetDecoder asciiDecoder = ascii.newDecoder();
   //
-  //        /**
-  //         * Shutdown the client.
+  //        /*
+//         * Shutdown the client.
   //         *
   //         * @throws IOException
   //         */
@@ -2843,8 +2843,8 @@ public class TestPageServer extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Class encapsulates constants used by the page server protocol (version
+  //    /*
+//     * Class encapsulates constants used by the page server protocol (version
   //     * 0.1). All requests conforming to this protocol have the following header.
   //     *
   //     * <code>
@@ -2888,16 +2888,16 @@ public class TestPageServer extends TestCase {
   //     */
   //    public final static class Protocol_0_1 {
   //
-  //        /**
-  //         * This is version 0.1 of the protocol. The version is two bytes. The
+  //        /*
+//         * This is version 0.1 of the protocol. The version is two bytes. The
   //         * high byte is the major version. The low byte is the minor version.
   //         */
   //        public static final transient short VERSION = 0x0001;
   //
   //        public static final transient int OP_LOCK    = 0;
   //
-  //        /**
-  //         * Read page operation
+  //        /*
+//         * Read page operation
   //         *
   //         * @param txId LONG
   //         * @param pageId LONG
@@ -2905,8 +2905,8 @@ public class TestPageServer extends TestCase {
   //         */
   //        public static final transient short OP_READ    = (short)1;
   //
-  //        /**
-  //         * Write page operation
+  //        /*
+//         * Write page operation
   //         *
   //         * @param txId LONG
   //         * @param pageId LONG
@@ -2933,13 +2933,13 @@ public class TestPageServer extends TestCase {
   //        public static final transient int SZ_OP      = SZ_SHORT;
   //        public static final transient int SZ_STATUS  = SZ_SHORT;
   //
-  //        /**
-  //         * The size of the common header for all protocol operations.
+  //        /*
+//         * The size of the common header for all protocol operations.
   //         */
   //        public static final transient int SZ_HEADER  = SZ_MAGIC + SZ_VERSION + SZ_OP;
   //
-  //        /**
-  //         * The size of the WRITE operation including all fixed length
+  //        /*
+//         * The size of the WRITE operation including all fixed length
   //         * parameters. The last field is the #of bytes that must follow and
   //         * which provide the data to be written.
   //         */
@@ -2950,8 +2950,8 @@ public class TestPageServer extends TestCase {
   //                + SZ_INT  // #bytes
   //                ;
   //
-  //        /**
-  //         * The size of the READ operation. There are no variable length
+  //        /*
+//         * The size of the READ operation. There are no variable length
   //         * parameters.
   //         */
   //        public static final transient int SZ_READ_REQUEST
@@ -2961,8 +2961,8 @@ public class TestPageServer extends TestCase {
   //                ;
   //
   //
-  //        /**
-  //         * The maximum request size. The largest request is a write operation
+  //        /*
+//         * The maximum request size. The largest request is a write operation
   //         * writing the maximum page size.
   //         */
   //        public static final transient int SZ_MAX_REQUEST
@@ -3005,8 +3005,8 @@ public class TestPageServer extends TestCase {
   //         * value. This can be used to write [nbytes] as a [short] rather than an
   //         * [int].
   //         */
-  ////        /**
-  ////         * Converts a 4 byte array of unsigned bytes to an long
+  ////        /*
+////         * Converts a 4 byte array of unsigned bytes to an long
   ////         * @param b an array of 4 unsigned bytes
   ////         * @return a long representing the unsigned int
   ////         */
@@ -3023,8 +3023,8 @@ public class TestPageServer extends TestCase {
   ////            return l;
   ////        }
   ////
-  ////        /**
-  ////         * Converts a two byte array to an integer
+  ////        /*
+////         * Converts a two byte array to an integer
   ////         * @param b a byte array of length 2
   ////         * @return an int representing the unsigned short
   ////         */

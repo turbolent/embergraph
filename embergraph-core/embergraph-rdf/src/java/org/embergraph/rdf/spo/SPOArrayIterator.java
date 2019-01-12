@@ -31,8 +31,8 @@ import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Iterator visits {@link SPO}s and supports removal (fully buffered).
+/*
+* Iterator visits {@link SPO}s and supports removal (fully buffered).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ import org.embergraph.striterator.IKeyOrder;
  */
 public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
 
-  /**
+  /*
    * The maximum capacity for the backing array.
    *
    * <p>FIXME Array limits in truth maintenance code. This should probably be close to the branching
@@ -58,7 +58,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
   /** The database (optional). */
   private AbstractTripleStore db;
 
-  /**
+  /*
    * The {@link IKeyOrder} in which statements are being visited and <code>null</code> if not known.
    */
   private final IKeyOrder<ISPO> keyOrder;
@@ -86,7 +86,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
     return keyOrder;
   }
 
-  /**
+  /*
    * An iterator that visits the {@link SPO}s in the given array whose {@link IKeyOrder} is NOT
    * known.
    *
@@ -110,8 +110,8 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
 
   }
 
-  //    /**
-  //     * An iterator that visits the {@link SPO}s in the given array and
+  //    /*
+//     * An iterator that visits the {@link SPO}s in the given array and
   //     * optionally supports {@link #remove()}.
   //     *
   //     * @param db
@@ -140,7 +140,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
   //
   //    }
 
-  /**
+  /*
    * Fully buffers all statements selected by the {@link IAccessPath}.
    *
    * <p>Note: This constructor variant supports {@link #remove()}.
@@ -235,12 +235,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
 
     assert i <= numStmts;
 
-    if (i == numStmts) {
-
-      return false;
-    }
-
-    return true;
+    return i != numStmts;
   }
 
   public ISPO next() {
@@ -255,7 +250,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
     return current;
   }
 
-  /**
+  /*
    * Removes the last statement visited from the database (non-batch API).
    *
    * <p>Note If you are trying to remove a set of statements then you are MUCH better off collecting
@@ -285,7 +280,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
     current = null;
   }
 
-  /**
+  /*
    * Return the backing array.
    *
    * @see #getStatementCount()
@@ -297,7 +292,7 @@ public class SPOArrayIterator implements IChunkedOrderedIterator<ISPO> {
     return stmts;
   }
 
-  /**
+  /*
    * Returns the remaining statements.
    *
    * @throws NoSuchElementException if {@link #hasNext()} returns false.

@@ -27,8 +27,8 @@ import org.embergraph.service.DataService;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IMetadataService;
 
-/**
- * A description of the metadata state for a partition of a scale-out index.
+/*
+* A description of the metadata state for a partition of a scale-out index.
  *
  * <p>Each index partition has a distinct partitionId. This partitionId is assigned by a centralized
  * service - the {@link IMetadataService} for the scale-out index for that index partition. A
@@ -68,8 +68,8 @@ import org.embergraph.service.IMetadataService;
 public interface IPartitionMetadata extends ISeparatorKeys {
 
   /** The unique partition identifier. */
-  public int getPartitionId();
+  int getPartitionId();
 
   /** Return {@link #getPartitionId()} */
-  public int hashCode();
+  int hashCode();
 }

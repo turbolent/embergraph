@@ -26,8 +26,8 @@ package org.embergraph.service;
 import java.util.Properties;
 import java.util.UUID;
 
-/**
- * Concrete implementation for an {@link EmbeddedFederation}.
+/*
+* Concrete implementation for an {@link EmbeddedFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

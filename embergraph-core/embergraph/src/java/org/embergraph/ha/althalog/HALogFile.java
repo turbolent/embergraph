@@ -73,7 +73,7 @@ public class HALogFile {
   /** Offset of the second root block in the file. */
   static final int OFFSET_ROOT_BLOCK1 = SIZE_MAGIC + SIZE_VERSION + (SIZEOF_ROOT_BLOCK * 1);
 
-  /**
+  /*
    * The size of the file header, including MAGIC, version, and both root blocks. The data starts at
    * this offset.
    */
@@ -121,7 +121,7 @@ public class HALogFile {
   // A writer is only created for a newly opened file
   private final HALogWriter m_writer;
 
-  /**
+  /*
    * We need to take a lock whenever we are updating the file and signal the fileChange condition to
    * alert any waiting readers.
    */
@@ -138,7 +138,7 @@ public class HALogFile {
   private long m_writePosition = -1;
   private long m_sequence = 0;
 
-  /**
+  /*
    * This constructor is called by the log manager to create the file. A writer is created at the
    * same time, and its presence indicates that the file is open for writing.
    *
@@ -186,7 +186,7 @@ public class HALogFile {
     if (log.isInfoEnabled()) log.info("Opening HALogFile: " + m_haLogFile.getAbsolutePath());
   }
 
-  /**
+  /*
    * This constructor creates a read only view of the log file and can be used independently of the
    * HALogManager.
    *
@@ -212,7 +212,7 @@ public class HALogFile {
     m_channel = m_raf.getChannel();
 
     try {
-      /**
+      /*
        * Must determine whether the file has consistent open and committed rootBlocks, using the
        * commitCounter to determine which rootBlock is which.
        *
@@ -227,8 +227,8 @@ public class HALogFile {
        */
       m_raf.seek(0L);
       try {
-        /*
-         * Note: this next line will throw IOException if there is a
+      /*
+       * Note: this next line will throw IOException if there is a
          * file lock contention.
          */
         m_magic = m_raf.readInt();
@@ -259,8 +259,8 @@ public class HALogFile {
       final long cc1 = m_closeRootBlock.getCommitCounter();
 
       if ((cc0 + 1) != cc1 && (cc0 != cc1)) {
-        /*
-         * Counters are inconsistent with either an empty log file or a
+      /*
+       * Counters are inconsistent with either an empty log file or a
          * single transaction scope.
          */
         throw new IllegalStateException("Incompatible rootblocks: cc0=" + cc0 + ", cc1=" + cc1);
@@ -282,7 +282,7 @@ public class HALogFile {
     }
   }
 
-  /**
+  /*
    * Private method called by the HALogWriter to write a new message
    *
    * @param msg
@@ -330,8 +330,8 @@ public class HALogFile {
       switch (m_openRootBlock.getStoreType()) {
         case RW:
           {
-            /*
-             * Write the WriteCache block on the channel.
+          /*
+       * Write the WriteCache block on the channel.
              */
             final int nbytes = msg.getSize();
             assert data.position() == 0;
@@ -343,8 +343,8 @@ public class HALogFile {
           }
         case WORM:
           {
-            /*
-             * We will use the HA failover read API to recover the block
+          /*
+       * We will use the HA failover read API to recover the block
              * from a node in the quorum when we need to replay the HA log.
              */
             break;
@@ -362,7 +362,7 @@ public class HALogFile {
     }
   }
 
-  /**
+  /*
    * Utility to return a ByteBuffer containing the external version of the object.
    *
    * @return The {@link ByteBuffer}. The position will be zero. The limit will be the #of bytes in
@@ -374,7 +374,7 @@ public class HALogFile {
     return ByteBuffer.wrap(SerializerUtil.serialize(obj));
   }
 
-  /**
+  /*
    * Attempts to close the file; will only succeed if there are no readers and writers.
    *
    * @throws IOException
@@ -386,7 +386,7 @@ public class HALogFile {
     }
   }
 
-  /**
+  /*
    * Requests that the underlying log file is deleted.
    *
    * @throws IOException
@@ -421,7 +421,7 @@ public class HALogFile {
     return m_writer != null && m_writer.isOpen() ? m_writer : null;
   }
 
-  /**
+  /*
    * @return a new reader for the file
    * @throws IOException
    */
@@ -429,7 +429,7 @@ public class HALogFile {
     return new HALogReader();
   }
 
-  /**
+  /*
    * Called by the HALogWriter to close the log file with the committing rootblock.
    *
    * @param rbv
@@ -465,7 +465,7 @@ public class HALogFile {
     if (log.isDebugEnabled()) log.debug("wrote root block: " + rootBlock);
   }
 
-  /**
+  /*
    * The {@link IRootBlockView} for the committed state BEFORE the write set contained in the HA log
    * file.
    */
@@ -474,7 +474,7 @@ public class HALogFile {
     return m_openRootBlock;
   }
 
-  /**
+  /*
    * The {@link IRootBlockView} for the committed state AFTER the write set contained in the HA log
    * file.
    *
@@ -549,8 +549,8 @@ public class HALogFile {
           }
         case WORM:
           {
-            /*
-             * Note: The WriteCache block needs to be recovered from the
+          /*
+       * Note: The WriteCache block needs to be recovered from the
              * WORMStrategy by the caller. The clientBuffer, if supplied, is
              * ignored and untouched.
              *
@@ -570,7 +570,7 @@ public class HALogFile {
     }
   }
 
-  /**
+  /*
    * Called from the LogManager to disable the current log file for writing.
    *
    * <p>We need not worry about concurrent access to the writer since another threads access to the
@@ -585,7 +585,7 @@ public class HALogFile {
     m_writer.close();
   }
 
-  /**
+  /*
    * Return the local name of the HA Log file associated with the commitCounter.
    *
    * @param commitCounter
@@ -662,8 +662,8 @@ public class HALogFile {
       if (!isOpen()) throw new IOException("Closed: " + HALogFile.this);
     }
 
-    //		/**
-    //		 * The {@link IRootBlockView} for the committed state BEFORE the write
+    //		/*
+//		 * The {@link IRootBlockView} for the committed state BEFORE the write
     //		 * set contained in the HA log file.
     //		 */
     //		public HALogFile getHALogFile() {
@@ -896,7 +896,7 @@ public class HALogFile {
     }
   }
 
-  /**
+  /*
    * To support streaming protocols, this simple InputStream extension provides a thread-local
    * management of the read position, asserting the single thread assumption rather than providing a
    * locking strategy.
@@ -949,7 +949,7 @@ public class HALogFile {
       return m_position;
     }
 
-    /**
+    /*
      * Simulates the normal InputStream request, returning -1 if EOF and only asking for as much as
      * can be read - do not try to read past EOF.
      *

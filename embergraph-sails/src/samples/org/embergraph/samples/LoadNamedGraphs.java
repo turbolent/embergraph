@@ -46,8 +46,8 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Sample code for loading RDF data using the {@link EmbergraphSail} and the openrdf API.
+/*
+* Sample code for loading RDF data using the {@link EmbergraphSail} and the openrdf API.
  *
  * @see DataLoader
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -55,7 +55,7 @@ import org.openrdf.rio.RDFFormat;
  */
 public class LoadNamedGraphs extends SampleCode {
 
-  /**
+  /*
    * Load all data from some directory.
    *
    * @param dir
@@ -184,8 +184,8 @@ public class LoadNamedGraphs extends SampleCode {
 
                 cxn.add(reader, baseIRI, RDFFormat.forFileName(f.getName()));
 
-                /*
-                 * Note: due to buffering, this reports stmts flushed to
+              /*
+       * Note: due to buffering, this reports stmts flushed to
                  * the db not stmts added to the cxn.
                  *
                  * Note: cxn.size() will do a FULL SCAN of the statement
@@ -306,7 +306,7 @@ public class LoadNamedGraphs extends SampleCode {
     System.err.println(sb.toString());
   }
 
-  /**
+  /*
    * Loads a bunch of data from a file, zip file, or directory (non-recursive). You can use <code>
    * quad.properties</code> as the properties file or anything else that you like.
    *

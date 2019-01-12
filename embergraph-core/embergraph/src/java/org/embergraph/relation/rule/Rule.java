@@ -33,8 +33,8 @@ import org.embergraph.bop.bindingSet.EmptyBindingSet;
 import org.embergraph.relation.rule.eval.ActionEnum;
 import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 
-/**
- * Default impl.
+/*
+* Default impl.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -50,7 +50,7 @@ public class Rule<E> implements IRule<E> {
 
   protected static final transient boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Singleton factory for {@link Var}s (delegates to {@link Var#var(String)}).
    *
    * @see Var#var(String)
@@ -75,8 +75,8 @@ public class Rule<E> implements IRule<E> {
   /** The body of the rule -or- <code>null</code> if the body of the rule is empty. */
   private final IPredicate[] tail;
 
-  //    /**
-  //     * <code>true</code> iff a DISTINCT constraint will be imposed when the
+  //    /*
+//     * <code>true</code> iff a DISTINCT constraint will be imposed when the
   //     * rule is evaluated as a query.
   //     */
   //    final private boolean distinct;
@@ -96,7 +96,7 @@ public class Rule<E> implements IRule<E> {
   /** The set of distinct variables declared by the rule. */
   private final Set<IVariable> vars;
 
-  /**
+  /*
    * The set of distinct required variables declared by the rule. These are used in the projection
    * (select or construct) and for aggregation, and thus can never be dropped from the binding sets.
    */
@@ -228,7 +228,7 @@ public class Rule<E> implements IRule<E> {
     return sb.toString();
   }
 
-  /**
+  /*
    * Rule ctor.
    *
    * @param name A label for the rule.
@@ -262,7 +262,7 @@ public class Rule<E> implements IRule<E> {
         null /* taskFactory */);
   }
 
-  /**
+  /*
    * Rule ctor.
    *
    * @param name A label for the rule.
@@ -323,7 +323,7 @@ public class Rule<E> implements IRule<E> {
         null /* requiredVars */);
   }
 
-  /**
+  /*
    * Fully specified ctor.
    *
    * @param name The name of the rule.
@@ -421,7 +421,7 @@ public class Rule<E> implements IRule<E> {
 
         if (t.isVar()) {
 
-          if (!vars.contains((IVariable) t)) {
+          if (!vars.contains(t)) {
 
             throw new IllegalArgumentException("Variable not declared in the tail: " + t);
           }
@@ -559,7 +559,7 @@ public class Rule<E> implements IRule<E> {
     return getSharedVars(tail[index1], tail[index2]);
   }
 
-  /**
+  /*
    * Return the variables in common for two {@link IPredicate}s.
    *
    * @param p1 A predicate.

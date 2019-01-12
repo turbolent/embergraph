@@ -26,8 +26,8 @@ import org.apache.log4j.Level;
 import org.embergraph.btree.keys.NoSuccessorException;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
-/**
- * Test suite for the {@link ILinearList} access methods.
+/*
+* Test suite for the {@link ILinearList} access methods.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -307,7 +307,7 @@ public class TestLinearListMethods extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Tests on a tree of height (2).
    *
    * @see src/architecture/btree.xls for the example used in this test.

@@ -27,8 +27,8 @@ import java.util.UUID;
 import junit.framework.TestCase;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for {@link DTE}
+/*
+* Test suite for {@link DTE}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -43,7 +43,7 @@ public class TestDTE extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for {@link DTE} verifies that the correspondence between the enumerated types and the
    * internal values is correct.
    */

@@ -27,8 +27,8 @@ import cern.colt.GenericSorting;
 import cern.colt.Swapper;
 import cern.colt.function.IntComparator;
 
-/**
- * Utility for merge sort of chunks. Merge sorts are used when two or more ordered chunks have been
+/*
+* Utility for merge sort of chunks. Merge sorts are used when two or more ordered chunks have been
  * combined into a single chunk. Since the source chunks were already ordered, the merge sort is
  * less expensive than performing a full sort on the combined chunk.
  *
@@ -37,7 +37,7 @@ import cern.colt.function.IntComparator;
  */
 public class ChunkMergeSortHelper {
 
-  /**
+  /*
    * In place merge sort.
    *
    * @param <E> The generic type of the elements in the chunk.
@@ -53,12 +53,12 @@ public class ChunkMergeSortHelper {
         0, // fromIndex
         chunk.length, // toIndex
         new MyIntComparator((Comparable[]) chunk),
-        new MySwapper((Object[]) chunk));
+        new MySwapper(chunk));
 
     return;
   }
 
-  /**
+  /*
    * Implementation for data in an array whose element type implements {@link Comparable}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -81,7 +81,7 @@ public class ChunkMergeSortHelper {
     }
   }
 
-  /**
+  /*
    * Implementation swaps object references in an array.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

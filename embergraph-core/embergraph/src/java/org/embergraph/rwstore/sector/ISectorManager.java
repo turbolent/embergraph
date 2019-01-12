@@ -18,8 +18,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rwstore.sector;
 
-/**
- * The {@link ISectorManager} defines the contract required to manage a set of {@link
+/*
+* The {@link ISectorManager} defines the contract required to manage a set of {@link
  * SectorAllocator}s.
  *
  * <p>The {@link ISectorManager} is passed to the {@link SectorAllocator} constructors and they will
@@ -29,7 +29,7 @@ package org.embergraph.rwstore.sector;
  */
 public interface ISectorManager {
 
-  /**
+  /*
    * This request is made when the sectorAllocator no longer has a full set of block allocations
    * available.
    *
@@ -40,7 +40,7 @@ public interface ISectorManager {
    */
   void removeFromFreeList(SectorAllocator sectorAllocator);
 
-  /**
+  /*
    * When sufficient allocations have been freed for recycling that a threshold of availability of
    * reached for all block sizes, then the allocator calls back to the SectorManager to signal it is
    * available to be returned to the free list.
@@ -49,7 +49,7 @@ public interface ISectorManager {
    */
   void addToFreeList(SectorAllocator sectorAllocator);
 
-  /**
+  /*
    * When a sector is first created, it will remain at the head of the free list until one of two
    * conditions has been reached:
    *

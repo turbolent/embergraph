@@ -29,8 +29,8 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.lang.MutableString;
 import java.io.Serializable;
 
-/**
- * An abstract implementation of a prefix map.
+/*
+* An abstract implementation of a prefix map.
  *
  * <p>This class provides the full serives of a {@link PrefixMap} by implementing just {@link
  * #getInterval(CharSequence)} and {@link #getTerm(int, MutableString)}
@@ -46,14 +46,14 @@ public abstract class AbstractPrefixMap extends AbstractObject2LongFunction<Char
   {
     defaultReturnValue(-1);
   }
-  /**
+  /*
    * Returns the range of strings having a given prefix.
    *
    * @param prefix a prefix.
    * @return the corresponding range of strings as an interval.
    */
   protected abstract Interval getInterval(CharSequence prefix);
-  /**
+  /*
    * Writes a string specified by index into a {@link MutableString}.
    *
    * @param index the index of a string.

@@ -27,13 +27,13 @@ import java.util.Map;
 import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.util.NV;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class BasicExperimentConditions extends ExperimentDriver {
 
-  /**
+  /*
    * Sets up a series of {@link Condition}s based on the use of different {@link BufferMode}s and
    * also sets up {@link Condition}s for {@link BufferMode}s that are backed by disk where {@link
    * Options#FORCE_ON_COMMIT} is set to {@link ForceEnum#No}

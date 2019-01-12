@@ -3,8 +3,8 @@ package org.embergraph.btree.isolation;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
 
-/**
- * Does not resolve any conflicts.
+/*
+* Does not resolve any conflicts.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

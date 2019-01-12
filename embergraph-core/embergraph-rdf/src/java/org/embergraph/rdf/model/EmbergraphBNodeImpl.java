@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -48,8 +48,8 @@ import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.BNode;
 
-/**
- * A blank node. Use {@link EmbergraphValueFactory} to create instances of this class.
+/*
+* A blank node. Use {@link EmbergraphValueFactory} to create instances of this class.
  *
  * <p>Note: When {@link AbstractTripleStore.Options#STATEMENT_IDENTIFIERS} is enabled blank nodes in
  * the context position of a statement are recognized as statement identifiers by {@link
@@ -67,7 +67,7 @@ public class EmbergraphBNodeImpl extends EmbergraphResourceImpl implements Ember
 
   private final String id;
 
-  /**
+  /*
    * Boolean flag is set during conversion from an RDF interchange syntax into the internal {@link
    * SPO} model if the blank node is a statement identifier.
    */
@@ -209,7 +209,7 @@ public class EmbergraphBNodeImpl extends EmbergraphResourceImpl implements Ember
    * 6/1/2012.
    */
 
-  /**
+  /*
    * Marks this as a blank node which models the specified statement.
    *
    * @param sid The statement.

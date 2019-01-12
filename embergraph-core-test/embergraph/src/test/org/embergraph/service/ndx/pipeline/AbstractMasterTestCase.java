@@ -38,8 +38,8 @@ import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * Abstract base class for test suites for the {@link AbstractMasterTask} and friends.
+/*
+* Abstract base class for test suites for the {@link AbstractMasterTask} and friends.
  *
  * <p>Note: There are a bunch of inner classes which have the same names as the generic types used
  * by the master and subtask classes. This makes it much easier to instantiate these things since
@@ -58,7 +58,7 @@ public class AbstractMasterTestCase extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * The locator is a simple integer - you can think of this as being similar to the index partition
    * identifier. Since the unit tests are not concerned with the real indices we do not need to
    * differentiate between indices, just their partitions.
@@ -110,7 +110,7 @@ public class AbstractMasterTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Concrete master impl w/o generic types.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -150,7 +150,7 @@ public class AbstractMasterTestCase extends TestCase2 {
       return new S(this, locator, out);
     }
 
-    /**
+    /*
      * Hash partitions the elements in the chunk using the hash of the key into a fixed population
      * of N partitions.
      */
@@ -193,7 +193,7 @@ public class AbstractMasterTestCase extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * A map used by {@link #keyRangePartition(KVO[], boolean)}. If there is an entry in the map
      * corresponding to the integer value of the first byte of the key (which is interpreted as the
      * partition locator) then the value stored under that entry is the integer value for the
@@ -204,7 +204,7 @@ public class AbstractMasterTestCase extends TestCase2 {
     protected final ConcurrentHashMap<Integer, Integer> redirects =
         new ConcurrentHashMap<Integer, Integer>();
 
-    /**
+    /*
      * Assigns elements from an ordered chunk to key-range partitions by interpreting the first byte
      * of the key as the partition identifier (does not work if the key is empty).
      */
@@ -261,7 +261,7 @@ public class AbstractMasterTestCase extends TestCase2 {
       addToOutputBuffer(new L(1), chunk, 0, chunk.length, reopen);
     }
 
-    /**
+    /*
      * This applies {@link #keyRangePartition(KVO[])} to map the chunk across the output buffers for
      * the subtasks.
      */
@@ -297,7 +297,7 @@ public class AbstractMasterTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Concrete subtask impl w/o generic types.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -310,7 +310,7 @@ public class AbstractMasterTestCase extends TestCase2 {
       super(master, locator, buffer);
     }
 
-    /**
+    /*
      * This method may be overridden to simulate the latency of the write operation. The default is
      * a NOP.
      */
@@ -362,7 +362,7 @@ public class AbstractMasterTestCase extends TestCase2 {
     executorService.shutdownNow();
   }
 
-  /**
+  /*
    * Sleep up to the timeout or until the chunksOut takes on the specified value.
    *
    * @param master

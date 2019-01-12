@@ -57,8 +57,8 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Optimizes <code>SELECT (DISTINCT|REDUCED) ?property WHERE { ?x ?property ?y . }</code> and
+/*
+* Optimizes <code>SELECT (DISTINCT|REDUCED) ?property WHERE { ?x ?property ?y . }</code> and
  * similar patterns using an O(N) algorithm, where N is the number of distinct solutions.
  *
  * <p>The main advantage here is to turn an access path that is fully unbound into a distinct-term
@@ -94,8 +94,8 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
     if (context.getAbstractTripleStore().isQuads()) {
       boolean ok = false;
       if (dataset == null || dataset.getNamedGraphs() == null) {
-        /*
-         * The dataset is all graphs.
+      /*
+       * The dataset is all graphs.
          */
         ok = true;
       }
@@ -139,7 +139,7 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
 
     for (int i = 0; i < arity; i++) {
 
-      final BOp child = (BOp) group.get(i);
+      final BOp child = group.get(i);
 
       if (child instanceof GraphPatternGroup<?>) {
 
@@ -163,7 +163,7 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Attempt to rewrite the SELECT.
    *
    * @param context
@@ -321,7 +321,7 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
     sp.setDistinctTermScanVar(distinctTermScanVar);
     sp.setQueryHint(IPredicate.Annotations.KEY_ORDER, keyOrder.toString());
 
-    /**
+    /*
      * Change the estimated cardinality.
      *
      * <p>The new cardinality is:
@@ -343,7 +343,7 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
     sp.setProperty(AST2BOpBase.Annotations.ESTIMATED_CARDINALITY, newCard);
   }
 
-  /**
+  /*
    * Computes an applicable key order for performing a distinct range term scan, if exists. Such a
    * key order must be formed out of a prefix [ConstList + DistinctVar], where ConstList is the list
    * of constants in the triple pattern.
@@ -375,7 +375,7 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Return all candidate key orders. Candidate key orders must satisfy the condition that the
    * constants in the triple pattern form a prefix, followed by the term scan variable in the
    * position right behind the constant positions.
@@ -389,7 +389,7 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
   private Set<SPOKeyOrder> getCandidateKeyOrders(
       StatementPatternNode sp, IVariable<?> termScanVar, AST2BOpContext context, boolean isQuads) {
 
-    /**
+    /*
      * Constraints on the positions are as follows:
      *
      * <p>2 - constant 1 - the distinct term scan var 0 - unconstrained
@@ -423,7 +423,7 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * There's some bug if all but one of the positions are constrained, we do *not* want to apply
      * the optimization in that case (though it should be possible). For now, the fix is to not
      * optimize, while in future we may want to address the root cause of the issue.
@@ -461,7 +461,7 @@ public class ASTDistinctTermScanOptimizer implements IASTOptimizer {
     return allPossiblePrefixes;
   }
 
-  /**
+  /*
    * Returns a constraint ID defined as follows:
    *
    * <p>2 - constant 1 - the distinct term scan var 0 - unconstrained

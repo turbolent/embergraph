@@ -13,8 +13,8 @@ import org.embergraph.service.EventReceiver;
 import org.embergraph.service.IEventReportingService;
 import org.embergraph.service.IService;
 
-/**
- * A dummy implementation of the {@link IEventReportingService} interface, used for testing the HTTP
+/*
+* A dummy implementation of the {@link IEventReportingService} interface, used for testing the HTTP
  * telemtry service.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
@@ -28,7 +28,7 @@ public class DummyEventReportingService extends EventReceiver implements IServic
     super(Long.MAX_VALUE /* eventHistoryMillis */, EventBTree.createTransient());
   }
 
-  /**
+  /*
    * Parse a CSV file into a LinkedHashMap of events. The CSV file is assumed to be tab-delimited,
    * have one event per row, and follow the schema implied by {@link Event#getHeader()}.
    *

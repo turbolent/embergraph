@@ -27,8 +27,8 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * This class demonstrates concurrent reading and writing with the U10 data set on the scale-out
+/*
+* This class demonstrates concurrent reading and writing with the U10 data set on the scale-out
  * architecture. One thread writes the U10 data files, doing a commit after every file (this is not
  * the fastest way to perform load, as it simulates incremental updates vs bulk load). Another
  * thread asks for the number of "FullProfessors" every three seconds. You can watch the number of
@@ -47,7 +47,7 @@ public class ScaleOut {
   private static final String query =
       "select ?x where { ?x <" + RDF.TYPE + "> <" + LUBM.FULL_PROFESSOR + "> . }";
 
-  /**
+  /*
    * Manage the control flow of the program. Open a proxy to the federation, kick off the writer,
    * kick off the reader, wait for the writer to complete, kill the reader, wait for the reader to
    * complete, shutdown the federation.
@@ -101,7 +101,7 @@ public class ScaleOut {
     }
   }
 
-  /**
+  /*
    * Create our triple store instance if it doesn't exist.
    *
    * @param fed the jini federation
@@ -131,7 +131,7 @@ public class ScaleOut {
     return tripleStore;
   }
 
-  /**
+  /*
    * Lookup the triple store instance using the specified timestamp. Pass in ITx.UNISOLATED for the
    * writable instance (not safe for concurrent readers), otherwise use a transaction id or
    * timestamp for a historical view. This is demonstrated below.
@@ -218,7 +218,7 @@ public class ScaleOut {
     /** The jini federation. */
     private JiniFederation fed;
 
-    /**
+    /*
      * Construct the writer task.
      *
      * @param fed the jini federation
@@ -228,7 +228,7 @@ public class ScaleOut {
       this.fed = fed;
     }
 
-    /**
+    /*
      * Opens the triple store and writes the LUBM ontology and U10 data files. Does a commit after
      * every file, which is not the most efficient way to bulk load, but simulates incremental
      * updates.
@@ -257,7 +257,7 @@ public class ScaleOut {
       }
     }
 
-    /**
+    /*
      * Load the LUBM ontology and U10 data into a Sesame Repository.
      *
      * @param repo the sesame repository
@@ -330,7 +330,7 @@ public class ScaleOut {
     }
   }
 
-  /**
+  /*
    * A reader task to issue concurrent queries. Asks for the # of full professors every three
    * seconds.
    */
@@ -342,7 +342,7 @@ public class ScaleOut {
     /** Allows the reader to be stopped gracefully. */
     private volatile boolean kill = false;
 
-    /**
+    /*
      * Create the reader.
      *
      * @param fed the jini federation
@@ -358,7 +358,7 @@ public class ScaleOut {
       this.kill = true;
     }
 
-    /**
+    /*
      * Opens a read-committed view of the triple store using the last commit point and issues a
      * query for a list of all LUBM full professors. Does this every three seconds until killed.
      */
@@ -379,7 +379,7 @@ public class ScaleOut {
       }
     }
 
-    /**
+    /*
      * Issue the query.
      *
      * @throws Exception

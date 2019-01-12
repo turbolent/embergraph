@@ -60,8 +60,8 @@ import org.embergraph.counters.render.XHTMLRenderer;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpJoins;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Class defines the log on which summary operator execution statistics are written.
+/*
+* Class defines the log on which summary operator execution statistics are written.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -89,13 +89,13 @@ public class QueryLog {
     if (log.isInfoEnabled()) log.info(QueryLog.getTableHeader());
   }
 
-  //    /**
-  //     * A single buffer is reused to keep down the heap churn.
+  //    /*
+//     * A single buffer is reused to keep down the heap churn.
   //     */
   //    final private static StringBuilder sb = new StringBuilder(
   //            Bytes.kilobyte32 * 4);
 
-  /**
+  /*
    * Log rule execution statistics @ INFO.
    *
    * @param q The running query.
@@ -109,7 +109,7 @@ public class QueryLog {
       final IRunningQuery[] children =
           (q instanceof AbstractRunningQuery) ? ((AbstractRunningQuery) q).getChildren() : null;
 
-      /**
+      /*
        * Note: The static StringBuilder can not be used if the parent query has child subqueries
        * without running into a deadlock on the [sb] object. If there are no children, we could
        * reuse the global static [sb] and the AbstractRunningQuery.lock(). However,
@@ -160,8 +160,8 @@ public class QueryLog {
     }
   }
 
-  //  /**
-  //   * Log the query.
+  //  /*
+//   * Log the query.
   //   *
   //   * @param q
   //   *            The query.
@@ -281,7 +281,7 @@ public class QueryLog {
     return sb.toString();
   }
 
-  /**
+  /*
    * Return a tabular representation of the query {@link RunState}.
    *
    * @param q The {@link IRunningQuery}.
@@ -355,7 +355,7 @@ public class QueryLog {
       sb.append('\t');
       sb.append(bop.getProperty(BOp.Annotations.CONTROLLER, BOp.Annotations.DEFAULT_CONTROLLER));
       sb.append('\t');
-      sb.append(Integer.toString(bopId));
+      sb.append(bopId);
     }
 
     sb.append('\t');
@@ -572,9 +572,9 @@ public class QueryLog {
     sb.append('\t');
     sb.append(stats.opCount.get());
     sb.append('\t');
-    sb.append(Long.toString(numRunning));
+    sb.append(numRunning);
     sb.append('\t');
-    sb.append(Integer.toString(fanOut));
+    sb.append(fanOut);
     {
       final QueueStats tmp = queueStats == null ? null : queueStats.get(bopId);
       if (tmp != null) {
@@ -595,13 +595,13 @@ public class QueryLog {
     sb.append('\t');
     sb.append(stats.unitsIn.get());
     sb.append('\t');
-    sb.append(Double.toString(avg(stats.unitsIn.get(), stats.chunksIn.get())));
+    sb.append(avg(stats.unitsIn.get(), stats.chunksIn.get()));
     sb.append('\t');
     sb.append(stats.chunksOut.get());
     sb.append('\t');
     sb.append(stats.unitsOut.get());
     sb.append('\t');
-    sb.append(Double.toString(avg(stats.unitsOut.get(), stats.chunksOut.get())));
+    sb.append(avg(stats.unitsOut.get(), stats.chunksOut.get()));
     sb.append('\t');
     sb.append(stats.mutationCount.get());
     sb.append('\t');
@@ -634,7 +634,7 @@ public class QueryLog {
     return sb.toString();
   }
 
-  /**
+  /*
    * Format the data as an (X)HTML table. The table will include a header which declares the
    * columns, a detail row for each operator (optional), and a summary row for the query as a whole.
    *
@@ -845,7 +845,7 @@ public class QueryLog {
     w.write("</tr\n>");
   }
 
-  /**
+  /*
    * Write the table rows.
    *
    * @param queryStr The query text (optional).
@@ -896,7 +896,7 @@ public class QueryLog {
     }
   }
 
-  /**
+  /*
    * Return a tabular representation of the query {@link RunState}.
    *
    * @param queryStr The query text (optional).
@@ -1115,8 +1115,8 @@ public class QueryLog {
         w.write(cdata(")"));
       }
       if (bop.getProperty(NamedSetAnnotations.NAMED_SET_REF) != null) {
-        /*
-         * Named Solution Set(s) summary.
+      /*
+       * Named Solution Set(s) summary.
          */
         final Object namedSetRef = bop.getProperty(NamedSetAnnotations.NAMED_SET_REF);
         if (namedSetRef instanceof INamedSolutionSetRef) {
@@ -1447,7 +1447,7 @@ public class QueryLog {
     w.write("</tr\n>");
   }
 
-  /**
+  /*
    * Shows annotations on a {@link BOp}.
    *
    * @param w Where to write the XHTML data.
@@ -1480,7 +1480,7 @@ public class QueryLog {
     }
   }
 
-  /**
+  /*
    * Write a summary row for the query. The table element, header, and footer must be written
    * separately.
    *
@@ -1560,7 +1560,7 @@ public class QueryLog {
   //
   //    }
 
-  /**
+  /*
    * Return <code>x/y</code> unless <code>y:=0</code>, in which case return ZERO (0).
    *
    * @param x The numerator.
@@ -1574,7 +1574,7 @@ public class QueryLog {
     return x / (double) y;
   }
 
-  /**
+  /*
    * Return the {@link IRunningQuery} for that queryId iff it is available.
    *
    * @param q The query that you already have.
@@ -1584,7 +1584,7 @@ public class QueryLog {
   private static IRunningQuery getRunningQuery(final IRunningQuery q, final UUID queryId) {
 
     if (queryId == null) {
-      /**
+      /*
        * @see <a href="https://jira.blazegraph.com/browse/BLZG-1493" > NPE in nested star property
        *     paths </a>. When queryId is null, it refers to the current query.
        */

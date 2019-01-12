@@ -22,8 +22,8 @@ import java.util.Set;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
-/**
- * Contains the projection clause, where clause, and solution modified clauses.
+/*
+* Contains the projection clause, where clause, and solution modified clauses.
  *
  * @see IGroupNode
  * @see ProjectionNode
@@ -49,8 +49,8 @@ public abstract class QueryBase extends QueryNodeBase
     /** The {@link ConstructNode} (optional). */
     String CONSTRUCT = "construct";
 
-    //        /**
-    //         * The {@link ProjectionNode} (optional). This is also used for DESCRIBE
+    //        /*
+//         * The {@link ProjectionNode} (optional). This is also used for DESCRIBE
     //         * queries to capture the list of variables and IRIs which are then used
     //         * to rewrite the DESCRIBE query into what amounts to a CONSTRUCT query.
     //         * The resulting CONSTRUCT query will have a different
@@ -71,7 +71,7 @@ public abstract class QueryBase extends QueryNodeBase
     /** The {@link SliceNode} (optional). */
     String SLICE = "slice";
 
-    /**
+    /*
      * When <code>true</code> inferred statements will not be stripped from the access paths
      * (default {@value #DEFAULT_INCLUDE_INFERRED}).
      */
@@ -109,7 +109,7 @@ public abstract class QueryBase extends QueryNodeBase
     setQueryType(queryType);
   }
 
-  /**
+  /*
    * Return the type of query. This provides access to information which may otherwise be difficult
    * to determine by inspecting the generated AST or query plan.
    */
@@ -130,7 +130,7 @@ public abstract class QueryBase extends QueryNodeBase
     return (ConstructNode) getProperty(Annotations.CONSTRUCT);
   }
 
-  /**
+  /*
    * Set or clear the construction.
    *
    * @param construction The construction (may be <code>null</code>).
@@ -170,7 +170,7 @@ public abstract class QueryBase extends QueryNodeBase
     return vars;
   }
 
-  /**
+  /*
    * Return the set of variables on which the {@link ProjectionNode} for this query depends (this is
    * a NOP if there is no {@link ProjectionNode} for the query, which can happen for an ASK query).
    * This DOES NOT report the variables which are projected OUT of the query, just those used by the
@@ -191,7 +191,7 @@ public abstract class QueryBase extends QueryNodeBase
     return vars;
   }
 
-  /**
+  /*
    * Return the {@link GraphPatternGroup} for the WHERE clause.
    *
    * @return The WHERE clause -or- <code>null</code>.
@@ -226,7 +226,7 @@ public abstract class QueryBase extends QueryNodeBase
     super.setProperty(Annotations.GRAPH_PATTERN, graphPattern);
   }
 
-  /**
+  /*
    * Set the {@link GraphPatternGroup} for the WHERE clause.
    *
    * @param whereClause The "WHERE" clause.
@@ -250,7 +250,7 @@ public abstract class QueryBase extends QueryNodeBase
     return (GroupByNode) getProperty(Annotations.GROUP_BY);
   }
 
-  /**
+  /*
    * Set or clear the {@link GroupByNode}.
    *
    * @param groupBy The new value (may be <code>null</code>).
@@ -266,7 +266,7 @@ public abstract class QueryBase extends QueryNodeBase
     return (HavingNode) getProperty(Annotations.HAVING);
   }
 
-  /**
+  /*
    * Set or clear the {@link HavingNode}.
    *
    * @param having The new value (may be <code>null</code>).
@@ -282,7 +282,7 @@ public abstract class QueryBase extends QueryNodeBase
     return (SliceNode) getProperty(Annotations.SLICE);
   }
 
-  /**
+  /*
    * Set or clear the slice.
    *
    * @param slice The slice (may be <code>null</code>).
@@ -292,7 +292,7 @@ public abstract class QueryBase extends QueryNodeBase
     setProperty(Annotations.SLICE, slice);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff there is a {@link SliceNode} and either the LIMIT and/or OFFSET
    * has been specified with a non-default value.
    */
@@ -304,10 +304,9 @@ public abstract class QueryBase extends QueryNodeBase
 
     if (slice.getLimit() != SliceNode.Annotations.DEFAULT_LIMIT) return true;
 
-    if (slice.getOffset() != SliceNode.Annotations.DEFAULT_OFFSET) return true;
+    return slice.getOffset() != SliceNode.Annotations.DEFAULT_OFFSET;
 
     // The SLICE does not specify either LIMIT or OFFSET.
-    return false;
   }
 
   /** Return the order by clause -or- <code>null</code> if there is no order by. */
@@ -316,7 +315,7 @@ public abstract class QueryBase extends QueryNodeBase
     return (OrderByNode) getProperty(Annotations.ORDER_BY);
   }
 
-  /**
+  /*
    * Set or clear the {@link OrderByNode}.
    *
    * @param orderBy The order by (may be <code>null</code>).
@@ -341,7 +340,7 @@ public abstract class QueryBase extends QueryNodeBase
     return getProperty(Annotations.TIMEOUT, Annotations.DEFAULT_TIMEOUT);
   }
 
-  /**
+  /*
    * Set the timeout (milliseconds) for the query.
    *
    * @see Annotations#TIMEOUT
@@ -350,7 +349,7 @@ public abstract class QueryBase extends QueryNodeBase
     setProperty(Annotations.TIMEOUT, timeout);
   }
 
-  /**
+  /*
    * Set the BINDINGS.
    *
    * @param bindings

@@ -37,8 +37,8 @@ import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Statement;
 
-/**
- * A interface representing an RDF triple, an RDF triple with a statement identifier, or an RDF
+/*
+* A interface representing an RDF triple, an RDF triple with a statement identifier, or an RDF
  * quad. The slots are 64-bit <code>long</code> term identifiers assigned by a lexicon. The 4th
  * position is either unused (triples), the statement identifier (triples with the provenance mode
  * enabled), or the context/named graph position of a quad. This interface treats all four positions
@@ -69,7 +69,7 @@ public interface ISPO extends IElement, Statement {
   /** The term identifier for the object position (slot 2) -or- {@link #NULL}. */
   IV o();
 
-  /**
+  /*
    * The term identifier for the SID/context position (slot 3) -or- {@link #NULL}. The semantics of
    * the returned value depend on the database mode. For triples, it is unused. For triples+SIDs, it
    * is the statement identifier as assigned by the lexicon. For quads, it is the context (aka named
@@ -80,7 +80,7 @@ public interface ISPO extends IElement, Statement {
    */
   IV c();
 
-  /**
+  /*
    * Return the s,p,o, or c value corresponding to the given index.
    *
    * @param index The legal values are: s=0, p=1, o=2, c=3.
@@ -88,7 +88,7 @@ public interface ISPO extends IElement, Statement {
   @SuppressWarnings("rawtypes")
   IV get(int index);
 
-  /**
+  /*
    * Return true iff all position (s,p,o) are non-{@link #NULL}.
    *
    * <p>Note: {@link SPO}s are sometimes used to represent triple patterns, e.g., in the tail of a
@@ -100,7 +100,7 @@ public interface ISPO extends IElement, Statement {
    */
   boolean isFullyBound();
 
-  /**
+  /*
    * Whether the statement is {@link StatementEnum#Explicit}, {@link StatementEnum#Inferred} or an
    * {@link StatementEnum#Axiom}.
    *
@@ -109,7 +109,7 @@ public interface ISPO extends IElement, Statement {
    */
   StatementEnum getStatementType();
 
-  /**
+  /*
    * Set the statement type for this statement.
    *
    * @param type The statement type.
@@ -119,7 +119,7 @@ public interface ISPO extends IElement, Statement {
    */
   void setStatementType(StatementEnum type);
 
-  /**
+  /*
    * Return <code>true</code> iff the statement type is known. <code>true</code> iff the statement
    * type is known for this statement.
    */
@@ -131,7 +131,7 @@ public interface ISPO extends IElement, Statement {
   /** Return <code>true</code> IFF the {@link SPO} user flag is set */
   boolean getUserFlag();
 
-  /**
+  /*
    * Set {@link SPO} user flag
    *
    * @param userFlag
@@ -144,8 +144,8 @@ public interface ISPO extends IElement, Statement {
   /** Return <code>true</code> IFF the {@link SPO} is marked as {@link StatementEnum#Axiom}. */
   boolean isAxiom();
 
-  //    /**
-  //     * Mark whether or not the {@link SPO} will permit the statement identifier
+  //    /*
+//     * Mark whether or not the {@link SPO} will permit the statement identifier
   //     * to be lazily materialized (default <code>false</code>).
   //     *
   //     * @param sid
@@ -157,7 +157,7 @@ public interface ISPO extends IElement, Statement {
   //     */
   //    void setStatementIdentifier(final boolean sidable);
 
-  /**
+  /*
    * The statement identifier (optional). This has nearly identical semantics to {@link #c()}, but
    * will throw an exception if the 4th position is not bound.
    *
@@ -169,20 +169,20 @@ public interface ISPO extends IElement, Statement {
    */
   IV getStatementIdentifier();
 
-  /**
+  /*
    * <code>true</code> IFF {@link AbstractTripleStore#isStatement(IV)} returns <code>true</code> for
    * {@link #c()}.
    */
   boolean hasStatementIdentifier();
 
-  /**
+  /*
    * Set the override flag.
    *
    * @param override the new value.
    */
-  public void setOverride(boolean override);
+  void setOverride(boolean override);
 
-  /**
+  /*
    * When <code>true</code> the statement will be written onto the database with exactly its current
    * {@link #getStatementType()} (default <code>false</code>).
    *
@@ -192,17 +192,17 @@ public interface ISPO extends IElement, Statement {
    * {@link StatementEnum} in the database without first deleting the statement (which would also
    * delete its justifications).
    */
-  public boolean isOverride();
+  boolean isOverride();
 
-  /**
+  /*
    * Set a transient flag indicating whether or not the persistent state of the statement was
    * modified when it was last written onto the database. Modification can indicate that the
    * statement was inserted, retracted, or had its associated {@link StatementEnum} in the database
    * updated.
    */
-  public void setModified(ModifiedEnum modified);
+  void setModified(ModifiedEnum modified);
 
-  /**
+  /*
    * Return the state of the transient <i>modified</i> flag. This flag indicates whether or not the
    * persistent state of the statement was modified when it was written onto the database.
    * Modification can indicate that the statement was inserted, retracted, or had its associated
@@ -218,14 +218,14 @@ public interface ISPO extends IElement, Statement {
    *     <p>Because this information is set at a low-level it can not currently be used in
    *     combination with truth maintenance mechanisms.
    */
-  public ModifiedEnum getModified();
+  ModifiedEnum getModified();
 
-  public boolean isModified();
+  boolean isModified();
 
-  /**
+  /*
    * Method may be used to externalize the {@link EmbergraphValue}s in the {@link ISPO}.
    *
    * @param db The database whose lexicon will be used.
    */
-  public String toString(IRawTripleStore db);
+  String toString(IRawTripleStore db);
 }

@@ -26,8 +26,8 @@ package org.embergraph.btree;
 import java.io.Serializable;
 import org.embergraph.relation.accesspath.IAccessPath;
 
-/**
- * An interface that is used to generate a bloom filter for an {@link AbstractBTree} and which
+/*
+* An interface that is used to generate a bloom filter for an {@link AbstractBTree} and which
  * allows the caller to specify the expected number of index entries, the desired error rate for the
  * filter at that #of index entries, and the maximum error rate before the bloom filter will be
  * disabled.
@@ -64,13 +64,13 @@ public class BloomFilterFactory implements Serializable {
   /** The desired error rate for the bloom filter at that #of index entries. */
   public final double p;
 
-  /**
+  /*
    * The maximum error rate for the bloom filter (it will be disabled for a {@link BTree} once the
    * bloom filter can be expected to realize this error rate).
    */
   public final double maxP;
 
-  /**
+  /*
    * The maximum #of index entries before the expected performance will be worse than the specified
    * maximum error rate. A {@link BTree} will automatically disable its bloom filter once this many
    * elements have been inserted. In practice, this is only a constraint on scale-up indices. For
@@ -89,7 +89,7 @@ public class BloomFilterFactory implements Serializable {
   /** The default maximum error rate {@value #DEFAULT_MAX_ERROR_RATE}. */
   public static final transient double DEFAULT_MAX_ERROR_RATE = 0.15;
 
-  /**
+  /*
    * The recommenced default factory configuration. This configuration is designed to provide a
    * bloom filter with good performance up to ~2M index entries and then shut off automatically.
    * This works for both the scale-up case (good for small indices and turns off for large indices)
@@ -119,7 +119,7 @@ public class BloomFilterFactory implements Serializable {
   public static final transient BloomFilterFactory DEFAULT =
       new BloomFilterFactory(DEFAULT_N, DEFAULT_ERROR_RATE, DEFAULT_MAX_ERROR_RATE);
 
-  /**
+  /*
    * Configuration with the caller specified #of index entries and having a target error rate of
    * {@value #DEFAULT_ERROR_RATE} and a maximum error rate of {@value #DEFAULT_MAX_ERROR_RATE}.
    *
@@ -132,7 +132,7 @@ public class BloomFilterFactory implements Serializable {
     this(n, DEFAULT_ERROR_RATE, DEFAULT_MAX_ERROR_RATE);
   }
 
-  /**
+  /*
    * Core impl.
    *
    * @param n The expected #of index entries (this value is ignored for {@link IndexSegment}s).
@@ -172,7 +172,7 @@ public class BloomFilterFactory implements Serializable {
     this.maxN = BloomFilter.getEntryCountForErrorRate(k, m, maxP);
   }
 
-  /**
+  /*
    * Create and return a new (empty) bloom filter for a {@link BTree} or {@link IndexSegment}.
    *
    * <p>The bloom filter can be provisioned with reference to {@link src

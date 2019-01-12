@@ -20,15 +20,15 @@ package org.embergraph.btree;
 import org.embergraph.btree.data.ILeafData;
 import org.embergraph.btree.data.INodeData;
 
-/**
- * Interface for creating nodes or leaves.
+/*
+* Interface for creating nodes or leaves.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface INodeFactory {
 
-  /**
+  /*
    * Create a node.
    *
    * @param btree The owning B+Tree.
@@ -36,9 +36,9 @@ public interface INodeFactory {
    * @param data The node data record.
    * @return A node initialized from those data.
    */
-  public Node allocNode(AbstractBTree btree, long addr, INodeData data);
+  Node allocNode(AbstractBTree btree, long addr, INodeData data);
 
-  /**
+  /*
    * Create a leaf.
    *
    * @param btree The owning B+Tree.
@@ -46,5 +46,5 @@ public interface INodeFactory {
    * @param data The leaf data record.
    * @return A leaf initialized from those data.
    */
-  public Leaf allocLeaf(AbstractBTree btree, long addr, ILeafData data);
+  Leaf allocLeaf(AbstractBTree btree, long addr, ILeafData data);
 }

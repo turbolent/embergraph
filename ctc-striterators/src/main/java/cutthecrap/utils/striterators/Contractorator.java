@@ -17,8 +17,8 @@ package cutthecrap.utils.striterators;
 
 import java.util.Iterator;
 
-/**
- * A Contractorator is the reverse of an Expanderator. A Contractorator takes a source Iterator, and
+/*
+* A Contractorator is the reverse of an Expanderator. A Contractorator takes a source Iterator, and
  * consumes elements from it in batches by passing to the Contractor which returns an object when
  * ready. It is upto the Contractor to handle termination conditions. For example, it might batch
  * consume the objects ten at a time with some summary info, but handle that there may be less than

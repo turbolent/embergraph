@@ -20,8 +20,8 @@ package org.embergraph.io;
 import java.io.File;
 import java.io.FileFilter;
 
-/**
- * Helper class to filter for files with a known basename and extension.
+/*
+* Helper class to filter for files with a known basename and extension.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -59,7 +59,7 @@ public class NameAndExtensionFilter implements FileFilter {
     return basename;
   }
 
-  /**
+  /*
    * Accepts files ending with a <code>.log</code> extension whose name component is shared by the
    * name component found in {@link #getLogBaseName()}.
    */
@@ -71,16 +71,13 @@ public class NameAndExtensionFilter implements FileFilter {
 
     if (ext.length() == 0 || actualName.endsWith(ext)) {
 
-      if (actualName.startsWith(expectedName)) {
-
-        return true;
-      }
+      return actualName.startsWith(expectedName);
     }
 
     return false;
   }
 
-  /**
+  /*
    * Return any existing log files within the directory identified by {@link #getBaseName()}. If the
    * basename names a directory, then all files in that directory are scanned. Otherwise the parent
    * directory which would contain any file created using basename is scanned.

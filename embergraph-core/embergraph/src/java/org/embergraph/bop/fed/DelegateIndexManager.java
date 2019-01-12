@@ -41,8 +41,8 @@ import org.embergraph.service.DataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * The index view that we need for the {@link DistributedJoinTask} is on the {@link IndexManager}
+/*
+* The index view that we need for the {@link DistributedJoinTask} is on the {@link IndexManager}
  * class, not the live {@link ManagedJournal}. Looking on the live journal we will only see the
  * mutable {@link BTree} and not the entire index partition view. However, {@link IndexManager} does
  * not implement {@link IIndexManager} or even {@link IIndexStore}. Therefore this class was
@@ -70,7 +70,7 @@ class DelegateIndexManager implements IIndexManager {
     this.dataService = dataService;
   }
 
-  /**
+  /*
    * Delegates to the {@link IndexManager}.
    *
    * <p>{@inheritDoc}
@@ -81,7 +81,7 @@ class DelegateIndexManager implements IIndexManager {
     return dataService.getResourceManager().getIndex(name, timestamp);
   }
 
-  /**
+  /*
    * Not allowed.
    *
    * <p>{@inheritDoc}
@@ -191,7 +191,7 @@ class DelegateIndexManager implements IIndexManager {
     return super.toString() + "{dataServiceUUID=" + dataService.getServiceUUID() + "}";
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO Implement. Probably delegate to the local DS n2a index so this does a DS local n2a

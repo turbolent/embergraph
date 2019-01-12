@@ -28,8 +28,8 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.filter.ITupleFilter;
 import org.embergraph.btree.filter.TupleFilter;
 
-/**
- * Align the predicate's {@link IElementFilter} constraint with {@link ITupleFilter} so that the
+/*
+* Align the predicate's {@link IElementFilter} constraint with {@link ITupleFilter} so that the
  * {@link IElementFilter} can be evaluated close to the data by an {@link ITupleIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -42,7 +42,7 @@ public class ElementFilter<R> extends TupleFilter<R> {
 
   private final IElementFilter<R> test;
 
-  /**
+  /*
    * Helper method conditionally wraps the <i>test</i>.
    *
    * @param <R>
@@ -56,7 +56,7 @@ public class ElementFilter<R> extends TupleFilter<R> {
     return new ElementFilter<R>(test);
   }
 
-  /**
+  /*
    * Helper method conditionally wraps the <i>test</i>.
    *
    * @param <R>
@@ -109,12 +109,12 @@ public class ElementFilter<R> extends TupleFilter<R> {
   @Override
   public boolean isValid(final ITuple<R> tuple) {
 
-    final R obj = (R) tuple.getObject();
+    final R obj = tuple.getObject();
 
     return test.isValid(obj);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Extended to show a human readable representation of the test.

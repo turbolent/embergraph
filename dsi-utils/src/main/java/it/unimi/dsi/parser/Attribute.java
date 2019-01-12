@@ -29,7 +29,7 @@ public final class Attribute {
   /** The name of this attribute. */
   public final CharSequence name;
 
-  /**
+  /*
    * Creates a new attribute with given name.
    *
    * @param name the name of the new attribute.
@@ -38,7 +38,7 @@ public final class Attribute {
     this.name = new MutableString(name);
   }
 
-  /**
+  /*
    * Returns the name of this attribute.
    *
    * @return the name of this attribute.

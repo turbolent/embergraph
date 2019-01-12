@@ -40,8 +40,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.util.Bytes;
 
-/**
- * This class implements a variant of a B+Tree in which all values are stored in leaves, but the
+/*
+* This class implements a variant of a B+Tree in which all values are stored in leaves, but the
  * leaves are not connected with prior-next links. This constraint arises from the requirement to
  * support a copy-on-write policy.
  *
@@ -148,7 +148,7 @@ public class BTree extends AbstractBTree
     return store;
   }
 
-  /**
+  /*
    * Returns an {@link ICounter}. The {@link ICounter} is mutable iff the {@link BTree} is mutable.
    * All {@link ICounter}s returned by this method report and increment the same underlying counter.
    *
@@ -175,7 +175,7 @@ public class BTree extends AbstractBTree
     return counter;
   }
 
-  /**
+  /*
    * The constructor sets this field initially based on a {@link Checkpoint} record containing the
    * only address of the {@link IndexMetadata} for the index. Thereafter this reference is
    * maintained as the {@link Checkpoint} record last written by {@link #writeCheckpoint()} or read
@@ -183,14 +183,14 @@ public class BTree extends AbstractBTree
    */
   private Checkpoint checkpoint = null;
 
-  //    /**
-  //     * The root of the btree. This is initially a leaf until the leaf is split,
+  //    /*
+//     * The root of the btree. This is initially a leaf until the leaf is split,
   //     * at which point it is replaced by a node. The root is also replaced each
   //     * time copy-on-write triggers a cascade of updates.
   //     */
   //    protected AbstractNode root;
 
-  /**
+  /*
    * The height of the btree. The height is the #of leaves minus one. A btree with only a root leaf
    * is said to have <code>height := 0</code>. Note that the height only changes when we split the
    * root node.
@@ -206,7 +206,7 @@ public class BTree extends AbstractBTree
   /** The #of entries in the btree. This is zero (0) for a new btree. */
   protected long nentries;
 
-  /**
+  /*
    * The value of the record version number that will be assigned to the next node or leaf written
    * onto the backing store. This number is incremented each time a node or leaf is written onto the
    * backing store. The initial value is ZERO (0). The first value assigned to a node or leaf will
@@ -214,7 +214,7 @@ public class BTree extends AbstractBTree
    */
   protected long recordVersion;
 
-  /**
+  /*
    * The mutable counter exposed by #getCounter()}.
    *
    * <p>Note: This is <code>protected</code> so that it will be visible to {@link Checkpoint} which
@@ -223,14 +223,14 @@ public class BTree extends AbstractBTree
    */
   protected AtomicLong counter;
 
-  /**
+  /*
    * A buffer used to encode a raw record address for a mutable {@link BTree} and otherwise <code>
    * null</code>.
    */
   private final ByteArrayBuffer recordAddrBuf;
 
-  //    /**
-  //     * The last address from which the {@link IndexMetadata} record was read or
+  //    /*
+//     * The last address from which the {@link IndexMetadata} record was read or
   //     * on which it was written.
   //     */
   //    private long lastMetadataAddr;
@@ -249,7 +249,7 @@ public class BTree extends AbstractBTree
   //
   //    }
 
-  /**
+  /*
    * Required constructor form for {@link BTree} and any derived subclasses. This constructor is
    * used both to create a new {@link BTree}, and to load a {@link BTree} from the store using a
    * {@link Checkpoint} record.
@@ -322,7 +322,7 @@ public class BTree extends AbstractBTree
     recordAddrBuf = readOnly ? null : new ByteArrayBuffer(Bytes.SIZEOF_LONG);
   }
 
-  /**
+  /*
    * Encode a raw record address into a byte[] suitable for storing in the value associated with a
    * tuple and decoding using {@link AbstractBTree#decodeRecordAddr(byte[])}. This method is only
    * supported for a mutable {@link BTree} instance. Per the contract of the mutable {@link BTree},
@@ -336,7 +336,7 @@ public class BTree extends AbstractBTree
     return AbstractBTree.encodeRecordAddr(recordAddrBuf, addr);
   }
 
-  /**
+  /*
    * Sets the {@link #checkpoint} and initializes the mutable fields from the checkpoint record. In
    * order for this operation to be atomic, the caller must be synchronized on the {@link BTree} or
    * otherwise guaranteed to have exclusive access, e.g., during the ctor or when the {@link BTree}
@@ -359,7 +359,7 @@ public class BTree extends AbstractBTree
     this.recordVersion = checkpoint.getRecordVersion();
   }
 
-  /**
+  /*
    * Creates and sets new root {@link Leaf} on the B+Tree and (re)sets the various counters to be
    * consistent with that root. This is used both by the constructor for a new {@link BTree} and by
    * {@link #removeAll()}.
@@ -436,7 +436,7 @@ public class BTree extends AbstractBTree
     }
   }
 
-  /**
+  /*
    * Lazily reads the bloom filter from the backing store if it exists and is not already in memory.
    */
   @Override
@@ -479,7 +479,7 @@ public class BTree extends AbstractBTree
     return bloomFilter;
   }
 
-  /**
+  /*
    * Read the bloom filter from the backing store using the address stored in the last {@link
    * #checkpoint} record. This method will be invoked by {@link #getBloomFilter()} when the bloom
    * filter reference is <code>null</code> but the bloom filter is known to exist and the bloom
@@ -517,8 +517,8 @@ public class BTree extends AbstractBTree
   //
   //    }
 
-  //    /**
-  //     * Mark the B+Tree as read-only. Once the B+Tree is marked as read-only,
+  //    /*
+//     * Mark the B+Tree as read-only. Once the B+Tree is marked as read-only,
   //     * that instance will remain read-only.
   //     *
   //     * @param readOnly
@@ -580,7 +580,7 @@ public class BTree extends AbstractBTree
     this.lastCommitTime = lastCommitTime;
   }
 
-  /**
+  /*
    * The lastCommitTime of the {@link Checkpoint} record from which the {@link BTree} was loaded.
    *
    * <p>Note: Made volatile on 8/2/2010 since it is not otherwise obvious what would guarantee
@@ -597,7 +597,7 @@ public class BTree extends AbstractBTree
     return listener;
   }
 
-  /**
+  /*
    * Set or clear the listener (there can be only one).
    *
    * @param listener The listener.
@@ -629,7 +629,7 @@ public class BTree extends AbstractBTree
     l.dirtyEvent(this);
   }
 
-  /**
+  /*
    * Flush the nodes of the {@link BTree} to the backing store. After invoking this method the root
    * of the {@link BTree} will be clean.
    *
@@ -656,7 +656,7 @@ public class BTree extends AbstractBTree
     return false;
   }
 
-  /**
+  /*
    * Returns an immutable view of this {@link BTree}. If {@link BTree} is already read-only, then
    * <i>this</i> instance is returned. Otherwise, a read-only {@link BTree} is loaded from the last
    * checkpoint and returned.
@@ -677,8 +677,8 @@ public class BTree extends AbstractBTree
     return BTree.load(store, checkpoint.addrCheckpoint, true /* readOnly */);
   }
 
-  //    /**
-  //     * Converts this {@link BTree} to a read-only {@link BTree}, stealing its
+  //    /*
+//     * Converts this {@link BTree} to a read-only {@link BTree}, stealing its
   //     * cached nodes and leaves. If {@link BTree} is already read-only, then
   //     * <i>this</i> instance is returned. Otherwise, a read-only {@link BTree} is
   //     * loaded from the last checkpoint, populated with new instances of cached
@@ -726,7 +726,7 @@ public class BTree extends AbstractBTree
   //
   //    }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This checkpoint operation {@link #flush()}es dirty nodes, the optional {@link IBloomFilter}
@@ -744,7 +744,7 @@ public class BTree extends AbstractBTree
     return writeCheckpoint2().getCheckpointAddr();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see #load(IRawStore, long, boolean)
@@ -783,7 +783,7 @@ public class BTree extends AbstractBTree
     final Lock lock = writeLock();
     lock.lock();
     try {
-      /**
+      /*
        * Do not permit checkpoint if the index is in an error state.
        *
        * @see <a href="http://trac.blazegraph.com/ticket/1005">Invalidate BTree objects if error
@@ -794,8 +794,8 @@ public class BTree extends AbstractBTree
       if (
       /* autoCommit && */ needsCheckpoint()) {
 
-        /*
-         * Flush the btree, write a checkpoint record, and return the
+      /*
+       * Flush the btree, write a checkpoint record, and return the
          * address of that checkpoint record. The [checkpoint] reference
          * is also updated.
          */
@@ -822,7 +822,7 @@ public class BTree extends AbstractBTree
     }
   }
 
-  /**
+  /*
    * Core implementation invoked by {@link #writeCheckpoint2()} while holding the lock - <strong>DO
    * NOT INVOKE THIS METHOD DIRECTLY</strong>.
    *
@@ -857,8 +857,8 @@ public class BTree extends AbstractBTree
 
       if (filter != null && filter.isDirty() && filter.isEnabled()) {
 
-        /*
-         * The bloom filter is enabled, is loaded and is dirty, so write
+      /*
+       * The bloom filter is enabled, is loaded and is dirty, so write
          * it on the store now.
          *
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/440
@@ -928,7 +928,7 @@ public class BTree extends AbstractBTree
     return checkpoint;
   }
 
-  /**
+  /*
    * Create a {@link Checkpoint} for a {@link BTree}.
    *
    * <p>The caller is responsible for writing the {@link Checkpoint} record onto the store.
@@ -957,7 +957,7 @@ public class BTree extends AbstractBTree
        */
 
       @SuppressWarnings("rawtypes")
-      final Constructor ctor = cl.getConstructor(new Class[] {BTree.class});
+      final Constructor ctor = cl.getConstructor(BTree.class);
 
       final Checkpoint checkpoint = (Checkpoint) ctor.newInstance(new Object[] {this});
 
@@ -995,8 +995,8 @@ public class BTree extends AbstractBTree
     return (root == null ? getCheckpoint().getRootAddr() : root.getIdentity());
   }
 
-  //    /**
-  //     * Return true iff the state of this B+Tree has been modified since the last
+  //    /*
+//     * Return true iff the state of this B+Tree has been modified since the last
   //     * {@link Checkpoint} record associated with the given address.
   //     *
   //     * @param checkpointAddr
@@ -1018,7 +1018,7 @@ public class BTree extends AbstractBTree
   //
   //    }
 
-  /**
+  /*
    * Return true iff changes would be lost unless the B+Tree is flushed to the backing store using
    * {@link #writeCheckpoint()}.
    *
@@ -1086,12 +1086,8 @@ public class BTree extends AbstractBTree
         return true;
       }
 
-      if (checkpoint.getRootAddr() != root.identity) {
-
-        // The root node has a different persistent identity.
-
-        return true;
-      }
+      // The root node has a different persistent identity.
+      return checkpoint.getRootAddr() != root.identity;
     }
 
     /*
@@ -1117,7 +1113,7 @@ public class BTree extends AbstractBTree
 
   }
 
-  /**
+  /*
    * Method updates the index metadata associated with this {@link BTree}. The new metadata record
    * will be written out as part of the next index {@link #writeCheckpoint()}.
    *
@@ -1143,7 +1139,7 @@ public class BTree extends AbstractBTree
     fireDirtyEvent();
   }
 
-  /**
+  /*
    * Handle request for a commit by {@link #writeCheckpoint()}ing dirty nodes and leaves onto the
    * store, writing a new metadata record, and returning the address of that metadata record.
    *
@@ -1169,7 +1165,7 @@ public class BTree extends AbstractBTree
     if (error == null) error = t;
   }
 
-  /**
+  /*
    * Remove all entries in the B+Tree.
    *
    * <p>When delete markers are not enabled this simply replaces the root with a new root leaf and
@@ -1282,7 +1278,7 @@ public class BTree extends AbstractBTree
     }
   }
 
-  /**
+  /*
    * Clears the hard reference cache and replaces the root node with an empty root leaf. This is a
    * low level method.
    */
@@ -1319,7 +1315,7 @@ public class BTree extends AbstractBTree
     newRootLeaf();
   }
 
-  /**
+  /*
    * Create a new checkpoint for a mutable {@link BTree} in which the view is redefined to include
    * the previous view of the {@link BTree} (the one from which this {@link BTree} instance was
    * loaded) plus the current view of the {@link BTree}. The root of the {@link BTree} is replaced
@@ -1438,7 +1434,7 @@ public class BTree extends AbstractBTree
     return priorCommitTime;
   }
 
-  /**
+  /*
    * Create a new {@link BTree} or derived class. This method works by writing the {@link
    * IndexMetadata} record on the store and then loading the {@link BTree} from the {@link
    * IndexMetadata} record.
@@ -1490,7 +1486,7 @@ public class BTree extends AbstractBTree
     return load(store, firstCheckpoint.getCheckpointAddr(), false /* readOnly */);
   }
 
-  /**
+  /*
    * Create a new {@link BTree} or derived class that is fully transient (NO backing {@link
    * IRawStore}).
    *
@@ -1534,7 +1530,7 @@ public class BTree extends AbstractBTree
        */
       final Constructor ctor =
           cl.getConstructor(
-              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
+              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final BTree btree =
           (BTree)
@@ -1557,8 +1553,8 @@ public class BTree extends AbstractBTree
     }
   }
 
-  //    /**
-  //     * Load an instance of a {@link BTree} or derived class from the store. The
+  //    /*
+//     * Load an instance of a {@link BTree} or derived class from the store. The
   //     * {@link BTree} or derived class MUST declare a constructor with the
   //     * following signature: <code>
   //     *
@@ -1587,7 +1583,7 @@ public class BTree extends AbstractBTree
   //
   //    }
 
-  /**
+  /*
    * Load an instance of a {@link BTree} or derived class from the store. The {@link BTree} or
    * derived class MUST declare a constructor with the following signature: <code>
    *
@@ -1662,7 +1658,7 @@ public class BTree extends AbstractBTree
        */
       final Constructor ctor =
           cl.getConstructor(
-              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
+              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final BTree btree =
           (BTree) ctor.newInstance(new Object[] {store, checkpoint, metadata, readOnly});
@@ -1704,7 +1700,7 @@ public class BTree extends AbstractBTree
     }
   }
 
-  /**
+  /*
    * Mutable counter.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1733,8 +1729,8 @@ public class BTree extends AbstractBTree
 
       if (counter == btree.checkpoint.getCounter() + 1) {
 
-        /*
-         * The first time the counter is incremented beyond the value in
+      /*
+       * The first time the counter is incremented beyond the value in
          * the checkpoint record we fire off a dirty event to put the
          * BTree on the commit list.
          */
@@ -1744,8 +1740,8 @@ public class BTree extends AbstractBTree
 
       if (counter == 0L) {
 
-        /*
-         * The counter has wrapped back to ZERO.
+      /*
+       * The counter has wrapped back to ZERO.
          */
 
         throw new RuntimeException("Counter overflow");
@@ -1755,7 +1751,7 @@ public class BTree extends AbstractBTree
     }
   } // class Counter
 
-  /**
+  /*
    * Places the counter values into a namespace formed by the partition identifier. The partition
    * identifier is found in the high int32 word and the counter value from the underlying {@link
    * BTree} is found in the low int32 word.
@@ -1778,7 +1774,7 @@ public class BTree extends AbstractBTree
       this.src = src;
     }
 
-    /**
+    /*
      * Range checks the source counter (it must fit in the lower 32-bit word) and then jambs the
      * partition identifier into the high word.
      *
@@ -1792,8 +1788,8 @@ public class BTree extends AbstractBTree
 
       if (tmp >= MAX_LOCAL_COUNTER) {
 
-        /*
-         * Note: Checkpoint MUST persist the raw counter in scale-out
+      /*
+       * Note: Checkpoint MUST persist the raw counter in scale-out
          * this code will observe the partitionId in the high word and
          * throw an exception. The whole point of this check is to
          * verify that the underlying index local counter has not
@@ -1833,7 +1829,7 @@ public class BTree extends AbstractBTree
       return wrap(src.incrementAndGet());
     }
 
-    /**
+    /*
      * Return the partition identifier from the high word of a partitioned counter.
      *
      * @param v The partitioned counter.
@@ -1844,7 +1840,7 @@ public class BTree extends AbstractBTree
       return (int) (v >>> 32);
     }
 
-    /**
+    /*
      * Return the local counter from the low word of a partitioned counter.
      *
      * @param v The partitioned counter.
@@ -1855,7 +1851,7 @@ public class BTree extends AbstractBTree
       return (int) v;
     }
 
-    /**
+    /*
      * Combines the partition identifier and the local counter using the same logic as the {@link
      * PartitionedCounter}.
      *
@@ -1901,7 +1897,7 @@ public class BTree extends AbstractBTree
     return new LeafCursor(key);
   }
 
-  /**
+  /*
    * A simple stack based on an array used to maintain hard references for the parent {@link Node}s
    * in the {@link LeafCursor}. This class is optimized for light-weight push/pop and copy
    * operations. In particular, the copy operation is used to support atomic state changes for
@@ -1917,7 +1913,7 @@ public class BTree extends AbstractBTree
     /** #of elements in the stack. */
     private int n = 0;
 
-    /**
+    /*
      * Stack with initial capacity of 10.
      *
      * <p>Note: The initial capacity is a relatively small since a B+Tree of depth 10 will have a
@@ -1945,7 +1941,7 @@ public class BTree extends AbstractBTree
       return n;
     }
 
-    /**
+    /*
      * Push an element onto the stack.
      *
      * @param item The element (required).
@@ -1969,7 +1965,7 @@ public class BTree extends AbstractBTree
       a[n++] = item;
     }
 
-    /**
+    /*
      * Pop an element off of the stack.
      *
      * @return The element that was on the top of the stack.
@@ -1991,7 +1987,7 @@ public class BTree extends AbstractBTree
       return item;
     }
 
-    /**
+    /*
      * Return the element on the top of the stack.
      *
      * @throws IllegalStateException if the stack is empty.
@@ -2003,7 +1999,7 @@ public class BTree extends AbstractBTree
       return a[n - 1];
     }
 
-    /**
+    /*
      * Replace the state of this {@link Stack} with the state of the source {@link Stack}.
      *
      * @param src The source {@link Stack}.
@@ -2034,8 +2030,8 @@ public class BTree extends AbstractBTree
 
       while (n > 0) {
 
-        /*
-         * Again, clearing the reference is important since we are
+      /*
+       * Again, clearing the reference is important since we are
          * managing weak reference reachability with this stack.
          */
 
@@ -2044,7 +2040,7 @@ public class BTree extends AbstractBTree
     }
   }
 
-  /**
+  /*
    * A cursor that may be used to traversal {@link Leaf}s.
    *
    * <p>Note: Instances of this class do NOT register an {@link ILeafListener} and therefore do NOT
@@ -2058,7 +2054,7 @@ public class BTree extends AbstractBTree
    */
   public class LeafCursor implements ILeafCursor<Leaf> {
 
-    /**
+    /*
      * A stack containing the ordered ancestors of the current leaf. The root of the B+Tree will
      * always be on the bottom of the stack. Nodes are pushed onto the stack during top-down
      * navigation by the various methods that (re-)locate the current leaf.
@@ -2087,7 +2083,7 @@ public class BTree extends AbstractBTree
      */
     private Stack stack = new Stack();
 
-    /**
+    /*
      * {@link #prior()} and {@link #next()} use this in order to make their operations on the {@link
      * #stack} atomic. If they are unable to find the prior/next leaf (because the cursor is already
      * on the first/last leaf) then they undo their operations on the stack by restoring it from
@@ -2215,7 +2211,7 @@ public class BTree extends AbstractBTree
       return leaf = (Leaf) node;
     }
 
-    /**
+    /*
      * Descend from the root node to the leaf spanning that key. Note that the leaf may not actually
      * contain the key, in which case it is the leaf that contains the insertion point for the key.
      */
@@ -2285,8 +2281,8 @@ public class BTree extends AbstractBTree
 
           if (p == null) {
 
-            /*
-             * No right-sibling (must be the last leaf).
+          /*
+       * No right-sibling (must be the last leaf).
              */
 
             // undo changes to the stack.
@@ -2325,7 +2321,7 @@ public class BTree extends AbstractBTree
       return leaf = (Leaf) sibling;
     }
 
-    /**
+    /*
      * Materialize the prior leaf in the natural order of the index (this is more general than the
      * right sibling which is restricted to leaves that are children of the same direct parent). The
      * algorithm is:
@@ -2370,8 +2366,8 @@ public class BTree extends AbstractBTree
 
           if (p == null) {
 
-            /*
-             * No left-sibling (must be the first leaf).
+          /*
+       * No left-sibling (must be the first leaf).
              */
 
             // undo changes to the stack.

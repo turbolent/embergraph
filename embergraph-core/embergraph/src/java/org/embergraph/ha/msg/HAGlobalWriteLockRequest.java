@@ -20,8 +20,8 @@ package org.embergraph.ha.msg;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see https://sourceforge.net/apps/trac/bigdata/ticket/566 ( Concurrent unisolated operations
  *     against multiple KBs on the same Journal)
  */

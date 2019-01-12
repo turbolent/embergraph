@@ -30,8 +30,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.spo.InGraphBinarySearchFilter;
 import org.embergraph.rdf.spo.InGraphHashSetFilter;
 
-/**
- * Abstract base class for "IN" {@link IConstraint} implementations.
+/*
+* Abstract base class for "IN" {@link IConstraint} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public abstract class INConstraint<T> extends BOpBase implements BooleanValueExp
     /** The variable against which the constraint is applied. */
     String VARIABLE = (INConstraint.class.getName() + ".variable").intern();
 
-    /**
+    /*
      * The set of allowed values for that variable.
      *
      * @todo allow large sets to be specified by reference to a resource which is then materialized
@@ -63,7 +63,7 @@ public abstract class INConstraint<T> extends BOpBase implements BooleanValueExp
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */

@@ -15,8 +15,8 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
 
-/**
- * {@link JoinTask} implementation for a {@link Journal}.
+/*
+* {@link JoinTask} implementation for a {@link Journal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -29,7 +29,7 @@ public class LocalJoinTask extends JoinTask {
   /** <code>null</code> unless this is the last join dimension. */
   private final IBuffer<ISolution[]> solutionBuffer;
 
-  /**
+  /*
    * @param rule
    * @param joinNexusFactory
    * @param order
@@ -128,7 +128,7 @@ public class LocalJoinTask extends JoinTask {
     source.close();
   }
 
-  /**
+  /*
    * Note: The target buffer on which the unsynchronized buffer writes depends on whether or not
    * there is a downstream sink for this {@link LocalJoinTask}. When this is the {@link
    * JoinTask#lastJoin}, the unsynchronized buffer returned by this method will write on the
@@ -163,13 +163,13 @@ public class LocalJoinTask extends JoinTask {
     }
   }
 
-  /**
+  /*
    * The {@link BlockingBuffer} whose queue will be drained by the downstream {@link LocalJoinTask}
    * -or- <code>null</code> IFF [lastJoin == true].
    */
   protected final BlockingBuffer<IBindingSet[]> syncBuffer;
 
-  /**
+  /*
    * The {@link Future} for the sink for this {@link LocalJoinTask} and <code>null</code> iff this
    * is {@link JoinTask#lastJoin}. This field is set by the {@link LocalJoinMasterTask} so it can be
    * <code>null</code> if things error out before it gets set or perhaps if they complete too
@@ -177,7 +177,7 @@ public class LocalJoinTask extends JoinTask {
    */
   private volatile Future<? extends Object> sinkFuture;
 
-  /**
+  /*
    * Set the future for the downstream join dimension on this join task. This MUST be done before
    * you begin to execute the downstream join. The sink future is relied on by {@link
    * #flushAndCloseBuffersAndAwaitSinks()} and {@link #cancelSinks()}, both of which are executed
@@ -222,8 +222,8 @@ public class LocalJoinTask extends JoinTask {
 
       if (joinNexus.getAction().isMutation()) {
 
-        /*
-         * For mutation operations, the solutionBuffer for the last
+      /*
+       * For mutation operations, the solutionBuffer for the last
          * join dimension writes solutions onto the target relation.
          * When that buffer is flushed it returns the #of solutions
          * that resulted in a state change in the target relation.
@@ -279,7 +279,7 @@ public class LocalJoinTask extends JoinTask {
     }
   }
 
-  /**
+  /*
    * Return the next chunk of {@link IBindingSet}s the source {@link JoinTask}.
    *
    * @return The next chunk -or- <code>null</code> iff the source is exhausted.

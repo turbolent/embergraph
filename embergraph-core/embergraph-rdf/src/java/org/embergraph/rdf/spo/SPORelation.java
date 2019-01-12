@@ -103,8 +103,8 @@ import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * The {@link SPORelation} handles all things related to the indices representing the triples stored
+/*
+* The {@link SPORelation} handles all things related to the indices representing the triples stored
  * in the database. Statements are first converted to term identifiers using the {@link
  * LexiconRelation} and then inserted into the statement indices in parallel. There is one statement
  * index for each of the three possible access paths for a triple store. The key is formed from the
@@ -125,7 +125,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
   private final int keyArity;
 
-  /**
+  /*
    * The arity of the key for the statement indices: <code>3</code> is a triple store, with or
    * without statement identifiers; <code>4</code> is a quad store, which does not support statement
    * identifiers as the 4th position of the (s,p,o,c) is interpreted as context and located in the
@@ -136,7 +136,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return keyArity;
   }
 
-  /**
+  /*
    * Hard references for the possible statement indices. The index into the array is {@link
    * SPOKeyOrder#index()}.
    */
@@ -145,7 +145,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   /** Hard reference to the justifications index iff used. */
   private volatile IIndex just;
 
-  /**
+  /*
    * Constant for the {@link SPORelation} namespace component.
    *
    * <p>Note: To obtain the fully qualified name of an index in the {@link SPORelation} you need to
@@ -158,7 +158,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
   private static final transient String NAME_JUST = "JUST";
 
-  /**
+  /*
    * This is used to conditionally enable the logic to retract justifications when the corresponding
    * statements is retracted.
    */
@@ -167,7 +167,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   /** This is used to conditionally disable all but a single statement index (aka access path). */
   public final boolean oneAccessPath;
 
-  /**
+  /*
    * <code>true</code> iff the SPO index will maintain a bloom filter.
    *
    * @see Options#BLOOM_FILTER
@@ -177,13 +177,13 @@ public class SPORelation extends AbstractRelation<ISPO> {
   /** This is used to conditionally index the {@link IChangeLog}. */
   private final boolean historyService;
 
-  /**
+  /*
    * When true, SPOs will never be removed from the indices, only downgraded to {@link
    * StatementEnum#History}.
    */
   private final boolean history;
 
-  /**
+  /*
    * When <code>true</code> the database will support statement identifiers. A statement identifier
    * is a unique 64-bit integer taken from the same space as the term identifiers and which uniquely
    * identifiers a statement in the database regardless of the graph in which that statement
@@ -192,7 +192,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
    */
   private final boolean statementIdentifiers;
 
-  /**
+  /*
    * When <code>true</code> the database will support statement identifiers.
    *
    * <p>A statement identifier is a unique 64-bit integer taken from the same space as the term
@@ -297,7 +297,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
           set.add(getFQN(SPOKeyOrder.SPO));
 
           keyOrders =
-              Collections.unmodifiableList(Arrays.asList(new SPOKeyOrder[] {SPOKeyOrder.SPO}));
+              Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPO));
 
         } else {
 
@@ -310,7 +310,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
           keyOrders =
               Collections.unmodifiableList(
                   Arrays.asList(
-                      new SPOKeyOrder[] {SPOKeyOrder.SPO, SPOKeyOrder.POS, SPOKeyOrder.OSP}));
+                      SPOKeyOrder.SPO, SPOKeyOrder.POS, SPOKeyOrder.OSP));
         }
 
       } else {
@@ -323,7 +323,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
           set.add(getFQN(SPOKeyOrder.SPOC));
 
           keyOrders =
-              Collections.unmodifiableList(Arrays.asList(new SPOKeyOrder[] {SPOKeyOrder.SPOC}));
+              Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPOC));
 
         } else {
 
@@ -374,7 +374,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return (AbstractTripleStore) super.getContainer();
   }
 
-  /**
+  /*
    * @todo This should use GRS row scan in the GRS for the SPORelation namespace. It is only used by
    *     the {@link LocalTripleStore} constructor and a unit test's main() method. This method IS
    *     NOT part of any public API at this time.
@@ -498,7 +498,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     }
   }
 
-  /**
+  /*
    * Overridden to return the hard reference for the index, which is cached the first time it is
    * resolved. This class does not eagerly resolve the indices to (a) avoid a performance hit when
    * running in a context where the index view is not required; and (b) to avoid exceptions when
@@ -535,7 +535,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return getIndex(getPrimaryKeyOrder());
   }
 
-  /**
+  /*
    * The optional index on which {@link Justification}s are stored.
    *
    * @todo The Justifications index is not a regular index of the SPORelation. In fact, it is a
@@ -565,7 +565,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return just;
   }
 
-  /**
+  /*
    * Return an iterator that will visit the distinct (s,p,o) tuples in the source iterator. The
    * context and statement type information will be stripped from the visited {@link ISPO}s. The
    * iterator will be backed by a {@link BTree} on a {@link TemporaryStore} and will use a bloom
@@ -582,7 +582,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return new DistinctSPOIterator(this, src);
   }
 
-  /**
+  /*
    * Return a new unnamed {@link BTree} instance for the {@link SPOKeyOrder#SPO} key order backed by
    * a {@link TemporaryStore}. The index will only store (s,p,o) triples (not quads) and will not
    * store either the SID or {@link StatementEnum}. This is a good choice when you need to impose a
@@ -621,7 +621,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return ndx;
   }
 
-  /**
+  /*
    * Overrides for the statement indices.
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/150" > Choosing the index for
@@ -784,7 +784,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return metadata;
   }
 
-  /**
+  /*
    * Overrides for the statement indices.
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607" > History Service </a>
@@ -833,7 +833,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
   public static final transient String NAME_HISTORY = "HIST";
 
-  /**
+  /*
    * Conflict resolver for add/add conflicts and retract/retract conflicts for any of (triple store,
    * triple store with SIDs or quad store) but without inference. For an add/retract conflict, the
    * writes can not be reconciled and the transaction can not be validated. Write-write conflict
@@ -880,13 +880,9 @@ public class SPORelation extends AbstractRelation<ISPO> {
       //
       //            }
 
-      if (!txTuple.isDeletedVersion() && !currentTuple.isDeletedVersion()) {
-
-        //                System.err.println("Resolved add/add conflict");
-
-        // add/add is not a conflict.
-        return true;
-      }
+      //                System.err.println("Resolved add/add conflict");
+      // add/add is not a conflict.
+      return !txTuple.isDeletedVersion() && !currentTuple.isDeletedVersion();
 
       /*
        * Note: We don't need to materialize the SPOs to resolve the
@@ -897,7 +893,6 @@ public class SPORelation extends AbstractRelation<ISPO> {
       // final ISPO currentSPO = (ISPO) txTuple.getObject();
 
       // either delete/add or add/delete is a conflict.
-      return false;
     }
   }
 
@@ -943,7 +938,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     }
   }
 
-  /**
+  /*
    * Return the access path for a triple pattern.
    *
    * @param s
@@ -978,7 +973,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return getAccessPath(s, p, o, c, filter, null);
   }
 
-  /**
+  /*
    * Return the access path for a triple or quad pattern with an optional filter (core
    * implementation). All arguments are optional. Any bound argument will restrict the returned
    * access path. For a triple pattern, <i>c</i> WILL BE IGNORED as there is no index over the
@@ -1008,7 +1003,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return getAccessPath(pred);
   }
 
-  /**
+  /*
    * Return the predicate for a triple or quad pattern filter (core implementation). All arguments
    * are optional. Any bound argument will restrict the returned access path. For a triple pattern,
    * <i>c</i> WILL BE IGNORED as there is no index over the statement identifiers, even when they
@@ -1027,7 +1022,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return getPredicate(s, p, o, c, null, null);
   }
 
-  /**
+  /*
    * Return the predicate for a triple or quad pattern with an optional filter (core
    * implementation). All arguments are optional. Any bound argument will restrict the returned
    * access path. For a triple pattern, <i>c</i> WILL BE IGNORED as there is no index over the
@@ -1065,8 +1060,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
         if (statementIdentifiers) {
           C = (c == null ? Var.var("c") : new Constant<IV>(c));
         } else if (c != null) {
-          /*
-           * The 4th position should never become bound for a triple store
+        /*
+       * The 4th position should never become bound for a triple store
            * without statement identifiers.
            */
 
@@ -1104,8 +1099,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return pred;
   }
 
-  //    /**
-  //     * Return the {@link IAccessPath} that is most efficient for the specified
+  //    /*
+//     * Return the {@link IAccessPath} that is most efficient for the specified
   //     * predicate based on an analysis of the bound and unbound positions in the
   //     * predicate.
   //     * <p>
@@ -1157,8 +1152,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
   //
   //    }
 
-  //    /**
-  //     * Isolates the logic for selecting the {@link SPOKeyOrder} from the
+  //    /*
+//     * Isolates the logic for selecting the {@link SPOKeyOrder} from the
   //     * {@link SPOPredicate} and then delegates to
   //     * {@link #getAccessPath(IKeyOrder, IPredicate)}.
   //     */
@@ -1177,7 +1172,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   //
   //    }
 
-  /**
+  /*
    * Implementation chooses a quads or triples index as appropriate.
    *
    * <p>{@inheritDoc}
@@ -1190,8 +1185,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return SPOKeyOrder.getKeyOrder(predicate, keyArity);
   }
 
-  //    /**
-  //     * This handles a request for an access path that is restricted to a
+  //    /*
+//     * This handles a request for an access path that is restricted to a
   //     * specific index partition.
   //     * <p>
   //     * Note: This path is used with the scale-out JOIN strategy, which
@@ -1338,8 +1333,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
   //
   //    }
 
-  //    /**
-  //     * Core impl.
+  //    /*
+//     * Core impl.
   //     *
   //     * @param keyOrder
   //     *            The natural order of the selected index (this identifies the
@@ -1438,8 +1433,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
 
         final ISPO spo = sidIV.getInlineValue();
 
-        /*
-         * We need to check the inline SPO against the predicate to
+      /*
+       * We need to check the inline SPO against the predicate to
          * make sure it matches the triple pattern implied by the
          * predicate.  Usually in this case s, p, and o are unbound
          * (reverse lookup from SID to spo), but occasionally there
@@ -1514,7 +1509,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   //
   //    }
 
-  /**
+  /*
    * Efficient scan of the distinct term identifiers that appear in the first position of the keys
    * for the statement index corresponding to the specified {@link IKeyOrder}. For example, using
    * {@link SPOKeyOrder#POS} will give you the term identifiers for the distinct predicates actually
@@ -1528,7 +1523,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return distinctTermScan(keyOrder, /* termIdFilter */ null);
   }
 
-  /**
+  /*
    * Efficient scan of the distinct term identifiers that appear in the first position of the keys
    * for the statement index corresponding to the specified {@link IKeyOrder}. For example, using
    * {@link SPOKeyOrder#POS} will give you the term identifiers for the distinct predicates actually
@@ -1546,7 +1541,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return distinctTermScan(keyOrder, null /* fromKey */, null /* toKey */, filter);
   }
 
-  /**
+  /*
    * Efficient scan of the distinct term identifiers that appear in the first position of the keys
    * for the statement index corresponding to the specified {@link IKeyOrder}. For example, using
    * {@link SPOKeyOrder#POS} will give you the term identifiers for the distinct predicates actually
@@ -1627,7 +1622,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return new ChunkedWrappedIterator<IV>(itr, IChunkedIterator.DEFAULT_CHUNK_SIZE, IV.class);
   }
 
-  /**
+  /*
    * Efficient scan of the distinct term identifiers that appear in the first position of the keys
    * for the statement index corresponding to the specified {@link IKeyOrder}. For example, using
    * {@link SPOKeyOrder#POS} will give you the term identifiers for the distinct predicates actually
@@ -1642,7 +1637,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return distinctMultiTermScan(keyOrder, knownTerms, /* termIdFilter */ null);
   }
 
-  /**
+  /*
    * Efficient scan of the distinct term identifiers that appear in the first position of the keys
    * for the statement index corresponding to the specified {@link IKeyOrder}. For example, using
    * {@link SPOKeyOrder#POS} will give you the term identifiers for the distinct predicates actually
@@ -1736,8 +1731,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
         );
   }
 
-  //    /**
-  //     * @todo This implementation was written early on and works for creating new
+  //    /*
+//     * @todo This implementation was written early on and works for creating new
   //     *       SPOs licensed by inference against a triple store. It does not
   //     *       allow us to specify the statement type, which is always set to
   //     *       [inferred]. It also does not capture the context if one exists, but
@@ -1772,7 +1767,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
   //
   //    }
 
-  /**
+  /*
    * @todo This works for creating new SPOs licensed by inference against a triple store. However,
    *     it does not allow us to specify the statement type, which is always set to [inferred]. It
    *     also does not capture the context if one exists, but that could be done by inspection of
@@ -1806,7 +1801,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return ISPO.class;
   }
 
-  /**
+  /*
    * Inserts {@link SPO}s, writing on the statement indices in parallel.
    *
    * <p>Note: This does NOT write on the justifications index. If justifications are being
@@ -1842,7 +1837,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     }
   }
 
-  /**
+  /*
    * Deletes {@link SPO}s, writing on the statement indices in parallel.
    *
    * <p>Note: The {@link ISPO#isModified()} flag is set by this method.
@@ -1881,7 +1876,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     }
   }
 
-  /**
+  /*
    * Inserts {@link SPO}s, writing on the statement indices in parallel.
    *
    * <p>Note: The {@link ISPO#isModified()} flag is set by this method.
@@ -2158,7 +2153,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     }
   }
 
-  /**
+  /*
    * Delete the {@link SPO}s from the statement indices. Any justifications for those statements
    * will also be deleted. The {@link ISPO#isModified()} flag is set by this method if the {@link
    * ISPO} was pre-existing in the database and was therefore deleted by this operation.
@@ -2429,7 +2424,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return mutationCount.get();
   }
 
-  /**
+  /*
    * Adds justifications to the store.
    *
    * @param itr The iterator from which we will read the {@link Justification}s to be added. The
@@ -2484,8 +2479,8 @@ public class SPORelation extends AbstractRelation<ISPO> {
           keys[i] = tupleSer.serializeKey(a[i]); // jst.getKey(keyBuilder);
         }
 
-        /*
-         * sort into their natural order.
+      /*
+       * sort into their natural order.
          *
          * @todo is it faster to sort the Justification[] or the keys[]?
          * See above for the alternative.
@@ -2534,11 +2529,10 @@ public class SPORelation extends AbstractRelation<ISPO> {
                   Var.var("s"), Var.var("p"), Var.var("o"),
                 },
             NV.asMap(
-                new NV[] {
-                  new NV(IPredicate.Annotations.RELATION_NAME, new String[] {getNamespace()}),
-                  //                        new NV(IPredicate.Annotations.KEY_ORDER,
-                  //                                keyOrder),
-                }));
+                new NV(IPredicate.Annotations.RELATION_NAME, new String[] {getNamespace()})
+                //                        new NV(IPredicate.Annotations.KEY_ORDER,
+                //                                keyOrder),
+            ));
     //        final IPredicate<ISPO> pred = new SPOPredicate(
     //                new String[] { getNamespace() }, -1, // partitionId
     //                Var.var("s"),
@@ -2569,36 +2563,36 @@ public class SPORelation extends AbstractRelation<ISPO> {
     return sb;
   }
 
-  /**
+  /*
    * Checks whether one of the associated triple indices uses delete markers.
    *
    * @return true if some index uses delete markers
    */
   public boolean indicesHaveDeleteMarkers() {
-    /**
+    /*
      * actually, either none of the triple indices or all of them uses delete markers, so it
      * suffices to probe the primary index
      */
     return getPrimaryIndex().getIndexMetadata().getDeleteMarkers();
   }
 
-  /**
+  /*
    * The {@link ILexiconConfiguration} instance, which will determine how terms are encoded and
    * decoded in the key space. private ILexiconConfiguration lexiconConfiguration;
    */
 
-  /**
+  /*
    * See {@link ILexiconConfiguration#isInline(DTE)}. Delegates to the {@link #lexiconConfiguration}
    * instance. public boolean isInline(DTE dte) { return lexiconConfiguration.isInline(dte); }
    */
 
-  /**
+  /*
    * See {@link ILexiconConfiguration#isLegacyEncoding()}. Delegates to the {@link
    * #lexiconConfiguration} instance. public boolean isLegacyEncoding() { return
    * lexiconConfiguration.isLegacyEncoding(); }
    */
 
-  /**
+  /*
    * Return the {@link #lexiconConfiguration} instance. Used to determine how to encode and decode
    * terms in the key space. public ILexiconConfiguration getLexiconConfiguration() { return
    * lexiconConfiguration; }

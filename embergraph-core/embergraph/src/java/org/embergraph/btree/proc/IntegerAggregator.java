@@ -24,8 +24,8 @@ package org.embergraph.btree.proc;
 import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.service.Split;
 
-/**
- * Aggregates the value of an {@link Integer} result, making the sum available as a {@link Long}
+/*
+* Aggregates the value of an {@link Integer} result, making the sum available as a {@link Long}
  * integer (to help prevent overflow).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

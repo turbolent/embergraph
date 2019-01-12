@@ -28,8 +28,8 @@ import org.embergraph.bop.ap.filter.BOpResolver;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPO;
 
-/**
- * Strips the context information from an {@link SPO}. This is used in default graph access paths.
+/*
+* Strips the context information from an {@link SPO}. This is used in default graph access paths.
  * It operators on {@link ISPO}s so it must be applied using {@link
  * IPredicate.Annotations#ACCESS_PATH_FILTER}.
  *
@@ -51,7 +51,7 @@ public class StripContextFilter extends BOpResolver {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */

@@ -20,8 +20,8 @@ package org.embergraph.service.fts;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.service.fts.FTS.SearchResultType;
 
-/**
- * Metadata about a search result against an external fulltext index.
+/*
+* Metadata about a search result against an external fulltext index.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -53,7 +53,7 @@ public class FulltextSearchHit<V extends Comparable<V>>
     return "FulltextSearchHit{res=" + res + ",score=" + score + ",snippet=" + snippet + "}";
   }
 
-  /**
+  /*
    * Sorts {@link FulltextSearchHit}s into decreasing cosine order with ties broken by the the
    * <code>docId</code>.
    */

@@ -49,7 +49,7 @@ public class BOpContextBase {
   /** The executor service. */
   private final Executor executor;
 
-  /**
+  /*
    * The <strong>local</strong> {@link IIndexManager}. Query evaluation occurs against the local
    * indices. In scale-out, query evaluation proceeds shard-wise and this {@link IIndexManager} MUST
    * be able to read on the {@link ILocalBTreeView}.
@@ -59,7 +59,7 @@ public class BOpContextBase {
     return indexManager;
   }
 
-  /**
+  /*
    * The {@link IEmbergraphFederation} IFF the operator is being evaluated on an {@link
    * IEmbergraphFederation} and otherwise <code>null</code>. When evaluating operations against an
    * {@link IEmbergraphFederation}, this reference provides access to the scale-out view of the
@@ -70,7 +70,7 @@ public class BOpContextBase {
     return fed;
   }
 
-  /**
+  /*
    * Return the {@link Executor} on to which the operator may submit tasks.
    *
    * <p>Note: The is the {@link ExecutorService} associated with the <em>local</em> {@link
@@ -86,7 +86,7 @@ public class BOpContextBase {
     this(queryEngine.getFederation(), queryEngine.getIndexManager());
   }
 
-  /**
+  /*
    * Core constructor.
    *
    * @param fed The federation iff running in scale-out.
@@ -109,7 +109,7 @@ public class BOpContextBase {
     this.executor = localIndexManager == null ? null : localIndexManager.getExecutorService();
   }
 
-  /**
+  /*
    * Locate and return the view of the relation identified by the {@link IPredicate}.
    *
    * @param pred The {@link IPredicate}, which MUST be a tail from some {@link IRule}.
@@ -129,7 +129,7 @@ public class BOpContextBase {
     return (IRelation<E>) getResource(namespace, timestamp);
   }
 
-  /**
+  /*
    * Locate and return the view of the identified relation.
    *
    * @param namespace The namespace of the relation.
@@ -149,8 +149,8 @@ public class BOpContextBase {
     return (ILocatableResource<?>) tmp.getResourceLocator().locate(namespace, timestamp);
   }
 
-  //  /**
-  //  * Return a writable view of the relation.
+  //  /*
+//  * Return a writable view of the relation.
   //  *
   //  * @param namespace
   //  *            The namespace of the relation.
@@ -174,7 +174,7 @@ public class BOpContextBase {
   //
   // }
 
-  /**
+  /*
    * Obtain an access path reading from the identified {@link IRelation} using the specified {@link
    * IPredicate}.
    *

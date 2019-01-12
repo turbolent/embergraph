@@ -11,8 +11,8 @@ package cern.colt.matrix.impl;
 import cern.colt.map.AbstractIntDoubleMap;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
-/**
- * Selection view on sparse 3-d matrices holding <tt>double</tt> elements. First see the <a
+/*
+* Selection view on sparse 3-d matrices holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -60,7 +60,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
   /** The offset. */
   protected int offset;
 
-  /**
+  /*
    * Constructs a matrix view with the given parameters.
    *
    * @param elements the cells.
@@ -90,7 +90,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
 
     this.isNoView = false;
   }
-  /**
+  /*
    * Returns the position of the given absolute rank within the (virtual or non-virtual) internal
    * 1-dimensional array. Default implementation. Override, if necessary.
    *
@@ -100,7 +100,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
   protected int _columnOffset(int absRank) {
     return columnOffsets[absRank];
   }
-  /**
+  /*
    * Returns the position of the given absolute rank within the (virtual or non-virtual) internal
    * 1-dimensional array. Default implementation. Override, if necessary.
    *
@@ -110,7 +110,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
   protected int _rowOffset(int absRank) {
     return rowOffsets[absRank];
   }
-  /**
+  /*
    * Returns the position of the given absolute rank within the (virtual or non-virtual) internal
    * 1-dimensional array. Default implementation. Override, if necessary.
    *
@@ -120,7 +120,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
   protected int _sliceOffset(int absRank) {
     return sliceOffsets[absRank];
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[slice,row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -144,7 +144,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
             + rowOffsets[rowZero + row * rowStride]
             + columnOffsets[columnZero + column * columnStride]);
   }
-  /**
+  /*
    * Returns <tt>true</tt> if both matrices share common cells. More formally, returns <tt>true</tt>
    * if <tt>other != null</tt> and at least one of the following conditions is met
    *
@@ -164,7 +164,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
     }
     return false;
   }
-  /**
+  /*
    * Returns the position of the given coordinate within the (virtual or non-virtual) internal
    * 1-dimensional array.
    *
@@ -180,7 +180,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
         + rowOffsets[rowZero + row * rowStride]
         + columnOffsets[columnZero + column * columnStride];
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of slices, rows and columns. For example, if the receiver is an
    * instance of type <tt>DenseDoubleMatrix3D</tt> the new matrix must also be of type
@@ -197,7 +197,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
   public DoubleMatrix3D like(int slices, int rows, int columns) {
     return new SparseDoubleMatrix3D(slices, rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, sharing the
    * same cells. For example, if the receiver is an instance of type <tt>DenseDoubleMatrix3D</tt>
    * the new matrix must also be of type <tt>DenseDoubleMatrix2D</tt>, if the receiver is an
@@ -219,7 +219,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
     throw new InternalError(); // this method is never called since viewRow() and viewColumn are
                                // overridden properly.
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[slice,row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -245,7 +245,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
     if (value == 0) this.elements.removeKey(index);
     else this.elements.put(index, value);
   }
-  /**
+  /*
    * Sets up a matrix with a given number of slices and rows.
    *
    * @param slices the number of slices the matrix shall have.
@@ -260,7 +260,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
     this.columnStride = 1;
     this.offset = 0;
   }
-  /**
+  /*
    * Self modifying version of viewDice().
    *
    * @throws IllegalArgumentException if some of the parameters are equal or not in range 0..2.
@@ -280,7 +280,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
 
     return this;
   }
-  /**
+  /*
    * Constructs and returns a new 2-dimensional <i>slice view</i> representing the slices and rows
    * of the given column. The returned view is backed by this matrix, so changes in the returned
    * view are reflected in this matrix, and vice-versa.
@@ -325,7 +325,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
         viewColumnOffsets,
         viewOffset);
   }
-  /**
+  /*
    * Constructs and returns a new 2-dimensional <i>slice view</i> representing the slices and
    * columns of the given row. The returned view is backed by this matrix, so changes in the
    * returned view are reflected in this matrix, and vice-versa.
@@ -370,7 +370,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
         viewColumnOffsets,
         viewOffset);
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param sliceOffsets the offsets of the visible elements.
@@ -383,7 +383,7 @@ class SelectedSparseDoubleMatrix3D extends DoubleMatrix3D {
     return new SelectedSparseDoubleMatrix3D(
         this.elements, sliceOffsets, rowOffsets, columnOffsets, this.offset);
   }
-  /**
+  /*
    * Constructs and returns a new 2-dimensional <i>slice view</i> representing the rows and columns
    * of the given slice. The returned view is backed by this matrix, so changes in the returned view
    * are reflected in this matrix, and vice-versa.

@@ -30,8 +30,8 @@ import org.embergraph.bop.join.PipelinedHashIndexAndSolutionSetJoinOp;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
-/**
- * Test suite for {@link PipelinedHashIndexAndSolutionSetJoinOp}, which implements a pipelined hash
+/*
+* Test suite for {@link PipelinedHashIndexAndSolutionSetJoinOp}, which implements a pipelined hash
  * join.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -319,7 +319,7 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
     assertPipelinedPlanOrNot(queryPlan, astContainer, true, true);
   }
 
-  /**
+  /*
    * Make sure the pipelined hash join operator is not used as a standard for non-LIMIT query. Query
    * body is the same as for testPipelinedHashJoinUsedForOptional(), but no LIMIT.
    */
@@ -340,7 +340,7 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
         queryPlan, astContainer, QueryHints.DEFAULT_PIPELINED_HASH_JOIN, false);
   }
 
-  /**
+  /*
    * Make sure the pipelined hash join operator is not used as a standard for LIMIT+OFFSET queries.
    * Query body is the same as for testPipelinedHashJoinUsedForOptional(), but including LIMIT *and*
    * ORDER BY.
@@ -488,7 +488,7 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
         queryPlan, astContainer, QueryHints.DEFAULT_PIPELINED_HASH_JOIN, false);
   }
 
-  /**
+  /*
    * Make sure the pipelined hash join operator is not used as a standard for non-LIMIT query. Query
    * body is the same as for testPipelinedHashJoinUsedForOptional(), but no LIMIT. Verifies
    * exemplarily for analytic mode.
@@ -781,7 +781,7 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
     assertPipelinedPlanOrNot(queryPlan, astContainer, false, true);
   }
 
-  /**
+  /*
    * Test query affected by PipelinedHashIndexAndSolutionSetOp.INCOMING_BINDINGS_BUFFER_THRESHOLD.
    */
   public void testPipelinedHashIncomingBindingsBufferThreshold() throws Exception {
@@ -800,7 +800,7 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
     assertPipelinedPlanOrNot(queryPlan, astContainer, true, false);
   }
 
-  /**
+  /*
    * Test query affected by PipelinedHashIndexAndSolutionSetOp.DISTINCT_PROJECTION_BUFFER_THRESHOLD
    */
   public void testPipelinedHashDistinctProjectionBufferThreshold() throws Exception {
@@ -819,7 +819,7 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
     assertPipelinedPlanOrNot(queryPlan, astContainer, true, false);
   }
 
-  /**
+  /*
    * Test query affected by PipelinedHashIndexAndSolutionSetOp.INCOMING_BINDINGS_BUFFER_THRESHOLD.
    */
   public void testPipelinedHashIncomingBindingsBufferThresholdAnalyticMode() throws Exception {
@@ -838,7 +838,7 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
     assertPipelinedPlanOrNot(queryPlan, astContainer, true, true);
   }
 
-  /**
+  /*
    * Test query affected by PipelinedHashIndexAndSolutionSetOp.DISTINCT_PROJECTION_BUFFER_THRESHOLD
    */
   public void testPipelinedHashDistinctProjectionBufferThresholdAnalyticMode() throws Exception {
@@ -925,7 +925,7 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
     assertPipelinedPlanOrNot(queryPlan, astContainer, true, true);
   }
 
-  /**
+  /*
    * Asserts that a PipelinedHashIndexAndSolutionSetOp is contained in the query plan if contains
    * equals <code>true</code>, otherwise that it is NOT contained.
    */
@@ -957,7 +957,7 @@ public class TestPipelinedHashJoin extends AbstractDataDrivenSPARQLTestCase {
           firstMatch.annotations().get(Annotations.HASH_JOIN_UTILITY_FACTORY);
       final Class<?> observedUtilClass = utilFactory.getClass();
 
-      /**
+      /*
        * The string checking below is a workaround for dealing with the anonymous inner classes,
        * what we have here is something lie
        *

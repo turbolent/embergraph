@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.embergraph.rdf.sail.webapp.lbs.AbstractLBSPolicy;
 import org.embergraph.rdf.sail.webapp.lbs.ServiceScore;
 
-/**
- * Policy implements a round-robin over the services that are joined with the met quorum.
+/*
+* Policy implements a round-robin over the services that are joined with the met quorum.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -40,7 +40,7 @@ public class RoundRobinLBSPolicy extends AbstractLBSPolicy {
     sb.append(",nextService=" + nextService.get());
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This imposes a round-robin policy over the discovered services. If the service is discovered
@@ -125,7 +125,7 @@ public class RoundRobinLBSPolicy extends AbstractLBSPolicy {
     return serviceScore.getRequestURI();
   }
 
-  /**
+  /*
    * Note: This could be a hot spot. We can have concurrent requests and we need to increment this
    * counter for each such request.
    */

@@ -26,8 +26,8 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.btree.IRangeQuery;
 import org.embergraph.relation.IRelation;
 
-/**
- * A common interface for all access paths.
+/*
+* A common interface for all access paths.
  *
  * @param <R> The generic type of the [R]elation elements of the {@link IRelation}.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -38,14 +38,14 @@ public interface IAbstractAccessPath<R> {
   /** The constraints on the {@link IAccessPath}. */
   IPredicate<R> getPredicate();
 
-  /**
+  /*
    * True iff the access path is empty (there are no matches for the {@link IPredicate}) This is
    * more conclusive than {@link #rangeCount()} since you MAY have a non-zero range count when the
    * key range is in fact empty (there may be "deleted" index entries within the key range).
    */
   boolean isEmpty();
 
-  /**
+  /*
    * Return the maximum #of elements spanned by the {@link IPredicate}.
    *
    * <p>Note: When there is an {@link IFilter} on the {@link IPredicate} the exact range count MUST
@@ -61,10 +61,10 @@ public interface IAbstractAccessPath<R> {
    */
   long rangeCount(boolean exact);
 
-  /**
+  /*
    * Remove all elements selected by the {@link IPredicate} (optional operation).
    *
    * @return The #of elements that were removed.
    */
-  public long removeAll();
+  long removeAll();
 }

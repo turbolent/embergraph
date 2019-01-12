@@ -65,8 +65,8 @@ import org.embergraph.service.IServiceShutdown;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * Class encapsulates logic for handling journal overflow events. Overflow is triggered
+/*
+* Class encapsulates logic for handling journal overflow events. Overflow is triggered
  * automatically when the user data extent on the journal nears a configured threshold. Once the
  * preconditions for overflow are satisfied, the {@link WriteExecutorService}s for the journal are
  * paused and all running tasks on those services are allowed to complete and commit. Once no
@@ -91,7 +91,7 @@ public abstract class OverflowManager extends IndexManager {
   /** Logger. */
   protected static final Logger log = Logger.getLogger(OverflowManager.class);
 
-  /**
+  /*
    * FIXME This is a temporary flag used to (dis|en)able the logic for executing various index
    * partition operations as after actions for a compacting merge.
    */
@@ -112,8 +112,8 @@ public abstract class OverflowManager extends IndexManager {
   /** @see Options#TAIL_SPLIT_THRESHOLD */
   protected final double tailSplitThreshold;
 
-  //    /**
-  //     * @see Options#HOT_SPLIT_THRESHOLD
+  //    /*
+//     * @see Options#HOT_SPLIT_THRESHOLD
   //     */
   //    final protected double hotSplitThreshold;
 
@@ -126,7 +126,7 @@ public abstract class OverflowManager extends IndexManager {
   /** @see Options#MINIMUM_ACTIVE_INDEX_PARTITIONS */
   protected final int minimumActiveIndexPartitions;
 
-  /**
+  /*
    * @see Options#MAXIMUM_MOVES
    * @deprecated Moves are now decided on a case by case basis. An alternative parameter might be
    *     introduced in the future to restrict the rate at which a DS can shed shards by moving them
@@ -134,7 +134,7 @@ public abstract class OverflowManager extends IndexManager {
    */
   protected final int maximumMoves;
 
-  /**
+  /*
    * @see Options#MAXIMUM_MOVES_PER_TARGET
    * @deprecated Moves are now decided on a case by case basis. An alternative parameter might be
    *     introduced in the future to restrict the rate at which a DS can shed shards by moving them
@@ -150,7 +150,7 @@ public abstract class OverflowManager extends IndexManager {
   /** @see Options#MOVE_PERCENT_CPU_TIME_THRESHOLD */
   protected final double movePercentCpuTimeThreshold;
 
-  /**
+  /*
    * The maximum #of optional compacting merge operations that will be performed during a single
    * overflow event.
    *
@@ -160,14 +160,14 @@ public abstract class OverflowManager extends IndexManager {
    */
   protected final int maximumOptionalMergesPerOverflow;
 
-  /**
+  /*
    * @see Options#MAXIMUM_JOURNALS_PER_VIEW
    * @deprecated merges are now performed in priority order while time remains in a given
    *     asynchronous overflow cycle.
    */
   protected final int maximumJournalsPerView;
 
-  /**
+  /*
    * @see Options#MAXIMUM_SEGMENTS_PER_VIEW
    * @deprecated merges are now performed in priority order while time remains in a given
    *     asynchronous overflow cycle.
@@ -177,7 +177,7 @@ public abstract class OverflowManager extends IndexManager {
   /** @see Options#MAXIMUM_BUILD_SEGMENT_BYTES */
   protected final long maximumBuildSegmentBytes;
 
-  /**
+  /*
    * The timeout for {@link #shutdown()} -or- ZERO (0L) to wait for ever.
    *
    * @see IServiceShutdown#SHUTDOWN_TIMEOUT
@@ -187,21 +187,21 @@ public abstract class OverflowManager extends IndexManager {
   /** The service that runs the asynchronous overflow {@link AsynchronousOverflowTask}. */
   private final ExecutorService overflowService;
 
-  /**
+  /*
    * The #of threads which will execute index partition build operations.
    *
    * @see Options#BUILD_SERVICE_CORE_POOL_SIZE
    */
   protected final int buildServiceCorePoolSize;
 
-  /**
+  /*
    * The #of threads which will execute index partition merge operations.
    *
    * @see Options#MERGE_SERVICE_CORE_POOL_SIZE
    */
   protected final int mergeServiceCorePoolSize;
 
-  /**
+  /*
    * The name of the service (iff available). This is used to help label thread pools and the like.
    */
   protected final String serviceName;
@@ -209,7 +209,7 @@ public abstract class OverflowManager extends IndexManager {
   /** @see Options#OVERFLOW_ENABLED */
   private final boolean overflowEnabled;
 
-  /**
+  /*
    * @see Options#OVERFLOW_MAX_COUNT
    * @deprecated This is no longer used, even for testing.
    */
@@ -218,7 +218,7 @@ public abstract class OverflowManager extends IndexManager {
   /** @see Options#OVERFLOW_THRESHOLD */
   protected final double overflowThreshold;
 
-  /**
+  /*
    * A flag used to disable overflow of the live journal until asynchronous post-processing of the
    * old journal has been completed.
    *
@@ -229,7 +229,7 @@ public abstract class OverflowManager extends IndexManager {
   /** A flag used to disable the asynchronous overflow processing for some unit tests. */
   protected final AtomicBoolean asyncOverflowEnabled = new AtomicBoolean(true);
 
-  /**
+  /*
    * Flag may be set to force overflow processing during the next group commit. The flag is cleared
    * by {@link #overflow()}.
    *
@@ -237,7 +237,7 @@ public abstract class OverflowManager extends IndexManager {
    */
   public final AtomicBoolean forceOverflow = new AtomicBoolean(false);
 
-  /**
+  /*
    * A flag that may be set to force the next asynchronous overflow to perform a compacting merge
    * for all indices that are not simply copied over to the new journal (<strong>the use of this
    * flag significantly raises the time required for asynchronous overflow processing as all shard
@@ -257,7 +257,7 @@ public abstract class OverflowManager extends IndexManager {
     return overflowCounters.clone();
   }
 
-  /**
+  /*
    * #of synchronous overflows that have taken place. This counter is incremented each time the
    * synchronous overflow operation.
    *
@@ -268,7 +268,7 @@ public abstract class OverflowManager extends IndexManager {
     return overflowCounters.synchronousOverflowCounter.get();
   }
 
-  /**
+  /*
    * #of asynchronous overflows that have taken place. This counter is incremented each time the
    * entire overflow operation is complete, including any post-processing of the old journal.
    *
@@ -279,14 +279,14 @@ public abstract class OverflowManager extends IndexManager {
     return overflowCounters.asynchronousOverflowCounter.get();
   }
 
-  /**
+  /*
    * The timeout for asynchronous overflow processing.
    *
    * @see Options#OVERFLOW_TIMEOUT
    */
   protected final long overflowTimeout;
 
-  /**
+  /*
    * @see Options#OVERFLOW_TASKS_CONCURRENT
    * @deprecated by {@link #mergeServiceCorePoolSize} and {@link #buildServiceCorePoolSize}
    */
@@ -295,13 +295,13 @@ public abstract class OverflowManager extends IndexManager {
   /** @see Options#OVERFLOW_CANCELLED_WHEN_JOURNAL_FULL */
   protected final boolean overflowCancelledWhenJournalFull;
 
-  //    /**
-  //     * @see Options#PURGE_RESOURCES_TIMEOUT
+  //    /*
+//     * @see Options#PURGE_RESOURCES_TIMEOUT
   //     */
   //    private final long purgeResourcesTimeout;
 
-  //    /**
-  //     * The timeout in milliseconds that we will await an exclusive write lock on
+  //    /*
+//     * The timeout in milliseconds that we will await an exclusive write lock on
   //     * the {@link WriteExecutorService} in order to purge unused resources.
   //     *
   //     * @see Options#PURGE_RESOURCES_TIMEOUT
@@ -312,7 +312,7 @@ public abstract class OverflowManager extends IndexManager {
   //
   //    }
 
-  /**
+  /*
    * Index partitions are split when they approach this size on the disk.
    *
    * @see Options#NOMINAL_SHARD_SIZE
@@ -321,7 +321,7 @@ public abstract class OverflowManager extends IndexManager {
    */
   public final long nominalShardSize;
 
-  /**
+  /*
    * If an index partition refuses to split it will be disabled once its size on disk (for a compact
    * view) is greater than this multiplier. The most common cause for this is a bad {@link
    * ISimpleSplitHandler} implementation provided by the application when it registered the index.
@@ -334,7 +334,7 @@ public abstract class OverflowManager extends IndexManager {
    */
   public final double shardOverextensionLimit = 2d;
 
-  /**
+  /*
    * <code>true</code> if overflow processing is enabled and <code>false</code> if overflow
    * processing was disabled as a configuration option or if a maximum overflow count was configured
    * and has been satisfied, in which case the live journal will NOT overflow.
@@ -355,15 +355,15 @@ public abstract class OverflowManager extends IndexManager {
     return overflowAllowed.get();
   }
 
-  /**
+  /*
    * Options understood by the {@link OverflowManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options extends IndexManager.Options, IServiceShutdown.Options {
+  public interface Options extends IndexManager.Options, IServiceShutdown.Options {
 
-    /**
+    /*
      * Boolean property determines whether or not {@link IResourceManager#overflow()} processing is
      * enabled (default {@value #DEFAULT_OVERFLOW_ENABLED}). When disabled the journal will grow
      * without bounds, {@link IndexSegment}s will never be generated and index partitions will not
@@ -373,7 +373,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_OVERFLOW_ENABLED = "true";
 
-    /**
+    /*
      * Option may be used to permit a fixed number of synchronous overflow operations after which
      * overflow is disabled (default {@value #DEFAULT_OVERFLOW_MAX_COUNT}). When ZERO (0) there is
      * no limit on the #of synchronous overflow operations. This option is mainly used for testing,
@@ -392,7 +392,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_OVERFLOW_MAX_COUNT = "0";
 
-    /**
+    /*
      * Floating point property specifying the percentage of the maximum extent at which synchronous
      * overflow processing will be triggered (default {@link #DEFAULT_OVERFLOW_THRESHOLD}). The
      * value is multiplied into the configured {@link
@@ -414,7 +414,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_OVERFLOW_THRESHOLD = ".9";
 
-    /**
+    /*
      * Index partitions having no more than this many entries as reported by a range count will be
      * copied to the new journal during synchronous overflow processing rather than building a new
      * index segment from the buffered writes (default {@value #DEFAULT_COPY_INDEX_THRESHOLD}). When
@@ -429,7 +429,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_COPY_INDEX_THRESHOLD = "1000";
 
-    /**
+    /*
      * The #of index partitions below which we will accelerate the decision to split an index
      * partition (default {@value #DEFAULT_ACCELERATE_SPLIT_THRESHOLD}). When a new scale-out index
      * is created there is by default only a single index partition on a single {@link
@@ -444,7 +444,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_ACCELERATE_SPLIT_THRESHOLD = "20";
 
-    /**
+    /*
      * The minimum percentage (where <code>1.0</code> corresponds to 100 percent) that an index
      * partition must constitute of a nominal index partition before a head or tail split will be
      * considered (default {@value #DEFAULT_PERCENT_OF_SPLIT_THRESHOLD}). Values near to and greater
@@ -457,7 +457,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_PERCENT_OF_SPLIT_THRESHOLD = ".9";
 
-    /**
+    /*
      * The minimum percentage (in [0:1]) of leaf splits which must be in the tail of the index
      * partition before a tail split of an index partition will be considered (default {@value
      * #DEFAULT_TAIL_SPLIT_THRESHOLD}).
@@ -466,7 +466,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_TAIL_SPLIT_THRESHOLD = ".4";
 
-    /**
+    /*
      * The minimum percentage (in [0:2]) of a nominal split before an index partition will be "hot
      * split" (default {@value #DEFAULT_HOT_SPLIT_THRESHOLD}). Hot splits are taken by hosts which
      * are more heavily utilized than their peers but not heavily utilized in terms of their own
@@ -485,7 +485,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_HOT_SPLIT_THRESHOLD = "2.0"; // was .4
 
-    /**
+    /*
      * Boolean option indicates whether or not scatter splits are allowed (default {@value
      * #SCATTER_SPLIT_ENABLED}) on this service.
      *
@@ -495,7 +495,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_SCATTER_SPLIT_ENABLED = "true";
 
-    /**
+    /*
      * Option may be used to disable index partition joins.
      *
      * <p>FIXME Joins are being triggered by the scatter split and/or {@link
@@ -512,7 +512,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_JOINS_ENABLED = "false";
 
-    /**
+    /*
      * The minimum #of active index partitions on a data service before the resource manager will
      * consider moving an index partition to another service (default {@value
      * #DEFAULT_MINIMUM_ACTIVE_INDEX_PARTITIONS}).
@@ -543,7 +543,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_MINIMUM_ACTIVE_INDEX_PARTITIONS = "1";
 
-    /**
+    /*
      * This is the maximum #of index partitions that the resource manager is willing to move in a
      * given overflow operations across all of the identified under-utilized services (default
      * {@value #DEFAULT_MAXIMUM_MOVES}).
@@ -559,7 +559,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_MAXIMUM_MOVES = "3";
 
-    /**
+    /*
      * This is the maximum #of index partitions that the resource manager is willing to move in a
      * given overflow operation onto each identified under-utilized service (default {@value
      * #DEFAULT_MAXIMUM_MOVES_PER_TARGET}).
@@ -580,7 +580,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_MAXIMUM_MOVES_PER_TARGET = "2";
 
-    /**
+    /*
      * This is the maximum percentage (in [0:2]) of a full index partition which will be considered
      * for a move (default {@value #DEFAULT_MAXIMUM_MOVE_PERCENT_OF_SPLIT}).
      *
@@ -591,7 +591,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_MAXIMUM_MOVE_PERCENT_OF_SPLIT = ".8";
 
-    /**
+    /*
      * The threshold for a service to consider itself sufficiently loaded that it will consider
      * moving an index partition (default {@value #DEFAULT_MOVE_PERCENT_CPU_TIME_THRESHOLD}). This
      * threshold IS NOT considered for scatter splits, since the goal there is to distribute the
@@ -602,7 +602,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_MOVE_PERCENT_CPU_TIME_THRESHOLD = ".7";
 
-    /**
+    /*
      * The maximum #of optional compacting merge operations that will be performed during a single
      * overflow event (default {@value #DEFAULT_OPTIONAL_COMPACTING_MERGES_PER_OVERFLOW}).
      *
@@ -630,8 +630,8 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_OPTIONAL_COMPACTING_MERGES_PER_OVERFLOW = "2";
 
-    //        /**
-    //         * The maximum #of sources for an index partition view before a
+    //        /*
+//         * The maximum #of sources for an index partition view before a
     //         * compacting merge of the index partition will be triggered in
     //         * preference to an incremental build (default
     //         * {@value #DEFAULT_MAXIMUM_SOURCES_PER_VIEW}). The minimum value is
@@ -658,7 +658,7 @@ public abstract class OverflowManager extends IndexManager {
     //
     //        String DEFAULT_MAXIMUM_SOURCES_PER_VIEW = "5";
 
-    /**
+    /*
      * A compacting merge will be triggered when the #of journals in an index partition view is GTE
      * to this value (default {@value #DEFAULT_MAXIMUM_JOURNALS_PER_VIEW}). The minimum value is TWO
      * (2) since there will be two journals in a view when an index partition overflows and {@link
@@ -686,7 +686,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_MAXIMUM_JOURNALS_PER_VIEW = "3";
 
-    /**
+    /*
      * A compacting merge will be triggered when the #of index segments in an index partition view
      * is GTE to this value (default {@value #DEFAULT_MAXIMUM_SEGMENTS_PER_VIEW}).
      *
@@ -712,7 +712,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_MAXIMUM_SEGMENTS_PER_VIEW = "6";
 
-    /**
+    /*
      * Option limits the #of {@link IndexSegmentStore} bytes that an {@link
      * OverflowActionEnum#Build} operation will process (default {@value
      * #DEFAULT_MAXIMUM_BUILD_SEGMENTS_BYTES}). Given that the nominal size of an index partition is
@@ -730,7 +730,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_MAXIMUM_BUILD_SEGMENTS_BYTES = "" + (Bytes.megabyte * 20);
 
-    /**
+    /*
      * The timeout in milliseconds for asynchronous overflow processing to complete (default {@link
      * #DEFAULT_OVERFLOW_TIMEOUT}). Any overflow task that does not complete within this timeout
      * will be canceled.
@@ -749,13 +749,13 @@ public abstract class OverflowManager extends IndexManager {
      */
     String OVERFLOW_TIMEOUT = OverflowManager.class.getName() + ".timeout";
 
-    /**
+    /*
      * The default timeout in milliseconds for asynchronous overflow processing (equivalent to 10
      * minutes).
      */
     String DEFAULT_OVERFLOW_TIMEOUT = "" + (10 * 1000 * 60L); // 10 minutes.
 
-    /**
+    /*
      * The #of threads used to execute the asynchronous overflow tasks in parallel, ZERO (0) to
      * execute ALL asynchronous overflow tasks in parallel, or ONE (1) to execute the asynchronous
      * overflow tasks sequentially (default {@value #DEFAULT_OVERFLOW_TASKS_CONCURRENT}).
@@ -767,7 +767,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_OVERFLOW_TASKS_CONCURRENT = "0";
 
-    /**
+    /*
      * Cancel an existing asynchronous overflow process (interrupting any running tasks) if the live
      * journal is again approaching its maximum extent (default {@value
      * #DEFAULT_OVERFLOW_CANCELLED_WHEN_JOURNAL_FULL}).
@@ -780,8 +780,8 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_OVERFLOW_CANCELLED_WHEN_JOURNAL_FULL = "true";
 
-    //        /**
-    //         * The timeout in milliseconds that we will await an exclusive lock on
+    //        /*
+//         * The timeout in milliseconds that we will await an exclusive lock on
     //         * the {@link WriteExecutorService} in order to release unused resources
     //         * (journals and segment files).
     //         */
@@ -803,7 +803,7 @@ public abstract class OverflowManager extends IndexManager {
 
     String DEFAULT_MERGE_SERVICE_CORE_POOL_SIZE = "1";
 
-    /**
+    /*
      * The nominal size on the size of a full index partition (~200MB). Index partitions are split
      * once they reach or exceed this size. The space on the journal is not considered when making
      * this decision since it can not readily be attributed to any given index partition.
@@ -816,13 +816,13 @@ public abstract class OverflowManager extends IndexManager {
     String DEFAULT_NOMINAL_SHARD_SIZE = "" + (200 * Bytes.megabyte);
   }
 
-  /**
+  /*
    * Performance counters for the {@link OverflowManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface IOverflowManagerCounters {
+  public interface IOverflowManagerCounters {
 
     /** <code>true</code> iff overflow processing is enabled as a configuration option. */
     String OverflowEnabled = "Overflow Enabled";
@@ -830,14 +830,14 @@ public abstract class OverflowManager extends IndexManager {
     /** <code>true</code> iff overflow processing is currently permitted. */
     String OverflowAllowed = "Overflow Allowed";
 
-    /**
+    /*
      * <code>true</code> iff synchronous overflow should be initiated based on an examination of the
      * state of the live journal and whether or not overflow processing is enabled and currently
      * allowed.
      */
     String ShouldOverflow = "Should Overflow";
 
-    /**
+    /*
      * The #of synchronous overflow events that have taken place. This counter is incremented each
      * time the synchronous overflow operation is complete.
      */
@@ -849,7 +849,7 @@ public abstract class OverflowManager extends IndexManager {
     /** The elapsed time for asynchronous overflow processing to date. */
     String AsynchronousOverflowMillis = "Asynchronous Overflow Millis";
 
-    /**
+    /*
      * The #of asynchronous overflow events that have taken place. This counter is incremented each
      * time the entire overflow operation is complete, including any post-processing of the old
      * journal.
@@ -862,25 +862,25 @@ public abstract class OverflowManager extends IndexManager {
     /** The #of asynchronous overflow tasks (split, join, merge, etc) which have failed. */
     String AsynchronousOverflowTaskFailedCount = "Asynchronous Overflow Task Failed Count";
 
-    /**
+    /*
      * The #of asynchronous overflow tasks (split, join, merge, etc) that were canceled due to
      * timeout.a
      */
     String AsynchronousOverflowTaskCancelledCount = "Asynchronous Overflow Task Cancelled Count";
   }
 
-  /**
+  /*
    * Performance counters for the index partition tasks.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface IIndexPartitionTaskCounters {
+  public interface IIndexPartitionTaskCounters {
 
     /** The #of index partition build operations which have completed successfully. */
     String BuildCount = "Build Count";
 
-    /**
+    /*
      * The #of index partition merge (compacting merge) operations which have completed
      * successfully.
      */
@@ -898,23 +898,23 @@ public abstract class OverflowManager extends IndexManager {
     /** The #of index partition move operations which have completed successfully. */
     String MoveCount = "Move Count";
 
-    /**
+    /*
      * The #of index partitions received by this data service in response to an index partition move
      * from another data service.
      */
     String ReceiveCount = "Receive Count";
 
-    /**
+    /*
      * The #of index partitions build tasks that are executing concurrently on this data service.
      */
     String ConcurrentBuildCount = "Concurrent Build Count";
 
-    /**
+    /*
      * The #of index partitions merge tasks that are executing concurrently on this data service.
      */
     String ConcurrentMergeCount = "Concurrent Merge Count";
 
-    /**
+    /*
      * The running index partition builds for this service. The vast majority of any of the index
      * partition tasks (split, move, join, etc.) lies in the index segment build operations.
      * Therefore you can use the tasks reported here to see the majority of the effort for
@@ -1543,7 +1543,7 @@ public abstract class OverflowManager extends IndexManager {
     }
   }
 
-  /**
+  /*
    * An overflow condition is recognized when the journal is within some declared percentage of
    * {@link Options#MAXIMUM_EXTENT}. However, this method will return <code>false</code> if overflow
    * has been disabled or if there is an asynchronous overflow operation in progress.
@@ -1605,14 +1605,7 @@ public abstract class OverflowManager extends IndexManager {
     {
       nextOffset = journal.getRootBlockView().getNextOffset();
 
-      if (nextOffset > overflowThreshold * journal.getMaximumExtent()) {
-
-        shouldOverflow = true;
-
-      } else {
-
-        shouldOverflow = false;
-      }
+      shouldOverflow = nextOffset > overflowThreshold * journal.getMaximumExtent();
 
       if (!shouldOverflow && log.isDebugEnabled()) {
 
@@ -1637,7 +1630,7 @@ public abstract class OverflowManager extends IndexManager {
     return shouldOverflow;
   }
 
-  /**
+  /*
    * Core method for overflow with post-processing.
    *
    * <p>Note: This method does not test preconditions based on the extent of the journal.
@@ -1703,21 +1696,21 @@ public abstract class OverflowManager extends IndexManager {
 
       if (asyncOverflowEnabled.get()) {
 
-        /*
-         * Do overflow processing if overflow is being forced OR if we
+      /*
+       * Do overflow processing if overflow is being forced OR if we
          * need to do a build for at least one index partition.
          */
 
         if (forceOverflow || overflowMetadata.postProcess) {
 
-          /*
-           * Post-processing SHOULD be performed.
+        /*
+       * Post-processing SHOULD be performed.
            */
 
           if (log.isInfoEnabled()) log.info("Will start asynchronous overflow processing.");
 
-          /*
-           * Start the asynchronous processing of the named indices on
+        /*
+       * Start the asynchronous processing of the named indices on
            * the old journal.
            */
           if (!overflowAllowed.compareAndSet(true /* expect */, false /* set */)) {
@@ -1725,8 +1718,8 @@ public abstract class OverflowManager extends IndexManager {
             throw new AssertionError();
           }
 
-          /*
-           * Submit task on private service that will run
+        /*
+       * Submit task on private service that will run
            * asynchronously and clear [overflowAllowed] when done.
            *
            * Note: No one ever checks the Future returned by this
@@ -1740,8 +1733,8 @@ public abstract class OverflowManager extends IndexManager {
 
         if (log.isInfoEnabled()) log.info("Asynchronous overflow not required");
 
-        /*
-         * Note: increment the counter now since we will not do
+      /*
+       * Note: increment the counter now since we will not do
          * asynchronous overflow processing.
          */
 
@@ -1753,8 +1746,8 @@ public abstract class OverflowManager extends IndexManager {
 
         log.warn("Asynchronous overflow processing is disabled!");
 
-        /*
-         * Note: increment the counter now since we will not do
+      /*
+       * Note: increment the counter now since we will not do
          * asynchronous overflow processing.
          */
 
@@ -1771,7 +1764,7 @@ public abstract class OverflowManager extends IndexManager {
     }
   }
 
-  /**
+  /*
    * Synchronous overflow processing.
    *
    * <p>This is invoked once all preconditions have been satisfied.
@@ -1936,8 +1929,8 @@ public abstract class OverflowManager extends IndexManager {
 
       if (serviceRoot != null) {
 
-        /*
-         * The counters for the resource manager within the service's
+      /*
+       * The counters for the resource manager within the service's
          * counter hierarchy.
          *
          * Note: The [serviceRoot] is not defined by the MockFederation
@@ -1949,8 +1942,8 @@ public abstract class OverflowManager extends IndexManager {
 
         if (tmp != null) {
 
-          /*
-           * Again, the resourceManager counters are not defined for
+        /*
+       * Again, the resourceManager counters are not defined for
            * some unit tests.
            */
 
@@ -2093,8 +2086,8 @@ public abstract class OverflowManager extends IndexManager {
 
         if (oldpmd == null) {
 
-          /*
-           * A named index that is not an index partition.
+        /*
+       * A named index that is not an index partition.
            *
            * Note: In the scale-out system all named indices are
            * registered as partitioned indices so this condition
@@ -2117,8 +2110,8 @@ public abstract class OverflowManager extends IndexManager {
         // true iff an overflow handler is defined.
         final boolean hasOverflowHandler = indexMetadata.getOverflowHandler() != null;
 
-        /*
-         * When an index partition is empty we always just copy it onto
+      /*
+       * When an index partition is empty we always just copy it onto
          * the new journal (since there is no data, all that we are
          * doing is registering the index on the new journal).
          *
@@ -2155,8 +2148,8 @@ public abstract class OverflowManager extends IndexManager {
 
         if (copyIndex) {
 
-          /*
-           * We will copy the index data from the B+Tree old journal
+        /*
+       * We will copy the index data from the B+Tree old journal
            * (but not from the full index view) onto the new journal.
            * In this case the index will use a view that DOES NOT
            * include the old index on the old journal.
@@ -2195,8 +2188,8 @@ public abstract class OverflowManager extends IndexManager {
 
         } else {
 
-          /*
-           * We will only create a empty index on the new journal.
+        /*
+       * We will only create a empty index on the new journal.
            *
            * We will update the partition metadata so that the new
            * index reflects its location on the new journal. The index
@@ -2242,8 +2235,8 @@ public abstract class OverflowManager extends IndexManager {
                   ));
         }
 
-        /*
-         * Create and register the index with the new view on the new
+      /*
+       * Create and register the index with the new view on the new
          * journal.
          *
          * Note: This is essentially a variant of BTree#create() where
@@ -2252,8 +2245,8 @@ public abstract class OverflowManager extends IndexManager {
          */
         {
 
-          /*
-           * Write metadata record on store. The address of that
+        /*
+       * Write metadata record on store. The address of that
            * record is set as a side-effect on the metadata object.
            */
           indexMetadata.write(newJournal);
@@ -2281,15 +2274,15 @@ public abstract class OverflowManager extends IndexManager {
           final Checkpoint overflowCheckpoint =
               indexMetadata.overflowCheckpoint(oldBTree.getCheckpoint());
 
-          /*
-           * Write the checkpoint record on the store. The address of
+        /*
+       * Write the checkpoint record on the store. The address of
            * the checkpoint record is set on the object as a side
            * effect.
            */
           overflowCheckpoint.write(newJournal);
 
-          /*
-           * Load the B+Tree from the store using that checkpoint
+        /*
+       * Load the B+Tree from the store using that checkpoint
            * record.
            */
           final BTree newBTree =
@@ -2304,8 +2297,8 @@ public abstract class OverflowManager extends IndexManager {
 
           if (copyIndex) {
 
-            /*
-             * Copy the data from the B+Tree on the old journal into
+          /*
+       * Copy the data from the B+Tree on the old journal into
              * the B+Tree on the new journal.
              *
              * Note: [overflow := true] since we are copying from
@@ -2339,16 +2332,16 @@ public abstract class OverflowManager extends IndexManager {
 
           } else {
 
-            /*
-             * The index was not copied so its view was re-defined
+          /*
+       * The index was not copied so its view was re-defined
              * on the new journal.
              */
 
             numIndicesViewRedefined++;
           }
 
-          /*
-           * Register the new B+Tree on the new journal.
+        /*
+       * Register the new B+Tree on the new journal.
            */
           newJournal.registerIndex(bm.name, newBTree);
         }
@@ -2385,7 +2378,7 @@ public abstract class OverflowManager extends IndexManager {
     return new ResourceScores(this);
   }
 
-  /**
+  /*
    * Helper class reports performance counters of interest for this service.
    *
    * <p>Note: Default values are used when the performance counter is not available. Reasonable
@@ -2445,7 +2438,7 @@ public abstract class OverflowManager extends IndexManager {
     }
   }
 
-  /**
+  /*
    * Return the value of a host counter.
    *
    * @param path The path (relative to the host root).
@@ -2486,7 +2479,7 @@ public abstract class OverflowManager extends IndexManager {
     return defaultValue;
   }
 
-  /**
+  /*
    * Return the value of a service counter.
    *
    * @param path The path (relative to the service root).

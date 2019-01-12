@@ -30,8 +30,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.lexicon.LexiconKeyOrder;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 
-/**
- * Unit tests for {@link Configuration}.
+/*
+* Unit tests for {@link Configuration}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -75,7 +75,7 @@ public class TestConfiguration extends TestCase {
         Configuration.getProperty(indexManager, properties, namespace, globalName, defaultValue));
   }
 
-  /**
+  /*
    * Unit test for override of a property value specified for the exact namespace (rather than some
    * namespace prefix).
    */
@@ -110,7 +110,7 @@ public class TestConfiguration extends TestCase {
         Configuration.getProperty(indexManager, properties, namespace, globalName, defaultValue));
   }
 
-  /**
+  /*
    * Unit test where the property override is applied at the parent level in the namespace ("foo" vs
    * "foo.baz").
    */

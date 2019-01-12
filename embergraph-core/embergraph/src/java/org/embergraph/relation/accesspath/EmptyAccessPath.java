@@ -7,8 +7,8 @@ import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * An access path that is known to be empty.
+/*
+* An access path that is known to be empty.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -19,7 +19,7 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
 
   private final IKeyOrder<E> keyOrder;
 
-  /**
+  /*
    * Ctor variant does not specify the {@link #getPredicate()} or the {@link #getKeyOrder()} and
    * those methods will throw an {@link UnsupportedOperationException} if invoked.
    */
@@ -28,7 +28,7 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
     this(null /* predicate */, null /* keyOrder */);
   }
 
-  /**
+  /*
    * Note: the {@link #getPredicate()} and {@link #getKeyOrder()} and methods will throw an {@link
    * UnsupportedOperationException} if the corresponding argument is null.
    *
@@ -48,7 +48,7 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
     this.keyOrder = keyOrder;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws UnsupportedOperationException unless the caller specified an {@link IPredicate} to the
@@ -62,7 +62,7 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
     return predicate;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws UnsupportedOperationException unless the caller specified an {@link IKeyOrder} to the
@@ -76,7 +76,7 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
     return keyOrder;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws UnsupportedOperationException since no index was selected.
@@ -87,7 +87,7 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Always returns <code>true</code>.
@@ -98,7 +98,7 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
     return true;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Always returns ZERO(0).
@@ -109,8 +109,8 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
     return 0;
   }
 
-  //    /**
-  //     * Visits nothing.
+  //    /*
+//     * Visits nothing.
   //     */
   //    @SuppressWarnings("unchecked")
   //    @Override
@@ -127,8 +127,8 @@ public class EmptyAccessPath<E> implements IAccessPath<E> {
     return iterator(0L /* offset */, 0L /* limit */, 0 /* capacity */);
   }
 
-  //    /**
-  //     * Visits nothing.
+  //    /*
+//     * Visits nothing.
   //     */
   //    public IChunkedOrderedIterator<E> iterator(int limit, int capacity) {
   //

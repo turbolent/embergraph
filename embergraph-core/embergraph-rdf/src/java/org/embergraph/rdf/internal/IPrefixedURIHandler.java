@@ -17,17 +17,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal;
 
-/**
- * Utility for inline URI Handlers that have a namespace and a prefix
+/*
+* Utility for inline URI Handlers that have a namespace and a prefix
  *
  * @author beebs
  */
 public interface IPrefixedURIHandler {
 
-  /**
+  /*
    * Returns the prefix for the handler
    *
    * @return
    */
-  public String getPrefix();
+  String getPrefix();
 }

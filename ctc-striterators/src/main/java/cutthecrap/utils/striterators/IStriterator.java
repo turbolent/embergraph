@@ -19,45 +19,45 @@ import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-/**
- * Striterator - transformation and mapping patterns over java {@link Iterator} s.
+/*
+* Striterator - transformation and mapping patterns over java {@link Iterator} s.
  *
  * <p>Extends the {@link Iterator} interface to expose methods to add {@link IFilter} objects and a
  * specific Type filter
  */
 public interface IStriterator extends Iterator, Enumeration {
   /** Adds a Discriminating IFilter object * */
-  public IStriterator addFilter(IFilter filter);
+  IStriterator addFilter(IFilter filter);
 
   /** check each object against cls.isInstance(object) * */
-  public IStriterator addTypeFilter(Class cls);
+  IStriterator addTypeFilter(Class cls);
 
   /** check each object against object.getClass() == cls * */
-  public IStriterator addInstanceOfFilter(Class cls);
+  IStriterator addInstanceOfFilter(Class cls);
 
   /** exclude the passed object from the iteration * */
-  public IStriterator exclude(Object object);
+  IStriterator exclude(Object object);
 
   /** append the passed iteration * */
-  public IStriterator append(Iterator iter);
+  IStriterator append(Iterator iter);
 
   /** Ensures the returned values appear only once * */
-  public IStriterator makeUnique();
+  IStriterator makeUnique();
 
-  /**
+  /*
    * map the clients method against the Iteration, the Method MUST take a single Object valued
    * parameter. can be called by : iter.map(this, MyClass.aMethod);
    */
-  public IStriterator map(Object client, Method method);
+  IStriterator map(Object client, Method method);
 
-  public interface ITailOp {
-    /**
+  interface ITailOp {
+    /*
      * Opportunity for a Striterator to provide a "tail iterator" to shorten the call stack. For
      * example, an Appenderator would return the second iterator if current. Or an Expanderator the
      * child iterator if there were no more source objects.
      *
      * @return a tail optimizing iterator if possible
      */
-    public Iterator availableTailOp();
+    Iterator availableTailOp();
   }
 }

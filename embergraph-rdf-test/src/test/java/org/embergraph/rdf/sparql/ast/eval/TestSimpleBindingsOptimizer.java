@@ -29,8 +29,8 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * SPARQL level test suite for the {@link ASTSimpleBindingsOptimizer}.
+/*
+* SPARQL level test suite for the {@link ASTSimpleBindingsOptimizer}.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/653">Slow query with bind</a>
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -71,7 +71,7 @@ public class TestSimpleBindingsOptimizer extends AbstractDataDrivenSPARQLTestCas
       return properties;
     }
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -99,7 +99,7 @@ public class TestSimpleBindingsOptimizer extends AbstractDataDrivenSPARQLTestCas
       assertPredicateUsesConstant_01(spoPredicates.get(0));
     }
 
-    /**
+    /*
      * Complex patterns like
      *
      * <pre>
@@ -134,7 +134,7 @@ public class TestSimpleBindingsOptimizer extends AbstractDataDrivenSPARQLTestCas
 
   public static class TestQuadsModeAPs extends TestSimpleBindingsOptimizer {
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -162,7 +162,7 @@ public class TestSimpleBindingsOptimizer extends AbstractDataDrivenSPARQLTestCas
     }
   }
 
-  /**
+  /*
    * Make sure the passed predicate uses constant http://bigdata.com#Person in its third position
    * (with shadowed variable ?type)
    */
@@ -174,7 +174,7 @@ public class TestSimpleBindingsOptimizer extends AbstractDataDrivenSPARQLTestCas
     assertEquals("http://embergraph.org#Person", tId.getValue().toString());
   }
 
-  /**
+  /*
    * Complex patterns like
    *
    * <pre>

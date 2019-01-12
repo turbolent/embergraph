@@ -20,8 +20,8 @@ package org.embergraph.ha;
 import java.util.UUID;
 import org.embergraph.ha.msg.IHAMessage;
 
-/**
- * Message requesting a pipeline reset on a service.
+/*
+* Message requesting a pipeline reset on a service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -30,7 +30,7 @@ public interface IHAPipelineResetRequest extends IHAMessage {
   /** The quorum token in effect on the leader when this request was generated. */
   long token();
 
-  /**
+  /*
    * The {@link UUID} of the service that the leader has forced from the pipeline
    *
    * @return The {@link UUID} of the problem service -or- <code>null</code> if the leader did not
@@ -38,7 +38,7 @@ public interface IHAPipelineResetRequest extends IHAMessage {
    */
   UUID getProblemServiceId();
 
-  /**
+  /*
    * How long to await the state where the problem service is no longer part of the write pipeline
    * for a service that is upstream or downstream of the problem service.
    */

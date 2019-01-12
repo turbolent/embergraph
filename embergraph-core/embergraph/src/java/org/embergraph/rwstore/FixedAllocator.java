@@ -38,8 +38,8 @@ import org.embergraph.rwstore.RWStore.AllocationStats;
 import org.embergraph.rwstore.StorageStats.Bucket;
 import org.embergraph.util.BytesUtil;
 
-/**
- * FixedAllocator
+/*
+* FixedAllocator
  *
  * <p>Maintains List of AllocBlock(s)
  */
@@ -59,7 +59,7 @@ public class FixedAllocator implements Allocator {
   FixedAllocator m_prevCommit;
   FixedAllocator m_nextCommit;
 
-  /**
+  /*
    * Address of the {@link FixedAllocator} within the meta allocation space on the disk of the last
    * committed version of this {@link FixedAllocator}. This is a bit that can be decoded by {@link
    * RWStore#metaBit2Addr(int)}. The value is initially ZERO (0) which is never a legal bit.
@@ -70,7 +70,7 @@ public class FixedAllocator implements Allocator {
 
   Bucket m_statsBucket = null;
 
-  /**
+  /*
    * If an allocator is selected in a smallSlotHighWaste scenario, then the sparseness test for
    * allocation must be relaxed or there is a risk that no allocation would be made from a "free"
    * allocator.
@@ -78,7 +78,7 @@ public class FixedAllocator implements Allocator {
   boolean m_smallSlotHighWaste = false;
 
   public void setIndex(final int index) {
-    final AllocBlock fb = (AllocBlock) m_allocBlocks.get(0);
+    final AllocBlock fb = m_allocBlocks.get(0);
 
     if (s_islogDebug)
       log.debug(
@@ -126,7 +126,7 @@ public class FixedAllocator implements Allocator {
     return this == o;
   }
 
-  /**
+  /*
    * Return the bit in metabits for the last persisted version of this allocator. This bit can be
    * translated into the actual byte offset on the file by {@link RWStore#metaBit2Addr(int)}.
    */
@@ -134,7 +134,7 @@ public class FixedAllocator implements Allocator {
     return m_diskAddr;
   }
 
-  /**
+  /*
    * Set the bit in metabits for this allocator.
    *
    * @param addr A bit obtained from {@link RWStore#metaAlloc()}.
@@ -147,7 +147,7 @@ public class FixedAllocator implements Allocator {
     m_diskAddr = addr;
   }
 
-  /**
+  /*
    * Return the byte offset on the file corresponding to a bit index into this {@link
    * FixedAllocator}.
    *
@@ -161,7 +161,7 @@ public class FixedAllocator implements Allocator {
     offset -= 3;
 
     // The AllocBlock that manages that bit.
-    final AllocBlock block = (AllocBlock) m_allocBlocks.get(offset / allocBlockRange);
+    final AllocBlock block = m_allocBlocks.get(offset / allocBlockRange);
 
     // The bit offset into the AllocBlock.
     final int bit = offset % allocBlockRange;
@@ -208,7 +208,7 @@ public class FixedAllocator implements Allocator {
     return m_size;
   }
 
-  /**
+  /*
    * The free list for the allocation slot size serviced by this allocator. This is a reference back
    * into the corresponding free list as managed by the RWStore.
    *
@@ -219,7 +219,7 @@ public class FixedAllocator implements Allocator {
   public void setFreeList(final ArrayList list) {
     setFreeList(list, false);
   }
-  /**
+  /*
    * The force parameter is set to true when the allocator is being moved from one free list to
    * another.
    */
@@ -262,7 +262,7 @@ public class FixedAllocator implements Allocator {
     return m_context == null;
   }
 
-  /**
+  /*
    * Indicates whether session protection has been used to protect store from re-allocating
    * allocations reachable from read-only requests and concurrent transactions.
    */
@@ -301,7 +301,7 @@ public class FixedAllocator implements Allocator {
     if (s_islogDebug) checkBits();
   }
 
-  /**
+  /*
    * Unwinds the allocations made within the context and clears the write cache of any associated
    * data
    *
@@ -328,7 +328,7 @@ public class FixedAllocator implements Allocator {
     }
   }
 
-  /**
+  /*
    * write called on commit, so this is the point when "transient frees" - the freeing of previously
    * committed memory can be made available since we are creating a new commit point - the condition
    * being that m_freeBits was zero and m_freeTransients not.
@@ -358,8 +358,8 @@ public class FixedAllocator implements Allocator {
           }
 
           if (!protectTransients) {
-            /**
-             * This assert will trip if any address was freed under session protection and therefore
+          /*
+       * This assert will trip if any address was freed under session protection and therefore
              * remained accessible until released. The value returned by releaseSession should be
              * zero since all "frees" should already have removed any writes to the
              * writeCacheService
@@ -445,8 +445,8 @@ public class FixedAllocator implements Allocator {
         for (int i = 0; i < m_bitSize; i++) {
           block.m_live[i] = str.readInt();
 
-          /**
-           * Need to calc how many free blocks are available, minor optimization by checking against
+        /*
+       * Need to calc how many free blocks are available, minor optimization by checking against
            * either empty or full to avoid scanning every bit unnecessarily
            */
           if (block.m_live[i] == 0) { // empty
@@ -463,8 +463,8 @@ public class FixedAllocator implements Allocator {
           } // else full so no freebits
         }
 
-        block.m_transients = (int[]) block.m_live.clone();
-        block.m_commit = (int[]) block.m_live.clone();
+        block.m_transients = block.m_live.clone();
+        block.m_commit = block.m_live.clone();
 
         if (m_startAddr == 0) {
           m_startAddr = block.m_addr;
@@ -485,19 +485,19 @@ public class FixedAllocator implements Allocator {
   private int m_startAddr = 0;
   private int m_endAddr = 0;
 
-  /**
+  /*
    * For "small slot" allocators the allocation search is always from bit areas with less than a
    * maximum density to ensure that writes have better locality.
    */
   int m_allocIndex = -1;
 
-  /**
+  /*
    * The #of int32 values in a single {@link AllocBlock} region. The {@link FixedAllocator} can
    * manage many {@link AllocBlock}s.
    */
   private final int m_bitSize;
 
-  /**
+  /*
    * The #of bits in an {@link AllocBlock} (the #of slots managed by that {@link AllocBlock}). Each
    * slot managed by the {@link AllocBlock} is {@link #m_size} bytes.
    */
@@ -507,7 +507,7 @@ public class FixedAllocator implements Allocator {
 
   final RWStore m_store;
 
-  /**
+  /*
    * Calculating the number of ints (m_bitSize) cannot rely on a power of 2. Previously this
    * assumption was sufficient to guarantee a rounding on to an 64k boundary. However, now nints *
    * 32 * 64 = 64K, so need multiple of 32 ints.
@@ -555,7 +555,7 @@ public class FixedAllocator implements Allocator {
     m_freeBits = 32 * m_bitSize * numBlocks;
   }
 
-  /**
+  /*
    * find the allocationIndex of first "sparsely committed" AllocBlock.
    *
    * <p>Checks the committed bits of all the AllocBlocks until one is found with > 50% free (or less
@@ -581,8 +581,8 @@ public class FixedAllocator implements Allocator {
         for (int i = (m_allocIndex % m_bitSize); i < m_bitSize; i++) {
           // first check if transients are already full
           if (ab.m_transients[i] != 0xFFFFFFFF) {
-            /*
-             * If small slots are in a high waste scenario, then do not check for extra
+          /*
+       * If small slots are in a high waste scenario, then do not check for extra
              * locality in uncommitted state
              */
             if (m_smallSlotHighWaste || Integer.bitCount(ab.m_commit[i]) < 16) {
@@ -605,7 +605,7 @@ public class FixedAllocator implements Allocator {
     }
   }
 
-  /**
+  /*
    * This determines the size of the reservation required in terms of the number of ints each
    * holding bits for 32 slots.
    *
@@ -737,7 +737,7 @@ public class FixedAllocator implements Allocator {
     return free(addr, size, false);
   }
 
-  /**
+  /*
    * Need to check if address to be freed was 'live' for any shadowed allocator to determine if we
    * need to adjust the 'savedLive' data. This is critical since otherwise we will not be able to
    * reset any unisolated alloc/frees.
@@ -750,7 +750,7 @@ public class FixedAllocator implements Allocator {
 
       final int block = offset / nbits;
 
-      /**
+      /*
        * When a session is released any m_sessionActive FixedAllocators should be atomically
        * released. However, if any state allowed a call to free once the store is not session
        * protected, this must NOT overwrite m_sessionActive if it is already set since a commit
@@ -764,7 +764,7 @@ public class FixedAllocator implements Allocator {
       try {
         if (s_islogDebug) checkBits();
 
-        if (((AllocBlock) m_allocBlocks.get(block))
+        if (m_allocBlocks.get(block)
             .freeBit(offset % nbits, m_sessionActive && !overideSession)) { // bit adjust
 
           m_freeBits++;
@@ -773,9 +773,7 @@ public class FixedAllocator implements Allocator {
 
         } else {
           m_freeTransients++;
-          if (m_sessionActive) {
-            assert checkSessionFrees();
-          }
+          assert !m_sessionActive || checkSessionFrees();
         }
 
         if (m_statsBucket != null) {
@@ -861,7 +859,7 @@ public class FixedAllocator implements Allocator {
     }
   }
 
-  /**
+  /*
    * The introduction of IAllocationContexts has added some complexity to the older concept of a
    * free list. With AllocationContexts it is possibly for allocator to have free space available
    * but this being restricted to a specific AllocationContext.
@@ -1127,7 +1125,7 @@ public class FixedAllocator implements Allocator {
     return allocated;
   }
 
-  /**
+  /*
    * @return the amount of heap storage assigned to this allocator over all reserved allocation
    *     blocks.
    */
@@ -1142,7 +1140,7 @@ public class FixedAllocator implements Allocator {
     return allocated;
   }
 
-  /**
+  /*
    * Computes the amount of storage allocated using the freeBits count.
    *
    * @return the amount of storage to alloted slots in the allocation blocks
@@ -1164,7 +1162,7 @@ public class FixedAllocator implements Allocator {
 
     final int allocBlockRange = 32 * m_bitSize;
 
-    final AllocBlock block = (AllocBlock) m_allocBlocks.get(offset / allocBlockRange);
+    final AllocBlock block = m_allocBlocks.get(offset / allocBlockRange);
 
     final int bit = offset % allocBlockRange;
 
@@ -1176,7 +1174,7 @@ public class FixedAllocator implements Allocator {
 
     final int allocBlockRange = 32 * m_bitSize;
 
-    final AllocBlock block = (AllocBlock) m_allocBlocks.get(offset / allocBlockRange);
+    final AllocBlock block = m_allocBlocks.get(offset / allocBlockRange);
 
     final int bit = offset % allocBlockRange;
 
@@ -1188,10 +1186,10 @@ public class FixedAllocator implements Allocator {
 
     final int allocBlockRange = 32 * m_bitSize;
 
-    return (AllocBlock) m_allocBlocks.get(offset / allocBlockRange);
+    return m_allocBlocks.get(offset / allocBlockRange);
   }
 
-  /**
+  /*
    * If the context is this allocators context AND it is not in the commit bits then we can
    * immediately free.
    */
@@ -1219,7 +1217,7 @@ public class FixedAllocator implements Allocator {
     m_statsBucket = b;
   }
 
-  /**
+  /*
    * The semantics of reset are to ditch all unisolated modifications since the last commit point.
    * Note that this includes unisolated frees as well as allocations.
    *
@@ -1372,7 +1370,7 @@ public class FixedAllocator implements Allocator {
     return m_size;
   }
 
-  /**
+  /*
    * Add the committed allocated slot contents to the digest
    *
    * <p>FIXME: First version is correct rather than optimal, need to consider if there is any
@@ -1521,7 +1519,7 @@ public class FixedAllocator implements Allocator {
     return count;
   }
 
-  /**
+  /*
    * Determines if the provided physical address is within an allocated slot
    *
    * @param addr
@@ -1548,7 +1546,7 @@ public class FixedAllocator implements Allocator {
     return false;
   }
 
-  /**
+  /*
    * Add a copy of the currently committed allocation data to the snapshot. This is used by the
    * snapshot mechanism to ensure that a file copy, taken over the course of multiple commits, will
    * contain the correct allocation data from the time the snapshot was taken.
@@ -1557,7 +1555,7 @@ public class FixedAllocator implements Allocator {
     if (m_diskAddr > 0) tm.put(m_store.metaBit2Addr(m_diskAddr), commitData());
   }
 
-  /**
+  /*
    * Returns the 1K committed allocation data by writing the commit data for each allocation block.
    */
   byte[] commitData() {

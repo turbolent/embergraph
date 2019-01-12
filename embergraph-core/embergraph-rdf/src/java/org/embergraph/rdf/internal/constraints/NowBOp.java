@@ -44,7 +44,7 @@ public class NowBOp extends IVValueExpression<IV> implements INeedsMaterializati
     this(BOp.NOARGS, anns(globals));
   }
 
-  /**
+  /*
    * Required shallow copy constructor.
    *
    * @param args The operands.
@@ -55,7 +55,7 @@ public class NowBOp extends IVValueExpression<IV> implements INeedsMaterializati
     super(args, anns);
   }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * @param op

@@ -33,8 +33,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * An arbitrary procedure run against a single index.
+/*
+* An arbitrary procedure run against a single index.
  * <p>
  * There is a fairly direct correspondence between map / reduce processing and
  * the use of index procedures. The "map" phase corresponds to the
@@ -91,7 +91,7 @@ import org.embergraph.sparse.SparseRowStore;
  */
 public interface IIndexProcedure<T> extends IReadOnly, Serializable {
 
-  /**
+  /*
    * Run the procedure.
    *
    * <p>Note: Unisolated procedures have "auto-commit" ACID properties for a local index only. In
@@ -103,5 +103,5 @@ public interface IIndexProcedure<T> extends IReadOnly, Serializable {
    *     <code>null</code>. In general, this MUST be {@link Serializable} since it may have to pass
    *     across a network interface.
    */
-  public T apply(IIndex ndx);
+  T apply(IIndex ndx);
 }

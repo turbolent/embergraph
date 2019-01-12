@@ -25,8 +25,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 
-/**
- * Default implementation of {@link IInlineURIFactory} that comes pre-loaded with two handlers:
+/*
+* Default implementation of {@link IInlineURIFactory} that comes pre-loaded with two handlers:
  *
  * <ul>
  *   <li>IPv4 ({@link InlineIPv4URIHandler})
@@ -43,7 +43,7 @@ public class InlineURIFactory implements IInlineURIFactory {
 
   //	private final List<InlineURIHandler> handlers = new LinkedList<InlineURIHandler>();
 
-  /**
+  /*
    * The set of declared {@link InlineURIHandler}s, with an index on the prefix for the handler.
    *
    * <p>Note: I've removed the separate linked list of the handlers and changed this to a tree map.
@@ -64,7 +64,7 @@ public class InlineURIFactory implements IInlineURIFactory {
     addHandler(new InlineIPv4URIHandler(InlineIPv4URIHandler.NAMESPACE));
   }
 
-  /**
+  /*
    * Declare a handler. This must be invoked in the constructor for this class or the constructor of
    * a subclass. The set of registered handlers must not be changed outside of the constructor scope
    * both for reasons of visibility of the changes (thread-safety) and stability of the mapping of

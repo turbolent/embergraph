@@ -10,7 +10,7 @@ package cern.jet.stat.quantile;
 
 /** Computes b and k vor various parameters. */
 class QuantileCalc extends Object {
-  /**
+  /*
    * Efficiently computes the binomial coefficient, often also referred to as "n over k" or "n
    * choose k". The binomial coefficient is defined as n!/((n-k)!*k!). Tries to avoid numeric
    * overflows.
@@ -33,7 +33,7 @@ class QuantileCalc extends Object {
     }
     return binomial;
   }
-  /**
+  /*
    * Returns the smallest <code>long &gt;= value</code>.
    * <dt>Examples: <code>1.0 -> 1, 1.2 -> 2, 1.9 -> 2</code>. This method is safer than using (long)
    *     Math.ceil(value), because of possible rounding error.
@@ -41,7 +41,7 @@ class QuantileCalc extends Object {
   public static long ceiling(double value) {
     return Math.round(Math.ceil(value));
   }
-  /**
+  /*
    * Computes the number of buffers and number of values per buffer such that quantiles can be
    * determined with an approximation error no more than epsilon with a certain probability.
    *
@@ -71,7 +71,7 @@ class QuantileCalc extends Object {
     returnSamplingRate[0] = 1.0;
     return known_N_compute_B_and_K_quick(N, epsilon);
   }
-  /**
+  /*
    * Computes the number of buffers and number of values per buffer such that quantiles can be
    * determined with a <b>guaranteed</b> approximation error no more than epsilon. Assumes that
    * quantiles are to be computed over N values.
@@ -162,7 +162,7 @@ class QuantileCalc extends Object {
     int minB = -1;
     for (int b = 2; b <= maxBuffers; b++) {
       if (kMinimums[b - 2] < Long.MAX_VALUE) {
-        long mult = ((long) b) * ((long) kMinimums[b - 2]);
+        long mult = ((long) b) * kMinimums[b - 2];
         if (mult < multMin) {
           multMin = mult;
           minB = b;
@@ -184,7 +184,7 @@ class QuantileCalc extends Object {
     result[1] = k;
     return result;
   }
-  /**
+  /*
    * Computes the number of buffers and number of values per buffer such that quantiles can be
    * determined with an approximation error no more than epsilon with a certain probability. Assumes
    * that quantiles are to be computed over N values. The required sampling rate is computed and
@@ -347,7 +347,7 @@ class QuantileCalc extends Object {
       }
     }
   }
-  /**
+  /*
    * Computes the number of buffers and number of values per buffer such that quantiles can be
    * determined with an approximation error no more than epsilon with a certain probability.
    *

@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-/**
- * Interface for methods that return or accept an ordinal index into the entries in the B+-Tree. The
+/*
+* Interface for methods that return or accept an ordinal index into the entries in the B+-Tree. The
  * semantics of this interface are build over the #of spanned tuples for each child as recorded
  * within each node of the B+Tree. This provides a fast means to compute the linear index into the
  * B+Tree of any given tuple. However, this interface is only available for a local B+Tree object
@@ -37,7 +37,7 @@ package org.embergraph.btree;
  */
 public interface ILinearList {
 
-  /**
+  /*
    * Lookup the index position of the key.
    *
    * <p>Note that {@link #indexOf(byte[])} is the basis for implementing the {@link IRangeQuery}
@@ -55,9 +55,9 @@ public interface ILinearList {
    * @see #keyAt(long)
    * @see #valueAt(long)
    */
-  public long indexOf(byte[] key);
+  long indexOf(byte[] key);
 
-  /**
+  /*
    * Return the key for the identified entry. This performs an efficient search whose cost is
    * essentially the same as {@link ISimpleBTree#lookup(byte[])}.
    *
@@ -68,9 +68,9 @@ public interface ILinearList {
    * @see #indexOf(byte[])
    * @see #valueAt(long)
    */
-  public byte[] keyAt(long index);
+  byte[] keyAt(long index);
 
-  /**
+  /*
    * Return the value for the identified entry. This performs an efficient search whose cost is
    * essentially the same as {@link ISimpleBTree#lookup(byte[])}.
    *
@@ -82,5 +82,5 @@ public interface ILinearList {
    * @see #indexOf(byte[])
    * @see #keyAt(long)
    */
-  public byte[] valueAt(long index);
+  byte[] valueAt(long index);
 }

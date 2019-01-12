@@ -55,8 +55,8 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 import org.embergraph.util.concurrent.WriteTaskCounters;
 
-/**
- * This class coordinates a schedule among concurrent operations requiring exclusive access to
+/*
+* This class coordinates a schedule among concurrent operations requiring exclusive access to
  * shared resources. Whenever possible, the result is a concurrent schedule - that is, operations
  * having non-overlapping lock requirements run concurrently while operations that have lock
  * contentions are queued behind operations that currently have locks on the relevant resources. A
@@ -100,7 +100,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
   protected static final boolean INFO = log.isInfoEnabled();
   protected static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Each resource that can be locked has an associated {@link ResourceQueue}.
    *
    * <p>Note: This is a concurrent collection since new resources may be added while concurrent
@@ -116,7 +116,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
               R, ResourceQueue<LockFutureTask<? extends Object>>>(
               1000 /* nresources */, TimeUnit.SECONDS.toNanos(60));
 
-  /**
+  /*
    * Release all locks held by the {@link LockFutureTask} currently holding a lock on the specified
    * resource.
    *
@@ -149,8 +149,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
         if (task == null) {
 
-          /*
-           * find the task by checking the resource queue for any of
+        /*
+       * find the task by checking the resource queue for any of
            * its declared locks.
            */
           task = resourceQueue.queue.peek();
@@ -160,8 +160,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
         } else {
 
-          /*
-           * verify that the task holds the rest of its declared
+        /*
+       * verify that the task holds the rest of its declared
            * locks.
            */
           if (task != resourceQueue.queue.peek()) {
@@ -196,14 +196,14 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * True iff locks MUST be predeclared by the operation - this is a special case of 2PL (two-phrase
    * locking) that allows significant optimizations and avoids the possibility of deadlock
    * altogether.
    */
   private final boolean predeclareLocks;
 
-  /**
+  /*
    * When true, the resources in a lock request are sorted before the lock requests are made to the
    * various resource queues. This option is ONLY turned off for testing purposes as it ALWAYS
    * reduces the chance of deadlocks and eliminates it entirely when locks are also predeclared.
@@ -216,44 +216,44 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
   /** Tasks holding their locks are submitted to this service for execution. */
   protected final Executor delegate;
 
-  /**
+  /*
    * Run states for the {@link NonBlockingLockManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static enum RunState {
+  public enum RunState {
 
     /** During startup. Tasks are NOT accepted. */
     Starting(0),
 
-    /**
+    /*
      * While running (aka open). Tasks are accepted and submitted for execution once they hold their
      * locks.
      */
     Running(1),
 
-    /**
+    /*
      * When shutting down normally. New tasks are not accepted but {@link Future}s are still
      * monitored for completion and waiting tasks will eventually be granted their locks and execute
      * on the delegate.
      */
     Shutdown(2),
 
-    /**
+    /*
      * When shutting down immediately. New tasks are not accepted, tasks waiting for their locks are
      * cancelled (they will not execute) and {@link Future}s for running tasks are cancelled (they
      * are interrupted).
      */
     ShutdownNow(3),
 
-    /**
+    /*
      * When halted. New tasks are not accepted. No tasks are waiting. Any {@link Future}s were
      * cancelled.
      */
     Halted(4);
 
-    private RunState(int val) {
+    RunState(int val) {
 
       this.val = val;
     }
@@ -271,23 +271,23 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
         if (newval == Running) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == Running) {
 
         if (newval == Shutdown) return true;
 
-        if (newval == ShutdownNow) return true;
+        return newval == ShutdownNow;
 
       } else if (this == Shutdown) {
 
         if (newval == ShutdownNow) return true;
 
-        if (newval == Halted) return true;
+        return newval == Halted;
 
       } else if (this == ShutdownNow) {
 
-        if (newval == Halted) return true;
+        return newval == Halted;
       }
 
       return false;
@@ -453,7 +453,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
   private CounterSet root;
 
-  /**
+  /*
    * Helper class pairs up the resource with its sampled queue size and allows ordering of the
    * samples. E.g., by size or by resource.
    *
@@ -481,7 +481,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Counters for the {@link NonBlockingLockManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -498,7 +498,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     /** The #of tasks that have been started on the delegate {@link Executor} (running total). */
     public long nstarted;
 
-    /**
+    /*
      * The #of tasks that whose execution on the delegate {@link Executor} is complete (either by
      * normal completion or by error, but only for tasks which were executed on the delegate)
      * (running total).
@@ -511,21 +511,21 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     /** The #of tasks whose exception was set (running total). */
     public long nerror;
 
-    /**
+    /*
      * The #of tasks that deadlocked when they attempted to acquire their locks (running total).
      * Note that a task MAY retry lock acquisition and this counter will be incremented each time it
      * does so and then deadlocks.
      */
     public long ndeadlock;
 
-    /**
+    /*
      * The #of tasks that timed out when they attempted to acquire their locks (running total). Note
      * that a task MAY retry lock acquisition and this counter will be incremented each time it does
      * so and then times out.
      */
     public long ntimeout;
 
-    /**
+    /*
      * #of tasks that are currently waiting on locks. This is the effective queue length of the
      * {@link NonBlockingLockManager}. To get the actual queue length you need to add this to the
      * length of the queue for the delegate {@link Executor}.
@@ -538,7 +538,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
      */
     public int nwaiting;
 
-    /**
+    /*
      * #of tasks that have acquired their locks and are concurrently executing. This is the true
      * measure of concurrency.
      */
@@ -551,7 +551,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
   /** Counters for various things. */
   final Counters counters = new Counters();
 
-  /**
+  /*
    * Create a lock manager. No concurrency limit imposed when <i>predeclareLocks</i> is <code>true
    * </code> as deadlocks are impossible and we do not maintain a WAITS_FOR graph.
    *
@@ -577,7 +577,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     this(maxConcurrency, predeclareLocks, true /* sortLockRequests */, delegate);
   }
 
-  /**
+  /*
    * Create a lock manager. No concurrency limit imposed when <i>predeclareLocks</i> is <code>true
    * </code> as deadlocks are impossible and we do not maintain a WAITS_FOR graph.
    *
@@ -680,7 +680,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * {@link FutureTask} which executes once it holds its locks.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -695,19 +695,19 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
     private final int maxLockTries;
 
-    /**
+    /*
      * Incremented each time a deadlock is detected. We will not retry if {@link #maxLockTries} is
      * exceeded.
      */
     private int ntries = 0;
 
-    /**
+    /*
      * The timestamp in nanoseconds when this task was accepted. This is used to decide whether the
      * {@link #lockTimeout} has expired.
      */
     private final long acceptTime = System.nanoTime();
 
-    /**
+    /*
      * The set of {@link ResourceQueue}s for which this task owns a lock (is a member of the granted
      * group) (NOT THREAD SAFE).
      *
@@ -773,7 +773,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       this.task = task;
     }
 
-    /**
+    /*
      * The resource(s) that are pre-declared by the task. {@link #call()} will ensure that the task
      * as a lock on these resources before it invokes {@link #run()} to execution the task.
      */
@@ -802,7 +802,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       return lockTimeout;
     }
 
-    /**
+    /*
      * Extended signal {@link NonBlockingLockManager#stateChanged} when the task completes, to track
      * counters, and also exposed to the outer class.
      */
@@ -815,8 +815,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       try {
         if (DEBUG) log.debug("Exception: " + this + ", cause=" + t, t);
         counters.nerror++;
-        /*
-         * Note: Not known to be running, hence assume waiting (this
+      /*
+       * Note: Not known to be running, hence assume waiting (this
          * method is sometimes called before the task begins to
          * execute).
          */
@@ -828,7 +828,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       }
     }
 
-    /**
+    /*
      * Extended signal {@link NonBlockingLockManager#stateChanged} when the task completes and to
      * track counters.
      */
@@ -841,8 +841,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       try {
         if (DEBUG) log.debug("Cancelled: " + this);
         counters.ncancel++;
-        /*
-         * Note: Not known to be running, hence assume waiting (this
+      /*
+       * Note: Not known to be running, hence assume waiting (this
          * method is sometimes called before the task begins to
          * execute).
          */
@@ -856,7 +856,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       return ret;
     }
 
-    /**
+    /*
      * Extended signal {@link NonBlockingLockManager#stateChanged} when the task completes and to
      * track counters.
      */
@@ -908,8 +908,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
             counters.nended++;
             counters.nrunning--;
           }
-          /*
-           * The task is KNOWN to not be waiting since it was running.
+        /*
+       * The task is KNOWN to not be waiting since it was running.
            */
           final boolean waiting = false;
           releaseLocks(this, waiting);
@@ -921,7 +921,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Add if absent and return a {@link ResourceQueue} for the named resource.
    *
    * @param resource The resource.
@@ -949,7 +949,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     return resourceQueue;
   }
 
-  /**
+  /*
    * Submit a task for execution. The task will wait until it holds the declared locks. It will then
    * execute. This method is non-blocking. The caller must use {@link FutureTask#get()} to await the
    * outcome.
@@ -1058,7 +1058,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Used to run the {@link AcceptTask} and the {@link MonitorTask}.
    *
    * <p>FIXME Monitor this service using a {@link ThreadPoolExecutorStatisticsTask} to convert
@@ -1070,7 +1070,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
   /** The service run state. */
   private volatile RunState runState = RunState.Starting;
 
-  /**
+  /*
    * Lock used to protect changes various state changes, including change to the {@link #runState}.
    */
   private final ReentrantLock lock = new ReentrantLock();
@@ -1078,7 +1078,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
   /** Condition is signaled whenever the {@link AcceptTask} needs to wake up. */
   private final Condition stateChanged = lock.newCondition();
 
-  /**
+  /*
    * Tasks accepted but not yet waiting on their locks. Tasks are moved from here to the {@link
    * #waitingTasks} asynchronously in order to de-couple the caller from {@link DeadlockException}s
    * or periods when the system is at the maximum multi-programming level and can not accept another
@@ -1087,14 +1087,14 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
   private final BlockingQueue<LockFutureTask<? extends Object>> acceptedTasks =
       new LinkedBlockingQueue<LockFutureTask<? extends Object>>();
 
-  /**
+  /*
    * Tasks whose lock requests are in the appropriate {@link ResourceQueue}s but which are not yet
    * executing.
    */
   private final BlockingQueue<LockFutureTask<? extends Object>> waitingTasks =
       new LinkedBlockingQueue<LockFutureTask<? extends Object>>();
 
-  /**
+  /*
    * {@link Runnable} drains the {@link #acceptedTasks} queue and manages state changes in the
    * {@link ResourceQueue}s. Once a task is holding all necessary locks, the task is submitted to
    * the delegate {@link Executor} for execution. This thread is also responsible for monitoring the
@@ -1124,8 +1124,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
           case Shutdown:
             {
               while (processAcceptedTasks() || processWaitingTasks()) {
-                /*
-                 * Do work.
+              /*
+       * Do work.
                  *
                  * Note: will run anything already accepted. That is
                  * intentional. Once the lock manager is shutdown it will no
@@ -1136,8 +1136,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
               lock.lock();
               try {
                 if (acceptedTasks.isEmpty() && waitingTasks.isEmpty()) {
-                  /*
-                   * There is no more work to be performed so we can
+                /*
+       * There is no more work to be performed so we can
                    * change the runState.
                    */
                   if (INFO) log.info("No more work.");
@@ -1154,8 +1154,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
             }
           case ShutdownNow:
             {
-              /*
-               * Cancel all tasks, clearing all queues. Note that only
+            /*
+       * Cancel all tasks, clearing all queues. Note that only
                * tasks which are on [runningTasks] need to be interrupted
                * as tasks on the other queues are NOT running.
                */
@@ -1184,7 +1184,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       } // while(true)
     } // run
 
-    /**
+    /*
      * IFF there is no work that could be performed and we are in the expected {@link RunState} then
      * this blocks until someone signals {@link NonBlockingLockManager#stateChanged}. That signal
      * can come either from submitting a new task, from a running task that completes, from a task
@@ -1196,8 +1196,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     private void awaitStateChange(final RunState expected) {
       lock.lock();
       try {
-        /*
-         * While we hold the lock we verify that there really is no work
+      /*
+       * While we hold the lock we verify that there really is no work
          * to be done and that we are in the expected run state. Then
          * and only then do we wait on [stateChanged].
          */
@@ -1219,7 +1219,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       }
     }
 
-    /**
+    /*
      * Cancel all tasks and remove them from the queue.
      *
      * @param tasks The tasks.
@@ -1237,7 +1237,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       }
     }
 
-    /**
+    /*
      * Processes accepted tasks, adding lock requests for each in turn:
      *
      * <ul>
@@ -1293,8 +1293,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
           if (waitsFor != null && waitsFor.isFull()) {
 
-            /*
-             * Note: When TxDag is used we MUST NOT add the lock
+          /*
+       * Note: When TxDag is used we MUST NOT add the lock
              * requests if it would exceed the configured
              * multi-programming capacity (an exception would be
              * thrown by TxDag). Therefore we stop processing
@@ -1312,8 +1312,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
             return nmoved > 0;
           }
 
-          /*
-           * Modify the state of the ResourceQueue(s) and the optional
+        /*
+       * Modify the state of the ResourceQueue(s) and the optional
            * TxDag to reflect the lock requests. The method will
            * release the lock requests if a deadlock would arise.
            *
@@ -1324,8 +1324,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
           if (waitsFor != null) {
 
-            /*
-             * Declare the vertex.
+          /*
+       * Declare the vertex.
              *
              * Note: The problem here is twofold.
              *
@@ -1368,8 +1368,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
           t.setException(t2);
 
           if (waitsFor != null) {
-            /*
-             * Paranoia check to make sure that we did not leave
+          /*
+       * Paranoia check to make sure that we did not leave
              * anything in the WAITS_FOR graph.
              */
             final int nafter = waitsFor.size();
@@ -1380,8 +1380,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
           if ((t2 instanceof DeadlockException)) {
 
-            /*
-             * This is the ONLY expected exception when we issue the
+          /*
+       * This is the ONLY expected exception when we issue the
              * lock requests.
              */
 
@@ -1403,15 +1403,15 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
           } else {
 
-            /*
-             * Anything else is an internal error.
+          /*
+       * Anything else is an internal error.
              */
 
             log.error("Internal error: task=" + t, t2);
           }
 
-          /*
-           * Remove task from the accepted queue since we will not
+        /*
+       * Remove task from the accepted queue since we will not
            * re-run it.
            *
            * Note: We DO retry tasks which result in a deadlock so
@@ -1424,8 +1424,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
           lock.unlock();
         }
 
-        /*
-         * FIXME if the task is holding all of its locks then start it
+      /*
+       * FIXME if the task is holding all of its locks then start it
          * immediately. Note also that we are grabbing and releasing the
          * #lock quite in the AcceptTask's thread. And presumably in
          * run() as well.
@@ -1451,7 +1451,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       return nmoved > 0;
     }
 
-    /**
+    /*
      * For each task waiting to run:
      *
      * <ul>
@@ -1513,8 +1513,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
           try {
 
-            /*
-             * Note: FutureTask will take can of updating its state
+          /*
+       * Note: FutureTask will take can of updating its state
              * before/after the runnable target.
              *
              * Note: If delegate.execute() blocks then the acceptor
@@ -1531,8 +1531,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
           } catch (RejectedExecutionException t2) {
 
-            /*
-             * We can't queue this task now so we stop processing
+          /*
+       * We can't queue this task now so we stop processing
              * the waiting tasks. We will pick up on those tasks
              * again the next time this method is invoked.
              */
@@ -1611,7 +1611,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Change the {@link #runState}.
    *
    * @param newval The new value.
@@ -1637,7 +1637,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Update the {@link ResourceQueue}s and the optional {@link TxDag} to reflect the lock requests
    * for the task. The operation is atomic and succeeds iff the lock requests could be issued
    * without deadlock. If an error occurs then the lock requests will not have been registered on
@@ -1657,8 +1657,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     switch (runState) {
       case ShutdownNow:
       case Halted:
-        /*
-         * No new lock requests are permitted once we reach ShutdownNow.
+      /*
+       * No new lock requests are permitted once we reach ShutdownNow.
          */
         throw new IllegalStateException("runState=" + runState);
     }
@@ -1670,8 +1670,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       // verify that no locks are held for this operation.
       if (!task.lockedResources.isEmpty()) {
 
-        /*
-         * The operation has already declared some locks. Since
+      /*
+       * The operation has already declared some locks. Since
          * [predeclareLocks] is true it is not permitted to grow the set
          * of declared locks, so we throw an exception.
          */
@@ -1704,7 +1704,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
        */
       final LinkedHashSet<LockFutureTask<? extends Object>> predecessors =
           new LinkedHashSet<LockFutureTask<? extends Object>>();
-      for (R r : (R[]) task.resource) {
+      for (R r : task.resource) {
 
         // make sure queue exists for this resource.
         final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = declareResource(r);
@@ -1717,8 +1717,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
       if (!predecessors.isEmpty()) {
 
-        /*
-         * Add edges to the WAITS_FOR graph for each task on which this
+      /*
+       * Add edges to the WAITS_FOR graph for each task on which this
          * task must wait.
          *
          * Note: throws DeadlockException if the lock requests would
@@ -1744,18 +1744,18 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
        * ResourceQueues.
        */
 
-      for (R r : (R[]) task.resource) {
+      for (R r : task.resource) {
 
         // make sure queue exists for this resource.
         final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = declareResource(r);
 
-        /*
-         * Add a lock request for this resource.
+      /*
+       * Add a lock request for this resource.
          */
         resourceQueue.queue.add(task);
 
-        /*
-         * Add the resource queue to the set of queues whose locks are
+      /*
+       * Add the resource queue to the set of queues whose locks are
          * held by this task.
          */
         task.lockedResources.add(resourceQueue);
@@ -1770,18 +1770,18 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
        * its lock requests.
        */
 
-      for (R r : (R[]) task.resource) {
+      for (R r : task.resource) {
 
         // make sure queue exists for this resource.
         final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = declareResource(r);
 
-        /*
-         * Add a lock request for this resource.
+      /*
+       * Add a lock request for this resource.
          */
         resourceQueue.queue.add(task);
 
-        /*
-         * Add the resource queue to the set of queues whose locks are held
+      /*
+       * Add the resource queue to the set of queues whose locks are held
          * by this task.
          */
         task.lockedResources.add(resourceQueue);
@@ -1789,7 +1789,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the task holds all of its declared locks.
    *
    * @param task The task.
@@ -1799,7 +1799,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 
-    for (R r : (R[]) task.resource) {
+    for (R r : task.resource) {
 
       final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = resourceQueues.get(r);
 
@@ -1814,7 +1814,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     return true;
   }
 
-  /**
+  /*
    * Release all locks for the task.
    *
    * @param task The task.
@@ -1840,8 +1840,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
         final ResourceQueue<LockFutureTask<? extends Object>> resourceQueue = itr.next();
 
-        /*
-         * Remove lock request from resource queue
+      /*
+       * Remove lock request from resource queue
          */
         if (!resourceQueue.queue.remove(t)) {
 
@@ -1857,8 +1857,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
       if (waitsFor != null) {
 
-        /*
-         * At this point there are edges in the WAITS_FOR graph and the
+      /*
+       * At this point there are edges in the WAITS_FOR graph and the
          * task is no longer on any of the resource queues.
          */
         synchronized (waitsFor) {
@@ -1866,8 +1866,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
 
             waitsFor.removeEdges(t, waiting);
 
-            /*
-             * Release the vertex (if any) in the WAITS_FOR graph.
+          /*
+       * Release the vertex (if any) in the WAITS_FOR graph.
              *
              * Note: Since we always declare a vertex before we
              * request the locks for a task this method SHOULD NOT
@@ -1915,7 +1915,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
         + "}";
   }
 
-  /**
+  /*
    * Unbounded queue of operations waiting to gain an exclusive lock on a resource. By default, the
    * queue imposes a "fair" schedule for access to the resource. Deadlocks among resources are
    * detected using a <code>WAITS_FOR</code> graph that is shared by all resources and transactions
@@ -1935,7 +1935,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     /** The resource whose access is controlled by this object. */
     private final R resource;
 
-    /**
+    /*
      * The queue of transactions seeking access to the {@link #resource}. The object at the head of
      * the queue is the transaction with the lock on the resource.
      */
@@ -1959,7 +1959,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       return Math.max(0, queue.size() - 1);
     }
 
-    /**
+    /*
      * Return true if the transaction currently holds the lock.
      *
      * @param tx The transaction.
@@ -1974,7 +1974,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       return queue.peek() == tx;
     }
 
-    /**
+    /*
      * Note: This uses {@link LinkedBlockingQueue#toString()} to serialize the state of the resource
      * queue so the result will be consistent per the contract of that method and {@link
      * LinkedBlockingQueue#iterator()}.
@@ -1989,7 +1989,7 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
           + "}";
     }
 
-    /**
+    /*
      * Create a queue of lock requests for a resource.
      *
      * @param resource The resource.
@@ -2001,8 +2001,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
       this.resource = resource;
     }
 
-    //        /**
-    //         * Return iff the tx currently holds the lock on the resource.
+    //        /*
+//         * Return iff the tx currently holds the lock on the resource.
     //         *
     //         * @throws IllegalStateException
     //         *             if the tx is not in the granted group.
@@ -2017,8 +2017,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     //
     //        }
 
-    //        /**
-    //         * Request a lock on the resource. If the queue is empty or if the task
+    //        /*
+//         * Request a lock on the resource. If the queue is empty or if the task
     //         * already owns the lock then return immediately. Otherwise, update the
     //         * optional {@link TxDag} to determine if the a deadlock would result.
     //         * If no deadlock would result, then add the task to the queue.
@@ -2135,8 +2135,8 @@ public class NonBlockingLockManager</* T, */ R extends Comparable<R>> {
     //
     //        }
     //
-    //        /**
-    //         * Remove the tx from the {@link ResourceQueue}.
+    //        /*
+//         * Remove the tx from the {@link ResourceQueue}.
     //         *
     //         * @param tx
     //         *            The transaction.

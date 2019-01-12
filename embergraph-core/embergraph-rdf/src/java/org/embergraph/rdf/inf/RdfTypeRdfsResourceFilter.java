@@ -11,8 +11,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Filter matches <code>(x rdf:type rdfs:Resource).
+/*
+* Filter matches <code>(x rdf:type rdfs:Resource).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,16 +49,11 @@ public class RdfTypeRdfsResourceFilter<E extends ISPO> extends SPOFilter<E>
 
   private boolean accept(final ISPO spo) {
 
-    if (spo.p().equals(rdfType) && spo.o().equals(rdfsResource)) {
-
-      // reject (?x, rdf:type, rdfs:Resource )
-
-      return true;
-    }
+    // reject (?x, rdf:type, rdfs:Resource )
+    return spo.p().equals(rdfType) && spo.o().equals(rdfsResource);
 
     // Accept everything else.
 
-    return false;
   }
 
   /** The initial version. */

@@ -47,11 +47,11 @@ public interface IWriteCacheCounters {
   String NACCEPT = "naccept";
   /** The #of bytes in the records that were accepted by the cache. */
   String BYTES_ACCEPTED = "bytesAccepted";
-  // /**
-  // * The #of times this write cache was flushed to the backing channel.
+  // /*
+// * The #of times this write cache was flushed to the backing channel.
   // */
   // String NFLUSHED = "nflushed";
-  /**
+  /*
    * The #of writes onto the backing channel - this is either {@link WriteCache} buffer instances or
    * individual records in those {@link WriteCache} buffers depending on whether the {@link
    * WriteCache} supports gathered writes (for the WORM, it is the #of {@link WriteCache} instances

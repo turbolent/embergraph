@@ -8,8 +8,8 @@ import java.util.concurrent.Future;
 import org.embergraph.ha.msg.IHAMessage;
 import org.embergraph.quorum.ServiceLookup;
 
-/**
- * Helper class submits the RMI for a PREPARE, COMMIT, or ABORT message. This is used to execute the
+/*
+* Helper class submits the RMI for a PREPARE, COMMIT, or ABORT message. This is used to execute the
  * different requests in parallel on a local executor service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -65,7 +65,7 @@ abstract class AbstractMessageTask<S extends Remote, T, M extends IHAMessage>
     }
   }
 
-  /**
+  /*
    * Invoke the specific RMI using the message supplied to the constructor.
    *
    * @param service The service (resolved from the service {@link UUID} supplied to the

@@ -27,8 +27,8 @@ import it.unimi.dsi.io.OutputBitStream;
 import java.io.EOFException;
 import java.io.IOException;
 
-/**
- * Provides semi-external random access to a list of {@linkplain OutputBitStream#writeGamma(int)
+/*
+* Provides semi-external random access to a list of {@linkplain OutputBitStream#writeGamma(int)
  * &gamma;-encoded} integers.
  *
  * <p>This class is a semi-external {@link it.unimi.dsi.fastutil.longs.LongList} that MG4J uses to
@@ -48,7 +48,7 @@ import java.io.IOException;
 public class SemiExternalGammaList extends AbstractLongList {
   public static final int DEFAULT_STEP = 128;
 
-  /**
+  /*
    * Position in the offset stream for each random access entry point (one each {@link #step}
    * elements).
    */
@@ -60,7 +60,7 @@ public class SemiExternalGammaList extends AbstractLongList {
   /** The number of longs. */
   private final int numLongs;
 
-  /**
+  /*
    * Creates a new semi-external list.
    *
    * @param longs a bit stream containing &gamma;-encoded longs.
@@ -84,7 +84,7 @@ public class SemiExternalGammaList extends AbstractLongList {
     }
   }
 
-  /**
+  /*
    * Creates a new semi-external list.
    *
    * <p>This quick-and-dirty constructor estimates the number of longs by checking for an {@link

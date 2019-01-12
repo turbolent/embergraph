@@ -3,8 +3,8 @@ package org.embergraph.resources;
 import java.util.Arrays;
 import org.embergraph.btree.IndexMetadata;
 
-/**
- * The result of a {@link JoinIndexPartitionTask}.
+/*
+* The result of a {@link JoinIndexPartitionTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -15,7 +15,7 @@ public class JoinResult extends AbstractResult {
 
   public final String[] oldnames;
 
-  /**
+  /*
    * @todo javadoc
    * @param name
    * @param indexMetadata

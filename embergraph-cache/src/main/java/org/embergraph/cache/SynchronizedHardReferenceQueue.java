@@ -23,21 +23,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.cache;
 
-/**
- * Thread-safe version.
+/*
+* Thread-safe version.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class SynchronizedHardReferenceQueue<T> implements IHardReferenceQueue<T> {
 
-  /**
+  /*
    * Note: Synchronization for the inner {@link #queue} is realized using the <strong>outer</strong>
    * reference!
    */
   protected final HardReferenceQueue<T> queue;
 
-  /**
+  /*
    * Defaults the #of references to scan on append requests to 10.
    *
    * @param listener The listener on which cache evictions are reported.
@@ -50,7 +50,7 @@ public class SynchronizedHardReferenceQueue<T> implements IHardReferenceQueue<T>
     this(listener, capacity, DEFAULT_NSCAN);
   }
 
-  /**
+  /*
    * Core impl.
    *
    * @param listener The listener on which cache evictions are reported (optional).
@@ -67,7 +67,7 @@ public class SynchronizedHardReferenceQueue<T> implements IHardReferenceQueue<T>
     this.queue = new InnerHardReferenceQueue(listener, capacity, DEFAULT_NSCAN);
   }
 
-  /**
+  /*
    * All attempts to add an element to the buffer invoke this hook before checking the remaining
    * capacity in the buffer. The caller will be synchronized on <i>this</i> when this method is
    * invoked.
@@ -78,7 +78,7 @@ public class SynchronizedHardReferenceQueue<T> implements IHardReferenceQueue<T>
 
   }
 
-  /**
+  /*
    * Inner class delegates {@link #beforeOffer(Object)} to the outer class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -87,7 +87,7 @@ public class SynchronizedHardReferenceQueue<T> implements IHardReferenceQueue<T>
    */
   private final class InnerHardReferenceQueue extends HardReferenceQueue<T> {
 
-    /**
+    /*
      * @param listener
      * @param capacity
      * @param nscan

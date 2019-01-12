@@ -69,8 +69,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.openrdf.model.URI;
 
-/**
- * Optimizer that aims at the optimization of SPARQL 1.1 pattern detecting static (i.e., non runtime
+/*
+* Optimizer that aims at the optimization of SPARQL 1.1 pattern detecting static (i.e., non runtime
  * dependent) binding for variables, moving them to the top-level of the query where possible, and
  * attaching them with occurrences of the variable.
  *
@@ -133,13 +133,13 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     final IQueryNode queryNode = input.getQueryNode();
     final IBindingSet[] bindingSets = input.getBindingSets();
 
-    /**
+    /*
      * We collect statically enforced bindings in this binding set, which will later be post
      * processed and injected (by joining all bindings).
      */
     final StaticBindingInfo staticBindingInfo = new StaticBindingInfo(bindingSets);
 
-    /**
+    /*
      * In case the binding sets variable is null, nothing needs to be done (query will return empty
      * result anyways). Also, this optimizer is only applicable to top-level queries.
      */
@@ -170,7 +170,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Apply the optimization (eliminating static binding producing constructs from the query and
      * collecting the staticBindings set)
      */
@@ -199,7 +199,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       final Set<InlineTasks> inlineTasks,
       final BindingsClause bindingsClause) {
 
-    /**
+    /*
      * First, collect static bindings from the outer VALUES clause. In case of the root query, those
      * will be added to the exogeneous binding set later on; in case of subqueries, we'll merge them
      * with other produced static bindings into a new VALUES clause in the end.
@@ -230,7 +230,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * The optimization phase performs rewriting & extraction of static binding infos and inline
      * tasks.
      */
@@ -241,7 +241,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       inlineTask.apply();
     }
 
-    /**
+    /*
      * Return the binding set, leaving the caller the decision on what to do with it (i.e., adding
      * it to the exogeneous bindings or constructing a VALUES clause). The binding set is
      * constructed by joining all produced bindings. Note that this is the case for the outer query;
@@ -284,7 +284,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     return staticBindings;
   }
 
-  /**
+  /*
    * Applies the optimization to any {@link GroupNodeBase}.
    *
    * @param group a join group
@@ -317,7 +317,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       return;
     }
 
-    /**
+    /*
      * Collect information about which variables are used where, for later inlining. Further, this
      * information is required to make sure that we do not make static bindings exogeneous for some
      * variable ?x for which a filter exists in the same scope or in the parent scope, which would
@@ -350,8 +350,8 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
         final AssignmentNode an = (AssignmentNode) child;
         final IValueExpression<?> ve = an.getValueExpression();
 
-        /**
-         * We can optimize cases where (i) the value expression is a constant that is (ii)
+      /*
+       * We can optimize cases where (i) the value expression is a constant that is (ii)
          * represented through a ConstantNode. Note that value expressions not represented through
          * ConstantNodes (such as, e.g., CONCAT("a", "b") in principle are amenable to the
          * optimization as well, but their constructed values have not yet been joined against the
@@ -420,8 +420,8 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
               VariableUsageInfo.merge(ancOrSelfVarUsageInfo, childVarUsageInfo);
         }
 
-        /*
-         * In the following, we set up inline tasks for vars with unique
+      /*
+       * In the following, we set up inline tasks for vars with unique
          * value in the specified binding set.
          */
         final VariableUsageInfo usageInfo =
@@ -483,8 +483,8 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
             bs.set((IVariable) right.getValueExpression(), (IConstant) left.getValueExpression());
           }
 
-          /*
-           * In case the filter describes a single static mapping, we also
+        /*
+       * In case the filter describes a single static mapping, we also
            * schedule an inline task.
            */
           if (!bs.isEmpty() && bs.size() == 1) {
@@ -514,7 +514,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
             if (varNodeCandidate instanceof VarNode) {
 
               final VarNode varNode = (VarNode) varNodeCandidate;
-              final IVariable<IV> var = (IVariable<IV>) (varNode.getValueExpression());
+              final IVariable<IV> var = (varNode.getValueExpression());
 
               final BOp valueBOp = functionNode.get(1);
               if (valueBOp instanceof ConstantNode) {
@@ -542,7 +542,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Remove the children for which static bindings were extracted (they were recorded in the prior
      * iteration over the group.
      */
@@ -563,8 +563,8 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
       } else if (child instanceof SubqueryRoot) {
 
-        /**
-         * Apply to subquery, voiding all collected information to account for the new scope induced
+      /*
+       * Apply to subquery, voiding all collected information to account for the new scope induced
          * by the subquery.
          */
         optimize(
@@ -577,7 +577,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Helper class used to record usage of a given variable, i.e. linking variables to constructs in
    * which they occur.
    */
@@ -591,7 +591,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       usageMap = new HashMap<IVariable<?>, List<IQueryNode>>();
     }
 
-    /**
+    /*
      * Returns true if a usage record for the given variable inside a FILTER
      * or BIND/VALUES node has been recorded. The rationale of this check is
      * as follows: if a variable used inside a static binding is queries in
@@ -646,7 +646,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       return false; // no filter occurrence detected
     }
 
-    /**
+    /*
      * Returns true iff usage records for the var are available.
      *
      * @param var
@@ -657,7 +657,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       return usageMap.containsKey(var) && !usageMap.get(var).isEmpty();
     }
 
-    /**
+    /*
      * Returns the list of variable usages.
      *
      * @param var
@@ -668,7 +668,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       return usageMap.get(var);
     }
 
-    /**
+    /*
      * Gets the map recoding all usages of all variables (internal data structure maintained by the
      * class).
      *
@@ -678,7 +678,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       return usageMap;
     }
 
-    /**
+    /*
      * Extracts variable usage information (variables and the nodes they occur in), investigating
      * FILTERs, assignment nodes, and statement pattern nodes, but /not/ recursing into children.
      *
@@ -697,7 +697,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
 
           final IValueExpressionNode vexpr = filter.getValueExpressionNode();
 
-          extractVarUsageInfo(node, (IValueExpressionNode) vexpr);
+          extractVarUsageInfo(node, vexpr);
 
         } else if (node instanceof StatementPatternNode) {
 
@@ -741,7 +741,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Extracts variable usage information from an {@link IValueExpressionNode}.
      *
      * @param node the "parent" node which is reported back
@@ -749,7 +749,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
      */
     private void extractVarUsageInfo(final IQueryNode node, final IValueExpressionNode vexpNode) {
 
-      /**
+      /*
        * If the vexpNode is a VarNode, we're done and add it to the map (if it has not yet been
        * recorded before).
        */
@@ -781,7 +781,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Extracts usage information for the variable from statement patterns being direct children of
      * the current node (ignoring the node itself).
      *
@@ -799,7 +799,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Extracts usage information for the variable inside statement patterns from the current node
      * itself and its children (recursively).
      *
@@ -849,7 +849,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Registers the mapping between the variable var and the child in the usage map. If var is null
      * or the child is null, no action will be taken.
      *
@@ -869,7 +869,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       usageMap.get(var).add(child);
     }
 
-    /**
+    /*
      * Merges two {@link VariableUsageInfo}, creating a new one containing the merged information.
      * The original objects are not modified.
      */
@@ -902,7 +902,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Class that helps to keep track of static bindings that have been spotted during query analysis.
    * The class maintains a list of "produced" static bindings, i.e. such derived from assignment
    * nodes etc.
@@ -949,7 +949,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       return bsList;
     }
 
-    /**
+    /*
      * Joins the staticBindings with the queryInput binding set, returning the resulting binding
      * set.
      */
@@ -992,7 +992,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Task specifying the inlining opportunities for a given variable in the form of a list of query
    * nodes in which a statically derived value for the given variable can be inlined.
    *
@@ -1009,7 +1009,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
     /** The nodes in which the variable can be inlined. */
     private final List<IQueryNode> nodes;
 
-    /**
+    /*
      * Construct an inline task
      *
      * @param var the variable to inline
@@ -1029,7 +1029,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       return var;
     }
 
-    /**
+    /*
      * Applies the {@link InlineTasks} for the variable through the given constant to the patterns
      * specified in the task.
      */
@@ -1044,7 +1044,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Applies the {@link InlineTasks} for the class variable with the parameter val to the given
      * query node.
      *
@@ -1080,7 +1080,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Applies the {@link InlineTasks} for the class variable with the parameter val to the given
      * assignment node.
      *
@@ -1094,7 +1094,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       applyToValueExpressionNode(val, vexpr);
     }
 
-    /**
+    /*
      * Applies the {@link InlineTasks} for the class variable with the parameter val to the given
      * statement pattern node.
      *
@@ -1142,7 +1142,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Applies the {@link InlineTasks} for the class variable with the parameter val to the given
      * statement pattern node.
      *
@@ -1189,7 +1189,7 @@ public class ASTStaticBindingsOptimizer implements IASTOptimizer {
       }
     }
 
-    /**
+    /*
      * Applies the {@link InlineTasks} for the class variable with the parameter val to the value
      * expression node statement pattern node.
      *

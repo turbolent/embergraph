@@ -32,7 +32,7 @@ public class GeoSpatialTestVocabulary extends EmbergraphCoreVocabulary_v20160317
     super();
   }
 
-  /**
+  /*
    * Used by {@link AbstractTripleStore#create()}.
    *
    * @param namespace The namespace of the KB instance.

@@ -34,8 +34,8 @@ import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.resources.ResourceManager;
 import org.embergraph.util.Bytes;
 
-/**
- * Abstract base class for {@link IBufferStrategy} implementation.
+/*
+* Abstract base class for {@link IBufferStrategy} implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,46 +48,46 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
 
   protected static final boolean WARN = log.getEffectiveLevel().toInt() <= Level.WARN.toInt();
 
-  /**
+  /*
    * Text of the error message used when a {@link ByteBuffer} with zero bytes {@link
    * ByteBuffer#remaining()} is passed to {@link #write(ByteBuffer)}.
    */
   public static final String ERR_BUFFER_EMPTY = "Zero bytes remaining in buffer";
 
-  /**
+  /*
    * Text of the error message used when a <code>null</code> reference is provided for a {@link
    * ByteBuffer}.
    */
   public static final String ERR_BUFFER_NULL = "Buffer is null";
 
-  /**
+  /*
    * Text of the error message used when an address is given has never been written. Since the
    * journal is an append-only store, an address whose offset plus record length exceeds the {@link
    * #nextOffset} on which data would be written may be easily detected.
    */
   public static final String ERR_ADDRESS_NOT_WRITTEN = "Address never written.";
 
-  /**
+  /*
    * Text of the error message used when a ZERO (0L) is passed as an address to {@link
    * IRawStore#read(long)} or similar methods. This value 0L is reserved to indicate a persistent
    * null reference and may never be read.
    */
   public static final String ERR_ADDRESS_IS_NULL = "Address is 0L";
 
-  /**
+  /*
    * Text of the error message used when an address provided to {@link IRawStore#read(long)} or a
    * similar method encodes a record length of zero (0). Empty records are not permitted on write
    * and addresses with a zero length are rejected on read.
    */
   public static final String ERR_RECORD_LENGTH_ZERO = "Record length is zero";
 
-  /**
+  /*
    * Text of the error message used when a write operation would exceed the maximum extent for a
    * backing store.
    */
   public static final String ERR_MAX_EXTENT = "Would exceed maximum extent.";
 
-  /**
+  /*
    * Text of the error message used when {@link IBufferStrategy#truncate(long)} would truncate data
    * that has already been written.
    */
@@ -96,24 +96,24 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
   /** Error message used when the writes are not allowed. */
   public static final String ERR_READ_ONLY = "Read only";
 
-  /**
+  /*
    * Error message used when the record size is invalid (e.g., negative).
    *
    * @todo There is some overlap with {@link #ERR_RECORD_LENGTH_ZERO} and {@link #ERR_BUFFER_EMPTY}.
    */
   public static final String ERR_BAD_RECORD_SIZE = "Bad record size";
 
-  /**
+  /*
    * Error message used when the store is closed but the operation requires that the store is open.
    */
   public static final String ERR_NOT_OPEN = "Not open";
 
-  /**
+  /*
    * Error message used when the store is open by the operation requires that the store is closed.
    */
   public static final String ERR_OPEN = "Open";
 
-  /**
+  /*
    * Error message used when an operation would write more data than would be permitted onto a
    * buffer.
    */
@@ -133,7 +133,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
   /** The buffer strategy implemented by this class. */
   protected final BufferMode bufferMode;
 
-  /**
+  /*
    * The next offset at which a data item would be written on the store as an offset into the
    * <em>user extent</em> (offset zero(0) addresses the first byte after the root blocks). This is
    * updated each time a new record is written on the store. On restart, the value is initialized
@@ -196,7 +196,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
     return nextOffset.get();
   }
 
-  /**
+  /*
    * (Re-)open a buffer.
    *
    * @param storeUUID The UUID that identifies the owning {@link IRawStore}.
@@ -278,7 +278,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
     deleteResources();
   }
 
-  /**
+  /*
    * Invoked if the store would exceed its current extent by {@link #write(ByteBuffer)}. The default
    * behavior extends the capacity of the buffer by the at least the requested amount and a maximum
    * of 32M or the {@link Options#INITIAL_EXTENT}.
@@ -337,8 +337,8 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
 
       if (newExtent - userExtent < needed) {
 
-        /*
-         * Not enough room for the requested extension.
+      /*
+       * Not enough room for the requested extension.
          */
 
         log.error(ERR_MAX_EXTENT);
@@ -359,7 +359,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
     return true;
   }
 
-  /**
+  /*
    * Helper method used by {@link DiskBackedBufferStrategy} and {@link DiskOnlyStrategy} to
    * implement {@link IBufferStrategy#transferTo(RandomAccessFile)} using a {@link FileChannel} to
    * {@link FileChannel} transfer.
@@ -484,7 +484,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
 
   }
 
-  /**
+  /*
    * Not supported - this is available on the {@link AbstractJournal}.
    *
    * @throws UnsupportedOperationException always
@@ -494,7 +494,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Not supported - this is available on the {@link AbstractJournal}.
    *
    * @throws UnsupportedOperationException always
@@ -504,7 +504,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Sets the <code>readOnly</code> flag.
    *
    * <p>Note: This method SHOULD be extended to release write caches, etc.
@@ -532,7 +532,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation checks the current allocation offset with that in the rootBlock
@@ -574,7 +574,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
     return getNextOffset() > block.getNextOffset();
   }
 
-  /**
+  /*
    * The maximum size of a record for the address manager less 4 bytes iff checksums are enabled.
    */
   public int getMaxRecordSize() {
@@ -582,7 +582,7 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
     return getAddressManager().getMaxByteCount() - (useChecksums() ? 4 : 0);
   }
 
-  /**
+  /*
    * <code>false</code> by default since these were added for HA with the {@link WORMStrategy} and
    * the {@link RWStrategy}.
    */
@@ -591,8 +591,8 @@ public abstract class AbstractBufferStrategy extends AbstractRawWormStore
   }
 
   //
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     * <p>
   //     * Note: By default there is no WriteCache to buffer any writes
   //     *

@@ -23,15 +23,15 @@ import java.util.List;
 import java.util.Set;
 import org.openrdf.model.URI;
 
-/**
- * Base class for {@link EmbergraphVertex} and {@link EmbergraphEdge}. Handles property-related
+/*
+* Base class for {@link EmbergraphVertex} and {@link EmbergraphEdge}. Handles property-related
  * methods.
  *
  * @author mikepersonick
  */
 public abstract class EmbergraphElement implements Element {
 
-  private static final List<String> blacklist = Arrays.asList(new String[] {"id", ""});
+  private static final List<String> blacklist = Arrays.asList("id", "");
 
   protected final URI uri;
   protected final EmbergraphGraph graph;
@@ -71,8 +71,8 @@ public abstract class EmbergraphElement implements Element {
     graph.setProperty(uri, prop, val);
   }
 
-  //	/**
-  //	 * Simple extension for multi-valued properties.
+  //	/*
+//	 * Simple extension for multi-valued properties.
   //	 */
   //	public void addProperty(final String prop, final Object val) {
   //
@@ -84,8 +84,8 @@ public abstract class EmbergraphElement implements Element {
   //
   //	}
   //
-  //	/**
-  //	 * Simple extension for multi-valued properties.
+  //	/*
+//	 * Simple extension for multi-valued properties.
   //	 */
   //    @SuppressWarnings("unchecked")
   //    public <T> List<T> getProperties(final String property) {
@@ -115,9 +115,9 @@ public abstract class EmbergraphElement implements Element {
       if (other.graph != null) return false;
     } else if (!graph.equals(other.graph)) return false;
     if (uri == null) {
-      if (other.uri != null) return false;
-    } else if (!uri.equals(other.uri)) return false;
-    return true;
+      return other.uri == null;
+    } else
+      return uri.equals(other.uri);
   }
 
   @Override

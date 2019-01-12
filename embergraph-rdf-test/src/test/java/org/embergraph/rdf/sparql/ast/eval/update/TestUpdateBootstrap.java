@@ -59,8 +59,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Bootstrapped test suite for core UPDATE functionality based on BOP evaluation.
+/*
+* Bootstrapped test suite for core UPDATE functionality based on BOP evaluation.
  *
  * <p>Note: We are not using BOP evaluation for SPARQL UPDATE at this time, so this test is NOT
  * being run in CI.
@@ -80,7 +80,7 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for inserting ground triples or quads.
    *
    * <pre>
@@ -285,8 +285,8 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
       {
         final BOpStats stats = future.getStats().get(resolutionId);
 
-        /*
-         * Note: This assumes that rdf:type and rdfs:label are not
+      /*
+       * Note: This assumes that rdf:type and rdfs:label are not
          * defined by the vocabulary.  We have to subtract out each
          * Value which was declared by the vocabulary or is otherwise
          * represented as a fully inline IV.
@@ -478,8 +478,8 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
       {
         final BOpStats stats = future.getStats().get(resolutionId);
 
-        /*
-         * Note: This assumes that rdf:type and rdfs:label are not
+      /*
+       * Note: This assumes that rdf:type and rdfs:label are not
          * defined by the vocabulary.  We have to subtract out each
          * Value which was declared by the vocabulary or is otherwise
          * represented as a fully inline IV.
@@ -508,7 +508,7 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Return either <i>left</i> wrapped as the sole member of an array or {@link BOp#NOARGS} iff
    * <i>left</i> is <code>null</code>.
    *

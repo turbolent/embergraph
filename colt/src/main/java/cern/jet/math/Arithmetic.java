@@ -261,7 +261,7 @@ public class Arithmetic extends Constants {
 
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Arithmetic() {}
-  /**
+  /*
    * Efficiently returns the binomial coefficient, often also referred to as "n over k" or "n choose
    * k". The binomial coefficient is defined as <tt>(n * n-1 * ... * n-k+1 ) / ( 1 * 2 * ... * k
    * )</tt>.
@@ -289,7 +289,7 @@ public class Arithmetic extends Constants {
     }
     return binomial;
   }
-  /**
+  /*
    * Efficiently returns the binomial coefficient, often also referred to as "n over k" or "n choose
    * k". The binomial coefficient is defined as
    *
@@ -333,7 +333,7 @@ public class Arithmetic extends Constants {
     }
     return binomial;
   }
-  /**
+  /*
    * Returns the smallest <code>long &gt;= value</code>.
    * <dt>Examples: <code>1.0 -> 1, 1.2 -> 2, 1.9 -> 2</code>. This method is safer than using (long)
    *     Math.ceil(value), because of possible rounding error.
@@ -341,7 +341,7 @@ public class Arithmetic extends Constants {
   public static long ceil(double value) {
     return Math.round(Math.ceil(value));
   }
-  /**
+  /*
    * Evaluates the series of Chebyshev polynomials Ti at argument x/2. The series is given by
    *
    * <pre>
@@ -372,7 +372,7 @@ public class Arithmetic extends Constants {
    * @param coef the coefficients of the polynomial.
    * @param N the number of coefficients.
    */
-  public static double chbevl(double x, double coef[], int N) throws ArithmeticException {
+  public static double chbevl(double x, double[] coef, int N) throws ArithmeticException {
     double b0, b1, b2;
 
     int p = 0;
@@ -413,7 +413,7 @@ public class Arithmetic extends Constants {
     if (j < 0) return -d;
     else return d;
   }
-  /**
+  /*
    * Instantly returns the factorial <tt>k!</tt>.
    *
    * @param k must hold <tt>k &gt;= 0</tt>.
@@ -428,7 +428,7 @@ public class Arithmetic extends Constants {
     if (k < length1 + length2) return doubleFactorials[k - length1];
     else return Double.POSITIVE_INFINITY;
   }
-  /**
+  /*
    * Returns the largest <code>long &lt;= value</code>.
    * <dt>Examples: <code>
    * 1.0 -> 1, 1.2 -> 1, 1.9 -> 1 <dt>
@@ -453,7 +453,7 @@ public class Arithmetic extends Constants {
     // 1.0 / Math.log(2) == 1.4426950408889634
     return Math.log(value) * 1.4426950408889634;
   }
-  /**
+  /*
    * Returns <tt>log(k!)</tt>. Tries to avoid overflows. For <tt>k<30</tt> simply looks up a table
    * in O(1). For <tt>k>=30</tt> uses stirlings approximation.
    *
@@ -473,7 +473,7 @@ public class Arithmetic extends Constants {
       return (k + 0.5) * Math.log(k) - k + C0 + r * (C1 + rr * (C3 + rr * (C5 + rr * C7)));
     } else return logFactorials[k];
   }
-  /**
+  /*
    * Instantly returns the factorial <tt>k!</tt>.
    *
    * @param k must hold <tt>k &gt;= 0 && k &lt; 21</tt>.
@@ -484,7 +484,7 @@ public class Arithmetic extends Constants {
     if (k < longFactorials.length) return longFactorials[k];
     throw new IllegalArgumentException("Overflow");
   }
-  /**
+  /*
    * Returns the StirlingCorrection.
    *
    * <p>Correction term of the Stirling approximation for <tt>log(k!)</tt> (series in 1/k, or table

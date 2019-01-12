@@ -24,8 +24,8 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
-/**
- * Interface supports choice of either weak or soft references for cache entries and makes it
+/*
+* Interface supports choice of either weak or soft references for cache entries and makes it
  * possible for the application to extend the metadata associated with and entry in the {@link
  * WeakValueCache}.
  *
@@ -34,7 +34,7 @@ import java.lang.ref.WeakReference;
  */
 public interface IWeakRefCacheEntryFactory<K, T> {
 
-  /**
+  /*
    * Creates a weak reference object to serve as the value in the cache for the given application
    * object.
    *
@@ -46,5 +46,5 @@ public interface IWeakRefCacheEntryFactory<K, T> {
    * @see WeakReference
    * @see SoftReference
    */
-  public IWeakRefCacheEntry<K, T> newCacheEntry(K key, T obj, ReferenceQueue<T> queue);
+  IWeakRefCacheEntry<K, T> newCacheEntry(K key, T obj, ReferenceQueue<T> queue);
 }

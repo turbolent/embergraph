@@ -19,8 +19,8 @@ package org.embergraph.btree;
 
 import java.util.Iterator;
 
-/**
- * Interface for a node or a leaf of a B+-Tree.
+/*
+* Interface for a node or a leaf of a B+-Tree.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -28,14 +28,14 @@ import java.util.Iterator;
 public interface IAbstractNode {
 
   /** Traversal of index values in key order. */
-  public ITupleIterator entryIterator();
+  ITupleIterator entryIterator();
 
-  /**
+  /*
    * Post-order traveral of nodes and leaves in the tree. For any given node, its children are
    * always visited before the node itself (hence the node occurs in the post-order position in the
    * traveral). The iterator is NOT safe for concurrent modification.
    *
    * @return Iterator visiting {@link IAbstractNode}s.
    */
-  public Iterator<AbstractNode> postOrderNodeIterator();
+  Iterator<AbstractNode> postOrderNodeIterator();
 }

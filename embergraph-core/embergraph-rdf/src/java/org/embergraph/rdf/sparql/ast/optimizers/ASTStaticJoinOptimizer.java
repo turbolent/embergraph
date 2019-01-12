@@ -53,8 +53,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpBase;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 
-/**
- * This is an AST optimizer port of the old "static" optimizer - {@link DefaultEvaluationPlan2}.
+/*
+* This is an AST optimizer port of the old "static" optimizer - {@link DefaultEvaluationPlan2}.
  * This optimizer uses range counts and simple shared variable heuristics to order the statement
  * patterns within a particular join group. This optimizer extends the old static optimizer in that
  * child join groups consider the ordering of statement patterns in their parent and ancestors when
@@ -71,7 +71,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
 
   public interface Annotations extends AST2BOpBase.Annotations {
 
-    /**
+    /*
      * The value of this query hint determines how optimistic the optimizer will be in selecting the
      * join cardinality for its joins. Basically when there is a join that has both shared and
      * unshared variables, the join cardinality will be somewhere in between the cardinality of the
@@ -92,7 +92,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
     Double DEFAULT_OPTIMISTIC = 1.0d;
   }
 
-  /**
+  /*
    * Return the exogenous bindings.
    *
    * <p>Note: This is considering only a single exogenous solution. It can not really use more than
@@ -276,8 +276,8 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
           final GraphPatternGroup<IGroupMemberNode> childGroup =
               (GraphPatternGroup<IGroupMemberNode>) subquery.getWhereClause();
 
-          /*
-           * Only the projected variables are in scope in the subquery.
+        /*
+       * Only the projected variables are in scope in the subquery.
            */
 
           final Set<IVariable<?>> projectedVars =
@@ -288,8 +288,8 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
           final IBindingSet tmp =
               exogenousBindings == null ? null : exogenousBindings.copy(variablesToKeep);
 
-          /**
-           * See https://jira.blazegraph.com/browse/BLZG-1817:
+        /*
+       * See https://jira.blazegraph.com/browse/BLZG-1817:
            *
            * <p>In the normal case, we pass in the current ancestry. There is one exception to this
            * rule though: whenever we're recursing into complex subquery roots that will be
@@ -434,7 +434,7 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * @param ctx
    * @param exogenousBindings The exogenous bindings -or- <code>null</code> iff there are none.
    * @param queryRoot
@@ -488,8 +488,8 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
           }
         }
 
-        /**
-         * BLZG-2097: if we have preceding non-reorderable nodes, we add the definitely bound
+      /*
+       * BLZG-2097: if we have preceding non-reorderable nodes, we add the definitely bound
          * variables to the ancestry. This means, we replace the (buggy) ancestry computation
          * mechanism from before through dynamic ancestry computation.
          */
@@ -553,8 +553,8 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
     }
   }
 
-  //    /**
-  //     * Use the SPORelation from the database to grab the appropriate range
+  //    /*
+//     * Use the SPORelation from the database to grab the appropriate range
   //     * counts for the {@link StatementPatternNode}s.  Only tries to attach them
   //     * if the annotation {@link Annotations#ESTIMATED_CARDINALITY} is not
   //     * already attached to the node.  This makes it possible to write unit
@@ -607,8 +607,8 @@ public class ASTStaticJoinOptimizer implements IASTOptimizer {
   //
   //    }
   //
-  //    /**
-  //     * Helper method grabs the IV out of the TermNode, doing the appropriate
+  //    /*
+//     * Helper method grabs the IV out of the TermNode, doing the appropriate
   //     * NULL and constant/var checks.
   //     *
   //     * @param term

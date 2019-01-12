@@ -24,8 +24,8 @@ package org.embergraph.rdf.error;
 import java.util.Formatter;
 import org.embergraph.util.NV;
 
-/**
- * Exception Base class for errors defined by the W3C for XQuery, XPath, and SPARQL.
+/*
+* Exception Base class for errors defined by the W3C for XQuery, XPath, and SPARQL.
  *
  * @see http://www.w3.org/TR/xquery/#errors
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -40,7 +40,7 @@ public class W3CQueryLanguageException extends RuntimeException {
   private static final long serialVersionUID = 1L;
 
   /** Language family for errors. */
-  public static enum LanguageFamily {
+  public enum LanguageFamily {
     /** XQuery */
     XQ,
     /** XPath */
@@ -50,14 +50,14 @@ public class W3CQueryLanguageException extends RuntimeException {
   }
 
   /** Error category. */
-  public static enum ErrorCategory {
+  public enum ErrorCategory {
     /** Static analysis error. */
     ST,
     /** Dynamic (runtime) error. */
     DY,
     /** Type error. */
     TY
-  };
+  }
 
   /** The {@link LanguageFamily}. */
   public final LanguageFamily languageFamily;
@@ -68,7 +68,7 @@ public class W3CQueryLanguageException extends RuntimeException {
   /** The four digit error code. */
   public final int errorCode;
 
-  /**
+  /*
    * @param languageFamily The {@link LanguageFamily}.
    * @param errorCategory The {@link ErrorCategory}.
    * @param errorCode The four digit error code.
@@ -85,7 +85,7 @@ public class W3CQueryLanguageException extends RuntimeException {
     this.errorCode = errorCode;
   }
 
-  /**
+  /*
    * @param languageFamily The {@link LanguageFamily}.
    * @param errorCategory The {@link ErrorCategory}.
    * @param errorCode The four digit error code.
@@ -108,7 +108,7 @@ public class W3CQueryLanguageException extends RuntimeException {
     this.errorCode = errorCode;
   }
 
-  /**
+  /*
    * @param languageFamily The {@link LanguageFamily}.
    * @param errorCategory The {@link ErrorCategory}.
    * @param errorCode The four digit error code.
@@ -131,7 +131,7 @@ public class W3CQueryLanguageException extends RuntimeException {
     this.errorCode = errorCode;
   }
 
-  /**
+  /*
    * Return the URI for the given error. This is used to avoid the runtime creation of strings for
    * frequently thrown errors, such as type errors. Various subclasses use this method to declare
    * concrete URIs which are then passed into their constructors for specific kinds of errors.
@@ -191,7 +191,7 @@ public class W3CQueryLanguageException extends RuntimeException {
     }
   }
 
-  /**
+  /*
    * Safe UTF-8 encoder (handles the highly unlikely exception that can be thrown as well as a
    * <code>null</code> value).
    *

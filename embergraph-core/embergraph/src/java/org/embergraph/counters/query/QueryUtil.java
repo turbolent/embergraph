@@ -63,8 +63,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCounters;
 import org.xml.sax.SAXException;
 
-/**
- * Some static utility methods.
+/*
+* Some static utility methods.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -73,7 +73,7 @@ public class QueryUtil {
 
   protected static final Logger log = Logger.getLogger(QueryUtil.class);
 
-  /**
+  /*
    * Return the data captured by {@link Pattern} from the path of the specified <i>counter</i>.
    *
    * <p>Note: This is used to extract the parts of the {@link Pattern} which are of interest -
@@ -138,7 +138,7 @@ public class QueryUtil {
     return groups;
   }
 
-  /**
+  /*
    * Generate a {@link Pattern} from the OR of zero or more strings which must be matched and zero
    * or more regular expressions which must be matched.
    *
@@ -211,7 +211,7 @@ public class QueryUtil {
     return pattern;
   }
 
-  /**
+  /*
    * Generate a {@link Pattern} from the OR of zero or more regular expressions which must be
    * matched.
    *
@@ -243,7 +243,7 @@ public class QueryUtil {
     return Pattern.compile(s);
   }
 
-  /**
+  /*
    * Read counters matching the optional filter from the file into the given {@link CounterSet}.
    *
    * @param file The file.
@@ -279,7 +279,7 @@ public class QueryUtil {
     readCountersFromFile(file, counterSet, filter, instrumentFactory);
   }
 
-  /**
+  /*
    * Read counters matching the optional filter from the file into the given {@link CounterSet}.
    *
    * @param file The file.
@@ -366,7 +366,7 @@ public class QueryUtil {
     }
   }
 
-  /**
+  /*
    * Task reads counters matching a regular expression into the caller's {@link CounterSet}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -384,7 +384,7 @@ public class QueryUtil {
 
     final Pattern regex;
 
-    /**
+    /*
      * @param file
      * @param counterSet
      * @param nsamples
@@ -431,7 +431,7 @@ public class QueryUtil {
     }
   }
 
-  /**
+  /*
    * Read in {@link Event}s logged on a file in a tab-delimited format.
    *
    * @param service The events will be added to this service.
@@ -464,7 +464,7 @@ public class QueryUtil {
     }
   }
 
-  /**
+  /*
    * Return the specified files, substituting recursively spanned files when a given file is a
    * directory.
    *
@@ -505,7 +505,7 @@ public class QueryUtil {
     return out;
   }
 
-  /**
+  /*
    * Return a {@link Pattern} which will match the minimum set of performance counters required by
    * the load balancer to perform its function.
    */
@@ -541,7 +541,7 @@ public class QueryUtil {
       QueryUtil.getPattern(
           Arrays.asList(requiredPerformanceCounterPaths) /* strings */, null /* regex */);
 
-  /**
+  /*
    * Utility may be used to read the required performance counters for the load balancer from zero
    * or more files specified on the command line. The results are written using the XML interchange
    * format on stdout.

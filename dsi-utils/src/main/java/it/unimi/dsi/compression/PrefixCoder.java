@@ -23,8 +23,8 @@ package it.unimi.dsi.compression;
 
 import it.unimi.dsi.bits.BitVector;
 
-/**
- * A coder based on a set of prefix-free codewords.
+/*
+* A coder based on a set of prefix-free codewords.
  *
  * <p>Not all coders are codeword-based (for instance, arithmetic coding is not codeword-based).
  * However, coders that are based on prefix-free codewords are invited to return by means of {@link
@@ -35,7 +35,7 @@ import it.unimi.dsi.bits.BitVector;
  */
 public interface PrefixCoder extends Coder {
 
-  /**
+  /*
    * Provides access to the codewords.
    *
    * <p><strong>Warning</strong>: bit 0 of each bit vector returned by {@link #codeWords()} is the

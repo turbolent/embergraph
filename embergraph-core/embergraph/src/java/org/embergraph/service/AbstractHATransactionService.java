@@ -35,8 +35,8 @@ import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.ITransactionService;
 
-/**
- * Adds local methods to support an HA aware {@link ITransactionService}.
+/*
+* Adds local methods to support an HA aware {@link ITransactionService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -48,7 +48,7 @@ public abstract class AbstractHATransactionService extends AbstractTransactionSe
     super(properties);
   }
 
-  /**
+  /*
    * Factory for the Gather task that will be executed by the follower.
    *
    * @param leader The proxy for the quorum leader (the service that made this request). This is
@@ -64,7 +64,7 @@ public abstract class AbstractHATransactionService extends AbstractTransactionSe
   public abstract Callable<IHANotifyReleaseTimeResponse> newGatherMinimumVisibleCommitTimeTask(
       final HAGlue leader, final UUID serviceId, final IHAGatherReleaseTimeRequest req);
 
-  /**
+  /*
    * Coordinate the update of the <i>releaseTime</i> on each service that is joined with the met
    * quorum.
    *
@@ -81,12 +81,12 @@ public abstract class AbstractHATransactionService extends AbstractTransactionSe
       final UUID[] joinedServiceIds,
       final long timeout,
       final TimeUnit units)
-      throws IOException, TimeoutException, InterruptedException, Exception;
+      throws Exception;
 
   /** Used to make a serviceJoin() MUTEX with the consensus protocol. */
   public abstract void runWithBarrierLock(Runnable r);
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to expose this method so it may be invoked when a follower joins an existing

@@ -27,8 +27,8 @@ import org.embergraph.journal.AbstractIndexManagerTestCase;
 import org.embergraph.journal.ProxyTestCase;
 import org.embergraph.resources.OverflowManager;
 
-/**
- * Delegate for {@link ProxyTestCase}s for services running against an {@link EmbeddedFederation}.
+/*
+* Delegate for {@link ProxyTestCase}s for services running against an {@link EmbeddedFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -79,7 +79,7 @@ public class TestEDS extends AbstractIndexManagerTestCase<EmbeddedFederation> {
 
   private File dataDir;
 
-  /**
+  /*
    * Data files are placed into a directory named by the test. If the directory exists, then it is
    * removed before the federation is set up.
    */
@@ -97,7 +97,7 @@ public class TestEDS extends AbstractIndexManagerTestCase<EmbeddedFederation> {
     }
   }
 
-  /**
+  /*
    * Optional cleanup after the test runs, but sometimes its helpful to be able to see what was
    * created in the file system.
    */
@@ -109,7 +109,7 @@ public class TestEDS extends AbstractIndexManagerTestCase<EmbeddedFederation> {
     }
   }
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself.
    *

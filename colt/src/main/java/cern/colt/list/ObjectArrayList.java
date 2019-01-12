@@ -9,13 +9,13 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.list;
 
 import cern.colt.function.ObjectProcedure;
-/**
- * Resizable list holding <code>Object</code> elements; implemented with arrays. First see the <a
+/*
+* Resizable list holding <code>Object</code> elements; implemented with arrays. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  */
 public class ObjectArrayList extends AbstractList {
-  /**
+  /*
    * The array buffer into which the elements of the list are stored. The capacity of the list is
    * the length of this array buffer.
    *
@@ -23,7 +23,7 @@ public class ObjectArrayList extends AbstractList {
    */
   protected Object[] elements;
 
-  /**
+  /*
    * The size of the list.
    *
    * @serial
@@ -33,7 +33,7 @@ public class ObjectArrayList extends AbstractList {
   public ObjectArrayList() {
     this(10);
   }
-  /**
+  /*
    * Constructs a list containing the specified elements. The initial size and capacity of the list
    * is the length of the array.
    *
@@ -46,7 +46,7 @@ public class ObjectArrayList extends AbstractList {
   public ObjectArrayList(Object[] elements) {
     elements(elements);
   }
-  /**
+  /*
    * Constructs an empty list with the specified initial capacity.
    *
    * @param initialCapacity the number of elements the receiver can hold without auto-expanding
@@ -56,7 +56,7 @@ public class ObjectArrayList extends AbstractList {
     this(new Object[initialCapacity]);
     size = 0;
   }
-  /**
+  /*
    * Appends the specified element to the end of this list.
    *
    * @param element element to be appended to this list.
@@ -65,7 +65,7 @@ public class ObjectArrayList extends AbstractList {
     if (size == elements.length) ensureCapacity(size + 1);
     elements[size++] = element;
   }
-  /**
+  /*
    * Appends the part of the specified list between <code>from</code> (inclusive) and <code>to
    * </code> (inclusive) to the receiver.
    *
@@ -78,7 +78,7 @@ public class ObjectArrayList extends AbstractList {
   public void addAllOfFromTo(ObjectArrayList other, int from, int to) {
     beforeInsertAllOfFromTo(size, other, from, to);
   }
-  /**
+  /*
    * Inserts the specified element before the specified position into the receiver. Shifts the
    * element currently at that position (if any) and any subsequent elements to the right.
    *
@@ -96,7 +96,7 @@ public class ObjectArrayList extends AbstractList {
     elements[index] = element;
     size++;
   }
-  /**
+  /*
    * Inserts the part of the specified list between <code>otherFrom</code> (inclusive) and <code>
    * otherTo</code> (inclusive) before the specified position into the receiver. Shifts the element
    * currently at that position (if any) and any subsequent elements to the right.
@@ -116,7 +116,7 @@ public class ObjectArrayList extends AbstractList {
     this.beforeInsertDummies(index, length);
     this.replaceFromToWithFrom(index, index + length - 1, other, from);
   }
-  /**
+  /*
    * Inserts length dummies before the specified position into the receiver. Shifts the element
    * currently at that position (if any) and any subsequent elements to the right.
    *
@@ -132,7 +132,7 @@ public class ObjectArrayList extends AbstractList {
       size += length;
     }
   }
-  /**
+  /*
    * Searches the receiver for the specified value using the binary search algorithm. The receiver
    * must be sorted into ascending order according to the <i>natural ordering</i> of its elements
    * (as by the sort method) prior to making this call. If it is not sorted, the results are
@@ -153,7 +153,7 @@ public class ObjectArrayList extends AbstractList {
   public int binarySearch(Object key) {
     return this.binarySearchFromTo(key, 0, size - 1);
   }
-  /**
+  /*
    * Searches the receiver for the specified value using the binary search algorithm. The receiver
    * must be sorted into ascending order according to the <i>natural ordering</i> of its elements
    * (as by the sort method) prior to making this call. If it is not sorted, the results are
@@ -188,7 +188,7 @@ public class ObjectArrayList extends AbstractList {
     }
     return -(low + 1); // key not found.
   }
-  /**
+  /*
    * Searches the receiver for the specified value using the binary search algorithm. The receiver
    * must be sorted into ascending order according to the specified comparator. All elements in the
    * range must be <i>mutually comparable</i> by the specified comparator (that is,
@@ -218,7 +218,7 @@ public class ObjectArrayList extends AbstractList {
   public int binarySearchFromTo(Object key, int from, int to, java.util.Comparator comparator) {
     return cern.colt.Sorting.binarySearchFromTo(this.elements, key, from, to, comparator);
   }
-  /**
+  /*
    * Returns a copy of the receiver such that the copy and the receiver <i>share</i> the same
    * elements, but do not share the same array to index them; So modifying an object in the copy
    * modifies the object in the receiver and vice versa; However, structurally modifying the copy
@@ -229,10 +229,10 @@ public class ObjectArrayList extends AbstractList {
    */
   public Object clone() {
     ObjectArrayList v = (ObjectArrayList) super.clone();
-    v.elements = (Object[]) elements.clone();
+    v.elements = elements.clone();
     return v;
   }
-  /**
+  /*
    * Returns true if the receiver contains the specified element. Tests for equality or identity as
    * specified by testForEquality.
    *
@@ -242,7 +242,7 @@ public class ObjectArrayList extends AbstractList {
   public boolean contains(Object elem, boolean testForEquality) {
     return indexOfFromTo(elem, 0, size - 1, testForEquality) >= 0;
   }
-  /**
+  /*
    * Returns a copy of the receiver; call <code>clone()</code> and casts the result. Returns a copy
    * such that the copy and the receiver <i>share</i> the same elements, but do not share the same
    * array to index them; So modifying an object in the copy modifies the object in the receiver and
@@ -254,7 +254,7 @@ public class ObjectArrayList extends AbstractList {
   public ObjectArrayList copy() {
     return (ObjectArrayList) clone();
   }
-  /**
+  /*
    * Deletes the first element from the receiver that matches the specified element. Does nothing,
    * if no such matching element is contained.
    *
@@ -269,7 +269,7 @@ public class ObjectArrayList extends AbstractList {
     int index = indexOfFromTo(element, 0, size - 1, testForEquality);
     if (index >= 0) removeFromTo(index, index);
   }
-  /**
+  /*
    * Returns the elements currently stored, including invalid elements between size and capacity, if
    * any.
    *
@@ -282,7 +282,7 @@ public class ObjectArrayList extends AbstractList {
   public Object[] elements() {
     return elements;
   }
-  /**
+  /*
    * Sets the receiver's elements to be the specified array (not a copy of it).
    *
    * <p>The size and capacity of the list is the length of the array. <b>WARNING:</b> For efficiency
@@ -297,7 +297,7 @@ public class ObjectArrayList extends AbstractList {
     this.size = elements.length;
     return this;
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of elements without needing to
    * allocate new internal memory. If necessary, allocates new internal memory and increases the
    * capacity of the receiver.
@@ -307,7 +307,7 @@ public class ObjectArrayList extends AbstractList {
   public void ensureCapacity(int minCapacity) {
     elements = cern.colt.Arrays.ensureCapacity(elements, minCapacity);
   }
-  /**
+  /*
    * Compares the specified Object with the receiver for equality. Returns true if and only if the
    * specified Object is also an ObjectArrayList, both lists have the same size, and all
    * corresponding pairs of elements in the two lists are equal. In other words, two lists are
@@ -321,7 +321,7 @@ public class ObjectArrayList extends AbstractList {
   public boolean equals(Object otherObj) { // delta
     return equals(otherObj, true);
   }
-  /**
+  /*
    * Compares the specified Object with the receiver for equality. Returns true if and only if the
    * specified Object is also an ObjectArrayList, both lists have the same size, and all
    * corresponding pairs of elements in the two lists are the same. In other words, two lists are
@@ -352,15 +352,14 @@ public class ObjectArrayList extends AbstractList {
       }
     } else {
       for (int i = size; --i >= 0; ) {
-        if (!(theElements[i] == null
-            ? otherElements[i] == null
-            : theElements[i].equals(otherElements[i]))) return false;
+        if (theElements[i] == null ? otherElements[i] != null
+            : !theElements[i].equals(otherElements[i])) return false;
       }
     }
 
     return true;
   }
-  /**
+  /*
    * Sets the specified range of elements in the specified array to the specified value.
    *
    * @param from the index of the first element (inclusive) to be filled with the specified value.
@@ -371,7 +370,7 @@ public class ObjectArrayList extends AbstractList {
     checkRangeFromTo(from, to, this.size);
     for (int i = from; i <= to; ) setQuick(i++, val);
   }
-  /**
+  /*
    * Applies a procedure to each element of the receiver, if any. Starts at index 0, moving
    * rightwards.
    *
@@ -387,7 +386,7 @@ public class ObjectArrayList extends AbstractList {
     for (int i = 0; i < theSize; ) if (!procedure.apply(theElements[i++])) return false;
     return true;
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver.
    *
    * @param index index of element to return.
@@ -399,7 +398,7 @@ public class ObjectArrayList extends AbstractList {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     return elements[index];
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver; <b>WARNING:</b> Does not check
    * preconditions. Provided with invalid parameters this method may return invalid elements without
    * throwing any exception! <b>You should only use this method when you are absolutely sure that
@@ -411,7 +410,7 @@ public class ObjectArrayList extends AbstractList {
   public Object getQuick(int index) {
     return elements[index];
   }
-  /**
+  /*
    * Returns the index of the first occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element.
    *
@@ -424,7 +423,7 @@ public class ObjectArrayList extends AbstractList {
   public int indexOf(Object element, boolean testForEquality) {
     return this.indexOfFromTo(element, 0, size - 1, testForEquality);
   }
-  /**
+  /*
    * Returns the index of the first occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element. Searches between <code>from</code>, inclusive and
    * <code>to</code>, inclusive.
@@ -461,7 +460,7 @@ public class ObjectArrayList extends AbstractList {
     }
     return -1; // not found
   }
-  /**
+  /*
    * Determines whether the receiver is sorted ascending, according to the <i>natural ordering</i>
    * of its elements. All elements in this range must implement the <tt>Comparable</tt> interface.
    * Furthermore, all elements in this range must be <i>mutually comparable</i> (that is,
@@ -482,12 +481,12 @@ public class ObjectArrayList extends AbstractList {
 
     Object[] theElements = elements;
     for (int i = from + 1; i <= to; i++) {
-      if (((Comparable) theElements[i]).compareTo((Comparable) theElements[i - 1]) < 0)
+      if (((Comparable) theElements[i]).compareTo(theElements[i - 1]) < 0)
         return false;
     }
     return true;
   }
-  /**
+  /*
    * Returns the index of the last occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element. Tests for equality or identity as specified by
    * <code>testForEquality</code>.
@@ -500,7 +499,7 @@ public class ObjectArrayList extends AbstractList {
   public int lastIndexOf(Object element, boolean testForEquality) {
     return lastIndexOfFromTo(element, 0, size - 1, testForEquality);
   }
-  /**
+  /*
    * Returns the index of the last occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element. Searches beginning at <code>to</code>, inclusive
    * until <code>from</code>, inclusive. Tests for equality or identity as specified by <code>
@@ -536,7 +535,7 @@ public class ObjectArrayList extends AbstractList {
     }
     return -1; // not found
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending order, according to the <i>natural
    * ordering</i> of its elements. All elements in this range must implement the <tt>Comparable</tt>
    * interface. Furthermore, all elements in this range must be <i>mutually comparable</i> (that is,
@@ -566,7 +565,7 @@ public class ObjectArrayList extends AbstractList {
     checkRangeFromTo(from, to, size);
     java.util.Arrays.sort(elements, from, to + 1);
   }
-  /**
+  /*
    * Sorts the receiver according to the order induced by the specified comparator. All elements in
    * the range must be <i>mutually comparable</i> by the specified comparator (that is,
    * <tt>c.compare(e1, e2)</tt> must not throw a <tt>ClassCastException</tt> for any elements
@@ -597,7 +596,7 @@ public class ObjectArrayList extends AbstractList {
     checkRangeFromTo(from, to, size);
     java.util.Arrays.sort(elements, from, to + 1, c);
   }
-  /**
+  /*
    * Returns a new list of the part of the receiver between <code>from</code>, inclusive, and <code>
    * to</code>, inclusive.
    *
@@ -616,7 +615,7 @@ public class ObjectArrayList extends AbstractList {
     System.arraycopy(elements, from, part, 0, to - from + 1);
     return new ObjectArrayList(part);
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending order, according to the <i>natural
    * ordering</i> of its elements. All elements in this range must implement the <tt>Comparable</tt>
    * interface. Furthermore, all elements in this range must be <i>mutually comparable</i> (that is,
@@ -643,7 +642,7 @@ public class ObjectArrayList extends AbstractList {
     checkRangeFromTo(from, to, size);
     cern.colt.Sorting.quickSort(elements, from, to + 1);
   }
-  /**
+  /*
    * Sorts the receiver according to the order induced by the specified comparator. All elements in
    * the range must be <i>mutually comparable</i> by the specified comparator (that is,
    * <tt>c.compare(e1, e2)</tt> must not throw a <tt>ClassCastException</tt> for any elements
@@ -671,7 +670,7 @@ public class ObjectArrayList extends AbstractList {
     checkRangeFromTo(from, to, size);
     cern.colt.Sorting.quickSort(elements, from, to + 1, c);
   }
-  /**
+  /*
    * Removes from the receiver all elements that are contained in the specified list. Tests for
    * equality or identity as specified by <code>testForEquality</code>.
    *
@@ -693,7 +692,7 @@ public class ObjectArrayList extends AbstractList {
     setSize(j);
     return modified;
   }
-  /**
+  /*
    * Removes from the receiver all elements whose index is between <code>from</code>, inclusive and
    * <code>to</code>, inclusive. Shifts any succeeding elements to the left (reduces their index).
    * This call shortens the list by <tt>(to - from + 1)</tt> elements.
@@ -713,7 +712,7 @@ public class ObjectArrayList extends AbstractList {
     int width = to - from + 1;
     if (width > 0) size -= width;
   }
-  /**
+  /*
    * Replaces a number of elements in the receiver with the same number of elements of another list.
    * Replaces elements in the receiver, between <code>from</code> (inclusive) and <code>to</code>
    * (inclusive), with elements of <code>other</code>, starting from <code>otherFrom</code>
@@ -732,7 +731,7 @@ public class ObjectArrayList extends AbstractList {
       System.arraycopy(other.elements, otherFrom, elements, from, length);
     }
   }
-  /**
+  /*
    * Replaces the part between <code>from</code> (inclusive) and <code>to</code> (inclusive) with
    * the other list's part between <code>otherFrom</code> and <code>otherTo</code>. Powerful (and
    * tricky) method! Both parts need not be of the same size (part A can both be smaller or larger
@@ -808,7 +807,7 @@ public class ObjectArrayList extends AbstractList {
       System.arraycopy(other.elements, otherFrom, elements, from, length);
     }
   }
-  /**
+  /*
    * Replaces the part of the receiver starting at <code>from</code> (inclusive) with all the
    * elements of the specified collection. Does not alter the size of the receiver. Replaces exactly
    * <tt>Math.max(0,Math.min(size()-from, other.size()))</tt> elements.
@@ -825,7 +824,7 @@ public class ObjectArrayList extends AbstractList {
     int limit = Math.min(size - from, other.size());
     for (int i = 0; i < limit; i++) elements[index++] = e.next(); // delta
   }
-  /**
+  /*
    * Retains (keeps) only the elements in the receiver that are contained in the specified other
    * list. In other words, removes from the receiver all of its elements that are not contained in
    * the specified other list. Tests for equality or identity as specified by <code>testForEquality
@@ -855,7 +854,7 @@ public class ObjectArrayList extends AbstractList {
     setSize(j);
     return modified;
   }
-  /**
+  /*
    * Reverses the elements of the receiver. Last becomes first, second last becomes second first,
    * and so on.
    */
@@ -871,7 +870,7 @@ public class ObjectArrayList extends AbstractList {
       theElements[j--] = tmp;
     }
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element.
    *
    * @param index index of element to replace.
@@ -884,7 +883,7 @@ public class ObjectArrayList extends AbstractList {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     elements[index] = element;
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element;
    * <b>WARNING:</b> Does not check preconditions. Provided with invalid parameters this method may
    * access invalid indexes without throwing any exception! <b>You should only use this method when
@@ -897,7 +896,7 @@ public class ObjectArrayList extends AbstractList {
   public void setQuick(int index, Object element) {
     elements[index] = element;
   }
-  /**
+  /*
    * Randomly permutes the part of the receiver between <code>from</code> (inclusive) and <code>to
    * </code> (inclusive).
    *
@@ -924,7 +923,7 @@ public class ObjectArrayList extends AbstractList {
       theElements[i] = tmpElement;
     }
   }
-  /**
+  /*
    * Returns the number of elements contained in the receiver.
    *
    * @returns the number of elements contained in the receiver.
@@ -932,7 +931,7 @@ public class ObjectArrayList extends AbstractList {
   public int size() {
     return size;
   }
-  /**
+  /*
    * Returns a list which is a concatenation of <code>times</code> times the receiver.
    *
    * @param times the number of times the receiver shall be copied.
@@ -944,7 +943,7 @@ public class ObjectArrayList extends AbstractList {
     }
     return newList;
   }
-  /**
+  /*
    * Returns an array containing all of the elements in the receiver in the correct order. The
    * runtime type of the returned array is that of the specified array. If the receiver fits in the
    * specified array, it is returned therein. Otherwise, a new array is allocated with the runtime
@@ -961,7 +960,7 @@ public class ObjectArrayList extends AbstractList {
    * @exception ArrayStoreException the runtime type of <tt>array</tt> is not a supertype of the
    *     runtime type of every element in the receiver.
    */
-  public Object[] toArray(Object array[]) {
+  public Object[] toArray(Object[] array) {
     if (array.length < size)
       array =
           (Object[]) java.lang.reflect.Array.newInstance(array.getClass().getComponentType(), size);
@@ -981,14 +980,14 @@ public class ObjectArrayList extends AbstractList {
     for (int i = 0; i < mySize; i++) list.add(theElements[i]);
     return list;
   }
-  /**
+  /*
    * Returns a string representation of the receiver, containing the String representation of each
    * element.
    */
   public String toString() {
     return cern.colt.Arrays.toString(partFromTo(0, size() - 1).elements());
   }
-  /**
+  /*
    * Trims the capacity of the receiver to be the receiver's current size. Releases any superfluos
    * internal memory. An application can use this operation to minimize the storage of the receiver.
    */

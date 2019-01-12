@@ -23,8 +23,8 @@ package org.embergraph.bop;
 
 import org.embergraph.relation.rule.eval.IJoinNexus;
 
-/**
- * An interface for exposing the data in an object view of a tuple by index position. This
+/*
+* An interface for exposing the data in an object view of a tuple by index position. This
  * facilitates binding values elements read from an access path onto binding sets during join
  * processing.
  *
@@ -35,7 +35,7 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
  */
 public interface IElement {
 
-  /**
+  /*
    * Return the value at the specified index.
    *
    * @param index The index.
@@ -43,5 +43,5 @@ public interface IElement {
    * @throws IllegalArgumentException if the index is less than zero or GTE the #of fields defined
    *     for the element.
    */
-  public Object get(int index);
+  Object get(int index);
 }

@@ -19,8 +19,8 @@ package org.embergraph.rdf.sail.webapp;
 
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Interface used to report whether or not a given feature is supported.
+/*
+* Interface used to report whether or not a given feature is supported.
  *
  * @author bryan
  */

@@ -28,8 +28,8 @@ import java.util.concurrent.TimeoutException;
 import org.embergraph.journal.IAtomicStore;
 import org.embergraph.util.ChecksumError;
 
-/**
- * Interface for a write cache with read back and the capability to update records while they are
+/*
+* Interface for a write cache with read back and the capability to update records while they are
  * still in the cache.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -37,7 +37,7 @@ import org.embergraph.util.ChecksumError;
  */
 public interface IWriteCache {
 
-  /**
+  /*
    * Write the record on the cache. This interface DOES NOT provide any guarantee about the ordering
    * of writes. Callers who require a specific ordering must coordinate that ordering themselves,
    * e.g., by synchronizing across their writes onto the cache.
@@ -59,10 +59,10 @@ public interface IWriteCache {
    *     provide special handling for such large records. For example, they can be written directly
    *     onto the backing channel.
    */
-  public boolean write(final long offset, final ByteBuffer data, final int chk)
+  boolean write(final long offset, final ByteBuffer data, final int chk)
       throws InterruptedException;
 
-  /**
+  /*
    * Read a record from the write cache.
    *
    * @param offset The file offset of that record in the backing file.
@@ -77,10 +77,10 @@ public interface IWriteCache {
    * @throws ChecksumError if checksums are enabled and the checksum for the record could not be
    *     validated.
    */
-  public ByteBuffer read(final long offset, final int nbytes)
+  ByteBuffer read(final long offset, final int nbytes)
       throws InterruptedException, ChecksumError;
 
-  /**
+  /*
    * Flush the writes to the backing channel but does not force anything to the backing channel. The
    * caller is responsible for managing when the channel is forced to the disk (if it is backed by
    * disk) and whether file data or file data and file metadata are forced to the disk.
@@ -89,9 +89,9 @@ public interface IWriteCache {
    * @throws InterruptedException
    *     <p>FIXME The [force] parameter is ignored and will be removed shortly.
    */
-  public void flush(final boolean force) throws IOException, InterruptedException;
+  void flush(final boolean force) throws IOException, InterruptedException;
 
-  /**
+  /*
    * Flush the writes to the backing channel but does not force anything to the backing channel. The
    * caller is responsible for managing when the channel is forced to the disk (if it is backed by
    * disk) and whether file data or file data and file metadata are forced to the disk.
@@ -101,10 +101,10 @@ public interface IWriteCache {
    * @throws InterruptedException
    *     <p>FIXME The [force] parameter is ignored and will be removed shortly.
    */
-  public boolean flush(final boolean force, final long timeout, final TimeUnit unit)
+  boolean flush(final boolean force, final long timeout, final TimeUnit unit)
       throws IOException, TimeoutException, InterruptedException;
 
-  /**
+  /*
    * Reset the write cache, discarding any writes which have not been written through to the backing
    * channel yet. This method IS NOT responsible for discarding writes which have been written
    * through since those are in general available for reading directly from the backing channel. The
@@ -114,13 +114,13 @@ public interface IWriteCache {
    *
    * @throws InterruptedException
    */
-  public void reset() throws InterruptedException;
+  void reset() throws InterruptedException;
 
-  /**
+  /*
    * Permanently take the {@link IWriteCache} out of service. Dirty records are discarded, not
    * flushed.
    *
    * @throws InterruptedException
    */
-  public void close() throws InterruptedException;
+  void close() throws InterruptedException;
 }

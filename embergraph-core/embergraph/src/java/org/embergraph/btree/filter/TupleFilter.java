@@ -16,8 +16,8 @@ import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.Tuple;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Filter supporting {@link ITupleIterator}s.
+/*
+* Filter supporting {@link ITupleIterator}s.
  *
  * <p><strong>Warning: Unlike {@link Filter}, this class correctly uses a second {@link Tuple}
  * instance to perform filtering.<strong> This is necessary since the {@link Tuple} instance for the
@@ -64,7 +64,7 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
 
   protected abstract boolean isValid(ITuple<E> tuple);
 
-  /**
+  /*
    * Implementation class knows how to avoid side-effects from the reuse of the same {@link Tuple}
    * instance by the base {@link ITupleIterator} impls.
    *
@@ -84,7 +84,7 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
     /** The next value to be returned by {@link #next()}. */
     private ITuple<E> nextValue = null;
 
-    /**
+    /*
      * The {@link ITuple} instance that will actually be returned to the caller. The data from
      * {@link #nextValue} is <em>copied</em> into this {@link #returnValue} in order to avoid
      * side-effects from {@link #getNext()}. Those side-effects would otherwise arise because the
@@ -163,10 +163,10 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
       visit(returnValue);
 
       // return the private instance containing a copy of the data.
-      return (ITuple<E>) returnValue;
+      return returnValue;
     }
 
-    /**
+    /*
      * Hook for subclasses. This is invoked immediately before {@link #next()} returns. The default
      * implementation is a NOP.
      *
@@ -178,7 +178,7 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
 
     }
 
-    /**
+    /*
      * Note: {@link #remove()} is supported iff the source iterator is an {@link ITupleCursor} and
      * the underlying {@link AbstractBTree} allows modification.
      *
@@ -197,8 +197,8 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
 
       if (src instanceof ITupleCursor<?>) {
 
-        /*
-         * The ITupleCursor supports traversal with concurrent
+      /*
+       * The ITupleCursor supports traversal with concurrent
          * modification. Therefore we can remove the correct entry from
          * the underlying B+Tree by directing the remove(key) request to
          * the index implementation itself.
@@ -215,8 +215,8 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
 
       } else {
 
-        /*
-         * Otherwise the one step lookahead imposed by the filter means
+      /*
+       * Otherwise the one step lookahead imposed by the filter means
          * that the source iterator is already positioned on a successor
          * of the current element. If we were to use [src.remove()]
          * here, it would cause a successor of the current element to be
@@ -228,7 +228,7 @@ public abstract class TupleFilter<E> extends FilterBase implements ITupleFilter<
       }
     }
 
-    /**
+    /*
      * One step look ahead.
      *
      * @return The next object to be visited.

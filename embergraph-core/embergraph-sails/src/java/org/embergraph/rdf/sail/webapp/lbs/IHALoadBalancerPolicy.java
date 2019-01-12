@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 
-/**
- * Load balancer policy interface.
+/*
+* Load balancer policy interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see HALoadBalancerServlet
@@ -32,7 +32,7 @@ import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
  */
 public interface IHALoadBalancerPolicy extends IHAPolicyLifeCycle {
 
-  /**
+  /*
    * Invoked for each request. If the response is not committed, then it will be handled by the
    * {@link HALoadBalancerServlet}.
    *
@@ -53,7 +53,7 @@ public interface IHALoadBalancerPolicy extends IHAPolicyLifeCycle {
       final HttpServletResponse response)
       throws ServletException, IOException;
 
-  /**
+  /*
    * Return the Request-URI to which a non-idempotent request will be proxied.
    *
    * @param req The request.
@@ -62,7 +62,7 @@ public interface IHALoadBalancerPolicy extends IHAPolicyLifeCycle {
    */
   String getLeaderURI(HttpServletRequest req);
 
-  /**
+  /*
    * Return the Request-URL to which a <strong>read-only</strong> request will be proxied. The
    * returned URL must include the protocol, hostname and port (if a non-default port will be used)
    * as well as the target request path.

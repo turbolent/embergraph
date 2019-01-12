@@ -32,8 +32,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 
-/**
- * Class provides methods to determine if two {@link IJoinNode}s can join on a shared variable and
+/*
+* Class provides methods to determine if two {@link IJoinNode}s can join on a shared variable and
  * if they can join on an variable which is indirectly shared through constraints which can be
  * attached to that join.
  *
@@ -46,7 +46,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
 
   private static final Logger log = Logger.getLogger(StaticAnalysis.class);
 
-  /**
+  /*
    * @param queryRoot The root of the query. We need to have this on hand in order to resolve {@link
    *     NamedSubqueryInclude}s during static analysis.
    * @param evaluationContext The evaluation context provides access to the {@link
@@ -58,7 +58,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
     super(queryRoot, evaluationContext);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff two predicates can join on the basis of at least one variable
    * which is shared directly by those predicates. Only the operands of the predicates are
    * considered.
@@ -84,10 +84,10 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
     if (p2 == null) throw new IllegalArgumentException();
 
     final Set<IVariable<?>> set1 =
-        getSpannedVariables((BOp) p1, false /* filters */, new LinkedHashSet<IVariable<?>>());
+        getSpannedVariables(p1, false /* filters */, new LinkedHashSet<IVariable<?>>());
 
     final Set<IVariable<?>> set2 =
-        getSpannedVariables((BOp) p2, false /* filters */, new LinkedHashSet<IVariable<?>>());
+        getSpannedVariables(p2, false /* filters */, new LinkedHashSet<IVariable<?>>());
 
     // The difference gives us the shared variables.
     set1.retainAll(set2);
@@ -107,7 +107,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
     return canJoin;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff a predicate may be used to extend a join path on the basis of at
    * least one variable which is shared either directly or via one or more constraints which may be
    * attached to the predicate when it is added to the join path. The join path is used to decide
@@ -166,7 +166,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
     {
       for (IJoinNode p : path) {
 
-        getSpannedVariables((BOp) p, false /* filters */, knownBound);
+        getSpannedVariables(p, false /* filters */, knownBound);
       }
     }
 
@@ -176,7 +176,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
      */
     {
       final Set<IVariable<?>> vset =
-          getSpannedVariables((BOp) vertex, new LinkedHashSet<IVariable<?>>());
+          getSpannedVariables(vertex, new LinkedHashSet<IVariable<?>>());
 
       vset.retainAll(knownBound);
 
@@ -277,7 +277,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
     return false;
   }
 
-  /**
+  /*
    * Given a join path, return the set of constraints to be associated with each join in that join
    * path. Only those constraints whose variables are known to be bound will be attached.
    *
@@ -348,8 +348,8 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
           if (c == null) throw new IllegalArgumentException();
 
           if (used.contains(c)) {
-            /*
-             * Skip constraints which were already assigned to
+          /*
+       * Skip constraints which were already assigned to
              * predicates before this one in the join path.
              */
             continue;
@@ -364,8 +364,8 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
 
           } else {
 
-            /*
-             * true iff all variables used by this constraint are
+          /*
+       * true iff all variables used by this constraint are
              * bound at this point in the join path.
              */
             final boolean allVarsBound;
@@ -385,8 +385,8 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
 
           if (attach) {
 
-            /*
-             * All variables have become bound for this constraint,
+          /*
+       * All variables have become bound for this constraint,
              * so add it to the set of "used" constraints.
              */
 
@@ -413,7 +413,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
     return ret;
   }
 
-  /**
+  /*
    * Return the set of variables which MUST be bound for solutions after the evaluation of this
    * group. A group will produce "MUST" bindings for variables from its statement patterns and a LET
    * based on an expression whose variables are known bound.

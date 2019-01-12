@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.matrix.doublealgo;
 
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * A comparison function which imposes a <i>total ordering</i> on some collection of elements.
+/*
+* A comparison function which imposes a <i>total ordering</i> on some collection of elements.
  * Comparators can be passed to a sort method (such as
  * <tt>cern.colt.matrix.doublealgo.Sorting.quickSort</tt>) to allow precise control over the sort
  * order.
@@ -29,7 +29,7 @@ import cern.colt.matrix.DoubleMatrix2D;
  * @see cern.colt.Sorting
  */
 public interface DoubleMatrix2DComparator {
-  /**
+  /*
    * Compares its two arguments for order. Returns a negative integer, zero, or a positive integer
    * as the first argument is less than, equal to, or greater than the second.
    *
@@ -49,7 +49,7 @@ public interface DoubleMatrix2DComparator {
    *     equal to, or greater than the second.
    */
   int compare(DoubleMatrix2D o1, DoubleMatrix2D o2);
-  /**
+  /*
    * Indicates whether some other object is &quot;equal to&quot; this Comparator. This method must
    * obey the general contract of <tt>Object.equals(Object)</tt>. Additionally, this method can
    * return <tt>true</tt> <i>only</i> if the specified Object is also a comparator and it imposes

@@ -24,8 +24,8 @@ package org.embergraph.htree;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Unit tests for commit functionality that do not trigger copy-on-write.
+/*
+* Unit tests for commit functionality that do not trigger copy-on-write.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -87,8 +87,8 @@ public class TestCommit extends AbstractHTreeTestCase {
         assertEquals("#leaves", 1, htree.nleaves);
         assertEquals("#entries", 0, htree.nentries);
 
-        /*
-         * Commit of tree with clean root writes a new metadata record
+      /*
+       * Commit of tree with clean root writes a new metadata record
          * but does not change the addrRoot.
          */
         metadata2 = htree.writeCheckpoint();

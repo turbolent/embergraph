@@ -37,8 +37,8 @@ import org.embergraph.striterator.EmptyChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Provides backward chaining for property collection and reverse property collection on owl:sameAs
+/*
+* Provides backward chaining for property collection and reverse property collection on owl:sameAs
  * for the ?P? and ??? access paths.
  *
  * <p>Note:
@@ -55,7 +55,7 @@ public class BackchainOwlSameAsPropertiesPIterator extends BackchainOwlSameAsIte
 
   private boolean canRemove = false;
 
-  /**
+  /*
    * Create an iterator that will visit all statements in the source iterator and also backchain any
    * entailments that would have resulted from owl:sameAs {2,3}.
    *
@@ -112,7 +112,7 @@ public class BackchainOwlSameAsPropertiesPIterator extends BackchainOwlSameAsIte
     return current;
   }
 
-  /**
+  /*
    * We are essentially taking a cross product of the two sets {s, ? sameAs s} and {o, ? sameAs o},
    * and then inferring links between those {s,o} pairs. We can do this because s and o are unbound
    * in this access path. We are simply using the connection that we know about (the bound p), to

@@ -28,8 +28,8 @@ import org.embergraph.io.SerializerUtil;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Unit tests for a {@link BTree} with its bloom filter enabled. This class is mostly focused on the
+/*
+* Unit tests for a {@link BTree} with its bloom filter enabled. This class is mostly focused on the
  * basic bloom filter mechanics. Also see {@link TestIndexSegmentWithBloomFilter} which was
  * originally written to test the {@link IndexSegment} behavior with a bloom filter, but which also
  * tests the {@link BTree} to some extent now that the {@link BTree} also maintains a bloom filter.
@@ -47,7 +47,7 @@ public class TestBTreeWithBloomFilter extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Return a btree backed by a journal with the indicated branching factor. The serializer requires
    * that values in leaves are {@link SimpleEntry} objects.
    *
@@ -92,7 +92,7 @@ public class TestBTreeWithBloomFilter extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Simple test to verify that the bloom filter does not break the semantics of insert, lookup,
    * contains, or remove.
    *
@@ -162,8 +162,8 @@ public class TestBTreeWithBloomFilter extends AbstractBTreeTestCase {
    * Note: this does not work out since it is not so easy to determine when
    * the iterator is a point test as toKey is the exclusive upper bound.
    */
-  //    /**
-  //     * Test verifies that the BTree will automatically apply the bloom filter to
+  //    /*
+//     * Test verifies that the BTree will automatically apply the bloom filter to
   //     * reject range iterator requests that correspond to a point test, but only
   //     * when the iterator was not requested with any options that would permit
   //     * concurrent modification of the index.
@@ -233,7 +233,7 @@ public class TestBTreeWithBloomFilter extends AbstractBTreeTestCase {
   //
   //    }
 
-  /**
+  /*
    * Simple test that the bloom filter is persisted with the btree and reloaded from the store.
    *
    * @see BloomFilter
@@ -354,7 +354,7 @@ public class TestBTreeWithBloomFilter extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Simple test that the bloom filter is discarded if the btree is closed without writing a
    * checkpoint.
    */
@@ -446,7 +446,7 @@ public class TestBTreeWithBloomFilter extends AbstractBTreeTestCase {
     assertFalse(btree.getBloomFilter().contains(k0));
   }
 
-  /**
+  /*
    * Unit test disables the bloom filter and verifies that a checkpoint writes a 0L as the address
    * of the bloom filter and that on reload the btree does not have a bloomfilter
    */
@@ -505,7 +505,7 @@ public class TestBTreeWithBloomFilter extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that the bloom filter is automatically disabled once the #of entries in the
    * {@link BTree} exceeds the <code>maxN</code> (the calculated #of index entries at which the
    * bloom filter performance will have degraded to below the desired maximum error rate).

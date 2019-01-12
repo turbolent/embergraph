@@ -41,8 +41,8 @@ import org.embergraph.rwstore.RWStore;
 import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.util.Bytes;
 
-/**
- * Options for the {@link Journal}. Options are specified as property values to the {@link
+/*
+* Options for the {@link Journal}. Options are specified as property values to the {@link
  * Journal#Journal(Properties)} constructor.
  *
  * <h2>Write Cache</h2>
@@ -71,14 +71,14 @@ import org.embergraph.util.Bytes;
  */
 public interface Options {
 
-  /**
+  /*
    * The name of the file. If the file not found (or if it exists but is empty) and {@link #CREATE}
    * is true, then a new journal will be created. The filename extension {@value #JNL} is
    * recommended.
    */
   String FILE = AbstractJournal.class.getName() + ".file";
 
-  /**
+  /*
    * The name of the property whose value controls the nature of the backing store (default {@link
    * #DEFAULT_BUFFER_MODE}).
    *
@@ -87,7 +87,7 @@ public interface Options {
    */
   String BUFFER_MODE = AbstractJournal.class.getName() + ".bufferMode";
 
-  /**
+  /*
    * The capacity of the LRU cache for canonicalizing mapping maintained by the {@link
    * AbstractJournal} for index {@link Checkpoint}s. The capacity of this cache indirectly controls
    * how many <strong>historical</strong> indices the journal will hold open. The main reason for
@@ -107,7 +107,7 @@ public interface Options {
   String HISTORICAL_INDEX_CACHE_CAPACITY =
       AbstractJournal.class.getName() + ".historicalIndexCacheCapacity";
 
-  /**
+  /*
    * The timeout in milliseconds for stale entries in the historical index cache -or- ZERO (0) to
    * disable the timeout (default {@value #DEFAULT_HISTORICAL_INDEX_CACHE_TIMEOUT}). When this
    * timeout expires, the reference for the entry in the backing {@link HardReferenceQueue} will be
@@ -121,7 +121,7 @@ public interface Options {
 
   String DEFAULT_HISTORICAL_INDEX_CACHE_TIMEOUT = "" + (60 * 1000);
 
-  /**
+  /*
    * The capacity of the LRU cache for the "live" {@link Name2Addr} object (default {@value
    * #DEFAULT_LIVE_INDEX_CACHE_CAPACITY}). A special {@link Name2Addr} instance is maintained for
    * the "live" index objects, gives the most recent {@link Checkpoint} address from which the
@@ -147,7 +147,7 @@ public interface Options {
    */
   String LIVE_INDEX_CACHE_CAPACITY = AbstractJournal.class.getName() + ".liveIndexCacheCapacity";
 
-  /**
+  /*
    * The timeout in milliseconds for stale entries in the live index cache -or- ZERO (0) to disable
    * the timeout (default {@value #DEFAULT_LIVE_INDEX_CACHE_TIMEOUT}). When this timeout expires,
    * the reference for the entry in the backing {@link HardReferenceQueue} will be cleared. Note
@@ -160,7 +160,7 @@ public interface Options {
 
   String DEFAULT_LIVE_INDEX_CACHE_TIMEOUT = "" + (60 * 1000);
 
-  /**
+  /*
    * A boolean property whose value controls whether a direct (native) or heap-based {@link
    * ByteBuffer} will be allocated by the selected {@link BufferMode}. Note that this only applies
    * to fully buffered modes, e.g., {@link BufferMode#Transient} or {@link BufferMode#Direct}. This
@@ -168,8 +168,8 @@ public interface Options {
    */
   String USE_DIRECT_BUFFERS = AbstractJournal.class.getName() + ".useDirectBuffers";
 
-  //    /**
-  //     * An integer property whose value controls the size of the write cache (in
+  //    /*
+//     * An integer property whose value controls the size of the write cache (in
   //     * records) (default {@value #DEFAULT_READ_CACHE_CAPACITY} bytes). A value
   //     * of ZERO (0) will disable the read cache.
   //     * <p>
@@ -180,8 +180,8 @@ public interface Options {
   //     */
   //    String READ_CACHE_CAPACITY = AbstractJournal.class.getName()+".readCacheCapacity";
   //
-  //    /**
-  //     * An integer property whose value is the maximum size of a record that will
+  //    /*
+//     * An integer property whose value is the maximum size of a record that will
   //     * be allowed into the optional read cache. Records larger than this size
   //     * are always read from the backing store.
   //     *
@@ -190,7 +190,7 @@ public interface Options {
   //    String READ_CACHE_MAX_RECORD_SIZE =
   // AbstractJournal.class.getName()+".readCacheMaxRecordSize";
 
-  /**
+  /*
    * Option may be used to disable the {@link WriteCacheService} on the {@link WORMStrategy}.
    * Generally, this option is only used by some unit tests to avoid direct buffer allocation using
    * the {@link DirectBufferPool}.
@@ -199,7 +199,7 @@ public interface Options {
    */
   String WRITE_CACHE_ENABLED = AbstractJournal.class.getName() + ".writeCacheEnabled";
 
-  /**
+  /*
    * Option may be used to override the #of {@link WriteCache} buffers which will be used with a
    * {@link WriteCacheService}.
    *
@@ -209,7 +209,7 @@ public interface Options {
    */
   String WRITE_CACHE_BUFFER_COUNT = AbstractJournal.class.getName() + ".writeCacheBufferCount";
 
-  /**
+  /*
    * Option may be used to control the maximum number of buffers on the {@link WriteCacheService}
    * dirty list (default {@value #DEFAULT_WRITE_CACHE_MIN_CLEAN_LIST_SIZE}, which means that an
    * intelligent policy used). This effectively controls the maximum number of buffers that are
@@ -220,7 +220,7 @@ public interface Options {
   String WRITE_CACHE_MIN_CLEAN_LIST_SIZE =
       AbstractJournal.class.getName() + ".writeCacheMinCleanListSize";
 
-  /**
+  /*
    * Option specifies the minimum percentage of empty space in a {@link WriteCache} buffer that
    * could be recovered before we will attempt to compact the buffer (in [0:100], default {@value
    * #DEFAULT_WRITE_CACHE_COMPACTION_THRESHOLD}). Free space is created in a dirty buffer when
@@ -239,7 +239,7 @@ public interface Options {
   String WRITE_CACHE_COMPACTION_THRESHOLD =
       AbstractJournal.class.getName() + ".writeCacheCompactionThreshold";
 
-  /**
+  /*
    * <strong>ALPHA FEATURE</strong>
    *
    * <p>Option may be used to override the #of {@link ReadCache} buffers which will be used with a
@@ -256,7 +256,7 @@ public interface Options {
    */
   String READ_CACHE_BUFFER_COUNT = AbstractJournal.class.getName() + ".readCacheBufferCount";
 
-  /**
+  /*
    * <strong>ALPHA FEATURE</strong>
    *
    * <p>Option may be used to override the #of touches at which a retained readCache record is moved
@@ -269,7 +269,7 @@ public interface Options {
    */
   String HOT_CACHE_THRESHOLD = AbstractJournal.class.getName() + ".hotCacheThreshold";
 
-  /**
+  /*
    * <strong>ALPHA FEATURE</strong>
    *
    * <p>Option may be used to override the number of hotCache buffers which will be used with a
@@ -279,8 +279,8 @@ public interface Options {
    */
   String HOT_CACHE_SIZE = AbstractJournal.class.getName() + ".hotCacheSize";
 
-  //    /**
-  //     * An integer property whose value controls the size of the write cache (in
+  //    /*
+//     * An integer property whose value controls the size of the write cache (in
   //     * bytes) used by the selected {@link BufferMode} (default
   //     * {@value #DEFAULT_WRITE_CACHE_CAPACITY} bytes). A value of ZERO (0) will
   //     * disable the write cache.
@@ -296,7 +296,7 @@ public interface Options {
   //     */
   //    String WRITE_CACHE_CAPACITY = AbstractJournal.class.getName()+".writeCacheCapacity";
 
-  /**
+  /*
    * Optional {@link IRecordCompressor} strategy for the {@link WriteCacheService} in support of
    * compressed payloads for replicated messages and compressed HALogs (default {@value
    * #DEFAULT_HALOG_COMPRESSOR}). The value is a <code>key</code> declared to the {@link
@@ -310,7 +310,7 @@ public interface Options {
 
   String DEFAULT_HALOG_COMPRESSOR = CompressorRegistry.DEFLATE_BEST_SPEED;
 
-  /**
+  /*
    * The initial extent of the journal (bytes). When the journal is backed by a file, this is the
    * initial length of that file. The initial user extent is typically slightly smaller as the head
    * of the file contains some metadata outside of the user space (the root blocks). The initial
@@ -328,7 +328,7 @@ public interface Options {
 
   //    int minimumWriteCacheCapacity = Bytes.megabyte32;
 
-  /**
+  /*
    * The maximum extent of the journal (bytes). The journal will {@link IResourceManager#overflow()}
    * once it approaches this limit.
    *
@@ -336,7 +336,7 @@ public interface Options {
    */
   String MAXIMUM_EXTENT = AbstractJournal.class.getName() + ".maximumExtent";
 
-  /**
+  /*
    * The minimum #of bytes that the journal will be extended when it runs out of room in the user
    * extent.
    *
@@ -346,7 +346,7 @@ public interface Options {
 
   long minimumMinimumExtension = 1 * Bytes.megabyte;
 
-  /**
+  /*
    * The #of bits in a 64-bit long integer identifier that are used to encode the byte offset of a
    * record in the store as an unsigned integer. The default is {@link
    * WormAddressManager#SCALE_UP_OFFSET_BITS} for a {@link Journal} and {@link
@@ -357,7 +357,7 @@ public interface Options {
    */
   String OFFSET_BITS = AbstractJournal.class.getName() + ".offsetBits";
 
-  /**
+  /*
    * An optional boolean property (default {@value #DEFAULT_VALIDATE_CHECKSUM}). When <code>true
    * </code>, the checksum stored in the root blocks of an existing store will be validated when the
    * store file is opened. This property may be set to false if you are engaged in a desperate
@@ -367,7 +367,7 @@ public interface Options {
    */
   String VALIDATE_CHECKSUM = AbstractJournal.class.getName() + ".validateChecksum";
 
-  /**
+  /*
    * <strong>WARNING - The use of this option is dangerous.</strong> This option MAY be used if you
    * have a commit point whose root block is valid but where the data associated with that root
    * block is invalid. Normally the more current root block is used to (re-)open the store. However,
@@ -383,7 +383,7 @@ public interface Options {
    */
   String ALTERNATE_ROOT_BLOCK = AbstractJournal.class.getName() + ".alternateRootBlock";
 
-  /**
+  /*
    * <strong>WARNING - The use of this option is dangerous.</strong> This option MAY be used to
    * permit the database to be opened if one of the root blocks is bad. This will allow you to
    * access the remaining root block and the associated commit point. <strong>If you subsequently
@@ -396,7 +396,7 @@ public interface Options {
    */
   String IGNORE_BAD_ROOT_BLOCK = AbstractJournal.class.getName() + ".ignoreBadRootBlock";
 
-  /**
+  /*
    * <strong>WARNING - The use of this option is dangerous.</strong> This option may be used to
    * update the {@link ICUVersionRecord} associated with the journal. ICU provides a Unicode sort
    * key generation service for embergraph. Unicode sort keys are used in many indices, including
@@ -407,7 +407,7 @@ public interface Options {
    */
   String UPDATE_ICU_VERSION = AbstractJournal.class.getName() + ".updateICUVersion";
 
-  /**
+  /*
    * An optional boolean property (default is {@value #DEFAULT_CREATE}). When <code>true</code> and
    * the named file is not found, a new journal will be created. If the file exists but is empty,
    * then a new journal will be initialized on that file (this makes it possible to use the
@@ -416,7 +416,7 @@ public interface Options {
    */
   String CREATE = AbstractJournal.class.getName() + ".create";
 
-  /**
+  /*
    * An optional property allowed iff a new journal is being created whose value is the timestamp to
    * be written in the {@link IRootBlockView#getCreateTime()} field of the root block. This is used
    * by the {@link ResourceManager} to place consistent createTime timestamps on its managed journal
@@ -424,13 +424,13 @@ public interface Options {
    */
   String CREATE_TIME = AbstractJournal.class.getName() + ".createTime";
 
-  /**
+  /*
    * When <code>true</code>, the journal must pre-exist and will be read-only (optional, default is
    * {@value #DEFAULT_READ_ONLY}).
    */
   String READ_ONLY = AbstractJournal.class.getName() + ".readOnly";
 
-  /**
+  /*
    * A trinary property {no, force, forceMetadata} that determines whether the journal will be
    * opened in a mode that writes through synchronously to stable storage (default {@value
    * #DEFAULT_FORCE_WRITES}). This option does NOT effect the stability of the data on disk but may
@@ -443,7 +443,7 @@ public interface Options {
    */
   String FORCE_WRITES = AbstractJournal.class.getName() + ".forceWrites";
 
-  /**
+  /*
    * A trinary property {no, force, forceMetadata} that determines whether the journal will be
    * forced to stable storage on a commit (default {@value #DEFAULT_FORCE_ON_COMMIT}).
    *
@@ -479,7 +479,7 @@ public interface Options {
    */
   String FORCE_ON_COMMIT = AbstractJournal.class.getName() + ".forceOnCommit";
 
-  /**
+  /*
    * This boolean option may be used to request that application data are forced to stable storage
    * <em>before</em> we update the root blocks (default {@value #DEFAULT_DOUBLE_SYNC}). This is
    * accomplished by invoking {@link FileChannel#force(boolean)} before root blocks are updated as
@@ -500,7 +500,7 @@ public interface Options {
    */
   String DOUBLE_SYNC = AbstractJournal.class.getName() + ".doubleSync";
 
-  /**
+  /*
    * This boolean option causes a new file to be created using the {@link
    * File#createTempFile(String, String, File)} temporary file mechanism. However, if all you need
    * is an atomic create of a new filename, you can just create the temporary file and then pass it
@@ -520,21 +520,21 @@ public interface Options {
    */
   String CREATE_TEMP_FILE = AbstractJournal.class.getName() + ".createTempFile";
 
-  /**
+  /*
    * This boolean option causes the journal file to be deleted when the journal is closed (default
    * <em>false</em>). This option is used by the some test suites (those that do not test restart
    * safety) to keep down the disk burden of the tests and MUST NOT be used with restart-safe data.
    */
   String DELETE_ON_CLOSE = AbstractJournal.class.getName() + ".deleteOnClose";
 
-  /**
+  /*
    * This boolean option causes the journal file to be deleted when the VM exits (default
    * <em>false</em>). This option is used by the test suites to keep down the disk burden of the
    * tests and MUST NOT be used with restart-safe data.
    */
   String DELETE_ON_EXIT = AbstractJournal.class.getName() + ".deleteOnExit";
 
-  /**
+  /*
    * The property whose value is the name of the directory in which temporary files will be created.
    * When not specified the default is governed by the value of the System property named <code>
    * java.io.tmpdir</code>. There are several kinds of temporary files that can be created,
@@ -542,7 +542,7 @@ public interface Options {
    */
   String TMP_DIR = AbstractJournal.class.getName() + ".tmpDir";
 
-  /**
+  /*
    * When <code>true</code> (default {@value #DEFAULT_FILE_LOCK_ENABLED}) a {@link FileLock} will be
    * sought for the journal by default. When <code>false</code> only an advisory lock will be
    * sought. Note that {@link FileLock} is never used for memory-mapped (causes problems) or
@@ -563,26 +563,26 @@ public interface Options {
   /** The default for {@link #USE_DIRECT_BUFFERS}. */
   String DEFAULT_USE_DIRECT_BUFFERS = "false";
 
-  //    /**
-  //     * The default for {@link #WRITE_CACHE_CAPACITY} (1M).
+  //    /*
+//     * The default for {@link #WRITE_CACHE_CAPACITY} (1M).
   //     */
   //    String DEFAULT_WRITE_CACHE_CAPACITY = ""+(1 * Bytes.megabyte32);
 
-  /**
+  /*
    * The {@link WriteCacheService} is enabled by default.
    *
    * @see #WRITE_CACHE_ENABLED
    */
   String DEFAULT_WRITE_CACHE_ENABLED = "true";
 
-  /**
+  /*
    * The #of {@link WriteCache} buffers used by the {@link WriteCacheService}.
    *
    * @see #WRITE_CACHE_BUFFER_COUNT
    */
   String DEFAULT_WRITE_CACHE_BUFFER_COUNT = "6";
 
-  /**
+  /*
    * The #of {@link ReadCache} buffers used by the {@link WriteCacheService}.
    *
    * @see #READ_CACHE_BUFFER_COUNT
@@ -595,8 +595,8 @@ public interface Options {
   /** @see #WRITE_CACHE_COMPACTION_THRESHOLD */
   String DEFAULT_WRITE_CACHE_COMPACTION_THRESHOLD = "20";
 
-  //    /**
-  //     * The default for {@link #READ_CACHE_MAX_RECORD_SIZE}.
+  //    /*
+//     * The default for {@link #READ_CACHE_MAX_RECORD_SIZE}.
   //     */
   //    String DEFAULT_READ_CACHE_MAX_RECORD_SIZE = ""+(2*Bytes.kilobyte);
 
@@ -606,29 +606,29 @@ public interface Options {
   /** The default for {@link #HOT_CACHE_THRESHOLD}. */
   String DEFAULT_HOT_CACHE_SIZE = "10";
 
-  /**
+  /*
    * The default initial extent for a new journal.
    *
    * @see #INITIAL_EXTENT
    */
   String DEFAULT_INITIAL_EXTENT = "" + (10 * Bytes.megabyte);
 
-  /**
+  /*
    * The default maximum extent for a new journal before a commit triggers an overflow event (200M).
    *
    * @see #MAXIMUM_EXTENT
    */
   String DEFAULT_MAXIMUM_EXTENT = "" + (200 * Bytes.megabyte);
 
-  /**
+  /*
    * The default minimum extension of the journal when the user extent runs out of room.
    *
    * @see #MINIMUM_EXTENSION
    */
   String DEFAULT_MINIMUM_EXTENSION = "" + (32 * Bytes.megabyte);
 
-  //    /**
-  //     * The default #of bits ({@value WormAddressManager#SCALE_OUT_OFFSET_BITS})
+  //    /*
+//     * The default #of bits ({@value WormAddressManager#SCALE_OUT_OFFSET_BITS})
   //     * used to encode the byte offset of a record in the store as an unsigned
   //     * integer.
   //     *
@@ -644,7 +644,7 @@ public interface Options {
   /** The default for the {@link #READ_ONLY} option. */
   String DEFAULT_READ_ONLY = "false";
 
-  /**
+  /*
    * The default for the {@link #FORCE_WRITES} option (writes are not forced).
    *
    * @todo consider changing this default so that we normally request synchronous writes.
@@ -654,7 +654,7 @@ public interface Options {
   /** The default for the {@link #FORCE_ON_COMMIT} option (file data and metadata are forced). */
   String DEFAULT_FORCE_ON_COMMIT = ForceEnum.ForceMetadata.toString();
 
-  /**
+  /*
    * The default for the {@link #DOUBLE_SYNC} option (application data is NOT forced to disk before
    * we write the root blocks).
    */
@@ -687,7 +687,7 @@ public interface Options {
   /** Maxmimum extent for stores backed by a byte[] in Java. */
   long MEM_MAX_EXTENT = Integer.MAX_VALUE;
 
-  /**
+  /*
    * A default used for {@link BufferMode}s which do not have a fixed maximum extent. For example,
    * the WORM modes depend on the partitioning of the address bits into bits for the offset and bits
    * for the data length.

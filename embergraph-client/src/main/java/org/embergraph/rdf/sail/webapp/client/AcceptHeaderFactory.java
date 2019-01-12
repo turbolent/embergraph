@@ -39,8 +39,8 @@ import org.openrdf.query.resultio.TupleQueryResultParserRegistry;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParserRegistry;
 
-/**
- * Utility class for generating accept heades modeled on {@link RDFFormat#getAcceptParams(Iterable,
+/*
+* Utility class for generating accept heades modeled on {@link RDFFormat#getAcceptParams(Iterable,
  * boolean, RDFFormat)}, but extended to handle {@link TupleQueryResultFormat} using the same base
  * quality value.
  *
@@ -56,7 +56,7 @@ public class AcceptHeaderFactory {
 
   private static final int defaultQValue = 10;
 
-  /**
+  /*
    * @param rdfFormats
    * @param requireContext
    * @param preferredFormat
@@ -107,7 +107,7 @@ public class AcceptHeaderFactory {
     return acceptParams;
   }
 
-  /**
+  /*
    * Return a set of accept header values annotated with quality scores.
    *
    * @param formats The set of formats which can be accepted.
@@ -147,7 +147,7 @@ public class AcceptHeaderFactory {
     return acceptParams;
   }
 
-  /**
+  /*
    * Return an accept header which establishes a preference pattern for graph data. The accept
    * header will not include any formats for which we can not discover a parser.
    */
@@ -166,8 +166,8 @@ public class AcceptHeaderFactory {
 
       if (registry.get(format) == null) {
 
-        /*
-         * Remove any format for which there is no registered parser.
+      /*
+       * Remove any format for which there is no registered parser.
          */
 
         itr.remove();
@@ -179,7 +179,7 @@ public class AcceptHeaderFactory {
     return toString(list1);
   }
 
-  /**
+  /*
    * Return an accept header which establishes a preference pattern for solution set data. The
    * accept header will not include any formats for which we can not discover a parser.
    *
@@ -203,8 +203,8 @@ public class AcceptHeaderFactory {
 
       if (registry.get(format) == null) {
 
-        /*
-         * Remove any format for which there is no registered parser.
+      /*
+       * Remove any format for which there is no registered parser.
          *
          * Note: For example, the JSON parser does not exist for openrdf
          * 2.6.3.
@@ -220,7 +220,7 @@ public class AcceptHeaderFactory {
     return toString(list2);
   }
 
-  /**
+  /*
    * Return an accept header which establishes a preference pattern for boolean data. The accept
    * header will not include any formats for which we can not discover a parser.
    */
@@ -241,8 +241,8 @@ public class AcceptHeaderFactory {
 
       if (registry.get(format) == null) {
 
-        /*
-         * Remove any format for which there is no registered parser.
+      /*
+       * Remove any format for which there is no registered parser.
          */
 
         itr.remove();
@@ -255,7 +255,7 @@ public class AcceptHeaderFactory {
     return toString(list3);
   }
 
-  /**
+  /*
    * Convert into a comma delimited list.
    *
    * @param values The values.

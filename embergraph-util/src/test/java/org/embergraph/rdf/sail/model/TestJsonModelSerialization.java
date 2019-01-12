@@ -15,7 +15,7 @@ public class TestJsonModelSerialization extends TestCase {
   public static final String rQueryJson =
       "[{\"extQueryId\":\"10\",\"queryUuid\":\"2392a97d-64e7-4c63-bde0-da4fdb49ae9d\",\"begin\":1433272158065380000,\"isUpdateQuery\":false,\"cancelled\":false,\"elapsedTimeNS\":4177445000},{\"extQueryId\":\"11\",\"queryUuid\":\"e38c5441-758b-4805-ae95-05a46e279297\",\"begin\":1433272159648011000,\"isUpdateQuery\":false,\"cancelled\":false,\"elapsedTimeNS\":2594833000}]";
 
-  /**
+  /*
    * Test the serialization from Java Objects to JSON
    *
    * @throws IOException
@@ -79,7 +79,7 @@ public class TestJsonModelSerialization extends TestCase {
     assertEquals(i, 2);
   }
 
-  /**
+  /*
    * Convenience method to deserialize JSON.
    *
    * @return

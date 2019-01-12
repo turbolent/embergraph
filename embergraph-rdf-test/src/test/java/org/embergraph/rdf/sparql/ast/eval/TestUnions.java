@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test suite for UNION.
+/*
+* Test suite for UNION.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -36,7 +36,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -57,7 +57,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("test_union_01").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -82,7 +82,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("union_02").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -104,7 +104,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("union_03").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -126,7 +126,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("union_04").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -173,7 +173,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -215,7 +215,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * The original query.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/874">FILTER not applied when there is UNION in
@@ -232,7 +232,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A rewrite of the original query that works.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/874">FILTER not applied when there is UNION in
@@ -249,7 +249,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This is DAWG sparql11-subquery-05. It fails in scale-out.
    *
    * <pre>

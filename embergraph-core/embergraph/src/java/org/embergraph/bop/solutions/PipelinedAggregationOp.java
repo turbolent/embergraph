@@ -31,8 +31,8 @@ import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.util.InnerCause;
 
-/**
- * A pipelined aggregation operator based on an in memory hash table associating with per-group
+/*
+* A pipelined aggregation operator based on an in memory hash table associating with per-group
  * state for each aggregate expression (it can also handle the degenerate case where all solutions
  * form a single implicit group). This operator is highly efficient, but may only be used if (a)
  * DISTINCT is NOT specified for any aggregate and (b) aggregates do not embed other aggregates.
@@ -64,7 +64,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
   public interface Annotations
       extends PipelineOp.Annotations, HashMapAnnotations, GroupByOp.Annotations {}
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns <code>true</code>. This is a pipelined aggregation operator and MAY NOT be used to
@@ -152,7 +152,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
     /** The hash code for {@link #vals}. */
     private final int hash;
 
-    /**
+    /*
      * The computed values for the groupBy value expressions in the order in which they were
      * declared.
      */
@@ -163,7 +163,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
       return super.toString() + "{group=" + Arrays.toString(vals) + "}";
     }
 
-    /**
+    /*
      * Return a new {@link SolutionGroup} given the value expressions and the binding set.
      *
      * @param groupBy The value expressions to be computed. The binding set.
@@ -184,8 +184,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
         Object exprValue;
 
         try {
-          /*
-           * Note: This has a side-effect on the solution and causes
+        /*
+       * Note: This has a side-effect on the solution and causes
            * the evaluated GROUP_BY value expressions to become bound
            * on the solution. This is necessary in order for us to
            * compute the aggregates incrementally.
@@ -233,26 +233,26 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
     }
   } // SolutionGroup
 
-  /**
+  /*
    * State associated with each {@link SolutionGroup} (this is not used if all solutions belong to a
    * single implicit group).
    */
   private static class SolutionGroupState {
 
-    /**
+    /*
      * The aggregate expressions to be evaluated. The {@link IAggregate}s MUST have been cloned to
      * avoid side-effect across groups.
      */
     private final LinkedHashMap<IAggregate<?>, IVariable<?>> aggExpr;
 
-    /**
+    /*
      * The intermediate solution with all bindings produced when evaluating this solution group. Any
      * bare variables and any variables declared by the GROUP_BY clause are projected onto {@link
      * #aggregates} by the constructor.
      */
     private final IBindingSet aggregates;
 
-    /**
+    /*
      * @param groupBy The (rewritten) GROUP_BY clause.
      * @param aggExpr The aggregates to be computed for each group. The {@link IAggregate}s will be
      *     *cloned* in order to avoid side-effects across groups.
@@ -282,8 +282,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
         if (expr instanceof IVariable<?>) {
 
-          /**
-           * Propagate bare variable used in GROUP_BY clause to [aggregates].
+        /*
+       * Propagate bare variable used in GROUP_BY clause to [aggregates].
            *
            * <pre>
            * GROUP BY ?x
@@ -301,15 +301,14 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
           } else {
             val = new Constant(varValue.getClass().cast(varValue));
           }
-          ;
 
           // Bind on [aggregates].
           aggregates.set(var, val);
 
         } else if (expr instanceof IBind<?>) {
 
-          /**
-           * Propagate BIND declared by GROUP_BY clause to [aggregates].
+        /*
+       * Propagate BIND declared by GROUP_BY clause to [aggregates].
            *
            * <pre>
            * GROUP BY (2*?y as ?x)
@@ -341,7 +340,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
     }
   } // class SolutionGroupState
 
-  /**
+  /*
    * Extends {@link BOpStats} to provide the shared state for the aggregation operator across
    * invocations for different source chunks.
    *
@@ -352,7 +351,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
     /** */
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * <code>true</code> until we initialize the shared start during the first invocation of the
      * {@link ChunkTask}.
      */
@@ -374,8 +373,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
       }
 
       if (groupByState.isNestedAggregates()) {
-        /*
-         * Pipelined aggregation does not support aggregates which embed
+      /*
+       * Pipelined aggregation does not support aggregates which embed
          * other aggregates.
          */
         throw new UnsupportedOperationException(
@@ -387,7 +386,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
   /** Shared execution state for the {@link PipelinedAggregationOp}. */
   private static class SharedState {
 
-    /**
+    /*
      * A map whose keys are the bindings on the specified variables and whose values are the
      * per-group state.
      *
@@ -398,7 +397,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
      */
     private final LinkedHashMap<SolutionGroup, SolutionGroupState> map;
 
-    /**
+    /*
      * The aggregates to be computed (they have internal state).
      *
      * <p>Note: The map is shared state and can not be discarded or cleared until the last
@@ -418,8 +417,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
       } else {
 
-        /*
-         * The map is only defined if a GROUP_BY clause was used.
+      /*
+       * The map is only defined if a GROUP_BY clause was used.
          */
 
         map =
@@ -436,7 +435,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
     private final BOpContext<IBindingSet> context;
 
-    /**
+    /*
      * A map whose keys are the bindings on the specified variables and whose values are the
      * per-group state.
      *
@@ -447,7 +446,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
      */
     private final LinkedHashMap<SolutionGroup, SolutionGroupState> map;
 
-    /**
+    /*
      * The aggregates to be computed (they have internal state).
      *
      * <p>Note: The map is shared state and can not be discarded or cleared until the last
@@ -479,8 +478,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
       final SharedState sharedState;
       synchronized (stats) {
         if (stats.first) {
-          /*
-           * Setup the shared state.
+        /*
+       * Setup the shared state.
            */
           stats.first = false;
           sharedState = new SharedState(op, stats);
@@ -505,7 +504,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
       context.getRunningQuery().getAttributes().remove(sharedStateKey);
     }
 
-    /**
+    /*
      * Update the state of the {@link IAggregate}s for the appropriate group.
      *
      * @param bset The solution.
@@ -553,15 +552,15 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
             if (groupBy == null) {
 
-              /*
-               * A single implicit group.
+            /*
+       * A single implicit group.
                */
               doAggregate(aggExpr, bset, stats);
 
             } else {
 
-              /*
-               * Explicit GROUP_BY.
+            /*
+       * Explicit GROUP_BY.
                */
               accept(bset);
             }
@@ -575,15 +574,15 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
           if (groupBy == null) {
 
-            /*
-             * A single implicit group.
+          /*
+       * A single implicit group.
              *
              * Output solution for the implicit group IFF the HAVING
              * constraints are satisfied.
              */
 
-            /**
-             * The intermediate solution with all bindings produced when evaluating this solution
+          /*
+       * The intermediate solution with all bindings produced when evaluating this solution
              * group.
              *
              * <p>Note: There is no GROUP_BY so we do not need to propagate any bindings declared by
@@ -607,8 +606,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
                 TypeErrorLog.handleTypeError(ex, expr, stats);
                 continue;
               } catch (IllegalArgumentException ex) {
-                /*
-                 * Note: This a hack turns an
+              /*
+       * Note: This a hack turns an
                  * IllegalArgumentException which we presume is
                  * coming out of new Constant(null) into an
                  * (implicit) SPARQL type error so we can drop
@@ -624,12 +623,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
             // Verify optional HAVING constraint(s)
             final boolean drop;
             final IConstraint[] having2 = rewrite.getHaving2();
-            if (having2 != null && !BOpUtility.isConsistent(having2, aggregates)) {
-              // drop this solution.
-              drop = true;
-            } else {
-              drop = false;
-            }
+            // drop this solution.
+            drop = having2 != null && !BOpUtility.isConsistent(having2, aggregates);
 
             if (log.isInfoEnabled()) log.info((drop ? "drop" : "keep") + " : " + aggregates);
 
@@ -649,8 +644,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
           } else {
 
-            /*
-             * Explicit GROUP_BY.
+          /*
+       * Explicit GROUP_BY.
              *
              * Output solutions for the observed groups which pass
              * the optional HAVING constraint(s).
@@ -671,8 +666,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
                   TypeErrorLog.handleTypeError(ex, expr, stats);
                   continue;
                 } catch (IllegalArgumentException ex) {
-                  /*
-                   * Note: This hack turns an
+                /*
+       * Note: This hack turns an
                    * IllegalArgumentException which we presume
                    * is coming out of new Constant(null) into
                    * an (implicit) SPARQL type error so we can
@@ -688,12 +683,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
               // Verify optional HAVING constraint(s)
               final boolean drop;
               final IConstraint[] having2 = rewrite.getHaving2();
-              if (having2 != null && !BOpUtility.isConsistent(having2, aggregates)) {
-                // drop this solution.
-                drop = true;
-              } else {
-                drop = false;
-              }
+              // drop this solution.
+              drop = having2 != null && !BOpUtility.isConsistent(having2, aggregates);
 
               if (log.isInfoEnabled()) log.info((drop ? "drop" : "keep") + " : " + aggregates);
 
@@ -735,7 +726,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
     }
   }
 
-  /**
+  /*
    * Update the {@link IAggregate}s for the given binding set.
    *
    * <p>Note: The {@link IAggregate} instances MUST be distinct within each group to avoid
@@ -760,8 +751,8 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
 
         if (InnerCause.isInnerCause(t, SparqlTypeErrorException.class)) {
 
-          /*
-           * Trap the type error. The group will be reported, but this
+        /*
+       * Trap the type error. The group will be reported, but this
            * aggregate will not bind a value for that group (the
            * aggregate will track its error state internally.)
            */
@@ -774,7 +765,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
     }
   }
 
-  /**
+  /*
    * Finalize the {@link IAggregate}s for a solution group (or for the implicit group formed from
    * all solutions when no GROUP_BY was given). This invokes {@link IAggregate#done()} on each
    * {@link IAggregate} in turn and binds any non-<code>null</code> results onto <i>aggregates</i>.

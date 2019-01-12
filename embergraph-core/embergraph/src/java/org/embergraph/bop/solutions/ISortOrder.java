@@ -29,15 +29,15 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 
-/**
- * A value expression and a direction flag for the ordering of the computed values.
+/*
+* A value expression and a direction flag for the ordering of the computed values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ISortOrder<E> extends Serializable {
 
-  /**
+  /*
    * An {@link IValueExpression} to be evaluated for each input solution. The {@link
    * IValueExpression} should be either a bare {@link IVariable}, a {@link IConstant} or an {@link
    * IBind} associating the computed value of an {@link IValueExpression} with an {@link IVariable}
@@ -45,7 +45,7 @@ public interface ISortOrder<E> extends Serializable {
    */
   IValueExpression<E> getExpr();
 
-  /**
+  /*
    * <code>true</code> iff the values will be placed into an ascending sort and <code>false</code>
    * if the values will be placed into a descending sort.
    */

@@ -17,24 +17,24 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.journal;
 
-/**
- * Interface for access to the snapshot metadata.
+/*
+* Interface for access to the snapshot metadata.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ICommitTimeEntry {
 
   /** Return the bytes on the disk for the snapshot file. */
-  public long sizeOnDisk();
+  long sizeOnDisk();
 
   /** The commit counter associated with the index entry. */
-  public long getCommitCounter();
+  long getCommitCounter();
 
   /** The commit time associated with the index entry. */
-  public long getCommitTime();
+  long getCommitTime();
 
   /** Return the {@link IRootBlockView} of the snapshot. */
-  public IRootBlockView getRootBlock();
+  IRootBlockView getRootBlock();
 
   // public static class SnapshotRecord implements ISnapshotRecord,
   //        Externalizable {
@@ -43,15 +43,15 @@ public interface ICommitTimeEntry {
   //
   //    private static final int currentVersion = VERSION0;
   //
-  //    /**
-  //     * Note: This is NOT {@link Serializable}.
+  //    /*
+//     * Note: This is NOT {@link Serializable}.
   //     */
   //    private IRootBlockView rootBlock;
   //
   //    private long sizeOnDisk;
   //
-  //    /**
-  //     * De-serialization constructor.
+  //    /*
+//     * De-serialization constructor.
   //     */
   //    public SnapshotRecord() {
   //    }
@@ -153,13 +153,13 @@ public interface ICommitTimeEntry {
   // static protected class TupleSerializer extends
   //        DefaultTupleSerializer<Long, ISnapshotRecord> {
   //
-  //    /**
-  //     *
+  //    /*
+//     *
   //     */
   //    private static final long serialVersionUID = -2851852959439807542L;
   //
-  //    /**
-  //     * De-serialization ctor.
+  //    /*
+//     * De-serialization ctor.
   //     */
   //    public TupleSerializer() {
   //
@@ -167,8 +167,8 @@ public interface ICommitTimeEntry {
   //
   //    }
   //
-  //    /**
-  //     * Ctor when creating a new instance.
+  //    /*
+//     * Ctor when creating a new instance.
   //     *
   //     * @param keyBuilderFactory
   //     */
@@ -178,8 +178,8 @@ public interface ICommitTimeEntry {
   //
   //    }
   //
-  //    /**
-  //     * Decodes the key as a commit time.
+  //    /*
+//     * Decodes the key as a commit time.
   //     */
   //    @Override
   //    @SuppressWarnings("rawtypes")
@@ -190,13 +190,13 @@ public interface ICommitTimeEntry {
   //
   //    }
   //
-  //    /**
-  //     * The initial version (no additional persistent state).
+  //    /*
+//     * The initial version (no additional persistent state).
   //     */
   //    private final static transient byte VERSION0 = 0;
   //
-  //    /**
-  //     * The current version.
+  //    /*
+//     * The current version.
   //     */
   //    private final static transient byte VERSION = VERSION0;
   //

@@ -37,8 +37,8 @@ import org.embergraph.bop.bset.ConditionalRoutingOp;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * Operator computing a join over two variables already bound variables in the mapping set (for
+/*
+* Operator computing a join over two variables already bound variables in the mapping set (for
  * which the IV has been computed already). More specifically, given two variables ?targetVar and
  * ?tmpVar as input, the operator iterates over the source binding set and tries to unify ?targetVar
  * and ?tmpVar according to the following rules:
@@ -79,7 +79,7 @@ public class VariableUnificationOp extends PipelineOp {
     String VARS = VariableUnificationOp.class.getName() + ".vars";
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -101,7 +101,7 @@ public class VariableUnificationOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * @return the target variable for unification, which will remain bound in mappings passing the
    *     unification process
    */
@@ -110,7 +110,7 @@ public class VariableUnificationOp extends PipelineOp {
     return getVars()[0];
   }
 
-  /**
+  /*
    * @return the variable for unification that will be removed/renamed in mappings passing the
    *     unification process
    */
@@ -180,18 +180,18 @@ public class VariableUnificationOp extends PipelineOp {
             final IConstant<?> tmpVal = bs.get(tmpVar);
             final IConstant<?> targetVal = bs.get(targetVar);
 
-            /*
-             * Variable to be initialized iff unified binding set exists
+          /*
+       * Variable to be initialized iff unified binding set exists
              */
             IBindingSet bsUnified = null; // unified bs, if succeeds
 
-            /*
-             * Case 1: tmpVal is bound, so we need to further investigate
+          /*
+       * Case 1: tmpVal is bound, so we need to further investigate
              */
             if (tmpVal != null) {
 
-              /*
-               * Case 1.1: if targetVar is not bound in the mapping, then
+            /*
+       * Case 1.1: if targetVar is not bound in the mapping, then
                * simply rename tmpVar to targetVar
                */
               if (targetVal == null) {
@@ -202,8 +202,8 @@ public class VariableUnificationOp extends PipelineOp {
 
               } else {
 
-                /*
-                 * Case 2: if targetVar is also bound in the mapping,
+              /*
+       * Case 2: if targetVar is also bound in the mapping,
                  * then we need to compare the values; in case this
                  * check succeeds, the variables are identical and we
                  * can remove the temporary variable; if they are not,
@@ -216,8 +216,8 @@ public class VariableUnificationOp extends PipelineOp {
                 } // else: drop mapping, i.e. do not set bsUnified
               }
 
-              /*
-               * Case 2: if tmpVal is not bound, unification succeeds by
+            /*
+       * Case 2: if tmpVal is not bound, unification succeeds by
                * definition and we can keep the mapping as is
                */
             } else {
@@ -225,8 +225,8 @@ public class VariableUnificationOp extends PipelineOp {
               bsUnified = bs.clone();
             }
 
-            /*
-             * If a unified mapping exists, collect it in the result array
+          /*
+       * If a unified mapping exists, collect it in the result array
              */
             if (bsUnified != null) unified[nunified++] = bsUnified;
           }

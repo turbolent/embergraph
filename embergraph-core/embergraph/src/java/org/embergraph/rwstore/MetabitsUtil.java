@@ -24,8 +24,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.journal.Journal.Options;
 import org.embergraph.journal.RWStrategy;
 
-/**
- * A utility class to explicitly change the metabits storage to allow for compatibility with
+/*
+* A utility class to explicitly change the metabits storage to allow for compatibility with
  * previous versions.
  *
  * <p>There is an option to use a demispace rather than standard allocations to support stores with
@@ -60,7 +60,7 @@ public class MetabitsUtil {
     return new Journal(properties); // .getBufferStrategy();
   }
 
-  /**
+  /*
    * Example usage:
    *
    * <pre>

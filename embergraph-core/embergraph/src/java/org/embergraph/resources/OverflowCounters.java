@@ -31,8 +31,8 @@ import org.embergraph.resources.OverflowManager.IOverflowManagerCounters;
 import org.embergraph.resources.OverflowManager.Options;
 import org.embergraph.resources.ResourceManager.IResourceManagerCounters;
 
-/**
- * Utility class exposes some counter values while protecting the actual counters on the service
+/*
+* Utility class exposes some counter values while protecting the actual counters on the service
  * from modification.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -43,7 +43,7 @@ public class OverflowCounters implements Serializable {
   /** */
   private static final long serialVersionUID = -7374339581752061839L;
 
-  /**
+  /*
    * #of synchronous overflows that have taken place. This counter is incremented each time the
    * synchronous overflow operation is complete.
    */
@@ -52,7 +52,7 @@ public class OverflowCounters implements Serializable {
   /** The elapsed milliseconds for synchronous overflow processing to date. */
   public final AtomicLong synchronousOverflowMillis = new AtomicLong(0L);
 
-  /**
+  /*
    * The time in milliseconds since the epoch at which the most recent asynchronous overflow
    * started. This is used to compute the elapsed asynchronous overflow time when the service is
    * currently performing asynchronous overflow processing. The value is set each time asynchronous
@@ -60,7 +60,7 @@ public class OverflowCounters implements Serializable {
    */
   public final AtomicLong asynchronousOverflowStartMillis = new AtomicLong(0L);
 
-  /**
+  /*
    * #of asynchronous overflows that have taken place. This counter is incremented each time the
    * entire overflow operation is complete, including any asynchronous post-processing of the old
    * journal.
@@ -70,7 +70,7 @@ public class OverflowCounters implements Serializable {
   /** The elapsed milliseconds for asynchronous overflow processing to date. */
   public final AtomicLong asynchronousOverflowMillis = new AtomicLong(0L);
 
-  /**
+  /*
    * The #of asynchronous overflow operations which fail.
    *
    * @see AsynchronousOverflowTask
@@ -80,7 +80,7 @@ public class OverflowCounters implements Serializable {
   /** The #of asynchronous overflow tasks (index partition splits, joins, or moves) that failed. */
   public final AtomicLong asynchronousOverflowTaskFailedCounter = new AtomicLong(0L);
 
-  /**
+  /*
    * The #of asynchronous overflow tasks (index partition splits, joins, or moves) that were
    * canceled due to timeout.
    *
@@ -106,7 +106,7 @@ public class OverflowCounters implements Serializable {
   /** #of successful index partition move operations. */
   public final AtomicLong indexPartitionMoveCounter = new AtomicLong(0L);
 
-  /**
+  /*
    * #of successful index partition move operations where this service was the target of the move
    * (it received the index partition).
    */

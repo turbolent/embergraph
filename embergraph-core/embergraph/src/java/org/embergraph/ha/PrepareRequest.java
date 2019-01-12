@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
 import org.embergraph.journal.IRootBlockView;
 
-/**
- * A 2-phase request as coordinated by the leader (local object).
+/*
+* A 2-phase request as coordinated by the leader (local object).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -34,12 +34,12 @@ public class PrepareRequest {
   /** The consensus release time from the GATHER. */
   private final IHANotifyReleaseTimeResponse consensusReleaseTime;
 
-  /**
+  /*
    * The services joined and non-joined with the met quorum as of the atomic decision point for the
    * GATHER.
    */
   private final IJoinedAndNonJoinedServices gatherJoinedAndNonJoinedServices;
-  /**
+  /*
    * The services joined and non-joined with the met quorum as of the atomic decision point for the
    * PREPARE.
    */
@@ -56,7 +56,7 @@ public class PrepareRequest {
     return consensusReleaseTime;
   }
 
-  /**
+  /*
    * The services joined and non-joined with the met quorum as of the atomic decision point for the
    * GATHER.
    */
@@ -65,7 +65,7 @@ public class PrepareRequest {
     return gatherJoinedAndNonJoinedServices;
   }
 
-  /**
+  /*
    * The services joined and non-joined with the met quorum as of the atomic decision point for the
    * PREPARE.
    */
@@ -89,7 +89,7 @@ public class PrepareRequest {
     return unit;
   }
 
-  /**
+  /*
    * @param consensusReleaseTime The consensus release time from the GATHER.
    * @param gatherJoinedAndNonJoinedServices The services joined and non-joined with the met quorum
    *     as of the atomic decision point for the GATHER.

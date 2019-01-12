@@ -212,7 +212,7 @@ public class LinkedBlockingQueueTest extends JSR166TestCase {
     }
   }
 
-  /**
+  /*
    * addAll of a collection with any null elements throws NPE after possibly adding some elements
    */
   public void testAddAll3() {

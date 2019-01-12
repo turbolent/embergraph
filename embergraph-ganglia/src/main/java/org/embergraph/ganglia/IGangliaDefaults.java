@@ -27,7 +27,7 @@ public interface IGangliaDefaults {
   /** The maximum size of an XDR message (as per libgmond.c). */
   int BUFFER_SIZE = 1500; // TODO Versus max_udp_msg_len = 1472 ?
 
-  /**
+  /*
    * The duration in seconds of the quiet period after a ganglia service start. During the quiet
    * period a ganglia service will not reset the timestamp associated with its counters in response
    * to a metadata request. This is done to avoid multicast storms when several services are
@@ -35,7 +35,7 @@ public interface IGangliaDefaults {
    */
   int QUIET_PERIOD = 60 * 10; // aka 10 minutes.
 
-  /**
+  /*
    * The waiting period in seconds before the first reporting pass.
    *
    * <p>Note: The core ganglia metrics will be self-declared once this period has expired if they
@@ -43,7 +43,7 @@ public interface IGangliaDefaults {
    */
   int INITIAL_DELAY = 20;
 
-  /**
+  /*
    * The default heartbeat interval for ganglia hosts.
    *
    * <p>Note: Use ZERO (0) if you are running <code>gmond</code> on the same host. That will prevent
@@ -56,7 +56,7 @@ public interface IGangliaDefaults {
    */
   int HEARTBEAT_INTERVAL = 20;
 
-  /**
+  /*
    * The interval at which metrics which are collected on this node.
    *
    * <p>Each time an updated metric is examined, its current value is copied into the internal state
@@ -68,14 +68,14 @@ public interface IGangliaDefaults {
    */
   int MONITORING_INTERVAL = 20; // 20 seconds.
 
-  /**
+  /*
    * The default "slope" used to shape curves in RRDTOOL.
    *
    * @see GangliaSlopeEnum
    */
   GangliaSlopeEnum DEFAULT_SLOPE = GangliaSlopeEnum.both;
 
-  /**
+  /*
    * The default time after which ganglia should expect a new value for a metric (TMAX). This value
    * is only advisory. Metric data are not purged until DMAX is exceeded. Values which remain
    * unchanged are not retransmitted unless TMAX might be exceeded before their next reporting
@@ -83,13 +83,13 @@ public interface IGangliaDefaults {
    */
   int DEFAULT_TMAX = 180; // aka 3 minutes.
 
-  /**
+  /*
    * Time in seconds after weak a counter which has not been reported will be purged -or- ZERO (0)
    * to never purge a counter.
    */
   int DEFAULT_DMAX = 3600; // aka one hour.
 
-  /**
+  /*
    * The default units for reported metrics (ganglia allows metadata for a metric to indicate its
    * base unit).
    */

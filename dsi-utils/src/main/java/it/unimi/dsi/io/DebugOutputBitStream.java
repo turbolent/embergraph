@@ -25,8 +25,8 @@ import it.unimi.dsi.lang.MutableString;
 import java.io.IOException;
 import java.io.PrintStream;
 
-/**
- * A debugging wrapper for output bit streams.
+/*
+* A debugging wrapper for output bit streams.
  *
  * <p>This class can be used to wrap an output bit stream. The semantics of the resulting write
  * operations is unchanged, but each operation will be logged.
@@ -61,7 +61,7 @@ public class DebugOutputBitStream extends OutputBitStream {
   private final PrintStream pw;
   private final OutputBitStream obs;
 
-  /**
+  /*
    * Creates a new debug output bit stream wrapping a given output bit stream and logging on a given
    * writer.
    *
@@ -74,7 +74,7 @@ public class DebugOutputBitStream extends OutputBitStream {
     pw.print("[");
   }
 
-  /**
+  /*
    * Creates a new debug output bit stream wrapping a given output bit stream and logging on
    * standard error.
    *
@@ -130,7 +130,7 @@ public class DebugOutputBitStream extends OutputBitStream {
     return s.length(len).reverse();
   }
 
-  public long write(final byte bits[], final long len) throws IOException {
+  public long write(final byte[] bits, final long len) throws IOException {
     if (len > Integer.MAX_VALUE) throw new IllegalArgumentException();
     MutableString s = new MutableString(" {");
     for (int i = 0; i < bits.length; i++) s.append(byte2Binary(bits[i]));

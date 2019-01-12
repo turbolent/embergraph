@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt;
 
 import cern.colt.function.IntComparator;
-/**
- * Demonstrates how to use {@link Sort}.
+/*
+* Demonstrates how to use {@link Sort}.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 03-Jul-99
@@ -117,7 +117,7 @@ class GenericSortingTest extends Object {
     System.out.println("Z=" + Arrays.toString(z));
     System.out.println("\n\n");
   }
-  /**
+  /*
    * Checks the correctness of the partition method by generating random input parameters and
    * checking whether results are correct.
    */

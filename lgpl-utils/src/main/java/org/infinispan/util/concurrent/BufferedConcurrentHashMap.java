@@ -34,8 +34,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * A hash table supporting full concurrency of retrievals and adjustable expected concurrency for
+/*
+* A hash table supporting full concurrency of retrievals and adjustable expected concurrency for
  * updates. This class obeys the same functional specification as {@link java.util.Hashtable}, and
  * includes versions of methods corresponding to each method of <tt>Hashtable</tt>. However, even
  * though all operations are thread-safe, retrieval operations do <em>not</em> entail locking, and
@@ -89,7 +89,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
    */
 
   /* ---------------- Constants -------------- */
-  /**
+  /*
    * The default initial capacity for this table, used when not otherwise specified in a
    * constructor.
    */
@@ -98,13 +98,13 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
   /** The default load factor for this table, used when not otherwise specified in a constructor. */
   static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
-  /**
+  /*
    * The default concurrency level for this table, used when not otherwise specified in a
    * constructor.
    */
   static final int DEFAULT_CONCURRENCY_LEVEL = 16;
 
-  /**
+  /*
    * The maximum capacity, used if a higher value is implicitly specified by either of the
    * constructors with arguments. MUST be a power of two <= 1<<30 to ensure that entries are
    * indexable using ints.
@@ -114,7 +114,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
   /** The maximum number of segments to allow; used to bound constructor arguments. */
   static final int MAX_SEGMENTS = 1 << 16; // slightly conservative
 
-  /**
+  /*
    * Number of unsynchronized retries in size and containsValue methods before resorting to locking.
    * This is used to avoid unbounded retries if tables undergo continuous modification which would
    * make it impossible to obtain an accurate result.
@@ -123,7 +123,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
   /* ---------------- Fields -------------- */
 
-  /**
+  /*
    * Mask value for indexing into segments. The upper bits of a key's hash code are used to choose
    * the segment.
    */
@@ -141,7 +141,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
   /* ---------------- Small Utilities -------------- */
 
-  /**
+  /*
    * Applies a supplemental hash function to a given hashCode, which defends against poor quality
    * hash functions. This is critical because ConcurrentHashMap uses power-of-two length hash
    * tables, that otherwise encounter collisions for hashCodes that do not differ in lower or upper
@@ -158,7 +158,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return h ^ (h >>> 16);
   }
 
-  /**
+  /*
    * Returns the segment that should be used for key with given hash
    *
    * @param hash the hash code for the key
@@ -170,7 +170,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
   /* ---------------- Inner Classes -------------- */
 
-  /**
+  /*
    * ConcurrentHashMap list entry. Note that this is never exported out as a user-visible Map.Entry.
    *
    * <p>Because the value field is volatile, not final, it is legal wrt the Java Memory Model for an
@@ -280,9 +280,9 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
   interface EvictionPolicy<K, V> {
 
-    public static final int MAX_BATCH_SIZE = 64;
+    int MAX_BATCH_SIZE = 64;
 
-    /**
+    /*
      * Invokes eviction policy algorithm and returns set of evicted entries.
      *
      * <p>Set cannot be null but could possibly be an empty set.
@@ -291,7 +291,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
      */
     Set<HashEntry<K, V>> execute();
 
-    /**
+    /*
      * Invoked to notify EvictionPolicy implementation that there has been an attempt to access an
      * entry in Segment, however that entry was not present in Segment.
      *
@@ -299,7 +299,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
      */
     void onEntryMiss(HashEntry<K, V> e);
 
-    /**
+    /*
      * Invoked to notify EvictionPolicy implementation that an entry in Segment has been accessed.
      * Returns true if batching threshold has been reached, false otherwise.
      *
@@ -310,7 +310,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
      */
     boolean onEntryHit(HashEntry<K, V> e);
 
-    /**
+    /*
      * Invoked to notify EvictionPolicy implementation that an entry e has been removed from
      * Segment.
      *
@@ -318,19 +318,19 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
      */
     void onEntryRemove(HashEntry<K, V> e);
 
-    /**
+    /*
      * Invoked to notify EvictionPolicy implementation that all Segment entries have been cleared.
      */
     void clear();
 
-    /**
+    /*
      * Returns type of eviction algorithm (strategy).
      *
      * @return type of eviction algorithm
      */
     Eviction strategy();
 
-    /**
+    /*
      * Returns true if batching threshold has expired, false otherwise.
      *
      * <p>Note that this method is potentially invoked without holding a lock on Segment.
@@ -649,7 +649,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     }
   }
 
-  /**
+  /*
    * Segments are specialized versions of hash tables. This subclasses from ReentrantLock
    * opportunistically, just to simplify some locking and avoid separate construction.
    */
@@ -688,7 +688,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     /** The number of elements in this segment's region. */
     transient volatile int count;
 
-    /**
+    /*
      * Number of updates that alter the size of the table. This is used during bulk-read methods to
      * make sure they see a consistent snapshot: If modCounts change during a traversal of segments
      * computing size or checking containsValue, then we might have an inconsistent view of state so
@@ -696,7 +696,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
      */
     transient int modCount;
 
-    /**
+    /*
      * The table is rehashed when its size exceeds this threshold. (The value of this field is
      * always <tt>(int)(capacity * loadFactor)</tt>.)
      */
@@ -709,7 +709,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
     final transient EvictionListener<K, V> evictionListener;
 
-    /**
+    /*
      * The load factor for the hash table. Even though this value is same for all segments, it is
      * replicated to avoid needing links to outer object.
      *
@@ -721,7 +721,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
       loadFactor = lf;
       eviction = es.make(this, cap, lf);
       evictionListener = listener;
-      setTable(HashEntry.<K, V>newArray(cap));
+      setTable(HashEntry.newArray(cap));
     }
 
     @SuppressWarnings("unchecked")
@@ -741,7 +741,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
       return tab[hash & (tab.length - 1)];
     }
 
-    /**
+    /*
      * Reads value field of an entry under lock. Called if value field ever appears to be null. This
      * is possible only if a compiler happens to reorder a HashEntry initialization with its table
      * assignment, which is legal under memory model but is not known to ever occur.
@@ -793,7 +793,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
     private Set<HashEntry<K, V>> attemptEviction(boolean lockedAlready) {
       Set<HashEntry<K, V>> evicted = null;
-      boolean obtainedLock = !lockedAlready ? tryLock() : true;
+      boolean obtainedLock = lockedAlready || tryLock();
       if (!obtainedLock && eviction.thresholdExpired()) {
         lock();
         obtainedLock = true;
@@ -1056,7 +1056,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
   /* ---------------- Public operations -------------- */
 
-  /**
+  /*
    * Creates a new, empty map with the specified initial capacity, load factor and concurrency
    * level.
    *
@@ -1119,7 +1119,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
         new NullEvictionListener<K, V>());
   }
 
-  /**
+  /*
    * Creates a new, empty map with the specified initial capacity and load factor and with the
    * default concurrencyLevel (16).
    *
@@ -1135,7 +1135,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     this(initialCapacity, loadFactor, DEFAULT_CONCURRENCY_LEVEL);
   }
 
-  /**
+  /*
    * Creates a new, empty map with the specified initial capacity, and with default load factor
    * (0.75) and concurrencyLevel (16).
    *
@@ -1147,7 +1147,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     this(initialCapacity, DEFAULT_LOAD_FACTOR, DEFAULT_CONCURRENCY_LEVEL);
   }
 
-  /**
+  /*
    * Creates a new, empty map with a default initial capacity (16), load factor (0.75) and
    * concurrencyLevel (16).
    */
@@ -1155,7 +1155,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR, DEFAULT_CONCURRENCY_LEVEL);
   }
 
-  /**
+  /*
    * Creates a new map with the same mappings as the given map. The map is created with a capacity
    * of 1.5 times the number of mappings in the given map or 16 (whichever is greater), and a
    * default load factor (0.75) and concurrencyLevel (16).
@@ -1170,7 +1170,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     putAll(m);
   }
 
-  /**
+  /*
    * Returns <tt>true</tt> if this map contains no key-value mappings.
    *
    * @return <tt>true</tt> if this map contains no key-value mappings
@@ -1201,7 +1201,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return true;
   }
 
-  /**
+  /*
    * Returns the number of key-value mappings in this map. If the map contains more than
    * <tt>Integer.MAX_VALUE</tt> elements, returns <tt>Integer.MAX_VALUE</tt>.
    *
@@ -1243,7 +1243,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     else return (int) sum;
   }
 
-  /**
+  /*
    * Returns the value to which the specified key is mapped, or {@code null} if this map contains no
    * mapping for the key.
    *
@@ -1258,7 +1258,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return segmentFor(hash).get(key, hash);
   }
 
-  /**
+  /*
    * Tests if the specified object is a key in this table.
    *
    * @param key possible key
@@ -1271,7 +1271,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return segmentFor(hash).containsKey(key, hash);
   }
 
-  /**
+  /*
    * Returns <tt>true</tt> if this map maps one or more keys to the specified value. Note: This
    * method requires a full internal traversal of the hash table, and so is much slower than method
    * <tt>containsKey</tt>.
@@ -1325,7 +1325,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return found;
   }
 
-  /**
+  /*
    * Legacy method testing if some key maps into the specified value in this table. This method is
    * identical in functionality to {@link #containsValue}, and exists solely to ensure full
    * compatibility with class {@link java.util.Hashtable}, which supported this method prior to
@@ -1340,7 +1340,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return containsValue(value);
   }
 
-  /**
+  /*
    * Maps the specified key to the specified value in this table. Neither the key nor the value can
    * be null.
    *
@@ -1359,7 +1359,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return segmentFor(hash).put(key, hash, value, false);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @return the previous value associated with the specified key, or <tt>null</tt> if there was no
@@ -1372,7 +1372,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return segmentFor(hash).put(key, hash, value, true);
   }
 
-  /**
+  /*
    * Copies all of the mappings from the specified map to this one. These mappings replace any
    * mappings that this map had for any of the keys currently in the specified map.
    *
@@ -1382,7 +1382,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) put(e.getKey(), e.getValue());
   }
 
-  /**
+  /*
    * Removes the key (and its corresponding value) from this map. This method does nothing if the
    * key is not in the map.
    *
@@ -1396,7 +1396,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return segmentFor(hash).remove(key, hash, null);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws NullPointerException if the specified key is null
@@ -1407,7 +1407,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return segmentFor(hash).remove(key, hash, value) != null;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws NullPointerException if any of the arguments are null
@@ -1418,7 +1418,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return segmentFor(hash).replace(key, hash, oldValue, newValue);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @return the previous value associated with the specified key, or <tt>null</tt> if there was no
@@ -1436,7 +1436,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     for (int i = 0; i < segments.length; ++i) segments[i].clear();
   }
 
-  /**
+  /*
    * Returns a {@link Set} view of the keys contained in this map. The set is backed by the map, so
    * changes to the map are reflected in the set, and vice-versa. The set supports element removal,
    * which removes the corresponding mapping from this map, via the <tt>Iterator.remove</tt>,
@@ -1453,7 +1453,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return (ks != null) ? ks : (keySet = new KeySet());
   }
 
-  /**
+  /*
    * Returns a {@link Collection} view of the values contained in this map. The collection is backed
    * by the map, so changes to the map are reflected in the collection, and vice-versa. The
    * collection supports element removal, which removes the corresponding mapping from this map, via
@@ -1471,7 +1471,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return (vs != null) ? vs : (values = new Values());
   }
 
-  /**
+  /*
    * Returns a {@link Set} view of the mappings contained in this map. The set is backed by the map,
    * so changes to the map are reflected in the set, and vice-versa. The set supports element
    * removal, which removes the corresponding mapping from the map, via the
@@ -1488,7 +1488,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return (es != null) ? es : (entrySet = new EntrySet());
   }
 
-  /**
+  /*
    * Returns an enumeration of the keys in this table.
    *
    * @return an enumeration of the keys in this table
@@ -1498,7 +1498,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     return new KeyIterator();
   }
 
-  /**
+  /*
    * Returns an enumeration of the values in this table.
    *
    * @return an enumeration of the values in this table
@@ -1586,7 +1586,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     }
   }
 
-  /**
+  /*
    * Custom Entry class used by EntryIterator.next(), that relays setValue changes to the underlying
    * map.
    */
@@ -1597,7 +1597,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
       super(k, v);
     }
 
-    /**
+    /*
      * Set our entry's value and write through to the map. The value to return is somewhat arbitrary
      * here. Since a WriteThroughEntry does not necessarily track asynchronous changes, the most
      * recent "previous" value could be different from what we return (or could even have been
@@ -1687,7 +1687,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
   /* ---------------- Serialization Support -------------- */
 
-  /**
+  /*
    * Save the state of the <tt>ConcurrentHashMap</tt> instance to a stream (i.e., serialize it).
    *
    * @param s the stream
@@ -1716,7 +1716,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
     s.writeObject(null);
   }
 
-  /**
+  /*
    * Reconstitute the <tt>ConcurrentHashMap</tt> instance from a stream (i.e., deserialize it).
    *
    * @param s the stream

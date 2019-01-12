@@ -24,25 +24,25 @@ package org.embergraph.io;
 
 import org.embergraph.btree.keys.KeyBuilder;
 
-/**
- * Interface for a slice of a backing byte[].
+/*
+* Interface for a slice of a backing byte[].
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IByteArraySlice {
 
-  /**
+  /*
    * The backing byte[]. This method DOES NOT guarantee that the backing array reference will remain
    * constant. Some implementations use an extensible backing byte[] and will replace the reference
    * when the backing buffer is extended.
    */
-  public byte[] array();
+  byte[] array();
 
   /** The start of the slice in the {@link #array()}. */
-  public int off();
+  int off();
 
-  /**
+  /*
    * The length of the slice in the {@link #array()}.
    *
    * <p>Note: {@link IByteArraySlice#len()} has different semantics for some concrete
@@ -51,9 +51,9 @@ public interface IByteArraySlice {
    * buffer. In contrast, {@link KeyBuilder#len()} is always the #of bytes written onto the backing
    * buffer.
    */
-  public int len();
+  int len();
 
-  /**
+  /*
    * Return a copy of the data in the slice.
    *
    * @return A new array containing data in the slice.

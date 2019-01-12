@@ -42,8 +42,8 @@ import org.embergraph.rdf.task.AbstractApiTask;
 import org.embergraph.util.NV;
 import org.openrdf.model.Resource;
 
-/**
- * Useful glue for implementing service actions, but does not directly implement any service action/
+/*
+* Useful glue for implementing service actions, but does not directly implement any service action/
  */
 public abstract class EmbergraphServlet extends HttpServlet implements IMimeTypes {
 
@@ -52,7 +52,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
 
   private static final transient Logger log = Logger.getLogger(EmbergraphServlet.class);
 
-  /**
+  /*
    * The name of the {@link ServletContext} attribute whose value is the {@link
    * EmbergraphRDFContext}.
    */
@@ -61,7 +61,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
   /** The name of the {@link ServletContext} attribute whose value is the {@link IIndexManager}. */
   /*package*/ static final transient String ATTRIBUTE_INDEX_MANAGER = IIndexManager.class.getName();
 
-  /**
+  /*
    * The {@link ServletContext} attribute whose value is the prefix for the HALoadBalancerServlet
    * (DO NOT LINK JAVADOC) iff it is running.
    *
@@ -72,7 +72,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
   static final String ATTRIBUTE_LBS_PREFIX =
       "org.embergraph.rdf.sail.webapp.HALoadBalancerServlet.prefix";
 
-  /**
+  /*
    * The {@link ServletContext} attribute that is managed by the HALoadBalancerServlet (DO NOT LINK
    * JAVADOC) and which maintains a collection of the active instances of that servlet. This is used
    * to administer the IHALoadBalancerPolicy associated with the load balancer servlet instances.
@@ -84,8 +84,8 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
   static final String ATTRIBUTE_LBS_INSTANCES =
       "org.embergraph.rdf.sail.webapp.HALoadBalancerServlet.instances";
 
-  //    /**
-  //     * The {@link ServletContext} attribute whose value is the
+  //    /*
+//     * The {@link ServletContext} attribute whose value is the
   //     * {@link SparqlCache}.
   //     */
   //    /* package */static final transient String ATTRIBUTE_SPARQL_CACHE =
@@ -165,7 +165,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     return getRequiredServletContextAttribute(servletContext, ATTRIBUTE_INDEX_MANAGER);
   }
 
-  /**
+  /*
    * Submit a task, await its {@link Future}, flush and commit the servlet resdponse, and then a
    * <strong>completed</strong> {@link Future} for that task. The task will be run on the
    * appropriate executor service depending on the nature of the backing database and the view
@@ -256,7 +256,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     }
   }
 
-  /**
+  /*
    * Return the {@link HAStatusEnum} -or- <code>null</code> if the {@link IIndexManager} is not an
    * {@link AbstractQuorum} or is not HA enabled.
    */
@@ -273,7 +273,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     return null;
   }
 
-  /**
+  /*
    * If the node is not writable, then commit a response and return <code>false</code>. Otherwise
    * return <code>true</code>.
    *
@@ -312,7 +312,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     }
   }
 
-  /**
+  /*
    * If the node is not readable, then commit a response and return <code>false</code>. Otherwise
    * return <code>true</code>.
    *
@@ -343,8 +343,8 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     }
   }
 
-  //	/**
-  //	 * The {@link SparqlCache}.
+  //	/*
+//	 * The {@link SparqlCache}.
   //	 */
   //    protected SparqlCache getSparqlCache() {
   //
@@ -352,7 +352,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
   //
   //    }
 
-  /**
+  /*
    * Return the serviceURI(s) for this service (one or more).
    *
    * @param req The request.
@@ -386,7 +386,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
       serviceURIs.add(uri);
     }
 
-    /**
+    /*
      * If the load balancer servlet is registered, then get its effective service URI. This will be
      * a load balanced version of the serviceURI that we obtained above. We are trying to go from
      *
@@ -433,7 +433,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     return serviceURIs.toArray(new String[serviceURIs.size()]);
   }
 
-  /**
+  /*
    * Generate and commit a response having the indicated http status code, mime type, and content.
    *
    * <p>This flushes the response to the client immediately. Therefore this method MUST NOT be
@@ -486,7 +486,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     w.flush();
   }
 
-  /**
+  /*
    * Return the effective boolean value of a request parameter. The text <code>"true"</code> is
    * recognized. All other values are interpreted as <code>false</code>.
    *
@@ -508,7 +508,7 @@ public abstract class EmbergraphServlet extends HttpServlet implements IMimeType
     return b;
   }
 
-  /**
+  /*
    * Decode an array of named graph contexts from a request.
    *
    * @param req The request.

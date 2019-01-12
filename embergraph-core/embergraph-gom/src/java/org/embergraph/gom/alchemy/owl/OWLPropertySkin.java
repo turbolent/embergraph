@@ -24,8 +24,8 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * The OWLClassSkin returns Iterator<OWLPropertySkin> with the getProperties method using the
+/*
+* The OWLClassSkin returns Iterator<OWLPropertySkin> with the getProperties method using the
  * RDFS.DOMAIN URI.
  *
  * <p>So a property has a domain, an RDF.TYPE and an RDFS.RANGE that defines the datatype of the
@@ -83,7 +83,7 @@ public class OWLPropertySkin extends BasicSkin implements IGenericSkin {
     return m_gpo.getValue(RDF.TYPE) == OWL.OBJECTPROPERTY;
   }
 
-  /**
+  /*
    * Note that this can be null. The univ-bench.owl does not define types of Literal values.
    *
    * @return type of property

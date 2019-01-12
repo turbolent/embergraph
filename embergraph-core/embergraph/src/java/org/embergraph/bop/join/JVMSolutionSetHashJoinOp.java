@@ -25,8 +25,8 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.NV;
 
-/**
- * {@inheritDoc}
+/*
+* {@inheritDoc}
  *
  * <p>JVM Specific version.
  *
@@ -45,7 +45,7 @@ public class JVMSolutionSetHashJoinOp extends SolutionSetHashJoinOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args

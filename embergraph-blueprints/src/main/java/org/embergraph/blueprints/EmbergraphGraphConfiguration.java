@@ -22,8 +22,8 @@ import com.tinkerpop.rexster.config.GraphConfigurationContext;
 import com.tinkerpop.rexster.config.GraphConfigurationException;
 import org.apache.commons.configuration.Configuration;
 
-/**
- * Create and configure a EmbergraphGraph for Rexster.
+/*
+* Create and configure a EmbergraphGraph for Rexster.
  *
  * @author mikepersonick
  */
@@ -37,7 +37,7 @@ public class EmbergraphGraphConfiguration implements GraphConfiguration {
     /** Specifies that an embedded embergraph instance should be used. */
     String TYPE_EMBEDDED = "embedded";
 
-    /**
+    /*
      * Specifies that a remote embergraph instance should be used. You MUST also specify one of the
      * following combinations:
      *
@@ -61,7 +61,7 @@ public class EmbergraphGraphConfiguration implements GraphConfiguration {
     /** Port for a remote embergraph instance. */
     String PORT = "properties.port";
 
-    /**
+    /*
      * To connect to a specific namespace using the SPARQL endpoint URL
      *
      * @see https://jira.blazegraph.com/browse/BLZG-1374
@@ -69,7 +69,7 @@ public class EmbergraphGraphConfiguration implements GraphConfiguration {
     String SPARQL_ENDPOINT_URL = "properties.sparqlEndpointURL";
   }
 
-  /**
+  /*
    * Configure and return a EmbergraphGraph based on the supplied configuration parameters.
    *
    * @see {@link Options}

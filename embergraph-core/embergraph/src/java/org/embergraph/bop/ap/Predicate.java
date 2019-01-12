@@ -46,8 +46,8 @@ import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.relation.rule.IAccessPathExpander;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * A generic implementation of an immutable {@link IPredicate}.
+/*
+* A generic implementation of an immutable {@link IPredicate}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -69,7 +69,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     super(op);
   }
 
-  /**
+  /*
    * Variable argument version of the shallow constructor.
    *
    * @param vars
@@ -80,7 +80,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     super(args, NV.asMap(annotations));
   }
 
-  /**
+  /*
    * Disallows <code>null</code> in any position.
    *
    * @param args
@@ -92,7 +92,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     }
   }
 
-  /**
+  /*
    * Simplified ctor (for lex predicates).
    *
    * @param values The values (order is important!).
@@ -111,7 +111,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
         ITx.READ_COMMITTED);
   }
 
-  /**
+  /*
    * @param relationName The namespace of the relation.
    * @param partitionId The index partition constraint -or- <code>-1</code> if there is no index
    *     partition constraint.
@@ -132,14 +132,12 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     this(
         values,
         NV.asMap(
-            new NV[] {
-              new NV(Annotations.RELATION_NAME, new String[] {relationName}),
-              new NV(Annotations.PARTITION_ID, partitionId),
-              new NV(Annotations.OPTIONAL, optional),
-              new NV(Annotations.INDEX_LOCAL_FILTER, ElementFilter.newInstance(constraint)),
-              new NV(Annotations.ACCESS_PATH_EXPANDER, expander),
-              new NV(Annotations.TIMESTAMP, timestamp)
-            }));
+            new NV(Annotations.RELATION_NAME, new String[] {relationName}),
+            new NV(Annotations.PARTITION_ID, partitionId),
+            new NV(Annotations.OPTIONAL, optional),
+            new NV(Annotations.INDEX_LOCAL_FILTER, ElementFilter.newInstance(constraint)),
+            new NV(Annotations.ACCESS_PATH_EXPANDER, expander),
+            new NV(Annotations.TIMESTAMP, timestamp)));
 
     if (relationName == null) throw new IllegalArgumentException();
 
@@ -186,7 +184,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
 
   public int getPartitionId() {
 
-    return (Integer) getProperty(Annotations.PARTITION_ID, Annotations.DEFAULT_PARTITION_ID);
+    return getProperty(Annotations.PARTITION_ID, Annotations.DEFAULT_PARTITION_ID);
   }
 
   @SuppressWarnings("rawtypes")
@@ -203,11 +201,11 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
 
   public final boolean isOptional() {
 
-    return (Boolean) getProperty(Annotations.OPTIONAL, Annotations.DEFAULT_OPTIONAL);
+    return getProperty(Annotations.OPTIONAL, Annotations.DEFAULT_OPTIONAL);
   }
 
-  //    /**
-  //     *
+  //    /*
+//     *
   //     * @deprecated This is being replaced by two classes of filters. One which
   //     *             is always evaluated local to the index and one which is
   //     *             evaluated in the JVM in which the access path is evaluated
@@ -284,7 +282,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     return asBound(new ListBindingSet(new IVariable[] {var}, new IConstant[] {val}));
   }
 
-  /**
+  /*
    * Fast path for as-bound.
    *
    * <p>This reuses the annotations map since we know that the annotations will not be changed by
@@ -421,7 +419,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
   //
   //    }
 
-  /**
+  /*
    * Overridden to provide a fast path clone(). This avoids a constructor lookup via reflection in
    * favor of simply creating a new {@link Predicate} instance. However, subclasses MUST override
    * this method. This change was introduced on 11/17/2011 when a profiler showed a 13% of all time
@@ -475,7 +473,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     return tmp;
   }
 
-  /**
+  /*
    * Add an {@link Annotations#INDEX_LOCAL_FILTER}. When there is a filter for the named property,
    * the filters are combined. Otherwise the filter is set.
    *
@@ -491,7 +489,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     return tmp;
   }
 
-  /**
+  /*
    * Add an {@link Annotations#INDEX_LOCAL_FILTER}. When there is a filter for the named property,
    * the filters are combined. Otherwise the filter is set.
    *
@@ -507,7 +505,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     return tmp;
   }
 
-  /**
+  /*
    * Private method used to add a filter. When there is a filter for the named property, the filters
    * are combined. Otherwise the filter is set. DO NOT use this outside of the copy-on-write helper
    * methods.
@@ -537,7 +535,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     }
   }
 
-  /**
+  /*
    * Strengthened return type.
    *
    * <p>{@inheritDoc}

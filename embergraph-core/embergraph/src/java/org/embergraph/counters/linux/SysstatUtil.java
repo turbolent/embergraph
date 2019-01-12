@@ -31,8 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
-/**
- * Some utility methods related to integration with <code>sysstat</code>.
+/*
+* Some utility methods related to integration with <code>sysstat</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ public class SysstatUtil {
   private static final Logger log = Logger.getLogger(SysstatUtil.class);
 
   public interface Options {
-    /**
+    /*
      * The name of the optional property whose value specifies the default location of the SYSSTAT
      * package (pidstat, iostat, etc) (default {@value #DEFAULT_PATH}).
      *
@@ -53,7 +53,7 @@ public class SysstatUtil {
     String DEFAULT_PATH = "/usr/bin";
   }
 
-  /**
+  /*
    * Returns the path to the specified sysstat utility (pidstat, sar, etc). The default is directory
    * is {@value Options#DEFAULT_PATH}. This may be overridden using the {@value Options#PATH}
    * property. The following directories are also searched if the program is not found in the
@@ -107,7 +107,7 @@ public class SysstatUtil {
     return new File(path, cmd);
   }
 
-  /**
+  /*
    * Splits a data line into fields based on whitespace and skipping over the date field (index zero
    * (0) is the index of the first non-date field).
    *
@@ -135,7 +135,7 @@ public class SysstatUtil {
     return fields;
   }
 
-  /**
+  /*
    * Takes header and data lines and generates a Map<String, String> from them
    *
    * @return a Map where keys are fields names and values are fields values.
@@ -157,7 +157,7 @@ public class SysstatUtil {
 
     return fields;
   }
-  /**
+  /*
    * Used to parse the timestamp associated with each row of sysstat output.
    *
    * <p>Note: This assumes that you have controlled the date format using the sysstat ISO date

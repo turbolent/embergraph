@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.matrix.impl;
 
-/**
- * Abstract base class for flexible, well human readable matrix print formatting. Value type
+/*
+* Abstract base class for flexible, well human readable matrix print formatting. Value type
  * independent. A single cell is formatted via a format string. Columns can be aligned left,
  * centered, right and by decimal point.
  *
@@ -65,7 +65,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
   /** The default string separating any two slices from another; currently <tt>"\n\n"</tt>. */
   protected String sliceSeparator = DEFAULT_SLICE_SEPARATOR;
 
-  /**
+  /*
    * Tells whether String representations are to be preceded with summary of the shape; currently
    * <tt>true</tt>.
    */
@@ -80,7 +80,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
   }
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected AbstractFormatter() {}
-  /**
+  /*
    * Modifies the strings in a column of the string matrix to be aligned
    * (left,centered,right,decimal).
    */
@@ -325,7 +325,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
     }
     return buf.toString();
   }
-  /**
+  /*
    * Sets the column alignment (left,center,right,decimal).
    *
    * @param alignment the new alignment to be used; must be one of
@@ -334,7 +334,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
   public void setAlignment(String alignment) {
     this.alignment = alignment;
   }
-  /**
+  /*
    * Sets the string separating any two columns from another.
    *
    * @param columnSeparator the new columnSeparator to be used.
@@ -342,7 +342,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
   public void setColumnSeparator(String columnSeparator) {
     this.columnSeparator = columnSeparator;
   }
-  /**
+  /*
    * Sets the way a <i>single</i> cell value is to be formatted.
    *
    * @param format the new format to be used.
@@ -350,7 +350,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
   public void setFormat(String format) {
     this.format = format;
   }
-  /**
+  /*
    * Sets the minimum number of characters a column may have.
    *
    * @param minColumnWidth the new minColumnWidth to be used.
@@ -359,7 +359,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
     if (minColumnWidth < 0) throw new IllegalArgumentException();
     this.minColumnWidth = minColumnWidth;
   }
-  /**
+  /*
    * Specifies whether a string representation of a matrix is to be preceded with a summary of its
    * shape.
    *
@@ -368,7 +368,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
   public void setPrintShape(boolean printShape) {
     this.printShape = printShape;
   }
-  /**
+  /*
    * Sets the string separating any two rows from another.
    *
    * @param rowSeparator the new rowSeparator to be used.
@@ -376,7 +376,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
   public void setRowSeparator(String rowSeparator) {
     this.rowSeparator = rowSeparator;
   }
-  /**
+  /*
    * Sets the string separating any two slices from another.
    *
    * @param sliceSeparator the new sliceSeparator to be used.
@@ -416,7 +416,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
   public static String shape(AbstractMatrix3D matrix) {
     return matrix.slices() + " x " + matrix.rows() + " x " + matrix.columns() + " matrix";
   }
-  /**
+  /*
    * Returns a single string representation of the given string matrix.
    *
    * @param strings the matrix to be converted to a single string.
@@ -439,7 +439,7 @@ public abstract class AbstractFormatter extends cern.colt.PersistentObject {
 
     return total.toString();
   }
-  /**
+  /*
    * Returns a string representation of the given matrix.
    *
    * @param matrix the matrix to convert.

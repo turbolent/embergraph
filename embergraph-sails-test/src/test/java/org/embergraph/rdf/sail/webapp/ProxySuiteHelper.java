@@ -32,8 +32,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.embergraph.journal.BufferMode;
 
-/**
- * This class provides static methods to help creating test classes and suites of tests that use the
+/*
+* This class provides static methods to help creating test classes and suites of tests that use the
  * proxy test approach. For creating test classes use {@link #suiteWhenStandalone(Class, String,
  * TestMode...)}, when creating test suites use {@link #suiteWithOptionalProxy(String, TestMode...)}
  *
@@ -59,7 +59,8 @@ public class ProxySuiteHelper {
   }
 
   private static class MultiModeTestSuite extends TestSuite {
-    private final ProxyTestSuite subs[];
+
+    private final ProxyTestSuite[] subs;
 
     public MultiModeTestSuite(
         final String name, final Set<BufferMode> bufferModes, final TestMode... testModes) {
@@ -84,8 +85,8 @@ public class ProxySuiteHelper {
                 protected void tearDown() throws Exception {
                   ((TestNanoSparqlServerWithProxyIndexManager) suite2.getDelegate())
                       .tearDownAfterSuite();
-                  /*
-                   * Note: Do not clear. Will not leak unless the
+                /*
+       * Note: Do not clear. Will not leak unless the
                    * QueryEngine objects are pinned. They will not be
                    * pinned if you shutdown the Journal correctly for each
                    * test; the call to tearDownAfterSuite above calls the destroy() method
@@ -140,7 +141,7 @@ public class ProxySuiteHelper {
     return rslt;
   }
 
-  /**
+  /*
    * This variable tells us if the class {@link TestNanoSparqlServerWithProxyIndexManager} (or
    * potentially a similar class that sets this variable) has loaded. This information is used by
    * {@link #suiteWhenStandalone(Class, String, TestMode...)} to decide whether to operate in
@@ -149,7 +150,7 @@ public class ProxySuiteHelper {
    */
   static boolean proxyIndexManagerTestingHasStarted = false;
 
-  /**
+  /*
    * Call this method to create local testing using one or more proxies. e.g. right clicking in
    * eclipse and running JUnit tests works. Also using this within a TestSuite also works.
    *
@@ -182,7 +183,7 @@ public class ProxySuiteHelper {
         clazz, regex, Collections.singleton(BufferMode.Transient), testModes);
   }
 
-  /**
+  /*
    * Call this method to create a new test suite which can include other test suites and tests using
    * proxies. Having created the test suite then the classes and tests and suites are added in the
    * usual way.

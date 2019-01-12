@@ -23,8 +23,8 @@ package org.embergraph.rdf.internal.gis;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractCoordinateTestCase extends TestCase2 {
@@ -55,7 +55,7 @@ public class AbstractCoordinateTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Asserts that two {@link CoordinateDD}s are equal.
    *
    * @param expected
@@ -66,7 +66,7 @@ public class AbstractCoordinateTestCase extends TestCase2 {
     throw new AssertionFailedError("Expected: " + expected + ", but found " + actual);
   }
 
-  /**
+  /*
    * Asserts that two {@link CoordinateDMS}s are equal.
    *
    * @param expected
@@ -77,7 +77,7 @@ public class AbstractCoordinateTestCase extends TestCase2 {
     throw new AssertionFailedError("Expected: " + expected + ", but found " + actual);
   }
 
-  /**
+  /*
    * Asserts that two {@link CoordinateDDM}s are equal.
    *
    * @param expected
@@ -88,7 +88,7 @@ public class AbstractCoordinateTestCase extends TestCase2 {
     throw new AssertionFailedError("Expected: " + expected + ", but found " + actual);
   }
 
-  /**
+  /*
    * Round off a double precision number to a given number of digits after the decimal.
    *
    * @param d The value.
@@ -102,7 +102,7 @@ public class AbstractCoordinateTestCase extends TestCase2 {
     return Math.round(d * m) / m;
   }
 
-  /**
+  /*
    * Round off a double precision number to 1 digit after the decimal.
    *
    * @param d The value.
@@ -112,7 +112,7 @@ public class AbstractCoordinateTestCase extends TestCase2 {
     return Math.round(d * 10d) / 10d;
   }
 
-  /**
+  /*
    * Round off a double precision number to 2 digits after the decimal.
    *
    * @param d The value.
@@ -122,7 +122,7 @@ public class AbstractCoordinateTestCase extends TestCase2 {
     return Math.round(d * 100d) / 100d;
   }
 
-  /**
+  /*
    * Round off a double precision number to 5 digits after the decimal.
    *
    * @param d The value.

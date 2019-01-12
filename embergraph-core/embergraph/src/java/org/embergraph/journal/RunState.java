@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.journal;
 
-/**
- * Enum of transaction run states.
+/*
+* Enum of transaction run states.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public enum RunState {
     return name;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff a transition is allowable from the current {@link RunState} to the
    * proposed {@link RunState}.
    *
@@ -66,17 +66,14 @@ public enum RunState {
 
       if (newval.equals(RunState.Aborted)) return true;
 
-      if (newval.equals(Committed)) return true;
-
-      return false;
+      return newval.equals(Committed);
 
     } else if (this.equals(RunState.Prepared)) {
 
       if (newval.equals(Aborted)) return true;
 
-      if (newval.equals(Committed)) return true;
+      return newval.equals(Committed);
 
-      return false;
     }
 
     return false;

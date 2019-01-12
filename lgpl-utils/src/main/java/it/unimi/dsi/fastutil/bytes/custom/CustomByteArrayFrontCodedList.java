@@ -35,8 +35,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Compact storage of lists of arrays using front coding.
+/*
+* Compact storage of lists of arrays using front coding.
  *
  * <p>This class stores immutably a list of arrays in a single large array using front coding (of
  * course, the compression will be reasonable only if the list is sorted lexicographically&mdash;see
@@ -114,30 +114,30 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
    * New interfaces and their implementations.
    */
 
-  /**
+  /*
    * Abstraction allowing different implementations of the backing buffer.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
   public interface BackingBuffer extends Cloneable, Serializable {
-    /**
+    /*
      * Return the byte value at the specified index.
      *
      * @param i The index.
      * @return The byte.
      */
-    public byte get(int i);
+    byte get(int i);
 
-    /**
+    /*
      * Reads a coded length.
      *
      * @param pos The starting position.
      * @return The length coded at <code>pos</code>.
      */
-    public int readInt(int pos);
+    int readInt(int pos);
 
-    /**
+    /*
      * Copy data from the backing buffer into the caller's array.
      *
      * @param pos The starting position in the backing buffer.
@@ -145,23 +145,23 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
      * @param destPos The starting position in the caller's array.
      * @param len The #of bytes to copy.
      */
-    public void arraycopy(int pos, byte[] dest, int destPos, int len);
+    void arraycopy(int pos, byte[] dest, int destPos, int len);
 
     /** The size of the backing buffer in bytes. */
-    public int size();
+    int size();
 
     /** Return a copy of the data in the backing buffer. */
-    public byte[] toArray();
+    byte[] toArray();
 
-    /**
+    /*
      * Write the data on the output stream.
      *
      * @param out The output stream.
      * @return The #of bytes written.
      */
-    public int writeOn(OutputStream out) throws IOException;
+    int writeOn(OutputStream out) throws IOException;
 
-    /**
+    /*
      * Write <i>len</i> bytes starting at <i>off</i> onto the caller's stream.
      *
      * @param out The output stream.
@@ -169,13 +169,13 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
      * @param len The #of bytes to be written.
      * @return The #of bytes written.
      */
-    public int writeOn(OutputStream out, int off, int len) throws IOException;
+    int writeOn(OutputStream out, int off, int len) throws IOException;
 
     /** Clone the backing buffer. */
-    public BackingBuffer clone();
+    BackingBuffer clone();
   }
 
-  /**
+  /*
    * Implementation for a <code>byte[]</code>.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -268,7 +268,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     }
   }
 
-  /**
+  /*
    * Implementation with a backing {@link ByteBuffer}.
    *
    * <p>Note: Methods which interact with a ByteBuffer MUST NOT change its position or limit. If
@@ -288,7 +288,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
 
     private final ByteBuffer b;
 
-    /**
+    /*
      * @param b The data. All bytes in view are used (from zero through the capacity of the array).
      *     The limit and position of the buffer are ignored.
      */
@@ -409,7 +409,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     if (ratio < 1) throw new IllegalArgumentException("Illegal ratio (" + ratio + ")");
   }
 
-  /**
+  /*
    * Creates a new front-coded list containing the arrays returned by the given iterator.
    *
    * @param arrays an iterator returning arrays.
@@ -434,7 +434,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     int curSize = 0, b = 0, common, length, minLength;
 
     while (arrays.hasNext()) {
-      a[b] = (byte[]) arrays.next();
+      a[b] = arrays.next();
       length = a[b].length;
 
       if (n % ratio == 0) {
@@ -471,7 +471,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     this.hasDups = hasDups;
   }
 
-  /**
+  /*
    * Creates a new front-coded list containing the arrays in the given collection.
    *
    * @param c a collection containing arrays.
@@ -482,7 +482,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     this(c.iterator(), ratio);
   }
 
-  /**
+  /*
    * Creates a new front-coded list containing the arrays in the given collection.
    *
    * @param c a collection containing arrays.
@@ -495,8 +495,8 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     this(c.iterator(), ratio, hasDups);
   }
 
-  //    /**
-  //     * Reads a coded length.
+  //    /*
+//     * Reads a coded length.
   //     *
   //     * @param a
   //     *            the data array.
@@ -518,7 +518,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
   //                | (-a[pos + 2] - 1) << 14 | (-a[pos + 3] - 1) << 7 | a[pos + 4];
   //    }
 
-  /**
+  /*
    * Computes the number of elements coding a given length.
    *
    * @param length the length to be coded.
@@ -533,7 +533,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return 5;
   }
 
-  /**
+  /*
    * Writes a length.
    *
    * @param a the data array.
@@ -541,7 +541,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
    * @param pos the starting position.
    * @return the number of elements coding <code>length</code>.
    */
-  private static int writeInt(final byte a[], int length, int pos) {
+  private static int writeInt(final byte[] a, int length, int pos) {
     final int count = count(length);
     a[pos + count - 1] = (byte) (length & 0x7F);
 
@@ -556,7 +556,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return count;
   }
 
-  /**
+  /*
    * Returns the ratio of this list.
    *
    * @return the ratio of this list.
@@ -565,7 +565,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return ratio;
   }
 
-  /**
+  /*
    * Computes the length of the array at the given index.
    *
    * <p>This private version of {@link #arrayLength(int)} does not check its argument.
@@ -606,7 +606,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return length + common;
   }
 
-  /**
+  /*
    * Computes the length of the array at the given index.
    *
    * @param index an index.
@@ -617,7 +617,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return length(index);
   }
 
-  /**
+  /*
    * Extracts the array at the given index.
    *
    * @param index an index.
@@ -626,7 +626,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
    * @param length a maximum number of elements to store in <code>a</code>.
    * @return the length of the extracted array.
    */
-  private int extract(final int index, final byte a[], final int offset, final int length) {
+  private int extract(final int index, final byte[] a, final int offset, final int length) {
     final BackingBuffer bb = this.bb;
     final int delta = index % ratio; // The delta inside the block.
     final int startPos = p[index / ratio]; // The position into the array of
@@ -687,12 +687,12 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
   public byte[] getArray(final int index) {
     ensureRestrictedIndex(index);
     final int length = length(index);
-    final byte a[] = new byte[length];
+    final byte[] a = new byte[length];
     extract(index, a, 0, length);
     return a;
   }
 
-  /**
+  /*
    * Write the specified byte[] onto a stream.
    *
    * @param os The stream.
@@ -713,7 +713,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return a.length;
   }
 
-  /**
+  /*
    * Stores in the given array elements from an array stored in this front-coded list.
    *
    * @param index an index.
@@ -732,7 +732,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return length - arrayLength;
   }
 
-  /**
+  /*
    * Stores in the given array an array stored in this front-coded list.
    *
    * @param index an index.
@@ -753,7 +753,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     ensureIndex(start);
 
     return new AbstractObjectListIterator<byte[]>() {
-      byte a[] = ByteArrays.EMPTY_ARRAY;
+      byte[] a = ByteArrays.EMPTY_ARRAY;
 
       int i = 0, pos = 0;
 
@@ -832,7 +832,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     };
   }
 
-  /**
+  /*
    * Returns a copy of this list.
    *
    * @return a copy of this list.
@@ -913,7 +913,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
    * New ctors and new methods.
    */
 
-  /**
+  /*
    * Reconsitute an instance from just the coded byte[], the #of elements in the array, and the
    * ratio.
    *
@@ -926,7 +926,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     this(n, ratio, array, 0, array.length, false /* hasDups */);
   }
 
-  /**
+  /*
    * Reconsitute an instance from a slice byte[] containing the coded data, the #of elements in the
    * array, and the ratio.
    *
@@ -957,7 +957,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     rebuildPointerArray();
   }
 
-  /**
+  /*
    * Reconsitute an instance from just a {@link ByteBuffer} view onto the coded byte[], the #of
    * elements in the array, and the ratio.
    *
@@ -985,7 +985,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return bb;
   }
 
-  /**
+  /*
    * Rebuild pointer array from the packed byte {@link #array}, the #of elements in that array
    * {@link #n}, and the {@link #ratio()}.
    */
@@ -1012,7 +1012,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     this.p = p;
   }
 
-  /**
+  /*
    * Search for the index of the value having the same data. The results are meaningless if the list
    * is not ordered. A binary search is performed against each of the entries that is coded as a
    * full length value. If there is a match, the index of that entry is returned directly. Otherwise
@@ -1195,8 +1195,8 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
 
       if (clen < mlen) {
 
-        /*
-         * No match is possible once the common length is LT the matched
+      /*
+       * No match is possible once the common length is LT the matched
          * length.
          */
 
@@ -1207,8 +1207,8 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
       pos += count(clen);
 
       if (clen > mlen) {
-        /*
-         * No match is possible while the common prefix length with the
+      /*
+       * No match is possible while the common prefix length with the
          * prior entry is GT the matched length with the probe key.
          */
         pos += rlen;
@@ -1300,7 +1300,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     }
   }
 
-  /**
+  /*
    * Binary search against the entries in the backing buffer that are coded as their full length
    * values.
    *
@@ -1373,7 +1373,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return -(offset + 1);
   }
 
-  /**
+  /*
    * Compares the caller's key to a full length key at a specific offset in the {@link
    * BackingBuffer}.
    *
@@ -1397,7 +1397,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return compareBytes(key, 0, key.length, bb, pos, blen);
   }
 
-  /**
+  /*
    * Compare up to <i>len</i> bytes in <i>a</i> interpreted as unsigned bytes against the bytes in
    * the {@link BackingBuffer} starting at offset <i>off</i> in the {@link BackingBuffer}.
    *
@@ -1439,7 +1439,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
    * BytesUtil in the embergraph package (BBT, 9/24/2009).
    */
 
-  /**
+  /*
    * Formats a key as a series of comma delimited unsigned bytes.
    *
    * @param key The key.
@@ -1452,7 +1452,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
     return toString(key, 0, key.length);
   }
 
-  /**
+  /*
    * Formats a key as a series of comma delimited unsigned bytes.
    *
    * @param key The key.
@@ -1474,7 +1474,7 @@ public class CustomByteArrayFrontCodedList extends AbstractObjectList<byte[]>
 
       // as an unsigned integer.
       //            sb.append(Integer.toHexString(key[i] & 0xff));
-      sb.append(Integer.toString(key[i] & 0xff));
+      sb.append((key[i] & 0xff));
     }
 
     sb.append("]");

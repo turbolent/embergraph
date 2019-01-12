@@ -42,7 +42,7 @@ public class SAILGASEngine extends GASEngine {
     super(nthreads);
   }
 
-  /**
+  /*
    * Returns <code>false</code>. The openrdf {@link Value} interface does not implement {@link
    * Comparable} and can not be sorted without an external {@link Comparator}. Also, the order over
    * the external RDF {@link Value} representations is unlikely to benefit any {@link Sail} that
@@ -65,7 +65,7 @@ public class SAILGASEngine extends GASEngine {
       this(cxn, true /* includeInferred */, (Resource) null /* defaultContext */);
     }
 
-    /**
+    /*
      * @param cxn The connection.
      * @param includeInferred When <code>true</code>, inferred triples will be visited as well as
      *     explicit triples.
@@ -133,10 +133,10 @@ public class SAILGASEngine extends GASEngine {
     private IStriterator getEdges(
         final boolean inEdges, final IGASContext<?, ?, ?> ctx, final Value u) throws SailException {
 
-      final URI linkTypeIV = (URI) ctx.getLinkType();
+      final URI linkTypeIV = ctx.getLinkType();
       if (linkTypeIV != null) {
-        /*
-         * FIXME RDR: We need to use a union of access paths for link
+      /*
+       * FIXME RDR: We need to use a union of access paths for link
          * attributes for the generic SAIL since it does not have the
          * concept of statements about statements. This will require
          * applying the access paths that will visit the appropriate
@@ -174,7 +174,7 @@ public class SAILGASEngine extends GASEngine {
          */
         citr =
             cxn.getStatements(
-                null /* s */, (URI) linkTypeIV /* p */, u /* o */, includeInferred, defaultContext);
+                null /* s */, linkTypeIV /* p */, u /* o */, includeInferred, defaultContext);
 
       } else {
 

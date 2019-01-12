@@ -10,8 +10,8 @@ import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link CustomByteArrayFrontCodedList}.
+/*
+* Unit tests for {@link CustomByteArrayFrontCodedList}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -60,7 +60,7 @@ public class TestCustomByteArrayFrontCodedList extends TestCase {
     return true;
   }
 
-  private int l[];
+  private int[] l;
   private byte[][] a;
 
   private void _test(final int n) {

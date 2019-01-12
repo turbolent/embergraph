@@ -26,8 +26,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * Simple stored query consisting of a parameterized SPARQL query.
+/*
+* Simple stored query consisting of a parameterized SPARQL query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -37,7 +37,7 @@ public abstract class SimpleStoredQueryService extends StoredQueryService {
   protected abstract String getQuery(
       final ServiceCallCreateParams createParams, final ServiceParams serviceParams);
 
-  /**
+  /*
    * Executes the SPARQL query returned by {@link #getQuery(ServiceCallCreateParams, ServiceParams)}
    */
   @Override
@@ -52,7 +52,7 @@ public abstract class SimpleStoredQueryService extends StoredQueryService {
     final String baseURI = createParams.getServiceURI().stringValue();
 
     final EmbergraphSailTupleQuery query =
-        (EmbergraphSailTupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
+        cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
 
     return query.evaluate();
   }

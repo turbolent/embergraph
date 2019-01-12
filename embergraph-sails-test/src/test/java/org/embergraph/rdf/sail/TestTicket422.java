@@ -34,8 +34,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.sail.SailException;
 
-/**
- * Test suite for wrapping a {@link TempTripleStore} as a {@link EmbergraphSail}.
+/*
+* Test suite for wrapping a {@link TempTripleStore} as a {@link EmbergraphSail}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -93,7 +93,7 @@ public class TestTicket422 extends ProxyEmbergraphSailTestCase {
             try {
 
               final CloseableIteration<? extends Statement, SailException> itr =
-                  con.getStatements((Resource) null, (URI) null, (Value) null, (Resource) null);
+                  con.getStatements(null, null, null, null);
 
               try {
 

@@ -27,8 +27,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link InetAddressUtil}.
+/*
+* Test suite for {@link InetAddressUtil}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -94,7 +94,7 @@ public class TestInetAddressUtil extends TestCase2 {
               + actual3);
   }
 
-  /**
+  /*
    * Verifies that the same result is obtained when we interpret some IPV4 addresses using {@link
    * InetAddress#getByName(String)} and using {@link InetAddressUtil#getByName(String)}.
    *

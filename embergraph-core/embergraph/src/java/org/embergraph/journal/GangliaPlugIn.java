@@ -37,8 +37,8 @@ import org.embergraph.ganglia.GangliaSlopeEnum;
 import org.embergraph.ganglia.IGangliaDefaults;
 import org.embergraph.ganglia.util.GangliaUtil;
 
-/**
- * A plugin for ganglia.
+/*
+* A plugin for ganglia.
  *
  * <p>Note: This plugin will not start (and will not be loaded from the classpath) unless {@link
  * PlatformStatsPlugIn.Options#COLLECT_PLATFORM_STATISTICS} is set to <code>true</code>.
@@ -67,7 +67,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
 
     String DEFAULT_GANGLIA_LISTEN_PORT = Integer.toString(IGangliaDefaults.DEFAULT_PORT);
 
-    /**
+    /*
      * When <code>true</code>, the embedded {@link GangliaService} will listen on to the specified
      * multicast group and build up an internal model of the metrics in the ganglia network.
      *
@@ -80,7 +80,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
 
     // Report
 
-    /**
+    /*
      * When <code>true</code>, the embedded {@link GangliaService} will report performance metrics
      * to the specified gmetad server(s).
      *
@@ -91,7 +91,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
 
     String DEFAULT_GANGLIA_REPORT = "false";
 
-    /**
+    /*
      * An list of the metric servers (<code>gmetad</code> instances) to which metrics will be sent.
      * The default is to send metrics to the well known multicast group for ganglia. Zero or more
      * hosts may be specified, separated by whitespace or commas. The port for each host is optional
@@ -102,7 +102,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
 
     String DEFAULT_GANGLIA_SERVERS = IGangliaDefaults.DEFAULT_GROUP;
 
-    /**
+    /*
      * The delay between reports of performance counters in milliseconds ( {@value
      * #DEFAULT_REPORT_DELAY}). When ZERO (0L), performance counter reporting will be disabled.
      *
@@ -114,7 +114,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
     String DEFAULT_REPORT_DELAY = "" + (60 * 1000);
   }
 
-  /**
+  /*
    * Future for an embedded {@link GangliaService} which listens to <code>gmond</code> instances and
    * other {@link GangliaService}s and reports out metrics from {@link #getCounters()} to the
    * ganglia network.
@@ -126,7 +126,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
   private final AtomicReference<EmbergraphGangliaService> gangliaService =
       new AtomicReference<EmbergraphGangliaService>();
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Start embedded Ganglia peer. It will develop a snapshot of the metrics in memory for all
@@ -289,7 +289,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
       //                        statisticsCollector, null/* filter */));
 
       // Wrap as Future.
-      final FutureTask<Void> ft = new FutureTask<Void>(gangliaService, (Void) null);
+      final FutureTask<Void> ft = new FutureTask<Void>(gangliaService, null);
 
       // Save reference to future.
       gangliaFuture.set(ft);
@@ -317,7 +317,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The embedded GangliaService is executed on the main thread pool. We need to terminate
@@ -342,9 +342,7 @@ public class GangliaPlugIn implements IPlugIn<Journal, GangliaService> {
 
     final FutureTask<Void> ft = gangliaFuture.get();
 
-    if (ft == null || ft.isDone()) return false;
-
-    return true;
+    return ft != null && !ft.isDone();
   }
 
   @Override

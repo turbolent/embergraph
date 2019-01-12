@@ -31,8 +31,8 @@ import org.embergraph.Banner;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 
-/**
- * Test suite for binary compatibility, portability, and forward compatibility or automated
+/*
+* Test suite for binary compatibility, portability, and forward compatibility or automated
  * migration of persistent stores and persistence or serialization capable objects across different
  * embergraph releases. The tests in this suite rely on artifacts which are archived within SVN.
  *
@@ -64,7 +64,7 @@ public class TestBinaryCompatibility extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * @todo munge the release version into a name that is compatibility with the file system ("." to
    *     "_"). Store artifacts at each release? At each release in which an incompatibility is
    *     introduced? At each release in which a persistence capable data structure or change is
@@ -82,7 +82,7 @@ public class TestBinaryCompatibility extends TestCase2 {
       this.revision = revision;
     }
 
-    /**
+    /*
      * The embergraph version number associated with the release. This is in the form <code>xx.yy.zz
      * </code>
      */
@@ -90,7 +90,7 @@ public class TestBinaryCompatibility extends TestCase2 {
       return version;
     }
 
-    /**
+    /*
      * The SVN repository revision associated with the release. This is in the form <code>####
      * </code>.
      */
@@ -138,7 +138,7 @@ public class TestBinaryCompatibility extends TestCase2 {
     super.tearDown();
   }
 
-  /**
+  /*
    * @throws Throwable
    * @todo Each 'test' should run an instance of a class which knows how to create the appropriate
    *     artifacts and how to test them.

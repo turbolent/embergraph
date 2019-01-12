@@ -47,7 +47,7 @@ public class UUIDBOp extends IVValueExpression<IV> implements INeedsMaterializat
     this(BOp.NOARGS, anns(globals, new NV(Annotations.STR, str)));
   }
 
-  /**
+  /*
    * Required shallow copy constructor.
    *
    * @param args The operands.
@@ -58,7 +58,7 @@ public class UUIDBOp extends IVValueExpression<IV> implements INeedsMaterializat
     super(args, anns);
   }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * @param op

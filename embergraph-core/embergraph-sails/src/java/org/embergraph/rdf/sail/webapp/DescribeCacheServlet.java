@@ -43,8 +43,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterRegistry;
 
-/**
- * A maintained cache for DESCRIBE of URIs.
+/*
+* A maintained cache for DESCRIBE of URIs.
  *
  * <p>In general, URIs may be identified either by a bare URI (in which case the URI must be some
  * extension of the SPARQL endpoint path) or by a SPARQL DESCRIBE query ( <code>
@@ -96,7 +96,7 @@ public class DescribeCacheServlet extends EmbergraphRDFServlet {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * The name of a request attribute whose bound value is a {@link Set} of {@link URI}s to be
    * described by the {@link DescribeCacheServlet}.
    */
@@ -104,7 +104,7 @@ public class DescribeCacheServlet extends EmbergraphRDFServlet {
 
   public DescribeCacheServlet() {}
 
-  /**
+  /*
    * GET returns the DESCRIBE of the resource.
    *
    * <p>FIXME DESCRIBE: TX ISOLATION for request but ensure that cache is not negatively effected by
@@ -255,8 +255,8 @@ public class DescribeCacheServlet extends EmbergraphRDFServlet {
 
       if (g == null) {
 
-        /*
-         * None of the URIs was found.
+      /*
+       * None of the URIs was found.
          *
          * Note: We can only send the NOT_FOUND status and commit the
          * response if the cache is complete. Otherwise, we might set
@@ -302,8 +302,8 @@ public class DescribeCacheServlet extends EmbergraphRDFServlet {
       resp.setContentType(mimeType);
 
       if (isAttachment(mimeType)) {
-        /*
-         * Mark this as an attachment (rather than inline). This is
+      /*
+       * Mark this as an attachment (rather than inline). This is
          * just a hint to the user agent. How the user agent handles
          * this hint is up to it.
          */

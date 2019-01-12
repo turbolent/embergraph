@@ -23,8 +23,8 @@ package it.unimi.dsi.parser;
 
 import it.unimi.dsi.lang.MutableString;
 
-/**
- * A set of coherent methods to turn element-type, attribute and entity names to unique interned
+/*
+* A set of coherent methods to turn element-type, attribute and entity names to unique interned
  * instances.
  *
  * <p>The {@link it.unimi.dsi.parser.BulletParser} needs a way to turn a name (for an element type,
@@ -46,27 +46,27 @@ import it.unimi.dsi.lang.MutableString;
  */
 public interface ParsingFactory {
 
-  /**
+  /*
    * Returns the {@link it.unimi.dsi.parser.Element} associated to a name.
    *
    * @param name the name of an element type.
    * @return the corresponding interned {@link Element} object.
    */
-  public Element getElement(final MutableString name);
+  Element getElement(final MutableString name);
 
-  /**
+  /*
    * Returns the {@link it.unimi.dsi.parser.Attribute} associated to a name.
    *
    * @param name the name of an attribute.
    * @return the corresponding interned {@link Attribute} object.
    */
-  public Attribute getAttribute(final MutableString name);
+  Attribute getAttribute(final MutableString name);
 
-  /**
+  /*
    * Returns the {@link it.unimi.dsi.parser.Entity} associated to a name.
    *
    * @param name the name of an entity.
    * @return the corresponding interned {@link Entity} object.
    */
-  public Entity getEntity(final MutableString name);
+  Entity getEntity(final MutableString name);
 }

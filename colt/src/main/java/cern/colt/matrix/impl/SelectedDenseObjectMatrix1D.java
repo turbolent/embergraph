@@ -10,8 +10,8 @@ package cern.colt.matrix.impl;
 
 import cern.colt.matrix.ObjectMatrix1D;
 import cern.colt.matrix.ObjectMatrix2D;
-/**
- * Selection view on dense 1-d matrices holding <tt>Object</tt> elements. First see the <a
+/*
+* Selection view on dense 1-d matrices holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -55,7 +55,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
 
   /** The offset. */
   protected int offset;
-  /**
+  /*
    * Constructs a matrix view with the given parameters.
    *
    * @param elements the cells.
@@ -64,7 +64,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
   protected SelectedDenseObjectMatrix1D(Object[] elements, int[] offsets) {
     this(offsets.length, elements, 0, 1, offsets, 0);
   }
-  /**
+  /*
    * Constructs a matrix view with the given parameters.
    *
    * @param size the number of cells the matrix shall have.
@@ -84,7 +84,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
     this.offset = offset;
     this.isNoView = false;
   }
-  /**
+  /*
    * Returns the position of the given absolute rank within the (virtual or non-virtual) internal
    * 1-dimensional array. Default implementation. Override, if necessary.
    *
@@ -94,7 +94,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
   protected int _offset(int absRank) {
     return offsets[absRank];
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>index</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -121,7 +121,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
     }
     return false;
   }
-  /**
+  /*
    * Returns the position of the element with the given relative rank within the (virtual or
    * non-virtual) internal 1-dimensional array. You may want to override this method for
    * performance.
@@ -133,7 +133,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
     // manually inlined:
     return offset + offsets[zero + rank * stride];
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified size. For example, if the receiver is an instance of type
    * <tt>DenseObjectMatrix1D</tt> the new matrix must also be of type <tt>DenseObjectMatrix1D</tt>,
@@ -147,7 +147,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
   public ObjectMatrix1D like(int size) {
     return new DenseObjectMatrix1D(size);
   }
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseObjectMatrix1D</tt> the new matrix must be of type <tt>DenseObjectMatrix2D</tt>, if
@@ -161,7 +161,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
   public ObjectMatrix2D like2D(int rows, int columns) {
     return new DenseObjectMatrix2D(rows, columns);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>index</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -177,7 +177,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
     // manually inlined:
     elements[offset + offsets[zero + index * stride]] = value;
   }
-  /**
+  /*
    * Sets up a matrix with a given number of cells.
    *
    * @param size the number of cells the matrix shall have.
@@ -187,7 +187,7 @@ class SelectedDenseObjectMatrix1D extends ObjectMatrix1D {
     this.stride = 1;
     this.offset = 0;
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param offsets the offsets of the visible elements.

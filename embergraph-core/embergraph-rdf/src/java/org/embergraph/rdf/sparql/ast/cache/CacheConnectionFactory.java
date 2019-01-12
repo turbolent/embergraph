@@ -27,8 +27,8 @@ import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
-/**
- * A factory pattern for the {@link ICacheConnection}.
+/*
+* A factory pattern for the {@link ICacheConnection}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public class CacheConnectionFactory {
 
   private static final Logger log = Logger.getLogger(CacheConnectionFactory.class);
 
-  /**
+  /*
    * Weak key cache to enforce the singleton pattern.
    *
    * <p>Note: We do not want to keep any {@link ICacheConnection} objects wired into the memory
@@ -46,7 +46,7 @@ public class CacheConnectionFactory {
   private static WeakHashMap<QueryEngine, ICacheConnection> instanceCache =
       new WeakHashMap<QueryEngine, ICacheConnection>();
 
-  /**
+  /*
    * Singleton factory test (does not create the cache).
    *
    * @param queryEngine The {@link QueryEngine}.
@@ -58,7 +58,7 @@ public class CacheConnectionFactory {
     return instanceCache.get(queryEngine);
   }
 
-  /**
+  /*
    * Singleton factory.
    *
    * @param queryEngine The {@link QueryEngine}.
@@ -70,7 +70,7 @@ public class CacheConnectionFactory {
 
     if (!QueryHints.CACHE_ENABLED || !(queryEngine.getIndexManager() instanceof AbstractJournal)) {
 
-      /**
+      /*
        * Feature is disabled.
        *
        * <p>Note: IBTreeManager does not support HTree methods, so TemporaryStore can not substitute
@@ -99,7 +99,7 @@ public class CacheConnectionFactory {
     return cache;
   }
 
-  /**
+  /*
    * Initialize a new {@link ICacheConnection} instance (or a connection to a cache fabric).
    *
    * @param queryEngine The query controller.

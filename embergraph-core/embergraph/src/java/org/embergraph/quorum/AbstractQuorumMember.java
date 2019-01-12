@@ -25,8 +25,8 @@ import java.rmi.Remote;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/**
- * Abstract base class for a {@link QuorumMember}.
+/*
+* Abstract base class for a {@link QuorumMember}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -65,7 +65,7 @@ public abstract class AbstractQuorumMember<S extends Remote> extends AbstractQuo
     return serviceId;
   }
 
-  /**
+  /*
    * Return the actor for this {@link QuorumMember} (it is allocated by {@link
    * AbstractQuorum#start(QuorumClient)}).
    */
@@ -74,7 +74,7 @@ public abstract class AbstractQuorumMember<S extends Remote> extends AbstractQuo
     // Note: This causes a compiler error on CI builds w/ JDK1.1.6_17.
     //        return (QuorumActor<S, QuorumMember<S>>) getQuorum().getActor();
     //        return (QuorumActor<S, QuorumMember<S>>) (QuorumActor<?,?>)getQuorum().getActor();
-    return (QuorumActor<S, QuorumMember<S>>) (QuorumActor) getQuorum().getActor();
+    return (QuorumActor<S, QuorumMember<S>>) getQuorum().getActor();
   }
 
   @Override
@@ -107,7 +107,7 @@ public abstract class AbstractQuorumMember<S extends Remote> extends AbstractQuo
     return false;
   }
 
-  /**
+  /*
    * @todo This method is a bit odd as it is open to two different semantics based on whether or not
    *     it will return false or throw a {@link QuorumException} if the condition is not true. What
    *     makes it odd is having the token passed in, but without the token we can not know that the
@@ -126,7 +126,7 @@ public abstract class AbstractQuorumMember<S extends Remote> extends AbstractQuo
     return true;
   }
 
-  /**
+  /*
    * @todo This method is a bit odd as it is open to two different semantics based on whether or not
    *     it will return false or throw a {@link QuorumException} if the condition is not true. What
    *     makes it odd is having the token passed in, but without the token we can not know that the
@@ -152,7 +152,7 @@ public abstract class AbstractQuorumMember<S extends Remote> extends AbstractQuo
     return false;
   }
 
-  /**
+  /*
    * @todo This method is a bit odd as it is open to two different semantics based on whether or not
    *     it will return false or throw a {@link QuorumException} if the condition is not true. What
    *     makes it odd is having the token passed in, but without the token we can not know that the
@@ -222,7 +222,7 @@ public abstract class AbstractQuorumMember<S extends Remote> extends AbstractQuo
   private final CopyOnWriteArraySet<QuorumStateChangeListener> listeners =
       new CopyOnWriteArraySet<QuorumStateChangeListener>();
 
-  /**
+  /*
    * Add a delegate listener.
    *
    * @param listener The listener.
@@ -234,7 +234,7 @@ public abstract class AbstractQuorumMember<S extends Remote> extends AbstractQuo
     this.listeners.add(listener);
   }
 
-  /**
+  /*
    * Remove a delegate listener.
    *
    * @param listener The listener.

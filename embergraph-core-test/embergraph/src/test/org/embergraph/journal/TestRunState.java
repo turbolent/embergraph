@@ -25,8 +25,8 @@ package org.embergraph.journal;
 
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link RunState}.
+/*
+* Unit tests for {@link RunState}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -61,7 +61,7 @@ public class TestRunState extends TestCase {
     assertFalse(RunState.Aborted.isTransitionAllowed(RunState.Committed));
   }
 
-  /**
+  /*
    * Verify that a NOP state change is allowed (this is used when there are multiple committers for
    * a distributed transaction since (as a convenience) more than one may instruct us to make the
    * same state change).

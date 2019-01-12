@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-/**
- * A marker interface for an {@link IValueExpression} which has the side-effect of binding a value
+/*
+* A marker interface for an {@link IValueExpression} which has the side-effect of binding a value
  * on an {@link IVariable}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -30,7 +30,7 @@ package org.embergraph.bop;
  */
 public interface IBind<E> extends IValueExpression<E> {
 
-  /**
+  /*
    * Return the variable which will be bound to the result of evaluating the associated value
    * expression.
    */

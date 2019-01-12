@@ -5,7 +5,7 @@ import java.io.Serializable;
 /** Subquery cost report. */
 public class SubqueryCostReport implements Serializable {
 
-  /**
+  /*
    * @todo should be either Externalizable and explicitly managed versioning or Serializable with a
    *     public interface for versioning.
    */
@@ -23,13 +23,13 @@ public class SubqueryCostReport implements Serializable {
   /** An estimated range count based on the samples and adjusted for the #of graphs. */
   public final long rangeCount;
 
-  /**
+  /*
    * An estimated cost (latency in milliseconds) based on the samples and adjusted for the #of
    * graphs.
    */
   public final double cost;
 
-  /**
+  /*
    * @param ngraphs The #of graphs against which subqueries will be issued.
    * @param limit The #of samples to be taken.
    * @param nsamples The #of samples taken.

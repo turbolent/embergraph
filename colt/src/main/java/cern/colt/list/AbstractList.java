@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.list;
 
-/**
- * Abstract base class for resizable lists holding objects or primitive data types such as <code>int
+/*
+* Abstract base class for resizable lists holding objects or primitive data types such as <code>int
  * </code>, <code>float</code>, etc. First see the <a href="package-summary.html">package
  * summary</a> and javadoc <a href="package-tree.html">tree view</a> to get the broad picture.
  *
@@ -24,7 +24,7 @@ package cern.colt.list;
 public abstract class AbstractList extends AbstractCollection {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected AbstractList() {}
-  /**
+  /*
    * Appends all of the elements of the specified Collection to the receiver.
    *
    * @exception ClassCastException if an element in the collection is not of the same parameter type
@@ -33,7 +33,7 @@ public abstract class AbstractList extends AbstractCollection {
   public void addAllOf(java.util.Collection collection) {
     this.beforeInsertAllOf(size(), collection);
   }
-  /**
+  /*
    * Inserts all elements of the specified collection before the specified position into the
    * receiver. Shifts the element currently at that position (if any) and any subsequent elements to
    * the right (increases their indices).
@@ -48,7 +48,7 @@ public abstract class AbstractList extends AbstractCollection {
     this.beforeInsertDummies(index, collection.size());
     this.replaceFromWith(index, collection);
   }
-  /**
+  /*
    * Inserts <tt>length</tt> dummy elements before the specified position into the receiver. Shifts
    * the element currently at that position (if any) and any subsequent elements to the right.
    * <b>This method must set the new size to be <tt>size()+length</tt>.
@@ -63,7 +63,7 @@ public abstract class AbstractList extends AbstractCollection {
     if (index >= theSize || index < 0)
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + theSize);
   }
-  /**
+  /*
    * Checks if the given range is within the contained array's bounds.
    *
    * @throws IndexOutOfBoundsException if <tt>to!=from-1 || from&lt;0 || from&gt;to ||
@@ -74,14 +74,14 @@ public abstract class AbstractList extends AbstractCollection {
     if (from < 0 || from > to || to >= theSize)
       throw new IndexOutOfBoundsException("from: " + from + ", to: " + to + ", size=" + theSize);
   }
-  /**
+  /*
    * Removes all elements from the receiver. The receiver will be empty after this call returns, but
    * keep its current capacity.
    */
   public void clear() {
     removeFromTo(0, size() - 1);
   }
-  /**
+  /*
    * Sorts the receiver into ascending order. This sort is guaranteed to be <i>stable</i>: equal
    * elements will not be reordered as a result of the sort.
    *
@@ -98,7 +98,7 @@ public abstract class AbstractList extends AbstractCollection {
   public final void mergeSort() {
     mergeSortFromTo(0, size() - 1);
   }
-  /**
+  /*
    * Sorts the receiver into ascending order. This sort is guaranteed to be <i>stable</i>: equal
    * elements will not be reordered as a result of the sort.
    *
@@ -118,7 +118,7 @@ public abstract class AbstractList extends AbstractCollection {
    *     to!=from-1</tt>.
    */
   public abstract void mergeSortFromTo(int from, int to);
-  /**
+  /*
    * Sorts the receiver into ascending order. The sorting algorithm is a tuned quicksort, adapted
    * from Jon L. Bentley and M. Douglas McIlroy's "Engineering a Sort Function", Software-Practice
    * and Experience, Vol. 23(11) P. 1249-1265 (November 1993). This algorithm offers n*log(n)
@@ -132,7 +132,7 @@ public abstract class AbstractList extends AbstractCollection {
   public final void quickSort() {
     quickSortFromTo(0, size() - 1);
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending order. The sorting algorithm is a
    * tuned quicksort, adapted from Jon L. Bentley and M. Douglas McIlroy's "Engineering a Sort
    * Function", Software-Practice and Experience, Vol. 23(11) P. 1249-1265 (November 1993). This
@@ -150,7 +150,7 @@ public abstract class AbstractList extends AbstractCollection {
    *     to!=from-1</tt>.
    */
   public abstract void quickSortFromTo(int from, int to);
-  /**
+  /*
    * Removes the element at the specified position from the receiver. Shifts any subsequent elements
    * to the left.
    *
@@ -160,7 +160,7 @@ public abstract class AbstractList extends AbstractCollection {
   public void remove(int index) {
     removeFromTo(index, index);
   }
-  /**
+  /*
    * Removes from the receiver all elements whose index is between <code>from</code>, inclusive and
    * <code>to</code>, inclusive. Shifts any succeeding elements to the left (reduces their index).
    * This call shortens the list by <tt>(to - from + 1)</tt> elements.
@@ -171,7 +171,7 @@ public abstract class AbstractList extends AbstractCollection {
    *     to!=from-1</tt>.
    */
   public abstract void removeFromTo(int fromIndex, int toIndex);
-  /**
+  /*
    * Replaces the part of the receiver starting at <code>from</code> (inclusive) with all the
    * elements of the specified collection. Does not alter the size of the receiver. Replaces exactly
    * <tt>Math.max(0,Math.min(size()-from, other.size()))</tt> elements.
@@ -181,12 +181,12 @@ public abstract class AbstractList extends AbstractCollection {
    * @throws IndexOutOfBoundsException if <tt>index &lt; 0 || index &gt;= size()</tt>.
    */
   public abstract void replaceFromWith(int from, java.util.Collection other);
-  /**
+  /*
    * Reverses the elements of the receiver. Last becomes first, second last becomes second first,
    * and so on.
    */
   public abstract void reverse();
-  /**
+  /*
    * Sets the size of the receiver. If the new size is greater than the current size, new null or
    * zero items are added to the end of the receiver. If the new size is less than the current size,
    * all components at index newSize and greater are discarded. This method does not release any
@@ -209,7 +209,7 @@ public abstract class AbstractList extends AbstractCollection {
   public final void shuffle() {
     shuffleFromTo(0, size() - 1);
   }
-  /**
+  /*
    * Randomly permutes the receiver between <code>from</code> (inclusive) and <code>to</code>
    * (inclusive).
    *
@@ -219,7 +219,7 @@ public abstract class AbstractList extends AbstractCollection {
    *     to!=from-1</tt>.
    */
   public abstract void shuffleFromTo(int from, int to);
-  /**
+  /*
    * Sorts the receiver into ascending order.
    *
    * <p>The sorting algorithm is dynamically chosen according to the characteristics of the data
@@ -231,7 +231,7 @@ public abstract class AbstractList extends AbstractCollection {
   public final void sort() {
     sortFromTo(0, size() - 1);
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending order.
    *
    * <p>The sorting algorithm is dynamically chosen according to the characteristics of the data
@@ -246,7 +246,7 @@ public abstract class AbstractList extends AbstractCollection {
   public void sortFromTo(int from, int to) {
     quickSortFromTo(from, to);
   }
-  /**
+  /*
    * Trims the capacity of the receiver to be the receiver's current size. Releases any superfluos
    * internal memory. An application can use this operation to minimize the storage of the receiver.
    *

@@ -44,8 +44,8 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Eliminate semantically empty join group nodes which are the sole child of another join groups.
+/*
+* Eliminate semantically empty join group nodes which are the sole child of another join groups.
  * Such nodes either do not specify a context or they specify the same context as the parent.
  *
  * <pre>
@@ -159,8 +159,8 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
 
         eliminateEmptyGroups(queryBase, childGroup);
 
-        /*
-         * If we pruned the child, then we need to decrement the index
+      /*
+       * If we pruned the child, then we need to decrement the index
          * so that we don't skip one.
          */
         if (i < op.arity() && op.get(i) != child) {
@@ -178,8 +178,8 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
 
         eliminateEmptyGroups(subquery, childGroup);
 
-        /*
-         * If we pruned the child, then we need to decrement the index
+      /*
+       * If we pruned the child, then we need to decrement the index
          * so that we don't skip one.
          */
         if (i < op.arity() && op.get(i) != child) {
@@ -224,8 +224,8 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
           //  fix for trac 712
           && (parent.isOptional() || !child.isOptional())) {
 
-        /*
-         * We can always merge two JoinGroupNodes into one, but we have
+      /*
+       * We can always merge two JoinGroupNodes into one, but we have
          * to make sure we get the optionality right.
          *
          * Note: This is not true for MINUS. MINUS can only be combined
@@ -307,7 +307,7 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
       // inherit query hints
       copyQueryHintsAndRequiredAnnotations(op.get(0), op.getQueryHints(), op.annotations());
 
-      ((GroupNodeBase<?>) op.getParent()).replaceWith(op, (BOp) op.get(0));
+      ((GroupNodeBase<?>) op.getParent()).replaceWith(op, op.get(0));
     }
 
     //        if (op instanceof GraphPatternGroup<?>) {
@@ -318,17 +318,16 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
 
   }
 
-  /**
+  /*
    * Return true if the operator is a UNION.
    *
    * @param op The operator.
    */
   private static boolean isUnion(final IGroupNode<?> op) {
-    if (op instanceof UnionNode) return true;
-    return false;
+    return op instanceof UnionNode;
   }
 
-  /**
+  /*
    * Return true if the operator is a MINUS node.
    *
    * @param op The operator.
@@ -336,13 +335,13 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
   private static boolean isMinus(final IGroupNode<?> op) {
     if (op instanceof IJoinNode) {
       final IJoinNode g = (IJoinNode) op;
-      if (g.isMinus()) return true;
+      return g.isMinus();
     }
     return false;
   }
 
-  //    /**
-  //     * Return true if the operator is an OPTIONAL node.
+  //    /*
+//     * Return true if the operator is an OPTIONAL node.
   //     *
   //     * @param op
   //     *            The operator.
@@ -356,7 +355,7 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
   //        return false;
   //    }
 
-  /**
+  /*
    * Swap the parent with the child inside the grandparent. If there is no grandparent, assume the
    * parent is the where clause in the query base, and replace it with the child.
    */
@@ -393,7 +392,7 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
     parent.setParent(null);
   }
 
-  /**
+  /*
    * Copies the query hints to the given node, if not specified there. If the given node already has
    * the query hint, it is left unmodified. Also propagates runFirst and runLast annotations
    * according to the same principle, see https://jira.blazegraph.com/browse/BLZG-4323.
@@ -408,7 +407,7 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
     copyRequiredAnnotations(node, annotations);
   }
 
-  /**
+  /*
    * Copies the query hints to the given node, if not specified there. If the given node already has
    * the query hint, it is left unmodified.
    *
@@ -438,7 +437,7 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Copies selected annotations to given node, if not specified there. If the given node already
    * has the annotation, it is left unmodified.
    *

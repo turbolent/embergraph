@@ -55,8 +55,8 @@ import org.embergraph.rwstore.RWStore;
 import org.embergraph.rwstore.RWStore.StoreCounters;
 import org.embergraph.util.ChecksumError;
 
-/**
- * A highly scalable persistent {@link IBufferStrategy} wrapping the {@link RWStore} which may be
+/*
+* A highly scalable persistent {@link IBufferStrategy} wrapping the {@link RWStore} which may be
  * used as the backing store for a {@link Journal}.
  *
  * <p>The {@link RWStore} manages allocation slots. This can translate into an enormous space
@@ -98,7 +98,7 @@ public class RWStrategy extends AbstractRawStore
   /** The HA {@link Quorum} (optional). */
   private final Quorum<?, ?> m_quorum;
 
-  /**
+  /*
    * @param fileMetadata
    * @param quorum The HA {@link Quorum} (optional).
    */
@@ -145,7 +145,7 @@ public class RWStrategy extends AbstractRawStore
         // ignore error in logging system.
       }
       // update the performance counters.
-      final StoreCounters<?> c = (StoreCounters<?>) m_store.getStoreCounters().acquire();
+      final StoreCounters<?> c = m_store.getStoreCounters().acquire();
       try {
         c.checksumErrorCount++;
       } finally {
@@ -177,7 +177,7 @@ public class RWStrategy extends AbstractRawStore
   //        return write(data, oldAddr);
   //    }
 
-  /**
+  /*
    * Overridden to integrate with the shadow allocator support of the {@link RWStore}. Shadow
    * allocators may be used to isolate allocation changes (both allocating slots and releasing
    * slots) across different processes.
@@ -237,7 +237,7 @@ public class RWStrategy extends AbstractRawStore
     delete(addr, null /* IAllocationContext */);
   }
 
-  /**
+  /*
    * Must check whether there are existing transactions which may access this data, and if not free
    * immediately, otherwise defer.
    */
@@ -265,7 +265,7 @@ public class RWStrategy extends AbstractRawStore
     m_store.abortContext(context);
   }
 
-  /**
+  /*
    * Operation is not supported.
    *
    * @throws UnsupportedOperationException always.
@@ -320,7 +320,7 @@ public class RWStrategy extends AbstractRawStore
     return m_store.getFileStorage();
   }
 
-  /**
+  /*
    * Operation is not supported.
    *
    * @throws UnsupportedOperationException always.
@@ -409,7 +409,7 @@ public class RWStrategy extends AbstractRawStore
     return m_store.getStoreFile();
   }
 
-  /**
+  /*
    * Not supported - this is available on the {@link AbstractJournal}.
    *
    * @throws UnsupportedOperationException always
@@ -444,7 +444,7 @@ public class RWStrategy extends AbstractRawStore
     return true;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to return the #of bytes in the file rather than the user bytes. This is because
@@ -483,7 +483,7 @@ public class RWStrategy extends AbstractRawStore
     return m_am.toString(addr);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The state of the provided block is not relevant since it does not hold information on recent
@@ -495,7 +495,7 @@ public class RWStrategy extends AbstractRawStore
     return m_store.requiresCommit();
   }
 
-  /**
+  /*
    * Supports protocol in EmbergraphSailConnection to check for modifications prior to calling
    * rollback().
    *
@@ -521,7 +521,7 @@ public class RWStrategy extends AbstractRawStore
     return m_store.getMaxAllocSize() - 4 /* checksum */;
   }
 
-  /**
+  /*
    * Although the RW Store uses a latched addressing strategy it is not meaningful to make this
    * available in this interface.
    */
@@ -530,8 +530,8 @@ public class RWStrategy extends AbstractRawStore
     return 0;
   }
 
-  //	/**
-  //	 * Used for unit tests, could also be used to access raw statistics.
+  //	/*
+//	 * Used for unit tests, could also be used to access raw statistics.
   //	 *
   //	 * @return the associated RWStore
   //	 */
@@ -629,7 +629,7 @@ public class RWStrategy extends AbstractRawStore
 
     if (sze == 0) throw new IllegalArgumentException(AbstractBufferStrategy.ERR_BAD_RECORD_SIZE);
 
-    /**
+    /*
      * Allocate buffer to include checksum to allow single read but then return ByteBuffer excluding
      * those bytes
      */
@@ -642,7 +642,7 @@ public class RWStrategy extends AbstractRawStore
     return m_store.getData(rwaddr, sze);
   }
 
-  /**
+  /*
    * Called from HAGlue.receiveAndReplicate to ensure the correct file extent prior to any writes.
    * For RW this is essential as the allocation blocks for current committed data could otherwise be
    * overwritten and the store invalidated.
@@ -654,7 +654,7 @@ public class RWStrategy extends AbstractRawStore
     m_store.establishExtent(extent);
   }
 
-  /**
+  /*
    * An assert oriented method that allows a finite number of addresses to be monitored to ensure it
    * is not freed.
    *
@@ -667,8 +667,8 @@ public class RWStrategy extends AbstractRawStore
     return true;
   }
 
-  //	/**
-  //	 * If history is retained this returns the time for which
+  //	/*
+//	 * If history is retained this returns the time for which
   //	 * data was most recently released.  No request can be made for data
   //	 * earlier than this.
   //	 * @return latest data release time
@@ -678,7 +678,7 @@ public class RWStrategy extends AbstractRawStore
     return m_store.getLastReleaseTime();
   }
 
-  /**
+  /*
    * Lifted to provide a direct interface from the Journal so that the CommitRecordIndex can be
    * pruned prior to store commit.
    */
@@ -692,7 +692,7 @@ public class RWStrategy extends AbstractRawStore
     return totalFreed;
   }
 
-  /**
+  /*
    * Return true if the address is marked as committed in the {@link RWStore} in memory bit maps.
    *
    * @param addr The address.
@@ -702,7 +702,7 @@ public class RWStrategy extends AbstractRawStore
     return m_store.isCommitted(decodeAddr(addr));
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the address was in the write cache as of the moment the write
    * cache was inspected.
    *

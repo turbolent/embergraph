@@ -30,8 +30,8 @@ import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.gom.gpo.IGenericSkin;
 import org.embergraph.gom.gpo.ILinkSet;
 
-/**
- * Helper class provides a global (JVM wide) registery for {@link IGenericSkin}s. Generally, when
+/*
+* Helper class provides a global (JVM wide) registery for {@link IGenericSkin}s. Generally, when
  * writing an {@link IGenericSkin} or {@link ILinkSetSkin} that implements some interface, you will
  * include a static initialization block in the implementation class that registers the skin using
  * {@link #registerClass( Class theClass )}.
@@ -51,7 +51,7 @@ public class GenericSkinRegistry {
 
   static Collection m_registeredClass = Collections.synchronizedCollection(new Vector());
 
-  /**
+  /*
    * This static method MUST be used to register any {@linkIGenericSkin}s. Once a skin has been
    * registered, you can use {@link IGPO#asClass( Class theClassOrInterface )} or {@link
    * ILinkSet#linkSetAsClass( Class theClassOrInterface )} to re-skin any {@link IGPO} object or
@@ -111,7 +111,7 @@ public class GenericSkinRegistry {
     }
   }
 
-  /**
+  /*
    * Returns a {@link Class} that has been registered using {@link #registerClass( Class
    * theClassOrInterface )} as a skin.
    *
@@ -176,7 +176,7 @@ public class GenericSkinRegistry {
     return theImplementationClass;
   }
 
-  /**
+  /*
    * Helper method for {@link IGPO#asClass( Class theClassOrInterface )} implementations.
    *
    * <p>
@@ -241,16 +241,14 @@ public class GenericSkinRegistry {
                   + ": theClassOrInterface="
                   + theClassOrInterface
                   + ", initCause="
-                  + t);
-
-      ex.initCause(t);
+                  + t, t);
 
       throw ex;
     }
   }
 
-  //    /**
-  //     * Helper method for {@link ILinkSet#linkSetAsClass( Class
+  //    /*
+//     * Helper method for {@link ILinkSet#linkSetAsClass( Class
   //     * theClassOrInterface )} implementations.<p>
   //     *
   //     * @return A {@link ILinkSetSkin} for <i>ls</i> that is an
@@ -348,7 +346,7 @@ public class GenericSkinRegistry {
 
   public static IGenericSkin mintGenericSkin(Class implClass, IGPO g) throws Exception {
 
-    Constructor c = implClass.getDeclaredConstructor(new Class[] {IGPO.class});
+    Constructor c = implClass.getDeclaredConstructor(IGPO.class);
 
     return (IGenericSkin) c.newInstance(new Object[] {g});
   }

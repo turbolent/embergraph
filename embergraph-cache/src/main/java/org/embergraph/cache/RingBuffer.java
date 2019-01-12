@@ -27,8 +27,8 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
-/**
- * A unsynchronized fixed capacity ring buffer. The buffer does not accept <code>null</code>
+/*
+* A unsynchronized fixed capacity ring buffer. The buffer does not accept <code>null</code>
  * elements. If you want a thread-safe {@link Queue} consider {@link ArrayBlockingQueue} instead.
  *
  * <p>Note: The "head" of the ring buffer is the insertion point, NOT the MRU element which is
@@ -45,7 +45,7 @@ public class RingBuffer<T> implements Queue<T> {
   /** The capacity of the buffer. */
   protected final int capacity;
 
-  /**
+  /*
    * The internal fixed capacity buffer.
    *
    * <p>References are inserted at the {@link #head}, which is then post-incremented using <code>
@@ -73,7 +73,7 @@ public class RingBuffer<T> implements Queue<T> {
   /** The tail (the LRU position and the eviction point). */
   private int tail = 0;
 
-  /**
+  /*
    * The #of elements in the buffer. The buffer is empty when this field is zero. The buffer is full
    * when this field equals the {@link #capacity}.
    *
@@ -81,7 +81,7 @@ public class RingBuffer<T> implements Queue<T> {
    */
   protected int size = 0;
 
-  /**
+  /*
    * Ctor.
    *
    * @param capacity The capacity of the buffer.
@@ -157,7 +157,7 @@ public class RingBuffer<T> implements Queue<T> {
     return true;
   }
 
-  /**
+  /*
    * All attempts to add an element to the buffer invoke this hook before checking the remaining
    * capacity in the buffer.
    *
@@ -193,7 +193,7 @@ public class RingBuffer<T> implements Queue<T> {
     clear(true /* clearRefs */);
   }
 
-  /**
+  /*
    * Clears the buffer (sets the index of the head and the tail to zero and sets the count to zero).
    *
    * @param clearRefs When <code>true</code> the references are explicitly set to <code>null</code>
@@ -274,7 +274,7 @@ public class RingBuffer<T> implements Queue<T> {
     return r;
   }
 
-  /**
+  /*
    * Return the n<i>th</i> element in the buffer. The index positions are counted from the MRU (the
    * insertion point), which has an index of ZERO (0), to the LRU position (the eviction point),
    * which as an index of {@link #size()}-1.
@@ -295,7 +295,7 @@ public class RingBuffer<T> implements Queue<T> {
     return refs[i];
   }
 
-  /**
+  /*
    * Return the reference at the specified index in the backing array.
    *
    * <p>Note: Unlike {@link #get(int)}, this method does not adjust by the index of the <code>tail
@@ -312,7 +312,7 @@ public class RingBuffer<T> implements Queue<T> {
     return refs[i];
   }
 
-  /**
+  /*
    * Remove the element at the specified index in the buffer. The index positions are counted from
    * the MRU (the insertion point), which has an index of ZERO (0), to the LRU position (the
    * eviction point), which as an index of {@link #size()}-1.
@@ -404,7 +404,7 @@ public class RingBuffer<T> implements Queue<T> {
     return ref;
   }
 
-  /**
+  /*
    * Scan the last nscan references for this reference. If found, return immediately.
    *
    * @param nscan The #of positions to scan, starting with the most recently added reference.
@@ -448,7 +448,7 @@ public class RingBuffer<T> implements Queue<T> {
     return false;
   }
 
-  /**
+  /*
    * Return true iff the reference is found in the first N positions scanning backwards from the
    * tail of the queue.
    *
@@ -518,7 +518,7 @@ public class RingBuffer<T> implements Queue<T> {
     return true;
   }
 
-  /**
+  /*
    * Return an iterator over the buffer visiting elements in LRU to MRU order (the order in which
    * those elements would be read by {@link #poll()}). The iterator supports {@link
    * Iterator#remove()}. The iterator is NOT thread-safe.
@@ -528,7 +528,7 @@ public class RingBuffer<T> implements Queue<T> {
     return new MyIterator();
   }
 
-  /**
+  /*
    * Iterator (not thread-safe).
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

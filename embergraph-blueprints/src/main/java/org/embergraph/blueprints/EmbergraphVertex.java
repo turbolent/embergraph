@@ -27,8 +27,8 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.openrdf.model.URI;
 
-/**
- * Vertex implementation that wraps a Vertex URI and points to a {@link EmbergraphGraph} instance.
+/*
+* Vertex implementation that wraps a Vertex URI and points to a {@link EmbergraphGraph} instance.
  *
  * @author mikepersonick
  */
@@ -127,7 +127,7 @@ public class EmbergraphVertex extends EmbergraphElement implements Vertex {
     }
   }
 
-  /**
+  /*
    * Not bothering to provide a SPARQL translation for vertex queries at this time. I suspect that
    * scan and filter works fine when starting from an individual vertex.
    */

@@ -24,8 +24,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.rdf.graph.EdgesEnum;
 import org.openrdf.model.Resource;
 
-/**
- * Utility class for sampling vertices from a graph.
+/*
+* Utility class for sampling vertices from a graph.
  *
  * <p>If we build a table <code>[f,v]</code>, where <code>f</code> is a frequency value and <code>v
  * </code> is a vertex identifier, then we can select according to different biases depending on how
@@ -53,7 +53,7 @@ public class VertexDistribution {
     /** The #of times this {@link Resource} occurs as the source of an out-edge. */
     public int out;
 
-    /**
+    /*
      * @param v The resource.
      * @param in The #of times this {@link Resource} has been observed as the target of an in-edge.
      * @param out The #of times this {@link Resource} has been observed as the source of an
@@ -78,7 +78,7 @@ public class VertexDistribution {
   /** Map from {@link Resource} to {@link VertexSample}. */
   private final Map<Resource, VertexSample> samples = new HashMap<Resource, VertexSample>();
 
-  /**
+  /*
    * Map from an arbitrary (one-up) index (origin ZERO) to the sequence in which the {@link
    * VertexSample} was first observed.
    */
@@ -91,8 +91,8 @@ public class VertexDistribution {
     this.r = r;
   }
 
-  //    /**
-  //     * Add a sample of a vertex having some attribute value.
+  //    /*
+//     * Add a sample of a vertex having some attribute value.
   //     *
   //     * @param v
   //     *            The vertex.
@@ -101,7 +101,7 @@ public class VertexDistribution {
   //
   //    }
 
-  /**
+  /*
    * Add a sample of a vertex having some out-edge.
    *
    * @param v The vertex.
@@ -120,7 +120,7 @@ public class VertexDistribution {
     }
   }
 
-  /**
+  /*
    * Add a sample of a vertex having some in-edge.
    *
    * @param v The vertex.
@@ -139,7 +139,7 @@ public class VertexDistribution {
     }
   }
 
-  /**
+  /*
    * Return the #of samples in the distribution from which a called specified number of samples may
    * then drawn using a random sampling without replacement technique.
    *
@@ -151,7 +151,7 @@ public class VertexDistribution {
     return samples.size();
   }
 
-  /**
+  /*
    * Build a vector over the samples. The indices of the sample vector are correlated with the
    * {@link #indexOf} map.
    *
@@ -244,7 +244,7 @@ public class VertexDistribution {
     return a;
   }
 
-  /**
+  /*
    * Return a sample (without duplicates) of vertices from the graph choosen randomly according to
    * their frequency within the underlying distribution.
    *
@@ -295,7 +295,7 @@ public class VertexDistribution {
     return selected.toArray(new Resource[selected.size()]);
   }
 
-  /**
+  /*
    * Return a sample (without duplicates) of vertices from the graph choosen at random without
    * regard to their frequency distribution.
    *
@@ -354,7 +354,7 @@ public class VertexDistribution {
 
   }
 
-  /**
+  /*
    * Return all (without duplicates) vertices from the graph
    *
    * @return The distinct samples that were found.

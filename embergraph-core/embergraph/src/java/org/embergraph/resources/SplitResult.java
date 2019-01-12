@@ -6,8 +6,8 @@ import org.embergraph.btree.IndexSegment;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.service.Split;
 
-/**
- * The result of a {@link SplitIndexPartitionTask} including enough metadata to identify the index
+/*
+* The result of a {@link SplitIndexPartitionTask} including enough metadata to identify the index
  * partitions to be created and the index partition to be deleted.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -15,7 +15,7 @@ import org.embergraph.service.Split;
  */
 public class SplitResult extends AbstractResult {
 
-  /**
+  /*
    * The array of {@link Split}s that describes the new key range for each new index partition
    * created by splitting the old index partition.
    */
@@ -24,7 +24,7 @@ public class SplitResult extends AbstractResult {
   /** An array of the {@link BuildResult}s for each output split. */
   public final BuildResult[] buildResults;
 
-  /**
+  /*
    * @param name The name under which the processed index partition was registered (this is
    *     typically different from the name of the scale-out index).
    * @param indexMetadata The index metadata object for the processed index as of the timestamp of

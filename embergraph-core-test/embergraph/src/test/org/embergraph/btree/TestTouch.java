@@ -27,8 +27,8 @@ import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for {@link BTree#touch(AbstractNode)}. None of these tests cause an evicted node to be
+/*
+* Test suite for {@link BTree#touch(AbstractNode)}. None of these tests cause an evicted node to be
  * made persistent, but they do verify the correct tracking of the {@link
  * AbstractNode#referenceCount} and the contract for touching a node.
  *
@@ -45,7 +45,7 @@ public class TestTouch extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test verifies that the reference counter is incremented when a node is appended to the hard
    * reference queue (the scan of the tail of the queue is disabled for this test). Finally, verify
    * that we can force the node to be evicted from the queue but that its non-zero reference counter
@@ -148,7 +148,7 @@ public class TestTouch extends AbstractBTreeTestCase {
     assertFalse(a.isPersistent());
   }
 
-  /**
+  /*
    * Test verifies that the reference counter is unchanged across {@link BTree#touch(AbstractNode)}
    * if a node is already on the hard reference queue.
    */
@@ -235,7 +235,7 @@ public class TestTouch extends AbstractBTreeTestCase {
     assertFalse(a.isPersistent());
   }
 
-  /**
+  /*
    * Test verifies that touching a node when the queue is full and the node is the next reference to
    * be evicted from the queue does NOT cause the node to be made persistent. The test is setup
    * using a queue of capacity one (1) and NO scanning. The root leaf is already on the queue when

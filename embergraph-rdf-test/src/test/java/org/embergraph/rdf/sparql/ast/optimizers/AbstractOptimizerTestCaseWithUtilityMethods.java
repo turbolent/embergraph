@@ -70,8 +70,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.BDS;
 import org.embergraph.service.fts.FTS;
 
-/**
- * Test case helper class in the style of {@link Helper} exposing additional methods for
+/*
+* Test case helper class in the style of {@link Helper} exposing additional methods for
  * constructing ASTs with different properties.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -119,7 +119,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return stmtPatternWithVar(varName, true);
   }
 
-  /**
+  /*
    * Returns a fresh statement pattern with the specified variable bound that is either optional or
    * not, as specified by the second parameter.
    */
@@ -137,7 +137,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return spn;
   }
 
-  /**
+  /*
    * For each variable, a fresh statement pattern with the variable is created and the list of
    * statement patterns is returned.
    */
@@ -151,7 +151,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return statementPatterns;
   }
 
-  /**
+  /*
    * Returns a fresh filter node with the specified variable in their {@link ValueExpressionNode}.
    * The filter is not of type EXISTS or NOT EXISTS.
    */
@@ -168,7 +168,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return (FilterNode) resolveVEs(fn);
   }
 
-  /**
+  /*
    * Returns a fresh filter node with the specified variables in their {@link ValueExpressionNode}.
    * The filter is not of type EXISTS or NOT EXISTS.
    */
@@ -268,7 +268,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return jgn;
   }
 
-  /**
+  /*
    * Returns a {@link UnionNode} binding varNames in their body, where left variable is the (one and
    * only) in the left pattern, and rights are the variables in the right union pattern.
    */
@@ -318,7 +318,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return an;
   }
 
-  /**
+  /*
    * Returns an {@link AssignmentNode} binding the vars to themselves (useful for projection nodes).
    */
   AssignmentNode[] assignmentWithVars(final String... varNames) {
@@ -369,7 +369,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return subquery;
   }
 
-  /**
+  /*
    * Returns an {@link ArbitraryLengthPathNode} binding varNames in their body, where the first
    * parameter specified the {@link ArbitraryLengthPathNode}s internal variable.
    */
@@ -386,7 +386,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return alpNode;
   }
 
-  /**
+  /*
    * Returns a SPARQL 1.1 {@link ServiceNode} using the specified vars in its body, with a constant
    * endpoint.
    */
@@ -412,7 +412,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return serviceNode;
   }
 
-  /**
+  /*
    * Returns a SPARQL 1.1 {@link ServiceNode} using the specified vars in its body, with an endpoint
    * specified through endpointVar.
    */
@@ -551,8 +551,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
 
                     if (obj instanceof IValueExpressionNodeContainer) return true;
                     if (obj instanceof HavingNode) return true;
-                    if (obj instanceof StatementPatternNode) return true;
-                    return false;
+                    return obj instanceof StatementPatternNode;
                   }
                 });
 
@@ -595,7 +594,7 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
     return groupNode;
   }
 
-  /**
+  /*
    * Creates a {@link StaticAnalysis} object for the nodes by setting up a SELECT query with a
    * single {@link JoinGroupNode} comprising the nodes in its body to retrieve the {@link
    * StaticAnalysis} object.

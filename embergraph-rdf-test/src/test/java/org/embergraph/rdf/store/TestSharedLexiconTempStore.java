@@ -27,8 +27,8 @@ import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 
-/**
- * Test suite for {@link TempTripleStore}s sharing the same {@link LexiconRelation} as the primary
+/*
+* Test suite for {@link TempTripleStore}s sharing the same {@link LexiconRelation} as the primary
  * {@link AbstractTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

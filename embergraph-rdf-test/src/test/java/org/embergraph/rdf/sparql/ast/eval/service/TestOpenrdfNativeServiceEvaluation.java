@@ -30,8 +30,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
-/**
- * Data driven test suite for SPARQL 1.1 Federated Query against an openrdf aware SERVICE
+/*
+* Data driven test suite for SPARQL 1.1 Federated Query against an openrdf aware SERVICE
  * implementation running in the same JVM.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -47,7 +47,7 @@ public class TestOpenrdfNativeServiceEvaluation extends AbstractDataDrivenSPARQL
     super(name);
   }
 
-  /**
+  /*
    * A simple SERVICE query. The service adds in a single solution which restricts the set of
    * solutions for the overall query.
    *
@@ -96,7 +96,7 @@ public class TestOpenrdfNativeServiceEvaluation extends AbstractDataDrivenSPARQL
     }
   }
 
-  /**
+  /*
    * A simple SERVICE query. The service provides three solutions, two of which join with the
    * remainder of the query.
    *

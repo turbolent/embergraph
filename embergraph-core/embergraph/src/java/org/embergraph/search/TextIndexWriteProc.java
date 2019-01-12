@@ -35,8 +35,8 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 
-/**
- * Writes on the text index.
+/*
+* Writes on the text index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -51,14 +51,14 @@ public class TextIndexWriteProc extends AbstractKeyArrayIndexProcedure<Long>
   public static class IndexWriteProcConstructor
       extends AbstractKeyArrayIndexProcedureConstructor<TextIndexWriteProc> {
 
-    /**
+    /*
      * Variant which always overwrites any existing entry. Note that you must still delete all
      * entries for a document before re-indexing that document.
      */
     public static TextIndexWriteProc.IndexWriteProcConstructor OVERWRITE =
         new IndexWriteProcConstructor(true);
 
-    /**
+    /*
      * Variant that will not overwrite an existing entry for a {term,doc,field}. This is useful when
      * you have a corpus which (a) only grows in size; and (b) the content of each document is
      * unchanging.

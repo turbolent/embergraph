@@ -25,8 +25,8 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.counters.Instrument;
 
-/**
- * A helper class that collects statistics on an {@link AbstractBTree}.
+/*
+* A helper class that collects statistics on an {@link AbstractBTree}.
  *
  * <p>Note: This class DOES NOT have a hard reference to the {@link AbstractBTree}. Holding an
  * instance of this class WILL NOT force the {@link AbstractBTree} to remain strongly reachable.
@@ -59,7 +59,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
     return this == o;
   }
 
-  /**
+  /*
    * Copy constructor.
    *
    * @param c
@@ -79,8 +79,8 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
     return tmp;
   }
 
-  //    /**
-  //     * Returns a "mark". The mark is a copy of the counters taken at the moment
+  //    /*
+//     * Returns a "mark". The mark is a copy of the counters taken at the moment
   //     * requested. You can compute the delta between the last mark or any mark
   //     * using {@link #subtract(BTreeCounters)}.
   //     */
@@ -94,7 +94,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
   //
   //    }
 
-  /**
+  /*
    * Adds the values from another {@link BTreeCounters} object to this one.
    *
    * @param o
@@ -157,7 +157,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
 
   }
 
-  /**
+  /*
    * Subtracts the given counters from the current counters, returning a new counter object
    * containing their difference.
    *
@@ -228,7 +228,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
     return t;
   }
 
-  /**
+  /*
    * #of keys looked up in the tree by contains/lookup(key) (does not count those rejected by the
    * bloom filter before they are tested against the B+Tree).
    */
@@ -286,13 +286,13 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
    * deciding whether or not to split an index partition.
    */
 
-  /**
+  /*
    * #of non-deleted tuples that were inserted into the B+Tree (rather than updating the value for
    * an existing tuple).
    */
   public long ntupleInsertValue = 0;
 
-  /**
+  /*
    * #of deleted tuples that were inserted into the B+Tree (rather than deleting the value for an
    * existing tuple). Note that delete markers MAY be written into a B+Tree when there is no tuple
    * for that key in the BTree. Those cases arise when the B+Tree is used to isolate a transaction's
@@ -300,19 +300,19 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
    */
   public long ntupleInsertDelete = 0;
 
-  /**
+  /*
    * #of pre-existing tuples whose value was updated to a non-deleted value (includes update of a
    * deleted tuple to a non-deleted tuple by overwrite of the tuple).
    */
   public long ntupleUpdateValue = 0;
 
-  /**
+  /*
    * #of pre-existing un-deleted tuples whose delete marker was set (we don't count re-deletes of an
    * already deleted tuple).
    */
   public long ntupleUpdateDelete = 0;
 
-  /**
+  /*
    * #of pre-existing tuples that were removed from the B+Tree (only non-zero when the B+Tree does
    * not support delete markers).
    */
@@ -325,12 +325,12 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
    */
 
   // IO reads (concurrent)
-  /**
+  /*
    * #of tests of the BTree cache (getChild()). See BLZG-1657. Should correlate to #of getChild()
    * calls.
    */
   public final CAT cacheTests = new CAT();
-  /**
+  /*
    * #of misses when testing the BTree cache (getChild()). See BLZG-1657. Should correlate to
    * nodesRead+leavesRead.
    */
@@ -340,7 +340,6 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
   /** #of leaf read operations. */
   public final CAT leavesRead = new CAT();
   /** Total bytes read for nodes and leaves (but not raw records). */
-  ;
 
   public final CAT bytesRead = new CAT();
   /** Read time for nodes and leaves (but not raw records). */
@@ -367,21 +366,21 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
    * performance regression for both load and query.  See BLZG-1693.
    */
   //    // touch()
-  //	/**
-  //	 * Nanoseconds inside of doSyncTouch().
+  //	/*
+//	 * Nanoseconds inside of doSyncTouch().
   //	 *
   //     * @see BLZG-1664
   //	 */
   //    public final CAT syncTouchNanos = new CAT();
-  //    /**
-  //     * Nanoseconds inside of doTouch() (this is also invoked from within
+  //    /*
+//     * Nanoseconds inside of doTouch() (this is also invoked from within
   //     * doSyncTouch()).
   //     *
   //     * @see BLZG-1664
   //     */
   //    public final CAT touchNanos = new CAT();
-  //    /**
-  //     * doTouch() call counter.
+  //    /*
+//     * doTouch() call counter.
   //     *
   //     * @see BLZG-1664
   //     */
@@ -393,31 +392,31 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
    * Note: The introduction of these performance counters might have caused
    * some performance regression for both load and query.  See BLZG-1693.
    */
-  //    /**
-  //     * The #of node or leaf references evicted from the write retention queue.
+  //    /*
+//     * The #of node or leaf references evicted from the write retention queue.
   //     */
   //    public final AtomicLong queueEvict = new AtomicLong();
-  //    /**
-  //     * The #of node or leave references evicted from the write retention queue
+  //    /*
+//     * The #of node or leave references evicted from the write retention queue
   //     * that are no longer referenced on that queue. If the reference is dirty,
   //     * it will be serialized and written on the backing store.
   //     */
   //    public final AtomicLong queueEvictNoRef = new AtomicLong();
-  //    /**
-  //     * The #of node or leave references evicted from the write retention queue
+  //    /*
+//     * The #of node or leave references evicted from the write retention queue
   //     * that are no longer referenced on that queue and are dirty and thus will
   //     * be immediately serialized and written on the backing store.
   //     */
   //    public final AtomicLong queueEvictDirty = new AtomicLong();
 
-  /**
+  /*
    * The #of bytes in the unisolated view of the index which are being used to store raw records.
    *
    * @todo not correctly tracked in scale-out (overflow handling).
    */
   public final AtomicLong bytesOnStore_rawRecords = new AtomicLong();
 
-  /**
+  /*
    * The #of bytes in node and leaf) records on the backing store for the unisolated view of the
    * index. This value grows and shrinks as nodes (leaves) are added to and removed from the index.
    * The actual space occupied by the index on the backing store depends on whether and when
@@ -428,7 +427,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
    */
   public final AtomicLong bytesOnStore_nodesAndLeaves = new AtomicLong();
 
-  /**
+  /*
    * Return a score whose increasing value is correlated with the amount of read/write activity on
    * an index as reflected in these {@link BTreeCounters}.
    *
@@ -459,7 +458,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
     return (serializeNanos.get() + deserializeNanos.get()) + (writeNanos.get() + readNanos.get());
   }
 
-  /**
+  /*
    * Return a score whose increasing value is correlated with the amount of read activity on an
    * index as reflected in these {@link BTreeCounters}. The score is {@link #deserializeNanos} +
    * {@link #readNanos}.
@@ -471,7 +470,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
     return deserializeNanos.get() + readNanos.get();
   }
 
-  /**
+  /*
    * Return a score whose increasing value is correlated with the amount of write activity on an
    * index as reflected in these {@link BTreeCounters}. The score is {@link #serializeNanos} plus
    * {@link #writeNanos}.
@@ -483,7 +482,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
     return serializeNanos.get() + writeNanos.get();
   }
 
-  /**
+  /*
    * Normalizes a raw score in the context of totals for some data service.
    *
    * @param rawScore The raw score.
@@ -530,7 +529,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
     return bytesReleased.get();
   }
 
-  /**
+  /*
    * Return a {@link CounterSet} reporting on the various counters tracked in the instance fields of
    * this class.
    */
@@ -803,7 +802,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
        * Cache.
        */
 
-      /**
+      /*
        * #of tests of the BTree cache (getChild()). See BLZG-1657. Should correlate to #of
        * getChild() calls.
        */
@@ -816,7 +815,7 @@ public final class BTreeCounters implements Cloneable, ICounterSetAccess {
             }
           });
 
-      /**
+      /*
        * #of misses when testing the BTree cache (getChild()). See BLZG-1657. Should correlate to
        * nodesRead+leavesRead.
        */

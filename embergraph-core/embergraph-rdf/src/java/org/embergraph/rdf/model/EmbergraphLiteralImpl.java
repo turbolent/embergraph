@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -46,8 +46,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.openrdf.model.Literal;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
-/**
- * A literal. Use {@link EmbergraphValueFactory} to create instances of this class.
+/*
+* A literal. Use {@link EmbergraphValueFactory} to create instances of this class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -177,12 +177,9 @@ public class EmbergraphLiteralImpl extends EmbergraphValueImpl implements Emberg
 
       return datatype.equals(o.getDatatype());
 
-    } else if (o.getDatatype() != null) {
+    } else
+      return o.getDatatype() == null;
 
-      return false;
-    }
-
-    return true;
   }
 
   /*

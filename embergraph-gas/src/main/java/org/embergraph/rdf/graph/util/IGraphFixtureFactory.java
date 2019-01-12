@@ -18,7 +18,7 @@ package org.embergraph.rdf.graph.util;
 /** Factory for {@link IGraphFixture}. */
 public interface IGraphFixtureFactory {
 
-  /**
+  /*
    * Factory method to create a new {@link IGraphFixture}.
    *
    * @throws Exception

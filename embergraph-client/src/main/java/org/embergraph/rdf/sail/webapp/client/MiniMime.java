@@ -26,8 +26,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.embergraph.util.NV;
 
-/**
- * Extract and return the quality score for the mime type (defaults to <code>1.0</code>).
+/*
+* Extract and return the quality score for the mime type (defaults to <code>1.0</code>).
  *
  * <p>Note: <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1">the grammar</a>
  * permits whitespace fairly generally, but the parser in this class does not cope with this
@@ -46,14 +46,14 @@ public class MiniMime {
 
   private final String mimeType;
 
-  /**
+  /*
    * The parsed name=value MIME Type parameters. The tail of the array MAY have one or more null
    * elements. You can just break out of the loop when you hit the first <code>null</code> MIME type
    * parameter name.
    */
   private final List<NV> params = new LinkedList<NV>();
 
-  /**
+  /*
    * @param s The value to be parsed.
    * @throws NullPointerException if the argument is <code>null</code>
    */
@@ -82,7 +82,7 @@ public class MiniMime {
     return mimeType;
   }
 
-  /**
+  /*
    * Return the first value for the named MIME type parameter.
    *
    * @param name The parameter name (case sensitive).
@@ -99,7 +99,7 @@ public class MiniMime {
     return def;
   }
 
-  /**
+  /*
    * Return the value of the <code>charset</code>.
    *
    * <p>Note: Per Section 3.7.1 Canonicalization and Text Defaults of the HTTP 1.1 specification:

@@ -33,14 +33,14 @@ import org.embergraph.journal.WORMStrategy;
 public interface IHALogReader {
 
   /** The filename extension used for the HALog files. */
-  public static final String HA_LOG_EXT = ".ha-log";
+  String HA_LOG_EXT = ".ha-log";
 
-  /**
+  /*
    * A {@link FileFilter} that visits all files ending with the {@link #HA_LOG_EXT} and the names of
    * all direct child directories. This {@link FileFilter} may be used to establish recursive scans
    * of the HALog directory.
    */
-  public static final FileFilter HALOG_FILTER =
+  FileFilter HALOG_FILTER =
       new FileFilter() {
 
         @Override
@@ -55,7 +55,7 @@ public interface IHALogReader {
         }
       };
 
-  /**
+  /*
    * Closes the reader iff it is open.
    *
    * <p>Note: Closing a reader does not have a side-effect on any open reader or writer for the same
@@ -65,7 +65,7 @@ public interface IHALogReader {
    */
   void close() throws IOException;
 
-  /**
+  /*
    * Return <code>true</code> if the root blocks in the log file have the same commit counter. Such
    * log files are logically empty regardless of their length.
    *
@@ -77,19 +77,19 @@ public interface IHALogReader {
   /** Return <code>true</code> iff the reader is open. */
   boolean isOpen();
 
-  /**
+  /*
    * The {@link IRootBlockView} for the committed state BEFORE the write set contained in the HA log
    * file.
    */
   IRootBlockView getOpeningRootBlock() throws IOException;
 
-  /**
+  /*
    * The {@link IRootBlockView} for the committed state AFTER the write set contained in the HA log
    * file has been applied.
    */
   IRootBlockView getClosingRootBlock() throws IOException;
 
-  /**
+  /*
    * Checks whether we have reached the end of the file (blocking).
    *
    * <p>Note: This method will block if this is the live HALog. This allows a process to block until
@@ -107,7 +107,7 @@ public interface IHALogReader {
    */
   boolean hasMoreBuffers() throws IOException;
 
-  /**
+  /*
    * Attempts to read the next {@link IHAWriteMessage} and then the expected buffer, that is read
    * into the client buffer. The {@link IHAWriteMessage} is returned to the caller.
    *
@@ -123,13 +123,13 @@ public interface IHALogReader {
    */
   IHAWriteMessage processNextBuffer(final ByteBuffer clientBuffer) throws IOException;
 
-  /**
+  /*
    * Compute the digest. If the {@link IHALogReader} is backed by the live HALog, then only the
    * digest of the then current extent will be computed.
    */
   void computeDigest(MessageDigest digest) throws DigestException, IOException;
 
-  /**
+  /*
    * Return <code>true</code> iff this is was the live HALog at the moment when it was opened (if
    * true, then this flag will remain <code>true</code> even if the writer moves onto another HALog
    * file).

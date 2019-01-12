@@ -29,8 +29,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.math.BigInteger;
 
-/**
- * Default implementation.
+/*
+* Default implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class Slice implements ISlice, Externalizable {
   /** A slice corresponding to all results (offset is zero, limit is {@link Long#MAX_VALUE}). */
   public static final transient ISlice ALL = new Slice(0, Long.MAX_VALUE);
 
-  /**
+  /*
    * @param offset
    * @param limit
    * @throws IllegalArgumentException if offset is negative.

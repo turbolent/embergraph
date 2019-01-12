@@ -29,8 +29,8 @@ import java.util.Map;
 import junit.framework.TestCase2;
 import org.embergraph.service.TestEventReceiver.MyEvent;
 
-/**
- * Unit tests for parsing {@link Event}s.
+/*
+* Unit tests for parsing {@link Event}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

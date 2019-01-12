@@ -15,8 +15,8 @@ import org.embergraph.rdf.spo.ISPO;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 
-/**
- * Add terms to the reverse index, which is the index that we use to lookup the RDF value by its
+/*
+* Add terms to the reverse index, which is the index that we use to lookup the RDF value by its
  * term identifier so that we can externalize {@link ISPO}s as RDF/XML or the like.
  *
  * <p>Note: Every term asserted against the forward mapping [terms] MUST be asserted against the
@@ -36,7 +36,7 @@ public class ReverseIndexWriterTask implements Callable<Long> {
 
   private final boolean storeBlankNodes;
 
-  /**
+  /*
    * @param idTermIndex The index on which to write the data.
    * @param valueFactory This determines how the {@link Value} objects are serialized on the index.
    * @param a The terms (in sorted order by their term identifiers).

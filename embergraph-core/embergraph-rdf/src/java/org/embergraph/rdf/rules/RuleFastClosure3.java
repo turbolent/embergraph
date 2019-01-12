@@ -38,7 +38,7 @@ public class RuleFastClosure3 extends AbstractRuleFastClosure_3_5_6_7_9 {
   /** */
   private static final long serialVersionUID = 8276555097415122677L;
 
-  /**
+  /*
    * @param vocab
    * @param P
    */
@@ -53,7 +53,7 @@ public class RuleFastClosure3 extends AbstractRuleFastClosure_3_5_6_7_9 {
         new FastClosure_3_RuleTaskFactory(database, focusStore, vocab));
   }
 
-  /**
+  /*
    * Custom rule executor factory.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

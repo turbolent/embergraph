@@ -14,7 +14,7 @@ abstract class Buffer extends cern.colt.PersistentObject {
   protected int level;
   protected int k;
   protected boolean isAllocated;
-  /**
+  /*
    * This method was created in VisualAge.
    *
    * @param k int

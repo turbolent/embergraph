@@ -28,8 +28,8 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.geospatial.GeoSpatialSearchException;
 
-/**
- * Test case asserting that geospatial SERVICE query fails with proper exception if geospatial
+/*
+* Test case asserting that geospatial SERVICE query fails with proper exception if geospatial
  * submodue is turned off.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -45,7 +45,7 @@ public class TestGeoSpatialQueryIfGeospatialDisabled extends AbstractDataDrivenS
     super(name);
   }
 
-  /**
+  /*
    * Submit a query and make sure it fails with proper exception if geospatial SERVCIE is not
    * enabled.
    */

@@ -36,8 +36,8 @@ import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.IDataService;
 
-/**
- * A client-side view of a scale-out index as of some <i>timestamp</i>.
+/*
+* A client-side view of a scale-out index as of some <i>timestamp</i>.
  *
  * <p>This view automatically handles the split, join, or move of index partitions within the
  * federation. The {@link IDataService} throws back a (sometimes wrapped) {@link
@@ -60,7 +60,7 @@ import org.embergraph.service.IDataService;
  */
 public class ClientIndexViewRefactor extends AbstractScaleOutClientIndexView2 {
 
-  /**
+  /*
    * Create a view on a scale-out index.
    *
    * @param fed The federation containing the index.
@@ -81,7 +81,7 @@ public class ClientIndexViewRefactor extends AbstractScaleOutClientIndexView2 {
     super(fed, name, timestamp, metadataIndex);
   }
 
-  /**
+  /*
    * Runs a set of tasks.
    *
    * <p>Note: If {@link #getRecursionDepth()} evaluates to a value larger than zero then the task(s)
@@ -137,7 +137,7 @@ public class ClientIndexViewRefactor extends AbstractScaleOutClientIndexView2 {
     }
   }
 
-  /**
+  /*
    * Maps a set of {@link DataServiceProcedureTask} tasks across the index partitions in strict
    * sequence. The tasks are run on the {@link #getThreadPool()} so that sequential tasks never
    * increase the total burden placed by the client above the size of that thread pool.
@@ -170,7 +170,7 @@ public class ClientIndexViewRefactor extends AbstractScaleOutClientIndexView2 {
     }
   }
 
-  /**
+  /*
    * Maps a set of {@link DataServiceProcedureTask} tasks across the index partitions in parallel.
    *
    * @param tasks The tasks.
@@ -251,7 +251,7 @@ public class ClientIndexViewRefactor extends AbstractScaleOutClientIndexView2 {
               + (System.currentTimeMillis() - begin));
   }
 
-  /**
+  /*
    * Maps a set of {@link DataServiceProcedureTask} tasks across the index partitions in strict
    * sequence. The tasks are run on the {@link #getThreadPool()} so that sequential tasks never
    * increase the total burden placed by the client above the size of that thread pool.
@@ -293,7 +293,7 @@ public class ClientIndexViewRefactor extends AbstractScaleOutClientIndexView2 {
     }
   }
 
-  /**
+  /*
    * Executes the tasks in the caller's thread.
    *
    * @param tasks The tasks.

@@ -24,8 +24,8 @@ package org.embergraph.btree.isolation;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
-/**
- * This test case demonstrates a state-based validation technique described in
+/*
+* This test case demonstrates a state-based validation technique described in
  * http://www.cs.brown.edu/~mph/Herlihy90a/p96-herlihy.pdf for a "bank account" data type.
  *
  * @todo There are several things that are different about this approach from my preconceptions.<br>
@@ -56,7 +56,7 @@ public class TestAccount extends TestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * An implementation of a bank account data type used to test state-based validation. The basic
    * data type just carries the account balance. An instance of that data type may be wrapped up in
    * transactional state (low, high, and change). A transactional instance knows how to validate
@@ -72,7 +72,7 @@ public class TestAccount extends TestCase {
     long bal = 0;
   }
 
-  /**
+  /*
    * A transactional view of an {@link Account}. Each transaction has its own transaction local
    * state (low, high, and change). All operations within a transaction are applied to the {@link
    * TxAccount}. If the transaction validates and commits, then the net <i>change</i> in the balance
@@ -101,7 +101,7 @@ public class TestAccount extends TestCase {
     /** The transaction's net change to the balance (initially zero). */
     long change = 0;
 
-    /**
+    /*
      * Credit the account.
      *
      * @param cents The amount.
@@ -111,7 +111,7 @@ public class TestAccount extends TestCase {
       change = change + cents;
     }
 
-    /**
+    /*
      * Debit the account.
      *
      * @param cents The amount.
@@ -127,8 +127,8 @@ public class TestAccount extends TestCase {
 
       } else {
 
-        /*
-         * overdraft.
+      /*
+       * overdraft.
          */
 
         high = Math.min(high, cents - change);
@@ -142,7 +142,7 @@ public class TestAccount extends TestCase {
       return "bal=" + account.bal + ", low=" + low + ", high=" + high + ", change=" + change;
     }
 
-    /**
+    /*
      * Validate the transaction against the current account balance.
      *
      * <p>Note: Validation is currently invoked from within the {@link #commit()}, which handles
@@ -152,17 +152,12 @@ public class TestAccount extends TestCase {
 
       if (log.isInfoEnabled()) log.info("validate: " + toString());
 
-      if (low <= account.bal && account.bal < high) {
+      // valid.
+      return low <= account.bal && account.bal < high;
 
-        // valid.
-
-        return true;
-      }
-
-      return false;
     }
 
-    /**
+    /*
      * Validate against the current account balance and commit the change to the account.
      *
      * <p>Note: This validate + commit operation needs to be atomic. That is achieved here by
@@ -187,7 +182,7 @@ public class TestAccount extends TestCase {
     }
   }
 
-  /**
+  /*
    * Runs a schedule and verifies the intermediate and stable states for an {@link Account}.
    *
    * <p>The schedule is from page 101 of http://www.cs.brown.edu/~mph/Herlihy90a/p96-herlihy.pdf.

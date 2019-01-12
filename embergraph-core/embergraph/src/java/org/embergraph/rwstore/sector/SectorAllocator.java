@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.embergraph.rwstore.IWriteCacheManager;
 
-/**
- * The SectorAllocator is designed as an alternative the the standard RWStore FixedAllocators.
+/*
+* The SectorAllocator is designed as an alternative the the standard RWStore FixedAllocators.
  *
  * <p>The idea of the SectorAllocator is to efficiently contain within a single region as dense a
  * usage as possible. Since a SectorAllocator is able to allocate a full range of slot sizes, it
@@ -125,7 +125,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
     return tag;
   }
 
-  /**
+  /*
    * Must find tag type that size fits in (or BLOB) and then find block of type into which an
    * allocation can be made.
    */
@@ -244,7 +244,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
     return false;
   }
 
-  /**
+  /*
    * @param bit
    * @return
    */
@@ -288,7 +288,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
     return false;
   }
 
-  /**
+  /*
    * @param bit
    * @return the block size
    */
@@ -307,7 +307,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
 
     return 0;
   }
-  /**
+  /*
    * Uses the m_addresses block offset cache to efficiently determine the corresponding resource
    * offset.
    *
@@ -326,8 +326,8 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
     return offset;
   }
 
-  //	/**
-  //	 * A previous version of bit2Offset that calculated the offset dynamically
+  //	/*
+//	 * A previous version of bit2Offset that calculated the offset dynamically
   //	 * @param bit
   //	 * @return the offset in the sector
   //	 */
@@ -350,7 +350,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
   //
   //		return 0;
   //	}
-  /**
+  /*
    * Since we know that all allocations are 32 bits each, there is no need to scan through the
    * array.
    *
@@ -383,7 +383,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
     return null;
   }
 
-  /**
+  /*
    * @param threshold the minimum number of bits free per 32 bit block
    * @return whether there are sufficient free for all block sizes
    */
@@ -394,7 +394,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
     return true;
   }
 
-  /**
+  /*
    * Checks
    *
    * @return if there is a positive free count for all tags
@@ -531,7 +531,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
     return -1;
   }
 
-  /**
+  /*
    * As well as setting the address, this is the point when the allocator can pre-allocate the first
    * set of tags.
    *
@@ -585,7 +585,7 @@ public class SectorAllocator implements Comparable<SectorAllocator> {
 
   public int compareTo(final SectorAllocator other) {
 
-    final int oindex = ((SectorAllocator) other).m_index;
+    final int oindex = other.m_index;
 
     return m_index < oindex ? -1 : (m_index > oindex ? 1 : 0);
   }

@@ -96,7 +96,7 @@ public class ASTUnionFiltersOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryNode, bindingSets);
   }
 
-  /**
+  /*
    * Look for a join group that has only one union and some filters. Lift the filters into all
    * children of the union and remove the filters from the group.
    */

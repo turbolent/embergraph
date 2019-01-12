@@ -8,17 +8,17 @@ that both that copyright notice and this permission notice appear in supporting 
 CERN makes no representations about the suitability of this software for any purpose.
 It is provided "as is" without expressed or implied warranty.
 */
-/**
- * Interface that represents a function object: a function that takes 9 arguments and returns a
+/*
+* Interface that represents a function object: a function that takes 9 arguments and returns a
  * single value.
  */
 public interface Double9Function {
-  /**
+  /*
    * Applies a function to nine arguments.
    *
    * @return the result of the function.
    */
-  public abstract double apply(
+  double apply(
       double a00,
       double a01,
       double a02,

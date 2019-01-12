@@ -62,7 +62,7 @@ public class GangliaSender {
     }
   }
 
-  /**
+  /*
    * Send an XDR formatted message to the metric server(s).
    *
    * @param xdr The XDR formatted message.

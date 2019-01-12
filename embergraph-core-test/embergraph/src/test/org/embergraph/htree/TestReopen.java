@@ -28,8 +28,8 @@ import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.util.PseudoRandom;
 
-/**
- * Unit tests for the close/checkpoint/reopen protocol designed to manage the resource burden of
+/*
+* Unit tests for the close/checkpoint/reopen protocol designed to manage the resource burden of
  * indices without invalidating the index objects (indices opens can be reopened as long as their
  * backing store remains available).
  *
@@ -46,7 +46,7 @@ public class TestReopen extends AbstractHTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test close on a new tree - should force the root to the store since a new root is dirty (if
    * empty). reopen should then reload the empty root and on life goes.
    */
@@ -151,7 +151,7 @@ public class TestReopen extends AbstractHTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Stress test comparison with ground truth htree when {@link HTree#close()} is randomly invoked
    * during mutation operations.
    */
@@ -369,7 +369,7 @@ public class TestReopen extends AbstractHTreeTestCase {
           psr2.nextBytes(key, i);
           byte[] r1 = htree.remove(key);
           byte[] r2 = groundTruth.remove(key);
-          if (r1 == null && r2 != null || r1 != null && r2 == null)
+          if (r1 == null ? r2 != null : r2 == null)
             fail("Inconsistency on remove!");
           if (r1 != null) entries--;
         } else {

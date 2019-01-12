@@ -30,8 +30,8 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 
-/**
- * A bridge between byte {@linkplain ByteBuffer buffers} and {@linkplain InputStream input streams}.
+/*
+* A bridge between byte {@linkplain ByteBuffer buffers} and {@linkplain InputStream input streams}.
  *
  * <p>The main usefulness of this class is that of making it possible creating input streams that
  * are really based on a {@link MappedByteBuffer}.
@@ -65,7 +65,7 @@ public class ByteBufferInputStream extends MeasurableInputStream implements Repo
   /** The overall size of this input steam. */
   private long size;
 
-  /**
+  /*
    * Creates a new byte-buffer input stream from a single {@link ByteBuffer}.
    *
    * @param byteBuffer the underlying byte buffer.
@@ -74,7 +74,7 @@ public class ByteBufferInputStream extends MeasurableInputStream implements Repo
     this(new ByteBuffer[] {byteBuffer});
   }
 
-  /**
+  /*
    * Creates a new byte-buffer input stream.
    *
    * @param byteBuffer the underlying byte buffers.

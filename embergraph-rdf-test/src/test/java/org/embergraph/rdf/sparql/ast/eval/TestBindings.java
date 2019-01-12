@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast.eval;
 import java.util.Properties;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite for SPARQL 1.1 BIND & VALUES clause.
+/*
+* Data driven test suite for SPARQL 1.1 BIND & VALUES clause.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a> *
@@ -41,7 +41,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * TCK test for the BINDINGS clause.
    *
    * <pre>
@@ -81,7 +81,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * TCK test for the BINDINGS clause.
    *
    * <pre>
@@ -121,7 +121,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This is a variant of Federated Query <code>service04</code> where the remote end point is
    * treated as a named graph. This makes it easier to examine the JOIN evaluation logic, which
    * should be the same regardless of whether or not we use a SERVICE call.
@@ -173,7 +173,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("sparql11-bindings-04").runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -197,7 +197,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -222,7 +222,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -247,7 +247,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -273,7 +273,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -299,7 +299,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <p>SELECT ?s WHERE { BIND(1 AS ?s) OPTIONAL { OPTIONAL { ?s ?p ?o } } }
@@ -317,7 +317,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <p>SELECT * WHERE { BIND(1 AS ?s) { BIND(2 AS ?s2) FILTER(!bound(?s)) } }
@@ -335,7 +335,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -358,7 +358,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -383,7 +383,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -410,7 +410,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -440,7 +440,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -468,7 +468,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -499,7 +499,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -526,7 +526,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -554,7 +554,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -578,7 +578,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -602,7 +602,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -627,7 +627,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -652,7 +652,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -680,7 +680,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -708,7 +708,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -736,7 +736,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -761,7 +761,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -788,7 +788,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -817,7 +817,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -851,7 +851,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -887,7 +887,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -924,7 +924,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -960,7 +960,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -996,7 +996,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -1032,7 +1032,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -1059,7 +1059,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -1082,7 +1082,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -1110,7 +1110,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -1135,7 +1135,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -1158,7 +1158,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -1180,7 +1180,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Evaluation of query
    *
    * <pre>
@@ -1203,7 +1203,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Problem with multiple VALUES clauses, as described in
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-48">Query fails to project subquery
@@ -1219,7 +1219,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Problem with multiple VALUES clauses, as described in
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-48">Query fails to project subquery
@@ -1235,7 +1235,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Problem with multiple VALUES clauses, as described in
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-48">Query fails to project subquery
@@ -1251,7 +1251,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Problem with multiple VALUES clauses, as described in
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-50">Queries with multiple VALUES
@@ -1267,7 +1267,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Problem with multiple VALUES clauses, as described in
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-50">Queries with multiple VALUES
@@ -1283,7 +1283,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Problem with multiple VALUES clauses, as described in
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-50">Queries with multiple VALUES
@@ -1299,7 +1299,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Duplicate in VALUES get replicated problem
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1299">duplicates in VALUES get
@@ -1315,7 +1315,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Testing proper use of VALUES clause inside named subqueries.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1296">named subquery and VALUES
@@ -1331,7 +1331,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Testing proper use of VALUES clause inside named subqueries.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1296">named subquery and VALUES
@@ -1347,7 +1347,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Testing proper use of VALUES clause inside named subqueries.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1296">named subquery and VALUES
@@ -1363,7 +1363,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Testing proper use of VALUES clause inside named subqueries.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1296">named subquery and VALUES
@@ -1379,7 +1379,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Combination of VALUES clause and SERVICE keyword
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1256">Service call with values clauses
@@ -1395,7 +1395,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Strategies for VALUES+BIND queries
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1141">Strategies for VALUES+BIND
@@ -1411,7 +1411,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Isues with placement of BIND.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-876">BIND not executed before SERVICE
@@ -1427,7 +1427,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Isues with placement of BIND.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-876">BIND not executed before SERVICE
@@ -1443,7 +1443,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Isues with placement of BIND.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-876">BIND not executed before SERVICE
@@ -1509,7 +1509,7 @@ public class TestBindings extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Some of the test cases require the FTS index, so we need a custom properties definition here.
    */
   @Override

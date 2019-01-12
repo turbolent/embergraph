@@ -26,15 +26,15 @@ import junit.framework.Test;
 import junit.framework.TestCase2;
 import junit.framework.TestSuite;
 
-/**
- * Aggregates test that are run for each {@link ITripleStore} implementation.
+/*
+* Aggregates test that are run for each {@link ITripleStore} implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestTripleStoreBasics extends TestCase2 {
 
-  /**
+  /*
    * Aggregates the test suites into something approximating increasing dependency. This is designed
    * to run as a <em>proxy test suite</em> in which all tests are run using a common configuration
    * and a delegation mechanism. You MUST add the returned {@link Test} into a properly configured
@@ -98,7 +98,7 @@ public class TestTripleStoreBasics extends TestCase2 {
     // the DataLoader utility.
     suite.addTestSuite(TestDataLoader.class);
 
-    /**
+    /*
      * Test suite for configuration of the BLOBS index support.
      *
      * @see <a href="https://github.com/SYSTAP/bigdata-gpu/issues/25">Disable BLOBS indexing

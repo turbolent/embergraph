@@ -27,8 +27,8 @@ import java.util.Map;
 import java.util.Vector;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link NanoHTTPD#decodeParams(String, LinkedHashMap)}
+/*
+* Test suite for {@link NanoHTTPD#decodeParams(String, LinkedHashMap)}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -66,7 +66,7 @@ public class TestDecodeParams extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link NanoHTTPD#decodeParams(String, LinkedHashMap)}.
    *
    * @throws UnsupportedEncodingException
@@ -136,7 +136,7 @@ public class TestDecodeParams extends TestCase2 {
     assertSameParams(expected, actual);
   }
 
-  /**
+  /*
    * Examines behavior with leading/trailing whitespace.
    *
    * @throws UnsupportedEncodingException

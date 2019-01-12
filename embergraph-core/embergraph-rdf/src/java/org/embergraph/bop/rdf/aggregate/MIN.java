@@ -27,8 +27,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.CompareBOp;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
-/**
- * Operator reports the minimum observed value over the presented binding sets for the given
+/*
+* Operator reports the minimum observed value over the presented binding sets for the given
  * variable using SPARQL ORDER_BY semantics. Missing values are ignored.
  *
  * <p>Note: MIN (and MAX) are defined in terms of the ORDER_BY semantics for SPARQL. Therefore, this
@@ -44,7 +44,7 @@ public class MIN extends AggregateBase<IV> implements INeedsMaterialization {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Provides SPARQL <em>ORDER BY</em> semantics.
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/736">MIN() malfunction </a>
@@ -63,7 +63,7 @@ public class MIN extends AggregateBase<IV> implements INeedsMaterialization {
     super(distinct, expr);
   }
 
-  /**
+  /*
    * The minimum observed value and initially <code>null</code>.
    *
    * <p>Note: This field is guarded by the monitor on the {@link MIN} instance.
@@ -100,8 +100,8 @@ public class MIN extends AggregateBase<IV> implements INeedsMaterialization {
 
       if (iv != null) {
 
-        /*
-         * Aggregate non-null values.
+      /*
+       * Aggregate non-null values.
          */
 
         if (min == null) {
@@ -142,7 +142,7 @@ public class MIN extends AggregateBase<IV> implements INeedsMaterialization {
     return min;
   }
 
-  /**
+  /*
    * Note: {@link MIN} only works on pretty much anything and uses the same semantics as {@link
    * CompareBOp} (it is essentially the transitive closure of LT over the column projection of the
    * inner expression). This probably means that we always need to materialize something unless it

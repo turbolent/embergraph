@@ -40,8 +40,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
 import org.openrdf.sail.memory.MemoryStore;
 
-/**
- * Unit tests for database at once closure, fix point of a rule set (does not test truth maintenance
+/*
+* Unit tests for database at once closure, fix point of a rule set (does not test truth maintenance
  * under assertion and retraction or the justifications).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -80,7 +80,7 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Uses the specified closure algorithm and other properties per {@link #getProperties()}.
    *
    * @param closureClass The closure algorithm.
@@ -455,7 +455,7 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Reads files matching the filter from the directory and return an array containing their path
    * names.
    *
@@ -482,8 +482,8 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
     return resources;
   }
 
-  //    /**
-  //     * Compares ground truth for the closure of the source RDF/XML file (as
+  //    /*
+//     * Compares ground truth for the closure of the source RDF/XML file (as
   //     * computed by Sesame 2) against the closure as computed by embergraph.
   //     *
   //     * @param file
@@ -547,7 +547,7 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
   //
   //    }
 
-  /**
+  /*
    * Compares ground truth for the closure of the source RDF/XML file(s) (as computed by Sesame 2)
    * against the closure as computed by embergraph.
    *
@@ -670,8 +670,8 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
       }
 
       {
-        /*
-         * Loads the same data into the closure store and computes the
+      /*
+       * Loads the same data into the closure store and computes the
          * closure.
          */
 
@@ -726,8 +726,8 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
           }
         }
 
-        /*
-         * compute the database at once closure.
+      /*
+       * compute the database at once closure.
          *
          * Note: You can run either the full closure or the fast closure
          * method depending on how you setup the store. You can also use
@@ -770,7 +770,7 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Example using only {@link RuleRdfs11} that requires multiple rounds to compute the fix point
    * closure of a simple data set. This example is based on closure of the class hierarchy. Given
    *
@@ -857,8 +857,8 @@ public class TestDatabaseAtOnceClosure extends AbstractRuleTestCase {
         final long mutationCount =
             joinNexusFactory.newInstance(store.getIndexManager()).runMutation(program);
 
-        /*
-         * FIXME This assertion is failing. The problem is how the
+      /*
+       * FIXME This assertion is failing. The problem is how the
          * mutation count is being reported the closure of the rule. The
          * computed closure is correct.
          *

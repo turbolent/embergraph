@@ -32,8 +32,8 @@ import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase2;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * Unit tests for {@link Latch}.
+/*
+* Unit tests for {@link Latch}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -73,7 +73,7 @@ public class TestLatch extends TestCase2 {
     assertEquals(latch.get(), 0);
   }
 
-  /**
+  /*
    * Basic tests releasing blocked threads.
    *
    * @throws InterruptedException
@@ -154,7 +154,7 @@ public class TestLatch extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that addAndGet() allows the counter to return to zero but does not allow the counter to
    * become negative.
    */
@@ -182,7 +182,7 @@ public class TestLatch extends TestCase2 {
     assertEquals(0, latch.addAndGet(-1));
   }
 
-  /**
+  /*
    * Test of {@link Latch#await(long, TimeUnit)}.
    *
    * @throws InterruptedException

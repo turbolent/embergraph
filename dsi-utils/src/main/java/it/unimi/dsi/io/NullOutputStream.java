@@ -21,8 +21,8 @@ package it.unimi.dsi.io;
  *
  */
 
-/**
- * Throw-it-away output stream.
+/*
+* Throw-it-away output stream.
  *
  * <p>This stream discards whatever is written into it. Its usefulness is in previewing the length
  * of some coding by wrapping it in an {@link OutputBitStream} (it is a good idea, in this case,

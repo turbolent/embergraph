@@ -32,15 +32,15 @@ import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.sparse.TPS.TPV;
 import org.embergraph.util.MillisecondTimestampFactory;
 
-/**
- * Utility class for choosing timestamps for the {@link SparseRowStore} on the server.
+/*
+* Utility class for choosing timestamps for the {@link SparseRowStore} on the server.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TimestampChooser implements IRowStoreConstants {
 
-  /**
+  /*
    * Choose the timestamp for {@link TPV} tuples to written on the sparse row store.
    *
    * <p>Note: Revisions written with the same timestamp as a pre-existing column value will
@@ -75,8 +75,8 @@ public class TimestampChooser implements IRowStoreConstants {
 
       if (mutableBTree.getStore() instanceof TemporaryRawStore) {
 
-        /*
-         * Use a unique timestamp for the local machine since a
+      /*
+       * Use a unique timestamp for the local machine since a
          * temporary store is not visible outside of that context.
          */
 

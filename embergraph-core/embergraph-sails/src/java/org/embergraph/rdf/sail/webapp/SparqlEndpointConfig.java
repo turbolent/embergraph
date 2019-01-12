@@ -17,21 +17,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp;
 
-/**
- * Configuration object.
+/*
+* Configuration object.
  *
  * @see ConfigParams
  */
 public class SparqlEndpointConfig {
 
-  /**
+  /*
    * The default namespace.
    *
    * @see ConfigParams#NAMESPACE
    */
   public final String namespace;
 
-  /**
+  /*
    * The default timestamp used to query the default namespace. The server will obtain a read only
    * transaction which reads from the commit point associated with this timestamp.
    *
@@ -43,14 +43,14 @@ public class SparqlEndpointConfig {
    */
   public final long timestamp;
 
-  /**
+  /*
    * The #of threads to use to handle SPARQL queries -or- ZERO (0) for an unbounded pool.
    *
    * @see ConfigParams#QUERY_THREAD_POOL_SIZE
    */
   public final int queryThreadPoolSize;
 
-  /**
+  /*
    * When <code>true</code> and the KB instance is in the <code>quads</code> mode, each named graph
    * will also be described in in the same level of detail as the default graph. Otherwise only the
    * default graph will be described.
@@ -59,7 +59,7 @@ public class SparqlEndpointConfig {
    */
   public final boolean describeEachNamedGraph;
 
-  /**
+  /*
    * When <code>true</code>, requests will be refused for mutation operations on the database made
    * through the REST API. This may be used to help lock down a public facing interface.
    *
@@ -67,7 +67,7 @@ public class SparqlEndpointConfig {
    */
   public final boolean readOnly;
 
-  /**
+  /*
    * When non-zero, this specifies the timeout (milliseconds) for a query. This may be used to limit
    * resource consumption on a public facing interface.
    *

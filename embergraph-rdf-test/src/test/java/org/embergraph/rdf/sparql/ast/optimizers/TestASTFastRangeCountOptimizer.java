@@ -34,8 +34,8 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Test suite for {@link ASTFastRangeCountOptimizer}. This needs to handle a variety of things
+/*
+* Test suite for {@link ASTFastRangeCountOptimizer}. This needs to handle a variety of things
  * related to the following, including where variables are projected into a sub-select (in which
  * case we run the fast range count using the as-bound variables for the triple pattern).
  *
@@ -76,7 +76,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
   /** Quads mode specific test suite. */
   public static class TestQuadsModeAPs extends TestASTFastRangeCountOptimizer {
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -95,8 +95,8 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
                           varNode(w))),
                   where(newStatementPatternNode(new VarNode(s), new VarNode(p), new VarNode(o))));
 
-          /**
-           * We need to convert:
+        /*
+       * We need to convert:
            *
            * <pre>
            * SELECT (COUNT(*) as ?w) {?s ?p ?o}
@@ -131,7 +131,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       }.test();
     }
 
-    /**
+    /*
      * Test rewrite of the:
      *
      * <pre>SELECT (COUNT(*) as ?w) { OPTIONAL { ?s ?p ?o} }</pre>
@@ -162,7 +162,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       }.test();
     }
 
-    /**
+    /*
      * Test rewrite of:
      *
      * <pre>SELECT COUNT(*) { GRAPH ?g {?s ?p ?o} }</pre>
@@ -192,7 +192,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       }.test();
     }
 
-    /**
+    /*
      * Test rewrite of:
      *
      * <pre>SELECT COUNT(*) { GRAPH :g {:s ?p ?o} }</pre>
@@ -222,7 +222,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       }.test();
     }
 
-    /**
+    /*
      * Verify NO rewrite of the following for a quads-mode KB:
      *
      * <pre>
@@ -265,8 +265,8 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       }.test();
     }
 
-    //		/**
-    //		 * TODO Do a test to make sure that this optimizer is disabled if the KB
+    //		/*
+//		 * TODO Do a test to make sure that this optimizer is disabled if the KB
     //		 * uses full read/write transactions AND the evaluation context is SPARQL
     //		 * UPDATE (vs SPARQL QUERY).
     //		 */
@@ -276,7 +276,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
 
   } // class TestQuadsModeAPs
 
-  /**
+  /*
    * Triples mode test suite.
    *
    * @author bryan
@@ -305,7 +305,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       return properties;
     }
 
-    /**
+    /*
      * Verify correct rewrite of
      *
      * <pre>
@@ -330,8 +330,8 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
                           )),
                   where(newStatementPatternNode(new VarNode(s), new VarNode(p), new VarNode(o))));
 
-          /**
-           * We need to convert:
+        /*
+       * We need to convert:
            *
            * <pre>
            * SELECT (COUNT(?s ?p ?o) as ?w) {?s ?p ?o}
@@ -354,8 +354,8 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
           // the triple pattern.
           final StatementPatternNode sp1 =
               newStatementPatternNode(new VarNode(s), new VarNode(p), new VarNode(o));
-          /*
-           * annotate with the name of the variable to become bound to
+        /*
+       * annotate with the name of the variable to become bound to
            * the fast range count of that triple pattern.
            */
           sp1.setFastRangeCount(new VarNode(w));
@@ -367,7 +367,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       }.test();
     }
 
-    /**
+    /*
      * Verify correct rewrite of basic combinations with identical semantics:
      *
      * <pre>SELECT (COUNT(DISTINCT *) AS ?w) {?s ?p ?o}</pre>
@@ -410,7 +410,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       (new WildCardHelper(REDUCED)).test();
     }
 
-    /**
+    /*
      * Combinations using a constrained range-count.
      *
      * <pre>SELECT COUNT(*) {:s ?p ?o}</pre>
@@ -507,7 +507,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       }.test();
     }
 
-    /**
+    /*
      * Combinations using a constrained range-count where the triple pattern is 1-unbound and the
      * COUNT() references the unbound variable.
      *
@@ -540,7 +540,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       };
     }
 
-    /**
+    /*
      *
      *
      * <pre>SELECT * { { SELECT COUNT(*) {?s ?p ?o} } }</pre>
@@ -575,7 +575,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       };
     }
 
-    /**
+    /*
      *
      *
      * <pre>SELECT * { { SELECT COUNT(*) {?s ?p ?o} } :s :p :o .}</pre>
@@ -612,7 +612,7 @@ public class TestASTFastRangeCountOptimizer extends AbstractOptimizerTestCase {
       };
     }
 
-    /**
+    /*
      * Verify correct rejection:
      *
      * <pre>SELECT COUNT(?p) {:s ?p ?o}</pre>

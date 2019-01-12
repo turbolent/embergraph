@@ -21,8 +21,8 @@ package org.embergraph.sparse;
 
 import org.embergraph.util.Bytes;
 
-/**
- * A type safe enumeration of key types and the byte values that are used to encode that key type
+/*
+* A type safe enumeration of key types and the byte values that are used to encode that key type
  * within the encoded {@link Schema} name.
  *
  * @see Schema#getSchemaBytes()
@@ -48,7 +48,7 @@ public enum KeyType {
 //    UnsignedBytes(7, 0/* variable length */)
 ;
 
-  private KeyType(int b, int encodedLength) {
+  KeyType(int b, int encodedLength) {
 
     this.b = (byte) b;
 
@@ -58,7 +58,7 @@ public enum KeyType {
   /** The unique one byte code for this {@link KeyType}. */
   private final byte b;
 
-  /**
+  /*
    * The #of bytes in which values of that {@link KeyType} are encoded -or- zero (0) iff values are
    * encoded in a variable number of bytes with a <code>nul</code> terminator for the byte sequence.
    */
@@ -70,7 +70,7 @@ public enum KeyType {
     return encodedLength != 0;
   }
 
-  /**
+  /*
    * The #of bytes in which values of that {@link KeyType} are encoded -or- zero (0) iff values are
    * encoded in a variable number of bytes with a <code>nul</code> terminator for the byte sequence.
    */
@@ -79,7 +79,7 @@ public enum KeyType {
     return encodedLength;
   }
 
-  /**
+  /*
    * The byte that indicates this {@link KeyType}.
    *
    * @return
@@ -89,7 +89,7 @@ public enum KeyType {
     return b;
   }
 
-  /**
+  /*
    * Return the {@link KeyType} given its byte code.
    *
    * @param b The byte code.

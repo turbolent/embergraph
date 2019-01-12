@@ -50,8 +50,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.util.NT;
 import org.embergraph.util.concurrent.Haltable;
 
-/**
- * A join graph with annotations for estimated cardinality and other details in support of runtime
+/*
+* A join graph with annotations for estimated cardinality and other details in support of runtime
  * query optimization. A join graph is a collection of access paths reading on relations (the
  * vertices of the join graph) and joins which connect those relations (the edges of the join
  * graph). This boils down to a collection of {@link IPredicate}s (access paths reading on on
@@ -93,8 +93,8 @@ public class JoinGraph extends PipelineOp {
   /** Known annotations. */
   public interface Annotations extends PipelineOp.Annotations {
 
-    //        /**
-    //         * The variables to be projected out of the join graph (optional). When
+    //        /*
+//         * The variables to be projected out of the join graph (optional). When
     //         * <code>null</code>, all variables will be projected out.
     //         */
     //        String SELECTED = JoinGraph.class.getName() + ".selected";
@@ -102,7 +102,7 @@ public class JoinGraph extends PipelineOp {
     /** The vertices of the join graph, expressed an an {@link IPredicate}[] (required). */
     String VERTICES = JoinGraph.class.getName() + ".vertices";
 
-    /**
+    /*
      * The constraints on the join graph, expressed an an {@link IConstraint}[] (optional, defaults
      * to no constraints).
      */
@@ -113,7 +113,7 @@ public class JoinGraph extends PipelineOp {
 
     int DEFAULT_LIMIT = 100;
 
-    /**
+    /*
      * The <i>nedges</i> edges of the join graph having the lowest cardinality will be used to
      * generate the initial join paths (default {@value #DEFAULT_NEDGES}). This must be a positive
      * integer. The edges in the join graph are sorted in order of increasing cardinality and up to
@@ -125,7 +125,7 @@ public class JoinGraph extends PipelineOp {
 
     int DEFAULT_NEDGES = 2;
 
-    /**
+    /*
      * The type of sample to take (default {@value #DEFAULT_SAMPLE_TYPE)}.
      *
      * @see SampleIndex.SampleType
@@ -134,19 +134,19 @@ public class JoinGraph extends PipelineOp {
 
     String DEFAULT_SAMPLE_TYPE = SampleType.RANDOM.name();
 
-    /**
+    /*
      * The set of variables that are known to have already been materialized in the context in which
      * the RTO was invoked.
      */
     String DONE_SET = JoinGraph.class.getName() + ".doneSet";
 
-    /**
+    /*
      * The AST {@link JoinGroupNode} for the joins and filters that we are running through the RTO
      * (required).
      */
     String JOIN_GROUP = JoinGraph.class.getName() + ".joinGroup";
 
-    /**
+    /*
      * An {@link NT} object specifying the namespace and timestamp of the KB view against which the
      * RTO is running. This is necessary in order to reconstruct the {@link AST2BOpContext} when it
      * comes time to evaluate either a cutoff join involving filters that need materialization or
@@ -155,7 +155,7 @@ public class JoinGraph extends PipelineOp {
     String NT = JoinGraph.class.getName() + ".nt";
   }
 
-  /**
+  /*
    * {@link IQueryAttributes} names for the {@link JoinGraph}. The fully qualified name of the
    * attribute is formed by appending the attribute name to the "bopId-", where <code>bopId</code>
    * is the value returned by {@link BOp#getId()}
@@ -170,7 +170,7 @@ public class JoinGraph extends PipelineOp {
     /** The samples associated with join path selected by the RTO (output). */
     String SAMPLES = JoinGraph.class.getName() + ".samples";
 
-    /**
+    /*
      * The physical query plan generated from the RTO determined best join ordering (output). This
      * is used to specify the query plan to be executed by a downstream operator.
      */
@@ -181,8 +181,8 @@ public class JoinGraph extends PipelineOp {
    * JoinGraph operator annotations.
    */
 
-  //	/**
-  //	 * @see Annotations#SELECTED
+  //	/*
+//	 * @see Annotations#SELECTED
   //	 */
   //	public IVariable<?>[] getSelected() {
   //
@@ -221,7 +221,7 @@ public class JoinGraph extends PipelineOp {
         getProperty(Annotations.SAMPLE_TYPE, Annotations.DEFAULT_SAMPLE_TYPE));
   }
 
-  /**
+  /*
    * Return the set of variables that are known to have already been materialized at the point in
    * the overall query plan where the RTO is being executed.
    *
@@ -237,7 +237,7 @@ public class JoinGraph extends PipelineOp {
    * IQueryAttributes
    */
 
-  /**
+  /*
    * Return the computed join path.
    *
    * @see Attributes#PATH
@@ -247,7 +247,7 @@ public class JoinGraph extends PipelineOp {
     return (Path) q.getAttributes().get(getId() + "-" + Attributes.PATH);
   }
 
-  /**
+  /*
    * Return the samples associated with the computed join path.
    *
    * @see Annotations#SAMPLES
@@ -268,7 +268,7 @@ public class JoinGraph extends PipelineOp {
     q.getAttributes().put(getId() + "-" + Attributes.SAMPLES, samples);
   }
 
-  /**
+  /*
    * Return the query plan to be executed based on the RTO determined join ordering.
    *
    * @see Attributes#QUERY_PLAN
@@ -283,7 +283,7 @@ public class JoinGraph extends PipelineOp {
     q.getAttributes().put(getId() + "-" + Attributes.QUERY_PLAN, queryPlan);
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -351,7 +351,7 @@ public class JoinGraph extends PipelineOp {
     return new FutureTask<Void>(new JoinGraphTask(context));
   }
 
-  /**
+  /*
    * Evaluation of a {@link JoinGraph}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -372,8 +372,8 @@ public class JoinGraph extends PipelineOp {
 
       if (getQueryPlan(context.getRunningQuery()) == null) {
 
-        /*
-         * Use the RTO to generate a query plan.
+      /*
+       * Use the RTO to generate a query plan.
          *
          * TODO Make sure that the JoinGraph can not be triggered
          * concurrently, e.g., that the CONTROLLER attribute prevents
@@ -385,8 +385,8 @@ public class JoinGraph extends PipelineOp {
         // Create the join graph.
         final JGraph g = new JGraph(JoinGraph.this);
 
-        /*
-         * This map is used to associate join path segments (expressed
+      /*
+       * This map is used to associate join path segments (expressed
          * as an ordered array of bopIds) with edge sample to avoid
          * redundant effort.
          */
@@ -396,8 +396,8 @@ public class JoinGraph extends PipelineOp {
         final Path path =
             g.runtimeOptimizer(context.getRunningQuery().getQueryEngine(), edgeSamples);
 
-        /*
-         * Release samples.
+      /*
+       * Release samples.
          *
          * TODO If we have fully sampled some vertices or edges, then we
          * could replace the JOIN with the sample. For this to work, we
@@ -430,8 +430,8 @@ public class JoinGraph extends PipelineOp {
 
         // final long elapsed_queryOptimizer = mark - begin;
 
-        /*
-         * Generate the query from the selected join path.
+      /*
+       * Generate the query from the selected join path.
          */
         final PipelineOp queryOp =
             AST2BOpRTO.compileJoinGraph(
@@ -459,7 +459,7 @@ public class JoinGraph extends PipelineOp {
     }
   } // class JoinGraphTask
 
-  /**
+  /*
    * Execute the selected join path.
    *
    * <p>Note: When executing the query, it is actually being executed as a subquery. Therefore we

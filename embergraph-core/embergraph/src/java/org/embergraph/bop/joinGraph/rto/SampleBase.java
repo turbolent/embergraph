@@ -27,8 +27,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.engine.IChunkMessage;
 import org.embergraph.rwstore.sector.IMemoryManager;
 
-/**
- * Base class for a sample taken from a vertex (access path) or edge (cutoff join).
+/*
+* Base class for a sample taken from a vertex (access path) or edge (cutoff join).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public abstract class SampleBase {
 
   private static final transient Logger log = Logger.getLogger(SampleBase.class);
 
-  /**
+  /*
    * The total estimated cardinality of the underlying access path (for a vertex) or the join path
    * segment (for a cutoff join).
    *
@@ -58,7 +58,7 @@ public abstract class SampleBase {
   /** The limit used to produce the {@link #getSample() sample}. */
   public final int limit;
 
-  /**
+  /*
    * Indicates whether the estimate is exact, an upper bound, or a lower bound.
    *
    * <p>TODO When the input to a cutoff join is {@link EstimateEnum#Exact}, we could run the join
@@ -70,7 +70,7 @@ public abstract class SampleBase {
    */
   public final EstimateEnum estimateEnum;
 
-  /**
+  /*
    * Return <code>true</code> iff this sample is the fully materialized solution for the vertex or
    * join path segment.
    */
@@ -79,7 +79,7 @@ public abstract class SampleBase {
     return estimateEnum == EstimateEnum.Exact;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff this sample has cardinality underflow (the sample is empty).
    * Cardinality underflow occurs when the sampling process was unable to find any solutions.
    * Underflow is typically addressed by increasing the sample size, but sometimes underflow
@@ -94,7 +94,7 @@ public abstract class SampleBase {
   /** Sample. */
   private final AtomicReference<IBindingSet[]> sampleRef = new AtomicReference<IBindingSet[]>();
 
-  /**
+  /*
    * The sampled solution set.
    *
    * @return The sampled solution set -or- <code>null</code> if it has been released.
@@ -105,7 +105,7 @@ public abstract class SampleBase {
     return sampleRef.get();
   }
 
-  /**
+  /*
    * Release the sampled solution set.
    *
    * <p>FIXME RTO : MEMORY MANAGER : release.
@@ -118,7 +118,7 @@ public abstract class SampleBase {
     }
   }
 
-  /**
+  /*
    * @param estimatedCardinality The estimated cardinality.
    * @param limit The cutoff limit used to make that cardinality estimate.
    * @param estimateEnum Type safe enumeration indication various edge conditions which can arise
@@ -148,7 +148,7 @@ public abstract class SampleBase {
     this.sampleRef.set(sample);
   }
 
-  /**
+  /*
    * Hook for extending {@link #toString()}.
    *
    * @param sb The buffer into which the implementation can write additional information.

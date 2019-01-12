@@ -25,8 +25,8 @@ import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.httpd.CounterSetHTTPD;
 
-/**
- * {@link CounterSetHTTPD} plug-in.
+/*
+* {@link CounterSetHTTPD} plug-in.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -37,7 +37,7 @@ public class HttpPlugin implements IPlugIn<Journal, CounterSetHTTPD> {
 
   public interface Options {
 
-    /**
+    /*
      * Integer option specifies the port on which an httpd service will be started that exposes the
      * {@link CounterSet} for the client (default {@value #DEFAULT_HTTPD_PORT}). When ZERO (0), a
      * random port will be used and the actual port selected may be discovered using {@link
@@ -46,14 +46,14 @@ public class HttpPlugin implements IPlugIn<Journal, CounterSetHTTPD> {
      */
     String HTTPD_PORT = Journal.class.getName() + ".httpdPort";
 
-    /**
+    /*
      * The default http service port is <code>-1</code>, which means performance counter reporting
      * is disabled by default.
      */
     String DEFAULT_HTTPD_PORT = "-1";
   }
 
-  /**
+  /*
    * httpd reporting the live counters -or- <code>null</code> if not enabled.
    *
    * <p>Note: Guarded by <code>synchronized(this)</code>.
@@ -62,7 +62,7 @@ public class HttpPlugin implements IPlugIn<Journal, CounterSetHTTPD> {
    */
   private CounterSetHTTPD httpd = null;
 
-  /**
+  /*
    * The URL that may be used to access the httpd service exposed by this client -or- <code>null
    * </code> if not enabled.
    *
@@ -70,7 +70,7 @@ public class HttpPlugin implements IPlugIn<Journal, CounterSetHTTPD> {
    */
   private String httpdURL = null;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Start the local httpd service (if enabled). The service is started on the {@link
@@ -168,7 +168,7 @@ public class HttpPlugin implements IPlugIn<Journal, CounterSetHTTPD> {
     }
   }
 
-  /**
+  /*
    * The URL that may be used to access the httpd service exposed by this client -or- <code>null
    * </code> if not enabled.
    */

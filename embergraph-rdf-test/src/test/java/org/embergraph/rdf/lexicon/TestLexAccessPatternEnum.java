@@ -32,8 +32,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.test.MockTermIdFactory;
 
-/**
- * Test suite for {@link LexAccessPatternEnum}.
+/*
+* Test suite for {@link LexAccessPatternEnum}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

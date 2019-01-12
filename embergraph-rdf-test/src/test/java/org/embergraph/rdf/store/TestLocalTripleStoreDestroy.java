@@ -36,8 +36,8 @@ import org.embergraph.relation.locator.DefaultResourceLocator;
 import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * Test suite to verify the semantics of destroying a {@link LocalTripleStore}, including verifying
+/*
+* Test suite to verify the semantics of destroying a {@link LocalTripleStore}, including verifying
  * that the indices are deleted (gone from Name2Addr), that the locator is cleared from the {@link
  * DefaultResourceLocator}, and that the entries from the {@link AbstractTripleStore} are removed
  * from the global row store.
@@ -55,7 +55,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Verify that a newly created {@link AbstractTripleStore} which has never been committed may be
    * destroyed, that the entries in the global row store are removed, the resource locator cache is
    * cleared, and the indices for the triple store are no longer discoverable using the {@link
@@ -150,7 +150,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
     }
   }
 
-  /**
+  /*
    * Verify that a newly created and committed {@link AbstractTripleStore} may be destroyed, that
    * the entries in the global row store are removed, the resource locator cache is cleared, and the
    * indices for the triple store are no longer discoverable using the {@link IIndexManager}. The
@@ -257,7 +257,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
     }
   }
 
-  /**
+  /*
    * Return a list of the namespaces for the {@link AbstractTripleStore}s registered against the
    * embergraph instance.
    */
@@ -314,7 +314,7 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
     return namespaces;
   }
 
-  /**
+  /*
    * Verify the namespace prefix for the triple store is imposed correctly in {@link
    * AbstractResource#destroy()}. Create two KBs such that the namespace for one instance is a
    * prefix of the namespace for the other instance, e.g.,
@@ -372,8 +372,8 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
       // Verify post-conditions of the created KBs.
       {
 
-        /*
-         * Verify that both triple store declarations exist in the GRS.
+      /*
+       * Verify that both triple store declarations exist in the GRS.
          *
          * Note: Will be in lexical order for Unicode.
          */
@@ -381,8 +381,8 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
             getNamespaces(indexManager, ITx.UNISOLATED).toArray(new String[] {});
         assertEquals(new String[] {namespace, namespace1}, namespaces);
 
-        /*
-         * Verify that the unislolated versions of each triple stores is
+      /*
+       * Verify that the unislolated versions of each triple stores is
          * the same reference that we obtained above when that triple
          * store was created.
          */
@@ -460,8 +460,8 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
        */
       {
 
-        /*
-         * Verify that the triple store declaration exists in the GRS.
+      /*
+       * Verify that the triple store declaration exists in the GRS.
          *
          * Note: Will be in lexical order for Unicode.
          */
@@ -469,8 +469,8 @@ public class TestLocalTripleStoreDestroy extends ProxyTestCase {
             getNamespaces(indexManager, ITx.UNISOLATED).toArray(new String[] {});
         assertEquals(new String[] {namespace1}, namespaces);
 
-        /*
-         * Verify that the unislolated versions of each triple stores is the
+      /*
+       * Verify that the unislolated versions of each triple stores is the
          * same reference that we obtained above when that triple store was
          * created.
          */

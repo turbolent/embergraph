@@ -31,8 +31,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * A {@link BlockingQueue} based on the {@link RingBuffer}.
+/*
+* A {@link BlockingQueue} based on the {@link RingBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -203,7 +203,7 @@ public class BlockingRingBuffer<E> implements BlockingQueue<E> {
     }
   }
 
-  /**
+  /*
    * The lock is not held across the entire operation to avoid the possibility of deadlock if the
    * queue becomes full.
    */

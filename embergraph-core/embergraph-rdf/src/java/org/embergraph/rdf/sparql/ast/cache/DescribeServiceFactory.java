@@ -17,8 +17,8 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.BD;
 
-/**
- * This service tracks KB updates via an {@link IChangeLog} and is responsible for DESCRIBE cache
+/*
+* This service tracks KB updates via an {@link IChangeLog} and is responsible for DESCRIBE cache
  * invalidation for resources for which an update has been observed.
  *
  * @see BD#DESCRIBE
@@ -42,7 +42,7 @@ public class DescribeServiceFactory extends CustomServiceFactoryBase {
     return serviceOptions;
   }
 
-  /**
+  /*
    * TODO Implement: The {@link DescribeServiceFactory} COULD be integrated into query processing
    * using a rewrite of a DESCRIBE or a star-join into an invocation of this service.
    */
@@ -52,13 +52,13 @@ public class DescribeServiceFactory extends CustomServiceFactoryBase {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Register an {@link IChangeLog} listener that will manage the maintenance of the describe cache.
    */
   @Override
   public void startConnection(final EmbergraphSailConnection conn) {
 
-    /**
+    /*
      * TODO This really should not be using getCacheConnection() but rather
      * getExistingCacheConnection(). I need to figure out the pattern that brings the cache
      * connection into existence and who is responsible for invoking it. The problem is that there
@@ -88,7 +88,7 @@ public class DescribeServiceFactory extends CustomServiceFactoryBase {
     conn.addChangeLog(new DescribeCacheChangeLogListener(describeCache));
   }
 
-  /**
+  /*
    * Handles cache maintenance/invalidation.
    *
    * <p>There are several very different scenarios for cache maintenance:
@@ -137,8 +137,8 @@ public class DescribeServiceFactory extends CustomServiceFactoryBase {
 
       if (record.getChangeAction() == ChangeAction.UPDATED) {
 
-        /*
-         * This state change does not matter for cache maintenance
+      /*
+       * This state change does not matter for cache maintenance
          * unless we also plan to note the {Axiom, Inference, Explicit}
          * state on the statements in the cache.
          */

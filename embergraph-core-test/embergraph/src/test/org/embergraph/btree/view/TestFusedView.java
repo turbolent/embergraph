@@ -48,8 +48,8 @@ import org.embergraph.striterator.Resolver;
 import org.embergraph.striterator.Striterator;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for {@link FusedView}.
+/*
+* Test suite for {@link FusedView}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -134,7 +134,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     new FusedView(new AbstractBTree[] {btree1, btree2});
   }
 
-  /**
+  /*
    * Test verifies some of the basic principles of the fused view, including that a deleted entry in
    * the first source will mask an undeleted entry in a secondary source. It also verifies that
    * insert() and remove() return the current value under the key from the view (not just from the
@@ -469,7 +469,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     assertEquals(v9a, view.lookup(k9)); // no change!
   }
 
-  /**
+  /*
    * Unit test of the bloom filter.
    *
    * @todo bloom filter is on the mutable index, but not on the 2nd index in the view.
@@ -600,7 +600,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Test verifies some of the basic principles of the fused view, including that a deleted entry in
    * the first source will mask an undeleted entry in a secondary source.
    *
@@ -736,7 +736,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     assertFalse(view.contains(k7));
   }
 
-  /**
+  /*
    * Test of the bit manipulation required under java to turn off the {@link IRangeQuery#REMOVEALL}
    * flag.
    */
@@ -756,7 +756,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     assertEquals(false, (flags2 & IRangeQuery.REMOVEALL) != 0);
   }
 
-  /**
+  /*
    * Test of {@link FusedTupleIterator#remove()}. Note that tuples are removed by writing a delete
    * marker into the first B+Tree in the ordered sources.
    */
@@ -856,7 +856,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link IRangeQuery#REMOVEALL}. Note that tuples are removed by writing a delete marker
    * into the first B+Tree in the ordered sources.
    */
@@ -945,7 +945,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     assertTrue(btree1.lookup(k9, btree1.getLookupTuple()).isDeletedVersion());
   }
 
-  /**
+  /*
    * Test of {@link IRangeQuery#REMOVEALL} with a filter verifies that only those tuples which
    * satisify the filter are visited and removed.
    */
@@ -1037,7 +1037,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     assertFalse(view.contains(k9));
   }
 
-  /**
+  /*
    * This tests the ability to traverse the tuples in the {@link FusedView} in reverse order. This
    * ability is a requirement for several aspects of the total architecture, including atomic append
    * for the embergraph file system, locating an index partition, and finding the last entry in a
@@ -1136,7 +1136,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
             null /* filter */));
   }
 
-  /**
+  /*
    * Unit test for correct layering of filters on top of the {@link FusedTupleIterator}. Note that
    * the filters must be layered on top of the {@link FusedTupleIterator} rather than being passed
    * into the per-index source {@link ITupleIterator}s so that the filters will see a fused
@@ -1233,7 +1233,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
     assertEquals(4, count.get());
   }
 
-  /**
+  /*
    * Unit test for the {@link ITupleCursor} API for a {@link FusedView}.
    *
    * <p>Note: The requirement for {@link FusedView} to implement {@link ITupleCursor} arises in
@@ -1402,8 +1402,8 @@ public class TestFusedView extends AbstractBTreeTestCase {
       // k7 : key deleted.
       assertNull(cursor.seek(k7));
       {
-        /*
-         * Test seek to deleted key when DELETED is specified.
+      /*
+       * Test seek to deleted key when DELETED is specified.
          */
 
         // another cursor with DELETED in the flags.
@@ -1558,7 +1558,7 @@ public class TestFusedView extends AbstractBTreeTestCase {
 
   }
 
-  /**
+  /*
    * Compares {@link ITuple}s for equality in their data.
    *
    * @param expected

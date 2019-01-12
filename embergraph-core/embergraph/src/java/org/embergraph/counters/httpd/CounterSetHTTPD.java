@@ -37,8 +37,8 @@ import org.embergraph.service.IService;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
-/**
- * Exposes a {@link CounterSet} via HTTPD.
+/*
+* Exposes a {@link CounterSet} via HTTPD.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -53,7 +53,7 @@ public class CounterSetHTTPD extends AbstractHTTPD {
   /** The service reference iff one one specified to the ctor (may be null). */
   private final IService service;
 
-  /**
+  /*
    * The minimum time before a client can force the re-materialization of the {@link CounterSet}.
    * This is designed to limit the impact of the client on the service.
    *
@@ -67,7 +67,7 @@ public class CounterSetHTTPD extends AbstractHTTPD {
   /** The timestamp of the last materialized {@link CounterSet}. */
   private volatile long lastTimestamp = 0L;
 
-  /**
+  /*
    * Class used to pre-declare classpath resources that are available for download via httpd.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -78,7 +78,7 @@ public class CounterSetHTTPD extends AbstractHTTPD {
     final String localResource;
     final String mimeType;
 
-    /**
+    /*
      * @param localResource The name of a resource to be located using the classpath.
      * @param mimeType The mime type of that resource.
      */
@@ -111,7 +111,7 @@ public class CounterSetHTTPD extends AbstractHTTPD {
     }
   }
 
-  /**
+  /*
    * An immutable collection of pre-declared classpath resources which can be downloaded via httpd.
    */
   private final Map<String /*uri*/, DeclaredResource> allowedClassPathResources;
@@ -126,7 +126,7 @@ public class CounterSetHTTPD extends AbstractHTTPD {
     this(port, accessor, null /*fed*/);
   }
 
-  /**
+  /*
    * @param port
    * @param accessor
    * @param service Optional reference to the service within which this httpd is hosted.
@@ -259,7 +259,7 @@ public class CounterSetHTTPD extends AbstractHTTPD {
     return r;
   }
 
-  /**
+  /*
    * Send a resource from the classpath.
    *
    * @param decl A pre-declared resource.

@@ -52,8 +52,8 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * Unit tests for {@link MemoryGroupByOp}.
+/*
+* Unit tests for {@link MemoryGroupByOp}.
  *
  * @author thompsonbry
  */
@@ -90,14 +90,12 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
         new MemoryGroupByOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, groupById),
-                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.PIPELINED, false),
-                  new NV(PipelineOp.Annotations.MAX_MEMORY, 0),
-                  new NV(GroupByOp.Annotations.GROUP_BY_STATE, groupByState),
-                  new NV(GroupByOp.Annotations.GROUP_BY_REWRITE, groupByRewrite),
-                }));
+                new NV(BOp.Annotations.BOP_ID, groupById),
+                new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.PIPELINED, false),
+                new NV(PipelineOp.Annotations.MAX_MEMORY, 0),
+                new NV(GroupByOp.Annotations.GROUP_BY_STATE, groupByState),
+                new NV(GroupByOp.Annotations.GROUP_BY_REWRITE, groupByRewrite)));
 
     return query;
   }
@@ -107,7 +105,7 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
     return false;
   }
 
-  /**
+  /*
    * A variant of
    *
    * https://www.w3.org/2009/sparql/docs/tests/data-sparql11/grouping/group03.rq
@@ -177,7 +175,7 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
 
       // COUNT(DISTINCT ?v) AS ?S
       final IValueExpression<IV> countDistinctVAsS =
-          new Bind(S, new COUNT(true /* distinct */, (IValueExpression<IV>) v));
+          new Bind(S, new COUNT(true /* distinct */, v));
 
       final GroupByOp query =
           newFixture(
@@ -186,7 +184,7 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
               null // having
               );
 
-      /**
+      /*
        * The test data:
        *
        * <pre>
@@ -195,13 +193,13 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
        *     s2   2
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ListBindingSet(new IVariable<?>[] {w, s, v}, new IConstant[] {num9, s1, num1}),
-            new ListBindingSet(new IVariable<?>[] {s, v}, new IConstant[] {s2, num2})
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ListBindingSet(new IVariable<?>[]{w, s, v}, new IConstant[]{num9, s1, num1}),
+              new ListBindingSet(new IVariable<?>[]{s, v}, new IConstant[]{s2, num2})
           };
 
-      /**
+      /*
        * The expected solutions:
        *
        * <pre>
@@ -217,10 +215,10 @@ public class TestMemoryGroupByOp extends AbstractAggregationTestCase {
           new Constant<XSDIntegerIV<EmbergraphLiteral>>(
               new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(1)));
 
-      final IBindingSet expected[] =
-          new IBindingSet[] {
-            new ListBindingSet(new IVariable<?>[] {w, S}, new IConstant[] {num9, _num1}),
-            new ListBindingSet(new IVariable<?>[] {S}, new IConstant[] {_num1})
+      final IBindingSet[] expected =
+          new IBindingSet[]{
+              new ListBindingSet(new IVariable<?>[]{w, S}, new IConstant[]{num9, _num1}),
+              new ListBindingSet(new IVariable<?>[]{S}, new IConstant[]{_num1})
           };
 
       final BOpStats stats = query.newStats();

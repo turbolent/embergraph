@@ -57,7 +57,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
     return (SailGraphFixture) super.getGraphFixture();
   }
 
-  /**
+  /*
    * A small foaf data set relating some of the project contributors (triples mode data).
    *
    * @see {@value #smallGraph}
@@ -114,9 +114,9 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
 
       vertices =
           new LinkedHashSet<Value>(
-              Arrays.asList(new Value[] {foafPerson, mike, bryan, martyn, dc}));
+              Arrays.asList(foafPerson, mike, bryan, martyn, dc));
 
-      linkTypes = new LinkedHashSet<Value>(Arrays.asList(new Value[] {rdfType, foafKnows}));
+      linkTypes = new LinkedHashSet<Value>(Arrays.asList(rdfType, foafKnows));
     }
 
     public URI getRdfType() {
@@ -154,7 +154,7 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
     return new SmallGraphProblem(getGraphFixture());
   }
 
-  /**
+  /*
    * A small data set designed to demonstrate the push style scatter for SSSP.
    *
    * <pre>
@@ -220,9 +220,9 @@ public class AbstractSailGraphTestCase extends AbstractGraphTestCase {
       v4 = sail.getValueFactory().createURI("http://www.embergraph.org/ssspGraph/4");
       v5 = sail.getValueFactory().createURI("http://www.embergraph.org/ssspGraph/5");
 
-      vertices = new LinkedHashSet<Value>(Arrays.asList(new Value[] {v1, v2, v3, v4, v5}));
+      vertices = new LinkedHashSet<Value>(Arrays.asList(v1, v2, v3, v4, v5));
 
-      linkTypes = new LinkedHashSet<Value>(Arrays.asList(new Value[] {link}));
+      linkTypes = new LinkedHashSet<Value>(Arrays.asList(link));
     }
 
     public Value get_v1() {

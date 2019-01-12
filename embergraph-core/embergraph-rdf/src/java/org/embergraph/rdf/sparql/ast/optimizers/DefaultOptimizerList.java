@@ -36,8 +36,8 @@ import org.openrdf.query.algebra.evaluation.impl.IterativeEvaluationOptimizer;
 import org.openrdf.query.algebra.evaluation.impl.QueryModelNormalizer;
 import org.openrdf.query.algebra.evaluation.impl.SameTermFilterOptimizer;
 
-/**
- * Pre-populated list of the default optimizers.
+/*
+* Pre-populated list of the default optimizers.
  *
  * <pre>
  * optimizerList.add(new BindingAssigner()); // done.
@@ -133,7 +133,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     // AFTER ASTOrderByAggregateFlatteningOptimizer THAT MAY
     // INTRODUCE ANONYMOUS AGGREGATES IN 'ORDER BY'.
 
-    /**
+    /*
      * Flattens ORDER BY arguments by introducing auxiliary aliases in the corresponding SELECTs.
      * This is not a real optimizer as it is not optional -- this AST transformation is necessary to
      * comply with the SPARQL semantics. It must be applied before any optional optimisations and
@@ -142,20 +142,20 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTOrderByAggregateFlatteningOptimizer());
 
-    /**
+    /*
      * Query hints are identified applied to AST nodes based on the specified scope and the location
      * within the AST in which they are found.
      */
     add(new ASTQueryHintOptimizer());
 
-    /**
+    /*
      * Brings complex filter expressions into CNF, decomposes them to allow for more exact placement
      * and reasoning on individual filter components, and eliminates duplicate and simple redundant
      * filter expressions.
      */
     add(new ASTFilterNormalizationOptimizer());
 
-    /**
+    /*
      * Optimizes various constructs that lead to global static bindings for query execution, such as
      * BIND/VALUES clauses involving constants, but also FILTER expressions binding a variable via
      * sameTerm() or IN to one ore more constants. These constructs are removed from the query and
@@ -166,7 +166,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTStaticBindingsOptimizer());
 
-    /**
+    /*
      * Converts a BDS.SEARCH_IN_SEARCH function call (inside a filter) into a full text index to
      * determine the IN set.
      *
@@ -182,19 +182,19 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTSearchInSearchOptimizer());
 
-    /**
+    /*
      * Many (most) property path expressions can be re-written as simple joins and UNIONs and
      * filters. We need to do this before we set the value expressions.
      */
     add(new ASTPropertyPathOptimizer());
 
-    /**
+    /*
      * Visit all the value expression nodes and convert them into value expressions. If a value
      * expression can be evaluated to a constant, then it is replaced by that constant.
      */
     add(new ASTSetValueExpressionsOptimizer());
 
-    /**
+    /*
      * Flatten UNIONs where possible.
      *
      * <pre>
@@ -206,7 +206,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTFlattenUnionsOptimizer());
 
-    /**
+    /*
      * Look for groups that have a single union and some filters, and lift those filters inside the
      * union.
      *
@@ -216,7 +216,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTUnionFiltersOptimizer());
 
-    /**
+    /*
      * Eliminate semantically empty join group nodes which are the sole child of another join
      * groups.
      *
@@ -238,7 +238,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTEmptyGroupOptimizer());
 
-    /**
+    /*
      * Rewrites any {@link ProjectionNode} with a wild card into the set of variables visible to the
      * {@link QueryBase} having that projection. This is done first for the {@link
      * NamedSubqueriesNode} and then depth-first for the WHERE clause. Only variables projected by a
@@ -248,7 +248,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTWildcardProjectionOptimizer());
 
-    /**
+    /*
      * Translate {@link BD#SEARCH} and associated magic predicates into a a {@link ServiceNode}. If
      * there are multiple searches in the query, then each is translated into its own {@link
      * ServiceNode}. The magic predicates identify the bindings to be projected out of the named
@@ -260,7 +260,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTSearchOptimizer());
 
-    /**
+    /*
      * Translate {@link FTS#SEARCH} and associated magic predicates into a a {@link ServiceNode}. If
      * there are multiple external Solr searches in the query, then each is translated into its own
      * {@link ServiceNode}. The magic predicates identify the bindings to be projected out of the
@@ -268,7 +268,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTFulltextSearchOptimizer());
 
-    /**
+    /*
      * Translate {@link GeoSpatial#SEARCH} and associated magic predicates into a a {@link
      * ServiceNode}. If there are multiple GeoSpatial searches in the query, then each is translated
      * into its own {@link ServiceNode}.
@@ -278,7 +278,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     /** Imposes a LIMIT of ONE for a non-aggregation ASK query. */
     add(new AskOptimizer());
 
-    /**
+    /*
      * Rewrites the projection node of a DESCRIBE query into, generating a CONSTRUCT clause and
      * extending the WHERE clause to capture the semantics of the DESCRIBE query. The query type is
      * also changed to CONSTRUCT.
@@ -288,13 +288,13 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     /** Creates and assigns a PROJECTION of all variables in the CONSTRUCT clause. */
     add(new ASTConstructOptimizer());
 
-    /**
+    /*
      * Rewrites the group graph pattern annotation of an {@link ExistsNode} or a {@link
      * NotExistsNode} into an ASK subquery in the containing join group.
      */
     add(new ASTExistsOptimizer());
 
-    /**
+    /*
      * Handles a variety of special constructions related to graph graph groups.
      *
      * <p>Note: This optimizer MUST run before optimizers which lift out named subqueries in order
@@ -306,7 +306,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTGraphGroupOptimizer());
 
-    /**
+    /*
      * Lift FILTERs which can be evaluated based solely on the bindings in the parent group out of a
      * child group. This helps because we will issue the subquery for the child group less often
      * (assuming that the filter rejects any solutions).
@@ -315,7 +315,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTLiftPreFiltersOptimizer());
 
-    /**
+    /*
      * Pruning rules for unknown IVs in statement patterns:
      *
      * <p>If an optional join is known to fail, then remove the optional group in which it appears
@@ -384,7 +384,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     /** Convert an ALP service call into an ArbitraryLengthPathNode */
     add(new ASTALPServiceOptimizer());
 
-    /**
+    /*
      * Rewrites aspects of queries where bottom-up evaluation would produce different results.
      *
      * @see <a href="http://trac.blazegraph.com/ticket/1113">Hook to configure the ASTOptimizerList
@@ -392,7 +392,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTBottomUpOptimizer());
 
-    /**
+    /*
      * Lifts a simple optional out of the child group.
      *
      * <p>Note: In order for this to work we have to attach any FILTER(s) lifted out of the optional
@@ -401,13 +401,13 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTSimpleOptionalOptimizer());
 
-    /**
+    /*
      * Flattens non-optional, non-minus JoinGroupNodes with their parent JoinGroupNode, eliminating
      * unnecessary hash joins.
      */
     add(new ASTFlattenJoinGroupsOptimizer());
 
-    /**
+    /*
      * Rewrites the WHERE clause of each query by lifting out any {@link ServiceNode}s into a named
      * subquery. Rewrites the WHERE clause of any named subquery such that there is no more than one
      * {@link ServiceNode} in that subquery by lifting out additional {@link ServiceNode}s into new
@@ -421,7 +421,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTServiceNodeOptimizer());
 
-    /**
+    /*
      * Brings the children in group nodes into an order that implements the SPARQL 1.1 semantics,
      * trying to optimize this order based on various heuristics.
      */
@@ -448,7 +448,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     /** Attach cardinality to join groups and unions. Not fully implemented yet. */
     add(new ASTCardinalityOptimizer());
 
-    /**
+    /*
      * Optimizes SELECT COUNT(*) { triple-pattern } using the fast range count mechanisms when that
      * feature would produce exact results for the KB instance.
      *
@@ -457,7 +457,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     if (QueryHints.DEFAULT_FAST_RANGE_COUNT_OPTIMIZER) addFastRangeCountOptimizer();
 
-    /**
+    /*
      * Optimizes SELECT COUNT(*) ?z { triple-pattern } GROUP BY ?z using the fast rang count pattern
      * documented above, i.e. the COUNT is rewritten to be performed via fast range count
      * optimization where possible. In addition, the computation of bindings for grouping variable
@@ -467,7 +467,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     if (QueryHints.DEFAULT_FAST_RANGE_COUNT_OPTIMIZER) add(new ASTSimpleGroupByAndCountOptimizer());
 
-    /**
+    /*
      * Optimizes <code>SELECT DISTINCT ?property WHERE { ?x ?property ?y . }</code> and similar
      * patterns using an O(N) algorithm, where N is the number of distinct solutions.
      *
@@ -481,7 +481,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     if (QueryHints.DEFAULT_DISTINCT_TERM_SCAN_OPTIMIZER) add(new ASTDistinctTermScanOptimizer());
 
-    /**
+    /*
      * Run the static join order optimizer. This attaches the estimated cardinality data (fast range
      * counts) and uses fast algorithm to reorder the joins in each required or optional join group.
      *
@@ -512,7 +512,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTStaticJoinOptimizer());
 
-    /**
+    /*
      * No optimization, just guarantee that the order of FILTERs and nodes with special semantics
      * gets right. We apply this step only in case the query hint to enable the old optimizer is
      * turned off.
@@ -533,7 +533,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     /** Optimizer attaches FilterNodes which will run as "join filters" to StatementPatternNodes. */
     add(new ASTAttachJoinFiltersOptimizer());
 
-    /**
+    /*
      * Rewrite each join group having two or more complex optionals as named subqueries. This
      * optimizer proceeds in two steps.
      *
@@ -562,7 +562,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     //        add(new ASTComplexOptionalOptimizer());
 
-    /**
+    /*
      * Rewrites join groups having one or more joins which would involve a full cross product as
      * hash joins of sub-groups. This handles queries such as BSBM Q5 by, in effect, "pushing down"
      * sub-groups.
@@ -576,8 +576,8 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     //        add(new ASTHashJoinOptimizer());
 
-    //        /**
-    //         * Recognizes cases where intermediate variables are not required
+    //        /*
+//         * Recognizes cases where intermediate variables are not required
     //         * outside of a group and rewrites the group into a subquery having a
     //         * projection which does not include the intermediate variables.
     //         *
@@ -599,7 +599,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     //         */
     ////        add(new ASTSubgroupProjectionOptimizer());
 
-    /**
+    /*
      * Lift {@link SubqueryRoot}s into named subqueries when appropriate or necessary.
      *
      * <p>TODO In fact, we could do "as-bound" evaluation of sub-selects with a SLICE if we issued
@@ -608,7 +608,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
      */
     add(new ASTSparql11SubqueryOptimizer());
 
-    /**
+    /*
      * Validates named subquery / include patterns, identifies the join variables, and annotates the
      * named subquery root and named subquery include with those join variables.
      *
@@ -625,7 +625,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     add(new ASTSubGroupJoinVarOptimizer());
   }
 
-  /**
+  /*
    * Tries to add the GPU-based {@link ASTRangeCountOptimizer}. If adding this optimizer fails, this
    * method adds {@link ASTRangeCountOptimizer}.
    *
@@ -651,7 +651,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     }
   }
 
-  /**
+  /*
    * Tries to add the GPU-based {@link ASTFastRangeCountOptimizer}. If adding this optimizer fails,
    * this method adds {@link ASTFastRangeCountOptimizer}.
    *
@@ -675,7 +675,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     }
   }
 
-  /**
+  /*
    * Helper class for one-time static initialization of the mapgraph optimizers.
    *
    * @author bryan
@@ -686,7 +686,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
     private final IASTOptimizer fastRangeCountOptimizer;
     private final IASTOptimizer gpuAccelerationOptimizer;
 
-    /**
+    /*
      * Tries to create the GPU-based {@link ASTRangeCountOptimizer}; returns <code>null</code> if
      * the attempt fails.
      *
@@ -702,7 +702,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
           );
     }
 
-    /**
+    /*
      * Tries to create the GPU-based {@link ASTFastRangeCountOptimizer}; returns <code>null</code>
      * if the attempt fails.
      *
@@ -718,7 +718,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
           );
     }
 
-    /**
+    /*
      * Tries to create the {@link IASTOptimizer} for using GPUs; returns <code>null</code> if the
      * attempt fails.
      */

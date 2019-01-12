@@ -19,8 +19,8 @@ package org.embergraph.quorum;
 
 import java.util.UUID;
 
-/**
- * Event data equivalent to the {@link QuorumStateChangeListener} API. This interface makes it
+/*
+* Event data equivalent to the {@link QuorumStateChangeListener} API. This interface makes it
  * possible to enqueue these messages and then process them asynchronously.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -31,7 +31,7 @@ public interface QuorumStateChangeEvent {
   /** The type of event and never <code>null</code>. */
   QuorumStateChangeEventEnum getEventType();
 
-  /**
+  /*
    * Return the old and new downstream {@link UUID}s.
    *
    * @return An array of two elements. [0] is the old downstream service {@link UUID}. [1] is the
@@ -42,7 +42,7 @@ public interface QuorumStateChangeEvent {
    */
   UUID[] getDownstreamOldAndNew();
 
-  /**
+  /*
    * The last commit time consensus.
    *
    * @return The last commit time consensus value.
@@ -56,7 +56,7 @@ public interface QuorumStateChangeEvent {
    * quorumMeet(token,leaderId)
    */
 
-  /**
+  /*
    * Return the token on which the quorum met.
    *
    * @return The token.
@@ -66,7 +66,7 @@ public interface QuorumStateChangeEvent {
    */
   long getToken();
 
-  /**
+  /*
    * Return the {@link UUID} of the quorum leader.
    *
    * @return The {@link UUID} of the quorum leader.

@@ -9,8 +9,8 @@ import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.WriteExecutorService;
 
-/**
- * Interface defines and documents the names and meanings of counters pertaining to blocking queues
+/*
+* Interface defines and documents the names and meanings of counters pertaining to blocking queues
  * (of tasks) and services executing tasks and includes counters pertaining to the service executing
  * {@link ITx#UNISOLATED} tasks - the {@link WriteExecutorService}.
  *
@@ -19,20 +19,20 @@ import org.embergraph.journal.WriteExecutorService;
  */
 public interface IQueueCounters extends ICounterHierarchy {
 
-  /**
+  /*
    * The #of tasks not yet assigned to any thread which are waiting to run (moving average). This is
    * available for any queue.
    */
   String AverageQueueSize = "Average Queue Size";
 
-  /**
+  /*
    * Counters defined by {@link TaskCounters}. Subsets of these counters are also exposed by other
    * interfaces.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface ITaskCounters {
+  interface ITaskCounters {
 
     /** Count of all tasks completed by the service (failed + success). */
     String TaskCompleteCount = "Task Complete Count";
@@ -49,13 +49,13 @@ public interface IQueueCounters extends ICounterHierarchy {
     /** Cumulative milliseconds of the inter-arrival time between tasks. */
     String InterArrivalTime = "Inter Arrival Time";
 
-    /**
+    /*
      * Cumulative milliseconds across tasks of the time that a task was waiting on a queue pending
      * execution.
      */
     String QueueWaitingTime = "Queue Waiting Time";
 
-    /**
+    /*
      * Cumulative milliseconds across tasks that a task is being serviced by a worker thread
      * (elapsed clock time from when the task was assigned to the thread until the task completes
      * its work).
@@ -65,7 +65,7 @@ public interface IQueueCounters extends ICounterHierarchy {
      */
     String ServiceTime = "Service Time";
 
-    /**
+    /*
      * Cumulative elapsed time in milliseconds consumed by write tasks while checkpointing their
      * indices.
      *
@@ -76,7 +76,7 @@ public interface IQueueCounters extends ICounterHierarchy {
      */
     String CheckpointTime = "Checkpoint Time";
 
-    /**
+    /*
      * Cumulative milliseconds across tasks between the submission of a task and its completion
      * including any time spent waiting for resource locks, commit processing and any time spent
      * servicing that task.
@@ -84,22 +84,22 @@ public interface IQueueCounters extends ICounterHierarchy {
     String QueuingTime = "Queuing Time";
   }
 
-  /**
+  /*
    * Additional counters available for any {@link ThreadPoolExecutor}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface IThreadPoolExecutorCounters extends IQueueCounters {
+  interface IThreadPoolExecutorCounters extends IQueueCounters {
 
-    /**
+    /*
      * Count of all tasks completed by the service (failed + success).
      *
      * @see ITaskCounters#TaskCompleteCount
      */
     String TaskCompleteCount = ITaskCounters.TaskCompleteCount;
 
-    /**
+    /*
      * The #of tasks that are currently running (moving average).
      *
      * <p>Note: This count does NOT reflect the #of tasks holding locks for queues where tasks
@@ -109,7 +109,7 @@ public interface IQueueCounters extends ICounterHierarchy {
      */
     String AverageActiveCount = "Average Active Count";
 
-    /**
+    /*
      * The queue length (moving average).
      *
      * <p>Note: this is the primary average of interest - it includes both the tasks waiting to be
@@ -124,7 +124,7 @@ public interface IQueueCounters extends ICounterHierarchy {
     String LargestPoolSize = "Largest Pool Size";
   }
 
-  /**
+  /*
    * Additional counters available for any {@link ThreadPoolExecutor} which is processing {@link
    * AbstractTask}s.
    *
@@ -134,23 +134,23 @@ public interface IQueueCounters extends ICounterHierarchy {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface IThreadPoolExecutorTaskCounters extends IQueueCounters {
+  interface IThreadPoolExecutorTaskCounters extends IQueueCounters {
 
-    /**
+    /*
      * Count of all tasks submitted to the service.
      *
      * @see ITaskCounters#TaskSubmitCount
      */
     String TaskSubmitCount = ITaskCounters.TaskSubmitCount;
 
-    /**
+    /*
      * Count of all tasks which failed during execution.
      *
      * @see ITaskCounters#TaskFailCount
      */
     String TaskFailCount = ITaskCounters.TaskFailCount;
 
-    /**
+    /*
      * Count of all tasks which were successfully executed.
      *
      * @see ITaskCounters#TaskSuccessCount
@@ -163,14 +163,14 @@ public interface IQueueCounters extends ICounterHierarchy {
     /** The average service rate in tasks per millisecond (1/average-service-time). */
     String AverageServiceRate = "Average Service Rate";
 
-    /**
+    /*
      * Moving average in milliseconds of the time a task waits on a queue pending execution.
      *
      * @see ITaskCounters#QueueWaitingTime
      */
     String AverageQueueWaitingTime = "Average Queue Waiting Time";
 
-    /**
+    /*
      * Moving average in milliseconds of the time that a task is being serviced by a worker thread
      * (elapsed clock time from when the task was assigned to the thread until the task completes
      * its work).
@@ -184,7 +184,7 @@ public interface IQueueCounters extends ICounterHierarchy {
      */
     String AverageServiceTime = "Average Service Time";
 
-    /**
+    /*
      * Moving average in milliseconds of the time that a task is checkpointing the indices on which
      * it has written (this is already reported as part of the {@link #AverageServiceTime} but is
      * broken out here as a detail). An index checkpoint operation consists of flushing all dirty
@@ -195,7 +195,7 @@ public interface IQueueCounters extends ICounterHierarchy {
      */
     String AverageCheckpointTime = "Average Checkpoint Time";
 
-    /**
+    /*
      * Moving average in milliseconds of the time between the submission of a task and its
      * completion including any time spent waiting for resource locks, commit processing and any
      * time spent servicing that task.
@@ -205,22 +205,22 @@ public interface IQueueCounters extends ICounterHierarchy {
     String AverageQueuingTime = "Average Queuing Time";
   }
 
-  /**
+  /*
    * Additional counters available for the {@link WriteServiceExecutor}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface IWriteServiceExecutorCounters extends IThreadPoolExecutorTaskCounters {
+  interface IWriteServiceExecutorCounters extends IThreadPoolExecutorTaskCounters {
 
-    /**
+    /*
      * The #of tasks that are currently running <strong>with locks held</strong> (moving average)
      * (this is only reported for the {@link WriteExecutorService} as that is the only service where
      * tasks must acquire locks in order to execute).
      */
     String AverageActiveCountWithLocksHeld = "Average Active Count With Locks Held";
 
-    /**
+    /*
      * The #of tasks that are waiting to run on the internal lock used by the {@link
      * WriteExecutorService} to coordinate the start and end of tasks and the group commit. This
      * counter indicates how much potential concurrency is being wasted by the {@link
@@ -228,25 +228,25 @@ public interface IQueueCounters extends ICounterHierarchy {
      */
     String AverageReadyCount = "Average Ready Count";
 
-    /**
+    /*
      * Moving average in milliseconds of the time that a task is waiting for resource locks (zero
      * unless the task is unisolated).
      */
     String AverageLockWaitingTime = "Average Lock Waiting Time";
 
-    /**
+    /*
      * Moving average in milliseconds of the time that the task that initiates the group commit
      * waits for other tasks to join the commit group (zero unless the service is unisolated).
      */
     String AverageCommitWaitingTime = "Average Commit Waiting Time";
 
-    /**
+    /*
      * Moving average in milliseconds of the time servicing the group commit (zero unless the
      * service is unisolated).
      */
     String AverageCommitServiceTime = "Average Commit Service Time";
 
-    /**
+    /*
      * Moving average of the #of bytes written since the previous commit (zero unless the service is
      * unisolated).
      *
@@ -263,7 +263,7 @@ public interface IQueueCounters extends ICounterHierarchy {
     /** The #of aborts (only reported services which do commit processing). */
     String AbortCount = "Abort Count";
 
-    /**
+    /*
      * The #of synchronous overflow events (only reported services which do commit processing). A
      * synchronous overflow event is when the index partitions on the live journal are re-defined
      * onto a new live journal. Asynchronous overflow processing then proceeds in the background
@@ -271,27 +271,27 @@ public interface IQueueCounters extends ICounterHierarchy {
      */
     String OverflowCount = "Overflow Count";
 
-    /**
+    /*
      * The #of tasks whose execution was rejected, typically because the queue was at capacity.
      *
      * @see RejectedExecutionHandler
      */
     String RejectedExecutionCount = "Rejected Execution Count";
 
-    /**
+    /*
      * The maximum observed value in milliseconds of the time that the task that initiates the group
      * commit waits for other tasks to join the commit group (zero unless the service is
      * unisolated).
      */
     String MaxCommitWaitingTime = "Max Commit Waiting Time";
 
-    /**
+    /*
      * The maximum observed value in milliseconds of the time servicing the group commit (zero
      * unless the service is unisolated).
      */
     String MaxCommitServiceTime = "Max Commit Service Time";
 
-    /**
+    /*
      * Moving average of the #of tasks that participate in commit group. (The size of the most
      * recent commit group is sampled and turned into a moving average.)
      */
@@ -300,7 +300,7 @@ public interface IQueueCounters extends ICounterHierarchy {
     /** The maximum #of tasks in any commit group. */
     String MaxCommitGroupSize = "Max Commit Group Size";
 
-    /**
+    /*
      * The maximum #of tasks that are concurrently executing without regard to whether or not the
      * tasks have acquired their locks.
      *

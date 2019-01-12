@@ -21,8 +21,8 @@ import org.embergraph.rdf.internal.impl.AbstractIV;
 import org.embergraph.rdf.internal.impl.literal.PackedLongIV;
 import org.openrdf.model.URI;
 
-/**
- * An extension of the intrinsic types defined by {@link DTE}.
+/*
+* An extension of the intrinsic types defined by {@link DTE}.
  *
  * @author bryan
  * @see BLZG-1507 (Implement support for DTE extension types for URIs)
@@ -33,7 +33,7 @@ public enum DTEExtension {
   /** An IPV4 address. */
   IPV4((byte) 0, 0 /* len */, IPv4Address.class, XSD.IPV4, DTEFlags.NOFLAGS),
 
-  /**
+  /*
    * A packed long value, restricted to the range [0;72057594037927935L]. Note that this is not the
    * full range of long (negative values are not supported and positive long values in
    * [72057594037927936L;Long.MAX] are not supported), the reason being that the compression
@@ -47,7 +47,7 @@ public enum DTEExtension {
   /** An mocked IV (used internally). */
   MOCKED_IV((byte) 3, 0 /* len */, Void.class, null /*datatypeURI*/, DTEFlags.NOFLAGS),
 
-  /**
+  /*
    * This is a place holder for extension of the intrinsic data types. Its code corresponds to 0xff,
    * which is to say all four bits are on. When this code is used, the next byte(s) must be examined
    * to determine the actual intrinsic data type.
@@ -64,7 +64,7 @@ public enum DTEExtension {
    */
   RESERVED((byte) 255, 0 /* len */, Void.class, null /*datatypeURI*/, DTEFlags.NOFLAGS);
 
-  /**
+  /*
    * @param v The code for the data type.
    * @param len The length of the inline value -or- ZERO (0) if the value has a variable length
    *     (xsd:integer, xsd:decimal).
@@ -73,7 +73,7 @@ public enum DTEExtension {
    * @param datatype The well-known URI for the data type.
    * @param flags Some bit flags. See {@link #NUMERIC}, {@link #UNSIGNED_NUMERIC}, etc.
    */
-  private DTEExtension(
+  DTEExtension(
       final byte v, final int len, final Class<?> cls, final URI datatypeURI, final int flags) {
     this.v = v;
     this.len = len;
@@ -102,7 +102,7 @@ public enum DTEExtension {
     }
   }
 
-  /**
+  /*
    * Return the {@link DTEExtension} for the datatype {@link URI}.
    *
    * @param datatype The datatype {@link URI}.
@@ -136,13 +136,13 @@ public enum DTEExtension {
   /** The code for the data type. */
   final byte v;
 
-  /**
+  /*
    * The length of the inline value -or- ZERO (0) if the value has a variable length (xsd:integer,
    * xsd:decimal).
    */
   private final int len;
 
-  /**
+  /*
    * The class of the Java object used to represent instances of the coded data type. (The inline
    * object.)
    */
@@ -159,7 +159,7 @@ public enum DTEExtension {
     return v;
   }
 
-  /**
+  /*
    * The length of the data type value when represented as a component in an unsigned byte[] key
    * -or- ZERO iff the key component has a variable length for that data type.
    */

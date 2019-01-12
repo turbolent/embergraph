@@ -40,8 +40,8 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.service.DataService;
 
-/**
- * A task that executes a mutation operation.
+/*
+* A task that executes a mutation operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -61,7 +61,7 @@ public class MutationTask extends AbstractStepTask {
     super(action, joinNexusFactory, step, indexManager, dataService);
   }
 
-  /**
+  /*
    * Run the task.
    *
    * <p>Note: We can create the individual tasks that we need to execute now that we are in the
@@ -157,7 +157,7 @@ public class MutationTask extends AbstractStepTask {
     return totals;
   }
 
-  /**
+  /*
    * Flush the buffer(s) and aggregate the mutation count from each buffer. This is the actual
    * mutation count for the step(s) executed by the {@link MutationTask} (no double-counting).
    *
@@ -228,7 +228,7 @@ public class MutationTask extends AbstractStepTask {
     }
   }
 
-  /**
+  /*
    * This just reads off and aggregates the mutationCount from each buffer as reported by {@link
    * IBuffer#flush()}. This is the actual mutation count for the step(s) executed by the {@link
    * MutationTask} (no double-counting).
@@ -297,7 +297,7 @@ public class MutationTask extends AbstractStepTask {
     return mutationCount;
   }
 
-  /**
+  /*
    * Builds a set of tasks for the program.
    *
    * @param buffers
@@ -357,8 +357,8 @@ public class MutationTask extends AbstractStepTask {
 
         if (!parallel || joinNexus.forceSerialExecution()) {
 
-          /*
-           * Tasks for sequential mutation steps are always wrapped to
+        /*
+       * Tasks for sequential mutation steps are always wrapped to
            * ensure that the thread-safe buffer is flushed onto the
            * mutable relation after each rule executes. This is
            * necessary in order for the results of one rule in a
@@ -370,8 +370,8 @@ public class MutationTask extends AbstractStepTask {
 
         } else {
 
-          /*
-           * Add the task.
+        /*
+       * Add the task.
            */
 
           tasks.add(task);

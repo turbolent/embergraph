@@ -37,8 +37,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.service.Split;
 import org.embergraph.util.InnerCause;
 
-/**
- * Class drains a {@link BlockingBuffer} writing on a specific index partition.
+/*
+* Class drains a {@link BlockingBuffer} writing on a specific index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -97,7 +97,7 @@ public class IndexPartitionWriteTask<
     this.indexPartitionName = DataService.getIndexPartitionName(master.ndx.getName(), partitionId);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Maps the chunk across the sinks for the index partitions on which the element in that chunk
@@ -285,6 +285,6 @@ public class IndexPartitionWriteTask<
   @Override
   protected void notifyClientOfRedirect(L locator, Throwable cause) {
 
-    master.ndx.staleLocator(master.ndx.getTimestamp(), (L) locator, (StaleLocatorException) cause);
+    master.ndx.staleLocator(master.ndx.getTimestamp(), locator, (StaleLocatorException) cause);
   }
 }

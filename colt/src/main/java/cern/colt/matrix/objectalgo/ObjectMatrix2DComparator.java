@@ -9,8 +9,8 @@ CERN makes no representations about the suitability of this software for any pur
 It is provided "as is" without expressed or implied warranty.
 */
 import cern.colt.matrix.ObjectMatrix2D;
-/**
- * A comparison function which imposes a <i>total ordering</i> on some collection of elements.
+/*
+* A comparison function which imposes a <i>total ordering</i> on some collection of elements.
  * Comparators can be passed to a sort method (such as
  * <tt>cern.colt.matrix.objectalgo.Sorting.quickSort</tt>) to allow precise control over the sort
  * order.
@@ -29,7 +29,7 @@ import cern.colt.matrix.ObjectMatrix2D;
  * @see cern.colt.Sorting
  */
 public interface ObjectMatrix2DComparator {
-  /**
+  /*
    * Compares its two arguments for order. Returns a negative integer, zero, or a positive integer
    * as the first argument is less than, equal to, or greater than the second.
    *
@@ -49,7 +49,7 @@ public interface ObjectMatrix2DComparator {
    *     equal to, or greater than the second.
    */
   int compare(ObjectMatrix2D o1, ObjectMatrix2D o2);
-  /**
+  /*
    * Indicates whether some other object is &quot;equal to&quot; this Comparator. This method must
    * obey the general contract of <tt>Object.equals(Object)</tt>. Additionally, this method can
    * return <tt>true</tt> <i>only</i> if the specified Object is also a comparator and it imposes

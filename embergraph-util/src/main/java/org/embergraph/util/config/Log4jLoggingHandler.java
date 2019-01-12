@@ -26,8 +26,8 @@ import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 
-/**
- * Implements a <code>java.util.logging</code> handler that redirects logged messages to a Log4j
+/*
+* Implements a <code>java.util.logging</code> handler that redirects logged messages to a Log4j
  * Appender. This allows all the log messages to be collected into a single log file.
  *
  * <p><b>Configuration:</b> The Log4jLoggingHandler is initialized using the following LogManager

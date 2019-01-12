@@ -32,8 +32,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTHashJoinOptimizer;
 
-/**
- * Utility class for join analysis.
+/*
+* Utility class for join analysis.
  *
  * <p>TODO Surely we can do some bit math which would be slimmer and faster than managing the
  * IVariable sets?
@@ -51,13 +51,13 @@ public class JoinSetUtil {
   /** The variables known to be bound on entry to the group. */
   public final Set<IVariable<?>> knownBound;
 
-  /**
+  /*
    * The set of variables which are bound by the time the last required join is done. This includes
    * the {@link #knownBound} variables plus any variables for any required join.
    */
   public final Set<IVariable<?>> eventuallyBoundVars;
 
-  /**
+  /*
    * An array of the vertices for the required joins in the group. The indices into the array are
    * the order in which the required joins were encountered in the group.
    */
@@ -66,7 +66,7 @@ public class JoinSetUtil {
   /** The #of required joins in the group (the {@link #requiredJoins} length). */
   public final int requiredJoinCount;
 
-  /**
+  /*
    * The FILTERS that can be run on entry to the group (and which should be lifted into the parent).
    */
   public final Set<FilterNode> preFilters;
@@ -77,7 +77,7 @@ public class JoinSetUtil {
   /** The FILTERS that can not be run until the end of the join group. */
   public final Set<FilterNode> postFilters;
 
-  /**
+  /*
    * The set of variables which are bound be each of the vertices for the required joins. The
    * indices into the array are the order in which the requried joins were encountered in the group.
    */
@@ -85,7 +85,7 @@ public class JoinSetUtil {
 
   // final Set<IVariable<?>>[] varsWithFilters;
 
-  /**
+  /*
    * Diagonal matrix for the required joins. A cells having a positive value gives the #of directly
    * shared variables. This will be ZERO (0) if there is no direct join. Only the upper diagonal of
    * the matrix is populated.
@@ -95,7 +95,7 @@ public class JoinSetUtil {
   /** The #of direct joins found for each vertex (summed across {@link #canJoin} matrix. */
   public final int[] directJoinCount;
 
-  /**
+  /*
    * The distinct sets of vertices which are composed solely of (the transitive closure of) joins on
    * directly shared variables. For example
    *
@@ -119,7 +119,7 @@ public class JoinSetUtil {
   /** A collection of vertices and the join variables they bind. */
   public static class VertexJoinSet {
 
-    /**
+    /*
      * The set of verticies in this join set. The indices are the order in which the vertices were
      * encountered in the group.
      */
@@ -151,12 +151,11 @@ public class JoinSetUtil {
       if (!(o instanceof VertexJoinSet)) return false;
       final VertexJoinSet t = (VertexJoinSet) o;
       if (!vertices.equals(t.vertices)) return false;
-      if (!joinvars.equals(t.joinvars)) return false;
-      return true;
+      return joinvars.equals(t.joinvars);
     }
   }
 
-  /**
+  /*
    * @param sa
    * @param knownBound Any variables known to be bound on entry to the group.
    * @param group The group.
@@ -201,7 +200,7 @@ public class JoinSetUtil {
         final IJoinNode j = requiredJoins[i];
         // anything bound by this join.
         final Set<IVariable<?>> tmp =
-            sa.getSpannedVariables((BOp) j, new LinkedHashSet<IVariable<?>>());
+            sa.getSpannedVariables(j, new LinkedHashSet<IVariable<?>>());
         tmp.addAll(knownBound); // plus anything bound on entry to the group.
         eventuallyBoundVars.addAll(vars[i] = tmp);
       }
@@ -221,23 +220,23 @@ public class JoinSetUtil {
         if (m instanceof FilterNode) {
           final FilterNode f = (FilterNode) m;
           if (sa.isFullyBound(f, knownBound)) {
-            /*
-             * The variables for this filter are already bound on
+          /*
+       * The variables for this filter are already bound on
              * entry.
              */
             preFilters.add(f);
             continue;
           }
           if (sa.isFullyBound(f, eventuallyBoundVars)) {
-            /*
-             * The variables for this filter will be fully bound by
+          /*
+       * The variables for this filter will be fully bound by
              * the time we are done with the required joins.
              */
             joinFilters.add(f);
             continue;
           }
-          /*
-           * The variables for this filter will not be bound by the
+        /*
+       * The variables for this filter will not be bound by the
            * end of the required joins. If there are optional joins,
            * then the filter might be able to succeed if it is run
            * after the last optional join which could bind a variable
@@ -288,7 +287,7 @@ public class JoinSetUtil {
     directJoinSets = calcDirectJoinSets();
   }
 
-  /**
+  /*
    * Identify the subsets of the vertices which can join directly.
    *
    * <p>Start with each row and create a set containing the variables for that vertex and a set of

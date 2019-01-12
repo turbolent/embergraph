@@ -54,8 +54,8 @@ import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20151106;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Integration test suite for {@link InlineURIFactory} (the inline IVs are also tested in their own
+/*
+* Integration test suite for {@link InlineURIFactory} (the inline IVs are also tested in their own
  * package without the triple store integration).
  *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
@@ -64,7 +64,7 @@ public class TestInlineURIs extends AbstractTripleStoreTestCase {
 
   protected static final Logger log = Logger.getLogger(TestInlineURIs.class);
 
-  /**
+  /*
    * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
    * JOURNAL FILE.
    */

@@ -49,8 +49,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTHashJoinOptimizer}.
+/*
+* Test suite for {@link ASTHashJoinOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -65,7 +65,7 @@ public class TestASTHashJoinOptimizer extends AbstractASTEvaluationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * This unit test is based on BSBM Q5.
    *
    * <pre>
@@ -225,35 +225,27 @@ public class TestASTHashJoinOptimizer extends AbstractASTEvaluationTestCase {
             new FunctionNode(
                 FunctionRegistry.LT,
                 null /* scalarArgs */,
-                new ValueExpressionNode[] {
-                  new VarNode("simProperty1"),
-                  new FunctionNode(
-                      FunctionRegistry.ADD,
-                      null /* scalarArgs */,
-                      new ValueExpressionNode[] {
-                        new VarNode("origProperty1"), new ConstantNode(_120.getIV())
-                      })
-                });
+                new VarNode("simProperty1"),
+                new FunctionNode(
+                    FunctionRegistry.ADD,
+                    null /* scalarArgs */,
+                    new VarNode("origProperty1"), new ConstantNode(_120.getIV())));
 
         final ValueExpressionNode right =
             new FunctionNode(
                 FunctionRegistry.GT,
                 null /* scalarArgs */,
-                new ValueExpressionNode[] {
-                  new VarNode("simProperty1"),
-                  new FunctionNode(
-                      FunctionRegistry.SUBTRACT,
-                      null /* scalarArgs */,
-                      new ValueExpressionNode[] {
-                        new VarNode("origProperty1"), new ConstantNode(_120.getIV())
-                      })
-                });
+                new VarNode("simProperty1"),
+                new FunctionNode(
+                    FunctionRegistry.SUBTRACT,
+                    null /* scalarArgs */,
+                    new VarNode("origProperty1"), new ConstantNode(_120.getIV())));
 
         final ValueExpressionNode expr =
             new FunctionNode(
                 FunctionRegistry.AND,
                 null /* scalarValues */,
-                new ValueExpressionNode[] {left, right});
+                left, right);
 
         final FilterNode filter = new FilterNode(expr);
 
@@ -285,35 +277,27 @@ public class TestASTHashJoinOptimizer extends AbstractASTEvaluationTestCase {
             new FunctionNode(
                 FunctionRegistry.LT,
                 null /* scalarArgs */,
-                new ValueExpressionNode[] {
-                  new VarNode("simProperty2"),
-                  new FunctionNode(
-                      FunctionRegistry.ADD,
-                      null /* scalarArgs */,
-                      new ValueExpressionNode[] {
-                        new VarNode("origProperty2"), new ConstantNode(_170.getIV())
-                      })
-                });
+                new VarNode("simProperty2"),
+                new FunctionNode(
+                    FunctionRegistry.ADD,
+                    null /* scalarArgs */,
+                    new VarNode("origProperty2"), new ConstantNode(_170.getIV())));
 
         final ValueExpressionNode right =
             new FunctionNode(
                 FunctionRegistry.GT,
                 null /* scalarArgs */,
-                new ValueExpressionNode[] {
-                  new VarNode("simProperty2"),
-                  new FunctionNode(
-                      FunctionRegistry.SUBTRACT,
-                      null /* scalarArgs */,
-                      new ValueExpressionNode[] {
-                        new VarNode("origProperty2"), new ConstantNode(_170.getIV())
-                      })
-                });
+                new VarNode("simProperty2"),
+                new FunctionNode(
+                    FunctionRegistry.SUBTRACT,
+                    null /* scalarArgs */,
+                    new VarNode("origProperty2"), new ConstantNode(_170.getIV())));
 
         final ValueExpressionNode expr =
             new FunctionNode(
                 FunctionRegistry.AND,
                 null /* scalarValues */,
-                new ValueExpressionNode[] {left, right});
+                left, right);
 
         final FilterNode filter = new FilterNode(expr);
 
@@ -419,35 +403,27 @@ public class TestASTHashJoinOptimizer extends AbstractASTEvaluationTestCase {
               new FunctionNode(
                   FunctionRegistry.LT,
                   null /* scalarArgs */,
-                  new ValueExpressionNode[] {
-                    new VarNode("simProperty1"),
-                    new FunctionNode(
-                        FunctionRegistry.ADD,
-                        null /* scalarArgs */,
-                        new ValueExpressionNode[] {
-                          new VarNode("origProperty1"), new ConstantNode(_120.getIV())
-                        })
-                  });
+                  new VarNode("simProperty1"),
+                  new FunctionNode(
+                      FunctionRegistry.ADD,
+                      null /* scalarArgs */,
+                      new VarNode("origProperty1"), new ConstantNode(_120.getIV())));
 
           final ValueExpressionNode right =
               new FunctionNode(
                   FunctionRegistry.GT,
                   null /* scalarArgs */,
-                  new ValueExpressionNode[] {
-                    new VarNode("simProperty1"),
-                    new FunctionNode(
-                        FunctionRegistry.SUBTRACT,
-                        null /* scalarArgs */,
-                        new ValueExpressionNode[] {
-                          new VarNode("origProperty1"), new ConstantNode(_120.getIV())
-                        })
-                  });
+                  new VarNode("simProperty1"),
+                  new FunctionNode(
+                      FunctionRegistry.SUBTRACT,
+                      null /* scalarArgs */,
+                      new VarNode("origProperty1"), new ConstantNode(_120.getIV())));
 
           final ValueExpressionNode expr =
               new FunctionNode(
                   FunctionRegistry.AND,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {left, right});
+                  left, right);
 
           final FilterNode filter = new FilterNode(expr);
 
@@ -485,35 +461,27 @@ public class TestASTHashJoinOptimizer extends AbstractASTEvaluationTestCase {
               new FunctionNode(
                   FunctionRegistry.LT,
                   null /* scalarArgs */,
-                  new ValueExpressionNode[] {
-                    new VarNode("simProperty2"),
-                    new FunctionNode(
-                        FunctionRegistry.ADD,
-                        null /* scalarArgs */,
-                        new ValueExpressionNode[] {
-                          new VarNode("origProperty2"), new ConstantNode(_170.getIV())
-                        })
-                  });
+                  new VarNode("simProperty2"),
+                  new FunctionNode(
+                      FunctionRegistry.ADD,
+                      null /* scalarArgs */,
+                      new VarNode("origProperty2"), new ConstantNode(_170.getIV())));
 
           final ValueExpressionNode right =
               new FunctionNode(
                   FunctionRegistry.GT,
                   null /* scalarArgs */,
-                  new ValueExpressionNode[] {
-                    new VarNode("simProperty2"),
-                    new FunctionNode(
-                        FunctionRegistry.SUBTRACT,
-                        null /* scalarArgs */,
-                        new ValueExpressionNode[] {
-                          new VarNode("origProperty2"), new ConstantNode(_170.getIV())
-                        })
-                  });
+                  new VarNode("simProperty2"),
+                  new FunctionNode(
+                      FunctionRegistry.SUBTRACT,
+                      null /* scalarArgs */,
+                      new VarNode("origProperty2"), new ConstantNode(_170.getIV())));
 
           final ValueExpressionNode expr =
               new FunctionNode(
                   FunctionRegistry.AND,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {left, right});
+                  left, right);
 
           final FilterNode filter = new FilterNode(expr);
 

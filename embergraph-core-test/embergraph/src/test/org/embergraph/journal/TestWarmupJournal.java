@@ -37,8 +37,8 @@ import org.embergraph.btree.BaseIndexStats;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.KV;
 
-/**
- * Test suite for {@link WarmUpTask}.
+/*
+* Test suite for {@link WarmUpTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="http://trac.bigdata.com/ticket/1050" > pre-heat the journal on startup </a>
@@ -53,7 +53,7 @@ public class TestWarmupJournal extends ProxyTestCase<Journal> {
     super(name);
   }
 
-  /**
+  /*
    * Verify operation Ok when nothing has been written on the journal.
    *
    * @throws IOException
@@ -89,7 +89,7 @@ public class TestWarmupJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test of a journal on which a single index has been register (and the journal committed) but no
    * data was written onto the index.
    */
@@ -137,7 +137,7 @@ public class TestWarmupJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which a single index has been registered with random data on the index.
    */
   public void test_journal_oneIndexRandomData()
@@ -193,7 +193,7 @@ public class TestWarmupJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which many indices have been registered and populated with random data.
    */
   public void test_journal_manyIndicesRandomData()
@@ -273,7 +273,7 @@ public class TestWarmupJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which many indices have been registered and populated with random data.
    *
    * @throws IOException
@@ -328,8 +328,8 @@ public class TestWarmupJournal extends ProxyTestCase<Journal> {
         // commit the journal (!)
         src.commit();
 
-        /*
-         * Submit task for concurrent writes. Note that this task does not
+      /*
+       * Submit task for concurrent writes. Note that this task does not
          * do a commit, but it does write modifications onto the live
          * indices. Those changes should not be visible in the snapshot.
          * Since the task does not do a commit, the snapshot should have

@@ -28,8 +28,8 @@ import org.embergraph.service.ndx.pipeline.IDuplicateRemover;
 import org.embergraph.service.ndx.pipeline.KVOC;
 import org.embergraph.service.ndx.pipeline.KVOList;
 
-/**
- * Assigns the term identifier to duplicate {@link EmbergraphValue} for a single write operation
+/*
+* Assigns the term identifier to duplicate {@link EmbergraphValue} for a single write operation
  * when an {@link IDuplicateRemover} was applied.
  *
  * @todo this should be more transparent. One way to do that is to get rid of {@link

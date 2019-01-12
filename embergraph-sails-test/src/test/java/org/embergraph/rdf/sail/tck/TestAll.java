@@ -21,8 +21,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Aggregates test suites into increasing dependency order.
+/*
+* Aggregates test suites into increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -55,7 +55,7 @@ public class TestAll extends TestCase {
     // Fully isolated read/write operations.
     suite.addTestSuite(EmbergraphSPARQLUpdateTxTest.class);
 
-    /**
+    /*
      * The embergraph extensions to SPARQL UPDATE to support solution sets as well as graphs.
      *
      * <p>Note: We need to run a few different IRawStore backends to confirm support for the

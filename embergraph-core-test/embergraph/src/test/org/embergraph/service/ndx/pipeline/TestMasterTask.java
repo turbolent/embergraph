@@ -30,8 +30,8 @@ import java.util.concurrent.TimeoutException;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
-/**
- * Unit tests for the control logic used by {@link AbstractMasterTask} and friends.
+/*
+* Unit tests for the control logic used by {@link AbstractMasterTask} and friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class TestMasterTask extends AbstractMasterTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test verifies start/stop of the master.
    *
    * @throws InterruptedException
@@ -78,7 +78,7 @@ public class TestMasterTask extends AbstractMasterTestCase {
     assertEquals("partitionCount", 0, masterStats.getMaximumPartitionCount());
   }
 
-  /**
+  /*
    * Unit test writes an empty chunk and then stops the master.
    *
    * @throws InterruptedException
@@ -116,7 +116,7 @@ public class TestMasterTask extends AbstractMasterTestCase {
     assertEquals("partitionCount", 0, masterStats.getMaximumPartitionCount());
   }
 
-  /**
+  /*
    * Unit test writes a chunk and then stops the master.
    *
    * @throws InterruptedException
@@ -175,7 +175,7 @@ public class TestMasterTask extends AbstractMasterTestCase {
     assertEquals("subtaskEndCount", 1, masterStats.subtaskEndCount.get());
   }
 
-  /**
+  /*
    * Unit test writes a chunk that is split onto two subtasks and then stops the master.
    *
    * @throws InterruptedException
@@ -188,7 +188,7 @@ public class TestMasterTask extends AbstractMasterTestCase {
     doStartWriteStop2Test();
   }
 
-  /**
+  /*
    * Stress test for the atomic termination condition.
    *
    * @throws InterruptedException
@@ -217,7 +217,7 @@ public class TestMasterTask extends AbstractMasterTestCase {
     }
   }
 
-  /**
+  /*
    * The logic for {@link #test_startWriteWriteStop2()}, which is reused by a stress test.
    *
    * <p>
@@ -307,7 +307,7 @@ public class TestMasterTask extends AbstractMasterTestCase {
 
   }
 
-  /**
+  /*
    * Unit test writes 2 chunks that are each split onto two subtasks and then stops the master.
    *
    * @throws InterruptedException

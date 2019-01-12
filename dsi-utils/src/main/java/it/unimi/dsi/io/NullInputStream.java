@@ -26,8 +26,8 @@ import it.unimi.dsi.fastutil.io.RepositionableStream;
 import java.io.IOException;
 import java.io.Serializable;
 
-/**
- * End-of-stream-only input stream.
+/*
+* End-of-stream-only input stream.
  *
  * <p>This stream has length 0, and will always return end-of-file on any read attempt.
  *
@@ -48,7 +48,7 @@ public class NullInputStream extends MeasurableInputStream
     return -1;
   }
 
-  /**
+  /*
    * Returns the only instance of this class.
    *
    * @return the only instance of this class.

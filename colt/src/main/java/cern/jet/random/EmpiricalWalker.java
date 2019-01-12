@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Discrete Empirical distribution (pdf's can be specified).
+/*
+* Discrete Empirical distribution (pdf's can be specified).
  *
  * <p>The probability distribution function (pdf) must be provided by the user as an array of
  * positive real numbers. The pdf does not need to be provided in the form of relative
@@ -49,7 +49,7 @@ public class EmpiricalWalker extends AbstractDiscreteDistribution {
 
   protected double[] cdf; // cumulative distribution function
   /*
-  * James Theiler, jt@lanl.gov, the author of the GSL routine this port is based on, describes his approach as follows:
+   * James Theiler, jt@lanl.gov, the author of the GSL routine this port is based on, describes his approach as follows:
   *
   * Based on: Alastair J Walker, An efficient method for generating
   * discrete random variables with general distributions, ACM Trans
@@ -152,7 +152,7 @@ public class EmpiricalWalker extends AbstractDiscreteDistribution {
   * Adapted to GSL, 30 Jan 1999, jt
 
   */
-  /**
+  /*
    * Constructs an Empirical distribution. The probability distribution function (pdf) is an array
    * of positive real numbers. It need not be provided in the form of relative probabilities,
    * absolute probabilities are also accepted. The <tt>pdf</tt> must satisfy both of the following
@@ -180,7 +180,7 @@ public class EmpiricalWalker extends AbstractDiscreteDistribution {
     if (k >= cdf.length - 1) return 1.0;
     return cdf[k];
   }
-  /**
+  /*
    * Returns a deep copy of the receiver; the copy will produce identical sequences. After this call
    * has returned, the copy and the receiver have equal but separate state.
    *
@@ -188,9 +188,9 @@ public class EmpiricalWalker extends AbstractDiscreteDistribution {
    */
   public Object clone() {
     EmpiricalWalker copy = (EmpiricalWalker) super.clone();
-    if (this.cdf != null) copy.cdf = (double[]) this.cdf.clone();
-    if (this.A != null) copy.A = (int[]) this.A.clone();
-    if (this.F != null) copy.F = (double[]) this.F.clone();
+    if (this.cdf != null) copy.cdf = this.cdf.clone();
+    if (this.A != null) copy.A = this.A.clone();
+    if (this.F != null) copy.F = this.F.clone();
     return copy;
   }
   /** Returns a random integer <tt>k</tt> with probability <tt>pdf(k)</tt>. */
@@ -219,7 +219,7 @@ public class EmpiricalWalker extends AbstractDiscreteDistribution {
     if (k < 0 || k >= cdf.length - 1) return 0.0;
     return cdf[k - 1] - cdf[k];
   }
-  /**
+  /*
    * Sets the distribution parameters. The <tt>pdf</tt> must satisfy all of the following conditions
    *
    * <ul>
@@ -253,7 +253,7 @@ public class EmpiricalWalker extends AbstractDiscreteDistribution {
     }
     // cdf is now cached...
   }
-  /**
+  /*
    * Sets the distribution parameters. The <tt>pdf</tt> must satisfy both of the following
    * conditions
    *

@@ -21,8 +21,8 @@ import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * A stream of {@link IBindingSet} are mapped across the shards which will have the data for the
+/*
+* A stream of {@link IBindingSet} are mapped across the shards which will have the data for the
  * {@link IPredicate#asBound(IBindingSet)} {@link IPredicate}.
  *
  * <p>Unsynchronized (non-thread safe) buffer maps the {@link IBindingSet}s across the index
@@ -57,34 +57,34 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
 
   protected final AbstractScaleOutFederation<?> fed;
 
-  /**
+  /*
    * The predicate from which we generate the asBound binding sets. This predicate and the {@link
    * IKeyOrder} together determine the required access path.
    */
   protected final IPredicate<F> pred;
 
-  //    /**
-  //     * Identifies the index for the access path required by the {@link #pred
+  //    /*
+//     * Identifies the index for the access path required by the {@link #pred
   //     * predicate}.
   //     */
   //    protected final IKeyOrder<F> keyOrder;
 
-  /**
+  /*
    * The timestamp associated with the operation on the target access path. If the binding sets will
    * be used to read on the shards of the target access path, then this is the read timestamp. If
    * they will be used to write on the target access path, then this is the write timestamp.
    */
   protected final long timestamp;
 
-  //    /**
-  //     * The name of the scale-out index associated with the {@link #pred
+  //    /*
+//     * The name of the scale-out index associated with the {@link #pred
   //     * predicate}, including both the relation name and the {@link IKeyOrder}
   //     * components of the index name.
   //     */
   //    protected final String namespace;
   //
-  //    /**
-  //     * The associated {@link IMetadataIndex}.
+  //    /*
+//     * The associated {@link IMetadataIndex}.
   //     *
   //     * @todo might be moved into the {@link IShardMapper} constructors for
   //     *       efficiency so only materialized when necessary. Alternatively, we
@@ -94,8 +94,8 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
   //     */
   //    protected final IMetadataIndex mdi;
   //
-  //    /**
-  //     * The {@link IKeyBuilder} for the index associated with the access path
+  //    /*
+//     * The {@link IKeyBuilder} for the index associated with the access path
   //     * required by the predicate.
   //     */
   //    protected final IKeyBuilder keyBuilder;
@@ -103,13 +103,13 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
   /** A scale-out view of the target relation. */
   protected final IRelation<F> relation;
 
-  /**
+  /*
    * The implementation class for the algorithm which will be used to map the {@link IBindingSet}s
    * over the shards.
    */
   private final IShardMapper<E, F> algorithm;
 
-  /**
+  /*
    * @param fed The federation.
    * @param pred The predicate associated with the target operator. The predicate identifies which
    *     variables and/or constants form the key for the access path and hence selects the shards on
@@ -249,7 +249,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
     return mdi;
   }
 
-  /**
+  /*
    * Maps the chunk of {@link IBindingSet}s across the index partition(s) for the sink join
    * dimension.
    *
@@ -303,7 +303,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
     return fed.locatorScan(name, timestamp, fromKey, toKey, false /* reverse */);
   }
 
-  /**
+  /*
    * Extended to flush each buffer which targets a specific index partition as well.
    *
    * <p>{@inheritDoc}
@@ -321,7 +321,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
     return n;
   }
 
-  /**
+  /*
    * The allocated sinks.
    *
    * <p>Note: Since the collection is not thread-safe, synchronization is required when adding to
@@ -331,7 +331,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
   private final LinkedHashMap<PartitionLocator, IBuffer<IBindingSet[]> /* sink */> sinks =
       new LinkedHashMap<PartitionLocator, IBuffer<IBindingSet[]>>();
 
-  /**
+  /*
    * An immutable view of the sinks.
    *
    * @todo Rather than exposing all sinks and requiring that all sinks be fully buffered, it would
@@ -350,7 +350,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
     return Collections.unmodifiableMap(sinks);
   }
 
-  /**
+  /*
    * Return the buffer used to absorb binding sets which target the specified index partition.
    *
    * @param locator The locator for the target index partition.
@@ -368,7 +368,7 @@ public abstract class MapBindingSetsOverShardsBuffer<E extends IBindingSet, F>
     return sink;
   }
 
-  /**
+  /*
    * Return a buffer onto which binding sets will be written which are destined for the specified
    * shard.
    *

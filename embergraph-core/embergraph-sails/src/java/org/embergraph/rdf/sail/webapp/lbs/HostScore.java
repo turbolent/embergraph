@@ -20,8 +20,8 @@ package org.embergraph.rdf.sail.webapp.lbs;
 import java.util.Comparator;
 import org.embergraph.counters.AbstractStatisticsCollector;
 
-/**
- * Helper class pairs a hostname and the normalized availabilty for that host. The availability is
+/*
+* Helper class pairs a hostname and the normalized availabilty for that host. The availability is
  * based on (normalized) <code>1 - LOAD</code> for the host. The <code>LOAD</code> is computed using
  * the {@link IHostMetrics} and an {@link IHostScoringRule} for computing the workload of a host
  * from those metrics. The availability is then computed from the LOAD and normalized.
@@ -39,7 +39,7 @@ public class HostScore {
   /** The normalized availability for the host. */
   private final double availability;
 
-  /**
+  /*
    * Return the normalized availability for the host. Load balancing decision are based on this
    * normalized {@link #getAvailability() score} (work is assigned to hosts in inverse proportion to
    * the normalized load of the host).
@@ -71,7 +71,7 @@ public class HostScore {
         + "}";
   }
 
-  /**
+  /*
    * @param hostname The hostname (required, must be non-empty).
    * @param availability The normalized availability score for this host.
    */
@@ -90,7 +90,7 @@ public class HostScore {
     this.thisHost = AbstractStatisticsCollector.fullyQualifiedHostName.equals(hostname);
   }
 
-  /**
+  /*
    * Places elements into order by decreasing {@link #getAvailability() normalized load}. The {@link
    * #getHostname()} is used to break any ties.
    */
@@ -113,7 +113,7 @@ public class HostScore {
         }
       };
 
-  /**
+  /*
    * Orders by hostname. This provides a stable way of viewing the data in <code>/embergraph/status
    * </code>.
    */

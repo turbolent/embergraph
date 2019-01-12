@@ -33,7 +33,7 @@ public class TestDefaultAnalyzerFactory extends AbstractDefaultAnalyzerFactoryTe
     return new String[0];
   }
 
-  /**
+  /*
    * The DefaultAnalyzerFactory has bizarre behavior concerning language specific settings. The
    * three letter ISO 639-1 language tags for the languages for which Lucene has Analyzers use those
    * Analyzers; whereas the two digit ISO language tags, which are the ones recommended by the IETF

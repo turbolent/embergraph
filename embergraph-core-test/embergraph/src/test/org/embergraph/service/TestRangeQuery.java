@@ -41,8 +41,8 @@ import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.service.ndx.PartitionedTupleIterator;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for the {@link IRangeQuery} API.
+/*
+* Test suite for the {@link IRangeQuery} API.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -60,7 +60,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
    * Range query tests with static partitions.
    */
 
-  /**
+  /*
    * Range count tests with two (2) static partitions where the successor of a key is found in the
    * next partition (tests the fence post for the mapping of the rangeCount operation over the
    * different partitions).
@@ -131,7 +131,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     assertEquals("rangeCount", 4, ndx.rangeCount(null, null));
   }
 
-  /**
+  /*
    * Test unbounded range query with an empty index and two partitions.
    *
    * @throws IOException
@@ -173,7 +173,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Test unbounded range query with one entry in the index and two index partitions. The entry is
    * in the first partition.
    *
@@ -214,7 +214,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Test unbounded range query with one entry in the index and two index partitions. The entry is
    * in the 2nd partition.
    *
@@ -255,7 +255,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Test unbounded range query with two entries in the index and two index partitions. There is one
    * entry in each partition.
    *
@@ -307,7 +307,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Test unbounded range query with two entries in the index and two index partitions. Both entries
    * are in the 1st index partition and we limit the data service query to one result per query.
    */
@@ -359,7 +359,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link IRangeQuery#REMOVEALL} using a limit (capacity := 1). This form of the iterator
    * is used to support queue constructs since the delete is performed on the unisolated index. The
    * state of the index is verified afterwards.
@@ -481,7 +481,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link IRangeQuery#REMOVEALL} using a filter. Only the even keys are deleted. The state
    * of the index is verified afterwards.
    *
@@ -539,9 +539,8 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
             final int i = KeyBuilder.decodeInt(key, 0);
 
             // delete only the even keys.
-            if (i % 2 == 0) return true;
+            return i % 2 == 0;
 
-            return false;
           }
         };
 
@@ -614,7 +613,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability to scan a partitioned index in forward and reverse order. The test verifies
    * that index partitions are visited in the correct order, that the chunks within each index
    * partition are visited in the correct order, and that the tuples within each chunk are visited
@@ -813,8 +812,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
           @Override
           protected boolean isValid(ITuple tuple) {
             final byte[] key = tuple.getKey();
-            if (key[0] >= 7 && key[0] < 10) return false;
-            return true;
+            return key[0] < 7 || key[0] >= 10;
           }
         };
 
@@ -930,7 +928,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Basic unit tests for the parallel range iterator.
    *
    * <p>FIXME write unit tests for the parallel range iterator running across one, one or multiple
@@ -1110,7 +1108,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -1121,7 +1119,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     assertSameIteratorAnyOrder("", expected, actual);
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -1184,7 +1182,7 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Compares two tuples for equality based on their data (flags, keys, values, deleted marker, and
    * version timestamp).
    *
@@ -1215,8 +1213,6 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
 
     if (expected.isDeletedVersion() != actual.isDeletedVersion()) return false;
 
-    if (expected.getVersionTimestamp() != actual.getVersionTimestamp()) return false;
-
-    return true;
+    return expected.getVersionTimestamp() == actual.getVersionTimestamp();
   }
 }

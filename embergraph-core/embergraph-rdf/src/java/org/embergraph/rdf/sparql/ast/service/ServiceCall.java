@@ -26,8 +26,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.relation.accesspath.IBindingSetAccessPath;
 import org.openrdf.query.BindingSet;
 
-/**
- * Service invocation interface.
+/*
+* Service invocation interface.
  *
  * @param <E> The generic type of the solutions which are exchanged with the service implementation.
  *     This will be either {@link IBindingSet} or {@link BindingSet}. Note that those two interfaces
@@ -36,7 +36,7 @@ import org.openrdf.query.BindingSet;
  */
 public interface ServiceCall<E> {
 
-  /**
+  /*
    * Return options and metadata for the service end point.
    *
    * <p>TODO The options for a {@link ServiceCall} instance are shared with all instances for the
@@ -46,7 +46,7 @@ public interface ServiceCall<E> {
    */
   IServiceOptions getServiceOptions();
 
-  /**
+  /*
    * Invoke an service. The caller will join the results from the service with the solutions in the
    * context in which the service was invoked (using a solution set hash join pattern).
    *

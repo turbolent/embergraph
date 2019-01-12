@@ -26,8 +26,8 @@ package org.embergraph.sparse;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * A Timestamp Property Set is a property set with {@link ITPV timestamp property values}
+/*
+* A Timestamp Property Set is a property set with {@link ITPV timestamp property values}
  * representing data for a specific {@link Schema}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -36,28 +36,28 @@ import java.util.Map;
 public interface ITPS {
 
   /** The {@link Schema} name. */
-  public Schema getSchema();
+  Schema getSchema();
 
-  /**
+  /*
    * The value of the primary key.
    *
    * @return The value of the primary key -or- <code>null</code> if there is no property value bound
    *     for the property named by {@link Schema#getName()}.
    */
-  public Object getPrimaryKey();
+  Object getPrimaryKey();
 
-  /**
+  /*
    * The timestamp assigned by an atomic write operation (for atomic readback only).
    *
    * @return The timestamp.
    * @throws IllegalStateException if no timestamp has been assigned.
    */
-  public long getWriteTimestamp();
+  long getWriteTimestamp();
 
   /** The #of tuples - each tuple is an {@link ITPV}. */
-  public int size();
+  int size();
 
-  /**
+  /*
    * Return the most recent value for the named property whose timestamp is not greater than the
    * specified timestamp.
    *
@@ -66,9 +66,9 @@ public interface ITPS {
    * @return An object representing value of the property as of the indicated timestamp and never
    *     <code>null</code>.
    */
-  public ITPV get(String name, long timestamp);
+  ITPV get(String name, long timestamp);
 
-  /**
+  /*
    * Return the most recent value for the named property.
    *
    * @param name The propery name.
@@ -77,15 +77,15 @@ public interface ITPS {
    *     ITPV#getValue()} will return <code>null</code> and {@link ITPV#getTimestamp()} will return
    *     <code>0L</code>.
    */
-  public ITPV get(String name);
+  ITPV get(String name);
 
   /** Visits all tuples in order by <em>ascending timestamp</em>. */
-  public Iterator<ITPV> iterator();
+  Iterator<ITPV> iterator();
 
   /** Return a copy of the tuples showing only the most recent value for each property. */
-  public Map<String, Object> asMap();
+  Map<String, Object> asMap();
 
-  /**
+  /*
    * Return a copy of the tuples showing only the most recent value for each property whose
    * timestamp is not greater than the given timestamp.
    *
@@ -94,9 +94,9 @@ public interface ITPS {
    * @return A map containing a copy of the selected property values. A deleted property will not be
    *     contained in the map.
    */
-  public Map<String, Object> asMap(long timestamp);
+  Map<String, Object> asMap(long timestamp);
 
-  /**
+  /*
    * Return a copy of the tuples showing only the most recent value for each property whose
    * timestamp is not greater than the given timestamp.
    *
@@ -106,5 +106,5 @@ public interface ITPS {
    * @return A map containing a copy of the selected property values. A deleted property will not be
    *     contained in the map.
    */
-  public Map<String, Object> asMap(long timestamp, INameFilter filter);
+  Map<String, Object> asMap(long timestamp, INameFilter filter);
 }

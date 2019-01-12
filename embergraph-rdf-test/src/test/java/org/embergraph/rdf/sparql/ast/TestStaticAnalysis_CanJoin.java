@@ -45,7 +45,7 @@ public class TestStaticAnalysis_CanJoin extends TestCase2 {
     return TermId.mockIV(VTE.URI);
   }
 
-  /**
+  /*
    * Correct rejection tests.
    *
    * @see StaticAnalysis#canJoin(IBindingProducerNode, IBindingProducerNode)
@@ -85,7 +85,7 @@ public class TestStaticAnalysis_CanJoin extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Semantics tests focused on shared variables in the operands.
    *
    * @see StaticAnalysis#canJoin(IBindingProducerNode, IBindingProducerNode)
@@ -125,8 +125,8 @@ public class TestStaticAnalysis_CanJoin extends TestCase2 {
     assertTrue(sa.canJoin(p1, p1));
   }
 
-  //    /**
-  //     * TODO Write unit tests for canJoin of {@link IBindingProducerNode}s which
+  //    /*
+//     * TODO Write unit tests for canJoin of {@link IBindingProducerNode}s which
   //     * are not just {@link StatementPatternNode}s, including {@link ServiceNode}
   //     * , {@link SubqueryRoot}, etc.
   //     */
@@ -134,7 +134,7 @@ public class TestStaticAnalysis_CanJoin extends TestCase2 {
   //        fail("write test");
   //    }
 
-  /**
+  /*
    * Verify that joins are not permitted when the variables are only shared via a FILTER.
    *
    * @see StaticAnalysis#canJoin(IBindingProducerNode, IBindingProducerNode)

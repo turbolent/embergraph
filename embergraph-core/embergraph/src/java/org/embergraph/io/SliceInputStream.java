@@ -25,8 +25,8 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * A stream which only lets you read a fixed #of bytes from an underlying stream.
+/*
+* A stream which only lets you read a fixed #of bytes from an underlying stream.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -36,7 +36,7 @@ public class SliceInputStream extends FilterInputStream {
   private final int limit;
   private int nread = 0;
 
-  /**
+  /*
    * @param in The source stream.
    * @param limit The maximum #of bytes which may be read.
    */

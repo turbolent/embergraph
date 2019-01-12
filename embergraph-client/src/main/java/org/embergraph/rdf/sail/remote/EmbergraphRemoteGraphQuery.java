@@ -60,7 +60,6 @@ public class EmbergraphRemoteGraphQuery extends AbstractEmbergraphRemoteQuery
         handler.handleStatement(gqr.next());
       }
       handler.endRDF();
-      ;
     } finally {
       gqr.close();
     }

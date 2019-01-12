@@ -44,8 +44,8 @@ import org.openrdf.repository.sail.SailRepositoryConnection;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.memory.MemoryStore;
 
-/**
- * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
+/*
+* @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestMultiGraphs extends ProxyEmbergraphSailTestCase {
@@ -176,19 +176,13 @@ public class TestMultiGraphs extends ProxyEmbergraphSailTestCase {
         final Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
             createBindingSet(
-                new Binding[] {
-                  new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person),
-                }));
+                new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person)));
         solution.add(
             createBindingSet(
-                new Binding[] {
-                  new BindingImpl("p", likes), new BindingImpl("o", rdf),
-                }));
+                new BindingImpl("p", likes), new BindingImpl("o", rdf)));
         solution.add(
             createBindingSet(
-                new Binding[] {
-                  new BindingImpl("p", RDFS.LABEL), new BindingImpl("o", l1),
-                }));
+                new BindingImpl("p", RDFS.LABEL), new BindingImpl("o", l1)));
 
         compare(result, solution);
       }
@@ -225,19 +219,13 @@ public class TestMultiGraphs extends ProxyEmbergraphSailTestCase {
         final Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
             createBindingSet(
-                new Binding[] {
-                  new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person),
-                }));
+                new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person)));
         solution.add(
             createBindingSet(
-                new Binding[] {
-                  new BindingImpl("p", likes), new BindingImpl("o", rdf),
-                }));
+                new BindingImpl("p", likes), new BindingImpl("o", rdf)));
         solution.add(
             createBindingSet(
-                new Binding[] {
-                  new BindingImpl("p", RDFS.LABEL), new BindingImpl("o", l1),
-                }));
+                new BindingImpl("p", RDFS.LABEL), new BindingImpl("o", l1)));
 
         compare(result, solution);
       }

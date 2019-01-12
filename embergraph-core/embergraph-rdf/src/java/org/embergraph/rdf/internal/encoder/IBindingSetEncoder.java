@@ -27,8 +27,8 @@ import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Interface for encoding {@link IBindingSet}s comprised of {@link IV}s. The interface is slightly
+/*
+* Interface for encoding {@link IBindingSet}s comprised of {@link IV}s. The interface is slightly
  * more complicated than it otherwise would be due to (a) {@link IVCache} and (b) the need to vector
  * operations.
  *
@@ -52,7 +52,7 @@ public interface IBindingSetEncoder {
   /** Return <code>true</code> iff the {@link IVCache} associations are preserved by the encoder. */
   boolean isValueCache();
 
-  /**
+  /*
    * Encode the solution as an {@link IV}[], collecting updates for the internal {@link IV} to
    * {@link EmbergraphValue} cache.
    *
@@ -61,7 +61,7 @@ public interface IBindingSetEncoder {
    */
   byte[] encodeSolution(final IBindingSet bset);
 
-  /**
+  /*
    * Encode the solution as an {@link IV}[].
    *
    * <p>Note: The {@link IVCache} associations may be buffered by this method. Use {@link #flush()}
@@ -78,7 +78,7 @@ public interface IBindingSetEncoder {
    */
   byte[] encodeSolution(final IBindingSet bset, final boolean updateCache);
 
-  /**
+  /*
    * Flush any updates. This allows for vectored operations when updating the {@link IVCache}
    * associations.
    */

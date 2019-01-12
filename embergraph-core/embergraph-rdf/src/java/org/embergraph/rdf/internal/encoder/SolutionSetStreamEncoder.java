@@ -30,8 +30,8 @@ import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
 import org.embergraph.rdf.sparql.ast.SolutionSetStatserator;
 import org.embergraph.util.Bytes;
 
-/**
- * Stream encoder for solution sets (chunk oriented).
+/*
+* Stream encoder for solution sets (chunk oriented).
  *
  * @see SolutionSetStreamDecoder
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -41,7 +41,7 @@ public class SolutionSetStreamEncoder {
 
   private static final Logger log = Logger.getLogger(SolutionSetStreamEncoder.class);
 
-  /**
+  /*
    * The per-chunk header.
    *
    * <p>Note: The version number is per-chunk in case we ever support splicing solution streams (for
@@ -87,7 +87,7 @@ public class SolutionSetStreamEncoder {
     this.name = name;
   }
 
-  /**
+  /*
    * Encode solutions onto the output stream.
    *
    * @param os The output stream.

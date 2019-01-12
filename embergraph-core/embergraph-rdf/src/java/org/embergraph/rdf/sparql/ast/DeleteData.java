@@ -25,8 +25,8 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.model.EmbergraphStatement;
 
-/**
- * The DELETE DATA operation removes some triples, given inline in the request, if the respective
+/*
+* The DELETE DATA operation removes some triples, given inline in the request, if the respective
  * graphs in the Graph Store contain those:
  *
  * <pre>
@@ -50,7 +50,7 @@ public class DeleteData extends AbstractGraphDataUpdate {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

@@ -24,8 +24,8 @@ package org.embergraph.rdf.sail;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Extension API for high level operations (Query and Update) against the Sail.
+/*
+* Extension API for high level operations (Query and Update) against the Sail.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

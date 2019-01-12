@@ -25,8 +25,8 @@ import java.util.Properties;
 import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 
-/**
- * Proxy test suite for {@link TempTripleStore}.
+/*
+* Proxy test suite for {@link TempTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -82,7 +82,7 @@ public class TestTempTripleStore extends AbstractTestCase {
     return new TempTripleStore(properties);
   }
 
-  /**
+  /*
    * Re-open the same backing store.
    *
    * @param store the existing store.

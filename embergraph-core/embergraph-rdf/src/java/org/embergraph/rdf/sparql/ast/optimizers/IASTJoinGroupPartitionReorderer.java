@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-/**
- * Interface for classes offering the capability to reorder partitions.
+/*
+* Interface for classes offering the capability to reorder partitions.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

@@ -51,8 +51,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 import org.openrdf.model.URI;
 
-/**
- * This optimizer simply puts each type of {@link IGroupMemberNode} within a {@link JoinGroupNode}
+/*
+* This optimizer simply puts each type of {@link IGroupMemberNode} within a {@link JoinGroupNode}
  * in the right order with respect to the other types.
  *
  * <p>TODO TEST SUITE!
@@ -175,7 +175,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
   //
   //    }
 
-  /**
+  /*
    * Get the group member nodes into the right order:
    *
    * <pre>
@@ -356,8 +356,8 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
 
             if (f != null) {
 
-              /**
-               * Queue services in the beginning or in the end. Note that the query hint can be used
+            /*
+       * Queue services in the beginning or in the end. Note that the query hint can be used
                * to override the service defaults.
                */
               if (f.getServiceOptions().isRunFirst()) {
@@ -439,8 +439,8 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
         if (child instanceof SubqueryRoot) {
           final SubqueryRoot subquery = (SubqueryRoot) child;
           if (subquery.getQueryType() == QueryType.ASK) {
-            /**
-             * ASK subqueries are used for FILTER EXISTS and FILTER NOT EXISTS. They can not be run
+          /*
+       * ASK subqueries are used for FILTER EXISTS and FILTER NOT EXISTS. They can not be run
              * before the required join groups.
              *
              * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/515">Query with two
@@ -514,7 +514,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
     //       * join groups, and nested union).
     //       */
 
-    /**
+    /*
      * Run the ASK subqueries (FILTER EXISTS, FILTER NOT EXISTS).
      *
      * <p>TODO This should be (I think) a permissible placement for the ASK subqueries. However, we
@@ -568,8 +568,8 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
 
         if (sp.isOptional()) {
 
-          /*
-           * ASTSimpleOptionalOptimizer will recognize and lift out
+        /*
+       * ASTSimpleOptionalOptimizer will recognize and lift out
            * simple optionals into the parent join group. A simple
            * optional is basically a single a statement pattern in an
            * optional join group. If there were any FILTERs in the
@@ -628,7 +628,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
     // Replace the children with those in the [ordered] list.
     for (int i = 0; i < arity; i++) {
 
-      joinGroup.setArg(i, (BOp) ordered.get(i));
+      joinGroup.setArg(i, ordered.get(i));
     }
   }
 }

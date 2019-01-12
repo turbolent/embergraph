@@ -29,8 +29,8 @@ import org.embergraph.rdf.sparql.ast.DummyConstantNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.ProxyTestCase;
 
-/**
- * Test suite for {@link RegexBOp}.
+/*
+* Test suite for {@link RegexBOp}.
  *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  */

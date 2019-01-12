@@ -32,7 +32,7 @@ public class TestPseudoRandom extends TestCase {
     testRange(2 * 1048576);
   }
 
-  /**
+  /*
    * Verify that the pseudo random number generator completely fills the half-open range.
    *
    * @param range The exclusive upper bound of the half-open range.
@@ -41,7 +41,7 @@ public class TestPseudoRandom extends TestCase {
     testRange(range, 1 /* next */);
   }
 
-  /**
+  /*
    * Verify that the pseudo random number generator completely fills the half-open range.
    *
    * @param range The exclusive upper bound of the half-open range.

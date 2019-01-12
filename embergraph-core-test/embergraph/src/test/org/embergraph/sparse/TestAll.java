@@ -30,8 +30,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.TestEDS;
 import org.embergraph.service.TestJournal;
 
-/**
- * Test suite for the spare row store facility (aka key-value store).
+/*
+* Test suite for the spare row store facility (aka key-value store).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -47,7 +47,7 @@ public class TestAll extends TestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Returns a test that will run each of the implementation specific test suites in turn.
    *
    * @see TestSegSplitter, which tests the constraint imposed in the separator key during an index
@@ -94,7 +94,7 @@ public class TestAll extends TestCase {
     return suite;
   }
 
-  /**
+  /*
    * Create and populate a {@link ProxyTestSuite} with the unit tests that we will run against any
    * of the {@link IIndexManager} implementations.
    *

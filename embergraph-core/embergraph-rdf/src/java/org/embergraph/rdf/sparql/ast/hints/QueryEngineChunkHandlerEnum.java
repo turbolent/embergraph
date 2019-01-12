@@ -24,8 +24,8 @@ import org.embergraph.bop.engine.IChunkHandler;
 import org.embergraph.bop.engine.ManagedHeapStandloneChunkHandler;
 import org.embergraph.bop.engine.NativeHeapStandloneChunkHandler;
 
-/**
- * Type safe enumeration of known {@link IChunkHandler} implementations in support of the {@link
+/*
+* Type safe enumeration of known {@link IChunkHandler} implementations in support of the {@link
  * QueryEngineChunkHandlerQueryHint}.
  *
  * @author bryan
@@ -38,7 +38,7 @@ public enum QueryEngineChunkHandlerEnum {
   /** Use the native heap. */
   Native;
 
-  /**
+  /*
    * Return the type safe enumeration corresponding to a specific implementation class.
    *
    * @param cls The {@link IChunkHandler} implementation class.

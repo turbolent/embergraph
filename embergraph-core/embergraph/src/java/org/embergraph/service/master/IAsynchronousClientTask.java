@@ -27,8 +27,8 @@ import java.rmi.RemoteException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
-/**
- * Interface for remote {@link Callable}s which process chunks of resources as assigned by the
+/*
+* Interface for remote {@link Callable}s which process chunks of resources as assigned by the
  * MappedTaskMaster. This interface extends {@link Remote} since its methods are invoked using RMI.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -41,8 +41,8 @@ import java.util.concurrent.Future;
 public interface IAsynchronousClientTask<U, V> extends Remote {
 
   // Not a remote method.
-  //    /**
-  //     * This is the main thread for the client. It should setup operations and
+  //    /*
+//     * This is the main thread for the client. It should setup operations and
   //     * then block. The master will interrupt the main thread using
   //     * {@link Future#cancel(boolean)} once (a) all pending work is done; or (b)
   //     * the job is interrupted.
@@ -51,7 +51,7 @@ public interface IAsynchronousClientTask<U, V> extends Remote {
   //     */
   //    public U call() throws Exception;
 
-  /**
+  /*
    * Accept a chunk of resources for processing. The client may block while it is accepting the
    * chunk, but SHOULD NOT process the resources within this method. For each resource processed,
    * the client MUST notify the master regarding the success or error for that resource. Those
@@ -62,9 +62,9 @@ public interface IAsynchronousClientTask<U, V> extends Remote {
    * @throws RemoteException if there is an RMI problem.
    * @throws InterruptedException if the client thread accepting the request is interrupted.
    */
-  public void accept(V[] chunk) throws RemoteException, InterruptedException;
+  void accept(V[] chunk) throws RemoteException, InterruptedException;
 
-  /**
+  /*
    * Signal that no new chunks will be tasked to client. The client should flush its asynchronous
    * index write buffers. The main thread should normally remain blocked in {@link Callable#call()}
    * until the master interrupts the client using {@link Future#cancel(boolean)}. However, if all
@@ -73,14 +73,14 @@ public interface IAsynchronousClientTask<U, V> extends Remote {
    * @throws RemoteException if there is an RMI problem.
    * @throws InterruptedException if the client thread accepting the request is interrupted.
    */
-  public void close() throws RemoteException, InterruptedException;
+  void close() throws RemoteException, InterruptedException;
 
-  /**
+  /*
    * Return a proxy for the future of this task (this allows us to have both the proxy for the task
    * and the proxy for its {@link Future}). The {@link Future} is required in order to interrupt the
    * client tasks when the MappedTaskMaster terminates.
    *
    * @throws IllegalStateException if the future has not been set.
    */
-  public Future<U> getFuture() throws RemoteException;
+  Future<U> getFuture() throws RemoteException;
 }

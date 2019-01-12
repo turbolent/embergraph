@@ -29,8 +29,8 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTBottomUpOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
 
-/**
- * Test driver for debugging Sesame or DAWG manifest tests.
+/*
+* Test driver for debugging Sesame or DAWG manifest tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -46,7 +46,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * This is not a DAWG test. There is no data for the aggregation. Sesame is expecting a solution
    * set consisting of a single solution with 0^^xsd:integer. We are producing an empty solution
    * set, which is the correct result. The expected answer has been modified here so the test will
@@ -67,7 +67,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This is not a DAWG test. The query is simple enough. However, one of the
    * values which is bound on <code>?x</code> is a plain literal rather than a
    * numeric datatype literal.
@@ -113,7 +113,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This is not a DAWG test. There is no data for the aggregation. Sesame is expecting a solution
    * set consisting of a single solution with 0^^xsd:integer. We are producing an empty solution
    * set.
@@ -129,7 +129,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This is not a DAWG test. We produce 10^^xsd:decimal while openrdf expects 10.0^^xsd:decimal.
    */
   public void test_sparql11_sum_04() throws Exception {
@@ -155,8 +155,8 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  //    /**
-  //     * TODO I can not figure out why these "dataset" tests fail.
+  //    /*
+//     * TODO I can not figure out why these "dataset" tests fail.
   //     */
   //    public void test_dataset_01() throws Exception {
   //
@@ -169,7 +169,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
   //
   //    }
 
-  /**
+  /*
    * Test effective boolean value - optional.
    *
    * <pre>
@@ -197,7 +197,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>Nested Optionals - 1</code>. Badly designed left join with TWO optionals.
    *
    * <pre>
@@ -229,7 +229,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This is the same query, except we are running the rewritten version of the query (that is, the
    * version that we have to produce for the query above with the badly designed left join).
    */
@@ -256,7 +256,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Filter-nested - 2 (Filter on variable ?v which is not in scope)
    *
    * <pre>
@@ -277,7 +277,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Badly designed left join pattern plus a FILTER with a variable which is not in scope.
    *
    * <pre>
@@ -305,7 +305,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Classic badly designed left join.
    *
    * <pre>
@@ -332,7 +332,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Complex optional semantics: 1.
    *
    * <pre>
@@ -364,7 +364,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Complex optional semantics: 2 (dawg-optional-complex-2).
    *
    * <pre>
@@ -415,7 +415,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Reification of the default graph (dawg-construct-reification-1).
    *
    * <pre>
@@ -441,7 +441,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -467,7 +467,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -495,7 +495,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * DAWG SPARQL 1.0 test
    *
    * <pre>
@@ -518,7 +518,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * DAWG test ("find pairs that don't value-compare").
    *
    * <pre>
@@ -551,7 +551,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * DAWG test (FILTER inside an OPTIONAL does not block an entire solution).
    *
    * <pre>
@@ -578,7 +578,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This is sesame TCK test <code>sparql11-subquery-04</code>. We picked it
    * up with Sesame 2.6.3. It fails in the TCK run, but it appears to be Ok
    * when run at this layer.
@@ -628,7 +628,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * TCK (non-DAWG) query we picked up with <code>Sesame 2.6.3</code>. I've
    * modified the test slightly to report the aggregate used in the ORDER BY
    * through the SELECT.
@@ -710,7 +710,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * TCK (non-DAWG) query we picked up with <code>Sesame 2.6.3</code>
    *
    * <pre>
@@ -735,7 +735,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This is based on <code>service13</code>, which is an openrdf Federated Query test. The test was
    * failing because the two SERVICE joins do not share any variables and use a hash join. Thus, we
    * had two solutions from the first SERVICE and sent two <em>empty</em> solutions to the second
@@ -787,7 +787,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
     if (log.isInfoEnabled()) log.info(astContainer.toString());
   }
 
-  /**
+  /*
    * Execute the stress tests a couple of times.
    *
    * @throws Exception
@@ -802,8 +802,8 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  //    /**
-  //     * This is BSBM BI query 05 on the PC100 data set. We picked this up with
+  //    /*
+//     * This is BSBM BI query 05 on the PC100 data set. We picked this up with
   //     * Sesame 2.6.3. It is failing with a "solution set not found" error in the
   //     * TCK. The problem is reproduced by this test. However, the test is a bit
   //     * long running, so take it out of this test suite once we get to the bottom
@@ -849,7 +849,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
   //
   //    }
 
-  /**
+  /*
    * Tests to be executed in a stress test fashion, i.e. multiple times.
    *
    * @author msc
@@ -864,7 +864,7 @@ public class TestTCK extends AbstractDataDrivenSPARQLTestCase {
       super(name);
     }
 
-    /**
+    /*
      * Optional-filter - 1
      *
      * <pre>

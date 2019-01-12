@@ -42,15 +42,15 @@ import org.embergraph.service.ndx.pipeline.IndexAsyncWriteStats;
 import org.embergraph.service.ndx.pipeline.KVOC;
 import org.embergraph.service.ndx.pipeline.KVOLatch;
 
-/**
- * Interface for asynchronous writes on scale-out indices.
+/*
+* Interface for asynchronous writes on scale-out indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IAsynchronousWriteBufferFactory {
 
-  /**
+  /*
    * Asynchronous write API (streaming writes).
    *
    * <p>The returned buffer provides a streaming API which is highly efficient. The caller writes
@@ -106,7 +106,7 @@ public interface IAsynchronousWriteBufferFactory {
    *     parameter, then this method signature could be used for both local and scale-out index
    *     views. This method could then be moved to an IAsynchronousIndexWriter interface.
    */
-  public <T extends IKeyArrayIndexProcedure, O, R, A> IRunnableBuffer<KVO<O>[]> newWriteBuffer(
+  <T extends IKeyArrayIndexProcedure, O, R, A> IRunnableBuffer<KVO<O>[]> newWriteBuffer(
       final IResultHandler<R, A> resultHandler,
       final IDuplicateRemover<O> duplicateRemover,
       final AbstractKeyArrayIndexProcedureConstructor<T> ctor);

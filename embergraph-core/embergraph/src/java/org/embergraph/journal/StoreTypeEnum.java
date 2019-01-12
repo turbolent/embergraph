@@ -21,27 +21,27 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-/**
- * The type of store (read/write vs worm).
+/*
+* The type of store (read/write vs worm).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public enum StoreTypeEnum {
 
-  /**
+  /*
    * Indicates that the store is a WORM (Write Once, Read Many) aka a journal or a log-structured
    * store.
    */
   WORM((byte) 0),
 
-  /**
+  /*
    * Indicate that the store is a read/write store. For the read/write store, records are allocated
    * from allocation blocks and can be reused sometime after they have been deleted.
    */
   RW((byte) 1);
 
-  private StoreTypeEnum(byte b) {
+  StoreTypeEnum(byte b) {
     this.type = b;
   }
 

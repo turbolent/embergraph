@@ -67,8 +67,8 @@ import org.embergraph.service.IDataServiceCallable;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Interface provides an interoperability nexus for the {@link IPredicate}s, {@link IBindingSet}s,
+/*
+* Interface provides an interoperability nexus for the {@link IPredicate}s, {@link IBindingSet}s,
  * and {@link ISolution}s for the evaluation of an {@link IRule} and is responsible for resolving
  * the relation symbol to the {@link IRelation} object. Instances of this interface may be
  * type-specific and allow you to control various implementation classes used during {@link IRule}
@@ -85,7 +85,7 @@ public interface IJoinNexus {
   /** The factory for rule statistics objects. */
   IRuleStatisticsFactory getRuleStatisticsFactory();
 
-  /**
+  /*
    * The factory object is used to materialize appropriate {@link IJoinNexus} instances when the
    * rule execution crosses an RMI boundary.
    */
@@ -97,7 +97,7 @@ public interface IJoinNexus {
   /** The kind of operation that is being executed (Query, Insert, or Delete). */
   ActionEnum getAction();
 
-  /**
+  /*
    * When <code>true</code>, rule level parallelism is disabled and the {@link ISolution} buffers
    * are flushed after after every {@link IStep}. This can be enabled if you are exploring apparent
    * concurrency problems with the rules. It should normally be <code>false</code> for better
@@ -107,7 +107,7 @@ public interface IJoinNexus {
    */
   boolean forceSerialExecution();
 
-  /**
+  /*
    * The maximum #of subqueries for the first join dimension that will be issued in parallel. Use
    * ZERO(0) to avoid submitting tasks to the {@link ExecutorService} entirely and ONE (1) to submit
    * a single task at a time to the {@link ExecutorService}.
@@ -116,7 +116,7 @@ public interface IJoinNexus {
    */
   int getMaxParallelSubqueries();
 
-  /**
+  /*
    * The #of elements in a chunk for query or mutation. This is normally a relatively large value on
    * the order of <code>10,000</code> or better.
    *
@@ -124,7 +124,7 @@ public interface IJoinNexus {
    */
   int getChunkCapacity();
 
-  /**
+  /*
    * The #of chunks that can be held by an {@link IBuffer} that is the target or one or more {@link
    * UnsynchronizedArrayBuffer}s. This is generally a small value on the order of the #of parallel
    * producers that might be writing on the {@link IBuffer} since the capacity of the {@link
@@ -137,7 +137,7 @@ public interface IJoinNexus {
    */
   int getChunkOfChunksCapacity();
 
-  /**
+  /*
    * The #of elements that will be materialized in a fully buffered read by an {@link IAccessPath}.
    * When this threshold is exceeded the {@link IAccessPath} will use an {@link
    * IAsynchronousIterator} instead. This value should on the order of {@link #getChunkCapacity()}.
@@ -148,7 +148,7 @@ public interface IJoinNexus {
    */
   int getFullyBufferedReadThreshold();
 
-  /**
+  /*
    * Resolve the property value using the {@link IIndexManager}, the namespace of the resource, and
    * the {@link Properties} instance to be tested as hidden parameters.
    *
@@ -159,7 +159,7 @@ public interface IJoinNexus {
    */
   String getProperty(final String name, final String defaultValue);
 
-  /**
+  /*
    * Resolves, parses, and validates the property value.
    *
    * @param name The property name.
@@ -168,7 +168,7 @@ public interface IJoinNexus {
    */
   <T> T getProperty(final String name, final String defaultValue, IValidator<T> validator);
 
-  /**
+  /*
    * Binds variables from a visited element.
    *
    * <p>Note: The bindings are propagated before the constraints are verified so this method will
@@ -187,7 +187,7 @@ public interface IJoinNexus {
    */
   boolean bind(final IRule rule, final int index, final Object e, final IBindingSet bindings);
 
-  /**
+  /*
    * Binds variables from a visited element.
    *
    * <p>Note: The bindings are propagated before the constraints are verified so this method will
@@ -204,7 +204,7 @@ public interface IJoinNexus {
    */
   boolean bind(IPredicate<?> pred, IConstraint[] constraints, Object e, IBindingSet bindings);
 
-  /**
+  /*
    * Return a 'fake' binding for the given variable in the specified predicate. The binding should
    * be such that it is of a legal type for the slot in the predicate associated with that variable.
    * This is used to discovery the {@link IKeyOrder} associated with the {@link IAccessPath} that
@@ -217,7 +217,7 @@ public interface IJoinNexus {
    */
   IConstant fakeBinding(IPredicate predicate, Var var);
 
-  /**
+  /*
    * Create a new {@link ISolution}. The behavior of this method generally depends on bit flags
    * specified when the {@link IJoinNexus} was created.
    *
@@ -239,7 +239,7 @@ public interface IJoinNexus {
    */
   ISolution newSolution(IRule rule, IBindingSet bindingSet);
 
-  /**
+  /*
    * Return an {@link ISortKeyBuilder} for an {@link IBindingSet}. The sort key may be used to SORT
    * {@link IBindingSet}s or to impose a DISTINCT filter on {@link ISolution}s, etc.
    *
@@ -252,29 +252,29 @@ public interface IJoinNexus {
   /** The flags that effect the behavior of {@link #newSolution(IRule, IBindingSet)}. */
   int solutionFlags();
 
-  /**
+  /*
    * Bit flag indicating that {@link #newSolution(IRule, IBindingSet)} should materialize an element
    * from the {@link IRule} and {@link IBindingSet} and make it available via {@link
    * ISolution#get()}.
    */
-  final int ELEMENT = 1 << 0;
+  int ELEMENT = 1 << 0;
 
-  /**
+  /*
    * Bit flag indicating that {@link #newSolution(IRule, IBindingSet)} should clone the {@link
    * IBindingSet} and make it available via {@link ISolution#getBindingSet()}.
    */
-  final int BINDINGS = 1 << 1;
+  int BINDINGS = 1 << 1;
 
-  /**
+  /*
    * Bit flag indicating that {@link #newSolution(IRule, IBindingSet)} make the {@link IRule} that
    * generated the {@link ISolution} available via {@link ISolution#getRule()}.
    */
-  final int RULE = 1 << 2;
+  int RULE = 1 << 2;
 
   /** {@link #ELEMENT} and {@link #BINDINGS} and {@link #RULE}. */
-  final int ALL = ELEMENT | BINDINGS | RULE;
+  int ALL = ELEMENT | BINDINGS | RULE;
 
-  /**
+  /*
    * Factory for {@link IBindingSet} implementations.
    *
    * <p>Note: The factory MUST apply any bound {@link IRule#getConstants() constants} for the {@link
@@ -285,7 +285,7 @@ public interface IJoinNexus {
    */
   IBindingSet newBindingSet(IRule rule);
 
-  /**
+  /*
    * Return the effective {@link IRuleTaskFactory} for the rule. When the rule is a step of a
    * sequential program writing on one or more {@link IMutableRelation}s, then the returned {@link
    * IStepTask} must automatically flush the buffer after the rule executes in order to ensure that
@@ -306,7 +306,7 @@ public interface IJoinNexus {
    */
   IRuleTaskFactory getRuleTaskFactory(boolean parallel, IRule rule);
 
-  /**
+  /*
    * Return the factory for {@link IEvaluationPlan}s.
    *
    * @return The factory.
@@ -319,7 +319,7 @@ public interface IJoinNexus {
   /** Equivalent to {@link IJoinNexusFactory#getReadTimestamp()}. */
   long getReadTimestamp();
 
-  /**
+  /*
    * Locate and return the view of the relation identified by the {@link IPredicate}. The
    * implementation must choose a view that will accept writes iff this is a mutation operation and
    * which is associated with an appropriate timestamp.
@@ -330,7 +330,7 @@ public interface IJoinNexus {
    */
   IRelation getHeadRelationView(IPredicate pred);
 
-  /**
+  /*
    * Locate and return the view of the relation(s) identified by the {@link IPredicate}.
    *
    * <p>Note: This method is responsible for returning a fused view when more than one relation name
@@ -347,8 +347,8 @@ public interface IJoinNexus {
    */
   IRelation getTailRelationView(IPredicate pred);
 
-  //    /**
-  //     * Obtain an access path reading from the view for the relation associated
+  //    /*
+//     * Obtain an access path reading from the view for the relation associated
   //     * with the specified predicate (from the tail of some rule).
   //     *
   //     * @param pred
@@ -362,7 +362,7 @@ public interface IJoinNexus {
   //     */
   //    IAccessPath getTailAccessPath(IPredicate pred);
 
-  /**
+  /*
    * Obtain an access path reading from relation for the specified predicate (from the tail of some
    * rule).
    *
@@ -378,7 +378,7 @@ public interface IJoinNexus {
    */
   IAccessPath getTailAccessPath(IRelation relation, IPredicate pred);
 
-  /**
+  /*
    * Return an iterator visiting the {@link PartitionLocator} for the index partitions from which an
    * {@link IAccessPath} must read in order to materialize all elements which would be visited for
    * that predicate.
@@ -399,7 +399,7 @@ public interface IJoinNexus {
   /** Used to locate indices, relations and relation containers. */
   IIndexManager getIndexManager();
 
-  /**
+  /*
    * Run as a query.
    *
    * @param step The {@link IRule} or {@link IProgram}.
@@ -413,7 +413,7 @@ public interface IJoinNexus {
    */
   IChunkedOrderedIterator<ISolution> runQuery(IStep step) throws Exception;
 
-  /**
+  /*
    * Run as mutation operation (it will write any solutions onto the relations named in the head of
    * the various {@link IRule}s).
    *
@@ -424,13 +424,13 @@ public interface IJoinNexus {
    */
   long runMutation(IStep step) throws Exception;
 
-  /**
+  /*
    * Return a thread-safe buffer onto which chunks of computed {@link ISolution}s will be written.
    * The client will drain {@link ISolution}s from buffer using {@link IBlockingBuffer#iterator()}.
    */
   IBlockingBuffer<ISolution[]> newQueryBuffer();
 
-  /**
+  /*
    * Return a thread-safe buffer onto which chunks of computed {@link ISolution}s will be written.
    * When the buffer is {@link IBuffer#flush() flushed} the chunked {@link ISolution}s will be
    * inserted into the {@link IMutableRelation}.
@@ -440,7 +440,7 @@ public interface IJoinNexus {
    */
   IBuffer<ISolution[]> newInsertBuffer(IMutableRelation relation);
 
-  /**
+  /*
    * Return a thread-safe buffer onto which chunks of computed {@link ISolution}s will be written.
    * When the buffer is {@link IBuffer#flush() flushed} the chunks of {@link ISolution}s will be
    * deleted from the {@link IMutableRelation}.
@@ -450,7 +450,7 @@ public interface IJoinNexus {
    */
   IBuffer<ISolution[]> newDeleteBuffer(IMutableRelation relation);
 
-  /**
+  /*
    * Return a buffer suitable for a single-threaded writer that flushes onto the specified
    * <i>targetBuffer</i>.
    *
@@ -467,7 +467,7 @@ public interface IJoinNexus {
    */
   IBuffer<ISolution> newUnsynchronizedBuffer(IBuffer<ISolution[]> targetBuffer, int chunkCapacity);
 
-  /**
+  /*
    * Return the {@link IElementFilter} that will be used to reject solutions based on the bindings
    * for the head of the rule -or- <code>null</code> if no filter will be imposed. This may be used
    * for query or mutation.
@@ -482,13 +482,13 @@ public interface IJoinNexus {
    */
   IElementFilter<ISolution> getSolutionFilter();
 
-  /**
+  /*
    * Return the object that is responsible for (de-)serializing chunks of {@link ISolution}s. This
    * is used by high-level query to transfer {@link ISolution}s back to the client.
    */
   IStreamSerializer<ISolution[]> getSolutionSerializer();
 
-  /**
+  /*
    * Return the object that is responsible for (de-)serializing chunks of {@link IBindingSet}s. This
    * is used by {@link JoinTask}s to transfer intermediate {@link IBindingSet}s from one join
    * dimension to the next.

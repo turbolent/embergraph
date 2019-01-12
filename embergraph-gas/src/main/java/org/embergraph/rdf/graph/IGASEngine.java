@@ -15,14 +15,14 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph;
 
-/**
- * The interface used to submit an {@link IGASProgram} for evaluation.
+/*
+* The interface used to submit an {@link IGASProgram} for evaluation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IGASEngine {
 
-  /**
+  /*
    * Obtain an execution context for the specified {@link IGASProgram}.
    *
    * @param graphAccessor Indicates the graph to be processed.
@@ -38,7 +38,7 @@ public interface IGASEngine {
   <VS, ES, ST> IGASContext<VS, ES, ST> newGASContext(
       IGraphAccessor graphAccessor, IGASProgram<VS, ES, ST> program);
 
-  /**
+  /*
    * Return <code>true</code> iff the frontier should be sorted. Backends that benefit from an
    * ordered frontier (e.g., to vector IOs) should return <code>true</code>. Backends that do not
    * benefit from an ordered frontier (e.g., a backend based on hash collections in memory) should
@@ -59,8 +59,8 @@ public interface IGASEngine {
    * Note: This is a problem since we then need to scope the SailConnection
    * internally.
    */
-  //    /**
-  //     * Access the default graph. In platforms that support multiple graphs, the
+  //    /*
+//     * Access the default graph. In platforms that support multiple graphs, the
   //     * accessed graph will be platform specific. (The sense of graph here is a
   //     * triple or a quad store, not a named graph.)
   //     */

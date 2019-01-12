@@ -47,8 +47,8 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ManagedResourceService;
 import org.embergraph.service.ResourceService;
 
-/**
- * An {@link IEmbergraphFederation} aware {@link QueryEngine}.
+/*
+* An {@link IEmbergraphFederation} aware {@link QueryEngine}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -56,15 +56,15 @@ public class FederatedQueryEngine extends QueryEngine {
 
   private static final transient Logger log = Logger.getLogger(FederatedQueryEngine.class);
 
-  /**
+  /*
    * Annotations understood by the {@link QueryEngine}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface Annotations extends QueryEngine.Annotations {
 
-    //        /**
-    //         * The class used to map binding sets across the federation.
+    //        /*
+//         * The class used to map binding sets across the federation.
     //         */
     //        String CHUNK_HANDLER = FederatedQueryEngine.class.getName()
     //                + ".chunkHandler";
@@ -74,7 +74,7 @@ public class FederatedQueryEngine extends QueryEngine {
   /** The {@link UUID} associated with this service. */
   private final UUID serviceUUID;
 
-  /**
+  /*
    * The {@link IEmbergraphFederation} iff running in scale-out.
    *
    * <p>Note: The {@link IEmbergraphFederation} is required in scale-out in order to perform shard
@@ -82,7 +82,7 @@ public class FederatedQueryEngine extends QueryEngine {
    */
   private final IEmbergraphFederation<?> fed;
 
-  /**
+  /*
    * The service used to expose {@link ByteBuffer}s and managed index resources for transfer to
    * remote services in support of distributed query evaluation.
    */
@@ -94,15 +94,15 @@ public class FederatedQueryEngine extends QueryEngine {
   /** The proxy for this query engine when used as a query controller. */
   private final IQueryClient clientProxy;
 
-  //    /**
-  //     * A queue of {@link IChunkMessage}s which needs to have their data
+  //    /*
+//     * A queue of {@link IChunkMessage}s which needs to have their data
   //     * materialized so an operator can consume those data on this node.
   //     * This queue is drained by the {@link MaterializeChunksTask}.
   //     */
   //    final private BlockingQueue<IChunkMessage<?>> chunkMaterializationQueue = new
   // LinkedBlockingQueue<IChunkMessage<?>>();
 
-  /**
+  /*
    * The service used to accept {@link IChunkMessage} for evaluation. This is started by {@link
    * #init()}.
    *
@@ -112,8 +112,8 @@ public class FederatedQueryEngine extends QueryEngine {
   private final AtomicReference<ExecutorService> acceptTaskService =
       new AtomicReference<ExecutorService>();
 
-  //    /**
-  //     * The {@link Future} for the task draining the {@link #chunkMaterializationQueue}.
+  //    /*
+//     * The {@link Future} for the task draining the {@link #chunkMaterializationQueue}.
   //     */
   //    private final AtomicReference<FutureTask<Void>> acceptMessageTaskFuture = new
   // AtomicReference<FutureTask<Void>>();
@@ -148,7 +148,7 @@ public class FederatedQueryEngine extends QueryEngine {
   //
   //    }
 
-  /**
+  /*
    * The service used to expose {@link ByteBuffer}s and managed index resources for transfer to
    * remote services in support of distributed query evaluation.
    */
@@ -157,7 +157,7 @@ public class FederatedQueryEngine extends QueryEngine {
     return resourceService;
   }
 
-  /**
+  /*
    * Overridden to return an RMI proxy for this {@link FederatedQueryEngine}.
    *
    * <p>{@inheritDoc}
@@ -180,7 +180,7 @@ public class FederatedQueryEngine extends QueryEngine {
     return isDataService;
   }
 
-  /**
+  /*
    * Overridden to strengthen the return type.
    *
    * <p>{@inheritDoc}
@@ -196,7 +196,7 @@ public class FederatedQueryEngine extends QueryEngine {
     return getClass().getName() + "{serviceUUID=" + getServiceUUID() + "}";
   }
 
-  /**
+  /*
    * Constructor used on a {@link DataService} (a query engine peer).
    *
    * @param dataService The data service.
@@ -211,7 +211,7 @@ public class FederatedQueryEngine extends QueryEngine {
         true /* isDataService */);
   }
 
-  /**
+  /*
    * Constructor used on a non-{@link DataService} node to expose a query controller. Since the
    * query controller is not embedded within a data service it needs to provide its own {@link
    * ResourceService} and local {@link IIndexManager}.
@@ -264,8 +264,7 @@ public class FederatedQueryEngine extends QueryEngine {
        */
 
       this.clientProxy =
-          (IQueryClient)
-              ((AbstractDistributedFederation<?>) fed).getProxy(this, true /* enableDGC */);
+          ((AbstractDistributedFederation<?>) fed).getProxy(this, true /* enableDGC */);
 
     } else {
 
@@ -274,7 +273,7 @@ public class FederatedQueryEngine extends QueryEngine {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Extended to also initialize a thread which will materialize {@link IChunkMessage} for
@@ -298,7 +297,7 @@ public class FederatedQueryEngine extends QueryEngine {
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Extended to stop materializing chunks once all running queries are done.
@@ -316,7 +315,7 @@ public class FederatedQueryEngine extends QueryEngine {
     acceptTaskService.set(null);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Extended to stop materializing chunks.
@@ -336,7 +335,7 @@ public class FederatedQueryEngine extends QueryEngine {
     super.shutdownNow();
   }
 
-  /**
+  /*
    * Materialize an {@link IChunkMessage} for processing and place it on the queue of accepted
    * messages.
    *
@@ -359,8 +358,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
       try {
 
-        /*
-         * Note: accept() sets [q] as a side-effect! It SHOULD NOT be
+      /*
+       * Note: accept() sets [q] as a side-effect! It SHOULD NOT be
          * resolved in the constructor since it may require an RMI back
          * to the query controller to materialize the query on this
          * node.
@@ -375,8 +374,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
         if (log.isDebugEnabled()) log.debug("accepted: " + msg);
 
-        /*
-         * Note: This can block if queue for each (operator,shard)
+      /*
+       * Note: This can block if queue for each (operator,shard)
          * bundle has a bounded capacity. If it blocks then the
          * acceptQueue can stagnate as no new IChunkMessages can be
          * materialized.
@@ -392,8 +391,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
         if (q != null) {
 
-          /*
-           * Note: Since no one is watching the Future for this task,
+        /*
+       * Note: Since no one is watching the Future for this task,
            * an error here needs to cause the query to abort.
            */
 
@@ -406,7 +405,7 @@ public class FederatedQueryEngine extends QueryEngine {
       }
     }
 
-    /**
+    /*
      * Accept and materialize a chunk for processing.
      *
      * @param msg The message.
@@ -432,8 +431,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
         if (isController) {
 
-          /*
-           * @todo This would indicate that the query had been
+        /*
+       * @todo This would indicate that the query had been
            * concurrently terminated and cleared from the set of
            * runningQueries and that we were not retaining metadata
            * about queries which had been terminated.
@@ -445,16 +444,16 @@ public class FederatedQueryEngine extends QueryEngine {
 
         try {
 
-          /*
-           * Get the query declaration from the query controller.
+        /*
+       * Get the query declaration from the query controller.
            */
 
           q = getDeclaredQuery(queryId);
 
         } catch (IllegalArgumentException ex) {
 
-          /*
-           * The query is no longer available on the query controller.
+        /*
+       * The query is no longer available on the query controller.
            * Typically, it has been cancelled. For example, by
            * satisifying a LIMIT.
            */
@@ -467,8 +466,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
         if (q == null) {
 
-          /*
-           * Note: Should never be null per getDeclaredQuery().
+        /*
+       * Note: Should never be null per getDeclaredQuery().
            */
 
           throw new AssertionError();
@@ -486,8 +485,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
           if (!AbstractRunningQuery.isRootCauseInterrupt(t)) {
 
-            /*
-             * Note: This can be triggered by serialization errors.
+          /*
+       * Note: This can be triggered by serialization errors.
              *
              * Whatever is thrown out here, we want to log @ ERROR
              * unless the root cause was an interrupt.
@@ -509,7 +508,7 @@ public class FederatedQueryEngine extends QueryEngine {
       return !q.isCancelled();
     }
 
-    /**
+    /*
      * This code path handles the message the first time a chunk is observed on a node for a query.
      * Since we do not broadcast the query to all nodes, the node has to resolve the query from the
      * query controller.
@@ -548,8 +547,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
       if (query == null) {
 
-        /*
-         * Should never be null; getQuery() throws
+      /*
+       * Should never be null; getQuery() throws
          * IllegalArgumentException.
          */
 
@@ -586,7 +585,7 @@ public class FederatedQueryEngine extends QueryEngine {
     putIfAbsent(queryId, q);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO The timing and responsibility for materializing chunks needs to be examined further
@@ -631,7 +630,7 @@ public class FederatedQueryEngine extends QueryEngine {
     new MaterializeMessageTask(msg).run();
   }
 
-  /**
+  /*
    * Overridden to cancel all running operators for the query on this node.
    *
    * <p>{@inheritDoc}
@@ -667,7 +666,7 @@ public class FederatedQueryEngine extends QueryEngine {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to always use a {@link FederatedRunningQuery}.
@@ -691,7 +690,7 @@ public class FederatedQueryEngine extends QueryEngine {
         realSource);
   }
 
-  /**
+  /*
    * Resolve an {@link IQueryPeer}.
    *
    * <p>Note: This only resolves the peers running on the {@link IDataService}s. It will not resolve
@@ -723,8 +722,8 @@ public class FederatedQueryEngine extends QueryEngine {
 
       if (proxy == null) {
 
-        /*
-         * Note: Presumably this is due to the concurrent tear down of
+      /*
+       * Note: Presumably this is due to the concurrent tear down of
          * the peer.
          */
 
@@ -757,7 +756,7 @@ public class FederatedQueryEngine extends QueryEngine {
     return new FederatedQueryEngineCounters();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to strengthen the return type.

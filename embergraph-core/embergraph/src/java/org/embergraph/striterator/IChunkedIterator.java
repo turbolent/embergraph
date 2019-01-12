@@ -26,8 +26,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.embergraph.btree.IRangeQuery;
 
-/**
- * An iterator that is able visit items in chunks. The elements in the chunk will be in the same
+/*
+* An iterator that is able visit items in chunks. The elements in the chunk will be in the same
  * order that they would be visited by {@link Iterator#next()}. The size of the chunk is up to the
  * implementation.
  *
@@ -48,23 +48,23 @@ public interface IChunkedIterator<E> extends ICloseableIterator<E> {
   /** The default chunk size. */
   int DEFAULT_CHUNK_SIZE = 100; // 00;
 
-  /**
+  /*
    * The next element available from the iterator.
    *
    * @throws NoSuchElementException if the iterator is exhausted.
    */
   @Override
-  public E next();
+  E next();
 
-  /**
+  /*
    * Return the next "chunk" from the iterator.
    *
    * @return The next chunk.
    * @throws NoSuchElementException if the iterator is exhausted.
    */
-  public E[] nextChunk();
+  E[] nextChunk();
 
-  /**
+  /*
    * Removes the last element visited by {@link #next()} (optional operation).
    *
    * <p>Note: This method is not readily suited for use with {@link #nextChunk()} since the latter
@@ -75,5 +75,5 @@ public interface IChunkedIterator<E> extends ICloseableIterator<E> {
    * index as they are visited.
    */
   @Override
-  public void remove();
+  void remove();
 }

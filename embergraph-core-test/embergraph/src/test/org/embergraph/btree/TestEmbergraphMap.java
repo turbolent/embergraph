@@ -36,8 +36,8 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for {@link EmbergraphMap}.
+/*
+* Test suite for {@link EmbergraphMap}.
  *
  * @todo write tests where delete markers are and are not enabled or make these tests run against
  *     all variants.
@@ -59,7 +59,7 @@ public class TestEmbergraphMap extends TestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * The test fixture - this is backed by a temporary store in order to make the unit test cleanup
    * simple.
    */
@@ -138,7 +138,7 @@ public class TestEmbergraphMap extends TestCase {
     assertFalse(map.containsValue("abc"));
   }
 
-  /**
+  /*
    * Handles {@link String} keys and values and makes the keys available for {@link EmbergraphMap}
    * and {@link EmbergraphSet} (under the assumption that the key and the value are the same!). The
    * actual index order is governed by {@link TestKeyBuilder#asSortKey(Object)}.
@@ -158,7 +158,7 @@ public class TestEmbergraphMap extends TestCase {
       super(keyBuilderFactory);
     }
 
-    /**
+    /*
      * Note: The key is materialized from the value since the encoding to the unsigned byte[] is not
      * reversable.
      */

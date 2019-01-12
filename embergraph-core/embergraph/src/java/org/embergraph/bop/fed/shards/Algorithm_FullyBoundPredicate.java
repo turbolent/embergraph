@@ -10,8 +10,8 @@ import org.embergraph.service.ndx.AbstractSplitter;
 import org.embergraph.service.ndx.ISplitter;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * When the asBound predicates are known to be fully bound, then the {@link AbstractSplitter} can be
+/*
+* When the asBound predicates are known to be fully bound, then the {@link AbstractSplitter} can be
  * used. This approach is quite efficient.
  */
 class Algorithm_FullyBoundPredicate<E extends IBindingSet, F> implements IShardMapper<E, F> {
@@ -24,7 +24,7 @@ class Algorithm_FullyBoundPredicate<E extends IBindingSet, F> implements IShardM
 
   private final ISplitter splitter;
 
-  /**
+  /*
    * @param op
    * @param keyOrder The key order which will be used for the predicate when it is fully bound.
    */

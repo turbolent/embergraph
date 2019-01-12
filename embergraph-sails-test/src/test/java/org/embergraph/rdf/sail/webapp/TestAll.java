@@ -26,8 +26,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.embergraph.journal.BufferMode;
 
-/**
- * Test suite.
+/*
+* Test suite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

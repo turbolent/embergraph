@@ -33,8 +33,8 @@ import javax.management.ObjectName;
 import javax.management.StandardMBean;
 import javax.management.monitor.CounterMonitor;
 
-/**
- * Class demonstrates the ability to declare get/set and get methods on the the {@link IFoo}
+/*
+* Class demonstrates the ability to declare get/set and get methods on the the {@link IFoo}
  * interface and expose a {@link Foo} implementation of that interface as a {@link StandardMBean}.
  * You can run {@link #main(String[])} and start <code>jconsole</code> and inspect/set the "foo"
  * attribute and see the change on the read-only "bar" attribute. No fuss, no muss.
@@ -62,7 +62,7 @@ import javax.management.monitor.CounterMonitor;
  */
 public class JMXTest {
 
-  /**
+  /*
    * Interface to be exposed as an MBean.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -70,14 +70,14 @@ public class JMXTest {
    */
   public interface IFoo {
 
-    public int getFoo();
+    int getFoo();
 
-    public int setFoo(int foo);
+    int setFoo(int foo);
 
-    public String getBar();
+    String getBar();
   }
 
-  /**
+  /*
    * Object implementing that interface.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -108,7 +108,7 @@ public class JMXTest {
 
   public interface IClock {
 
-    public long getTime();
+    long getTime();
   }
 
   public static class Clock extends Thread implements IClock {
@@ -137,7 +137,7 @@ public class JMXTest {
     }
   }
 
-  /**
+  /*
    * When you run this class it registers an instance of {@link Foo} as an MBean and then waits
    * forever. You can run <code>jconsole</code> and verify that you can see the MBean and its
    * attributes and change attribute values using the setter(s) declared on the {@link IFoo}
@@ -203,10 +203,10 @@ public class JMXTest {
 
       cmon.setGranularityPeriod(1000 /* ms */);
 
-      cmon.setInitThreshold((Long) System.currentTimeMillis());
+      cmon.setInitThreshold(System.currentTimeMillis());
 
       // offset after event trigger for retrigger.
-      cmon.setOffset((Long) 5000L /* ms since clock is also time */);
+      cmon.setOffset(5000L /* ms since clock is also time */);
 
       // set the difference mode ?!?
       cmon.setDifferenceMode(false);

@@ -13,8 +13,8 @@ import org.embergraph.rdf.internal.impl.BlobIV;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 
-/**
- * Task resolves a chunk of {@link BlobIV}s against the {@link LexiconKeyOrder#BLOBS} index.
+/*
+* Task resolves a chunk of {@link BlobIV}s against the {@link LexiconKeyOrder#BLOBS} index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -31,7 +31,7 @@ class ResolveBlobsTask implements Callable<Void> {
   private final ITermCache<IV<?, ?>, EmbergraphValue> termCache;
   private final EmbergraphValueFactory valueFactory;
 
-  /**
+  /*
    * @param ndx The index that will be used to resolve the term identifiers.
    * @param fromIndex The first index in <i>keys</i> to resolve.
    * @param toIndex The first index in <i>keys</i> that will not be resolved.
@@ -103,8 +103,8 @@ class ResolveBlobsTask implements Callable<Void> {
           continue;
         }
 
-        /*
-         * Note: This automatically sets the valueFactory reference
+      /*
+       * Note: This automatically sets the valueFactory reference
          * on the de-serialized value.
          */
         EmbergraphValue value = valueFactory.getValueSerializer().deserialize(data);
@@ -119,8 +119,8 @@ class ResolveBlobsTask implements Callable<Void> {
           value = tmp;
         }
 
-        /*
-         * The term identifier was set when the value was
+      /*
+       * The term identifier was set when the value was
          * de-serialized. However, this will throw an
          * IllegalStateException if the value somehow was assigned
          * the wrong term identifier (paranoia test).

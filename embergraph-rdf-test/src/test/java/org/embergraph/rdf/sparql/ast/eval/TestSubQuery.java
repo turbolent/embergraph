@@ -29,8 +29,8 @@ import org.embergraph.rdf.sparql.ast.optimizers.ASTSparql11SubqueryOptimizer;
 import org.embergraph.rdf.sparql.ast.optimizers.TestASTSparql11SubqueryOptimizer;
 import org.openrdf.model.Value;
 
-/**
- * Data driven test suite.
+/*
+* Data driven test suite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -45,7 +45,7 @@ public class TestSubQuery extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -103,7 +103,7 @@ public class TestSubQuery extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("subquery-slice-01").runTest();
   }
 
-  /**
+  /*
    * Simple Sub-Select unit test
    *
    * <pre>
@@ -124,7 +124,7 @@ public class TestSubQuery extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("sparql-subselect").runTest();
   }
 
-  /**
+  /*
    * A unit test from the Sesame 2.5 TCK.
    *
    * <pre>
@@ -142,7 +142,7 @@ public class TestSubQuery extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A unit test from the Sesame 2.5 TCK.
    *
    * <pre>
@@ -163,7 +163,7 @@ public class TestSubQuery extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Test that only projected variables are included in subquery results.
    *
    * <pre>
@@ -184,7 +184,7 @@ public class TestSubQuery extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("sparql11-subquery-scope").runTest();
   }
 
-  /**
+  /*
    * In this test variant, the FILTER winds up attached to a {@link NamedSubqueryRoot} (there are no
    * shared variables projected out of the sub-select) and does not require RDF {@link Value}
    * materialization.
@@ -232,7 +232,7 @@ public class TestSubQuery extends AbstractDataDrivenSPARQLTestCase {
             .hasNext());
   }
 
-  /**
+  /*
    * Variant where the FILTER requires RDF Value materialization and the sub-select is lifted out as
    * a named subquery.
    *
@@ -274,7 +274,7 @@ public class TestSubQuery extends AbstractDataDrivenSPARQLTestCase {
             .hasNext());
   }
 
-  /**
+  /*
    * This ticket is for a bug when the {@link ASTComplexOptionalOptimizer} runs. If that optimizer
    * is disabled, then the query is fine. There are two versions for this method. One in which one
    * of the OPTIONALs is turned into a required join. In this case, the problem is not demonstrated
@@ -326,7 +326,7 @@ public class TestSubQuery extends AbstractDataDrivenSPARQLTestCase {
     h.runTest();
   }
 
-  /**
+  /*
    * In this variant, one of the child join groups is OPTIONAL rather than required. This shows the
    * problem reported in the ticket where adding an OPTIONAL join group reduces the number of
    * solutions.

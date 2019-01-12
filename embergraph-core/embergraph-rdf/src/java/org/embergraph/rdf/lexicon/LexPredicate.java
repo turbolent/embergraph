@@ -30,8 +30,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 
-/**
- * A <code>
+/*
+* A <code>
  * lex(EmbergraphValue,IV)
  * </code> predicate used for querying the {@link LexiconRelation}'s TERMS index.
  *
@@ -43,7 +43,7 @@ public class LexPredicate extends Predicate<EmbergraphValue> {
   /** */
   private static final long serialVersionUID = 6379772624297485704L;
 
-  /**
+  /*
    * Simplified forward lookup ctor. Use this ctor to lookup an {@link IV} from a {@link
    * EmbergraphValue}.
    *
@@ -71,7 +71,7 @@ public class LexPredicate extends Predicate<EmbergraphValue> {
         new NV(Annotations.TIMESTAMP, timestamp));
   }
 
-  /**
+  /*
    * Simplified reverse lookup ctor. Use this ctor to lookup a {@link EmbergraphValue} from an
    * {@link IV}.
    *
@@ -136,7 +136,7 @@ public class LexPredicate extends Predicate<EmbergraphValue> {
     return (IVariableOrConstant<IV>) get(LexiconKeyOrder.SLOT_IV);
   }
 
-  /**
+  /*
    * Strengthened return type.
    *
    * <p>{@inheritDoc}

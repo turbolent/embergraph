@@ -30,8 +30,8 @@ import org.embergraph.io.writecache.WriteCache.FileChannelScatteredWriteCache;
 import org.embergraph.io.writecache.WriteCacheService;
 import org.embergraph.quorum.Quorum;
 
-/**
- * Defines the WriteCacheService to be used by the RWStore.
+/*
+* Defines the WriteCacheService to be used by the RWStore.
  *
  * @author mgc
  */
@@ -74,7 +74,7 @@ public class RWWriteCacheService extends WriteCacheService implements IWriteCach
     return true;
   }
 
-  /**
+  /*
    * Provide default {@link FileChannelScatteredWriteCache}.
    *
    * <p>Note: This is used by the unit tests, but not by the {@link RWStore}.

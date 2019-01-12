@@ -58,8 +58,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/**
- * Formats for a properties file.
+/*
+* Formats for a properties file.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -110,8 +110,8 @@ public class PropertiesFormat extends FileFormat implements Iterable<PropertiesF
     register(XML);
   }
 
-  //    /**
-  //     * Binary properties file using <code>application/octet-stream</code>
+  //    /*
+//     * Binary properties file using <code>application/octet-stream</code>
   //     */
   //    public static final PropertiesFormat BINARY = new PropertiesFormat(
   //            "application/octet-stream",
@@ -120,7 +120,7 @@ public class PropertiesFormat extends FileFormat implements Iterable<PropertiesF
   //            (List) Collections.emptyList()// known-file-extensions
   //    );
 
-  /**
+  /*
    * Creates a new RDFFormat object.
    *
    * @param name The name of the RDF file format, e.g. "RDF/XML".
@@ -141,7 +141,7 @@ public class PropertiesFormat extends FileFormat implements Iterable<PropertiesF
     super(name, mimeTypes, charset, fileExtensions);
   }
 
-  /**
+  /*
    * Tries to determine the appropriate file format based on the a MIME type that describes the
    * content type.
    *
@@ -156,7 +156,7 @@ public class PropertiesFormat extends FileFormat implements Iterable<PropertiesF
     return forMIMEType(mimeType, null);
   }
 
-  /**
+  /*
    * Tries to determine the appropriate file format based on the a MIME type that describes the
    * content type. The supplied fallback format will be returned when the MIME type was not
    * recognized.

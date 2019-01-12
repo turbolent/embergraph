@@ -64,8 +64,8 @@ import org.embergraph.quorum.MockQuorumFixture.MockQuorum.MockQuorumWatcher;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.InnerCause;
 
-/**
- * A mock object providing the shared quorum state for a set of {@link QuorumClient}s running in the
+/*
+* A mock object providing the shared quorum state for a set of {@link QuorumClient}s running in the
  * same JVM.
  *
  * <p>This fixture dumps the events into queues drained by a per-watcher thread. This approximates
@@ -87,7 +87,7 @@ public class MockQuorumFixture {
   /** Single threaded executor used to dispatch events to the {@link MockQuorumWatcher}s. */
   private ExecutorService dispatchService = null;
 
-  /**
+  /*
    * The set of registered listeners. Each listener will get each event. For each event, the next
    * listener will not get the event until it has been handled by the previous listener. The {@link
    * MockQuorumWatcher}s collaborate to create this behavior.
@@ -101,7 +101,7 @@ public class MockQuorumFixture {
   /** Condition used to await the watcher completing the handling of an event. */
   private final Condition eventDone = globalSynchronousLock.newCondition();
 
-  /**
+  /*
    * Deque of events from actors awaiting dispatch to {@link MockQuorumWatcher}. The fixture and
    * each {@link MockQuorumWatcher} run a thread. The fixture's thread pumps each event into a local
    * queue for each {@link MockQuorumWatcher}. The watcher's thread takes an event from the queue
@@ -109,7 +109,7 @@ public class MockQuorumFixture {
    */
   private final LinkedBlockingDeque<QuorumEvent> deque = new LinkedBlockingDeque<QuorumEvent>();
 
-  /**
+  /*
    * The lock protecting state changes in the remaining fields and used to provide {@link
    * Condition}s used to await various states.
    */
@@ -129,7 +129,7 @@ public class MockQuorumFixture {
   /** The service {@link UUID} of each service registered as a member of this quorum. */
   private final LinkedHashSet<UUID> members = new LinkedHashSet<UUID>();
 
-  /**
+  /*
    * A map from collection of the distinct <i>lastCommitTimes</i> for which at least one service has
    * cast its vote to the set of services which have cast their vote for that <i>lastCommitTime</i>,
    * <em>in vote order</em>.
@@ -137,13 +137,13 @@ public class MockQuorumFixture {
   private final TreeMap<Long /* lastCommitTime */, LinkedHashSet<UUID>> votes =
       new TreeMap<Long, LinkedHashSet<UUID>>();
 
-  /**
+  /*
    * The services joined with the quorum in the order in which they join. This MUST be a {@link
    * LinkedHashSet} to preserve the join order.
    */
   private final LinkedHashSet<UUID> joined = new LinkedHashSet<UUID>();
 
-  /**
+  /*
    * The ordered set of services in the write pipeline. The {@link LinkedHashSet} is responsible for
    * preserving the pipeline order.
    *
@@ -163,7 +163,7 @@ public class MockQuorumFixture {
   private final ConcurrentHashMap<UUID, QuorumMember<?>> known =
       new ConcurrentHashMap<UUID, QuorumMember<?>>();
 
-  /**
+  /*
    * An {@link ExecutorService} which can be used by the unit tests.
    *
    * @see QuorumMember#getExecutor()
@@ -172,7 +172,7 @@ public class MockQuorumFixture {
     return executorService;
   }
 
-  /**
+  /*
    * Resolve a known {@link QuorumMember} for the fixture.
    *
    * @param serviceId The {@link UUID}for the {@link QuorumMember}'s service.
@@ -188,7 +188,7 @@ public class MockQuorumFixture {
     return member;
   }
 
-  /**
+  /*
    * Resolve the service by its {@link UUID} for any service running against this fixture.
    *
    * @param serviceId The {@link UUID} for the service.
@@ -242,7 +242,7 @@ public class MockQuorumFixture {
     if (dispatchService == null) throw new IllegalStateException();
   }
 
-  /**
+  /*
    * Dispatches each event to each watcher in turn. The event is not dispatched to the next watcher
    * until the current watcher is finished with the event.
    */
@@ -269,8 +269,8 @@ public class MockQuorumFixture {
         while (deque.isEmpty()) {
           dequeNotEmpty.await();
         }
-        /*
-         * Note: only peek for now so deque remains non-empty until we
+      /*
+       * Note: only peek for now so deque remains non-empty until we
          * are done with this event.
          */
         if ((e = deque.peek()) == null) throw new AssertionError();
@@ -304,8 +304,8 @@ public class MockQuorumFixture {
         // now take the event.
         if (e != deque.take()) throw new AssertionError();
         if (deque.isEmpty()) {
-          /*
-           * Signal if the deque is empty _and_ the event has been
+        /*
+       * Signal if the deque is empty _and_ the event has been
            * dispatched.
            */
           dequeEmpty.signalAll();
@@ -316,7 +316,7 @@ public class MockQuorumFixture {
     }
   }
 
-  /**
+  /*
    * Block until the event deque has been drained (that is, until all watchers have handled all
    * events which have already been generated). For example:
    *
@@ -356,7 +356,7 @@ public class MockQuorumFixture {
     //        }
   }
 
-  /**
+  /*
    * Accept an event. Events are generated by the methods below which update our internal state.
    * Events are ONLY generated if the internal state is changed by the request, and that state
    * change is made atomically while holding the {@link #lock}. This guarantees that we will not see
@@ -482,8 +482,8 @@ public class MockQuorumFixture {
     try {
       if (pipeline.remove(serviceId)) {
         if (log.isDebugEnabled()) log.debug("serviceId=" + serviceId);
-        /*
-         * Remove the service from the pipeline.
+      /*
+       * Remove the service from the pipeline.
          */
         accept(
             new AbstractQuorum.E(
@@ -596,7 +596,7 @@ public class MockQuorumFixture {
     }
   }
 
-  /**
+  /*
    * Mock {@link Quorum} implementation with increased visibility of some methods so we can pump
    * state changes into the {@link MockQuorumFixture2}.
    *
@@ -608,7 +608,7 @@ public class MockQuorumFixture {
 
     private final MockQuorumFixture fixture;
 
-    /**
+    /*
      * A single threaded executor which drains the {@link #queue} and submits each event to the
      * {@link MockQuorumWatcher} to be interpreted.
      *
@@ -638,7 +638,7 @@ public class MockQuorumFixture {
       return new MockQuorumWatcher(logicalServiceUUID);
     }
 
-    /**
+    /*
      * Exposed to the unit tests which use the returned {@link QuorumActor} to send state change
      * requests to the {@link MockQuorumFixture2}. From there, they are noticed by the {@link
      * MockQuorumWatcher} and become visible to the client's {@link MockQuorum}.
@@ -648,7 +648,7 @@ public class MockQuorumFixture {
     }
 
     public void start(final C client) {
-      super.start((C) client);
+      super.start(client);
       // Start the service accepting events for the watcher.
       watcherService =
           Executors.newSingleThreadScheduledExecutor(new DaemonThreadFactory("watcherService"));
@@ -679,7 +679,7 @@ public class MockQuorumFixture {
       if (watcher != null) fixture.removeWatcher(watcher);
     }
 
-    /**
+    /*
      * Accepts one event at a time and notifies the {@link DispatcherTask} when we are done with it.
      */
     private class WatcherTask implements Runnable {
@@ -801,8 +801,8 @@ public class MockQuorumFixture {
         fixture.pipelineRemove(service);
       }
 
-      //            /**
-      //             * {@inheritDoc}
+      //            /*
+//             * {@inheritDoc}
       //             * <p>
       //             * This implementation tunnels through to the fixture and makes the
       //             * necessary changes directly. Those changes will be noticed by the
@@ -834,7 +834,7 @@ public class MockQuorumFixture {
 
     }
 
-    /**
+    /*
      * Watcher propagates state changes observed in the {@link MockQuorumFixture2} to the {@link
      * MockQuorum}.
      *
@@ -850,7 +850,7 @@ public class MockQuorumFixture {
         super(logicalServiceUUID);
       }
 
-      /**
+      /*
        * The queue into which the fixture pumps events. This only needs a capacity of ONE (1)
        * because the fixture hands off the events synchronously to each of the {@link
        * MockQuorumWatcher}s.
@@ -918,8 +918,8 @@ public class MockQuorumFixture {
             //                    setLastValidToken(e.lastValidToken());
             //                    break;
             //                }
-            /**
-             * Event generated when a quorum meets (used here to set the lastValidToken and token).
+          /*
+       * Event generated when a quorum meets (used here to set the lastValidToken and token).
              */
           case QUORUM_MEET:
             {
@@ -932,28 +932,28 @@ public class MockQuorumFixture {
               clearToken();
               break;
             }
-            /*
-             * Note: These events do not carry any state change so we do
+          /*
+       * Note: These events do not carry any state change so we do
              * not do anything with them here. These events will be
              * generated by the watchers for each quorum as it accepts
              * the state change events from the fixture.
              */
-            //                    /**
-            //                     * Event generated when a new leader is elected, including
+            //                    /*
+//                     * Event generated when a new leader is elected, including
             //                     * when a quorum meets.
             //                     */
             //                case LEADER_ELECTED:
-            //                    /**
-            //                     * Event generated when a service joins a quorum as a
+            //                    /*
+//                     * Event generated when a service joins a quorum as a
             //                     * follower.
             //                     */
             //                case FOLLOWER_ELECTED:
-            //                    /**
-            //                     * Event generated when the leader leaves a quorum.
+            //                    /*
+//                     * Event generated when the leader leaves a quorum.
             //                     */
             //                case LEADER_LEFT:
-            //                    /**
-            //                     * A consensus has been achieved with <code>(k+1)/2</code>
+            //                    /*
+//                     * A consensus has been achieved with <code>(k+1)/2</code>
             //                     * services voting for some lastCommitTime. This event will
             //                     * typically be associated with an invalid quorum token
             //                     * since the quorum token is assigned when the leader is
@@ -966,7 +966,7 @@ public class MockQuorumFixture {
         }
       }
 
-      /**
+      /*
        * @todo We really should scan the fixture's quorumImpl state using getMembers(), getVotes(),
        *     getPipelineMembers(), getJoined(), and token() and setup the client's quorum to mirror
        *     the state of the fixture. This code could not be reused directly for zookeeper because
@@ -981,7 +981,7 @@ public class MockQuorumFixture {
     }
   }
 
-  /**
+  /*
    * NOP client base class used for the individual clients for each {@link MockQuorum} registered
    * with of a shared {@link MockQuorumFixture} - you can actually use any {@link QuorumMember}
    * implementation you like with the {@link MockQuorumFixture}, not just this one. The
@@ -992,7 +992,7 @@ public class MockQuorumFixture {
    */
   static class MockQuorumMember<S extends Remote> extends AbstractQuorumMember<S> {
 
-    /**
+    /*
      * The last lastCommitTime value around which a consensus was achieved and initially -1L, but
      * this is cleared to -1L each time the consensus is lost.
      */
@@ -1016,7 +1016,7 @@ public class MockQuorumFixture {
       this.fixture = fixture;
     }
 
-    /**
+    /*
      * Factory for the local service implementation object. The default implementation uses a {@link
      * MockService}.
      */
@@ -1029,7 +1029,7 @@ public class MockQuorumFixture {
       return (S) fixture.getService(serviceId);
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Overridden to save the <i>lastCommitTime</i> on {@link #lastConsensusValue}.
@@ -1046,7 +1046,7 @@ public class MockQuorumFixture {
       this.lastConsensusValue = -1L;
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Overridden to save the current downstream service {@link UUID} on {@link #downStreamId}
@@ -1056,7 +1056,7 @@ public class MockQuorumFixture {
       this.downStreamId = newDownStreamId;
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Overridden to clear the {@link #downStreamId}.
@@ -1093,7 +1093,7 @@ public class MockQuorumFixture {
       return service;
     }
 
-    /**
+    /*
      * Inner base class for service implementations provides access to the {@link MockQuorumMember}.
      */
     protected class ServiceBase implements Remote {}
@@ -1115,7 +1115,7 @@ public class MockQuorumFixture {
         return addrSelf;
       }
 
-      /**
+      /*
        * @todo This is not fully general purpose since it is not strictly forbidden that the
        *     service's lastCommitTime could change, e.g., due to explicit intervention, and hence be
        *     updated across this operation. The real implemention should be a little more
@@ -1197,7 +1197,7 @@ public class MockQuorumFixture {
     } // MockService
   } // MockQuorumMember
 
-  /**
+  /*
    * Return an open port on current machine. Try the suggested port first. If suggestedPort is zero,
    * just select a random port
    */

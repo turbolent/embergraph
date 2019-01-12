@@ -37,8 +37,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.journal.Options;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Unit tests for splitting an index segment based on its size on the disk, the nominal size of an
+/*
+* Unit tests for splitting an index segment based on its size on the disk, the nominal size of an
  * index partition, and an optional application level constraint on the choice of the separator
  * keys. This approach presumes a compacting merge has been performed such that all history other
  * than the buffered writes is on a single index segment. The buffered writes are not considered
@@ -90,7 +90,7 @@ public class AbstractTestSegSplitter extends TestCase2 {
         }
       };
 
-  /**
+  /*
    * Accepts the recommended separator key unless it is GTE the key given to the constructor, in
    * which case it refuses to accept any splits.
    */
@@ -119,9 +119,9 @@ public class AbstractTestSegSplitter extends TestCase2 {
       // Otherwise accept the recommended separator key.
       return a;
     }
-  };
+  }
 
-  /**
+  /*
    * Generate an {@link IndexSegment} from the given BTree.
    *
    * @param src The source {@link BTree}.
@@ -184,7 +184,7 @@ public class AbstractTestSegSplitter extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Mock implementation assigns index partitions from a counter beginning with ZERO (0), which is
    * the first legal index partition identifier. The name parameter is ignored.
    *

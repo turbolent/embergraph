@@ -31,8 +31,8 @@ import org.embergraph.io.compression.IUnicodeCompressor;
 import org.embergraph.io.compression.NoCompressor;
 import org.embergraph.util.Bytes;
 
-/**
- * Utility class supporting {@link IV}s having inline Unicode data.
+/*
+* Utility class supporting {@link IV}s having inline Unicode data.
  *
  * <p>IVs must be able to report their correct mutual order. This means that the Java {@link String}
  * must be given the same order as the encoded Unicode representation. Since we must include the #of
@@ -64,12 +64,12 @@ public class IVUnicode {
   //    private static IUnicodeCompressor uc = new SCSUCompressor();
   private static IUnicodeCompressor uc = new NoCompressor();
 
-  //    /**
-  //     * Helper instance for compression/decompression of Unicode string data.
+  //    /*
+//     * Helper instance for compression/decompression of Unicode string data.
   //     */
   //    private static UnicodeHelper un = new UnicodeHelper(uc);
 
-  /**
+  /*
    * Encode a Unicode string.
    *
    * @param s The string.
@@ -126,7 +126,7 @@ public class IVUnicode {
     return k.array();
   }
 
-  /**
+  /*
    * Decode a {@link String} from the input stream. The result is appended into the caller's buffer.
    * The caller is responsible for resetting the buffer as necessary.
    *
@@ -200,7 +200,7 @@ public class IVUnicode {
     return slen;
   }
 
-  /**
+  /*
    * Return the byte length of the serialized representation of a unicode string.
    *
    * @param s The string.
@@ -222,7 +222,7 @@ public class IVUnicode {
     //        }
   }
 
-  /**
+  /*
    * Class imposes the natural ordering of the encoded Unicode representation for an {@link IV}
    * having inline Unicode data on Java {@link String}s. This is used by such {@link IV}s in order
    * to impose on themselves the correct natural order.

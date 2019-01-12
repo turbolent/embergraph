@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.bitvector;
 
 import java.awt.Rectangle;
-/**
- * Fixed sized (non resizable) n*m bit matrix. A bit matrix has a number of columns and rows, which
+/*
+* Fixed sized (non resizable) n*m bit matrix. A bit matrix has a number of columns and rows, which
  * are assigned upon instance construction - The matrix's size is then <tt>columns()*rows()</tt>.
  * Bits are accessed via <tt>(column,row)</tt> coordinates.
  *
@@ -49,8 +49,8 @@ public class BitMatrix extends cern.colt.PersistentObject {
    * columnOf(bitIndex)==bitIndex%columns
    * rowOf(bitIndex)==bitIndex/columns
    */
-  protected long bits[];
-  /**
+  protected long[] bits;
+  /*
    * Constructs a bit matrix with a given number of columns and rows. All bits are initially
    * <tt>false</tt>.
    *
@@ -61,7 +61,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
   public BitMatrix(int columns, int rows) {
     elements(QuickBitVector.makeBitVector(columns * rows, 1), columns, rows);
   }
-  /**
+  /*
    * Performs a logical <b>AND</b> of the receiver with another bit matrix. The receiver is modified
    * so that a bit in it has the value <code>true</code> if and only if it already had the value
    * <code>true</code> and the corresponding bit in the other bit matrix argument has the value
@@ -75,7 +75,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
     checkDimensionCompatibility(other);
     toBitVector().and(other.toBitVector());
   }
-  /**
+  /*
    * Clears all of the bits in receiver whose corresponding bit is set in the other bit matrix. In
    * other words, determines the difference (A\B) between two bit matrices.
    *
@@ -87,7 +87,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
     checkDimensionCompatibility(other);
     toBitVector().andNot(other.toBitVector());
   }
-  /**
+  /*
    * Returns the number of bits currently in the <tt>true</tt> state. Optimized for speed.
    * Particularly quick if the receiver is either sparse or dense.
    */
@@ -112,7 +112,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
   public void clear() {
     toBitVector().clear();
   }
-  /**
+  /*
    * Cloning this <code>BitMatrix</code> produces a new <code>BitMatrix</code> that is equal to it.
    * The clone of the bit matrix is another bit matrix that has exactly the same bits set to <code>
    * true</code> as this bit matrix and the same number of columns and rows.
@@ -121,7 +121,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
    */
   public Object clone() {
     BitMatrix clone = (BitMatrix) super.clone();
-    if (this.bits != null) clone.bits = (long[]) this.bits.clone();
+    if (this.bits != null) clone.bits = this.bits.clone();
     return clone;
   }
   /** Returns the number of columns of the receiver. */
@@ -134,7 +134,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
       throw new IndexOutOfBoundsException(
           "column:" + column + ", row:" + row + " ,width:" + width + ", height:" + height);
   }
-  /**
+  /*
    * Returns a shallow clone of the receiver; calls <code>clone()</code> and casts the result.
    *
    * @return a shallow clone of the receiver.
@@ -146,7 +146,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
   protected long[] elements() {
     return bits;
   }
-  /**
+  /*
    * You normally need not use this method. Use this method only if performance is critical. Sets
    * the bit matrix's backing bits, columns and rows. <b>WARNING:</b> For efficiency reasons and to
    * keep memory usage low, <b>the array is not copied</b>. So if subsequently you modify the
@@ -162,7 +162,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
     this.columns = columns;
     this.rows = rows;
   }
-  /**
+  /*
    * Compares this object against the specified object. The result is <code>true</code> if and only
    * if the argument is not <code>null</code> and is a <code>BitMatrix</code> object that has the
    * same number of columns and rows as the receiver and that has exactly the same bits set to
@@ -180,7 +180,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
 
     return toBitVector().equals(other.toBitVector());
   }
-  /**
+  /*
    * Applies a procedure to each coordinate that holds a bit in the given state. Iterates rowwise
    * downwards from [columns()-1,rows()-1] to [0,0]. Useful, for example, if you want to copy bits
    * into an image or somewhere else. Optimized for speed. Particularly quick if one of the
@@ -228,7 +228,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
     long val = theBits[bits.length - 1];
     for (int j = vector.numberOfBitsInPartialUnit(); --j >= 0; ) {
       long mask = val & (1L << j);
-      if ((state && (mask != 0L)) || ((!state) && (mask == 0L))) {
+      if (state ? mask != 0L : mask == 0L) {
         if (!procedure.apply(column, row)) return false;
       }
       if (--column < 0) {
@@ -287,7 +287,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
 
     return true;
   }
-  /**
+  /*
    * Returns from the receiver the value of the bit at the specified coordinate. The value is
    * <tt>true</tt> if this bit is currently set; otherwise, returns <tt>false</tt>.
    *
@@ -302,7 +302,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
       throw new IndexOutOfBoundsException("column:" + column + ", row:" + row);
     return QuickBitVector.get(bits, row * columns + column);
   }
-  /**
+  /*
    * Returns from the receiver the value of the bit at the specified coordinate; <b>WARNING:</b>
    * Does not check preconditions. The value is <tt>true</tt> if this bit is currently set;
    * otherwise, returns <tt>false</tt>.
@@ -327,7 +327,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
   public void not() {
     toBitVector().not();
   }
-  /**
+  /*
    * Performs a logical <b>OR</b> of the receiver with another bit matrix. The receiver is modified
    * so that a bit in it has the value <code>true</code> if and only if it either already had the
    * value <code>true</code> or the corresponding bit in the other bit matrix argument has the value
@@ -341,7 +341,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
     checkDimensionCompatibility(other);
     toBitVector().or(other.toBitVector());
   }
-  /**
+  /*
    * Constructs and returns a new matrix with <tt>width</tt> columns and <tt>height</tt> rows which
    * is a copy of the contents of the given box. The box ranges from <tt>[column,row]</tt> to
    * <tt>[column+width-1,row+height-1]</tt>, all inclusive.
@@ -363,7 +363,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
     subMatrix.replaceBoxWith(0, 0, width, height, this, column, row);
     return subMatrix;
   }
-  /**
+  /*
    * Sets the bit at the specified coordinate to the state specified by <tt>value</tt>.
    *
    * @param column the index of the column-coordinate.
@@ -377,7 +377,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
       throw new IndexOutOfBoundsException("column:" + column + ", row:" + row);
     QuickBitVector.put(bits, row * columns + column, value);
   }
-  /**
+  /*
    * Sets the bit at the specified coordinate to the state specified by <tt>value</tt>;
    * <b>WARNING:</b> Does not check preconditions.
    *
@@ -393,7 +393,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
   public void putQuick(int column, int row, boolean value) {
     QuickBitVector.put(bits, row * columns + column, value);
   }
-  /**
+  /*
    * Replaces a box of the receiver with the contents of another matrix's box. The source box ranges
    * from <tt>[sourceColumn,sourceRow]</tt> to <tt>[sourceColumn+width-1,sourceRow+height-1]</tt>,
    * all inclusive. The destination box ranges from <tt>[column,row]</tt> to
@@ -443,7 +443,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
       destVector.replaceFromToWith(offset, offset + width - 1, sourceVector, sourceOffset);
     }
   }
-  /**
+  /*
    * Sets the bits in the given box to the state specified by <tt>value</tt>. The box ranges from
    * <tt>[column,row]</tt> to <tt>[column+width-1,row+height-1]</tt>, all inclusive. (Does nothing
    * if <tt>width &lt;= 0 || height &lt;= 0</tt>).
@@ -474,7 +474,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
   public int size() {
     return columns * rows;
   }
-  /**
+  /*
    * Converts the receiver to a bitvector. In many cases this method only makes sense on
    * one-dimensional matrices. <b>WARNING:</b> The returned bitvector and the receiver share the
    * <b>same</b> backing bits. Modifying either of them will affect the other. If this behaviour is
@@ -488,7 +488,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
   public String toString() {
     return toBitVector().toString();
   }
-  /**
+  /*
    * Performs a logical <b>XOR</b> of the receiver with another bit matrix. The receiver is modified
    * so that a bit in it has the value <code>true</code> if and only if one of the following
    * statements holds:

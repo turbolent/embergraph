@@ -25,8 +25,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.embergraph.testutil.ExperimentDriver;
 
-/**
- * Aggregates unit tests into dependency order.
+/*
+* Aggregates unit tests into dependency order.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -119,7 +119,7 @@ public class TestAll extends TestCase {
     return suite;
   }
 
-  /**
+  /*
    * Glue class used to execute the stress tests.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -133,7 +133,7 @@ public class TestAll extends TestCase {
       super(name);
     }
 
-    /**
+    /*
      * FIXME Modify the stress test configuration file to run each condition of interest. It is only
      * setup for a few conditions right now.
      */

@@ -25,8 +25,8 @@ package org.embergraph.bop.solutions;
 
 import org.embergraph.bop.IValueExpression;
 
-/**
- * Default impl.
+/*
+* Default impl.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public class SortOrder<E> implements ISortOrder<E> {
     return (asc ? "ASC" : "DESC") + "(" + expr + ")";
   }
 
-  /**
+  /*
    * @param expr The value expression.
    * @param asc <code>true</code> for an ascending sort and <code>false</code> for a descending
    *     sort.

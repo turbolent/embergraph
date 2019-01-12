@@ -34,8 +34,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for {@link BaseVocabulary}.
+/*
+* Test suite for {@link BaseVocabulary}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -95,14 +95,14 @@ public class TestVocabulary extends TestCase2 {
         //                        log.info("Ignoring expected exception: " + ex);
         //                }
 
-        /*
-         * The IV attached to the Value can be used to lookup the Value
+      /*
+       * The IV attached to the Value can be used to lookup the Value
          * in the Vocabulary.
          */
         assertEquals(v, vocab.asValue(v.getIV()));
 
-        /*
-         * The Value can be used to wrap it's cached IV.
+      /*
+       * The Value can be used to wrap it's cached IV.
          */
 
         assertNotNull(vocab.getConstant(v));
@@ -134,7 +134,7 @@ public class TestVocabulary extends TestCase2 {
     assertNull(vocab.get(new URIImpl("http://www.embergraph.org/unknown-uri")));
   }
 
-  /**
+  /*
    * Unit test a big vocabulary (one that forces us to use both byte and short encodings for the
    * identifiers for the {@link IV}s).
    */
@@ -183,14 +183,14 @@ public class TestVocabulary extends TestCase2 {
         //                        log.info("Ignoring expected exception: " + ex);
         //                }
 
-        /*
-         * The IV attached to the Value can be used to lookup the Value
+      /*
+       * The IV attached to the Value can be used to lookup the Value
          * in the Vocabulary.
          */
         assertEquals(v, vocab.asValue(v.getIV()));
 
-        /*
-         * The Value can be used to wrap it's cached IV.
+      /*
+       * The Value can be used to wrap it's cached IV.
          */
 
         assertNotNull(vocab.getConstant(v));
@@ -248,7 +248,7 @@ public class TestVocabulary extends TestCase2 {
       super();
     }
 
-    /**
+    /*
      * Used by {@link AbstractTripleStore#create()}.
      *
      * @param namespace The namespace of the KB instance.

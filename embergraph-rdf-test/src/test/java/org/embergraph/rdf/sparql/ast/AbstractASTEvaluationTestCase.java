@@ -57,8 +57,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.LocalTripleStore;
 import org.openrdf.model.Value;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
@@ -80,7 +80,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
   private BOpContextBase context = null;
 
-  /**
+  /*
    * Return the context for evaluation of {@link IValueExpression}s during query optimization.
    *
    * @return The context that can be used to resolve the {@link ILexiconConfiguration} and {@link
@@ -181,10 +181,10 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
     if (!expected.equals(actual)) {
 
-      log.error("expected: " + BOpUtility.toString((BOp) expected));
-      log.error("actual  : " + BOpUtility.toString((BOp) actual));
+      log.error("expected: " + BOpUtility.toString(expected));
+      log.error("actual  : " + BOpUtility.toString(actual));
 
-      AbstractQueryEngineTestCase.diff((BOp) expected, (BOp) actual);
+      AbstractQueryEngineTestCase.diff(expected, actual);
 
       // No difference was detected?
       throw new AssertionError();
@@ -193,7 +193,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
     } else if (log.isInfoEnabled()) {
 
-      log.info(BOpUtility.toString((BOp) expected));
+      log.info(BOpUtility.toString(expected));
     }
   }
 
@@ -236,8 +236,8 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
     return new LinkedHashSet<Integer>(Arrays.asList(a));
   }
 
-  //    /**
-  //     * Return a mock IV for the value.
+  //    /*
+//     * Return a mock IV for the value.
   //     */
   //    @SuppressWarnings("unchecked")
   //    protected IV<EmbergraphValue, ?> mockIV(final EmbergraphValue value) {
@@ -256,7 +256,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
   //
   //    }
 
-  /**
+  /*
    * Return a (Mock) IV for a Value.
    *
    * @param v The value.

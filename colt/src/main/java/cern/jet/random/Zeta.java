@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Zeta distribution.
+/*
+* Zeta distribution.
  *
  * <p>Valid parameter ranges: <tt>ro &gt; 0</tt> and <tt>pk &gt;= 0</tt>.
  * <dt>If either <tt>ro &gt; 100</tt> or <tt>k &gt; 10000</tt> numerical problems in computing the
@@ -49,7 +49,7 @@ public class Zeta extends AbstractDiscreteDistribution {
   }
   /** Returns a zeta distributed random number. */
   protected long generateZeta(double ro, double pk, RandomEngine randomGenerator) {
-    /**
+    /*
      * **************************************************************** * Zeta Distribution -
      * Acceptance Rejection * * ***************************************************************** *
      * To sample from the Zeta distribution with parameters ro and pk * it suffices to sample
@@ -116,7 +116,7 @@ public class Zeta extends AbstractDiscreteDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + ro + "," + pk + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

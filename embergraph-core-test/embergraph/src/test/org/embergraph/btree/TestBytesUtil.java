@@ -26,8 +26,8 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for low-level operations on variable length byte[]s.
+/*
+* Test suite for low-level operations on variable length byte[]s.
  *
  * @see BytesUtil
  * @todo test with JNI integration.
@@ -95,7 +95,7 @@ public class TestBytesUtil extends TestCase2 {
     assertEquals(3 * 1024 * 1024 * 1024L, BytesUtil.getByteCount("3Gb"));
   }
 
-  /**
+  /*
    * A byte has a signed value between -128 and 127.
    *
    * <p>Note: we need to compare bytes as unsigned values. You can convert to a signed integer using
@@ -146,7 +146,7 @@ public class TestBytesUtil extends TestCase2 {
     assertTrue(BytesUtil.compareBytes(new byte[] {-1}, new byte[] {Byte.MAX_VALUE}) > 0);
   }
 
-  /**
+  /*
    * Test of unsigned byte[] comparison with explicit offset into each array and #of bytes to
    * consider from that offset for each array.
    */
@@ -289,7 +289,7 @@ public class TestBytesUtil extends TestCase2 {
     assertEquals(new byte[] {1, 2}, BytesUtil.getPrefix(new byte[] {1, 2}, new byte[] {1, 2, 4}));
   }
 
-  /**
+  /*
    * Verify the semantics of the successor of a byte[] and that the successor is computed correctly
    * by {@link BytesUtil#successor(byte[])}.
    */
@@ -329,7 +329,7 @@ public class TestBytesUtil extends TestCase2 {
   private final byte maxSignedByte = 127;
   private final byte minSignedByte = -128;
 
-  /**
+  /*
    * Test logic to add one to an unsigned byte in Java. A byte in Java is a signed value, so we have
    * to convert to and from a signed quantity with a larger range in order to do this operation.
    *
@@ -378,7 +378,7 @@ public class TestBytesUtil extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test method that chooses the shortest key that is less than one key but greater than another.
    */
   public void test_getSeparatorKey() {
@@ -546,7 +546,7 @@ public class TestBytesUtil extends TestCase2 {
 
   }
 
-  /**
+  /*
    * A series of test cases for binary search for a "key" in an array of keys with an adjustable
    * base (starting offset) and length (#of members). This tests for "key not found" resulting in a
    * variety of insertion points (including before and after all records in the array) as well as
@@ -773,7 +773,7 @@ public class TestBytesUtil extends TestCase2 {
     assertEquals(0xffffffff, getMSBMask(32));
   }
 
-  /**
+  /*
    * Test help logs the {@link BytesUtil#getMSBMask(int)} results for inspection.
    *
    * @param nbits The #of bits whose MSB mask is desired.

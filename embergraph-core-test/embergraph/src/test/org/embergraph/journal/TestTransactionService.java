@@ -33,8 +33,8 @@ import org.embergraph.service.AbstractTransactionService.TxState;
 import org.embergraph.service.CommitTimeIndex;
 import org.embergraph.service.TxServiceRunState;
 
-/**
- * Unit tests of the {@link AbstractTransactionService} using a mock client.
+/*
+* Unit tests of the {@link AbstractTransactionService} using a mock client.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -104,8 +104,8 @@ public class TestTransactionService extends TestCase2 {
       return commitTime;
     }
 
-    //        /**
-    //         * Note: We are not testing distributed commits here so this is not
+    //        /*
+//         * Note: We are not testing distributed commits here so this is not
     //         * implemented.
     //         */
     //        public long prepared(long tx, UUID dataService)
@@ -113,8 +113,8 @@ public class TestTransactionService extends TestCase2 {
     //            return 0;
     //        }
     //
-    //        /**
-    //         * Note: We are not testing distributed commits here so this is not
+    //        /*
+//         * Note: We are not testing distributed commits here so this is not
     //         * implemented.
     //         */
     //        public boolean committed(long tx, UUID dataService) throws IOException,
@@ -150,13 +150,13 @@ public class TestTransactionService extends TestCase2 {
 
       synchronized (commitTimeIndex) {
 
-        /*
-         * Add all commit times
+      /*
+       * Add all commit times
          */
         commitTimeIndex.add(commitTime);
 
-        /*
-         * Note: commit time notifications can be overlap such that they
+      /*
+       * Note: commit time notifications can be overlap such that they
          * appear out of sequence with respect to their values. This is
          * Ok. We just ignore any older commit times. However we do need
          * to be synchronized here such that the commit time notices
@@ -181,7 +181,7 @@ public class TestTransactionService extends TestCase2 {
 
     }
 
-    /**
+    /*
      * Awaits the specified run state.
      *
      * @param expectedRunState The expected run state.
@@ -209,8 +209,8 @@ public class TestTransactionService extends TestCase2 {
           i++;
         }
 
-        /*
-         * Note: This will generally fail since we did not achieve the
+      /*
+       * Note: This will generally fail since we did not achieve the
          * desired run state in the loop above.
          */
 
@@ -222,7 +222,7 @@ public class TestTransactionService extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * Note: This currently waits until at least two milliseconds have elapsed. This is a workaround
      * for {@link TestTransactionService#test_newTx_readOnly()} until (if) <a href=
      * "https://sourceforge.net/apps/trac/bigdata/ticket/145" >ISSUE#145 </a> is resolved.
@@ -242,7 +242,7 @@ public class TestTransactionService extends TestCase2 {
       return super.nextTimestamp();
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Exposed to the test suite.
@@ -265,7 +265,7 @@ public class TestTransactionService extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Exposed to the test suite.
@@ -277,7 +277,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Create a new read-write tx and then abort it.
    *
    * <p>Note: New read-write transaction identifiers are assigned using {@link
@@ -593,7 +593,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Create a read-write transaction, commit it, and then attempt to re-commit it and to abort it -
    * those operations should fail with an {@link IllegalStateException}.
    */
@@ -636,7 +636,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test ability to start a read-committed tx when [lastCommitTime] is non-zero.
    *
    * <p>Note: A "read-committed" transactions is just a shorthand for a read-only transaction whose
@@ -753,7 +753,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for a new read-only transaction.
    *
    * <p>Read-only transactions are allowed to read on historical commit points of the database. The
@@ -882,7 +882,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test in which all possible start times for a read-only transaction are used, forcing the
    * caller to block.
    *
@@ -925,8 +925,8 @@ public class TestTransactionService extends TestCase2 {
 
       {
 
-        /*
-         * First try to obtain a new tx for the same commit point in a
+      /*
+       * First try to obtain a new tx for the same commit point in a
          * thread. This should block. We wait for a bit (in the main
          * thread) to make sure that the thread is not progressing and
          * then interrupt this thread. This is to prove to ourselves
@@ -957,8 +957,8 @@ public class TestTransactionService extends TestCase2 {
       }
       {
 
-        /*
-         * Run a thread that sleeps for a moment and then terminates one
+      /*
+       * Run a thread that sleeps for a moment and then terminates one
          * of the transactions that is keeping us from being able to
          * allocate a newTx for the desired commit point. Once [tx2] is
          * terminated, the main thread should be granted a new tx.
@@ -975,8 +975,8 @@ public class TestTransactionService extends TestCase2 {
               throw new RuntimeException(e);
             }
 
-            /*
-             * Terminate a running tx for the desired commit point,
+          /*
+       * Terminate a running tx for the desired commit point,
              * freeing a timestamp that may be used for the newTx()
              * request in the main thread.
              */
@@ -989,8 +989,8 @@ public class TestTransactionService extends TestCase2 {
           }
         }.start();
 
-        /*
-         * This should block for a moment while the thread is sleeping
+      /*
+       * This should block for a moment while the thread is sleeping
          * and then succeed.
          *
          * Note: The assigned transaction identifier will be the same as
@@ -1012,7 +1012,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that you can create a read-only transaction by providing the lastCommitTime as the
    * timestamp.
    *
@@ -1059,7 +1059,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify the behavior of the {@link AbstractTransactionService} when there are no commit points
    * and a read-only transaction is requested. Since there are no commit points, the transaction
    * service will return the next timestamp. That value will be GT the requested timestamp and LT
@@ -1095,7 +1095,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify the behavior of the {@link AbstractTransactionService} when there are no commit points
    * and a read-write transaction is requested. You can always obtain a read-write transaction, even
    * when there are no commit points on the database.
@@ -1122,7 +1122,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that you can create a read-only transaction using a timestamp that is in the future. A
    * commit point is generated and a read-only tx is requested which is beyond that commit point.
    * The returned tx will be assigned using nextTimestamp() which is guaranteed to be less than the
@@ -1161,7 +1161,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that the release time does NOT advance when the earliest running transaction
    * terminates but a second transaction is still active which reads on the same commit time.
    *
@@ -1232,7 +1232,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that a request for an historical state that is no longer available will be rejected.
    *
    * <p>The test is setup as follows:
@@ -1364,8 +1364,8 @@ public class TestTransactionService extends TestCase2 {
       assertEquals(Math.abs(commitTimeTx0) - 1, newReleaseTime2);
 
       try {
-        /*
-         * Try to read from [ts1]. This timestamp was obtain after tx0
+      /*
+       * Try to read from [ts1]. This timestamp was obtain after tx0
          * and before tx1. Since [minReleaseAge==0], the history for
          * this timestamp was released after both tx0 and tx1 were done.
          * Therefore, we should not be able to obtain a transaction for
@@ -1378,8 +1378,8 @@ public class TestTransactionService extends TestCase2 {
       }
 
       try {
-        /*
-         * Try to read from [ts2]. This timestamp was obtain after tx1
+      /*
+       * Try to read from [ts2]. This timestamp was obtain after tx1
          * and before tx1 was committed. Since [minReleaseAge==0], the
          * history for this timestamp was released after both tx0 and
          * tx1 were done. Therefore, we should not be able to obtain a
@@ -1405,7 +1405,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * This is a variant on {@link #test_newTx_readOnly_historyGone()} where we do not start tx2. In
    * this case, when we end tx1 the release time will advance right up to the most recent commit
    * time.
@@ -1525,8 +1525,8 @@ public class TestTransactionService extends TestCase2 {
       assertEquals(Math.abs(commitTimeTx1) - 1, newReleaseTime2);
 
       try {
-        /*
-         * Try to read from [ts1]. This timestamp was obtain after tx0
+      /*
+       * Try to read from [ts1]. This timestamp was obtain after tx0
          * and before tx1. Since [minReleaseAge==0], the history for
          * this timestamp was released after both tx0 and tx1 were done.
          * Therefore, we should not be able to obtain a transaction for
@@ -1539,8 +1539,8 @@ public class TestTransactionService extends TestCase2 {
       }
 
       try {
-        /*
-         * Try to read from [ts2]. This timestamp was obtain after tx1
+      /*
+       * Try to read from [ts2]. This timestamp was obtain after tx1
          * and before tx1 was committed. Since [minReleaseAge==0], the
          * history for this timestamp was released after both tx0 and
          * tx1 were done. Therefore, we should not be able to obtain a
@@ -1553,8 +1553,8 @@ public class TestTransactionService extends TestCase2 {
       }
 
       try {
-        /*
-         * Try to read from [ts3]. This timestamp was obtain before tx1
+      /*
+       * Try to read from [ts3]. This timestamp was obtain before tx1
          * committed. Since [minReleaseAge==0], the history for this
          * timestamp was released after both tx0 and tx1 were done.
          * Therefore, we should not be able to obtain a transaction for
@@ -1580,7 +1580,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test verifies the advance of the release time when the earliest running transaction completes.
    * This version focuses on when there are no active transactions once the earliest transaction
    * completes. In this case the [lastCommitTime] is the exclusive upper bound for the new
@@ -1646,7 +1646,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * A unit test of advancing the last release time for the case where there are still active
    * transactions running once the earliest active transaction commits.
    *
@@ -1691,13 +1691,13 @@ public class TestTransactionService extends TestCase2 {
       service.abort(tx0);
 
       {
-        /*
-         * Verify that releaseTime was NOT updated yet. The original
+      /*
+       * Verify that releaseTime was NOT updated yet. The original
          * commit time is still pinned by [tx2].
          */
         assertEquals(0L, service.getReleaseTime());
-        /*
-         * However, the lastCommitTime SHOULD have been updated.
+      /*
+       * However, the lastCommitTime SHOULD have been updated.
          */
         assertTrue(service.getLastCommitTime() > 0);
       }
@@ -1748,7 +1748,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Create a read-only transaction, commit it, and then attempt to re-commit it and to abort it -
    * those operations should fail with an {@link IllegalStateException}.
    *
@@ -1811,7 +1811,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test that the service will wait for a read-write tx to commit.
    *
    * @throws InterruptedException
@@ -1872,7 +1872,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test that the service will wait for a read-write tx to abort.
    *
    * @throws InterruptedException
@@ -1927,7 +1927,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test that shutdown() does not permit new tx to start (a variety of things are not permitted
    * during shutdown).
    *
@@ -2110,7 +2110,7 @@ public class TestTransactionService extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test that shutdown() may be interrupted while waiting for a tx to complete and that it will
    * convert to shutdownNow() which does not wait.
    *

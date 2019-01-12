@@ -26,8 +26,8 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.htree.HTree;
 import org.embergraph.util.BytesUtil;
 
-/**
- * A flyweight mutable implementation for an {@link HTree} bucket page using a backing <code>
+/*
+* A flyweight mutable implementation for an {@link HTree} bucket page using a backing <code>
  * byte[][]</code>. Unlike the keys in a B+Tree, the {@link HTree} keys are NOT ordered and need not
  * be dense. Further, each bucket page is logically divided into a set of buddy hash buckets. All
  * operations therefore take place within a buddy bucket. The buddy bucket is identified by its
@@ -46,14 +46,14 @@ import org.embergraph.util.BytesUtil;
  */
 public class MutableKeyBuffer implements IRaba {
 
-  /**
+  /*
    * The #of defined keys across the entire bucket page. The caller must explicitly scan a buddy
    * hash bucket in order to learn the #of non- <code>null</code> keys (free slots) in that buddy
    * hash bucket.
    */
   public int nkeys;
 
-  /**
+  /*
    * An array containing the keys. The size of the array is the maximum capacity of the key buffer,
    * which is <code>2^addressBits</code>.
    */
@@ -67,7 +67,7 @@ public class MutableKeyBuffer implements IRaba {
           "capacity must be 2^n where n is positive, not " + capacity);
   }
 
-  /**
+  /*
    * Allocate a mutable key buffer capable of storing <i>capacity</i> keys.
    *
    * @param capacity The capacity of the key buffer.
@@ -81,7 +81,7 @@ public class MutableKeyBuffer implements IRaba {
     keys = new byte[capacity][];
   }
 
-  /**
+  /*
    * Constructor wraps an existing byte[][].
    *
    * @param nkeys The #of defined keys in the array.
@@ -100,7 +100,7 @@ public class MutableKeyBuffer implements IRaba {
     this.keys = keys;
   }
 
-  /**
+  /*
    * Creates a new instance using a new byte[][] but sharing the byte[] references with the caller's
    * buffer.
    *
@@ -125,7 +125,7 @@ public class MutableKeyBuffer implements IRaba {
     }
   }
 
-  /**
+  /*
    * Builds a mutable key buffer.
    *
    * @param capacity The capacity of the new instance (this is based on the branching factor for the
@@ -194,7 +194,7 @@ public class MutableKeyBuffer implements IRaba {
     return tmp.length;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @return <code>true</code> iff the key at that index is <code>null</code>.
@@ -211,7 +211,7 @@ public class MutableKeyBuffer implements IRaba {
     return nkeys == 0;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This is the #of keys in the bucket page (across all buddy buckets on that page).
@@ -243,7 +243,7 @@ public class MutableKeyBuffer implements IRaba {
     return false;
   }
 
-  /**
+  /*
    * Instances are searchable and support duplicate keys.
    *
    * @returns <code>true</code>
@@ -254,7 +254,7 @@ public class MutableKeyBuffer implements IRaba {
     return true;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This iterator visits all keys on the bucket page, including <code>null</code>s.
@@ -313,7 +313,7 @@ public class MutableKeyBuffer implements IRaba {
     nkeys++;
   }
 
-  /**
+  /*
    * Remove a key in the buffer at the specified index, decrementing the #of keys in the buffer by
    * one.
    *
@@ -333,7 +333,7 @@ public class MutableKeyBuffer implements IRaba {
     return --nkeys;
   }
 
-  /**
+  /*
    * This method is not supported. Keys must be inserted into a specific buddy bucket. This requires
    * the caller to specify the index at which the key will be stored using {@link #set(int,
    * byte[])}.
@@ -346,7 +346,7 @@ public class MutableKeyBuffer implements IRaba {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * This method is not supported. Keys must be inserted into a specific buddy bucket. This requires
    * the caller to specify the index at which the key will be stored using {@link #set(int,
    * byte[])}.
@@ -359,7 +359,7 @@ public class MutableKeyBuffer implements IRaba {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * This method is not supported. Keys must be inserted into a specific buddy bucket. This requires
    * the caller to specify the index at which the key will be stored using {@link #set(int,
    * byte[])}.
@@ -372,7 +372,7 @@ public class MutableKeyBuffer implements IRaba {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Used for both lookup and insert. Similar to BTree methods it returns a negative number if the
    * key is not found, but the negative number is one less than the insertion point should the key
    * be added. So an empty array would return -1 indicating the new value could be added at index
@@ -387,7 +387,7 @@ public class MutableKeyBuffer implements IRaba {
     return search(key, keys, 0, capacity());
   }
 
-  /**
+  /*
    * Optimized search for ordered insertion point using binary chop.
    *
    * <p>TODO: Could be further optimized ignoring prefix bits

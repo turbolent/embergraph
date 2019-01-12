@@ -24,8 +24,8 @@ package org.embergraph.htree;
 import java.util.Formatter;
 import junit.framework.TestCase2;
 
-/**
- * Unit tests for {@link HTreeUtil}.
+/*
+* Unit tests for {@link HTreeUtil}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -71,7 +71,7 @@ public class TestHTreeUtil extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Prints various tables and runs consistency tests on the htree math operations dealing with
    * addressBits, globalDepth, localDepth, etc.
    *
@@ -158,8 +158,8 @@ public class TestHTreeUtil extends TestCase2 {
           nfail++;
         }
 
-        /*
-         * Find the buddy offset for a sequence of relevant hash bits
+      /*
+       * Find the buddy offset for a sequence of relevant hash bits
          * having a 1 in each of the bit positions to which the buddy
          * indexing is sensitive given the globalDepth of the parent and
          * the localDepth of the child. This gives us an overview of the
@@ -222,7 +222,7 @@ public class TestHTreeUtil extends TestCase2 {
     assertEquals("nfail", 0, nfail);
   }
 
-  /**
+  /*
    * Exercise the hash tree math for a 1-bit address space. This is the absolute minimum size for an
    * address space and the address space is only capable of making a single bit distinction per
    * level in the hash tree.
@@ -298,7 +298,7 @@ public class TestHTreeUtil extends TestCase2 {
     if (log.isInfoEnabled()) log.info(sb.toString());
   }
 
-  /**
+  /*
    * Unit test for {@link HTreeUtil#getBuddyOffset(int, int, int)} for the case where globalDepth:=2
    * and localDepth:=0. For this case, the child will have 4 buddies and the
    * (globalDepth-localDepth) lower bits of the int32 hash code will be used to index into those

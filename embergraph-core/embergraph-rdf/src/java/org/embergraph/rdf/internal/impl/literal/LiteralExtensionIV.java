@@ -18,8 +18,8 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-/**
- * Class provides support for datatype {@link Literal}s for which an {@link IExtension} was
+/*
+* Class provides support for datatype {@link Literal}s for which an {@link IExtension} was
  * registered. An {@link LiteralExtensionIV} <strong>always</strong> has the <em>inline</em> and
  * <em>extension</em> bits set. An instance of this class bundles together an inline value of some
  * primitive data type declared by {@link DTE} with the {@link IV} of the datatype URI for the
@@ -41,7 +41,7 @@ public class LiteralExtensionIV<V extends EmbergraphLiteral>
 
   private final IV<EmbergraphURI, ?> datatype;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The extensionIV and delegateIV are NOT cloned. The rationale is that we are only
@@ -71,10 +71,10 @@ public class LiteralExtensionIV<V extends EmbergraphLiteral>
 
     this.delegate = delegate;
 
-    this.datatype = (AbstractIV<EmbergraphURI, ?>) datatype;
+    this.datatype = datatype;
   }
 
-  /**
+  /*
    * Even though Literal extension IVs are fully inline (no data in the lexicon indices), we do need
    * materialization to answer the openrdf Literal interface correctly. We cannot properly interpret
    * what the delegate IV means without the materialized value.
@@ -138,7 +138,7 @@ public class LiteralExtensionIV<V extends EmbergraphLiteral>
     return datatype.byteLength() + delegate.byteLength();
   }
 
-  /**
+  /*
    * Defer to the {@link ILexiconConfiguration} which has specific knowledge of how to generate an
    * RDF value from this general purpose extension IV.
    *

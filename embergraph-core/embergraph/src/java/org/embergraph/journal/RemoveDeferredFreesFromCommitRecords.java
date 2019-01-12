@@ -24,8 +24,8 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.Journal.Options;
 import org.embergraph.service.AbstractTransactionService;
 
-/**
- * A utility to fix a store with invalid addresses in the deferred free list of a commitRecord.
+/*
+* A utility to fix a store with invalid addresses in the deferred free list of a commitRecord.
  *
  * <p>This condition is rare and not well understood, but if an invalid address has been added to
  * the deferredFree list then the store cannot be opened, or at some point will not be able to be

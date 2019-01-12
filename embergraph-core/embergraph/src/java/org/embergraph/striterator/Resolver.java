@@ -28,8 +28,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Pattern for resolving elements of an iterator.
+/*
+* Pattern for resolving elements of an iterator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -50,7 +50,7 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
     this(IChunkedIterator.DEFAULT_CHUNK_SIZE, null);
   }
 
-  /**
+  /*
    * @param chunkSize The chunk size to use if the source is not chunked.
    * @param keyOrder The order for the resolved elements (optional).
    */
@@ -67,7 +67,7 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
     return new ChunkedResolvingIterator<I, E, F>(src, this);
   }
 
-  /**
+  /*
    * Resolve an element visited by the source iterator into an element of the type visitable by this
    * iterator.
    *
@@ -76,7 +76,7 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
    */
   protected abstract F resolve(E e);
 
-  /**
+  /*
    * Converts the type of the source iterator using {@link Resolver#resolve(Object)}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -94,7 +94,7 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
     /** The resolver. */
     private final Resolver<I, E, F> filter;
 
-    /**
+    /*
      * Ctor variant when (a) you KNOW the sort order for the source iterator and (b) the source
      * elements and the resolved elements have the same natural sort order (so the sort order is
      * naturally preserved when the elements are resolved).
@@ -153,8 +153,8 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
 
           if (a == null) {
 
-            /*
-             * Dynamically instantiation an array of the same
+          /*
+       * Dynamically instantiation an array of the same
              * component type as the objects that we are visiting.
              */
 
@@ -170,7 +170,7 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
       }
     }
 
-    /**
+    /*
      * Resolve a chunk of elements.
      *
      * @param a The chunk of elements.
@@ -189,8 +189,8 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
 
         if (b == null) {
 
-          /*
-           * Dynamically instantiation an array of the same
+        /*
+       * Dynamically instantiation an array of the same
            * component type as the objects that we are visiting.
            */
 
@@ -241,8 +241,8 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
   //    abstract static public class ChunkedResolvingIterator2<I extends Iterator<E>, E, F>
   //            extends ChunkedResolvingIterator<I, E, F> {
   //
-  //        /**
-  //         * @param src
+  //        /*
+//         * @param src
   //         * @param filter
   //         */
   //        public ChunkedResolvingIterator2(I src) {
@@ -258,8 +258,8 @@ public abstract class Resolver<I extends Iterator<E>, E, F> implements IFilter<I
   //
   //        }
   //
-  //        /**
-  //         * Resolve an element visited by the source iterator into an element of
+  //        /*
+//         * Resolve an element visited by the source iterator into an element of
   //         * the type visitable by this iterator.
   //         *
   //         * @param e

@@ -44,8 +44,8 @@ import org.embergraph.quorum.QuorumException;
 import org.embergraph.rdf.task.IApiTask;
 import org.embergraph.service.IService;
 
-/**
- * A {@link Remote} interface for methods supporting high availability for a set of journals or data
+/*
+* A {@link Remote} interface for methods supporting high availability for a set of journals or data
  * services having shared persistent state.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -65,7 +65,7 @@ public interface HAGlue
    * @todo Move to an HAAdminGlue interface?
    */
 
-  /**
+  /*
    * Await the service being ready to partitipate in an HA quorum. The preconditions include:
    *
    * <ol>
@@ -79,11 +79,10 @@ public interface HAGlue
    * @param units The units for that timeout.
    * @return the quorum token for which the service became HA ready.
    */
-  public long awaitHAReady(long timeout, TimeUnit unit)
-      throws IOException, InterruptedException, TimeoutException, QuorumException,
-          AsynchronousQuorumCloseException;
+  long awaitHAReady(long timeout, TimeUnit unit)
+      throws IOException, InterruptedException, TimeoutException, QuorumException;
 
-  /**
+  /*
    * A follower uses this message to request that the quorum leader await the visibility of the
    * zookeeper event in which the service join becomes visible to the leader. This is invoked while
    * holding a lock that blocks pipeline replication, so the leader can not flush the write
@@ -102,7 +101,7 @@ public interface HAGlue
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/681" > HAJournalServer deadlock:
    *     pipelineRemove() and getLeaderId()</a>
    */
-  public IHANotifyReleaseTimeResponse awaitServiceJoin(IHAAwaitServiceJoinRequest req)
+  IHANotifyReleaseTimeResponse awaitServiceJoin(IHAAwaitServiceJoinRequest req)
       throws IOException, InterruptedException, TimeoutException;
 
   /*
@@ -114,7 +113,7 @@ public interface HAGlue
    * @todo Move to an HASyncGlue interface?
    */
 
-  /**
+  /*
    * Return the then current root block for the persistence store.
    *
    * <p>Note: The initial root blocks are identical, so this may be used to create a new journal in
@@ -128,19 +127,19 @@ public interface HAGlue
   /** The port that the NanoSparqlServer is running on. */
   int getNSSPort() throws IOException;
 
-  /**
+  /*
    * The {@link RunState} of the service - this does NOT tell you whether the service is ready to
    * act as a leader or follower.
    */
   RunState getRunState() throws IOException;
 
-  /**
+  /*
    * The extended run state of the service - this embeds more information but is not designed for
    * progamatic interpretation.
    */
   String getExtendedRunState() throws IOException;
 
-  /**
+  /*
    * A simplified summary of the HA status of the service. This may be used to reliably decide
    * whether the service is the {@link HAStatusEnum#Leader}, a {@link HAStatusEnum#Follower}, or
    * {@link HAStatusEnum#NotReady}. This is exposed both here (an RMI interface) and by the REST
@@ -148,7 +147,7 @@ public interface HAGlue
    */
   HAStatusEnum getHAStatus() throws IOException;
 
-  /**
+  /*
    * Compute the digest of the entire backing store - <strong>THIS METHOD IS ONLY FOR DIAGNOSTIC
    * PURPOSES.</strong>
    *
@@ -158,7 +157,7 @@ public interface HAGlue
   IHADigestResponse computeDigest(IHADigestRequest req)
       throws IOException, NoSuchAlgorithmException, DigestException;
 
-  /**
+  /*
    * Compute the digest of the entire HALog file - <strong>THIS METHOD IS ONLY FOR DIAGNOSTIC
    * PURPOSES.</strong>
    *
@@ -170,7 +169,7 @@ public interface HAGlue
   IHALogDigestResponse computeHALogDigest(IHALogDigestRequest req)
       throws IOException, NoSuchAlgorithmException, DigestException;
 
-  /**
+  /*
    * Compute the digest of the entire snapshot file - <strong>THIS METHOD IS ONLY FOR DIAGNOSTIC
    * PURPOSES.</strong> This digest is computed for the compressed data so it may be compared
    * directly with the digest of the backing store from which the snapshot was obtained.
@@ -180,8 +179,8 @@ public interface HAGlue
   IHASnapshotDigestResponse computeHASnapshotDigest(IHASnapshotDigestRequest req)
       throws IOException, NoSuchAlgorithmException, DigestException;
 
-  //    /**
-  //     * Obtain a global write lock on the leader. The lock only blocks writers.
+  //    /*
+//     * Obtain a global write lock on the leader. The lock only blocks writers.
   //     * Readers may continue to execute without delay.
   //     * <p>
   //     * You can not obtain a coherent backup of the {@link Journal} while there
@@ -217,7 +216,7 @@ public interface HAGlue
   //    Future<Void> globalWriteLock(IHAGlobalWriteLockRequest req)
   //            throws IOException, TimeoutException, InterruptedException;
 
-  /**
+  /*
    * Request that the service take a snapshot. If there is already a snapshot in progress, then the
    * {@link Future} for that request will be returned.
    *
@@ -229,7 +228,7 @@ public interface HAGlue
    */
   Future<IHASnapshotResponse> takeSnapshot(IHASnapshotRequest req) throws IOException;
 
-  /**
+  /*
    * Disaster recovery (REBUILD) of the local database instance from the leader of a met quorum.
    *
    * <p>There are several preconditions:
@@ -249,7 +248,7 @@ public interface HAGlue
    */
   Future<Void> rebuildFromLeader(IHARemoteRebuildRequest req) throws IOException;
 
-  /**
+  /*
    * Run the caller's task on the service.
    *
    * <p>Note: This interface provides direct access to the raw index manager. Caller's requiring
@@ -262,6 +261,6 @@ public interface HAGlue
    *     computation. <code>false</code> if the task will execute synchronously and return a thick
    *     {@link Future}.
    */
-  public <T> Future<T> submit(IIndexManagerCallable<T> callable, boolean asyncFuture)
+  <T> Future<T> submit(IIndexManagerCallable<T> callable, boolean asyncFuture)
       throws IOException;
 }

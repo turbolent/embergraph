@@ -13,8 +13,8 @@ import org.embergraph.service.Event;
 import org.embergraph.service.Params;
 import org.embergraph.util.InnerCause;
 
-/**
- * Adds additional metadata to a {@link BTreeMetadata} that deals with the index partition view,
+/*
+* Adds additional metadata to a {@link BTreeMetadata} that deals with the index partition view,
  * including its fast rangeCount, its {@link ISimpleSplitHandler}, etc.
  *
  * <p>Note: There is overhead in opening a view comprised of more than just the mutable {@link
@@ -26,7 +26,7 @@ import org.embergraph.util.InnerCause;
  */
 class ViewMetadata extends BTreeMetadata implements Params {
 
-  /**
+  /*
    * Set <code>true</code> iff the index partition view is requested and the various additional data
    * are collected from that view (e.g., range count). This is done in order to prevent
    * re-initialization of such lazily obtained data.
@@ -39,7 +39,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
   /** Cached index partition count once initialized from the view. */
   private volatile long partitionCount;
 
-  /**
+  /*
    * The adjusted nominal size of an index partition. Index partitions are split once {@link
    * #sumSegBytes} is GT this value. This value MAY be adjusted down by an "acceleration" factor.
    *
@@ -47,7 +47,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
    */
   private volatile long adjustedNominalShardSize;
 
-  /**
+  /*
    * Cached estimated percentage of a split once initialized from the view.
    *
    * <p>Note: the percentOfSplit when based on sumSegBytes is not 100% predictive unless we have a
@@ -60,7 +60,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
   /** Cached decision whether or not a tail split is warranted once initialized from the view. */
   private volatile boolean tailSplit;
 
-  /**
+  /*
    * A {@link SoftReference} is used to cache the view since we really want to hold onto the
    * reference until we get around to finishing overflow processing for this index partition.
    * However, you SHOULD clear the reference using {@link #clearRef()} as soon as you have handled
@@ -68,7 +68,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
    */
   private volatile SoftReference<ILocalBTreeView> ref;
 
-  /**
+  /*
    * Open the historical view of that index at that time (not just the mutable BTree but the full
    * view). The view is cached. If the reference has been cleared then the view is re-opened. This
    * also initializes values requiring additional effort which are not available until this method
@@ -86,7 +86,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
 
         if (view == null) {
 
-          view = (ILocalBTreeView) resourceManager.getIndex(name, commitTime);
+          view = resourceManager.getIndex(name, commitTime);
 
           ref = new SoftReference<ILocalBTreeView>(view);
 
@@ -100,7 +100,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
     return view;
   }
 
-  /**
+  /*
    * Release the {@link SoftReference} for the index partition view.
    *
    * @todo refactor into clearBTreeRef() and clearViewRef(). The latter calls the former. check all
@@ -118,7 +118,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
     super.clearRef();
   }
 
-  /**
+  /*
    * Initialize additional data with higher latency (range count, #of index partitions, the adjusted
    * split handler, etc.).
    *
@@ -168,8 +168,8 @@ class ViewMetadata extends BTreeMetadata implements Params {
 
           if (npartitions == 0) {
 
-            /*
-             * There must always be at least one index partition for
+          /*
+       * There must always be at least one index partition for
              * a scale-out index so this is an error condition.
              */
             log.error("No partitions? name=" + indexMetadata.getName());
@@ -184,8 +184,8 @@ class ViewMetadata extends BTreeMetadata implements Params {
           throw new RuntimeException(t);
         }
 
-        /*
-         * Traps any RMI failures (or anything else), logs a warning,
+      /*
+       * Traps any RMI failures (or anything else), logs a warning,
          * and reports npartitions as -1L.
          */
 
@@ -212,8 +212,8 @@ class ViewMetadata extends BTreeMetadata implements Params {
 
       } else {
 
-        /*
-         * discount: given T=100:
+      /*
+       * discount: given T=100:
          *
          * d = .01 when N=1
          *
@@ -266,7 +266,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
     initView = true;
   }
 
-  /**
+  /*
    * The fast range count of the view (cached).
    *
    * @throws IllegalStateException unless {@link #getView()} has been invoked.
@@ -282,7 +282,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
     return rangeCount;
   }
 
-  /**
+  /*
    * Return the #of index partitions for this scale-out index. The value is computed once per
    * overflow event and then cached.
    */
@@ -297,7 +297,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
     return partitionCount;
   }
 
-  /**
+  /*
    * The adjusted nominal size on disk of a shard after a compacting merge (cached). This factors in
    * an optional acceleration factor which causes shards to be split when they are smaller unless a
    * minimum #of shards exist for that index.
@@ -315,7 +315,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
     return adjustedNominalShardSize;
   }
 
-  /**
+  /*
    * Estimated percentage of a split based on the size on disk (cached).
    *
    * <p>Note: the percentOfSplit is not 100% predictive unless we have a compact view since the size
@@ -334,7 +334,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
     return this.percentOfSplit;
   }
 
-  /**
+  /*
    * Return <code>true</code> if the index partition satisfies the criteria for a tail split (heavy
    * writes on the tail of the index partition and the size of the index partition is large enough
    * to warrant a tail split).
@@ -352,7 +352,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
     return tailSplit;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The ctor intentionally does not force the materialization of the view or perform any
@@ -385,7 +385,7 @@ class ViewMetadata extends BTreeMetadata implements Params {
     }
   }
 
-  /**
+  /*
    * Returns all the interesting properties in a semi-structured form which can be used to log an
    * {@link Event}.
    */

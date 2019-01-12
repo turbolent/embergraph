@@ -37,8 +37,8 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Tokenize an input file, collect the set of distinct keywords, and encode those keywords as
+/*
+* Tokenize an input file, collect the set of distinct keywords, and encode those keywords as
  * unsigned byte[]s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

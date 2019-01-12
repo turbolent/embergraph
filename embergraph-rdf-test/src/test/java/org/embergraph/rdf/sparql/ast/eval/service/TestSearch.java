@@ -25,8 +25,8 @@ import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.BD;
 
-/**
- * Data driven test suite for full text search.
+/*
+* Data driven test suite for full text search.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * A simple full text search query. The query is transformed from
    *
    * <pre>
@@ -106,7 +106,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("search-1").runTest();
   }
 
-  /**
+  /*
    * A simple full text search query (variant of the above using the <code>SPARQL 1.1</code> SERVICE
    * syntax).
    */
@@ -115,7 +115,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("search-service-1").runTest();
   }
 
-  /**
+  /*
    * A full text search query based on the in-depth example in the full text index core package
    * ("child proofing" example).
    */
@@ -130,7 +130,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("search-3").runTest();
   }
 
-  /**
+  /*
    * Unit test for a prefix match ("mi*").
    *
    * <pre>
@@ -156,7 +156,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unit test for a prefix match ("mi*").
    *
    * <pre>
@@ -194,7 +194,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("search-match-all-terms").runTest();
   }
 
-  /**
+  /*
    * Unit test with named graphs (quads) using graph graph pattern and a subject join in the named
    * subquery. In this case we do not need to do anything more to filter out literals matched which
    * do not appear in statements for the named graph.
@@ -206,7 +206,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("search-named-graphs1").runTest();
   }
 
-  /**
+  /*
    * Variant of the test above in which the graph variable is bound to the graph in which the search
    * result is visible.
    */
@@ -215,7 +215,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("search-named-graphs2").runTest();
   }
 
-  /**
+  /*
    * Variant of the test above in which the graph variable is bound to a graph in which the search
    * result is not visible.
    */
@@ -230,7 +230,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("search-named-graphs4").runTest();
   }
 
-  /**
+  /*
    * Unit test with named graphs (quads) using a graph graph pattern but not having a subject join
    * in the named subquery. In this case we need to take action in order to ensure that literal
    * matches are filtered out if they do not appear in a statement for the named graph. Verify that
@@ -242,7 +242,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("search-named-graphs5").runTest();
   }
 
-  /**
+  /*
    * Run the query with no graphs specified.
    *
    * <pre>
@@ -270,7 +270,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Run the query with graphA specified as the default graph.
    *
    * <pre>
@@ -294,7 +294,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Run the query with graphB specified as the default graph
    *
    * <pre>
@@ -316,7 +316,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Run the query with graphB specified as the default graph and also pull out the subject from the
    * search variable.
    *
@@ -340,7 +340,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Run the query with graphA specified as the default graph and also pull out the subject from the
    * search variable.
    *
@@ -367,7 +367,7 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unit test for a query with magic search predicates in the main WHERE clause. These predicates
    * should be translated into a {@link ServiceNode} which is then lifted into a named subquery.
    */
@@ -396,8 +396,8 @@ public class TestSearch extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  //    /**
-  //     * TODO Unit test for search-in-search pattern:
+  //    /*
+//     * TODO Unit test for search-in-search pattern:
   //     *
   //     * <pre>
   //     * select ?snippet

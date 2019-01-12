@@ -71,8 +71,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTBottomUpOptimizer}.
+/*
+* Test suite for {@link ASTBottomUpOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestASTBottomUpOptimizer.java 5197 2011-09-15 19:10:44Z thompsonbry $
@@ -91,7 +91,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Nested Optionals - 1 (Query is not well designed because there are no shared variables in the
    * intermediate join group and there is an embedded OPTIONAL join group. Since ?v is not present
    * in the intermediate join group the (:x3 :q ?w . OPTIONAL { :x2 :p ?v }) solutions must be
@@ -250,7 +250,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     assertEquals("modifiedClause", modifiedClause, queryRoot.getWhereClause());
   }
 
-  /**
+  /*
    * A variant of {@link #test_bottomUpOptimizer_nested_optionals_1()} where there is a binding for
    * <code>v</code> in each exogenous solutions. This turns <code>v</code> into a "known" bound
    * variable. At that point we no longer need to rewrite the query in order to have the correct
@@ -320,7 +320,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     assertNull("should not have rewritten the query", queryRoot.getNamedSubqueries());
   }
 
-  /**
+  /*
    * Static analysis of TCK query:
    *
    * <pre>
@@ -489,10 +489,9 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
               new FilterNode(
                   new FunctionNode(
                       FunctionRegistry.EQ,
-                      null /* scalarValues */,
-                      new ValueExpressionNode[] { // args
-                        new VarNode(unboundVarName), new ConstantNode(new Constant(ONE.getIV()))
-                      }));
+                      null, /* scalarValues */
+                      // args
+                      new VarNode(unboundVarName), new ConstantNode(new Constant(ONE.getIV()))));
           final GlobalAnnotations globals =
               new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
           AST2BOpUtility.toVE(getBOpContext(), globals, filterNode.getValueExpressionNode());
@@ -525,7 +524,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     diff(modifiedClause, queryRoot.getWhereClause());
   }
 
-  /**
+  /*
    * Join-scope - 1 (aka var-scope-join-1).
    *
    * <pre>
@@ -690,7 +689,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     assertEquals("modifiedClause", modifiedClause, queryRoot.getWhereClause());
   }
 
-  /**
+  /*
    * Variant on {@link #test_bottomUpOptimizer_join_scope_1()} where the query is well designed due
    * to the presence of a shared variable <code>?X</code> in the intermediate join group. This test
    * verifies that we DO NOT rewrite the query.
@@ -744,7 +743,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     assertEquals(expected, queryRoot);
   }
 
-  /**
+  /*
    * Slight variation on the structure of the query in the test above which should not be recognized
    * as a badly designed left join.
    *
@@ -799,7 +798,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     assertEquals(expected, queryRoot);
   }
 
-  /**
+  /*
    * Slight variation on the structure of the query in the test above which should not be recognized
    * as a badly designed left join.
    *
@@ -854,7 +853,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     assertEquals(expected, queryRoot);
   }
 
-  /**
+  /*
    * Tests ill-designed patterns with OPTIONAL nested UNION and non well designed variable being
    * properly replaced through subquery. Test case motivated by ticket #1087 (query structurally
    * equals the query in the test case).
@@ -913,7 +912,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     assertFalse(itr.hasNext());
   }
 
-  /**
+  /*
    * This test is be based on <code>Filter-nested - 2</code> (Filter on variable ?v which is not in
    * scope).
    *
@@ -989,7 +988,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
               new FunctionNode(
                   FunctionRegistry.EQ,
                   null, // scalarValues(Map)Collections.emptyMap(),
-                  new ValueExpressionNode[] {new VarNode(anonvar), new ConstantNode(ONE.getIV())}));
+                  new VarNode(anonvar), new ConstantNode(ONE.getIV())));
       final GlobalAnnotations globals =
           new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
       AST2BOpUtility.toVE(getBOpContext(), globals, filterNode.getValueExpressionNode());
@@ -1002,7 +1001,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
 
   }
 
-  /**
+  /*
    * Test when <code>?v</code> is bound in the input {@link IBindingSet}[]. In this case we can not
    * rewrite the filter.
    *
@@ -1069,7 +1068,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     diff(expected, queryRoot);
   }
 
-  /**
+  /*
    * Unit test for filter with a variable which is never bound (this has nothing to do with the
    * variable scoping).
    *
@@ -1134,7 +1133,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
               new FunctionNode(
                   FunctionRegistry.EQ,
                   null, // scalarValues (Map)Collections.emptyMap(),
-                  new ValueExpressionNode[] {new VarNode(anonvar), new ConstantNode(ONE.getIV())}));
+                  new VarNode(anonvar), new ConstantNode(ONE.getIV())));
       final GlobalAnnotations globals =
           new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
       AST2BOpUtility.toVE(getBOpContext(), globals, filterNode.getValueExpressionNode());
@@ -1144,7 +1143,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     diff(expectedWhereClause, queryRoot.getWhereClause());
   }
 
-  /**
+  /*
    * Optional-filter - 1
    *
    * <pre>
@@ -1230,7 +1229,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     diff(expected, queryRoot);
   }
 
-  /**
+  /*
    * The MINUS operator evaluates both sides and then removes the solution sets on the right hand
    * side from those on the left hand side. When there are shared variables we can constrain the
    * right hand side evaluation without violating bottom up evaluation semantics. (This example is
@@ -1316,7 +1315,7 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * For this case, there are no shared variables so the MINUS group can just be eliminated (it can
    * not produce any solutions which would be removed from the parent group).
    *
@@ -1406,8 +1405,8 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
 
   //    Note: This was not actually a bottom up evaluation problem at all.
   //
-  //    /**
-  //     * This is a bottom up semantics test from the openrdf services test suite.
+  //    /*
+//     * This is a bottom up semantics test from the openrdf services test suite.
   //     * There are no shared variables for the two SERVICE clauses. This means
   //     * that we need to lift them out into named subqueries in order to have
   //     * bottom up evaluation semantics.
@@ -1454,8 +1453,8 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
   //        store.getLexiconRelation()
   //                .addTerms(values, values.length, false/* readOnly */);
   //
-  //        /**
-  //         * The source AST.
+  //        /*
+//         * The source AST.
   //         *
   //         * <pre>
   //         * PREFIX : <http://example.org>
@@ -1604,8 +1603,8 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
   //
   //    }
 
-  //    /**
-  //     * The variable <code>?n</code> in the FILTER is the same as the
+  //    /*
+//     * The variable <code>?n</code> in the FILTER is the same as the
   //     * variable <code>?n</code> in the outer join group. It must not be
   //     * rewritten into an anonymous variable.
   //     * <pre>
@@ -1721,8 +1720,8 @@ public class TestASTBottomUpOptimizer extends AbstractASTEvaluationTestCase {
   //
   //    }
   //
-  //    /**
-  //     * The variable <code>?n</code> in the inner FILTER is the same as the
+  //    /*
+//     * The variable <code>?n</code> in the inner FILTER is the same as the
   //     * variable <code>?n</code> in the outer join group. It must not be
   //     * rewritten into an anonymous variable.
   //     * <p>

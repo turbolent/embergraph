@@ -32,8 +32,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceCallCreateParams;
 import org.embergraph.striterator.CloseableIteratorWrapper;
 import org.openrdf.query.BindingSet;
 
-/**
- * Mock service reports the solutions provided in the constructor.
+/*
+* Mock service reports the solutions provided in the constructor.
  *
  * <p>Note: This can not be used to test complex queries because the caller needs to know the order
  * in which the query will be evaluated in order to know the correct response for the mock service.

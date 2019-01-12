@@ -11,8 +11,8 @@ import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.algebra.ValueExpr;
 import org.openrdf.query.algebra.Var;
 
-/**
- * A negated property set is a SPARQL construction of the form {?X !(uri|^uri) ?Y}. This class is a
+/*
+* A negated property set is a SPARQL construction of the form {?X !(uri|^uri) ?Y}. This class is a
  * temporary representation used by the parser. It is converted by the TupleExprBuilder into a set
  * of joins and filters on regular statement patterns.
  *

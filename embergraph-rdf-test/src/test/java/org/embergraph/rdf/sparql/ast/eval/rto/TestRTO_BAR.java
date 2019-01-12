@@ -25,8 +25,8 @@ import java.util.Properties;
 import org.embergraph.bop.rdf.joinGraph.GenerateBarData;
 import org.embergraph.rdf.sail.EmbergraphSail;
 
-/**
- * Data driven test suite for the Runtime Query Optimizer (RTO) using BAR data and queries.
+/*
+* Data driven test suite for the Runtime Query Optimizer (RTO) using BAR data and queries.
  *
  * @see GenerateBarData
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -55,7 +55,7 @@ public class TestRTO_BAR extends AbstractRTOTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Sample query for the synthetic data set. The query is arranged in a known good order.
    *
    * <p>Note: The runtime optimizer estimate of the cardinality of the edge [5 4] in this query is a

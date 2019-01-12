@@ -29,8 +29,8 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.journal.Journal.Options;
 
-/**
- * Test suite for {@link RegisterIndexTask} and {@link DropIndexTask}.
+/*
+* Test suite for {@link RegisterIndexTask} and {@link DropIndexTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Test ability to submit an unisolated write task that creates a named index and then shutdown
    * the journal. The journal is then re-opened and we verify that the registered index is restart
    * safe. Finally we drop the index, close the journal and then re-open it again to verify that the
@@ -80,12 +80,12 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
           log.info("Resolving future for task.");
 
-          assertEquals("indexUUID", indexUUID, (UUID) future.get());
+          assertEquals("indexUUID", indexUUID, future.get());
 
           log.info("Resolved future");
 
-          /*
-           * This verifies that the write task did not return control to
+        /*
+       * This verifies that the write task did not return control to
            * the caller until the write set of that task was committed.
            */
 
@@ -130,8 +130,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
                   protected Object doTask() throws Exception {
 
-                    /*
-                     * Note: Throws an exception if the index is not registered.
+                  /*
+       * Note: Throws an exception if the index is not registered.
                      */
 
                     IIndex ndx = getIndex(name);
@@ -148,8 +148,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
           assertNull(future.get());
 
-          /*
-           * The commit counter MUST NOT have been changed since we ran a
+        /*
+       * The commit counter MUST NOT have been changed since we ran a
            * read-only task.
            */
 
@@ -183,8 +183,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
           assertTrue("Index did not exist?", (Boolean) future.get());
 
-          /*
-           * This verifies that the write task did not return control to
+        /*
+       * This verifies that the write task did not return control to
            * the caller until the write set of that task was committed.
            */
 
@@ -225,8 +225,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
                   protected Object doTask() throws Exception {
 
-                    /*
-                     * Note: Throws an exception if the index is not registered.
+                  /*
+       * Note: Throws an exception if the index is not registered.
                      */
 
                     try {
@@ -250,8 +250,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
 
           assertNull(future.get());
 
-          /*
-           * We ran a read-only task so the commit counter MUST NOT have
+        /*
+       * We ran a read-only task so the commit counter MUST NOT have
            * been changed.
            */
 
@@ -276,7 +276,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
     }
   }
 
-  /**
+  /*
    * Test registers an index and then verifies that a second {@link RegisterIndexTask} will return
    * <code>false</code> since the index already exists.
    *
@@ -309,10 +309,10 @@ public class TestAddDropIndexTask extends ProxyTestCase {
             journal.submit(
                 new RegisterIndexTask(journal, name, new IndexMetadata(name, indexUUID)));
 
-        assertEquals("indexUUID", indexUUID, (UUID) future.get());
+        assertEquals("indexUUID", indexUUID, future.get());
 
-        /*
-         * This verifies that the write task did not return control to the
+      /*
+       * This verifies that the write task did not return control to the
          * caller until the write set of that task was committed.
          */
 
@@ -339,10 +339,10 @@ public class TestAddDropIndexTask extends ProxyTestCase {
                 new RegisterIndexTask(journal, name, new IndexMetadata(name, indexUUID)));
 
         // Note: the UUID for the pre-existing index is returned.
-        assertEquals("indexUUID", indexUUID, (UUID) future.get());
+        assertEquals("indexUUID", indexUUID, future.get());
 
-        /*
-         * This verifies that no commit was performed since no data was
+      /*
+       * This verifies that no commit was performed since no data was
          * actually written on the store because the index was pre-existing.
          */
 
@@ -363,8 +363,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
         // should return true if the index was dropped.
         assertTrue("Index did not exist?", (Boolean) future.get());
 
-        /*
-         * Verify that a commit was performed.
+      /*
+       * Verify that a commit was performed.
          */
 
         assertEquals(
@@ -384,8 +384,8 @@ public class TestAddDropIndexTask extends ProxyTestCase {
         // should return false since the index does not exist.
         assertFalse("Index exists?", (Boolean) future.get());
 
-        /*
-         * Verify that a commit was NOT performed since no data was written
+      /*
+       * Verify that a commit was NOT performed since no data was written
          * by the task.
          */
 
@@ -401,7 +401,7 @@ public class TestAddDropIndexTask extends ProxyTestCase {
     }
   }
 
-  /**
+  /*
    * Test attempt operations against a new journal (nothing committed) and verify that we see {@link
    * NoSuchIndexException}s rather than something odder. This is an edge case since {@link
    * Journal#getCommitRecord()} will have 0L for all root addresses until the first commit - this

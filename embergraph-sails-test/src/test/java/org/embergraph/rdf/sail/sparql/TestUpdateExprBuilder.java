@@ -64,8 +64,8 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.rio.RDFParser.DatatypeHandling;
 
-/**
- * Test suite for {@link UpdateExprBuilder}.
+/*
+* Test suite for {@link UpdateExprBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -80,7 +80,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -109,7 +109,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the SILENT keyword.
    *
    * <pre>
@@ -141,7 +141,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the SILENT keyword.
    *
    * <pre>
@@ -223,7 +223,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -257,7 +257,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -291,7 +291,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -325,7 +325,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -359,7 +359,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -393,7 +393,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -427,7 +427,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -461,7 +461,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -495,7 +495,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -529,7 +529,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple LOAD operation with the non-standard extension
    *
    * <pre>
@@ -566,7 +566,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple CLEAR operation.
    *
    * <pre>
@@ -593,7 +593,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -619,7 +619,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -645,7 +645,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -673,7 +673,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -704,7 +704,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -731,7 +731,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -757,7 +757,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -783,7 +783,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -811,7 +811,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -841,7 +841,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -868,7 +868,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -897,7 +897,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -929,7 +929,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -963,7 +963,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -993,7 +993,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1023,7 +1023,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1055,7 +1055,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1089,7 +1089,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1119,7 +1119,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1149,7 +1149,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1181,7 +1181,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1215,7 +1215,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1245,7 +1245,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1275,7 +1275,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1314,15 +1314,15 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcTitle,
-                (EmbergraphValue) label1,
+                book1,
+                dcTitle,
+                label1,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcCreator,
-                (EmbergraphValue) label2,
+                book1,
+                dcCreator,
+                label2,
                 null,
                 StatementEnum.Explicit),
             //                    new SPO(book1, dcTitle, label1, null,
@@ -1338,7 +1338,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1372,10 +1372,10 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) price,
-                (EmbergraphValue) i42,
-                (EmbergraphResource) bookstore,
+                book1,
+                price,
+                i42,
+                bookstore,
                 StatementEnum.Explicit),
           };
 
@@ -1387,7 +1387,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1434,7 +1434,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1481,22 +1481,22 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcTitle,
-                (EmbergraphValue) label1,
+                book1,
+                dcTitle,
+                label1,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcCreator,
-                (EmbergraphValue) label2,
+                book1,
+                dcCreator,
+                label2,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) price,
-                (EmbergraphValue) i42,
-                (EmbergraphResource) bookstore,
+                book1,
+                price,
+                i42,
+                bookstore,
                 StatementEnum.Explicit),
           };
 
@@ -1525,7 +1525,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     parseUpdate(sparql, baseURI);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1572,21 +1572,21 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) price,
-                (EmbergraphValue) i42,
-                (EmbergraphResource) bookstore,
+                book1,
+                price,
+                i42,
+                bookstore,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcTitle,
-                (EmbergraphValue) label1,
+                book1,
+                dcTitle,
+                label1,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcCreator,
-                (EmbergraphValue) label2,
+                book1,
+                dcCreator,
+                label2,
                 null,
                 StatementEnum.Explicit),
           };
@@ -1598,7 +1598,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1645,21 +1645,21 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       final EmbergraphStatement[] data =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcTitle,
-                (EmbergraphValue) label1,
+                book1,
+                dcTitle,
+                label1,
                 null,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) price,
-                (EmbergraphValue) i42,
-                (EmbergraphResource) bookstore,
+                book1,
+                price,
+                i42,
+                bookstore,
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) book1,
-                (EmbergraphURI) dcCreator,
-                (EmbergraphValue) label2,
+                book1,
+                dcCreator,
+                label2,
                 null, //
                 StatementEnum.Explicit),
           };
@@ -1671,7 +1671,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1714,7 +1714,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
             valueFactory.createStatement(
                 (EmbergraphResource) book1.getValue(),
                 (EmbergraphURI) dcTitle.getValue(),
-                (EmbergraphValue) label1.getValue(),
+                label1.getValue(),
                 (EmbergraphResource) bookstore.getValue(),
                 StatementEnum.Explicit),
           };
@@ -1731,7 +1731,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
             valueFactory.createStatement(
                 (EmbergraphResource) book1.getValue(),
                 (EmbergraphURI) dcTitle.getValue(),
-                (EmbergraphValue) label2.getValue(),
+                label2.getValue(),
                 (EmbergraphResource) bookstore.getValue(),
                 StatementEnum.Explicit),
             //            new SPO(book1, dcTitle, label2, bookstore, StatementEnum.Explicit),
@@ -1745,7 +1745,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT w/o WITH.
    *
    * <pre>
@@ -1854,7 +1854,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT plus WITH to specify the graph.
    *
    * <pre>
@@ -1936,8 +1936,8 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
 
         op.setWhereClause(whereClause);
 
-        /*
-         * Outside the GRAPH group. This is still marked as
+      /*
+       * Outside the GRAPH group. This is still marked as
          * NAMED_CONTEXTS because WITH creates an implicit top-level
          * GRAPH group wrapping the INSERT clause, DELETE clause, and
          * WHERE clause.
@@ -1968,7 +1968,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT and USING.
    *
    * <pre>
@@ -2075,8 +2075,8 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       @SuppressWarnings("unchecked")
       final DatasetNode dataset =
           new DatasetNode(
-              (Set<IV>) Collections.singleton(addresses2), // defaultGraph
-              (Set) Collections.emptySet(), // namedGraphs
+              Collections.singleton(addresses2), // defaultGraph
+              Collections.emptySet(), // namedGraphs
               true // update
               );
 
@@ -2088,7 +2088,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT and USING NAMED.
    *
    * <pre>
@@ -2196,8 +2196,8 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       @SuppressWarnings("unchecked")
       final DatasetNode dataset =
           new DatasetNode(
-              (Set) Collections.emptySet(), // defaultGraph
-              (Set<IV>) Collections.singleton(addresses), // namedGraphs
+              Collections.emptySet(), // defaultGraph
+              Collections.singleton(addresses), // namedGraphs
               true // update
               );
 
@@ -2209,7 +2209,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT, WITH, USING, and USING NAMED.
    *
    * <pre>
@@ -2325,7 +2325,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
       @SuppressWarnings("unchecked")
       final DatasetNode dataset =
           new DatasetNode(
-              (Set) Collections.emptySet(), // defaultGraph
+              Collections.emptySet(), // defaultGraph
               namedGraphs,
               true // update
               );
@@ -2338,7 +2338,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT w/o WITH but using a GRAPH in the DELETE and INSERT clauses.
    *
    * <pre>
@@ -2481,7 +2481,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT with WITH and a GRAPH in the DELETE and INSERT clauses.
    *
    * <pre>
@@ -2624,7 +2624,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT with default graph.
    *
    * <pre>
@@ -2696,7 +2696,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT plus GRAPH in INSERT and WHERE clauses.
    *
    * <pre>
@@ -2796,7 +2796,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A unit test for the DELETE WHERE "shortcut" form.
    *
    * <pre>
@@ -2832,7 +2832,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A unit test for the DELETE WHERE "shortcut" form.
    *
    * <pre>
@@ -2881,7 +2881,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE/INSERT with blank node in the DELETE template.
    *
    * <p>Note: blank nodes are not allowed in the DELETE clause template (nor in DELETE DATA). This
@@ -2914,7 +2914,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     }
   }
 
-  /**
+  /*
    * DELETE/INSERT with blank node in the DELETE template.
    *
    * <p>Note: blank nodes are not allowed in the DELETE clause template (nor in DELETE DATA). This
@@ -2947,7 +2947,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     }
   }
 
-  /**
+  /*
    * A unit test for the DELETE WHERE form without the shortcut, but there the template and the
    * where clause are the same.
    *
@@ -2996,7 +2996,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A sequences of DELETE/INSERT operations with different data sets and no WITH clause.
    *
    * <pre>
@@ -3145,7 +3145,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
         @SuppressWarnings("unchecked")
         final DatasetNode dataset =
             new DatasetNode(
-                (Set) Collections.emptySet(), // defaultGraph
+                Collections.emptySet(), // defaultGraph
                 namedGraphs,
                 true // update
                 );
@@ -3159,7 +3159,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A sequences of DELETE/INSERT operations with different data sets and no WITH clause.
    *
    * <pre>
@@ -3265,7 +3265,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
         @SuppressWarnings("unchecked")
         final DatasetNode dataset =
             new DatasetNode(
-                (Set) Collections.emptySet(), // defaultGraph
+                Collections.emptySet(), // defaultGraph
                 namedGraphs,
                 true // update
                 );
@@ -3325,7 +3325,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * A sequences of DELETE/INSERT operations with different data sets and no WITH clause. Test
    * ensures, that named graph from dataset definition of the first clause does not get leaked into
    * the second clause dataset definition.
@@ -3433,7 +3433,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
         @SuppressWarnings("unchecked")
         final DatasetNode dataset =
             new DatasetNode(
-                (Set) Collections.emptySet(), // defaultGraph
+                Collections.emptySet(), // defaultGraph
                 namedGraphs,
                 true // update
                 );
@@ -3492,7 +3492,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
         @SuppressWarnings("unchecked")
         final DatasetNode dataset =
             new DatasetNode(
-                (Set) Collections.emptySet(), // defaultGraph
+                Collections.emptySet(), // defaultGraph
                 namedGraphs,
                 true // update
                 );
@@ -3506,7 +3506,7 @@ public class TestUpdateExprBuilder extends AbstractEmbergraphExprBuilderTestCase
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>

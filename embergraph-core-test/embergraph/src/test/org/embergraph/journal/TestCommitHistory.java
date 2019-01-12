@@ -30,8 +30,8 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.service.AbstractTransactionService;
 
-/**
- * Test the ability to get (exact match) and find (most recent less than or equal to) historical
+/*
+* Test the ability to get (exact match) and find (most recent less than or equal to) historical
  * commit records in a {@link Journal}. Also verifies that a canonicalizing cache is maintained (you
  * never obtain distinct concurrent instances of the same commit record).
  *
@@ -48,7 +48,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
     super(name);
   }
 
-  /**
+  /*
    * Compare two {@link ICommitRecord}s for equality in their data.
    *
    * @param expected
@@ -74,7 +74,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test that {@link Journal#getCommitRecord(long)} returns null if invoked before anything has
    * been committed.
    *
@@ -137,7 +137,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
       journal.destroy();
     }
   }
-  /**
+  /*
    * Test the ability to recover a {@link ICommitRecord} from the {@link CommitRecordIndex}.
    *
    * <p>A second commit should be void and therefore the previous record should be retrievable.
@@ -248,7 +248,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Tests for finding (less than or equal to) historical commit records using the commit record
    * index. This also tests restart-safety of the index with multiple records (if the store is
    * stable).
@@ -315,8 +315,8 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
           assertEquals(commitRecords[i - 1], journal.getCommitRecord(commitTime[i - 1]));
         }
 
-        /*
-         * Obtain a unique timestamp from the same source that the journal
+      /*
+       * Obtain a unique timestamp from the same source that the journal
          * is using to generate the commit timestamps. This ensures that
          * there will be at least one possible timestamp between each commit
          * timestamp.
@@ -328,8 +328,8 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
 
       if (journal.isStable()) {
 
-        /*
-         * Close and then re-open the store so that we will also be testing
+      /*
+       * Close and then re-open the store so that we will also be testing
          * restart-safety of the commit record index.
          */
 
@@ -369,8 +369,8 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
           assertEquals(commitRecords[i - 1], journal.getCommitRecord(commitTime[i] - 1));
         }
 
-        /*
-         * Verify a null return if we probe with a timestamp before any
+      /*
+       * Verify a null return if we probe with a timestamp before any
          * commit time.
          */
         assertNull(journal.getCommitRecord(commitTime[0] - 1));
@@ -382,7 +382,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test verifies that exact match and find always return the same reference for the same commit
    * record (at least as long as the test holds a hard reference to the commit record of interest).
    */
@@ -446,7 +446,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test of the canonicalizing object cache used to prevent distinct instances of a historical
    * index from being created. The test also verifies that the historical named index is NOT the
    * same instance as the current unisolated index by that name.
@@ -496,7 +496,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
       assertTrue(liveIndex != historicalIndex0);
 
       // re-request is still the same object.
-      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord0));
+      assertTrue(historicalIndex0 == journal.getIndexWithCommitRecord(name, commitRecord0));
 
       /*
        * The re-load address for the live index as of that commit record.
@@ -538,13 +538,13 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
        * commit record since the index state was not changed and it will
        * be reloaded from the same address.
        */
-      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord1));
+      assertTrue(historicalIndex0 == journal.getIndexWithCommitRecord(name, commitRecord1));
 
       // re-request is still the same object.
-      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord0));
+      assertTrue(historicalIndex0 == journal.getIndexWithCommitRecord(name, commitRecord0));
 
       // re-request is still the same object.
-      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord1));
+      assertTrue(historicalIndex0 == journal.getIndexWithCommitRecord(name, commitRecord1));
 
       /*
        * Now write on the live index and commit. verify that there is a

@@ -32,8 +32,8 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Internal value representing a packed long in the range [0;72057594037927935L]. Note that this is
+/*
+* Internal value representing a packed long in the range [0;72057594037927935L]. Note that this is
  * not the full range of long (negative values are not supported and positive long values in
  * [72057594037927936L;Long.MAX] are not supported), the reason being that the compression technique
  * we're using is order preserving only for the valid range.
@@ -48,7 +48,7 @@ public class PackedLongIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
   public static final URI PACKED_LONG =
       new URIImpl("http://www.embergraph.org/rdf/datatype#packedLong");
 
-  /**
+  /*
    * The {@link PackedLongIV} uses the {@link LongPacker} to compress values. {@link
    * LongPacker#packLong(long, byte[], org.embergraph.io.LongPacker.IByteBuffer)} is order
    * preserving whenever the first byte is 0. Since the IV relies on an order preserving encoding,
@@ -115,7 +115,7 @@ public class PackedLongIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
     return literal;
   }
 
-  /**
+  /*
    * Return the byte length for the byte[] encoded representation of this internal value. Depends on
    * the byte length of the encoded inline value.
    */

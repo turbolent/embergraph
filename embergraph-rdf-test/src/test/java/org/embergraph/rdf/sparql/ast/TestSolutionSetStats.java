@@ -23,8 +23,8 @@ package org.embergraph.rdf.sparql.ast;
 
 import org.embergraph.bop.IBindingSet;
 
-/**
- * Test suite for {@link SolutionSetStats}.
+/*
+* Test suite for {@link SolutionSetStats}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestSolutionSetStats.java 6099 2012-03-09 16:35:55Z thompsonbry $
@@ -48,7 +48,7 @@ public class TestSolutionSetStats extends AbstractSolutionSetStatsTestCase {
   public void test_001() {
 
     try {
-      new SolutionSetStats((IBindingSet[]) null /* bindingSets */);
+      new SolutionSetStats(null /* bindingSets */);
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

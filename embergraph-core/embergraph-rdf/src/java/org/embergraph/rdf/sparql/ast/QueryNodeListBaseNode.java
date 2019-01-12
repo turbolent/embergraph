@@ -25,8 +25,8 @@ import java.util.Iterator;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * Base class for AST nodes which model an ordered list of children.
+/*
+* Base class for AST nodes which model an ordered list of children.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -57,7 +57,7 @@ public abstract class QueryNodeListBaseNode<E extends IQueryNode> extends QueryN
 
     if (e == null) throw new IllegalArgumentException();
 
-    addArg((BOp) e);
+    addArg(e);
   }
 
   @SuppressWarnings({"unchecked", "rawtypes"})

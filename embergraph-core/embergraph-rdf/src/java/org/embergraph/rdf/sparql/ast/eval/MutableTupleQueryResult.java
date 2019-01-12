@@ -30,8 +30,8 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * An implementation of the {@link TupleQueryResult} interface that stores the complete query result
+/*
+* An implementation of the {@link TupleQueryResult} interface that stores the complete query result
  * in memory. The query results in a MutableTupleQueryResult can be iterated over multiple times and
  * can also be iterated over in reverse order.
  *
@@ -50,7 +50,7 @@ public class MutableTupleQueryResult implements TupleQueryResult, Cloneable {
   /** The index of the next element that will be returned by a call to {@link #next()}. */
   private int currentIndex = 0;
 
-  /**
+  /*
    * The index of the last element that was returned by a call to {@link #next()} or {@link
    * #previous()}. Equal to -1 if there is no such element.
    */
@@ -65,7 +65,7 @@ public class MutableTupleQueryResult implements TupleQueryResult, Cloneable {
     this(bindingNames, Arrays.asList(bindingSets));
   }
 
-  /**
+  /*
    * Creates a query result table with the supplied binding names. <em>The supplied list of binding
    * names is assumed to be constant</em>; care should be taken that the contents of this list
    * doesn't change after supplying it to this solution.
@@ -146,7 +146,7 @@ public class MutableTupleQueryResult implements TupleQueryResult, Cloneable {
     throw new NoSuchElementException();
   }
 
-  /**
+  /*
    * Moves the cursor to the start of the query result, just before the first binding set. After
    * calling this method, the result can be iterated over from scratch.
    */
@@ -159,7 +159,7 @@ public class MutableTupleQueryResult implements TupleQueryResult, Cloneable {
     currentIndex = bindingSets.size() + 1;
   }
 
-  /**
+  /*
    * Inserts the specified binding set into the list. The binding set is inserted immediately before
    * the next element that would be returned by {@link #next()}, if any, and after the next element
    * that would be returned by {@link #previous}, if any. (If the table contains no binding sets,

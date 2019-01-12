@@ -28,8 +28,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Query hint deciding on the {@link IChunkHandler} to be used.
+/*
+* Query hint deciding on the {@link IChunkHandler} to be used.
  *
  * @see BLZG-533 (Vector query engine on the native heap)
  */

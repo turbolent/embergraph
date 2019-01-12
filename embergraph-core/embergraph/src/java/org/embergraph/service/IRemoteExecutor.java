@@ -30,8 +30,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 
-/**
- * Interface for running procedures on a remote service. In general, applications SHOULD restrict
+/*
+* Interface for running procedures on a remote service. In general, applications SHOULD restrict
  * their discovery of {@link IRemoteExecutor} to {@link IClientService}s. Applications SHOULD NOT
  * run arbitrary {@link Callable}s against an {@link IDataService} or an {@link IMetadataService}
  * unless it is necessary to access the index objects locally on the service (index partition moves,
@@ -42,7 +42,7 @@ import java.util.concurrent.RejectedExecutionException;
  */
 public interface IRemoteExecutor extends Remote {
 
-  /**
+  /*
    * Submit a {@link Callable} and return its {@link Future}. The {@link Callable} will execute on
    * the {@link IEmbergraphFederation#getExecutorService()}.
    *
@@ -52,5 +52,5 @@ public interface IRemoteExecutor extends Remote {
    * @todo change API to <T> Future<T> submit(Callable<T> proc). This will break existing code but
    *     reflects the correct use of generics.
    */
-  public Future<? extends Object> submit(Callable<? extends Object> task) throws RemoteException;
+  Future<? extends Object> submit(Callable<? extends Object> task) throws RemoteException;
 }

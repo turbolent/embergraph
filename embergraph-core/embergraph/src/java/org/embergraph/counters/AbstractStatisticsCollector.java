@@ -46,8 +46,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.httpd.AbstractHTTPD;
 import org.embergraph.util.httpd.Config;
 
-/**
- * Base class for collecting data on a host. The data are described by a hierarchical collection of
+/*
+* Base class for collecting data on a host. The data are described by a hierarchical collection of
  * {@link ICounterSet}s and {@link ICounter}s. A {@link IRequiredHostCounters minimum set of
  * counters} is defined which SHOULD be available for decision-making. Implementations are free to
  * report any additional data which they can make available. Reporting is assumed to be periodic,
@@ -97,7 +97,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     return interval;
   }
 
-  /**
+  /*
    * The name of the process (or more typically its service {@link UUID}) whose per-process
    * performance counters are to be collected.
    */
@@ -119,8 +119,8 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     this.processName = processName;
   }
 
-  //    /**
-  //     * Return the load average for the last minute if available and -1
+  //    /*
+//     * Return the load average for the last minute if available and -1
   //     * otherwise.
   //     * <p>
   //     * Note: The load average is available on 1.6+ JVMs.
@@ -164,7 +164,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
   /** {@link CounterSet} hierarchy. */
   private CounterSet countersRoot;
 
-  /**
+  /*
    * Return the counter hierarchy. The returned hierarchy only includes those counters whose values
    * are available from the JVM. This collection is normally augmented with platform specific
    * performance counters collected using an {@link AbstractProcessCollector}.
@@ -212,7 +212,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     return countersRoot;
   }
 
-  /**
+  /*
    * Adds the Info and Memory counter sets under the <i>serviceRoot</i>.
    *
    * @param serviceRoot The {@link CounterSet} corresponding to the service (or client).
@@ -241,7 +241,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     serviceRoot.attach(getMemoryCounterSet());
   }
 
-  /**
+  /*
    * Return the {@link IProcessCounters#Memory memory counter set}. This should be attached to the
    * service root.
    */
@@ -308,7 +308,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     return serviceRoot;
   }
 
-  /**
+  /*
    * Lists out all of the properties and then report each property using a {@link
    * OneShotInstrument}.
    *
@@ -330,7 +330,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
 
         name = (String) e.nextElement();
 
-        value = (String) properties.getProperty(name);
+        value = properties.getProperty(name);
 
       } catch (ClassCastException ex) {
 
@@ -345,7 +345,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     }
   }
 
-  /**
+  /*
    * Adds/updates counters relating to JVM Garbage Collection. These counters should be located
    * within a per-service path.
    *
@@ -424,7 +424,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     }
   }
 
-  /**
+  /*
    * Adds/updates counters relating to JVM Memory Pools. These counters should be located within a
    * per-service path.
    *
@@ -523,7 +523,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     if (log.isInfoEnabled()) log.info("Stopping collection.");
   }
 
-  /**
+  /*
    * Installs a {@link Runtime#addShutdownHook(Thread)} that executes {@link #stop()}.
    *
    * <p>Note: The runtime shutdown hook appears to be a robust way to handle ^C by providing a clean
@@ -549,23 +549,23 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     Runtime.getRuntime().addShutdownHook(t);
   }
 
-  /**
+  /*
    * Options for {@link AbstractStatisticsCollector}
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface Options {
 
-    /**
+    /*
      * The interval in seconds at which the performance counters of the host platform will be
      * sampled (default 60).
      */
-    public String PERFORMANCE_COUNTERS_SAMPLE_INTERVAL =
+    String PERFORMANCE_COUNTERS_SAMPLE_INTERVAL =
         AbstractStatisticsCollector.class.getPackage().getName() + ".interval";
 
-    public String DEFAULT_PERFORMANCE_COUNTERS_SAMPLE_INTERVAL = "60";
+    String DEFAULT_PERFORMANCE_COUNTERS_SAMPLE_INTERVAL = "60";
 
-    /**
+    /*
      * The name of the process whose per-process performance counters are to be collected (required,
      * no default). This causes the per-process counters to be reported using the path:
      *
@@ -575,11 +575,11 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
      * generally used as the service name. A single host may run many different services and will
      * report the counters for each service using the path formed as described above.
      */
-    public String PROCESS_NAME =
+    String PROCESS_NAME =
         AbstractStatisticsCollector.class.getPackage().getName() + ".processName";
   }
 
-  /**
+  /*
    * Create an instance appropriate for the operating system on which the JVM is running.
    *
    * @param properties See {@link Options}
@@ -628,7 +628,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     }
   }
 
-  /**
+  /*
    * Utility runs the {@link AbstractStatisticsCollector} appropriate for your operating system.
    * Before performance counter collection starts the static counters will be written on stdout. The
    * appropriate process(es) are then started to collect the dynamic performance counters.
@@ -753,7 +753,7 @@ public abstract class AbstractStatisticsCollector implements IStatisticsCollecto
     System.err.println("Done");
   }
 
-  /**
+  /*
    * Converts KB to bytes.
    *
    * @param kb The #of kilobytes.

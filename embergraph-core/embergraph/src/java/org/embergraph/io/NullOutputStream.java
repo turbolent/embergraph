@@ -24,8 +24,8 @@ package org.embergraph.io;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * An {@link OutputStream} which discards anything written on it.
+/*
+* An {@link OutputStream} which discards anything written on it.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

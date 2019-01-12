@@ -13,8 +13,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-/**
- * Test suite for {@link EmbergraphValueImpl} serialization semantics, including the correct
+/*
+* Test suite for {@link EmbergraphValueImpl} serialization semantics, including the correct
  * recovery of the {@link EmbergraphValueFactoryImpl} reference when deserialized.
  *
  * @see EmbergraphValueSerializer
@@ -44,7 +44,7 @@ public class TestEmbergraphValueSerialization extends TestCase2 {
     super.tearDown();
   }
 
-  /**
+  /*
    * Performs round trip (de-)serialization using {@link EmbergraphValueSerializer#serialize()} and
    * {@link EmbergraphValueSerializer#deserialize(byte[])}.
    *

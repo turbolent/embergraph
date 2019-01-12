@@ -48,8 +48,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * A utility class for generating and processing compact representations of {@link IBindingSet}s
+/*
+* A utility class for generating and processing compact representations of {@link IBindingSet}s
  * whose {@link IConstant}s are bound to {@link IV}s. Individual {@link IV}s may be associated with
  * a cached RDF {@link Value}.
  *
@@ -67,7 +67,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
   /** Value factory */
   protected final EmbergraphValueFactory vf;
 
-  /**
+  /*
    * <code>true</code> iff this is in support of a DISTINCT filter.
    *
    * <p>Note: we do not maintain the {@link #ivCacheSchema} for a DISTINCT filter since the original
@@ -75,7 +75,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
    */
   protected final boolean filter;
 
-  /**
+  /*
    * The schema provides the order in which the {@link IV}[] for solutions stored in the hash index
    * are encoded in the {@link HTree}. {@link IV} s which are not bound are modeled by a {@link
    * TermId#NullIV}.
@@ -89,7 +89,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
   /** Used to encode the {@link IV}s. */
   private final IKeyBuilder keyBuilder;
 
-  /**
+  /*
    * @param store the backing store
    * @param filter <code>true</code> iff this is in support of a DISTINCT filter.
    *     <p>Note: we do not maintain the {@link #ivCacheSchema} for a DISTINCT filter since the
@@ -106,7 +106,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
     this.keyBuilder = new ASCIIKeyBuilderFactory(128).getKeyBuilder();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation does not maintain the {@link IVCache} associations.
@@ -117,7 +117,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
     return false;
   }
 
-  /**
+  /*
    * Build up the schema based on variables that are actually bound in the observed bindings.
    *
    * @param bset An observed binding set.
@@ -158,7 +158,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
      */
     keyBuilder.reset();
 
-    /**
+    /*
      * https://jira.blazegraph.com/browse/BLZG-4476: DISTINCT does not eliminate duplicate rows
      *
      * <p>Given that the schema is extended over time, we always encode up to the position of the
@@ -215,8 +215,8 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
 
         if (iv.isNullIV()) {
 
-          /**
-           * BLZG-611 (https://jira.blazegraph.com/browse/BLZG-611): we need to properly encode (and
+        /*
+       * BLZG-611 (https://jira.blazegraph.com/browse/BLZG-611): we need to properly encode (and
            * later on, decode) mocked IVs, which have either been constructed at runtime or
            * represent values that are not present in the database. We do this by wrapping fully
            * inlined IV types (for URIs, literals, or blank nodes) into MockedValueIV, which will be
@@ -270,7 +270,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
     return keyBuilder.getKey();
   }
 
-  /**
+  /*
    * Hook method to trigger caching of variable and the value. May be re-implemented in subclasses
    * to batch values, see {@link IVBindingSetEncoderWithIVCache}.
    *
@@ -300,8 +300,8 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
     for (IVariable<?> v : schema) {
 
       if (i == ivs.length) {
-        /*
-         * This solution does not include all variables which were
+      /*
+       * This solution does not include all variables which were
          * eventually discovered to be part of the schema.
          */
         break;
@@ -315,7 +315,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
         continue;
       }
 
-      /**
+      /*
        * BLZG-611 (https://jira.blazegraph.com/browse/BLZG-611): decoding of MockeedValueIV, see
        * encodeSolution() for more information.
        */
@@ -376,7 +376,7 @@ public class IVBindingSetEncoder implements IBindingSetEncoder, IBindingSetDecod
     return bset;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This implementation is a NOP as the {@link IVCache} association is NOT maintained by

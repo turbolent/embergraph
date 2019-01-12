@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-/**
- * Interface for a sampled counter.
+/*
+* Interface for a sampled counter.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -32,5 +32,5 @@ package org.embergraph.counters;
  */
 public interface ICounter<T> extends ICounterNode, IInstrument<T> {
 
-  public IInstrument<T> getInstrument();
+  IInstrument<T> getInstrument();
 }

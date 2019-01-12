@@ -12,8 +12,8 @@ import org.embergraph.sparse.TimestampChooser;
 import org.embergraph.sparse.ValueType;
 import org.embergraph.util.Bytes;
 
-/**
- * A procedure that performs a key range scan, marking all non-deleted versions within the key range
+/*
+* A procedure that performs a key range scan, marking all non-deleted versions within the key range
  * as deleted (by storing a null property value for the {@link FileMetadataSchema#VERSION}).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -35,7 +35,7 @@ public class FileVersionDeleter extends TupleUpdater<TPV> {
   /** used to generate keys on the server (not serialized). */
   private transient KeyBuilder keyBuilder;
 
-  /**
+  /*
    * @param timestamp A valid timestamp or {@link IRowStoreConstants#AUTO_TIMESTAMP} or {@link
    *     IRowStoreConstants#AUTO_TIMESTAMP_UNIQUE}.
    */
@@ -52,12 +52,10 @@ public class FileVersionDeleter extends TupleUpdater<TPV> {
 
     final String name = keyDecoder.getColumnName();
 
-    if (!name.equals(FileMetadataSchema.VERSION)) return false;
-
-    return true;
+    return name.equals(FileMetadataSchema.VERSION);
   }
 
-  /**
+  /*
    * Appends a new tuple into the index whose key uses the {@link #choosenTimestamp} and whose value
    * is an encoded <code>null</code>. This is interepreted as a "deleted" file version tuple.
    *

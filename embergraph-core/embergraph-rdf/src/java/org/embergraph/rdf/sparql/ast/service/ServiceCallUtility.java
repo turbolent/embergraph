@@ -44,8 +44,8 @@ import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
-/**
- * Helper class for {@link ServiceCall} invocations.
+/*
+* Helper class for {@link ServiceCall} invocations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -58,7 +58,7 @@ public class ServiceCallUtility {
 
   private static final String ERR_NOT_MATERIALIZED = "Service reference is not materialized";
 
-  /**
+  /*
    * Return the effective service URI IFF the value expression for the service reference is a
    * constant.
    *
@@ -87,7 +87,7 @@ public class ServiceCallUtility {
     return serviceURI;
   }
 
-  /**
+  /*
    * Return the effective service URI.
    *
    * @param bset A solution which will be used to evaluate the service reference value expression.
@@ -115,7 +115,7 @@ public class ServiceCallUtility {
     return serviceURI;
   }
 
-  /**
+  /*
    * Convert the {@link IBindingSet} into an openrdf {@link BindingSet}.
    *
    * <p>Note: The {@link IVCache} MUST be set for non-inline {@link IV}s.
@@ -156,8 +156,8 @@ public class ServiceCallUtility {
 
       if (iv.isInline()) {
 
-        /**
-         * Materialize inline IV as Value.
+      /*
+       * Materialize inline IV as Value.
          *
          * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/632">
          *     NotMaterializedException when a SERVICE call needs variables that are provided as
@@ -174,8 +174,8 @@ public class ServiceCallUtility {
 
         } catch (NotMaterializedException ex) {
 
-          /*
-           * Add the variable name to the stack trace.
+        /*
+       * Add the variable name to the stack trace.
            */
 
           throw new NotMaterializedException("var=" + name + ", val=" + iv, ex);
@@ -188,7 +188,7 @@ public class ServiceCallUtility {
     return out;
   }
 
-  /**
+  /*
    * Convert an openrdf {@link BindingSet} into a embergraph {@link IBindingSet}. The {@link
    * BindingSet} MUST contain {@link EmbergraphValue}s and the {@link IV}s for those {@link
    * EmbergraphValue}s MUST have been resolved against the database and the {@link IVCache}
@@ -240,7 +240,7 @@ public class ServiceCallUtility {
     return out;
   }
 
-  /**
+  /*
    * Convert {@link IBindingSet}[] to openrdf {@link BindingSet}[].
    *
    * @param projectedVars When given, variables which are not projected will not be present in the
@@ -260,7 +260,7 @@ public class ServiceCallUtility {
     return out;
   }
 
-  /**
+  /*
    * Batch resolve EmbergraphValues to IVs. This is necessary in order to have subsequent JOINs
    * succeed when they join on variables which are bound to terms which are in the lexicon.
    *

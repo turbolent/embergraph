@@ -19,8 +19,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.memory.MemoryStore;
 
-/**
- * Extreme test for problem with arbitrary length paths. This test is apparently not intended to run
+/*
+* Extreme test for problem with arbitrary length paths. This test is apparently not intended to run
  * during normal CI but instead looks as if it were developed to address a specific openrdf issue.
  *
  * @see <a href="http://www.openrdf.org/issues/browse/SES-956">StackOverflowError for
@@ -35,7 +35,7 @@ public class EmbergraphArbitraryLengthPathTest extends TestCase {
 
   private RepositoryConnection con;
 
-  /**
+  /*
    * Note: This method may be overridden in order to run the test suite against other variations of
    * the embergraph backend.
    */

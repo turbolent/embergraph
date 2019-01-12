@@ -36,8 +36,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Connected components computes the distinct sets of non-overlapping subgraphs within a graph. All
+/*
+* Connected components computes the distinct sets of non-overlapping subgraphs within a graph. All
  * vertices within a connected component are connected along at least one path.
  *
  * <p>The implementation works by assigning a label to each vertex. The label is initially the
@@ -70,7 +70,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
 
   public static class VS {
 
-    /**
+    /*
      * The label for the vertex. This value is initially the vertex identifier. It is relaxed by the
      * computation until it is the minimum vertex identifier for the connected component.
      */
@@ -84,7 +84,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
       this.label = new AtomicReference<Value>(v);
     }
 
-    /**
+    /*
      * The assigned label for this vertex. Once converged, all vertices in a given connected
      * component will have the same label and the labels assigned to the vertices in each connected
      * component will be distinct. The labels themselves are just the identifier of a vertex in that
@@ -139,7 +139,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
     return FrontierEnum.AllVertices;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to not impose any filter on the sampled vertices (it does not matter whether they
@@ -163,7 +163,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
     return EdgesEnum.AllEdges;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Return the label of the remote vertex.
@@ -179,7 +179,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
     return vs.getLabel();
   }
 
-  /**
+  /*
    * MIN
    *
    * <p>{@inheritDoc}
@@ -197,7 +197,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
     return right;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Compute the new value for this vertex, making a note of the last change for this vertex.
@@ -240,7 +240,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
     return us;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns <code>true</code> iff the label was changed in the current round.
@@ -266,7 +266,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
     sch.schedule(v);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -301,21 +301,21 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
     return tmp;
   }
 
-  /**
+  /*
    * Additional {@link IBindingExtractor.IBinder}s exposed by {@link CC}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface Bindings extends BaseGASProgram.Bindings {
 
-    /**
+    /*
      * The label associated with all of the vertices in a subgraph. The label is a vertex identifier
      * and can be used to jump into the subgraph.
      */
     int LABEL = 1;
   }
 
-  /**
+  /*
    * Returns a map containing the labels assigned to each connected component (which gives you a
    * vertex in that connected component) and the #of vertices in each connected component.
    *
@@ -355,7 +355,7 @@ public class CC extends BaseGASProgram<CC.VS, CC.ES, Value> {
     }
   }
 
-  /**
+  /*
    * Returns a map containing the labels assigned to each connected component (which gives you a
    * vertex in that connected component) and the #of vertices in each connected component.
    */

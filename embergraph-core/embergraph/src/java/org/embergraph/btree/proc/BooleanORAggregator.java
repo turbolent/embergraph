@@ -25,15 +25,15 @@ package org.embergraph.btree.proc;
 
 import org.embergraph.service.Split;
 
-/**
- * Combines together boolean values using a logical <code>OR</code>. The {@link #getResult() result}
+/*
+* Combines together boolean values using a logical <code>OR</code>. The {@link #getResult() result}
  * will be <code>true</code> if any of the component results was <code>true</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class BooleanORAggregator implements IResultHandler<Boolean, Boolean> {
 
-  /**
+  /*
    * Note: The public methods are synchronized so that changes to this field state will be visible.
    */
   private boolean flag;

@@ -25,8 +25,8 @@ package org.embergraph.counters.linux;
 
 import junit.framework.TestCase2;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestKernelVersion extends TestCase2 {

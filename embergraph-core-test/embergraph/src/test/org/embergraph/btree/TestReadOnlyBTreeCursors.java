@@ -27,8 +27,8 @@ import java.util.UUID;
 import org.embergraph.btree.AbstractBTreeTupleCursor.ReadOnlyBTreeTupleCursor;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Unit tests for {@link ITupleCursor} for a read-only {@link BTree}.
+/*
+* Unit tests for {@link ITupleCursor} for a read-only {@link BTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -59,7 +59,7 @@ public class TestReadOnlyBTreeCursors extends AbstractBTreeCursorTestCase {
         (BTree) btree, new Tuple<String>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
   }
 
-  /**
+  /*
    * Verify that {@link ITupleCursor#remove()} will thrown an exception if the source {@link BTree}
    * does not allow writes.
    */

@@ -29,8 +29,8 @@ import junit.framework.TestCase2;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 
-/**
- * Unit tests of the setReleaseTime, snapshot and restart aspects of the {@link
+/*
+* Unit tests of the setReleaseTime, snapshot and restart aspects of the {@link
  * DistributedTransactionService} (all having to do with the maintenance of the commit time index,
  * including across restart).
  *
@@ -75,7 +75,7 @@ public class TestDistributedTransactionServiceRestart extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * Note: The scheduled tasks are disabled for the unit test since we do not have a federation
      * for this test.
      */
@@ -94,7 +94,7 @@ public class TestDistributedTransactionServiceRestart extends TestCase2 {
       return this;
     }
 
-    /**
+    /*
      * This is overridden to be a NOP for this test suite. The unit tests in this suite depend on
      * the ability to inject specific commit times into the transaction service without having them
      * "release" based on the actual system clock.
@@ -112,7 +112,7 @@ public class TestDistributedTransactionServiceRestart extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Return an array containing the ordered keys in the {@link CommitTimeIndex}.
    *
    * @param ndx
@@ -144,7 +144,7 @@ public class TestDistributedTransactionServiceRestart extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit tests verifies that the head of the commit time index is truncated when the release time
    * is advanced and that it is still possible to obtain a read-only tx as of the timestamp
    * immediately after the current release time.
@@ -221,7 +221,7 @@ public class TestDistributedTransactionServiceRestart extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test of the ability to snapshot the commit index. The test setups up the expected state of
    * the commit index, verifies that state, shuts down the service, and verifies that a snapshot was
    * written during shutdown. The test then restarts the service, and verifies that the commit index

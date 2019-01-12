@@ -11,8 +11,8 @@ package cern.jet.random;
 import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 import cern.jet.random.engine.RandomEngine;
-/**
- * Benchmarks random number generation from various distributions as well as PDF and CDF lookups.
+/*
+* Benchmarks random number generation from various distributions as well as PDF and CDF lookups.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
@@ -50,21 +50,21 @@ public class Benchmark extends cern.colt.PersistentObject {
     // bin.addAllOf(numbers);
     // System.out.println(bin);
   }
-  /**
+  /*
    * Benchmarks all subclasses
    *
    * @param args[0] the number of random numbers to be generated per subclass.
    * @param args[1] <tt>true</tt> prints each generated number, <tt>false</tt> does not print
    *     generated numbers (use this setting for benchmarking).
    */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     int size = Integer.parseInt(args[0]);
     boolean print = new Boolean(args[1]).booleanValue();
     double mean = new Double(args[2]).doubleValue();
     String generatorName = args[3];
     random(size, print, mean, generatorName);
   }
-  /**
+  /*
    * Benchmarks all subclasses
    *
    * @param size the number of random numbers to be generated per subclass.

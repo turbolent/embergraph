@@ -46,8 +46,8 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
-/**
- * Test suite for <a href="https://sourceforge.net/apps/trac/bigdata/ticket/473">
+/*
+* Test suite for <a href="https://sourceforge.net/apps/trac/bigdata/ticket/473">
  * PhysicalAddressResolutionException after reopen using RWStore and recycler</a>. The root cause
  * for this exception was traced to recycling the root not when it was not direct in the BTree
  * writeCheckpoint() code. The BTree was dirty because {@link Id2TermWriteProc} was having a
@@ -100,7 +100,7 @@ public class TestTicket473 extends TestCase {
     return new EmbergraphSail(properties);
   }
 
-  /**
+  /*
    * This seems to hinge on simple updates, commits and re-opens.
    *
    * <p>This test does not require reading current state.
@@ -128,10 +128,9 @@ public class TestTicket473 extends TestCase {
 
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection conn =
-        (EmbergraphSailRepositoryConnection)
-            repo
-                //                .getReadWriteConnection();
-                .getUnisolatedConnection();
+        repo
+            //                .getReadWriteConnection();
+            .getUnisolatedConnection();
     conn.setAutoCommit(false);
 
     try {

@@ -32,8 +32,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * This test case covers 2 ArrayIndexOutOfBoundsException occurrences: 1. Overflow of values array
+/*
+* This test case covers 2 ArrayIndexOutOfBoundsException occurrences: 1. Overflow of values array
  * in StatementBuffer due to blank nodes are not cleared on flush; 2. Overflow of values array in
  * MergeUtility due to its capacity computed without reference to blank nodes.
  *
@@ -81,7 +81,7 @@ public class TestTicket1889 extends QuadsTestCase {
     }
   }
 
-  /**
+  /*
    * Prepares data containing blank nodes, loads it into triplestore, then run an update, which
    * creates additional statements with blank nodes resulting number of statements loaded should be
    * 2*n. Total number of blank nodes will be n+k.

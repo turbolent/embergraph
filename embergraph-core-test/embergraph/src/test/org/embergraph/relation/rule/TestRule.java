@@ -36,8 +36,8 @@ import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.test.MockTermIdFactory;
 
-/**
- * Test suite for basic {@link Rule} mechanisms.
+/*
+* Test suite for basic {@link Rule} mechanisms.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -156,7 +156,7 @@ public class TestRule extends AbstractRuleTestCase {
     assertTrue(actual.contains(Var.var("u")));
   }
 
-  /**
+  /*
    * Test the ability to compute the variables shared between two {@link Pred}s in a {@link Rule}.
    */
   public void test_getSharedVarsInTail() {
@@ -200,7 +200,7 @@ public class TestRule extends AbstractRuleTestCase {
     assertFalse(r.isFullyBound(0, bindingSet)); // no longer fully bound.
   }
 
-  /**
+  /*
    * Verify that constraint violations are being tested (specific {@link IConstraint}s are tested
    * elsewhere).
    */
@@ -296,7 +296,7 @@ public class TestRule extends AbstractRuleTestCase {
     assertTrue(r.isConsistent(bindingSet));
   }
 
-  /**
+  /*
    * Test case for specializing a rule by binding some of its variables.
    *
    * @todo test adding constraints.

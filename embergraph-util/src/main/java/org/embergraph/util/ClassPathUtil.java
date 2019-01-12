@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
-/**
- * Utility class for returning an instance of an interface.
+/*
+* Utility class for returning an instance of an interface.
  *
  * @author bryan
  */
@@ -34,7 +34,7 @@ public class ClassPathUtil {
   /** True iff the {@link #log} level is DEBUG or less. */
   private static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * BLZG-1703: we cash resolved classes in a map. We use a synchronized map rather than a
    * ConcurrentHashMap since the latter does not support null values (which we use to indicate that
    * resolving failed, e.g. for the optional GPU add-on optimizers).
@@ -51,7 +51,7 @@ public class ClassPathUtil {
         preferredClassName, defaultClass, sharedInterface, ClassPathUtil.class.getClassLoader());
   }
 
-  /**
+  /*
    * Return an instance of the shared interface. If possible, an instance of the preferred class
    * will be used. If that class is not found or is does not extend the specified interface, then an
    * instance of the default class will be used.
@@ -162,7 +162,7 @@ public class ClassPathUtil {
       cache.put(requestConfig, defaultClass);
 
       // Return an instance of the default class.
-      return (T) defaultClass.newInstance();
+      return defaultClass.newInstance();
 
     } catch (InstantiationException | IllegalAccessException e) {
 
@@ -170,7 +170,7 @@ public class ClassPathUtil {
     }
   }
 
-  /**
+  /*
    * Configuration representing a request for a given class based on preferred name, default class,
    * shared class or instance, and the class loader to be used.
    *
@@ -183,7 +183,7 @@ public class ClassPathUtil {
     protected final Class<?> sharedClassOrInterface;
     protected final ClassLoader classLoader;
 
-    /**
+    /*
      * Initialize the config. preferredClassName, sharedClassOrInterface, and the classLoader must
      * be non null, otherwise and {@link IllegalArgumentException} is thrown.
      *

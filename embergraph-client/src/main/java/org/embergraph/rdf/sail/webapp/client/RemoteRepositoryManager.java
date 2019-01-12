@@ -71,8 +71,8 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 
-/**
- * A manager for connections to one or more REST API / SPARQL end points for the same embergraph
+/*
+* A manager for connections to one or more REST API / SPARQL end points for the same embergraph
  * service.
  *
  * @author bryan
@@ -85,7 +85,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
       "Class not found for service provider hook. "
           + "Embergraph specific parser extensions will not be available.";
 
-  /**
+  /*
    * The path to the root of the web application (without the trailing "/").
    *
    * <p>Note: This SHOULD NOT be the SPARQL end point URL. The NanoSparqlServer has a wider
@@ -94,7 +94,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
    */
   private final String baseServiceURL;
 
-  /**
+  /*
    * When <code>true</code>, the REST API methods will use the load balancer aware requestURLs. The
    * load balancer has essentially zero cost when not using HA, so it is recommended to always
    * specify <code>true</code>. When <code>false</code>, the REST API methods will NOT use the load
@@ -107,7 +107,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
   /** The client used for http connections. */
   protected final HttpClient httpClient;
 
-  /**
+  /*
    * IFF an {@link HttpClient} was allocated by the constructor, then this is that reference. When
    * non-<code>null</code> this is always the same reference as {@link #httpClient}.
    */
@@ -116,19 +116,19 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
   /** Thread pool for processing HTTP responses in background. */
   protected final Executor executor;
 
-  /**
+  /*
    * IFF an {@link Executor} was allocated by the constructor, then this is that reference. When
    * non-<code>null</code> this is always the same reference as {@link #executor}.
    */
   private final ExecutorService our_executor;
 
-  /**
+  /*
    * The maximum requestURL length before the request is converted into a POST using a <code>
    * application/x-www-form-urlencoded</code> request entity.
    */
   private volatile int maxRequestURLLength;
 
-  /**
+  /*
    * The HTTP verb that will be used for a QUERY (versus a UPDATE or other mutation operation).
    *
    * @see #QUERY_METHOD
@@ -144,7 +144,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
   /** Show Queries Query Parameter */
   private static String SHOW_QUERIES = "showQueries";
 
-  /**
+  /*
    * Return the remote client for the transaction manager API.
    *
    * @since 1.5.2
@@ -162,7 +162,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return executor;
   }
 
-  /**
+  /*
    * The path to the root of the web application (without the trailing "/").
    *
    * <p>Note: This SHOULD NOT be the SPARQL end point URL. The NanoSparqlServer has a wider
@@ -174,7 +174,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return baseServiceURL;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the REST API methods will use the load balancer aware requestURLs.
    * The load balancer has essentially zero cost when not using HA, so it is recommended to always
    * specify <code>true</code>. When <code>false</code>, the REST API methods will NOT use the load
@@ -185,7 +185,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return useLBS;
   }
 
-  /**
+  /*
    * Return the maximum requestURL length before the request is converted into a POST using a <code>
    * application/x-www-form-urlencoded</code> request entity.
    *
@@ -204,7 +204,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     this.maxRequestURLLength = newVal;
   }
 
-  /**
+  /*
    * Return the HTTP verb that will be used for a QUERY (versus an UPDATE or other mutation
    * operations) (default {@value #DEFAULT_QUERY_METHOD}). POST can often handle larger queries than
    * GET due to limits at the HTTP client layer and will defeat http caching and thus provide a
@@ -219,7 +219,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return queryMethod;
   }
 
-  /**
+  /*
    * Set the default HTTP verb for QUERY and other idempotant operations.
    *
    * @param method The method which may be "POST" or "GET".
@@ -237,7 +237,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Create a manager that is not aware of a specific embergraph backend. This constructor is
    * intended for patterns where a sparql end point is available but the top-level serviceURL for
    * embergraph is either not visible or not known:
@@ -254,7 +254,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     this("http://localhost/no-service-URL");
   }
 
-  /**
+  /*
    * Create a manager client for the specified serviceURL. The serviceURL has the typical form
    *
    * <pre>
@@ -288,7 +288,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     this(serviceURL, false /* useLBS */);
   }
 
-  /**
+  /*
    * Create a remote client for the specified serviceURL that optionally use the load balanced URLs.
    *
    * @param serviceURL The path to the root of the web application (without the trailing "/").
@@ -304,7 +304,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     this(serviceURL, useLBS, null /* httpClient */, null /* executor */);
   }
 
-  /**
+  /*
    * Create a remote client for the specified serviceURL.
    *
    * @param serviceURL The path to the root of the web application (without the trailing "/").
@@ -331,7 +331,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     this(serviceURL, false /* useLBS */, httpClient, executor);
   }
 
-  /**
+  /*
    * Create a remote client for the specified serviceURL (core impl).
    *
    * @param serviceURL The path to the root of the web application (without the trailing "/").
@@ -423,7 +423,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Ensure resource is closed.
@@ -492,7 +492,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return super.toString() + "{baseServiceURL=" + baseServiceURL + ", useLBS=" + useLBS + "}";
   }
 
-  /**
+  /*
    * Return the base URL for a remote repository (less the /sparql path component).
    *
    * @param namespace The namespace.
@@ -505,7 +505,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return baseServiceURL + "/namespace/" + ConnectOptions.urlEncode(namespace);
   }
 
-  /**
+  /*
    * Returns the SPARQL endpoint URL for the given namespace or the default SPARQL endpoint in case
    * namespace is null.
    *
@@ -518,7 +518,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
         ? baseServiceURL + "/sparql"
         : getRepositoryBaseURLForNamespace(namespace) + "/sparql";
   }
-  /**
+  /*
    * Obtain a flyweight {@link RemoteRepository} for the default namespace associated with the
    * remote service.
    */
@@ -527,7 +527,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return getRepositoryForURL(baseServiceURL + "/sparql");
   }
 
-  /**
+  /*
    * Obtain a flyweight {@link RemoteRepository} for a data set managed by the remote service.
    *
    * @param namespace The name of the data set (its embergraph namespace).
@@ -538,8 +538,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return getRepositoryForURL(getRepositoryBaseURLForNamespace(namespace) + "/sparql");
   }
 
-  // /**
-  // * Obtain a flyweight {@link RemoteRepository} for the data set having the
+  // /*
+// * Obtain a flyweight {@link RemoteRepository} for the data set having the
   // specified
   // * SPARQL end point.
   // *
@@ -564,7 +564,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
   // }
 
-  /**
+  /*
    * Obtain a flyweight {@link RemoteRepository} for the data set having the specified SPARQL end
    * point. The load balancer will be used or not as per the parameters to the {@link
    * RemoteRepositoryManager} constructor.
@@ -577,7 +577,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return getRepositoryForURL(sparqlEndpointURL, null /* timestamp */);
   }
 
-  /**
+  /*
    * Obtain a flyweight {@link RemoteRepository} for the data set having the specified SPARQL end
    * point. The load balancer will be used or not as per the parameters to the {@link
    * RemoteRepositoryManager} constructor.
@@ -592,7 +592,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return new RemoteRepository(this, sparqlEndpointURL, tx);
   }
 
-  /**
+  /*
    * Obtain a <a href="http://vocab.deri.ie/void/">VoID </a> description of the configured KBs. Each
    * KB has its own namespace and corresponds to a VoID "data set".
    *
@@ -606,7 +606,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return getRepositoryDescriptions(UUID.randomUUID());
   }
 
-  /**
+  /*
    * Obtain a <a href="http://vocab.deri.ie/void/">VoID </a> description of the configured KBs. Each
    * KB has its own namespace and corresponds to a VoID "data set".
    *
@@ -629,7 +629,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return graphResults(opts, uuid, null /* listener */);
   }
 
-  /**
+  /*
    * Create a new KB instance.
    *
    * @param namespace The namespace of the KB instance.
@@ -644,7 +644,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     createRepository(namespace, properties, UUID.randomUUID());
   }
 
-  /**
+  /*
    * Create a new KB instance.
    *
    * @param namespace The namespace of the KB instance.
@@ -705,7 +705,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Prepare configuration properties for a new KB instance.
    *
    * @param namespace The namespace of the KB instance.
@@ -805,7 +805,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * @param
    * @param
    * @return
@@ -855,7 +855,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Destroy a KB instance.
    *
    * @param namespace The namespace of the KB instance.
@@ -866,7 +866,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     deleteRepository(namespace, UUID.randomUUID());
   }
 
-  /**
+  /*
    * Destroy a KB instance.
    *
    * @param namespace The namespace of the KB instance.
@@ -892,7 +892,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * ******************************************************************** *************************
    * Mapgraph Servlet **************************
    * ********************************************************************
@@ -908,10 +908,10 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
   public enum ComputeMode {
     CPU,
-    GPU;
+    GPU
   }
 
-  /**
+  /*
    * Publishes the given namespace to the mapgraph runtime. If the namespace if already published,
    * no action is performed. The return value is false in the latter case, true otherwise. If the
    * namespace that is passed in is null, the default namespace will be used.
@@ -950,7 +950,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return true;
   }
 
-  /**
+  /*
    * Drops the given namespace from the mapgraph runtime. If the namespace was not registered in the
    * runtime, no action is performed. The return value is false in the latter case, true otherwise.
    * If the namespace that is passed in is null, the default namespace will be used.
@@ -989,7 +989,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return true;
   }
 
-  /**
+  /*
    * Checks whether the given namespace has been published. If null is passed in, the method
    * performs a check for the default namespace.
    *
@@ -1027,7 +1027,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Resets the mapgraph runtime for the compute mode.
    *
    * @param computeMode the desired compute mode
@@ -1064,7 +1064,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Returns the current status report for mapgraph.
    *
    * @return the status report as human-readable string
@@ -1096,7 +1096,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Checks whether the mapgraph runtime is available.
    *
    * @return
@@ -1133,7 +1133,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     if (!mapgraphRuntimeAvailable()) throw new NoGPUAccelerationAvailable();
   }
 
-  /**
+  /*
    * Return the effective configuration properties for the named data set.
    *
    * <p>Note: While it is possible to change some configuration options are a data set has been
@@ -1207,7 +1207,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Initiate an online backup using the {@link org.embergraph.rdf.sail.webapp.BackupServlet}.
    *
    * @param file -- The name of the file for the backup. (default = "backup.jnl")
@@ -1218,7 +1218,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
   public void onlineBackup(final String file, final boolean compress, final boolean block)
       throws Exception {
 
-    /**
+    /*
      * Use copies of these from {@link org.embergraph.rdf.sail.webapp.BackupServlet} to avoid
      * introducing cyclical dependency with embergraph-core.
      */
@@ -1250,7 +1250,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Initiate the data loader for a namespace within the a NSS
    *
    * @param properties The properties for the DataLoader Servlet
@@ -1302,7 +1302,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Connect to a SPARQL end point (GET or POST query only).
    *
    * @param opts The connection options.
@@ -1375,7 +1375,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     Request request = null;
     try {
 
-      request = (HttpRequest) newRequest(urlString.toString(), opts.method);
+      request = newRequest(urlString.toString(), opts.method);
 
       if (opts.requestHeaders != null) {
 
@@ -1453,7 +1453,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Return the {@link ConnectOptions} which will be used by default for the SPARQL end point for a
    * QUERY or other idempotent operation.
    *
@@ -1473,7 +1473,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return opts;
   }
 
-  /**
+  /*
    * Return the {@link ConnectOptions} which will be used by default for the SPARQL end point for an
    * UPDATE or other non-idempotant operation.
    *
@@ -1493,8 +1493,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return opts;
   }
 
-  // /**
-  // * Return the {@link ConnectOptions} which will be used by default for the
+  // /*
+// * Return the {@link ConnectOptions} which will be used by default for the
   // * SPARQL end point.
   // */
   // final protected ConnectOptions newConnectOptions() {
@@ -1503,7 +1503,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
   // }
 
-  /**
+  /*
    * Return the {@link ConnectOptions} which will be used by default for the specified service URL.
    *
    * <p>There are three cases:
@@ -1544,8 +1544,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
       if (tx.isReadOnly()) {
 
-        /*
-         * A read-only transaction.
+      /*
+       * A read-only transaction.
          *
          * FIXME This will not work for scale-out. We need to specify
          * the txId itself.
@@ -1554,8 +1554,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
       } else {
 
-        /*
-         * A read/write transaction. We must use the txId to have the
+      /*
+       * A read/write transaction. We must use the txId to have the
          * correct isolation.
          */
 
@@ -1564,7 +1564,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
 
     if (uuid != null) {
-      /**
+      /*
        * Associate requests with a UUID so they may be cancelled.
        *
        * @see #1254 (All REST API operations should be cancelable from both REST API and workbench.)
@@ -1575,7 +1575,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     return opts;
   }
 
-  /**
+  /*
    * Builds a graph from an RDF result set (statements, not binding sets).
    *
    * @param response The connection from which to read the results.
@@ -1631,7 +1631,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
       parser.setStopAtFirstError(true);
 
       parser.setDatatypeHandling(RDFParser.DatatypeHandling.IGNORE);
-      /**
+      /*
        * Note: The default charset depends on the MIME Type. The [charset] MUST be [null] if the
        * MIME Type is binary since this effects whether a Reader or InputStream will be used to
        * construct and apply the RDF parser.
@@ -1690,7 +1690,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
                   listener.closed(queryId);
                 }
               }
-            };
+            }
           };
 
       /*
@@ -1714,16 +1714,16 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     } finally {
 
       if (response != null && result == null) {
-        /*
-         * This code path only handles errors. We have a response, but
+      /*
+       * This code path only handles errors. We have a response, but
          * we were not able to generate the asynchronous [result]
          * object.
          */
         response.abort();
 
         try {
-          /*
-           * POST back to the server in an attempt to cancel the
+        /*
+       * POST back to the server in an attempt to cancel the
            * request if already executing on the server.
            */
           cancel(queryId);
@@ -1738,7 +1738,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Processing the response for a SPARQL UPDATE request.
    *
    * <p>Note: This is not compatible with the MONITOR option. That option requires the client to
@@ -1766,8 +1766,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
 
       if (response == null) {
         try {
-          /*
-           * Some error prevented our obtaining a response.
+        /*
+       * Some error prevented our obtaining a response.
            *
            * POST back to the server in an attempt to cancel the
            * request if already executing on the server.
@@ -1777,8 +1777,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
           log.warn(ex);
         }
       } else {
-        /*
-         * Note: We are not reading anything from the response so I
+      /*
+       * Note: We are not reading anything from the response so I
          * THINK that we do not need to call listener.abort(). If we do
          * need to call this, then we might need to distinguish between
          * a normal response and when we read the response entity.
@@ -1792,7 +1792,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Cancel a query running remotely on the server.
    *
    * @param queryID the UUID of the query to cancel
@@ -1868,7 +1868,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Extracts the solutions from a SPARQL query.
    *
    * @param response The connection from which to read the results.
@@ -1992,14 +1992,14 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
                   }
                 }
 
-                /*
-                 * Notify the listener.
+              /*
+       * Notify the listener.
                  */
                 if (listener != null) {
                   listener.closed(queryId);
                 }
               }
-            };
+            }
           };
 
       /*
@@ -2013,14 +2013,14 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     } finally {
 
       if (response != null && tqrImpl == null) {
-        /*
-         * Error handling code path. We have an http response listener
+      /*
+       * Error handling code path. We have an http response listener
          * but we were not able to setup the tuple query result
          * listener.
          */
         if (ft != null) {
-          /*
-           * We submitted the task to parse the response. Since the
+        /*
+       * We submitted the task to parse the response. Since the
            * code is not returning normally (tqrImpl:=null) we cancel
            * the FutureTask for the background parse of that response.
            */
@@ -2029,8 +2029,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
         // Abort the http response handling.
         response.abort();
         try {
-          /*
-           * POST back to the server to cancel the request in case it
+        /*
+       * POST back to the server to cancel the request in case it
            * is still running on the server.
            */
           cancel(queryId);
@@ -2044,7 +2044,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  /**
+  /*
    * Parse a SPARQL result set for an ASK query.
    *
    * @param response The connection from which to read the results.
@@ -2100,8 +2100,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     } finally {
 
       if (result == null) {
-        /*
-         * Error handling path. We issued the request, but were not able
+      /*
+       * Error handling path. We issued the request, but were not able
          * to parse out the response.
          */
         if (response != null) {
@@ -2109,8 +2109,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
           response.abort();
         }
         try {
-          /*
-           * POST request to server to cancel query in case it is
+        /*
+       * POST request to server to cancel query in case it is
            * still running.
            */
           cancel(queryId);
@@ -2125,8 +2125,8 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     }
   }
 
-  // /**
-  // * Counts the #of results in a SPARQL result set.
+  // /*
+// * Counts the #of results in a SPARQL result set.
   // *
   // * @param response
   // * The connection from which to read the results.

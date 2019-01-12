@@ -75,8 +75,8 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.NV;
 import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 
-/**
- * Test suite for concurrent operations on a {@link DataService}. A federation consisting of a
+/*
+* Test suite for concurrent operations on a {@link DataService}. A federation consisting of a
  * {@link MetadataService} and a single {@link DataService} is started. A client is created,
  * connects to the federation, and registers an index the federation. A pool of threads is created
  * for that client and populated with a number of operations. The threads then write and read
@@ -191,7 +191,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
     super.tearDown();
   }
 
-  /**
+  /*
    * Test of N concurrent operations.
    *
    * @todo run a performance analysis generating a graph of response time by queue length. the queue
@@ -220,7 +220,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
         client, nclients, timeout, ntrials, keyLen, nops, insertRate, nindices, testCorrectness);
   }
 
-  /**
+  /*
    * A stress test with a pool of concurrent clients.
    *
    * @param client The client.
@@ -328,8 +328,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
           if (testCorrectness) {
 
-            /*
-             * Setup a distinct backing store for the ground truth
+          /*
+       * Setup a distinct backing store for the ground truth
              * for each index and a lock to serialize access to that
              * index. This allows concurrency if you start with more
              * than one index or after an index has been split.
@@ -534,8 +534,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
       if (testCorrectness) {
 
-        /*
-         * @todo config parameter.
+      /*
+       * @todo config parameter.
          *
          * Note: there may be differences when we have forced overflow
          * and when we have not since forcing overflow will trigger
@@ -553,8 +553,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
           log.warn("Forced  overflow: " + new Date());
         }
 
-        /*
-         * For each index, verify its state against the corresponding
+      /*
+       * For each index, verify its state against the corresponding
          * ground truth index.
          */
 
@@ -573,8 +573,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
                     + ", #partitions="
                     + federation.getMetadataIndex(name, ITx.READ_COMMITTED).rangeCount());
 
-          /*
-           * Note: This uses an iterator based comparison so that we
+        /*
+       * Note: This uses an iterator based comparison so that we
            * can compare a local index without delete markers and a
            * key-range partitioned index with delete markers.
            *
@@ -624,8 +624,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
             federation.getTransactionService().abort(tx);
           }
 
-          /*
-           * Verify against the unisolated views (this might be Ok if
+        /*
+       * Verify against the unisolated views (this might be Ok if
            * all tasks ran to completion, but if there is ongoing
            * asynchronous overflow activity then that could mess this
            * up since the UNISOLATED index views do not have
@@ -633,8 +633,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
            */
           assertSameEntryIterator(expected, federation.getIndex(name, ITx.UNISOLATED));
 
-          /*
-           * Release the ground truth index and the backing store.
+        /*
+       * Release the ground truth index and the backing store.
            */
 
           groundTruth[i].close();
@@ -670,7 +670,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
     }
   }
 
-  /**
+  /*
    * Fake out the load balancer so that it will report the one data service is "highly utilized"
    * while the other data service is "under utilized".
    *
@@ -685,7 +685,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
     final AbstractEmbeddedLoadBalancerService lbs =
         ((AbstractEmbeddedLoadBalancerService)
-            ((EmbeddedFederation<?>) fed).getLoadBalancerService());
+            fed.getLoadBalancerService());
 
     final ServiceScore[] fakeServiceScores = new ServiceScore[2];
 
@@ -794,7 +794,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
       return data;
     }
 
-    /**
+    /*
      * @param ndx The index under test.
      * @param groundTruth Used for performing ground truth correctness tests when running against
      *     one or more data services with index partition split, move, and join enabled (optional).
@@ -836,7 +836,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
       }
     }
 
-    /**
+    /*
      * Executes a random batch operation with keys presented in sorted order.
      *
      * <p>Note: Batch operations with sorted keys have twice the performance of the corresponding
@@ -851,8 +851,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
       if (r.nextDouble() <= insertRate) {
 
-        /*
-         * Insert
+      /*
+       * Insert
          */
 
         //                log.info("insert: nops=" + nops);
@@ -866,8 +866,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
           r.nextBytes(vals[i]);
         }
 
-        /*
-         * Note: Lock is forcing the same serialization order on the
+      /*
+       * Note: Lock is forcing the same serialization order on the
          * test and ground truth index writes.
          */
         lock.lock();
@@ -885,8 +885,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
           if (groundTruth != null) {
 
-            /*
-             * Note: Even though we write on the groundTruth after
+          /*
+       * Note: Even though we write on the groundTruth after
              * the scale-out index, it is possible that the mutation
              * on the ground truth will be interrupted if the task
              * is cancelled such that the groundTruth and the
@@ -910,8 +910,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
       } else {
 
-        /*
-         * Remove.
+      /*
+       * Remove.
          */
 
         //                log.info("remove: nops=" + nops);
@@ -921,8 +921,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
           keys[i] = nextKey();
         }
 
-        /*
-         * Note: Lock is forcing the same serialization order on the
+      /*
+       * Note: Lock is forcing the same serialization order on the
          * test and ground truth index writes.
          */
         lock.lock();
@@ -940,8 +940,8 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
 
           if (groundTruth != null) {
 
-            /*
-             * Note: Even though we write on the groundTruth after
+          /*
+       * Note: Even though we write on the groundTruth after
              * the scale-out index, it is possible that the mutation
              * on the ground truth will be interrupted if the task
              * is cancelled such that the groundTruth and the
@@ -968,7 +968,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
     }
   }
 
-  /**
+  /*
    * Runs a single instance of the test as configured in the code.
    *
    * @todo try running the test out more than 30 seconds. Note that a larger journal maximum extent
@@ -1038,40 +1038,40 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
   }
 
   /** Additional properties understood by this test. */
-  public static interface TestOptions extends Options {
+  public interface TestOptions extends Options {
 
     /** The timeout for the test. */
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
     /** The #of concurrent clients to run. */
-    public static final String NCLIENTS = "nclients";
+    String NCLIENTS = "nclients";
 
     /** The #of trials (aka transactions) to run. */
-    public static final String NTRIALS = "ntrials";
+    String NTRIALS = "ntrials";
 
-    /**
+    /*
      * The length of the keys used in the test. This directly impacts the likelyhood of a
      * write-write conflict. Shorter keys mean more conflicts. However, note that conflicts are only
      * possible when there are at least two concurrent clients running.
      */
-    public static final String KEYLEN = "keyLen";
+    String KEYLEN = "keyLen";
 
     /** The #of operations in each trial. */
-    public static final String NOPS = "nops";
+    String NOPS = "nops";
 
-    /**
+    /*
      * The rate of insert operations (inserting <i>nops</i> tuples) in [0.0:1.0]. The balance of the
      * operations will remove <i>nops</i> tuples.
      */
     String INSERT_RATE = "insertRate";
 
-    /**
+    /*
      * The #of distinct scale-out indices that will be used during the run. Each index may be split
      * over time as the run progresses, eventually yielding multiple index partitions.
      */
-    public static final String NINDICES = "nindices";
+    String NINDICES = "nindices";
 
-    /**
+    /*
      * When <code>true</code>, ground truth will be maintained and verified against the
      * post-condition of the index(s) under test.
      *
@@ -1081,10 +1081,10 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
      * <p>Note: All operations on a ground truth index are serialized so this option can not be used
      * when you are doing performance testing.
      */
-    final String TEST_CORRECTNESS = "testCorrectness";
+    String TEST_CORRECTNESS = "testCorrectness";
   }
 
-  /**
+  /*
    * Setup and run a test.
    *
    * @param properties There are no "optional" properties - you must make sure that each property
@@ -1124,7 +1124,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
     return result;
   }
 
-  /**
+  /*
    * Experiment generation utility class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1132,7 +1132,7 @@ public class StressTestConcurrent extends AbstractEmbeddedFederationTestCase
    */
   public static class GenerateExperiment extends ExperimentDriver {
 
-    /**
+    /*
      * Generates an XML file that can be run by {@link ExperimentDriver}.
      *
      * @param args

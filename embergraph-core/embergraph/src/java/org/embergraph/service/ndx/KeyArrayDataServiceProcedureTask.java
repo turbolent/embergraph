@@ -7,8 +7,8 @@ import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.service.Split;
 
-/**
- * Handles stale locators for {@link IKeyArrayIndexProcedure}s. When necessary the procedure will be
+/*
+* Handles stale locators for {@link IKeyArrayIndexProcedure}s. When necessary the procedure will be
  * re-split.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -16,7 +16,7 @@ import org.embergraph.service.Split;
  */
 class KeyArrayDataServiceProcedureTask extends AbstractDataServiceProcedureTask {
 
-  /**
+  /*
    * The keys. Only the elements in this array indexed by {@link
    * AbstractDataServiceProcedureTask#split} will be operated on by this instance of the procedure.
    *
@@ -26,7 +26,7 @@ class KeyArrayDataServiceProcedureTask extends AbstractDataServiceProcedureTask 
    */
   protected final byte[][] keys;
 
-  /**
+  /*
    * The values and <code>null</code> if the operation does not take values as an input. Only the
    * elements in this array indexed by {@link AbstractDataServiceProcedureTask#split} will be
    * operated on by this instance of the procedure.
@@ -37,13 +37,13 @@ class KeyArrayDataServiceProcedureTask extends AbstractDataServiceProcedureTask 
    */
   protected final byte[][] vals;
 
-  /**
+  /*
    * The object that knows how to create an instance of the procedure to be applied to the keys and
    * values when they are de-serialized on the server.
    */
   protected final AbstractKeyArrayIndexProcedureConstructor ctor;
 
-  /**
+  /*
    * Reports the #of keys that are used by the {@link Split} tasked to this instance of the
    * procedure to be executed.
    */
@@ -54,7 +54,7 @@ class KeyArrayDataServiceProcedureTask extends AbstractDataServiceProcedureTask 
 
   }
 
-  /**
+  /*
    * Variant used for {@link IKeyArrayIndexProcedure}s.
    *
    * @param keys The original keys[][].
@@ -91,7 +91,7 @@ class KeyArrayDataServiceProcedureTask extends AbstractDataServiceProcedureTask 
     }
   }
 
-  /**
+  /*
    * Submit using {@link ClientIndexView#submit(int, int, byte[][], byte[][],
    * AbstractKeyArrayIndexProcedureConstructor, IResultHandler)}. This will recompute the split
    * points and re-map the procedure across the newly determined split points.

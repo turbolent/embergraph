@@ -22,8 +22,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.rdf.graph.util.IGraphFixture;
 import org.embergraph.rdf.graph.util.IGraphFixtureFactory;
 
-/**
- * Abstract base class for graph mining tests.
+/*
+* Abstract base class for graph mining tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -37,7 +37,7 @@ public abstract class AbstractGraphTestCase extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * The fixture for the test.
    *
    * @see #newGraphFixture()
@@ -81,7 +81,7 @@ public abstract class AbstractGraphTestCase extends TestCase {
     super.tearDown();
   }
 
-  /**
+  /*
    * Make a set
    *
    * @param a The objects for the set.

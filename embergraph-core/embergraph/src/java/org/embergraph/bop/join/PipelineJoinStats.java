@@ -31,7 +31,7 @@ public class PipelineJoinStats extends BaseJoinStats {
 
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * The #of input solutions consumed (not just accepted).
    *
    * <p>Note: This counter is highly correlated with {@link BOpStats#unitsIn} but is incremented
@@ -44,7 +44,7 @@ public class PipelineJoinStats extends BaseJoinStats {
    */
   public final CAT inputSolutions = new CAT();
 
-  /**
+  /*
    * The #of output solutions generated. This is incremented as soon as the solution is produced and
    * is used by {@link #getJoinHitRatio()}. Of necessity, updates to {@link #inputSolutions}
    * slightly lead updates to {@link #inputSolutions}.
@@ -53,7 +53,7 @@ public class PipelineJoinStats extends BaseJoinStats {
    */
   public final CAT outputSolutions = new CAT();
 
-  /**
+  /*
    * The estimated join hit ratio. This is computed as
    *
    * <pre>

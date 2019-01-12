@@ -36,8 +36,8 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.KV;
 import org.embergraph.util.InnerCause;
 
-/**
- * Test suite for {@link Journal#snapshot(org.embergraph.journal.Journal.ISnapshotFactory)}.
+/*
+* Test suite for {@link Journal#snapshot(org.embergraph.journal.Journal.ISnapshotFactory)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="http://trac.bigdata.com/ticket/1172">Online backup for Journal </a>
@@ -72,9 +72,9 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
     public boolean getCompress() {
       return compressed;
     }
-  };
+  }
 
-  /**
+  /*
    * Open a journal snapshot.
    *
    * <p>Note: If the snapshot was compressed, then it was decompressed in order to open it. In this
@@ -130,7 +130,7 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
     return tmp;
   }
 
-  /**
+  /*
    * Verifies exception if there are no commits on the journal (the lastCommitTime will be zero
    * which does not identify a valid commit point).
    *
@@ -185,7 +185,7 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Verifies exception if there are no commits on the journal (the lastCommitTime will be zero
    * which does not identify a valid commit point).
    *
@@ -244,7 +244,7 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test of a journal on which a single index has been register (and the journal committed) but no
    * data was written onto the index.
    *
@@ -305,7 +305,7 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which a single index has been registered with random data on the index.
    *
    * @throws IOException
@@ -371,7 +371,7 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which a single index has been registered with random data on the index.
    *
    * @throws IOException
@@ -437,7 +437,7 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which many indices have been registered and populated with random data.
    *
    * @throws IOException
@@ -541,7 +541,7 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which many indices have been registered and populated with random data.
    *
    * @throws IOException
@@ -601,8 +601,8 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
         // commit the journal (!)
         src.commit();
 
-        /*
-         * Submit task for concurrent writes. Note that this task does not
+      /*
+       * Submit task for concurrent writes. Note that this task does not
          * do a commit, but it does write modifications onto the live
          * indices. Those changes should not be visible in the snapshot.
          * Since the task does not do a commit, the snapshot should have

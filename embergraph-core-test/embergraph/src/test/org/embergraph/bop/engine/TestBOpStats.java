@@ -24,8 +24,8 @@ package org.embergraph.bop.engine;
 import junit.framework.TestCase2;
 import org.embergraph.io.SerializerUtil;
 
-/**
- * Test suite for {@link BOpStats}.
+/*
+* Test suite for {@link BOpStats}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

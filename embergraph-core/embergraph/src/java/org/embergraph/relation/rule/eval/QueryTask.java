@@ -14,8 +14,8 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.service.DataService;
 
-/**
- * A task that executes a query operation.
+/*
+* A task that executes a query operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -108,7 +108,7 @@ public class QueryTask extends AbstractStepTask {
     }
   }
 
-  /**
+  /*
    * Run the task(s) and wait for them to complete.
    *
    * @return The {@link RuleStats}
@@ -141,7 +141,7 @@ public class QueryTask extends AbstractStepTask {
     return totals;
   }
 
-  /**
+  /*
    * Builds a set of tasks for the program. Each task is assigned its own {@link
    * UnsynchronizedArrayBuffer}. Each task will flush that {@link UnsynchronizedArrayBuffer} onto
    * the given {@link IBuffer} when it completes.

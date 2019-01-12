@@ -5,8 +5,8 @@ import org.embergraph.relation.locator.ILocatableResource;
 import org.embergraph.sparse.KeyType;
 import org.embergraph.sparse.Schema;
 
-/**
- * A {@link Schema} for metadata about existing relations. Each relation corresponds more or less to
+/*
+* A {@link Schema} for metadata about existing relations. Each relation corresponds more or less to
  * a table in an RDBMS. A relation "exists" when there are indices for its data. An {@link
  * IRelation} is a Class that allows you to read or write on the relation's data. Given the {@link
  * #NAMESPACE} of a relation, the {@link RelationSchema} specifies the {@link #CLASS} that should be
@@ -23,26 +23,26 @@ public class RelationSchema extends Schema {
   /** */
   private static final long serialVersionUID = -558566998386484688L;
 
-  /**
+  /*
    * The name of the property whose value is the namespace of the {@link ILocatableResource} (this
    * is the primary key).
    */
   public static final String NAMESPACE = RelationSchema.class.getPackage().getName() + ".namespace";
 
-  /**
+  /*
    * The name of the property whose value is the name of the {@link Class} used to instantiate the
    * {@link ILocatableResource}.
    */
   public static final String CLASS = RelationSchema.class.getPackage().getName() + ".class";
 
-  /**
+  /*
    * The name of the property whose value is namespace of the container (if any) for this the {@link
    * ILocatableResource} resource having {@link #NAMESPACE} as its resource identifier. When
    * defined, this value MUST be a prefix of the value stored under the {@link #NAMESPACE} property.
    */
   public static final String CONTAINER = RelationSchema.class.getPackage().getName() + ".container";
 
-  /**
+  /*
    * A dynamically injected property which can reveal the commit time from which a locatable
    * resource was materialized.
    *
@@ -58,7 +58,7 @@ public class RelationSchema extends Schema {
   /** A shared instance. */
   public static final transient RelationSchema INSTANCE = new RelationSchema();
 
-  /**
+  /*
    * De-serialization ctor.
    *
    * @see #INSTANCE

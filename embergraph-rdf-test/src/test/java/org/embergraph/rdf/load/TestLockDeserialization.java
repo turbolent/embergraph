@@ -31,8 +31,8 @@ import junit.framework.TestCase2;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.service.ClientService;
 
-/**
- * This is a test suite for the {@link ReentrantLock} deserialization pattern used by the {@link
+/*
+* This is a test suite for the {@link ReentrantLock} deserialization pattern used by the {@link
  * MappedRDFFileLoadTask} when it executes on a remote {@link ClientService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -48,7 +48,7 @@ public class TestLockDeserialization extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * A {@link Serializable} class with a {@link ReentrantLock}, a {@link Condition}s, and a boolean
    * condition variable. Only the boolean condition variable state is actually serialized. The rest
    * of the state of the class is restored when it is deserialized.
@@ -58,7 +58,7 @@ public class TestLockDeserialization extends TestCase2 {
     /** Some mock state. */
     private final int state;
 
-    /**
+    /*
      * The lock protecting the {@link #cond Condition} and the {@link #condVar condition variable}.
      */
     private transient Lock lock;

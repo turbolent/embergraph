@@ -26,8 +26,8 @@ import org.embergraph.ha.msg.IHANotifyReleaseTimeRequest;
 import org.embergraph.ha.msg.IHANotifyReleaseTimeResponse;
 import org.embergraph.journal.ITransactionService;
 
-/**
- * RMI interface for the {@link ITransactionService} for HA.
+/*
+* RMI interface for the {@link ITransactionService} for HA.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a
@@ -38,7 +38,7 @@ import org.embergraph.journal.ITransactionService;
  */
 public interface HATXSGlue extends Remote {
 
-  /**
+  /*
    * Message used to request information about the earliest commit point that is pinned on a
    * follower. This is used by the leader to make a decision about the new release time for the
    * replication cluster.
@@ -66,7 +66,7 @@ public interface HATXSGlue extends Remote {
    */
   void gatherMinimumVisibleCommitTime(IHAGatherReleaseTimeRequest req) throws IOException;
 
-  /**
+  /*
    * Message used by the follower to notify the leader about the new release time that will be
    * visible for new transaction starts. The leader then chooses the mimimum across itself and the
    * followers.

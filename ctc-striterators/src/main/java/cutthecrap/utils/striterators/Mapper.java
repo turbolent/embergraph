@@ -18,8 +18,8 @@ package cutthecrap.utils.striterators;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 
-/**
- * Mapper
+/*
+* Mapper
  *
  * <p>Used with Mapperator by Striterator to map instance methods against member objects.
  */

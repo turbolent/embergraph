@@ -30,8 +30,8 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.impl.literal.XSDDecimalIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * Unit tests for {@link XSDDecimalIV}.
+/*
+* Unit tests for {@link XSDDecimalIV}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public class TestEncodeDecodeXSDDecimalIVs extends AbstractEncodeDecodeKeysTestC
     super(name);
   }
 
-  /**
+  /*
    * Unit test of {@link XSDDecimalIV} with positive and negative {@link BigDecimal}s having varying
    * digits after the decimals.
    */
@@ -70,7 +70,7 @@ public class TestEncodeDecodeXSDDecimalIVs extends AbstractEncodeDecodeKeysTestC
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test of {@link XSDDecimalIV} with trailing zeros. The encoded and decoded values are
    * consistent, but trailing zeros are removed by the {@link XSDDecimalIV} encoding.
    */
@@ -103,7 +103,7 @@ public class TestEncodeDecodeXSDDecimalIVs extends AbstractEncodeDecodeKeysTestC
     doComparatorTest(b);
   }
 
-  /**
+  /*
    * Unit test demonstrates that precision is not preserved by the encoding. Thus, ZEROs are encoded
    * in the same manner regardless of their precision (this is true of other values with trailing
    * zeros after the decimal point as well).
@@ -197,8 +197,8 @@ public class TestEncodeDecodeXSDDecimalIVs extends AbstractEncodeDecodeKeysTestC
     doComparatorTest(e);
   }
 
-  //    /**
-  //     * Unit test for {@link XSDDecimalIV}.
+  //    /*
+//     * Unit test for {@link XSDDecimalIV}.
   //     */
   //    public void test_encodeDecode_XSDDecimal_2() {
   //

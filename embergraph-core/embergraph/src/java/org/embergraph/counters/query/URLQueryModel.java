@@ -56,8 +56,8 @@ import org.embergraph.service.IService;
 import org.embergraph.util.CaseInsensitiveStringComparator;
 import org.embergraph.util.httpd.NanoHTTPD;
 
-/**
- * The model for a URL used to query an {@link ICounterSelector}.
+/*
+* The model for a URL used to query an {@link ICounterSelector}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -75,7 +75,7 @@ public class URLQueryModel {
   /** @see BLZG-1318 */
   public static final String DEFAULT_DEPTH = "0";
 
-  /**
+  /*
    * URL query parameter whose value is the type of report to generate. The default is {@link
    * ReportEnum#hierarchy}.
    *
@@ -83,14 +83,14 @@ public class URLQueryModel {
    */
   public static final String REPORT = "report";
 
-  /**
+  /*
    * The ordered labels to be assigned to the category columns in a {@link ReportEnum#pivot} report.
    * The order of the names in the URL query parameters MUST correspond with the order of the
    * capturing groups in the {@link #REGEX}.
    */
   public static final String CATEGORY = "category";
 
-  /**
+  /*
    * Name of the URL query parameter specifying whether the optional correlated view for counter
    * histories will be displayed.
    *
@@ -98,13 +98,13 @@ public class URLQueryModel {
    */
   public static final String CORRELATED = "correlated";
 
-  /**
+  /*
    * Name of the URL query parameter specifying one or more strings for the filter to be applied to
    * the counter paths.
    */
   public static final String FILTER = "filter";
 
-  /**
+  /*
    * Name of the URL query parameter specifying one or more regular expression for the filter to be
    * applied to the counter paths. Any capturing groups in this regular expression will be used to
    * generate the column title when examining correlated counters in a table view. If there are no
@@ -112,7 +112,7 @@ public class URLQueryModel {
    */
   public static final String REGEX = "regex";
 
-  /**
+  /*
    * Name of the URL query parameter specifying that the format for the first column of the history
    * counter table view. This column is the timestamp associated with the counter but it can be
    * reported in a variety of ways. The possible values for this option are specified by {@link
@@ -124,7 +124,7 @@ public class URLQueryModel {
    */
   public static final String TIMESTAMP_FORMAT = "timestampFormat";
 
-  /**
+  /*
    * The reporting period to be displayed. When not specified, all periods will be reported. The
    * value may be any {@link PeriodEnum}.
    */
@@ -133,13 +133,13 @@ public class URLQueryModel {
   /** Optional override of the MIME type from a URL query parameter. */
   public static final String MIMETYPE = "mimeType";
 
-  /**
+  /*
    * Parameter recognized as the name of the local file on which to render the counters (this option
    * is supported only by utility classes run from a command line, not by the httpd interface).
    */
   public static final String FILE = "file";
 
-  /**
+  /*
    * A collection of event filters. Each filter is a regular expression. The key is the {@link
    * Event} {@link Field} to which the filter will be applied. The events filters are specified
    * using URL query parameters having the general form: <code>events.column=regex</code>. For
@@ -159,7 +159,7 @@ public class URLQueryModel {
    */
   public final HashMap<Field, Pattern> eventFilters = new HashMap<Field, Pattern>();
 
-  /**
+  /*
    * The <code>eventOrderBy=fld</code> URL query parameters specifies the sequence in which events
    * should be grouped. The value of the query parameter is an ordered list of the names of {@link
    * Event} {@link Field}s. For example:
@@ -177,7 +177,7 @@ public class URLQueryModel {
    */
   static final String EVENT_ORDER_BY = "eventOrderBy";
 
-  /**
+  /*
    * The order in which the events will be grouped.
    *
    * @see #EVENT_ORDER_BY
@@ -190,8 +190,8 @@ public class URLQueryModel {
   /** The parameters from the request (as parsed from URL query parameters). */
   public final LinkedHashMap<String, Vector<String>> params;
 
-  //    /**
-  //     * The request headers.
+  //    /*
+//     * The request headers.
   //     */
   //    final public Map<String,String> headers;
 
@@ -204,7 +204,7 @@ public class URLQueryModel {
   /** The value of the {@link #DEPTH} query parameter. */
   public final int depth;
 
-  /**
+  /*
    * The kind of report to generate.
    *
    * @see #REPORT
@@ -212,13 +212,13 @@ public class URLQueryModel {
    */
   public final ReportEnum reportType;
 
-  /**
+  /*
    * @see #TIMESTAMP_FORMAT
    * @see TimestampFormatEnum
    */
   public final TimestampFormatEnum timestampFormat;
 
-  /**
+  /*
    * The ordered labels to be assigned to the category columns in a {@link ReportEnum#pivot} report
    * (optional). The order of the names in the URL query parameters MUST correspond with the order
    * of the capturing groups in the {@link #REGEX}.
@@ -227,31 +227,31 @@ public class URLQueryModel {
    */
   public final String[] category;
 
-  /**
+  /*
    * The inclusive lower bound in milliseconds of the timestamp for the counters or events to be
    * selected.
    */
   public final long fromTime;
 
-  /**
+  /*
    * The exclusive upper bound in milliseconds of the timestamp for the counters or events to be
    * selected.
    */
   public final long toTime;
 
-  /**
+  /*
    * The reporting period to be used. When <code>null</code> all periods will be reported. When
    * specified, only that period is reported.
    */
   public final PeriodEnum period;
 
-  /**
+  /*
    * The {@link Pattern} compiled from the {@link #FILTER} query parameters and <code>null</code>
    * iff there are no {@link #FILTER} query parameters.
    */
   public final Pattern pattern;
 
-  /**
+  /*
    * The events iff they are available from the service.
    *
    * @see IEventReportingService
@@ -270,27 +270,27 @@ public class URLQueryModel {
   /** Used to format integer and long counter values. */
   public final NumberFormat integerFormat;
 
-  /**
+  /*
    * Used to format the units of time when expressed as elapsed units since the first sample of a
    * {@link History}.
    */
   public final DecimalFormat unitsFormat;
 
-  /**
+  /*
    * Used to format the timestamp fields (From:, To:, and the last column) and the epoch for <code>
    * flot</code>. This is set dynamically based on the {@link #TIMESTAMP_FORMAT} and the {@link
    * #PERIOD}. Flot always requires epoch numbering, so it does not use this field.
    */
   public final Format dateFormat;
 
-  /**
+  /*
    * Optional override of the MIME type from a URL query parameter.
    *
    * @see MIMETYPE
    */
   public final String mimeType;
 
-  /**
+  /*
    * The name of a local file on which to write the data (this option is supported only by local
    * utility classes, not by the httpd interface).
    *
@@ -358,7 +358,7 @@ public class URLQueryModel {
     return sb.toString();
   }
 
-  /**
+  /*
    * Factory for performance counter integration.
    *
    * @param service The service object IFF one was specified when {@link CounterSetHTTPD} was
@@ -397,7 +397,7 @@ public class URLQueryModel {
     return new URLQueryModel(service, uri, params, requestURL);
   }
 
-  /**
+  /*
    * Factory for Servlet API integration.
    *
    * @param service The service object IFF one was specified when {@link CounterSetHTTPD} was
@@ -439,7 +439,7 @@ public class URLQueryModel {
     return new URLQueryModel(service, uri, params, requestURL);
   }
 
-  /**
+  /*
    * Create a {@link URLQueryModel} from a URL. This is useful when serving historical performance
    * counter data out of a file.
    *
@@ -557,7 +557,7 @@ public class URLQueryModel {
         }
 
         // the name of the event column.
-        final String col = name.substring(pos + 1, name.length());
+        final String col = name.substring(pos + 1);
 
         final Field fld;
         try {
@@ -576,8 +576,8 @@ public class URLQueryModel {
         if (patterns.size() > 1)
           throw new IllegalArgumentException("Only one pattern per field: " + name);
 
-        /*
-         * compile the pattern
+      /*
+       * compile the pattern
          *
          * Note: Throws PatternSyntaxException if the pattern can
          * not be compiled.
@@ -602,8 +602,8 @@ public class URLQueryModel {
 
       if (v == null) {
 
-        /*
-         * Use a default for eventOrderBy.
+      /*
+       * Use a default for eventOrderBy.
          */
 
         try {
@@ -641,8 +641,8 @@ public class URLQueryModel {
       case events:
         if (eventReportingService == null) {
 
-          /*
-           * Throw exception since the report type requires events but
+        /*
+       * Throw exception since the report type requires events but
            * they are not available.
            */
 
@@ -702,8 +702,8 @@ public class URLQueryModel {
      */
     switch (timestampFormat) {
       case dateTime:
-        /*
-         * Note: I have decided to go with the long format (date + time)
+      /*
+       * Note: I have decided to go with the long format (date + time)
          * since runs often span days and the time along is not enough
          * information.
          */
@@ -744,7 +744,7 @@ public class URLQueryModel {
     if (log.isInfoEnabled()) log.info(FILE + "=" + file);
   }
 
-  /**
+  /*
    * Return the first value for the named property.
    *
    * @param params The request parameters.
@@ -768,7 +768,7 @@ public class URLQueryModel {
     return vals.get(0);
   }
 
-  /**
+  /*
    * Re-create the request URL, including the protocol, host, port, and path but not any query
    * parameters.
    */
@@ -777,7 +777,7 @@ public class URLQueryModel {
     return new StringBuilder(requestURL);
   }
 
-  /**
+  /*
    * Re-create the request URL.
    *
    * @param override Overridden query parameters (optional).

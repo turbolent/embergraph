@@ -25,8 +25,8 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.util.UUID;
 
-/**
- * A {@link Remote} interface for methods supporting high availability. This interface hierarchy
+/*
+* A {@link Remote} interface for methods supporting high availability. This interface hierarchy
  * mirrors the {@link QuorumService} hierarchy and is broken down by the various facets of the high
  * availability functionality such as the write pipeline, quorum reads, the quorum commit protocol,
  * etc.
@@ -36,7 +36,7 @@ import java.util.UUID;
  */
 public interface HAGlueBase extends Remote {
 
-  /**
+  /*
    * The {@link UUID} of this service.
    *
    * @todo This should be handled as a smart proxy so this method does not actually perform RMI.

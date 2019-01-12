@@ -19,8 +19,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.util;
 
-/**
- * Collection of some utility methods for HTML.
+/*
+* Collection of some utility methods for HTML.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -32,7 +32,7 @@ public class HTMLUtility {
     super();
   }
 
-  /**
+  /*
    * Sometimes you want to escape something without using a DOM instance. This method escapes a
    * String value so that it may be written as the value of an XML attribute in a manner that is
    * also compatible with HTML. Note that the best solution is to use a DOM instance, which will
@@ -112,8 +112,8 @@ public class HTMLUtility {
     return sb.toString();
   }
 
-  //    /**
-  //     * Same as escapeForXHTML but respects the encoding
+  //    /*
+//     * Same as escapeForXHTML but respects the encoding
   //     * parameter.
   //     */
   //    public static String escapeForXHTML(String s, String enc)

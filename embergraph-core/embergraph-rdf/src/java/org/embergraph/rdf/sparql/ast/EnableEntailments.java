@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * The ENABLE ENTAILMENTS operation enable incremental truth maintenance.
+/*
+* The ENABLE ENTAILMENTS operation enable incremental truth maintenance.
  *
  * <pre>
  * ENABLE ENTAILMENTS
@@ -44,7 +44,7 @@ public class EnableEntailments extends GraphUpdate {
     super(UpdateType.EnableEntailments);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

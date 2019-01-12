@@ -24,7 +24,7 @@ package org.embergraph.rdf.sparql.ast.service;
 /** @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a> */
 public abstract class ServiceOptionsBase implements IServiceOptions {
 
-  /**
+  /*
    * The location of the propertyFile for setting service properties. This to allow overriding the
    * default value via passing a Java Property at the command line.
    */

@@ -30,8 +30,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 
-/**
- * Computed {@link INeedsMaterialization} metadata for an {@link IValueExpression}.
+/*
+* Computed {@link INeedsMaterialization} metadata for an {@link IValueExpression}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: ComputedMaterializationRequirement.java 5179 2011-09-12 20:13:25Z thompsonbry $
@@ -93,8 +93,6 @@ public class ComputedMaterializationRequirement implements INeedsMaterialization
 
     if (requirement != t.requirement) return false;
 
-    if (!varsToMaterialize.equals(t.varsToMaterialize)) return false;
-
-    return true;
+    return varsToMaterialize.equals(t.varsToMaterialize);
   }
 }

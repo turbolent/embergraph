@@ -28,14 +28,14 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.Lock;
 import org.embergraph.concurrent.NamedLock;
 
-/**
- * An implementation using {@link NamedLock}s suitable for within JVM locking.
+/*
+* An implementation using {@link NamedLock}s suitable for within JVM locking.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public final class ResourceLockService implements IResourceLockService {
 
-  /**
+  /*
    * Table of locks. Locks are weakly held.
    *
    * @todo could use simple locks in weak value hash map with the name as the key.
@@ -61,7 +61,7 @@ public final class ResourceLockService implements IResourceLockService {
     return new ResourceLock(lock);
   }
 
-  /**
+  /*
    * Inner class (NOT serializable).
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

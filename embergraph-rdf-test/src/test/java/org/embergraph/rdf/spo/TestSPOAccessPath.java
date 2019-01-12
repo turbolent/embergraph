@@ -40,8 +40,8 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.test.MockTermIdFactory;
 import org.openrdf.model.Statement;
 
-/**
- * Test suite for {@link SPOAccessPath}.
+/*
+* Test suite for {@link SPOAccessPath}.
  * <p>
  * See also {@link TestTripleStore} which tests some of this stuff.
  * 
@@ -56,14 +56,14 @@ import org.openrdf.model.Statement;
  */
 public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
 
-    /**
-     * 
+    /*
+     *
      */
     public TestSPOAccessPath() {
         super();
     }
 
-    /**
+    /*
      * @param name
      */
     public TestSPOAccessPath(String name) {
@@ -88,7 +88,7 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
         
     }
 
-    /**
+    /*
      * There are 8 distinct triple pattern bindings for a triple store that
      * select among 3 distinct access paths.
      */
@@ -109,8 +109,8 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
 
             if (store.isQuads()) {
 
-                /*
-                 * For a quad store there are 16 distinct binding patterns that
+              /*
+       * For a quad store there are 16 distinct binding patterns that
                  * select among 6 distinct access paths. there are some quad
                  * patterns which could be mapped onto more than one access
                  * path, but the code here checks the expected mapping. These
@@ -182,7 +182,7 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
 
     }
 
-    /**
+    /*
      * Unit test for predicate patterns in which the same variable appears in
      * more than one position of a triple pattern. The access path should
      * enforce a constraint to ensure that only elements having the same value
@@ -270,7 +270,7 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
         
     }
 
-    /**
+    /*
      * Unit test for predicate patterns in which the same variable appears in
      * more than one position of a quad pattern. The access path should enforce
      * a constraint to ensure that only elements having the same value in each
@@ -292,8 +292,8 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
 
             if(!store.isQuads()) {
 
-                /*
-                 * @todo modify test to work for triple store also? This is easy
+              /*
+       * @todo modify test to work for triple store also? This is easy
                  * enough to do with an (s,p,o) predicate in which s and o are
                  * or s and p bound to the same variable.
                  */
@@ -386,7 +386,7 @@ public class TestSPOAccessPath extends AbstractTripleStoreTestCase {
         
     }
     
-    /**
+    /*
      * @todo write tests of slice where offset=0, offset>0. test with limit at
      *       fence posts (0,1) and with limit GT the maximum that can be fully
      *       buffered. verify stable result sets by using a slice to page

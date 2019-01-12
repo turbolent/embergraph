@@ -41,8 +41,8 @@ import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocationContext;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * Extends {@link ChunkedRunningQuery} to provide additional state and logic required to support
+/*
+* Extends {@link ChunkedRunningQuery} to provide additional state and logic required to support
  * distributed query evaluation against an {@link IEmbergraphFederation} .
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -54,7 +54,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
   /** The {@link UUID} of the service which is the {@link IQueryClient} running this query. */
   /*private*/ final UUID queryControllerUUID;
 
-  /**
+  /*
    * A map of all allocation contexts associated with this query.
    *
    * <p>FIXME Separate out the life cycle of the allocation from the allocation context. This is
@@ -93,7 +93,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
   private final ConcurrentHashMap<AllocationContextKey, IAllocationContext> allocationContexts =
       new ConcurrentHashMap<AllocationContextKey, IAllocationContext>();
 
-  /**
+  /*
    * Extended to release all allocations associated with the specified operator.
    *
    * <p>{@inheritDoc}
@@ -115,7 +115,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
     }
   }
 
-  /**
+  /*
    * Extended to release all {@link IAllocationContext}s associated with the query when it
    * terminates.
    *
@@ -173,7 +173,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
     return (FederatedQueryEngine) super.getQueryEngine();
   }
 
-  /**
+  /*
    * Overridden to make this visible to the {@link FederatedQueryEngine}.
    *
    * <p>{@inheritDoc}
@@ -184,7 +184,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
     return super.acceptChunk(msg);
   }
 
-  /**
+  /*
    * Resolve the proxy for an {@link IQueryPeer}. This is special cased for both <i>this</i> service
    * (the actual reference is returned) and the query controller (we use an alternative path to
    * discover the query controller since it might not be registered against a lookup service if it
@@ -236,7 +236,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
     return queryPeer;
   }
 
-  /**
+  /*
    * Return the {@link IAllocationContext} for the given key.
    *
    * @param key The key.
@@ -255,7 +255,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
     return ctx;
   }
 
-  /**
+  /*
    * Overridden to notify each peer on which the query was started.
    *
    * <p>{@inheritDoc}
@@ -278,8 +278,8 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
 
       } catch (RemoteException e) {
 
-        /*
-         * If we do not manage to notify the peer then the peer will not
+      /*
+       * If we do not manage to notify the peer then the peer will not
          * release resources assigned to the query in a timely manner.
          * However, assuming the peer eventually manages to send some
          * data to another node which has been notified (or to the
@@ -304,7 +304,7 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
         QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.INSTANCE);
   }
 
-  /**
+  /*
    * Overridden to broadcast to all nodes and/or shards on which the operator has run in scale-out.
    * Broadcast will be to nodes if the operator is hash partitioned. Broadcast will be to shards if
    * the operator is key-range partitioned.
@@ -325,8 +325,8 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
       case ANY:
       case HASHED:
         {
-          /*
-           * For both ANY and HASHED we want to send a last pass message to
+        /*
+       * For both ANY and HASHED we want to send a last pass message to
            * each service on which the operator was evaluated. For ANY, the
            * set of such services will be discovered dynamically as the query
            * is evaluated. For HASHED, the set of such services will be
@@ -358,8 +358,8 @@ public class FederatedRunningQuery extends ChunkedRunningQuery {
         }
       case SHARDED:
         {
-          /*
-           * Generate a last pass message for each shard on which the operator
+        /*
+       * Generate a last pass message for each shard on which the operator
            * was invoked.
            */
           for (Integer shardId : ((Set<Integer>) doneOn)) {

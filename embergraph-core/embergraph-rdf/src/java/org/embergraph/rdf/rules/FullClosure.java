@@ -4,8 +4,8 @@ import java.util.List;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.rule.Rule;
 
-/**
- * A program that uses the fix point of the configured rules to compute the forward closure of the
+/*
+* A program that uses the fix point of the configured rules to compute the forward closure of the
  * database. Since there is no inherent order among the rules in a fix point program, this program
  * can be easily extended by adding additional rules.
  *

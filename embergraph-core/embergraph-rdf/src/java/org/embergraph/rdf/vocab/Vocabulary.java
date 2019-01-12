@@ -29,36 +29,36 @@ import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Value;
 
-/**
- * Interface for a pre-defined vocabulary.
+/*
+* Interface for a pre-defined vocabulary.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface Vocabulary {
 
-  /**
+  /*
    * The namespace of the owning {@link LexiconRelation}.
    *
    * @return
    */
-  public String getNamespace();
+  String getNamespace();
 
-  /**
+  /*
    * The #of defined {@link Value}s.
    *
    * @throws IllegalStateException if the values have not been defined.
    */
   int size();
 
-  /**
+  /*
    * The {@link Value}s in an arbitrary order.
    *
    * @throws IllegalStateException if the values have not been defined.
    */
   Iterator<? extends Value> values();
 
-  /**
+  /*
    * The term identifier for the pre-defined {@link Value}.
    *
    * @param value The value.
@@ -69,18 +69,18 @@ public interface Vocabulary {
    * Note: Prior to the TERMS_REFACTOR_BRANCH this would throw an exception
    * if the Value was not declared by the Vocabulary.
    */
-  public IV get(Value value);
+  IV get(Value value);
 
-  /**
+  /*
    * Returns the {@link IConstant} for the {@link Value}.
    *
    * @param value The value.
    * @return The {@link IConstant}.
    * @throws IllegalArgumentException if that {@link Value} is not defined for this vocabulary.
    */
-  public IConstant<IV> getConstant(Value value);
+  IConstant<IV> getConstant(Value value);
 
-  /**
+  /*
    * Reverse lookup of an {@link IV} defined by this vocabulary.
    *
    * @param iv The {@link IV}.
@@ -88,5 +88,5 @@ public interface Vocabulary {
    *     the vocabulary.
    * @since TERMS_REFACTOR_BRANCH
    */
-  public Value asValue(IV iv);
+  Value asValue(IV iv);
 }

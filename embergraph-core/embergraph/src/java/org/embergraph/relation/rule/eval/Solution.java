@@ -29,8 +29,8 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.IRelation;
 import org.embergraph.relation.rule.IRule;
 
-/**
- * Flyweight implementation.
+/*
+* Flyweight implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class Solution<E> implements ISolution<E>, Serializable {
   private final IRule<E> rule;
   private final IBindingSet bindingSet;
 
-  /**
+  /*
    * Constructs the element iff requested, saves the rule reference iff requested, and clones and
    * saves the bindingSet iff requested. The requested behavior depends on {@link
    * IJoinNexus#solutionFlags()}. When requested, the element is created using {@link

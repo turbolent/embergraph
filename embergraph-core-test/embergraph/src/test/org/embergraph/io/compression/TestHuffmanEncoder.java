@@ -27,6 +27,7 @@ import java.io.DataInput;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.zip.Deflater;
@@ -35,8 +36,8 @@ import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 import junit.framework.TestCase2;
 
-/**
- * Explores the built-in huffman coding support in the Deflate library. Unfortunately, {@link
+/*
+* Explores the built-in huffman coding support in the Deflate library. Unfortunately, {@link
  * Deflater} does not provide access to the dictionary. For the B+Tree, what we generally want is to
  * use a canonical huffman code since it is both more space efficient and preserves the alphabetic
  * ordering of the coded values. However, this test suite might be refactored for store level record
@@ -105,7 +106,7 @@ public class TestHuffmanEncoder extends TestCase2 {
     fpf.setMaximumFractionDigits(2);
   }
 
-  /**
+  /*
    * Simple application of the {@link Deflater} to encode a byte[] using a Huffman encoding and
    * decode that byte[].
    *
@@ -116,7 +117,7 @@ public class TestHuffmanEncoder extends TestCase2 {
     final String msg =
         "this is an example of huffman encoding this is an example of huffman encoding";
 
-    final byte[] uncompressed = msg.getBytes("UTF-8");
+    final byte[] uncompressed = msg.getBytes(StandardCharsets.UTF_8);
 
     System.err.println(
         "uncompressed(" + uncompressed.length + "): " + Arrays.toString(uncompressed));
@@ -174,18 +175,18 @@ public class TestHuffmanEncoder extends TestCase2 {
     assertEquals("did not decompress correctly", uncompressed, decompressed);
   }
 
-  /**
+  /*
    * Application and reuse of a {@link Deflater} and an {@link Inflater} to encode and decode
    * byte[]s. While instances of these classes are reused, concurrency is not tested (reuse is
    * serialized).
    */
   public void test_huffman_reuse() throws IOException {
 
-    final String messages[] = {
-      "this is an example of huffman encoding",
-      "this is an example of huffman encoding in which the decode and the encode are reused",
-      "the lazy brown dog jumped over the fence",
-      "Application and reuse of a {@link Deflater} and an {@link Inflater} to encode and decode byte[]s.  While instances of these classes are reused, concurrency is not tested (reuse is serialized)."
+    final String[] messages = {
+        "this is an example of huffman encoding",
+        "this is an example of huffman encoding in which the decode and the encode are reused",
+        "the lazy brown dog jumped over the fence",
+        "Application and reuse of a {@link Deflater} and an {@link Inflater} to encode and decode byte[]s.  While instances of these classes are reused, concurrency is not tested (reuse is serialized)."
     };
 
     HuffmanEncoder c = new HuffmanEncoder();
@@ -193,7 +194,7 @@ public class TestHuffmanEncoder extends TestCase2 {
 
     for (int i = 0; i < messages.length; i++) {
 
-      final byte[] uncompressed = messages[i].getBytes("UTF-8");
+      final byte[] uncompressed = messages[i].getBytes(StandardCharsets.UTF_8);
 
       System.err.println(
           "uncompressed(" + uncompressed.length + "): " + Arrays.toString(uncompressed));
@@ -212,7 +213,7 @@ public class TestHuffmanEncoder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Class provides only the huffman encoding aspect of the ZLIB compression standard. Note that
    * this class, which wraps {@link Deflater}, uses adaptive huffman encoding and (a) does NOT allow
    * you to isolate the dictionary from the input; and (b) does NOT allow you to use a static code
@@ -272,7 +273,7 @@ public class TestHuffmanEncoder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Decoder for ZLIB.
    *
    * <p>Instances of this class are NOT thread-safe.
@@ -292,7 +293,7 @@ public class TestHuffmanEncoder extends TestCase2 {
       inflater = new Inflater();
     }
 
-    /**
+    /*
      * Decompress N bytes from the input stream.
      *
      * @param is The input stream.
@@ -326,7 +327,7 @@ public class TestHuffmanEncoder extends TestCase2 {
       return decompress(baos.toByteArray());
     }
 
-    /**
+    /*
      * Decompress an input stream until EOF.
      *
      * @param is The input stream.
@@ -349,8 +350,8 @@ public class TestHuffmanEncoder extends TestCase2 {
 
       } catch (EOFException ex) {
 
-        /*
-         * Ignore - this is how we notice the end of the input stream.
+      /*
+       * Ignore - this is how we notice the end of the input stream.
          *
          * @todo throwing and catching an exception is too expensive to
          * be done as the expected code path.
@@ -364,7 +365,7 @@ public class TestHuffmanEncoder extends TestCase2 {
       return decompress(baos.toByteArray());
     }
 
-    /**
+    /*
      * Decompress an input stream until EOF.
      *
      * @param is The input stream.
@@ -401,7 +402,7 @@ public class TestHuffmanEncoder extends TestCase2 {
       return baos.toByteArray();
     }
 
-    /**
+    /*
      * Decompress a byte[].
      *
      * @param compressed The compressed data (w/ the ZLIB header).

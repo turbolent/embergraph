@@ -46,8 +46,8 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.webapp.client.ConnectOptions;
 
-/**
- * This class supports making requests to the server with fairly low level control. Each operation
+/*
+* This class supports making requests to the server with fairly low level control. Each operation
  * is set up by calls to the protected methods such as {@link #setMethodisPost(String, String)},
  * {@link #setAllow400s()}, and then to call {@link #serviceRequest(String...)} to actually process
  * the request. This process may be repeated multiple times. After each call to {@link
@@ -59,7 +59,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
 
   protected interface RequestFactory {
     HttpUriRequest createRequest(String... params);
-  };
+  }
 
   protected static final String SELECT = "SELECT (1 as ?one){}";
   protected static final String ASK = "ASK WHERE {}";
@@ -138,7 +138,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
     servlet = null;
     super.tearDown();
   }
-  /**
+  /*
    * This method is called automatically after each call to {@link #serviceRequest(String...)} so
    * probably is unnecessary.
    */
@@ -155,7 +155,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
     return responseContentType;
   }
 
-  /**
+  /*
    * Sets the accept header, default is "*"
    *
    * @param mimetype
@@ -171,12 +171,12 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
 
   private static Pattern charset = Pattern.compile("[; ]charset *= *\"?([^ ;\"]*)([ \";]|$)");
 
-  /**
+  /*
    * Sanity check the {@link #charset} pattern
    *
    * @param argv
    */
-  public static void main(String argv[]) {
+  public static void main(String[] argv) {
     for (final String t :
         new String[] {
           "text/html ; charset=iso-8856-1",
@@ -221,7 +221,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
 
     return schemeRegistry;
   }
-  /**
+  /*
    * This is the main entry point for subclasses. This method sends a request to the server, as set
    * up by setABC methods, and returns the string send back to the client.
    *
@@ -283,7 +283,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
         params.put(key, new String[] {value});
       } else {
         // horridly inefficient, never called?
-        final String nval[] = new String[val.length + 1];
+        final String[] nval = new String[val.length + 1];
         System.arraycopy(val, 0, nval, 0, val.length);
         nval[val.length] = value;
         params.put(key, nval);
@@ -292,7 +292,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
     return params;
   }
 
-  /**
+  /*
    * The method is a POST usng url-encoded form data, with the parameters being those past to {@link
    * #serviceRequest(String...)} call.
    */
@@ -312,7 +312,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
         };
   }
 
-  /**
+  /*
    * The method is a POST of the given document
    *
    * @param mimeType The mimetype of the document
@@ -358,7 +358,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
     this.permit400s = true;
   }
 
-  /**
+  /*
    * Assert that the update from {@link #update} has or has not taken place. This calls {@link
    * #resetDefaultOptions()}, and the next call to {@link #serviceRequest(String...)} will need to
    * be setup after this call.

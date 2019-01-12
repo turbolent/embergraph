@@ -24,8 +24,8 @@ package org.embergraph.bop.engine;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.solutions.SolutionSetStream;
 
-/**
- * Implementation supports a standalone database. Depending on the specific instance used, either
+/*
+* Implementation supports a standalone database. Depending on the specific instance used, either
  * the generated chunk is left on the Java heap or it is migrated onto the native heap using a
  * {@link SolutionSetStream}. Either way, it is then handed off synchronously using {@link
  * QueryEngine#acceptChunk(IChunkMessage)}. That method will queue the chunk for asynchronous
@@ -35,7 +35,7 @@ import org.embergraph.bop.solutions.SolutionSetStream;
  */
 public class StandaloneChunkHandler implements IChunkHandler {
 
-  /**
+  /*
    * Instance puts all chunks onto the native heap.
    *
    * @see BLZG-533 Vector query engine on native heap.
@@ -45,7 +45,7 @@ public class StandaloneChunkHandler implements IChunkHandler {
   /** Instance puts all chunks onto the managed object heap. */
   public static final IChunkHandler MANAGED_HEAP_INSTANCE = new ManagedHeapStandloneChunkHandler();
 
-  /**
+  /*
    * This instance is explicitly used for several unit tests in the query engine package that are
    * not written to the RDF data model (the native heap version assumes an RDF data model).
    */

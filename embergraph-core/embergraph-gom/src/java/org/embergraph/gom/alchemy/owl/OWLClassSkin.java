@@ -30,7 +30,7 @@ public class OWLClassSkin extends BasicSkin implements IGenericSkin {
     super(gpo);
   }
 
-  /**
+  /*
    * Returns a list of defined OWLClasses. The classes do not in fact have any reference to the
    * Ontology instance, but the skin supports the fiction.
    */

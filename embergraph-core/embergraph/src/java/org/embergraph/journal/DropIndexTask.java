@@ -19,8 +19,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.journal;
 
-/**
- * Drop a named index (unisolated write operation).
+/*
+* Drop a named index (unisolated write operation).
  *
  * <p>Note: the dropped index will continue to be visible to unisolated readers or read-commmitted
  * isolated operations (since they read from the most recent committed state) until the next commit.
@@ -37,7 +37,7 @@ public class DropIndexTask extends AbstractTask<Boolean> {
     super(concurrencyManager, ITx.UNISOLATED, name);
   }
 
-  /**
+  /*
    * Drop the named index.
    *
    * @return A {@link Boolean} value that is <code>true</code> iff the index was pre-existing at the

@@ -1,7 +1,7 @@
 package org.embergraph.counters;
 
-/**
- * An {@link Instrument} that records a single value at the moment that it is constructed and always
+/*
+* An {@link Instrument} that records a single value at the moment that it is constructed and always
  * reports the same value and lastModified time.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

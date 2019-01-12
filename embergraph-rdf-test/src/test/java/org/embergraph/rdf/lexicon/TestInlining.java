@@ -54,8 +54,8 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.rdf.vocab.VocabularyDecl;
 import org.openrdf.model.URI;
 
-/**
- * Test suite for adding terms to the lexicon.
+/*
+* Test suite for adding terms to the lexicon.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -294,7 +294,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * The "told bnodes" mode uses the blank node ID as specified rather than assigning one based on a
    * UUID. For this case, we need to store the blank nodes in the reverse index (T2ID) so we can
    * translate a blank node back to a specific identifier.
@@ -327,8 +327,8 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
       if (!store.isStable()) {
 
-        /*
-         * We need a restart safe store to test this since otherwise a
+      /*
+       * We need a restart safe store to test this since otherwise a
          * term cache could give us a false positive.
          */
 
@@ -417,8 +417,8 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
       if (!store.isStable()) {
 
-        /*
-         * We need a restart safe store to test this since otherwise a
+      /*
+       * We need a restart safe store to test this since otherwise a
          * term cache could give us a false positive.
          */
 
@@ -542,8 +542,8 @@ public class TestInlining extends AbstractTripleStoreTestCase {
 
       if (!store.isStable()) {
 
-        /*
-         * We need a restart safe store to test this since otherwise a
+      /*
+       * We need a restart safe store to test this since otherwise a
          * term cache could give us a false positive.
          */
 
@@ -618,7 +618,7 @@ public class TestInlining extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * @param store
    * @param terms
    * @return

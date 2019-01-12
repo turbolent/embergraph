@@ -11,8 +11,8 @@ import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.mdi.SegmentMetadata;
 import org.embergraph.service.Params;
 
-/**
- * The result of an {@link CompactingMergeTask}.
+/*
+* The result of an {@link CompactingMergeTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -22,7 +22,7 @@ public class BuildResult extends AbstractResult implements Params {
   /** The #of sources in the view from which the {@link IndexSegment} was built. */
   public final int sourceCount;
 
-  /**
+  /*
    * The sources in the view from which the {@link IndexSegment} was built.
    *
    * <p>Note: Builds may include anything from the mutable {@link BTree} on the old journal to the
@@ -34,7 +34,7 @@ public class BuildResult extends AbstractResult implements Params {
    */
   public IResourceMetadata[] sources;
 
-  /**
+  /*
    * <code>true</code> iff the build operation was a compacting merge of the entire index partition
    * view.
    *
@@ -50,13 +50,13 @@ public class BuildResult extends AbstractResult implements Params {
   /** The metadata describing the generated {@link IndexSegment}. */
   public final SegmentMetadata segmentMetadata;
 
-  /**
+  /*
    * The object which built the {@link IndexSegment} and which contains more interesting information
    * about the build.
    */
   public final IndexSegmentBuilder builder;
 
-  /**
+  /*
    * @param name The name under which the processed index partition was registered (this is
    *     typically different from the name of the scale-out index).
    * @param indexMetadata The index metadata object for the processed index as of the timestamp of

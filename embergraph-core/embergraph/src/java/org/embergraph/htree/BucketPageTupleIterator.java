@@ -6,8 +6,8 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.raba.IRaba;
 
-/**
- * Visits the non-empty tuples in each {@link BucketPage} visited by the source iterator.
+/*
+* Visits the non-empty tuples in each {@link BucketPage} visited by the source iterator.
  *
  * <p>TODO This might be reworked as an expander and an iterator visiting the tuples on a single
  * bucket page. That could provide more reuse. See {@link BucketPage#tuples()}
@@ -32,7 +32,7 @@ class BucketPageTupleIterator<E> implements ITupleIterator<E> {
     this.src = src;
   }
 
-  /**
+  /*
    * Scan to the next non-empty slot in the current {@link BucketPage}.
    *
    * @return <code>true</code> iff there is a non-empty slot on the current {@link BucketPage}.

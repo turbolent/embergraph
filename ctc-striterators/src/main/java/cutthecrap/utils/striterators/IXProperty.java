@@ -18,8 +18,8 @@ package cutthecrap.utils.striterators;
 /** IXProperty.java */
 public interface IXProperty {
   /** Returns the key of the property * */
-  public String getKey();
+  String getKey();
 
   /** Returns the value of the property * */
-  public Object getValue();
+  Object getValue();
 }

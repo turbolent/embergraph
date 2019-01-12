@@ -38,8 +38,8 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Default implementation for immutable {@link ILeafData} records.
+/*
+* Default implementation for immutable {@link ILeafData} records.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -52,7 +52,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
   //    private static final transient Logger log = Logger
   //            .getLogger(DefaultLeafCoder.class);
 
-  /**
+  /*
    * The initial version of the serialized representation of the {@link DefaultLeafCoder} class
    * (versus the serializer representation of the node or leaf).
    */
@@ -110,7 +110,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
   /** De-serialization ctor. */
   public DefaultLeafCoder() {}
 
-  /**
+  /*
    * @param keysCoder The {@link IRabaCoder} for the leaf's keys.
    * @param valsCoder The {@link IRabaCoder} for the leaf's values.
    */
@@ -147,8 +147,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     // Flag record as leaf or linked-leaf (vs node).
     final boolean doubleLinked = leaf.isDoubleLinked();
     buf.putByte(
-        (byte)
-            (doubleLinked ? AbstractReadOnlyNodeData.LINKED_LEAF : AbstractReadOnlyNodeData.LEAF));
+        (doubleLinked ? AbstractReadOnlyNodeData.LINKED_LEAF : AbstractReadOnlyNodeData.LEAF));
 
     if (doubleLinked) {
 
@@ -259,7 +258,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
       final byte versionTimestampBits = (byte) (Fast.mostSignificantBit(max - min) + 1);
 
       // one byte.
-      buf.putByte((byte) versionTimestampBits);
+      buf.putByte(versionTimestampBits);
 
       // offset of minVersionTimestamp.
       //            O_versionTimestamps = buf.pos();
@@ -271,8 +270,8 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
       buf.putLong(max);
 
       if (versionTimestampBits > 0) {
-        /*
-         * Note: We only write the deltas if there is more than one
+      /*
+       * Note: We only write the deltas if there is more than one
          * distinct timestamp value (min!=max). When min==max, the
          * deltas are coded in zero bits, so this would be a NOP anyway.
          */
@@ -438,7 +437,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     return encodeLive(leaf, buf).data();
   }
 
-  /**
+  /*
    * A read-only view of the data for a B+Tree leaf based on a compact record format. While some
    * fields are cached, for the most part the various data fields, including the keys and values,
    * are accessed in place in the data record in order to minimize the memory footprint of the leaf.
@@ -484,13 +483,13 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     private final IRaba keys;
     private final IRaba vals;
 
-    /**
+    /*
      * Offset of the bit flags in the buffer encoding the presence of deleted tuples -or- <code>-1
      * </code> if the leaf does not report those data.
      */
     private final int O_deleteMarkers;
 
-    /**
+    /*
      * The byte offset of the minimum version timestamp in the buffer -or- <code>-1</code> if the
      * leaf does not report those data. The minimum timestamp is coded as a full length long. The
      * next field in the buffer is the maximum version timestamp. The following fields are an array
@@ -502,13 +501,13 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     /** The #of bits used to code the version timestamps -or- ZERO (0) if they are not present. */
     private final byte versionTimestampBits;
 
-    /**
+    /*
      * The minimum across the versionTimestamp[] (iff version timestamps are in use and otherwise
      * <code>-1L</code>).
      */
     private final long minVersionTimestamp;
 
-    /**
+    /*
      * Offset of the bit flags in the buffer encoding the presence of tuples with raw records -or-
      * <code>-1</code> if the leaf does not report those data.
      */
@@ -520,7 +519,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
       return b;
     }
 
-    /**
+    /*
      * Constructor used when the caller is encoding the {@link ILeafData}.
      *
      * @param buf A buffer containing the leaf data.
@@ -688,7 +687,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
       this.b = buf;
     }
 
-    /**
+    /*
      * Decode in place (wraps a record containing the encoded data for a leaf).
      *
      * @param buf A buffer containing the leaf data.
@@ -890,8 +889,8 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
       return nkeys;
     }
 
-    //        /**
-    //         * For a leaf the #of tuples is always the #of keys.
+    //        /*
+//         * For a leaf the #of tuples is always the #of keys.
     //         */
     //        final public long getSpannedTupleCount() {
     //
@@ -1069,8 +1068,8 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     //
     //		}
 
-    //		/**
-    //		 * Visits the index of each bucket entry having a matching hash code.
+    //		/*
+//		 * Visits the index of each bucket entry having a matching hash code.
     //		 *
     //		 * @todo a trie over the hash entries would provide much faster search.
     //		 */
@@ -1194,8 +1193,8 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
       return b.getByte(0) == LINKED_LEAF;
     }
 
-    //        /**
-    //         * Update the data record to set the prior and next leaf address.
+    //        /*
+//         * Update the data record to set the prior and next leaf address.
     //         * <p>
     //         * Note: In order to use this method to write linked leaves on the store
     //         * you have to either write behind at a pre-determined address on the
@@ -1258,7 +1257,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     }
   }
 
-  /**
+  /*
    * Utility method formats the {@link ILeafData}.
    *
    * @param leaf A leaf data record.

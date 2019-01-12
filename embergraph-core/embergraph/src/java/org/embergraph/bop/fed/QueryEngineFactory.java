@@ -24,8 +24,8 @@ package org.embergraph.bop.fed;
 import org.apache.log4j.Logger;
 import org.embergraph.util.ClassPathUtil;
 
-/**
- * Singleton factory for a query controller.
+/*
+* Singleton factory for a query controller.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see BLZG-1471 (Convert QueryEngineFactory to use getInstance() and public interface for accessor

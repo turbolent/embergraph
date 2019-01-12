@@ -46,21 +46,21 @@ import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.resources.ResourceManager;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Implementation of a metadata service for a named scale-out index.
+/*
+* Implementation of a metadata service for a named scale-out index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class MetadataService extends DataService implements IMetadataService {
 
-  /**
+  /*
    * Error message when a request is made to register a scale-out index but delete markers are not
    * enabled for that index.
    */
   protected static final String ERR_DELETE_MARKERS = "Delete markers not enabled";
 
-  /**
+  /*
    * Return the name of the metadata index.
    *
    * @param name The name of the scale-out index.
@@ -76,13 +76,13 @@ public abstract class MetadataService extends DataService implements IMetadataSe
   /** The namespace for the metadata indices. */
   public static final String METADATA_INDEX_NAMESPACE = "metadata-";
 
-  /**
+  /*
    * Options for the {@link MetadataService}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options extends DataService.Options {}
+  public interface Options extends DataService.Options {}
 
   /** @param properties */
   protected MetadataService(Properties properties) {
@@ -95,7 +95,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     return (MetadataService) super.start();
   }
 
-  /**
+  /*
    * Note: You SHOULD NOT be running arbitrary tasks on a {@link MetadataService}. They are
    * specialized for the index partition locator information and SHOULD NOT be overloaded for other
    * purposes.
@@ -141,8 +141,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       if (timestamp == ITx.UNISOLATED) {
 
-        /*
-         * This is a read-only operation so run as read committed rather
+      /*
+       * This is a read-only operation so run as read committed rather
          * than unisolated.
          */
 
@@ -160,7 +160,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
   }
 
-  /**
+  /*
    * Task for {@link MetadataService#get(String, long, byte[])}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -196,8 +196,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       if (timestamp == ITx.UNISOLATED) {
 
-        /*
-         * This is a read-only operation so run as read committed rather
+      /*
+       * This is a read-only operation so run as read committed rather
          * than unisolated.
          */
 
@@ -215,7 +215,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
   }
 
-  /**
+  /*
    * Task for {@link MetadataService#find(String, long, byte[])}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -243,7 +243,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
   }
 
   public void splitIndexPartition(
-      String name, PartitionLocator oldLocator, PartitionLocator newLocators[])
+      String name, PartitionLocator oldLocator, PartitionLocator[] newLocators)
       throws IOException, InterruptedException, ExecutionException {
 
     setupLoggingContext();
@@ -381,13 +381,13 @@ public abstract class MetadataService extends DataService implements IMetadataSe
    * Tasks.
    */
 
-  /**
+  /*
    * Task assigns the next partition identifier for a registered scale-out index in a restart-safe
    * manner.
    */
   protected static class NextPartitionIdTask extends AbstractTask {
 
-    /**
+    /*
      * @param concurrencyManager
      * @param resource
      */
@@ -412,7 +412,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
   }
 
-  /**
+  /*
    * Atomic operation removes the pre-existing entry for specified index partition and replaces it
    * with N new entries giving the locators for the N new index partitions created when that index
    * partition was split.
@@ -423,9 +423,9 @@ public abstract class MetadataService extends DataService implements IMetadataSe
   protected static class SplitIndexPartitionTask extends AbstractTask {
 
     protected final PartitionLocator oldLocator;
-    protected final PartitionLocator newLocators[];
+    protected final PartitionLocator[] newLocators;
 
-    /**
+    /*
      * @param concurrencyManager
      * @param resource
      * @param oldLocator
@@ -435,7 +435,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
         IConcurrencyManager concurrencyManager,
         String resource,
         PartitionLocator oldLocator,
-        PartitionLocator newLocators[]) {
+        PartitionLocator[] newLocators) {
 
       super(concurrencyManager, ITx.UNISOLATED, resource);
 
@@ -474,8 +474,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       if (!oldLocator.equals(pmd)) {
 
-        /*
-         * Sanity check failed - old locator not equal to the locator
+      /*
+       * Sanity check failed - old locator not equal to the locator
          * found under that key in the metadata index.
          */
 
@@ -579,7 +579,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
   }
 
-  /**
+  /*
    * Updates the {@link MetadataIndex} to reflect the join of 2 or more index partitions.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -587,10 +587,10 @@ public abstract class MetadataService extends DataService implements IMetadataSe
    */
   protected static class JoinIndexPartitionTask extends AbstractTask {
 
-    protected final PartitionLocator oldLocators[];
+    protected final PartitionLocator[] oldLocators;
     protected final PartitionLocator newLocator;
 
-    /**
+    /*
      * @param concurrencyManager
      * @param resource
      * @param oldLocators
@@ -599,7 +599,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     protected JoinIndexPartitionTask(
         IConcurrencyManager concurrencyManager,
         String resource,
-        PartitionLocator oldLocators[],
+        PartitionLocator[] oldLocators,
         PartitionLocator newLocator) {
 
       super(concurrencyManager, ITx.UNISOLATED, resource);
@@ -661,8 +661,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
         if (!locator.equals(pmd)) {
 
-          /*
-           * Sanity check failed - old locator not equal to the
+        /*
+       * Sanity check failed - old locator not equal to the
            * locator found under that key in the metadata index.
            *
            * @todo differences in just the data service failover chain
@@ -672,8 +672,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
           throw new RuntimeException("Expected oldLocator=" + locator + ", but actual=" + pmd);
         }
 
-        /*
-         * FIXME validate that the newLocator is a perfect fit
+      /*
+       * FIXME validate that the newLocator is a perfect fit
          * replacement for the oldLocators in terms of the key range
          * spanned and that there are no gaps.  Add an API constaint
          * that the oldLocators are in key order by their leftSeparator
@@ -689,7 +689,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
   }
 
-  /**
+  /*
    * Updates the {@link MetadataIndex} to reflect the move of an index partition.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -700,7 +700,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     protected final PartitionLocator oldLocator;
     protected final PartitionLocator newLocator;
 
-    /**
+    /*
      * @param concurrencyManager
      * @param resource
      * @param oldLocator
@@ -750,8 +750,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       if (!oldLocator.equals(pmd)) {
 
-        /*
-         * Sanity check failed - old locator not equal to the locator
+      /*
+       * Sanity check failed - old locator not equal to the locator
          * found under that key in the metadata index.
          *
          * @todo differences in just the data service failover chain are
@@ -775,7 +775,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
   }
 
-  /**
+  /*
    * Registers a metadata index for a named scale-out index and statically partition the index using
    * the given separator keys and data services.
    *
@@ -806,7 +806,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     /** The data services on which to create those index partitions. */
     private final IDataService[] dataServices;
 
-    /**
+    /*
      * Create and statically partition a scale-out index.
      *
      * @param metadataIndexName The name of the metadata index (the resource on which the task must
@@ -846,8 +846,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
       } else {
 
-        /*
-         * Auto-assign the index partitions to data services.
+      /*
+       * Auto-assign the index partitions to data services.
          */
 
         try {
@@ -921,7 +921,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
       }
     }
 
-    /**
+    /*
      * Create and statically partition the scale-out index.
      *
      * @return The UUID assigned to the managed index.
@@ -984,8 +984,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
         if (log.isInfoEnabled()) log.info("name=" + scaleOutIndexName + ", pmd=" + pmd);
 
-        /*
-         * Map the initial partition onto that data service. This
+      /*
+       * Map the initial partition onto that data service. This
          * requires us to compute the left and right separator keys. The
          * right separator key is just the separator key for the next
          * partition in order and null iff this is the last partition.
@@ -1000,8 +1000,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
                 -1, // we are creating a new index, not moving an index partition.
                 leftSeparator,
                 rightSeparator,
-                /*
-                 * Note: By setting this to null we are indicating to
+              /*
+       * Note: By setting this to null we are indicating to
                  * the RegisterIndexTask on the data service that it
                  * needs to set the resourceMetadata[] when the index is
                  * actually registered based on the live journal as of
@@ -1045,7 +1045,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
     }
   }
 
-  /**
+  /*
    * Drops a scale-out index.
    *
    * <p>Since this task is unisolated, it basically has a lock on the writable version of the
@@ -1068,7 +1068,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
 
     private final IEmbergraphFederation fed;
 
-    /**
+    /*
      * @parma fed
      * @param concurrencyManager
      * @param name The name of the metadata index for some scale-out index.
@@ -1083,7 +1083,7 @@ public abstract class MetadataService extends DataService implements IMetadataSe
       this.fed = fed;
     }
 
-    /**
+    /*
      * Drops the index partitions and then drops the metadata index as well.
      *
      * @return The {@link Integer} #of index partitions that were dropped.
@@ -1123,8 +1123,8 @@ public abstract class MetadataService extends DataService implements IMetadataSe
             (PartitionLocator) SerializerUtil.deserialize(tuple.getValue());
         //                .deserialize(tuple.getValueStream());
 
-        /*
-         * Drop the index partition.
+      /*
+       * Drop the index partition.
          */
         {
           final int partitionId = pmd.getPartitionId();

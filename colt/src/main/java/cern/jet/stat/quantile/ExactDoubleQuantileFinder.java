@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.stat.quantile;
 
 import cern.colt.list.DoubleArrayList;
-/**
- * Exact quantile finding algorithm for known and unknown <tt>N</tt> requiring large main memory;
+/*
+* Exact quantile finding algorithm for known and unknown <tt>N</tt> requiring large main memory;
  * computes quantiles over a sequence of <tt>double</tt> elements. The folkore algorithm: Keeps all
  * elements in main memory, sorts the list, then picks the quantiles.
  *
@@ -26,7 +26,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
     this.buffer = new DoubleArrayList(0);
     this.clear();
   }
-  /**
+  /*
    * Adds a value to the receiver.
    *
    * @param value the value to add.
@@ -35,7 +35,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
     this.buffer.add(value);
     this.isSorted = false;
   }
-  /**
+  /*
    * Adds all values of the specified list to the receiver.
    *
    * @param values the list of which all values shall be added.
@@ -43,7 +43,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
   public void addAllOf(DoubleArrayList values) {
     addAllOfFromTo(values, 0, values.size() - 1);
   }
-  /**
+  /*
    * Adds the part of the specified list between indexes <tt>from</tt> (inclusive) and <tt>to</tt>
    * (inclusive) to the receiver.
    *
@@ -55,7 +55,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
     buffer.addAllOfFromTo(values, from, to);
     this.isSorted = false;
   }
-  /**
+  /*
    * Removes all elements from the receiver. The receiver will be empty after this call returns, and
    * its memory requirements will be close to zero.
    */
@@ -64,7 +64,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
     this.buffer.trimToSize();
     this.isSorted = false;
   }
-  /**
+  /*
    * Returns a deep copy of the receiver.
    *
    * @return a deep copy of the receiver.
@@ -79,7 +79,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
     this.sort();
     return buffer.binarySearch(element) >= 0;
   }
-  /**
+  /*
    * Applies a procedure to each element of the receiver, if any. Iterates over the receiver in no
    * particular order.
    *
@@ -95,7 +95,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
     for (int i = 0; i < theSize; ) if (!procedure.apply(theElements[i++])) return false;
     return true;
   }
-  /**
+  /*
    * Returns the number of elements currently needed to store all contained elements. This number
    * usually differs from the results of method <tt>size()</tt>, according to the underlying
    * datastructure.
@@ -103,7 +103,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
   public long memory() {
     return buffer.elements().length;
   }
-  /**
+  /*
    * Returns how many percent of the elements contained in the receiver are <tt>&lt;= element</tt>.
    * Does linear interpolation if the element is not contained but lies in between two contained
    * elements.
@@ -116,7 +116,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
     this.sort();
     return cern.jet.stat.Descriptive.rankInterpolated(buffer, element) / this.size();
   }
-  /**
+  /*
    * Computes the specified quantile elements over the values previously added.
    *
    * @param phis the quantiles for which elements are to be computed. Each phi must be in the
@@ -136,7 +136,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
     return new DoubleArrayList(quantileElements);
     */
   }
-  /**
+  /*
    * Returns the number of elements currently contained in the receiver (identical to the number of
    * values added so far).
    */
@@ -159,7 +159,7 @@ class ExactDoubleQuantileFinder extends cern.colt.PersistentObject implements Do
     s = s.substring(s.lastIndexOf('.') + 1);
     return s + "(mem=" + memory() + ", size=" + size() + ")";
   }
-  /**
+  /*
    * Returns the number of elements currently needed to store all contained elements. This number
    * usually differs from the results of method <tt>size()</tt>, according to the underlying
    * datastructure.

@@ -33,8 +33,8 @@ import junit.framework.TestCase2;
 import org.embergraph.journal.TestHelper;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
+/*
+* Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
  * TestCase2}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -69,7 +69,7 @@ public class TestCase3 extends TestCase2 {
     TestHelper.checkJournalsClosed(this);
   }
 
-  /**
+  /*
    * Helper method verifies that the contents of <i>actual</i> from position() to limit() are
    * consistent with the expected byte[]. A read-only view of <i>actual</i> is used to avoid side
    * effects on the position, mark or limit properties of the buffer.
@@ -113,7 +113,7 @@ public class TestCase3 extends TestCase2 {
     assertEquals(expected, actual);
   }
 
-  /**
+  /*
    * Helper method verifies that the contents of <i>actual</i> from position() to limit() are
    * consistent with the expected byte[]. A read-only view of <i>actual</i> is used to avoid side
    * effects on the position, mark or limit properties of the buffer.
@@ -159,7 +159,7 @@ public class TestCase3 extends TestCase2 {
     return BytesUtil.getBytes(buf);
   }
 
-  /**
+  /*
    * Wait up to a timeout until some condition succeeds.
    *
    * @param cond The condition, which must throw an {@link AssertionFailedError} if it does not
@@ -211,7 +211,7 @@ public class TestCase3 extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Waits up to 5 seconds for the condition to succeed.
    *
    * @param cond The condition, which must throw an {@link AssertionFailedError} if it does not
@@ -224,7 +224,7 @@ public class TestCase3 extends TestCase2 {
     assertCondition(cond, 5, TimeUnit.SECONDS);
   }
 
-  /**
+  /*
    * Returns random data that will fit in <i>nbytes</i>.
    *
    * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> having random contents.
@@ -238,7 +238,7 @@ public class TestCase3 extends TestCase2 {
     return ByteBuffer.wrap(bytes);
   }
 
-  /**
+  /*
    * Returns random data that will fit in <i>nbytes</i>.
    *
    * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> having random contents.
@@ -258,7 +258,7 @@ public class TestCase3 extends TestCase2 {
     return b;
   }
 
-  /**
+  /*
    * Return an open port on current machine. Try the suggested port first. If suggestedPort is zero,
    * just select a random port
    */

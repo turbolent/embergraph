@@ -25,8 +25,8 @@ import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepositoryConnection;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * Proxied test suite.
+/*
+* Proxied test suite.
  *
  * @param <S>
  */
@@ -48,8 +48,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
         );
   }
 
-  //	/**
-  //	 * Select everything in the kb using a GET. There will be no solutions
+  //	/*
+//	 * Select everything in the kb using a GET. There will be no solutions
   //	 * (assuming that we are using a told triple kb or quads kb w/o axioms).
   //	 */
   //	public void test_SELECT_ALL() throws Exception {
@@ -89,8 +89,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //		}
   //
-  //		/**
-  //		 * FIXME The necessary parser does not appear to be available. If you
+  //		/*
+//		 * FIXME The necessary parser does not appear to be available. If you
   //		 * enable this you will get ClassNotFoundException for
   //		 * <code>au/com/bytecode/opencsv/CSVReader</code>
   //		 *
@@ -121,8 +121,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //		}
   //
-  //		/**
-  //		 * Enabled now that we have a JSON result format parser (openrdf 2.7).
+  //		/*
+//		 * Enabled now that we have a JSON result format parser (openrdf 2.7).
   //		 *
   //		 * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/714" >
   //		 *      Migrate to openrdf 2.7 </a>
@@ -143,8 +143,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //	}
   //
-  //	// /**
-  //	// * Select everything in the kb using a POST. There will be no solutions
+  //	// /*
+//	// * Select everything in the kb using a POST. There will be no solutions
   //	// * (assuming that we are using a told triple kb or quads kb w/o axioms).
   //	// */
   //	// public void test_POST_SELECT_ALL() throws Exception {
@@ -168,8 +168,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //	// }
   //
-  //	/**
-  //	 * A GET query which should result in an error (the query is not well
+  //	/*
+//	 * A GET query which should result in an error (the query is not well
   //	 * formed).
   //	 */
   //	public void test_GET_SELECT_ERROR() throws Exception {
@@ -326,8 +326,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //	}
   //
-  //	/**
-  //	 * Test for POST of an NQuads resource by a URL.
+  //	/*
+//	 * Test for POST of an NQuads resource by a URL.
   //	 */
   //	public void test_POST_INSERT_NQuads_by_URL() throws Exception {
   //
@@ -407,8 +407,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //	}
   //
-  //	/**
-  //	 * Test of insert and retrieval of a large literal.
+  //	/*
+//	 * Test of insert and retrieval of a large literal.
   //	 */
   //	public void test_INSERT_veryLargeLiteral() throws Exception {
   //
@@ -447,8 +447,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //	}
   //
-  //	/**
-  //	 * Test ability to load data from a URI.
+  //	/*
+//	 * Test ability to load data from a URI.
   //	 */
   //	public void test_POST_INSERT_LOAD_FROM_URIs() throws Exception {
   //
@@ -527,8 +527,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //	}
   //
-  //	/**
-  //	 * Select everything in the kb using a POST.
+  //	/*
+//	 * Select everything in the kb using a POST.
   //	 */
   //	public void test_DELETE_withQuery() throws Exception {
   //
@@ -593,8 +593,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //		doConstructTest("POST", RDFFormat.TRIX);
   //	}
   //
-  //    /**
-  //     * A construct where the data has duplicate triples in different named
+  //    /*
+//     * A construct where the data has duplicate triples in different named
   //     * graphs. We materialize all triples. In this version of the test the
   //     * duplicate triples should be eliminated (this is verified by a count of
   //     * the CONSTRUCT results).
@@ -647,8 +647,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //    }
   //
-  //    /**
-  //     * A construct where the data has duplicate triples in different named
+  //    /*
+//     * A construct where the data has duplicate triples in different named
   //     * graphs. We materialize all triples. In this version of the test the
   //     * duplicate triples should be eliminated (this is verified by a count of
   //     * the CONSTRUCT results).
@@ -701,8 +701,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //    }
   //
-  //	/**
-  //	 * Unit test for ACID UPDATE using PUT. This test is for the operation where
+  //	/*
+//	 * Unit test for ACID UPDATE using PUT. This test is for the operation where
   //	 * a SPARQL selects the data to be deleted and the request body contains the
   //	 * statements to be inserted.
   //	 */
@@ -848,8 +848,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //	}
   //
-  //	// /**
-  //	// * Unit test verifies that you can have a CONSTRUCT SPARQL with an empty
+  //	// /*
+//	// * Unit test verifies that you can have a CONSTRUCT SPARQL with an empty
   //	// * WHERE clause.
   //	// *
   //	// * @throws MalformedQueryException
@@ -867,8 +867,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //	// }
   //
-  //	/**
-  //	 * Unit test where the "query" used to delete triples from the database
+  //	/*
+//	 * Unit test where the "query" used to delete triples from the database
   //	 * consists solely of a CONSTRUCT "template" without a WHERE clause (the
   //	 * WHERE clause is basically optional as all elements of it are optional).
   //	 *
@@ -1024,8 +1024,8 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   //
   //	}
   //
-  //	// /**
-  //	// * Unit test for ACID UPDATE using PUT. This test is for the operation
+  //	// /*
+//	// * Unit test for ACID UPDATE using PUT. This test is for the operation
   //	// where
   //	// * the request body is a multi-part MIME document conveying both the
   //	// * statements to be removed and the statement to be inserted.
@@ -1038,7 +1038,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends AbstractTestN
   public void testServiceNodeBindings() throws Exception {
     final EmbergraphSailRemoteRepository repo = m_repo.getEmbergraphSailRemoteRepository();
     final EmbergraphSailRemoteRepositoryConnection cxn =
-        (EmbergraphSailRemoteRepositoryConnection) repo.getConnection();
+        repo.getConnection();
 
     try {
       String queryStr =

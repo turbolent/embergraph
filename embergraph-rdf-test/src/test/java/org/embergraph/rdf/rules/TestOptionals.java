@@ -50,8 +50,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
+/*
+* @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestOptionals extends AbstractInferenceEngineTestCase {
@@ -319,7 +319,7 @@ public class TestOptionals extends AbstractInferenceEngineTestCase {
     final IJoinNexus joinNexus = joinNexusFactory.newInstance(db.getIndexManager());
     final IEvaluationPlan plan = planFactory.newPlan(joinNexus, rule);
     StringBuilder sb = new StringBuilder();
-    int order[] = plan.getOrder();
+    int[] order = plan.getOrder();
     for (int i = 0; i < order.length; i++) {
       sb.append(order[i]);
       if (i < order.length - 1) {

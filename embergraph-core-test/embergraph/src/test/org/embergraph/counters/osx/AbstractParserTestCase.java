@@ -11,7 +11,7 @@ public class AbstractParserTestCase extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Used to verify that the header corresponds to our expectations. Logs errors when the
    * expectations are not met.
    *

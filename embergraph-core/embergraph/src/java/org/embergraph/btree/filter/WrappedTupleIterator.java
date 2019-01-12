@@ -4,8 +4,8 @@ import java.util.Iterator;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 
-/**
- * Wraps an {@link Iterator} as an {@link ITupleIterator}.
+/*
+* Wraps an {@link Iterator} as an {@link ITupleIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

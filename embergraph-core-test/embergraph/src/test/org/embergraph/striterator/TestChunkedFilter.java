@@ -26,8 +26,8 @@ package org.embergraph.striterator;
 import java.util.Arrays;
 import junit.framework.TestCase2;
 
-/**
- * Unit tests for {@link ChunkedFilter}.
+/*
+* Unit tests for {@link ChunkedFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -61,7 +61,7 @@ public class TestChunkedFilter extends TestCase2 {
     assertEquals(new Long[] {2L, 4L, 6L}, itr.nextChunk());
   }
 
-  /**
+  /*
    * Unit test for correct rendering of a partial chunk when an element has already been drawn from
    * the iterator.
    */

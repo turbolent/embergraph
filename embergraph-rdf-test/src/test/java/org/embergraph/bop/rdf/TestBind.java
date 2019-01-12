@@ -37,8 +37,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 
-/**
- * Test suite for logic which "joins" two solutions, propagating bindings, verifying constraints,
+/*
+* Test suite for logic which "joins" two solutions, propagating bindings, verifying constraints,
  * and dropping bindings which are not to be kept.
  *
  * @see BOpContext#bind(IBindingSet, IBindingSet, boolean, IConstraint[], IVariable[])
@@ -181,7 +181,7 @@ public class TestBind extends TestCase2 {
     assertNull(actual2);
   }
 
-  /**
+  /*
    * Unit test for join of two consistent solutions when only of them has the {@link
    * EmbergraphValue} cached on the {@link IV} and the other does not. The cached reference should
    * be propagated to the result.
@@ -200,8 +200,8 @@ public class TestBind extends TestCase2 {
     final IConstant<?> val1 = new Constant(iv1);
     final IConstant<?> val2 = new Constant(iv2);
     final IConstant<?> val3 = new Constant(iv3);
-    iv1.setValue((EmbergraphValue) lit);
-    iv3.setValue((EmbergraphValue) lit);
+    iv1.setValue(lit);
+    iv3.setValue(lit);
 
     final ListBindingSet expected = new ListBindingSet();
     expected.set(x, val3);
@@ -224,7 +224,7 @@ public class TestBind extends TestCase2 {
     assertEquals(iv3.getValue(), ((IV) actual.get(x).get()).getValue());
   }
 
-  /**
+  /*
    * A variant on {@link #test_bind05()} where the {@link IV} having the cached {@link
    * EmbergraphValue} is in the other source solution (test of symmetry).
    */
@@ -242,8 +242,8 @@ public class TestBind extends TestCase2 {
     final IConstant<?> val1 = new Constant(iv1);
     final IConstant<?> val2 = new Constant(iv2);
     final IConstant<?> val3 = new Constant(iv3);
-    iv2.setValue((EmbergraphValue) lit);
-    iv3.setValue((EmbergraphValue) lit);
+    iv2.setValue(lit);
+    iv3.setValue(lit);
 
     final ListBindingSet expected = new ListBindingSet();
     expected.set(x, val3);
@@ -266,7 +266,7 @@ public class TestBind extends TestCase2 {
     assertEquals(iv3.getValue(), ((IV) actual.get(x).get()).getValue());
   }
 
-  /**
+  /*
    * Unit test for Constant/2 semantics. The value of the constant needs to be propagated onto the
    * named variable.
    */
@@ -284,8 +284,8 @@ public class TestBind extends TestCase2 {
     final IConstant<?> val1 = new Constant(iv1);
     final IConstant<?> val2 = new Constant(iv2);
     final IConstant<?> val3 = new Constant(iv3);
-    iv2.setValue((EmbergraphValue) lit);
-    iv3.setValue((EmbergraphValue) lit);
+    iv2.setValue(lit);
+    iv3.setValue(lit);
 
     final ListBindingSet expected = new ListBindingSet();
     expected.set(x, val3);

@@ -46,8 +46,8 @@ import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.mdi.MetadataIndex;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Basic test of compacting merge for an index partition on overflow.
+/*
+* Basic test of compacting merge for an index partition on overflow.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -64,7 +64,7 @@ public class TestMergeTask extends AbstractResourceManagerTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Test generates an {@link IndexSegment} from a (typically historical) fused view of an index
    * partition. The resulting {@link IndexSegment} is a complete replacement for the historical view
    * but does not possess any deleted index entries. Typically the {@link IndexSegment} will be used
@@ -192,8 +192,8 @@ public class TestMergeTask extends AbstractResourceManagerTestCase {
         // overflow must be disallowed as a task pre-condition.
         resourceManager.overflowAllowed.compareAndSet(true, false);
 
-        /*
-         * Submit task and await result (metadata describing the new
+      /*
+       * Submit task and await result (metadata describing the new
          * index segment).
          */
         result = concurrencyManager.submit(task).get();

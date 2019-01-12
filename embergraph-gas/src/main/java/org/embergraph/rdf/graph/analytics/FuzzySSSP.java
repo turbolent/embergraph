@@ -29,8 +29,8 @@ import org.embergraph.rdf.graph.IStaticFrontier;
 import org.embergraph.rdf.graph.analytics.FuzzySSSP.FuzzySSSPResult;
 import org.openrdf.model.Value;
 
-/**
- * This algorithm provides a fuzzy implementation of the shortest paths between a set of source
+/*
+* This algorithm provides a fuzzy implementation of the shortest paths between a set of source
  * vertices and a set of target vertices. This can be used to identify a set of vertices that are
  * close to the shortest paths between those source and target vertices. For some domains, the
  * resulting set of vertices can be understood as an "interesting subgraph".
@@ -80,14 +80,14 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
   /** The object used to access the graph. */
   private final IGraphAccessor graphAccessor;
 
-  /**
+  /*
    * Interface for communicating the results back to the caller.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public class FuzzySSSPResult {
 
-    /**
+    /*
      * The reachability map. The keys of the outer map are the source vertices. The values in the
      * inner maps are the target vertices that are reachable from a given source vertex (both the
      * key and the value of the inner map is the target vertex - it is being used as a set).
@@ -104,7 +104,7 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
       return visited.add(v);
     }
 
-    /**
+    /*
      * Assert that the target was reachable from the source.
      *
      * @param src The source.
@@ -140,7 +140,7 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
       return visited.size();
     }
 
-    /**
+    /*
      * Return <code>true</code> if the given target is reachable by the given source.
      *
      * @param src The source.
@@ -151,7 +151,7 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
       throw new UnsupportedOperationException();
     }
 
-    /**
+    /*
      * Return the set of vertices that were discovered by the analytic. This constitutes an
      * "interesting subgraph". The source and target vertices will be included in this collection.
      * Each vertex along a shortest path from a source vertex to each of the target vertices will be
@@ -170,7 +170,7 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
     }
   } // class FuzzySSSPResult
 
-  /**
+  /*
    * @param src The source vertices (there must be at least one).
    * @param tgt The target vertices (there must be at least one).
    * @param N The maximum number of vertices to report (must be positive), i.e., the stopping
@@ -278,8 +278,8 @@ public class FuzzySSSP implements Callable<FuzzySSSPResult> {
                   while (itr.hasNext()) {
                     final Value v = itr.next();
                     if (result.addVisited(v) && result.getVisitedCount() >= N) {
-                      /*
-                       * We have reached our threshold during the
+                    /*
+       * We have reached our threshold during the
                        * BFS expansion.
                        *
                        * Note: Since we are expanding in a breadth

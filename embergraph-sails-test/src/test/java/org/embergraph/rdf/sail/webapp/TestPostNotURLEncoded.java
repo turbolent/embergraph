@@ -21,8 +21,8 @@ package org.embergraph.rdf.sail.webapp;
 import java.io.IOException;
 import junit.framework.Test;
 
-/**
- * See trac 711 for discussion.
+/*
+* See trac 711 for discussion.
  *
  * @author jeremycarroll
  */

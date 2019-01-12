@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Data driven test suite for named subquery evaluation (that is, for queries which are explicitly
+/*
+* Data driven test suite for named subquery evaluation (that is, for queries which are explicitly
  * written using the named subquery syntax).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -38,7 +38,7 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * This is a version of {@link TestSubQuery#test_sparql_subselect()} which uses the same data and
    * has the same results, but which uses a named subquery rather than a SPARQL 1.1 subselect.
    *
@@ -58,8 +58,8 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("named-subquery").runTest();
   }
 
-  //    /**
-  //     * This is a variant {@link #test_named_subquery()} in which the JOIN ON
+  //    /*
+//     * This is a variant {@link #test_named_subquery()} in which the JOIN ON
   //     * query hint is used to explicitly specify NO join variables.
   //     */
   //    public void test_named_subquery_noJoinVars() throws Exception {
@@ -68,7 +68,7 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
   //
   //    }
 
-  /**
+  /*
    * Test that only projected variables are included in named-subquery results.
    *
    * <pre>
@@ -91,7 +91,7 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("named-subquery-scope").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -118,7 +118,7 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("double-optional-include").runTest();
   }
 
-  /**
+  /*
    * Unit test verifies that the BINDINGS clause is presented to the named subquery. This is done by
    * referencing the variable bound the BINDINGS clause only within the named subquery and not the
    * main where clause. Thus, if the query is to be restricted, the named subquery needs to be
@@ -144,7 +144,7 @@ public class TestNamedSubQuery extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("named-subquery-bindings").runTest();
   }
 
-  /**
+  /*
    * Unit test verifies that the named subquery is considering the exogenous variables when it's the
    * first operator in the query and choosing the appropriate join variables to build the hash
    * index. You need to enable logging to verify that the JOIN_VARS are set correctly on the include

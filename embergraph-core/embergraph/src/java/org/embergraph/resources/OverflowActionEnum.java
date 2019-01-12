@@ -1,7 +1,7 @@
 package org.embergraph.resources;
 
-/**
- * The different actions that we can take to handle an index partition during overflow processing.
+/*
+* The different actions that we can take to handle an index partition during overflow processing.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -9,12 +9,12 @@ package org.embergraph.resources;
  */
 public enum OverflowActionEnum {
 
-  /**
+  /*
    * Copy all tuples on the old journal to the new journal during synchronous overflow processing.
    */
   Copy,
 
-  /**
+  /*
    * Copy the tuples from the last commit point on the old journal into an index segment, and may
    * incorporate tuples from zero or more additional sources in the view. Builds are done both in
    * order to improve read performance and to release dependencies on older journals.
@@ -31,14 +31,14 @@ public enum OverflowActionEnum {
    */
   Build,
 
-  /**
+  /*
    * Compacting merge of the sources for the index partition into a single index segment. Compacting
    * merges are done to improve read performance and to keep index partition views from including
    * too many distinct index segment sources.
    */
   Merge,
 
-  /**
+  /*
    * Move the index partition to another data service. Note that moves may be initiated either to
    * redistribute the load more equitably among the data services in the federation or to bring the
    * left/right sibling of an index partition onto the same data service as its right/left sibling
@@ -52,17 +52,17 @@ public enum OverflowActionEnum {
   /** Split an index partition that has overflowed into 2 or more siblings. */
   Split,
 
-  /**
+  /*
    * Split the first index partition for a new scale-out index into N siblings and distribute those
    * siblings across the federation in order to improve the data distribution and improve the
    * potential concurrency of the index.
    */
   ScatterSplit,
 
-  /**
+  /*
    * Split an index partition receiving a lot of writes on the tail of the key range into 2 siblings
    * where the left-sibling has most of the key range and the right-sibling has the tail of the key
    * range.
    */
-  TailSplit;
+  TailSplit
 }

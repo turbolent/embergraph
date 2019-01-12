@@ -31,7 +31,7 @@ public class SubqueryRoot extends SubqueryBase implements IJoinNode {
       extends // SubqueryBase.Annotations,
       IJoinNode.Annotations {
 
-    /**
+    /*
      * Annotation provides a query hint indicating whether or not the subquery should be transformed
      * into a named subquery, lifting its evaluation out of the main body of the query and replacing
      * the subquery with an INCLUDE. When <code>true</code>, the subquery will be lifted out. When
@@ -44,13 +44,13 @@ public class SubqueryRoot extends SubqueryBase implements IJoinNode {
 
     boolean DEFAULT_RUN_ONCE = false;
 
-    /**
+    /*
      * Annotation used to communicate the name of the anonymous variable supporting a NOT (EXISTS)
      * graph pattern evaluation.
      */
     String ASK_VAR = "askVar";
 
-    /**
+    /*
      * Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic plans: vectored
      * sub-plan and subquery with LIMIT ONE. Each plan has its advantages.
      *
@@ -81,7 +81,7 @@ public class SubqueryRoot extends SubqueryBase implements IJoinNode {
     super(args, anns);
   }
 
-  /**
+  /*
    * Note: This constructor variant may be used with the implicit subquery for EXISTS to specify the
    * type of the subquery as {@link QueryType#ASK}.
    *
@@ -92,7 +92,7 @@ public class SubqueryRoot extends SubqueryBase implements IJoinNode {
     super(queryType);
   }
 
-  /**
+  /*
    * Indicate whether this subquery should run once rather than as-bound.
    *
    * @param runOnce
@@ -166,7 +166,7 @@ public class SubqueryRoot extends SubqueryBase implements IJoinNode {
     setProperty(Annotations.FILTERS, filters);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to also report the {@link Annotations#RUN_ONCE} annotation.

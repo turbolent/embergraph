@@ -25,8 +25,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.webapp.client.IRemoteTx;
 import org.embergraph.rdf.sail.webapp.client.RemoteTransactionManager;
 
-/**
- * Proxied test suite for testing the transaction management API. The outer class provides a test
+/*
+* Proxied test suite for testing the transaction management API. The outer class provides a test
  * suite for behaviors that are consistent without regard to whether or not isolatable indices have
  * been enabled. There are then two inner classes that provide tests where we are controlling the
  * configuration and verifying behaviors that are specific to when isolatable indices are / are not
@@ -114,7 +114,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends AbstractTestNanoS
     assertFalse(tx.isReadOnly());
   }
 
-  /**
+  /*
    * Create an unisolated transaction and commit it. This should be a NOP since nothing is written
    * on the database.
    *
@@ -163,7 +163,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(tx.isReadOnly());
   }
 
-  /**
+  /*
    * Create an read-only transaction and commit it. This should be a NOP since nothing is written on
    * the database.
    *
@@ -199,7 +199,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends AbstractTestNanoS
   //
   //   }
 
-  /**
+  /*
    * An *extension* of the test suite that uses a namespace that is NOT configured to support
    * read/write transactions. This extension is used to verify that certain operations are NOT
    * permitted when the namespace does not support isolatable indices.
@@ -230,7 +230,7 @@ public class Test_REST_TX_API<S extends IIndexManager> extends AbstractTestNanoS
     public void test_TX_STUFF() {}
   }
 
-  /**
+  /*
    * An *extension* of the test suite that uses a namespace that is configured to support read/write
    * transactions.
    *

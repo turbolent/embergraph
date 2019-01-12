@@ -29,8 +29,8 @@ import java.util.LinkedList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
-/**
- * Mutable program may be used to create a variety of rule executions.
+/*
+* Mutable program may be used to create a variety of rule executions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -51,14 +51,14 @@ public class Program implements IProgram {
 
   private final List<IStep> steps = new LinkedList<IStep>();
 
-  //    /**
-  //     * De-serialization ctor.
+  //    /*
+//     * De-serialization ctor.
   //     */
   //    public Program() {
   //
   //    }
 
-  /**
+  /*
    * An empty program.
    *
    * @param name A label for the program.
@@ -71,7 +71,7 @@ public class Program implements IProgram {
     this(name, parallel, false /* closure */, QueryOptions.NONE);
   }
 
-  /**
+  /*
    * An empty program.
    *
    * @param name A label for the program.
@@ -85,7 +85,7 @@ public class Program implements IProgram {
     this(name, parallel, false /* closure */, queryOptions);
   }
 
-  /**
+  /*
    * An empty program.
    *
    * @param name A label for the program.
@@ -100,7 +100,7 @@ public class Program implements IProgram {
     this(name, parallel, closure, QueryOptions.NONE);
   }
 
-  /**
+  /*
    * Fully specific ctor.
    *
    * @param parallel <code>true</code> iff the steps in the program are parallelizable (this does
@@ -165,7 +165,7 @@ public class Program implements IProgram {
     return steps.toArray(new IStep[stepCount()]);
   }
 
-  /**
+  /*
    * Add another step in the program.
    *
    * @param step The step.
@@ -180,7 +180,7 @@ public class Program implements IProgram {
     steps.add(step);
   }
 
-  /**
+  /*
    * Adds the steps to the program.
    *
    * @param steps The steps.
@@ -195,7 +195,7 @@ public class Program implements IProgram {
     }
   }
 
-  /**
+  /*
    * Adds a sub-program consisting of the fixed point closure of the given rules.
    *
    * @param rules The rules.
@@ -225,8 +225,8 @@ public class Program implements IProgram {
 
         if (i > 0) {
 
-          /*
-           * Note: Do NOT use a comma here - it will break the comma
+        /*
+       * Note: Do NOT use a comma here - it will break the comma
            * delimited format written by RuleStats.
            */
           sb.append(" ");
@@ -258,7 +258,7 @@ public class Program implements IProgram {
     addStep(subProgram);
   }
 
-  /**
+  /*
    * Adds a sub-program consisting of the fixed point closure of the given rule.
    *
    * @param rule The rule.

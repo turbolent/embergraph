@@ -18,7 +18,7 @@ package org.embergraph.ganglia;
 /** A factory for registering application metrics dynamically. */
 public interface IGangliaMetadataFactory {
 
-  /**
+  /*
    * Factory for new declarations.
    *
    * @param hostName The name of this host.
@@ -27,10 +27,10 @@ public interface IGangliaMetadataFactory {
    * @return The metric declaration -or- <code>null</code> if this factory does not know how to
    *     declare this metric.
    */
-  public IGangliaMetadataMessage newDecl(
+  IGangliaMetadataMessage newDecl(
       final String hostName, final String metricName, final Object value);
 
-  /**
+  /*
    * Resolve a declaration received over the wire into a declaration with a richer object behavior.
    * This allows the application to substitute its own versions of an {@link
    * IGangliaMetadataMessage}.
@@ -38,5 +38,5 @@ public interface IGangliaMetadataFactory {
    * @param decl A declaration (typically received over the wire).
    * @return The declaration to be used.
    */
-  public IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl);
+  IGangliaMetadataMessage resolve(final IGangliaMetadataMessage decl);
 }

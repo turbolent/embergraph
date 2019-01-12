@@ -45,8 +45,8 @@ import org.embergraph.sparse.GlobalRowStoreHelper;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * A temporary store that supports named indices but no concurrency controls.
+/*
+* A temporary store that supports named indices but no concurrency controls.
  *
  * <p>If you want a temporary store that supports named indices and concurrency controls then choose
  * a {@link Journal} with {@link BufferMode#Temporary}. This has the advantage of full concurrency
@@ -65,7 +65,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
 
   private static final Logger log = Logger.getLogger(TemporaryStore.class);
 
-  /**
+  /*
    * The size of the live index cache for the {@link Name2Addr} instance.
    *
    * @todo this should be a configuration property once the temporary store accepts a {@link
@@ -74,7 +74,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
    */
   private final int liveIndexCacheCapacity = 20;
 
-  /**
+  /*
    * The timeout in milliseconds for stale entries in the live index cache for the {@link Name2Addr}
    * instance.
    *
@@ -85,7 +85,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   private final long liveIndexCacheTimeout =
       Long.parseLong(Options.DEFAULT_LIVE_INDEX_CACHE_TIMEOUT);
 
-  /**
+  /*
    * BTree mapping index names to the last metadata record committed for the named index. The keys
    * are index names (unicode strings). The values are the last known address of the named btree.
    *
@@ -94,7 +94,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
    */
   private final Name2Addr name2Addr;
 
-  /**
+  /*
    * A {@link TemporaryStore} that can scale-up. The backing file will be created using the Java
    * temporary file mechanism.
    *
@@ -106,7 +106,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
     this(WormAddressManager.SCALE_UP_OFFSET_BITS);
   }
 
-  /**
+  /*
    * A {@link TemporaryStore} provisioned with the specified <i>offsetBits</i>. The backing file
    * will be created using the Java temporary file mechanism.
    *
@@ -118,7 +118,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
     this(offsetBits, getTempFile());
   }
 
-  /**
+  /*
    * A {@link TemporaryStore} provisioned with the specified <i>offsetBits</i> and backed by the
    * specified file.
    *
@@ -145,8 +145,8 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
             );
   }
 
-  //    /**
-  //     * Setup the btree that resolved named btrees.
+  //    /*
+//     * Setup the btree that resolved named btrees.
   //     */
   //    private void setupName2AddrBTree() {
   //
@@ -158,15 +158,15 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   //
   //    }
 
-  //    /**
-  //     * The address of the last checkpoint written. When ZERO(0L) no checkpoint
+  //    /*
+//     * The address of the last checkpoint written. When ZERO(0L) no checkpoint
   //     * has been written and {@link #name2Addr} is simple discarded on
   //     * {@link #abort()}.
   //     */
   //    private long lastCheckpointAddr = 0L;
   //
-  //    /**
-  //     * Reverts to the last checkpoint, if any. If there is no last checkpoint,
+  //    /*
+//     * Reverts to the last checkpoint, if any. If there is no last checkpoint,
   //     * then the post-condition is as if the store had never been written on
   //     * (except that the storage on the backing file is not reclaimed).
   //     */
@@ -176,8 +176,8 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   //
   //    }
   //
-  //    /**
-  //     * Reverts to the checkpoint associated with the given <i>checkpointAddr</i>.
+  //    /*
+//     * Reverts to the checkpoint associated with the given <i>checkpointAddr</i>.
   //     * When ZERO(0L), the post-condition is as if the store had never been
   //     * written on (except that the storage on the backing file is not
   //     * reclaimed). The <i>checkpointAddr</i> is noted as the current
@@ -205,8 +205,8 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
   //
   //    }
   //
-  //    /**
-  //     * Checkpoints the dirty indices and notes the new
+  //    /*
+//     * Checkpoints the dirty indices and notes the new
   //     * {@link #restoreLastCheckpoint()} point. You can revert to the last
   //     * written checkpoint using {@link #restoreLastCheckpoint()} or to an
   //     * arbitrary checkpoint using {@link #restoreCheckpoint(long)}.
@@ -244,7 +244,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
     return (BTree) register(name, metadata);
   }
 
-  /**
+  /*
    * Variant method creates and registered a named persistence capable data structure but does not
    * assume that the data structure will be a {@link BTree}.
    *
@@ -271,7 +271,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
     return btree;
   }
 
-  /**
+  /*
    * Register a named persistence capable data structure (core impl).
    *
    * @param name The name.
@@ -325,8 +325,8 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
     }
   }
 
-  //    /**
-  //     * Return an {@link ITx#UNISOLATED} view of the named index -or-
+  //    /*
+//     * Return an {@link ITx#UNISOLATED} view of the named index -or-
   //     * <code>null</code> if there is no registered index by that name.
   //     */
   @Override
@@ -335,8 +335,8 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
     return (BTree) getUnisolatedIndex(name);
   }
 
-  //    /**
-  //     * Return an {@link ITx#UNISOLATED} view of the named index -or-
+  //    /*
+//     * Return an {@link ITx#UNISOLATED} view of the named index -or-
   //     * <code>null</code> if there is no registered index by that name.
   //     */
   //    public HTree getHTree(final String name) {
@@ -351,7 +351,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
     return (BTree) getIndexLocal(name, timestamp);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: Requests for historical reads or read-only tx views will result return the {@link
@@ -414,7 +414,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
       return getUnisolatedIndex(name);
     }
 
-    /**
+    /*
      * FIXME The RWStore uses a read-only transaction to protect against recycling of the B+Tree
      * revisions associated with the commit point on which it is reading. The temporary store only
      * supports unisolated reads, so this is just ignoring the tx specified by the mutation rule for
@@ -507,7 +507,7 @@ public class TemporaryStore extends TemporaryRawStore implements IBTreeManager {
     super.close();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation always returns ZERO (0L) since you can not perform a commit on a {@link

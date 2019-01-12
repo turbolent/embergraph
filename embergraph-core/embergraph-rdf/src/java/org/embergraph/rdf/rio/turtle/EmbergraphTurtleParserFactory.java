@@ -11,8 +11,8 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.turtle.TurtleParser;
 
-/**
- * An RDR-aware {@link RDFParserFactory} for Turtle parsers.
+/*
+* An RDR-aware {@link RDFParserFactory} for Turtle parsers.
  *
  * @author Arjohn Kampman
  * @openrdf
@@ -20,7 +20,7 @@ import org.openrdf.rio.turtle.TurtleParser;
  */
 public class EmbergraphTurtleParserFactory implements RDFParserFactory {
 
-  /**
+  /*
    * Returns {@link ServiceProviderHook#TURTLE_RDR}.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/1038" >RDR RDF parsers not always discovered

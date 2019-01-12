@@ -25,8 +25,8 @@ import java.io.File;
 import java.util.Properties;
 import junit.framework.TestCase;
 
-/**
- * Abstract harness for testing under a variety of configurations. In order to test a specific
+/*
+* Abstract harness for testing under a variety of configurations. In order to test a specific
  * configuration, create a concrete instance of this class. The configuration can be described using
  * a mixture of a <code>.properties</code> file of the same name as the test class and custom code.
  *
@@ -84,8 +84,8 @@ public abstract class AbstractJournalTestCase extends AbstractIndexManagerTestCa
   //
   //    }
 
-  //    /**
-  //     * Note: your unit must close the store for delete to work.
+  //    /*
+//     * Note: your unit must close the store for delete to work.
   //     */
   //    protected void deleteTestFile() {
   //
@@ -131,7 +131,7 @@ public abstract class AbstractJournalTestCase extends AbstractIndexManagerTestCa
 
   private Properties m_properties;
 
-  /**
+  /*
    * Returns properties read from a hierarchy of sources. The underlying properties read from those
    * sources are cached, but a new properties object is returned on each invocation (to prevent side
    * effects by the caller).
@@ -178,7 +178,7 @@ public abstract class AbstractJournalTestCase extends AbstractIndexManagerTestCa
     return new Journal(properties);
   }
 
-  /**
+  /*
    * Re-open the same backing store.
    *
    * @param store the existing store.

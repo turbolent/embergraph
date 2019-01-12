@@ -42,8 +42,8 @@ import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.rwstore.sector.MemoryManager;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
-/**
- * A scalable DISTINCT operator based for {@link SPO}s.
+/*
+* A scalable DISTINCT operator based for {@link SPO}s.
  *
  * <p>Note: While highly scalable, this class will absorb a minimum of one direct buffer per use.
  * This is because we do not have access to the memory manager of the {@link IRunningQuery} on which
@@ -79,14 +79,14 @@ public class NativeDistinctFilter extends BOpFilterBase {
           BTreeAnnotations,
           HashMapAnnotations {
 
-    /**
+    /*
      * Overrides the default initial capacity to be relatively large. Up to this many entries will
      * be permitted. Once the map reaches that threshold, the entries will be flushed through to the
      * backing index in order to vector updates against that index.
      */
     int DEFAULT_INITIAL_CAPACITY = 10000;
 
-    /**
+    /*
      * The default maximum length of an inlined {@link IV} before it is coverted into a raw record
      * reference. Encoded {@link IV}s tend to be relatively small so we are generally better off
      * inlining them into the bucket page of the {@link HTree}.
@@ -97,7 +97,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
     String KEY_ORDER = "keyOrder";
   }
 
-  /**
+  /*
    * A instance using the default configuration for the in memory hash map.
    *
    * @param indexKeyOrder The natural order in which the {@link ISPO}s will arrive at this filter.
@@ -107,7 +107,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
   public static NativeDistinctFilter newInstance(final SPOKeyOrder indexKeyOrder) {
 
     return new NativeDistinctFilter(
-        BOp.NOARGS, Collections.singletonMap(Annotations.KEY_ORDER, (Object) indexKeyOrder));
+        BOp.NOARGS, Collections.singletonMap(Annotations.KEY_ORDER, indexKeyOrder));
   }
 
   /** Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}. */
@@ -131,7 +131,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
     return new Filterator(src, context, new DistinctFilterImpl(this));
   }
 
-  /**
+  /*
    * Return the 3-component key order which has the best locality given that the SPOs will be
    * arriving in the natural order of the <i>indexKeyOrder</i>. This is the keyOrder that we will
    * use for the filter. This gives the filter index structure the best possible locality in terms
@@ -212,7 +212,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
     return filterKeyOrder;
   }
 
-  /**
+  /*
    * A {@link Filter} which passes only the DISTINCT {@link ISPO}s and is backed by a scalable data
    * structure (BTree or HTree).
    *
@@ -234,14 +234,14 @@ public class NativeDistinctFilter extends BOpFilterBase {
     /** The object used to format the keys for the index. */
     private final IKeyBuilder keyBuilder;
 
-    /**
+    /*
      * The key order used to build the triples mode keys for the DISTINCT SPO filter.
      *
      * @see NativeDistinctFilter#getFilterKeyOrder(SPOKeyOrder)
      */
     private final int[] filterKeyOrder;
 
-    /**
+    /*
      * A persistence capable index for very large data sets. This is allocated IFF the {@link #lru}
      * overflows at least once.
      *
@@ -252,7 +252,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
     /** <code>true</code> until {@link #close() closed}. */
     private final AtomicBoolean open = new AtomicBoolean(true);
 
-    /**
+    /*
      * When <code>true</code>, the {@link BTree} will be used. When <code>false</code> the {@link
      * HTree}.
      *
@@ -271,7 +271,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
       super.finalize();
     }
 
-    /**
+    /*
      * Release resources associated with the filter.
      *
      * <p>Note: This is done automatically by {@link #finalize()}, but it should be done
@@ -283,8 +283,8 @@ public class NativeDistinctFilter extends BOpFilterBase {
     @Override
     public void close() {
       if (open.compareAndSet(true /* expect */, false /* update */)) {
-        /*
-         * Close when first invoked.
+      /*
+       * Close when first invoked.
          */
         if (index != null) {
           index.close();
@@ -321,7 +321,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
       return defaultValue;
     }
 
-    /**
+    /*
      * DISTINCT {@link ISPO} filter based on persistence capable data structures.
      *
      * @param properties Used to configure the DISTINCT filter.
@@ -348,7 +348,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
        */
       {
         final SPOKeyOrder indexKeyOrder =
-            (SPOKeyOrder) getRequiredProperty(properties, Annotations.KEY_ORDER);
+            getRequiredProperty(properties, Annotations.KEY_ORDER);
 
         filterKeyOrder = getFilterKeyOrder(indexKeyOrder);
 
@@ -474,7 +474,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
       return add(spo);
     }
 
-    /**
+    /*
      * Add the {@link SPO} to the collection. This has the same semantics as {@link
      * Set#add(Object)}. The "collection" has two layers. A JVM {@link LinkedHashMap}, which
      * provides fast tests for recently observed objects, and a persistence capable index, which
@@ -535,7 +535,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
       return true;
     }
 
-    /**
+    /*
      * Add to {@link BTree}.
      *
      * @param members
@@ -554,7 +554,7 @@ public class NativeDistinctFilter extends BOpFilterBase {
       return true;
     }
 
-    /**
+    /*
      * Add to {@link HTree}.
      *
      * @param members

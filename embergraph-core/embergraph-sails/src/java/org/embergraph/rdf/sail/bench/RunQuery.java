@@ -18,8 +18,8 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.sail.SailTupleQuery;
 
-/**
- * Open a journal and run a query against it - pretty much the only reason to use this class is if
+/*
+* Open a journal and run a query against it - pretty much the only reason to use this class is if
  * you want to run the query under a debugger against a local {@link Journal}
  *
  * @author thompsonbry
@@ -35,7 +35,7 @@ public class RunQuery {
     System.exit(1);
   }
 
-  /**
+  /*
    * Read a query from a file or stdin and run it against a journal. Use
    *
    * <pre>
@@ -137,7 +137,7 @@ public class RunQuery {
       try {
 
         final EmbergraphSailRepositoryConnection cxn =
-            (EmbergraphSailRepositoryConnection) repository.getReadOnlyConnection();
+            repository.getReadOnlyConnection();
 
         try {
 
@@ -184,7 +184,7 @@ public class RunQuery {
     }
   }
 
-  /**
+  /*
    * Read the contents of a file.
    *
    * <p>Note: This makes default platform assumptions about the encoding of the file.
@@ -217,7 +217,7 @@ public class RunQuery {
     }
   }
 
-  /**
+  /*
    * Read from stdin.
    *
    * <p>Note: This makes default platform assumptions about the encoding of the data being read.

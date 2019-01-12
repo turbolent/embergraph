@@ -177,8 +177,8 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.rio.rdfxml.RDFXMLParser;
 
-/**
- * Abstract base class that implements logic for the {@link ITripleStore} interface that is
+/*
+* Abstract base class that implements logic for the {@link ITripleStore} interface that is
  * invariant across the choice of the backing store.
  *
  * <p>By default, this class supports RDFS inference plus optional support for <code>owl:sameAs
@@ -202,8 +202,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
    * not sure what effect this would have.  You can always force registration
    * of the embedded services using "ServiceRegistry.getInstance()".
    */
-  //    /**
-  //     * Make sure that any services are registered.
+  //    /*
+//     * Make sure that any services are registered.
   //     */
   //    static {
   //
@@ -211,13 +211,13 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   //
   //    }
 
-  /**
+  /*
    * This is used to conditionally enable the logic to retract justifications when the corresponding
    * statements is retracted.
    */
   private final boolean justify;
 
-  /**
+  /*
    * True iff justification chains are being recorded for entailments and used to support truth
    * maintenance.
    *
@@ -230,13 +230,13 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return justify;
   }
 
-  /**
+  /*
    * This is used to conditionally disable the lexicon support, principally in conjunction with a
    * {@link TempTripleStore}.
    */
   protected final boolean lexicon;
 
-  /**
+  /*
    * The #of internal values in the key for a statement index (3 is a triple store, 4 is a quad
    * store).
    *
@@ -247,7 +247,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   /** <code>true</code> iff this is a quad store. */
   private final boolean quads;
 
-  /**
+  /*
    * Indicate whether this is a triple or a quad store (3 is a triple store, 4 is a quad store).
    *
    * @return The #of elements in the key for the {@link SPORelation} (3 or 4).
@@ -257,7 +257,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return spoKeyArity;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff this is a quad store.
    *
    * @see Options#QUADS
@@ -268,7 +268,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return quads;
   }
 
-  /**
+  /*
    * When <code>true</code> the database will support statement identifiers. A statement identifier
    * is a unique 64-bit integer taken from the same space as the term identifiers and which uniquely
    * identifiers a statement in the database regardless of the graph in which that statement
@@ -284,21 +284,21 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
   private final boolean statementIdentifiers;
 
-  /**
+  /*
    * The {@link Axioms} class.
    *
    * @see org.embergraph.rdf.store.AbstractTripleStore.Options#AXIOMS_CLASS
    */
   private final Class<? extends BaseAxioms> axiomClass;
 
-  /**
+  /*
    * The {@link Vocabulary} class.
    *
    * @see Options#VOCABULARY_CLASS
    */
   private final Class<? extends BaseVocabulary> vocabularyClass;
 
-  /**
+  /*
    * The {@link BaseClosure} class.
    *
    * @see Options#CLOSURE_CLASS
@@ -314,7 +314,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   /** @see Options#COMPUTE_CLOSURE_FOR_SIDS */
   private final boolean computeClosureForSids;
 
-  /**
+  /*
    * The {@link RDRHistory} class.
    *
    * @see Options#RDR_HISTORY_CLASS
@@ -327,7 +327,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     try {
 
       final Constructor<? extends BaseClosure> ctor =
-          closureClass.getConstructor(new Class[] {AbstractTripleStore.class});
+          closureClass.getConstructor(AbstractTripleStore.class);
 
       return ctor.newInstance(this);
 
@@ -347,7 +347,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     try {
 
       final Constructor<? extends RDRHistory> ctor =
-          rdrHistoryClass.getConstructor(new Class[] {AbstractTripleStore.class});
+          rdrHistoryClass.getConstructor(AbstractTripleStore.class);
 
       return ctor.newInstance(this);
 
@@ -363,7 +363,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return rdrHistoryClass != null;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the fully bound statement is an axiom.
    *
    * @param s The internal value ({@link IV}) for the subject position.
@@ -375,7 +375,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return getAxioms().isAxiom(s, p, o);
   }
 
-  /**
+  /*
    * When <code>true</code> the database will support statement identifiers.
    *
    * <p>A statement identifier is a unique 64-bit integer taken from the same space as the term
@@ -393,7 +393,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return statementIdentifiers;
   }
 
-  /**
+  /*
    * Returns <code>true</code> when the database is in inline terms mode. In this mode, certain
    * types of terms (numerics in particular) are inlined into the statement indices rather than
    * being mapped to and from term identifiers in the lexicon.
@@ -415,7 +415,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return bottomUpEvaluation;
   }
 
-  /**
+  /*
    * The {@link EmbergraphValueFactoryImpl} for namespace of the {@link LexiconRelation} associated
    * with this {@link AbstractTripleStore}.
    *
@@ -444,24 +444,18 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
   private volatile EmbergraphValueFactory valueFactory;
 
-  /*
-   * IDatabase, ILocatableResource
-   */
-
   public Iterator<IRelation> relations() {
-
-    return Collections.unmodifiableList(
-            Arrays.asList(new IRelation[] {getSPORelation(), getLexiconRelation()}))
-        .iterator();
+    List<IRelation> relations = Arrays.asList(getSPORelation(), getLexiconRelation());
+    return Collections.unmodifiableList(relations).iterator();
   }
 
-  /**
+  /*
    * Configuration options.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options
+  public interface Options
       extends AbstractResource.Options,
           InferenceEngine.Options,
           org.embergraph.journal.Options,
@@ -470,7 +464,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           FullTextIndex.Options,
           GeoSpatialConfigOptions.Options {
 
-    /**
+    /*
      * Boolean option (default <code>true</code>) enables support for the lexicon (the forward and
      * backward term indices). When <code>false</code>, the lexicon indices are not registered. This
      * can be safely turned off for the {@link TempTripleStore} when only the statement indices are
@@ -498,7 +492,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_LEXICON = "true";
 
-    /**
+    /*
      * Boolean option (default {@value #DEFAULT_STORE_BLANK_NODES}) controls whether or not we store
      * blank nodes in the forward mapping of the lexicon (this is also known as the "told bnodes"
      * mode).
@@ -519,7 +513,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_STORE_BLANK_NODES = "false";
 
-    /**
+    /*
      * Option effects how evenly distributed the assigned term identifiers which has a pronounced
      * effect on the ID2TERM and statement indices for <em>scale-out deployments</em>. The default
      * for a scale-out deployment is {@value #DEFAULT_TERMID_BITS_TO_REVERSE}. This option is
@@ -568,7 +562,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_TERMID_BITS_TO_REVERSE = "6";
 
-    /**
+    /*
      * Integer option whose value is the capacity of the term cache. This cache provides fast lookup
      * of frequently used RDF {@link Value}s by their term identifier.
      */
@@ -576,7 +570,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_TERM_CACHE_CAPACITY = "10000"; // "50000";
 
-    /**
+    /*
      * The name of the class that will establish the pre-defined {@link Vocabulary} for the database
      * (default {@value #DEFAULT_VOCABULARY_CLASS}). The class MUST extend {@link BaseVocabulary}.
      * This option is ignored if the lexicon is disabled.
@@ -603,7 +597,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      */
     String VOCABULARY_CLASS = AbstractTripleStore.class.getName() + ".vocabularyClass";
 
-    /**
+    /*
      * Note: The default {@link Vocabulary} class may be changed from time to time as additional
      * {@link VocabularyDecl} are created and bundled into a new default {@link Vocabulary}.
      * However, a deployed concrete instance of the default {@link Vocabulary} class MUST NOT be
@@ -612,7 +606,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      */
     String DEFAULT_VOCABULARY_CLASS = EmbergraphCoreVocabulary_v20160317.class.getName();
 
-    /**
+    /*
      * The {@link Axioms} model that will be used (default {@value Options#DEFAULT_AXIOMS_CLASS}).
      * The value is the name of the class that will be instantiated by {@link
      * AbstractTripleStore#create()}. The class must extend {@link BaseAxioms}. This option is
@@ -622,7 +616,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_AXIOMS_CLASS = OwlAxioms.class.getName();
 
-    /**
+    /*
      * The name of the {@link BaseClosure} class that will be used (default {@value
      * Options#DEFAULT_CLOSURE_CLASS}). The value is the name of the class that will be used to
      * generate the {@link Program} that computes the closure of the database. The class must extend
@@ -648,7 +642,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_CLOSURE_CLASS = FastClosure.class.getName();
 
-    /**
+    /*
      * Boolean option (default <code>false</code>) disables all but a single statement index (aka
      * access path).
      *
@@ -666,7 +660,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_ONE_ACCESS_PATH = "false";
 
-    /**
+    /*
      * Optional property controls whether or not a bloom filter is maintained for the SPO statement
      * index. The bloom filter is effective up to ~ 2M entries per index (partition). For scale-up,
      * the bloom filter is automatically disabled after its error rate would be too large given the
@@ -695,7 +689,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_BLOOM_FILTER = "true";
 
-    /**
+    /*
      * When <code>true</code> (default {@value Options#DEFAULT_JUSTIFY}), proof chains for
      * entailments generated by forward chaining are stored in the database. This option is required
      * for truth maintenance when retracting assertion.
@@ -711,7 +705,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_JUSTIFY = "true";
 
-    /**
+    /*
      * Boolean option (default {@value #DEFAULT_STATEMENT_IDENTIFIERS}) enables support for
      * statement identifiers. A statement identifier is unique identifier for a <em>triple</em> in
      * the database. Statement identifiers may be used to make statements about statements without
@@ -752,7 +746,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_STATEMENT_IDENTIFIERS = "false";
 
-    /**
+    /*
      * Boolean option determines whether the KB instance will be a quad store or a triple store. For
      * a triple store only, the {@link #STATEMENT_IDENTIFIERS} option determines whether or not the
      * provenance mode is enabled.
@@ -761,7 +755,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_QUADS = "false";
 
-    /**
+    /*
      * Set up database in triples mode, no provenance. This is equivalent to setting the following
      * options:
      *
@@ -776,7 +770,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_TRIPLES_MODE = "false";
 
-    /**
+    /*
      * Set up database in triples mode with provenance. This is equivalent to setting the following
      * options:
      *
@@ -792,7 +786,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_TRIPLES_MODE_WITH_PROVENANCE = "false";
 
-    /**
+    /*
      * Set up database in quads mode. Quads mode means no provenance, no inference. This is
      * equivalent to setting the following options:
      *
@@ -809,7 +803,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_QUADS_MODE = "false";
 
-    /**
+    /*
      * The name of the {@link EmbergraphValueFactory} class. The implementation MUST declare a
      * method with the following signature which will be used as a canonicalizing factory for the
      * instances of that class.
@@ -828,7 +822,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      * Full text index options.
      */
 
-    /**
+    /*
      * Boolean option (default {@value #DEFAULT_TEXT_INDEX}) enables support for a full text index
      * that may be used to lookup literals by tokens found in the text of those literals.
      *
@@ -841,7 +835,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_TEXT_INDEX = "true";
 
-    /**
+    /*
      * Boolean option (default <code>true</code>) enables support for a full text index that may be
      * used to lookup literals by tokens found in the text of those literals.
      *
@@ -857,7 +851,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     @Deprecated String DEFAULT_SUBJECT_CENTRIC_TEXT_INDEX = "false";
 
-    /**
+    /*
      * Boolean option enables support for a full text index that may be used to lookup datatype
      * literals by tokens found in the text of those literals (default {@value
      * #DEFAULT_TEXT_INDEX_DATATYPE_LITERALS}). Enabling of this option will cause ALL datatype
@@ -872,7 +866,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_TEXT_INDEX_DATATYPE_LITERALS = "true";
 
-    /**
+    /*
      * List of datatypes, which will be put into full text index even if {@link
      * #TEXT_INDEX_DATATYPE_LITERALS} is not enabled (default {@value
      * #DEFAULT_DATATYPES_TO_TEXT_INDEX}).
@@ -881,7 +875,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_DATATYPES_TO_TEXT_INDEX = "";
 
-    /**
+    /*
      * The name of the {@link IValueCentricTextIndexer} class. The implementation MUST declare a
      * method with the following signature which will be used to locate instances of that class.
      *
@@ -897,7 +891,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_TEXT_INDEXER_CLASS = EmbergraphValueCentricFullTextIndex.class.getName();
 
-    /**
+    /*
      * The name of the {@link ITextIndexer} class. The implementation MUST declare a method with the
      * following signature which will be used to locate instances of that class.
      *
@@ -919,7 +913,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      * Inlining options.
      */
 
-    /**
+    /*
      * The threshold (in character length) at which an RDF {@link Value} will be inserted into the
      * {@link LexiconKeyOrder#BLOBS} index rather than the {@link LexiconKeyOrder#TERM2ID} and
      * {@link LexiconKeyOrder#ID2TERM} indices (default {@value #DEFAULT_BLOBS_THRESHOLD}).
@@ -946,7 +940,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_BLOBS_THRESHOLD = "256";
 
-    /**
+    /*
      * The constant that may be used to disable the BLOBS index.
      *
      * @see #BLOBS_THRESHOLD
@@ -955,7 +949,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      */
     String BLOBS_THRESHOLD_DISABLE = Integer.toString(Integer.MAX_VALUE);
 
-    /**
+    /*
      * Set up database to inline XSD datatype literals corresponding to primitives (boolean) and
      * numerics (byte, short, int, etc) directly into the statement indices (default {@value
      * #DEFAULT_INLINE_XSD_DATATYPE_LITERALS}).
@@ -971,7 +965,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_INLINE_XSD_DATATYPE_LITERALS = "true";
 
-    /**
+    /*
      * Inline ANY literal having fewer than {@link #MAX_INLINE_TEXT_LENGTH} characters (default
      * {@value #DEFAULT_INLINE_TEXT_LITERALS}).
      *
@@ -991,7 +985,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_INLINE_TEXT_LITERALS = "false";
 
-    /**
+    /*
      * The maximum length of a String value which may be inlined into the statement indices (default
      * {@value #DEFAULT_MAX_INLINE_STRING_LENGTH} ). Depending on the configuration, this may
      * applies to literal label (and datatypeURI or language code), URI local names, full URIs,
@@ -1008,7 +1002,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      */
     String MAX_INLINE_TEXT_LENGTH = AbstractTripleStore.class.getName() + ".maxInlineTextLength";
 
-    /**
+    /*
      * Note that there an interaction when this is enabled with the full text indexer. When we
      * inline a non-datatype literal then the literal is ALSO inlined into the full text index as
      * well for each keyword in that literal. That can produce quite a bit of duplication. Therefore
@@ -1017,7 +1011,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      */
     String DEFAULT_MAX_INLINE_STRING_LENGTH = "0";
 
-    /**
+    /*
      * Set up database to inline bnodes directly into the statement indices rather than using the
      * lexicon to map them to term identifiers and back. This is only compatible with told bnodes
      * mode.
@@ -1028,7 +1022,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_INLINE_BNODES = "true";
 
-    /**
+    /*
      * Set up database to inline date/times directly into the statement indices rather than using
      * the lexicon to map them to term identifiers and back (default {@value
      * #DEFAULT_INLINE_DATE_TIMES}). Date times will be converted to UTC, then stored as
@@ -1043,7 +1037,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_INLINE_DATE_TIMES = "true";
 
-    /**
+    /*
      * The default time zone to be used to a) encode inline xsd:datetime literals that do not have a
      * time zone specified and b) decode xsd:datetime literals from the statement indices where they
      * are stored as UTC milliseconds since the epoch (default {@value
@@ -1059,7 +1053,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         //        	TimeZone.getDefault().getID();
         "GMT";
 
-    /**
+    /*
      * The name of the {@link IExtensionFactory} class. The implementation MUST declare a
      * constructor that accepts an {@link IDatatypeURIResolver} as its only argument. The {@link
      * IExtension}s constructed by the factory need a resolver to resolve datatype URIs to term
@@ -1071,7 +1065,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
     String DEFAULT_EXTENSION_FACTORY_CLASS = DefaultExtensionFactory.class.getName();
 
-    /**
+    /*
      * When <code>true</code> AND {@value #INLINE_XSD_DATATYPE_LITERALS} is <code>true</code>,
      * literals having an xsd datatype URI which can not be validated against that datatype will be
      * rejected (default {@link #DEFAULT_REJECT_INVALID_XSD_VALUES}). For example, when <code>true
@@ -1088,7 +1082,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      * Options for shard split behavior.
      */
 
-    /**
+    /*
      * Boolean option determines whether or not an {@link XXXCShardSplitHandler} is applied
      * (scale-out only, default {@value #DEFAULT_CONSTRAIN_XXXC_SHARDS}).
      *
@@ -1112,36 +1106,36 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      * History Service.
      */
 
-    /**
+    /*
      * When <code>true</code> a HISTORY SERVICE and its associated index will be maintained.
      *
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">HISTORY SERVICE </a>
      */
-    public static String HISTORY_SERVICE = AbstractTripleStore.class.getName() + ".historyService";
+    String HISTORY_SERVICE = AbstractTripleStore.class.getName() + ".historyService";
 
-    public static String DEFAULT_HISTORY_SERVICE = "false";
+    String DEFAULT_HISTORY_SERVICE = "false";
 
-    /**
+    /*
      * The minimum amount of history (in milliseconds) that will be retained by the {@link
      * #HISTORY_SERVICE} (default {@value #DEFAULT_HISTORY_SERVICE_MIN_RELEASE_AGE}). The head of
      * the index will be pruned during update to remove tuples associated with older commit points.
      */
-    public static String HISTORY_SERVICE_MIN_RELEASE_AGE =
+    String HISTORY_SERVICE_MIN_RELEASE_AGE =
         AbstractTripleStore.class.getName() + ".historyService.minReleaseAge";
 
-    public static String DEFAULT_HISTORY_SERVICE_MIN_RELEASE_AGE = Long.toString(Long.MAX_VALUE);
+    String DEFAULT_HISTORY_SERVICE_MIN_RELEASE_AGE = Long.toString(Long.MAX_VALUE);
 
-    /**
+    /*
      * If this option is set to false, turn off the ASTBottomUpOptimizer.
      *
      * @see {@link ASTBottomUpOptimizer}
      */
-    public static String BOTTOM_UP_EVALUATION =
+    String BOTTOM_UP_EVALUATION =
         AbstractTripleStore.class.getName() + ".bottomUpEvaluation";
 
-    public static String DEFAULT_BOTTOM_UP_EVALUATION = "true";
+    String DEFAULT_BOTTOM_UP_EVALUATION = "true";
 
-    /**
+    /*
      * The name of the {@link IInlineURIFactory} class.
      *
      * @see #DEFAULT_EXTENSION_FACTORY_CLASS
@@ -1154,19 +1148,19 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     String RDR_HISTORY_CLASS = AbstractTripleStore.class.getName() + ".rdrHistoryClass";
 
     /** If this option is set to false, do not compute closure for sids. */
-    public static String COMPUTE_CLOSURE_FOR_SIDS =
+    String COMPUTE_CLOSURE_FOR_SIDS =
         AbstractTripleStore.class.getName() + ".computeClosureForSids";
 
-    public static String DEFAULT_COMPUTE_CLOSURE_FOR_SIDS = "true";
+    String DEFAULT_COMPUTE_CLOSURE_FOR_SIDS = "true";
 
-    /**
+    /*
      * If this option is set to false, turn off using raw records to store the lexical forms of the
      * RDF Values.
      */
-    public static String ENABLE_RAW_RECORDS_SUPPORT =
+    String ENABLE_RAW_RECORDS_SUPPORT =
         AbstractTripleStore.class.getName() + ".enableRawRecordsSupport";
 
-    public static String DEFAULT_ENABLE_RAW_RECORDS_SUPPORT = "true";
+    String DEFAULT_ENABLE_RAW_RECORDS_SUPPORT = "true";
   }
 
   protected Class determineAxiomClass() {
@@ -1227,7 +1221,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     }
   }
 
-  /**
+  /*
    * Ctor specified by {@link DefaultResourceLocator}.
    *
    * @see Options
@@ -1326,8 +1320,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       } else {
 
-        /*
-         * no axioms if no lexicon (the lexicon is required to write the
+      /*
+       * no axioms if no lexicon (the lexicon is required to write the
          * axioms).
          */
 
@@ -1422,7 +1416,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     addNamespace(XMLSchema.NAMESPACE, "xsd");
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the store is safe for concurrent readers and writers. This
    * property depends on primarily on the concurrency control mechanisms (if any) that are used to
    * prevent concurrent access to an unisolated index while a thread is writing on that index.
@@ -1453,7 +1447,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
    */
   public abstract boolean isConcurrent();
 
-  /**
+  /*
    * <strong>DO NOT INVOKE FROM APPLICATION CODE</strong> - this method deletes the KB instance and
    * destroys the backing database instance. It is used to help tear down unit tests.
    */
@@ -1482,7 +1476,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
   private boolean open = true;
 
-  /**
+  /*
    * True iff the backing store is stable (exists on disk somewhere and may be closed and
    * re-opened).
    *
@@ -1516,8 +1510,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       if (Boolean.valueOf(tmp.getProperty(Options.TEXT_INDEX, Options.DEFAULT_TEXT_INDEX))) {
 
-        /*
-         * If the text index is enabled for a new kb instance, then disable
+      /*
+       * If the text index is enabled for a new kb instance, then disable
          * the fieldId component of the full text index key since it is not
          * used by the RDF database and will just waste space in the index.
          *
@@ -1526,7 +1520,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         tmp.setProperty(FullTextIndex.Options.FIELDS_ENABLED, "false");
       }
 
-      /**
+      /*
        * We must not write the properties onto the global row store until they have been fully
        * initialized.
        *
@@ -1542,8 +1536,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       if (lexicon) {
 
-        /*
-         * Setup the vocabulary.
+      /*
+       * Setup the vocabulary.
          */
         {
           assert vocabRef.get() == null;
@@ -1551,10 +1545,10 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           try {
 
             final Constructor<? extends BaseVocabulary> ctor =
-                vocabularyClass.getConstructor(new Class[] {String.class});
+                vocabularyClass.getConstructor(String.class);
 
             // save reference.
-            vocabRef.set(ctor.newInstance(new Object[] {LEXICON_NAMESPACE}));
+            vocabRef.set(ctor.newInstance(LEXICON_NAMESPACE));
 
           } catch (Exception ex) {
 
@@ -1565,8 +1559,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           ((BaseVocabulary) vocabRef.get()).init();
         }
 
-        /*
-         * For performance reasons, we also store the geospatial configuration
+      /*
+       * For performance reasons, we also store the geospatial configuration
          * in the global row store, in case geospatial is enabled.
          */
         {
@@ -1594,8 +1588,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
             // initialized geospatial configuration if geospatial is enabled
             if (geoSpatial) {
 
-              /**
-               * We have configuration strings of the form -
+            /*
+       * We have configuration strings of the form -
                * [AbstractTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG].0 = ... -
                * [AbstractTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG].1 = ... -
                * [AbstractTripleStore.Options.GEO_SPATIAL_DATATYPE_CONFIG].2 = ... ...
@@ -1674,8 +1668,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
        */
       if (lexicon) {
 
-        /*
-         * Setup the axiom model.
+      /*
+       * Setup the axiom model.
          */
         {
           assert axioms == null;
@@ -1683,10 +1677,10 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           try {
 
             final Constructor<? extends BaseAxioms> ctor =
-                axiomClass.getConstructor(new Class[] {String.class});
+                axiomClass.getConstructor(String.class);
 
             // save reference.
-            axioms = ctor.newInstance(new Object[] {LEXICON_NAMESPACE});
+            axioms = ctor.newInstance(LEXICON_NAMESPACE);
 
           } catch (Exception ex) {
 
@@ -1698,7 +1692,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         }
       }
 
-      /**
+      /*
        * Write on the global row store. We atomically set all properties, including the axioms and
        * the vocabulary objects.
        *
@@ -1707,8 +1701,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
        */
       {
 
-        /*
-         * Convert the Properties to a Map.
+      /*
+       * Convert the Properties to a Map.
          */
         final Map<String, Object> map = GlobalRowStoreUtil.convert(tmp);
 
@@ -1733,8 +1727,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           // setProperty(TripleStoreSchema.GEO_SPATIAL_CONFIG,geoSpatoalConfig)
         }
 
-        /*
-         * Note: This will now be false automatically since the [map] is
+      /*
+       * Note: This will now be false automatically since the [map] is
          * based on the Properties object [tmp] and we have already set
          * this property to [false] in tmp.
          */
@@ -1755,8 +1749,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           log.debug("Properties after write: " + afterMap);
         }
 
-        /*
-         * Note: A commit is required in order for a read-committed view
+      /*
+       * Note: A commit is required in order for a read-committed view
          * to have access to the registered indices.
          *
          * @todo have the caller do this? It does not really belong here
@@ -1766,8 +1760,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
         commit();
 
-        /*
-         * Add this instance to the locator cache, but NOT before we
+      /*
+       * Add this instance to the locator cache, but NOT before we
          * have committed the changes to the global row store.
          *
          * Note: Normally, the instances are created by the locator
@@ -1813,8 +1807,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
           if (lex != null && lex.getIndexManager() == getIndexManager()) {
 
-            /*
-             * Destroy the lexicon, but only if it is backed by the
+          /*
+       * Destroy the lexicon, but only if it is backed by the
              * same index manager. (This prevents a lexicon on the
              * database from being destroyed when a statements-only
              * instance on a temporary store is destroyed.
@@ -1842,7 +1836,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       super.destroy();
 
-      /**
+      /*
        * Discard the value factory for the lexicon's namespace.
        *
        * <p>Note: The LexiconRelation already does this. However, the AtomicDelete operation on the
@@ -1860,7 +1854,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     }
   }
 
-  /**
+  /*
    * The configured axioms. This is stored in the global row store and set automatically if it is
    * found in the {@link Properties}. Otherwise it is set by {@link #create()}.
    *
@@ -1877,8 +1871,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
       synchronized (this) {
         if (axioms == null) {
 
-          /*
-           * The vocabulary is stored in properties for the triple
+        /*
+       * The vocabulary is stored in properties for the triple
            * store instance in the global row store. However, we
            * pre-materialize those properties so we can directly
            * retrieve the vocabulary from the materialized properties.
@@ -1903,7 +1897,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
   private volatile Axioms axioms;
 
-  /**
+  /*
    * Return the configured {@link Vocabulary}. This consists of {@link EmbergraphValue}s of interest
    * that have been pre-evaluated against the lexicon and are associated with their correct term
    * identifiers.
@@ -1926,8 +1920,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
         if (vocab == null) {
 
-          /*
-           * The vocabulary is stored in properties for the triple
+        /*
+       * The vocabulary is stored in properties for the triple
            * store instance in the global row store. However, we
            * pre-materialize those properties so we can directly
            * retrieve the vocabulary from the materialized properties.
@@ -1955,7 +1949,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return vocab;
   }
 
-  /**
+  /*
    * Return the configured {@link GeoSpatialConfig}. The GeoSpatialConfig defines the structure and
    * storage details of registered geospatial datatypes.
    *
@@ -1979,8 +1973,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
         if (geoSpatialConfig == null) {
 
-          /*
-           * The vocabulary is stored in properties for the triple
+        /*
+       * The vocabulary is stored in properties for the triple
            * store instance in the global row store. However, we
            * pre-materialize those properties so we can directly
            * retrieve the vocabulary from the materialized properties.
@@ -2003,14 +1997,14 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return geoSpatialConfig;
   }
 
-  /**
+  /*
    * Note: This is used both as a monitor object and as an atomic reference.
    *
    * @see #getVocabulary()
    */
   private final AtomicReference<Vocabulary> vocabRef = new AtomicReference<Vocabulary>();
 
-  /**
+  /*
    * The geospatial configuration -- if null, geospatial is disabled.
    *
    * @see #getGeoSpatialConfig()
@@ -2048,7 +2042,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
   private final AtomicReference<SPORelation> spoRelationRef = new AtomicReference<SPORelation>();
 
-  /**
+  /*
    * The {@link LexiconRelation} handles all things related to the indices mapping RDF {@link
    * Value}s onto internal 64-bit term identifiers.
    */
@@ -2060,8 +2054,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       if (TimestampUtility.isReadWriteTx(t)) {
 
-        /*
-         * A read-write tx must use the unisolated view of the lexicon.
+      /*
+       * A read-write tx must use the unisolated view of the lexicon.
          */
         t = ITx.UNISOLATED;
       }
@@ -2079,8 +2073,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   private LexiconRelation lexiconRelation;
 
   // Note: Use LexiconRelation#getSearchEngine().
-  //    /**
-  //     * Full text information retrieval for RDF essentially treats the RDF
+  //    /*
+//     * Full text information retrieval for RDF essentially treats the RDF
   //     * Literals as "documents." The literals are broken down into "token"s to
   //     * obtain a "token frequency distribution" for that literal/document. The
   //     * full text index contains the indexed token data.
@@ -2136,7 +2130,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return getStatementCount(c, false /* exact */);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Core implementation.
@@ -2154,7 +2148,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     }
   }
 
-  /**
+  /*
    * The #of explicit statements in the database (exact count based on key-range scan).
    *
    * <p>Note: In order to get the #of explicit statements in the repository we have to actually do a
@@ -2169,7 +2163,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         .rangeCount(true /* exact */);
   }
 
-  /**
+  /*
    * Clears hard references to any indices, relations, etc. MUST be extended to discard write sets
    * for impls with live indices.
    *
@@ -2208,7 +2202,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This method MUST be extended to perform commit for implementations with live indices.
@@ -2332,7 +2326,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return rangeCount;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: Will always return zero (0) if {@value Options#STORE_BLANK_NODES} is <code>false
@@ -2391,7 +2385,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return terms[0].getIV();
   }
 
-  /**
+  /*
    * This method is extremely inefficient for scale-out as it does one RMI per request!
    *
    * @return the corresponding {@link EmbergraphValue} if found and <code>null</code> if not found
@@ -2410,7 +2404,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return r.getTerm(iv);
   }
 
-  /**
+  /*
    * <strong>WARNING DO NOT USE OUTSIDE OF THE UNIT TESTS: </strong> This method is extremely
    * inefficient for scale-out as it does one RMI per request!
    *
@@ -2540,7 +2534,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return tupleSer.decodeValue(spo, val);
   }
 
-  /**
+  /*
    * Return true if the triple pattern matches any statement(s) in the store (non-batch API).
    *
    * <p>Note: This method does not verify whether or not the statement is explicit.
@@ -2555,7 +2549,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return hasStatement(s, p, o, null /* c */);
   }
 
-  /**
+  /*
    * Return true if the statement pattern matches any statement(s) in the store (non-batch API).
    *
    * <p>Note: This method does not verify whether or not the statement is explicit.
@@ -2604,7 +2598,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return hasStatement(s, p, o, null /* c */);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This method is extremely inefficient for scale-out as it does multiple RMIs per request (one
@@ -2618,9 +2612,9 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      */
     final EmbergraphValueFactory valueFactory = getValueFactory();
 
-    s = (Resource) valueFactory.asValue(s);
+    s = valueFactory.asValue(s);
 
-    p = (URI) valueFactory.asValue(p);
+    p = valueFactory.asValue(p);
 
     o = valueFactory.asValue(o);
 
@@ -2736,7 +2730,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return asStatementIterator(getAccessPath(s, p, o, c).iterator());
   }
 
-  /**
+  /*
    * Efficient batched, streaming resolution of triple patterns to statements spanned by those
    * triple patterns that are present in the data.
    *
@@ -2797,7 +2791,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         .createStatement(
             (EmbergraphResource) terms.get(spo.s()),
             (EmbergraphURI) terms.get(spo.p()),
-            (EmbergraphValue) terms.get(spo.o()),
+            terms.get(spo.o()),
             (EmbergraphResource) (c != null ? terms.get(c) : null),
             spo.getStatementType(),
             spo.getUserFlag());
@@ -2935,7 +2929,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return getPredicate(s, p, o, c, null /* filter */, null /* range */);
   }
 
-  /**
+  /*
    * Convert a Sesame Value based triple pattern into a embergraph Predicate. Will return null if
    * any of the Sesame Values are not present in the database.
    */
@@ -3068,7 +3062,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return getAccessPath(keyOrder, null /* filter */);
   }
 
-  /**
+  /*
    * @param keyOrder
    * @param filter The filter will be incorporated as a constraint on the {@link IPredicate} for the
    *     {@link IAccessPath} and will be evaluated close to the data.
@@ -3087,14 +3081,12 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
                   Var.var("s"), Var.var("p"), Var.var("o"),
                 },
             NV.asMap(
-                new NV[] {
-                  new NV(IPredicate.Annotations.RELATION_NAME, new String[] {r.getNamespace()}),
-                  //                        new NV(IPredicate.Annotations.KEY_ORDER,
-                  //                                keyOrder),
-                  new NV(
-                      IPredicate.Annotations.INDEX_LOCAL_FILTER, ElementFilter.newInstance(filter)),
-                  new NV(SPOPredicate.Annotations.INCLUDE_HISTORY, true),
-                }));
+                new NV(IPredicate.Annotations.RELATION_NAME, new String[] {r.getNamespace()}),
+                //                        new NV(IPredicate.Annotations.KEY_ORDER,
+                //                                keyOrder),
+                new NV(
+                    IPredicate.Annotations.INDEX_LOCAL_FILTER, ElementFilter.newInstance(filter)),
+                new NV(SPOPredicate.Annotations.INCLUDE_HISTORY, true)));
     //        final SPOPredicate p = new SPOPredicate(
     //                new String[] { r.getNamespace() },
     //                -1, // partitionId
@@ -3117,7 +3109,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   // namespace to prefix
   private final Map<String, String> uriToPrefix = new LinkedHashMap<String, String>();
 
-  /**
+  /*
    * Defines a transient mapping from a URI to a namespace prefix that will be used for that URI by
    * {@link #toString()}.
    *
@@ -3129,7 +3121,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     uriToPrefix.put(namespace, prefix);
   }
 
-  /**
+  /*
    * Return an unmodifiable view of the mapping from namespaces to namespace prefixes.
    *
    * <p>Note: this is NOT a persistent map. It is used by {@link #toString(IV)} when externalizing
@@ -3140,7 +3132,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return Collections.unmodifiableMap(uriToPrefix);
   }
 
-  /**
+  /*
    * Return the namespace for the given prefix.
    *
    * @param prefix The prefix.
@@ -3166,7 +3158,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return null;
   }
 
-  /**
+  /*
    * Removes the namespace associated with the prefix.
    *
    * @param prefix The prefix.
@@ -3279,8 +3271,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   //
   //    }
   //
-  //    /**
-  //     * Dumps the #of statements using each predicate in the kb (tab delimited,
+  //    /*
+//     * Dumps the #of statements using each predicate in the kb (tab delimited,
   //     * unordered).
   //     *
   //     * @param resolveTerms
@@ -3367,7 +3359,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return dumpStore(resolveTerms, explicit, inferred, axioms, false /* justifications */);
   }
 
-  /**
+  /*
    * Dumps the store in a human readable format (not suitable for interchange).
    *
    * @param resolveTerms Used to resolve term identifiers to terms (you can use this to dump a
@@ -3414,7 +3406,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         getSPORelation().getPrimaryKeyOrder());
   }
 
-  /**
+  /*
    * Dumps the store in a human readable format (not suitable for interchange).
    *
    * @param resolveTerms Used to resolve term identifiers to terms (you can use this to dump a
@@ -3514,7 +3506,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       while (itrj.hasNext()) {
 
-        final Justification jst = (Justification) itrj.next().getObject();
+        final Justification jst = itrj.next().getObject();
 
         sb.append(
             "#"
@@ -3542,7 +3534,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return sb;
   }
 
-  /**
+  /*
    * Dumps the access path, efficiently resolving term identifiers to terms.
    *
    * @param accessPath
@@ -3572,7 +3564,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
    * IRawTripleStore
    */
 
-  /**
+  /*
    * Copies the statements from <i>this</i> store into the specified store using the
    * <strong>same</strong> term identifiers (the lexicon is neither copied to nor asserted on the
    * target).
@@ -3631,16 +3623,16 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       } else {
 
-        /*
-         * Use a thread pool to write out the statement and the
+      /*
+       * Use a thread pool to write out the statement and the
          * justifications concurrently. This drammatically reduces the
          * latency when also writing justifications.
          */
 
         final List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(2);
 
-        /*
-         * Note: we reject using the filter before stmts or
+      /*
+       * Note: we reject using the filter before stmts or
          * justifications make it into the buffer so we do not need to
          * apply the filter again here.
          */
@@ -3682,12 +3674,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
             elapsed_JST = 0;
           }
 
-        } catch (InterruptedException ex) {
-
-          throw new RuntimeException(ex);
-
-        } catch (ExecutionException ex) {
-
+        } catch (InterruptedException | ExecutionException ex) {
           throw new RuntimeException(ex);
         }
 
@@ -3777,7 +3764,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return addStatements(this /* statementStore */, false /* copyOnly */, itr, filter);
   }
 
-  /**
+  /*
    * Add statements to the <i>statementStore</i>.
    *
    * <p>Note: If {@link Options#STATEMENT_IDENTIFIERS} was specified, then statement identifiers are
@@ -3914,7 +3901,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return removeStatements(itr, true /*computeClosureForStatementIdentifiers*/);
   }
 
-  /**
+  /*
    * This processes a chunk of {@link SPO}s at a time and then submits tasks to parallel threads to
    * remove those statements from each of the statement indices. This continues until all statements
    * visited by the iterator have been removed.
@@ -3969,7 +3956,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     return mutationCount;
   }
 
-  /**
+  /*
    * Return an iterator which will visit the closure of the statements visited by the source
    * iterator plus any statements in the database made using a statement identifier found on any of
    * the statements visited by the source iterator (only explicit statements have statement
@@ -4068,7 +4055,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     };
   }
 
-  /**
+  /*
    * Computes the fixed point of those statements in the database which make assertions about
    * statement identifiers in the tmp store.
    *
@@ -4132,8 +4119,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
               db.getAccessPath(sid, null, null).iterator(),
               null /* filter */);
 
-          /*
-           * sid in the predicate position.
+        /*
+       * sid in the predicate position.
            *
            * Note: this case is not allowed by RDF but a TMGraph model
            * might use it.
@@ -4148,7 +4135,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           tempStore.addStatements(
               tempStore,
               true /*copyOnly*/,
-              db.getAccessPath((IV) null, (IV) null, (IV) sid).iterator(),
+              db.getAccessPath((IV) null, null, sid).iterator(),
               null /* filter */);
 
           // finished with this sid.
@@ -4176,8 +4163,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   }
 
   // Use getLexiconRelation().getSearchEngine().search(...)
-  //    /**
-  //     * <p>
+  //    /*
+//     * <p>
   //     * Performs a full text search against literals returning an {@link IHit}
   //     * list visiting the term identifiers for literals containing tokens parsed
   //     * from the query. Those term identifiers may be used to join against the
@@ -4216,7 +4203,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   //
   //    }
 
-  /**
+  /*
    * @param solutionFlags See {@link IJoinNexus#ELEMENT} and friends.
    * @param filter Optional filter.
    * @return
@@ -4234,7 +4221,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         DefaultEvaluationPlanFactory2.INSTANCE);
   }
 
-  /**
+  /*
    * @param solutionFlags See {@link IJoinNexus#ELEMENT} and friends.
    * @param filter Optional filter.
    * @return
@@ -4259,7 +4246,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         null /*overrides*/);
   }
 
-  /**
+  /*
    * @param solutionFlags See {@link IJoinNexus#ELEMENT} and friends.
    * @param filter Optional filter.
    * @param overrides Optional overrides of the properties controlling the rule execution layer.
@@ -4347,8 +4334,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       if (getIndexManager() instanceof IEmbergraphFederation<?>) {
 
-        /*
-         * Use historical reads.
+      /*
+       * Use historical reads.
          *
          * Note: The read timestamp will be automatically updated before
          * each mutation step so that all mutation operations will see
@@ -4360,8 +4347,8 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       } else {
 
-        /*
-         * LTS closure operations.
+      /*
+       * LTS closure operations.
          *
          * Note: This means that we use UNISOLATED reads since mutation
          * requires that the caller is using the UNISOLATED relation.
@@ -4425,7 +4412,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         isOwlSameAsUsed);
   }
 
-  /**
+  /*
    * Specialized {@link IRule} execution using the full text index to identify possible completions
    * of the given literals for which there exists a subject <code>s</code> such that:
    *
@@ -4553,7 +4540,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     }
   }
 
-  /**
+  /*
    * Generate a program from the possible completions of the literals.
    *
    * @param lits One or more literals. The completions of these literals will be discovered using

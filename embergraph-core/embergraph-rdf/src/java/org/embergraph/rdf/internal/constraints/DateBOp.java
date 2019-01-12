@@ -44,8 +44,8 @@ import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.function.datetime.Timezone;
 import org.openrdf.query.algebra.evaluation.function.datetime.Tz;
 
-/**
- * A date expression involving a left IValueExpression operand. The operation to be applied to the
+/*
+* A date expression involving a left IValueExpression operand. The operation to be applied to the
  * operands is specified by the {@link Annotations#OP} annotation.
  */
 public class DateBOp extends IVValueExpression<IV> implements INeedsMaterialization {
@@ -55,7 +55,7 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
 
   public interface Annotations extends ImmutableBOp.Annotations {
 
-    /**
+    /*
      * The operation to be applied to the left operands (required). The value of this annotation is
      * a {@link DateOp}, such as {@link DateOp#YEAR}.
      *
@@ -82,7 +82,7 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
     return true;
   }
 
-  /**
+  /*
    * @param left The left operand.
    * @param right The right operand.
    * @param op The annotation specifying the operation to be performed on those operands.
@@ -93,7 +93,7 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
     this(new BOp[] {left}, anns(globals, new NV(Annotations.OP, op)));
   }
 
-  /**
+  /*
    * Required shallow copy constructor.
    *
    * @param args The operands.
@@ -109,7 +109,7 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
     }
   }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * @param op
@@ -154,8 +154,8 @@ public class DateBOp extends IVValueExpression<IV> implements INeedsMaterializat
           case TIMEZONE:
             return timezone(bl);
           case DATE:
-            /*
-             * @see https://jira.blazegraph.com/browse/BLZG-1388
+          /*
+       * @see https://jira.blazegraph.com/browse/BLZG-1388
              * FullyInlineTypedLiteralIV is used to keep exact string representation of newDate in literal,
              * that results in different internal representation in contrast to xsd:dateTime values,
              * which represented as LiteralExtensionIV with delegate of XSDLong

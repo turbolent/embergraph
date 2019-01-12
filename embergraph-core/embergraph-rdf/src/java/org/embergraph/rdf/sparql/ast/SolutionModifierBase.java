@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * AST node for solution modifiers (SLICE, ORDER BY, GROUP BY)
+/*
+* AST node for solution modifiers (SLICE, ORDER BY, GROUP BY)
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

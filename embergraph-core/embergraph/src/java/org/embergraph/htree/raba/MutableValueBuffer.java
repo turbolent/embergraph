@@ -25,8 +25,8 @@ import org.embergraph.btree.raba.AbstractRaba;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.htree.HTree;
 
-/**
- * A flyweight mutable implementation for an {@link HTree} bucket page using a backing <code>
+/*
+* A flyweight mutable implementation for an {@link HTree} bucket page using a backing <code>
  * byte[][]</code>. Unlike the values in a B+Tree, the {@link HTree} values need not be dense.
  * Further, each bucket page is logically divided into a set of buddy hash buckets. All operations
  * therefore take place within a buddy bucket. The buddy bucket is identified by its offset and its
@@ -46,7 +46,7 @@ public class MutableValueBuffer implements IRaba {
   /** The #of defined values across the entire bucket page. */
   public int nvalues;
 
-  /**
+  /*
    * An array containing the values. The size of the array is the maximum capacity of the value
    * buffer, which is <code>2^addressBits</code>.
    */
@@ -58,7 +58,7 @@ public class MutableValueBuffer implements IRaba {
     if (capacity <= 1 || (capacity & -capacity) != capacity) throw new IllegalArgumentException();
   }
 
-  /**
+  /*
    * Allocate a mutable value buffer capable of storing <i>capacity</i> values.
    *
    * @param capacity The capacity of the value buffer.
@@ -72,7 +72,7 @@ public class MutableValueBuffer implements IRaba {
     values = new byte[capacity][];
   }
 
-  /**
+  /*
    * Constructor wraps an existing byte[][].
    *
    * @param nvalues The #of defined values in the array.
@@ -91,7 +91,7 @@ public class MutableValueBuffer implements IRaba {
     this.values = values;
   }
 
-  /**
+  /*
    * Creates a new instance using a new array of values but sharing the value references with the
    * provided {@link MutableValueBuffer}.
    *
@@ -116,7 +116,7 @@ public class MutableValueBuffer implements IRaba {
     }
   }
 
-  /**
+  /*
    * Builds a mutable value buffer.
    *
    * @param capacity The capacity of the new instance (this is based on the branching factor for the
@@ -185,7 +185,7 @@ public class MutableValueBuffer implements IRaba {
     return tmp.length;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @return <code>true</code> iff the value at that index is <code>null</code>.
@@ -202,7 +202,7 @@ public class MutableValueBuffer implements IRaba {
     return nvalues == 0;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This is the #of values in the bucket page (across all buddy buckets on that page).
@@ -234,7 +234,7 @@ public class MutableValueBuffer implements IRaba {
     return false;
   }
 
-  /**
+  /*
    * Instances are NOT searchable. Duplicates and <code>null</code>s ARE permitted.
    *
    * @returns <code>false</code>
@@ -245,7 +245,7 @@ public class MutableValueBuffer implements IRaba {
     return false;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This iterator visits all values on the bucket page, including <code>null</code>s.
@@ -303,7 +303,7 @@ public class MutableValueBuffer implements IRaba {
     nvalues++;
   }
 
-  /**
+  /*
    * Remove a value in the buffer at the specified index, decrementing the #of value in the buffer
    * by one.
    *
@@ -322,7 +322,7 @@ public class MutableValueBuffer implements IRaba {
     return --nvalues;
   }
 
-  /**
+  /*
    * This method is not supported. Values must be inserted into a specific buddy bucket. This
    * requires the caller to specify the index at which the value will be stored using {@link
    * #set(int, byte[])}.
@@ -335,7 +335,7 @@ public class MutableValueBuffer implements IRaba {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * This method is not supported. Values must be inserted into a specific buddy bucket. This
    * requires the caller to specify the index at which the value will be stored using {@link
    * #set(int, byte[])}.
@@ -348,7 +348,7 @@ public class MutableValueBuffer implements IRaba {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * This method is not supported. Values must be inserted into a specific buddy bucket. This
    * requires the caller to specify the index at which the value will be stored using {@link
    * #set(int, byte[])}.
@@ -361,7 +361,7 @@ public class MutableValueBuffer implements IRaba {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * This method is not supported.
    *
    * @throws UnsupportedOperationException

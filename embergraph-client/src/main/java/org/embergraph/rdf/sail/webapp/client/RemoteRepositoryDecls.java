@@ -24,8 +24,8 @@ import org.openrdf.model.impl.URIImpl;
 //
 // import org.embergraph.rdf.sparql.ast.service.RemoteServiceOptions;
 
-/**
- * Various declarations used by the client API.
+/*
+* Various declarations used by the client API.
  *
  * <p>Note: Some of these fields are replicated from the org.embergraph.rdf.store.BD interface in
  * order to avoid dragging in other aspects of the embergraph code base.
@@ -40,12 +40,12 @@ public class RemoteRepositoryDecls {
   /** The name of the <code>UTF-8</code> character encoding. */
   protected static final String UTF8 = "UTF-8";
 
-  /**
+  /*
    * The name of the URL request parameter used to assign a unique identifier to a REST API request.
    */
   protected static final String QUERYID = "queryId";
 
-  /**
+  /*
    * The name of the system property that may be used to specify the default HTTP method (GET or
    * POST) for a SPARQL QUERY or other indempotent request.
    *
@@ -55,7 +55,7 @@ public class RemoteRepositoryDecls {
    */
   public static final String QUERY_METHOD = RemoteRepository.class.getName() + ".queryMethod";
 
-  /**
+  /*
    * Note: The default is {@value #DEFAULT_QUERY_METHOD}. This supports use cases where the end
    * points are read/write databases and http caching must be defeated in order to gain access to
    * the most recent committed state of the end point.
@@ -65,7 +65,7 @@ public class RemoteRepositoryDecls {
    */
   public static final String DEFAULT_QUERY_METHOD = "POST";
 
-  /**
+  /*
    * The name of the system property that may be used to specify the maximum length (in characters)
    * for a requestURL associated with an HTTP GET before it is automatically converted to an HTTP
    * POST.
@@ -76,7 +76,7 @@ public class RemoteRepositoryDecls {
   public static final String MAX_REQUEST_URL_LENGTH =
       RemoteRepository.class.getName() + ".maxRequestURLLength";
 
-  /**
+  /*
    * The default maximum limit on a requestURL before the request is converted into a POST using a
    * <code>application/x-www-form-urlencoded</code> request entity.
    *
@@ -86,7 +86,7 @@ public class RemoteRepositoryDecls {
    */
   public static final int DEFAULT_MAX_REQUEST_URL_LENGTH = 1000;
 
-  /**
+  /*
    * The name of the property whose value is the namespace of the KB to be created.
    *
    * <p>Note: This string is identicial to one defined by the EmbergraphSail options, but the client
@@ -100,7 +100,7 @@ public class RemoteRepositoryDecls {
   /** The name of the default namespace. */
   public static final String DEFAULT_NAMESPACE = "kb";
 
-  /**
+  /*
    * HTTP header may be used to specify the timeout for a query.
    *
    * @see http://trac.blazegraph.com/ticket/914 (Set timeout on remote query)
@@ -108,7 +108,7 @@ public class RemoteRepositoryDecls {
   protected static final String HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS =
       "X-EMBERGRAPH-MAX-QUERY-MILLIS";
 
-  /**
+  /*
    * The name of the parameter/attribute that contains boolean flag to include inferred statements
    * for remote queries execution or returning statements.
    *
@@ -116,14 +116,14 @@ public class RemoteRepositoryDecls {
    */
   public static final String INCLUDE_INFERRED = "includeInferred";
 
-  /**
+  /*
    * The name of the parameter/attribute that contains baseURI for remote queries execution.
    *
    * @see org.embergraph.rdf.sail.webapp.QueryServlet.BASE_URI
    */
   public static final String BASE_URI = "baseURI";
 
-  /**
+  /*
    * The name of the parameter/attribute that contains high resolution maxQueryTime (milliseconds)
    * for remote queries execution. Minimum value of maxQueryTimeMillis and {@link
    * RemoteRepositoryDecls.HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS
@@ -133,7 +133,7 @@ public class RemoteRepositoryDecls {
    */
   public static final String MAX_QUERY_TIME_MILLIS = "maxQueryTimeMillis";
 
-  /**
+  /*
    * URL query parameter used to specify a URI in the default graph for SPARQL query (but not for
    * SPARQL update).
    *
@@ -141,7 +141,7 @@ public class RemoteRepositoryDecls {
    */
   public static final String DEFAULT_GRAPH_URI = "default-graph-uri";
 
-  /**
+  /*
    * URL query parameter used to specify a URI in the set of named graphs for SPARQL query (but not
    * for SPARQL update).
    *
@@ -149,21 +149,21 @@ public class RemoteRepositoryDecls {
    */
   public static final String NAMED_GRAPH_URI = "named-graph-uri";
 
-  /**
+  /*
    * URL query parameter used to specify a URI in the default graph for SPARQL UPDATE.
    *
    * @see org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.USING_GRAPH_URI
    */
   public static final String USING_GRAPH_URI = "using-graph-uri";
 
-  /**
+  /*
    * URL query parameter used to specify a URI in the set of named graphs for SPARQL UPDATE.
    *
    * @see org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.USING_NAMED_GRAPH_URI
    */
   public static final String USING_NAMED_GRAPH_URI = "using-named-graph-uri";
 
-  /**
+  /*
    * The Prefix of the parameter/attribute that contains binding for remote queries execution.
    *
    * @see org.embergraph.rdf.sail.webapp.QueryServlet.BINDING_PREFIX

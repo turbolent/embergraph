@@ -5,8 +5,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * AST node for value expressions.
+/*
+* AST node for value expressions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -18,7 +18,7 @@ public abstract class ValueExpressionNode extends ASTBase implements IValueExpre
 
   interface Annotations extends ASTBase.Annotations {
 
-    /**
+    /*
      * The {@link IValueExpression}.
      *
      * <p>Note: This is really an instance of cached data. If the argument corresponding the the
@@ -27,7 +27,7 @@ public abstract class ValueExpressionNode extends ASTBase implements IValueExpre
     String VALUE_EXPR = "valueExpr";
   }
 
-  /**
+  /*
    * @deprecated This was just for compatibility with SOp2ASTUtility. It is only used by the test
    *     suite now. It should be removed now that we are done with the SPARQL to AST direct
    *     translation.

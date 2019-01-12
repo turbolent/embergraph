@@ -2,8 +2,8 @@ package org.embergraph.journal;
 
 import java.rmi.Remote;
 
-/**
- * A lock granted by an {@link IResourceLockService}.
+/*
+* A lock granted by an {@link IResourceLockService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -11,5 +11,5 @@ import java.rmi.Remote;
 public interface IResourceLock extends Remote {
 
   /** Release the lock. */
-  public void unlock();
+  void unlock();
 }

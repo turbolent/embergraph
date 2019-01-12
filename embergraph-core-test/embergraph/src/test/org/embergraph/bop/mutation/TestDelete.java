@@ -23,8 +23,8 @@ package org.embergraph.bop.mutation;
 
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link DeleteOp}.
+/*
+* Test suite for {@link DeleteOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

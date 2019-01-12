@@ -6,21 +6,21 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Class permits specification of a pre-assigned index partition splits onto data services.
+/*
+* Class permits specification of a pre-assigned index partition splits onto data services.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AssignedSplits {
 
-  /**
+  /*
    * The array of separator keys. Each separator key is interpreted as an <em>unsigned byte[]</em>.
    * The first entry MUST be an empty byte[]. The entries MUST be in sorted order.
    */
   final byte[][] separatorKeys;
 
-  /**
+  /*
    * The array of data services onto which each partition defined by a separator key will be mapped
    * (optional). When given, the #of entries in this array MUST agree with the #of entries in the
    * <i>separatorKeys</i> array and all entries must be non-<code>null</code>. When not given, the
@@ -28,7 +28,7 @@ public class AssignedSplits {
    */
   final UUID[] dataServiceUUIDs;
 
-  /**
+  /*
    * Register the index against the federation using the index partitions and data services
    * described by this instance. if the {@link IIndexManager} is NOT an {@link
    * IEmbergraphFederation} then the indices will be registered normally using {@link
@@ -54,7 +54,7 @@ public class AssignedSplits {
     }
   }
 
-  /**
+  /*
    * @param separatorKeys The array of separator keys. Each separator key is interpreted as an
    *     <em>unsigned byte[]</em>. The first entry MUST be an empty byte[]. The entries MUST be in
    *     sorted order.

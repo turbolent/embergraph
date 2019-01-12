@@ -45,8 +45,8 @@ import org.embergraph.rdf.sparql.ast.eval.TestNamedGraphs;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTGraphGroupOptimizer}.
+/*
+* Test suite for {@link ASTGraphGroupOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestASTGraphGroupOptimizer.java 5701 2011-11-20 00:52:36Z thompsonbry $
@@ -66,7 +66,7 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test where nested GRAPH patterns share the same variable.
    *
    * <pre>
@@ -166,7 +166,7 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expectedClause, queryRoot.getWhereClause());
   }
 
-  /**
+  /*
    * Unit test where nested GRAPH patterns do not share the same variable.
    *
    * <pre>
@@ -277,7 +277,7 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expectedClause, queryRoot.getWhereClause());
   }
 
-  /**
+  /*
    * A unit test where two nested graph groups have the same URI as their context. This case is
    * legal and there is nothing that needs to be changed in the AST for enforce the graph context
    * constraint.
@@ -306,7 +306,7 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
         .optimize(context, new QueryNodeWithBindingSet(astContainer.getOriginalAST(), null));
   }
 
-  /**
+  /*
    * A unit test where two nested graph groups have the same URI as their context. This case is
    * illegal and will result in a thrown exception.
    *
@@ -356,8 +356,8 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
    * by the ASTGraphGroupOptimizer.
    */
 
-  //    /**
-  //     * Given
+  //    /*
+//     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)
@@ -465,8 +465,8 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Given
+  //    /*
+//     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)
@@ -581,8 +581,8 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Given
+  //    /*
+//     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)
@@ -701,8 +701,8 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Given
+  //    /*
+//     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)
@@ -822,8 +822,8 @@ public class TestASTGraphGroupOptimizer extends AbstractASTEvaluationTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Given
+  //    /*
+//     * Given
   //     *
   //     * <pre>
   //     *   SELECT VarNode(subj)

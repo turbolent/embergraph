@@ -53,8 +53,8 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.NV;
 import org.embergraph.util.concurrent.ThreadPoolExecutorStatisticsTask;
 
-/**
- * Suite of stress tests of the concurrency control mechanisms (without the database implementation)
+/*
+* Suite of stress tests of the concurrency control mechanisms (without the database implementation)
  * - See {@link NonBlockingLockManager}.
  *
  * <p>Goals:
@@ -94,7 +94,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
     super(arg0);
   }
 
-  /**
+  /*
    * Waits 10ms once it acquires its locks.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -130,7 +130,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
     }
   }
 
-  /**
+  /*
    * Dies once it acquires its locks by throwing {@link HorridTaskDeath}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -146,7 +146,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
     }
   }
 
-  /**
+  /*
    * Test driver.
    *
    * <p>Note: A "resource" is a named index (partition), so set nresources based on your
@@ -393,8 +393,8 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
           resource[j] = resources[t];
         }
 
-        /*
-         * Create all tasks.  They will be submitted below.
+      /*
+       * Create all tasks.  They will be submitted below.
          */
 
         final LockCallableImpl<String, Object> task;
@@ -556,7 +556,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
     }
   }
 
-  /**
+  /*
    * Options for {@link
    * StressTestNonBlockingLockManagerWithPredeclaredLocks#doComparisonTest(Properties)}.
    *
@@ -565,11 +565,11 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
    */
   public static class TestOptions {
 
-    /**
+    /*
      * Maximum amount of time that the test will run (seconds) or ZERO (0) if there is no timeout.
      */
     public static final String TIMEOUT = "testTimeout";
-    /**
+    /*
      * Boolean option determines whether a {@link SynchronousQueue} or an unbounded queue will be
      * used for the work queue of the {@link ThreadPoolExecutor} consuming the ready tasks (default
      * is {@value #DEFAULT_SYNCHRONOUS_QUEUE}).
@@ -584,7 +584,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
      * @see ThreadPoolExecutor
      */
     public static final String SYNCHRONOUS_QUEUE = "synchronousQueue";
-    /**
+    /*
      * When using a {@link SynchronousQueue} for the {@link ThreadPoolExecutor}'s work queue, this
      * boolean property specifies whether or not the {@link SynchronousQueue} will be fair, which is
      * a ctor property for {@link SynchronousQueue}.
@@ -592,21 +592,21 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
     public static final String SYNCHRONOUS_QUEUE_FAIR = "synchronousQueueFair";
     /** The core thread pool size. */
     public static final String CORE_POOL_SIZE = "nthreads";
-    /**
+    /*
      * The #of concurrent threads (multi-programming level). This must be GTE to {@link
      * #CORE_POOL_SIZE}. The default value is whatever was specified for {@link #CORE_POOL_SIZE}.
      * The value is ignored if you specify {@link #SYNCHRONOUS_QUEUE} as <code>true</code> and an
      * unbounded thread pool is used instead.
      */
     public static final String MAX_POOL_SIZE = "maxPoolThreads";
-    /**
+    /*
      * When <code>true</code> the core thread pool will be prestarted when the {@link
      * ThreadPoolExecutor} is created.
      */
     public static final String PRESTART_CORE_THREADS = "prestartCoreThreads";
     /** Total #of tasks to execute. */
     public static final String NTASKS = "ntasks";
-    /**
+    /*
      * The percentage of tasks that will die a {@link HorridTaskDeath} in [0.0:1.0] (default is
      * 0.0). This is used to stress the error handling mechanisms.
      */
@@ -617,11 +617,11 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
     public static final String MIN_LOCKS = "minLocks";
     /** The maximum #of locks that a task will seek to acquire. */
     public static final String MAX_LOCKS = "maxLocks";
-    /**
+    /*
      * The timeout for the task in (milliseconds) -or- <code>0</code> iff no timeout will be used.
      */
     public static final String TASK_TIMEOUT = "lockTimeout";
-    /**
+    /*
      * The maximum #of times that a task will attempt to acquire its locks before failing. Temporary
      * failures may occur due to deadlock or timeout during lock acquisition. Such failures may be
      * retried. The minimum value is ONE (1) since that means that we make only one attempt to
@@ -629,7 +629,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
      */
     public static final String MAX_LOCK_TRIES = "maxLockTries";
 
-    /**
+    /*
      * When true, operations MUST pre-declare their locks (default true).
      *
      * <p>Note: The {@link NonBlockingLockManager} uses this information to avoid deadlocks by the
@@ -639,7 +639,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
      */
     public static final String PREDECLARE_LOCKS = "predeclareLocks";
 
-    /**
+    /*
      * When true, the resources in a lock request are sorted before the lock requests are issued
      * (default true). This option is ONLY turned off for testing purposes. Since predeclaration
      * plus sorting makes deadlocks impossible, this option MAY be turned off in order to exercise
@@ -677,7 +677,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
 
   public void tearDownComparisonTest() throws Exception {}
 
-  /**
+  /*
    * Generates an XML file that can be used to (re-)run the concurrency control tests. The outputs
    * are appended to a file so you can see how performance and collected counters change from run to
    * run.
@@ -692,7 +692,7 @@ public abstract class AbstractStressTestNonBlockingLockManager extends TestCase 
    */
   public static class Generate extends ExperimentDriver {
 
-    /**
+    /*
      * Generates an XML file that can be run by {@link ExperimentDriver}.
      *
      * @param args

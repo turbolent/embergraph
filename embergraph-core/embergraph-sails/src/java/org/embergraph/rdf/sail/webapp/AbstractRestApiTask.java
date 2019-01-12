@@ -39,8 +39,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.task.AbstractApiTask;
 import org.embergraph.util.NV;
 
-/**
- * Abstract base class for REST API methods. This class is compatible with a job-oriented
+/*
+* Abstract base class for REST API methods. This class is compatible with a job-oriented
  * concurrency control pattern.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -54,7 +54,7 @@ public abstract class AbstractRestApiTask<T> extends AbstractApiTask<T> {
 
   private static final Logger log = Logger.getLogger(AbstractRestApiTask.class);
 
-  /**
+  /*
    * The {@link UUID} associated with this task. This is used to CANCEL a task.
    *
    * @see <a href="http://trac.bigdata.com/ticket/1254" > All REST API operations should be
@@ -74,13 +74,13 @@ public abstract class AbstractRestApiTask<T> extends AbstractApiTask<T> {
   /** The {@link PrintWriter} iff requested by the task. */
   private PrintWriter writer;
 
-  /**
+  /*
    * Used to coordinate access to the {@link ServletOutputStream} versus the {@link PrintWriter}
    * (visibility).
    */
   private final Lock lock = new ReentrantLock();
 
-  /**
+  /*
    * Return the {@link ServletOutputStream} associated with the request (and stash a copy).
    *
    * @throws IOException
@@ -108,7 +108,7 @@ public abstract class AbstractRestApiTask<T> extends AbstractApiTask<T> {
     }
   }
 
-  /**
+  /*
    * Return the {@link PrintWriter} associated with the request (and stash a copy).
    *
    * @throws IOException
@@ -137,7 +137,7 @@ public abstract class AbstractRestApiTask<T> extends AbstractApiTask<T> {
     }
   }
 
-  /**
+  /*
    * Flush and close the {@link ServletOutputStream} or {@link PrintWriter} depending on which was
    * obtained.
    *
@@ -163,7 +163,7 @@ public abstract class AbstractRestApiTask<T> extends AbstractApiTask<T> {
     }
   }
 
-  /**
+  /*
    * @param req The {@link HttpServletRequest}.
    * @param resp The {@link HttpServletResponse}.
    * @param namespace The namespace of the target KB instance.
@@ -177,7 +177,7 @@ public abstract class AbstractRestApiTask<T> extends AbstractApiTask<T> {
     this(req, resp, namespace, timestamp, false /*isGSRRequired*/);
   }
 
-  /**
+  /*
    * @param req The {@link HttpServletRequest}.
    * @param resp The {@link HttpServletResponse}.
    * @param namespace The namespace of the target KB instance.
@@ -217,7 +217,7 @@ public abstract class AbstractRestApiTask<T> extends AbstractApiTask<T> {
         + "}";
   }
 
-  /**
+  /*
    * Reports the mutation count and elapsed operation time as specified by the REST API for mutation
    * operations.
    *
@@ -270,7 +270,7 @@ public abstract class AbstractRestApiTask<T> extends AbstractApiTask<T> {
 
   }
 
-  /**
+  /*
    * Generate a response having the indicated http status code, mime type, and content.
    *
    * @param status The http status code.

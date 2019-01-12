@@ -73,8 +73,8 @@ import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.IHaltable;
 
-/**
- * A class managing execution of concurrent queries against a local {@link IIndexManager}.
+/*
+* A class managing execution of concurrent queries against a local {@link IIndexManager}.
  *
  * <p>
  *
@@ -180,14 +180,14 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   /** Error message used if a query is not running. */
   protected static final transient String ERR_QUERY_NOT_RUNNING = "Query is not running:";
 
-  /**
+  /*
    * Annotations understood by the {@link QueryEngine}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * Annotation may be used to impose a specific {@link UUID} for a query. This may be used by an
      * external process such that it can then use {@link QueryEngine#getRunningQuery(UUID)} to gain
      * access to the running query instance. It is an error if there is a query already running with
@@ -195,7 +195,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
      */
     String QUERY_ID = QueryEngine.class.getName() + ".queryId";
 
-    /**
+    /*
      * The name of the {@link IRunningQuery} implementation class which will be used to evaluate a
      * query marked by this annotation (optional). The specified class MUST implement {@link
      * IRunningQuery} and MUST have a constructor with the following signature:
@@ -215,7 +215,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     //        String DEFAULT_RUNNING_QUERY_CLASS = StandaloneChainedRunningQuery.class.getName();
     String DEFAULT_RUNNING_QUERY_CLASS = ChunkedRunningQuery.class.getName();
 
-    /**
+    /*
      * The class used to map binding sets across the federation or transition them from
      * IBindingSet[]s to {@link IChunkMessage}s stored on the native heap.
      *
@@ -273,15 +273,15 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   /** GeoSpatial counters */
   protected final GeoSpatialCounters geoSpatialCounters = newGeoSpatialCounters();
 
-  //    /**
-  //     * Statistics for queries which are "tagged" so we can recognize their
+  //    /*
+//     * Statistics for queries which are "tagged" so we can recognize their
   //     * instances as members of some group.
   //     */
   //    final protected ConcurrentHashMap<String/* groupId */, Counters> groupCounters = new
   // ConcurrentHashMap<String, Counters>();
 
-  //    /**
-  //     * Factory for {@link Counters} instances associated with a query group. A
+  //    /*
+//     * Factory for {@link Counters} instances associated with a query group. A
   //     * query is marked as a member of a group using {@link QueryHints#TAG}. This
   //     * is typically used to mark queries which are instances of the same query
   //     * template.
@@ -344,7 +344,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return geoSpatialCounters;
   }
 
-  /**
+  /*
    * Access to the <strong>local</strong> indices.
    *
    * <p>Note: You MUST NOT use unisolated indices without obtaining the necessary locks. The {@link
@@ -357,8 +357,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   private final AtomicReference<HttpClient> clientConnectionManagerRef =
       new AtomicReference<HttpClient>();
 
-  //    /**
-  //     * A pool used to service IO requests (reads on access paths).
+  //    /*
+//     * A pool used to service IO requests (reads on access paths).
   //     * <p>
   //     * Note: An IO thread pool at this level must attach threads to operations
   //     * (access path reads) rather than to individual IO requests. In order to do
@@ -367,8 +367,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //     */
   //    private final Executor iopool;
 
-  //    /**
-  //     * A pool for executing fork/join tasks servicing light weight tasks which
+  //    /*
+//     * A pool for executing fork/join tasks servicing light weight tasks which
   //     * DO NOT block on IO. Examples of such tasks abound, including: NIO for
   //     * sending/receiving direct {@link ByteBuffer}s containing binding sets,
   //     * elements, solutions, etc; formulation of access paths from binding sets;
@@ -391,7 +391,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return ((IRawStore) localIndexManager).getUUID();
   }
 
-  /**
+  /*
    * The {@link IEmbergraphFederation} iff running in scale-out.
    *
    * <p>Note: The {@link IEmbergraphFederation} is required in scale-out in order to perform shard
@@ -402,7 +402,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return null;
   }
 
-  /**
+  /*
    * The <em>local</em> index manager, which provides direct access to local {@link BTree} and
    * {@link IndexSegment} objects. In scale-out, this is the {@link IndexManager} inside the {@link
    * IDataService} and provides direct access to {@link FusedView}s (aka shards).
@@ -416,7 +416,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return localIndexManager;
   }
 
-  /**
+  /*
    * Return the {@link ConcurrencyManager} for the {@link #getIndexManager() local index manager}.
    */
   public ConcurrencyManager getConcurrencyManager() {
@@ -424,7 +424,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return ((Journal) localIndexManager).getConcurrencyManager();
   }
 
-  /**
+  /*
    * The RMI proxy for this {@link QueryEngine} when used as a query controller. The default
    * implementation returns <i>this</i>.
    */
@@ -448,15 +448,15 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
           if (!isRunning()) {
 
-            /*
-             * Shutdown.
+          /*
+       * Shutdown.
              */
 
             throw new IllegalStateException();
           }
 
-          /*
-           * Lazy instantiation.
+        /*
+       * Lazy instantiation.
            */
 
           clientConnectionManagerRef.set(cm = HttpClientConfigurator.getInstance().newInstance());
@@ -483,7 +483,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   private final ConcurrentHashMap<UUID /* queryId */, AbstractRunningQuery> runningQueries =
       new ConcurrentHashMap<UUID, AbstractRunningQuery>();
 
-  /**
+  /*
    * LRU cache used to handle problems with asynchronous termination of running queries.
    *
    * <p>Note: Holding onto the query references here might pin memory retained by those queries.
@@ -508,7 +508,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
         }
       };
 
-  /**
+  /*
    * A high concurrency cache operating as an LRU designed to close a data race between the
    * asynchronous start of a submitted query or update operation and the explicit asynchronous
    * CANCEL of that operation using its pre-assigned {@link UUID}.
@@ -544,7 +544,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   private final ConcurrentWeakValueCache<UUID, UUID> pendingCancelLRU =
       new ConcurrentWeakValueCache<>(50 /* queueCapacity (SWAG, but see above) */);
 
-  /**
+  /*
    * Add a query {@link UUID} to the LRU of query identifiers for which we have received a CANCEL
    * request, but were unable to find a running QUERY, recently done query, or running UPDATE
    * request.
@@ -559,7 +559,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     pendingCancelLRU.putIfAbsent(queryId, queryId);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the {@link UUID} is the the collection of {@link UUID}s for which
    * we have already received a CANCEL request.
    *
@@ -575,7 +575,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return pendingCancelLRU.remove(queryId) != null;
   }
 
-  /**
+  /*
    * A queue of {@link ChunkedRunningQuery}s having binding set chunks available for consumption.
    *
    * @todo Handle priority for selective queries based on the time remaining until the timeout.
@@ -592,7 +592,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   // PriorityBlockingQueue<RunningQuery>(
   //            );
 
-  /**
+  /*
    * A queue arranged in order of increasing deadline times. Only queries with an explicit deadline
    * are added to this priority queue. The head of the queue contains the query whose deadline will
    * expire soonest. A thread can thus poll the head of the queue to determine whether the deadline
@@ -627,7 +627,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   private final PriorityBlockingQueue<QueryDeadline> deadlineQueue =
       new PriorityBlockingQueue<QueryDeadline>();
 
-  /**
+  /*
    * Queries with a deadline that lies significantly in the future can lie around in the priority
    * queue until that deadline is reached if there are other queries in front of them that are not
    * terminated and whose deadline has not be reached. Therefore, periodically, we need to scan the
@@ -636,13 +636,13 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
    */
   private static final int DEADLINE_QUEUE_SCAN_SIZE = 200;
 
-  /**
+  /*
    * The maximum granularity before we will check the deadline priority queue for queries that need
    * to be terminated because their deadline has expired.
    */
   private static final long DEADLINE_CHECK_MILLIS = 100;
 
-  /**
+  /*
    * Add the query to the deadline priority queue
    *
    * @exception IllegalArgumentException if the query deadline has not been set.
@@ -666,7 +666,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     deadlineQueue.add(new QueryDeadline(deadlineNanos, query));
   }
 
-  /**
+  /*
    * Scan the priority queue of queries with a specified deadline, halting any queries whose
    * deadline has expired.
    */
@@ -687,8 +687,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       if (deadlineQueue.size() > DEADLINE_QUEUE_SCAN_SIZE) {
 
-        /*
-         * Scan the deadline queue, removing entries for expired
+      /*
+       * Scan the deadline queue, removing entries for expired
          * queries.
          */
         scanDeadlineQueue(nowNanos, deadlineQueue);
@@ -708,8 +708,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
       // test for query done or deadline expired.
       if (x.checkDeadline(nowNanos) == null) {
 
-        /*
-         * This query is known to be done. It was removed from the
+      /*
+       * This query is known to be done. It was removed from the
          * priority queue above. We need to check the next element in
          * the priority order to see whether it is also done.
          */
@@ -719,8 +719,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       if (x.deadlineNanos > nowNanos) {
 
-        /*
-         * This query has not yet reached its deadline. That means that
+      /*
+       * This query has not yet reached its deadline. That means that
          * no other query in the deadline queue has reached its
          * deadline. Therefore we are done for now.
          */
@@ -733,7 +733,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     }
   }
 
-  /**
+  /*
    * Queries with a deadline that lies significantly in the future can lie around in the priority
    * queue until that deadline is reached if there are other queries in front of them that are not
    * terminated and whose deadline has not be reached. Therefore, periodically, we need to scan the
@@ -792,14 +792,14 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
   }
 
-  /**
+  /*
    * Initialize the {@link QueryEngine}. It will accept binding set chunks and run them against
    * running queries until it is shutdown.
    */
   public void init() {
 
     final FutureTask<Void> ft =
-        new FutureTaskMon<Void>(new QueryEngineTask(priorityQueue, deadlineQueue), (Void) null);
+        new FutureTaskMon<Void>(new QueryEngineTask(priorityQueue, deadlineQueue), null);
 
     if (engineFuture.compareAndSet(null /* expect */, ft)) {
 
@@ -815,7 +815,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     }
   }
 
-  /**
+  /*
    * {@link QueryEngine}s are used with a singleton pattern managed by the {@link
    * QueryEngineFactory}. They are torn down automatically once they are no longer reachable. This
    * behavior depends on not having any hard references back to the {@link QueryEngine}.
@@ -836,13 +836,13 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   private final AtomicReference<FutureTask<Void>> engineFuture =
       new AtomicReference<FutureTask<Void>>();
 
-  /**
+  /*
    * Volatile flag is set for normal termination. When set, no new queries will be accepted but
    * existing queries will run to completion.
    */
   private volatile boolean shutdown = false;
 
-  /**
+  /*
    * Return if the query engine is running.
    *
    * @throws IllegalStateException if the query engine is shutting down.
@@ -859,7 +859,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return engineFuture.get() != null && !shutdown;
   }
 
-  /**
+  /*
    * Executes the {@link Runnable} on the local {@link IIndexManager}'s {@link ExecutorService}.
    *
    * @param r The {@link Runnable}.
@@ -869,7 +869,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     localIndexManager.getExecutorService().execute(r);
   }
 
-  /**
+  /*
    * Runnable submits chunks available for evaluation against running queries.
    *
    * <p>Note: This is a static inner class in order to avoid a hard reference back to the outer
@@ -910,8 +910,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
             final long now = System.nanoTime();
             if ((remaining = deadline - (now - mark)) < 0) {
               // log.error("Checking deadline queue");
-              /*
-               * Check for queries whose deadline is expired.
+            /*
+       * Check for queries whose deadline is expired.
                *
                * Note: We only do this every DEADLINE_CHECK_MILLIS
                * and then reset [mark] and [remaining].
@@ -927,8 +927,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
             // Consume chunk already on queue for this query.
             if (q != null && !q.isDone()) q.consumeChunk();
           } catch (InterruptedException e) {
-            /*
-             * Note: Uncomment the stack trace here if you want to
+          /*
+       * Note: Uncomment the stack trace here if you want to
              * find where the query was interrupted.
              *
              * Note: If you want to find out who interrupted the
@@ -953,7 +953,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     }
   } // QueryEngineTask
 
-  /**
+  /*
    * Add a chunk of intermediate results for consumption by some query. The chunk will be attached
    * to the query and the query will be scheduled for execution.
    *
@@ -999,7 +999,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return true;
   }
 
-  /**
+  /*
    * Shutdown the {@link QueryEngine} (blocking). The {@link QueryEngine} will not accept new
    * queries, but existing queries will run to completion.
    */
@@ -1127,7 +1127,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default implementation is a NOP.
@@ -1172,8 +1172,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     }
   }
 
-  //    /**
-  //     * Return an {@link IAsynchronousIterator} that will read a single, empty
+  //    /*
+//     * Return an {@link IAsynchronousIterator} that will read a single, empty
   //     * {@link IBindingSet}.
   //     */
   //    private static ThickAsynchronousIterator<IBindingSet[]> newBindingSetIterator() {
@@ -1182,8 +1182,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //
   //    }
 
-  //    /**
-  //     * Return an {@link IAsynchronousIterator} that will read a single
+  //    /*
+//     * Return an {@link IAsynchronousIterator} that will read a single
   //     * {@link IBindingSet}.
   //     *
   //     * @param bindingSet
@@ -1197,8 +1197,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //
   //    }
 
-  //    /**
-  //     * Return an {@link IAsynchronousIterator} that will read the source
+  //    /*
+//     * Return an {@link IAsynchronousIterator} that will read the source
   //     * {@link IBindingSet}s.
   //     *
   //     * @param bsets
@@ -1249,8 +1249,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
         this /* queryEngine */, queryId, getStartId(op), -1 /* partitionId */, src);
   }
 
-  //    /**
-  //     * Return a {@link LocalChunkMessage} for the query wrapping the specified
+  //    /*
+//     * Return a {@link LocalChunkMessage} for the query wrapping the specified
   //     * source.
   //     *
   //     * @param queryId
@@ -1276,7 +1276,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //
   //    }
 
-  /**
+  /*
    * Evaluate a query. This node will serve as the controller for the query.
    *
    * @param query The query to evaluate.
@@ -1289,7 +1289,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return eval(op, new ListBindingSet());
   }
 
-  /**
+  /*
    * Evaluate a query. This node will serve as the controller for the query.
    *
    * @param query The query to evaluate.
@@ -1336,7 +1336,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return eval(queryId, (PipelineOp) op, queryAttributes, newLocalChunkMessage(queryId, op, bset));
   }
 
-  /**
+  /*
    * Evaluate a query. This node will serve as the controller for the query.
    *
    * @param query The query to evaluate.
@@ -1350,7 +1350,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return eval(op, bsets, null /* attributes */);
   }
 
-  /**
+  /*
    * Evaluate a query. This node will serve as the controller for the query.
    *
    * @param query The query to evaluate.
@@ -1367,8 +1367,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return eval(queryId, (PipelineOp) op, attribs, newLocalChunkMessage(queryId, op, bsets));
   }
 
-  //    /**
-  //     * Evaluate a query. This node will serve as the controller for the query.
+  //    /*
+//     * Evaluate a query. This node will serve as the controller for the query.
   //     *
   //     * @param query
   //     *            The query to evaluate.
@@ -1396,8 +1396,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //
   //    }
 
-  //    /**
-  //     * Evaluate a query. This node will serve as the controller for the query.
+  //    /*
+//     * Evaluate a query. This node will serve as the controller for the query.
   //     *
   //     * @param queryId
   //     *            The unique identifier for the query.
@@ -1427,7 +1427,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   //
   //    }
 
-  /**
+  /*
    * Evaluate a query. This node will serve as the controller for the query. The {@link
    * IBindingSet}s made available by the {@link IChunkMessage} will be pushed into the query.
    *
@@ -1450,7 +1450,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     return startEval(queryId, query, queryAttributes, msg);
   }
 
-  /**
+  /*
    * Begin to evaluate a query (core impl). This node will serve as the controller for the query.
    * The {@link IBindingSet}s made available by the {@link IChunkMessage} will be pushed into the
    * query.
@@ -1520,8 +1520,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       if (deadline > 0) {
 
-        /*
-         * Impose a deadline on the query.
+      /*
+       * Impose a deadline on the query.
          */
         runningQuery.setDeadline(deadline);
       }
@@ -1590,7 +1590,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
    * Management of running queries.
    */
 
-  /**
+  /*
    * Places the {@link AbstractRunningQuery} object into the internal map.
    *
    * @param queryId The query identifier.
@@ -1656,8 +1656,8 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       } catch (IllegalStateException ex) {
 
-        /**
-         * The query engine either is not initialized or was shutdown concurrent with adding the new
+      /*
+       * The query engine either is not initialized or was shutdown concurrent with adding the new
          * query to the running query table. We yank the query out of the running query table in
          * order to have no net effect and then throw out the exception indicating that the
          * QueryEngine has been shutdown.
@@ -1678,7 +1678,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     }
   }
 
-  /**
+  /*
    * Return the {@link AbstractRunningQuery} associated with that query identifier.
    *
    * @param queryId The query identifier.
@@ -1778,7 +1778,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     if (interrupted) Thread.currentThread().interrupt();
   }
 
-  /**
+  /*
    * Handle a recently halted query by throwing an appropriate exception.
    *
    * @param queryId The query identifier.
@@ -1808,7 +1808,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
     }
   }
 
-  /**
+  /*
    * Listener API for {@link IRunningQuery} life cycle events (start/halt).
    *
    * <p>Note: While this interface makes it possible to catch the start and halt of an {@link
@@ -1882,7 +1882,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
    * RunningQuery factory.
    */
 
-  /**
+  /*
    * Factory for {@link IRunningQuery}s.
    *
    * @see Annotations#RUNNING_QUERY_CLASS
@@ -1916,19 +1916,17 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       final Constructor<? extends IRunningQuery> ctor =
           cls.getConstructor(
-              new Class[] {
-                QueryEngine.class,
-                UUID.class,
-                Boolean.TYPE,
-                IQueryClient.class,
-                PipelineOp.class,
-                IChunkMessage.class
-              });
+              QueryEngine.class,
+              UUID.class,
+              Boolean.TYPE,
+              IQueryClient.class,
+              PipelineOp.class,
+              IChunkMessage.class);
 
       // save reference.
       runningQuery =
           ctor.newInstance(
-              new Object[] {this, queryId, controller, clientProxy, query, realSource});
+              this, queryId, controller, clientProxy, query, realSource);
 
     } catch (Exception ex) {
 

@@ -30,8 +30,8 @@ import org.embergraph.relation.rule.IStep;
 import org.embergraph.relation.rule.Program;
 import org.embergraph.relation.rule.Rule;
 
-/**
- * Test suite for rule re-writes supporting truth maintenance for the RDF DB. This does NOT test the
+/*
+* Test suite for rule re-writes supporting truth maintenance for the RDF DB. This does NOT test the
  * execution of those rules or their role in truth maintenance.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -52,7 +52,7 @@ public class TestTMUtility extends AbstractRuleTestCase {
 
   private final String focusStore = "focusStore";
 
-  /**
+  /*
    * Test mapping of a rule with a single predicate in the tail across two relations for truth
    * maintenance. This will produce a single new rule. That rule will read from the focusStore
    * rather than the database.
@@ -80,7 +80,7 @@ public class TestTMUtility extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Test mapping of a rule with a two predicates in the tail across two relations for truth
    * maintenance. This will produce 2 new rules.
    *

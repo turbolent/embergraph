@@ -34,8 +34,8 @@ import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.channels.FileChannel;
 
-/**
- * Bit-level output stream.
+/*
+* Bit-level output stream.
  *
  * <p>This class wraps any {@link OutputStream} so that you can treat it as <em>bit</em> stream.
  * Constructors and methods closely resemble those of {@link OutputStream}. Data can be added to
@@ -158,7 +158,7 @@ public class OutputBitStream implements Flushable, Closeable {
   /** True if we are wrapping an array. */
   protected final boolean wrapping;
 
-  /**
+  /*
    * This (non-public) constructor exists just to provide fake initialisation for classes such as
    * {@link DebugOutputBitStream}.
    */
@@ -169,7 +169,7 @@ public class OutputBitStream implements Flushable, Closeable {
     wrapping = false;
   }
 
-  /**
+  /*
    * Creates a new output bit stream wrapping a given output stream using a buffer of size {@link
    * #DEFAULT_BUFFER_SIZE}.
    *
@@ -182,7 +182,7 @@ public class OutputBitStream implements Flushable, Closeable {
     this(os, true);
   }
 
-  /**
+  /*
    * Creates a new output bit stream wrapping a given output stream using a buffer of size {@link
    * #DEFAULT_BUFFER_SIZE}.
    *
@@ -194,7 +194,7 @@ public class OutputBitStream implements Flushable, Closeable {
     this(os, DEFAULT_BUFFER_SIZE);
   }
 
-  /**
+  /*
    * Creates a new output bit stream wrapping a given output stream with a specified buffer size.
    *
    * <p>This constructor performs the reflective tests that are necessary to support {@link
@@ -207,7 +207,7 @@ public class OutputBitStream implements Flushable, Closeable {
     this(os, bufSize, true);
   }
 
-  /**
+  /*
    * Creates a new output bit stream wrapping a given output stream with a specified buffer size.
    *
    * @param os the output stream to wrap.
@@ -247,7 +247,7 @@ public class OutputBitStream implements Flushable, Closeable {
     }
   }
 
-  /**
+  /*
    * Creates a new output bit stream wrapping a given file output stream using a buffer of size
    * {@link #DEFAULT_BUFFER_SIZE}.
    *
@@ -260,7 +260,7 @@ public class OutputBitStream implements Flushable, Closeable {
     this(os, DEFAULT_BUFFER_SIZE);
   }
 
-  /**
+  /*
    * Creates a new output bit stream wrapping a given file output stream with a specified buffer
    * size.
    *
@@ -282,7 +282,7 @@ public class OutputBitStream implements Flushable, Closeable {
     fileChannel = os.getChannel();
   }
 
-  /**
+  /*
    * Creates a new output bit stream wrapping a given byte array.
    *
    * @param a the byte array to wrap.
@@ -297,7 +297,7 @@ public class OutputBitStream implements Flushable, Closeable {
     repositionableStream = null;
   }
 
-  /**
+  /*
    * Creates a new output bit stream writing to file.
    *
    * @param name the name of the file.
@@ -307,7 +307,7 @@ public class OutputBitStream implements Flushable, Closeable {
     this(new FileOutputStream(name), bufSize);
   }
 
-  /**
+  /*
    * Creates a new output bit stream writing to a file.
    *
    * @param name the name of the file.
@@ -316,7 +316,7 @@ public class OutputBitStream implements Flushable, Closeable {
     this(new FileOutputStream(name), DEFAULT_BUFFER_SIZE);
   }
 
-  /**
+  /*
    * Creates a new output bit stream writing to file.
    *
    * @param file the file.
@@ -326,7 +326,7 @@ public class OutputBitStream implements Flushable, Closeable {
     this(new FileOutputStream(file), bufSize);
   }
 
-  /**
+  /*
    * Creates a new output bit stream writing to a file.
    *
    * @param file the file.
@@ -335,7 +335,7 @@ public class OutputBitStream implements Flushable, Closeable {
     this(new FileOutputStream(file), DEFAULT_BUFFER_SIZE);
   }
 
-  /**
+  /*
    * Flushes the bit stream.
    *
    * <p>This method will align the stream, write the bit buffer, empty the byte buffer and delegate
@@ -369,7 +369,7 @@ public class OutputBitStream implements Flushable, Closeable {
     buffer = null;
   }
 
-  /**
+  /*
    * Returns the number of bits written to this bit stream.
    *
    * @return the number of bits written so far.
@@ -378,7 +378,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return writtenBits;
   }
 
-  /**
+  /*
    * Sets the number of bits written to this bit stream.
    *
    * <p>This method is provided so that, for instance, the user can reset via <code>writtenBits(0)
@@ -390,7 +390,7 @@ public class OutputBitStream implements Flushable, Closeable {
     this.writtenBits = writtenBits;
   }
 
-  /**
+  /*
    * Writes a byte to the stream.
    *
    * <p>This method takes care of managing the buffering logic transparently.
@@ -420,7 +420,7 @@ public class OutputBitStream implements Flushable, Closeable {
     buffer[pos++] = (byte) b;
   }
 
-  /**
+  /*
    * Writes bits in the bit buffer, possibly flushing it.
    *
    * <p>You cannot write more than {@link #free} bits with this method. However, after having
@@ -441,7 +441,7 @@ public class OutputBitStream implements Flushable, Closeable {
     if (DEBUG)
       if (len > free)
         throw new IllegalArgumentException(
-            Integer.toString(len) + " bit(s) to write, " + free + " available.");
+            len + " bit(s) to write, " + free + " available.");
 
     current |= (b & ((1 << len) - 1)) << (free -= len);
     if (free == 0) {
@@ -454,7 +454,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return len;
   }
 
-  /**
+  /*
    * Aligns the stream.
    *
    * <p>After a call to this method, the stream is byte aligned. Zeroes are used to pad it if
@@ -467,7 +467,7 @@ public class OutputBitStream implements Flushable, Closeable {
     else return 0;
   }
 
-  /**
+  /*
    * Sets this stream bit position, if it is based on a {@link RepositionableStream} or on a {@link
    * java.nio.channels.FileChannel}.
    *
@@ -509,7 +509,7 @@ public class OutputBitStream implements Flushable, Closeable {
           "position() can only be called if the underlying byte stream implements the RepositionableStream interface or if the getChannel() method of the underlying byte stream exists and returns a FileChannel");
   }
 
-  /**
+  /*
    * Writes a sequence of bits.
    *
    * <p>Bits will be written in the natural way: the first bit is bit 7 of the first byte, the
@@ -523,7 +523,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return writeByteOffset(bits, 0, len);
   }
 
-  /**
+  /*
    * Writes a sequence of bits, starting from a given offset.
    *
    * <p>Bits will be written in the natural way: the first bit is bit 7 of the first byte, the
@@ -543,7 +543,7 @@ public class OutputBitStream implements Flushable, Closeable {
         + writeByteOffset(bits, (int) (offset / 8 + 1), len - initial);
   }
 
-  /**
+  /*
    * Writes a sequence of bits, starting from a given byte offset.
    *
    * <p>Bits will be written in the natural way: the first bit is bit 7 of the first byte, the
@@ -591,7 +591,7 @@ public class OutputBitStream implements Flushable, Closeable {
     }
   }
 
-  /**
+  /*
    * Writes a bit.
    *
    * @param bit a bit.
@@ -601,7 +601,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return writeInCurrent(bit ? 1 : 0, 1);
   }
 
-  /**
+  /*
    * Writes a bit.
    *
    * @param bit a bit.
@@ -613,7 +613,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return writeInCurrent(bit, 1);
   }
 
-  /**
+  /*
    * Writes a sequence of bits emitted by a boolean iterator.
    *
    * <p>If the iterator throws an exception, it is catched, and the return value is given by the
@@ -639,7 +639,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return count;
   }
 
-  /**
+  /*
    * Writes a fixed number of bits from an integer.
    *
    * @param x an integer.
@@ -676,7 +676,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return len;
   }
 
-  /**
+  /*
    * Writes a fixed number of bits from a long.
    *
    * @param x a long.
@@ -717,7 +717,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return len;
   }
 
-  /**
+  /*
    * Writes a natural number in unary coding.
    *
    * <p>The unary coding of a natural number <var>n</var> is given by 0<sup><var>n</var></sup>1.
@@ -750,7 +750,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return x + shift + 1;
   }
 
-  /**
+  /*
    * Writes a long natural number in unary coding.
    *
    * @param x a long natural number.
@@ -782,7 +782,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return x + shift + 1;
   }
 
-  /**
+  /*
    * Writes a natural number in &gamma; coding.
    *
    * <p>The &gamma; coding of a positive number of <var>k</var> bits is obtained writing
@@ -803,7 +803,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + (msb != 0 ? writeInt(x, msb) : 0);
   }
 
-  /**
+  /*
    * Writes a long natural number in &gamma; coding.
    *
    * @param x a long natural number.
@@ -820,7 +820,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + (msb != 0 ? writeLong(x, msb) : 0);
   }
 
-  /**
+  /*
    * Writes a natural number in shifted &gamma; coding.
    *
    * <p>The shifted &gamma; coding of 0 is 1. The coding of a positive number of <var>k</var> bits
@@ -840,7 +840,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + (msb > 0 ? writeInt(x, msb) : 0);
   }
 
-  /**
+  /*
    * Writes a long natural number in shifted &gamma; coding.
    *
    * @param x a natural number.
@@ -857,7 +857,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + (msb > 0 ? writeLong(x, msb) : 0);
   }
 
-  /**
+  /*
    * Writes a natural number in &delta; coding.
    *
    * <p>The &delta; coding of a positive number of <var>k</var> bits is obtained writing
@@ -877,7 +877,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + (msb != 0 ? writeInt(x, msb) : 0);
   }
 
-  /**
+  /*
    * Writes a long natural number in &delta; coding.
    *
    * @param x a long natural number.
@@ -894,7 +894,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + (msb != 0 ? writeLong(x, msb) : 0);
   }
 
-  /**
+  /*
    * Writes a natural number in a limited range using a minimal binary coding.
    *
    * <p>A minimal binary code is an optimal code for the uniform distribution. This method uses an
@@ -912,7 +912,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return writeMinimalBinary(x, b, Fast.mostSignificantBit(b));
   }
 
-  /**
+  /*
    * Writes a natural number in a limited range using a minimal binary coding.
    *
    * <p>This method is faster than {@link #writeMinimalBinary(int,int)} because it does not have to
@@ -938,7 +938,7 @@ public class OutputBitStream implements Flushable, Closeable {
     else return writeInt(m + x, log2b + 1);
   }
 
-  /**
+  /*
    * Writes a long natural number in a limited range using a minimal binary coding.
    *
    * @param x a natural number.
@@ -954,7 +954,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return writeLongMinimalBinary(x, b, Fast.mostSignificantBit(b));
   }
 
-  /**
+  /*
    * Writes a long natural number in a limited range using a minimal binary coding.
    *
    * <p>This method is faster than {@link #writeLongMinimalBinary(long,long)} because it does not
@@ -981,7 +981,7 @@ public class OutputBitStream implements Flushable, Closeable {
     else return writeLong(m + x, log2b + 1);
   }
 
-  /**
+  /*
    * Writes a natural number in Golomb coding.
    *
    * <p>Golomb coding with modulo <var>b</var> writes a natural number <var>x</var> as the quotient
@@ -1001,7 +1001,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return writeGolomb(x, b, Fast.mostSignificantBit(b));
   }
 
-  /**
+  /*
    * Writes a natural number in Golomb coding.
    *
    * <p>This method is faster than {@link #writeGolomb(int,int)} because it does not have to compute
@@ -1030,7 +1030,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + writeMinimalBinary(x % b, b, log2b);
   }
 
-  /**
+  /*
    * Writes a long natural number in Golomb coding.
    *
    * @param x a long natural number.
@@ -1044,7 +1044,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return writeLongGolomb(x, b, Fast.mostSignificantBit(b));
   }
 
-  /**
+  /*
    * Writes a long natural number in Golomb coding.
    *
    * <p>This method is faster than {@link #writeLongGolomb(long,long)} because it does not have to
@@ -1074,7 +1074,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + writeLongMinimalBinary(x % b, b, log2b);
   }
 
-  /**
+  /*
    * Writes a natural number in skewed Golomb coding.
    *
    * <p>This method implements also the case in which <code>b</code> is 0: in this case, the
@@ -1102,7 +1102,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + writeMinimalBinary(x - m, M - m);
   }
 
-  /**
+  /*
    * Writes a long natural number in skewed Golomb coding.
    *
    * <p>This method implements also the case in which <code>b</code> is 0: in this case, the
@@ -1131,7 +1131,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + writeLongMinimalBinary(x - m, M - m);
   }
 
-  /**
+  /*
    * Writes a natural number in &zeta; coding.
    *
    * <p>&zeta; coding (with modulo <var>k</var>) records positive numbers in the intervals
@@ -1162,7 +1162,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + (x - left < left ? writeInt(x - left, h * k + k - 1) : writeInt(x, h * k + k));
   }
 
-  /**
+  /*
    * Writes a long natural number in &zeta; coding.
    *
    * @param x a long natural number.
@@ -1184,7 +1184,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return l + (x - left < left ? writeLong(x - left, h * k + k - 1) : writeLong(x, h * k + k));
   }
 
-  /**
+  /*
    * Writes a natural number in variable-length nibble coding.
    *
    * <p>Variable-length nibble coding records a natural number by padding its binary representation
@@ -1209,7 +1209,7 @@ public class OutputBitStream implements Flushable, Closeable {
     return ((msb / 3) + 1) << 2;
   }
 
-  /**
+  /*
    * Writes a long natural number in variable-length nibble coding.
    *
    * @param x a long natural number.

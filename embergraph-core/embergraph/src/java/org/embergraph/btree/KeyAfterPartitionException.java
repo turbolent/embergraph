@@ -26,8 +26,8 @@ package org.embergraph.btree;
 import org.embergraph.mdi.ISeparatorKeys;
 import org.embergraph.util.BytesUtil;
 
-/**
- * An exception thrown when a key lies after the half-open range of an index partition.
+/*
+* An exception thrown when a key lies after the half-open range of an index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public class KeyAfterPartitionException extends KeyOutOfRangeException {
   /** */
   private static final long serialVersionUID = 150631245388779308L;
 
-  /**
+  /*
    * @param key
    * @param allowUpperBound
    * @param pmd

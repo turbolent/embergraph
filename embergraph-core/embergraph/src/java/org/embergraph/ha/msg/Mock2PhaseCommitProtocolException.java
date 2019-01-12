@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-/**
- * Instances of this class are used when one of the {@link IHA2PhaseCommitProtocolMessage}s is
+/*
+* Instances of this class are used when one of the {@link IHA2PhaseCommitProtocolMessage}s is
  * configured to force a runtime exception during the 2-phase commit protocol.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

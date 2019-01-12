@@ -27,17 +27,17 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.util.UUID;
 
-/**
- * Remote interface for a service which can receive {@link Event}s.
+/*
+* Remote interface for a service which can receive {@link Event}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IEventReceivingService extends Remote {
 
-  /**
+  /*
    * Accepts the event, either updates the existing event with the same {@link UUID} or adds the
    * event to the set of recent events.
    */
-  public void notifyEvent(Event e) throws IOException;
+  void notifyEvent(Event e) throws IOException;
 }

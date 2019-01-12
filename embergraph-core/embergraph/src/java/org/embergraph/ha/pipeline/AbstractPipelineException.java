@@ -19,8 +19,8 @@ package org.embergraph.ha.pipeline;
 
 import org.embergraph.quorum.QuorumException;
 
-/**
- * A quorum related exception dealing with the write replication pipeline.
+/*
+* A quorum related exception dealing with the write replication pipeline.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

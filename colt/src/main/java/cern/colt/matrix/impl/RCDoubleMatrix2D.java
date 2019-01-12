@@ -12,8 +12,8 @@ import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * Sparse row-compressed 2-d matrix holding <tt>double</tt> elements. First see the <a
+/*
+* Sparse row-compressed 2-d matrix holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -142,7 +142,7 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
   protected DoubleArrayList values;
   protected int[] starts;
   // protected int N;
-  /**
+  /*
    * Constructs a matrix with a copy of the given values. <tt>values</tt> is required to have the
    * form <tt>values[row][column]</tt> and have exactly the same number of columns in every row.
    *
@@ -157,7 +157,7 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
     this(values.length, values.length == 0 ? 0 : values[0].length);
     assign(values);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of rows and columns. All entries are initially
    * <tt>0</tt>.
    *
@@ -177,7 +177,7 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
     values = new DoubleArrayList();
     starts = new int[rows + 1];
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>value</tt>.
    *
    * @param value the value to be filled into the cells.
@@ -220,7 +220,7 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Replaces all cell values of the receiver with the values of another matrix. Both matrices must
    * have the same number of rows and columns. If both matrices share the same cells (as is the case
    * if they are views derived from the same matrix) and intersect in an ambiguous way, then
@@ -343,14 +343,14 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Returns the content of this matrix if it is a wrapper; or <tt>this</tt> otherwise. Override
    * this method in wrappers.
    */
   protected DoubleMatrix2D getContent() {
     return this;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -374,7 +374,7 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
     values.beforeInsert(index, value);
     for (int i = starts.length; --i > row; ) starts[i]++;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of rows and columns. For example, if the receiver is an instance of
    * type <tt>DenseDoubleMatrix2D</tt> the new matrix must also be of type
@@ -390,7 +390,7 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
   public DoubleMatrix2D like(int rows, int columns) {
     return new RCDoubleMatrix2D(rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix2D</tt> the new matrix must be of type <tt>DenseDoubleMatrix1D</tt>, if
@@ -409,7 +409,7 @@ public class RCDoubleMatrix2D extends WrapperDoubleMatrix2D {
     values.remove(index);
     for (int i = starts.length; --i > row; ) starts[i]--;
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any

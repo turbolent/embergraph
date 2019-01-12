@@ -45,7 +45,7 @@ public class EmbergraphSailBooleanQuery extends SailBooleanQuery implements Embe
   @Override
   public boolean evaluate() throws QueryEvaluationException {
 
-    return evaluate((BindingsClause) null);
+    return evaluate(null);
   }
 
   public boolean evaluate(final BindingsClause bc) throws QueryEvaluationException {

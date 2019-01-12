@@ -56,29 +56,29 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.Properties;
 
-/**
- * An interface for {@link Properties} document readers.
+/*
+* An interface for {@link Properties} document readers.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface PropertiesParser {
 
   /** Gets the {@link PropertiesFormat} that this {@link PropertiesParser} uses. */
-  public PropertiesFormat getFormat();
+  PropertiesFormat getFormat();
 
-  /**
+  /*
    * Parses the data from the supplied {@link InputStream}.
    *
    * @param in The InputStream from which to read the data.
    * @throws IOException If an I/O error occurred while data was read from the InputStream.
    */
-  public Properties parse(InputStream in) throws IOException;
+  Properties parse(InputStream in) throws IOException;
 
-  /**
+  /*
    * Parses the data from the supplied {@link Reader}.
    *
    * @param reader The Reader from which to read the data.
    * @throws IOException If an I/O error occurred while data was read from the InputStream.
    */
-  public Properties parse(Reader reader) throws IOException;
+  Properties parse(Reader reader) throws IOException;
 }

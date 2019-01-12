@@ -32,8 +32,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Note: rdfs 6, 8, 10, 12, and 13 use the same base clase.
+/*
+* Note: rdfs 6, 8, 10, 12, and 13 use the same base clase.
  *
  * @see RuleRdfs06
  * @see RuleRdfs08
@@ -53,7 +53,7 @@ public class TestRuleRdfs10 extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test of {@link RuleRdfs10} where the data satisifies the rule exactly once.
    *
    * <pre>
@@ -112,7 +112,7 @@ public class TestRuleRdfs10 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link RuleRdfs10} where the data satisifies the rule exactly twice.
    *
    * <pre>

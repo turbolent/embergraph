@@ -30,8 +30,8 @@ import org.embergraph.mdi.SegmentMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
-/**
- * {@link BTree} mapping {@link IndexSegmentStore} <em>createTime</em>s to {@link IResourceMetadata}
+/*
+* {@link BTree} mapping {@link IndexSegmentStore} <em>createTime</em>s to {@link IResourceMetadata}
  * records. The keys are the long integers (commitTimes) followed by the index segment UUID to break
  * ties (this is not the scale-out index UUID, but the UUID of the specific index segment). The
  * values are {@link IResourceMetadata} objects.
@@ -46,7 +46,7 @@ public class IndexSegmentIndex extends BTree {
   /** Instance used to encode the timestamp into the key. */
   private final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG + Bytes.SIZEOF_UUID);
 
-  /**
+  /*
    * Create a transient instance.
    *
    * @return The new instance.
@@ -60,7 +60,7 @@ public class IndexSegmentIndex extends BTree {
     return (IndexSegmentIndex) BTree.createTransient(metadata);
   }
 
-  /**
+  /*
    * Load from the store.
    *
    * @param store The backing store.
@@ -73,7 +73,7 @@ public class IndexSegmentIndex extends BTree {
     super(store, checkpoint, metadata, readOnly);
   }
 
-  /**
+  /*
    * Encodes the commit time into a key.
    *
    * @param commitTime The commit time.
@@ -85,7 +85,7 @@ public class IndexSegmentIndex extends BTree {
     return keyBuilder.reset().append(commitTime).append(uuid).getKey();
   }
 
-  /**
+  /*
    * Add an entry under the commitTime and resource UUID associated with the {@link
    * IResourceMetadata} record.
    *

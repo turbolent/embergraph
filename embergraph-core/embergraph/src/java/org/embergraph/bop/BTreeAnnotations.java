@@ -23,15 +23,15 @@ package org.embergraph.bop;
 
 import org.embergraph.btree.BTree;
 
-/**
- * Annotations for an operator using an {@link BTree}.
+/*
+* Annotations for an operator using an {@link BTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface BTreeAnnotations extends IndexAnnotations {
 
-  /**
+  /*
    * The branching factor.
    *
    * @see #DEFAULT_BRANCHING_FACTOR

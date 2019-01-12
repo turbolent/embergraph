@@ -25,8 +25,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 
-/**
- * Unit tests for {@link JVMDistinctBindingSetsOp}.
+/*
+* Unit tests for {@link JVMDistinctBindingSetsOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestDistinctBindingSets.java 4259 2011-02-28 16:24:53Z thompsonbry $

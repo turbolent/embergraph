@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-/**
- * Counters defined on a per-process basis.
+/*
+* Counters defined on a per-process basis.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -35,13 +35,13 @@ public interface IProcessCounters extends ICounterHierarchy {
    * CPU
    */
 
-  /**
+  /*
    * Percentage of the time the processor is not idle that it is executing at the user level
    * (normalized to 100% in single CPU and SMP environments).
    */
   String CPU_PercentUserTime = CPU + ps + "% User Time";
 
-  /**
+  /*
    * Percentage of the time the processor is not idle that it is executing at the system (aka
    * kernel) level (normalized to 100% in single CPU and SMP environments).
    */
@@ -69,7 +69,7 @@ public interface IProcessCounters extends ICounterHierarchy {
   /** The percentage of the phsyical memory used by the process. */
   String Memory_percentMemorySize = Memory + ps + "Percent Memory Size";
 
-  /**
+  /*
    * The value reported by {@link Runtime#maxMemory()} (the maximum amount of memory that the JVM
    * will attempt to use). This should be a {@link OneShotInstrument}.
    */
@@ -78,7 +78,7 @@ public interface IProcessCounters extends ICounterHierarchy {
   /** The value reported by {@link Runtime#freeMemory()} (the amount of free memory in the JVM)). */
   String Memory_runtimeFreeMemory = Memory + ps + "Runtime Free Memory";
 
-  /**
+  /*
    * The value reported by {@link Runtime#totalMemory()} (the amount of total memory in the JVM,
    * which may vary over time).
    */
@@ -91,7 +91,7 @@ public interface IProcessCounters extends ICounterHierarchy {
   /** The rate at which the process is reading data from disk in bytes per second. */
   String PhysicalDisk_BytesReadPerSec = PhysicalDisk + ps + "Bytes Read per Second";
 
-  /**
+  /*
    * The rate at which the process is writing data on the disk in bytes per second (cached writes
    * may be reported in this quantity).
    */

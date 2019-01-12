@@ -37,8 +37,8 @@ import org.embergraph.btree.keys.KVO;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * Unit tests of the idle timeout behavior for {@link AbstractMasterTask} and friends.
+/*
+* Unit tests of the idle timeout behavior for {@link AbstractMasterTask} and friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -51,7 +51,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test to verify that output buffers are not closed too quickly. This also verifies that a
    * buffer automatically re-opened if it was closed by a timeout.
    */
@@ -195,7 +195,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that an idle timeout may be LT the chunk timeout and that the sink will be
    * closed by the idle timeout if chunks do not appear in a timely manner.
    *
@@ -308,7 +308,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
     assertEquals("subtaskEndCount", 1, masterStats.subtaskEndCount.get());
   }
 
-  /**
+  /*
    * Used to recognize the a scheduled task which halts based on our signal rather than for some
    * error condition.
    *
@@ -324,7 +324,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that a sink whose source iterator is not empty always resets the idle
    * timeout (that is, if chunks continue to appear in a timely manner than the sink will not be
    * closed by an idle timeout).
@@ -465,8 +465,8 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
                   // halt?
                   if (halt.get()) throw new HaltedException();
 
-                  /*
-                   * Verify the sink WAS NOT closed by an idle
+                /*
+       * Verify the sink WAS NOT closed by an idle
                    * timeout.
                    *
                    * TODO I have seen this assertion
@@ -605,8 +605,8 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
 
       if (r < .8 || r > 1.1) {
 
-        /*
-         * The ration between the expected and observed average chunk
+      /*
+       * The ration between the expected and observed average chunk
          * sizes is not within some reasonable bounds on its
          * performance. [It is more likely that this will report an
          * error for a short run, but the values should be quite close
@@ -623,7 +623,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies correct shutdown when writing chunks onto a master whose subtask has an
    * infinite chunk timeout and an infinite idle timeout. In this situation the subtask must notice
    * that the master's input buffer has been closed and close its input buffer so that it will
@@ -725,7 +725,7 @@ public class TestMasterTaskIdleTimeout extends AbstractMasterTestCase {
     assertEquals("partitionCount", 1, masterStats.getMaximumPartitionCount());
   }
 
-  /**
+  /*
    * Unit test verifies that an idle timeout will cause a sink to flush its buffer without waiting
    * to combine additional chunks even though it has an infinite chunkTimeout.
    *

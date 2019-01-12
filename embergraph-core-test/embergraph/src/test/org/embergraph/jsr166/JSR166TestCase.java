@@ -34,8 +34,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Base class for JSR166 Junit TCK tests. Defines some constants, utility methods and classes, as
+/*
+* Base class for JSR166 Junit TCK tests. Defines some constants, utility methods and classes, as
  * well as a simple framework for helping to make sure that assertions failing in generated threads
  * cause the associated test that generated them to itself fail (which JUnit does not otherwise
  * arrange). The rules for creating such tests are:
@@ -89,13 +89,13 @@ public class JSR166TestCase extends TestCase {
 
   protected static final boolean expensiveTests = Boolean.getBoolean("jsr166.expensiveTests");
 
-  /**
+  /*
    * If true, report on stdout all "slow" tests, that is, ones that take more than profileThreshold
    * milliseconds to execute.
    */
   private static final boolean profileTests = Boolean.getBoolean("jsr166.profileTests");
 
-  /**
+  /*
    * The number of milliseconds that tests are permitted for execution without being reported, when
    * profileTests is set.
    */
@@ -219,7 +219,7 @@ public class JSR166TestCase extends TestCase {
   public static long MEDIUM_DELAY_MS;
   public static long LONG_DELAY_MS;
 
-  /**
+  /*
    * Returns the shortest timed delay. This could be reimplemented to use for example a Property.
    */
   protected long getShortDelay() {
@@ -237,7 +237,7 @@ public class JSR166TestCase extends TestCase {
   /** The first exception encountered if any threadAssertXXX method fails. */
   private final AtomicReference<Throwable> threadFailure = new AtomicReference<Throwable>(null);
 
-  /**
+  /*
    * Records an exception so that it can be rethrown later in the test harness thread, triggering a
    * test case failure. Only the first failure is recorded; subsequent calls to this method from
    * within the same test have no effect.
@@ -250,7 +250,7 @@ public class JSR166TestCase extends TestCase {
     setDelays();
   }
 
-  /**
+  /*
    * Triggers test case failure if any thread assertions have failed, by rethrowing, in the test
    * harness thread, any exception recorded earlier by threadRecordFailure.
    */
@@ -268,7 +268,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Just like fail(reason), but additionally recording (using threadRecordFailure) any
    * AssertionFailedError thrown, so that the current testcase will fail.
    */
@@ -281,7 +281,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Just like assertTrue(b), but additionally recording (using threadRecordFailure) any
    * AssertionFailedError thrown, so that the current testcase will fail.
    */
@@ -294,7 +294,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Just like assertFalse(b), but additionally recording (using threadRecordFailure) any
    * AssertionFailedError thrown, so that the current testcase will fail.
    */
@@ -307,7 +307,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Just like assertNull(x), but additionally recording (using threadRecordFailure) any
    * AssertionFailedError thrown, so that the current testcase will fail.
    */
@@ -320,7 +320,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Just like assertEquals(x, y), but additionally recording (using threadRecordFailure) any
    * AssertionFailedError thrown, so that the current testcase will fail.
    */
@@ -333,7 +333,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Just like assertEquals(x, y), but additionally recording (using threadRecordFailure) any
    * AssertionFailedError thrown, so that the current testcase will fail.
    */
@@ -348,7 +348,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Just like assertSame(x, y), but additionally recording (using threadRecordFailure) any
    * AssertionFailedError thrown, so that the current testcase will fail.
    */
@@ -371,7 +371,7 @@ public class JSR166TestCase extends TestCase {
     threadFail("should throw " + exceptionName);
   }
 
-  /**
+  /*
    * Records the given exception using {@link #threadRecordFailure}, then rethrows the exception,
    * wrapping it in an AssertionFailedError if necessary.
    */
@@ -434,7 +434,7 @@ public class JSR166TestCase extends TestCase {
   public static final Integer m6 = new Integer(-6);
   public static final Integer m10 = new Integer(-10);
 
-  /**
+  /*
    * Runs Runnable r with a security policy that permits precisely the specified permissions. If
    * there is no current security manager, the runnable is run twice, both with and without a
    * security manager. We require that any security manager permit getPolicy/setPolicy.
@@ -531,7 +531,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Sleeps until the timeout has elapsed, or interrupted. Does <em>NOT</em> throw
    * InterruptedException.
    */
@@ -542,7 +542,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Waits up to the specified number of milliseconds for the given thread to enter a wait state:
    * BLOCKED, WAITING, or TIMED_WAITING.
    */
@@ -562,7 +562,7 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Returns the number of milliseconds since time given by startNanoTime, which must have been
    * previously returned from a call to {@link System.nanoTime()}.
    */
@@ -578,7 +578,7 @@ public class JSR166TestCase extends TestCase {
     return t;
   }
 
-  /**
+  /*
    * Waits for the specified time (in milliseconds) for the thread to terminate (using {@link
    * Thread#join(long)}), else interrupts the thread (in the hope that it may terminate later) and
    * fails.
@@ -914,8 +914,8 @@ public class JSR166TestCase extends TestCase {
     }
   }
 
-  //    /**
-  //     * Analog of CheckedRunnable for RecursiveAction
+  //    /*
+//     * Analog of CheckedRunnable for RecursiveAction
   //     */
   //    public abstract class CheckedRecursiveAction extends RecursiveAction {
   //        protected abstract void realCompute() throws Throwable;
@@ -929,8 +929,8 @@ public class JSR166TestCase extends TestCase {
   //        }
   //    }
   //
-  //    /**
-  //     * Analog of CheckedCallable for RecursiveTask
+  //    /*
+//     * Analog of CheckedCallable for RecursiveTask
   //     */
   //    public abstract class CheckedRecursiveTask<T> extends RecursiveTask<T> {
   //        protected abstract T realCompute() throws Throwable;
@@ -950,7 +950,7 @@ public class JSR166TestCase extends TestCase {
     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {}
   }
 
-  /**
+  /*
    * A CyclicBarrier that fails with AssertionFailedErrors instead of throwing checked exceptions.
    */
   public class CheckedBarrier extends CyclicBarrier {

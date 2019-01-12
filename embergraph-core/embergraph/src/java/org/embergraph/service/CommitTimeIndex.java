@@ -16,8 +16,8 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
-/**
- * {@link BTree} whose keys are commit times. No values are stored in the {@link BTree}.
+/*
+* {@link BTree} whose keys are commit times. No values are stored in the {@link BTree}.
  *
  * @todo Subclass {@link BTree} for long keys and arbitrary values and move the find() and
  *     findNext() methods onto that class and make the value type generic. That same logic is
@@ -33,7 +33,7 @@ public class CommitTimeIndex extends BTree {
   /** Instance used to encode the timestamp into the key. */
   private final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
 
-  /**
+  /*
    * Create a transient instance.
    *
    * @return The new instance.
@@ -49,7 +49,7 @@ public class CommitTimeIndex extends BTree {
     return (CommitTimeIndex) BTree.createTransient(/* store, */ metadata);
   }
 
-  /**
+  /*
    * Load from the store.
    *
    * @param store The backing store.
@@ -65,7 +65,7 @@ public class CommitTimeIndex extends BTree {
     super(store, checkpoint, metadata, readOnly);
   }
 
-  /**
+  /*
    * Encodes the commit time into a key.
    *
    * @param commitTime The commit time.
@@ -81,7 +81,7 @@ public class CommitTimeIndex extends BTree {
     return KeyBuilder.decodeLong(key, 0);
   }
 
-  /**
+  /*
    * Return the largest commitTime that is less than or equal to the given timestamp. This is used
    * primarily to locate the commit point that will serve as the ground state for a transaction
    * having <i>timestamp</i> as its start time. In this context the LTE search identifies the most
@@ -109,7 +109,7 @@ public class CommitTimeIndex extends BTree {
     return decodeKey(keyAt(index));
   }
 
-  /**
+  /*
    * Find the first commit time strictly greater than the timestamp.
    *
    * @param timestamp The timestamp. A value of ZERO (0) may be used to find the first commit time.
@@ -137,7 +137,7 @@ public class CommitTimeIndex extends BTree {
     return decodeKey(keyAt(index));
   }
 
-  /**
+  /*
    * Find the index having the largest timestamp that is less than or equal to the given timestamp.
    *
    * @return The index having the largest timestamp that is less than or equal to the given
@@ -179,7 +179,7 @@ public class CommitTimeIndex extends BTree {
     }
   }
 
-  /**
+  /*
    * Add an entry for the commitTime.
    *
    * @param commitTime A timestamp representing a commit time.
@@ -205,7 +205,7 @@ public class CommitTimeIndex extends BTree {
     }
   }
 
-  /**
+  /*
    * Encapsulates key and value formation.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -222,7 +222,7 @@ public class CommitTimeIndex extends BTree {
       super();
     }
 
-    /**
+    /*
      * Ctor when creating a new instance.
      *
      * @param keyBuilderFactory

@@ -38,8 +38,8 @@ import org.embergraph.bop.engine.IChunkAccessor;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * This operator copies its source to its sink(s). Specializations exist which are used to feed the
+/*
+* This operator copies its source to its sink(s). Specializations exist which are used to feed the
  * the initial set of intermediate results into a pipeline ( {@link StartOp}) and which are used to
  * replicate intermediate results to more than one sink ({@link Tee}).
  *
@@ -55,25 +55,25 @@ public class CopyOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * An optional {@link IVariable}[] which specifies which variables will have their bindings
      * copied.
      */
     String SELECT = CopyOp.class.getName() + ".select";
 
-    /**
+    /*
      * An optional {@link IConstraint}[] which places restrictions on the legal patterns in the
      * variable bindings.
      */
     String CONSTRAINTS = CopyOp.class.getName() + ".constraints";
 
-    /**
+    /*
      * An optional {@link IBindingSet}[] to be used <strong>instead</strong> of the default source.
      */
     String BINDING_SETS = CopyOp.class.getName() + ".bindingSets";
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -82,7 +82,7 @@ public class CopyOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -120,7 +120,7 @@ public class CopyOp extends PipelineOp {
     return new FutureTask<Void>(new CopyTask(this, context));
   }
 
-  /**
+  /*
    * Copy the source to the sink.
    *
    * @todo Optimize this. When using an {@link IChunkAccessor} we should be able to directly output

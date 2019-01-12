@@ -19,8 +19,8 @@ package org.embergraph.gom.om;
 
 import org.openrdf.model.URI;
 
-/**
- * The IIDGenerator interface is used to create default object URI ids for new objects. This can be
+/*
+* The IIDGenerator interface is used to create default object URI ids for new objects. This can be
  * exploited by various use cases where a unique id can be conveniently managed by the system.
  *
  * <p>The interface allows applications to control the ID creation if required.
@@ -29,14 +29,14 @@ import org.openrdf.model.URI;
  */
 public interface IIDGenerator {
 
-  /**
+  /*
    * Generate a globally unique URI.
    *
    * @return The URI.
    */
   URI genId();
 
-  /**
+  /*
    * Generate a globally unique URI.
    *
    * @param scope The scope will be incorporated into the URI. This is not necessary to make the URI

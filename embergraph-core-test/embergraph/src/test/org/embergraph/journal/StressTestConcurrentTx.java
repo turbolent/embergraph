@@ -48,8 +48,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.NV;
 
-/**
- * Stress tests for concurrent transaction processing.
+/*
+* Stress tests for concurrent transaction processing.
  *
  * <p>Note: For short transactions, TPS is basically constant for a given combination of the buffer
  * mode and whether or not commits are forced to disk. This means that the #of clients is not a
@@ -119,8 +119,8 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
 
       if (false && journal.getBufferStrategy() instanceof MappedBufferStrategy) {
 
-        /*
-         * @todo the mapped buffer strategy has become cpu bound w/o
+      /*
+       * @todo the mapped buffer strategy has become cpu bound w/o
          * termination when used with concurrent clients - this needs to
          * be looked into further.
          */
@@ -144,7 +144,7 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
     }
   }
 
-  /**
+  /*
    * A stress test with a pool of concurrent clients.
    *
    * <p>Note: <i>nclients</i> corresponds to a number of external processes that start transactions,
@@ -281,8 +281,8 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
 
           } else {
 
-            /*
-             * Other kinds of exceptions are errors.
+          /*
+       * Other kinds of exceptions are errors.
              */
 
             fail("Not expecting: " + ex, ex);
@@ -337,7 +337,7 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
     return ret;
   }
 
-  /**
+  /*
    * Run a transaction.
    *
    * <p>Note: defers creation of the tx until it begins to execute! This provides a substantial
@@ -381,7 +381,7 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
       return super.toString() + "#" + trial;
     }
 
-    /**
+    /*
      * Executes random operations in the transaction.
      *
      * @return The commit time of the transactions and <code>0L</code> IFF the transaction was
@@ -448,8 +448,8 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
 
         if (commitTime == 0L) {
 
-          /*
-           *
+        /*
+       *
            */
           throw new AssertionError("Expecting non-zero commit time");
         }
@@ -467,7 +467,7 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
     }
   }
 
-  /**
+  /*
    * Runs a single instance of the test as configured in the code.
    *
    * @todo Try to make this a correctness test since there are lots of little ways in which things
@@ -529,32 +529,32 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
   }
 
   /** Additional properties understood by this test. */
-  public static interface TestOptions extends ConcurrencyManager.Options {
+  public interface TestOptions extends ConcurrencyManager.Options {
 
     /** The timeout for the test. */
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
     /** The #of concurrent clients to run. */
-    public static final String NCLIENTS = "nclients";
+    String NCLIENTS = "nclients";
 
     /** The #of trials (aka transactions) to run. */
-    public static final String NTRIALS = "ntrials";
+    String NTRIALS = "ntrials";
 
-    /**
+    /*
      * The length of the keys used in the test. This directly impacts the likelyhood of a
      * write-write conflict. Shorter keys mean more conflicts. However, note that conflicts are only
      * possible when there are at least two concurrent clients running.
      */
-    public static final String KEYLEN = "keyLen";
+    String KEYLEN = "keyLen";
 
     /** The #of operations in each trial. */
-    public static final String NOPS = "nops";
+    String NOPS = "nops";
 
     /** The #of clients that choose to abort a transaction rather the committing it [0.0:1.0]. */
-    public static final String ABORT_RATE = "abortRate";
+    String ABORT_RATE = "abortRate";
   }
 
-  /**
+  /*
    * Setup and run a test.
    *
    * @param properties There are no "optional" properties - you must make sure that each property
@@ -581,7 +581,7 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
     return result;
   }
 
-  /**
+  /*
    * Experiment generation utility class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -589,7 +589,7 @@ public class StressTestConcurrentTx extends ProxyTestCase<Journal> implements IC
    */
   public static class GenerateExperiment extends ExperimentDriver {
 
-    /**
+    /*
      * Generates an XML file that can be run by {@link ExperimentDriver}.
      *
      * <p>FIXME I have seen an out of memory error showing up on the 28th condition (they were

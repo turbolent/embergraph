@@ -44,8 +44,8 @@ import org.embergraph.io.FileChannelUtility.AsyncTransfer;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for {@link FileChannelUtility}.
+/*
+* Test suite for {@link FileChannelUtility}.
  *
  * @todo this test suite does not test the behavior under concurrent IO requests. readAll() and
  *     writeAll() should be ok, but can not offer atomic guarentees since at least write operations
@@ -99,7 +99,7 @@ public class TestFileChannelUtility extends TestCase {
     return pos;
   }
 
-  /**
+  /*
    * Choose #of bytes for the an operation which is no more bytes than exist from that position to
    * the end of the file but up to 4 times the capacity of the direct buffers in use by the pool
    * (and no more than Integer.MAX_VALUE bytes regardless).
@@ -129,7 +129,7 @@ public class TestFileChannelUtility extends TestCase {
     }
   }
 
-  /**
+  /*
    * A single trial testing the behavior of readAll() and writeAll()
    *
    * @throws IOException
@@ -179,7 +179,7 @@ public class TestFileChannelUtility extends TestCase {
     }
   }
 
-  /**
+  /*
    * A sequence of trials testing the behavior of readAll() and writeAll(). The ground truth data is
    * changed periodically and updated on the source file and continued testing is performed.
    *
@@ -219,8 +219,8 @@ public class TestFileChannelUtility extends TestCase {
 
         if (trial + 1 < ntrials) {
 
-          /*
-           * If we will do another trial we first purturb the ground
+        /*
+       * If we will do another trial we first purturb the ground
            * truth and write the updated region on the file before we
            * test again.
            */
@@ -273,7 +273,7 @@ public class TestFileChannelUtility extends TestCase {
     }
   }
 
-  /**
+  /*
    * Verify {@link FileChannelUtility#readAll(FileChannel, ByteBuffer, long)} using a file that the
    * caller has pre-written and a byte[] containing the ground truth data for that file.
    *
@@ -327,7 +327,7 @@ public class TestFileChannelUtility extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link FileChannelUtility#transferAll(FileChannel, long, long, RandomAccessFile)} on
    * 20M of random data using a bunch of transfer of different sizes from different positions in the
    * source file.
@@ -384,8 +384,8 @@ public class TestFileChannelUtility extends TestCase {
 
         if (log.isInfoEnabled()) log.info("fromPosition=" + fromPosition + ", count=" + count);
 
-        /*
-         * Transfer some number of bytes from the source channel to the
+      /*
+       * Transfer some number of bytes from the source channel to the
          * target channel.
          *
          * Note: The source channel position is modified as a side
@@ -410,8 +410,8 @@ public class TestFileChannelUtility extends TestCase {
         // changed : new position is [toPosition + count].
         assertEquals("targetPosition", toPosition + count, target.getChannel().position());
 
-        /*
-         * Read the data back from the target channel.
+      /*
+       * Read the data back from the target channel.
          */
 
         final ByteBuffer actual = ByteBuffer.wrap(new byte[count]);
@@ -425,8 +425,8 @@ public class TestFileChannelUtility extends TestCase {
         // Note: used to provoke a test failure.
         //                actual.array()[0]++;
 
-        /*
-         * Verify that the transferred data agrees with the ground truth.
+      /*
+       * Verify that the transferred data agrees with the ground truth.
          */
         if (0
             != BytesUtil.compareBytesWithLenAndOffset(
@@ -684,7 +684,7 @@ public class TestFileChannelUtility extends TestCase {
 
     private volatile AsynchronousFileChannel asyncChannel;
 
-    private int asyncChannelOpenCount = 0;;
+    private int asyncChannelOpenCount = 0;
 
     public ReopenFileChannel(final File file, final RandomAccessFile raf, final String mode)
         throws IOException {
@@ -753,8 +753,8 @@ public class TestFileChannelUtility extends TestCase {
         if (raf != null) {
           final FileChannel channel = raf.getChannel();
           if (channel.isOpen()) {
-            /*
-             * The channel is still open. If you are allowing
+          /*
+       * The channel is still open. If you are allowing
              * concurrent reads on the channel, then this could
              * indicate that two readers each found the channel
              * closed and that one was able to re-open the channel

@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service.ndx.pipeline;
 
-/**
- * An instance of this exception is thrown when a sink closes it's input queue due to an idle
+/*
+* An instance of this exception is thrown when a sink closes it's input queue due to an idle
  * timeout (nothing has been written on its input queue for a period of timeout which exceeds its
  * idle timeout).
  *
@@ -49,7 +49,7 @@ public class IdleTimeoutException extends RuntimeException {
     super(cause);
   }
 
-  /**
+  /*
    * @param message
    * @param cause
    */

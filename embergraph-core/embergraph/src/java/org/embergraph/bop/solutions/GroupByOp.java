@@ -26,8 +26,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.aggregate.IAggregate;
 
-/**
- * Base class for operators which perform aggregation operations on binding sets.
+/*
+* Base class for operators which perform aggregation operations on binding sets.
  *
  * <h2>Aggregation semantics and errors.</h2>
  *
@@ -69,7 +69,7 @@ public abstract class GroupByOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * This required annotation describes the {@link IGroupByState} for the aggregation operator,
      * including the SELECT value expressions to be projected, the optional GROUP BY value
      * expressions, and the optional HAVING value expressions.
@@ -78,7 +78,7 @@ public abstract class GroupByOp extends PipelineOp {
      */
     String GROUP_BY_STATE = GroupByOp.class.getName() + ".groupByState";
 
-    /**
+    /*
      * This required annotation provides the {@link IGroupByRewriteState}, which is a rewrite of the
      * {@link GroupByState} that allows for certain optimizations. This data is a required
      * annotation because the rewrite includes anonymous variables and the identity of those
@@ -96,7 +96,7 @@ public abstract class GroupByOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -104,7 +104,7 @@ public abstract class GroupByOp extends PipelineOp {
     super(args, annotations);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff this operator supports pipelined aggregation
    *
    * <p>Note: Pipelined aggregation is only possible when (a) DISTINCT is not used in the {@link

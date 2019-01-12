@@ -27,8 +27,8 @@ import java.util.Set;
 import java.util.Vector;
 import junit.framework.TestCase;
 
-/**
- * Test suite for {@link NameAndExtensionFilter}.
+/*
+* Test suite for {@link NameAndExtensionFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -45,7 +45,7 @@ public class TestNameAndExtensionFilter extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Verifies that the same files are present in each {@link File}[]. The order in which the files
    * are listed does not matter.
    *
@@ -152,7 +152,7 @@ public class TestNameAndExtensionFilter extends TestCase {
         v.add(logFile);
       }
 
-      final File[] expectedFiles = (File[]) v.toArray(new File[] {});
+      final File[] expectedFiles = v.toArray(new File[] {});
 
       assertSameFiles(expectedFiles, logFilter.getFiles());
 

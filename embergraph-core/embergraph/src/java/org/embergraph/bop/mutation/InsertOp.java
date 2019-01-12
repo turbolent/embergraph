@@ -44,8 +44,8 @@ import org.embergraph.service.DataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * This operator writes elements constructed from binding sets and an orders list of variables and
+/*
+* This operator writes elements constructed from binding sets and an orders list of variables and
  * constants on an index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -59,7 +59,7 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * An {@link IPredicate}. The {@link IPredicate#asBound(IBindingSet)} predicate will be used to
      * create the elements to be inserted into the relation.
      *
@@ -75,7 +75,7 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
     String KEY_ORDER = (InsertOp.class.getName() + ".keyOrder").intern();
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -84,7 +84,7 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -158,7 +158,7 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
       keyOrder = op.getKeyOrder();
     }
 
-    /**
+    /*
      * @todo This does not order the tuples before writing on the local index. I am not sure that it
      *     should. I think that order is generally obtained from how we organize the tuples when
      *     mapping them across shards. However, for standalone databases it may make sense to insert
@@ -216,7 +216,7 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
       }
     }
 
-    /**
+    /*
      * Return an mutable view of the specified index.
      *
      * @param <T> The generic type of the elements in the relation.
@@ -245,8 +245,8 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
         final IRelation<T> relation, final IKeyOrder<T> keyOrder, final int partitionId) {
 
       if (true) {
-        /*
-         * FIXME Concurrency control and locks. Maybe submit as an
+      /*
+       * FIXME Concurrency control and locks. Maybe submit as an
          * AbstractTask?
          */
         throw new UnsupportedOperationException();
@@ -275,8 +275,8 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
       } else {
 
         if (fed == null) {
-          /*
-           * This is not scale-out so index partitions are not
+        /*
+       * This is not scale-out so index partitions are not
            * supported.
            */
           throw new UnsupportedOperationException();
@@ -303,8 +303,8 @@ public class InsertOp<E> extends PipelineOp implements IShardwisePipelineOp<E> {
   //
   //  a[i] = e;
 
-  //    /**
-  //     * This is a shard wise operator.
+  //    /*
+//     * This is a shard wise operator.
   //     */
   //    @Override
   //    public BOpEvaluationContext getEvaluationContext() {

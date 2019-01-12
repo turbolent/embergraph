@@ -23,8 +23,8 @@ package org.embergraph.htree.data;
 import org.embergraph.btree.data.ITreeNodeData;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Interface for the data record of a hash directory. A hash directory provides an address space. In
+/*
+* Interface for the data record of a hash directory. A hash directory provides an address space. In
  * a hash table, all of the children are buckets. In a hash tree, children may be either buckets or
  * directories. If the hash tree is balanced, then all children on the same level are of the same
  * type (either buckets or directories). If the hash tree is unbalanced, then children may be of
@@ -57,19 +57,19 @@ import org.embergraph.rawstore.IRawStore;
  */
 public interface IDirectoryData extends ITreeNodeData {
 
-  /**
+  /*
    * <code>true</code> iff this is an overflow directory page. An overflow directory page is created
    * when a bucket page overflows as the parent of that bucket page. The children of the overflow
    * directory page may be other overflow directory pages or bucket pages. All bucket pages below an
    * overflow directory page will have the same key. That key is recorded once in each overflow
    * bucket page.
    */
-  public boolean isOverflowDirectory();
+  boolean isOverflowDirectory();
 
-  /**
+  /*
    * If this is an overflow directory, then there is a single key for which the directory will
    * reference multiple BucketPages storing the associated values. The key is used to constrain
    * insertions to the Directory, adding extra levels to discriminate as necessary.
    */
-  public byte[] getOverflowKey();
+  byte[] getOverflowKey();
 }

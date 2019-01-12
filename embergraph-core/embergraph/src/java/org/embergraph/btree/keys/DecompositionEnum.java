@@ -2,8 +2,8 @@ package org.embergraph.btree.keys;
 
 import java.text.Collator;
 
-/**
- * Type safe enumeration for the decomposition mode.
+/*
+* Type safe enumeration for the decomposition mode.
  *
  * <p>Note: ICU and the JDK use different integer constants for the decomposition modes!
  *
@@ -17,5 +17,5 @@ public enum DecompositionEnum {
   /** See {@link Collator#FULL_DECOMPOSITION}. */
   Full,
   /** See {@link Collator#CANONICAL_DECOMPOSITION}. */
-  Canonical;
+  Canonical
 }

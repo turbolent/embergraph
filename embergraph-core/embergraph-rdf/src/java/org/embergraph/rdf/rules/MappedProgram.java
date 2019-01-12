@@ -27,8 +27,8 @@ import java.util.Iterator;
 import org.embergraph.relation.rule.IStep;
 import org.embergraph.relation.rule.Program;
 
-/**
- * Program automatically maps the rules added across the combination of the database (the relation
+/*
+* Program automatically maps the rules added across the combination of the database (the relation
  * named on the rule) and the focusStore.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -41,8 +41,8 @@ public class MappedProgram extends Program {
 
   private String focusStore;
 
-  //    /**
-  //     * De-serialization ctor.
+  //    /*
+//     * De-serialization ctor.
   //     */
   //    public MappedProgram() {
   //
@@ -50,7 +50,7 @@ public class MappedProgram extends Program {
   //
   //    }
 
-  /**
+  /*
    * @param name
    * @param focusStore Identifies the relation containing the data to be asserted or retracted
    *     (optional). When <code>null</code> the steps are not transformed as they are added to the
@@ -65,7 +65,7 @@ public class MappedProgram extends Program {
     this.focusStore = focusStore;
   }
 
-  /**
+  /*
    * Allow subclasses to use a different TM Utility.
    *
    * @return TMUtility instance
@@ -75,7 +75,7 @@ public class MappedProgram extends Program {
     return TMUtility.INSTANCE;
   }
 
-  /**
+  /*
    * Extended to add the N steps that map the given <i>step</i> across the database and the
    * focusStore.
    */
@@ -108,8 +108,8 @@ public class MappedProgram extends Program {
        */
       if (this.isClosure()) {
 
-        /*
-         * insert the individual rules into the closure program.
+      /*
+       * insert the individual rules into the closure program.
          */
 
         final Iterator<? extends IStep> steps = subProgram.steps();

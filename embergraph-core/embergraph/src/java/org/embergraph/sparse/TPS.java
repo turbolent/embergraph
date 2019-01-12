@@ -36,8 +36,8 @@ import java.util.TreeMap;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure;
 
-/**
- * Default implementation.
+/*
+* Default implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -57,7 +57,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
 
   private long writeTime;
 
-  /**
+  /*
    * The {schema,property,timestamp,value} tuples.
    *
    * <p>Note: The key is {property,timestamp}. The value is the value. The schema is implicit since
@@ -65,12 +65,12 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
    */
   private TreeMap<TP, ITPV> tuples;
 
-  /**
+  /*
    * Used to pass back additional metadata for an atomic write with an {@link IPrecondition} test.
    */
   private boolean preconditionOk = true;
 
-  /**
+  /*
    * <code>true</code> unless an atomic write operation specified an {@link IPrecondition} and that
    * {@link IPrecondition} was not satisified.
    */
@@ -87,7 +87,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
   /** De-serialization constructor. */
   public TPS() {}
 
-  /**
+  /*
    * @param schema The schema.
    * @param timestamp When the data were read back as part of an atomic write, then this MUST be the
    *     timestamp of the atomic write. That can be either a caller given timestamp or a server
@@ -105,7 +105,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     this.writeTime = timestamp;
   }
 
-  /**
+  /*
    * The value of the primary key.
    *
    * <p>Note: This looks up and returns the value of the {@link Schema#getPrimaryKeyName()} property
@@ -130,8 +130,8 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     return tuples.size();
   }
 
-  //    /**
-  //     * Remove all existing bindings for that property regardless of the
+  //    /*
+//     * Remove all existing bindings for that property regardless of the
   //     * associated timestamp.
   //     *
   //     * @param name
@@ -161,7 +161,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
   //
   //    }
 
-  /**
+  /*
    * Set the value of the named property as of the specified timestamp.
    *
    * @param name The property name.
@@ -250,8 +250,8 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     return last;
   }
 
-  // /**
-  //     * Return <code>true</code> if there are any bindings for the property.
+  // /*
+//     * Return <code>true</code> if there are any bindings for the property.
   //     *
   //     * @param name
   //     *            The property name.
@@ -285,7 +285,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     return currentRow(null /* filter */);
   }
 
-  /**
+  /*
    * Filters for the current row (most recent bindings)
    *
    * @param filter An optional property name filter.
@@ -371,7 +371,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     return filter(fromTime, toTime, null /* filter */);
   }
 
-  /**
+  /*
    * Filters for only those bindings that satisify the given filter.
    *
    * @param filter An optional filter.
@@ -381,7 +381,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     return filter(MIN_TIMESTAMP, MAX_TIMESTAMP, filter);
   }
 
-  /**
+  /*
    * Filters for only those bindings whose timestamp is GTE to the given timestamp and which
    * satisify the optional property name filter.
    */
@@ -463,7 +463,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     return asMap(timestamp, null /* filter */);
   }
 
-  /**
+  /*
    * Note: A {@link LinkedHashMap} is returned to reduce the overhead with iterators while
    * preserving the ordering imposed by {@link #tuples}.
    */
@@ -508,8 +508,8 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
 
   //    private final transient Integer ONE = Integer.valueOf(1);
   //
-  //    /**
-  //     * Return a frequency distribution for the distinct timestamps.
+  //    /*
+//     * Return a frequency distribution for the distinct timestamps.
   //     */
   //    private HashMap<Long,Integer> timestamps() {
   //
@@ -541,8 +541,8 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
   //
   //    }
   //
-  //    /**
-  //     * Return a frequency distribution for the distinct property names.
+  //    /*
+//     * Return a frequency distribution for the distinct property names.
   //     */
   //    private LinkedHashMap<String,Integer> names() {
   //
@@ -574,7 +574,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
   //
   //    }
 
-  /**
+  /*
    * FIXME use compression for the names and timestamps, refactoring the logic already in {@link
    * AbstractKeyArrayIndexProcedure}.
    *
@@ -692,7 +692,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
   /** No compression. */
   private static final short VERSION0 = 0x0;
 
-  /**
+  /*
    * A {property, timestamp} tuple.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -713,7 +713,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
       this.timestamp = timestamp;
     }
 
-    /**
+    /*
      * Note: The order is imposed by timestamp (ascending) then property name (ascending). This
      * means that a scan may abort once it reads a timestamp greater than the largest timestamp of
      * interest.
@@ -738,7 +738,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     }
   }
 
-  /**
+  /*
    * Helper class models a single property value as of a given timestamp.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -753,7 +753,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     private long timestamp;
     private Object value;
 
-    /**
+    /*
      * @param schema The schema.
      * @param name The property name.
      * @param timestamp The timestamp.
@@ -801,7 +801,7 @@ public class TPS implements ITPS, Externalizable, IRowStoreConstants {
     }
   }
 
-  /**
+  /*
    * Imposes ordering based on schema, property name, and timestamp. It is an error to have a
    * collection with multiple values for the same schema, property name, and timestamp.
    *

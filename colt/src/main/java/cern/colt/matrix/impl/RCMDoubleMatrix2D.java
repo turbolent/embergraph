@@ -12,8 +12,8 @@ import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * Sparse row-compressed-modified 2-d matrix holding <tt>double</tt> elements.
+/*
+* Sparse row-compressed-modified 2-d matrix holding <tt>double</tt> elements.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 0.9, 04/14/2000
@@ -24,7 +24,7 @@ class RCMDoubleMatrix2D extends WrapperDoubleMatrix2D {
    */
   private IntArrayList[] indexes;
   private DoubleArrayList[] values;
-  /**
+  /*
    * Constructs a matrix with a copy of the given values. <tt>values</tt> is required to have the
    * form <tt>values[row][column]</tt> and have exactly the same number of columns in every row.
    *
@@ -39,7 +39,7 @@ class RCMDoubleMatrix2D extends WrapperDoubleMatrix2D {
     this(values.length, values.length == 0 ? 0 : values[0].length);
     assign(values);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of rows and columns. All entries are initially
    * <tt>0</tt>.
    *
@@ -54,7 +54,7 @@ class RCMDoubleMatrix2D extends WrapperDoubleMatrix2D {
     indexes = new IntArrayList[rows];
     values = new DoubleArrayList[rows];
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>value</tt>.
    *
    * @param value the value to be filled into the cells.
@@ -70,14 +70,14 @@ class RCMDoubleMatrix2D extends WrapperDoubleMatrix2D {
     } else super.assign(value);
     return this;
   }
-  /**
+  /*
    * Returns the content of this matrix if it is a wrapper; or <tt>this</tt> otherwise. Override
    * this method in wrappers.
    */
   protected DoubleMatrix2D getContent() {
     return this;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -95,7 +95,7 @@ class RCMDoubleMatrix2D extends WrapperDoubleMatrix2D {
     if (k < 0) return 0;
     return values[row].getQuick(k);
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of rows and columns. For example, if the receiver is an instance of
    * type <tt>DenseDoubleMatrix2D</tt> the new matrix must also be of type
@@ -111,7 +111,7 @@ class RCMDoubleMatrix2D extends WrapperDoubleMatrix2D {
   public DoubleMatrix2D like(int rows, int columns) {
     return new RCMDoubleMatrix2D(rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix2D</tt> the new matrix must be of type <tt>DenseDoubleMatrix1D</tt>, if
@@ -124,7 +124,7 @@ class RCMDoubleMatrix2D extends WrapperDoubleMatrix2D {
   public DoubleMatrix1D like1D(int size) {
     return new SparseDoubleMatrix1D(size);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -175,7 +175,7 @@ class RCMDoubleMatrix2D extends WrapperDoubleMatrix2D {
       values[i].beforeInsert(k, value);
     }
   }
-  /**
+  /*
    * Linear algebraic matrix-vector multiplication; <tt>z = A * y</tt>. <tt>z[i] = alpha*Sum(A[i,j]
    * * y[j]) + beta*z[i], i=0..A.rows()-1, j=0..y.size()-1</tt>. Where <tt>A == this</tt>.
    *

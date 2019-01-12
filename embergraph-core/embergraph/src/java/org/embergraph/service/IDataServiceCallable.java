@@ -5,8 +5,8 @@ import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.DropIndexTask;
 import org.embergraph.journal.RegisterIndexTask;
 
-/**
- * Interface for procedures that require access to the {@link IDataService} and or the federation.
+/*
+* Interface for procedures that require access to the {@link IDataService} and or the federation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -19,7 +19,7 @@ import org.embergraph.journal.RegisterIndexTask;
  */
 public interface IDataServiceCallable extends IFederationCallable {
 
-  /**
+  /*
    * Invoked before the task is executed to provide a reference to the {@link IDataService} on which
    * it is executing. This method is also responsible for setting the {@link IEmbergraphFederation}
    * reference using {@link IFederationCallable#setFederation(IEmbergraphFederation)}.
@@ -31,7 +31,7 @@ public interface IDataServiceCallable extends IFederationCallable {
    */
   void setDataService(DataService dataService);
 
-  /**
+  /*
    * Return the {@link DataService}.
    *
    * @return The data service and never <code>null</code>.

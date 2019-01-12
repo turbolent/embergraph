@@ -88,7 +88,7 @@ public class TestMemoryManager extends TestCase2 {
     assertTrue(saddr == saddr2);
   }
 
-  /**
+  /*
    * The address mappings are between the integer allocation address and the sector index (16 signed
    * bits) and offset (16 unsigned bits).
    */
@@ -273,7 +273,7 @@ public class TestMemoryManager extends TestCase2 {
           addrs.add(Long.valueOf(addr1));
         } else if (i > 1000) {
           final int f = r.nextInt(addrs.size());
-          final long faddr = ((Long) addrs.remove(f)).longValue();
+          final long faddr = addrs.remove(f).longValue();
           mm.free(faddr);
           frees++;
         }
@@ -312,7 +312,7 @@ public class TestMemoryManager extends TestCase2 {
     assertTrue(manager.getSlotBytes() == 0L);
   }
 
-  /**
+  /*
    * Unit test in which we verify that a thread will block awaiting an allocation until another
    * thread releases an allocation, thereby making enough memory available for the thread to
    * continue.
@@ -366,8 +366,8 @@ public class TestMemoryManager extends TestCase2 {
                   if (log.isInfoEnabled())
                     log.info(
                         "Attempting blocking allocation: slotBytes: " + manager.getSlotBytes());
-                  /*
-                   * blocking allocation of the same size that was
+                /*
+       * blocking allocation of the same size that was
                    * just refused.
                    */
                   return manager.allocate(sectorSize);

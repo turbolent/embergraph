@@ -6,8 +6,8 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/**
- * A quorum is a collection of services instances comprising the same logical service. The {@link
+/*
+* A quorum is a collection of services instances comprising the same logical service. The {@link
  * Quorum} interface provides a view of the quorum from the perspective of one of those member
  * services. A quorum has a replication factor <em>k</em>. A member service may "join" with a quorum
  * when it shares an agreement with at least (k+1)/2 other quorum members concerning its state. When
@@ -57,7 +57,7 @@ import java.util.concurrent.TimeoutException;
  */
 public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
 
-  /**
+  /*
    * The constant used to indicate that there is no quorum (@value {@value #NO_QUORUM}).
    *
    * <p>Note: The quorum token is formed by adding one to the {@link #lastValidToken()}. The initial
@@ -66,7 +66,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   long NO_QUORUM = -1;
 
-  /**
+  /*
    * Return <em>k</em>, the target replication factor.
    *
    * <p>A normal quorum requires a simple majority and a replication factor that is a non-negative
@@ -81,7 +81,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   int replicationFactor();
 
-  /**
+  /*
    * Return <code>true</code> iff the argument is large enough to constitute a quorum.
    *
    * <p>Note: This method makes it easier to write code that obeys policies other than simple
@@ -95,7 +95,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   boolean isQuorum(int njoined);
 
-  /**
+  /*
    * The current token for the quorum. The initial value before the quorum has met is {@link
    * #NO_QUORUM}. When a leader is elected, it sets the current token as <code>
    * token := lastValidToken() + 1</code>. The current token is cleared to {@link #NO_QUORUM} if the
@@ -108,7 +108,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
   /** The quorum token which was assigned the last time a leader was elected. */
   long lastValidToken();
 
-  /**
+  /*
    * Return <code>true</code> if {@link #replicationFactor()} is GT ONE (1). High availability
    * exists (in principle) when the {@link Quorum#replicationFactor()} <em>k</em> is greater than
    * one. High availability exists (in practice) when the {@link Quorum} {@link Quorum#isQuorumMet()
@@ -118,13 +118,13 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   boolean isHighlyAvailable();
 
-  /**
+  /*
    * Return true iff the #of services joined with the quorum is GTE <code>(k + 1)/2</code>. A
    * service with a met quorum is highly available <em>in practice</em>.
    */
   boolean isQuorumMet();
 
-  /**
+  /*
    * Return true iff the #of services joined with the quorum EQUALS <code>k</code> AND the provided
    * quorum token is valid. A service with a fully met quorum may be eligible to release storage
    * associated with historical allocations since it does not need to maintain history in support of
@@ -135,7 +135,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   boolean isQuorumFullyMet(long token);
 
-  /**
+  /*
    * Add a listener
    *
    * @param listener The listener.
@@ -145,7 +145,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   void addListener(QuorumListener listener);
 
-  /**
+  /*
    * Remove a listener (the quorum's client is always a listener).
    *
    * @param listener The listener.
@@ -155,7 +155,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   void removeListener(QuorumListener listener);
 
-  /**
+  /*
    * Return the identifiers for the member services (all known physical services for the logical
    * service).
    *
@@ -166,7 +166,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
   /** Return an immutable snapshot of the votes cast by the quorum members. */
   Map<Long, UUID[]> getVotes();
 
-  /**
+  /*
    * Return the vote cast by the service.
    *
    * @param serviceId The service.
@@ -176,7 +176,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   Long getCastVote(final UUID serviceId);
 
-  /**
+  /*
    * Search for the vote for the service.
    *
    * @param serviceId The service identifier.
@@ -185,7 +185,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   Long getCastVoteIfConsensus(final UUID serviceId);
 
-  /**
+  /*
    * Return the identifiers for the member services joined with this quorum. If the quorum was met
    * at the moment the request was processed, then the first element of the array was the quorum
    * leader as of that moment and the remaining elements are followers (non-blocking).
@@ -194,7 +194,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   UUID[] getJoined();
 
-  /**
+  /*
    * Return the service identifiers for the services in the write pipeline in the order in which
    * they will accept and relay writes.
    *
@@ -202,7 +202,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   UUID[] getPipeline();
 
-  /**
+  /*
    * Return the {@link UUID} of the service which is the last service in the write pipeline.
    *
    * @return The {@link UUID} of the last service in the write pipeline or <code>null</code> if
@@ -210,7 +210,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   UUID getLastInPipeline();
 
-  /**
+  /*
    * Return the {@link UUID}of the service in the pipeline which is immediately upstream from (prior
    * to) and downstream from (next to) the specified service. These are, respectively, the service
    * from which it receives data (upstream) and to which it sends data (downstream).
@@ -224,7 +224,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   UUID[] getPipelinePriorAndNext(final UUID serviceId);
 
-  /**
+  /*
    * Await a met quorum (blocking). If the {@link Quorum}is not met, then this will block until the
    * {@link Quorum} meets.
    *
@@ -234,7 +234,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   long awaitQuorum() throws InterruptedException, AsynchronousQuorumCloseException;
 
-  /**
+  /*
    * Await a met quorum (blocking). If the {@link Quorum}is not met, then this will block until the
    * {@link Quorum} meets.
    *
@@ -248,7 +248,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
   long awaitQuorum(long timeout, TimeUnit units)
       throws InterruptedException, AsynchronousQuorumCloseException, TimeoutException;
 
-  /**
+  /*
    * Await a met break (blocking). If the {@link Quorum} is met, then this will block until the
    * {@link Quorum} breaks.
    *
@@ -257,7 +257,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   void awaitBreak() throws InterruptedException, AsynchronousQuorumCloseException;
 
-  /**
+  /*
    * Await a met break (blocking). If the {@link Quorum} is met, then this will block until the
    * {@link Quorum} breaks.
    *
@@ -270,7 +270,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
   void awaitBreak(long timeout, TimeUnit units)
       throws InterruptedException, AsynchronousQuorumCloseException, TimeoutException;
 
-  /**
+  /*
    * Assert that the quorum associated with the token is still valid. The pattern for using this
    * method is to save the {@link #token()} somewhere. This method may then be invoked to verify
    * that the saved token is still valid and, hence, that the quorum is still met.
@@ -282,7 +282,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   void assertQuorum(long token);
 
-  /**
+  /*
    * Assert that the token is still valid and that the {@link #getClient()} is the quorum leader.
    *
    * @param token A quorum token.
@@ -292,7 +292,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   void assertLeader(long token);
 
-  /**
+  /*
    * The {@link UUID} of the leader {@link Quorum} leader (non-blocking).
    *
    * @return The {@link UUID} of the leader {@link Quorum} leader -or- <code>null</code> if the
@@ -306,7 +306,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
   /** Terminate any asynchronous processing associated with maintaining the {@link Quorum} state. */
   void terminate();
 
-  /**
+  /*
    * Return the {@link QuorumClient} iff the quorum is running.
    *
    * @return The {@link QuorumClient}.
@@ -314,7 +314,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   C getClient();
 
-  /**
+  /*
    * Return the {@link QuorumMember} iff the quorum is running.
    *
    * @return The {@link QuorumMember}.
@@ -323,7 +323,7 @@ public interface Quorum<S extends Remote, C extends QuorumClient<S>> {
    */
   QuorumMember<S> getMember();
 
-  /**
+  /*
    * The object used to effect changes in distributed quorum state on the behalf of the {@link
    * QuorumMember}.
    *

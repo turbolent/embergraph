@@ -37,8 +37,8 @@ import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Interface providing access to various things of interest when preparing and evaluating a query or
+/*
+* Interface providing access to various things of interest when preparing and evaluating a query or
  * update operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
  */
 public interface IEvaluationContext {
 
-  /**
+  /*
    * Some summary statistics about the exogenous solution sets. These are computed by {@link
    * AST2BOpUtility#convert(AST2BOpContext, IBindingSet[])} before it begins to run the {@link
    * IASTOptimizer}s.
@@ -80,7 +80,7 @@ public interface IEvaluationContext {
   /** Return the namespace of the {@link LexiconRelation}. */
   String getLexiconNamespace();
 
-  /**
+  /*
    * Return the context for evaluation of {@link IValueExpression}s during query optimization.
    *
    * @return The context that can be used to resolve the {@link ILexiconConfiguration} and {@link
@@ -91,7 +91,7 @@ public interface IEvaluationContext {
    */
   BOpContextBase getBOpContext();
 
-  /**
+  /*
    * Return the timestamp which will be used to read on the lexicon.
    *
    * <p>Note: This uses the timestamp of the triple store view unless this is a read/write
@@ -103,14 +103,14 @@ public interface IEvaluationContext {
   /** Return the database. */
   AbstractTripleStore getAbstractTripleStore();
 
-  /**
+  /*
    * Return the manager for named solution sets (experimental feature).
    *
    * @return The manager -or- <code>null</code>.
    */
   ISolutionSetManager getSolutionSetManager();
 
-  /**
+  /*
    * Return the cache for described resources (experimental feature).
    *
    * @return The cache -or- <code>null</code>.
@@ -118,7 +118,7 @@ public interface IEvaluationContext {
    */
   IDescribeCache getDescribeCache();
 
-  /**
+  /*
    * Resolve the pre-existing named solution set returning its {@link ISolutionSetStats}.
    *
    * @param localName The local name of the named solution set.
@@ -127,8 +127,8 @@ public interface IEvaluationContext {
    */
   ISolutionSetStats getSolutionSetStats(String name);
 
-  //    /**
-  //     * Resolve a pre-existing named solution set.
+  //    /*
+//     * Resolve a pre-existing named solution set.
   //     *
   //     * @param localName
   //     *            The local name of the named solution set.
@@ -140,19 +140,19 @@ public interface IEvaluationContext {
   //     */
   //    ICloseableIterator<IBindingSet[]> getSolutionSet(String name);
 
-  /**
+  /*
    * Returns all the variables with a global scope. This basically serves the purpose of identifying
    * variables that are injected through Sesame's Operation.setBinding() interface. Guaranteed to be
    * not null.
    *
    * @return
    */
-  public Set<IVariable<?>> getGloballyScopedVariables();
+  Set<IVariable<?>> getGloballyScopedVariables();
 
-  /**
+  /*
    * Sets the variables with global scope. This basically serves the purpose of identifying
    *
    * @param globallyScopedVariables
    */
-  public void setGloballyScopedVariables(final Set<IVariable<?>> globallyScopedVariables);
+  void setGloballyScopedVariables(final Set<IVariable<?>> globallyScopedVariables);
 }

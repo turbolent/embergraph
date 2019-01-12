@@ -28,8 +28,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Query hint for turning the {@link HTreeDistinctBindingSetsOp} on/off.
+/*
+* Query hint for turning the {@link HTreeDistinctBindingSetsOp} on/off.
  *
  * <p>TODO This can only be used enable/disable the native distinct solutions both on a query wide
  * basis (via {@link AST2BOpContext}). However, it should be possible to enable/disable this on a

@@ -47,8 +47,8 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test relation composed of {@link E} elements with a single primary index.
+/*
+* Test relation composed of {@link E} elements with a single primary index.
  *
  * <p>Note: This has to be public in order to be an {@link ILocatableResource}.
  */
@@ -72,7 +72,7 @@ public class R extends AbstractRelation<E> {
       return 2;
     }
 
-    /**
+    /*
      * The [name] and [value] attributes are used to generate the key. [name] is at index zero in
      * the key. [value] is at index 1.
      */
@@ -89,7 +89,7 @@ public class R extends AbstractRelation<E> {
   /** The only defined index order (the primary key). */
   public static final KeyOrder primaryKeyOrder = new KeyOrder();
 
-  /**
+  /*
    * @param indexManager
    * @param namespace
    * @param timestamp
@@ -114,7 +114,7 @@ public class R extends AbstractRelation<E> {
     getIndexManager().registerIndex(metadata);
   }
 
-  /**
+  /*
    * Alternative {@link #create()} method creates the primary index using the specified separator
    * keys and data services.
    *
@@ -205,8 +205,8 @@ public class R extends AbstractRelation<E> {
 
       if (!ndx.contains(key)) {
 
-        /*
-         * Note: The key is formed from both the name and the value.
+      /*
+       * Note: The key is formed from both the name and the value.
          * This makes it possible to have a many-to-many association
          * pattern.
          *

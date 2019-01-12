@@ -31,8 +31,8 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.relation.rule.IAccessPathExpander;
 
-/**
- * A predicate that is a triple with one or more variables. While the general case allows a
+/*
+* A predicate that is a triple with one or more variables. While the general case allows a
  * predicate to have an arbitrary name, for RDFS reasoning we are only concerned with predicates of
  * the form <code>triple(s,p,o)</code>.
  *
@@ -46,12 +46,12 @@ public class SPOPredicate extends Predicate<ISPO> {
   /** */
   private static final long serialVersionUID = 3517916629931687107L;
 
-  public static interface Annotations extends Predicate.Annotations {
+  public interface Annotations extends Predicate.Annotations {
 
     /** The SID {@link IVariable} (optional). */
     String SID = SPOPredicate.class.getName() + ".sid";
 
-    /**
+    /*
      * Include historical SPOs (type == StatementEnum.History). By default these will be filtered
      * out.
      *
@@ -75,7 +75,7 @@ public class SPOPredicate extends Predicate<ISPO> {
     super(op);
   }
 
-  /**
+  /*
    * Partly specified ctor. The context will be <code>null</code>. The predicate is NOT optional. No
    * constraint is specified. No expander is specified.
    *
@@ -98,7 +98,7 @@ public class SPOPredicate extends Predicate<ISPO> {
         new NV(Annotations.RELATION_NAME, new String[] {relationName}));
   }
 
-  /**
+  /*
    * Partly specified ctor. The predicate is NOT optional. No constraint is specified. No expander
    * is specified.
    *
@@ -121,7 +121,7 @@ public class SPOPredicate extends Predicate<ISPO> {
     super(new IVariableOrConstant[] {s, p, o, c}, new NV(Annotations.RELATION_NAME, relationName));
   }
 
-  /**
+  /*
    * Partly specified ctor. The context will be <code>null</code>. The predicate is NOT optional. No
    * constraint is specified. No expander is specified.
    *
@@ -142,7 +142,7 @@ public class SPOPredicate extends Predicate<ISPO> {
     super(new IVariableOrConstant[] {s, p, o}, new NV(Annotations.RELATION_NAME, relationName));
   }
 
-  /**
+  /*
    * Partly specified ctor. The context will be <code>null</code>. No constraint is specified. No
    * expander is specified.
    *
@@ -168,7 +168,7 @@ public class SPOPredicate extends Predicate<ISPO> {
         new NV(Annotations.OPTIONAL, optional));
   }
 
-  /**
+  /*
    * Partly specified ctor. The context will be <code>null</code>. No constraint is specified. No
    * expander is specified.
    *
@@ -195,7 +195,7 @@ public class SPOPredicate extends Predicate<ISPO> {
         new NV(Annotations.ACCESS_PATH_EXPANDER, expander));
   }
 
-  /**
+  /*
    * Partly specified ctor. The context will be <code>null</code>. No constraint is specified.
    *
    * @param relationName
@@ -223,8 +223,8 @@ public class SPOPredicate extends Predicate<ISPO> {
         new NV(Annotations.ACCESS_PATH_EXPANDER, expander));
   }
 
-  //    /**
-  //     * Constrain the predicate by setting the context position. If the context
+  //    /*
+//     * Constrain the predicate by setting the context position. If the context
   //     * position on the {@link SPOPredicate} is non-<code>null</code>, then you
   //     * must use {@link #asBound(IBindingSet)} to replace all occurrences of the
   //     * variable appearing in the context position of the predicate with the
@@ -293,7 +293,7 @@ public class SPOPredicate extends Predicate<ISPO> {
     return (IVariableOrConstant<IV>) get(3 /* c */);
   }
 
-  /**
+  /*
    * The variable for the statement identifier (optional). The statement identifier is the
    * composition of the (subject, predicate, and object) positions of the fully predicate. When this
    * variable is declared, it will be bound to a {@link SidIV} for matched statements.
@@ -323,7 +323,7 @@ public class SPOPredicate extends Predicate<ISPO> {
     return getProperty(Annotations.INCLUDE_HISTORY, false);
   }
 
-  /**
+  /*
    * Strengthened return type.
    *
    * <p>{@inheritDoc}
@@ -425,8 +425,8 @@ public class SPOPredicate extends Predicate<ISPO> {
 
   }
 
-  //    /**
-  //     * Strengthened return type.
+  //    /*
+//     * Strengthened return type.
   //     * <p>
   //     * {@inheritDoc}
   //     */

@@ -36,8 +36,8 @@ import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 
-/**
- * Implementation caches all locators but does not allow stale locators. This is useful for
+/*
+* Implementation caches all locators but does not allow stale locators. This is useful for
  * read-historical index views since locators can not become stale for a historical view.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -73,7 +73,7 @@ public class CacheOnceMetadataIndex implements IMetadataIndex {
         + "}";
   }
 
-  /**
+  /*
    * Caches the index partition locators.
    *
    * @param name The name of the scale-out index.
@@ -112,7 +112,7 @@ public class CacheOnceMetadataIndex implements IMetadataIndex {
     cacheLocators(null /* fromKey */, null /* toKey */);
   }
 
-  /**
+  /*
    * Bulk copy the partition definitions for the scale-out index into the client.
    *
    * <p>Note: This assumes that the metadata index is NOT partitioned and DOES NOT support delete
@@ -167,7 +167,7 @@ public class CacheOnceMetadataIndex implements IMetadataIndex {
     }
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException stale locators should not occur for read-historical
    *     views!
    */

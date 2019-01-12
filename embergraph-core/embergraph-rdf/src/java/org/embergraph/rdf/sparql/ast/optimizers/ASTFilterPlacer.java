@@ -25,8 +25,8 @@ import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 
-/**
- * Class allowing for precise placement of FILTER expressions within join group.
+/*
+* Class allowing for precise placement of FILTER expressions within join group.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -42,14 +42,14 @@ class ASTFilterPlacer {
 
     this.fExInfo = fExInfo;
 
-    /**
+    /*
      * Filter out the filter nodes from the join group, they will receive special handling in the
      * end. Note that this includes ASK subqueries which belong to FILTER expressions.
      */
     filterNodeClassifier =
         new ASTTypeBasedNodeClassifier(new Class<?>[] {FilterNode.class, SubqueryRoot.class});
 
-    /**
+    /*
      * We're interested in the ASK subquery roots associated with some EXISTS or NOT EXISTS filter,
      * as recoreded in the fExInfo map.
      */

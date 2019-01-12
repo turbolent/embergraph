@@ -26,8 +26,8 @@ package org.embergraph.resources;
 import java.util.UUID;
 import org.embergraph.btree.BTree;
 
-/**
- * Abstract base class for tasks responsible for the atomic update of the view of an index
+/*
+* Abstract base class for tasks responsible for the atomic update of the view of an index
  * partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -35,7 +35,7 @@ import org.embergraph.btree.BTree;
  */
 public abstract class AbstractAtomicUpdateTask<T> extends AbstractResourceManagerTask<T> {
 
-  /**
+  /*
    * @param resourceManager
    * @param timestamp
    * @param resource
@@ -46,7 +46,7 @@ public abstract class AbstractAtomicUpdateTask<T> extends AbstractResourceManage
     super(resourceManager, timestamp, resource);
   }
 
-  /**
+  /*
    * @param resourceManager
    * @param timestamp
    * @param resource
@@ -58,7 +58,7 @@ public abstract class AbstractAtomicUpdateTask<T> extends AbstractResourceManage
     super(resourceManager, timestamp, resource);
   }
 
-  /**
+  /*
    * Verifies that the view is a view of the expected scale-out index.
    *
    * <p>This is used to detect drop/add sequences where a scale-out index exists with the same name

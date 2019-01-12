@@ -43,8 +43,8 @@ import org.embergraph.journal.StoreTypeEnum;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * Test suite for {@link HALogWriter} and {@link HALogReader}.
+/*
+* Test suite for {@link HALogWriter} and {@link HALogReader}.
  *
  * @author <a href="mailto:martyncutcher@users.sourceforge.net">Martyn Cutcher</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -94,7 +94,7 @@ public class TestHALogWriter extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself.
    *
@@ -186,7 +186,7 @@ public class TestHALogWriter extends TestCase2 {
   }
 
   /** Simple writelog test, open file, write data and commit. */
-  public void testSimpleRWWriter() throws FileNotFoundException, IOException, InterruptedException {
+  public void testSimpleRWWriter() throws IOException, InterruptedException {
 
     final HALogWriter writer = new HALogWriter(logdir);
 
@@ -232,7 +232,7 @@ public class TestHALogWriter extends TestCase2 {
 
   /** Simple WriteReader, no concurrency, confirms non-delayed responses. */
   public void testSimpleRWWriterReader()
-      throws FileNotFoundException, IOException, InterruptedException {
+      throws IOException, InterruptedException {
 
     final HALogWriter writer = new HALogWriter(logdir);
 
@@ -278,8 +278,8 @@ public class TestHALogWriter extends TestCase2 {
           // The HALog is logically empty.
           // assertTrue(reader.isEmpty());
 
-          /*
-           * Note: Don't do this here. The method will block for the
+        /*
+       * Note: Don't do this here. The method will block for the
            * live HALog until the file is closed (sealed with the
            * closing root block) or destroyed.
            */
@@ -410,7 +410,7 @@ public class TestHALogWriter extends TestCase2 {
     private final HALogWriter writer;
     private final int count;
 
-    /**
+    /*
      * @param openRB The opening root block.
      * @param writer The {@link HALogWriter}.
      * @param count The HALog files to write. Each will have a random #of records.
@@ -480,7 +480,7 @@ public class TestHALogWriter extends TestCase2 {
     }
   } // class SimpleWriter.
 
-  /**
+  /*
    * Reader consumes an HALog file. The file must exist before you start running the {@link
    * ReaderTask}.
    *
@@ -492,7 +492,7 @@ public class TestHALogWriter extends TestCase2 {
     private final HALogWriter writer;
     private final Future<Void> wf;
 
-    /**
+    /*
      * @param commitCounter The commit counter that identifies the closing commit point for the
      *     HALog file to be read.
      * @param writer The {@link HALogWriter}.
@@ -553,8 +553,8 @@ public class TestHALogWriter extends TestCase2 {
 
       } finally {
 
-        /*
-         * Note: This should not throw an IOException.
+      /*
+       * Note: This should not throw an IOException.
          *
          * Note: It it does throw an IOException, then it can also be
          * masking an error in the try{} above. Diagnose both if you get
@@ -566,7 +566,7 @@ public class TestHALogWriter extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * While a writer thread writes a number of HALogs, readers are opened to process them.
    *
    * @throws Exception
@@ -600,8 +600,8 @@ public class TestHALogWriter extends TestCase2 {
        */
       for (long commitCounter = 1L; commitCounter <= nfiles; commitCounter++) {
 
-        /*
-         * Note: We need to spin here in case the reader tries to open
+      /*
+       * Note: We need to spin here in case the reader tries to open
          * the HALog for reading before the writer has created the HALog
          * for that commit point. This can be done by monitoring the
          * writer or the file system.
@@ -625,8 +625,8 @@ public class TestHALogWriter extends TestCase2 {
           Thread.sleep(100 /* ms */);
         }
 
-        /*
-         * Open and read the next HALog file, blocking until all data
+      /*
+       * Open and read the next HALog file, blocking until all data
          * has been read from that file.
          */
         new ReaderTask(commitCounter, writer, wf).call();
@@ -644,7 +644,7 @@ public class TestHALogWriter extends TestCase2 {
     HALogReader.main(new String[] {logdir.toString()});
   }
 
-  /**
+  /*
    * A unit test where the reader is blocked awaiting more input in {@link
    * IHALogReader#hasMoreBuffers()} on the live HALog. The writer is closed. The reader should
    * immediately notice this event and return <code>false</code>.
@@ -701,7 +701,7 @@ public class TestHALogWriter extends TestCase2 {
                     // should block until writer is closed.
                     assertFalse(reader.hasMoreBuffers());
                     // done - success.
-                    return (Void) null;
+                    return null;
                   }
                 });
 
@@ -732,7 +732,7 @@ public class TestHALogWriter extends TestCase2 {
     HALogReader.main(new String[] {logdir.toString()});
   }
 
-  /**
+  /*
    * A unit test where the reader is blocked awaiting more input in {@link
    * IHALogReader#hasMoreBuffers()} on the live HALog. The writer is {@link
    * HALogWriter#disableHALog() disabled}. The reader should immediately notice this event and
@@ -790,7 +790,7 @@ public class TestHALogWriter extends TestCase2 {
                     // should block until writer is closed.
                     assertFalse(reader.hasMoreBuffers());
                     // done - success.
-                    return (Void) null;
+                    return null;
                   }
                 });
 
@@ -821,7 +821,7 @@ public class TestHALogWriter extends TestCase2 {
     HALogReader.main(new String[] {logdir.toString()});
   }
 
-  /**
+  /*
    * Unit test verifies that each open of an {@link IHALogReader} is distinct and the an {@link
    * IHALogReader#close()} will not close the backing channel for a different reader instance that
    * is reading from the same HALog file. This version of the test is for a historical (non-live)
@@ -951,7 +951,7 @@ public class TestHALogWriter extends TestCase2 {
     HALogReader.main(new String[] {logdir.toString()});
   }
 
-  /**
+  /*
    * Unit test for an open file leak for a historical log reader.
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/678#comment:4" > DGC Thread
@@ -1035,8 +1035,8 @@ public class TestHALogWriter extends TestCase2 {
           assertFalse(r2.isEmpty());
           assertTrue(r2.hasMoreBuffers());
 
-          /*
-           * Now use the 2nd reader to read the data to make sure that
+        /*
+       * Now use the 2nd reader to read the data to make sure that
            * the IHALogReader is really open and functional.
            */
           try {

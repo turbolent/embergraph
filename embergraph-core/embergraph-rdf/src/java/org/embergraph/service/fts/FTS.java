@@ -22,8 +22,8 @@ import org.embergraph.rdf.store.BDS;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * <p>
+/*
+* <p>
  * A vocabulary for the embergraph external full text search facility.
  * The FTS search may be used to combine text search and graph search,
  * just like the {@link BDS} - the basic difference is that this search is
@@ -93,9 +93,9 @@ import org.openrdf.model.impl.URIImpl;
  */
 public interface FTS {
 
-  public interface Options {
+  interface Options {
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link FTS#ENDPOINT}, to be used in fulltext
      * search whenever the {@link FTS#ENDPOINT} is left unspecified. When not set, the {@link
      * FTS#ENDPOINT} is mandatory in FTS SERVICE queries; when set, the magic vocabulary {@link
@@ -103,7 +103,7 @@ public interface FTS {
      */
     String FTS_ENDPOINT = FTS.class.getName() + ".defaultEndpoint";
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link FTS#ENDPOINT_TYPE}, to be used in
      * fulltext search whenever the {@link FTS#ENDPOINT_TYPE} is left unspecified. When set, the
      * magic vocabulary {@link FTS#ENDPOINT_TYPE} may be used to override the default.
@@ -112,7 +112,7 @@ public interface FTS {
 
     EndpointType DEFAULT_ENDPOINT_TYPE = EndpointType.SOLR;
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link FTS#SEARCH_RESULT_TYPE}, to be used in
      * fulltext search whenever the {@link FTS#SEARCH_RESULT_TYPE} is left unspecified. When set,
      * the magic vocabulary {@link FTS#SEARCH_RESULT_TYPE} may be used to override the default.
@@ -121,70 +121,70 @@ public interface FTS {
 
     SearchResultType DEFAULT_SEARCH_RESULT_TYPE = SearchResultType.LITERAL;
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link FTS#FTS_TIMEOUT}, to be used in
      * fulltext search whenever the {@link FTS#FTS_TIMEOUT} is left unspecified. When set, the magic
      * vocabulary {@link FTS#FTS_TIMEOUT} may be used to override the default.
      */
     String FTS_TIMEOUT = FTS.class.getName() + ".defaultTimeout";
 
-    final int DEFAULT_TIMEOUT = Integer.MAX_VALUE;
+    int DEFAULT_TIMEOUT = Integer.MAX_VALUE;
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link FTS#PARAMS}, to be used in fulltext
      * search whenever the {@link FTS#PARAMS} is left unspecified. When set, the vocabulary {@link
      * FTS#PARAMS} may be used to override the default.
      */
     String FTS_PARAMS = FTS.class.getName() + ".defaultParams";
 
-    final String DEFAULT_PARAMS = "";
+    String DEFAULT_PARAMS = "";
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link FTS#SEARCH_FIELD}, to be used in
      * fulltext search whenever the {@link FTS#SEARCH_FIELD} is left unspecified. When set, the
      * magic vocabulary {@link FTS#SEARCH_FIELD} may be used to override the default.
      */
     String FTS_SEARCH_FIELD = FTS.class.getName() + ".defaultSearchField";
 
-    final String DEFAULT_SEARCH_FIELD = "id"; // this is the Solr default
+    String DEFAULT_SEARCH_FIELD = "id"; // this is the Solr default
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link FTS#SCORE_FIELD}, to be used in
      * fulltext search whenever the {@link FTS#SCORE_FIELD} is left unspecified. When set, the magic
      * vocabulary {@link FTS#SCORE_FIELD} may be used to override the default.
      */
     String FTS_SCORE_FIELD = FTS.class.getName() + ".defaultScoreField";
 
-    final String DEFAULT_SCORE_FIELD = null; // no system default
+    String DEFAULT_SCORE_FIELD = null; // no system default
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link FTS#SNIPPET_FIELD}, to be used in
      * fulltext search whenever the {@link FTS#SNIPPET_FIELD} is left unspecified. When set, the
      * magic vocabulary {@link FTS#SNIPPET_FIELD} may be used to override the default.
      */
     String FTS_SNIPPET_FIELD = FTS.class.getName() + ".defaultSnippetField";
 
-    final String DEFAULT_SNIPPET_FIELD = null; // no system default
+    String DEFAULT_SNIPPET_FIELD = null; // no system default
   }
 
   /** The namespace used for magic search predicates. */
-  final String NAMESPACE = "http://www.embergraph.org/rdf/fts#";
+  String NAMESPACE = "http://www.embergraph.org/rdf/fts#";
 
   /** The type of the FTS. For now, only Solr is implemented/supported. */
-  public static enum EndpointType {
+  enum EndpointType {
     SOLR
   }
 
-  /**
+  /*
    * Target type for extracted entities, determining whether they are parsed into a literal or
    * interpreted as a URI.
    */
-  public static enum SearchResultType {
+  enum SearchResultType {
     URI,
     LITERAL
   }
 
-  /**
+  /*
    * The name of a magic predicate recognized in SPARQL queries when it occurs in statement patterns
    * such as:
    *
@@ -204,9 +204,9 @@ public interface FTS {
    * <p>You may want to use {@link FTS#RESULT_FIELD} to fix the result field that is mapped to the
    * result variable.
    */
-  final URI SEARCH = new URIImpl(NAMESPACE + "search");
+  URI SEARCH = new URIImpl(NAMESPACE + "search");
 
-  /**
+  /*
    * Magic predicate used to specify the Solr endpoint to be queried. If not provided, the default
    * endpoint as specified in the configuration is used.
    *
@@ -225,9 +225,9 @@ public interface FTS {
    * The endpoint must be provided as a literal, including protocol, IP or hostname, and port to be
    * queried.
    */
-  final URI ENDPOINT = new URIImpl(NAMESPACE + "endpoint");
+  URI ENDPOINT = new URIImpl(NAMESPACE + "endpoint");
 
-  /**
+  /*
    * Magic predicate used to specify the endpoint type, such as a Solr endpoint or any other
    * external full text search service.
    *
@@ -244,9 +244,9 @@ public interface FTS {
    *
    * The endpoint must be provided as a literal, according to the {@link EndpointType} enum values.
    */
-  final URI ENDPOINT_TYPE = new URIImpl(NAMESPACE + "endpointType");
+  URI ENDPOINT_TYPE = new URIImpl(NAMESPACE + "endpointType");
 
-  /**
+  /*
    * Magic predicate used to specify full text search parameters to be applied when executing the
    * search.
    *
@@ -263,9 +263,9 @@ public interface FTS {
    * The params need to be a correct string according to Solr specifications and it must be provided
    * as a literal.
    */
-  final URI PARAMS = new URIImpl(NAMESPACE + "params");
+  URI PARAMS = new URIImpl(NAMESPACE + "params");
 
-  /**
+  /*
    * Magic predicate used to specify the type of the values stored in the Solr field or fields from
    * which data is extracted (the latter one being specified as part of the PARAMS predicate above.
    * If there are multiple output fields, all of the will be included and the type specified refers
@@ -287,9 +287,9 @@ public interface FTS {
    * Allowed values are "URI" and "LITERAL"; if none of these values is provided, the {@value
    * #DEFAULT_SEARCH_RESULT_TYPE} will be used.
    */
-  final URI SEARCH_RESULT_TYPE = new URIImpl(NAMESPACE + "searchResultType");
+  URI SEARCH_RESULT_TYPE = new URIImpl(NAMESPACE + "searchResultType");
 
-  /**
+  /*
    * Magic predicate used to query for free text search metadata to set a deadline in milliseconds
    * on the full text index search ( {@value #DEFAULT_TIMEOUT}). Use in conjunction with {@link
    * #SEARCH} as follows:
@@ -309,9 +309,9 @@ public interface FTS {
    * <p>Timeout specified in milliseconds, as literal. If not specified or not a valid integer, the
    * {@value #DEFAULT_TIMEOUT} is used.
    */
-  final URI TIMEOUT = new URIImpl(NAMESPACE + "timeout");
+  URI TIMEOUT = new URIImpl(NAMESPACE + "timeout");
 
-  /**
+  /*
    * Magic predicate to indicate the output variable in which the score of matches will be saved.
    *
    * <pre>
@@ -330,9 +330,9 @@ public interface FTS {
    * <p>In order to use this, you also need to set {@link FTS#SCORE_FIELD} to fix the result field
    * that is mapped to the score variable.
    */
-  final URI SCORE = new URIImpl(NAMESPACE + "score");
+  URI SCORE = new URIImpl(NAMESPACE + "score");
 
-  /**
+  /*
    * Magic predicate to indicate the output variable in which a sample snippet for matches will be
    * saved.
    *
@@ -352,9 +352,9 @@ public interface FTS {
    * <p>In order to use this, you need to set {@link FTS#SNIPPET_FIELD} to fix the result field that
    * is mapped to the snippet variable.
    */
-  final URI SNIPPET = new URIImpl(NAMESPACE + "snippet");
+  URI SNIPPET = new URIImpl(NAMESPACE + "snippet");
 
-  /**
+  /*
    * Magic predicate to indicate the external search service result field which will be stored in
    * the result variable.
    *
@@ -368,9 +368,9 @@ public interface FTS {
    *
    * </pre>
    */
-  final URI SEARCH_FIELD = new URIImpl(NAMESPACE + "searchField");
+  URI SEARCH_FIELD = new URIImpl(NAMESPACE + "searchField");
 
-  /**
+  /*
    * Magic predicate to indicate the external search service field whose value will be bound to the
    * snippet variable (see {@link FTS#SNIPPET}).
    *
@@ -384,9 +384,9 @@ public interface FTS {
    *
    * </pre>
    */
-  final URI SNIPPET_FIELD = new URIImpl(NAMESPACE + "snippetField");
+  URI SNIPPET_FIELD = new URIImpl(NAMESPACE + "snippetField");
 
-  /**
+  /*
    * Magic predicate to indicate the external search service field whose value will be bound to the
    * score variable (see {@link FTS#SCORE}).
    *
@@ -400,13 +400,13 @@ public interface FTS {
    *
    * </pre>
    */
-  final URI SCORE_FIELD = new URIImpl(NAMESPACE + "scoreField");
+  URI SCORE_FIELD = new URIImpl(NAMESPACE + "scoreField");
 
-  /**
+  /*
    * Configuration property starting with FTS_CUSTOM_TYPE can be used to specify the class that will
    * be handling this type. For example:
    * org.embergraph.service.fts.FTS.enpointType.Elastic=com.example.ElasticSearchImpl The class
    * should be instance of {@link IFulltextSearch}.
    */
-  final String FTS_CUSTOM_TYPE = FTS.class.getName() + ".endpointType.";
+  String FTS_CUSTOM_TYPE = FTS.class.getName() + ".endpointType.";
 }

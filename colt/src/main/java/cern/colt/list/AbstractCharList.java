@@ -10,13 +10,13 @@ package cern.colt.list;
 
 import cern.colt.function.CharComparator;
 import cern.colt.function.CharProcedure;
-/**
- * Abstract base class for resizable lists holding <code>char</code> elements; abstract. First see
+/*
+* Abstract base class for resizable lists holding <code>char</code> elements; abstract. First see
  * the <a href="package-summary.html">package summary</a> and javadoc <a
  * href="package-tree.html">tree view</a> to get the broad picture.
  */
 public abstract class AbstractCharList extends AbstractList {
-  /**
+  /*
    * The size of the list. This is a READ_ONLY variable for all methods but setSizeRaw(int newSize)
    * !!! If you violate this principle in subclasses, you should exactly know what you are doing.
    *
@@ -25,7 +25,7 @@ public abstract class AbstractCharList extends AbstractList {
   protected int size;
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected AbstractCharList() {}
-  /**
+  /*
    * Appends the specified element to the end of this list.
    *
    * @param element element to be appended to this list.
@@ -33,7 +33,7 @@ public abstract class AbstractCharList extends AbstractList {
   public void add(char element) {
     beforeInsert(size, element);
   }
-  /**
+  /*
    * Appends the part of the specified list between <code>from</code> (inclusive) and <code>to
    * </code> (inclusive) to the receiver.
    *
@@ -46,7 +46,7 @@ public abstract class AbstractCharList extends AbstractList {
   public void addAllOfFromTo(AbstractCharList other, int from, int to) {
     beforeInsertAllOfFromTo(size, other, from, to);
   }
-  /**
+  /*
    * Inserts the specified element before the specified position into the receiver. Shifts the
    * element currently at that position (if any) and any subsequent elements to the right.
    *
@@ -59,7 +59,7 @@ public abstract class AbstractCharList extends AbstractList {
     beforeInsertDummies(index, 1);
     set(index, element);
   }
-  /**
+  /*
    * Inserts the part of the specified list between <code>otherFrom</code> (inclusive) and <code>
    * otherTo</code> (inclusive) before the specified position into the receiver. Shifts the element
    * currently at that position (if any) and any subsequent elements to the right.
@@ -79,7 +79,7 @@ public abstract class AbstractCharList extends AbstractList {
     this.beforeInsertDummies(index, length);
     this.replaceFromToWithFrom(index, index + length - 1, other, from);
   }
-  /**
+  /*
    * Inserts <tt>length</tt> dummy elements before the specified position into the receiver. Shifts
    * the element currently at that position (if any) and any subsequent elements to the right.
    * <b>This method must set the new size to be <tt>size()+length</tt>.
@@ -97,7 +97,7 @@ public abstract class AbstractCharList extends AbstractList {
       replaceFromToWithFrom(index + length, size - 1, this, index);
     }
   }
-  /**
+  /*
    * Searches the receiver for the specified value using the binary search algorithm. The receiver
    * must <strong>must</strong> be sorted (as by the sort method) prior to making this call. If it
    * is not sorted, the results are undefined: in particular, the call may enter an infinite loop.
@@ -116,7 +116,7 @@ public abstract class AbstractCharList extends AbstractList {
   public int binarySearch(char key) {
     return this.binarySearchFromTo(key, 0, size - 1);
   }
-  /**
+  /*
    * Searches the receiver for the specified value using the binary search algorithm. The receiver
    * must <strong>must</strong> be sorted (as by the sort method) prior to making this call. If it
    * is not sorted, the results are undefined: in particular, the call may enter an infinite loop.
@@ -147,7 +147,7 @@ public abstract class AbstractCharList extends AbstractList {
     }
     return -(low + 1); // key not found.
   }
-  /**
+  /*
    * Returns a deep copy of the receiver.
    *
    * @return a deep copy of the receiver.
@@ -155,7 +155,7 @@ public abstract class AbstractCharList extends AbstractList {
   public Object clone() {
     return partFromTo(0, size - 1);
   }
-  /**
+  /*
    * Returns true if the receiver contains the specified element.
    *
    * @param element element whose presence in the receiver is to be tested.
@@ -163,7 +163,7 @@ public abstract class AbstractCharList extends AbstractList {
   public boolean contains(char elem) {
     return indexOfFromTo(elem, 0, size - 1) >= 0;
   }
-  /**
+  /*
    * Deletes the first element from the receiver that is identical to the specified element. Does
    * nothing, if no such matching element is contained.
    *
@@ -173,7 +173,7 @@ public abstract class AbstractCharList extends AbstractList {
     int index = indexOfFromTo(element, 0, size - 1);
     if (index >= 0) remove(index);
   }
-  /**
+  /*
    * Returns the elements currently stored, possibly including invalid elements between size and
    * capacity.
    *
@@ -188,7 +188,7 @@ public abstract class AbstractCharList extends AbstractList {
     for (int i = size; --i >= 0; ) myElements[i] = getQuick(i);
     return myElements;
   }
-  /**
+  /*
    * Sets the receiver's elements to be the specified array. The size and capacity of the list is
    * the length of the array. <b>WARNING:</b> For efficiency reasons and to keep memory usage low,
    * this method may decide <b>not to copy the array</b>. So if subsequently you modify the returned
@@ -202,7 +202,7 @@ public abstract class AbstractCharList extends AbstractList {
     addAllOfFromTo(new CharArrayList(elements), 0, elements.length - 1);
     return this;
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of elements without needing to
    * allocate new internal memory. If necessary, allocates new internal memory and increases the
    * capacity of the receiver.
@@ -210,7 +210,7 @@ public abstract class AbstractCharList extends AbstractList {
    * @param minCapacity the desired minimum capacity.
    */
   public abstract void ensureCapacity(int minCapacity);
-  /**
+  /*
    * Compares the specified Object with the receiver. Returns true if and only if the specified
    * Object is also an ArrayList of the same type, both Lists have the same size, and all
    * corresponding pairs of elements in the two Lists are identical. In other words, two Lists are
@@ -233,7 +233,7 @@ public abstract class AbstractCharList extends AbstractList {
     }
     return true;
   }
-  /**
+  /*
    * Sets the specified range of elements in the specified array to the specified value.
    *
    * @param from the index of the first element (inclusive) to be filled with the specified value.
@@ -244,7 +244,7 @@ public abstract class AbstractCharList extends AbstractList {
     checkRangeFromTo(from, to, this.size);
     for (int i = from; i <= to; ) setQuick(i++, val);
   }
-  /**
+  /*
    * Applies a procedure to each element of the receiver, if any. Starts at index 0, moving
    * rightwards.
    *
@@ -257,7 +257,7 @@ public abstract class AbstractCharList extends AbstractList {
     for (int i = 0; i < size; ) if (!procedure.apply(get(i++))) return false;
     return true;
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver.
    *
    * @param index index of element to return.
@@ -269,7 +269,7 @@ public abstract class AbstractCharList extends AbstractList {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     return getQuick(index);
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver; <b>WARNING:</b> Does not check
    * preconditions. Provided with invalid parameters this method may return invalid elements without
    * throwing any exception! <b>You should only use this method when you are absolutely sure that
@@ -283,7 +283,7 @@ public abstract class AbstractCharList extends AbstractList {
    * @param index index of element to return.
    */
   protected abstract char getQuick(int index);
-  /**
+  /*
    * Returns the index of the first occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element.
    *
@@ -294,7 +294,7 @@ public abstract class AbstractCharList extends AbstractList {
   public int indexOf(char element) { // delta
     return indexOfFromTo(element, 0, size - 1);
   }
-  /**
+  /*
    * Returns the index of the first occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element. Searches between <code>from</code>, inclusive and
    * <code>to</code>, inclusive. Tests for identity.
@@ -315,7 +315,7 @@ public abstract class AbstractCharList extends AbstractList {
     }
     return -1; // not found
   }
-  /**
+  /*
    * Returns the index of the last occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element.
    *
@@ -326,7 +326,7 @@ public abstract class AbstractCharList extends AbstractList {
   public int lastIndexOf(char element) {
     return lastIndexOfFromTo(element, 0, size - 1);
   }
-  /**
+  /*
    * Returns the index of the last occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element. Searches beginning at <code>to</code>, inclusive
    * until <code>from</code>, inclusive. Tests for identity.
@@ -347,7 +347,7 @@ public abstract class AbstractCharList extends AbstractList {
     }
     return -1; // not found
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending order.
    *
    * <p>The sorting algorithm is a modified mergesort (in which the merge is omitted if the highest
@@ -374,7 +374,7 @@ public abstract class AbstractCharList extends AbstractList {
     elements(myElements);
     setSizeRaw(mySize);
   }
-  /**
+  /*
    * Sorts the receiver according to the order induced by the specified comparator. All elements in
    * the range must be <i>mutually comparable</i> by the specified comparator (that is,
    * <tt>c.compare(e1, e2)</tt> must not throw a <tt>ClassCastException</tt> for any elements
@@ -409,7 +409,7 @@ public abstract class AbstractCharList extends AbstractList {
     elements(myElements);
     setSizeRaw(mySize);
   }
-  /**
+  /*
    * Returns a new list of the part of the receiver between <code>from</code>, inclusive, and <code>
    * to</code>, inclusive.
    *
@@ -427,7 +427,7 @@ public abstract class AbstractCharList extends AbstractList {
     part.addAllOfFromTo(this, from, to);
     return part;
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending numerical order. The sorting algorithm
    * is a tuned quicksort, adapted from Jon L. Bentley and M. Douglas McIlroy's "Engineering a Sort
    * Function", Software-Practice and Experience, Vol. 23(11) P. 1249-1265 (November 1993). This
@@ -453,7 +453,7 @@ public abstract class AbstractCharList extends AbstractList {
     elements(myElements);
     setSizeRaw(mySize);
   }
-  /**
+  /*
    * Sorts the receiver according to the order induced by the specified comparator. All elements in
    * the range must be <i>mutually comparable</i> by the specified comparator (that is,
    * <tt>c.compare(e1, e2)</tt> must not throw a <tt>ClassCastException</tt> for any elements
@@ -485,7 +485,7 @@ public abstract class AbstractCharList extends AbstractList {
     elements(myElements);
     setSizeRaw(mySize);
   }
-  /**
+  /*
    * Removes from the receiver all elements that are contained in the specified list. Tests for
    * identity.
    *
@@ -505,7 +505,7 @@ public abstract class AbstractCharList extends AbstractList {
     setSize(j);
     return modified;
   }
-  /**
+  /*
    * Removes from the receiver all elements whose index is between <code>from</code>, inclusive and
    * <code>to</code>, inclusive. Shifts any succeeding elements to the left (reduces their index).
    * This call shortens the list by <tt>(to - from + 1)</tt> elements.
@@ -525,7 +525,7 @@ public abstract class AbstractCharList extends AbstractList {
     int width = to - from + 1;
     if (width > 0) setSizeRaw(size - width);
   }
-  /**
+  /*
    * Replaces a number of elements in the receiver with the same number of elements of another list.
    * Replaces elements in the receiver, between <code>from</code> (inclusive) and <code>to</code>
    * (inclusive), with elements of <code>other</code>, starting from <code>otherFrom</code>
@@ -551,7 +551,7 @@ public abstract class AbstractCharList extends AbstractList {
       }
     }
   }
-  /**
+  /*
    * Replaces the part between <code>from</code> (inclusive) and <code>to</code> (inclusive) with
    * the other list's part between <code>otherFrom</code> and <code>otherTo</code>. Powerful (and
    * tricky) method! Both parts need not be of the same size (part A can both be smaller or larger
@@ -624,7 +624,7 @@ public abstract class AbstractCharList extends AbstractList {
       replaceFromToWithFrom(from, from + length - 1, other, otherFrom);
     }
   }
-  /**
+  /*
    * Replaces the part of the receiver starting at <code>from</code> (inclusive) with all the
    * elements of the specified collection. Does not alter the size of the receiver. Replaces exactly
    * <tt>Math.max(0,Math.min(size()-from, other.size()))</tt> elements.
@@ -641,7 +641,7 @@ public abstract class AbstractCharList extends AbstractList {
     int limit = Math.min(size() - from, other.size());
     for (int i = 0; i < limit; i++) set(index++, ((Character) e.next()).charValue()); // delta
   }
-  /**
+  /*
    * Retains (keeps) only the elements in the receiver that are contained in the specified other
    * list. In other words, removes from the receiver all of its elements that are not contained in
    * the specified other list.
@@ -666,7 +666,7 @@ public abstract class AbstractCharList extends AbstractList {
     setSize(j);
     return modified;
   }
-  /**
+  /*
    * Reverses the elements of the receiver. Last becomes first, second last becomes second first,
    * and so on.
    */
@@ -681,7 +681,7 @@ public abstract class AbstractCharList extends AbstractList {
       setQuick(j--, tmp);
     }
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element.
    *
    * @param index index of element to replace.
@@ -693,7 +693,7 @@ public abstract class AbstractCharList extends AbstractList {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     setQuick(index, element);
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element;
    * <b>WARNING:</b> Does not check preconditions. Provided with invalid parameters this method may
    * access invalid indexes without throwing any exception! <b>You should only use this method when
@@ -708,7 +708,7 @@ public abstract class AbstractCharList extends AbstractList {
    * @param element element to be stored at the specified position.
    */
   protected abstract void setQuick(int index, char element);
-  /**
+  /*
    * Sets the size of the receiver without modifying it otherwise. This method should not release or
    * allocate new memory but simply set some instance variable like <tt>size</tt>.
    *
@@ -721,7 +721,7 @@ public abstract class AbstractCharList extends AbstractList {
   protected void setSizeRaw(int newSize) {
     size = newSize;
   }
-  /**
+  /*
    * Randomly permutes the part of the receiver between <code>from</code> (inclusive) and <code>to
    * </code> (inclusive).
    *
@@ -744,7 +744,7 @@ public abstract class AbstractCharList extends AbstractList {
       setQuick(i, tmpElement);
     }
   }
-  /**
+  /*
    * Returns the number of elements contained in the receiver.
    *
    * @returns the number of elements contained in the receiver.
@@ -752,7 +752,7 @@ public abstract class AbstractCharList extends AbstractList {
   public int size() {
     return size;
   }
-  /**
+  /*
    * Returns a list which is a concatenation of <code>times</code> times the receiver.
    *
    * @param times the number of times the receiver shall be copied.
@@ -771,7 +771,7 @@ public abstract class AbstractCharList extends AbstractList {
     for (int i = 0; i < mySize; i++) list.add(new Character(get(i)));
     return list;
   }
-  /**
+  /*
    * Returns a string representation of the receiver, containing the String representation of each
    * element.
    */

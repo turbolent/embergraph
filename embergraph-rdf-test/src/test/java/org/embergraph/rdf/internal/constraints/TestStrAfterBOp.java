@@ -33,8 +33,8 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.ProxyTestCase;
 
-/**
- * Test suite for {@link StrAfterBOp}.
+/*
+* Test suite for {@link StrAfterBOp}.
  *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  */

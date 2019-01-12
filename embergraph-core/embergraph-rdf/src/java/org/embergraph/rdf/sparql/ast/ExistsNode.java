@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * A special function node for modeling EXISTS.
+/*
+* A special function node for modeling EXISTS.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -35,7 +35,7 @@ public class ExistsNode extends SubqueryFunctionNodeBase {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * @param lex
    * @param anonvar An anonymous variable which will be bound by an ASK subquery.
    * @param graphPattern The inner value of the EXISTS function.

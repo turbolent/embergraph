@@ -38,8 +38,8 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 
-/**
- * Test case for reverse lookup from SID to statement.
+/*
+* Test case for reverse lookup from SID to statement.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -79,7 +79,7 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
 
       try {
 
@@ -87,8 +87,8 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
 
         cxn.add(getClass().getResourceAsStream("sids.ttl"), "", ServiceProviderHook.TURTLE_RDR);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -147,25 +147,19 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
             final Collection<BindingSet> solution = new LinkedList<BindingSet>();
             solution.add(
                 createBindingSet(
-                    new Binding[] {
-                      new BindingImpl("s", new URIImpl("http://localhost/host1")),
-                      new BindingImpl("p", new URIImpl("http://mynamespace.com#connectedTo")),
-                      new BindingImpl("o", new URIImpl("http://localhost/switch1")),
-                    }));
+                    new BindingImpl("s", new URIImpl("http://localhost/host1")),
+                    new BindingImpl("p", new URIImpl("http://mynamespace.com#connectedTo")),
+                    new BindingImpl("o", new URIImpl("http://localhost/switch1"))));
             solution.add(
                 createBindingSet(
-                    new Binding[] {
-                      new BindingImpl("s", new URIImpl("http://localhost/host1")),
-                      new BindingImpl("p", RDF.TYPE),
-                      new BindingImpl("o", new URIImpl("http://domainnamespace.com/host#Host")),
-                    }));
+                    new BindingImpl("s", new URIImpl("http://localhost/host1")),
+                    new BindingImpl("p", RDF.TYPE),
+                    new BindingImpl("o", new URIImpl("http://domainnamespace.com/host#Host"))));
             solution.add(
                 createBindingSet(
-                    new Binding[] {
-                      new BindingImpl("s", new URIImpl("http://localhost/switch1")),
-                      new BindingImpl("p", RDF.TYPE),
-                      new BindingImpl("o", new URIImpl("http://domainnamespace.com/san#Switch")),
-                    }));
+                    new BindingImpl("s", new URIImpl("http://localhost/switch1")),
+                    new BindingImpl("p", RDF.TYPE),
+                    new BindingImpl("o", new URIImpl("http://domainnamespace.com/san#Switch"))));
 
             compare(result, solution);
           }
@@ -189,7 +183,7 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
 
       try {
 
@@ -315,25 +309,19 @@ public class TestSids extends ProxyEmbergraphSailTestCase {
             Collection<BindingSet> solution = new LinkedList<BindingSet>();
             solution.add(
                 createBindingSet(
-                    new Binding[] {
-                      new BindingImpl("s", new URIImpl("http://localhost/host1")),
-                      new BindingImpl("p", new URIImpl("http://mynamespace.com#connectedTo")),
-                      new BindingImpl("o", new URIImpl("http://localhost/switch1")),
-                    }));
+                    new BindingImpl("s", new URIImpl("http://localhost/host1")),
+                    new BindingImpl("p", new URIImpl("http://mynamespace.com#connectedTo")),
+                    new BindingImpl("o", new URIImpl("http://localhost/switch1"))));
             solution.add(
                 createBindingSet(
-                    new Binding[] {
-                      new BindingImpl("s", new URIImpl("http://localhost/host1")),
-                      new BindingImpl("p", RDF.TYPE),
-                      new BindingImpl("o", new URIImpl("http://domainnamespace.com/host#Host")),
-                    }));
+                    new BindingImpl("s", new URIImpl("http://localhost/host1")),
+                    new BindingImpl("p", RDF.TYPE),
+                    new BindingImpl("o", new URIImpl("http://domainnamespace.com/host#Host"))));
             solution.add(
                 createBindingSet(
-                    new Binding[] {
-                      new BindingImpl("s", new URIImpl("http://localhost/switch1")),
-                      new BindingImpl("p", RDF.TYPE),
-                      new BindingImpl("o", new URIImpl("http://domainnamespace.com/san#Switch")),
-                    }));
+                    new BindingImpl("s", new URIImpl("http://localhost/switch1")),
+                    new BindingImpl("p", RDF.TYPE),
+                    new BindingImpl("o", new URIImpl("http://domainnamespace.com/san#Switch"))));
 
             compare(result, solution);
           }

@@ -15,9 +15,10 @@ import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
+import cern.jet.math.Functions;
 import cern.jet.random.engine.RandomEngine;
-/**
- * Basic statistics operations on matrices. Computation of covariance, correlation, distance matrix.
+/*
+* Basic statistics operations on matrices. Computation of covariance, correlation, distance matrix.
  * Random sampling views. Conversion to histograms with and without OLAP cube operators. Conversion
  * to bins with retrieval of statistical bin measures. Also see {@link cern.jet.stat} and {@link
  * hep.aida.bin}, in particular {@link hep.aida.bin.DynamicBin1D}.
@@ -63,7 +64,8 @@ public class Statistic extends Object {
   public static final VectorVectorFunction EUCLID =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return Math.sqrt(a.aggregate(b, F.plus, F.chain(F.square, F.minus)));
+          return Math.sqrt(a.aggregate(b,
+              Functions.plus, Functions.chain(Functions.square, Functions.minus)));
         }
       };
 
@@ -71,7 +73,8 @@ public class Statistic extends Object {
   public static final VectorVectorFunction BRAY_CURTIS =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, F.plus, F.chain(F.abs, F.minus)) / a.aggregate(b, F.plus, F.plus);
+          return a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus)) / a.aggregate(b, Functions.plus,
+              Functions.plus);
         }
       };
 
@@ -86,7 +89,7 @@ public class Statistic extends Object {
             };
 
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, F.plus, fun);
+          return a.aggregate(b, Functions.plus, fun);
         }
       };
 
@@ -94,7 +97,7 @@ public class Statistic extends Object {
   public static final VectorVectorFunction MAXIMUM =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, F.max, F.chain(F.abs, F.minus));
+          return a.aggregate(b, Functions.max, Functions.chain(Functions.abs, Functions.minus));
         }
       };
 
@@ -102,29 +105,29 @@ public class Statistic extends Object {
   public static final VectorVectorFunction MANHATTAN =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, F.plus, F.chain(F.abs, F.minus));
+          return a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus));
         }
       };
 
-  /**
+  /*
    * Interface that represents a function object: a function that takes two argument vectors and
    * returns a single value.
    */
   public interface VectorVectorFunction {
-    /**
+    /*
      * Applies a function to two argument vectors.
      *
      * @param x the first argument vector passed to the function.
      * @param y the second argument vector passed to the function.
      * @return the result of the function.
      */
-    public abstract double apply(
+    double apply(
         cern.colt.matrix.DoubleMatrix1D x, cern.colt.matrix.DoubleMatrix1D y);
   }
 
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Statistic() {}
-  /**
+  /*
    * Applies the given aggregation functions to each column and stores the results in a the result
    * matrix. If matrix has shape <tt>m x n</tt>, then result must have shape <tt>aggr.length x
    * n</tt>. Tip: To do aggregations on rows use dice views (transpositions), as in
@@ -154,7 +157,7 @@ public class Statistic extends Object {
   //	}
   //	return result;
   // }
-  /**
+  /*
    * Fills all cell values of the given vector into a bin from which statistics measures can be
    * retrieved efficiently. Cells values are copied. <br>
    * Tip: Use <tt>System.out.println(bin(vector))</tt> to print most measures computed by the bin.
@@ -216,7 +219,7 @@ public class Statistic extends Object {
   	return bin;
   }
   */
-  /**
+  /*
    * Modifies the given covariance matrix to be a correlation matrix (in-place). The correlation
    * matrix is a square, symmetric matrix consisting of nothing but correlation coefficients. The
    * rows and the columns represent the variables, the cells represent correlation coefficients. The
@@ -251,7 +254,7 @@ public class Statistic extends Object {
 
     return covariance;
   }
-  /**
+  /*
    * Constructs and returns the covariance matrix of the given matrix. The covariance matrix is a
    * square, symmetric matrix consisting of nothing but covariance coefficients. The rows and the
    * columns represent the variables, the cells represent covariance coefficients. The diagonal
@@ -286,7 +289,7 @@ public class Statistic extends Object {
     }
     return covariance;
   }
-  /**
+  /*
    * 2-d OLAP cube operator; Fills all cells of the given vectors into the given histogram. If you
    * use hep.aida.ref.Converter.toString(histo) on the result, the OLAP cube of x-"column" vs.
    * y-"column" , summing the weights "column" will be printed. For example, aggregate sales by
@@ -360,7 +363,7 @@ public class Statistic extends Object {
   //	hep.aida.IHistogram2D histo = new hep.aida.ref.Histogram2D("Cube",xaxis,yaxis);
   //	return histogram(histo,x,y,weights);
   // }
-  /**
+  /*
    * 3-d OLAP cube operator; Fills all cells of the given vectors into the given histogram. If you
    * use hep.aida.ref.Converter.toString(histo) on the result, the OLAP cube of x-"column" vs.
    * y-"column" vs. z-"column", summing the weights "column" will be printed. For example, aggregate
@@ -475,7 +478,7 @@ public class Statistic extends Object {
     System.out.println("\nA=" + A.viewDice());
     System.out.println("\ndist=" + distance(A, norm).viewDice());
   }
-  /**
+  /*
    * Constructs and returns the distance matrix of the given matrix. The distance matrix is a
    * square, symmetric matrix consisting of nothing but distance coefficients. The rows and the
    * columns represent the variables, the cells represent distance coefficients. The diagonal cells
@@ -508,7 +511,7 @@ public class Statistic extends Object {
     }
     return distance;
   }
-  /**
+  /*
    * Fills all cells of the given vector into the given histogram.
    *
    * @return <tt>histo</tt> (for convenience only).
@@ -521,7 +524,7 @@ public class Statistic extends Object {
   //	}
   //	return histo;
   // }
-  /**
+  /*
    * Fills all cells of the given vectors into the given histogram.
    *
    * @return <tt>histo</tt> (for convenience only).
@@ -536,7 +539,7 @@ public class Statistic extends Object {
   //	}
   //	return histo;
   // }
-  /**
+  /*
    * Fills all cells of the given vectors into the given histogram.
    *
    * @return <tt>histo</tt> (for convenience only).
@@ -553,7 +556,7 @@ public class Statistic extends Object {
   //	}
   //	return histo;
   // }
-  /**
+  /*
    * Fills all cells of the given vectors into the given histogram.
    *
    * @return <tt>histo</tt> (for convenience only).
@@ -577,7 +580,7 @@ public class Statistic extends Object {
     boolean print = args[2].equals("print");
     demo2(rows, columns, print);
   }
-  /**
+  /*
    * Constructs and returns a sampling view with a size of <tt>round(matrix.size() * fraction)</tt>.
    * Samples "without replacement" from the uniform distribution.
    *
@@ -617,7 +620,7 @@ public class Statistic extends Object {
 
     return matrix.viewSelection(selectedCols);
   }
-  /**
+  /*
    * Constructs and returns a sampling view with <tt>round(matrix.rows() * rowFraction)</tt> rows
    * and <tt>round(matrix.columns() * columnFraction)</tt> columns. Samples "without replacement".
    * Rows and columns are randomly chosen from the uniform distribution. Examples:
@@ -727,7 +730,7 @@ public class Statistic extends Object {
 
     return matrix.viewSelection(selectedRows, selectedCols);
   }
-  /**
+  /*
    * Constructs and returns a sampling view with <tt>round(matrix.slices() * sliceFraction)</tt>
    * slices and <tt>round(matrix.rows() * rowFraction)</tt> rows and <tt>round(matrix.columns() *
    * columnFraction)</tt> columns. Samples "without replacement". Slices, rows and columns are
@@ -801,7 +804,7 @@ public class Statistic extends Object {
 
     return matrix.viewSelection(selectedSlices, selectedRows, selectedCols);
   }
-  /**
+  /*
    * Constructs and returns the distance matrix of the given matrix. The distance matrix is a
    * square, symmetric matrix consisting of nothing but distance coefficients. The rows and the
    * columns represent the variables, the cells represent distance coefficients. The diagonal cells
@@ -854,7 +857,7 @@ public class Statistic extends Object {
     */
     return null;
   }
-  /**
+  /*
    * Constructs and returns the distance matrix of the given matrix. The distance matrix is a
    * square, symmetric matrix consisting of nothing but distance coefficients. The rows and the
    * columns represent the variables, the cells represent distance coefficients. The diagonal cells

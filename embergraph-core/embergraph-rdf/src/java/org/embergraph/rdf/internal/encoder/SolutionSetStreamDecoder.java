@@ -28,8 +28,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.io.DataInputBuffer;
 
-/**
- * Stream decoder for solution sets (chunk oriented).
+/*
+* Stream decoder for solution sets (chunk oriented).
  *
  * @see SolutionSetStreamEncoder
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -53,7 +53,7 @@ public class SolutionSetStreamDecoder implements ICloseableIterator<IBindingSet[
   /** The #of solution sets which have been decoded so far. */
   private long nsolutions = 0;
 
-  /**
+  /*
    * @param name The name of the solution set.
    * @param in The solutions are read from this stream.
    * @param solutionSetCount The #of solutions to be read from the stream.
@@ -116,7 +116,7 @@ public class SolutionSetStreamDecoder implements ICloseableIterator<IBindingSet[
     return open && bsets != null;
   }
 
-  /**
+  /*
    * Read ahead and decode the next chunk of solutions.
    *
    * @return The decoded solutions.

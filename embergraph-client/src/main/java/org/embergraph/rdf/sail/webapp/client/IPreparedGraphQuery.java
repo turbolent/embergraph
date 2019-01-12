@@ -23,14 +23,14 @@ package org.embergraph.rdf.sail.webapp.client;
 
 import org.openrdf.query.GraphQueryResult;
 
-/**
- * A prepared graph query for the {@link RemoteRepository}.
+/*
+* A prepared graph query for the {@link RemoteRepository}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IPreparedGraphQuery extends IPreparedQuery {
 
-  /**
+  /*
    * Evaluate the graph query.
    *
    * @return The result.
@@ -38,7 +38,7 @@ public interface IPreparedGraphQuery extends IPreparedQuery {
    */
   GraphQueryResult evaluate() throws Exception;
 
-  /**
+  /*
    * Evaluate the graph query, notify the specified listener when complete.
    *
    * @param listener The query listener.

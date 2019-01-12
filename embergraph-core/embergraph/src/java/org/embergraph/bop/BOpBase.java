@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/**
- * Abstract base class for copy-on-write {@link BOp}s. The {@link BOpBase} class is used for query
+/*
+* Abstract base class for copy-on-write {@link BOp}s. The {@link BOpBase} class is used for query
  * evaluation operators. The copy-on-write contract provides a safety margin during concurrent
  * evaluation of query plans by ensuring that all references are fully published.
  *
@@ -67,7 +67,7 @@ public class BOpBase extends CoreBaseBOp {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * The argument values - <strong>direct access to this field is discouraged</strong> - the field
    * is protected to support <em>mutation</em> APIs and should not be relied on for other purposes.
    *
@@ -89,7 +89,7 @@ public class BOpBase extends CoreBaseBOp {
    */
   private final BOp[] args;
 
-  /**
+  /*
    * The operator annotations.
    *
    * <p>Note: This must be at least "effectively" final per the effectively immutable contract for
@@ -97,7 +97,7 @@ public class BOpBase extends CoreBaseBOp {
    */
   private final Map<String, Object> annotations;
 
-  /**
+  /*
    * Deep copy constructor (required).
    *
    * <p>Each {@link BOp} MUST implement a public copy constructor with the signature:
@@ -132,7 +132,7 @@ public class BOpBase extends CoreBaseBOp {
     annotations = new LinkedHashMap<String, Object>(op.annotations);
   }
 
-  /**
+  /*
    * Shallow copy constructor (required).
    *
    * @param args The arguments to the operator.
@@ -167,7 +167,7 @@ public class BOpBase extends CoreBaseBOp {
       return annotationsEqual(annotations, ((BOpBase) o).annotations);
     }
 
-    return super.annotationsEqual(annotations, o.annotations());
+    return annotationsEqual(annotations, o.annotations());
   }
 
   /** A copy of the args[] array. */
@@ -189,7 +189,7 @@ public class BOpBase extends CoreBaseBOp {
     return new LinkedHashMap<String, Object>(annotations);
   }
 
-  /**
+  /*
    * A reference to the actual annotations map object. This is used in some hot spots to avoid
    * creating a new annotations map when we know that the annotations will not be modified
    * (annotations are always set within the context in which the {@link BOpBase} instance is created
@@ -206,7 +206,7 @@ public class BOpBase extends CoreBaseBOp {
     return args[index];
   }
 
-  /**
+  /*
    * Set the value of an operand.
    *
    * <p>Note: This is protected to facilitate copy-on-write patterns. It is not public to prevent
@@ -222,7 +222,7 @@ public class BOpBase extends CoreBaseBOp {
     this.args[index] = op;
   }
 
-  /**
+  /*
    * Return a new {@link BOpBase} in which the child operand has been replaced by the given
    * expression.
    *
@@ -241,7 +241,7 @@ public class BOpBase extends CoreBaseBOp {
     return tmp;
   }
 
-  /**
+  /*
    * Effectively overwrites the specified argument with the provided value.
    *
    * <p>WARNING: this method could break logic of the code, which relies on immutability of the
@@ -264,7 +264,7 @@ public class BOpBase extends CoreBaseBOp {
     return args.length;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This is much less efficient than {@link #argIterator()}.
@@ -275,7 +275,7 @@ public class BOpBase extends CoreBaseBOp {
     return Collections.unmodifiableList(Arrays.asList(args));
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The iterator does not support removal. (This is more efficient than #args()).
@@ -323,8 +323,8 @@ public class BOpBase extends CoreBaseBOp {
     return a;
   }
 
-  //    /**
-  //     * Deep copy of a {@link BOpBase}.
+  //    /*
+//     * Deep copy of a {@link BOpBase}.
   //     *
   //     * @return The deep copy.
   //     */
@@ -340,7 +340,7 @@ public class BOpBase extends CoreBaseBOp {
   //
   //    }
 
-  /**
+  /*
    * Deep copy the arguments.
    *
    * <p>Note: As long as we stick to the immutable semantics for bops, we can just make a shallow
@@ -360,7 +360,7 @@ public class BOpBase extends CoreBaseBOp {
     return t;
   }
 
-  /**
+  /*
    * Deep copy the annotations.
    *
    * <p>Note: This does not know how to deep copy annotations which are not {@link BOp}s or
@@ -466,7 +466,7 @@ public class BOpBase extends CoreBaseBOp {
   //
   //    }
 
-  /**
+  /*
    * Set an annotation.
    *
    * <p>Note: This is protected to facilitate copy-on-write patterns. It is not public to prevent
@@ -482,7 +482,7 @@ public class BOpBase extends CoreBaseBOp {
     return annotations.put(name, value);
   }
 
-  /**
+  /*
    * Clear an annotation.
    *
    * <p>Note: This is protected to facilitate copy-on-write patterns. It is not public to prevent
@@ -506,7 +506,7 @@ public class BOpBase extends CoreBaseBOp {
     return tmp;
   }
 
-  /**
+  /*
    * Conditionally sets the property.
    *
    * @param name The name.
@@ -524,7 +524,7 @@ public class BOpBase extends CoreBaseBOp {
     return tmp;
   }
 
-  /**
+  /*
    * Clear the named annotation.
    *
    * @param name The annotation.
@@ -541,7 +541,7 @@ public class BOpBase extends CoreBaseBOp {
     return tmp;
   }
 
-  /**
+  /*
    * Strips off the named annotations.
    *
    * @param names The annotations to be removed.

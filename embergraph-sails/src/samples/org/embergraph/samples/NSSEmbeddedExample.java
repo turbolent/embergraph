@@ -8,8 +8,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.webapp.NanoSparqlServer;
 
-/**
- * Class demonstrates how to start the {@link NanoSparqlServer} from within embedded code.
+/*
+* Class demonstrates how to start the {@link NanoSparqlServer} from within embedded code.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -71,7 +71,7 @@ public class NSSEmbeddedExample implements Runnable {
     }
   }
 
-  /**
+  /*
    * Start and run an {@link NanoSparqlServer} instance from embedded code.
    *
    * @param args ignored.

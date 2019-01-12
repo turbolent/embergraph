@@ -94,7 +94,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -173,7 +173,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -270,7 +270,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -379,7 +379,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -522,7 +522,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -655,7 +655,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -773,7 +773,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -936,7 +936,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1444,7 +1444,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <p>?producer bsbm:country <http://downlode.org/rdf/iso-3166/countries#RU> . # card=2081
@@ -1724,7 +1724,7 @@ public class TestASTStaticJoinOptimizer extends AbstractOptimizerTestCase {
   }
 
   /*
-       *
+   *
        * prefix skos: <http://www.w3.org/2004/02/skos/core#>
          prefix bds: <http://www.embergraph.org/rdf/search#>
 

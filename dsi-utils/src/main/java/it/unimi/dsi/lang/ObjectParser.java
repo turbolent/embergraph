@@ -29,8 +29,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-/**
- * A parser for simple object specifications based on strings.
+/*
+* A parser for simple object specifications based on strings.
  *
  * <p>Whenever a particular instance of a class (not a singleton) has to be specified in textual
  * format, one faces the difficulty of having {@link Class#forName(String)} but no analogous method
@@ -84,7 +84,7 @@ public class ObjectParser extends StringParser {
   private static final Object NO_CONTEXT = new Object();
   /** A list of package names that will be prepended to specifications, or <code>null</code>. */
   private final String[] packages;
-  /**
+  /*
    * A list of factory methods that will be used before trying constructors, or <code>null</code>.
    */
   private final String[] factoryMethod;
@@ -93,7 +93,7 @@ public class ObjectParser extends StringParser {
   /** The context for this parser, or <code>null</code>. */
   private final Object context;
 
-  /**
+  /*
    * Creates a new object parser with given control type, list of packages and factory methods.
    *
    * @param type a type that will be used to check instantiated objects.
@@ -106,7 +106,7 @@ public class ObjectParser extends StringParser {
     this(NO_CONTEXT, type, packages, factoryMethod);
   }
 
-  /**
+  /*
    * Creates a new object parser with given control type and list of packages.
    *
    * @param type a type that will be used to check instantiated objects.
@@ -117,7 +117,7 @@ public class ObjectParser extends StringParser {
     this(type, packages, null);
   }
 
-  /**
+  /*
    * Creates a new object parser with given control type.
    *
    * @param type a type that will be used to check instantiated objects.
@@ -131,7 +131,7 @@ public class ObjectParser extends StringParser {
     this(Object.class);
   }
 
-  /**
+  /*
    * Creates a new object parser with given context, control type, list of packages and factory
    * methods.
    *
@@ -154,7 +154,7 @@ public class ObjectParser extends StringParser {
     this.factoryMethod = factoryMethod;
   }
 
-  /**
+  /*
    * Creates a new object parser with given context, control type and list of packages.
    *
    * @param context the context for this parser (will be passed on to instantiated
@@ -167,7 +167,7 @@ public class ObjectParser extends StringParser {
     this(context, type, packages, null);
   }
 
-  /**
+  /*
    * Creates a new object parser with given context and control type.
    *
    * @param context the context for this parser (will be passed on to instantiated
@@ -178,7 +178,7 @@ public class ObjectParser extends StringParser {
     this(context, type, null);
   }
 
-  /**
+  /*
    * Creates a new object parser with given context.
    *
    * @param context the context for this parser (will be passed on to instantiated
@@ -197,7 +197,7 @@ public class ObjectParser extends StringParser {
     }
   }
 
-  /**
+  /*
    * Creates a new instance from a specification.
    *
    * @param spec the object specification (see the {@linkplain ObjectParser class documentation}).
@@ -208,7 +208,7 @@ public class ObjectParser extends StringParser {
     return fromSpec(NO_CONTEXT, spec, Object.class, null, null);
   }
 
-  /**
+  /*
    * Creates a new instance from a specification using a given control type.
    *
    * @param spec the object specification (see the {@linkplain ObjectParser class documentation}).
@@ -220,7 +220,7 @@ public class ObjectParser extends StringParser {
     return fromSpec(NO_CONTEXT, spec, type, null, null);
   }
 
-  /**
+  /*
    * Creates a new instance from a specification using a given control type, list of packages and
    * factory methods.
    *
@@ -235,7 +235,7 @@ public class ObjectParser extends StringParser {
     return fromSpec(NO_CONTEXT, spec, type, packages, null);
   }
 
-  /**
+  /*
    * Creates a new instance from a specification using a given control type and list of packages.
    *
    * @param spec the object specification (see the {@linkplain ObjectParser class documentation}).
@@ -252,7 +252,7 @@ public class ObjectParser extends StringParser {
     return fromSpec(NO_CONTEXT, spec, type, packages, factoryMethod);
   }
 
-  /**
+  /*
    * Creates a new instance from a context and a specification.
    *
    * @param context a context object, or <code>null</code>.
@@ -264,7 +264,7 @@ public class ObjectParser extends StringParser {
     return fromSpec(context, spec, Object.class, null, null);
   }
 
-  /**
+  /*
    * Creates a new instance from a context and a specification using a given control type.
    *
    * @param context a context object, or <code>null</code>.
@@ -277,7 +277,7 @@ public class ObjectParser extends StringParser {
     return fromSpec(context, spec, type, null, null);
   }
 
-  /**
+  /*
    * Creates a new instance from a context and a specification using a given control type, list of
    * packages and factory methods.
    *
@@ -294,7 +294,7 @@ public class ObjectParser extends StringParser {
     return fromSpec(context, spec, type, packages, null);
   }
 
-  /**
+  /*
    * Creates a new instance from a context and a specification using a given control type and list
    * of packages.
    *
@@ -480,7 +480,7 @@ public class ObjectParser extends StringParser {
     }
   }
 
-  /**
+  /*
    * Generates a parseable representation of an object fetching by reflection a <code>toSpec()
    * </code> method, or using the class name.
    *

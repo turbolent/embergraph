@@ -56,8 +56,8 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTSetValueExpressionsOptimizer}.
+/*
+* Test suite for {@link ASTSetValueExpressionsOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -72,7 +72,7 @@ public class TestASTSetValueExpressionOptimizer extends AbstractASTEvaluationTes
     super(name);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>

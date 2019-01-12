@@ -10,8 +10,8 @@ import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.keys.IKeyBuilderFactory;
 import org.embergraph.io.SerializerUtil;
 
-/**
- * Helper class for (de-)serializing logical rows for {@link AtomicRowFilter}.
+/*
+* Helper class for (de-)serializing logical rows for {@link AtomicRowFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -33,7 +33,7 @@ public class TPSTupleSerializer extends DefaultTupleSerializer<Void, TPS> {
     super(keyBuilderFactory);
   }
 
-  /**
+  /*
    * This method is not used since we do not store {@link TPS} objects directly in a {@link BTree}.
    *
    * @throws UnsupportedOperationException always.
@@ -60,7 +60,7 @@ public class TPSTupleSerializer extends DefaultTupleSerializer<Void, TPS> {
             );
   }
 
-  /**
+  /*
    * You can get the {@link Schema} and the primary key from {@link #deserialize(ITuple)}.
    *
    * @throws UnsupportedOperationException always.

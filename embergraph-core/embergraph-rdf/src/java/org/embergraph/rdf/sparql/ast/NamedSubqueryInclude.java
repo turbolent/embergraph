@@ -30,8 +30,8 @@ import java.util.Set;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
-/**
- * An AST node which provides a reference in an {@link IGroupNode} and indicates that a named
+/*
+* An AST node which provides a reference in an {@link IGroupNode} and indicates that a named
  * solution set should be joined with the solutions in the group.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +45,7 @@ public class NamedSubqueryInclude extends GroupMemberNodeBase<NamedSubqueryInclu
 
   public interface Annotations extends IJoinNode.Annotations, INamedSolutionSet.Annotations {
 
-    /**
+    /*
      * A {@link VarNode}[] specifying the join variables that will be used when the named result set
      * is join with the query. The join variables MUST be bound for a solution to join.
      *
@@ -68,8 +68,8 @@ public class NamedSubqueryInclude extends GroupMemberNodeBase<NamedSubqueryInclu
      *
      * @see https://sourceforge.net/apps/trac/bigdata/ticket/405
      */
-    //        /**
-    //         * When <code>true</code>, the join variables will be ignored when
+    //        /*
+//         * When <code>true</code>, the join variables will be ignored when
     //         * performing the join. This option makes it possible to build an index
     //         * using join variables, but to evaluate the join without regard to
     //         * those join variables.
@@ -127,7 +127,7 @@ public class NamedSubqueryInclude extends GroupMemberNodeBase<NamedSubqueryInclu
     return (VarNode[]) getProperty(Annotations.JOIN_VARS);
   }
 
-  /**
+  /*
    * Set the join variables.
    *
    * @param joinVars The join variables.
@@ -137,7 +137,7 @@ public class NamedSubqueryInclude extends GroupMemberNodeBase<NamedSubqueryInclu
     setProperty(Annotations.JOIN_VARS, joinVars);
   }
 
-  /**
+  /*
    * Return the ordered set of join variables.
    *
    * @return The ordered set of join variables and never <code>null</code>.

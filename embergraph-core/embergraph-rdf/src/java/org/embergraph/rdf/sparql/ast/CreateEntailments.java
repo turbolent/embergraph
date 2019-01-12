@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * The CREATE ENTAILMENTS operation compute entailments in the Graph Store.
+/*
+* The CREATE ENTAILMENTS operation compute entailments in the Graph Store.
  *
  * <pre>
  * CREATE ENTAILMENTS
@@ -44,7 +44,7 @@ public class CreateEntailments extends GraphUpdate {
     super(UpdateType.CreateEntailments);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

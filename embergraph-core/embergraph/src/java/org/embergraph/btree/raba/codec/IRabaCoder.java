@@ -22,8 +22,8 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
-/**
- * Interface for coding (compressing) a logical <code>byte[][]</code> and for accessing the coded
+/*
+* Interface for coding (compressing) a logical <code>byte[][]</code> and for accessing the coded
  * data in place.
  *
  * @see IRaba
@@ -31,19 +31,19 @@ import org.embergraph.io.DataOutputBuffer;
  */
 public interface IRabaCoder extends Serializable {
 
-  /**
+  /*
    * Return <code>true</code> if this implementation can code B+Tree keys (supports search on the
    * coded representation). Note that some implementations can code either keys or values.
    */
   boolean isKeyCoder();
 
-  /**
+  /*
    * Return <code>true</code> if this implementation can code B+Tree values (allows <code>null
    * </code>s). Note that some implementations can code either keys or values.
    */
   boolean isValueCoder();
 
-  /**
+  /*
    * Return true iff this {@link IRabaCoder} supports duplicate keys.
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/763" > Stochastic Results With
@@ -51,7 +51,7 @@ public interface IRabaCoder extends Serializable {
    */
   boolean isDuplicateKeys();
 
-  /**
+  /*
    * Encode the data, returning an {@link ICodedRaba}. Implementations of this method should be
    * optimized for the very common use case where the caller requires immediate access to the coded
    * data record. In that case, many of the {@link IRabaCoder} implementations can be optimized by
@@ -65,9 +65,9 @@ public interface IRabaCoder extends Serializable {
    * IRawStore}. The {@link IndexSegmentBuilder} is a special case, since the coded record will not
    * be used other than to write it on the disk.
    */
-  public ICodedRaba encodeLive(IRaba raba, DataOutputBuffer buf);
+  ICodedRaba encodeLive(IRaba raba, DataOutputBuffer buf);
 
-  /**
+  /*
    * Encode the data.
    *
    * <p>Note: Implementations of this method are typically heavy. While it is always valid to {@link
@@ -87,7 +87,7 @@ public interface IRabaCoder extends Serializable {
    */
   AbstractFixedByteArrayBuffer encode(IRaba raba, DataOutputBuffer buf);
 
-  /**
+  /*
    * Return an {@link IRaba} which can access the coded data. In general, implementations SHOULD NOT
    * materialize a backing byte[][]. Instead, the implementation should access the data in place
    * within the caller's buffer. Frequently used fields MAY be cached, but the whole point of the

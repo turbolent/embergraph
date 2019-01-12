@@ -43,8 +43,8 @@ import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Integration test with a persistence store.
+/*
+* Integration test with a persistence store.
  *
  * @author bryan
  */
@@ -127,7 +127,7 @@ public class TestHTreeWithMemStore extends TestCase {
     doOverflowStressTest(addressBits, writeRetentionQueueCapacity, numOverflowPages);
   }
 
-  /**
+  /*
    * @param addressBits
    * @param writeRetentionQueueCapacity
    * @param numOverflowPages The #of overflow bucket pages for the largest overflow bucket in the
@@ -290,7 +290,7 @@ public class TestHTreeWithMemStore extends TestCase {
   //
   //    }
 
-  /**
+  /*
    * Note: If the retention queue is less than the maximum depth of the HTree then we can encounter
    * a copy-on-write problem where the parent directory becomes immutable during a mutation on the
    * child.
@@ -339,7 +339,7 @@ public class TestHTreeWithMemStore extends TestCase {
   private static final int s_limit = 10000;
   private static final int s_retentionQueueCapacity = 20;
 
-  /**
+  /*
    * Note: If the retention queue is less than the maximum depth of the HTree then we can encounter
    * a copy-on-write problem where the parent directory becomes immutable during a mutation on the
    * child.
@@ -446,8 +446,8 @@ public class TestHTreeWithMemStore extends TestCase {
 
         if (true) {
 
-          /*
-           * Note: This code verifies that the dumpPages() code is
+        /*
+       * Note: This code verifies that the dumpPages() code is
            * working. If you comment this out, then write an explicit
            * unit test for dumpPages().
            */

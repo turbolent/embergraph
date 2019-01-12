@@ -53,8 +53,8 @@ package org.embergraph.rdf.properties;
 
 import info.aduna.lang.service.FileFormatServiceRegistry;
 
-/**
- * A registry that keeps track of the available {@link PropertiesWriterFactory} s.
+/*
+* A registry that keeps track of the available {@link PropertiesWriterFactory} s.
  *
  * @author Arjohn Kampman
  * @author Bryan Thompson
@@ -64,7 +64,7 @@ public class PropertiesWriterRegistry
 
   private static PropertiesWriterRegistry defaultRegistry;
 
-  /**
+  /*
    * Gets the default {@link PropertiesWriterRegistry}.
    *
    * @return The default registry.

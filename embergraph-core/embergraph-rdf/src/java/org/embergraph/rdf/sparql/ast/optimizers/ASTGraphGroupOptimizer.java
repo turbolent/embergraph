@@ -48,8 +48,8 @@ import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Handles a variety of special constructions related to graph graph groups.
+/*
+* Handles a variety of special constructions related to graph graph groups.
  *
  * <dl>
  *   <dt>GRAPH ?foo
@@ -165,7 +165,7 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryNode, bindingSets);
   }
 
-  /**
+  /*
    * Visit groups, applying and verifying GRAPH constraints.
    *
    * <p>Note: This will NOT visit stuff inside of SERVICE calls. If those graph patterns get
@@ -193,35 +193,35 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
 
       if (innerGraphContext.isConstant()) {
 
-        /*
-         * If there is a named graphs data set, then verify that the
+      /*
+       * If there is a named graphs data set, then verify that the
          * given URI is a member of that data set.
          */
 
         assertGraphInNamedDataset(
-            (EmbergraphURI) ((TermNode) innerGraphContext).getValue(), dataSet);
+            (EmbergraphURI) innerGraphContext.getValue(), dataSet);
       }
 
       if (graphContext == null) {
 
-        /*
-         * Top-most GRAPH group in this part of the query.
+      /*
+       * Top-most GRAPH group in this part of the query.
          */
 
         graphContext = innerGraphContext;
 
       } else {
 
-        /*
-         * There is an existing GRAPH context.
+      /*
+       * There is an existing GRAPH context.
          *
          * Make sure the constraints are compatible and/or enforced.
          */
 
         if (graphContext.isConstant() && innerGraphContext.isConstant()) {
 
-          /*
-           * GRAPH uri { ... GRAPH uri { ... } ... }
+        /*
+       * GRAPH uri { ... GRAPH uri { ... } ... }
            */
 
           assertSameURI(graphContext, innerGraphContext);
@@ -230,8 +230,8 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
             && innerGraphContext.isVariable()
             && !graphContext.equals(innerGraphContext)) {
 
-          /*
-           * GRAPH ?foo { ... GRAPH ?bar { ... } ... }
+        /*
+       * GRAPH ?foo { ... GRAPH ?bar { ... } ... }
            *
            * Adds a SameTerm(foo,bar) constraint to the inner GRAPH
            * pattern.
@@ -249,14 +249,14 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
           group.addChild(filterNode);
         }
 
-        /*
-         * TODO GRAPH ?foo { ... GRAPH uri ... } could be handled here
+      /*
+       * TODO GRAPH ?foo { ... GRAPH uri ... } could be handled here
          * (optimization, not correctness).
          */
 
       }
 
-      /**
+      /*
        * Handle edge cases GRAPH ?g { } and GRAPH <uri>, which require special handling (if not
        * rewritten, they will return wrong results in some cases).
        */
@@ -277,8 +277,8 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
 
       } else if (group.isEmpty() && graphContext.isConstant()) {
 
-        /**
-         * We need to verify that there is one or more stmt in that named graph. We do that using an
+      /*
+       * We need to verify that there is one or more stmt in that named graph. We do that using an
          * ASK subquery.
          *
          * <p>Note that it is *not* safe to drop the whole construct, even if we statically detect
@@ -318,8 +318,8 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
 
       if (child instanceof ServiceNode) {
 
-        /*
-         * Do NOT translate SERVICE nodes (unless they are a embergraph
+      /*
+       * Do NOT translate SERVICE nodes (unless they are a embergraph
          * service).
          */
 
@@ -330,8 +330,8 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
 
         if (child instanceof StatementPatternNode) {
 
-          /*
-           * All statement patterns within a GRAPH {...} MUST have a
+        /*
+       * All statement patterns within a GRAPH {...} MUST have a
            * constraint on [c] and MUST specify NAMED_CONTEXTS as
            * their scope.
            */
@@ -356,8 +356,8 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
 
           if (sp.c() == null) {
 
-            /*
-             * Impose the context if it is missing.
+          /*
+       * Impose the context if it is missing.
              *
              * TODO Should it be an error if this is not bound? Who
              * really has responsibility for attaching the [c]
@@ -377,7 +377,7 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Assert that the contexts are the same URI.
    *
    * @param context
@@ -394,7 +394,7 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Assert that the given URI is in the named data set.
    *
    * @param uri A URI.

@@ -23,8 +23,8 @@ package org.embergraph.cache;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 
-/**
- * Implementation based on {@link WeakReference}.
+/*
+* Implementation based on {@link WeakReference}.
  *
  * @version $Id$
  * @author thompsonbry

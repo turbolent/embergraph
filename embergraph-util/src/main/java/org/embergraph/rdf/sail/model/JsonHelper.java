@@ -30,15 +30,15 @@ import java.io.InputStream;
 import java.io.Writer;
 import java.util.List;
 
-/**
- * Helper class for Json Serialization of Model Objects
+/*
+* Helper class for Json Serialization of Model Objects
  *
  * @author beebs
  */
 public class JsonHelper {
 
   public static void writeRunningQueryList(Writer w, List<RunningQuery> rQueries)
-      throws JsonGenerationException, JsonMappingException, IOException {
+      throws IOException {
     final ObjectMapper mapper = new ObjectMapper();
     final TypeFactory typeFactory = mapper.getTypeFactory();
     final ObjectWriter writer =
@@ -50,7 +50,7 @@ public class JsonHelper {
   }
 
   public static List<RunningQuery> readRunningQueryList(InputStream is)
-      throws JsonProcessingException, IOException {
+      throws IOException {
 
     final ObjectMapper mapper = new ObjectMapper();
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

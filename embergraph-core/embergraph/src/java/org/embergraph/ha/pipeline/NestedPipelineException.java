@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.pipeline;
 
-/**
- * An exception that is used to wrap and rethrow a cause whose root cause is another {@link
+/*
+* An exception that is used to wrap and rethrow a cause whose root cause is another {@link
  * AbstractPipelineException}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

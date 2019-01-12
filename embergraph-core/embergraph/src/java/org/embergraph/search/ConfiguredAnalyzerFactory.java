@@ -24,8 +24,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.lucene.analysis.Analyzer;
 import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
-/**
- * This comment describes the implementation of {@link ConfiguredAnalyzerFactory}. The only method
+/*
+* This comment describes the implementation of {@link ConfiguredAnalyzerFactory}. The only method
  * in the interface is {@link ConfiguredAnalyzerFactory#getAnalyzer(String, boolean)}, a map is used
  * from language tag to {@link AnalyzerPair}, where the pair contains an {@link Analyzer} both with
  * and without stopwords configured (some times these two analyzers are identical, if, for example,
@@ -39,7 +39,7 @@ import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
  */
 class ConfiguredAnalyzerFactory implements IAnalyzerFactory {
 
-  /**
+  /*
    * These provide a mapping from a language range to a pair of Analyzers and sort with the
    * best-match (i.e. longest match) first.
    *
@@ -64,7 +64,7 @@ class ConfiguredAnalyzerFactory implements IAnalyzerFactory {
       this.withoutStopWords = withOutStopWords;
     }
 
-    /**
+    /*
      * This clone constructor implements {@link AnalyzerOptions#LIKE}.
      *
      * @param range
@@ -85,13 +85,13 @@ class ConfiguredAnalyzerFactory implements IAnalyzerFactory {
     }
   }
 
-  private final AnalyzerPair config[];
+  private final AnalyzerPair[] config;
 
   /** This caches the result of looking up a lang tag in the config of language ranges. */
   private final Map<String, AnalyzerPair> langTag2AnalyzerPair =
-      new ConcurrentHashMap<String, AnalyzerPair>();;
+      new ConcurrentHashMap<String, AnalyzerPair>();
 
-  /**
+  /*
    * While it would be very unusual to have more than 500 different language tags in a store it is
    * possible - we use a max size to prevent a memory explosion, and a naive caching strategy so the
    * code will still work on the {@link #MAX_LANG_CACHE_SIZE}+1 th entry.
@@ -99,12 +99,12 @@ class ConfiguredAnalyzerFactory implements IAnalyzerFactory {
   private static final int MAX_LANG_CACHE_SIZE = 500;
 
   private final String defaultLanguage;
-  /**
+  /*
    * Builds a new ConfigurableAnalyzerFactory.
    *
    * @param fullTextIndex
    */
-  public ConfiguredAnalyzerFactory(AnalyzerPair config[], String defaultLanguage) {
+  public ConfiguredAnalyzerFactory(AnalyzerPair[] config, String defaultLanguage) {
     this.config = config;
     this.defaultLanguage = defaultLanguage;
   }
@@ -138,7 +138,7 @@ class ConfiguredAnalyzerFactory implements IAnalyzerFactory {
   }
 
   private AnalyzerPair lookupPair(String languageCode) {
-    String language[] = languageCode.split("-");
+    String[] language = languageCode.split("-");
     for (AnalyzerPair p : config) {
       if (p.extendedFilterMatch(language)) {
         return p;

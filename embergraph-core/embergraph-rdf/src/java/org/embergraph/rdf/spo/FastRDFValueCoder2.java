@@ -17,8 +17,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Coder for values in statement index with inference enabled but without SIDS. We encode the value
+/*
+* Coder for values in statement index with inference enabled but without SIDS. We encode the value
  * in 4 bits per statement. The 1st bit is the override flag. The remaining next two bits are the
  * statement type {inferred, explicit, or axiom}. The last bit is not used. The bit sequence <code>
  * 0111</code> is used as a place holder for a <code>null</code> value and de-serializes to a
@@ -146,7 +146,7 @@ public class FastRDFValueCoder2 implements Externalizable, IRabaCoder {
     return new CodedRabaImpl(data);
   }
 
-  /**
+  /*
    * Decoder.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -196,7 +196,7 @@ public class FastRDFValueCoder2 implements Externalizable, IRabaCoder {
       return true;
     }
 
-    /**
+    /*
      * Constructor used when encoding a data record.
      *
      * @param data The coded data record.
@@ -209,7 +209,7 @@ public class FastRDFValueCoder2 implements Externalizable, IRabaCoder {
       this.size = size;
     }
 
-    /**
+    /*
      * Constructor used when decoding a data record.
      *
      * @param data The coded data record.
@@ -230,7 +230,7 @@ public class FastRDFValueCoder2 implements Externalizable, IRabaCoder {
       size = data.getInt(1 /* offset */);
     }
 
-    /**
+    /*
      * Thread-safe extract of the bits coded value for the specified index.
      *
      * @param index The specified index.
@@ -296,7 +296,7 @@ public class FastRDFValueCoder2 implements Externalizable, IRabaCoder {
       return getBits(index) == 7;
     }
 
-    /**
+    /*
      * Returns ONE (1) unless the value is a <code>null</code>.
      *
      * <p>{@inheritDoc}

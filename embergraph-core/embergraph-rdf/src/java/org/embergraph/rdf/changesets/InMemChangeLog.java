@@ -28,8 +28,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.EmbergraphStatementIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
-/**
- * This is a very simple implementation of a change log. NOTE: This is not a particularly great
+/*
+* This is a very simple implementation of a change log. NOTE: This is not a particularly great
  * implementation. First of all it ends up storing two copies of the change set. Secondly it needs
  * to be smarter about concurrency, or maybe we can be smart about it when we do the implementation
  * on the other side (the SAIL connection can just write change events to a buffer and then the
@@ -88,7 +88,7 @@ public class InMemChangeLog implements IChangeLog {
   @Override
   public void close() {}
 
-  /**
+  /*
    * Return the change set as of the last commmit point.
    *
    * @return a collection of {@link IChangeRecord}s as of the last commit point
@@ -98,7 +98,7 @@ public class InMemChangeLog implements IChangeLog {
     return committed.values();
   }
 
-  /**
+  /*
    * Return the change set as of the last commmit point, using the supplied database to resolve
    * ISPOs to EmbergraphStatements.
    *
@@ -109,7 +109,7 @@ public class InMemChangeLog implements IChangeLog {
     return resolve(db, committed.values());
   }
 
-  /**
+  /*
    * Use the supplied database to turn a set of ISPO change records into EmbergraphStatement change
    * records. EmbergraphStatements also implement ISPO, the difference being that
    * EmbergraphStatements also contain materialized RDF terms for the 3 (or 4) positions, in

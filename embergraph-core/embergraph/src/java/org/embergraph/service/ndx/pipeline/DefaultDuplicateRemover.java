@@ -3,8 +3,8 @@ package org.embergraph.service.ndx.pipeline;
 import org.embergraph.btree.keys.KVO;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Implementation which retains one instance of each tuple having the same unsigned byte[] key and
+/*
+* Implementation which retains one instance of each tuple having the same unsigned byte[] key and
  * the same byte[] value. For efficiency, you may specify that the presence of the same non-<code>
  * null</code> object reference may be used to detect duplicates without requiring the comparison of
  * the byte[] values.
@@ -27,7 +27,7 @@ public class DefaultDuplicateRemover<O> implements IDuplicateRemover<O> {
   public static final transient IDuplicateRemover KEY_VAL =
       new DefaultDuplicateRemover(false /* testRefs */);
 
-  /**
+  /*
    * Instance verifies the same unsigned byte[] key and will accept the same non-<code>null</code>
    * object reference as indicating the same value. If the object reference is <code>null</code>
    * then it will compare the byte[] values.
@@ -35,7 +35,7 @@ public class DefaultDuplicateRemover<O> implements IDuplicateRemover<O> {
   public static final transient IDuplicateRemover KEY_REF_VAL =
       new DefaultDuplicateRemover(false /* testRefs */);
 
-  /**
+  /*
    * @param testRefs When <code>true</code>, {@link KVO}s having the same key and the same non-
    *     <code>null</code> object reference will be filtered without testing the byte[] values for
    *     equality.
@@ -70,7 +70,7 @@ public class DefaultDuplicateRemover<O> implements IDuplicateRemover<O> {
     return KVO.dense(tmp, ndistinct);
   }
 
-  /**
+  /*
    * Return <code>true</code> if the <i>other</i> instance is a duplicate and may be dropped. (This
    * implementation recognizes {@link KVOList} and handles it appropriately.)
    *

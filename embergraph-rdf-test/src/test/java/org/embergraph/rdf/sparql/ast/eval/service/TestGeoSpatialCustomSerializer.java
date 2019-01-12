@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite for custom serializer.
+/*
+* Data driven test suite for custom serializer.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

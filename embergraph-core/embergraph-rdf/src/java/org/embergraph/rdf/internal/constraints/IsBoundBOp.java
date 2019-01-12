@@ -50,7 +50,7 @@ public class IsBoundBOp extends XSDBooleanIVValueExpression {
     super(op);
   }
 
-  /**
+  /*
    *
    *
    * <pre>

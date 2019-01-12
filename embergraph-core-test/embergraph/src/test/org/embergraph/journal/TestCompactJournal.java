@@ -33,8 +33,8 @@ import org.embergraph.btree.BTree;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.KV;
 
-/**
- * Test suite for {@link Journal#compact(java.io.File)}.
+/*
+* Test suite for {@link Journal#compact(java.io.File)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -48,7 +48,7 @@ public class TestCompactJournal extends ProxyTestCase<Journal> {
     super(name);
   }
 
-  /**
+  /*
    * Verifies exception if there are no commits on the journal (the lastCommitTime will be zero
    * which does not identify a valid commit point).
    *
@@ -93,7 +93,7 @@ public class TestCompactJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test of a journal on which a single index has been register (and the journal committed) but no
    * data was written onto the index.
    *
@@ -146,7 +146,7 @@ public class TestCompactJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which a single index has been registered with random data on the index.
    *
    * @throws IOException
@@ -204,7 +204,7 @@ public class TestCompactJournal extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test with a journal on which many indies have been registered and populated with random data.
    *
    * @throws IOException

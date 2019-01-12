@@ -19,8 +19,8 @@ public class TestNumericBNodes extends RemoteGOMTestCase {
   }
 
   //
-  //	/**
-  //	 * Mike,
+  //	/*
+//	 * Mike,
   //	 *
   //	 * If you load the attached file into the NSS and then execute
   //	 * embergraph-gom/samples//Example1 (or Example2) it will throw an exception

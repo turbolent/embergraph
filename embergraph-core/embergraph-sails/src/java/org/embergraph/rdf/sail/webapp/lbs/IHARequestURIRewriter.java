@@ -20,15 +20,15 @@ package org.embergraph.rdf.sail.webapp.lbs;
 import javax.servlet.http.HttpServletRequest;
 import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 
-/**
- * Interface for rewriting the Request-URI once the load balancer has determined the target host and
+/*
+* Interface for rewriting the Request-URI once the load balancer has determined the target host and
  * service to which the request will be proxied.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHARequestURIRewriter extends IHAPolicyLifeCycle {
 
-  /**
+  /*
    * Rewrite the <code>originalRequestURI</code> into a <a href=
    * "http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1.2" >Request-URL</a> for the web
    * application whose servlet context root is given by the <code>proxyToRequestURI</code>.
@@ -67,7 +67,7 @@ public interface IHARequestURIRewriter extends IHAPolicyLifeCycle {
    *     </code>
    * @see ServiceScore#getRequestURI()
    */
-  public StringBuilder rewriteURI(
+  StringBuilder rewriteURI(
       boolean isLeaderRequest,
       String full_prefix,
       String originalRequestURI,

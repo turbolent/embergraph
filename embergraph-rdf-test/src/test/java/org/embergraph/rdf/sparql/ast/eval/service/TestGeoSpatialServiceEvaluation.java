@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite for GeoSpatial service feature in quads mode, testing of different service
+/*
+* Data driven test suite for GeoSpatial service feature in quads mode, testing of different service
  * configurations, as well as correctness of the GeoSpatial service itself.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -44,7 +44,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     super(name);
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -60,7 +60,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -76,7 +76,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -95,7 +95,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -115,7 +115,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -135,7 +135,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query (not wrapped into service):
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -154,7 +154,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query and subsequent join of result.
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -171,7 +171,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify precision handling. The query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#> SELECT ?res ?o WHERE { SERVICE
@@ -235,7 +235,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify rectangle search with simple:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -317,7 +317,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     helper.runTest();
   }
 
-  /**
+  /*
    * Test query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -336,7 +336,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Test query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -356,7 +356,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Test query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -376,7 +376,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Test query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -395,7 +395,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Compared to the circle01* queries, the query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -415,7 +415,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * A variant of circle02 where the unit is specified in miles rather than kilometers (delivering
    * the same result).
    */
@@ -425,7 +425,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Compared to queries circle02 and circle03, the query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -445,7 +445,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Compared to queries circle04, the query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -463,7 +463,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Query similar in spirit to circle04, but settled at the corner of our gred (top left):
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -480,7 +480,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Query similar in spirit to circle06a, but top-right corner.
    *
    * @throws Exception
@@ -491,7 +491,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Query similar in spirit to circle06a, but lower-left corner.
    *
    * @throws Exception
@@ -502,7 +502,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Query similar in spirit to circle06a, but lower-right corner.
    *
    * @throws Exception
@@ -513,7 +513,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Test query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -545,7 +545,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     helper.runTest();
   }
 
-  /**
+  /*
    * Verify that location value is properly extracted.
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -561,7 +561,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify that time value is properly extracted.
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -577,7 +577,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify that location + time value is properly extracted.
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -594,7 +594,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify that all dimension values are extracted properly when respective output variables are
    * present
    *
@@ -612,7 +612,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Verify that a circle query with illegal center point latitude value fails.
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -642,7 +642,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     throw new RuntimeException("Expected to run into exception. Test case failed.");
   }
 
-  /**
+  /*
    * Verify that a circle query with illegal center point longitude value fails.
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -673,7 +673,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     throw new RuntimeException("Expected to run into exception. Test case failed.");
   }
 
-  /**
+  /*
    * Verify that a query that spans over the max lat + lon values does not fail, but yields all data
    * in the database.
    *
@@ -693,7 +693,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Assert failing in case of invalid rectangle coordinates (in upper left).
    *
    * @throws Exception
@@ -719,7 +719,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     throw new RuntimeException("Expected to run into exception. Test case failed.");
   }
 
-  /**
+  /*
    * Assert failing in case of invalid rectangle coordinates (in lower right).
    *
    * @throws Exception
@@ -745,7 +745,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
     throw new RuntimeException("Expected to run into exception. Test case failed.");
   }
 
-  /**
+  /*
    * Real world test against geo coordinates of few cities.
    *
    * @throws Exception
@@ -760,7 +760,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Real world test against geo coordinates of few cities.
    *
    * @throws Exception
@@ -775,7 +775,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Real world test against geo coordinates of few cities, including distance calculation.
    *
    * @throws Exception
@@ -790,7 +790,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Real world test against geo coordinates of few cities, including distance calculation and ORDER
    * BY over distances.
    *
@@ -806,7 +806,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Real world test against geo coordinates of few cities.
    *
    * @throws Exception
@@ -821,7 +821,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Rectangle test q query on grid ranging from [-179;180] longitude and [-5;5] latitude and fixed
    * "0" timestamp, aiming covering edge cases overlapping the -180 and +180 longitude values.
    *
@@ -836,7 +836,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Rectangle test query on grid ranging from [-179;180] longitude and [-5;5] latitude and fixed
    * "0" timestamp, aiming covering edge cases overlapping the -180 and +180 longitude values.
    *
@@ -851,7 +851,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Rectangle test query on grid ranging from [-179;180] longitude and [-5;5] latitude and fixed
    * "0" timestamp, aiming covering edge cases overlapping the -180 and +180 longitude values.
    *
@@ -866,7 +866,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Circle test q query on grid ranging from [-179;180] longitude and [-5;5] latitude and fixed "0"
    * timestamp, aiming covering edge cases overlapping the -180 and +180 longitude values.
    *
@@ -881,7 +881,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Circle test query on grid ranging from [-179;180] longitude and [-5;5] latitude and fixed "0"
    * timestamp, aiming covering edge cases overlapping the -180 and +180 longitude values.
    *
@@ -896,7 +896,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Circle test q query on grid ranging from [-179;180] longitude and [-5;5] latitude and fixed "0"
    * timestamp, aiming covering edge cases overlapping the -180 and +180 longitude values.
    *
@@ -911,7 +911,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * Circle test q query on grid ranging from [-179;180] longitude and [-5;5] latitude and fixed "0"
    * timestamp, aiming covering edge cases overlapping the -180 and +180 longitude values.
    *
@@ -926,7 +926,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1718: exception if search predicate is unknown
    *
    * @throws Exception
@@ -940,7 +940,7 @@ public class TestGeoSpatialServiceEvaluation extends AbstractDataDrivenSPARQLTes
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1719: test rectangle for real-world example
    *
    * @throws Exception

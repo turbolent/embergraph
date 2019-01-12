@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * Class buffers up to a block of data at a time and flushes blocks using an atomic append operation
+/*
+* Class buffers up to a block of data at a time and flushes blocks using an atomic append operation
  * on the identifier file version.
  *
  * @todo this would benefit from asynchronous write-behind of the last block so that caller's do not
@@ -42,7 +42,7 @@ public class FileVersionOutputStream extends OutputStream {
   /** #of bytes written onto this output stream. */
   private long nwritten;
 
-  /**
+  /*
    * #of bytes written onto this output stream.
    *
    * @todo handle overflow of long - leave counter at {@link Long#MAX_VALUE}.
@@ -61,7 +61,7 @@ public class FileVersionOutputStream extends OutputStream {
     return nblocks;
   }
 
-  /**
+  /*
    * Create an output stream that will atomically append blocks of data to the specified file
    * version.
    *
@@ -82,7 +82,7 @@ public class FileVersionOutputStream extends OutputStream {
     this.buffer = new byte[repo.getBlockSize()];
   }
 
-  /**
+  /*
    * Buffers the byte. If the buffer would overflow then it is flushed.
    *
    * @throws IOException
@@ -101,7 +101,7 @@ public class FileVersionOutputStream extends OutputStream {
     nwritten++;
   }
 
-  /**
+  /*
    * If there is data data accumulated in the buffer then it is written on the file version using an
    * atomic append (empty buffers are NOT flushed).
    *
@@ -122,7 +122,7 @@ public class FileVersionOutputStream extends OutputStream {
     }
   }
 
-  /**
+  /*
    * Flushes the buffer.
    *
    * @throws IOException
@@ -132,7 +132,7 @@ public class FileVersionOutputStream extends OutputStream {
     flush();
   }
 
-  /**
+  /*
    * Consumes the input stream, writing blocks onto the file version. The output stream is NOT
    * flushed.
    *

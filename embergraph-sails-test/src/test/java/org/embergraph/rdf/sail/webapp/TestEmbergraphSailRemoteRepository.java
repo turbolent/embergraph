@@ -52,8 +52,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Proxied test suite for {@link EmbergraphSailRemoteRepository} and {@link
+/*
+* Proxied test suite for {@link EmbergraphSailRemoteRepository} and {@link
  * EmbergraphSailRemoteRepositoryConnection}.
  *
  * <p>Note: There are two versions of the test suite. One with isolatable indices enabled and one
@@ -103,7 +103,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
   /** The repository under test. */
   protected EmbergraphSailRemoteRepository repo = null;
 
-  /**
+  /*
    * A connection obtained by {@link #setUp()} from {@link #repo}. This connection will be closed
    * when the fixture is torn down.
    */
@@ -138,7 +138,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
   /** The URI for the default prefix (":") in SPARQL QUERY and UPDATE requests. */
   protected static final String DEFAULT_PREFIX = "http://embergraph.org/";
 
-  /**
+  /*
    * A bunch of namespace declarations to be used by the tests.
    *
    * @return
@@ -221,7 +221,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
     assertEquals(false, query.evaluate());
   }
 
-  /**
+  /*
    * Select everything in the kb using a GET. There will be no solutions (assuming that we are using
    * a told triple kb or quads kb w/o axioms).
    */
@@ -821,7 +821,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
     assertEquals(0, result);
   }
 
-  /**
+  /*
    * Basic test creates a read/write connection, issues begin(), and then issues rollback() on the
    * connection.
    */
@@ -838,7 +838,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
     assertFalse(cxn.isActive());
   }
 
-  /**
+  /*
    * Basic test creates a read/write connection, issues begin(), and then issues commit() on the
    * connection.
    */
@@ -855,7 +855,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
     assertFalse(cxn.isActive());
   }
 
-  /**
+  /*
    * An *extension* of the test suite that uses a namespace that is configured to support read/write
    * transactions.
    *
@@ -872,7 +872,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
       super(name);
     }
 
-    /**
+    /*
      * Enable isolatable indices for so we can have concurrent read/write transactions in the {@link
      * RepositoryConnection}.
      */
@@ -886,7 +886,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
       return p;
     }
 
-    /**
+    /*
      * Basic test creates a read/write connection, issues begin(), and then issues commit() on the
      * connection.
      *
@@ -936,7 +936,7 @@ public class TestEmbergraphSailRemoteRepository<S extends IIndexManager>
       assertFalse(cxn.isActive());
     }
 
-    /**
+    /*
      * Basic test creates a read/write connection, issues begin(), and then issues commit() on the
      * connection.
      *

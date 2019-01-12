@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.map;
 
-/**
- * Provides various hash functions.
+/*
+* Provides various hash functions.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
@@ -17,7 +17,7 @@ package cern.colt.map;
 public class HashFunctions extends Object {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected HashFunctions() {}
-  /**
+  /*
    * Returns a hashcode for the specified value.
    *
    * @return a hash code value for the specified value.
@@ -25,7 +25,7 @@ public class HashFunctions extends Object {
   public static int hash(char value) {
     return (int) value;
   }
-  /**
+  /*
    * Returns a hashcode for the specified value.
    *
    * @return a hash code value for the specified value.
@@ -37,7 +37,7 @@ public class HashFunctions extends Object {
     // return (int) Double.doubleToLongBits(value*663608941.737);
     // this avoids excessive hashCollisions in the case values are of the form (1.0, 2.0, 3.0, ...)
   }
-  /**
+  /*
    * Returns a hashcode for the specified value.
    *
    * @return a hash code value for the specified value.
@@ -46,7 +46,7 @@ public class HashFunctions extends Object {
     return Float.floatToIntBits(value * 663608941.737f);
     // this avoids excessive hashCollisions in the case values are of the form (1.0, 2.0, 3.0, ...)
   }
-  /**
+  /*
    * Returns a hashcode for the specified value.
    *
    * @return a hash code value for the specified value.
@@ -65,7 +65,7 @@ public class HashFunctions extends Object {
     return 28629151*hashCode; // spread even further; h*31^5
     */
   }
-  /**
+  /*
    * Returns a hashcode for the specified value.
    *
    * @return a hash code value for the specified value.
@@ -81,7 +81,7 @@ public class HashFunctions extends Object {
     return 28629151*hashCode; // spread even further; h*31^5
     */
   }
-  /**
+  /*
    * Returns a hashcode for the specified object.
    *
    * @return a hash code value for the specified object.
@@ -89,7 +89,7 @@ public class HashFunctions extends Object {
   public static int hash(Object object) {
     return object == null ? 0 : object.hashCode();
   }
-  /**
+  /*
    * Returns a hashcode for the specified value.
    *
    * @return a hash code value for the specified value.
@@ -97,7 +97,7 @@ public class HashFunctions extends Object {
   public static int hash(short value) {
     return (int) value;
   }
-  /**
+  /*
    * Returns a hashcode for the specified value.
    *
    * @return a hash code value for the specified value.

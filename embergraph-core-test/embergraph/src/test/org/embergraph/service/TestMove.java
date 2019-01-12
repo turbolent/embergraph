@@ -48,8 +48,8 @@ import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 import org.embergraph.util.Bytes;
 
-/**
- * Some unit tests for moving an index partition.
+/*
+* Some unit tests for moving an index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -64,7 +64,7 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Overridden to specify the {@link BufferMode#Disk} mode and to lower the threshold at which an
    * overflow operation will be selected.
    */
@@ -116,7 +116,7 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Test forces a move of an index partition and validates the scale-out index after the move
    * against ground truth.
    *
@@ -255,8 +255,8 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
                   + "), npartitions="
                   + npartitions);
 
-        /*
-         * Compare the index against ground truth after overflow.
+      /*
+       * Compare the index against ground truth after overflow.
          */
         if (log.isInfoEnabled()) log.info("Verifying scale-out index against ground truth");
 
@@ -282,7 +282,7 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
 
       final AbstractEmbeddedLoadBalancerService lbs =
           ((AbstractEmbeddedLoadBalancerService)
-              ((EmbeddedFederation) fed).getLoadBalancerService());
+              fed.getLoadBalancerService());
 
       final ServiceScore[] fakeServiceScores = new ServiceScore[2];
 
@@ -320,8 +320,8 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
       //            while (!done)
       {
 
-        /*
-         * Just a little random data.
+      /*
+       * Just a little random data.
          *
          * Note: We have to write enough data so that the new updates
          * are not just copied onto the new journal in order for the
@@ -349,8 +349,8 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
             BatchInsertConstructor.RETURN_NO_VALUES,
             null /* handler */);
 
-        /*
-         * Set flag to force overflow on group commit.
+      /*
+       * Set flag to force overflow on group commit.
          */
         dataService0.forceOverflow(false /* immediate */, true /* compactingMerge */);
 
@@ -367,8 +367,8 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
         // wait until overflow processing is done.
         overflowCounter = awaitAsynchronousOverflow(dataService0, overflowCounter);
 
-        /*
-         * Compare the index against ground truth after overflow.
+      /*
+       * Compare the index against ground truth after overflow.
          */
 
         if (log.isInfoEnabled()) log.info("Verifying scale-out index against ground truth");

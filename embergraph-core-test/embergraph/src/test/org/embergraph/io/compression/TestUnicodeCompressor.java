@@ -26,8 +26,8 @@ import java.util.Random;
 import junit.framework.TestCase2;
 import org.embergraph.io.DataOutputBuffer;
 
-/**
- * Unit tests for Unicode schemes:
+/*
+* Unit tests for Unicode schemes:
  *
  * <ul>
  *   <li>Standard Compression for Unicode (<a
@@ -73,8 +73,8 @@ public class TestUnicodeCompressor extends TestCase2 {
     doTest(new NoCompressor());
   }
 
-  //    /**
-  //     * BOCU-1 encoding / decoding stress test.
+  //    /*
+//     * BOCU-1 encoding / decoding stress test.
   //     */
   //    public void test_BOCU() {
   //
@@ -82,8 +82,8 @@ public class TestUnicodeCompressor extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * SCSU encoding / decoding stress test.
+  //    /*
+//     * SCSU encoding / decoding stress test.
   //     */
   //    public void test_SCSU() {
   //
@@ -199,7 +199,7 @@ public class TestUnicodeCompressor extends TestCase2 {
               + elapsed);
   }
 
-  /**
+  /*
    * A bunch of words derived from a stopwords list that are used to generate random strings
    * comprised of a redundant set of terms. This approach was chosen in order to give the
    * compression algorithm some realistic data on which to work.

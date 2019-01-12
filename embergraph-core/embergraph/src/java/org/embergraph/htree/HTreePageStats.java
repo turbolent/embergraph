@@ -42,12 +42,12 @@ public class HTreePageStats extends PageStats {
      * tree.
      */
 
-    height = Math.max(((AbstractPage) node).getLevel(), height);
+    height = Math.max(node.getLevel(), height);
 
     super.visit(htree, node);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO This method always returns the current value of [addressBits]. It should be modified to

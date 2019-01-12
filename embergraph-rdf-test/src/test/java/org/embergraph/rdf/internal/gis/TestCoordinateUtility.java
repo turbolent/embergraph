@@ -21,8 +21,8 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 
-/**
- * Test suite for {@link CoordinateUtility}.
+/*
+* Test suite for {@link CoordinateUtility}.
  *
  * @todo test distance between coordinates based on some known points in each quadrant.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -39,8 +39,8 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
     super(arg0);
   }
 
-  // /**
-  // * Test routine to convert a latitude into the angle in the transverse
+  // /*
+// * Test routine to convert a latitude into the angle in the transverse
   // * graticule used by trig functions.
   // */
   // public void test_toTransverseGraticule() {
@@ -65,7 +65,7 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
     assertEquals(110952d, CoordinateUtility.metersPerDegreeOfLatitudeAtSeaLevel);
   }
 
-  /**
+  /*
    * Cross check for approximate meters per second of longitude at some known latitudes on Earth.
    *
    * <p>Note: The computed values are rounded off to integers (zero digits after the decimal) since
@@ -108,7 +108,7 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
     }
   }
 
-  /**
+  /*
    * Cross check for meters per unit of longitude at some known latitudes on Earth.
    *
    * @todo reduce rounding or remove altogether for this test.
@@ -145,7 +145,7 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
     }
   }
 
-  /**
+  /*
    * A test with two points that are exactly the same.
    *
    * @throws ParseException
@@ -162,7 +162,7 @@ public class TestCoordinateUtility extends AbstractCoordinateTestCase {
     assertEquals(0d, CoordinateUtility.distance(c, c, UNITS.Meters));
   }
 
-  /**
+  /*
    * Note: The road distance by the most direct route (US 29) between Greensboro, NC and Washington,
    * DC is 299 miles.
    *

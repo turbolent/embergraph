@@ -39,7 +39,7 @@ public class IsInlineBOp extends XSDBooleanIVValueExpression {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * If true, only accept variable bindings for {@link #x} that have an inline internal value
      * {@link IV}. Otherwise only accept variable bindings that are not inline in the statement
      * indices.

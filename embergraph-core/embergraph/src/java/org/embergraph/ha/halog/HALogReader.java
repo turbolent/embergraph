@@ -42,8 +42,8 @@ import org.embergraph.journal.StoreTypeEnum;
 import org.embergraph.util.ChecksumError;
 import org.embergraph.util.InnerCause;
 
-/**
- * Given an HALog file can be used to replay the file and can provide a readable dump of the
+/*
+* Given an HALog file can be used to replay the file and can provide a readable dump of the
  * content. When replaying, the current position is compared to the EOF to determine whether more
  * data can be read. The called should call {@link IHALogReader#hasMoreBuffers()} and if so read the
  * next associated buffer and process with the returned {@link IHAMessage}. If {@link
@@ -65,7 +65,7 @@ public class HALogReader implements IHALogReader {
   private final int magic;
   private final int version;
 
-  /**
+  /*
    * <strong>CAUTION: This constructor should not be used in circumstances in which the {@link
    * HALogWriter} is active since this constructor can not differentiate atomically between the live
    * HALog and a historical HALog and will always provide a read-only view, even if the live HALog
@@ -83,7 +83,7 @@ public class HALogReader implements IHALogReader {
     m_channel = m_raf.getChannel();
 
     try {
-      /**
+      /*
        * Must determine whether the file has consistent open and committed rootBlocks, using the
        * commitCounter to determine which rootBlock is which.
        *
@@ -98,8 +98,8 @@ public class HALogReader implements IHALogReader {
        */
       m_raf.seek(0L);
       try {
-        /*
-         * Note: this next line will throw IOException if there is a
+      /*
+       * Note: this next line will throw IOException if there is a
          * file lock contention.
          */
         magic = m_raf.readInt();
@@ -142,8 +142,8 @@ public class HALogReader implements IHALogReader {
       final long cc1 = m_closeRootBlock.getCommitCounter();
 
       if ((cc0 + 1) != cc1 && (cc0 != cc1)) {
-        /*
-         * Counters are inconsistent with either an empty log file or a
+      /*
+       * Counters are inconsistent with either an empty log file or a
          * single transaction scope.
          */
         throw new IllegalStateException(
@@ -162,8 +162,8 @@ public class HALogReader implements IHALogReader {
     }
   }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     *
   //     * TODO This was added to address a file handle leak. However, I am quite
   //     * dubious that this will fix the problem. While GC may be necessary to
@@ -234,7 +234,7 @@ public class HALogReader implements IHALogReader {
     if (!m_channel.isOpen()) throw new IOException("Closed: " + m_file);
   }
 
-  /**
+  /*
    * The {@link IRootBlockView} for the committed state BEFORE the write set contained in the HA log
    * file.
    */
@@ -265,7 +265,7 @@ public class HALogReader implements IHALogReader {
     return m_channel.position() < m_channel.size();
   }
 
-  /**
+  /*
    * To stream from the Channel, we can use the associated RandomAccessFile since the FilePointer
    * for one is the same as the other.
    */
@@ -360,7 +360,7 @@ public class HALogReader implements IHALogReader {
     return msg;
   }
 
-  /**
+  /*
    * Utility program will dump log files (or directories containing log files) provided as
    * arguments.
    *

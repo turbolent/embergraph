@@ -31,8 +31,8 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.Bytes;
 
-/**
- * Class provides (de-)compression for logical byte[][]s based on front coding. The data MUST be
+/*
+* Class provides (de-)compression for logical byte[][]s based on front coding. The data MUST be
  * ordered. <code>null</code> values are not allowed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -52,7 +52,7 @@ public class FrontCodedRabaCoder implements IRabaCoder, Externalizable {
     return super.toString() + "{ratio=" + ratio + "}";
   }
 
-  /**
+  /*
    * A pre-parameterized version of the {@link FrontCodedRabaCoder} which is used as the default
    * {@link IRabaCoder} for B+Tree keys for both nodes and leaves.
    *
@@ -87,7 +87,7 @@ public class FrontCodedRabaCoder implements IRabaCoder, Externalizable {
   /** De-serialization ctor. */
   public FrontCodedRabaCoder() {}
 
-  /**
+  /*
    * @param ratio The ratio as defined by {@link ByteArrayFrontCodedList}. For front-coding,
    *     compression trades directly for search performance. Every ratio byte[]s is fully coded.
    *     Binary search is used on the fully coded byte[]s and will identify a bucket <i>ratio</i>
@@ -227,7 +227,7 @@ public class FrontCodedRabaCoder implements IRabaCoder, Externalizable {
     return new CodedRabaImpl(data, isDuplicateKeys());
   }
 
-  /**
+  /*
    * Decoder for an ordered logical byte[][] without <code>null</code>s.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -239,7 +239,7 @@ public class FrontCodedRabaCoder implements IRabaCoder, Externalizable {
 
     private final CustomByteArrayFrontCodedList decoder;
 
-    /**
+    /*
      * @param data The record containing the coded data.
      * @param hasDups <code>true</code> iff the {@link IRabaCoder} supports duplicate keys.
      */
@@ -266,7 +266,7 @@ public class FrontCodedRabaCoder implements IRabaCoder, Externalizable {
       this.data = data;
     }
 
-    /**
+    /*
      * Alternative constructor avoids the cost of constructing the decoder when it is already
      * available.
      *

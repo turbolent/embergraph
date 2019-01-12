@@ -7,8 +7,8 @@ import java.io.ObjectOutput;
 import org.embergraph.btree.IndexMetadata.Options;
 import org.embergraph.io.LongPacker;
 
-/**
- * Configuration object for scatter split behavior for a scale-out index.
+/*
+* Configuration object for scatter split behavior for a scale-out index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -74,7 +74,7 @@ public class ScatterSplitConfiguration implements Externalizable {
   /** De-serialization ctor. */
   public ScatterSplitConfiguration() {}
 
-  /**
+  /*
    * Core impl.
    *
    * @param enabled

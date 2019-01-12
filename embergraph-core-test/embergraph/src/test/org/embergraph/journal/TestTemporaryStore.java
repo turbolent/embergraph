@@ -34,8 +34,8 @@ import org.embergraph.rawstore.AbstractRawStoreTestCase;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for {@link TemporaryStore} (temporary store with named indices).
+/*
+* Test suite for {@link TemporaryStore} (temporary store with named indices).
  *
  * @todo add test to verify read back after we overflow the initial write cache.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -88,7 +88,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     return new TemporaryRawStore();
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractRawStoreTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -111,7 +111,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link TestInterrupts}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -133,7 +133,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMROWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -155,7 +155,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMRMWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -177,7 +177,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link AbstractBufferStrategy#overflow(long)}. The test verifies that the extent
    * and the user extent are correctly updated after an overflow.
    */
@@ -188,7 +188,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     try {
 
       final AbstractBufferStrategy bufferStrategy =
-          (AbstractBufferStrategy) store.getBufferStrategy();
+          store.getBufferStrategy();
 
       final long userExtent = bufferStrategy.getUserExtent();
 
@@ -218,7 +218,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Write random bytes on the store.
    *
    * @param store The store.
@@ -234,7 +234,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
 
     long addr = 0L;
 
-    AbstractBufferStrategy bufferStrategy = (AbstractBufferStrategy) store.getBufferStrategy();
+    AbstractBufferStrategy bufferStrategy = store.getBufferStrategy();
 
     int n = 0;
 
@@ -293,7 +293,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     try {
 
       final AbstractBufferStrategy bufferStrategy =
-          (AbstractBufferStrategy) store.getBufferStrategy();
+          store.getBufferStrategy();
 
       final long userExtent = bufferStrategy.getUserExtent();
 
@@ -321,7 +321,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test verifies that a write over the remaining extent triggers an overflow. The test also makes
    * sure that the existing data is recoverable and that the new data is also recoverable (when the
    * buffer is extended it is typically copied while the length of a file is simply changed).
@@ -333,7 +333,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     try {
 
       final AbstractBufferStrategy bufferStrategy =
-          (AbstractBufferStrategy) store.getBufferStrategy();
+          store.getBufferStrategy();
 
       final long userExtent = bufferStrategy.getUserExtent();
 
@@ -406,8 +406,8 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     }
   }
 
-  //    /**
-  //     * Test that the store transparently overflows onto disk when the maximum
+  //    /*
+//     * Test that the store transparently overflows onto disk when the maximum
   //     * in-memory limit has been exceeded. The test also makes sure that the
   //     * existing data is recoverable and that the new data is also recoverable
   //     * (when the buffer is extended it is typically copied while the length of a
@@ -565,7 +565,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
   //
   //    }
 
-  /**
+  /*
    * Test the ability to register and use named {@link BTree}, including whether the named {@link
    * BTree} is restart safe.
    *
@@ -628,7 +628,7 @@ public class TestTemporaryStore extends AbstractRawStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability to register and use named {@link HTree}, including whether the named {@link
    * HTree} is restart safe.
    *

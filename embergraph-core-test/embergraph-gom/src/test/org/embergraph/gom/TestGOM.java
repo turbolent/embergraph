@@ -41,8 +41,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * Base test suite for the embedded (local) GOM.
+/*
+* Base test suite for the embedded (local) GOM.
  *
  * @author Martyn Cutcher
  */
@@ -228,7 +228,7 @@ public class TestGOM extends ProxyGOMTest {
     assertTrue(map.size() == 3);
   }
 
-  /**
+  /*
    * SimpleClassObjects tests navigation around a constructed network of GPOs. First some class
    * objects are created, with superclass and metaclass data. Then instances of the classes are
    * written. The purpose of this test is two fold: 1) To exercise the developing system and 2) To
@@ -377,7 +377,7 @@ public class TestGOM extends ProxyGOMTest {
     }
   }
 
-  /**
+  /*
    * A simple test to compare native String interns with own-rolled ConcurrentHashMap based
    * dictionary. Figures suggest that the ConcurrentHashMap is a little slower building the table
    * but then around 10 times faster processing the lookup.

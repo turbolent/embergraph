@@ -25,8 +25,8 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 package org.embergraph.search;
 
-/**
- * Metadata about a search result.
+/*
+* Metadata about a search result.
  *
  * @param <V> The generic type of the document identifier.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -35,11 +35,11 @@ package org.embergraph.search;
 public interface IHit<V extends Comparable<V>> {
 
   /** The computed relevance score. */
-  public double getCosine();
+  double getCosine();
 
   /** The document identifier associated with the search result. */
-  public V getDocId();
+  V getDocId();
 
   /** The rank of this hit within the context of the search. */
-  public int getRank();
+  int getRank();
 }

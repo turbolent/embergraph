@@ -64,8 +64,8 @@ import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
-/**
- * Master providing efficient distributed evaluation of {@link IRule}s. For query, this task should
+/*
+* Master providing efficient distributed evaluation of {@link IRule}s. For query, this task should
  * be run by the client that wishes to materialize the query results. For mutation, this task may be
  * run by any client or service since the data does not flow through the master for mutation.
  *
@@ -219,7 +219,7 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
 
   protected final IJoinNexusFactory joinNexusFactory;
 
-  /**
+  /*
    * From the ctor. This will be the {@link IBuffer} on which the last join dimension writes the
    * computed {@link ISolution}s.
    *
@@ -242,7 +242,7 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
 
   protected final RuleStats ruleStats;
 
-  /**
+  /*
    * Statistics on {@link JoinTask} behavior for each {@link IPredicate} in the tail of the rule.
    * These statistics are reported by each {@link JoinTask} and then aggregated for each join
    * dimension.
@@ -254,7 +254,7 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
   /** The unique identifier for this {@link JoinMasterTask} instance. */
   protected final UUID masterUUID;
 
-  /**
+  /*
    * @param rule The rule to be executed.
    * @param joinNexus The {@link IJoinNexus}.
    * @param solutionBuffer The {@link ISolution} buffer.
@@ -353,8 +353,8 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
 
       if (log.isInfoEnabled()) {
 
-        /*
-         * Give the join tasks a chance to complete so that the join
+      /*
+       * Give the join tasks a chance to complete so that the join
          * stats will get reported to the master so that the master can
          * report out the correct stats to its caller.
          *
@@ -397,14 +397,14 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
     return ruleStats;
   }
 
-  /**
+  /*
    * Start one or more {@link JoinTask}s for the rule.
    *
    * @return The {@link Future}s for those {@link JoinTask}s.
    */
   abstract List<Future<Void>> start() throws Exception;
 
-  /**
+  /*
    * Make sure that each {@link JoinTask} completed successfully.
    *
    * <p>Note: This waits until all {@link JoinTask}s complete, regardless of their outcome (or until
@@ -456,8 +456,8 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
 
       } catch (CancellationException ex) {
 
-        /*
-         * A JoinTask will be canceled if any of its output buffers are
+      /*
+       * A JoinTask will be canceled if any of its output buffers are
          * asynchronously closed. This will occur if a downstream
          * JoinTask discovers that it has satisfied a SLICE or
          * encountered an error during processing. Either way, we treat
@@ -476,8 +476,8 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
             || InnerCause.isInnerCause(ex, BufferClosedException.class)
             || InnerCause.isInnerCause(ex, CancellationException.class)) {
 
-          /*
-           * The root cause was the asynchronous close of the
+        /*
+       * The root cause was the asynchronous close of the
            * buffer that is the overflow() target for the
            * unsynchronized buffer. This will occur if the
            * high-level iterator was closed() while join thread(s)
@@ -525,8 +525,8 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
 
         } else {
 
-          /*
-           * Something unexpected.
+        /*
+       * Something unexpected.
            */
 
           // add to list of errors.
@@ -551,7 +551,7 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
     }
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single {@link IBindingSet}.
    *
    * @param bindingSet the binding set.
@@ -563,7 +563,7 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
         new IBindingSet[][] {new IBindingSet[] {bindingSet}});
   }
 
-  /**
+  /*
    * Aggregates statistics each {@link JoinTask} onto {@link #ruleStats}. There are N {@link
    * JoinTask}s per {@link IPredicate} in the tail of the rule, where N is the #of index partitions
    * on which we must read to evaluate the {@link IRule} for a given {@link IPredicate} in the tail
@@ -634,7 +634,7 @@ public abstract class JoinMasterTask implements IStepTask, IJoinMaster {
     RuleLog.log(rule, ruleState, joinStats);
   }
 
-  /**
+  /*
    * Aggregates the statistics for some join dimension.
    *
    * @param joinStats Statistics for an index partition of some join dimension.

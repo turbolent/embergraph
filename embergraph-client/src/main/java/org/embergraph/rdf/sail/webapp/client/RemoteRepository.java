@@ -42,8 +42,8 @@ import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Java API to the Nano Sparql Server.
+/*
+* Java API to the Nano Sparql Server.
  *
  * <p>Note: The {@link RemoteRepository} object SHOULD be reused for multiple operations against the
  * same end point.
@@ -57,7 +57,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
 
   private static final transient Logger log = Logger.getLogger(RemoteRepository.class);
 
-  /**
+  /*
    * The {@link RemoteRepositoryManager} object use to manage all access to the service backing the
    * {@link #sparqlEndpointURL}.
    */
@@ -66,7 +66,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
   /** The service end point for the default data set. */
   private final String sparqlEndpointURL;
 
-  /**
+  /*
    * When non-<code>null</code> the operations against the {@link #sparqlEndpointURL} will be
    * isolated by the transaction.
    */
@@ -90,7 +90,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
         + "}";
   }
 
-  /**
+  /*
    * The {@link RemoteRepositoryManager} object use to manage all access to the service backing the
    * {@link #sparqlEndpointURL}.
    */
@@ -99,7 +99,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return mgr;
   }
 
-  /**
+  /*
    * Create a connection to a remote repository. This can be used with any SPARQL end point as long
    * as you restrict yourself to SPARQL QUERY or SPARQL UPDATE. The other methods can only be used
    * with a embergraph backend.
@@ -191,7 +191,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return mgr.graphResults(opts, uuid, null /* preparedListener */);
   }
 
-  /**
+  /*
    * Prepare a tuple (select) query.
    *
    * @param query the query string
@@ -202,7 +202,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return prepareTupleQuery(query, UUID.randomUUID());
   }
 
-  /**
+  /*
    * Prepare a tuple (select) query.
    *
    * @param query the query string
@@ -215,7 +215,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return new TupleQuery(mgr.newQueryConnectOptions(sparqlEndpointURL, uuid, tx), uuid, query);
   }
 
-  /**
+  /*
    * Prepare a graph query.
    *
    * @param query the query string
@@ -226,7 +226,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return prepareGraphQuery(query, UUID.randomUUID());
   }
 
-  /**
+  /*
    * Prepare a graph query.
    *
    * @param query the query string
@@ -239,7 +239,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return new GraphQuery(mgr.newQueryConnectOptions(sparqlEndpointURL, uuid, tx), uuid, query);
   }
 
-  /**
+  /*
    * Prepare a boolean (ask) query.
    *
    * @param query the query string
@@ -250,7 +250,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return prepareBooleanQuery(query, UUID.randomUUID());
   }
 
-  /**
+  /*
    * Prepare a boolean (ask) query.
    *
    * @param query the query string
@@ -263,7 +263,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return new BooleanQuery(mgr.newQueryConnectOptions(sparqlEndpointURL, uuid, tx), uuid, query);
   }
 
-  /**
+  /*
    * Prepare a SPARQL UPDATE request.
    *
    * @param updateStr The SPARQL UPDATE request.
@@ -275,7 +275,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return prepareUpdate(updateStr, UUID.randomUUID());
   }
 
-  /**
+  /*
    * Prepare a SPARQL UPDATE request.
    *
    * @param updateStr The SPARQL UPDATE request.
@@ -290,7 +290,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
         mgr.newUpdateConnectOptions(sparqlEndpointURL, uuid, tx), uuid, updateStr);
   }
 
-  /**
+  /*
    * Return all matching statements.
    *
    * @param subj
@@ -349,7 +349,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     }
   }
 
-  /**
+  /*
    * Method to line up with the Sesame interface.
    *
    * @param s The subject (optional).
@@ -417,7 +417,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return util.toExternal(val);
   }
 
-  /**
+  /*
    * Cancel a query running remotely on the server.
    *
    * @param queryID the UUID of the query to cancel
@@ -427,7 +427,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     mgr.cancel(queryId);
   }
 
-  /**
+  /*
    * Perform a fast range count on the statement indices for a given triple (quad) pattern.
    *
    * @param s the subject (can be null)
@@ -444,7 +444,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return rangeCount(false /* exact */, s, p, o, c);
   }
 
-  /**
+  /*
    * Perform a range count on the statement indices for a given triple (quad) pattern.
    *
    * <p>Note: fast range counts are *fast*. They require two key probes into the indices. Exact
@@ -511,7 +511,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     }
   }
 
-  /**
+  /*
    * Perform a fast range count on the statement indices. This reports an estimate of the number of
    * statements in the namespace. That estimate is exact unless the namespace is provisioned for
    * full read/write transactions or the endpoint is scale-out.
@@ -523,7 +523,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return rangeCount(/* s */ null, /* p */ null, /* o */ null);
   }
 
-  /**
+  /*
    * Return a list of contexts in use in a remote quads database.
    *
    * <p>FIXME This should be a streaming response for scalability. That will require us to change
@@ -558,7 +558,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     }
   }
 
-  /**
+  /*
    * Adds RDF data to the remote repository.
    *
    * @param add The RDF data to be added.
@@ -569,7 +569,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return add(add, UUID.randomUUID() /*queryId*/);
   }
 
-  /**
+  /*
    * Adds RDF data to the remote repository.
    *
    * @param add The RDF data to be added.
@@ -625,8 +625,8 @@ public class RemoteRepository extends RemoteRepositoryBase {
         response.abort();
         if (!ok) {
           try {
-            /*
-             * POST back to the server to cancel the request in case
+          /*
+       * POST back to the server to cancel the request in case
              * it is still running on the server.
              */
             cancel(uuid);
@@ -638,7 +638,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     }
   }
 
-  /**
+  /*
    * Removes RDF data from the remote repository.
    *
    * @param remove The RDF data to be removed.
@@ -651,7 +651,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return remove(remove, UUID.randomUUID());
   }
 
-  /**
+  /*
    * Removes RDF data from the remote repository.
    *
    * @param remove The RDF data to be removed.
@@ -705,8 +705,8 @@ public class RemoteRepository extends RemoteRepositoryBase {
       }
 
       if (remove.c != null) {
-        /*
-         * Note: Due to the way in which the RemoveOp declares [c] even when
+      /*
+       * Note: Due to the way in which the RemoveOp declares [c] even when
          * it is not a "delete-by-accesspath" request, we have to check for
          * [c!=null] here.
          *
@@ -739,8 +739,8 @@ public class RemoteRepository extends RemoteRepositoryBase {
         response.abort();
         if (!ok) {
           try {
-            /*
-             * POST back to the server to cancel the request in case
+          /*
+       * POST back to the server to cancel the request in case
              * it is still running on the server.
              */
             cancel(uuid);
@@ -752,7 +752,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     }
   }
 
-  /**
+  /*
    * Perform an ACID update (delete+insert) per the semantics of <a href=
    * "https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=NanoSparqlServer#UPDATE_.28DELETE_.2B_INSERT.29"
    * > the NanoSparqlServer. </a>
@@ -770,7 +770,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     return update(remove, add, UUID.randomUUID());
   }
 
-  /**
+  /*
    * Perform an ACID update
    *
    * <p>There are two different patterns which are supported:
@@ -876,8 +876,8 @@ public class RemoteRepository extends RemoteRepositoryBase {
         response.abort();
         if (!ok) {
           try {
-            /*
-             * POST back to the server to cancel the request in case
+          /*
+       * POST back to the server to cancel the request in case
              * it is still running on the server.
              */
             cancel(uuid);
@@ -889,7 +889,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     }
   }
 
-  /**
+  /*
    * A prepared query will hold metadata for a particular query instance.
    *
    * <p>Right now, the only metadata is the query ID.
@@ -909,7 +909,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
       this(opts, id, query, false /* update */);
     }
 
-    /**
+    /*
      * @param id The query id.
      * @param query The SPARQL query or update string.
      * @param update <code>true</code> iff this is a SPARQL update.
@@ -982,7 +982,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
       opts.setHeader(HTTP_HEADER_EMBERGRAPH_MAX_QUERY_MILLIS, Long.toString(timeout));
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Note: <code>-1L</code> is returned if the http header is not specified.
@@ -1227,7 +1227,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
       this.stmts = stmts;
     }
 
-    /**
+    /*
      * @param s The subject (optional).
      * @param p The predicate (optional).
      * @param o The value (optional).
@@ -1272,7 +1272,7 @@ public class RemoteRepository extends RemoteRepositoryBase {
     }
   }
 
-  /**
+  /*
    * Connect to a SPARQL end point (GET or POST query only).
    *
    * @param opts The connection options.

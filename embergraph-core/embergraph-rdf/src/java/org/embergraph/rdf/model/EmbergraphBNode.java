@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -42,8 +42,8 @@ package org.embergraph.rdf.model;
 
 import org.openrdf.model.BNode;
 
-/**
- * A {@link BNode} that exposes the internal term identifier.
+/*
+* A {@link BNode} that exposes the internal term identifier.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -51,14 +51,14 @@ import org.openrdf.model.BNode;
 public interface EmbergraphBNode extends EmbergraphResource, BNode {
 
   /** Set flag indicating that this blank node models a statement. */
-  public void setStatementIdentifier(boolean isStmtIdentifier);
+  void setStatementIdentifier(boolean isStmtIdentifier);
 
   /** <code>true</code> if this blank node models a statement. */
-  public boolean isStatementIdentifier();
+  boolean isStatementIdentifier();
 
   /** Set the statement that this blank node models. */
-  public void setStatement(EmbergraphStatement stmt);
+  void setStatement(EmbergraphStatement stmt);
 
   /** Get the statement that this blank node models. */
-  public EmbergraphStatement getStatement();
+  EmbergraphStatement getStatement();
 }

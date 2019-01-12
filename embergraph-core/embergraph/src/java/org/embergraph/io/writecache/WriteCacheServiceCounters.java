@@ -26,8 +26,8 @@ import org.embergraph.io.writecache.WriteCache.ReadCache;
 import org.embergraph.io.writecache.WriteCacheService.WriteTask;
 import org.embergraph.util.Bytes;
 
-/**
- * Performance counters for the {@link WriteCacheService}.
+/*
+* Performance counters for the {@link WriteCacheService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -40,13 +40,13 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
   /** The configured dirty list threshold before evicting to disk (immutable). */
   public final int dirtyListThreshold;
 
-  /**
+  /*
    * The threshold of reclaimable space at which we will attempt to coalesce records in cache
    * buffers.
    */
   public final int compactingThreshold;
 
-  /**
+  /*
    * #of dirty buffers (instantaneous).
    *
    * <p>Note: This is set by the {@link WriteTask} thread and by {@link WriteCacheService#reset()}.
@@ -55,7 +55,7 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
    */
   public volatile int ndirty;
 
-  /**
+  /*
    * #of clean buffers (instantaneous).
    *
    * <p>Note: This is set by the {@link WriteTask} thread and by {@link WriteCacheService#reset()}.
@@ -64,14 +64,14 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
    */
   public volatile int nclean;
 
-  /**
+  /*
    * The maximum #of dirty buffers observed by the {@link WriteTask} (its maximum observed backlog).
    * This is only set by the {@link WriteTask} thread, but it is volatile so it is visible from a
    * thread which looks at the counters.
    */
   public volatile int maxdirty;
 
-  /**
+  /*
    * #of times the {@link WriteCacheService} was reset (typically to handle an error condition).
    *
    * <p>Note: This is set by {@link WriteCacheService#reset()}. It is volatile so it is visible from
@@ -85,7 +85,7 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
   /** The #of {@link WriteCache} buffers written to the disk. */
   public volatile long nbufferEvictedToChannel;
 
-  /**
+  /*
    * The cumulative latency (nanoseconds) when writing a write cache buffer onto the backing
    * channel.
    *
@@ -93,7 +93,7 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
    */
   public volatile long elapsedBufferEvictedToChannelNanos;
 
-  /**
+  /*
    * The cumulative number of records written onto the backing channel. This may be used to track
    * the number of induced write operators per second. However, note that the RWStore will pad out
    * writes to their slot size in order to offer the underlying file system and disk controller an
@@ -110,28 +110,28 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
   /** The #of record-level writes made onto the {@link WriteCacheService}. */
   public volatile long ncacheWrites;
 
-  /**
+  /*
    * The cumulative latency (nanoseconds) when writing into the write cache.
    *
    * <p>See BLZG-1589 (new latency-oriented counters)
    */
   public volatile long elapsedCacheWriteNanos;
 
-  /**
+  /*
    * The requests to clear an address from the cache.
    *
    * @see WriteCacheService#clearWrite(long, int)
    */
   public volatile long nclearAddrRequests;
 
-  /**
+  /*
    * The #of addresses actually found and cleared from the cache by the {@link WriteCacheService}.
    *
    * @see WriteCacheService#clearWrite(long, int)
    */
   public volatile long nclearAddrCleared;
 
-  /**
+  /*
    * The #of read requests that were a miss in the cache and resulted in a read through to the disk
    * where the record was NOT installed into the read cache (either because there is no read cache,
    * because the record is too large for the read cache, or because the thread could not obtain a
@@ -252,8 +252,8 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
           @Override
           public void sample() {
             if (nrecordsEvictedToChannel > 0) {
-              /*
-               * Note: records are evicted a buffer at a time. Therefore
+            /*
+       * Note: records are evicted a buffer at a time. Therefore
                * we use the same divisor here as we do for the
                * AVERAGE_BUFFER_EVICTED_TO_CHANNEL_NANOS.
                */
@@ -269,8 +269,8 @@ public class WriteCacheServiceCounters extends WriteCacheCounters
           @Override
           public void sample() {
             if (nrecordsEvictedToChannel > 0) {
-              /*
-               * Note: records are evicted a buffer at a time. Therefore
+            /*
+       * Note: records are evicted a buffer at a time. Therefore
                * we use the same divisor here as we do for the
                * AVERAGE_BUFFER_EVICTED_TO_CHANNEL_NANOS.
                */

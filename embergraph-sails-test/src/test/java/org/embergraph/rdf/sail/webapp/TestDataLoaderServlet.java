@@ -34,8 +34,8 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * Proxied test suite for {@link DataLoaderServlet}
+/*
+* Proxied test suite for {@link DataLoaderServlet}
  *
  * @author beebs
  */
@@ -103,8 +103,7 @@ public class TestDataLoaderServlet<S extends IIndexManager>
     }
 
     final EmbergraphSailRemoteRepositoryConnection cxn =
-        (EmbergraphSailRemoteRepositoryConnection)
-            repo.getEmbergraphSailRemoteRepository().getConnection();
+        repo.getEmbergraphSailRemoteRepository().getConnection();
 
     try {
       String queryStr = "select * where { ?s ?p ?o }";

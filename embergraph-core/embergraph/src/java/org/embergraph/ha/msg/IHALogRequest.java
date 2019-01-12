@@ -20,7 +20,7 @@ package org.embergraph.ha.msg;
 /** Message requesting the root blocks and other metadata for an HA Log file. */
 public interface IHALogRequest extends IHASyncRequest {
 
-  /**
+  /*
    * The commit counter is used to identify the desired commit point (the commit counter of the
    * closing root block).
    */

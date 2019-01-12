@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.raba;
 
-/**
- * Flyweight implementation for wrapping a <code>byte[][]</code> with fromIndex and toIndex.
+/*
+* Flyweight implementation for wrapping a <code>byte[][]</code> with fromIndex and toIndex.
  *
  * @see MutableKeyBuffer
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ public class MutableKeysRaba extends AbstractRaba implements IRaba {
     return true;
   }
 
-  /**
+  /*
    * Create a view of a byte[][]. All elements in the array are visible in the view.
    *
    * @param a The backing byte[][].
@@ -56,7 +56,7 @@ public class MutableKeysRaba extends AbstractRaba implements IRaba {
     this(0 /* fromIndex */, a.length /* toIndex */, a.length /* capacity */, a);
   }
 
-  /**
+  /*
    * Create a view of a <code>byte[][]</code> slice. The slice will include only those elements
    * between the fromIndex and the toIndex. The capacity will be the #of elements. {@link #isFull()}
    * will report <code>true</code> .
@@ -71,7 +71,7 @@ public class MutableKeysRaba extends AbstractRaba implements IRaba {
     this(fromIndex, toIndex, a.length - fromIndex, a);
   }
 
-  /**
+  /*
    * Create a view from a slice of a byte[][].
    *
    * @param fromIndex The index of the first element in the byte[][] which is visible in the view

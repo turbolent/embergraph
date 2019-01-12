@@ -33,8 +33,8 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 
-/**
- * {@link Remote} interface declaring the API of {@link IAsynchronousIterator} but also declaring
+/*
+* {@link Remote} interface declaring the API of {@link IAsynchronousIterator} but also declaring
  * that each methods throws {@link IOException} in order to be compatible with {@link Remote} and
  * {@link Exporter}. Of course, this means that this interface can not extend {@link
  * IAsynchronousIterator}!
@@ -55,7 +55,7 @@ public interface RemoteAsynchronousIterator<E> extends Remote {
   /** @see Iterator#next() */
   E next() throws IOException;
 
-  /**
+  /*
    * Method applies a custom serializer to the value returned by {@link #next()} and returns a
    * {@link RemoteElement} that can be transported by RMI and which knows how to de-serialize the
    * element on the other end.
@@ -79,7 +79,7 @@ public interface RemoteAsynchronousIterator<E> extends Remote {
   /** @see IAsynchronousIterator#next(long, TimeUnit) */
   E next(long timeout, TimeUnit unit) throws IOException, InterruptedException;
 
-  /**
+  /*
    * Used to send an serialized element together with the object that knows how to de-serialize the
    * element.
    *
@@ -89,11 +89,11 @@ public interface RemoteAsynchronousIterator<E> extends Remote {
    */
   interface RemoteElement<E> extends Serializable {
 
-    /**
+    /*
      * Return the de-serialized element.
      *
      * @return The de-serialized element.
      */
-    public E get();
+    E get();
   }
 }

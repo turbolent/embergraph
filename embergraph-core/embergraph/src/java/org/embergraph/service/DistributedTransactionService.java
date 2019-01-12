@@ -62,8 +62,8 @@ import org.embergraph.journal.Name2Addr;
 import org.embergraph.journal.RunState;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
-/**
- * Implementation for an {@link IEmbergraphFederation} supporting both single-phase commits (for
+/*
+* Implementation for an {@link IEmbergraphFederation} supporting both single-phase commits (for
  * transactions that execute on a single {@link IDataService}) and distributed commits.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -72,7 +72,7 @@ import org.embergraph.util.concurrent.ExecutionExceptions;
 public abstract class DistributedTransactionService extends AbstractTransactionService
     implements IDistributedTransactionService {
 
-  /**
+  /*
    * Options understood by this service.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -82,7 +82,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     /** The directory in which the persistent state of this service will be stored. */
     String DATA_DIR = DistributedTransactionService.class.getName() + ".dataDir";
 
-    /**
+    /*
      * The interval in milliseconds between writing a snapshot of the index of accessible commit
      * points into the {@link #DATA_DIR} ({@value #DEFAULT_SHAPSHOT_INTERVAL}).
      *
@@ -101,7 +101,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     String DEFAULT_SHAPSHOT_INTERVAL = "" + (5 * 60 * 1000);
   }
 
-  /**
+  /*
    * A map of the distributed transactions that are currently committing.
    *
    * @todo config for initial capacity and concurrency?
@@ -109,7 +109,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
   private final ConcurrentHashMap<Long /* tx */, DistributedTxCommitTask /* state */> commitList =
       new ConcurrentHashMap<Long, DistributedTxCommitTask>();
 
-  /**
+  /*
    * The {@link LockManager} used to impose a partial ordering on the prepare phase of distributed
    * transaction commits using index partition names as the named resources for which the tasks must
    * contend.
@@ -117,7 +117,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
   private final LockManager<String> indexLockManager =
       new LockManager<String>(0 /* maxConcurrencyIsIgnored */, true /* predeclareLocks */);
 
-  /**
+  /*
    * The {@link LockManager} used to impose a partial ordering on the commit phase of distributed
    * transaction commits using {@link IDataService} {@link UUID}s as the named resources for which
    * the tasks must contend.
@@ -125,7 +125,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
   private final LockManager<UUID> dataServiceLockManager =
       new LockManager<UUID>(0 /* maxConcurrencyIsIgnored */, true /* predeclareLocks */);
 
-  /**
+  /*
    * A {@link BTree} containing a log of the historical commit points.
    *
    * <p>The main things that it gives us are (a) the half-open ranges within which we can allocate
@@ -142,7 +142,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
   /** The data directory -or- <code>null</code> iff the service is transient. */
   protected final File dataDir;
 
-  /**
+  /*
    * The interval in milliseconds between logging an image of the {@link #commitTimeIndex}.
    *
    * @see Options#COMMIT_TIME_INDEX_SHAPSHOT_INTERVAL
@@ -192,7 +192,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
           "lastCommitTime=" + lastCommitTime + ", #commitTimes=" + commitTimeIndex.getEntryCount());
   }
 
-  /**
+  /*
    * Either creates the data directory or reads the {@link #commitTimeIndex} from files in an
    * existing data directory.
    */
@@ -246,8 +246,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
       // true iff file0 is more recent.
       final boolean isFile0 =
           (time0 != 0L && time1 != 0L)
-              ? (time0 > time1 ? true : false) // Note: both files exist.
-              : (time0 != 0L ? true : false) // Note: only one file exists
+              ? (time0 > time1) // Note: both files exist.
+              : (time0 != 0L) // Note: only one file exists
           ;
 
       final File file = isFile0 ? file0 : file1;
@@ -296,13 +296,13 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * Basename for the files written in the {@link #dataDir} containing images of the {@link
    * #commitTimeIndex}.
    */
   protected static final String BASENAME = "commitTime";
 
-  /**
+  /*
    * Extension for the files written in the {@link #dataDir} containing snapshots of the {@link
    * #commitTimeIndex}.
    */
@@ -317,7 +317,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     new SnapshotTask().run();
   }
 
-  /**
+  /*
    * A task that writes a snapshot of the commit time index onto a pair of alternating files. This
    * is in the spirit of the Challis algorithm, but the approach is less rigorous.
    *
@@ -384,9 +384,9 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
         lock.unlock();
       }
     }
-  };
+  }
 
-  /**
+  /*
    * A helper class for reading and writing snapshots of the commit time index. The image contains
    * the commit timestamps in order.
    *
@@ -480,8 +480,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       if (n != entryCount) {
 
-        /*
-         * Note: probable error is the caller not preventing concurrent
+      /*
+       * Note: probable error is the caller not preventing concurrent
          * modification.
          */
 
@@ -520,7 +520,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
     if (!lock.isHeldByCurrentThread()) throw new IllegalMonitorStateException();
 
-    final AbstractFederation fed = (AbstractFederation) getFederation();
+    final AbstractFederation fed = getFederation();
 
     // @todo config options (verify units).
     notifyFuture =
@@ -656,7 +656,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * Extended to truncate the head of the {@link #commitTimeIndex} such only the commit times
    * requires for reading on timestamps GTE to the new releaseTime are retained.
    */
@@ -676,8 +676,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       synchronized (commitTimeIndex) {
 
-        /*
-         * The exclusive upper bound is the timestamp of the earliest
+      /*
+       * The exclusive upper bound is the timestamp of the earliest
          * commit point on which we can read with this [releaseTime].
          */
         final long toKey = commitTimeIndex.find(releaseTime + 1);
@@ -701,7 +701,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * Return the proxies for the services participating in a distributed transaction commit or abort.
    *
    * <p>Note: This method is here so that it may be readily overriden for unit tests.
@@ -714,7 +714,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     return getFederation().getDataServices(uuids);
   }
 
-  /**
+  /*
    * Task runs {@link ITxCommitProtocol#abort(long)}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -786,8 +786,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       } catch (Throwable t) {
 
-        /*
-         * Collect all causes and always log an error if any data
+      /*
+       * Collect all causes and always log an error if any data
          * service abort fails.
          *
          * Note: If an exception is thrown here the transaction will be
@@ -814,7 +814,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * There are two distinct commit protocols depending on whether the transaction write set is
    * distributed across more than one {@link IDataService}. When write set of the transaction lies
    * entirely on a single {@link IDataService}, an optimized commit protocol is used. When the write
@@ -945,7 +945,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * Task runs the distributed commit protocol transaction. Pre-conditions:
    *
    * <p>
@@ -992,13 +992,13 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     /** The #of participating {@link IDataService}s. */
     private final int nservices;
 
-    /**
+    /*
      * The revision time (assigned once the task begins to execute with all locks held for the named
      * index partitions).
      */
     private long revisionTime;
 
-    /**
+    /*
      * The commit time (assigned once the prepared barrier breaks and all locks are held for the
      * participating data services).
      *
@@ -1006,14 +1006,14 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
      */
     private long commitTime;
 
-    /**
+    /*
      * The thread in which the {@link DistributedTxCommitTask} is executing. This is the {@link
      * Thread} that is used to obtain the locks for the commit phase using the {@link
      * DistributedTransactionService#dataServiceLockManager}.
      */
     final Thread commitThread;
 
-    /**
+    /*
      * Condition is signaled when the "prepared" barrier breaks.
      *
      * <p>Note: If the barrier does not break because a participate fails then the {@link
@@ -1021,7 +1021,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
      */
     final Condition prepared;
 
-    /**
+    /*
      * Condition is signaled when the necessary locks are held for the participating {@link
      * IDataService}s.
      *
@@ -1032,13 +1032,13 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     /** Condition is signaled when the "committed" barrier breaks. */
     final Condition committed;
 
-    /**
+    /*
      * Barrier used to await the {@link ITransactionService#prepared(long, UUID)} messages during a
      * distributed read-write transaction commit.
      */
     CyclicBarrier preparedBarrier = null;
 
-    /**
+    /*
      * Barrier used to await the {@link ITransactionService#committed(long, UUID)} messages during a
      * distributed read-write transaction commit.
      */
@@ -1076,7 +1076,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
       this.committed = state.lock.newCondition();
     }
 
-    /**
+    /*
      * This method will be invoked by the {@link LockManagerTask} once it holds all of the necessary
      * named index resource locks. This is how we impose a partial order for preparing the
      * transaction. Deadlocks can not arise because we predeclare the locks and {@link LockManager}
@@ -1090,7 +1090,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
       return distributedCommit(state);
     }
 
-    /**
+    /*
      * Prepare and commit a read-write transaction that has written on more than one data service.
      *
      * <p>Note: read-write transactions that have written on multiple journals must use a
@@ -1126,8 +1126,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       try {
 
-        /*
-         * Submit a task that will run issue the prepare(tx,rev)
+      /*
+       * Submit a task that will run issue the prepare(tx,rev)
          * messages to each participating data service and await its
          * future.
          */
@@ -1141,7 +1141,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
       }
     }
 
-    /**
+    /*
      * Setups up the {@link TxState#preparedBarrier} and the {@link TxState#committedBarrier} and
      * then runs the {@link PrepareTask} tasks.
      *
@@ -1165,14 +1165,14 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         taskRunnerFuture = getFederation().getExecutorService().submit(new TaskRunner());
 
-        /*
-         * Signaled when the prepared barrier breaks. Interrupted if
+      /*
+       * Signaled when the prepared barrier breaks. Interrupted if
          * the prepare phase fails.
          */
         prepared.await();
 
-        /**
-         * Runs an inner Callable once we have the data service UUID locks.
+      /*
+       * Runs an inner Callable once we have the data service UUID locks.
          *
          * <p>Note: The purpose of this task is to hold onto those locks until the commit is
          * finished (either success or failure). The locks are automatically release once the inner
@@ -1190,8 +1190,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
                     if (!state.lock.isHeldByCurrentThread()) {
 
-                      /*
-                       * Note: The task runs in its caller's thread and
+                    /*
+       * Note: The task runs in its caller's thread and
                        * the caller should already be holding the TxState
                        * lock.
                        */
@@ -1199,8 +1199,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
                       throw new IllegalMonitorStateException();
                     }
 
-                    /*
-                     * Signal so that the task which caused the prepared
+                  /*
+       * Signal so that the task which caused the prepared
                      * barrier to break can resume. It turn, when the
                      * prepared runnable finishes, all tasks awaiting that
                      * barrier will continue to execute and will enter their
@@ -1221,16 +1221,16 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       } finally {
 
-        /*
-         * Reset the barriers in case anyone is waiting.
+      /*
+       * Reset the barriers in case anyone is waiting.
          */
 
         if (preparedBarrier != null) preparedBarrier.reset();
 
         if (committedBarrier != null) committedBarrier.reset();
 
-        /*
-         * Await the future on the task running the PrepareTasks.
+      /*
+       * Await the future on the task running the PrepareTasks.
          *
          * Note: This task SHOULD complete very shortly after a
          * successful commit.
@@ -1242,7 +1242,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
       }
     }
 
-    /**
+    /*
      * Submits the {@link PrepareTask}s in a different thread, awaits their {@link Future}s and logs
      * any errors.
      *
@@ -1265,8 +1265,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
         // This thread MUST NOT own the lock.
         assert !state.lock.isHeldByCurrentThread();
 
-        /*
-         * The futures for the tasks used to invoke prepare(tx,rev) on
+      /*
+       * The futures for the tasks used to invoke prepare(tx,rev) on
          * each dataService.
          */
         final List<Future<Void>> futures;
@@ -1279,8 +1279,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         try {
 
-          /*
-           * Await all futures, returning once they are all done.
+        /*
+       * Await all futures, returning once they are all done.
            */
 
           futures = getFederation().getExecutorService().invokeAll(tasks);
@@ -1290,8 +1290,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         } catch (Throwable t) {
 
-          /*
-           * If we can not invoke all tasks then abort
+        /*
+       * If we can not invoke all tasks then abort
            */
 
           log.error(t.getLocalizedMessage(), t);
@@ -1335,7 +1335,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
       } // call()
     } // class TaskRunner
 
-    /**
+    /*
      * Sets up the {@link TxState#preparedBarrier}. When the barrier action runs it will change
      * {@link RunState} to {@link RunState#Prepared} and assign a <em>commitTime</em> to the
      * transaction. When the barrier breaks, the assigned <i>commitTime</i> will be reported back to
@@ -1358,8 +1358,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
                     state.setRunState(RunState.Prepared);
 
-                    /*
-                     * Wake up the main thread. It will obtain the necessary
+                  /*
+       * Wake up the main thread. It will obtain the necessary
                      * locks for the participating data services and then
                      * signal that we may continue.
                      */
@@ -1391,7 +1391,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
               });
     }
 
-    /**
+    /*
      * Sets up the {@link TxState#committedBarrier}. When the barrier action runs it will change the
      * {@link RunState} to {@link RunState#Committed}.
      */
@@ -1402,8 +1402,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
               nservices,
               new Runnable() {
 
-                /**
-                 * Method runs when the "committed" barrier breaks. At this point the transaction is
+              /*
+       * Method runs when the "committed" barrier breaks. At this point the transaction is
                  * fully committed on the participating data services.
                  */
                 public void run() {
@@ -1429,7 +1429,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
               });
     }
 
-    /**
+    /*
      * Task issues {@link ITxCommitProtocol#prepare(long, long)} to an {@link IDataService}
      * participating in a distributed commit.
      *
@@ -1452,8 +1452,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
         } catch (Throwable e) {
 
-          /*
-           * If an exception is thrown, then make sure that the tx
+        /*
+       * If an exception is thrown, then make sure that the tx
            * is in the [Abort] state.
            */
           try {
@@ -1481,7 +1481,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * Note: Only those {@link DataService}s on which a read-write transaction has started will
    * participate in the commit. If there is only a single such {@link IDataService}, then a
    * single-phase commit will be used. Otherwise a distributed transaction commit protocol will be
@@ -1548,7 +1548,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * Waits at "prepared" barrier. When the barrier breaks, examing the {@link TxState}. If the
    * transaction is aborted, then throw an {@link InterruptedException}. Otherwise return the
    * commitTime assigned to the transaction.
@@ -1594,7 +1594,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * Wait at "committed" barrier. When the barrier breaks, examing the {@link TxState}. If the
    * transaction is aborted, then return <code>false</code>. Otherwise return true.
    *
@@ -1630,9 +1630,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
       // wait at the 'committed' barrier.
       task.committedBarrier.await();
 
-      if (state.isAborted()) return false;
-
-      return true;
+      return !state.isAborted();
 
     } finally {
 
@@ -1654,7 +1652,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * @todo Is it a problem if the commit notices do not arrive in sequence? Because they will not.
    *     Unisolated operations will participate in group commits using timestamps obtained from the
    *     transaction service, but those commit operations will not be serialize and their reporting
@@ -1696,13 +1694,13 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
       synchronized (commitTimeIndex) {
 
-        /*
-         * Add all commit times
+      /*
+       * Add all commit times
          */
         commitTimeIndex.add(commitTime);
 
-        /*
-         * Note: commit time notifications can be overlap such that they
+      /*
+       * Note: commit time notifications can be overlap such that they
          * appear out of sequence with respect to their values. This is
          * Ok. We just ignore any older commit times. However we do need
          * to be synchronized here such that the commit time notices
@@ -1736,7 +1734,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     return lastCommitTime;
   }
 
-  /**
+  /*
    * Invokes {@link ITxCommitProtocol#setReleaseTime(long)} for a specific {@link IDataService}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1766,7 +1764,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
     }
   }
 
-  /**
+  /*
    * Task periodically notifies the discovered {@link IDataService}s of the new release time.
    *
    * <p>Note: Running a concurrent instance of this could cause release times to be distributed that
@@ -1785,7 +1783,7 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
     private long lastReleaseTime = 0L;
 
-    /**
+    /*
      * Notifies all {@link IDataService}s of the current release time.
      *
      * <p>Note: An {@link IDataService} WILL NOT release its most current commit point, regardless
@@ -1832,8 +1830,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
 
           } catch (Throwable t) {
 
-            /*
-             * Log an error if any data service can not be notified.
+          /*
+       * Log an error if any data service can not be notified.
              */
 
             log.error(t.getLocalizedMessage(), t);
@@ -1861,21 +1859,21 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
      */
     final CounterSet countersRoot = super.getCounters();
 
-    /**
+    /*
      * The lock manager imposing a partial ordering on the prepare phase of distributed transaction
      * commits using the index partition names as the named resources.
      */
     countersRoot
         .makePath("Index Lock Manager")
-        .attach(((DistributedTransactionService) this).indexLockManager.getCounters());
+        .attach(this.indexLockManager.getCounters());
 
-    /**
+    /*
      * The lock manager imposing a partial ordering on the commit phase of distributed transaction
      * commits using the data service UUIDs as the named resources.
      */
     countersRoot
         .makePath("DataService Lock Manager")
-        .attach(((DistributedTransactionService) this).dataServiceLockManager.getCounters());
+        .attach(this.dataServiceLockManager.getCounters());
 
     /** The #of snapshots of the commit time index that have been written to date. */
     countersRoot.addCounter(
@@ -1900,8 +1898,8 @@ public abstract class DistributedTransactionService extends AbstractTransactionS
         "commitTimesCount",
         new Instrument<Long>() {
           protected void sample() {
-            /*
-             * Note: This uses a method which does not require
+          /*
+       * Note: This uses a method which does not require
              * synchronization.  (The entryCount is reported
              * without traversing the BTree.)
              */

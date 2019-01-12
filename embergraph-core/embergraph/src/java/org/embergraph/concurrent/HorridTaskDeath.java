@@ -1,7 +1,7 @@
 package org.embergraph.concurrent;
 
-/**
- * Thrown by some unit tests.
+/*
+* Thrown by some unit tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

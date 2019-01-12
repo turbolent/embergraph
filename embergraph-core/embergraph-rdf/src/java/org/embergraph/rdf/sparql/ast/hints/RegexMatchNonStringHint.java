@@ -30,8 +30,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * {@link https://jira.blazegraph.com/browse/BLZG-1780}
+/*
+* {@link https://jira.blazegraph.com/browse/BLZG-1780}
  *
  * <p>{@see https://www.w3.org/TR/sparql11-query/#func-regex}
  *

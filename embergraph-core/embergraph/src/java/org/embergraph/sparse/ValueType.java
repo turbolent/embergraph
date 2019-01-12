@@ -22,13 +22,14 @@ package org.embergraph.sparse;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.SerializerUtil;
 
-/**
- * A type safe enumeration of value types. This class also supports encoding and decoding of
+/*
+* A type safe enumeration of value types. This class also supports encoding and decoding of
  * instances of the enumerated value types and is used for encoding and decoding of column values.
  */
 public enum ValueType {
@@ -47,19 +48,19 @@ public enum ValueType {
   Date(6),
   /** An uninterpreted byte array. */
   ByteArray(7),
-  /**
+  /*
    * A 32-bit auto-incremental counter.
    *
    * @see AutoIncIntegerCounter
    */
   AutoIncInteger(8),
-  /**
+  /*
    * A 64-bit auto-incremental counter.
    *
    * @see AutoIncLongCounter
    */
   AutoIncLong(9),
-  /**
+  /*
    * A Java object that will be serialized using its {@link Serializable} or {@link Externalizable}
    * interface.
    */
@@ -72,7 +73,7 @@ public enum ValueType {
     this.code = code;
   }
 
-  /**
+  /*
    * An integer that identifies the type safe enumeration value.
    *
    * @return
@@ -129,7 +130,7 @@ public enum ValueType {
     return (DataOutputBuffer) buf.get();
   }
 
-  /**
+  /*
    * Encode an object that is an instance of a supported class.
    *
    * @param v The value.
@@ -142,8 +143,8 @@ public enum ValueType {
 
       if (v == null) {
 
-        /*
-         * A null will be interpreted as a deletion request for a
+      /*
+       * A null will be interpreted as a deletion request for a
          * column value on insert / update.
          */
         return null;
@@ -206,7 +207,7 @@ public enum ValueType {
         buf.writeByte(ValueType.Unicode.intValue());
 
         // @todo constrain max byte[] length?
-        byte[] bytes = ((String) v).getBytes(UTF8);
+        byte[] bytes = ((String) v).getBytes(StandardCharsets.UTF_8);
 
         buf.packLong(bytes.length);
 
@@ -243,7 +244,7 @@ public enum ValueType {
     }
   }
 
-  /**
+  /*
    * @param v
    * @return
    */
@@ -273,7 +274,7 @@ public enum ValueType {
             final int len = (int) buf.unpackLong();
             final byte[] bytes = new byte[len];
             buf.readFully(bytes);
-            String s = new String(bytes, UTF8);
+            String s = new String(bytes, StandardCharsets.UTF_8);
             return s;
           }
         case Date:

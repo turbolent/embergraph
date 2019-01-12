@@ -29,8 +29,8 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.filter.LookaheadTupleFilter.ILookaheadTupleIterator;
 
-/**
- * Abstract base class for an {@link ITupleFilter} that transforms the data type of the keys and/or
+/*
+* Abstract base class for an {@link ITupleFilter} that transforms the data type of the keys and/or
  * values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -65,15 +65,15 @@ public abstract class TupleTransformer<E, F> extends FilterBase implements ITupl
     return newTransformer((ILookaheadTupleIterator<E>) src, context);
   }
 
-  /**
+  /*
    * Method responsible for creating a new instance of the iterator that reads from the lookahead
    * source whose tuples are of the source type and visits the transformed tuples.
    */
   protected abstract ITupleIterator<F> newTransformer(
       final ILookaheadTupleIterator<E> src, final Object context);
 
-  //    /**
-  //     * Return <code>true</code> iff another tuple of the transformed type can
+  //    /*
+//     * Return <code>true</code> iff another tuple of the transformed type can
   //     * be assembled from the source iterator.
   //     *
   //     * @param src
@@ -81,8 +81,8 @@ public abstract class TupleTransformer<E, F> extends FilterBase implements ITupl
   //     */
   //    abstract protected boolean hasNext(ILookaheadTupleIterator<E> src);
   //
-  //    /**
-  //     * Implementation should consume one or more tuples from the source,
+  //    /*
+//     * Implementation should consume one or more tuples from the source,
   //     * returning a new tuple of the target generic type.
   //     *
   //     * @param src
@@ -92,8 +92,8 @@ public abstract class TupleTransformer<E, F> extends FilterBase implements ITupl
   //     */
   //    abstract protected ITuple<F> next(ILookaheadTupleIterator<E> src);
 
-  //    /**
-  //     *
+  //    /*
+//     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
   //     * @version $Id$
   //     * @param <E>
@@ -105,8 +105,8 @@ public abstract class TupleTransformer<E, F> extends FilterBase implements ITupl
   ////        private final TupleTransformer<E, F> filter;
   //        private final ITupleIterator<F> transform;
   //
-  //        /**
-  //         *
+  //        /*
+//         *
   //         * @param src
   //         * @param filter
   //         */

@@ -29,8 +29,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.journal.TestHelper;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
-/**
- * Abstract harness for testing under a variety of configurations. In order to test a specific
+/*
+* Abstract harness for testing under a variety of configurations. In order to test a specific
  * configuration, create a concrete instance of this class. The configuration can be described using
  * a mixture of a <code>.properties</code> file of the same name as the test class and custom code.
  *
@@ -89,7 +89,7 @@ public abstract class AbstractEmbergraphSailTestCase extends TestCase2 {
 
   private Properties m_properties;
 
-  /**
+  /*
    * Returns properties read from a hierarchy of sources. The underlying properties read from those
    * sources are cached, but a new properties object is returned on each invocation (to prevent side
    * effects by the caller).
@@ -126,8 +126,8 @@ public abstract class AbstractEmbergraphSailTestCase extends TestCase2 {
        */
       if (m_properties.get(Options.FILE) == null) {
 
-        /*
-         * Use a temporary file for the test. Such files are always deleted when
+      /*
+       * Use a temporary file for the test. Such files are always deleted when
          * the journal is closed or the VM exits.
          */
 
@@ -140,7 +140,7 @@ public abstract class AbstractEmbergraphSailTestCase extends TestCase2 {
     return new Properties(m_properties);
   }
 
-  /**
+  /*
    * This method is invoked from methods that MUST be proxied to this class. {@link
    * GenericProxyTestCase} extends this class, as do the concrete classes that drive the test suite
    * for specific GOM integration test configuration. Many method on this class must be proxied from
@@ -197,8 +197,8 @@ public abstract class AbstractEmbergraphSailTestCase extends TestCase2 {
 
   protected abstract EmbergraphSail reopenSail(EmbergraphSail sail);
 
-  //    /**
-  //     * Recursively removes any files and subdirectories and then removes the
+  //    /*
+//     * Recursively removes any files and subdirectories and then removes the
   //     * file (or directory) itself.
   //     *
   //     * @param f

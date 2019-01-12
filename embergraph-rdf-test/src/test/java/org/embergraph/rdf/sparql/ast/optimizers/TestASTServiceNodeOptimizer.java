@@ -42,8 +42,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.BDS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTServiceNodeOptimizer}.
+/*
+* Test suite for {@link ASTServiceNodeOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -58,7 +58,7 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -120,7 +120,7 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
 
     final IBindingSet[] bsets = new IBindingSet[] {new ListBindingSet()};
 
-    /**
+    /*
      * The source AST.
      *
      * <pre>
@@ -186,7 +186,7 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
               Scope.DEFAULT_CONTEXTS));
     }
 
-    /**
+    /*
      * The expected AST after the rewrite.
      *
      * <pre>
@@ -291,7 +291,7 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Unit test for correct rejection of the lift into a named subquery.
    *
    * <pre>
@@ -321,7 +321,7 @@ public class TestASTServiceNodeOptimizer extends AbstractASTEvaluationTestCase {
 
     final IBindingSet[] bsets = new IBindingSet[] {new ListBindingSet()};
 
-    /**
+    /*
      * The source AST.
      *
      * <pre></pre>

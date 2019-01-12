@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.clhep;
 
-/**
- * High Energy Physics coherent Physical Constants. This class is a Java port of the <a
+/*
+* High Energy Physics coherent Physical Constants. This class is a Java port of the <a
  * href="http://wwwinfo.cern.ch/asd/lhc++/clhep/manual/RefGuide/Units/PhysicalConstants_h.html">C++
  * version</a> found in <a href="http://wwwinfo.cern.ch/asd/lhc++/clhep">CLHEP 1.4.0</a>, which in
  * turn has been provided by Geant4 (a simulation toolkit for HEP).
@@ -20,7 +20,7 @@ package cern.clhep;
  * @version 1.0, 09/24/99
  */
 public class PhysicalConstants extends Object {
-  /**
+  /*
    * Little trick to allow for "aliasing", that is, renaming this class. Normally you would write
    *
    * <pre>

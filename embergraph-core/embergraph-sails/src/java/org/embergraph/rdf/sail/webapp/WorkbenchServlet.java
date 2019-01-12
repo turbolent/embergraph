@@ -42,7 +42,7 @@ public class WorkbenchServlet extends EmbergraphRDFServlet {
   /** Flag to signify a workbench operation. */
   static final transient String ATTR_WORKBENCH = "workbench";
 
-  /**
+  /*
    * Flag to signify a convert operation. POST an RDF document with a content type and an accept
    * header for what it should be converted to.
    */
@@ -72,7 +72,7 @@ public class WorkbenchServlet extends EmbergraphRDFServlet {
 
     if (log.isInfoEnabled()) log.info("Request body: " + contentType);
 
-    /**
+    /*
      * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/620">UpdateServlet fails to parse
      * MIMEType when doing conneg. </a>
      */

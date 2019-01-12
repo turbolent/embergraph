@@ -18,8 +18,8 @@ import org.embergraph.service.EventResource;
 import org.embergraph.service.Split;
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * Task splits an index partition into N equal sized index partitions and scatters those index
+/*
+* Task splits an index partition into N equal sized index partitions and scatters those index
  * partitions across data services in the federation. Unlike a normal split, this MAY result in
  * index partitions which are under the nominal minimum size requirements. The purpose of a scatter
  * split is to rapidly redistribute an index partition across the federation in order to increase
@@ -55,20 +55,20 @@ public class ScatterSplitTask extends AbstractPrepareTask<AbstractResult> {
   /** The #of index partitions that will be generated when we split the source index partition. */
   protected final int nsplits;
 
-  /**
+  /*
    * An array of move targets for the new index partitions. The index partitions will be assigned to
    * the move targets using a round robin process. If one of the move targets is this data service,
    * then the corresponding index partition will not be moved.
    */
   protected final UUID[] moveTargets;
 
-  /**
+  /*
    * The target size of a shard for the scatter split. This is computed by dividing the size of the
    * compact segment on the disk by the #of desired splits.
    */
   protected final long adjustedNominalShardSize;
 
-  /**
+  /*
    * @param vmd The metadata for the index partition to be split.
    * @param nsplits The index will be split into this many index partitions without regard to the
    *     #of tuples in each split.
@@ -125,7 +125,7 @@ public class ScatterSplitTask extends AbstractPrepareTask<AbstractResult> {
     vmd.clearRef();
   }
 
-  /**
+  /*
    * Breaks the index partition into N splits, where N was specified to the ctor, and redistributes
    * those splits onto the move targets using a round robin.
    *
@@ -166,8 +166,8 @@ public class ScatterSplitTask extends AbstractPrepareTask<AbstractResult> {
         // Note: fused view for the source index partition.
         final ILocalBTreeView src = vmd.getView();
 
-        /*
-         * Get the split points for the index. Each split point
+      /*
+       * Get the split points for the index. Each split point
          * describes a new index partition. Together the split points
          * MUST exactly span the source index partitions key range.
          * There MUST NOT be any overlap in the key ranges for the
@@ -193,8 +193,8 @@ public class ScatterSplitTask extends AbstractPrepareTask<AbstractResult> {
           if (overextension > resourceManager.shardOverextensionLimit
               && !resourceManager.isDisabledWrites(vmd.name)) {
 
-            /*
-             * The shard is overextended (it is at least two times
+          /*
+       * The shard is overextended (it is at least two times
              * its nominal maximum size) and is refusing a split.
              * Continuing to do incremental builds here will mask
              * the problem and cause the cost of a merge on the
@@ -229,8 +229,8 @@ public class ScatterSplitTask extends AbstractPrepareTask<AbstractResult> {
             resourceManager.disableWrites(vmd.name);
           }
 
-          /*
-           * Do an incremental build.
+        /*
+       * Do an incremental build.
            */
 
           log.warn("No splits identified: will build: " + vmd);
@@ -258,8 +258,8 @@ public class ScatterSplitTask extends AbstractPrepareTask<AbstractResult> {
 
       } finally {
 
-        /*
-         * We are done building index segments from the source index
+      /*
+       * We are done building index segments from the source index
          * partition view so we clear our references for that view.
          */
 
@@ -308,23 +308,23 @@ public class ScatterSplitTask extends AbstractPrepareTask<AbstractResult> {
             continue;
           }
 
-          /*
-           * Obtain a new partition identifier for the partition that
+        /*
+       * Obtain a new partition identifier for the partition that
            * will be created when we move the index partition to the
            * target data service.
            */
           final int newPartitionId = resourceManager.nextPartitionId(vmd.indexMetadata.getName());
 
-          /*
-           * The name of the post-split index partition that is the
+        /*
+       * The name of the post-split index partition that is the
            * source for the move operation.
            */
           final String nameOfPartitionToMove =
               DataService.getIndexPartitionName(
                   vmd.indexMetadata.getName(), splitResult.splits[i].pmd.getPartitionId());
 
-          /*
-           * Create a move task.
+        /*
+       * Create a move task.
            *
            * Note: We do not explicitly delete the source index
            * segment for the source index partition after the move. It
@@ -383,8 +383,8 @@ public class ScatterSplitTask extends AbstractPrepareTask<AbstractResult> {
 
           if (buildResult != null) {
 
-            /*
-             * At this point the index segment was either incorporated into
+          /*
+       * At this point the index segment was either incorporated into
              * the new view in a restart safe manner or there was an error.
              * Either way, we now remove the index segment store's UUID from
              * the retentionSet so it will be subject to the release policy

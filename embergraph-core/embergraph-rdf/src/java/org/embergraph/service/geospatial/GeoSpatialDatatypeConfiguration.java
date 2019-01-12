@@ -38,8 +38,8 @@ import org.embergraph.service.geospatial.GeoSpatialDatatypeFieldConfiguration.Va
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Configuration of a single geospatial datatype, including value type, multiplier, min possible
+/*
+* Configuration of a single geospatial datatype, including value type, multiplier, min possible
  * value, and mapping to the service.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -67,7 +67,7 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
   private boolean hasCoordSystem = false;
   private Map<String, Integer> customFieldsIdxs = new HashMap<String, Integer>();
 
-  /**
+  /*
    * Constructor, setting up a {@link GeoSpatialDatatypeConfiguration} given a uri and a JSON array
    * defining the fields as input. Throws an {@link InvalidGeoSpatialDatatypeConfigurationError} if
    * the uri is null or empty or in case the JSON array does not describe a set of valid fields.
@@ -119,7 +119,7 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
 
     fields = new ArrayList<GeoSpatialDatatypeFieldConfiguration>();
 
-    /**
+    /*
      * We expect a JSON array of the following format (example):
      *
      * <p>[ { "valueType": "DOUBLE", "multiplier": "100000", "serviceMapping": "LATITUDE" }, {
@@ -133,7 +133,7 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
       try {
 
         // { "valueType": "double", "multiplier": "100000", "serviceMapping": "latitude" }
-        JSONObject fieldJson = (JSONObject) fieldsJson.getJSONObject(i);
+        JSONObject fieldJson = fieldsJson.getJSONObject(i);
 
         fields.add(new GeoSpatialDatatypeFieldConfiguration(fieldJson));
 
@@ -182,7 +182,7 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
     initDerivedMembers();
   }
 
-  /**
+  /*
    * Alternative constructor (to ease writing test cases)
    *
    * @param uri
@@ -226,7 +226,7 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
     return fields;
   }
 
-  /**
+  /*
    * Computes the index of a field with a given (predefined) service mapping. Returns -1 if no such
    * component present in the datatype or the mapping that is passed in is null.
    *
@@ -318,7 +318,7 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
     return idx == null ? null : fields.get(idx).getValueType();
   }
 
-  /**
+  /*
    * Initialized derived member variables, allowing efficient access to nested information (such as
    * the field types).
    */

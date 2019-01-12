@@ -20,8 +20,8 @@ package org.embergraph.rdf.internal;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * Utility IV to generate IVs for URIs in the form of http://example.org/value/1234234513STRSUFFIX
+/*
+* Utility IV to generate IVs for URIs in the form of http://example.org/value/1234234513STRSUFFIX
  * where the localName of the URI is a string suffix followed by an integer value with fixed width.
  *
  * <p>You should extend this class with implementation for specific instances of URIs that follow

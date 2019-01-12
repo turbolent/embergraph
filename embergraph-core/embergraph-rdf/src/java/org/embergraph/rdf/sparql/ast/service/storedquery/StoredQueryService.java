@@ -40,8 +40,8 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * A SERVICE that exposes a stored query for execution. The stored query may be a SPARQL query or
+/*
+* A SERVICE that exposes a stored query for execution. The stored query may be a SPARQL query or
  * arbitrary procedural application logic, but it must evaluate to a solution multi-set. The service
  * interface is written to the openrdf interfaces in order to remove the burden of dealing with
  * embergraph {@link IV}s from the application.
@@ -97,8 +97,8 @@ public abstract class StoredQueryService extends AbstractServiceFactoryBase {
 
   public interface Options {
 
-    //        /**
-    //         * The namespace used for stored query service.
+    //        /*
+//         * The namespace used for stored query service.
     //         */
     //        String NAMESPACE = "http://www.embergraph.org/rdf/stored-query#";
 
@@ -148,7 +148,7 @@ public abstract class StoredQueryService extends AbstractServiceFactoryBase {
     return new StoredQueryServiceCall(createParams, serviceParams);
   }
 
-  /**
+  /*
    * Abstract method for core application logic. The implementation may execute a SPARQL query, or a
    * series or SPARQL or other operations under application control.
    *
@@ -217,14 +217,14 @@ public abstract class StoredQueryService extends AbstractServiceFactoryBase {
       }
     }
 
-    /**
+    /*
      * Task to execute the stored query.
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
      */
     private class StoredQueryTask extends AbstractApiTask<TupleQueryResult> {
 
-      /**
+      /*
        * FIXME This is ignoring the exogenous bindings. This is more or less equivalent to bottom-up
        * evaluation. It would be more efficient if we could flow in the exogenous bindings but this
        * is not supported before openrdf 2.7 (we hack this in {@link EmbergraphSailTupleQuery}).
@@ -260,8 +260,8 @@ public abstract class StoredQueryService extends AbstractServiceFactoryBase {
         } finally {
           if (cxn != null) {
             if (!success && !cxn.isReadOnly()) {
-              /*
-               * Force rollback of the connection.
+            /*
+       * Force rollback of the connection.
                *
                * Note: It is possible that the commit has already
                * been processed, in which case this rollback()

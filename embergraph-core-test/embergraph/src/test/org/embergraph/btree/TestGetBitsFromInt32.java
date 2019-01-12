@@ -24,8 +24,8 @@ import java.util.Formatter;
 import junit.framework.TestCase2;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Unit tests for {@link BytesUtil#getBits(int, int, int)
+/*
+* Unit tests for {@link BytesUtil#getBits(int, int, int)
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

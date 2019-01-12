@@ -26,8 +26,8 @@ import java.util.concurrent.ConcurrentMap;
 import org.embergraph.bop.join.IHashJoinUtility;
 import org.embergraph.rdf.sparql.ast.FunctionRegistry.Factory;
 
-/**
- * A factory which is used to register and resolve query hints.
+/*
+* A factory which is used to register and resolve query hints.
  *
  * <p>TODO Query hints for includeInferred, timeout/deadline, the "noJoinVarsLimit" at which we
  * break an unconstrained hash join (see the {@link IHashJoinUtility} implementation classes).
@@ -39,7 +39,7 @@ public class QueryHintRegistry {
   private static ConcurrentMap<String /* name */, IQueryHint<?>> registry =
       new ConcurrentHashMap<String /* name */, IQueryHint<?>>();
 
-  /**
+  /*
    * Register an {@link IQueryHint}.
    *
    * @param The query hint.
@@ -54,7 +54,7 @@ public class QueryHintRegistry {
     }
   }
 
-  /**
+  /*
    * Return the {@link IQueryHint} under that name.
    *
    * @param name The name of the {@link IQueryHint}.

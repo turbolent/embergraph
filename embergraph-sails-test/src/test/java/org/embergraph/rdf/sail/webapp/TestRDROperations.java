@@ -26,8 +26,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.ServiceProviderHook;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 
-/**
- * Test of RDR specific data interchange and query.
+/*
+* Test of RDR specific data interchange and query.
  *
  * @author bryan
  * @param <S>
@@ -180,7 +180,7 @@ public class TestRDROperations<S extends IIndexManager> extends AbstractTestNano
   //
   //    }
 
-  /**
+  /*
    * FIXME We need to verify export for this case. It relies on access to a Embergraph specific
    * ValueFactoryImpl to handle the RDR mode statements.
    */

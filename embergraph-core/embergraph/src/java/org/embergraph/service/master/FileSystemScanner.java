@@ -27,8 +27,8 @@ import java.io.FilenameFilter;
 import java.util.Queue;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
-/**
- * Adds all files accepted by the filter to the {@link Queue}.
+/*
+* Adds all files accepted by the filter to the {@link Queue}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -53,7 +53,7 @@ public class FileSystemScanner extends AbstractResourceScanner<File> {
         + "}";
   }
 
-  /**
+  /*
    * @param buffer Chunks of files to be loaded are added to this buffer.
    * @param fileOrDir The file or directory to be loaded.
    * @param filter An optional filter on files that will be accepted when processing a directory.
@@ -76,7 +76,7 @@ public class FileSystemScanner extends AbstractResourceScanner<File> {
     process2(fileOrDir);
   }
 
-  /**
+  /*
    * Scans file(s) recursively starting with the named file, and, for each file that passes the
    * filter, submits the task.
    *

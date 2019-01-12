@@ -35,8 +35,8 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.bop.join.JoinAnnotations;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * Operator projects only the identified variables.
+/*
+* Operator projects only the identified variables.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public class ProjectionOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * An {@link IVariable}[] identifying the variables to be retained in the {@link IBindingSet}s
      * written out by the operator.
      */
@@ -60,7 +60,7 @@ public class ProjectionOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */

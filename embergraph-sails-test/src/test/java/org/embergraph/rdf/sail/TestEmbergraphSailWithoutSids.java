@@ -27,8 +27,8 @@ import junit.framework.Test;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 import org.embergraph.rdf.sail.sparql.TestVerifyAggregates;
 
-/**
- * Test suite for the {@link EmbergraphSail} with statement identifiers enabled.
+/*
+* Test suite for the {@link EmbergraphSail} with statement identifiers enabled.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

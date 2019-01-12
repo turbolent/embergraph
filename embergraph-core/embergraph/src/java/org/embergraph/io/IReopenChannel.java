@@ -30,8 +30,8 @@ import java.nio.channels.ClosedByInterruptException;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.FileLock;
 
-/**
- * Interface for objects which know how to re-open a {@link Channel} for some resource and also
+/*
+* Interface for objects which know how to re-open a {@link Channel} for some resource and also
  * understand when the resource has been closed and therefore should not be reopened. This is used
  * in combination with {@link FileChannelUtility} to support the transparent re-opening of a file
  * whose channel was closed asynchronously by an interrupt in another thread during an NIO
@@ -42,7 +42,7 @@ import java.nio.channels.FileLock;
  */
 public interface IReopenChannel<C extends Channel> {
 
-  /**
+  /*
    * Transparently re-opens the {@link Channel} if it is closed.
    *
    * <p>Note: Java will close the backing {@link Channel} if a {@link Thread} is interrupted during
@@ -69,8 +69,8 @@ public interface IReopenChannel<C extends Channel> {
    *     permitting reads or writes on the file.
    * @throws IOException
    */
-  public C reopenChannel() throws IOException;
+  C reopenChannel() throws IOException;
 
   /** Should include the name of the backing file (if known). */
-  public String toString();
+  String toString();
 }

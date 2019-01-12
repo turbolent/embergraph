@@ -85,21 +85,21 @@ import org.openrdf.query.impl.GraphQueryResultImpl;
 import org.openrdf.query.impl.TupleQueryResultImpl;
 import org.openrdf.sail.SailException;
 
-/**
- * Helper class for evaluating SPARQL queries.
+/*
+* Helper class for evaluating SPARQL queries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class ASTEvalHelper {
 
-  /**
+  /*
    * A logger whose sole purpose is to log the SPARQL queries which are being evaluated <strong>DO
    * NOT USE THIS FOR OTHER PURPOSES !!! </strong>
    */
   private static final Logger log = Logger.getLogger(ASTEvalHelper.class);
 
-  /**
+  /*
    * Evaluate a boolean query.
    *
    * @param store The {@link AbstractTripleStore} having the data.
@@ -158,8 +158,8 @@ public class ASTEvalHelper {
       return itr.hasNext();
     } finally {
       if (itr != null) {
-        /**
-         * Ensure query is terminated. An interrupt during hasNext() should cause the query to
+      /*
+       * Ensure query is terminated. An interrupt during hasNext() should cause the query to
          * terminate through itr.close().
          *
          * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">
@@ -170,7 +170,7 @@ public class ASTEvalHelper {
     }
   }
 
-  /**
+  /*
    * Evaluate a SELECT query.
    *
    * @param store The {@link AbstractTripleStore} having the data.
@@ -211,8 +211,8 @@ public class ASTEvalHelper {
       return r;
     } finally {
       if (r == null) {
-        /**
-         * Ensure query is terminated if assignment to fails. E.g., if interrupted during the ctor.
+      /*
+       * Ensure query is terminated if assignment to fails. E.g., if interrupted during the ctor.
          *
          * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">
          *     BlockingBuffer.close() does not unblock threads </a>
@@ -222,7 +222,7 @@ public class ASTEvalHelper {
     }
   }
 
-  /**
+  /*
    * Evaluate a SELECT query without converting the results into openrdf solutions.
    *
    * @param store The {@link AbstractTripleStore} having the data.
@@ -303,8 +303,8 @@ public class ASTEvalHelper {
 
       if (materialize && !materializeProjectionInQuery && !projectedSet.isEmpty()) {
 
-        /*
-         * Materialize IVs as RDF Values.
+      /*
+       * Materialize IVs as RDF Values.
          *
          * Note: This is the code path when we want to materialize the
          * IVs and we can not do so within the query plan because the
@@ -341,7 +341,7 @@ public class ASTEvalHelper {
     }
   }
 
-  /**
+  /*
    * Optimize a SELECT query.
    *
    * @param store The {@link AbstractTripleStore} having the data.
@@ -390,7 +390,7 @@ public class ASTEvalHelper {
     return optimizedQuery;
   }
 
-  /**
+  /*
    * Evaluate a CONSTRUCT/DESCRIBE query.
    *
    * <p>Note: For a DESCRIBE query, this also updates the DESCRIBE cache.
@@ -482,8 +482,8 @@ public class ASTEvalHelper {
       final Set<EmbergraphValue> describedResources;
       if (describeCache != null) {
 
-        /**
-         * If we are maintaining the DESCRIBE cache, then we need to know the distinct bindings that
+      /*
+       * If we are maintaining the DESCRIBE cache, then we need to know the distinct bindings that
          * the projected variables in the original DESCRIBE query take on in the solutions. Those
          * bound values identify the resources that were actually described by the query. This is
          * necessary to handle cases such as <code>DESCRIBE ?foo WHERE {...}</code> or <code>
@@ -540,8 +540,8 @@ public class ASTEvalHelper {
             //        case CBDNR:
             //        case SCBDNR:
             {
-              /*
-               * Concise Bounded Description (of any flavor) requires a fixed
+            /*
+       * Concise Bounded Description (of any flavor) requires a fixed
                * point expansion.
                *
                * TODO CBD : The expansion should monitor a returned iterator so
@@ -570,8 +570,8 @@ public class ASTEvalHelper {
 
       if (describeCache != null) {
 
-        /*
-         * Wrap the Statement iteration with logic that will update the
+      /*
+       * Wrap the Statement iteration with logic that will update the
          * DESCRIBE cache.
          *
          * Note: [describedResources] is the set of EmbergraphValues that were
@@ -594,8 +594,8 @@ public class ASTEvalHelper {
       result = new GraphQueryResultImpl(optimizedQuery.getPrefixDecls(), src3);
     } finally {
       if (result == null) {
-        /**
-         * Cancel the query since we are not returning the GraphTupleQuery result object to the
+      /*
+       * Cancel the query since we are not returning the GraphTupleQuery result object to the
          * caller.
          *
          * <p>Note: This provides only partial resolution of the following ticket. There are other
@@ -614,7 +614,7 @@ public class ASTEvalHelper {
     return result;
   }
 
-  /**
+  /*
    * Evaluate a query plan (core method).
    *
    * <p>As explained in some depth at <a
@@ -699,7 +699,7 @@ public class ASTEvalHelper {
     }
   }
 
-  /**
+  /*
    * Convert a Sesame {@link BindingSet} into a embergraph {@link IBindingSet}.
    *
    * @param src The {@link BindingSet} (optional).
@@ -734,7 +734,7 @@ public class ASTEvalHelper {
     return new IBindingSet[] {bindingSet};
   }
 
-  /**
+  /*
    * Wrap {@link IRunningQuery} with the logic to materialize {@link IV}s as RDF {@link Value}s.
    *
    * @param runningQuery The {@link IRunningQuery}.
@@ -886,7 +886,7 @@ public class ASTEvalHelper {
     return it3;
   }
 
-  /**
+  /*
    * Dechunkify the running query and monitor the Sesame iterator.
    *
    * @param runningQuery The {@link IRunningQuery}.
@@ -907,7 +907,7 @@ public class ASTEvalHelper {
     return it3;
   }
 
-  /**
+  /*
    * Evaluate a SPARQL UPDATE request (core method).
    *
    * @param astContainer The query model.
@@ -944,8 +944,8 @@ public class ASTEvalHelper {
 
       if (dataset != null) {
 
-        /*
-         * Apply the optional data set override.
+      /*
+       * Apply the optional data set override.
          */
 
         applyDataSet(conn.getTripleStore(), astContainer, resolved.dataset);
@@ -986,7 +986,7 @@ public class ASTEvalHelper {
     }
   }
 
-  /**
+  /*
    * Apply the {@link Dataset} to each {@link DeleteInsertGraph} in the UPDATE request.
    *
    * <p>The openrdf API here is somewhat at odds with the current LCWD for SPARQL UPDATE. In order
@@ -1039,7 +1039,7 @@ public class ASTEvalHelper {
     }
   }
 
-  /**
+  /*
    * Log SPARQL Query and SPARQL UPDATE requests.
    *
    * <p>Note: The SPARQL syntax is logged whenever possible. However, we sometimes generate the AST

@@ -303,7 +303,7 @@ public class TestGPO extends ProxyGOMTest {
     assertTrue(om.getGPO(newuri).getLinksIn(worksFor).contains(workergpo));
   }
 
-  /**
+  /*
    * Checks for consistency as link set is created and modified
    *
    * <p>Dependent: setValue, getValue, removeValue, getLinksIn

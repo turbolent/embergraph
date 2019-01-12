@@ -19,8 +19,8 @@ import org.embergraph.mdi.SegmentMetadata;
 import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 
-/**
- * Task builds an {@link IndexSegment} from the mutable {@link BTree} and zero or more additional
+/*
+* Task builds an {@link IndexSegment} from the mutable {@link BTree} and zero or more additional
  * sources in the index partition view and then atomically updates the view (aka an incremental
  * build).
  *
@@ -68,7 +68,7 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
     vmd.clearRef();
   }
 
-  /**
+  /*
    * Build an {@link IndexSegment} from one or more sources for an index partition view. The sources
    * are chosen in view order. New sources are incorporated until too much work would be performed
    * for the lightweight semantics of "build". If all sources are incorporated by the build, then
@@ -93,8 +93,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
       try {
 
-        /*
-         * Figure out which sources will be used in the build operation.
+      /*
+       * Figure out which sources will be used in the build operation.
          * The sources are chosen in order. The first source is always
          * a BTree on a journal and is always in the accepted view.
          *
@@ -114,8 +114,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
         if (INFO) log.info("acceptedView: " + buildViewMetadata);
 
-        /*
-         * Build the index segment from a view comprised of just the
+      /*
+       * Build the index segment from a view comprised of just the
          * accepted sources.
          */
         buildResult =
@@ -147,8 +147,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
         {
 
-          /*
-           * Verify that the resource manager can open the new index
+        /*
+       * Verify that the resource manager can open the new index
            * segment. This provides verification both that the index
            * segment is registered with the store manager and that the
            * index segment can be read. However, we do not actually
@@ -166,8 +166,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
       } finally {
 
-        /*
-         * Release our hold on the source index partition view. We only
+      /*
+       * Release our hold on the source index partition view. We only
          * needed it during the the index partition build.
          */
 
@@ -177,8 +177,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
       if (buildResult.compactingMerge
           && buildResult.builder.getCheckpoint().length >= resourceManager.nominalShardSize) {
 
-        /*
-         * If a compacting merge was performed and sumSegBytes exceeds the
+      /*
+       * If a compacting merge was performed and sumSegBytes exceeds the
          * threshold, then do a split here just as if CompactingMerge was
          * run instead.
          *
@@ -196,8 +196,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
       try {
 
-        /*
-         * Submit task that will update the definition of the index
+      /*
+       * Submit task that will update the definition of the index
          * partition view and wait for it to complete.
          */
         concurrencyManager
@@ -230,8 +230,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
       if (buildResult != null) {
 
-        /*
-         * At this point the index segment was either incorporated into
+      /*
+       * At this point the index segment was either incorporated into
          * the new view in a restart safe manner or there was an error.
          * Either way, we now remove the index segment store's UUID from
          * the retentionSet so it will be subject to the release policy
@@ -244,7 +244,7 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
     }
   }
 
-  /**
+  /*
    * The source is an {@link IndexSegment} that was built from the mutable {@link BTree} associated
    * with the lastCommitTime on old journal of some index partition. What we are doing is replacing
    * the role of that {@link BTree} on the closed out journal with the {@link IndexSegment}. Note
@@ -282,7 +282,7 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
     private final Event parentEvent;
 
-    /**
+    /*
      * @param resourceManager
      * @param concurrencyManager
      * @param resource
@@ -313,7 +313,7 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
       this.parentEvent = parentEvent;
     }
 
-    /**
+    /*
      * Atomic update.
      *
      * @return The ordered array of resources that define the post-condition view.
@@ -348,8 +348,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
         if (INFO) log.info(buildResult.toString());
 
-        /*
-         * Open the unisolated B+Tree on the live journal that is
+      /*
+       * Open the unisolated B+Tree on the live journal that is
          * absorbing writes. We are going to update its index metadata.
          *
          * Note: I am using AbstractTask#getIndex(String name) so that
@@ -367,8 +367,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
 
         if (view instanceof BTree) {
 
-          /*
-           * Note: there is an expectation that this is not a simple
+        /*
+       * Note: there is an expectation that this is not a simple
            * BTree because this the build task is supposed to be
            * invoked after an overflow event (or a view checkpoint),
            * and that event should have re-defined the view to include
@@ -398,8 +398,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
         // clone the current metadata record for the live index.
         final IndexMetadata indexMetadata = btree.getIndexMetadata().clone();
 
-        /*
-         * This is the index partition definition on the live index -
+      /*
+       * This is the index partition definition on the live index -
          * the one that will be replaced with a new view as the result
          * of this atomic update.
          */
@@ -414,8 +414,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
         final IResourceMetadata[] currentResources = currentpmd.getResources();
         {
 
-          /*
-           * verify that there are at least two resources in the
+        /*
+       * verify that there are at least two resources in the
            * current view:
            *
            * 1. currentResources[0] is the mutable BTree on the live
@@ -441,8 +441,8 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
                     + Arrays.toString(currentResources));
           }
 
-          /*
-           * verify that the 2nd resource in the view is also a BTree
+        /*
+       * verify that the 2nd resource in the view is also a BTree
            * on a journal.
            */
           if (!currentResources[1].isJournal()) {
@@ -474,15 +474,15 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
           // the live journal.
           newView.add(getJournal().getResourceMetadata());
 
-          /*
-           * The newly built index segment. This was built from at
+        /*
+       * The newly built index segment. This was built from at
            * least one source, but it MAY have been built from more
            * than one source.
            */
           newView.add(segmentMetadata);
 
-          /*
-           * The rest of the components of the old view.
+        /*
+       * The rest of the components of the old view.
            *
            * Note: We start copying resources into the view AFTER the
            * last source which was included in the view used to
@@ -511,7 +511,7 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
             newView.add(currentResources[i]);
           }
 
-          newResources = (IResourceMetadata[]) newView.toArray(new IResourceMetadata[] {});
+          newResources = newView.toArray(new IResourceMetadata[] {});
         }
 
         // describe the index partition.
@@ -551,16 +551,16 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
                   + toString("oldResources", currentResources)
                   + toString("newResources", newResources));
 
-        /*
-         * Verify that the btree recognizes that it needs to be
+      /*
+       * Verify that the btree recognizes that it needs to be
          * checkpointed.
          *
          * Note: The atomic commit point is when this task commits.
          */
         assert btree.needsCheckpoint();
 
-        /*
-         * Update counter to reflect successful index partition build.
+      /*
+       * Update counter to reflect successful index partition build.
          *
          * Note: All build tasks are reported as builds so that we can
          * readily distinguish the tasks which were selected as

@@ -25,15 +25,15 @@ package org.embergraph.service.ndx.pipeline;
 
 import org.embergraph.btree.keys.KVO;
 
-/**
- * Interface allowing application specific elimination of duplicates.
+/*
+* Interface allowing application specific elimination of duplicates.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IDuplicateRemover<O> {
 
-  /**
+  /*
    * Accepts a dense array of key-value tuples and returns a dense array of key-value tuples in
    * which duplicates have been eliminated. The elements of the given array MUST NOT be modified as
    * a side-effect.
@@ -50,5 +50,5 @@ public interface IDuplicateRemover<O> {
    *     duplicates are eliminated by the {@link IndexPartitionWriteTask} within a single-threaded
    *     context.
    */
-  public KVO<O>[] filter(KVO<O>[] a);
+  KVO<O>[] filter(KVO<O>[] a);
 }

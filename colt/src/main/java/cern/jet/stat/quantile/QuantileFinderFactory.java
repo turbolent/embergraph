@@ -11,8 +11,8 @@ package cern.jet.stat.quantile;
 // import cern.it.util.Doubles;
 import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
-/**
- * Factory constructing exact and approximate quantile finders for both known and unknown
+/*
+* Factory constructing exact and approximate quantile finders for both known and unknown
  * <tt>N</tt>. Also see {@link hep.aida.bin.QuantileBin1D}, demonstrating how this package can be
  * used.
  *
@@ -110,7 +110,7 @@ import cern.jet.random.engine.RandomEngine;
 public class QuantileFinderFactory extends Object {
   /** Make this class non instantiable. Let still allow others to inherit. */
   protected QuantileFinderFactory() {}
-  /**
+  /*
    * Computes the number of buffers and number of values per buffer such that quantiles can be
    * determined with an approximation error no more than epsilon with a certain probability.
    *
@@ -156,7 +156,7 @@ public class QuantileFinderFactory extends Object {
     }
     return known_N_compute_B_and_K_quick(N, epsilon);
   }
-  /**
+  /*
    * Computes the number of buffers and number of values per buffer such that quantiles can be
    * determined with a <b>guaranteed</b> approximation error no more than epsilon. Assumes that
    * quantiles are to be computed over N values.
@@ -239,7 +239,7 @@ public class QuantileFinderFactory extends Object {
     int minB = -1;
     for (int b = 2; b <= maxBuffers; b++) {
       if (kMinimums[b - 2] < Long.MAX_VALUE) {
-        long mult = ((long) b) * ((long) kMinimums[b - 2]);
+        long mult = ((long) b) * kMinimums[b - 2];
         if (mult < multMin) {
           multMin = mult;
           minB = b;
@@ -261,7 +261,7 @@ public class QuantileFinderFactory extends Object {
     result[1] = k;
     return result;
   }
-  /**
+  /*
    * Computes the number of buffers and number of values per buffer such that quantiles can be
    * determined with an approximation error no more than epsilon with a certain probability. Assumes
    * that quantiles are to be computed over N values. The required sampling rate is computed and
@@ -354,7 +354,7 @@ public class QuantileFinderFactory extends Object {
     returnSamplingRate[0] = sampling_rate;
     return result;
   }
-  /**
+  /*
    * Returns a quantile finder that minimizes the amount of memory needed under the user provided
    * constraints.
    *
@@ -450,7 +450,7 @@ public class QuantileFinderFactory extends Object {
           (int) b1, (int) k1, (int) h1, preComputeEpsilon, generator);
     }
   }
-  /**
+  /*
    * Convenience method that computes phi's for equi-depth histograms. This is simply a list of
    * numbers with <tt>i / (double)quantiles</tt> for <tt>i={1,2,...,quantiles-1}</tt>.
    *
@@ -461,7 +461,7 @@ public class QuantileFinderFactory extends Object {
     for (int i = 1; i <= quantiles - 1; i++) phis.add(i / (double) quantiles);
     return phis;
   }
-  /**
+  /*
    * Computes the number of buffers and number of values per buffer such that quantiles can be
    * determined with an approximation error no more than epsilon with a certain probability.
    *
@@ -504,7 +504,7 @@ public class QuantileFinderFactory extends Object {
     return result_1;
     */
   }
-  /**
+  /*
    * Computes the number of buffers and number of values per buffer such that quantiles can be
    * determined with an approximation error no more than epsilon with a certain probability. <b>You
    * never need to call this method.</b> It is only for curious users wanting to gain some insight

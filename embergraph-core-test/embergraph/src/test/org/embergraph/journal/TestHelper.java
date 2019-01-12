@@ -26,8 +26,8 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.embergraph.io.DirectBufferPoolTestHelper;
 
-/**
- * Some helper methods for CI.
+/*
+* Some helper methods for CI.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -36,7 +36,7 @@ public class TestHelper {
 
   private static final Logger log = Logger.getLogger(TestHelper.class);
 
-  /**
+  /*
    * Verify that any journal created by the test have been destroyed.
    *
    * <p>Note: This clears the counter as a side effect to prevent a cascade of tests from being
@@ -47,7 +47,7 @@ public class TestHelper {
     checkJournalsClosed(test, null /*delegate*/);
   }
 
-  /**
+  /*
    * Verify that any journal created by the test have been destroyed (variant when using an {@link
    * IProxyTest}).
    *
@@ -113,7 +113,7 @@ public class TestHelper {
     DirectBufferPoolTestHelper.checkBufferPools(test, testClass);
   }
 
-  /**
+  /*
    * Verify that any {@link TemporaryRawStore}s created by the test have been destroyed.
    *
    * <p>Note: This clears the counter as a side effect to prevent a cascade of tests from being

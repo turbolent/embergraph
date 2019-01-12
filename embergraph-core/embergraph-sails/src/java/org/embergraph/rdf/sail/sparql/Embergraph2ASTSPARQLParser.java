@@ -62,8 +62,8 @@ import org.openrdf.query.parser.QueryParser;
 import org.openrdf.query.parser.QueryParserUtil;
 import org.openrdf.query.parser.sparql.SPARQLParser;
 
-/**
- * Overridden version of the openrdf {@link SPARQLParser} class which extracts additional
+/*
+* Overridden version of the openrdf {@link SPARQLParser} class which extracts additional
  * information required by embergraph and associates it with the {@link ParsedQuery} or {@link
  * ParsedUpdate}.
  *
@@ -80,7 +80,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
 
   public Embergraph2ASTSPARQLParser() {}
 
-  /**
+  /*
    * Parse either a SPARQL QUERY or a SPARQL UPDATE request.
    *
    * @param operation The request.
@@ -110,7 +110,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
     return parsedOperation;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The use of the alternative {@link #parseQuery2(String, String)} is strongly encouraged.
@@ -124,7 +124,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
     return new EmbergraphParsedQuery(parseQuery2(queryStr, baseURI));
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/448">SPARQL 1.1 Update </a>
@@ -136,7 +136,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
     return new EmbergraphParsedUpdate(parseUpdate2(updateStr, baseURI));
   }
 
-  /**
+  /*
    * Parse a SPARQL 1.1 UPDATE request.
    *
    * @return The Embergraph AST model for that request.
@@ -196,8 +196,8 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
 
         BaseDeclProcessor.process(uc, baseURI);
 
-        /*
-         * Do a special dance to handle prefix declarations in
+      /*
+       * Do a special dance to handle prefix declarations in
          * sequences: if the current operation has its own prefix
          * declarations, use those. Otherwise, try and use prefix
          * declarations from a previous operation in this sequence.
@@ -222,8 +222,8 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
 
         PrefixDeclProcessor.process(uc);
 
-        /*
-         * Note: In the query part of an update, blank nodes are treated
+      /*
+       * Note: In the query part of an update, blank nodes are treated
          * as anonymous vars. In the data part of the update, like in a
          * construct node, if a blank node is seen, for each binding set
          * in the solution list, a new blank node is generated. If it is
@@ -233,8 +233,8 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
          */
         BlankNodeVarProcessor.process(uc);
 
-        /*
-         * Prepare deferred batch IV resolution of ASTRDFValue to EmbergraphValues.
+      /*
+       * Prepare deferred batch IV resolution of ASTRDFValue to EmbergraphValues.
          * @see https://jira.blazegraph.com/browse/BLZG-1176
          *
          * Note: IV resolution must proceed separately (or be
@@ -253,8 +253,8 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
 
         if (updateNode != null) {
 
-          /*
-           * Translate an UPDATE operation.
+        /*
+       * Translate an UPDATE operation.
            */
           final Update updateOp = (Update) updateNode.jjtAccept(updateExprBuilder, null /* data */);
 
@@ -277,7 +277,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
     }
   }
 
-  /**
+  /*
    * Parse a SPARQL query.
    *
    * @param queryStr The query.
@@ -366,7 +366,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
     }
   }
 
-  /**
+  /*
    * IApplies the {@link EmbergraphExprBuilder} visitor to interpret the parse tree, building up a
    * embergraph {@link ASTBase AST}.
    *
@@ -393,7 +393,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
     }
   }
 
-  /**
+  /*
    * Looks for the {@link QueryHints#QUERYID} and copies it to the {@link ASTContainer}, which is
    * where other code will look for a caller given QueryID.
    *

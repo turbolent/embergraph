@@ -25,8 +25,8 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.NV;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * Abstract base class for "IN" {@link IConstraint} implementations.
+/*
+* Abstract base class for "IN" {@link IConstraint} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: INConstraint.java 4286 2011-03-09 17:36:10Z mrpersonick $
@@ -45,7 +45,7 @@ public abstract class InBOp extends XSDBooleanIVValueExpression {
   private static BOp[] mergeArguments(
       final IValueExpression<? extends IV> var, final IConstant<? extends IV>... set) {
 
-    final BOp args[] = new BOp[1 + (set != null ? set.length : 0)];
+    final BOp[] args = new BOp[1 + (set != null ? set.length : 0)];
 
     args[0] = var;
 
@@ -72,7 +72,7 @@ public abstract class InBOp extends XSDBooleanIVValueExpression {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */

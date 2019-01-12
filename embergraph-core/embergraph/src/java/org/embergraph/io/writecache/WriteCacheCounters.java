@@ -21,8 +21,8 @@ import org.embergraph.counters.CAT;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 
-/**
- * Performance counters for the {@link WriteCache}.
+/*
+* Performance counters for the {@link WriteCache}.
  *
  * <p>Note: thread-safety is required for: {@link #nhit} and {@link #nmiss}. The rest should be Ok
  * without additional synchronization, CAS operators, etc (mainly because they are updated while
@@ -56,12 +56,12 @@ public class WriteCacheCounters implements IWriteCacheCounters {
    * write on the channel.
    */
 
-  // /**
-  // * #of times {@link IWriteCache#flush(boolean)} was called.
+  // /*
+// * #of times {@link IWriteCache#flush(boolean)} was called.
   // */
   // public long nflush;
 
-  /**
+  /*
    * #of writes on the backing channel. Note that some write cache implementations do ordered writes
    * and will therefore do one write per record while others do append only and therefore do one
    * write per write cache flush. Note that in both cases we may have to redo a write if the backing

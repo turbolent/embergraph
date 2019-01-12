@@ -69,8 +69,8 @@ public class EmbergraphStoreTest extends RDFStoreTest {
 
   private static final Logger log = Logger.getLogger(EmbergraphStoreTest.class);
 
-  //    /**
-  //     * Return a test suite using the {@link LocalTripleStore} and pipeline
+  //    /*
+//     * Return a test suite using the {@link LocalTripleStore} and pipeline
   //     * joins.
   //     */
   //    public static class LTSWithPipelineJoins extends EmbergraphStoreTest {
@@ -190,7 +190,7 @@ public class EmbergraphStoreTest extends RDFStoreTest {
     return sail;
   }
 
-  /**
+  /*
    * Embergraph uses snapshot isolation for transactions while openrdf assumes that any writes
    * committed by a transaction become immediately visible to transactions which are already
    * running. This unit test from the base class has been overridden since embergraph has stronger

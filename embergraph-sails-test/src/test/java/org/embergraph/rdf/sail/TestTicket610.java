@@ -33,8 +33,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.repository.RepositoryConnection;
 
-/**
- * To run this test case, specify the following JVM property: <code>
+/*
+* To run this test case, specify the following JVM property: <code>
  * -DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithoutSids</code>
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
@@ -68,10 +68,8 @@ public class TestTicket610 extends ProxyEmbergraphSailTestCase {
     final Model data =
         new LinkedHashModel(
             Arrays.asList(
-                new StatementImpl[] {
-                  new StatementImpl(a, RDF.TYPE, OWL.TRANSITIVEPROPERTY),
-                  new StatementImpl(b, RDFS.SUBPROPERTYOF, a),
-                }));
+                new StatementImpl(a, RDF.TYPE, OWL.TRANSITIVEPROPERTY),
+                new StatementImpl(b, RDFS.SUBPROPERTYOF, a)));
 
     /*
      * The embergraph store, backed by a temporary journal file.

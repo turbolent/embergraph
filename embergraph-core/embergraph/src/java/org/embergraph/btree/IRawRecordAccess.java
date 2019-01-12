@@ -25,7 +25,7 @@ import java.nio.ByteBuffer;
 /** Interface providing access to raw records. */
 public interface IRawRecordAccess {
 
-  /**
+  /*
    * Read the raw record from the backing store.
    *
    * @param addr The record address.

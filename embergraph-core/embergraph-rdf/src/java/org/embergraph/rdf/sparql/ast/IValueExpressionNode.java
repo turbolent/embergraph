@@ -9,7 +9,7 @@ public interface IValueExpressionNode {
   /** Return the cached {@link IValueExpression} if it exists on the node, otherwise return null. */
   IValueExpression<? extends IV> getValueExpression();
 
-  /**
+  /*
    * Return the cached {@link IValueExpressionNode} if it exists on the node.
    *
    * @return The {@link IValueExpressionNode} and never <code>null</code>.
@@ -23,7 +23,7 @@ public interface IValueExpressionNode {
   /** Invalidate the cached value. It will be recomputed again on demand. */
   void invalidate();
 
-  /**
+  /*
    * A string representation of a recursive structure with pretty-print indent.
    *
    * @param indent

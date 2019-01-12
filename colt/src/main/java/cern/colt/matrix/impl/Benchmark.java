@@ -10,8 +10,8 @@ package cern.colt.matrix.impl;
 
 import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * Benchmarks the performance of matrix algorithms.
+/*
+* Benchmarks the performance of matrix algorithms.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
@@ -181,7 +181,7 @@ class Benchmark {
     return a;
   }
   /** Benchmarks various matrix methods. */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     int runs = Integer.parseInt(args[0]);
     int rows = Integer.parseInt(args[1]);
     int columns = Integer.parseInt(args[2]);

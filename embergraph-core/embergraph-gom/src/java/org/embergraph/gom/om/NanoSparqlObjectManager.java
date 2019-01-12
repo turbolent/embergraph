@@ -36,8 +36,8 @@ import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * Remote {@link IObjectManager} using the <a href=
+/*
+* Remote {@link IObjectManager} using the <a href=
  * "https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=NanoSparqlServer" >
  * NanoSparqlServer REST API </a> to communicate with the database.
  *

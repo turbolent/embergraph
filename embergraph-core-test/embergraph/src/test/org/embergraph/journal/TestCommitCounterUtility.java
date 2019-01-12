@@ -25,8 +25,8 @@ import java.io.FileFilter;
 import java.io.IOException;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for the {@link CommitCounterUtility}.
+/*
+* Test suite for the {@link CommitCounterUtility}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -38,7 +38,7 @@ public class TestCommitCounterUtility extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Verify the value of specific constants. These constants must not be modified since they define
    * the hierarchical structure of the durable data and a relied upon to generate and parse the
    * fully qualified names of the files within a managed commit counter based directory system.

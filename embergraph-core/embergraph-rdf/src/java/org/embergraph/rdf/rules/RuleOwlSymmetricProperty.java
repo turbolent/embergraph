@@ -30,8 +30,8 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * owl:SymmetricProperty
+/*
+* owl:SymmetricProperty
  *
  * <pre>
  *   (x rdf:type owl:SymmetricProperty), (a x b) -&gt; (b x a).

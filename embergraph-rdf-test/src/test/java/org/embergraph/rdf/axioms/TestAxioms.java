@@ -35,8 +35,8 @@ import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for the {@link Axioms}.
+/*
+* Test suite for the {@link Axioms}.
  *
  * <p>Note: {@link BaseAxioms} required an {@link AbstractTripleStore} to convert the {@link
  * EmbergraphStatement} objects into {@link SPO}s. This makes it impossible to unit test the axioms
@@ -56,7 +56,7 @@ public class TestAxioms extends AbstractTripleStoreTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test of the constructors for the axiom classes. This does not test serialization because
    * that uses {@link SPO} objects which are only created when we write on the {@link
    * AbstractTripleStore}.
@@ -66,7 +66,7 @@ public class TestAxioms extends AbstractTripleStoreTestCase {
     new NoAxioms(getName());
   }
 
-  /**
+  /*
    * Unit test of the constructors for the axiom classes. This does not test serialization because
    * that uses {@link SPO} objects which are only created when we write on the {@link
    * AbstractTripleStore}.
@@ -306,7 +306,7 @@ public class TestAxioms extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test (de-)serialization of an axioms model.
    *
    * @return The de-serialized axioms.

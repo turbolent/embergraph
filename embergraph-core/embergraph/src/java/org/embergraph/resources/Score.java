@@ -26,8 +26,8 @@ package org.embergraph.resources;
 import java.util.Comparator;
 import org.embergraph.btree.BTreeCounters;
 
-/**
- * Helper class assigns a raw and a normalized score to each index based on its per-index {@link
+/*
+* Helper class assigns a raw and a normalized score to each index based on its per-index {@link
  * BTreeCounters} and on the global (non-restart safe) {@link BTreeCounters} for the data service
  * during the life cycle of the last journal.
  *
@@ -84,7 +84,7 @@ class Score implements Comparable<Score> {
     score = BTreeCounters.normalize(rawScore, totalRawScore);
   }
 
-  /**
+  /*
    * Places elements into order by ascending {@link #rawScore}. The {@link #name} is used to break
    * any ties.
    */
@@ -102,7 +102,7 @@ class Score implements Comparable<Score> {
     return name.compareTo(arg0.name);
   }
 
-  /**
+  /*
    * Places {@link Score} into ascending order (lowest score to highest score). Ties are broken
    * based on an alpha sort of the index name.
    *
@@ -126,7 +126,7 @@ class Score implements Comparable<Score> {
     }
   }
 
-  /**
+  /*
    * Places {@link Score} into descending order (highest score to lowest score). Ties are broken
    * based on an alpha sort of the index name.
    *

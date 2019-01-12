@@ -57,8 +57,8 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.ext.EntityResolver2;
 
-/**
- * A harness for running comparison of different configurations.
+/*
+* A harness for running comparison of different configurations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -76,7 +76,7 @@ public class ExperimentDriver {
     /** */
     private static final long serialVersionUID = 5726970069639981728L;
 
-    /**
+    /*
      * Converts an exception into a result containing an "Error" column having {@link
      * Throwable#getMessage()} as its value and a "StackTrace" colukn and having the stack trace
      * (with newlines replaced by ";" and carrige returns and tabs removed) as its value.
@@ -109,7 +109,7 @@ public class ExperimentDriver {
       return toString(false);
     }
 
-    /**
+    /*
      * Converts to a human readable representation using {name=value, ...}. The attributes are
      * listed in sorted order.
      */
@@ -139,39 +139,39 @@ public class ExperimentDriver {
     }
   }
 
-  /**
+  /*
    * Interface for tests that can be run by {@link ExperimentDriver}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface IComparisonTest {
+  public interface IComparisonTest {
 
-    /**
+    /*
      * ala JUnit, but allows us to run {@link org.embergraph.journal.ProxyTestCase}s as well.
      *
      * @param properties May be used to configure the test fixture.
      * @throws Exception
      */
-    public void setUpComparisonTest(Properties properties) throws Exception;
+    void setUpComparisonTest(Properties properties) throws Exception;
 
-    /**
+    /*
      * Run a test.
      *
      * @param properties The properties used to configure the test.
      * @return The test result to report.
      */
-    public Result doComparisonTest(Properties properties) throws Exception;
+    Result doComparisonTest(Properties properties) throws Exception;
 
-    /**
+    /*
      * ala JUnit, but allows us to run {@link org.embergraph.journal.ProxyTestCase}s as well.
      *
      * @throws Exception
      */
-    public void tearDownComparisonTest() throws Exception;
+    void tearDownComparisonTest() throws Exception;
   }
 
-  /**
+  /*
    * Converts a map to human readable representation using a tab delimited format. The attributes
    * are listed in order by the given column names. If an attribute is not present then an empty
    * cell is output.
@@ -236,7 +236,7 @@ public class ExperimentDriver {
     return sb.toString();
   }
 
-  /**
+  /*
    * An experimental condition.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -268,7 +268,7 @@ public class ExperimentDriver {
     }
   }
 
-  /**
+  /*
    * Accepts a list of conditions and an array of NV[]s and returns a new list of conditions in each
    * original condition has been expanded into N new conditions, one per element of the NV[]s array.
    * This can be used to systematically build up hypercubes in the experimental design that can then
@@ -303,7 +303,7 @@ public class ExperimentDriver {
     return ret;
   }
 
-  /**
+  /*
    * Variant that allows multiple factors to vary at a time.
    *
    * @param conditions
@@ -338,7 +338,7 @@ public class ExperimentDriver {
     return ret;
   }
 
-  /**
+  /*
    * Returns a list that contains N copies of the original conditions.
    *
    * @param nruns The #of copies to make.
@@ -360,7 +360,7 @@ public class ExperimentDriver {
     return ret;
   }
 
-  /**
+  /*
    * Randomize the conditions.
    *
    * @param conditions
@@ -383,7 +383,7 @@ public class ExperimentDriver {
     return ret;
   }
 
-  /**
+  /*
    * Models an experiment.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -490,8 +490,8 @@ public class ExperimentDriver {
           }
         }
 
-        /*
-         * Write out results when they are available.
+      /*
+       * Write out results when they are available.
          */
         if (cond.result != null) {
 
@@ -516,7 +516,7 @@ public class ExperimentDriver {
       return sb.toString();
     }
 
-    /**
+    /*
      * Run the experiment, writing the results onto a CSV file.
      *
      * @param randomize When true, the {@link Condition}s will be executed in a random ordering.
@@ -635,8 +635,8 @@ public class ExperimentDriver {
 
       } finally {
 
-        /*
-         * Always write the summary onto the file.
+      /*
+       * Always write the summary onto the file.
          */
 
         if (exists) {
@@ -647,8 +647,8 @@ public class ExperimentDriver {
 
         writer.write("Run: " + new Date(runStartTime) + "\n\n");
 
-        /*
-         * Collect the distinct condition and result columns.
+      /*
+       * Collect the distinct condition and result columns.
          *
          * Note: This extracts all columns whose values are constants
          * for a given run and write them out once at the top of the
@@ -729,8 +729,8 @@ public class ExperimentDriver {
             first = false;
           }
 
-          /*
-           * Remove column headings that were identified as invariants.
+        /*
+       * Remove column headings that were identified as invariants.
            */
           {
             Iterator<Object> itr2 = invariants.keySet().iterator();
@@ -746,8 +746,8 @@ public class ExperimentDriver {
           }
         }
 
-        /*
-         * Write out the invariants across the runs.
+      /*
+       * Write out the invariants across the runs.
          */
         {
           writer.write("Invariants:\n");
@@ -850,7 +850,7 @@ public class ExperimentDriver {
     }
   }
 
-  /**
+  /*
    * Helper class for validating {@link Experiment} documents.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -865,14 +865,14 @@ public class ExperimentDriver {
     /** The name of the file containing the DTD (without any path information). */
     public static final String SYSTEM_EXPERIMENT_FILENAME_0_1 = "Experiment.dtd";
 
-    //        /**
-    //         * The Java resource containing the inline-mention-form DTD, version
+    //        /*
+//         * The Java resource containing the inline-mention-form DTD, version
     //         * 0.1.
     //         */
     //        public static final String SYSTEM_EXPERIMENT_RESOURCE_0_1 = "org/embergraph/journal/"
     //                + SYSTEM_EXPERIMENT_FILENAME_0_1;
 
-    /**
+    /*
      * Validate an inline-mention-form document against a DTD.
      *
      * @param source The source from which the document will be read.
@@ -936,7 +936,7 @@ public class ExperimentDriver {
       log.warn(e);
     }
 
-    /**
+    /*
      * Re-throws exception in order to cause a validation error to halt processing (the default
      * behavior ignores errors).
      */
@@ -946,7 +946,7 @@ public class ExperimentDriver {
     }
   }
 
-  /**
+  /*
    * Parses an XML representation of an {@link Experiment}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1065,7 +1065,7 @@ public class ExperimentDriver {
     }
   }
 
-  /**
+  /*
    * Return a {@link Properties} object that inherits defaults from <i>properties</i> and
    * sets/overrides properties identified in <i>entries</i>.
    *
@@ -1086,7 +1086,7 @@ public class ExperimentDriver {
     return new Condition(properties);
   }
 
-  /**
+  /*
    * Runs a comparison of various an {@link IComparisonTest} under various conditions and writes a
    * CSV representation of the reported results.
    *
@@ -1118,7 +1118,7 @@ public class ExperimentDriver {
     doMain(new File(args[0]), nruns, randomize);
   }
 
-  /**
+  /*
    * Run an experiment.
    *
    * @param file The file describing the experiment.
@@ -1133,7 +1133,7 @@ public class ExperimentDriver {
     exp.run(randomize, nruns);
   }
 
-  /**
+  /*
    * Filter the system properties to report only those that are interesting summaries of the
    * execution environment.
    */

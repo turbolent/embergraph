@@ -38,8 +38,8 @@ import java.util.NoSuchElementException;
 import java.util.TreeMap;
 import org.apache.log4j.Logger;
 
-/**
- * A helper class to read CSV (comma separated value) and similar kinds of delimited data. Files may
+/*
+* A helper class to read CSV (comma separated value) and similar kinds of delimited data. Files may
  * use commas or tabs to delimit columns. If you have to parse other kinds of delimited data then
  * you should override {@link #split(String)}.
  *
@@ -65,7 +65,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
   /** The #of characters to buffer in the reader. */
   protected static final int BUF_SIZE = Bytes.kilobyte32 * 20;
 
-  /**
+  /*
    * A header for a column that examines its values and interprets them as floating point numbers,
    * integers, dates, or times when possible and as uninterpreted character data otherwise.
    *
@@ -81,7 +81,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
       return name;
     }
 
-    /**
+    /*
      * An array of formats to be tested against the column values. The order in the array is the
      * order in which the formats are tested.
      *
@@ -122,8 +122,8 @@ public class CSVReader implements Iterator<Map<String, Object>> {
             NumberFormat.getPercentInstance(),
             NumberFormat.getNumberInstance(),
 
-            /*
-             * Note: There are no factory methods for formats that
+          /*
+       * Note: There are no factory methods for formats that
              * handle exponents. I've put a few in here, but there may
              * very well be other examples that will still not be parsed
              * correctly.
@@ -147,7 +147,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
       this.name = name;
     }
 
-    /**
+    /*
      * Attempts to interpret the character data as a date/time, currency, percentage, floating point
      * value, or integer. If the text can not be interpreted as any of those formats then it returns
      * the uninterpreted character data.
@@ -226,7 +226,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
   /** The source. */
   protected final BufferedReader r;
 
-  /**
+  /*
    * The current line. Set to null initially and by {@link #next()}. Set to non-null by {@link
    * #hasNext()} when testing for more lines or by {@link #next()} when attempting to read the next
    * line.
@@ -236,7 +236,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
   /** The current line # (origin one). */
   private int lineNo = 0;
 
-  /**
+  /*
    * Set to true when {@link BufferedReader#readLine()} returns false indicating that no more data
    * may be read from the source.
    */
@@ -250,7 +250,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
 
   private long tailDelayMillis = 0L;
 
-  /**
+  /*
    * The header definitions (initially null).
    *
    * @see #readHeaders()
@@ -322,7 +322,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     return trimWhitespace;
   }
 
-  /**
+  /*
    * The #of milliseconds that the {@link CSVReader} should wait before attempting to read another
    * line from the source (when reading from a pipe) -or- 0L if the {@link CSVReader} should NOT
    * continue reading once it has reached the end of the input (default 0L).
@@ -369,8 +369,8 @@ public class CSVReader implements Iterator<Map<String, Object>> {
         }
 
         while (tailDelayMillis != 0L && !r.ready()) {
-          /*
-           * Wait until more data is available.
+        /*
+       * Wait until more data is available.
            *
            * @todo may have to wait until a newline is available, or
            * just incrementally buffer until we have a full line of
@@ -424,7 +424,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     return map;
   }
 
-  /**
+  /*
    * Split the line into columns based on tabs or commas.
    *
    * @param line The line.
@@ -438,7 +438,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     return cols;
   }
 
-  /**
+  /*
    * Trim whitespace and optional quotes from each value iff {@link #getTrimWhitespace()} is true.
    *
    * @param cols The column values.
@@ -468,7 +468,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     return cols;
   }
 
-  /**
+  /*
    * Parse the line into column values. If no headers have been defined then default headers are
    * automatically using {@link #setDefaultHeaders(int)}.
    *
@@ -503,7 +503,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     return map;
   }
 
-  /**
+  /*
    * Creates default headers named by the origin ONE column indices {1,2,3,4,...}.
    *
    * @param ncols The #of columns.
@@ -520,7 +520,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     this.headers = headers;
   }
 
-  /**
+  /*
    * Parse a line containing headers.
    *
    * @param line The line.
@@ -540,7 +540,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     return headers;
   }
 
-  /**
+  /*
    * Interpret the next row as containing headers.
    *
    * @throws IOException
@@ -562,7 +562,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     return headers.clone();
   }
 
-  /**
+  /*
    * Explictly set the headers.
    *
    * @param headers The headers.
@@ -574,7 +574,7 @@ public class CSVReader implements Iterator<Map<String, Object>> {
     this.headers = headers;
   }
 
-  /**
+  /*
    * Re-define the {@link Header} at the specified index.
    *
    * @param index The index in [0:#headers-1].

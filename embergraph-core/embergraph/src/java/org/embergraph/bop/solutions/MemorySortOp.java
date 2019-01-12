@@ -21,8 +21,8 @@ import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * An in-memory merge sort for binding sets. The operator is pipelined. Each time it runs, it
+/*
+* An in-memory merge sort for binding sets. The operator is pipelined. Each time it runs, it
  * evaluates the value expressions on which the ordering will be imposed, binding the results on the
  * incoming solutions and buffers the as-bound solution for eventual sorting. The sort is applied
  * only once the last chunk of source solutions has been observed.
@@ -122,7 +122,7 @@ public class MemorySortOp extends SortOp {
 
     private final ISortOrder<?>[] sortOrder;
 
-    /**
+    /*
      * The {@link IQueryAttributes} for the {@link IRunningQuery} off which we will hang the named
      * solution set.
      */
@@ -131,7 +131,7 @@ public class MemorySortOp extends SortOp {
     /** The solutions. A reference to this object is stored on the {@link IQueryAttributes}. */
     private transient LinkedList<IBindingSet> solutions;
 
-    /**
+    /*
      * The name of the key under which the {@link #solutions} are stored in the {@link
      * IQueryAttributes}.
      */
@@ -210,7 +210,7 @@ public class MemorySortOp extends SortOp {
       return null;
     }
 
-    /**
+    /*
      * Evaluate the value expressions for each input solution, drop any solution for which there is
      * a type error, and buffer the as-bound solutions.
      *
@@ -236,8 +236,8 @@ public class MemorySortOp extends SortOp {
 
               for (ISortOrder<?> s : sortOrder) {
 
-                /*
-                 * Evaluate. A BIND() will have side-effect on
+              /*
+       * Evaluate. A BIND() will have side-effect on
                  * [bset].
                  */
                 (expr = s.getExpr()).get(bset);
@@ -273,7 +273,7 @@ public class MemorySortOp extends SortOp {
       }
     } // acceptSolutions
 
-    /**
+    /*
      * Sort the solutions based on the as-bound value expressions.
      *
      * @param sink Where to write the results.

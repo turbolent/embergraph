@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast.hints;
 import org.embergraph.bop.BufferAnnotations;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
-/**
- * This is identical to the {@link BufferChunkCapacityHint}, but it is accessed through the well
+/*
+* This is identical to the {@link BufferChunkCapacityHint}, but it is accessed through the well
  * known name {@link QueryHints#CHUNK_SIZE}.
  *
  * <p>Sets the capacity of the output buffer that used to accumulate chunks of solutions (default

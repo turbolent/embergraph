@@ -53,8 +53,8 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnectionTest;
 
-/**
- * Embergraph uses snapshot isolation for transactions while openrdf assumes that any writes
+/*
+* Embergraph uses snapshot isolation for transactions while openrdf assumes that any writes
  * committed by a transaction become immediately visible to transactions which are already running.
  * Several unit tests from the base class have to be overridden embergraph has stronger semantics
  * for transactional isolation.
@@ -65,8 +65,8 @@ import org.openrdf.repository.RepositoryConnectionTest;
  */
 public class EmbergraphConnectionTest extends RepositoryConnectionTest {
 
-  //    /**
-  //     * When <code>true</code>, the unit tests for setDataset() with SPARQL
+  //    /*
+//     * When <code>true</code>, the unit tests for setDataset() with SPARQL
   //     * UPDATE are enabled.
   //     *
   //     * FIXME setDataset() does not work correctly for UPDATE
@@ -104,8 +104,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
     super(name);
   }
 
-  //    /**
-  //     * Return a test suite using the {@link LocalTripleStore} and pipeline
+  //    /*
+//     * Return a test suite using the {@link LocalTripleStore} and pipeline
   //     * joins.
   //     */
   //    public static class LTSWithPipelineJoins extends EmbergraphConnectionTest {
@@ -226,8 +226,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
     }
   }
   //
-  //    /**
-  //	 * This test has been overridden because Sesame assumes "read-committed"
+  //    /*
+//	 * This test has been overridden because Sesame assumes "read-committed"
   //	 * transaction semantics while bidata uses snapshot isolation for its
   //	 * transactions.
   //	 */
@@ -249,8 +249,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   //		assertTrue(testCon2.isEmpty()); // Yes. This is snapshot isolation semantics.
   //    }
   //
-  //	/**
-  //	 * This test has been overridden because Sesame assumes "read-committed"
+  //	/*
+//	 * This test has been overridden because Sesame assumes "read-committed"
   //	 * transaction semantics while bidata uses snapshot isolation for its
   //	 * transactions.
   //	 */
@@ -275,8 +275,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   //		assertEquals(0, testCon2.size()); // Yes. snapshot isolation.
   //    }
   //
-  //	/**
-  //	 * This test has been overridden because Sesame assumes "read-committed"
+  //	/*
+//	 * This test has been overridden because Sesame assumes "read-committed"
   //	 * transaction semantics while bidata uses snapshot isolation for its
   //	 * transactions.
   //	 */
@@ -303,8 +303,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   //
   //    }
   //
-  ////    /**
-  ////     * Copied into the local test suite unchanged in order to debug with this
+  ////    /*
+////     * Copied into the local test suite unchanged in order to debug with this
   ////     * test.
   ////     */
   ////    @Override
@@ -316,8 +316,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   ////        assertTrue(testCon2.isOpen());
   ////    }
   //
-  //    /**
-  //     * Modified to test SPARQL instead of Serql.
+  //    /*
+//     * Modified to test SPARQL instead of Serql.
   //     */
   //    @Override
   //	public void testSimpleTupleQuery()
@@ -369,8 +369,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   //		}
   //	}
   //
-  //    /**
-  //     * This is a test of simply preparing a SeRQL query into a TupleExpr, no
+  //    /*
+//     * This is a test of simply preparing a SeRQL query into a TupleExpr, no
   //     * data, no evaluation.  Since we don't support SeRQL anymore, it does
   //     * not seem worthwhile to port this one.
   //     */
@@ -380,8 +380,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   //	{
   //	}
   //
-  //    /**
-  //     * Modified to test SPARQL instead of Serql.
+  //    /*
+//     * Modified to test SPARQL instead of Serql.
   //     */
   //	public void testSimpleTupleQueryUnicode()
   //		throws Exception
@@ -422,8 +422,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   // */
   //	}
   //
-  //    /**
-  //     * Modified to test SPARQL instead of Serql.
+  //    /*
+//     * Modified to test SPARQL instead of Serql.
   //     */
   //	public void testPreparedTupleQuery()
   //		throws Exception
@@ -474,8 +474,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   //		}
   //	}
   //
-  //    /**
-  //     * Modified to test SPARQL instead of Serql.
+  //    /*
+//     * Modified to test SPARQL instead of Serql.
   //     */
   //	public void testPreparedTupleQuery2()
   //		throws Exception
@@ -527,8 +527,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   //		}
   //	}
   //
-  //    /**
-  //     * Modified to test SPARQL instead of Serql.
+  //    /*
+//     * Modified to test SPARQL instead of Serql.
   //     */
   //	public void testPreparedTupleQueryUnicode()
   //		throws Exception
@@ -569,8 +569,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   // */
   //	}
   //
-  //    /**
-  //     * Modified to test SPARQL instead of Serql.
+  //    /*
+//     * Modified to test SPARQL instead of Serql.
   //     */
   //	public void testSimpleGraphQuery()
   //		throws Exception
@@ -619,8 +619,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   //		}
   //	}
   //
-  //    /**
-  //     * Modified to test SPARQL instead of Serql.
+  //    /*
+//     * Modified to test SPARQL instead of Serql.
   //     */
   //	public void testPreparedGraphQuery()
   //		throws Exception
@@ -673,7 +673,7 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
   //		}
   //	}
   //
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This test was failing historically for two reasons. First, it would sometimes encounter a
@@ -702,9 +702,9 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
 
     final Class cls2 = Class.forName("com.sun.management.GcInfo");
 
-    final Method method1 = cls1.getMethod("getLastGcInfo", new Class[] {});
+    final Method method1 = cls1.getMethod("getLastGcInfo");
 
-    final Method method2 = cls2.getMethod("getDuration", new Class[] {});
+    final Method method2 = cls2.getMethod("getDuration");
 
     /*
      * Load data.
@@ -764,8 +764,8 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
               ManagementFactory.getGarbageCollectorMXBeans();
 
           for (GarbageCollectorMXBean m : mbeans) {
-            /*
-             * Note: This relies on a sun specific interface.
+          /*
+       * Note: This relies on a sun specific interface.
              *
              * Note: This test is not strickly diagnostic. We should
              * really be comparing the full GC time since we started
@@ -775,7 +775,7 @@ public class EmbergraphConnectionTest extends RepositoryConnectionTest {
              */
             if (cls1.isAssignableFrom(m.getClass())) {
               // Information from the last GC.
-              final Object lastGcInfo = method1.invoke(m, new Object[] {});
+              final Object lastGcInfo = method1.invoke(m);
               // Duration of that last GC.
               final long lastDuration = (Long) method2.invoke(lastGcInfo, new Object[] {});
               if (lastDuration >= MAX_QUERY_TIME) {

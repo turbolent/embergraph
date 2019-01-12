@@ -32,8 +32,8 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 
-/**
- * A factory for named {@link ReadWriteLock}s. A simple {@link ReadWriteLock} manages access to a
+/*
+* A factory for named {@link ReadWriteLock}s. A simple {@link ReadWriteLock} manages access to a
  * single resource. However, a {@link NamedReadWriteLock} manages access to the members of a set of
  * named resources. This is more efficient when the latency of the operation once the lock is
  * acquired is significant, e.g., an RMI call or a disk IO.
@@ -50,7 +50,7 @@ public class NamedReadWriteLock<T> {
 
   private final Map<T, ReentrantReadWriteLock> locks = new WeakHashMap<T, ReentrantReadWriteLock>();
 
-  /**
+  /*
    * Return the canonical instance of the lock for a named resource.
    *
    * @param name The name.
@@ -76,7 +76,7 @@ public class NamedReadWriteLock<T> {
     return lock;
   }
 
-  /**
+  /*
    * Block until the {@link ReadLock} for the named resource is available, then {@link Lock#lock()}
    * the {@link Lock} and returns the {@link Lock}.
    *

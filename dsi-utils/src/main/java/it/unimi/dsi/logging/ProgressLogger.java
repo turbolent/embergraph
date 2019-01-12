@@ -25,8 +25,8 @@ import it.unimi.dsi.Util;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-/**
- * Tunable progress logger.
+/*
+* Tunable progress logger.
  *
  * <p>This class provides a simple way to log progress information about long-lasting activities.
  *
@@ -105,14 +105,14 @@ public final class ProgressLogger {
   public Level priority = Level.INFO;
   /** The time interval for a new log in milliseconds. */
   public long logInterval;
-  /**
+  /*
    * Unused.
    *
    * @deprecated Replaced by {@link #log2Modulus}, which avoids the very slow modulus operator at
    *     each {@link #lightUpdate()} call.
    */
   @Deprecated public int modulus = 1000;
-  /**
+  /*
    * If nonzero, calls to {@link #lightUpdate()} will cause a call to {@link
    * System#currentTimeMillis()} only if the current value of {@link #count} is a multiple of 2
    * raised to this power.
@@ -122,7 +122,7 @@ public final class ProgressLogger {
   public Object info;
   /** The number of calls to {@link #update()} since the last {@link #start()}. */
   public long count;
-  /**
+  /*
    * The number of expected calls to {@link #update()} (used to compute the percentages, ignored if
    * negative).
    */
@@ -139,7 +139,7 @@ public final class ProgressLogger {
   /** The time of the last log. */
   private long lastLog;
 
-  /**
+  /*
    * Creates a new progress logger using <samp>items</samp> as items name and logging every {@link
    * #DEFAULT_LOG_INTERVAL} milliseconds with to the {@linkplain Logger#getRootLogger() root
    * logger}.
@@ -148,7 +148,7 @@ public final class ProgressLogger {
     this(Logger.getRootLogger());
   }
 
-  /**
+  /*
    * Creates a new progress logger using <samp>items</samp> as items name and logging every {@link
    * #DEFAULT_LOG_INTERVAL} milliseconds.
    *
@@ -158,7 +158,7 @@ public final class ProgressLogger {
     this(logger, DEFAULT_LOG_INTERVAL);
   }
 
-  /**
+  /*
    * Creates a new progress logger logging every {@link #DEFAULT_LOG_INTERVAL} milliseconds.
    *
    * @param logger the logger to which messages will be sent.
@@ -168,7 +168,7 @@ public final class ProgressLogger {
     this(logger, DEFAULT_LOG_INTERVAL, itemsName);
   }
 
-  /**
+  /*
    * Creates a new progress logger using <samp>items</samp> as items name.
    *
    * @param logger the logger to which messages will be sent.
@@ -178,7 +178,7 @@ public final class ProgressLogger {
     this(logger, logInterval, "items");
   }
 
-  /**
+  /*
    * Creates a new progress logger.
    *
    * @param logger the logger to which messages will be sent.
@@ -192,7 +192,7 @@ public final class ProgressLogger {
     this.expectedUpdates = -1;
   }
 
-  /**
+  /*
    * Updates the progress logger.
    *
    * <p>This call updates the progress logger internal count. If enough time has passed since the
@@ -255,7 +255,7 @@ public final class ProgressLogger {
     return;
   }
 
-  /**
+  /*
    * Updates the progress logger in a lightweight fashion.
    *
    * <p>This call updates the progress logger internal counter as {@link #update()}. However, it
@@ -272,7 +272,7 @@ public final class ProgressLogger {
         && System.currentTimeMillis() - lastLog >= logInterval) updateInternal();
   }
 
-  /**
+  /*
    * Starts the progress logger, displaying a message and resetting the count.
    *
    * @param message the message to display.
@@ -289,7 +289,7 @@ public final class ProgressLogger {
     start(null);
   }
 
-  /**
+  /*
    * Stops the progress logger, displaying a message.
    *
    * <p>This method will also mark {@link #expectedUpdates} as invalid, to avoid erroneous reuses of
@@ -309,7 +309,7 @@ public final class ProgressLogger {
     stop(null);
   }
 
-  /**
+  /*
    * Completes a run of this progress logger, logging <samp>Completed&#46;</samp> and the logger
    * itself.
    */
@@ -318,7 +318,7 @@ public final class ProgressLogger {
     logger.log(priority, this);
   }
 
-  /**
+  /*
    * Returns the number of milliseconds between present time and the last call to {@link #start()},
    * if this progress logger is running, or between the last call to {@link #stop()} and the last
    * call to {@link #start()}, if this progress logger is stopped.
@@ -342,7 +342,7 @@ public final class ProgressLogger {
     return h + "h " + m + "m " + s + "s";
   }
 
-  /**
+  /*
    * Converts the data stored in this progress logger to a string.
    *
    * @return the data in this progress logger in a printable form.

@@ -40,8 +40,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Test suite for registering and evaluating custom functions.
+/*
+* Test suite for registering and evaluating custom functions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -59,7 +59,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for a simple custom function extending {@link AbstractLiteralBOp}, including access
    * to the {@link ILexiconConfiguration}.
    */
@@ -98,7 +98,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for a simple custom function extending {@link XSDBooleanIVValueExpression}, including
    * access to the {@link ILexiconConfiguration}.
    */
@@ -138,7 +138,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * This is a variant of {@link #test_custom_function_1()} where the function is evaluated against
    * a constant.
    */
@@ -167,7 +167,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
     /** */
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      *
      * @param op
@@ -176,7 +176,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
       super(op);
     }
 
-    /**
+    /*
      * Required shallow copy constructor.
      *
      * @param args The function arguments.
@@ -186,7 +186,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
       super(args, anns);
     }
 
-    /**
+    /*
      * @param x The function argument.
      * @param lex The namespace of the lexicon relation.
      */
@@ -244,7 +244,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
     /** */
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      *
      * @param op
@@ -253,7 +253,7 @@ public class TestCustomFunction extends AbstractDataDrivenSPARQLTestCase {
       super(op);
     }
 
-    /**
+    /*
      * Required shallow copy constructor.
      *
      * @param args The function arguments.

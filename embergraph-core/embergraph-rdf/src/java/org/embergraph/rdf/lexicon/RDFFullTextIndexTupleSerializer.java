@@ -46,8 +46,8 @@ import org.embergraph.search.ReadOnlyTermDocRecord;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Replaces the {@link FullTextIndexTupleSerializer} to support {@link IV}s as document identifiers.
+/*
+* Replaces the {@link FullTextIndexTupleSerializer} to support {@link IV}s as document identifiers.
  *
  * <p>Since {@link IV}s have a variable length encoding we have to indicate the length of the {@link
  * IV} either in the key or the value of the {@link ITuple} . I've put this information into the
@@ -73,7 +73,7 @@ public class RDFFullTextIndexTupleSerializer
   //        return doublePrecision;
   //    }
 
-  /**
+  /*
    * Used to serialize the values for the tuples in the index.
    *
    * <p>Note: While this object is not thread-safe, the mutable B+Tree is restricted to a single
@@ -84,7 +84,7 @@ public class RDFFullTextIndexTupleSerializer
   /** De-serialization constructor. */
   public RDFFullTextIndexTupleSerializer() {}
 
-  /**
+  /*
    * @param keyBuilderFactory This factory governs the Unicode collation order that will be imposed
    *     on the indexed tokens.
    * @param leafKeysCoder The coder used for the leaf keys (prefix coding is fine).
@@ -151,7 +151,7 @@ public class RDFFullTextIndexTupleSerializer
   @Override
   public byte[] serializeVal(final ITermDocVal obj) {
 
-    final ITermDocVal val = (ITermDocVal) obj;
+    final ITermDocVal val = obj;
 
     if (log.isDebugEnabled()) {
       log.debug(val);
@@ -216,7 +216,7 @@ public class RDFFullTextIndexTupleSerializer
     final int docIdOffset = kbuf.limit() - byteLength;
 
     // Decode the IV.
-    final IV docId = (IV) IVUtility.decodeFromOffset(kbuf.array(), docIdOffset);
+    final IV docId = IVUtility.decodeFromOffset(kbuf.array(), docIdOffset);
 
     final int termWeightOffset = docIdOffset - Bytes.SIZEOF_BYTE;
 

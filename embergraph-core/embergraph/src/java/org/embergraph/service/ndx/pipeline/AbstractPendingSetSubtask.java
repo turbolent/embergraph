@@ -34,8 +34,8 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.service.IRemoteExecutor;
 import org.embergraph.service.master.IAsynchronousClientTask;
 
-/**
- * Extended to assign chunks of work items to a remote {@link IAsynchronousClientTask}, to track the
+/*
+* Extended to assign chunks of work items to a remote {@link IAsynchronousClientTask}, to track the
  * set of outstanding asynchronous operations for a specific client task (the "pending set"), and to
  * close the client task when the sink not assign any more work to that client.
  *
@@ -62,7 +62,7 @@ public abstract class AbstractPendingSetSubtask<
   /** Condition signaled when the {@link #pendingSet} is empty. */
   private final Condition pendingSetEmpty = lock.newCondition();
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @param clientTask The proxy for the remote client task.
@@ -152,7 +152,7 @@ public abstract class AbstractPendingSetSubtask<
     }
   }
 
-  /**
+  /*
    * Submits the chunk of resources for processing by the remote client task. Clients should accept
    * resources for asynchronous processing, notifying the sink as resources succeed or fail.
    *
@@ -267,7 +267,7 @@ public abstract class AbstractPendingSetSubtask<
     }
   }
 
-  /**
+  /*
    * @todo This should handle the redirect of the pendingSet if the remote client task dies. To be
    *     robust, we need to notice client death even if it occurs when we are not invoking
    *     client#accept(chunk). Doing that will require some changes to the logic in this class,

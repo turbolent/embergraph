@@ -28,7 +28,7 @@ import java.io.IOException;
 /** Decoding methods for a specific compression technique. */
 public interface Decoder {
 
-  /**
+  /*
    * Decodes the next symbol from the given boolean iterator.
    *
    * <p>Note that {@link InputBitStream} implements {@link BooleanIterator}.
@@ -40,7 +40,7 @@ public interface Decoder {
    */
   int decode(BooleanIterator iterator);
 
-  /**
+  /*
    * Decodes the next symbol from the given input bit stream.
    *
    * <p>Note that {@link InputBitStream} implements {@link BooleanIterator}.

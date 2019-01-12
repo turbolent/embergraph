@@ -38,8 +38,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Default implementation for immutable {@link INodeData} records.
+/*
+* Default implementation for immutable {@link INodeData} records.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -54,7 +54,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
   /** */
   private static final long serialVersionUID = 3998574101917337169L;
 
-  /**
+  /*
    * The initial version of the serialized representation of the {@link DefaultNodeCoder} class
    * (versus the serializer representation of the node or leaf).
    */
@@ -237,8 +237,8 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
         final long nchildren = node.getChildEntryCount(i);
         sum += nchildren;
         if (nchildren < 0) {
-          /*
-           * Note: ZERO is permitted for a test case, but is not legal
+        /*
+       * Note: ZERO is permitted for a test case, but is not legal
            * in live data.
            */
           throw new RuntimeException();
@@ -258,7 +258,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
       final byte nbits = (byte) (Fast.mostSignificantBit(delta) + 1);
 
       // one byte.
-      buf.putByte((byte) nbits);
+      buf.putByte(nbits);
 
       // offset of minVersionTimestamp.
       //            O_versionTimestamps = buf.pos();
@@ -270,8 +270,8 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
       //            buf.putLong(max);
 
       if (nbits > 0) {
-        /*
-         * Note: We only write the deltas if
+      /*
+       * Note: We only write the deltas if
          * (min!=max). When min==max, the
          * deltas are coded in zero bits, so this would be a NOP anyway.
          */
@@ -329,7 +329,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
     return encodeLive(node, buf).data();
   }
 
-  /**
+  /*
    * A read-only view of the data for a B+Tree node.
    *
    * <p>Note: The leading byte of the record format codes for a leaf, a double-linked leaf or a node
@@ -361,7 +361,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
     /** Offset of the encoded childAddr[] in the buffer. */
     private final int O_childAddr;
 
-    /**
+    /*
      * Offset of the encoded childEntryCount[] in the buffer.
      *
      * <p>TODO Compute at runtime to save space as <code>O_childAddr + (nkeys + 1) * SIZEOF_ADDR
@@ -380,7 +380,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
       return b;
     }
 
-    /**
+    /*
      * Constructor used when the caller is encoding the {@link INodeData}.
      *
      * @param buf The buffer containing the data for the node.
@@ -432,8 +432,8 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
         pos += Bytes.SIZEOF_LONG;
       }
       if (nentries < 0) {
-        /*
-         * Note: ZERO (0) is permitted for a test case but is not legal
+      /*
+       * Note: ZERO (0) is permitted for a test case but is not legal
          * in live data.
          */
         throw new RuntimeException();
@@ -467,7 +467,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
       this.b = buf;
     }
 
-    /**
+    /*
      * Decode in place (wraps a buffer containing an encoded node data record).
      *
      * @param buf The buffer containing the data for the node.
@@ -518,8 +518,8 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
         pos += Bytes.SIZEOF_LONG;
       }
       if (nentries < 0) {
-        /*
-         * Note: ZERO (0) is allowed for a unit test, but it is not
+      /*
+       * Note: ZERO (0) is allowed for a unit test, but it is not
          * legal in live data.
          */
         throw new RuntimeException();
@@ -553,7 +553,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
       this.b = buf;
     }
 
-    /**
+    /*
      * The offset into the buffer of the minimum version timestamp, which is an int64 field. The
      * maximum version timestamp is the next field. This offset is computed dynamically to keep down
      * the size of the node object in memory.
@@ -650,7 +650,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
       return nentries;
     }
 
-    /**
+    /*
      * Bounds check.
      *
      * @throws IndexOutOfBoundsException if <i>index</i> is LT ZERO (0)
@@ -746,7 +746,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
     }
   }
 
-  /**
+  /*
    * Utility method formats the {@link INodeData}.
    *
    * @param node A node data record.
@@ -852,7 +852,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
 //
 //    }
 //
-//    /**
+//    /*
 //     * Write out a packed array of the #of entries spanned by each child of some
 //     * node.
 //     *
@@ -893,7 +893,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
 //
 //    }
 //
-//    /**
+//    /*
 //     * Read in a packed array of the #of entries spanned by each child of some
 //     * node.
 //     *

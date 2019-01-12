@@ -48,8 +48,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.sparql.ast.AssignmentNode;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * A vectored operator that resolves variables bound to mocked terms in binding sets through a
+/*
+* A vectored operator that resolves variables bound to mocked terms in binding sets through a
  * dictionary join. This may be necessary when having {@link AssignmentNode} inside queries; these
  * construct fresh values, which are mocked in a first step. Whenever these values are used later in
  * the query, e.g. by joining such a mock URI with a statement pattern, they need to be resolved to
@@ -67,7 +67,7 @@ public class MockTermResolverOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * The {@link IVariable}[] identifying the variables for which the referenced values in binding
      * sets are joined with the dictionary (whenever they are bound to mocked IDs). be materialized.
      * When <code>null</code> or not specified, ALL variables will be materialized. This may not be
@@ -80,7 +80,7 @@ public class MockTermResolverOp extends PipelineOp {
     String TIMESTAMP = Predicate.Annotations.TIMESTAMP;
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -107,7 +107,7 @@ public class MockTermResolverOp extends PipelineOp {
     this(args, NV.asMap(annotations));
   }
 
-  /**
+  /*
    * @param vars The variables for which to resolve mocked IVs. Resolving is only attempted for
    *     those variables which are actually bound in given solution.
    * @param namespace The namespace of the {@link LexiconRelation}.
@@ -122,7 +122,7 @@ public class MockTermResolverOp extends PipelineOp {
         new NV(Annotations.TIMESTAMP, timestamp));
   }
 
-  /**
+  /*
    * Return the variables for which mocked IVs are resolved.
    *
    * @return The variables for which mocked IDs shall be resolved -or- <code>null</code> iff all
@@ -200,7 +200,7 @@ public class MockTermResolverOp extends PipelineOp {
     }
   } // ChunkTask
 
-  /**
+  /*
    * Resolve a chunk of {@link IBindingSet}s into a chunk of {@link IBindingSet}s in which {@link
    * IV}s have been resolved to {@link EmbergraphValue}s.
    *
@@ -223,7 +223,7 @@ public class MockTermResolverOp extends PipelineOp {
             ? chunk.length
             : ((required.length == 0) ? 1 : chunk.length * required.length);
 
-    /**
+    /*
      * Collected affected IVs, storing them in a map pointing from the IV to the associated
      * EmbergraphValue.
      */
@@ -254,8 +254,8 @@ public class MockTermResolverOp extends PipelineOp {
             throw new RuntimeException("NULL? : var=" + entry.getKey() + ", " + bindingSet);
           }
 
-          /**
-           * We are interested only in ivs whose value resolves to a EmbergraphValue that is mocked.
+        /*
+       * We are interested only in ivs whose value resolves to a EmbergraphValue that is mocked.
            * As a side effect, the internal cache of the mocked value is cleared.
            */
           collectIVsToResolve(iv, ivMap, lex);
@@ -279,8 +279,8 @@ public class MockTermResolverOp extends PipelineOp {
             throw new RuntimeException("NULL? : var=" + v + ", " + bindingSet);
           }
 
-          /**
-           * We are interested only in ivs whose value resolves to a EmbergraphValue that is mocked.
+        /*
+       * We are interested only in ivs whose value resolves to a EmbergraphValue that is mocked.
            * As a side effect, the internal cache of the mocked value is cleared.
            */
           collectIVsToResolve(iv, ivMap, lex);
@@ -291,7 +291,7 @@ public class MockTermResolverOp extends PipelineOp {
     if (log.isInfoEnabled())
       log.info("Processing " + ivMap.size() + " IVs, required=" + Arrays.toString(required));
 
-    /**
+    /*
      * In order to make lex.addTerms take effect, we need to clear the mocked internal values of the
      * mocked EmbergraphValues that we want to resolve.
      */
@@ -331,7 +331,7 @@ public class MockTermResolverOp extends PipelineOp {
     }
   } // handleChunk
 
-  /**
+  /*
    * Collect IVs that need to be resolved against the dictionary. There are actually two cases that
    * we need to consider here:
    *
@@ -366,7 +366,7 @@ public class MockTermResolverOp extends PipelineOp {
     }
   }
 
-  /**
+  /*
    * Replaces the constant referenced in the {@link IBindingSet} using the map populated when we
    * fetched the current chunk.
    *
@@ -401,7 +401,7 @@ public class MockTermResolverOp extends PipelineOp {
           continue;
         }
 
-        final IV<?, ?> iv = (IV<?, ?>) c.get();
+        final IV<?, ?> iv = c.get();
 
         if (iv == null) {
 
@@ -410,8 +410,8 @@ public class MockTermResolverOp extends PipelineOp {
 
         final EmbergraphValue value = ivMap.get(iv);
 
-        /**
-         * Note: constants are immutable, so we can't execute a c.set(), but instead we need to
+      /*
+       * Note: constants are immutable, so we can't execute a c.set(), but instead we need to
          * construct a fresh constant with the resolved value.
          */
         if (value != null && value.getIV() != null) {
@@ -444,8 +444,8 @@ public class MockTermResolverOp extends PipelineOp {
 
         final EmbergraphValue value = ivMap.get(iv);
 
-        /**
-         * Note: constants are immutable, so we can't execute a c.set(), but instead we need to
+      /*
+       * Note: constants are immutable, so we can't execute a c.set(), but instead we need to
          * construct a fresh constant with the resolved value.
          */
         bindingSet.set(entry.getKey(), new Constant<IV<EmbergraphValue, ?>>(value.getIV()));

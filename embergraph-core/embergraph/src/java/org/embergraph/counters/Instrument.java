@@ -26,8 +26,8 @@ package org.embergraph.counters;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 
-/**
- * Abstract class for reporting instrumented values supporting some useful conversions.
+/*
+* Abstract class for reporting instrumented values supporting some useful conversions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -39,7 +39,7 @@ public abstract class Instrument<T> implements IInstrument<T> {
   /** <code>N/A</code> */
   protected static final transient String NA = "N/A";
 
-  /**
+  /*
    * Converts an event count whose durations were measured in elapsed nanoseconds to an event rate
    * per second.
    *
@@ -57,13 +57,13 @@ public abstract class Instrument<T> implements IInstrument<T> {
     return "" + counter / secs;
   }
 
-  /**
+  /*
    * Take a sample, setting the current value and timestamp using either {@link #setValue(Object)}
    * or {@link #setValue(Object, long)}.
    */
   protected abstract void sample();
 
-  /**
+  /*
    * Set the value.
    *
    * @param value The value, which will be associated with the current time as reported by {@link
@@ -74,7 +74,7 @@ public abstract class Instrument<T> implements IInstrument<T> {
     setValue(value, System.currentTimeMillis());
   }
 
-  /**
+  /*
    * Set the value.
    *
    * @param value The value.

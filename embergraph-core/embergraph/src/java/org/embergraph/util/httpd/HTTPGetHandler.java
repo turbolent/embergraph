@@ -25,15 +25,15 @@ import java.util.Collection;
 import org.embergraph.util.httpd.NanoHTTPD.Request;
 import org.embergraph.util.httpd.NanoHTTPD.Response;
 
-/**
- * Interface allows for implementation of different handlers for "GET".
+/*
+* Interface allows for implementation of different handlers for "GET".
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface HTTPGetHandler {
 
-  /**
+  /*
    * HTTP GET
    *
    * @param uri Percent-decoded URI without parameters, for example "/index.cgi"
@@ -45,5 +45,5 @@ public interface HTTPGetHandler {
    * @return HTTP response
    * @see Response
    */
-  public Response doGet(final Request req) throws Exception;
+  Response doGet(final Request req) throws Exception;
 }

@@ -33,8 +33,8 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.IKeyBuilderFactory;
 import org.embergraph.btree.keys.KeyBuilder;
 
-/**
- * Default implementation uses the {@link KeyBuilder} to format the object as a key and requires
+/*
+* Default implementation uses the {@link KeyBuilder} to format the object as a key and requires
  * that the values are byte[]s which it passes on without change. Deserialization of the tuple value
  * always the byte[] itself.
  *
@@ -52,7 +52,7 @@ public class NOPTupleSerializer extends DefaultTupleSerializer {
   /** De-serialization ctor. */
   public NOPTupleSerializer() {}
 
-  /**
+  /*
    * Normally callers will use an {@link ASCIIKeyBuilderFactory} since Unicode support is not
    * required
    *
@@ -64,7 +64,7 @@ public class NOPTupleSerializer extends DefaultTupleSerializer {
     super(keyBuilderFactory);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Return <i>obj</i> iff it is a <code>byte[]</code> and otherwise converts <i>obj</i> to a
@@ -97,7 +97,7 @@ public class NOPTupleSerializer extends DefaultTupleSerializer {
     return tuple.getValue();
   }
 
-  /**
+  /*
    * This is an unsupported operation. Additional information is required to either decode the
    * internal unsigned byte[] keys or to extract the key from the de-serialized value (if it is
    * being stored in that value). You can either write your own {@link ITupleSerializer} or you can

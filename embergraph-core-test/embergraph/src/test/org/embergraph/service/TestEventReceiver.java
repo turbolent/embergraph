@@ -55,8 +55,8 @@ import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
-/**
- * Unit tests for the {@link EventReceiver}.
+/*
+* Unit tests for the {@link EventReceiver}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -71,7 +71,7 @@ public class TestEventReceiver extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Subclass overrides {@link #sendEvent()} to send to a configured {@link EventReceiver} on the
    * {@link MockFederation}.
    *
@@ -83,7 +83,7 @@ public class TestEventReceiver extends TestCase2 {
     /** */
     private static final long serialVersionUID = 3987546249519888387L;
 
-    /**
+    /*
      * @param fed
      * @param resource
      * @param majorEventType
@@ -110,7 +110,7 @@ public class TestEventReceiver extends TestCase2 {
           this.fed, this.resource, this.majorEventType, minorEventType, this.details);
     }
 
-    /**
+    /*
      * Serializes and then de-serializes the event and sends the de-serialized reference to the
      * {@link EventReceiver}. This simulates RMI where the receiver always has a different instance
      * for each message received.
@@ -125,7 +125,7 @@ public class TestEventReceiver extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test dispatch using both {@link Event#start()} and {@link Event#end()}.
    *
    * @throws InterruptedException
@@ -201,7 +201,7 @@ public class TestEventReceiver extends TestCase2 {
     assertFalse(eventReceiver.eventCache.containsKey(e.eventUUID));
   }
 
-  /**
+  /*
    * Test dispatch using only {@link Event#end()} (instantaneous events).
    *
    * @throws InterruptedException
@@ -268,7 +268,7 @@ public class TestEventReceiver extends TestCase2 {
     assertFalse(eventReceiver.eventCache.containsKey(e.eventUUID));
   }
 
-  /**
+  /*
    * Pumps a bunch of events through and then verifies that the start events are correlated with the
    * end events and that the size of the {@link LinkedHashMap} is bounded by the #of incomplete
    * events no older than the configured eventHistoryMillis.
@@ -301,8 +301,8 @@ public class TestEventReceiver extends TestCase2 {
 
       } else {
 
-        /*
-         * event with duration.
+      /*
+       * event with duration.
          */
         e.start();
 
@@ -332,7 +332,7 @@ public class TestEventReceiver extends TestCase2 {
     assertEquals(0, eventReceiver.eventCache.size());
   }
 
-  /**
+  /*
    * Unit tests verifies that the APIs are thread-safe.
    *
    * @throws InterruptedException
@@ -378,7 +378,7 @@ public class TestEventReceiver extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Generates events.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -411,8 +411,8 @@ public class TestEventReceiver extends TestCase2 {
 
         } else {
 
-          /*
-           * event with duration.
+        /*
+       * event with duration.
            */
           e.start();
 
@@ -435,7 +435,7 @@ public class TestEventReceiver extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Reports on events (places a concurrent read load on the B+Tree on which the events are stored).
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -470,7 +470,7 @@ public class TestEventReceiver extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Mock federation to support the unit tests in the outer class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

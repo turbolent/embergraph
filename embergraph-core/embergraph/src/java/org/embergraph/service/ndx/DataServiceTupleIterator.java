@@ -29,8 +29,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.IDataService;
 
-/**
- * Class supports range query across against an unpartitioned index on an {@link IDataService}.
+/*
+* Class supports range query across against an unpartitioned index on an {@link IDataService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -40,7 +40,7 @@ public class DataServiceTupleIterator<E> extends RawDataServiceTupleIterator<E> 
   /** Used to submit delete requests to the scale-out index in a robust manner. */
   protected final IScaleOutClientIndex ndx;
 
-  /**
+  /*
    * @param ndx The scale-out index view.
    * @param dataService The data service to be queried.
    * @param name The name of an index partition of that scale-out index on the data service.
@@ -90,7 +90,7 @@ public class DataServiceTupleIterator<E> extends RawDataServiceTupleIterator<E> 
     this.ndx = ndx;
   }
 
-  /**
+  /*
    * This method (and no other method on this class) will throw a (possibly wrapped) {@link
    * StaleLocatorException} if an index partition is split, joined or moved during traversal.
    *

@@ -32,8 +32,8 @@ import org.embergraph.btree.keys.KeyBuilder.Options;
 import org.embergraph.io.IManagedByteArray;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Interface for building up variable <code>unsigned byte[]</code> keys from one or more primitive
+/*
+* Interface for building up variable <code>unsigned byte[]</code> keys from one or more primitive
  * data types values and/or Unicode strings. An instance of this interface may be {@link #reset()}
  * and reused to encode a series of keys.
  *
@@ -81,7 +81,7 @@ import org.embergraph.util.BytesUtil;
  */
 public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray {
 
-  /**
+  /*
    * The backing byte[] WILL be transparently replaced if the buffer capacity is extended.
    * {@inheritDoc}
    */
@@ -90,13 +90,13 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
   /** The offset of the slice into the backing byte[] is always zero. {@inheritDoc} */
   int off();
 
-  /**
+  /*
    * The length of the slice is number of bytes written onto the backing byte[]. This is set to ZERO
    * (0) by {@link #reset()}. {@inheritDoc}
    */
   int len();
 
-  /**
+  /*
    * Return the encoded key. Comparison of keys returned by this method MUST treat the array as an
    * array of <em>unsigned bytes</em>.
    *
@@ -107,27 +107,27 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @return A new array containing the key.
    * @see BytesUtil#compareBytes(byte[], byte[])
    */
-  public byte[] getKey();
+  byte[] getKey();
 
-  /**
+  /*
    * An alias for {@link #getKey()}.
    *
    * <p>{@inheritDoc}
    */
-  public byte[] toByteArray();
+  byte[] toByteArray();
 
-  /**
+  /*
    * Reset the key length to zero before building another key.
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder reset();
+  IKeyBuilder reset();
 
   /*
    * Optional operations.
    */
 
-  /**
+  /*
    * Encodes a Unicode string using the configured {@link Options#COLLATOR} and appends the
    * resulting sort key to the buffer (without a trailing nul byte).
    *
@@ -165,9 +165,9 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    *     using a specified language family (such as could be identified with an <code>xml:lang
    *     </code> attribute).
    */
-  public IKeyBuilder append(String s);
+  IKeyBuilder append(String s);
 
-  /**
+  /*
    * Encodes a variable length text field into the buffer. The text is truncated to {@link
    * IKeyBuilder#maxlen} characters. The sort keys for strings that differ after truncation solely
    * in the #of trailing {@link #pad} characters will be identical (trailing pad characters are
@@ -212,15 +212,15 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @return The {@link IKeyBuilder}.
    * @see http://www.unicode.org/reports/tr10/tr10-10.html#Interleaved_Levels
    */
-  public IKeyBuilder appendText(String text, boolean unicode, boolean successor);
+  IKeyBuilder appendText(String text, boolean unicode, boolean successor);
 
   /*
    * Note: This operation is not implemented since it can cause confusion so
    * easily.  If you want Unicode encoding use append(String).  If you want
    * ASCII encoding, use appendASCII(String).
    */
-  //    /**
-  //     * Encodes a character as a Unicode sort key by first converting it to a
+  //    /*
+//     * Encodes a character as a Unicode sort key by first converting it to a
   //     * unicode string of length N and then encoding it using
   //     * {@link #append(String)} (optional operation).
   //     *
@@ -235,13 +235,13 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * Required operations.
    */
 
-  /**
+  /*
    * Return <code>true</code> iff Unicode is supported by this object (returns <code>false</code> if
    * only ASCII support is configured).
    */
-  public boolean isUnicodeSupported();
+  boolean isUnicodeSupported();
 
-  /**
+  /*
    * The maximum length of a variable length text field is <code>65535</code> (<code>pow(2,16)-1
    * </code>).
    *
@@ -250,9 +250,9 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * such a non-terminal position trailing pad characters are used to maintain lexiographic ordering
    * over the multi-field key.
    */
-  public final int maxlen = 65535;
+  int maxlen = 65535;
 
-  /**
+  /*
    * Encodes a unicode string by assuming that its contents are ASCII characters. For each
    * character, this method simply chops of the high byte and converts the low byte to an unsigned
    * byte.
@@ -265,25 +265,25 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param s A String containing US-ASCII characters.
    * @return <i>this</i>
    */
-  public IKeyBuilder appendASCII(String s);
+  IKeyBuilder appendASCII(String s);
 
-  /**
+  /*
    * Appends a byte - the byte is treated as an <code>unsigned</code> value.
    *
    * @param b The byte.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(byte b);
+  IKeyBuilder append(byte b);
 
-  /**
+  /*
    * Appends an array of bytes - the bytes are treated as <code>unsigned</code> values.
    *
    * @param a The array of bytes.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(byte[] a);
+  IKeyBuilder append(byte[] a);
 
-  /**
+  /*
    * Append <i>len</i> bytes starting at <i>off</i> in <i>a</i> to the key buffer - the bytes are
    * treated as <code>unsigned</code> values.
    *
@@ -292,9 +292,9 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param a The array containing the bytes to append.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(byte[] a, int off, int len);
+  IKeyBuilder append(byte[] a, int off, int len);
 
-  /**
+  /*
    * Appends a double precision floating point value by first converting it into a signed long
    * integer using {@link Double#doubleToLongBits(double)}, converting that values into a
    * twos-complement number and then appending the bytes in big-endian order into the key buffer.
@@ -304,9 +304,9 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param d The double-precision floating point value.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(double d);
+  IKeyBuilder append(double d);
 
-  /**
+  /*
    * Appends a single precision floating point value by first converting it into a signed integer
    * using {@link Float#floatToIntBits(float)} converting that values into a twos-complement number
    * and then appending the bytes in big-endian order into the key buffer.
@@ -316,42 +316,42 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param f The single-precision floating point value.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(float f);
+  IKeyBuilder append(float f);
 
-  /**
+  /*
    * Appends the UUID to the key using the MSB and then the LSB (this preserves the natural order
    * imposed by {@link UUID#compareTo(UUID)}).
    *
    * @param uuid The UUID.
    * @return <i>this</i>
    */
-  public IKeyBuilder append(UUID uuid);
+  IKeyBuilder append(UUID uuid);
 
-  /**
+  /*
    * Appends a signed long integer to the key by first converting it to a lexiographic ordering as
    * an unsigned long integer and then appending it into the buffer as 8 bytes using a big-endian
    * order.
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder append(long v);
+  IKeyBuilder append(long v);
 
-  /**
+  /*
    * Appends a signed integer to the key by first converting it to a lexiographic ordering as an
    * unsigned integer and then appending it into the buffer as 4 bytes using a big-endian order.
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder append(int v);
+  IKeyBuilder append(int v);
 
-  /**
+  /*
    * Appends a signed short integer to the key by first converting it to a two-complete
    * representation supporting unsigned byte[] comparison and then appending it into the buffer as 2
    * bytes using a big-endian order.
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder append(short v);
+  IKeyBuilder append(short v);
 
   /*
    * Note: this method has been dropped from the API to reduce the
@@ -359,8 +359,8 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * append(String).  If you want ASCII semantics then use appendASCII().
    * If you want signed integer semantics then use append(short).
    */
-  //    /**
-  //     * Encodes a character as a 16-bit unsigned integer.
+  //    /*
+//     * Encodes a character as a 16-bit unsigned integer.
   //     * <p>
   //     * Note: Characters are encoded as unsigned integers rather than as Unicode
   //     * values since the semantics of Unicode collation sequences often violate
@@ -375,22 +375,22 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
   //     */
   //    public IKeyBuilder append(char v);
 
-  /**
+  /*
    * Converts the signed byte to an unsigned byte and appends it to the key.
    *
    * @param v The signed byte.
    * @return <i>this</i>
    */
-  public IKeyBuilder appendSigned(final byte v);
+  IKeyBuilder appendSigned(final byte v);
 
-  /**
+  /*
    * Append an unsigned zero byte to the key.
    *
    * @return <i>this</i>
    */
-  public IKeyBuilder appendNul();
+  IKeyBuilder appendNul();
 
-  /**
+  /*
    * Encode a {@link BigInteger} into an unsigned byte[] and append it into the key buffer.
    *
    * <p>The encoding is a 2 byte run length whose leading bit is set iff the {@link BigInteger} is
@@ -399,17 +399,17 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @param The {@link BigInteger} value.
    * @return The unsigned byte[].
    */
-  public IKeyBuilder append(final BigInteger i);
+  IKeyBuilder append(final BigInteger i);
 
-  /**
+  /*
    * Encode a {@link BigDecimal} into an unsigned byte[] and append it into the key buffer.
    *
    * @param The {@link BigDecimal} value.
    * @return The unsigned byte[].
    */
-  public IKeyBuilder append(final BigDecimal d);
+  IKeyBuilder append(final BigDecimal d);
 
-  /**
+  /*
    * Append the value to the buffer, encoding it as appropriate based on the class of the object.
    * This method handles all of the primitive data types plus {@link UUID} and Unicode {@link
    * String}s.
@@ -419,9 +419,9 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    * @throws IllegalArgumentException if <i>val</i> is <code>null</code>.
    * @throws UnsupportedOperationException if <i>val</i> is an instance of an unsupported class.
    */
-  public IKeyBuilder append(Object val);
+  IKeyBuilder append(Object val);
 
-  /**
+  /*
    * Converts the key into a z-order byte array, assuming numDimensions components of type Long
    * (i.e., 64bit each). For instance, assume the current key's buffer is 001001011010010001010100
    * and we call the method with numDimensions=3. The method logically proceeds as follows:
@@ -434,7 +434,7 @@ public interface IKeyBuilder extends ISortKeyBuilder<Object>, IManagedByteArray 
    */
   byte[] toZOrder(int numDimensions);
 
-  /**
+  /*
    * Inverts method above in the sense that it interprets the buffer as a zOrderString and returns
    * an array of long values of size numDimensions, reflecting the individual components of the
    * z-order string.

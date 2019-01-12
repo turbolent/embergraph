@@ -21,21 +21,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.cache;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IWeakRefCacheEntry<K, T> {
 
-  /**
+  /*
    * Returns the key for the object stored in the cache entry. This is generally an object
    * identifier (OID).
    */
-  public K getKey();
+  K getKey();
 
-  /**
+  /*
    * The object in the cache. If the entry belongs to a weak reference cache, then this method
    * returns the weak referent or null iff the weak reference has been cleared.
    */
-  public T getObject();
+  T getObject();
 }

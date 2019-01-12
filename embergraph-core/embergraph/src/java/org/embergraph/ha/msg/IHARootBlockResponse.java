@@ -19,14 +19,14 @@ package org.embergraph.ha.msg;
 
 import org.embergraph.journal.IRootBlockView;
 
-/**
- * Interface for a response requesting a root block from a remote service.
+/*
+* Interface for a response requesting a root block from a remote service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHARootBlockResponse extends IHAMessage {
 
-  /**
+  /*
    * The root block from the remote service.
    *
    * @return The root block and never <code>null</code>.

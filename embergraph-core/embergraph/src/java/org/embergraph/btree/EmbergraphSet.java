@@ -31,8 +31,8 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedSet;
 
-/**
- * A {@link SortedSet} backed by a B+Tree.
+/*
+* A {@link SortedSet} backed by a B+Tree.
  *
  * <p>Note: The {@link EmbergraphMap} has the same concurrency constraints as the {@link BTree} - it
  * is single-threaded for writes and allows concurrent readers.
@@ -59,7 +59,7 @@ public class EmbergraphSet<E> extends AbstractSet<E> implements SortedSet<E> {
     map = new EmbergraphMap<E, E>(ndx);
   }
 
-  /**
+  /*
    * Ctor used to wrap a key-range of a {@link EmbergraphMap}.
    *
    * @param map The map which will impose the key-range constraints.
@@ -102,7 +102,7 @@ public class EmbergraphSet<E> extends AbstractSet<E> implements SortedSet<E> {
     return map.isEmpty();
   }
 
-  /**
+  /*
    * The #of index entries. When there are more than {@link Integer#MAX_VALUE} entries then this
    * method will report {@link Integer#MAX_VALUE} entries. If the backing index supports delete
    * markers then an index scan will be performed in order to count the #of non-deleted index
@@ -113,7 +113,7 @@ public class EmbergraphSet<E> extends AbstractSet<E> implements SortedSet<E> {
     return map.size();
   }
 
-  /**
+  /*
    * The #of non-deleted entries in the map.
    *
    * @param exactCount When <code>true</code> the result will be an exact count, which will require
@@ -156,7 +156,7 @@ public class EmbergraphSet<E> extends AbstractSet<E> implements SortedSet<E> {
     return super.retainAll(c);
   }
 
-  /**
+  /*
    * There is no means available to specify a {@link Comparator} for the {@link SortedSet}.
    * Application keys are first converted into <strong>unsigned</strong> byte[] keys using the
    * configured {@link ITupleSerializer} for the backing B+Tree. The index order is directly

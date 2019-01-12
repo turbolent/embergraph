@@ -19,15 +19,15 @@ package org.embergraph.journal;
 
 import java.io.File;
 
-/**
- * Interface for the outcome of a snapshot task.,
+/*
+* Interface for the outcome of a snapshot task.,
  *
  * @author bryan
  * @see <a href="http://trac.bigdata.com/ticket/1172">Online backup for Journal </a>
  */
 public interface ISnapshotResult {
 
-  /**
+  /*
    * The current root block for the snapshot. The snapshot will be consistent as of the commit point
    * associated with this root block.
    */

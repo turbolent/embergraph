@@ -32,8 +32,8 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.Bytes;
 
-/**
- * Default implementation for immutable {@link IDirectoryData} records.
+/*
+* Default implementation for immutable {@link IDirectoryData} records.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: DefaultNodeCoder.java 4585 2011-06-01 13:42:56Z thompsonbry $
@@ -43,7 +43,7 @@ import org.embergraph.util.Bytes;
 public class DefaultDirectoryPageCoder
     implements IAbstractNodeDataCoder<IDirectoryData>, Externalizable {
 
-  /**
+  /*
    * The initial version of the serialized representation of the {@link DefaultDirectoryPageCoder}
    * class (versus the serialized representation of the node or leaf).
    */
@@ -145,7 +145,7 @@ public class DefaultDirectoryPageCoder
     return encodeLive(node, buf).data();
   }
 
-  /**
+  /*
    * A read-only view of the data for a B+Tree node.
    *
    * <p>Note: The leading byte of the record format codes for a leaf, a double-linked leaf or a node
@@ -179,7 +179,7 @@ public class DefaultDirectoryPageCoder
 
     // static int s_newKeys = 0;
 
-    /**
+    /*
      * Constructor used when the caller is encoding the {@link IDirectoryData}.
      *
      * @param buf The buffer containing the data for the node.
@@ -288,7 +288,7 @@ public class DefaultDirectoryPageCoder
       return nchildren;
     }
 
-    /**
+    /*
      * Bounds check.
      *
      * @throws IndexOutOfBoundsException if <i>index</i> is LT ZERO (0)
@@ -327,7 +327,7 @@ public class DefaultDirectoryPageCoder
     }
   }
 
-  /**
+  /*
    * Utility method formats the {@link IDirectoryData}.
    *
    * @param node A node data record.

@@ -6,8 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Simple {@link IExtensionFactory} implementation that creates two {@link IExtension}s - the {@link
+/*
+* Simple {@link IExtensionFactory} implementation that creates two {@link IExtension}s - the {@link
  * EpochExtension} and the {@link ColorsEnumExtension}.
  */
 public class SampleExtensionFactory implements IExtensionFactory {

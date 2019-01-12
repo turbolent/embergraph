@@ -31,8 +31,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * A fully inlined representation of a URI based on a <code>short</code> code. The flags byte looks
+/*
+* A fully inlined representation of a URI based on a <code>short</code> code. The flags byte looks
  * like: <code>VTE=URI, inline=true, extension=false,
  * DTE=XSDShort</code>. It is followed by an <code>unsigned short</code> value which is the index of
  * the URI in the {@link Vocabulary} class for the triple store.
@@ -47,7 +47,7 @@ public class VocabURIShortIV<V extends EmbergraphURI> extends AbstractInlineIV<V
 
   private final short value;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: Always returns <i>this</i>. (The rationale is that the vocabulary {@link IV}s already
@@ -66,7 +66,7 @@ public class VocabURIShortIV<V extends EmbergraphURI> extends AbstractInlineIV<V
     this.value = value;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to return <code>true</code>.
@@ -131,12 +131,12 @@ public class VocabURIShortIV<V extends EmbergraphURI> extends AbstractInlineIV<V
   public String toString() {
 
     return "Vocab("
-        + Short.toString(value)
+        + value
         + ")"
         + (hasValue() ? "[" + getValue().stringValue() + "]" : "");
   }
 
-  /**
+  /*
    * Because we only store an index into the vocabulary, we need the materialized URI to answer the
    * URI interface methods.
    */

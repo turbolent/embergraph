@@ -27,8 +27,8 @@ import java.util.Iterator;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
-/**
- * A memory sensitive cache using weak references for its values and object ids for its keys and
+/*
+* A memory sensitive cache using weak references for its values and object ids for its keys and
  * backed by the CRUD operations of the persistence layer, which is assumed to implement a hard
  * reference LRU or similar cache policy.
  *
@@ -93,7 +93,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
   /** #of "put" operations that wind up inserting the object into the weak value cache. */
   private int _ninsert = 0;
 
-  /**
+  /*
    * #of "put" operations that wind up touching the object in the weak value cache. A touch in the
    * weak value cache does not cause any change in the state of the weak value cache.
    */
@@ -111,14 +111,14 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
   /** #of cache entries which were explicitly removed. */
   private int _nremove = 0;
 
-  /**
+  /*
    * The high tide for the cache is the largest size which it achieves. The size of the cache grows
    * as objects are added to the cache and shrinks as references are cleared and as objects are
    * explicitly removed from the cache.
    */
   private int _highTide = 0;
 
-  /**
+  /*
    * The hash map which is the basis for the cache. The keys are the object identifiers. The values
    * are weak references to the objects inserted into the cache.
    *
@@ -126,7 +126,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
    */
   private Map<K, IWeakRefCacheEntry<K, T>> _cache;
 
-  /**
+  /*
    * Reference queue for weak references in entered into the cache. A weak reference will appear on
    * this queue once the reference has been cleared.
    */
@@ -139,7 +139,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
 
   private final IClearReferenceListener<K> _clearReferenceListener;
 
-  /**
+  /*
    * An optional listener that is invoked when we notice a cleared reference.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -147,7 +147,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
    */
   public interface IClearReferenceListener<K> {
 
-    public void cleared(K key);
+    void cleared(K key);
   }
 
   public WeakValueCache(ICachePolicy<K, T> delegate) {
@@ -160,7 +160,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
     this(INITIAL_CAPACITY, LOAD_FACTOR, delegate, factory);
   }
 
-  /**
+  /*
    * Designated constructor.
    *
    * @param initialCapacity May be used to reduce re-hashing by starting with a larger initial
@@ -237,7 +237,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
     _delegate.clear();
   }
 
-  /**
+  /*
    * Report and optionally clear the cache statistics.
    *
    * @param resetCounters When true the counters will be reset to zero.
@@ -281,7 +281,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
     }
   }
 
-  /**
+  /*
    * This reports some statistics gathered during the cache use. The execution of this finalizer is
    * NOT required for the correct functioning of the cache.
    */
@@ -366,8 +366,8 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
         obj = entry.getObject();
 
         if (obj != null) {
-          /*
-           * Note: Dirty objects are installed when they are evicted
+        /*
+       * Note: Dirty objects are installed when they are evicted
            * on the hard reference cache and it is impossible for an
            * object to be dirty if it is not found on the hard
            * reference cache. Therefore we always set the dirty flag
@@ -407,7 +407,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
     }
   }
 
-  /**
+  /*
    * Invoked from various methods to remove any objects whose weak reference has been cleared from
    * the cache. This method does not block and only polls the {@link ReferenceQueue}. We do not
    * clear entries from the delegate hard reference cache because it is not possible to have a weak
@@ -461,7 +461,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
     return _delegate.getCacheListener();
   }
 
-  /**
+  /*
    * Visits objects in the delegate cache in the order defined by the delegate.
    *
    * <p>Note: Objects evicted from the hard reference cache that are still weakly reachable are no
@@ -484,7 +484,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
     return _delegate.iterator();
   }
 
-  /**
+  /*
    * Visits entries in the delegate cache in the order defined by the delegate.
    *
    * <p>Note: Objects evicted from the hard reference cache that are still weakly reachable are no
@@ -506,8 +506,8 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
     return _delegate.entryIterator();
   }
 
-  //    /**
-  //	 * The #of entries in the weak reference cache. Entries may be
+  //    /*
+//	 * The #of entries in the weak reference cache. Entries may be
   //	 * deterministically {@link #remove(long) removed} from the cache. However
   //	 * entries are also cleared from the cache once the object in that entry
   //	 * becomes weakly reachable. The number of entries in the cache is therefore
@@ -519,7 +519,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
   //	 *
   //	 * @return The #of entries in the map.
   //	 */
-  /**
+  /*
    * The #of entries in the backing hard reference cache. The weak reference cache will often
    * contain additional entries, but those entries are not reported by this method and can not be
    * visited by either {@link #iterator()} or {@link #entryIterator()}.

@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.changesets;
 
-/**
- * Provides detailed information on changes made to statements in the database. Change records are
+/*
+* Provides detailed information on changes made to statements in the database. Change records are
  * generated for any statements that are used in addStatement() or removeStatements() operations on
  * the SAIL connection, as well as any inferred statements that are added or removed as a result of
  * truth maintenance when the database has inference enabled. Change records will be sent to an
@@ -30,7 +30,7 @@ package org.embergraph.rdf.changesets;
  */
 public interface IChangeLog {
 
-  /**
+  /*
    * Occurs when a statement add or remove is flushed to the indices (but not yet committed).
    *
    * @param record the {@link IChangeRecord}
@@ -40,7 +40,7 @@ public interface IChangeLog {
   /** Message issued when a new transaction will begin. */
   void transactionBegin();
 
-  /**
+  /*
    * Message issued when preparing for a commit. The next message will be either {@link
    * #transactionCommited(long)} or {@link #transactionAborted()}.
    *
@@ -49,7 +49,7 @@ public interface IChangeLog {
    */
   void transactionPrepare();
 
-  /**
+  /*
    * Occurs when the current SAIL transaction is committed.
    *
    * @param commitTime The timestamp associated with the commit point.

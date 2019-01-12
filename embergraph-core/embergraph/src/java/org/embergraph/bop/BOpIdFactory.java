@@ -28,7 +28,7 @@ public class BOpIdFactory implements IdFactory {
 
   private int nextId = 0;
 
-  /**
+  /*
    * Reserve a bop id by adding it to a set of known identifiers that will not be issued by {@link
    * #nextId()}.
    *
@@ -63,7 +63,7 @@ public class BOpIdFactory implements IdFactory {
     }
   }
 
-  /**
+  /*
    * Reserve ids used by the predicates in some join graph.
    *
    * @param preds The vertices of the join graph.
@@ -78,7 +78,7 @@ public class BOpIdFactory implements IdFactory {
     }
   }
 
-  /**
+  /*
    * Reserve ids used by the constraints for some predicate or join graph.
    *
    * @param constraints The constraints that attach to some predicate (optional).

@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -77,8 +78,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.ClassPathUtil;
 import org.embergraph.util.InnerCause;
 
-/**
- * A status page for the service.
+/*
+* A status page for the service.
  *
  * <p>TODO The KB addressed by the request should also be displayed as metadata associated with the
  * request. We should make this a restriction that can be placed onto the status page and make it
@@ -94,19 +95,19 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
   private static final transient Logger log = Logger.getLogger(StatusServlet.class);
 
-  /**
+  /*
    * The name of a request parameter used to request a list of the namespaces which could be served.
    */
   private static final String SHOW_NAMESPACES = "showNamespaces";
 
-  /**
+  /*
    * Request a low-level dump of the journal.
    *
    * @see DumpJournal
    */
   private static final String DUMP_JOURNAL = "dumpJournal";
 
-  /**
+  /*
    * Request a low-level dump of the pages in the indices for the journal. The {@link #DUMP_JOURNAL}
    * option MUST also be specified.
    *
@@ -114,7 +115,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
    */
   private static final String DUMP_PAGES = "dumpPages";
 
-  /**
+  /*
    * Restrict a low-level dump of the journal to only the indices having the specified namespace
    * prefix. The {@link #DUMP_JOURNAL} option MUST also be specified.
    *
@@ -122,7 +123,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
    */
   private static final String DUMP_NAMESPACE = "dumpNamespace";
 
-  /**
+  /*
    * The name of a request parameter used to request a display of the currently running queries.
    * Legal values for this request parameter are either {@value #DETAILS} or no value.
    *
@@ -134,13 +135,13 @@ public class StatusServlet extends EmbergraphRDFServlet {
   /** @see #SHOW_QUERIES */
   private static final String DETAILS = "details";
 
-  /**
+  /*
    * The name of a request parameter whose value is the {@link UUID} of a top-level query. See also
    * {@link QueryHints#QUERYID} which is the same value.
    */
   private static final String QUERY_ID = "queryId";
 
-  /**
+  /*
    * The name of a request parameter used to cancel a running query (or any other kind of REST API
    * operation). At least one {@link #QUERY_ID} must also be specified. Queries specified by their
    * {@link #QUERY_ID} will be cancelled if they are still running.
@@ -150,13 +151,13 @@ public class StatusServlet extends EmbergraphRDFServlet {
    */
   protected static final String CANCEL_QUERY = "cancelQuery";
 
-  /**
+  /*
    * Request a snapshot of the journal (HA Mode). The snapshot will be written into the configured
    * directory on the server. If a snapshot is already being taken then this is a NOP.
    */
   static final String SNAPSHOT = "snapshot";
 
-  /**
+  /*
    * Request to generate the digest for the journals, HALog files, and snapshot files. This is only
    * a debugging tool. In particular, the digests on the journal are only valid if there are no
    * concurrent writes on the journal and the journal has been through either a commit or an abort
@@ -169,15 +170,15 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
   static final DigestEnum DEFAULT_DIGESTS = DigestEnum.Journal;
 
-  static enum DigestEnum {
+  enum DigestEnum {
     None,
     Journal,
     HALogs,
     Snapshots,
-    All;
+    All
   }
 
-  /**
+  /*
    * URL request parameter to trigger a thread dump. The thread dump is written onto the http
    * response. This is intended to provide an aid when analyzing either node-local or distributed
    * deadlocks.
@@ -187,7 +188,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
    */
   static final String THREAD_DUMP = "threadDump";
 
-  /**
+  /*
    * Special HA status request designed for clients that poll to determine the status of an
    * HAJournalServer. This option is exclusive of other parameters.
    */
@@ -222,7 +223,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return;
   }
 
-  /**
+  /*
    * Cancel a running query.
    *
    * <pre>
@@ -271,7 +272,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     }
 
     final QueryEngine queryEngine =
-        (QueryEngine) QueryEngineFactory.getInstance().getQueryController(indexManager);
+        QueryEngineFactory.getInstance().getQueryController(indexManager);
 
     // See BLZG-1464
     // QueryCancellationHelper.cancelQueries(queryIds, queryEngine);
@@ -299,7 +300,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
   }
 
-  /**
+  /*
    * Attempt to cancel a running SPARQL UPDATE request.
    *
    * @param context
@@ -318,10 +319,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
         if (f != null) {
 
-          if (f.cancel(true /* mayInterruptIfRunning */)) {
-
-            return true;
-          }
+          return f.cancel(true /* mayInterruptIfRunning */);
         }
       }
     }
@@ -330,7 +328,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return false;
   }
 
-  /**
+  /*
    * Attempt to cancel a task that is neither a SPARQL QUERY nor a SPARQL UPDATE.
    *
    * @param context
@@ -349,10 +347,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
       if (f != null) {
 
-        if (f.cancel(true /* mayInterruptIfRunning */)) {
-
-          return true;
-        }
+        return f.cancel(true /* mayInterruptIfRunning */);
       }
     }
 
@@ -360,7 +355,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return false;
   }
 
-  /**
+  /*
    * A status page. Options include:
    *
    * <dl>
@@ -451,7 +446,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Internal method to process the Servlet request returning the results in JSON form. Currently
    * only supports the listing of running queries.
    *
@@ -466,7 +461,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
       throws IOException {
 
     resp.setContentType(MIME_JSON);
-    final Writer w = new OutputStreamWriter(resp.getOutputStream(), UTF8);
+    final Writer w = new OutputStreamWriter(resp.getOutputStream(), StandardCharsets.UTF_8);
 
     final Set<UUID> requestedQueryIds = getRequestedQueryIds(req);
 
@@ -483,7 +478,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
      */
 
     final QueryEngine queryEngine =
-        (QueryEngine) QueryEngineFactory.getInstance().getQueryController(getIndexManager());
+        QueryEngineFactory.getInstance().getQueryController(getIndexManager());
 
     final UUID[] queryIds = queryEngine.getRunningQueries();
 
@@ -527,7 +522,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     JsonHelper.writeRunningQueryList(w, modelRunningQueries);
   }
 
-  /**
+  /*
    * Internal method to process the Servlet request returning the results in HTML form.
    *
    * <p>TODO: This is an initial version and should be refactored to support HTML, XML, JSON, and
@@ -565,7 +560,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     final boolean showNamespaces = req.getParameter(SHOW_NAMESPACES) != null;
 
     resp.setContentType(MIME_TEXT_HTML);
-    final Writer w = new OutputStreamWriter(resp.getOutputStream(), UTF8);
+    final Writer w = new OutputStreamWriter(resp.getOutputStream(), StandardCharsets.UTF_8);
     try {
 
       final HTMLBuilder doc = new HTMLBuilder(UTF8, w);
@@ -755,14 +750,14 @@ public class StatusServlet extends EmbergraphRDFServlet {
        */
       {
         final QueryEngine queryEngine =
-            (QueryEngine) QueryEngineFactory.getInstance().getQueryController(getIndexManager());
+            QueryEngineFactory.getInstance().getQueryController(getIndexManager());
 
         final CounterSet counterSet = queryEngine.getCounters();
 
         if (getEmbergraphRDFContext().getSampleTask() != null) {
 
-          /*
-           * Performance counters for the NSS queries.
+        /*
+       * Performance counters for the NSS queries.
            *
            * Note: This is NSS specific, rather than per-QueryEngine.
            * For example, DataServices on a federation embed a
@@ -805,7 +800,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
       final Set<UUID> requestedQueryIds = getRequestedQueryIds(req);
 
-      /**
+      /*
        * Obtain a cross walk from the {@link QueryEngine}'s {@link IRunningQuery#getQueryId()} to
        * {@link NanoSparqlServer}'s {@link RunningQuery#queryId}.
        *
@@ -823,7 +818,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
        */
 
       final QueryEngine queryEngine =
-          (QueryEngine) QueryEngineFactory.getInstance().getQueryController(getIndexManager());
+          QueryEngineFactory.getInstance().getQueryController(getIndexManager());
 
       final UUID[] queryIds = queryEngine.getRunningQueries();
 
@@ -1033,8 +1028,8 @@ public class StatusServlet extends EmbergraphRDFServlet {
           current.node("p").attr("class", "original-ast").text(originalAST.toString()).close();
         }
 
-        /*
-         * Note: The UPDATE request is optimized piece by piece, and
+      /*
+       * Note: The UPDATE request is optimized piece by piece, and
          * those pieces are often rewrites. Thus, the optimized AST is
          * not available here. Likewise, neither is the query plan.
          * However, when a UPDATE operation is rewritten to include a
@@ -1050,7 +1045,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return current;
   }
 
-  /**
+  /*
    * Display metadata about a currently executing task.
    *
    * @param req
@@ -1157,7 +1152,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return current;
   }
 
-  /**
+  /*
    * Paint a single query.
    *
    * @param req
@@ -1368,7 +1363,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return current;
   }
 
-  /**
+  /*
    * Return a {@link Map} whose natural order puts the entries into descending order based on their
    * {@link Long} keys. This is used with keys which represent query durations to present the
    * longest running queries first.
@@ -1379,8 +1374,8 @@ public class StatusServlet extends EmbergraphRDFServlet {
   private <T> TreeMap<Long, T> newQueryMap() {
     return new TreeMap<Long, T>(
         new Comparator<Long>() {
-          /**
-           * Comparator puts the entries into descending order by the query execution time (longest
+        /*
+       * Comparator puts the entries into descending order by the query execution time (longest
            * running queries are first).
            */
           @Override
@@ -1392,7 +1387,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
         });
   }
 
-  /**
+  /*
    * Map providing a cross walk from the {@link QueryEngine}'s {@link IRunningQuery#getQueryId()} to
    * {@link NanoSparqlServer}'s {@link RunningQuery#queryId}.
    *
@@ -1447,7 +1442,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return crosswalkMap;
   }
 
-  /**
+  /*
    * Write a thread dump onto the http response as an aid to diagnose both node-local and
    * distributed deadlocks.
    *
@@ -1511,7 +1506,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return requestedQueryIds;
   }
 
-  /**
+  /*
    * Map providing the QueryEngine's IRunningQuery objects in order by descending elapsed evaluation
    * time (longest running queries are listed first). This provides a stable ordering and help
    * people to focus on the problem queries.
@@ -1556,7 +1551,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return runningQueryAge;
   }
 
-  /**
+  /*
    * Return a collection of running SPARQL QUERY REQUESTS requested).
    *
    * <p>Note: This is only SPARQL QUERY requests.
@@ -1596,8 +1591,8 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
       if (acceptedQuery == null) {
 
-        /*
-         * A query running on the query engine which is not a query
+      /*
+       * A query running on the query engine which is not a query
          * accepted by the NanoSparqlServer is typically a sub-query
          * being evaluated as part of the query plan for the
          * top-level query.
@@ -1627,7 +1622,7 @@ public class StatusServlet extends EmbergraphRDFServlet {
     return runningSparqlQueries;
   }
 
-  /**
+  /*
    * Convenience method to return a collection of update requests that may be running.
    *
    * @param requestedQueryIds
@@ -1654,8 +1649,8 @@ public class StatusServlet extends EmbergraphRDFServlet {
 
       if (queryId == null) {
 
-        /*
-         * Note: The UUID is not assigned until the UPDATE request
+      /*
+       * Note: The UUID is not assigned until the UPDATE request
          * begins to execute.
          */
         continue;

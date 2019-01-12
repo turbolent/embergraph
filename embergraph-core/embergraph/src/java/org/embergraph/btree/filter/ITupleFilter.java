@@ -29,8 +29,8 @@ import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 
-/**
- * Interface for stacked filtering iterators for {@link ITuple}s.
+/*
+* Interface for stacked filtering iterators for {@link ITuple}s.
  *
  * @see ITupleIterator
  * @see IRangeQuery#rangeIterator(byte[], byte[], int, int, IFilterConstructor)
@@ -41,10 +41,10 @@ import org.embergraph.btree.ITupleIterator;
  */
 public interface ITupleFilter<E> extends IFilter {
 
-  /**
+  /*
    * Strengthened return type.
    *
    * <p>{@inheritDoc}
    */
-  public ITupleIterator<E> filterOnce(Iterator src, Object context);
+  ITupleIterator<E> filterOnce(Iterator src, Object context);
 }

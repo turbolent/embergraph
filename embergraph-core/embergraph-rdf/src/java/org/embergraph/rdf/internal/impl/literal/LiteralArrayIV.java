@@ -31,8 +31,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.util.BytesUtil;
 import org.openrdf.model.Literal;
 
-/**
- * An inline literal IV composed of an array of other inline literal IVs. This IV is meant to be
+/*
+* An inline literal IV composed of an array of other inline literal IVs. This IV is meant to be
  * used with LiteralExtensionIV and URIExtensionIV as the delegate for an inline literal extension
  * or an inline URI. This IV is not directly materializable into a Literal outside the context of a
  * literal extension factory or an inline URI handler.
@@ -53,7 +53,7 @@ public class LiteralArrayIV extends AbstractLiteralIV<EmbergraphLiteral, Object[
   /** The inline literal array. */
   private final InlineLiteralIV<?, ?>[] ivs;
 
-  /**
+  /*
    * Only used for compareTo() and byteLength(). Encoding takes place in AbstractIV, decoding in
    * IVUtility.
    */
@@ -62,7 +62,7 @@ public class LiteralArrayIV extends AbstractLiteralIV<EmbergraphLiteral, Object[
   /** Cached hash code. */
   private transient int hashCode = 0;
 
-  /**
+  /*
    * Construct an instance using the supplied inline literal IVs. The array must not be empty and
    * must not be more than 256 elements (using one byte to encode the array length).
    *
@@ -128,8 +128,7 @@ public class LiteralArrayIV extends AbstractLiteralIV<EmbergraphLiteral, Object[
     if (obj == null) return false;
     if (getClass() != obj.getClass()) return false;
     LiteralArrayIV other = (LiteralArrayIV) obj;
-    if (!Arrays.equals(ivs, other.ivs)) return false;
-    return true;
+    return Arrays.equals(ivs, other.ivs);
   }
 
   /** Implement {@link Literal#getLabel()} for logging. Superclass uses inline value. */
@@ -144,7 +143,7 @@ public class LiteralArrayIV extends AbstractLiteralIV<EmbergraphLiteral, Object[
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * This IV cannot be materialized on its own. It can only be used within the context of a {@link
    * URIExtensionIV} or {@link LiteralExtensionIV} as the delegate in cases where the extension
    * mechanism needs an array of inline IVs to represent its URI or Literal respectively.

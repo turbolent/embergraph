@@ -27,8 +27,8 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * For named and default graph access paths where access path cost estimation is disabled by setting
+/*
+* For named and default graph access paths where access path cost estimation is disabled by setting
  * the {@link #ACCESS_PATH_SAMPLE_LIMIT} to ZERO (0), this query hint determines whether a SCAN +
  * FILTER or PARALLEL SUBQUERY (aka as-bound data set join) approach.
  */

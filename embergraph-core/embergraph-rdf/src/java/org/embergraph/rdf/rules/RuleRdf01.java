@@ -21,8 +21,8 @@ import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * rdf1:
+/*
+* rdf1:
  *
  * <pre>
  * (?a rdf:type rdf:Property) :- ( ?u ?a ?y ).

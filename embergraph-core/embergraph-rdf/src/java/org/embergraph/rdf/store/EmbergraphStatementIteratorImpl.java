@@ -21,8 +21,8 @@ import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Value;
 
-/**
- * Efficiently resolve term identifiers in Embergraph {@link ISPO}s to RDF {@link EmbergraphValue}s.
+/*
+* Efficiently resolve term identifiers in Embergraph {@link ISPO}s to RDF {@link EmbergraphValue}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -33,14 +33,14 @@ public class EmbergraphStatementIteratorImpl
 
   private static final Logger log = Logger.getLogger(EmbergraphStatementIteratorImpl.class);
 
-  /**
+  /*
    * An optional map of known blank node term identifiers and the corresponding {@link
    * EmbergraphBNodeImpl} objects. This map may be used to resolve term identifiers to the
    * corresponding blank node objects across a "connection" context.
    */
   private final Map<IV, EmbergraphBNode> bnodes;
 
-  /**
+  /*
    * @param db Used to resolve term identifiers to {@link Value} objects.
    * @param src The source iterator (will be closed when this iterator is closed).
    */
@@ -50,7 +50,7 @@ public class EmbergraphStatementIteratorImpl
     this(db, null /* bnodes */, src);
   }
 
-  /**
+  /*
    * @param db Used to resolve term identifiers to {@link Value} objects.
    * @param bnodes An optional map of known blank node term identifiers and the corresponding {@link
    *     EmbergraphBNodeImpl} objects. This map may be used to resolve blank node term identifiers
@@ -165,16 +165,16 @@ public class EmbergraphStatementIteratorImpl
       final IV<?, ?> _c = spo.c();
       final EmbergraphResource c;
       if (_c != null) {
-        /*
-         * FIXME This kludge to strip off the null graph should be
+      /*
+       * FIXME This kludge to strip off the null graph should be
          * isolated to the EmbergraphSail's package. Our own code should be
          * protected from this behavior. Also see the
          * EmbergraphSolutionResolverator.
          */
         final EmbergraphResource tmp = (EmbergraphResource) resolve(terms, _c);
-        if (tmp instanceof EmbergraphURI && ((EmbergraphURI) tmp).equals(BD.NULL_GRAPH)) {
-          /*
-           * Strip off the "nullGraph" context.
+        if (tmp instanceof EmbergraphURI && tmp.equals(BD.NULL_GRAPH)) {
+        /*
+       * Strip off the "nullGraph" context.
            */
           c = null;
         } else {
@@ -202,7 +202,7 @@ public class EmbergraphStatementIteratorImpl
     return stmts;
   }
 
-  /**
+  /*
    * Add the IV to the list of terms to materialize, and also delegate to {@link #handleSid(SidIV,
    * Collection, boolean)} if it's a SidIV.
    */
@@ -220,8 +220,8 @@ public class EmbergraphStatementIteratorImpl
     }
   }
 
-  //    /**
-  //     * Sids need to be handled specially because their individual ISPO
+  //    /*
+//     * Sids need to be handled specially because their individual ISPO
   //     * components might need materialization as well.
   //     */
   //    private void handleSid(final SidIV<?> sid,
@@ -243,7 +243,7 @@ public class EmbergraphStatementIteratorImpl
   //
   //    }
 
-  /**
+  /*
    * Resolve a term identifier to the {@link EmbergraphValue}, checking the {@link #bnodes} map if
    * it is defined.
    *

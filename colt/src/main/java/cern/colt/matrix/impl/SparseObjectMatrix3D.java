@@ -12,8 +12,8 @@ import cern.colt.map.AbstractIntObjectMap;
 import cern.colt.map.OpenIntObjectHashMap;
 import cern.colt.matrix.ObjectMatrix2D;
 import cern.colt.matrix.ObjectMatrix3D;
-/**
- * Sparse hashed 3-d matrix holding <tt>Object</tt> elements. First see the <a
+/*
+* Sparse hashed 3-d matrix holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -88,7 +88,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
    * The elements of the matrix.
    */
   protected AbstractIntObjectMap elements;
-  /**
+  /*
    * Constructs a matrix with a copy of the given values. <tt>values</tt> is required to have the
    * form <tt>values[slice][row][column]</tt> and have exactly the same number of rows in in every
    * slice and exactly the same number of columns in in every row.
@@ -109,7 +109,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
         (values.length == 0 ? 0 : values[0].length == 0 ? 0 : values[0][0].length));
     assign(values);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of slices, rows and columns and default memory usage.
    * All entries are initially <tt>null</tt>.
    *
@@ -122,7 +122,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
   public SparseObjectMatrix3D(int slices, int rows, int columns) {
     this(slices, rows, columns, slices * rows * (columns / 1000), 0.2, 0.5);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of slices, rows and columns using memory as specified.
    * All entries are initially <tt>null</tt>. For details related to memory usage see {@link
    * cern.colt.map.OpenIntObjectHashMap}.
@@ -150,7 +150,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
     setUp(slices, rows, columns);
     this.elements = new OpenIntObjectHashMap(initialCapacity, minLoadFactor, maxLoadFactor);
   }
-  /**
+  /*
    * Constructs a view with the given parameters.
    *
    * @param slices the number of slices the matrix shall have.
@@ -198,7 +198,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
     if (this.isNoView) return this.elements.size();
     else return super.cardinality();
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of non-zero cells without
    * needing to allocate new internal memory. If necessary, allocates new internal memory and
    * increases the capacity of the receiver.
@@ -213,7 +213,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
   public void ensureCapacity(int minCapacity) {
     this.elements.ensureCapacity(minCapacity);
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[slice,row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -250,7 +250,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
     }
     return false;
   }
-  /**
+  /*
    * Returns the position of the given coordinate within the (virtual or non-virtual) internal
    * 1-dimensional array.
    *
@@ -269,7 +269,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
         + columnZero
         + column * columnStride;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of slices, rows and columns. For example, if the receiver is an
    * instance of type <tt>DenseObjectMatrix3D</tt> the new matrix must also be of type
@@ -286,7 +286,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
   public ObjectMatrix3D like(int slices, int rows, int columns) {
     return new SparseObjectMatrix3D(slices, rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, sharing the
    * same cells. For example, if the receiver is an instance of type <tt>DenseObjectMatrix3D</tt>
    * the new matrix must also be of type <tt>DenseObjectMatrix2D</tt>, if the receiver is an
@@ -308,7 +308,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
     return new SparseObjectMatrix2D(
         rows, columns, this.elements, rowZero, columnZero, rowStride, columnStride);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[slice,row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -336,7 +336,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
     if (value == null) this.elements.removeKey(index);
     else this.elements.put(index, value);
   }
-  /**
+  /*
    * Releases any superfluous memory created by explicitly putting zero values into cells formerly
    * having non-zero values; An application can use this operation to minimize the storage of the
    * receiver.
@@ -361,7 +361,7 @@ public class SparseObjectMatrix3D extends ObjectMatrix3D {
   public void trimToSize() {
     this.elements.trimToSize();
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param sliceOffsets the offsets of the visible elements.

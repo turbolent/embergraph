@@ -17,12 +17,12 @@ package org.embergraph.ganglia;
 
 import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
-/**
- * Interface for generating Ganglia message according to some version of the ganglia wire protocol.
+/*
+* Interface for generating Ganglia message according to some version of the ganglia wire protocol.
  */
 public interface IGangliaMessageEncoder {
 
-  /**
+  /*
    * Generate a request record.
    *
    * @param xdr Where to write the record.
@@ -30,7 +30,7 @@ public interface IGangliaMessageEncoder {
    */
   void writeRequest(XDROutputBuffer xdr, IGangliaRequestMessage msg);
 
-  /**
+  /*
    * Ganglia metadata record. This is a NOP until version 3.1.
    *
    * @param xdr Where to write the record.
@@ -38,7 +38,7 @@ public interface IGangliaMessageEncoder {
    */
   void writeMetadata(XDROutputBuffer xdr, IGangliaMetadataMessage decl);
 
-  /**
+  /*
    * Generate a metric record.
    *
    * <p>Note: It is critical that the {@link IGangliaMetricMessage} is both internally consistent

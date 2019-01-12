@@ -61,8 +61,8 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * Unit tests for the {@link MemorySortOp}.
+/*
+* Unit tests for the {@link MemorySortOp}.
  *
  * <p>The test suite for the {@link IVComparator} is responsible for testing the ability to compare
  * inline and non-inline {@link IV}s, placing them into an order which is not inconsistent with the
@@ -106,8 +106,8 @@ public class TestMemorySortOp extends TestCase2 {
     final IConstant<IV> d = new Constant<IV>(makeIV(f.createLiteral("d")));
     final IConstant<IV> e = new Constant<IV>(makeIV(f.createLiteral("e")));
 
-    final ISortOrder<?> sors[] =
-        new ISortOrder[] {new SortOrder(x, true /*asc*/), new SortOrder(y, false /*asc*/)};
+    final ISortOrder<?>[] sors =
+        new ISortOrder[]{new SortOrder(x, true /*asc*/), new SortOrder(y, false /*asc*/)};
 
     final int sortOpId = 1;
 
@@ -115,47 +115,45 @@ public class TestMemorySortOp extends TestCase2 {
         new MemorySortOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),
-                  new NV(MemorySortOp.Annotations.SORT_ORDER, sors),
-                  new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  //                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
-                  new NV(MemorySortOp.Annotations.LAST_PASS, true),
-                }));
+                new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),
+                new NV(MemorySortOp.Annotations.SORT_ORDER, sors),
+                new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                //                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
+                new NV(MemorySortOp.Annotations.LAST_PASS, true)));
 
     // the test data
 
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, a}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, e}),
-          new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {c}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {d, a}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {d, b}),
-          new ListBindingSet(new IVariable<?>[] {}, new IConstant[] {}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, c}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {b, d}),
-          new ListBindingSet(new IVariable<?>[] {y}, new IConstant[] {a}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {b, b})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, a}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, e}),
+            new ListBindingSet(new IVariable<?>[]{x}, new IConstant[]{c}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{d, a}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{d, b}),
+            new ListBindingSet(new IVariable<?>[]{}, new IConstant[]{}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, c}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{b, d}),
+            new ListBindingSet(new IVariable<?>[]{y}, new IConstant[]{a}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{b, b})
         };
 
     // the expected solutions
 
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {y}, new IConstant[] {a}),
-          new ListBindingSet(new IVariable<?>[] {}, new IConstant[] {}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, e}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, c}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, a}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {b, d}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {b, b}),
-          new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {c}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {d, b}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {d, a})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{y}, new IConstant[]{a}),
+            new ListBindingSet(new IVariable<?>[]{}, new IConstant[]{}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, e}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, c}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, a}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{b, d}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{b, b}),
+            new ListBindingSet(new IVariable<?>[]{x}, new IConstant[]{c}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{d, b}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{d, a})
         };
 
     final BOpStats stats = query.newStats();
@@ -220,8 +218,8 @@ public class TestMemorySortOp extends TestCase2 {
     final IConstant<IV> d = new Constant<IV>(new XSDNumericIV(4));
     final IConstant<IV> e = new Constant<IV>(new XSDNumericIV(5));
 
-    final ISortOrder<?> sors[] =
-        new ISortOrder[] {new SortOrder(x, true /*asc*/), new SortOrder(y, false /*asc*/)};
+    final ISortOrder<?>[] sors =
+        new ISortOrder[]{new SortOrder(x, true /*asc*/), new SortOrder(y, false /*asc*/)};
 
     final int sortOpId = 1;
 
@@ -229,47 +227,45 @@ public class TestMemorySortOp extends TestCase2 {
         new MemorySortOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),
-                  new NV(MemorySortOp.Annotations.SORT_ORDER, sors),
-                  new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  //                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
-                  new NV(MemorySortOp.Annotations.LAST_PASS, true),
-                }));
+                new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),
+                new NV(MemorySortOp.Annotations.SORT_ORDER, sors),
+                new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                //                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
+                new NV(MemorySortOp.Annotations.LAST_PASS, true)));
 
     // the test data
 
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, a}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, e}),
-          new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {c}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {d, a}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {d, b}),
-          new ListBindingSet(new IVariable<?>[] {}, new IConstant[] {}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, c}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {b, d}),
-          new ListBindingSet(new IVariable<?>[] {y}, new IConstant[] {a}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {b, b})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, a}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, e}),
+            new ListBindingSet(new IVariable<?>[]{x}, new IConstant[]{c}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{d, a}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{d, b}),
+            new ListBindingSet(new IVariable<?>[]{}, new IConstant[]{}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, c}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{b, d}),
+            new ListBindingSet(new IVariable<?>[]{y}, new IConstant[]{a}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{b, b})
         };
 
     // the expected solutions
 
-    final IBindingSet expected[] =
-        new IBindingSet[] {
-          new ListBindingSet(new IVariable<?>[] {y}, new IConstant[] {a}),
-          new ListBindingSet(new IVariable<?>[] {}, new IConstant[] {}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, e}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, c}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {a, a}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {b, d}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {b, b}),
-          new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {c}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {d, b}),
-          new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {d, a})
+    final IBindingSet[] expected =
+        new IBindingSet[]{
+            new ListBindingSet(new IVariable<?>[]{y}, new IConstant[]{a}),
+            new ListBindingSet(new IVariable<?>[]{}, new IConstant[]{}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, e}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, c}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{a, a}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{b, d}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{b, b}),
+            new ListBindingSet(new IVariable<?>[]{x}, new IConstant[]{c}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{d, b}),
+            new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{d, a})
         };
 
     final BOpStats stats = query.newStats();
@@ -320,7 +316,7 @@ public class TestMemorySortOp extends TestCase2 {
     assertEquals(1, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Test with computed value expressions.
    *
    * <p>Note: Since there are some unbound values for the base variables, solutions in which those
@@ -353,19 +349,19 @@ public class TestMemorySortOp extends TestCase2 {
       final IConstant<IV> _4 = new Constant<IV>(new XSDNumericIV(4));
       final IConstant<IV> _5 = new Constant<IV>(new XSDNumericIV(5));
 
-      final ISortOrder<?> sors[] =
-          new ISortOrder[] {
-            new SortOrder(
-                new Bind(
-                    z,
-                    new MathBOp(
-                        x,
-                        y,
-                        MathBOp.MathOp.PLUS,
-                        new GlobalAnnotations(lexiconNamespace, ITx.READ_COMMITTED))),
-                false /* asc */),
-            new SortOrder(y, false /* asc */),
-            new SortOrder(x, true /* asc */),
+      final ISortOrder<?>[] sors =
+          new ISortOrder[]{
+              new SortOrder(
+                  new Bind(
+                      z,
+                      new MathBOp(
+                          x,
+                          y,
+                          MathBOp.MathOp.PLUS,
+                          new GlobalAnnotations(lexiconNamespace, ITx.READ_COMMITTED))),
+                  false /* asc */),
+              new SortOrder(y, false /* asc */),
+              new SortOrder(x, true /* asc */),
           };
 
       final int sortOpId = 1;
@@ -374,58 +370,56 @@ public class TestMemorySortOp extends TestCase2 {
           new MemorySortOp(
               new BOp[] {},
               NV.asMap(
-                  new NV[] {
-                    new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),
-                    new NV(MemorySortOp.Annotations.SORT_ORDER, sors),
-                    new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),
-                    new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                    new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),
-                    new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                    //                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
-                    new NV(MemorySortOp.Annotations.LAST_PASS, true),
-                  }));
+                  new NV(MemorySortOp.Annotations.BOP_ID, sortOpId),
+                  new NV(MemorySortOp.Annotations.SORT_ORDER, sors),
+                  new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, new IVComparator()),
+                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                  new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1),
+                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                  //                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
+                  new NV(MemorySortOp.Annotations.LAST_PASS, true)));
 
       // the test data
 
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_1, _1}) // x+y=2
-            ,
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_1, _5}) // x+y=6
-            ,
-            new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {_3}) // x+y=N/A
-            ,
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_4, _1}) // x+y=5
-            ,
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_4, _2}) // x+y=6
-            ,
-            new ListBindingSet(new IVariable<?>[] {}, new IConstant[] {}) // x+y=N/A
-            ,
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_1, _3}) // x+y=4
-            ,
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_2, _4}) // x+y=6
-            ,
-            new ListBindingSet(new IVariable<?>[] {y}, new IConstant[] {_1}) // x+y=N/A
-            ,
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_2, _2}) // x+y=4
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_1, _1}) // x+y=2
+              ,
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_1, _5}) // x+y=6
+              ,
+              new ListBindingSet(new IVariable<?>[]{x}, new IConstant[]{_3}) // x+y=N/A
+              ,
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_4, _1}) // x+y=5
+              ,
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_4, _2}) // x+y=6
+              ,
+              new ListBindingSet(new IVariable<?>[]{}, new IConstant[]{}) // x+y=N/A
+              ,
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_1, _3}) // x+y=4
+              ,
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_2, _4}) // x+y=6
+              ,
+              new ListBindingSet(new IVariable<?>[]{y}, new IConstant[]{_1}) // x+y=N/A
+              ,
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_2, _2}) // x+y=4
           };
 
       // the expected solutions
 
-      final IBindingSet expected[] =
-          new IBindingSet[] {
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_1, _5}),
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_2, _4}),
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_4, _2}),
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_4, _1}),
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_1, _3}),
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_2, _2}),
-            new ListBindingSet(new IVariable<?>[] {x, y}, new IConstant[] {_1, _1}),
-            new ListBindingSet(new IVariable<?>[] {y}, new IConstant[] {_1}) // type error.
-            ,
-            new ListBindingSet(new IVariable<?>[] {}, new IConstant[] {}) // type error.
-            ,
-            new ListBindingSet(new IVariable<?>[] {x}, new IConstant[] {_3}) // type error.
+      final IBindingSet[] expected =
+          new IBindingSet[]{
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_1, _5}),
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_2, _4}),
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_4, _2}),
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_4, _1}),
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_1, _3}),
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_2, _2}),
+              new ListBindingSet(new IVariable<?>[]{x, y}, new IConstant[]{_1, _1}),
+              new ListBindingSet(new IVariable<?>[]{y}, new IConstant[]{_1}) // type error.
+              ,
+              new ListBindingSet(new IVariable<?>[]{}, new IConstant[]{}) // type error.
+              ,
+              new ListBindingSet(new IVariable<?>[]{x}, new IConstant[]{_3}) // type error.
           };
 
       final BOpStats stats = query.newStats();

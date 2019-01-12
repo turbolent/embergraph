@@ -25,8 +25,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Handler is mapped to a namespace prefix. When a URI is presented that matches the handler's
+/*
+* Handler is mapped to a namespace prefix. When a URI is presented that matches the handler's
  * namespace prefix, this class attempts to parse the remaining portion of the URI into an inline
  * literal. The namespace prefix must be present in the vocabulary. The localName must be parseable
  * into an inline literal. If either of these things is not true the URI will not be inlined.
@@ -45,7 +45,7 @@ public abstract class InlineURIHandler {
   @SuppressWarnings("rawtypes")
   protected transient IV namespaceIV;
 
-  /**
+  /*
    * Create a handler for the supplied namespace prefix - the handler will be invoked iff it is the
    * registered handler having the longest prefix LTE to the actual URI.
    */
@@ -67,7 +67,7 @@ public abstract class InlineURIHandler {
               + namespace);
   }
 
-  /**
+  /*
    * The namespace this handles. Used for resolving the handler after load so it can inflate the
    * localName portion of the inlined uri.
    */
@@ -111,7 +111,7 @@ public abstract class InlineURIHandler {
     return delegate.getInlineValue().toString();
   }
 
-  /**
+  /*
    * Concrete subclasses are responsible for actually creating the inline literal IV for the
    * localName.
    */

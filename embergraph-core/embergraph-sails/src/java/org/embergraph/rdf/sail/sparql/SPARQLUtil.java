@@ -7,8 +7,8 @@ package org.embergraph.rdf.sail.sparql;
 
 import info.aduna.text.StringUtil;
 
-/**
- * SPARQL-related utility methods.
+/*
+* SPARQL-related utility methods.
  *
  * @author Arjohn Kampman
  * @openrdf
@@ -28,7 +28,7 @@ public class SPARQLUtil {
     return s;
   }
 
-  /**
+  /*
    * Decodes an encoded SPARQL string. Any \-escape sequences are substituted with their decoded
    * value.
    *
@@ -50,7 +50,7 @@ public class SPARQLUtil {
     StringBuilder sb = new StringBuilder(sLength);
 
     while (backSlashIdx != -1) {
-      sb.append(s.substring(startIdx, backSlashIdx));
+      sb.append(s, startIdx, backSlashIdx);
 
       if (backSlashIdx + 1 >= sLength) {
         throw new IllegalArgumentException("Unescaped backslash in: " + s);

@@ -37,21 +37,21 @@ import org.embergraph.btree.raba.MutableKeyBuffer;
 import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Abstract node supporting incremental persistence and copy-on-write semantics.
+/*
+* Abstract node supporting incremental persistence and copy-on-write semantics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public abstract class AbstractNode<
         T extends AbstractNode
-        /*
-         * DO-NOT-USE-GENERIC-HERE. The compiler will fail under Linux (JDK 1.6.0_14,
+      /*
+       * DO-NOT-USE-GENERIC-HERE. The compiler will fail under Linux (JDK 1.6.0_14,
          * _16).
          */
         >
     extends PO implements IAbstractNode, IAbstractNodeData, IKeysData {
 
-  /**
+  /*
    * Log for node and leaf operations.
    *
    * <dl>
@@ -73,7 +73,7 @@ public abstract class AbstractNode<
   /** True iff the {@link #log} level is DEBUG or less. */
   protected static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * The BTree.
    *
    * <p>Note: This field MUST be patched when the node is read from the store. This requires a
@@ -81,7 +81,7 @@ public abstract class AbstractNode<
    */
   protected final transient AbstractBTree btree;
 
-  /**
+  /*
    * The parent of this node. This is null for the root node. The parent is required in order to set
    * the persistent identity of a newly persisted child node on its parent. The reference to the
    * parent will remain strongly reachable as long as the parent is either a root (held by the
@@ -95,7 +95,7 @@ public abstract class AbstractNode<
    */
   protected transient Reference<Node> parent = null;
 
-  /**
+  /*
    * A {@link Reference} to this {@link Node}. This is created when the node is created and is
    * reused by a children of the node as the {@link Reference} to their parent. This results in few
    * {@link Reference} objects in use by the B+Tree since it effectively provides a canonical {@link
@@ -103,7 +103,7 @@ public abstract class AbstractNode<
    */
   protected final transient Reference<? extends AbstractNode<T>> self;
 
-  /**
+  /*
    * The #of times that this node is present on the {@link HardReferenceQueue} . This value is
    * incremented each time the node is added to the queue and is decremented each time the node is
    * evicted from the queue. On eviction, if the counter is zero(0) after it is decremented then the
@@ -122,13 +122,13 @@ public abstract class AbstractNode<
    */
   protected transient int referenceCount = 0;
 
-  /**
+  /*
    * The minimum #of keys. For a {@link Node}, the minimum #of children is <code>minKeys + 1</code>.
    * For a {@link Leaf}, the minimum #of values is <code>minKeys</code>.
    */
   protected abstract int minKeys();
 
-  /**
+  /*
    * The maximum #of keys. This is <code>branchingFactor - 1</code> for a {@link Node} and <code>
    * branchingFactor</code> for a {@link Leaf}. For a {@link Node}, the maximum #of children is
    * <code>maxKeys + 1</code>. For a {@link Leaf}, the maximum #of values is <code>maxKeys</code>.
@@ -182,7 +182,7 @@ public abstract class AbstractNode<
     deleted = true;
   }
 
-  /**
+  /*
    * The parent iff the node has been added as the child of another node and the parent reference
    * has not been cleared.
    *
@@ -205,7 +205,7 @@ public abstract class AbstractNode<
      * The parent is allowed to be null iff this is the root of the
      * btree.
      */
-    assert (this == btree.root && p == null) || p != null;
+    assert this == btree.root || p != null;
 
     return p;
   }
@@ -216,7 +216,7 @@ public abstract class AbstractNode<
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * All constructors delegate to this constructor to set the btree and branching factor and to
    * compute the minimum and maximum #of keys for the node. This isolates the logic required for
    * computing the minimum and maximum capacity and encapsulates it as <code>final</code> data
@@ -257,7 +257,7 @@ public abstract class AbstractNode<
     btree.touch(this);
   }
 
-  /**
+  /*
    * Copy constructor.
    *
    * <p>Note: The copy constructor steals the state of the source node, creating a new node with the
@@ -341,7 +341,7 @@ public abstract class AbstractNode<
 
   }
 
-  /**
+  /*
    * Return this leaf iff it is dirty (aka mutable) and otherwise return a copy of this leaf. If a
    * copy is made of the leaf, then a copy will also be made of each immutable parent up to the
    * first mutable parent or the root of the tree, which ever comes first. If the root is copied,
@@ -365,7 +365,7 @@ public abstract class AbstractNode<
     return copyOnWrite(NULL);
   }
 
-  /**
+  /*
    * Return this node or leaf iff it is dirty (aka mutable) and otherwise return a copy of this node
    * or leaf. If a copy is made of the node, then a copy will also be made of each immutable parent
    * up to the first mutable parent or the root of the tree, which ever comes first. If the root is
@@ -462,8 +462,8 @@ public abstract class AbstractNode<
 
       if (!parent.isDirty()) {
 
-        /*
-         * Note: pass up the identity of the old child since we want
+      /*
+       * Note: pass up the identity of the old child since we want
          * to avoid having its parent reference reset.
          */
         parent = (Node) parent.copyOnWrite(oldId);
@@ -486,7 +486,7 @@ public abstract class AbstractNode<
     return postOrderNodeIterator(false /* dirtyNodesOnly */, false /* nodesOnly */);
   }
 
-  /**
+  /*
    * Post-order traversal of nodes and leaves in the tree. For any given node, its children are
    * always visited before the node itself (hence the node occurs in the post-order position in the
    * traversal). The iterator is NOT safe for concurrent modification.
@@ -499,7 +499,7 @@ public abstract class AbstractNode<
     return postOrderNodeIterator(dirtyNodesOnly, false /* nodesOnly */);
   }
 
-  /**
+  /*
    * Post-order traversal of nodes and leaves in the tree. For any given node, its children are
    * always visited before the node itself (hence the node occurs in the post-order position in the
    * traversal). The iterator is NOT safe for concurrent modification.
@@ -516,7 +516,7 @@ public abstract class AbstractNode<
     return rangeIterator(null /* fromKey */, null /* toKey */, IRangeQuery.DEFAULT);
   }
 
-  /**
+  /*
    * Return an iterator that visits the entries in a half-open key range but filters the values.
    *
    * @param fromKey The first key that will be visited (inclusive). When <code>null</code> there is
@@ -531,7 +531,7 @@ public abstract class AbstractNode<
         btree, postOrderIterator(fromKey, toKey), fromKey, toKey, flags);
   }
 
-  /**
+  /*
    * Post-order traversal of nodes and leaves in the tree with a key range constraint. For any given
    * node, its children are always visited before the node itself (hence the node occurs in the
    * post-order position in the traversal). The iterator is NOT safe for concurrent modification.
@@ -544,7 +544,7 @@ public abstract class AbstractNode<
    */
   public abstract Iterator<AbstractNode> postOrderIterator(byte[] fromKey, byte[] toKey);
 
-  /**
+  /*
    * Helper class expands a post-order node and leaf traversal to visit the entries in the leaves.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -590,8 +590,8 @@ public abstract class AbstractNode<
 
             private static final long serialVersionUID = 1L;
 
-            /*
-             * Expand the value objects for each leaf visited in the
+          /*
+       * Expand the value objects for each leaf visited in the
              * post-order traversal.
              */
             protected Iterator expand(final Object childObj) {
@@ -621,7 +621,7 @@ public abstract class AbstractNode<
     }
   }
 
-  /**
+  /*
    * Invariants:
    *
    * <ul>
@@ -651,8 +651,8 @@ public abstract class AbstractNode<
 
       if ((btree instanceof IndexSegment)) {
 
-        /*
-         * @todo back out underflow support.
+      /*
+       * @todo back out underflow support.
          * The leaves and nodes of an IndexSegment are allowed to
          * underflow down to one key when the IndexSegment was generated
          * using an overestimate of the actual tuple count.
@@ -684,7 +684,7 @@ public abstract class AbstractNode<
     }
   }
 
-  /**
+  /*
    * Return a human readable representation of the key. The key is a variable length unsigned
    * byte[]. The returned string is a representation of that unsigned byte[]. This is use a wrapper
    * for {@link BytesUtil#toString()}.
@@ -696,7 +696,7 @@ public abstract class AbstractNode<
     return BytesUtil.toString(key);
   }
 
-  /**
+  /*
    * Copy a key from the source node into this node. This method does not modify the source node.
    * This method does not update the #of keys in this node.
    *
@@ -721,14 +721,14 @@ public abstract class AbstractNode<
     return btree.branchingFactor;
   }
 
-  /**
+  /*
    * Split a node or leaf that is over capacity (by one).
    *
    * @return The high node (or leaf) created by the split.
    */
   protected abstract IAbstractNode split();
 
-  /**
+  /*
    * Join this node (must be deficient) with either its left or right sibling. A join will either
    * cause a single key and value (child) to be redistributed from a sibling to this leaf (node) or
    * it will cause a sibling leaf (node) to be merged into this leaf (node). Both situations also
@@ -878,7 +878,7 @@ public abstract class AbstractNode<
     }
   }
 
-  /**
+  /*
    * Return <code>true</code> if this node is the left-most node at its level within the tree.
    *
    * @return <code>true</code> iff the child is the left-most node at its level within the tree.
@@ -911,7 +911,7 @@ public abstract class AbstractNode<
     return false;
   }
 
-  /**
+  /*
    * Return <code>true</code> if this node is the right-most node at its level within the tree.
    *
    * @return <code>true</code> iff the child is the right-most node at its level within the tree.
@@ -949,7 +949,7 @@ public abstract class AbstractNode<
     return false;
   }
 
-  /**
+  /*
    * Redistribute the one key from the sibling into this node.
    *
    * @param sibling The sibling.
@@ -966,7 +966,7 @@ public abstract class AbstractNode<
    */
   protected abstract void redistributeKeys(AbstractNode sibling, boolean isRightSibling);
 
-  /**
+  /*
    * Merge the sibling into this node.
    *
    * @param sibling The sibling.
@@ -974,7 +974,7 @@ public abstract class AbstractNode<
    */
   protected abstract void merge(AbstractNode sibling, boolean isRightSibling);
 
-  /**
+  /*
    * Insert or update a value.
    *
    * @param key The key (non-null).
@@ -995,7 +995,7 @@ public abstract class AbstractNode<
   public abstract Tuple insert(
       byte[] key, byte[] val, boolean delete, boolean putIfAbsent, long timestamp, Tuple tuple);
 
-  /**
+  /*
    * Recursive search locates the appropriate leaf and removes the entry for the key.
    *
    * <p>Note: It is an error to call this method if delete markers are in use.
@@ -1008,7 +1008,7 @@ public abstract class AbstractNode<
    */
   public abstract Tuple remove(byte[] searchKey, Tuple tuple);
 
-  /**
+  /*
    * Lookup a key.
    *
    * @param searchKey The search key.
@@ -1019,7 +1019,7 @@ public abstract class AbstractNode<
    */
   public abstract Tuple lookup(byte[] searchKey, Tuple tuple);
 
-  /**
+  /*
    * Recursive search locates the appropriate leaf and returns the index position of the entry.
    *
    * @param searchKey The search key.
@@ -1030,7 +1030,7 @@ public abstract class AbstractNode<
    */
   public abstract long indexOf(byte[] searchKey);
 
-  /**
+  /*
    * Recursive search locates the entry at the specified index position in the btree and returns the
    * key for that entry.
    *
@@ -1041,7 +1041,7 @@ public abstract class AbstractNode<
    */
   public abstract byte[] keyAt(long index);
 
-  /**
+  /*
    * Recursive search locates the entry at the specified index position in the btree and returns the
    * value for that entry.
    *
@@ -1053,7 +1053,7 @@ public abstract class AbstractNode<
    */
   public abstract void valueAt(long index, Tuple tuple);
 
-  /**
+  /*
    * Dump the data onto the {@link PrintStream} (non-recursive).
    *
    * @param out Where to write the dump.
@@ -1064,7 +1064,7 @@ public abstract class AbstractNode<
     return dump(BTree.dumpLog.getEffectiveLevel(), out);
   }
 
-  /**
+  /*
    * Dump the data onto the {@link PrintStream}.
    *
    * @param level The logging level.
@@ -1076,7 +1076,7 @@ public abstract class AbstractNode<
     return dump(level, out, -1, false);
   }
 
-  /**
+  /*
    * Dump the data onto the {@link PrintStream}.
    *
    * @param level The logging level.

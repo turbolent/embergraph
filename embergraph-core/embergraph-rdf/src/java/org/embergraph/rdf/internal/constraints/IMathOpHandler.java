@@ -8,15 +8,15 @@ import org.openrdf.model.Literal;
 /** Interface for handling math operations on specific data type. */
 public interface IMathOpHandler {
 
-  /**
+  /*
    * Check if this utility applies for the argument types.
    *
    * @param args
    * @return
    */
-  public boolean canInvokeMathOp(final Literal... args);
+  boolean canInvokeMathOp(final Literal... args);
 
-  /**
+  /*
    * Perform the operation on arguments.
    *
    * @param l1
@@ -27,7 +27,7 @@ public interface IMathOpHandler {
    * @param vf
    * @return
    */
-  public IV doMathOp(
+  IV doMathOp(
       final Literal l1,
       final IV iv1,
       final Literal l2,

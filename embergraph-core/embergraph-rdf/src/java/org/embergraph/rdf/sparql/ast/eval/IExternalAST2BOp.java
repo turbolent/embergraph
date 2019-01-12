@@ -34,13 +34,13 @@ import org.embergraph.rdf.sparql.ast.DatasetNode;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 
-/**
- * Interface for an external evaluation of {@link JoinGroupNode}s.
+/*
+* Interface for an external evaluation of {@link JoinGroupNode}s.
  *
  * @author <a href="http://olafhartig.de">Olaf Hartig</a>
  */
 public interface IExternalAST2BOp {
-  /**
+  /*
    * Translate the given join group.
    *
    * @param left
@@ -56,7 +56,7 @@ public interface IExternalAST2BOp {
       final AtomicInteger start,
       final AST2BOpContext ctx);
 
-  /**
+  /*
    * Use a {@link FastRangeCountOp}.
    *
    * @see https://github.com/SYSTAP/bigdata-gpu/issues/101

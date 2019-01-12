@@ -29,8 +29,8 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.ap.Predicate;
 
-/**
- * Unit tests for {@link PartitionedJoinGroup#canJoin(IPredicate, IPredicate)}
+/*
+* Unit tests for {@link PartitionedJoinGroup#canJoin(IPredicate, IPredicate)}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -45,7 +45,7 @@ public class TestPartitionedJoinGroup_canJoin extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Correct rejection tests.
    *
    * @see BOpUtility#canJoin(IPredicate, IPredicate).
@@ -77,7 +77,7 @@ public class TestPartitionedJoinGroup_canJoin extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Semantics tests focused on shared variables in the operands.
    *
    * @see PartitionedJoinGroup#canJoin(IPredicate, IPredicate)
@@ -107,7 +107,7 @@ public class TestPartitionedJoinGroup_canJoin extends TestCase2 {
     assertTrue(PartitionedJoinGroup.canJoin(p1, p1));
   }
 
-  /**
+  /*
    * Verify that joins are not permitted when the variables are only shared via an annotation.
    *
    * @see PartitionedJoinGroup#canJoin(IPredicate, IPredicate)

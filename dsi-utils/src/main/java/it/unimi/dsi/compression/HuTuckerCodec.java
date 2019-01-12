@@ -25,8 +25,8 @@ import it.unimi.dsi.bits.BitVector;
 import it.unimi.dsi.fastutil.booleans.BooleanArrays;
 import java.io.Serializable;
 
-/**
- * An implementation of the Hu&ndash;Tucker optimal lexicographical prefix-free code.
+/*
+* An implementation of the Hu&ndash;Tucker optimal lexicographical prefix-free code.
  *
  * <p>The familiar Huffman coding technique can be extended so to preserve the order in which
  * symbols are given to the coder, in the sense that if <var>j</var>&lt;<var>k</var>, then the
@@ -69,7 +69,7 @@ public class HuTuckerCodec implements PrefixCodec, Serializable {
     }
   }
 
-  private static long[] intArray2LongArray(final int a[]) {
+  private static long[] intArray2LongArray(final int[] a) {
     final long[] b = new long[a.length];
     for (int i = a.length; i-- != 0; ) b[i] = a[i];
     return b;

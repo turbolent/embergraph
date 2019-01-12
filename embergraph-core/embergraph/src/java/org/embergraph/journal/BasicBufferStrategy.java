@@ -24,8 +24,8 @@ import java.nio.channels.FileChannel;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.io.FileChannelUtility;
 
-/**
- * Implements logic to read from and write on a buffer. This is sufficient for a {@link
+/*
+* Implements logic to read from and write on a buffer. This is sufficient for a {@link
  * BufferMode#Transient} implementation or a {@link BufferMode#Mapped} implementation, but the
  * {@link BufferMode#Direct} implementation needs to also implement write through to the disk.
  *
@@ -34,7 +34,7 @@ import org.embergraph.io.FileChannelUtility;
  */
 public abstract class BasicBufferStrategy extends AbstractBufferStrategy {
 
-  /**
+  /*
    * A buffer containing a write through image of the backing file. The image begins after the root
    * blocks, making it impossible to write on the root blocks using the buffer. The offset of the
    * image into the backing file is given by {@link FileMetadata#headerSize0}.
@@ -50,7 +50,7 @@ public abstract class BasicBufferStrategy extends AbstractBufferStrategy {
    */
   private volatile ByteBuffer buffer;
 
-  /**
+  /*
    * @param readOnly
    * @return
    */
@@ -66,7 +66,7 @@ public abstract class BasicBufferStrategy extends AbstractBufferStrategy {
     }
   }
 
-  /**
+  /*
    * The size of the journal header, including MAGIC, version, and both root blocks. This is used as
    * an offset when computing the address of a record in an underlying file and is ignored by buffer
    * modes that are not backed by a file (e.g., transient) or that are memory mapped (since the map
@@ -230,7 +230,7 @@ public abstract class BasicBufferStrategy extends AbstractBufferStrategy {
     return view.slice();
   }
 
-  /**
+  /*
    * Note: This is synchronized since it MAY be invoked directly while concurrent writers are
    * running and not just from {@link #overflow(long)}.
    */
@@ -333,7 +333,7 @@ public abstract class BasicBufferStrategy extends AbstractBufferStrategy {
     return count;
   }
 
-  /**
+  /*
    * FIXME Counters need to be added here for the {@link DirectBufferStrategy}, {@link
    * MappedBufferStrategy}, and {@link TransientBufferStrategy}.
    */

@@ -62,8 +62,8 @@ import org.embergraph.util.concurrent.Computable;
 import org.embergraph.util.concurrent.LatchedExecutor;
 import org.embergraph.util.concurrent.Memoizer;
 
-/**
- * Abstract base class for a persistence capable extensible hash tree.
+/*
+* Abstract base class for a persistence capable extensible hash tree.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -85,13 +85,13 @@ public abstract class AbstractHTree
   /** The index is read-only but a mutation operation was requested. */
   protected static final String ERROR_READ_ONLY = "Read-only";
 
-  /**
+  /*
    * The index is transient (not backed by persistent storage) but an operation that requires
    * persistence was requested.
    */
   protected static final String ERROR_TRANSIENT = "Transient";
 
-  /**
+  /*
    * An unisolated index view is in an error state. It must be discarded and reloaded from the
    * current checkpoint record.
    *
@@ -101,7 +101,7 @@ public abstract class AbstractHTree
   protected static final String ERROR_ERROR_STATE = "Index is in error state";
 
   public final int MIN_ADDRESS_BITS = 1;
-  /**
+  /*
    * The maximum value for the <code>addressBits</code> parameter.
    *
    * <p>Note: <code>1^32</code> overflows an int32. However, <code>2^16</code> is 65536 which is a
@@ -121,7 +121,7 @@ public abstract class AbstractHTree
   /** Log for {@link AbstractHTree#dump(PrintStream)} and friends. */
   public static final Logger dumpLog = Logger.getLogger(AbstractHTree.class.getName() + "#dump");
 
-  /**
+  /*
    * Counters tracking various aspects of the btree.
    *
    * <p>Note: This is <code>volatile</code> to avoid the need for synchronization in order for
@@ -129,7 +129,7 @@ public abstract class AbstractHTree
    */
   private volatile BTreeCounters btreeCounters = new BTreeCounters();
 
-  /**
+  /*
    * Counters tracking various aspects of the btree.
    *
    * <p>TODO Refactor / reuse performance counters for HTree and collect counters in the code.
@@ -139,7 +139,7 @@ public abstract class AbstractHTree
     return btreeCounters;
   }
 
-  /**
+  /*
    * Replace the {@link BTreeCounters}.
    *
    * <p>Note: This is used by the {@link IndexManager} to ensure that an index loaded from its
@@ -160,8 +160,8 @@ public abstract class AbstractHTree
     this.btreeCounters = btreeCounters;
   }
 
-  //	/**
-  //	 * {@inheritDoc}
+  //	/*
+//	 * {@inheritDoc}
   //	 * <p>
   //	 * Return some "statistics" about the btree including both the static
   //	 * {@link CounterSet} and the {@link BTreeCounters}s.
@@ -290,34 +290,34 @@ public abstract class AbstractHTree
   /** When <code>true</code> the {@link AbstractHTree} does not permit mutation. */
   protected final boolean readOnly;
 
-  /**
+  /*
    * The #of bits in the address space for a directory page (from the constructor). This constant is
    * specified when the hash tree is created. A directory page has <code>2^addressBits</code>
    * entries. Those entries are divided up among one or more buddy hash tables on that page.
    */
   protected final int addressBits;
 
-  /**
+  /*
    * The #of bucket slots in a bucket page. There is a case for allowing the number of bucket slots
    * to be different than the number of directory page slots (as determined by the number of
    * addressBits) since the storage requirements for bucket values/keys is not set.
    */
   protected final int bucketSlots;
 
-  /**
+  /*
    * Hard reference iff the index is mutable (aka unisolated) allows us to avoid patterns that
    * create short life time versions of the object to protect {@link #writeCheckpoint2()} and
    * similar operations.
    */
   private final IReadWriteLockManager lockManager;
 
-  //	/**
-  //	 * The #of entries in a directory bucket, which is 2^{@link #addressBits}
+  //	/*
+//	 * The #of entries in a directory bucket, which is 2^{@link #addressBits}
   //	 * (aka <code>1<<addressBits</code>).
   //	 */
   //    protected final int branchingFactor;
 
-  /**
+  /*
    * Helper class models a request to load a child node.
    *
    * <p>Note: This class must implement equals() and hashCode() since it is used within the {@link
@@ -333,7 +333,7 @@ public abstract class AbstractHTree
     /** The child index. */
     final int index;
 
-    /**
+    /*
      * @param parent The parent node.
      * @param index The child index.
      */
@@ -354,7 +354,7 @@ public abstract class AbstractHTree
       return parent == r.parent && index == r.index;
     }
 
-    /**
+    /*
      * The hashCode() implementation assumes that the parent's hashCode() is well distributed and
      * just adds in the index to that value to improve the chance of a distinct hash value.
      */
@@ -364,15 +364,15 @@ public abstract class AbstractHTree
     }
   }
 
-  /**
+  /*
    * Helper loads a child node from the specified address by delegating to {@link
    * Node#_getChild(int)}.
    */
   private static final Computable<LoadChildRequest, AbstractPage> loadChild =
       new Computable<LoadChildRequest, AbstractPage>() {
 
-        /**
-         * Loads a child node from the specified address.
+      /*
+       * Loads a child node from the specified address.
          *
          * @return A hard reference to that child node.
          * @throws IllegalArgumentException if addr is <code>null</code>.
@@ -405,7 +405,7 @@ public abstract class AbstractHTree
         }
       };
 
-  /**
+  /*
    * A {@link Memoizer} subclass which exposes an additional method to remove a {@link FutureTask}
    * from the internal cache. This is used as part of an explicit protocol in {@link
    * DirectoryPage#_getChild(int)} to clear out cache entries once the child reference has been set
@@ -423,8 +423,8 @@ public abstract class AbstractHTree
       super(c);
     }
 
-    //        /**
-    //         * The approximate size of the cache (used solely for debugging to
+    //        /*
+//         * The approximate size of the cache (used solely for debugging to
     //         * detect cache leaks).
     //         */
     //        int size() {
@@ -433,7 +433,7 @@ public abstract class AbstractHTree
     //
     //        }
 
-    /**
+    /*
      * Called by the thread which atomically sets the {@link DirectoryPage#childRefs} element to the
      * computed {@link AbstractPage}. At that point a reference exists to the child on the parent.
      *
@@ -447,8 +447,8 @@ public abstract class AbstractHTree
       }
     }
 
-    //        /**
-    //         * Called from {@link AbstractBTree#close()}.
+    //        /*
+//         * Called from {@link AbstractBTree#close()}.
     //         *
     //         * @todo should we do this?  There should not be any reads against the
     //         * the B+Tree when it is close()d.  Therefore I do not believe there
@@ -460,9 +460,9 @@ public abstract class AbstractHTree
     //
     //        }
 
-  };
+  }
 
-  /**
+  /*
    * Used to materialize children without causing concurrent threads passing through the same parent
    * node to wait on the IO for the child. This is <code>null</code> for a mutable B+Tree since
    * concurrent requests are not permitted for the mutable B+Tree.
@@ -471,7 +471,7 @@ public abstract class AbstractHTree
    */
   final ChildMemoizer memo;
 
-  /**
+  /*
    * {@link Memoizer} pattern for non-blocking concurrent reads of child nodes. This is package
    * private. Use {@link Node#getChild(int)} instead.
    *
@@ -500,7 +500,7 @@ public abstract class AbstractHTree
   /** The root directory. */
   protected volatile DirectoryPage root;
 
-  /**
+  /*
    * This field is set if an error is encountered that renders an unisolated index object unusable.
    * For example, this can occur if an error was detected during incremental eviction of dirty nodes
    * for a mutable index view since that means that there are partly serialized (and possibly
@@ -513,7 +513,7 @@ public abstract class AbstractHTree
    */
   protected volatile Throwable error;
 
-  /**
+  /*
    * Nodes (that is nodes or leaves) are added to a hard reference queue when they are created or
    * read from the store. On eviction from the queue a dirty node is serialized by a listener
    * against the {@link IRawStore}. The nodes and leaves refer to their parent with a {@link
@@ -557,7 +557,7 @@ public abstract class AbstractHTree
   /** The #of distinct nodes and leaves on the {@link #writeRetentionQueue}. */
   protected int ndistinctOnWriteRetentionQueue;
 
-  /**
+  /*
    * The maximum number of threads to apply when evicting a level set of nodes or leaves in
    * parallel. When ONE (1), parallel eviction will be disabled for the index.
    *
@@ -567,7 +567,7 @@ public abstract class AbstractHTree
    */
   private final int maxParallelEvictThreads;
 
-  /**
+  /*
    * The minimum number of threads to apply when evicting a level set of nodes or leaves in parallel
    * (GTE ONE(2)). When TWO (2), parallel eviction will be used even if there are only two nodes /
    * leaves in a given level set. A higher value may be used to ensure that parallelism is only
@@ -580,7 +580,7 @@ public abstract class AbstractHTree
    */
   private final int minDirtyListSizeForParallelEvict;
 
-  /**
+  /*
    * Returns the metadata record for this index.
    *
    * <p>Note: If the index is read-only then the metadata object will be cloned to avoid potential
@@ -616,7 +616,7 @@ public abstract class AbstractHTree
 
   private volatile HTreeIndexMetadata metadata2;
 
-  /**
+  /*
    * The metadata record for the index. This data rarely changes during the life of the {@link
    * HTree} object, but it CAN be changed.
    */
@@ -625,7 +625,7 @@ public abstract class AbstractHTree
   /** Used to serialize and de-serialize the nodes and leaves of the tree. */
   protected final NodeSerializer nodeSer;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: CLOSING A TRANSIENT INDEX WILL DISCARD ALL DATA!
@@ -710,7 +710,7 @@ public abstract class AbstractHTree
 
   }
 
-  /**
+  /*
    * {@inheritDoc}.
    *
    * <p>This method delegates to {@link #_reopen()} if double-checked locking demonstrates that the
@@ -744,7 +744,7 @@ public abstract class AbstractHTree
     }
   }
 
-  /**
+  /*
    * This method is responsible for setting up the root leaf (either new or read from the store),
    * the bloom filter, etc. It is invoked by {@link #reopen()} once {@link #root} has been show to
    * be <code>null</code> with double-checked locking. When invoked in this context, the caller is
@@ -778,7 +778,7 @@ public abstract class AbstractHTree
     return readOnly;
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException if the B+Tree is read-only.
    * @see #isReadOnly()
    */
@@ -792,7 +792,7 @@ public abstract class AbstractHTree
     if (error != null) throw new IndexInconsistentError(ERROR_ERROR_STATE, error);
   }
 
-  /**
+  /*
    * The timestamp associated with the last {@link IAtomicStore#commit()} in which writes buffered
    * by this index were made restart-safe on the backing store. The lastCommitTime is set when the
    * index is loaded from the backing store and updated after each commit. It is ZERO (0L) when
@@ -802,8 +802,8 @@ public abstract class AbstractHTree
   @Override
   public abstract long getLastCommitTime();
 
-  //    /**
-  //     * The timestamp associated with unisolated writes on this index. This
+  //    /*
+//     * The timestamp associated with unisolated writes on this index. This
   //     * timestamp is designed to allow the interleaving of full transactions
   //     * (whose revision timestamp is assigned by the transaction service) with
   //     * unisolated operations on the same indices.
@@ -850,7 +850,7 @@ public abstract class AbstractHTree
     return store;
   }
 
-  /**
+  /*
    * The #of bits in the address space for a hash directory page. This constant is specified to the
    * constructor. The #of child pages is <code>2^addressBits</code>. When <i>addressBits</i> is
    * <code>10</code> we have <code>2^10 := 1024</code>. If the size of a child address is 4 bytes,
@@ -860,13 +860,13 @@ public abstract class AbstractHTree
     return addressBits;
   }
 
-  /**
+  /*
    * The #of {@link DirectoryPage}s in the {@link HTree} (not buddy hash tables, but the pages on
    * which they appear).
    */
   public abstract long getNodeCount();
 
-  /**
+  /*
    * The #of {@link BucketPage}s in the {@link HTree} (not buddy hash buckets, but the pages on
    * which they appear).
    */
@@ -875,7 +875,7 @@ public abstract class AbstractHTree
   /** The #of tuples in the {@link HTree}. */
   public abstract long getEntryCount();
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @return <code>false</code> since an {@link HTree} is NOT a balanced tree.
@@ -899,7 +899,7 @@ public abstract class AbstractHTree
     return nodeSer;
   }
 
-  /**
+  /*
    * The root of the {@link HTree}. This is always a {@link DirectoryPage}.
    *
    * <p>The hard reference to the root node is cleared if the index is {@link #close() closed}. This
@@ -950,7 +950,7 @@ public abstract class AbstractHTree
     return sb.toString();
   }
 
-  /**
+  /*
    * @param store The persistence store.
    * @param nodeFactory Object that provides a factory for node and leaf objects.
    * @param readOnly <code>true</code> IFF it is <em>known</em> that the {@link AbstractHTree} is
@@ -1096,7 +1096,7 @@ public abstract class AbstractHTree
                 IndexMetadata.Options.DEFAULT_MIN_DIRTY_LIST_SIZE_FOR_PARALLEL_EVICT));
   }
 
-  /**
+  /*
    * Note: Method is package private since it must be overridden for some unit tests.
    *
    * <p>Note: If the retention queue is less than the maximum depth of the HTree then we can
@@ -1162,7 +1162,7 @@ public abstract class AbstractHTree
         new DefaultEvictionListener(), writeRetentionQueueCapacity, writeRetentionQueueScan);
   }
 
-  /**
+  /*
    * Recursive dump of the tree.
    *
    * @param out The dump is written on this stream.
@@ -1201,7 +1201,7 @@ public abstract class AbstractHTree
     } else return true;
   }
 
-  /**
+  /*
    * This method is responsible for putting the node or leaf onto the ring buffer which controls (a)
    * how long we retain a hard reference to the node or leaf; and (b) for writes, when the node or
    * leaf is evicted with a zero reference count and made persistent (along with all dirty
@@ -1267,7 +1267,7 @@ public abstract class AbstractHTree
       return;
     }
 
-    /**
+    /*
      * At this point we know that the B+Tree object is a mutable data structure (!readOnly). If we
      * can prove that the current thread is conducting a read-only operation on the B+Tree, then we
      * DO NOT touch the node in order to prevent having read-only operations drive evictions. This
@@ -1323,7 +1323,7 @@ public abstract class AbstractHTree
     }
   }
 
-  /**
+  /*
    * Note: Synchronization is necessary for the mutable {@link BTree}. The underlying reason is the
    * {@link UnisolatedReadWriteIndex} permits concurrent readers. Reads drive evictions so
    * concurrent calls of {@link #touch()} are possible. When the B+Tree is mutable, those calls must
@@ -1432,7 +1432,7 @@ public abstract class AbstractHTree
 
   }
 
-  /**
+  /*
    * Write a dirty node and its children using a post-order traversal that first writes any dirty
    * leaves and then (recursively) their parent nodes. The parent nodes are guaranteed to be dirty
    * if there is a dirty child so this never triggers copy-on-write. This is used as part of the
@@ -1510,8 +1510,8 @@ public abstract class AbstractHTree
 
       if (t != root) {
 
-        /*
-         * The parent MUST be defined unless this is the root node.
+      /*
+       * The parent MUST be defined unless this is the root node.
          */
 
         assert t.parent != null;
@@ -1571,7 +1571,7 @@ public abstract class AbstractHTree
 
   }
 
-  /**
+  /*
    * Writes the dirty nodes and leaves in level sets (one level at a time) with up to one thread per
    * dirty node/leave in a given level. This can reduce the latency of {@link #writeCheckpoint()} or
    * for a {@link Node} evicted from the {@link #writeRetentionQueue}. Whether this is driven by
@@ -1652,8 +1652,8 @@ public abstract class AbstractHTree
 
       if (t != root) {
 
-        /*
-         * The parent MUST be defined unless this is
+      /*
+       * The parent MUST be defined unless this is
          * the root node.
          */
 
@@ -1740,8 +1740,8 @@ public abstract class AbstractHTree
 
       if (dirtyListSize < minDirtyListSizeForParallelEvict) {
 
-        /*
-         * Avoid parallelism when only a few nodes or leaves will be
+      /*
+       * Avoid parallelism when only a few nodes or leaves will be
          * evicted.
          */
         for (AbstractPage t : dirtyList) {
@@ -1778,8 +1778,8 @@ public abstract class AbstractHTree
 
                         if (u != root) {
 
-                          /*
-                           * The parent MUST be defined unless this is
+                        /*
+       * The parent MUST be defined unless this is
                            * the root node.
                            */
 
@@ -1845,7 +1845,7 @@ public abstract class AbstractHTree
               + "ms.");
   }
 
-  /**
+  /*
    * Codes the node and writes the coded record on the store (non-recursive). The node MUST be
    * dirty. If the node has a parent, then the parent is notified of the persistent identity
    * assigned to the node by the store. This method is NOT recursive and dirty children of a node
@@ -1941,16 +1941,15 @@ public abstract class AbstractHTree
        */
       if (node.isLeaf()) {
 
-        assert (1 << (addressBits - node.globalDepth) == parent.countChildRefs((BucketPage) node));
+        assert (1 << (addressBits - node.globalDepth) == parent.countChildRefs(node));
 
         // code data record and _replace_ the data ref.
         ((BucketPage) node).data = nodeSer.encodeLive(((BucketPage) node).data);
 
         // slice onto the coded data record.
-        slice = ((BucketPage) node).data();
+        slice = node.data();
 
         btreeCounters.leavesWritten.increment();
-        ;
 
       } else {
 
@@ -1958,10 +1957,9 @@ public abstract class AbstractHTree
         ((DirectoryPage) node).data = nodeSer.encodeLive(((DirectoryPage) node).data);
 
         // slice onto the coded data record.
-        slice = ((DirectoryPage) node).data();
+        slice = node.data();
 
         btreeCounters.nodesWritten.increment();
-        ;
       }
 
       btreeCounters.serializeNanos.add(System.nanoTime() - beginNanos);
@@ -2066,7 +2064,7 @@ public abstract class AbstractHTree
     return addr;
   }
 
-  /**
+  /*
    * Read an {@link AbstractPage} from the store.
    *
    * <p>Note: Callers SHOULD be synchronized in order to ensure that only one thread will read the
@@ -2211,7 +2209,7 @@ public abstract class AbstractHTree
     }
   }
 
-  /**
+  /*
    * Create the reference that will be used by an {@link AbstractPage} to refer to its children
    * (nodes or leaves).
    *
@@ -2255,7 +2253,7 @@ public abstract class AbstractHTree
     }
   }
 
-  /**
+  /*
    * A class that provides hard reference semantics for use with transient {@link HTree}s. While the
    * class extends {@link WeakReference}, it internally holds a hard reference and thereby prevents
    * the reference from being cleared. This approach is necessitated on the one hand by the use of
@@ -2291,7 +2289,7 @@ public abstract class AbstractHTree
     }
   }
 
-  /**
+  /*
    * Encode a raw record address into a byte[] suitable for storing in the value associated with a
    * tuple and decoding using {@link #decodeRecordAddr(byte[])}
    *
@@ -2306,7 +2304,7 @@ public abstract class AbstractHTree
     return recordAddrBuf.toByteArray();
   }
 
-  /**
+  /*
    * Decodes a signed long value as encoded by {@link #appendSigned(long)}.
    *
    * @param buf The buffer containing the encoded record address.
@@ -2329,7 +2327,7 @@ public abstract class AbstractHTree
     return v;
   }
 
-  /**
+  /*
    * The maximum length of a <code>byte[]</code> value stored within a leaf for this {@link HTree}.
    * This value only applies when raw record support has been enabled for the {@link HTree}. Values
    * greater than this in length will be written as raw records on the backing persistence store.
@@ -2342,7 +2340,7 @@ public abstract class AbstractHTree
     return metadata.getMaxRecLen();
   }
 
-  /**
+  /*
    * Read the raw record from the backing store.
    *
    * <p>Note: This does not cache the record. In general, the file system cache should do a good job
@@ -2366,7 +2364,7 @@ public abstract class AbstractHTree
     return b;
   }
 
-  /**
+  /*
    * Write a raw record on the backing store.
    *
    * @param b The data.
@@ -2389,7 +2387,7 @@ public abstract class AbstractHTree
     return addr;
   }
 
-  /**
+  /*
    * Delete a raw record from the backing store.
    *
    * @param addr The address of the record.
@@ -2405,7 +2403,7 @@ public abstract class AbstractHTree
     btreeCounters.bytesOnStore_rawRecords.addAndGet(-nbytes);
   }
 
-  /**
+  /*
    * Delete a node or leaf from the backing store, updating various performance counters.
    *
    * @param addr The address of the node or leaf.
@@ -2432,7 +2430,7 @@ public abstract class AbstractHTree
     return new EntryScanIterator(rangeIterator());
   }
 
-  /**
+  /*
    * Simple iterator visits all tuples in the {@link HTree} in order by the effective prefix of
    * their keys. Since the key is typically a hash of some fields in the associated application data
    * record, this will normally visit application data records in what appears to be an arbitrary
@@ -2459,7 +2457,7 @@ public abstract class AbstractHTree
                 }));
   }
 
-  /**
+  /*
    * Visits the values stored in the {@link HTree} in order by the effective prefix of their keys.
    * Since the key is typically a hash of some fields in the associated application data record,
    * this will normally visit application data records in what appears to be an arbitrary order.
@@ -2482,7 +2480,7 @@ public abstract class AbstractHTree
             });
   }
 
-  /**
+  /*
    * Exception that can be thrown for asserts and testing, retaining the source page of the error
    */
   public static class HTreePageStateException extends RuntimeException {
@@ -2499,7 +2497,7 @@ public abstract class AbstractHTree
     }
   }
 
-  /**
+  /*
    * Checks globalDepth of each node and also whether any BucketPages are empty.
    *
    * @param full indicates whether to check consistency on disk

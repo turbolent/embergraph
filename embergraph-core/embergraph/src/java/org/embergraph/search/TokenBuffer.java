@@ -7,8 +7,8 @@ import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.btree.keys.KV;
 import org.embergraph.btree.proc.LongAggregator;
 
-/**
- * A buffer holding tokens extracted from one or more documents / fields. Each entry in the buffer
+/*
+* A buffer holding tokens extracted from one or more documents / fields. Each entry in the buffer
  * corresponds to the {@link TermFrequencyData} extracted from a field of some document. When the
  * buffer overflows it is {@link #flush()}, writing on the indices.
  *
@@ -47,7 +47,7 @@ public class TokenBuffer<V extends Comparable<V>> {
   /** The last observed fieldId and -1 if none observed. */
   private long lastFieldId;
 
-  /**
+  /*
    * Ctor.
    *
    * @param capacity The #of distinct {document,field} tuples that can be held in the buffer before
@@ -98,7 +98,7 @@ public class TokenBuffer<V extends Comparable<V>> {
     return count;
   }
 
-  /**
+  /*
    * Return the {@link TermFrequencyData} for the specified index.
    *
    * @param index The index in [0:<i>count</i>).
@@ -112,7 +112,7 @@ public class TokenBuffer<V extends Comparable<V>> {
     return buffer[index];
   }
 
-  /**
+  /*
    * Adds another token to the current field of the current document. If either the field or the
    * document identifier changes, then begins a new field and possibly a new document. If the buffer
    * is full then it will be {@link #flush()}ed before beginning a new field.
@@ -205,7 +205,7 @@ public class TokenBuffer<V extends Comparable<V>> {
     lastFieldId = fieldId;
   }
 
-  /**
+  /*
    * Write any buffered data on the indices.
    *
    * <p>Note: The writes on the terms index are scattered since the key for the index is {term,
@@ -268,8 +268,8 @@ public class TokenBuffer<V extends Comparable<V>> {
         //                final byte[] key = recordBuilder.getKey(keyBuilder, termText,
         //                        false/* successor */, docId, fieldId);
 
-        /*
-         * Note: This wraps both sides of the record together and passes
+      /*
+       * Note: This wraps both sides of the record together and passes
          * them into the tupleSerializer so it can examine both pieces
          * when making its decision on how to encode the information
          * into the key/val of the index.
@@ -363,7 +363,7 @@ public class TokenBuffer<V extends Comparable<V>> {
   //
   //    }
 
-  /**
+  /*
    * Writes on the index.
    *
    * @param n
@@ -390,7 +390,7 @@ public class TokenBuffer<V extends Comparable<V>> {
     return resultHandler.getResult();
   }
 
-  /**
+  /*
    * Writes on the index.
    *
    * @param n

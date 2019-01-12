@@ -41,8 +41,8 @@ import org.embergraph.service.IMetadataService;
 import org.embergraph.service.MetadataService;
 import org.embergraph.util.ReverseLongComparator;
 
-/**
- * The {@link ResourceManager} has broad responsibility for journal files, index segment files,
+/*
+* The {@link ResourceManager} has broad responsibility for journal files, index segment files,
  * maintaining index views during overflow processing, and managing the transparent decomposition of
  * scale-out indices and the distribution of the key-range index partitions for those scale-out
  * indices.
@@ -79,20 +79,20 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
   /** Logger. */
   protected static final Logger log = Logger.getLogger(ResourceManager.class);
 
-  /**
+  /*
    * Interface defines and documents the counters and counter namespaces for the {@link
    * ResourceManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface IResourceManagerCounters
+  public interface IResourceManagerCounters
       extends IOverflowManagerCounters, IIndexManagerCounters, IStoreManagerCounters {
 
     /** The namespace for counters pertaining to the {@link OverflowManager}. */
     String OverflowManager = "Overflow Manager";
 
-    /**
+    /*
      * The namespace for counters pertaining for overflow tasks (within the {@link #OverflowManager}
      * namespace).
      */
@@ -104,7 +104,7 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
     /** The namespace for counters pertaining to the {@link StoreManager}. */
     String StoreManager = "Store Manager";
 
-    /**
+    /*
      * The namespace for counters pertaining to the live {@link ManagedJournal}.
      *
      * <p>Note: these counters are detached and reattached to the new live journal during overflow
@@ -113,8 +113,8 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
     String LiveJournal = "Live Journal";
   }
 
-  //    /**
-  //     * <strong>WARNING: The {@link DataService} transfers all of the children
+  //    /*
+//     * <strong>WARNING: The {@link DataService} transfers all of the children
   //     * from this object into the hierarchy reported by
   //     * {@link AbstractFederation#getServiceCounterSet()} and this object will be
   //     * empty thereafter.</strong>
@@ -205,8 +205,8 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
             public void sample() {
               long t = overflowCounters.asynchronousOverflowMillis.get();
               if (isOverflowEnabled() && !isOverflowAllowed()) {
-                /*
-                 * Include time from the active (ongoing)
+              /*
+       * Include time from the active (ongoing)
                  * asynchronous overflow operation.
                  */
                 t +=
@@ -245,8 +245,8 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
             IIndexPartitionTaskCounters.RunningBuilds,
             new Instrument<String>() {
               public void sample() {
-                /*
-                 * Put the running tasks into order by their
+              /*
+       * Put the running tasks into order by their
                  * elapsed execution time.
                  */
                 final TreeMap<Long /* elapsed */, IndexSegmentBuilder> map =
@@ -261,8 +261,8 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
                   final long elapsed = (startTime == 0 ? 0L : now - startTime);
                   map.put(elapsed, task);
                 }
-                /*
-                 * Format the list of running tasks.
+              /*
+       * Format the list of running tasks.
                  */
                 //                                    int n = 0;
                 final StringBuilder sb = new StringBuilder();
@@ -350,8 +350,8 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
               final ManagedJournal liveJournal = getLiveJournal();
               final long lastCommitTime = liveJournal.getLastCommitTime();
               if (lastCommitTime == 0L) {
-                /*
-                 * This warning will be issued for the first
+              /*
+       * This warning will be issued for the first
                  * live journal for a data service since
                  * there are no commit points until the
                  * application registers an index on that
@@ -643,8 +643,8 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
 
   //    private CounterSet root;
 
-  //    /**
-  //     * The counter set that corresponds to the {@link IndexManager}.
+  //    /*
+//     * The counter set that corresponds to the {@link IndexManager}.
   //     */
   //    public CounterSet getIndexManagerCounters() {
   //
@@ -659,13 +659,13 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
   //    }
   //    private CounterSet indexManagerRoot;
 
-  /**
+  /*
    * {@link ResourceManager} options.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options extends OverflowManager.Options {}
+  public interface Options extends OverflowManager.Options {}
 
   private IConcurrencyManager concurrencyManager;
 
@@ -690,7 +690,7 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
     this.concurrencyManager = concurrencyManager;
   }
 
-  /**
+  /*
    * (Re-)open the {@link ResourceManager}.
    *
    * <p>Note: You MUST use {@link #setConcurrencyManager(IConcurrencyManager)} after calling this
@@ -705,7 +705,7 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
     super(properties);
   }
 
-  /**
+  /*
    * Requests a new index partition identifier from the {@link MetadataService} for the specified
    * scale-out index (RMI).
    *
@@ -734,8 +734,8 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
     }
   }
 
-  //    /**
-  //     * Impose flow control on data destined for the named index partition. When
+  //    /*
+//     * Impose flow control on data destined for the named index partition. When
   //     * invoked, clients will no longer be authorized to buffer data on this data
   //     * service to be written on the named index partition.
   //     *
@@ -750,8 +750,8 @@ public abstract class ResourceManager extends OverflowManager implements IPartit
   //
   //    }
   //
-  //    /**
-  //     * Allow clients to buffer writes for the named index partition.
+  //    /*
+//     * Allow clients to buffer writes for the named index partition.
   //     *
   //     * @param name
   //     *

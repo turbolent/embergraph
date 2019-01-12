@@ -30,8 +30,8 @@ import org.embergraph.relation.rule.Rule;
 import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.InsertSolutionBuffer;
 import org.embergraph.relation.rule.eval.ISolution;
 
-/**
- * A buffer that is written on by {@link Rule}s.
+/*
+* A buffer that is written on by {@link Rule}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -39,17 +39,17 @@ import org.embergraph.relation.rule.eval.ISolution;
  */
 public interface ISPOAssertionBuffer extends ISPOBuffer {
 
-  /**
+  /*
    * The #of justifications currently in the buffer.
    *
    * @deprecated not used.
    */
-  public int getJustificationCount();
+  int getJustificationCount();
 
-  /**
+  /*
    * Add a statement and an optional justification to the buffer.
    *
    * @deprecated by {@link ISolution}s in an {@link IBuffer}.
    */
-  public boolean add(SPO stmt, Justification justification);
+  boolean add(SPO stmt, Justification justification);
 }

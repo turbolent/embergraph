@@ -33,8 +33,8 @@ import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.service.Split;
 
-/**
- * Unit tests for {@link ISplitter}.
+/*
+* Unit tests for {@link ISplitter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -135,7 +135,7 @@ public class TestSplitter extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test computing the correct splits with a single key and a single index partition.
    *
    * @todo unit test when the MDI does not have any entries (this is an error which is checked by
@@ -222,7 +222,7 @@ public class TestSplitter extends TestCase2 {
         splitter.splitKeys(ts, 0 /* fromIndex */, 1 /* toIndex */, keys).iterator());
   }
 
-  /**
+  /*
    * Test with one key into each of two index partitions. The separator key between the index
    * partitions is also used as the key that goes into the 2nd index partition so this tests right
    * on the fence post.
@@ -297,7 +297,7 @@ public class TestSplitter extends TestCase2 {
         splitter.splitKeys(ts, 0 /* fromIndex */, 2 /* toIndex */, keys).iterator());
   }
 
-  /**
+  /*
    * Correct detection when the keys are not fully ordered.
    *
    * @todo we need to test two code paths. One where the rightSeparator is bound and one where it is
@@ -350,7 +350,7 @@ public class TestSplitter extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Recognizing duplicate keys, which are OK as long as the do not violate the key ordering. This
    * situation arises with asynchronous writes when duplicates are not filtered out.
    *
@@ -362,7 +362,7 @@ public class TestSplitter extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Verifies the {@link PartitionLocator}, fromIndex, and toIndex on each {@link Split} and the
    * order of the {@link Split}s.
    *

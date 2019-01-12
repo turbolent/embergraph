@@ -27,8 +27,8 @@ import it.unimi.dsi.io.OutputBitStream;
 import it.unimi.dsi.lang.MutableString;
 import java.io.IOException;
 
-/**
- * A set of interned mutable strings.
+/*
+* A set of interned mutable strings.
  *
  * <p>This class extends {@link it.unimi.dsi.fastutil.objects.ObjectOpenHashSet} by providing an
  * {@link #intern(MutableString)} method with a semantics similar to that of {@link
@@ -74,7 +74,7 @@ public class InternedMutableStringSet extends ObjectOpenHashSet<MutableString> {
     super(n);
   }
 
-  /**
+  /*
    * Returns an interned, canonical copy contained in this set of the specified mutable string.
    *
    * <p>The semantics of this method is essentially the same as that of {@link

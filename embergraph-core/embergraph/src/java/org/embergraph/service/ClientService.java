@@ -29,8 +29,8 @@ import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
 import org.embergraph.Banner;
 
-/**
- * A service for distributing application {@link Callable}s across an {@link IEmbergraphFederation}.
+/*
+* A service for distributing application {@link Callable}s across an {@link IEmbergraphFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -39,7 +39,7 @@ public abstract class ClientService extends AbstractService implements IClientSe
 
   protected static final Logger log = Logger.getLogger(DataService.class);
 
-  /**
+  /*
    * Configuration options.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -105,7 +105,7 @@ public abstract class ClientService extends AbstractService implements IClientSe
     return IClientService.class;
   }
 
-  /**
+  /*
    * Note: When the {@link ClientService} is accessed via RMI the {@link Future} MUST be a proxy.
    * This gets handled by the concrete server implementation.
    *
@@ -144,7 +144,7 @@ public abstract class ClientService extends AbstractService implements IClientSe
     }
   }
 
-  /**
+  /*
    * Extended to attach the various performance counters reported by the {@link
    * DistributedTransactionService}.
    *
@@ -159,8 +159,8 @@ public abstract class ClientService extends AbstractService implements IClientSe
       super(service);
     }
 
-    //        /**
-    //         * Note: May be extended to setup service specific counters.
+    //        /*
+//         * Note: May be extended to setup service specific counters.
     //         *
     //         * @todo write the client URL onto a file in the service's data
     //         *       directory.
@@ -175,8 +175,8 @@ public abstract class ClientService extends AbstractService implements IClientSe
     //
     //        }
     //
-    //        /**
-    //         * Sets up {@link AbstractTransactionService} specific counters.
+    //        /*
+//         * Sets up {@link AbstractTransactionService} specific counters.
     //         */
     //        protected void setupCounters() {
     //

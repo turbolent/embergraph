@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.UUID;
 import org.embergraph.mdi.IResourceMetadata;
 
-/**
- * Static class since must be {@link Serializable}.
+/*
+* Static class since must be {@link Serializable}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: AbstractBTree.java 4336 2011-03-24 01:04:33Z thompsonbry $

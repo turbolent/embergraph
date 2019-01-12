@@ -39,8 +39,8 @@ import org.openrdf.repository.sail.SailTupleQuery;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.memory.MemoryStore;
 
-/**
- * Unit test template for use in submission of bugs.
+/*
+* Unit test template for use in submission of bugs.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -64,7 +64,7 @@ public class TestTicket669 extends QuadsTestCase {
 
   protected static final Logger log = Logger.getLogger(TestTicket669.class);
 
-  /**
+  /*
    * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
    * JOURNAL FILE.
    */

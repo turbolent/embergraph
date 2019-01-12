@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.util;
 
-/**
- * Utility class declaring methods for examining a stack trace for an instance of some class of
+/*
+* Utility class declaring methods for examining a stack trace for an instance of some class of
  * exception.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -32,7 +32,7 @@ package org.embergraph.util;
  */
 public class InnerCause {
 
-  /**
+  /*
    * Examines a stack trace for an instance of the specified cause nested to any level within that
    * stack trace.
    *
@@ -78,7 +78,7 @@ public class InnerCause {
     return getInnerCause(t, cls);
   }
 
-  /**
+  /*
    * Examines a stack trace for an instance of the specified cause nested to any level within that
    * stack trace.
    *

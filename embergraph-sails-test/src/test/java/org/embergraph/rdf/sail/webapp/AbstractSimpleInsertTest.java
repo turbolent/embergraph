@@ -92,7 +92,7 @@ public class AbstractSimpleInsertTest<S extends IIndexManager>
     super.tearDown();
   }
 
-  /**
+  /*
    * Get a set of useful namespace prefix declarations.
    *
    * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
@@ -129,7 +129,7 @@ public class AbstractSimpleInsertTest<S extends IIndexManager>
   }
 
   protected void executeInsert(String where, boolean expected)
-      throws RepositoryException, Exception {
+      throws Exception {
     final StringBuilder update = new StringBuilder();
     update.append(getNamespaceDeclarations());
     update.append("INSERT { ex:bob rdfs:label \"Bob\" . } WHERE { " + where + " }");

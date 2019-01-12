@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Abstract base class for all random distributions.
+/*
+* Abstract base class for all random distributions.
  *
  * <p>A subclass of this class need to override method <tt>nextDouble()</tt> and, in rare cases,
  * also <tt>nextInt()</tt>.
@@ -65,21 +65,21 @@ public abstract class AbstractDistribution extends cern.colt.PersistentObject
   protected RandomEngine randomGenerator;
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected AbstractDistribution() {}
-  /**
+  /*
    * Equivalent to <tt>nextDouble()</tt>. This has the effect that distributions can now be used as
    * function objects, returning a random number upon function evaluation.
    */
   public double apply(double dummy) {
     return nextDouble();
   }
-  /**
+  /*
    * Equivalent to <tt>nextInt()</tt>. This has the effect that distributions can now be used as
    * function objects, returning a random number upon function evaluation.
    */
   public int apply(int dummy) {
     return nextInt();
   }
-  /**
+  /*
    * Returns a deep copy of the receiver; the copy will produce identical sequences. After this call
    * has returned, the copy and the receiver have equal but separate state.
    *
@@ -95,7 +95,7 @@ public abstract class AbstractDistribution extends cern.colt.PersistentObject
   protected RandomEngine getRandomGenerator() {
     return randomGenerator;
   }
-  /**
+  /*
    * Constructs and returns a new uniform random number generation engine seeded with the current
    * time. Currently this is {@link cern.jet.random.engine.MersenneTwister}.
    */
@@ -104,7 +104,7 @@ public abstract class AbstractDistribution extends cern.colt.PersistentObject
   }
   /** Returns a random number from the distribution. */
   public abstract double nextDouble();
-  /**
+  /*
    * Returns a random number from the distribution; returns <tt>(int) Math.round(nextDouble())</tt>.
    * Override this method if necessary.
    */

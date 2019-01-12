@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.quorum;
 
-/**
- * An interface for receiving informational quorum events. These events are intended for clients
+/*
+* An interface for receiving informational quorum events. These events are intended for clients
  * interested in quorum state changes. Services that are HA aware use a more intimate API to handle
  * the state changes.
  *
@@ -31,7 +31,7 @@ package org.embergraph.quorum;
  */
 public interface QuorumListener {
 
-  /**
+  /*
    * Notify the client of a quorum event.
    *
    * <p>The listener MUST NOT take any event that could block. In particular, it MUST NOT wait on

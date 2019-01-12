@@ -32,8 +32,8 @@ import java.util.Iterator;
 import java.util.Set;
 import org.embergraph.service.ndx.PartitionedTupleIterator;
 
-/**
- * Streaming iterator pattern.
+/*
+* Streaming iterator pattern.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ import org.embergraph.service.ndx.PartitionedTupleIterator;
  */
 public class Striterator<I extends Iterator<E>, E> implements IStriterator<I, E> {
 
-  /**
+  /*
    * Set to the source iterator by the ctor. This exists against the possibility that some patterns
    * will require access to the source iterator as well. One example is the partitioned tuple
    * iterator which needs to know the key for last tuple visited by the source iterator in order to
@@ -52,7 +52,7 @@ public class Striterator<I extends Iterator<E>, E> implements IStriterator<I, E>
    */
   protected final I realSource;
 
-  /**
+  /*
    * Set to the source iterator by the ctor and then replaced each time we wrap the source iterator
    * with another {@link IFilter}. This is always the iterator that realizes the stacked filter
    * semantics.
@@ -67,7 +67,7 @@ public class Striterator<I extends Iterator<E>, E> implements IStriterator<I, E>
     this.realSource = this.src = src;
   }
 
-  /**
+  /*
    * Wraps the enumeration as an iterator.
    *
    * <p><strong>The constructor must be overridden for derived classes that specialize the type of
@@ -103,7 +103,7 @@ public class Striterator<I extends Iterator<E>, E> implements IStriterator<I, E>
   @SuppressWarnings("unchecked")
   public IStriterator<I, E> addFilter(final IFilter<I, ?, E> filter) {
 
-    src = (I) filter.filter((I) src);
+    src = (I) filter.filter(src);
 
     return this;
   }
@@ -130,7 +130,7 @@ public class Striterator<I extends Iterator<E>, E> implements IStriterator<I, E>
     return addFilter(new Appender<I, E>(src));
   }
 
-  /**
+  /*
    * Exclude elements found in the set.
    *
    * @param set The set of elements to be excluded.
@@ -185,7 +185,7 @@ public class Striterator<I extends Iterator<E>, E> implements IStriterator<I, E>
     return src.next();
   }
 
-  /**
+  /*
    * Unsupported operation.
    *
    * <p>Extreme care must be taken when implementing striterator patterns that support removal in

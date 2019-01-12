@@ -46,8 +46,8 @@ import junit.framework.TestCase2;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.config.NicUtil;
 
-/**
- * Test suite for {@link NanoHTTPD}.
+/*
+* Test suite for {@link NanoHTTPD}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -182,8 +182,8 @@ public class TestNanoHTTPD extends TestCase2 {
         // if (log.isInfoEnabled())
         // log.info("Status Line: " + conn.getResponseMessage());
 
-        /*
-         * Write out the response body
+      /*
+       * Write out the response body
          */
         {
           final LineNumberReader r =
@@ -300,8 +300,8 @@ public class TestNanoHTTPD extends TestCase2 {
         // if (log.isInfoEnabled())
         // log.info("Status Line: " + conn.getResponseMessage());
 
-        /*
-         * Write out the response body
+      /*
+       * Write out the response body
          */
         {
           final LineNumberReader r =
@@ -396,8 +396,8 @@ public class TestNanoHTTPD extends TestCase2 {
         // if (log.isInfoEnabled())
         // log.info("Status Line: " + conn.getResponseMessage());
 
-        /*
-         * Read the response body and compare it with the expected data.
+      /*
+       * Read the response body and compare it with the expected data.
          */
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         {
@@ -492,8 +492,8 @@ public class TestNanoHTTPD extends TestCase2 {
         // if (log.isInfoEnabled())
         // log.info("Status Line: " + conn.getResponseMessage());
 
-        /*
-         * Read the response body
+      /*
+       * Read the response body
          */
         {
           final LineNumberReader r =
@@ -610,8 +610,8 @@ public class TestNanoHTTPD extends TestCase2 {
         // if (log.isInfoEnabled())
         // log.info("Status Line: " + conn.getResponseMessage());
 
-        /*
-         * Read the response body
+      /*
+       * Read the response body
          */
         {
           final LineNumberReader r =
@@ -645,7 +645,7 @@ public class TestNanoHTTPD extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Post with a non-empty request body using <code>application/octet-stream</code>. The request
    * body is written using the raw {@link OutputStream}.
    */
@@ -720,8 +720,8 @@ public class TestNanoHTTPD extends TestCase2 {
           throw new IOException(rc + " : " + conn.getResponseMessage() + " : " + url);
         }
 
-        /*
-         * Read the response body
+      /*
+       * Read the response body
          */
         {
           final LineNumberReader r =
@@ -755,7 +755,7 @@ public class TestNanoHTTPD extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Post with a non-empty request body using <code>application/octet-stream</code>. The request
    * body is written using a {@link Writer}.
    *
@@ -839,8 +839,8 @@ public class TestNanoHTTPD extends TestCase2 {
         // if (log.isInfoEnabled())
         // log.info("Status Line: " + conn.getResponseMessage());
 
-        /*
-         * Read the response body
+      /*
+       * Read the response body
          */
         {
           final LineNumberReader r =

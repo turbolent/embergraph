@@ -19,8 +19,8 @@ package org.embergraph.rdf.internal.gis;
 
 import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 
-/**
- * Utility class for operations on {@link ICoordinate}s.
+/*
+* Utility class for operations on {@link ICoordinate}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -34,34 +34,34 @@ public class CoordinateUtility {
     super();
   }
 
-  /**
+  /*
    * The #of meters per second of latitude at sea level <code>30.82</code> (this is the same
    * regardless of the degrees north/south).
    */
   public static double metersPerSecondOfLatitudeAtSeaLevel = 30.82;
 
-  /**
+  /*
    * The #of meters per minute of latitude at sea level (this is the same regardless of the degrees
    * north/south).
    */
   public static double metersPerMinuteOfLatitudeAtSeaLevel =
       metersPerSecondOfLatitudeAtSeaLevel * 60;
 
-  /**
+  /*
    * The #of meters per degree of latitude at sea level (this is the same regardless of the degrees
    * north/south).
    */
   public static double metersPerDegreeOfLatitudeAtSeaLevel =
       metersPerSecondOfLatitudeAtSeaLevel * 60 * 60;
 
-  /**
+  /*
    * The #of meters per second of longitude at sea level on the equator. The #of meters per second
    * of longitude decreases as the angle increases until it becomes zero (0) at the poles (at the
    * poles the longitudinal radius of a sphere is always zero).
    */
   public static double metersPerSecondOfLongitudeAtSeaLevelAtEquator = 30.92;
 
-  /**
+  /*
    * The average radius of the Earth (meters). This does not account for flattening of the Earth.
    */
   static final double averageRadius = 6367449d;
@@ -84,7 +84,7 @@ public class CoordinateUtility {
   /** 180 degrees / {@link Math#PI}. */
   static final double _180_div_pi = 180.d / Math.PI;
 
-  /**
+  /*
    * The real width of a longitudinal degree on a given latitude (this accounts for the flattening
    * of the Earth).
    *
@@ -133,7 +133,7 @@ public class CoordinateUtility {
 
     Double lon = start.eastWest - deltaEastWest;
 
-    /**
+    /*
      * over case where we go "beyond" the -180 degrees border. If the search range is smaller than
      * 360 (=everything), we just convert a value such as -190 into (180 - 10) = 170. Our search
      * range should then later be from [170;180].
@@ -165,7 +165,7 @@ public class CoordinateUtility {
 
     Double lon = start.eastWest + deltaEastWest;
 
-    /**
+    /*
      * over case where we go "beyond" the 180 degrees border. If the search range is smaller than
      * 360 (=everything), we just convert a value such as 190 into (=180 + 10) =-170 and start
      * search from there. Our search range should then later be from [-180;-170].
@@ -190,8 +190,8 @@ public class CoordinateUtility {
       throw new IllegalArgumentException("" + d + " is not in [180:-180)");
   }
 
-  // /**
-  // * The real width of a longitudinal degree on a given latitude.
+  // /*
+// * The real width of a longitudinal degree on a given latitude.
   // *
   // * @param secondsNorth
   // * The latitude (north/south).
@@ -204,7 +204,7 @@ public class CoordinateUtility {
   // return realMetersPerDegreeOfLongitudeAtSeaLevel(secondsNorth*3600.);
   //
   // }
-  /**
+  /*
    * The approximate width of a longitudinal degree on a given latitude.
    *
    * <p>Note: This routine is faster than {@link #realMetersPerDegreeOfLongitudeAtSeaLevel(double)}
@@ -226,8 +226,8 @@ public class CoordinateUtility {
     return lengthOfArc;
   }
 
-  // /**
-  // * Return the angle converted to the transverse graticule that is used by
+  // /*
+// * Return the angle converted to the transverse graticule that is used by
   // * trig functions (shifted 90 degrees).
   // *
   // * @param degreesNorth The latitude in degrees north/south.
@@ -247,7 +247,7 @@ public class CoordinateUtility {
   // return angle;
   //
   // }
-  /**
+  /*
    * Convert degrees to radians.
    *
    * @param degrees The angle in degrees.
@@ -258,7 +258,7 @@ public class CoordinateUtility {
     return radians;
   }
 
-  /**
+  /*
    * Convert radians to degrees.
    *
    * @param radians The angle in radians.
@@ -269,7 +269,7 @@ public class CoordinateUtility {
     return degrees;
   }
 
-  /**
+  /*
    * Computes the distance between two coordinates.
    *
    * @param p1 coordinate one
@@ -299,7 +299,7 @@ public class CoordinateUtility {
     return metersToUnits(distAsDegree * 60 * 1.1515 * 1609.344, units);
   }
 
-  /**
+  /*
    * Computes the distance between two coordinates in meters.
    *
    * @param latP1 latitude of point #1
@@ -324,7 +324,7 @@ public class CoordinateUtility {
     return distAsDegree * 60 * 1.1515 * 1609.344;
   }
 
-  /**
+  /*
    * Convert meters to the desired units.
    *
    * @param meters The #of meters.
@@ -348,7 +348,7 @@ public class CoordinateUtility {
     }
   }
 
-  /**
+  /*
    * Convert meters to the desired units.
    *
    * @param meters The #of meters.
@@ -372,7 +372,7 @@ public class CoordinateUtility {
     }
   }
 
-  /**
+  /*
    * Convert Degrees, Minutes, and Seconds to Decimal Degrees.
    *
    * @param degrees Degrees

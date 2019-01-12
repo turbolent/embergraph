@@ -40,8 +40,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.concurrent.Memoizer;
 
-/**
- * An {@link HTree} directory page (node). Each directory page will hold one or more "buddy" hash
+/*
+* An {@link HTree} directory page (node). Each directory page will hold one or more "buddy" hash
  * tables. The #of buddy hash tables on the page depends on the globalDepth of the page and the
  * addressBits as computed by {@link DirectoryPage#getNumBuddies()}.
  */
@@ -60,7 +60,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
   /** Persistent data. */
   IDirectoryData data;
 
-  /**
+  /*
    * Get the child indexed by the key.
    *
    * <p>Note: The recursive descent pattern requires the caller to separately compute the buddy
@@ -87,7 +87,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return getChild(index);
   }
 
-  /**
+  /*
    * Split the child {@link BucketPage}.
    *
    * <p>Rather than immediately creating 2 buckets, we want first to just fill half the original
@@ -134,13 +134,13 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     final Reference<AbstractPage> a =
         (Reference<AbstractPage>) (fillLowerSlots ? newPage.self : null);
     for (int s = start; s < start + crefs; s++) {
-      childRefs[s] = (Reference<AbstractPage>) a;
+      childRefs[s] = a;
     }
 
     final Reference<AbstractPage> b =
         (Reference<AbstractPage>) (!fillLowerSlots ? newPage.self : null);
     for (int s = start + crefs; s <= last; s++) {
-      childRefs[s] = (Reference<AbstractPage>) b;
+      childRefs[s] = b;
     }
 
     assert !newPage.isPersistent();
@@ -171,7 +171,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return ret;
   }
 
-  /**
+  /*
    * This is a lazy creation of a BucketPage to fill the relevant number of slots based on the
    * number of empty slots surrounding it.
    *
@@ -252,7 +252,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return to - from;
   }
 
-  /**
+  /*
    * Return the {@link Reference} for the child at that index.
    *
    * @param index The index
@@ -263,7 +263,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return childRefs[index];
   }
 
-  /**
+  /*
    * This method must be invoked on a parent to notify the parent that the child has become
    * persistent. The method scans the weak references for the children, finds the index for the
    * specified child, and then sets the corresponding index in the array of child addresses.
@@ -303,7 +303,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   }
 
-  /**
+  /*
    * Return the child at the specified index in the {@link DirectoryPage}.
    *
    * @param index The index of the slot in the {@link DirectoryPage}. If the child must be
@@ -450,7 +450,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return lazyChild;
   }
 
-  /**
+  /*
    * Method conditionally reads the child at the specified index from the backing store and sets its
    * reference on the appropriate element of {@link #childRefs}. This method assumes that external
    * mechanisms guarantee that no other thread is requesting the same child via this method at the
@@ -608,8 +608,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
         if (data.getChildAddr(i) == addr) {
 
-          /*
-           * Since the childRefs[index] element has not been updated we do so
+        /*
+       * Since the childRefs[index] element has not been updated we do so
            * now while we are synchronized.
            *
            * Note: This paranoia test could be tripped if the caller allowed
@@ -755,7 +755,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return data.data();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This method can only be used once you have decoded the hash bits from the key and
@@ -794,7 +794,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return data.isLeaf();
   }
 
-  /**
+  /*
    * The result depends on the backing {@link IDirectoryData} implementation. The {@link
    * DirectoryPage} will be mutable when it is first created and is made immutable when it is
    * persisted. If there is a mutation operation, the backing {@link IDirectoryData} is
@@ -804,7 +804,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return data.isReadOnly();
   }
 
-  /**
+  /*
    * @param htree The owning hash tree.
    * @param overflowDirectory <code>true</code> iff this is an overflow directory page.
    * @param globalDepth The size of the address space (in bits) for each buddy hash table on a
@@ -825,7 +825,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     data = new MutableDirectoryPageData(overflowKey, htree.addressBits, htree.versionTimestamps);
   }
 
-  /**
+  /*
    * Deserialization constructor - {@link #globalDepth} MUST be set by the caller.
    *
    * @param htree
@@ -843,7 +843,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     childRefs = new Reference[(1 << htree.addressBits)];
   }
 
-  /**
+  /*
    * Copy constructor.
    *
    * @param src The source node (must be immutable).
@@ -916,8 +916,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
        */
       if (child != null && (htree.store == null || child.getIdentity() != triggeredByChildId)) {
 
-        /*
-         * Copy on write should never trigger for a dirty node and only
+      /*
+       * Copy on write should never trigger for a dirty node and only
          * a dirty node can have dirty children.
          */
         assert !child.isDirty();
@@ -933,7 +933,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   }
 
-  /**
+  /*
    * Iterator visits children, recursively expanding each child with a post-order traversal of its
    * children and finally visits this node itself.
    */
@@ -955,7 +955,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
         .append(new SingleValueIterator(this));
   }
 
-  /**
+  /*
    * Iterator visits children recursively expanding each child with a post-order traversal of its
    * children and finally visits this node itself.
    */
@@ -984,21 +984,21 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
               private static final long serialVersionUID = 1L;
 
-              /*
-               * Expand each child in turn.
+            /*
+       * Expand each child in turn.
                */
               protected Iterator expand(final Object childObj) {
 
-                /*
-                 * A child of this node.
+              /*
+       * A child of this node.
                  */
 
                 final AbstractPage child = (AbstractPage) childObj;
 
                 if (!child.isLeaf()) {
 
-                  /*
-                   * The child is a Node (has children).
+                /*
+       * The child is a Node (has children).
                    *
                    * Visit the children (recursive post-order traversal).
                    */
@@ -1014,8 +1014,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
                 } else {
 
-                  /*
-                   * The child is a leaf.
+                /*
+       * The child is a leaf.
                    */
 
                   // BTree.log.debug("child is leaf: " + child);
@@ -1033,7 +1033,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return new ChildIterator();
   }
 
-  /**
+  /*
    * Visit the distinct children exactly once (if there are multiple pointers to a given child, that
    * child is visited just once).
    */
@@ -1047,7 +1047,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
       nextChild(); // materialize the first child.
     }
 
-    /**
+    /*
      * Advance to the next distinct child, materializing it if necessary. The first time, this will
      * always return the child in slot zero on the page. Thereafter, it will skip over pointers to
      * the same child and return the next distinct child.
@@ -1190,13 +1190,13 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
               private static final long serialVersionUID = 1L;
 
-              /*
-               * Expand each child in turn.
+            /*
+       * Expand each child in turn.
                */
               protected Iterator expand(final Object childObj) {
 
-                /*
-                 * A child of this node.
+              /*
+       * A child of this node.
                  */
 
                 final AbstractPage child = (AbstractPage) childObj;
@@ -1208,8 +1208,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
                 if (child instanceof DirectoryPage) {
 
-                  /*
-                   * The child is a Node (has children).
+                /*
+       * The child is a Node (has children).
                    */
 
                   // visit the children (recursive post-order
@@ -1225,8 +1225,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
                 } else {
 
-                  /*
-                   * The child is a leaf.
+                /*
+       * The child is a leaf.
                    */
 
                   // Visit the leaf itself.
@@ -1238,7 +1238,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
             });
   }
 
-  /**
+  /*
    * Iterator visits the direct child nodes in the external key ordering.
    *
    * @param dirtyNodesOnly When true, only the direct dirty child nodes will be visited.
@@ -1255,7 +1255,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   }
 
-  /**
+  /*
    * TODO We should dump each bucket page once. This could be done either by dumping each buddy
    * bucket on the page separately or by skipping through the directory page until we get to the
    * next bucket page and then dumping that.
@@ -1338,8 +1338,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
       if (child != null) {
 
         if (child.parent == null || child.parent.get() == null) {
-          /*
-           * the reference to the parent MUST exist since the we are
+        /*
+       * the reference to the parent MUST exist since the we are
            * the parent and therefore the parent is strongly
            * reachable.
            */
@@ -1353,8 +1353,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
         }
 
         if (child.isDirty()) {
-          /*
-           * Dirty child. The parent of a dirty child MUST also be
+        /*
+       * Dirty child. The parent of a dirty child MUST also be
            * dirty.
            */
           if (!isDirty()) {
@@ -1380,8 +1380,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
             ok = false;
           }
         } else {
-          /*
-           * Clean child (ie, persistent). The parent of a clean child
+        /*
+       * Clean child (ie, persistent). The parent of a clean child
            * may be either clear or dirty.
            */
           if (getChildAddr(i) == NULL) {
@@ -1419,8 +1419,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
             && !isReadOnly()
             && ((MutableDirectoryPageData) data).childAddr[i] == 0) {
 
-          /*
-           * This let's us dump a tree with some kinds of structural
+        /*
+       * This let's us dump a tree with some kinds of structural
            * problems (missing child reference or key).
            */
 
@@ -1435,8 +1435,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
           continue;
         }
 
-        /*
-         * Note: this works around the assert test for the index in
+      /*
+       * Note: this works around the assert test for the index in
          * getChild(index) but is not able/willing to follow a childKey
          * to a child that is not memory resident.
          */
@@ -1477,7 +1477,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return ok;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see <a href="http://trac.bigdata.com/ticket/1050" > pre-heat the journal on startup </a>
@@ -1499,8 +1499,8 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
 
       if (!visitLeaves && child instanceof BucketPage) {
 
-        /*
-         * Note: This always reads the child and then filters out leaves.
+      /*
+       * Note: This always reads the child and then filters out leaves.
          *
          * Note: It might not be possible to lift this constraint into the
          * childIterator() due to the HTree design (per Martyn's
@@ -1514,7 +1514,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   }
 
-  /**
+  /*
    * Utility method formats the {@link IDirectoryData}.
    *
    * @param data A data record.
@@ -1619,7 +1619,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   }
 
-  /**
+  /*
    * Tests the slot for content
    *
    * @param slot - the slot to check
@@ -1633,7 +1633,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   }
 
-  /**
+  /*
    * Invoked by {@link #copyOnWrite()} to clear the persistent address for a child on a cloned
    * parent and set the reference to the cloned child.
    *
@@ -1760,7 +1760,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     assert !isReadOnly();
     assert !isOverflowDirectory();
 
-    /**
+    /*
      * TBD: Since for _addLevel to be called there should only be a single reference to bucketPage,
      * this directory MUST be at global depth. BUT, rather than replacing the only the old bucket
      * page with the reference to the new directory, we should/could create a directory of half this
@@ -1818,7 +1818,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   }
 
-  /**
+  /*
    * This method should only be called when using a DirectoryPage as a BucketPage Blob. The final
    * child in the blob is used for insert by default.
    *
@@ -1878,7 +1878,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     throw new AssertionError();
   }
 
-  /**
+  /*
    * Double indirection dereference for the specified index. If the {@link Reference} is <code>null
    * </code>, returns <code>null</code>. Otherwise returns {@link Reference#get()}.
    */
@@ -1893,7 +1893,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return data.isOverflowDirectory();
   }
 
-  /**
+  /*
    * If this is an overflow directory then the depth-based hashCode is irrelevant since it is used
    * as a blob container for BucketPage references.
    */
@@ -1910,7 +1910,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return super.getLocalHashCode(key, prefixLength);
   }
 
-  /**
+  /*
    * This method is never called at present since DirectoryPages are always created at maximum
    * depth. Whether there is any advantage in supporting pages of lesser depths is yet to be
    * determined.
@@ -2064,7 +2064,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   } // updatePointersInParent
 
-  /**
+  /*
    * Redistribute the buddy hash tables in a {@link DirectoryPage}.
    *
    * <p>Note: We are not changing the #of hash tables, just their size and the page on which they
@@ -2308,7 +2308,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return data.getOverflowKey();
   }
 
-  /**
+  /*
    * Called on the condition that an attempt is made to insert a key/value into an overflow
    * directory with a different key.
    *
@@ -2330,8 +2330,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     final DirectoryPage newdir =
         new DirectoryPage((HTree) htree, null /*overflowKey*/, htree.addressBits);
 
-    if (isReadOnly()) // TBD: Remove debug point
-    assert !isReadOnly();
+    assert !isReadOnly() || !isReadOnly();
 
     replaceChildRef(current.self, newdir);
 
@@ -2371,7 +2370,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   }
 
-  /**
+  /*
    * crawl up the hierarchy decrementing the eviction count if any hit zero then explicitly evict
    */
   private void _releaseProtection() {
@@ -2393,7 +2392,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     }
   }
 
-  /**
+  /*
    * This method distributes new BucketPages in the child slots around a specified slot
    *
    * <p>The purpose is to create the minimum number of pages to enable the specified slot to have
@@ -2428,7 +2427,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
       ((HTree) htree).nleaves++;
 
       for (int s = 0; s < length; s++) {
-        if (isReadOnly()) assert !isReadOnly();
+        assert !isReadOnly() || !isReadOnly();
 
         assert childRefs[offset + s] == null;
 
@@ -2448,7 +2447,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     return prefixLength;
   }
 
-  /**
+  /*
    * Ensure their is a single reference to the BucketPage. This assumption is required in the case
    * of overflow, since an overflow Bucket will hold values for a single key.
    *
@@ -2514,7 +2513,7 @@ class DirectoryPage extends AbstractPage implements IDirectoryData {
     if (!isOverflowDirectory())
       throw new UnsupportedOperationException("Only valid if page is an overflow directory");
 
-    /**
+    /*
      * We should check the overflowKey to see if we need to ask the last BucketPage to remove the
      * key.
      *

@@ -30,8 +30,8 @@ import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 
-/**
- * The default implementation used when scores are available.
+/*
+* The default implementation used when scores are available.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public abstract class AbstractServiceLoadHelperWithScores extends AbstractServic
 
   protected final ServiceScore[] scores;
 
-  /**
+  /*
    * @param joinTimeout The maximum time in milliseconds
    * @param knownGood A service that is known to be active and NOT excluded from the request to be
    *     posed.
@@ -70,7 +70,7 @@ public abstract class AbstractServiceLoadHelperWithScores extends AbstractServic
     this.scores = scores;
   }
 
-  /**
+  /*
    * Handles the case when we have per-service scores.
    *
    * <p>Note: Pre-condition: the service scores must exist and there must be at least one active

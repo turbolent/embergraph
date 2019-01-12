@@ -28,8 +28,8 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.striterator.IChunkedIterator;
 
-/**
- * An {@link IAsynchronousIterator} that wraps an {@link IChunkedIterator} or a {@link
+/*
+* An {@link IAsynchronousIterator} that wraps an {@link IChunkedIterator} or a {@link
  * ICloseableIterator}.
  *
  * @param E The generic type of the visited chunks.
@@ -45,7 +45,7 @@ public class WrappedAsynchronousIterator<E, F> implements IAsynchronousIterator<
 
   private final IChunkedIterator<F> src;
 
-  /**
+  /*
    * @param src The source.
    * @throws IllegalArgumentException if <i>src</i> is <code>null</code>.
    */

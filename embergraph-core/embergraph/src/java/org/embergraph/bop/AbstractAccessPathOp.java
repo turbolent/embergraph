@@ -25,8 +25,8 @@ import java.util.Map;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * Interface for evaluating operations producing chunks of elements (tuples materialized from some
+/*
+* Interface for evaluating operations producing chunks of elements (tuples materialized from some
  * index of a relation).
  *
  * @see IAccessPath
@@ -41,7 +41,7 @@ public abstract class AbstractAccessPathOp<E> extends BOpBase {
 
   public interface Annotations extends BOp.Annotations, BufferAnnotations {}
 
-  /**
+  /*
    * Required shallow copy constructor.
    *
    * @param args
@@ -52,7 +52,7 @@ public abstract class AbstractAccessPathOp<E> extends BOpBase {
     super(args, annotations);
   }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * @param op
@@ -61,8 +61,8 @@ public abstract class AbstractAccessPathOp<E> extends BOpBase {
     super(op);
   }
 
-  //    /**
-  //     * @see BufferAnnotations#CHUNK_CAPACITY
+  //    /*
+//     * @see BufferAnnotations#CHUNK_CAPACITY
   //     */
   //    protected int getChunkCapacity() {
   //
@@ -71,8 +71,8 @@ public abstract class AbstractAccessPathOp<E> extends BOpBase {
   //
   //    }
   //
-  //    /**
-  //     * @see BufferAnnotations#CHUNK_OF_CHUNKS_CAPACITY
+  //    /*
+//     * @see BufferAnnotations#CHUNK_OF_CHUNKS_CAPACITY
   //     */
   //    protected int getChunkOfChunksCapacity() {
   //
@@ -88,8 +88,8 @@ public abstract class AbstractAccessPathOp<E> extends BOpBase {
   //
   //    }
 
-  //    /**
-  //     * @see BufferAnnotations#CHUNK_TIMEOUT
+  //    /*
+//     * @see BufferAnnotations#CHUNK_TIMEOUT
   //     */
   //    protected long getChunkTimeout() {
   //

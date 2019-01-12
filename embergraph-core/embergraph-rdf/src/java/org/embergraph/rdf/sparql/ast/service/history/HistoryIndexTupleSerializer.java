@@ -42,8 +42,8 @@ import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.util.Bytes;
 
-/**
- * (De-)serializes {@link IChangeRecord}s for the history index.
+/*
+* (De-)serializes {@link IChangeRecord}s for the history index.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">History Service</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -54,7 +54,7 @@ public class HistoryIndexTupleSerializer
 
   private static final long serialVersionUID = -1L;
 
-  /**
+  /*
    * The natural order for the {@link ISPO} data in the index (this is not a total key order since
    * the key has a revision timestamp prefix).
    */
@@ -66,7 +66,7 @@ public class HistoryIndexTupleSerializer
   /** De-serialization constructor. */
   public HistoryIndexTupleSerializer() {}
 
-  /**
+  /*
    * Create an {@link ITupleSerializer} for the indicated access path.
    *
    * @param keyOrder The key order for the (s,p,o[,c]) component of the key.
@@ -76,7 +76,7 @@ public class HistoryIndexTupleSerializer
     this(keyOrder, sids, getDefaultLeafKeysCoder(), getDefaultValuesCoder());
   }
 
-  /**
+  /*
    * Create an {@link ITupleSerializer} for the indicated access path.
    *
    * @param keyOrder The access path.

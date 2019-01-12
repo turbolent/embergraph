@@ -43,8 +43,8 @@ import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.striterator.IKeyOrder;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * A node in the AST representing a statement pattern.
+/*
+* A node in the AST representing a statement pattern.
  *
  * <p>Note: The annotations on the class are mostly interpreted by the toPredicate() method in
  * {@link AST2BOpUtility} and by the logic in {@link AST2BOpJoins} which handles the default and
@@ -63,14 +63,14 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
 
   public interface Annotations extends GroupMemberNodeBase.Annotations, IJoinNode.Annotations {
 
-    /**
+    /*
      * The {@link Scope} (required).
      *
      * @see ASTGraphGroupOptimizer
      */
     String SCOPE = "scope";
 
-    /**
+    /*
      * Boolean flag indicates that the distinct solutions for the statement pattern are required
      * ({@value #DEFAULT_DISTINCT}).
      *
@@ -87,7 +87,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
 
     boolean DEFAULT_DISTINCT = false;
 
-    /**
+    /*
      * The existence of at least one solution will be verified otherwise the solution will be
      * failed. This turns into an iterator with a limit of ONE (1) on the {@link SPOAccessPath}.
      *
@@ -113,7 +113,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
      */
     String EXISTS = "exists";
 
-    /**
+    /*
      * The data for this access path is inline. The value of the attribute is the column projection
      * / solution set reference.
      *
@@ -139,7 +139,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
      */
     String INLINE = "inline";
 
-    /**
+    /*
      * An optional attribute whose value is an {@link RangeBOp} which models the key-range
      * constraint on the access path. The {@link RangeBOp} is used when there are filters which
      * impose a GT/GTE and/or LT/LTE restriction on the values which a variable may take on for that
@@ -160,7 +160,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
      */
     String RANGE = "range";
 
-    /**
+    /*
      * An optional annotation whose value is the variable which will be bound to the statement
      * identifier for the matched statement patterns. The statement identifier is always formed from
      * the subject, predicate and object (the triple). The context is NOT represented in the
@@ -171,7 +171,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
      */
     String SID = "sid";
 
-    /**
+    /*
      * An optional annotation whose value is a variable which will become bound to the fast range
      * count of the associated triple pattern.
      *
@@ -180,7 +180,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
      */
     String FAST_RANGE_COUNT_VAR = "fastRangeCountVar";
 
-    /**
+    /*
      * An optional annotation whose value the variable that will be bound by a {@link
      * DistinctTermAdvancer} layered over the access path.
      *
@@ -202,7 +202,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     super(args, anns);
   }
 
-  /**
+  /*
    * A triple pattern. The {@link Scope} will be {@link Scope#DEFAULT_CONTEXTS}, the context will be
    * <code>null</code>.
    *
@@ -216,7 +216,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     this(s, p, o, null /* context */, Scope.DEFAULT_CONTEXTS);
   }
 
-  /**
+  /*
    * A quad pattern.
    *
    * <p>Note: When a {@link StatementPatternNode} appears in a WHERE clause, the {@link Scope}
@@ -268,25 +268,25 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
   /** The variable or constant for the subject position (required). */
   public final TermNode s() {
 
-    return (TermNode) get(0);
+    return get(0);
   }
 
   /** The variable or constant for the predicate position (required). */
   public final TermNode p() {
 
-    return (TermNode) get(1);
+    return get(1);
   }
 
   /** The variable or constant for the object position (required). */
   public final TermNode o() {
 
-    return (TermNode) get(2);
+    return get(2);
   }
 
   /** The variable or constant for the context position (required iff in quads mode). */
   public final TermNode c() {
 
-    return (TermNode) get(3);
+    return get(3);
   }
 
   /** Strengthen return type. */
@@ -301,7 +301,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     this.setArg(3, c);
   }
 
-  /**
+  /*
    * The statement identifier variable for triples which match this statement pattern (optional).
    * The statement identifier is the composition of the (subject, predicate, and object) positions
    * of the matched statements.
@@ -319,7 +319,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     setProperty(Annotations.SID, sid);
   }
 
-  /**
+  /*
    * The scope for this statement pattern (either named graphs or default graphs).
    *
    * @see Annotations#SCOPE
@@ -337,7 +337,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     setProperty(Annotations.SCOPE, scope);
   }
 
-  /**
+  /*
    * Return the {@link VarNode} associated with the optional {@link
    * Annotations#FAST_RANGE_COUNT_VAR} property.
    *
@@ -356,7 +356,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     setProperty(Annotations.FAST_RANGE_COUNT_VAR, var);
   }
 
-  /**
+  /*
    * Return the variable that will be bound by the {@link DistinctTermAdvancer} pattern.
    *
    * @return The distinct term scan variable -or- <code>null</code> if the access path will not use
@@ -373,7 +373,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     setProperty(Annotations.DISTINCT_TERM_SCAN_VAR, var);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This returns <code>true</code> iff the {@link StatementPatternNode} was lifted out of an
@@ -394,7 +394,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     return false;
   }
 
-  /**
+  /*
    * Mark this {@link StatementPatternNode} as one which was lifted out of a "simple optional" group
    * and which therefore has "optional" semantics (we will do an optional join for it).
    *
@@ -412,7 +412,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     setProperty(Annotations.OPTIONAL, optional);
   }
 
-  /**
+  /*
    * Attach a {@link RangeNode} that describes a range for the statement pattern's O value.
    *
    * @param range
@@ -456,12 +456,10 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
 
     if (o() instanceof VarNode) return false;
 
-    if (c() instanceof VarNode) return false;
-
-    return true;
+    return !(c() instanceof VarNode);
   }
 
-  /**
+  /*
    * Return the variables used by the predicate - i.e. what this node will attempt to bind when run.
    */
   public Set<IVariable<?>> getProducedBindings() {
@@ -481,7 +479,7 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
     return producedBindings;
   }
 
-  /**
+  /*
    * This handles the special case where we've wrapped a Var with a Constant because we know it's
    * bound, perhaps by the exogenous bindings. If we don't handle this case then we get the join
    * vars wrong.

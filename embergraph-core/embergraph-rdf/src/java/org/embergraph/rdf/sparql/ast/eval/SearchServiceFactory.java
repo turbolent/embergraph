@@ -65,8 +65,8 @@ import org.embergraph.striterator.SingleValueChunkedIterator;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-/**
- * A factory for a search service. It accepts a group consisting of search magic predicates. See
+/*
+* A factory for a search service. It accepts a group consisting of search magic predicates. See
  * {@link BD#SEARCH}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -141,7 +141,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
     return new SearchCall(store, searchVar, statementPatterns, getServiceOptions());
   }
 
-  /**
+  /*
    * Validate the search request. This looks for search magic predicates and returns them all. It is
    * an error if anything else is found in the group. All such search patterns are reported back by
    * this method, but the service can only be invoked for one a single search variable at a time.
@@ -173,13 +173,13 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
 
         if (!p.isConstant()) throw new RuntimeException("Expecting search predicate: " + sp);
 
-        final URI uri = (URI) ((ConstantNode) p).getValue();
+        final URI uri = (URI) p.getValue();
 
         if (!uri.stringValue().startsWith(BDS.NAMESPACE))
           throw new RuntimeException("Expecting search predicate: " + sp);
 
-        /*
-         * Some search predicate.
+      /*
+       * Some search predicate.
          */
 
         if (!ASTSearchOptimizer.searchUris.contains(uri))
@@ -214,7 +214,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
     return tmp;
   }
 
-  /**
+  /*
    * Validate the search. There must be exactly one {@link BD#SEARCH} predicate. There should not be
    * duplicates of any of the search predicates for a given searchVar.
    */
@@ -291,7 +291,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
 
     final TermNode o = sp.o();
 
-    if (!o.isConstant() || !(((ConstantNode) o).getValue() instanceof Literal)) {
+    if (!o.isConstant() || !(o.getValue() instanceof Literal)) {
 
       throw new IllegalArgumentException("Object is not literal: " + sp);
     }
@@ -307,7 +307,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Note: This has the {@link AbstractTripleStore} reference attached. This is not a {@link
    * Serializable} object. It MUST run on the query controller.
    */
@@ -324,7 +324,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
     private final Literal maxRelevance;
     private final boolean matchAllTerms;
     private final boolean matchExact;
-    /**
+    /*
      * @deprecated Feature was never completed due to scalability issues. See BZLG-1548, BLZG-563.
      */
     @Deprecated private final boolean subjectSearch;
@@ -402,23 +402,23 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
         } else if (BDS.RANGE_COUNT.equals(p)) {
           rangeCountVar = oVar;
         } else if (BDS.MIN_RANK.equals(p)) {
-          minRank = (Literal) oVal;
+          minRank = oVal;
         } else if (BDS.MAX_RANK.equals(p)) {
-          maxRank = (Literal) oVal;
+          maxRank = oVal;
         } else if (BDS.MIN_RELEVANCE.equals(p)) {
-          minRelevance = (Literal) oVal;
+          minRelevance = oVal;
         } else if (BDS.MAX_RELEVANCE.equals(p)) {
-          maxRelevance = (Literal) oVal;
+          maxRelevance = oVal;
         } else if (BDS.MATCH_ALL_TERMS.equals(p)) {
-          matchAllTerms = ((Literal) oVal).booleanValue();
+          matchAllTerms = oVal.booleanValue();
         } else if (BDS.MATCH_EXACT.equals(p)) {
-          matchExact = ((Literal) oVal).booleanValue();
+          matchExact = oVal.booleanValue();
         } else if (BDS.SUBJECT_SEARCH.equals(p)) {
-          subjectSearch = ((Literal) oVal).booleanValue();
+          subjectSearch = oVal.booleanValue();
         } else if (BDS.SEARCH_TIMEOUT.equals(p)) {
-          searchTimeout = (Literal) oVal;
+          searchTimeout = oVal;
         } else if (BDS.MATCH_REGEX.equals(p)) {
-          matchRegex = (Literal) oVal;
+          matchRegex = oVal;
         }
       }
 
@@ -548,7 +548,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
               TimeUnit.MILLISECONDS));
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>FIXME The bindingsClause is ignored. If someone were to bind the subject, rank, or
@@ -561,13 +561,13 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
 
       if (bindingsClause.length > 1) {
 
-        /*
-         * FIXME This case is not supported.  We need to run
+      /*
+       * FIXME This case is not supported.  We need to run
          * the search engine for each of the source solutions.
          */
 
-        /*
-         * Fixed this to allow an incoming binding stream that does not
+      /*
+       * Fixed this to allow an incoming binding stream that does not
          * include any of the search variables.
          */
         //                throw new UnsupportedOperationException();
@@ -575,8 +575,8 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
         for (IBindingSet bs : bindingsClause) {
           if (rangeCountVar != null) {
             if (bs.isBound(rangeCountVar)) {
-              /*
-               * FIXME This case is not supported.  We need to run
+            /*
+       * FIXME This case is not supported.  We need to run
                * the search engine for each of the source solutions.
                */
               throw new UnsupportedOperationException();
@@ -584,8 +584,8 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
           } else {
             for (int i = 0; i < vars.length; i++) {
               if (bs.isBound(vars[i])) {
-                /*
-                 * FIXME This case is not supported.  We need to run
+              /*
+       * FIXME This case is not supported.  We need to run
                  * the search engine for each of the source solutions.
                  */
                 throw new UnsupportedOperationException();
@@ -597,8 +597,8 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
 
       if (bindingsClause.length == 1 && !bindingsClause[0].isEmpty()) {
 
-        /*
-         * Fixed this by putting the ASTBindingAssigner before the
+      /*
+       * Fixed this by putting the ASTBindingAssigner before the
          * ASTSearchOptimizer in the DefaultOptimizerList.
          */
 

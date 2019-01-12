@@ -32,8 +32,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.embergraph.service.ResourceService;
 import org.embergraph.util.concurrent.Haltable;
 
-/**
- * An allocator for {@link ByteBuffer} slices backed by direct {@link ByteBuffer}s allocated against
+/*
+* An allocator for {@link ByteBuffer} slices backed by direct {@link ByteBuffer}s allocated against
  * a {@link DirectBufferPool}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -56,7 +56,7 @@ public class DirectBufferPoolAllocator {
   private final ConcurrentHashMap<UUID, Allocation> allocations =
       new ConcurrentHashMap<UUID, Allocation>();
 
-  /**
+  /*
    * @todo Maybe replace this with a private {@link Haltable} (or extend {@link Haltable}) so we can
    *     test {@link Haltable#halted()} in critical methods? If we expose the {@link Haltable} then
    *     the {@link ResourceService} can also check it to see whether all allocations have been
@@ -81,7 +81,7 @@ public class DirectBufferPoolAllocator {
     super.finalize();
   }
 
-  /**
+  /*
    * Releases all {@link AllocationContext}s and all direct {@link ByteBuffer} s which they are
    * using.
    */
@@ -102,7 +102,7 @@ public class DirectBufferPoolAllocator {
     return directBufferPool.getBufferCapacity();
   }
 
-  /**
+  /*
    * Return an allocation context for the key. If none exists for that key, then one is atomically
    * created and returned.
    *
@@ -129,7 +129,7 @@ public class DirectBufferPoolAllocator {
     return c;
   }
 
-  /**
+  /*
    * Return the allocation associated with that id.
    *
    * @param id The allocation identifier.
@@ -140,8 +140,8 @@ public class DirectBufferPoolAllocator {
     return allocations.get(id);
   }
 
-  //    /**
-  //     * A direct {@link ByteBuffer} allocated from the {@link #directBufferPool}
+  //    /*
+//     * A direct {@link ByteBuffer} allocated from the {@link #directBufferPool}
   //     * together with the identifier assigned to that {@link ByteBuffer} (we can
   //     * not directly insert {@link ByteBuffer}s into the keys of a hash map since
   //     * their hash code is a function of their content).
@@ -169,13 +169,13 @@ public class DirectBufferPoolAllocator {
   //
   //    }
 
-  /**
+  /*
    * An allocation context links some application specified key with a list of direct {@link
    * ByteBuffer}s on which allocations have been made by the application.
    */
   public interface IAllocationContext {
 
-    /**
+    /*
      * Allocate a series of {@link ByteBuffer} slices on which the application may write data. The
      * application is encouraged to maintain the order of the allocations in the array in order to
      * preserve the ordering of data written onto those allocation.
@@ -194,12 +194,12 @@ public class DirectBufferPoolAllocator {
   public interface IAllocation {
 
     /** The allocation identifier. */
-    public UUID getId();
+    UUID getId();
 
     /** The allocated {@link ByteBuffer#slice()}. */
-    public ByteBuffer getSlice();
+    ByteBuffer getSlice();
 
-    /**
+    /*
      * Release this allocation.
      *
      * <p>Note: The implementation is encouraged to release the associated direct {@link ByteBuffer}
@@ -213,7 +213,7 @@ public class DirectBufferPoolAllocator {
      *
      * @throws InterruptedException
      */
-    public void release() throws InterruptedException;
+    void release() throws InterruptedException;
   }
 
   /** An allocation against a direct {@link ByteBuffer}. */
@@ -225,7 +225,7 @@ public class DirectBufferPoolAllocator {
     /** The allocation identifier. */
     private final UUID id;
 
-    /**
+    /*
      * The direct {@link ByteBuffer} against which the allocation was made.
      *
      * @todo Allow incremental recycling of allocations. To do this we would keep an allocation map
@@ -234,7 +234,7 @@ public class DirectBufferPoolAllocator {
     // Note: package private for the unit tests.
     final /*private*/ IBufferAccess nativeBuffer;
 
-    /**
+    /*
      * A {@link ByteBuffer#slice()} onto the allocated region of the {@link #nativeBuffer}. The
      * slice is cleared when the allocation is released.
      */
@@ -300,7 +300,7 @@ public class DirectBufferPoolAllocator {
     }
   } // class Allocation
 
-  /**
+  /*
    * An allocation context links some application specified key with a list of direct {@link
    * ByteBuffer}s on which allocations have been made by the application.
    */
@@ -313,13 +313,13 @@ public class DirectBufferPoolAllocator {
     /** Lock guarding allocations made by this allocation context. */
     private final ReentrantLock lock = new ReentrantLock();
 
-    /**
+    /*
      * The set of native {@link ByteBuffer}s in use by this allocation context. Last element in the
      * list is the {@link ByteBuffer} against which allocations are currently being made.
      */
     private final LinkedList<IBufferAccess> directBuffers = new LinkedList<IBufferAccess>();
 
-    /**
+    /*
      * The set of native {@link ByteBuffer}s in use by this allocation context. The positive of in
      * that buffer is the next byte available in that buffer. The limit is the buffer capacity.
      * Mutable views of this buffer object are published by {@link #alloc(int)}. Those views have
@@ -328,7 +328,7 @@ public class DirectBufferPoolAllocator {
     private final ConcurrentHashMap<UUID, Allocation> allocations =
         new ConcurrentHashMap<UUID, Allocation>();
 
-    /**
+    /*
      * Human readable summary (non-blocking).
      *
      * <p>Note: The #of native buffers is approximate since this method does not acquire the lock
@@ -369,8 +369,8 @@ public class DirectBufferPoolAllocator {
           if (directBuffer == null) {
 
             if (!open.get()) {
-              /*
-               * The allocation pool is closed.
+            /*
+       * The allocation pool is closed.
                *
                * Note: The lock serializes these decisions since
                * otherwise allocations could be made concurrent
@@ -424,7 +424,7 @@ public class DirectBufferPoolAllocator {
       }
     }
 
-    /**
+    /*
      * Release all direct {@link ByteBuffer}s associated with this allocation context back to the
      * {@link #directBufferPool}. If the current thread is interrupted, the interrupt will be
      * trapped and the thread will be interrupted on exit (after all allocations have been
@@ -471,7 +471,7 @@ public class DirectBufferPoolAllocator {
       if (interrupted) Thread.currentThread().interrupt();
     }
 
-    /**
+    /*
      * Release the allocation.
      *
      * @throws InterruptedException if the thread was interrupted
@@ -486,8 +486,8 @@ public class DirectBufferPoolAllocator {
 
         if (!allocations.remove(a.id, a)) {
 
-          /*
-           * The allocation was not found in the map.
+        /*
+       * The allocation was not found in the map.
            */
           throw new RuntimeException();
         }
@@ -499,7 +499,7 @@ public class DirectBufferPoolAllocator {
     }
   }
 
-  /**
+  /*
    * Copy the caller's data onto the ordered array of allocations. The position of each {@link
    * IAllocation#getSlice() allocation} will be advanced by the #of bytes copied into that
    * allocation.
@@ -531,7 +531,7 @@ public class DirectBufferPoolAllocator {
     if (remaining > 0) throw new BufferOverflowException();
   }
 
-  /**
+  /*
    * Copy the caller's data onto the ordered array of allocations. The position of each {@link
    * IAllocation#getSlice() allocation} will be advanced by the #of bytes copied into that
    * allocation.

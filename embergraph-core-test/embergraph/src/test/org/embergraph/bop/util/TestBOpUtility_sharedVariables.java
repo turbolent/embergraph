@@ -33,8 +33,8 @@ import org.embergraph.bop.NV;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.ap.Predicate;
 
-/**
- * Unit tests for {@link BOpUtility#getSharedVars(BOp, BOp)}.
+/*
+* Unit tests for {@link BOpUtility#getSharedVars(BOp, BOp)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public class TestBOpUtility_sharedVariables extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for correct rejection of illegal arguments.
    *
    * @see BOpUtility#getSharedVars(BOp, BOp)
@@ -73,7 +73,7 @@ public class TestBOpUtility_sharedVariables extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for correct identification of cases in which there are no shared variables.
    *
    * @see BOpUtility#getSharedVars(BOp, BOp)
@@ -108,7 +108,7 @@ public class TestBOpUtility_sharedVariables extends TestCase2 {
             .isEmpty());
   }
 
-  /**
+  /*
    * Unit test for correct identification of cases in which there are shared variables.
    *
    * @see BOpUtility#getSharedVars(BOp, BOp)
@@ -190,7 +190,7 @@ public class TestBOpUtility_sharedVariables extends TestCase2 {
             new Predicate(new BOp[] {Var.var("y"), Var.var("z")}, new NV("name", Var.var("x")))));
   }
 
-  /**
+  /*
    * Test helper.
    *
    * @param expected The expected variables in any order.

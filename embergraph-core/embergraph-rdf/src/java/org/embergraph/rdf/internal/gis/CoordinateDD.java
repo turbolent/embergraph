@@ -22,8 +22,8 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * An immutable coordinate expressed as double precision decimal degrees on the surface of (the
+/*
+* An immutable coordinate expressed as double precision decimal degrees on the surface of (the
  * Earth's) sphere.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -76,7 +76,7 @@ public class CoordinateDD implements ICoordinate {
     FMT_DECIMAL_DEGREES.setMinimumFractionDigits(5);
   }
 
-  /**
+  /*
    * Constructor for a coordinate using decimal degrees.
    *
    * @param northSouth Decimal degrees north (or south iff negative). The range is [-90:+90].
@@ -89,7 +89,7 @@ public class CoordinateDD implements ICoordinate {
     this(northSouth, eastWest, false);
   }
 
-  /**
+  /*
    * Constructor for a coordinate using decimal degrees.
    *
    * @param northSouth Decimal degrees north (or south iff negative). The range is [-90:+90].
@@ -130,7 +130,7 @@ public class CoordinateDD implements ICoordinate {
     this.eastWest = eastWest;
   }
 
-  /**
+  /*
    * Returns the coordinate in decimal degrees as
    *
    * <pre>
@@ -141,7 +141,7 @@ public class CoordinateDD implements ICoordinate {
     return FMT_DECIMAL_DEGREES.format(northSouth) + "," + FMT_DECIMAL_DEGREES.format(eastWest);
   }
 
-  /**
+  /*
    * Matches a latitude expressed as decimal degrees.
    *
    * <dl>
@@ -153,7 +153,7 @@ public class CoordinateDD implements ICoordinate {
       "([-+]?\\d{1,2}\\.\\d{3,})[�*]?" // decimal degrees longitude.
       ;
 
-  /**
+  /*
    * Matches a longitude expressed as decimal degrees.
    *
    * <dl>
@@ -164,7 +164,7 @@ public class CoordinateDD implements ICoordinate {
   static final String regex_long = "([-+]?\\d{1,3}\\.\\d{3,})[�*]?" // decimal degrees longitude.
       ;
 
-  /**
+  /*
    * Matches a coordinate expressed as decimal degrees.
    *
    * <dl>
@@ -188,7 +188,7 @@ public class CoordinateDD implements ICoordinate {
 
   static final int group_degreesEast = 5;
 
-  /**
+  /*
    * Parses coordinates expressed in decimal degrees. For example
    *
    * <pre>
@@ -221,7 +221,7 @@ public class CoordinateDD implements ICoordinate {
     return false;
   }
 
-  /**
+  /*
    * True iff the two coordinates are exactly the same.
    *
    * @param o
@@ -231,7 +231,7 @@ public class CoordinateDD implements ICoordinate {
     return northSouth == o.northSouth && eastWest == o.eastWest;
   }
 
-  /**
+  /*
    * Convert to degrees, minutes and (tenths of) seconds.
    *
    * @return The coordinate expressed as degrees, minutes and (tenths of) seconds.

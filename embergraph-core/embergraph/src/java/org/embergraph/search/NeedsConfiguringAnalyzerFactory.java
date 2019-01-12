@@ -47,8 +47,8 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
 import org.embergraph.search.ConfigurableAnalyzerFactory.Options;
 
-/**
- * The bulk of the code in this class is invoked from {@link #init()} to set up the array of {@link
+/*
+* The bulk of the code in this class is invoked from {@link #init()} to set up the array of {@link
  * ConfiguredAnalyzerFactory.AnalyzerPair}s. For example, all of the subclasses of {@link
  * AnalyzerPair}s, are simply to call the appropriate constructor in the appropriate way: the
  * difficulty is that many subclasses of {@link Analyzer} have constructors with different
@@ -60,7 +60,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
   private static final transient Logger log =
       Logger.getLogger(NeedsConfiguringAnalyzerFactory.class);
 
-  /**
+  /*
    * We create only one {@link ConfiguredAnalyzerFactory} per namespace and store it here. The UUID
    * is stable and allows us to side-step lifecycle issues such as creation and destruction of
    * namespaces, potentially with different properties. We use a WeakHashMap to ensure that after
@@ -104,7 +104,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
 
   static int loggerIdCounter = 0;
 
-  /**
+  /*
    * This class and all its subclasses provide a variety of patterns for mapping from the various
    * constructor patterns of subclasses of {@link Analyzer} to {@link
    * ConfiguredAnalyzerFactory#AnalyzerPair}.
@@ -117,7 +117,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
       super(range, withStopWords, withOutStopWords);
     }
 
-    /**
+    /*
      * This clone constructor implements {@link AnalyzerOptions#LIKE}.
      *
      * @param range
@@ -127,7 +127,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
       super(range, copyMe);
     }
 
-    /**
+    /*
      * If we have a constructor, with arguments including a populated stop word set, then we can use
      * it to make both the withStopWords analyzer, and the withoutStopWords analyzer.
      *
@@ -146,7 +146,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
     }
 
     private static Object[] useEmptyStopWordSet(Object[] params) {
-      Object rslt[] = new Object[params.length];
+      Object[] rslt = new Object[params.length];
       for (int i = 0; i < params.length; i++) {
         if (params[i] instanceof Set) {
           rslt[i] = CharArraySet.EMPTY_SET;
@@ -158,7 +158,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
     }
   }
 
-  /**
+  /*
    * Used for Analyzer classes with a constructor with signature (Version, Set).
    *
    * @author jeremycarroll
@@ -174,7 +174,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
     }
   }
 
-  /**
+  /*
    * Used for Analyzer classes which do not support stopwords and have a constructor with signature
    * (Version).
    *
@@ -186,7 +186,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
     }
   }
 
-  /**
+  /*
    * Special case code for {@link PatternTokenizer}
    *
    * @author jeremycarroll
@@ -209,7 +209,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
     }
   }
 
-  /**
+  /*
    * This class is initialized with the config options, using the {@link #setProperty(String,
    * String)} method, for a particular language range and works out which pair of {@link Analyzer}s
    * to use for that language range.
@@ -242,7 +242,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
       this.languageRange = languageRange;
     }
 
-    /**
+    /*
      * This is called only when we have already identified that the class does support stopwords.
      *
      * @return
@@ -284,7 +284,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
           || AnalyzerOptions.STOPWORDS_VALUE_DEFAULT.equals(stopwords);
     }
 
-    /**
+    /*
      * The first step in the life-cycle, used to initialize the fields.
      *
      * @return true if the property was recognized.
@@ -442,7 +442,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
               + languageRange);
     }
 
-    /**
+    /*
      * Also part of the third phase of the life-cycle, following the {@link AnalyzerOptions#LIKE}
      * properties.
      *
@@ -609,7 +609,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
       String prop = (String) en.nextElement();
       if (prop.equals(Options.NATURAL_LANGUAGE_SUPPORT)) continue;
       if (prop.startsWith(Options.ANALYZER)) {
-        String languageRangeAndProperty[] =
+        String[] languageRangeAndProperty =
             prop.substring(Options.ANALYZER.length()).replaceAll("_", "*").split("[.]");
         if (languageRangeAndProperty.length == 2) {
 

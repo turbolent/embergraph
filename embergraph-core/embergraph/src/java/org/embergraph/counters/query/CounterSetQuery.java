@@ -58,8 +58,8 @@ import org.embergraph.service.Event;
 import org.embergraph.util.httpd.NanoHTTPD;
 import org.xml.sax.SAXException;
 
-/**
- * Utility to extract a batch of performance counters from a collection of logged XML counter set
+/*
+* Utility to extract a batch of performance counters from a collection of logged XML counter set
  * files. This utility accepts file(s) giving the URLs which would be used to demand the
  * corresponding performance counters against the live embergraph federation. The URLs listed in
  * that file are parsed. The host and port information are ignored, but the URL query parameters are
@@ -92,7 +92,7 @@ public class CounterSetQuery {
 
   private static final Logger log = Logger.getLogger(CounterSetQuery.class);
 
-  /**
+  /*
    * Reads a list of {@link URL}s from a file. Blank lines and comment lines are ignored.
    *
    * @param file A file containing URLs, blank lines, and comment lines (which start with '#').
@@ -129,7 +129,7 @@ public class CounterSetQuery {
     return tmp;
   }
 
-  /**
+  /*
    * Reads URLs from a file or all files (recursively) in a directory.
    *
    * @param file The file or directory.
@@ -256,8 +256,8 @@ public class CounterSetQuery {
         future.get();
       } catch (ExecutionException ex) {
         if (ex.getCause() instanceof SAXException) {
-          /*
-           * Sometimes you can get a partial XML file if the LBS was
+        /*
+       * Sometimes you can get a partial XML file if the LBS was
            * in the process of generating the file when it was copied.
            * This shows up as a SAXException.  Rather than dying, this
            * just logs a warning and continues.
@@ -274,7 +274,7 @@ public class CounterSetQuery {
     if (nerrors != 0) log.error("There were " + nerrors + " errors.");
   }
 
-  /**
+  /*
    * Utility class for running extracting data from performance counter dumps and running various
    * kinds of reports on those data.
    *
@@ -465,8 +465,8 @@ public class CounterSetQuery {
         final IRenderer renderer =
             RendererFactory.get(model, new CounterSetSelector(counterSet), defaultMimeType);
 
-        /*
-         * Render on a file. The file can be specified by a URL query
+      /*
+       * Render on a file. The file can be specified by a URL query
          * parameter.
          *
          * @todo Use the munged counter path / counter name (when one

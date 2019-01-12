@@ -24,8 +24,8 @@ import org.embergraph.bop.BOpUtility;
 import org.embergraph.bop.join.FastRangeCountOp;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * @see <a href="http://trac.blazegraph.com/ticket/1037" > Rewrite SELECT COUNT(...)
+/*
+* @see <a href="http://trac.blazegraph.com/ticket/1037" > Rewrite SELECT COUNT(...)
  *     (DISTINCT|REDUCED) {single-triple-pattern} as ESTCARD </a>
  */
 public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCase {
@@ -63,7 +63,7 @@ public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCas
       return properties;
     }
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -87,7 +87,7 @@ public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCas
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -111,7 +111,7 @@ public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCas
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * The optimization must *not* be applied in the presence of delete markers. Delete markers are
      * present in the case of isolatable indices. The query below, which is amenable to optimization
      * in principle, cannot be optimized when this mode is used.
@@ -138,14 +138,14 @@ public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCas
     }
   }
 
-  /**
+  /*
    * Quads mode test suite.
    *
    * <p>FIXME Add explicit tests using FROM and FROM NAMED.
    */
   public static class TestQuadsModeAPs extends TestFastRangeCountOptimizer {
 
-    /**
+    /*
      * Default graph query. Returns the total range count of the index.
      *
      * <pre>
@@ -169,7 +169,7 @@ public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCas
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * Default graph query. Returns range count of Oxxx index where O is bound to a constant.
      *
      * <pre>
@@ -193,7 +193,7 @@ public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCas
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * Named graph query where the graph is not constrained. Returns range count of Oxxx index where
      * O is bound to a constant.
      *
@@ -218,7 +218,7 @@ public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCas
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * Named graph query where the graph is constrained. Returns range count of Cxxx index where C
      * is bound to a constant.
      *
@@ -243,7 +243,7 @@ public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCas
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * Named graph query where the graph is not constrained but the set of named graphs is
      * constrained by a FROM NAMED clause.
      *
@@ -275,7 +275,7 @@ public class TestFastRangeCountOptimizer extends AbstractDataDrivenSPARQLTestCas
           0, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * The optimization must *not* be applied in the presence of delete markers. Delete markers are
      * present in the case of isolatable indices. The query below, which is amenable to optimization
      * in principle, cannot be optimized when this mode is used.

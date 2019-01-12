@@ -13,16 +13,21 @@ import cern.colt.function.DoubleFunction;
 import cern.colt.list.IntArrayList;
 import cern.colt.map.AbstractIntDoubleMap;
 import cern.colt.map.OpenIntDoubleHashMap;
+import cern.colt.matrix.DoubleFactory1D;
 import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
 import cern.colt.matrix.doublealgo.DoubleMatrix2DComparator;
+import cern.colt.matrix.doublealgo.Transform;
 import cern.colt.matrix.linalg.Algebra;
 import cern.colt.matrix.linalg.LUDecompositionQuick;
+import cern.colt.matrix.linalg.Property;
 import cern.colt.matrix.linalg.SeqBlas;
-/**
- * Quick and dirty tests.
+import cern.jet.math.Functions;
+
+/*
+* Quick and dirty tests.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
@@ -104,7 +109,7 @@ class TestMatrix2D {
     DoubleMatrix2D master = Factory2D.ascending(rows, columns);
     // Basic.ascending(master);
     // master.assign(1); // set all cells to 1
-    Transform.mult(master, Math.sin(0.3));
+    cern.colt.matrix.doublealgo.Transform.mult(master, Math.sin(0.3));
     System.out.println("\n" + master);
     // master.viewPart(2,0,2,3).assign(2); // set [2,1] .. [3,3] to 2
     // System.out.println("\n"+master);
@@ -191,35 +196,36 @@ class TestMatrix2D {
     // --> 14
 
     // Sum( x[i]*x[i] )
-    System.out.println(matrix.aggregate(F.plus, F.square));
+    System.out.println(matrix.aggregate(Functions.plus, Functions.square));
     // --> 14
 
     // Sum( x[i]*x[i]*x[i] )
-    System.out.println(matrix.aggregate(F.plus, F.pow(3)));
+    System.out.println(matrix.aggregate(Functions.plus, Functions.pow(3)));
     // --> 36
 
     // Sum( x[i] )
-    System.out.println(matrix.aggregate(F.plus, F.identity));
+    System.out.println(matrix.aggregate(Functions.plus, Functions.identity));
     // --> 6
 
     // Min( x[i] )
-    System.out.println(matrix.aggregate(F.min, F.identity));
+    System.out.println(matrix.aggregate(Functions.min, Functions.identity));
     // --> 0
 
     // Max( Sqrt(x[i]) / 2 )
-    System.out.println(matrix.aggregate(F.max, F.chain(F.div(2), F.sqrt)));
+    System.out.println(matrix.aggregate(Functions.max, Functions.chain(Functions.div(2), Functions.sqrt)));
     // --> 0.8660254037844386
 
     // Number of all cells with 0 <= value <= 2
-    System.out.println(matrix.aggregate(F.plus, F.between(0, 2)));
+    System.out.println(matrix.aggregate(Functions.plus, Functions.between(0, 2)));
     // --> 3
 
     // Number of all cells with 0.8 <= Log2(value) <= 1.2
-    System.out.println(matrix.aggregate(F.plus, F.chain(F.between(0.8, 1.2), F.log2)));
+    System.out.println(matrix.aggregate(Functions.plus, Functions
+        .chain(Functions.between(0.8, 1.2), Functions.log2)));
     // --> 1
 
     // Product( x[i] )
-    System.out.println(matrix.aggregate(F.mult, F.identity));
+    System.out.println(matrix.aggregate(Functions.mult, Functions.identity));
     // --> 0
 
     // Product( x[i] ) of all x[i] > limit
@@ -230,15 +236,16 @@ class TestMatrix2D {
             return a > limit ? a : 1;
           }
         };
-    System.out.println(matrix.aggregate(F.mult, f));
+    System.out.println(matrix.aggregate(Functions.mult, f));
     // --> 6
 
     // Sum( (x[i]+y[i])^2 )
     DoubleMatrix1D otherMatrix1D = matrix.copy();
-    System.out.println(matrix.aggregate(otherMatrix1D, F.plus, F.chain(F.square, F.plus)));
+    System.out.println(matrix.aggregate(otherMatrix1D, Functions.plus, Functions
+        .chain(Functions.square, Functions.plus)));
     // --> 56
 
-    matrix.assign(F.plus(1));
+    matrix.assign(Functions.plus(1));
     otherMatrix1D = matrix.copy();
     // otherMatrix1D.zMult(3);
     System.out.println(matrix);
@@ -246,12 +253,13 @@ class TestMatrix2D {
     // Sum(Math.PI * Math.log(otherMatrix1D[i] / matrix[i]))
     System.out.println(
         matrix.aggregate(
-            otherMatrix1D, F.plus, F.chain(F.mult(Math.PI), F.chain(F.log, F.swapArgs(F.div)))));
+            otherMatrix1D, Functions.plus, Functions.chain(
+                Functions.mult(Math.PI), Functions.chain(Functions.log, Functions.swapArgs(Functions.div)))));
     // or, perhaps less error prone and more readable:
     System.out.println(
         matrix.aggregate(
             otherMatrix1D,
-            F.plus,
+            Functions.plus,
             new DoubleDoubleFunction() {
               public double apply(double a, double b) {
                 return Math.PI * Math.log(b / a);
@@ -262,15 +270,15 @@ class TestMatrix2D {
     System.out.println(x);
 
     // Sum( x[slice,row,col]*x[slice,row,col] )
-    System.out.println(x.aggregate(F.plus, F.square));
+    System.out.println(x.aggregate(Functions.plus, Functions.square));
     // --> 140
 
     DoubleMatrix3D y = x.copy();
     // Sum( (x[i]+y[i])^2 )
-    System.out.println(x.aggregate(y, F.plus, F.chain(F.square, F.plus)));
+    System.out.println(x.aggregate(y, Functions.plus, Functions.chain(Functions.square, Functions.plus)));
     // --> 560
 
-    System.out.println(matrix.assign(F.random()));
+    System.out.println(matrix.assign(Functions.random()));
     System.out.println(
         matrix.assign(
             new cern.jet.random.Poisson(5, cern.jet.random.Poisson.makeDefaultGenerator())));
@@ -279,7 +287,8 @@ class TestMatrix2D {
   public static void doubleTest14(int r1, int c, int r2) {
     double[] values = {0, 1, 2, 3};
     DoubleMatrix2D a = DoubleFactory2D.dense.ascending(r1, c);
-    DoubleMatrix2D b = Transform.mult(DoubleFactory2D.dense.ascending(c, r2), -1);
+    DoubleMatrix2D b = cern.colt.matrix.doublealgo.Transform
+        .mult(DoubleFactory2D.dense.ascending(c, r2), -1);
 
     // System.out.println(a);
     // System.out.println(b);
@@ -344,8 +353,8 @@ class TestMatrix2D {
     DoubleMatrix2D A = Factory2D.ascending(3, 4);
     DoubleMatrix2D B = Factory2D.ascending(2, 3);
     DoubleMatrix2D C = Factory2D.ascending(1, 2);
-    B.assign(F.plus(A.zSum()));
-    C.assign(F.plus(B.zSum()));
+    B.assign(Functions.plus(A.zSum()));
+    C.assign(Functions.plus(B.zSum()));
 
     /*
     System.out.println("\n"+A);
@@ -370,17 +379,17 @@ class TestMatrix2D {
 
     A00 = Factory2D.ascending(s, s);
     // A01 = empty;
-    A01 = Factory2D.ascending(s, s).assign(F.plus(A00.getQuick(s - 1, s - 1)));
-    A02 = Factory2D.ascending(s, s).assign(F.plus(A01.getQuick(s - 1, s - 1)));
-    A10 = Factory2D.ascending(s, s).assign(F.plus(A02.getQuick(s - 1, s - 1)));
+    A01 = Factory2D.ascending(s, s).assign(Functions.plus(A00.getQuick(s - 1, s - 1)));
+    A02 = Factory2D.ascending(s, s).assign(Functions.plus(A01.getQuick(s - 1, s - 1)));
+    A10 = Factory2D.ascending(s, s).assign(Functions.plus(A02.getQuick(s - 1, s - 1)));
     A11 = null;
     // A11 = Factory2D.ascending(s,s).assign(F.plus(A10.getQuick(s-1,s-1)));
-    A12 = Factory2D.ascending(s, s).assign(F.plus(A10.getQuick(s - 1, s - 1)));
+    A12 = Factory2D.ascending(s, s).assign(Functions.plus(A10.getQuick(s - 1, s - 1)));
     // A12 = Factory2D.ascending(s,s).assign(F.plus(A11.getQuick(s-1,s-1)));
-    A20 = Factory2D.ascending(s, s).assign(F.plus(A12.getQuick(s - 1, s - 1)));
+    A20 = Factory2D.ascending(s, s).assign(Functions.plus(A12.getQuick(s - 1, s - 1)));
     A21 = empty;
     // A21 = Factory2D.ascending(s,s).assign(F.plus(A20.getQuick(s-1,s-1)));
-    A22 = Factory2D.ascending(s, s).assign(F.plus(A20.getQuick(s - 1, s - 1)));
+    A22 = Factory2D.ascending(s, s).assign(Functions.plus(A20.getQuick(s - 1, s - 1)));
     // A22 = Factory2D.ascending(s,s).assign(F.plus(A21.getQuick(s-1,s-1)));
 
     // B.assign(F.plus(A.zSum()));
@@ -544,17 +553,17 @@ class TestMatrix2D {
 
     A00 = Factory2D.ascending(s, s);
     // A01 = empty;
-    A01 = Factory2D.ascending(s, s).assign(F.plus(A00.getQuick(s - 1, s - 1)));
-    A02 = Factory2D.ascending(s, s).assign(F.plus(A01.getQuick(s - 1, s - 1)));
-    A10 = Factory2D.ascending(s, s).assign(F.plus(A02.getQuick(s - 1, s - 1)));
+    A01 = Factory2D.ascending(s, s).assign(Functions.plus(A00.getQuick(s - 1, s - 1)));
+    A02 = Factory2D.ascending(s, s).assign(Functions.plus(A01.getQuick(s - 1, s - 1)));
+    A10 = Factory2D.ascending(s, s).assign(Functions.plus(A02.getQuick(s - 1, s - 1)));
     A11 = null;
     // A11 = Factory2D.ascending(s,s).assign(F.plus(A10.getQuick(s-1,s-1)));
-    A12 = Factory2D.ascending(s, s).assign(F.plus(A10.getQuick(s - 1, s - 1)));
+    A12 = Factory2D.ascending(s, s).assign(Functions.plus(A10.getQuick(s - 1, s - 1)));
     // A12 = Factory2D.ascending(s,s).assign(F.plus(A11.getQuick(s-1,s-1)));
-    A20 = Factory2D.ascending(s, s).assign(F.plus(A12.getQuick(s - 1, s - 1)));
+    A20 = Factory2D.ascending(s, s).assign(Functions.plus(A12.getQuick(s - 1, s - 1)));
     A21 = empty;
     // A21 = Factory2D.ascending(s,s).assign(F.plus(A20.getQuick(s-1,s-1)));
-    A22 = Factory2D.ascending(s, s).assign(F.plus(A20.getQuick(s - 1, s - 1)));
+    A22 = Factory2D.ascending(s, s).assign(Functions.plus(A20.getQuick(s - 1, s - 1)));
     // A22 = Factory2D.ascending(s,s).assign(F.plus(A21.getQuick(s-1,s-1)));
 
     // B.assign(F.plus(A.zSum()));
@@ -664,7 +673,7 @@ class TestMatrix2D {
     double a = Math.sqrt(10405);
     double b = Math.sqrt(26);
     double[] e = {-10 * a, 0, 510 - 100 * b, 1000, 1000, 510 + 100 * b, 1020, 10 * a};
-    System.out.println(Factory1D.dense.make(e));
+    System.out.println(DoubleFactory1D.dense.make(e));
   }
   /** */
   public static void doubleTest21() {
@@ -731,8 +740,8 @@ class TestMatrix2D {
 
     System.out.println("sampling...");
     double value = 2;
-    if (dense) A = Factory2D.dense.sample(size, size, value, nonZeroFraction);
-    else A = Factory2D.sparse.sample(size, size, value, nonZeroFraction);
+    if (dense) A = DoubleFactory2D.dense.sample(size, size, value, nonZeroFraction);
+    else A = DoubleFactory2D.sparse.sample(size, size, value, nonZeroFraction);
     b = A.like1D(size).assign(1);
 
     // A.assign(random);
@@ -780,8 +789,8 @@ class TestMatrix2D {
     System.out.println("initializing...");
     DoubleMatrix2D A;
     DoubleFactory2D factory;
-    if (dense) factory = Factory2D.dense;
-    else factory = Factory2D.sparse;
+    if (dense) factory = DoubleFactory2D.dense;
+    else factory = DoubleFactory2D.sparse;
 
     double value = 2;
     double omega = 1.25;
@@ -834,8 +843,8 @@ class TestMatrix2D {
     boolean dense = true;
     DoubleMatrix2D A;
     DoubleFactory2D factory;
-    if (dense) factory = Factory2D.dense;
-    else factory = Factory2D.sparse;
+    if (dense) factory = DoubleFactory2D.dense;
+    else factory = DoubleFactory2D.sparse;
 
     double value = 0.5;
     A = factory.make(size, size, value);
@@ -857,8 +866,8 @@ class TestMatrix2D {
     boolean dense = true;
     DoubleMatrix2D A;
     DoubleFactory2D factory;
-    if (dense) factory = Factory2D.dense;
-    else factory = Factory2D.sparse;
+    if (dense) factory = DoubleFactory2D.dense;
+    else factory = DoubleFactory2D.sparse;
 
     double value = 0.5;
     A = factory.make(size, size, value);
@@ -1256,7 +1265,7 @@ class TestMatrix2D {
   public static void doubleTest31(int size) {
 
     System.out.println("\ninit");
-    DoubleMatrix1D a = Factory1D.dense.descending(size);
+    DoubleMatrix1D a = DoubleFactory1D.dense.descending(size);
     DoubleMatrix1D b = new WrapperDoubleMatrix1D(a);
     DoubleMatrix1D c = b.viewPart(2, 3);
     DoubleMatrix1D d = c.viewFlip();
@@ -1320,7 +1329,7 @@ class TestMatrix2D {
     };
 
     DoubleMatrix2D A = new DenseDoubleMatrix2D(data);
-    Property.DEFAULT.generateNonSingular(A);
+    cern.colt.matrix.linalg.Property.DEFAULT.generateNonSingular(A);
     DoubleMatrix2D inv = Algebra.DEFAULT.inverse(A);
 
     System.out.println("\n\n\n" + A);
@@ -1331,7 +1340,7 @@ class TestMatrix2D {
       throw new InternalError();
     }
   }
-  /**
+  /*
    * Title: Aero3D
    *
    * <p>Description: A Program to analyse aeroelestic evects in transonic wings
@@ -1398,7 +1407,7 @@ class TestMatrix2D {
     System.out.println("done\n");
     */
   }
-  /**
+  /*
    * Title: Aero3D
    *
    * <p>Description: A Program to analyse aeroelestic evects in transonic wings
@@ -1435,7 +1444,7 @@ class TestMatrix2D {
     DoubleMatrix2D view = master.viewPart(2, 0, 2, 3).assign(2);
     System.out.println("\n" + master);
     System.out.println("\n" + view);
-    Transform.mult(view, 3);
+    cern.colt.matrix.doublealgo.Transform.mult(view, 3);
     System.out.println("\n" + master);
     System.out.println("\n" + view);
 
@@ -1579,10 +1588,10 @@ class TestMatrix2D {
 
   public static void doubleTestQR() {
     // test case0...
-    double x0[] = {-6.221564, -9.002113, 2.678001, 6.483597, -7.934148};
-    double y0[] = {-7.291898, -7.346928, 0.520158, 5.012548, -8.223725};
-    double x1[] = {1.185925, -2.523077, 0.135380, 0.412556, -2.980280};
-    double y1[] = {13.561087, -15.204410, 16.496829, 16.470860, 0.822198};
+    double[] x0 = {-6.221564, -9.002113, 2.678001, 6.483597, -7.934148};
+    double[] y0 = {-7.291898, -7.346928, 0.520158, 5.012548, -8.223725};
+    double[] x1 = {1.185925, -2.523077, 0.135380, 0.412556, -2.980280};
+    double[] y1 = {13.561087, -15.204410, 16.496829, 16.470860, 0.822198};
 
     solve(x1.length, x1, y1);
     solve(x0.length, x0, y0);
@@ -1622,7 +1631,7 @@ class TestMatrix2D {
     return m;
   }
 
-  public static void solve(int numpnt, double x[], double y[]) {
+  public static void solve(int numpnt, double[] x, double[] y) {
     /*
     // create the matrix object
     DoubleMatrix2D A = new DenseDoubleMatrix2D(numpnt, 5);

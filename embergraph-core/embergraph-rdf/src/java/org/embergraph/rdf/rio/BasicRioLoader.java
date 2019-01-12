@@ -31,21 +31,21 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.Rio;
 
-/**
- * Parses data but does not load it into the indices.
+/*
+* Parses data but does not load it into the indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class BasicRioLoader implements IRioLoader {
 
-  /**
+  /*
    * Note: This logger was historically associated with the {@link IRioLoader} interface and it is
    * still named for that interface.
    */
   protected static final transient Logger log = Logger.getLogger(IRioLoader.class);
 
-  /**
+  /*
    * Force the load of the NxParser integration class.
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/439">Class loader problems </a>
@@ -118,7 +118,7 @@ public class BasicRioLoader implements IRioLoader {
     }
   }
 
-  /**
+  /*
    * Choose the parser based on the {@link RDFFormat} specified to the constructor.
    *
    * @return The parser.
@@ -154,7 +154,7 @@ public class BasicRioLoader implements IRioLoader {
     loadRdf2(reader, baseURI, rdfFormat, defaultGraph, options);
   }
 
-  /**
+  /*
    * Core implementation.
    *
    * @param source A {@link Reader} or {@link InputStream}.
@@ -263,7 +263,7 @@ public class BasicRioLoader implements IRioLoader {
   /** Invoked from finally clause after parse regardless of success or failure. */
   protected void cleanUp() {}
 
-  /**
+  /*
    * Note: YOU MUST override this method to install a different {@link RDFHandler}. The default is
    * the {@link BasicRDFHandler} which does NOTHING.
    */

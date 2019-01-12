@@ -2,8 +2,8 @@ package org.embergraph.util.concurrent;
 
 import java.util.concurrent.Future;
 
-/**
- * Interface extends {@link Future} and provides an interface for managing the termination of a
+/*
+* Interface extends {@link Future} and provides an interface for managing the termination of a
  * process from within that process.
  *
  * @param <V> The generic type of the computation to which the {@link Future} evaluates.
@@ -13,7 +13,7 @@ public interface IHaltable<V> extends Future<V> {
   /** Halt (normal termination). */
   void halt(V v);
 
-  /**
+  /*
    * Halt (exception thrown). <strong>The caller is responsible for throwing their given
    * <i>cause</i> out of their own context.</strong> As a convenience, this method returns the given
    * <i>cause</>.
@@ -23,7 +23,7 @@ public interface IHaltable<V> extends Future<V> {
    */
   <T extends Throwable> T halt(T cause);
 
-  /**
+  /*
    * Return the first {@link Throwable} which caused this process to halt, but only for abnormal
    * termination.
    *
@@ -35,7 +35,7 @@ public interface IHaltable<V> extends Future<V> {
    */
   Throwable getCause();
 
-  /**
+  /*
    * Return the first {@link Throwable cause} regardless of whether it is indicative of normal
    * termination and <code>null</code> iff no cause has been set.
    */

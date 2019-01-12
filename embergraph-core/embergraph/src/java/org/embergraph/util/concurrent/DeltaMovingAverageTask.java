@@ -25,15 +25,15 @@ package org.embergraph.util.concurrent;
 
 import java.util.concurrent.Callable;
 
-/**
- * Moving average based on the change in some sampled value.
+/*
+* Moving average based on the change in some sampled value.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class DeltaMovingAverageTask extends MovingAverageTask {
 
-  /**
+  /*
    * @param name
    * @param sampleTask
    */
@@ -41,7 +41,7 @@ public class DeltaMovingAverageTask extends MovingAverageTask {
     super(name, sampleTask);
   }
 
-  /**
+  /*
    * @param name
    * @param sampleTask
    * @param w

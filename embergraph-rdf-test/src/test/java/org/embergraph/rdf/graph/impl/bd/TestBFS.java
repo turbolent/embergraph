@@ -25,8 +25,8 @@ import org.embergraph.rdf.graph.TraversalDirectionEnum;
 import org.embergraph.rdf.graph.analytics.BFS;
 import org.openrdf.sail.SailConnection;
 
-/**
- * Test class for Breadth First Search (BFS) traversal.
+/*
+* Test class for Breadth First Search (BFS) traversal.
  *
  * @see BFS
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -78,7 +78,7 @@ public class TestBFS extends AbstractEmbergraphGraphTestCase {
     }
   }
 
-  /**
+  /*
    * Variant test in which we choose a vertex (<code>foaf:person</code>) in the middle of the graph
    * and insist on forward directed edges. Since the edges point from the person to the <code>
    * foaf:person</code> vertex, this BSF traversal does not discover any connected vertices.
@@ -140,7 +140,7 @@ public class TestBFS extends AbstractEmbergraphGraphTestCase {
     }
   }
 
-  /**
+  /*
    * Variant test in which we choose a vertex (<code>foaf:person</code>) in the middle of the graph
    * and insist on reverse directed edges. Since the edges point from the person to the <code>
    * foaf:person</code> vertex, forward BSF traversal does not discover any connected vertices.
@@ -203,7 +203,7 @@ public class TestBFS extends AbstractEmbergraphGraphTestCase {
     }
   }
 
-  /**
+  /*
    * Variant test in which we choose a vertex (<code>foaf:person</code>) in the middle of the graph
    * and insist on directed edges. Since the edges point from the person to the <code>foaf:person
    * </code> vertex, this BSF traversal does not discover any connected vertices.

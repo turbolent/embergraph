@@ -56,8 +56,8 @@ import org.embergraph.rdf.store.EmbergraphStatementIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.openrdf.model.BNode;
 
-/**
- * This is the most basic possible implementation of the Blueprints Graph API. It wraps an embedded
+/*
+* This is the most basic possible implementation of the Blueprints Graph API. It wraps an embedded
  * {@link EmbergraphSailRepository} and holds open an unisolated connection to the database for the
  * lifespan of the Graph (until {@link #shutdown()} is called.
  *
@@ -68,7 +68,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
 
   private static final transient Logger log = Logger.getLogger(EmbergraphGraphEmbedded.class);
 
-  public static interface Options {
+  public interface Options {
 
     String AUTO_COMMIT_ON_SHUTDOWN =
         EmbergraphGraphEmbedded.class.getName() + ".autoCommitOnShutdown";
@@ -90,7 +90,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     this(sail, EmbergraphRDFFactory.INSTANCE);
   }
 
-  /**
+  /*
    * Create a Blueprints wrapper around a {@link EmbergraphSail} instance with a non-standard {@link
    * BlueprintsValueFactory} implementation.
    */
@@ -98,7 +98,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     this(new EmbergraphSailRepository(sail), factory, new Properties());
   }
 
-  /**
+  /*
    * Create a Blueprints wrapper around a {@link EmbergraphSail} instance with a non-standard {@link
    * BlueprintsValueFactory} implementation.
    */
@@ -112,7 +112,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     this(repo, EmbergraphRDFFactory.INSTANCE, new Properties());
   }
 
-  /**
+  /*
    * Create a Blueprints wrapper around a {@link EmbergraphSailRepository} instance with a
    * non-standard {@link BlueprintsValueFactory} implementation.
    */
@@ -122,7 +122,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
       final Properties props) {
     super(factory, props);
 
-    this.repo = (EmbergraphSailRepository) repo;
+    this.repo = repo;
     this.autocommitOnShutdown =
         Boolean.valueOf(
             props.getProperty(
@@ -233,8 +233,8 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     try {
       try {
         if (autocommitOnShutdown) {
-          /*
-           * Auto-commit on close.
+        /*
+       * Auto-commit on close.
            */
           commit();
         }
@@ -360,7 +360,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     }
   }
 
-  /**
+  /*
    * Turn a change record into a graph edit and notify the graph listeners.
    *
    * @param record Embergraph change record.
@@ -374,7 +374,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     }
   }
 
-  /**
+  /*
    * Turn a embergraph change record into a graph edit.
    *
    * @param record Embergraph change record
@@ -399,7 +399,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     return new EmbergraphGraphEdit(action, atom);
   }
 
-  /**
+  /*
    * Materialize a batch of change records.
    *
    * @param records Embergraph change records
@@ -500,14 +500,14 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
   protected QueryEngine getQueryEngine() {
 
     final QueryEngine queryEngine =
-        (QueryEngine) QueryEngineFactory.getInstance().getQueryController(getIndexManager());
+        QueryEngineFactory.getInstance().getQueryController(getIndexManager());
 
     return queryEngine;
   }
 
   private IIndexManager getIndexManager() {
 
-    final EmbergraphSailRepository repo = (EmbergraphSailRepository) this.getRepository();
+    final EmbergraphSailRepository repo = this.getRepository();
 
     final IIndexManager indexMgr = repo.getSail().getIndexManager();
 
@@ -659,7 +659,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
   //        return super.getFeatures();
   //    }
 
-  /**
+  /*
    * Note: This is also responsible for noticing the time at which the query begins to execute and
    * storing the {@link RunningQuery} in the {@link #m_queries} map.
    *
@@ -706,7 +706,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     return queryUuid;
   }
 
-  /**
+  /*
    * Determines the {@link UUID} which will be associated with the {@link IRunningQuery}. If {@link
    * QueryHints#QUERYID} has already been used by the application to specify the {@link UUID} then
    * that {@link UUID} is noted. Otherwise, a random {@link UUID} is generated and assigned to the
@@ -735,7 +735,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     return queryUuid;
   }
 
-  /**
+  /*
    * The currently executing queries (does not include queries where a client has established a
    * connection but the query is not running because the {@link #queryService} is blocking).
    *
@@ -746,7 +746,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
   private static final ConcurrentHashMap<String /* extQueryId */, RunningQuery> m_queries =
       new ConcurrentHashMap<String, RunningQuery>();
 
-  /**
+  /*
    * The currently executing QUERY and UPDATE requests.
    *
    * <p>Note: This does not include requests where a client has established a connection to the
@@ -796,7 +796,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph
     }
   }
 
-  /**
+  /*
    * Helper method to determine if a query was cancelled.
    *
    * @param queryId

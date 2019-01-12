@@ -33,7 +33,7 @@ public abstract class AbstractQueryHint<T> implements IQueryHint<T> {
 
   private final T defaultValue;
 
-  /**
+  /*
    * @param name The name of the query hint (required).
    * @param defaultValue The default value (optional).
    */
@@ -68,7 +68,7 @@ public abstract class AbstractQueryHint<T> implements IQueryHint<T> {
 
   // }
 
-  /**
+  /*
    * Set the query hint.
    *
    * <p>Note: Query hints are {@link Properties} objects and their values are {@link String}s. The
@@ -90,7 +90,7 @@ public abstract class AbstractQueryHint<T> implements IQueryHint<T> {
     op.setQueryHint(name, value.toString());
   }
 
-  /**
+  /*
    * Set an annotation on the AST node.
    *
    * <p>Note: Annotations are attached directly to the AST node. They are interpreted during query
@@ -120,8 +120,8 @@ public abstract class AbstractQueryHint<T> implements IQueryHint<T> {
    * the query hint should be applied to all AST nodes in the query (at least
    * those of the appropriate type).
    */
-  //    /**
-  //     * Conditionally set the property in the global scope.
+  //    /*
+//     * Conditionally set the property in the global scope.
   //     *
   //     * @param context
   //     *            The evaluation context.

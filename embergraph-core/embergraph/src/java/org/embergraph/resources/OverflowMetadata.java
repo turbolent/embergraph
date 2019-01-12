@@ -21,8 +21,8 @@ import org.embergraph.journal.Name2Addr.Entry;
 import org.embergraph.journal.Name2Addr.EntrySerializer;
 import org.embergraph.service.IDataService;
 
-/**
- * Metadata on the entire synchronous and asynchronous overflow task.
+/*
+* Metadata on the entire synchronous and asynchronous overflow task.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -34,19 +34,19 @@ public class OverflowMetadata {
   /** The resource manager. */
   public final ResourceManager resourceManager;
 
-  /**
+  /*
    * The last commit time on the old journal. This identifies the commit point on which synchronous
    * and asynchronous overflow will read.
    */
   public final long lastCommitTime;
 
-  //    /**
-  //     * The names of any index partitions that were copied onto the new journal
+  //    /*
+//     * The names of any index partitions that were copied onto the new journal
   //     * during synchronous overflow processing.
   //     */
   //    private final Set<String> copied = new HashSet<String>();
 
-  /**
+  /*
    * Set <code>true</code> iff asynchronous post-processing should be performed. Flag is set iff
    * some indices are NOT copied onto the new journal such that asynchronous post-processing should
    * be performed.
@@ -58,7 +58,7 @@ public class OverflowMetadata {
    * journal.
    */
 
-  /**
+  /*
    * The raw write score computed based on the net change in the aggregated {@link BTreeCounters}s
    * for each index partition since the last overflow.
    *
@@ -76,13 +76,13 @@ public class OverflowMetadata {
    * Metadata for the BTree and index partition views.
    */
 
-  /**
+  /*
    * Note: Since this is a linked hash map it will maintain the order in which we populate it so
    * views() will also be in index name order.
    */
   private final LinkedHashMap<String, ViewMetadata> views;
 
-  /**
+  /*
    * Clears the {@link ViewMetadata} map, clearing the {@link SoftReference}s from each {@link
    * BTreeMetadata} and {@link ViewMetadata} instance. This is used by the {@link
    * AsynchronousOverflowTask} to encourage the eager GC of resources once that task is finished.
@@ -97,7 +97,7 @@ public class OverflowMetadata {
     views.clear();
   }
 
-  /**
+  /*
    * Random lookup of the {@link ViewMetadata}.
    *
    * @param name The index name.
@@ -125,7 +125,7 @@ public class OverflowMetadata {
     return views.size();
   }
 
-  /**
+  /*
    * True if the tuples for the index were copied to the new live journal during synchronous
    * overflow.
    *
@@ -143,8 +143,8 @@ public class OverflowMetadata {
     return OverflowActionEnum.Copy.equals(vmd.getAction());
   }
 
-  //    /**
-  //     * The action to take / taken for the index partition.
+  //    /*
+//     * The action to take / taken for the index partition.
   //     *
   //     * @param name
   //     *            The name of the index partition.
@@ -166,7 +166,7 @@ public class OverflowMetadata {
   //
   //    }
 
-  /**
+  /*
    * Specify the action to be taken.
    *
    * @param name The index partition name.
@@ -214,7 +214,7 @@ public class OverflowMetadata {
     }
   }
 
-  /**
+  /*
    * Return the #of index partitions for which the specified action was chosen.
    *
    * @param action The action.
@@ -249,7 +249,7 @@ public class OverflowMetadata {
   private final Map<OverflowActionEnum, AtomicInteger> actionCounts =
       new HashMap<OverflowActionEnum, AtomicInteger>();
 
-  /**
+  /*
    * Captures various metadata about the live journal in preparation for a synchronous overflow
    * operation.
    *
@@ -302,8 +302,8 @@ public class OverflowMetadata {
         final Entry entry =
             EntrySerializer.INSTANCE.deserialize(new DataInputBuffer(tuple.getValue()));
 
-        /*
-         * Obtain the delta in the btree performance counters for this
+      /*
+       * Obtain the delta in the btree performance counters for this
          * index partition since the last overflow.
          */
         BTreeCounters btreeCounters = delta.get(entry.name);
@@ -391,7 +391,7 @@ public class OverflowMetadata {
     return Arrays.asList(scores);
   }
 
-  /**
+  /*
    * Return <code>true</code> if the named index partition is "warm" for {@link ITx#UNISOLATED}
    * and/or {@link ITx#READ_COMMITTED} operations.
    *

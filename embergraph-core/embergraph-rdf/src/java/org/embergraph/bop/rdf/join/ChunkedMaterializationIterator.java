@@ -27,8 +27,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 
-/**
- * Iterator pattern for chunked materialization.
+/*
+* Iterator pattern for chunked materialization.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public class ChunkedMaterializationIterator implements ICloseableIterator<IBindi
 
   private boolean open = false;
 
-  /**
+  /*
    * @param vars The variables to be materialized (required; must not be an empty array).
    * @param lex The {@link LexiconRelation}.
    * @param materializeInlineIVs When <code>true</code>, inline IVs will also be materialized.

@@ -30,8 +30,8 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * A factory for named {@link Lock}s. A simple {@link Lock} manages access to a single resource.
+/*
+* A factory for named {@link Lock}s. A simple {@link Lock} manages access to a single resource.
  * However, a {@link NamedLock} manages access to the members of a set of named resources. This is
  * more efficient when the latency of the operation once the lock is acquired is significant, e.g.,
  * an RMI call or a disk IO.
@@ -48,7 +48,7 @@ public class NamedLock<T> {
 
   private final Map<T, ReentrantLock> locks = new WeakHashMap<T, ReentrantLock>();
 
-  /**
+  /*
    * Return the canonical instance of the lock for a named resource.
    *
    * @param name The name.
@@ -74,7 +74,7 @@ public class NamedLock<T> {
     return lock;
   }
 
-  /**
+  /*
    * Block until the {@link Lock} for the named resource is available, then {@link Lock#lock()} the
    * {@link Lock} and return the locked {@link Lock}.
    *

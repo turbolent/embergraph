@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt;
 
-/**
- * A handy stopwatch for benchmarking. Like a real stop watch used on ancient running tracks you can
+/*
+* A handy stopwatch for benchmarking. Like a real stop watch used on ancient running tracks you can
  * start the watch, stop it, start it again, stop it again, display the elapsed time and reset the
  * watch.
  */
@@ -22,7 +22,7 @@ public class Timer extends PersistentObject {
   public Timer() {
     this.reset();
   }
-  /**
+  /*
    * Prints the elapsed time on System.out
    *
    * @return <tt>this</tt> (for convenience only).
@@ -43,7 +43,7 @@ public class Timer extends PersistentObject {
     }
     return elapsed;
   }
-  /**
+  /*
    * <tt>T = this - other</tt>; Constructs and returns a new timer which is the difference of the
    * receiver and the other timer. The new timer is not started.
    *
@@ -59,7 +59,7 @@ public class Timer extends PersistentObject {
   public float minutes() {
     return seconds() / 60;
   }
-  /**
+  /*
    * <tt>T = this + other</tt>; Constructs and returns a new timer which is the sum of the receiver
    * and the other timer. The new timer is not started.
    *
@@ -71,7 +71,7 @@ public class Timer extends PersistentObject {
     copy.elapsedTime = millis() + other.millis();
     return copy;
   }
-  /**
+  /*
    * Resets the timer.
    *
    * @return <tt>this</tt> (for convenience only).
@@ -85,7 +85,7 @@ public class Timer extends PersistentObject {
   public float seconds() {
     return ((float) millis()) / UNIT;
   }
-  /**
+  /*
    * Starts the timer.
    *
    * @return <tt>this</tt> (for convenience only).
@@ -94,7 +94,7 @@ public class Timer extends PersistentObject {
     baseTime = System.currentTimeMillis();
     return this;
   }
-  /**
+  /*
    * Stops the timer. You can start it again later, if necessary.
    *
    * @return <tt>this</tt> (for convenience only).
@@ -143,6 +143,6 @@ public class Timer extends PersistentObject {
   }
   /** Returns a String representation of the receiver. */
   public String toString() {
-    return "Time=" + Float.toString(this.elapsedTime()) + " secs";
+    return "Time=" + this.elapsedTime() + " secs";
   }
 }

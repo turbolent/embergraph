@@ -29,7 +29,7 @@ import org.openrdf.util.iterators.Iterators;
 /** @author Arjohn Kampman */
 public class ModelUtil {
 
-  /**
+  /*
    * Compares two models, defined by two statement collections, and returns <tt>true</tt> if they
    * are equal. Models are equal if they contain the same set of statements. Blank node IDs are not
    * relevant for model equality, they are mapped from one model to the other by using the attached
@@ -47,7 +47,7 @@ public class ModelUtil {
     return equals(set1, set2);
   }
 
-  /**
+  /*
    * Compares two models, defined by two statement collections, and returns <tt>true</tt> if they
    * are equal. Models are equal if they contain the same set of statements. Blank node IDs are not
    * relevant for model equality, they are mapped from one model to the other by using the attached
@@ -62,7 +62,7 @@ public class ModelUtil {
     return isSubsetInternal(model1, model2);
   }
 
-  /**
+  /*
    * Compares two models, defined by two statement collections, and returns <tt>true</tt> if the
    * first model is a subset of the second model.
    */
@@ -78,7 +78,7 @@ public class ModelUtil {
     return isSubset(set1, set2);
   }
 
-  /**
+  /*
    * Compares two models, defined by two statement collections, and returns <tt>true</tt> if the
    * first model is a subset of the second model.
    */
@@ -115,7 +115,7 @@ public class ModelUtil {
     return matchModels(model1BNodes, model2, new HashMap<BNode, BNode>(), 0);
   }
 
-  /**
+  /*
    * A recursive method for finding a complete mapping between blank nodes in model1 and blank nodes
    * in model2. The algorithm does a depth-first search trying to establish a mapping for each blank
    * node occurring in model1.
@@ -228,25 +228,18 @@ public class ModelUtil {
 
       if (mappedBNode != null) {
         // bNode 'obj1' was already mapped to some other bNode
-        if (!obj2.equals(mappedBNode)) {
-          // 'obj1' and 'obj2' do not match
-          return false;
-        }
+        // 'obj1' and 'obj2' do not match
+        return obj2.equals(mappedBNode);
       } else {
         // 'obj1' was not yet mapped. we need to check if 'obj2' is a
         // possible mapping candidate
-        if (bNodeMapping.containsValue(obj2)) {
-          // 'obj2' is already mapped to some other value.
-          return false;
-        }
+        // 'obj2' is already mapped to some other value.
+        return !bNodeMapping.containsValue(obj2);
       }
     } else {
       // objects are not (both) bNodes
-      if (!obj1.equals(obj2)) {
-        return false;
-      }
+      return obj1.equals(obj2);
     }
 
-    return true;
   }
 }

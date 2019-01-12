@@ -57,7 +57,7 @@ public class DataSetSummary {
     return s;
   }
 
-  /**
+  /*
    * The set of graphs. The {@link URI}s MUST have been resolved against the appropriate {@link
    * LexiconRelation} such that their term identifiers (when the exist) are known. If any term
    * identifier is {@link IRawTripleStore#NULL}, then the corresponding graph does not exist and no
@@ -68,14 +68,14 @@ public class DataSetSummary {
   //    public final Iterable<? extends URI> graphs;
   public final Set<IV> graphs;
 
-  /**
+  /*
    * The #of graphs in {@link #graphs} whose term identifier is known. While this is not proof that
    * there is data in the quad store for a graph having the corresponding {@link URI}, it does allow
    * the possibility that a graph could exist for that {@link URI}.
    */
   public final int nknown;
 
-  /**
+  /*
    * The #of graphs in {@link #graphs} whose term identifier is not known. For QUERY, this is proof
    * that there is no data in the quad store for a graph having the corresponding {@link URI}.
    * However, for UPDATE it is possible that a graph could be created for that {@link URI} during an
@@ -83,13 +83,13 @@ public class DataSetSummary {
    */
   public final int nunknown;
 
-  /**
+  /*
    * The {@link IV} for the first graph having a known {@link IV} and {@link IRawTripleStore#NULL}
    * if no graphs were specified having a known {@link IV}.
    */
   public final IV firstContext;
 
-  /**
+  /*
    * @param graphs The set of named graphs in the SPARQL DATASET (optional). A runtime exception
    *     will be thrown during evaluation of the if the {@link URI}s are not {@link EmbergraphURI}s.
    *     If <code>graphs := null</code>, then the set of named graphs is understood to be ALL graphs
@@ -179,17 +179,17 @@ public class DataSetSummary {
     }
   }
 
-  /**
+  /*
    * Return the distinct {@link IV}s for the graphs known to the database.
    *
    * @return An ordered set of the distinct {@link IV}s.
    */
   public Set<IV> getGraphs() {
 
-    return graphs != null ? graphs : Collections.<IV>emptySet();
+    return graphs != null ? graphs : Collections.emptySet();
   }
 
-  /**
+  /*
    * Estimate cost of SUBQUERY with C bound (sampling).
    *
    * @param context
@@ -269,8 +269,6 @@ public class DataSetSummary {
 
     final DataSetSummary t = (DataSetSummary) o;
 
-    if (!graphs.equals(t.graphs)) return false;
-
-    return true;
+    return graphs.equals(t.graphs);
   }
 }

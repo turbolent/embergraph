@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-/**
- * Used to reject samples that arrive way out of timestamp order.
+/*
+* Used to reject samples that arrive way out of timestamp order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class TimestampOrderException extends IllegalStateException {
     super(arg0);
   }
 
-  /**
+  /*
    * @param arg0
    * @param arg1
    */

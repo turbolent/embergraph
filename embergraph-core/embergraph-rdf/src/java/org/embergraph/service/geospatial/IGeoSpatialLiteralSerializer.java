@@ -25,29 +25,29 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 
-/**
- * Interface for serialization and deserialization of GeoSpatial datatypes, defining how a given
+/*
+* Interface for serialization and deserialization of GeoSpatial datatypes, defining how a given
  * geospatial datatype is translated from literal string into its component array and back.
  *
  * @author msc
  */
 public interface IGeoSpatialLiteralSerializer extends Serializable {
 
-  /**
+  /*
    * Decomposes a string[] into an array of strings identifying the individual components.
    *
    * @param literalString
    */
-  public String[] toComponents(final String literalString);
+  String[] toComponents(final String literalString);
 
-  /**
+  /*
    * Recomposes the components into a string, should typically use the object's toString() method.
    *
    * @param components
    */
-  public String fromComponents(final Object[] components);
+  String fromComponents(final Object[] components);
 
-  /**
+  /*
    * Serialize a geo-location of latitude and longitude. The two parameters are either Double or
    * Long values, so you should typically use the object's toString() method to get to a valid
    * string representation.
@@ -56,10 +56,10 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param latitude
    * @param longitude
    */
-  public IV<?, ?> serializeLocation(
+  IV<?, ?> serializeLocation(
       final EmbergraphValueFactory vf, final Object latitude, final Object longitude);
 
-  /**
+  /*
    * Serialize a latitude+longitude+time value contained in a geospatial datatype. The parameters
    * are either Double or Long values, so you should typically use the object's toString() method to
    * get to a valid string representation.
@@ -69,13 +69,13 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param longitude
    * @param time
    */
-  public IV<?, ?> serializeLocationAndTime(
+  IV<?, ?> serializeLocationAndTime(
       final EmbergraphValueFactory vf,
       final Object latitude,
       final Object longitude,
       final Object time);
 
-  /**
+  /*
    * Serialize a time value contained in a geospatial datatype. The parameter is either a Double or
    * Long value, so you should typically use the object's toString() method to get to a valid string
    * representation.
@@ -83,9 +83,9 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param vf
    * @param time
    */
-  public IV<?, ?> serializeTime(final EmbergraphValueFactory vf, final Object time);
+  IV<?, ?> serializeTime(final EmbergraphValueFactory vf, final Object time);
 
-  /**
+  /*
    * Serialize a latitude value contained in a geospatial datatype. The parameter is either a Double
    * or Long value, so you should typically use the object's toString() method to get to a valid
    * string representation.
@@ -93,9 +93,9 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param vf
    * @param latitude
    */
-  public IV<?, ?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude);
+  IV<?, ?> serializeLatitude(final EmbergraphValueFactory vf, final Object latitude);
 
-  /**
+  /*
    * Serialize a longitude value contained in a geospatial datatype. The parameter is either a
    * Double or Long value, so you should typically use the object's toString() method to get to a
    * valid string representation.
@@ -103,9 +103,9 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param vf
    * @param longitude
    */
-  public IV<?, ?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude);
+  IV<?, ?> serializeLongitude(final EmbergraphValueFactory vf, final Object longitude);
 
-  /**
+  /*
    * Serialize a coordinate system value contained in a geospatial datatype. The parameter is either
    * a Double or Long value, so you should typically use the object's toString() method to get to a
    * valid string representation.
@@ -113,20 +113,20 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param vf
    * @param coordinateSystem
    */
-  public IV<?, ?> serializeCoordSystem(
+  IV<?, ?> serializeCoordSystem(
       final EmbergraphValueFactory vf, final Object coordinateSystem);
 
-  /**
+  /*
    * Serialize a custom fields value contained in a geospatial datatype. The parameter is either a
    * Double or Long value, so you should typically use the object's toString() method to get to a
    * valid string representation.
    *
    * @param coordSystem
    */
-  public IV<?, ?> serializeCustomFields(
+  IV<?, ?> serializeCustomFields(
       final EmbergraphValueFactory vf, final Object... customFields);
 
-  /**
+  /*
    * Serialize a distance value. The two parameters reflect the distance value (as Double) and the
    * {@link UNITS} in which the value is represented. The {@link UNITS} depend on the units that are
    * specified within the query. Given that the user should be aware of the {@link UNITS}, you may
@@ -136,6 +136,6 @@ public interface IGeoSpatialLiteralSerializer extends Serializable {
    * @param distance
    * @param units
    */
-  public IV<?, ?> serializeDistance(
+  IV<?, ?> serializeDistance(
       final EmbergraphValueFactory vf, final Double distance, final UNITS unit);
 }

@@ -27,8 +27,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 import org.embergraph.util.concurrent.Haltable;
 
-/**
- * A factory pattern for per-thread objects whose life cycle is tied to some container. The pool can
+/*
+* A factory pattern for per-thread objects whose life cycle is tied to some container. The pool can
  * be torn down when the container is torn down, which prevents its thread-local references from
  * escaping.
  *
@@ -49,7 +49,7 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
   /** The thread-local queues. */
   private final ConcurrentHashMap<Thread, T> map;
 
-  /**
+  /*
    * A list of all objects visible to the caller. This is used to ensure that any objects allocated
    * by the factory are visited.
    *
@@ -75,7 +75,7 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
     return map.size();
   }
 
-  /**
+  /*
    * Add the element to the thread-local buffer.
    *
    * @param e An element.
@@ -86,7 +86,7 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
     get().add(e);
   }
 
-  /**
+  /*
    * Return a thread-local buffer
    *
    * @return The thread-local buffer.
@@ -97,8 +97,8 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
     T tmp = map.get(t);
     if (tmp == null) {
       if (map.put(t, tmp = initialValue()) != null) {
-        /*
-         * Note: Since the key is the thread it is not possible for
+      /*
+       * Note: Since the key is the thread it is not possible for
          * there to be a concurrent put of an entry under the same key
          * so we do not have to use putIfAbsent().
          */
@@ -113,7 +113,7 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
     return tmp;
   }
 
-  /**
+  /*
    * Flush each of the unsynchronized buffers onto their backing synchronized buffer.
    *
    * @throws RuntimeException if the join is halted.
@@ -139,7 +139,7 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
     }
   }
 
-  /**
+  /*
    * Reset each of the synchronized buffers, discarding their buffered writes.
    *
    * <p>Note: This method is used during error processing, therefore it DOES NOT check {@link
@@ -162,7 +162,7 @@ public abstract class ThreadLocalBufferFactory<T extends IBuffer<E>, E> {
   /** Create and return a new object. */
   protected abstract T initialValue();
 
-  /**
+  /*
    * Test to see if the process has been halted.
    *
    * @see Haltable#halted()

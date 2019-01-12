@@ -1,7 +1,7 @@
 package org.embergraph.rdf.sparql.ast;
 
-/**
- * Exception indicating that a quads operation such as an update or extract on a named graph is
+/*
+* Exception indicating that a quads operation such as an update or extract on a named graph is
  * issued, but the database is bootstrapped in triples mode only. This exception might be thrown in
  * the static analysis phase when encountering constructs such as NAMED, WITH, GRAPH, etc, or at
  * runtime.
@@ -15,9 +15,9 @@ public class QuadsOperationInTriplesModeException extends RuntimeException {
 
   public QuadsOperationInTriplesModeException() {
     super();
-  };
+  }
 
   public QuadsOperationInTriplesModeException(String msg) {
     super(msg);
-  };
+  }
 }

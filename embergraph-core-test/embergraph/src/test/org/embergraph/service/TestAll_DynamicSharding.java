@@ -25,8 +25,8 @@ import junit.framework.Test;
 import junit.framework.TestCase2;
 import junit.framework.TestSuite;
 
-/**
- * Test suite for dynamic sharding.
+/*
+* Test suite for dynamic sharding.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

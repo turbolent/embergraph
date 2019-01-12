@@ -28,8 +28,8 @@ import it.unimi.dsi.parser.BulletParser;
 import it.unimi.dsi.parser.Element;
 import java.util.Map;
 
-/**
- * A builder for composed callbacks.
+/*
+* A builder for composed callbacks.
  *
  * <p>To compose a series of callbacks, you must first create an instance of this class, {@linkplain
  * #add(Callback) add all required callbacks}, and finally {@linkplain #compose() get the composed
@@ -45,7 +45,7 @@ public class ComposedCallbackBuilder {
     /** The callback array. */
     private Callback[] callback;
 
-    /**
+    /*
      * An array of boolean representing continuation of the corresponding callback in {@link
      * #callback}.
      */
@@ -123,7 +123,7 @@ public class ComposedCallbackBuilder {
   /** Creates a new, empty callback composer. */
   public ComposedCallbackBuilder() {}
 
-  /**
+  /*
    * Adds a new callback to this builder at a specified position.
    *
    * @param position a position in the current callback list.
@@ -133,7 +133,7 @@ public class ComposedCallbackBuilder {
     callbacks.add(position, callback);
   }
 
-  /**
+  /*
    * Adds a new callback to this builder.
    *
    * @param callback a callback.
@@ -142,7 +142,7 @@ public class ComposedCallbackBuilder {
     callbacks.add(callback);
   }
 
-  /**
+  /*
    * Checks whether this callback builder is empty.
    *
    * @return true if this callback builder is empty.
@@ -151,7 +151,7 @@ public class ComposedCallbackBuilder {
     return callbacks.isEmpty();
   }
 
-  /**
+  /*
    * Returns the number of callbacks in this builder.
    *
    * @return the number of callbacks in this composer.
@@ -160,7 +160,7 @@ public class ComposedCallbackBuilder {
     return callbacks.size();
   }
 
-  /**
+  /*
    * Returns the composed callback produced by this builder.
    *
    * @return a composed callback.

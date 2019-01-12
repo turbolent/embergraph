@@ -30,8 +30,8 @@ import java.util.concurrent.TimeoutException;
 import junit.framework.TestCase2;
 import org.embergraph.resources.AsynchronousOverflowTask;
 
-/**
- * Unit tests for the round robin behaviors of the load balancer in isolation (not an integration
+/*
+* Unit tests for the round robin behaviors of the load balancer in isolation (not an integration
  * test).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -48,7 +48,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Test when minCount=maxCount=1 and there are N=2 data services to verify correct round robin
    * assignment.
    *
@@ -119,7 +119,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test when minCount=maxCount=1 and there are N GT 2 data services to verify correct round robin
    * assignment.
    *
@@ -187,7 +187,7 @@ public class TestLoadBalancerRoundRobin extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test when minCount=maxCount=0 where there is an excluded service. This is how {@link
    * AsynchronousOverflowTask} looks for target services for index partition MOVEs. {@link
    * AsynchronousOverflowTask} will specify the local data service as the excluded service. The

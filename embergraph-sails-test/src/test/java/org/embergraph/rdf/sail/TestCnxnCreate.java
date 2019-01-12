@@ -31,8 +31,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.sail.SailException;
 
-/**
- * Test suite for BLZG-2056 EmbergraphSailConnections not always closed by EmbergraphSail.shutdown()
+/*
+* Test suite for BLZG-2056 EmbergraphSailConnections not always closed by EmbergraphSail.shutdown()
  *
  * @see https://jira.blazegraph.com/browse/BLZG-2056
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -47,7 +47,7 @@ public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test whether connections are auto closed when the Sail is shutdown
    *
    * @throws SailException
@@ -103,7 +103,7 @@ public class TestCnxnCreate extends ProxyEmbergraphSailTestCase {
     }
   }
 
-  /**
+  /*
    * Test whether connections are auto closed when the Sail is shutdown
    *
    * @throws SailException

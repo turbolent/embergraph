@@ -26,8 +26,8 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * A constraint that a variable may only take on the bindings enumerated by some set.
+/*
+* A constraint that a variable may only take on the bindings enumerated by some set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: INBinarySearch.java 4357 2011-03-31 17:11:26Z thompsonbry $
@@ -36,21 +36,21 @@ public class InBinaryBOp extends InBOp {
 
   private static final long serialVersionUID = 2251370041131847351L;
 
-  /**
+  /*
    * The value expression to be computed for each solution (cached).
    *
    * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
    */
   private transient volatile IValueExpression<IV> valueExpr;
 
-  /**
+  /*
    * The ordered list of constants (cached).
    *
    * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
    */
   private transient volatile IV[] set;
 
-  /**
+  /*
    * <code>true</code> iff this is NOT IN (cached).
    *
    * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
@@ -68,7 +68,7 @@ public class InBinaryBOp extends InBOp {
     super(args, annotations);
   }
 
-  /**
+  /*
    * @param x Some variable.
    * @param set A set of legal term identifiers providing a constraint on the allowable values for
    *     that variable.
@@ -108,7 +108,7 @@ public class InBinaryBOp extends InBOp {
     return tmp;
   }
 
-  /**
+  /*
    * Extends {@link org.embergraph.bop.CoreBaseBOp#mutation() CoreBaseBOp.mutation} method to
    * reflect args changes in cached IVs set.
    */
@@ -162,6 +162,6 @@ public class InBinaryBOp extends InBOp {
     // true iff the bound value was found in the set.
     final boolean found = pos >= 0;
 
-    return not ? !found : found;
+    return not != found;
   }
 }

@@ -23,8 +23,8 @@ package org.embergraph.rdf.internal;
 
 import junit.framework.TestCase;
 
-/**
- * Test suite for {@link VTE}.
+/*
+* Test suite for {@link VTE}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -38,7 +38,7 @@ public class TestVTE extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for {@link VTE} verifies that the correspondence between the enumerated types and the
    * internal values is correct (self-consistent).
    */
@@ -51,7 +51,7 @@ public class TestVTE extends TestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link VTE} verifies that all legal byte values decode to an internal value type
    * enum (basically, this checks that we mask the two lower bits).
    */

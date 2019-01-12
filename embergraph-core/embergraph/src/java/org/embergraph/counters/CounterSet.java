@@ -44,8 +44,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.StackInfoReport;
 import org.xml.sax.SAXException;
 
-/**
- * A set of counters arranged in a hierarchy, much like a file system. Each node has a name and a
+/*
+* A set of counters arranged in a hierarchy, much like a file system. Each node has a name and a
  * path. The name is a local and immutable label. The path is the {separator, name} sequence reading
  * down from the root to a given node. The "root" is the top-most node in the hierarchy - it always
  * has an empty name and its path is <code>/</code>. The direct children of a root are typically
@@ -83,7 +83,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     this("", null);
   }
 
-  /**
+  /*
    * Used to add a child.
    *
    * @param name The name of the child.
@@ -96,8 +96,8 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
 
   }
 
-  //    /**
-  //     * Updates the {@link #path} on this {@link CounterSet} and then recursively
+  //    /*
+//     * Updates the {@link #path} on this {@link CounterSet} and then recursively
   //     * on all of its children.
   //     */
   //    private void updatePath() {
@@ -146,7 +146,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return children.isEmpty();
   }
 
-  /**
+  /*
    * Attaches a {@link CounterSet} as a child of this node. If <i>child</i> is a root, then all
    * children of the <i>child</i> are attached instead. If a {@link CounterSet} already exists then
    * its children are attached. If a {@link Counter}s already exists then it is overwritten. During
@@ -208,8 +208,8 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
 
       } else if (src.isCounterSet()) {
 
-        /*
-         * If the [src] is a counter set, then attach its children
+      /*
+       * If the [src] is a counter set, then attach its children
          * instead.
          */
 
@@ -263,7 +263,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     }
   }
 
-  /**
+  /*
    * Detaches and returns the node having that path.
    *
    * @param path The path.
@@ -293,7 +293,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return node;
   }
 
-  /**
+  /*
    * Visits direct child counters matching the optional filter.
    *
    * <p>Note: Since the filter does NOT have to be anchored at the root, the only place we can apply
@@ -333,7 +333,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return src;
   }
 
-  /**
+  /*
    * All spanned nodes.
    *
    * @param filter An optional filter.
@@ -385,7 +385,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return src;
   }
 
-  /**
+  /*
    * Iterator visits all directly attached children.
    *
    * @param sorted When <code>true</code> the children will be visited in order by their name.
@@ -408,7 +408,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     final ICounterNode[] a;
 
     synchronized (this) {
-      a = (ICounterNode[]) children.values().toArray(new ICounterNode[] {});
+      a = children.values().toArray(new ICounterNode[] {});
     }
 
     final IStriterator itr = new Striterator(Arrays.asList(a).iterator());
@@ -443,7 +443,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return directChildIterator(true /*sorted*/, ICounterSet.class);
   }
 
-  /**
+  /*
    * Iterator visits {@link ICounterSet} children recursively expanding each child with a post-order
    * traversal of its children and finally visits this node itself.
    */
@@ -457,7 +457,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return new Striterator(postOrderIterator1()).append(new SingleValueIterator(this));
   }
 
-  /**
+  /*
    * Iterator visits this node recursively expanding each {@link ICounterSet} child with a pre-order
    * traversal of its children and finally visits this node itself.
    */
@@ -471,7 +471,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return new Striterator(new SingleValueIterator(this)).append(preOrderIterator1());
   }
 
-  /**
+  /*
    * Visits the {@link ICounterSet} children (recursively) using pre-order traversal, but does NOT
    * visit this node.
    */
@@ -490,15 +490,15 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
 
               private static final long serialVersionUID = 1L;
 
-              /*
-               * Expand each child in turn.
+            /*
+       * Expand each child in turn.
                */
               @Override
               @SuppressWarnings("rawtypes")
               protected Iterator expand(final Object childObj) {
 
-                /*
-                 * A child of this node.
+              /*
+       * A child of this node.
                  */
 
                 final ICounterSet child = (ICounterSet) childObj;
@@ -513,7 +513,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
             });
   }
 
-  /**
+  /*
    * Visits the {@link ICounterSet} children (recursively) using post-order traversal, but does NOT
    * visit this node.
    */
@@ -532,15 +532,15 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
 
               private static final long serialVersionUID = 1L;
 
-              /*
-               * Expand each child in turn.
+            /*
+       * Expand each child in turn.
                */
               @Override
               @SuppressWarnings("rawtypes")
               protected Iterator expand(final Object childObj) {
 
-                /*
-                 * A child of this node.
+              /*
+       * A child of this node.
                  */
 
                 final ICounterSet child = (ICounterSet) childObj;
@@ -563,7 +563,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return children.get(name);
   }
 
-  /**
+  /*
    * Adds any necessary {@link CounterSet}s described in the path (ala mkdirs).
    *
    * @param path The path.
@@ -648,7 +648,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return p;
   }
 
-  /**
+  /*
    * Add a counter.
    *
    * @param path The path of the counter (absolute or relative).
@@ -670,11 +670,11 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
       return addCounter2(path, instrument);
     }
 
-    final String name = path.substring(indexOf + 1, path.length());
+    final String name = path.substring(indexOf + 1);
 
     final String ppath = path.substring(0, indexOf);
 
-    final CounterSet parent = (CounterSet) makePath(ppath);
+    final CounterSet parent = makePath(ppath);
 
     return parent.addCounter2(name, instrument);
   }
@@ -723,7 +723,7 @@ public class CounterSet extends AbstractCounterSet implements ICounterSet {
     return counter;
   }
 
-  /**
+  /*
    * Per {@link #asXML(OutputStream, String, Pattern)} but does not write out the header declaring
    * the encoding.
    *

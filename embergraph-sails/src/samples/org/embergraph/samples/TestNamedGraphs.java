@@ -35,13 +35,13 @@ import org.openrdf.query.impl.DatasetImpl;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryResult;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestNamedGraphs extends SampleCode {
 
-  /**
+  /*
    * Load all data from some directory.
    *
    * @param dir
@@ -111,7 +111,7 @@ public class TestNamedGraphs extends SampleCode {
     }
   }
 
-  /**
+  /*
    * Loads a bunch of data from a zip file.
    *
    * @param args The file name.

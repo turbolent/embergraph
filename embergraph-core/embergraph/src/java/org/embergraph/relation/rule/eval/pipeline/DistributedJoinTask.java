@@ -39,8 +39,8 @@ import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.concurrent.Computable;
 import org.embergraph.util.concurrent.Memoizer;
 
-/**
- * Implementation used by scale-out deployments. There will be one instance of this task per index
+/*
+* Implementation used by scale-out deployments. There will be one instance of this task per index
  * partition on which the rule will read. Those instances will be in-process on the {@link
  * DataService} hosting that index partition. Instances are created on the {@link DataService} using
  * the {@link JoinTaskFactoryTask} helper class.
@@ -50,7 +50,7 @@ import org.embergraph.util.concurrent.Memoizer;
  */
 public class DistributedJoinTask extends JoinTask {
 
-  /**
+  /*
    * When <code>true</code>, enables a trace on {@link System#err} of the code polling the source
    * {@link IAsynchronousIterator}s from which this {@link DistributedJoinTask} draws its {@link
    * IBindingSet} chunks.
@@ -60,7 +60,7 @@ public class DistributedJoinTask extends JoinTask {
   /** The federation is used to obtain locator scans for the access paths. */
   protected final AbstractScaleOutFederation<?> fed;
 
-  /**
+  /*
    * The {@link IJoinNexus} for the {@link IEmbergraphFederation}. This is mainly used to setup the
    * {@link #solutionBuffer} since it needs to write on the scale-out index while the {@link
    * AccessPathTask} will read on the local index partition view.
@@ -73,14 +73,14 @@ public class DistributedJoinTask extends JoinTask {
   /** @see IRuleState#getKeyOrder() */
   private final IKeyOrder<?>[] keyOrders;
 
-  /**
+  /*
    * The name of the scale-out index associated with the next {@link IPredicate} in the evaluation
    * order and <code>null</code> iff this is the last {@link IPredicate} in the evaluation order
    * [logging only.]
    */
   private final String nextScaleOutIndexName;
 
-  /**
+  /*
    * Sources for {@link IBindingSet} chunks that will be processed by this {@link JoinTask}. There
    * will be one such source for each upstream {@link JoinTask} that targets this {@link JoinTask}.
    *
@@ -90,7 +90,7 @@ public class DistributedJoinTask extends JoinTask {
   private final Vector<IAsynchronousIterator<IBindingSet[]>> sources =
       new Vector<IAsynchronousIterator<IBindingSet[]>>();
 
-  /**
+  /*
    * <code>false</code> until all binding sets have been consumed and the join task has made an
    * atomic decision that it will not accept any new sources. Note that the join task may still be
    * consuming binding sets once this flag is set - it is not necessarily done with its work, just
@@ -100,14 +100,14 @@ public class DistributedJoinTask extends JoinTask {
    */
   private boolean sourcesExhausted = false;
 
-  /**
+  /*
    * The {@link DataService} on which this task is executing. This is used to remove the entry for
    * the task from {@link DataService#getSession()}.
    */
   private final DataService dataService;
 
-  //    /**
-  //     * The {@link JoinTaskSink}s for the downstream
+  //    /*
+//     * The {@link JoinTaskSink}s for the downstream
   //     * {@link DistributedJoinTask}s onto which the generated
   //     * {@link IBindingSet}s will be written. This is <code>null</code>
   //     * for the last join since we will write solutions onto the
@@ -173,8 +173,8 @@ public class DistributedJoinTask extends JoinTask {
 
       if (action.isMutation()) {
 
-        /*
-         * Note: The solution buffer for mutation operations
+      /*
+       * Note: The solution buffer for mutation operations
          * is obtained locally from a joinNexus that is
          * backed by the federation NOT the local index
          * manager. (This is because the solution buffer
@@ -183,8 +183,8 @@ public class DistributedJoinTask extends JoinTask {
 
         final IJoinNexus tmp = fedJoinNexus;
 
-        /*
-         * The view of the mutable relation for the _head_ of the
+      /*
+       * The view of the mutable relation for the _head_ of the
          * rule.
          */
 
@@ -212,8 +212,8 @@ public class DistributedJoinTask extends JoinTask {
 
       } else {
 
-        /*
-         * The solution buffer for queries is obtained from the
+      /*
+       * The solution buffer for queries is obtained from the
          * master.
          */
 
@@ -250,7 +250,7 @@ public class DistributedJoinTask extends JoinTask {
     addSource(src);
   }
 
-  /**
+  /*
    * Adds a source from which this {@link DistributedJoinTask} will read {@link IBindingSet} chunks.
    *
    * @param source The source.
@@ -305,7 +305,7 @@ public class DistributedJoinTask extends JoinTask {
 
   private final IBuffer<ISolution[]> solutionBuffer;
 
-  /**
+  /*
    * Sets a flag preventing new sources from being declared and closes all known {@link #sources}
    * and removes this task from the {@link Session}.
    */
@@ -334,7 +334,7 @@ public class DistributedJoinTask extends JoinTask {
     }
   }
 
-  /**
+  /*
    * Remove the task from the session, but only if the task in the session is this task (it will
    * have been overwritten if this task decides not to accept more sources and another source shows
    * up).
@@ -362,7 +362,7 @@ public class DistributedJoinTask extends JoinTask {
     }
   }
 
-  /**
+  /*
    * This lock is used to make {@link #nextChunk()} and {@link #addSource(IAsynchronousIterator)}
    * into mutually exclusive operations. {@link #nextChunk()} is the reader. {@link
    * #addSource(IAsynchronousIterator)} is the writer. These operations need to be exclusive and
@@ -381,7 +381,7 @@ public class DistributedJoinTask extends JoinTask {
   //    private ReadWriteLock lock = new ReentrantReadWriteLock(false/* fair */);
   private final ReentrantLock lock = new ReentrantLock();
 
-  /**
+  /*
    * Returns a chunk of {@link IBindingSet}s by combining chunks from the various source {@link
    * JoinTask}s.
    *
@@ -466,8 +466,8 @@ public class DistributedJoinTask extends JoinTask {
           // if there is something to read on that source.
           if (src.hasNext(1L, TimeUnit.MILLISECONDS)) {
 
-            /*
-             * Read the chunk, waiting up to the timeout for
+          /*
+       * Read the chunk, waiting up to the timeout for
              * additional chunks from this source which can be
              * combined together by the iterator into a single
              * chunk.
@@ -477,8 +477,8 @@ public class DistributedJoinTask extends JoinTask {
              */
             final IBindingSet[] chunk = src.next(10L, TimeUnit.MILLISECONDS);
 
-            /*
-             * Note: Since hasNext() returned [true] for this source
+          /*
+       * Note: Since hasNext() returned [true] for this source
              * we SHOULD get a chunk back since it is known to be
              * there waiting for us. The timeout should only give
              * the iterator an opportunity to combine multiple
@@ -523,8 +523,8 @@ public class DistributedJoinTask extends JoinTask {
 
         if (nexhausted == sources.length) {
 
-          /*
-           * All sources on which we were reading in this loop have
+        /*
+       * All sources on which we were reading in this loop have
            * been exhausted.
            *
            * Note: we may have buffered some data, which is checked
@@ -550,8 +550,8 @@ public class DistributedJoinTask extends JoinTask {
 
               sourcesExhausted = true;
 
-              /*
-               * Remove ourselves from the Session since we will
+            /*
+       * Remove ourselves from the Session since we will
                * no longer accept any new sources.
                */
 
@@ -593,7 +593,7 @@ public class DistributedJoinTask extends JoinTask {
     return null;
   }
 
-  /**
+  /*
    * Combine the chunk(s) into a single chunk.
    *
    * @param chunks A list of chunks read from the {@link #sources}.
@@ -699,7 +699,7 @@ public class DistributedJoinTask extends JoinTask {
     return unsyncOutputBuffer;
   }
 
-  /**
+  /*
    * Notifies each sink that this {@link DistributedJoinTask} will no longer generate new {@link
    * IBindingSet} chunks and then waits for the sink task(s) to complete.
    *
@@ -747,8 +747,8 @@ public class DistributedJoinTask extends JoinTask {
 
       if (joinNexus.getAction().isMutation()) {
 
-        /*
-         * Apply mutationCount to the JoinStats so that it will be
+      /*
+       * Apply mutationCount to the JoinStats so that it will be
          * reported back to the JoinMasterTask.
          */
 
@@ -821,7 +821,7 @@ public class DistributedJoinTask extends JoinTask {
               + (lastJoin ? "lastJoin" : ", sinkCount=" + memo.size()));
   }
 
-  /**
+  /*
    * Flushes any buffered data for a {@link JoinTaskSink} and closes the {@link BlockingBuffer} for
    * that sink so that the sink {@link JoinTask}'s iterator can eventually drain the buffer and
    * report that it is exhausted.
@@ -863,7 +863,7 @@ public class DistributedJoinTask extends JoinTask {
     }
   }
 
-  /**
+  /*
    * Cancel all {@link DistributedJoinTask}s that are sinks for this {@link DistributedJoinTask}.
    */
   @Override
@@ -906,7 +906,7 @@ public class DistributedJoinTask extends JoinTask {
               + memo.size());
   }
 
-  /**
+  /*
    * Return the sink on which we will write {@link IBindingSet} for the index partition associated
    * with the specified locator. The sink will be backed by a {@link DistributedJoinTask} running on
    * the {@link IDataService} that is host to that index partition. The scale-out index will be the
@@ -923,7 +923,7 @@ public class DistributedJoinTask extends JoinTask {
     return memo.compute(new SinkRequest(this, locator));
   }
 
-  /**
+  /*
    * Helper class models a request to obtain a sink for a given join task and locator.
    *
    * <p>Note: This class must implement equals() and hashCode() since it is used within the {@link
@@ -937,7 +937,7 @@ public class DistributedJoinTask extends JoinTask {
 
     final PartitionLocator locator;
 
-    /**
+    /*
      * @param joinTask The join task.
      * @param locator The locator for the target shard.
      */
@@ -958,7 +958,7 @@ public class DistributedJoinTask extends JoinTask {
       return joinTask == r.joinTask && locator.equals(r.locator);
     }
 
-    /**
+    /*
      * The hashCode() is based directly on the hash code of the {@link PartitionLocator}. All
      * requests against a given {@link Memoizer} will have the same {@link DistributedJoinTask} so
      * that field can be factored out of the hash code.
@@ -983,7 +983,7 @@ public class DistributedJoinTask extends JoinTask {
         }
       };
 
-  /**
+  /*
    * FIXME javadoc : A {@link Memoizer} subclass which exposes an additional method to remove a
    * {@link FutureTask} from the internal cache. This is used as part of an explicit protocol to
    * clear out cache entries once the sink reference has been set on
@@ -1003,7 +1003,7 @@ public class DistributedJoinTask extends JoinTask {
       return cache.size();
     }
 
-    /**
+    /*
      * FIMXE There are two distinct semantics available here. One is the set of current sinks (there
      * is a join task fully up and running on a DS somewhere and we have a proxy for that DS). The
      * other is the set of sinks which have been requested but may or may not have been fully
@@ -1027,8 +1027,8 @@ public class DistributedJoinTask extends JoinTask {
 
                 @Override
                 public boolean isValid(final Object e) {
-                  /*
-                   * Filter out any tasks which are not done or which had an
+                /*
+       * Filter out any tasks which are not done or which had an
                    * error.
                    */
                   final Future<JoinTaskSink> f = (Future<JoinTaskSink>) e;
@@ -1051,8 +1051,8 @@ public class DistributedJoinTask extends JoinTask {
 
                 @Override
                 protected Object resolve(final Object arg0) {
-                  /*
-                   * We filtered out any tasks which were not done and any
+                /*
+       * We filtered out any tasks which were not done and any
                    * tasks which had errors.  The future should be immediately
                    * available and Future.get() should not throw an error.
                    */
@@ -1068,8 +1068,8 @@ public class DistributedJoinTask extends JoinTask {
               });
     }
 
-    //        /**
-    //         * Called by the thread which atomically sets the
+    //        /*
+//         * Called by the thread which atomically sets the
     //         * {@link AbstractNode#childRefs} element to the computed
     //         * {@link AbstractNode}. At that point a reference exists to the child
     //         * on the parent.
@@ -1087,8 +1087,8 @@ public class DistributedJoinTask extends JoinTask {
     //
     //        }
 
-    //        /**
-    //         * Called from {@link AbstractBTree#close()}.
+    //        /*
+//         * Called from {@link AbstractBTree#close()}.
     //         *
     //         * @todo should we do this?  There should not be any reads against the
     //         * the B+Tree when it is close()d.  Therefore I do not believe there
@@ -1100,15 +1100,15 @@ public class DistributedJoinTask extends JoinTask {
     //
     //        }
 
-  };
+  }
 
-  /**
+  /*
    * Used to materialize {@link JoinTaskSink}s without causing concurrent requests for different
    * sinks to block.
    */
   private final SinkMemoizer memo;
 
-  /**
+  /*
    * Inner implementation invoked from the {@link Memoizer}.
    *
    * @param locator The shard locator.
@@ -1218,7 +1218,7 @@ public class DistributedJoinTask extends JoinTask {
     return sink;
   }
 
-  /**
+  /*
    * Logs an error in {@link JoinTask#call()} on the local log file and adds some metadata about the
    * operation which was being executed. This does not imply that the error originates with this
    * join task. You have to inspect the error messages, the order in which the joins were being

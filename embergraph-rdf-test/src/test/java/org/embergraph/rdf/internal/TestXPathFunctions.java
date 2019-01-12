@@ -24,8 +24,8 @@ package org.embergraph.rdf.internal;
 import junit.framework.TestCase2;
 import org.embergraph.rdf.sparql.ast.FunctionRegistry;
 
-/**
- * Test suite for various xpath numeric functions.
+/*
+* Test suite for various xpath numeric functions.
  *
  * <p><strong>The xpath functions are very picky. Check the specs when you work on this test
  * suite!</strong>
@@ -44,7 +44,7 @@ public class TestXPathFunctions extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for {@link FunctionRegistry#ABS}.
    *
    * @see http://www.w3.org/TR/xpath-functions/#func-abs
@@ -55,7 +55,7 @@ public class TestXPathFunctions extends TestCase2 {
     // covered in TCK
   }
 
-  /**
+  /*
    * Unit test for {@link FunctionRegistry#CEIL}.
    *
    * @see http://www.w3.org/TR/xpath-functions/#func-ceiling
@@ -66,7 +66,7 @@ public class TestXPathFunctions extends TestCase2 {
     // covered in TCK
   }
 
-  /**
+  /*
    * Unit test for {@link FunctionRegistry#FLOOR}.
    *
    * @see http://www.w3.org/TR/xpath-functions/#func-floor
@@ -77,7 +77,7 @@ public class TestXPathFunctions extends TestCase2 {
     // covered in TCK
   }
 
-  /**
+  /*
    * Unit test for {@link FunctionRegistry#round}.
    *
    * @see http://www.w3.org/TR/xpath-functions/#func-round

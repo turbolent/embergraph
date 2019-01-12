@@ -50,8 +50,8 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * A justification for a {@link StatementEnum#Inferred} statement. The head is the entailed
+/*
+* A justification for a {@link StatementEnum#Inferred} statement. The head is the entailed
  * statement. The tail of the justification is one or more triple pattern(s). Consider <code>rdf1
  * </code>
  *
@@ -121,7 +121,7 @@ public class Justification implements Comparable<Justification> {
   /** From the ctor, but not persisted. */
   public final transient IRule rule;
 
-  /**
+  /*
    * Term identifiers for the head and bindings.
    *
    * <p>Divide the length by the #of terms in a statement #N and subtract one to find the #of
@@ -131,8 +131,8 @@ public class Justification implements Comparable<Justification> {
    */
   final IV[] ivs;
 
-  //    /**
-  //     * Construct an entailment for an {@link StatementEnum#Inferred} statement.
+  //    /*
+//     * Construct an entailment for an {@link StatementEnum#Inferred} statement.
   //     *
   //     * @param rule
   //     *            The rule that licensed the entailment (this is only used for
@@ -170,7 +170,7 @@ public class Justification implements Comparable<Justification> {
   //
   //    }
 
-  /**
+  /*
    * Returns the head as an {@link SPO}.
    *
    * <p>Note: The {@link StatementEnum} associated with the head is actually unknown, but it is
@@ -185,7 +185,7 @@ public class Justification implements Comparable<Justification> {
     return new SPO(ivs[0], ivs[1], ivs[2], StatementEnum.Inferred);
   }
 
-  /**
+  /*
    * Returns the tail as an {@link SPO}[].
    *
    * <p>Note: The {@link StatementEnum} associated triple patterns in the tail is actually unknown,
@@ -212,7 +212,7 @@ public class Justification implements Comparable<Justification> {
     return tail;
   }
 
-  /**
+  /*
    * Construct a justification directly an {@link ISolution}.
    *
    * @param solution The solution.
@@ -307,8 +307,8 @@ public class Justification implements Comparable<Justification> {
     }
   }
 
-  //    /**
-  //     * Deserialize a justification from an index entry.
+  //    /*
+//     * Deserialize a justification from an index entry.
   //     *
   //     * @param itr
   //     *            The iterator visiting the index entries.
@@ -346,7 +346,7 @@ public class Justification implements Comparable<Justification> {
   //
   //    }
 
-  /**
+  /*
    * Used by the {@link JustificationTupleSerializer} to materialize justifications.
    *
    * @param ids The bindings on the head and tail(s).
@@ -360,7 +360,7 @@ public class Justification implements Comparable<Justification> {
     this.ivs = ids;
   }
 
-  /**
+  /*
    * Serialize a justification as an index key. The key length is a function of the #of bindings in
    * the justification.
    *
@@ -395,7 +395,7 @@ public class Justification implements Comparable<Justification> {
     return Arrays.equals(ivs, o.ivs);
   }
 
-  /**
+  /*
    * Places the justifications into an ordering that clusters them based on the entailment is being
    * justified.
    */
@@ -501,7 +501,7 @@ public class Justification implements Comparable<Justification> {
     return sb.toString();
   }
 
-  /**
+  /*
    * Return true iff a grounded justification chain exists for the statement.
    *
    * @param focusStore The focusStore contains the set of statements that are being retracted from
@@ -606,8 +606,8 @@ public class Justification implements Comparable<Justification> {
 
       if (!visited.add(head)) {
 
-        /*
-         * Note: add() returns true if the element was added and false
+      /*
+       * Note: add() returns true if the element was added and false
          * if it was pre-existing. The presence of a pre-existing query
          * or fully bound SPO in this set means that we have already
          * consider it. In this case we return false without further
@@ -645,15 +645,15 @@ public class Justification implements Comparable<Justification> {
 
           if (spo.getStatementType() == StatementEnum.Explicit) {
 
-            /*
-             * If we do not have to test the focusStore then we are
+          /*
+       * If we do not have to test the focusStore then we are
              * done.
              */
 
             if (!testFocusStore) return true;
 
-            /*
-             * Before we can accept this spo as providing support
+          /*
+       * Before we can accept this spo as providing support
              * for a grounded justification we have to test the
              * focusStore and make sure that this is NOT one of the
              * statements that is being retracted.
@@ -661,8 +661,8 @@ public class Justification implements Comparable<Justification> {
 
             if (!focusStore.hasStatement(spo.s(), spo.p(), spo.o())) {
 
-              /*
-               * This spo provides grounded support for a
+            /*
+       * This spo provides grounded support for a
                * justification.
                */
 
@@ -673,8 +673,8 @@ public class Justification implements Comparable<Justification> {
 
           }
 
-          /*
-           * depth-first recursion to see if the statement is grounded.
+        /*
+       * depth-first recursion to see if the statement is grounded.
            *
            * Note: testHead is [false] now since we just tested the head.
            */
@@ -715,8 +715,8 @@ public class Justification implements Comparable<Justification> {
 
       while (itr.hasNext()) {
 
-        /*
-         * For each justification we consider the bindings. The first N are
+      /*
+       * For each justification we consider the bindings. The first N are
          * just the statement that was proven. The remaining bindings are
          * M-1 triple patterns of N elements each.
          */
@@ -727,8 +727,8 @@ public class Justification implements Comparable<Justification> {
 
         final SPO[] tail = jst.getTail();
 
-        /*
-         * if all in tail are explicit in the statement indices, then done.
+      /*
+       * if all in tail are explicit in the statement indices, then done.
          *
          * since tail is triple patterns, we have to scan those patterns for
          * the first explicit statement matched.
@@ -769,7 +769,7 @@ public class Justification implements Comparable<Justification> {
     return false;
   }
 
-  /**
+  /*
    * A collection of {@link SPO} objects (either fully bound or query patterns) that have already
    * been visited.
    *
@@ -786,7 +786,7 @@ public class Justification implements Comparable<Justification> {
 
     private final SPOTupleSerializer tupleSer;
 
-    /**
+    /*
      * Create an {@link SPO} set backed by a {@link BTree} on the temporary store associated with
      * the [focusStore] on which truth maintenance is being performed. The data written on this set
      * will not last longer than {@link Justification#isGrounded(InferenceEngine, TempTripleStore,
@@ -819,7 +819,7 @@ public class Justification implements Comparable<Justification> {
       btree = BTree.create(tempStore, metadata);
     }
 
-    /**
+    /*
      * @param spo
      * @return <code>true</code> iff the set did not already contain the element (i.e., if the
      *     element was added to the set).
@@ -845,7 +845,7 @@ public class Justification implements Comparable<Justification> {
       return btree.getEntryCount();
     }
 
-    /**
+    /*
      * Discards anything written on the btree. If nothing has been written on the backing store yet
      * then nothing ever will be.
      */
@@ -859,8 +859,8 @@ public class Justification implements Comparable<Justification> {
         // discard the hard reference.
         btree = null;
 
-        /*
-         * Note: !!!! DO NOT close the backing store here !!!!
+      /*
+       * Note: !!!! DO NOT close the backing store here !!!!
          *
          * Note: The visited set is backed by the [focusStore] and that
          * MUST NOT be closed since it is still in use by the caller!

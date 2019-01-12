@@ -25,8 +25,8 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.openrdf.model.URI;
 
-/**
- * A special function node for modeling value expression nodes which are evaluated against an inner
+/*
+* A special function node for modeling value expression nodes which are evaluated against an inner
  * graph expression, such as EXISTS and NOT EXISTS. Another possibility is IN(subSelect), where IN
  * is evaluated against the subquery result.
  *
@@ -40,7 +40,7 @@ public abstract class SubqueryFunctionNodeBase extends FunctionNode
 
   interface Annotations extends FunctionNode.Annotations, IGraphPatternContainer.Annotations {
 
-    /**
+    /*
      * Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic plans: vectored
      * sub-plan and subquery with LIMIT ONE. Each plan has its advantages.
      *
@@ -66,7 +66,7 @@ public abstract class SubqueryFunctionNodeBase extends FunctionNode
     super(args, anns);
   }
 
-  /**
+  /*
    * @param anonvar An anonymous variable which will be bound by an ASK subquery.
    * @param graphPattern The inner value of the EXISTS function.
    */
@@ -75,7 +75,7 @@ public abstract class SubqueryFunctionNodeBase extends FunctionNode
       final VarNode anonvar,
       final GraphPatternGroup<IGroupMemberNode> graphPattern) {
 
-    super(functionURI, null /* scalarValues */, new ValueExpressionNode[] {anonvar});
+    super(functionURI, null /* scalarValues */, anonvar);
 
     if (anonvar == null) throw new IllegalArgumentException();
 

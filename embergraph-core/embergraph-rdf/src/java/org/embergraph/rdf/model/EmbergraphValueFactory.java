@@ -34,8 +34,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Interface strengthens the return types and adds some custom extensions.
+/*
+* Interface strengthens the return types and adds some custom extensions.
  *
  * @see EmbergraphValueFactoryImpl#getInstance(String)
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -44,12 +44,12 @@ import org.openrdf.model.ValueFactory;
 public interface EmbergraphValueFactory extends ValueFactory {
 
   /** The namespace of the KB instance associated with the value factory. */
-  public String getNamespace();
+  String getNamespace();
 
   /** Remove instance of valueFactory from static cache */
   void remove(/*final String namespace*/ );
 
-  /**
+  /*
    * Returns a factory that will assign its blank node IDs within a globally unique namespace. This
    * factory should be used when processing a document as the generated IDs are clustered and make
    * the ordered writes on the lexicon more efficient since all blank nodes for the same document
@@ -59,15 +59,15 @@ public interface EmbergraphValueFactory extends ValueFactory {
    *
    * @see BNodeContextFactory
    */
-  public EmbergraphValueFactory newBNodeContext();
+  EmbergraphValueFactory newBNodeContext();
 
-  //    /**
-  //     * Create a blank node and flag it as a statement identifier.
+  //    /*
+//     * Create a blank node and flag it as a statement identifier.
   //     */
   //    EmbergraphBNodeImpl createSID();
   //
-  //    /**
-  //     * Create a blank node with the specified ID and flag it as a statement
+  //    /*
+//     * Create a blank node with the specified ID and flag it as a statement
   //     * identifier.
   //     */
   //    EmbergraphBNodeImpl createSID(String id);
@@ -124,7 +124,7 @@ public interface EmbergraphValueFactory extends ValueFactory {
   /** Create a statement whose {@link StatementEnum} is NOT specified. */
   EmbergraphStatement createStatement(Resource s, URI p, Value o, Resource c);
 
-  /**
+  /*
    * Create a statement (core impl). The s,p,o, and the optional c arguments will be normalized to
    * this {@link EmbergraphValueFactory} using {@link #asValue(Value)}.
    *
@@ -137,7 +137,7 @@ public interface EmbergraphValueFactory extends ValueFactory {
    */
   EmbergraphStatement createStatement(Resource s, URI p, Value o, Resource c, StatementEnum type);
 
-  /**
+  /*
    * Create a statement (core impl). The s,p,o, and the optional c arguments will be normalized to
    * this {@link EmbergraphValueFactory} using {@link #asValue(Value)}.
    *
@@ -152,7 +152,7 @@ public interface EmbergraphValueFactory extends ValueFactory {
   EmbergraphStatement createStatement(
       Resource s, URI p, Value o, Resource c, StatementEnum type, boolean userFlag);
 
-  /**
+  /*
    * Converts a {@link Value} into a {@link EmbergraphValue}. If the value is already a {@link
    * EmbergraphValue} and it was allocated by <i>this</i> {@link EmbergraphValueFactoryImpl} then it
    * is returned unchanged. Otherwise a new {@link EmbergraphValue} will be creating using the same
@@ -184,7 +184,7 @@ public interface EmbergraphValueFactory extends ValueFactory {
   /** Strongly typed for {@link BNode}s. */
   EmbergraphBNode asValue(BNode v);
 
-  /**
+  /*
    * An object that can efficiently (de-)serialize {@link Value}s using this {@link ValueFactory}.
    * When the values are de-serialized they will have a reference to this {@link
    * EmbergraphValueFactoryImpl}. That reference can be used to identify when two {@link

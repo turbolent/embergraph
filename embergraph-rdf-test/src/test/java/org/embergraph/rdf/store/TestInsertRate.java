@@ -28,8 +28,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * A test for measuring the possible insert rate for a triple store based on a journal and btree
+/*
+* A test for measuring the possible insert rate for a triple store based on a journal and btree
  * using a synthetic data generator.
  *
  * <p>The s:p:o of the statements can use random selection without replacement from a class space, a
@@ -67,7 +67,7 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Large scale insert test.
    *
    * @param args unused - just edit the code.
@@ -103,26 +103,26 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
   /** Defines a variety of URIs relevant to the XML Schema Datatypes specification. */
   public static class XMLSchema {
 
-    /**
+    /*
      * The namespace name, commonly associated with the prefix "rdf", whose value is
      * "http://www.w3.org/1999/02/22-rdf-syntax-ns#".
      */
     public static final String NAMESPACE_RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 
-    /**
+    /*
      * The namespace name, commonly associated with the prefix "rdfs", whose value is
      * "http://www.w3.org/2000/01/rdf-schema#".
      */
     public static final String NAMESPACE_RDFS = "http://www.w3.org/2000/01/rdf-schema#";
 
-    /**
+    /*
      * The URI,commonly written as rdf:XMLLiteral, whose value is
      * "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral".
      */
     public static final String RDF_XMLLiteral =
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral";
 
-    /**
+    /*
      * The namespace name, commonly associated with the prefix "xsd", whose value is
      * "http://www.w3.org/2001/XMLSchema#".
      *
@@ -151,7 +151,7 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
     /** The XSDatatype URI for "double". */
     public static final String xsDouble = NAMESPACE_XSD + "double";
 
-    /**
+    /*
      * The XSDatatype URI for "integer" - used for {@link java.math.BigInteger} and natively by the
      * XSD library for {@link com.sun.msv.datatype.xsd.IntegerValueType}.
      */
@@ -167,7 +167,7 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
     public static final String xsAnyURI = NAMESPACE_XSD + "anyURI";
   }
 
-  /**
+  /*
    * Primary driver for the insert rate test.
    *
    * @param nclass The #of distinct classes.
@@ -363,9 +363,9 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
 
     // Get random orderings for selecting from the class, property
     // and value spaces.
-    final int corder[] = getRandomOrder(cspace.length);
-    final int porder[] = getRandomOrder(pspace.length);
-    final int oorder[] = getRandomOrder(ospace.length);
+    final int[] corder = getRandomOrder(cspace.length);
+    final int[] porder = getRandomOrder(pspace.length);
+    final int[] oorder = getRandomOrder(ospace.length);
 
     // Generate and insert random statements.
 
@@ -479,7 +479,7 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
     w.close();
   }
 
-  /**
+  /*
    * Returns a random but unique value within the identified type space.
    *
    * @param t The data type URI.
@@ -498,7 +498,7 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
     return "" + id;
   }
 
-  /**
+  /*
    * Returns the quantity <i>n</i> expressed as a per-second rate or "N/A" if the elapsed time is
    * zero.
    */
@@ -515,7 +515,7 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
     return new BufferedWriter(new FileWriter(getName() + ext));
   }
 
-  /**
+  /*
    * @todo write tests for the individual indices, restart safety, concurrent writers, and
    *     concurrent writes with concurrent query.
    */
@@ -540,8 +540,8 @@ public class TestInsertRate extends AbstractTripleStoreTestCase {
     doTest(nclass, nproperty, nliteral, litsize);
   }
 
-  //        /**
-  //         * This tests nearly a million triples.
+  //        /*
+//         * This tests nearly a million triples.
   //         *
   //         * <pre>
   //         * Sustained insert rate: #statements=880000, elapsed=7422, stmts/sec=118566

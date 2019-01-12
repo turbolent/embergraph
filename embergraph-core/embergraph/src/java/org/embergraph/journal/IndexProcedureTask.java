@@ -22,8 +22,8 @@ package org.embergraph.journal;
 
 import org.embergraph.btree.proc.IIndexProcedure;
 
-/**
- * Class provides an adaptor allowing a {@link IIndexProcedure} to be executed on an {@link
+/*
+* Class provides an adaptor allowing a {@link IIndexProcedure} to be executed on an {@link
  * IConcurrencyManager}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

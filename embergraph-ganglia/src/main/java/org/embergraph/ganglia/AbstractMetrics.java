@@ -8,7 +8,7 @@ public abstract class AbstractMetrics implements IGangliaAttributes {
 
   public static final Map<String, String[]> emptyMap = Collections.emptyMap();
 
-  /**
+  /*
    * Return an extraValues map containing the optional title and/or description.
    *
    * @param title The title (optional).
@@ -69,7 +69,7 @@ public abstract class AbstractMetrics implements IGangliaAttributes {
   protected final int tmax;
   protected final int dmax;
 
-  /**
+  /*
    * @param hostName The name of this host.
    * @param slope The default value to use in the declarations.
    * @param tmax The value of tmax to use in the declarations.

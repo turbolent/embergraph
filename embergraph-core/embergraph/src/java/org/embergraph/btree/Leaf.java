@@ -39,8 +39,8 @@ import org.embergraph.journal.ITransactionService;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.BytesUtil;
 
-/**
- * A B+-Tree leaf.
+/*
+* A B+-Tree leaf.
  *
  * <h2>Tuple revision timestamps</h2>
  *
@@ -65,7 +65,7 @@ import org.embergraph.util.BytesUtil;
  */
 public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAccess {
 
-  /**
+  /*
    * The data record. {@link MutableLeafData} is used for all mutation operations. {@link
    * ReadOnlyLeafData} is used when the {@link Leaf} is made persistent. A read-only data record is
    * automatically converted into a {@link MutableLeafData} record when a mutation operation is
@@ -75,7 +75,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
    */
   ILeafData data;
 
-  /**
+  /*
    * Return <code>(branchingFactor + 1) &lt;&lt; 1</code>
    *
    * <p>Note: the root may have fewer keys.
@@ -123,7 +123,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     return true;
   }
 
-  /**
+  /*
    * The result depends on the implementation. The {@link Leaf} will be mutable when it is first
    * created and is made immutable when it is persisted. If there is a mutation operation, the
    * backing {@link ILeafData} is automatically converted into a mutable instance.
@@ -183,7 +183,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     return data.getValues();
   }
 
-  /**
+  /*
    * Convenience method returns the byte[] for the given index in the leaf. If the tuple at that
    * index is a raw record, then the record is read from the backing store. More efficient
    * operations should be performed when copying the value into a tuple.
@@ -282,7 +282,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     return data.getNextAddr();
   }
 
-  /**
+  /*
    * De-serialization constructor.
    *
    * <p>Note: The de-serialization constructor (and ONLY the de-serialization constructor) ALWAYS
@@ -318,7 +318,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
   }
 
-  /**
+  /*
    * Creates a new mutable leaf.
    *
    * @param btree A mutable B+Tree.
@@ -363,7 +363,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
   }
 
-  /**
+  /*
    * Copy constructor.
    *
    * @param src The source node (must be immutable).
@@ -482,7 +482,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     leafListeners = null;
   }
 
-  /**
+  /*
    * Insert or update an entry in the leaf as appropriate. The caller MUST ensure by appropriate
    * navigation of parent nodes that the key for the next tuple either exists in or belongs in this
    * leaf. If the leaf overflows then it is split after the insert.
@@ -534,8 +534,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
         if (!hasDeleteMarkers() || !getDeleteMarker(entryIndex)) {
 
-          /*
-           * Found an existing (non-deleted) entry under the key.
+        /*
+       * Found an existing (non-deleted) entry under the key.
            *
            * Do NOT mutate the leaf.
            */
@@ -603,8 +603,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       if (tuple != null) {
 
-        /*
-         * Copy data and metadata for the old value stored under the
+      /*
+       * Copy data and metadata for the old value stored under the
          * search key.
          */
 
@@ -619,8 +619,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
        */
       if (hasRawRecords()) {
 
-        /*
-         * Note: If the old value was a raw record, we need to delete
+      /*
+       * Note: If the old value was a raw record, we need to delete
          * that raw record now.
          *
          * Note: If the new value will be a raw record, we need to write
@@ -663,16 +663,16 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
         if (!data.deleteMarkers[entryIndex] && delete) {
 
-          /*
-           * Changing from a non-deleted to a deleted tuple (we don't
+        /*
+       * Changing from a non-deleted to a deleted tuple (we don't
            * count re-deletes of an already deleted tuple).
            */
           btree.getBtreeCounters().ntupleUpdateDelete++;
 
         } else if (!delete) {
 
-          /*
-           * Either changing from a deleted to a non-deleted tuple or
+        /*
+       * Either changing from a deleted to a non-deleted tuple or
            * just overwriting an existing non-deleted tuple.
            */
           btree.getBtreeCounters().ntupleUpdateValue++;
@@ -682,8 +682,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       } else {
 
-        /*
-         * Update value for existing tuple (delete markers are not in
+      /*
+       * Update value for existing tuple (delete markers are not in
          * use).
          */
         btree.getBtreeCounters().ntupleUpdateValue++;
@@ -899,7 +899,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     return true;
   }
 
-  /**
+  /*
    * Split an over-capacity leaf (a leaf with <code>maxKeys+1</code> keys), creating a new
    * rightSibling. The splitIndex (the index of the first key to move to the rightSibling) is <code>
    * (maxKeys+1)/2</code>. The key at the splitIndex is also inserted as the new separatorKey into
@@ -963,8 +963,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       if (separatorIndex >= 0) {
 
-        /*
-         * The separator key should not be pre-existing in the parent.
+      /*
+       * The separator key should not be pre-existing in the parent.
          */
 
         throw new AssertionError(
@@ -1069,7 +1069,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
        * on this leaf _before_ the split.
        */
 
-      p = new Node((BTree) btree, this, nentriesBeforeSplit);
+      p = new Node(btree, this, nentriesBeforeSplit);
 
     } else {
 
@@ -1081,8 +1081,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       if (p != btree.root && p.isRightMostNode()) {
 
-        /*
-         * If the leaf that is split is a child of the right most node
+      /*
+       * If the leaf that is split is a child of the right most node
          * in the tree then that is counted as a "tail split".
          *
          * Note: We DO NOT count tail splits when the leaf is the root
@@ -1099,8 +1099,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       } else if (p != btree.root && p.isLeftMostNode()) {
 
-        /*
-         * If the leaf that is split is a child of the left-most node in
+      /*
+       * If the leaf that is split is a child of the left-most node in
          * the tree then that is counted as a "head split".
          *
          * Note: We DO NOT count head splits when the leaf is the root
@@ -1131,7 +1131,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     return rightSibling;
   }
 
-  /**
+  /*
    * Redistributes a key from the specified sibling into this leaf in order to bring this leaf up to
    * the minimum #of keys. This also updates the separator key in the parent for the right most of
    * (this, sibling). While the #of entries spanned by the children of the common parent is changed
@@ -1333,7 +1333,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     }
   }
 
-  /**
+  /*
    * Merge the keys and values from the sibling into this leaf, delete the sibling from the store
    * and remove the sibling from the parent. This will trigger recursive {@link AbstractNode#join()}
    * if the parent node is now deficient. While this changes the #of entries spanned by the current
@@ -1368,9 +1368,9 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     // children of the same node.
     assert s.getParent() == p
         : "this.parent="
-            + (p == null ? null : p)
+            + (p)
             + " != s.parent="
-            + (s.getParent() == null ? null : s.getParent());
+            + (s.getParent());
 
     if (DEBUG) {
       log.debug("this=" + this + ", sibling=" + sibling + ", rightSibling=" + isRightSibling);
@@ -1530,7 +1530,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     p.removeChild(s);
   }
 
-  /**
+  /*
    * Copies all keys and values from the specified start index down by one in order to make room to
    * insert a key and value at that index.
    *
@@ -1766,8 +1766,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
       btree.getBtreeCounters().ntupleRemove++;
 
       if (data.versionTimestamps != null) {
-        /*
-         * If the tuple with the min/max version timestamp was removed
+      /*
+       * If the tuple with the min/max version timestamp was removed
          * then we need to recalculate the min/max version timestamp.
          * This needs to happen after we update nkeys/nvalues (so the
          * new min/max considers only the valid tuples) and before we
@@ -1792,8 +1792,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
       if (data.getKeyCount() < minKeys()) {
 
-        /*
-         * The leaf is deficient. Join it with a sibling, causing their
+      /*
+       * The leaf is deficient. Join it with a sibling, causing their
          * keys to be redistributed such that neither leaf is deficient.
          * If there is only one other sibling and it has only the
          * minimum #of values then the two siblings will be merged into
@@ -1832,7 +1832,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     return tuple;
   }
 
-  /**
+  /*
    * Visits this leaf if unless it is not dirty and the flag is true, in which case the returned
    * iterator will not visit anything.
    *
@@ -1998,8 +1998,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     return ok;
   }
 
-  //    /**
-  //     * Formats the data into a {@link String}.
+  //    /*
+//     * Formats the data into a {@link String}.
   //     *
   //     * @param data
   //     *            An array of <em>signed</em> byte arrays.
@@ -2031,7 +2031,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
   //
   //    }
 
-  /**
+  /*
    * Human readable representation of the {@link ILeafData} plus transient information associated
    * with the {@link Leaf}.
    */
@@ -2077,7 +2077,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     return sb.toString();
   }
 
-  /**
+  /*
    * An interface that may be used to register for and receive events when the state of a {@link
    * Leaf} is changed. This includes (a) adding a new tuple to a leaf; (b) removing a tuple from a
    * leaf (but not flagging an existing tuple as deleted); and (c) when the leaf is discarded by
@@ -2089,18 +2089,18 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
    *     there was a desire for pre- or post-processing for each tuple. This might be useful for
    *     introducing triggers.
    */
-  public static interface ILeafListener {
+  public interface ILeafListener {
 
-    /**
+    /*
      * Notice that the leaf state has changed and that the listener must not assume: (a) that a
      * tuple of interest still resides within the leaf (it may have been moved up or down within the
      * leaf or it may be in another leaf altogether as a result of underflow or overflow); (b) that
      * the leaf is still in use (it may have been discarded by a copy-on-write operation).
      */
-    public void invalidateLeaf();
+    void invalidateLeaf();
 
-    //        /**
-    //         * Notice that the state of a tuple in the leaf has been changed (the
+    //        /*
+//         * Notice that the state of a tuple in the leaf has been changed (the
     //         * tuple is still known to be located within the leaf).
     //         *
     //         * @param index
@@ -2110,7 +2110,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
 
   }
 
-  /**
+  /*
    * Listeners for {@link ILeafListener} events.
    *
    * <p>Note: The values in the map are <code>null</code>.
@@ -2134,7 +2134,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
    */
   private transient WeakHashMap<ILeafListener, Void> leafListeners = null;
 
-  /**
+  /*
    * Register an {@link ILeafListener} with this {@link Leaf}. Listeners are automatically removed
    * by the JVM shortly after they become only weakly reachable.
    *
@@ -2166,8 +2166,8 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     }
   }
 
-  //    /**
-  //     * Fire an {@link ILeafListener#invalidateTuple(int)} event to any
+  //    /*
+//     * Fire an {@link ILeafListener#invalidateTuple(int)} event to any
   //     * registered listeners.
   //     *
   //     * @param index

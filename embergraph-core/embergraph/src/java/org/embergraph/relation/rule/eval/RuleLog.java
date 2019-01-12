@@ -28,8 +28,8 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.eval.pipeline.JoinStats;
 
-/**
- * Class defines the log on which rule execution statistics are written. This covers both query
+/*
+* Class defines the log on which rule execution statistics are written. This covers both query
  * evaluation and mutation operations such as fixed point closure of a rule set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -39,7 +39,7 @@ public class RuleLog {
 
   protected static final transient Logger log = Logger.getLogger(RuleLog.class);
 
-  /**
+  /*
    * Log rule execution statistics.
    *
    * @param stats The rule execution statistics.
@@ -52,7 +52,7 @@ public class RuleLog {
     }
   }
 
-  /**
+  /*
    * Log distributed join execution statistics using a CSV format.
    *
    * @param rule The {@link IRule} whose {@link JoinStats} are being reported.

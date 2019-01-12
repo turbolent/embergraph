@@ -51,8 +51,8 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.DatasetImpl;
 
-/**
- * Test suite for the <code>VIRTUAL GRAPHS</code> SPARQL extension.
+/*
+* Test suite for the <code>VIRTUAL GRAPHS</code> SPARQL extension.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -76,7 +76,7 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
     return properties;
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -229,7 +229,7 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -340,8 +340,8 @@ public class TestVirtualGraphs extends AbstractEmbergraphExprBuilderTestCase {
       }
 
       {
-        /*
-         * Note: There is some sensitivity to the distinction between an
+      /*
+       * Note: There is some sensitivity to the distinction between an
          * empty named graph collection or an empty default graph
          * collection and a [null] reference. I am not yet convinced
          * that the code is laid out correctly here, in the

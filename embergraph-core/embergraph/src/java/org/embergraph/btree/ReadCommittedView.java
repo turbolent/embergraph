@@ -37,8 +37,8 @@ import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.resources.IndexManager;
 import org.embergraph.resources.StoreManager.ManagedJournal;
 
-/**
- * A view of a named index that replaces its view for each high-level request if there has been an
+/*
+* A view of a named index that replaces its view for each high-level request if there has been an
  * intervening commit on the backing store. Each request, including each iterator request, will be
  * <strong>read-consistent</strong> as of the commit point resolved for that request. However,
  * subsequent requests will, of course, be read-consistent against then then current lastCommitTime.
@@ -69,7 +69,7 @@ import org.embergraph.resources.StoreManager.ManagedJournal;
  */
 public class ReadCommittedView implements ILocalBTreeView {
 
-  /**
+  /*
    * Class encapsulates the state that provides the basis for the current view. A new instance is
    * allocated if (a) the live journal is changed; or (b) the lastCommitTime on the journal is
    * changed.
@@ -84,7 +84,7 @@ public class ReadCommittedView implements ILocalBTreeView {
 
     final BTree btree;
 
-    /**
+    /*
      * @param journal The live journal.
      * @param name The name of the index.
      */
@@ -107,7 +107,7 @@ public class ReadCommittedView implements ILocalBTreeView {
 
   private volatile Basis basis;
 
-  /**
+  /*
    * Return the read-committed view.
    *
    * @return the index
@@ -132,7 +132,7 @@ public class ReadCommittedView implements ILocalBTreeView {
     return basis.btree;
   }
 
-  /**
+  /*
    * @param resourceManager The object that will report to us the live journal.
    * @param name The name of the index.
    */
@@ -256,7 +256,7 @@ public class ReadCommittedView implements ILocalBTreeView {
    * read-only contract for the iterators exposed by this class.
    */
 
-  /**
+  /*
    * Note: The iterators returned by this view will be <em>read-consistent</em> as of the
    * lastCommitTime when they are created. In order for newly committed state to be visible you must
    * request a new iterator.

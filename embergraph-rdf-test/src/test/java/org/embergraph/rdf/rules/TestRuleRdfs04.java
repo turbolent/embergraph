@@ -36,8 +36,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test suite for {@link RuleRdfs04a} and {@link RuleRdfs04b}
+/*
+* Test suite for {@link RuleRdfs04a} and {@link RuleRdfs04b}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -54,7 +54,7 @@ public class TestRuleRdfs04 extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Extended to explicitly turn on {@link Options#FORWARD_CHAIN_RDF_TYPE_RDFS_RESOURCE} for testing
    * {@link RuleRdfs04}.
    */
@@ -67,7 +67,7 @@ public class TestRuleRdfs04 extends AbstractRuleTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Test of the basic semantics.
    *
    * @throws Exception
@@ -120,7 +120,7 @@ public class TestRuleRdfs04 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Test of the basic semantics.
    *
    * @throws Exception
@@ -171,7 +171,7 @@ public class TestRuleRdfs04 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Literals may not appear in the subject position, but an rdfs4b entailment can put them there
    * unless you explicitly filter it out.
    *

@@ -24,8 +24,8 @@ package org.embergraph.rdf.task;
 import java.util.concurrent.Callable;
 import org.embergraph.journal.IIndexManager;
 
-/**
- * A task that can be run either with direct index access or using the concurrency manager
+/*
+* A task that can be run either with direct index access or using the concurrency manager
  * (compatible with group commit).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -40,21 +40,21 @@ public interface IApiTask<T> extends Callable<T> {
   /** The timestamp of the view of that KB instance. */
   long getTimestamp();
 
-  /**
+  /*
    * Tasks that create or destroy locatable resources need to write on the global row store (GRS).
    * Such tasks must specify this property. Note that the GRS lock will have the side-effect of
    * serializing all such tasks that write on the GRS index.
    */
   boolean isGRSRequired();
 
-  /**
+  /*
    * Invoked to inform the task of the index manager before it is executed.
    *
    * @param indexManager The index manager.
    */
   void setIndexManager(IIndexManager indexManager);
 
-  /**
+  /*
    * Return the {@link IIndexManager}.
    *
    * @return The index manager.

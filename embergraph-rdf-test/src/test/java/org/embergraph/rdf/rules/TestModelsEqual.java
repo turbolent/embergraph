@@ -31,8 +31,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.TripleStoreUtility;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test suite for {@link TripleStoreUtility#modelsEqual(AbstractTripleStore, AbstractTripleStore)}
+/*
+* Test suite for {@link TripleStoreUtility#modelsEqual(AbstractTripleStore, AbstractTripleStore)}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class TestModelsEqual extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test compares two stores with the same data, then removes a statement from one store and
    * re-compares the stores to verify that the inconsistency is detected.
    *

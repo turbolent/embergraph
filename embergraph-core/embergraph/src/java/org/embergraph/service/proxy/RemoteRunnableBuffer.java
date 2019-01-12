@@ -28,8 +28,8 @@ import java.rmi.Remote;
 import java.util.concurrent.Future;
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 
-/**
- * {@link Remote} interface declaring the API of {@link IRunnableBuffer} but also declaring that
+/*
+* {@link Remote} interface declaring the API of {@link IRunnableBuffer} but also declaring that
  * each methods throws {@link IOException} in order to be compatible with {@link Remote} and
  * Exporter. Of course, this means that this interface can not extend {@link IRunnableBuffer}!
  *
@@ -40,13 +40,13 @@ import org.embergraph.relation.accesspath.IRunnableBuffer;
  */
 public interface RemoteRunnableBuffer<E, V> extends RemoteBuffer<E> {
 
-  public void add(E e) throws IOException;
+  void add(E e) throws IOException;
 
-  public boolean isOpen() throws IOException;
+  boolean isOpen() throws IOException;
 
-  public void close() throws IOException;
+  void close() throws IOException;
 
-  public void abort(Throwable cause) throws IOException;
+  void abort(Throwable cause) throws IOException;
 
-  public Future<V> getFuture() throws IOException;
+  Future<V> getFuture() throws IOException;
 }

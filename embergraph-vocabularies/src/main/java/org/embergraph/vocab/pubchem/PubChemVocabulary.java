@@ -28,8 +28,8 @@ package org.embergraph.vocab.pubchem;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.core.EmbergraphCoreVocabulary_v20151210;
 
-/**
- * A {@link Vocabulary} covering the PubChem data from {@link
+/*
+* A {@link Vocabulary} covering the PubChem data from {@link
  * https://pubchem.ncbi.nlm.nih.gov/rdf/}. Use the vocabulary by adding a property to your journal
  * file per below. <code>
  * org.embergraph.rdf.store.AbstractTripleStore.vocabularyClass=org.embergraph.vocab.pubchem.PubChemVocabulary
@@ -47,7 +47,7 @@ public class PubChemVocabulary extends EmbergraphCoreVocabulary_v20151210 {
     super();
   }
 
-  /**
+  /*
    * Used by {@link AbstractTripleStore#create()}.
    *
    * @param namespace The namespace of the KB instance.

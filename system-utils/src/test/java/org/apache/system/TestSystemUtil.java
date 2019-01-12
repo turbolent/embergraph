@@ -20,8 +20,8 @@ package org.apache.system;
 
 import junit.framework.TestCase;
 
-/**
- * This is used to test SystemUtil for correctness.
+/*
+* This is used to test SystemUtil for correctness.
  *
  * @author <a href="mailto:dev@avalon.apache.org">Avalon Development Team</a>
  * @version $Id$

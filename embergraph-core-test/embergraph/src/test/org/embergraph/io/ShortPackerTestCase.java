@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.util.Random;
 import junit.framework.TestCase;
 
-/**
- * TestAll suite for {@link ShortPacker}.
+/*
+* TestAll suite for {@link ShortPacker}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class ShortPackerTestCase extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unpacks a short value.
    *
    * @param expected The expected long value.
@@ -150,10 +150,10 @@ public class ShortPackerTestCase extends TestCase {
   }
 
   private interface ShortGenerator {
-    public short nextShort();
+    short nextShort();
   }
 
-  /**
+  /*
    * All long values in sequence starting from the given start value and using the given increment.
    *
    * @author thompsonbry
@@ -178,7 +178,7 @@ public class ShortPackerTestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Random short values (16 bits of random short), including negatives, with a uniform
    * distribution.
    *
@@ -197,7 +197,7 @@ public class ShortPackerTestCase extends TestCase {
     }
   }
 
-  /**
+  /*
    * Run a large #of pack/unpack operations on a sequence of short values to demonstrate correctness
    * in that sequence. The sequence is the short values from -1 to {@link Short#MAX_VALUE} by one
    * (dense coverage).
@@ -210,7 +210,7 @@ public class ShortPackerTestCase extends TestCase {
     doStressTest(Short.MAX_VALUE + 1, new Sequence((short) -1, (short) 1));
   }
 
-  /**
+  /*
    * Run a large #of random pack/unpack operations to sample the space while showing correctness on
    * those samples.
    *
@@ -222,7 +222,7 @@ public class ShortPackerTestCase extends TestCase {
     doStressTest(0xffff, new RandomShort(new Random()));
   }
 
-  /**
+  /*
    * Run a stress test. Writes some information of possible interest onto System.err.
    *
    * @param ntrials #of trials.

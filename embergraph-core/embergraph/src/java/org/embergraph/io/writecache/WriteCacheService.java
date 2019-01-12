@@ -76,8 +76,8 @@ import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.Computable;
 import org.embergraph.util.concurrent.Memoizer;
 
-/**
- * A {@link WriteCacheService} is provisioned with some number of {@link WriteCache} buffers and a
+/*
+* A {@link WriteCacheService} is provisioned with some number of {@link WriteCache} buffers and a
  * writer thread. Caller's populate {@link WriteCache} instances. When they are full, they are
  * transferred to a queue which is drained by the thread writing on the local disk. Hooks are
  * provided to wait until the current write set has been written (e.g., at a commit point when the
@@ -187,7 +187,7 @@ public abstract class WriteCacheService implements IWriteCache {
   /** A single threaded service which writes dirty {@link WriteCache}s onto the backing store. */
   private final ExecutorService localWriteService;
 
-  /**
+  /*
    * The {@link Future} of the task running on the {@link #localWriteService}.
    *
    * @see WriteTask
@@ -195,7 +195,7 @@ public abstract class WriteCacheService implements IWriteCache {
    */
   private Future<Void> localWriteFuture;
 
-  /**
+  /*
    * The {@link Future} of the task running on the {@link #remoteWriteService} .
    *
    * <p>Note: Since this is <em>volatile</em> you MUST guard against concurrent clear to <code>null
@@ -206,7 +206,7 @@ public abstract class WriteCacheService implements IWriteCache {
    */
   private volatile Future<?> remoteWriteFuture = null;
 
-  /**
+  /*
    * A list of clean buffers. By clean, we mean not needing to be written. Once a dirty write cache
    * has been flushed, it is placed onto the {@link #cleanList}. Clean buffers can be taken at any
    * time for us as the current buffer.
@@ -216,14 +216,14 @@ public abstract class WriteCacheService implements IWriteCache {
   /** Lock for the {@link #cleanList} allows us to notice when it becomes empty and not-empty. */
   private final ReentrantLock cleanListLock = new ReentrantLock();
 
-  /**
+  /*
    * Condition <code>!cleanList.isEmpty()</code>
    *
    * <p>Note: If you wake up from this condition you MUST also test {@link #halt}.
    */
   private final Condition cleanListNotEmpty = cleanListLock.newCondition();
 
-  /**
+  /*
    * The read lock allows concurrent {@link #acquireForWriter()}s while the write lock prevents
    * {@link #acquireForWriter()} when we must either reset the {@link #current} cache buffer or
    * change the {@link #current} reference. E.g., {@link #flush(boolean, long, TimeUnit)}.
@@ -232,7 +232,7 @@ public abstract class WriteCacheService implements IWriteCache {
    */
   private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
-  /**
+  /*
    * A list of dirty buffers. Writes from these may be combined, but not across {@link
    * #flush(boolean)}.
    */
@@ -241,7 +241,7 @@ public abstract class WriteCacheService implements IWriteCache {
   /** Lock for the {@link #dirtyList} allows us to notice when it becomes empty and not-empty. */
   private final ReentrantLock dirtyListLock = new ReentrantLock();
 
-  /**
+  /*
    * Lock used to put cache buffers onto the {@link #dirtyList}. This lock is required in order for
    * {@link #flush(boolean, long, TimeUnit)} to have atomic semantics, otherwise new cache buffers
    * could be added to the dirty list. This lock is distinct from the {@link #lock} because we do
@@ -253,7 +253,7 @@ public abstract class WriteCacheService implements IWriteCache {
    */
   private final Condition dirtyListEmpty = dirtyListLock.newCondition();
 
-  /**
+  /*
    * Condition signaled whenever content is added to the dirty list.
    *
    * <p>Note: If you wake up from this condition you MUST also test {@link #halt}.
@@ -267,20 +267,20 @@ public abstract class WriteCacheService implements IWriteCache {
   private final AtomicReference<WriteCache> compactingReserveRef =
       new AtomicReference<WriteCache>();
 
-  /**
+  /*
    * Disable {@link WriteCache} compaction when <code>false</code>.
    *
    * <p>Note: This is set to <code>false</code> when {@link #compactionThreshold} is 100.
    */
   private final boolean compactionEnabled;
 
-  /**
+  /*
    * The minimum percentage of empty space that could be recovered before we will attempt to compact
    * a {@link WriteCache} buffer (in [0:100]).
    */
   private final int compactionThreshold = 20;
 
-  /**
+  /*
    * The current buffer. Modification of this value and reset of the current {@link WriteCache} are
    * protected by the write lock of {@link #lock()}.
    */
@@ -289,7 +289,7 @@ public abstract class WriteCacheService implements IWriteCache {
   /** The current read cache. */
   private final AtomicReference<ReadCache> readCache = new AtomicReference<ReadCache>();
 
-  /**
+  /*
    * Flag set if {@link WriteTask} encounters an error. The cause is set on {@link #firstCause} as
    * well.
    *
@@ -309,31 +309,31 @@ public abstract class WriteCacheService implements IWriteCache {
   /** The capacity of the cache buffers. This is assumed to be the same for each buffer. */
   private final int capacity;
 
-  //  /**
-  //   * Object knows how to (re-)open the backing channel.
+  //  /*
+//   * Object knows how to (re-)open the backing channel.
   //   */
   //  final private IReopenChannel<? extends Channel> opener;
 
-  /**
+  /*
    * A map from the offset of the record on the backing file to the cache buffer on which that
    * record was written.
    */
   private final ConcurrentMap<Long /* offset */, WriteCache> serviceMap;
 
-  /**
+  /*
    * An immutable array of the {@link WriteCache} buffer objects owned by the {@link
    * WriteCacheService} (in contract to those owner by the caller but placed onto the {@link
    * #dirtyList} by {@link #writeChk(long, ByteBuffer, int)}).
    */
   private final WriteCache[] writeBuffers;
 
-  /**
+  /*
    * An immutable array of the {@link WriteCache} buffer objects owned by the {@link
    * WriteCacheService}. These buffers are used for the readCache.
    */
   private final ReadCache[] readBuffers;
 
-  /**
+  /*
    * Debug arrays to chase down write/removal errors.
    *
    * <p>Toggle comment appropriately to activate/deactivate
@@ -354,20 +354,20 @@ public abstract class WriteCacheService implements IWriteCache {
   /** The current file extent. */
   private final AtomicLong fileExtent = new AtomicLong(-1L);
 
-  //  /**
-  //   * The environment in which this object participates
+  //  /*
+//   * The environment in which this object participates
   //   */
   //  protected final Environment environment;
 
   /** The object which manages {@link Quorum} state changes on the behalf of this service. */
   private final Quorum<HAPipelineGlue, QuorumMember<HAPipelineGlue>> quorum;
 
-  //    /**
-  //     * The {@link UUID} of the highly available service.
+  //    /*
+//     * The {@link UUID} of the highly available service.
   //     */
   //    final private UUID serviceId;
 
-  /**
+  /*
    * The {@link Quorum} token under which this {@link WriteCacheService} instance is valid. This is
    * fixed for the life cycle of the {@link WriteCacheService}. This ensures that all writes are
    * buffered under a consistent quorum meet.
@@ -382,7 +382,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return quorum;
   }
 
-  /**
+  /*
    * Allocates N buffers from the {@link DirectBufferPool}.
    *
    * @param nwriteBuffers The #of {@link WriteCache} buffers.
@@ -430,7 +430,7 @@ public abstract class WriteCacheService implements IWriteCache {
     if (minCleanListSize == 0) { // default
 
       /*
-                   * Setup a reasonable default if no value was specified.
+       * Setup a reasonable default if no value was specified.
                    * Just need to make sure we have a few spare buffers to
                    * prevent latency on acquiring a clean buffer for writing.
       	     *
@@ -467,7 +467,7 @@ public abstract class WriteCacheService implements IWriteCache {
 
     this.useChecksum = useChecksum;
 
-    /**
+    /*
      * FIXME WCS compaction fails!
      *
      * <p>CORRECTION, it is NOT clearly established that WCS compaction fails although some failures
@@ -650,7 +650,7 @@ public abstract class WriteCacheService implements IWriteCache {
     localWriteFuture = localWriteService.submit(newWriteTask());
   }
 
-  /**
+  /*
    * Return <code>true</code> iff we are allowed to compact buffers. The default implementation of
    * the {@link WriteCache} is for a Worm and can never compact.
    *
@@ -661,7 +661,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return false;
   }
 
-  /**
+  /*
    * Called from {@link IBufferStrategy#commit()} and {@link #reset()} to reset WriteCache sequence
    * for HA synchronization. The return value winds up propagated to the {@link
    * IRootBlockView#getBlockSequence()} field in the {@link IRootBlockView}s.
@@ -681,7 +681,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return cacheSequence.get();
   }
 
-  /**
+  /*
    * Determines how long the dirty list should grow until the {@link WriteCache} buffers are
    * coalesced and/or written to disk.
    *
@@ -694,7 +694,7 @@ public abstract class WriteCacheService implements IWriteCache {
    */
   private final int m_dirtyListThreshold;
 
-  /**
+  /*
    * The readCache is managed separately from the writeCache.
    *
    * <p>If active then the readCache may optionally be managed together with a hotList, to which
@@ -714,7 +714,7 @@ public abstract class WriteCacheService implements IWriteCache {
   /** The readList - maximum of readListSize */
   private final BlockingQueue<ReadCache> readList;
 
-  /**
+  /*
    * Determines the size of the HIRS cache (will be zero if disabled)
    *
    * <p>Where HIRS captures High inter-reference vs Low inter-reference of LIRS.
@@ -731,7 +731,7 @@ public abstract class WriteCacheService implements IWriteCache {
   /** The hotList - maximum of hirsSize - populated lazily from cleanList */
   private final BlockingQueue<ReadCache> hotList;
 
-  /**
+  /*
    * The current hotCache.
    *
    * <p>Note: Guarded by the {@link #readCache} reference.
@@ -741,15 +741,15 @@ public abstract class WriteCacheService implements IWriteCache {
   /** Current hotCacheThreshold above which readCache records are transferred to the hotCache. */
   private final int hotCacheThreshold;
 
-  /**
+  /*
    * The current hotReserve.
    *
    * <p>Note: Guarded by the {@link #readCache} reference.
    */
   private ReadCache hotReserve = null;
 
-  //    /**
-  //     * Computes modular distance of a circular number list.
+  //    /*
+//     * Computes modular distance of a circular number list.
   //     *
   //     * eg start: 1, end:5, mod: 20 = 5-1 = ((5+20)-1)%20 = 4
   //     * or start:15, end:3, mod: 20 = (3+20)-15 = 8
@@ -761,13 +761,13 @@ public abstract class WriteCacheService implements IWriteCache {
   //     	return ((end + mod) - start) % mod;
   //    }
 
-  /**
+  /*
    * When <code>true</code>, dirty buffers are immediately drained, compacted, and then written out
    * to the backing media and (in HA mode) to the followers.
    */
   private volatile boolean flush = false;
 
-  /**
+  /*
    * When <code>true</code> any dirty buffers are written directly and never compacted. This is only
    * used in flush() when adding any compactingCache to the dirty list.
    */
@@ -778,7 +778,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return new WriteTask();
   }
 
-  /**
+  /*
    * The task responsible for writing dirty buffers onto the backing channel and onto the downstream
    * {@link Quorum} member if the service is highly available.
    *
@@ -788,7 +788,7 @@ public abstract class WriteCacheService implements IWriteCache {
 
     private ByteBuffer checksumBuffer;
 
-    /**
+    /*
      * Note: If there is an error in this thread then it needs to be propagated to the threads
      * write()ing on the cache or awaiting flush() and from there back to the caller and an abort().
      * We do not need to bother the readers since the read() methods all allow for concurrent
@@ -811,8 +811,8 @@ public abstract class WriteCacheService implements IWriteCache {
         doRun();
         return null;
       } catch (InterruptedException t) {
-        /*
-         * This task can only be interrupted by a thread with its
+      /*
+       * This task can only be interrupted by a thread with its
          * Future (or by shutting down the thread pool on which it
          * is running), so this interrupt is a clear signal that the
          * write cache service is closing down.
@@ -820,15 +820,15 @@ public abstract class WriteCacheService implements IWriteCache {
         return null;
       } catch (Throwable t) {
         if (InnerCause.isInnerCause(t, AsynchronousCloseException.class)) {
-          /*
-           * The service was shutdown. We do not want to log an
+        /*
+       * The service was shutdown. We do not want to log an
            * error here since this is normal shutdown. close()
            * will handle all of the Condition notifies.
            */
           return null;
         }
-        /*
-         * Anything else is an error and halts processing. Error
+      /*
+       * Anything else is an error and halts processing. Error
          * processing MUST a high-level abort() and MUST do a
          * reset() if this WriteCacheService instance will be
          * reused.
@@ -842,8 +842,8 @@ public abstract class WriteCacheService implements IWriteCache {
         if (firstCause.compareAndSet(null /* expect */, t /* update */)) {
           halt = true;
         }
-        /*
-         * Signal anyone blocked on the dirtyList or cleanList
+      /*
+       * Signal anyone blocked on the dirtyList or cleanList
          * Conditions. They need to notice the change in [halt] and
          * wrap and rethrow [firstCause].
          */
@@ -861,14 +861,14 @@ public abstract class WriteCacheService implements IWriteCache {
           cleanListLock.unlock();
         }
         log.error(t, t);
-        /*
-         * Halt processing. The WriteTask must be restarted by
+      /*
+       * Halt processing. The WriteTask must be restarted by
          * reset.
          */
         return null;
       } finally {
-        /*
-         * Clear compactingCache reference now that the WriteTask is
+      /*
+       * Clear compactingCache reference now that the WriteTask is
          * known to be terminated.
          */
         compactingCacheRef.set(null); // clear reference.
@@ -880,8 +880,8 @@ public abstract class WriteCacheService implements IWriteCache {
 
       while (true) {
 
-        /*
-         * Replace assert !halt; since it is set in WriteCacheService.close()
+      /*
+       * Replace assert !halt; since it is set in WriteCacheService.close()
          */
         if (halt) {
           throw new RuntimeException(firstCause.get());
@@ -893,8 +893,8 @@ public abstract class WriteCacheService implements IWriteCache {
         boolean didCompact = false;
         boolean didWrite = false;
 
-        /*
-         * Note: When using a large number of write cache buffers and a
+      /*
+       * Note: When using a large number of write cache buffers and a
          * bulk data load, it is not uncommon for all records to be
          * recycled by the time we take something from the dirtyList, in
          * which case the cache will be (logically) empty.
@@ -953,8 +953,8 @@ public abstract class WriteCacheService implements IWriteCache {
         dirtyListLock.lockInterruptibly();
         try {
           if (dirtyList.isEmpty()) {
-            /*
-             * Signal Condition when we release the
+          /*
+       * Signal Condition when we release the
              * dirtyListLock.
              */
             dirtyListEmpty.signalAll();
@@ -998,7 +998,7 @@ public abstract class WriteCacheService implements IWriteCache {
       } // while(true)
     } // doRun()
 
-    /**
+    /*
      * We choose here whether to compact the cache.
      *
      * <p>1) Reserve extra clean buffer, if none available do NOT attempt compaction 2) Compact to
@@ -1009,7 +1009,7 @@ public abstract class WriteCacheService implements IWriteCache {
      * @return <code>true</code> iff we compacted the cache.
      * @throws InterruptedException
      */
-    private boolean compactCache(final WriteCache cache) throws InterruptedException, Exception {
+    private boolean compactCache(final WriteCache cache) throws Exception {
 
       /*
        * The cache should not be closed against writes. If it were closed
@@ -1065,19 +1065,19 @@ public abstract class WriteCacheService implements IWriteCache {
 
             return true;
           }
-          /*
-           * The [curCompactingCache] is full.
+        /*
+       * The [curCompactingCache] is full.
            */
           if (flush) {
-            /*
-             * Send out the full cache block.
+          /*
+       * Send out the full cache block.
              */
             writeCacheBlock(curCompactingCache);
             addClean(curCompactingCache, true /* addFirst */);
             if (log.isTraceEnabled()) log.trace("Flushed curCompactingCache");
           } else {
-            /*
-             * Add current compacting cache to dirty list.
+          /*
+       * Add current compacting cache to dirty list.
              */
             dirtyList.add(curCompactingCache);
             if (log.isTraceEnabled()) log.trace("Added curCompactingCache to dirtyList");
@@ -1086,8 +1086,8 @@ public abstract class WriteCacheService implements IWriteCache {
           curCompactingCache = null;
         }
 
-        /*
-         * Clear the state on the reserve buffer and remove from
+      /*
+       * Clear the state on the reserve buffer and remove from
          * cacheService map.
          */
         if (log.isTraceEnabled()) log.trace("Setting curCompactingCache to reserve");
@@ -1128,7 +1128,7 @@ public abstract class WriteCacheService implements IWriteCache {
       }
     } // compactCache()
 
-    /**
+    /*
      * In HA, we need to notify a downstream RWS of the addresses that have been allocated on the
      * leader in the same order in which the leader made those allocations. This information is used
      * to infer the order in which the allocators for the different allocation slot sizes are
@@ -1158,7 +1158,7 @@ public abstract class WriteCacheService implements IWriteCache {
       }
     }
 
-    /**
+    /*
      * Get a dirty cache buffer. Unless we are flushing out the buffered writes, we will allow the
      * dirtyList to grow to the desired threshold before we attempt to compact anything.
      *
@@ -1174,8 +1174,8 @@ public abstract class WriteCacheService implements IWriteCache {
       try {
         assert m_dirtyListThreshold >= 1 && m_dirtyListThreshold <= writeBuffers.length
             : "dirtyListThreshold=" + m_dirtyListThreshold + ", #buffers=" + writeBuffers.length;
-        /*
-         * Wait for a dirty buffer.
+      /*
+       * Wait for a dirty buffer.
          *
          * Note: [flush] and [m_dirtyListThreshold] can change
          * during this loop!
@@ -1214,7 +1214,7 @@ public abstract class WriteCacheService implements IWriteCache {
       }
     }
 
-    /**
+    /*
      * Write the {@link WriteCache} onto the disk and the HA pipeline.
      *
      * @param cache The {@link WriteCache}.
@@ -1225,7 +1225,7 @@ public abstract class WriteCacheService implements IWriteCache {
     private void writeCacheBlock(final WriteCache cache)
         throws InterruptedException, ExecutionException, IOException {
 
-      /**
+      /*
        * IFF HA and this is the quorum leader.
        *
        * <p>Note: This is true for HA1 as well. The code path enabled by this is responsible for
@@ -1273,8 +1273,8 @@ public abstract class WriteCacheService implements IWriteCache {
         // Verify quorum still valid and we are the leader.
         quorum.assertLeader(quorumToken);
 
-        /*
-         * Replicate from the leader to the first follower. Each
+      /*
+       * Replicate from the leader to the first follower. Each
          * non-final follower will receiveAndReplicate the write cache
          * buffer. The last follower will receive the buffer.
          */
@@ -1298,8 +1298,8 @@ public abstract class WriteCacheService implements IWriteCache {
 
         assert pkg.getData().remaining() > 0 : "Empty cache: " + cache;
 
-        /*
-         * Start the remote asynchronous IO before the local synchronous
+      /*
+       * Start the remote asynchronous IO before the local synchronous
          * IO.
          *
          * Note: In HA with replicationFactor=1, this should still
@@ -1307,16 +1307,16 @@ public abstract class WriteCacheService implements IWriteCache {
          * someone else in the write pipeline (for example, off-site
          * replication).
          */
-        /*
-         * FIXME There may be a problem with doing the async IO first.
+      /*
+       * FIXME There may be a problem with doing the async IO first.
          * Track this down and document the nature of the problem,
          * then clean up the documentation here (see the commented
          * out version of this line below).
          */
         quorumMember.logWriteCacheBlock(pkg.getMessage(), pkg.getData().duplicate());
 
-        /*
-         * TODO Do we want to always support the replication code path
+      /*
+       * TODO Do we want to always support the replication code path
          * when a quorum exists (that is, also for HA1) in case there
          * are pipeline listeners that are not HAJournalServer
          * instances? E.g., for offsite replication?
@@ -1330,8 +1330,8 @@ public abstract class WriteCacheService implements IWriteCache {
           counters.get().nsend++;
         }
 
-        /*
-         * The quorum leader logs the write cache block here. For the
+      /*
+       * The quorum leader logs the write cache block here. For the
          * followers, the write cache blocks are currently logged by
          * HAJournalServer.
          */
@@ -1389,7 +1389,7 @@ public abstract class WriteCacheService implements IWriteCache {
     } // writeCacheBlock()
   } // class WriteTask
 
-  /**
+  /*
    * Factory for {@link WriteCache} implementations.
    *
    * @param buf The backing buffer (optional).
@@ -1409,7 +1409,7 @@ public abstract class WriteCacheService implements IWriteCache {
       final long fileExtent)
       throws InterruptedException;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>All dirty buffers are reset and transferred to the head of the clean list. The buffers on
@@ -1471,8 +1471,8 @@ public abstract class WriteCacheService implements IWriteCache {
         // ignored.
       } finally {
 
-        /*
-         * Once more, drain and reset the dirty cache buffers, dropping
+      /*
+       * Once more, drain and reset the dirty cache buffers, dropping
          * them onto the cleanList.
          *
          * Note: This is intended to handle the case where there might
@@ -1485,8 +1485,8 @@ public abstract class WriteCacheService implements IWriteCache {
          */
         drainAndResetDirtyList();
 
-        /*
-         * Verify some post-conditions once the WriteTask is terminated.
+      /*
+       * Verify some post-conditions once the WriteTask is terminated.
          */
 
         dirtyListLock.lockInterruptibly();
@@ -1620,7 +1620,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Drain the dirty list; reset each dirty cache buffer, and then add the reset buffers to the
    * front of the cleanList (since they are known to be empty).
    *
@@ -1797,7 +1797,7 @@ public abstract class WriteCacheService implements IWriteCache {
     if (log.isInfoEnabled()) log.info(counters.get().toString());
   }
 
-  /**
+  /*
    * Ensures that {@link #close()} is eventually invoked so the buffers can be returned to the
    * {@link DirectBufferPool}.
    *
@@ -1808,7 +1808,7 @@ public abstract class WriteCacheService implements IWriteCache {
     close();
   }
 
-  /**
+  /*
    * This method is called ONLY by write threads and verifies that the service is {@link #open},
    * that the {@link WriteTask} has not been {@link #halt halted}, and that the {@link WriteTask} is
    * still executing (in case any uncaught errors are thrown out of {@link WriteTask#call()}.
@@ -1844,7 +1844,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Return the current buffer to a write thread. Once they are done, the caller MUST call {@link
    * #release()}.
    *
@@ -1911,7 +1911,7 @@ public abstract class WriteCacheService implements IWriteCache {
     lock.readLock().unlock();
   }
 
-  /**
+  /*
    * Flush the current write set through to the backing channel.
    *
    * @throws InterruptedException
@@ -1931,7 +1931,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>flush() is a blocking method. At most one flush() operation may run at a time. The {@link
@@ -2017,8 +2017,8 @@ public abstract class WriteCacheService implements IWriteCache {
       if (!dirtyListLock.tryLock(remaining, TimeUnit.NANOSECONDS)) throw new TimeoutException();
 
       try {
-        /*
-         * Force WriteTask.call() to evict anything in the cache.
+      /*
+       * Force WriteTask.call() to evict anything in the cache.
          *
          * Note: We need to wait until the dirtyList has been evicted
          * before writing out the compacting cache (if any) and then
@@ -2027,8 +2027,8 @@ public abstract class WriteCacheService implements IWriteCache {
          */
         flush = true;
 
-        /*
-         * Wait until the dirtyList has been emptied.
+      /*
+       * Wait until the dirtyList has been emptied.
          *
          * Note: [tmp] may be empty, but there is basically zero cost in
          * WriteTask to process an empty buffer and, done this way, the
@@ -2044,8 +2044,8 @@ public abstract class WriteCacheService implements IWriteCache {
             throw new TimeoutException();
           }
         }
-        /*
-         * Add the [compactingCache] (if any) to dirty list and spin it
+      /*
+       * Add the [compactingCache] (if any) to dirty list and spin it
          * down again.
          *
          * Note: We can not drop the compactingCache onto the dirtyList
@@ -2081,8 +2081,8 @@ public abstract class WriteCacheService implements IWriteCache {
         flush = false;
         try {
           if (!halt) {
-            /*
-             * Check assertions for clean WCS after flush().
+          /*
+       * Check assertions for clean WCS after flush().
              *
              * Note: Can not check assertion if there is an existing
              * exception.
@@ -2128,7 +2128,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Set the extent of the file on the current {@link WriteCache}. The then current value of the
    * extent will be communicated together with the rest of the {@link WriteCache} state if it is
    * written onto another service using the write replication pipeline (HA only). The receiver will
@@ -2176,7 +2176,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return write(offset, data, chk, useChecksum, 0 /* latchedAddr */);
   }
 
-  /**
+  /*
    * Write the record onto the cache. If the record is too large for the cache buffers, then it is
    * written synchronously onto the backing channel. Otherwise it is written onto a cache buffer
    * which is lazily flushed onto the backing channel. Cache buffers are written in order once they
@@ -2324,8 +2324,8 @@ public abstract class WriteCacheService implements IWriteCache {
 
       try {
 
-        /*
-         * While holding the write lock, see if the record can fit into
+      /*
+       * While holding the write lock, see if the record can fit into
          * the current buffer. Note that the buffer we acquire here MAY
          * be a different buffer since a concurrent write could have
          * already switched us to a new buffer. In that case, the record
@@ -2340,8 +2340,8 @@ public abstract class WriteCacheService implements IWriteCache {
           // While holding the write lock, see if the record fits.
           if (cache.write(offset, data, chk, useChecksum, latchedAddr)) {
 
-            /*
-             * It fits: someone already changed to a new cache,
+          /*
+       * It fits: someone already changed to a new cache,
              * which is fine.
              */
             if (serviceMap.put(offset, cache) != null) {
@@ -2353,8 +2353,8 @@ public abstract class WriteCacheService implements IWriteCache {
             return true;
           }
 
-          /*
-           * There is not enough room in the current buffer for this
+        /*
+       * There is not enough room in the current buffer for this
            * record, so put the buffer onto the dirty list. Then take
            * a new buffer from the clean list (block), reset the
            * buffer to clear the old writes, and set it as current. At
@@ -2375,8 +2375,8 @@ public abstract class WriteCacheService implements IWriteCache {
            * by this thread!!!
            */
 
-          /*
-           * Move the current buffer to the dirty list.
+        /*
+       * Move the current buffer to the dirty list.
            *
            * Note: The lock here is not required to give flush() atomic
            * semantics with regard to the set of dirty write buffers
@@ -2394,8 +2394,8 @@ public abstract class WriteCacheService implements IWriteCache {
             dirtyListLock.unlock();
           }
 
-          /*
-           * Take the buffer from the cleanList and set it has the
+        /*
+       * Take the buffer from the cleanList and set it has the
            * [current] buffer.
            */
 
@@ -2422,8 +2422,8 @@ public abstract class WriteCacheService implements IWriteCache {
             return true;
           }
 
-          /*
-           * Should never happen.
+        /*
+       * Should never happen.
            */
           throw new AssertionError(
               "Unable to write into current WriteCache " + offset + " " + addrDebugInfo(offset));
@@ -2449,8 +2449,8 @@ public abstract class WriteCacheService implements IWriteCache {
 
         if (log.isInfoEnabled() && cleanList.isEmpty()) log.info("Waiting for clean buffer");
 
-        /*
-         * Note: We use the [cleanListNotEmpty] Condition so we can
+      /*
+       * Note: We use the [cleanListNotEmpty] Condition so we can
          * notice a [halt].
          */
         while (cleanList.isEmpty() && !halt) {
@@ -2473,8 +2473,8 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  //    /**
-  //     * Caches data read from disk (or even read from "older" cache).
+  //    /*
+//     * Caches data read from disk (or even read from "older" cache).
   //     * The assumption is that we do not need a "reserve" buffer.
   //     *
   //     * @param addr
@@ -2540,7 +2540,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Write a record whose size (when combined with the optional checksum) is larger than the
    * capacity of an individual {@link WriteCache} buffer. This operation is synchronous (to protect
    * the ByteBuffer from concurrent modification by the caller). It will block until the record has
@@ -2714,7 +2714,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Move the {@link #current} buffer to the dirty list and await a clean buffer. The clean buffer
    * is set as the {@link #current} buffer and returned to the caller.
    *
@@ -2783,7 +2783,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Add to the cleanList.
    *
    * <p>Since moving to an explicit readCache, we now call resetWith before adding the the
@@ -2855,7 +2855,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return true;
   }
 
-  /**
+  /*
    * Pool the {@link #cleanList} and return the {@link WriteCache} from the head of the {@link
    * #cleanList} IFF one is available and otherwise <code>null</code>.
    *
@@ -2874,7 +2874,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return tmp;
   }
 
-  /**
+  /*
    * Non-blocking take of a {@link ReadCache}. If successful, the returned {@link ReadCache} will be
    * clean. Otherwise return <code>null</code>.
    */
@@ -2898,8 +2898,8 @@ public abstract class WriteCacheService implements IWriteCache {
         int cycles = 0;
         while (tmp != null) {
           if (log.isDebugEnabled() && !tmp.isEmpty()) {
-            /*
-             * Just debug stuff.
+          /*
+       * Just debug stuff.
              */
             int hitRecords = 0;
             int hotRecords = 0;
@@ -2972,7 +2972,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return tmp;
   }
 
-  /**
+  /*
    * This is a non-blocking query of all write cache buffers (current, clean and dirty).
    *
    * <p>This implementation DOES NOT throw an {@link IllegalStateException} if the service is
@@ -3018,7 +3018,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Attempt to read record from cache (either write cache or read cache depending on the service
    * map state).
    */
@@ -3039,8 +3039,8 @@ public abstract class WriteCacheService implements IWriteCache {
 
       if (!open.get()) {
 
-        /*
-         * Not open. Return [null] rather than throwing an exception per
+      /*
+       * Not open. Return [null] rather than throwing an exception per
          * the contract for this implementation.
          */
 
@@ -3081,8 +3081,8 @@ public abstract class WriteCacheService implements IWriteCache {
         continue;
 
       } catch (IllegalStateException ex) {
-        /*
-         * The write cache was closed. Per the API for this method,
+      /*
+       * The write cache was closed. Per the API for this method,
          * return [null] so that the caller will read through to the
          * backing store.
          */
@@ -3095,7 +3095,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return null;
   }
 
-  /**
+  /*
    * Helper class models a request to load a record from the backing store.
    *
    * <p>Note: This class must implement equals() and hashCode() since it is used within the {@link
@@ -3126,7 +3126,7 @@ public abstract class WriteCacheService implements IWriteCache {
       return service == r.service && offset == r.offset && nbytes == r.nbytes;
     }
 
-    /**
+    /*
      * The hashCode() implementation assumes that the <code>offset</code>'s hashCode() is well
      * distributed.
      */
@@ -3136,15 +3136,15 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Helper loads a child node from the specified address by delegating {@link
    * WriteCacheService#_getRecord(long, int)}.
    */
   private static final Computable<LoadRecordRequest, ByteBuffer> loadChild =
       new Computable<LoadRecordRequest, ByteBuffer>() {
 
-        /**
-         * Loads a record from the specified address.
+      /*
+       * Loads a record from the specified address.
          *
          * @return A heap {@link ByteBuffer} containing the data for that record.
          * @throws IllegalArgumentException if addr is {@link IRawStore#NULL}.
@@ -3161,8 +3161,8 @@ public abstract class WriteCacheService implements IWriteCache {
 
           } finally {
 
-            /*
-             * Clear the future task from the memoizer cache.
+          /*
+       * Clear the future task from the memoizer cache.
              *
              * Note: This is necessary in order to prevent the cache from
              * retaining a hard reference to each child materialized for the
@@ -3178,7 +3178,7 @@ public abstract class WriteCacheService implements IWriteCache {
         }
       };
 
-  /**
+  /*
    * A {@link Memoizer} subclass which exposes an additional method to remove a {@link FutureTask}
    * from the internal cache.
    */
@@ -3197,7 +3197,7 @@ public abstract class WriteCacheService implements IWriteCache {
       return cache.size();
     }
 
-    /**
+    /*
      * Called by the thread which atomically installs the record into the cache and updates the
      * service record map. At that point the record is available from the service record map.
      *
@@ -3211,8 +3211,8 @@ public abstract class WriteCacheService implements IWriteCache {
       }
     }
 
-    //        /**
-    //         * Called from {@link AbstractBTree#close()}.
+    //        /*
+//         * Called from {@link AbstractBTree#close()}.
     //         *
     //         * @todo should we do this?  There should not be any reads against the
     //         * the B+Tree when it is close()d.  Therefore I do not believe there
@@ -3224,9 +3224,9 @@ public abstract class WriteCacheService implements IWriteCache {
     //
     //        }
 
-  };
+  }
 
-  /**
+  /*
    * Used to materialize records with at most one thread reading the record from disk for a given
    * address. Other threads desiring the same record will wait on the {@link Future} for the thread
    * doing the work.
@@ -3257,7 +3257,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Method invoked from within the memoizer pattern to read the record from the backing store and
    * install it into the cache. The method must first verify that the record is not in the cache.
    *
@@ -3332,8 +3332,8 @@ public abstract class WriteCacheService implements IWriteCache {
       synchronized (readCache) {
         theCache = readCache.get();
         if (theCache != null) {
-          /*
-           * Attempt to allocate record on current read cache.
+        /*
+       * Attempt to allocate record on current read cache.
            */
           assert theCache.getReferenceCount() > 0;
           bb = theCache.allocate(nbytes); // intr iff can't lock().
@@ -3342,8 +3342,8 @@ public abstract class WriteCacheService implements IWriteCache {
             theCache.incrementReferenceCount();
             willInstall = true;
           } else {
-            /*
-             * At this point, the current [readCache] does not have
+          /*
+       * At this point, the current [readCache] does not have
              * enough room to install the record. We will clear the
              * [readCache] reference and transfer it to the
              * [readList].
@@ -3364,8 +3364,8 @@ public abstract class WriteCacheService implements IWriteCache {
           }
         }
         if (bb == null) {
-          /*
-           * Either no [readCache] on entry or no room in current
+        /*
+       * Either no [readCache] on entry or no room in current
            * [readCache] and [readCache] was set to [null].
            */
           assert readCache.get() == null; // pre-condition.
@@ -3391,8 +3391,8 @@ public abstract class WriteCacheService implements IWriteCache {
       } // synchronized(readCache)
 
       if (bb == null) {
-        /*
-         * No free buffer to install the read. Read directly into a heap
+      /*
+       * No free buffer to install the read. Read directly into a heap
          * ByteBuffer and return that to the caller.
          */
         assert willInstall == false;
@@ -3448,7 +3448,7 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  /**
+  /*
    * Read through to the backing file.
    *
    * @param offset The byte offset of the record on the backing file.
@@ -3482,7 +3482,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return ret;
   }
 
-  /**
+  /*
    * Read the data from the backing file.
    *
    * <p>We need to know the size of the data so we can allocate the buffer.
@@ -3539,7 +3539,7 @@ public abstract class WriteCacheService implements IWriteCache {
   //        return ByteBuffer.wrap(ret);
   //    }
 
-  /**
+  /*
    * Called to check if a write has already been flushed. This is only made if a write has been made
    * to previously committed data (in the current RW session).
    *
@@ -3567,8 +3567,8 @@ public abstract class WriteCacheService implements IWriteCache {
         }
         cache.transferLock.lock();
         try {
-          //                    /**
-          //                     * Note: The tests below require us to take the read lock on
+          //                    /*
+//                     * Note: The tests below require us to take the read lock on
           //                     * the WriteCache before we test the serviceMap again in
           //                     * order to guard against a concurrent reset() of the
           //                     * WriteCache.
@@ -3582,8 +3582,8 @@ public abstract class WriteCacheService implements IWriteCache {
           //                    try {
           final WriteCache cache2 = serviceMap.get(offset);
           if (cache2 != cache) {
-            /*
-             * Not found in this WriteCache.
+          /*
+       * Not found in this WriteCache.
              *
              * Record was (re-)moved before we got the lock.
              *
@@ -3596,8 +3596,8 @@ public abstract class WriteCacheService implements IWriteCache {
           // Remove entry from the recordMap.
           final WriteCache oldValue = serviceMap.remove(offset);
           if (oldValue == null) {
-            /**
-             * Note: The [WriteCache.transferLock] protects the WriteCache against a concurrent
+          /*
+       * Note: The [WriteCache.transferLock] protects the WriteCache against a concurrent
              * transfer of a record in WriteCache.transferTo(). However, WriteCache.resetWith() does
              * NOT take the transferLock. Therefore, it is possible (and valid) for the [recordMap]
              * entry to be cleared to [null] for this record by a concurrent resetWith() call.
@@ -3608,8 +3608,8 @@ public abstract class WriteCacheService implements IWriteCache {
             continue;
           }
           if (oldValue != cache) {
-            /*
-             * Concurrent modification!
+          /*
+       * Concurrent modification!
              */
             throw new AssertionError(
                 "oldValue="
@@ -3622,8 +3622,8 @@ public abstract class WriteCacheService implements IWriteCache {
                     + latchedAddr);
           }
 
-          /*
-           * Note: clearAddrMap() is basically a NOP if the WriteCache
+        /*
+       * Note: clearAddrMap() is basically a NOP if the WriteCache
            * has been closedForWrites().
            */
           if (cache.clearAddrMap(offset, latchedAddr)) {
@@ -3644,8 +3644,8 @@ public abstract class WriteCacheService implements IWriteCache {
     }
   }
 
-  //    /**
-  //     * Debug method to verify that the {@link WriteCacheService} has flushed all
+  //    /*
+//     * Debug method to verify that the {@link WriteCacheService} has flushed all
   //     * {@link WriteCache} buffers.
   //     *
   //     * @return whether there are no outstanding writes buffered
@@ -3661,7 +3661,7 @@ public abstract class WriteCacheService implements IWriteCache {
   //
   //    }
 
-  /**
+  /*
    * An array of writeCache actions is maintained that can be used to provide a breadcrumb of how
    * that address has been written, saved, freed or removed.
    *
@@ -3700,7 +3700,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return ret.toString();
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the address is in the write cache at the moment which the write
    * cache is checked.
    *
@@ -3722,7 +3722,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return counters.get().getCounters();
   }
 
-  /**
+  /*
    * Return the #of {@link WriteCache} blocks sent by the quorum leader to the first downstream
    * follower.
    */
@@ -3731,7 +3731,7 @@ public abstract class WriteCacheService implements IWriteCache {
     return counters.get().nsend;
   }
 
-  /**
+  /*
    * An instance of this exception is thrown if a thread notices that the {@link WriteCacheService}
    * was closed by a concurrent process.
    *

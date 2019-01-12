@@ -26,8 +26,8 @@ import cern.colt.bitvector.BitVector;
 import it.unimi.dsi.bits.AbstractBitVector;
 import java.nio.ByteBuffer;
 
-/**
- * Wraps a {@link ByteBuffer} as a read-only {@link BitVector}.
+/*
+* Wraps a {@link ByteBuffer} as a read-only {@link BitVector}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public class ByteBufferBitVector extends AbstractBitVector {
     return len;
   }
 
-  /**
+  /*
    * Ctor assumes that all bits in the buffer are used.
    *
    * @param b The buffer.
@@ -58,7 +58,7 @@ public class ByteBufferBitVector extends AbstractBitVector {
     this(b, 0 /* offset */, b == null ? 0 : b.capacity() * 8 /* len */);
   }
 
-  /**
+  /*
    * @param b The buffer.
    * @param off The offset from the start of the buffer for the view.
    * @param len The #of bits which will be included in the view.
@@ -80,7 +80,7 @@ public class ByteBufferBitVector extends AbstractBitVector {
     this.off = off;
   }
 
-  /**
+  /*
    * Return the index of the byte in which the bit with the given index is encoded.
    *
    * @param bitIndex The bit index.
@@ -91,7 +91,7 @@ public class ByteBufferBitVector extends AbstractBitVector {
     return ((int) ((bitIndex + off) / 8));
   }
 
-  /**
+  /*
    * Return the offset within the byte in which the bit is coded of the bit (this is just the
    * remainder <code>bitIndex % 8</code>).
    *
@@ -103,7 +103,7 @@ public class ByteBufferBitVector extends AbstractBitVector {
     return (int) ((bitIndex + off) % 8);
   }
 
-  /**
+  /*
    * Extract and return a bit coded flag.
    *
    * @param offset The offset in the buffer of the start of the byte[] sequence in which the bit

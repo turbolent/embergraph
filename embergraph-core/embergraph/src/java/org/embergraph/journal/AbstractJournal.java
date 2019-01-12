@@ -177,8 +177,8 @@ import org.embergraph.util.ClocksNotSynchronizedException;
 import org.embergraph.util.NT;
 import org.embergraph.util.StackInfoReport;
 
-/**
- * The journal is a persistence capable data structure supporting atomic commit, named indices, and
+/*
+* The journal is a persistence capable data structure supporting atomic commit, named indices, and
  * full transactions. The {@link BufferMode#DiskRW} mode provides an persistence scheme based on
  * reusable allocation slots while the {@link BufferMode#DiskWORM} mode provides an append only
  * persistence scheme. Journals may be configured in highly available quorums.
@@ -235,7 +235,7 @@ public abstract class AbstractJournal
   /** Logger. */
   private static final Logger log = Logger.getLogger(AbstractJournal.class);
 
-  /**
+  /*
    * @see http://sourceforge.net/apps/trac/bigdata/ticket/443 (Logger for RWStore transaction
    *     service and recycler)
    */
@@ -244,7 +244,7 @@ public abstract class AbstractJournal
   /** Logger for HA events. */
   protected static final Logger haLog = Logger.getLogger("org.embergraph.haLog");
 
-  /**
+  /*
    * The index of the root address containing the address of the persistent {@link Name2Addr}
    * mapping names to {@link BTree}s registered for the store.
    */
@@ -256,7 +256,7 @@ public abstract class AbstractJournal
   /** The index of the root address of the delete blocks associated with this transaction. */
   public static final transient int DELETEBLOCK = 2;
 
-  /**
+  /*
    * The index of the root address containing the {@link ICUVersionRecord}. That record specifies
    * the ICU version metadata which was in force when the journal was created.
    */
@@ -265,19 +265,19 @@ public abstract class AbstractJournal
   /** A clone of the properties used to initialize the {@link Journal}. */
   protected final Properties properties;
 
-  /**
+  /*
    * The #of open journals (JVM wide). This is package private. It is used to chase down unit tests
    * which are not closing() the Journal.
    */
   static final AtomicInteger nopen = new AtomicInteger();
 
-  /**
+  /*
    * The #of closed journals (JVM wide). This is package private. It is used to chase down unit
    * tests which are not {@link #close() closing} the Journal.
    */
   static final AtomicInteger nclose = new AtomicInteger();
 
-  /**
+  /*
    * The #of destroyed journals (JVM wide). This is package private. It is used to chase down unit
    * tests which are not {@link #destroy() destroying} the journal.
    */
@@ -286,7 +286,7 @@ public abstract class AbstractJournal
   /** The directory that should be used for temporary files. */
   public final File tmpDir;
 
-  /**
+  /*
    * The object used by the journal to compute the checksums of its root blocks (this object is NOT
    * thread-safe so there is one instance per journal).
    */
@@ -305,7 +305,7 @@ public abstract class AbstractJournal
   // * synchronization (many methods use volatile reads on these fields).
   // */
 
-  /**
+  /*
    * The metadata for a pre-existing journal -or- <code>null</code> if the journal was created for
    * the first time.
    */
@@ -319,7 +319,7 @@ public abstract class AbstractJournal
   /** The implementation logic for the current {@link BufferMode}. */
   private final IBufferStrategy _bufferStrategy;
 
-  /**
+  /*
    * A description of the journal as a resource.
    *
    * <p>Note: For HA, this is updated if new root blocks are installed onto the journal. This is
@@ -345,7 +345,7 @@ public abstract class AbstractJournal
    *
    */
 
-  /**
+  /*
    * This lock is used to prevent clearing or setting of critical fields while a concurrent thread
    * is seeking to operate on the referenced objects. A read-write lock was chosen because nearly
    * all operations are "reads" (the read the field reference). For this purpose the "writer" is a
@@ -356,14 +356,14 @@ public abstract class AbstractJournal
   private final ReentrantReadWriteLock _fieldReadWriteLock =
       new ReentrantReadWriteLock(false /* fair */);
 
-  /**
+  /*
    * This lock is needed to synchronize serviceJoin of a <em>follower</em> with a GATHER.
    * Specifically it ensures that if a service is trying to join during a replicated write set, then
    * the GATHER and the SERVICE JOIN are MUTEX.
    */
   private final Lock _gatherLock = new ReentrantLock();
 
-  /**
+  /*
    * Used to cache the most recent {@link ICommitRecord} -- discarded on {@link #abort()}; set by
    * {@link #commitNow(long)}.
    *
@@ -372,7 +372,7 @@ public abstract class AbstractJournal
    */
   private volatile ICommitRecord _commitRecord;
 
-  /**
+  /*
    * BTree mapping commit timestamps to the address of the corresponding {@link ICommitRecord}. The
    * keys are timestamps (long integers). The values are the address of the {@link ICommitRecord}
    * with that commit timestamp.
@@ -391,7 +391,7 @@ public abstract class AbstractJournal
   /** The {@link ICUVersionRecord} iff known. */
   private volatile ICUVersionRecord _icuVersionRecord;
 
-  /**
+  /*
    * The configured capacity for the {@link HardReferenceQueue} backing the index cache maintained
    * by the "live" {@link Name2Addr} object.
    *
@@ -399,7 +399,7 @@ public abstract class AbstractJournal
    */
   private final int liveIndexCacheCapacity;
 
-  /**
+  /*
    * The configured timeout in milliseconds for stale entries in the {@link HardReferenceQueue}
    * backing the index cache maintained by the "live" {@link Name2Addr} object.
    *
@@ -407,14 +407,14 @@ public abstract class AbstractJournal
    */
   private final long liveIndexCacheTimeout;
 
-  /**
+  /*
    * The configured capacity for the LRU backing the {@link #historicalIndexCache}.
    *
    * @see Options#HISTORICAL_INDEX_CACHE_CAPACITY
    */
   private final int historicalIndexCacheCapacity;
 
-  /**
+  /*
    * The configured timeout for stale entries in the {@link HardReferenceQueue} backing the {@link
    * #historicalIndexCache}.
    *
@@ -422,7 +422,7 @@ public abstract class AbstractJournal
    */
   private final long historicalIndexCacheTimeout;
 
-  /**
+  /*
    * A cache that is used by the {@link AbstractJournal} to provide a <em>canonicalizing</em>
    * mapping from an address to the instance of a read-only historical object loaded from that
    * address and which indirectly controls how long the journal will "keep open" historical index
@@ -447,7 +447,7 @@ public abstract class AbstractJournal
   // final private WeakValueCache<Long, ICommitter> historicalIndexCache;
   private final ConcurrentWeakValueCache<Long, ICommitter> historicalIndexCache;
 
-  /**
+  /*
    * A cache that is used to avoid lookups against the {@link CommitRecordIndex} and {@link
    * Name2Addr} for historical index views.
    *
@@ -464,7 +464,7 @@ public abstract class AbstractJournal
    */
   private final ConcurrentWeakValueCacheWithTimeout<NT, ICheckpointProtocol> indexCache;
 
-  /**
+  /*
    * The "live" BTree mapping index names to the last metadata record committed for the named index.
    * The keys are index names (unicode strings). The values are the names and the last known address
    * of the named btree.
@@ -484,7 +484,7 @@ public abstract class AbstractJournal
    */
   private volatile Name2Addr _name2Addr;
 
-  /**
+  /*
    * An atomic state specifying whether a clean abort is required. This is set to true by critical
    * section code in the _abort if it does not complete cleanly.
    *
@@ -495,7 +495,7 @@ public abstract class AbstractJournal
    */
   private final AtomicBoolean abortRequired = new AtomicBoolean(false);
 
-  /**
+  /*
    * Return the "live" BTree mapping index names to the last metadata record committed for the named
    * index. The keys are index names (unicode strings). The values are the names and the last known
    * address of the named btree.
@@ -531,7 +531,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * A read-only view of the {@link Name2Addr} object mapping index names to the most recent
    * committed {@link Entry} for the named index. The keys are index names (unicode strings). The
    * values are {@link Entry}s containing the names, commitTime, and last known {@link Checkpoint}
@@ -598,7 +598,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Return a read-only view of the {@link Name2Addr} object as of the specified commit time.
    *
    * @param commitTime A commit time.
@@ -640,8 +640,8 @@ public abstract class AbstractJournal
     return n2a;
   }
 
-  //	/**
-  //	 * Return the root block view associated with the commitRecord for the
+  //	/*
+//	 * Return the root block view associated with the commitRecord for the
   //	 * provided commit time.  This requires accessing the next commit record
   //	 * since the previous root block is stored with each record.
   //	 *
@@ -682,8 +682,8 @@ public abstract class AbstractJournal
   //
   //	}
   //
-  //	/**
-  //	 *
+  //	/*
+//	 *
   //	 * @param startTime from which to begin iteration
   //	 *
   //	 * @return an iterator over the committed root blocks
@@ -728,7 +728,7 @@ public abstract class AbstractJournal
   /** True iff the journal was opened in a read-only mode. */
   private final boolean readOnly;
 
-  /**
+  /*
    * Option controls whether the journal forces application data to disk before updating the root
    * blocks.
    */
@@ -737,13 +737,13 @@ public abstract class AbstractJournal
   /** Option controls how the journal behaves during a commit. */
   protected final ForceEnum forceOnCommit;
 
-  /**
+  /*
    * Option set by the test suites causes the file backing the journal to be deleted when the
    * journal is closed.
    */
   protected final boolean deleteOnClose;
 
-  /**
+  /*
    * The maximum extent before a {@link #commit()} will {@link #overflow()}. In practice, overflow
    * tries to trigger before this point in order to avoid extending the journal.
    *
@@ -756,7 +756,7 @@ public abstract class AbstractJournal
 
   private RootBlockCommitter m_rootBlockCommitter;
 
-  /**
+  /*
    * The maximum extent before a {@link #commit()} will {@link #overflow()}. In practice, overflow
    * tries to trigger before this point in order to avoid extending the journal.
    *
@@ -767,7 +767,7 @@ public abstract class AbstractJournal
     return maximumExtent;
   }
 
-  /**
+  /*
    * Resolves the property value (static variant for ctor initialization).
    *
    * @see Configuration#getProperty(IIndexManager, Properties, String, String, String)
@@ -782,7 +782,7 @@ public abstract class AbstractJournal
 																			 */, name, defaultValue);
   }
 
-  /**
+  /*
    * Resolves the property value.
    *
    * @see Configuration#getProperty(IIndexManager, Properties, String, String, String)
@@ -792,7 +792,7 @@ public abstract class AbstractJournal
     return Configuration.getProperty(this, properties, "" /* no namespace */, name, defaultValue);
   }
 
-  /**
+  /*
    * Resolves, parses, and validates the property value.
    *
    * @param name The property name.
@@ -806,7 +806,7 @@ public abstract class AbstractJournal
         this, properties, "" /* no namespace */, name, defaultValue, validator);
   }
 
-  /**
+  /*
    * Create or re-open a journal.
    *
    * @param properties The properties as defined by {@link Options}.
@@ -819,7 +819,7 @@ public abstract class AbstractJournal
     this(properties, null /* quorum */);
   }
 
-  /**
+  /*
    * Create or re-open a journal as part of a highly available {@link Quorum}.
    *
    * @param properties The properties as defined by {@link Options}.
@@ -954,8 +954,8 @@ public abstract class AbstractJournal
       if (BufferMode.valueOf(getProperty(Options.BUFFER_MODE, Options.DEFAULT_BUFFER_MODE))
           .isFullyBuffered()) {
 
-        /*
-         * Memory only buffer modes.
+      /*
+       * Memory only buffer modes.
          */
 
         if (readOnly) {
@@ -1011,8 +1011,8 @@ public abstract class AbstractJournal
             throw new AssertionError("bufferMode=" + bufferMode);
         }
 
-        /*
-         * setup the root blocks.
+      /*
+       * setup the root blocks.
          */
         final int nextOffset = 0;
         final long firstCommitTime = 0L;
@@ -1073,21 +1073,21 @@ public abstract class AbstractJournal
 
         this._rootBlock = rootBlock1;
 
-        /*
-         * End memory backed modes.
+      /*
+       * End memory backed modes.
          */
 
       } else {
 
-        /*
-         * Disk backed modes.
+      /*
+       * Disk backed modes.
          */
 
         /*final FileMetadata*/ fileMetadata =
             FileMetadata.createInstance(properties, !(this instanceof Journal), quorumToken);
 
-        /*
-         * Note: Use the BufferMode as reported by FileMetadata. This
+      /*
+       * Note: Use the BufferMode as reported by FileMetadata. This
          * will be the right mode on a restart as it checks what is
          * actually in the store header / root blocks.
          */
@@ -1108,8 +1108,8 @@ public abstract class AbstractJournal
           case Direct:
             {
 
-              /*
-               * Setup the buffer strategy.
+            /*
+       * Setup the buffer strategy.
                */
 
               _bufferStrategy = new DirectBufferStrategy(0L /*
@@ -1126,12 +1126,12 @@ public abstract class AbstractJournal
           case Mapped:
             {
 
-              /*
-               * Setup the buffer strategy.
+            /*
+       * Setup the buffer strategy.
                */
 
-              /*
-               * Note: the maximumExtent is a hard limit in this case only
+            /*
+       * Note: the maximumExtent is a hard limit in this case only
                * since resize is not supported for mapped files.
                */
               _bufferStrategy = new MappedBufferStrategy(maximumExtent /*
@@ -1169,8 +1169,8 @@ public abstract class AbstractJournal
           case DiskWORM:
             {
 
-              /*
-               * Setup the buffer strategy.
+            /*
+       * Setup the buffer strategy.
                */
 
               _bufferStrategy =
@@ -1188,8 +1188,8 @@ public abstract class AbstractJournal
           case DiskRW:
             {
 
-              /*
-               * Setup the buffer strategy.
+            /*
+       * Setup the buffer strategy.
                */
 
               _bufferStrategy = new RWStrategy(fileMetadata, quorum);
@@ -1202,8 +1202,8 @@ public abstract class AbstractJournal
           case TemporaryRW:
             {
 
-              /*
-               * Setup the buffer strategy.
+            /*
+       * Setup the buffer strategy.
                */
 
               _bufferStrategy = new RWStrategy(fileMetadata, quorum);
@@ -1216,8 +1216,8 @@ public abstract class AbstractJournal
           case Temporary:
             {
 
-              /*
-               * Setup the buffer strategy.
+            /*
+       * Setup the buffer strategy.
                *
                * FIXME Add test suite for this buffer mode. It should
                * support MRMW but is not restart-safe.
@@ -1258,7 +1258,7 @@ public abstract class AbstractJournal
       // new or re-load commit record index from store via root block.
       this._commitRecordIndex = _getCommitRecordIndex();
 
-      /**
+      /*
        * If the store can recycle storage then we must provide a hook to allow the removal of cached
        * data when it is available for recycling.
        */
@@ -1317,7 +1317,7 @@ public abstract class AbstractJournal
     nopen.incrementAndGet();
   }
 
-  /**
+  /*
    * @todo consider making the properties restart safe so that they can be read from the journal.
    *     This will let some properties be specified on initialization while letting others default
    *     or be overridden on restart. This is trivially accomplished by dedicating a root slot to a
@@ -1331,7 +1331,7 @@ public abstract class AbstractJournal
     return new Properties(properties);
   }
 
-  /**
+  /*
    * Return the delegate that implements the {@link BufferMode}.
    *
    * <p>Note: this method MUST NOT check to see whether the journal is open since we need to use it
@@ -1343,7 +1343,7 @@ public abstract class AbstractJournal
     return _bufferStrategy;
   }
 
-  /**
+  /*
    * Service for running arbitrary tasks in support of {@link IResourceLocator}. There is no
    * concurrency control associated with this service, but tasks run here may submit tasks to the
    * {@link ConcurrencyManager}.
@@ -1351,7 +1351,7 @@ public abstract class AbstractJournal
   @Override
   public abstract ExecutorService getExecutorService();
 
-  /**
+  /*
    * Shutdown the journal (running tasks will run to completion, but no new tasks will start).
    *
    * <p>Note: You SHOULD use this method rather than {@link #close()} for normal shutdown of the
@@ -1373,7 +1373,7 @@ public abstract class AbstractJournal
     if (log.isInfoEnabled()) log.info("Shutdown complete.");
   }
 
-  /**
+  /*
    * Immediate shutdown (running tasks are canceled rather than being permitted to complete).
    *
    * @see #shutdown()
@@ -1411,7 +1411,7 @@ public abstract class AbstractJournal
     return CountersFactory.getCounters(this);
   }
 
-  /**
+  /*
    * Note: A combination of a static inner class and a weak reference to the outer class are used to
    * avoid the returned {@link CounterSet} having a hard reference to the outer class while
    * retaining the ability to update the {@link CounterSet} dynamically as long as the referenced
@@ -1570,8 +1570,8 @@ public abstract class AbstractJournal
     }
   }
 
-  //    /**
-  //     * Return the live index counters maintained by the unisolated
+  //    /*
+//     * Return the live index counters maintained by the unisolated
   //     * {@link Name2Addr} index iff they are available. These counters are not
   //     * available for a read-only journal. They are also not available if the
   //     * journal has been concurrently shutdown (since the {@link Name2Addr}
@@ -1602,7 +1602,7 @@ public abstract class AbstractJournal
   //        return null;
   //    }
 
-  /**
+  /*
    * Return a {@link CounterSet} reflecting the named indices that are open or which have been
    * recently opened.
    *
@@ -1723,8 +1723,8 @@ public abstract class AbstractJournal
     return tmp.getFile();
   }
 
-  //    /**
-  //     * The HA log directory.
+  //    /*
+//     * The HA log directory.
   //     *
   //     * @see HAJournal.Options#HA_LOG_DIR
   //     *
@@ -1737,7 +1737,7 @@ public abstract class AbstractJournal
   //
   //	}
 
-  /**
+  /*
    * Assert that <code>t1</code> LT <code>t2</code>, where <code>t1</code> and <code>t2</code> are
    * timestamps obtain such that this relation will be <code>true</code> if the clocks on the nodes
    * are synchronized.
@@ -1766,7 +1766,7 @@ public abstract class AbstractJournal
     ClocksNotSynchronizedException.assertBefore(serviceId1, serviceId2, t1, t2, maxSkew);
   }
 
-  /**
+  /*
    * The maximum error allowed (milliseconds) in the clocks. This is used by {@link
    * #assertBefore(UUID, UUID, long, long)} to verify that the clocks are within some acceptable
    * skew of one another. It is also used by {@link #nextCommitTimestamp()} where it specifies the
@@ -1781,7 +1781,7 @@ public abstract class AbstractJournal
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * The HA timeout in milliseconds for a 2-phase prepare.
    *
    * @throws UnsupportedOperationException always.
@@ -1791,7 +1791,7 @@ public abstract class AbstractJournal
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * The HA timeout in milliseconds for the release time consensus protocol.
    *
    * @throws UnsupportedOperationException always.
@@ -1847,7 +1847,7 @@ public abstract class AbstractJournal
     nclose.incrementAndGet();
   }
 
-  /**
+  /*
    * Deletes the backing file(s) (if any).
    *
    * <p>Note: This is the core implementation of delete and handles event reporting.
@@ -1887,7 +1887,7 @@ public abstract class AbstractJournal
     ResourceManager.deleteJournal(getFile() == null ? null : getFile().toString());
   }
 
-  /**
+  /*
    * Truncate the backing buffer such that there is no remaining free space in the journal.
    *
    * <p>Note: The caller MUST have exclusive write access to the journal. When the {@link
@@ -1909,8 +1909,8 @@ public abstract class AbstractJournal
 
     switch (backingBuffer.getBufferMode()) {
       case DiskRW:
-        /*
-         * Operation is not supported for the RWStore.
+      /*
+       * Operation is not supported for the RWStore.
          */
         return;
       default:
@@ -1926,7 +1926,7 @@ public abstract class AbstractJournal
     if (log.isInfoEnabled()) log.info("oldExtent=" + oldExtent + ", newExtent=" + newExtent);
   }
 
-  /**
+  /*
    * Make sure that the journal has at least the specified number of bytes of unused capacity
    * remaining in the user extent.
    *
@@ -1953,7 +1953,7 @@ public abstract class AbstractJournal
     return buf.getUserExtent() - buf.getNextOffset();
   }
 
-  /**
+  /*
    * Restart safe conversion of the store into a read-only store with the specified
    * <i>closeTime</i>.
    *
@@ -2203,7 +2203,7 @@ public abstract class AbstractJournal
     ndestroy.incrementAndGet();
   }
 
-  /**
+  /*
    * Assert that the store is open.
    *
    * <p>Note: You can see an {@link IllegalStateException} thrown out of here if there are tasks
@@ -2233,7 +2233,7 @@ public abstract class AbstractJournal
     return journalMetadata.get();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This will report <code>false</code> for a new highly available journal until the
@@ -2245,7 +2245,7 @@ public abstract class AbstractJournal
     return _bufferStrategy != null && _bufferStrategy.isOpen();
   }
 
-  /**
+  /*
    * Return <code>true</code> if the journal was opened in a read-only mode or if {@link
    * #closeForWrites(long)} was used to seal the journal against further writes.
    */
@@ -2295,8 +2295,8 @@ public abstract class AbstractJournal
         case Follower: // read-only
           return true;
         case NotReady:
-          /*
-           * This case is considered "read-only" locally, but not
+        /*
+       * This case is considered "read-only" locally, but not
            * available for reads by the HA layer (REST API, SPARQL, etc).
            */
           return true;
@@ -2314,7 +2314,7 @@ public abstract class AbstractJournal
     return false;
   }
 
-  /**
+  /*
    * Assert that the journal is readable.
    *
    * @throws IllegalStateException if the journal is not writable at this time.
@@ -2331,7 +2331,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Assert that the journal is writable.
    *
    * @throws IllegalStateException if the journal is not writable at this time.
@@ -2352,7 +2352,7 @@ public abstract class AbstractJournal
     }
 
     if (abortRequired.get()) {
-      /**
+      /*
        * Do not permit mutation if an abort must be performed.
        *
        * @see http://jira.blazegraph.com/browse/BLZG-181 (Add critical section protection to
@@ -2380,7 +2380,7 @@ public abstract class AbstractJournal
     return doubleSync;
   }
 
-  /**
+  /*
    * Return <code>true</code> if the persistence store uses record level checksums. When <code>true
    * </code>, the store will detect bad reads by comparing the record as read from the disk against
    * the checksum for that record.
@@ -2390,8 +2390,8 @@ public abstract class AbstractJournal
     return _bufferStrategy.useChecksums();
   }
 
-  //    /**
-  //     * Return <code>true</code> if the journal is configured for high
+  //    /*
+//     * Return <code>true</code> if the journal is configured for high
   //     * availability.
   //     *
   //     * @see Quorum#isHighlyAvailable()
@@ -2402,7 +2402,7 @@ public abstract class AbstractJournal
   //
   //	}
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns the current root block (immediate, non-blocking peek).
@@ -2443,7 +2443,7 @@ public abstract class AbstractJournal
 
   }
 
-  /**
+  /*
    * Variant of {@link #getRootBlockView()} that takes the internal lock in order to provide an
    * appropriate synchronization barrier when installing new root blocks onto an empty journal in
    * HA.
@@ -2460,8 +2460,8 @@ public abstract class AbstractJournal
 
       if (_rootBlock == null) {
 
-        /*
-         * This can happen before the journal file has been created.
+      /*
+       * This can happen before the journal file has been created.
          * Once it has been created the root block will always be
          * non-null when viewed while holding the lock.
          */
@@ -2496,7 +2496,7 @@ public abstract class AbstractJournal
 
   }
 
-  /**
+  /*
    * Set a persistence capable data structure for callback during the commit protocol.
    *
    * <p>Note: the committers must be reset after restart or whenever the committers are discarded
@@ -2514,7 +2514,7 @@ public abstract class AbstractJournal
     _committers[rootSlot] = committer;
   }
 
-  /**
+  /*
    * Notify all registered committers and collect their reported root addresses in an array.
    *
    * @param commitTime The timestamp assigned to the commit.
@@ -2585,7 +2585,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Discards any unisolated writes since the last {@link #commitNow(long)()} and also discards the
    * unisolated (aka live) btree objects, reloading them from the current {@link ICommitRecord} on
    * demand.
@@ -2736,8 +2736,8 @@ public abstract class AbstractJournal
 
       if (quorum != null) {
 
-        /*
-         * In HA, we need to tell the QuorumService that the database
+      /*
+       * In HA, we need to tell the QuorumService that the database
          * has done an abort() so it can discard any local state
          * associated with the current write set (the HALog file and the
          * last live HA message).
@@ -2750,8 +2750,8 @@ public abstract class AbstractJournal
 
         } catch (IllegalStateException ex) {
 
-          /*
-           * Note: Thrown if the QuorumService is not running.
+        /*
+       * Note: Thrown if the QuorumService is not running.
            */
 
           // ignore.
@@ -2780,7 +2780,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Rollback a journal to its previous commit point.
    *
    * <p>Note: You MUST have an exclusive write lock on the journal.
@@ -2845,8 +2845,8 @@ public abstract class AbstractJournal
     }
   }
 
-  //	/**
-  //	 * Return the object providing the {@link AbstractLocalTransactionManager}
+  //	/*
+//	 * Return the object providing the {@link AbstractLocalTransactionManager}
   //	 * for this journal.
   //	 */
   //	abstract public AbstractLocalTransactionManager getLocalTransactionManager();
@@ -2857,7 +2857,7 @@ public abstract class AbstractJournal
     return _bufferStrategy.isDirty();
   }
 
-  /**
+  /*
    * Get timestamp that will be assigned to this commit point.
    *
    * <p>Note: This will spin until commit time advances over <code>lastCommitTime</code>, but not
@@ -2885,14 +2885,14 @@ public abstract class AbstractJournal
       while (true) {
         final long t = transactionManager.nextTimestamp();
         if (t > lastCommitTime) {
-          /*
-           * We have a distinct timestamp. Time is moving forward.
+        /*
+       * We have a distinct timestamp. Time is moving forward.
            */
           commitTime = t;
           break;
         }
-        /*
-         * Time is going backwards.  Figure out by how much.
+      /*
+       * Time is going backwards.  Figure out by how much.
          *
          * Note: delta is in ms.
          */
@@ -2967,23 +2967,23 @@ public abstract class AbstractJournal
 
   /** Performance counters for the journal-level commit operations. */
   private static class CommitCounters implements ICounterSetAccess {
-    /**
+    /*
      * Elapsed nanoseconds for the {@link ICommitter#handleCommit(long)} (flushing dirty pages from
      * the indices into the write cache service).
      */
     private final CAT elapsedNotifyCommittersNanos = new CAT();
-    /**
+    /*
      * Elapsed nanoseconds for {@link CommitState#writeCommitRecord()}. Note: This is also
      * responsible for recycling the deferred frees for {@link IHistoryManager} backends.
      */
     private final CAT elapsedWriteCommitRecordNanos = new CAT();
-    /**
+    /*
      * Elapsed nanoseconds for flushing the write set from the write cache service to the backing
      * store (this is the bulk of the disk IO unless the write cache service fills up during a long
      * running commit, in which case there is also incremental eviction).
      */
     private final CAT elapsedFlushWriteSetNanos = new CAT();
-    /**
+    /*
      * Elapsed nanoseconds for the simple atomic commit (non-HA). This consists of sync'ing the disk
      * (iff double-sync is enabled), writing the root block, and then sync'ing the disk.
      */
@@ -3093,7 +3093,7 @@ public abstract class AbstractJournal
 
   private final CommitCounters commitCounters = new CommitCounters();
 
-  /**
+  /*
    * Class to which we attach all of the little pieces of state during {@link
    * AbstractJournal#commitNow(long)}.
    *
@@ -3118,7 +3118,7 @@ public abstract class AbstractJournal
     /** Local HA service implementation (non-Remote) and <code>null</code> if not in an HA mode.. */
     private final QuorumService<HAGlue> quorumService;
 
-    /**
+    /*
      * The commit time either of a transaction or of an unisolated commit. Note that when mixing
      * isolated and unisolated commits you MUST use the same {@link ITimestampService} for both
      * purposes.
@@ -3137,7 +3137,7 @@ public abstract class AbstractJournal
     /** The commit counter that will be assigned to the new commit point. */
     private final long newCommitCounter;
 
-    /**
+    /*
      * @param store The backing store.
      * @param commitTime The commit time either of a transaction or of an unisolated commit. Note
      *     that when mixing isolated and unisolated commits you MUST use the same {@link
@@ -3178,7 +3178,7 @@ public abstract class AbstractJournal
       store.assertCommitTimeAdvances(commitTime);
     }
 
-    /**
+    /*
      * Notify {@link ICommitter}s to flush out application data. This sets the {@link #rootAddrs}
      * for the {@link ICommitRecord}.
      *
@@ -3209,8 +3209,8 @@ public abstract class AbstractJournal
        */
       if (!_bufferStrategy.requiresCommit(store._rootBlock)) {
 
-        /*
-         * Will not do commit.
+      /*
+       * Will not do commit.
          *
          * Note: No data was written onto the store so the commit can
          * not achieve any useful purpose.
@@ -3239,14 +3239,14 @@ public abstract class AbstractJournal
       return true;
     }
 
-    /**
+    /*
      * The new root addresses for the {@link ICommitRecord}.
      *
      * @see #notifyCommitters()
      */
     private long[] rootAddrs;
 
-    /**
+    /*
      * Write out the {@link ICommitRecord}, noting the {@link #commitRecordAddr}, add the {@link
      * ICommitRecord} to the {@link CommitRecordIndex}. Finally, checkpoint the {@link
      * CommitRecordIndex} setting the {@link #commitRecordIndexAddr}.
@@ -3300,14 +3300,14 @@ public abstract class AbstractJournal
       store.commitCounters.elapsedWriteCommitRecordNanos.add(System.nanoTime() - beginNanos);
     }
 
-    /**
+    /*
      * The address of the {@link ICommitRecord}.
      *
      * @see #writeCommitRecord()
      */
     private long commitRecordAddr;
 
-    /**
+    /*
      * The address of the {@link CommitRecordIndex} once it has been checkpointed against the
      * backing store.
      *
@@ -3320,7 +3320,7 @@ public abstract class AbstractJournal
      */
     private long commitRecordIndexAddr;
 
-    /**
+    /*
      * Call commit on {@link IBufferStrategy} prior to creating the new {@link IRootBlockView}. This
      * will flush the {@link WriteCacheService} . For HA, that ensures that the write set has been
      * replicated to the followers.
@@ -3379,8 +3379,8 @@ public abstract class AbstractJournal
 
       if (priorCommitTime != 0L) {
 
-        /*
-         * This is a local sanity check to make sure that the commit
+      /*
+       * This is a local sanity check to make sure that the commit
          * timestamps are strictly increasing. An error will be reported
          * if the commit time for the current (un)isolated transaction
          * is not strictly greater than the last commit time on the
@@ -3417,7 +3417,7 @@ public abstract class AbstractJournal
               store.checker);
     }
 
-    /**
+    /*
      * The new {@link IRootBlockView}.
      *
      * @see #newRootBlock()
@@ -3442,7 +3442,7 @@ public abstract class AbstractJournal
         return;
       }
 
-      /**
+      /*
        * CRITICAL SECTION. We need obtain a distributed consensus for the services joined with the
        * met quorum concerning the earliest commit point that is pinned by the combination of the
        * active transactions and the minReleaseAge on the TXS. New transaction starts during this
@@ -3528,8 +3528,8 @@ public abstract class AbstractJournal
 
       if (_bufferStrategy instanceof IRWStrategy) {
 
-        /*
-         * Now the root blocks are down we can commit any transient
+      /*
+       * Now the root blocks are down we can commit any transient
          * state.
          */
 
@@ -3543,8 +3543,8 @@ public abstract class AbstractJournal
       store._commitRecord = store._getCommitRecord();
 
       if (quorum != null) {
-        /**
-         * Write the root block on the HALog file, closing out that file.
+      /*
+       * Write the root block on the HALog file, closing out that file.
          *
          * @see <a href="http://trac.blazegraph.com/ticket/721">HA1 </a>
          */
@@ -3581,7 +3581,7 @@ public abstract class AbstractJournal
       }
     }
 
-    /**
+    /*
      * PREPARE
      *
      * <p>Note: We need to make an atomic decision here regarding whether a service is joined with
@@ -3637,8 +3637,8 @@ public abstract class AbstractJournal
 
         if (!didPrepare) {
 
-          /*
-           * Something went wrong. Any services that were in the
+        /*
+       * Something went wrong. Any services that were in the
            * pipeline could have a dirty write set. Services that
            * voted NO will have already discarded their dirty write
            * set. We issue an abort2Phase() to tell the other services
@@ -3671,7 +3671,7 @@ public abstract class AbstractJournal
     private PrepareRequest prepareRequest;
     private PrepareResponse prepareResponse;
 
-    /**
+    /*
      * COMMIT.
      *
      * <p>Pre-condition: PREPARE was successful on a majority of the services.
@@ -3682,8 +3682,8 @@ public abstract class AbstractJournal
       boolean didCommit = false;
       try {
 
-        /*
-         * Prepare was successful. COMMIT message has been formed. We
+      /*
+       * Prepare was successful. COMMIT message has been formed. We
          * will now commit.
          *
          * Note: The overall commit will fail unless we can prove that a
@@ -3696,8 +3696,8 @@ public abstract class AbstractJournal
 
         if (!store.quorum.isQuorum(commitResponse.getNOk())) {
 
-          /*
-           * Fail the commit.
+        /*
+       * Fail the commit.
            *
            * Note: An insufficient number of services were able to
            * COMMIT successfully.
@@ -3720,8 +3720,8 @@ public abstract class AbstractJournal
 
         if (!didCommit) {
 
-          /*
-           * The quorum voted to commit, but something went wrong.
+        /*
+       * The quorum voted to commit, but something went wrong.
            *
            * This forces the leader to fail over. The quorum can then
            * meet up again around a new consensus.
@@ -3759,7 +3759,7 @@ public abstract class AbstractJournal
     private CommitResponse commitResponse;
   } // class CommitState.
 
-  /**
+  /*
    * An atomic commit is performed by directing each registered {@link ICommitter} to flush its
    * state onto the store using {@link ICommitter#handleCommit(long)}. The address returned by that
    * method is the address from which the {@link ICommitter} may be reloaded (and its previous
@@ -3819,8 +3819,8 @@ public abstract class AbstractJournal
       cs.writeCommitRecord();
 
       if (quorum != null) {
-        /*
-         * Verify that the last negotiated quorum is still valid.
+      /*
+       * Verify that the last negotiated quorum is still valid.
          */
         quorum.assertLeader(cs.commitToken);
       }
@@ -3862,8 +3862,8 @@ public abstract class AbstractJournal
       } finally {
 
         if (commitLock != null) {
-          /*
-           * Release the [commitLock] iff one was taken above.
+        /*
+       * Release the [commitLock] iff one was taken above.
            */
           commitLock.unlock();
         }
@@ -3900,8 +3900,8 @@ public abstract class AbstractJournal
     }
   }
 
-  //    /**
-  //     * (debug only) For the {@link RWStrategy}, scans the
+  //    /*
+//     * (debug only) For the {@link RWStrategy}, scans the
   //     * {@link #historicalIndexCache} and verifies that there are no checkpoint
   //     * addresses present which are "locked".
   //     */
@@ -3937,7 +3937,7 @@ public abstract class AbstractJournal
   //
   //    }
 
-  /**
+  /*
    * Method verifies that the commit time strictly advances on the local store by checking against
    * the current root block.
    *
@@ -3957,7 +3957,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Method verifies that the commit time strictly advances on the local store by checking against
    * the current root block.
    *
@@ -4135,7 +4135,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Resolve the {@link ICommitRecord} for the earliest visible commit point based on the caller's
    * <i>releaseTime</i>.
    *
@@ -4166,8 +4166,8 @@ public abstract class AbstractJournal
 
       if (releaseTime >= lastCommitTime) {
 
-        /*
-         * The caller is querying with an effective releaseTime GTE the
+      /*
+       * The caller is querying with an effective releaseTime GTE the
          * lastCommitTime. It is not valid to have a releaseTime GTE the
          * current committed state.
          */
@@ -4220,7 +4220,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Returns a read-only view of the most recently committed {@link ICommitRecord} containing the
    * root addresses.
    *
@@ -4270,7 +4270,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * This method is invoked to mark any persistence capable data structures as invalid (in an error
    * state). This ensures that dirty committers are not accidentally flushed through after a call to
    * abort().
@@ -4297,7 +4297,7 @@ public abstract class AbstractJournal
     getResourceLocator().clearUnisolatedCache();
   }
 
-  /**
+  /*
    * This method is invoked by {@link #abort()} when the store must discard any hard references that
    * it may be holding to objects registered as {@link ICommitter}s.
    *
@@ -4314,7 +4314,7 @@ public abstract class AbstractJournal
     _name2Addr = null;
   }
 
-  /**
+  /*
    * Invoked when a journal is first created, re-opened, or when the committers have been {@link
    * #discardCommitters() discarded}.
    *
@@ -4337,13 +4337,13 @@ public abstract class AbstractJournal
        */
       setupName2AddrBTree(getRootAddr(ROOT_NAME2ADDR));
 
-      /**
+      /*
        * Do not register committer to write previous root block, but instead just create it and call
        * explicitly when required. This is a workaround to allow "void" transactions.
        */
       m_rootBlockCommitter = new RootBlockCommitter(this);
 
-      /**
+      /*
        * If the strategy is a RWStrategy, then register the delete block committer to store the
        * deferred deletes for each commit record.
        */
@@ -4359,7 +4359,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Return the {@link ICUVersionRecord} from the current {@link ICommitRecord} -or- a new instance
    * for the current runtime environment if the root address for {@link #ROOT_ICUVERSION} is {@link
    * #NULL}.
@@ -4381,7 +4381,7 @@ public abstract class AbstractJournal
     return r;
   }
 
-  /**
+  /*
    * Writes the {@link ICUVersionRecord} onto the store iff either (a) it does not exist; or (b) it
    * exists, it differs from the last persistent record, and the update flag was specified.
    *
@@ -4405,7 +4405,7 @@ public abstract class AbstractJournal
       lastAddr = getRootAddr(ROOT_ICUVERSION);
     }
 
-    /**
+    /*
      * Commits a new {@link ICUVersionRecord} IF none is defined -OR- IF one is defined, it is a
      * different version of ICU, and the update flag is set.
      */
@@ -4460,7 +4460,7 @@ public abstract class AbstractJournal
    * named indices.
    */
 
-  /**
+  /*
    * Setup the btree that resolves named indices. This is invoke when the journal is opened and by
    * {@link #abort()} .
    *
@@ -4514,7 +4514,7 @@ public abstract class AbstractJournal
     return _name2Addr;
   }
 
-  /**
+  /*
    * Return a read-only view of the last committed state of the {@link CommitRecordIndex}.
    *
    * @return The read-only view of the {@link CommitRecordIndex}.
@@ -4541,8 +4541,8 @@ public abstract class AbstractJournal
     }
   }
 
-  //    /**
-  //     * I have removed this method since the returned {@link CommitRecordIndex}
+  //    /*
+//     * I have removed this method since the returned {@link CommitRecordIndex}
   //     * was being used without appropriate synchronization. There is a
   //     * {@link #getReadOnlyCommitRecordIndex()} which may be used in place of
   //     * this method.
@@ -4574,7 +4574,7 @@ public abstract class AbstractJournal
   //
   //	}
 
-  /**
+  /*
    * Read and return the {@link CommitRecordIndex} from the current root block.
    *
    * @return The {@link CommitRecordIndex} and never <code>null</code>.
@@ -4605,7 +4605,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Create or load and return the index that resolves timestamps to {@link ICommitRecord}s. This
    * method is capable of returning either the live {@link CommitRecordIndex} or a read-only view of
    * any committed version of that index.
@@ -4654,8 +4654,8 @@ public abstract class AbstractJournal
 
       if (readOnly) {
 
-        /*
-         * Read only view of the most CommitRecordIndex having
+      /*
+       * Read only view of the most CommitRecordIndex having
          * that checkpointAddr.
          */
 
@@ -4663,8 +4663,8 @@ public abstract class AbstractJournal
 
       } else {
 
-        /*
-         * Reload the mutable btree from its root address.
+      /*
+       * Reload the mutable btree from its root address.
          *
          * Note: For this code path we DO NOT cache the index view.
          */
@@ -4678,7 +4678,7 @@ public abstract class AbstractJournal
     return ndx;
   }
 
-  /**
+  /*
    * Note: There are some embergraph releases (such as 1.0.4) where the commit record index was not
    * pruned when deferred deletes were recycled. By maintaining this test, we will correctly refuse
    * to return a commit record for a commit point whose deferred deletes have been recycled, even
@@ -4703,7 +4703,7 @@ public abstract class AbstractJournal
     return false;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @todo the {@link CommitRecordIndex} is a possible source of thread contention since
@@ -4736,7 +4736,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Return the first commit record whose timestamp is strictly greater than the given commitTime.
    *
    * @param commitTime The commit time.
@@ -4765,7 +4765,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: Transactions should pass in the timestamp against which they are reading rather than
@@ -4792,7 +4792,7 @@ public abstract class AbstractJournal
     return (BTree) getIndexLocal(name, commitTime);
   }
 
-  /**
+  /*
    * Core implementation for access to historical index views.
    *
    * <p>Note: Transactions should pass in the timestamp against which they are reading rather than
@@ -4842,8 +4842,8 @@ public abstract class AbstractJournal
 
         if (log.isTraceEnabled()) log.trace("Removing entry from cache: " + name);
 
-        /*
-         * No longer visible.
+      /*
+       * No longer visible.
          *
          * Note: If you are using a transaction, then the transaction
          * will have a read lock which prevents the commit point against
@@ -4885,7 +4885,7 @@ public abstract class AbstractJournal
       }
 
       // Resolve the index against that commit record.
-      ndx = (ICheckpointProtocol) getIndexWithCommitRecord(name, commitRecord);
+      ndx = getIndexWithCommitRecord(name, commitRecord);
 
       if (ndx == null) {
 
@@ -4898,8 +4898,8 @@ public abstract class AbstractJournal
 
       if (ndx2 != null) {
 
-        /*
-         * Lost a data race. Use the winner's version of the index.
+      /*
+       * Lost a data race. Use the winner's version of the index.
          *
          * Note: Both index objects SHOULD be the same reference.
          * getIndex(name,commitRecord) will go through a canonicalizing
@@ -4930,8 +4930,8 @@ public abstract class AbstractJournal
     return historicalIndexCache.size();
   }
 
-  //	/**
-  //     * Returns a read-only named index loaded from a {@link ICommitRecord}. The
+  //	/*
+//     * Returns a read-only named index loaded from a {@link ICommitRecord}. The
   //     * {@link BTree} will be marked as read-only, it will NOT permit writes, and
   //     * {@link BTree#getLastCommitTime(long)} will report the value associated
   //     * with {@link Entry#commitTime} for the historical {@link Name2Addr}
@@ -4948,7 +4948,7 @@ public abstract class AbstractJournal
   //
   //	}
 
-  /**
+  /*
    * Returns a read-only named index loaded from a {@link ICommitRecord}. The index will be marked
    * as read-only, it will NOT permit writes, and {@link
    * ICheckpointProtocol#getLastCommitTime(long)} will report the value associated with {@link
@@ -5033,8 +5033,8 @@ public abstract class AbstractJournal
     }
   }
 
-  //	/**
-  //	 * A canonicalizing mapping for <em>historical</em> {@link BTree}s.
+  //	/*
+//	 * A canonicalizing mapping for <em>historical</em> {@link BTree}s.
   //	 * <p>
   //	 * Note: This method imposes a canonicalizing mapping and ensures that there
   //	 * will be at most one instance of the historical index at a time. This
@@ -5066,8 +5066,8 @@ public abstract class AbstractJournal
   //
   //	}
 
-  //    /**
-  //     * A canonicalizing mapping for <em>historical</em> {@link HTree}s.
+  //    /*
+//     * A canonicalizing mapping for <em>historical</em> {@link HTree}s.
   //     * <p>
   //     * Note: This method imposes a canonicalizing mapping and ensures that there
   //     * will be at most one instance of the historical index at a time. This
@@ -5097,7 +5097,7 @@ public abstract class AbstractJournal
   //
   //    }
 
-  /**
+  /*
    * A canonicalizing mapping for <em>historical</em> (read-only) views of persistence capable data
    * structures (core impl).
    *
@@ -5170,7 +5170,7 @@ public abstract class AbstractJournal
     return (ICheckpointProtocol) ndx;
   }
 
-  /**
+  /*
    * Registers a named index. Once registered the index will participate in atomic commits.
    *
    * <p>Note: A named index must be registered outside of any transaction before it may be used
@@ -5200,7 +5200,7 @@ public abstract class AbstractJournal
     _register(name, ndx);
   }
 
-  /**
+  /*
    * Provides an opportunity to validate some aspects of the {@link IndexMetadata} for an index
    * partition.
    */
@@ -5210,7 +5210,7 @@ public abstract class AbstractJournal
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Once registered the index will participate in atomic commits.
@@ -5233,7 +5233,7 @@ public abstract class AbstractJournal
     return registerIndex(name, btree);
   }
 
-  /**
+  /*
    * Variant method creates and registered a named persistence capable data structure but does not
    * assume that the data structure will be a {@link BTree}.
    *
@@ -5265,7 +5265,7 @@ public abstract class AbstractJournal
     _register(name, ndx);
   }
 
-  /**
+  /*
    * Registers a named index (core impl). Once registered the index will participate in atomic
    * commits.
    *
@@ -5300,7 +5300,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Drops the named index. The index will no longer participate in atomic commits and will not
@@ -5414,7 +5414,7 @@ public abstract class AbstractJournal
     return Name2Addr.indexNameScan(prefix, n2a);
   }
 
-  /**
+  /*
    * Return the mutable view of the named index (aka the "live" or {@link ITx#UNISOLATED} index).
    * This object is NOT thread-safe. You MUST NOT write on this index unless you KNOW that you are
    * the only writer. See {@link ConcurrencyManager}, which handles exclusive locks for {@link
@@ -5429,8 +5429,8 @@ public abstract class AbstractJournal
     return (BTree) getUnisolatedIndex(name);
   }
 
-  //    /**
-  //     * Return the mutable view of the named index (aka the "live" or
+  //    /*
+//     * Return the mutable view of the named index (aka the "live" or
   //     * {@link ITx#UNISOLATED} index). This object is NOT thread-safe. You MUST
   //     * NOT write on this index unless you KNOW that you are the only writer. See
   //     * {@link ConcurrencyManager}, which handles exclusive locks for
@@ -5449,8 +5449,8 @@ public abstract class AbstractJournal
   //
   //    }
 
-  //    /**
-  //     * Return the mutable view of the named index (aka the "live" or
+  //    /*
+//     * Return the mutable view of the named index (aka the "live" or
   //     * {@link ITx#UNISOLATED} index). This object is NOT thread-safe. You MUST
   //     * NOT write on this index unless you KNOW that you are the only writer. See
   //     * {@link ConcurrencyManager}, which handles exclusive locks for
@@ -5466,7 +5466,7 @@ public abstract class AbstractJournal
   //
   //    }
 
-  /**
+  /*
    * Return the mutable view of the named persistence capable data structure (aka the "live" or
    * {@link ITx#UNISOLATED} view).
    *
@@ -5544,7 +5544,7 @@ public abstract class AbstractJournal
    * High Availability
    */
 
-  /**
+  /*
    * The current quorum token or {@value Quorum#NO_QUORUM} if the node is not part of a {@link
    * Quorum}.
    *
@@ -5566,7 +5566,7 @@ public abstract class AbstractJournal
     return quorumToken;
   }
 
-  /**
+  /*
    * This method will update the quorum token on the journal and the associated values <em>as
    * if</em> the service was not joined with a met quorum. This allows us to handle conditions where
    * we know that the service will not be joined with the met quorum once it is able to observe the
@@ -5597,7 +5597,7 @@ public abstract class AbstractJournal
     setQuorumToken2(newValue, isServiceJoined);
   }
 
-  /**
+  /*
    * Update the {@link #quorumToken}, {@link #haReadyToken}, and {@link #hashCode()}.
    *
    * @param newValue The new quorum token value.
@@ -5665,7 +5665,7 @@ public abstract class AbstractJournal
 
     try {
 
-      /**
+      /*
        * The following condition tests are slightly confusing, it is not clear that they represent
        * all real states.
        *
@@ -5683,13 +5683,13 @@ public abstract class AbstractJournal
        */
       if (transitionState.didLeaveMetQuorum) {
 
-        /*
-         * The service was joined with a met quorum.
+      /*
+       * The service was joined with a met quorum.
          */
         quorumToken = newValue; // volatile write.
 
-        /*
-         * We also need to discard any active read/write tx since there
+      /*
+       * We also need to discard any active read/write tx since there
          * is no longer a quorum. This will hit both read-only
          * transactions running on any service (not necessarily the
          * leader) and read/write transactions if this service was the
@@ -5704,8 +5704,8 @@ public abstract class AbstractJournal
         ((AbstractTransactionService) getLocalTransactionManager().getTransactionService())
             .abortAllTx();
 
-        /**
-         * Local abort (no quorum, so 2-phase abort not required).
+      /*
+       * Local abort (no quorum, so 2-phase abort not required).
          *
          * <p>FIXME HA : Abort the unisolated connection? (esp for group commit and the NSS level
          * SPARQL and REST API unisolated operations). Maybe we can wrap the execute of the
@@ -5722,8 +5722,8 @@ public abstract class AbstractJournal
          */
         doLocalAbort();
 
-        /*
-         * Note: We can not re-cast our vote until our last vote is
+      /*
+       * Note: We can not re-cast our vote until our last vote is
          * widthdrawn. That is currently done by QuorumWatcherBase. So,
          * we have to wait until we observe that to cast a new vote.
          */
@@ -5736,8 +5736,8 @@ public abstract class AbstractJournal
 
       } else if (transitionState.didBreak) {
 
-        /*
-         * Note: [didLeaveMetQuorum] was handled above. So, this else if
+      /*
+       * Note: [didLeaveMetQuorum] was handled above. So, this else if
          * only applies to a service that observes a quorum break but
          * which was not joined with the met quorum. As we were not
          * joined at the break there is nothing to do save for updating
@@ -5754,8 +5754,8 @@ public abstract class AbstractJournal
 
       } else if (transitionState.didMeet || transitionState.didJoinMetQuorum) {
 
-        /**
-         * Either a quorum meet (didMeet:=true) or the service is joining a quorum that is already
+      /*
+       * Either a quorum meet (didMeet:=true) or the service is joining a quorum that is already
          * met (didJoinMetQuorum).
          */
         final long tmp;
@@ -5776,8 +5776,8 @@ public abstract class AbstractJournal
 
           if (localCommitCounter == 0L) {
 
-            /*
-             * Take the root blocks from the quorum leader and use
+          /*
+       * Take the root blocks from the quorum leader and use
              * them.
              */
 
@@ -5795,8 +5795,8 @@ public abstract class AbstractJournal
 
             if (leaderRB.getCommitCounter() == 0L) {
 
-              /*
-               * Installs the root blocks and does a local abort.
+            /*
+       * Installs the root blocks and does a local abort.
                *
                * Note: This code path is only taken when both the
                * leader and the follower are at commitCounter==0L.
@@ -5832,8 +5832,8 @@ public abstract class AbstractJournal
           tmp = Quorum.NO_QUORUM;
         }
 
-        /*
-         * Note: These volatile writes need to occur before we do the
+      /*
+       * Note: These volatile writes need to occur before we do the
          * local abort since the readOnly versus readWrite state of the
          * journal is decided based on the [haStatus].
          */
@@ -5848,8 +5848,8 @@ public abstract class AbstractJournal
 
         if (!installedRBs) {
 
-          /**
-           * If we install the RBs, then a local abort was already done. Otherwise we need to do one
+        /*
+       * If we install the RBs, then a local abort was already done. Otherwise we need to do one
            * now (this covers the case when setQuorumToken() is called on the leader as well as
            * cases where the service is either not a follower or is a follower, but the leader is
            * not at commitCounter==0L, etc.
@@ -5878,20 +5878,20 @@ public abstract class AbstractJournal
 
       } else {
 
-        /*
-         * Did not (leave|break|meet|join).
+      /*
+       * Did not (leave|break|meet|join).
          */
 
         if (haReadyToken != Quorum.NO_QUORUM) {
 
-          /*
-           * We should not be here if this service is HAReady.
+        /*
+       * We should not be here if this service is HAReady.
            */
           throw new AssertionError("VOID setToken");
         }
 
-        /*
-         * We are not joined. No change in token or HAReadyToken.
+      /*
+       * We are not joined. No change in token or HAReadyToken.
          *
          * Note: This can occur (for example) if we are not yet joined
          * and an error occurs during our attempt to join with a met
@@ -5924,8 +5924,8 @@ public abstract class AbstractJournal
   /** Updated with the {@link #haReadyToken}. */
   private volatile HAStatusEnum haStatus = HAStatusEnum.NotReady;
 
-  //    /**
-  //     * Await the service being ready to partitipate in an HA quorum. The
+  //    /*
+//     * Await the service being ready to partitipate in an HA quorum. The
   //     * preconditions include:
   //     * <ol>
   //     * <li>receiving notice of the quorum token via
@@ -5960,8 +5960,8 @@ public abstract class AbstractJournal
   //        }
   //    }
 
-  //    /**
-  //     * Await the service being ready to partitipate in an HA quorum. The
+  //    /*
+//     * Await the service being ready to partitipate in an HA quorum. The
   //     * preconditions include:
   //     * <ol>
   //     * <li>receiving notice of the quorum token via
@@ -6025,7 +6025,7 @@ public abstract class AbstractJournal
     return haReadyToken;
   }
 
-  /**
+  /*
    * A simplified summary of the HA status of the service. This may be used to reliably decide
    * whether the service is the {@link HAStatusEnum#Leader}, a {@link HAStatusEnum#Follower}, or
    * {@link HAStatusEnum#NotReady}. This is exposed both here (an RMI interface) and by the REST
@@ -6046,7 +6046,7 @@ public abstract class AbstractJournal
     return haStatus;
   }
 
-  /**
+  /*
    * Assert that the {@link #getHAReady()} token has the specified value.
    *
    * @param token The specified value.
@@ -6061,7 +6061,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Install identical root blocks on the journal. This is used for a few different conditions in
    * HA.
    *
@@ -6120,8 +6120,8 @@ public abstract class AbstractJournal
       // Check the root blocks before we install them.
       {
         if (!_rootBlock.getStoreType().equals(rootBlock0.getStoreType())) {
-          /*
-           * The StoreType must agree.
+        /*
+       * The StoreType must agree.
            */
           throw new RuntimeException(
               "Incompatible StoreType: expected="
@@ -6183,7 +6183,7 @@ public abstract class AbstractJournal
     _abort();
   }
 
-  /**
+  /*
    * Local commit protocol (HA, offline).
    *
    * <p>Note: This is used to support RESTORE by replay of HALog files when the HAJournalServer is
@@ -6197,7 +6197,7 @@ public abstract class AbstractJournal
     doLocalCommit(null /* localService */, rootBlock);
   }
 
-  /**
+  /*
    * Local commit protocol (HA).
    *
    * @param localService For HA modes only. When non-<code>null</code>, this is used to identify
@@ -6256,14 +6256,14 @@ public abstract class AbstractJournal
       _rootBlock = rootBlock;
 
       final boolean leader =
-          localService == null ? false : localService.isLeader(rootBlock.getQuorumToken());
+          localService != null && localService.isLeader(rootBlock.getQuorumToken());
 
       if (leader) {
 
         if (_bufferStrategy instanceof IRWStrategy) {
 
-          /*
-           * Now the root blocks are down we can commit any transient
+        /*
+       * Now the root blocks are down we can commit any transient
            * state.
            */
 
@@ -6272,8 +6272,8 @@ public abstract class AbstractJournal
 
       } else {
 
-        /*
-         * Ensure allocators are synced after commit. This is only done
+      /*
+       * Ensure allocators are synced after commit. This is only done
          * for the followers. The leader has been updating the in-memory
          * allocators as it lays down the writes. The followers have not
          * be updating the allocators.
@@ -6285,8 +6285,8 @@ public abstract class AbstractJournal
         /** Call to sync any transient state */
         ((IHABufferStrategy) _bufferStrategy).postHACommit(rootBlock);
 
-        /*
-         * Clear reference and reload from the store.
+      /*
+       * Clear reference and reload from the store.
          *
          * The leader does not need to do this since it is writing on
          * the unisolated commit record index and thus the new commit
@@ -6314,7 +6314,7 @@ public abstract class AbstractJournal
   /** The current {@link Quorum} (if any). */
   private final Quorum<HAGlue, QuorumService<HAGlue>> quorum;
 
-  /**
+  /*
    * Used to pin the {@link Future} of the gather operation on the client to prevent it from being
    * finalized while the leader is still running its side of the consensus protocol to update the
    * release time for the replication cluster.
@@ -6326,8 +6326,8 @@ public abstract class AbstractJournal
   private final AtomicReference<Future<IHANotifyReleaseTimeResponse>> gatherFuture =
       new AtomicReference<Future<IHANotifyReleaseTimeResponse>>();
 
-  //    /**
-  //     * The {@link Quorum} for this service -or- <code>null</code> if the service
+  //    /*
+//     * The {@link Quorum} for this service -or- <code>null</code> if the service
   //     * is not running with a quorum.
   //     */
   @Override
@@ -6336,7 +6336,7 @@ public abstract class AbstractJournal
     return quorum;
   }
 
-  /**
+  /*
    * Factory for the {@link HADelegate} object for this {@link AbstractJournal}. The object returned
    * by this method will be made available using {@link QuorumMember#getService()}.
    *
@@ -6347,7 +6347,7 @@ public abstract class AbstractJournal
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Return both root blocks (atomically - used by HA).
    *
    * <p>Note: This takes a lock to ensure that the root blocks are consistent with a commit point on
@@ -6383,7 +6383,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * With lock held to ensure that there is no concurrent commit, copy key data atomically to ensure
    * recovered snapshot is consistent with the commit state when the snapshot is taken. This atomic
    * data snapshot can be merged with the file data to ensure a valid new store copy.
@@ -6434,7 +6434,7 @@ public abstract class AbstractJournal
     }
   }
 
-  /**
+  /*
    * Implementation hooks into the various low-level operations required to support HA for the
    * journal.
    */
@@ -6508,7 +6508,7 @@ public abstract class AbstractJournal
       return AbstractJournal.this.awaitHAReady(timeout, units);
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>FIXME awaitServiceJoin() is failing to set the commitCounter on the message. Either create
@@ -6544,8 +6544,8 @@ public abstract class AbstractJournal
 
             if (serviceUUID.equals(t)) {
 
-              /*
-               * Found it.
+            /*
+       * Found it.
                *
                * FIXME This should be returning the commitCounter
                * associated with the most recent gather, not -1L.
@@ -6570,8 +6570,8 @@ public abstract class AbstractJournal
 
             if (sleepMillis <= 0) {
 
-              /*
-               * If remaining LT 1 ms, then fail fast.
+            /*
+       * If remaining LT 1 ms, then fail fast.
                */
 
               throw new TimeoutException();
@@ -6632,7 +6632,7 @@ public abstract class AbstractJournal
       throw new UnsupportedOperationException();
     }
 
-    /**
+    /*
      * Return a proxy object for a {@link Future} suitable for use in an RMI environment (the
      * default implementation returns its argument).
      *
@@ -6644,7 +6644,7 @@ public abstract class AbstractJournal
       return getProxy(future, false /* asyncFuture */);
     }
 
-    /**
+    /*
      * Return a proxy object for a {@link Future} suitable for use in an RMI environment (the
      * default implementation returns its argument).
      *
@@ -6715,16 +6715,16 @@ public abstract class AbstractJournal
 
       if (!isJoined) {
 
-        /*
-         * A NOP task if this service is not joined with the met quorum.
+      /*
+       * A NOP task if this service is not joined with the met quorum.
          */
 
         ft = new FutureTaskMon<Boolean>(new VoteNoTask(quorumService));
 
       } else {
 
-        /*
-         * A task to flush and sync if the service is joined with the
+      /*
+       * A task to flush and sync if the service is joined with the
          * met quorum.
          *
          * Note: This code path is only when [isJoined := true].
@@ -6735,8 +6735,8 @@ public abstract class AbstractJournal
 
       if (isLeader) {
 
-        /*
-         * Run in the caller's thread.
+      /*
+       * Run in the caller's thread.
          *
          * Note: In order to avoid deadlock, when the leader calls back to
          * itself it MUST do so in the same thread in which it is already
@@ -6748,8 +6748,8 @@ public abstract class AbstractJournal
 
       } else {
 
-        /*
-         * We can't really handle the timeout in the leader's thread
+      /*
+       * We can't really handle the timeout in the leader's thread
          * (and it would be very odd if the leader wound up waiting on
          * itself!) but the followers can obey the timeout semantics for
          * prepare() by execute()ing the FutureTask and then returning
@@ -6764,7 +6764,7 @@ public abstract class AbstractJournal
       return getProxy(ft);
     }
 
-    /**
+    /*
      * Task votes NO (unconditional).
      *
      * <p>Note: If we were not joined at the start of the 2-phase commit, then we will not
@@ -6796,8 +6796,8 @@ public abstract class AbstractJournal
 
         if (req.isJoinedService()) {
 
-          /*
-           * Force a service that was joined at the atomic decision
+        /*
+       * Force a service that was joined at the atomic decision
            * point of the 2-phase commit protocol to do a service
            * leave.
            */
@@ -6812,7 +6812,7 @@ public abstract class AbstractJournal
       }
     } // class VoteNoTask
 
-    /**
+    /*
      * Task prepares for a 2-phase commit (syncs to the disk) and votes YES iff if is able to
      * prepare successfully.
      *
@@ -6830,8 +6830,8 @@ public abstract class AbstractJournal
 
         if (!prepareMessage.isJoinedService()) {
 
-          /*
-           * Only services that are joined as of the atomic decision
+        /*
+       * Only services that are joined as of the atomic decision
            * point in commitNow() are sent a PREPARE message.
            */
 
@@ -6851,8 +6851,8 @@ public abstract class AbstractJournal
 
         try {
 
-          /*
-           * Note: Throws IllegalStateException if quorum has been
+        /*
+       * Note: Throws IllegalStateException if quorum has been
            * terminated. We can't PREPARE if the quorum is terminated.
            */
           localService = quorum.getClient();
@@ -6865,8 +6865,8 @@ public abstract class AbstractJournal
 
           if (!vote.get()) {
 
-            /**
-             * Since the service refuses to PREPARE we want it to enter an error state and then
+          /*
+       * Since the service refuses to PREPARE we want it to enter an error state and then
              * figure out whether it needs to resynchronize with the quorum.
              *
              * <p>Note: Entering the error state will cause the local abort and serviceLeave()
@@ -6886,8 +6886,8 @@ public abstract class AbstractJournal
 
       private Boolean innerCall() throws Exception {
 
-        /*
-         * Get and clear the [gatherFuture]. A service which was
+      /*
+       * Get and clear the [gatherFuture]. A service which was
          * joined at the atomic decision point for the GATHER will
          * have a non-null Future here. A service which is newly
          * joined and which joined *after* the GATHER will have a
@@ -6915,8 +6915,8 @@ public abstract class AbstractJournal
 
         if (haLog.isInfoEnabled()) haLog.info("validated=" + rootBlock);
 
-        /*
-         * Verify that the local release time is consisent with the
+      /*
+       * Verify that the local release time is consisent with the
          * GATHER.
          */
         final IHANotifyReleaseTimeResponse consensusReleaseTime =
@@ -6925,8 +6925,8 @@ public abstract class AbstractJournal
         {
           if (oldFuture != null) {
 
-            /*
-             * If we ran the GATHER task, then we must await the
+          /*
+       * If we ran the GATHER task, then we must await the
              * outcome of the GATHER on this service before we
              * can verify that the local consensus release time
              * is consistent with the GATHER.
@@ -6960,14 +6960,14 @@ public abstract class AbstractJournal
           }
         }
 
-        /*
-         * if(follower) {...}
+      /*
+       * if(follower) {...}
          */
         if (
         /*isJoined &&*/ !isLeader) {
 
-          /**
-           * This is a follower.
+        /*
+       * This is a follower.
            *
            * <p>Validate the release time consensus protocol was completed successfully on the
            * follower.
@@ -6977,8 +6977,8 @@ public abstract class AbstractJournal
            */
           if (!prepareMessage.isGatherService()) {
 
-            /*
-             * This service did not participate in the GATHER.
+          /*
+       * This service did not participate in the GATHER.
              * Instead, it joined after the GATHER but before
              * the PREPARE.
              */
@@ -6992,8 +6992,8 @@ public abstract class AbstractJournal
             return vote.get();
           }
 
-          /**
-           * Note: We need to block here (on oldFuture.get()) in case the follower has not finished
+        /*
+       * Note: We need to block here (on oldFuture.get()) in case the follower has not finished
            * applying the updated release time.
            */
           try {
@@ -7011,18 +7011,18 @@ public abstract class AbstractJournal
                       + consensusReleaseTime);
             }
 
-            /*
-             * Gather was successful - fall through.
+          /*
+       * Gather was successful - fall through.
              */
 
           } catch (InterruptedException e) {
-            /*
-             * Note: Future isDone(). Caller should not block.
+          /*
+       * Note: Future isDone(). Caller should not block.
              */
             throw new AssertionError();
           } catch (CancellationException e) {
-            /*
-             * Gather cancelled on the follower (e.g.,
+          /*
+       * Gather cancelled on the follower (e.g.,
              * immediately above).
              */
             haLog.error("Gather cancelled on follower: serviceId=" + getServiceId() + " : " + e, e);
@@ -7034,16 +7034,16 @@ public abstract class AbstractJournal
           }
         }
 
-        /*
-         * Call to ensure strategy does everything required for itself
+      /*
+       * Call to ensure strategy does everything required for itself
          * before final root block commit. At a minimum it must flush
          * its write cache to the backing file (issue the writes).
          */
         // _bufferStrategy.commit(); // lifted to before we
         // retrieve
         // RootBlock in commitNow
-        /*
-         * Force application data to stable storage _before_ we update
+      /*
+       * Force application data to stable storage _before_ we update
          * the root blocks. This option guarantees that the application
          * data is stable on the disk before the atomic commit. Some
          * operating systems and/or file systems may otherwise choose an
@@ -7063,8 +7063,8 @@ public abstract class AbstractJournal
 
         if (prepareMessage.voteNo()) {
 
-          /*
-           * Hook allows the test suite to force a NO vote.
+        /*
+       * Hook allows the test suite to force a NO vote.
            */
 
           throw new Mock2PhaseCommitProtocolException("Force NO vote");
@@ -7077,7 +7077,7 @@ public abstract class AbstractJournal
       }
     }
 
-    /**
+    /*
      * Validate the new root block against the current root block. This method checks a variety of
      * invariants:
      *
@@ -7108,8 +7108,8 @@ public abstract class AbstractJournal
       // Validate UUID of store is consistent.
       if (!newRB.getUUID().equals(oldRB.getUUID())) {
 
-        /*
-         * The root block has a different UUID. We can not accept this
+      /*
+       * The root block has a different UUID. We can not accept this
          * condition.
          */
 
@@ -7120,8 +7120,8 @@ public abstract class AbstractJournal
       // Validate commit time is strictly increasing.
       if (newRB.getLastCommitTime() <= oldRB.getLastCommitTime()) {
 
-        /*
-         * The root block has a commit time that is LTE the most recent
+      /*
+       * The root block has a commit time that is LTE the most recent
          * commit on this Journal. We can not accept this condition.
          */
 
@@ -7140,8 +7140,8 @@ public abstract class AbstractJournal
 
         if (newcc != (oldcc + 1)) {
 
-          /*
-           * The new root block MUST have a commit counter that is ONE
+        /*
+       * The new root block MUST have a commit counter that is ONE
            * more than the current commit counter on this Journal. We
            * can not accept any other value for the commit counter.
            */
@@ -7165,8 +7165,8 @@ public abstract class AbstractJournal
 
       if (isLeader) {
 
-        /*
-         * Verify still the leader.
+      /*
+       * Verify still the leader.
          */
         if (!localService.isLeader(prepareToken)) throw new IllegalStateException("Not leader.");
 
@@ -7180,8 +7180,8 @@ public abstract class AbstractJournal
 
       } else {
 
-        /*
-         * Verify still a follower.
+      /*
+       * Verify still a follower.
          */
         if (!localService.isFollower(prepareToken))
           throw new IllegalStateException("Not follower.");
@@ -7243,8 +7243,8 @@ public abstract class AbstractJournal
 
         try {
 
-          /*
-           * Note: Throws IllegalStateException if quorum has been
+        /*
+       * Note: Throws IllegalStateException if quorum has been
            * terminated. We can't go through the 2-phase commit if the
            * quorum is terminated.
            */
@@ -7295,8 +7295,8 @@ public abstract class AbstractJournal
         if (prepareMessage == null) throw new IllegalStateException();
 
         if (!prepareMessage.isJoinedService()) {
-          /*
-           * Only services that are joined as of the atomic decision
+        /*
+       * Only services that are joined as of the atomic decision
            * point should receive a PREPARE or COMMIT message.
            */
           throw new AssertionError();
@@ -7320,8 +7320,8 @@ public abstract class AbstractJournal
                   + vote);
 
         if (rootBlock.getLastCommitTime() != commitTime) {
-          /*
-           * The commit time does not agree with the root
+        /*
+       * The commit time does not agree with the root
            * block from the prepare message.
            */
           throw new IllegalStateException();
@@ -7329,8 +7329,8 @@ public abstract class AbstractJournal
 
         if (!vote.get()) {
 
-          /*
-           * This service voted NO. It will not participate in the
+        /*
+       * This service voted NO. It will not participate in the
            * commit.
            */
 
@@ -7347,8 +7347,8 @@ public abstract class AbstractJournal
           throw new Mock2PhaseCommitProtocolException();
         }
 
-        /*
-         * Write the root block on the local journal.
+      /*
+       * Write the root block on the local journal.
          */
         AbstractJournal.this.doLocalCommit(localService, rootBlock);
 
@@ -7357,16 +7357,16 @@ public abstract class AbstractJournal
           throw new Mock2PhaseCommitProtocolException();
         }
 
-        /*
-         * Write the root block on the HALog file, closing out that
+      /*
+       * Write the root block on the HALog file, closing out that
          * file.
          */
         localService.logRootBlock(rootBlock);
 
         if (commitMessage.didAllServicesPrepare()) {
 
-          /*
-           * The HALog files are conditionally purged (depending
+        /*
+       * The HALog files are conditionally purged (depending
            * on the IRestorePolicy) on each node any time the
            * quorum is fully met and goes through a commit point.
            * The current HALog always remains open.
@@ -7430,8 +7430,8 @@ public abstract class AbstractJournal
 
           if (haLog.isInfoEnabled()) haLog.info("token=" + token);
 
-          /*
-           * Note: even if the quorum breaks, we still need to discard
+        /*
+       * Note: even if the quorum breaks, we still need to discard
            * our local state. Forcing doLocalAbort() here is MUCH
            * safer than failing to invoke it because the quorum
            * broken. If we do not invoke doLocalAbort() then we could
@@ -7456,7 +7456,7 @@ public abstract class AbstractJournal
       }
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * @todo We should test the LRUNexus for failover reads and install records into the cache if
@@ -7658,7 +7658,7 @@ public abstract class AbstractJournal
     //            return getProxy(ft);
     //        }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>This implementation does pipeline remove() followed by pipline add().
@@ -7693,8 +7693,8 @@ public abstract class AbstractJournal
      * Note: API is mostly implemented by Journal/HAJournal.
      */
 
-    //        /**
-    //         * Clear the {@link #gatherFuture} and return <code>true</code> iff the
+    //        /*
+//         * Clear the {@link #gatherFuture} and return <code>true</code> iff the
     //         * {@link Future} was available, was already done, and the computation
     //         * did not result in an error. Othewise return <code>false</code>.
     //         * <p>
@@ -7734,7 +7734,7 @@ public abstract class AbstractJournal
     //            return false;
     //        }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/673" > Native thread leak in
@@ -7748,8 +7748,8 @@ public abstract class AbstractJournal
 
       {
 
-        /*
-         * Clear the old outcome. Reference SHOULD be null. Ensure not
+      /*
+       * Clear the old outcome. Reference SHOULD be null. Ensure not
          * running.
          */
         final Future<IHANotifyReleaseTimeResponse> oldFuture = gatherFuture.getAndSet(null);
@@ -7818,7 +7818,7 @@ public abstract class AbstractJournal
           .notifyEarliestCommitTime(req);
     }
 
-    /**
+    /*
      * This exposes the clock used to assign transaction identifiers and commit times. It is being
      * exposed to support certain kinds of overrides for unit tests.
      *
@@ -7838,8 +7838,8 @@ public abstract class AbstractJournal
 
       } catch (IOException ex) {
 
-        /*
-         * Note: This is a local method call. IOException will not be
+      /*
+       * Note: This is a local method call. IOException will not be
          * thrown.
          */
 
@@ -7893,9 +7893,9 @@ public abstract class AbstractJournal
 
       return getProxy(ft, asyncFuture);
     }
-  };
+  }
 
-  /**
+  /*
    * Remove all commit records between the two provided keys.
    *
    * <p>This is called from the RWStore when it checks for deferredFrees against the

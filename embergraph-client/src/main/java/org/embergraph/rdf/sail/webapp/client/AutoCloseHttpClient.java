@@ -23,8 +23,8 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.embergraph.util.StackInfoReport;
 
-/**
- * A {@link HttpClient} that supports the {@link AutoCloseable} protocol and which will be
+/*
+* A {@link HttpClient} that supports the {@link AutoCloseable} protocol and which will be
  * transparently closed by the {@link RemoteRepositoryManager} if {@link
  * RemoteRepositoryManager#close()} is invoked.
  *
@@ -69,7 +69,7 @@ public class AutoCloseHttpClient extends HttpClient implements AutoCloseable {
     s_active.decrementAndGet();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Called from {@link RemoteRepositoryManager} when it is closed.

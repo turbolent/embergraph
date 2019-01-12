@@ -32,8 +32,8 @@ import org.embergraph.service.MetadataService;
 import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.Bytes;
 
-/**
- * Task builds an {@link IndexSegment} from the fused view of an index partition as of some
+/*
+* Task builds an {@link IndexSegment} from the fused view of an index partition as of some
  * historical timestamp and then atomically updates the view (aka a compacting merge).
  *
  * <p>Note: This task may be used after {@link IResourceManager#overflow()} in order to produce a
@@ -66,7 +66,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
     vmd.clearRef();
   }
 
-  /**
+  /*
    * Build an {@link IndexSegment} from the compacting merge of an index partition.
    *
    * @return The {@link BuildResult}.
@@ -88,8 +88,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
         if (resourceManager.isOverflowAllowed()) throw new IllegalStateException();
 
-        /*
-         * Build the index segment.
+      /*
+       * Build the index segment.
          *
          * Note: Since this is a compacting merge the view on the old
          * journal as of the last commit time will be fully captured by
@@ -111,8 +111,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
       } finally {
 
-        /*
-         * Release our hold on the source view - we only needed it when
+      /*
+       * Release our hold on the source view - we only needed it when
          * we did the index segment build.
          */
 
@@ -121,8 +121,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
       if (buildResult.builder.getCheckpoint().length >= resourceManager.nominalShardSize) {
 
-        /*
-         * If sumSegBytes exceeds the threshold, then do a split here.
+      /*
+       * If sumSegBytes exceeds the threshold, then do a split here.
          */
 
         // FIXME reconcile return type and enable post-merge split.
@@ -185,8 +185,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
       if (resourceManager.compactingMergeWithAfterAction) {
 
-        /*
-         * Consider possible after-actions now that the view is compact.
+      /*
+       * Consider possible after-actions now that the view is compact.
          * If any is selected, then it will be executed in the current
          * thread.
          */
@@ -204,8 +204,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
       if (buildResult != null) {
 
-        /*
-         * At this point the index segment was either incorporated into
+      /*
+       * At this point the index segment was either incorporated into
          * the new view in a restart safe manner or there was an error.
          * Either way, we now remove the index segment store's UUID from
          * the retentionSet so it will be subject to the release policy
@@ -218,7 +218,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
     }
   }
 
-  /**
+  /*
    * Now that the index partition is compact, decide if we will take any after action, such as
    * {move, join, split, tailSplit, scatterSplit, etc). All of these operations are much cheaper
    * while the index is compact which is why we do them here.
@@ -396,8 +396,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
         if (resourceManager.getDataServiceUUID().equals(targetDataServiceUUID)) {
 
-          /*
-           * JOIN underutilized index partition with its local
+        /*
+       * JOIN underutilized index partition with its local
            * rightSibling.
            *
            * Note: This is only joining two index partitions at a
@@ -425,8 +425,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
         } else {
 
-          /*
-           * MOVE underutilized index partition to data service
+        /*
+       * MOVE underutilized index partition to data service
            * hosting the right sibling.
            *
            * @todo The decision to join shards is asymmetric (an
@@ -527,7 +527,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
     return null;
   }
 
-  /**
+  /*
    * Return the {@link ILoadBalancerService} if it can be discovered.
    *
    * @return the {@link ILoadBalancerService} if it can be discovered and otherwise <code>null
@@ -559,7 +559,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
     return loadBalancerService;
   }
 
-  /**
+  /*
    * Figure out if this data service is considered to be highly utilized, in which case the DS
    * should shed some index partitions.
    *
@@ -634,7 +634,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
   }
 
-  /**
+  /*
    * Obtain the UUID of some relatively underutilized data service.
    *
    * <p>FIXME The LBS should interpret the excludedServiceUUID as the source service UUID and then
@@ -684,7 +684,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
     }
   }
 
-  /**
+  /*
    * Locate the right sibling for this index partition.
    *
    * <p>Note: default key/val serializers are used.
@@ -708,15 +708,14 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
     try {
 
       resultBuffer =
-          (ResultBuffer)
-              resourceManager
-                  .getFederation()
-                  .getMetadataService()
-                  .submit(
-                      TimestampUtility.asHistoricalRead(lastCommitTime),
-                      MetadataService.getMetadataIndexName(scaleOutIndexName),
-                      op)
-                  .get();
+          resourceManager
+              .getFederation()
+              .getMetadataService()
+              .submit(
+                  TimestampUtility.asHistoricalRead(lastCommitTime),
+                  MetadataService.getMetadataIndexName(scaleOutIndexName),
+                  op)
+              .get();
 
     } catch (Exception e) {
 
@@ -729,7 +728,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
     return (PartitionLocator) SerializerUtil.deserialize(resultBuffer.getValues().get(0));
   }
 
-  /**
+  /*
    * Identify the target data services for the new index partitions.
    *
    * <p>Note that when maxCount is ZERO (0) ALL joined data services will be reported.
@@ -766,8 +765,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
     return tmp.toArray(new UUID[tmp.size()]);
   }
 
-  //    /**
-  //     * A paranoia test that verifies that the definition of the view was in fact
+  //    /*
+//     * A paranoia test that verifies that the definition of the view was in fact
   //     * updated.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -781,8 +780,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
   //
   //        final private Event updateEvent;
   //
-  //        /**
-  //         * @param resourceManager
+  //        /*
+//         * @param resourceManager
   //         * @param concurrencyManager
   //         * @param resource
   //         * @param buildResult
@@ -816,8 +815,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
   //
   //        }
   //
-  //        /**
-  //         * Verify that the update was correctly registered on the mutable
+  //        /*
+//         * Verify that the update was correctly registered on the mutable
   //         * {@link BTree}.
   //         *
   //         * @return <code>null</code>
@@ -886,7 +885,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
   //
   //    }
 
-  /**
+  /*
    * The source view is pre-overflow (the last writes are on the old journal) while the current view
    * is post-overflow (reflects writes made since overflow). What we are doing is replacing the
    * pre-overflow history with an {@link IndexSegment}.
@@ -919,7 +918,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
     protected final BuildResult buildResult;
 
-    /**
+    /*
      * @param resourceManager
      * @param concurrencyManager
      * @param resource
@@ -952,7 +951,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
       this.updateEvent = updateEvent;
     }
 
-    /**
+    /*
      * Atomic update.
      *
      * @return <code>null</code>
@@ -970,8 +969,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
 
         if (INFO) log.info("Begin: name=" + getOnlyResource() + ", newSegment=" + segmentMetadata);
 
-        /*
-         * Open the unisolated B+Tree on the live journal that is
+      /*
+       * Open the unisolated B+Tree on the live journal that is
          * absorbing writes. We are going to update its index metadata.
          *
          * Note: I am using AbstractTask#getIndex(String name) so that
@@ -979,15 +978,15 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
          * BTree and cause it to be checkpointed if this task succeeds
          * normally.
          */
-        final ILocalBTreeView view = (ILocalBTreeView) getIndex(getOnlyResource());
+        final ILocalBTreeView view = getIndex(getOnlyResource());
 
         // make sure that this is the same scale-out index.
         assertSameIndex(indexUUID, view.getMutableBTree());
 
         if (view instanceof BTree) {
 
-          /*
-           * Note: there is an expectation that this is not a simple
+        /*
+       * Note: there is an expectation that this is not a simple
            * BTree because this the build task is supposed to be
            * invoked after an overflow event, and that event should
            * have re-defined the view to include the BTree on the new
@@ -1026,8 +1025,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
         // clone the current metadata record for the live index.
         final IndexMetadata indexMetadata = btree.getIndexMetadata().clone();
 
-        /*
-         * This is the index partition definition on the live index -
+      /*
+       * This is the index partition definition on the live index -
          * the one that will be replaced with a new view as the result
          * of this atomic update.
          */
@@ -1047,8 +1046,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
                 "Expecting live journal to be the first resource: " + currentResources);
           }
 
-          /*
-           * Note: I have commented out a bunch of pre-condition tests
+        /*
+       * Note: I have commented out a bunch of pre-condition tests
            * that are not valid for histories such as:
            *
            * history=create() register(0) split(0)
@@ -1147,8 +1146,8 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
                   + ", pmd="
                   + indexMetadata.getPartitionMetadata());
 
-        /*
-         * Verify that the btree recognizes that it needs to be
+      /*
+       * Verify that the btree recognizes that it needs to be
          * checkpointed.
          *
          * Note: The atomic commit point is when this task commits.

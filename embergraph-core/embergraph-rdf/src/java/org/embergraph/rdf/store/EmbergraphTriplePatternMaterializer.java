@@ -39,8 +39,8 @@ import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
-/**
- * Efficient batched, streaming resolution of triple patterns to statements spanned by those triple
+/*
+* Efficient batched, streaming resolution of triple patterns to statements spanned by those triple
  * patterns that are present in the data.
  *
  * <p>Note: If the input contains triple patterns that have a high cardinality in the data, then a
@@ -106,7 +106,7 @@ public class EmbergraphTriplePatternMaterializer
 
     if (helperService == null) throw new IllegalStateException();
 
-    /**
+    /*
      * The output will be at most sizeof(chunk) arrays. Each array will have one or more statements.
      * Any triple patterns that have no intersection in the data will be dropped and will not put
      * anything into this output queue.
@@ -130,14 +130,14 @@ public class EmbergraphTriplePatternMaterializer
        */
       for (EmbergraphTriplePattern stmt : chunk) {
 
-        /*
-         * Task runs subquery and cancels all subqueries in [tasks] if
+      /*
+       * Task runs subquery and cancels all subqueries in [tasks] if
          * it fails.
          */
         final FutureTask<Long> ft =
             new FutureTask<Long>(new ResolveTriplePatternTask(stmt, out)) {
-              /*
-               * Hook future to count down the latch when the task is
+            /*
+       * Hook future to count down the latch when the task is
                * done.
                */
               @Override
@@ -198,7 +198,7 @@ public class EmbergraphTriplePatternMaterializer
     }
   }
 
-  /**
+  /*
    * Resolve a triple pattern to the statements that it spans in the data.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -223,10 +223,9 @@ public class EmbergraphTriplePatternMaterializer
        * database.getAccessPath(s, p, o, c).iterator());
        */
       final IAccessPath<ISPO> ap =
-          (IAccessPath<ISPO>)
-              state.getAccessPath(
-                  stmt.getSubject(), stmt.getPredicate(),
-                  stmt.getObject(), stmt.getContext());
+          state.getAccessPath(
+              stmt.getSubject(), stmt.getPredicate(),
+              stmt.getObject(), stmt.getContext());
 
       //            if(ap.isFullyBoundForKey()) {
       //                /*
@@ -257,8 +256,8 @@ public class EmbergraphTriplePatternMaterializer
           //                                throw new AssertionError(Arrays.toString(a));
           //                        }
           //                    }
-          /**
-           * This will never fail for a ConcurrentLinkedQueue.
+        /*
+       * This will never fail for a ConcurrentLinkedQueue.
            *
            * @see <a href="http://trac.blazegraph.com/ticket/985" > Deadlock in
            *     EmbergraphTriplePatternMaterializer </a>

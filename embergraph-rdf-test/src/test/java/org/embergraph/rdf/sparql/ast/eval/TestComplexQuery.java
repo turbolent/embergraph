@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Data driven test suite for complex queries.
+/*
+* Data driven test suite for complex queries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -43,8 +43,8 @@ public class TestComplexQuery extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("aggregate-divide").runTest();
   }
 
-  //    /**
-  //     * TODO In order to verify the behavior of GROUP_CONCAT, the test harness
+  //    /*
+//     * TODO In order to verify the behavior of GROUP_CONCAT, the test harness
   //     * needs to verify that the actual solutions are some permutation of the
   //     * possible solutions. The <code>?phrase</code> binding can be computed from
   //     * the solutions in any order since there is no ORDER BY clause in the

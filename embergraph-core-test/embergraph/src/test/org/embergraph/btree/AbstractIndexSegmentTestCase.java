@@ -29,8 +29,8 @@ import org.embergraph.btree.IndexSegment.ImmutableLeafCursor;
 import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
 import org.embergraph.io.DirectBufferPool;
 
-/**
- * Adds some methods for testing an {@link IndexSegment} for consistency.
+/*
+* Adds some methods for testing an {@link IndexSegment} for consistency.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -45,7 +45,7 @@ public class AbstractIndexSegmentTestCase extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * apply dump() as a structural validation of the tree. note that we have to materialize the
    * leaves in the generated index segment since dump does not materialize a child from its Addr if
    * it is not already resident.
@@ -183,7 +183,7 @@ public class AbstractIndexSegmentTestCase extends AbstractBTreeTestCase {
     assertEquals("#leaves", nleaves, n);
   }
 
-  /**
+  /*
    * Test reverse leaf scan.
    *
    * <p>Note: the scan starts with the last leaf in the key order and then proceeds in reverse key
@@ -231,7 +231,7 @@ public class AbstractIndexSegmentTestCase extends AbstractBTreeTestCase {
     assertEquals("#leaves", nleaves, n);
   }
 
-  /**
+  /*
    * Compares the {@link IndexSegmentMultiBlockIterator} against the standard {@link BTree}
    * iterator.
    *

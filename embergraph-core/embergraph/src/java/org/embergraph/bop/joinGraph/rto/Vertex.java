@@ -39,8 +39,8 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IBindingSetAccessPath;
 import org.embergraph.striterator.IChunkedIterator;
 
-/**
- * A vertex of the join graph is an annotated relation (this corresponds to an {@link IPredicate}
+/*
+* A vertex of the join graph is an annotated relation (this corresponds to an {@link IPredicate}
  * with additional annotations to support the adaptive query optimization algorithm).
  *
  * <p>The unique identifier for a {@link Vertex} (within a given join graph) is the {@link
@@ -54,7 +54,7 @@ public class Vertex implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * The {@link IPredicate} associated with the {@link Vertex}. This basically provides the
    * information necessary to select an appropriate access path.
    */
@@ -82,7 +82,7 @@ public class Vertex implements Serializable {
     return this == o;
   }
 
-  /**
+  /*
    * The hash code is just the {@link BOp.Annotations#BOP_ID} of the associated {@link IPredicate}.
    */
   @Override
@@ -90,7 +90,7 @@ public class Vertex implements Serializable {
     return pred.getId();
   }
 
-  /**
+  /*
    * Take a sample of the vertex, updating {@link #sample} as a side-effect. If the sample is
    * already exact, then this is a NOP. If the vertex was already sampled to that limit, then this
    * is a NOP (you have to raise the limit to re-sample the vertex).
@@ -231,7 +231,7 @@ public class Vertex implements Serializable {
     return;
   }
 
-  /**
+  /*
    * Convert the source sample into an IBindingSet[].
    *
    * @param pred The {@link IPredicate}, which tells us the variables which need to become bound.

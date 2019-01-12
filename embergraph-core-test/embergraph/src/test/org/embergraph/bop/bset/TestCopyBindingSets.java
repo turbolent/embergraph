@@ -45,8 +45,8 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * Test suite for {@link CopyOp}.
+/*
+* Test suite for {@link CopyOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -113,7 +113,7 @@ public class TestCopyBindingSets extends TestCase2 {
     data = null;
   }
 
-  /**
+  /*
    * Unit test for copying the input to the output.
    *
    * @throws ExecutionException
@@ -127,9 +127,7 @@ public class TestCopyBindingSets extends TestCase2 {
         new CopyOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, bopId),
-                }));
+                new NV(BOp.Annotations.BOP_ID, bopId)));
 
     // the expected solutions (default sink).
     final IBindingSet[] expected = data.toArray(new IBindingSet[0]);
@@ -171,7 +169,7 @@ public class TestCopyBindingSets extends TestCase2 {
     assertEquals(1L, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Testing against {@link Tee} which is a specialized {@link CopyOp} which requires that the
    * alternate sink is also specified. Gives us code coverage of {@link Tee} as well.
    */
@@ -183,9 +181,7 @@ public class TestCopyBindingSets extends TestCase2 {
         new Tee(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, bopId), new NV(CopyOp.Annotations.ALT_SINK_REF, 2),
-                }));
+                new NV(BOp.Annotations.BOP_ID, bopId), new NV(CopyOp.Annotations.ALT_SINK_REF, 2)));
 
     // the expected solutions (default sink).
     final IBindingSet[] expected = data.toArray(new IBindingSet[0]);
@@ -230,7 +226,7 @@ public class TestCopyBindingSets extends TestCase2 {
     assertEquals(2L, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Unit test for copying the input to the output with an {@link IConstraint} .
    *
    * @throws ExecutionException
@@ -246,14 +242,12 @@ public class TestCopyBindingSets extends TestCase2 {
         new CopyOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, bopId),
-                  new NV(
-                      CopyOp.Annotations.CONSTRAINTS,
-                      new IConstraint[] {
-                        Constraint.wrap(new EQConstant(x, new Constant<String>("Mary")))
-                      }),
-                }));
+                new NV(BOp.Annotations.BOP_ID, bopId),
+                new NV(
+                    CopyOp.Annotations.CONSTRAINTS,
+                    new IConstraint[] {
+                      Constraint.wrap(new EQConstant(x, new Constant<String>("Mary")))
+                    })));
 
     // the expected solutions (default sink).
     final List<IBindingSet> expected = new LinkedList<IBindingSet>();
@@ -308,7 +302,7 @@ public class TestCopyBindingSets extends TestCase2 {
     assertEquals(1L, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read the source {@link IBindingSet}s.
    *
    * @param bsets The source binding sets.

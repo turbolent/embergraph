@@ -38,8 +38,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.concurrent.NonBlockingLockManagerWithNewDesign.LockFutureTask;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * basic unit tests.
+/*
+* basic unit tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -62,7 +62,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Waits 10ms once it acquires its locks.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -98,7 +98,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Dies once it acquires its locks by throwing {@link HorridTaskDeath}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -114,7 +114,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test startup and fast shutdown.
    *
    * @throws InterruptedException
@@ -146,7 +146,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test startup and normal shutdown.
    *
    * @throws InterruptedException
@@ -178,7 +178,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Create an {@link Executor}. The caller is responsible for shutting down the service.
    *
    * @return The {@link Executor}.
@@ -200,7 +200,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
         new DaemonThreadFactory(getClass().getName()));
   }
 
-  /**
+  /*
    * Test ability to submit a {@link Callable} to the service and verify that is reported at
    * ready(Runnable) and that we can cancel the {@link Future}.
    *
@@ -271,7 +271,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test ability to run a {@link Callable} on the service, get() the result, and then shutdown the
    * service.
    *
@@ -330,7 +330,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test ability to run a {@link Callable} on the service which throws an exception, get() the
    * result, and then shutdown the service.
    *
@@ -391,7 +391,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Succeeds if the task holds all of its declared locks.
    *
    * @param <R>
@@ -411,7 +411,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Succeeds if the task holds none of its declared locks.
    *
    * @param <R>
@@ -431,7 +431,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test ability to obtain a lock, run a {@link Callable} on the service, get() the result, and
    * then shutdown the service.
    *
@@ -488,7 +488,7 @@ public class TestNonBlockingLockManagerWithNewDesign extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test ability to obtain a lock, run a {@link Callable} on the service that releases its locks
    * during its computation, verify that the locks were released, get() the result, and then
    * shutdown the service.

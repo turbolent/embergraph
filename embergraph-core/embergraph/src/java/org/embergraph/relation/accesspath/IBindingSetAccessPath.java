@@ -28,8 +28,8 @@ import org.embergraph.bop.IElement;
 import org.embergraph.bop.join.BaseJoinStats;
 import org.embergraph.relation.IRelation;
 
-/**
- * An interface for access paths which visit solutions (versus {@link IElement} s).
+/*
+* An interface for access paths which visit solutions (versus {@link IElement} s).
  *
  * @param <R> The generic type of the [R]elation elements of the {@link IRelation}.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -37,7 +37,7 @@ import org.embergraph.relation.IRelation;
  */
 public interface IBindingSetAccessPath<R> extends IAbstractAccessPath<R> {
 
-  /**
+  /*
    * Return an iterator which will visit the solutions drawn from the access path with a limit on
    * the number of solutions drawn.
    *

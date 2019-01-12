@@ -36,8 +36,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/**
- * An abstract implementation of a {@link BitVector}.
+/*
+* An abstract implementation of a {@link BitVector}.
  *
  * <p>This abstract implementation provides almost all methods: you have to provide just {@link
  * it.unimi.dsi.fastutil.booleans.BooleanList#getBoolean(int)} and {@link java.util.List#size()}. No
@@ -199,7 +199,7 @@ public abstract class AbstractBitVector extends AbstractBooleanList implements B
     BitVectors.ensureFromTo(length(), from, to);
     final long length = to - from;
     final long l = length - length % Long.SIZE;
-    final long bits[] = new long[(int) ((length + Long.SIZE - 1) / Long.SIZE)];
+    final long[] bits = new long[(int) ((length + Long.SIZE - 1) / Long.SIZE)];
     int i;
     for (i = 0; i < l; i += Long.SIZE)
       bits[i / Long.SIZE] = getLong(from + i, from + i + Long.SIZE);
@@ -207,7 +207,7 @@ public abstract class AbstractBitVector extends AbstractBooleanList implements B
     return LongArrayBitVector.wrap(bits, length);
   }
 
-  /**
+  /*
    * Returns an instance of {@link LongArrayBitVector} containing a copy of this bit vector.
    *
    * @return an instance of {@link LongArrayBitVector} containing a copy of this bit vector.
@@ -355,7 +355,7 @@ public abstract class AbstractBitVector extends AbstractBooleanList implements B
     return bits;
   }
 
-  /**
+  /*
    * An integer sorted set view of a bit vector.
    *
    * <p>This class implements in the obvious way an integer set view of a bit vector. The vector is
@@ -491,7 +491,7 @@ public abstract class AbstractBitVector extends AbstractBooleanList implements B
     }
   }
 
-  /**
+  /*
    * A list-of-integers view of a bit vector.
    *
    * <p>This class implements in the obvious way a view of a bit vector as a list of integers of
@@ -673,7 +673,7 @@ public abstract class AbstractBitVector extends AbstractBooleanList implements B
     return Long.signum(length() - v.length());
   }
 
-  /**
+  /*
    * Returns a string representation of this vector.
    *
    * <p>Note that this string representation shows the bit of index 0 at the leftmost position.

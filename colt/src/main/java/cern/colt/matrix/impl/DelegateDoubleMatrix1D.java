@@ -10,8 +10,8 @@ package cern.colt.matrix.impl;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * 1-d matrix holding <tt>double</tt> elements; either a view wrapping another 2-d matrix and
+/*
+* 1-d matrix holding <tt>double</tt> elements; either a view wrapping another 2-d matrix and
  * therefore delegating calls to it.
  *
  * @author wolfgang.hoschek@cern.ch
@@ -34,7 +34,7 @@ class DelegateDoubleMatrix1D extends WrapperDoubleMatrix1D {
     this.row = row;
     this.content = newContent;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>index</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -47,7 +47,7 @@ class DelegateDoubleMatrix1D extends WrapperDoubleMatrix1D {
   public double getQuick(int index) {
     return content.getQuick(row, index);
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified size. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix1D</tt> the new matrix must also be of type <tt>DenseDoubleMatrix1D</tt>,
@@ -61,7 +61,7 @@ class DelegateDoubleMatrix1D extends WrapperDoubleMatrix1D {
   public DoubleMatrix1D like(int size) {
     return content.like1D(size);
   }
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix1D</tt> the new matrix must be of type <tt>DenseDoubleMatrix2D</tt>, if
@@ -75,7 +75,7 @@ class DelegateDoubleMatrix1D extends WrapperDoubleMatrix1D {
   public DoubleMatrix2D like2D(int rows, int columns) {
     return content.like(rows, columns);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>index</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any

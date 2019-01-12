@@ -31,8 +31,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.stream.Stream;
 import org.embergraph.stream.Stream.StreamIndexMetadata;
 
-/**
- * A checkpoint record is written each time the btree is flushed to the store.
+/*
+* A checkpoint record is written each time the btree is flushed to the store.
  *
  * <p>Note: In order to create a btree use {@link BTree#create(IRawStore, IndexMetadata)} to write
  * the initial {@link IndexMetadata} record and the initial check point on the store. It will then
@@ -61,7 +61,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
 
   private long recordVersion; // #of node or leaf records written to date.
 
-  /**
+  /*
    * Added in {@link #VERSION1}. This is a short field allowing for 65536 different possible index
    * types.
    */
@@ -102,7 +102,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
     return addrBloomFilter;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see <a href="http://trac.bigdata.com/ticket/1229" > DumpJournal fails on non-BTree classes
@@ -120,7 +120,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
     return height;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see <a href="http://trac.bigdata.com/ticket/1229" > DumpJournal fails on non-BTree classes
@@ -206,7 +206,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
   /** De-serialization ctor. */
   public Checkpoint() {}
 
-  /**
+  /*
    * Create the first checkpoint record for a new {@link BTree} from a {@link IndexMetadata} record.
    * The root of the {@link BTree} will NOT exist (its address will be <code>0L</code>). Once
    * written on the store the {@link Checkpoint} record may be used to obtain a corresponding
@@ -230,7 +230,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         );
   }
 
-  /**
+  /*
    * Create the first checkpoint record for an existing {@link BTree} when it is propagated on
    * overflow onto a new backing {@link IRawStore}. The {@link #counter} is propagated to the new
    * {@link Checkpoint} but otherwise the initialization is as if for an empty {@link BTree}.
@@ -254,7 +254,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         metadata.getIndexType());
   }
 
-  /**
+  /*
    * Creates a {@link Checkpoint} record from a {@link BTree}.
    *
    * <p>Pre-conditions:
@@ -277,8 +277,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
 
     this(
         btree.getMetadataAddr(),
-        /*
-         * root node or leaf.
+      /*
+       * root node or leaf.
          *
          * Note: if the [root] reference is not defined then we use the
          * address in the last checkpoint record. if that is 0L then
@@ -288,8 +288,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         btree.getRootAddr(),
         //                (btree.root == null ? btree.getCheckpoint().getRootAddr()
         //                        : btree.root.getIdentity()),
-        /*
-         * optional bloom filter.
+      /*
+       * optional bloom filter.
          *
          * Note: if the [bloomFilter] reference is not defined then we
          * use the address in the last checkpoint record. if that is 0L
@@ -305,8 +305,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         btree.nnodes,
         btree.nleaves,
         btree.nentries,
-        /*
-         * Note: This MUST access the raw counter in scale-out or the
+      /*
+       * Note: This MUST access the raw counter in scale-out or the
          * logic in PartitionedCounter.wrap(long) will observe the
          * partitionId in the high word and throw an exception. The
          * whole point of that check in PartitionedCounter.wrap(long) is
@@ -319,7 +319,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         );
   }
 
-  /**
+  /*
    * Creates a {@link Checkpoint} record from an {@link HTree}.
    *
    * <p>Pre-conditions:
@@ -342,8 +342,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
 
     this(
         htree.getMetadataAddr(),
-        /*
-         * root node or leaf.
+      /*
+       * root node or leaf.
          *
          * Note: if the [root] reference is not defined then we use the
          * address in the last checkpoint record. if that is 0L then
@@ -351,8 +351,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
          * demand.
          */
         htree.getRootAddr(),
-        /*
-         * optional bloom filter.
+      /*
+       * optional bloom filter.
          *
          * Note: if the [bloomFilter] reference is not defined then we
          * use the address in the last checkpoint record. if that is 0L
@@ -376,7 +376,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         );
   }
 
-  /**
+  /*
    * Creates a {@link Checkpoint} record from an {@link HTree}.
    *
    * <p>Pre-conditions:
@@ -399,8 +399,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
 
     this(
         stream.getMetadataAddr(),
-        /*
-         * root node or leaf.
+      /*
+       * root node or leaf.
          *
          * Note: if the [root] reference is not defined then we use the
          * address in the last checkpoint record. if that is 0L then
@@ -408,8 +408,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
          * demand.
          */
         stream.getRootAddr(),
-        /*
-         * optional bloom filter.
+      /*
+       * optional bloom filter.
          *
          * Note: if the [bloomFilter] reference is not defined then we
          * use the address in the last checkpoint record. if that is 0L
@@ -480,7 +480,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
     this.indexType = indexType;
   }
 
-  /**
+  /*
    * Initial serialization version.
    *
    * <p>Note: The fields of the {@link Checkpoint} record use fixed length representations in order
@@ -491,13 +491,13 @@ public class Checkpoint implements ICheckpoint, Externalizable {
    */
   private static final transient int VERSION0 = 0x0;
 
-  /**
+  /*
    * Adds the {@link #indexType} field and the {@link #globalDepth} field, which is present only for
    * {@link IndexTypeEnum#HTree}.
    */
   private static final transient int VERSION1 = 0x1;
 
-  /**
+  /*
    * Adds and/or modifies the following fields.
    *
    * <dl>
@@ -525,7 +525,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
   /** The current version. */
   private static final transient int currentVersion = VERSION2;
 
-  /**
+  /*
    * Write the {@link Checkpoint} record on the store, setting {@link #addrCheckpoint} as a side
    * effect.
    *
@@ -544,7 +544,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
     addrCheckpoint = store.write(ByteBuffer.wrap(data));
   }
 
-  /**
+  /*
    * Read a {@link Checkpoint} record from a store.
    *
    * @param store The store.
@@ -697,7 +697,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
     }
   }
 
-  /**
+  /*
    * Utility method reads the {@link Checkpoint} record and then loads and returns a view of the
    * associated read-only persistence capable data structure.
    *
@@ -750,7 +750,7 @@ public class Checkpoint implements ICheckpoint, Externalizable {
     return ndx;
   }
 
-  /**
+  /*
    * Generic method to create a persistence capable data structure (GIST compatible, core
    * implementation).
    *
@@ -769,8 +769,8 @@ public class Checkpoint implements ICheckpoint, Externalizable {
         ndx = HTree.create(store, (HTreeIndexMetadata) metadata);
         break;
       case Stream:
-        /*
-         * FIXME GIST : This is not setting the SolutionSetStream class
+      /*
+       * FIXME GIST : This is not setting the SolutionSetStream class
          * since Stream.create() is being invoked rather than
          * SolutionSetStream.create()
          *

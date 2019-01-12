@@ -25,8 +25,8 @@ import org.embergraph.rdf.spo.SPORelation;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.relation.AbstractRelation;
 
-/**
- * This service tracks KB updates via an {@link IChangeLog} and is responsible for maintaining an
+/*
+* This service tracks KB updates via an {@link IChangeLog} and is responsible for maintaining an
  * ordered index over the assertions that have been added to or removed from a KB instance.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">History Service</a>
@@ -59,7 +59,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
     return serviceOptions;
   }
 
-  /**
+  /*
    * TODO Implement: Query should support an index scan of a date range with optional filters on the
    * (s,p,o,c) and add/remove flags. It might make more sense to index in (POS) order rather than
    * SPO order so we can more efficiently scan a specific predicate within some date range using an
@@ -95,7 +95,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Register an {@link IChangeLog} listener that will manage the maintenance of the describe cache.
    */
   @Override
@@ -113,7 +113,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Handles maintenance of the history index.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -126,7 +126,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
     private final EmbergraphSailConnection conn;
     /** The KB instance. */
     private final AbstractTripleStore tripleStore;
-    /**
+    /*
      * The head of the index is pruned on update to remove entries that are older than this age
      * (milliseconds).
      */
@@ -168,7 +168,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
       }
     }
 
-    /**
+    /*
      * Return the revision time that will be used for all changes written onto the history index by
      * this {@link IChangeLog} listener.
      *
@@ -251,7 +251,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
       }
     }
 
-    /**
+    /*
      * Return the pre-existing history index.
      *
      * @param tripleStore The KB.
@@ -271,7 +271,7 @@ public class HistoryServiceFactory extends CustomServiceFactoryBase {
       return ndx;
     }
 
-    /**
+    /*
      * Prune the head of the history index.
      *
      * <p>Note: Either this should be done as the first action or you must make a note of the

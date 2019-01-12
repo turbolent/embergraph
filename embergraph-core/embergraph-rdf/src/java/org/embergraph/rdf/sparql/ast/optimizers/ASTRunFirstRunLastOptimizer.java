@@ -40,8 +40,8 @@ import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 
-/**
- * This optimizer simply puts each type of {@link IGroupMemberNode} within a {@link JoinGroupNode}
+/*
+* This optimizer simply puts each type of {@link IGroupMemberNode} within a {@link JoinGroupNode}
  * in the right order w.r.t. to the other types.
  *
  * <p>Basically the ASTRunFirstRunLastOptimizer will look for IJoinNodes that have a query hint of
@@ -110,7 +110,7 @@ public class ASTRunFirstRunLastOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryNode, bindingSets);
   }
 
-  /**
+  /*
    * 1. Look for multiple run first or run last joins and throw an exception.
    *
    * <p>2. Find the run first join if it exists. Make sure it is not optional. Put it first.
@@ -172,7 +172,7 @@ public class ASTRunFirstRunLastOptimizer implements IASTOptimizer {
 
         joinGroup.removeChild(first);
 
-        joinGroup.addArg(firstJoinIndex, (BOp) first);
+        joinGroup.addArg(firstJoinIndex, first);
       }
 
       if (last != null) {
@@ -187,7 +187,7 @@ public class ASTRunFirstRunLastOptimizer implements IASTOptimizer {
 
         joinGroup.removeChild(last);
 
-        joinGroup.addArg(lastJoinIndex, (BOp) last);
+        joinGroup.addArg(lastJoinIndex, last);
       }
     }
 

@@ -27,8 +27,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.RawStoreDelegate;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Unit tests for a B+Tree with raw record support enabled (this is where a large <code>byte[]
+/*
+* Unit tests for a B+Tree with raw record support enabled (this is where a large <code>byte[]
  * </code> value is written directly onto the backing store rather than being stored within the
  * leaf).
  *
@@ -42,7 +42,7 @@ public class TestRawRecords extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for the insert of a large <code>byte[]</code> value into an index such that it is
    * represented as a raw record on the backing store rather than inline within the B+Tree leaf.
    */
@@ -83,7 +83,7 @@ public class TestRawRecords extends AbstractBTreeTestCase {
     TestCase3.assertEquals(val, actual);
   }
 
-  /**
+  /*
    * Unit test in which we update a small value (inline within the leaf) with a large value (stored
    * as a raw record).
    */
@@ -138,7 +138,7 @@ public class TestRawRecords extends AbstractBTreeTestCase {
     TestCase3.assertEquals(newval, actual);
   }
 
-  /**
+  /*
    * Unit test in which we update a large value (represented directly on the backing store) with a
    * small value (inline within the leaf). The test verifies that the original large value is
    * deleted.
@@ -201,7 +201,7 @@ public class TestRawRecords extends AbstractBTreeTestCase {
     assertEquals(IRawStore.NULL, root.getRawRecord(0 /* entryIndex */));
   }
 
-  /**
+  /*
    * Unit test in which we update a large value (represented directly on the backing store) with
    * another large value (also represented directly on the store). The test verifies that the
    * original large value is deleted.
@@ -273,7 +273,7 @@ public class TestRawRecords extends AbstractBTreeTestCase {
     TestCase3.assertEquals(newval, actual2);
   }
 
-  /**
+  /*
    * Unit test in which we insert a large value (represented directly on the backing store) and then
    * delete the key under which that value was stored. The test verifies that the original large
    * value is deleted.
@@ -329,7 +329,7 @@ public class TestRawRecords extends AbstractBTreeTestCase {
     assertEquals(val, oldval);
   }
 
-  /**
+  /*
    * Helper class is used to watch for deletes of raw records from the backing store.
    *
    * @author thompsonbry

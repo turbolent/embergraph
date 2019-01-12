@@ -15,8 +15,8 @@ import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.resources.StoreManager.ManagedJournal;
 
-/**
- * Class encapsulates a bunch of metadata used to make decisions about how to handle an index
+/*
+* Class encapsulates a bunch of metadata used to make decisions about how to handle an index
  * partition during asynchronous overflow.
  *
  * <p>Note: This class uses {@link SoftReference}s to hold onto the mutable {@link BTree}. The
@@ -41,7 +41,7 @@ class BTreeMetadata {
   /** Name of the local index (the index partition name). */
   public final String name;
 
-  /**
+  /*
    * A {@link SoftReference} is used to cache the {@link BTree} reference since we really want to
    * hold onto the reference until we get around to finishing overflow processing for this index
    * partition. However, you SHOULD clear the reference using {@link #clearRef()} as soon as you
@@ -49,7 +49,7 @@ class BTreeMetadata {
    */
   private volatile SoftReference<BTree> ref;
 
-  /**
+  /*
    * Open the mutable {@link BTree}. The {@link BTree} reference is cached by a {@link
    * SoftReference}. If the reference has been cleared then the {@link BTree} is re-opened from the
    * backing journal.
@@ -64,8 +64,8 @@ class BTreeMetadata {
       synchronized (this) {
         btree = ref == null ? null : ref.get();
 
-        /*
-         * The mutable btree on the journal associated with the
+      /*
+       * The mutable btree on the journal associated with the
          * commitTime, not the full view of that index.
          */
 
@@ -109,28 +109,28 @@ class BTreeMetadata {
   /** The sum of the size on disk across the index segments in the view. */
   public final long sumSegBytes;
 
-  /**
+  /*
    * These constants are used to compute the {@link #mergePriority}.
    *
    * <p>See src/architecture/mergePriority.xls.
    */
   private final int A = 3, B = 1; // , C = 10;
 
-  /**
+  /*
    * This is the inverse of the {@link #mergePriority}. If the merge priority is ZERO (0), then this
    * is 1.0 (which is greater than the build priority which associated with any index partition with
    * a non-zero merge priority).
    */
   public final double buildPriority;
 
-  /**
+  /*
    * The computed merge priority is based on the complexity of the view. This is ZERO (0) if there
    * is no reason to perform a merge.
    */
   public final double mergePriority;
 
-  //    /**
-  //     * The split priority is based solely on {@link #sumSegBytes} (it is the
+  //    /*
+//     * The split priority is based solely on {@link #sumSegBytes} (it is the
   //     * ratio of that value to the nominal shard size) and is ZERO (0) until
   //     * {@link #sumSegBytes} is GTE the {@link OverflowManager#nominalShardSize}.
   //     *
@@ -138,7 +138,7 @@ class BTreeMetadata {
   //     */
   //    public final double splitPriority;
 
-  /**
+  /*
    * <code>true</code> iff this index partition meets the criteria for a mandatory compacting merge
    * (too many journals in the view, too many index segments in the view, or too many sources in the
    * view).
@@ -150,7 +150,7 @@ class BTreeMetadata {
    */
   public final boolean mandatoryMerge;
 
-  /**
+  /*
    * <code>true</code> iff there are two sources in the view and the second source is an {@link
    * IndexSegment} (the first will be the {@link BTree} on some {@link ManagedJournal}).
    */
@@ -168,7 +168,7 @@ class BTreeMetadata {
   /** The percentage of leaf splits which occurred at or near the tail of the {@link BTree}. */
   public final double percentTailSplits;
 
-  /**
+  /*
    * A package private lock used to ensure that decisions concerning which index partition operation
    * (build, merge, split, etc) to execute are serialized.
    *
@@ -176,7 +176,7 @@ class BTreeMetadata {
    */
   final ReentrantLock lock = new ReentrantLock();
 
-  /**
+  /*
    * The action taken and <code>null</code> if no action has been taken for this local index.
    *
    * <p>Note: An {@link AtomicReference} is used to permit inspection of the value without holding
@@ -186,7 +186,7 @@ class BTreeMetadata {
   private final AtomicReference<OverflowActionEnum> actionRef =
       new AtomicReference<OverflowActionEnum>();
 
-  /**
+  /*
    * The action taken and <code>null</code> if no action has been taken for this local index
    * (non-blocking).
    *
@@ -199,7 +199,7 @@ class BTreeMetadata {
     return actionRef.get();
   }
 
-  /**
+  /*
    * Set the action to be taken.
    *
    * @param action The action.
@@ -221,7 +221,7 @@ class BTreeMetadata {
     actionRef.set(action);
   }
 
-  /**
+  /*
    * Used to force clear a {@link OverflowActionEnum#Copy} action when we will force a compacting
    * merge. This allows us to do compacting merges on shard views which would otherwise simply be
    * copied onto the new journal.
@@ -238,7 +238,7 @@ class BTreeMetadata {
     }
   }
 
-  /**
+  /*
    * @param resourceManager Used to (re-)open the {@link BTree} as necessary.
    * @param commitTime The commit time corresponding to the desired commit point.
    * @param name The name of the {@link BTree}.
@@ -285,8 +285,8 @@ class BTreeMetadata {
           sourceJournalCount++;
         } else {
           sourceSegmentCount++;
-          /*
-           * Note: This opens the backing segment store in order to
+        /*
+       * Note: This opens the backing segment store in order to
            * determine its size on the disk. This is a fairly light
            * weight operation (the nodes region is not read, just the
            * checkpoint record and the IndexMetadata record).
@@ -416,7 +416,7 @@ class BTreeMetadata {
     return sb.toString();
   }
 
-  /**
+  /*
    * Permits extension of {@link #toString()} in subclass.
    *
    * @param sb

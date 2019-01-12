@@ -28,8 +28,8 @@ import org.openrdf.model.URI;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.helpers.RDFParserBase;
 
-/**
- * The LOAD operation reads an RDF document from a IRI and inserts its triples into the specified
+/*
+* The LOAD operation reads an RDF document from a IRI and inserts its triples into the specified
  * graph in the Graph Store.
  *
  * <pre>
@@ -44,7 +44,7 @@ public class LoadGraph extends GraphUpdate {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Adds options to control the behavior of the {@link RDFParser}.
    *
    * @see RDFParserOptions
@@ -74,7 +74,7 @@ public class LoadGraph extends GraphUpdate {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */
@@ -83,7 +83,7 @@ public class LoadGraph extends GraphUpdate {
     super(args, anns);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: For {@link LoadGraph}, this is the {@link URI} of the external resource to be loaded.

@@ -41,8 +41,8 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.impl.LiteralImpl;
 
-/**
- * Unit tests for {@link GROUP_CONCAT}
+/*
+* Unit tests for {@link GROUP_CONCAT}
  *
  * <p>Note: Several of the tests exercise the {@link GROUP_CONCAT.Annotations#SEPARATOR} annotation.
  *
@@ -88,7 +88,7 @@ public class TestGROUP_CONCAT extends TestCase2 {
         new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
     price9.get().setValue(f.createLiteral(9));
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -99,20 +99,20 @@ public class TestGROUP_CONCAT extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     final GROUP_CONCAT op = new GROUP_CONCAT(false /* distinct */, lprice, namespace, " ");
@@ -161,7 +161,7 @@ public class TestGROUP_CONCAT extends TestCase2 {
         new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
     price9.get().setValue(f.createLiteral(9));
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -172,32 +172,30 @@ public class TestGROUP_CONCAT extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     final GROUP_CONCAT op =
         new GROUP_CONCAT(
             new BOp[] {lprice},
             NV.asMap(
-                new NV[] {
-                  new NV(GROUP_CONCAT.Annotations.DISTINCT, false),
-                  new NV(GROUP_CONCAT.Annotations.NAMESPACE, namespace),
-                  new NV(GROUP_CONCAT.Annotations.SEPARATOR, "."),
-                  new NV(GROUP_CONCAT.Annotations.VALUE_LIMIT, 3),
-                }));
+                new NV(GROUP_CONCAT.Annotations.DISTINCT, false),
+                new NV(GROUP_CONCAT.Annotations.NAMESPACE, namespace),
+                new NV(GROUP_CONCAT.Annotations.SEPARATOR, "."),
+                new NV(GROUP_CONCAT.Annotations.VALUE_LIMIT, 3)));
     assertFalse(op.isDistinct());
     assertFalse(op.isWildcard());
 
@@ -241,7 +239,7 @@ public class TestGROUP_CONCAT extends TestCase2 {
         new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
     price9.get().setValue(f.createLiteral(9));
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -252,32 +250,30 @@ public class TestGROUP_CONCAT extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book2, price5}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book2, price5}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     final GROUP_CONCAT op =
         new GROUP_CONCAT(
             new BOp[] {lprice},
             NV.asMap(
-                new NV[] {
-                  new NV(GROUP_CONCAT.Annotations.DISTINCT, false),
-                  new NV(GROUP_CONCAT.Annotations.NAMESPACE, namespace),
-                  new NV(GROUP_CONCAT.Annotations.SEPARATOR, "."),
-                  new NV(GROUP_CONCAT.Annotations.CHARACTER_LIMIT, 3),
-                }));
+                new NV(GROUP_CONCAT.Annotations.DISTINCT, false),
+                new NV(GROUP_CONCAT.Annotations.NAMESPACE, namespace),
+                new NV(GROUP_CONCAT.Annotations.SEPARATOR, "."),
+                new NV(GROUP_CONCAT.Annotations.CHARACTER_LIMIT, 3)));
     assertFalse(op.isDistinct());
     assertFalse(op.isWildcard());
 
@@ -329,7 +325,7 @@ public class TestGROUP_CONCAT extends TestCase2 {
           new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
       price9.get().setValue(f.createLiteral(9));
 
-      /**
+      /*
        * The test data:
        *
        * <pre>
@@ -340,28 +336,28 @@ public class TestGROUP_CONCAT extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book1, price9})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book2, price5})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth2, book3, price7})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org2, auth3, book4, price7}))
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book1, price9})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book2, price5})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth2, book3, price7})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org2, auth3, book4, price7}))
           };
 
       // GROUP_CONCAT(STR(lprice+1))
@@ -431,7 +427,7 @@ public class TestGROUP_CONCAT extends TestCase2 {
           new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
       price9.get().setValue(f.createLiteral(9));
 
-      /**
+      /*
        * The test data:
        *
        * <pre>
@@ -442,28 +438,28 @@ public class TestGROUP_CONCAT extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet data[] =
-          new IBindingSet[] {
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book1, price9})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth1, book2, price5})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org1, auth2, book3, price7})),
-            new ContextBindingSet(
-                context,
-                new ListBindingSet(
-                    new IVariable<?>[] {org, auth, book, lprice},
-                    new IConstant[] {org2, auth3, book4, price7}))
+      final IBindingSet[] data =
+          new IBindingSet[]{
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book1, price9})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth1, book2, price5})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org1, auth2, book3, price7})),
+              new ContextBindingSet(
+                  context,
+                  new ListBindingSet(
+                      new IVariable<?>[]{org, auth, book, lprice},
+                      new IConstant[]{org2, auth3, book4, price7}))
           };
 
       // GROUP_CONCAT(lprice+1)
@@ -523,7 +519,7 @@ public class TestGROUP_CONCAT extends TestCase2 {
         new Constant<XSDNumericIV<EmbergraphLiteral>>(new XSDNumericIV<EmbergraphLiteral>(9));
     price9.get().setValue(f.createLiteral(9));
 
-    /**
+    /*
      * The test data:
      *
      * <pre>
@@ -534,24 +530,24 @@ public class TestGROUP_CONCAT extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet data[] =
-        new IBindingSet[] {
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth1, book1, price9}),
-          new ListBindingSet(
-              new IVariable<?>[] {
-                org, auth, book,
-              },
-              new IConstant[] {
-                org1, auth1, book2,
-              }),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org1, auth2, book3, price7}),
-          new ListBindingSet(
-              new IVariable<?>[] {org, auth, book, lprice},
-              new IConstant[] {org2, auth3, book4, price7})
+    final IBindingSet[] data =
+        new IBindingSet[]{
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth1, book1, price9}),
+            new ListBindingSet(
+                new IVariable<?>[]{
+                    org, auth, book,
+                },
+                new IConstant[]{
+                    org1, auth1, book2,
+                }),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org1, auth2, book3, price7}),
+            new ListBindingSet(
+                new IVariable<?>[]{org, auth, book, lprice},
+                new IConstant[]{org2, auth3, book4, price7})
         };
 
     // GROUP_CONCAT(lprice)
@@ -602,8 +598,8 @@ public class TestGROUP_CONCAT extends TestCase2 {
   // Constant<XSDNumericIV<EmbergraphLiteral>>(
   //                new XSDNumericIV<EmbergraphLiteral>(9));
   //
-  //        /**
-  //         * The test data:
+  //        /*
+//         * The test data:
   //         *
   //         * <pre>
   //         * ?org  ?auth  ?book  ?lprice

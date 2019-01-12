@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast.hints;
 import org.embergraph.bop.BufferAnnotations;
 import org.embergraph.bop.IBindingSet;
 
-/**
- * Sets the capacity of the {@link IBindingSet}[]s used to accumulate a chunk of {@link
+/*
+* Sets the capacity of the {@link IBindingSet}[]s used to accumulate a chunk of {@link
  * IBindingSet}s (default {@value BufferAnnotations#DEFAULT_CHUNK_CAPACITY}). Partial chunks may be
  * automatically combined into full chunks.
  *

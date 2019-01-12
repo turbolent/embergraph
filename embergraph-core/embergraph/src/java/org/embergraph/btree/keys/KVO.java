@@ -27,8 +27,8 @@ import java.util.Arrays;
 import org.embergraph.service.ndx.pipeline.KVOC;
 import org.embergraph.util.BytesUtil;
 
-/**
- * A key-value-object tuple. Comparison places the {@link KVO} tuples into an order based on the
+/*
+* A key-value-object tuple. Comparison places the {@link KVO} tuples into an order based on the
  * interpretation of their {@link #key}s as unsigned byte[]s. This may be used to perform a
  * correlated sort of keys and values. This class may also be used to pair an optional unserialized
  * representation of the value {@link Object} with the unsigned byte[] key and the serialized byte[]
@@ -49,7 +49,7 @@ public class KVO<O> implements Comparable<KVO<O>> {
   /** The unserialized object value (optional, even when {@link #val} is given). */
   public final O obj;
 
-  /**
+  /*
    * @param key The unsigned byte[] key (required).
    * @param val The serialized byte[] value (optional).
    */
@@ -58,7 +58,7 @@ public class KVO<O> implements Comparable<KVO<O>> {
     this(key, val, null /* obj */);
   }
 
-  /**
+  /*
    * @param key The unsigned byte[] key (required).
    * @param val The serialized byte[] value (optional).
    * @param obj The unserialized object value (optional, even when <i>val</i> is given).
@@ -74,7 +74,7 @@ public class KVO<O> implements Comparable<KVO<O>> {
     this.obj = obj;
   }
 
-  /**
+  /*
    * Method is invoked when the tuple represented by the {@link KVO} has been written onto the index
    * by an <em>asynchronous</em> write operation. {@link KVOC} overrides this method to support
    * notification when all tuples generated within some scope have been written onto the database.
@@ -98,7 +98,7 @@ public class KVO<O> implements Comparable<KVO<O>> {
         + "}";
   }
 
-  /**
+  /*
    * Return a dense array of the keys in a {@link KVO}[] chunk. The keys are copied by reference,
    * not by value.
    *
@@ -119,7 +119,7 @@ public class KVO<O> implements Comparable<KVO<O>> {
     return keys;
   }
 
-  /**
+  /*
    * Return a dense array of the values in a {@link KVO}[] chunk. The values are copied by
    * reference, not by value.
    *
@@ -140,7 +140,7 @@ public class KVO<O> implements Comparable<KVO<O>> {
     return vals;
   }
 
-  /**
+  /*
    * Return a dense array. If the array is already dense, then the array reference is returned. This
    * is not a deep copy.
    *

@@ -10,8 +10,8 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.openrdf.query.Dataset;
 
-/**
- * AST node models a SPARQL default graph and/or named graph data set.
+/*
+* AST node models a SPARQL default graph and/or named graph data set.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public class DatasetNode extends QueryNodeBase {
     super(args, anns);
   }
 
-  /**
+  /*
    * @param ivs The {@link IV}s.
    * @param update <code>true</code> iff this is a SPARQL UPDATE./
    * @return
@@ -73,10 +73,10 @@ public class DatasetNode extends QueryNodeBase {
     //        if (ivs.isEmpty())
     //            return null;
 
-    return new DataSetSummary((Set) (ivs == null ? Collections.emptySet() : ivs), update);
+    return new DataSetSummary((ivs == null ? Collections.emptySet() : ivs), update);
   }
 
-  /**
+  /*
    * @param defaultGraphs
    * @param namedGraphs
    * @param update <code>true</code> iff this is a SPARQL update.
@@ -115,7 +115,7 @@ public class DatasetNode extends QueryNodeBase {
         update);
   }
 
-  /**
+  /*
    * Core constructor implementation.
    *
    * @param defaultGraphs The list of default graphs (optional). When not specified, all graphs will

@@ -28,8 +28,8 @@ import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.spo.ISPO;
 
-/**
- * Abstract base class for the <code>INSERT DATA</code> and <code>DELETE DATA</code> operations.
+/*
+* Abstract base class for the <code>INSERT DATA</code> and <code>DELETE DATA</code> operations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -40,7 +40,7 @@ public abstract class AbstractGraphDataUpdate extends GraphUpdate {
 
   interface Annotations extends GraphUpdate.Annotations {
 
-    /**
+    /*
      * The {@link EmbergraphStatement}[] data.
      *
      * <p>TODO The strong typing as a {@link EmbergraphStatement}[] was introduced to support of the
@@ -67,7 +67,7 @@ public abstract class AbstractGraphDataUpdate extends GraphUpdate {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */
@@ -111,8 +111,8 @@ public abstract class AbstractGraphDataUpdate extends GraphUpdate {
 
         if (i >= 10) {
 
-          /**
-           * Truncate the description.
+        /*
+       * Truncate the description.
            *
            * <p>Note: People sometimes push a LOT of data through with a DeleteData or InsertData
            * operation. This truncates the description to avoid problems with log files or the echo

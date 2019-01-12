@@ -28,8 +28,8 @@ import junit.framework.TestCase;
 import junit.framework.TestCase2;
 import org.embergraph.journal.IIndexManager;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> extends TestCase2 {
@@ -81,13 +81,13 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
 
   protected abstract S getIndexManager();
 
-  //    /**
-  //     * Open/create an {@link IIndexManager} using the given properties.
+  //    /*
+//     * Open/create an {@link IIndexManager} using the given properties.
   //     */
   //    abstract protected S getStore(Properties properties);
   //
-  //    /**
-  //     * Close and then re-open an {@link IIndexManager} backed by the same
+  //    /*
+//     * Close and then re-open an {@link IIndexManager} backed by the same
   //     * persistent data.
   //     *
   //     * @param store
@@ -101,7 +101,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //     */
   //    abstract protected S reopenStore(S store);
 
-  /**
+  /*
    * This method is invoked from methods that MUST be proxied to this class. {@link
    * GenericProxyTestCase} extends this class, as do the concrete classes that drive the test suite
    * for specific GOM integration test configuration. Many methods on this class must be proxied

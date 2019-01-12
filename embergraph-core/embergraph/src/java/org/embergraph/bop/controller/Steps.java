@@ -27,8 +27,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.NV;
 import org.embergraph.bop.PipelineOp;
 
-/**
- * STEPS(ops)
+/*
+* STEPS(ops)
  *
  * <pre>
  * STEPS([],{subqueries=[a,b,c]})
@@ -52,7 +52,7 @@ public class Steps extends AbstractSubqueryOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args

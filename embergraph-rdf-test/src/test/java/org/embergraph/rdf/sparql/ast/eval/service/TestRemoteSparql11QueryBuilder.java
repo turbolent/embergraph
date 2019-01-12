@@ -65,8 +65,8 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.MapBindingSet;
 
-/**
- * Test suite for the {@link RemoteSparql11QueryBuilder}, including some correct rejection tests
+/*
+* Test suite for the {@link RemoteSparql11QueryBuilder}, including some correct rejection tests
  * when the solutions to be vectored to the remote end point can not be represented using the <code>
  * BINDINGS</code> clause.
  *
@@ -85,7 +85,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     super(name);
   }
 
-  /**
+  /*
    * Return the {@link IRemoteSparqlQueryBuilder} under test.
    *
    * @param serviceNode
@@ -120,7 +120,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     }
   }
 
-  /**
+  /*
    * Wrap as an {@link IConstant}.
    *
    * @param iv The {@link IV}.
@@ -131,7 +131,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     return new Constant<IV<?, ?>>(iv);
   }
 
-  /**
+  /*
    * A simple test with nothing bound and NO source solution. For this case the BINDINGS clause
    * should be omitted.
    */
@@ -212,7 +212,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A simple test with nothing bound and a single <em>empty</em> source solution. For this case the
    * BINDINGS clause should be omitted.
    */
@@ -296,7 +296,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A test where a single fully bound triple pattern is presented.
    *
    * <p>Note: It is possible to optimize this as an ASK query, but only when there is a single
@@ -424,7 +424,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in which there are some BINDINGS to be passed through. The set of bindings
    * covers the different types of RDF {@link Value} and also exercises the prefix declarations.
    * This test does NOT use blank nodes in the BINDINGS.
@@ -582,7 +582,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are not correlated so we do not need to impose a FILTER
    * on the remote service.
@@ -667,8 +667,8 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
           vars.add(Var.var("s"));
         }
 
-        /*
-         * Note: The blank node should be sent across as a variable
+      /*
+       * Note: The blank node should be sent across as a variable
          * without a bound value (UNDEF).
          */
         {
@@ -683,7 +683,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated but there is only one solution to be
    * vectored so we will impose a FILTER on the remote service to enforce that correlation.
@@ -782,8 +782,8 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
           vars.add(Var.var("o"));
         }
 
-        /*
-         * Note: The blank node should be sent across as a variable
+      /*
+       * Note: The blank node should be sent across as a variable
          * without a bound value (UNDEF).
          */
         {
@@ -798,7 +798,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated but there is only one solution to be
    * vectored so we will impose a FILTER on the remote service to enforce that correlation. This
@@ -918,8 +918,8 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
           vars.add(Var.var("o1"));
         }
 
-        /*
-         * Note: The blank node should be sent across as a variable
+      /*
+       * Note: The blank node should be sent across as a variable
          * without a bound value (UNDEF).
          */
         {
@@ -934,7 +934,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     assertSameAST(queryStr, expected, actual);
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated and there is more than one solution to be
    * vectored so we MUST impose a FILTER on the remote service to enforce that correlation.
@@ -1012,7 +1012,7 @@ public class TestRemoteSparql11QueryBuilder extends AbstractEmbergraphExprBuilde
     }
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated so we MUST impose a constraint on the
    * remote service to enforce that correlation. However, there is another solution in which the two

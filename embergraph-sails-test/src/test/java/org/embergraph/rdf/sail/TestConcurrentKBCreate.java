@@ -42,8 +42,8 @@ import org.embergraph.util.InnerCause;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.sail.SailException;
 
-/**
- * Test suite for the concurrent create and discovery of a KB instance.
+/*
+* Test suite for the concurrent create and discovery of a KB instance.
  *
  * <p>Note: There is a data race when creating the a KB (especially the default KB) and verifying
  * that the KB exists. If we find the KB in the row store cache but we do not find the axioms, then
@@ -209,7 +209,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     }
   }
 
-  /**
+  /*
    * Verify that the named kb exists.
    *
    * @throws SailException
@@ -229,7 +229,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     }
   }
 
-  /**
+  /*
    * Verify that the named kb does not exist.
    *
    * @throws SailException
@@ -283,7 +283,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     }
   }
 
-  /**
+  /*
    * A non-concurrent version testing both create, destroy, and then re-create where the KB
    * properties have NOT been changed.
    *
@@ -331,7 +331,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
       if (jnl != null) jnl.destroy();
     }
   }
-  /**
+  /*
    * A non-concurrent version testing both create, destroy, and then re-create where the KB
    * properties have been changed (especially the Vocabulary class).
    *
@@ -388,7 +388,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     }
   }
 
-  /**
+  /*
    * A non-concurrent version testing both create, destroy, and then re-create where the KB
    * properties have been changed (especially the Vocabulary class).
    *
@@ -474,7 +474,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     }
   }
 
-  /**
+  /*
    * Runs the concurrent KB Create and Discovery test multiple times against a single journal, but
    * using a distinct KB namespace for each test.
    *
@@ -504,7 +504,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     }
   }
 
-  /**
+  /*
    * Runs {@link #test_concurrentKBCreateAndDiscovery()} multiple times. Each time that test runs,
    * it uses a distinct {@link Journal} instance.
    */
@@ -657,7 +657,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     }
   }
 
-  /**
+  /*
    * Return a connection transaction. When the timestamp is associated with a historical commit
    * point, this will be a read-only connection. When it is associated with the {@link
    * ITx#UNISOLATED} view or a read-write transaction, this will be a mutable connection.
@@ -721,7 +721,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
 
       if (TimestampUtility.isReadOnly(timestamp)) {
 
-        return (EmbergraphSailRepositoryConnection) repo.getReadOnlyConnection(timestamp);
+        return repo.getReadOnlyConnection(timestamp);
       }
 
       // Read-write connection.
@@ -739,7 +739,7 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     }
   }
 
-  /**
+  /*
    * Return a read-only view of the {@link AbstractTripleStore} for the given namespace will read
    * from the commit point associated with the given timestamp.
    *
@@ -758,8 +758,8 @@ public abstract class TestConcurrentKBCreate extends ProxyEmbergraphSailTestCase
     return tripleStore;
   }
 
-  //    /**
-  //     * Return an UNISOLATED connection.
+  //    /*
+//     * Return an UNISOLATED connection.
   //     *
   //     * @param namespace
   //     *            The namespace.

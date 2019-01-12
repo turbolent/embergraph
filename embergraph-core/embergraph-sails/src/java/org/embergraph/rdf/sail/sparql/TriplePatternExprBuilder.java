@@ -64,8 +64,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Class handles triple patterns and property paths.
+/*
+* Class handles triple patterns and property paths.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -869,8 +869,8 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
   //			collectedVars.add(var);
   //		}
   //
-  //		/**
-  //		 * @return Returns the collectedVars.
+  //		/*
+//		 * @return Returns the collectedVars.
   //		 */
   //		public Set<Var> getCollectedVars() {
   //			return collectedVars;
@@ -993,7 +993,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
    * done right)
    */
 
-  /**
+  /*
    * This is invoked in two different contexts. One for a bare triple reference pattern:
    *
    * <pre>
@@ -1041,7 +1041,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
     if (s instanceof ConstantNode) {
 
-      final EmbergraphValue v = ((ConstantNode) s).getValue();
+      final EmbergraphValue v = s.getValue();
 
       if (v instanceof Literal) {
 
@@ -1054,8 +1054,8 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
     } else {
       if (((VarNode) s).isAnonymous()) {
-        /*
-         * Blank nodes have already been translated into variables.
+      /*
+       * Blank nodes have already been translated into variables.
          *
          * TODO We could run into trouble here if there anonymous
          * variables are introduced for anything other than a blank node
@@ -1069,7 +1069,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
     if (p instanceof ConstantNode) {
 
-      final EmbergraphValue v = ((ConstantNode) p).getValue();
+      final EmbergraphValue v = p.getValue();
 
       if (!(v instanceof URI)) {
 
@@ -1083,7 +1083,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
     if (o instanceof ConstantNode) {
 
-      final EmbergraphValue v = ((ConstantNode) o).getValue();
+      final EmbergraphValue v = o.getValue();
 
       // See https://jira.blazegraph.com/browse/BLZG-1229
       // To support SPARQL* syntax in CONSTRUCT clauses with nested TRef values,
@@ -1100,8 +1100,8 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
     } else {
 
       if (((VarNode) o).isAnonymous()) {
-        /*
-         * Blank nodes have already been translated into variables.
+      /*
+       * Blank nodes have already been translated into variables.
          */
         throw new VisitorException("Object in triple reference pattern may not be blank node.");
       }
@@ -1176,7 +1176,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
     return sidVar;
   }
 
-  /**
+  /*
    * @param x the node to be tested
    * @return true if provide node is ASTConstruct or has ASTConstruct in any of transitive parents.
    */

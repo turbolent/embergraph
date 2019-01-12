@@ -25,8 +25,8 @@ import java.util.UUID;
 import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.util.Bytes;
 
-/**
- * Tests logic to encode and decode the offsets within regions in an {@link IndexSegmentStore}.
+/*
+* Tests logic to encode and decode the offsets within regions in an {@link IndexSegmentStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class TestIndexSegmentAddressManager extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test works through the basic operations required to encode and decode an address for a node and
    * a leaf.
    *
@@ -105,7 +105,7 @@ public class TestIndexSegmentAddressManager extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that an offset of <code>0L</code> (not a full address, just an offset) is
    * correctly encoded and decoded.
    */
@@ -308,7 +308,7 @@ public class TestIndexSegmentAddressManager extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Test helper forms an encoded address whose offset is relative to the specified region and then
    * attempts to decode that address.
    *

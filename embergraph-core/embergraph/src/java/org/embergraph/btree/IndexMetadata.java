@@ -65,8 +65,8 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ndx.pipeline.AbstractSubtask;
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * The persistent and mostly immutable metadata for a {@link AbstractBTree}. This class allows you
+/*
+* The persistent and mostly immutable metadata for a {@link AbstractBTree}. This class allows you
  * to configured several very important aspects of the B+Tree (and other persistence capable data
  * structures) behavior. Read on.
  *
@@ -178,7 +178,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
   private static final transient Logger log = Logger.getLogger(IndexMetadata.class);
 
-  /**
+  /*
    * Options and their defaults for the {@link org.embergraph.btree} package and the {@link BTree}
    * and {@link IndexSegment} classes. Options that apply equally to views and {@link
    * AbstractBTree}s are in the package namespace, such as whether or not a bloom filter is enabled.
@@ -201,7 +201,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options {
+  public interface Options {
 
     /*
      * Constants.
@@ -216,13 +216,13 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     /** A reasonable maximum branching factor for an {@link IndexSegment}. */
     int MAX_INDEX_SEGMENT_BRANCHING_FACTOR = 10240;
 
-    /**
+    /*
      * The minimum write retention queue capacity is two (2) in order to avoid cache evictions of
      * the leaves participating in a split.
      */
     int MIN_WRITE_RETENTION_QUEUE_CAPACITY = 2;
 
-    /**
+    /*
      * A large maximum write retention queue capacity. A reasonable value with a large heap is
      * generally in 4000 to 8000, depending on the branching factor. The impact on the JVM heap is a
      * function of both the write retention queue capacity and the B+Tree branching factor. Larger
@@ -237,7 +237,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
      * Note: These options are in the package namespace.
      */
 
-    /**
+    /*
      * Optional property controls whether or not a bloom filter is maintained (default {@value
      * #DEFAULT_BLOOM_FILTER}). When enabled, the bloom filter is effective up to ~ 2M entries per
      * index (partition). For scale-up, the bloom filter is automatically disabled after its error
@@ -256,7 +256,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_BLOOM_FILTER = "false";
 
-    /**
+    /*
      * When raw record support is enabled for the index, this is the maximum length of an index
      * value which will be stored within a leaf before it is automatically promoted to a raw record
      * reference on the backing store (default {@value #DEFAULT_MAX_REC_LEN}).
@@ -269,7 +269,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_MAX_REC_LEN = "256";
 
-    /**
+    /*
      * The name of an optional property whose value identifies the data service on which the initial
      * index partition of a scale-out index will be created. The value may be the {@link UUID} of
      * that data service (this is unambiguous) of the name associated with the data service (it is
@@ -284,7 +284,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     String INITIAL_DATA_SERVICE =
         org.embergraph.btree.BTree.class.getPackage().getName() + ".initialDataService";
 
-    /**
+    /*
      * The capacity of the hard reference queue used to retain recently touched nodes (nodes or
      * leaves) and to defer the eviction of dirty nodes (nodes or leaves).
      *
@@ -318,7 +318,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
                 + ".writeRetentionQueue.capacity")
             .intern();
 
-    /**
+    /*
      * The #of entries on the write retention queue that will be scanned for a match before a new
      * reference is appended to the queue. This trades off the cost of scanning entries on the
      * queue, which is handled by the queue itself, against the cost of queue churn. Note that queue
@@ -334,7 +334,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_WRITE_RETENTION_QUEUE_SCAN = "20";
 
-    /**
+    /*
      * Override the {@link IKeyBuilderFactory} used by the {@link DefaultTupleSerializer} (the
      * default is a {@link DefaultKeyBuilderFactory} initialized with an empty {@link Properties}
      * object).
@@ -345,7 +345,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
         (org.embergraph.btree.AbstractBTree.class.getPackage().getName() + "keyBuilderFactory")
             .intern();
 
-    /**
+    /*
      * Override the {@link IRabaCoder} used for the keys in the nodes of a B+Tree (the default is a
      * {@link FrontCodedRabaCoder} instance).
      */
@@ -353,7 +353,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
         (org.embergraph.btree.AbstractBTree.class.getPackage().getName() + "nodeKeysCoder")
             .intern();
 
-    /**
+    /*
      * Override the {@link IRabaCoder} used for the keys of leaves in B+Trees (the default is a
      * {@link FrontCodedRabaCoder} instance).
      *
@@ -363,7 +363,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
         (org.embergraph.btree.AbstractBTree.class.getPackage().getName() + ".leafKeysCoder")
             .intern();
 
-    /**
+    /*
      * Override the {@link IRabaCoder} used for the values of leaves in B+Trees (default is a {@link
      * CanonicalHuffmanRabaCoder}).
      *
@@ -373,8 +373,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
         (org.embergraph.btree.AbstractBTree.class.getPackage().getName() + ".leafValuesCoder")
             .intern();
 
-    //        /**
-    //         * Option determines whether or not per-child locks are used by
+    //        /*
+//         * Option determines whether or not per-child locks are used by
     //         * {@link Node} for a <em>read-only</em> {@link AbstractBTree} (default
     //         * {@value #DEFAULT_CHILD_LOCKS}). This option effects synchronization
     //         * in {@link Node#getChild(int)}. Synchronization is not required for
@@ -412,7 +412,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
      * Note: These options are in the BTree namespace.
      */
 
-    /**
+    /*
      * The name of a class derived from {@link BTree} that will be used to re-load the index. Note
      * that index partitions are in general views (of one or more resources). Therefore only
      * unpartitioned indices can be meaningfully specialized solely in terms of the {@link BTree}
@@ -425,7 +425,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
      */
     String BTREE_CLASS_NAME = (BTree.class.getName() + ".className").intern();
 
-    /**
+    /*
      * The name of an optional property whose value specifies the branching factor for a mutable
      * {@link BTree}.
      *
@@ -434,7 +434,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
      */
     String BTREE_BRANCHING_FACTOR = (BTree.class.getName() + ".branchingFactor").intern();
 
-    /**
+    /*
      * The default branching factor for a mutable {@link BTree}.
      *
      * <p>Note: on 9/11/2009 I changed the default B+Tree branching factor and write retention queue
@@ -448,8 +448,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
      */
     String DEFAULT_BTREE_BRANCHING_FACTOR = "32"; // "256"
 
-    //        /**
-    //         * The capacity of the hard reference queue used to retain recently used
+    //        /*
+//         * The capacity of the hard reference queue used to retain recently used
     //         * nodes (or leaves) (default
     //         * {@value #DEFAULT_BTREE_READ_RETENTION_QUEUE_CAPACITY}). When zero
     //         * (0), this queue is disabled.
@@ -500,8 +500,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //
     //        String DEFAULT_BTREE_READ_RETENTION_QUEUE_CAPACITY = "10000";
     //
-    //        /**
-    //         * The #of entries on the hard reference queue that will be scanned for
+    //        /*
+//         * The #of entries on the hard reference queue that will be scanned for
     //         * a match before a new reference is appended to the queue. This trades
     //         * off the cost of scanning entries on the queue, which is handled by
     //         * the queue itself, against the cost of queue churn.
@@ -512,7 +512,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //
     //        String DEFAULT_BTREE_READ_RETENTION_QUEUE_SCAN = "20";
 
-    /**
+    /*
      * An optional factory providing record-level compression for the nodes and leaves of an {@link
      * IndexSegment} (default {@value #DEFAULT_BTREE_RECORD_COMPRESSOR_FACTORY}).
      *
@@ -525,7 +525,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     /** @see #BTREE_RECORD_COMPRESSOR_FACTORY */
     String DEFAULT_BTREE_RECORD_COMPRESSOR_FACTORY = null;
 
-    /**
+    /*
      * The maximum number of threads that will be used to evict dirty nodes or leaves in a given
      * level of a persistence capable index (BTree or HTree). Parallel level set eviction can reduce
      * the latency required to checkpoint a large index when a large bulk update has been applied.
@@ -539,7 +539,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_MAX_PARALLEL_EVICT_THREADS = "10";
 
-    /**
+    /*
      * The minimum number of dirty nodes or leaves in a given level of the index (BTree or HTree)
      * before parallel eviction will be used. You may set this value to a {@link Integer#MAX_VALUE}
      * to disable parallel level set eviction.
@@ -561,7 +561,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
      * Note: These options are in the IndexSegment namespace.
      */
 
-    /**
+    /*
      * The name of the property whose value specifies the branching factory for an immutable {@link
      * IndexSegment}.
      */
@@ -571,7 +571,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     /** The default branching factor for an {@link IndexSegment}. */
     String DEFAULT_INDEX_SEGMENT_BRANCHING_FACTOR = "512";
 
-    /**
+    /*
      * When <code>true</code> an attempt will be made to fully buffer the nodes (but not the leaves)
      * of the {@link IndexSegment} (default {@value #DEFAULT_INDEX_SEGMENT_BUFFER_NODES}). The nodes
      * in the {@link IndexSegment} are serialized in a contiguous region by the {@link
@@ -594,8 +594,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     /** @see #INDEX_SEGMENT_BUFFER_NODES */
     String DEFAULT_INDEX_SEGMENT_BUFFER_NODES = "false";
 
-    //        /**
-    //         * The size of the LRU cache backing the weak reference cache for leaves
+    //        /*
+//         * The size of the LRU cache backing the weak reference cache for leaves
     //         * (default {@value #DEFAULT_INDEX_SEGMENT_LEAF_CACHE_CAPACITY}).
     //         * <p>
     //         * While the {@link AbstractBTree} already provides caching for nodes
@@ -611,14 +611,14 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //        String INDEX_SEGMENT_LEAF_CACHE_CAPACITY = IndexSegment.class.getName()
     //                + ".leafCacheCapacity";
     //
-    //        /**
-    //         *
+    //        /*
+//         *
     //         * @see #INDEX_SEGMENT_LEAF_CACHE_CAPACITY
     //         */
     //        String DEFAULT_INDEX_SEGMENT_LEAF_CACHE_CAPACITY = "100";
     //
-    //        /**
-    //         * The timeout in nanoseconds for the LRU cache backing the weak
+    //        /*
+//         * The timeout in nanoseconds for the LRU cache backing the weak
     //         * reference cache for {@link IndexSegment} leaves (default
     //         * {@value #DEFAULT_INDEX_SEGMENT_LEAF_CACHE_TIMEOUT}).
     //         * <p>
@@ -635,14 +635,14 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //        String INDEX_SEGMENT_LEAF_CACHE_TIMEOUT = IndexSegment.class.getName()
     //                + ".leafCacheTimeout";
     //
-    //        /**
-    //         *
+    //        /*
+//         *
     //         * @see #INDEX_SEGMENT_LEAF_CACHE_TIMEOUT
     //         */
     //        String DEFAULT_INDEX_SEGMENT_LEAF_CACHE_TIMEOUT = ""
     //                + TimeUnit.SECONDS.toNanos(30);
 
-    /**
+    /*
      * An optional factory providing record-level compression for the nodes and leaves of an {@link
      * IndexSegment} (default {@value #DEFAULT_INDEX_SEGMENT_RECORD_COMPRESSOR_FACTORY}).
      *
@@ -668,31 +668,31 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //        * final int minimumEntryCount = 1 * Bytes.kilobyte32; (or 10k)
     //        *
     //        * final int entryCountPerSplit = 5 * Bytes.megabyte32; (or 50k)
-    //        /**
-    //         * An index partition which has no more than this many tuples should be
+    //        /*
+//         * An index partition which has no more than this many tuples should be
     //         * joined with its rightSibling (if any).
     //         */
     //        String SPLIT_HANDLER_MIN_ENTRY_COUNT = DefaultSplitHandler.class
     //                .getName()
     //                + ".minimumEntryCount";
     //
-    //        /**
-    //         * The target #of tuples for an index partition.
+    //        /*
+//         * The target #of tuples for an index partition.
     //         */
     //        String SPLIT_HANDLER_ENTRY_COUNT_PER_SPLIT = DefaultSplitHandler.class
     //                .getName()
     //                + ".entryCountPerSplit";
     //
-    //        /**
-    //         * The index partition will be split when its actual entry count is GTE
+    //        /*
+//         * The index partition will be split when its actual entry count is GTE
     //         * to <code>overCapacityMultiplier * entryCountPerSplit</code>
     //         */
     //        String SPLIT_HANDLER_OVER_CAPACITY_MULTIPLIER = DefaultSplitHandler.class
     //                .getName()
     //                + ".overCapacityMultiplier";
     //
-    //        /**
-    //         * When an index partition will be split, the #of new index partitions
+    //        /*
+//         * When an index partition will be split, the #of new index partitions
     //         * will be chosen such that each index partition is approximately
     //         * <i>underCapacityMultiplier</i> full.
     //         */
@@ -700,8 +700,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     //                .getName()
     //                + ".underCapacityMultiplier";
     //
-    //        /**
-    //         * The #of samples to take per estimated split (non-negative, and
+    //        /*
+//         * The #of samples to take per estimated split (non-negative, and
     //         * generally on the order of 10s of samples). The purpose of the samples
     //         * is to accommodate the actual distribution of the keys in the index.
     //         */
@@ -724,7 +724,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
      * Asynchronous index write API.
      */
 
-    /**
+    /*
      * The capacity of the queue on which the application writes. Chunks are drained from this queue
      * by the {@link AbstractTaskMaster}, broken into splits, and each split is written onto the
      * {@link AbstractSubtask} sink handling writes for the associated index partition.
@@ -740,7 +740,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_MASTER_CHUNK_SIZE = "10000";
 
-    /**
+    /*
      * The time in nanoseconds that the master will combine smaller chunks so that it can satisfy
      * the desired <i>masterChunkSize</i>.
      */
@@ -749,7 +749,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_MASTER_CHUNK_TIMEOUT_NANOS = "" + TimeUnit.MILLISECONDS.toNanos(50);
 
-    /**
+    /*
      * The time in nanoseconds that the {@link AbstractSubtask sink} will wait inside of the {@link
      * IAsynchronousIterator} when it polls the iterator for a chunk. This value should be
      * relatively small so that the sink remains responsible rather than blocking inside of the
@@ -766,7 +766,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_SINK_QUEUE_CAPACITY = "5000";
 
-    /**
+    /*
      * The desired size of the chunks written that will be written by the {@link AbstractSubtask
      * sink}.
      */
@@ -775,7 +775,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_SINK_CHUNK_SIZE = "10000";
 
-    /**
+    /*
      * The maximum amount of time in nanoseconds that a sink will combine smaller chunks so that it
      * can satisfy the desired <i>sinkChunkSize</i> (default {@value
      * #DEFAULT_SINK_CHUNK_TIMEOUT_NANOS}). The default is an infinite timeout. This means that the
@@ -788,7 +788,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_SINK_CHUNK_TIMEOUT_NANOS = "" + Long.MAX_VALUE;
 
-    /**
+    /*
      * The time in nanoseconds after which an idle sink will be closed (default {@value
      * #DEFAULT_SINK_IDLE_TIMEOUT_NANOS}). Any buffered writes are flushed when the sink is closed.
      * The idle timeout is reset (a) if a chunk is available to be drained by the sink; or (b) if a
@@ -812,7 +812,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
      * Scatter split configuration.
      */
 
-    /**
+    /*
      * Boolean option indicates whether or not scatter splits are performed (default {@value
      * #SCATTER_SPLIT_ENABLED}). Scatter splits only apply for scale-out indices where they
      * "scatter" the initial index partition across the {@link IDataService}s in the federation.
@@ -831,7 +831,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_SCATTER_SPLIT_ENABLED = "true";
 
-    /**
+    /*
      * The percentage of the nominal index partition size at which a scatter split is triggered when
      * there is only a single index partition for a given scale-out index (default {@link
      * #DEFAULT_SCATTER_SPLIT_PERCENT_OF_SPLIT_THRESHOLD}). The scatter split will break the index
@@ -846,7 +846,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_SCATTER_SPLIT_PERCENT_OF_SPLIT_THRESHOLD = ".25";
 
-    /**
+    /*
      * The #of data services on which the index will be scattered or ZERO(0) to use all discovered
      * data services (default {@value #DEFAULT_SCATTER_SPLIT_DATA_SERVICE_COUNT}).
      */
@@ -855,7 +855,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
     String DEFAULT_SCATTER_SPLIT_DATA_SERVICE_COUNT = "0";
 
-    /**
+    /*
      * The #of index partitions to generate when an index is scatter split. The index partitions
      * will be evenly distributed across up to {@link #SCATTER_SPLIT_DATA_SERVICE_COUNT} discovered
      * data services. When ZERO(0), the scatter split will generate <code>(NDATA_SERVICES x 2)
@@ -884,7 +884,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     String DEFAULT_SCATTER_SPLIT_INDEX_PARTITION_COUNT = "0";
   }
 
-  /**
+  /*
    * Address that can be used to read this metadata record from the store.
    *
    * <p>Note: This is not persisted since we do not have the address until after we have written out
@@ -892,7 +892,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
    */
   private transient /*final*/ long addrMetadata;
 
-  /**
+  /*
    * Address that can be used to read this metadata record from the store.
    *
    * <p>Note: This is not a persistent property. However the value is set when the metadata record
@@ -904,7 +904,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return addrMetadata;
   }
 
-  /**
+  /*
    * The {@link UUID} of the {@link DataService} on which the first partition of the scale-out index
    * should be created. This is a purely transient property and will be <code>null</code> unless
    * either explicitly set or set using {@value Options#INITIAL_DATA_SERVICE}. This property is only
@@ -934,7 +934,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
   private UUID indexUUID;
   private String name;
-  /**
+  /*
    * The type of the index.
    *
    * @see #VERSION4
@@ -975,7 +975,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
   /** @see Options#INDEX_SEGMENT_BUFFER_NODES */
   private boolean indexSegmentBufferNodes;
 
-  /**
+  /*
    * The unique identifier for the (scale-out) index whose data is stored in this B+Tree data
    * structure.
    *
@@ -993,7 +993,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return indexType;
   }
 
-  /**
+  /*
    * The name associated with the index -or- <code>null</code> iff the index is not named (internal
    * indices are generally not named while application indices are always named).
    *
@@ -1007,7 +1007,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return name;
   }
 
-  /**
+  /*
    * The branching factor for a mutable {@link BTree}. The branching factor is the #of children in a
    * node or values in a leaf and must be an integer greater than or equal to three (3). Larger
    * branching factors result in trees with fewer levels. However there is a point of diminishing
@@ -1021,7 +1021,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return branchingFactor;
   }
 
-  /**
+  /*
    * The branching factor used when building an {@link IndexSegment} (default is 4096). Index
    * segments are read-only B+Tree resources. The are built using a bulk index build procedure and
    * typically have a much higher branching factor than the corresponding mutable index on the
@@ -1056,7 +1056,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return indexSegmentBranchingFactor;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the nodes region for the {@link IndexSegment} should be fully
    * buffered by the {@link IndexSegmentStore}.
    *
@@ -1072,7 +1072,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.indexSegmentBufferNodes = newValue;
   }
 
-  /**
+  /*
    * Return the record-level compression provider for a {@link BTree} (may be null, which implies no
    * compression).
    */
@@ -1087,7 +1087,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.btreeRecordCompressorFactory = btreeRecordCompressorFactory;
   }
 
-  /**
+  /*
    * Return the record-level compression provider for an {@link IndexSegment} (may be null, which
    * implies no compression).
    */
@@ -1124,8 +1124,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.writeRetentionQueueScan = v;
   }
 
-  //    /**
-  //     * @see Options#BTREE_READ_RETENTION_QUEUE_CAPACITY
+  //    /*
+//     * @see Options#BTREE_READ_RETENTION_QUEUE_CAPACITY
   //     */
   //    public final int getBTreeReadRetentionQueueCapacity() {
   //
@@ -1139,8 +1139,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
   //
   //    }
   //
-  //    /**
-  //     * @see Options#BTREE_READ_RETENTION_QUEUE_SCAN
+  //    /*
+//     * @see Options#BTREE_READ_RETENTION_QUEUE_SCAN
   //     */
   //    public final int getBTreeReadRetentionQueueScan() {
   //
@@ -1154,7 +1154,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
   //
   //    }
 
-  /**
+  /*
    * When non-<code>null</code>, this is the description of the view of this index partition. This
    * will be <code>null</code> iff the {@link BTree} is not part of a scale-out index. This is
    * updated when the view composition for the index partition is changed.
@@ -1164,7 +1164,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return pmd;
   }
 
-  /**
+  /*
    * The name of a class derived from {@link BTree} that will be used to re-load the index. Note
    * that index partitions are in general views (of one or more resources). Therefore only
    * unpartitioned indices can be meaningfully specialized solely in terms of the {@link BTree} base
@@ -1177,7 +1177,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return btreeClassName;
   }
 
-  /**
+  /*
    * The name of the {@link Checkpoint} class used by the index. This may be overridden to store
    * additional state with each {@link Checkpoint} record.
    */
@@ -1193,7 +1193,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.checkpointClassName = className;
   }
 
-  /**
+  /*
    * Object used to code (compress) the keys in a node.
    *
    * <p>Note: The keys for nodes are separator keys for the leaves. Since they are chosen to be the
@@ -1207,7 +1207,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return nodeKeysCoder;
   }
 
-  /**
+  /*
    * The object used to form unsigned byte[] keys from Java objects, to (de-)serialize Java object
    * stored in the index, and to (de-)compress the keys and values when stored in a leaf or {@link
    * ResultSet}.
@@ -1219,7 +1219,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return tupleSer;
   }
 
-  /**
+  /*
    * The optional object for handling write-write conflicts.
    *
    * <p>The concurrency control strategy detects write-write conflict resolution during backward
@@ -1237,7 +1237,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return conflictResolver;
   }
 
-  /**
+  /*
    * When <code>true</code> the index will write a delete marker when an attempt is made to delete
    * the entry under a key. Delete markers will be retained until a compacting merge of an index
    * partition. When <code>false</code> the index entry will be removed from the index immediately.
@@ -1260,7 +1260,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.deleteMarkers = deleteMarkers;
   }
 
-  /**
+  /*
    * When <code>true</code> the index will maintain a per-index entry revision timestamp. The
    * primary use of this is in support of transactional isolation. Delete markers MUST be enabled
    * when using revision timestamps.
@@ -1272,7 +1272,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return versionTimestamps;
   }
 
-  /**
+  /*
    * When <code>true</code> the index will maintain the min/max of the per tuple-revision timestamp
    * on each {@link Node} of the B+Tree. This information can be used to perform efficient filtering
    * of iterators such that they visit only nodes and leaves having data for a specified tuple
@@ -1296,7 +1296,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return versionTimestampFilters;
   }
 
-  /**
+  /*
    * Sets {@link #versionTimestampFilters}. You MUST also use {@link #setVersionTimestamps(boolean)}
    * to <code>true</code> for version timestamp filtering to be supported.
    *
@@ -1313,7 +1313,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.versionTimestamps = versionTimestamps;
   }
 
-  /**
+  /*
    * True iff the index supports transactional isolation (both delete markers and version timestamps
    * are required).
    */
@@ -1322,7 +1322,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return deleteMarkers && versionTimestamps;
   }
 
-  /**
+  /*
    * Convenience method sets both {@link #setDeleteMarkers(boolean)} and {@link
    * #setVersionTimestamps(boolean)} at the same time.
    *
@@ -1336,7 +1336,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     setVersionTimestamps(isolatable);
   }
 
-  /**
+  /*
    * When <code>true</code> the index transparently promote large <code>byte[]</code> values
    * associated with a key to raw records on the backing store. This feature is disabled by default.
    * Indices which do use large records should enable this option in order to reduce their IO churn
@@ -1348,7 +1348,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return rawRecords;
   }
 
-  /**
+  /*
    * (Dis|En)able automatic promotion of index <code>byte[]</code> values larger than a configured
    * byte length out of the index leaf and into raw records on the backing persistence store. This
    * option can significicantly reduce the IO churn for indices which do make use of large values.
@@ -1365,7 +1365,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.rawRecords = rawRecords;
   }
 
-  /**
+  /*
    * When {@link #getRawRecords()} returns <code>true</code>, this method returns the maximum byte
    * length of a <code>byte[]</code> value will be be stored in a B+Tree leaf (default {@link
    * Options#MAX_REC_LEN}) while values larger than this will be automatically converted into raw
@@ -1380,7 +1380,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return maxRecLen;
   }
 
-  /**
+  /*
    * Set the maximum length of a <code>byte[]</code> value in a leaf of the index.
    *
    * @param maxRecLen The maximum length of a <code>byte[]</code> value in a leaf of the index. A
@@ -1415,7 +1415,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.tupleSer = tupleSer;
   }
 
-  /**
+  /*
    * The branching factor MAY NOT be changed once an {@link AbstractBTree} object has been created.
    *
    * @param branchingFactor
@@ -1452,7 +1452,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.conflictResolver = conflictResolver;
   }
 
-  /**
+  /*
    * Return the bloom filter factory.
    *
    * <p>Bloom filters provide fast rejection for point tests in a space efficient manner with a
@@ -1475,7 +1475,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return bloomFilterFactory;
   }
 
-  /**
+  /*
    * Set the bloom filter factory.
    *
    * <p>Bloom filters provide fast rejection for point tests in a space efficient manner with a
@@ -1491,7 +1491,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.bloomFilterFactory = bloomFilterFactory;
   }
 
-  /**
+  /*
    * An optional object that may be used to inspect, and possibly operate on, each index entry as it
    * is copied into an {@link IndexSegment}.
    */
@@ -1505,7 +1505,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.overflowHandler = overflowHandler;
   }
 
-  /**
+  /*
    * Object which decides whether and where to split an index partition into 2 or more index
    * partitions. The default is a <code>null</code> reference. The default behavior when no split
    * handler is specified will work for nearly all use cases and will result in index partitions
@@ -1554,7 +1554,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.scatterSplitConfiguration = newVal;
   }
 
-  /**
+  /*
    * Create an instance of a class known to implement the specified interface from a class name.
    *
    * @param className The class name.
@@ -1590,13 +1590,13 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     }
   }
 
-  /**
+  /*
    * <strong>De-serialization constructor only</strong> - DO NOT use this ctor for creating a new
    * instance! It will result in a thrown exception, typically from {@link #firstCheckpoint()}.
    */
   public IndexMetadata() {}
 
-  /**
+  /*
    * Constructor used to configure a new <em>unnamed</em> B+Tree. The index UUID is set to the given
    * value and all other fields are defaulted as explained at {@link #IndexMetadata(Properties,
    * String, UUID)}. Those defaults may be overridden using the various setter methods, but some
@@ -1610,7 +1610,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this(null /* name */, indexUUID);
   }
 
-  /**
+  /*
    * Constructor used to configure a new <em>named</em> {@link BTree}. The index UUID is set to the
    * given value and all other fields are defaulted as explained at {@link
    * #IndexMetadata(Properties, String, UUID)}. Those defaults may be overridden using the various
@@ -1628,7 +1628,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this(null /* name */, System.getProperties(), name, indexUUID, IndexTypeEnum.BTree);
   }
 
-  /**
+  /*
    * Constructor used to configure a new <em>named</em> B+Tree. The index UUID is set to the given
    * value and all other fields are defaulted as explained at {@link #getProperty(Properties,
    * String, String, String)}. Those defaults may be overridden using the various setter methods.
@@ -1676,8 +1676,8 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
       if (val != null) {
 
-        /*
-         * Attempt to interpret the value as either a UUID or the name of
+      /*
+       * Attempt to interpret the value as either a UUID or the name of
          * a data service joined with the federation.
          */
 
@@ -2150,7 +2150,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     if (log.isInfoEnabled()) log.info(toString());
   }
 
-  /**
+  /*
    * Write out the metadata record for the btree on the store and return the address.
    *
    * @param store The store on which the metadata record is being written.
@@ -2176,7 +2176,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     this.addrMetadata = store.write(ByteBuffer.wrap(SerializerUtil.serialize(this)));
   }
 
-  /**
+  /*
    * Read the metadata record from the store.
    *
    * @param store the store.
@@ -2251,7 +2251,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return sb.toString();
   }
 
-  /**
+  /*
    * Extension hook for {@link #toString()}.
    *
    * @param sb Where to write additional metadata.
@@ -2265,26 +2265,26 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
   /** The initial version. */
   private static final transient int VERSION0 = 0x0;
 
-  /**
+  /*
    * This version adds support for {@link ILeafData#getRawRecord(int)} and {@link
    * IndexMetadata#getRawRecords()} will report <code>false</code> for earlier versions and {@link
    * IndexMetadata#getMaxRecLen()} will report {@link Options#DEFAULT_MAX_REC_LEN}.
    */
   private static final transient int VERSION1 = 0x1;
 
-  /**
+  /*
    * This version adds support for {@link HTree}. This includes {@link #addressBits} and {@link
    * #htreeClassName}.
    */
   private static final transient int VERSION2 = 0x2;
 
-  /**
+  /*
    * This version adds support for a fixed length key option for the {@link HTree} using {@link
    * #keyLen}.
    */
   private static final transient int VERSION3 = 0x3;
 
-  /**
+  /*
    * This version moves the {@link HTree} specific metadata into a derived class. Prior to this
    * version, the {@link HTree} was not used in a durable context. Thus, there is no need to recover
    * HTree specific index metadata records before {@link #VERSION4}. This version also introduces
@@ -2296,7 +2296,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
   /** The version that will be serialized by this class. */
   private static final transient int CURRENT_VERSION = VERSION4;
 
-  /**
+  /*
    * The actual version as set by {@link #readExternal(ObjectInput)} and {@link
    * #writeExternal(ObjectOutput)}.
    */
@@ -2435,7 +2435,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     LongPacker.packLong(out, version);
 
     // hasName?
-    out.writeBoolean(name != null ? true : false);
+    out.writeBoolean(name != null);
 
     // the name
     if (name != null) {
@@ -2525,7 +2525,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
 
   }
 
-  /**
+  /*
    * Makes a copy of the persistent data, clearing the address of the {@link IndexMetadata} record
    * on the cloned copy.
    *
@@ -2547,7 +2547,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     }
   }
 
-  /**
+  /*
    * Create an initial {@link Checkpoint} for a new persistence capable data structure described by
    * this metadata record.
    *
@@ -2587,7 +2587,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
        * declare the required public constructor.
        */
 
-      final Constructor ctor = cl.getConstructor(new Class[] {IndexMetadata.class});
+      final Constructor ctor = cl.getConstructor(IndexMetadata.class);
 
       final Checkpoint checkpoint = (Checkpoint) ctor.newInstance(new Object[] {this});
 
@@ -2599,7 +2599,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     }
   }
 
-  /**
+  /*
    * Variant used when an index overflows onto a new backing store.
    *
    * <p>The caller is responsible for writing the {@link Checkpoint} record onto the store.
@@ -2633,7 +2633,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
        */
 
       final Constructor ctor =
-          cl.getConstructor(new Class[] {IndexMetadata.class, Checkpoint.class});
+          cl.getConstructor(IndexMetadata.class, Checkpoint.class);
 
       final Checkpoint checkpoint =
           (Checkpoint) ctor.newInstance(new Object[] {this, oldCheckpoint});
@@ -2649,7 +2649,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     }
   }
 
-  /**
+  /*
    * Factory for thread-safe {@link IKeyBuilder} objects for use by {@link
    * ITupleSerializer#serializeKey(Object)} and possibly others.
    *
@@ -2690,7 +2690,7 @@ public class IndexMetadata implements Serializable, Externalizable, Cloneable, I
     return Configuration.getProperty(indexManager, properties, namespace, globalName, defaultValue);
   }
 
-  /**
+  /*
    * @see Configuration#getProperty(IIndexManager, Properties, String, String, String, IValidator)
    */
   protected <E> E getProperty(

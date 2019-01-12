@@ -21,8 +21,8 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTNamedSubqueryOptimizer;
 
-/**
- * A subquery with a named solution set which can be referenced from other parts of the query.
+/*
+* A subquery with a named solution set which can be referenced from other parts of the query.
  *
  * @see NamedSubqueryInclude
  */
@@ -33,13 +33,13 @@ public class NamedSubqueryRoot extends SubqueryBase implements INamedSolutionSet
 
   public interface Annotations extends INamedSolutionSet.Annotations {
 
-    /**
+    /*
      * The {@link String}[] of the named solution sets on which this named subquery has a
      * dependency. This is computed by the {@link ASTNamedSubqueryOptimizer}.
      */
     String DEPENDS_ON = "dependsOn";
 
-    /**
+    /*
      * A {@link VarNode}[] specifying the join variables that will be used when the named result set
      * is join with the query. The join variables MUST be bound for a solution to join.
      *
@@ -55,7 +55,7 @@ public class NamedSubqueryRoot extends SubqueryBase implements INamedSolutionSet
      */
     String JOIN_VARS = "joinVars";
 
-    /**
+    /*
      * The set of variables which are known to have been materialized once this named subquery is
      * evaluated. This is set when the {@link NamedSubqueryRoot} is evaluated and then referenced by
      * the {@link NamedSubqueryInclude}.
@@ -75,7 +75,7 @@ public class NamedSubqueryRoot extends SubqueryBase implements INamedSolutionSet
     super(args, anns);
   }
 
-  /**
+  /*
    * @param queryType
    * @param name The name of the subquery result set.
    */
@@ -106,7 +106,7 @@ public class NamedSubqueryRoot extends SubqueryBase implements INamedSolutionSet
     return (VarNode[]) getProperty(Annotations.JOIN_VARS);
   }
 
-  /**
+  /*
    * Set the join variables.
    *
    * @param joinVars The join variables.
@@ -116,7 +116,7 @@ public class NamedSubqueryRoot extends SubqueryBase implements INamedSolutionSet
     setProperty(Annotations.JOIN_VARS, joinVars);
   }
 
-  /**
+  /*
    * Return the set of named solution sets on which this named subquery depends.
    *
    * <p>Note: This is currently set by the {@link ASTNamedSubqueryOptimizer}. However, it could also

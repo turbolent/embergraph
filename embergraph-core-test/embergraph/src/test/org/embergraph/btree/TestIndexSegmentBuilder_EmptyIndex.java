@@ -24,8 +24,8 @@ package org.embergraph.btree;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Test suite for building an {@link IndexSegment} from an empty {@link BTree}.
+/*
+* Test suite for building an {@link IndexSegment} from an empty {@link BTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -141,7 +141,7 @@ public class TestIndexSegmentBuilder_EmptyIndex extends AbstractIndexSegmentTest
   }
 
   protected IndexSegmentCheckpoint doBuildAndDiscardCache(final BTree btree, final int m)
-      throws IOException, Exception {
+      throws Exception {
 
     final long commitTime = System.currentTimeMillis();
 

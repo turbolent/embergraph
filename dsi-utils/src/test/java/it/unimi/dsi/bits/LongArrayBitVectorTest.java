@@ -128,7 +128,7 @@ public class LongArrayBitVectorTest extends TestCase {
   }
 
   public void testConstructor() {
-    final long bits[] = {0, 1, 0};
+    final long[] bits = {0, 1, 0};
 
     boolean ok = false;
     try {

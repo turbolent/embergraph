@@ -27,8 +27,8 @@ import org.embergraph.rdf.sparql.ast.IQueryNode;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * For pipelined operators, this is the capacity of the input queue for that operator. Producers
+/*
+* For pipelined operators, this is the capacity of the input queue for that operator. Producers
  * will block if the input queue for the target operator is at its capacity. This provides an
  * important limit on the amount of data which can be buffered on the JVM heap during pipelined
  * query evaluation.

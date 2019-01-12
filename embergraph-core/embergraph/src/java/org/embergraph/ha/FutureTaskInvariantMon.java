@@ -32,8 +32,8 @@ import org.embergraph.quorum.QuorumEventEnum;
 import org.embergraph.quorum.QuorumListener;
 import org.embergraph.util.StackInfoReport;
 
-/**
- * A {@link Future} that allows you to cancel a computation if an invariant is violated. This class
+/*
+* A {@link Future} that allows you to cancel a computation if an invariant is violated. This class
  * is specifically designed to monitor quorum related invariants for HA.
  *
  * <p>Once an invariant is established, listening for the relevant quorum events commences and a
@@ -82,12 +82,12 @@ public abstract class FutureTaskInvariantMon<T> extends FutureTaskMon<T> impleme
     token = quorum.token();
   }
 
-  /**
+  /*
    * Concrete implementations use this callback hook to establish the invariants to be monitored.
    */
   protected abstract void establishInvariants();
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Hook to manage listener registration and establish invariants.
@@ -104,15 +104,15 @@ public abstract class FutureTaskInvariantMon<T> extends FutureTaskMon<T> impleme
     } finally {
       m_quorum.removeListener(this);
       if (!didStart) {
-        /*
-         * Guarantee cancelled unless run() invoked.
+      /*
+       * Guarantee cancelled unless run() invoked.
          */
         cancel(true /* mayInterruptIfRunning */);
       }
     }
   }
 
-  /**
+  /*
    * Establish an invariant that the specified service is a member of the quorum.
    *
    * @param serviceId The service.
@@ -124,7 +124,7 @@ public abstract class FutureTaskInvariantMon<T> extends FutureTaskMon<T> impleme
     assertMembership(m_quorum.getMembers(), serviceId);
   }
 
-  /**
+  /*
    * Establish an invariant that the specified service is joined with the met quorum.
    *
    * @param serviceId The service.
@@ -136,7 +136,7 @@ public abstract class FutureTaskInvariantMon<T> extends FutureTaskMon<T> impleme
     assertMembership(m_quorum.getJoined(), serviceId);
   }
 
-  /**
+  /*
    * Establish an invariant that the specified service is a not joined with the met quorum.
    *
    * @param serviceId The service.
@@ -148,7 +148,7 @@ public abstract class FutureTaskInvariantMon<T> extends FutureTaskMon<T> impleme
     if (isMember(m_quorum.getJoined(), serviceId)) broken();
   }
 
-  /**
+  /*
    * Establish an invariant that the specified service is in the quorum pipeline.
    *
    * @param serviceId The service.
@@ -160,7 +160,7 @@ public abstract class FutureTaskInvariantMon<T> extends FutureTaskMon<T> impleme
     assertMembership(m_quorum.getPipeline(), serviceId);
   }
 
-  /**
+  /*
    * Establish an invariant that the quorum is met and remains met on the same token (the one
    * specified to the constructor).
    */
@@ -227,7 +227,7 @@ public abstract class FutureTaskInvariantMon<T> extends FutureTaskMon<T> impleme
     private final QuorumEventEnum m_qe;
     private final UUID m_sid;
 
-    /**
+    /*
      * @param qe The {@link QuorumEvent} type (required).
      * @param sid The service {@link UUID} (optional). When <code>null</code> the {@link
      *     QuorumEventEnum} will be matched for ANY service {@link UUID}.

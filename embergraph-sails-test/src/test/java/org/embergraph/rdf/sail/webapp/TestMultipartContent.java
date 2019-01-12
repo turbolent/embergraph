@@ -19,8 +19,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.eclipse.jetty.client.api.ContentProvider;
 import org.embergraph.rdf.sail.webapp.client.EntityContentProvider;
 
-/**
- * The Jetty HttpClient does not provide "out of the box" support for multipart content similar to
+/*
+* The Jetty HttpClient does not provide "out of the box" support for multipart content similar to
  * the Apache MultipartEntity.
  *
  * <p>This unit test confirms that the new MultipartContentProvider provides the equivalent
@@ -41,7 +41,7 @@ public class TestMultipartContent extends TestCase {
 
     final ContentProvider content = new EntityContentProvider(entity);
 
-    System.out.println(new String(entity.getContentType().toString()));
+    System.out.println(entity.getContentType().toString());
   }
 
   private HttpEntity getUpdateEntity() {

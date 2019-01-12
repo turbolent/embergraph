@@ -27,8 +27,8 @@ import org.apache.log4j.Logger;
 import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 
-/**
- * Edge implementation that wraps an Edge statement and points to a {@link EmbergraphGraph}
+/*
+* Edge implementation that wraps an Edge statement and points to a {@link EmbergraphGraph}
  * instance.
  *
  * @author mikepersonick
@@ -37,7 +37,7 @@ public class EmbergraphEdge extends EmbergraphElement implements Edge {
 
   private static final transient Logger log = Logger.getLogger(EmbergraphEdge.class);
 
-  private static final List<String> blacklist = Arrays.asList(new String[] {"id", "", "label"});
+  private static final List<String> blacklist = Arrays.asList("id", "", "label");
 
   protected final Statement stmt;
 
@@ -111,7 +111,7 @@ public class EmbergraphEdge extends EmbergraphElement implements Edge {
   public String toString() {
 
     final URI s = (URI) stmt.getSubject();
-    final URI p = (URI) stmt.getPredicate();
+    final URI p = stmt.getPredicate();
     final URI o = (URI) stmt.getObject();
     return "e[" + p.getLocalName() + "][" + s.getLocalName() + "->" + o.getLocalName() + "]";
   }

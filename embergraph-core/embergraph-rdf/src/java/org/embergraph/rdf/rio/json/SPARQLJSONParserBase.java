@@ -37,8 +37,8 @@ import org.openrdf.query.resultio.QueryResultParserBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Abstract base class for SPARQL Results JSON Parsers. Provides a common implementation of both
+/*
+* Abstract base class for SPARQL Results JSON Parsers. Provides a common implementation of both
  * boolean and tuple parsing.
  *
  * <p>Embergraph Changes:
@@ -260,8 +260,8 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
                       jp.getCurrentLocation().getColumnNr());
                 }
 
-                /*
-                 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Start Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              /*
+       * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Start Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~
                  */
                 final Value value = parseValue(bindingStr, jp);
 
@@ -310,8 +310,8 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
                 //								nextBindingSet.addBinding(bindingStr, parseValue(type, value, lang,
                 // datatype));
 
-                /*
-                 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              /*
+       * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                  */
 
               }
@@ -366,7 +366,7 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
 
   /** New method added to support Embergraph Sid extension. */
   protected Value parseValue(final String bindingStr, final JsonParser jp)
-      throws QueryResultParseException, JsonParseException, IOException {
+      throws QueryResultParseException, IOException {
 
     String lang = null;
     String type = null;
@@ -406,7 +406,7 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
     return parseValue(type, value, lang, datatype);
   }
 
-  /**
+  /*
    * Parse a value out of the elements for a binding.
    *
    * @param type {@link #LITERAL}, {@link #TYPED_LITERAL}, {@link #BNODE} or {@link #URI}

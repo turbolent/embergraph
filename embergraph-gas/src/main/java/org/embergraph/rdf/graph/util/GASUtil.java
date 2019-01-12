@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
-/**
- * Utility class for operations on the public interfaces.
+/*
+* Utility class for operations on the public interfaces.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -30,7 +30,7 @@ public class GASUtil {
 
   //    private static final Logger log = Logger.getLogger(GASUtil.class);
 
-  /**
+  /*
    * The average fan out of the frontier.
    *
    * @param frontierSize The size of the frontier.
@@ -42,7 +42,7 @@ public class GASUtil {
     return ((int) (nedges * 10d / frontierSize)) / 10d;
   }
 
-  /**
+  /*
    * The traversed edges per second.
    *
    * @param nedges The number of traversed edges.

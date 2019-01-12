@@ -21,8 +21,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Test suite.
+/*
+* Test suite.
  *
  * @author <a href="mailto:beebs@users.sourceforge.net">Brad Bebee</a>
  */

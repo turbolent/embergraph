@@ -48,8 +48,8 @@ import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * Unit tests for {@link JVMDistinctBindingSetsOp}.
+/*
+* Unit tests for {@link JVMDistinctBindingSetsOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -117,7 +117,7 @@ public class TestConditionalRoutingOp extends TestCase2 {
     data = null;
   }
 
-  /**
+  /*
    * Unit test for conditional routing of binding sets.
    *
    * @throws ExecutionException
@@ -133,12 +133,10 @@ public class TestConditionalRoutingOp extends TestCase2 {
         new ConditionalRoutingOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, bopId),
-                  new NV(
-                      ConditionalRoutingOp.Annotations.CONDITION,
-                      Constraint.wrap(new EQConstant(x, new Constant<String>("Mary")))),
-                }));
+                new NV(BOp.Annotations.BOP_ID, bopId),
+                new NV(
+                    ConditionalRoutingOp.Annotations.CONDITION,
+                    Constraint.wrap(new EQConstant(x, new Constant<String>("Mary"))))));
 
     // the expected solutions (default sink).
     final IBindingSet[] expected =
@@ -196,7 +194,7 @@ public class TestConditionalRoutingOp extends TestCase2 {
     assertEquals(2L, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read the source {@link IBindingSet}s.
    *
    * @param bsets The source binding sets.

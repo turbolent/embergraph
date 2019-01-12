@@ -21,8 +21,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * @author <a href="mailto:beebs@users.sourceforge.net">Brad Bebee</a>
+/*
+* @author <a href="mailto:beebs@users.sourceforge.net">Brad Bebee</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {

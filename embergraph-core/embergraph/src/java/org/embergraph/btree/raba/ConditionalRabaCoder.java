@@ -35,8 +35,8 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.LongPacker;
 
-/**
- * Coder conditionally applies other {@link IRabaCoder}s based on a condition, typically the
+/*
+* Coder conditionally applies other {@link IRabaCoder}s based on a condition, typically the
  * branching factor or the #of elements in the {@link IRaba}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -51,7 +51,7 @@ public class ConditionalRabaCoder implements IRabaCoder, Externalizable {
   private IRabaCoder smallCoder;
   private IRabaCoder bigCoder;
 
-  /**
+  /*
    * Return <code>true</code> iff the "small" {@link IRabaCoder} should be applied.
    *
    * @param size The size of the {@link IRaba} to be coded.
@@ -83,7 +83,7 @@ public class ConditionalRabaCoder implements IRabaCoder, Externalizable {
   /** De-serialization ctor. */
   public ConditionalRabaCoder() {}
 
-  /**
+  /*
    * @param smallCoder The coder for a small {@link IRaba}.
    * @param bigCoder The coder for a large {@link IRaba}.
    * @param bigSize An {@link IRaba} with this many elements will be coded using the {@link
@@ -108,7 +108,7 @@ public class ConditionalRabaCoder implements IRabaCoder, Externalizable {
   @Override
   public ICodedRaba decode(final AbstractFixedByteArrayBuffer data) {
 
-    final boolean isSmall = data.getByte(0) == 1 ? true : false;
+    final boolean isSmall = data.getByte(0) == 1;
 
     final AbstractFixedByteArrayBuffer delegateSlice = data.slice(1, data.len() - 1);
 
@@ -208,7 +208,7 @@ public class ConditionalRabaCoder implements IRabaCoder, Externalizable {
 
   private static final byte VERSION0 = 0x00;
 
-  /**
+  /*
    * Helper class used to wrap an {@link ICodedRaba} while returning the caller's slice for the
    * backing data. We use this to have the {@link ConditionalRabaCoder} return the original slice,
    * not the slice after the first byte (which indicates whether to use the small or large coder)

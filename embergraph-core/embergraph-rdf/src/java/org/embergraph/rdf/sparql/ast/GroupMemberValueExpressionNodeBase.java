@@ -31,8 +31,8 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 @SuppressWarnings("rawtypes")
@@ -64,7 +64,7 @@ public abstract class GroupMemberValueExpressionNodeBase extends GroupMemberNode
 
   abstract IValueExpression<? extends IV> getValueExpression();
 
-  /**
+  /*
    * Return the {@link IValueExpression}.
    *
    * @return The {@link IValueExpression} and never <code>null</code>.

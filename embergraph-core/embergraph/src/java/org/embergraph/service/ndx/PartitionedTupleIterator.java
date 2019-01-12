@@ -37,8 +37,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.InnerCause;
 
-/**
- * Class supports range query across one or more index partitions. Each partition is mapped onto a
+/*
+* Class supports range query across one or more index partitions. Each partition is mapped onto a
  * single {@link DataServiceTupleIterator} query. In turn, the {@link DataServiceTupleIterator} may
  * make several queries to the data service per partition. The actual #of queries made to the data
  * service depends on the #of index entries that are visited per partition and the capacity
@@ -68,7 +68,7 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
   /** The timestamp from the ctor. */
   private final long ts;
 
-  /**
+  /*
    * <code>true</code> iff the {@link #ts} is a read-historical transaction created specifically to
    * give the iterator read-consistent semantics. when <code>true</code>, this class will ensure
    * that the transaction is eventually aborted so that its read lock will be released.
@@ -84,7 +84,7 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
   /** This controls the #of results per data service query. */
   private final int capacity;
 
-  /**
+  /*
    * These flags control whether keys and/or values are requested. If neither keys nor values are
    * requested, then this is just a range count operation and you might as well use rangeCount
    * instead.
@@ -93,14 +93,14 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
 
   private final IFilter filter;
 
-  /**
+  /*
    * <code>true</code> iff {@link IRangeQuery#REVERSE} was specified by the caller. When {@link
    * IRangeQuery#REVERSE} was specified then we will use a reverse locator scan so that we proceed
    * in reverse order over the index partitions as in reverse order within each index partition.
    */
   private final boolean reverseScan;
 
-  /**
+  /*
    * The {@link #currentFromKey} and {@link #currentToKey} are updated each time we formulate a
    * query against the partitioned index, which can occur one or more times per index partition. The
    * update of the fields depends on whether we are doing a forward or reverse scan. If we have to
@@ -124,7 +124,7 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
    */
   private byte[] currentFromKey;
 
-  /**
+  /*
    * The {@link #currentToKey} is initially set by the ctor to the {@link #toKey}.
    *
    * <p>For a forward scan, the {@link #currentToKey} remains unchanged.
@@ -137,14 +137,14 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
   /** The metadata for the current index partition. */
   private PartitionLocator locator = null;
 
-  /**
+  /*
    * The last locator for which we received a {@link StaleLocatorException}. We note this so that we
    * can avoid an endless retry if the same locator is reported when we attempt to restart the
    * {@link #locatorItr}.
    */
   private PartitionLocator lastStaleLocator = null;
 
-  /**
+  /*
    * The #of index partitions that have been queried so far. There will be one {@link
    * DataServiceTupleIterator} query issued per partition.
    *
@@ -160,7 +160,7 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
   /** The {@link DataServiceTupleIterator} reading from the current index partition. */
   private DataServiceTupleIterator<E> src;
 
-  /**
+  /*
    * When true, the entire key range specified by the client has been visited and the iterator is
    * exhausted (i.e., all done).
    *
@@ -168,7 +168,7 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
    */
   private boolean exhausted = false;
 
-  /**
+  /*
    * The #of index partitions queried so far.
    *
    * @deprecated The #of partitions is a bit tricky since splits and joins can introduce new
@@ -179,7 +179,7 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
     return nparts;
   }
 
-  /**
+  /*
    * The #of entries visited so far (not the #of entries scanned, which can be much greater if a
    * filter is in use).
    */
@@ -188,7 +188,7 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
     return nvisited;
   }
 
-  /**
+  /*
    * Note: The {@link PartitionedTupleIterator} uses a sequential scan (rather than mapping across
    * the index partitions in parallel) and always picks up from the successor of the last key
    * visited. Read-consistent is achieved by specifying a commitTime for the <i>timestamp</i> rather
@@ -252,7 +252,7 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
     close();
   }
 
-  /**
+  /*
    * Marks the iterator as {@link #exhausted} and aborts the {@link #ts} iff it was identified to
    * the ctor as being created specifically to provide read-consistent semantics for this iterator
    * and hence our responsibility to clean up.
@@ -312,8 +312,8 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
 
       if (cause != null) {
 
-        /*
-         * Handle StaleLocatorException. This exception indicates that
+      /*
+       * Handle StaleLocatorException. This exception indicates that
          * we have a stale index partition locator. This can happen when
          * index partitions are split, joined, or moved. It can only
          * happen for UNISOLATED or READ_COMMITTED operations since we
@@ -327,8 +327,8 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
 
           if (lastStaleLocator.getPartitionId() == locator.getPartitionId()) {
 
-            /*
-             * This happens if we get a StaleLocatorException,
+          /*
+       * This happens if we get a StaleLocatorException,
              * restart the locator scan, and get another
              * StaleLocatorException on the same index partition.
              * Since a new index partition identifier is assigned
@@ -499,8 +499,8 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
               flags,
               filter) {
 
-            /**
-             * Overridden so that we observe each distinct result set obtained from the DataService.
+          /*
+       * Overridden so that we observe each distinct result set obtained from the DataService.
              */
             protected ResultSet getResultSet(
                 final long timestamp,
@@ -524,8 +524,8 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
 
               if (reverseScan) {
 
-                /*
-                 * We are moving backwards through the key order so we
+              /*
+       * We are moving backwards through the key order so we
                  * take the last key visited and use it to restrict our
                  * exclusive upper bound. Without this the iterator will
                  * not "advance".
@@ -540,8 +540,8 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
 
               } else {
 
-                /*
-                 * We are moving forwards through the key order so we
+              /*
+       * We are moving forwards through the key order so we
                  * take the last key visited and use it to advanced our
                  * inclusive lower bound. Without this the iterator will
                  * not advance.
@@ -599,7 +599,7 @@ public class PartitionedTupleIterator<E> implements ITupleIterator<E> {
     };
   }
 
-  /**
+  /*
    * Batch delete behind semantics.
    *
    * @see DataServiceTupleIterator#remove()

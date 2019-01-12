@@ -40,8 +40,8 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * This test suite is for trac items where the failure mode is a 500 error caused by a software
+/*
+* This test suite is for trac items where the failure mode is a 500 error caused by a software
  * error, often in the static optimizer.
  *
  * <p>The tests each consist of a test query in a file in this package. The typical test succeeds if
@@ -75,7 +75,7 @@ public class TestNoExceptions extends QuadsTestCase {
     return (AbstractEmbergraphSailTestCase) super.getDelegate();
   }
 
-  /**
+  /*
    * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
    * JOURNAL FILE.
    */
@@ -101,7 +101,7 @@ public class TestNoExceptions extends QuadsTestCase {
 
     return props;
   }
-  /**
+  /*
    * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in the top-level query.
    *
    * <p>This is specifically for Trac 746 which crashed out during optimize. So the test simply runs
@@ -109,11 +109,11 @@ public class TestNoExceptions extends QuadsTestCase {
    *
    * @throws IOException
    */
-  public void test_namedSubquery746() throws Exception, TokenMgrError, ParseException, IOException {
+  public void test_namedSubquery746() throws Exception, TokenMgrError {
     optimizeQuery("ticket746");
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -133,7 +133,7 @@ public class TestNoExceptions extends QuadsTestCase {
     optimizeQuery("filterSubselect737");
   }
 
-  /**
+  /*
    *
    *
    * <pre>

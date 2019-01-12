@@ -46,14 +46,14 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Decoder for {@link IVSolutionSetEncoder}.
+/*
+* Decoder for {@link IVSolutionSetEncoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class IVSolutionSetDecoder implements IBindingSetDecoder {
 
-  /**
+  /*
    * The schema provides the order in which the {@link IV}[] for solutions stored in the hash index
    * are encoded in the {@link HTree}. {@link IV} s which are not bound are modeled by a {@link
    * TermId#NullIV}.
@@ -64,7 +64,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
    */
   private final LinkedHashSet<IVariable<?>> schema;
 
-  /**
+  /*
    * An extensible random access list. The order of the items in the list is the order in which they
    * are entered into the {@link #schema}. This is used to interpret the bitmap for the variables
    * which are bound in a solution.
@@ -80,7 +80,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
   /** The #of solutions decoded to date. */
   private int nsolutions = 0;
 
-  /**
+  /*
    * The version number. The versions are declared by {@link IVSolutionSetEncoder}. They are read
    * from the first solution in a stream.
    */
@@ -90,13 +90,13 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
    * Discovered dynamically.
    */
 
-  /**
+  /*
    * The namespace of the lexicon relation. The namespace is discovered dynamically when we read the
    * first record with an {@link IVCache} association. It will be <code>null</code> until then.
    */
   private String namespace;
 
-  /**
+  /*
    * Used to de-serialize the {@link EmbergraphValue}s for {@link IVCache} associations. This is
    * initialized if and when we discover the {@link #namespace}.
    */
@@ -128,7 +128,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
     this.tmp = new StringBuilder();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: Solutions MUST be decoded in the encode order because the schema (the set of variables
@@ -147,7 +147,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
     return decodeSolution(in, resolveCachedValues);
   }
 
-  /**
+  /*
    * Stream oriented decode.
    *
    * @param in The source data.
@@ -231,16 +231,16 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
       final int newCached = in.unpackInt();
 
       if (newCached > 0 && numBindings == 0) {
-        /*
-         * Illegal combination. New IV => EmbergraphValue cache
+      /*
+       * Illegal combination. New IV => EmbergraphValue cache
          * associations can only appear with new bindings.
          */
         throw new RuntimeException();
       }
 
       if (newCached > 0 && namespace == null) {
-        /*
-         * This is where we discover the namespace for the serialized
+      /*
+       * This is where we discover the namespace for the serialized
          * EmbergraphValue objects.
          */
         namespace = in.readUTF2();
@@ -312,8 +312,8 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
           if (bitIndex >= maxBitIndex) break;
           final boolean isSet = BytesUtil.getBit(data, bitIndex++);
           if (isSet) {
-            /*
-             * Decode the IV for this variable.
+          /*
+       * Decode the IV for this variable.
              *
              * Note: A "mock" IV will be decoded into a non-null
              * TermId.
@@ -352,8 +352,8 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
           if (bitIndex >= maxBitIndex) break;
           final boolean isSet = BytesUtil.getBit(data, bitIndex++);
           if (isSet) {
-            /*
-             * Decode the cached Value for the IV.
+          /*
+       * Decode the cached Value for the IV.
              */
             chksum++;
             final IV<?, ?> iv = ivs.get(i);
@@ -361,8 +361,8 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
             if (!iv.isNullIV()) {
               cache.put(iv, value);
             } else {
-              /*
-               * We must attach the IVCache association for a
+            /*
+       * We must attach the IVCache association for a
                * mockIV since it is NOT possible to recover that
                * association from the cache.
                *
@@ -438,7 +438,7 @@ public class IVSolutionSetDecoder implements IBindingSetDecoder {
     valueSer = null;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Always returns <code>true</code>.

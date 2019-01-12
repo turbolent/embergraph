@@ -54,8 +54,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.sparql.ast.ssets.ISolutionSetManager;
 import org.openrdf.model.URI;
 
-/**
- * Methods for static analysis of a query. There is one method which looks "up". This corresponds to
+/*
+* Methods for static analysis of a query. There is one method which looks "up". This corresponds to
  * how we actually evaluation things (left to right in the query plan). There are two methods which
  * look "down". This corresponds to the bottom-up evaluation semantics of SPARQL.
  *
@@ -172,7 +172,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
   private static final Logger log = Logger.getLogger(StaticAnalysis.class);
 
-  /**
+  /*
    * @param queryRoot The root of the query. We need to have this on hand in order to resolve {@link
    *     NamedSubqueryInclude}s during static analysis.
    * @deprecated By the other form of this constructor. The constructor should have access to the
@@ -185,7 +185,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     this(queryRoot, null /* evaluationContext */);
   }
 
-  /**
+  /*
    * @param queryRoot The root of the query. We need to have this on hand in order to resolve {@link
    *     NamedSubqueryInclude}s during static analysis.
    * @param evaluationContext The evaluation context provides access to the {@link
@@ -198,7 +198,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     super(queryRoot, evaluationContext);
   }
 
-  /**
+  /*
    * Find and return the parent {@link JoinGroupNode} which is the lowest such {@link JoinGroupNode}
    * dominating the given {@link GraphPatternGroup}. This will search the tree to locate the parent
    * when the {@link GraphPatternGroup} appears as the annotation of a {@link QueryBase}, {@link
@@ -240,7 +240,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Return the parent of the {@link GraphPatternGroup}. When the group has an explicit parent
    * reference, that reference is returned immediately. Otherwise the {@link QueryRoot} is searched
    * for a node having the given group as an annotation. This makes it possible to locate a {@link
@@ -320,7 +320,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return p;
   }
 
-  /**
+  /*
    * Search in aGroup for theGroup, peeking into {@link QueryBase#getWhereClause()}, {@link
    * ServiceNode#getGraphPattern()}, and all {@link SubqueryFunctionNodeBase} instances for any
    * {@link FilterNode}s.
@@ -397,8 +397,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return null;
   }
 
-  //    /**
-  //     * Return the set of variables which are "in-scope" for a given node. This
+  //    /*
+//     * Return the set of variables which are "in-scope" for a given node. This
   //     * is based on bottom up evaluation semantics rather than the top-down,
   //     * left-to-right evaluation order. The "in-scope" variables are the
   //     * variables which are locally produced, which are produced in a child
@@ -458,8 +458,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   //
   //    }
   //
-  //    /**
-  //     * Reports on all in-scope variables for a {@link JoinGroupNode} or
+  //    /*
+//     * Reports on all in-scope variables for a {@link JoinGroupNode} or
   //     * {@link UnionNode}.
   //     */
   //    private Set<IVariable<?>> getInScopeVars(
@@ -491,7 +491,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
   //
   //    }
 
-  /**
+  /*
    * Return the set of variables which MUST be bound coming into this group during top-down,
    * left-to-right evaluation. The returned set is based on a non-recursive analysis of the
    * definitely (MUST) bound variables in each of the parent groups. The analysis is non-recursive
@@ -562,8 +562,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       for (IGroupMemberNode child : parent) {
 
-        /*
-         * We've found ourself. Stop collecting vars.
+      /*
+       * We've found ourself. Stop collecting vars.
          */
         if (child == node) {
 
@@ -590,7 +590,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return getDefinitelyIncomingBindings(parent, vars);
   }
 
-  /**
+  /*
    * Returns true if the current node is located (recursively) inside the top-level query, false if
    * it is nested inside a subquery or a named subquery. The method does not look into {@link
    * FilterNode}s, but only recurses into {@link GroupNodeBase} nodes.
@@ -603,7 +603,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return locatedInGroupNode(queryRoot.getWhereClause(), node);
   }
 
-  /**
+  /*
    * Returns true if the current node is identical or (recursively) located inside the given group
    * scope or is the group node itself, but not a subquery referenced in the node. The method does
    * not look into {@link FilterNode}s, but only recurses into {@link GroupNodeBase} nodes.
@@ -631,7 +631,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return false; // not found
   }
 
-  /**
+  /*
    * Return the set of variables which MIGHT be bound coming into this group during top-down,
    * left-to-right evaluation. The returned set is based on a non-recursive analysis of the "maybe"
    * bound variables in each of the parent groups. The analysis is non-recursive for each parent
@@ -690,8 +690,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       for (IGroupMemberNode child : parent) {
 
-        /*
-         * We've found ourself. Stop collecting vars.
+      /*
+       * We've found ourself. Stop collecting vars.
          */
         if (child == node) {
 
@@ -707,8 +707,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
           if (
           /* !optional && */ !minus) {
-            /*
-             * MINUS does not produce any bindings, it just removes
+          /*
+       * MINUS does not produce any bindings, it just removes
              * solutions. On the other hand, OPTIONAL joins DO
              * produce bindings, they are just "maybe" bindings.
              */
@@ -725,7 +725,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return getMaybeIncomingBindings(parent, vars);
   }
 
-  /**
+  /*
    * Return the set of variables which MUST be bound for solutions after the evaluation of this
    * group. A group will produce "MUST" bindings for variables from its statement patterns and a LET
    * based on an expression whose variables are known bound.
@@ -810,8 +810,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         final ISolutionSetStats stats = getSolutionSetStats(name);
 
-        /*
-         * Note: This is all variables which are bound in ALL solutions.
+      /*
+       * Note: This is all variables which are bound in ALL solutions.
          */
 
         vars.addAll(stats.getAlwaysBound());
@@ -853,7 +853,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vars;
   }
 
-  /**
+  /*
    * Collect all variables appearing in the group. This DOES NOT descend recursively into groups. It
    * DOES report variables projected out of named subqueries, SPARQL 1.1 subqueries, and SERVICE
    * calls.
@@ -882,7 +882,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vars;
   }
 
-  /**
+  /*
    * Return the set of variables which MUST or MIGHT be bound after the evaluation of this join
    * group.
    *
@@ -958,8 +958,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         final ISolutionSetStats stats = getSolutionSetStats(name);
 
-        /*
-         * Note: This is all variables bound in ANY solution. It MAY
+      /*
+       * Note: This is all variables bound in ANY solution. It MAY
          * include variables which are NOT bound in some solutions.
          */
 
@@ -1027,8 +1027,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         if (!sp.isOptional()) {
 
-          /*
-           * Required JOIN (statement pattern).
+        /*
+       * Required JOIN (statement pattern).
            */
 
           getDefinitelyProducedBindings(sp, vars, recursive);
@@ -1046,8 +1046,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
           || child instanceof SubqueryRoot
           || child instanceof ServiceNode) {
 
-        /*
-         * Required JOIN (Named solution set, SPARQL 1.1 subquery,
+      /*
+       * Required JOIN (Named solution set, SPARQL 1.1 subquery,
          * EXISTS, or SERVICE).
          *
          * Note: We have to descend recursively into these structures in
@@ -1076,8 +1076,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       } else if (child instanceof AssignmentNode) {
 
-        /*
-         * Note: BIND() in a group is only a "maybe" because the spec says
+      /*
+       * Note: BIND() in a group is only a "maybe" because the spec says
          * that an error when evaluating a BIND() in a group will not fail
          * the solution.
          *
@@ -1227,7 +1227,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vars;
   }
 
-  /**
+  /*
    * Report "MUST" bound bindings projected by the query. This involves checking the WHERE clause
    * and the {@link ProjectionNode} for the query. Note that the projection can rename variables. It
    * can also bind a constant on a variable. Variables which are not projected by the query will NOT
@@ -1318,8 +1318,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         if (bind.getValueExpression() instanceof IConstant<?>) {
 
-          /*
-           * 1. The projection of a constant.
+        /*
+       * 1. The projection of a constant.
            *
            * Note: This depends on pre-evaluation of constant
            * expressions. If the expression has not been reduced to a
@@ -1335,8 +1335,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
           if (definitelyBound.contains(bind.getVar())) {
 
-            /*
-             * 2. The projection of a definitely bound variable
+          /*
+       * 2. The projection of a definitely bound variable
              * under the same name.
              */
 
@@ -1350,8 +1350,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
           if (definitelyBound.contains(bind.getValueExpression())) {
 
-            /*
-             * 3. The projection of a definitely bound variable
+          /*
+       * 3. The projection of a definitely bound variable
              * under a different name.
              */
 
@@ -1363,8 +1363,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
         if (!isAggregate) {
 
-          /*
-           * 4. The projection of a select expression which is not an
+        /*
+       * 4. The projection of a select expression which is not an
            * aggregate. Normally, the projected variable will be
            * bound if all components of the select expression are
            * definitely bound: this comment ignores the possibility
@@ -1385,21 +1385,21 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
            */
           final Set<IVariable<?>> usedVars =
               getSpannedVariables(
-                  (BOp) bind.getValueExpression(), new LinkedHashSet<IVariable<?>>());
+                  bind.getValueExpression(), new LinkedHashSet<IVariable<?>>());
 
           usedVars.removeAll(definitelyBound);
 
           if (!usedVars.isEmpty()) {
 
-            /*
-             * There is at least one variable which is used by the
+          /*
+       * There is at least one variable which is used by the
              * select expression which is not definitely bound.
              */
             continue;
           }
 
-          /*
-           * All variables used by the select expression are
+        /*
+       * All variables used by the select expression are
            * definitely bound so the projected variable for that
            * select expression will be definitely bound.
            */
@@ -1420,7 +1420,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     }
   }
 
-  /**
+  /*
    * Report the "MUST" and "MAYBE" bound bindings projected by the query. This reduces to reporting
    * the projected variables. We do not need to analyze the whereClause or projection any further in
    * order to know what "might" be projected.
@@ -1441,7 +1441,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return projection.getProjectionVars(vars);
   }
 
-  /**
+  /*
    * Report "MUST" bound bindings projected by the SERVICE. This involves checking the graph pattern
    * reported by {@link ServiceNode#getGraphPattern()}.
    *
@@ -1454,7 +1454,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
 
     final GraphPatternGroup<IGroupMemberNode> graphPattern =
-        (GraphPatternGroup<IGroupMemberNode>) node.getGraphPattern();
+        node.getGraphPattern();
 
     if (graphPattern != null) {
 
@@ -1464,7 +1464,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vars;
   }
 
-  /**
+  /*
    * Report the "MUST" and "MAYBE" bound variables projected by the service. This involves checking
    * the graph pattern reported by {@link ServiceNode#getGraphPattern()}. A SERVICE does NOT have an
    * explicit PROJECTION so it can not rename the projected bindings.
@@ -1475,7 +1475,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
 
     final GraphPatternGroup<IGroupMemberNode> graphPattern =
-        (GraphPatternGroup<IGroupMemberNode>) node.getGraphPattern();
+        node.getGraphPattern();
 
     if (graphPattern != null) {
 
@@ -1489,7 +1489,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
    * FILTERS analysis for JoinGroupNodes
    */
 
-  /**
+  /*
    * Return only the filter child nodes in this group that will be fully bound before running any of
    * the joins in this group.
    *
@@ -1519,7 +1519,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return filters;
   }
 
-  /**
+  /*
    * Return only the filter child nodes in this group whose variables were not fully bound on entry
    * into the join group but which will be fully bound no later than once we have run the required
    * joins in this group.
@@ -1558,7 +1558,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return filters;
   }
 
-  /**
+  /*
    * Return only the filter child nodes in this group that will not be fully bound even after
    * running the <em>required</em> joins in this group.
    *
@@ -1614,7 +1614,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return filters;
   }
 
-  /**
+  /*
    * Return any filters can not succeed based on the "incoming", "must" and "may" bound variables
    * for this group. These filters are candidates for pruning.
    *
@@ -1689,7 +1689,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return filters;
   }
 
-  /**
+  /*
    * Helper method to determine the set of filters that will be fully bound assuming the specified
    * set of variables is bound.
    */
@@ -1726,7 +1726,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
    * Materialization pipeline support.
    */
 
-  /**
+  /*
    * Use the {@link INeedsMaterialization} interface to find and collect variables that need to be
    * materialized for this constraint.
    */
@@ -1760,7 +1760,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return gatherVarsToMaterialize(c, terms, null /*varMap*/, includeVarsInAnnotations);
   }
 
-  /**
+  /*
    * Static helper used to determine materialization requirements.
    *
    * <p>TODO This should also reason about datatype constraints on variables. If we know that a
@@ -1862,7 +1862,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return terms;
   }
 
-  /**
+  /*
    * Identify the join variables for the specified INCLUDE for the position within the query in
    * which it appears.
    *
@@ -1877,7 +1877,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return _getJoinVars(aNamedSubquery, anInclude, vars);
   }
 
-  /**
+  /*
    * Identify the join variables for the specified subquery for the position within the query in
    * which it appears.
    *
@@ -1890,7 +1890,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return _getJoinVars(subquery, subquery, vars);
   }
 
-  /**
+  /*
    * Identify the join variables for the specified subquery for the position within the query in
    * which it appears. For a named subquery, it considers the position in which the INCLUDE appears.
    *
@@ -1944,7 +1944,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vars;
   }
 
-  /**
+  /*
    * Return the join variables for a SERVICE.
    *
    * @param serviceNode
@@ -1979,7 +1979,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vars;
   }
 
-  /**
+  /*
    * Return the join variables for a VALUES clause (embedded only - not top-level).
    *
    * @param bc The VALUES clause (a bunch of solutions)
@@ -2020,7 +2020,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vars;
   }
 
-  /**
+  /*
    * Return the join variables for an INCLUDE of a pre-existing named solution set.
    *
    * @param nsi The {@link NamedSubqueryInclude}
@@ -2069,7 +2069,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vars;
   }
 
-  /**
+  /*
    * Return any variables which are used after the given node in the current ordering of its parent
    * {@link JoinGroupNode} but DOES NOT consider the parent or the PROJECTION for the query in which
    * this group appears.
@@ -2101,7 +2101,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
       if (found) {
 
         // Add in any variables referenced after this proxy node.
-        getSpannedVariables((BOp) c, true /* filters */, vars);
+        getSpannedVariables(c, true /* filters */, vars);
       }
 
       if (c == node) {
@@ -2116,7 +2116,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vars;
   }
 
-  /**
+  /*
    * Return the set of variables which must be projected if the group is to be converted into a
    * sub-query. This method identifies variables which are either MUST or MIGHT bound outside of the
    * group which are also used within the group and includes them in the projection. It also
@@ -2200,7 +2200,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return projectedVars;
   }
 
-  /**
+  /*
    * Return <code>true</code> if any of the {@link ProjectionNode}, {@link GroupByNode}, or {@link
    * HavingNode} indicate that this is an aggregation query.
    *
@@ -2212,7 +2212,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return isAggregate(query.getProjection(), query.getGroupBy(), query.getHaving());
   }
 
-  /**
+  /*
    * Return <code>true</code> if any of the {@link ProjectionNode}, {@link GroupByNode}, or {@link
    * HavingNode} indicate that this is an aggregation query. All arguments are optional.
    */
@@ -2236,7 +2236,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return false;
   }
 
-  /**
+  /*
    * Checks if given expression node is or contains any aggregates <br>
    * <br>
    * After refactoring of SPARQL parser (https://jira.blazegraph.com/browse/BLZG-1176),
@@ -2263,8 +2263,8 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       if (exprNode instanceof FunctionNode) {
 
-        /*
-         * Hack used when the EmbergraphExprBuilder needs to decide
+      /*
+       * Hack used when the EmbergraphExprBuilder needs to decide
          * on the validity of aggregate expressions before we
          * get around to caching the value expressions during
          * evaluation (i.e., to pass the compliance tests for
@@ -2272,20 +2272,16 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
          */
         final FunctionNode functionNode = (FunctionNode) exprNode;
 
-        if (FunctionRegistry.isAggregate(functionNode.getFunctionURI())) return true;
+        return FunctionRegistry.isAggregate(functionNode.getFunctionURI());
       }
 
       return false;
     }
 
-    if (isObviousAggregate(expr)) {
-
-      return true;
-    }
-    return false;
+    return isObviousAggregate(expr);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the {@link IValueExpression} is an obvious aggregate (it uses an
    * {@link IAggregate} somewhere within it). This is used to identify projections which are
    * aggregates when they are used without an explicit GROUP BY or HAVING clause.
@@ -2322,7 +2318,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return false;
   }
 
-  /**
+  /*
    * Extract the set of variables contained in a binding set.
    *
    * @param bss
@@ -2349,7 +2345,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return isCNF(filter.getValueExpressionNode());
   }
 
-  /**
+  /*
    * Checks whether the given value expression node is in CNF.
    *
    * @param vexpr
@@ -2382,7 +2378,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     }
   }
 
-  /**
+  /*
    * Check if filter node is an inner disjunct within a CNF. In particular, it must not contain any
    * other conjunctive nodes.
    *
@@ -2409,17 +2405,11 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       return isCNFDisjunct;
 
-    } else if (functionURI.equals(FunctionRegistry.AND)) {
-
-      return false; // not allowed
-
-    } else {
-
-      return true; // everything else is a terminal
-    }
+    } else
+      return !functionURI.equals(FunctionRegistry.AND);
   }
 
-  /**
+  /*
    * Check if filter node is a negation (possibly recursive) or terminal within a CNF. In
    * particular, it must not contain any other disjuncts or conjuncts.
    *
@@ -2450,7 +2440,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     }
   }
 
-  /**
+  /*
    * Returns the corresponding (equivalent) value expression in CNF. Makes a copy of the original
    * value expression, leaving it unmodified.
    *
@@ -2465,7 +2455,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return pushDisjuncts(pushNegations(copy));
   }
 
-  /**
+  /*
    * Recursively pushes negations down the operator tree, such that in the returned node, negations
    * are always at the bottom of the tree. In particular, all AND and OR value expressions will be
    * situated above negations.
@@ -2579,7 +2569,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vexp;
   }
 
-  /**
+  /*
    * Recursively pushes logical ORs below logical ANDs in the operator tree, such that in the
    * returned node all OR expressions are situated below AND expressions. Expectes that all NOT
    * expressions have been pushed down to the bottom already (otherwise, the behavior is
@@ -2641,7 +2631,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return vexp; // return the (possibly modified) vexp
   }
 
-  /**
+  /*
    * Extracts all AND-connected conjuncts located at the top of a given value expression node
    * (recursively, unless an operator different from AND is encountered).
    *
@@ -2670,7 +2660,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     return nodes;
   }
 
-  /**
+  /*
    * Constructs an (unbalanced) tree out of the list of conjuncts. If the conjuncts that are passed
    * in are null or empty, null is returned.
    *
@@ -2703,7 +2693,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     }
   }
 
-  /**
+  /*
    * Resolves the {@link NamedSubqueryInclude} in the given context, returning the associated {@link
    * NamedSubqueryRoot} object. Returns null if resolval fails.
    */

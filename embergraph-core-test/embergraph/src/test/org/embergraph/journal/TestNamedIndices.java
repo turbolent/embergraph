@@ -27,8 +27,8 @@ import org.embergraph.btree.HTreeIndexMetadata;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.htree.HTree;
 
-/**
- * Test suite for api supporting registration, lookup, use, and atomic commit of named indices.
+/*
+* Test suite for api supporting registration, lookup, use, and atomic commit of named indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public class TestNamedIndices extends ProxyTestCase<Journal> {
     super(name);
   }
 
-  /**
+  /*
    * Test the ability to register and use named {@link BTree}, including whether the named {@link
    * BTree} is restart safe.
    */
@@ -82,12 +82,12 @@ public class TestNamedIndices extends ProxyTestCase<Journal> {
 
       if (journal.isStable()) {
 
-        /*
-         * re-open the journal and test restart safety.
+      /*
+       * re-open the journal and test restart safety.
          */
         journal = reopenStore(journal);
 
-        btree = (BTree) journal.getIndex(name);
+        btree = journal.getIndex(name);
 
         assertNotNull("btree", btree);
         assertEquals("indexUUID", indexUUID, btree.getIndexMetadata().getIndexUUID());
@@ -101,7 +101,7 @@ public class TestNamedIndices extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test the ability to register and use named {@link HTree}, including whether the named {@link
    * HTree} is restart safe.
    */
@@ -140,8 +140,8 @@ public class TestNamedIndices extends ProxyTestCase<Journal> {
 
       if (journal.isStable()) {
 
-        /*
-         * re-open the journal and test restart safety.
+      /*
+       * re-open the journal and test restart safety.
          */
         journal = reopenStore(journal);
 
@@ -159,8 +159,8 @@ public class TestNamedIndices extends ProxyTestCase<Journal> {
     }
   }
 
-  //    /**
-  //     * FIXME GIST : Test for Stream as well. We should define a basic Stream
+  //    /*
+//     * FIXME GIST : Test for Stream as well. We should define a basic Stream
   //     * that handles byte[]s, much like the basic BTree or HTree. That way it can
   //     * be a concrete class and used for a variety of things.
   //     *

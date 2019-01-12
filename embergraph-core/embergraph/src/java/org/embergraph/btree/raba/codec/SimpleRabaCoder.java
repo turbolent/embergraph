@@ -34,8 +34,8 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * This class does not offer any compression. It merely stores the byte[][] in a {@link ByteBuffer}
+/*
+* This class does not offer any compression. It merely stores the byte[][] in a {@link ByteBuffer}
  * together with offset information required to extract the original byte[]s using a random access
  * pattern. It supports both B+Tree keys and B+Tree values.
  *
@@ -49,7 +49,7 @@ public class SimpleRabaCoder implements IRabaCoder, Externalizable {
   /** The original version for the coded data record. */
   private static final byte VERSION0 = 0x00;
 
-  /**
+  /*
    * New version for the coded data record also records the capacity of the original {@link IRaba}.
    */
   private static final byte VERSION1 = 0x01;
@@ -101,7 +101,7 @@ public class SimpleRabaCoder implements IRabaCoder, Externalizable {
   private static final int SIZEOF_FLAGS = 1;
   /** The size of the size field. */
   private static final int SIZEOF_SIZE = Bytes.SIZEOF_INT;
-  /**
+  /*
    * The size of the capacity field.
    *
    * @since #VERSION1
@@ -236,7 +236,7 @@ public class SimpleRabaCoder implements IRabaCoder, Externalizable {
     return new CodedRabaImpl(data);
   }
 
-  /**
+  /*
    * Class provides in place access to the "coded" logical byte[][].
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -317,7 +317,7 @@ public class SimpleRabaCoder implements IRabaCoder, Externalizable {
       O_offsets = o_nulls + bitFlagByteCount;
     }
 
-    /**
+    /*
      * The offset into the buffer of the offset[]. This array is also used to compute the length of
      * any given byte[] by subtracting the offset of the next byte[] from the offset of the desired
      * byte[], which is why we write <code>size+1</code> values into this array.

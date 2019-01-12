@@ -31,8 +31,8 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
-/**
- * An fully compliant implementation of Sesame's {@link Repository} that wraps the embergraph remote
+/*
+* An fully compliant implementation of Sesame's {@link Repository} that wraps the embergraph remote
  * API. Additional functionality is available using the embergraph {@link RemoteRepositoryManager}.
  * The proper incantation to create an instance of this class is:
  *
@@ -81,14 +81,14 @@ public class EmbergraphSailRemoteRepository implements Repository {
   /** Initially open (aka initialized). */
   private volatile boolean open = true;
 
-  /**
+  /*
    * non-<code>null</code> iff the {@link RemoteRepositoryManager} is allocated by the constructor,
    * in which case it is scoped to the life cycle of this {@link EmbergraphSailRemoteRepository}
    * instance.
    */
   private final RemoteRepositoryManager our_mgr;
 
-  /**
+  /*
    * Always non-<code>null</code>. This is either an object that we have created ourselves or one
    * that was passed in by the caller. If we create this object, then we own its life cycle and will
    * close it when this object is closed. In this case it will also be a {@link
@@ -96,7 +96,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
    */
   private final RemoteRepository remoteRepository;
 
-  /**
+  /*
    * This exists solely for {@link #getValueFactory()} - the value factory is not used inside of
    * this class.
    */
@@ -108,7 +108,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
     return remoteRepository;
   }
 
-  /**
+  /*
    * Constructor that simply specifies an endpoint. This class will internally allocate a {@link
    * RemoteRepositoryManager} that is scoped to the life cycle of this class. The allocated {@link
    * RemoteRepositoryManager} will be closed when this {@link EmbergraphSailRemoteRepository} is
@@ -133,7 +133,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
     this.remoteRepository = our_mgr.getRepositoryForURL(sparqlEndpointURL);
   }
 
-  /**
+  /*
    * Flyweight constructor wraps the embergraph remote client for a SPARQL endpoint as an openrdf
    * {@link Repository}.
    *
@@ -193,7 +193,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
     return open;
   }
 
-  /**
+  /*
    * Unsupported operation
    *
    * @throws UnsupportedOperationException
@@ -203,7 +203,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Unsupported operation
    *
    * @throws UnsupportedOperationException
@@ -219,7 +219,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
     return valueFactory;
   }
 
-  /**
+  /*
    * Cancel the query specified by the UUID.
    *
    * @param queryId
@@ -230,7 +230,7 @@ public class EmbergraphSailRemoteRepository implements Repository {
     this.our_mgr.cancel(queryId);
   }
 
-  /**
+  /*
    * Return a collection containing Metadata objects about the currently running queries.
    *
    * @return

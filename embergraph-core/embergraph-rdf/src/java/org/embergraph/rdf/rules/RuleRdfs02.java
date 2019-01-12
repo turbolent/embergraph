@@ -23,8 +23,8 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * rdfs2:
+/*
+* rdfs2:
  *
  * <pre>
  * ( u rdf:type x) :- ( a rdfs:domain x), ( u a y ).

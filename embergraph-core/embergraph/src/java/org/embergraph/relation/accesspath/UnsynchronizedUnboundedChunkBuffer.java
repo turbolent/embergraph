@@ -32,8 +32,8 @@ import org.embergraph.striterator.EmptyChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * An unsynchronized buffer backed by a fixed capacity array that migrates references onto an
+/*
+* An unsynchronized buffer backed by a fixed capacity array that migrates references onto an
  * internal {@link Queue}, which may be drained by an {@link #iterator()}.
  *
  * <p><strong>This implementation is NOT thread-safe.</strong>
@@ -50,7 +50,7 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
   /** The order of the elements as they are added to the buffer (iff known). */
   private final IKeyOrder<E> keyOrder;
 
-  /**
+  /*
    * From the first element visited.
    *
    * <p>TODO This is probably no longer required since the component type of the class is now
@@ -58,7 +58,7 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
    */
   private Class<E[]> chunkClass = null;
 
-  /**
+  /*
    * @param capacity The capacity of the backing buffer.
    * @param cls The component type of the backing array.
    */
@@ -67,7 +67,7 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
     this(capacity, cls, null /* filter */, null /* keyOrder */);
   }
 
-  /**
+  /*
    * @param capacity The capacity of the backing buffer.
    * @param cls The component type of the backing array.
    * @param filter Filter to keep elements out of the buffer (optional).
@@ -99,7 +99,7 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
     queue.add(chunk);
   }
 
-  /**
+  /*
    * Iterator drains chunks from a snapshot of the queue (shallow copy). Chunks are drained in a
    * FIFO basis. The internal buffer is flushed onto a chunk on the queue before the snapshot is
    * taken so that any buffered elements will appear in the snapshot.
@@ -133,7 +133,7 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
     }
   }
 
-  /**
+  /*
    * Drains chunks from a queue. Chunks are drained in a FIFO basis.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -145,7 +145,7 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
 
     private final IKeyOrder<E> keyOrder;
 
-    /**
+    /*
      * @param src Iterator visiting dense chunks.
      * @param keyOrder The order of the elements in the buffer or <code>null</code> iff not known.
      */
@@ -217,15 +217,15 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
 
       } else {
 
-        /*
-         * Create and return a new chunk[] containing only the elements
+      /*
+       * Create and return a new chunk[] containing only the elements
          * remaining in the current iterator.
          */
 
         final int remaining = chunk.length - i;
 
-        /*
-         * Dynamically instantiation an array of the same component type
+      /*
+       * Dynamically instantiation an array of the same component type
          * as the objects that we are visiting.
          */
 
@@ -269,8 +269,8 @@ public class UnsynchronizedUnboundedChunkBuffer<E> extends AbstractUnsynchronize
 
       if (!keyOrder.equals(getKeyOrder())) {
 
-        /*
-         * Sort into the required order.
+      /*
+       * Sort into the required order.
          *
          * Note: Since this iterator is supposed to have snapshot
          * semantics the chunk is cloned so that the sort does not

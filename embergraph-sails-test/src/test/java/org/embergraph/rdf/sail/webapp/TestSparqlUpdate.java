@@ -75,8 +75,8 @@ import org.openrdf.query.parser.sparql.SPARQLUpdateTest;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Proxied test suite.
+/*
+* Proxied test suite.
  *
  * <p>Note: Also see {@link SPARQLUpdateTest}. These two test suites SHOULD be kept synchronized.
  * {@link SPARQLUpdateTest} runs against a local kb instance while this class runs against the NSS.
@@ -95,7 +95,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     super(name);
   }
 
-  /**
+  /*
    * We need to be running this test suite for each of the BufferModes that we want to support. This
    * is because there are subtle interactions between the BufferMode, the AbstractTask, and the
    * execution of mutation operations. One approach might be to pass in a collection of BufferMode
@@ -113,9 +113,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
         //				"testInsertWhereGraph",
         new LinkedHashSet<BufferMode>(
             Arrays.asList(
-                new BufferMode[] {
-                  BufferMode.Transient, BufferMode.DiskWORM, BufferMode.MemStore, BufferMode.DiskRW,
-                })),
+                BufferMode.Transient, BufferMode.DiskWORM, BufferMode.MemStore, BufferMode.DiskRW)),
         TestMode.quads);
   }
 
@@ -142,7 +140,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     graph2 = f.createURI(EX_NS, "graph2");
   }
 
-  /**
+  /*
    * Load the test data set.
    *
    * @throws Exception
@@ -165,7 +163,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     super.tearDown();
   }
 
-  /**
+  /*
    * Load a file.
    *
    * @param file The file.
@@ -179,7 +177,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     m_repo.add(add);
   }
 
-  /**
+  /*
    * Get a set of useful namespace prefix declarations.
    *
    * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
@@ -229,8 +227,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(hasStatement(alice, RDFS.LABEL, f.createLiteral("Alice"), true));
   }
 
-  //    /**
-  //     * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //    /*
+//     * TODO Requires BINDINGS support for {@link RemoteRepository}
   //     *
   //     * @since openrdf 2.6.3
   //     */
@@ -257,8 +255,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   //        assertFalse(con.hasStatement(alice, RDFS.LABEL, f.createLiteral("Alice"), true));
   //    }
   //
-  //    /**
-  //     * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //    /*
+//     * TODO Requires BINDINGS support for {@link RemoteRepository}
   //     *
   //     * @since openrdf 2.6.6
   //     */
@@ -300,8 +298,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(hasStatement(bob, RDFS.LABEL, f.createLiteral("Bob"), true));
   }
 
-  //    /**
-  //     * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //    /*
+//     * TODO Requires BINDINGS support for {@link RemoteRepository}
   //     *
   //     * @since openrdf 2.6.3
   //     */
@@ -342,8 +340,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertFalse(hasStatement(bob, RDFS.LABEL, null, true));
   }
 
-  //    /**
-  //  * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //    /*
+//  * TODO Requires BINDINGS support for {@link RemoteRepository}
   //  *
   //     * @since openrdf 2.6.3
   //     */
@@ -369,8 +367,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   //        assertFalse(con.hasStatement(bob, RDFS.LABEL, null, true));
   //    }
 
-  //    /**
-  //  * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //    /*
+//  * TODO Requires BINDINGS support for {@link RemoteRepository}
   //  *
   //     * @since openrdf 2.6.3
   //     */
@@ -460,8 +458,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertFalse(hasStatement(alice, FOAF.NAME, f.createLiteral("Alice"), true));
   }
 
-  //    /**
-  //  * TODO Requires BINDINGS support for {@link RemoteRepository}
+  //    /*
+//  * TODO Requires BINDINGS support for {@link RemoteRepository}
   //  *
   //       * @since OPENRDF 2.6.6. */
   ////  @Test
@@ -531,7 +529,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
 
     m_repo.prepareUpdate(update.toString()).evaluate();
 
-    /**
+    /*
      * FIXME getStatements() is hitting a problem in the ASTConstruct iterator where a blank node is
      * being reported without a letter (_:18 versus _:B18). However, there are a number of DAWG
      * tests which fail if we just wrap any blank node with the canonicalizing mapping (those which
@@ -641,7 +639,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(msg, hasStatement(alice, FOAF.KNOWS, null, true));
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -695,8 +693,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertFalse(msg, hasStatement(alice, FOAF.NAME, f.createLiteral("Alice"), true));
   }
 
-  //    /**
-  //     * Note: blank nodes are not permitted in the DELETE clause template.
+  //    /*
+//     * Note: blank nodes are not permitted in the DELETE clause template.
   //     *
   //     * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/571">
   //     * DELETE/INSERT WHERE handling of blank nodes </a>
@@ -1236,7 +1234,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(null, null, null, false));
   }
@@ -1268,7 +1266,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(null, null, null, false, graph1));
     assertFalse(hasStatement(null, null, null, false, graph2));
@@ -1292,7 +1290,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //        System.err.println(dumpStore());
 
     //        operation.execute();
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(null, null, null, false, graph1));
     assertTrue(hasStatement(null, null, null, false, graph2));
@@ -1311,7 +1309,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(null, null, null, false));
   }
@@ -1344,7 +1342,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    m_repo.prepareUpdate(update).evaluate();
 
     assertFalse(hasStatement(null, null, null, false, graph1));
     assertFalse(hasStatement(null, null, null, false, graph2));
@@ -1367,7 +1365,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
 
     //        operation.execute();
 
-    m_repo.prepareUpdate(update.toString()).evaluate();
+    m_repo.prepareUpdate(update).evaluate();
 
     assertTrue(hasStatement(null, null, null, false, graph1));
     assertTrue(hasStatement(null, null, null, false, graph2));
@@ -1375,8 +1373,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertFalse(hasStatement(null, null, null, false, new Resource[] {null}));
   }
 
-  //  /**
-  //  * Note: blank nodes are not permitted in the DELETE clause template.
+  //  /*
+//  * Note: blank nodes are not permitted in the DELETE clause template.
   //  *
   //  * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/571">
   //  * DELETE/INSERT WHERE handling of blank nodes </a>
@@ -1411,8 +1409,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
   //        assertTrue(msg, hasStatement(alice, FOAF.NAME, f.createLiteral("foo"), true));
   //    }
 
-  //  /**
-  //  * Note: blank nodes are not permitted in the DELETE clause template.
+  //  /*
+//  * Note: blank nodes are not permitted in the DELETE clause template.
   //  *
   //  * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/571">
   //  * DELETE/INSERT WHERE handling of blank nodes </a>
@@ -1524,7 +1522,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(msg, hasStatement(book1, DC.TITLE, null, true, bookStore2));
   }
 
-  /**
+  /*
    * Unit test for
    *
    * <pre>
@@ -1576,7 +1574,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     assertTrue(msg, hasStatement(null, null, null, true, two));
   }
 
-  /**
+  /*
    * This test is based on a forum post. This post provided an example of an issue with Unicode
    * case-folding in the REGEX operator and a means to encode the Unicode characters to avoid doubt
    * about which characters were transmitted and receieved.
@@ -1689,8 +1687,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
             f.createURI(ns, "mike"), RDFS.LABEL, f.createLiteral("Michael Personick"), true));
   }
 
-  //    /**
-  //     * Verify ability to load data from a gzip resource.
+  //    /*
+//     * Verify ability to load data from a gzip resource.
   //     */
   //    public void testLoadZip()
   //            throws Exception
@@ -1787,7 +1785,8 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     Update,
     DropAll,
     LoadFile
-  };
+  }
+
   /** A stress test written to look for stochastic behaviors in SPARQL UPDATE for GROUP COMMIT. */
   public void testStressInsertWhereGraph() throws Exception {
 
@@ -1811,7 +1810,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     }
   }
 
-  /**
+  /*
    * Variant of scenario sketched in https://jira.blazegraph.com/browse/BLZG-1738, the problem being
    * that PropertyPathNodes in UPDATE queries are not treated properly.
    *

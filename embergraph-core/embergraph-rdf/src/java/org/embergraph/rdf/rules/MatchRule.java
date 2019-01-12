@@ -21,8 +21,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Rule supporting {@link LocalTripleStore#match(Literal[], URI[], URI)}.
+/*
+* Rule supporting {@link LocalTripleStore#match(Literal[], URI[], URI)}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

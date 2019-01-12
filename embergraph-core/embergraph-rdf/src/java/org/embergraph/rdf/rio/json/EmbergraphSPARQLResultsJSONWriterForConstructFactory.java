@@ -24,8 +24,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterFactory;
 
-/**
- * A {@link TupleQueryResultWriterFactory} for writers of SPARQL/JSON query results.
+/*
+* A {@link TupleQueryResultWriterFactory} for writers of SPARQL/JSON query results.
  *
  * @author Arjohn Kampman
  */

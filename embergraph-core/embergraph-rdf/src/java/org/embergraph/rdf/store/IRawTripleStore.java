@@ -35,8 +35,8 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 import org.openrdf.model.Value;
 
-/**
- * Low-level API directly using long term identifiers rather than an RDF Value object model.
+/*
+* Low-level API directly using long term identifiers rather than an RDF Value object model.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public interface IRawTripleStore extends ITripleStore {
   /** The constant <code>NULL</code>. */
   String NULLSTR = "NULL";
 
-  /**
+  /*
    * Add a term into the term:id index and the id:term index, returning the assigned term identifier
    * (non-batch API).
    *
@@ -58,35 +58,35 @@ public interface IRawTripleStore extends ITripleStore {
    * @param value The term.
    * @return The assigned internal value.
    */
-  public IV addTerm(Value value);
+  IV addTerm(Value value);
 
-  /**
+  /*
    * Batch insert of terms into the database. The internal values are set on the terms as a
    * side-effect.
    *
    * @param terms An array to be inserted.
    * @see LexiconRelation#addTerms(EmbergraphValue[], int, boolean)
    */
-  public void addTerms(EmbergraphValue[] terms);
+  void addTerms(EmbergraphValue[] terms);
 
-  /**
+  /*
    * Return the RDF {@link Value} given an internal value (non-batch api).
    *
    * @return the RDF value or <code>null</code> if there is no term with that internal value in the
    *     index.
    */
-  public Value getTerm(IV iv);
+  Value getTerm(IV iv);
 
-  /**
+  /*
    * Return the pre-assigned internal value for the value (non-batch API).
    *
    * @param value Any {@link Value} reference (MAY be <code>null</code>).
    * @return The pre-assigned internal value -or- null iff the term is not known to the database.
    * @deprecated This is only used by the unit tests. It is not efficient for scale-out.
    */
-  public IV getIV(Value value);
+  IV getIV(Value value);
 
-  /**
+  /*
    * Chooses and returns the best {@link IAccessPath} for the given triple pattern.
    *
    * @param s The internal value for the subject -or- null.
@@ -94,9 +94,9 @@ public interface IRawTripleStore extends ITripleStore {
    * @param o The internal value for the object -or- null.
    * @deprecated by {@link SPORelation#getAccessPath(IV, IV, IV)}
    */
-  public IAccessPath<ISPO> getAccessPath(IV s, IV p, IV o);
+  IAccessPath<ISPO> getAccessPath(IV s, IV p, IV o);
 
-  /**
+  /*
    * Return the {@link IAccessPath} for the specified {@link IKeyOrder} and a fully unbound triple
    * pattern. This is generally used only when you want to perform a {@link
    * IAccessPath#distinctTermScan()}.
@@ -104,9 +104,9 @@ public interface IRawTripleStore extends ITripleStore {
    * @deprecated by {@link SPORelation#getAccessPath(SPOKeyOrder,
    *     org.embergraph.relation.rule.IPredicate)}
    */
-  public IAccessPath<ISPO> getAccessPath(IKeyOrder<ISPO> keyOrder);
+  IAccessPath<ISPO> getAccessPath(IKeyOrder<ISPO> keyOrder);
 
-  /**
+  /*
    * Return the statement from the database (fully bound s:p:o only).
    *
    * <p>Note: This may be used to examine the {@link StatementEnum}.
@@ -122,12 +122,12 @@ public interface IRawTripleStore extends ITripleStore {
    * @exception IllegalArgumentException if the c is null and {@link #isQuads()} would return <code>
    *     true</code>.
    */
-  public ISPO getStatement(IV s, IV p, IV o, IV c);
+  ISPO getStatement(IV s, IV p, IV o, IV c);
 
   /** @deprecated does not support quads. */
-  public ISPO getStatement(IV s, IV p, IV o);
+  ISPO getStatement(IV s, IV p, IV o);
 
-  /**
+  /*
    * Writes the statements onto the statements indices (batch, parallel, NO truth maintenance).
    *
    * @param stmts The statements (sorted into {@link IKeyOrder#SPO} order as a side-effect).
@@ -136,9 +136,9 @@ public interface IRawTripleStore extends ITripleStore {
    *     axiom or inferred and that is converted to an explicit statement by this method will be
    *     reported in this count as well as any statement that was not pre-existing in the database).
    */
-  public long addStatements(ISPO[] stmts, int numStmts);
+  long addStatements(ISPO[] stmts, int numStmts);
 
-  /**
+  /*
    * Writes the statements onto the statement indices (batch, parallel, NO truth maintenance).
    *
    * @param stmts The statements.
@@ -149,9 +149,9 @@ public interface IRawTripleStore extends ITripleStore {
    *     axiom or inferred and that is converted to an explicit statement by this method will be
    *     reported in this count as well as any statement that was not pre-existing in the database).
    */
-  public long addStatements(ISPO[] stmts, int numStmts, IElementFilter<ISPO> filter);
+  long addStatements(ISPO[] stmts, int numStmts, IElementFilter<ISPO> filter);
 
-  /**
+  /*
    * Writes the statements onto the statement indices (batch, parallel, NO truth maintenance).
    *
    * @param itr An iterator visiting the statements to be added.
@@ -162,9 +162,9 @@ public interface IRawTripleStore extends ITripleStore {
    *     reported in this count as well as any statement that was not pre-existing in the database).
    * @deprecated by {@link SPORelation#insert(IChunkedOrderedIterator)}
    */
-  public long addStatements(IChunkedOrderedIterator<ISPO> itr, IElementFilter<ISPO> filter);
+  long addStatements(IChunkedOrderedIterator<ISPO> itr, IElementFilter<ISPO> filter);
 
-  /**
+  /*
    * Removes the statements from the statement indices (batch, parallel, NO truth maintenance).
    *
    * <p>Note: The {@link StatementEnum} on the {@link SPO}s is ignored by this method. It will
@@ -174,9 +174,9 @@ public interface IRawTripleStore extends ITripleStore {
    * @param itr The iterator
    * @return The #of statements that were removed from the indices.
    */
-  public long removeStatements(ISPO[] stmts, int numStmts);
+  long removeStatements(ISPO[] stmts, int numStmts);
 
-  /**
+  /*
    * Removes the statements from the statement indices (batch, parallel, NO truth maintenance).
    *
    * <p>Note: The {@link StatementEnum} on the {@link SPO}s is ignored by this method. It will
@@ -186,9 +186,9 @@ public interface IRawTripleStore extends ITripleStore {
    * @param itr The iterator
    * @return The #of statements that were removed from the indices.
    */
-  public long removeStatements(IChunkedOrderedIterator<ISPO> itr);
+  long removeStatements(IChunkedOrderedIterator<ISPO> itr);
 
-  /**
+  /*
    * Filter the supplied set of {@link ISPO} objects for whether they are "present" or "not present"
    * in the database, depending on the value of the supplied boolean variable (batch API).
    *
@@ -198,10 +198,10 @@ public interface IRawTripleStore extends ITripleStore {
    *     statements that do not exist
    * @return an iteration over the filtered set of statements
    */
-  public IChunkedOrderedIterator<ISPO> bulkFilterStatements(
+  IChunkedOrderedIterator<ISPO> bulkFilterStatements(
       ISPO[] stmts, int numStmts, boolean present);
 
-  /**
+  /*
    * Efficiently filter the supplied set of {@link SPO} objects for whether they are "present" or
    * "not present" in the database, depending on the value of the supplied boolean variable (batch
    * api).
@@ -211,34 +211,34 @@ public interface IRawTripleStore extends ITripleStore {
    *     statements that do not exist
    * @return an iteration over the filtered set of statements
    */
-  public IChunkedOrderedIterator<ISPO> bulkFilterStatements(
+  IChunkedOrderedIterator<ISPO> bulkFilterStatements(
       IChunkedOrderedIterator<ISPO> itr, boolean present);
 
-  /**
+  /*
    * This method fills out the statement metadata (type and sid) for {@link ISPO}s that are present
    * in the database. {@link ISPO}s not present in the database are left as-is.
    *
    * @return An iterator visiting the completed {@link ISPO}s. Any {@link ISPO}s that were not found
    *     will be present but their statement metadata (type and sid) will be unchanged.
    */
-  public IChunkedOrderedIterator<ISPO> bulkCompleteStatements(
+  IChunkedOrderedIterator<ISPO> bulkCompleteStatements(
       final IChunkedOrderedIterator<ISPO> itr);
 
   /** Externalizes a quad or a triple with a statement identifier using an abbreviated syntax. */
-  public String toString(IV s, IV p, IV o, IV c);
+  String toString(IV s, IV p, IV o, IV c);
 
-  /**
+  /*
    * Externalizes a triple using an abbreviated syntax.
    *
    * @deprecated by {@link #toString(IV, IV, IV, IV)}
    */
-  public String toString(IV s, IV p, IV o);
+  String toString(IV s, IV p, IV o);
 
-  /**
+  /*
    * Externalizes a term using an abbreviated syntax.
    *
    * @param iv The term identifier.
    * @return A representation of the term.
    */
-  public String toString(IV iv);
+  String toString(IV iv);
 }

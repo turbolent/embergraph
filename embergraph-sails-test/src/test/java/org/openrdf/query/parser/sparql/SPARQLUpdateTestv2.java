@@ -56,8 +56,8 @@ import org.openrdf.rio.RDFParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Tests for SPARQL 1.1 Update functionality.
+/*
+* Tests for SPARQL 1.1 Update functionality.
  *
  * @author Jeen Broekstra
  */
@@ -81,7 +81,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
 
   protected static final String EX_NS = "http://example.org/";
 
-  /**
+  /*
    * Note: This field MUST be cleared in tearDown or a hard reference will be retained to the
    * backend until the end of CI!
    */
@@ -189,7 +189,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
     logger.debug("dataset loaded.");
   }
 
-  /**
+  /*
    * Get a set of useful namespace prefix declarations.
    *
    * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
@@ -208,7 +208,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
     return declarations.toString();
   }
 
-  /**
+  /*
    * Note: This method may be overridden in order to run the test suite against other variations of
    * the embergraph backend.
    */
@@ -279,7 +279,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
     System.err.println("##### INITIAL DATA IN DATABASE");
     debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
 
-    /**
+    /*
      * Load into graphA (note: file is "file:///tmp/junk.ttl" in the ticket).
      *
      * <pre>
@@ -311,7 +311,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
     System.err.println("##### DATA IN DATABASE AFTER INSERT");
     debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
 
-    /**
+    /*
      * Verify that all three triples are in graphA:
      *
      * <pre>
@@ -324,7 +324,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
       assertEquals("graphA", 3L, countSolutions(query));
     }
 
-    /**
+    /*
      * Now delete some triples from graphA while inserting the deleted triples into tempGraph:
      *
      * <pre>
@@ -354,7 +354,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
     System.err.println("##### DATA IN DATABASE AFTER DELETE + INSERT");
     debugPrintSolutions("SELECT * WHERE { GRAPH ?g { ?s ?p ?o } }");
 
-    /**
+    /*
      * graphA should have one triple remaining:
      *
      * <pre>

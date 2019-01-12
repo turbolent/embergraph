@@ -20,8 +20,8 @@ package org.embergraph.btree.keys;
 import java.text.Collator;
 import java.util.Locale;
 
-/**
- * Implementation that uses the JDK library (does not support compressed sort keys).
+/*
+* Implementation that uses the JDK library (does not support compressed sort keys).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

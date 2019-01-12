@@ -26,8 +26,8 @@ package org.embergraph.relation.rule.eval;
 import org.embergraph.relation.IMutableRelation;
 import org.embergraph.relation.rule.IProgram;
 
-/**
- * Symbolic constants corresponding to the type of action associated with the execution of an {@link
+/*
+* Symbolic constants corresponding to the type of action associated with the execution of an {@link
  * IProgram}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -44,15 +44,15 @@ public enum ActionEnum {
   /** Delete the computed {@link ISolution}s from the {@link IMutableRelation}. */
   Delete(true /*mutation*/);
 
-  // /**
-  // * Apply an {@link ITransform} to the elements of the
+  // /*
+// * Apply an {@link ITransform} to the elements of the
   // * {@link IMutableRelation} selected by the computed {@link ISolution}s.
   // */
   // Update;
 
   private final boolean mutation;
 
-  private ActionEnum(final boolean mutation) {
+  ActionEnum(final boolean mutation) {
 
     this.mutation = mutation;
   }

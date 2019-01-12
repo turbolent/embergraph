@@ -15,8 +15,8 @@
 */
 package org.embergraph.ganglia;
 
-/**
- * Attributes for {@link IGangliaMetadataMessage} records.
+/*
+* Attributes for {@link IGangliaMetadataMessage} records.
  *
  * <p>Note: The attribute names, group names, titles, and descriptions for the core metrics can be
  * discovered from the output of
@@ -37,7 +37,7 @@ package org.embergraph.ganglia;
  */
 public interface IGangliaAttributes {
 
-  /**
+  /*
    * The name of the optional attribute which is used to collect metrics into groups in the UI. The
    * value of the attribute is the name of the metric group to which a metric belongs.
    */
@@ -46,7 +46,7 @@ public interface IGangliaAttributes {
   /** The name of the optional attribute whose value is a nice "title" for the metric. */
   String ATTR_TITLE = "TITLE";
 
-  /**
+  /*
    * The name of the optional attribute whose value is a description of the attribute.
    *
    * <p>Note: The maximum size of a packet for the ganglia protocol puts a realistic limit on how

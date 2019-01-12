@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Exponential Distribution (aka Negative Exponential Distribution); See the <A
+/*
+* Exponential Distribution (aka Negative Exponential Distribution); See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node78.html#SECTION000780000000000000000"> math
  * definition</A> <A HREF="http://www.statsoft.com/textbook/glose.html#Exponential Distribution">
  * animated definition</A>.
@@ -68,7 +68,7 @@ public class Exponential extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + lambda + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

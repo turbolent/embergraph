@@ -91,8 +91,8 @@ import org.embergraph.service.ndx.pipeline.IndexWriteTask;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.ExecutionHelper;
 
-/**
- * A client-side view of a scale-out index as of some <i>timestamp</i>.
+/*
+* A client-side view of a scale-out index as of some <i>timestamp</i>.
  *
  * <p>This view automatically handles the split, join, or move of index partitions within the
  * federation. The {@link IDataService} throws back a (sometimes wrapped) {@link
@@ -132,7 +132,7 @@ import org.embergraph.util.concurrent.ExecutionHelper;
  */
 public class ClientIndexView implements IScaleOutClientIndex {
 
-  /**
+  /*
    * Note: Invocations of the non-batch API are logged at the WARN level since they result in an
    * application that can not scale-out efficiently.
    */
@@ -141,14 +141,14 @@ public class ClientIndexView implements IScaleOutClientIndex {
   /** True iff the {@link #log} level is WARN or less. */
   protected final boolean WARN = log.getEffectiveLevel().toInt() <= Level.WARN.toInt();
 
-  /**
+  /*
    * Error message used if we were unable to start a new transaction in order to provide
    * read-consistent semantics for an {@link ITx#READ_COMMITTED} view or for a read-only operation
    * on an {@link ITx#UNISOLATED} view.
    */
   protected static final transient String ERR_NEW_TX = "Could not start transaction";
 
-  /**
+  /*
    * Error message used if we were unable to abort a transaction that we started in order to provide
    * read-consistent semantics for an {@link ITx#READ_COMMITTED} view or for a read-only operation
    * on an {@link ITx#UNISOLATED} view.
@@ -168,7 +168,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return (ThreadPoolExecutor) fed.getExecutorService();
   }
 
-  /**
+  /*
    * The timeout in milliseconds for tasks run on an {@link IDataService}.
    *
    * @see Options#CLIENT_TASK_TIMEOUT
@@ -178,7 +178,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
   /** */
   protected static final String NON_BATCH_API = "Non-batch API";
 
-  /**
+  /*
    * This may be used to disable the non-batch API, which is quite convenient for locating code that
    * needs to be re-written to use {@link IIndexProcedure}s.
    */
@@ -203,7 +203,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return name;
   }
 
-  /**
+  /*
    * The {@link IMetadataIndex} for this scale-out index.
    *
    * @todo This is a bit dangerous since most of the time when you want the metadata index you may
@@ -212,13 +212,13 @@ public class ClientIndexView implements IScaleOutClientIndex {
    */
   private final IMetadataIndex metadataIndex;
 
-  /**
+  /*
    * The {@link IndexMetadata} for the {@link MetadataIndex} that manages the scale-out index. The
    * metadata template for the managed scale-out index is available as a field on this object.
    */
   private final MetadataIndexMetadata metadataIndexMetadata;
 
-  /**
+  /*
    * Obtain the proxy for a metadata service. if this instance fails, then we can always ask for a
    * new instance for the same federation (failover).
    */
@@ -230,7 +230,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
   /** Knows how to break down key[][]s into {@link Split}s. */
   private final ISplitter splitter;
 
-  /**
+  /*
    * Return a view of the metadata index for the scale-out index as of the timestamp associated with
    * this index view.
    *
@@ -282,7 +282,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return sb.toString();
   }
 
-  /**
+  /*
    * Create a view on a scale-out index.
    *
    * @param fed The federation containing the index.
@@ -343,7 +343,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return metadataIndexMetadata;
   }
 
-  /**
+  /*
    * The metadata for the managed scale-out index. Among other things, this gets used to determine
    * how we serialize keys and values for {@link IKeyArrayIndexProcedure}s when we serialize a
    * procedure to be sent to a remote {@link IDataService}.
@@ -538,7 +538,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return rangeCount(null, null);
   }
 
-  /**
+  /*
    * Returns the sum of the range count for each index partition spanned by the key range.
    *
    * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/470">Optimize range counts on
@@ -557,7 +557,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return handler.getResult();
   }
 
-  /**
+  /*
    * The exact range count is obtained by mapping a key-range scan over the index partitions. The
    * operation is parallelized.
    */
@@ -574,7 +574,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return handler.getResult();
   }
 
-  /**
+  /*
    * The exact range count of deleted and undeleted tuples is obtained by mapping a key-range scan
    * over the index partitions. The operation is parallelized.
    */
@@ -597,7 +597,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return rangeIterator(null, null);
   }
 
-  /**
+  /*
    * An {@link ITupleIterator} that kinds the use of a series of {@link ResultSet}s to cover all
    * index partitions spanned by the key range.
    */
@@ -608,7 +608,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
         fromKey, toKey, capacity, IRangeQuery.DEFAULT /* flags */, null /* filter */);
   }
 
-  /**
+  /*
    * Identifies the index partition(s) that are spanned by the key range query and maps an iterator
    * across each index partition. The iterator buffers responses up to the specified capacity and a
    * follow up iterator request is automatically issued if the iterator has not exhausted the key
@@ -673,8 +673,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       if (parallel) {
 
-        /*
-         * Parallel iterator scan. This breaks the total ordering
+      /*
+       * Parallel iterator scan. This breaks the total ordering
          * guarantee of the iterator in exchange for faster visitation
          * of the tuples in key range which spans multiple index
          * partitions.
@@ -685,8 +685,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       } else {
 
-        /*
-         * Process the index partitions in key order so the total order
+      /*
+       * Process the index partitions in key order so the total order
          * of the keys is preserved by the iterator visitation ordering.
          */
 
@@ -698,8 +698,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       if (isReadConsistentTx) {
 
-        /*
-         * Terminate the transaction since we created it ourselves.
+      /*
+       * Terminate the transaction since we created it ourselves.
          */
 
         try {
@@ -716,7 +716,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
   }
 
-  /**
+  /*
    * Parallel iterator scan. This breaks the total ordering guarantee of the iterator in exchange
    * for faster visitation of the tuples in key range which spans multiple index partitions.
    *
@@ -765,7 +765,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
         new ParallelRangeIteratorTask(
             ts, isReadConsistentTx, fromKey, toKey, capacity, flags, filter, queryBuffer);
 
-    /**
+    /*
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">BlockingBuffer.close()
      *     does not unblock threads </a>
      */
@@ -782,7 +782,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return new UnchunkedTupleIterator(queryBuffer.iterator());
   }
 
-  /**
+  /*
    * Converts a chunked iterator to an {@link ITupleIterator}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -839,7 +839,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
       throw new UnsupportedOperationException();
     }
 
-    /**
+    /*
      * @todo {@link ITupleIterator} should extend {@link ICloseableIterator} so we do not need to do
      *     this in a finalizer. A finalizer is driven by GC on the client, but the iterator could be
      *     doing a lot of work on the remote data services in which case the client GC might not be
@@ -852,7 +852,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
   }
 
-  /**
+  /*
    * Inner class runs a range iterator mapped in parallel across multiple index partitions.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -908,7 +908,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       this.queryBuffer = queryBuffer;
 
-      final int poolSize = ((ThreadPoolExecutor) getThreadPool()).getCorePoolSize();
+      final int poolSize = getThreadPool().getCorePoolSize();
 
       final int maxTasksPerRequest = fed.getClient().getMaxParallelTasksPerRequest();
 
@@ -934,8 +934,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       try {
 
-        /*
-         * Scan visits index partition locators in key order.
+      /*
+       * Scan visits index partition locators in key order.
          *
          * Note: We are using the caller's timestamp.
          *
@@ -948,8 +948,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
         while (itr.hasNext()) {
 
-          /*
-           * Process the remaining locators a "chunk" at a time. The
+        /*
+       * Process the remaining locators a "chunk" at a time. The
            * chunk size is chosen to be the configured size of the
            * client thread pool. This lets us avoid overwhelming the
            * thread pool queue when mapping a procedure across a very
@@ -969,8 +969,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
             final PartitionLocator locator = itr.next();
 
-            /*
-             * Constrain the iterator's range to the intersection of
+          /*
+       * Constrain the iterator's range to the intersection of
              * the index partition and the original iterator range.
              */
 
@@ -1001,7 +1001,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
       }
     }
 
-    /**
+    /*
      * Runs an iterator against a key-range. If an index partition is split, joined or moved then
      * the iterator will follow the data. If the {@link BlockingBuffer} is closed, then this task
      * will terminate.
@@ -1013,7 +1013,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       private final PartitionedTupleIterator itr;
 
-      /**
+      /*
        * @param fromKey
        * @param toKey
        */
@@ -1073,7 +1073,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     } // RobustIteratorTask
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: Because the procedure is submitted against a single key, it is assumed to address a
@@ -1139,7 +1139,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
   }
 
-  /**
+  /*
    * Variant uses the caller's timestamp.
    *
    * @param ts
@@ -1191,7 +1191,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return fed.locatorScan(name, ts, fromKey, toKey, reverseScan);
   }
 
-  /**
+  /*
    * Maps an {@link IIndexProcedure} across a key range by breaking it down into one task per index
    * partition spanned by that key range.
    *
@@ -1255,7 +1255,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
   }
 
-  /**
+  /*
    * Variant uses the caller's timestamp.
    *
    * @param ts
@@ -1281,7 +1281,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
               + " will be mapped across index partitions in "
               + (parallel ? "parallel" : "sequence"));
 
-    final int poolSize = ((ThreadPoolExecutor) getThreadPool()).getCorePoolSize();
+    final int poolSize = getThreadPool().getCorePoolSize();
 
     final int maxTasksPerRequest = fed.getClient().getMaxParallelTasksPerRequest();
 
@@ -1352,7 +1352,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
               + (parallel ? "parallel" : "sequence"));
   }
 
-  /**
+  /*
    * The procedure will be transparently broken down and executed against each index partitions
    * spanned by its keys. If the <i>ctor</i> creates instances of {@link
    * IParallelizableIndexProcedure} then the procedure will be mapped in parallel against the
@@ -1402,8 +1402,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
           && proc.isReadOnly()
           && TimestampUtility.isReadCommittedOrUnisolated(getTimestamp())) {
 
-        /*
-         * Create a read-historical transaction from the last commit
+      /*
+       * Create a read-historical transaction from the last commit
          * point of the federation in order to provide consistent
          * reads for the mapped procedure.
          */
@@ -1442,8 +1442,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
         } catch (IOException e) {
 
-          /*
-           * log error but do not rethrow since operation is over
+        /*
+       * log error but do not rethrow since operation is over
            * anyway.
            */
 
@@ -1453,7 +1453,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
   }
 
-  /**
+  /*
    * Variant uses the caller's timestamp.
    *
    * @param ts
@@ -1524,7 +1524,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     runTasks(parallel, tasks);
   }
 
-  /**
+  /*
    * Runs a set of tasks.
    *
    * <p>Note: If {@link #getRecursionDepth()} evaluates to a value larger than zero then the task(s)
@@ -1580,7 +1580,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
   }
 
-  /**
+  /*
    * Maps a set of {@link DataServiceProcedureTask} tasks across the index partitions in strict
    * sequence. The tasks are run on the {@link #getThreadPool()} so that sequential tasks never
    * increase the total burden placed by the client above the size of that thread pool.
@@ -1613,7 +1613,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
   }
 
-  /**
+  /*
    * Maps a set of {@link DataServiceProcedureTask} tasks across the index partitions in parallel.
    *
    * @param tasks The tasks.
@@ -1655,8 +1655,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
           f.get();
 
         } catch (ExecutionException e) {
-          /*
-           * FIXME This needs to recognize when the remote task was
+        /*
+       * FIXME This needs to recognize when the remote task was
            * cancelled by an interrupt and handle that condition
            * appropriately. This is tricky since we are running
            * multiple tasks in parallel. Probably we should interrupt
@@ -1704,7 +1704,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
               + (System.currentTimeMillis() - begin));
   }
 
-  /**
+  /*
    * Maps a set of {@link DataServiceProcedureTask} tasks across the index partitions in strict
    * sequence. The tasks are run on the {@link #getThreadPool()} so that sequential tasks never
    * increase the total burden placed by the client above the size of that thread pool.
@@ -1746,7 +1746,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     }
   }
 
-  /**
+  /*
    * Executes the tasks in the caller's thread.
    *
    * @param tasks The tasks.
@@ -1803,8 +1803,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return splitter.splitKeys(ts, fromIndex, toIndex, a);
   }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     *
   //     * Find the partition for the first key. Check the last key, if it is in the
   //     * same partition then then this is the simplest case and we can just send
@@ -1999,8 +1999,8 @@ public class ClientIndexView implements IScaleOutClientIndex {
   //
   //    }
   //
-  //    /**
-  //     * Paranoia testing for generated splits.
+  //    /*
+//     * Paranoia testing for generated splits.
   //     *
   //     * @param locator
   //     * @param fromIndex
@@ -2071,7 +2071,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return fed.getDataService(pmd.getDataServiceUUID());
   }
 
-  /**
+  /*
    * This operation is not supported - the resource description of a scale-out index would include
    * all "live" resources in the corresponding {@link MetadataIndex}.
    */
@@ -2137,7 +2137,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
             fed.getIndexCounters(name).asynchronousStats,
             writeBuffer);
 
-    /**
+    /*
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">BlockingBuffer.close()
      *     does not unblock threads </a>
      */
@@ -2155,7 +2155,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
     return task.getBuffer();
   }
 
-  /**
+  /*
    * Return a new {@link CounterSet} backed by the {@link ScaleOutIndexCounters} for this scale-out
    * index.
    */

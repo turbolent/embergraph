@@ -41,14 +41,14 @@ import org.embergraph.journal.AbstractJournal.ISnapshotData;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumException;
 
-/**
- * A highly available {@link IBufferStrategy}.
+/*
+* A highly available {@link IBufferStrategy}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHABufferStrategy extends IBufferStrategy {
 
-  /**
+  /*
    * Write a buffer containing data replicated from the master onto the local persistence store.
    *
    * @throws InterruptedException
@@ -57,7 +57,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
   void writeRawBuffer(IHAWriteMessage msg, IBufferAccess b)
       throws IOException, InterruptedException;
 
-  /**
+  /*
    * Send an {@link IHAWriteMessage} and the associated raw buffer through the write pipeline.
    *
    * @param req The {@link IHALogRequest} for some HALog file.
@@ -71,7 +71,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
   Future<Void> sendHALogBuffer(IHALogRequest req, IHAWriteMessage msg, IBufferAccess b)
       throws IOException, InterruptedException;
 
-  /**
+  /*
    * Send an {@link IHAWriteMessage} and the associated raw buffer through the write pipeline.
    *
    * @param req The {@link IHARebuildRequest} to replicate the backing file to the requesting
@@ -101,7 +101,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
       ByteBuffer b)
       throws IOException, InterruptedException;
 
-  /**
+  /*
    * Read from the local store in support of failover reads on nodes in a highly available {@link
    * Quorum}.
    *
@@ -109,14 +109,14 @@ public interface IHABufferStrategy extends IBufferStrategy {
    */
   ByteBuffer readFromLocalStore(final long addr) throws InterruptedException;
 
-  /**
+  /*
    * Extend local store for a highly available {@link Quorum}.
    *
    * @throws InterruptedException
    */
   void setExtentForLocalStore(final long extent) throws IOException, InterruptedException;
 
-  /**
+  /*
    * Reload from the current root block - <strong>CAUTION : THIS IS NOT A RESET / ABORT</strong>.
    * The purpose of this method is to reload the root block under some very limited circumstances,
    * specifically when the root blocks were replaced during a REBUILD or RESYNC of the backing store
@@ -134,7 +134,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
    */
   void resetFromHARootBlock(final IRootBlockView rootBlock);
 
-  /**
+  /*
    * Provides a trigger for synchronization of transient state after a commit.
    *
    * <p>For the RWStore this is used to resynchronize the allocators during the 2-phase commit on
@@ -146,7 +146,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
    */
   void postHACommit(final IRootBlockView rootBlock);
 
-  /**
+  /*
    * Return the #of {@link WriteCache} blocks that were written out for the last write set. This is
    * used to communicate the #of write cache blocks in the commit point back to {@link
    * AbstractJournal#commitNow(long)}. It is part of the commit protocol.
@@ -163,14 +163,14 @@ public interface IHABufferStrategy extends IBufferStrategy {
    */
   long getBlockSequence(); // TODO RENAME => getBlockSequenceCountForCommitPoint()
 
-  /**
+  /*
    * Return the then-current write cache block sequence.
    *
    * @see #getBlockSequence()
    */
   long getCurrentBlockSequence();
 
-  /**
+  /*
    * Snapshot the allocators in preparation for computing a digest of the committed allocations.
    *
    * @return The snapshot in a format that is backing store specific -or- <code>null</code> if the
@@ -178,7 +178,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
    */
   Object snapshotAllocators();
 
-  /**
+  /*
    * Compute the digest of the entire backing store (including the magic, file version, root blocks,
    * etc).
    *
@@ -191,7 +191,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
    */
   void computeDigest(Object snapshot, MessageDigest digest) throws DigestException, IOException;
 
-  /**
+  /*
    * Used to support the rebuild protocol.
    *
    * @param fileOffset - absolute file offset
@@ -199,7 +199,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
    */
   ByteBuffer readRaw(long fileOffset, ByteBuffer transfer);
 
-  /**
+  /*
    * Used to support the rebuild protocol
    *
    * @param req
@@ -210,7 +210,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
   void writeRawBuffer(HARebuildRequest req, IHAWriteMessage msg, ByteBuffer transfer)
       throws IOException;
 
-  /**
+  /*
    * Write a consistent snapshot of the committed state of the backing store. This method writes all
    * data starting after the root blocks. The caller is responsible for putting down the root blocks
    * themselves.
@@ -239,7 +239,7 @@ public interface IHABufferStrategy extends IBufferStrategy {
   /** Return the {@link WriteCacheService} (mainly for debugging). */
   WriteCacheService getWriteCacheService();
 
-  /**
+  /*
    * A StoreState object references critical transient data that can be used to determine a degree
    * of consistency between stores, specifically for an HA context.
    */

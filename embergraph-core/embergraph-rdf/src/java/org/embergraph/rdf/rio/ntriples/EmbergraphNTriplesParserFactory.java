@@ -10,8 +10,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 
-/**
- * An RDR-aware {@link RDFParserFactory} for N-Triples parsers.
+/*
+* An RDR-aware {@link RDFParserFactory} for N-Triples parsers.
  *
  * @author Arjohn Kampman
  * @openrdf

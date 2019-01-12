@@ -26,8 +26,8 @@ package org.embergraph.striterator;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.NoSuchElementException;
 
-/**
- * A closable iterator that visits nothing.
+/*
+* A closable iterator that visits nothing.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

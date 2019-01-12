@@ -17,14 +17,14 @@ package org.embergraph.ganglia;
 
 import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
-/**
- * An earlier version of the Ganglia protocol.
+/*
+* An earlier version of the Ganglia protocol.
  *
  * <p>TODO Is 3.0 or 2.5 the previous format and which one is this?
  */
 public class GangliaMessageEncoder25 implements IGangliaMessageEncoder {
 
-  /**
+  /*
    * TODO I am not sure whether or not there was a request message in this protocol version. While
    * the metadata was sent with each metric record, the purpose of the request is not only to obtain
    * the metadata but also to tell the ganglia services that a new service wants to get up to speed
@@ -40,7 +40,7 @@ public class GangliaMessageEncoder25 implements IGangliaMessageEncoder {
 
   }
 
-  /**
+  /*
    * NOP. The metadata was sent with each metric message in this version of the protocol.
    *
    * @param xdr

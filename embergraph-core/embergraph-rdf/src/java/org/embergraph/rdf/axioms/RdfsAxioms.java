@@ -27,8 +27,8 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * The axioms for RDF Schema.
+/*
+* The axioms for RDF Schema.
  *
  * @author personickm
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

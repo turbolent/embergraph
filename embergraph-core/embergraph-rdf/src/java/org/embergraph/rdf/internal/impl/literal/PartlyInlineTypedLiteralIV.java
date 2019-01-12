@@ -11,8 +11,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
-/**
- * A {@link Literal} modeled as a datatype {@link IV} plus an inline Unicode <code>label</code>.
+/*
+* A {@link Literal} modeled as a datatype {@link IV} plus an inline Unicode <code>label</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
 
     return "Literal(datatypeIV="
         + getExtensionIV()
-        + String.valueOf(getVTE().getCharCode())
+        + getVTE().getCharCode()
         + ", localName="
         + getDelegate()
         + ")";
@@ -66,7 +66,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().stringValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#getLabel()}.
    *
    * <p>We can use the inline delegate for this.
@@ -76,7 +76,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().getLabel();
   }
 
-  /**
+  /*
    * Implements {@link Literal#booleanValue()}.
    *
    * <p>We can use the inline delegate for this.
@@ -86,7 +86,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().booleanValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#byteValue()}.
    *
    * <p>We can use the inline delegate for this.
@@ -96,7 +96,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().byteValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#calendarValue()}.
    *
    * <p>We can use the inline delegate for this.
@@ -106,7 +106,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().calendarValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#decimalValue()}.
    *
    * <p>We can use the inline delegate for this.
@@ -116,7 +116,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().decimalValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#doubleValue()}.
    *
    * <p>We can use the inline delegate for this.
@@ -126,7 +126,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().doubleValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#floatValue()}.
    *
    * <p>We can use the inline delegate for this.
@@ -136,7 +136,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().floatValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#intValue()}.
    *
    * <p>We can use the inline delegate for this.
@@ -146,7 +146,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().intValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#integerValue()}.
    *
    * <p>We can use the inline delegate for this.
@@ -156,7 +156,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().integerValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#longValue()}.
    *
    * <p>We can use the inline delegate for this.
@@ -166,7 +166,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return getDelegate().longValue();
   }
 
-  /**
+  /*
    * Implements {@link Literal#shortValue()}.
    *
    * <p>We can use the inline delegate for this.

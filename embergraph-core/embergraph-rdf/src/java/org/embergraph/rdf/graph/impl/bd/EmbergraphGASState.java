@@ -44,7 +44,7 @@ public class EmbergraphGASState<VS, ES, ST> extends GASState<VS, ES, ST> {
     super(gasEngine, graphAccessor, frontier, gasScheduler, gasProgram);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO EDGE STATE: edge state should be traced out also.
@@ -98,7 +98,7 @@ public class EmbergraphGASState<VS, ES, ST> extends GASState<VS, ES, ST> {
     return getGraphAccessor().getKB().toString((ISPO) e);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The {@link IV} classes sometimes implement more than one kind of {@link Value}. E.g.,
@@ -114,7 +114,7 @@ public class EmbergraphGASState<VS, ES, ST> extends GASState<VS, ES, ST> {
 
     final ISPO spo = (ISPO) e;
 
-    /**
+    /*
      * For the early development of the GAS API, this test was written using o.isURI() rather than
      * o.isResource(). That caused edges that ended in a bnode to be ignored, which means that a lot
      * of the FOAF data set we were using was ignored. This was changed in r7365 to use
@@ -141,11 +141,8 @@ public class EmbergraphGASState<VS, ES, ST> extends GASState<VS, ES, ST> {
       // Edge does not use the specified link attribute type.
       return false;
     }
-    if (!(edge.s() instanceof SidIV)) {
-      // The subject of the edge is not a Statement.
-      return false;
-    }
-    return true;
+    // The subject of the edge is not a Statement.
+    return edge.s() instanceof SidIV;
   }
 
   @SuppressWarnings("rawtypes")

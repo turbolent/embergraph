@@ -15,8 +15,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-/**
- * This servlet implements a proxy pattern to allow for separation of the embergraph-gpu package.
+/*
+* This servlet implements a proxy pattern to allow for separation of the embergraph-gpu package.
  */
 package org.embergraph.rdf.sail.webapp;
 
@@ -46,7 +46,7 @@ public class MapgraphServletProxy extends EmbergraphRDFServlet {
     return DEFAULT_PROVIDER;
   }
 
-  /**
+  /*
    * Factory pattern for a servlet that is discovered at runtime. Either the real servlet or its
    * base class (the proxy servlet) will be returned by the factory. This is used by the {@link
    * RESTServlet} to discover, initialize, delegate, and destroy such servlets using a runtime

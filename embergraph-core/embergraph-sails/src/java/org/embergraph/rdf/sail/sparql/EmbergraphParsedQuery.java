@@ -27,8 +27,8 @@ import org.openrdf.query.algebra.TupleExpr;
 import org.openrdf.query.parser.ParsedQuery;
 import org.openrdf.query.parser.QueryParser;
 
-/**
- * Class extends {@link ParsedQuery} for API compliance with {@link QueryParser} but DOES NOT
+/*
+* Class extends {@link ParsedQuery} for API compliance with {@link QueryParser} but DOES NOT
  * support ANY aspect of the {@link QueryParser} API. All data pertaining to the parsed query is
  * reported by {@link #getASTContainer()}. There is NO {@link TupleExpr} associated with the {@link
  * EmbergraphParsedQuery}. Embergraph uses an entirely different model to represent the parsed

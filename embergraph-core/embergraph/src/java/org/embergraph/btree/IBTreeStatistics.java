@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-/**
- * Interface used to report out some statistics about a B+Tree. These statistics may be used in
+/*
+* Interface used to report out some statistics about a B+Tree. These statistics may be used in
  * combination with a disk cost model to predict the cost (latency) associated with a variety of
  * operations on the B+Tree. All values reported by this interface are tracked explicitly by the
  * {@link AbstractBTree} and do not require DISK IO.
@@ -35,7 +35,7 @@ public interface IBTreeStatistics {
   /** The branching factor for the btree. */
   int getBranchingFactor();
 
-  /**
+  /*
    * The height of the btree. The height is the #of levels minus one. A btree with only a root leaf
    * has <code>height := 0</code>. A btree with a root node and one level of leaves under it has
    * <code>height := 1</code>. Note that all leaves of a btree are at the same height (this is what
@@ -51,14 +51,14 @@ public interface IBTreeStatistics {
   /** The #of leaf nodes in the {@link AbstractBTree}. This is one (1) for a new btree. */
   long getLeafCount();
 
-  /**
+  /*
    * The #of entries (aka tuples) in the {@link AbstractBTree}. This is zero (0) for a new B+Tree.
    * When the B+Tree supports delete markers, this value also includes tuples which have been marked
    * as deleted.
    */
   long getEntryCount();
 
-  /**
+  /*
    * Computes and returns the utilization of the tree. The utilization figures do not factor in the
    * space requirements of nodes and leaves.
    */

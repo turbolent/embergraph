@@ -24,8 +24,8 @@ package org.embergraph.bop.engine;
 import java.io.Serializable;
 import java.util.UUID;
 
-/**
- * Common metadata for operator evaluation messages. Messages are {@link Serializable} since they
+/*
+* Common metadata for operator evaluation messages. Messages are {@link Serializable} since they
  * are sent on the wire in the clustered database.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

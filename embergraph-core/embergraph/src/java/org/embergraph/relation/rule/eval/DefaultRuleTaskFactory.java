@@ -15,8 +15,8 @@ import org.embergraph.relation.rule.eval.pipeline.JoinTask;
 import org.embergraph.relation.rule.eval.pipeline.LocalJoinMasterTask;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * Default factory for tasks to execute {@link IRule}s.
+/*
+* Default factory for tasks to execute {@link IRule}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -28,8 +28,8 @@ public class DefaultRuleTaskFactory implements IRuleTaskFactory, Externalizable 
   /** */
   private static final long serialVersionUID = -6751546625682021618L;
 
-  //    /**
-  //     * Nested subquery join strategy.
+  //    /*
+//     * Nested subquery join strategy.
   //     * <p>
   //     * Note: When used on a scale-out index, this results in the use of
   //     * {@link ClientIndexView}s and a LOT of RMI. The {@link #PIPELINE}
@@ -40,7 +40,7 @@ public class DefaultRuleTaskFactory implements IRuleTaskFactory, Externalizable 
   //    public static transient final IRuleTaskFactory SUBQUERY = new DefaultRuleTaskFactory(
   //            true/* subquery */);
 
-  /**
+  /*
    * Pipeline join strategy.
    *
    * <p>Note: This join strategy was designed for scale-out evaluation but does better for local

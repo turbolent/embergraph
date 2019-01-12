@@ -45,8 +45,8 @@ import org.openrdf.sail.memory.MemoryStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Functionality for creating a JUnit test suite out of a W3C Working Group-style manifest for
+/*
+* Functionality for creating a JUnit test suite out of a W3C Working Group-style manifest for
  * SPARQL query and update tests.
  *
  * @author Jeen Broekstra
@@ -57,7 +57,7 @@ public class SPARQL11ManifestTest {
 
   private static File tmpDir;
 
-  /**
+  /*
    * Creates a new {@link TestSuite} for executiong of {@link SPARQLQueryTest} s.
    *
    * @param factory a factory class that creates each individual test case.
@@ -235,7 +235,7 @@ public class SPARQL11ManifestTest {
     return manifestFile;
   }
 
-  /**
+  /*
    * Verifies if the selected subManifest occurs in the supplied list of excluded subdirs.
    *
    * @param subManifestFile the url of a sub-manifest

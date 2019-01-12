@@ -32,8 +32,8 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.htree.HTree;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for the {@link Name2Addr index} used to name index names to the named indices.
+/*
+* Test suite for the {@link Name2Addr index} used to name index names to the named indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -109,7 +109,7 @@ public class TestName2Addr extends ProxyTestCase<Journal> {
     if (log.isInfoEnabled()) log.info("name=" + name + ", key=" + BytesUtil.toString(a));
   }
 
-  /**
+  /*
    * Test the ability to register and use named index, including whether the named index is restart
    * safe.
    */
@@ -221,8 +221,8 @@ public class TestName2Addr extends ProxyTestCase<Journal> {
 
       if (journal.isStable()) {
 
-        /*
-         * re-open the journal and test restart safety.
+      /*
+       * re-open the journal and test restart safety.
          */
         journal = reopenStore(journal);
 
@@ -242,7 +242,7 @@ public class TestName2Addr extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Return a set of all named indices on the journal.
    *
    * @param jnl The journal.

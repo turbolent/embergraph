@@ -24,13 +24,14 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.btree.keys.SuccessorUtil;
 
-/**
- * A schema for a sparse row store. Note that more than one schema may be used with the same index.
+/*
+* A schema for a sparse row store. Note that more than one schema may be used with the same index.
  * The name of the schema is always encoded as the first component of the key.
  *
  * @todo support optional strong typing for column values?
@@ -49,7 +50,7 @@ public class Schema implements Externalizable {
   /** De-serialization ctor. */
   public Schema() {}
 
-  /**
+  /*
    * @param name The schema name.
    * @param primaryKey The name of the column whose value is the (application defined) primary key.
    * @param primaryKeyType The data type for the primary key.
@@ -96,17 +97,13 @@ public class Schema implements Externalizable {
     if (schemaBytes == null) {
 
       if (SparseRowStore.schemaNameUnicodeClean) {
-        /*
-         * One time encoding of the schema name as UTF8.
+      /*
+       * One time encoding of the schema name as UTF8.
          */
-        try {
-          schemaBytes = name.getBytes(SparseRowStore.UTF8);
-        } catch (UnsupportedEncodingException e) {
-          throw new RuntimeException(e);
-        }
+        schemaBytes = name.getBytes(StandardCharsets.UTF_8);
       } else {
-        /*
-         * One time encoding of the schema name as a Unicode sort key.
+      /*
+       * One time encoding of the schema name as a Unicode sort key.
          */
         schemaBytes = asSortKey(name);
       }
@@ -115,8 +112,8 @@ public class Schema implements Externalizable {
     return schemaBytes;
   }
 
-  //    /**
-  //     * The length of the value that will be returned by {@link #getSchemaBytes()}
+  //    /*
+//     * The length of the value that will be returned by {@link #getSchemaBytes()}
   //     */
   //    final protected int getSchemaBytesLength() {
   //
@@ -128,7 +125,7 @@ public class Schema implements Externalizable {
    * Key builder stuff.
    */
 
-  /**
+  /*
    * Helper method appends a typed value to the compound key (this is used to get the primary key
    * into the compound key).
    *
@@ -161,13 +158,9 @@ public class Schema implements Externalizable {
           {
             final String tmp = v.toString();
             if (SparseRowStore.primaryKeyUnicodeClean) {
-              try {
-                keyBuilder
-                    .append(SuccessorUtil.successor(tmp.getBytes(SparseRowStore.UTF8)))
-                    .appendNul();
-              } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-              }
+              keyBuilder
+                  .append(SuccessorUtil.successor(tmp.getBytes(StandardCharsets.UTF_8)))
+                  .appendNul();
             } else {
               // primary key in backwards compatibility mode.
               keyBuilder.appendText(tmp, true /* unicode */, true /* successor */).appendNul();
@@ -201,11 +194,7 @@ public class Schema implements Externalizable {
           {
             final String tmp = v.toString();
             if (SparseRowStore.primaryKeyUnicodeClean) {
-              try {
-                keyBuilder.append(tmp.getBytes(SparseRowStore.UTF8)).appendNul();
-              } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-              }
+              keyBuilder.append(tmp.getBytes(StandardCharsets.UTF_8)).appendNul();
             } else {
               // primary key in backwards compatibility mode.
               keyBuilder
@@ -231,7 +220,7 @@ public class Schema implements Externalizable {
 
   }
 
-  /**
+  /*
    * Return the successor of a primary key object.
    *
    * @param v The object.
@@ -255,8 +244,8 @@ public class Schema implements Externalizable {
       case Unicode:
       case ASCII:
         //        case UnsignedBytes:
-        /*
-         * Note: See toKey() for how to correctly form the sort key for the
+      /*
+       * Note: See toKey() for how to correctly form the sort key for the
          * successor of a Unicode value.
          */
         throw new UnsupportedOperationException();
@@ -272,7 +261,7 @@ public class Schema implements Externalizable {
 
   }
 
-  /**
+  /*
    * Forms the key in {@link #keyBuilder} that should be used as the first key (inclusive) for a
    * range query that will visit all index entries for the specified primary key.
    *
@@ -299,7 +288,7 @@ public class Schema implements Externalizable {
     return keyBuilder;
   }
 
-  /**
+  /*
    * The prefix that identifies all tuples in the logical row for this schema having the indicated
    * value for their primary key.
    *
@@ -315,8 +304,8 @@ public class Schema implements Externalizable {
    * Note: use SuccessorUtil.successor(key.clone()) instead.
    */
 
-  //    /**
-  //     * Forms the key in {@link #keyBuilder} that should be used as the last key
+  //    /*
+//     * Forms the key in {@link #keyBuilder} that should be used as the last key
   //     * (exclusive) for a range query that will visit all index entries for the
   //     * specified primary key.
   //     *
@@ -350,7 +339,7 @@ public class Schema implements Externalizable {
   //
   //    }
 
-  /**
+  /*
    * Encodes a key for the {@link Schema}.
    *
    * @param keyBuilder
@@ -381,14 +370,8 @@ public class Schema implements Externalizable {
      * The column name. Note that the column name is NOT stored with Unicode
      * compression so that we can decode it without loss.
      */
-    try {
 
-      keyBuilder.append(col.getBytes(SparseRowStore.UTF8)).appendNul();
-
-    } catch (UnsupportedEncodingException ex) {
-
-      throw new RuntimeException(ex);
-    }
+    keyBuilder.append(col.getBytes(StandardCharsets.UTF_8)).appendNul();
 
     keyBuilder.append(timestamp);
 
@@ -437,13 +420,13 @@ public class Schema implements Externalizable {
         + "}";
   }
 
-  /**
+  /*
    * Used for historical compatibility to unbox an application key (convert it to an unsigned
    * byte[]).
    */
   private static final IKeyBuilder _keyBuilder = KeyBuilder.newUnicodeInstance();
 
-  /**
+  /*
    * Utility method for historical compatibility converts an application key to a sort key (an
    * unsigned byte[] that imposes the same sort order).
    *

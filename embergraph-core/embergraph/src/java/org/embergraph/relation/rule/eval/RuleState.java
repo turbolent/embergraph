@@ -19,8 +19,8 @@ import org.embergraph.relation.rule.IStarJoin;
 import org.embergraph.relation.rule.Rule;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * State for a rule execution.
+/*
+* State for a rule execution.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -35,14 +35,14 @@ public class RuleState implements IRuleState {
   /** The plan (data from which the evaluation order was selected). */
   private final IEvaluationPlan plan;
 
-  /**
+  /*
    * The #of unbound variables for the predicates in the tail of the {@link Rule} given the {@link
    * #plan evaluation plan}. The array is correlated with the predicates index in the tail of the
    * rule NOT with its evaluation order.
    */
   private final int[] nvars;
 
-  /**
+  /*
    * An array of the {@link IKeyOrder} that will be used for each predicate in the tail of the rule.
    * The array is correlated with the predicates index in the tail of the rule NOT with its
    * evaluation order. This information may be used to re-order a chunk into the {@link IKeyOrder}
@@ -51,7 +51,7 @@ public class RuleState implements IRuleState {
    */
   private final IKeyOrder[] keyOrder;
 
-  /**
+  /*
    * Each step in the join has a set of variables that are required, either by that tail or by
    * something downstream, be it another tail or the projection (select or construct) or the
    * aggregation phase. If a variable is not required any longer, it will be filtered out of the
@@ -96,7 +96,7 @@ public class RuleState implements IRuleState {
     this.requiredVars = null;
   }
 
-  /**
+  /*
    * @param rule The rule.
    * @param joinNexus The {@link IJoinNexus}.
    */
@@ -153,7 +153,7 @@ public class RuleState implements IRuleState {
     return toString(null);
   }
 
-  /**
+  /*
    * Shows the bindings (if given), the computed evaluation order, the computed {@link IKeyOrder},
    * and the required variables for each {@link IPredicate} in the rule.
    *
@@ -178,7 +178,7 @@ public class RuleState implements IRuleState {
         + Arrays.toString(s);
   }
 
-  /**
+  /*
    * Return an array indicating the {@link IKeyOrder} that will be used when reading on each of the
    * tail predicates. The array is formed using a private {@link IBindingSet} and propagating {@link
    * IJoinNexus#fakeBinding(IPredicate, Var) fake bindings} to each predicate in turn using the
@@ -276,7 +276,7 @@ public class RuleState implements IRuleState {
     return a;
   }
 
-  /**
+  /*
    * Return an array indicated what variables are required for each tail index. The rule itself has
    * a set of required variables outside of the join (for select, construct, aggregation, etc), so
    * these variables will automatically appear in the list for each tail. In addition, each tail

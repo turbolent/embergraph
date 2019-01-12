@@ -27,8 +27,8 @@ import java.util.Iterator;
 import org.embergraph.btree.ITupleIterator;
 // import org.embergraph.btree.filter.IFilter;
 
-/**
- * Chunked streaming iterator.
+/*
+* Chunked streaming iterator.
  *
  * @todo Like the {@link ITupleIterator}, the {@link IChunkedIterator}s can be executed on the
  *     server and them stream results back to the client. We really need to introduce custom
@@ -48,7 +48,7 @@ public class ChunkedStriterator<I extends IChunkedIterator<E>, E> extends Strite
     this.src = src;
   }
 
-  /**
+  /*
    * Wraps the source iterator as a chunked iterator using a default chunk size.
    *
    * @param src The source iterator.
@@ -58,7 +58,7 @@ public class ChunkedStriterator<I extends IChunkedIterator<E>, E> extends Strite
     this(IChunkedIterator.DEFAULT_CHUNK_SIZE, src);
   }
 
-  /**
+  /*
    * Wraps the source iterator as a chunked iterator.
    *
    * @param chunkSize The chunk size.

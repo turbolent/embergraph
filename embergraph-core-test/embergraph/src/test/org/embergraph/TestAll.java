@@ -27,8 +27,8 @@ import junit.framework.TestSuite;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-/**
- * Aggregates test suites in increase dependency order.
+/*
+* Aggregates test suites in increase dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

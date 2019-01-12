@@ -23,8 +23,8 @@ package org.embergraph.service.geospatial;
 import org.embergraph.rdf.internal.impl.extensions.GeoSpatialLiteralExtension;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Class providing utility functions for efficient zOrder-based multi-dimensional range scans, such
+/*
+* Class providing utility functions for efficient zOrder-based multi-dimensional range scans, such
  * as efficient range checks and functionality for BigMin calculation. The latter follows the logics
  * defined in the BIGMIN decision table as provided in
  * http://www.vision-tools.com/h-tropf/multidimensionalrangequery.pdf, page 76.
@@ -53,7 +53,7 @@ public class ZOrderRangeScanUtil {
   final byte[] max;
   byte[] bigmin;
 
-  /**
+  /*
    * Constructor for the {@link ZOrderRangeScanUtil}.
    *
    * @param searchMinZOrder the top-left (minimum) value
@@ -73,14 +73,14 @@ public class ZOrderRangeScanUtil {
     bigmin = new byte[zOrderArrayLength];
   }
 
-  /**
+  /*
    * Checks if the dividing record passed as arguments is in the multi-dimensional search range
    * defined by this class.
    */
   public boolean isInSearchRange(final byte[] dividingRecord) {
 
-    final boolean dimShownToBeLargerThanMin[] = new boolean[numDimensions];
-    final boolean dimShownToBeSmallerThanMax[] = new boolean[numDimensions];
+    final boolean[] dimShownToBeLargerThanMin = new boolean[numDimensions];
+    final boolean[] dimShownToBeSmallerThanMax = new boolean[numDimensions];
 
     // get first byte in which the values differ
     int firstDifferingByte = 0;
@@ -91,7 +91,7 @@ public class ZOrderRangeScanUtil {
       }
     }
 
-    /**
+    /*
      * We now scan sequentially over the bit array, starting with firstDifferingByte. Thereby, we
      * notice whenever we detect a smaller or greater situation (and make sure that, for the
      * dimension under investigation, we do not check again in future). Note that this operation
@@ -143,7 +143,7 @@ public class ZOrderRangeScanUtil {
     return true; // all is good
   }
 
-  /**
+  /*
    * Returns the BIGMIN, i.e. the next relevant value in the search range. The value is returned as
    * unsigned, which needs to be converted into two's complement prior to appending as a key (see
    * {@link GeoSpatialLiteralExtension} for details).
@@ -240,7 +240,7 @@ public class ZOrderRangeScanUtil {
     return bigmin;
   }
 
-  /**
+  /*
    * Implements the load function from p.75 in
    * http://www.vision-tools.com/h-tropf/multidimensionalrangequery.pdf:
    *
@@ -254,8 +254,8 @@ public class ZOrderRangeScanUtil {
       final boolean setFirst, final int position, final byte[] arr, final int numDimensions) {
 
     // set the trailing bit
-    if (setFirst) arr[(int) (position / Byte.SIZE)] |= 1 << 7 - (position % 8);
-    else arr[(int) (position / Byte.SIZE)] &= ~(1 << 7 - (position % 8));
+    if (setFirst) arr[position / Byte.SIZE] |= 1 << 7 - (position % 8);
+    else arr[position / Byte.SIZE] &= ~(1 << 7 - (position % 8));
 
     // set the remaining bits (inverted)
     for (int i = position + numDimensions; i < arr.length * Byte.SIZE; i += numDimensions) {
@@ -270,8 +270,8 @@ public class ZOrderRangeScanUtil {
         i += numDimensions; // corresponds to one time skip of outer loop
       }
 
-      if (setFirst) arr[(int) (i / Byte.SIZE)] &= ~mask;
-      else arr[(int) (i / Byte.SIZE)] |= mask;
+      if (setFirst) arr[i / Byte.SIZE] &= ~mask;
+      else arr[i / Byte.SIZE] |= mask;
     }
   }
 }

@@ -62,8 +62,8 @@ import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * This operator performs a distinct terms scan for an {@link IPredicate}, binding the distinct
+/*
+* This operator performs a distinct terms scan for an {@link IPredicate}, binding the distinct
  * values for the specified variable(s) from the {@link IAccessPath} for the {@link IPredicate}.
  * This is done using a {@link DistinctTermAdvancer} to skip over any duplicate solutions in the
  * index. Thus the cost of this operator is O(N) where N is the number of distinct solutions that
@@ -80,14 +80,14 @@ public class DistinctTermScanOp<E> extends PipelineOp {
 
   public interface Annotations extends AccessPathJoinAnnotations {
 
-    /**
+    /*
      * The name of the variable whose distinct projection against the {@link IAccessPath} associated
      * with the as-bound {@link IPredicate} is output by this operator.
      */
     String DISTINCT_VAR = DistinctTermScanOp.class.getName() + ".distinctVar";
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -97,7 +97,7 @@ public class DistinctTermScanOp<E> extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -150,7 +150,7 @@ public class DistinctTermScanOp<E> extends PipelineOp {
     return (IPredicate<E>) getRequiredProperty(Annotations.PREDICATE);
   }
 
-  /**
+  /*
    * Return the value of {@link IPredicate#isOptional()} for the {@link IPredicate} associated with
    * this join.
    *
@@ -216,8 +216,8 @@ public class DistinctTermScanOp<E> extends PipelineOp {
 
       try {
 
-        /*
-         * TODO If there are multiple left solutions (from the pipeline)
+      /*
+       * TODO If there are multiple left solutions (from the pipeline)
          * then we could generate their fromKeys and order them to
          * improve cache locality. See PipelineJoin for an example of
          * how this is done. For the distinct-term-scan this could
@@ -233,8 +233,8 @@ public class DistinctTermScanOp<E> extends PipelineOp {
 
           if (asBound == null) {
 
-            /*
-             * This can happen for a SIDS mode join if some of the
+          /*
+       * This can happen for a SIDS mode join if some of the
              * (s,p,o,[c]) and SID are bound on entry and they can not
              * be unified. For example, the s position might be
              * inconsistent with the Subject that can be decoded from
@@ -263,8 +263,8 @@ public class DistinctTermScanOp<E> extends PipelineOp {
           //
           //					}
 
-          /**
-           * The {@link IAccessPath} corresponding to the asBound {@link IPredicate} for this join
+        /*
+       * The {@link IAccessPath} corresponding to the asBound {@link IPredicate} for this join
            * dimension. The asBound {@link IPredicate} is {@link IAccessPath#getPredicate()}.
            *
            * <p>FIXME What do we do if there is a local filter or an access path filter? Do we have
@@ -327,7 +327,7 @@ public class DistinctTermScanOp<E> extends PipelineOp {
       }
     }
 
-    /**
+    /*
      * Efficient scan of the distinct term identifiers that appear in the first position of the keys
      * for the statement index corresponding to the specified {@link IKeyOrder}. For example, using
      * {@link SPOKeyOrder#POS} will give you the term identifiers for the distinct predicates
@@ -376,8 +376,8 @@ public class DistinctTermScanOp<E> extends PipelineOp {
 
       if (termIdFilter != null) {
 
-        /*
-         * Layer in a filter for only the desired term types.
+      /*
+       * Layer in a filter for only the desired term types.
          */
 
         filter.addFilter(

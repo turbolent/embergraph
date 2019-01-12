@@ -20,8 +20,8 @@ package org.embergraph.journal;
 import java.io.File;
 import java.nio.ByteBuffer;
 
-/**
- * Transient buffer strategy uses a direct buffer but never writes on disk.
+/*
+* Transient buffer strategy uses a direct buffer but never writes on disk.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -29,13 +29,15 @@ import java.nio.ByteBuffer;
  */
 public class TransientBufferStrategy extends BasicBufferStrategy {
 
-  /** The root blocks. */
-  private final IRootBlockView rootBlocks[] = new IRootBlockView[2];
+  /*
+   * The root blocks.
+   */
+  private final IRootBlockView[] rootBlocks = new IRootBlockView[2];
 
   /** Either zero (0) or one (1). */
   private int currentRootBlock = 0;
 
-  /**
+  /*
    * Note: I have not observed much performance gain from the use of a direct buffer for the
    * transient mode. Further, there is a BUG related to release of direct {@link ByteBuffer}s so
    * they are NOT in general recommended here.
@@ -99,7 +101,7 @@ public class TransientBufferStrategy extends BasicBufferStrategy {
     rootBlocks[currentRootBlock] = rootBlock;
   }
 
-  /**
+  /*
    * There is no header.
    *
    * @return ZERO (0).

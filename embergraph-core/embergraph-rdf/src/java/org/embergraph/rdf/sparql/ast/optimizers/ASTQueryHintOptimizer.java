@@ -60,8 +60,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-/**
- * Query hints are identified applied to AST nodes based on the specified scope and the location
+/*
+* Query hints are identified applied to AST nodes based on the specified scope and the location
  * within the AST in which they are found. Query hints recognized by this optimizer have the form:
  *
  * <pre>
@@ -137,13 +137,13 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryNode, bindingSets);
   }
 
-  /**
+  /*
    * Tnis is used to avoid descent into parts of the AST which can not have query hints, such as
    * value expressions.
    */
   private boolean isNodeAcceptingQueryHints(final BOp op) {
 
-    /**
+    /*
      * Note: Historically, only visited QueryNodeBase, but that does not let query hints be applied
      * to a variety of relevant AST nodes, including the SliceOp. The new pattern is to exclude
      * those parts of the AST interface heirarchy that should not have query hints applied, which is
@@ -158,17 +158,11 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
       return false;
     }
 
-    if (op instanceof IValueExpression) {
-
-      // Skip value expressions.
-      return false;
-    }
-
-    // Visit anything else.
-    return true;
+    // Skip value expressions.
+    return !(op instanceof IValueExpression);// Visit anything else.
   }
 
-  /**
+  /*
    * Applies the global query hints to each node in the query.
    *
    * @param queryRoot
@@ -203,7 +197,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Apply each query hint in turn to the AST node.
    *
    * @param t The AST node.
@@ -233,7 +227,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Apply the query hint to the AST node.
    *
    * @param t The AST node to which the query hint will be bound.
@@ -309,8 +303,8 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
   }
 
-  //    /**
-  //     * Validate the global query hints.
+  //    /*
+//     * Validate the global query hints.
   //     *
   //     * @param queryHints
   //     */
@@ -331,7 +325,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
   //
   //    }
 
-  /**
+  /*
    * Recursively process a join group, applying any query hints found and removing them from the
    * join group.
    *
@@ -391,8 +385,8 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
           continue;
         }
 
-        /*
-         * Recursion (looking for query hints to be applied).
+      /*
+       * Recursion (looking for query hints to be applied).
          */
         if (child instanceof GraphPatternGroup<?>) {
           processGroup(context, queryRoot, queryBase, (GraphPatternGroup<IGroupMemberNode>) child);
@@ -403,8 +397,8 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
           processGroup(context, queryRoot, queryBase, ((ServiceNode) child).getGraphPattern());
         } else if (child instanceof FilterNode
             && ((FilterNode) child).getValueExpressionNode() instanceof SubqueryFunctionNodeBase) {
-          /**
-           * @see <a href="http://trac.blazegraph.com/ticket/990">Query hint not recognized in
+        /*
+       * @see <a href="http://trac.blazegraph.com/ticket/990">Query hint not recognized in
            *     FILTER</a>
            */
           final GraphPatternGroup<IGroupMemberNode> filterGraphPattern =
@@ -446,7 +440,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Return <code>true</code> iff this {@link StatementPatternNode} is a query hint. This method
    * checks the namespace of the predicate. All query hints MUST start with the <code>hint:</code>
    * namespace, which is given by {@link QueryHints#NAMESPACE}.
@@ -477,7 +471,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     if (!(sp.p() instanceof ConstantNode)) return false;
 
-    final EmbergraphValue p = ((ConstantNode) sp.p()).getValue();
+    final EmbergraphValue p = sp.p().getValue();
 
     if (!(p instanceof URI)) return false;
 
@@ -485,16 +479,12 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     final String str = u.stringValue();
 
-    if (str.startsWith(QueryHints.NAMESPACE)) {
+    // A possible query hint.
+    return str.startsWith(QueryHints.NAMESPACE);
 
-      // A possible query hint.
-      return true;
-    }
-
-    return false;
   }
 
-  /**
+  /*
    * Extract and return the {@link QueryHintScope}.
    *
    * @param t The subject position of the query hint {@link StatementPatternNode}.
@@ -507,7 +497,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     if (!(t instanceof ConstantNode))
       throw new RuntimeException("Subject position of query hint must be a constant.");
 
-    final EmbergraphValue v = ((ConstantNode) t).getValue();
+    final EmbergraphValue v = t.getValue();
 
     if (!(v instanceof EmbergraphURI)) throw new RuntimeException("Query hint scope is not a URI.");
 
@@ -516,7 +506,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     return QueryHintScope.valueOf(u);
   }
 
-  /**
+  /*
    * Extract, validate, and return the name of the query hint property.
    *
    * @param t The predicate position of the query hint {@link StatementPatternNode}.
@@ -528,7 +518,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
       throw new RuntimeException("Predicate position of query hint must be a constant.");
     }
 
-    final EmbergraphValue v = ((ConstantNode) t).getValue();
+    final EmbergraphValue v = t.getValue();
 
     if (!(v instanceof EmbergraphURI))
       throw new RuntimeException("Predicate position of query hint is not a URI.");
@@ -540,7 +530,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     return name;
   }
 
-  /**
+  /*
    * Return the value for the query hint.
    *
    * @param t
@@ -560,7 +550,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
       return '?' + ((VarNode) t).getValueExpression().getName();
     }
 
-    final EmbergraphValue v = ((ConstantNode) t).getValue();
+    final EmbergraphValue v = t.getValue();
 
     if (!(v instanceof Literal))
       throw new RuntimeException("Object position of query hint is not a Literal.");
@@ -570,7 +560,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     return lit.stringValue();
   }
 
-  /**
+  /*
    * @param context
    * @param queryRoot
    * @param group
@@ -637,7 +627,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * @param group
    * @param name
    * @param value
@@ -668,13 +658,13 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     //        if (isNodeAcceptingQueryHints(queryBase)) {
 
-    _applyQueryHint(context, queryRoot, scope, (ASTBase) queryBase, name, value);
+    _applyQueryHint(context, queryRoot, scope, queryBase, name, value);
 
     //        }
 
   }
 
-  /**
+  /*
    * Applies the query hint to the entire query.
    *
    * @param queryRoot
@@ -689,7 +679,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
       final String value) {
 
     if (false && context.queryHints != null) {
-      /**
+      /*
        * Also stuff the query hint on the global context for things which look there.
        *
        * <p>Note: HINTS: This was putting the literal given name and value of the query hint. This
@@ -731,7 +721,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Apply the query hint to the group and, recursively, to any sub-groups.
    *
    * @param group
@@ -760,13 +750,13 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     //        if(isNodeAcceptingQueryHints(group)) {
 
-    _applyQueryHint(context, queryRoot, scope, (ASTBase) group, name, value);
+    _applyQueryHint(context, queryRoot, scope, group, name, value);
 
     //        }
 
   }
 
-  /**
+  /*
    * Apply the query hint to the group.
    *
    * @param group
@@ -788,7 +778,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     //        if (isNodeAcceptingQueryHints(group)) {
 
-    _applyQueryHint(context, queryRoot, scope, (ASTBase) group, name, value);
+    _applyQueryHint(context, queryRoot, scope, group, name, value);
 
     //        }
 

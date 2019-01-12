@@ -8,8 +8,8 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Demonstrate how to use embergraph. You are free to use this code for whatever purpose without
+/*
+* Demonstrate how to use embergraph. You are free to use this code for whatever purpose without
  * restriction.
  *
  * @author mikep

@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.matrix.impl;
 
-/**
- * Abstract base class for 3-d matrices holding objects or primitive data types such as <code>int
+/*
+* Abstract base class for 3-d matrices holding objects or primitive data types such as <code>int
  * </code>, <code>double</code>, etc. First see the <a href="package-summary.html">package
  * summary</a> and javadoc <a href="package-tree.html">tree view</a> to get the broad picture.
  *
@@ -42,7 +42,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   // this.isNoView implies: offset==0, sliceStride==rows*slices, rowStride==columns, columnStride==1
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected AbstractMatrix3D() {}
-  /**
+  /*
    * Returns the position of the given absolute rank within the (virtual or non-virtual) internal
    * 1-dimensional array. Default implementation. Override, if necessary.
    *
@@ -52,7 +52,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   protected int _columnOffset(int absRank) {
     return absRank;
   }
-  /**
+  /*
    * Returns the absolute rank of the given relative rank.
    *
    * @param rank the relative rank of the element.
@@ -61,7 +61,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   protected int _columnRank(int rank) {
     return columnZero + rank * columnStride;
   }
-  /**
+  /*
    * Returns the position of the given absolute rank within the (virtual or non-virtual) internal
    * 1-dimensional array. Default implementation. Override, if necessary.
    *
@@ -71,7 +71,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   protected int _rowOffset(int absRank) {
     return absRank;
   }
-  /**
+  /*
    * Returns the absolute rank of the given relative rank.
    *
    * @param rank the relative rank of the element.
@@ -80,7 +80,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   protected int _rowRank(int rank) {
     return rowZero + rank * rowStride;
   }
-  /**
+  /*
    * Returns the position of the given absolute rank within the (virtual or non-virtual) internal
    * 1-dimensional array. Default implementation. Override, if necessary.
    *
@@ -90,7 +90,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   protected int _sliceOffset(int absRank) {
     return absRank;
   }
-  /**
+  /*
    * Returns the absolute rank of the given relative rank.
    *
    * @param rank the relative rank of the element.
@@ -99,7 +99,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   protected int _sliceRank(int rank) {
     return sliceZero + rank * sliceStride;
   }
-  /**
+  /*
    * Checks whether the receiver contains the given box and throws an exception, if necessary.
    *
    * @throws IndexOutOfBoundsException if <tt>row<0 || height<0 || row+height>rows || slice<0 ||
@@ -130,7 +130,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
               + ", width:"
               + width);
   }
-  /**
+  /*
    * Sanity check for operations requiring a column index to be within bounds.
    *
    * @throws IndexOutOfBoundsException if <tt>column < 0 || column >= columns()</tt>.
@@ -140,7 +140,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
       throw new IndexOutOfBoundsException(
           "Attempted to access " + toStringShort() + " at column=" + column);
   }
-  /**
+  /*
    * Checks whether indexes are legal and throws an exception, if necessary.
    *
    * @throws IndexOutOfBoundsException if <tt>! (0 <= indexes[i] < columns())</tt> for any
@@ -152,7 +152,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
       if (index < 0 || index >= columns) checkColumn(index);
     }
   }
-  /**
+  /*
    * Sanity check for operations requiring a row index to be within bounds.
    *
    * @throws IndexOutOfBoundsException if <tt>row < 0 || row >= rows()</tt>.
@@ -162,7 +162,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
       throw new IndexOutOfBoundsException(
           "Attempted to access " + toStringShort() + " at row=" + row);
   }
-  /**
+  /*
    * Checks whether indexes are legal and throws an exception, if necessary.
    *
    * @throws IndexOutOfBoundsException if <tt>! (0 <= indexes[i] < rows())</tt> for any
@@ -174,7 +174,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
       if (index < 0 || index >= rows) checkRow(index);
     }
   }
-  /**
+  /*
    * Sanity check for operations requiring two matrices with the same number of slices, rows and
    * columns.
    *
@@ -186,7 +186,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
       throw new IllegalArgumentException(
           "Incompatible dimensions: " + toStringShort() + " and " + B.toStringShort());
   }
-  /**
+  /*
    * Sanity check for operations requiring matrices with the same number of slices, rows and
    * columns.
    *
@@ -209,7 +209,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
               + ", "
               + C.toStringShort());
   }
-  /**
+  /*
    * Sanity check for operations requiring a slice index to be within bounds.
    *
    * @throws IndexOutOfBoundsException if <tt>slice < 0 || slice >= slices()</tt>.
@@ -219,7 +219,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
       throw new IndexOutOfBoundsException(
           "Attempted to access " + toStringShort() + " at slice=" + slice);
   }
-  /**
+  /*
    * Checks whether indexes are legal and throws an exception, if necessary.
    *
    * @throws IndexOutOfBoundsException if <tt>! (0 <= indexes[i] < slices())</tt> for any
@@ -235,7 +235,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   public int columns() {
     return columns;
   }
-  /**
+  /*
    * Returns the position of the given coordinate within the (virtual or non-virtual) internal
    * 1-dimensional array.
    *
@@ -252,7 +252,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   public int rows() {
     return rows;
   }
-  /**
+  /*
    * Sets up a matrix with a given number of slices and rows.
    *
    * @param slices the number of slices the matrix shall have.
@@ -264,7 +264,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
   protected void setUp(int slices, int rows, int columns) {
     setUp(slices, rows, columns, 0, 0, 0, rows * columns, columns, 1);
   }
-  /**
+  /*
    * Sets up a matrix with a given number of slices and rows and the given strides.
    *
    * @param slices the number of slices the matrix shall have.
@@ -339,7 +339,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
     }
     return this;
   }
-  /**
+  /*
    * Self modifying version of viewDice().
    *
    * @throws IllegalArgumentException if some of the parameters are equal or not in range 0..2.
@@ -378,7 +378,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
     this.isNoView = false;
     return this;
   }
-  /**
+  /*
    * Self modifying version of viewPart().
    *
    * @throws IndexOutOfBoundsException if <tt>slice<0 || depth<0 || slice+depth>slices() || row<0 ||
@@ -417,7 +417,7 @@ public abstract class AbstractMatrix3D extends AbstractMatrix {
     }
     return this;
   }
-  /**
+  /*
    * Self modifying version of viewStrides().
    *
    * @throws IndexOutOfBoundsException if <tt>sliceStride<=0 || rowStride<=0 ||

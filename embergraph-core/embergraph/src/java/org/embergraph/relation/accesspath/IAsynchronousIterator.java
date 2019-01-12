@@ -28,8 +28,8 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.relation.rule.IQueryOptions;
 import org.embergraph.relation.rule.IRule;
 
-/**
- * Interface for iterators that are running asynchronously. Such iterators are the consumer side of
+/*
+* Interface for iterators that are running asynchronously. Such iterators are the consumer side of
  * a producer - consumer pattern. The producer writes on an {@link IBlockingBuffer} which is drained
  * by the {@link IAsynchronousIterator}.
  *
@@ -39,8 +39,8 @@ import org.embergraph.relation.rule.IRule;
  */
 public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
 
-  //    /**
-  //     * Return <code>true</code> if the {@link Future} that is writing on the
+  //    /*
+//     * Return <code>true</code> if the {@link Future} that is writing on the
   //     * {@link IBlockingBuffer} has been set and is done. This indicates that all
   //     * results are materialized on the queue and will be visited without waiting
   //     * on the {@link Future}. It does NOT indicate whether or not the
@@ -53,16 +53,16 @@ public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
   //     */
   //    public boolean isFutureDone();
 
-  /**
+  /*
    * Return <code>true</code> iff this iterator will not visit any more elements (non-blocking).
    *
    * @return <code>true</code> iff the iterator is known to be exhausted without blocking. A <code>
    *     false</code> return does NOT imply that the iterator will visit more elements, only that it
    *     MIGHT visit more elements.
    */
-  public boolean isExhausted();
+  boolean isExhausted();
 
-  /**
+  /*
    * Return <code>true</code> iff there is at least one element that can be visited. If the buffer
    * is empty then this will block until: (a) an element appears in the buffer; (b) the buffer is
    * {@link BlockingBuffer#close()}ed; or (c) the timeout expires.
@@ -78,9 +78,9 @@ public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
    * @throws InterruptedException if the current thread is interrupted while waiting another
    *     element.
    */
-  public boolean hasNext(final long timeout, final TimeUnit unit) throws InterruptedException;
+  boolean hasNext(final long timeout, final TimeUnit unit) throws InterruptedException;
 
-  /**
+  /*
    * Waits up to the <i>timeout</i> to return the next element. When the generic type of the
    * elements in the buffer is an array type and there is more than one element available within the
    * specified time, then multiple elements in the buffer MAY be combined into a single element and
@@ -97,9 +97,9 @@ public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
    * @throws InterruptedException if the current thread is interrupted while waiting for another
    *     element.
    */
-  public E next(long timeout, TimeUnit unit) throws InterruptedException;
+  E next(long timeout, TimeUnit unit) throws InterruptedException;
 
-  /**
+  /*
    * Notes that the iterator is closed and hence may no longer be read. It is safe to invoke this
    * method even if the iterator is closed. However, if the producer is still running then it will
    * be <em>canceled</em> (interrupted) in order to prevent the {@link IBlockingBuffer} from filling
@@ -112,5 +112,5 @@ public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
    * limit has been satisfied. However, the preferred way to treat LIMIT is using {@link IRule} with
    * an {@link IQueryOptions} that specifies a LIMIT.
    */
-  public void close();
+  void close();
 }

@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * Exception thrown if a transaction is not active in a context where it needs to be active for some
+/*
+* Exception thrown if a transaction is not active in a context where it needs to be active for some
  * operation to take place.
  *
  * @author bryan

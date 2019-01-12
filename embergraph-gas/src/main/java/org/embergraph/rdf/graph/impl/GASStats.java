@@ -20,8 +20,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.rdf.graph.IGASStats;
 import org.embergraph.rdf.graph.util.GASUtil;
 
-/**
- * Statistics for GAS algorithms.
+/*
+* Statistics for GAS algorithms.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -28,8 +28,8 @@ import java.util.Set;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
-/**
- * The top level container for a sequence of UPDATE operations.
+/*
+* The top level container for a sequence of UPDATE operations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public class UpdateRoot extends GroupNodeBase<Update> implements IPrefixDecls {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

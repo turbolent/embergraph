@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Logarithmic distribution.
+/*
+* Logarithmic distribution.
  *
  * <p>Valid parameter ranges: <tt>0 &lt; p &lt; 1</tt>.
  *
@@ -49,7 +49,7 @@ public class Logarithmic extends AbstractContinousDistribution {
   }
   /** Returns a random number from the distribution; bypasses the internal state. */
   public double nextDouble(double a) {
-    /**
+    /*
      * **************************************************************** * Logarithmic Distribution -
      * Inversion/Transformation * *
      * ***************************************************************** * The algorithm combines
@@ -116,7 +116,7 @@ public class Logarithmic extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + my_p + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

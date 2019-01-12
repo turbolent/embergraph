@@ -26,8 +26,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Query hint for turning the enabling/disabling the use of remote access paths on a cluster.
+/*
+* Query hint for turning the enabling/disabling the use of remote access paths on a cluster.
  *
  * <p>TODO Should be allowed on a BGP basis, but only supported right now as a query-wide hint.
  */

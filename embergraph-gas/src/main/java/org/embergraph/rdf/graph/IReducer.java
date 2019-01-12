@@ -17,8 +17,8 @@ package org.embergraph.rdf.graph;
 
 import org.openrdf.model.Value;
 
-/**
- * An interface for computing reductions over the vertices of a graph.
+/*
+* An interface for computing reductions over the vertices of a graph.
  *
  * @param <T> The type of the result.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -26,15 +26,15 @@ import org.openrdf.model.Value;
  */
 public interface IReducer<VS, ES, ST, T> {
 
-  /**
+  /*
    * Method is invoked for each result and is responsible for combining the results in whatever
    * manner is meaningful for the procedure. Implementations of this method MUST be
    * <strong>thread-safe</strong>.
    *
    * @param result The result from applying the procedure to a single index partition.
    */
-  public void visit(IGASState<VS, ES, ST> state, Value u);
+  void visit(IGASState<VS, ES, ST> state, Value u);
 
   /** Return the aggregated results as an implementation dependent object. */
-  public T get();
+  T get();
 }

@@ -23,8 +23,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.webapp.client.IPreparedBooleanQuery;
 import org.openrdf.query.resultio.BooleanQueryResultFormat;
 
-/**
- * Proxied test suite.
+/*
+* Proxied test suite.
  *
  * @param <S> TODO Should test GET as well as POST (this requires that we configured the client
  *     differently).
@@ -68,7 +68,7 @@ public class Test_REST_ASK<S extends IIndexManager> extends AbstractTestNanoSpar
       assertEquals(false, query.evaluate());
     }
 
-    /**
+    /*
      * Uncommented to test CONNEG for JSON (available with openrdf 2.7).
      *
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/588" > JSON-LD </a>
@@ -84,8 +84,8 @@ public class Test_REST_ASK<S extends IIndexManager> extends AbstractTestNanoSpar
     }
   }
 
-  // /**
-  // * "ASK" query using POST with an empty KB.
+  // /*
+// * "ASK" query using POST with an empty KB.
   // */
   // public void test_POST_ASK() throws Exception {
 

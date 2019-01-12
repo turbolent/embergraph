@@ -38,7 +38,7 @@ public class SameTermBOp extends XSDBooleanIVValueExpression implements INeedsMa
 
   public interface Annotations extends XSDBooleanIVValueExpression.Annotations {
 
-    /**
+    /*
      * The compare operator, which is a {@link CompareOp} enum value. Must be either {@link
      * CompareOp#EQ} or {@link CompareOp#NE}.
      */
@@ -53,7 +53,7 @@ public class SameTermBOp extends XSDBooleanIVValueExpression implements INeedsMa
     this(left, right, CompareOp.EQ);
   }
 
-  /**
+  /*
    * Constructor for sameTerm using either {@link CompareOp#EQ} or {@link CompareOp#NE}.
    *
    * @param left

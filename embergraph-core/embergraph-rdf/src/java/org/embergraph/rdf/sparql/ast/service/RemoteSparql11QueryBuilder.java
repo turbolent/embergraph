@@ -33,8 +33,8 @@ import org.openrdf.model.Value;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 
-/**
- * Utility class constructs a valid SPARQL query for a remote <code>SPARQL 1.1</code> using the
+/*
+* Utility class constructs a valid SPARQL query for a remote <code>SPARQL 1.1</code> using the
  * <code>VALUES</code> clause to vector solutions into that remote end point.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -54,7 +54,7 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
 
   protected final AST2SPARQLUtil util;
 
-  /**
+  /*
    * The distinct variables "projected" by the SERVICE group graph pattern. The order of this set is
    * not important, but the variables must be distinct.
    */
@@ -62,8 +62,8 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
 
   //    private final BindingSet[] bindingSets;
 
-  //    /**
-  //     * This is a vectored implementation.
+  //    /*
+//     * This is a vectored implementation.
   //     */
   //    @Override
   //    public boolean isVectored() {
@@ -93,8 +93,8 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
           @Override
           public String toExternal(final BNode val) {
 
-            /*
-             * Note: The SPARQL 1.1 GRAMMAR does not permit blank nodes in
+          /*
+       * Note: The SPARQL 1.1 GRAMMAR does not permit blank nodes in
              * the BINDINGS clause. Blank nodes are sent across as an
              * unbound variable (UNDEF). If there is more than one variable
              * which takes on the same blank node in a given solution, then
@@ -108,7 +108,7 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
         };
   }
 
-  /**
+  /*
    * Return an ordered collection of the distinct variable names used in the given caller's solution
    * set.
    *
@@ -162,8 +162,8 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
     {
       sb.append("SELECT ");
       if (projectedVars.isEmpty()) {
-        /*
-         * Note: This is a dubious hack for openrdf federated query
+      /*
+       * Note: This is a dubious hack for openrdf federated query
          * testEmptyServiceBlock. Since there are no variables in the
          * service clause, it was sending an invalid SELECT expression.
          * It is now hacked to send a "*" instead.
@@ -224,8 +224,8 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
       final String tmp = exprImage.substring(beginIndex, endIndex);
       sb.append("WHERE {\n");
       if (bnodes != null) {
-        /*
-         * Impose a same-term constraint for all variables which are
+      /*
+       * Impose a same-term constraint for all variables which are
          * bound to the same blank node.
          */
         for (Set<String> sameTermVars : bnodes.values()) {
@@ -301,7 +301,7 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
     return q;
   }
 
-  /**
+  /*
    * Return a correlated blank node / variables map.
    *
    * <p>Note: This is necessary because the BINDINGS clause does not permit blank nodes.
@@ -326,8 +326,8 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
         if (cvars == null) {
           bnodes.put(bnd, cvars = new LinkedHashSet<String>());
         } else {
-          /*
-           * Correlated. This blank node is already the binding
+        /*
+       * Correlated. This blank node is already the binding
            * for some other variable in this solution.
            *
            * Note: A FILTER can be used to enforce a same-term
@@ -341,8 +341,8 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
           if (bindingSets.length > 1) throw new UnsupportedOperationException();
         }
         if (!cvars.add(b.getName())) {
-          /*
-           * This would imply the same variable was bound more
+        /*
+       * This would imply the same variable was bound more
            * than once in the solution.
            */
           throw new AssertionError();
@@ -352,8 +352,8 @@ public class RemoteSparql11QueryBuilder implements IRemoteSparqlQueryBuilder {
     return bnodes;
   }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     * <p>
   //     * This implementation returns it's argument.
   //     */

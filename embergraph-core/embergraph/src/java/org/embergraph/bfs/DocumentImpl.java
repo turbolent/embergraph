@@ -10,8 +10,8 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-/**
- * Flyweight document implementation.
+/*
+* Flyweight document implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -23,7 +23,7 @@ public class DocumentImpl extends DocumentHeaderImpl implements Document {
   /** Create a new empty document. */
   public DocumentImpl() {}
 
-  /**
+  /*
    * Copy constructor for header information.
    *
    * @param metadata to copy
@@ -33,7 +33,7 @@ public class DocumentImpl extends DocumentHeaderImpl implements Document {
     super(metadata);
   }
 
-  /**
+  /*
    * Copy constructor for header information.
    *
    * @param header to copy
@@ -53,7 +53,7 @@ public class DocumentImpl extends DocumentHeaderImpl implements Document {
     return new InputStreamReader(new ByteArrayInputStream(content), getContentEncoding());
   }
 
-  /**
+  /*
    * Set the content by copying the byte[].
    *
    * <p>Note: Do NOT use this when the content is character data since the encoding attribute will
@@ -72,7 +72,7 @@ public class DocumentImpl extends DocumentHeaderImpl implements Document {
     System.arraycopy(b, off, content, 0, len);
   }
 
-  /**
+  /*
    * Set the content by copying the byte[].
    *
    * <p>Note: Do NOT use this when the content is character data since the encoding attribute will
@@ -85,7 +85,7 @@ public class DocumentImpl extends DocumentHeaderImpl implements Document {
     copyStream(b, 0, b.length);
   }
 
-  /**
+  /*
    * Set the content by copying the given stream.
    *
    * <p>Note: Do NOT use this when the content is character data since the encoding attribute will
@@ -115,7 +115,7 @@ public class DocumentImpl extends DocumentHeaderImpl implements Document {
     }
   }
 
-  /**
+  /*
    * Set the content by converting characters to into bytes using the specified encoding.
    *
    * @param encoding The encoding that will be used to convert characters to bytes.
@@ -129,7 +129,7 @@ public class DocumentImpl extends DocumentHeaderImpl implements Document {
     content = s.getBytes(encoding);
   }
 
-  /**
+  /*
    * Set the content by copying characters from the given reader and converting them into bytes
    * using the specified encoding.
    *
@@ -146,7 +146,7 @@ public class DocumentImpl extends DocumentHeaderImpl implements Document {
     content = s.getBytes(encoding);
   }
 
-  /**
+  /*
    * Suck the character data from the reader into a string.
    *
    * @param reader

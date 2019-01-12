@@ -29,8 +29,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.util.InnerCause;
 
-/**
- * Test suite for restart-safe (data survives commit and reopen of the store).
+/*
+* Test suite for restart-safe (data survives commit and reopen of the store).
  *
  * @todo verify {@link ICommitter} protocol.
  * @todo verify nextOffset after restart and other metadata preserved by the root blocks.
@@ -48,8 +48,8 @@ public abstract class AbstractRestartSafeTestCase extends AbstractBufferStrategy
     super(name);
   }
 
-  //    /**
-  //     * override to disable deletion of the store on close.
+  //    /*
+//     * override to disable deletion of the store on close.
   //     */
   //    public Properties getProperties() {
   //
@@ -61,7 +61,7 @@ public abstract class AbstractRestartSafeTestCase extends AbstractBufferStrategy
   //
   //    }
 
-  /**
+  /*
    * Re-open the same backing store.
    *
    * @param store the existing store.
@@ -109,7 +109,7 @@ public abstract class AbstractRestartSafeTestCase extends AbstractBufferStrategy
     return new Journal(properties);
   }
 
-  /**
+  /*
    * Writes a record, verifies the write but does NOT commit the store. Closes and reopens the store
    * and finally verifies the write was lost.
    */
@@ -179,7 +179,7 @@ public abstract class AbstractRestartSafeTestCase extends AbstractBufferStrategy
     }
   }
 
-  /**
+  /*
    * Writes a record, verifies the write then commits the store. Closes and reopens the store and
    * finally verifies the write on the reopened store.
    */
@@ -240,7 +240,7 @@ public abstract class AbstractRestartSafeTestCase extends AbstractBufferStrategy
     }
   }
 
-  /**
+  /*
    * Test writes a bunch of records and verifies that each can be read after it is written. The test
    * then performs a random order read and verifies that each of the records can be read correctly.
    */
@@ -377,7 +377,7 @@ public abstract class AbstractRestartSafeTestCase extends AbstractBufferStrategy
     }
   }
 
-  /**
+  /*
    * Unit tests writes some data, commits, and closes the journal against future writes. The {@link
    * LRUNexus} is then cleared and we verify that we can still read data back from the store.
    * Finally, we close and then reopen the store in a read-only mode and verify that we can still
@@ -402,7 +402,7 @@ public abstract class AbstractRestartSafeTestCase extends AbstractBufferStrategy
 
       final int nrecs = 1000;
       final ByteBuffer[] recs = new ByteBuffer[nrecs];
-      final long addrs[] = new long[nrecs];
+      final long[] addrs = new long[nrecs];
 
       // Write a bunch of data onto the store.
       for (int i = 0; i < nrecs; i++) {

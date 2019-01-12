@@ -16,8 +16,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/**
- * https://jira.blazegraph.com/browse/BLZG-1862 and https://jira.blazegraph.com/browse/BLZG-856 take
+/*
+* https://jira.blazegraph.com/browse/BLZG-1862 and https://jira.blazegraph.com/browse/BLZG-856 take
  * this optimizer into an infinite loop.
  *
  * <p>BLZG-856 SELECT * WITH { SELECT * { INCLUDE %sub_record }} AS %foo { INCLUDE %foo } and
@@ -96,7 +96,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
 public class TestASTNamedSubqueryOptimizer2 extends AbstractOptimizerTestCaseWithUtilityMethods {
 
-  /**
+  /*
    * Modify the inherited Helper class to have a named solution set.
    *
    * @author jeremycarroll

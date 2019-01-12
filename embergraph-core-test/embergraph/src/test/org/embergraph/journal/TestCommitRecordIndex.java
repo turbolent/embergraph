@@ -26,8 +26,8 @@ import org.embergraph.btree.BTree;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for {@link CommitRecordIndex}. Tests focus on get (exact match) vs find (most recent
+/*
+* Test suite for {@link CommitRecordIndex}. Tests focus on get (exact match) vs find (most recent
  * match less than or equal to) and restart safety.
  *
  * @see TestCommitHistory, which tests the {@link CommitRecordIndex} in situ.
@@ -44,7 +44,7 @@ public class TestCommitRecordIndex extends AbstractCommitRecordTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Tests the ability to perform an exact match on a commit time and return the address for the
    * associated commit record. This also tests fence posts for find and restart-safety for one
    * entry.

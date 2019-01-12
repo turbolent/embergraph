@@ -8,8 +8,8 @@ import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.util.concurrent.IQueueCounters.ITaskCounters;
 
-/**
- * Class captures various data about the execution of {@link AbstractTask}s. These data are
+/*
+* Class captures various data about the execution of {@link AbstractTask}s. These data are
  * collected by the {@link ConcurrencyManager} in groups the different services on which the tasks
  * are run.
  *
@@ -69,7 +69,7 @@ public class TaskCounters {
   /** Cumulative elapsed time in nanoseconds waiting on the queue pending service. */
   public final AtomicLong queueWaitingNanoTime = new AtomicLong();
 
-  /**
+  /*
    * Cumulative elapsed time in nanoseconds consumed by tasks while assigned to a worker thread.
    *
    * <p>Note: Since this is aggregated over concurrent tasks the reported elapsed time MAY exceed
@@ -80,7 +80,7 @@ public class TaskCounters {
    */
   public final AtomicLong serviceNanoTime = new AtomicLong();
 
-  /**
+  /*
    * Cumulative elapsed time in nanoseconds consumed by write tasks while checkpointing their
    * indices.
    *
@@ -94,7 +94,7 @@ public class TaskCounters {
    */
   public final AtomicLong checkpointNanoTime = new AtomicLong();
 
-  /**
+  /*
    * Cumulative elapsed time in nanoseconds consumed by tasks from when they are submitted until
    * they are complete.
    *
@@ -105,7 +105,7 @@ public class TaskCounters {
   /** Ctor */
   public TaskCounters() {}
 
-  /**
+  /*
    * Note: The elapsed time counters ({@link #queueWaitingNanoTime}, {@link #serviceNanoTime}, and
    * {@link #queuingNanoTime}) are reported as cumulative <i>milliseconds</i> by this method. These
    * data are turned into moving averages by the {@link ThreadPoolExecutorStatisticsTask}.

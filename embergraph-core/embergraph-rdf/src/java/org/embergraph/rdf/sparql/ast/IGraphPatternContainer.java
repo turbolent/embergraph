@@ -21,15 +21,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast;
 
-/**
- * An interface for AST nodes which have a {@link GraphPatternGroup} annotation.
+/*
+* An interface for AST nodes which have a {@link GraphPatternGroup} annotation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IGraphPatternContainer {
 
-  public interface Annotations {
+  interface Annotations {
 
     /** The {@link GraphPatternGroup} annotation. */
     String GRAPH_PATTERN = "graphPattern";

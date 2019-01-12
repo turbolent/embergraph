@@ -24,8 +24,8 @@ package org.embergraph.bop.engine;
 import java.io.Serializable;
 import org.embergraph.counters.CAT;
 
-/**
- * Statistics associated with the Static Analysis phase, such as runtime for the parser, given
+/*
+* Statistics associated with the Static Analysis phase, such as runtime for the parser, given
  * optimizers, etc.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -44,7 +44,7 @@ public class StaticAnalysisStat implements Serializable {
   /** The elapsed time (milliseconds) for the statistics object. */
   private final CAT elapsed = new CAT();
 
-  /**
+  /*
    * Create a new, initially empty statistics object.
    *
    * @param statName a descriptive, human understandable name for the stats object

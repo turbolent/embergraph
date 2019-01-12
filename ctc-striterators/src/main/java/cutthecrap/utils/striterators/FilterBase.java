@@ -22,15 +22,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Used with Filterator by Striterator to filter returned objects. This can represent either a
+/*
+* Used with Filterator by Striterator to filter returned objects. This can represent either a
  * single {@link IFilter} or a chain of {@link IFilter}s.
  */
 public abstract class FilterBase implements IFilter, Cloneable {
 
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * An optional filter chain. When non-<code>null</code> this contains the {@link IFilter} in the
    * same order in which they were added to this {@link IFilter}, but <i>this</i> is NOT included in
    * the filter chain.
@@ -39,7 +39,7 @@ public abstract class FilterBase implements IFilter, Cloneable {
    */
   /*private*/ volatile List<IFilter> filterChain = null;
 
-  /**
+  /*
    * Annotations may be used to decorate the {@link IFilter} with required or optional metadata.
    *
    * <p>Note: package private for unit tests.
@@ -48,7 +48,7 @@ public abstract class FilterBase implements IFilter, Cloneable {
 
   public FilterBase() {}
 
-  /**
+  /*
    * Add a filter to the end of this filter chain.
    *
    * @param filter The filter.
@@ -58,8 +58,8 @@ public abstract class FilterBase implements IFilter, Cloneable {
     if (filter == null) throw new IllegalArgumentException();
     if (filterChain == null) {
       synchronized (this) {
-        /*
-         * Note: double-checked locking pattern and volatile field are
+      /*
+       * Note: double-checked locking pattern and volatile field are
          * used to ensure visibility in combination with lazy create of
          * the backing list.
          */
@@ -88,7 +88,7 @@ public abstract class FilterBase implements IFilter, Cloneable {
     return src;
   }
 
-  /**
+  /*
    * Wrap the source iterator with <i>this</i> filter.
    *
    * @param src The source iterator.
@@ -104,7 +104,7 @@ public abstract class FilterBase implements IFilter, Cloneable {
     return annotations.get(name);
   }
 
-  /**
+  /*
    * Return the value of a named property.
    *
    * @param name The property name.
@@ -120,7 +120,7 @@ public abstract class FilterBase implements IFilter, Cloneable {
     return value;
   }
 
-  /**
+  /*
    * Set an annotation.
    *
    * @param name The name.

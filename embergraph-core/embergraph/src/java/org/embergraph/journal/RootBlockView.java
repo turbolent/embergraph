@@ -36,8 +36,8 @@ import org.embergraph.resources.ResourceManager;
 import org.embergraph.rwstore.RWStore;
 import org.embergraph.util.Bytes;
 
-/**
- * A view onto a root block of the {@link Journal}.
+/*
+* A view onto a root block of the {@link Journal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -57,7 +57,7 @@ public class RootBlockView implements IRootBlockView {
   static final transient short SIZEOF_QTOKEN = Bytes.SIZEOF_LONG;
   static final transient short SIZEOF_BLOCKSEQ = Bytes.SIZEOF_LONG;
 
-  /**
+  /*
    * This is a chunk of reserved bytes from which new fields in the root block are allocated from
    * time to time.
    */
@@ -114,7 +114,7 @@ public class RootBlockView implements IRootBlockView {
   /** Original version. */
   static final int VERSION0 = 0x0;
 
-  /**
+  /*
    * This version supports the {@link RWStore} as well as the log-structured journal store. The
    * {@link RWStore} includes meta-allocation blocks, allocation blocks, and delete blocks (chains
    * of addresses which can be freed in the allocation blocks when the corresponding commit record
@@ -164,7 +164,7 @@ public class RootBlockView implements IRootBlockView {
    */
   static final int VERSION1 = 0x1;
 
-  /**
+  /*
    * This version supports the HA journal.
    *
    * <p>The new fields for this version include:
@@ -179,7 +179,7 @@ public class RootBlockView implements IRootBlockView {
    */
   static final int VERSION2 = 0x2;
 
-  /**
+  /*
    * This version supports the HA journal.
    *
    * <p>The new fields for this version include:
@@ -195,7 +195,7 @@ public class RootBlockView implements IRootBlockView {
    */
   static final int VERSION3 = 0x3;
 
-  /**
+  /*
    * The current version for new root blocks. While different kinds of backing store (e.g., the RW
    * and WORM as of this time) may have some fields which are not used by the other kinds of backing
    * stores, they ALL share the same root block versioning system. Further, all evolutions in the
@@ -207,13 +207,13 @@ public class RootBlockView implements IRootBlockView {
   /** The buffer holding the backing data. */
   private final ByteBuffer buf;
 
-  /**
+  /*
    * True iff this is root block ZERO (0) as declared by the constructor (this value is not
    * persistent in the root block itself).
    */
   private final boolean rootBlock0;
 
-  /**
+  /*
    * When non-null, this is used to compute and validate the checksum of the root block. Since the
    * {@link ChecksumUtility} is NOT thread-safe, the {@link AbstractJournal} holds a reference to an
    * instance of this object that is reused for all root blocks read or written by that class.
@@ -228,7 +228,7 @@ public class RootBlockView implements IRootBlockView {
     return rootBlock0;
   }
 
-  /**
+  /*
    * Note: all addresses are potentially legal with the WormAddressManager so we actually need to
    * have the WormAddressManager to decode the address in order to determine whether or it is legal.
    * The test that we make compares the nextOffset that to be written on the store with the range of
@@ -269,7 +269,7 @@ public class RootBlockView implements IRootBlockView {
     }
   }
 
-  /**
+  /*
    * Create a new read-only root block image with a unique timestamp. The other fields are populated
    * from the supplied parameters.
    *
@@ -566,7 +566,7 @@ public class RootBlockView implements IRootBlockView {
     return new RootBlockView(rootBlock0, asReadOnlyBuffer(), checker);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to implement the hash code as the hash code of the data in the backing {@link
@@ -587,7 +587,7 @@ public class RootBlockView implements IRootBlockView {
 
   private volatile int hash = 0;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overriden to implement equality based on the data in the {@link IRootBlockView}.
@@ -597,11 +597,10 @@ public class RootBlockView implements IRootBlockView {
     if (this == o) return true;
     if (!(o instanceof IRootBlockView)) return false;
     final IRootBlockView o2 = (IRootBlockView) o;
-    if (!buf.asReadOnlyBuffer().equals(o2.asReadOnlyBuffer())) return false;
-    return true;
+    return buf.asReadOnlyBuffer().equals(o2.asReadOnlyBuffer());
   }
 
-  /**
+  /*
    * Create a new read-only view from the supplied buffer.
    *
    * @param rootBlock0 There are two root blocks and they are written in an alternating order. For
@@ -683,7 +682,7 @@ public class RootBlockView implements IRootBlockView {
     return buf.getLong(OFFSET_NEXT_OFFSET);
   }
 
-  /**
+  /*
    * A purely <em>informative</em> field whose value is the system local timestamp of the last
    * commit as reported by {@link System#currentTimeMillis()} or the time at which the store was
    * created iff there have been no commits. Unlike {@link #getFirstCommitTime()} and {@link
@@ -709,7 +708,7 @@ public class RootBlockView implements IRootBlockView {
     return buf.getLong(OFFSET_LAST_CMIT);
   }
 
-  /**
+  /*
    * The "Challis field" is written at both the head and the tail of each root block and is a
    * strictly increasing value positive long integer. This field is used to detect partial writes of
    * the root blocks (the values of the field in a given root block will not agree). This field is
@@ -799,7 +798,7 @@ public class RootBlockView implements IRootBlockView {
     return buf.getLong(OFFSET_CLOSE_TIME);
   }
 
-  /**
+  /*
    * Return the checksum store in the root block (excluding only the field including the checksum
    * value itself).
    *
@@ -835,7 +834,7 @@ public class RootBlockView implements IRootBlockView {
     return storedChecksum;
   }
 
-  /**
+  /*
    * Compute the checksum of the root block (excluding only the field including the checksum value
    * itself).
    */
@@ -884,7 +883,7 @@ public class RootBlockView implements IRootBlockView {
 
   private static final String toString(final DateFormat df, final long t) {
 
-    return Long.toString(t) + (t != 0L ? " [" + df.format(new Date(t)) + "]" : "");
+    return t + (t != 0L ? " [" + df.format(new Date(t)) + "]" : "");
   }
 
   private static DateFormat getDateFormat() {
@@ -896,7 +895,7 @@ public class RootBlockView implements IRootBlockView {
     return df;
   }
 
-  /**
+  /*
    * Format a commit time as the raw milliseconds since the epoch value plus a fully expressed date
    * and time.
    *
@@ -924,7 +923,7 @@ public class RootBlockView implements IRootBlockView {
     return buf.getLong(OFFSET_META_START);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The {@link #OFFSET_STORETYPE} field was defined in {@link #VERSION1}. The default
@@ -939,7 +938,7 @@ public class RootBlockView implements IRootBlockView {
     return StoreTypeEnum.valueOf(buf.get(OFFSET_STORETYPE));
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The quorum token was introduced in {@link #VERSION2}. The default value for that field
@@ -952,7 +951,7 @@ public class RootBlockView implements IRootBlockView {
     return buf.getLong(OFFSET_QTOKEN);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The write cache block sequence was introduced in {@link #VERSION3}. The default value

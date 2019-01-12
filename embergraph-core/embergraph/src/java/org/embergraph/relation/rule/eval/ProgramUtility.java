@@ -27,8 +27,8 @@ import java.util.Iterator;
 import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IStep;
 
-/**
- * Support for determining how and where a program should be executed.
+/*
+* Support for determining how and where a program should be executed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,8 +46,8 @@ public class ProgramUtility {
   //
   //    }
 
-  //    /**
-  //     *
+  //    /*
+//     *
   //     * @param resourceLocator
   //     */
   public ProgramUtility() { // IResourceLocator resourceLocator) {
@@ -59,8 +59,8 @@ public class ProgramUtility {
 
   }
 
-  //    /**
-  //     * Return the {@link IIndexManager} that is capable of resolving all
+  //    /*
+//     * Return the {@link IIndexManager} that is capable of resolving all
   //     * relations (and their indices) used in the {@link IStep} -or-
   //     * <code>null</code> if some relations or indices are not resolvable from
   //     * the current context (in general, either because they do not exist or
@@ -192,7 +192,7 @@ public class ProgramUtility {
   //
   //    }
 
-  /**
+  /*
    * <code>true</code> iff the program contains an embedded closure operation. <code>false</code> if
    * the program is a rule or is itself a closure operation.
    *

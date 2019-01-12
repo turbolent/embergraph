@@ -53,8 +53,8 @@ import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Abstract test case for {@link BTree} tests.
+/*
+* Abstract test case for {@link BTree} tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -65,7 +65,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
   protected IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_INT);
 
-  /**
+  /*
    * Encodes an integer as a unsigned byte[] key.
    *
    * @param v An integer.
@@ -87,7 +87,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Test helper verifies the #of keys and their ordered values.
    *
    * @param expected A ground truth node.
@@ -131,7 +131,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test helper provides backwards compatibility for a large #of tests that were written with
    * <code>int</code> keys. Each key is encoded by the {@link KeyBuilder} before comparison with the
    * key at the corresponding index in the node.
@@ -178,7 +178,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Test helper verifies the #of values, their ordered values, and that all values beyond the last
    * defined value are <code>null</code>.
    *
@@ -270,7 +270,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Compares two nodes (or leaves) for the same data.
    *
    * @param n1 The expected node state.
@@ -312,7 +312,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     assertSameNodeData(n1, n2);
   }
 
-  /**
+  /*
    * Compares leaves for the same data.
    *
    * @param n1 The expected leaf state.
@@ -414,7 +414,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   /** Verify all data accessible from {@link ILeafData}. */
   public static void assertSameLeafData(final ILeafData n1, final ILeafData n2) {
 
-    assertSameAbstractNodeData((IAbstractNodeData) n1, (IAbstractNodeData) n2);
+    assertSameAbstractNodeData(n1, n2);
 
     assertEquals("#keys!=#vals", n1.getKeyCount(), n1.getValueCount());
 
@@ -475,7 +475,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     assertSameRaba(n1.getValues(), n2.getValues());
   }
 
-  /**
+  /*
    * Compares the data in two {@link IRaba}s but not their <code>capacity</code> or things which
    * depend on their capacity, such as {@link IRaba#isFull()} and whether or not they are {@link
    * IRaba#isReadOnly()}. If the expected {@link IRaba#isKeys()}, then both must represent keys and
@@ -645,8 +645,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  //	/**
-  //	 * Verifies details for the {@link IBucketData} interface.
+  //	/*
+//	 * Verifies details for the {@link IBucketData} interface.
   //	 *
   //	 * @param b1
   //	 *            A hash bucket.
@@ -715,7 +715,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   //
   //    }
 
-  /**
+  /*
    * Special purpose helper used to vet {@link Node#childAddr}.
    *
    * @param childAddr An array all of whose values will be tested against the corresponding child
@@ -754,7 +754,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Validate the keys in the node.
    *
    * @param keys An array all of whose entries will be tested against the corresponding keys in the
@@ -792,7 +792,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Special purpose helper used to vet the per-child entry counts for an {@link INodeData}.
    *
    * @param expected An array all of whose values will be tested against the corresponding elements
@@ -835,7 +835,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Return a new btree backed by a simple transient store that will NOT evict leaves or nodes onto
    * the store. The leaf cache will be large and cache evictions will cause exceptions if they
    * occur. This provides an indication if cache evictions are occurring so that the tests of basic
@@ -877,10 +877,10 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     // override the BTree class.
     metadata.setBTreeClassName(NoEvictionBTree.class.getName());
 
-    return (NoEvictionBTree) BTree.create(store, metadata);
+    return BTree.create(store, metadata);
   }
 
-  /**
+  /*
    * Provide hook to allow specific test cases to determine if rawRecords should be used, failing
    * any overide the value is random.
    *
@@ -890,7 +890,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     return r.nextBoolean();
   }
 
-  /**
+  /*
    * Specifies a {@link NoEvictionListener}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -898,7 +898,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
    */
   private static class NoEvictionBTree extends BTree {
 
-    /**
+    /*
      * @param store
      * @param checkpoint
      * @param metadata
@@ -916,8 +916,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  //    /**
-  //     * <p>
+  //    /*
+//     * <p>
   //     * Unit test for the {@link #getRandomKeys(int, int, int)} test helper. The
   //     * test verifies fence posts by requiring the randomly generated keys to be
   //     * dense in the target array. The test checks for several different kinds of
@@ -985,8 +985,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Test helper produces a set of distinct randomly selected external keys.
+  //    /*
+//     * Test helper produces a set of distinct randomly selected external keys.
   //     */
   //    public int[] getRandomKeys(int nkeys) {
   //
@@ -994,8 +994,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * <p>
+  //    /*
+//     * <p>
   //     * Test helper produces a set of distinct randomly selected external keys in
   //     * the half-open range [fromKey:toKey).
   //     * </p>
@@ -1077,7 +1077,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   //
   //    }
 
-  /**
+  /*
    * Test helper for {@link #test_splitRootLeaf_increasingKeySequence()}. creates a sequence of keys
    * in increasing order and inserts them into the tree. Note that you do not know, in general, how
    * many inserts it will take to split the root node since the split decisions are path dependent.
@@ -1186,7 +1186,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     assertEquals("#entries", 0, btree.nentries);
   }
 
-  /**
+  /*
    * Creates a sequence of keys in decreasing order and inserts them into the tree. Note that you do
    * not know, in general, how many inserts it will take to split the root node since the split
    * decisions are path dependent. They depend on the manner in which the leaves get filled, whether
@@ -1291,7 +1291,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     assertEquals("#entries", 0, btree.nentries);
   }
 
-  /**
+  /*
    * Stress test helper inserts random permutations of keys into btrees of order m for several
    * different btrees, #of keys to be inserted, and permutations of keys. Several random
    * permutations of dense and sparse keys are inserted. The #of keys to be inserted is also varied.
@@ -1341,7 +1341,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Insert dense key-value pairs into the tree in a random order and verify the expected entry
    * traversal afterwards.
    *
@@ -1356,9 +1356,9 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
      * generate keys.  the keys are a dense monotonic sequence.
      */
 
-    final int keys[] = new int[ninserts];
+    final int[] keys = new int[ninserts];
 
-    final SimpleEntry entries[] = new SimpleEntry[ninserts];
+    final SimpleEntry[] entries = new SimpleEntry[ninserts];
 
     for (int i = 0; i < ninserts; i++) {
 
@@ -1370,7 +1370,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     return doInsertRandomKeySequenceTest(btree, keys, entries, trace);
   }
 
-  /**
+  /*
    * Insert a sequence of monotonically increase keys with random spacing into a tree in a random
    * order and verify the expected entry traversal afterwards.
    *
@@ -1385,9 +1385,9 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     /*
      * generate random keys. the keys are a sparse monotonic sequence.
      */
-    final int keys[] = new int[ninserts];
+    final int[] keys = new int[ninserts];
 
-    final SimpleEntry entries[] = new SimpleEntry[ninserts];
+    final SimpleEntry[] entries = new SimpleEntry[ninserts];
 
     final Random r = new Random();
 
@@ -1407,7 +1407,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     return doInsertRandomKeySequenceTest(btree, keys, entries, trace);
   }
 
-  /**
+  /*
    * Insert key value pairs into the tree in a random order and verify the expected entry traversal
    * afterwards.
    *
@@ -1423,7 +1423,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     return doInsertKeySequenceTest(btree, keys, entries, getRandomOrder(keys.length), trace);
   }
 
-  /**
+  /*
    * Present a known sequence.
    *
    * @param m The branching factor.
@@ -1434,9 +1434,9 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
     final int ninserts = order.length;
 
-    final int keys[] = new int[ninserts];
+    final int[] keys = new int[ninserts];
 
-    final SimpleEntry entries[] = new SimpleEntry[ninserts];
+    final SimpleEntry[] entries = new SimpleEntry[ninserts];
 
     for (int i = 0; i < ninserts; i++) {
 
@@ -1448,7 +1448,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     doInsertKeySequenceTest(btree, keys, entries, order, trace);
   }
 
-  /**
+  /*
    * Insert key value pairs into the tree in the specified order and verify the expected entry
    * traversal afterwards. If the test fails, then the details necessary to recreate the test (m,
    * ninserts, and the order[]) are printed out.
@@ -1568,7 +1568,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Creates a sequence of dense keys in random order and inserts them into the tree. Note that the
    * split decision points are path dependent and can not be predicated given random inserts.
    *
@@ -1690,7 +1690,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     if (log.isInfoEnabled()) log.info(btree.getBtreeCounters().toString());
   }
 
-  /**
+  /*
    * Stress test helper performs random inserts, removal and lookup operations and compares the
    * behavior of the {@link BTree} against ground truth as tracked by a {@link TreeMap}.
    *
@@ -1760,8 +1760,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
       if (i % 100 == 0) {
 
-        /*
-         * Validate the keys and entries.
+      /*
+       * Validate the keys and entries.
          */
 
         assertEquals("#entries", expected.size(), btree.getEntryCount());
@@ -1784,7 +1784,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     if (log.isInfoEnabled()) log.info(btree.getBtreeCounters().toString());
   }
 
-  /**
+  /*
    * Stress test for building up a tree and then removing all keys in a random order. The test
    * populates a btree with enough keys to split the root leaf at least once then verifies that
    * delete correctly removes each keys and any unused leaves and finally replaces the root node
@@ -1875,7 +1875,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     if (log.isInfoEnabled()) log.info(btree.getBtreeCounters().toString());
   }
 
-  /**
+  /*
    * A suite of tests designed to verify that one btree correctly represents the information present
    * in a ground truth btree. The test verifies the #of entries, key type, the {@link
    * AbstractBTree#rangeIterator()}, and also both lookup by key and lookup by entry index. The
@@ -1995,7 +1995,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Compares the total ordering of two B+Trees as revealed by their range iterators
    *
    * @param expected The ground truth iterator.
@@ -2038,8 +2038,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
       } catch (AssertionFailedError ex) {
 
-        /*
-         * Lazily generate message.
+      /*
+       * Lazily generate message.
          */
         fail(
             "Keys differ: index="
@@ -2066,8 +2066,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
           assertSameValue(expectedVal, actualVal);
 
         } catch (AssertionFailedError ex) {
-          /*
-           * Lazily generate message.
+        /*
+       * Lazily generate message.
            */
           fail(
               "Values differ: index="
@@ -2083,8 +2083,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
       }
 
       if (expectedTuple.getVersionTimestamp() != actualTuple.getVersionTimestamp()) {
-        /*
-         * Lazily generate message.
+      /*
+       * Lazily generate message.
          */
         assertEquals(
             "timestamps differ: index=" + index + ", key=" + BytesUtil.toString(expectedKey),
@@ -2103,7 +2103,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     return actualTupleCount;
   }
 
-  /**
+  /*
    * Extract all keys and values from the btree in key order. The caller must correctly dimension
    * the arrays before calling this method.
    *
@@ -2138,7 +2138,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Tests the performance of random {@link IIndex#lookup(Object)}s on the btree. This vets the
    * separator keys and the childAddr and/or childRef arrays since those are responsible for lookup.
    *
@@ -2191,7 +2191,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Tests the performance of random lookups of keys and values by entry index. This vets the
    * separator keys and childRef/childAddr arrays, which are used to lookup the entry index for a
    * key, and also vets the childEntryCount[] array, since that is responsible for lookup by entry
@@ -2240,7 +2240,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Method verifies that the <i>actual</i> {@link ITupleIterator} produces the expected values in
    * the expected order. Errors are reported if too few or too many values are produced, etc.
    */
@@ -2249,7 +2249,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     assertSameIterator("", expected, actual);
   }
 
-  /**
+  /*
    * Method verifies that the <i>actual</i> {@link ITupleIterator} produces the expected values in
    * the expected order. Errors are reported if too few or too many values are produced, etc.
    */
@@ -2273,8 +2273,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
         if (val != null) {
 
-          /*
-           * Only do message construction if we know that the assert
+        /*
+       * Only do message construction if we know that the assert
            * will fail.
            */
           fail(
@@ -2290,8 +2290,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
         if (val == null) {
 
-          /*
-           * Only do message construction if we know that the assert
+        /*
+       * Only do message construction if we know that the assert
            * will fail.
            */
           fail(
@@ -2305,8 +2305,8 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
         if (BytesUtil.compareBytes(expected[i], val) != 0) {
 
-          /*
-           * Only do message construction if we know that the assert
+        /*
+       * Only do message construction if we know that the assert
            * will fail.
            */
           fail(
@@ -2335,7 +2335,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verifies the data in the two indices using a batch-oriented key range scans (this can be used
    * to verify a key-range partitioned scale-out index against a ground truth index) - only the keys
    * and values of non-deleted index entries in the <i>expected</i> index are inspected. Deleted
@@ -2353,7 +2353,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     assertSameEntryIterator(expectedItr, actualItr);
   }
 
-  /**
+  /*
    * Verifies that the iterators visit tuples having the same data in the same order.
    *
    * @param expectedItr
@@ -2405,7 +2405,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     assertFalse("Not expecting more tuples", actualItr.hasNext());
   }
 
-  /**
+  /*
    * Generate a set of N random distinct byte[] keys in sorted order using an unsigned byte[]
    * comparison function.
    *
@@ -2472,7 +2472,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Generate random key-value data in key order.
    *
    * <p>Note: The auto-split feature of the scale-out indices depends on the assumption that the
@@ -2513,7 +2513,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     return data;
   }
 
-  /**
+  /*
    * Utility method for random long integers within a range.
    *
    * @param r The random number.

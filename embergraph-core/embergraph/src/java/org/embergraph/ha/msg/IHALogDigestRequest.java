@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-/**
- * Message used to request the digest of the HALog file associated with a specified commit point.
+/*
+* Message used to request the digest of the HALog file associated with a specified commit point.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

@@ -35,8 +35,8 @@ import org.embergraph.rawstore.IPSOutputStream;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.TransientResourceMetadata;
 
-/**
- * An {@link IRawStore} backed by an {@link IMemoryManager}.
+/*
+* An {@link IRawStore} backed by an {@link IMemoryManager}.
  *
  * @author thompsonbry
  */
@@ -51,7 +51,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
   /** The {@link UUID} for the store. */
   private final UUID m_uuid;
 
-  /**
+  /*
    * Create a new instance.
    *
    * @param pool The pool from which the backing direct {@link ByteBuffer}s will be allocated.
@@ -61,7 +61,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
     this(pool, Integer.MAX_VALUE);
   }
 
-  /**
+  /*
    * Create a new instance.
    *
    * @param pool The pool from which the backing direct {@link ByteBuffer}s will be allocated.
@@ -80,7 +80,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
     m_uuid = UUID.randomUUID();
   }
 
-  /**
+  /*
    * Wrap an existing {@link IMemoryManager}.
    *
    * @param mmgr The {@link IMemoryManager}.
@@ -90,7 +90,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
     this(mmgr, UUID.randomUUID());
   }
 
-  /**
+  /*
    * Private constructor used to return a {@link MemStore} backed by a new {@link IMemoryManager}
    * allocation context.
    *
@@ -116,7 +116,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
     return m_strategy.getStore();
   }
 
-  /**
+  /*
    * Return a new view of the {@link MemStore} backed by a child {@link IMemoryManager}. Allocations
    * against the {@link MemStore} may be released in bulk by {@link #close()}. The life cycle of the
    * returned {@link MemStore} is bounded by the life cycle of the {@link MemStore} from which it
@@ -205,7 +205,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
     deleteResources();
   }
 
-  /**
+  /*
    * NOP since the {@link MemStore} is not backed by stable media.
    *
    * <p>{@inheritDoc}
@@ -216,7 +216,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
 
   }
 
-  /**
+  /*
    * This method always returns <code>null</code> since there is no backing file.
    *
    * <p>{@inheritDoc}
@@ -251,7 +251,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
     return false;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to return the #of bytes in the allocation slots rather than the user bytes. This
@@ -303,7 +303,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
     return m_strategy.getOutputStream();
   }
 
-  /**
+  /*
    * Return an output stream which can be used to write on the backing store within the given
    * allocation context. You can recover the address used to read back the data from the {@link
    * IPSOutputStream}.
@@ -317,7 +317,7 @@ public class MemStore extends AbstractRawStore implements IAllocationManagerStor
     return m_strategy.getOutputStream(context);
   }
 
-  /**
+  /*
    * Return an input stream from which a previously written stream may be read back.
    *
    * @param addr The address at which the stream was written.

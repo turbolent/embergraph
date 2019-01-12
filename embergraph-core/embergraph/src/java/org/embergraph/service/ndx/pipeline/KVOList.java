@@ -4,8 +4,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicReference;
 import org.embergraph.btree.keys.KVO;
 
-/**
- * Extends {@link KVO} to allow duplicates to be gathered together in a doubly-linked list. This is
+/*
+* Extends {@link KVO} to allow duplicates to be gathered together in a doubly-linked list. This is
  * used to facilitate duplicate removal where the goal is to eliminate the index write for the
  * duplicate instance(s) but where we still want to take some after action for each distinct
  * instance.
@@ -17,7 +17,7 @@ import org.embergraph.btree.keys.KVO;
  */
 public class KVOList<O> extends KVO<O> {
 
-  /**
+  /*
    * A doubly-linked chain.
    *
    * <p>Note: it is less expensive to allocate this with the {@link KVOList} than to allocate an
@@ -27,7 +27,7 @@ public class KVOList<O> extends KVO<O> {
 
   private volatile boolean done = false;
 
-  /**
+  /*
    * @param key The unsigned byte[] key (required).
    * @param val The byte[] value (optional).
    * @param obj The paired application object (optional).
@@ -38,7 +38,7 @@ public class KVOList<O> extends KVO<O> {
     super(key, val, obj);
   }
 
-  /**
+  /*
    * Add a reference to the duplicates list. This is MUTEX with {@link #done()}.
    *
    * @param o A duplicate of this object.
@@ -107,7 +107,7 @@ public class KVOList<O> extends KVO<O> {
     }
   }
 
-  /**
+  /*
    * The #of duplicates on the internal list. This will report ZERO (0) if there are no duplicates
    * (the internal list is empty).
    */
@@ -139,19 +139,19 @@ public class KVOList<O> extends KVO<O> {
     }
   }
 
-  /**
+  /*
    * An operation which can be mapped over the duplicate list.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    * @param <O>
    */
-  public static interface Op<O> {
+  public interface Op<O> {
 
-    public void apply(KVO<O> o);
+    void apply(KVO<O> o);
   }
 
-  /**
+  /*
    * Maps the operation across the duplicate list (the operation is NOT applied to the original).
    *
    * @param op The operation.

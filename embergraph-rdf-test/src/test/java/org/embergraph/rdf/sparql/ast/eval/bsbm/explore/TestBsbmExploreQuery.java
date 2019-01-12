@@ -23,8 +23,8 @@ package org.embergraph.rdf.sparql.ast.eval.bsbm.explore;
 
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 
-/**
- * Data driven test suite for complex queries.
+/*
+* Data driven test suite for complex queries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -40,7 +40,7 @@ public class TestBsbmExploreQuery extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * PC 10 data set. This is the data set which was used to generate the concrete instances of the
    * queries referenced from within this class.
    */

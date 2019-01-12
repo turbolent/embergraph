@@ -51,8 +51,8 @@ import org.embergraph.rdf.sparql.ast.eval.ASTDeferredIVResolution;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTSimpleOptionalOptimizer}.
+/*
+* Test suite for {@link ASTSimpleOptionalOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -67,7 +67,7 @@ public class TestASTSimpleOptionalOptimizer extends AbstractASTEvaluationTestCas
     super(name);
   }
 
-  /**
+  /*
    * Unit test for recognizing a "simple optional" and lifting it into the parent join group.
    *
    * <p>TODO Unit test for a variation where there are FILTERS or other things in the optional which
@@ -145,7 +145,7 @@ public class TestASTSimpleOptionalOptimizer extends AbstractASTEvaluationTestCas
     }
   }
 
-  /**
+  /*
    * Test effective boolean value - optional.
    *
    * <pre>
@@ -240,7 +240,7 @@ public class TestASTSimpleOptionalOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expectedClause, queryRoot.getWhereClause());
   }
 
-  /**
+  /*
    * A variant of the TCK test where the filter is in the optional group and uses BOUND() to wrap
    * the variable. This filter does not have any materialization requirements. Both it and the
    * statement pattern should be lifted out of the optional group. The filter should be attached to
@@ -333,7 +333,7 @@ public class TestASTSimpleOptionalOptimizer extends AbstractASTEvaluationTestCas
               new FunctionNode(
                   FunctionRegistry.BOUND,
                   null, // scalarValues
-                  new ValueExpressionNode[] {new VarNode("w")}));
+                  new VarNode("w")));
 
       final GlobalAnnotations globals =
           new GlobalAnnotations(context.getLexiconNamespace(), context.getTimestamp());
@@ -352,8 +352,8 @@ public class TestASTSimpleOptionalOptimizer extends AbstractASTEvaluationTestCas
    * Note: I have taken out the code path since we are not trying to lift the
    * filter in this case.
    */
-  //    /**
-  //     * A variant of the TCK test where the filter is in the optional group and
+  //    /*
+//     * A variant of the TCK test where the filter is in the optional group and
   //     * uses a variable which is "incoming bound" to the optional group (hence
   //     * definitely bound in the parent group).
   //     * <p>

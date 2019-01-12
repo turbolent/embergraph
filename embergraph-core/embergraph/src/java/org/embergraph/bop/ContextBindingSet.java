@@ -24,8 +24,8 @@ package org.embergraph.bop;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-/**
- * Wraps an {@link IBindingSet} to provide access to the {@link BOpContext}. The {@link BOpContext}
+/*
+* Wraps an {@link IBindingSet} to provide access to the {@link BOpContext}. The {@link BOpContext}
  * information is <em>transient</em> and will not cross the wire.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

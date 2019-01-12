@@ -5,8 +5,8 @@ import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.PIDUtil;
 
-/**
- * Collection of host performance data using <code>vmstat</code> and <code>sysstat</code> suite.
+/*
+* Collection of host performance data using <code>vmstat</code> and <code>sysstat</code> suite.
  *
  * @see http://pagesperso-orange.fr/sebastien.godard/
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -28,7 +28,7 @@ public class StatisticsCollectorForLinux extends AbstractStatisticsCollector {
     kernelVersion = KernelVersion.get();
   }
 
-  /**
+  /*
    * The name of the process (or more typically its service {@link UUID}) whose per-process
    * performance counters are to be collected.
    */
@@ -146,7 +146,7 @@ public class StatisticsCollectorForLinux extends AbstractStatisticsCollector {
     return root;
   }
 
-  /**
+  /*
    * @param interval The interval at which the performance counters will be collected in seconds.
    * @param processName The name of the process (or more typically its service {@link UUID}) whose
    *     per-process performance counters are to be collected.

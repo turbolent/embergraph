@@ -38,8 +38,8 @@ import org.embergraph.io.FixedByteArrayBuffer;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.test.MockTermIdFactory;
 
-/**
- * Test suite for approaches to key compression for statement indices (keys are permutations on
+/*
+* Test suite for approaches to key compression for statement indices (keys are permutations on
  * SPOC, logically comprised of long[4] and encoded as byte[]), the terms index (key is byte[]
  * encoding the URI, literal, or bnode ID), or the ids index (key is byte[] encoding a long term
  * identifier). Key compression can be used (a) before sorting the data; (b) when serializing the
@@ -86,7 +86,7 @@ public class TestSPOKeyCoders extends TestCase2 {
     return factory.newTermIdNoSids();
   }
 
-  /**
+  /*
    * Return an array of {@link SPO}s.
    *
    * @param n The #of elements in the array.
@@ -153,7 +153,7 @@ public class TestSPOKeyCoders extends TestCase2 {
     doRoundTripTest(getData(10000), rabaCoder);
   }
 
-  /**
+  /*
    * Do a round-trip test test.
    *
    * @param a The array of {@link SPO}s.

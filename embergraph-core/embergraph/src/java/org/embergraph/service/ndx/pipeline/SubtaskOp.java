@@ -1,7 +1,7 @@
 package org.embergraph.service.ndx.pipeline;
 
-/**
- * An operation which can be mapped across subtasks.
+/*
+* An operation which can be mapped across subtasks.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -9,5 +9,5 @@ package org.embergraph.service.ndx.pipeline;
  */
 public interface SubtaskOp<S extends AbstractSubtask> {
 
-  public void call(S s) throws Exception;
+  void call(S s) throws Exception;
 }

@@ -83,15 +83,15 @@ import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 import org.openrdf.sail.SailException;
 
-/**
- * Proxied test suite.
+/*
+* Proxied test suite.
  *
  * @param <S>
  */
 public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     extends ProxyTestCase<S> {
 
-  /**
+  /*
    * The path used to resolve resources in this package when they are being uploaded to the {@link
    * NanoSparqlServer}.
    */
@@ -100,13 +100,13 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
   /** A jetty {@link Server} running a {@link NanoSparqlServer} instance. */
   protected Server m_fixture;
 
-  /**
+  /*
    * The namespace of the {@link AbstractTripleStore} instance against which the test is running. A
    * unique namespace is used for each test run, but the namespace is based on the test name.
    */
   protected String namespace;
 
-  /**
+  /*
    * The {@link ClientConnectionManager} for the {@link HttpClient} used by the {@link
    * RemoteRepository}. This is used when we tear down the {@link RemoteRepository}.
    */
@@ -124,7 +124,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
   /** The effective {@link NanoSparqlServer} http end point (including the ContextPath). */
   protected String m_serviceURL;
 
-  /**
+  /*
    * The URL of the root of the web application server. This does NOT include the ContextPath for
    * the webapp.
    *
@@ -135,8 +135,8 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
    */
   protected String m_rootURL;
 
-  //	/**
-  //	 * The request path for the REST API under test.
+  //	/*
+//	 * The request path for the REST API under test.
   //	 */
   //	final protected static String requestPath = "/sparql";
 
@@ -168,8 +168,8 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     //      AbstractApiTask.submitApiTask(indexManager, new CreateKBTask(namespace,
     //            properties)).get();
     //
-    //        /**
-    //         * Return a view of the new KB to the caller.
+    //        /*
+//         * Return a view of the new KB to the caller.
     //         *
     //         * Note: The caller MUST NOT attempt to modify this KB view outside of
     //         * the group commit mechanisms. Therefore I am now returning a read-only
@@ -397,8 +397,8 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     }
   }
 
-  //    /**
-  //    * Returns a view of the triple store using the sail interface.
+  //    /*
+//    * Returns a view of the triple store using the sail interface.
   //    *
   //    * FIXME DO NOT CIRCUMVENT! Use the REST API throughout this test suite.
   //    */
@@ -436,7 +436,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
   //
   //	}
 
-  /**
+  /*
    * Counts the #of results in a SPARQL result set.
    *
    * @param result The connection from which to read the results.
@@ -464,7 +464,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     }
   }
 
-  /**
+  /*
    * Counts the #of results in a SPARQL result set.
    *
    * @param result The connection from which to read the results.
@@ -525,7 +525,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     return out.toArray(new Statement[out.size()]);
   }
 
-  /**
+  /*
    * Compare two graphs for equality.
    *
    * <p>Note: This is not very efficient if the {@link Graph} implementations are not indexed.
@@ -543,7 +543,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     assertSameGraph(expected, asGraph(actual));
   }
 
-  /**
+  /*
    * Compare two graphs for equality.
    *
    * <p>Note: This is not very efficient if the {@link Graph} implementations are not indexed.
@@ -564,7 +564,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     assertEquals("size", expected.size(), actual.size());
   }
 
-  /**
+  /*
    * Preferred version executes the {@link IPreparedGraphQuery} and ensures that the {@link
    * GraphQueryResult} is closed.
    *
@@ -593,7 +593,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     }
   }
 
-  /**
+  /*
    * @deprecated by {@link #asGraph(IPreparedGraphQuery)} which can ensure that the {@link
    *     GraphQueryResult} is closed.
    */
@@ -613,7 +613,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     }
   }
 
-  /**
+  /*
    * Return the #of solutions in a result set.
    *
    * @param result The result set.
@@ -632,7 +632,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     }
   }
 
-  /**
+  /*
    * Generates some statements and serializes them using the specified {@link RDFFormat}.
    *
    * @param ntriples The #of statements to generate.
@@ -684,8 +684,8 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     return g;
   }
 
-  //    /**
-  //     * "ASK" query using POST with an empty KB.
+  //    /*
+//     * "ASK" query using POST with an empty KB.
   //     */
   //    public void test_POST_ASK() throws Exception {
   //
@@ -736,7 +736,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
 
   }
 
-  /**
+  /*
    * Return the exact number of statements in the repository.
    *
    * @see #countAll()
@@ -753,7 +753,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
 
   }
 
-  /**
+  /*
    * Test helps PUTs some data, verifies that it is visible, DELETEs the data, and then verifies
    * that it is gone.
    *
@@ -824,7 +824,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     }
   }
 
-  /**
+  /*
    * Insert a resource into the {@link NanoSparqlServer}. This is used to load resources in the test
    * package into the server.
    */
@@ -837,7 +837,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     return m_repo.add(add);
   }
 
-  /**
+  /*
    * Read the contents of a file.
    *
    * @param file The file.
@@ -911,7 +911,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     return g;
   }
 
-  /**
+  /*
    * Write a graph on a buffer suitable for sending as an HTTP request body.
    *
    * @param format The RDF Format to use.
@@ -942,7 +942,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     return baos.toByteArray();
   }
 
-  /**
+  /*
    * Load and return a graph from a resource.
    *
    * @param resource The resource.
@@ -958,7 +958,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     return g;
   }
 
-  /**
+  /*
    * Reads a resource and sends it using an INSERT with BODY request to be loaded into the database.
    *
    * @param method
@@ -1004,7 +1004,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     }
   }
 
-  /**
+  /*
    * Inserts some data into the KB and then issues a DESCRIBE query against the REST API and
    * verifies the expected results.
    *
@@ -1064,7 +1064,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     }
   }
 
-  /**
+  /*
    * Sets up a simple data set on the server.
    *
    * @throws Exception
@@ -1093,7 +1093,7 @@ public abstract class AbstractTestNanoSparqlClient<S extends IIndexManager>
     }
   }
 
-  /**
+  /*
    * Sets up a simple data set on the server.
    *
    * @throws Exception

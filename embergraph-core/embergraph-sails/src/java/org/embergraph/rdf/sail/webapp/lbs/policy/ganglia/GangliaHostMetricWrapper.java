@@ -20,8 +20,8 @@ import org.embergraph.ganglia.IHostReport;
 import org.embergraph.rdf.sail.webapp.lbs.AbstractHostMetrics;
 import org.embergraph.rdf.sail.webapp.lbs.IHostMetrics;
 
-/**
- * Wraps an {@link IHostReport} as an {@link IHostMetrics} object.
+/*
+* Wraps an {@link IHostReport} as an {@link IHostMetrics} object.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

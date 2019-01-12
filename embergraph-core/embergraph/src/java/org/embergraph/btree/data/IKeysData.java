@@ -22,15 +22,15 @@ package org.embergraph.btree.data;
 
 import org.embergraph.btree.raba.IRaba;
 
-/**
- * Interface for access to the keys {@link IRaba} of a node or leaf in an index data structure.
+/*
+* Interface for access to the keys {@link IRaba} of a node or leaf in an index data structure.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: ILeafData.java 4388 2011-04-11 13:35:47Z thompsonbry $
  */
 public interface IKeysData {
 
-  /**
+  /*
    * Return the #of keys in the node or leaf. A node has <code>nkeys+1</code> children. A leaf has
    * <code>nkeys</code> keys and values. The maximum #of keys for a node is one less than the
    * branching factor of the B+Tree. The maximum #of keys for a leaf is the branching factor of the

@@ -28,8 +28,8 @@ import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.bop.engine.IChunkMessage;
 import org.embergraph.bop.engine.QueryEngine;
 
-/**
- * Abstract base class for pipeline operators where the data moving along the pipeline is chunks of
+/*
+* Abstract base class for pipeline operators where the data moving along the pipeline is chunks of
  * {@link IBindingSet}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +45,7 @@ public abstract class PipelineOp extends BOpBase {
 
   public interface Annotations extends BOp.Annotations, BufferAnnotations {
 
-    /**
+    /*
      * The value of the annotation is the {@link BOp.Annotations#BOP_ID} of the ancestor in the
      * operator tree which serves as the default sink for binding sets (optional, default is the
      * parent).
@@ -54,7 +54,7 @@ public abstract class PipelineOp extends BOpBase {
      */
     String SINK_REF = PipelineOp.class.getName() + ".sinkRef";
 
-    /**
+    /*
      * The value of the annotation is the {@link BOp.Annotations#BOP_ID} of the ancestor in the
      * operator tree which serves as the alternative sink for binding sets (default is no
      * alternative sink).
@@ -64,7 +64,7 @@ public abstract class PipelineOp extends BOpBase {
      */
     String ALT_SINK_REF = PipelineOp.class.getName() + ".altSinkRef";
 
-    /**
+    /*
      * The value reported by {@link PipelineOp#isSharedState()} (default {@value
      * #DEFAULT_SHARED_STATE}). This may be overridden to <code>true</code> to have instances of
      * operators evaluated in the same query engine context share the same {@link BOpStats}
@@ -82,7 +82,7 @@ public abstract class PipelineOp extends BOpBase {
 
     boolean DEFAULT_SHARED_STATE = false;
 
-    /**
+    /*
      * When <code>true</code>, the {@link QueryEngine} MAY reorder the solutions as they flow
      * through the query plan (this is done as a throughput optimization). When <code>false</code>,
      * the {@link QueryEngine} MUST NOT reorder solutions.
@@ -94,7 +94,7 @@ public abstract class PipelineOp extends BOpBase {
 
     boolean DEFAULT_REORDER_SOLUTIONS = true;
 
-    /**
+    /*
      * This option may be used to place an optional limit on the #of concurrent tasks which may run
      * for the same (bopId,shardId) for a given query (default {@value #DEFAULT_MAX_PARALLEL}). The
      * query is guaranteed to make progress as long as this is some positive integer. While limiting
@@ -114,7 +114,7 @@ public abstract class PipelineOp extends BOpBase {
     /** @see #MAX_PARALLEL */
     int DEFAULT_MAX_PARALLEL = 5;
 
-    /**
+    /*
      * For a pipelined operator, this is the maximum number of messages that will be assigned to a
      * single invocation of the evaluation task for that operator (default {@value
      * #DEFAULT_MAX_MESSAGES_PER_TASK}). By default the {@link QueryEngine} MAY (and generally does)
@@ -129,7 +129,7 @@ public abstract class PipelineOp extends BOpBase {
     /** @see #MAX_MESSAGES_PER_TASK */
     int DEFAULT_MAX_MESSAGES_PER_TASK = 10;
 
-    /**
+    /*
      * For pipelined operators, this is the capacity of the input queue for that operator. Producers
      * will block if the input queue for the target operator is at its capacity. This provides an
      * important limit on the amount of data which can be buffered on the JVM heap during pipelined
@@ -140,7 +140,7 @@ public abstract class PipelineOp extends BOpBase {
     /** @see #PIPELINE_QUEUE_CAPACITY */
     int DEFAULT_PIPELINE_QUEUE_CAPACITY = 10;
 
-    /**
+    /*
      * Annotation used to mark pipelined (aka vectored) operators. When <code>false</code> the
      * operator will use either "at-once" or "blocked" evaluation depending on how it buffers its
      * data for evaluation.
@@ -152,7 +152,7 @@ public abstract class PipelineOp extends BOpBase {
     /** @see #PIPELINED */
     boolean DEFAULT_PIPELINED = true;
 
-    /**
+    /*
      * This annotation is only used for non-{@link #PIPELINED} operators and specifies the maximum
      * #of bytes which the operator may buffer on the native heap before evaluation of the operator
      * is triggered (default {@value #DEFAULT_MAX_MEMORY}).
@@ -176,7 +176,7 @@ public abstract class PipelineOp extends BOpBase {
     /** @see #MAX_MEMORY */
     long DEFAULT_MAX_MEMORY = 0L;
 
-    /**
+    /*
      * When <code>true</code> a final evaluation pass will be invoked once it is know that the
      * operator can not be re-triggered by another {@link IChunkMessage}. The final evaluation pass
      * will be associated with an empty {@link IChunkMessage} as its source and {@link
@@ -190,8 +190,8 @@ public abstract class PipelineOp extends BOpBase {
 
     boolean DEFAULT_LAST_PASS = false;
 
-    //      /**
-    //      * For hash partitioned operators, this is the set of the member nodes
+    //      /*
+//      * For hash partitioned operators, this is the set of the member nodes
     //      * for the operator.
     //      * <p>
     //      * This annotation is required for such operators since the set of known
@@ -204,7 +204,7 @@ public abstract class PipelineOp extends BOpBase {
 
   }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * @param op
@@ -213,7 +213,7 @@ public abstract class PipelineOp extends BOpBase {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -262,7 +262,7 @@ public abstract class PipelineOp extends BOpBase {
     return getProperty(Annotations.REORDER_SOLUTIONS, Annotations.DEFAULT_REORDER_SOLUTIONS);
   }
 
-  /**
+  /*
    * The maximum amount of memory which may be used to buffered inputs for this operator on the
    * native heap. When ZERO (0), the inputs will be buffered on the JVM heap. When {@link
    * Long#MAX_VALUE}, an essentially unbounded amount of data may be buffered on the native heap.
@@ -277,7 +277,7 @@ public abstract class PipelineOp extends BOpBase {
     return getProperty(Annotations.MAX_MEMORY, Annotations.DEFAULT_MAX_MEMORY);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the operator uses pipelined evaluation (versus "at-once" or
    * "blocked" evaluation as discussed below).
    *
@@ -318,7 +318,7 @@ public abstract class PipelineOp extends BOpBase {
     return getProperty(PipelineOp.Annotations.PIPELINED, PipelineOp.Annotations.DEFAULT_PIPELINED);
   }
 
-  /**
+  /*
    * <code>true</code> iff the operator will use at-once evaluation (all inputs for the operator
    * will be buffered and the operator will run exactly once to consume those inputs).
    *
@@ -338,18 +338,15 @@ public abstract class PipelineOp extends BOpBase {
        */
       return true;
     }
-    if (maxMemory == Long.MAX_VALUE) {
-      /*
-       * Operator will buffer an essentially unbounded amount of data on
-       * the native heap.
-       */
-      return true;
-    }
+    /*
+     * Operator will buffer an essentially unbounded amount of data on
+     * the native heap.
+     */
+    return maxMemory == Long.MAX_VALUE;
 
-    return false;
   }
 
-  /**
+  /*
    * <code>true</code> iff the operator uses blocked evaluation (it buffers data on the native heap
    * up to a threshold and then evaluate that block of data).
    *
@@ -362,18 +359,15 @@ public abstract class PipelineOp extends BOpBase {
 
     final long maxMemory = getMaxMemory();
 
-    if (maxMemory > 0L && maxMemory < Long.MAX_VALUE) {
-      /*
-       * Operator will buffer data up to some maximum #of bytes on the
-       * native heap.
-       */
-      return true;
-    }
+    /*
+     * Operator will buffer data up to some maximum #of bytes on the
+     * native heap.
+     */
+    return maxMemory > 0L && maxMemory < Long.MAX_VALUE;
 
-    return false;
   }
 
-  /**
+  /*
    * Assert that this operator is annotated as an "at-once" operator which buffers its data on the
    * java heap. The requirements are:
    *
@@ -410,8 +404,8 @@ public abstract class PipelineOp extends BOpBase {
       throw new UnsupportedOperationException(Annotations.MAX_MEMORY + "=" + maxMemory);
   }
 
-  //	/**
-  //	 * Return <code>true</code> iff concurrent invocations of the operator are
+  //	/*
+//	 * Return <code>true</code> iff concurrent invocations of the operator are
   //	 * permitted.
   //	 * <p>
   //	 * Note: Operators which are not thread-safe still permit concurrent
@@ -447,7 +441,7 @@ public abstract class PipelineOp extends BOpBase {
     }
   }
 
-  /**
+  /*
    * The maximum parallelism with which tasks may be evaluated for this operator (this is a
    * per-shard limit in scale-out). A value of ONE (1) indicates that at most ONE (1) instance of
    * this task may be executing in parallel for a given shard and may be used to indicate that the
@@ -469,7 +463,7 @@ public abstract class PipelineOp extends BOpBase {
         PipelineOp.Annotations.MAX_PARALLEL, PipelineOp.Annotations.DEFAULT_MAX_PARALLEL);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff a final evaluation pass is requested by the operator. The final
    * evaluation pass will be invoked once for each node or shard on which the operator was evaluated
    * once it has consumed all inputs from upstream operators.
@@ -481,7 +475,7 @@ public abstract class PipelineOp extends BOpBase {
     return getProperty(Annotations.LAST_PASS, Annotations.DEFAULT_LAST_PASS);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff {@link #newStats(IQueryContext)} must be shared across all
    * invocations of {@link #eval(BOpContext)} for this operator for a given query.
    *
@@ -492,7 +486,7 @@ public abstract class PipelineOp extends BOpBase {
     return getProperty(Annotations.SHARED_STATE, Annotations.DEFAULT_SHARED_STATE);
   }
 
-  /**
+  /*
    * Return a new object which can be used to collect statistics on the operator evaluation. This
    * may be overridden to return a more specific class depending on the operator.
    */
@@ -501,7 +495,7 @@ public abstract class PipelineOp extends BOpBase {
     return new BOpStats();
   }
 
-  /**
+  /*
    * Return a {@link FutureTask} which computes the operator against the evaluation context. The
    * caller is responsible for executing the {@link FutureTask} (this gives them the ability to hook
    * the completion of the computation).

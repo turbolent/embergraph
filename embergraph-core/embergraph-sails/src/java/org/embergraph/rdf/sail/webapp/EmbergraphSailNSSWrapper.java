@@ -39,7 +39,7 @@ public class EmbergraphSailNSSWrapper {
   /** A jetty {@link Server} running a {@link NanoSparqlServer} instance. */
   protected Server m_fixture;
 
-  /**
+  /*
    * The {@link ClientConnectionManager} for the {@link HttpClient} used by the {@link
    * RemoteRepository}. This is used when we tear down the {@link RemoteRepository}.
    */
@@ -54,7 +54,7 @@ public class EmbergraphSailNSSWrapper {
   /** The effective {@link NanoSparqlServer} http end point (including the ContextPath). */
   protected String m_serviceURL;
 
-  /**
+  /*
    * The URL of the root of the web application server. This does NOT include the ContextPath for
    * the webapp.
    *

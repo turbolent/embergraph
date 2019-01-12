@@ -23,8 +23,8 @@ package org.embergraph.quorum;
 import java.rmi.Remote;
 import java.util.UUID;
 
-/**
- * An interface that causes various changes in the distributed quorum state required to execute the
+/*
+* An interface that causes various changes in the distributed quorum state required to execute the
  * intention of a {@link QuorumMember} service and its cognizant {@link AbstractQuorum}. The {@link
  * QuorumActor} is responsible for making coherent changes in the distributed quorum state. However,
  * when a service terminates abnormally, is partitioned from the distributed quorum, etc., then the
@@ -84,13 +84,13 @@ import java.util.UUID;
 public interface QuorumActor<S extends Remote, C extends QuorumClient<S>> {
 
   /** The {@link Quorum}. */
-  public Quorum<S, C> getQuourm();
+  Quorum<S, C> getQuourm();
 
   /** The service on whose behalf this class is acting. */
-  public QuorumMember<S> getQuorumMember();
+  QuorumMember<S> getQuorumMember();
 
   /** The {@link UUID} of the service on whose behalf this class is acting. */
-  public UUID getServiceId();
+  UUID getServiceId();
 
   /** Add the service to the set of quorum members. */
   void memberAdd();
@@ -104,7 +104,7 @@ public interface QuorumActor<S extends Remote, C extends QuorumClient<S>> {
   /** Remove the service from the write pipeline. */
   void pipelineRemove();
 
-  /**
+  /*
    * Cast a vote on the behalf of the associated service. If the service is not part of the
    * pipeline, then it is implicitly added to the pipeline. If the service has already voted for
    * some other lastCommitTime, then that vote is withdrawn before the new vote is cast. Services do
@@ -131,29 +131,29 @@ public interface QuorumActor<S extends Remote, C extends QuorumClient<S>> {
   /** Remove the associated service from the set of joined services for the quorum. */
   void serviceLeave();
 
-  //    /**
-  //     * Set the lastValidToken on the quorum equal to the given token. When a new
+  //    /*
+//     * Set the lastValidToken on the quorum equal to the given token. When a new
   //     * leader will be elected, this method will be invoked to update the quorum
   //     * token, passing in <code>newToken := lastValidToken+1</code>.
   //     */
   //    void setLastValidToken(final long newToken);
   //
-  //    /**
-  //     * Set the current token on the quorum equal to the lastValidToken. Note that
+  //    /*
+//     * Set the current token on the quorum equal to the lastValidToken. Note that
   //     * {@link #setLastValidToken(long)} will have been invoked as a precondition
   //     * so this has the effect of updating the current token to the recently
   //     * assigned newToken.
   //     */
   //    void setToken();
 
-  //    /**
-  //     * Set the lastValidToken on the quorum equal to the given token. When a new
+  //    /*
+//     * Set the lastValidToken on the quorum equal to the given token. When a new
   //     * leader will be elected, this method will be invoked to update the quorum
   //     * token, passing in <code>newToken := lastValidToken+1</code>.
   //     */
   //    void setToken(final long newToken);
 
-  /**
+  /*
    * Atomically set the lastValidToken and the current token on the quorum equal to the given token.
    * This method is invoked when the leader is elected, passing in <code>
    * newToken := lastValidToken + 1</code>.
@@ -166,7 +166,7 @@ public interface QuorumActor<S extends Remote, C extends QuorumClient<S>> {
   /** Clear the quorum token. */
   void clearToken();
 
-  /**
+  /*
    * Remove the service from the quorum. This should be called when a problem with the service is
    * reported to the quorum leader, for example as a result of a failed RMI request or failed socket
    * level write replication. Such errors arise either from network connectivity or service death.
@@ -179,5 +179,5 @@ public interface QuorumActor<S extends Remote, C extends QuorumClient<S>> {
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/724" > HA wire pulling and sure
    *     kill testing </a>
    */
-  public void forceRemoveService(UUID serviceId);
+  void forceRemoveService(UUID serviceId);
 }

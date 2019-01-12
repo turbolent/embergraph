@@ -59,8 +59,8 @@ import org.embergraph.striterator.CloseableChunkedIteratorWrapperConverter;
 import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedStriterator;
 
-/**
- * The evaluation context for the operator (NOT serializable).
+/*
+* The evaluation context for the operator (NOT serializable).
  *
  * @param <E> The generic type of the objects processed by the operator.
  */
@@ -86,7 +86,7 @@ public class BOpContext<E> extends BOpContextBase {
 
   private final boolean lastInvocation;
 
-  /**
+  /*
    * <code>true</code> iff this is the last invocation of the operator. The property is only set to
    * <code>true</code> for operators which:
    *
@@ -108,7 +108,7 @@ public class BOpContext<E> extends BOpContextBase {
     return lastInvocation;
   }
 
-  /**
+  /*
    * The interface for a running query.
    *
    * <p>Note: In scale-out each node will have a distinct {@link IRunningQuery} object and the query
@@ -139,7 +139,7 @@ public class BOpContext<E> extends BOpContextBase {
     return source;
   }
 
-  /**
+  /*
    * Where to write the output of the operator.
    *
    * @see PipelineOp.Annotations#SINK_REF
@@ -148,7 +148,7 @@ public class BOpContext<E> extends BOpContextBase {
     return sink;
   }
 
-  /**
+  /*
    * Optional alternative sink for the output of the operator. This is used by things like SPARQL
    * optional joins to route failed joins outside of the join group.
    *
@@ -159,7 +159,7 @@ public class BOpContext<E> extends BOpContextBase {
     return sink2;
   }
 
-  /**
+  /*
    * @param runningQuery The {@link IRunningQuery} (required).
    * @param partitionId The index partition identifier -or- <code>-1</code> if the index is not
    *     sharded.
@@ -206,7 +206,7 @@ public class BOpContext<E> extends BOpContextBase {
         sink2);
   }
 
-  /**
+  /*
    * Variant used by some test cases that need to mock up a {@link BOpContext} .
    *
    * @param runningQuery The {@link IRunningQuery} (not checked).
@@ -294,7 +294,7 @@ public class BOpContext<E> extends BOpContextBase {
         sink2);
   }
 
-  /**
+  /*
    * Wraps each {@link IBindingSet} to provide access to the {@link BOpContext}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -409,7 +409,7 @@ public class BOpContext<E> extends BOpContextBase {
     }
   }
 
-  /**
+  /*
    * Return the {@link IRunningQuery} associated with the specified queryId.
    *
    * @param queryId The {@link UUID} of some {@link IRunningQuery}.
@@ -440,7 +440,7 @@ public class BOpContext<E> extends BOpContextBase {
     return runningQuery;
   }
 
-  /**
+  /*
    * Return the {@link IQueryAttributes} associated with the specified query.
    *
    * @param queryId The {@link UUID} of some {@link IRunningQuery} -or- null to use the {@link
@@ -457,7 +457,7 @@ public class BOpContext<E> extends BOpContextBase {
     return getRunningQuery(queryId).getAttributes();
   }
 
-  /**
+  /*
    * Return the {@link IQueryAttributes} associated with this query.
    *
    * @return The {@link IQueryAttributes}.
@@ -467,8 +467,8 @@ public class BOpContext<E> extends BOpContextBase {
     return getRunningQuery().getAttributes();
   }
 
-  //    /**
-  //     * Return an access path for a predicate that identifies a data structure
+  //    /*
+//     * Return an access path for a predicate that identifies a data structure
   //     * which can be resolved to a reference attached to as a query attribute.
   //     * <p>
   //     * This method is used for data structures (including {@link Stream}s,
@@ -543,7 +543,7 @@ public class BOpContext<E> extends BOpContextBase {
   //
   //    }
 
-  /**
+  /*
    * Return an {@link ICloseableIterator} that can be used to read the solutions to be indexed from
    * a source other than the pipeline. The returned iterator is intentionally aligned with the type
    * returned by {@link BOpContext#getSource()}.
@@ -587,8 +587,8 @@ public class BOpContext<E> extends BOpContextBase {
 
       if (tmp instanceof IHashJoinUtility) {
 
-        /*
-         * Reading solutions from an existing hash index.
+      /*
+       * Reading solutions from an existing hash index.
          */
 
         final IHashJoinUtility state = (IHashJoinUtility) tmp;
@@ -597,16 +597,16 @@ public class BOpContext<E> extends BOpContextBase {
 
       } else if (tmp instanceof ISimpleIndexAccess) {
 
-        /*
-         * Reading solutions from a raw BTree, HTree, or Stream.
+      /*
+       * Reading solutions from a raw BTree, HTree, or Stream.
          */
 
         src = (ICloseableIterator<IBindingSet>) ((ISimpleIndexAccess) tmp).scan();
 
       } else {
 
-        /*
-         * We found something, but we do not know how to turn it
+      /*
+       * We found something, but we do not know how to turn it
          * into an iterator visiting solutions.
          */
 
@@ -618,7 +618,7 @@ public class BOpContext<E> extends BOpContextBase {
 
     } else {
 
-      /**
+      /*
        * queryID is null.
        *
        * <p>Note: This is *not* the case addressed by BLZG-1493. That ticket allows a null queryID
@@ -664,7 +664,7 @@ public class BOpContext<E> extends BOpContextBase {
     }
   }
 
-  /**
+  /*
    * Return the {@link IMemoryManager} associated with the specified query.
    *
    * @param queryId The {@link UUID} of some {@link IRunningQuery} -or- null to use the {@link
@@ -687,7 +687,7 @@ public class BOpContext<E> extends BOpContextBase {
     return getRunningQuery().getQueryEngine().getClientConnectionManager();
   }
 
-  /**
+  /*
    * Binds variables from a visited element.
    *
    * <p>Note: The bindings are propagated before the constraints are verified so this method will
@@ -722,7 +722,7 @@ public class BOpContext<E> extends BOpContextBase {
     return true;
   }
 
-  /**
+  /*
    * Copy the values for variables in the predicate from the element, applying them to the caller's
    * {@link IBindingSet}.
    *
@@ -758,8 +758,8 @@ public class BOpContext<E> extends BOpContextBase {
 
       } else {
 
-        /*
-         * Note: A variable which is bound outside of the query to a
+      /*
+       * Note: A variable which is bound outside of the query to a
          * constant gets turned into a Constant with that variable as
          * its annotation. This code path causes the binding to be
          * created for the variable and the constant when the constant
@@ -788,8 +788,8 @@ public class BOpContext<E> extends BOpContextBase {
 
       if (sidVar != null) {
 
-        /*
-         * Build a SidIV for the (s,p,o) and binding it on the sid
+      /*
+       * Build a SidIV for the (s,p,o) and binding it on the sid
          * variable.
          *
          * @see <a
@@ -811,8 +811,8 @@ public class BOpContext<E> extends BOpContextBase {
     }
   }
 
-  //    /**
-  //     * Copy the as-bound values for the named variables out of the
+  //    /*
+//     * Copy the as-bound values for the named variables out of the
   //     * {@link IElement} and into the caller's array.
   //     *
   //     * @return The caller's array. If a variable was resolved to a bound value,
@@ -879,7 +879,7 @@ public class BOpContext<E> extends BOpContextBase {
   //
   //    }
 
-  /**
+  /*
    * Copy the values for variables from the source {@link IBindingSet} to the destination {@link
    * IBindingSet}. It is an error if a binding already exists in the destination {@link IBindingSet}
    * which is not consistent with a binding in the source {@link IBindingSet}.
@@ -960,8 +960,8 @@ public class BOpContext<E> extends BOpContextBase {
               return null;
 
             } else if (sval.get() instanceof IV<?, ?>) {
-              /*
-               * Already bound to the same value; Check cached
+            /*
+       * Already bound to the same value; Check cached
                * Value on the IVs.
                */
               final IV siv = (IV) sval.get();
@@ -1033,7 +1033,7 @@ public class BOpContext<E> extends BOpContextBase {
     return dst;
   }
 
-  /**
+  /*
    * Convert an {@link IAccessPath#iterator()} into a stream of chunks of {@link IBindingSet}.
    *
    * @param src The iterator draining the {@link IAccessPath}. This will visit {@link IElement}s.
@@ -1090,8 +1090,8 @@ public class BOpContext<E> extends BOpContextBase {
                     final IBindingSet bset =
                         new ContextBindingSet(BOpContext.this, new ListBindingSet());
 
-                    /*
-                     * Propagate bindings from the element to the binding
+                  /*
+       * Propagate bindings from the element to the binding
                      * set.
                      *
                      * Note: This is responsible for handling the semantics
@@ -1104,8 +1104,8 @@ public class BOpContext<E> extends BOpContextBase {
                 });
     // ) {
     //
-    //            /**
-    //             * Close the real source if the caller closes the returned iterator.
+    //            /*
+//             * Close the real source if the caller closes the returned iterator.
     //             */
     //            @Override
     //            public void close() {
@@ -1127,8 +1127,8 @@ public class BOpContext<E> extends BOpContextBase {
   /*
    * I've replaced this with AbstractSplitter for the moment.
    */
-  //    /**
-  //     * Return an iterator visiting the {@link PartitionLocator} for the index
+  //    /*
+//     * Return an iterator visiting the {@link PartitionLocator} for the index
   //     * partitions from which an {@link IAccessPath} must read in order to
   //     * materialize all elements which would be visited for that predicate.
   //     *

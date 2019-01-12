@@ -22,15 +22,15 @@ package org.embergraph.service.geospatial.impl;
 
 import org.embergraph.rdf.internal.gis.CoordinateDD;
 
-/**
- * GeoSpatial utility functions.
+/*
+* GeoSpatial utility functions.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public class GeoSpatialUtility {
 
-  /**
+  /*
    * A two dimensional point representing latitude and longitude. Wraps the {@link CoordinateDD}
    * with some use case specific functionality.
    */
@@ -86,7 +86,7 @@ public class GeoSpatialUtility {
       return buf.toString();
     }
 
-    /**
+    /*
      * Splits a given point into its component string. Corresponds to a parsed (and typed) version
      * of what toString returns.
      *
@@ -173,7 +173,7 @@ public class GeoSpatialUtility {
       return buf.toString();
     }
 
-    /**
+    /*
      * Splits a given point into its component string. Corresponds to a parsed (and typed) version
      * of what toString returns.
      *

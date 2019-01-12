@@ -56,8 +56,8 @@ import org.openrdf.model.vocabulary.DC;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
-/**
- * Test suite the {@link RemoteSparqlBuilderFactory}
+/*
+* Test suite the {@link RemoteSparqlBuilderFactory}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestRemoteServiceCallImpl.java 6060 2012-03-02 16:07:38Z thompsonbry $
@@ -93,8 +93,8 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
     }
   }
 
-  //    /**
-  //     * Wrap as an {@link IConstant}.
+  //    /*
+//     * Wrap as an {@link IConstant}.
   //     *
   //     * @param iv
   //     *            The {@link IV}.
@@ -107,7 +107,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
   //
   //    }
 
-  /**
+  /*
    * A simple test with nothing bound and NO source solution. This can be handled by either {@link
    * IRemoteSparqlQueryBuilder}.
    */
@@ -168,7 +168,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
   }
 
-  /**
+  /*
    * A simple test with nothing bound and a single <em>empty</em> source solution. This can be
    * handled by either {@link IRemoteSparqlQueryBuilder} .
    */
@@ -232,7 +232,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
   }
 
-  /**
+  /*
    * A test where a single fully bound triple pattern is presented. This can be handled by either
    * {@link IRemoteSparqlQueryBuilder}.
    */
@@ -318,7 +318,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
   }
 
-  /**
+  /*
    * A variant test in which there are some BINDINGS to be passed through. The set of bindings
    * covers the different types of RDF {@link Value} and also exercises the prefix declarations.
    * This test does NOT use blank nodes in the BINDINGS. This can be handled by either {@link
@@ -424,7 +424,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are not correlated so we do not need to impose a FILTER
    * on the remote service. This can be handled by either {@link IRemoteSparqlQueryBuilder}.
@@ -494,7 +494,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated but there is only one solution to be
    * vectored. This can be handled by either {@link IRemoteSparqlQueryBuilder}.
@@ -571,7 +571,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated but there is only one solution to be
    * vectored so we will impose a FILTER on the remote service to enforce that correlation. This
@@ -657,7 +657,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated and there is more than one solution to be
    * vectored.
@@ -749,7 +749,7 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         RemoteSparqlBuilderFactory.get(options, serviceNode, a).getClass());
   }
 
-  /**
+  /*
    * A variant test in there is a blank node in the BINDINGS to be flowed through to the remote
    * SERVICE. In this test the blank nodes are correlated so we MUST impose a constraint on the
    * remote service to enforce that correlation. However, there is another solution in which the two
@@ -900,14 +900,13 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
     final String actualQueryStrVersion_10 = queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
 
     final String expectedSparqlVersion_10 =
-        new String(
-                "SELECT  ?s "
-                    + "WHERE { "
-                    + "FILTER ( sameTerm( ?p, <p:p1>) ). "
-                    + "FILTER ( sameTerm( ?o, \"\\\"lit1\\\"\") ). "
-                    + " ?s ?p ?o "
-                    + //
-                    "} ")
+        ("SELECT  ?s "
+            + "WHERE { "
+            + "FILTER ( sameTerm( ?p, <p:p1>) ). "
+            + "FILTER ( sameTerm( ?o, \"\\\"lit1\\\"\") ). "
+            + " ?s ?p ?o "
+            + //
+            "} ")
             .replaceAll("\\s+", " ");
 
     assertEquals(expectedSparqlVersion_10, actualQueryStrVersion_10);
@@ -919,15 +918,14 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
     final String actualQueryStrVersion_11 = queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
 
     final String expectedSparqlVersion_11 =
-        new String(
-                "SELECT  ?s "
-                    + "WHERE {"
-                    + " ?s ?p ?o "
-                    + //
-                    "} "
-                    + "VALUES ( ?p ?o) { "
-                    + "( <p:p1> \"\\\"lit1\\\"\" ) "
-                    + "} ")
+        ("SELECT  ?s "
+            + "WHERE {"
+            + " ?s ?p ?o "
+            + //
+            "} "
+            + "VALUES ( ?p ?o) { "
+            + "( <p:p1> \"\\\"lit1\\\"\" ) "
+            + "} ")
             .replaceAll("\\s+", " ");
 
     assertEquals(expectedSparqlVersion_11, actualQueryStrVersion_11);
@@ -940,15 +938,14 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
 
     final String expectedSparqlVersion_11_DRAFT_BINDINGS =
-        new String(
-                "SELECT  ?s "
-                    + "WHERE {"
-                    + " ?s ?p ?o "
-                    + //
-                    "} "
-                    + "BINDINGS ?p ?o { "
-                    + "( <p:p1> \"\\\"lit1\\\"\" ) "
-                    + "} ")
+        ("SELECT  ?s "
+            + "WHERE {"
+            + " ?s ?p ?o "
+            + //
+            "} "
+            + "BINDINGS ?p ?o { "
+            + "( <p:p1> \"\\\"lit1\\\"\" ) "
+            + "} ")
             .replaceAll("\\s+", " ");
 
     assertEquals(actualQueryStrVersion_11_DRAFT_BINDINGS, expectedSparqlVersion_11_DRAFT_BINDINGS);

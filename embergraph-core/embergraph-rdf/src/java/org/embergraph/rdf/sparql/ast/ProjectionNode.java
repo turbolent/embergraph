@@ -34,8 +34,8 @@ import org.embergraph.bop.Bind;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 
-/**
- * AST node modeling projected value expressions.
+/*
+* AST node modeling projected value expressions.
  *
  * <p>Note: "*" is modeled using an explicit variable whose name is <code>*</code>.
  *
@@ -58,7 +58,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
 
     boolean DEFAULT_REDUCED = false;
 
-    /**
+    /*
      * Optional annotation specifies the {@link DescribeModeEnum} that will be used to evaluate a
      * DESCRIBE query. The default is controlled by {@value QueryHints#DEFAULT_DESCRIBE_MODE}.
      *
@@ -66,7 +66,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
      */
     String DESCRIBE_MODE = "describeMode";
 
-    /**
+    /*
      * Optional annotation specifies the limit on the #of iterations for an iterative DESCRIBE
      * algorithm.
      *
@@ -74,7 +74,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
      */
     String DESCRIBE_ITERATION_LIMIT = "describeIterationLimit";
 
-    /**
+    /*
      * Optional annotation specifies the limit on the #of statements for an iterative DESCRIBE
      * algorithm.
      *
@@ -82,7 +82,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
      */
     String DESCRIBE_STATEMENT_LIMIT = "describeStatementLimit";
 
-    /**
+    /*
      * "Black list" for variables that should not be treated as projection variables, eg, auxiliary
      * aliases introduced for flattening aggregates. Essentially, the blacklisted variables won't
      * show in getProjectionVars().
@@ -133,7 +133,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     return getExpr(0).getVar().isWildcard();
   }
 
-  /**
+  /*
    * Return the {@link DescribeModeEnum} that will be used to evaluate a DESCRIBE query.
    *
    * <p>Note: The default is governed by {@value QueryHints#DEFAULT_DESCRIBE_MODE}.
@@ -146,7 +146,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     return (DescribeModeEnum) getProperty(Annotations.DESCRIBE_MODE);
   }
 
-  /**
+  /*
    * Set the {@link DescribeModeEnum} that will be used to evaluate a DESCRIBE query.
    *
    * <p>Note: The default is governed by {@value QueryHints#DEFAULT_DESCRIBE_MODE}.
@@ -159,7 +159,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     setProperty(Annotations.DESCRIBE_MODE, describeMode);
   }
 
-  /**
+  /*
    * Return the optional limit on the #of iterations for a DESCRIBE query.
    *
    * @return The limit -or- <code>null</code>.
@@ -170,7 +170,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     return (Integer) getProperty(Annotations.DESCRIBE_ITERATION_LIMIT);
   }
 
-  /**
+  /*
    * Return the optional limit on the #of statements for a DESCRIBE query.
    *
    * @return The limit -or- <code>null</code>.
@@ -193,7 +193,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     setProperty(Annotations.DESCRIBE_STATEMENT_LIMIT, newValue);
   }
 
-  /**
+  /*
    * Adds a variable to be projected. The variable is modeled as an assignment of itself to itself,
    * so everything in the projection node winds up looking like an assignment.
    *
@@ -209,7 +209,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     addExpr(assignment);
   }
 
-  /**
+  /*
    * Makes a copy of vars the (new) black list for variables that are not to be treated as
    * projection variables. This feature is useful for auxiliary aliases.
    */
@@ -217,7 +217,7 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     setProperty(Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION, new HashSet<IVariable<?>>(vars));
   }
 
-  /**
+  /*
    * Return the ordered subset of the value expressions which project a computed value expression
    * which is not a bare variable.
    *
@@ -250,10 +250,10 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     //
     //        }
 
-    return (IVariable[]) vars.toArray(new IVariable[vars.size()]);
+    return vars.toArray(new IVariable[vars.size()]);
   }
 
-  /**
+  /*
    * Return the projected variables.
    *
    * @param vars A set into which the projected variables will be added.
@@ -271,20 +271,19 @@ public class ProjectionNode extends ValueExpressionListBaseNode<AssignmentNode> 
     return vars;
   }
 
-  /**
+  /*
    * Checks if the variable is "blacklisted" to be excluded from projection variables. This feature
    * is useful for auxiliary aliases.
    */
   public boolean excludeFromProjection(final IVariable<?> var) {
     Set<IVariable<?>> vars =
-        (Set<IVariable<?>>)
-            getProperty(
-                Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION,
-                Annotations.DEFAULT_VARS_TO_EXCLUDE_FROM_PROJECTION);
+        getProperty(
+            Annotations.VARS_TO_EXCLUDE_FROM_PROJECTION,
+            Annotations.DEFAULT_VARS_TO_EXCLUDE_FROM_PROJECTION);
     return (vars != null) && vars.contains(var);
   }
 
-  /**
+  /*
    * Collect the variables used by the SELECT EXPRESSIONS for this projection node.
    *
    * <p>Note: This DOES NOT report the variables which are projected OUT of the query. It reports

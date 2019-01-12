@@ -28,8 +28,8 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ContextStatementImpl;
 import org.openrdf.model.impl.StatementImpl;
 
-/**
- * Class for efficiently converting {@link Statement}s into {@link EmbergraphStatement}s, including
+/*
+* Class for efficiently converting {@link Statement}s into {@link EmbergraphStatement}s, including
  * resolving term identifiers (or adding entries to the lexicon for unknown terms) as required. The
  * class does not write the converted {@link EmbergraphStatement}s onto the database, but that can
  * be easily done using a resolving iterator pattern.
@@ -71,27 +71,27 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
 
   protected static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * The database against which the {@link Value}s will be resolved (or added). If this database
    * supports statement identifiers, then statement identifiers for the converted statements will be
    * resolved (or added) to the lexicon.
    */
   private final AbstractTripleStore db;
 
-  /**
+  /*
    * When <code>true</code>, {@link Value}s will be resolved against the {@link LexiconRelation} and
    * {@link Statement}s will be resolved against the {@link SPORelation}, but unknown {@link Value}s
    * and unknown {@link Statement}s WILL NOT be inserted into the corresponding relations.
    */
   protected final boolean readOnly;
 
-  /**
+  /*
    * The maximum #of {@link EmbergraphStatement}s that can be buffered before the buffer {@link
    * #overflow()}s (from the ctor).
    */
   private final int capacity;
 
-  /**
+  /*
    * Buffer for canonical {@link EmbergraphValue}s. This buffer is cleared each time it overflows.
    */
   private final EmbergraphValue[] valueBuffer;
@@ -99,7 +99,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   /** The #of elements in {@link #valueBuffer}. */
   private int nvalues = 0;
 
-  /**
+  /*
    * Buffer for accepted {@link EmbergraphStatement}s. This buffer is cleared each time it would
    * overflow.
    */
@@ -108,7 +108,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   /** The #of elements in {@link #statementBuffer}. */
   private int nstmts = 0;
 
-  /**
+  /*
    * Statements which use blank nodes in their {s,p,o} positions must be deferred when statement
    * identifiers are enabled until (a) either the blank node is observed in the context position of
    * a statement; or (b) {@link #flush()} is invoked, indicating that no more data will be loaded
@@ -122,12 +122,12 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
    */
   private final List<G> deferredStatementBuffer;
 
-  /**
+  /*
    * Map used to filter out duplicate terms. The use of this map provides a ~40% performance gain.
    */
   private final Map<Value, EmbergraphValue> distinctValues;
 
-  /**
+  /*
    * A canonicalizing map for blank nodes. This map MUST be cleared before you begin to add
    * statements to the buffer from a new "source" otherwise it will co-reference blank nodes from
    * distinct sources. The life cycle of the map is the life cycle of the document being loaded, so
@@ -144,7 +144,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
     return db;
   }
 
-  /**
+  /*
    * Note: Returns the same value as {@link #getDatabase()} since the distinction is not captured by
    * this class. This MUST be overriden in derived classes which make this distinction.
    */
@@ -161,7 +161,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
 
   private final EmbergraphValueFactory valueFactory;
 
-  /**
+  /*
    * @param db The database against which the {@link Value}s will be resolved (or added). If this
    *     database supports statement identifiers, then statement identifiers for the converted
    *     statements will be resolved (or added) to the lexicon.
@@ -207,7 +207,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
     this.bnodes = bnodes;
   }
 
-  /**
+  /*
    * Return a canonical {@link EmbergraphValue} instance representing the given <i>value</i>. The
    * scope of the canonical instance is until the next internal buffer overflow ({@link URI}s and
    * {@link Literal}s) or until {@link #flush()} ({@link BNode}s, since blank nodes are global for a
@@ -299,7 +299,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   public boolean isEmpty() {
 
     return nstmts == 0
-        && (deferredStatementBuffer == null ? true : !deferredStatementBuffer.isEmpty());
+        && (deferredStatementBuffer == null || !deferredStatementBuffer.isEmpty());
   }
 
   /** #of buffered statements plus the #of buffered statements that are being deferred. */
@@ -318,7 +318,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   //
   //    }
 
-  /**
+  /*
    * Imposes a canonical mapping on the subject, predicate, and objects of the given {@link
    * Statement}s and stores a new {@link EmbergraphStatement} instance in the internal buffer. If
    * the given statement is a {@link EmbergraphStatement} then its {@link StatementEnum} will be
@@ -406,7 +406,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
     add((F) stmt);
   }
 
-  /**
+  /*
    * Efficiently resolves/adds term identifiers for the buffered {@link EmbergraphValue}s.
    *
    * <p>If {@link #readOnly}), then the term identifier for unknown values will remain {@link
@@ -419,7 +419,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
     db.getLexiconRelation().addTerms(valueBuffer, nvalues, readOnly);
   }
 
-  /**
+  /*
    * Processes any {@link EmbergraphStatement}s in the {@link #deferredStatementBuffer}, adding them
    * to the {@link #statementBuffer}, which may cause the latter to {@link #overflow()}.
    */
@@ -438,7 +438,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Invoked each time the {@link #statementBuffer} buffer would overflow. This method is
    * responsible for bulk resolving / adding the buffered {@link EmbergraphValue}s against the
    * {@link #db} and adding the fully resolved {@link EmbergraphStatement}s to the queue on which
@@ -476,7 +476,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
     clear();
   }
 
-  /**
+  /*
    * Invoked by {@link #overflow()}.
    *
    * @param a An array of processed {@link EmbergraphStatement}s.
@@ -484,7 +484,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
    */
   protected abstract int handleProcessedStatements(G[] a);
 
-  /**
+  /*
    * Converts any buffered statements and any deferred statements and then invokes {@link
    * #overflow()} to flush anything remaining in the buffer.
    *
@@ -513,7 +513,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
 
   private long counter = 0L;
 
-  /**
+  /*
    * Discards all state (term map, bnodes, deferred statements, the buffered statements, and the
    * counter whose value is reported by {@link #flush()}).
    */
@@ -530,7 +530,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
     clear();
   }
 
-  /**
+  /*
    * Clears the state associated with the {@link EmbergraphStatement}s in the internal buffer but
    * does not discard the blank nodes or deferred statements.
    */
@@ -543,8 +543,8 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
     nstmts = nvalues = 0;
   }
 
-  //    /**
-  //     * Provides an iterator for reading resolved statements. The source (
+  //    /*
+//     * Provides an iterator for reading resolved statements. The source (
   //     * {@link #add(Statement)}ing {@link Statement}s to this buffer) and the
   //     * sink (consuming the {@link #iterator()}) MUST be different threads. This
   //     * class may also be used to load data into a database simply by passing the
@@ -564,8 +564,8 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   // EmbergraphStatement>
   //            extends AbstractStatementBuffer<F, G> {
   //
-  //        /**
-  //         * @param db
+  //        /*
+//         * @param db
   //         *            The database against which the {@link Value}s will be
   //         *            resolved (or added). If this database supports statement
   //         *            identifiers, then statement identifiers for the converted
@@ -590,8 +590,8 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   //
   //        }
   //
-  //        /**
-  //         * Adds converted statements to the output iterator.
+  //        /*
+//         * Adds converted statements to the output iterator.
   //         */
   //        @Override
   //        protected int handleProcessedStatements(G[] a){
@@ -602,8 +602,8 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   //
   //        }
   //
-  //        /**
-  //         * An asynchronous iterator singleton that reads from the converted
+  //        /*
+//         * An asynchronous iterator singleton that reads from the converted
   //         * statements. {@link EmbergraphStatement}s are made available to the
   //         * iterator in chunks each time the buffer {@link #overflow()}s and
   //         * when it is {@link #flush()}ed. The iterator will block until more
@@ -618,8 +618,8 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   //        }
   //        private final OutputIterator itr;
   //
-  //        /**
-  //         * Extended to ensure that the {@link OutputIterator} is closed.
+  //        /*
+//         * Extended to ensure that the {@link OutputIterator} is closed.
   //         */
   //        protected void finalize() throws Throwable {
   //
@@ -629,16 +629,16 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   //
   //        }
   //
-  //        /**
-  //         * Iterator for converted {@link EmbergraphStatement}s.
+  //        /*
+//         * Iterator for converted {@link EmbergraphStatement}s.
   //         *
   //         * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
   //         * @version $Id$
   //         */
   //        private class OutputIterator implements ICloseableIterator<G> {
   //
-  //            /**
-  //             * <code>true</code> iff the iterator is open. When open, the
+  //            /*
+//             * <code>true</code> iff the iterator is open. When open, the
   //             * iterator will block if the {@link #queue} is empty.
   //             * <p>
   //             * Note: Access to {@link #open} should be synchronized on <i>this</i>
@@ -646,8 +646,8 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   //             */
   //            private boolean open;
   //
-  //            /**
-  //             * Blocking queue containing chunks of converted
+  //            /*
+//             * Blocking queue containing chunks of converted
   //             * {@link EmbergraphStatement}s.
   //             * <p>
   //             * Note: The queue has an unbounded capacity. In practice, a bounded
@@ -659,14 +659,14 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   //             */
   //            private final BlockingQueue<G[]> queue = new LinkedBlockingQueue<G[]>();
   //
-  //            /**
-  //             * The current chunk of converted {@link EmbergraphStatement}s from
+  //            /*
+//             * The current chunk of converted {@link EmbergraphStatement}s from
   //             * the {@link #queue}.
   //             */
   //            private G[] chunk = null;
   //
-  //            /**
-  //             * The index of the next element in {@link #chunk} to be delivered
+  //            /*
+//             * The index of the next element in {@link #chunk} to be delivered
   //             * by the iterator.
   //             */
   //            private int index = 0;
@@ -675,8 +675,8 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   //
   //            }
   //
-  //            /**
-  //             * Adds the chunk to the {@link #queue}. The elements in the chunk
+  //            /*
+//             * Adds the chunk to the {@link #queue}. The elements in the chunk
   //             * will be processed when that chunk is popped off of the
   //             * {@link #queue}.
   //             *
@@ -756,7 +756,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
   //
   //    }
 
-  /**
+  /*
    * Loads {@link Statement}s into an RDF database.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -769,7 +769,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
 
     private final AbstractTripleStore statementStore;
 
-    /**
+    /*
      * @param lexiconStore The database against which the {@link Value}s will be resolved (or
      *     added). If this database supports statement identifiers, then statement identifiers for
      *     the converted statements will be resolved (or added) to the lexicon.
@@ -785,7 +785,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
       this(lexiconStore, lexiconStore, readOnly, capacity);
     }
 
-    /**
+    /*
      * @param lexiconStore The database against which the {@link Value}s will be resolved (or
      *     added). If this database supports statement identifiers, then statement identifiers for
      *     the converted statements will be resolved (or added) to the lexicon.
@@ -819,7 +819,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
       return statementStore;
     }
 
-    /**
+    /*
      * Writes the {@link Statement}s onto the {@link #getStatementStore()}.
      *
      * @return The #of statements actually written on the statement indices.
@@ -850,7 +850,7 @@ public abstract class AbstractStatementBuffer<F extends Statement, G extends Emb
       return (int) statementStore.addStatements(b, b.length);
     }
 
-    /**
+    /*
      * @return The total #of statements written on the {@link #getStatementStore()}. This will be
      *     ZERO (0L) if <code>readOnly == true</code>.
      */

@@ -25,8 +25,8 @@ package org.embergraph.btree.raba;
 import org.embergraph.btree.proc.IKeyArrayIndexProcedure;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Immutable implementation does not allow <code>null</code>s but supports search.
+/*
+* Immutable implementation does not allow <code>null</code>s but supports search.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public class ReadOnlyKeysRaba extends AbstractRaba {
     return true;
   }
 
-  /**
+  /*
    * Create a view of a byte[][]. All elements in the array are visible in the view.
    *
    * @param a The backing byte[][].
@@ -58,7 +58,7 @@ public class ReadOnlyKeysRaba extends AbstractRaba {
     this(0 /* fromIndex */, a.length /* toIndex */, a.length /* capacity */, a);
   }
 
-  /**
+  /*
    * Create a view of a byte[][]. All elements in the array are visible in the view. The elements in
    * the array from index ZERO (0) through index <code>size-1</code> are assumed to have valid data.
    *
@@ -70,7 +70,7 @@ public class ReadOnlyKeysRaba extends AbstractRaba {
     this(0 /* fromIndex */, size /* toIndex */, a.length /* capacity */, a);
   }
 
-  /**
+  /*
    * Create a view of a <code>byte[][]</code> slice. The slice will include only those elements
    * between the fromIndex and the toIndex. The capacity will be the #of elements. {@link #isFull()}
    * will report <code>true</code> .
@@ -88,7 +88,7 @@ public class ReadOnlyKeysRaba extends AbstractRaba {
     this(fromIndex, toIndex, a.length - fromIndex, a);
   }
 
-  /**
+  /*
    * Create a view from a slice of a byte[][].
    *
    * @param fromIndex The index of the first element in the byte[][] which is visible in the view
@@ -108,7 +108,7 @@ public class ReadOnlyKeysRaba extends AbstractRaba {
 
   }
 
-  /**
+  /*
    * Asserts that the <code>unsigned byte[]</code>s in the logical byte[][] are in a total order.
    *
    * @param fromIndex The first index in the view (inclusive lower bound).

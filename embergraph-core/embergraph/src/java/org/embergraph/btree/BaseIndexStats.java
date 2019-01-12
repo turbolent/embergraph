@@ -20,8 +20,8 @@ package org.embergraph.btree;
 import java.io.PrintWriter;
 import java.util.Map;
 
-/**
- * Basic stats that are available for all index types and whose collection does not require
+/*
+* Basic stats that are available for all index types and whose collection does not require
  * visitation of the index pages.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -32,7 +32,7 @@ public class BaseIndexStats {
   public IndexTypeEnum indexType;
   /** The name associated with the index -or- <code>null</code> if the index is not named. */
   public String name;
-  /**
+  /*
    * The current branching factor for the index.
    *
    * <p>TODO GIST: [m] is BTree specific. The [addressBits] concept is the parallel for the HTree.
@@ -92,7 +92,7 @@ public class BaseIndexStats {
     this.nleaves = checkpoint.getLeafCount();
   }
 
-  /**
+  /*
    * Return the header row for a table.
    *
    * @return The header row.
@@ -118,7 +118,7 @@ public class BaseIndexStats {
     return sb.toString();
   }
 
-  /**
+  /*
    * Return a row of data for an index as aggregated by this {@link PageStats} object.
    *
    * @see #getHeaderRow()
@@ -146,7 +146,7 @@ public class BaseIndexStats {
     return sb.toString();
   }
 
-  /**
+  /*
    * Helper method may be used to write out a tab-delimited table of the statistics.
    *
    * @param out Where to write the statistics.
@@ -166,8 +166,8 @@ public class BaseIndexStats {
 
       if (stats == null) {
 
-        /*
-         * Something for which we did not extract the PageStats.
+      /*
+       * Something for which we did not extract the PageStats.
          */
 
         out.println("name: " + name + " :: no statistics?");

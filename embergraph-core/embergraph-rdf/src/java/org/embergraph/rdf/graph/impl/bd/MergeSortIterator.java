@@ -6,8 +6,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.openrdf.model.Value;
 
-/**
- * An N-way merge sort of N source iterators visiting {@link Value}s (which are actually {@link
+/*
+* An N-way merge sort of N source iterators visiting {@link Value}s (which are actually {@link
  * IV}s).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -23,7 +23,7 @@ public class MergeSortIterator implements Iterator<Value> {
   /** The source iterators in the order given to the ctor. */
   private final Iterator<Value>[] sourceIterator;
 
-  /**
+  /*
    * The current value from each source and <code>null</code> if we need to get another value from
    * that source. The value for a source iterator that has been exhausted will remain <code>null
    * </code>. When all entries in this array are <code>null</code> there are no more values to be
@@ -31,7 +31,7 @@ public class MergeSortIterator implements Iterator<Value> {
    */
   private final Value[] sourceTuple;
 
-  /**
+  /*
    * Index into {@link #sourceIterator} and {@link #sourceTuple} of the iterator whose value will be
    * returned next -or- <code>-1</code> if we need to choose the next value to be visited.
    */
@@ -143,8 +143,8 @@ public class MergeSortIterator implements Iterator<Value> {
 
             if (ret < 0) {
 
-              /*
-               * This key orders LT the current key.
+            /*
+       * This key orders LT the current key.
                *
                * Note: This test MUST be strictly LT since LTE
                * would break the precedence in which we are
@@ -179,7 +179,7 @@ public class MergeSortIterator implements Iterator<Value> {
     return consumeLookaheadTuple();
   }
 
-  /**
+  /*
    * Consume the {@link #current} source value.
    *
    * @return The {@link #current} tuple.
@@ -195,7 +195,7 @@ public class MergeSortIterator implements Iterator<Value> {
     return t;
   }
 
-  /**
+  /*
    * Clear tuples from other sources having the same key as the current tuple (eliminates
    * duplicates).
    */

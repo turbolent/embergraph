@@ -18,8 +18,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail;
 
-/**
- * Extension API for embergraph queries.
+/*
+* Extension API for embergraph queries.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */

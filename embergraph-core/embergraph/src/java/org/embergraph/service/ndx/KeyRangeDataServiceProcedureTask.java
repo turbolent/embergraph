@@ -6,8 +6,8 @@ import org.embergraph.btree.proc.IKeyRangeIndexProcedure;
 import org.embergraph.btree.proc.IResultHandler;
 import org.embergraph.service.Split;
 
-/**
- * Handles stale locators for {@link IKeyRangeIndexProcedure}s.
+/*
+* Handles stale locators for {@link IKeyRangeIndexProcedure}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -23,7 +23,7 @@ class KeyRangeDataServiceProcedureTask extends AbstractDataServiceProcedureTask 
     return 0;
   }
 
-  /**
+  /*
    * @param fromKey
    * @param toKey
    * @param split
@@ -56,7 +56,7 @@ class KeyRangeDataServiceProcedureTask extends AbstractDataServiceProcedureTask 
     }
   }
 
-  /**
+  /*
    * The {@link IKeyRangeIndexProcedure} is re-mapped for the constrained key range of the stale
    * locator using {@link ClientIndexView#submit(byte[], byte[], IKeyRangeIndexProcedure,
    * IResultHandler)}.

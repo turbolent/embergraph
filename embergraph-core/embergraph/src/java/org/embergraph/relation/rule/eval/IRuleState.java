@@ -33,26 +33,26 @@ import org.embergraph.relation.rule.IRule;
 import org.embergraph.relation.rule.Rule;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRuleState {
 
   /** The {@link IRule} being evaluated. */
-  public IRule getRule();
+  IRule getRule();
 
   /** The evaluation plan. */
-  public IEvaluationPlan getPlan();
+  IEvaluationPlan getPlan();
 
-  /**
+  /*
    * The #of unbound variables for the predicates in the tail of the {@link Rule} for the {@link
    * #getPlan() evaluation plan}. The array is correlated with the predicates index in the tail of
    * the rule NOT with its evaluation order.
    */
-  public int[] getNVars();
+  int[] getNVars();
 
-  /**
+  /*
    * An array of the {@link IKeyOrder} that will be used for each predicate in the tail of the rule.
    * The array is correlated with the predicates index in the tail of the rule NOT with its
    * evaluation order.
@@ -60,23 +60,23 @@ public interface IRuleState {
    * <p>Note: The fully qualified index name for a given predicate is the name of the relation for
    * that predicate plus {@link IKeyOrder#getIndexName()}.
    */
-  public IKeyOrder[] getKeyOrder();
+  IKeyOrder[] getKeyOrder();
 
-  /**
+  /*
    * A list of variables required for each tail, by tailIndex. Used to filter downstream variable
    * binding sets.
    */
-  public IVariable[][] getRequiredVars();
+  IVariable[][] getRequiredVars();
 
   /** Externalizes the rule and the evaluation order. */
-  public String toString();
+  String toString();
 
-  /**
+  /*
    * Shows the bindings (if given), the computed evaluation order, and the computed {@link
    * IKeyOrder} for each {@link IPredicate} in the rule.
    *
    * @param bindingSet When non-<code>null</code>, the current variable bindings will be displayed.
    *     Otherwise, the names of variables will be displayed rather than their bindings.
    */
-  public String toString(IBindingSet bindingSet);
+  String toString(IBindingSet bindingSet);
 }

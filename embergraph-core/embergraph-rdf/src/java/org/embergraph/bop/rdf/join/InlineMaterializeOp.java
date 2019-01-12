@@ -37,8 +37,8 @@ import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * This operator is used as part of the EmbergraphValue materialization step inside the pipeline.
+/*
+* This operator is used as part of the EmbergraphValue materialization step inside the pipeline.
  * Inline IVs are routes to this bop to be materialized and have their EmbergraphValue cached on
  * them. The inline IVs need access to the LexiconRelation to materialize themselves, but only to
  * the class itself, not to the data in its indices. The lexicon's LexiconConfiguration is used by
@@ -55,14 +55,14 @@ public class InlineMaterializeOp<E> extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * The {@link IPredicate} contains information about the how to find the lexicon relation and
      * which variable in the incoming binding sets needs materializing.
      */
     String PREDICATE = InlineMaterializeOp.class.getName() + ".predicate";
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -71,7 +71,7 @@ public class InlineMaterializeOp<E> extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -85,7 +85,7 @@ public class InlineMaterializeOp<E> extends PipelineOp {
     super(args, NV.asMap(anns));
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see Annotations#PREDICATE
@@ -166,8 +166,8 @@ public class InlineMaterializeOp<E> extends PipelineOp {
 
             if (iv != null && iv.isInline()) {
 
-              /*
-               * This will materialize the EmbergraphValue and cache
+            /*
+       * This will materialize the EmbergraphValue and cache
                * it on the IV as a side-effect.
                */
               iv.asValue(lex);

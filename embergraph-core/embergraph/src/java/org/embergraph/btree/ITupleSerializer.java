@@ -35,8 +35,8 @@ import org.embergraph.journal.CommitRecordIndex;
 import org.embergraph.journal.Journal;
 import org.embergraph.service.IMetadataService;
 
-/**
- * An interface that provides for the (de)-serialization of the value of a tuple stored in an index
+/*
+* An interface that provides for the (de)-serialization of the value of a tuple stored in an index
  * and, when possible, the key under which that value is stored.
  *
  * <p>The encoded key is always a variable length unsigned byte[]s. The purpose of the encoded key
@@ -76,7 +76,7 @@ import org.embergraph.service.IMetadataService;
 public interface ITupleSerializer<K extends Object, V extends Object>
     extends IKeyBuilderFactory, Serializable {
 
-  /**
+  /*
    * Factory for thread-safe {@link IKeyBuilder} objects for use by {@link
    * ITupleSerializer#serializeKey(Object)} and possibly others.
    *
@@ -93,9 +93,9 @@ public interface ITupleSerializer<K extends Object, V extends Object>
    * locally configured {@link IKeyBuilder} then your Unicode keys will be encoded based on the
    * {@link Locale} configured for the JVM NOT the factory specified for <i>this</i> index.
    */
-  public IKeyBuilder getKeyBuilder();
+  IKeyBuilder getKeyBuilder();
 
-  /**
+  /*
    * Serialize a facet of an object's state that places the object into the total sort order for the
    * index. This method is automatically applied by {@link IAutoboxBTree#insert(Object, Object)} and
    * friends to convert the <strong>key</strong> object into an <strong>unsigned</strong> variable
@@ -114,7 +114,7 @@ public interface ITupleSerializer<K extends Object, V extends Object>
    */
   byte[] serializeKey(Object obj);
 
-  /**
+  /*
    * Serialize the persistent state of the object (the value stored in the index under the key for
    * that object). This method is automatically applied by {@link IAutoboxBTree#insert(Object,
    * Object)} and friends to convert the <strong>value</strong> object into an byte[].
@@ -126,7 +126,7 @@ public interface ITupleSerializer<K extends Object, V extends Object>
    */
   byte[] serializeVal(V obj);
 
-  /**
+  /*
    * De-serialize an object from an {@link ITuple}. This method is automatically applied by methods
    * on the {@link IAutoboxBTree} interface that return the object stored under a key and by {@link
    * ITuple#getObject()}.
@@ -137,7 +137,7 @@ public interface ITupleSerializer<K extends Object, V extends Object>
    */
   V deserialize(ITuple tuple);
 
-  /**
+  /*
    * De-serialize the application key from an {@link ITuple} (optional operation).
    *
    * <p>Note: There is no general means to recover the application key from the B+Tree. However,
@@ -160,7 +160,7 @@ public interface ITupleSerializer<K extends Object, V extends Object>
    */
   K deserializeKey(ITuple tuple);
 
-  /**
+  /*
    * The object used to code (compress) an ordered array of keys such as found in a B+Tree {@link
    * ILeafData} record or in a {@link ResultSet}.
    *
@@ -169,7 +169,7 @@ public interface ITupleSerializer<K extends Object, V extends Object>
    */
   IRabaCoder getLeafKeysCoder();
 
-  /**
+  /*
    * The object used to code (compress) an unordered array of values ordered array of keys such as
    * found in a B+Tree {@link ILeafData} record or in a {@link ResultSet}.
    *

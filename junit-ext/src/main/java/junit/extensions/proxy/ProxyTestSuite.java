@@ -24,8 +24,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.apache.log4j.Logger;
 
-/**
- * A simple wrapper around {@link TestSuite} that permits the caller to specify the delegate {@link
+/*
+* A simple wrapper around {@link TestSuite} that permits the caller to specify the delegate {@link
  * Test} for either directly or recursively contained {@link IProxyTest}s added to a {@link
  * ProxyTestSuite}. There are three cases for junit:
  *
@@ -53,12 +53,12 @@ public class ProxyTestSuite extends TestSuite {
   /** The {@link Logger} is named for this class. */
   protected static final Logger log = Logger.getLogger(ProxyTestSuite.class);
 
-  /**
+  /*
    * The delegate that will be used by each {@link IProxyTest}added to this {@link ProxyTestSuite}.
    */
   private final Test m_delegate;
 
-  /**
+  /*
    * Invoked automatically by the constructors.
    *
    * @exception IllegalArgumentException if the <i>delegate </i> is <code>null</code>.
@@ -85,7 +85,7 @@ public class ProxyTestSuite extends TestSuite {
     return m_delegate;
   }
 
-  /**
+  /*
    * Creates an empty unnamed test suite. The <i>delegate </i> will be assigned to tests added to
    * this test suite that implement {@link IProxyTest}.
    *
@@ -100,7 +100,7 @@ public class ProxyTestSuite extends TestSuite {
     m_delegate = delegate;
   }
 
-  /**
+  /*
    * Creates a named test suite and populates it with test instances identified by scanning the
    * <i>testClass </i>. The <i>delegate </i> will be assigned to tests added to this test suite that
    * implement {@link IProxyTest}, including those created from <i>testClass </i>.
@@ -130,7 +130,7 @@ public class ProxyTestSuite extends TestSuite {
     flowDown(this);
   }
 
-  /**
+  /*
    * Creates an unnamed test suite and populates it with test instances identified by scanning the
    * <i>testClass </i>. The <i>delegate </i> will be assigned to tests added to this test suite that
    * implement {@link IProxyTest}, including those created from <i>testClass </i>.
@@ -161,7 +161,7 @@ public class ProxyTestSuite extends TestSuite {
     flowDown(this);
   }
 
-  /**
+  /*
    * Creates an empty named test suite. The declared will be assigned to tests added to this test
    * suite that implement {@link IProxyTest}.
    *
@@ -177,7 +177,7 @@ public class ProxyTestSuite extends TestSuite {
     m_delegate = delegate;
   }
 
-  /**
+  /*
    * We override the implementation of {@link TestSuite#addTestSuite( Class theClass )} to wrap the
    * <i>testClass</i> in another instance of this {@link ProxyTestSuite} class using the same
    * delegate that was provided to our constructor. This causes the delegation to be inherited by
@@ -212,7 +212,7 @@ public class ProxyTestSuite extends TestSuite {
     addTest(proxyTestSuite);
   }
 
-  /**
+  /*
    * If the suite is not a {@link ProxyTestSuite}, then the tests in the suite are recursively
    * enumerated and a proxy test suite is created with the same name and tests. This ensures that
    * the common delegate flows down through all tests even when using the traditional <code>

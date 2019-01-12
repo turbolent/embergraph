@@ -33,8 +33,8 @@ import org.embergraph.rdf.sparql.ast.IQueryNode;
 import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * An executable list of query optimizers.
+/*
+* An executable list of query optimizers.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -71,7 +71,7 @@ public class ASTOptimizerList extends LinkedList<IASTOptimizer> implements IASTO
     return super.add(opt);
   }
 
-  /**
+  /*
    * Run all the optimizers in the list.
    *
    * <p>Note: This makes a deep copy of the AST before applying destructive modifications.

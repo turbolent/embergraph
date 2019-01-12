@@ -84,8 +84,8 @@ import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.query.impl.DatasetImpl;
 import org.openrdf.query.impl.MapBindingSet;
 
-/**
- * This class provides batch resolution of internal values, which were left unresolved during
+/*
+* This class provides batch resolution of internal values, which were left unresolved during
  * query/update preparation. Values, which are processed: any BOp arguments, ValueExpressions, and
  * specific values stored in annotations (for example, SERVICE_REF in ServiceNode).
  *
@@ -101,7 +101,7 @@ public class ASTDeferredIVResolution {
 
   private static final Logger log = Logger.getLogger(ASTDeferredIVResolution.class);
 
-  /**
+  /*
    * Anonymous instances of Handler interface are used as a deferred code, which should be run after
    * particular IV is available in batch resolution results
    */
@@ -109,8 +109,8 @@ public class ASTDeferredIVResolution {
     void handle(IV newIV);
   }
 
-  //    /**
-  //     * The target triple store.
+  //    /*
+//     * The target triple store.
   //     */
   //    private final AbstractTripleStore store;
 
@@ -120,13 +120,13 @@ public class ASTDeferredIVResolution {
   /** Deferred handlers, linked to particular EmbergraphValue resolution */
   private final Map<EmbergraphValue, List<Handler>> deferred = new LinkedHashMap<>();
 
-  /**
+  /*
    * Deferred handlers, NOT linked to particular EmbergraphValue resolution, used to provide sets of
    * resolved default and named graphs into DataSetSummary constructor
    */
   private final List<Runnable> deferredRunnables = new ArrayList<>();
 
-  /**
+  /*
    * IVs of graphs, which will be later passed to {@link #resolveDataset(AST2BOpContext, Map)}.
    *
    * <p>No need for synchronization or keeping order of values.
@@ -153,7 +153,7 @@ public class ASTDeferredIVResolution {
     }
   }
 
-  /**
+  /*
    * Do deferred resolution of IVs, which were left unresolved while preparing the query
    *
    * @param store - triple store, which will be used for values resolution
@@ -165,7 +165,7 @@ public class ASTDeferredIVResolution {
     return resolveQuery(store, ast, null, null, null /* context unknown */);
   }
 
-  /**
+  /*
    * Do deferred resolution of IVs, which were left unresolved while preparing the query
    *
    * @param store - triple store, which will be used for values resolution
@@ -271,7 +271,7 @@ public class ASTDeferredIVResolution {
     return new DeferredResolutionResult(resolvedBindingset, resolvedDataset);
   }
 
-  /**
+  /*
    * Do deferred resolution of IVs, which were left unresolved while preparing the update
    *
    * @param store - triple store, which will be used for values resolution
@@ -283,7 +283,7 @@ public class ASTDeferredIVResolution {
     return resolveUpdate(store, ast, null, null);
   }
 
-  /**
+  /*
    * Do deferred resolution of IVs, which were left unresolved while preparing the update
    *
    * @param store - triple store, which will be used for values resolution
@@ -360,7 +360,7 @@ public class ASTDeferredIVResolution {
     return new DeferredResolutionResult(resolvedBindingSet, resolvedDataset);
   }
 
-  /**
+  /*
    * Do deferred resolution of IVs, which were left unresolved after execution of each Update in
    * UpdateRoot
    *
@@ -395,7 +395,7 @@ public class ASTDeferredIVResolution {
     return new DeferredResolutionResult(resolvedBindingSet, resolvedDataset);
   }
 
-  /**
+  /*
    * Schedule resolution if IV in provided value, provided handler will be used to process resolved
    * IV. If provided EmbergraphValue was created using EmbergraphValueFactory bound to triple store,
    * and has real IV already resolved (for example dataset definition), handler will be fired
@@ -425,7 +425,7 @@ public class ASTDeferredIVResolution {
     handlers.add(handler);
   }
 
-  /**
+  /*
    * Schedule execution of runnable after batch resolution if IVs (to handle creation of
    * DataSetSummary instances for default and named graphs collections)
    *
@@ -435,7 +435,7 @@ public class ASTDeferredIVResolution {
     deferredRunnables.add(runnable);
   }
 
-  /**
+  /*
    * Prepare and execute batch resolution of IVs in provided queryNode
    *
    * @param bs
@@ -461,7 +461,7 @@ public class ASTDeferredIVResolution {
     resolveIVs(store);
   }
 
-  /**
+  /*
    * Method is invoked after IV resolution and sets the {@link IDataSetNode#setDataset(DatasetNode)
    * data set} on each {@link IDataSetNode} to a newly constructed {@link DatasetNode} object.
    *
@@ -492,8 +492,8 @@ public class ASTDeferredIVResolution {
               "NAMED clauses in queries are not supported in" + " triples mode.");
         }
 
-        /*
-         * Lazily instantiated sets for the default and named graphs.
+      /*
+       * Lazily instantiated sets for the default and named graphs.
          */
 
         final Set<IV<?, ?>> defaultGraphs = new LinkedHashSet<>();
@@ -518,8 +518,8 @@ public class ASTDeferredIVResolution {
                   if (dc.isVirtual()) {
 
                     if (uri.getIV().isNullIV()) {
-                      /*
-                       * A virtual graph was referenced which is not
+                    /*
+       * A virtual graph was referenced which is not
                        * declared in the database. This virtual graph will
                        * not have any members.
                        */
@@ -585,8 +585,8 @@ public class ASTDeferredIVResolution {
                     final DatasetNode datasetNode =
                         new DatasetNode((Set) defaultGraphs, (Set) namedGraphs, update);
 
-                    /*
-                     * Set the data set on the QueryRoot or
+                  /*
+       * Set the data set on the QueryRoot or
                      * DeleteInsertGraph node.
                      */
                     dcList.getKey().setDataset(datasetNode);
@@ -598,7 +598,7 @@ public class ASTDeferredIVResolution {
     }
   }
 
-  /**
+  /*
    * prepare deferred handlers for batch IVs resolution. the handlers will go back and put the IVs
    * into place afterwards.
    *
@@ -691,8 +691,8 @@ public class ASTDeferredIVResolution {
 
         final NamedSubqueriesNode namedSubqueries = ((QueryRoot) queryRoot).getNamedSubqueries();
 
-        /*
-         * Note: This loop uses the current size() and get(i) to avoid
+      /*
+       * Note: This loop uses the current size() and get(i) to avoid
          * problems with concurrent modification during visitation.
          */
         for (int i = 0; i < namedSubqueries.size(); i++) {
@@ -828,8 +828,8 @@ public class ASTDeferredIVResolution {
 
       final EmbergraphValue value = ((ConstantNode) bop).getValue();
       if (value != null) {
-        /*
-         * Even if iv is already filled in we should try to resolve it
+      /*
+       * Even if iv is already filled in we should try to resolve it
          * against triplestore, as previously resolved IV may be
          * inlined, but expected to be term from lexicon relation on
          * evaluation.
@@ -1090,7 +1090,7 @@ public class ASTDeferredIVResolution {
     }
   }
 
-  /**
+  /*
    * Does the batch resolution of IVs against the database and applies the handlers to set those IVs
    * on the AST.
    *
@@ -1176,8 +1176,8 @@ public class ASTDeferredIVResolution {
 
           if (log.isDebugEnabled()) log.debug("RESOLVED: " + v + " => " + v.getIV());
 
-          /*
-           * Note: If the constant is an effective constant
+        /*
+       * Note: If the constant is an effective constant
            * because it was given in the binding sets then we also
            * need to capture the variable name associated with
            * that constant.
@@ -1186,8 +1186,8 @@ public class ASTDeferredIVResolution {
           iv = v.getIV();
         } else {
           if (v instanceof Literal) {
-            /*
-             * This code path handles IVs not resolved by
+          /*
+       * This code path handles IVs not resolved by
              * ASTDeferredIVResolutionInitializer, for example
              * bindings, nor resolved by LexiconRelation, so we
              * could not provide Term IV for a literal from a triple
@@ -1262,8 +1262,8 @@ public class ASTDeferredIVResolution {
 
           final List<Handler> deferredHandlers = deferred.get(v);
           if (deferredHandlers != null) {
-            /*
-             * No handlers are usually defined for vocab values
+          /*
+       * No handlers are usually defined for vocab values
              * (see above).
              */
             for (final Handler handler : deferredHandlers) {

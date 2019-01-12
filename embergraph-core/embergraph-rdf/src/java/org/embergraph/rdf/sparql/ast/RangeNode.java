@@ -24,8 +24,8 @@ import org.embergraph.bop.NV;
 import org.embergraph.rdf.internal.constraints.Range;
 import org.embergraph.rdf.internal.constraints.RangeBOp;
 
-/**
- * It's a value expression because it does eventually evaluate to a value - a {@link Range} value.
+/*
+* It's a value expression because it does eventually evaluate to a value - a {@link Range} value.
  */
 public class RangeNode extends ASTBase {
 
@@ -34,7 +34,7 @@ public class RangeNode extends ASTBase {
 
   public interface Annotations extends ASTBase.Annotations {
 
-    /**
+    /*
      * The variable whose range is restricted by the associated {@link #FROM} and/or {@link #TO}
      * filters.
      */

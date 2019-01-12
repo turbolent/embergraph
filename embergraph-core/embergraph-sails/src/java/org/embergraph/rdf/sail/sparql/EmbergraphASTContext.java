@@ -37,8 +37,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Object provides context required in various stages of parsing queries or updates.
+/*
+* Object provides context required in various stages of parsing queries or updates.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @openrdf
@@ -47,7 +47,7 @@ public class EmbergraphASTContext {
 
   protected final EmbergraphValueFactory valueFactory;
 
-  /**
+  /*
    * A mapping of parsed RDF Values and well known vocabulary items used when generating the AST to
    * resolved {@link EmbergraphValue}s. This includes everything which was parsed plus certain
    * well-known items such as {@link RDF#FIRST}, {@link RDF#REST}, and {@link RDF#NIL} which are
@@ -58,7 +58,7 @@ public class EmbergraphASTContext {
   /** Counter used to generate unique (within query) variable names. */
   private int constantVarID = 1;
 
-  /**
+  /*
    * @param values A map from the distinct RDF {@link Value} objects in the QUERY or UPDATE request
    *     to the corresponding {@link EmbergraphValue} objects that will be used to process the
    *     request.
@@ -70,7 +70,7 @@ public class EmbergraphASTContext {
     this.vocab = values;
   }
 
-  /**
+  /*
    * Create an anonymous variable. The variable name will be unique (within the scope of the query
    * parser) and {@link VarNode#isAnonymous()} will return <code>true</code>.
    *
@@ -88,7 +88,7 @@ public class EmbergraphASTContext {
     return var;
   }
 
-  /**
+  /*
    * Return a constant for a pre-defined vocabulary item.
    *
    * @throws VisitorException
@@ -102,7 +102,7 @@ public class EmbergraphASTContext {
     return new ConstantNode(v.getIV());
   }
 
-  /**
+  /*
    * Return a new variable for a SID (Statement Identifier)
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/526">Reification Done Right</a>

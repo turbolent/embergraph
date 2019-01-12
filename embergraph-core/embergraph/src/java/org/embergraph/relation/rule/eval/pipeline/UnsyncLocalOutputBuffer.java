@@ -4,8 +4,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * Keeps track of the chunks of binding sets that are generated on the caller's {@link JoinStats}.
+/*
+* Keeps track of the chunks of binding sets that are generated on the caller's {@link JoinStats}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: UnsyncLocalOutputBuffer.java 3448 2010-08-18 20:55:58Z thompsonbry $
@@ -17,7 +17,7 @@ public class UnsyncLocalOutputBuffer<E extends IBindingSet>
   private final JoinStats joinStats;
   private final IBlockingBuffer<E[]> syncBuffer;
 
-  /**
+  /*
    * @param joinTask The task that is writing on this buffer.
    * @param capacity The capacity of this buffer.
    * @param syncBuffer The thread-safe buffer onto which this buffer writes when it overflows.
@@ -32,7 +32,7 @@ public class UnsyncLocalOutputBuffer<E extends IBindingSet>
     this.syncBuffer = syncBuffer;
   }
 
-  /**
+  /*
    * Adds the chunk to the {@link #syncBuffer} and updated the {@link JoinStats} to reflect the #of
    * {@link IBindingSet} chunks that will be output and the #of {@link IBindingSet}s in those
    * chunks.

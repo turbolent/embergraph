@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.keys;
 
-/**
- * Delegation pattern for {@link ISortKeyBuilder} that is useful when you need to {@link
+/*
+* Delegation pattern for {@link ISortKeyBuilder} that is useful when you need to {@link
  * #resolve(Object)} one type to another before applying the delegate to generate the sort key.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -43,7 +43,7 @@ public abstract class DelegateSortKeyBuilder<E, F> implements ISortKeyBuilder<E>
     this.delegate = delegate;
   }
 
-  /**
+  /*
    * Resolve one generic type to another.
    *
    * @param e An element.

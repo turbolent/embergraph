@@ -47,8 +47,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test suite for {@link AbstractRuleFastClosure_3_5_6_7_9}.
+/*
+* Test suite for {@link AbstractRuleFastClosure_3_5_6_7_9}.
  *
  * @see RuleFastClosure3
  * @see RuleFastClosure5
@@ -70,7 +70,7 @@ public class TestRuleFastClosure_3_5_6_7_9 extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for {@link InferenceEngine#getSubProperties(AbstractTripleStore)}, which is used to
    * setup the pre-conditions for {@link RuleFastClosure3}.
    */
@@ -135,7 +135,7 @@ public class TestRuleFastClosure_3_5_6_7_9 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test of {@link RuleFastClosure6} where the data allow the rule to fire exactly twice, once
    * where the predicate is <code>rdfs:Range</code> and once where the predicate is an <code>
    * rdfs:subPropertyOf</code> <code>rdfs:Range</code>, and tests that the rule correctly filters
@@ -244,7 +244,7 @@ public class TestRuleFastClosure_3_5_6_7_9 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Implementation with the semantics of {@link RuleFastClosure6} but accepting a hand-built
    * property set closure.
    *
@@ -272,7 +272,7 @@ public class TestRuleFastClosure_3_5_6_7_9 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Custom rule evaluation overriden to use a hand-built {@link Set}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

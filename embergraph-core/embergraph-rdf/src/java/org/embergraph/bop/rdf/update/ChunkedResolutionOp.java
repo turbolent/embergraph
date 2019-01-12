@@ -46,8 +46,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Value;
 
-/**
- * Vectored operator adds and/or resolves the RDF {@link Value}s associated with mock {@link IV}s.
+/*
+* Vectored operator adds and/or resolves the RDF {@link Value}s associated with mock {@link IV}s.
  * On input, the variables must be mock {@link IV}s whose {@link IVCache} is set to the
  * corresponding {@link EmbergraphValue}. On output, the bindings of the variables will be replaced
  * by the corresponding {@link IV} if it exists or is an inline {@link IV} and (it writing is
@@ -65,14 +65,14 @@ public class ChunkedResolutionOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations, ILocatableResourceAnnotations {
 
-    /**
+    /*
      * An optional {@link IVariable}[] identifying the variables to be resolved. All variables are
      * resolved unless this annotation is specified.
      */
     String VARS = ChunkedResolutionOp.class.getName() + ".vars";
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -136,7 +136,7 @@ public class ChunkedResolutionOp extends PipelineOp {
       return null;
     }
 
-    /**
+    /*
      * Resolve the values.
      *
      * @return New solutions with resolved {@link IV}s.
@@ -211,15 +211,15 @@ public class ChunkedResolutionOp extends PipelineOp {
 
           if (iv == null) {
 
-            /*
-             * Since the term identifier is NULL this value is not
+          /*
+       * Since the term identifier is NULL this value is not
              * known to the kb.
              */
 
             if (log.isInfoEnabled()) log.info("Not in knowledge base: " + term);
 
-            /*
-             * Create a dummy iv and cache the unknown value on it
+          /*
+       * Create a dummy iv and cache the unknown value on it
              * so that it can be used during query evalution.
              */
             final IV dummy = TermId.mockIV(VTE.valueOf(term));
@@ -259,7 +259,7 @@ public class ChunkedResolutionOp extends PipelineOp {
 
             final IV<?, ?> iv = (IV<?, ?>) e.getValue().get();
 
-            final Value val = (Value) iv.getValue();
+            final Value val = iv.getValue();
 
             // Lookup the resolved EmbergraphValue object.
             final EmbergraphValue val2 = values.get(val);

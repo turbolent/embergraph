@@ -100,8 +100,8 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.helpers.BasicParserSettings;
 import org.openrdf.rio.helpers.StatementCollector;
 
-/**
- * Extension of {@link EmbergraphExprBuilder} that builds Update Expressions.
+/*
+* Extension of {@link EmbergraphExprBuilder} that builds Update Expressions.
  *
  * @author Jeen Broekstra
  * @author Bryan Thompson
@@ -135,7 +135,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
   //
   //  }
 
-  /**
+  /*
    * Note: Variables in QuadDatas are disallowed in INSERT DATA requests (see Notes 8 in the
    * grammar). That is, the INSERT DATA statement only allows to insert ground triples. Blank nodes
    * in QuadDatas are assumed to be disjoint from the blank nodes in the Graph Store, i.e., will be
@@ -153,7 +153,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     return op;
   }
 
-  /**
+  /*
    * Note: For DELETE DATA, QuadData denotes triples to be removed and is as described in INSERT
    * DATA, with the difference that in a DELETE DATA operation neither variables nor blank nodes are
    * allowed (see Notes 8+9 in the grammar).
@@ -198,7 +198,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     return group;
   }
 
-  /**
+  /*
    * This handles the "DELETE WHERE" syntax short hand.
    *
    * <pre>
@@ -279,7 +279,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     return op;
   }
 
-  /**
+  /*
    * Note: DROP and CLEAR have the identical semantics for embergraph since it does not support
    * empty graphs.
    */
@@ -330,7 +330,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     return op;
   }
 
-  /**
+  /*
    * Note: DROP and CLEAR have the identical semantics for embergraph since it does not support
    * empty graphs.
    */
@@ -504,7 +504,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
    * DELETE/INSERT
    */
 
-  /**
+  /*
    * The DELETE/INSERT operation can be used to remove or add triples from/to the Graph Store based
    * on bindings for a query pattern specified in a WHERE clause:
    *
@@ -544,8 +544,8 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
 
         with = (ConstantNode) withNode.jjtAccept(this, data);
 
-        /*
-         * Set the default context for the WHERE clause, DELETE clause,
+      /*
+       * Set the default context for the WHERE clause, DELETE clause,
          * and/or INSERT clauser.
          */
 
@@ -675,8 +675,8 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
 
       for (Statement stmt : stmts) {
 
-        /**
-         * Blank nodes are not allowed in DELETE DATA.
+      /*
+       * Blank nodes are not allowed in DELETE DATA.
          *
          * <p>See http://trac.bigdata.com/ticket/1076#comment:5
          */
@@ -703,7 +703,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     }
   }
 
-  /**
+  /*
    * Collect 'QuadData' for an INSERT DATA or DELETE DATA operation. This form does not allow
    * variables in the quads data.
    *
@@ -794,9 +794,9 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
 
       final EmbergraphStatement spo =
           context.valueFactory.createStatement(
-              (EmbergraphResource) s,
+              s,
               (EmbergraphURI) sp.p().getValue(),
-              (EmbergraphValue) o,
+              o,
               (EmbergraphResource) (sp.c() != null ? sp.c().getValue() : null),
               StatementEnum.Explicit);
       //            final ISPO spo = new SPO(
@@ -815,7 +815,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     return a;
   }
 
-  /**
+  /*
    * Method used to correctly reject variables in an INSERT DATA or DELETE DATA operation.
    *
    * @param t A Subject, Predicate, or Object term.
@@ -836,7 +836,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     throw new VisitorException("Variable not permitted in this context: " + t);
   }
 
-  /**
+  /*
    * Method used to correctly reject blank nodes in a DELETE DATA clause.
    *
    * @param t A Subject or Object term.
@@ -858,7 +858,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     }
   }
 
-  /**
+  /*
    * Convert the {@link TermNode} to a {@link EmbergraphValue}. IFF the {@link TermNode} is an
    * anonymous variable, then it is converted into a blank node whose ID is the name of that
    * anonymous variable. This is used to turn anonymous variables back into blank nodes for INSERT
@@ -877,7 +877,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     return t.getValue();
   }
 
-  /**
+  /*
    * Collect quads patterns for a DELETE/INSERT operation. This form allows variables in the quads
    * patterns.
    *
@@ -930,7 +930,7 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
     return quadData;
   }
 
-  /**
+  /*
    * Solution set names get modeled as variables which report <code>true</code> for {@link
    * VarNode#isSolutionSet()}.
    */

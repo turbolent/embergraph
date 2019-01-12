@@ -25,8 +25,8 @@ import org.embergraph.rdf.changesets.IChangeLog;
 import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Interface for custom services.
+/*
+* Interface for custom services.
  *
  * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=FederatedQuery">
  *     Federated Query and Custom Services</a>
@@ -34,7 +34,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
  */
 public interface CustomServiceFactory extends ServiceFactory {
 
-  /**
+  /*
    * Callback is used to notify the {@link ServiceFactory} of connection starts. If the service
    * wishes to be notified of updates, then it must return a {@link IChangeLog} implementation here.
    * The listener will be obtained when the {@link ServiceFactory} is registered.

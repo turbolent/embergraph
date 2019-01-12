@@ -24,8 +24,8 @@ import org.embergraph.rdf.internal.XSD;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
 
-/**
- * Extended vocabulary to include some new declarations. Note: Do not modify this class. Create an
+/*
+* Extended vocabulary to include some new declarations. Note: Do not modify this class. Create an
  * entirely new vocabulary and edit {@link AbstractTripleStore.Options#DEFAULT_VOCABULARY_CLASS}.
  *
  * <p>NOTE: Default is a terrible name for this class. The core vocabulary will naturally evolve
@@ -40,7 +40,7 @@ public class DefaultEmbergraphVocabulary extends RDFSVocabulary {
     super();
   }
 
-  /**
+  /*
    * Used by {@link AbstractTripleStore#create()}.
    *
    * @param namespace The namespace of the KB instance.

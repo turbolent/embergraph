@@ -25,8 +25,8 @@ package org.embergraph.bfs;
 
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * Test suite for {@link EmbergraphFileSystem#getDocumentHeaders(String, String)}.
+/*
+* Test suite for {@link EmbergraphFileSystem#getDocumentHeaders(String, String)}.
  *
  * <p>Note: The correct behavior of this method depends on the {@link SparseRowStore}'s logical row
  * iterator.

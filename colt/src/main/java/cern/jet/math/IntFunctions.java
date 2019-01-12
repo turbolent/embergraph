@@ -12,8 +12,8 @@ import cern.colt.function.IntFunction;
 import cern.colt.function.IntIntFunction;
 import cern.colt.function.IntIntProcedure;
 import cern.colt.function.IntProcedure;
-/**
- * Integer Function objects to be passed to generic methods. Same as {@link Functions} except
+/*
+* Integer Function objects to be passed to generic methods. Same as {@link Functions} except
  * operating on integers.
  *
  * <p>For aliasing see {@link #intFunctions}.
@@ -22,7 +22,7 @@ import cern.colt.function.IntProcedure;
  * @version 1.0, 09/24/99
  */
 public class IntFunctions extends Object {
-  /**
+  /*
    * Little trick to allow for "aliasing", that is, renaming this class. Writing code like
    *
    * <p><tt>IntFunctions.chain(IntFunctions.plus,IntFunctions.mult(3),IntFunctions.chain(IntFunctions.square,IntFunctions.div(2)));</tt>
@@ -36,7 +36,7 @@ public class IntFunctions extends Object {
    */
   public static final IntFunctions intFunctions = new IntFunctions();
 
-  /**
+  /*
    * ***************************
    *
    * <H3>Unary functions</H3>
@@ -115,7 +115,7 @@ public class IntFunctions extends Object {
         }
       };
 
-  /**
+  /*
    * ***************************
    *
    * <H3>Binary functions</H3>
@@ -277,7 +277,7 @@ public class IntFunctions extends Object {
 
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected IntFunctions() {}
-  /**
+  /*
    * Constructs a function that returns <tt>a & b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -288,7 +288,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>(from<=a && a<=to) ? 1 : 0</tt>. <tt>a</tt> is a
    * variable, <tt>from</tt> and <tt>to</tt> are fixed.
    */
@@ -299,7 +299,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a unary function from a binary function with the first operand (argument) fixed to
    * the given constant <tt>c</tt>. The second operand is variable (free).
    *
@@ -313,7 +313,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a unary function from a binary function with the second operand (argument) fixed to
    * the given constant <tt>c</tt>. The first operand is variable (free).
    *
@@ -327,7 +327,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs the function <tt>g( h(a) )</tt>.
    *
    * @param g a unary function.
@@ -341,7 +341,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs the function <tt>g( h(a,b) )</tt>.
    *
    * @param g a unary function.
@@ -355,7 +355,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs the function <tt>f( g(a), h(b) )</tt>.
    *
    * @param f a binary function.
@@ -371,7 +371,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a < b ? -1 : a > b ? 1 : 0</tt>. <tt>a</tt> is a
    * variable, <tt>b</tt> is fixed.
    */
@@ -390,7 +390,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a / b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -401,7 +401,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a == b ? 1 : 0</tt>. <tt>a</tt> is a variable,
    * <tt>b</tt> is fixed.
    */
@@ -412,7 +412,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>from<=a && a<=to</tt>. <tt>a</tt> is a variable,
    * <tt>from</tt> and <tt>to</tt> are fixed.
    */
@@ -423,7 +423,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a == b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -434,7 +434,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a > b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -445,7 +445,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a < b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -456,7 +456,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>Math.max(a,b)</tt>. <tt>a</tt> is a variable, <tt>b</tt>
    * is fixed.
    */
@@ -467,7 +467,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>Math.min(a,b)</tt>. <tt>a</tt> is a variable, <tt>b</tt>
    * is fixed.
    */
@@ -478,7 +478,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a - b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -489,7 +489,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a % b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -500,7 +500,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a * b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -511,7 +511,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a | b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -522,7 +522,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a + b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -533,7 +533,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>(int) Math.pow(a,b)</tt>. <tt>a</tt> is a variable,
    * <tt>b</tt> is fixed.
    */
@@ -544,7 +544,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns a 32 bit uniformly distributed random number in the closed
    * interval <tt>[Integer.MIN_VALUE,Integer.MAX_VALUE]</tt> (including <tt>Integer.MIN_VALUE</tt>
    * and <tt>Integer.MAX_VALUE</tt>). Currently the engine is {@link
@@ -558,7 +558,7 @@ public class IntFunctions extends Object {
   public static IntFunction random() {
     return new cern.jet.random.engine.MersenneTwister(new java.util.Date());
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a << b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -569,7 +569,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a >> b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -580,7 +580,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a >>> b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -591,7 +591,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>function.apply(b,a)</tt>, i.e. applies the function with
    * the first operand as second operand and the second operand as first operand.
    *
@@ -605,7 +605,7 @@ public class IntFunctions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a | b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */

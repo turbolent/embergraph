@@ -10,7 +10,7 @@ package cern.colt.function;
 
 /** Interface that represents a function object: a function that takes three arguments. */
 public interface IntIntDoubleFunction {
-  /**
+  /*
    * Applies a function to three arguments.
    *
    * @param first first argument passed to the function.
@@ -18,5 +18,5 @@ public interface IntIntDoubleFunction {
    * @param third third argument passed to the function.
    * @return the result of the function.
    */
-  public abstract double apply(int first, int second, double third);
+  double apply(int first, int second, double third);
 }

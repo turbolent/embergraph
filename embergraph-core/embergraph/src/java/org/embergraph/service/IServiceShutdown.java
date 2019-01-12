@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service;
 
-/**
- * Local API for service shutdown.
+/*
+* Local API for service shutdown.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -32,35 +32,35 @@ package org.embergraph.service;
 public interface IServiceShutdown {
 
   /** Return <code>true</code> iff the service is running. */
-  public boolean isOpen();
+  boolean isOpen();
 
-  /**
+  /*
    * The service will no longer accept new requests, but existing requests will be processed
    * (sychronous). This method should await the termination of pending requests, but no longer than
    * the timeout specified by {@link Options#SHUTDOWN_TIMEOUT}. Implementations SHOULD be
    * <strong>synchronized</strong>. If the service is aleady shutdown, then this method should be a
    * NOP.
    */
-  public void shutdown();
+  void shutdown();
 
-  /**
+  /*
    * The service will no longer accept new requests and will make a best effort attempt to terminate
    * all existing requests and return ASAP. This method should terminate any asynchronous
    * processing, release all resources and return immediately. Implementations SHOULD be
    * <strong>synchronized</strong>. If the service is aleady shutdown, then this method should be a
    * NOP.
    */
-  public void shutdownNow();
+  void shutdownNow();
 
-  /**
+  /*
    * Options for {@link IServiceShutdown} implementations.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface Options {
+  interface Options {
 
-    /**
+    /*
      * The maximum time in milliseconds that {@link #shutdown()} should wait termination of the
      * various services -or- ZERO (0) to wait forever (default is to wait forever).
      *

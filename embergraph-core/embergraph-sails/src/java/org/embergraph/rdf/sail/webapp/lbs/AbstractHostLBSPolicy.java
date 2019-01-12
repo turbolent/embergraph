@@ -42,8 +42,8 @@ import org.embergraph.quorum.Quorum;
 import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 import org.embergraph.util.InnerCause;
 
-/**
- * Abstract base class for an LBS policy that uses per-host load metrics.
+/*
+* Abstract base class for an LBS policy that uses per-host load metrics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -54,14 +54,14 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * @see HALoadBalancerServlet#getConfigParam(ServletConfig, Class, String, String) for how these
    *     <code>init-param</code> values can be set in <code>web.xml</code> and via environment
    *     variables.
    */
   public interface InitParams extends AbstractLBSPolicy.InitParams {
 
-    /**
+    /*
      * The {@link IHostScoringRule} that will be used to score the {@link IHostMetrics}. The {@link
      * IHostMetrics} are obtained periodically from the from some source (specified by a concrete
      * derived class).
@@ -74,7 +74,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
      */
     String HOST_SCORING_RULE = "hostScoringRule";
 
-    /**
+    /*
      * Read requests are forwarded to the local service if the availability on that service is
      * greater than or equal to the configured threshold when considering the normalized workload of
      * the hosts. The value must be in [0:1] and represents a normalized availability threshold for
@@ -101,7 +101,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
 
     String DEFAULT_LOCAL_FORWARD_THRESHOLD = "1.0";
 
-    /**
+    /*
      * The initial delay in milliseconds before the first scheduled task that updates the in-memory
      * snapshots of the performance metrics for the joined services (default {@value
      * #DEFAULT_HOST_DISCOVERY_INITIAL_DELAY}).
@@ -110,7 +110,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
 
     String DEFAULT_HOST_DISCOVERY_INITIAL_DELAY = "10000"; // ms.
 
-    /**
+    /*
      * The delay in milliseconds between scheduled tasks that update the in-memory snapshots of the
      * performance metrics for the joined services (default {@value #DEFAULT_HOST_DISCOVERY_DELAY}).
      */
@@ -143,7 +143,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
   /** @see InitParams#LOCAL_FORWARD_THRESHOLD */
   private final AtomicReference<Double> localForwardThresholdRef = new AtomicReference<Double>();
 
-  /**
+  /*
    * The rule used to score the {@link IHostMetrics}.
    *
    * @see InitParams#HOST_SCORING_RULE
@@ -151,7 +151,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
   private final AtomicReference<IHostScoringRule> scoringRuleRef =
       new AtomicReference<IHostScoringRule>();
 
-  /**
+  /*
    * The initial delay before the first discovery cycle that updates our local knowledge of the load
    * on each host.
    *
@@ -159,7 +159,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
    */
   private long hostDiscoveryInitialDelay = -1L;
 
-  /**
+  /*
    * The delay between discovery cycles that updates our local knowledge of the load on each host.
    *
    * @see InitParams#HOST_DISCOVERY_DELAY
@@ -169,20 +169,20 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
   /** Random number generator used to load balance the read-requests. */
   private final Random rand = new Random();
 
-  /**
+  /*
    * The current {@link HostTable} data.
    *
    * @see #updateHostTable()
    */
   private final AtomicReference<HostTable> hostTableRef = new AtomicReference<HostTable>(null);
 
-  /**
+  /*
    * The {@link Future} of a task that periodically queries the ganglia peer for its up to date host
    * counters for each discovered host.
    */
   private ScheduledFuture<?> scheduledFuture;
 
-  /**
+  /*
    * Return the name of the {@link IHostScoringRule} that provides default value for the {@link
    * InitParams#HOST_SCORING_RULE} configuration parameter.
    *
@@ -191,7 +191,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
    */
   protected abstract String getDefaultScoringRule();
 
-  /**
+  /*
    * The delay between discovery cycles that updates our local knowledge of the load on each host.
    *
    * @see InitParams#HOST_DISCOVERY_DELAY
@@ -217,7 +217,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     // report whether or not the scheduled future is still running.
     {
       final ScheduledFuture<?> tmp = scheduledFuture;
-      final boolean futureIsDone = tmp == null ? true : tmp.isDone();
+      final boolean futureIsDone = tmp == null || tmp.isDone();
       sb.append(",scheduledFuture=" + (tmp == null ? "N/A" : (futureIsDone ? "done" : "running")));
       if (futureIsDone && tmp != null) {
         // Check for error.
@@ -328,8 +328,8 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
                         // Terminate if interrupted.
                         throw ex;
                       }
-                      /*
-                       * Note: If the task thows an exception it will not
+                    /*
+       * Note: If the task thows an exception it will not
                        * be rescheduled, therefore log @ ERROR rather than
                        * allowing the unchecked exception to be
                        * propagated.
@@ -369,7 +369,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     localForwardThresholdRef.set(newValue);
   }
 
-  /**
+  /*
    * Extended to conditionally update the {@link #hostTableRef} iff it does not exist or is empty.
    */
   @Override
@@ -396,7 +396,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     }
   }
 
-  /**
+  /*
    * Overridden to also update the hosts table in case we add/remove a service and the set of hosts
    * that cover the member services is changed as a result.
    */
@@ -408,7 +408,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     updateHostTable();
   }
 
-  /**
+  /*
    * Update the per-host scoring table. The host table will only contain entries for hosts
    * associated with at least one service that is joined with the met quorum.
    *
@@ -458,7 +458,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     hostTableRef.set(newHostTable);
   }
 
-  /**
+  /*
    * Compute and return the normalized load across the known hosts.
    *
    * <p>Note: This needs to be done only for those hosts that are associated with the {@link Quorum}
@@ -546,7 +546,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
      * which is the AVAILABILITY to do more work.
      */
     double totalAvailability = 0;
-    double availability[] = new double[nhosts];
+    double[] availability = new double[nhosts];
     {
       for (int i = 0; i < nhosts; i++) {
 
@@ -695,7 +695,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     return requestURI;
   }
 
-  /**
+  /*
    * Stochastically select the target host based on the current host workload.
    *
    * <p>Note: This is package private in order to expose it to the test suite.
@@ -727,13 +727,13 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     HostScore hostScore = null;
     {
       if (hostScores.length == 1) {
-        /*
-         * Only one host.
+      /*
+       * Only one host.
          */
         hostScore = hostScores[0];
       } else {
-        /*
-         * Multiple hosts.
+      /*
+       * Multiple hosts.
          *
          * Note: Choice is inversely proportional to normalized workload
          * (1 - load).
@@ -754,7 +754,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     return hostScore;
   }
 
-  /**
+  /*
    * Stochastically select the target service on the given host.
    *
    * <p>Note: There can be multiple services on the same host. However, this mostly happens in CI.
@@ -814,7 +814,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     return serviceScore;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>If the normalized availability for this host is over a configured threshold, then we forward
@@ -846,7 +846,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
     return false;
   }
 
-  /**
+  /*
    * Return a map from the known canonical hostnames (as self-reported by the services) of the
    * joined services to the {@link IHostMetrics}s for those hosts.
    *

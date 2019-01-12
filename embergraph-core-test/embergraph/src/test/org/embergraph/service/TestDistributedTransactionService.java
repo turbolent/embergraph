@@ -31,8 +31,8 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.proc.IIndexProcedure;
 import org.embergraph.journal.ITx;
 
-/**
- * Unit tests of local (all writes are on a single data service) and distributed abort and commit
+/*
+* Unit tests of local (all writes are on a single data service) and distributed abort and commit
  * protocols for an {@link IEmbergraphFederation} using the {@link DistributedTransactionService}.
  *
  * @todo the easiest way to set this up is to place different indices onto different data services,
@@ -58,8 +58,8 @@ public class TestDistributedTransactionService extends AbstractEmbeddedFederatio
     super(arg0);
   }
 
-  //    /**
-  //     * Writes a key/val pair on a named index on the specified
+  //    /*
+//     * Writes a key/val pair on a named index on the specified
   //     * {@link IDataService}.
   //     *
   //     * @param tx
@@ -93,7 +93,7 @@ public class TestDistributedTransactionService extends AbstractEmbeddedFederatio
   //
   //    }
 
-  /**
+  /*
    * Unit test of abort of a read-write tx that writes on a single data service.
    *
    * @throws ExecutionException
@@ -223,8 +223,8 @@ public class TestDistributedTransactionService extends AbstractEmbeddedFederatio
 
   // FIXME full distributed read-write tx support is not finished yet so these
   // tests have been commented out.
-  //    /**
-  //     * unit test of commit of a read-write tx that writes on a single data
+  //    /*
+//     * unit test of commit of a read-write tx that writes on a single data
   //     *       service.
   //     *
   //     * @throws IOException
@@ -314,8 +314,8 @@ public class TestDistributedTransactionService extends AbstractEmbeddedFederatio
   //
   //    }
   //
-  //    /**
-  //     * @todo unit test of abort of a read-write tx that writes on a more than
+  //    /*
+//     * @todo unit test of abort of a read-write tx that writes on a more than
   //     *       one data service.
   //     */
   //    public void test_distTxAbort() {
@@ -324,8 +324,8 @@ public class TestDistributedTransactionService extends AbstractEmbeddedFederatio
   //
   //    }
   //
-  //    /**
-  //     * @todo unit test of commit of a read-write tx that writes on a more than
+  //    /*
+//     * @todo unit test of commit of a read-write tx that writes on a more than
   //     *       one data service.
   //     */
   //    public void test_distTxCommit() {

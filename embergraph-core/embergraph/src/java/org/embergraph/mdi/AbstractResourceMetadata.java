@@ -36,8 +36,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.resources.IndexManager;
 import org.embergraph.service.Params;
 
-/**
- * Base class for {@link IResourceMetadata} implementations.
+/*
+* Base class for {@link IResourceMetadata} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -50,15 +50,15 @@ public abstract class AbstractResourceMetadata
   /** The name of the resource file. */
   private String filename;
 
-  //    /**
-  //     * The size of that file in bytes.
+  //    /*
+//     * The size of that file in bytes.
   //     */
   //    private long nbytes;
 
   /** The unique identifier for the resource. */
   private UUID uuid;
 
-  /**
+  /*
    * The commit time associated with the described index. When the index is an {@link IndexSegment}
    * this is the commit time of the view from which that {@link IndexSegment} was generated. When
    * the index is a {@link BTree} on a {@link Journal}, the commit time is the commit time
@@ -118,7 +118,7 @@ public abstract class AbstractResourceMetadata
     return uuid.hashCode();
   }
 
-  /**
+  /*
    * Note: The JDK {@link HashMap} implementation requires that we define this method in order for
    * {@link HashMap#get(Object)} to work correctly!
    */
@@ -134,15 +134,11 @@ public abstract class AbstractResourceMetadata
 
     // Note: compares UUIDs first.
 
-    if (uuid.equals(o.getUUID())
+    return uuid.equals(o.getUUID())
         && filename.equals(o.getFile())
         //                && nbytes == o.size()
-        && createTime == o.getCreateTime()) {
+        && createTime == o.getCreateTime();
 
-      return true;
-    }
-
-    return false;
   }
 
   public final String getFile() {
@@ -174,7 +170,7 @@ public abstract class AbstractResourceMetadata
   /** The original version. */
   private static final transient short VERSION0 = 0x0;
 
-  /**
+  /*
    * This version supports a commitTime field. That field is used when a view must be defined which
    * reads on a specific commit record in a journal. For VERSION0, this field was not defined. Prior
    * to version1, all references to a historical journal were interpreted as references to the

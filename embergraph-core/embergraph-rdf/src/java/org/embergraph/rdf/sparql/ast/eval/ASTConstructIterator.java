@@ -64,8 +64,8 @@ import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 import org.openrdf.query.impl.EmptyBindingSet;
 
-/**
- * Iterator consumes the solutions from a query and interprets them according to a {@link
+/*
+* Iterator consumes the solutions from a query and interprets them according to a {@link
  * ConstructNode}. Ground triples in the template are output immediately. Any non-ground triples are
  * output iff they are fully (and validly) bound for a given solution. Blank nodes are scoped to a
  * solution.
@@ -82,7 +82,7 @@ public class ASTConstructIterator
 
   private static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * When <code>false</code>, no DISTINCT SPO filter will be imposed.
    *
    * @see https://jira.blazegraph.com/browse/BLZG-1341 (performance of dumping single graph)
@@ -94,7 +94,7 @@ public class ASTConstructIterator
   /** The non-ground statement patterns. */
   private final List<StatementPatternNode> templates;
 
-  /**
+  /*
    * A mapping of blank node IDs to {@link EmbergraphBNode}s that will be imposed across the {@link
    * ASTConstructIterator}. This MUST be <code>null</code> for a CONSTRUCT query since the semantics
    * of CONSTRUCT require that blank node assignments are scoped to the solution. It must be non-
@@ -111,7 +111,7 @@ public class ASTConstructIterator
    */
   final Map<String, EmbergraphBNode> bnodes;
 
-  /**
+  /*
    * Return the blank node map. If this was specified to the constructor, then the same map is
    * returned for each invocation. Otherwise a <strong>new</strong> map instance is returned for
    * each invocation.
@@ -133,7 +133,7 @@ public class ASTConstructIterator
 
   private final CloseableIteration<BindingSet, QueryEvaluationException> src;
 
-  /**
+  /*
    * A list of {@link Statement}s constructed from the most recently visited solution. Statements
    * are drained from this buffer, sending them to the sink. Once the buffer is empty, we will go
    * back to the {@link #src} to refill it.
@@ -143,7 +143,7 @@ public class ASTConstructIterator
    */
   private final LinkedList<EmbergraphStatement> buffer = new LinkedList<EmbergraphStatement>();
 
-  /**
+  /*
    * A filter which restricts the emitted statements to the distinct {@link ISPO}. The {@link
    * DistinctFilter} is based on the Java heap. The {@link NativeDistinctFilter} is based on
    * persistence capable data structures and can scale to high cardinality outputs. Unfortunately, a
@@ -159,8 +159,8 @@ public class ASTConstructIterator
    */
   private final IFilterTest filter;
 
-  //    /**
-  //     * Return <code>true</code>iff {@link LexiconRelation#isStoreBlankNodes()}
+  //    /*
+//     * Return <code>true</code>iff {@link LexiconRelation#isStoreBlankNodes()}
   //     * is <code>true</code>.
   //     */
   //    private final boolean toldBNodes;
@@ -170,7 +170,7 @@ public class ASTConstructIterator
 
   private boolean open = true;
 
-  /**
+  /*
    * <code>false</code> until we get the first solution for the WHERE clause. We do not output
    * ground triples in the template until we see that first solution. It is Ok if it is empty, but
    * we need to know that the WHERE clause succeeded before we can output the ground triples.
@@ -179,7 +179,7 @@ public class ASTConstructIterator
 
   public static boolean flagToCheckNativeDistinctQuadsInvocationForJUnitTesting = false;
 
-  /**
+  /*
    * @param tripleStore
    * @param construct The {@link ConstructNode}
    * @param whereClause The WHERE clause (used to identify construct templates which obviously
@@ -243,8 +243,8 @@ public class ASTConstructIterator
 
       } else {
 
-        /*
-         * A statement pattern that we will process for each solution.
+      /*
+       * A statement pattern that we will process for each solution.
          */
 
         templates.add(pat);
@@ -276,7 +276,7 @@ public class ASTConstructIterator
     final boolean nativeDistinct = construct.isNativeDistinct();
 
     if (!constructDistinctSPO) {
-      /**
+      /*
        * DISTINCT SPO filter was disabled by a query hint. The output is NOT guaranteed to be
        * distinct.
        *
@@ -323,7 +323,7 @@ public class ASTConstructIterator
     }
   }
 
-  /**
+  /*
    * FIXME NATIVE DISTINCT : This needs to create a filter using a HTree to impose a scalable
    * distinct.
    *
@@ -402,7 +402,7 @@ public class ASTConstructIterator
      * path.
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
-    final SPOKeyOrder indexKeyOrder = SPOKeyOrder.getKeyOrder((IPredicate) pred, 3 /* keyArity */);
+    final SPOKeyOrder indexKeyOrder = SPOKeyOrder.getKeyOrder(pred, 3 /* keyArity */);
 
     construct.setProperty(NativeDistinctFilter.Annotations.KEY_ORDER, indexKeyOrder);
 
@@ -410,7 +410,7 @@ public class ASTConstructIterator
     return new NativeDistinctFilter.DistinctFilterImpl(construct);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff this CONSTRUCT template will obviously produce distinct triples.
    *
    * <p>Note: CONSTRUCT is sometimes used to materialize all triples for some triple pattern. For
@@ -511,29 +511,22 @@ public class ASTConstructIterator
     //        if (!sp1.o().equals(sp2.o()))
     //            return false;
 
-    /**
+    /*
      * CONSTRUCT always produces triples, but the access path for the statement pattern in the WHERE
      * clause may visit multiple named graphs. If it does, then duplicate triples can result unless
      * the access path is the RDF MERGE (default graph access path).
      *
      * @see https://jira.blazegraph.com/browse/BLZG-1341 (do not de-dup for very large graphs)
      */
-    if (quads && sp2.c() == null && sp2.getScope() == Scope.NAMED_CONTEXTS) {
-
-      /*
-       * Multiple named graphs could be visited, so the statement pattern
-       * in the CONSTRUCT could produce duplicate triples.
-       */
-
-      return false;
-    }
-
     /*
+     * Multiple named graphs could be visited, so the statement pattern
+     * in the CONSTRUCT could produce duplicate triples.
+     */
+    return !quads || sp2.c() != null || sp2.getScope() != Scope.NAMED_CONTEXTS;/*
      * The construct should produce distinct triples without our having to
      * add a DISTINCT filter.
      */
 
-    return true;
   }
 
   @Override
@@ -543,8 +536,8 @@ public class ASTConstructIterator
 
       if (!buffer.isEmpty()) {
 
-        /*
-         * At least one statement is ready in the buffer.
+      /*
+       * At least one statement is ready in the buffer.
          */
 
         return true;
@@ -552,8 +545,8 @@ public class ASTConstructIterator
 
       if (!src.hasNext()) {
 
-        /*
-         * Nothing left to visit.
+      /*
+       * Nothing left to visit.
          */
 
         close();
@@ -599,8 +592,8 @@ public class ASTConstructIterator
 
       if (filter instanceof ICloseable) {
 
-        /*
-         * Ensure that we release the backing MemoryManager in a timely
+      /*
+       * Ensure that we release the backing MemoryManager in a timely
          * fashion.
          *
          * @see <a
@@ -619,7 +612,7 @@ public class ASTConstructIterator
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Refill the buffer from a new solution. This method is responsible for the scope of blank nodes
    * and for discarding statements which are ill-formed (missing slots, bad type for a slot, etc).
    *
@@ -679,7 +672,7 @@ public class ASTConstructIterator
     }
   }
 
-  /**
+  /*
    * Add a statement to the output buffer.
    *
    * @param stmt The statement.
@@ -713,7 +706,7 @@ public class ASTConstructIterator
     }
   }
 
-  /**
+  /*
    * Return a statement if a valid statement could be constructed for that statement pattern and
    * this solution.
    *
@@ -744,10 +737,10 @@ public class ASTConstructIterator
     if (c != null && !(c instanceof Resource)) return null;
 
     // return the statement
-    return f.createStatement((Resource) s, (URI) p, (Value) o, (Resource) c);
+    return f.createStatement((Resource) s, (URI) p, o, (Resource) c);
   }
 
-  /**
+  /*
    * Return the as-bound value of the variable or constant given the solution.
    *
    * @param term Either a variable or a constant from the statement pattern in the template.
@@ -771,8 +764,8 @@ public class ASTConstructIterator
 
       if (value == null) {
 
-        /**
-         * If the value is null, then the valueCache was not set on the IV for the Constant. Since
+      /*
+       * If the value is null, then the valueCache was not set on the IV for the Constant. Since
          * the Constant was a Constant specified in the original query, this means that is an IV in
          * the original AST whose valueCache was not set.
          *
@@ -794,14 +787,14 @@ public class ASTConstructIterator
 
       if (value instanceof EmbergraphBNode) {
 
-        /*
-         * Blank nodes require special handling.
+      /*
+       * Blank nodes require special handling.
          */
 
         if (this.bnodes != null) {
 
-          /*
-           * DESCRIBE
+        /*
+       * DESCRIBE
            *
            * Note: This preserves the ID/IV for constants in the
            * query, but it breaks semantics for CONSTRUCT. The test
@@ -816,8 +809,8 @@ public class ASTConstructIterator
           return value;
         }
 
-        /*
-         * CONSTRUCT.
+      /*
+       * CONSTRUCT.
          *
          * Note: The blank nodes will be scoped to the solution.
          */
@@ -857,8 +850,8 @@ public class ASTConstructIterator
 
       if (v.isAnonymous()) {
 
-        /*
-         * Anonymous variable. I can't quite say whether or not this is
+      /*
+       * Anonymous variable. I can't quite say whether or not this is
          * a hack, so let me explain what is going on instead. When the
          * SPARQL grammar parses a blank node in a query, it is *always*
          * turned into an anonymous variable. So, when we interpret the
@@ -900,7 +893,7 @@ public class ASTConstructIterator
     }
   }
 
-  /**
+  /*
    * Scope the bnode ID to the solution. The same ID in each solution is mapped to the same bnode.
    * The same ID in a new solution is mapped to a new BNode.
    */

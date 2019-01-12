@@ -34,8 +34,8 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * GETSTMTS test suite for includeInferred.
+/*
+* GETSTMTS test suite for includeInferred.
  *
  * @see <a href="http://jira.blazegraph.com/browse/BLZG-1207" > getStatements() ignores
  *     includeInferred (REST API) </a>
@@ -60,7 +60,7 @@ public class Test_Ticket_1207<S extends IIndexManager> extends AbstractTestNanoS
         Test_Ticket_1207.class, "test.*", TestMode.triplesPlusTruthMaintenance);
   }
 
-  /**
+  /*
    * Test supposed to check if remote call for getStatements properly handle includeInferred flag
    */
   public void test_ticket_1207() throws Exception {

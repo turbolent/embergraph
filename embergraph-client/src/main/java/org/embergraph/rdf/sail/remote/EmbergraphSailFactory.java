@@ -30,8 +30,8 @@ import org.embergraph.util.httpd.Config;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.Sail;
 
-/**
- * Helper class to create a embergraph instance.
+/*
+* Helper class to create a embergraph instance.
  *
  * @author mikepersonick
  * @see <a href="http://trac.bigdata.com/ticket/1152" > EmbergraphSailFactory must be moved to the
@@ -42,20 +42,20 @@ public class EmbergraphSailFactory {
   /** The default embergraph SAIL_PROVIDER. */
   public static final String EMBERGRAPH_SAIL_INSTANCE = "org.embergraph.rdf.sail.EmbergraphSail";
 
-  /**
+  /*
    * The name of the property to set with the class that will provide the Sail.
    *
    * <p>It must have a constructor that takes a single properties file as the parameter.
    */
   public static final String SAIL_PROVIDER = "org.embergraph.rdf.sail.remote.Provider";
 
-  /**
+  /*
    * A handy list of common Options you might want to specify when creating your embergraph
    * instance.
    *
    * @author mikepersonick
    */
-  public static enum Option {
+  public enum Option {
 
     /** Inference on or off. Off by default. */
     Inference,
@@ -69,20 +69,20 @@ public class EmbergraphSailFactory {
     /** Text index on or off. Off by default. */
     TextIndex,
 
-    //        /**
-    //         * Create an in-memory instance.
+    //        /*
+//         * Create an in-memory instance.
     //         */
     //        InMemory,
     //
-    //        /**
-    //         * Create a persistent instance backed by a file.  You must specify
+    //        /*
+//         * Create a persistent instance backed by a file.  You must specify
     //         * the file.
     //         */
     //        Persistent
 
   }
 
-  /**
+  /*
    * Connect to a remote embergraph instance.
    *
    * <p>FIXME This does not parameterize the value of the ContextPath. See {@link
@@ -92,7 +92,7 @@ public class EmbergraphSailFactory {
     return connect("http://" + host + ":" + port + "/" + Config.PATH);
   }
 
-  /**
+  /*
    * Connect to a remote embergraph instance.
    *
    * @param sparqlEndpointURL The URL of the SPARQL end point.
@@ -108,7 +108,7 @@ public class EmbergraphSailFactory {
         .getEmbergraphSailRemoteRepository();
   }
 
-  /**
+  /*
    * Convenience method to allow the testing of the URL normalization functionality.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/1139">EmbergraphSailFactory.connect() </a>
@@ -158,7 +158,7 @@ public class EmbergraphSailFactory {
     }
   }
 
-  /**
+  /*
    * Open an existing persistent embergraph instance. If a journal does not exist at the specified
    * location then an exception will be thrown.
    */
@@ -167,7 +167,7 @@ public class EmbergraphSailFactory {
     return new SailRepository(openSail(file, false));
   }
 
-  /**
+  /*
    * Open an existing persistent embergraph instance. If a journal does not exist at the specified
    * location and the boolean create flag is true a journal will be created at that location with
    * the default set of options.
@@ -177,7 +177,7 @@ public class EmbergraphSailFactory {
     return new SailRepository(openSail(file, create));
   }
 
-  /**
+  /*
    * Open an existing persistent embergraph instance. If a journal does not exist at the specified
    * location then an exception will be thrown.
    */
@@ -186,7 +186,7 @@ public class EmbergraphSailFactory {
     return openSail(file, false);
   }
 
-  /**
+  /*
    * Open an existing persistent embergraph instance. If a journal does not exist at the specified
    * location and the boolean create flag is true a journal will be created at that location with
    * the default set of options.
@@ -212,7 +212,7 @@ public class EmbergraphSailFactory {
     }
   }
 
-  /**
+  /*
    * Create a new embergraph instance using the specified options. Since no journal file is
    * specified this must be an in-memory instance.
    */
@@ -221,7 +221,7 @@ public class EmbergraphSailFactory {
     return createRepository(new Properties(), null, args);
   }
 
-  /**
+  /*
    * Create a new embergraph instance using the specified options. Since no journal file is
    * specified this must be an in-memory instance.
    */
@@ -236,7 +236,7 @@ public class EmbergraphSailFactory {
     return createRepository(new Properties(), file, args);
   }
 
-  /**
+  /*
    * Create a new embergraph instance using the specified options. Since no journal file is
    * specified this must be an in-memory instance.
    */
@@ -246,7 +246,7 @@ public class EmbergraphSailFactory {
     return new SailRepository(createSail(props, file, args));
   }
 
-  /**
+  /*
    * Create a new embergraph instance using the specified options. Since no journal file is
    * specified this must be an in-memory instance.
    */

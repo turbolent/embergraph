@@ -25,8 +25,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.decls.RDFVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.VoidVocabularyDecl;
 
-/**
- * Extended vocabulary to include {@link VoidVocabularyDecl}.
+/*
+* Extended vocabulary to include {@link VoidVocabularyDecl}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: RDFSVocabulary.java 4632 2011-06-06 15:11:53Z thompsonbry $
@@ -39,7 +39,7 @@ public class RDFSVocabularyV2 extends RDFSVocabulary {
     super();
   }
 
-  /**
+  /*
    * Used by {@link AbstractTripleStore#create()}.
    *
    * @param namespace The namespace of the KB instance.

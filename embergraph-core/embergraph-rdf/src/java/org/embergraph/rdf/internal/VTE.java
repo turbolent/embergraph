@@ -27,8 +27,8 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Value Type Enumeration (IVTE) is a class with methods for interpreting and setting the bit flags
+/*
+* Value Type Enumeration (IVTE) is a class with methods for interpreting and setting the bit flags
  * used to identify the type of an RDF Value (URI, Literal, Blank Node, SID, etc).
  */
 public enum VTE {
@@ -45,7 +45,7 @@ public enum VTE {
   /** A statement identifier. */
   STATEMENT((byte) 0x03);
 
-  private VTE(final byte flags) {
+  VTE(final byte flags) {
 
     this.v = flags;
   }
@@ -58,7 +58,7 @@ public enum VTE {
     return v;
   }
 
-  /**
+  /*
    * Return the {@link VTE} identified by the LOW TWO (2) bits in the caller's value.
    *
    * @param b The bit flags.
@@ -86,7 +86,7 @@ public enum VTE {
     }
   }
 
-  /**
+  /*
    * Return the one character code for this RDF Value type (U, L, B, or S). This is used in various
    * internal toString() implementations.
    */

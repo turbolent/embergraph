@@ -25,8 +25,8 @@ package org.embergraph.relation.accesspath;
 
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link AbstractArrayBuffer}.
+/*
+* Test suite for {@link AbstractArrayBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -2,8 +2,8 @@ package org.embergraph.btree.keys;
 
 import java.text.Collator;
 
-/**
- * Type safe enumeration for the strength.
+/*
+* Type safe enumeration for the strength.
  *
  * <p>Note: ICU and the JDK use different integer constants for the #IDENTICAL strength
  *
@@ -21,5 +21,5 @@ public enum StrengthEnum {
   /** Note: this option is NOT supported by the JDK. */
   Quaternary,
   /** See {@link Collator#IDENTICAL}. */
-  Identical;
+  Identical
 }

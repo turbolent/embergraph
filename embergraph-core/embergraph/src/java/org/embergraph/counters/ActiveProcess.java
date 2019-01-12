@@ -32,8 +32,8 @@ import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * Command manages the execution and termination of a native process and an object reading the
+/*
+* Command manages the execution and termination of a native process and an object reading the
  * output of that process.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -43,7 +43,7 @@ public class ActiveProcess {
 
   protected static final Logger log = Logger.getLogger(ActiveProcess.class);
 
-  /**
+  /*
    * Used to read {@link #is} and aggregate the performance data reported by the {@link #process}.
    */
   protected final ExecutorService readService =
@@ -59,7 +59,7 @@ public class ActiveProcess {
   // This is used in tests
   protected ActiveProcess() {}
 
-  /**
+  /*
    * @param command The command to be executed. See {@link ProcessBuilder#command(List)}.
    * @param collector
    */
@@ -103,7 +103,7 @@ public class ActiveProcess {
 
   }
 
-  /**
+  /*
    * Attaches the reader to the process, which was started by the ctor and is already running.
    *
    * @param processReader The reader.

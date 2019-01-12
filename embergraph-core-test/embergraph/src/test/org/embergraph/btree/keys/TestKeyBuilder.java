@@ -37,8 +37,8 @@ import junit.framework.TestCase2;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
-/**
- * Test suite for high level operations that build variable length _unsigned_ byte[] keys from
+/*
+* Test suite for high level operations that build variable length _unsigned_ byte[] keys from
  * various data types and unicode strings.
  *
  * @see <a href="http://docs.hp.com/en/B3906-90004/ch02s02.html#d0e1095>ranges on negative float and
@@ -277,7 +277,7 @@ public class TestKeyBuilder extends TestCase2 {
     assertEquals(0, key.length);
   }
 
-  /**
+  /*
    * Test ability to reset the key buffer (simply zeros the #of valid bytes in the buffer without
    * touching the buffer itself).
    */
@@ -301,7 +301,7 @@ public class TestKeyBuilder extends TestCase2 {
    * successors around zero is correctly defined by the resulting key.
    */
 
-  /**
+  /*
    * Note: The {@link KeyBuilder} uses an order preserving transfrom from signed bytes to unsigned
    * bytes. This transform preserves the order of values in the signed space by translating them
    * such that the minimum signed value (-128) is represented by an unsigned 0x00. For example, zero
@@ -613,7 +613,7 @@ public class TestKeyBuilder extends TestCase2 {
     assertEquals("kmax", SuccessorUtil.DPOS_MAX, KeyBuilder.decodeDouble(kmax, 0));
   }
 
-  /**
+  /*
    * Test verifies encode/decode of {@link UUID}s and also verifies that the natural order of the
    * encoded {@link UUID}s respects the order imposed by {@link UUID#compareTo(UUID)}.
    */
@@ -663,7 +663,7 @@ public class TestKeyBuilder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test ordering imposed by encoding a single ASCII key.
    *
    * @todo test ability to decode an ASCII field in a non-terminal position of a multi-field key.
@@ -699,7 +699,7 @@ public class TestKeyBuilder extends TestCase2 {
     assertEquals("Abc", KeyBuilder.decodeASCII(key3, 0, 3));
   }
 
-  /**
+  /*
    * Test verifies the order for ASCII sort keys, including verifying that the pad byte causes a
    * prefix such as "bro" to sort before a term which extends that prefix, such as "brown".
    */
@@ -728,7 +728,7 @@ public class TestKeyBuilder extends TestCase2 {
     assertEquals("brown", a[3].obj);
   }
 
-  /**
+  /*
    * Test that lexiographic order is maintain when a variable length ASCII field is followed by
    * another field. This test works by comparing the original multi-field key with the multi-field
    * key formed from the successor of the ASCII field followed by the other field:
@@ -749,8 +749,8 @@ public class TestKeyBuilder extends TestCase2 {
   /*
    * Moved to TestKeyBuilderCollation.  bbt 7/15/2010.
    */
-  //    /**
-  //     * Test of the ability to normalize trailing pad characters.
+  //    /*
+//     * Test of the ability to normalize trailing pad characters.
   //     */
   //    public void test_keyBuilder_normalizeTrailingPadCharacters() {
   //
@@ -787,8 +787,8 @@ public class TestKeyBuilder extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Test verifies that very long strings are truncated.
+  //    /*
+//     * Test verifies that very long strings are truncated.
   //     *
   //     * @todo verify that trailing whitespace is removed after truncation rather
   //     *       than before truncation.
@@ -806,8 +806,8 @@ public class TestKeyBuilder extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Test verifies the order among unicode sort keys, including verifying that
+  //    /*
+//     * Test verifies the order among unicode sort keys, including verifying that
   //     * the pad byte causes a prefix such as "bro" to sort before a term which
   //     * extends that prefix, such as "brown".
   //     */
@@ -838,8 +838,8 @@ public class TestKeyBuilder extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * <p>
+  //    /*
+//     * <p>
   //     * Test that lexiographic order is maintain when a variable length Unicode
   //     * field is followed by another field. This test works by comparing the
   //     * original multi-field key with the multi-field key formed from the
@@ -879,7 +879,7 @@ public class TestKeyBuilder extends TestCase2 {
   //
   //    }
 
-  /**
+  /*
    * Test helper.
    *
    * @param unicode When <code>true</code> tests Unicode semantics. Otherwise tests ASCII semantics.
@@ -963,7 +963,7 @@ public class TestKeyBuilder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Return a string consisting of a repeating sequence of the digits zero through nine whose length
    * is {@link IKeyBuilder#maxlen}.
    */
@@ -985,7 +985,7 @@ public class TestKeyBuilder extends TestCase2 {
     return text;
   }
 
-  /**
+  /*
    * Test helper forms two keys and verifies successor semantics:
    *
    * <pre>
@@ -1074,7 +1074,7 @@ public class TestKeyBuilder extends TestCase2 {
    * unsigned byte[]s is maintained.
    */
 
-  /**
+  /*
    * Verify that we can convert float keys to unsigned byte[]s while preserving the value space
    * order.
    */
@@ -1098,7 +1098,7 @@ public class TestKeyBuilder extends TestCase2 {
         this.val = val;
         this.key = key;
       }
-    };
+    }
     /** imposes ordering based on {@link X#val}. */
     class XComp implements Comparator<X> {
       public int compare(X o1, X o2) {
@@ -1107,7 +1107,7 @@ public class TestKeyBuilder extends TestCase2 {
         if (ret > 0) return 1;
         return 0;
       }
-    };
+    }
     //        final float[] vals = new float[limit];
     //        final byte[][] keys = new byte[limit][];
     Set<Float> set = new HashSet<Float>(limit);
@@ -1211,7 +1211,7 @@ public class TestKeyBuilder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that we can convert double keys to unsigned byte[]s while preserving the value space
    * order.
    */
@@ -1235,7 +1235,7 @@ public class TestKeyBuilder extends TestCase2 {
         this.val = val;
         this.key = key;
       }
-    };
+    }
     /** imposes ordering based on {@link X#val}. */
     class XComp implements Comparator<X> {
       public int compare(X o1, X o2) {
@@ -1244,7 +1244,7 @@ public class TestKeyBuilder extends TestCase2 {
         if (ret > 0) return 1;
         return 0;
       }
-    };
+    }
     Set<Double> set = new HashSet<Double>(limit);
     final X[] data = new X[limit];
     IKeyBuilder keyBuilder = new KeyBuilder();
@@ -1346,7 +1346,7 @@ public class TestKeyBuilder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link KeyBuilder#encodeByte(byte)} and {@link KeyBuilder#decodeByte(byte)}. The
    * former should have the same behavior as {@link KeyBuilder#appendSigned(byte)} while the latter
    * should reverse the mapping.
@@ -1501,7 +1501,7 @@ public class TestKeyBuilder extends TestCase2 {
     return KeyBuilder.decodeBigDecimal(0 /*offset*/, key);
   }
 
-  /**
+  /*
    * FIXME The 2 byte run length limits the maximum key length for a BigInteger to ~32k. Write unit
    * tests which verify that we detect and throw an IllegalArgumentException rather than just
    * truncating the run length!
@@ -1747,7 +1747,7 @@ public class TestKeyBuilder extends TestCase2 {
     doEncodeDecodeTest(v);
   }
 
-  /**
+  /*
    * Unit test demonstrates that precision is not preserved by the encoding. Thus, ZEROs are encoded
    * in the same manner regardless of their precision (this is true of other values with trailing
    * zeros after the decimal point as well).
@@ -2052,7 +2052,7 @@ public class TestKeyBuilder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test with positive and negative {@link BigInteger}s having a common prefix with varying digits
    * after the prefix.
    */
@@ -2073,7 +2073,7 @@ public class TestKeyBuilder extends TestCase2 {
     doLTTest(m2, m1); // -151 LT -15
   }
 
-  /**
+  /*
    * Test with positive and negative {@link BigDecimal}s having varying digits after the decimals.
    */
   public void test_BigDecimal_negativeSortOrder() {
@@ -2328,7 +2328,7 @@ public class TestKeyBuilder extends TestCase2 {
   //
   //      }
 
-  /**
+  /*
    * Normalize the {@link BigDecimal} by setting the scale such that there are no digits before the
    * decimal point.
    *
@@ -2345,7 +2345,7 @@ public class TestKeyBuilder extends TestCase2 {
     return i.stripTrailingZeros();
   }
 
-  /**
+  /*
    * Dumps out interesting bits of the {@link BigDecimal} state.
    *
    * @return The dump.
@@ -2368,8 +2368,8 @@ public class TestKeyBuilder extends TestCase2 {
     return msg;
   }
   //
-  //    /**
-  //     * Note: must have normalized representation of the BigDecimal to do
+  //    /*
+//     * Note: must have normalized representation of the BigDecimal to do
   //     * equals(). BigDecimal#equals(foo) compares both value and scale, while we
   //     * can only test on value here.
   //     */
@@ -2428,7 +2428,7 @@ public class TestKeyBuilder extends TestCase2 {
     EQ(0),
     GT(1);
 
-    private CompareEnum(final int ret) {
+    CompareEnum(final int ret) {
       this.ret = ret;
     }
 
@@ -2525,7 +2525,7 @@ public class TestKeyBuilder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Utility method converts an application key to a sort key (an unsigned byte[] that imposes the
    * same sort order).
    *

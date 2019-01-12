@@ -56,8 +56,8 @@ import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.sail.SailException;
 
-/**
- * Utility class for exporting the configuration properties and data associated with one or more KBs
+/*
+* Utility class for exporting the configuration properties and data associated with one or more KBs
  * on a {@link Journal}.
  *
  * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=DataMigration">Data
@@ -71,8 +71,8 @@ public class ExportKB {
   /** The connection that will be used to export the data. */
   private final EmbergraphSailConnection conn;
 
-  //    /**
-  //     * The KB to be exported.
+  //    /*
+//     * The KB to be exported.
   //     */
   //    private final AbstractTripleStore kb;
 
@@ -85,13 +85,13 @@ public class ExportKB {
   /** The {@link RDFFormat} which will be used when the data are exported. */
   private final RDFFormat format;
 
-  /**
+  /*
    * When <code>true</code> inferences and axioms will also be exported. Otherwise just the
    * explicitly given (aka told) triples/quads will be exported.
    */
   private final boolean includeInferred;
 
-  /**
+  /*
    * @param conn The connection.
    * @param kbdir The directory into which the exported properties and RDF data will be written.
    * @param format The {@link RDFFormat} to use when exporting the data.
@@ -131,7 +131,7 @@ public class ExportKB {
     this.includeInferred = includeInferred;
   }
 
-  /**
+  /*
    * Munge a name index so that it is suitable for use in a filesystem. In particular, any non-word
    * characters are converted to an underscore character ("_"). This gets rid of all punctuation
    * characters and whitespace in the index name itself, but will not translate unicode characters.
@@ -144,7 +144,7 @@ public class ExportKB {
     return s.replaceAll("[\\W]", "_");
   }
 
-  /**
+  /*
    * Export the properties and data for the KB.
    *
    * @throws IOException
@@ -168,7 +168,7 @@ public class ExportKB {
     }
   }
 
-  /**
+  /*
    * Export the configuration properties for the kb.
    *
    * @throws IOException
@@ -209,7 +209,7 @@ public class ExportKB {
     }
   }
 
-  /**
+  /*
    * Exports all told statements associated with the last commit point for the KB.
    *
    * @throws IOException
@@ -228,8 +228,8 @@ public class ExportKB {
             null /* s */,
             null /* p */,
             null /* o */,
-            includeInferred,
-            new Resource[] {} /* contexts */);
+            includeInferred
+            /* contexts */);
     try {
       final File file = new File(kbdir, "data." + format.getDefaultFileExtension() + ".gz");
       System.out.println("Writing " + file);
@@ -257,7 +257,7 @@ public class ExportKB {
 
   }
 
-  /**
+  /*
    * Return a list of the namespaces for the {@link AbstractTripleStore}s registered against the
    * embergraph instance.
    */
@@ -302,7 +302,7 @@ public class ExportKB {
     return namespaces;
   }
 
-  /**
+  /*
    * Load a {@link Properties} object from a file.
    *
    * @param file The property file.
@@ -359,7 +359,7 @@ public class ExportKB {
     return out;
   }
 
-  /**
+  /*
    * Export one or more KBs from a Journal. The only required argument is the name of the properties
    * file for the Journal. By default all KB instances found on the journal will be exported into
    * the current working directory. Each KB will be written into a subdirectory based on the

@@ -29,8 +29,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.spo.SPORelation;
 
-/**
- * Abstract base class for both transient and persistent {@link ITripleStore} implementations using
+/*
+* Abstract base class for both transient and persistent {@link ITripleStore} implementations using
  * local storage.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -38,7 +38,7 @@ import org.embergraph.rdf.spo.SPORelation;
  */
 public abstract class AbstractLocalTripleStore extends AbstractTripleStore {
 
-  /**
+  /*
    * @param indexManager
    * @param namespace
    * @param timestamp
@@ -50,7 +50,7 @@ public abstract class AbstractLocalTripleStore extends AbstractTripleStore {
     super(indexManager, namespace, timestamp, properties);
   }
 
-  /**
+  /*
    * Reports the bytes written on each of the {@link SPORelation} indices and on each of the {@link
    * LexiconRelation} indices. These performance data are not restart safe. However, they are help
    * by a hard reference from the {@link BTree}, and the {@link BTree} instances for these indices

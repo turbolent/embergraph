@@ -28,8 +28,8 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParser.DatatypeHandling;
 import org.openrdf.rio.helpers.RDFParserBase;
 
-/**
- * Instances of this class may be used to configure options on an {@link RDFParser}. The options all
+/*
+* Instances of this class may be used to configure options on an {@link RDFParser}. The options all
  * have the defaults specified by {@link RDFParserBase}.
  *
  * <p>Note: synchronization on the class instance is used to ensure safe publication of the member
@@ -45,9 +45,9 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
   /** */
   private static final long serialVersionUID = 1L;
 
-  public static interface Options {
+  public interface Options {
 
-    /**
+    /*
      * Optional boolean property may be used to turn on data verification in the RIO parser (default
      * is {@value #DEFAULT_VERIFY_DATA}).
      */
@@ -55,17 +55,17 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
 
     String DEFAULT_VERIFY_DATA = "false";
 
-    /**
+    /*
      * Optional boolean property may be used to set {@link
      * RDFParserBase#setPreserveBNodeIDs(boolean)} (default is {@value
      * #DEFAULT_PRESERVE_BNODE_IDS}).
      */
-    public static final String PRESERVE_BNODE_IDS =
+    String PRESERVE_BNODE_IDS =
         RDFParserOptions.class.getName() + ".preserveBNodeIDs";
 
-    public static final String DEFAULT_PRESERVE_BNODE_IDS = "false";
+    String DEFAULT_PRESERVE_BNODE_IDS = "false";
 
-    /**
+    /*
      * Optional boolean property may be used to set {@link
      * RDFParserBase#setStopAtFirstError(boolean)} (default is {@value
      * #DEFAULT_STOP_AT_FIRST_ERROR}).
@@ -76,7 +76,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     // BasicaParserSettings)
     String DEFAULT_STOP_AT_FIRST_ERROR = "false";
 
-    /**
+    /*
      * Optional boolean property may be used to set {@link
      * RDFParserBase#setDatatypeHandling(DatatypeHandling)} (default is {@value
      * #DEFAULT_DATATYPE_HANDLING})).
@@ -225,7 +225,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     this.verifyData = verifyData;
   }
 
-  /**
+  /*
    * Apply the options to the parser.
    *
    * @param p The parser.
@@ -237,7 +237,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
     p.setVerifyData(verifyData);
   }
 
-  /**
+  /*
    * Utility method applies the options to the {@link RDFParser}.
    *
    * @param opts The options.
@@ -265,8 +265,6 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
 
     if (stopAtFirstError != t.getStopAtFirstError()) return false;
 
-    if (!datatypeHandling.equals(getDatatypeHandling())) return false;
-
-    return true;
+    return datatypeHandling.equals(getDatatypeHandling());
   }
 }

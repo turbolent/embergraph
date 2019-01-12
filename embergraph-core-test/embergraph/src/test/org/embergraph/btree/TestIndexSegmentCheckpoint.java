@@ -30,8 +30,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for {@link IndexSegmentCheckpoint}.
+/*
+* Test suite for {@link IndexSegmentCheckpoint}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -64,7 +64,7 @@ public class TestIndexSegmentCheckpoint extends TestCase {
     assertEquals("size", 421, IndexSegmentCheckpoint.SIZE);
   }
 
-  /**
+  /*
    * Test the ability to create an {@link IndexSegmentCheckpoint} record, write it on a file, and
    * read back the same data from the file. The data for this test are somewhat faked since there
    * are assertions on legal metadata and we can not write arbitrary values into the various fields.

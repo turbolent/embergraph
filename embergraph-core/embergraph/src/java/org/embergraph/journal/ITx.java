@@ -21,21 +21,21 @@ import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.isolation.IsolatedFusedView;
 import org.embergraph.service.ITxState;
 
-/**
- * Interface for transaction state on the client.
+/*
+* Interface for transaction state on the client.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ITx extends ITxState {
 
-  /**
+  /*
    * The constant that SHOULD used as the timestamp for an <em>unisolated</em> read-write operation.
    * The value of this constant is ZERO (0L) -- this value corresponds to <code>
    * Wed Dec 31 19:00:00 EST 1969</code> when interpreted as a {@link Date}.
    */
-  public static final long UNISOLATED = 0L;
+  long UNISOLATED = 0L;
 
-  /**
+  /*
    * A constant that SHOULD used as the timestamp for <em>read-committed</em> (non-transactional
    * dirty reads) operations. The value of this constant is MINUS ONE (-1L) -- this value
    * corresponds to <code>Wed Dec 31 18:59:59 EST 1969</code> when interpreted as a {@link Date}.
@@ -61,12 +61,12 @@ public interface ITx extends ITxState {
    * (and unisolated) operations. For this reason, it is often better to specify "read-consistent"
    * semantics by giving the lastCommitTime for the {@link IIndexStore}.
    */
-  public static final long READ_COMMITTED = -1L;
+  long READ_COMMITTED = -1L;
 
   /** When true, the transaction has an empty write set. */
   boolean isEmptyWriteSet();
 
-  /**
+  /*
    * Return an isolated view onto a named index. The index will be isolated at the same level as
    * this transaction. Changes on the index will be made restart-safe iff the transaction
    * successfully commits. Writes on the returned index will be isolated in an {@link
@@ -87,7 +87,7 @@ public interface ITx extends ITxState {
    */
   ILocalBTreeView getIndex(String name);
 
-  /**
+  /*
    * Return an array of the resource(s) (the named indices) on which the transaction has written
    * (the isolated index(s) that absorbed the writes for the transaction).
    */

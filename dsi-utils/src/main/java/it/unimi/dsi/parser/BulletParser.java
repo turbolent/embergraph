@@ -30,8 +30,8 @@ import it.unimi.dsi.lang.MutableString;
 import it.unimi.dsi.parser.callback.Callback;
 import it.unimi.dsi.util.TextPattern;
 
-/**
- * A fast, lightweight, on-demand (X)HTML parser.
+/*
+* A fast, lightweight, on-demand (X)HTML parser.
  *
  * <p>The bullet parser has been written with two specific goals in mind: web crawling and targeted
  * data extraction from massive web data sets. To be usable in such environments, a parser must obey
@@ -183,7 +183,7 @@ public class BulletParser {
   protected boolean parseTags;
   /** Whether we should parse attributes. */
   protected boolean parseAttributes;
-  /**
+  /*
    * The subset of attributes whose values will be actually parsed (if, of course, {@link
    * #parseAttributes}is true).
    */
@@ -203,7 +203,7 @@ public class BulletParser {
     this(HTMLFactory.INSTANCE);
   }
 
-  /**
+  /*
    * Returns whether this parser will invoke the text handler.
    *
    * @return whether this parser will invoke the text handler.
@@ -213,7 +213,7 @@ public class BulletParser {
     return parseText;
   }
 
-  /**
+  /*
    * Sets the text handler flag.
    *
    * @param parseText the new value.
@@ -224,7 +224,7 @@ public class BulletParser {
     return this;
   }
 
-  /**
+  /*
    * Returns whether this parser will invoke the CDATA-section handler.
    *
    * @return whether this parser will invoke the CDATA-section handler.
@@ -234,7 +234,7 @@ public class BulletParser {
     return parseCDATA;
   }
 
-  /**
+  /*
    * Sets the CDATA-section handler flag.
    *
    * @param parseCDATA the new value.
@@ -245,7 +245,7 @@ public class BulletParser {
     return this;
   }
 
-  /**
+  /*
    * Returns whether this parser will parse tags and invoke element handlers.
    *
    * @return whether this parser will parse tags and invoke element handlers.
@@ -255,7 +255,7 @@ public class BulletParser {
     return parseTags;
   }
 
-  /**
+  /*
    * Sets whether this parser will parse tags and invoke element handlers.
    *
    * @param parseTags the new value.
@@ -266,7 +266,7 @@ public class BulletParser {
     return this;
   }
 
-  /**
+  /*
    * Returns whether this parser will parse attributes.
    *
    * @return whether this parser will parse attributes.
@@ -276,7 +276,7 @@ public class BulletParser {
     return parseAttributes;
   }
 
-  /**
+  /*
    * Sets the attribute parsing flag.
    *
    * @param parseAttributes the new value for the flag.
@@ -287,7 +287,7 @@ public class BulletParser {
     return this;
   }
 
-  /**
+  /*
    * Adds the given attribute to the set of attributes to be parsed.
    *
    * @param attribute an attribute that should be parsed.
@@ -300,7 +300,7 @@ public class BulletParser {
     return this;
   }
 
-  /**
+  /*
    * Sets the callback for this parser, resetting at the same time all parsing flags.
    *
    * @param callback the new callback.
@@ -314,7 +314,7 @@ public class BulletParser {
     return this;
   }
 
-  /**
+  /*
    * Returns the character corresponding to a given entity name.
    *
    * @param name the name of an entity.
@@ -326,7 +326,7 @@ public class BulletParser {
     return e == null ? (char) 0 : e.character;
   }
 
-  /**
+  /*
    * Searches for the end of an entity.
    *
    * <p>This method will search for the end of an entity starting at the given offset (the offset
@@ -398,7 +398,7 @@ public class BulletParser {
     return -1;
   }
 
-  /**
+  /*
    * Replaces entities with the corresponding characters.
    *
    * <p>This method will modify the mutable string <code>s</code> so that all legal occurrences of
@@ -424,7 +424,7 @@ public class BulletParser {
         length = s.replace(i, j, lastEntity).length();
   }
 
-  /**
+  /*
    * Handles markup.
    *
    * @param text the text.
@@ -469,7 +469,7 @@ public class BulletParser {
     return pos;
   }
 
-  /**
+  /*
    * Handles processing instruction, ASP tags etc.
    *
    * @param text the text.
@@ -501,7 +501,7 @@ public class BulletParser {
     return pos;
   }
 
-  /**
+  /*
    * Analyze the text document to extract information.
    *
    * @param text a <code>char</code> array of text to be parsed.
@@ -510,7 +510,7 @@ public class BulletParser {
     parse(text, 0, text.length);
   }
 
-  /**
+  /*
    * Analyze the text document to extract information.
    *
    * @param text a <code>char</code> array of text to be parsed.

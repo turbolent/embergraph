@@ -26,8 +26,8 @@ package org.embergraph.util.concurrent;
 import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.journal.WriteExecutorService;
 
-/**
- * Extended for the {@link WriteExecutorService}.
+/*
+* Extended for the {@link WriteExecutorService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -39,7 +39,7 @@ public class WriteTaskCounters extends TaskCounters {
   /** */
   public WriteTaskCounters() {}
 
-  /**
+  /*
    * Cumulative elapsed time in nanoseconds consumed by tasks while waiting for an resource lock.
    */
   public final AtomicLong lockWaitingNanoTime = new AtomicLong();

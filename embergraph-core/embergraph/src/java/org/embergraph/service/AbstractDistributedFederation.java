@@ -22,8 +22,8 @@ import org.embergraph.io.IStreamSerializer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.IBuffer;
 
-/**
- * Abstract base class for {@link IEmbergraphFederation} implementations where the services are
+/*
+* Abstract base class for {@link IEmbergraphFederation} implementations where the services are
  * distributed using RMI and are running, at least in principle, across more than one host/JVM.
  *
  * @todo Explore a variety of cached and uncached strategies for the metadata index. An uncached
@@ -50,7 +50,7 @@ public abstract class AbstractDistributedFederation<T> extends AbstractScaleOutF
     return true;
   }
 
-  /**
+  /*
    * Convenience method to remove linkage for embergraph-jini
    *
    * <p>BLZG-1370
@@ -67,7 +67,7 @@ public abstract class AbstractDistributedFederation<T> extends AbstractScaleOutF
     return true;
   }
 
-  /**
+  /*
    * Return a proxy object for an {@link IAsynchronousIterator} suiteable for use in an RMI
    * environment.
    *
@@ -84,7 +84,7 @@ public abstract class AbstractDistributedFederation<T> extends AbstractScaleOutF
   public abstract <E> IAsynchronousIterator<E> getProxy(
       IAsynchronousIterator<E> src, IStreamSerializer<E> serializer, int capacity);
 
-  /**
+  /*
    * Return a proxy object for a {@link Future} suitable for use in an RMI environment.
    *
    * @param future The future.
@@ -92,7 +92,7 @@ public abstract class AbstractDistributedFederation<T> extends AbstractScaleOutF
    */
   public abstract <E> Future<E> getProxy(Future<E> future);
 
-  /**
+  /*
    * Return a proxy object for an {@link IBuffer} suitable for use in an RMI environment.
    *
    * @param buffer The future.
@@ -100,7 +100,7 @@ public abstract class AbstractDistributedFederation<T> extends AbstractScaleOutF
    */
   public abstract <E> IBuffer<E> getProxy(final IBuffer<E> buffer);
 
-  /**
+  /*
    * Return a proxy for an object.
    *
    * @param obj The object.

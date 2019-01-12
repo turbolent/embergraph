@@ -145,8 +145,8 @@ public class TestOWLSkin extends LocalGOMTestCase {
     OWLSkins.register();
   }
 
-  //	    /**
-  //     * Utility to load n3 statements from a resource
+  //	    /*
+//     * Utility to load n3 statements from a resource
   //     */
   //    private void load(final URL data, final RDFFormat format)
   //            throws IOException, RDFParseException, RepositoryException {

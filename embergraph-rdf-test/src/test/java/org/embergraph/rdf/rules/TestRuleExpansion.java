@@ -61,8 +61,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 
-/**
- * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
+/*
+* @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestRuleExpansion extends AbstractInferenceEngineTestCase {
@@ -77,7 +77,7 @@ public class TestRuleExpansion extends AbstractInferenceEngineTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test the various access paths for backchaining the property collection normally done through
    * owl:sameAs {2,3}.
    */
@@ -368,7 +368,7 @@ public class TestRuleExpansion extends AbstractInferenceEngineTestCase {
     final IJoinNexus joinNexus = joinNexusFactory.newInstance(db.getIndexManager());
     final IEvaluationPlan plan = planFactory.newPlan(joinNexus, rule);
     StringBuilder sb = new StringBuilder();
-    int order[] = plan.getOrder();
+    int[] order = plan.getOrder();
     for (int i = 0; i < order.length; i++) {
       sb.append(order[i]);
       if (i < order.length - 1) {

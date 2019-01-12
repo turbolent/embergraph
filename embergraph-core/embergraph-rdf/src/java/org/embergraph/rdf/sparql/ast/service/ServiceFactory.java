@@ -29,13 +29,13 @@ import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 /** Factory for creating objects which can talk to SPARQL service end points. */
 public interface ServiceFactory {
 
-  /**
+  /*
    * Return options for the service end point. Depending on the implementation, these options MAY be
    * configurable.
    */
   IServiceOptions getServiceOptions();
 
-  /**
+  /*
    * Create a service invocation object.
    *
    * @param params The pararameters, which are encapsulated by this interface.
@@ -43,21 +43,21 @@ public interface ServiceFactory {
    */
   ServiceCall<?> create(ServiceCallCreateParams params);
 
-  /**
+  /*
    * Returns, for the given service node, the variables that must be bound prior to start executing
    * the service. This information is important to reason about the position where to place the
    * service within the execution proccess.
    *
    * <p>See {@link IVariableBindingRequirements#getRequiredBound(StaticAnalysis)}.
    */
-  public Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode);
+  Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode);
 
-  /**
+  /*
    * Returns, for the given service node, the variables that are desired to be bound prior to start
    * executing the service. This information is important to reason about the position where to
    * place the service within the execution proccess.
    *
    * <p>See {@link IVariableBindingRequirements#getDesiredBound(StaticAnalysis)}.
    */
-  public Set<IVariable<?>> getDesiredBound(final ServiceNode serviceNode);
+  Set<IVariable<?>> getDesiredBound(final ServiceNode serviceNode);
 }

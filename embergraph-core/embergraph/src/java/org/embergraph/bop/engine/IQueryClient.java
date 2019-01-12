@@ -7,13 +7,13 @@ import org.embergraph.bop.PipelineOp;
 /** Interface for a client executing queries (the query controller). */
 public interface IQueryClient extends IQueryPeer {
 
-  /**
+  /*
    * Return the set of queries which are running as of the moment when the request was processed.
    * Queries reported in the returned array may terminate at any time.
    */
   UUID[] getRunningQueries() throws RemoteException;
 
-  /**
+  /*
    * Return the query.
    *
    * @param queryId The query identifier.
@@ -22,13 +22,13 @@ public interface IQueryClient extends IQueryPeer {
    */
   PipelineOp getQuery(UUID queryId) throws RemoteException;
 
-  /**
+  /*
    * Notify the client that execution has started for some query, operator, node, and index
    * partition.
    */
   void startOp(IStartOpMessage msg) throws RemoteException;
 
-  /**
+  /*
    * Notify the client that execution has halted for some query, operator, node, shard, and source
    * binding set chunk(s). If execution halted abnormally, then the cause is sent as well.
    */

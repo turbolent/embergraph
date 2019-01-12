@@ -23,8 +23,8 @@ package org.embergraph.rdf.lexicon;
 
 import org.embergraph.bop.IPredicate;
 
-/**
- * Type safe enumeration of access patterns for the {@link LexPredicate}.
+/*
+* Type safe enumeration of access patterns for the {@link LexPredicate}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

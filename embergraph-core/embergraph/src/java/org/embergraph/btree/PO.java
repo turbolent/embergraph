@@ -22,8 +22,8 @@ package org.embergraph.btree;
 
 import org.embergraph.btree.data.IAbstractNodeData;
 
-/**
- * A persistent object.
+/*
+* A persistent object.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -36,7 +36,7 @@ public abstract class PO implements IIdentityAccess, IDirty {
   /** True iff the object is deleted. */
   protected transient boolean deleted = false;
 
-  /**
+  /*
    * @todo Historically, a mutable node was always non-persistent. With the introduction of coding
    *     of nodes and leaves for transient B+Trees on eviction from the write retention queue, those
    *     nodes and leaves become read-only when they are coded without becoming persistent. While
@@ -68,7 +68,7 @@ public abstract class PO implements IIdentityAccess, IDirty {
     return identity;
   }
 
-  /**
+  /*
    * Used by the store to set the persistent identity.
    *
    * <p>Note: This method should not be public.
@@ -97,7 +97,7 @@ public abstract class PO implements IIdentityAccess, IDirty {
     this.identity = key;
   }
 
-  /**
+  /*
    * New objects are considered to be dirty. When an object is deserialized from the store the dirty
    * flag MUST be explicitly cleared.
    */
@@ -113,7 +113,7 @@ public abstract class PO implements IIdentityAccess, IDirty {
     this.dirty = dirty;
   }
 
-  /**
+  /*
    * Extends the basic behavior to display the persistent identity of the object iff the object is
    * persistent and to mark objects that have been deleted.
    */
@@ -122,7 +122,7 @@ public abstract class PO implements IIdentityAccess, IDirty {
     return toShortString();
   }
 
-  /**
+  /*
    * Returns a short representation of the class, identity (if assigned), the object instance, and
    * whether or not the {@link PO} is deleted.
    */
@@ -149,7 +149,7 @@ public abstract class PO implements IIdentityAccess, IDirty {
     }
   }
 
-  /**
+  /*
    * Returns a string that may be used to indent a dump of the nodes in the tree.
    *
    * @param height The height.

@@ -29,8 +29,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.util.BytesUtil;
 import org.openrdf.model.Literal;
 
-/**
- * Internally used IV representing a mocked value. The IV contains a delegate, which typically would
+/*
+* Internally used IV representing a mocked value. The IV contains a delegate, which typically would
  * be something like a fully inlined URI iv (or a fully inlined literal/blank node, respectively).
  * It is just a wrapper to indicate that the delegate is to be translated back into a mocked value.
  *
@@ -48,7 +48,7 @@ public class MockedValueIV extends AbstractLiteralIV<EmbergraphLiteral, IV<?, ?>
   /** The delegate IV */
   private final IV<?, ?> delegate;
 
-  /**
+  /*
    * Only used for compareTo() and byteLength(). Encoding takes place in AbstractIV, decoding in
    * IVUtility.
    */
@@ -57,7 +57,7 @@ public class MockedValueIV extends AbstractLiteralIV<EmbergraphLiteral, IV<?, ?>
   /** Cached hash code. */
   private transient int hashCode = 0;
 
-  /**
+  /*
    * Construct an instance using the delegate.
    *
    * @param delegate the delegate

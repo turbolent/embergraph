@@ -52,8 +52,8 @@ import org.embergraph.relation.rule.eval.IJoinNexusFactory;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * Test for {@link ISlice} handling in native {@link IRule} execution. Slice for joins is handled by
+/*
+* Test for {@link ISlice} handling in native {@link IRule} execution. Slice for joins is handled by
  * the query plan and its evaluation. Slice for an {@link IAccessPath} scan is handled using the
  * appropriate iterator and is not tested by this class.
  *
@@ -70,7 +70,7 @@ public class TestSlice extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Tests various slices on an {@link IRule} using a single JOIN with 3 solutions.
    *
    * @throws Exception
@@ -254,7 +254,7 @@ public class TestSlice extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Creates a new rule instance for {@link #test_slice()}.
    *
    * @param store
@@ -289,7 +289,7 @@ public class TestSlice extends AbstractRuleTestCase {
         );
   }
 
-  /**
+  /*
    * Verifies the the iterator visits {@link ISolution}s have the expected {@link IBindingSet}s in
    * the expected order.
    *

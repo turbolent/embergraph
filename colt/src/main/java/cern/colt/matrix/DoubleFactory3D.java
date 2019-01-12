@@ -10,8 +10,10 @@ package cern.colt.matrix;
 
 import cern.colt.matrix.impl.DenseDoubleMatrix3D;
 import cern.colt.matrix.impl.SparseDoubleMatrix3D;
-/**
- * Factory for convenient construction of 3-d matrices holding <tt>double</tt> cells. Use idioms
+import cern.jet.math.Functions;
+
+/*
+* Factory for convenient construction of 3-d matrices holding <tt>double</tt> cells. Use idioms
  * like <tt>DoubleFactory3D.dense.make(4,4,4)</tt> to construct dense matrices,
  * <tt>DoubleFactory3D.sparse.make(4,4,4)</tt> to construct sparse matrices.
  *
@@ -45,7 +47,7 @@ public class DoubleFactory3D extends cern.colt.PersistentObject {
   public DoubleMatrix3D ascending(int slices, int rows, int columns) {
     cern.jet.math.Functions F = cern.jet.math.Functions.functions;
     return descending(slices, rows, columns)
-        .assign(F.chain(F.neg, F.minus(slices * rows * columns)));
+        .assign(Functions.chain(Functions.neg, Functions.minus(slices * rows * columns)));
   }
   /** Constructs a matrix with cells having descending values. For debugging purposes. */
   public DoubleMatrix3D descending(int slices, int rows, int columns) {
@@ -60,7 +62,7 @@ public class DoubleFactory3D extends cern.colt.PersistentObject {
     }
     return matrix;
   }
-  /**
+  /*
    * Constructs a matrix with the given cell values. <tt>values</tt> is required to have the form
    * <tt>values[slice][row][column]</tt> and have exactly the same number of slices, rows and
    * columns as the receiver.

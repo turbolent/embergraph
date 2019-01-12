@@ -39,8 +39,8 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Test suite for {@link AbstractQuery#setBinding(String, Value)}
+/*
+* Test suite for {@link AbstractQuery#setBinding(String, Value)}
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -80,7 +80,7 @@ public class TestSetBinding extends ProxyEmbergraphSailTestCase {
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
 
       try {
 
@@ -99,7 +99,7 @@ public class TestSetBinding extends ProxyEmbergraphSailTestCase {
 
         if (log.isInfoEnabled()) log.info("Loading data");
 
-        cxn.add(new StringReader(data), "", RDFFormat.TURTLE, new Resource[0]);
+        cxn.add(new StringReader(data), "", RDFFormat.TURTLE);
 
         cxn.commit();
 

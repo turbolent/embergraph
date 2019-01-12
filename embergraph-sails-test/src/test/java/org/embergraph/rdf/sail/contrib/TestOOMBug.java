@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.sail.ProxyEmbergraphSailTestCase;
 
-/**
- * Unit test template for use in submission of bugs.
+/*
+* Unit test template for use in submission of bugs.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -57,7 +57,7 @@ public class TestOOMBug extends ProxyEmbergraphSailTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
    * JOURNAL FILE.
    */

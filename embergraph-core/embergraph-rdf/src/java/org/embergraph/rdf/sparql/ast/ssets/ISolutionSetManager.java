@@ -26,8 +26,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
 import org.embergraph.rdf.spo.ISPO;
 
-/**
- * A management interface for named solution sets.
+/*
+* A management interface for named solution sets.
  *
  * <p>Note: This is an internal interface that may evolve substantially.
  *
@@ -46,7 +46,7 @@ public interface ISolutionSetManager {
   /** Shutdown. */
   void close();
 
-  /**
+  /*
    * Clear the specified named solution set.
    *
    * @param solutionSet The name of the solution set.
@@ -57,7 +57,7 @@ public interface ISolutionSetManager {
   /** Clear all named solution sets. */
   void clearAllSolutions();
 
-  /**
+  /*
    * Create a named solution set.
    *
    * @param solutionSet The name of the solution set.
@@ -66,7 +66,7 @@ public interface ISolutionSetManager {
    */
   void createSolutions(String solutionSet, ISPO[] params);
 
-  /**
+  /*
    * Save the solutions into a named solution set. If there is an existing solution set having that
    * name, then its solutions will be replaced by the new solutions (replace not append).
    *
@@ -75,7 +75,7 @@ public interface ISolutionSetManager {
    */
   void putSolutions(String solutionSet, ICloseableIterator<IBindingSet[]> src);
 
-  /**
+  /*
    * Read the solutions from a named solution set.
    *
    * @param solutionSet The name of the solution set.
@@ -84,7 +84,7 @@ public interface ISolutionSetManager {
    */
   ICloseableIterator<IBindingSet[]> getSolutions(String solutionSet);
 
-  /**
+  /*
    * Return computed statistics for a named solution set.
    *
    * @param solutionSet The name of the solution set.
@@ -92,7 +92,7 @@ public interface ISolutionSetManager {
    */
   ISolutionSetStats getSolutionSetStats(String solutionSet);
 
-  /**
+  /*
    * Return <code>true</code> iff a named solution set exists.
    *
    * @param solutionSet The name of the solution set.

@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
-/**
- * Implementation that will not re-open the {@link FileChannel} once it has been closed. This is
+/*
+* Implementation that will not re-open the {@link FileChannel} once it has been closed. This is
  * useful for simple things where you still want the reliability guarantees of {@link
  * FileChannelUtility}.
  *

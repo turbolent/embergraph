@@ -4,8 +4,8 @@ package org.embergraph.bop;
 import junit.framework.TestCase2;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 
-/**
- * Unit tests for {@link Bind}.
+/*
+* Unit tests for {@link Bind}.
  *
  * @author thompsonbry
  * @todo Write a test where the {@link IValueExpression} given to bind is more complex than an

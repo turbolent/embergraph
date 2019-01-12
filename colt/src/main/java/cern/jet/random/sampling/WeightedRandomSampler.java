@@ -11,8 +11,8 @@ package cern.jet.random.sampling;
 import cern.colt.list.BooleanArrayList;
 import cern.jet.random.Uniform;
 import cern.jet.random.engine.RandomEngine;
-/**
- * Conveniently computes a stable subsequence of elements from a given input sequence; Picks
+/*
+* Conveniently computes a stable subsequence of elements from a given input sequence; Picks
  * (samples) exactly one random element from successive blocks of <tt>weight</tt> input elements
  * each. For example, if weight==2 (a block is 2 elements), and the input is 5*2=10 elements long,
  * then picks 5 random elements from the 10 elements such that one element is randomly picked from
@@ -37,7 +37,7 @@ public class WeightedRandomSampler extends cern.colt.PersistentObject {
   public WeightedRandomSampler() {
     this(1, null);
   }
-  /**
+  /*
    * Chooses exactly one random element from successive blocks of <tt>weight</tt> input elements
    * each. For example, if weight==2, and the input is 5*2=10 elements long, then chooses 5 random
    * elements from the 10 elements such that one is chosen from the first block, one from the
@@ -60,7 +60,7 @@ public class WeightedRandomSampler extends cern.colt.PersistentObject {
     copy.generator = (Uniform) this.generator.clone();
     return copy;
   }
-  /**
+  /*
    * Not yet commented.
    *
    * @param weight int
@@ -68,7 +68,7 @@ public class WeightedRandomSampler extends cern.colt.PersistentObject {
   public int getWeight() {
     return this.weight;
   }
-  /**
+  /*
    * Chooses exactly one random element from successive blocks of <tt>weight</tt> input elements
    * each. For example, if weight==2, and the input is 5*2=10 elements long, then chooses 5 random
    * elements from the 10 elements such that one is chosen from the first block, one from the
@@ -100,7 +100,7 @@ public class WeightedRandomSampler extends cern.colt.PersistentObject {
 
     return true;
   }
-  /**
+  /*
    * Not yet commented.
    *
    * @param weight int
@@ -124,7 +124,7 @@ public class WeightedRandomSampler extends cern.colt.PersistentObject {
 
     System.out.println("Sample = " + sample);
   }
-  /**
+  /*
    * Chooses exactly one random element from successive blocks of <tt>weight</tt> input elements
    * each. For example, if weight==2, and the input is 5*2=10 elements long, then chooses 5 random
    * elements from the 10 elements such that one is chosen from the first block, one from the

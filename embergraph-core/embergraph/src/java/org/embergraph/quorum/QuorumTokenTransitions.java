@@ -20,8 +20,8 @@ package org.embergraph.quorum;
 import org.embergraph.ha.HAGlue;
 import org.embergraph.ha.QuorumService;
 
-/**
- * Wraps the token/join transitions in a testable manner.
+/*
+* Wraps the token/join transitions in a testable manner.
  *
  * <p>Both enables JUnit testing and also provides context to represent better abstractions on the
  * quorum/service states.
@@ -193,7 +193,7 @@ public class QuorumTokenTransitions {
       throw new AssertionError("didMeet && didJoinMetQuorum");
     }
 
-    /**
+    /*
      * This is a bit odd, it is okay, but probably didLeaveMetQuorum will only be true iff isJoined
      */
     // if (didBreak && didLeaveMetQuorum) {

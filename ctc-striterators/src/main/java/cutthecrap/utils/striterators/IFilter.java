@@ -18,8 +18,8 @@ package cutthecrap.utils.striterators;
 import java.io.Serializable;
 import java.util.Iterator;
 
-/**
- * Provides the hook interface that allows use by Striterators
+/*
+* Provides the hook interface that allows use by Striterators
  *
  * <p>TODO The {@link Striterator} protocol does not support a close() method for {@link Filter}s.
  * That method should be invoked by an {@link ICloseableIterator}.
@@ -28,7 +28,7 @@ import java.util.Iterator;
  *     close() protocol for Ifilter </a>
  */
 public interface IFilter extends Serializable, IPropertySet {
-  /**
+  /*
    * The filter method is provided to allow the creation of the filtering iterator.
    *
    * <p>Any implementation should follow the following pattern:
@@ -42,5 +42,5 @@ public interface IFilter extends Serializable, IPropertySet {
    * This pattern makes the source iterator, the evaluation context, and the {@link IPropertySet}
    * annotations visible to the runtime striterator implementation.
    */
-  public abstract Iterator filter(Iterator src, Object context);
+  Iterator filter(Iterator src, Object context);
 }

@@ -48,8 +48,8 @@ import org.embergraph.rdf.model.EmbergraphValueSerializer;
 import org.embergraph.util.BytesUtil;
 import org.openrdf.model.Value;
 
-/**
- * This class provides fast, efficient serialization for solution sets. Each solution must be an
+/*
+* This class provides fast, efficient serialization for solution sets. Each solution must be an
  * {@link IBindingSet}s whose bound values are {@link IV}s and their cached {@link
  * EmbergraphValue}s. The {@link IV}s and the cached {@link EmbergraphValue}s are efficiently and
  * compactly represented in format suitable for chunked messages or streaming. Decode is a fast
@@ -148,7 +148,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
 
   private static final Logger log = Logger.getLogger(IVSolutionSetEncoder.class);
 
-  /**
+  /*
    * The schema provides the order in which the {@link IV}[] for solutions stored in the hash index
    * are encoded in the {@link HTree}. {@link IV} s which are not bound are modeled by a {@link
    * TermId#NullIV}.
@@ -159,7 +159,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
    */
   private final LinkedHashSet<IVariable<?>> schema;
 
-  /**
+  /*
    * Used to store the {@link IVCache} associations. This allows us to elide {@link
    * EmbergraphValue}s which have already been written by this encoder instance.
    */
@@ -187,7 +187,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
    * Set when the first solution having a bound value is processed.
    */
 
-  /**
+  /*
    * The namespace of the lexicon relation. This is discovered from the first {@link IVCache}
    * association and written out into the stream at that point. If there are no {@link IVCache}
    * associations then it is never set.
@@ -227,7 +227,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
     this.tmp = new ByteArrayBuffer();
   }
 
-  /**
+  /*
    * Encode the solution on the stream.
    *
    * @param out The stream.
@@ -244,7 +244,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
     return encodeSolution(bset, true /* updateCache */);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO We typically use a {@link ListBindingSet}. If the {@link IBindingSet} is large enough,
@@ -333,8 +333,8 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
             discoveredNamespace = true;
           }
           if (!iv.isNullIV()) {
-            /*
-             * We can not lookup Null IVs in the cache on the
+          /*
+       * We can not lookup Null IVs in the cache on the
              * decoder side since ties are broken by comparing the
              * IVCache association, which is what we are trying to
              * resolve. Therefore we always inline the IVCache
@@ -493,7 +493,7 @@ public class IVSolutionSetEncoder implements IBindingSetEncoder {
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Always returns <code>true</code>.

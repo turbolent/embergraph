@@ -49,8 +49,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
-/**
- * This compulsory AST transformation (not an optional optimizer!) enforces the correct treatment of
+/*
+* This compulsory AST transformation (not an optional optimizer!) enforces the correct treatment of
  * aggregates in ORDER BY clauses, according to the SPARQL semantic, under the assumption that
  * {@link org.embergraph.bop.solutions.MemorySortOp} does not have to deal with aggregates. In a
  * nutshell, this is done by introducing aliases for the aggregate expressions and thus pushing the
@@ -189,7 +189,7 @@ public class ASTOrderByAggregateFlatteningOptimizer implements IASTOptimizer {
     queryBase.setOrderBy(newOrderBy);
   } // doSelectQuery(final AST2BOpContext context, final QueryBase queryBase)
 
-  /**
+  /*
    * @param context
    * @param group possibly null, eg, when the enclosing query is a DESCRIBE
    */
@@ -204,7 +204,7 @@ public class ASTOrderByAggregateFlatteningOptimizer implements IASTOptimizer {
 
     for (int i = 0; i < arity; i++) {
 
-      final BOp child = (BOp) group.get(i);
+      final BOp child = group.get(i);
 
       if (child instanceof GraphPatternGroup<?>) {
 

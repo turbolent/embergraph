@@ -52,8 +52,8 @@ import org.embergraph.relation.rule.eval.pipeline.JoinMasterTask;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * An immutable constraint on the elements visited using an {@link IAccessPath}. The slots in the
+/*
+* An immutable constraint on the elements visited using an {@link IAccessPath}. The slots in the
  * predicate corresponding to variables are named and those names establish binding patterns access
  * {@link IPredicate}s. Access is provided to slots by ordinal index regardless of whether or not
  * they are named variables.
@@ -64,10 +64,10 @@ import org.embergraph.striterator.IKeyOrder;
 public interface IPredicate<E> extends BOp, Cloneable, Serializable {
 
   /** Interface declaring well known annotations. */
-  public interface Annotations
+  interface Annotations
       extends BOp.Annotations, BufferAnnotations, ILocatableResourceAnnotations {
 
-    /**
+    /*
      * Optional property <em>overrides</em> the {@link IKeyOrder} to use for the access path.
      * Sometimes changing which index is used for a join can change the locality of the join and
      * improve join performance.
@@ -91,7 +91,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
      */
     String KEY_ORDER = IPredicate.class.getName() + ".keyOrder";
 
-    /**
+    /*
      * <code>true</code> iff the predicate has SPARQL optional semantics (default {@value
      * #DEFAULT_OPTIONAL}).
      *
@@ -107,8 +107,8 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
 
     boolean DEFAULT_OPTIONAL = false;
 
-    //        /**
-    //         * Constraints on the elements read from the relation.
+    //        /*
+//         * Constraints on the elements read from the relation.
     //         *
     //         * @deprecated This is being replaced by two classes of filters. One
     //         *             which is always evaluated local to the index and one
@@ -123,13 +123,13 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
     //         */
     //        String CONSTRAINT = "constraint";
 
-    //      /**
-    //      * An optional {@link IConstraint}[] which places restrictions on the
+    //      /*
+//      * An optional {@link IConstraint}[] which places restrictions on the
     //      * legal patterns in the variable bindings.
     //      */
     //     String CONSTRAINTS = PipelineJoin.class.getName() + ".constraints";
 
-    /**
+    /*
      * An optional {@link IFilter} that will be evaluated local to the to the index. When the index
      * is remote, the filter will be sent to the node on which the index resides and evaluated
      * there. This makes it possible to efficiently filter out tuples which are not of interest for
@@ -149,7 +149,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
      */
     String INDEX_LOCAL_FILTER = IPredicate.class.getName() + ".indexLocalFilter";
 
-    /**
+    /*
      * An optional {@link BOpFilterBase} to be applied to the elements of the relation as they are
      * materialized from the index. {@link ITuple}s are automatically resolved into relation
      * "elements" before this filter is applied.
@@ -163,7 +163,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
      */
     String ACCESS_PATH_FILTER = IPredicate.class.getName() + ".accessPathFilter";
 
-    /**
+    /*
      * Access path expander pattern. This allows you to wrap or replace the {@link IAccessPath}.
      *
      * <p>Note: Access path expanders in scale-out are logically consistent when used with a {@link
@@ -186,7 +186,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
      */
     String ACCESS_PATH_EXPANDER = IPredicate.class.getName() + ".accessPathExpander";
 
-    /**
+    /*
      * The partition identifier -or- <code>-1</code> if the predicate does not address a specific
      * shard.
      */
@@ -194,7 +194,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
 
     int DEFAULT_PARTITION_ID = -1;
 
-    /**
+    /*
      * Boolean option determines whether the predicate will use a data service local access path
      * (partitioned index view) or a remote access path (global index view) (default {@value
      * #DEFAULT_REMOTE_ACCESS_PATH}).
@@ -229,7 +229,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
 
     boolean DEFAULT_REMOTE_ACCESS_PATH = true;
 
-    /**
+    /*
      * If the estimated rangeCount for an {@link AccessPath#iterator()} is LTE this threshold then
      * use a fully buffered (synchronous) iterator. Otherwise use an asynchronous iterator whose
      * capacity is governed by {@link #CHUNK_OF_CHUNKS_CAPACITY}.
@@ -239,7 +239,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
     String FULLY_BUFFERED_READ_THRESHOLD =
         IPredicate.class.getName() + ".fullyBufferedReadThreshold";
 
-    /**
+    /*
      * Default for {@link #FULLY_BUFFERED_READ_THRESHOLD}.
      *
      * @todo Experiment with this. It should probably be something close to the branching factor,
@@ -247,7 +247,7 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
      */
     int DEFAULT_FULLY_BUFFERED_READ_THRESHOLD = 100; // trunk=20*Bytes.kilobyte32;
 
-    /**
+    /*
      * Specify the {@link IRangeQuery} flags for the {@link IAccessPath} ( default is {@link
      * IRangeQuery#KEYS}, {@link IRangeQuery#VALS}).
      *
@@ -269,12 +269,12 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
     String FLAGS = IPredicate.class.getName() + ".flags";
 
     /** The default flags will visit the keys and values of the non-deleted tuples. */
-    final int DEFAULT_FLAGS = IRangeQuery.KEYS | IRangeQuery.VALS
+    int DEFAULT_FLAGS = IRangeQuery.KEYS | IRangeQuery.VALS
         //                | IRangeQuery.PARALLEL
         ;
 
-    //		/**
-    //		 * Boolean property whose value is <code>true</code> iff this operator
+    //		/*
+//		 * Boolean property whose value is <code>true</code> iff this operator
     //		 * writes on a database.
     //		 * <p>
     //		 * Most operators operate solely on streams of elements or binding sets.
@@ -292,14 +292,14 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
     //
     //        boolean DEFAULT_MUTATION = false;
 
-    /**
+    /*
      * Note: This annotation is not currently integrated. It is intended to provide a means to
      * constrain the key-range of the predicate based on an allowable value range for some slot in
      * that predicate.
      */
     String RANGE = IPredicate.class.getName() + ".range";
 
-    /**
+    /*
      * Limits the number of elements read from the access path for this predicate when used in a
      * join ({@link HTreeHashJoinOp}, {@link JVMHashJoinOp}, {@link PipelineJoin}). Note that this
      * is limiting INPUT to a join, it says nothing about the output from a join.
@@ -307,10 +307,10 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
     String CUTOFF_LIMIT = IPredicate.class.getName() + ".cutoffLimit";
 
     /** Deault is to not cut off the join. */
-    final long DEFAULT_CUTOFF_LIMIT = Long.MAX_VALUE;
+    long DEFAULT_CUTOFF_LIMIT = Long.MAX_VALUE;
   }
 
-  /**
+  /*
    * Resource identifier (aka namespace) identifies the {@link IRelation} associated with this
    * {@link IPredicate}.
    *
@@ -318,9 +318,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    * @see Annotations#RELATION_NAME
    * @todo Rename as getRelationName()
    */
-  public String getOnlyRelationName();
+  String getOnlyRelationName();
 
-  /**
+  /*
    * Return the ith element of the relation view. The view is an ordered array of resource
    * identifiers that describes the view for the relation.
    *
@@ -328,16 +328,16 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    * @deprecated Unions of predicates must be handled explicitly as a union of pipeline operators
    *     reading against the different predicate.
    */
-  public String getRelationName(int index);
+  String getRelationName(int index);
 
-  /**
+  /*
    * The #of elements in the relation view.
    *
    * @deprecated per {@link #getRelationName(int)}.
    */
-  public int getRelationCount();
+  int getRelationCount();
 
-  /**
+  /*
    * The index partition identifier and <code>-1</code> if no partition identifier was specified.
    *
    * @return The index partition identifier -or- <code>-1</code> if the predicate is not locked to a
@@ -347,9 +347,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    * @see AccessPath
    * @see JoinMasterTask
    */
-  public int getPartitionId();
+  int getPartitionId();
 
-  /**
+  /*
    * Sets the index partition identifier constraint.
    *
    * @param partitionId The index partition identifier.
@@ -358,9 +358,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    * @throws IllegalStateException if the index partition identifier was already specified.
    * @see Annotations#PARTITION_ID
    */
-  public IPredicate<E> setPartitionId(int partitionId);
+  IPredicate<E> setPartitionId(int partitionId);
 
-  /**
+  /*
    * <code>true</code> iff the predicate is optional when evaluated as the right-hand side of a
    * join. An optional predicate will match once after all matches in the data have been exhausted.
    * By default, the match will NOT bind any variables that have been determined to be bound by the
@@ -372,9 +372,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    *
    * @return <code>true</code> iff this predicate is optional when evaluating a JOIN.
    */
-  public boolean isOptional();
+  boolean isOptional();
 
-  /**
+  /*
    * Returns the object that may be used to selectively override the evaluation of the predicate.
    *
    * @return The {@link IAccessPathExpander}.
@@ -382,10 +382,10 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    * @todo Replace with {@link IAccessPathExpander#getAccessPath(IAccessPath)} , which is the only
    *     method declared by {@link IAccessPathExpander}?
    */
-  public IAccessPathExpander<E> getAccessPathExpander();
+  IAccessPathExpander<E> getAccessPathExpander();
 
-  //    /**
-  //     * An optional constraint on the visitable elements.
+  //    /*
+//     * An optional constraint on the visitable elements.
   //     *
   //     * @see Annotations#CONSTRAINT
   //     *
@@ -397,8 +397,8 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
   //     */
   //    public IElementFilter<E> getConstraint();
 
-  //    /**
-  //     * Return the optional {@link IConstraint}[] to be applied by a join which
+  //    /*
+//     * Return the optional {@link IConstraint}[] to be applied by a join which
   //     * evaluates this {@link IPredicate}.
   //     * <p>
   //     * Note: The {@link Annotations#CONSTRAINTS} are annotated on the
@@ -413,32 +413,32 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
   //     */
   //    public IConstraint[] constraints();
 
-  /**
+  /*
    * Return the optional filter to be evaluated local to the index.
    *
    * @see Annotations#INDEX_LOCAL_FILTER
    */
-  public IFilter getIndexLocalFilter();
+  IFilter getIndexLocalFilter();
 
-  /**
+  /*
    * Return the optional filter to be evaluated once tuples have been converted into relation
    * elements by the access path (local to the caller).
    *
    * @see Annotations#ACCESS_PATH_FILTER
    */
-  public IFilter getAccessPathFilter();
+  IFilter getAccessPathFilter();
 
-  /**
+  /*
    * Return the {@link IKeyOrder} override for this {@link IPredicate} by the query optimizer.
    *
    * @return The assigned {@link IKeyOrder} or <code>null</code> if the {@link IKeyOrder} was not
    *     overridden.
    * @see Annotations#KEY_ORDER
    */
-  public IKeyOrder<E> getKeyOrder();
+  IKeyOrder<E> getKeyOrder();
 
-  //    /**
-  //     * Set the {@link IKeyOrder} annotation on the {@link IPredicate}, returning
+  //    /*
+//     * Set the {@link IKeyOrder} annotation on the {@link IPredicate}, returning
   //     * a new {@link IPredicate} in which the annotation takes on the given
   //     * binding.
   //     *
@@ -451,35 +451,35 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
   //     */
   //    public IPredicate<E> setKeyOrder(final IKeyOrder<E> keyOrder);
 
-  /**
+  /*
    * Figure out if all positions in the predicate which are required to form the key for this access
    * path are bound in the predicate.
    */
-  public boolean isFullyBound(IKeyOrder<E> keyOrder);
+  boolean isFullyBound(IKeyOrder<E> keyOrder);
 
-  /**
+  /*
    * @deprecated This is only used in a few places, which should probably use {@link
    *     BOpUtility#getArgumentVariableCount(BOp)} instead.
    */
-  public int getVariableCount();
+  int getVariableCount();
 
-  /**
+  /*
    * The #of arguments in the predicate required for the specified {@link IKeyOrder} which are
    * unbound.
    *
    * @param keyOrder The key order.
    * @return The #of unbound arguments for that {@link IKeyOrder}.
    */
-  public int getVariableCount(IKeyOrder<E> keyOrder);
+  int getVariableCount(IKeyOrder<E> keyOrder);
 
-  /**
+  /*
    * Return <code>true</code> if this is a remote access path.
    *
    * @see Annotations#REMOTE_ACCESS_PATH
    */
-  public boolean isRemoteAccessPath();
+  boolean isRemoteAccessPath();
 
-  /**
+  /*
    * Return the variable or constant at the specified index.
    *
    * @param index The index.
@@ -491,9 +491,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    * Note: the return value can not be parameterized without breaking code.
    */
   @SuppressWarnings("rawtypes")
-  public IVariableOrConstant get(int index);
+  IVariableOrConstant get(int index);
 
-  /**
+  /*
    * Return the asBound value at the specified index for the given element. This method does not
    * consider the bindings of the predicate instance.
    *
@@ -509,9 +509,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    *     IPredicate} implementation or for the given element type.
    * @deprecated by {@link IElement#get(int)} which does exactly what this method is trying to do.
    */
-  public IConstant<?> get(E e, int index);
+  IConstant<?> get(E e, int index);
 
-  /**
+  /*
    * Return a new instance in which all occurrences of the given variable have been replaced by the
    * specified constant.
    *
@@ -523,9 +523,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    *     replaced by the constant.
    * @throws IllegalArgumentException if either argument is <code>null</code>.
    */
-  public Predicate<E> asBound(final IVariable<?> var, final IConstant<?> val);
+  Predicate<E> asBound(final IVariable<?> var, final IConstant<?> val);
 
-  /**
+  /*
    * Return a new instance in which all occurrences of the variable appearing in the binding set
    * have been replaced by their bound values.
    *
@@ -536,9 +536,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    *     not be unified with the {@link IBindingSet}.
    * @see #815 (RDR query does too much work)
    */
-  public IPredicate<E> asBound(IBindingSet bindingSet);
+  IPredicate<E> asBound(IBindingSet bindingSet);
 
-  /**
+  /*
    * Extract the as bound value from the predicate. When the predicate is not
    * bound at that index, the value of the variable is taken from the binding
    * set.
@@ -557,9 +557,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    * @throws IllegalArgumentException
    *             if the <i>bindingSet</i> is <code>null</code>.
    */
-  public Object asBound(int index, IBindingSet bindingSet);
+  Object asBound(int index, IBindingSet bindingSet);
 
-  /**
+  /*
    * A copy of this {@link IPredicate} in which the <i>relationName</i>(s) replace the existing set
    * of relation name(s).
    *
@@ -570,19 +570,19 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    * @deprecated This will be modified to use a scalar relation name per {@link
    *     #getOnlyRelationName()}.
    */
-  public IPredicate<E> setRelationName(String[] relationName);
+  IPredicate<E> setRelationName(String[] relationName);
 
   /** Representation of the predicate without variable bindings. */
-  public String toString();
+  String toString();
 
-  /**
+  /*
    * Representation of the predicate with variable bindings.
    *
    * @param bindingSet The variable bindings
    */
-  public String toString(IBindingSet bindingSet);
+  String toString(IBindingSet bindingSet);
 
-  /**
+  /*
    * Compares the bindings of two predicates for equality.
    *
    * @param other Another predicate.
@@ -590,9 +590,9 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    *     when both predicates have a variable at a given index, the names of the variables must be
    *     the same.
    */
-  public boolean equals(Object other);
+  boolean equals(Object other);
 
-  /**
+  /*
    * The hash code is defined as
    *
    * <pre>
@@ -604,32 +604,32 @@ public interface IPredicate<E> extends BOp, Cloneable, Serializable {
    *
    * <p>Note: This is similar to how {@link String#hashCode()} is defined.
    */
-  public int hashCode();
+  int hashCode();
 
-  /**
+  /*
    * Sets the {@link org.embergraph.bop.BOp.Annotations#BOP_ID} annotation.
    *
    * @param bopId The bop id.
    * @return The newly annotated {@link IPredicate}.
    */
-  public IPredicate<E> setBOpId(int bopId);
+  IPredicate<E> setBOpId(int bopId);
 
-  /**
+  /*
    * Return a copy of this predicate with a different {@link IVariableOrConstant} for the arg
    * specified by the supplied index parameter.
    */
   @SuppressWarnings("rawtypes")
-  public IPredicate<E> setArg(int index, IVariableOrConstant arg);
+  IPredicate<E> setArg(int index, IVariableOrConstant arg);
 
-  //	/**
-  //	 * Return <code>true</code> iff this operator is an access path which writes
+  //	/*
+//	 * Return <code>true</code> iff this operator is an access path which writes
   //	 * on the database.
   //	 *
   //	 * @see Annotations#MUTATION
   //	 */
   //	boolean isMutation();
 
-  /**
+  /*
    * The timestamp or transaction identifier on which the operator will read or write.
    *
    * @see Annotations#TIMESTAMP

@@ -28,8 +28,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.embergraph.counters.render.XHTMLRenderer;
 
-/**
- * Utility class to interpret URL query parameters as a time range. Some examples of supported
+/*
+* Utility class to interpret URL query parameters as a time range. Some examples of supported
  * expressions include:
  *
  * <dl>
@@ -70,7 +70,7 @@ import org.embergraph.counters.render.XHTMLRenderer;
  */
 public class TimeRange {
 
-  /**
+  /*
    * @todo <code>true</code> iff the adjusted time is {@link #dur} {@link #unit}s after some
    *     (unspecified) reference time; <code>false</code> iff the adjusted time is {@link #dur}
    *     {@link #unit}s before some (unspecified) reference time; and <code>null</code> if {@link
@@ -84,7 +84,7 @@ public class TimeRange {
   /** The duration in the specified units. */
   public final long dur;
 
-  /**
+  /*
    * @todo Return the adjusted timestamp. This is {@link #dur} unless {@link #relative} is <code>
    *     true</code> in which case it is the given timestamp <i>minus</i> {@link #dur}.
    * @param ts A reference timestamp from within the available history.

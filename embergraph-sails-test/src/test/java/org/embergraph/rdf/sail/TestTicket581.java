@@ -29,8 +29,8 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.sail.SailGraphQuery;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Unit test template for use in submission of bugs.
+/*
+* Unit test template for use in submission of bugs.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -54,7 +54,7 @@ public class TestTicket581 extends QuadsTestCase {
 
   protected static final Logger log = Logger.getLogger(TestTicket581.class);
 
-  /**
+  /*
    * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
    * JOURNAL FILE.
    */

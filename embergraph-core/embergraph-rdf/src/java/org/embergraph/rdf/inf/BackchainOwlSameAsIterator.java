@@ -17,7 +17,7 @@ public abstract class BackchainOwlSameAsIterator implements IChunkedOrderedItera
   /** The database. */
   protected AbstractTripleStore db;
 
-  /**
+  /*
    * This flag is <code>true</code> since we do NOT want statement identifiers to be generated for
    * inferences produced by the backchainer.
    */

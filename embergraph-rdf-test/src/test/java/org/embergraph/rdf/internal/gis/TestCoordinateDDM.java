@@ -21,8 +21,8 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 
-/**
- * Test suite for {@link CoordinateDDM}.
+/*
+* Test suite for {@link CoordinateDDM}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -38,7 +38,7 @@ public class TestCoordinateDDM extends AbstractCoordinateTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Test of the constructor and formatter.
    *
    * <pre>
@@ -66,7 +66,7 @@ public class TestCoordinateDDM extends AbstractCoordinateTestCase {
     //        fail("write tests");
   }
 
-  /**
+  /*
    * Test verifies the groups into which the pattern breaks the parsed text.
    *
    * @see CoordinateDDM#pattern_ddm
@@ -117,7 +117,7 @@ public class TestCoordinateDDM extends AbstractCoordinateTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link CoordinateDDM#toDD()}. The test data are based on
    *
    * <pre>

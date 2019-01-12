@@ -27,8 +27,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 import org.embergraph.relation.accesspath.IAccessPath;
 
-/**
- * Base class for test suites for inference engine and the magic sets implementation.
+/*
+* Base class for test suites for inference engine and the magic sets implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -43,7 +43,7 @@ public class AbstractInferenceEngineTestCase extends AbstractTripleStoreTestCase
     super(name);
   }
 
-  /**
+  /*
    * Return the constant bound on the {@link Predicate} associated with the {@link IAccessPath} at
    * the specified slot index -or- {@link #NULL} iff the predicate is not bound at that slot index.
    *

@@ -23,8 +23,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Aggregates test suites in increasing dependency order.
+/*
+* Aggregates test suites in increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -39,7 +39,7 @@ public class TestAll extends TestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Returns a test that will run each of the implementation specific test suites in turn.
    *
    * <p>TODO There should be a test suite for the XDR package. It is implicitly tested by testing

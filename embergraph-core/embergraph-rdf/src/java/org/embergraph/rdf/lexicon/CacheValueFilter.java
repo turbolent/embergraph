@@ -27,8 +27,8 @@ import org.embergraph.bop.ap.filter.BOpResolver;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Cache the {@link EmbergraphValue} on the {@link IV} (create a cross linkage). This is useful for
+/*
+* Cache the {@link EmbergraphValue} on the {@link IV} (create a cross linkage). This is useful for
  * lexicon joins and SPARQL operators that need to use materialized RDF values.
  */
 public class CacheValueFilter extends BOpResolver {
@@ -46,7 +46,7 @@ public class CacheValueFilter extends BOpResolver {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */

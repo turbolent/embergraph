@@ -23,8 +23,8 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import org.embergraph.rdf.sparql.ast.JoinGroupNode;
 import org.embergraph.rdf.sparql.ast.UnionNode;
 
-/**
- * Test suite for the {@link ASTJoinGroupOrderOptimizer}.
+/*
+* Test suite for the {@link ASTJoinGroupOrderOptimizer}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
@@ -118,7 +118,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.test();
   }
 
-  /**
+  /*
    * Test filter placement where one filter variables is bound in the first, one in the join group
    */
   public void testFilterPlacement04() {
@@ -210,7 +210,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.test();
   }
 
-  /**
+  /*
    * Test complex pattern, including inter- and intra-partition reordering, with focus on BIND and
    * ASSIGNMENT nodes.
    */
@@ -272,7 +272,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.test();
   }
 
-  /**
+  /*
    * VALUES claused placed early whenever it binds values that are reused by other nodes such as
    * BINDs. Motivated by the scenario discussed in https://jira.blazegraph.com/browse/BLZG-1463.
    */
@@ -548,8 +548,8 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
                     unionWithVars("bound", "x3"),
                     assignmentWithVar("bound", "x1")));
 
-        /**
-         * Only the second UNION expression bounds x1 for sure. The BIND node is placed at the first
+      /*
+       * Only the second UNION expression bounds x1 for sure. The BIND node is placed at the first
          * "useful" position after that one.
          */
         expected =
@@ -653,7 +653,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.testWhileIgnoringExplainHints();
   }
 
-  /**
+  /*
    * Test complex pattern, including inter- and intra-partition reordering, excluding BIND and
    * ASSIGNMENT nodes.
    */
@@ -742,7 +742,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.testWhileIgnoringExplainHints();
   }
 
-  /**
+  /*
    * Test complex pattern, including inter- and intra-partition reordering, with focus on BIND and
    * ASSIGNMENT nodes.
    */
@@ -817,7 +817,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.testWhileIgnoringExplainHints();
   }
 
-  /**
+  /*
    * Test placement of named subquery at the beginning of the previous partition (where
    * intra-partition optimization is possible).
    */
@@ -895,7 +895,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.test();
   }
 
-  /**
+  /*
    * Test case for ASK subqueries, as they emerge from FILTER (NOT) EXISTS clauses. This test case
    * focuses on the placement in the context of OPTIONAL patterns.
    */
@@ -944,7 +944,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.testWhileIgnoringExplainHints();
   }
 
-  /**
+  /*
    * Test case for ASK subqueries, as they emerge from FILTER (NOT) EXISTS clauses. This test case
    * focuses on the interaction with simple FILTERs.
    */
@@ -1010,7 +1010,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.test();
   }
 
-  /**
+  /*
    * In case the UNION node has binding requirements that cannot be satisified internally, it must
    * be evaluated after the subquery.
    */
@@ -1043,7 +1043,7 @@ public class TestASTJoinGroupOrderOptimizer extends AbstractOptimizerTestCaseWit
     }.test();
   }
 
-  /**
+  /*
    * In the following variant, the union node has binding requirements but can (and does) internally
    * satisfy them.
    */

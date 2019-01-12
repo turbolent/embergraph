@@ -27,8 +27,8 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.util.BytesUtil;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestVocabURIByteIV extends AbstractEncodeDecodeKeysTestCase {
@@ -41,7 +41,7 @@ public class TestVocabURIByteIV extends AbstractEncodeDecodeKeysTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for a fully inlined representation of a URI based on a <code>byte</code> code. The
    * flags byte looks like: <code>VTE=URI, inline=true, extension=false,
    * DTE=XSDByte</code>. It is followed by a <code>unsigned byte</code> value which is the index of
@@ -53,7 +53,7 @@ public class TestVocabURIByteIV extends AbstractEncodeDecodeKeysTestCase {
       //                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MIN_VALUE),
       //                new VocabURIByteIV<EmbergraphURI>((byte) -1),
       new VocabURIByteIV<EmbergraphURI>((byte) 0),
-      new VocabURIByteIV<EmbergraphURI>((byte) KeyBuilder.encodeByte(14)),
+      new VocabURIByteIV<EmbergraphURI>(KeyBuilder.encodeByte(14)),
       new VocabURIByteIV<EmbergraphURI>((byte) 14),
       //                new VocabURIByteIV<EmbergraphURI>((byte) Byte.MAX_VALUE),
     };

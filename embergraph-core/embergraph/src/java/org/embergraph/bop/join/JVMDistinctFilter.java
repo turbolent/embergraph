@@ -31,8 +31,8 @@ import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBuffer;
 
-/**
- * Utility class for imposing a DISTINCT filter on {@link IBindingSet}. This class is thread-safe.
+/*
+* Utility class for imposing a DISTINCT filter on {@link IBindingSet}. This class is thread-safe.
  * It is based on a {@link ConcurrentHashMap}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -79,7 +79,7 @@ public class JVMDistinctFilter implements IDistinctFilter {
   /** The variables used to impose a distinct constraint. */
   private final IVariable<?>[] vars;
 
-  /**
+  /*
    * A concurrent map whose keys are the bindings on the specified variables (the keys and the
    * values are the same since the map implementation does not allow <code>null</code> values).
    *
@@ -88,7 +88,7 @@ public class JVMDistinctFilter implements IDistinctFilter {
    */
   private final ConcurrentHashMap<Solution, Solution> map;
 
-  /**
+  /*
    * @param vars The set of variables on which the DISTINCT filter will be imposed. Only these
    *     variables will be present in the "accepted" solutions. Any variable bindings not specified
    *     in this array will be dropped.
@@ -125,7 +125,7 @@ public class JVMDistinctFilter implements IDistinctFilter {
     return vars;
   }
 
-  /**
+  /*
    * If the bindings are distinct for the configured variables then return those bindings.
    *
    * @param bset The binding set to be filtered.
@@ -207,8 +207,8 @@ public class JVMDistinctFilter implements IDistinctFilter {
 
       for (IBindingSet bset : a) {
 
-        /*
-         * Test to see if this solution is distinct from those already
+      /*
+       * Test to see if this solution is distinct from those already
          * seen.
          */
         if ((bset = accept(bset)) == null) {
@@ -217,8 +217,8 @@ public class JVMDistinctFilter implements IDistinctFilter {
           continue;
         }
 
-        /*
-         * This is a distinct solution.
+      /*
+       * This is a distinct solution.
          */
 
         sink.add(bset);

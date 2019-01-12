@@ -34,8 +34,8 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.sail.SailTupleQuery;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Unit test template for use in submission of bugs.
+/*
+* Unit test template for use in submission of bugs.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -59,7 +59,7 @@ public class TestTicket693 extends QuadsTestCase {
 
   protected static final Logger log = Logger.getLogger(TestTicket693.class);
 
-  /**
+  /*
    * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
    * JOURNAL FILE.
    */
@@ -159,8 +159,8 @@ public class TestTicket693 extends QuadsTestCase {
           log.info("running query:\n" + query);
         }
 
-        /*
-         * Run the problem query using the embergraph store and then compare
+      /*
+       * Run the problem query using the embergraph store and then compare
          * the answer.
          */
         final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
@@ -192,8 +192,8 @@ public class TestTicket693 extends QuadsTestCase {
           log.info("running query:\n" + query);
         }
 
-        /*
-         * Run the problem query using the embergraph store and then compare
+      /*
+       * Run the problem query using the embergraph store and then compare
          * the answer.
          */
         final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
@@ -222,8 +222,8 @@ public class TestTicket693 extends QuadsTestCase {
           log.info("running query:\n" + query);
         }
 
-        /*
-         * Run the problem query using the embergraph store and then compare
+      /*
+       * Run the problem query using the embergraph store and then compare
          * the answer.
          */
         final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();
@@ -254,8 +254,8 @@ public class TestTicket693 extends QuadsTestCase {
           log.info("running query:\n" + query);
         }
 
-        /*
-         * Run the problem query using the embergraph store and then compare
+      /*
+       * Run the problem query using the embergraph store and then compare
          * the answer.
          */
         final RepositoryConnection cxn = embergraphRepo.getReadOnlyConnection();

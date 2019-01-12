@@ -38,8 +38,8 @@ import org.embergraph.service.ResourceService.ReadResourceTask;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.config.NicUtil;
 
-/**
- * Test verifies the ability to transmit a file using the {@link ResourceService}.
+/*
+* Test verifies the ability to transmit a file using the {@link ResourceService}.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson </a>
@@ -55,7 +55,7 @@ public class TestReceiveFile extends TestCase3 {
     super(name);
   }
 
-  /**
+  /*
    * Test the ability to receive a file.
    *
    * @throws Exception
@@ -127,7 +127,7 @@ public class TestReceiveFile extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that concurrent "receive" requests for the same resource do not cause
    * problems with {@link FileLock}.
    *

@@ -28,8 +28,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * {@link IExtension}s are responsible for round-tripping between an RDF {@link Value} and an {@link
+/*
+* {@link IExtension}s are responsible for round-tripping between an RDF {@link Value} and an {@link
  * LiteralExtensionIV} for a particular datatype. Because of how {@link LiteralExtensionIV}s are
  * encoded and decoded, the {@link IExtension} will need to have on hand the {@link TermId} for its
  * datatype. This is accomplished via the {@link IDatatypeURIResolver} - the {@link IExtension} will
@@ -39,7 +39,7 @@ import org.openrdf.model.Value;
  */
 public interface IExtension<V extends EmbergraphValue> {
 
-  /**
+  /*
    * Return the fully resolved datatype(s) handled by this interface in the form of a {@link
    * EmbergraphURI} with the {@link TermId} already set.
    *
@@ -47,7 +47,7 @@ public interface IExtension<V extends EmbergraphValue> {
    */
   Set<EmbergraphURI> getDatatypes();
 
-  /**
+  /*
    * Create an {@link LiteralExtensionIV} from an RDF value.
    *
    * @param value The RDF {@link Value}
@@ -56,7 +56,7 @@ public interface IExtension<V extends EmbergraphValue> {
    */
   LiteralExtensionIV createIV(final Value value);
 
-  /**
+  /*
    * Create an RDF value from an {@link LiteralExtensionIV}.
    *
    * @param iv The extension {@link IV}

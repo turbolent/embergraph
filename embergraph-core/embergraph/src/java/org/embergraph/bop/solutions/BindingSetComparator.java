@@ -17,7 +17,7 @@ public class BindingSetComparator<E> implements Comparator<IBindingSet> {
   /** The #of solutions compared. */
   private long n = 0;
 
-  /**
+  /*
    * @param sortOrder The sort order to be imposed. While the {@link ISortOrder} is defined in terms
    *     of {@link IValueExpression}s, any {@link IValueExpression}s MUST be either bare variables
    *     or constants or be {@link IBind}s where the nested {@link IValueExpression} has been
@@ -57,8 +57,8 @@ public class BindingSetComparator<E> implements Comparator<IBindingSet> {
 
       if (v instanceof IBind<?>) {
 
-        /*
-         * Use the variable on which the computed expression was bound.
+      /*
+       * Use the variable on which the computed expression was bound.
          *
          * Note: This assumes that the value expression for the bind has
          * already been evaluated such that we may simply resolve the

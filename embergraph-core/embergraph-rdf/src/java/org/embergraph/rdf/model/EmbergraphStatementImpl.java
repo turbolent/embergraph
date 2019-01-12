@@ -27,8 +27,8 @@ import org.embergraph.rdf.store.IRawTripleStore;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
-/**
- * Implementation reveals whether a statement is explicit, inferred, or an axiom and the internal
+/*
+* Implementation reveals whether a statement is explicit, inferred, or an axiom and the internal
  * term identifiers for the subject, predicate, object, the context bound on that statement (when
  * present). When statement identifiers are enabled, the context position (if bound) will be a blank
  * node that represents the statement having that subject, predicate, and object and its term
@@ -180,7 +180,7 @@ public class EmbergraphStatementImpl implements EmbergraphStatement {
     return equals((Statement) o);
   }
 
-  /**
+  /*
    * Note: implementation per {@link Statement} interface, which specifies that only the (s,p,o)
    * positions are to be considered.
    */
@@ -328,7 +328,7 @@ public class EmbergraphStatementImpl implements EmbergraphStatement {
     this.override = override;
   }
 
-  /**
+  /*
    * Note: this implementation is equivalent to {@link #toString()} since the {@link Value}s are
    * already resolved.
    */

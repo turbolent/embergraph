@@ -26,8 +26,8 @@ package org.embergraph.rdf.spo;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
-/**
- * Implementation of a binding.
+/*
+* Implementation of a binding.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */
@@ -56,7 +56,7 @@ public class Binding implements IBinding {
     this.val = val;
   }
 
-  /**
+  /*
    * Get the variable.
    *
    * @return the variable
@@ -66,7 +66,7 @@ public class Binding implements IBinding {
     return var;
   }
 
-  /**
+  /*
    * Get the value.
    *
    * @return the value
@@ -76,7 +76,7 @@ public class Binding implements IBinding {
     return val;
   }
 
-  /**
+  /*
    * True iff the variable and its bound value is the same for the two bindings.
    *
    * @param o Another binding.
@@ -88,7 +88,7 @@ public class Binding implements IBinding {
     }
 
     if (o instanceof IBinding) {
-      IBinding b = (IBinding) o;
+      IBinding b = o;
       // variables ok for reference testing
       return var == b.getVar() && val.equals(b.getVal());
     }

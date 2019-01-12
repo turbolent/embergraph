@@ -24,8 +24,8 @@ package org.embergraph.btree;
 import org.apache.log4j.Level;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
-/**
- * Test suite for iterators that visit only dirty nodes or leaves. This test suite was factored
+/*
+* Test suite for iterators that visit only dirty nodes or leaves. This test suite was factored
  * apart from {@link TestIterators} since this suite relies on (and to some extent validates) both
  * node and leaf IO and copy-on-write mechanisms.
  *
@@ -46,7 +46,7 @@ public class TestDirtyIterators extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test ability to visit the direct dirty children of a node. For this test we only verify that
    * the dirty child iterator will visit the same children as the normal child iterator. This is
    * true since we never evict a node onto the store during this test - see {@link #getBTree(int)},
@@ -139,7 +139,7 @@ public class TestDirtyIterators extends AbstractBTreeTestCase {
 
   }
 
-  /**
+  /*
    * Test ability to visit the direct dirty children of a node. This test works by explicitly
    * writing out either the root node or a leaf and verifying that the dirty children iterator
    * correctly visits only those children that should be marked as dirty after the others have been
@@ -307,7 +307,7 @@ public class TestDirtyIterators extends AbstractBTreeTestCase {
 
   }
 
-  /**
+  /*
    * Test ability to visit the dirty nodes of the tree in a post-order traversal. This version of
    * the test verifies that the dirty post-order iterator will visit the same nodes as the normal
    * post-order iterator since all nodes are dirty.
@@ -464,7 +464,7 @@ public class TestDirtyIterators extends AbstractBTreeTestCase {
     assertSameIterator(new IAbstractNode[] {b}, btree.root.postOrderNodeIterator(true));
   }
 
-  /**
+  /*
    * Test ability to visit the dirty nodes of the tree in a post-order traversal. This version of
    * the test writes out some nodes and/or leaves in order to verify that the post-order iterator
    * will visit only those nodes and leaves that are currently dirty. Note that writing out a node

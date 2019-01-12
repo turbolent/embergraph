@@ -12,8 +12,8 @@ import org.embergraph.ganglia.GangliaSlopeEnum;
 import org.embergraph.ganglia.IGangliaDefaults;
 import org.embergraph.ganglia.IGangliaMetadataFactory;
 
-/**
- * A utility class which may be used to run the embergraph performance counter collection system
+/*
+* A utility class which may be used to run the embergraph performance counter collection system
  * within an embedded {@link GangliaService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -65,7 +65,7 @@ public class EmbergraphGangliaService extends GangliaService {
         metadataFactory);
   }
 
-  /**
+  /*
    * Runs a {@link GangliaService} as a standalone application.
    *
    * <p>Note: This routine is mainly for test as the primary purpose of the {@link GangliaService}

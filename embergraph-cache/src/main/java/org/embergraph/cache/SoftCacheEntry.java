@@ -23,8 +23,8 @@ package org.embergraph.cache;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 
-/**
- * Implementation based on {@link SoftReference}.
+/*
+* Implementation based on {@link SoftReference}.
  *
  * @author thompsonbry
  * @version $Id$

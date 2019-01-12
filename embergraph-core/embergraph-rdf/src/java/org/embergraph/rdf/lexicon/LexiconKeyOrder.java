@@ -12,8 +12,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.striterator.AbstractKeyOrder;
 import org.openrdf.model.Value;
 
-/**
- * Natural index orders for the {@link LexiconRelation}.
+/*
+* Natural index orders for the {@link LexiconRelation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -28,19 +28,19 @@ public class LexiconKeyOrder extends AbstractKeyOrder<EmbergraphValue> {
   private static final transient int _ID2TERM = 1;
   private static final transient int _BLOBS = 2; // was TERMS
 
-  /**
+  /*
    * Keys are RDF {@link Value}s. Values are {@link TermId}s. Note that the keys of this index CAN
    * NOT be decoded (they are unicode sort keys).
    */
   public static final transient LexiconKeyOrder TERM2ID = new LexiconKeyOrder(_TERM2ID);
 
-  /**
+  /*
    * Keys are {@link TermId}s. Values are RDF {@link Value}s (which MAY be stored on raw records,
    * which is transparent to the user if it occurs).
    */
   public static final transient LexiconKeyOrder ID2TERM = new LexiconKeyOrder(_ID2TERM);
 
-  /**
+  /*
    * Keys are {@link BlobIV}s. Values are RDF {@link Value}s which are typically stored on raw
    * records.
    *
@@ -52,7 +52,7 @@ public class LexiconKeyOrder extends AbstractKeyOrder<EmbergraphValue> {
    */
   public static final transient LexiconKeyOrder BLOBS = new LexiconKeyOrder(_BLOBS);
 
-  /**
+  /*
    * The positional index corresponding to the {@link EmbergraphValue} in a {@link LexPredicate}.
    */
   public static final transient int SLOT_TERM = 0;
@@ -68,7 +68,7 @@ public class LexiconKeyOrder extends AbstractKeyOrder<EmbergraphValue> {
     this.index = index;
   }
 
-  /**
+  /*
    * Returns the singleton corresponding to the <i>index</i>.
    *
    * @param index The index.
@@ -147,7 +147,7 @@ public class LexiconKeyOrder extends AbstractKeyOrder<EmbergraphValue> {
     }
   }
 
-  /**
+  /*
    * Operation is not supported.
    *
    * <p>Note: The TERMS index key order is defined by the {@link BlobIV} keys. They are formed from
@@ -169,7 +169,7 @@ public class LexiconKeyOrder extends AbstractKeyOrder<EmbergraphValue> {
     return LexiconKeyOrder.valueOf(index);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to handle the encoding of the {@link IV} for the index.

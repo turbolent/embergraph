@@ -33,8 +33,8 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-/**
- * Helper utilities for (de-)serialization of {@link Serializable} objects using the Java
+/*
+* Helper utilities for (de-)serialization of {@link Serializable} objects using the Java
  * serialization mechanisms.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -93,7 +93,7 @@ public class SerializerUtil {
         }
       };
 
-  /**
+  /*
    * An {@link IRecordSerializer} wrapper for the static methods declared by the {@link
    * SerializerUtil}.
    */
@@ -133,7 +133,7 @@ public class SerializerUtil {
         }
       };
 
-  /**
+  /*
    * Serialize an object using the Java serialization mechanisms.
    *
    * @param obj A {@link Serializable} object.
@@ -161,7 +161,7 @@ public class SerializerUtil {
     return baos.toByteArray();
   }
 
-  /**
+  /*
    * De-serialize an object using the Java serialization mechanisms.
    *
    * @param b A byte[] containing a serialized object.
@@ -175,7 +175,7 @@ public class SerializerUtil {
     return deserialize(b, 0, b.length);
   }
 
-  /**
+  /*
    * De-serialize an object using the Java serialization mechanisms.
    *
    * @param b A byte[] containing a serialized object.
@@ -203,7 +203,7 @@ public class SerializerUtil {
     }
   }
 
-  /**
+  /*
    * De-serialize an object using the Java serialization mechanisms.
    *
    * @param is The input stream from which to read the serialized data.
@@ -223,7 +223,7 @@ public class SerializerUtil {
     }
   }
 
-  /**
+  /*
    * De-serialize an object using the Java serialization mechanisms.
    *
    * @param buf A buffer containing a serialized object. The bytes from {@link

@@ -24,8 +24,8 @@ package it.unimi.dsi.io;
 import java.io.Reader;
 import java.io.Serializable;
 
-/**
- * End-of-stream-only reader.
+/*
+* End-of-stream-only reader.
  *
  * <p>This reader will always return end-of-file on any read attempt.
  *
@@ -42,7 +42,7 @@ public class NullReader extends Reader implements Serializable {
 
   private NullReader() {}
 
-  /**
+  /*
    * Returns the only instance of this class.
    *
    * @return the only instance of this class.

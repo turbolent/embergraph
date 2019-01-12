@@ -11,8 +11,8 @@ package cern.jet.random;
 import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
-/**
- * Binomial distribution; See the <A
+/*
+* Binomial distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node19.html#SECTION000190000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosb.html#Binomial Distribution">
  * animated definition</A>.
@@ -50,7 +50,7 @@ public class Binomial extends AbstractDiscreteDistribution {
 
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static Binomial shared = new Binomial(1, 0.5, makeDefaultGenerator());
-  /**
+  /*
    * Constructs a binomial distribution. Example: n=1, p=0.5.
    *
    * @param n the number of trials (also known as <i>sample size</i>).
@@ -75,7 +75,7 @@ public class Binomial extends AbstractDiscreteDistribution {
 
     return sum;
   }
-  /**
+  /*
    * **************************************************************** * Binomial-Distribution -
    * Acceptance Rejection/Inversion * *
    * ***************************************************************** * Acceptance Rejection method
@@ -158,7 +158,7 @@ public class Binomial extends AbstractDiscreteDistribution {
           pk = p0;
         } else {
           U -= pk;
-          pk = (double) (((n - K + 1) * par * pk) / (K * q));
+          pk = ((n - K + 1) * par * pk) / (K * q);
         }
       }
       return ((p > 0.5) ? (n - K) : K);
@@ -235,7 +235,7 @@ public class Binomial extends AbstractDiscreteDistribution {
   public int nextInt() {
     return generateBinomial(n, p);
   }
-  /**
+  /*
    * Returns a random number from the distribution with the given parameters n and p; bypasses the
    * internal state.
    *
@@ -258,7 +258,7 @@ public class Binomial extends AbstractDiscreteDistribution {
             + this.log_p * k
             + this.log_q * r);
   }
-  /**
+  /*
    * Sets the parameters number of trials and the probability of success.
    *
    * @param n the number of trials
@@ -274,7 +274,7 @@ public class Binomial extends AbstractDiscreteDistribution {
     this.log_q = Math.log(1.0 - p);
     this.log_n = Arithmetic.logFactorial(n);
   }
-  /**
+  /*
    * Returns a random number from the distribution with the given parameters n and p.
    *
    * @param n the number of trials
@@ -290,7 +290,7 @@ public class Binomial extends AbstractDiscreteDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + n + "," + p + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

@@ -24,8 +24,8 @@ package org.embergraph.journal;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 
-/**
- * Type safe enumeration of options governing whether and how a file is forced to stable storage.
+/*
+* Type safe enumeration of options governing whether and how a file is forced to stable storage.
  * This enum is used for a variety of behaviors, including commit semantics and the mode in which
  * the {@link RandomAccessFile} is opened.
  *
@@ -37,14 +37,14 @@ public enum ForceEnum {
   /** The file is not forced to stable storage. */
   No("No"),
 
-  /**
+  /*
    * The file data, but NOT the file metadata, are forced to stable storage.
    *
    * @see FileChannel#force(boolean)
    */
   Force("Force"),
 
-  /**
+  /*
    * The file data and the file metadata are forced to stable storage.
    *
    * @see FileChannel#force(boolean)
@@ -53,7 +53,7 @@ public enum ForceEnum {
 
   private String name;
 
-  private ForceEnum(String name) {
+  ForceEnum(String name) {
     this.name = name;
   }
 
@@ -62,7 +62,7 @@ public enum ForceEnum {
     return name;
   }
 
-  /**
+  /*
    * Parse a string whose contents must be "No", "Force", "ForceMetadata".
    *
    * @param s The string.
@@ -76,7 +76,7 @@ public enum ForceEnum {
     throw new IllegalArgumentException("Unknown value: " + s);
   }
 
-  /**
+  /*
    * Return the read-write file mode corresponding to the enum value.
    *
    * @see RandomAccessFile#RandomAccessFile(java.io.File, String)

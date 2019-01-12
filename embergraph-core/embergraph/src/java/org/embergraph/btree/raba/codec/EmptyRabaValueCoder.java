@@ -34,8 +34,8 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
-/**
- * Useful when a B+Tree uses keys but not values. The coder maintains the {@link IRaba#size()}, but
+/*
+* Useful when a B+Tree uses keys but not values. The coder maintains the {@link IRaba#size()}, but
  * any <code>byte[]</code> values stored under the B+Tree will be <strong>discarded</strong> by this
  * {@link IRabaCoder}.
  *
@@ -104,7 +104,7 @@ public class EmptyRabaValueCoder implements IRabaCoder, Externalizable {
     return new EmptyCodedRaba(buf.slice(O_origin, buf.pos() - O_origin), size);
   }
 
-  /**
+  /*
    * <strong>Any data in the {@link IRaba} will be discarded!</strong> Only the {@link IRaba#size()}
    * is maintained.
    */
@@ -132,7 +132,7 @@ public class EmptyRabaValueCoder implements IRabaCoder, Externalizable {
     return new EmptyCodedRaba(data);
   }
 
-  /**
+  /*
    * An {@link ICodedRaba} for use when the encoded logical byte[][] was empty.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -266,7 +266,7 @@ public class EmptyRabaValueCoder implements IRabaCoder, Externalizable {
       };
     }
 
-    /**
+    /*
      * If the {@link IRaba} represents B+Tree keys then returns <code>-1</code> as the insertion
      * point.
      *

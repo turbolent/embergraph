@@ -24,8 +24,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.BindingSet;
 
-/**
- * Simple graph program identifies friends of friends that are not directly connected using a SPARQL
+/*
+* Simple graph program identifies friends of friends that are not directly connected using a SPARQL
  * query and then constructs an in-memory graph consisting of those vertices and using the
  * connection count as the link weights connecting the vertices. The graph is symmetric.
  *
@@ -55,7 +55,7 @@ public class Example2 implements Callable<Void> {
     this.om = om;
   }
 
-  /**
+  /*
    * Return the string value of the property iff it exists and otherwise <code>null</code>.
    *
    * @param gpo The object.
@@ -75,7 +75,7 @@ public class Example2 implements Callable<Void> {
     return null;
   }
 
-  /**
+  /*
    * Return the link weight between two friends of friends.
    *
    * @param gpo The link source.
@@ -153,8 +153,8 @@ public class Example2 implements Callable<Void> {
                 + "  OPTIONAL { ?z rdfs:label ?zname2 } .\n"
                 + "} \n"
                 + "GROUP BY ?x ?z \n"
-            /*
-             * Optionally, only see friends of a friend with more
+          /*
+       * Optionally, only see friends of a friend with more
              * than one indirect connection.
              */
             //                        +"HAVING (?connectionCount > 1)\n"
@@ -181,8 +181,8 @@ public class Example2 implements Callable<Void> {
 
         final Value zval = bset.getValue("z");
         if (!(zval instanceof Resource)) {
-          /*
-           * Bad FOAF data. The target should be a Resource, not a
+        /*
+       * Bad FOAF data. The target should be a Resource, not a
            * Literal.
            */
           log.warn("target of foaf:knows is not a Resource: source=" + xval + ", target=" + zval);
@@ -279,7 +279,7 @@ public class Example2 implements Callable<Void> {
     final String serviceURL =
         "http://localhost:" + Config.HTTP_PORT + "/" + EmbergraphStatics.getContextPath();
 
-    /**
+    /*
      * The namespace of the KB instance that you want to connect to on that server. The default
      * namespace is "kb".
      */

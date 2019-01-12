@@ -20,28 +20,28 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast;
 
-/**
- * The known query optimizers.
+/*
+* The known query optimizers.
  *
  * @see QueryHints#OPTIMIZER
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public enum QueryOptimizerEnum {
-  /**
+  /*
    * The query optimizer is disabled. The joins in the query will be evaluated in the order in which
    * they are given. This may be used to compensate when the static query optimizer produces an
    * inefficient join ordering.
    */
   None,
-  /**
+  /*
    * A query optimizer based on a static analysis of the query which relies on fast range counts for
    * the basic graph patterns to estimate the cardinality of the different access paths. This
    * optimizer is fast but it can fail to order joins correctly as the error in the estimated
    * cardinality of joins can grow exponentially in the number of joins in the query.
    */
   Static,
-  /**
+  /*
    * A runtime query optimizer based on sampling. The runtime query optimizer samples each of the
    * access paths and each of the joins and builds out join paths in a breadth first manner until it
    * finds a join ordering which is known to dominate the other possible join orderings. The runtime
@@ -53,5 +53,5 @@ public enum QueryOptimizerEnum {
    * magnitude more efficient (10x or 100x). For long running joins, this can translates into a
    * savings of minutes or hours.
    */
-  Runtime;
+  Runtime
 }

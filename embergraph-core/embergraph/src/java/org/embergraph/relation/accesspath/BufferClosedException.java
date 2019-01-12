@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-/**
- * Exception thrown by {@link IBlockingBuffer#add()} if the buffer is closed.
+/*
+* Exception thrown by {@link IBlockingBuffer#add()} if the buffer is closed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class BufferClosedException extends IllegalStateException {
     super(cause);
   }
 
-  /**
+  /*
    * @param message
    * @param cause
    */

@@ -46,8 +46,8 @@ import org.embergraph.bop.constraint.BooleanValueExpression;
 import org.embergraph.bop.constraint.Constraint;
 import org.embergraph.bop.joinGraph.rto.JGraph;
 
-/**
- * This test suite is built around around BSBM Q5. Each test has an existing join path and a new
+/*
+* This test suite is built around around BSBM Q5. Each test has an existing join path and a new
  * vertex to be added to the join path. The question is whether or not the vertex <em>can join</em>
  * with the join path using one or more shared variable(s). This tests a method used to
  * incrementally grow a join path when it is dynamically decided that an {@link IPredicate} may be
@@ -109,7 +109,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
     super(name);
   }
 
-  /**
+  /*
    * Unit tests to verify that arguments are validated.
    *
    * @see PartitionedJoinGroup#canJoinUsingConstraints(IPredicate[], IPredicate, IConstraint[])
@@ -207,7 +207,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
   // Annotation for the comparison or math operator.
   private static final String OP = "op";
 
-  /**
+  /*
    * A do-nothing constraint. The constraint is never evaluated. It is only used to test the logic
    * which decides when two predicates can join based on variable(s) shared via a constraint.
    */
@@ -215,7 +215,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      *
      * @param op
@@ -224,7 +224,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
       super(op);
     }
 
-    /**
+    /*
      * @param args
      * @param annotations
      */
@@ -237,7 +237,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
     }
   }
 
-  /**
+  /*
    * A do-nothing constraint. The constraint is never evaluated. It is only used to test the logic
    * which decides when two predicates can join based on variable(s) shared via a constraint.
    */
@@ -245,7 +245,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      *
      * @param op
@@ -254,7 +254,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
       super(op);
     }
 
-    /**
+    /*
      * @param args
      * @param annotations
      */
@@ -271,7 +271,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
     }
   }
 
-  /**
+  /*
    * A do-nothing value expression. The expression is never evaluated. It is only used to test the
    * logic which decides when two predicates can join based on variable(s) shared via a constraint.
    */
@@ -279,7 +279,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
 
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      *
      * @param op
@@ -289,7 +289,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
       super(op);
     }
 
-    /**
+    /*
      * Required shallow copy constructor.
      *
      * @param args The operands.
@@ -305,7 +305,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
       }
     }
 
-    /**
+    /*
      * @param left The left operand.
      * @param right The right operand.
      * @param op The annotation specifying the operation to be performed on those operands.
@@ -406,7 +406,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
   final IConstraint c0 =
       Constraint.wrap(new NEConstant(product, new Constant<String>(productInstance)));
 
-  /**
+  /*
    * FILTER (?simProperty1 < (?origProperty1 + 120) && ?simProperty1 > (?origProperty1 - 120))
    *
    * <p>Note: The AND in the compound filters is typically optimized out such that each of these is
@@ -420,14 +420,14 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
                   new BOp[] {
                     simProperty1, new MathBOp(origProperty1, new Constant<Integer>(120), PLUS)
                   },
-                  NV.asMap(new NV[] {new NV(OP, LT)})),
+                  NV.asMap(new NV(OP, LT))),
               new MyCompareOp(
                   new BOp[] {
                     simProperty1, new MathBOp(origProperty1, new Constant<Integer>(120), MINUS)
                   },
-                  NV.asMap(new NV[] {new NV(OP, GT)}))));
+                  NV.asMap(new NV(OP, GT)))));
 
-  /**
+  /*
    * FILTER (?simProperty2 < (?origProperty2 + 170) && ?simProperty2 > (?origProperty2 - 170))
    *
    * <p>Note: The AND in the compound filters is typically optimized out such that each of these is
@@ -441,12 +441,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
                   new BOp[] {
                     simProperty2, new MathBOp(origProperty2, new Constant<Integer>(170), PLUS)
                   },
-                  NV.asMap(new NV[] {new NV(OP, LT)})),
+                  NV.asMap(new NV(OP, LT))),
               new MyCompareOp(
                   new BOp[] {
                     simProperty2, new MathBOp(origProperty2, new Constant<Integer>(170), MINUS)
                   },
-                  NV.asMap(new NV[] {new NV(OP, GT)}))));
+                  NV.asMap(new NV(OP, GT)))));
 
   /** The constraints on the join graph. */
   final IConstraint[] constraints = new IConstraint[] {c0, c1, c2};
@@ -463,8 +463,8 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
         assertTrue(PartitionedJoinGroup.canJoin(t0, t1));
         assertTrue(PartitionedJoinGroup.canJoin(t1, t0));
         if (t0 != t1) {
-          /*
-           * Test join path extension, but not when the vertex used to
+        /*
+       * Test join path extension, but not when the vertex used to
            * extend the path is already present in the join path.
            */
           assertTrue(
@@ -542,7 +542,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
             ));
   }
 
-  /**
+  /*
    * Unit test examines the predicates without shared variables and verifies (a) that joins are not
    * permitted when the constraints are not considered; and (b) that joins are permitted when the
    * constraints are considered.
@@ -607,7 +607,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
             ));
   }
 
-  /**
+  /*
    * Unit test examines the predicates without shared variables and verifies (a) that joins are not
    * permitted when the constraints are not considered; and (b) that joins are permitted when the
    * constraints are considered.
@@ -762,7 +762,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
     assertSameConstraints(expected, actual);
   }
 
-  /**
+  /*
    * <code>[5  6  0  2  1  4 3]</code>.
    *
    * <p>FIXME The above join path produces a false ZERO result for the query and all of the join
@@ -804,7 +804,7 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
     assertSameConstraints(expected, actual);
   }
 
-  /**
+  /*
    * Verifies that the right set of constraints is attached at each of the vertices of a join path.
    * Comparison of {@link IConstraint} instances is by reference.
    *

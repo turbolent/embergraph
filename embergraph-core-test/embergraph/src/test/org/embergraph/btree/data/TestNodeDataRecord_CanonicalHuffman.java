@@ -24,8 +24,8 @@ package org.embergraph.btree.data;
 
 import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
 
-/**
- * Test suite using the {@link CanonicalHuffmanRabaCoder} to provide key compression.
+/*
+* Test suite using the {@link CanonicalHuffmanRabaCoder} to provide key compression.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

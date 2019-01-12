@@ -23,22 +23,22 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-/**
- * Various namespaces for per-host and per-process counters.
+/*
+* Various namespaces for per-host and per-process counters.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ICounterHierarchy {
 
-  /**
+  /*
    * The path separator string.
    *
    * @see ICounterSet#pathSeparator
    */
   String ps = ICounterSet.pathSeparator;
 
-  /**
+  /*
    * The namespace for counters describing the host platform. These are essentially "unchanging"
    * counters.
    */
@@ -50,7 +50,7 @@ public interface ICounterHierarchy {
   /** The namespace for counters dealing with memory (RAM). */
   String Memory = "Memory";
 
-  /**
+  /*
    * The namespace for counters dealing with garbage collection (GC is per-JVM and is therefore
    * reported for each service, so this namespace is relative to the counter set for the service).
    */

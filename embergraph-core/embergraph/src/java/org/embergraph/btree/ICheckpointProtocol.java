@@ -26,8 +26,8 @@ import org.embergraph.journal.ICommitter;
 import org.embergraph.journal.Name2Addr;
 import org.embergraph.journal.Name2Addr.Entry;
 
-/**
- * Interface in support of the {@link Checkpoint} record protocol.
+/*
+* Interface in support of the {@link Checkpoint} record protocol.
  *
  * @author thompsonbry@users.sourceforge.net
  *     <p>TODO Try to lift out an abstract implementation of this interface for HTree, BTree, and
@@ -40,7 +40,7 @@ import org.embergraph.journal.Name2Addr.Entry;
 public interface ICheckpointProtocol
     extends ICommitter, ICounterSetAccess, ISimpleIndexAccess, IReadWriteLockManager {
 
-  /**
+  /*
    * The value of the record version number that will be assigned to the next node or leaf written
    * onto the backing store. This number is incremented each time a node or leaf is written onto the
    * backing store. The initial value is ZERO (0). The first value assigned to a node or leaf will
@@ -48,26 +48,26 @@ public interface ICheckpointProtocol
    *
    * <p>TODO Nobody is actually incrementing this value right now.
    */
-  public long getRecordVersion();
+  long getRecordVersion();
 
-  /**
+  /*
    * Returns the most recent {@link ICheckpoint} record.
    *
    * @return The most recent {@link ICheckpoint} record and never <code>null</code>.
    */
-  public ICheckpoint getCheckpoint();
+  ICheckpoint getCheckpoint();
 
   /** The address at which the most recent {@link IndexMetadata} record was written. */
-  public long getMetadataAddr();
+  long getMetadataAddr();
 
-  /**
+  /*
    * The address of the last written root of the persistent data structure -or- <code>0L</code> if
    * there is no root. A <code>0L</code> return may be an indication that an empty data structure
    * will be created on demand.
    */
-  public long getRootAddr();
+  long getRootAddr();
 
-  /**
+  /*
    * Sets the lastCommitTime.
    *
    * <p>Note: The lastCommitTime is set by a combination of the {@link AbstractJournal} and {@link
@@ -81,18 +81,18 @@ public interface ICheckpointProtocol
    * @throws IllegalStateException if the timestamp is less than the previous value (it is permitted
    *     to advance but not to go backwards).
    */
-  public void setLastCommitTime(final long lastCommitTime);
+  void setLastCommitTime(final long lastCommitTime);
 
-  /**
+  /*
    * The timestamp associated with the last {@link IAtomicStore#commit()} in which writes buffered
    * by this index were made restart-safe on the backing store. The lastCommitTime is set when the
    * index is loaded from the backing store and updated after each commit. It is ZERO (0L) when an
    * index is first created and will remain ZERO (0L) until the index is committed. If the backing
    * store does not support atomic commits, then this value will always be ZERO (0L).
    */
-  public long getLastCommitTime();
+  long getLastCommitTime();
 
-  /**
+  /*
    * Checkpoint operation must {@link #flush()} dirty nodes, dirty persistent data structures, etc,
    * write a new {@link Checkpoint} record on the backing store, save a reference to the current
    * {@link Checkpoint}, and return the address of that {@link Checkpoint} record.
@@ -105,9 +105,9 @@ public interface ICheckpointProtocol
    *     written onto the store. The data structure can be reloaded from this {@link Checkpoint}
    *     record.
    */
-  public long writeCheckpoint();
+  long writeCheckpoint();
 
-  /**
+  /*
    * Checkpoint operation must {@link #flush()} dirty nodes, dirty persistent data structures, etc,
    * write a new {@link Checkpoint} record on the backing store, save a reference to the current
    * {@link Checkpoint}, and return the address of that {@link Checkpoint} record.
@@ -120,19 +120,19 @@ public interface ICheckpointProtocol
    *     the store. The persistent data structure can be reloaded from this {@link Checkpoint}
    *     record.
    */
-  public Checkpoint writeCheckpoint2();
+  Checkpoint writeCheckpoint2();
 
   /** Return the {@link IDirtyListener}. */
-  public IDirtyListener getDirtyListener();
+  IDirtyListener getDirtyListener();
 
-  /**
+  /*
    * Set or clear the listener (there can be only one).
    *
    * @param listener The listener.
    */
-  public void setDirtyListener(final IDirtyListener listener);
+  void setDirtyListener(final IDirtyListener listener);
 
-  /**
+  /*
    * The metadata for the index. This is full of good stuff about the index.
    *
    * <p>Note: The same method is also declared by {@link IIndex} in order to provide access to the
@@ -140,15 +140,15 @@ public interface ICheckpointProtocol
    *
    * @see IIndex#getIndexMetadata()
    */
-  public IndexMetadata getIndexMetadata();
+  IndexMetadata getIndexMetadata();
 
   //	/*
   //	 * Generic data access methods defined for all persistence capable
   //	 * data structures.
   //	 */
   //
-  //    /**
-  //     * Return the #of entries in the index.
+  //    /*
+//     * Return the #of entries in the index.
   //     * <p>
   //     * Note: If the index supports deletion markers then the range count will be
   //     * an upper bound and may double count tuples which have been overwritten,
@@ -160,15 +160,15 @@ public interface ICheckpointProtocol
   //     */
   //    public long rangeCount();
   //
-  //    /**
-  //     * Visit all entries in the index in the natural order of the index
+  //    /*
+//     * Visit all entries in the index in the natural order of the index
   //     * (dereferencing visited tuples to the application objects stored within
   //     * those tuples).
   //     */
   //    public ICloseableIterator<?> scan();
   //
-  //    /**
-  //     * Remove all entries in the index.
+  //    /*
+//     * Remove all entries in the index.
   //     */
   //    public void removeAll();
 
@@ -176,7 +176,7 @@ public interface ICheckpointProtocol
    * reopen() / close() protocol
    */
 
-  /**
+  /*
    * (Re-) open the index. This method is part of a {@link #close()} / {@link #reopen()} protocol.
    * That protocol may be used to reduce the resource burden of an index. This method is
    * automatically invoked by a variety of methods that need to ensure that the index is available
@@ -186,9 +186,9 @@ public interface ICheckpointProtocol
    * @see #isOpen()
    * @see #getRoot()
    */
-  public void reopen();
+  void reopen();
 
-  /**
+  /*
    * The contract for {@link #close()} is to reduce the resource burden of the index while not
    * rendering the index inoperative. An index that has been {@link #close() closed} MAY be {@link
    * #reopen() reopened} at any time (conditional on the continued availability of the backing
@@ -202,9 +202,9 @@ public interface ICheckpointProtocol
    * {@link #close()} a mutable index view that state can be recovered by {@link #reopen()} then you
    * MUST write a new {@link Checkpoint} record before closing the index.
    */
-  public void close();
+  void close();
 
-  /**
+  /*
    * An "open" index has may have some buffered data. A closed index will have to re-read any
    * backing data from the backing store.
    *
@@ -212,9 +212,9 @@ public interface ICheckpointProtocol
    * @see #close()
    * @see #reopen()
    */
-  public boolean isOpen();
+  boolean isOpen();
 
-  /**
+  /*
    * Reports statistics for the index.
    *
    * @param recursive When <code>true</code>, also collects statistics on the pages (nodes and

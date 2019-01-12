@@ -37,8 +37,8 @@ import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.IDataService;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Class supports range query across against an unpartitioned index on an {@link IDataService} but
+/*
+* Class supports range query across against an unpartitioned index on an {@link IDataService} but
  * DOES NOT handle index partition splits, moves or joins.
  *
  * <p>Note: This class supports caching of the remote metadata index, which does not use index
@@ -55,19 +55,19 @@ public class RawDataServiceTupleIterator<E> extends AbstractChunkedTupleIterator
   //
   //    protected static final boolean INFO = log.isInfoEnabled();
 
-  /**
+  /*
    * Error message used by {@link #getKey()} when the iterator was not provisioned to request keys
    * from the data service.
    */
   public static final transient String ERR_NO_KEYS = "Keys not requested";
 
-  /**
+  /*
    * Error message used by {@link #getValue()} when the iterator was not provisioned to request
    * values from the data service.
    */
   public static final transient String ERR_NO_VALS = "Values not requested";
 
-  /**
+  /*
    * The data service for the index.
    *
    * <p>Note: Be careful when using this field since you take on responsibilty for handling index
@@ -88,7 +88,7 @@ public class RawDataServiceTupleIterator<E> extends AbstractChunkedTupleIterator
   /** From the ctor. */
   private final boolean readConsistent;
 
-  /**
+  /*
    * @param dataService The data service on which the index resides.
    * @param name The name of the index partition on that data service.
    * @param timestamp The timestamp used for the reads.
@@ -154,7 +154,7 @@ public class RawDataServiceTupleIterator<E> extends AbstractChunkedTupleIterator
     this.readConsistent = readConsistent;
   }
 
-  /**
+  /*
    * Atomic operation caches a chunk of results from an {@link IDataService}.
    *
    * <p>Note: This uses the <i>timestamp</i> specified by the caller NOT the {@link #timestamp}

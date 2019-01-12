@@ -27,8 +27,8 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.paths.ArbitraryLengthPathOp;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
-/**
- * Test suite for https://jira.blazegraph.com/browse/BLZG-2089, which introduces a fresh query hint
+/*
+* Test suite for https://jira.blazegraph.com/browse/BLZG-2089, which introduces a fresh query hint
  * to select the gearing choice for property paths.
  *
  * @author <a href="mailto:ms@blazegraph.com">Michael Schmidt</a>
@@ -203,7 +203,7 @@ public class TestGearingQueryHint extends AbstractDataDrivenSPARQLTestCase {
     assertQueryHintSet(h.getASTContainer().getQueryPlan(), null /* no gearing hint specified */);
   }
 
-  /**
+  /*
    * Simple s p* o pattern with user-defined forward gearing hint. Case where the pattern does
    * match.
    */
@@ -222,7 +222,7 @@ public class TestGearingQueryHint extends AbstractDataDrivenSPARQLTestCase {
     assertQueryHintSet(h.getASTContainer().getQueryPlan(), QueryHints.GEARING_FORWARD);
   }
 
-  /**
+  /*
    * Simple s p* o pattern with user-defined reverse gearing hint. Case where the pattern does
    * match.
    */
@@ -241,7 +241,7 @@ public class TestGearingQueryHint extends AbstractDataDrivenSPARQLTestCase {
     assertQueryHintSet(h.getASTContainer().getQueryPlan(), QueryHints.GEARING_REVERSE);
   }
 
-  /**
+  /*
    * Simple s p* o pattern without user-defined gearing hint. Case where the pattern does NOT match.
    */
   public void test_hint_gearing_none_04b() throws Exception {
@@ -259,7 +259,7 @@ public class TestGearingQueryHint extends AbstractDataDrivenSPARQLTestCase {
     assertQueryHintSet(h.getASTContainer().getQueryPlan(), null /* no gearing hint specified */);
   }
 
-  /**
+  /*
    * Simple s p* o pattern with user-defined forward gearing hint. Case where the pattern does NOT
    * match.
    */
@@ -278,7 +278,7 @@ public class TestGearingQueryHint extends AbstractDataDrivenSPARQLTestCase {
     assertQueryHintSet(h.getASTContainer().getQueryPlan(), QueryHints.GEARING_FORWARD);
   }
 
-  /**
+  /*
    * Simple s p* o pattern with user-defined reverse gearing hint. Case where the pattern does NOT
    * match.
    */
@@ -313,7 +313,7 @@ public class TestGearingQueryHint extends AbstractDataDrivenSPARQLTestCase {
     assertQueryHintSet(h.getASTContainer().getQueryPlan(), null /* no gearing hint specified */);
   }
 
-  /**
+  /*
    * Simple s p* s pattern with user-defined forward gearing hint. Case where the pattern does NOT
    * match.
    */
@@ -348,7 +348,7 @@ public class TestGearingQueryHint extends AbstractDataDrivenSPARQLTestCase {
     assertQueryHintSet(h.getASTContainer().getQueryPlan(), QueryHints.GEARING_REVERSE);
   }
 
-  /**
+  /*
    * Query in the style of the original ticket triggering this feature:
    * https://jira.blazegraph.com/browse/BLZG-2089
    *
@@ -371,7 +371,7 @@ public class TestGearingQueryHint extends AbstractDataDrivenSPARQLTestCase {
     assertQueryHintSet(h.getASTContainer().getQueryPlan(), QueryHints.GEARING_FORWARD);
   }
 
-  /**
+  /*
    * Asserts that the gearing hint is set as specified (either forward, reverse, or not set aka
    * null) in the queryPlan's single {@link ArbitraryLengthPathOp}. Fails if this condition is
    * violated.

@@ -23,8 +23,8 @@ package org.embergraph.ha.pipeline;
 import java.util.concurrent.CancellationException;
 import org.embergraph.ha.QuorumPipelineImpl;
 
-/**
- * Exception thrown when the downstream service is changed by a pipeline reconfiguration. This
+/*
+* Exception thrown when the downstream service is changed by a pipeline reconfiguration. This
  * exception was introduced so retrySend() in {@link QuorumPipelineImpl} could differentiate between
  * normal termination of a service (which will interrupt the {@link HAReceiveService} and thus
  * propagate a {@link CancellationException} to the upstream service) and a pipeline change which

@@ -49,8 +49,8 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for translating the openrdf SPARQL AST nodes for <code>GroupGraphPattern</code> into
+/*
+* Test suite for translating the openrdf SPARQL AST nodes for <code>GroupGraphPattern</code> into
  * the embergraph AST (join groups, union, etc).
  *
  * @see TestSubqueryPatterns
@@ -67,7 +67,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     super(name);
   }
 
-  /**
+  /*
    * Test empty group. The group pattern:
    *
    * <pre>
@@ -109,7 +109,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for named graph triple pattern where the graph is a variable.
    *
    * <pre>
@@ -153,7 +153,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Test for a named graph triple pattern where the graph is a constant.
    *
    * <pre>
@@ -199,7 +199,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for the join of a triple pattern with a join group containing only a single triple
    * pattern.
    *
@@ -255,7 +255,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for the join of a triple pattern with a join group containing only a single triple
    * pattern.
    *
@@ -313,7 +313,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for two groups, each consisting of one triple pattern.
    *
    * <pre>
@@ -366,7 +366,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Test union of two groups.
    *
    * <pre>
@@ -429,7 +429,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Test union of three groups.
    *
    * <pre>
@@ -501,7 +501,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Test union of four groups.
    *
    * <pre>
@@ -580,7 +580,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Test union of two groups with an embedded union in the third group.
    *
    * <pre>
@@ -661,7 +661,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -718,7 +718,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -770,7 +770,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context with a FILTER.
    *
    * <pre>
@@ -809,7 +809,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.EQ,
               null /* scalarValues */,
-              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
+              new VarNode("s"), new VarNode("o"));
 
       whereClause.addChild(new FilterNode(ve));
     }
@@ -819,7 +819,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for empty group in the default context with a FILTER.
    *
    * <pre>
@@ -857,11 +857,9 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.GE,
               null /* scalarValues */,
-              new ValueExpressionNode[] {
-                new VarNode("a"),
-                new ConstantNode(
-                    lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG)))
-              });
+              new VarNode("a"),
+              new ConstantNode(
+                  lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG))));
 
       whereClause.addChild(new FilterNode(ve1));
 
@@ -869,11 +867,9 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.GE,
               null /* scalarValues */,
-              new ValueExpressionNode[] {
-                new VarNode("b"),
-                new ConstantNode(
-                    lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG)))
-              });
+              new VarNode("b"),
+              new ConstantNode(
+                  lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG))));
 
       whereClause.addChild(new FilterNode(ve2));
     }
@@ -883,7 +879,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context with a BIND and a FILTER.
    *
    * <pre>
@@ -924,7 +920,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.EQ,
               null /* scalarValues */,
-              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
+              new VarNode("s"), new VarNode("o"));
 
       whereClause.addChild(new FilterNode(ve));
     }
@@ -934,7 +930,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context with a LET and a FILTER (LET is an
    * alternative syntax for BIND).
    *
@@ -976,7 +972,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.EQ,
               null /* scalarValues */,
-              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
+              new VarNode("s"), new VarNode("o"));
 
       whereClause.addChild(new FilterNode(ve));
     }
@@ -986,7 +982,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * IN with empty arg list in a FILTER. This should be turned into a FALSE constraint.
    *
    * <pre>
@@ -1026,9 +1022,8 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
               new FunctionNode(
                   FunctionRegistry.IN,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s")
-                  })));
+                  // args
+                  new VarNode("s"))));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);
@@ -1036,7 +1031,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * IN with an arg list in a FILTER. The arg list has a single value. This should be turned into a
    * SameTerm constraint.
    *
@@ -1077,10 +1072,10 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
               new FunctionNode(
                   FunctionRegistry.IN,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"), // variable
-                    new VarNode("o") // other arg
-                  })));
+                  // args
+                  new VarNode("s"), // variable
+                  new VarNode("o") // other arg
+              )));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);
@@ -1088,7 +1083,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * IN with a non-empty arg list in a FILTER. The arguments are expressions rather than constants.
    * This should be turned into a {@link ComputedIN}.
    *
@@ -1129,11 +1124,11 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
               new FunctionNode(
                   FunctionRegistry.IN,
                   null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"), // // variable
-                    new VarNode("p"),
-                    new VarNode("o") // other args.
-                  })));
+                  // args
+                  new VarNode("s"), // // variable
+                  new VarNode("p"),
+                  new VarNode("o") // other args.
+              )));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);
@@ -1141,7 +1136,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * IN with a non-empty arg list in a FILTER. The arguments are expressions rather than constants.
    * This should be turned into an optimized IN using a hash set or binary search.
    *
@@ -1181,13 +1176,12 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FilterNode(
               new FunctionNode(
                   FunctionRegistry.IN,
-                  null, // scalarValues
-                  new ValueExpressionNode[] { // args
-                    new VarNode("s"), // var
-                    // other args to IN()
-                    new ConstantNode(makeIV(valueFactory.createLiteral("1", XSD.INTEGER))),
-                    new ConstantNode(makeIV(valueFactory.createLiteral("2", XSD.INTEGER)))
-                  })));
+                  null,// scalarValues
+                  // args
+                  new VarNode("s"), // var
+                  // other args to IN()
+                  new ConstantNode(makeIV(valueFactory.createLiteral("1", XSD.INTEGER))),
+                  new ConstantNode(makeIV(valueFactory.createLiteral("2", XSD.INTEGER))))));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);
@@ -1195,7 +1189,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Simple SERVICE graph pattern.
    *
    * <pre>
@@ -1251,7 +1245,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Simple SERVICE graph pattern with SILENT keyword.
    *
    * <pre>
@@ -1313,7 +1307,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Simple SERVICE graph pattern with variable for the URI.
    *
    * <pre>
@@ -1371,7 +1365,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Simple SERVICE graph pattern with variable for the URI and prefix declarations. This verifies
    * that the prefix declarations are harvested and attached to the {@link ServiceNode}.
    *

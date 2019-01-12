@@ -23,8 +23,8 @@ package org.embergraph.rdf.internal;
 import junit.framework.TestCase2;
 import org.embergraph.service.geospatial.ZOrderRangeScanUtil;
 
-/**
- * Test for utility functionalities required for zOrder index construction, such as {@link
+/*
+* Test for utility functionalities required for zOrder index construction, such as {@link
  * ZOrderRangeScanUtil}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -32,7 +32,7 @@ import org.embergraph.service.geospatial.ZOrderRangeScanUtil;
  */
 public class TestZOrderRangeScanUtility extends TestCase2 {
 
-  /**
+  /*
    * We implement the test case from Wikipedia: https://en.wikipedia.org/wiki/Z-order_curve,
    * implementing bigmin calculation in a two-dimensional setting.
    */

@@ -16,8 +16,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/**
- * Trac 794 concerns interactions between BIND and SERVICE going to a remote SPARQL end-point. The
+/*
+* Trac 794 concerns interactions between BIND and SERVICE going to a remote SPARQL end-point. The
  * service call must be done last.
  */
 package org.embergraph.rdf.sparql.ast.optimizers;

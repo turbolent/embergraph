@@ -18,7 +18,7 @@ package org.embergraph.ganglia;
 /** Decoder interface for ganglia wire format messages. */
 public interface IGangliaMessageDecoder {
 
-  /**
+  /*
    * Decode a Ganglia message as received from a datagram packet.
    *
    * @param data The data.

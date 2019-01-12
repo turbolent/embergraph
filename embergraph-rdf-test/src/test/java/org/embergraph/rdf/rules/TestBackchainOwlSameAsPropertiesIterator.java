@@ -37,8 +37,8 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test suite for {@link BackchainOwlSameAsPropertiesIterator}.
+/*
+* Test suite for {@link BackchainOwlSameAsPropertiesIterator}.
  *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -57,7 +57,7 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
 
   //    final TemporaryStore tempStore = new TemporaryStore();
 
-  /**
+  /*
    * Test the various access paths for backchaining the property collection normally done through
    * owl:sameAs {2,3}.
    */
@@ -155,7 +155,7 @@ public class TestBackchainOwlSameAsPropertiesIterator extends AbstractInferenceE
 
       { // test O
         SPOAccessPath accessPath =
-            (SPOAccessPath) noClosure.getAccessPath((IV) null, (IV) null, (IV) w);
+            (SPOAccessPath) noClosure.getAccessPath((IV) null, null, w);
 
         IChunkedOrderedIterator<ISPO> itr =
             new BackchainOwlSameAsPropertiesIterator(

@@ -27,8 +27,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.search.FullTextIndex;
 
-/**
- * Implementation provides for the use of {@link IV}s in the {@link FullTextIndex}.
+/*
+* Implementation provides for the use of {@link IV}s in the {@link FullTextIndex}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

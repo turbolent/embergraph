@@ -35,8 +35,8 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 
-/**
- * An operator for conditional routing of binding sets in a pipeline. The operator will copy binding
+/*
+* An operator for conditional routing of binding sets in a pipeline. The operator will copy binding
  * sets either to the default sink (if a condition is satisfied) and otherwise to the alternate sink
  * (iff one is specified). If a solution fails the constraint and the alternate sink is not
  * specified, then the solution is dropped.
@@ -58,7 +58,7 @@ public class ConditionalRoutingOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * An {@link IConstraint} which specifies the condition. When the condition is satisfied the
      * binding set is routed to the default sink. When the condition is not satisfied, the binding
      * set is routed to the alternative sink.
@@ -66,7 +66,7 @@ public class ConditionalRoutingOp extends PipelineOp {
     String CONDITION = ConditionalRoutingOp.class.getName() + ".condition";
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -76,7 +76,7 @@ public class ConditionalRoutingOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args

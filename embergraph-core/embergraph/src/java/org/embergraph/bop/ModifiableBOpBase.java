@@ -29,8 +29,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
-/**
- * Abstract base class for mutable {@link BOp}s. Unlike {@link BOpBase}, this class supports
+/*
+* Abstract base class for mutable {@link BOp}s. Unlike {@link BOpBase}, this class supports
  * destructive mutation. This is the base class for the embergraph AST nodes. ASTs are destructively
  * rewritten by optimizers before they are turned into a query plan.
  *
@@ -64,7 +64,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
   /** A mutable map containing the operator annotations and never <code>null</code>. */
   private final Map<String, Object> annotations;
 
-  /**
+  /*
    * Deep copy constructor (required).
    *
    * <p>Each {@link BOp} MUST implement a public copy constructor with the signature:
@@ -89,7 +89,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     annotations = new LinkedHashMap<String, Object>(op.annotations);
   }
 
-  /**
+  /*
    * Shallow copy constructor (required).
    *
    * @param args The arguments to the operator.
@@ -127,7 +127,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
       return annotationsEqual(annotations, ((ModifiableBOpBase) o).annotations);
     }
 
-    return super.annotationsEqual(annotations, o.annotations());
+    return annotationsEqual(annotations, o.annotations());
   }
 
   public BOp get(final int index) {
@@ -141,7 +141,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     return args.indexOf(bop);
   }
 
-  /**
+  /*
    * Replace the arguments.
    *
    * @param args The new arguments.
@@ -157,7 +157,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     return this;
   }
 
-  /**
+  /*
    * Replace the value of the argument at the specified index (core mutation method).
    *
    * @param index The index of the child expression to be replaced.
@@ -179,7 +179,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     return this;
   }
 
-  /**
+  /*
    * Add a new argument (core mutation method).
    *
    * @param newArg The argument.
@@ -198,7 +198,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     mutation();
   }
 
-  /**
+  /*
    * Add a new argument (core mutation method) at the specified index.
    *
    * @param index The index at which the child expression is to be inserted.
@@ -218,7 +218,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     mutation();
   }
 
-  /**
+  /*
    * Add an argument iff it is not already present.
    *
    * @param arg The argument.
@@ -237,7 +237,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     }
   }
 
-  /**
+  /*
    * Remove the 1st occurrence of the argument (core mutation method).
    *
    * @param arg The argument.
@@ -261,7 +261,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     return false;
   }
 
-  /**
+  /*
    * Replace a child of a node with another reference (destructive modification). All arguments
    * which point to the oldChild will be replaced by references to the newChild.
    *
@@ -283,7 +283,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
 
       if (child == oldChild) {
 
-        ((ModifiableBOpBase) p).setArg(i, newChild);
+        p.setArg(i, newChild);
 
         nmods++;
       }
@@ -297,7 +297,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     return args.size();
   }
 
-  /**
+  /*
    * An unmodifiable view of the list of arguments (aka children) of this node.
    *
    * <p>Note: The view is not modifiable in order to preserve the contract that {@link #mutation()}
@@ -491,7 +491,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This {@link Iterator} supports removal.
@@ -537,7 +537,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
   //
   //    }
 
-  /**
+  /*
    * Copy all annotations from the caller's map.
    *
    * @param anns The annotations to be copied.
@@ -550,7 +550,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     return this;
   }
 
-  /**
+  /*
    * Set the named property value (destructive mutation).
    *
    * @param name The name.
@@ -571,7 +571,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     return this;
   }
 
-  /**
+  /*
    * Conditionally set the named property iff it is not bound (destructive mutation).
    *
    * @param name The name.
@@ -591,7 +591,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     return this;
   }
 
-  /**
+  /*
    * Clear the named annotation (destructive mutation).
    *
    * @param name The annotation.
@@ -609,7 +609,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
     return this;
   }
 
-  /**
+  /*
    * Unconditionally set the {@link Annotations#BOP_ID}.
    *
    * @param id The id.
@@ -631,8 +631,8 @@ public class ModifiableBOpBase extends CoreBaseBOp {
   //
   //    }
   //
-  //    /**
-  //     * Deep copy the arguments.
+  //    /*
+//     * Deep copy the arguments.
   //     * <p>
   //     * Note: As long as we stick to the immutable semantics for bops, we can
   //     * just make a shallow copy of the arguments in the "copy" constructor and
@@ -653,8 +653,8 @@ public class ModifiableBOpBase extends CoreBaseBOp {
   //        return t;
   //    }
   //
-  //    /**
-  //     * Deep copy the annotations.
+  //    /*
+//     * Deep copy the annotations.
   //     * <p>
   //     * Note: This does not know how to deep copy annotations which are not
   //     * {@link BOp}s or immutable objects such as {@link String}s or

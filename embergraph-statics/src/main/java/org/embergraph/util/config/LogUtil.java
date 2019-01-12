@@ -25,8 +25,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.xml.DOMConfigurator;
 
-/**
- * Utility class that provides a set of static convenience methods related to the initialization and
+/*
+* Utility class that provides a set of static convenience methods related to the initialization and
  * configuration of the logging mechanism(s) employed by the components of the system. The methods
  * of this class can be useful both in Jini configuration files, as well as in the system components
  * themselves.
@@ -52,7 +52,7 @@ import org.apache.log4j.xml.DOMConfigurator;
  */
 public class LogUtil {
 
-  /**
+  /*
    * Examine the various log4j configuration properties and return the name of the log4j
    * configuration resource if one was configured.
    *
@@ -72,7 +72,7 @@ public class LogUtil {
     return null;
   }
 
-  /**
+  /*
    * Attempt to resolve the resources with the following names in the given order and return the
    * {@link URL} of the first such resource which is found and <code>null</code> if none of the
    * resources are found:
@@ -153,8 +153,8 @@ public class LogUtil {
 
       } else {
 
-        /*
-         * log4j was not explicitly configured and the log4j resource
+      /*
+       * log4j was not explicitly configured and the log4j resource
          * could not be located on the CLASSPATH.
          */
 

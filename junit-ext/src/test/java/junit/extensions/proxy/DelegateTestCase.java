@@ -52,7 +52,7 @@ public class DelegateTestCase extends TestCase {
     return suite;
   }
 
-  /**
+  /*
    * This method succeeds on the delegate and it writes a message on {@link System#err}. The
    * implementation on the proxy throws an exception so if the proxy is not setup correctly, you
    * will see that thrown exception.

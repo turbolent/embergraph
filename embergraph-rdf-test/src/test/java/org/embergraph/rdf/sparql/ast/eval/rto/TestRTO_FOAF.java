@@ -25,8 +25,8 @@ import java.util.Properties;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
 
-/**
- * Data driven test suite for the Runtime Query Optimizer (RTO) using quads-mode FOAF data.
+/*
+* Data driven test suite for the Runtime Query Optimizer (RTO) using quads-mode FOAF data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestBasicQuery.java 6440 2012-08-14 17:57:33Z thompsonbry $
@@ -66,7 +66,7 @@ public class TestRTO_FOAF extends AbstractRTOTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Find all friends of a friend.
    *
    * <pre>
@@ -109,7 +109,7 @@ public class TestRTO_FOAF extends AbstractRTOTestCase {
     assertSameJoinOrder(expected, helper);
   }
 
-  /**
+  /*
    * Find all friends of a friend having at least N indirect connections.
    *
    * <pre>
@@ -153,7 +153,7 @@ public class TestRTO_FOAF extends AbstractRTOTestCase {
     assertSameJoinOrder(expected, helper);
   }
 
-  /**
+  /*
    * Find all direct friends and extract their names (when available).
    *
    * <pre>

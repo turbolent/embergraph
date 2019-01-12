@@ -36,8 +36,8 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for {@link Id2TermTupleSerializer}.
+/*
+* Test suite for {@link Id2TermTupleSerializer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -88,7 +88,7 @@ public class TestId2TermTupleSerializer extends TestCase2 {
     assertTrue(BytesUtil.compareBytes(k2, k3) < 0);
   }
 
-  /**
+  /*
    * A unit test of the proposal for introducing backward compatible versioning into an unversioned
    * class.
    */
@@ -118,7 +118,7 @@ public class TestId2TermTupleSerializer extends TestCase2 {
     assertEquals("valueFactoryClass", expected.valueFactoryClass, actual.valueFactoryClass);
   }
 
-  /**
+  /*
    * @todo test w/ and w/o a base class which implements {@link Externalizable}. It SHOULD not
    *     matter.
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -130,7 +130,7 @@ public class TestId2TermTupleSerializer extends TestCase2 {
     public void writeExternal(ObjectOutput out) throws IOException {}
   }
 
-  /**
+  /*
    * A test class implementing {@link Externalizable} and incorporating the proposed backward
    * compatible introduction of versioning into the {@link Id2TermTupleSerializer} class.
    *
@@ -140,13 +140,13 @@ public class TestId2TermTupleSerializer extends TestCase2 {
       // extends V2
       implements Externalizable {
 
-    /**
+    /*
      * Note: This field is unchanging. If it were to change then deserialization of the class would
      * break for previous versions.
      */
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * Included only the UTF serialization of the namespace field without explicit version support.
      *
      * <pre>
@@ -155,7 +155,7 @@ public class TestId2TermTupleSerializer extends TestCase2 {
      */
     static final transient short VERSION0 = 0;
 
-    /**
+    /*
      * Added the UTF serialization of the class name of the value factory and an explicit version
      * number in the serialization format. This version is detected by a read of an empty string
      * from the original UTF field.

@@ -20,15 +20,15 @@ package org.embergraph.htree;
 import org.embergraph.btree.data.ILeafData;
 import org.embergraph.htree.data.IDirectoryData;
 
-/**
- * Interface for creating nodes or leaves.
+/*
+* Interface for creating nodes or leaves.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: INodeFactory.java 2265 2009-10-26 12:51:06Z thompsonbry $
  */
 public interface INodeFactory {
 
-  /**
+  /*
    * Create a node.
    *
    * @param htree The owning {@link HTree}.
@@ -36,9 +36,9 @@ public interface INodeFactory {
    * @param data The node data record.
    * @return A node initialized from those data.
    */
-  public DirectoryPage allocNode(AbstractHTree htree, long addr, IDirectoryData data);
+  DirectoryPage allocNode(AbstractHTree htree, long addr, IDirectoryData data);
 
-  /**
+  /*
    * Create a leaf.
    *
    * @param htree The owning {@link HTree}.
@@ -46,5 +46,5 @@ public interface INodeFactory {
    * @param data The leaf data record.
    * @return A leaf initialized from those data.
    */
-  public BucketPage allocLeaf(AbstractHTree htree, long addr, ILeafData data);
+  BucketPage allocLeaf(AbstractHTree htree, long addr, ILeafData data);
 }

@@ -26,8 +26,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import org.embergraph.relation.accesspath.IBuffer;
 
-/**
- * {@link Serializable} class wraps a {@link RemoteBuffer} delegating methods through to the {@link
+/*
+* {@link Serializable} class wraps a {@link RemoteBuffer} delegating methods through to the {@link
  * IBuffer} on the remote service while masquerading {@link IOException}s so that we can implement
  * the {@link IBuffer} API.
  *

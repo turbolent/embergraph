@@ -41,8 +41,8 @@ import org.embergraph.counters.ProcessReaderHelper;
 import org.embergraph.counters.linux.SarCpuUtilizationCollector.DI;
 import org.embergraph.util.Bytes;
 
-/**
- * Collects statistics on the JVM process relating to CPU, memory, and IO statistics (when
+/*
+* Collects statistics on the JVM process relating to CPU, memory, and IO statistics (when
  * available) using <code>pidstat -p 501 -u -I -r -d -w</code> [[<i>interval</i> [<i>count</i>]]
  *
  * <p>Where <code>-p</code> is the pid to monitor, <code>-u</code> is cpu utilization (<code>-I
@@ -58,26 +58,26 @@ public class PIDStatCollector extends AbstractProcessCollector
 
   //    static protected final Logger log = Logger.getLogger(PIDStatCollector.class);
   //
-  //    /**
-  //     * True iff the {@link #log} level is DEBUG or less.
+  //    /*
+//     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final protected static boolean DEBUG = log.isDebugEnabled();
   //
-  //    /**
-  //     * True iff the {@link #log} level is log.isInfoEnabled() or less.
+  //    /*
+//     * True iff the {@link #log} level is log.isInfoEnabled() or less.
   //     */
   //    final protected static boolean log.isInfoEnabled() = log.isInfoEnabled();
 
   /** process to be monitored. */
   protected final int pid;
 
-  /**
+  /*
    * set <code>true</code> if per-process IO data collection should be supported based on the {@link
    * KernelVersion}.
    */
   protected final boolean perProcessIOData;
 
-  /**
+  /*
    * Abstract inner class integrating the current values with the {@link ICounterSet} hierarchy.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -112,7 +112,7 @@ public class PIDStatCollector extends AbstractProcessCollector
     }
   }
 
-  /**
+  /*
    * Inner class integrating the current values with the {@link ICounterSet} hierarchy.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -142,7 +142,7 @@ public class PIDStatCollector extends AbstractProcessCollector
     }
   }
 
-  /**
+  /*
    * Inner class integrating the current values with the {@link ICounterSet} hierarchy.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -172,14 +172,14 @@ public class PIDStatCollector extends AbstractProcessCollector
     }
   }
 
-  /**
+  /*
    * Updated each time a new row of data is read from the process and reported as the last modified
    * time for counters based on that process and defaulted to the time that we begin to collect
    * performance data.
    */
   private final AtomicLong lastModified = new AtomicLong(System.currentTimeMillis());
 
-  /**
+  /*
    * Map containing the current values for the configured counters. The keys are paths into the
    * {@link CounterSet}. The values are the data most recently read from <code>pidstat</code>.
    *
@@ -190,7 +190,7 @@ public class PIDStatCollector extends AbstractProcessCollector
    */
   private final Map<String, Object> vals = new ConcurrentHashMap<String, Object>();
 
-  /**
+  /*
    * @param pid Process to be monitored.
    * @param interval Reporting interval in seconds.
    * @param kernelVersion The Linux {@link KernelVersion}.
@@ -281,7 +281,7 @@ public class PIDStatCollector extends AbstractProcessCollector
     return root;
   }
 
-  /**
+  /*
    * Extended to force <code>pidstat</code> to use a consistent timestamp format regardless of
    * locale by setting <code>S_TIME_FORMAT="ISO"</code> in the environment.
    */
@@ -299,7 +299,7 @@ public class PIDStatCollector extends AbstractProcessCollector
     return new PIDStatReader();
   }
 
-  /**
+  /*
    * Reads <code>pidstat</code> output and extracts and updates counter values.
    *
    * <p>Sample <code>pidstat</code> output.
@@ -348,7 +348,7 @@ public class PIDStatCollector extends AbstractProcessCollector
       super();
     }
 
-    /**
+    /*
      * The input arrives as an initial banner and a sequence of data reporting events, each of which
      * is three lines. The first line is blank. The second line gives the headers for the event. The
      * third line gives the data for the event. The 2nd and 3rd lines carry a timestamp as the first
@@ -418,8 +418,8 @@ public class PIDStatCollector extends AbstractProcessCollector
           //                }
           //
           //            }                /*
-          /*
-           * Note: This timestamp should be _very_ close to the value reported
+        /*
+       * Note: This timestamp should be _very_ close to the value reported
            * by sysstat. Also, using the current time is MUCH easier and less
            * error prone than attempting to parse the TIME OF DAY written by
            * sysstat and correct it into a UTC time by adjusting for the UTC
@@ -442,8 +442,8 @@ public class PIDStatCollector extends AbstractProcessCollector
           }
           if (fields.containsKey(PIDSTAT_FIELD_CPU_PERCENT)) {
 
-            /*
-             * CPU data for the specified process.
+          /*
+       * CPU data for the specified process.
              */
 
             // 06:35:15 AM       PID   %user %system    %CPU   CPU  Command
@@ -463,8 +463,8 @@ public class PIDStatCollector extends AbstractProcessCollector
 
           } else if (fields.containsKey("RSS")) {
 
-            /*
-             * Memory data for the specified process.
+          /*
+       * Memory data for the specified process.
              *
              *       06:35:15 AM       PID  minflt/s  majflt/s     VSZ    RSS   %MEM  Command
              *       06:35:15 AM       501      0.00      0.00       0      0   0.00  kjournald
@@ -492,8 +492,8 @@ public class PIDStatCollector extends AbstractProcessCollector
 
           } else if (perProcessIOData && header.contains("kB_rd/s")) {
 
-            /*
-             * IO data for the specified process.
+          /*
+       * IO data for the specified process.
              *
              *         06:35:15 AM       PID   kB_rd/s   kB_wr/s kB_ccwr/s  Command
              *         06:35:15 AM       501      0.00      1.13      0.00  kjournald
@@ -515,8 +515,8 @@ public class PIDStatCollector extends AbstractProcessCollector
 
         } catch (Exception ex) {
 
-          /*
-           * Issue warning for parsing problems.
+        /*
+       * Issue warning for parsing problems.
            */
 
           log.warn(

@@ -31,8 +31,8 @@ import org.embergraph.journal.RootBlockException;
 import org.embergraph.rawstore.IAddressManager;
 import org.embergraph.util.Bytes;
 
-/**
- * The checkpoint record for an {@link IndexSegment}.
+/*
+* The checkpoint record for an {@link IndexSegment}.
  *
  * <p>The checkpoint record for the index segment file is written at the head of the file. It should
  * have identical timestamps at the start and end of the checkpoint record (e.g., it doubles as a
@@ -69,7 +69,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
   private static final int SIZEOF_TIMESTAMP = Bytes.SIZEOF_LONG;
   private static final int SIZEOF_CHECKSUM = Bytes.SIZEOF_INT;
 
-  /**
+  /*
    * The #of unused bytes in the checkpoint record format for various versions of the record format.
    * Note that the unused space occurs <em>before</em> the final timestamp in the record. As the
    * unused bytes are allocated in new versions the value in this field MUST be adjusted down from
@@ -125,7 +125,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
   /** Version 0 of the serialization format. */
   public static final transient int VERSION0 = 0x0;
 
-  /**
+  /*
    * Version 1 of the serialization format introduces an option for record level checksums. New
    * fields in this version include:
    *
@@ -138,7 +138,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
    */
   public static final transient int VERSION1 = 0x1;
 
-  /**
+  /*
    * Version 2 of the serialization format replaced the int32 value for nentries with an int64
    * value.
    */
@@ -147,13 +147,13 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
   /** The current serialization version. */
   public static final transient int currentVersion = VERSION2;
 
-  /**
+  /*
    * UUID for this {@link IndexSegment} (it is a unique identifier for the index segment resource
    * and is reported as the {@link UUID} of the {@link IndexSegmentStore}).
    */
   public final UUID segmentUUID;
 
-  /**
+  /*
    * The #of bits in an 64-bit long integer address that are used to represent the byte offset into
    * the {@link IndexSegmentStore}.
    */
@@ -162,20 +162,20 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
   /** The {@link IAddressManager} used to interpret addresses in the {@link IndexSegmentStore}. */
   final IndexSegmentAddressManager am;
 
-  /**
+  /*
    * Height of the index segment (origin zero, so height := 0 means that there is only a root leaf
    * in the tree).
    */
   public final int height;
 
-  /**
+  /*
    * The #of leaves serialized in the file.
    *
    * <p>Note: {@link IndexSegmentBuilder} is restricted to MAX_INT leaves in its build plan.
    */
   public final int nleaves;
 
-  /**
+  /*
    * The #of nodes serialized in the file. If zero, then {@link #nleaves} MUST be ONE (1) and the
    * index consists solely of a root leaf.
    *
@@ -187,7 +187,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
   /** The #of index entries serialized in the file (non-negative and MAY be zero). */
   public final long nentries;
 
-  /**
+  /*
    * The maximum #of bytes in any node or leaf stored on the {@link IndexSegment}.
    *
    * <p>Note: while this appears to be unused now, it is still of interest and will be retained.
@@ -200,7 +200,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
    * byteCount size each region can span many, many records.
    */
 
-  /**
+  /*
    * The offset of the contiguous region containing the serialized leaves in the file.
    *
    * <p>Note: The offset must be equal to {@link #SIZE} since the leaves are written immediately
@@ -211,25 +211,25 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
   /** The #of bytes in the contiguous region containing the serialized leaves in the file. */
   public final long extentLeaves;
 
-  /**
+  /*
    * The offset of the contiguous region containing the serialized nodes in the file or <code>0L
    * </code> iff there are no nodes in the file.
    */
   public final long offsetNodes;
 
-  /**
+  /*
    * The #of bytes in the contiguous region containing the serialized nodes in the file or <code>0L
    * </code> iff there are no nodes in the file.
    */
   public final long extentNodes;
 
-  /**
+  /*
    * The offset of the optional contiguous region containing the raw records to be resolved by blob
    * references or <code>0L</code> iff there are no raw records in this region.
    */
   public final long offsetBlobs;
 
-  /**
+  /*
    * The #of bytes in the optional contiguous region containing the raw records to be resolved by
    * blob references or <code>0L</code> iff there are no raw records in this region.
    */
@@ -261,7 +261,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
   /** Length of the file in bytes. */
   public final long length;
 
-  /**
+  /*
    * <code>true</code> iff the caller asserted that the {@link IndexSegment} was a fused view of the
    * source index (partition) as of the specified {@link #commitTime}. <code>false</code> implies
    * that the {@link IndexSegment} is the result of an incremental build. This flag is important
@@ -270,14 +270,14 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
    */
   public final boolean compactingMerge;
 
-  /**
+  /*
    * <code>true</code> iff record level checksums are in use for the {@link IndexSegment}.
    *
    * @see #VERSION1
    */
   public final boolean useChecksums;
 
-  /**
+  /*
    * The commit time associated with the view from which the {@link IndexSegment} was generated. The
    * {@link IndexSegment} state is equivalent to the state of the view as of that timestamp.
    * However, the {@link IndexSegment} provides a view of only a single commit point in contrast to
@@ -289,7 +289,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
    */
   public final long commitTime;
 
-  /**
+  /*
    * The checksum for the serialized representation of the {@link IndexSegmentCheckpoint} record.
    * This is computed when the record is serialized and verified when it is de-serialized.
    */
@@ -298,7 +298,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
   /** A read-only view of the serialized {@link IndexSegmentCheckpoint} record. */
   private final ByteBuffer buf;
 
-  /**
+  /*
    * Reads the {@link IndexSegmentCheckpoint} record for the {@link IndexSegment}. The operation
    * seeks to the start of the file and uses relative reads with the file pointer.
    *
@@ -478,7 +478,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
     if (log.isInfoEnabled()) log.info(this.toString());
   }
 
-  /**
+  /*
    * Create a new checkpoint record in preparation for writing it on a file containing a newly
    * constructed {@link IndexSegment}.
    *
@@ -678,15 +678,15 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
 
       if (nnodes == 0) {
 
-        /*
-         * The root is a leaf. In this case there is only a single root leaf
+      /*
+       * The root is a leaf. In this case there is only a single root leaf
          * and there are no nodes.
          */
 
         if (offsetNodes != 0L || extentNodes != 0L) {
 
-          /*
-           * Since there is are no nodes, nodes offset and extent MUST be
+        /*
+       * Since there is are no nodes, nodes offset and extent MUST be
            * ZERO.
            */
 
@@ -700,8 +700,8 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
 
         if (am.getByteCount(addrRoot) != extentLeaves) {
 
-          /*
-           * Since there is only a single root leaf, size of the root leaf
+        /*
+       * Since there is only a single root leaf, size of the root leaf
            * record MUST equal extent of the leaves region.
            */
 
@@ -718,8 +718,8 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
 
       } else {
 
-        /*
-         * The root is a node.
+      /*
+       * The root is a node.
          */
 
         if (offsetNodes == 0L || extentNodes == 0L) {
@@ -779,7 +779,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
     }
   }
 
-  /**
+  /*
    * Returns a new view of the read-only {@link ByteBuffer} containing the serialized representation
    * of the {@link IndexSegmentCheckpoint} record.
    */
@@ -788,7 +788,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
     return buf.asReadOnlyBuffer(); // Note: a _new_ view.
   }
 
-  /**
+  /*
    * Serialize the {@link IndexSegmentCheckpoint} record onto a read-only {@link ByteBuffer}.
    *
    * @return The read-only {@link ByteBuffer}.
@@ -894,7 +894,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
     return buf.asReadOnlyBuffer();
   }
 
-  /**
+  /*
    * Write the checkpoint record at the start of the file.
    *
    * @param raf The file.
@@ -952,7 +952,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
     return sb.toString();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The checkpoint is assembled from the root block by the constructor. There is no
@@ -965,7 +965,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
     return 0L;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The checkpoint is assembled from the root block by the constructor. There is no
@@ -1018,7 +1018,7 @@ public class IndexSegmentCheckpoint implements ICheckpoint {
     return nentries;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: There is no counter associated with an {@link IndexSegment}. The counter is only

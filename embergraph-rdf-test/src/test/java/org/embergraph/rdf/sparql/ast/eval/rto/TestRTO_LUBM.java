@@ -25,8 +25,8 @@ import java.util.Properties;
 import org.embergraph.rdf.axioms.NoAxioms;
 import org.embergraph.rdf.sail.EmbergraphSail;
 
-/**
- * Data driven test suite for the Runtime Query Optimizer (RTO) using LUBM data and queries based on
+/*
+* Data driven test suite for the Runtime Query Optimizer (RTO) using LUBM data and queries based on
  * LUBM.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -57,7 +57,7 @@ public class TestRTO_LUBM extends AbstractRTOTestCase {
     return properties;
   }
 
-  /**
+  /*
    * LUBM Q2 on the U1 data set.
    *
    * <p>Note: There are no solutions for this query against U1. The optimizer is only providing the
@@ -85,7 +85,7 @@ public class TestRTO_LUBM extends AbstractRTOTestCase {
     assertSameJoinOrder(expected, helper);
   }
 
-  /**
+  /*
    * LUBM Q8 on the U1 data set.
    *
    * <p>Note: For U50 there are 6463 solutions and it discovers the join order: <code>[4,1,3,2,5]
@@ -109,7 +109,7 @@ public class TestRTO_LUBM extends AbstractRTOTestCase {
     assertSameJoinOrder(expected, helper);
   }
 
-  /**
+  /*
    * LUBM Q9 on the U1 data set.
    *
    * <p>Note: For U50 there are 8627 solutions and it discovers the join order: <code>[2,5,6,4,1,3]

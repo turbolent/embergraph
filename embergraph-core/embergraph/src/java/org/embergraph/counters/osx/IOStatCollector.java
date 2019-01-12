@@ -42,8 +42,8 @@ import org.embergraph.counters.IRequiredHostCounters;
 import org.embergraph.counters.ProcessReaderHelper;
 import org.embergraph.util.Bytes;
 
-/**
- * Collects some counters using <code>iostat</code> under OSX. Unfortunately, <code>iostat</code>
+/*
+* Collects some counters using <code>iostat</code> under OSX. Unfortunately, <code>iostat</code>
  * does not break down the reads and writes and does not report IO Wait. This information is
  * obviously available from OSX as it is provided by the ActivityMonitor, but we can not get it from
  * <code>iostat</code>.
@@ -53,7 +53,7 @@ import org.embergraph.util.Bytes;
 public class IOStatCollector extends AbstractProcessCollector
     implements ICounterHierarchy, IRequiredHostCounters, IHostCounters {
 
-  /**
+  /*
    * Inner class integrating the current values with the {@link ICounterSet} hierarchy.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -88,7 +88,7 @@ public class IOStatCollector extends AbstractProcessCollector
     }
   }
 
-  /**
+  /*
    * Double precision counter with scaling factor.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -123,7 +123,7 @@ public class IOStatCollector extends AbstractProcessCollector
     }
   }
 
-  /**
+  /*
    * Map containing the current values for the configured counters. The keys are paths into the
    * {@link CounterSet}. The values are the data most recently read from <code>iostat</code>.
    */
@@ -137,7 +137,7 @@ public class IOStatCollector extends AbstractProcessCollector
 
   private final boolean cpuStats;
 
-  /**
+  /*
    * @param interval The interval for the collected statistics.
    * @param cpuStats <code>true</code> if the collector should report on the CPU stats (us, sy, id).
    */
@@ -235,7 +235,7 @@ public class IOStatCollector extends AbstractProcessCollector
     return new IOStatReader();
   }
 
-  /**
+  /*
    * Sample output for <code>iostat -d -C -n 999 -w 60</code>, where <code>60</code> is the
    * interval. There is no option to suppress the periodic repeat of the header. The header repeats
    * in its entirety every "page" full.
@@ -446,8 +446,8 @@ public class IOStatCollector extends AbstractProcessCollector
 
         } catch (Exception ex) {
 
-          /*
-           * Issue warning for parsing problems.
+        /*
+       * Issue warning for parsing problems.
            */
 
           log.warn(ex.getMessage() + "\nheader: " + header1 + "\n  data: " + data, ex);

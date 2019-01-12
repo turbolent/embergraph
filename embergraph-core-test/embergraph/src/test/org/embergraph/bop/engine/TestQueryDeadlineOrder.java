@@ -36,8 +36,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
-/**
- * Test suite for {@link QueryDeadline} ordering.
+/*
+* Test suite for {@link QueryDeadline} ordering.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -111,7 +111,7 @@ public class TestQueryDeadlineOrder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify the semantics of {@link QueryDeadline#compareTo(QueryDeadline)}.
    *
    * @throws Exception
@@ -126,19 +126,15 @@ public class TestQueryDeadlineOrder extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query2 =
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final AbstractRunningQuery runningQuery1 =
         queryEngine.eval(UUID.randomUUID(), query1, new ListBindingSet());

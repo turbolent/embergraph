@@ -41,8 +41,8 @@ import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * Test for an error that occurs when a SERVICE (OpenRdf Service) call uses variables that are
+/*
+* Test for an error that occurs when a SERVICE (OpenRdf Service) call uses variables that are
  * assigned as input bindings to the query that holds the SERVICE call.
  *
  * <p>To run this test case, specify the following JVM property: <code>

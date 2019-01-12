@@ -32,8 +32,8 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Efficient absolute get/put operations on a slice of a byte[]. This class is not thread-safe under
+/*
+* Efficient absolute get/put operations on a slice of a byte[]. This class is not thread-safe under
  * mutation because the operations are not atomic. Concurrent operations on the same region of the
  * slice can reveal partial updates. This class is abstract. A concrete implementation need only
  * implement {@link #array()} and an appropriate constructor. This allows for use cases where the
@@ -64,7 +64,7 @@ public abstract class AbstractFixedByteArrayBuffer implements IFixedDataRecord {
     return len;
   }
 
-  /**
+  /*
    * A slice wrapping the entire array.
    *
    * @param array The array.
@@ -74,7 +74,7 @@ public abstract class AbstractFixedByteArrayBuffer implements IFixedDataRecord {
     return new FixedByteArrayBuffer(array, 0 /* off */, array.length /* len */);
   }
 
-  /**
+  /*
    * Protected constructor used to create a slice. The caller is responsible for verifying that the
    * slice is valid for the backing byte[] buffer.
    *
@@ -96,7 +96,7 @@ public abstract class AbstractFixedByteArrayBuffer implements IFixedDataRecord {
    * Absolute get/put operations.
    */
 
-  /**
+  /*
    * Verify that an operation starting at the specified offset into the slice and having the
    * specified length is valid against the slice.
    *

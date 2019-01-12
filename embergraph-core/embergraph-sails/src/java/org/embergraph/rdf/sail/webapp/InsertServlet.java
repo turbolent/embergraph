@@ -45,8 +45,8 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.SailException;
 
-/**
- * Handler for INSERT operations.
+/*
+* Handler for INSERT operations.
  *
  * @author martyncutcher
  */
@@ -59,7 +59,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
 
   public InsertServlet() {}
 
-  /**
+  /*
    * Perform an HTTP-POST, which corresponds to the basic CRUD operation "create" according to the
    * generic interaction semantics of HTTP REST. The operation will be executed against the target
    * namespace per the URI.
@@ -105,7 +105,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * POST with request body containing statements to be inserted.
    *
    * @param req The request.
@@ -124,7 +124,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
 
     if (log.isInfoEnabled()) log.info("Request body: " + contentType);
 
-    /**
+    /*
      * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/620">UpdateServlet fails to parse
      * MIMEType when doing conneg. </a>
      */
@@ -206,7 +206,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    *     <p>TODO #1056 (Add ability to set RIO options to REST API and workbench)
    */
@@ -216,7 +216,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
     private final Resource[] defaultContext;
     private final RDFParserFactory rdfParserFactory;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      * @param baseURI The base URI for the operation.
@@ -257,8 +257,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
 
         conn = getConnection();
 
-        /**
-         * There is a request body, so let's try and parse it.
+      /*
+       * There is a request body, so let's try and parse it.
          *
          * <p>FIXME This does not handle .gz or .zip files. We handle this in the
          *
@@ -278,8 +278,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
         rdfParser.setRDFHandler(
             new AddStatementHandler(conn.getSailConnection(), nmodified, defaultContext));
 
-        /*
-         * Run the parser, which will cause statements to be inserted.
+      /*
+       * Run the parser, which will cause statements to be inserted.
          */
         rdfParser.parse(req.getInputStream(), baseURI);
 
@@ -292,7 +292,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
 
         reportModifiedCount(nmodified.get(), elapsed);
 
-        return (Void) null;
+        return null;
 
       } finally {
 
@@ -306,7 +306,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * POST with URIs of resources to be inserted (loads the referenced resources).
    *
    * @param req The request.
@@ -386,7 +386,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
     private final Vector<URL> urls;
     private final Resource[] defaultContext;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      * @param baseURI The base URI for the operation.
@@ -447,8 +447,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
             hconn.setDoOutput(false);
             hconn.setReadTimeout(0); // no timeout? http param?
 
-            /**
-             * There is a request body, so let's try and parse it.
+          /*
+       * There is a request body, so let's try and parse it.
              *
              * @see <a href= "https://sourceforge.net/apps/trac/bigdata/ticket/620" > UpdateServlet
              *     fails to parse MIMEType when doing conneg. </a>
@@ -464,8 +464,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
 
             if (format == null) {
 
-              /*
-               * Try to get the RDFFormat from the URL's file
+            /*
+       * Try to get the RDFFormat from the URL's file
                * path.
                */
               // BLZG-1929
@@ -503,8 +503,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
             rdfParser.setRDFHandler(
                 new AddStatementHandler(conn.getSailConnection(), nmodified, defactoContext));
 
-            /*
-             * Run the parser, which will cause statements to be
+          /*
+       * Run the parser, which will cause statements to be
              * inserted.
              */
 
@@ -520,8 +520,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
           } finally {
 
             if (hconn instanceof HttpURLConnection) {
-              /*
-               * Disconnect, but only after we have loaded all the
+            /*
+       * Disconnect, but only after we have loaded all the
                * URLs. Disconnect is optional for java.net. It is
                * a hint that you will not be accessing more
                * resources on the connected host. By disconnecting
@@ -564,7 +564,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
     private final AtomicLong nmodified;
     private final Resource[] defaultContext;
 
-    /**
+    /*
      * @param conn
      * @param nmodified
      * @param defaultContexts Only used if the statements themselves do not have a context.
@@ -588,8 +588,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
     public void handleStatement(final Statement stmt) throws RDFHandlerException {
 
       final Resource[] c =
-          (Resource[])
-              (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
+          (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
 
       try {
 

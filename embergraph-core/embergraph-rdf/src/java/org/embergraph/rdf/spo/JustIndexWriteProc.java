@@ -36,8 +36,8 @@ import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.rdf.inf.Justification;
 import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 
-/**
- * Procedure for writing {@link Justification}s on an index or index partition.
+/*
+* Procedure for writing {@link Justification}s on an index or index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

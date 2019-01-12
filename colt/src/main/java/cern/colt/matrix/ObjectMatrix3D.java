@@ -11,8 +11,8 @@ package cern.colt.matrix;
 import cern.colt.list.IntArrayList;
 import cern.colt.list.ObjectArrayList;
 import cern.colt.matrix.impl.AbstractMatrix3D;
-/**
- * Abstract base class for 3-d matrices holding <tt>Object</tt> elements. First see the <a
+/*
+* Abstract base class for 3-d matrices holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -31,7 +31,7 @@ import cern.colt.matrix.impl.AbstractMatrix3D;
 public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected ObjectMatrix3D() {}
-  /**
+  /*
    * Applies a function to each cell and aggregates the results. Returns a value <tt>v</tt> such
    * that <tt>v==a(size())</tt> where <tt>a(i) == aggr( a(i-1), f(get(slice,row,column)) )</tt> and
    * terminators are <tt>a(1) == f(get(0,0,0)), a(0)==null</tt>.
@@ -75,7 +75,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     }
     return a;
   }
-  /**
+  /*
    * Applies a function to each corresponding cell of two matrices and aggregates the results.
    * Returns a value <tt>v</tt> such that <tt>v==a(size())</tt> where <tt>a(i) == aggr( a(i-1),
    * f(get(slice,row,column),other.get(slice,row,column)) )</tt> and terminators are <tt>a(1) ==
@@ -141,7 +141,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     }
     return a;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>values</tt>. <tt>values</tt> is required to have
    * the form <tt>values[slice][row][column]</tt> and have exactly the same number of slices, rows
    * and columns as the receiver.
@@ -183,7 +183,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[slice,row,col] =
    * function(x[slice,row,col])</tt>.
    *
@@ -218,7 +218,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     }
     return this;
   }
-  /**
+  /*
    * Replaces all cell values of the receiver with the values of another matrix. Both matrices must
    * have the same number of slices, rows and columns. If both matrices share the same cells (as is
    * the case if they are views derived from the same matrix) and intersect in an ambiguous way,
@@ -243,7 +243,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[row,col] =
    * function(x[row,col],y[row,col])</tt>.
    *
@@ -291,7 +291,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     }
     return this;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>value</tt>.
    *
    * @param value the value to be filled into the cells.
@@ -319,7 +319,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     }
     return cardinality;
   }
-  /**
+  /*
    * Constructs and returns a deep copy of the receiver.
    *
    * <p><b>Note that the returned matrix is an independent deep copy.</b> The returned matrix is not
@@ -331,7 +331,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public ObjectMatrix3D copy() {
     return like().assign(this);
   }
-  /**
+  /*
    * Compares the specified Object with the receiver for equality. Equivalent to
    * <tt>equals(otherObj,true)</tt>.
    *
@@ -341,7 +341,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public boolean equals(Object otherObj) { // delta
     return equals(otherObj, true);
   }
-  /**
+  /*
    * Compares the specified Object with the receiver for equality. Returns true if and only if the
    * specified Object is also at least an ObjectMatrix3D, both matrices have the same size, and all
    * corresponding pairs of cells in the two matrices are the same. In other words, two matrices are
@@ -376,9 +376,8 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
       for (int slice = slices; --slice >= 0; ) {
         for (int row = rows; --row >= 0; ) {
           for (int column = columns; --column >= 0; ) {
-            if (!(getQuick(slice, row, column) == null
-                ? other.getQuick(slice, row, column) == null
-                : getQuick(slice, row, column).equals(other.getQuick(slice, row, column))))
+            if (getQuick(slice, row, column) == null ? other.getQuick(slice, row, column) != null
+                : !getQuick(slice, row, column).equals(other.getQuick(slice, row, column)))
               return false;
           }
         }
@@ -387,7 +386,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
 
     return true;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[slice,row,column]</tt>.
    *
    * @param slice the index of the slice-coordinate.
@@ -402,14 +401,14 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
       throw new IndexOutOfBoundsException("slice:" + slice + ", row:" + row + ", column:" + column);
     return getQuick(slice, row, column);
   }
-  /**
+  /*
    * Returns the content of this matrix if it is a wrapper; or <tt>this</tt> otherwise. Override
    * this method in wrappers.
    */
   protected ObjectMatrix3D getContent() {
     return this;
   }
-  /**
+  /*
    * Fills the coordinates and values of cells having non-zero values into the specified lists.
    * Fills into the lists, starting at index 0. After this call returns the specified lists all have
    * a new size, the number of non-zero values.
@@ -452,7 +451,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
       }
     }
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[slice,row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -476,7 +475,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   protected boolean haveSharedCellsRaw(ObjectMatrix3D other) {
     return false;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the same number of slices, rows and columns. For example, if the receiver is an instance
    * of type <tt>DenseObjectMatrix3D</tt> the new matrix must also be of type
@@ -490,7 +489,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public ObjectMatrix3D like() {
     return like(slices, rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of slices, rows and columns. For example, if the receiver is an
    * instance of type <tt>DenseObjectMatrix3D</tt> the new matrix must also be of type
@@ -505,7 +504,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
    * @return a new empty matrix of the same dynamic type.
    */
   public abstract ObjectMatrix3D like(int slices, int rows, int columns);
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, sharing the
    * same cells. For example, if the receiver is an instance of type <tt>DenseObjectMatrix3D</tt>
    * the new matrix must also be of type <tt>DenseObjectMatrix2D</tt>, if the receiver is an
@@ -524,7 +523,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
    */
   protected abstract ObjectMatrix2D like2D(
       int rows, int columns, int rowZero, int columnZero, int rowStride, int columnStride);
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[slice,row,column]</tt> to the specified value.
    *
    * @param slice the index of the slice-coordinate.
@@ -539,7 +538,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
       throw new IndexOutOfBoundsException("slice:" + slice + ", row:" + row + ", column:" + column);
     setQuick(slice, row, column, value);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[slice,row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -553,7 +552,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
    * @param value the value to be filled into the specified cell.
    */
   public abstract void setQuick(int slice, int row, int column, Object value);
-  /**
+  /*
    * Constructs and returns a 2-dimensional array containing the cell values. The returned array
    * <tt>values</tt> has the form <tt>values[slice][row][column]</tt> and has the same number of
    * slices, rows and columns as the receiver.
@@ -576,7 +575,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     }
     return values;
   }
-  /**
+  /*
    * Returns a string representation using default formatting.
    *
    * @see cern.colt.matrix.objectalgo.Formatter
@@ -584,7 +583,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public String toString() {
     return new cern.colt.matrix.objectalgo.Formatter().toString(this);
   }
-  /**
+  /*
    * Constructs and returns a new view equal to the receiver. The view is a shallow clone. Calls
    * <code>clone()</code> and casts the result.
    *
@@ -599,7 +598,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   protected ObjectMatrix3D view() {
     return (ObjectMatrix3D) clone();
   }
-  /**
+  /*
    * Constructs and returns a new 2-dimensional <i>slice view</i> representing the slices and rows
    * of the given column. The returned view is backed by this matrix, so changes in the returned
    * view are reflected in this matrix, and vice-versa.
@@ -630,7 +629,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     return like2D(
         sliceRows, sliceColumns, sliceRowZero, sliceColumnZero, sliceRowStride, sliceColumnStride);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i> along the column axis. What used to be column
    * <tt>0</tt> is now column <tt>columns()-1</tt>, ..., what used to be column <tt>columns()-1</tt>
    * is now column <tt>0</tt>. The returned view is backed by this matrix, so changes in the
@@ -643,7 +642,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public ObjectMatrix3D viewColumnFlip() {
     return (ObjectMatrix3D) (view().vColumnFlip());
   }
-  /**
+  /*
    * Constructs and returns a new <i>dice view</i>; Swaps dimensions (axes); Example: 3 x 4 x 5
    * matrix --> 4 x 3 x 5 matrix. The view has dimensions exchanged; what used to be one axis is now
    * another, in all desired permutations. The returned view is backed by this matrix, so changes in
@@ -658,7 +657,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public ObjectMatrix3D viewDice(int axis0, int axis1, int axis2) {
     return (ObjectMatrix3D) (view().vDice(axis0, axis1, axis2));
   }
-  /**
+  /*
    * Constructs and returns a new <i>sub-range view</i> that is a <tt>depth x height x width</tt>
    * sub matrix starting at <tt>[slice,row,column]</tt>; Equivalent to
    * <tt>view().part(slice,row,column,depth,height,width)</tt>; Provided for convenience only. The
@@ -678,7 +677,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public ObjectMatrix3D viewPart(int slice, int row, int column, int depth, int height, int width) {
     return (ObjectMatrix3D) (view().vPart(slice, row, column, depth, height, width));
   }
-  /**
+  /*
    * Constructs and returns a new 2-dimensional <i>slice view</i> representing the slices and
    * columns of the given row. The returned view is backed by this matrix, so changes in the
    * returned view are reflected in this matrix, and vice-versa.
@@ -709,7 +708,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     return like2D(
         sliceRows, sliceColumns, sliceRowZero, sliceColumnZero, sliceRowStride, sliceColumnStride);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i> along the row axis. What used to be row
    * <tt>0</tt> is now row <tt>rows()-1</tt>, ..., what used to be row <tt>rows()-1</tt> is now row
    * <tt>0</tt>. The returned view is backed by this matrix, so changes in the returned view are
@@ -722,7 +721,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public ObjectMatrix3D viewRowFlip() {
     return (ObjectMatrix3D) (view().vRowFlip());
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding the indicated
    * cells. There holds <tt>view.slices() == sliceIndexes.length, view.rows() == rowIndexes.length,
    * view.columns() == columnIndexes.length</tt> and <tt>view.get(k,i,j) ==
@@ -784,7 +783,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
 
     return viewSelectionLike(sliceOffsets, rowOffsets, columnOffsets);
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding all <b>slices</b>
    * matching the given condition. Applies the condition to each slice and takes only those where
    * <tt>condition.apply(viewSlice(i))</tt> yields <tt>true</tt>. To match rows or columns, use a
@@ -817,7 +816,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     matches.trimToSize();
     return viewSelection(matches.elements(), null, null); // take all rows and columns
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param sliceOffsets the offsets of the visible elements.
@@ -827,7 +826,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
    */
   protected abstract ObjectMatrix3D viewSelectionLike(
       int[] sliceOffsets, int[] rowOffsets, int[] columnOffsets);
-  /**
+  /*
    * Constructs and returns a new 2-dimensional <i>slice view</i> representing the rows and columns
    * of the given slice. The returned view is backed by this matrix, so changes in the returned view
    * are reflected in this matrix, and vice-versa.
@@ -858,7 +857,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     return like2D(
         sliceRows, sliceColumns, sliceRowZero, sliceColumnZero, sliceRowStride, sliceColumnStride);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i> along the slice axis. What used to be slice
    * <tt>0</tt> is now slice <tt>slices()-1</tt>, ..., what used to be slice <tt>slices()-1</tt> is
    * now slice <tt>0</tt>. The returned view is backed by this matrix, so changes in the returned
@@ -871,7 +870,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public ObjectMatrix3D viewSliceFlip() {
     return (ObjectMatrix3D) (view().vSliceFlip());
   }
-  /**
+  /*
    * Sorts the matrix slices into ascending order, according to the <i>natural ordering</i> of the
    * matrix values in the given <tt>[row,column]</tt> position. This sort is guaranteed to be
    * <i>stable</i>. For further information, see {@link
@@ -885,7 +884,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public ObjectMatrix3D viewSorted(int row, int column) {
     return cern.colt.matrix.objectalgo.Sorting.mergeSort.sort(this, row, column);
   }
-  /**
+  /*
    * Constructs and returns a new <i>stride view</i> which is a sub matrix consisting of every i-th
    * cell. More specifically, the view has <tt>this.slices()/sliceStride</tt> slices and
    * <tt>this.rows()/rowStride</tt> rows and <tt>this.columns()/columnStride</tt> columns holding
@@ -904,7 +903,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
   public ObjectMatrix3D viewStrides(int sliceStride, int rowStride, int columnStride) {
     return (ObjectMatrix3D) (view().vStrides(sliceStride, rowStride, columnStride));
   }
-  /**
+  /*
    * Applies a procedure to each cell's value. Iterates downwards from
    * <tt>[slices()-1,rows()-1,columns()-1]</tt> to <tt>[0,0,0]</tt>, as demonstrated by this
    * snippet:
@@ -938,7 +937,7 @@ public abstract class ObjectMatrix3D extends AbstractMatrix3D {
     }
     return true;
   }
-  /**
+  /*
    * Applies a procedure to each cell's coordinate. Iterates downwards from
    * <tt>[slices()-1,rows()-1,columns()-1]</tt> to <tt>[0,0,0]</tt>, as demonstrated by this
    * snippet:

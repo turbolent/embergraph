@@ -25,8 +25,8 @@ import it.unimi.dsi.lang.MutableString;
 import java.io.IOException;
 import java.io.PrintStream;
 
-/**
- * A debugging wrapper for input bit streams.
+/*
+* A debugging wrapper for input bit streams.
  *
  * <p>This class can be used to wrap an input bit stream. The semantics of the resulting read
  * operations is unchanged, but each operation will be logged. The conventions are the same as those
@@ -47,7 +47,7 @@ public class DebugInputBitStream extends InputBitStream {
   private final PrintStream pw;
   private final InputBitStream ibs;
 
-  /**
+  /*
    * Creates a new debug input bit stream wrapping a given input bit stream and logging on a given
    * writer.
    *
@@ -60,7 +60,7 @@ public class DebugInputBitStream extends InputBitStream {
     pw.print("[");
   }
 
-  /**
+  /*
    * Creates a new debug input bit stream wrapping a given input bit stream and logging on standard
    * error.
    *

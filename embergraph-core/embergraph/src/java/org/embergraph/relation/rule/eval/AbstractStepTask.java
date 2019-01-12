@@ -57,8 +57,8 @@ import org.embergraph.service.IDataServiceCallable;
 import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.service.ndx.IClientIndex;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
@@ -71,7 +71,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
   protected /*final*/ IIndexManager indexManager;
   protected final IStep step;
 
-  /**
+  /*
    * Base class handles submit either to the caller's {@link ExecutorService} or to the {@link
    * ConcurrencyManager} IFF the task was submitted to a {@link DataService}.
    *
@@ -132,7 +132,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
         + "}";
   }
 
-  /**
+  /*
    * Run program steps in parallel.
    *
    * @param program
@@ -175,7 +175,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     return totals;
   }
 
-  /**
+  /*
    * Run program steps in sequence.
    *
    * @param program
@@ -207,7 +207,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
       final Callable<RuleStats> task = itr.next();
 
       /*
-                   * Submit and wait for the future.
+       * Submit and wait for the future.
                    *
                    * Note: tasks that are run in a sequential program are required to
                    * flush the buffer so that all solutions are available for the next
@@ -241,7 +241,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     return totals;
   }
 
-  /**
+  /*
    * Run a single step (sequence of one).
    *
    * <p>Note: use {@link #runOne(IStep, Callable)} rather than either {@link #runParallel(IStep,
@@ -287,7 +287,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     return stats;
   }
 
-  /**
+  /*
    * Run <i>this</i> task.
    *
    * <p>If we are executing on a {@link DataService} then {@link #getDataService()} will have been
@@ -324,8 +324,8 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     {
       if (util.isClosureProgram(step)) {
 
-        /*
-         * If this is not a rule, and it is not a closure of a flat rule
+      /*
+       * If this is not a rule, and it is not a closure of a flat rule
          * set, and there is a buried closure operation inside of the
          * program then we have a problem since the steps above the
          * closure should have been flattened out by the caller and run
@@ -514,8 +514,8 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
 
             if (log.isInfoEnabled()) log.info("Executing inner task: " + this);
 
-            /*
-             * Override to use the IJournal exposed by the AbstractTask.
+          /*
+       * Override to use the IJournal exposed by the AbstractTask.
              * This IJournal imposes the correct isolation control and
              * allows access to the unisolated indices (if you have declared
              * them and are running an UNISOLATED AbstractTask).
@@ -589,7 +589,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     }
   }
 
-  /**
+  /*
    * Locate the distinct relation identifiers corresponding to the head of each rule and resolve
    * them to their relations.
    *
@@ -643,7 +643,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     }
   }
 
-  /**
+  /*
    * Locate the distinct relation identifiers corresponding to the tail(s) of each rule and resolve
    * them to their relations. Note that a tail predicate can read on a fused view of more than one
    * relation.
@@ -708,7 +708,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     }
   }
 
-  /**
+  /*
    * Create the appropriate buffers to absorb writes by the rules in the program that target an
    * {@link IMutableRelation}.
    *
@@ -772,7 +772,7 @@ public abstract class AbstractStepTask extends DataServiceCallable<RuleStats>
     return c;
   }
 
-  /**
+  /*
    * Returns the names of the indices maintained by the relations.
    *
    * @param c A collection of {@link IRelation}s.

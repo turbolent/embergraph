@@ -31,8 +31,8 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * This class handles vectored remote service invocation by generating an appropriate SPARQL query
+/*
+* This class handles vectored remote service invocation by generating an appropriate SPARQL query
  * (with BINDINGS) and an appropriate HTTP request. The behavior of this class may be configured in
  * the {@link ServiceRegistry} by adjusting the {@link RemoteServiceOptions} for the service URI.
  *

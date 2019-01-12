@@ -40,8 +40,8 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.channels.FileChannel;
 
-/**
- * Bit-level input stream.
+/*
+* Bit-level input stream.
  *
  * <p>This class wraps any {@link InputStream} so that you can treat it as <em>bit</em> stream.
  * Constructors and methods closely resemble those of {@link InputStream}. Data can be read from
@@ -116,7 +116,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
       ZETA_3 = new int[256 * 256],
       SHIFTED_GAMMA = new int[256 * 256];
 
-  static void fillArrayFromResource(final String resource, final int array[]) throws IOException {
+  static void fillArrayFromResource(final String resource, final int[] array) throws IOException {
     final String resouceFullPath = "/it/unimi/dsi/io/" + resource;
     final InputStream ris = InputBitStream.class.getResourceAsStream(resouceFullPath);
     if (ris == null) throw new IOException("Cannot open resource " + resouceFullPath);
@@ -166,7 +166,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
   protected final boolean wrapping;
   /** The number of bits actually read from this bit stream. */
   private long readBits;
-  /**
+  /*
    * Current bit buffer: the lowest {@link #fill} bits represent the current content (the remaining
    * bits are undefined).
    */
@@ -184,7 +184,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
   /** Current position of the first byte in the byte buffer. */
   protected long position;
 
-  /**
+  /*
    * This (non-public) constructor exists just to provide fake initialisation for classes such as
    * {@link DebugInputBitStream}.
    */
@@ -196,7 +196,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     wrapping = false;
   }
 
-  /**
+  /*
    * Creates a new input bit stream wrapping a given input stream using a buffer of size {@link
    * #DEFAULT_BUFFER_SIZE}.
    *
@@ -209,7 +209,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this(is, true);
   }
 
-  /**
+  /*
    * Creates a new input bit stream wrapping a given input stream using a buffer of size {@link
    * #DEFAULT_BUFFER_SIZE}.
    *
@@ -221,7 +221,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this(is, DEFAULT_BUFFER_SIZE, testForPosition);
   }
 
-  /**
+  /*
    * Creates a new input bit stream wrapping a given input stream with a specified buffer size.
    *
    * <p>This constructor performs the reflective tests that are necessary to support {@link
@@ -234,7 +234,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this(is, bufSize, true);
   }
 
-  /**
+  /*
    * Creates a new input bit stream wrapping a given input stream with a specified buffer size.
    *
    * @param is the input stream to wrap.
@@ -269,7 +269,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Creates a new input bit stream wrapping a given file input stream using a buffer of size {@link
    * #DEFAULT_BUFFER_SIZE}.
    *
@@ -282,7 +282,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this(is, DEFAULT_BUFFER_SIZE);
   }
 
-  /**
+  /*
    * Creates a new input bit stream wrapping a given file input stream with a specified buffer size.
    *
    * <p>This constructor invokes directly {@link FileInputStream#getChannel()} to support {@link
@@ -299,7 +299,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     fileChannel = is.getChannel();
   }
 
-  /**
+  /*
    * Creates a new input bit stream wrapping a given byte array.
    *
    * @param a the byte array to wrap.
@@ -308,7 +308,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this(a, 0, a.length);
   }
 
-  /**
+  /*
    * Creates a new input bit stream wrapping a slice of a given byte array (BBT 8/30/2009).
    *
    * @param a the byte array to wrap.
@@ -340,7 +340,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Creates a new input bit stream reading from a file.
    *
    * <p>This constructor invokes directly {@link FileInputStream#getChannel()} to support {@link
@@ -353,7 +353,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this(new FileInputStream(name), bufSize);
   }
 
-  /**
+  /*
    * Creates a new input bit stream reading from a file.
    *
    * <p>This constructor invokes directly {@link FileInputStream#getChannel()} to support {@link
@@ -365,7 +365,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this(new FileInputStream(name), DEFAULT_BUFFER_SIZE);
   }
 
-  /**
+  /*
    * Creates a new input bit stream reading from a file.
    *
    * <p>This constructor invokes directly {@link FileInputStream#getChannel()} to support {@link
@@ -377,7 +377,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this(new FileInputStream(file), DEFAULT_BUFFER_SIZE);
   }
 
-  /**
+  /*
    * Creates a new input bit stream reading from a file.
    *
    * <p>This constructor invokes directly {@link FileInputStream#getChannel()} to support {@link
@@ -390,7 +390,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this(new FileInputStream(file), bufSize);
   }
 
-  /**
+  /*
    * Flushes the bit stream. All state information associated to the stream is reset. This includes
    * bytes prefetched from the stream, bits in the bit buffer and unget'd bits.
    *
@@ -414,7 +414,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     buffer = null;
   }
 
-  /**
+  /*
    * Returns the number of bits that can be read (or skipped over) from this bit stream without
    * blocking by the next caller of a method.
    *
@@ -424,7 +424,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return (is.available() + avail) * 8 + fill;
   }
 
-  /**
+  /*
    * Returns the number of bits read from this bit stream.
    *
    * @return the number of bits read so far.
@@ -433,7 +433,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return readBits;
   }
 
-  /**
+  /*
    * Sets the number of bits read from this bit stream.
    *
    * <p>This method is provided so that, for instance, the user can reset via <code>readBits(0)
@@ -445,7 +445,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     this.readBits = readBits;
   }
 
-  /**
+  /*
    * Reads the next byte from the stream.
    *
    * <p>This method takes care of managing the buffering logic transparently.
@@ -476,7 +476,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return buffer[pos++] & 0xFF;
   }
 
-  /**
+  /*
    * Feeds 16 more bits into {@link #current}, assuming that {@link #fill} is less than 16.
    *
    * <p>This method will never throw an {@link EOFException}&mdash;simply, it will refill less than
@@ -485,7 +485,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    * @return {@link #fill}.
    */
   private final int refill() throws IOException {
-    if (ASSERTS) assert fill < 16;
+    assert !ASSERTS || fill < 16;
 
     if (avail > 1) {
       // If there is a byte in the buffer, we use it directly.
@@ -505,7 +505,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return fill;
   }
 
-  /**
+  /*
    * Reads bits from the bit buffer, possibly refilling it.
    *
    * <p>This method is the basic mean for extracting bits from the underlying stream.
@@ -534,14 +534,14 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
       fill = 8;
     }
 
-    if (ASSERTS) assert len <= fill : len + " bit(s) requested, " + fill + " available";
+    assert !ASSERTS || len <= fill : len + " bit(s) requested, " + fill + " available";
 
     readBits += len;
 
     return current >>> (fill -= len) & (1 << len) - 1;
   }
 
-  /**
+  /*
    * Aligns the stream.
    *
    * <p>After a call to this function, the stream is byte aligned. Bits that have been read to align
@@ -553,7 +553,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     fill &= ~7;
   }
 
-  /**
+  /*
    * Reads a sequence of bits.
    *
    * <p>Bits will be read in the natural way: the first bit is bit 7 of the first byte, the eightth
@@ -563,7 +563,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    * @param len the number of bits to read.
    */
   public void read(final byte[] bits, int len) throws IOException {
-    if (ASSERTS) assert fill < 32 : fill + " >= " + 32;
+    assert !ASSERTS || fill < 32 : fill + " >= " + 32;
 
     if (len <= fill) {
       if (len <= 8) {
@@ -633,7 +633,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Reads a bit.
    *
    * @return the next bit from the stream.
@@ -642,7 +642,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return readFromCurrent(1);
   }
 
-  /**
+  /*
    * Reads a fixed number of bits into an integer.
    *
    * @param len a bit length.
@@ -670,7 +670,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return (x << len) | readFromCurrent(len);
   }
 
-  /**
+  /*
    * Reads a fixed number of bits into a long.
    *
    * @param len a bit length.
@@ -698,7 +698,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return (x << len) | readFromCurrent(len);
   }
 
-  /**
+  /*
    * Skips the given number of bits.
    *
    * @param n the number of bits to skip.
@@ -767,7 +767,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Sets this stream bit position, if it is based on a {@link RepositionableStream} or on a {@link
    * java.nio.channels.FileChannel}.
    *
@@ -856,7 +856,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Tests if this stream supports the {@link #mark(int)} and {@link #reset()} methods.
    *
    * <p>This method will just delegate the test to the underlying {@link InputStream}.
@@ -867,7 +867,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return is.markSupported();
   }
 
-  /**
+  /*
    * Marks the current position in this input stream. A subsequent call to the {@link #reset()}
    * method repositions this stream at the last marked position so that subsequent reads re-read the
    * same bits.
@@ -885,7 +885,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     is.mark(readLimit);
   }
 
-  /**
+  /*
    * Repositions this bit stream to the position at the time the {@link #mark(int)} method was last
    * called.
    *
@@ -897,14 +897,14 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     is.reset();
   }
 
-  /**
+  /*
    * Reads a natural number in unary coding.
    *
    * @return the next unary-encoded natural number.
    * @see OutputBitStream#writeUnary(int)
    */
   public int readUnary() throws IOException {
-    if (ASSERTS) assert fill < 32 : fill + " >= " + 32;
+    assert !ASSERTS || fill < 32 : fill + " >= " + 32;
     int x;
 
     if (fill < 16) refill();
@@ -933,7 +933,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return x;
   }
 
-  /**
+  /*
    * Reads a long natural number in unary coding.
    *
    * <p>Note that by unary coding we mean that 1 encodes 0, 01 encodes 1 and so on.
@@ -942,7 +942,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    * @see OutputBitStream#writeUnary(int)
    */
   public long readLongUnary() throws IOException {
-    if (ASSERTS) assert fill < 32 : fill + " >= " + 32;
+    assert !ASSERTS || fill < 32 : fill + " >= " + 32;
 
     // Clean up current and check whether it is nonzero
     if ((current & (1 << fill) - 1) != 0) return readUnary();
@@ -954,7 +954,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return x;
   }
 
-  /**
+  /*
    * Reads a natural number in &gamma; coding.
    *
    * @return the next &gamma;-encoded natural number.
@@ -973,7 +973,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return ((1 << msb) | readInt(msb)) - 1;
   }
 
-  /**
+  /*
    * Reads a long natural number in &gamma; coding.
    *
    * @return the next &gamma;-encoded long natural number.
@@ -992,7 +992,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return ((1L << msb) | readLong(msb)) - 1;
   }
 
-  /**
+  /*
    * Skips a given number of &gamma;-coded integers.
    *
    * <p>This method should be significantly quicker than iterating <code>n</code> times on {@link
@@ -1017,7 +1017,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Reads a given number of &gamma;-coded integers.
    *
    * <p>This method should be significantly quicker than iterating <code>n</code> times on {@link
@@ -1044,7 +1044,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Reads a natural number in shifted &gamma; coding.
    *
    * @return the next shifted-&gamma;&ndash;encoded natural number.
@@ -1064,7 +1064,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return msb == -1 ? 0 : ((1 << msb) | readInt(msb));
   }
 
-  /**
+  /*
    * Reads a natural number in shifted &gamma; coding.
    *
    * @return the next shifted-&gamma;&ndash;encoded natural number.
@@ -1084,7 +1084,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return msb == -1 ? 0 : ((1L << msb) | readLong(msb));
   }
 
-  /**
+  /*
    * Skips a given number of shited-&gamma;-coded integers.
    *
    * <p>This method should be significantly quicker than iterating <code>n</code> times on {@link
@@ -1110,7 +1110,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Reads a given number of shifted-&gamma;-coded integers.
    *
    * <p>This method should be significantly quicker than iterating <code>n</code> times on {@link
@@ -1138,7 +1138,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Reads a natural number in &delta; coding.
    *
    * @return the next &delta;-encoded natural number.
@@ -1157,7 +1157,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return ((1 << msb) | readInt(msb)) - 1;
   }
 
-  /**
+  /*
    * Reads a long natural number in &delta; coding.
    *
    * @return the next &delta;-encoded long natural number.
@@ -1176,7 +1176,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return ((1L << msb) | readLong(msb)) - 1;
   }
 
-  /**
+  /*
    * Skips a given number of &delta;-coded integers.
    *
    * <p>This method should be significantly quicker than iterating <code>n</code> times on {@link
@@ -1201,7 +1201,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Reads a given number of &delta;-coded integers.
    *
    * <p>This method should be significantly quicker than iterating <code>n</code> times on {@link
@@ -1228,7 +1228,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Reads a natural number in a limited range using a minimal binary coding.
    *
    * @param b a strict upper bound.
@@ -1241,7 +1241,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return readMinimalBinary(b, Fast.mostSignificantBit(b));
   }
 
-  /**
+  /*
    * Reads a natural number in a limited range using a minimal binary coding.
    *
    * <p>This method is faster than {@link #readMinimalBinary(int)} because it does not have to
@@ -1264,7 +1264,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     else return ((x << 1) + readBit() - m);
   }
 
-  /**
+  /*
    * Reads a long natural number in a limited range using a minimal binary coding.
    *
    * @param b a strict upper bound.
@@ -1277,7 +1277,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return readLongMinimalBinary(b, Fast.mostSignificantBit(b));
   }
 
-  /**
+  /*
    * Reads a long natural number in a limited range using a minimal binary coding.
    *
    * <p>This method is faster than {@link #readLongMinimalBinary(long)} because it does not have to
@@ -1300,7 +1300,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     else return ((x << 1) + readBit() - m);
   }
 
-  /**
+  /*
    * Reads a natural number in Golomb coding.
    *
    * <p>This method implements also the case in which <code>b</code> is 0: in this case, nothing
@@ -1315,7 +1315,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return readGolomb(b, Fast.mostSignificantBit(b));
   }
 
-  /**
+  /*
    * Reads a natural number in Golomb coding.
    *
    * <p>This method is faster than {@link #readGolomb(int)} because it does not have to compute
@@ -1337,7 +1337,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return readUnary() * b + readMinimalBinary(b, log2b);
   }
 
-  /**
+  /*
    * Reads a long natural number in Golomb coding.
    *
    * <p>This method implements also the case in which <code>b</code> is 0: in this case, nothing
@@ -1352,7 +1352,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return readLongGolomb(b, Fast.mostSignificantBit(b));
   }
 
-  /**
+  /*
    * Reads a long natural number in Golomb coding.
    *
    * <p>This method is faster than {@link #readLongGolomb(long)} because it does not have to compute
@@ -1374,7 +1374,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return readUnary() * b + readLongMinimalBinary(b, log2b);
   }
 
-  /**
+  /*
    * Reads a natural number in skewed Golomb coding.
    *
    * <p>This method implements also the case in which <code>b</code> is 0: in this case, nothing
@@ -1394,7 +1394,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return m + readMinimalBinary(M - m);
   }
 
-  /**
+  /*
    * Reads a long natural number in skewed Golomb coding.
    *
    * <p>This method implements also the case in which <code>b</code> is 0: in this case, nothing
@@ -1414,7 +1414,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return m + readLongMinimalBinary(M - m);
   }
 
-  /**
+  /*
    * Reads a natural number in &zeta; coding.
    *
    * @param k the shrinking factor.
@@ -1442,7 +1442,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return (m << 1) + readBit() - 1;
   }
 
-  /**
+  /*
    * Reads a long natural number in &zeta; coding.
    *
    * @param k the shrinking factor.
@@ -1470,7 +1470,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return (m << 1) + readBit() - 1;
   }
 
-  /**
+  /*
    * Skips a given number of &zeta;-coded integers.
    *
    * <p>This method should be significantly quicker than iterating <code>n</code> times on {@link
@@ -1499,7 +1499,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Reads a given number of &gamma;-coded integers.
    *
    * <p>This method should be significantly quicker than iterating <code>n</code> times on {@link
@@ -1533,7 +1533,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Reads a natural number in variable-length nibble coding.
    *
    * @return the next variable-length nibble-encoded natural number.
@@ -1552,7 +1552,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     return x;
   }
 
-  /**
+  /*
    * Reads a long natural number in variable-length nibble coding.
    *
    * @return the next variable-length nibble-encoded long natural number.
@@ -1583,7 +1583,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
     }
   }
 
-  /**
+  /*
    * Skips over the given number of bits.
    *
    * @param n the number of bits to skip.

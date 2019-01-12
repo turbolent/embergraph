@@ -39,8 +39,8 @@ import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.relation.rule.eval.AbstractSolutionBuffer.InsertSolutionBuffer;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
-/**
- * A buffer for {@link ISPO}s and optional {@link Justification}s that is flushed on overflow into a
+/*
+* A buffer for {@link ISPO}s and optional {@link Justification}s that is flushed on overflow into a
  * backing {@link AbstractTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -53,13 +53,13 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
   /** The database on which the lexicon is stored. */
   private final AbstractTripleStore db;
 
-  /**
+  /*
    * The focusStore on which the entailments computed by closure will be written. This may be either
    * the database or a temporary focusStore used during incremental TM.
    */
   private final AbstractTripleStore focusStore;
 
-  /**
+  /*
    * The focusStore on which the entailments computed by closure will be written. This may be either
    * the database or a temporary focusStore used during incremental TM.
    */
@@ -79,7 +79,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
     return numJustifications;
   }
 
-  /**
+  /*
    * true iff the Truth Maintenance strategy requires that we focusStore {@link Justification}s for
    * entailments.
    */
@@ -88,7 +88,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
   /** Used for change set notification (optional). */
   protected final IChangeLog changeLog;
 
-  /**
+  /*
    * Create a buffer.
    *
    * @param focusStore The focusStore on which the entailments computed by closure will be written
@@ -112,7 +112,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
     this(focusStore, db, filter, capacity, justified, null /* changeLog */);
   }
 
-  /**
+  /*
    * Create a buffer.
    *
    * @param focusStore The focusStore on which the entailments computed by closure will be written
@@ -152,7 +152,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
     this.changeLog = changeLog;
   }
 
-  /**
+  /*
    * Returns true iff there is no more space remaining in the buffer. Under those conditions adding
    * another statement to the buffer could cause an overflow.
    *
@@ -162,14 +162,9 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
 
     if (super.nearCapacity()) return true;
 
-    if (numJustifications + 1 > capacity) {
+    // would overflow the justification[].
+    return numJustifications + 1 > capacity;
 
-      // would overflow the justification[].
-
-      return true;
-    }
-
-    return false;
   }
 
   public int flush() {
@@ -302,7 +297,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
     return (int) Math.min(Integer.MAX_VALUE, n);
   }
 
-  /**
+  /*
    * When the buffer is {@link #nearCapacity()} the statements in the buffer will be flushed into
    * the backing focusStore.
    *
@@ -338,7 +333,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
      * justification.
      */
 
-    assert justify ? justification != null : justification == null;
+    assert justify == (justification != null);
 
     if (justify) {
 
@@ -346,8 +341,8 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
 
       if (DEBUG) {
 
-        /*
-         * Note: If [focusStore] is a TempTripleStore then this will NOT be able
+      /*
+       * Note: If [focusStore] is a TempTripleStore then this will NOT be able
          * to resolve the terms from the ids (since the lexicon is only in
          * the database).
          */

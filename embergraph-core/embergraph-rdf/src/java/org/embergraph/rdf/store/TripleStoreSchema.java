@@ -4,8 +4,8 @@ import org.embergraph.rdf.axioms.Axioms;
 import org.embergraph.rdf.vocab.RDFSVocabulary;
 import org.embergraph.relation.RelationSchema;
 
-/**
- * Extensions for additional state maintained by the {@link AbstractTripleStore} in the global row
+/*
+* Extensions for additional state maintained by the {@link AbstractTripleStore} in the global row
  * store.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

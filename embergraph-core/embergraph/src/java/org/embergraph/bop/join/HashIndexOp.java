@@ -32,8 +32,8 @@ import org.embergraph.htree.HTree;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-/**
- * Operator builds a hash index from the source solutions. Once all source solutions have been
+/*
+* Operator builds a hash index from the source solutions. Once all source solutions have been
  * indexed, the source solutions are output on the default sink. The set of variables to be copied
  * to the sink may be restricted by an annotation.
  *
@@ -69,7 +69,7 @@ public class HashIndexOp extends HashIndexOpBase {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args

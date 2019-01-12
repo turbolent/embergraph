@@ -40,8 +40,8 @@ import org.openrdf.rio.RDFWriterRegistry;
 import org.xml.sax.Attributes;
 import org.xml.sax.ext.DefaultHandler2;
 
-/**
- * Base class providing some common functionality.
+/*
+* Base class providing some common functionality.
  *
  * @author bryan
  */
@@ -49,7 +49,7 @@ public class RemoteRepositoryBase extends RemoteRepositoryDecls {
 
   private static final transient Logger log = Logger.getLogger(RemoteRepositoryDecls.class);
 
-  /**
+  /*
    * Return the web application context path for the default deployment of the embergraph web
    * application.
    *
@@ -67,7 +67,7 @@ public class RemoteRepositoryBase extends RemoteRepositoryDecls {
     return "/embergraph";
   }
 
-  /**
+  /*
    * Throw an exception if the status code does not indicate success.
    *
    * @param inputStreamResponseListener The response.
@@ -102,7 +102,7 @@ public class RemoteRepositoryBase extends RemoteRepositoryDecls {
     return responseListener;
   }
 
-  /**
+  /*
    * Utility method to turn a {@link GraphQueryResult} into a {@link Graph}.
    *
    * @param result The {@link GraphQueryResult}.

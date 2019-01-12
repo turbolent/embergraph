@@ -19,14 +19,14 @@ package org.embergraph.service;
 
 import org.embergraph.journal.ITransactionService;
 
-/**
- * Interface for the state associated with a transaction in an {@link ITransactionService}.
+/*
+* Interface for the state associated with a transaction in an {@link ITransactionService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ITxState extends ITxState0 {
 
-  /**
+  /*
    * A transaction is "active" when it is created and remains active until it prepares or aborts. An
    * active transaction accepts READ, WRITE, DELETE, PREPARE and ABORT requests.
    *
@@ -34,7 +34,7 @@ public interface ITxState extends ITxState0 {
    */
   boolean isActive();
 
-  /**
+  /*
    * A transaction is "prepared" once it has been successfully validated and has fulfilled its
    * pre-commit contract for a multi-stage commit protocol. An prepared transaction accepts COMMIT
    * and ABORT requests.
@@ -46,7 +46,7 @@ public interface ITxState extends ITxState0 {
    */
   boolean isPrepared();
 
-  /**
+  /*
    * A transaction is "complete" once has either committed or aborted. A completed transaction does
    * not accept any requests.
    *
@@ -54,7 +54,7 @@ public interface ITxState extends ITxState0 {
    */
   boolean isComplete();
 
-  /**
+  /*
    * A transaction is "committed" iff it has successfully committed. A committed transaction does
    * not accept any requests.
    *
@@ -62,7 +62,7 @@ public interface ITxState extends ITxState0 {
    */
   boolean isCommitted();
 
-  /**
+  /*
    * A transaction is "aborted" iff it has successfully aborted. An aborted transaction does not
    * accept any requests.
    *

@@ -23,8 +23,8 @@ import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.IJournal;
 import org.embergraph.journal.Journal;
 
-/**
- * Metadata required to locate a {@link Journal} resource.
+/*
+* Metadata required to locate a {@link Journal} resource.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class JournalMetadata extends AbstractResourceMetadata {
     return true;
   }
 
-  /**
+  /*
    * Return the file whose contents are the persistent state for the journal.
    *
    * @param journal The journal.
@@ -62,7 +62,7 @@ public class JournalMetadata extends AbstractResourceMetadata {
   /** De-serialization constructor. */
   public JournalMetadata() {}
 
-  /**
+  /*
    * The description of a journal. The {@link JournalMetadata} state will not change as writes are
    * made on the journal since it does not reflect anything exception the {@link UUID}, the
    * filename, and the create time.
@@ -79,7 +79,7 @@ public class JournalMetadata extends AbstractResourceMetadata {
         );
   }
 
-  /**
+  /*
    * Constructor variant used to indicate a read from a specific commitTime on a journal.
    *
    * @param journal The journal.
@@ -94,7 +94,7 @@ public class JournalMetadata extends AbstractResourceMetadata {
         commitTime);
   }
 
-  /**
+  /*
    * Data only constructor used by some unit tests.
    *
    * @param file
@@ -110,7 +110,7 @@ public class JournalMetadata extends AbstractResourceMetadata {
     this(file.getName() /* ,nbytes */, uuid, createTime, commitTime);
   }
 
-  /**
+  /*
    * Package private constructor used by the other constructors and when deserializing records.
    *
    * @param file

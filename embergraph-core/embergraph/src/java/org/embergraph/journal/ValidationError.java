@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-/**
- * An instance of this class is thrown when a transaction {@link ITx#prepare(long)}s if there is a
+/*
+* An instance of this class is thrown when a transaction {@link ITx#prepare(long)}s if there is a
  * write-write conflict that can not be resolved.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ public class ValidationError extends RuntimeException {
     super(cause);
   }
 
-  /**
+  /*
    * @param message
    * @param cause
    */

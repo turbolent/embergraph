@@ -58,8 +58,8 @@ import org.openrdf.rio.RDFParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * A set of compliance tests on SPARQL query functionality which can not be easily executed using
+/*
+* A set of compliance tests on SPARQL query functionality which can not be easily executed using
  * the {@link SPARQL11ManifestTest} format. This includes tests on queries with non-deterministic
  * output (e.g. GROUP_CONCAT).
  *
@@ -979,7 +979,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1027,7 +1027,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1077,7 +1077,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1127,7 +1127,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1177,7 +1177,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1232,7 +1232,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1287,7 +1287,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1345,7 +1345,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1402,7 +1402,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1435,7 +1435,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1467,7 +1467,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
   }
 
   @Test
-  /**
+  /*
    * @see http://www.openrdf.org/issues/browse/SES-1091
    * @throws Exception
    */
@@ -1640,7 +1640,7 @@ public abstract class ComplexSPARQLQueryTest extends TestCase {
     return count;
   }
 
-  /**
+  /*
    * Get a set of useful namespace prefix declarations.
    *
    * @return namespace prefix declarations for dc, foaf and ex.

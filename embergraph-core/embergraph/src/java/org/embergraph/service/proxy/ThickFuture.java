@@ -27,8 +27,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/**
- * A thick {@link Future}. This is used to communicate the state of a {@link Future} to a remote
+/*
+* A thick {@link Future}. This is used to communicate the state of a {@link Future} to a remote
  * client. The constructor blocks until the {@link Future} is done and then makes a record of the
  * {@link Future}'s state. That state is serializable as the object returned by the {@link Future}
  * is serializable.
@@ -45,7 +45,7 @@ public class ThickFuture<V> implements Future<V>, Serializable {
   private final boolean cancelled;
   private final ExecutionException cause;
 
-  /**
+  /*
    * Awaits the {@link Future} and then makes a serializable record of the {@link Future}'s state.
    */
   public ThickFuture(final Future<V> f) {
@@ -64,7 +64,7 @@ public class ThickFuture<V> implements Future<V>, Serializable {
     this.cause = cause;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The future can not be cancelled as it is already done.
@@ -80,7 +80,7 @@ public class ThickFuture<V> implements Future<V>, Serializable {
     return cancelled;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Always returns <code>true</code>.
@@ -91,7 +91,7 @@ public class ThickFuture<V> implements Future<V>, Serializable {
     return true;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The {@link Future} is already done, so this method does not block.
@@ -102,7 +102,7 @@ public class ThickFuture<V> implements Future<V>, Serializable {
     return outcome;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The {@link Future} is already done, so this method does not block.

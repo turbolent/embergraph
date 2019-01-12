@@ -31,8 +31,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.TemporaryStore;
 import org.embergraph.util.Bytes;
 
-/**
- * Unit tests for {@link DistinctFilter}.
+/*
+* Unit tests for {@link DistinctFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class TestDistinctFilter extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Unit test where all elements are visited in the first chunk. This case is optimized to avoid
    * the creation of the {@link BTree}.
    */
@@ -106,7 +106,7 @@ public class TestDistinctFilter extends TestCase2 {
     assertSameIterator(new Long[] {}, dst);
   }
 
-  /**
+  /*
    * Unit test where multiple chunks are processed. One of the chunks consists entirely of duplicate
    * elements.
    */
@@ -165,7 +165,7 @@ public class TestDistinctFilter extends TestCase2 {
         dst);
   }
 
-  /**
+  /*
    * Helper class visits a sequence of chunks specified to its ctor.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

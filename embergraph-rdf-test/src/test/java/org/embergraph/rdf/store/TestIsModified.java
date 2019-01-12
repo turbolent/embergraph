@@ -34,8 +34,8 @@ import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test suite for {@link ISPO#isModified()}.
+/*
+* Test suite for {@link ISPO#isModified()}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -50,7 +50,7 @@ public class TestIsModified extends AbstractTripleStoreTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for {@link ISPO#isModified()}. The test explores the correct reporting of statement
    * modification as statements are asserted and retracted on the database using the low-level
    * {@link SPORelation} API.

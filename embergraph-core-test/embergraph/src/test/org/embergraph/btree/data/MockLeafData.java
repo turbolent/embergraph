@@ -5,8 +5,8 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Mock object for {@link ILeafData} used for unit tests.
+/*
+* Mock object for {@link ILeafData} used for unit tests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -128,11 +128,11 @@ public class MockLeafData extends AbstractMockNodeData implements ILeafData {
     assert vals.size() == keys.size();
     assert vals.capacity() == keys.capacity();
 
-    if (deleteMarkers != null) assert deleteMarkers.length == vals.capacity();
+    assert deleteMarkers == null || deleteMarkers.length == vals.capacity();
 
-    if (versionTimestamps != null) assert versionTimestamps.length == vals.capacity();
+    assert versionTimestamps == null || versionTimestamps.length == vals.capacity();
 
-    if (rawRecords != null) assert rawRecords.length == vals.capacity();
+    assert rawRecords == null || rawRecords.length == vals.capacity();
 
     this.vals = vals;
 

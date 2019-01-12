@@ -25,8 +25,8 @@ package org.embergraph.io;
 
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link DirectBufferPool}.
+/*
+* Test suite for {@link DirectBufferPool}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -90,7 +90,7 @@ public class TestDirectBufferPool extends TestCase2 {
     assertEquals(poolAcquiredBefore, poolAcquiredAfter);
   }
 
-  /**
+  /*
    * Test verifies that a pool will not allocate a new buffer when it can recycle one instead.
    *
    * @throws InterruptedException
@@ -129,7 +129,7 @@ public class TestDirectBufferPool extends TestCase2 {
     assertEquals(poolSizeBefore, DirectBufferPool.INSTANCE.getPoolSize());
   }
 
-  /**
+  /*
    * Unit test to verify that a "double-release" of a buffer quietly succeeds.
    *
    * @throws InterruptedException

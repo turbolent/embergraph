@@ -26,8 +26,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.relation.rule.Rule;
 
-/**
- * Rule for steps 11 and 13 of the "fast closure" method.
+/*
+* Rule for steps 11 and 13 of the "fast closure" method.
  *
  * <p>Note: this rule is not very selective and does not produce new entailments unless your
  * ontology and your application both rely on domain/range to confer type information. If you
@@ -60,7 +60,7 @@ public abstract class AbstractRuleFastClosure_11_13 extends Rule {
   final IVariable<IV> x, y, z, a, b;
   final IConstant<IV> C1, C2;
 
-  /**
+  /*
    * @param head
    * @param body
    * @param constraints
@@ -79,12 +79,12 @@ public abstract class AbstractRuleFastClosure_11_13 extends Rule {
     z = (IVariable<IV>) body[0].o();
 
     // (y,C1,a)
-    assert y.equals((IVariable<IV>) body[1].s());
+    assert y.equals(body[1].s());
     C1 = (IConstant<IV>) body[1].p();
     a = (IVariable<IV>) body[1].o();
 
     // (a,C2,b)
-    assert a.equals((IVariable<IV>) body[2].s());
+    assert a.equals(body[2].s());
     C2 = (IConstant<IV>) body[2].p();
     b = (IVariable<IV>) body[2].o();
 

@@ -57,8 +57,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
-/**
- * Abstract base class for the inline representation of an RDF Value (the representation which is
+/*
+* Abstract base class for the inline representation of an RDF Value (the representation which is
  * encoded in to the keys of the statement indices). This class is responsible for combining the
  * {@link VTE} and the {@link DTE} together into the flags byte used as a common prefix for all keys
  * formed from RDF Values regardless of whether they are based on an assigned term identifier or the
@@ -200,7 +200,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
   /** */
   private static final long serialVersionUID = 4710700756635103123L;
 
-  /**
+  /*
    * Bit flags indicating the kind of RDF Value ({@link VTE}), whether the RDF Value is inline,
    * whether this is an extension datatype, and the natural order and binary representation of the
    * inline value ({@link See #DTE}).
@@ -210,7 +210,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
    */
   protected final byte flags;
 
-  /**
+  /*
    * The RDF Value type (URI, BNode, Literal or Statement) and the data type are combined and stored
    * in a single byte together with whether the RDF value has been inlined (an <i>inline</i> bit)
    * and whether the RDF Value is an extended data type (the <i>extension</> bit). The <i>vte</i>
@@ -243,7 +243,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     this(toFlags(vte, inline, extension, dte));
   }
 
-  /**
+  /*
    * Return the <code>flags</code> byte that encodes the provided metadata about an {@link IV
    * internal value}.
    *
@@ -270,7 +270,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
             & 0xff);
   }
 
-  /**
+  /*
    * Constructor used when decoding since you already have the flags.
    *
    * @param flags The flags.
@@ -286,49 +286,49 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return flags;
   }
 
-  /**
+  /*
    * The #of bits (SIX) that the {@link VTE} is shifted to the left when encoding it into the {@link
    * #flags}.
    */
   private static final int VTE_SHIFT = 6;
 
-  /**
+  /*
    * The bit mask that is bit-wise ANDed with the flags in order to reveal the {@link VTE}. The high
    * TWO (2) bits of the low byte in the mask are set.
    */
   private static final int VTE_MASK = 0xC0;
 
-  /**
+  /*
    * The #of bits (FIVE) that the <i>inline</i> flag is shifted to the left when encoding it into
    * the {@link #flags}.
    */
   private static final int INLINE_SHIFT = 5;
 
-  /**
+  /*
    * The bit mask that is bit-wise ANDed with the flags in order to reveal the <code>inline</code>
    * bit.
    */
   private static final int INLINE_MASK = 0x20;
 
-  /**
+  /*
    * The #of bits (FOUR) that the <i>extension</i> flag is shifted to the left when encoding it into
    * the {@link #flags}.
    */
   private static final int EXTENSION_SHIFT = 4;
 
-  /**
+  /*
    * The bit mask that is bit-wise ANDed with the flags in order to reveal the <code>inline</code>
    * bit.
    */
   private static final int EXTENSION_MASK = 0x10;
 
-  /**
+  /*
    * The bit mask that is bit-wise ANDed with the flags in order to reveal the {@link DTE}. The low
    * FOUR (4) bits in the mask are set.
    */
   private static final int DTE_MASK = 0x0f;
 
-  /**
+  /*
    * Return <code>true</code> if the flags byte has its <code>inline</code> bit set.
    *
    * @param flags The flags byte.
@@ -338,7 +338,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return (flags & INLINE_MASK) != 0;
   }
 
-  /**
+  /*
    * Return <code>true</code> if the flags byte has its <code>extension</code> bit set.
    *
    * @param flags The flags byte.
@@ -348,7 +348,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return (flags & EXTENSION_MASK) != 0;
   }
 
-  /**
+  /*
    * Return the {@link VTE} encoding in a flags byte.
    *
    * <p>Note: {@link VTE#valueOf(byte)} assumes that the VTE bits are in the TWO (2) LSB bits of the
@@ -382,7 +382,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return null;
   }
 
-  /**
+  /*
    * Helper method decodes a flags byte as found in a statement index key to an {@link VTE}.
    *
    * @param flags The flags byte.
@@ -393,7 +393,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return VTE.valueOf((byte) (((flags & VTE_MASK) >>> VTE_SHIFT) & 0xff));
   }
 
-  /**
+  /*
    * Helper method decodes a flags byte as found in a statement index key to an {@link DTE}.
    *
    * @param flags The flags byte.
@@ -434,7 +434,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return isURI() || isBNode();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation based on the <code>inline</code> bit flag. This can be overridden in
@@ -446,7 +446,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return isInline(flags);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation based on the <code>extension</code> bit flag. Since the extension flag
@@ -459,7 +459,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return isExtension(flags);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default implementation returns <code>false</code>.
@@ -469,7 +469,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return false;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation returns <code>false</code>. It is overridden by {@link TermId}.
@@ -509,7 +509,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
     return isInline() && getDTE().isFloatingPointNumeric();
   }
 
-  /**
+  /*
    * Return a hash code based on the value of the point in the value space.
    *
    * <p>Note: The {@link IV} implementations typically DO NOT return hash codes that are consistent
@@ -519,7 +519,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
   @Override
   public abstract int hashCode();
 
-  /**
+  /*
    * Return true iff the two {@link IV}s are the same point in the same value space. Points in
    * different value spaces (as identified by different datatype URIs) are NOT equal even if they
    * have the same value in the corresponding primitive data type.
@@ -531,7 +531,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
   @Override
   public abstract boolean equals(Object o);
 
-  /**
+  /*
    * Imposes an ordering of IVs based on their natural sort ordering in the index as unsigned
    * byte[]s.
    */
@@ -598,8 +598,8 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
        * The IV is not 100% inline.
        */
       if (isExtension()) {
-        /*
-         * The IV uses the "extension" bit. We have two different use
+      /*
+       * The IV uses the "extension" bit. We have two different use
          * cases here. One is URIs in which we have factored out the
          * namespaceIV for the URI. The other is data type literals in
          * which we have factored out the datatypeIV for the literal
@@ -799,14 +799,14 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
       case XSDString:
         {
           if (this instanceof FullyInlineTypedLiteralIV<?>) {
-            /*
-             * A fully inline Literal
+          /*
+       * A fully inline Literal
              */
             final FullyInlineTypedLiteralIV<?> iv = (FullyInlineTypedLiteralIV<?>) this;
             // notice the current key length.
             final int pos0 = keyBuilder.len();
             // append the term code.
-            keyBuilder.append((byte) iv.getTermCode());
+            keyBuilder.append(iv.getTermCode());
             // handle language code or datatype URI.
             if (iv.getLanguage() != null) {
               // language code
@@ -823,12 +823,12 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
             iv.setByteLength(1 /* flags */ + len);
             return keyBuilder;
           }
-          /*
-           * Optimized code path for xsd:string when using in combination with
+        /*
+       * Optimized code path for xsd:string when using in combination with
            * ExternalIV.
            */
           // append the term code (note: plain literal!!!)
-          keyBuilder.append((byte) ITermIndexCodes.TERM_CODE_LIT);
+          keyBuilder.append(ITermIndexCodes.TERM_CODE_LIT);
           final byte[] b = IVUnicode.encode1((String) t.getInlineValue());
           keyBuilder.append(b);
           ((IInlineUnicode) t).setByteLength(1 /* flags */ + 1 /* termCode */ + b.length);
@@ -858,15 +858,15 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
             case ARRAY:
               {
                 final InlineLiteralIV[] ivs = ((LiteralArrayIV) t).getIVs();
-                /*
-                 * Append the length of the array as a byte. InlineLiteralIV
+              /*
+       * Append the length of the array as a byte. InlineLiteralIV
                  * only supports arrays of length (1...256).
                  */
                 // int(1...256) --> byte(0...255)
                 final byte len = (byte) (ivs.length - 1);
                 keyBuilder.append(len);
-                /*
-                 * Then append the ivs one by one.
+              /*
+       * Then append the ivs one by one.
                  */
                 for (InlineLiteralIV<?, ?> iv : ivs) {
                   iv.encode(keyBuilder);
@@ -899,7 +899,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
    * RDF Value cache.
    */
 
-  /**
+  /*
    * Value cache (transient, but overridden serialization is used to send this anyway for various
    * purposes).
    *
@@ -945,7 +945,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
    * Serialization.
    */
 
-  /**
+  /*
    * Override default serialization to send the cached {@link EmbergraphValue}.
    *
    * @see https://sourceforge.net/apps/trac/bigdata/ticket/337

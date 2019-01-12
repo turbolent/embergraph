@@ -82,8 +82,8 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-/**
- * Utility class to parse some RDF resource(s) and count hash collisions using a variety of hash
+/*
+* Utility class to parse some RDF resource(s) and count hash collisions using a variety of hash
  * codes.
  *
  * <p>TODO Various data sets:
@@ -414,7 +414,7 @@ public class HashCollisionUtility {
 
   private static final Logger log = Logger.getLogger(HashCollisionUtility.class);
 
-  /**
+  /*
    * An index mapping <code>hashCode(Value)+counter : Value</code>. This provides a dictionary for
    * RDF {@link Value}s encountered when loading {@link Statement}s into the database. The counter
    * provides a simple mechanism for reconciling hash collisions.
@@ -431,20 +431,20 @@ public class HashCollisionUtility {
     /** #of statements visited. */
     private final AtomicLong nstmts = new AtomicLong();
 
-    /**
+    /*
      * The #of {@link URI}s whose <code>localName</code> was short enough that we decided to inline
      * them into the statement indices instead.
      */
     private final AtomicLong nshortURIs = new AtomicLong();
 
-    /**
+    /*
      * The #of {@link BNode}s whose <code>ID</code> was short enough that we decided to inline them
      * into the statement indices instead (this also counts blank nodes which are inlined because
      * they have integer or UUID IDs).
      */
     private final AtomicLong nshortBNodes = new AtomicLong();
 
-    /**
+    /*
      * The #of {@link Literal}s which were short enough that we decided to inline them into the
      * statement indices instead.
      */
@@ -453,7 +453,7 @@ public class HashCollisionUtility {
     // private final ConcurrentWeakValueCacheWithBatchedUpdates<Value,
     // EmbergraphValue> valueCache;
 
-    /**
+    /*
      * The size of the hash collision set for the RDF Value with the most hash collisions observed
      * to date.
      */
@@ -462,8 +462,8 @@ public class HashCollisionUtility {
     /** The total #of hash collisions. */
     private final AtomicLong totalCollisions = new AtomicLong();
 
-    // /**
-    // * The #of RDF {@link Value}s which were found in the {@link
+    // /*
+// * The #of RDF {@link Value}s which were found in the {@link
     // #valueCache},
     // * thereby avoiding a lookup against the index.
     // */
@@ -516,13 +516,13 @@ public class HashCollisionUtility {
   /** Lock used to coordinate {@link #shutdown()} and the {@link #valueQueue}. */
   private final ReentrantLock lock = new ReentrantLock();
 
-  /**
+  /*
    * Latch which is incremented as we accept files to parse and decremented once a parser begins to
    * parse that file.
    */
   private final Latch parserQueueLatch = new Latch(lock);
 
-  /**
+  /*
    * Latch which is incremented once we begin to parse a file and decremented as the parser task
    * completes.
    */
@@ -565,7 +565,7 @@ public class HashCollisionUtility {
       }
     }
 
-    /**
+    /*
      * Callback is invoked when a {@link ParseFileTask} completes.
      *
      * @param task The future for that task.
@@ -597,7 +597,7 @@ public class HashCollisionUtility {
     }
   }
 
-  /**
+  /*
    * A {@link Bucket} has an <code>unsigned byte[]</code> key and an unordered list of <code>long
    * </code> addrs for <code>byte[]</code> values. {@link Bucket} implements {@link Comparable} can
    * can be used to place an array of {@link Bucket}s into ascending key order.
@@ -612,7 +612,7 @@ public class HashCollisionUtility {
     /** The <code>unsigned byte[]</code> key. */
     public final byte[] key;
 
-    /**
+    /*
      * The list of addresses for this bucket.
      *
      * <p>TODO Collisions in a bucket are very rare given an int32 hash code, so this should be
@@ -634,7 +634,7 @@ public class HashCollisionUtility {
       addrs.add(addr);
     }
 
-    /**
+    /*
      * Add an address to this bucket.
      *
      * @param addr The address.
@@ -651,7 +651,7 @@ public class HashCollisionUtility {
     }
   }
 
-  /**
+  /*
    * A chunk of RDF {@link Value}s from the parser which are ready to be inserted into the TERMS
    * index.
    */
@@ -660,19 +660,19 @@ public class HashCollisionUtility {
     /** The allocation contexts which can be released once these data have been processed. */
     private final Set<IMemoryManager> contexts = new LinkedHashSet<IMemoryManager>();
 
-    /**
+    /*
      * The #of distinct records in the addrMap (this is more than the map size if there are hash
      * collisions since some buckets will have more than one entry).
      */
     private final int nvalues;
 
-    /**
+    /*
      * A map from the <code>unsigned byte[]</code> keys to the collision bucket containing the
      * address of each record for a given <code>unsigned byte[]</code> key.
      */
     private final Map<byte[] /* key */, Bucket> addrMap;
 
-    /**
+    /*
      * @param contexts The allocation contexts for the records in the addrMap.
      * @param nvalues The #of distinct records in the addrMap (this is more than the map size if
      *     there are hash collisions since some buckets will have more than one entry).
@@ -693,7 +693,7 @@ public class HashCollisionUtility {
       this.addrMap = addrMap;
     }
 
-    /**
+    /*
      * Clear the address map and the {@link IMemoryManager} allocation contexts against which the
      * data were stored.
      */
@@ -726,7 +726,7 @@ public class HashCollisionUtility {
   /** Counters for things that we track. */
   private final Counters c = new Counters();
 
-  /**
+  /*
    * The upper bound on the size of a {@link ValueBuffer} chunk (currently in slotBytes for the
    * allocations against the {@link MemoryManager}).
    *
@@ -741,7 +741,7 @@ public class HashCollisionUtility {
   /** Capacity of the {@link #valueQueue}. */
   final int valQueueCapacity = 10;
 
-  /**
+  /*
    * Maximum #of chunks to drain from the {@link #valueQueue} in one go. This bounds the largest
    * chunk that we will index at one go. You can remove the limit by specifying {@link
    * Integer#MAX_VALUE}.
@@ -751,13 +751,13 @@ public class HashCollisionUtility {
   /** The size of the read buffer when reading a file. */
   final int fileBufSize = 1024 * 8; // default 8k
 
-  /**
+  /*
    * How many parser threads to use. There can be only one parser per file, but you can parse more
    * than one file at a time.
    */
   final int nparserThreads = 1;
 
-  /**
+  /*
    * The size of the work queue for the {@link #parserService}.
    *
    * <p>Note: This should be large enough that we will not wait around forever if the caller is
@@ -769,7 +769,7 @@ public class HashCollisionUtility {
    */
   final int parserWorkQueueCapacity = 100;
 
-  /**
+  /*
    * A direct memory heap used to buffer RDF {@link Value}s which will be inserted into the TERMS
    * index. A distinct child {@link IMemoryManager} context is created by the {@link
    * StatementHandler} each time it needs to buffer data. The {@link StatementHandler} monitors the
@@ -924,7 +924,7 @@ public class HashCollisionUtility {
     }
   }
 
-  /**
+  /*
    * Future for the task which drains the {@link #valueQueue} and indexes the {@link ValueBuffer}s
    * drained from that queue.
    */
@@ -933,13 +933,13 @@ public class HashCollisionUtility {
   /** Flag is <code>true</code> while parsers are still running. */
   private final AtomicBoolean parsing = new AtomicBoolean(false);
 
-  /**
+  /*
    * Poison pill used to indicate that no more objects will be placed onto the {@link #valueQueue}.
    */
   private final ValueBuffer poisonPill =
       new ValueBuffer(new LinkedList<IMemoryManager>(), 0, new LinkedHashMap<byte[], Bucket>());
 
-  /**
+  /*
    * Normal shutdown. Running parsers will complete and their data will be indexed, but new parsers
    * will not start. This method will block until all data has been indexed.
    *
@@ -977,7 +977,7 @@ public class HashCollisionUtility {
     log.debug("all done.");
   }
 
-  /**
+  /*
    * Immediate shutdown. Running tasks will be canceled.
    *
    * @throws Exception
@@ -995,7 +995,7 @@ public class HashCollisionUtility {
     }
   }
 
-  /**
+  /*
    * Task drains the valueQueue and runs an {@link IndexerTask} each time something is drained from
    * that queue.
    *
@@ -1073,7 +1073,7 @@ public class HashCollisionUtility {
 
       log.debug("done.");
 
-      return (Void) null;
+      return null;
     }
 
     /** Combine chunks from the queue into a single chunk. */
@@ -1141,14 +1141,14 @@ public class HashCollisionUtility {
     }
   } // class IndexerMainTask
 
-  /**
+  /*
    * Return the index in which we store RDF {@link Value}s.
    *
    * @param jnl The index manager.
    * @return The index.
    */
   /*
-  	 * TODO CanonicalHuffmanRabaCoder for U1 drops the average leaf size
+   * TODO CanonicalHuffmanRabaCoder for U1 drops the average leaf size
   	 *
   	 * @ m=512 from 24k to 16k. Experiment with performance tradeoff
   	 * when compared with gzip of the record.
@@ -1253,14 +1253,14 @@ public class HashCollisionUtility {
       final DefaultTupleSerializer tupleSer =
           new DefaultTupleSerializer(
               new DefaultKeyBuilderFactory(new Properties()),
-              /*
-               * leaf keys
+            /*
+       * leaf keys
                */
               //					DefaultFrontCodedRabaCoder.INSTANCE,
               new FrontCodedRabaCoder(ratio),
               //					CanonicalHuffmanRabaCoder.INSTANCE,
-              /*
-               * leaf values
+            /*
+       * leaf values
                */
               CanonicalHuffmanRabaCoder.INSTANCE
               //					new SimpleRabaCoder()
@@ -1343,7 +1343,7 @@ public class HashCollisionUtility {
     }
   }
 
-  /**
+  /*
    * Task parses a single file.
    *
    * @author thompsonbry
@@ -1382,7 +1382,7 @@ public class HashCollisionUtility {
 
       parseFile(file);
 
-      return (Void) null;
+      return null;
     }
 
     private void parseFile(final File file)
@@ -1452,13 +1452,13 @@ public class HashCollisionUtility {
     /** The lexicon configuration. */
     private final LexiconConfiguration<EmbergraphValue> conf;
 
-    /**
+    /*
      * Blocking queue to which we add {@link ValueBuffer} instances as they are generated by the
      * parser.
      */
     final BlockingQueue<ValueBuffer> valueQueue;
 
-    /**
+    /*
      * <code>true</code> iff the parser is permitted to run and <code>false</code> if the parser
      * should terminate.
      */
@@ -1476,7 +1476,7 @@ public class HashCollisionUtility {
     /** Used to serialize RDF Values as byte[]s. */
     private final EmbergraphValueSerializer<EmbergraphValue> valSer;
 
-    /**
+    /*
      * Used to (de-)compress the raw values.
      *
      * <p>Note: This is not thread-safe, even for decompression. You need a pool or thread-local
@@ -1496,7 +1496,7 @@ public class HashCollisionUtility {
     /** The current allocation context. */
     private IMemoryManager context = null;
 
-    /**
+    /*
      * Map of distinct values in the buffer.
      *
      * <p>TODO In addition to enforcing DISTINCT over the Values in the ValueBuffer, an LRU/LIRS
@@ -1580,7 +1580,7 @@ public class HashCollisionUtility {
       c.nstmts.incrementAndGet();
     }
 
-    /**
+    /*
      * If the RDF {@link Value} can not be represented inline within the statement indices, then
      * buffer the value for batch resolution against the TERMS index.
      *
@@ -1661,8 +1661,8 @@ public class HashCollisionUtility {
 
       if (bucket == null) {
 
-        /*
-         * No match on that hash code key.
+      /*
+       * No match on that hash code key.
          */
 
         // lay the record down on the memory manager.
@@ -1675,8 +1675,8 @@ public class HashCollisionUtility {
 
       } else {
 
-        /*
-         * Either a hash collision or the value is already stored at
+      /*
+       * Either a hash collision or the value is already stored at
          * a known address.
          */
         {
@@ -1688,8 +1688,8 @@ public class HashCollisionUtility {
               continue;
             }
 
-            /*
-             * TODO It would be more efficient to compare the data
+          /*
+       * TODO It would be more efficient to compare the data
              * using the zero-copy get(addr) method.
              */
             final byte[] tmp = context.read(addr);
@@ -1701,8 +1701,8 @@ public class HashCollisionUtility {
               if (log.isDebugEnabled())
                 log.debug("Duplicate value in chunk: " + Arrays.toString(t.val));
 
-              /*
-               * FIXME This pattern does not really work out for
+            /*
+       * FIXME This pattern does not really work out for
                * building statements since we lack a reference to
                * the Value which is being inserted into the TERMS
                * index. The StatementBuffer handles this. It keeps
@@ -1728,7 +1728,7 @@ public class HashCollisionUtility {
       return;
     } // bufferValue()
 
-    /**
+    /*
      * Transfer a non-empty buffer to the {@link #valueQueue}.
      *
      * @throws InterruptedException
@@ -1878,7 +1878,7 @@ public class HashCollisionUtility {
     /** Used to de-serialize RDF Values (debugging only). */
     private final EmbergraphValueSerializer<EmbergraphValue> valSer;
 
-    /**
+    /*
      * Used to de-compress the raw values (debugging only).
      *
      * <p>Note: This is not thread-safe, even for decompression. You need a pool or thread-local
@@ -1967,10 +1967,10 @@ public class HashCollisionUtility {
       // release the address map and backing allocation context.
       vbuf.clear();
 
-      return (Void) null;
+      return null;
     }
 
-    /**
+    /*
      * Insert a record into the TERMS index.
      *
      * @param baseKey The base key for the hash code (without the counter suffix).
@@ -2034,8 +2034,8 @@ public class HashCollisionUtility {
 
       if (rangeCount >= Byte.MAX_VALUE) {
 
-        /*
-         * Impose a hard limit on the #of hash collisions we will accept
+      /*
+       * Impose a hard limit on the #of hash collisions we will accept
          * in this utility.
          *
          * @todo We do not need to have a hard limit if we use
@@ -2052,8 +2052,8 @@ public class HashCollisionUtility {
 
       if (rangeCount == 0) {
 
-        /*
-         * This is the first time we have observed a Value which
+      /*
+       * This is the first time we have observed a Value which
          * generates this hash code, so append a [short] ZERO (0) to
          * generate the actual key and then insert the Value into the
          * index. Since there is nothing in the index for this hash
@@ -2191,7 +2191,7 @@ public class HashCollisionUtility {
                 + getValue(val));
     }
 
-    /**
+    /*
      * Decompress and deserialize a {@link Value}.
      *
      * @param tmp The serialized and compressed value.
@@ -2209,7 +2209,7 @@ public class HashCollisionUtility {
     }
   } // class IndexValueBufferTask
 
-  /**
+  /*
    * Parse files, inserting {@link Value}s into indices and counting hash collisions.
    *
    * @param args filename(s)

@@ -25,8 +25,8 @@ import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-/**
- * An iterator that visits the elements in the given iterator of arrays.
+/*
+* An iterator that visits the elements in the given iterator of arrays.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: ChunkedArrayIterator.java 2265 2009-10-26 12:51:06Z thompsonbry $
@@ -47,13 +47,13 @@ public class ChunkedArraysIterator<E> implements IChunkedOrderedIterator<E> {
   /** The index of the next entry in {@link #buffer} that will be returned by {@link #next()}. */
   private int i = 0;
 
-  //    /**
-  //     * The element most recently returned by {@link #next()}.
+  //    /*
+//     * The element most recently returned by {@link #next()}.
   //     */
   //    private E current = null;
 
-  //    /**
-  //     * The #of elements that this iterator buffered.
+  //    /*
+//     * The #of elements that this iterator buffered.
   //     */
   //    public int getBufferCount() {
   //
@@ -61,7 +61,7 @@ public class ChunkedArraysIterator<E> implements IChunkedOrderedIterator<E> {
   //
   //    }
 
-  /**
+  /*
    * An iterator that visits the elements in the given iterator of arrays.
    *
    * @param a The iterator of arrays of elements.
@@ -71,7 +71,7 @@ public class ChunkedArraysIterator<E> implements IChunkedOrderedIterator<E> {
     this(a, null);
   }
 
-  /**
+  /*
    * An iterator that visits the elements in the given iterator of arrays.
    *
    * @param a The iterator of arrays of elements.
@@ -147,8 +147,8 @@ public class ChunkedArraysIterator<E> implements IChunkedOrderedIterator<E> {
     throw new UnsupportedOperationException();
   }
 
-  //    /**
-  //     * Return the backing array.
+  //    /*
+//     * Return the backing array.
   //     *
   //     * @see #getBufferCount()
   //     */
@@ -160,7 +160,7 @@ public class ChunkedArraysIterator<E> implements IChunkedOrderedIterator<E> {
   //
   //    }
 
-  /**
+  /*
    * Returns the remaining statements.
    *
    * @throws NoSuchElementException if {@link #hasNext()} returns false.

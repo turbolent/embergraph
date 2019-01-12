@@ -27,8 +27,8 @@ import org.embergraph.journal.BasicSnapshotFactory;
 import org.embergraph.journal.ISnapshotResult;
 import org.embergraph.journal.Journal;
 
-/**
- * Request an online backup of the journal (non-HA Mode). The backup will be
+/*
+* Request an online backup of the journal (non-HA Mode). The backup will be
  * written to the backup file specified as the value of the Request Parameter,
  * i.e.
  *
@@ -60,13 +60,13 @@ public class BackupServlet extends EmbergraphRDFServlet {
   /** */
   private static final long serialVersionUID = 5983619974621184746L;
 
-  /**
+  /*
    * URL parameter to compress the snapshot. Default value is false. If it is present without a
    * value, it is assumed to be true. It does not append a .gz to the filename.
    */
   public static final String COMPRESS = "compress";
 
-  /**
+  /*
    * URL parameter to specify the backup file. It is optional. If it is not specified, it defaults
    * to &quot;backup.jnl&quot;.
    *
@@ -77,7 +77,7 @@ public class BackupServlet extends EmbergraphRDFServlet {
 
   public static final String DEFAULT_FILE = "backup.jnl";
 
-  /**
+  /*
    * URL parameter to specify that the REST call should block until the backup is completed. The
    * default value is true.
    *

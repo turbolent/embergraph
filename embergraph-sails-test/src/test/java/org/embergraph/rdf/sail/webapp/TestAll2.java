@@ -25,8 +25,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * A version of the test suite that is intended for local debugging and is NOT run in CI. This is
+/*
+* A version of the test suite that is intended for local debugging and is NOT run in CI. This is
  * intended just to make it easier to run specific proxied test suites.
  *
  * <p>TO USE: Comment in/out those tests suites that you want to run in {@link #suite()} and also in

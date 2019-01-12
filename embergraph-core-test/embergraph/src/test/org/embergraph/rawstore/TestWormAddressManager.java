@@ -24,8 +24,8 @@ package org.embergraph.rawstore;
 import java.util.Random;
 import junit.framework.TestCase;
 
-/**
- * Test suite for {@link WormAddressManager}.
+/*
+* Test suite for {@link WormAddressManager}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -43,8 +43,8 @@ public class TestWormAddressManager extends TestCase {
     super(name);
   }
 
-  //    /**
-  //     * verify that the constructor correctly interprets is parameter as the #of
+  //    /*
+//     * verify that the constructor correctly interprets is parameter as the #of
   //     * offset bits.
   //     */
   //    public void test_ctor_default() {
@@ -60,7 +60,7 @@ public class TestWormAddressManager extends TestCase {
   //
   //    }
 
-  /**
+  /*
    * Test of constructor when splitting the long integer into two 32-bit unsigned integer components
    * (offset and #bytes).
    */
@@ -89,7 +89,7 @@ public class TestWormAddressManager extends TestCase {
     assertEquals("byteCountMask", 0x00000000ffffffffL, am.byteCountMask);
   }
 
-  /**
+  /*
    * Test of constructor when splitting the long integer into a 48-bit unsigned integer (offset) and
    * a 16-bit unsigned integer (#bytes).
    */
@@ -164,7 +164,7 @@ public class TestWormAddressManager extends TestCase {
     new WormAddressManager(WormAddressManager.MAX_OFFSET_BITS);
   }
 
-  /**
+  /*
    * Verify that {@link WormAddressManager#toAddr(int, long)} will reject a zero byte count or a
    * zero offset since the value <code>0L</code> is reserved to represent a null reference.
    */
@@ -206,7 +206,7 @@ public class TestWormAddressManager extends TestCase {
     doTestGet(48, 1000);
   }
 
-  /**
+  /*
    * Test of encoding and decoding addresses with a set of addresses selected from each of the legal
    * values of the offsetBits.
    */
@@ -218,8 +218,8 @@ public class TestWormAddressManager extends TestCase {
     }
   }
 
-  //    /**
-  //     * Test of packing and unpacking addresses with a small set of addresses
+  //    /*
+//     * Test of packing and unpacking addresses with a small set of addresses
   //     * using 32 bit offsets.
   //     */
   //    public void test_packUnpack_32() throws IOException {
@@ -228,8 +228,8 @@ public class TestWormAddressManager extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Test of packing and unpacking addresses with a small set of addresses
+  //    /*
+//     * Test of packing and unpacking addresses with a small set of addresses
   //     * using 48 bit offsets.
   //     */
   //    public void test_packUnpack_48() throws IOException {
@@ -238,8 +238,8 @@ public class TestWormAddressManager extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Test of packing and unpacking addresses with a set of addresses selected
+  //    /*
+//     * Test of packing and unpacking addresses with a set of addresses selected
   //     * from each of the legal values of the offsetBits.
   //     */
   //    public void test_packUnpack() throws IOException {
@@ -253,7 +253,7 @@ public class TestWormAddressManager extends TestCase {
   //
   //    }
 
-  /**
+  /*
    * Helper performs random tests of {@link WormAddressManager#toAddr(int, long)} and is intended to
    * verify both consistency of encoding and decoding and correct rejection when encoding.
    *
@@ -280,8 +280,8 @@ public class TestWormAddressManager extends TestCase {
 
       if (nbytes < 0 || offset > am.maxOffset || offset < 0L) {
 
-        /*
-         * Check for correct rejection.
+      /*
+       * Check for correct rejection.
          */
         try {
 
@@ -313,8 +313,8 @@ public class TestWormAddressManager extends TestCase {
     }
   }
 
-  //    /**
-  //     * Helper method verifies (de-)serialization of addresses.
+  //    /*
+//     * Helper method verifies (de-)serialization of addresses.
   //     *
   //     * @param offsetBits
   //     *
@@ -438,7 +438,7 @@ public class TestWormAddressManager extends TestCase {
     return addr;
   }
 
-  /**
+  /*
    * Returns a legal random non-NULL address that does not extend as far as <i>limit</i>.
    *
    * @param limit The first byte that must not be covered by the returned address.
@@ -462,7 +462,7 @@ public class TestWormAddressManager extends TestCase {
     return addr;
   }
 
-  /**
+  /*
    * Verify that we can encode and decode that address.
    *
    * @param am The address manager.
@@ -504,7 +504,7 @@ public class TestWormAddressManager extends TestCase {
     }
   }
 
-  /**
+  /*
    * Next random byte count in [0:maxByteCount], but never more than {@link Integer#MAX_VALUE} bytes
    * and zero (0) 5% of the time.
    */
@@ -520,7 +520,7 @@ public class TestWormAddressManager extends TestCase {
     return nbytes;
   }
 
-  /**
+  /*
    * Next random legal non-zero byte count less than maxByteCount and never more than {@link
    * Integer#MAX_VALUE} bytes.
    */
@@ -569,7 +569,7 @@ public class TestWormAddressManager extends TestCase {
     return offset;
   }
 
-  /**
+  /*
    * One of a series of tests of encoding and decoding addresses that have proven themselves to be
    * edge conditions in the code.
    */
@@ -626,7 +626,7 @@ public class TestWormAddressManager extends TestCase {
     assertEquals("maxByteCount", 1024, WormAddressManager.getMaxByteCount(54));
   }
 
-  /**
+  /*
    * Test that {@link IAddressManager#toAddr(int, long)} will correctly reject requests where the
    * byte count is invalid.
    */
@@ -664,7 +664,7 @@ public class TestWormAddressManager extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test that {@link IAddressManager#toAddr(int, long)} will correctly reject requests where the
    * byte offset is invalid.
    */

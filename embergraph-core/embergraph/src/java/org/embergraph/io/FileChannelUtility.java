@@ -42,8 +42,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.util.InnerCause;
 
-/**
- * A helper class for operations on {@link FileChannel}s.
+/*
+* A helper class for operations on {@link FileChannel}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -55,7 +55,7 @@ public class FileChannelUtility {
 
   private static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Reads {@link ByteBuffer#remaining()} bytes into the caller's {@link ByteBuffer} from the
    * channel starting at offset <i>pos</i>. The position of the {@link ByteBuffer} is advanced to
    * the limit. The offset of the channel is NOT modified as a side-effect.
@@ -82,7 +82,7 @@ public class FileChannelUtility {
     return readAll(new NOPReopener(channel), src, pos);
   }
 
-  /**
+  /*
    * Reads {@link ByteBuffer#remaining()} bytes into the caller's {@link ByteBuffer} from the
    * channel starting at offset <i>pos</i>. The position of the {@link ByteBuffer} is advanced to
    * the limit. The offset of the channel is NOT modified as a side-effect.
@@ -153,8 +153,8 @@ public class FileChannelUtility {
 
       } catch (ClosedByInterruptException ex) {
 
-        /*
-         * This indicates that this thread was interrupted. We
+      /*
+       * This indicates that this thread was interrupted. We
          * always abort in this case.
          */
 
@@ -162,8 +162,8 @@ public class FileChannelUtility {
 
       } catch (AsynchronousCloseException ex) {
 
-        /*
-         * The channel was closed asynchronously while blocking during
+      /*
+       * The channel was closed asynchronously while blocking during
          * the read. We will continue to read if the channel can be
          * reopened.
          */
@@ -171,8 +171,8 @@ public class FileChannelUtility {
 
       } catch (ClosedChannelException ex) {
 
-        /*
-         * The channel is closed. This could have occurred between the
+      /*
+       * The channel is closed. This could have occurred between the
          * moment when we got the FileChannel reference and the moment
          * when we tried to read on the FileChannel. We will continue to
          * read if the channel can be reopened.
@@ -263,7 +263,7 @@ public class FileChannelUtility {
     AsynchronousFileChannel getAsyncChannel();
   }
 
-  /**
+  /*
    * The AsyncTransfer class encapsulates the state required to make asynchronous transfer requests.
    * It was written explicitly to support asynchronous transfer of blob data that requires multiple
    * reads.
@@ -281,7 +281,7 @@ public class FileChannelUtility {
       m_buffer.mark(); // mark buffer to support reset on any retries
     }
 
-    /**
+    /*
      * Schedule a read on the channel. If the operation was previously schedule and is done (normal
      * completion), then return immediately. If the operation was previously schedule and was
      * cancelled, then throws out a CancellationException. If the operation was previously schedule
@@ -301,15 +301,15 @@ public class FileChannelUtility {
             InterruptedException {
       if (isDone()) { // Check for re-scheduling of the read().
         try {
-          /*
-           * Note: It is either unlikely or impossible to have an
+        /*
+       * Note: It is either unlikely or impossible to have an
            * InterruptedException thrown out here since we know that
            * the Future isDone().
            */
           m_fut.get(); // throws CancellationException, ExecutionException, InterruptedException.
         } catch (ExecutionException ex) {
-          /*
-           * This read() had failed. We clear future so we can re-do
+        /*
+       * This read() had failed. We clear future so we can re-do
            * the read.
            */
           m_fut = null;
@@ -341,7 +341,7 @@ public class FileChannelUtility {
     }
   }
 
-  /**
+  /*
    * readAllAsync will make repeated attempts to read data into the transfer buffers defined in the
    * List of AsyncTransfer instances.
    *
@@ -433,8 +433,8 @@ public class FileChannelUtility {
 
           if (InnerCause.isInnerCause(cause, ClosedByInterruptException.class)) {
 
-            /*
-             * This indicates that this thread was interrupted. We
+          /*
+       * This indicates that this thread was interrupted. We
              * always abort in this case.
              */
 
@@ -442,8 +442,8 @@ public class FileChannelUtility {
 
           } else if (InnerCause.isInnerCause(cause, AsynchronousCloseException.class)) {
 
-            /*
-             * The channel was closed asynchronously while blocking
+          /*
+       * The channel was closed asynchronously while blocking
              * during the read. We will continue to read if the
              * channel can be reopened.
              */
@@ -451,8 +451,8 @@ public class FileChannelUtility {
 
           } else if (InnerCause.isInnerCause(cause, ClosedChannelException.class)) {
 
-            /*
-             * The channel is closed. This could have occurred
+          /*
+       * The channel is closed. This could have occurred
              * between the moment when we got the FileChannel
              * reference and the moment when we tried to read on the
              * FileChannel. We will continue to read if the channel
@@ -462,8 +462,8 @@ public class FileChannelUtility {
 
           } else {
 
-            /*
-             * Wrap and thrown anything else.
+          /*
+       * Wrap and thrown anything else.
              */
             throw new RuntimeException(ex);
           }
@@ -479,7 +479,7 @@ public class FileChannelUtility {
     }
   }
 
-  /**
+  /*
    * Write bytes in <i>data</i> from the position to the limit on the channel starting at
    * <i>pos</i>. The position of the buffer will be advanced to the limit. The position of the
    * channel is not changed by this method.
@@ -546,7 +546,7 @@ public class FileChannelUtility {
 
   }
 
-  /**
+  /*
    * Write bytes in <i>data</i> from the position to the limit on the channel starting at
    * <i>pos</i>. The position of the buffer will be advanced to the limit. The position of the
    * channel is not changed by this method. If the backing channel is asynchronously in another
@@ -600,8 +600,8 @@ public class FileChannelUtility {
 
       } catch (ClosedByInterruptException ex) {
 
-        /*
-         * This indicates that this thread was interrupted. We always
+      /*
+       * This indicates that this thread was interrupted. We always
          * abort in this case.
          */
 
@@ -609,8 +609,8 @@ public class FileChannelUtility {
 
       } catch (AsynchronousCloseException ex) {
 
-        /*
-         * The channel was closed asynchronously while blocking during
+      /*
+       * The channel was closed asynchronously while blocking during
          * the write. We will continue to write if the channel can be
          * reopened.
          */
@@ -618,8 +618,8 @@ public class FileChannelUtility {
 
       } catch (ClosedChannelException ex) {
 
-        /*
-         * The channel is closed. This could have occurred between the
+      /*
+       * The channel is closed. This could have occurred between the
          * moment when we got the FileChannel reference and the moment
          * when we tried to write on the FileChannel. We will continue
          * to write if the channel can be reopened.
@@ -691,7 +691,7 @@ public class FileChannelUtility {
     return nwrites;
   }
 
-  /**
+  /*
    * {@link FileChannel} to {@link FileChannel} transfer of <i>count</i> bytes from the
    * <i>sourceChannel</i> starting at the <i>fromPosition</i> onto the <i>out</i> file starting at
    * its current position. The position on the <i>sourceChannel</i> is updated by this method and

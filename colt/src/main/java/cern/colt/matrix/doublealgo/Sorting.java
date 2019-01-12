@@ -15,8 +15,8 @@ import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
 import cern.colt.matrix.impl.DenseDoubleMatrix1D;
-/**
- * Matrix quicksorts and mergesorts. Use idioms like <tt>Sorting.quickSort.sort(...)</tt> and
+/*
+* Matrix quicksorts and mergesorts. Use idioms like <tt>Sorting.quickSort.sort(...)</tt> and
  * <tt>Sorting.mergeSort.sort(...)</tt>.
  *
  * <p>This is another case demonstrating one primary goal of this library: Delivering easy to use,
@@ -71,7 +71,7 @@ public class Sorting extends cern.colt.PersistentObject {
   protected void runSort(int fromIndex, int toIndex, IntComparator c, cern.colt.Swapper swapper) {
     cern.colt.GenericSorting.quickSort(fromIndex, toIndex, c, swapper);
   }
-  /**
+  /*
    * Sorts the vector into ascending order, according to the <i>natural ordering</i>. The returned
    * view is backed by this matrix, so changes in the returned view are reflected in this matrix,
    * and vice-versa. To sort ranges use sub-ranging views. To sort descending, use flip views ...
@@ -112,7 +112,7 @@ public class Sorting extends cern.colt.PersistentObject {
 
     return vector.viewSelection(indexes);
   }
-  /**
+  /*
    * Sorts the vector into ascending order, according to the order induced by the specified
    * comparator. The returned view is backed by this matrix, so changes in the returned view are
    * reflected in this matrix, and vice-versa. The algorithm compares two cells at a time,
@@ -153,7 +153,7 @@ public class Sorting extends cern.colt.PersistentObject {
 
     return vector.viewSelection(indexes);
   }
-  /**
+  /*
    * Sorts the matrix rows into ascending order, according to the <i>natural ordering</i> of the
    * matrix values in the virtual column <tt>aggregates</tt>; Particularly efficient when comparing
    * expensive aggregates, because aggregates need not be recomputed time and again, as is the case
@@ -269,7 +269,7 @@ public class Sorting extends cern.colt.PersistentObject {
     // take all columns in the original order
     return matrix.viewSelection(indexes, null);
   }
-  /**
+  /*
    * Sorts the matrix rows into ascending order, according to the <i>natural ordering</i> of the
    * matrix values in the given column. The returned view is backed by this matrix, so changes in
    * the returned view are reflected in this matrix, and vice-versa. To sort ranges use sub-ranging
@@ -334,7 +334,7 @@ public class Sorting extends cern.colt.PersistentObject {
     // take all columns in the original order
     return matrix.viewSelection(rowIndexes, null);
   }
-  /**
+  /*
    * Sorts the matrix rows according to the order induced by the specified comparator. The returned
    * view is backed by this matrix, so changes in the returned view are reflected in this matrix,
    * and vice-versa. The algorithm compares two rows (1-d matrices) at a time, determinining whether
@@ -380,7 +380,7 @@ public class Sorting extends cern.colt.PersistentObject {
     // take all columns in the original order
     return matrix.viewSelection(rowIndexes, null);
   }
-  /**
+  /*
    * Sorts the matrix rows into ascending order, according to the <i>natural ordering</i> of the
    * values computed by applying the given aggregation function to each row; Particularly efficient
    * when comparing expensive aggregates, because aggregates need not be recomputed time and again,
@@ -462,7 +462,7 @@ public class Sorting extends cern.colt.PersistentObject {
   //	double[] aggr = tmp.viewRow(0).toArray();
   //	return sort(matrix,aggr);
   // }
-  /**
+  /*
    * Sorts the matrix slices into ascending order, according to the <i>natural ordering</i> of the
    * matrix values in the given <tt>[row,column]</tt> position. The returned view is backed by this
    * matrix, so changes in the returned view are reflected in this matrix, and vice-versa. To sort
@@ -515,7 +515,7 @@ public class Sorting extends cern.colt.PersistentObject {
     // take all rows and columns in the original order
     return matrix.viewSelection(sliceIndexes, null, null);
   }
-  /**
+  /*
    * Sorts the matrix slices according to the order induced by the specified comparator. The
    * returned view is backed by this matrix, so changes in the returned view are reflected in this
    * matrix, and vice-versa. The algorithm compares two slices (2-d matrices) at a time,

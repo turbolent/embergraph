@@ -20,8 +20,8 @@ import org.embergraph.rdf.graph.IGASContext;
 import org.embergraph.rdf.graph.IGASState;
 import org.openrdf.model.Statement;
 
-/**
- * Filter visits only edges (filters out attribute values).
+/*
+* Filter visits only edges (filters out attribute values).
  *
  * <p>Note: This filter is pushed down onto the AP and evaluated close to the data.
  */

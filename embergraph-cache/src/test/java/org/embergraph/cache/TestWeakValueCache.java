@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.cache;
 
-/**
- * Tests suite for the {@link WeakValueCache}. This class tests the weak cache and its integration
+/*
+* Tests suite for the {@link WeakValueCache}. This class tests the weak cache and its integration
  * with a delegate hard reference cache policy.
  *
  * @todo verify entries cleared once weakly reachable, but not before.
@@ -105,7 +105,7 @@ public class TestWeakValueCache extends AbstractCachePolicyTest {
     new WeakValueCache<Integer, Object>(initialCapacity, loadFactor, delegate, factory);
   }
 
-  /**
+  /*
    * Test fixture factory.
    *
    * @return A new {@link WeakValueCache} backed by a {@link LRUCache} with the stated capacity.
@@ -114,7 +114,7 @@ public class TestWeakValueCache extends AbstractCachePolicyTest {
     return new WeakValueCache<Long, String>(new LRUCache<Long, String>(capacity));
   }
 
-  /**
+  /*
    * Test verifies that put() may not be used to replace the object in the cache under a given oid,
    * but only to update the dirty flag associated with that entry (and to update the LRU cache
    * ordering).

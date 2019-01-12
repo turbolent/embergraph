@@ -27,8 +27,8 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.BOpBase;
 
-/**
- * Base class for operators which apply striterator patterns for access paths.
+/*
+* Base class for operators which apply striterator patterns for access paths.
  *
  * <p>The striterator pattern is enacted slightly differently here. The filter chain is formed by
  * stacking {@link BOpFilterBase}s as child operands. Each operand specified to a {@link
@@ -48,7 +48,7 @@ public abstract class BOpFilterBase extends BOpBase implements IFilter {
 
   public interface Annotations extends BOp.Annotations {}
 
-  /**
+  /*
    * Deep copy.
    *
    * @param op
@@ -57,7 +57,7 @@ public abstract class BOpFilterBase extends BOpBase implements IFilter {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy.
    *
    * @param args
@@ -85,7 +85,7 @@ public abstract class BOpFilterBase extends BOpBase implements IFilter {
     return src;
   }
 
-  /**
+  /*
    * Wrap the source iterator with <i>this</i> filter.
    *
    * @param src The source iterator.

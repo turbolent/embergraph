@@ -26,8 +26,8 @@ package org.embergraph.service.ndx.pipeline;
 import java.util.concurrent.Callable;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
-/**
- * Interface for task consuming data written on an application on an asynchronous write buffer.
+/*
+* Interface for task consuming data written on an application on an asynchronous write buffer.
  *
  * @param <H> The generic type of the value returned by the {@link Callable} for the master (the
  *     statistics object).
@@ -38,8 +38,8 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 public interface IMasterTask<E, H> {
 
   /** The top-level buffer on which the application is writing. */
-  public BlockingBuffer<E[]> getBuffer();
+  BlockingBuffer<E[]> getBuffer();
 
   /** The statistics. */
-  public H getStats();
+  H getStats();
 }

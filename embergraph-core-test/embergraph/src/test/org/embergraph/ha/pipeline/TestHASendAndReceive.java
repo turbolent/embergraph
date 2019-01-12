@@ -29,8 +29,8 @@ import org.embergraph.ha.msg.HAMessageWrapper;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.IBufferAccess;
 
-/**
- * Test the raw socket protocol implemented by {@link HASendService} and {@link HAReceiveService}.
+/*
+* Test the raw socket protocol implemented by {@link HASendService} and {@link HAReceiveService}.
  *
  * @author martyn Cutcher
  */
@@ -88,7 +88,7 @@ public class TestHASendAndReceive extends AbstractHASendAndReceiveTestCase {
     }
   }
 
-  /**
+  /*
    * Should we expect concurrency of the Socket send and RMI? It seems that we should be able to
    * handle it whatever the logical argument. The only constraint should be on the processing of
    * each pair of socket/RMI interactions. OTOH, if we are intending to process the OP_ACCEPT and
@@ -128,7 +128,7 @@ public class TestHASendAndReceive extends AbstractHASendAndReceiveTestCase {
     }
   }
 
-  /**
+  /*
    * Sends a large number of random buffers, confirming successful transmission.
    *
    * @throws TimeoutException
@@ -155,7 +155,7 @@ public class TestHASendAndReceive extends AbstractHASendAndReceiveTestCase {
     }
   }
 
-  /**
+  /*
    * Sends a large number of random buffers, confirming successful transmission.
    *
    * @throws InterruptedException

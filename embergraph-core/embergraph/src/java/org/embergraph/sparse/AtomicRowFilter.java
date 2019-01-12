@@ -37,8 +37,8 @@ import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.sparse.TPS.TPV;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Transforms an {@link ITupleIterator} reading directly on an {@link IIndex} backing a {@link
+/*
+* Transforms an {@link ITupleIterator} reading directly on an {@link IIndex} backing a {@link
  * SparseRowStore} into an {@link ITupleIterator} visiting logical {@link ITPS} rows.
  *
  * @todo Look at the remove semantics for the sparse row store. This would have to delete the
@@ -70,7 +70,7 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
 
   private final INameFilter nameFilter;
 
-  /**
+  /*
    * @param schema The schema governing the row.
    * @param fromTime The first timestamp for which timestamped property values will be accepted.
    * @param toTime The first timestamp for which timestamped property values will NOT be accepted
@@ -108,12 +108,12 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
     /** #of logical rows read so far. */
     private transient long nvisited = 0;
 
-    /**
+    /*
      * One step lookahead for the output iterator containing the next {@link TPS} to be returned.
      */
     private transient TPS current = null;
 
-    /**
+    /*
      * The prefix key for the {@link #current} {@link TPS}. This is identified when we read the
      * first tuple from the logical row. Doing it this way means that we do not need to encode the
      * primary key and avoids a dependency on a correctly configured {@link IKeyBuilder}.
@@ -124,7 +124,7 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
 
     private final Object context;
 
-    /**
+    /*
      * Builds iterator that reads the source tuples and visits the transformed tuples.
      *
      * @param src Visits the source tuples.
@@ -138,7 +138,7 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
       this.context = context;
     }
 
-    /**
+    /*
      * Each visited tuple corresponds to a logical row. The key for the tuple is the
      * {schema,primaryKey} for that logical row. The value is the serialized {@link TPS} object for
      * the corresponding logical row.
@@ -161,8 +161,8 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
       final AbstractTuple<F> tuple =
           new AbstractTuple<F>(IRangeQuery.DEFAULT) {
 
-            /**
-             * @todo This can't be implemented since the tuples may have come from different backing
+          /*
+       * @todo This can't be implemented since the tuples may have come from different backing
              *     AbstractBTree's in the view. If blob references are to be supported they will
              *     have to be transformed during the atomic row read so that the incorporate the
              *     source index from which the block can be read.
@@ -178,8 +178,8 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
              */
             public int getSourceIndex() {
 
-              /*
-               * TODO Returning ZERO (0) fixes the ticket cited above but
+            /*
+       * TODO Returning ZERO (0) fixes the ticket cited above but
                * does not provide support for asynchronous resolution of
                * BLOBS in the sparse row store.
                */
@@ -202,7 +202,7 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
       return tuple;
     }
 
-    /**
+    /*
      * One step lookahead for logical rows. When {@link #current} is <code>null</code> this reads
      * the next tuple and extracts the primary key for the logical row for that tuple. It then reads
      * tuples until it reaches the first tuple that does not belong to the current logical row. The
@@ -247,8 +247,8 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
 
       if (prefix != null) {
 
-        /*
-         * Found at least one tuple belonging to a logical row.
+      /*
+       * Found at least one tuple belonging to a logical row.
          *
          * Note: The logical row MAY be empty depending on the
          * INameFilter and timestamp, but we will visit it anyway.
@@ -256,8 +256,8 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
 
         if (toTime == CURRENT_ROW) {
 
-          /*
-           * Strip out everything except the current row.
+        /*
+       * Strip out everything except the current row.
            */
 
           current = tps.currentRow();
@@ -274,7 +274,7 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
       return false;
     }
 
-    /**
+    /*
      * Extracts a property value from the tuple and adds it to the logical row if the timestamp and
      * optional {@link INameFilter} are satisified for the tuple.
      *
@@ -373,7 +373,7 @@ public class AtomicRowFilter extends TupleTransformer<TPV, TPS> implements IRowS
                 + BytesUtil.toString(key));
     }
 
-    /**
+    /*
      * Not supported.
      *
      * @throws UnsupportedOperationException

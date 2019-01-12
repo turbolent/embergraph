@@ -25,8 +25,8 @@ import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * Output stream which reports the #of bytes read from the underlying stream.
+/*
+* Output stream which reports the #of bytes read from the underlying stream.
  *
  * <p>Note: All <em>write</em> methods MUST be overridden if you subclass this filter as it
  * overrides them all for better performance.
@@ -55,12 +55,12 @@ public class ByteCountOutputStream extends FilterOutputStream {
     nwritten++;
   }
 
-  public void write(final byte b[]) throws IOException {
+  public void write(final byte[] b) throws IOException {
     out.write(b); // efficiency!
     nwritten += b.length;
   }
 
-  public void write(final byte b[], final int off, final int len) throws IOException {
+  public void write(final byte[] b, final int off, final int len) throws IOException {
     out.write(b, off, len); // efficiency!
     nwritten += len;
   }

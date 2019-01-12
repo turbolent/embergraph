@@ -33,8 +33,8 @@ import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 
-/**
- * Test suite for the GroupNodeVarBindingInfo class.
+/*
+* Test suite for the GroupNodeVarBindingInfo class.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -50,7 +50,7 @@ public class TestGroupNodeVarBindingInfo extends AbstractOptimizerTestCaseWithUt
   @Override
   IASTOptimizer newOptimizer() {
 
-    /**
+    /*
      * This test case is not optimizer specific, but we want to reuse the Helper factory methods
      * here and that's the (only) reason why we extend the AbstractOptimizerTestCase class.
      */

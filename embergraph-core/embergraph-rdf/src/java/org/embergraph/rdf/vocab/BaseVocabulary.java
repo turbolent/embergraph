@@ -46,8 +46,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Base class for {@link Vocabulary} implementations.
+/*
+* Base class for {@link Vocabulary} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -65,7 +65,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
   /** An ordered set of the declared vocabulary classes in the order in which they were declared. */
   private transient LinkedHashSet<VocabularyDecl> decls;
 
-  /**
+  /*
    * The {@link Value}s together with their assigned {@link IV}s.
    *
    * <p>Note: The {@link IV} is permanently attached to each {@link EmbergraphValue}.
@@ -88,7 +88,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
 
   }
 
-  /**
+  /*
    * Ctor used by {@link AbstractTripleStore#create()}.
    *
    * @param database The database.
@@ -100,7 +100,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
     this.valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
   }
 
-  /**
+  /*
    * Invoked by {@link AbstractTripleStore#create()} to initialize the {@link Vocabulary}.
    *
    * @throws IllegalStateException if {@link #init()} has already been invoked.
@@ -115,7 +115,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
     init(16 /* ndecls */, 16 /* nvalues */);
   }
 
-  /**
+  /*
    * Invoked by {@link AbstractTripleStore#create()} to initialize the {@link Vocabulary}.
    *
    * @throws IllegalStateException if {@link #init()} has already been invoked.
@@ -147,13 +147,13 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
     generateIVs();
   }
 
-  /**
+  /*
    * Hook for subclasses to provide their {@link VocabularyDecl}s using {@link
    * #addDecl(VocabularyDecl)}.
    */
   protected abstract void addValues();
 
-  /**
+  /*
    * Add a declared vocabulary.
    *
    * @param decl The vocabulary declaration.
@@ -167,8 +167,8 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
     decls.add(decl);
   }
 
-  //    /**
-  //     * Adds a {@link Value} into the internal collection.
+  //    /*
+//     * Adds a {@link Value} into the internal collection.
   //     *
   //     * @param value
   //     *            The value.
@@ -201,8 +201,8 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
         // Add to the collection.
         if (val2iv.put(value, value) != null) {
 
-          /*
-           * This has already been declared by some vocabulary. There
+        /*
+       * This has already been declared by some vocabulary. There
            * is no harm in this, but the vocabularies should be
            * distinct.
            */
@@ -217,7 +217,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
     }
   }
 
-  /**
+  /*
    * Make a stable assignment of {@link IV}s to declared {@link Value}s.
    *
    * <p>Note: The {@link Value}s are converted to {@link EmbergraphValue}s by {@link #add(Value)} so
@@ -327,22 +327,22 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
     return new Constant<IV>(iv);
   }
 
-  //    /**
-  //     * The initial version. This version is no longer supported. The manner in
+  //    /*
+//     * The initial version. This version is no longer supported. The manner in
   //     * which the lexicon is encoded has fundamentally changed with the
   //     * replacement of the TERM2ID and ID2TERM indices with a single TERMS index
   //     * and additional inlining of values into the statement indices.
   //     */
   //    private static final transient short VERSION0 = 0;
   //
-  //    /**
-  //     * This version modified the serialization to include the namespace of the
+  //    /*
+//     * This version modified the serialization to include the namespace of the
   //     * KB instance and to pack the byte length values (this version was never
   //     * deployed).
   //     */
   //    private static final transient short VERSION1 = 1;
 
-  /**
+  /*
    * This version modified the serialization to include the namespace of the KB instance and a list
    * of the {@link VocabularyDecl} classes to be instantiated. The names of those classes are given
    * in the order in which they were declared. When the vocabulary is deserialized, the {@link
@@ -358,7 +358,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
   /** The current version. */
   private static final transient short currentVersion = VERSION2;
 
-  /**
+  /*
    * Note: The de-serialized state contains {@link Value}s but not {@link EmbergraphValue}s since
    * the {@link AbstractTripleStore} reference is not available and we can not obtain the
    * appropriate {@link EmbergraphValueFactory} instance without it. This should not matter since
@@ -387,8 +387,8 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
     }
   }
 
-  //    /**
-  //     * The old code for {@link #VERSION0}. This is here for historical purposes
+  //    /*
+//     * The old code for {@link #VERSION0}. This is here for historical purposes
   //     * only.
   //     *
   //     * @param in
@@ -629,8 +629,8 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
     }
   }
 
-  //    /**
-  //     * The old code for {@link #VERSION0}. This is here for historical purposes
+  //    /*
+//     * The old code for {@link #VERSION0}. This is here for historical purposes
   //     * only.
   //     *
   //     * @param out
@@ -785,7 +785,7 @@ public abstract class BaseVocabulary implements Vocabulary, Externalizable {
 
   }
 
-  /**
+  /*
    * An instance of this class indicates a versioning problem with the {@link VocabularyDecl
    * declaration classes}. If a vocabulary declaration class is modified after it has been used to
    * instantiate a triple store then the mapping of URIs onto IVs might not be stable with the

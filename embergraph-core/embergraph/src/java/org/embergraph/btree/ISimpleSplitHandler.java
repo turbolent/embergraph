@@ -2,8 +2,8 @@ package org.embergraph.btree;
 
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * Interface allows an application to constrain the choice of the separator key when an index
+/*
+* Interface allows an application to constrain the choice of the separator key when an index
  * partition is split.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -11,7 +11,7 @@ import org.embergraph.sparse.SparseRowStore;
  */
 public interface ISimpleSplitHandler {
 
-  /**
+  /*
    * Return a separator key <em>close</em> to the recommended separator key (<i>splitAt</i>) which
    * is acceptable to the constraints imposed by the application on the index. This method is
    * invoked iteratively starting with the index of first addressable tuple in the index segment as

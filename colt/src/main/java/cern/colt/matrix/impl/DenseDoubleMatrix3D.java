@@ -10,8 +10,8 @@ package cern.colt.matrix.impl;
 
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
-/**
- * Dense 3-d matrix holding <tt>double</tt> elements. First see the <a
+/*
+* Dense 3-d matrix holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -60,14 +60,14 @@ import cern.colt.matrix.DoubleMatrix3D;
  * @version 1.0, 09/24/99
  */
 public class DenseDoubleMatrix3D extends DoubleMatrix3D {
-  /**
+  /*
    * The elements of this matrix. elements are stored in slice major, then row major, then column
    * major, in order of significance, i.e. index==slice*sliceStride+ row*rowStride +
    * column*columnStride i.e. {slice0 row0..m}, {slice1 row0..m}, ..., {sliceN row0..m} with each
    * row storead as {row0 column0..m}, {row1 column0..m}, ..., {rown column0..m}
    */
   protected double[] elements;
-  /**
+  /*
    * Constructs a matrix with a copy of the given values. <tt>values</tt> is required to have the
    * form <tt>values[slice][row][column]</tt> and have exactly the same number of rows in in every
    * slice and exactly the same number of columns in in every row.
@@ -88,7 +88,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
         (values.length == 0 ? 0 : values[0].length == 0 ? 0 : values[0][0].length));
     assign(values);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of slices, rows and columns. All entries are initially
    * <tt>0</tt>.
    *
@@ -102,7 +102,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
     setUp(slices, rows, columns);
     this.elements = new double[slices * rows * columns];
   }
-  /**
+  /*
    * Constructs a view with the given parameters.
    *
    * @param slices the number of slices the matrix shall have.
@@ -145,7 +145,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
     this.elements = elements;
     this.isNoView = false;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>values</tt>. <tt>values</tt> is required to have
    * the form <tt>values[slice][row][column]</tt> and have exactly the same number of slices, rows
    * and columns as the receiver.
@@ -191,7 +191,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
     }
     return this;
   }
-  /**
+  /*
    * Replaces all cell values of the receiver with the values of another matrix. Both matrices must
    * have the same number of slices, rows and columns. If both matrices share the same cells (as is
    * the case if they are views derived from the same matrix) and intersect in an ambiguous way,
@@ -224,7 +224,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
     }
     return super.assign(other);
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[slice,row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -250,7 +250,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
             + columnZero
             + column * columnStride];
   }
-  /**
+  /*
    * Returns <tt>true</tt> if both matrices share common cells. More formally, returns <tt>true</tt>
    * if <tt>other != null</tt> and at least one of the following conditions is met
    *
@@ -270,7 +270,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
     }
     return false;
   }
-  /**
+  /*
    * Returns the position of the given coordinate within the (virtual or non-virtual) internal
    * 1-dimensional array.
    *
@@ -289,7 +289,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
         + columnZero
         + column * columnStride;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of slices, rows and columns. For example, if the receiver is an
    * instance of type <tt>DenseDoubleMatrix3D</tt> the new matrix must also be of type
@@ -306,7 +306,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
   public DoubleMatrix3D like(int slices, int rows, int columns) {
     return new DenseDoubleMatrix3D(slices, rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, sharing the
    * same cells. For example, if the receiver is an instance of type <tt>DenseDoubleMatrix3D</tt>
    * the new matrix must also be of type <tt>DenseDoubleMatrix2D</tt>, if the receiver is an
@@ -328,7 +328,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
     return new DenseDoubleMatrix2D(
         rows, columns, this.elements, rowZero, columnZero, rowStride, columnStride);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[slice,row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -355,7 +355,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
                 + column * columnStride] =
         value;
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param sliceOffsets the offsets of the visible elements.
@@ -368,7 +368,7 @@ public class DenseDoubleMatrix3D extends DoubleMatrix3D {
     return new SelectedDenseDoubleMatrix3D(
         this.elements, sliceOffsets, rowOffsets, columnOffsets, 0);
   }
-  /**
+  /*
    * 27 neighbor stencil transformation. For efficient finite difference operations. Applies a
    * function to a moving <tt>3 x 3 x 3</tt> window. Does nothing if <tt>rows() < 3 || columns() < 3
    * || slices() < 3</tt>.

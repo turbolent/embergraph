@@ -41,8 +41,8 @@ import org.embergraph.relation.rule.eval.IStepTask;
 import org.embergraph.relation.rule.eval.RuleStats;
 import org.embergraph.striterator.IChunkedIterator;
 
-/**
- * Base class for rules having a single predicate that is none bound in the tail and a single
+/*
+* Base class for rules having a single predicate that is none bound in the tail and a single
  * variable in the head. These rules can be evaluated using a distinctTermScan rather than a full
  * index scan. For example:
  *
@@ -60,7 +60,7 @@ public abstract class AbstractRuleDistinctTermScan extends Rule {
   /** The sole unbound variable in the head of the rule. */
   private final IVariable<IV> h;
 
-  /**
+  /*
    * The access path that corresponds to the position of the unbound variable reference from the
    * head.
    */
@@ -125,7 +125,7 @@ public abstract class AbstractRuleDistinctTermScan extends Rule {
     taskFactory = new DistinctTermScanRuleTaskFactory(h, keyOrder);
   }
 
-  /**
+  /*
    * Factory for custom evaluation of the distinct term scan rule.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -139,7 +139,7 @@ public abstract class AbstractRuleDistinctTermScan extends Rule {
     /** The sole unbound variable in the head of the rule. */
     private final IVariable<IV> h;
 
-    /**
+    /*
      * The access path that corresponds to the position of the unbound variable reference from the
      * head.
      */
@@ -163,7 +163,7 @@ public abstract class AbstractRuleDistinctTermScan extends Rule {
     return taskFactory;
   }
 
-  /**
+  /*
    * Selects the distinct term identifiers, substituting their binding in the sole unbound variable
    * in the head of the rule.
    */
@@ -180,13 +180,13 @@ public abstract class AbstractRuleDistinctTermScan extends Rule {
     /** The sole unbound variable in the head of the rule. */
     private final IVariable<IV> h;
 
-    /**
+    /*
      * The access path that corresponds to the position of the unbound variable reference from the
      * head.
      */
     private final SPOKeyOrder keyOrder;
 
-    /**
+    /*
      * @param rule The rule (may have been specialized).
      * @param joinNexus
      * @param buffer The buffer on which the {@link ISolution}s will be written.
@@ -278,8 +278,8 @@ public abstract class AbstractRuleDistinctTermScan extends Rule {
             // [id] is a distinct term identifier for the selected
             // access path.
 
-            /*
-             * bind the unbound variable in the head of the rule.
+          /*
+       * bind the unbound variable in the head of the rule.
              *
              * Note: This explicitly leaves the other variables in
              * the head unbound so that the justifications will be

@@ -34,8 +34,8 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.openrdf.query.Dataset;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Base class provides support for triples, sids, and quads mode joins which was refactored from the
+/*
+* Base class provides support for triples, sids, and quads mode joins which was refactored from the
  * old Rule2BOpUtility class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -47,7 +47,7 @@ public class AST2BOpBase {
 
   protected AST2BOpBase() {}
 
-  /**
+  /*
    * Annotations used to mark named and default graph patterns on the {@link IPredicate}s. Rather
    * than attaching a named or default graph expander, we annotate the predicate with the metadata
    * for the access path and then convert that annotation to the appropriate pipeline operators.
@@ -59,7 +59,7 @@ public class AST2BOpBase {
 
     boolean DEFAULT_QUADS = false;
 
-    /**
+    /*
      * The {@link Dataset} associated with the access path (quads mode only). The {@link Dataset} is
      * only provided by openrdf when FROM or FROM NAMED was used in the query. Otherwise the {@link
      * Dataset} will be <code>null</code> and is not attached as an annotation.
@@ -70,7 +70,7 @@ public class AST2BOpBase {
      */
     String DATASET = AST2BOpBase.class.getName() + ".dataset";
 
-    /**
+    /*
      * The {@link Scope} of the access path (quads mode only). In quads mode the {@link Scope} is
      * always provided by openrdf.
      *
@@ -79,7 +79,7 @@ public class AST2BOpBase {
      */
     String SCOPE = AST2BOpBase.class.getName() + ".scope";
 
-    /**
+    /*
      * Boolean annotation indicates whether the generated JOIN is simple (a single JOIN operator
      * with optional constraints but without any variable materialization requirements) or complex
      * (a JOIN operator associated with at least one constraint which requires the materialization
@@ -91,7 +91,7 @@ public class AST2BOpBase {
      * Query planner and cost estimates.
      */
 
-    /**
+    /*
      * The original index assigned to the access path by the static query optimizer.
      *
      * <p>Note: The actual index will be chosen at runtime based on the asBound predicate. In
@@ -107,7 +107,7 @@ public class AST2BOpBase {
      */
     String ORIGINAL_INDEX = AST2BOpBase.class.getName() + ".originalIndex";
 
-    /**
+    /*
      * The estimated cardinality of an access path as determined during static query optimization.
      * This is the fast range count if the predicate and {@link Long#MAX_VALUE} if the predicate is
      * part of an optional join (this is used by the query optimized to order the optional joins to
@@ -118,7 +118,7 @@ public class AST2BOpBase {
     /** The estimated cost of a SCAN + FILTER approach to a default graph or named graph query. */
     String COST_SCAN = AST2BOpBase.class.getName() + ".cost.scan";
 
-    /**
+    /*
      * A {@link SubqueryCostReport} on the estimated cost of a SUBQUERY approach to a default graph
      * or named graph query.
      */
@@ -131,7 +131,7 @@ public class AST2BOpBase {
     String AUTO_COMMIT = AST2BOpBase.class.getName() + "AUTO_COMMIT";
   }
 
-  /**
+  /*
    * Return either <i>left</i> wrapped as the sole member of an array or {@link BOp#NOARGS} iff
    * <i>left</i> is <code>null</code>.
    *
@@ -143,8 +143,8 @@ public class AST2BOpBase {
     return left == null ? BOp.NOARGS : new BOp[] {left};
   }
 
-  //    /**
-  //     * Apply any query hints to the operator as annotations of that operator.
+  //    /*
+//     * Apply any query hints to the operator as annotations of that operator.
   //     * <p>
   //     * Note: This method is responsible for transferring query hints from
   //     * {@link ASTBase#getQueryHints()} onto a generated {@link PipelineOp}.
@@ -174,7 +174,7 @@ public class AST2BOpBase {
   //
   //    }
 
-  /**
+  /*
    * Apply any query hints to the operator as annotations of that operator.
    *
    * <p>Note: This method is responsible for transferring query hints from {@link
@@ -209,7 +209,7 @@ public class AST2BOpBase {
     return op;
   }
 
-  /**
+  /*
    * Apply any query hints to the operator as annotations of that operator.
    *
    * <p>Note: This method is responsible for transferring query hints from {@link
@@ -250,7 +250,7 @@ public class AST2BOpBase {
     return op;
   }
 
-  /**
+  /*
    * Apply any query hints to the operator as annotations of that operator.
    *
    * <p>Note: This method is responsible for transferring query hints from {@link

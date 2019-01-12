@@ -31,8 +31,8 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 
-/**
- * Exhibits a single {@link InputStream} as a number of streams divided into {@link
+/*
+* Exhibits a single {@link InputStream} as a number of streams divided into {@link
  * java.io.InputStream#reset() reset()}-separated segments.
  *
  * <p>An instance of this class wraps a given input stream (usually a replicable one, such as a
@@ -78,7 +78,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
     /** The segment we're currently reading. */
     int currSegment;
 
-    /**
+    /*
      * Creates a new block with given delimiters.
      *
      * @param delimiter a list of segment delimiters.
@@ -104,7 +104,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
       return "[segments=" + Arrays.toString(delimiter) + ", curr= " + currSegment + "]";
     }
 
-    /**
+    /*
      * Skips to the next segment. Now {@link #currentStartMarker()} and {@link #currentStopMarker()}
      * can be used.
      */
@@ -138,7 +138,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
     if (closed) throw new IllegalStateException("This segmented input stream has been closed");
   }
 
-  /**
+  /*
    * Creates a segmented input stream with no markers.
    *
    * @param in the underlying input stream.
@@ -150,7 +150,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
     this.currentBlock = -1;
   }
 
-  /**
+  /*
    * Creats a stream with one marker in.
    *
    * @param in the underlying input stream.
@@ -162,7 +162,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
     addBlock(delimiter);
   }
 
-  /**
+  /*
    * Checks if the current position is a stop marker.
    *
    * @return false if a skip has to be done or eof has been reached, true otherwise.
@@ -198,7 +198,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
     if (DEBUG) LOGGER.debug("New segment for block # " + currentBlock);
   }
 
-  /**
+  /*
    * Skips to the first segment of the next block, if any. In such case, it returns true, or false
    * otherwise.
    */
@@ -209,7 +209,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
     nextSegment();
   }
 
-  /**
+  /*
    * Checks whether there are more blocks.
    *
    * @return true if we there are more blocks.
@@ -218,7 +218,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
     return currentBlock < blocks.size() - 1;
   }
 
-  /**
+  /*
    * Adds a new block defined by its array of segment delimiters.
    *
    * <p>The block has length defined by the difference between the last and first delimiter.
@@ -245,7 +245,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
     return r;
   }
 
-  public int read(final byte b[], final int off, final int len) throws IOException {
+  public int read(final byte[] b, final int off, final int len) throws IOException {
     ensureNotClosed();
     ByteArrays.ensureOffsetLength(b, off, len);
     if (len == 0) return 0; // Requested by InputStream.

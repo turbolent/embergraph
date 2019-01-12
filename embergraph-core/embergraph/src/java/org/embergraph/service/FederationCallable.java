@@ -25,8 +25,8 @@ package org.embergraph.service;
 
 import java.util.concurrent.Callable;
 
-/**
- * Base class for {@link IFederationCallable}.
+/*
+* Base class for {@link IFederationCallable}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

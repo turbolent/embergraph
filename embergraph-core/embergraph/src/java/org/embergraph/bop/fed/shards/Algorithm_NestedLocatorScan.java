@@ -10,8 +10,8 @@ import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.BytesUtil;
 
-/**
- * This does a locatorScan for each binding set. This is a general purpose technique, but it will
+/*
+* This does a locatorScan for each binding set. This is a general purpose technique, but it will
  * issue one query to the {@link IMetadataIndex} per source {@link IBindingSet}.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/457">"No such index" on cluster
@@ -57,8 +57,8 @@ class Algorithm_NestedLocatorScan<E extends IBindingSet, F> implements IShardMap
           && BytesUtil.rangeCheck(
               bundle.toKey, current.getLeftSeparatorKey(), current.getRightSeparatorKey())) {
 
-        /*
-         * Optimization when the bundle fits inside of the last index
+      /*
+       * Optimization when the bundle fits inside of the last index
          * partition scanned (this optimization is only possible when
          * the asBound predicate will be mapped onto a single index
          * partition, but this is a very common case since we try to

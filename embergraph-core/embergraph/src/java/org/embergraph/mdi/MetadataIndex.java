@@ -34,8 +34,8 @@ import org.embergraph.journal.IResourceManager;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.MetadataService;
 
-/**
- * A metadata index for the partitions of a distributed index. There is one metadata index for each
+/*
+* A metadata index for the partitions of a distributed index. There is one metadata index for each
  * distributed index. The keys of the metadata index are the first key that would be directed into
  * the corresponding index segment, e.g., a <em>separator key</em> (this is just the standard btree
  * semantics). The values are serialized {@link PartitionLocator} objects.
@@ -88,7 +88,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
     return getIndexMetadata().getManagedIndexMetadata();
   }
 
-  /**
+  /*
    * Returns the value to be assigned to the next partition created on this {@link MetadataIndex}
    * and then increments the counter. The counter will be made restart-safe iff the index is dirty,
    * the index is registered as an {@link ICommitter}, and the store on which the index is stored is
@@ -116,7 +116,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
 
   private int nextPartitionId;
 
-  /**
+  /*
    * Create a new {@link MetadataIndex}.
    *
    * @param store The backing store.
@@ -157,7 +157,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
     return (MetadataIndex) BTree.create(store, metadata);
   }
 
-  /**
+  /*
    * Required ctor.
    *
    * @param store
@@ -178,7 +178,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
     view = new MetadataIndexView(this);
   }
 
-  /**
+  /*
    * Extended to require a checkpoint if {@link #incrementAndGetNextPartitionId()} has been invoked.
    */
   public boolean needsCheckpoint() {
@@ -191,7 +191,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
     return super.needsCheckpoint();
   }
 
-  /**
+  /*
    * Extends the {@link Checkpoint} record to store the next partition identifier to be assigned by
    * the metadata index.
    *
@@ -205,7 +205,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
 
     private int nextPartitionId;
 
-    /**
+    /*
      * The immutable value of the <code>nextPartitionId</code> counter stored in the metadata
      * record.
      */
@@ -225,7 +225,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
       nextPartitionId = ((MetadataIndex) btree).nextPartitionId;
     }
 
-    /**
+    /*
      * Create the initial checkpoint record for the initial metadata index.
      *
      * @param metadata
@@ -238,7 +238,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
       nextPartitionId = 0;
     }
 
-    /**
+    /*
      * Create the initial checkpoint record when the metadata index overflows onto a new backing
      * store.
      *
@@ -277,7 +277,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
     }
   }
 
-  /**
+  /*
    * Extends the {@link IndexMetadata} record to hold the metadata template for the managed
    * scale-out index.
    *
@@ -299,7 +299,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
     /** De-serialization constructor. */
     public MetadataIndexMetadata() {}
 
-    /**
+    /*
      * First time constructor.
      *
      * @param name The name of the managed index. The name of the metadata index is given by {@link
@@ -359,7 +359,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
     return view.find(key);
   }
 
-  /**
+  /*
    * Used to (de-)serialize {@link PartitionLocator}s in the {@link MetadataIndex}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -413,7 +413,7 @@ public class MetadataIndex extends BTree implements IMetadataIndex {
     }
   } // PartitionLocatorTupleSerializer
 
-  /**
+  /*
    * Passes the notice along to the {@link #view}. It caches de-serialized locators and needs to
    * drop them from its cache if they become stale.
    */

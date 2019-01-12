@@ -28,14 +28,14 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.UUID;
 
-/**
- * Common service interface.
+/*
+* Common service interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IService extends Remote {
 
-  /**
+  /*
    * The unique identifier for this service.
    *
    * <p>Note: Some service discovery frameworks (Jini) will assign the service a {@link UUID}
@@ -47,36 +47,36 @@ public interface IService extends Remote {
    */
   UUID getServiceUUID() throws IOException;
 
-  /**
+  /*
    * Return the most interesting interface for the service.
    *
    * @throws IOException since you can use this method with RMI.
    */
   Class getServiceIface() throws IOException;
 
-  /**
+  /*
    * The host on which this service is running.
    *
    * @throws IOException since you can use this method with RMI.
    */
   String getHostname() throws IOException;
 
-  /**
+  /*
    * Return name by which a user might recognize this service.
    *
    * @throws IOException since you can use this method with RMI.
    */
   String getServiceName() throws IOException;
 
-  //    /**
-  //     * Return the service directory.
+  //    /*
+//     * Return the service directory.
   //     *
   //     * @throws IOException
   //     *             since you can use this method with RMI.
   //     */
   //    File getServiceDirectory() throws IOException;
 
-  /**
+  /*
    * Destroy the service. If the service is running, it is shutdown immediately and then destroyed.
    * This method has the same signature as {@link DestroyAdmin#destroy()}.
    *

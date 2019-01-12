@@ -37,8 +37,8 @@ import org.embergraph.service.Event;
 import org.embergraph.service.IEventReportingService;
 import org.embergraph.util.HTMLUtility;
 
-/**
- * (X)HTML rendering of a {@link CounterSet}.
+/*
+* (X)HTML rendering of a {@link CounterSet}.
  *
  * @todo UI widgets for regex filters, depth, correlated.
  * @todo make documentation available on the counters via click through on their name.
@@ -65,7 +65,7 @@ public class XHTMLRenderer implements IRenderer {
   /** Selects the counters to be rendered. */
   private final ICounterSelector counterSelector;
 
-  /**
+  /*
    * @param model Describes the state of the controller (e.g., as parsed from the URL query
    *     parameters).
    * @param counterSelector Selects the counters to be rendered.
@@ -81,7 +81,7 @@ public class XHTMLRenderer implements IRenderer {
     this.counterSelector = counterSelector;
   }
 
-  /**
+  /*
    * @param w
    * @throws IOException
    */
@@ -106,7 +106,7 @@ public class XHTMLRenderer implements IRenderer {
     w.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
   }
 
-  /**
+  /*
    * @param w
    * @throws IOException
    */
@@ -206,8 +206,8 @@ public class XHTMLRenderer implements IRenderer {
       switch (model.reportType) {
         case hierarchy:
 
-          /*
-           * @todo rewrite to use node.getDepth() + model.depth so that
+        /*
+       * @todo rewrite to use node.getDepth() + model.depth so that
            * the relative depth is maintained during navigation.
            */
           writeCounterSet(w, (CounterSet) node, model.depth);
@@ -260,7 +260,7 @@ public class XHTMLRenderer implements IRenderer {
     w.write("</body\n>");
   }
 
-  /**
+  /*
    * A clickable trail of the path from the root.
    *
    * @deprecated by refactor inside of a rendering object.
@@ -270,7 +270,7 @@ public class XHTMLRenderer implements IRenderer {
     writePath(w, path, 0 /* root */);
   }
 
-  /**
+  /*
    * A clickable trail of the path.
    *
    * @param rootDepth The path components will be shown beginning at this depth - ZERO (0) is the
@@ -368,7 +368,7 @@ public class XHTMLRenderer implements IRenderer {
   //
   //    }
 
-  /**
+  /*
    * Writes all counters in the hierarchy starting with the specified {@link CounterSet} in a single
    * table (this is the navigational view of the counter set hierarchy).
    */
@@ -456,8 +456,8 @@ public class XHTMLRenderer implements IRenderer {
 
         final ICounter<?> counter = (ICounter<?>) node;
 
-        /*
-         * write out values for the counter.
+      /*
+       * write out values for the counter.
          */
 
         w.write("  <th align=\"left\">");
@@ -466,8 +466,8 @@ public class XHTMLRenderer implements IRenderer {
 
         if (counter.getInstrument() instanceof HistoryInstrument) {
 
-          /*
-           * Report the average over the last hour, day, and month.
+        /*
+       * Report the average over the last hour, day, and month.
            *
            * @todo could report the current value, the weighted
            * average for the last 5 units, and the weighted average
@@ -511,8 +511,8 @@ public class XHTMLRenderer implements IRenderer {
 
         } else {
 
-          /*
-           * Report only the most recent value.
+        /*
+       * Report only the most recent value.
            */
 
           // w.write(" <th>N/A</th\n>");
@@ -528,7 +528,7 @@ public class XHTMLRenderer implements IRenderer {
     w.write("</table\n>");
   }
 
-  /**
+  /*
    * Writes details on a single counter using a {@link HistoryTable} view.
    *
    * @param counter The counter.
@@ -543,8 +543,8 @@ public class XHTMLRenderer implements IRenderer {
     }
   }
 
-  //    /**
-  //     * Writes details on a single counter whose {@link IInstrument} provides a
+  //    /*
+//     * Writes details on a single counter whose {@link IInstrument} provides a
   //     * history. The goal is to be able to easily copy and paste the data into a
   //     * program for plotting, e.g., as an X-Y graph (values against time).
   //     *
@@ -578,8 +578,8 @@ public class XHTMLRenderer implements IRenderer {
   //
   //    }
 
-  //    /**
-  //     * Writes a table containing the samples for a {@link History} for some
+  //    /*
+//     * Writes a table containing the samples for a {@link History} for some
   //     * {@link ICounter}.
   //     *
   //     * @param w
@@ -735,7 +735,7 @@ public class XHTMLRenderer implements IRenderer {
       this.model = model;
     }
 
-    /**
+    /*
      * Formats a counter value as a String AND performs any escaping necessary for inclusion in a
      * CDATA section (we do both operations together so that we can format {@link
      * IServiceCounters#LOCAL_HTTPD} as a link anchor.
@@ -752,7 +752,7 @@ public class XHTMLRenderer implements IRenderer {
       writePath(w, path, 0 /* root */);
     }
 
-    /**
+    /*
      * A clickable trail of the path.
      *
      * @param rootDepth The path components will be shown beginning at this depth - ZERO (0) is the
@@ -833,7 +833,7 @@ public class XHTMLRenderer implements IRenderer {
     }
   }
 
-  /**
+  /*
    * Writes out a table containing the histories for the selected counters.
    *
    * @param a The selected counters.
@@ -952,8 +952,8 @@ public class XHTMLRenderer implements IRenderer {
       // for each row in the HistoryTable.
       for (int row = 0; row < t.nrows; row++) {
 
-        /*
-         * The time will be zero for the first row and a delta (expressed in
+      /*
+       * The time will be zero for the first row and a delta (expressed in
          * the units of the history) for the remaining rows.
          *
          * Note: The time units are computed using floating point math and
@@ -970,8 +970,8 @@ public class XHTMLRenderer implements IRenderer {
 
         final String timeStr = cdata(formatter.date(timestamp));
 
-        /*
-         * The set of distinct ordered matched category values in the
+      /*
+       * The set of distinct ordered matched category values in the
          * current row of the history table.
          */
         for (CSet cset : pt.csets) {
@@ -983,8 +983,8 @@ public class XHTMLRenderer implements IRenderer {
                   + "category names: "
                   + Arrays.toString(pt.cnames);
 
-          /*
-           * Aggregate values for counters in this cset having a value for
+        /*
+       * Aggregate values for counters in this cset having a value for
            * each value column in turn.
            *
            * If none of the counters in the cset have a value for the row
@@ -1042,8 +1042,8 @@ public class XHTMLRenderer implements IRenderer {
 
                 valueCountForColumn++;
 
-                /*
-                 * The counter appears just once in the data table
+              /*
+       * The counter appears just once in the data table
                  * so we can stop once we find its index.
                  */
                 break;
@@ -1052,8 +1052,8 @@ public class XHTMLRenderer implements IRenderer {
 
             if (valueCountForColumn > 0) {
 
-              /*
-               * There was at least one sample for the current value
+            /*
+       * There was at least one sample for the current value
                * column.
                */
 
@@ -1111,7 +1111,7 @@ public class XHTMLRenderer implements IRenderer {
     }
   }
 
-  /**
+  /*
    * Writes out a pivot table view.
    *
    * @param w Where to write the data.
@@ -1178,7 +1178,7 @@ public class XHTMLRenderer implements IRenderer {
     new HTMLPivotTableRenderer(pt, new HTMLValueFormatter(model)).render(w);
   }
 
-  /**
+  /*
    * Writes data in a format suitable for use in a pivot table.
    *
    * <p>The pivot table data are selected in the same manner as the correlated view and are used to
@@ -1241,7 +1241,7 @@ public class XHTMLRenderer implements IRenderer {
     writeResource(w, "flot-end.txt");
   }
 
-  /**
+  /*
    * Applies the {@link URLQueryModel#eventFilters} to the event.
    *
    * @param e The event.
@@ -1281,7 +1281,7 @@ public class XHTMLRenderer implements IRenderer {
     return true;
   }
 
-  /**
+  /*
    * The key for an event group is formed by combining the String value of the fields of the event
    * identified by the orderEventBy[] in order and using a ":" when combining two or more event
    * fields together.
@@ -1321,7 +1321,7 @@ public class XHTMLRenderer implements IRenderer {
     return sb.toString();
   }
 
-  /**
+  /*
    * Plots events using <code>flot</code>.
    *
    * @see ReportEnum#events
@@ -1454,8 +1454,8 @@ public class XHTMLRenderer implements IRenderer {
 
       final String tooltip;
       if (false) {
-        /*
-         * FIXME Finish the event flyover formatting support. I need to
+      /*
+       * FIXME Finish the event flyover formatting support. I need to
          * validate the HTML table and then validate how it is embedded
          * inside of the flot data. Since it occurs inline, it probably
          * needs to be escaped. It may also be impossible to do this in
@@ -1466,8 +1466,8 @@ public class XHTMLRenderer implements IRenderer {
         writeEventFlyover(sw, e);
         tooltip = sw.toString();
       } else {
-        /*
-         * use the tab-delimited format, but remove the trailing
+      /*
+       * use the tab-delimited format, but remove the trailing
          * newline.
          */
         tooltip = e.toString().replace("\n", "");
@@ -1615,7 +1615,7 @@ public class XHTMLRenderer implements IRenderer {
     w.write(tooltips.toString());
   }
 
-  /**
+  /*
    * Pretty up an event by rendering onto the {@link Writer} as an (X)HTML table.
    *
    * @param w The writer.
@@ -1657,7 +1657,7 @@ public class XHTMLRenderer implements IRenderer {
     // attributes.
     w.write(" <tr\n>");
     w.write("  <th align=\"left\">hostname</th>");
-    w.write("  <td colspan=\"2\">" + cdata(e.hostname.toString()) + "</td>");
+    w.write("  <td colspan=\"2\">" + cdata(e.hostname) + "</td>");
     w.write(" </tr\n>");
 
     w.write(" <tr\n>");
@@ -1667,7 +1667,7 @@ public class XHTMLRenderer implements IRenderer {
 
     w.write(" <tr\n>");
     w.write("  <th align=\"left\">serviceName</th>");
-    w.write("  <td colspan=\"2\">" + cdata(e.serviceName.toString()) + "</td>");
+    w.write("  <td colspan=\"2\">" + cdata(e.serviceName) + "</td>");
     w.write(" </tr\n>");
 
     w.write(" <tr\n>");
@@ -1744,7 +1744,7 @@ public class XHTMLRenderer implements IRenderer {
     }
   }
 
-  /**
+  /*
    * Encode a string for including in a CDATA section.
    *
    * @param s The string.
@@ -1757,7 +1757,7 @@ public class XHTMLRenderer implements IRenderer {
     return HTMLUtility.escapeForXHTML(s);
   }
 
-  /**
+  /*
    * Encoding a string for including in an (X)HTML attribute value.
    *
    * @param s The string.
@@ -1768,7 +1768,7 @@ public class XHTMLRenderer implements IRenderer {
     return HTMLUtility.escapeForXHTML(s);
   }
 
-  /**
+  /*
    * Formats a counter value as a String AND performs any escaping necessary for inclusion in a
    * CDATA section (we do both operations together so that we can format {@link
    * IServiceCounters#LOCAL_HTTPD} as a link anchor.
@@ -1810,7 +1810,7 @@ public class XHTMLRenderer implements IRenderer {
     return cdata(val.toString());
   }
 
-  /**
+  /*
    * A pattern matching the occurrence of the word "percent" in a counter name. Leading and trailing
    * wildcards are used and the match is case-insensitive.
    */

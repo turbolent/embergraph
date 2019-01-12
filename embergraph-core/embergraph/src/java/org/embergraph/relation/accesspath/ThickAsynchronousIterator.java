@@ -29,8 +29,8 @@ import java.io.Serializable;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-/**
- * An {@link IAsynchronousIterator} that may be serialized and sent to a remote JVM for consumption.
+/*
+* An {@link IAsynchronousIterator} that may be serialized and sent to a remote JVM for consumption.
  * Since all data to be visited is supplied to the ctor, the client will be able consume the data
  * without waiting.
  *
@@ -44,7 +44,7 @@ public class ThickAsynchronousIterator<E> implements IAsynchronousIterator<E>, S
 
   private transient boolean open = true;
 
-  /**
+  /*
    * Index of the last element visited by {@link #next()} and <code>-1</code> if NO elements have
    * been visited.
    */
@@ -53,7 +53,7 @@ public class ThickAsynchronousIterator<E> implements IAsynchronousIterator<E>, S
   /** The array of elements to be visited by the iterator. */
   private final E[] a;
 
-  /**
+  /*
    * Create a thick iterator.
    *
    * @param a The array of elements to be visited by the iterator (may be empty, but may not be

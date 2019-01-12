@@ -29,8 +29,8 @@ import java.io.ObjectOutput;
 import java.util.Arrays;
 import java.util.Random;
 
-/**
- * A Bloom filter derived directly from <code>it.unimi.dsi.mg4j.util.BloomFilter</code> in the mg4j
+/*
+* A Bloom filter derived directly from <code>it.unimi.dsi.mg4j.util.BloomFilter</code> in the mg4j
  * project. The primary changes are:
  *
  * <ul>
@@ -135,7 +135,7 @@ public class BloomFilter2 implements Externalizable {
   /** Initial {@link Externalizable} serialization format. */
   private static final transient int VERSION0 = 0x0;
 
-  /**
+  /*
    * The number of elements currently in the filter. It may be smaller than the actual number of
    * additions because of false positives.
    */
@@ -174,7 +174,7 @@ public class BloomFilter2 implements Externalizable {
   /** De-serialization ctor. */
   public BloomFilter2() {}
 
-  /**
+  /*
    * Creates a new high-precision Bloom filter a given expected number of elements.
    *
    * <p>This constructor uses a number of hash functions that is logarithmic in the number of
@@ -186,7 +186,7 @@ public class BloomFilter2 implements Externalizable {
     this(n, Fast.mostSignificantBit(n) + 1);
   }
 
-  /**
+  /*
    * Creates a new Bloom filter with given number of hash functions and expected number of elements.
    *
    * @param n the expected number of elements.
@@ -217,7 +217,7 @@ public class BloomFilter2 implements Externalizable {
     }
   }
 
-  /**
+  /*
    * Returns the value of the bit with the specified index in the specified array.
    *
    * <p>This method (and its companion {@link #set(long[], long)}) are static so that the bit array
@@ -230,7 +230,7 @@ public class BloomFilter2 implements Externalizable {
     return (bits[(int) (index >> LOG2_LONG_SIZE)] & (1L << (index & BIT_INDEX_MASK))) != 0;
   }
 
-  /**
+  /*
    * Sets the bit with specified index in the specified array.
    *
    * @param index the bit index.
@@ -244,7 +244,7 @@ public class BloomFilter2 implements Externalizable {
     return result;
   }
 
-  /**
+  /*
    * Hashes the given sequence with the given hash function.
    *
    * @param s a character sequence.
@@ -261,7 +261,7 @@ public class BloomFilter2 implements Externalizable {
     return (h & 0x7FFFFFFFFFFFFFFFL) % m;
   }
 
-  /**
+  /*
    * Hashes the given byte array with the given hash function.
    *
    * @param a a byte array.
@@ -278,7 +278,7 @@ public class BloomFilter2 implements Externalizable {
     return (h & 0x7FFFFFFFFFFFFFFFL) % m;
   }
 
-  /**
+  /*
    * Hashes the given short array with the given hash function.
    *
    * @param a a short array.
@@ -295,7 +295,7 @@ public class BloomFilter2 implements Externalizable {
     return (h & 0x7FFFFFFFFFFFFFFFL) % m;
   }
 
-  /**
+  /*
    * Hashes the given character array with the given hash function.
    *
    * @param a a character array.
@@ -312,7 +312,7 @@ public class BloomFilter2 implements Externalizable {
     return (h & 0x7FFFFFFFFFFFFFFFL) % m;
   }
 
-  /**
+  /*
    * Hashes the given int array with the given hash function.
    *
    * @param a an int array.
@@ -329,7 +329,7 @@ public class BloomFilter2 implements Externalizable {
     return (h & 0x7FFFFFFFFFFFFFFFL) % m;
   }
 
-  /**
+  /*
    * Hashes the given long array with the given hash function.
    *
    * @param a a long array.
@@ -346,7 +346,7 @@ public class BloomFilter2 implements Externalizable {
     return (h & 0x7FFFFFFFFFFFFFFFL) % m;
   }
 
-  /**
+  /*
    * Hashes the given float array with the given hash function.
    *
    * @param a a float array.
@@ -364,7 +364,7 @@ public class BloomFilter2 implements Externalizable {
     return (h & 0x7FFFFFFFFFFFFFFFL) % m;
   }
 
-  /**
+  /*
    * Hashes the given double array with the given hash function.
    *
    * @param a a double array.
@@ -382,7 +382,7 @@ public class BloomFilter2 implements Externalizable {
     return (h & 0x7FFFFFFFFFFFFFFFL) % m;
   }
 
-  /**
+  /*
    * Checks whether the given character sequence is in this filter.
    *
    * <p>Note that this method may return true on a character sequence that has not been added to the
@@ -396,12 +396,12 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean contains(final CharSequence s) {
     int i = d, l = s.length();
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     while (i-- != 0) if (!get(bits, hash(s, l, i))) return false;
     return true;
   }
 
-  /**
+  /*
    * Checks whether the given byte array is in this filter.
    *
    * @param a a byte array.
@@ -411,12 +411,12 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean contains(final byte[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
 
-  /**
+  /*
    * Checks whether the given short array is in this filter.
    *
    * @param a a short array.
@@ -426,12 +426,12 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean contains(final short[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
 
-  /**
+  /*
    * Checks whether the given character array is in this filter.
    *
    * @param a a character array.
@@ -441,12 +441,12 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean contains(final char[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
 
-  /**
+  /*
    * Checks whether the given int array is in this filter.
    *
    * @param a an int array.
@@ -456,12 +456,12 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean contains(final int[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
 
-  /**
+  /*
    * Checks whether the given long array is in this filter.
    *
    * @param a a long array.
@@ -471,12 +471,12 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean contains(final long[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
 
-  /**
+  /*
    * Checks whether the given float array is in this filter.
    *
    * @param a a float array.
@@ -486,12 +486,12 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean contains(final float[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
 
-  /**
+  /*
    * Checks whether the given double array is in this filter.
    *
    * @param a a double array.
@@ -501,12 +501,12 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean contains(final double[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
 
-  /**
+  /*
    * Adds a character sequence to the filter.
    *
    * @param s a character sequence.
@@ -515,14 +515,14 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean add(final CharSequence s) {
     int i = d, l = s.length();
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(s, l, i));
     if (!alreadySet) size++;
     return !alreadySet;
   }
 
-  /**
+  /*
    * Adds a byte array to the filter.
    *
    * @param a a byte array.
@@ -531,14 +531,14 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean add(final byte[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
     return !alreadySet;
   }
 
-  /**
+  /*
    * Adds a short array to the filter.
    *
    * @param a a short array.
@@ -547,14 +547,14 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean add(final short[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
     return !alreadySet;
   }
 
-  /**
+  /*
    * Adds a character array to the filter.
    *
    * @param a a character array.
@@ -563,14 +563,14 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean add(final char[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
     return !alreadySet;
   }
 
-  /**
+  /*
    * Adds an int array to the filter.
    *
    * @param a an int array.
@@ -579,14 +579,14 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean add(final int[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
     return !alreadySet;
   }
 
-  /**
+  /*
    * Adds a long array to the filter.
    *
    * @param a a long array.
@@ -595,14 +595,14 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean add(final long[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
     return !alreadySet;
   }
 
-  /**
+  /*
    * Adds a float array to the filter.
    *
    * @param a a float array.
@@ -611,14 +611,14 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean add(final float[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
     return !alreadySet;
   }
 
-  /**
+  /*
    * Adds a double array to the filter.
    *
    * @param a a double array.
@@ -627,7 +627,7 @@ public class BloomFilter2 implements Externalizable {
    */
   public boolean add(final double[] a) {
     int i = d, l = a.length;
-    long bits[] = this.bits;
+    long[] bits = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
@@ -640,7 +640,7 @@ public class BloomFilter2 implements Externalizable {
     size = 0;
   }
 
-  /**
+  /*
    * Returns the size of this filter.
    *
    * <p>Note that the size of a Bloom filter is only a <em>lower bound</em> for the number of

@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 
-/**
- * Writes bytes onto a {@link ByteBuffer}.
+/*
+* Writes bytes onto a {@link ByteBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class ByteBufferOutputStream extends OutputStream {
     this.buf = buf;
   }
 
-  /**
+  /*
    * Write a byte on the buffer. The {@link ByteBuffer#position()} is advanced as a side effect.
    *
    * @param b A byte whose value is in [-128:127].
@@ -62,7 +62,7 @@ public class ByteBufferOutputStream extends OutputStream {
     buf.put((byte) b);
   }
 
-  /**
+  /*
    * Write an array of bytes on the buffer. The {@link ByteBuffer#position()} is advanced as a side
    * effect.
    *
@@ -71,7 +71,7 @@ public class ByteBufferOutputStream extends OutputStream {
    * @param len the number of bytes to write.
    * @exception EOFException if the buffer would overflow.
    */
-  public void write(byte b[], int off, int len) throws IOException {
+  public void write(byte[] b, int off, int len) throws IOException {
 
     if (buf.remaining() < len) {
 

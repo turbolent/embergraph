@@ -30,8 +30,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 
-/**
- * Test suite for owl:inverseOf processing.
+/*
+* Test suite for owl:inverseOf processing.
  *
  * <pre>
  *   owl:inverseOf1 : (a owl:inverseOf b) -&gt; (b owl:inverseOf a)
@@ -55,7 +55,7 @@ public class TestRuleOwlInverseOf extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test where the data satisifies the rule exactly once.
    *
    * <pre>
@@ -110,7 +110,7 @@ public class TestRuleOwlInverseOf extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Test where the data satisifies the rule exactly once.
    *
    * <pre>

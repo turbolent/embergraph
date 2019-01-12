@@ -36,8 +36,8 @@ import org.embergraph.journal.IRootBlockView;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.quorum.QuorumMember;
 
-/**
- * A non-remote interface for a member service in a {@link Quorum} defining methods to replicating
+/*
+* A non-remote interface for a member service in a {@link Quorum} defining methods to replicating
  * writes.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +45,7 @@ import org.embergraph.quorum.QuorumMember;
  */
 public interface QuorumPipeline<S extends HAPipelineGlue> {
 
-  /**
+  /*
    * Return a {@link Future} for a task which will replicate an NIO buffer along the write pipeline.
    * This method is only invoked by the quorum leader. The payload is replicated to the first
    * follower in the write pipeline. That follower will accept the payload (and replicate it if
@@ -65,7 +65,7 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
    */
   Future<Void> replicate(IHASyncRequest req, IHAWriteMessage msg, ByteBuffer b) throws IOException;
 
-  /**
+  /*
    * Return a {@link Future} for a task which will replicate an NIO buffer along the write pipeline.
    * This method is invoked for any node except the master, including the last node in the failover
    * chain.
@@ -80,7 +80,7 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
   Future<Void> receiveAndReplicate(IHASyncRequest req, IHASendState snd, IHAWriteMessage msg)
       throws IOException;
 
-  /**
+  /*
    * Reset the pipeline (blocking). This message is used to handle an error in pipeline replication.
    * If replication fails, the socket connections both upstream and downstream of the point of
    * failure can be left in an indeterminate state with partially buffered data. In order to bring
@@ -100,8 +100,8 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
    * service out of the scope of the QuorumPipelineImpl and the send service
    * itself is not aware of pipeline state changes.
    */
-  //    /**
-  //     * The service used by the leader to transmit NIO buffers to the next node
+  //    /*
+//     * The service used by the leader to transmit NIO buffers to the next node
   //     * in the write pipeline. The returned object is valid as long as this node
   //     * remains the quorum leader.
   //     *
@@ -115,8 +115,8 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
    * service out of the scope of the QuorumPipelineImpl and the send service
    * itself is not aware of pipeline state changes.
    */
-  //    /**
-  //     * The service used by the followers to accept and relay NIO buffers along
+  //    /*
+//     * The service used by the followers to accept and relay NIO buffers along
   //     * the write pipeline. The returned object is valid until the service
   //     * becomes the leader or disconnects from the {@link Quorum}.
   //     *
@@ -125,14 +125,14 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
   //     */
   //    HAReceiveService<HAWriteMessage> getHAReceiveService();
 
-  /**
+  /*
    * Return the lastCommitTime for this service (based on its current root block). This supports the
    * {@link IHAWriteMessage} which requires this information as part of the metadata about
    * replicated {@link WriteCache} blocks.
    */
   long getLastCommitTime();
 
-  /**
+  /*
    * Return the lastCommitCounter for this service (based on its current root block). This supports
    * the {@link IHAWriteMessage} which requires this information as part of the metadata about
    * replicated {@link WriteCache} blocks.
@@ -142,7 +142,7 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
   /** The {@link UUID} of the backing store. */
   UUID getStoreUUID();
 
-  /**
+  /*
    * Log the {@link IHAWriteMessage} and the associated data (if necessary). The log file for the
    * current write set will be deleted if the quorum is fully met at the next 2-phase commit.
    *
@@ -151,7 +151,7 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
    */
   void logWriteCacheBlock(final IHAWriteMessage msg, final ByteBuffer data) throws IOException;
 
-  /**
+  /*
    * Log the root block for the commit point that closes the current write set onto the {@link
    * HALogWriter}.
    *
@@ -171,7 +171,7 @@ public interface QuorumPipeline<S extends HAPipelineGlue> {
   void logRootBlock( // final boolean isJoinedService,
       final IRootBlockView rootBlock) throws IOException;
 
-  /**
+  /*
    * Purge the local HA log files. This should be invoked when the service goes through a commit
    * point in which the quorum is fully met. At that moment, we no longer require these log files to
    * resynchronize any service.

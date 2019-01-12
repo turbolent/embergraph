@@ -32,8 +32,8 @@ import org.embergraph.quorum.MockQuorumFixture.MockQuorum;
 import org.embergraph.quorum.MockQuorumFixture.MockQuorum.MockQuorumActor;
 import org.embergraph.quorum.MockQuorumFixture.MockQuorumMember;
 
-/**
- * Abstract base class for testing using a {@link MockQuorumFixture}.
+/*
+* Abstract base class for testing using a {@link MockQuorumFixture}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -55,7 +55,7 @@ public abstract class AbstractQuorumTestCase extends TestCase3 {
   /** The clients. */
   protected MockQuorumMember[] clients;
 
-  /**
+  /*
    * The per-client quorum actor objects. The unit tests send events on the behalf of the clients
    * using these actor objects.
    */
@@ -114,7 +114,7 @@ public abstract class AbstractQuorumTestCase extends TestCase3 {
     fixture = null;
   }
 
-  /**
+  /*
    * Wait up to a timeout until some condition succeeds.
    *
    * <p>Whenever more than one {@link AbstractQuorum} is under test there will be concurrent
@@ -194,8 +194,8 @@ public abstract class AbstractQuorumTestCase extends TestCase3 {
     //        }
   }
 
-  //    /**
-  //     * Waits up to 5 seconds for the condition to succeed.
+  //    /*
+//     * Waits up to 5 seconds for the condition to succeed.
   //     *
   //     * @param cond
   //     *            The condition, which must throw an
@@ -212,7 +212,7 @@ public abstract class AbstractQuorumTestCase extends TestCase3 {
   //
   //    }
 
-  /**
+  /*
    * Helper method provides nice rendering of a votes snapshot.
    *
    * <p>Note: The snapshot uses a {@link UUID}[] rather than a collection for each <code>

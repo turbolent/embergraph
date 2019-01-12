@@ -40,8 +40,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * An index (or index partition) that has been isolated by a transaction. Isolation is achieved by
+/*
+* An index (or index partition) that has been isolated by a transaction. Isolation is achieved by
  * the following mechanisms:
  *
  * <ol>
@@ -94,13 +94,13 @@ public class IsolatedFusedView extends FusedView {
   /** The transaction identifier (aka transaction start time). */
   private final long startTime;
 
-  /**
+  /*
    * The isolated write set (the place where we record the intention of the transaction). This is
    * just a reference to the mutable {@link BTree} at index zero(0) of sources in the view.
    */
   private final BTree writeSet;
 
-  /**
+  /*
    * The isolated write set (the place where we record the intention of the transaction). This is
    * just a reference to the mutable {@link BTree} at index zero(0) of sources in the view.
    *
@@ -111,7 +111,7 @@ public class IsolatedFusedView extends FusedView {
     return writeSet;
   }
 
-  /**
+  /*
    * Constructor may be used either for a fully isolated transaction or an unisolated operation. In
    * each case the <i>groundState</i> is the ordered set of read-only resources corresponding to the
    * <i>timestamp</i>.
@@ -159,7 +159,7 @@ public class IsolatedFusedView extends FusedView {
     return writeSet.getEntryCount() == 0;
   }
 
-  /**
+  /*
    * Counters are disallowed for isolated view. The reason is that counters are typically used to
    * create one-up distinct values assigned to keys. If the counter is stored on the write set then
    * different transactions could easily assign the same counter value under different keys, leading
@@ -182,7 +182,7 @@ public class IsolatedFusedView extends FusedView {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Write an entry for the key on the write set.
@@ -231,7 +231,7 @@ public class IsolatedFusedView extends FusedView {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Write an entry for the key on the write set.
@@ -324,15 +324,15 @@ public class IsolatedFusedView extends FusedView {
 
       if (tuple.isDeletedVersion() && timestamp == this.startTime) {
 
-        /*
-         * Note: Avoid double-delete when the delete was performed by
+      /*
+       * Note: Avoid double-delete when the delete was performed by
          * this transaction.
          */
 
       } else {
 
-        /*
-         * Write a delete marker whose timestamp is copied from the
+      /*
+       * Write a delete marker whose timestamp is copied from the
          * groundState.
          */
 
@@ -346,7 +346,7 @@ public class IsolatedFusedView extends FusedView {
     }
   }
 
-  /**
+  /*
    * Validate changes made to the index within a transaction against the last committed state of the
    * index in the global scope. In general there are two kinds of conflicts: read-write conflicts
    * and write-write conflicts. Read-write conflicts are handled by NEVER overwriting an existing
@@ -501,8 +501,8 @@ public class IsolatedFusedView extends FusedView {
 
       if (baseEntry != null) {
 
-        /*
-         * If the version counters do not agree then we need to perform
+      /*
+       * If the version counters do not agree then we need to perform
          * write-write conflict resolution.
          */
 
@@ -517,8 +517,8 @@ public class IsolatedFusedView extends FusedView {
             return false;
           }
 
-          /*
-           * Create a temporary index to buffer the conflict
+        /*
+       * Create a temporary index to buffer the conflict
            * resolver's decisions. Once the write set has been
            * validated the versions written (or deleted) by the
            * conflict resolver must be written on the isolated index
@@ -539,8 +539,8 @@ public class IsolatedFusedView extends FusedView {
                     );
           }
 
-          /*
-           * Apply the conflict resolver in an attempt to resolve the
+        /*
+       * Apply the conflict resolver in an attempt to resolve the
            * conflict.
            */
 
@@ -622,7 +622,7 @@ public class IsolatedFusedView extends FusedView {
     return true;
   }
 
-  /**
+  /*
    * Merge the transaction scope index onto the then current unisolated index.
    *
    * <p>Note: This method is invoked by a transaction during commit processing to merge the write
@@ -680,8 +680,8 @@ public class IsolatedFusedView extends FusedView {
 
       if (entry.isDeletedVersion()) {
 
-        /*
-         * IFF there was a pre-existing version in the global scope then
+      /*
+       * IFF there was a pre-existing version in the global scope then
          * we remove the key from the global scope so that it will now
          * have a "delete marker" for this key.
          */
@@ -699,8 +699,8 @@ public class IsolatedFusedView extends FusedView {
 
         } else {
 
-          /*
-           * The deleted version never existed in the unisolated index
+        /*
+       * The deleted version never existed in the unisolated index
            * so we do not need to record the entry.
            */
 
@@ -708,8 +708,8 @@ public class IsolatedFusedView extends FusedView {
 
       } else {
 
-        /*
-         * Copy the entry down onto the global scope.
+      /*
+       * Copy the entry down onto the global scope.
          *
          * Note: This writes the [revisionTime] of the transaction on
          * the unisolated index entry.

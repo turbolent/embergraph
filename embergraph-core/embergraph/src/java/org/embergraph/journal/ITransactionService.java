@@ -26,8 +26,8 @@ import org.embergraph.btree.isolation.IConflictResolver;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * An interface for managing transaction life cycles.
+/*
+* An interface for managing transaction life cycles.
  *
  * <h2>Concurrency control</h2>
  *
@@ -98,7 +98,7 @@ import org.embergraph.service.IEmbergraphFederation;
  */
 public interface ITransactionService extends ITimestampService {
 
-  /**
+  /*
    * Create a new transaction.
    *
    * @param timestamp The timestamp may be:
@@ -133,7 +133,7 @@ public interface ITransactionService extends ITimestampService {
   //    *             {@link #getLastCommitTime()}.
   long newTx(long timestamp) throws IOException;
 
-  /**
+  /*
    * Request commit of the transaction write set. Committing a read-only transaction is necessary in
    * order to release read locks (this is very fast). If a transaction has a write set, then this
    * method does not return until that write set has been made restart safe or the transaction has
@@ -160,7 +160,7 @@ public interface ITransactionService extends ITimestampService {
    */
   long commit(long tx) throws ValidationError, IOException;
 
-  /**
+  /*
    * Request abort of the transaction write set.
    *
    * @param tx The transaction identifier.
@@ -169,7 +169,7 @@ public interface ITransactionService extends ITimestampService {
    */
   void abort(long tx) throws IOException;
 
-  /**
+  /*
    * Notify the {@link ITransactionService} that a commit has been performed with the given
    * timestamp (which it assigned) and that it should update its lastCommitTime iff the given
    * commitTime is GT its current lastCommitTime.
@@ -183,7 +183,7 @@ public interface ITransactionService extends ITimestampService {
    */
   void notifyCommit(long commitTime) throws IOException;
 
-  /**
+  /*
    * Return the last commitTime reported to the {@link ITransactionService}.
    *
    * @return The last known commit time.
@@ -191,7 +191,7 @@ public interface ITransactionService extends ITimestampService {
    */
   long getLastCommitTime() throws IOException;
 
-  /**
+  /*
    * Return the timestamp whose historical data MAY be released. This time is derived from the
    * minimum of the timestamp of the earliest running transaction and <code>now-minReleaseAge</code>
    * and is updated whenever the earliest running transaction terminates. This value is

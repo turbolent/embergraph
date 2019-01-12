@@ -23,7 +23,7 @@ import org.embergraph.journal.IIndexManager;
 
 public interface IHAPolicyLifeCycle {
 
-  /**
+  /*
    * Initialize the policy.
    *
    * @param servletConfig

@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.Vector;
 import org.apache.log4j.Logger;
 
-/**
- * <p>
+/*
+* <p>
  * Directed Acyclic Graph (DAG) for detecting and preventing deadlocks in a
  * concurrent programming system. The algorithm takes advantage of certain
  * characteristics of the deadlock detection problem for concurrent transactions
@@ -174,7 +174,7 @@ public class TxDag {
   /** The #of different paths from u to v in {@link #W}. */
   private final int[][] M;
 
-  /**
+  /*
    * A scratch buffer used to make conditional updates of M.
    *
    * @see #backup()
@@ -187,7 +187,7 @@ public class TxDag {
   /** The #of outbound edges for each transaction index. */
   final int[] outbound;
 
-  /**
+  /*
    * An array of the application transaction objects in order by the indices as assigned by {@link
    * #lookup(Object, boolean)}. Entries in this array are cleared (to <code>null</code>) when a
    * vertex is removed from the graph by {@link #releaseVertex(Object)}.
@@ -200,32 +200,32 @@ public class TxDag {
   /** An empty int[] used for order[] when the graph is empty. */
   private final int[] EMPTY = new int[] {};
 
-  /**
+  /*
    * This field controls whether or not the result of {@link #getOrder()} and {@link #getOrder(int,
    * int)} are sorted. Sorting is not required for correctness, but sorting may make it easier to
    * follow the behavior of the algorithm. The default is <code>false</code>.
    */
   public static boolean sortOrder = false;
 
-  /**
+  /*
    * This field controls whether or not the order[] is cloned and then sorted by {@link
    * #toString()}. The default is <code>true</code>.
    */
   public static boolean sortOrderForDisplay = true;
 
-  /**
+  /*
    * This field controls whether or not the result of {@link #getOrder()} is cached. Caching is
    * enabled by default but may be disabled for debugging.
    */
   public static boolean cacheOrder = false;
 
-  /**
+  /*
    * The constant used by {@link #lookup(Object, boolean)} to indicate that the named vertex was not
    * found in the DAG (<code>-1</code>).
    */
   public static final int UNKNOWN = -1;
 
-  /**
+  /*
    * A list containing {@link Integer} indices available to be assigned to a new transaction. When
    * this list is empty, then the maximum #of transactions are running concurrently. Entries are
    * removed from the list when they are assigned to a transaction. Entries are returned to the list
@@ -233,7 +233,7 @@ public class TxDag {
    */
   private final List<Integer> indices = new LinkedList<Integer>();
 
-  /**
+  /*
    * Mapping from the application "transaction" object to the {@link Integer} index assigned to that
    * transaction.
    *
@@ -241,7 +241,7 @@ public class TxDag {
    */
   private final Map<Object, Integer> mapping = new HashMap<Object, Integer>();
 
-  /**
+  /*
    * The maximum multi-programming level supported (from the constructor).
    *
    * @return The maximum vertex count.
@@ -252,7 +252,7 @@ public class TxDag {
     return _capacity;
   }
 
-  /**
+  /*
    * The current multi-programming level. This is simply the #of distinct transactions in the
    * WAITS_FOR relationship or alternatively the #of vertices in the DAG.
    *
@@ -263,7 +263,7 @@ public class TxDag {
     return mapping.size();
   }
 
-  /**
+  /*
    * Return <code>true</code> iff adding another transaction would exceed the configured
    * multi-programming capacity.
    */
@@ -272,7 +272,7 @@ public class TxDag {
     return size() == _capacity;
   }
 
-  /**
+  /*
    * Constructor.
    *
    * @param capacity The multi-programming level. This is the maximum number of concurrent
@@ -305,7 +305,7 @@ public class TxDag {
     }
   }
 
-  /**
+  /*
    * Lookup index assigned to transaction object.
    *
    * @param tx The transaction object.
@@ -325,7 +325,7 @@ public class TxDag {
       throw new IllegalArgumentException("transaction object is null");
     }
 
-    Integer index = (Integer) mapping.get(tx);
+    Integer index = mapping.get(tx);
 
     if (index == null) {
 
@@ -341,13 +341,13 @@ public class TxDag {
               "capacity=" + capacity + ", nvertices=" + nvertices);
         }
 
-        /*
-         * Assign the transaction a free index. Throws
+      /*
+       * Assign the transaction a free index. Throws
          * IndexOutOfBoundsException if there is no free index
          * available.
          */
 
-        index = (Integer) indices.remove(0);
+        index = indices.remove(0);
 
         //                if (index == null) {
         //
@@ -380,7 +380,7 @@ public class TxDag {
     return index.intValue();
   }
 
-  /**
+  /*
    * Releases the vertex by (a) removing it from the {@link #mapping} and (b) updating the list of
    * available {@link #indices}.
    *
@@ -392,7 +392,7 @@ public class TxDag {
    */
   public synchronized boolean releaseVertex(final Object tx) {
 
-    final Integer index = (Integer) mapping.remove(tx);
+    final Integer index = mapping.remove(tx);
 
     if (index == null) {
 
@@ -418,7 +418,7 @@ public class TxDag {
     return true;
   }
 
-  /**
+  /*
    * Return the #of different paths from u to v.
    *
    * @param u The index assigned to some transaction.
@@ -430,7 +430,7 @@ public class TxDag {
     return M[u][v];
   }
 
-  /**
+  /*
    * Return a copy of the entire path count matrix.
    *
    * @return A copy of the array M whose dimensions are [capacity][capacity].
@@ -438,10 +438,10 @@ public class TxDag {
    */
   final synchronized int[][] getPathCountMatrix() {
 
-    return (int[][]) M.clone();
+    return M.clone();
   }
 
-  /**
+  /*
    * Add an edge to the DAG. The edge has the semantics <code> blocked -&gt; running[ i ]</code>,
    * i.e., the <i>blocked </i> transaction <em>WAITS_FOR</em> the <i>running </i> transaction.
    *
@@ -482,8 +482,8 @@ public class TxDag {
     backup(order);
     try {
       if (!updateClosure(src, dst, true)) {
-        /*
-         * Deadlock - rollback tentative change to M.
+      /*
+       * Deadlock - rollback tentative change to M.
          */
         log.warn("Deadlock");
         restore(order);
@@ -521,7 +521,7 @@ public class TxDag {
     }
   }
 
-  /**
+  /*
    * Creates a BFIM (before image) of the in-use cells from M. A per-instance scratch buffer is used
    * to store the BFIM. Only in-use cells are actually written on the BFIM.
    *
@@ -540,7 +540,7 @@ public class TxDag {
     }
   }
 
-  /**
+  /*
    * Restore M when a deadlock resulted.
    *
    * @param order This <em>MUST</em> be the same order[] passed to {@link #backup(int[] order)}. If
@@ -557,7 +557,7 @@ public class TxDag {
     }
   }
 
-  /**
+  /*
    * Add or remove an edge <code>src WAITS_FOR dst</code>and update the closure of the WAITS_FOR
    * graph.
    *
@@ -684,7 +684,7 @@ public class TxDag {
        * otherwise sort the cached order[], which would have side effects
        * that I want to avoid when debugging.
        */
-      order = (int[]) getOrder().clone();
+      order = getOrder().clone();
       Arrays.sort(order); // sort indices for display purposes.
     } else {
       // Get order[] -- may be cached.
@@ -752,7 +752,7 @@ public class TxDag {
     return sb.toString();
   }
 
-  /**
+  /*
    * Package private method returns a dense array containing a copy of the in-use transaction
    * indices that participate in at least one edge. Transactions which have been declared to the
    * {@link TxDag} but which have neither inbound nor outbound edges are not reported. Such
@@ -813,7 +813,7 @@ public class TxDag {
     return _order;
   }
 
-  /**
+  /*
    * This is a special case version of {@link #getOrder()} that is invoked by {@link
    * #updateClosure(int t, int u, boolean insert)} when <code>insert == true</code> and forces
    * <code>t</code> and <code>u</code> to be included in the returned order[] even if those vertices
@@ -889,7 +889,7 @@ public class TxDag {
     return order;
   }
 
-  /**
+  /*
    * Resets the {@link #_order} cache so that {@link #getOrder()} will be forced to recompute its
    * response. This method is automatically.
    */
@@ -897,7 +897,7 @@ public class TxDag {
     _order = null;
   }
 
-  /**
+  /*
    * Add a set of edges to the DAG. Each edge has the semantics <code> blocked -&gt; running[ i ]
    * </code>, i.e., the <i>blocked </i> transaction <em>WAITS_FOR</em> the <i>running </i>
    * transaction.
@@ -989,8 +989,8 @@ public class TxDag {
       outbound[src]++; // increment outbound counter.
       inbound[tgt]++; // increment inbound counter.
       if (outbound[src] == 1 || inbound[tgt] == 1) {
-        /*
-         * If either counter was zero (and is now one) then the order
+      /*
+       * If either counter was zero (and is now one) then the order
          * must be reset.
          */
         reset = true;
@@ -1004,7 +1004,7 @@ public class TxDag {
     }
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the described edge exists in the graph.
    *
    * @param blocked A transaction.
@@ -1025,8 +1025,8 @@ public class TxDag {
     return W[src][dst];
   }
 
-  //    /**
-  //	 * Return an array of the application provided transaction objects. The
+  //    /*
+//	 * Return an array of the application provided transaction objects. The
   //	 * index positions in this array correspond to the transaction indices as
   //	 * assigned by {@link #lookup(Object, boolean)}. The length of the array
   //	 * corresponds to the #of in-use transactions.
@@ -1048,7 +1048,7 @@ public class TxDag {
   //        return transactions;
   //    }
 
-  /**
+  /*
    * Return an array of the edges asserted for the graph. The length of the array is the #of in use
    * transactions in the graph. Each element of the array represents a single edge. The state of the
    * returned object is current as of the time that this method executes and is not maintained.
@@ -1074,10 +1074,10 @@ public class TxDag {
         }
       }
     }
-    return (Edge[]) v.toArray(new Edge[] {});
+    return v.toArray(new Edge[] {});
   }
 
-  /**
+  /*
    * A representation of an edge in the DAG used for export of information to the caller.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson </a>
@@ -1087,13 +1087,13 @@ public class TxDag {
     public final Object src;
     /** The transaction object for the target vertex. */
     final Object tgt;
-    /**
+    /*
      * True iff the edge was explicitly asserted and false if the edge was inferred by the closure
      * of the WAITS_FOR relationship.
      */
     final boolean explicit;
 
-    /**
+    /*
      * @param src
      * @param tgt
      * @param explicit
@@ -1122,7 +1122,7 @@ public class TxDag {
       return tgt;
     }
 
-    /**
+    /*
      * Return true iff the edge was explicitly asserted (versus implied by the transitive closure of
      * the WAITS_FOR graph).
      */
@@ -1131,7 +1131,7 @@ public class TxDag {
     }
   }
 
-  /**
+  /*
    * Removes an edge from the DAG.
    *
    * <p>Note: This method does NOT does not recycle the vertex associated with a transaction which
@@ -1189,7 +1189,7 @@ public class TxDag {
     }
   }
 
-  /**
+  /*
    * Package private method removes an edge and updates the path count matrix and the inbound and
    * outbound edge counts for the source and target vertices. The described edge must exist.
    *
@@ -1220,7 +1220,7 @@ public class TxDag {
     }
   }
 
-  /**
+  /*
    * Remove all edges whose target is <i>tx</i>. This method SHOULD be used when a running
    * transaction completes (either aborts or commits). After calling this method, the transaction is
    * removed completely from the DAG. Failure to use this method will result in the capacity of the

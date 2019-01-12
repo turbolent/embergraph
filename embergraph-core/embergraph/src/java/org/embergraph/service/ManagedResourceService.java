@@ -30,8 +30,8 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.DirectBufferPoolAllocator;
 import org.embergraph.io.DirectBufferPoolAllocator.IAllocation;
 
-/**
- * This class manages a pool of direct {@link ByteBuffer}s. The application can create which are
+/*
+* This class manages a pool of direct {@link ByteBuffer}s. The application can create which are
  * exposed for retrieval by remote services.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ public abstract class ManagedResourceService extends ResourceService {
 
   private final DirectBufferPoolAllocator allocator;
 
-  /**
+  /*
    * The object used to make, resolve, and release allocations against a {@link DirectBufferPool}.
    */
   public DirectBufferPoolAllocator getAllocator() {
@@ -54,7 +54,7 @@ public abstract class ManagedResourceService extends ResourceService {
     return allocator;
   }
 
-  /**
+  /*
    * Create and start the service.
    *
    * @param addr The IP address and port at which the service will accept connections. The port MAY
@@ -83,7 +83,7 @@ public abstract class ManagedResourceService extends ResourceService {
     allocator.close();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @todo An allocation can be concurrently released if a query terminates. Make sure that we

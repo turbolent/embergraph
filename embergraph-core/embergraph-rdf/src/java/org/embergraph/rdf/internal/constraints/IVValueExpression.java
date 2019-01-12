@@ -44,8 +44,8 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
-/**
- * A specialized IValueExpression that evaluates to an IV. The inputs are usually, but not strictly
+/*
+* A specialized IValueExpression that evaluates to an IV. The inputs are usually, but not strictly
  * limited to, IVs as well. This class also contains many useful helper methods for evaluation,
  * including providing access to the EmbergraphValueFactory and LexiconConfiguration.
  */
@@ -58,23 +58,23 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
   public interface Annotations extends BOpBase.Annotations {
 
     /** The namespace of the lexicon. */
-    public String NAMESPACE = IVValueExpression.class.getName() + ".namespace";
+    String NAMESPACE = IVValueExpression.class.getName() + ".namespace";
 
     /** The timestamp of the query. */
-    public String TIMESTAMP = IVValueExpression.class.getName() + ".timestamp";
+    String TIMESTAMP = IVValueExpression.class.getName() + ".timestamp";
   }
 
-  /**
+  /*
    * Note: The double-checked locking pattern <em>requires</em> the keyword <code>volatile</code>.
    */
   private transient volatile EmbergraphValueFactory vf;
 
-  /**
+  /*
    * Note: The double-checked locking pattern <em>requires</em> the keyword <code>volatile</code>.
    */
   private transient volatile ILexiconConfiguration<EmbergraphValue> lc;
 
-  /**
+  /*
    * Used by subclasses to create the annotations object from the global annotations and the custom
    * annotations for the particular VE.
    *
@@ -98,7 +98,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     return NV.asMap(nv);
   }
 
-  /**
+  /*
    * Zero arg convenience constructor.
    *
    * @param globals The global annotations, including the lexicon namespace.
@@ -109,7 +109,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     this(BOpBase.NOARGS, anns(globals, anns));
   }
 
-  /**
+  /*
    * One arg convenience constructor.
    *
    * @param globals The global annotations, including the lexicon namespace.
@@ -167,7 +167,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     }
   }
 
-  /**
+  /*
    * Returns <code>true</code> unless overridden, meaning the {@link GlobalAnnotations} are required
    * for this value expression (certain boolean value expressions do not require them). Global
    * annotations allow the method getValueFactory and getLexiconConfiguration to work.
@@ -177,7 +177,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     return true;
   }
 
-  /**
+  /*
    * Return the {@link EmbergraphValueFactory} for the {@link LexiconRelation}.
    *
    * <p>Note: This is lazily resolved and then cached.
@@ -211,7 +211,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     return (Long) getRequiredProperty(Annotations.TIMESTAMP);
   }
 
-  /**
+  /*
    * Return the {@link ILexiconConfiguration}. The result is cached. The cache it will not be
    * serialized when crossing a node boundary.
    *
@@ -239,8 +239,8 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
 
           if (!(bset instanceof ContextBindingSet)) {
 
-            /*
-             * This generally indicates a failure to propagate the
+          /*
+       * This generally indicates a failure to propagate the
              * context wrapper for the binding set to a new binding
              * set during a copy (projection), bind (join), etc. It
              * could also indicate a failure to wrap binding sets
@@ -274,7 +274,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     return lc;
   }
 
-  /**
+  /*
    * Return the {@link Literal} for the {@link IV}.
    *
    * @param iv The {@link IV}.
@@ -305,7 +305,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     }
   }
 
-  /**
+  /*
    * Return the {@link Value} for the {@link IV}.
    *
    * @param iv The {@link IV}.
@@ -321,11 +321,11 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
 
     if (iv.isInline() && !iv.needsMaterialization()) {
 
-      return (Value) iv;
+      return iv;
 
     } else if (iv.hasValue()) {
 
-      return (EmbergraphValue) iv.getValue();
+      return iv.getValue();
 
     } else {
 
@@ -333,7 +333,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     }
   }
 
-  /**
+  /*
    * Return the {@link String} label for the {@link IV}.
    *
    * @param iv The {@link IV}.
@@ -348,7 +348,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     return asLiteral(iv).getLabel();
   }
 
-  /**
+  /*
    * Get the function argument (a value expression) and evaluate it against the source solution. The
    * evaluation of value expressions is recursive.
    *
@@ -373,7 +373,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     return iv;
   }
 
-  /**
+  /*
    * Get the function argument (a value expression) and evaluate it against the source solution. The
    * evaluation of value expressions is recursive.
    *
@@ -400,7 +400,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     return asLiteral(getAndCheckLiteral(i, bs));
   }
 
-  /**
+  /*
    * Return an {@link IV} for the {@link Value}.
    *
    * @param value The {@link Value}.
@@ -427,7 +427,7 @@ public abstract class IVValueExpression<T extends IV> extends BOpBase
     return asIV(v, bs);
   }
 
-  /**
+  /*
    * Return an {@link IV} for the {@link Value}.
    *
    * <p>If the supplied EmbergraphValue has an IV, cache the EmbergraphValue on the IV and return

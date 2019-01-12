@@ -92,8 +92,8 @@ import org.openrdf.rio.RDFParser.DatatypeHandling;
 import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.StatementCollector;
 
-/**
- * Abstract base class for data driven test suites.
+/*
+* Abstract base class for data driven test suites.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @openrdf
@@ -110,7 +110,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
     super(name);
   }
 
-  /**
+  /*
    * Data-driven unit tests for SPARQL queries.
    *
    * <p>Note: This class was derived from the openrdf SPARQLQueryTest file (Aduna BSD style
@@ -135,7 +135,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
       return store;
     }
 
-    /**
+    /*
      * @param testURI
      * @throws Exception
      */
@@ -144,7 +144,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
       this(testURI, testURI + ".rq", testURI + ".trig", testURI + ".srx");
     }
 
-    /**
+    /*
      * @param testURI
      * @param queryFileURL
      * @param dataFileURL
@@ -182,7 +182,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
       this(testURI, queryFileURL, new String[] {dataFileURL}, resultFileURL, checkOrder);
     }
 
-    /**
+    /*
      * Read the query and load the data file(s) but do not run the query.
      *
      * @param testURI
@@ -220,7 +220,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
         }
       }
 
-      /**
+      /*
        * Note: This should be the URL specified in the manifest as having the appropriate scope for
        * the value of the qt:query attribute, which is normally specified as something like:
        *
@@ -245,7 +245,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
       astContainer = new Embergraph2ASTSPARQLParser().parseQuery2(queryStr, baseURI);
 
       // Force the QueryEngine to exist for this db.
-      QueryEngineFactory.getInstance().getQueryController((IBTreeManager) store.getIndexManager());
+      QueryEngineFactory.getInstance().getQueryController(store.getIndexManager());
       //            ASTDeferredIVResolution.resolveQuery(store, astContainer);
 
       //            queryPlan = AST2BOpUtility.convert(context = new AST2BOpContext(
@@ -259,7 +259,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
 
     }
 
-    /**
+    /*
      * Run a data-driven SPARQL test.
      *
      * @param resource The base name of the resource. It will locate the query (.rq), the data
@@ -457,7 +457,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
       AbstractQueryEngineTestCase.compareGraphs(getName(), queryResult, expectedResult);
     }
 
-    /**
+    /*
      * Load some RDF data.
      *
      * @param resource The resource whose data will be loaded.
@@ -497,7 +497,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
     }
   }
 
-  /**
+  /*
    * Data-driven unit tests for SPARQL queries.
    *
    * <p>Note: This class was derived from the openrdf SPARQLQueryTest file (Aduna BSD style
@@ -516,7 +516,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
       return store;
     }
 
-    /**
+    /*
      * @param testURI
      * @throws Exception
      */
@@ -532,7 +532,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
       this(testURI, queryFileURL, new String[] {dataFileURL});
     }
 
-    /**
+    /*
      * Read the query and load the data file(s) but do not run the query.
      *
      * @param testURI
@@ -563,7 +563,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
         }
       }
 
-      /**
+      /*
        * Note: This should be the URL specified in the manifest as having the appropriate scope for
        * the value of the qt:query attribute, which is normally specified as something like:
        *
@@ -581,7 +581,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
       ASTDeferredIVResolution.resolveUpdate(store, astContainer);
     }
 
-    /**
+    /*
      * Load some RDF data.
      *
      * @param resource The resource whose data will be loaded.
@@ -684,8 +684,8 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
 
       } catch (MalformedURLException e) {
 
-        /*
-         * Ignore. we will handle the problem below if this was not
+      /*
+       * Ignore. we will handle the problem below if this was not
          * a URL.
          */
 
@@ -713,7 +713,7 @@ public abstract class AbstractDataDrivenSPARQLTestCase extends AbstractDataAndSP
     return is;
   }
 
-  /**
+  /*
    * Return the contents of the resource.
    *
    * @param resource The resource.

@@ -7,8 +7,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * A class that aligns a buffer of <code>E[]</code>s (a buffer of chunks) with an {@link
+/*
+* A class that aligns a buffer of <code>E[]</code>s (a buffer of chunks) with an {@link
  * IChunkedOrderedIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,7 +33,7 @@ public class ChunkConsumerIterator<E> implements IChunkedOrderedIterator<E> {
   /** The order of the elements in the buffer or <code>null</code> iff not known. */
   private final IKeyOrder<E> keyOrder;
 
-  /**
+  /*
    * The index of the last entry returned in the current {@link #chunk} and <code>-1</code> until
    * the first entry is returned.
    */
@@ -42,8 +42,8 @@ public class ChunkConsumerIterator<E> implements IChunkedOrderedIterator<E> {
   /** The current chunk -or- <code>null</code> if we need to fetch another chunk. */
   private E[] chunk = null;
 
-  //    /**
-  //     * Total elapsed time for the iterator instance.
+  //    /*
+//     * Total elapsed time for the iterator instance.
   //     */
   //    private long elapsed = 0L;
 
@@ -53,7 +53,7 @@ public class ChunkConsumerIterator<E> implements IChunkedOrderedIterator<E> {
   /** #of elements materialized so far. */
   private long nelements = 0L;
 
-  /**
+  /*
    * @param src The source iterator. Note that each element visited by the source iterator is
    *     treated as a chunk of elements by this iterator.
    */
@@ -62,7 +62,7 @@ public class ChunkConsumerIterator<E> implements IChunkedOrderedIterator<E> {
     this(src, /* keyOrder */ null);
   }
 
-  /**
+  /*
    * @param src The source iterator. Note that each element visited by the source iterator is
    *     treated as a chunk of elements by this iterator.
    * @param keyOrder The natural order in which the un-chunked elements in the source iterator will

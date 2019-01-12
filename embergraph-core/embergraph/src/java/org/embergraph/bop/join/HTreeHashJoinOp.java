@@ -33,8 +33,8 @@ import org.embergraph.bop.controller.INamedSolutionSetRef;
 import org.embergraph.htree.HTree;
 import org.embergraph.relation.accesspath.IAccessPath;
 
-/**
- * A hash join against an {@link IAccessPath} based on the {@link HTree} and suitable for very large
+/*
+* A hash join against an {@link IAccessPath} based on the {@link HTree} and suitable for very large
  * intermediate result sets. Source solutions are buffered on the {@link HTree} on each evaluation
  * pass. When the memory demand of the {@link HTree} is not bounded, the hash join will run a single
  * pass over the {@link IAccessPath} for the target {@link IPredicate}. For some queries, this can
@@ -98,7 +98,7 @@ public class HTreeHashJoinOp<E> extends HashJoinOp<E> implements ISingleThreaded
     this(args, NV.asMap(annotations));
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -151,7 +151,7 @@ public class HTreeHashJoinOp<E> extends HashJoinOp<E> implements ISingleThreaded
     return new HTreeHashJoinUtility(context.getRunningQuery().getMemoryManager(), this, joinType);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The {@link HTreeHashJoinOp} runs the hash join either exactly once (at-once evaluation) or
@@ -164,11 +164,7 @@ public class HTreeHashJoinOp<E> extends HashJoinOp<E> implements ISingleThreaded
 
     final long usedMemory = ((HTreeHashJoinUtility) state).getStore().size();
 
-    if (context.isLastInvocation() || usedMemory >= maxMemory) {
+    return context.isLastInvocation() || usedMemory >= maxMemory;
 
-      return true;
-    }
-
-    return false;
   }
 }

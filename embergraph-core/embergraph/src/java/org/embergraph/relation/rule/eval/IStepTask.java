@@ -27,8 +27,8 @@ import java.io.Serializable;
 import java.util.concurrent.Callable;
 import org.embergraph.relation.rule.IStep;
 
-/**
- * Interface for evaluation of an {@link IStep}. Tasks are created on the service where they will be
+/*
+* Interface for evaluation of an {@link IStep}. Tasks are created on the service where they will be
  * executed - they are NOT {@link Serializable}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -37,5 +37,5 @@ import org.embergraph.relation.rule.IStep;
 public interface IStepTask extends Callable<RuleStats> {
 
   /** Evaluate the rule. */
-  public RuleStats call() throws Exception;
+  RuleStats call() throws Exception;
 }

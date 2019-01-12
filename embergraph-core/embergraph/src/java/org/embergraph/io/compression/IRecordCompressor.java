@@ -26,15 +26,15 @@ package org.embergraph.io.compression;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 
-/**
- * Interface for record-level compression.
+/*
+* Interface for record-level compression.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IRecordCompressor {
 
-  /**
+  /*
    * Compresses data onto the provided ByteBuffer.
    *
    * @param bin The data. The data from the position to the limit will be compressed. The position
@@ -43,7 +43,7 @@ public interface IRecordCompressor {
    */
   void compress(final ByteBuffer bin, final ByteBuffer out);
 
-  /**
+  /*
    * Compresses data onto the provided ByteBuffer.
    *
    * @param bin The data. The data from the position to the limit will be compressed. The position
@@ -52,7 +52,7 @@ public interface IRecordCompressor {
    */
   ByteBuffer compress(final ByteBuffer bin);
 
-  /**
+  /*
    * Compresses data onto the output stream.
    *
    * @param bin The data. The data from the position to the limit will be compressed. The position
@@ -61,7 +61,7 @@ public interface IRecordCompressor {
    */
   void compress(final ByteBuffer bin, final OutputStream os);
 
-  /**
+  /*
    * Compresses data onto the output stream.
    *
    * @param bytes The data.
@@ -69,7 +69,7 @@ public interface IRecordCompressor {
    */
   void compress(final byte[] bytes, final OutputStream os);
 
-  /**
+  /*
    * Compresses data onto the output stream.
    *
    * @param bytes The source data.
@@ -79,7 +79,7 @@ public interface IRecordCompressor {
    */
   void compress(final byte[] bytes, final int off, final int len, final OutputStream os);
 
-  /**
+  /*
    * Decompress a {@link ByteBuffer} containing the record and return the uncompressed state.
    *
    * @param bin The compressed data.
@@ -89,7 +89,7 @@ public interface IRecordCompressor {
    */
   ByteBuffer decompress(final ByteBuffer bin);
 
-  /**
+  /*
    * Decompress a <code>byte[]</code> containing the record and return the uncompressed state.
    *
    * @param bin The compressed data.

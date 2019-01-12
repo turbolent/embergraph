@@ -11,8 +11,8 @@ package cern.colt;
 import cern.colt.function.IntComparator;
 import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
-/**
- * Given some interval boundaries, partitions arrays such that all elements falling into an interval
+/*
+* Given some interval boundaries, partitions arrays such that all elements falling into an interval
  * are placed next to each other.
  *
  * <p>The algorithms partition arrays into two or more intervals. They distinguish between
@@ -48,7 +48,7 @@ public class Partitioning extends Object {
   public static int swappedElements = 0;
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Partitioning() {}
-  /**
+  /*
    * Finds the given key "a" within some generic data using the binary search algorithm.
    *
    * @param a the index of the key to search for.
@@ -73,7 +73,7 @@ public class Partitioning extends Object {
     }
     return -(from + 1); // key not found.
   }
-  /**
+  /*
    * Same as {@link #dualPartition(int[],int[],int,int,int[],int,int,int[])} except that it
    * <i>synchronously</i> partitions <tt>double[]</tt> rather than <tt>int[]</tt> arrays.
    */
@@ -156,7 +156,7 @@ public class Partitioning extends Object {
           list, secondary, splitIndex + 1, to, splitters, medianIndex + 1, splitTo, splitIndexes);
     }
   }
-  /**
+  /*
    * Same as {@link #dualPartition(int[],int[],int,int,int)} except that it <i>synchronously</i>
    * partitions <tt>double[]</tt> rather than <tt>int[]</tt> arrays.
    */
@@ -177,7 +177,7 @@ public class Partitioning extends Object {
     }
     return from - 1;
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int[],int,int,int[])} except that this method
    * <i>synchronously</i> partitions two arrays at the same time; both arrays are partially sorted
    * according to the elements of the primary array. In other words, each time an element in the
@@ -275,7 +275,7 @@ public class Partitioning extends Object {
           list, secondary, splitIndex + 1, to, splitters, medianIndex + 1, splitTo, splitIndexes);
     }
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int)} except that this method <i>synchronously</i>
    * partitions two arrays at the same time; both arrays are partially sorted according to the
    * elements of the primary array. In other words, each time an element in the primary array is
@@ -302,7 +302,7 @@ public class Partitioning extends Object {
     }
     return from - 1;
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int[],int,int,int[])} except that it <i>generically</i>
    * partitions arbitrary shaped data (for example matrices or multiple arrays) rather than
    * <tt>int[]</tt> arrays.
@@ -431,7 +431,7 @@ public class Partitioning extends Object {
           splitIndex + 1, to, medianIndex + 1, splitTo, splitIndexes, comp, comp2, comp3, swapper);
     }
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int)} except that it <i>generically</i> partitions
    * arbitrary shaped data (for example matrices or multiple arrays) rather than <tt>int[]</tt>
    * arrays.
@@ -448,19 +448,19 @@ public class Partitioning extends Object {
     return from - 1;
   }
   /** Returns the index of the median of the three indexed elements. */
-  private static int med3(double x[], int a, int b, int c) {
+  private static int med3(double[] x, int a, int b, int c) {
     return (x[a] < x[b]
         ? (x[b] < x[c] ? b : x[a] < x[c] ? c : a)
         : (x[b] > x[c] ? b : x[a] > x[c] ? c : a));
   }
   /** Returns the index of the median of the three indexed elements. */
-  private static int med3(int x[], int a, int b, int c) {
+  private static int med3(int[] x, int a, int b, int c) {
     return (x[a] < x[b]
         ? (x[b] < x[c] ? b : x[a] < x[c] ? c : a)
         : (x[b] > x[c] ? b : x[a] > x[c] ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(Object x[], int a, int b, int c, java.util.Comparator comp) {
+  private static int med3(Object[] x, int a, int b, int c, java.util.Comparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);
@@ -473,7 +473,7 @@ public class Partitioning extends Object {
     int bc = comp.compare(b, c);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int[],int,int,int[])} except that it partitions
    * <tt>double[]</tt> rather than <tt>int[]</tt> arrays.
    */
@@ -553,7 +553,7 @@ public class Partitioning extends Object {
       partition(list, splitIndex + 1, to, splitters, medianIndex + 1, splitTo, splitIndexes);
     }
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int)} except that it partitions <tt>double[]</tt>
    * rather than <tt>int[]</tt> arrays.
    */
@@ -569,7 +569,7 @@ public class Partitioning extends Object {
     }
     return from - 1;
   }
-  /**
+  /*
    * Partitions (partially sorts) the given list such that all elements falling into some intervals
    * are placed next to each other. Returns the indexes of elements delimiting intervals.
    *
@@ -776,7 +776,7 @@ public class Partitioning extends Object {
     }
     // System.out.println("BACK TRACKING\n\n");
   }
-  /**
+  /*
    * Partitions (partially sorts) the given list such that all elements falling into the given
    * interval are placed next to each other. Returns the index of the element delimiting the
    * interval.
@@ -949,7 +949,7 @@ public class Partitioning extends Object {
     return from - 1;
     // return head-1;
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int[],int,int,int[])} except that it partitions
    * <tt>Object[]</tt> rather than <tt>int[]</tt> arrays.
    */
@@ -1032,7 +1032,7 @@ public class Partitioning extends Object {
       partition(list, splitIndex + 1, to, splitters, medianIndex + 1, splitTo, splitIndexes, comp);
     }
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int)} except that it <i>synchronously</i> partitions
    * the objects of the given list by the order of the given comparator.
    */
@@ -1050,7 +1050,7 @@ public class Partitioning extends Object {
     }
     return from - 1;
   }
-  /**
+  /*
    * Equivalent to <tt>partition(list.elements(), from, to, splitters.elements(), 0,
    * splitters.size()-1, splitIndexes.elements())</tt>.
    */
@@ -1069,7 +1069,7 @@ public class Partitioning extends Object {
         splitters.size() - 1,
         splitIndexes.elements());
   }
-  /**
+  /*
    * Equivalent to <tt>partition(list.elements(), from, to, splitters.elements(), 0,
    * splitters.size()-1, splitIndexes.elements())</tt>.
    */
@@ -1084,7 +1084,7 @@ public class Partitioning extends Object {
         splitters.size() - 1,
         splitIndexes.elements());
   }
-  /**
+  /*
    * Same as {@link #triplePartition(int[],int[],int[],int,int,int[],int,int,int[])} except that it
    * <i>synchronously</i> partitions <tt>double[]</tt> rather than <tt>int[]</tt> arrays.
    */
@@ -1184,7 +1184,7 @@ public class Partitioning extends Object {
           splitIndexes);
     }
   }
-  /**
+  /*
    * Same as {@link #triplePartition(int[],int[],int[],int,int,int)} except that it
    * <i>synchronously</i> partitions <tt>double[]</tt> rather than <tt>int[]</tt> arrays.
    */
@@ -1210,7 +1210,7 @@ public class Partitioning extends Object {
 
     return from - 1;
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int[],int,int,int[])} except that this method
    * <i>synchronously</i> partitions three arrays at the same time; all three arrays are partially
    * sorted according to the elements of the primary array. In other words, each time an element in
@@ -1326,7 +1326,7 @@ public class Partitioning extends Object {
           splitIndexes);
     }
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int)} except that this method <i>synchronously</i>
    * partitions three arrays at the same time; all three arrays are partially sorted according to
    * the elements of the primary array. In other words, each time an element in the primary array is

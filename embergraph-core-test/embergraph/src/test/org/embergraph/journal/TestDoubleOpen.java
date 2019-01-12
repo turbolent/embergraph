@@ -36,8 +36,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import org.apache.log4j.Logger;
 import org.embergraph.util.InnerCause;
 
-/**
- * Test the ability to rollback a commit.
+/*
+* Test the ability to rollback a commit.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -55,7 +55,7 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
     super(name);
   }
 
-  /**
+  /*
    * This unit test was written to track down an exception which is not always thrown for this
    * condition. When the exception is thrown, it is thrown on the first double-open request. If the
    * first double-open request succeeds, then the next 99 will also succeed. What we SHOULD be
@@ -210,7 +210,7 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Helper class attempts to open a {@link Journal} which should already be open in the main
    * thread.
    */
@@ -250,8 +250,8 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
 
         if ((cause = InnerCause.getInnerCause(t, OverlappingFileLockException.class)) != null) {
 
-          /*
-           * This is the expected exception per
+        /*
+       * This is the expected exception per
            * the javadoc.
            */
 
@@ -259,8 +259,8 @@ public class TestDoubleOpen extends ProxyTestCase<Journal> {
 
         } else if ((cause = InnerCause.getInnerCause(t, IOException.class)) != null) {
 
-          /*
-           * This is another exception which does
+        /*
+       * This is another exception which does
            * in fact occur some percentage of the
            * time.
            */

@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -45,8 +45,8 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.Future;
 
-/**
- * Utility class to compact a {@link Journal}. The {@link Journal} can not be open in another
+/*
+* Utility class to compact a {@link Journal}. The {@link Journal} can not be open in another
  * application.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -61,7 +61,7 @@ public class CompactJournalUtility {
     System.exit(1);
   }
 
-  /**
+  /*
    * Compacts the source journal, writing a new journal containing only the most current committed
    * view onto the specified output file.
    *

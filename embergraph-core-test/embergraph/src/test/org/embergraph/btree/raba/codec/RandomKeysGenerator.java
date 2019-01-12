@@ -28,8 +28,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Random B+Tree keys generator. The keys are variable length unsigned byte[]s of up to
+/*
+* Random B+Tree keys generator. The keys are variable length unsigned byte[]s of up to
  * <i>maxKeyLength</i> bytes. Random byte[]s are generated and then sorted into unsigned byte[]
  * order.
  *
@@ -52,7 +52,7 @@ public class RandomKeysGenerator implements IRabaGenerator {
   private final int maxKeys;
   private final int maxKeyLength;
 
-  /**
+  /*
    * @param r The random number generator.
    * @param maxKeys The branching factor (will be the capacity of the array).
    * @param maxKeyLength The maximum length of a key.
@@ -67,7 +67,7 @@ public class RandomKeysGenerator implements IRabaGenerator {
     this.maxKeyLength = maxKeyLength;
   }
 
-  /**
+  /*
    * Generate a set of N random distinct byte[] keys in sorted order using an unsigned byte[]
    * comparison function.
    *

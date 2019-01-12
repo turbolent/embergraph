@@ -10,8 +10,8 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
-/**
- * StudentT distribution (aka T-distribution); See the <A
+/*
+* StudentT distribution (aka T-distribution); See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node279.html#SECTION0002790000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/gloss.html#Student's t
  * Distribution"> animated definition</A>.
@@ -46,7 +46,7 @@ public class StudentT extends AbstractContinousDistribution {
   protected double TERM; // performance cache for pdf()
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static StudentT shared = new StudentT(1.0, makeDefaultGenerator());
-  /**
+  /*
    * Constructs a StudentT distribution. Example: freedom=1.0.
    *
    * @param freedom degrees of freedom.
@@ -64,7 +64,7 @@ public class StudentT extends AbstractContinousDistribution {
   public double nextDouble() {
     return nextDouble(this.freedom);
   }
-  /**
+  /*
    * Returns a random number from the distribution; bypasses the internal state.
    *
    * @param a degrees of freedom.
@@ -97,7 +97,7 @@ public class StudentT extends AbstractContinousDistribution {
   public double pdf(double x) {
     return this.TERM * Math.pow((1 + x * x / freedom), -(freedom + 1) * 0.5);
   }
-  /**
+  /*
    * Sets the distribution parameter.
    *
    * @param freedom degrees of freedom.
@@ -110,7 +110,7 @@ public class StudentT extends AbstractContinousDistribution {
     double val = Fun.logGamma((freedom + 1) / 2) - Fun.logGamma(freedom / 2);
     this.TERM = Math.exp(val) / Math.sqrt(Math.PI * freedom);
   }
-  /**
+  /*
    * Returns a random number from the distribution.
    *
    * @param freedom degrees of freedom.
@@ -125,7 +125,7 @@ public class StudentT extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + freedom + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

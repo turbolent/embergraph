@@ -28,8 +28,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Element-at-a-time filter with generics.
+/*
+* Element-at-a-time filter with generics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -68,14 +68,14 @@ public abstract class Filter<I extends Iterator<E>, E> implements IFilter<I, E, 
     return new FilteredIterator<I, E>(chunkSize, src, this);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the element should be visited.
    *
    * @param e The element.
    */
   protected abstract boolean isValid(E e);
 
-  /**
+  /*
    * Applies filter to the source iterator.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -100,7 +100,7 @@ public abstract class Filter<I extends Iterator<E>, E> implements IFilter<I, E, 
     /** <code>null</code> unless the source iterator is ordered. */
     private final IKeyOrder<E> keyOrder;
 
-    /**
+    /*
      * @param chunkSize The chunk size.
      * @param src The source iterator.
      * @param filter The filter.
@@ -153,7 +153,7 @@ public abstract class Filter<I extends Iterator<E>, E> implements IFilter<I, E, 
       return tmp;
     }
 
-    /**
+    /*
      * Not supported since the one-step lookahead means that we would have to delete the previous
      * element from the source.
      */
@@ -181,8 +181,8 @@ public abstract class Filter<I extends Iterator<E>, E> implements IFilter<I, E, 
 
         if (chunk == null) {
 
-          /*
-           * Dynamically instantiation an array of the same component type
+        /*
+       * Dynamically instantiation an array of the same component type
            * as the objects that we are visiting.
            */
 

@@ -39,8 +39,8 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-/**
- * Utility to load data into a graph.
+/*
+* Utility to load data into a graph.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -48,7 +48,7 @@ public abstract class GraphLoader {
 
   private static final Logger log = Logger.getLogger(GASUtil.class);
 
-  /**
+  /*
    * Return the best guess at the {@link RDFFormat} for a resource.
    *
    * <p>Note: This handles the .gz and .zip extensions.
@@ -86,13 +86,13 @@ public abstract class GraphLoader {
     }
   }
 
-  /**
+  /*
    * Return the {@link ValueFactory} that will be set on the {@link RDFParser} . This is necessary
    * for the RDR parser.
    */
   protected abstract ValueFactory getValueFactory();
 
-  /**
+  /*
    * Load a resource from the classpath, the file system, or a URI. GZ compressed files are
    * decompressed. Directories are processed recursively. The entries in a ZIP archive are
    * processed. Resources that are not recognized as some {@link RDFFormat} will be ignored unless
@@ -133,8 +133,8 @@ public abstract class GraphLoader {
 
           if (file.isDirectory()) {
 
-            /*
-             * Recursion.
+          /*
+       * Recursion.
              */
 
             final File[] a = file.listFiles();
@@ -302,8 +302,7 @@ public abstract class GraphLoader {
     public void handleStatement(final Statement stmt) throws RDFHandlerException {
 
       final Resource[] c =
-          (Resource[])
-              (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
+          (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
 
       addStatement(stmt, c);
     }

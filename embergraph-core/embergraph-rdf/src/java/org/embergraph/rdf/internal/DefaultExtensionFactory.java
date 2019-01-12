@@ -13,8 +13,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.service.geospatial.GeoSpatialDatatypeConfiguration;
 
-/**
- * Default {@link IExtensionFactory}. The following extensions are supported:
+/*
+* Default {@link IExtensionFactory}. The following extensions are supported:
  *
  * <dl>
  *   <dt>{@link DateTimeExtension}
@@ -78,7 +78,7 @@ public class DefaultExtensionFactory implements IExtensionFactory {
     _init(resolver, config, extensions);
   }
 
-  /**
+  /*
    * Give subclasses a chance to add extensions.
    *
    * @param resolver {@link IDatatypeURIResolver} from {@link #init(IDatatypeURIResolver,

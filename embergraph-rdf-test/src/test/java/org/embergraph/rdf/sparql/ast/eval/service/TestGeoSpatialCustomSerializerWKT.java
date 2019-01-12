@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite for custom serializer, testing basic feasibility for WKT literals (not
+/*
+* Data driven test suite for custom serializer, testing basic feasibility for WKT literals (not
  * strictly following the standard).
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -52,7 +52,7 @@ public class TestGeoSpatialCustomSerializerWKT extends AbstractDataDrivenSPARQLT
         .runTest();
   }
 
-  /**
+  /*
    * Simple rectangle query looking for WKT-style literal, with custom deserialization of
    * geo:locationValue.
    */
@@ -71,7 +71,7 @@ public class TestGeoSpatialCustomSerializerWKT extends AbstractDataDrivenSPARQLT
         .runTest();
   }
 
-  /**
+  /*
    * Simple circle query looking for WKT-style literal, with custom deserialization of
    * geo:locationValue.
    */
@@ -82,7 +82,7 @@ public class TestGeoSpatialCustomSerializerWKT extends AbstractDataDrivenSPARQLT
         .runTest();
   }
 
-  /**
+  /*
    * Simple circle query looking for WKT-style literal, with custom deserialization of full literal.
    */
   public void testWKTLiteral05() throws Exception {
@@ -100,7 +100,7 @@ public class TestGeoSpatialCustomSerializerWKT extends AbstractDataDrivenSPARQLT
         .runTest();
   }
 
-  /**
+  /*
    * Test passing in of WKT point as parameter of geo:spatialRectangleSouthWest and
    * geo:spatialRectangleNorthEast.
    */

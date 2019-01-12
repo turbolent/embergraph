@@ -35,8 +35,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.service.Split;
 import org.embergraph.service.ndx.pipeline.KVOList;
 
-/**
- * Synchronous RPC write on the TERM2ID index.
+/*
+* Synchronous RPC write on the TERM2ID index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -87,7 +87,7 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
     this.stats = stats;
   }
 
-  /**
+  /*
    * Unify the {@link EmbergraphValue}s with the TERM2ID index, setting the term identifiers (TIDs)
    * on those values as a side-effect.
    *
@@ -150,8 +150,8 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
       {
         final long _begin = System.currentTimeMillis();
 
-        /*
-         * Create a key buffer holding the sort keys. This does not
+      /*
+       * Create a key buffer holding the sort keys. This does not
          * allocate new storage for the sort keys, but rather aligns the
          * data structures for the call to splitKeys(). This also makes
          * a[] into a dense copy of the references in b[], but without
@@ -197,8 +197,8 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
 
         if (ndistinct == 0) {
 
-          /*
-           * Nothing to be written.
+        /*
+       * Nothing to be written.
            */
 
           return new KVO[0];
@@ -225,7 +225,7 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
     return KVO.dense(a, ndistinct);
   } // call
 
-  /**
+  /*
    * Class applies the term identifiers assigned by the {@link Term2IdWriteProc} to the {@link
    * EmbergraphValue} references in the {@link KVO} correlated with each {@link Split} of data
    * processed by that procedure.
@@ -243,13 +243,13 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
     private final KVO<EmbergraphValue>[] a;
     private final boolean readOnly;
 
-    /**
+    /*
      * @todo this could be the value returned by {@link #getResult()} which would make the API
      *     simpler.
      */
     private final AtomicInteger nunknown;
 
-    /**
+    /*
      * @param a A dense array of {@link KVO}s.
      * @param readOnly if readOnly was specified for the {@link Term2IdWriteProc}.
      * @param nunknown Incremented as a side effect for each terms that could not be resolved (iff
@@ -269,7 +269,7 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
       this.nunknown = nunknown;
     }
 
-    /**
+    /*
      * Copy the assigned / discovered term identifiers onto the corresponding elements of the
      * terms[].
      */
@@ -316,7 +316,7 @@ public class Term2IdWriteTask implements Callable<KVO<EmbergraphValue>[]> {
     }
   }
 
-  /**
+  /*
    * Generate the sort keys for the terms.
    *
    * @param keyBuilder The object used to generate the sort keys.

@@ -9,13 +9,13 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.list;
 
 import cern.colt.function.LongProcedure;
-/**
- * Resizable list holding <code>long</code> elements; implemented with arrays. First see the <a
+/*
+* Resizable list holding <code>long</code> elements; implemented with arrays. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  */
 public class LongArrayList extends AbstractLongList {
-  /**
+  /*
    * The array buffer into which the elements of the list are stored. The capacity of the list is
    * the length of this array buffer.
    *
@@ -26,7 +26,7 @@ public class LongArrayList extends AbstractLongList {
   public LongArrayList() {
     this(10);
   }
-  /**
+  /*
    * Constructs a list containing the specified elements. The initial size and capacity of the list
    * is the length of the array.
    *
@@ -39,7 +39,7 @@ public class LongArrayList extends AbstractLongList {
   public LongArrayList(long[] elements) {
     elements(elements);
   }
-  /**
+  /*
    * Constructs an empty list with the specified initial capacity.
    *
    * @param initialCapacity the number of elements the receiver can hold without auto-expanding
@@ -49,7 +49,7 @@ public class LongArrayList extends AbstractLongList {
     this(new long[initialCapacity]);
     setSizeRaw(0);
   }
-  /**
+  /*
    * Appends the specified element to the end of this list.
    *
    * @param element element to be appended to this list.
@@ -59,7 +59,7 @@ public class LongArrayList extends AbstractLongList {
     if (size == elements.length) ensureCapacity(size + 1);
     elements[size++] = element;
   }
-  /**
+  /*
    * Inserts the specified element before the specified position into the receiver. Shifts the
    * element currently at that position (if any) and any subsequent elements to the right.
    *
@@ -77,7 +77,7 @@ public class LongArrayList extends AbstractLongList {
     elements[index] = element;
     size++;
   }
-  /**
+  /*
    * Searches the receiver for the specified value using the binary search algorithm. The receiver
    * must <strong>must</strong> be sorted (as by the sort method) prior to making this call. If it
    * is not sorted, the results are undefined: in particular, the call may enter an infinite loop.
@@ -99,18 +99,18 @@ public class LongArrayList extends AbstractLongList {
   public int binarySearchFromTo(long key, int from, int to) {
     return cern.colt.Sorting.binarySearchFromTo(this.elements, key, from, to);
   }
-  /**
+  /*
    * Returns a deep copy of the receiver.
    *
    * @return a deep copy of the receiver.
    */
   public Object clone() {
     // overridden for performance only.
-    LongArrayList clone = new LongArrayList((long[]) elements.clone());
+    LongArrayList clone = new LongArrayList(elements.clone());
     clone.setSizeRaw(size);
     return clone;
   }
-  /**
+  /*
    * Returns a deep copy of the receiver; uses <code>clone()</code> and casts the result.
    *
    * @return a deep copy of the receiver.
@@ -118,7 +118,7 @@ public class LongArrayList extends AbstractLongList {
   public LongArrayList copy() {
     return (LongArrayList) clone();
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending numerical order.
    *
    * <p>The sorting algorithm is a count sort. This algorithm offers guaranteed
@@ -157,7 +157,7 @@ public class LongArrayList extends AbstractLongList {
       }
     }
   }
-  /**
+  /*
    * Returns the elements currently stored, including invalid elements between size and capacity, if
    * any.
    *
@@ -170,7 +170,7 @@ public class LongArrayList extends AbstractLongList {
   public long[] elements() {
     return elements;
   }
-  /**
+  /*
    * Sets the receiver's elements to be the specified array (not a copy of it).
    *
    * <p>The size and capacity of the list is the length of the array. <b>WARNING:</b> For efficiency
@@ -185,7 +185,7 @@ public class LongArrayList extends AbstractLongList {
     this.size = elements.length;
     return this;
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of elements without needing to
    * allocate new internal memory. If necessary, allocates new internal memory and increases the
    * capacity of the receiver.
@@ -195,7 +195,7 @@ public class LongArrayList extends AbstractLongList {
   public void ensureCapacity(int minCapacity) {
     elements = cern.colt.Arrays.ensureCapacity(elements, minCapacity);
   }
-  /**
+  /*
    * Compares the specified Object with the receiver. Returns true if and only if the specified
    * Object is also an ArrayList of the same type, both Lists have the same size, and all
    * corresponding pairs of elements in the two Lists are identical. In other words, two Lists are
@@ -219,7 +219,7 @@ public class LongArrayList extends AbstractLongList {
     }
     return true;
   }
-  /**
+  /*
    * Applies a procedure to each element of the receiver, if any. Starts at index 0, moving
    * rightwards.
    *
@@ -236,7 +236,7 @@ public class LongArrayList extends AbstractLongList {
     for (int i = 0; i < theSize; ) if (!procedure.apply(theElements[i++])) return false;
     return true;
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver.
    *
    * @param index index of element to return.
@@ -249,7 +249,7 @@ public class LongArrayList extends AbstractLongList {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     return elements[index];
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver; <b>WARNING:</b> Does not check
    * preconditions. Provided with invalid parameters this method may return invalid elements without
    * throwing any exception! <b>You should only use this method when you are absolutely sure that
@@ -261,7 +261,7 @@ public class LongArrayList extends AbstractLongList {
   public long getQuick(int index) {
     return elements[index];
   }
-  /**
+  /*
    * Returns the index of the first occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element. Searches between <code>from</code>, inclusive and
    * <code>to</code>, inclusive. Tests for identity.
@@ -287,7 +287,7 @@ public class LongArrayList extends AbstractLongList {
     }
     return -1; // not found
   }
-  /**
+  /*
    * Returns the index of the last occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element. Searches beginning at <code>to</code>, inclusive
    * until <code>from</code>, inclusive. Tests for identity.
@@ -313,7 +313,7 @@ public class LongArrayList extends AbstractLongList {
     }
     return -1; // not found
   }
-  /**
+  /*
    * Returns a new list of the part of the receiver between <code>from</code>, inclusive, and <code>
    * to</code>, inclusive.
    *
@@ -332,7 +332,7 @@ public class LongArrayList extends AbstractLongList {
     System.arraycopy(elements, from, part, 0, to - from + 1);
     return new LongArrayList(part);
   }
-  /**
+  /*
    * Removes from the receiver all elements that are contained in the specified list. Tests for
    * identity.
    *
@@ -383,7 +383,7 @@ public class LongArrayList extends AbstractLongList {
     setSize(j);
     return modified;
   }
-  /**
+  /*
    * Replaces a number of elements in the receiver with the same number of elements of another list.
    * Replaces elements in the receiver, between <code>from</code> (inclusive) and <code>to</code>
    * (inclusive), with elements of <code>other</code>, starting from <code>otherFrom</code>
@@ -408,7 +408,7 @@ public class LongArrayList extends AbstractLongList {
       System.arraycopy(((LongArrayList) other).elements, otherFrom, elements, from, length);
     }
   }
-  /**
+  /*
    * Retains (keeps) only the elements in the receiver that are contained in the specified other
    * list. In other words, removes from the receiver all of its elements that are not contained in
    * the specified other list.
@@ -457,7 +457,7 @@ public class LongArrayList extends AbstractLongList {
     setSize(j);
     return modified;
   }
-  /**
+  /*
    * Reverses the elements of the receiver. Last becomes first, second last becomes second first,
    * and so on.
    */
@@ -474,7 +474,7 @@ public class LongArrayList extends AbstractLongList {
       theElements[j--] = tmp;
     }
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element.
    *
    * @param index index of element to replace.
@@ -488,7 +488,7 @@ public class LongArrayList extends AbstractLongList {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     elements[index] = element;
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element;
    * <b>WARNING:</b> Does not check preconditions. Provided with invalid parameters this method may
    * access invalid indexes without throwing any exception! <b>You should only use this method when
@@ -501,7 +501,7 @@ public class LongArrayList extends AbstractLongList {
   public void setQuick(int index, long element) {
     elements[index] = element;
   }
-  /**
+  /*
    * Randomly permutes the part of the receiver between <code>from</code> (inclusive) and <code>to
    * </code> (inclusive).
    *
@@ -529,7 +529,7 @@ public class LongArrayList extends AbstractLongList {
       theElements[i] = tmpElement;
     }
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending order.
    *
    * <p>The sorting algorithm is dynamically chosen according to the characteristics of the data
@@ -582,7 +582,7 @@ public class LongArrayList extends AbstractLongList {
       quickSortFromTo(from, to);
     }
   }
-  /**
+  /*
    * Trims the capacity of the receiver to be the receiver's current size. Releases any superfluous
    * internal memory. An application can use this operation to minimize the storage of the receiver.
    */

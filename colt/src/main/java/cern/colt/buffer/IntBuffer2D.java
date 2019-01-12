@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.buffer;
 
 import cern.colt.list.IntArrayList;
-/**
- * Fixed sized (non resizable) streaming buffer connected to a target <tt>IntBuffer2DConsumer</tt>
+/*
+* Fixed sized (non resizable) streaming buffer connected to a target <tt>IntBuffer2DConsumer</tt>
  * to which data is automatically flushed upon buffer overflow.
  *
  * @author wolfgang.hoschek@cern.ch
@@ -26,7 +26,7 @@ public class IntBuffer2D extends cern.colt.PersistentObject implements IntBuffer
   protected IntArrayList yList;
   protected int capacity;
   protected int size;
-  /**
+  /*
    * Constructs and returns a new buffer with the given target.
    *
    * @param target the target to flush to.
@@ -42,7 +42,7 @@ public class IntBuffer2D extends cern.colt.PersistentObject implements IntBuffer
     this.yList = new IntArrayList(yElements);
     this.size = 0;
   }
-  /**
+  /*
    * Adds the specified point (x,y) to the receiver.
    *
    * @param x the x-coordinate of the point to add.
@@ -53,7 +53,7 @@ public class IntBuffer2D extends cern.colt.PersistentObject implements IntBuffer
     this.xElements[this.size] = x;
     this.yElements[this.size++] = y;
   }
-  /**
+  /*
    * Adds all specified points (x,y) to the receiver.
    *
    * @param x the x-coordinates of the points to add.
@@ -64,14 +64,14 @@ public class IntBuffer2D extends cern.colt.PersistentObject implements IntBuffer
     if (this.size + listSize >= this.capacity) flush();
     this.target.addAllOf(x, y);
   }
-  /**
+  /*
    * Sets the receiver's size to zero. In other words, forgets about any internally buffered
    * elements.
    */
   public void clear() {
     this.size = 0;
   }
-  /**
+  /*
    * Adds all internally buffered points to the receiver's target, then resets the current buffer
    * size to zero.
    */

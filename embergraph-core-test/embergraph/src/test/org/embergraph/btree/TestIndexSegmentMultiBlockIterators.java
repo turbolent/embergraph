@@ -28,8 +28,8 @@ import org.embergraph.btree.IndexSegmentBuilder.BuildEnum;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for {@link IndexSegmentMultiBlockIterator}.
+/*
+* Test suite for {@link IndexSegmentMultiBlockIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -160,7 +160,7 @@ public class TestIndexSegmentMultiBlockIterators extends AbstractIndexSegmentTes
     }
   }
 
-  /**
+  /*
    * Test build around an {@link IndexSegment} having a branching factor of THREE (3) and three
    * leaves, which are fully populated.
    */
@@ -269,7 +269,7 @@ public class TestIndexSegmentMultiBlockIterators extends AbstractIndexSegmentTes
     }
   }
 
-  /**
+  /*
    * Unit test builds an empty index segment and then verifies the behavior of the {@link
    * IndexSegmentMultiBlockIterator}.
    *
@@ -306,7 +306,7 @@ public class TestIndexSegmentMultiBlockIterators extends AbstractIndexSegmentTes
     }
   }
 
-  /**
+  /*
    * Test build around an {@link IndexSegment} having a default branching factor and a bunch of
    * leaves totally more than 1M in size on the disk.
    */
@@ -335,8 +335,8 @@ public class TestIndexSegmentMultiBlockIterators extends AbstractIndexSegmentTes
 
       if (seg.getStore().getCheckpoint().maxNodeOrLeafLength > pool.getBufferCapacity()) {
 
-        /*
-         * The individual leaves must be less than the buffer size in
+      /*
+       * The individual leaves must be less than the buffer size in
          * order for us to read at least one leaf per block.
          */
 
@@ -350,8 +350,8 @@ public class TestIndexSegmentMultiBlockIterators extends AbstractIndexSegmentTes
 
       if (nblocks < 2) {
 
-        /*
-         * The leaves extent needs to be larger than the buffer size in
+      /*
+       * The leaves extent needs to be larger than the buffer size in
          * order for us to test with more than one block read from the
          * backing file.
          */
@@ -371,7 +371,7 @@ public class TestIndexSegmentMultiBlockIterators extends AbstractIndexSegmentTes
     }
   }
 
-  /**
+  /*
    * Do a bunch of random iterator scans. Each scan will start at a random key and run to a random
    * key.
    *

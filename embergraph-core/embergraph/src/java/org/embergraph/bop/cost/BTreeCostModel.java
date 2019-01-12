@@ -26,8 +26,8 @@ import org.embergraph.btree.AbstractBTree;
 import org.embergraph.btree.BTree;
 import org.embergraph.journal.Journal;
 
-/**
- * A cost model for a range scan on a {@link BTree} backed by a {@link Journal}. The on disk
+/*
+* A cost model for a range scan on a {@link BTree} backed by a {@link Journal}. The on disk
  * representation of the {@link BTree} does not reflect the index order so a range scan on the
  * {@link BTree} is basically turned into one random seek per node or leaf visited.
  *
@@ -43,7 +43,7 @@ import org.embergraph.journal.Journal;
  */
 public class BTreeCostModel implements Serializable {
 
-  /**
+  /*
    * @todo should be either Externalizable and explicitly managed versioning or Serializable with a
    *     public interface for versioning.
    */
@@ -51,7 +51,7 @@ public class BTreeCostModel implements Serializable {
 
   private final DiskCostModel diskCostModel;
 
-  /**
+  /*
    * @param diskCostModel The cost model for the disk on which the {@link Journal} backing the
    *     {@link BTree} is located.
    */
@@ -62,7 +62,7 @@ public class BTreeCostModel implements Serializable {
     this.diskCostModel = diskCostModel;
   }
 
-  /**
+  /*
    * Compute the height of the B+Tree from its entry count and branching factor (this can also be
    * used to find the minimum height at which there could exist a given range count).
    */
@@ -79,7 +79,7 @@ public class BTreeCostModel implements Serializable {
     return (int) Math.ceil(h);
   }
 
-  /**
+  /*
    * Return the estimated cost of a range scan of the index.
    *
    * @param rangeCount The range count for the scan.
@@ -119,7 +119,7 @@ public class BTreeCostModel implements Serializable {
     return estimatedCost;
   }
 
-  /**
+  /*
    * Prints out some tables based on different disk cost models, branching factors, and range scans.
    * To validate this, you can do a scatter plot of the rangeCount and cost columns and observe the
    * log linear curve of the B+Tree.
@@ -162,8 +162,8 @@ public class BTreeCostModel implements Serializable {
             final int estimatedHeight = estimateHeight(rangeCount, m);
 
             if (estimatedHeight > h) {
-              /*
-               * Skip range counts which are too large for the
+            /*
+       * Skip range counts which are too large for the
                * current B+Tree height.
                */
               break;

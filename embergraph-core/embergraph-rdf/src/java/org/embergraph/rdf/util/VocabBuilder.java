@@ -50,8 +50,8 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-/**
- * Utility class scans some RDF data, builds up a distribution over the distinct predicates, and
+/*
+* Utility class scans some RDF data, builds up a distribution over the distinct predicates, and
  * generates a {@link VocabularyDecl} for the source data. This can be used to optimize the data
  * density over source data sources.
  *
@@ -207,13 +207,13 @@ public class VocabBuilder {
 
         if (o instanceof URI) {
 
-          UriFrequency typeFrequency = types.get((URI) o);
+          UriFrequency typeFrequency = types.get(o);
 
           if (typeFrequency == null) {
 
             types.put((URI) o, typeFrequency = new UriFrequency((URI) o));
 
-            if (log.isDebugEnabled()) log.debug("New " + (URI) o + " : total=" + types.size());
+            if (log.isDebugEnabled()) log.debug("New " + o + " : total=" + types.size());
           }
 
           typeFrequency.cnt++;
@@ -222,7 +222,7 @@ public class VocabBuilder {
     }
   }
 
-  /**
+  /*
    * @param args The file(s) to read.
    * @throws IOException
    */
@@ -380,7 +380,7 @@ public class VocabBuilder {
     }
   }
 
-  /**
+  /*
    * Note: The filter is chosen to select RDF data files and to allow the data files to use owl,
    * ntriples, etc as their file extension. gzip and zip extensions are also supported.
    */
@@ -391,13 +391,8 @@ public class VocabBuilder {
 
           if (new File(dir, name).isDirectory()) {
 
-            if (dir.isHidden()) {
-
-              // Skip hidden files.
-              return false;
-            }
-
-            //                if(dir.getName().equals(".svn")) {
+            // Skip hidden files.
+            return !dir.isHidden();//                if(dir.getName().equals(".svn")) {
             //
             //                    // Skip .svn files.
             //                    return false;
@@ -405,7 +400,6 @@ public class VocabBuilder {
             //                }
 
             // visit subdirectories.
-            return true;
           }
 
           // if recognizable as RDF.
@@ -423,7 +417,7 @@ public class VocabBuilder {
         }
       };
 
-  /**
+  /*
    * Force the load of the various integration/extension classes.
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/439">Class loader problems </a>

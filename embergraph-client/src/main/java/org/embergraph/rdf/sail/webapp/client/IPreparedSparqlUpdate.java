@@ -26,7 +26,7 @@ public interface IPreparedSparqlUpdate extends IPreparedOperation {
 
   void evaluate() throws Exception;
 
-  /**
+  /*
    * Evaluate and notify the specified listener when complete.
    *
    * @param listener The query listener.

@@ -7,8 +7,8 @@ import java.io.ObjectOutput;
 import java.util.UUID;
 import org.embergraph.io.LongPacker;
 
-/**
- * A message sent to the {@link IQueryClient} when an operator is done executing for some chunk of
+/*
+* A message sent to the {@link IQueryClient} when an operator is done executing for some chunk of
  * inputs.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -31,7 +31,7 @@ public class HaltOpMessage implements Externalizable, IHaltOpMessage {
   /** De-serialization constructor. */
   public HaltOpMessage() {}
 
-  /**
+  /*
    * @param queryId The query identifier.
    * @param bopId The operator whose execution phase has terminated for a specific index partition
    *     and input chunk.

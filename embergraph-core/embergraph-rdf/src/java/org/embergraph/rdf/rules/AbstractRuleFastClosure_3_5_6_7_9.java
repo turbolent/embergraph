@@ -52,8 +52,8 @@ import org.embergraph.relation.rule.eval.IStepTask;
 import org.embergraph.relation.rule.eval.RuleStats;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * Rule used in steps 3, 5, 6, 7, and 9 of the fast forward closure program.
+/*
+* Rule used in steps 3, 5, 6, 7, and 9 of the fast forward closure program.
  *
  * <pre>
  *    (?x, {P}, ?y) -&gt; (?x, propertyId, ?y)
@@ -86,7 +86,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
   // private final Var x, y, SetP;
 
-  /**
+  /*
    * @param propertyId
    * @param taskFactory An implementation returning a concrete instance of {@link
    *     FastClosureRuleTask}.
@@ -125,7 +125,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
   }
 
-  /**
+  /*
    * Custom rule execution task. You must implement {@link #getSet()}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -152,7 +152,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
     /** @see #getView() */
     private transient IRelation<ISPO> view = null;
 
-    /**
+    /*
      * <code>(?x, {P}, ?y) -> (?x, propertyId, ?y)</code> Note: Both the database and the (optional)
      * focusStore relation names MUST be declared for these rules. While the rule only declares a
      * single tail predicate, there is a "hidden" query based on the [database + focusStore] fused
@@ -261,8 +261,8 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
         if (IVUtility.equals(p, propertyId.get())) {
 
-          /*
-           * The rule refuses to consider triple patterns where the
+        /*
+       * The rule refuses to consider triple patterns where the
            * predicate for the subquery is the predicate for the
            * generated entailments since the support would then entail
            * itself.
@@ -304,8 +304,8 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
             for (ISPO spo : chunk) {
 
-              /*
-               * Note: since P includes rdfs:subPropertyOf (as
+            /*
+       * Note: since P includes rdfs:subPropertyOf (as
                * well as all of the sub-properties of
                * rdfs:subPropertyOf) there are going to be some
                * axioms in here that we really do not need to
@@ -347,7 +347,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
       return stats;
     }
 
-    /**
+    /*
      * Convert a {@link Set} of term identifiers into a sorted array of term identifiers.
      *
      * <p>Note: When issuing multiple queries against the database, it is generally faster to issue
@@ -373,7 +373,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
       return a;
     }
 
-    /**
+    /*
      * Return the {@link IRelation} (or {@link RelationFusedView}) used by the {@link #getSet()}
      * impls for their {@link IAccessPath}s.
      */
@@ -381,8 +381,8 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
       if (view == null) {
 
-        /*
-         * Setup the [database] or [database + focusStore] view used to
+      /*
+       * Setup the [database] or [database + focusStore] view used to
          * compute the closure.
          */
         final IResourceLocator resourceLocator = joinNexus.getIndexManager().getResourceLocator();
@@ -416,7 +416,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
       return view;
     }
 
-    /**
+    /*
      * Return the set of term identifiers that will be processed by the rule. When the closure is
      * being computed for truth maintenance the implementation MUST read from the
      * [database+focusStore] fused view. Otherwise it reads from the database.
@@ -428,7 +428,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
      */
     protected abstract Set<IV> getSet();
 
-    /**
+    /*
      * Delegates to {@link SubPropertyClosureTask}
      *
      * @return The closure.
@@ -438,7 +438,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
       return new SubPropertyClosureTask(getView(), rdfsSubPropertyOf).call();
     }
 
-    /**
+    /*
      * Delegates to {@link SubPropertiesOfClosureTask}
      *
      * @param propertyId The property of interest.
@@ -450,7 +450,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
     }
   } // FastClosureRuleTask
 
-  /**
+  /*
    * Computes the set of possible sub properties of rdfs:subPropertyOf (<code>P</code>). This is
    * used by step <code>2</code> in {@link RDFSVocabulary#fastForwardClosure()}.
    *
@@ -480,7 +480,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
       return getSubProperties();
     }
 
-    /**
+    /*
      * Compute the closure.
      *
      * @return A set containing the term identifiers for the members of P.
@@ -508,8 +508,8 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
 
           tmp.clear();
 
-          /*
-           * query := (?x, p, ?y ) for each p in P, filter ?y element
+        /*
+       * query := (?x, p, ?y ) for each p in P, filter ?y element
            * of P.
            */
 
@@ -581,7 +581,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
     }
   }
 
-  /**
+  /*
    * Query the <i>database</i> for the sub properties of a given property.
    *
    * <p>Pre-condition: The closure of <code>rdfs:subPropertyOf</code> has been asserted on the
@@ -622,7 +622,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
       return getSubPropertiesOf(p);
     }
 
-    /**
+    /*
      * Compute the closure.
      *
      * @param p The property of interest.

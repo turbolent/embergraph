@@ -33,8 +33,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
-/**
- * {@link IBindingSet} backed by a {@link LinkedHashMap}.
+/*
+* {@link IBindingSet} backed by a {@link LinkedHashMap}.
  *
  * <p>Note: A {@link LinkedHashMap} provides a fast iterator, which we use a bunch. However, {@link
  * IBindingSet}s are inherently unordered collections of bindings so the order preservation aspect
@@ -47,14 +47,14 @@ public class HashBindingSet implements IBindingSet {
 
   private static final long serialVersionUID = -2989802566387532422L;
 
-  //	/**
-  //  * Note: A {@link LinkedHashMap} provides a fast iterator, which we use a
+  //	/*
+//  * Note: A {@link LinkedHashMap} provides a fast iterator, which we use a
   //  * bunch.
   //  */
   // private final LinkedHashMap<IVariable, IConstant> map;
 
-  //	/**
-  //	 * The stack of symbol tables. Each symbol table is a mapping from an
+  //	/*
+//	 * The stack of symbol tables. Each symbol table is a mapping from an
   //	 * {@link IVariable} onto its non-<code>null</code> bound {@link IConstant}.
   //	 * The stack is initialized with an empty symbol table. Symbol tables may be
   //	 * pushed onto the stack or popped off of the stack, but the stack MAY NOT
@@ -215,7 +215,7 @@ public class HashBindingSet implements IBindingSet {
     current = new LinkedHashMap<IVariable, IConstant>();
   }
 
-  /**
+  /*
    * Copy constructor (used by clone, copy).
    *
    * @param src
@@ -253,7 +253,7 @@ public class HashBindingSet implements IBindingSet {
     current = contents;
   }
 
-  /**
+  /*
    * Return a copy of the source list.
    *
    * @param src The source list.
@@ -297,7 +297,7 @@ public class HashBindingSet implements IBindingSet {
     return dst;
   }
 
-  /**
+  /*
    * Return a copy of the source list minus entries assigning error values (Constant.errorValue() or
    * its copies). .
    *
@@ -348,7 +348,7 @@ public class HashBindingSet implements IBindingSet {
     return dst;
   } // copyMinusErrors(..)
 
-  /**
+  /*
    * Package private constructor used by the unit tests.
    *
    * @param src
@@ -367,7 +367,7 @@ public class HashBindingSet implements IBindingSet {
     }
   }
 
-  /**
+  /*
    * Package private constructor used by the unit tests.
    *
    * @param vars

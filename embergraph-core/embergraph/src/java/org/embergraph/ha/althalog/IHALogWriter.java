@@ -23,8 +23,8 @@ import java.nio.ByteBuffer;
 import org.embergraph.ha.msg.IHAWriteMessage;
 import org.embergraph.journal.IRootBlockView;
 
-/**
- * A constrained interface to a new HALogFile to allow writing.
+/*
+* A constrained interface to a new HALogFile to allow writing.
  *
  * <p>In order to write to an HALogFile, a writer must be requested. The implementation is private
  * to the HALogFile.
@@ -34,38 +34,38 @@ import org.embergraph.journal.IRootBlockView;
 public interface IHALogWriter {
 
   /** @return the next expected write sequence. */
-  public long getSequence();
+  long getSequence();
 
   /** @return a String showing the current state of the writer */
-  public String toString();
+  String toString();
 
-  /**
+  /*
    * Writes the message to the file and the associated data if the backing store is not a WORM.
    *
    * @param msg
    * @param data
    * @throws IOException
    */
-  public void write(IHAWriteMessage msg, ByteBuffer data) throws IOException;
+  void write(IHAWriteMessage msg, ByteBuffer data) throws IOException;
 
-  /**
+  /*
    * Writes the closing rootblock to the log file and closes the file to further writes.
    *
    * @param rbv is the rootblock associated with the commit point
    * @throws IOException
    */
-  public void close(IRootBlockView rbv) throws IOException;
+  void close(IRootBlockView rbv) throws IOException;
 
-  /**
+  /*
    * Close the file (does not flush).
    *
    * @throws IOException
    */
-  public void close() throws IOException;
+  void close() throws IOException;
 
-  /**
+  /*
    * The commit counter for the committed state BEFORE the write set contained in the file is
    * applied.
    */
-  public long getCommitCounter();
+  long getCommitCounter();
 }

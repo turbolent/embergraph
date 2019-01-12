@@ -34,8 +34,8 @@ import org.embergraph.journal.AbstractJournal;
 import org.embergraph.journal.Journal;
 import org.embergraph.util.Bytes;
 
-/**
- * Atomic write of a single block for a file version.
+/*
+* Atomic write of a single block for a file version.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -66,7 +66,7 @@ public class AtomicBlockWriteProc implements ISimpleIndexProcedure<Object>, Exte
     return false;
   }
 
-  /**
+  /*
    * @param id The file identifier.
    * @param version The file version.
    * @param block The block identifier.
@@ -93,7 +93,7 @@ public class AtomicBlockWriteProc implements ISimpleIndexProcedure<Object>, Exte
     this.b = b;
   }
 
-  /**
+  /*
    * This procedure runs on the unisolated index. The raw data is written directly onto the {@link
    * Journal} and the index is added/updated using the given file, version and block and the address
    * of the block's data on the {@link Journal}.

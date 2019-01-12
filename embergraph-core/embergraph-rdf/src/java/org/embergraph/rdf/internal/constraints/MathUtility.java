@@ -274,7 +274,7 @@ public class MathUtility implements IMathOpHandler {
   //
   //    }
 
-  /**
+  /*
    * The XPath numeric functions: abs, ceiling, floor, and round.
    *
    * @param iv1 The operand.
@@ -428,8 +428,8 @@ public class MathUtility implements IMathOpHandler {
       case MULTIPLY:
         return new XSDDecimalIV(left.multiply(right));
       case DIVIDE:
-        /*
-         * Note: Change per mroycsi.  Reverts to a half-rounding mode iff
+      /*
+       * Note: Change per mroycsi.  Reverts to a half-rounding mode iff
          * an exact quotient can not be represented.
          */
         try {

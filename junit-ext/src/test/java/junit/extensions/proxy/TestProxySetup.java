@@ -29,8 +29,8 @@ import junit.framework.TestResult;
 import junit.framework.TestSuite;
 import org.apache.log4j.Logger;
 
-/**
- * The tests in this class are responsible for verifying some assumptions about the default behavior
+/*
+* The tests in this class are responsible for verifying some assumptions about the default behavior
  * of junit when creating hierarchical tests from classes and suites and verifying the correct
  * behavior of the {@link ProxyTestSuite}, which must flowdown the delegate to all tests (added to
  * itself or to any nested test suite) that implement the {@link IProxyTest}interface.
@@ -57,7 +57,7 @@ public class TestProxySetup extends TestCase {
   public void test_ctor() {
 
     // local fixtures.
-    final class MyTestCase extends TestCase {};
+    final class MyTestCase extends TestCase {}
     final Test delegate = new TestCase() {};
     final Class testClass = MyTestCase.class;
     final String name = "name";
@@ -111,7 +111,7 @@ public class TestProxySetup extends TestCase {
 
     // ctor(Test delegate,Class testClass,String name): name is _optional_
     try {
-      new ProxyTestSuite(null, null, (String) null);
+      new ProxyTestSuite(null, null, null);
       assertFalse("Expected exception", true);
     } catch (IllegalArgumentException ex) {
       System.err.println("Ignoring expected exception: " + ex);
@@ -138,7 +138,7 @@ public class TestProxySetup extends TestCase {
     new ProxyTestSuite(delegate, testClass, null);
   }
 
-  /**
+  /*
    * Verifies expected behavior for both {@link TestSuite} and {@link ProxyTestSuite} when invoking
    * <code>addTestSuite(Class testClass)</code>.
    */
@@ -188,7 +188,7 @@ public class TestProxySetup extends TestCase {
     }
   }
 
-  /**
+  /*
    * Creates a nested proxy test suite and runs it. The tests in the test suite are instances of
    * {@link MyProxyTest}. The delegate is an instance of {@link MyDelegateTest}. The proxy test
    * method {@link MyProxyTest#testNothing()}increments a counter on the delegate each time the test

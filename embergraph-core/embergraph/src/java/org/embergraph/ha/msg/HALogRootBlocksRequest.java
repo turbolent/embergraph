@@ -24,7 +24,7 @@ public class HALogRootBlocksRequest implements IHALogRootBlocksRequest {
 
   private final long commitCounter;
 
-  /**
+  /*
    * @param commitCounter The commit counter used to identify the desired commit point (the commit
    *     counter of the closing root block).
    */

@@ -9,8 +9,8 @@ import org.embergraph.relation.accesspath.UnsynchronizedArrayBuffer;
 import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * An object used by a {@link JoinTask} to write on another {@link JoinTask} providing a sink for a
+/*
+* An object used by a {@link JoinTask} to write on another {@link JoinTask} providing a sink for a
  * specific index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -29,7 +29,7 @@ public class JoinTaskSink {
   /** The future may be used to cancel or interrupt the downstream {@link JoinTask}. */
   private Future future;
 
-  /**
+  /*
    * The {@link Future} of the downstream {@link JoinTask}. This may be used to cancel or interrupt
    * that {@link JoinTask}.
    */
@@ -57,14 +57,14 @@ public class JoinTaskSink {
   /** The index partition that is served by the sink. */
   final PartitionLocator locator;
 
-  /**
+  /*
    * The individual {@link IBindingSet}s are written onto this unsynchronized buffer. The buffer
    * gathers those {@link IBindingSet}s into chunks and writes those chunks onto the {@link
    * #blockingBuffer}.
    */
   final UnsynchronizedArrayBuffer<IBindingSet> unsyncBuffer;
 
-  /**
+  /*
    * This buffer provides {@link IBindingSet} chunks to the downstream {@link JoinTask}. That join
    * task reads those chunks from a proxy for the {@link BlockingBuffer#iterator()}.
    */
@@ -79,7 +79,7 @@ public class JoinTaskSink {
         + "}";
   }
 
-  /**
+  /*
    * Setups up the local buffers for a downstream {@link JoinTask}.
    *
    * <p>Note: The caller MUST create the task using a factory pattern on the target data service and

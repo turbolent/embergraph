@@ -32,8 +32,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.openrdf.model.URI;
 
-/**
- * Unit tests for {@link XSDIntegerIV}.
+/*
+* Unit tests for {@link XSDIntegerIV}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$

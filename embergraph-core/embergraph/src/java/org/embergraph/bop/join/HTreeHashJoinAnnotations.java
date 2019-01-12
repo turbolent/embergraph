@@ -27,8 +27,8 @@ import org.embergraph.htree.HTree;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Annotations in common for {@link HTree} based hash joins.
+/*
+* Annotations in common for {@link HTree} based hash joins.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -36,7 +36,7 @@ import org.embergraph.rdf.model.EmbergraphValue;
 public interface HTreeHashJoinAnnotations
     extends HTreeAnnotations, HashJoinAnnotations, JoinAnnotations {
 
-  /**
+  /*
    * The namespace of the lexicon relation.
    *
    * <p>Note: This is necessary for the ivCache index used to optimize the serialized representation

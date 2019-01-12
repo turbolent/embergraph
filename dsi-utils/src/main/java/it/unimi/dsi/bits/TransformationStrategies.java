@@ -29,8 +29,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * A class providing static methods and objects that do useful things with transformation
+/*
+* A class providing static methods and objects that do useful things with transformation
  * strategies.
  *
  * @see TransformationStrategy
@@ -67,7 +67,7 @@ public class TransformationStrategies {
   private static final TransformationStrategy<CharSequence> UTF16 =
       new Utf16TransformationStrategy(false);
 
-  /**
+  /*
    * A trivial transformation from strings to bit vectors that concatenates the bits of the UTF-16
    * representation.
    *
@@ -83,7 +83,7 @@ public class TransformationStrategies {
   private static final TransformationStrategy<CharSequence> PREFIX_FREE_UTF16 =
       new Utf16TransformationStrategy(true);
 
-  /**
+  /*
    * A trivial transformation from strings to bit vectors that concatenates the bits of the UTF-16
    * representation and completes the representation with an ASCII NUL to guarantee lexicographical
    * ordering and prefix-freeness.
@@ -105,7 +105,7 @@ public class TransformationStrategies {
     /** Whether we should guarantee prefix-freeness by adding 0 to the end of each string. */
     private final boolean prefixFree;
 
-    /**
+    /*
      * Creates a UTF16 transformation strategy. The strategy will map a string to its natural UTF16
      * bit sequence.
      *
@@ -262,7 +262,7 @@ public class TransformationStrategies {
   private static final TransformationStrategy<CharSequence> ISO =
       new ISOTransformationStrategy(false);
 
-  /**
+  /*
    * A trivial transformation from strings to bit vectors that concatenates the lower eight bits of
    * the UTF-16 representation.
    *
@@ -281,7 +281,7 @@ public class TransformationStrategies {
   private static final TransformationStrategy<CharSequence> PREFIX_FREE_ISO =
       new ISOTransformationStrategy(true);
 
-  /**
+  /*
    * A trivial transformation from strings to bit vectors that concatenates the bits of the UTF-16
    * representation and completes the representation with an ASCII NUL to guarantee lexicographical
    * ordering and prefix-freeness.
@@ -305,7 +305,7 @@ public class TransformationStrategies {
     /** Whether we should guarantee prefix-freeness by adding 0 to the end of each string. */
     private final boolean prefixFree;
 
-    /**
+    /*
      * Creates an ISO transformation strategy. The strategy will map a string to the lowest eight
      * bits of its natural UTF16 bit sequence.
      *
@@ -487,7 +487,7 @@ public class TransformationStrategies {
     }
   }
 
-  /**
+  /*
    * Wraps a given iterator, returning an iterator that emits {@linkplain BitVector bit vectors}.
    *
    * @param iterator an iterator.
@@ -521,7 +521,7 @@ public class TransformationStrategies {
     }
   }
 
-  /**
+  /*
    * Wraps a given iterable, returning an iterable that contains {@linkplain BitVector bit vectors}.
    *
    * @param iterable an iterable.
@@ -558,7 +558,7 @@ public class TransformationStrategies {
     }
   }
 
-  /**
+  /*
    * Wraps a given list, returning a list that contains {@linkplain BitVector bit vectors}.
    *
    * @param list a list.
@@ -643,7 +643,7 @@ public class TransformationStrategies {
     }
   }
 
-  /**
+  /*
    * A transformation from bit vectors to bit vectors that guarantees that its results are prefix
    * free.
    *

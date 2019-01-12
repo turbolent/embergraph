@@ -30,8 +30,8 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.io.LongPacker;
 import org.embergraph.io.SliceInputStream;
 
-/**
- * Utility class for compressed unicode encode/decode.
+/*
+* Utility class for compressed unicode encode/decode.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,7 +48,7 @@ public class UnicodeHelper {
     this.uc = uc;
   }
 
-  /**
+  /*
    * Encode the {@link String} onto the {@link OutputStream}. The temporary buffer is used to
    * perform the encoding. The byte length of the encoding is written out using a packed long
    * integer format followed by the coded bytes. This method is capable of writing out very long
@@ -80,7 +80,7 @@ public class UnicodeHelper {
     return nencoded;
   }
 
-  /**
+  /*
    * Encode a Unicode string.
    *
    * @param s The string.
@@ -115,7 +115,7 @@ public class UnicodeHelper {
     }
   }
 
-  /**
+  /*
    * Decode a {@link String} from the input stream. The result is appended into the caller's buffer.
    * The caller is responsible for resetting the buffer as necessary.
    *
@@ -145,7 +145,7 @@ public class UnicodeHelper {
     return ndecoded;
   }
 
-  /**
+  /*
    * Decode a {@link String} from the input stream.
    *
    * @param in The input stream.

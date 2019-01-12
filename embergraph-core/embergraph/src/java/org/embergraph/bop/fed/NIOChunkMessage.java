@@ -44,8 +44,8 @@ import org.embergraph.rdf.internal.encoder.IVSolutionSetEncoder;
 import org.embergraph.service.ManagedResourceService;
 import org.embergraph.service.ResourceService;
 
-/**
- * An {@link IChunkMessage} where the payload is made available to the receiving service using an
+/*
+* An {@link IChunkMessage} where the payload is made available to the receiving service using an
  * NIO transfer against the sender's {@link ResourceService}. This is suitable for moving large
  * blocks of data during query evaluation.
  *
@@ -76,13 +76,13 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
 
   private final int nbytes;
 
-  /**
+  /*
    * Note: Even when we send one message per chunk, we can still have a list of {@link IAllocation}s
    * if the chunk did not get formatted onto a single {@link IAllocation}.
    */
   private final A[] allocations;
 
-  /**
+  /*
    * The Internet address and port where the receiver can fetch the payload using the sender's
    * {@link ResourceService}.
    */
@@ -118,7 +118,7 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
     return false; // Never.
   }
 
-  /**
+  /*
    * The #of elements in this chunk.
    *
    * @todo we could track this in total and in {@link A} on a per-slice basis.
@@ -133,7 +133,7 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
     return nbytes;
   }
 
-  /**
+  /*
    * The Internet address and port of a {@link ResourceService} from which the receiver may demand
    * the data.
    */
@@ -164,7 +164,7 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
         + "}";
   }
 
-  /**
+  /*
    * @param queryController
    * @param queryId
    * @param sinkId
@@ -221,7 +221,7 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
     this.addr = addr;
   }
 
-  /**
+  /*
    * Chunk-wise serialization of the data onto allocations.
    *
    * @param allocationContext
@@ -289,7 +289,7 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
     /** The size of that resource in bytes. */
     private final int nbytes;
 
-    /**
+    /*
      * @param bufferId The identifier of the resource on the sender's {@link ResourceService}.
      * @param nbytes The size of that resource in bytes.
      */
@@ -358,7 +358,7 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
     }
   }
 
-  /**
+  /*
    * Core implementation. This is responsible receiving the data from the remote {@link
    * ResourceService} and assembling it into a set of {@link IAllocation}s in the specified {@link
    * IAllocationContext}.
@@ -418,7 +418,7 @@ public class NIOChunkMessage<E> implements IChunkMessage<E>, Serializable {
 
   private transient volatile ChunkAccessor chunkAccessor = null;
 
-  /**
+  /*
    * FIXME Provide in place decompression and read out of the binding sets. This should be factored
    * out into classes similar to IRaba and IRabaCoder. This stuff should be generic so it can handle
    * elements and binding sets and bats, but there should be specific coders for handling binding

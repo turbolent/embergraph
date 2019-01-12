@@ -39,8 +39,8 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.IProcessCounters;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestParsing extends TestCase2 {
@@ -92,7 +92,7 @@ public class TestParsing extends TestCase2 {
     assertEquals(
         new String[] {"06:35:15", "PID", "%user", "%system", "%CPU", "CPU", "Command"}, fields);
   }
-  /**
+  /*
    * Test parse of the sysstat ISO date format.
    *
    * @todo test only writes on the console - you need to verify the outcome by hand.
@@ -185,7 +185,7 @@ public class TestParsing extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Used to verify that the header corresponds to our expectations. Logs errors when the
    * expectations are not met.
    *

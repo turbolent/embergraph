@@ -19,8 +19,8 @@ import java.util.Map;
 import org.embergraph.ganglia.util.UnsignedUtil;
 import org.embergraph.ganglia.xdr.XDROutputBuffer;
 
-/**
- * Class for generating Ganglia 3.1 protocol messages.
+/*
+* Class for generating Ganglia 3.1 protocol messages.
  *
  * @see <code>ganglia/lib/gm_protocol.x</code>
  */
@@ -131,8 +131,8 @@ public class GangliaMessageEncoder31 implements IGangliaMessageEncoder {
           break;
         case UINT16:
           {
-            /*
-             * The Java value is an signed int whose value is the same as
+          /*
+       * The Java value is an signed int whose value is the same as
              * the desired unsigned int16 value, but whose bits need to be
              * converted into an unsigned int16 value.
              */
@@ -152,8 +152,8 @@ public class GangliaMessageEncoder31 implements IGangliaMessageEncoder {
           }
         case UINT32:
           {
-            /*
-             * The Java value is an signed long whose value is the same as
+          /*
+       * The Java value is an signed long whose value is the same as
              * the desired unsigned int32 value, but whose bits need to be
              * converted into an unsigned int32 value.
              */

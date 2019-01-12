@@ -72,8 +72,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.ClassPathUtil;
 
-/**
- * Convenience class for passing around the various pieces of context necessary to construct the bop
+/*
+* Convenience class for passing around the various pieces of context necessary to construct the bop
  * pipeline.
  */
 public class AST2BOpContext implements IdFactory, IEvaluationContext {
@@ -83,7 +83,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
   /** The {@link ASTContainer} and never <code>null</code>. */
   public final ASTContainer astContainer;
 
-  /**
+  /*
    * Factory for assigning unique within query identifiers to {@link BOp}s.
    *
    * @see #nextId()
@@ -102,7 +102,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
   /** The {@link IDescribeCache} -or- <code>null</code> iff that cache is not enabled.. */
   public final IDescribeCache describeCache;
 
-  /**
+  /*
    * The query hints from the original {@link #query}.
    *
    * <p>Note: This acts as a default source for query hints to be applied to the generated AST
@@ -120,7 +120,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   public final Properties queryHints;
 
-  /**
+  /*
    * The unique identifier assigned to this query.
    *
    * @see QueryHints#QUERYID
@@ -128,7 +128,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   public final UUID queryId;
 
-  /**
+  /*
    * The query optimizers (this includes both query rewrites for correct semantics, such as a
    * rewrite of a DESCRIBE query into a CONSTRUCT query, and query rewrites for performance
    * optimizations).
@@ -141,20 +141,20 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
   /** The {@link IExternalAST2BOp} for using GPUs or <code>null</code>. */
   public final IExternalAST2BOp gpuEvaluation;
 
-  /**
+  /*
    * When <code>true</code>, may use the version of DISTINCT which operates on the native heap (this
    * is only used when we are doing a hash join against a default graph access path and the
    * predicate for that access path has a large cardinality).
    */
   public boolean nativeDistinctSPO = QueryHints.DEFAULT_NATIVE_DISTINCT_SPO;
 
-  /**
+  /*
    * The threshold at which we will use a native hash set rather than a default hash set for a
    * default graph access path.
    */
   public long nativeDistinctSPOThreshold = QueryHints.DEFAULT_NATIVE_DISTINCT_SPO_THRESHOLD;
 
-  /**
+  /*
    * When <code>true</code>, will use the version of the DISTINCT SOLUTIONS operator which uses the
    * {@link HTree} against the native heap.
    *
@@ -162,7 +162,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   public boolean nativeDistinctSolutions = QueryHints.DEFAULT_NATIVE_DISTINCT_SOLUTIONS;
 
-  /**
+  /*
    * Controls whether the intermediate solution chunks on the query engine operator input queues are
    * stored on the native heap and/or the managed object heap.
    *
@@ -171,7 +171,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   public IChunkHandler queryEngineChunkHandler = QueryHints.DEFAULT_QUERY_ENGINE_CHUNK_HANDLER;
 
-  /**
+  /*
    * When <code>true</code>, use hash index operations based on the {@link HTree}. Otherwise use
    * hash index operations based on the Java collection classes. The {@link HTree} is more scalable
    * but has higher overhead for small cardinality hash joins.
@@ -180,7 +180,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   public boolean nativeHashJoins = QueryHints.DEFAULT_NATIVE_HASH_JOINS;
 
-  /**
+  /*
    * When <code>true</code>, use pipelined hash join operations wherever possible. Otherwise use
    * standard, blocking hash joins (which might be more efficient due to less memory overhead). Note
    * that, even if this is set to <code>false</code>, the system chooses pipelined hash joins
@@ -188,7 +188,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   public boolean pipelinedHashJoins = QueryHints.DEFAULT_PIPELINED_HASH_JOIN;
 
-  /**
+  /*
    * When <code>true</code>, a merge-join pattern will be recognized if it appears in a join group.
    * When <code>false</code>, this can still be selectively enabled using a query hint.
    *
@@ -196,7 +196,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   public boolean mergeJoin = QueryHints.DEFAULT_MERGE_JOIN;
 
-  /**
+  /*
    * The maximum parallelism for a solution set hash join when the join is used in a context that
    * does permit parallelism, such as sub-group and sub-query evaluation (default {@value
    * #maxParallelForSolutionSetHashJoin} ). The historical value for embergraph releases through
@@ -213,7 +213,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   public int maxParallelForSolutionSetHashJoin = 1;
 
-  /**
+  /*
    * When <code>true</code>, the projection of the query will be materialized by an {@link
    * ChunkedMaterializationOp} within the query plan unless a LIMIT and/or OFFSET was specified.
    * When <code>false</code>, the projection is always materialized outside of the query plan.
@@ -237,7 +237,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   boolean materializeProjectionInQuery = true;
 
-  /**
+  /*
    * Set by the {@link ConstructDistinctSPOHint}. When <code>false</code>, no DISTINCT SPO filter
    * will be imposed by the {@link ASTConstructIterator}.
    *
@@ -248,7 +248,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
   /** When <code>true</code>, force the use of REMOTE access paths in scale-out joins. */
   public boolean remoteAPs = QueryHints.DEFAULT_REMOTE_APS;
 
-  /**
+  /*
    * The #of samples to take when comparing the cost of a SCAN with an IN filter to as-bound
    * evaluation for each graph in the data set. The samples are taken from the data set. Each sample
    * is a graph (aka context) in the data set. The range counts and estimated cost to visit the AP
@@ -260,14 +260,14 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   public int accessPathSampleLimit = QueryHints.DEFAULT_ACCESS_PATH_SAMPLE_LIMIT;
 
-  /**
+  /*
    * For named and default graph access paths where access path cost estimation is disabled by
    * setting the {@link #accessPathSampleLimit} to ZERO (0), this determines whether a SCAN + FILTER
    * or PARALLEL SUBQUERY (aka as-bound data set join) approach.
    */
   public boolean accessPathScanAndFilter = QueryHints.DEFAULT_ACCESS_PATH_SCAN_AND_FILTER;
 
-  /**
+  /*
    * Whether or not a distinct filter is applied over triples extracted from the default graph
    * (applies in quads mode only). While such a filter in the general case is required for
    * correctness, it might be omitted whenever we know that no triple resides in more than one named
@@ -277,7 +277,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
 
   private int varIdFactory = 0;
 
-  /**
+  /*
    * Some summary statistics about the exogenous solution sets. These are computed by {@link
    * AST2BOpUtility#convert(AST2BOpContext, IBindingSet[])} before it begins to run the {@link
    * #optimizers}.
@@ -308,7 +308,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     return saStats;
   }
 
-  /**
+  /*
    * Set the statistics summary for the exogenous solution sets.
    *
    * @param stats The summary statistics.
@@ -321,7 +321,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     this.sss = stats;
   }
 
-  /**
+  /*
    * Set the statistics object for the static analysis phase.
    *
    * @param saStats the static analysis stats object
@@ -334,7 +334,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     this.saStats = saStats;
   }
 
-  /**
+  /*
    * Static analysis object initialized once we apply the AST optimizers and used by {@link
    * AST2BOpUtility}.
    *
@@ -342,7 +342,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
    */
   StaticAnalysis sa = null;
 
-  /**
+  /*
    * An optional map of key-value pairs that will be attached to the {@link IRunningQuery} on the
    * query controller node.
    */
@@ -361,7 +361,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     queryAttributes.get().put(key, val);
   }
 
-  /**
+  /*
    * Return an optional (and immutable) map of key-value pairs that will be attached to the {@link
    * IRunningQuery} on the query controller node.
    *
@@ -376,7 +376,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     return Collections.unmodifiableMap(tmp);
   }
 
-  /**
+  /*
    * @param astContainer The top-level {@link ASTContainer} for the query or update request to be
    *     evaluated (required).
    * @param db The KB instance.
@@ -492,7 +492,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     this.gpuEvaluation = initGPUEvaluation();
   }
 
-  /**
+  /*
    * Initialize the optimizer list.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/1113">Hook to configure the ASTOptimizerList
@@ -529,7 +529,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     return optimizers;
   }
 
-  /**
+  /*
    * Tries to create the {@link IExternalAST2BOp} for using GPUs; returns <code>null</code> if the
    * attempt fails.
    */
@@ -629,7 +629,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     return context;
   }
 
-  /**
+  /*
    * Create a new variable name which is unique within the scope of this {@link AST2BOpContext}.
    *
    * @param prefix The prefix. The general pattern for a prefix is "-foo-".
@@ -671,7 +671,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     return describeCache;
   }
 
-  /**
+  /*
    * Return the effective {@link DescribeModeEnum}.
    *
    * @param projection The query projection.
@@ -711,7 +711,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     return describeMode;
   }
 
-  /**
+  /*
    * Return the effective iteration limit for a DESCRIBE query.
    *
    * @param projection The query projection.
@@ -751,7 +751,7 @@ public class AST2BOpContext implements IdFactory, IEvaluationContext {
     return limit;
   }
 
-  /**
+  /*
    * Return the effective statement limit for a DESCRIBE query.
    *
    * @param projection The query projection.

@@ -18,8 +18,8 @@ package org.embergraph.ganglia;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-/**
- * A reported or observed metric value with a timestamp. This is used to report metric values which
+/*
+* A reported or observed metric value with a timestamp. This is used to report metric values which
  * are unchanged no more frequently than tmax seconds.
  *
  * <p>Note: This class deliberately does not use a generic for the data type. The data type of the
@@ -35,7 +35,7 @@ public class TimestampMetricValue implements ITimestampMetricValue {
   /** The current value of the metric. */
   private Object value;
 
-  /**
+  /*
    * The timestamp (in milliseconds) associated with the most recent value for this metric and
    * initially ZERO (0) if the metric is newly declared.
    */
@@ -60,7 +60,7 @@ public class TimestampMetricValue implements ITimestampMetricValue {
     return timestamp;
   }
 
-  /**
+  /*
    * Reset the timestamp. The next time the metric is updated it will self-report that it's value
    * needs to be sent to ganglia listeners.
    */
@@ -91,7 +91,7 @@ public class TimestampMetricValue implements ITimestampMetricValue {
     return value;
   }
 
-  /**
+  /*
    * Update the value associated with the metric.
    *
    * <p>This method handles any translation which must be applied to the value to bring it into line
@@ -171,22 +171,17 @@ public class TimestampMetricValue implements ITimestampMetricValue {
 
     final boolean changed = oldValue == null || decl.isChanged(oldValue, newValue);
 
-    if (changed || getAge() >= decl.getTMax() / 2) {
-
-      /*
-       * Either the value has changed or the last reported value is old
-       * enough that we need to retransmit it now.
-       *
-       * Note: Tmax is divided by two to help avoid timeouts in which
-       * metrics which we have on hand would otherwise appear as stale to
-       * other ganglia clients.
-       */
-
-      return true;
-    }
+    /*
+     * Either the value has changed or the last reported value is old
+     * enough that we need to retransmit it now.
+     *
+     * Note: Tmax is divided by two to help avoid timeouts in which
+     * metrics which we have on hand would otherwise appear as stale to
+     * other ganglia clients.
+     */
+    return changed || getAge() >= decl.getTMax() / 2;
 
     // Do not retransmit this metric.
-    return false;
   }
 
   /** Update the timestamp. */
@@ -195,7 +190,7 @@ public class TimestampMetricValue implements ITimestampMetricValue {
     timestamp = System.currentTimeMillis();
   }
 
-  /**
+  /*
    * Return the priority. The priority orders metrics which have never been reported first
    * (timestamp is ZERO) followed by metrics in descending <code>tmax - age</code>, where age is
    * <code>now - timestamp</code>.

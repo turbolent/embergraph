@@ -18,8 +18,8 @@ import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParserRegistry;
 
-/**
- * Test suite for SIDS support with NTRIPLES data.
+/*
+* Test suite for SIDS support with NTRIPLES data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -43,7 +43,7 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
     return properties;
   }
 
-  /**
+  /*
    * The "terse" syntax:
    *
    * <pre>
@@ -191,7 +191,7 @@ public class TestNTriplesWithSids extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * The "terse" syntax:
    *
    * <pre>

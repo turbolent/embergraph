@@ -23,8 +23,8 @@ import java.io.FileReader;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
-/**
- * Parses the Linux environment--Uses the proc filesystem to determine all the CPU information.
+/*
+* Parses the Linux environment--Uses the proc filesystem to determine all the CPU information.
  *
  * @author <a href="mailto:dev@avalon.apache.org">Avalon Development Team</a>
  * @version $Id$
@@ -81,7 +81,7 @@ public final class Linux implements CPUParser {
     return m_processors;
   }
 
-  /**
+  /*
    * Return the cpu info for the processors (assuming symetric multiprocessing which means that all
    * CPUs are identical). The format is:
    *
@@ -91,7 +91,7 @@ public final class Linux implements CPUParser {
     return m_cpuInfo;
   }
 
-  /**
+  /*
    * Splits the string on every token into an array of strings.
    *
    * @param string the string

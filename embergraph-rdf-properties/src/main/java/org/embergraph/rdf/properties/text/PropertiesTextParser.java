@@ -58,8 +58,8 @@ import java.util.Properties;
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesParser;
 
-/**
- * An {@link PropertiesParser} for {@link Properties} objects in the text listing format.
+/*
+* An {@link PropertiesParser} for {@link Properties} objects in the text listing format.
  *
  * @author Bryan THompson
  */

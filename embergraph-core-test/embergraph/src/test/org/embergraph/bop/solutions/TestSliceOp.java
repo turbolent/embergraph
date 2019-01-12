@@ -59,8 +59,8 @@ import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.InnerCause;
 
-/**
- * Unit tests for {@link SliceOp}.
+/*
+* Unit tests for {@link SliceOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -134,7 +134,7 @@ public class TestSliceOp extends TestCase2 {
     data = null;
   }
 
-  /**
+  /*
    * Unit test for correct visitation for a variety of offset/limit values.
    *
    * @throws ExecutionException
@@ -154,14 +154,12 @@ public class TestSliceOp extends TestCase2 {
         new SliceOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, bopId),
-                  new NV(SliceOp.Annotations.OFFSET, offset),
-                  new NV(SliceOp.Annotations.LIMIT, limit),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, offset),
+                new NV(SliceOp.Annotations.LIMIT, limit),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     assertEquals("offset", offset, query.getOffset());
 
@@ -249,7 +247,7 @@ public class TestSliceOp extends TestCase2 {
     assertEquals(1L, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Unit test for correct visitation for a variety of offset/limit values.
    *
    * @throws ExecutionException
@@ -269,14 +267,12 @@ public class TestSliceOp extends TestCase2 {
         new SliceOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, bopId),
-                  new NV(SliceOp.Annotations.OFFSET, offset),
-                  new NV(SliceOp.Annotations.LIMIT, limit),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, offset),
+                new NV(SliceOp.Annotations.LIMIT, limit),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     assertEquals("offset", offset, query.getOffset());
 
@@ -338,7 +334,7 @@ public class TestSliceOp extends TestCase2 {
     assertEquals(1L, stats.chunksOut.get());
   }
 
-  /**
+  /*
    * Unit test where the offset is never satisfied. For this test, all binding sets will be consumed
    * but none will be emitted.
    *
@@ -356,14 +352,12 @@ public class TestSliceOp extends TestCase2 {
         new SliceOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, bopId),
-                  new NV(SliceOp.Annotations.OFFSET, offset),
-                  new NV(SliceOp.Annotations.LIMIT, limit),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, offset),
+                new NV(SliceOp.Annotations.LIMIT, limit),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     assertEquals("offset", offset, query.getOffset());
 
@@ -419,7 +413,7 @@ public class TestSliceOp extends TestCase2 {
     assertEquals(0L, stats.naccepted.get());
   }
 
-  /**
+  /*
    * Unit test where the offset plus the limit is never satisfied. For this test, all binding sets
    * will be consumed and some will be emitted, but the slice is never satisfied.
    *
@@ -441,14 +435,12 @@ public class TestSliceOp extends TestCase2 {
         new SliceOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, bopId),
-                  new NV(SliceOp.Annotations.OFFSET, offset),
-                  new NV(SliceOp.Annotations.LIMIT, limit),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, offset),
+                new NV(SliceOp.Annotations.LIMIT, limit),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     assertEquals("offset", offset, query.getOffset());
 
@@ -518,7 +510,7 @@ public class TestSliceOp extends TestCase2 {
     assertEquals(4L, stats.naccepted.get());
   }
 
-  /**
+  /*
    * Unit test where the slice accepts everything.
    *
    * @throws InterruptedException
@@ -532,14 +524,12 @@ public class TestSliceOp extends TestCase2 {
         new SliceOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, bopId),
-                  // new NV(SliceOp.Annotations.OFFSET, 1L),
-                  // new NV(SliceOp.Annotations.LIMIT, 3L),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                // new NV(SliceOp.Annotations.OFFSET, 1L),
+                // new NV(SliceOp.Annotations.LIMIT, 3L),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     assertEquals("offset", 0L, query.getOffset());
 
@@ -603,14 +593,12 @@ public class TestSliceOp extends TestCase2 {
         new SliceOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, bopId),
-                  new NV(SliceOp.Annotations.OFFSET, -1L),
-                  new NV(SliceOp.Annotations.LIMIT, 3L),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, -1L),
+                new NV(SliceOp.Annotations.LIMIT, 3L),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     assertEquals("offset", -1L, query.getOffset());
 
@@ -653,14 +641,12 @@ public class TestSliceOp extends TestCase2 {
         new SliceOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, bopId),
-                  new NV(SliceOp.Annotations.OFFSET, 1L),
-                  new NV(SliceOp.Annotations.LIMIT, -1L),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, 1L),
+                new NV(SliceOp.Annotations.LIMIT, -1L),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     assertEquals("offset", 1L, query.getOffset());
 
@@ -707,7 +693,7 @@ public class TestSliceOp extends TestCase2 {
     doStressTest(500L /* offset */, 1500L /* limit */, timeout, ntrials, poolSize);
   }
 
-  /**
+  /*
    * @param timeout
    * @param ntrials
    * @param poolSize
@@ -739,14 +725,12 @@ public class TestSliceOp extends TestCase2 {
         new SliceOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, bopId),
-                  new NV(SliceOp.Annotations.OFFSET, offset),
-                  new NV(SliceOp.Annotations.LIMIT, limit),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, bopId),
+                new NV(SliceOp.Annotations.OFFSET, offset),
+                new NV(SliceOp.Annotations.LIMIT, limit),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     final SliceStats stats = query.newStats();
 

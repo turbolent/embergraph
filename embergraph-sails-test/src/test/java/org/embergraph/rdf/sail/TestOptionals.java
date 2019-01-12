@@ -34,8 +34,8 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 
-/**
- * Unit tests the optionals aspects of the {@link EmbergraphSail} implementation.
+/*
+* Unit tests the optionals aspects of the {@link EmbergraphSail} implementation.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -77,7 +77,7 @@ public class TestOptionals extends QuadsTestCase {
   /** dc:title */
   final URI DC_TITLE = new URIImpl(DC + "title");
 
-  /**
+  /*
    * Tests mapping of left joins in SPARQL onto optionals in embergraph rules.
    *
    * @throws Exception
@@ -88,7 +88,7 @@ public class TestOptionals extends QuadsTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        (EmbergraphSailRepositoryConnection) repo.getConnection();
+        repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -170,7 +170,7 @@ public class TestOptionals extends QuadsTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        (EmbergraphSailRepositoryConnection) repo.getConnection();
+        repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {

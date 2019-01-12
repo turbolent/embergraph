@@ -10,8 +10,8 @@ package cern.colt.matrix.impl;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * 1-d matrix holding <tt>double</tt> elements; either a view wrapping another matrix or a matrix
+/*
+* 1-d matrix holding <tt>double</tt> elements; either a view wrapping another matrix or a matrix
  * whose views are wrappers.
  *
  * @author wolfgang.hoschek@cern.ch
@@ -27,14 +27,14 @@ class WrapperDoubleMatrix1D extends DoubleMatrix1D {
     if (newContent != null) setUp(newContent.size());
     this.content = newContent;
   }
-  /**
+  /*
    * Returns the content of this matrix if it is a wrapper; or <tt>this</tt> otherwise. Override
    * this method in wrappers.
    */
   protected DoubleMatrix1D getContent() {
     return this.content;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>index</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -47,7 +47,7 @@ class WrapperDoubleMatrix1D extends DoubleMatrix1D {
   public double getQuick(int index) {
     return content.getQuick(index);
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified size. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix1D</tt> the new matrix must also be of type <tt>DenseDoubleMatrix1D</tt>,
@@ -61,7 +61,7 @@ class WrapperDoubleMatrix1D extends DoubleMatrix1D {
   public DoubleMatrix1D like(int size) {
     return content.like(size);
   }
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix1D</tt> the new matrix must be of type <tt>DenseDoubleMatrix2D</tt>, if
@@ -75,7 +75,7 @@ class WrapperDoubleMatrix1D extends DoubleMatrix1D {
   public DoubleMatrix2D like2D(int rows, int columns) {
     return content.like2D(rows, columns);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>index</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -88,7 +88,7 @@ class WrapperDoubleMatrix1D extends DoubleMatrix1D {
   public void setQuick(int index, double value) {
     content.setQuick(index, value);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i>. What used to be index <tt>0</tt> is now index
    * <tt>size()-1</tt>, ..., what used to be index <tt>size()-1</tt> is now index <tt>0</tt>. The
    * returned view is backed by this matrix, so changes in the returned view are reflected in this
@@ -109,7 +109,7 @@ class WrapperDoubleMatrix1D extends DoubleMatrix1D {
         };
     return view;
   }
-  /**
+  /*
    * Constructs and returns a new <i>sub-range view</i> that is a <tt>width</tt> sub matrix starting
    * at <tt>index</tt>.
    *
@@ -144,7 +144,7 @@ class WrapperDoubleMatrix1D extends DoubleMatrix1D {
     view.size = width;
     return view;
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding the indicated
    * cells. There holds <tt>view.size() == indexes.length</tt> and <tt>view.get(i) ==
    * this.get(indexes[i])</tt>. Indexes can occur multiple times and can be in arbitrary order.
@@ -191,7 +191,7 @@ class WrapperDoubleMatrix1D extends DoubleMatrix1D {
     view.size = indexes.length;
     return view;
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param offsets the offsets of the visible elements.
@@ -200,7 +200,7 @@ class WrapperDoubleMatrix1D extends DoubleMatrix1D {
   protected DoubleMatrix1D viewSelectionLike(int[] offsets) {
     throw new InternalError(); // should never get called
   }
-  /**
+  /*
    * Constructs and returns a new <i>stride view</i> which is a sub matrix consisting of every i-th
    * cell. More specifically, the view has size <tt>this.size()/stride</tt> holding cells
    * <tt>this.get(i*stride)</tt> for all <tt>i = 0..size()/stride - 1</tt>.

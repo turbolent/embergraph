@@ -30,8 +30,8 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.writecache.WriteCache;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Test suite for {@link WORMStrategy} journals which runs with a single {@link WriteCache} buffer.
+/*
+* Test suite for {@link WORMStrategy} journals which runs with a single {@link WriteCache} buffer.
  * The purpose of this version of the test suite is to look for deadlocks or other problems related
  * to having a single {@link WriteCache} buffer.
  *
@@ -106,7 +106,7 @@ public class TestWORMStrategyOneCacheBuffer extends AbstractJournalTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Verify normal operation and basic assumptions when creating a new journal using {@link
    * BufferMode#DiskWORM}.
    *
@@ -143,7 +143,7 @@ public class TestWORMStrategyOneCacheBuffer extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that {@link Options#CREATE} may be used to initialize a journal on a newly
    * created empty file.
    *
@@ -175,7 +175,7 @@ public class TestWORMStrategyOneCacheBuffer extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractRestartSafeTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -197,7 +197,7 @@ public class TestWORMStrategyOneCacheBuffer extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractInterruptsTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -231,7 +231,7 @@ public class TestWORMStrategyOneCacheBuffer extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMROWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -265,7 +265,7 @@ public class TestWORMStrategyOneCacheBuffer extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMRMWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -27,8 +27,8 @@ import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IVCache;
 
-/**
- * A set of interesting statistics on a solution set.
+/*
+* A set of interesting statistics on a solution set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,14 +47,14 @@ public interface ISolutionSetStats {
   /** Return the subset of the variables which are NOT bound in all solutions. */
   Set<IVariable<?>> getNotAlwaysBound();
 
-  /**
+  /*
    * Return the subset of the variables which are materialized in all solutions in which they appear
    * (the variables do not have to be bound in every solution, but if they are bound then their
    * {@link IVCache} association is always set).
    */
   Set<IVariable<?>> getMaterialized();
 
-  /**
+  /*
    * The set of variables which are effective constants (they are bound in every solution and always
    * to the same value) together with their constant bindings.
    *

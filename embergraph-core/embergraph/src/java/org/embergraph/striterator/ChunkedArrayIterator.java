@@ -24,8 +24,8 @@ package org.embergraph.striterator;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-/**
- * Fully buffered iterator.
+/*
+* Fully buffered iterator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,8 +46,8 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
   /** The index of the next entry in {@link #buffer} that will be returned by {@link #next()}. */
   private int i = 0;
 
-  //    /**
-  //     * The element most recently returned by {@link #next()}.
+  //    /*
+//     * The element most recently returned by {@link #next()}.
   //     */
   //    private E current = null;
 
@@ -57,7 +57,7 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
     return bufferCount;
   }
 
-  /**
+  /*
    * An iterator that visits the elements in the given array.
    *
    * @param a The array of elements.
@@ -67,7 +67,7 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
     this(a.length, a, null);
   }
 
-  /**
+  /*
    * An iterator that visits the elements in the given array.
    *
    * @param a The array of elements.
@@ -78,7 +78,7 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
     this(n, a, null);
   }
 
-  /**
+  /*
    * An iterator that visits the elements in the given array.
    *
    * @param a The array of elements.
@@ -105,12 +105,7 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
 
     assert i <= bufferCount;
 
-    if (i == bufferCount) {
-
-      return false;
-    }
-
-    return true;
+    return i != bufferCount;
   }
 
   @Override
@@ -136,7 +131,7 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Return the backing array.
    *
    * @see #getBufferCount()
@@ -148,7 +143,7 @@ public class ChunkedArrayIterator<E> implements IChunkedOrderedIterator<E> {
     return buffer;
   }
 
-  /**
+  /*
    * Returns the remaining statements.
    *
    * @throws NoSuchElementException if {@link #hasNext()} returns false.

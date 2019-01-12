@@ -46,8 +46,8 @@ import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinOrderByTypeOptimizer;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for SPARQL negation (EXISTS and MINUS).
+/*
+* Test suite for SPARQL negation (EXISTS and MINUS).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -61,7 +61,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for an query with an EXISTS filter. The EXISTS filter is modeled as an ASK sub-query
    * which projects an anonymous variable and a simple test of the truth state of that anonymous
    * variable.
@@ -89,7 +89,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Sesame Unit <code>sparql11-exists-05</code>.
    *
    * <pre>
@@ -115,7 +115,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Sesame Unit <code>sparql11-exists-06</code>, which appears to be the same
    * as an example in the LCWD.
    *
@@ -188,7 +188,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A Sesame test based on the SPARQL 1.1 LCWD.
    *
    * <pre>
@@ -218,7 +218,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A Sesame test.
    *
    * <pre>
@@ -245,7 +245,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A Sesame test.
    *
    * <pre>
@@ -277,7 +277,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A Sesame test.
    *
    * <pre>
@@ -327,7 +327,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -362,7 +362,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A varient on {@link #test_filter_not_exists()} where the first SP and FILTER NOT EXISTS are
    * moved into a child join group. Interestingly, openrdf translates this into the same operator
    * model for execution but we do not, so there is some structural optimization that we are missing
@@ -412,7 +412,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
             //                true // checkOrder
             );
 
-    /**
+    /*
      * Build the expected AST.
      *
      * <pre>
@@ -515,7 +515,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
             "org.embergraph.rdf.sparql.ast.eval.AST2BOpBase.originalIndex", SPOKeyOrder.POCS);
       }
 
-      /**
+      /*
        * <pre>
        *     QueryType: ASK
        *     SELECT VarNode(ar) VarNode(-exists-2)[anonymous]
@@ -530,8 +530,8 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
       final SubqueryRoot notExistsSubquery2;
       {
         notExistsSubquery2 = new SubqueryRoot(QueryType.ASK);
-        /*
-         * Note: This can not be attached until after the nested join
+      /*
+       * Note: This can not be attached until after the nested join
          * group.
          */
         //                whereClause.addChild(notExistsSubquery2);
@@ -569,7 +569,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         notExistsSubquery2.setFilterExistsMode(QueryHints.DEFAULT_FILTER_EXISTS);
       } // not-exists-2
 
-      /**
+      /*
        * <pre>
        *     JoinGroupNode {
        *
@@ -595,8 +595,8 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
       {
         final JoinGroupNode group = whereClause;
 
-        /**
-         * <pre>
+      /*
+       * <pre>
          *       QueryType: ASK
          *       SELECT VarNode(ar) VarNode(-exists-1)[anonymous]
          *         JoinGroupNode {
@@ -645,7 +645,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         } // not-exists-1
       } // end group
 
-      /**
+      /*
        *
        *
        * <pre>
@@ -670,7 +670,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
 
       whereClause.addChild(notExistsSubquery2);
 
-      /**
+      /*
        *
        *
        * <pre>
@@ -730,7 +730,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Performance related test for EXISTS. This is NOT an EXISTS query.
    * However, EXISTS is translated into an ASK sub-query. This runs the
    * equivalent ASK query.
@@ -763,7 +763,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Performance related test for EXISTS.
    *
    * <pre>
@@ -807,7 +807,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Performance related test for EXISTS.
    *
    * <pre>
@@ -850,7 +850,7 @@ public class TestNegation extends AbstractDataDrivenSPARQLTestCase {
       fail("Timeout exceeded: Query hint not recognized?");
     }
   }
-  /**
+  /*
    * Performance related test for EXISTS.
    *
    * <pre>

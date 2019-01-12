@@ -24,8 +24,8 @@ package org.embergraph.concurrent;
 import java.util.Properties;
 import org.embergraph.testutil.ExperimentDriver.Result;
 
-/**
- * Stress tests where we predeclare locks and sort the lock requests. Under these conditions we DO
+/*
+* Stress tests where we predeclare locks and sort the lock requests. Under these conditions we DO
  * NOT maintain a {@link TxDag} since deadlocks CAN NOT arise.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -43,7 +43,7 @@ public class StressTestNonBlockingLockManagerWithPredeclaredLocks
     super(name);
   }
 
-  /**
+  /*
    * Test where no locks are declared. This should run all tasks with the maximum concurrency. Since
    * there is no timeout, all tasks should complete successfully.
    *
@@ -75,7 +75,7 @@ public class StressTestNonBlockingLockManagerWithPredeclaredLocks
     assertEquals("maxrunning", nthreads, Integer.parseInt(result.get("maxrunning")));
   }
 
-  /**
+  /*
    * Test where no locks are declared. This should run all tasks with the maximum concurrency. Since
    * there is no timeout, all tasks should complete successfully.
    *
@@ -109,7 +109,7 @@ public class StressTestNonBlockingLockManagerWithPredeclaredLocks
     assertTrue("maxrunning=" + maxrunning, corePoolSize <= maxrunning);
   }
 
-  /**
+  /*
    * Test where each operation locks one or more resources.
    *
    * <p>Note: This condition provides the basis for deadlocks. In fact, since we have 10 resource
@@ -148,7 +148,7 @@ public class StressTestNonBlockingLockManagerWithPredeclaredLocks
     assertEquals("nsuccess", ntasks, Integer.parseInt(result.get("nsuccess")));
   }
 
-  /**
+  /*
    * Test where each operation locks one or more resources.
    *
    * <p>Note: This condition provides the basis for deadlocks. In fact, since we have 10 resource

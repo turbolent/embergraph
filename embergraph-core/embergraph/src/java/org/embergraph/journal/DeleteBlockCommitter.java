@@ -21,8 +21,8 @@ package org.embergraph.journal;
 import org.embergraph.btree.IndexInconsistentError;
 import org.embergraph.rwstore.IRWStrategy;
 
-/**
- * Defines the callback object called on commit that enables the deferred delete blocks to be
+/*
+* Defines the callback object called on commit that enables the deferred delete blocks to be
  * associated with a CommitRecord.
  *
  * @author Martyn Cutcher

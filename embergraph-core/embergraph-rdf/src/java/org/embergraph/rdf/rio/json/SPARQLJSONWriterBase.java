@@ -42,8 +42,8 @@ import org.openrdf.query.resultio.QueryResultWriterBase;
 import org.openrdf.rio.RioSetting;
 import org.openrdf.rio.helpers.BasicWriterSettings;
 
-/**
- * An abstract class to implement the base functionality for both SPARQLBooleanJSONWriter and
+/*
+* An abstract class to implement the base functionality for both SPARQLBooleanJSONWriter and
  * SPARQLResultsJSONWriter.
  *
  * <p>Embergraph Changes:
@@ -305,7 +305,7 @@ abstract class SPARQLJSONWriterBase extends QueryResultWriterBase implements Que
 
     if (value instanceof URI) {
       jg.writeStringField("type", "uri");
-      jg.writeStringField("value", ((URI) value).toString());
+      jg.writeStringField("value", value.toString());
     } else if (value instanceof BNode) {
       jg.writeStringField("type", "bnode");
       jg.writeStringField("value", ((BNode) value).getID());

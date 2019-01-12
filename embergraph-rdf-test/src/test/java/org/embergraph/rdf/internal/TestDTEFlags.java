@@ -23,8 +23,8 @@ package org.embergraph.rdf.internal;
 
 import junit.framework.TestCase;
 
-/**
- * Test suite for {@link DTEFlags}.
+/*
+* Test suite for {@link DTEFlags}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

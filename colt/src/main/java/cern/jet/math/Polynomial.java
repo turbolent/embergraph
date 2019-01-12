@@ -12,7 +12,7 @@ package cern.jet.math;
 public class Polynomial extends Constants {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Polynomial() {}
-  /**
+  /*
    * Evaluates the given polynomial of degree <tt>N</tt> at <tt>x</tt>, assuming coefficient of N is
    * 1.0. Otherwise same as <tt>polevl()</tt>.
    *
@@ -38,7 +38,7 @@ public class Polynomial extends Constants {
    * @param coef the coefficients of the polynomial.
    * @param N the degree of the polynomial.
    */
-  public static double p1evl(double x, double coef[], int N) throws ArithmeticException {
+  public static double p1evl(double x, double[] coef, int N) throws ArithmeticException {
     double ans;
 
     ans = x + coef[0];
@@ -49,7 +49,7 @@ public class Polynomial extends Constants {
 
     return ans;
   }
-  /**
+  /*
    * Evaluates the given polynomial of degree <tt>N</tt> at <tt>x</tt>.
    *
    * <pre>
@@ -69,7 +69,7 @@ public class Polynomial extends Constants {
    * @param coef the coefficients of the polynomial.
    * @param N the degree of the polynomial.
    */
-  public static double polevl(double x, double coef[], int N) throws ArithmeticException {
+  public static double polevl(double x, double[] coef, int N) throws ArithmeticException {
     double ans;
     ans = coef[0];
 

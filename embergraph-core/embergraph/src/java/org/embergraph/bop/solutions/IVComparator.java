@@ -40,8 +40,8 @@ import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 import org.openrdf.query.algebra.evaluation.util.ValueComparator;
 
-/**
- * A comparator that compares {@link IV}s according the SPARQL value ordering as specified in <a
+/*
+* A comparator that compares {@link IV}s according the SPARQL value ordering as specified in <a
  * href="http://www.w3.org/TR/rdf-sparql-query/#modOrderBy">SPARQL Query Language for RDF</a>. This
  * implementation is based on the openrdf {@link ValueComparator} but has been modified to work with
  * {@link IV}s.
@@ -119,7 +119,7 @@ public class IVComparator implements Comparator<IV>, Serializable {
     return compareLiterals((IV<EmbergraphLiteral, ?>) o1, (IV<EmbergraphLiteral, ?>) o2);
   }
 
-  /**
+  /*
    * Use the natural ordering of the {@link IV}s when they are both blank nodes. This causes the
    * solutions for the same blank node to be "grouped".
    *
@@ -132,7 +132,7 @@ public class IVComparator implements Comparator<IV>, Serializable {
     return leftBNode.compareTo(rightBNode);
   }
 
-  /**
+  /*
    * Use the natural ordering of the {@link SidIV}s when they are both SIDs nodes. This causes the
    * solutions for the same {@link SidIV} to be "grouped".
    *
@@ -145,7 +145,7 @@ public class IVComparator implements Comparator<IV>, Serializable {
     return leftSid.compareTo(rightSid);
   }
 
-  /**
+  /*
    * Only difference here with Sesame ValueComparator is that we use stringValue() instead of
    * toString().
    */
@@ -178,7 +178,7 @@ public class IVComparator implements Comparator<IV>, Serializable {
     return compareLiterals((Literal) left, (Literal) right);
   }
 
-  /**
+  /*
    * Taken directly from Sesame's ValueComparator, no modification. Handles inlines nicely since
    * they now implement the Literal interface.
    */

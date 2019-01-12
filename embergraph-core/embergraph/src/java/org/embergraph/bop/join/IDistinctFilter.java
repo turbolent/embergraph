@@ -26,20 +26,20 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.relation.accesspath.IBuffer;
 
-/**
- * A "DISTINCT" filter for {@link IBindingSet}s.
+/*
+* A "DISTINCT" filter for {@link IBindingSet}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IDistinctFilter {
 
-  /**
+  /*
    * The variables that are being projected out of the DISTINCT filter. The solutions will be
    * DISTINCT on this combination of variables. Bindings on other variables will be dropped.
    */
   IVariable<?>[] getProjectedVars();
 
-  /**
+  /*
    * If the bindings are distinct for the configured variables then return a new {@link IBindingSet}
    * consisting of only the selected variables.
    *
@@ -49,7 +49,7 @@ public interface IDistinctFilter {
    */
   IBindingSet accept(final IBindingSet bset);
 
-  /**
+  /*
    * Vectored DISTINCT.
    *
    * @param itr The source solutions.

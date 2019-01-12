@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.jet.math;
 
-/**
- * Only for performance tuning of compute intensive linear algebraic computations. Constructs
+/*
+* Only for performance tuning of compute intensive linear algebraic computations. Constructs
  * functions that return one of
  *
  * <ul>

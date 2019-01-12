@@ -40,8 +40,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.service.Split;
 import org.embergraph.service.ndx.IScaleOutClientIndex;
 
-/**
- * Task drains a {@link BlockingBuffer} containing {@link KVO}[] chunks, splits the chunks based on
+/*
+* Task drains a {@link BlockingBuffer} containing {@link KVO}[] chunks, splits the chunks based on
  * the separator keys for the scale-out index, and then assigns each chunk to per-index partition
  * {@link BlockingBuffer} which is in turned drained by an {@link IndexPartitionWriteTask} that
  * writes onto a specific index partition.
@@ -102,7 +102,7 @@ public abstract class IndexWriteTask<
         + "}";
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @param ndx The client's view of the scale-out index.
@@ -167,7 +167,7 @@ public abstract class IndexWriteTask<
     this.ctor = ctor;
   }
 
-  /**
+  /*
    * Splits the chunk according to the current index partitions and transfers each split to the
    * appropriate sink.
    */
@@ -219,7 +219,7 @@ public abstract class IndexWriteTask<
     return (S) new IndexPartitionWriteTask(this, locator, dataService, out);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The queue capacity, chunk size and chunk timeout are taken from the ctor parameters.
@@ -241,7 +241,7 @@ public abstract class IndexWriteTask<
     ndx.getFederation().getExecutorService().submit(subtask);
   }
 
-  /**
+  /*
    * Concrete master hides most of the generic types leaving you with only those that are
    * meaningfully parameterize for applications using the streaming write API.
    *

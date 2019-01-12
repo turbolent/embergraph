@@ -42,8 +42,8 @@ import org.embergraph.io.writecache.WriteCache;
 import org.embergraph.journal.WriteExecutorService;
 import org.embergraph.service.proxy.ThickFuture;
 
-/**
- * A {@link Remote} interface supporting the write replication pipeline. The quorum leader accepts
+/*
+* A {@link Remote} interface supporting the write replication pipeline. The quorum leader accepts
  * writes from the application layer. The writes are formatted onto low-level cache blocks. Those
  * cache blocks are replicated from the quorum leader to the quorum followers along the pipeline.
  *
@@ -53,7 +53,7 @@ import org.embergraph.service.proxy.ThickFuture;
  */
 public interface HAPipelineGlue extends Remote {
 
-  /**
+  /*
    * Return the address at which this service will listen for write pipeline messages sent from the
    * upstream service.
    *
@@ -61,7 +61,7 @@ public interface HAPipelineGlue extends Remote {
    */
   InetSocketAddress getWritePipelineAddr() throws IOException;
 
-  /**
+  /*
    * Instruct the service to move to the end of the write pipeline. The leader MUST be the first
    * service in the write pipeline since it is the service to which the application directs all
    * write requests. This message is used when a leader will be elected and it needs to force other
@@ -97,7 +97,7 @@ public interface HAPipelineGlue extends Remote {
    */
   Future<Void> moveToEndOfPipeline() throws IOException;
 
-  /**
+  /*
    * Reset the pipeline (blocking). This message is used to handle an error in pipeline replication.
    * If replication fails, the socket connections both upstream and downstream of the point of
    * failure can be left in an indeterminate state with partially buffered data. In order to bring
@@ -112,7 +112,7 @@ public interface HAPipelineGlue extends Remote {
    */
   Future<IHAPipelineResetResponse> resetPipeline(IHAPipelineResetRequest req) throws IOException;
 
-  /**
+  /*
    * Accept metadata describing an NIO buffer transfer along the write pipeline. This method is
    * never invoked on the master. It is only invoked on the failover nodes, including the last node
    * in the failover chain.
@@ -128,7 +128,7 @@ public interface HAPipelineGlue extends Remote {
   Future<Void> receiveAndReplicate(IHASyncRequest req, IHASendState snd, IHAWriteMessage msg)
       throws IOException;
 
-  /**
+  /*
    * Request metadata about the current write set from the quorum leader.
    *
    * @param req The request.
@@ -136,7 +136,7 @@ public interface HAPipelineGlue extends Remote {
    */
   IHAWriteSetStateResponse getHAWriteSetState(IHAWriteSetStateRequest req) throws IOException;
 
-  /**
+  /*
    * Request the root blocks for the HA Log for the specified commit point.
    *
    * @param msg The request (specifies the desired HA Log by the commit counter of the closing root
@@ -146,7 +146,7 @@ public interface HAPipelineGlue extends Remote {
   IHALogRootBlocksResponse getHALogRootBlocksForWriteSet(IHALogRootBlocksRequest msg)
       throws IOException;
 
-  /**
+  /*
    * The recipient will send the {@link WriteCache} blocks for the specified write set on the write
    * pipeline. These {@link WriteCache} blocks will be visible to ALL services in the write
    * pipeline. It is important that all services <em>ignore</em> {@link WriteCache} blocks that are
@@ -172,7 +172,7 @@ public interface HAPipelineGlue extends Remote {
    */
   Future<Void> sendHALogForWriteSet(IHALogRequest msg) throws IOException;
 
-  /**
+  /*
    * Send the raw blocks for the requested backing store across the write pipeline.
    *
    * <p>Note: This method supports disaster recovery of a service from a met quorum. This procedure
@@ -188,8 +188,8 @@ public interface HAPipelineGlue extends Remote {
    */
   Future<IHASendStoreResponse> sendHAStore(IHARebuildRequest msg) throws IOException;
 
-  //    /**
-  //     * There is something for this on HAGlue right now.
+  //    /*
+//     * There is something for this on HAGlue right now.
   //     *
   //     * TODO Method to compute a digest for the committed allocations on a
   //     * backing store as of the commit point on which the specified transaction

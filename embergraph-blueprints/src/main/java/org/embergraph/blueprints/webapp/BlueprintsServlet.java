@@ -41,7 +41,7 @@ public class BlueprintsServlet extends BlueprintsServletProxy {
   private static final transient Logger log = Logger.getLogger(BlueprintsServlet.class);
 
   public static final List<String> mimeTypes =
-      Arrays.asList(new String[] {"application/graphml+xml"});
+      Arrays.asList("application/graphml+xml");
 
   public BlueprintsServlet() {}
 
@@ -130,7 +130,7 @@ public class BlueprintsServlet extends BlueprintsServletProxy {
     }
   }
 
-  /**
+  /*
    * Convenience method to access doPost from a public method.
    *
    * @param req

@@ -29,8 +29,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.Serializable;
 
-/**
- * Factory for instances that do NOT support Unicode.
+/*
+* Factory for instances that do NOT support Unicode.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -75,7 +75,7 @@ public class ASCIIKeyBuilderFactory implements IKeyBuilderFactory, Externalizabl
     return KeyBuilder.newInstance(initialCapacity);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The PRIMARY is identical to the as-configured {@link IKeyBuilder} for ASCII.

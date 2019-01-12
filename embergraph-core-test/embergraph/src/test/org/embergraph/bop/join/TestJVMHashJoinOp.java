@@ -39,8 +39,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for {@link JVMHashJoinOp}.
+/*
+* Test suite for {@link JVMHashJoinOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -115,27 +115,23 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
         new Predicate<IV>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("x")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {setup.spoNamespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     // w/o variables.
     try {
       new JVMHashJoinOp<IV>(
           emptyArgs,
           NV.asMap(
-              new NV[] {
-                new NV(BOp.Annotations.BOP_ID, joinId),
-                //                            new NV(HashJoinAnnotations.JOIN_VARS,new
-                // IVariable[]{x}),
-                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                new NV(AccessPathJoinAnnotations.PREDICATE, pred),
-                new NV(PipelineOp.Annotations.PIPELINED, false),
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
-                namedSet,
-              }));
+              new NV(BOp.Annotations.BOP_ID, joinId),
+              //                            new NV(HashJoinAnnotations.JOIN_VARS,new
+              // IVariable[]{x}),
+              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+              new NV(AccessPathJoinAnnotations.PREDICATE, pred),
+              new NV(PipelineOp.Annotations.PIPELINED, false),
+              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+              namedSet));
       fail("Expecting: " + IllegalStateException.class);
     } catch (IllegalStateException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -146,15 +142,13 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
       new JVMHashJoinOp<IV>(
           emptyArgs,
           NV.asMap(
-              new NV[] {
-                new NV(BOp.Annotations.BOP_ID, joinId),
-                new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
-                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.ANY),
-                new NV(AccessPathJoinAnnotations.PREDICATE, pred),
-                new NV(PipelineOp.Annotations.PIPELINED, false),
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
-                namedSet,
-              }));
+              new NV(BOp.Annotations.BOP_ID, joinId),
+              new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
+              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.ANY),
+              new NV(AccessPathJoinAnnotations.PREDICATE, pred),
+              new NV(PipelineOp.Annotations.PIPELINED, false),
+              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+              namedSet));
       fail("Expecting: " + UnsupportedOperationException.class);
     } catch (UnsupportedOperationException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -165,15 +159,13 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
       new JVMHashJoinOp<IV>(
           emptyArgs,
           NV.asMap(
-              new NV[] {
-                new NV(BOp.Annotations.BOP_ID, joinId),
-                new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
-                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.SHARDED),
-                //                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
-                new NV(PipelineOp.Annotations.PIPELINED, false),
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
-                namedSet,
-              }));
+              new NV(BOp.Annotations.BOP_ID, joinId),
+              new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
+              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.SHARDED),
+              //                            new NV(AccessPathJoinAnnotations.PREDICATE,pred),
+              new NV(PipelineOp.Annotations.PIPELINED, false),
+              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+              namedSet));
       fail("Expecting: " + IllegalStateException.class);
     } catch (IllegalStateException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -184,15 +176,13 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
       new JVMHashJoinOp<IV>(
           emptyArgs,
           NV.asMap(
-              new NV[] {
-                new NV(BOp.Annotations.BOP_ID, joinId),
-                new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
-                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.SHARDED),
-                new NV(AccessPathJoinAnnotations.PREDICATE, pred),
-                new NV(PipelineOp.Annotations.PIPELINED, false),
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 2),
-                namedSet,
-              }));
+              new NV(BOp.Annotations.BOP_ID, joinId),
+              new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
+              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.SHARDED),
+              new NV(AccessPathJoinAnnotations.PREDICATE, pred),
+              new NV(PipelineOp.Annotations.PIPELINED, false),
+              new NV(PipelineOp.Annotations.MAX_PARALLEL, 2),
+              namedSet));
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -203,16 +193,14 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
       new JVMHashJoinOp<IV>(
           emptyArgs,
           NV.asMap(
-              new NV[] {
-                new NV(BOp.Annotations.BOP_ID, joinId),
-                new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
-                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.SHARDED),
-                new NV(AccessPathJoinAnnotations.PREDICATE, pred),
-                new NV(PipelineOp.Annotations.PIPELINED, false),
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
-                namedSet,
-                new NV(PipelineOp.Annotations.MAX_MEMORY, Bytes.megabyte),
-              }));
+              new NV(BOp.Annotations.BOP_ID, joinId),
+              new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
+              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.SHARDED),
+              new NV(AccessPathJoinAnnotations.PREDICATE, pred),
+              new NV(PipelineOp.Annotations.PIPELINED, false),
+              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+              namedSet,
+              new NV(PipelineOp.Annotations.MAX_MEMORY, Bytes.megabyte)));
       fail("Expecting: " + UnsupportedOperationException.class);
     } catch (UnsupportedOperationException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -223,15 +211,13 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
       new JVMHashJoinOp<IV>(
           emptyArgs,
           NV.asMap(
-              new NV[] {
-                new NV(BOp.Annotations.BOP_ID, joinId),
-                new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
-                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                new NV(AccessPathJoinAnnotations.PREDICATE, pred),
-                new NV(PipelineOp.Annotations.PIPELINED, true),
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
-                namedSet,
-              }));
+              new NV(BOp.Annotations.BOP_ID, joinId),
+              new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
+              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+              new NV(AccessPathJoinAnnotations.PREDICATE, pred),
+              new NV(PipelineOp.Annotations.PIPELINED, true),
+              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+              namedSet));
       fail("Expecting: " + UnsupportedOperationException.class);
     } catch (UnsupportedOperationException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -242,15 +228,14 @@ public class TestJVMHashJoinOp extends AbstractHashJoinOpTestCase {
       new JVMHashJoinOp<IV>(
           emptyArgs,
           NV.asMap(
-              new NV[] {
-                new NV(BOp.Annotations.BOP_ID, joinId),
-                new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
-                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                new NV(AccessPathJoinAnnotations.PREDICATE, pred),
-                new NV(PipelineOp.Annotations.PIPELINED, false),
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
-                //                            namedSet,
-              }));
+              new NV(BOp.Annotations.BOP_ID, joinId),
+              new NV(HashJoinAnnotations.JOIN_VARS, new IVariable[] {x}),
+              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+              new NV(AccessPathJoinAnnotations.PREDICATE, pred),
+              new NV(PipelineOp.Annotations.PIPELINED, false),
+              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1)
+              //                            namedSet,
+          ));
       fail("Expecting: " + IllegalStateException.class);
     } catch (IllegalStateException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

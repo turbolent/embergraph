@@ -103,8 +103,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterRegistry;
 
-/**
- * Class encapsulates state shared by {@link QueryServlet}(s) for the same {@link IIndexManager}.
+/*
+* Class encapsulates state shared by {@link QueryServlet}(s) for the same {@link IIndexManager}.
  *
  * @author Martyn Cutcher
  * @author thompsonbry@users.sourceforge.net
@@ -116,13 +116,13 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   /** URL Query parameter used to request the explanation of a query rather than its results. */
   protected static final String EXPLAIN = "explain";
 
-  /**
+  /*
    * Optional value for the {@link #EXPLAIN} URL query parameter that may be used to request more
    * detail in the "EXPLAIN" of a query.
    */
   protected static final String EXPLAIN_DETAILS = "details";
 
-  /**
+  /*
    * URL Query parameter used to request the "analytic" query hints. MAY be <code>null</code>, in
    * which case we do not set {@link QueryHints#ANALYTIC} query hint.
    */
@@ -131,20 +131,20 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   /** URL Query parameter used to request the use of the Runtime Query Optimizer. */
   protected static final String RTO = "RTO";
 
-  /**
+  /*
    * URL Query parameter used to request an XHTML response for SPARQL QUERY or SPARQL UPDATE. For
    * SPARQL QUERY, this provides an XHTML table view of the solutions. For SPARQL UPDATE, this
    * provides an incremental progress report on the UPDATE request.
    */
   protected static final String XHTML = "xhtml";
 
-  /**
+  /*
    * URL Query parameter used to specify an XSL style sheet to be associated with the response in
    * combination with the {@link #XHTML} URL query parameter.
    */
   protected static final String XSL_STYLESHEET = "xsl-stylesheet";
 
-  /**
+  /*
    * The default XSL style sheet.
    *
    * @see #XSL_STYLESHEET
@@ -152,7 +152,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   protected static final String DEFAULT_XSL_STYLESHEET =
       EmbergraphStatics.getContextPath() + "/html/result-to-html.xsl";
 
-  /**
+  /*
    * URL Query parameter used to request an incremental XHTML representation reporting on the
    * progress of a SPARQL UPDATE.
    *
@@ -162,13 +162,13 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
    */
   protected static final String MONITOR = "monitor";
 
-  /**
+  /*
    * URL query parameter used to specify a URI in the default graph for SPARQL query (but not for
    * SPARQL update).
    */
   protected static final String DEFAULT_GRAPH_URI = "default-graph-uri";
 
-  /**
+  /*
    * URL query parameter used to specify a URI in the set of named graphs for SPARQL query (but not
    * for SPARQL update).
    */
@@ -177,7 +177,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   /** URL query parameter used to specify a URI in the default graph for SPARQL UPDATE. */
   protected static final String USING_GRAPH_URI = "using-graph-uri";
 
-  /**
+  /*
    * URL query parameter used to specify the URI(s) from which data will be loaded for INSERT
    * (POST-WITH-URIs.
    *
@@ -185,7 +185,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
    */
   protected static final String URI = "uri";
 
-  /**
+  /*
    * URL query parameter used to specify the default context(s) for INSERT (POST-WITH-URIs,
    * POST-WITH-BODY).
    *
@@ -196,7 +196,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   /** URL query parameter used to specify a URI in the set of named graphs for SPARQL UPDATE. */
   protected static final String USING_NAMED_GRAPH_URI = "using-named-graph-uri";
 
-  /**
+  /*
    * URL query parameter used to specify a non-default KB namespace (as an alternative to having it
    * in the URL path). The path takes precendence over this query parameter.
    *
@@ -204,7 +204,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
    */
   protected static final String NAMESPACE = "namespace";
 
-  /**
+  /*
    * HTTP header may be used to specify the timeout for a query.
    *
    * @see http://trac.blazegraph.com/ticket/914 (Set timeout on remote query)
@@ -215,7 +215,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   /** HTTP header may be used to echo back the query. */
   public static final String HTTP_HEADER_ECHO_BACK_QUERY = "X-ECHO-BACK-QUERY";
 
-  /**
+  /*
    * The name of the parameter/attribute that contains maxQueryTime (milliseconds) for remote
    * queries execution.
    *
@@ -227,7 +227,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
    */
   static final String MAX_QUERY_TIME_MILLIS = "maxQueryTimeMillis";
 
-  /**
+  /*
    * Specifies a maximum query execution time, in whole seconds. The value should be an integer. A
    * setting of 0 or a negative number indicates unlimited query time (the default).
    */
@@ -238,7 +238,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
   private final SparqlEndpointConfig m_config;
 
-  /**
+  /*
    * A thread pool for running accepted queries against the {@link QueryEngine}. The number of
    * queries that will be processed concurrently is determined by this thread pool.
    *
@@ -249,7 +249,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   private final ScheduledFuture<?> m_queueStatsFuture;
   private final ThreadPoolExecutorBaseStatisticsTask m_queueSampleTask;
 
-  /**
+  /*
    * The currently executing queries (does not include queries where a client has established a
    * connection but the query is not running because the {@link #queryService} is blocking).
    *
@@ -260,7 +260,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   private final ConcurrentHashMap<Long /* queryId */, RunningQuery> m_queries =
       new ConcurrentHashMap<Long, RunningQuery>();
 
-  /**
+  /*
    * The currently executing QUERY and UPDATE requests.
    *
    * <p>Note: This does not include requests where a client has established a connection to the
@@ -295,7 +295,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       elapsedNanos.set(System.nanoTime() - beginNanos);
     }
 
-    /**
+    /*
      * The elapsed nanoseconds that the task has been executing. The clock stops once {@link
      * #done()} is called.
      */
@@ -311,7 +311,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       return elapsedNanos;
     }
 
-    /**
+    /*
      * Convenience method to return org.embergraph.rdf.sail.model.RunningQuery from a
      * EmbergraphRDFContext running query.
      *
@@ -342,7 +342,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     }
   }
 
-  /**
+  /*
    * A mapping from the given (or assigned) {@link UUID} to the {@link AbstractRestApiTask}.
    *
    * <p>Note: This partly duplicates information already captured by some other collections. However
@@ -354,7 +354,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   private final ConcurrentHashMap<UUID /* RestAPITask */, TaskAndFutureTask<?>> m_restTasks =
       new ConcurrentHashMap<UUID, TaskAndFutureTask<?>>();
 
-  /**
+  /*
    * Return the {@link RunningQuery} for a currently executing SPARQL QUERY or UPDATE request.
    *
    * @param queryId2 The {@link UUID} for the request.
@@ -368,7 +368,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   /** Factory for the query identifiers. */
   private final AtomicLong m_queryIdFactory = new AtomicLong();
 
-  /**
+  /*
    * The currently executing queries (does not include queries where a client has established a
    * connection but the query is not running because the {@link #queryService} is blocking).
    *
@@ -384,7 +384,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return m_queryIdFactory;
   }
 
-  /**
+  /*
    * Return the {@link AbstractRestApiTask} for a currently executing request.
    *
    * @param uuid The {@link UUID} for the request.
@@ -395,7 +395,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return m_restTasks.get(uuid);
   }
 
-  /**
+  /*
    * Register a task and the associated {@link FutureTask}.
    *
    * @param task The task.
@@ -406,7 +406,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     m_restTasks.put(task.uuid, new TaskAndFutureTask<T>(task, ft, System.nanoTime()));
   }
 
-  /**
+  /*
    * Remove a task (the task should be known to be done).
    *
    * @param uuid The task {@link UUID}.
@@ -422,7 +422,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     }
   }
 
-  /**
+  /*
    * A mapping from the given (or assigned) {@link UUID} to the {@link AbstractRestApiTask}.
    *
    * <p>Note: This partly duplicates information already captured by some other collections. However
@@ -449,17 +449,15 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     if (config.queryThreadPoolSize == 0) {
 
       queryService =
-          (ThreadPoolExecutor)
-              Executors.newCachedThreadPool(
-                  new DaemonThreadFactory(getClass().getName() + ".queryService"));
+          Executors.newCachedThreadPool(
+              new DaemonThreadFactory(getClass().getName() + ".queryService"));
 
     } else {
 
       queryService =
-          (ThreadPoolExecutor)
-              Executors.newFixedThreadPool(
-                  config.queryThreadPoolSize,
-                  new DaemonThreadFactory(getClass().getName() + ".queryService"));
+          Executors.newFixedThreadPool(
+              config.queryThreadPoolSize,
+              new DaemonThreadFactory(getClass().getName() + ".queryService"));
     }
 
     if (indexManager.getCollectQueueStatistics()) {
@@ -482,8 +480,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     }
   }
 
-  //    /**
-  //     * Normal shutdown waits until all accepted queries are done.
+  //    /*
+//     * Normal shutdown waits until all accepted queries are done.
   //     */
   //    void shutdown() {
   //
@@ -504,7 +502,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   //
   //    }
 
-  /**
+  /*
    * Immediate shutdown interrupts any running queries.
    *
    * <p>FIXME GROUP COMMIT: Shutdown should abort open transactions (including queries and updates).
@@ -532,7 +530,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return m_queueSampleTask;
   }
 
-  /**
+  /*
    * Return the effective baseURI for the request. This may be set using the {@value #BASE_URI} URL
    * query parameter. If it is not set, it defaults to the request URL.
    *
@@ -552,7 +550,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return baseURI;
   }
 
-  /**
+  /*
    * Return the effective boolean value of a URL query parameter such as "analytic". If the URL
    * query parameter was not given, then the effective boolean value is the <i>defaultValue</o>. If
    * a URL query parameter which is given without an explicit value, such as <code>&analytic</code>,
@@ -576,7 +574,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return Boolean.valueOf(s);
   }
 
-  /**
+  /*
    * Return the effective string value of a URL query parameter. If the URL query parameter was not
    * given, or if it was given without an explicit value, then the effective string value is the
    * <i>defaultValue</o>.
@@ -600,7 +598,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return s;
   }
 
-  /**
+  /*
    * Invoked if {@link #EXPLAIN} is found as a URL request parameter to see whether it exists with
    * {@link #EXPLAIN_DETAILS} as a value. We have to check each value since there might be more than
    * one.
@@ -625,7 +623,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return false;
   }
 
-  /**
+  /*
    * Abstract base class for running queries handles the timing, pipe, reporting, obtains the
    * connection, and provides the finally {} semantics for each type of query task.
    *
@@ -645,7 +643,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     /** The baseURI is set from the effective request URI. */
     protected final String baseURI;
 
-    /**
+    /*
      * Controls returning inferred triples.
      *
      * @see BLZG-1207 (getStatements ignored includeInferred)
@@ -655,7 +653,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     /** Bindings provided for query execution */
     protected final Map<String, Value> bindings;
 
-    /**
+    /*
      * The {@link ASTContainer} provides access to the original SPARQL query, the query model, the
      * query plan, etc.
      */
@@ -667,19 +665,19 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     /** A symbolic constant indicating the type of query. */
     protected final QueryType queryType;
 
-    /**
+    /*
      * The negotiated MIME type to be used for the query response (this does not include the charset
      * encoding) -or- <code>null</code> if this is a SPARQL UPDATE request.
      */
     protected final String mimeType;
 
-    /**
+    /*
      * The character encoding to use with the negotiated {@link #mimeType} -or- <code>null</code>
      * (it will be <code>null</code> for a binary encoding).
      */
     protected final Charset charset;
 
-    /**
+    /*
      * The file extension (without the leading ".") to use with the negotiated {@link #mimeType}
      * -or- <code>null</code> if this is a SPARQL UPDATE request
      */
@@ -694,8 +692,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     /** Where to write the response. */
     protected final OutputStream os;
 
-    //		/**
-    //		 * Set to the timestamp as reported by {@link System#nanoTime()} when
+    //		/*
+//		 * Set to the timestamp as reported by {@link System#nanoTime()} when
     //		 * the query begins to execute.
     //		 */
     //        final AtomicLong beginTime = new AtomicLong();
@@ -703,7 +701,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     /** The queryId as assigned by the SPARQL end point (rather than the {@link QueryEngine}). */
     protected final Long queryId;
 
-    /**
+    /*
      * The queryId used by the {@link QueryEngine}. If the application has not specified this using
      * {@link QueryHints#QUERYID} then this is assigned and set on the query using {@link
      * QueryHints#QUERYID}. This decision can not be made until we parse the query so the behavior
@@ -719,7 +717,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
      */
     protected volatile UUID queryId2;
 
-    /**
+    /*
      * The parsed query. It will be one of the {@link EmbergraphSailQuery} implementations or {@link
      * EmbergraphSailUpdate}. They all extend {@link AbstractOperation}.
      *
@@ -727,13 +725,13 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
      */
     protected AbstractOperation sailQueryOrUpdate;
 
-    /**
+    /*
      * The {@link Future} of the {@link UpdateTask} and <code>null</code> if this is not a SPARQL
      * UPDATE or if the {@link UpdateTask} has not begun execution.
      */
     protected volatile Future<Void> updateFuture;
 
-    /**
+    /*
      * When <code>true</code>, provide an "explanation" for the query (query plan, query evaluation
      * statistics) rather than the results of the query.
      */
@@ -748,7 +746,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     /** When <code>true</code>, enable the Runtime Query Optimizer. */
     final boolean rto;
 
-    /**
+    /*
      * When <code>true</code>, provide an view of the XHTML representation of the solutions or graph
      * result (SPARQL QUERY)
      *
@@ -756,7 +754,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
      */
     final boolean xhtml;
 
-    /**
+    /*
      * When <code>true</code>, provide an incremental XHTML representation reporting on the progress
      * of a SPARQL UPDATE.
      *
@@ -774,7 +772,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     /** The timstamp (in nanoseconds) when the task finishes its execution. */
     private volatile long endNanos = 0L;
 
-    /**
+    /*
      * Return the elapsed execution time in milliseconds. This will be ZERO (0) until the task
      * begins to execute.
      *
@@ -801,7 +799,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       return TimeUnit.NANOSECONDS.toMillis(elapsed);
     }
 
-    /**
+    /*
      * Version for SPARQL QUERY.
      *
      * @param cxn The connection used to isolate the query or update request.
@@ -875,7 +873,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       this.queryId = Long.valueOf(m_queryIdFactory.incrementAndGet());
     }
 
-    /**
+    /*
      * Version for SPARQL UPDATE.
      *
      * @param namespace The namespace against which the query will be run.
@@ -942,7 +940,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       this.queryId = Long.valueOf(m_queryIdFactory.incrementAndGet());
     }
 
-    /**
+    /*
      * If the {@link HttpServletRequest} included one or more of
      *
      * <ul>
@@ -986,7 +984,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       }
     }
 
-    /**
+    /*
      * Note: This is also responsible for noticing the time at which the query begins to execute and
      * storing the {@link RunningQuery} in the {@link #m_queries} map.
      *
@@ -1037,7 +1035,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       return query;
     }
 
-    /**
+    /*
      * Note: This is also responsible for noticing the time at which the query begins to execute and
      * storing the {@link RunningQuery} in the {@link #m_queries} map.
      *
@@ -1051,7 +1049,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       final EmbergraphSailUpdate update = new EmbergraphSailUpdate(astContainer, cxn);
 
       // Figure out the UUID under which the query will execute.
-      final UUID queryId2 = setQueryId(((EmbergraphSailUpdate) update).getASTContainer());
+      final UUID queryId2 = setQueryId(update.getASTContainer());
 
       // Override query if data set protocol parameters were used.
       overrideDataset(update);
@@ -1092,7 +1090,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       m_queries.put(queryId, r);
       m_queries2.put(queryId2, r);
 
-      /**
+      /*
        * Handle data races in CANCEL of an UPDATE operation whose cancellation was requested before
        * it began to execute.
        *
@@ -1104,8 +1102,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
         if (queryEngine.pendingCancel(queryId2)) {
 
-          /*
-           * There is a pending CANCEL for this UPDATE request, so
+        /*
+       * There is a pending CANCEL for this UPDATE request, so
            * cancel it now.
            */
           updateFuture.cancel(true /* mayInterruptIfRunning */);
@@ -1115,7 +1113,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       return update;
     }
 
-    /**
+    /*
      * Wrap the {@link ParsedQuery} as a {@link SailQuery}.
      *
      * <p>Note: This is achieved without reparsing the query.
@@ -1137,8 +1135,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
       if (queryTimeoutMillis > 0) {
 
-        /*
-         * If we have a timeout, then it is applied to the AST. The
+      /*
+       * If we have a timeout, then it is applied to the AST. The
          * timeout will be in milliseconds.
          */
 
@@ -1168,7 +1166,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       }
     }
 
-    /**
+    /*
      * Determines the {@link UUID} which will be associated with the {@link IRunningQuery}. If
      * {@link QueryHints#QUERYID} has already been used by the application to specify the {@link
      * UUID} then that {@link UUID} is noted. Otherwise, a random {@link UUID} is generated and
@@ -1197,7 +1195,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       return queryId2;
     }
 
-    /**
+    /*
      * Execute the query.
      *
      * @param cxn The connection.
@@ -1207,8 +1205,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     protected abstract void doQuery(EmbergraphSailRepositoryConnection cxn, OutputStream os)
         throws Exception;
 
-    //        /**
-    //         * Task for executing a SPARQL QUERY or SPARQL UPDATE.
+    //        /*
+//         * Task for executing a SPARQL QUERY or SPARQL UPDATE.
     //         * <p>
     //         * See {@link AbstractQueryTask#update} to decide whether this task is a
     //         * QUERY or an UPDATE.
@@ -1303,8 +1301,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
         if (log.isTraceEnabled()) log.trace("Query running...");
         beginNanos = System.nanoTime();
         if (explain && !update) {
-          /*
-           * The data goes to a bit bucket and we send an
+        /*
+       * The data goes to a bit bucket and we send an
            * "explanation" of the query evaluation back to the caller.
            *
            * Note: The trick is how to get hold of the IRunningQuery
@@ -1326,8 +1324,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
         } else {
           doQuery(cxn, os);
           //                        success = true;
-          /*
-           * GROUP_COMMIT: For mutation requests, calling flush() on the
+        /*
+       * GROUP_COMMIT: For mutation requests, calling flush() on the
            * output stream unblocks the client and allows it to proceed
            * BEFORE the write set of a mutation has been melded into a
            * group commit. This is only a problem for UPDATE requests.
@@ -1465,8 +1463,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
       if (xhtml) {
 
-        /*
-         * Override the XMLWriter to ensure that the XSL style sheet is
+      /*
+       * Override the XMLWriter to ensure that the XSL style sheet is
          * declared in the generated XML document. This will tell the
          * browser that it should style the result.
          *
@@ -1581,7 +1579,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   /** Executes a SPARQL UPDATE. */
   class UpdateTask extends AbstractQueryTask {
 
-    /**
+    /*
      * The timestamp for the commit point associated with the update and <code>-1</code> if the
      * commit point has not yet been assigned.
      */
@@ -1643,7 +1641,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
           });
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>This executes the SPARQL UPDATE and formats the HTTP response.
@@ -1665,8 +1663,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
       if (monitor) {
 
-        /*
-         * Establish a listener that will log the process onto an XHTML
+      /*
+       * Establish a listener that will log the process onto an XHTML
          * document that will be delivered (flushed) incrementally to
          * the client. The status code for the response will always be
          * 200 (Ok). If there is an error, then that error will be
@@ -1679,8 +1677,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
         // Always sending an OK with a response entity.
         resp.setStatus(EmbergraphServlet.HTTP_OK);
 
-        /**
-         * Note: Content Type header is required. See <a href=
+      /*
+       * Note: Content Type header is required. See <a href=
          * "http://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7.2.1" >RFC2616</a>
          *
          * <p>Note: This needs to be written before we write on the stream and after we decide on
@@ -1689,8 +1687,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
          */
         resp.setContentType("text/html; charset=" + charset.name());
 
-        /*
-         * Note: Setting this to true is causing an EofException when the
+      /*
+       * Note: Setting this to true is causing an EofException when the
          * jetty server attempts to write on the client (where the client in
          * this instance was Chrome). Given that flushing the http response
          * commits the response, it seems incorrect that we would ever do
@@ -1715,8 +1713,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
       } else {
 
-        /*
-         * The listener logs the progress report (with the incremental
+      /*
+       * The listener logs the progress report (with the incremental
          * load events) onto an xml document model but DOES NOT write
          * anything on the servlet response. If there is an error, the
          * HTTP status code will reflect that error. Otherwise we send
@@ -1733,8 +1731,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
         // buffer the response here.
         baos = new ByteArrayOutputStream();
 
-        /*
-         * Note: Do NOT set the ContentType yet. This action needs to be
+      /*
+       * Note: Do NOT set the ContentType yet. This action needs to be
          * deferred until we decide that a normal response (vs an
          * exception) will be delivered.
          */
@@ -1770,15 +1768,15 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
       if (baos != null) {
 
-        /*
-         * Since we buffered the response, we have to send it out now.
+      /*
+       * Since we buffered the response, we have to send it out now.
          */
 
         // Send an OK with a response entity.
         resp.setStatus(EmbergraphServlet.HTTP_OK);
 
-        /**
-         * Note: Content Type header is required. See <a href=
+      /*
+       * Note: Content Type header is required. See <a href=
          * "http://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7.2.1" >RFC2616</a>
          *
          * <p>Note: This needs to be written before we write on the stream and after we decide on
@@ -1792,8 +1790,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
         baos.flush();
         os.write(baos.toByteArray());
 
-        /*
-         * DO NOT FLUSH THE RESPONSE HERE.  IT WILL COMMIT THE RESPONSE
+      /*
+       * DO NOT FLUSH THE RESPONSE HERE.  IT WILL COMMIT THE RESPONSE
          * TO THE CLIENT BEFORE THE GROUP COMMMIT !!!
          *
          * @see #566
@@ -1809,7 +1807,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     }
   }
 
-  /**
+  /*
    * Writes the SPARQL UPDATE response document onto the caller's {@link OutputStream}. Depending on
    * the use case, the stream will either write directly onto the servlet response or it will be
    * buffered until the UPDATE request is finished.
@@ -1833,7 +1831,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     /** Used to correlate incremental LOAD progress messages. */
     private volatile Update lastOp = null;
 
-    /**
+    /*
      * @param os The {@link OutputStream}.
      * @param charset The character set.
      * @param reportLoadProgress When <code>true</code>, the incremental load progress will be
@@ -1889,7 +1887,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       this.echoBack = echoBack;
     }
 
-    /**
+    /*
      * Write the header of the SPARQL UPDATE response.
      *
      * @return The body.
@@ -1919,8 +1917,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
           if (reportLoadProgress) {
 
-            /*
-             * Incremental progress on LOAD.
+          /*
+       * Incremental progress on LOAD.
              */
 
             final SPARQLUpdateEvent.LoadProgress tmp = (SPARQLUpdateEvent.LoadProgress) e;
@@ -1931,8 +1929,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
             if (thisOp != lastOp) {
 
-              /*
-               * This is the first incremental load progress
+            /*
+       * This is the first incremental load progress
                * report for this LOAD operation.
                */
               lastOp = thisOp;
@@ -1958,8 +1956,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
         } else if (e.getCause() != null) {
 
-          /*
-           * An exception occurred when processing some update
+        /*
+       * An exception occurred when processing some update
            * operation.
            */
 
@@ -1992,13 +1990,13 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
         } else {
 
-          /*
-           * End of some UPDATE operation.
+        /*
+       * End of some UPDATE operation.
            */
 
           if (lastOp == e.getUpdate()) {
-            /*
-             * The end of a LOAD operation for which we reported the
+          /*
+       * The end of a LOAD operation for which we reported the
              * incremental progress. In this case, the LOAD
              * operation was already written onto the response
              * document, including the final report from the end of
@@ -2017,12 +2015,12 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
             //                                .close();
           } else {
 
-            /*
-             * Report statistics for the UPDATE operation.
+          /*
+       * Report statistics for the UPDATE operation.
              */
 
-            /*
-             * Note: will be null unless DELETE/INSERT WHERE
+          /*
+       * Note: will be null unless DELETE/INSERT WHERE
              * operation.
              *
              * @see BLZG-1446 (Provide detailed statistics on
@@ -2067,8 +2065,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
         if (flushEachEvent) {
 
-          /*
-           * Flush the response for each event so the client (presumably a
+        /*
+       * Flush the response for each event so the client (presumably a
            * human operator) can see the progress log update "live".
            *
            * Note: flushing the response is problematic and leads to an
@@ -2082,8 +2080,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
           os.flush();
 
-          /*
-           * Note: appears to be necessary for incremental writes.
+        /*
+       * Note: appears to be necessary for incremental writes.
            */
           resp.flushBuffer();
         }
@@ -2094,7 +2092,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       }
     }
 
-    /**
+    /*
      * Write the commit time into the document.
      *
      * @param commitTime The commit time.
@@ -2125,7 +2123,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     }
   }
 
-  /**
+  /*
    * Return the task which will execute the SPARQL Query -or- SPARQL UPDATE.
    *
    * <p>Note: The {@link OutputStream} is passed in rather than the {@link HttpServletResponse} in
@@ -2200,16 +2198,16 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     } else if (xhtml) {
       switch (queryType) {
         case ASK:
-          /*
-           * TODO This is just sending back text/plain. If we want to keep
+        /*
+       * TODO This is just sending back text/plain. If we want to keep
            * to the XHTML semantics, then we should send back XML with an
            * XSL style sheet.
            */
           acceptStr = BooleanQueryResultFormat.TEXT.getDefaultMIMEType();
           break;
         case SELECT:
-          /*
-           * We will send back an XML document with an XSLT style sheet
+        /*
+       * We will send back an XML document with an XSLT style sheet
            * declaration. The Content-Type needs to be application/xml in
            * order for the browser to interpret the style sheet
            * declaration.
@@ -2288,8 +2286,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
           final Charset charset;
           final String fileExt;
           if (xhtml) {
-            /*
-             * Override as application/xml so the browser will interpret the
+          /*
+       * Override as application/xml so the browser will interpret the
              * XSL style sheet directive.
              */
             mimeType = EmbergraphServlet.MIME_APPLICATION_XML;
@@ -2321,19 +2319,19 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     throw new RuntimeException("Unknown query type: " + queryType);
   }
 
-  /**
+  /*
    * Metadata about running {@link AbstractQueryTask}s (this includes both queries and update
    * requests).
    */
   static class RunningQuery {
 
-    /**
+    /*
      * The unique identifier for this query as assigned by the SPARQL end point (rather than the
      * {@link QueryEngine}).
      */
     final long queryId;
 
-    /**
+    /*
      * The unique identifier for this query for the {@link QueryEngine} (non-<code>null</code>).
      *
      * @see QueryEngine#getRunningQuery(UUID)
@@ -2370,7 +2368,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       this.queryTask = queryTask;
     }
 
-    /**
+    /*
      * Convenience method to return org.embergraph.rdf.sail.model.RunningQuery from a
      * EmbergraphRDFContext running query.
      *
@@ -2384,7 +2382,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
 
       final org.embergraph.rdf.sail.model.RunningQuery modelQuery;
 
-      final boolean isUpdateQuery = queryTask instanceof UpdateTask ? true : false;
+      final boolean isUpdateQuery = queryTask instanceof UpdateTask;
 
       modelQuery =
           new org.embergraph.rdf.sail.model.RunningQuery(
@@ -2394,8 +2392,8 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     }
   }
 
-  //    /**
-  //     * Return a connection transaction, which may be read-only or support
+  //    /*
+//     * Return a connection transaction, which may be read-only or support
   //     * update. When the timestamp is associated with a historical commit point,
   //     * this will be a read-only connection. When it is associated with the
   //     * {@link ITx#UNISOLATED} view or a read-write transaction, this will be a
@@ -2452,7 +2450,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
   //
   //    }
 
-  /**
+  /*
    * Return a read-only view of the {@link AbstractTripleStore} for the given namespace will read
    * from the commit point associated with the given timestamp.
    *
@@ -2479,7 +2477,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return tripleStore;
   }
 
-  /**
+  /*
    * Return a list of the namespaces for the {@link AbstractTripleStore}s registered against the
    * embergraph instance.
    *
@@ -2521,7 +2519,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return grs.getNamespaces(tx);
   }
 
-  /**
+  /*
    * Obtain a new transaction to protect operations against the specified view of the database. This
    * uses the transaction mechanisms to prevent recycling during operations NOT OTHERWISE PROTECTED
    * by a {@link EmbergraphSailConnection} for what would otherwise amount to dirty reads. This is
@@ -2557,7 +2555,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     return tx;
   }
 
-  /**
+  /*
    * Abort a transaction obtained by {@link #newTx(long)}. This decements the native active
    * transaction counter for the RWStore. Once that counter reaches zero, recycling will occur the
    * next time an unisolated mutation goes through a commit on the journal.
@@ -2580,7 +2578,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     }
   }
 
-  /**
+  /*
    * Commit a transaction obtained by {@link #newTx(long)}
    *
    * @param tx The transaction identifier.
@@ -2603,7 +2601,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     }
   }
 
-  /**
+  /*
    * Utility method to consolidate header into a single location.
    *
    * <p>The post-condition is that the current node is open for writing on the body element.
@@ -2626,7 +2624,7 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     current = current.node("body");
   }
 
-  /**
+  /*
    * Utility method to calculate a query timeout parameter value. Timeout could be set either via a
    * HTTP header {@link EmbergraphBaseContext#HTTP_HEADER_BIGDATA_MAX_QUERY_MILLIS} or via one of
    * the request parameters {@link EmbergraphBaseContext#MAX_QUERY_TIME_MILLIS} or {@link
@@ -2655,16 +2653,16 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
     {
       final String s = req.getParameter(MAX_QUERY_TIME_MILLIS);
       if (s != null) {
-        /*
-         * The maxQueryTimeMillis parameter was specified (0 implies no timeout).
+      /*
+       * The maxQueryTimeMillis parameter was specified (0 implies no timeout).
          */
         final long tmp = StringUtil.toLong(s);
         if (tmp > 0
             && // != -1L &&
             (queryTimeoutMillis == 0 /* noLimit */
                 || tmp < queryTimeoutMillis /* shorterLimit */)) {
-          /*
-           * Either we do not already have a timeout from the http
+        /*
+       * Either we do not already have a timeout from the http
            * header or the web.xml configuration (which implies no
            * timeout) or the query parameter value is less than the current
            * timeout. In both cases, we use the query parameter timeout
@@ -2679,16 +2677,16 @@ public class EmbergraphRDFContext extends EmbergraphBaseContext {
       final String s = req.getParameter(TIMEOUT);
 
       if (s != null) {
-        /*
-         * The timeout parameter was specified (0 implies no timeout).
+      /*
+       * The timeout parameter was specified (0 implies no timeout).
          */
         final long tmp = StringUtil.toLong(s) * 1000L;
         if (tmp > 0
             && // != -1L &&
             (queryTimeoutMillis == 0 /* noLimit */
                 || tmp < queryTimeoutMillis /* shorterLimit */)) {
-          /*
-           * The timeout parameter value is less than the current
+        /*
+       * The timeout parameter value is less than the current
            * timeout.
            */
           queryTimeoutMillis = tmp;

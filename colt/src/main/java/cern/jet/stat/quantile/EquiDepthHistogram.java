@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.jet.stat.quantile;
 
-/**
- * Read-only equi-depth histogram for selectivity estimation. Assume you have collected statistics
+/*
+* Read-only equi-depth histogram for selectivity estimation. Assume you have collected statistics
  * over a data set, among them a one-dimensional equi-depth histogram (quantiles). Then an
  * applications or DBMS might want to estimate the <i>selectivity</i> of some range query
  * <tt>[from,to]</tt>, i.e. the percentage of data set elements contained in the query range. This
@@ -30,14 +30,14 @@ package cern.jet.stat.quantile;
  */
 public class EquiDepthHistogram extends cern.colt.PersistentObject {
   protected float[] binBoundaries;
-  /**
+  /*
    * Constructs an equi-depth histogram with the given quantile elements. Quantile elements must be
    * sorted ascending and have the form specified in the class documentation.
    */
   public EquiDepthHistogram(float[] quantileElements) {
     this.binBoundaries = quantileElements;
   }
-  /**
+  /*
    * Returns the bin index of the given element. In other words, returns a handle to the range the
    * element falls into.
    *
@@ -59,14 +59,14 @@ public class EquiDepthHistogram extends cern.colt.PersistentObject {
     }
     return index;
   }
-  /**
+  /*
    * Returns the number of bins. In other words, returns the number of subdomains partitioning the
    * entire value domain.
    */
   public int bins() {
     return binBoundaries.length - 1;
   }
-  /**
+  /*
    * Returns the end of the range associated with the given bin.
    *
    * @throws ArrayIndexOutOfBoundsException if <tt>binIndex &lt; 0 || binIndex &gt;= bins()</tt>.
@@ -74,7 +74,7 @@ public class EquiDepthHistogram extends cern.colt.PersistentObject {
   public float endOfBin(int binIndex) {
     return binBoundaries[binIndex + 1];
   }
-  /**
+  /*
    * Returns the percentage of elements in the range (from,to]. Does linear interpolation.
    *
    * @param from the start point (exclusive).
@@ -84,7 +84,7 @@ public class EquiDepthHistogram extends cern.colt.PersistentObject {
   public double percentFromTo(float from, float to) {
     return phi(to) - phi(from);
   }
-  /**
+  /*
    * Returns how many percent of the elements contained in the receiver are <tt>&lt;= element</tt>.
    * Does linear interpolation.
    *
@@ -114,7 +114,7 @@ public class EquiDepthHistogram extends cern.colt.PersistentObject {
   public int size() {
     return binBoundaries.length;
   }
-  /**
+  /*
    * Returns the start of the range associated with the given bin.
    *
    * @throws ArrayIndexOutOfBoundsException if <tt>binIndex &lt; 0 || binIndex &gt;= bins()</tt>.

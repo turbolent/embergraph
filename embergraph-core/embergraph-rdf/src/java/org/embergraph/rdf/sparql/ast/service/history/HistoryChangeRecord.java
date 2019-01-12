@@ -27,8 +27,8 @@ import org.embergraph.rdf.changesets.ChangeRecord;
 import org.embergraph.rdf.changesets.IChangeRecord;
 import org.embergraph.rdf.spo.ISPO;
 
-/**
- * Extended to include a revision time for each record.
+/*
+* Extended to include a revision time for each record.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -48,7 +48,7 @@ public class HistoryChangeRecord extends ChangeRecord {
     this(changeRecord.getStatement(), changeRecord.getChangeAction(), revisionTime);
   }
 
-  /**
+  /*
    * The revision time is <code>lastCommitTime+1</code>.
    *
    * <p>TODO The revision time for the entries in the history index is currently <code>

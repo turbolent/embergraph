@@ -27,8 +27,8 @@ import org.embergraph.htree.data.MockBucketData;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Unit test which explores a simple add level case.
+/*
+* Unit test which explores a simple add level case.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -43,7 +43,7 @@ public class TestHTree_addLevel extends AbstractHTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test which inserts <code>
    * x10, x11, x20, x21</code> and then works through addLevel() and splitAndReindex(). For that
    * sequence of keys, we can get by with a single addLevel() and then immediately split and reindex
@@ -79,7 +79,7 @@ public class TestHTree_addLevel extends AbstractHTreeTestCase {
 
       final DirectoryPage root = htree.getRoot();
 
-      /**
+      /*
        * Insert a series of keys to bring us to the starting point for this test. The post-condition
        * of this insert sequence is:
        *
@@ -128,7 +128,7 @@ public class TestHTree_addLevel extends AbstractHTreeTestCase {
 
       assertTrue(a.distinctBitsRequired() == 1);
 
-      /**
+      /*
        * Add a directory level, replacing the full bucket page with a new directory (d) and two new
        * child bucket pages (e,f). The tuples in (a) are redistributed between (e,f) based on their
        * hash codes.

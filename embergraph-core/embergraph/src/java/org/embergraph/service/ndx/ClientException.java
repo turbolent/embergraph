@@ -5,8 +5,8 @@ import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Exposes a linked list of retry exceptions leading to the failure of an {@link
+/*
+* Exposes a linked list of retry exceptions leading to the failure of an {@link
  * AbstractDataServiceProcedureTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -19,7 +19,7 @@ public class ClientException extends RuntimeException {
 
   private List<Throwable> causes;
 
-  /**
+  /*
    * The list of causes, one per failed attempt.
    *
    * @return
@@ -33,7 +33,7 @@ public class ClientException extends RuntimeException {
     return causes;
   }
 
-  /**
+  /*
    * The final exception thrown which caused the task to fail. Normally this will indicate that the
    * retry count has been exceeded and {@link #getCauses()} will report the underlying problem(s)
    * which the task encountered.
@@ -45,14 +45,14 @@ public class ClientException extends RuntimeException {
     return super.getCause();
   }
 
-  //        /**
-  //         *
+  //        /*
+//         *
   //         */
   //        public ClientException() {
   //            super();
   //        }
 
-  /**
+  /*
    * @param msg
    * @param cause
    */
@@ -61,7 +61,7 @@ public class ClientException extends RuntimeException {
     this(msg, cause, null);
   }
 
-  /**
+  /*
    * @param msg
    * @param cause
    */
@@ -80,8 +80,8 @@ public class ClientException extends RuntimeException {
     this.causes = causes;
   }
 
-  //        /**
-  //         * @param cause
+  //        /*
+//         * @param cause
   //         */
   //        public ClientException(Throwable cause, List<Throwable> causes) {
 

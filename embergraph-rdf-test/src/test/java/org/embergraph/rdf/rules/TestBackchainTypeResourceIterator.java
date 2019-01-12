@@ -40,8 +40,8 @@ import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test suite for {@link BackchainTypeResourceIterator}.
+/*
+* Test suite for {@link BackchainTypeResourceIterator}.
  *
  * @todo write a test where we compute the forward closure of a data set with (x type Resource)
  *     entailments included in the rule set and then compare it to the forward closure of the same
@@ -62,7 +62,7 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test when only the subject of the triple pattern is bound. In this case the iterator MUST add a
    * single entailment (s rdf:Type rdfs:Resource) unless it is explicitly present in the database.
    */
@@ -133,7 +133,7 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Variant test where there is an explicit ( s rdf:type rdfs:Resource ) in the database for the
    * given subject. For this test we verify that the iterator visits an "explicit" statement rather
    * than adding its own inference.
@@ -210,7 +210,7 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Test when the triple pattern has no bound variables. In this case the iterator MUST add an
    * entailment for each distinct resource in the store unless there is also an explicit (s rdf:type
    * rdfs:Resource) assertion in the database.
@@ -303,7 +303,7 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Test for other triple patterns (all bound, predicate bound, object bound, etc). In all cases
    * the iterator MUST NOT add any entailments.
    *
@@ -376,7 +376,7 @@ public class TestBackchainTypeResourceIterator extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Backchain test when the subject is both bound and unbound and where the predicate is bound to
    * <code>rdf:type</code> and the object is bound to <code>rdfs:Resource</code>.
    *

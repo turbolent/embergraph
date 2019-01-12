@@ -36,8 +36,8 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.journal.ConcurrencyManager;
 import org.embergraph.util.BytesUtil;
 
-/**
- * A flyweight {@link SortedMap} wrapping an {@link IIndex}.
+/*
+* A flyweight {@link SortedMap} wrapping an {@link IIndex}.
  *
  * <p>Note: The {@link EmbergraphMap} has the same concurrency constraints as the {@link BTree} - it
  * is single-threaded for writes and allows concurrent readers. When wrapping a scale-out index, the
@@ -103,7 +103,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     return ndx;
   }
 
-  /**
+  /*
    * Wrap an index as a {@link SortedMap}.
    *
    * @param ndx The index.
@@ -113,7 +113,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     this(ndx, null /* fromKey */, null /* toKey */);
   }
 
-  /**
+  /*
    * Ctor that imposes a key-range constraint.
    *
    * @param ndx The backing index.
@@ -137,7 +137,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     this.toKey = toKey;
   }
 
-  /**
+  /*
    * This method imposes an optional key-range restriction on sub-map operations.
    *
    * @param x The key.
@@ -251,7 +251,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     }
   }
 
-  /**
+  /*
    * @todo override with implementation using ordered writes.
    *     <p>Note: Key range checks are being imposed by {@link #put(Object, Object)}.
    */
@@ -326,7 +326,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     return ndx.contains(key);
   }
 
-  /**
+  /*
    * Note: This performs an index scan (since the values of the map are unordered) but stops as soon
    * as a match is found.
    */
@@ -361,7 +361,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     return false;
   }
 
-  /**
+  /*
    * The #of index entries. When there are more than {@link Integer#MAX_VALUE} entries then this
    * method will report {@link Integer#MAX_VALUE} entries. If the backing index supports delete
    * markers then an index scan will be performed in order to count the #of non-deleted index
@@ -413,7 +413,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     return true;
   }
 
-  /**
+  /*
    * The #of non-deleted entries in the map.
    *
    * @param exactCount When <code>true</code> the result will be an exact count, which will require
@@ -467,7 +467,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
    * SortedMap.
    */
 
-  /**
+  /*
    * There is no means available to specify a {@link Comparator} for the {@link SortedMap}.
    * Application keys are first converted into <strong>unsigned</strong> byte[] keys using the
    * configured {@link ITupleSerializer} for the backing B+Tree. The index order is directly
@@ -480,7 +480,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     return null;
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException if the {@link ITupleSerializer} does not implement the
    *     optional {@link ITupleSerializer#deserializeKey(ITuple)} method.
    */
@@ -513,7 +513,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
 
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException if the {@link ITupleSerializer} does not implement the
    *     optional {@link ITupleSerializer#deserializeKey(ITuple)} method.
    */
@@ -551,8 +551,8 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
 
   }
 
-  //    /**
-  //     * The <strong>unsigned byte[]</strong> representation of the first key.
+  //    /*
+//     * The <strong>unsigned byte[]</strong> representation of the first key.
   //     *
   //     * @return The first key or <code>null</code> if there are no keys. (More
   //     *         precisely, if there are no undeleted tuples within the current
@@ -573,8 +573,8 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
   //
   //    }
   //
-  //    /**
-  //     * The <strong>unsigned byte[]</strong> representation of the last key.
+  //    /*
+//     * The <strong>unsigned byte[]</strong> representation of the last key.
   //     *
   //     * @return The last key or <code>null</code> if there are no keys. (More
   //     *         precisely, if there are no undeleted tuples within the current
@@ -596,7 +596,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
   //
   //    }
 
-  /**
+  /*
    * A {@link SortedMap} view onto the backing B+Tree which imposes the specified key-range
    * restriction.
    */
@@ -609,7 +609,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     return new EmbergraphMap<K, V>(ndx, k, fromKey);
   }
 
-  /**
+  /*
    * A {@link SortedMap} view onto the backing B+Tree which imposes the specified key-range
    * restriction.
    */
@@ -626,7 +626,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     return new EmbergraphMap<K, V>(ndx, kf, kt);
   }
 
-  /**
+  /*
    * A {@link SortedMap} view onto the backing B+Tree which imposes the specified key-range
    * restriction.
    */
@@ -645,7 +645,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     return new EntrySet();
   }
 
-  /**
+  /*
    * Implementation supporting {@link EmbergraphMap#entrySet()}.
    *
    * @todo override methods that are being overridden by {@link EmbergraphSet} for efficiency
@@ -668,7 +668,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     }
   }
 
-  /**
+  /*
    * Iterator visiting {@link Map.Entry} objects in support of {@link EntrySet}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -703,7 +703,7 @@ public class EmbergraphMap<K, V> extends AbstractMap<K, V> implements SortedMap<
     }
   }
 
-  /**
+  /*
    * Note: Since the same {@link ITuple} instance is returned for each tuple by many {@link
    * ITupleIterator}s there is a side-effect that invalidates the last visited {@link Map.Entry}
    * object. This side-effect could be removed by eagerly materializing the key and value from the

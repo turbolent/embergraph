@@ -40,8 +40,8 @@ import org.embergraph.relation.locator.DefaultResourceLocator;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.PropertyUtil;
 
-/**
- * A temporary triple store based on the <em>embergraph</em> architecture. Data is buffered in
+/*
+* A temporary triple store based on the <em>embergraph</em> architecture. Data is buffered in
  * memory but will overflow to disk for large stores. The backing store is a {@link TemporaryStore}.
  *
  * <p>Note: the {@link TempTripleStore} declares indices that do NOT support isolation. This offers
@@ -82,7 +82,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
     return store;
   }
 
-  /**
+  /*
    * NOP.
    *
    * <p>Note: since multiple {@link TempTripleStore}s may be created on the same backing {@link
@@ -106,7 +106,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
 
   }
 
-  /**
+  /*
    * Not supported.
    *
    * @throws UnsupportedOperationException
@@ -127,7 +127,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
     return store.isStable();
   }
 
-  /**
+  /*
    * Causes the {@link TempTripleStore} to be {@link #destroy()}ed, but does not reclaim space in
    * the backing {@link TemporaryStore} and does not close the backing {@link TemporaryStore}.
    */
@@ -140,8 +140,8 @@ public class TempTripleStore extends AbstractLocalTripleStore {
     super.close();
   }
 
-  //    /**
-  //     * Deletes the backing {@link TemporaryStore}, thereby destroying all
+  //    /*
+//     * Deletes the backing {@link TemporaryStore}, thereby destroying all
   //     * {@link TempTripleStore}s on that {@link TemporaryStore}. After calling
   //     * this method you will see an {@link IllegalStateException} if you attempt
   //     * further operations on {@link TempTripleStore}s that were backed by the
@@ -155,15 +155,15 @@ public class TempTripleStore extends AbstractLocalTripleStore {
   //
   //    }
 
-  /**
+  /*
    * @todo define options for {@link TemporaryStore} and then extend them here.
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface Options
+  public interface Options
       extends AbstractTripleStore.Options { // , TemporaryStore.Options {
   }
 
-  /**
+  /*
    * Create a transient {@link ITripleStore} backed by a new {@link TemporaryStore}.
    *
    * @param properties See {@link Options}.
@@ -176,7 +176,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
     this(properties, null);
   }
 
-  /**
+  /*
    * Create a transient {@link ITripleStore} backed by a new {@link TemporaryStore}. The {@link
    * ITripleStore} will default its properties based on those specified for the optional <i>db</i>
    * and then override those defaults using the given <i>properties</i>.
@@ -204,7 +204,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
     this(new TemporaryStore(), properties, db);
   }
 
-  /**
+  /*
    * Variant for creating a(nother) {@link TempTripleStore} on the same {@link TemporaryStore}. The
    * {@link TempTripleStore} will have its own namespace.
    *
@@ -236,7 +236,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
     create();
   }
 
-  /**
+  /*
    * Note: This is here just to make it easy to have the reference to the [store] and its [uuid]
    * when we create one in the calling ctor.
    */
@@ -245,7 +245,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
     this(store, UUID.randomUUID() + "kb", ITx.UNISOLATED, properties);
   }
 
-  /**
+  /*
    * Ctor specified by {@link DefaultResourceLocator}.
    *
    * @param indexManager
@@ -269,7 +269,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
     }
   }
 
-  /**
+  /*
    * Stacks the <i>properties</i> on top of the <i>db</i>'s properties so that the databases
    * properties will be treated as defaults and anything in <i>properties</i> will override anything
    * in database's properties.
@@ -321,7 +321,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
     return out;
   }
 
-  /**
+  /*
    * This store is NOT safe for concurrent operations on an {@link ITx#UNISOLATED} index. However,
    * it does support concurrent readers on the {@link ITx#READ_COMMITTED} view of an index.
    */

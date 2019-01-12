@@ -29,8 +29,8 @@ import org.embergraph.rdf.sparql.ast.QueryType;
 import org.embergraph.rdf.sparql.ast.SliceNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * ASK queries have a LIMIT of ONE imposed unless they are aggregations.
+/*
+* ASK queries have a LIMIT of ONE imposed unless they are aggregations.
  *
  * <p>TODO ASK style aggregations should always succeed (unless they encounter an error) and could
  * be refactored into a subquery with a limit of ONE and an aggregation to ensure that they do the

@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Poisson distribution; See the <A
+/*
+* Poisson distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node208.html#SECTION0002080000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosp.html#Poisson Distribution">
  * animated definition</A>.
@@ -60,7 +60,7 @@ public class PoissonSlow extends AbstractDiscreteDistribution {
     setRandomGenerator(randomGenerator);
     setMean(mean);
   }
-  /**
+  /*
    * Returns the value ln(Gamma(xx) for xx > 0. Full accuracy is obtained for xx > 1. For 0 < xx <
    * 1. the reflection formula (6.1.4) can be used first. (Adapted from Numerical Recipes in C)
    */
@@ -157,7 +157,7 @@ public class PoissonSlow extends AbstractDiscreteDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + mean + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

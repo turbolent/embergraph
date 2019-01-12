@@ -29,8 +29,8 @@ import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.Tuple;
 import org.embergraph.btree.UnisolatedReadWriteIndex;
 
-/**
- * Abstract {@link BTree} mapping <em>commitTime</em> (long integers) to {@link ICommitTimeEntry}
+/*
+* Abstract {@link BTree} mapping <em>commitTime</em> (long integers) to {@link ICommitTimeEntry}
  * objects.
  *
  * <p>This class is thread-safe for concurrent readers and writers.
@@ -38,14 +38,14 @@ import org.embergraph.btree.UnisolatedReadWriteIndex;
 public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends DelegateBTree
     implements ILinearList {
 
-  /**
+  /*
    * The underlying index. Access to this is NOT thread safe unless you take the appropriate lock on
    * the {@link #readWriteLock}.
    */
   private final BTree btree;
 
-  //    /**
-  //     * The {@link ReadWriteLock} used by the {@link UnisolatedReadWriteIndex} to
+  //    /*
+//     * The {@link ReadWriteLock} used by the {@link UnisolatedReadWriteIndex} to
   //     * make operations on the underlying {@link #btree} thread-safe.
   //     */
   //    private final ReadWriteLock readWriteLock;
@@ -56,8 +56,8 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
     return btree.getLookupTuple();
   }
 
-  //    /**
-  //     * Instance used to encode the timestamp into the key.
+  //    /*
+//     * Instance used to encode the timestamp into the key.
   //     */
   //    final private IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
 
@@ -69,7 +69,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
     this.btree = ndx;
   }
 
-  /**
+  /*
    * Encodes the commit time into a key.
    *
    * @param commitTime The commit time.
@@ -108,7 +108,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
     }
   }
 
-  /**
+  /*
    * Return the {@link IRootBlock} identifying the journal having the largest commitTime that is
    * less than or equal to the given timestamp. This is used primarily to locate the commit record
    * that will serve as the ground state for a transaction having <i>timestamp</i> as its start
@@ -150,7 +150,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
   /** Retrieve the entry from the index. */
   private T valueAtIndex(final long index) {
 
-    return (T) valueAt(index, getLookupTuple()).getObject();
+    return valueAt(index, getLookupTuple()).getObject();
 
     //        final byte[] val = super.valueAt(index);
     //
@@ -163,7 +163,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
 
   }
 
-  /**
+  /*
    * Return the first entry whose <em>commitTime</em> is strictly greater than the timestamp.
    *
    * @param timestamp The timestamp. A value of ZERO (0) may be used to find the first entry.
@@ -199,7 +199,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
     }
   }
 
-  /**
+  /*
    * Find the index of the entry associated with the largest commitTime that is less than or equal
    * to the given timestamp.
    *
@@ -250,7 +250,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
     }
   }
 
-  /**
+  /*
    * Add an entry under the commitTime associated with the entry.
    *
    * @param entry The entry
@@ -289,7 +289,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
     }
   }
 
-  /**
+  /*
    * Find and return the oldest entry (if any).
    *
    * @return That entry -or- <code>null</code> if there are no entries.
@@ -321,7 +321,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
     }
   }
 
-  /**
+  /*
    * Find the the most recent entry (if any).
    *
    * @return That entry -or- <code>null</code> if there are no entries.
@@ -346,7 +346,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
     }
   }
 
-  /**
+  /*
    * Find the oldest entry whose commit counter is LTE the specified commit counter.
    *
    * @return The entry -or- <code>null</code> if there is no such entry.
@@ -398,7 +398,7 @@ public class AbstractCommitTimeIndex<T extends ICommitTimeEntry> extends Delegat
     }
   }
 
-  /**
+  /*
    * Return the entry that is associated with the specified ordinal index (origin ZERO) counting
    * backwards from the most recent entry (0) towards the earliest entry (nentries-1).
    *

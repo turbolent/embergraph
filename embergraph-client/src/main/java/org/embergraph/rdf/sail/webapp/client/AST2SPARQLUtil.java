@@ -29,8 +29,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.parser.sparql.SPARQLUtil;
 
-/**
- * Utility class for externalizing SPARQL prefix declaration management.
+/*
+* Utility class for externalizing SPARQL prefix declaration management.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -66,7 +66,7 @@ public class AST2SPARQLUtil {
     }
   }
 
-  /**
+  /*
    * Return an external form for the {@link Value} suitable for direct embedding into a SPARQL
    * query.
    *

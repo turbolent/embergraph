@@ -28,29 +28,29 @@ import org.embergraph.bop.solutions.ISortOrder;
 import org.embergraph.relation.rule.eval.IStepTask;
 import org.embergraph.striterator.DistinctFilter;
 
-/**
- * A collection of constraints that may be imposed on an {@link IStep} when evaluated as a query.
+/*
+* A collection of constraints that may be imposed on an {@link IStep} when evaluated as a query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IQueryOptions extends Serializable {
 
-  /**
+  /*
    * <code>true</code> if a {@link DistinctFilter} should be applied when the query is evaluated.
    */
-  public boolean isDistinct();
+  boolean isDistinct();
 
-  /**
+  /*
    * An optional array of {@link ISortOrder}s describing the sort order that will be imposed on the
    * generated solutions when the rule is evaluated as a <em>query</em>.
    *
    * @return An array of {@link ISortOrder}s -or- <code>null</code> iff there is no "order by"
    *     constraint.
    */
-  public ISortOrder[] getOrderBy();
+  ISortOrder[] getOrderBy();
 
-  /**
+  /*
    * An optional {@link ISlice} describing a constraint on the first solution and the maximum #of
    * solutions to be materialized by a <em>query</em>.
    *
@@ -60,9 +60,9 @@ public interface IQueryOptions extends Serializable {
    * @return The {@link ISlice} -or- <code>null</code> if there is no constraint on the solutions
    *     that will be visited.
    */
-  public ISlice getSlice();
+  ISlice getSlice();
 
-  /**
+  /*
    * Return <code>true</code> iff query evaluation must be stable. Stable query evaluation requires
    * that the same query executed against the same commit point will produce the same solutions in
    * the same order. This constraint requires that (a) query execution does not use any parallelism;
@@ -71,5 +71,5 @@ public interface IQueryOptions extends Serializable {
    *
    * @return <code>true</code> if query evaluation must be stable.
    */
-  public boolean isStable();
+  boolean isStable();
 }

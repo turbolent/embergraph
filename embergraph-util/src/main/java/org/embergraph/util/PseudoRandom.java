@@ -19,8 +19,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.util;
 
-/**
- * PseudoRandom is derived from an algorithm used to create a dissolve graphics effect.
+/*
+* PseudoRandom is derived from an algorithm used to create a dissolve graphics effect.
  *
  * <p>Given a maximum number it generates all numbers from 1 to that number in a deterministic but
  * pseudorandom order.
@@ -68,7 +68,7 @@ public class PseudoRandom {
     0xA3000000
   };
 
-  /**
+  /*
    * Create a pseudo random number generator which will visit each integer in a half-open range.
    *
    * @param range The exclusive upper bound of the half-open range (0:range].
@@ -83,7 +83,7 @@ public class PseudoRandom {
     m_next = next + 1;
   }
 
-  /**
+  /*
    * Create a pseudo random number generator which will visit each integer in a half-open range. The
    * first visited value will be <code>1</code>.
    *
@@ -109,7 +109,7 @@ public class PseudoRandom {
     else return m_next - 1;
   }
 
-  /**
+  /*
    * The next number modulo the range.
    *
    * @param range The range.
@@ -127,7 +127,7 @@ public class PseudoRandom {
     return next() % range;
   }
 
-  /**
+  /*
    * Reset the pseudo random generator to a state where it has just visited <i>prev</i>.
    *
    * @param prev The "previous" value.

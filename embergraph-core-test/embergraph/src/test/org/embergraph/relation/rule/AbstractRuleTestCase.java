@@ -35,8 +35,8 @@ import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.test.MockTermIdFactory;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractRuleTestCase extends TestCase2 {
@@ -61,7 +61,7 @@ public abstract class AbstractRuleTestCase extends TestCase2 {
 
   protected static final Constant<IV> rdfProperty = new Constant<IV>(f.newTermId(VTE.URI));
 
-  /**
+  /*
    * this is rdfs9:
    *
    * <pre>
@@ -87,7 +87,7 @@ public abstract class AbstractRuleTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * rdfs4a:
    *
    * <pre>
@@ -123,7 +123,7 @@ public abstract class AbstractRuleTestCase extends TestCase2 {
       super(op);
     }
 
-    /**
+    /*
      * @param relation
      * @param s
      * @param p

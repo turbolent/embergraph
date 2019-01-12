@@ -34,8 +34,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.ChecksumError;
 import org.embergraph.util.InnerCause;
 
-/**
- * Test the raw socket protocol implemented by {@link HASendService} and {@link HAReceiveService}
+/*
+* Test the raw socket protocol implemented by {@link HASendService} and {@link HAReceiveService}
  * against a pipeline of 3 nodes.
  *
  * @author martyn Cutcher
@@ -58,7 +58,7 @@ public class TestHASendAndReceive3Nodes extends AbstractHASendAndReceiveTestCase
   /** The second follower (and the end of the pipeline). */
   private HAReceiveService<HAMessageWrapper> receiveServiceC;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Sets up an HA3 pipeline [A,B,C].
@@ -200,7 +200,7 @@ public class TestHASendAndReceive3Nodes extends AbstractHASendAndReceiveTestCase
     assertEquals(rcv1, rcv2);
   }
 
-  /**
+  /*
    * Unit test verifies that we can reconfigure the downstream target in an HA3 setting.
    *
    * <p>The test begins with 3 services [A,B,C] in the pipeline. Service A writes a message to
@@ -232,7 +232,7 @@ public class TestHASendAndReceive3Nodes extends AbstractHASendAndReceiveTestCase
     doTestPipelineChange(50 /* msgSize */, true /* smallMessage */);
   }
 
-  /**
+  /*
    * Variant test with a message size that we expect to be larger than will be received by the OS
    * before it hands control back to our code through the {@link Selector}.
    */
@@ -552,7 +552,7 @@ public class TestHASendAndReceive3Nodes extends AbstractHASendAndReceiveTestCase
     }
   }
 
-  /**
+  /*
    * <em>Note: This appears to work now.</em> This test has been observed to deadlock CI and is
    * disabled until we finish debugging the HA pipeline and quorums. See <a
    * href="https://sourceforge.net/apps/trac/bigdata/ticket/280>

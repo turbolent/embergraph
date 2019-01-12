@@ -54,8 +54,8 @@ import org.embergraph.service.DataService;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.WriteTaskCounters;
 
-/**
- * A custom {@link ThreadPoolExecutor} used by the {@link ConcurrencyManager} to execute concurrent
+/*
+* A custom {@link ThreadPoolExecutor} used by the {@link ConcurrencyManager} to execute concurrent
  * unisolated write tasks and perform group commits. Tasks extend {@link AbstractTask}. The caller
  * receives a {@link Future} when they submit a task to the write service. That {@link Future} is
  * NOT available until the next group commit following the successful execution of the write task.
@@ -121,24 +121,24 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   /** Main logger for the {@link WriteExecutorService}. */
   private static final Logger log = Logger.getLogger(WriteExecutorService.class);
 
-  /**
+  /*
    * Uses the {@link OverflowManager} log for things relating to synchronous overflow processing.
    */
   protected static final Logger overflowLog = Logger.getLogger(OverflowManager.class);
 
-  /**
+  /*
    * When <code>true</code>, writes the set of {@link #active} tasks into the {@link MDC} under the
    * <code>activeTasks</code> key. This is of interest if you want to know which tasks are in the
    * same commit group.
    */
   final boolean trackActiveSetInMDC = false; // MUST be false for deploy
 
-  /**
+  /*
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/196">Journal leaks memory </a>
    */
   private final WeakReference<IResourceManager> resourceManagerRef;
 
-  /**
+  /*
    * The name of the service if the write service is running inside of a service (used for error
    * messages).
    */
@@ -152,13 +152,13 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
   private final NonBlockingLockManagerWithNewDesign<String> lockManager;
 
-  /**
+  /*
    * The time in milliseconds that a group commit will await currently running tasks to join the
    * commit group.
    */
   protected final long groupCommitTimeout;
 
-  /**
+  /*
    * The time in milliseconds that a group commit will await an exclusive lock on the write service
    * in order to perform synchronous overflow processing. This lock is requested IFF overflow
    * process SHOULD be performed. The lock timeout needs to be of significant duration or a lock
@@ -171,7 +171,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   private static class MyLockManager<R extends Comparable<R>>
       extends NonBlockingLockManagerWithNewDesign<R> {
 
-    /**
+    /*
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/196">Journal leaks memory </a>
      */
     //        private final WriteExecutorService service;
@@ -201,7 +201,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * Tracks the #of rejected execution exceptions on the caller's counter.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -224,7 +224,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * @param resourceManager
    * @param corePoolSize
    * @param maximumPoolSize
@@ -320,7 +320,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
    * Support for pausing and resuming execution of new worker tasks.
    */
 
-  /**
+  /*
    * New tasks may begin to execute iff this counter is zero (0). It is incremented by {@link
    * #pause()} and decremented by {@link #resume()}.
    */
@@ -329,7 +329,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   /** Lock used for exclusive locks on the write service. */
   private final ReentrantLock exclusiveLock = new ReentrantLock();
 
-  /**
+  /*
    * Lock used for {@link Condition}s and to coordinate index checkpoints and index rollbacks with
    * the {@link AbstractTask}.
    *
@@ -341,7 +341,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   /** signaled when tasks should resume. */
   private final Condition unpaused = lock.newCondition();
 
-  /**
+  /*
    * The thread running {@link #groupCommit()} is signaled each time a task has completed
    * processing. The task will await the {@link #commit} signal before it resumes.
    *
@@ -361,7 +361,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   /** #of tasks that are running. */
   private final AtomicInteger nrunning = new AtomicInteger(0);
 
-  /**
+  /*
    * #of tasks that are waiting to run but are blocked on the #lock. This value represents the #of
    * tasks which have been starved from concurrent execution. The main culprit for a high value here
    * is group commit and the occasional synchronous overflow or purge resources (when someone has an
@@ -373,7 +373,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   private final ConcurrentHashMap<Thread, AbstractTask<?>> active =
       new ConcurrentHashMap<Thread, AbstractTask<?>>();
 
-  /**
+  /*
    * The set of tasks that make it into the commit group (so that we can set the commit time on each
    * of them iff the group commit succeeds).
    */
@@ -389,7 +389,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   /** True iff we are executing an abort. */
   private final AtomicBoolean abort = new AtomicBoolean(false);
 
-  /**
+  /*
    * The first cause if the {@link #commit(boolean)} fails. This is used to report a commit failure
    * (versus a task failure) through {@link #afterTask(AbstractTask, Throwable)} back to all tasks
    * in the commit group.
@@ -430,7 +430,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return maxPoolSize;
   }
 
-  /**
+  /*
    * The maximum #of tasks that are concurrently executing without regard to whether or not the
    * tasks have acquired their locks.
    *
@@ -442,7 +442,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return maxRunning;
   }
 
-  /**
+  /*
    * The maximum waiting time in millseconds from when a task completes successfully until the next
    * group commit.
    */
@@ -451,7 +451,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return maxCommitWaitingTime;
   }
 
-  /**
+  /*
    * The maximum service time in milliseconds of the atomic commit.
    *
    * @see AbstractJournal#commit()
@@ -461,7 +461,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return maxCommitServiceTime;
   }
 
-  /**
+  /*
    * The #of threads queued on the internal {@link #lock}. These are (for the most part) threads
    * waiting to start or stop during a group commit. However, you can not use this measure to infer
    * whether there are threads waiting to run which are being starved during a group commit or
@@ -472,7 +472,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return lock.getQueueLength();
   }
 
-  /**
+  /*
    * The #of tasks in the most recent commit group. In order to be useful information this must be
    * sampled and turned into a moving average.
    */
@@ -487,7 +487,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return maxCommitGroupSize;
   }
 
-  /**
+  /*
    * The #of group commits since the {@link WriteExecutorService} was started (all commits by this
    * service are group commits).
    */
@@ -496,7 +496,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return ngroupCommits.get();
   }
 
-  /**
+  /*
    * The #of bytes written by the last commit. This must be sampled to turn it into useful
    * information.
    */
@@ -505,7 +505,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return byteCountPerCommit;
   }
 
-  /**
+  /*
    * The #of aborts (not failed tasks) since the {@link WriteExecutorService} was started. Aborts
    * are serious events and occur IFF an {@link IAtomicStore#commit()} fails. Failed tasks do NOT
    * result in an abort.
@@ -515,7 +515,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return naborts;
   }
 
-  /**
+  /*
    * The #of tasks that have failed. Task failure means that the write set(s) for the task are
    * discarded and any indices on which it has written are rolled back. Task failure does NOT cause
    * the commit group to be discard. Rather, the failed task never joins a commit group and returns
@@ -526,7 +526,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return failedTaskCount;
   }
 
-  /**
+  /*
    * The #of tasks that have executed successfully (MIGHT NOT have been committed safely).
    *
    * @see #getTaskCommittedCount()
@@ -548,7 +548,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return noverflow;
   }
 
-  /**
+  /*
    * The instantaneous #of tasks that have <strong>acquired</strong> their locks are executing
    * concurrently on the write service. This is the real measure of concurrent task execution on the
    * write service. However, you need to sample this value and compute a moving average in order to
@@ -563,7 +563,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return activeTaskCountWithLocksHeld.get();
   }
 
-  /**
+  /*
    * #of tasks that are waiting to run but are blocked on the #lock. This value represents the #of
    * tasks which have been starved from concurrent execution. The main culprit for a high value here
    * is group commit and the occasional synchronous overflow or purge resources (when someone has an
@@ -574,7 +574,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return nready.get();
   }
 
-  /**
+  /*
    * <code>true</code> iff the pause flag is set such that the write service will queue up new tasks
    * without allowing them to execute.
    *
@@ -589,7 +589,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return paused.get() > 0;
   }
 
-  /**
+  /*
    * Sets the flag indicating that new worker tasks must pause in {@link #beforeExecute(Thread,
    * Runnable)}.
    *
@@ -638,7 +638,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * If task execution has been {@link #pause() paused} then {@link Condition#await() awaits}
    * someone to call {@link #resume()}.
    *
@@ -672,7 +672,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     super.beforeExecute(t, r);
   }
 
-  /**
+  /*
    * Executed before {@link AbstractTask#doTask()}
    *
    * @param t The thread in which that task will execute.
@@ -729,7 +729,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * This is executed after {@link AbstractTask#doTask()}. If the task completed successfully (no
    * exception thrown and its thread is not interrupted) then we invoke {@link #groupCommit()}.
    * Otherwise the write set of the task was already discarded by {@link
@@ -764,8 +764,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       if (t == null /*&& ! Thread.interrupted()*/) {
 
-        /*
-         * A write task succeeded.
+      /*
+       * A write task succeeded.
          *
          * Note: if the commit fails, then we need to interrupt all
          * write tasks that are awaiting commit. This means that we can
@@ -776,8 +776,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         assert nwrites > 0;
 
-        /*
-         *  If an IsolatedActionJournal then we want to unravel any
+      /*
+       *  If an IsolatedActionJournal then we want to unravel any
          *  updates.
          *
          *  So should we even be here doing a group commit?
@@ -798,8 +798,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         if (!groupCommit()) {
 
-          /*
-           * The task executed fine, but the commit group was aborted.
+        /*
+       * The task executed fine, but the commit group was aborted.
            *
            * @todo what circumstances can cause this other than the
            * journal being shutdown (interrupted) while tasks are
@@ -826,8 +826,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       } else {
 
-        /*
-         * A write task failed. Its write set has already been
+      /*
+       * A write task failed. Its write set has already been
          * discarded. We log some messages based on the cause and then
          * just return immediately
          */
@@ -838,8 +838,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         if (InnerCause.isInnerCause(t, ValidationError.class)) {
 
-          /*
-           * ValidationError.
+        /*
+       * ValidationError.
            *
            * The task was a commit for a transaction but the
            * transaction's write set could not be validated. Log a
@@ -850,8 +850,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } else if (InnerCause.isInnerCause(t, InterruptedException.class)) {
 
-          /*
-           * InterruptedException.
+        /*
+       * InterruptedException.
            *
            * The task was interrupted, noticed the interrupt, and threw
            * out an InterruptedException.
@@ -861,8 +861,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } else if (InnerCause.isInnerCause(t, NoSuchIndexException.class)) {
 
-          /*
-           * NoSuchIndexException.
+        /*
+       * NoSuchIndexException.
            *
            * The task attempted to access an index that does not
            * exist. This is pretty common and often occurs when an
@@ -874,8 +874,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } else if (InnerCause.isInnerCause(t, StaleLocatorException.class)) {
 
-          /*
-           * StaleLocatorException.
+        /*
+       * StaleLocatorException.
            *
            * The task attempted to access an index partition that was
            * split, joined or moved since the client obtain the
@@ -890,8 +890,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } else {
 
-          /*
-           * The task threw some other kind of exception.
+        /*
+       * The task threw some other kind of exception.
            */
 
           log.warn("Task failed: task=" + r); // , t);
@@ -1006,7 +1006,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return sb.toString();
   }
 
-  /**
+  /*
    * Overridden to shutdown the embedded lock manager service.
    *
    * <p>{@inheritDoc}
@@ -1019,7 +1019,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     super.shutdown();
   }
 
-  /**
+  /*
    * Overridden to shutdown the embedded lock manager service.
    *
    * <p>{@inheritDoc}
@@ -1032,7 +1032,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return super.shutdownNow();
   }
 
-  /**
+  /*
    * Group commit.
    *
    * <p>This method is called by {@link #afterTask(Callable, Throwable)} for each task that
@@ -1205,14 +1205,14 @@ public class WriteExecutorService extends ThreadPoolExecutor {
         // begins.
         final long beginWait = System.currentTimeMillis();
         if (shouldOverflow) {
-          /*
-           * Try to acquire the exclusive write lock so that we can do
+        /*
+       * Try to acquire the exclusive write lock so that we can do
            * synchronous overflow processing.
            */
           try {
             if (!(locked = tryLock(overflowLockRequestTimeout, TimeUnit.MILLISECONDS))) {
-              /*
-               * Note: This can cause serious problem if it
+            /*
+       * Note: This can cause serious problem if it
                * persists since the service will be unable to
                * release old resources on the disk and the live
                * journal extent will continue to grow without
@@ -1242,8 +1242,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
             return false;
           }
         } else {
-          /*
-           * Wait for some or all running tasks to join the commit
+        /*
+       * Wait for some or all running tasks to join the commit
            * group for greater efficiency (packs more tasks into a
            * commit group by trading off some latency against the size
            * of the commit group).
@@ -1404,7 +1404,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * Wait a moment to let other tasks finish, but if the queue is empty then return immediately in
    * order to keep down latency for a single task that is run all by itself without anything else in
    * the queue.
@@ -1614,8 +1614,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   //
   //        }
 
-  //    /**
-  //     * Flag may be set to force overflow processing during the next group
+  //    /*
+//     * Flag may be set to force overflow processing during the next group
   //     * commit. The flag is cleared once an overflow has occurred.
   //     */
   //    public final AtomicBoolean forceOverflow = new AtomicBoolean(false);
@@ -1633,7 +1633,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
         && rm.shouldOverflow();
   }
 
-  /**
+  /*
    * Return the {@link IResourceManager} - does NOT check for a cleared {@link WeakReference} on
    * {@link #resourceManagerRef}.
    *
@@ -1654,7 +1654,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   //
   //    }
 
-  /**
+  /*
    * Once an overflow condition has been recognized and NO tasks are {@link #nrunning} then {@link
    * IResourceManager#overflow()} MAY be invoked to handle synchronous overflow processing,
    * including putting a new {@link IJournal} into place and re-defining the views for all named
@@ -1706,7 +1706,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * Acquires an exclusive lock on the write service.
    *
    * <p>The write service is paused for up to <i>timeout</i> units. During that time no new tasks
@@ -1768,8 +1768,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       try {
 
-        /*
-         * Do not permit new tasks to start.
+      /*
+       * Do not permit new tasks to start.
          *
          * Note: New tasks can't start while we hold the [lock], but
          * this also ensures that new tasks will not start if we have to
@@ -1781,8 +1781,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
          */
         pause();
 
-        /*
-         * Wait up to the remaining time for the write service to
+      /*
+       * Wait up to the remaining time for the write service to
          * quiesce.
          */
         granted = quiesce(nanos, TimeUnit.NANOSECONDS);
@@ -1796,16 +1796,16 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       } finally {
 
-        /*
-         * Note: If the write service quiesed during the specified
+      /*
+       * Note: If the write service quiesed during the specified
          * timeout then the exclusiveLock is granted and we return
          * without calling exclusiveLock.unlock().
          */
 
         if (!granted) {
 
-          /*
-           * Since the write service did not quiesce the exclusiveLock
+        /*
+       * Since the write service did not quiesce the exclusiveLock
            * WILL NOT be granted so we resume() the write service and
            * release the exclusiveLock.
            */
@@ -1822,7 +1822,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * Release the exclusive write lock.
    *
    * @throws IllegalMonitorStateException if the current thread does not own the lock.
@@ -1853,7 +1853,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * Wait until there are no more tasks running.
    *
    * @param nanos The maximum amount of time to wait. Use {@link Long#MAX_VALUE} to wait forever.
@@ -1973,7 +1973,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     return false;
   }
 
-  /**
+  /*
    * Encapsulates a running task and its elapsed time since the task was started and extends the
    * toString() representation to give us some more interesting information. The natural sort order
    * is by the total elapsed run time (descending), which is noted when the object is instantiated
@@ -1990,10 +1990,10 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     /** The #of milliseconds ago that work began on this task. */
     private final long startAge;
 
-    private static enum State {
+    private enum State {
       Waiting,
       Running,
-      Done;
+      Done
     }
 
     private final State state;
@@ -2042,8 +2042,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  //    /**
-  //     * Orders the tasks by their submit time, which permits a stable sort and is
+  //    /*
+//     * Orders the tasks by their submit time, which permits a stable sort and is
   //     * correlated with their run time since we are only logging the running
   //     * tasks.
   //     *
@@ -2067,7 +2067,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
   //
   //    }
 
-  /**
+  /*
    * Commit the store.
    *
    * <p>Note: This method does NOT throw anything. All exceptions are caught and handled.
@@ -2161,8 +2161,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       if (locked) {
 
-        /*
-         * Note: an exclusive lock is obtained before overflow
+      /*
+       * Note: an exclusive lock is obtained before overflow
          * processing so this is the last commit before we overflow the
          * journal.
          */
@@ -2173,7 +2173,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
       // #of bytes on the journal as of the previous commit point.
       final long byteCountBefore = journal.getRootBlockView().getNextOffset();
 
-      /**
+      /*
        * ATOMIC COMMIT
        *
        * <p>Note: For HA, this is a 2-Phase commit. For the standalone Journal and the federation
@@ -2230,8 +2230,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
       if (locked) {
 
-        /*
-         * Note: an exclusive lock is obtained before overflow
+      /*
+       * Note: an exclusive lock is obtained before overflow
          * processing so this is the last commit before we overflow the
          * journal.
          */
@@ -2268,7 +2268,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * Abort. Interrupt all running tasks, await the termination of those tasks, and then abandon the
    * pending write sets.
    *
@@ -2368,8 +2368,8 @@ public class WriteExecutorService extends ThreadPoolExecutor {
 
         } catch (InterruptedException ex) {
 
-          /*
-           * The current thread was interrupted waiting for the active
+        /*
+       * The current thread was interrupted waiting for the active
            * tasks to complete so that we can do the abort. At this
            * point:
            *  - All write tasks that are awaiting commit have been
@@ -2448,7 +2448,7 @@ public class WriteExecutorService extends ThreadPoolExecutor {
     }
   }
 
-  /**
+  /*
    * Private helper resets some internal state to initial conditions following either a successful
    * commit or an abort.
    *

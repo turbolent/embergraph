@@ -31,8 +31,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * Wrapper for a task to be executed in a stand-off fashion. This can be used for the {@link
+/*
+* Wrapper for a task to be executed in a stand-off fashion. This can be used for the {@link
  * IEmbergraphFederation} since it provides access to the global view of a scale-out index. It can
  * also be used for a {@link Journal} if are not relying on the {@link IConcurrencyManager} to guard
  * the resources declared by the task.

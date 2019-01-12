@@ -36,8 +36,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.NV;
 
-/**
- * Base class for managing the initial configuration metadata for indices and locatable resources.
+/*
+* Base class for managing the initial configuration metadata for indices and locatable resources.
  *
  * @todo There are some drawbacks with this approach. It remains to be seen whether this can be
  *     improved on readily.
@@ -65,7 +65,7 @@ public class Configuration {
   /** The namespace separator character. */
   public static final transient char DOT = '.';
 
-  /**
+  /*
    * Return the value for property, which may be the default value, a global override, or a
    * namespace override. Defaults are assigned by three mechanisms.
    *
@@ -118,7 +118,7 @@ public class Configuration {
     return nv.getValue();
   }
 
-  /**
+  /*
    * Variant returns both the name under which the value was discovered and the value.
    *
    * @param indexManagerIsIgnored
@@ -214,7 +214,7 @@ public class Configuration {
     return new NV(key, val);
   }
 
-  /**
+  /*
    * Variant converts to the specified generic type and validates the value.
    *
    * @param <E>
@@ -248,8 +248,8 @@ public class Configuration {
     return e;
   }
 
-  //    /**
-  //     * Return the last component of the globalName.
+  //    /*
+//     * Return the last component of the globalName.
   //     * <p>
   //     * Note: If '.' does not appear, then lastIndexOf == -1 and beginIndex :=
   //     * lastIndexOf + 1 == 0, so the localName will be the same as the
@@ -268,7 +268,7 @@ public class Configuration {
   //
   //    }
 
-  /**
+  /*
    * Resolve the value to a {@link DataService} {@link UUID}.
    *
    * @param indexManager The index manager (optional).
@@ -331,7 +331,7 @@ public class Configuration {
     return null;
   }
 
-  /**
+  /*
    * Return the name that can be used to override the specified property for the given namespace.
    *
    * @param namespace The namespace (of an index, relation, etc).

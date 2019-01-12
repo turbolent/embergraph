@@ -29,8 +29,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 
-/**
- * Unit tests for {@link EQConstant}.
+/*
+* Unit tests for {@link EQConstant}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

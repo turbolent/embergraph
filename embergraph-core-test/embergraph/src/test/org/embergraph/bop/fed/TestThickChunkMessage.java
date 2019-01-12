@@ -49,8 +49,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.striterator.Dechunkerator;
 
-/**
- * Unit tests for {@link ThickChunkMessage}.
+/*
+* Unit tests for {@link ThickChunkMessage}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -88,7 +88,7 @@ public class TestThickChunkMessage extends TestCase2 {
     super.tearDown();
   }
 
-  /**
+  /*
    * Create an {@link IV} for a {@link EmbergraphLiteral}, set the {@link IVCache} association, and
    * wrap it as an {@link IConstant}.
    *
@@ -251,7 +251,7 @@ public class TestThickChunkMessage extends TestCase2 {
         new Dechunkerator<IBindingSet>(msg.getChunkAccessor().iterator()));
   }
 
-  /**
+  /*
    * Mock object.
    *
    * <p>Note: This needs to be serializable since we are sending the proxy with the {@link
@@ -295,7 +295,7 @@ public class TestThickChunkMessage extends TestCase2 {
       return null;
     }
 
-    /**
+    /*
      * Note: Assume equal as long as same class. This is used by the code which tests the
      * serialization of the {@link ThickChunkMessage}. In a real federation, the query controller is
      * a proxy. But also see {@link IChunkMessage#getQueryController()}, which is an issue to remove

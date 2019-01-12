@@ -29,7 +29,7 @@ public class BaseVocabularyDecl implements VocabularyDecl {
 
   private final URI[] uris;
 
-  /**
+  /*
    * Construct a decl from an array of URIs or URI Strings. Any object types other than URI or
    * String will cause an IllegalArgumentException.
    */
@@ -50,7 +50,7 @@ public class BaseVocabularyDecl implements VocabularyDecl {
     }
   }
 
-  /**
+  /*
    * Return an iterator which will visit the declared values. The iterator must not support removal.
    */
   public Iterator<URI> values() {

@@ -19,8 +19,8 @@ package org.embergraph.bop.controller;
 
 import org.embergraph.bop.join.SolutionSetHashJoinOp;
 
-/**
- * Marker interface for named subquery evaluation. Solutions from the pipeline flow through this
+/*
+* Marker interface for named subquery evaluation. Solutions from the pipeline flow through this
  * operator without modification. The subquery is evaluated exactly once, the first time this
  * operator is invoked, and the solutions for the subquery are written onto a hash index. Those
  * solutions are then joined back within the query at latter points in the query plan using a

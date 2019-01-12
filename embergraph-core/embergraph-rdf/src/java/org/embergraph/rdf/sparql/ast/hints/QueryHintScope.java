@@ -34,8 +34,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Type safe enumeration for the scope of a query hint. The {@link URI} for each scope is {@value
+/*
+* Type safe enumeration for the scope of a query hint. The {@link URI} for each scope is {@value
  * QueryHints#NAMESPACE} plus the name of the enumeration value. For example, <code>
  * http://www.embergraph.org/queryHints#Group</code> would apply to the entire group in which that
  * query hint was found.
@@ -49,7 +49,7 @@ public enum QueryHintScope {
 
   /** The entire query. */
   Query(new URIImpl(QueryHints.NAMESPACE + "Query")),
-  /**
+  /*
    * The query or subquery in which the query hint appears (any of the {@link QueryBase} instances).
    *
    * @see QueryRoot
@@ -57,16 +57,16 @@ public enum QueryHintScope {
    * @see NamedSubqueryRoot
    */
   SubQuery(new URIImpl(QueryHints.NAMESPACE + "SubQuery")),
-  /**
+  /*
    * The group in which the query hint appears and any direct non-group children within that group.
    */
   Group(new URIImpl(QueryHints.NAMESPACE + "Group")),
-  /**
+  /*
    * The group in which the query hint appears and any children of that group. This does not apply
    * to things within {@link ServiceNode}s or {@link SubqueryRoot}s.
    */
   GroupAndSubGroups(new URIImpl(QueryHints.NAMESPACE + "GroupAndSubGroups")),
-  /**
+  /*
    * The query hint binds on the previous non-query hint AST node which is not itself a query hint.
    * This may be used to bind a query hint on a {@link StatementPatternNode}, a {@link
    * JoinGroupNode}, a {@link UnionNode}, a {@link ServiceNode}, etc. This DOES NOT bind the query
@@ -74,7 +74,7 @@ public enum QueryHintScope {
    */
   Prior(new URIImpl(QueryHints.NAMESPACE + "Prior"));
 
-  private QueryHintScope(final URI uri) {
+  QueryHintScope(final URI uri) {
     this.uri = uri;
   }
 

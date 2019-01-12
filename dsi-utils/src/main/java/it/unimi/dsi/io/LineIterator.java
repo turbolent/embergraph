@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/**
- * An adapter that exposes a fast buffered reader as an iterator over the returned lines. Since we
+/*
+* An adapter that exposes a fast buffered reader as an iterator over the returned lines. Since we
  * just actually read a line to know whether {@link #hasNext()} should return true, the last line
  * read from the underlying fast buffered reader has to be cached. Mixing calls to this adapter and
  * to the underlying fast buffered reader will not usually give the expected results.
@@ -52,7 +52,7 @@ public class LineIterator extends AbstractObjectIterator<MutableString> {
   /** Which string in {@link #s} should be returned next. */
   private int k;
 
-  /**
+  /*
    * Creates a new line iterator over a specified fast buffered reader.
    *
    * @param fastBufferedReader the underlying buffered reader.
@@ -63,7 +63,7 @@ public class LineIterator extends AbstractObjectIterator<MutableString> {
     this.pl = pl;
   }
 
-  /**
+  /*
    * Creates a new line iterator over a specified fast buffered reader.
    *
    * @param fastBufferedReader the underlying buffered reader.
@@ -93,7 +93,7 @@ public class LineIterator extends AbstractObjectIterator<MutableString> {
     return s[k];
   }
 
-  /**
+  /*
    * Returns all lines remaining in this iterator as a list.
    *
    * @return all lines remaining in this iterator as a list.

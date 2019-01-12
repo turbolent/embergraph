@@ -33,8 +33,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Helper class for managing the execution of a set of {@link Callable} tasks on an {@link
+/*
+* Helper class for managing the execution of a set of {@link Callable} tasks on an {@link
  * ExecutorService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -47,7 +47,7 @@ public class ExecutionHelper<T> {
   private final long timeout;
   private final TimeUnit unit;
 
-  /**
+  /*
    * Tasks will execute without timeout.
    *
    * @param service The service on which the tasks will be executed.
@@ -57,7 +57,7 @@ public class ExecutionHelper<T> {
     this(service, Long.MAX_VALUE, TimeUnit.MILLISECONDS);
   }
 
-  /**
+  /*
    * Tasks will execute with the specified timeout.
    *
    * @param service The service on which the tasks will be executed.
@@ -88,7 +88,7 @@ public class ExecutionHelper<T> {
     this.unit = unit;
   }
 
-  /**
+  /*
    * Submit subquery tasks, wait until they are done, and verify that all tasks were executed
    * without error. A variety of steps are taken to normalize handling interrupts, canceled
    * execution due to timeout, and rejected execution when the {@link ExecutorService} has been
@@ -154,8 +154,8 @@ public class ExecutionHelper<T> {
 
       if (service.isShutdown()) {
 
-        /*
-         * Asynchronous shutdown of the executor service.
+      /*
+       * Asynchronous shutdown of the executor service.
          *
          * Note: When normal shutdown of the service is requested it is
          * common that the main thread will be in a state in which it

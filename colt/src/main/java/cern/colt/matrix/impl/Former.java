@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.matrix.impl;
 
-/**
- * Formats a double into a string (like sprintf in C).
+/*
+* Formats a double into a string (like sprintf in C).
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 21/07/00
@@ -18,7 +18,7 @@ package cern.colt.matrix.impl;
  * @see cern.colt.Sorting
  */
 public interface Former {
-  /**
+  /*
    * Formats a double into a string (like sprintf in C).
    *
    * @param x the number to format

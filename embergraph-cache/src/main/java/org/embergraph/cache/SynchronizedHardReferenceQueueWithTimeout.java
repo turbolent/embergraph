@@ -32,8 +32,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * Thread-safe version with timeout for clearing stale references from the queue. Clearing of stale
+/*
+* Thread-safe version with timeout for clearing stale references from the queue. Clearing of stale
  * entries is accomplished when a value is added to the {@link SynchronizedHardReferenceQueue}. The
  * tail of the queue is tested and any entry on the tail whose age exceeds a timeout is evicted.
  * This continues until we reach the first value on the tail of the queue whose age is greater than
@@ -49,7 +49,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
   private static final Logger log =
       Logger.getLogger(SynchronizedHardReferenceQueueWithTimeout.class);
 
-  /**
+  /*
    * Note: Synchronization for the inner {@link #queue} is realized using the <strong>outer</strong>
    * reference!
    */
@@ -62,7 +62,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
     return (HardReferenceQueue) queue;
   }
 
-  /**
+  /*
    * Variant with no listener and timeout.
    *
    * @param capacity The maximum #of references that can be stored on the cache. There is no
@@ -75,7 +75,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
     this(capacity, DEFAULT_NSCAN, timeoutNanos);
   }
 
-  /**
+  /*
    * Optional timeout.
    *
    * @param capacity The maximum #of references that can be stored on the cache. There is no
@@ -113,7 +113,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
     }
   }
 
-  /**
+  /*
    * Inner class wraps each object inserted into the queue with the nanotime corresponding to that
    * insert. A {@link Cleaner} thread runs periodically and removes stale references from the tail
    * of the queue.
@@ -128,13 +128,13 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
   private static class InnerHardReferenceQueue<T extends ValueAge<?>>
       extends HardReferenceQueue<T> {
 
-    /**
+    /*
      * The timeout (in nanoseconds) for an entry in the queue. When ZERO (0L), the timeout is
      * disabled.
      */
     private final long timeout;
 
-    /**
+    /*
      * @param listener
      * @param capacity
      * @param nscan
@@ -154,7 +154,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
       this.timeout = timeout;
     }
 
-    /**
+    /*
      * Examine references backwards from the tail, evicting any that have become stale (too long
      * since they were last touched).
      *
@@ -215,7 +215,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
       return ncleared;
     }
 
-    /**
+    /*
      * Examine references backwards from the tail, evicting any that have become stale (too long
      * since they were last touched) based on the timeout specified to the ctor (this is a NOP if
      * the timeout is ZERO(0)).
@@ -230,7 +230,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
       return 0;
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Overridden to handle the indirection from the {@link ValueAge} object to the wrapped
@@ -288,7 +288,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
    * Methods which DO NOT require synchronization.
    */
 
-  /**
+  /*
    * The timeout (in nanoseconds) for an entry in the queue. When ZERO (0L), the timeout is
    * disabled.
    */
@@ -382,7 +382,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
    * Cleaner service.
    */
 
-  /**
+  /*
    * This method may be invoked by life cycle operations which need to tear down the embergraph
    * environment. Normally you do not need to do this as the cleaner service uses a daemon thread
    * and will not prevent the JVM from halting. However, a servlet container running embergraph can
@@ -405,7 +405,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
         new Cleaner(), 5000 /* initialDelay */, 5000 /* delay */, TimeUnit.MILLISECONDS);
   }
 
-  /**
+  /*
    * Collection of weak references to {@link SynchronizedHardReferenceQueue}s with non-zero timeouts
    * to be processed by the cleaner.
    *
@@ -416,7 +416,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
       queues =
           new ConcurrentLinkedQueue<WeakReference<SynchronizedHardReferenceQueueWithTimeout>>();
 
-  /**
+  /*
    * Cleans stale references from all known {@link SynchronizedHardReferenceQueue} instances having
    * a non-ZERO timeout.
    *
@@ -424,7 +424,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
    */
   private static class Cleaner implements Runnable {
 
-    /**
+    /*
      * Each run clears stale references from each existing {@link SynchronizedHardReferenceQueue}
      * instance. This method is also responsible for removing {@link WeakReference}s which have been
      * cleared from {@link SynchronizedHardReferenceQueue#clients}.
@@ -455,12 +455,12 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
             continue;
           }
 
-          /*
-           * Note: Synchronization is imposed on the outer class
+        /*
+       * Note: Synchronization is imposed on the outer class
            * reference.
            */
           synchronized (queue) {
-            ncleared += ((InnerHardReferenceQueue) queue.queue).evictStaleRefs();
+            ncleared += queue.queue.evictStaleRefs();
           }
 
           nqueues++;
@@ -476,17 +476,17 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
     }
   }
 
-  /**
+  /*
    * Interface for something wrapping a reference.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @param <T>
    */
-  public static interface IRef<T> {
+  public interface IRef<T> {
     T get();
   }
 
-  /**
+  /*
    * Wraps an object so that it can self-report the last timestamp when it was last accessed.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -501,7 +501,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
       return ref;
     }
 
-    /**
+    /*
      * The timestamp associated with the value. This is initialized to the {@link System#nanoTime()}
      * when the {@link ValueAge} was created and is updated to the value of {@link
      * System#nanoTime()} each time {@link #touch()} is invoked.

@@ -27,15 +27,15 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.join.IHashJoinUtility;
 
-/**
- * Attributes for named solution set processing.
+/*
+* Attributes for named solution set processing.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface NamedSetAnnotations {
 
-  /**
+  /*
    * The name of {@link IQueryAttributes} attribute under which the {@link INamedSolutionSetRef} can
    * be located. That {@link INamedSolutionSetRef} may be used to locate the {@link
    * IHashJoinUtility}, which includes metadata about the hash index and encapsulates the hash index
@@ -50,5 +50,5 @@ public interface NamedSetAnnotations {
    * @see INamedSolutionSetRef
    * @see BOpContext#getAlternateSource(PipelineOp, INamedSolutionSetRef)
    */
-  final String NAMED_SET_REF = "namedSetRef";
+  String NAMED_SET_REF = "namedSetRef";
 }

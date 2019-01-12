@@ -30,8 +30,8 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.htree.AbstractHTree.HardReference;
 import org.embergraph.util.Bytes;
 
-/**
- * Unit tests for transient {@link HTree}s (no backing store).
+/*
+* Unit tests for transient {@link HTree}s (no backing store).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public class TestTransientHTree extends AbstractHTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test the ability to create a transient {@link HTree} (one not backed by a persistence store).
    */
   public void test_createTransient() {
@@ -99,7 +99,7 @@ public class TestTransientHTree extends AbstractHTreeTestCase {
     assertFalse(btree.contains(key));
   }
 
-  /**
+  /*
    * Test inserts a bunch of data into a transient {@link HTree} and verifies that eviction of dirty
    * nodes and leaves does not result in errors arising from an attempt to persist their state on
    * the (non-existent) backing store.
@@ -161,8 +161,8 @@ public class TestTransientHTree extends AbstractHTreeTestCase {
    * remove() has been implemented.
    */
 
-  //    /**
-  //     * Test verifies that the nodes and leaves become weakly reachable once they
+  //    /*
+//     * Test verifies that the nodes and leaves become weakly reachable once they
   //     * have been deleted.
   //     * <p>
   //     * The test builds up a modest amount of data in the {@link HTree} using a
@@ -302,8 +302,8 @@ public class TestTransientHTree extends AbstractHTreeTestCase {
   //
   //    }
   //
-  //	/**
-  //	 * Return the #of entries in the collection whose references have been
+  //	/*
+//	 * Return the #of entries in the collection whose references have been
   //	 * cleared.
   //	 *
   //	 * @param refs
@@ -331,8 +331,8 @@ public class TestTransientHTree extends AbstractHTreeTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Tests various methods that deal with persistence and makes sure that we
+  //    /*
+//     * Tests various methods that deal with persistence and makes sure that we
   //     * have reasonable error messages.
   //     */
   //    public void test_niceErrors() {
@@ -363,8 +363,8 @@ public class TestTransientHTree extends AbstractHTreeTestCase {
   //
   //    }
   //
-  //    /**
-  //     * This is the same as {@link #test_delete()} but the {@link BTree} is
+  //    /*
+//     * This is the same as {@link #test_delete()} but the {@link BTree} is
   //     * backed by an {@link IRawStore}.
   //     *
   //     * @todo since the code is identical other than allocating the {@link BTree}

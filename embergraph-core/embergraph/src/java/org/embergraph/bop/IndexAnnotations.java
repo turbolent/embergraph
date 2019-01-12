@@ -23,8 +23,8 @@ package org.embergraph.bop;
 
 import org.embergraph.btree.IndexMetadata;
 
-/**
- * Annotations for operators using a persistence capable index.
+/*
+* Annotations for operators using a persistence capable index.
  *
  * <p>TODO Annotations for key and value raba coders.
  *
@@ -36,9 +36,9 @@ public interface IndexAnnotations {
   /** @see IndexMetadata.Options#WRITE_RETENTION_QUEUE_CAPACITY */
   String WRITE_RETENTION_QUEUE_CAPACITY = IndexMetadata.Options.WRITE_RETENTION_QUEUE_CAPACITY;
 
-  final int DEFAULT_WRITE_RETENTION_QUEUE_CAPACITY = 4000;
+  int DEFAULT_WRITE_RETENTION_QUEUE_CAPACITY = 4000;
 
-  /**
+  /*
    * When <code>true</code> raw record references will be written on the backing store and the index
    * will manage the mapping between the keys and the storage addresses rather than having the
    * byte[] values inline in the bucket page (default {@link #DEFAULT_RAW_RECORDS}).
@@ -49,7 +49,7 @@ public interface IndexAnnotations {
 
   boolean DEFAULT_RAW_RECORDS = false;
 
-  /**
+  /*
    * When {@link #RAW_RECORDS} are used, this will be the maximum byte length of a byte[] value
    * before it is written as a raw record on the backing store rather than inlined within the bucket
    * page (default {@value #DEFAULT_MAX_RECLEN} .

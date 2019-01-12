@@ -10,8 +10,8 @@ import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
-/**
- * This is a test class that fails on centos 64bit. On working machines, it runs and always prints
+/*
+* This is a test class that fails on centos 64bit. On working machines, it runs and always prints
  * out 100, but on centos it will randomly print out 0. Note that the test as written is specific to
  * a quad store (it makes the quad store assumption about the context position). (This issue has
  * been linked to a bug in {@link BlockingBuffer#add(Object)}, where it was failing to test the
@@ -90,8 +90,8 @@ public class StressTestCentos extends AbstractTripleStoreTestCase {
                         TimestampUtility.asHistoricalRead(
                             store.getIndexManager().getLastCommitTime()));
 
-        /*
-         * Verify the #of statements in the most recently written graph.
+      /*
+       * Verify the #of statements in the most recently written graph.
          */
         int size = 0;
 

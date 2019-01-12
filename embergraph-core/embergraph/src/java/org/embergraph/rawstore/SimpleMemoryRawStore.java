@@ -33,8 +33,8 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.mdi.IResourceMetadata;
 
-/**
- * A purely transient append-only implementation useful when data need to be buffered in memory. The
+/*
+* A purely transient append-only implementation useful when data need to be buffered in memory. The
  * writes are stored in an {@link ArrayList}.
  *
  * <p>Note: it is safe to NOT call {@link #close()} on this implementation. The implementation does
@@ -51,7 +51,7 @@ public class SimpleMemoryRawStore extends AbstractRawWormStore {
 
   private final UUID uuid = UUID.randomUUID();
 
-  /**
+  /*
    * The #of bytes written so far. This is used to generate the address values returned by {@link
    * #write(ByteBuffer)}. This is necessary in order for this implementation to assign addresses in
    * the same manner as they would be assigned by an implementation using an append only byte[] or
@@ -59,13 +59,13 @@ public class SimpleMemoryRawStore extends AbstractRawWormStore {
    */
   protected int nextOffset = 0;
 
-  /**
+  /*
    * Maps an address onto the index in {@link #records} at which the data for that address was
    * written.
    */
   private final Map<Long, Integer> addrs;
 
-  /**
+  /*
    * The buffered records in the order written. If a record is deleted then that element in the list
    * will be a [null] value.
    */
@@ -77,7 +77,7 @@ public class SimpleMemoryRawStore extends AbstractRawWormStore {
     this(1000);
   }
 
-  /**
+  /*
    * @param capacity The #of records that you expect to store (non-negative). If the capacity is
    *     exceeded then the internal {@link ArrayList} will be grown as necessary.
    */
@@ -136,7 +136,7 @@ public class SimpleMemoryRawStore extends AbstractRawWormStore {
     return new ResourceMetadata(uuid);
   }
 
-  /**
+  /*
    * Static class since must be {@link Serializable}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -210,7 +210,7 @@ public class SimpleMemoryRawStore extends AbstractRawWormStore {
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This always returns <code>null</code>.

@@ -75,8 +75,8 @@ import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.NT;
 
-/**
- * Class encapsulates logic and handshaking for tracking which indices (and their backing stores)
+/*
+* Class encapsulates logic and handshaking for tracking which indices (and their backing stores)
  * are recently and currently referenced. This information is used to coordinate the close out of
  * index resources (and their backing stores) on an LRU basis by the {@link ResourceManager}.
  *
@@ -87,14 +87,14 @@ public abstract class IndexManager extends StoreManager {
   /** Logger. */
   private static final Logger log = Logger.getLogger(IndexManager.class);
 
-  /**
+  /*
    * Options understood by the {@link IndexManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface Options extends StoreManager.Options {
+  public interface Options extends StoreManager.Options {
 
-    /**
+    /*
      * The capacity of the LRU cache of open {@link IIndex}s. The capacity of this cache indirectly
      * controls how many {@link IIndex}s will be held open. The main reason for keeping an {@link
      * IIndex} open is to reuse its buffers, including its node and leaf cache, if another request
@@ -126,7 +126,7 @@ public abstract class IndexManager extends StoreManager {
 
     String DEFAULT_INDEX_CACHE_CAPACITY = "20";
 
-    /**
+    /*
      * The time in milliseconds before an entry in the index cache will be cleared from the backing
      * {@link HardReferenceQueue} (default {@value #DEFAULT_INDEX_CACHE_TIMEOUT}). This property
      * controls how long the index cache will retain an {@link IIndex} which has not been recently
@@ -136,7 +136,7 @@ public abstract class IndexManager extends StoreManager {
 
     String DEFAULT_INDEX_CACHE_TIMEOUT = "" + (60 * 1000); // One minute.
 
-    /**
+    /*
      * The capacity of the LRU cache of open {@link IndexSegment}s. The capacity of this cache
      * indirectly controls how many {@link IndexSegment}s will be held open. The main reason for
      * keeping an {@link IndexSegment} open is to reuse its buffers, including its node and leaf
@@ -162,7 +162,7 @@ public abstract class IndexManager extends StoreManager {
     /** The default for the {@link #INDEX_SEGMENT_CACHE_CAPACITY} option. */
     String DEFAULT_INDEX_SEGMENT_CACHE_CAPACITY = "60";
 
-    /**
+    /*
      * The time in milliseconds before an entry in the index segment cache will be cleared from the
      * backing {@link HardReferenceQueue} (default {@value #DEFAULT_INDEX_SEGMENT_CACHE_TIMEOUT}).
      * This property controls how long the index segment cache will retain an {@link IndexSegment}
@@ -175,24 +175,24 @@ public abstract class IndexManager extends StoreManager {
 
   }
 
-  /**
+  /*
    * Performance counters for the {@link IndexManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface IIndexManagerCounters {
+  public interface IIndexManagerCounters {
 
     /** The parent under which the per-index partition performance counters are listed. */
     String Indices = "indices";
 
-    /**
+    /*
      * The capacity of the cache of stale locators.
      *
      * @see StaleLocatorException
      */
     String StaleLocatorCacheCapacity = "Stale Locator Cache Capacity";
 
-    /**
+    /*
      * The #of stale locators in the cache.
      *
      * @see StaleLocatorException
@@ -202,7 +202,7 @@ public abstract class IndexManager extends StoreManager {
     /** The stale locators, including the {@link StaleLocatorReason} for each one. */
     String StaleLocators = "Stale Locators";
 
-    /**
+    /*
      * The #of named indices on the live journal. Each index partition is registered as an named
      * index on the live journal, so this may also be interpreted as the #of index partitions on the
      * data service.
@@ -224,7 +224,7 @@ public abstract class IndexManager extends StoreManager {
     /** The approximate #of {@link IndexSegment} leaves that are buffered in memory. */
     String IndexSegmentOpenLeafCount = "Index Segment Open Leaf Count";
 
-    /**
+    /*
      * The #of bytes on disk occupied by the {@link IndexSegment} leaves which are currently loaded
      * into memory (their in-memory profile can not be directly captured by the java runtime, but
      * you can get it from a heap dump). Likewise, you can directly obtain the #of bytes on disk per
@@ -233,7 +233,7 @@ public abstract class IndexManager extends StoreManager {
     String IndexSegmentOpenLeafByteCount = "Index Segment Open Leaf Byte Count";
   }
 
-  /**
+  /*
    * This map is used to note index partitions which could not be split and have become overextended
    * as a result (they are at least 2x the nominal size of a shard and are refusing to split). These
    * indices are registered in this map in order to disallow additional writes onto the index, which
@@ -252,7 +252,7 @@ public abstract class IndexManager extends StoreManager {
     disabledShards.remove(name);
   }
 
-  /**
+  /*
    * Return <code>true</code> if writes have been disabled for the named index.
    *
    * @param name The index name.
@@ -262,7 +262,7 @@ public abstract class IndexManager extends StoreManager {
     return disabledShards.contains(name);
   }
 
-  /**
+  /*
    * Cache of added/retrieved {@link IIndex}s by name and timestamp.
    *
    * <p>Map from the name and timestamp of an index to a weak reference for the corresponding {@link
@@ -304,7 +304,7 @@ public abstract class IndexManager extends StoreManager {
   //    final private WeakValueCache<NT, IIndex> indexCache;
   private final IndexCache<ILocalBTreeView> indexCache;
 
-  /**
+  /*
    * The earliest timestamp that MUST be retained for the read-historical indices in the cache and
    * {@link Long#MAX_VALUE} if there are NO read-historical indices in the cache.
    *
@@ -320,7 +320,7 @@ public abstract class IndexManager extends StoreManager {
     return t;
   }
 
-  /**
+  /*
    * A canonicalizing cache for {@link IndexSegment}s.
    *
    * <p>Note: {@link IndexSegmentStore} already makes the {@link IndexSegment}s canonical and the
@@ -340,7 +340,7 @@ public abstract class IndexManager extends StoreManager {
   /** Provides locks on a per-{name+timestamp} basis for higher concurrency. */
   private final transient NamedLock<NT> namedLock = new NamedLock<NT>();
 
-  /**
+  /*
    * Provides locks on a per-{@link IndexSegment} UUID basis for higher concurrency.
    *
    * <p>Note: The UUID is the unique key for the {@link #indexSegmentCache}.
@@ -351,7 +351,7 @@ public abstract class IndexManager extends StoreManager {
    */
   private final transient NamedLock<UUID> segmentLock = new NamedLock<UUID>();
 
-  /**
+  /*
    * The #of entries in the hard reference cache for {@link IIndex}s. There MAY be more {@link
    * IIndex}s open than are reported by this method if there are hard references held by the
    * application to those {@link IIndex}s. {@link IIndex}s that are not fixed by a hard reference
@@ -362,7 +362,7 @@ public abstract class IndexManager extends StoreManager {
     return indexCache.size();
   }
 
-  /**
+  /*
    * The configured capacity of the index cache.
    *
    * @see Options#INDEX_CACHE_CAPACITY
@@ -372,7 +372,7 @@ public abstract class IndexManager extends StoreManager {
     return indexCache.capacity();
   }
 
-  /**
+  /*
    * The #of entries in the hard reference cache for {@link IndexSegment}s. There MAY be more {@link
    * IndexSegment}s open than are reported by this method if there are hard references held by the
    * application to those {@link IndexSegment}s. {@link IndexSegment}s that are not fixed by a hard
@@ -383,7 +383,7 @@ public abstract class IndexManager extends StoreManager {
     return indexSegmentCache.size();
   }
 
-  /**
+  /*
    * The configured capacity of the index segment cache.
    *
    * @see Options#INDEX_SEGMENT_CACHE_CAPACITY
@@ -393,7 +393,7 @@ public abstract class IndexManager extends StoreManager {
     return indexSegmentCache.capacity();
   }
 
-  /**
+  /*
    * Statistics about the {@link IndexSegment}s open in the cache.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -405,8 +405,8 @@ public abstract class IndexManager extends StoreManager {
     public long leafByteCount;
   }
 
-  //    /**
-  //     * The approximate #of {@link IndexSegment} leaves in memory.
+  //    /*
+//     * The approximate #of {@link IndexSegment} leaves in memory.
   //     */
   //    public int getIndexSegmentOpenLeafCount() {
   //
@@ -431,8 +431,8 @@ public abstract class IndexManager extends StoreManager {
   //
   //    }
   //
-  //    /**
-  //     * The #of bytes on disk occupied by the {@link IndexSegment} leaves which
+  //    /*
+//     * The #of bytes on disk occupied by the {@link IndexSegment} leaves which
   //     * are currently loaded into memory (their in-memory profile can not be
   //     * directly captured by the java runtime, but you can get it from a heap
   //     * dump). Likewise, you can directly obtain the #of bytes on disk per leaf
@@ -461,7 +461,7 @@ public abstract class IndexManager extends StoreManager {
   //
   //    }
 
-  /**
+  /*
    * This cache is used to provide remote clients with an unambiguous indication that an index
    * partition has been rather than simply not existing or having been dropped.
    *
@@ -474,7 +474,7 @@ public abstract class IndexManager extends StoreManager {
   protected final LRUCache<String /* name */, StaleLocatorReason /* reason */> staleLocatorCache =
       new LRUCache<String, StaleLocatorReason>(1000);
 
-  /**
+  /*
    * Note: this information is based on an LRU cache with a large fixed capacity. It is expected
    * that the cache size is sufficient to provide good information to clients having queued write
    * tasks. If the index partition split/move/join changes somehow outpace the cache size then the
@@ -486,7 +486,7 @@ public abstract class IndexManager extends StoreManager {
     return staleLocatorCache.get(name);
   }
 
-  /**
+  /*
    * Notify the {@link ResourceManager} that the named index partition was split, joined or moved.
    * This effects only the unisolated view of that index partition. Historical views will continue
    * to exist and reside as before.
@@ -582,7 +582,7 @@ public abstract class IndexManager extends StoreManager {
     }
   }
 
-  /**
+  /*
    * Return a reference to the named index as of the specified timestamp on the identified resource.
    *
    * <p>Note: {@link AbstractTask} handles the load of the {@link ITx#UNISOLATED} index from the
@@ -667,7 +667,7 @@ public abstract class IndexManager extends StoreManager {
        */
 
       // MAY be null.
-      btree = (BTree) journal.getIndex(name);
+      btree = journal.getIndex(name);
 
     } else if (timestamp == ITx.READ_COMMITTED) {
 
@@ -692,10 +692,7 @@ public abstract class IndexManager extends StoreManager {
       // MAY be null.
       btree = (BTree) journal.getIndexWithCommitRecord(name, commitRecord);
 
-      if (btree != null) {
-
-        assert ((BTree) btree).getLastCommitTime() != 0;
-      }
+      assert btree == null || btree.getLastCommitTime() != 0;
 
     } else {
 
@@ -738,10 +735,7 @@ public abstract class IndexManager extends StoreManager {
                 + ", ds="
                 + getDataServiceUUID());
 
-      if (btree != null) {
-
-        assert ((BTree) btree).getLastCommitTime() != 0;
-      }
+      assert btree == null || btree.getLastCommitTime() != 0;
     }
 
     // MAY be null.
@@ -917,8 +911,8 @@ public abstract class IndexManager extends StoreManager {
 
         } catch (NoSuchStoreException ex) {
 
-          /*
-           * There is dependency for that index that is on a resource
+        /*
+       * There is dependency for that index that is on a resource
            * (a ManagedJournal or IndexSegment) that is no longer
            * available.
            */
@@ -949,8 +943,8 @@ public abstract class IndexManager extends StoreManager {
 
           } else if (resource.getCommitTime() == 0L) {
 
-            /*
-             * Interpret for a historical store as the last
+          /*
+       * Interpret for a historical store as the last
              * committed data on that store.
              */
 
@@ -996,7 +990,7 @@ public abstract class IndexManager extends StoreManager {
     return sources;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: An {@link ITx#READ_COMMITTED} view returned by this method WILL NOT update if there
@@ -1033,8 +1027,8 @@ public abstract class IndexManager extends StoreManager {
 
       if (timestamp == ITx.READ_COMMITTED) {
 
-        /*
-         * @todo experimental alternative gives a view based on the most
+      /*
+       * @todo experimental alternative gives a view based on the most
          * recent commit time. The only drawback about this approach is that
          * each request by the same operation will return the then most
          * recently committed view, well and the IIndex will report the
@@ -1083,8 +1077,8 @@ public abstract class IndexManager extends StoreManager {
 
         if (isReadWriteTx) {
 
-          /*
-           * Handle fully isolated (read-write) transactional views.
+        /*
+       * Handle fully isolated (read-write) transactional views.
            */
 
           if (tx == null) {
@@ -1116,8 +1110,8 @@ public abstract class IndexManager extends StoreManager {
 
         if (isReadWriteTx && tx == null) {
 
-          /*
-           * Note: This will happen both if you attempt to use a
+        /*
+       * Note: This will happen both if you attempt to use a
            * transaction identified that has not been registered or if you
            * attempt to use a transaction manager after the transaction
            * has been either committed or aborted.
@@ -1135,8 +1129,8 @@ public abstract class IndexManager extends StoreManager {
 
         if (isReadWriteTx) {
 
-          /*
-           * Isolated operation.
+        /*
+       * Isolated operation.
            *
            * Note: The backing index is always a historical state of the
            * named index.
@@ -1162,20 +1156,20 @@ public abstract class IndexManager extends StoreManager {
 
         } else {
 
-          /*
-           * Non-transactional view.
+        /*
+       * Non-transactional view.
            */
 
           if (readOnly) {
 
-            /*
-             * historical read -or- read-committed operation.
+          /*
+       * historical read -or- read-committed operation.
              */
 
             if (timestamp == ITx.READ_COMMITTED) {
 
-              /*
-               * Check to see if an index partition was split, joined
+            /*
+       * Check to see if an index partition was split, joined
                * or moved.
                */
               final StaleLocatorReason reason = getIndexPartitionGone(name);
@@ -1206,7 +1200,7 @@ public abstract class IndexManager extends StoreManager {
 
             if (sources.length == 1) {
 
-              tmp = (BTree) sources[0];
+              tmp = sources[0];
 
             } else {
 
@@ -1215,8 +1209,8 @@ public abstract class IndexManager extends StoreManager {
 
           } else {
 
-            /*
-             * Writable unisolated index.
+          /*
+       * Writable unisolated index.
              *
              * Note: This is the "live" mutable index. This index is NOT
              * thread-safe. A lock manager is used to ensure that at
@@ -1225,8 +1219,8 @@ public abstract class IndexManager extends StoreManager {
 
             assert timestamp == ITx.UNISOLATED : "timestamp=" + timestamp;
 
-            /*
-             * Check to see if an index partition was split, joined or
+          /*
+       * Check to see if an index partition was split, joined or
              * moved.
              */
             final StaleLocatorReason reason = getIndexPartitionGone(name);
@@ -1239,8 +1233,8 @@ public abstract class IndexManager extends StoreManager {
 
             if (isDisabledWrites(name)) {
 
-              /*
-               * Writes on the index have been disabled. This
+            /*
+       * Writes on the index have been disabled. This
                * occurs when the index refuses to split and is at
                * least two times larger than the nominal shard
                * size. In this case writes are disabled to push
@@ -1283,7 +1277,7 @@ public abstract class IndexManager extends StoreManager {
 
             if (sources.length == 1) {
 
-              tmp = (BTree) sources[0];
+              tmp = sources[0];
 
             } else {
 
@@ -1319,7 +1313,7 @@ public abstract class IndexManager extends StoreManager {
     }
   }
 
-  /**
+  /*
    * Dump index metadata as of the timestamp.
    *
    * @param timestamp
@@ -1401,7 +1395,7 @@ public abstract class IndexManager extends StoreManager {
     return sb.toString();
   }
 
-  /**
+  /*
    * Build an {@link IndexSegment} from an index partition. Delete markers are propagated to the
    * {@link IndexSegment} unless <i>compactingMerge</i> is <code>true</code>.
    *
@@ -1523,8 +1517,8 @@ public abstract class IndexManager extends StoreManager {
           else concurrentBuildTaskCount.decrementAndGet();
         }
 
-        /*
-         * Report on a bulk merge/build of an {@link IndexSegment}.
+      /*
+       * Report on a bulk merge/build of an {@link IndexSegment}.
          */
         {
           final long nbytes = builder.getCheckpoint().length;
@@ -1549,14 +1543,14 @@ public abstract class IndexManager extends StoreManager {
         // Describe the index segment.
         segmentMetadata = new SegmentMetadata(outFile, builder.segmentUUID, commitTime);
 
-        /*
-         * Add to the retention set so the newly built index segment
+      /*
+       * Add to the retention set so the newly built index segment
          * will not be deleted before it is put to use.
          */
         retentionSetAdd(segmentMetadata.getUUID());
 
-        /*
-         * Now that the file is protected from release, notify the
+      /*
+       * Now that the file is protected from release, notify the
          * resource manager so that it can find this file.
          */
         addResource(segmentMetadata, outFile);
@@ -1633,7 +1627,7 @@ public abstract class IndexManager extends StoreManager {
     }
   }
 
-  /**
+  /*
    * A map containing the concurrently executing index segment build tasks. This is used to report
    * those tasks out via the performance counters interface.
    */
@@ -1650,7 +1644,7 @@ public abstract class IndexManager extends StoreManager {
    * Per index counters.
    */
 
-  /**
+  /*
    * Canonical per-index partition {@link BTreeCounters}. These counters are set on each {@link
    * AbstractBTree} that is materialized by {@link #getIndexOnStore(String, long, IRawStore)}. The
    * same {@link BTreeCounters} object is used for the unisolated, read-committed, read-historical
@@ -1684,7 +1678,7 @@ public abstract class IndexManager extends StoreManager {
   private final ConcurrentHashMap<String /* name */, BTreeCounters> indexCounters =
       new ConcurrentHashMap<String, BTreeCounters>();
 
-  /**
+  /*
    * The aggregated performance counters for each unisolated index partition view as of the time
    * when the old journal was closed for writes. This is used to compute the delta for each
    * unisolated index partition view at the end of the life cycle for the new live journal.
@@ -1723,7 +1717,7 @@ public abstract class IndexManager extends StoreManager {
     return t;
   }
 
-  /**
+  /*
    * Snapshots the index partition performance counters and returns a map containing the net change
    * in the performance counters for each index partition since the last time this method was
    * invoked (it is invoked by {@link #overflow()}).
@@ -1790,7 +1784,7 @@ public abstract class IndexManager extends StoreManager {
     return delta;
   }
 
-  /**
+  /*
    * Return a {@link CounterSet} reflecting use of the named indices. When an index partition is in
    * use, its {@link CounterSet} is reported under a path formed from name of the scale-out index
    * and partition identifier.

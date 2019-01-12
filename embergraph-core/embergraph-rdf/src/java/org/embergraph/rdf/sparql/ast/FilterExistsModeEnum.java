@@ -22,8 +22,8 @@ package org.embergraph.rdf.sparql.ast;
 
 import org.embergraph.bop.controller.SubqueryOp;
 
-/**
- * Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic plans: vectored
+/*
+* Used to specify the query plan for FILTER (NOT) EXISTS. There are two basic plans: vectored
  * sub-plan and subquery with LIMIT ONE. Each plan has its advantages.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -31,7 +31,7 @@ import org.embergraph.bop.controller.SubqueryOp;
  */
 public enum FilterExistsModeEnum {
 
-  /**
+  /*
    * This evaluation mode builds a hash index from all source solutions, vectors the solutions from
    * the hash index into the sub-plan, and the does a hash join of the sub-plan with the hash index
    * to determine which solutions pass the filter.
@@ -43,7 +43,7 @@ public enum FilterExistsModeEnum {
    */
   VectoredSubPlan,
 
-  /**
+  /*
    * This evaluation mode routes each source solution (one by one) into a separate {@link SubqueryOp
    * subquery} and imposes a LIMIT ONE.
    *
@@ -54,5 +54,5 @@ public enum FilterExistsModeEnum {
    * sub-queries is modest because there are not that many source solution that need to flow into
    * the FILTER.
    */
-  SubQueryLimitOne;
+  SubQueryLimitOne
 }

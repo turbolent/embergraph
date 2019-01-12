@@ -14,8 +14,8 @@ import org.embergraph.rwstore.RWStore;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.InnerCause;
 
-/**
- * Test suite for a failure to handle errors inside of abort() by marking the journal as requiring
+/*
+* Test suite for a failure to handle errors inside of abort() by marking the journal as requiring
  * abort().
  *
  * @see #1021 (Add critical section protection to AbstractJournal.abort() and
@@ -76,7 +76,7 @@ public class TestJournalAbort extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * In this test we want to run through some data inserts, commits and aborts.
    *
    * <p>The overridden Journal will fail to abort correctly by overriding the discardcommitters

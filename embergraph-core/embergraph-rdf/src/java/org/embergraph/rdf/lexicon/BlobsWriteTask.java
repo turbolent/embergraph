@@ -16,8 +16,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.service.Split;
 import org.embergraph.service.ndx.pipeline.KVOList;
 
-/**
- * Synchronous RPC write on the TERMS index.
+/*
+* Synchronous RPC write on the TERMS index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -70,7 +70,7 @@ public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
     this.stats = stats;
   }
 
-  /**
+  /*
    * Unify the {@link EmbergraphValue}s with the TERMS index, setting the {@link IV}s on the {@link
    * EmbergraphValue}s as a side-effect.
    *
@@ -145,8 +145,8 @@ public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
       {
         final long _begin = System.currentTimeMillis();
 
-        /*
-         * Create a key buffer holding the sort keys. This does not
+      /*
+       * Create a key buffer holding the sort keys. This does not
          * allocate new storage for the sort keys, but rather aligns the
          * data structures for the call to splitKeys(). This also makes
          * a[] into a dense copy of the references in b[], but without
@@ -194,8 +194,8 @@ public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
 
         if (ndistinct == 0) {
 
-          /*
-           * Nothing to be written.
+        /*
+       * Nothing to be written.
            */
 
           return new KVO[0];
@@ -222,7 +222,7 @@ public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
     return KVO.dense(a, ndistinct);
   } // call
 
-  /**
+  /*
    * Class applies the term identifiers assigned by the {@link Term2IdWriteProc} to the {@link
    * EmbergraphValue} references in the {@link KVO} correlated with each {@link Split} of data
    * processed by that procedure.
@@ -239,13 +239,13 @@ public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
     private final KVO<EmbergraphValue>[] a;
     private final boolean readOnly;
 
-    /**
+    /*
      * @todo this could be the value returned by {@link #getResult()} which would make the API
      *     simpler.
      */
     private final WriteTaskStats stats;
 
-    /**
+    /*
      * @param a A dense array of {@link KVO}s.
      * @param readOnly if readOnly was specified for the {@link Term2IdWriteProc} .
      * @param stats Various atomic fields are updated as a side effect.
@@ -264,7 +264,7 @@ public class BlobsWriteTask implements Callable<KVO<EmbergraphValue>[]> {
       this.stats = stats;
     }
 
-    /**
+    /*
      * Copy the assigned / discovered term identifiers onto the corresponding elements of the
      * terms[].
      */

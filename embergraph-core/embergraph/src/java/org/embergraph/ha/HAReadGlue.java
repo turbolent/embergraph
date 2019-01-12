@@ -29,8 +29,8 @@ import org.embergraph.ha.msg.IHAReadRequest;
 import org.embergraph.ha.msg.IHAReadResponse;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * A {@link Remote} interface supporting low-level reads against persistent data from a quorum
+/*
+* A {@link Remote} interface supporting low-level reads against persistent data from a quorum
  * member. This interface is used to handle bad reads, which are identified by a checksum error when
  * reading on the local disk. To handle a bad read, the quorum member reads on a different member of
  * the same quorum.
@@ -41,7 +41,7 @@ import org.embergraph.rawstore.IRawStore;
  */
 public interface HAReadGlue extends Remote {
 
-  /**
+  /*
    * Read a record an {@link IRawStore} managed by the service. Services MUST NOT refer this message
    * to another service. If the read can not be satisfied, for example because the {@link IRawStore}
    * has been released or because there is a checksum error when reading on the {@link IRawStore},
@@ -51,5 +51,5 @@ public interface HAReadGlue extends Remote {
    * @return The {@link Future} of an operation which evaluated to the desired record.
    * @see QuorumRead#readFromQuorum(UUID, long)
    */
-  public Future<IHAReadResponse> readFromDisk(IHAReadRequest readMessage) throws IOException;
+  Future<IHAReadResponse> readFromDisk(IHAReadRequest readMessage) throws IOException;
 }

@@ -28,8 +28,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.embergraph.btree.raba.AbstractRaba;
 
-/**
- * Abstract implementation throws {@link UnsupportedOperationException} for all mutation operations.
+/*
+* Abstract implementation throws {@link UnsupportedOperationException} for all mutation operations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

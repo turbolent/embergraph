@@ -6,8 +6,8 @@ import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.Split;
 
-/**
- * Class handles stale locators by finding the current locator for the <i>key</i> and redirecting
+/*
+* Class handles stale locators by finding the current locator for the <i>key</i> and redirecting
  * the request to execute the procedure on the {@link IDataService} identified by that locator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -25,7 +25,7 @@ class SimpleDataServiceProcedureTask extends AbstractDataServiceProcedureTask {
     return 1;
   }
 
-  /**
+  /*
    * @param key
    * @param split
    * @param proc
@@ -50,7 +50,7 @@ class SimpleDataServiceProcedureTask extends AbstractDataServiceProcedureTask {
     }
   }
 
-  /**
+  /*
    * The locator is stale. We locate the index partition that spans the {@link #key} and re-submit
    * the request.
    */

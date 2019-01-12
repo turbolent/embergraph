@@ -192,7 +192,7 @@ public class HASendState implements IHASendState, Externalizable {
     replicationFactor = in.readInt();
   }
 
-  /**
+  /*
    * Decode the value returned by {@link #getMarker()}. This has the magic followed by {@link
    * #writeExternal2(DataOutput)}. It does not have the object serialization metadata.
    *
@@ -241,8 +241,8 @@ public class HASendState implements IHASendState, Externalizable {
 
   // static final private int MARKER_SIZE = 8;
 
-  // /**
-  // * Unique marker generation with JVM wide random number generator.
+  // /*
+// * Unique marker generation with JVM wide random number generator.
   // *
   // * @return A "pretty unique" marker.
   // */
@@ -257,8 +257,8 @@ public class HASendState implements IHASendState, Externalizable {
   // return token;
   // }
 
-  // /**
-  // * Checks that the first byte is not repeated in the remaining bytes, this
+  // /*
+// * Checks that the first byte is not repeated in the remaining bytes, this
   // * simplifies search for the token in the input stream.
   // */
   // static private boolean unique1(final byte[] bytes) {

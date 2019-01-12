@@ -10,8 +10,8 @@ package cern.colt.matrix;
 
 import cern.colt.matrix.impl.DenseObjectMatrix2D;
 import cern.colt.matrix.impl.SparseObjectMatrix2D;
-/**
- * Factory for convenient construction of 2-d matrices holding <tt>Object</tt> cells. Also provides
+/*
+* Factory for convenient construction of 2-d matrices holding <tt>Object</tt> cells. Also provides
  * convenient methods to compose (concatenate) and decompose (split) matrices from/to constituent
  * blocks.
  *
@@ -73,7 +73,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
   public static final ObjectFactory2D sparse = new ObjectFactory2D();
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected ObjectFactory2D() {}
-  /**
+  /*
    * C = A||B; Constructs a new matrix which is the column-wise concatenation of two other matrices.
    *
    * <pre>
@@ -101,7 +101,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
     matrix.viewPart(0, ac, r, bc).assign(B);
     return matrix;
   }
-  /**
+  /*
    * C = A||B; Constructs a new matrix which is the row-wise concatenation of two other matrices.
    *
    * <pre>
@@ -133,7 +133,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
     matrix.viewPart(ar, 0, br, c).assign(B);
     return matrix;
   }
-  /**
+  /*
    * Checks whether the given array is rectangular, that is, whether all rows have the same number
    * of columns.
    *
@@ -149,7 +149,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
       }
     }
   }
-  /**
+  /*
    * Checks whether the given array is rectangular, that is, whether all rows have the same number
    * of columns.
    *
@@ -165,7 +165,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
       }
     }
   }
-  /**
+  /*
    * Constructs a block matrix made from the given parts. The inverse to method {@link
    * #decompose(ObjectMatrix2D[][], ObjectMatrix2D)}.
    *
@@ -331,7 +331,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
 
     return matrix;
   }
-  /**
+  /*
    * Constructs a diagonal block matrix from the given parts (the <i>direct sum</i> of two
    * matrices). That is the concatenation
    *
@@ -355,7 +355,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
     sum.viewPart(ar, ac, br, bc).assign(B);
     return sum;
   }
-  /**
+  /*
    * Constructs a diagonal block matrix from the given parts. The concatenation has the form
    *
    * <pre>
@@ -374,7 +374,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
     diag.viewPart(A.rows() + B.rows(), A.columns() + B.columns(), C.rows(), C.columns()).assign(C);
     return diag;
   }
-  /**
+  /*
    * Splits a block matrix into its constituent blocks; Copies blocks of a matrix into the given
    * parts. The inverse to method {@link #compose(ObjectMatrix2D[][])}.
    *
@@ -505,7 +505,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
       r += maxHeights[row];
     }
   }
-  /**
+  /*
    * Constructs a new diagonal matrix whose diagonal elements are the elements of <tt>vector</tt>.
    * Cells values are copied. The new matrix is not a view. Example:
    *
@@ -526,7 +526,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
     }
     return diag;
   }
-  /**
+  /*
    * Constructs a new vector consisting of the diagonal elements of <tt>A</tt>. Cells values are
    * copied. The new vector is not a view. Example:
    *
@@ -548,7 +548,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
     }
     return diag;
   }
-  /**
+  /*
    * Constructs a matrix with the given cell values. <tt>values</tt> is required to have the form
    * <tt>values[row][column]</tt> and have exactly the same number of columns in every row.
    *
@@ -563,7 +563,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
     if (this == sparse) return new SparseObjectMatrix2D(values);
     else return new DenseObjectMatrix2D(values);
   }
-  /**
+  /*
    * Construct a matrix from a one-dimensional column-major packed array, ala Fortran. Has the form
    * <tt>matrix.get(row,column) == values[row + column*rows]</tt>. The values are copied.
    *
@@ -571,7 +571,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
    * @param rows the number of rows.
    * @exception IllegalArgumentException <tt>values.length</tt> must be a multiple of <tt>rows</tt>.
    */
-  public ObjectMatrix2D make(Object values[], int rows) {
+  public ObjectMatrix2D make(Object[] values, int rows) {
     int columns = (rows != 0 ? values.length / rows : 0);
     if (rows * columns != values.length)
       throw new IllegalArgumentException("Array length must be a multiple of m.");
@@ -598,7 +598,7 @@ public class ObjectFactory2D extends cern.colt.PersistentObject {
   protected ObjectMatrix1D make1D(int size) {
     return make(0, 0).like1D(size);
   }
-  /**
+  /*
    * C = A||A||..||A; Constructs a new matrix which is duplicated both along the row and column
    * dimension. Example:
    *

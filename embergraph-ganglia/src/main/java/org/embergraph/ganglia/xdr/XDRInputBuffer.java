@@ -15,8 +15,8 @@
 */
 package org.embergraph.ganglia.xdr;
 
-/**
- * A class for reading XDR data from an internal buffer.
+/*
+* A class for reading XDR data from an internal buffer.
  *
  * @see <a href="http://www.ietf.org/rfc/rfc4506.txt">RDF 4506</a>
  */
@@ -31,7 +31,7 @@ public class XDRInputBuffer {
   /** The offset of the first byte which may not be read. */
   private final int limit;
 
-  /**
+  /*
    * @param buffer The buffer containing the data to be read.
    * @param off The offset of the first byte with data to be read.
    * @param len The #of bytes with data to be read starting at that offset.
@@ -167,7 +167,7 @@ public class XDRInputBuffer {
     return s;
   }
 
-  /**
+  /*
    * Skips pad bytes in the buffer up to the nearest multiple of 4 (all XDR fields must be padded
    * out to the nearest multiple of four bytes if they do not fall on a 4 byte boundary).
    *

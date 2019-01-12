@@ -26,8 +26,8 @@ package org.embergraph.io.compression;
 import java.util.concurrent.TimeUnit;
 import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
 
-/**
- * An {@link IRecordCompressorFactory} with thread-local semantics based on an internal weak value
+/*
+* An {@link IRecordCompressorFactory} with thread-local semantics based on an internal weak value
  * cache and providing instances based on a delegate {@link IRecordCompressorFactory}. This is
  * designed to work well when the application is single-threaded as well as when there are
  * concurrent threads demanding instances from the delegate factory.
@@ -38,7 +38,7 @@ import org.embergraph.cache.ConcurrentWeakValueCacheWithTimeout;
 public class ThreadLocalRecordCompressorFactory<A extends RecordCompressor>
     implements IRecordCompressorFactory<A> {
 
-  /**
+  /*
    * Cache with timeout. A relatively small cache is used since the maximum #of instances is bounded
    * by the real concurrency of readers on a single resource. A relatively short timeout is used so
    * that the hard references in the queue will be cleared quickly if the factory is in high demand.
@@ -50,7 +50,7 @@ public class ThreadLocalRecordCompressorFactory<A extends RecordCompressor>
 
   private final IRecordCompressorFactory<A> delegate;
 
-  /**
+  /*
    * @param delegate The factory used to create instances of the {@link IRecordCompressor} when
    *     there is none in the cache.
    */
@@ -84,8 +84,8 @@ public class ThreadLocalRecordCompressorFactory<A extends RecordCompressor>
       // add to the cache.
       if (cache.put(t, a) != null) {
 
-        /*
-         * Per above, this should not be possible.
+      /*
+       * Per above, this should not be possible.
          */
 
         throw new AssertionError();
@@ -95,7 +95,7 @@ public class ThreadLocalRecordCompressorFactory<A extends RecordCompressor>
     return a;
   }
 
-  /**
+  /*
    * Return a new {@link IRecordCompressor} instance from the delegate {@link
    * IRecordCompressorFactory}.
    */

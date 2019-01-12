@@ -25,8 +25,8 @@ import java.util.Arrays;
 import org.apache.log4j.Level;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
-/**
- * Test suite using {@link BTree#insert(Object, Object)} to split a tree to height two (2) (three
+/*
+* Test suite using {@link BTree#insert(Object, Object)} to split a tree to height two (2) (three
  * levels) and then using {@link BTree#remove(Object)} to reduce the tree back to a single, empty
  * root leaf. This test suite is focused on m := 3 since we are capable of exercising all split()
  * and join() code paths with that branching factor.
@@ -51,7 +51,7 @@ public class TestSplitJoinThreeLevels extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test ability to split and join a tree of order m == 3 driven by the insertion and then the
    * removal of a known sequence of keys. This test checks the state of the tree after each
    * operation against the expected postconditions for that operation. In particular, testing at m
@@ -565,7 +565,7 @@ public class TestSplitJoinThreeLevels extends AbstractBTreeTestCase {
     assertEquals("entries", 0, btree.nentries);
   }
 
-  /**
+  /*
    * Variant of {@link #test_removeOrder3a()} that excercises some different code paths while
    * removing keys by choosing a different order in which to remove some keys. Both tests build the
    * same initial tree. However, this tests begins by removing a key (7) from the right edge of the
@@ -1085,7 +1085,7 @@ public class TestSplitJoinThreeLevels extends AbstractBTreeTestCase {
     assertEquals("entries", 0, btree.nentries);
   }
 
-  /**
+  /*
    * Variant of {@link #test_removeOrder3a()} that is focused on testing the redistribution of keys
    * among the left and right siblings of a node when that node underflows during a deletion
    * operation.
@@ -1471,8 +1471,8 @@ public class TestSplitJoinThreeLevels extends AbstractBTreeTestCase {
       }
 
       {
-          /*
-           * insert(10,v10) - splits (b) into (b,h) and adds (h) as a
+        /*
+       * insert(10,v10) - splits (b) into (b,h) and adds (h) as a
            * child of (f).
            */
         final byte[] key = TestKeyBuilder.asSortKey(10);

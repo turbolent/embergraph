@@ -29,8 +29,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.model.Literal;
 
-/**
- *
+/*
+*
  *
  * <pre>http://www.w3.org/2005/xpath-functions#lower-case</pre>
  *
@@ -45,7 +45,7 @@ public class LcaseBOp extends IVValueExpression<IV> implements INeedsMaterializa
     super(x, globals);
   }
 
-  /**
+  /*
    * Required shallow copy constructor.
    *
    * @param args The function arguments (value expressions).
@@ -65,7 +65,7 @@ public class LcaseBOp extends IVValueExpression<IV> implements INeedsMaterializa
     }
   }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * @param op
@@ -75,7 +75,7 @@ public class LcaseBOp extends IVValueExpression<IV> implements INeedsMaterializa
     super(op);
   }
 
-  /**
+  /*
    * This is a {@link Requirement#SOMETIMES} because it can operate on inline {@link IV}s without
    * materialization but requires materialization of non-inline {@link IV}s.
    */

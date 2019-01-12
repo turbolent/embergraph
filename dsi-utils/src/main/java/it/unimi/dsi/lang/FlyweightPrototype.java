@@ -21,8 +21,8 @@ package it.unimi.dsi.lang;
  *
  */
 
-/**
- * A prototype providing flyweight copies.
+/*
+* A prototype providing flyweight copies.
  *
  * <p><em>Flyweight copies</em> are useful to implement multithreading on read-only (but maybe
  * stateful) classes. An instance of a class implementing this interface is not necessarily thread
@@ -45,5 +45,5 @@ package it.unimi.dsi.lang;
 public interface FlyweightPrototype<T extends FlyweightPrototype<T>> {
 
   /** Returns a copy of this object, sharing state with this object as much as possible. */
-  public T copy();
+  T copy();
 }

@@ -26,8 +26,8 @@ import java.io.IOException;
 import java.rmi.Remote;
 import org.embergraph.relation.accesspath.IBuffer;
 
-/**
- * A helper object that provides the API of {@link IBuffer} but whose methods throw {@link
+/*
+* A helper object that provides the API of {@link IBuffer} but whose methods throw {@link
  * IOException} and are therefore compatible with {@link Remote} and {@link Exporter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

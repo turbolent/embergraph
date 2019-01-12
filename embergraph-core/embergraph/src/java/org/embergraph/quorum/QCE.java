@@ -19,8 +19,8 @@ package org.embergraph.quorum;
 
 import java.util.UUID;
 
-/**
- * Event implementation class.
+/*
+* Event implementation class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

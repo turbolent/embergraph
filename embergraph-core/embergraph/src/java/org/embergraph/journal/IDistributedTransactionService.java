@@ -24,14 +24,14 @@ import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ITxCommitProtocol;
 
-/**
- * Extended interface for distributed 2-phase transactions for an {@link IEmbergraphFederation}.
+/*
+* Extended interface for distributed 2-phase transactions for an {@link IEmbergraphFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IDistributedTransactionService extends ITransactionService {
 
-  /**
+  /*
    * An {@link IDataService} MUST invoke this method before permitting an operation isolated by a
    * read-write transaction to execute with access to the named resources (this applies only to
    * distributed databases). The declared resources are used in the commit phase of the read-write
@@ -47,9 +47,9 @@ public interface IDistributedTransactionService extends ITransactionService {
    * @return {@link IllegalStateException} if the transaction is not an active read-write
    *     transaction.
    */
-  public void declareResources(long tx, UUID dataService, String[] resource) throws IOException;
+  void declareResources(long tx, UUID dataService, String[] resource) throws IOException;
 
-  /**
+  /*
    * Callback by an {@link IDataService} participating in a two phase commit for a distributed
    * transaction. The {@link ITransactionService} will wait until all {@link IDataService}s have
    * prepared. It will then choose a <i>commitTime</i> for the transaction and return that value to
@@ -66,10 +66,10 @@ public interface IDistributedTransactionService extends ITransactionService {
    * @throws BrokenBarrierException
    * @throws IOException if there is an RMI problem.
    */
-  public long prepared(long tx, UUID dataService)
+  long prepared(long tx, UUID dataService)
       throws IOException, InterruptedException, BrokenBarrierException;
 
-  /**
+  /*
    * Sent by a task participating in a distributed commit of a transaction when the task has
    * successfully committed the write set of the transaction on the live journal of the local {@link
    * IDataService}. If this method returns <code>false</code> then the distributed commit has failed
@@ -84,6 +84,6 @@ public interface IDistributedTransactionService extends ITransactionService {
    *     there was a problem.
    * @throws IOException
    */
-  public boolean committed(long tx, UUID dataService)
+  boolean committed(long tx, UUID dataService)
       throws IOException, InterruptedException, BrokenBarrierException;
 }

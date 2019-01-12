@@ -26,8 +26,8 @@ package org.embergraph.striterator;
 import java.io.Serializable;
 import java.util.Iterator;
 
-/**
- * Stackable filter pattern with generics.
+/*
+* Stackable filter pattern with generics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,11 +37,11 @@ import java.util.Iterator;
  */
 public interface IFilter<I extends Iterator<E>, E, F> extends Serializable {
 
-  /**
+  /*
    * Wrap the source iterator with an iterator that applies this filter.
    *
    * @param src The source iterator.
    * @return The filtered iterator.
    */
-  public Iterator<F> filter(I src);
+  Iterator<F> filter(I src);
 }

@@ -28,8 +28,8 @@ import org.embergraph.rdf.model.EmbergraphStatement;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Statement;
 
-/**
- * Test loads an RDF/XML resource into a database and then verifies by re-parse that all expected
+/*
+* Test loads an RDF/XML resource into a database and then verifies by re-parse that all expected
  * statements were made persistent in the database.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +45,7 @@ public class TestLoadAndVerify extends AbstractRIOTestCase {
     super(name);
   }
 
-  /**
+  /*
    * @todo observed exception with verify in parallel which suggests a problem with {@link
    *     UnisolatedReadWriteIndex}
    *     <pre>
@@ -90,7 +90,7 @@ public class TestLoadAndVerify extends AbstractRIOTestCase {
    */
   final boolean parallel = false;
 
-  /**
+  /*
    * Test with the "small.rdf" data set.
    *
    * @throws Exception
@@ -143,7 +143,7 @@ public class TestLoadAndVerify extends AbstractRIOTestCase {
     doLoadAndVerifyTest(resource, parallel);
   }
 
-  /**
+  /*
    * Test with the "sample data.rdf" data set.
    *
    * @throws Exception
@@ -171,7 +171,7 @@ public class TestLoadAndVerify extends AbstractRIOTestCase {
     doLoadAndVerifyTest(file, parallel);
   }
 
-  /**
+  /*
    * Note: This allows an override of the properties that effect the data load, in particular
    * whether or not the full text index and statement identifiers are maintained. It can be useful
    * to disable those features in order to estimate the best load rate for a data set.
@@ -211,8 +211,8 @@ public class TestLoadAndVerify extends AbstractRIOTestCase {
     doLoad(store, resource, parallel, new StatementBufferFactory<EmbergraphStatement>(store));
   }
 
-  //    /**
-  //     * Load the file using the {@link DataLoader}.
+  //    /*
+//     * Load the file using the {@link DataLoader}.
   //     * <p>
   //     * Note: Normally we disable closure for this test, but that is not
   //     * critical. If you compute the closure of the data set then there will

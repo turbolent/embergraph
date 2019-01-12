@@ -32,8 +32,8 @@ import org.embergraph.io.DataOutputBuffer;
 import org.embergraph.rawstore.IBlock;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Abstract base class with much of the functionality of {@link ITuple}.
+/*
+* Abstract base class with much of the functionality of {@link ITuple}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -61,7 +61,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     return needVals;
   }
 
-  /**
+  /*
    * Reused for each key that is materialized and <code>null</code> if keys are not being requested.
    * Among other things, the {@link #kbuf} access may be used to completely avoid heap allocations
    * when considering keys. The data for the current key are simply copied from the leaf into the
@@ -77,7 +77,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     return kbuf;
   }
 
-  /**
+  /*
    * Return a stream from which the key may be read.
    *
    * @throws UnsupportedOperationException if the keys were not requested.
@@ -104,7 +104,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
 
   private DataInputBuffer keyStream = null;
 
-  /**
+  /*
    * Return a stream from which the value may be read.
    *
    * @throws UnsupportedOperationException if the values were not requested.
@@ -135,33 +135,33 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
 
   private DataInputBuffer valStream = null;
 
-  /**
+  /*
    * Reused for each value that is materialized and <code>null</code> if values are not being
    * requested.
    */
   private final DataOutputBuffer vbuf;
 
-  /**
+  /*
    * <code>true</code> iff the iterator is visiting an index entry with a <code>null</code> value.
    */
   private boolean isNull;
 
   private long versionTimestamp = 0L;
 
-  /**
+  /*
    * Note: The default of <code>false</code> has the correct semantics if the btree does not support
    * isolation since isolation requires that both deleted entries and version timestamps are
    * enabled.
    */
   private boolean versionDeleted = false;
 
-  /**
+  /*
    * The #of entries that have been visited. This will be ZERO (0) until the first entry has been
    * visited, at which point it is incremented to ONE (1), etc.
    */
   private int nvisited = 0;
 
-  /**
+  /*
    * The #of entries that have been visited so far and ZERO (0) until the first entry has been
    * visited.
    */
@@ -264,7 +264,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     return versionDeleted;
   }
 
-  /**
+  /*
    * @todo Implement. In order to work the tuple needs to know the source store from which the index
    *     entry was read. In the context of a fused view this is the element of that view that
    *     supplied the tuple binding (blocks may be stored on journals or index segments). In the
@@ -280,7 +280,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Copy data and metadata for the index entry from the {@link Leaf} into the {@link Tuple} and
    * increment the counter of the #of visited entries.
    *
@@ -350,7 +350,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     }
   }
 
-  /**
+  /*
    * Assumes that the tuple is not deleted and that timestamp information is not available.
    *
    * @param key
@@ -361,7 +361,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     copyTuple(key, val, false /* deleted */, 0L /* timestamp */);
   }
 
-  /**
+  /*
    * Sets all fields on the tuple and increments the tuple visited counter.
    *
    * @param key
@@ -401,7 +401,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     }
   }
 
-  /**
+  /*
    * Sets all fields and increments the tuple visited counter.
    *
    * @param t Some tuple.
@@ -459,7 +459,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     this.isNull = true;
   }
 
-  /**
+  /*
    * Change the tuple state to reflect the fact that the tuple has been deleted from the backing
    * index.
    */
@@ -474,7 +474,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     this.isNull = true;
   }
 
-  /**
+  /*
    * Note: A de-serialization problem thrown out of {@link #toString()} MAY indicate that the {@link
    * ITupleSerializer} was not overriden and a raw byte[] was stored as the tuple's value. In this
    * case, {@link #getObject()} will attempt to use Java standard de-serialization on the byte[]
@@ -488,7 +488,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     return toString(this);
   }
 
-  /**
+  /*
    * Utility method returns a {@link String} representation of an {@link ITuple}.
    *
    * @param tuple The {@link ITuple}.
@@ -548,7 +548,7 @@ public abstract class AbstractTuple<E> implements ITuple<E> {
     return sb.toString();
   }
 
-  /**
+  /*
    * Externalizes the flags as a list of symbolic constants.
    *
    * @param flags The {@link IRangeQuery} flags.

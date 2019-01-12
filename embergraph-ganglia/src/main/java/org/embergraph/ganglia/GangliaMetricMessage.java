@@ -21,7 +21,7 @@ public class GangliaMetricMessage extends AbstractGangliaMessage implements IGan
   private final String format;
   private final Object value;
 
-  /**
+  /*
    * Constructor from data.
    *
    * @param recordType
@@ -152,9 +152,7 @@ public class GangliaMetricMessage extends AbstractGangliaMessage implements IGan
 
     if (getValue().getClass() != t.getValue().getClass()) return false;
 
-    if (!getFormat().equals(t.getFormat())) return false;
-
-    return true;
+    return getFormat().equals(t.getFormat());
   }
 
   @Override

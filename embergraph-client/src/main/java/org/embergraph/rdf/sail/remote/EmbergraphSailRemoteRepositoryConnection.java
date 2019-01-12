@@ -68,8 +68,8 @@ import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * An implementation of Sesame's RepositoryConnection interface that wraps a embergraph {@link
+/*
+* An implementation of Sesame's RepositoryConnection interface that wraps a embergraph {@link
  * RemoteRepository}. This provides SAIL API based client access to a embergraph remote
  * NanoSparqlServer.
  *
@@ -102,7 +102,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     this.repo = repo;
   }
 
-  /**
+  /*
    * Return a {@link RemoteRepository} for this connection.
    *
    * @see RemoteRepositoryManager#new
@@ -212,7 +212,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see <a href="http://trac.bigdata.com/ticket/1109">hasStatements can overestimate and ignores
@@ -366,7 +366,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     add(new StatementImpl(s, p, o), c);
   }
 
-  /**
+  /*
    * <strong>single statement updates not recommended for performance reasons</strong>. Remember,
    * batch is beautiful.
    *
@@ -468,7 +468,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     remove(g, c);
   }
 
-  /**
+  /*
    * <strong>single statement updates not recommended for performance reasons</strong>. Remember,
    * batch is beautiful.
    *
@@ -565,7 +565,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This uses the HASSTMT REST API method to do the minimum amount of work on the server.
@@ -582,7 +582,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     return hasStatement(null /* s */, null /* p */, null /* o */, false /* includeInferred */);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see <a href="http://trac.bigdata.com/ticket/1174" > Sail/Repository.size() should not count
@@ -778,7 +778,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   /** <code>true</code> iff the connection is open. */
   private final AtomicBoolean open = new AtomicBoolean(true);
 
-  /**
+  /*
    * The current transaction. This is <code>null</code> before {@link #begin()} is called the first
    * time. It is set to <code>null</code> by both {@link #rollback()} and {@link #commit()}. If it
    * is non-<code>null</code> when {@link #close()} is called, then the associated transaction will
@@ -799,7 +799,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     if (!open.get()) throw new RepositoryException("Connection is not open");
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This is deprecated in openrdf since 2.7.x. The semantics are that a connection without
@@ -817,7 +817,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     return remoteTx.get() == null;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -858,8 +858,8 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
               new Runnable() {
                 @Override
                 public void run() {
-                  /*
-                   * Note: This invokes the tx.abort() without regard to whether or
+                /*
+       * Note: This invokes the tx.abort() without regard to whether or
                    * not the connection is open (it will be closed since we closed
                    * it before submitting this for execution).
                    */
@@ -886,7 +886,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
   }
 
   @Override
-  public boolean isActive() throws UnknownTransactionStateException, RepositoryException {
+  public boolean isActive() throws RepositoryException {
     /*
      * First, do some non-blocking tests. If we can prove that the connection
      * is not open or that there is no active transaction with a non-blocking
@@ -903,17 +903,13 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     synchronized (remoteTx) {
       assertOpen();
       final IRemoteTx tx = remoteTx.get();
-      if (tx == null) {
-        // no transaction is active.
-        return false;
-      }
-      /*
+      // no transaction is active.
+      return tx != null;/*
        * The client has an active transaction.
        *
        * Note: This DOES NOT indicate that the transaction is still active on
        * the server!
        */
-      return true;
     }
   }
 
@@ -935,7 +931,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     }
   }
 
-  /**
+  /*
    * Begin a read-only transaction. Since all read operations have snapshot isolation, this is only
    * necessary when multiple read operations need to read on the same commit point.
    */
@@ -956,7 +952,7 @@ public class EmbergraphSailRemoteRepositoryConnection implements RepositoryConne
     }
   }
 
-  /**
+  /*
    * Begin a read-only transaction that reads against the most recent committed state whose commit
    * timestamp is less than or equal to timestamp.
    *

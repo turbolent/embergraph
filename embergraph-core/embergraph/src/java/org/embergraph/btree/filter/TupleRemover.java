@@ -8,8 +8,8 @@ import org.embergraph.btree.IRangeQuery;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 
-/**
- * Visits all elements visited by the source iterator and removes those matching the filter.
+/*
+* Visits all elements visited by the source iterator and removes those matching the filter.
  *
  * <p>Note: If you want to only visit those elements that are being removed, then apply a {@link
  * TupleFilter} first and then stack the {@link TupleRemover} on top and make {@link
@@ -33,14 +33,14 @@ public abstract class TupleRemover<E> extends FilterBase implements ITupleFilter
     return new TupleRemover.Removerator<E>((ITupleIterator<E>) src, context, this);
   }
 
-  /**
+  /*
    * <code>true</code> iff the tuple should be removed from the source {@link IIndex}.
    *
    * @param e The tuple.
    */
   protected abstract boolean remove(ITuple<E> e);
 
-  /**
+  /*
    * Implementation class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -58,7 +58,7 @@ public abstract class TupleRemover<E> extends FilterBase implements ITupleFilter
     /** The filter to be applied. */
     private final TupleRemover<E> filter;
 
-    /**
+    /*
      * @param src
      * @param filter
      */
@@ -93,7 +93,7 @@ public abstract class TupleRemover<E> extends FilterBase implements ITupleFilter
       return e;
     }
 
-    /**
+    /*
      * Note: Visited tuples which satisfy {@link TupleRemover#remove(Object)} will already have been
      * removed from the source iterator. Attempting to remove them again using this method may cause
      * an {@link IllegalStateException} to be thrown by the source iterator.

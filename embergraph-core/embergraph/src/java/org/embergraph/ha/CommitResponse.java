@@ -23,8 +23,8 @@ package org.embergraph.ha;
 import java.util.ArrayList;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
-/**
- * Response for a 2-phase commit.
+/*
+* Response for a 2-phase commit.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -33,7 +33,7 @@ public class CommitResponse {
   /** The COMMIT message. */
   private final CommitRequest req;
 
-  /**
+  /*
    * An array of the root cause exceptions for any errors encountered when instructing the services
    * to execute the COMMIT message. The indices into this collection are correlated with the service
    * join order and the PREPARE vote order. The leader is always at index zero.
@@ -79,7 +79,7 @@ public class CommitResponse {
     return nfail;
   }
 
-  /**
+  /*
    * Return the root cause for the ith service -or- <code>null</code> if the COMMIT did not produce
    * an exception for that service.
    */
@@ -88,7 +88,7 @@ public class CommitResponse {
     return causes.get(i);
   }
 
-  /**
+  /*
    * Throw out the exception(s).
    *
    * <p>Note: This method is guaranteed to not return normally!

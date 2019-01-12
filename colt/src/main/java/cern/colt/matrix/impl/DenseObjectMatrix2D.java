@@ -10,8 +10,8 @@ package cern.colt.matrix.impl;
 
 import cern.colt.matrix.ObjectMatrix1D;
 import cern.colt.matrix.ObjectMatrix2D;
-/**
- * Dense 2-d matrix holding <tt>Object</tt> elements. First see the <a
+/*
+* Dense 2-d matrix holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -54,13 +54,13 @@ import cern.colt.matrix.ObjectMatrix2D;
  * @version 1.0, 09/24/99
  */
 public class DenseObjectMatrix2D extends ObjectMatrix2D {
-  /**
+  /*
    * The elements of this matrix. elements are stored in row major, i.e. index==row*columns + column
    * columnOf(index)==index%columns rowOf(index)==index/columns i.e. {row0 column0..m}, {row1
    * column0..m}, ..., {rown column0..m}
    */
   protected Object[] elements;
-  /**
+  /*
    * Constructs a matrix with a copy of the given values. <tt>values</tt> is required to have the
    * form <tt>values[row][column]</tt> and have exactly the same number of columns in every row.
    *
@@ -75,7 +75,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     this(values.length, values.length == 0 ? 0 : values[0].length);
     assign(values);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of rows and columns. All entries are initially
    * <tt>0</tt>.
    *
@@ -88,7 +88,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     setUp(rows, columns);
     this.elements = new Object[rows * columns];
   }
-  /**
+  /*
    * Constructs a view with the given parameters.
    *
    * @param rows the number of rows the matrix shall have.
@@ -115,7 +115,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     this.elements = elements;
     this.isNoView = false;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>values</tt>. <tt>values</tt> is required to have
    * the form <tt>values[row][column]</tt> and have exactly the same number of rows and columns as
    * the receiver.
@@ -150,7 +150,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[row,col] = function(x[row,col])</tt>.
    *
    * <p><b>Example:</b>
@@ -191,7 +191,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Replaces all cell values of the receiver with the values of another matrix. Both matrices must
    * have the same number of rows and columns. If both matrices share the same cells (as is the case
    * if they are views derived from the same matrix) and intersect in an ambiguous way, then
@@ -245,7 +245,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[row,col] =
    * function(x[row,col],y[row,col])</tt>.
    *
@@ -309,7 +309,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -328,7 +328,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     // manually inlined:
     return elements[rowZero + row * rowStride + columnZero + column * columnStride];
   }
-  /**
+  /*
    * Returns <tt>true</tt> if both matrices share common cells. More formally, returns <tt>true</tt>
    * if <tt>other != null</tt> and at least one of the following conditions is met
    *
@@ -348,7 +348,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     }
     return false;
   }
-  /**
+  /*
    * Returns the position of the given coordinate within the (virtual or non-virtual) internal
    * 1-dimensional array.
    *
@@ -360,7 +360,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     // manually inlined for speed:
     return rowZero + row * rowStride + columnZero + column * columnStride;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of rows and columns. For example, if the receiver is an instance of
    * type <tt>DenseObjectMatrix2D</tt> the new matrix must also be of type
@@ -376,7 +376,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
   public ObjectMatrix2D like(int rows, int columns) {
     return new DenseObjectMatrix2D(rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseObjectMatrix2D</tt> the new matrix must be of type <tt>DenseObjectMatrix1D</tt>, if
@@ -389,7 +389,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
   public ObjectMatrix1D like1D(int size) {
     return new DenseObjectMatrix1D(size);
   }
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, sharing the
    * same cells. For example, if the receiver is an instance of type <tt>DenseObjectMatrix2D</tt>
    * the new matrix must be of type <tt>DenseObjectMatrix1D</tt>, if the receiver is an instance of
@@ -405,7 +405,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
   protected ObjectMatrix1D like1D(int size, int zero, int stride) {
     return new DenseObjectMatrix1D(size, this.elements, zero, stride);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -424,7 +424,7 @@ public class DenseObjectMatrix2D extends ObjectMatrix2D {
     // manually inlined:
     elements[rowZero + row * rowStride + columnZero + column * columnStride] = value;
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param rowOffsets the offsets of the visible elements.

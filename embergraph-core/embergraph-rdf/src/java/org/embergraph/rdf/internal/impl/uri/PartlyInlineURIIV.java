@@ -9,8 +9,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.openrdf.model.URI;
 
-/**
- * A {@link URI} modeled as a namespace {@link IV} plus an inline Unicode <code>localName</code>.
+/*
+* A {@link URI} modeled as a namespace {@link IV} plus an inline Unicode <code>localName</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -22,7 +22,7 @@ public class PartlyInlineURIIV<V extends EmbergraphURI>
   /** */
   private static final long serialVersionUID = -4548354704407887640L;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The extensionIV and delegateIV are NOT cloned. The rationale is that we are only
@@ -48,14 +48,14 @@ public class PartlyInlineURIIV<V extends EmbergraphURI>
     super(VTE.URI, delegate, namespace);
   }
 
-  /**
+  /*
    * Human readable representation includes the namespace {@link IV} and the <code>localName</code>.
    */
   public String toString() {
 
     return "URI(namespaceIV="
         + getExtensionIV()
-        + String.valueOf(getVTE().getCharCode())
+        + getVTE().getCharCode()
         + ", localName="
         + getDelegate()
         + ")";
@@ -67,7 +67,7 @@ public class PartlyInlineURIIV<V extends EmbergraphURI>
     return INonInlineExtensionCodes.URINamespaceIV;
   }
 
-  /**
+  /*
    * Implements {@link URI#getLocalName()}.
    *
    * <p>We can use the inline delegate for this.

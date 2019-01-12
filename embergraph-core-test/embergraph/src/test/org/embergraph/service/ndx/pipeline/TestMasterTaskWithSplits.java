@@ -47,8 +47,8 @@ import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.util.Bytes;
 
-/**
- * Stress test using key-range partitioned index ({@link IMetadataIndex}), which allows us to test
+/*
+* Stress test using key-range partitioned index ({@link IMetadataIndex}), which allows us to test
  * the {@link AbstractMasterTask} under split, move, join and other kinds of index partition
  * operations.
  *
@@ -72,7 +72,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Method returns a separator key which lies 1/2 between the given separator keys. This test suite
    * uses long (64 bit) keys. An empty byte[] corresponds to ZERO (0L). A <code>null</code>, which
    * may only appear as the right separator, corresponds to <code>2^64</code>. The math is performed
@@ -111,7 +111,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
   private static final BigInteger MAX_KEY =
       BigInteger.valueOf(Long.MAX_VALUE).multiply(BigInteger.valueOf(2));
 
-  /**
+  /*
    * Convert an unsigned byte[] into a {@link BigInteger}. A <code>null</code> is understood as
    * <code>2^64</code>. An empty byte[] is understood as a ZERO (0).
    *
@@ -131,7 +131,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
     return new BigInteger(key);
   }
 
-  /**
+  /*
    * Unit tests to verify the math used to compute the separator keys.
    *
    * <p>FIXME This test passes because the assertions are correct, but it only lays out some known
@@ -157,7 +157,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
     assertEquals(MAX_KEY, decodeKey(null));
   }
 
-  /**
+  /*
    * FIXME Verify that the separator keys are properly ordered. [See notes at the top of this file,
    * but also note that we need to handle the <code>null</code> rightSeparator specially.]
    */
@@ -169,15 +169,15 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
             .longValue());
   }
 
-  /**
+  /*
    * Type-safe enumeration of index partition operations for this test.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  private static enum OpCode {
+  private enum OpCode {
 
-    /**
+    /*
      * Scatter-split an index partition (takes one index partition and produces N index partitions,
      * where N is on the order of 1x to 4x the #of data services in a cluster.
      */
@@ -188,13 +188,13 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
     Join,
     /** Move an index partition (changes its locator but does not change its key range). */
     Move,
-    /**
+    /*
      * This is not an index partition operation but rather is used to signal the end of the test.
      */
-    Done;
-  };
+    Done
+  }
 
-  /**
+  /*
    * Class models an operation and the delay until it occurs. A sequence of such operations forms a
    * schedule for the test.
    *
@@ -222,7 +222,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
     }
   }
 
-  /**
+  /*
    * Stress test for redirects.
    *
    * <p>Redirects are stored in an {@link IMetadataIndex} so we may test the behavior under SPLITs,
@@ -368,8 +368,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
           //                new Op(OpCode.Split, 1, scheduleUnit),
           //                new Op(OpCode.Split, 1, scheduleUnit),
           //                new Op(OpCode.Split, 1, scheduleUnit),
-          /*
-           * Note: Always include this as the last operation or the test
+        /*
+       * Note: Always include this as the last operation or the test
            * WILL NOT terminate!
            */
           new Op(OpCode.Done, 10, scheduleUnit)
@@ -398,7 +398,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
     // the #of producers that are currently running.
     final AtomicInteger producerCount = new AtomicInteger(0);
 
-    /**
+    /*
      * Writes on a master.
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -436,8 +436,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
               return null;
             }
 
-            /*
-             * Note: keys have uniform distribution.
+          /*
+       * Note: keys have uniform distribution.
              */
             final KVO<O>[] a = new KVO[producerChunkSize];
 
@@ -465,7 +465,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
       }
     }
 
-    /**
+    /*
      * Issues redirects.
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -479,7 +479,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
 
       final Random r = new Random();
 
-      /**
+      /*
        * @param master
        * @param times The delay times between redirects. The delay until the next redirect is chosen
        *     randomly from among the specified times.
@@ -544,7 +544,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
         return null;
       }
 
-      /**
+      /*
        * Handles scatterSplit. One index partition is selected. It is then scattered by dividing its
        * key range into 2N equal parts, where N is the #of of data services. The locators for the
        * index partition in the metadata index are updated to reflect the scatter split.
@@ -569,8 +569,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
           // lookup that locator.
           final L locator = (L) master.mdi.valueAt(index, master.mdi.getLookupTuple()).getObject();
 
-          /*
-           * Evenly divide the key range of the locator into N key
+        /*
+       * Evenly divide the key range of the locator into N key
            * ranges. If the rightSeparator is null, then we divide the
            * keys based on the a-priori knowledge that the keys are
            * 8-bytes long so the maximum key is formed by encoding
@@ -592,7 +592,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
         }
       }
 
-      /**
+      /*
        * Handle split of a randomly chosen index partition into two new index partitions.
        *
        * @param op
@@ -616,8 +616,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
           final L oldLocator =
               (L) master.mdi.valueAt(index, master.mdi.getLookupTuple()).getObject();
 
-          /*
-           * Divide the key range of the locator into 2 key ranges. If
+        /*
+       * Divide the key range of the locator into 2 key ranges. If
            * the rightSeparator is null, then we divide the keys based
            * on the a-priori knowledge that the keys are 8-bytes long
            * so the maximum key is formed by encoding Long.MAX_VALUE
@@ -670,7 +670,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
         throw new UnsupportedOperationException();
       }
 
-      /**
+      /*
        * Cause the test to halt.
        *
        * @param op
@@ -780,8 +780,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
       // periodically verify no errors in running tasks.
       while (!halt.get()) {
 
-        /*
-         * End the test if anything is done.
+      /*
+       * End the test if anything is done.
          */
 
         // check master.

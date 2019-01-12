@@ -58,8 +58,8 @@ import org.openrdf.model.Graph;
 import org.openrdf.model.impl.LinkedHashModel;
 import org.openrdf.model.impl.ValueFactoryImpl;
 
-/**
- * Mult-tenancy Administration Servlet (management for embergraph namespaces). A embergraph
+/*
+* Mult-tenancy Administration Servlet (management for embergraph namespaces). A embergraph
  * namespace corresponds to a partition in the naming of durable resources. A {@link Journal} or
  * {@link IEmbergraphFederation} may have multiple KB instances, each in their own namespace. This
  * servlet allows you to manage those KB instances using CRUD operations.
@@ -77,7 +77,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
 
   private static final transient Logger log = Logger.getLogger(MultiTenancyServlet.class);
 
-  /**
+  /*
    * URL query parameter used to override the servlet init parameter {@link
    * ConfigParams#DESCRIBE_EACH_NAMED_GRAPH}.
    */
@@ -161,7 +161,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
     m_restServlet.doPost(req, resp);
   }
 
-  /**
+  /*
    * Delete the KB associated with the effective namespace.
    *
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/689" > Missing URL encoding in
@@ -231,7 +231,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
     return;
   }
 
-  /**
+  /*
    * Prepare a list of properties for a new namespace.
    *
    * <pre>
@@ -434,7 +434,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Create a new namespace.
    *
    * <pre>
@@ -537,7 +537,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Delete an existing namespace.
    *
    * @param req
@@ -559,7 +559,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Send the configuration properties for the addressed KB instance.
    *
    * @param req
@@ -611,8 +611,8 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
 
                   } catch (Throwable t) {
                     if (InnerCause.isInnerCause(t, DatasetNotFoundException.class)) {
-                      /*
-                       * There is no such triple/quad store instance.
+                    /*
+       * There is no such triple/quad store instance.
                        */
                       throw new HttpOperationException(
                           HttpServletResponse.SC_NOT_FOUND,
@@ -659,7 +659,7 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
       describeDefaultNamespace = s != null ? Boolean.valueOf(s) : false;
     }
 
-    /**
+    /*
      * Protect the entire operation with a transaction, including the describe of each namespace
      * that we discover.
      *
@@ -680,8 +680,8 @@ public class MultiTenancyServlet extends EmbergraphRDFServlet {
 
       } else {
 
-        /*
-         * The set of registered namespaces for KBs.
+      /*
+       * The set of registered namespaces for KBs.
          */
         final List<String> namespaces = getEmbergraphRDFContext().getNamespacesTx(tx);
 

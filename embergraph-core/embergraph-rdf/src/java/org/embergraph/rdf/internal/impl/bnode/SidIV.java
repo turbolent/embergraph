@@ -48,8 +48,8 @@ import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Value;
 
-/**
- * Internal value representing an inline statement identifier. Uses the {@link ISPO} supplied in the
+/*
+* Internal value representing an inline statement identifier. Uses the {@link ISPO} supplied in the
  * ctor as the inline value. The {@link #asValue(EmbergraphValueFactory, ILexiconConfiguration)}
  * method returns a {@link EmbergraphBNode} that is used to represent the sid in serialization
  * formats (such as the custom RDF/XML extension for sids). The bnode is guaranteed to always have
@@ -131,7 +131,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
     return spo;
   }
 
-  /**
+  /*
    * Returns the bnode representation of this IV, useful for serialization formats such as RDF/XML.
    * See {@link #bnodeId()}.
    */
@@ -151,13 +151,13 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
               .createStatement(
                   (EmbergraphResource) spo.s().asValue(lex),
                   (EmbergraphURI) spo.p().asValue(lex),
-                  (EmbergraphValue) spo.o().asValue(lex),
+                  spo.o().asValue(lex),
                   c));
     }
     return bnode;
   }
 
-  /**
+  /*
    * Return the byte length for the byte[] encoded representation of this internal value. Depends on
    * the byte length of the encoded inline spo.
    */
@@ -181,7 +181,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
     return spo.hashCode();
   }
 
-  /**
+  /*
    * Implements {@link BNode#getID()}.
    *
    * <p>This implementation uses the {@link BigInteger} class to create a unique blank node ID based
@@ -230,7 +230,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
     return SPOComparator.INSTANCE.compare(spo, spo2);
   }
 
-  /**
+  /*
    * Encode this internal value into the supplied key builder. Emits the flags, following by the
    * encoded byte[] representing the spo, in SPO key order.
    *
@@ -264,7 +264,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
     return key;
   }
 
-  /**
+  /*
    * Object provides serialization for {@link SidIV} via the write-replace and read-replace pattern.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -24,8 +24,8 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.URI;
 
-/**
- * IExtensionFactories are responsible for enumerating what extensions are supported for a
+/*
+* IExtensionFactories are responsible for enumerating what extensions are supported for a
  * particular database configuration. Embergraph comes packaged with a {@link
  * SampleExtensionFactory} that supplies two starter extensions - the {@link EpochExtension} (for
  * representing time since the epoch as a long integer) and the {@link ColorsEnumExtension} (a
@@ -33,7 +33,7 @@ import org.openrdf.model.URI;
  */
 public interface IExtensionFactory {
 
-  /**
+  /*
    * This will be called very early in the IExtensionFactory lifecycle so that the {@link BlobIV}s
    * for the {@link IExtension}'s datatype URIs will be on hand when needed. Also gets other
    * relevant configuration information from the lexicon such as whether or not to inline

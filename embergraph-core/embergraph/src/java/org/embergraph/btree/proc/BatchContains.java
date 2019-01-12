@@ -28,8 +28,8 @@ import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBitBuffer;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 
-/**
- * Batch existence test operation. Existence tests SHOULD be used in place of lookup tests to
+/*
+* Batch existence test operation. Existence tests SHOULD be used in place of lookup tests to
  * determine key existence if null values are allowed in an index (lookup will return a null for
  * both a null value and the absence of a key in the index).
  *
@@ -41,7 +41,7 @@ public class BatchContains extends AbstractKeyArrayIndexProcedure<ResultBitBuffe
   /** */
   private static final long serialVersionUID = -5195874136364040815L;
 
-  /**
+  /*
    * Factory for {@link BatchContains} procedures.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -77,7 +77,7 @@ public class BatchContains extends AbstractKeyArrayIndexProcedure<ResultBitBuffe
   /** De-serialization ctor. */
   public BatchContains() {}
 
-  /**
+  /*
    * Create a batch existence test operation.
    *
    * @param keys A series of keys. Each key is an variable length unsigned byte[]. The keys MUST be
@@ -96,7 +96,7 @@ public class BatchContains extends AbstractKeyArrayIndexProcedure<ResultBitBuffe
     return true;
   }
 
-  /**
+  /*
    * Applies the operation using {@link ISimpleBTree#contains(byte[])}.
    *
    * @param ndx

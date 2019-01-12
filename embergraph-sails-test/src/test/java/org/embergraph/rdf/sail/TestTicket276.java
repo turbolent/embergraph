@@ -42,8 +42,8 @@ import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 import org.openrdf.sail.memory.MemoryStore;
 
-/**
- * Unit test template for use in submission of bugs.
+/*
+* Unit test template for use in submission of bugs.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -72,7 +72,7 @@ public class TestTicket276 extends QuadsTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
    * JOURNAL FILE.
    */

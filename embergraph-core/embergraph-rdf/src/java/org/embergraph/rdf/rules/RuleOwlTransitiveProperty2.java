@@ -31,8 +31,8 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * owl:TransitiveProperty2
+/*
+* owl:TransitiveProperty2
  *
  * <pre>
  * (a rdf:type owl:TransitiveProperty), (b rdfs:subPropertyOf a) -&gt; (b rdf:type owl:TransitiveProperty)

@@ -25,8 +25,8 @@ import java.util.Set;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinGroupFilterExistsInfo;
 
-/**
- * Class summarizing the variable binding requirements for a given node (used for children in the
+/*
+* Class summarizing the variable binding requirements for a given node (used for children in the
  * join group), thus providing easy access to its variable binding information {@link
  * IGroupMemberNode}s.
  *
@@ -37,13 +37,13 @@ public class GroupNodeVarBindingInfo {
   /** The node for which the information is valid. */
   private final IGroupMemberNode node;
 
-  /**
+  /*
    * Variables that must be bound upon evaluation of this node, see {@link
    * IVariableBindingRequirements} for detailed documentation.
    */
   private final Set<IVariable<?>> requiredBound;
 
-  /**
+  /*
    * Variables that are desired to be bound upon evaluation of this node, see {@link
    * IVariableBindingRequirements} for detailed documentation.
    */
@@ -55,7 +55,7 @@ public class GroupNodeVarBindingInfo {
   /** Variables that are definitely bound by this node. */
   private final Set<IVariable<?>> definitelyProduced;
 
-  /**
+  /*
    * Constructor
    *
    * @param node
@@ -84,7 +84,7 @@ public class GroupNodeVarBindingInfo {
       }
     }
 
-    /**
+    /*
      * Special handing for ASK subqueries. See also ticket #BLZG-1284 and the associated test in
      * TestTickets for why this is necessary.
      */
@@ -128,7 +128,7 @@ public class GroupNodeVarBindingInfo {
     return definitelyProduced;
   }
 
-  /**
+  /*
    * Get variables that remain to be bound, assuming that the definitely incoming variables plus the
    * variables passed as parameter are bound already.
    */

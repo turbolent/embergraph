@@ -32,8 +32,8 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.IProcessCounters;
 
-/**
- * Test suite for parsing the output of the <code>vm_stat</code> utility under OSX.
+/*
+* Test suite for parsing the output of the <code>vm_stat</code> utility under OSX.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -117,7 +117,7 @@ public class TestParse_vm_stat extends AbstractParserTestCase {
     }
   }
 
-  /**
+  /*
    *
    *
    * <pre>

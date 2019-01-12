@@ -10,8 +10,8 @@ package cern.jet.stat;
 
 import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
-/**
- * Basic descriptive statistics.
+/*
+* Basic descriptive statistics.
  *
  * @author peter.gedeck@pharma.Novartis.com
  * @author wolfgang.hoschek@cern.ch
@@ -32,7 +32,7 @@ public class Descriptive extends Object {
 
     return (run / (N - lag)) / variance;
   }
-  /**
+  /*
    * Checks if the given range is within the contained array's bounds.
    *
    * @throws IndexOutOfBoundsException if <tt>to!=from-1 || from&lt;0 || from&gt;to ||
@@ -43,7 +43,7 @@ public class Descriptive extends Object {
     if (from < 0 || from > to || to >= theSize)
       throw new IndexOutOfBoundsException("from: " + from + ", to: " + to + ", size=" + theSize);
   }
-  /**
+  /*
    * Returns the correlation of two data sequences. That is
    * <tt>covariance(data1,data2)/(standardDev1*standardDev2)</tt>.
    */
@@ -51,7 +51,7 @@ public class Descriptive extends Object {
       DoubleArrayList data1, double standardDev1, DoubleArrayList data2, double standardDev2) {
     return covariance(data1, data2) / (standardDev1 * standardDev2);
   }
-  /**
+  /*
    * Returns the covariance of two data sequences, which is <tt>cov(x,y) = (1/(size()-1)) *
    * Sum((x[i]-mean(x)) * (y[i]-mean(y)))</tt>. See the <A
    * HREF="http://www.cquest.utoronto.ca/geog/ggr270y/notes/not05efg.html"> math definition</A>.
@@ -110,7 +110,7 @@ public class Descriptive extends Object {
 
     return run / run_sq;
   }
-  /**
+  /*
    * Computes the frequency (number of occurances, count) of each distinct value in the given sorted
    * data. After this call returns both <tt>distinctValues</tt> and <tt>frequencies</tt> have a new
    * size (which is equal for both), which is the number of distinct values in the sorted data.
@@ -150,7 +150,7 @@ public class Descriptive extends Object {
       if (frequencies != null) frequencies.add(runLength);
     }
   }
-  /**
+  /*
    * Returns the geometric mean of a data sequence. Note that for a geometric mean to be meaningful,
    * the minimum of the data sequence must not be less or equal to zero. <br>
    * The geometric mean is given by <tt>pow( Product( data[i] ), 1/size)</tt> which is equivalent to
@@ -162,7 +162,7 @@ public class Descriptive extends Object {
     // this version would easily results in overflows
     // return Math.pow(product, 1/size);
   }
-  /**
+  /*
    * Returns the geometric mean of a data sequence. Note that for a geometric mean to be meaningful,
    * the minimum of the data sequence must not be less or equal to zero. <br>
    * The geometric mean is given by <tt>pow( Product( data[i] ), 1/data.size())</tt>. This method
@@ -172,7 +172,7 @@ public class Descriptive extends Object {
   public static double geometricMean(DoubleArrayList data) {
     return geometricMean(data.size(), sumOfLogarithms(data, 0, data.size() - 1));
   }
-  /**
+  /*
    * Returns the harmonic mean of a data sequence.
    *
    * @param size the number of elements in the data sequence.
@@ -181,7 +181,7 @@ public class Descriptive extends Object {
   public static double harmonicMean(int size, double sumOfInversions) {
     return size / sumOfInversions;
   }
-  /**
+  /*
    * Incrementally maintains and updates minimum, maximum, sum and sum of squares of a data
    * sequence.
    *
@@ -260,7 +260,7 @@ public class Descriptive extends Object {
     // At this point of return the following postcondition holds:
     // data.size()-from elements have been consumed by this call.
   }
-  /**
+  /*
    * Incrementally maintains and updates various sums of powers of the form
    * <tt>Sum(data[i]<sup>k</sup>)</tt>.
    *
@@ -395,7 +395,7 @@ public class Descriptive extends Object {
     // At this point of return the following postcondition holds:
     // data.size()-fromIndex elements have been consumed by this call.
   }
-  /**
+  /*
    * Incrementally maintains and updates sum and sum of squares of a <i>weighted</i> data sequence.
    *
    * <p>Assume we have already recorded some data sequence elements and know their sum and sum of
@@ -467,7 +467,7 @@ public class Descriptive extends Object {
     // At this point of return the following postcondition holds:
     // data.size()-from elements have been consumed by this call.
   }
-  /**
+  /*
    * Returns the kurtosis (aka excess) of a data sequence.
    *
    * @param moment4 the fourth central moment, which is <tt>moment(data,4,mean)</tt>.
@@ -477,14 +477,14 @@ public class Descriptive extends Object {
     return -3
         + moment4 / (standardDeviation * standardDeviation * standardDeviation * standardDeviation);
   }
-  /**
+  /*
    * Returns the kurtosis (aka excess) of a data sequence, which is <tt>-3 + moment(data,4,mean) /
    * standardDeviation<sup>4</sup></tt>.
    */
   public static double kurtosis(DoubleArrayList data, double mean, double standardDeviation) {
     return kurtosis(moment(data, 4, mean), standardDeviation);
   }
-  /**
+  /*
    * Returns the lag-1 autocorrelation of a dataset; Note that this method has semantics different
    * from <tt>autoCorrelation(..., 1)</tt>;
    */
@@ -518,13 +518,13 @@ public class Descriptive extends Object {
 
     return max;
   }
-  /**
+  /*
    * Returns the arithmetic mean of a data sequence; That is <tt>Sum( data[i] ) / data.size()</tt>.
    */
   public static double mean(DoubleArrayList data) {
     return sum(data) / data.size();
   }
-  /**
+  /*
    * Returns the mean deviation of a dataset. That is <tt>Sum (Math.abs(data[i]-mean)) /
    * data.size())</tt>.
    */
@@ -535,7 +535,7 @@ public class Descriptive extends Object {
     for (int i = size; --i >= 0; ) sum += Math.abs(elements[i] - mean);
     return sum / size;
   }
-  /**
+  /*
    * Returns the median of a sorted data sequence.
    *
    * @param sortedData the data sequence; <b>must be sorted ascending</b>.
@@ -570,7 +570,7 @@ public class Descriptive extends Object {
 
     return min;
   }
-  /**
+  /*
    * Returns the moment of <tt>k</tt>-th order with constant <tt>c</tt> of a data sequence, which is
    * <tt>Sum( (data[i]-c)<sup>k</sup> ) / data.size()</tt>.
    *
@@ -602,14 +602,14 @@ public class Descriptive extends Object {
     */
     return sum / size;
   }
-  /**
+  /*
    * Returns the moment of <tt>k</tt>-th order with constant <tt>c</tt> of a data sequence, which is
    * <tt>Sum( (data[i]-c)<sup>k</sup> ) / data.size()</tt>.
    */
   public static double moment(DoubleArrayList data, int k, double c) {
     return sumOfPowerDeviations(data, k, c) / data.size();
   }
-  /**
+  /*
    * Returns the pooled mean of two data sequences. That is <tt>(size1 * mean1 + size2 * mean2) /
    * (size1 + size2)</tt>.
    *
@@ -621,7 +621,7 @@ public class Descriptive extends Object {
   public static double pooledMean(int size1, double mean1, int size2, double mean2) {
     return (size1 * mean1 + size2 * mean2) / (size1 + size2);
   }
-  /**
+  /*
    * Returns the pooled variance of two data sequences. That is <tt>(size1 * variance1 + size2 *
    * variance2) / (size1 + size2)</tt>;
    *
@@ -633,7 +633,7 @@ public class Descriptive extends Object {
   public static double pooledVariance(int size1, double variance1, int size2, double variance2) {
     return (size1 * variance1 + size2 * variance2) / (size1 + size2);
   }
-  /**
+  /*
    * Returns the product, which is <tt>Prod( data[i] )</tt>. In other words:
    * <tt>data[0]*data[1]*...*data[data.size()-1]</tt>. This method uses the equivalent definition:
    * <tt>prod = pow( exp( Sum( Log(x[i]) ) / size(), size())</tt>.
@@ -641,7 +641,7 @@ public class Descriptive extends Object {
   public static double product(int size, double sumOfLogarithms) {
     return Math.pow(Math.exp(sumOfLogarithms / size), size);
   }
-  /**
+  /*
    * Returns the product of a data sequence, which is <tt>Prod( data[i] )</tt>. In other words:
    * <tt>data[0]*data[1]*...*data[data.size()-1]</tt>. Note that you may easily get numeric
    * overflows.
@@ -655,7 +655,7 @@ public class Descriptive extends Object {
 
     return product;
   }
-  /**
+  /*
    * Returns the <tt>phi-</tt>quantile; that is, an element <tt>elem</tt> for which holds that
    * <tt>phi</tt> percent of data elements are less than <tt>elem</tt>. The quantile need not
    * necessarily be contained in the data sequence, it can be a linear interpolation.
@@ -682,7 +682,7 @@ public class Descriptive extends Object {
 
     return result;
   }
-  /**
+  /*
    * Returns how many percent of the elements contained in the receiver are <tt>&lt;= element</tt>.
    * Does linear interpolation if the element is not contained but lies in between two contained
    * elements.
@@ -695,7 +695,7 @@ public class Descriptive extends Object {
   public static double quantileInverse(DoubleArrayList sortedList, double element) {
     return rankInterpolated(sortedList, element) / sortedList.size();
   }
-  /**
+  /*
    * Returns the quantiles of the specified percentages. The quantiles need not necessarily be
    * contained in the data sequence, it can be a linear interpolation.
    *
@@ -714,7 +714,7 @@ public class Descriptive extends Object {
 
     return quantiles;
   }
-  /**
+  /*
    * Returns the linearly interpolated number of elements in a list less or equal to a given
    * element. The rank is the number of elements <= element. Ranks are of the form <tt>{0, 1, 2,...,
    * sortedList.size()}</tt>. If no element is <= element, then the rank is zero. If the element
@@ -744,7 +744,7 @@ public class Descriptive extends Object {
     double delta = (element - from) / (to - from); // linear interpolation
     return insertionPoint + delta;
   }
-  /**
+  /*
    * Returns the RMS (Root-Mean-Square) of a data sequence. That is <tt>Math.sqrt(Sum(
    * data[i]*data[i] ) / data.size())</tt>. The RMS of data sequence is the square-root of the mean
    * of the squares of the elements in the data sequence. It is a measure of the average "size" of
@@ -756,7 +756,7 @@ public class Descriptive extends Object {
   public static double rms(int size, double sumOfSquares) {
     return Math.sqrt(sumOfSquares / size);
   }
-  /**
+  /*
    * Returns the sample kurtosis (aka excess) of a data sequence.
    *
    * <p>Ref: R.R. Sokal, F.J. Rohlf, Biometry: the principles and practice of statistics in
@@ -777,7 +777,7 @@ public class Descriptive extends Object {
   public static double sampleKurtosis(DoubleArrayList data, double mean, double sampleVariance) {
     return sampleKurtosis(data.size(), moment(data, 4, mean), sampleVariance);
   }
-  /**
+  /*
    * Return the standard error of the sample kurtosis.
    *
    * <p>Ref: R.R. Sokal, F.J. Rohlf, Biometry: the principles and practice of statistics in
@@ -789,7 +789,7 @@ public class Descriptive extends Object {
     int n = size;
     return Math.sqrt(24.0 * n * (n - 1) * (n - 1) / ((n - 3) * (n - 2) * (n + 3) * (n + 5)));
   }
-  /**
+  /*
    * Returns the sample skew of a data sequence.
    *
    * <p>Ref: R.R. Sokal, F.J. Rohlf, Biometry: the principles and practice of statistics in
@@ -809,7 +809,7 @@ public class Descriptive extends Object {
   public static double sampleSkew(DoubleArrayList data, double mean, double sampleVariance) {
     return sampleSkew(data.size(), moment(data, 3, mean), sampleVariance);
   }
-  /**
+  /*
    * Return the standard error of the sample skew.
    *
    * <p>Ref: R.R. Sokal, F.J. Rohlf, Biometry: the principles and practice of statistics in
@@ -821,7 +821,7 @@ public class Descriptive extends Object {
     int n = size;
     return Math.sqrt(6.0 * n * (n - 1) / ((n - 2) * (n + 1) * (n + 3)));
   }
-  /**
+  /*
    * Returns the sample standard deviation.
    *
    * <p>Ref: R.R. Sokal, F.J. Rohlf, Biometry: the principles and practice of statistics in
@@ -845,7 +845,7 @@ public class Descriptive extends Object {
     }
     return Cn * s;
   }
-  /**
+  /*
    * Returns the sample variance of a data sequence. That is <tt>(sumOfSquares - mean*sum) / (size -
    * 1)</tt> with <tt>mean = sum/size</tt>.
    *
@@ -857,7 +857,7 @@ public class Descriptive extends Object {
     double mean = sum / size;
     return (sumOfSquares - mean * sum) / (size - 1);
   }
-  /**
+  /*
    * Returns the sample variance of a data sequence. That is <tt>Sum ( (data[i]-mean)^2 ) /
    * (data.size()-1)</tt>.
    */
@@ -873,7 +873,7 @@ public class Descriptive extends Object {
 
     return sum / (size - 1);
   }
-  /**
+  /*
    * Returns the sample weighted variance of a data sequence. That is <tt>(sumOfSquaredProducts -
    * sumOfProducts * sumOfProducts / sumOfWeights) / (sumOfWeights - 1)</tt>.
    *
@@ -886,7 +886,7 @@ public class Descriptive extends Object {
     return (sumOfSquaredProducts - sumOfProducts * sumOfProducts / sumOfWeights)
         / (sumOfWeights - 1);
   }
-  /**
+  /*
    * Returns the skew of a data sequence.
    *
    * @param moment3 the third central moment, which is <tt>moment(data,3,mean)</tt>.
@@ -895,14 +895,14 @@ public class Descriptive extends Object {
   public static double skew(double moment3, double standardDeviation) {
     return moment3 / (standardDeviation * standardDeviation * standardDeviation);
   }
-  /**
+  /*
    * Returns the skew of a data sequence, which is <tt>moment(data,3,mean) /
    * standardDeviation<sup>3</sup></tt>.
    */
   public static double skew(DoubleArrayList data, double mean, double standardDeviation) {
     return skew(moment(data, 3, mean), standardDeviation);
   }
-  /**
+  /*
    * Splits (partitions) a list into sublists such that each sublist contains the elements with a
    * given range. <tt>splitters=(a,b,c,...,y,z)</tt> defines the ranges <tt>[-inf,a), [a,b), [b,c),
    * ..., [y,z), [z,inf]</tt>.
@@ -963,7 +963,7 @@ public class Descriptive extends Object {
   public static double standardDeviation(double variance) {
     return Math.sqrt(variance);
   }
-  /**
+  /*
    * Returns the standard error of a data sequence. That is <tt>Math.sqrt(variance/size)</tt>.
    *
    * @param size the number of elements in the data sequence.
@@ -972,7 +972,7 @@ public class Descriptive extends Object {
   public static double standardError(int size, double variance) {
     return Math.sqrt(variance / size);
   }
-  /**
+  /*
    * Modifies a data sequence to be standardized. Changes each element <tt>data[i]</tt> as follows:
    * <tt>data[i] = (data[i]-mean)/standardDeviation</tt>.
    */
@@ -984,7 +984,7 @@ public class Descriptive extends Object {
   public static double sum(DoubleArrayList data) {
     return sumOfPowerDeviations(data, 1, 0.0);
   }
-  /**
+  /*
    * Returns the sum of inversions of a data sequence, which is <tt>Sum( 1.0 / data[i])</tt>.
    *
    * @param data the data sequence.
@@ -994,7 +994,7 @@ public class Descriptive extends Object {
   public static double sumOfInversions(DoubleArrayList data, int from, int to) {
     return sumOfPowerDeviations(data, -1, 0.0, from, to);
   }
-  /**
+  /*
    * Returns the sum of logarithms of a data sequence, which is <tt>Sum( Log(data[i])</tt>.
    *
    * @param data the data sequence.
@@ -1007,14 +1007,14 @@ public class Descriptive extends Object {
     for (int i = from - 1; ++i <= to; ) logsum += Math.log(elements[i]);
     return logsum;
   }
-  /**
+  /*
    * Returns <tt>Sum( (data[i]-c)<sup>k</sup> )</tt>; optimized for common parameters like <tt>c ==
    * 0.0</tt> and/or <tt>k == -2 .. 4</tt>.
    */
   public static double sumOfPowerDeviations(DoubleArrayList data, int k, double c) {
     return sumOfPowerDeviations(data, k, c, 0, data.size() - 1);
   }
-  /**
+  /*
    * Returns <tt>Sum( (data[i]-c)<sup>k</sup> )</tt> for all <tt>i = from .. to</tt>; optimized for
    * common parameters like <tt>c == 0.0</tt> and/or <tt>k == -2 .. 5</tt>.
    */
@@ -1102,13 +1102,13 @@ public class Descriptive extends Object {
     }
     return sum;
   }
-  /**
+  /*
    * Returns the sum of powers of a data sequence, which is <tt>Sum ( data[i]<sup>k</sup> )</tt>.
    */
   public static double sumOfPowers(DoubleArrayList data, int k) {
     return sumOfPowerDeviations(data, k, 0);
   }
-  /**
+  /*
    * Returns the sum of squared mean deviation of of a data sequence. That is <tt>variance *
    * (size-1) == Sum( (data[i] - mean)^2 )</tt>.
    *
@@ -1122,7 +1122,7 @@ public class Descriptive extends Object {
   public static double sumOfSquares(DoubleArrayList data) {
     return sumOfPowerDeviations(data, 2, 0.0);
   }
-  /**
+  /*
    * Returns the trimmed mean of a sorted data sequence.
    *
    * @param sortedData the data sequence; <b>must be sorted ascending</b>.
@@ -1145,7 +1145,7 @@ public class Descriptive extends Object {
   public static double variance(double standardDeviation) {
     return standardDeviation * standardDeviation;
   }
-  /**
+  /*
    * Returns the variance of a data sequence. That is <tt>(sumOfSquares - mean*sum) / size</tt> with
    * <tt>mean = sum/size</tt>.
    *
@@ -1157,7 +1157,7 @@ public class Descriptive extends Object {
     double mean = sum / size;
     return (sumOfSquares - mean * sum) / size;
   }
-  /**
+  /*
    * Returns the weighted mean of a data sequence. That is <tt> Sum (data[i] * weights[i]) / Sum (
    * weights[i] )</tt>.
    */
@@ -1177,7 +1177,7 @@ public class Descriptive extends Object {
 
     return sum / weightsSum;
   }
-  /**
+  /*
    * Returns the weighted RMS (Root-Mean-Square) of a data sequence. That is <tt>Sum( data[i] *
    * data[i] * weights[i]) / Sum( data[i] * weights[i] )</tt>, or in other words <tt>sumOfProducts /
    * sumOfSquaredProducts</tt>.
@@ -1188,7 +1188,7 @@ public class Descriptive extends Object {
   public static double weightedRMS(double sumOfProducts, double sumOfSquaredProducts) {
     return sumOfProducts / sumOfSquaredProducts;
   }
-  /**
+  /*
    * Returns the winsorized mean of a sorted data sequence.
    *
    * @param sortedData the data sequence; <b>must be sorted ascending</b>.

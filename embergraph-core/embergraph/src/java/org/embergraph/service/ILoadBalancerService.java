@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
-/**
- * Interface for collecting, reporting, and decision-making based on node and service utilization
+/*
+* Interface for collecting, reporting, and decision-making based on node and service utilization
  * statistics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -36,7 +36,7 @@ import java.util.concurrent.TimeoutException;
  */
 public interface ILoadBalancerService extends IService, IEventReceivingService {
 
-  /**
+  /*
    * Send performance counters. Clients SHOULD invoke this method no less than once every 60
    * seconds.
    *
@@ -44,18 +44,18 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    * @param data The serialized performance counter data.
    * @throws IOException
    */
-  public void notify(UUID serviceUUID, byte[] data) throws IOException;
+  void notify(UUID serviceUUID, byte[] data) throws IOException;
 
-  /**
+  /*
    * A warning issued by a client when it is in danger of depleting its resources.
    *
    * @param msg A message.
    * @param serviceUUID The service {@link UUID} that is self-reporting.
    * @throws IOException
    */
-  public void warn(String msg, UUID serviceUUID) throws IOException;
+  void warn(String msg, UUID serviceUUID) throws IOException;
 
-  /**
+  /*
    * An urgent warning issued the caller is in immediate danger of depleting its resources with a
    * consequence of immediate service and/or host failure(s).
    *
@@ -63,9 +63,9 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    * @param serviceUUID The service {@link UUID} that is self-reporting.
    * @throws IOException
    */
-  public void urgent(String msg, UUID serviceUUID) throws IOException;
+  void urgent(String msg, UUID serviceUUID) throws IOException;
 
-  /**
+  /*
    * Return the {@link UUID} of an under-utilized data service. If there is no under-utilized
    * service, then return the {@link UUID} of the service with the least load.
    *
@@ -73,10 +73,10 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    *     service join.
    * @throws InterruptedException if the request is interrupted.
    */
-  public UUID getUnderUtilizedDataService()
+  UUID getUnderUtilizedDataService()
       throws IOException, TimeoutException, InterruptedException;
 
-  /**
+  /*
    * Return up to <i>limit</i> {@link IDataService} {@link UUID}s that are currently under-utilized.
    *
    * <p>When <i>minCount</i> is positive, this method will always return at least <i>minCount</i>
@@ -105,10 +105,10 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    * @todo probably should use {@link Integer#MAX_VALUE} rather than ZERO for the "no limit"
    *     signifier for [maxCount].
    */
-  public UUID[] getUnderUtilizedDataServices(int minCount, int maxCount, UUID exclude)
+  UUID[] getUnderUtilizedDataServices(int minCount, int maxCount, UUID exclude)
       throws IOException, TimeoutException, InterruptedException;
 
-  /**
+  /*
    * Return <code>true</code> if the service is considered to be "highly utilized".
    *
    * <p>Note: This is used mainly to decide when a service should attempt to shed index partitions.
@@ -119,22 +119,22 @@ public interface ILoadBalancerService extends IService, IEventReceivingService {
    * @return <code>true</code> if the service is considered to be "highly utilized".
    * @throws IOException
    */
-  public boolean isHighlyUtilizedDataService(UUID serviceUUID) throws IOException;
+  boolean isHighlyUtilizedDataService(UUID serviceUUID) throws IOException;
 
-  /**
+  /*
    * Return <code>true</code> if the service is considered to be "under-utilized".
    *
    * @param serviceUUID The service {@link UUID}.
    * @return <code>true</code> if the service is considered to be "under-utilized".
    * @throws IOException
    */
-  public boolean isUnderUtilizedDataService(UUID serviceUUID) throws IOException;
+  boolean isUnderUtilizedDataService(UUID serviceUUID) throws IOException;
 
   /** Logs counters to a temp file. Replacement for sighup mechanism. */
-  public void sighup() throws IOException;
+  void sighup() throws IOException;
 
-  //    /**
-  //     * Return the identifier(s) of under-utilized service(s).
+  //    /*
+//     * Return the identifier(s) of under-utilized service(s).
   //     *
   //     * @param minCount
   //     *            The minimum #of services {@link UUID}s to return -or- zero

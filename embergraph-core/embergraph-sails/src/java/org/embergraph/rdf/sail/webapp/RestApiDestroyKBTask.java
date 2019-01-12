@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.embergraph.journal.ITx;
 import org.embergraph.rdf.sail.DestroyKBTask;
 
-/**
- * Destroy a namespace (REST API).
+/*
+* Destroy a namespace (REST API).
  *
  * @author bryan
  */

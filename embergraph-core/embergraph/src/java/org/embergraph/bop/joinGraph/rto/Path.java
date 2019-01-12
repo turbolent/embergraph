@@ -27,8 +27,8 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpRTO;
 
-/**
- * A join path is an ordered sequence of N {@link Vertex vertices} and represents an ordered series
+/*
+* A join path is an ordered sequence of N {@link Vertex vertices} and represents an ordered series
  * of N-1 joins.
  *
  * <p>During exploration, the {@link Path} is used to develop an estimate of the cost of different
@@ -76,13 +76,13 @@ public class Path {
   /** An ordered list of the vertices in the {@link Path}. */
   final Vertex[] vertices;
 
-  /**
+  /*
    * An ordered list of the {@link IPredicate}s in the {@link #vertices}. This is computed by the
    * constructor and cached as it is used repeatedly.
    */
   private final IPredicate<?>[] preds;
 
-  /**
+  /*
    * The sample obtained by the step-wise cutoff evaluation of the ordered edges of the path.
    *
    * <p>Note: This sample is generated one edge at a time rather than by attempting the cutoff
@@ -94,7 +94,7 @@ public class Path {
    */
   EdgeSample edgeSample; // TODO rename pathSample?
 
-  /**
+  /*
    * Examine the path. If there is a cardinality underflow, then boost the sampling limit.
    * Otherwise, increase the sample by the caller's value.
    *
@@ -111,7 +111,7 @@ public class Path {
     return edgeSample.limit + limitIn;
   }
 
-  /**
+  /*
    * The cumulative estimated cardinality of the path. This is zero for an empty path. For a path
    * consisting of a single edge, this is the estimated cardinality of that edge. When creating a
    * new path by adding an edge to an existing path, the cumulative cardinality of the new path is
@@ -125,13 +125,13 @@ public class Path {
    */
   public final long sumEstCard;
 
-  /**
+  /*
    * The cumulative estimated #of tuples that would be read for this path if it were to be fully
    * executed (sum(tuplesRead*f) for each step in the path).
    */
   public final long sumEstRead;
 
-  /**
+  /*
    * The expected cost of this join path if it were to be fully executed. This is a function of
    * {@link #sumEstCard} and {@link #sumEstRead}. The former reflects the #of intermediate solutions
    * generated. The latter reflects the #of tuples read from the disk. These two measures are
@@ -139,7 +139,7 @@ public class Path {
    */
   public final long sumEstCost;
 
-  /**
+  /*
    * Combine the cumulative expected cardinality and the cumulative expected tuples read to produce
    * an overall measure of the expected cost of the join path if it were to be fully executed.
    *
@@ -188,8 +188,8 @@ public class Path {
     return sb.toString();
   }
 
-  //    /**
-  //     * Create an empty path.
+  //    /*
+//     * Create an empty path.
   //     */
   //    public Path() {
   ////        this.edges = Collections.emptyList();
@@ -199,7 +199,7 @@ public class Path {
   //        this.sample = null;
   //    }
 
-  /**
+  /*
    * Create a path from a single edge.
    *
    * @param v0 The initial vertex in the path.
@@ -239,7 +239,7 @@ public class Path {
     this.sumEstCost = getCost(this.sumEstRead, this.sumEstCard);
   }
 
-  /**
+  /*
    * Private constructor used when we extend a path.
    *
    * @param vertices The ordered array of vertices in the new path. The last entry in this array is
@@ -288,7 +288,7 @@ public class Path {
     return vertices.length;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the {@link Path} contains that {@link Vertex}.
    *
    * @param v The vertex
@@ -312,7 +312,7 @@ public class Path {
     return false;
   }
 
-  /**
+  /*
    * Return <code>true</code> if this path is an unordered variant of the given path (same vertices
    * in any order).
    *
@@ -367,7 +367,7 @@ public class Path {
     return true;
   }
 
-  /**
+  /*
    * Return the vertices in this path (in path order). For the first edge, the minimum cardinality
    * vertex is always reported first (this is critical for producing the correct join plan). For the
    * remaining edges in the path, the unvisited is reported.
@@ -379,7 +379,7 @@ public class Path {
     return Collections.unmodifiableList(Arrays.asList(vertices));
   }
 
-  /**
+  /*
    * Return the {@link IPredicate}s associated with the vertices of the join path in path order.
    *
    * @see #getVertices()
@@ -389,7 +389,7 @@ public class Path {
     return preds;
   }
 
-  /**
+  /*
    * Return the {@link BOp} identifiers of the predicates associated with each vertex in path order.
    */
   public int[] getVertexIds() {
@@ -399,7 +399,7 @@ public class Path {
     return BOpUtility.getPredIds(preds);
   }
 
-  /**
+  /*
    * Return the predicates associated with the vertices.
    *
    * @param vertices The vertices in the selected evaluation order.
@@ -418,7 +418,7 @@ public class Path {
     return preds;
   }
 
-  /**
+  /*
    * Return <code>true</code> if this path begins with the given path.
    *
    * @param p The given path.
@@ -450,7 +450,7 @@ public class Path {
     return true;
   }
 
-  /**
+  /*
    * Return <code>true</code> if this path begins with the given path.
    *
    * @param p The given path.
@@ -481,7 +481,7 @@ public class Path {
     return true;
   }
 
-  /**
+  /*
    * Return the first N {@link IPredicate}s in this {@link Path}.
    *
    * @param length The length of the path segment.
@@ -498,7 +498,7 @@ public class Path {
     return preds2;
   }
 
-  /**
+  /*
    * Add an edge to a path, computing the estimated cardinality of the new path, and returning the
    * new path. The cutoff join is performed using the {@link #edgeSample} of <i>this</i> join path
    * and the actual access path for the target vertex.
@@ -598,7 +598,7 @@ public class Path {
     return tmp;
   }
 
-  /**
+  /*
    * Cutoff join of the last vertex in the join path.
    *
    * <p><strong>The caller is responsible for protecting against needless re-sampling.</strong> This

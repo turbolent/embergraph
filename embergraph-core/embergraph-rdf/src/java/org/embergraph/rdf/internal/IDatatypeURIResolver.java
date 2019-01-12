@@ -23,8 +23,8 @@ import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 
-/**
- * Specialized interface for resolving (and creating if necessary) datatype URIs. This interface
+/*
+* Specialized interface for resolving (and creating if necessary) datatype URIs. This interface
  * requires access to a mutable view of the database since unknown URIs will be registered.
  *
  * @author mrpersonick
@@ -33,7 +33,7 @@ import org.openrdf.model.URI;
  */
 public interface IDatatypeURIResolver {
 
-  /**
+  /*
    * Returns a fully resolved datatype URI with the {@link IV} set.
    *
    * <p>{@link IExtension}s handle encoding and decoding of inline literals for custom datatypes,

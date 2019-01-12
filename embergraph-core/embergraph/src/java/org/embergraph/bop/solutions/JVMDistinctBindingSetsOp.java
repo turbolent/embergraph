@@ -37,8 +37,8 @@ import org.embergraph.bop.join.JVMHashJoinUtility;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-/**
- * A pipelined DISTINCT operator based on a hash table.
+/*
+* A pipelined DISTINCT operator based on a hash table.
  *
  * <p>Note: This implementation is a pipelined operator which inspects each chunk of solutions as
  * they arrive and those solutions which are distinct for each chunk are passed on. It uses a {@link

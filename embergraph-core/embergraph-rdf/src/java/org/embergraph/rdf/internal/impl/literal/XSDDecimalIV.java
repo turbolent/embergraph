@@ -68,7 +68,7 @@ public class XSDDecimalIV<V extends EmbergraphLiteral> extends NumericIV<V, BigD
     return value;
   }
 
-  /**
+  /*
    * Use toPlainString to avoid expression with exponent value that would imply xsd:double rather
    * than xsd:decimal
    */
@@ -79,7 +79,7 @@ public class XSDDecimalIV<V extends EmbergraphLiteral> extends NumericIV<V, BigD
 
   @Override
   public boolean booleanValue() {
-    return value.equals(BigDecimal.ZERO) ? false : true;
+    return !value.equals(BigDecimal.ZERO);
   }
 
   @Override
@@ -144,7 +144,7 @@ public class XSDDecimalIV<V extends EmbergraphLiteral> extends NumericIV<V, BigD
     return false;
   }
 
-  /**
+  /*
    * Return the hash code of the value returned by {@link BigDecimal#stripTrailingZeros()}.
    *
    * <p>Note: normalization is necessary to have a stable hash code when encoding and decoding for

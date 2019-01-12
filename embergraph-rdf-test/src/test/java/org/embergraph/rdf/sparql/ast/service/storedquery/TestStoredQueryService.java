@@ -31,8 +31,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * Test suite for stored query evaluation.
+/*
+* Test suite for stored query evaluation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="http://trac.blazegraph.com/ticket/989">Stored Query Service</a>
@@ -49,7 +49,7 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
 
   private static final String NAMESPACE = "http://www.embergraph.org/rdf/stored-query#";
 
-  /**
+  /*
    * Simple stored query test. Note that this test also verifies that the BINDINGS flow into the
    * stored query.
    *
@@ -112,7 +112,7 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Simple stored query test verifies that the stored query has access to the {@link
    * ServiceParams}.
    *
@@ -177,7 +177,7 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Complex stored query test like the above, but does not extend {@link SimpleStoredQueryService}.
    *
    * <pre>
@@ -222,8 +222,7 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
         final String baseURI = createParams.getServiceURI().stringValue();
 
         final EmbergraphSailTupleQuery query =
-            (EmbergraphSailTupleQuery)
-                cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
+            cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
 
         return query.evaluate();
       }

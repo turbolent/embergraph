@@ -48,8 +48,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.model.impl.BooleanLiteralImpl;
 
-/**
- * An implementation using {@link EmbergraphValue}s and {@link EmbergraphStatement}s. Values
+/*
+* An implementation using {@link EmbergraphValue}s and {@link EmbergraphStatement}s. Values
  * constructed using this factory do NOT have term identifiers assigned. Statements constructed
  * using this factory do NOT have statement identifiers assigned. Those metadata can be resolved
  * against the various indices and then set on the returned values and statements.
@@ -75,7 +75,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
     }
   }
 
-  /**
+  /*
    * WARNING: Use {@link #getInstance(String)} NOT this constructor.
    *
    * <p>WARNING: This constructor provides 'headless' (not associated with any namespace) instance
@@ -101,8 +101,8 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
     // object causes IllegalArgumentException </a>
     // @see <a href="http://trac.blazegraph.com/ticket/980"> Object position query hint is not a
     // Literal </a>
-    //        /**
-    //         * Cache the IV on the EmbergraphValue for these boolean constants.
+    //        /*
+//         * Cache the IV on the EmbergraphValue for these boolean constants.
     //         *
     //         * @see <a href="http://trac.blazegraph.com/ticket/983"> Concurrent insert
     //         *      data with boolean object causes IllegalArgumentException </a>
@@ -111,7 +111,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
     //        FALSE.setIV(XSDBooleanIV.FALSE);
   }
 
-  /**
+  /*
    * Canonicalizing mapping for {@link EmbergraphValueFactoryImpl}s based on the namespace of the
    * {@link LexiconRelation}.
    *
@@ -134,7 +134,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
   // WeakValueCache<String, EmbergraphValueFactoryImpl>(
   //            new LRUCache<String, EmbergraphValueFactoryImpl>(1/* capacity */));
 
-  /**
+  /*
    * Return the instance associated with the <i>namespace</i>.
    *
    * <p>Note: This canonicalizing mapping for {@link EmbergraphValueFactoryImpl}s is based on the
@@ -155,8 +155,8 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
     return cache.getInstance(namespace, namespace /*state*/);
   }
 
-  //    /**
-  //     * Return the instance associated with the <i>namespace</i>.
+  //    /*
+//     * Return the instance associated with the <i>namespace</i>.
   //     * <p>
   //     * Note: This canonicalizing mapping for {@link EmbergraphValueFactoryImpl}s is
   //     * based on the namespace of the {@link LexiconRelation}. This makes the
@@ -191,7 +191,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
   //
   //    }
 
-  /**
+  /*
    * Remove a {@link EmbergraphValueFactoryImpl} from the canonicalizing mapping.
    *
    * <p>Entries in this canonicalizing mapping for a {@link LexiconRelation} MUST be {@link
@@ -227,7 +227,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
     return new BNodeContextFactory(this);
   }
 
-  /**
+  /*
    * Returns a new blank node with a globally unique blank node ID based on a {@link UUID}.
    *
    * <p>Note: Since the blank node IDs are random, they tend to be uniformly distributed across the
@@ -332,7 +332,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
   //    private final EmbergraphLiteralImpl FALSE = new EmbergraphLiteralImpl(this, "false", null,
   //            xsd_boolean);
 
-  /**
+  /*
    * Map for fast resolution of XSD URIs. The keys are the string values of the URIs. The values are
    * the URIs.
    */
@@ -366,7 +366,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
     return map;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see <a href="http://trac.blazegraph.com/ticket/983">Concurrent insert data with boolean object
@@ -572,10 +572,10 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
       Resource s, URI p, Value o, Resource c, StatementEnum type, final boolean userFlag) {
 
     return new EmbergraphStatementImpl(
-        (EmbergraphResource) asValue(s),
-        (EmbergraphURI) asValue(p),
-        (EmbergraphValue) asValue(o),
-        (EmbergraphResource) asValue(c), // optional
+        asValue(s),
+        asValue(p),
+        asValue(o),
+        asValue(c), // optional
         type, // the statement type (optional).
         userFlag // the user flag (optional)
         );
@@ -594,8 +594,8 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
 
       if (iv == null || !iv.isNullIV()) {
 
-        /*
-         * A value from the same value factory whose IV is either
+      /*
+       * A value from the same value factory whose IV is either
          * unknown or defined (but not a NullIV or DummyIV).
          */
 
@@ -611,7 +611,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
 
     } else if (v instanceof URI) {
 
-      return createURI(((URI) v).stringValue());
+      return createURI(v.stringValue());
 
     } else if (v instanceof EmbergraphBNode && ((EmbergraphBNode) v).isStatementIdentifier()) {
 
@@ -619,7 +619,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
 
     } else if (v instanceof BNode) {
 
-      return createBNode(((BNode) v).stringValue());
+      return createBNode(v.stringValue());
 
     } else if (v instanceof Literal) {
 
@@ -635,7 +635,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
           this, // Note: Passing in this factory!
           label,
           language,
-          (EmbergraphURI) asValue(datatype));
+          asValue(datatype));
 
     } else {
 

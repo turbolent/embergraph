@@ -85,8 +85,8 @@ public class TestLexJoinOps extends QuadsTestCase {
 
         final ValueFactory vf = sail.getValueFactory();
 
-        /*
-         * Create some terms.
+      /*
+       * Create some terms.
          */
         final URI X = vf.createURI(BD.NAMESPACE + "X");
         final URI dt = vf.createURI(BD.NAMESPACE + "myDatatype");
@@ -97,8 +97,8 @@ public class TestLexJoinOps extends QuadsTestCase {
         final Literal _5 = vf.createLiteral(true);
         final Literal _6 = vf.createLiteral(1000l);
 
-        /*
-         * Create some statements.
+      /*
+       * Create some statements.
          */
         cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
         cxn.add(X, RDFS.LABEL, _1);
@@ -108,8 +108,8 @@ public class TestLexJoinOps extends QuadsTestCase {
         cxn.add(X, RDFS.LABEL, _5);
         cxn.add(X, RDFS.LABEL, _6);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -172,7 +172,7 @@ public class TestLexJoinOps extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -195,8 +195,8 @@ public class TestLexJoinOps extends QuadsTestCase {
 
         final ValueFactory vf = sail.getValueFactory();
 
-        /*
-         * Create some terms.
+      /*
+       * Create some terms.
          */
         final URI X = vf.createURI(BD.NAMESPACE + "X");
         final URI dt = vf.createURI(BD.NAMESPACE + "myDatatype");
@@ -207,8 +207,8 @@ public class TestLexJoinOps extends QuadsTestCase {
         final Literal _5 = vf.createLiteral(true);
         final Literal _6 = vf.createLiteral(1000l);
 
-        /*
-         * Create some statements.
+      /*
+       * Create some statements.
          */
         cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
         cxn.add(X, RDFS.LABEL, _1);
@@ -218,8 +218,8 @@ public class TestLexJoinOps extends QuadsTestCase {
         cxn.add(X, RDFS.LABEL, _5);
         cxn.add(X, RDFS.LABEL, _6);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -284,12 +284,12 @@ public class TestLexJoinOps extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 
   /*
-       * PREFIX : <http://example.org/>
+   * PREFIX : <http://example.org/>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
   SELECT ?s WHERE {
@@ -317,8 +317,8 @@ public class TestLexJoinOps extends QuadsTestCase {
 
         final ValueFactory vf = sail.getValueFactory();
 
-        /*
-         * Create some terms.
+      /*
+       * Create some terms.
          */
         final URI X = vf.createURI(BD.NAMESPACE + "X");
         final URI dt = vf.createURI(BD.NAMESPACE + "myDatatype");
@@ -329,8 +329,8 @@ public class TestLexJoinOps extends QuadsTestCase {
         final Literal _5 = vf.createLiteral(true);
         final Literal _6 = vf.createLiteral(1000l);
 
-        /*
-         * Create some statements.
+      /*
+       * Create some statements.
          */
         cxn.add(X, RDF.TYPE, RDFS.RESOURCE);
         cxn.add(X, RDFS.LABEL, _1);
@@ -340,8 +340,8 @@ public class TestLexJoinOps extends QuadsTestCase {
         cxn.add(X, RDFS.LABEL, _5);
         cxn.add(X, RDFS.LABEL, _6);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -403,7 +403,7 @@ public class TestLexJoinOps extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -426,8 +426,8 @@ public class TestLexJoinOps extends QuadsTestCase {
 
         final ValueFactory vf = sail.getValueFactory();
 
-        /*
-         * Create some terms.
+      /*
+       * Create some terms.
          */
         final URI X = vf.createURI(BD.NAMESPACE + "X");
         final URI Y = vf.createURI(BD.NAMESPACE + "Y");
@@ -436,16 +436,16 @@ public class TestLexJoinOps extends QuadsTestCase {
         final Literal _3 = vf.createLiteral("Cette S�rie des Ann�es Septante", "fr-BE");
         final Literal _4 = vf.createLiteral("Il Buono, il Bruto, il Cattivo");
 
-        /*
-         * Create some statements.
+      /*
+       * Create some statements.
          */
         cxn.add(X, RDFS.LABEL, _1);
         cxn.add(X, RDFS.LABEL, _2);
         cxn.add(X, RDFS.LABEL, _3);
         cxn.add(Y, RDFS.LABEL, _4);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -507,7 +507,7 @@ public class TestLexJoinOps extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
+        sail.__tearDownUnitTest(); // shutDown();
     }
   }
 }

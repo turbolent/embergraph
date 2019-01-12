@@ -27,8 +27,8 @@ import junit.extensions.proxy.ProxyTestSuite;
 import junit.framework.Test;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Test suite for {@link BufferMode#Direct} journals.
+/*
+* Test suite for {@link BufferMode#Direct} journals.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -101,7 +101,7 @@ public class TestDirectJournal extends AbstractJournalTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Verify normal operation and basic assumptions when creating a new journal using {@link
    * BufferMode#Direct}.
    *
@@ -134,7 +134,7 @@ public class TestDirectJournal extends AbstractJournalTestCase {
     journal.destroy();
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractRestartSafeTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -156,7 +156,7 @@ public class TestDirectJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractInterruptsTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -186,7 +186,7 @@ public class TestDirectJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMROWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -216,7 +216,7 @@ public class TestDirectJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMRMWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

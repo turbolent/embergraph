@@ -29,8 +29,8 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for {@link RuleRdf01}.
+/*
+* Test suite for {@link RuleRdf01}.
  *
  * <pre>
  *   triple(?v rdf:type rdf:Property) :-
@@ -96,7 +96,7 @@ public class TestRuleRdf01 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Test that can be used to verify that we are doing an efficient scan for the distinct predicates
    * (distinct key prefix scan).
    */

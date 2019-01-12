@@ -9,13 +9,13 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.stat.quantile;
 
 import cern.colt.list.DoubleArrayList;
-/**
- * A buffer holding <tt>double</tt> elements; internally used for computing approximate quantiles.
+/*
+* A buffer holding <tt>double</tt> elements; internally used for computing approximate quantiles.
  */
 class DoubleBuffer extends Buffer {
   protected DoubleArrayList values;
   protected boolean isSorted;
-  /**
+  /*
    * This method was created in VisualAge.
    *
    * @param k int
@@ -46,7 +46,7 @@ class DoubleBuffer extends Buffer {
   public void clear() {
     values.clear();
   }
-  /**
+  /*
    * Returns a deep copy of the receiver.
    *
    * @return a deep copy of the receiver.
@@ -69,7 +69,7 @@ class DoubleBuffer extends Buffer {
   public boolean isFull() {
     return values.size() == k;
   }
-  /**
+  /*
    * Returns the number of elements currently needed to store all contained elements. This number
    * usually differs from the results of method <tt>size()</tt>, according to the underlying
    * algorithm.
@@ -77,7 +77,7 @@ class DoubleBuffer extends Buffer {
   public int memory() {
     return values.elements().length;
   }
-  /**
+  /*
    * Returns the rank of a given element within the sorted sequence of the receiver. A rank is the
    * number of elements <= element. Ranks are of the form {1,2,...size()}. If no element is <=
    * element, then the rank is zero. If the element lies in between two contained elements, then
@@ -111,9 +111,9 @@ class DoubleBuffer extends Buffer {
     return "k="
         + this.k
         + ", w="
-        + Long.toString(weight())
+        + weight()
         + ", l="
-        + Integer.toString(level())
+        + level()
         + ", size="
         + values.size();
     // ", v=" + values.toString();

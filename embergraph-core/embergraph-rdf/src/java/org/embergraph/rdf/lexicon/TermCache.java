@@ -25,8 +25,8 @@ import org.embergraph.cache.ConcurrentWeakValueCacheWithBatchedUpdates;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TermCache<K extends IV<?, ?>, V extends EmbergraphValue> implements ITermCache<K, V> {
@@ -52,7 +52,7 @@ public class TermCache<K extends IV<?, ?>, V extends EmbergraphValue> implements
     return delegate.get(k);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>

@@ -54,8 +54,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * An mutable persistence capable extensible hash tree.
+/*
+* An mutable persistence capable extensible hash tree.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="A robust scheme for multilevel extendible hashing (2003)"> A Robust Scheme for
@@ -86,7 +86,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
 
   //    private static final transient Logger log = Logger.getLogger(HTree.class);
 
-  /**
+  /*
    * The #of bits of distinction to be made each time we split a directory page in the {@link
    * HTree}. See {@link #splitDirectoryPage(DirectoryPage, int, AbstractPage)} for a write up on
    * this.
@@ -102,12 +102,12 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
   final boolean deleteMarkers = false;
   final boolean rawRecords;
 
-  /**
+  /*
    * The #of {@link DirectoryPage} in the {@link HTree}. This is ONE (1) for a new {@link HTree}.
    */
   protected long nnodes;
 
-  /**
+  /*
    * The #of {@link BucketPage}s in the {@link HTree}. This is one (1) for a new {@link HTree} (one
    * directory page and one bucket page).
    */
@@ -116,7 +116,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
   /** The #of entries in the {@link HTree}. This is ZERO (0) for a new {@link HTree}. */
   protected long nentries;
 
-  /**
+  /*
    * The value of the record version number that will be assigned to the next node or leaf written
    * onto the backing store. This number is incremented each time a node or leaf is written onto the
    * backing store. The initial value is ZERO (0). The first value assigned to a node or leaf will
@@ -124,7 +124,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
    */
   protected long recordVersion;
 
-  /**
+  /*
    * The mutable counter exposed by #getCounter()}.
    *
    * <p>Note: This is <code>protected</code> so that it will be visible to {@link Checkpoint} which
@@ -133,7 +133,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
    */
   protected AtomicLong counter;
 
-  /**
+  /*
    * A buffer used to encode a raw record address for a mutable {@link BTree} and otherwise <code>
    * null</code>.
    */
@@ -157,7 +157,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return nentries;
   }
 
-  /**
+  /*
    * The constructor sets this field initially based on a {@link Checkpoint} record containing the
    * only address of the {@link IndexMetadata} for the index. Thereafter this reference is
    * maintained as the {@link Checkpoint} record last written by {@link #writeCheckpoint()} or read
@@ -191,7 +191,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return (root == null ? getCheckpoint().getRootAddr() : root.getIdentity());
   }
 
-  /**
+  /*
    * Return true iff changes would be lost unless the B+Tree is flushed to the backing store using
    * {@link #writeCheckpoint()}.
    *
@@ -259,12 +259,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
         return true;
       }
 
-      if (checkpoint.getRootAddr() != root.getIdentity()) {
-
-        // The root node has a different persistent identity.
-
-        return true;
-      }
+      // The root node has a different persistent identity.
+      return checkpoint.getRootAddr() != root.getIdentity();
     }
 
     /*
@@ -290,7 +286,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
 
   }
 
-  /**
+  /*
    * Method updates the index metadata associated with this {@link BTree}. The new metadata record
    * will be written out as part of the next index {@link #writeCheckpoint()}.
    *
@@ -316,8 +312,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     fireDirtyEvent();
   }
 
-  //    /**
-  //     * Handle request for a commit by {@link #writeCheckpoint()}ing dirty nodes
+  //    /*
+//     * Handle request for a commit by {@link #writeCheckpoint()}ing dirty nodes
   //     * and leaves onto the store, writing a new metadata record, and returning
   //     * the address of that metadata record.
   //     * <p>
@@ -343,7 +339,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     if (error == null) error = t;
   }
 
-  /**
+  /*
    * Returns an {@link ICounter}. The {@link ICounter} is mutable iff the {@link BTree} is mutable.
    * All {@link ICounter}s returned by this method report and increment the same underlying counter.
    *
@@ -371,7 +367,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return counter;
   }
 
-  /**
+  /*
    * Required constructor form for {@link HTree} and any derived subclasses. This constructor is
    * used both to create a new {@link HTree}, and to load a {@link HTree} from the store using a
    * {@link Checkpoint} record.
@@ -450,7 +446,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     this.rawRecords = metadata.getRawRecords();
   }
 
-  /**
+  /*
    * Encode a raw record address into a byte[] suitable for storing in the value associated with a
    * tuple and decoding using {@link AbstractBTree#decodeRecordAddr(byte[])}. This method is only
    * supported for a mutable {@link BTree} instance. Per the contract of the mutable {@link BTree},
@@ -464,7 +460,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return AbstractBTree.encodeRecordAddr(recordAddrBuf, addr);
   }
 
-  /**
+  /*
    * Sets the {@link #checkpoint} and initializes the mutable fields from the checkpoint record. In
    * order for this operation to be atomic, the caller must be synchronized on the {@link HTree} or
    * otherwise guaranteed to have exclusive access, e.g., during the ctor or when the {@link HTree}
@@ -488,7 +484,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     this.recordVersion = checkpoint.getRecordVersion();
   }
 
-  /**
+  /*
    * Creates and sets new root {@link Leaf} on the B+Tree and (re)sets the various counters to be
    * consistent with that root. This is used both by the constructor for a new {@link BTree} and by
    * {@link #removeAll()}.
@@ -657,7 +653,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     this.lastCommitTime = lastCommitTime;
   }
 
-  /**
+  /*
    * The lastCommitTime of the {@link Checkpoint} record from which the {@link BTree} was loaded.
    *
    * <p>Note: Made volatile on 8/2/2010 since it is not otherwise obvious what would guarantee
@@ -698,7 +694,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     l.dirtyEvent(this);
   }
 
-  /**
+  /*
    * Flush the nodes of the {@link BTree} to the backing store. After invoking this method the root
    * of the {@link BTree} will be clean.
    *
@@ -725,7 +721,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return false;
   }
 
-  /**
+  /*
    * Returns an immutable view of this {@link HTree}. If {@link BTree} is already read-only, then
    * <i>this</i> instance is returned. Otherwise, a read-only {@link BTree} is loaded from the last
    * checkpoint and returned.
@@ -762,7 +758,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
   //    *
   //    * @see #writeCheckpoint2(), which returns the {@link Checkpoint} record
   //    *      itself.
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see #load(IRawStore, long)
@@ -774,7 +770,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return writeCheckpoint2().getCheckpointAddr();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see #load(IRawStore, long)
@@ -813,7 +809,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     final Lock lock = writeLock();
     lock.lock();
     try {
-      /**
+      /*
        * Do not permit checkpoint if the index is in an error state.
        *
        * @see <a href="http://trac.blazegraph.com/ticket/1005">Invalidate BTree objects if error
@@ -824,8 +820,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
       if (
       /* autoCommit && */ needsCheckpoint()) {
 
-        /*
-         * Flush the btree, write a checkpoint record, and return the
+      /*
+       * Flush the btree, write a checkpoint record, and return the
          * address of that checkpoint record. The [checkpoint] reference
          * is also updated.
          */
@@ -851,7 +847,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     }
   }
 
-  /**
+  /*
    * Core implementation invoked by {@link #writeCheckpoint2()} while holding the lock - <strong>DO
    * NOT INVOKE THIS METHOD DIRECTLY</strong>.
    *
@@ -951,7 +947,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return checkpoint;
   }
 
-  /**
+  /*
    * Create a {@link Checkpoint} for a {@link HTree}.
    *
    * <p>The caller is responsible for writing the {@link Checkpoint} record onto the store.
@@ -980,7 +976,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
        */
 
       @SuppressWarnings("rawtypes")
-      final Constructor ctor = cl.getConstructor(new Class[] {HTree.class});
+      final Constructor ctor = cl.getConstructor(HTree.class);
 
       final Checkpoint checkpoint = (Checkpoint) ctor.newInstance(new Object[] {this});
 
@@ -1016,7 +1012,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
    * want to allow fully duplicated items into the bucket.).
    */
 
-  /**
+  /*
    * Convert an int32 hash code key into an <code>unsigned byte[4]</code>.
    *
    * <p>Note: This encoding MUST be consistent with {@link IKeyBuilder#append(int)}.
@@ -1051,7 +1047,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return contains(i2k(key));
   }
 
-  /**
+  /*
    * Return <code>true</code> iff there is at least one tuple in the hash tree having the specified
    * <i>key</i>.
    *
@@ -1075,14 +1071,11 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
       if (child == null) return false;
 
       if (child.isLeaf()) {
-        /*
-         * Found the bucket page, update it.
+      /*
+       * Found the bucket page, update it.
          */
         final BucketPage bucketPage = (BucketPage) child;
-        if (!bucketPage.contains(key, buddyOffset)) {
-          return false;
-        }
-        return true;
+        return bucketPage.contains(key, buddyOffset);
       }
       /*
        * Recursive descent into a child directory page. We have to update
@@ -1101,7 +1094,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
   //        lookup(obj.hashCode());
   //    }
 
-  /**
+  /*
    * Return the first value for the key.
    *
    * @param key The key.
@@ -1113,7 +1106,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return lookupFirst(i2k(key));
   }
 
-  /**
+  /*
    * Return the first value for the key.
    *
    * @param key The key.
@@ -1135,8 +1128,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
       if (child == null) return null;
 
       if (child.isLeaf()) {
-        /*
-         * Found the bucket page, search it for a match.
+      /*
+       * Found the bucket page, search it for a match.
          */
         final BucketPage bucketPage = (BucketPage) child;
         return bucketPage.lookupFirst(key, buddyOffset);
@@ -1154,7 +1147,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     }
   }
 
-  /**
+  /*
    * Return an iterator which will visit each tuple in the index having the specified key.
    *
    * @param key The key.
@@ -1164,7 +1157,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return lookupAll(i2k(key));
   }
 
-  /**
+  /*
    * Return an iterator which will visit each tuple in the index having the specified key.
    *
    * @param key The key.
@@ -1184,8 +1177,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
       if (child == null) return emptyTupleIterator();
 
       if (child.isLeaf()) {
-        /*
-         * Found the bucket page, search it for a match.
+      /*
+       * Found the bucket page, search it for a match.
          */
         final BucketPage bucketPage = (BucketPage) child;
         return bucketPage.lookupAll(key); // , buddyOffset);
@@ -1230,7 +1223,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     insert(i2k(key), val);
   }
 
-  /**
+  /*
    * Insert a tuple into the hash tree. Tuples with duplicate keys and even tuples with duplicate
    * keys and values are allowed and will result in multiple tuples.
    *
@@ -1272,7 +1265,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
           final DirectoryPage pd = current.getParentDirectory();
 
           assert !pd.isOverflowDirectory();
-          assert pd.isReadOnly() ? current.isReadOnly() : true;
+          assert !pd.isReadOnly() || current.isReadOnly();
 
           current = pd._addLevelForOverflow(current);
           // we need to fix this since we have introduced a new level
@@ -1292,8 +1285,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
 
       if (child.isLeaf()) {
 
-        /*
-         * Found the bucket page, update it.
+      /*
+       * Found the bucket page, update it.
          *
          * We must copyOnWrite now since the insert will otherwise call it
          * and potentially invalidate the bucketPage reference.
@@ -1304,8 +1297,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
         if (!bucketPage.insert(key, value)) {
           if (current.globalDepth == child.globalDepth) {
 
-            /*
-             * The child is at the same depth as the parent. Either
+          /*
+       * The child is at the same depth as the parent. Either
              * we can split a directory page which is a parent of
              * that bucket or we have to add a new level below the
              * root on the path to that bucket.
@@ -1352,7 +1345,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     }
   } // insert()
 
-  /**
+  /*
    * Insert a tuple into the hash tree. Tuples with duplicate keys and even tuples with duplicate
    * keys and values are allowed and will result in multiple tuples.
    *
@@ -1393,8 +1386,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
 
       if (child.isLeaf()) {
 
-        /*
-         * Found the bucket page, update it.
+      /*
+       * Found the bucket page, update it.
          *
          * Must ensure we have copyOnWriteVersion since otherwise the bucketPage
          * later referenced will not be valid
@@ -1407,8 +1400,8 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
 
           if (current.globalDepth == child.globalDepth) {
 
-            /*
-             * The child is at the same depth as the parent. Either
+          /*
+       * The child is at the same depth as the parent. Either
              * we can split a directory page which is a parent of
              * that bucket or we have to add a new level below the
              * root on the path to that bucket.
@@ -1457,7 +1450,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     }
   } // insertRawTuple()
 
-  /**
+  /*
    * Removes a single entry matching the key supplied. The HTree provides no guarantee that the
    * order in which a value with a duplicate key is added will be the order in which it would be
    * removed - FIFO. It is more likely to be in LIFO
@@ -1557,7 +1550,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return stats;
   }
 
-  /**
+  /*
    * Create a new {@link HTree} or derived class. This method works by writing the {@link
    * IndexMetadata} record on the store and then loading the {@link HTree} from the {@link
    * IndexMetadata} record.
@@ -1615,7 +1608,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     return load(store, firstCheckpoint.getCheckpointAddr(), false /* readOnly */);
   }
 
-  /**
+  /*
    * Create a new {@link HTree} or derived class that is fully transient (NO backing {@link
    * IRawStore}).
    *
@@ -1664,7 +1657,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
        */
       final Constructor ctor =
           cl.getConstructor(
-              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
+              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final HTree htree =
           (HTree)
@@ -1687,7 +1680,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     }
   }
 
-  /**
+  /*
    * Load an instance of a {@link HTree} or derived class from the store. The {@link HTree} or
    * derived class MUST declare a constructor with the following signature: <code>
    *
@@ -1762,7 +1755,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
        */
       final Constructor ctor =
           cl.getConstructor(
-              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
+              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final HTree htree =
           (HTree) ctor.newInstance(new Object[] {store, checkpoint, metadata, readOnly});
@@ -1784,7 +1777,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
     }
   }
 
-  /**
+  /*
    * Recycle (aka delete) the allocation. This method also adjusts the #of bytes released in the
    * {@link BTreeCounters}.
    *

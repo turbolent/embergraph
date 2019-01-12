@@ -31,7 +31,7 @@ public class TestAskJsonTrac704 extends AbstractProtocolTest {
         TestAskJsonTrac704.class, "test.*", TestMode.quads, TestMode.sids, TestMode.triples);
   }
 
-  /**
+  /*
    * This does not work - trac 704
    *
    * @throws IOException
@@ -43,7 +43,7 @@ public class TestAskJsonTrac704 extends AbstractProtocolTest {
     assertEquals(EmbergraphRDFServlet.MIME_SPARQL_RESULTS_JSON, getResponseContentType());
   }
 
-  /**
+  /*
    * This does not work - trac 704
    *
    * @throws IOException

@@ -15,8 +15,8 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Statements inserted into the buffer are verified against the database. No new {@link Value}s or
+/*
+* Statements inserted into the buffer are verified against the database. No new {@link Value}s or
  * {@link Statement}s will be written on the database by this class. The #of {@link URI}, {@link
  * Literal}, and told triples not found in the database are reported by various counters.
  *
@@ -34,7 +34,7 @@ public class VerifyStatementBuffer extends StatementBuffer {
 
   final AtomicLong nterms, ntermsNotFound, ntriples, ntriplesNotFound;
 
-  /**
+  /*
    * @param database
    * @param capacity
    */
@@ -57,7 +57,7 @@ public class VerifyStatementBuffer extends StatementBuffer {
     this.ntriplesNotFound = ntriplesNotFound;
   }
 
-  /**
+  /*
    * Overridden to batch verify the terms and statements in the buffer.
    *
    * <p>FIXME Verify that {@link StatementBuffer#flush()} is doing the right thing for this case

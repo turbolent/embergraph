@@ -43,8 +43,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test suite for {@link StatementBuffer}.
+/*
+* Test suite for {@link StatementBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO Parameterize with {@link IStatementBufferFactory} and use to test other
@@ -119,7 +119,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test verifies detection of duplicate terms and their automatic replacement with a
    * canonicalizing term.
    */
@@ -202,7 +202,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test verifies interpretation of triples by the {@link StatementBuffer} by validating how the
    * triples written onto the statement buffer are loaded into the {@link AbstractTripleStore}.
    */
@@ -278,7 +278,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * A unit test in which the translation of reified statements into inline statements disabled.
    * This test uses the same data as the test below.
    */
@@ -376,7 +376,7 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that triples which look like part of a reified model
    * of a statement are collected and then reported using SIDs.
    * <p>
@@ -446,15 +446,15 @@ public class TestStatementBuffer extends AbstractTripleStoreTestCase {
     try {
 
       if (!QueryHints.DEFAULT_REIFICATION_DONE_RIGHT) {
-        /*
-         * Disabled.
+      /*
+       * Disabled.
          */
         return;
       }
 
       if (!store.isStatementIdentifiers()) {
-        /**
-         * Disabled. FIXME This should be ON for TRIPLES or QUADS. It only works in the SIDS mode
+      /*
+       * Disabled. FIXME This should be ON for TRIPLES or QUADS. It only works in the SIDS mode
          * right now. The root cause is
          *
          * <pre>

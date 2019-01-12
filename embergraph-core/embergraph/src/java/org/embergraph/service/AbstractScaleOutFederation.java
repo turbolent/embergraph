@@ -56,8 +56,8 @@ import org.embergraph.service.AbstractScaleOutClient.Options;
 import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Abstract base class for federation implementations using the scale-out index architecture
+/*
+* Abstract base class for federation implementations using the scale-out index architecture
  * (federations that support key-range partitioned indices).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -90,7 +90,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
 
   protected final MetadataIndexCachePolicy metadataIndexCachePolicy;
 
-  /**
+  /*
    * Strengthens the return type.
    *
    * <p>{@inheritDoc}
@@ -100,7 +100,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
     return (ClientIndexView) super.getIndex(name, timestamp);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Extended to clear the various caches.
@@ -115,7 +115,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
     metadataIndexCache.shutdown();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Extended to clear the various caches.
@@ -130,7 +130,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
     metadataIndexCache.shutdown();
   }
 
-  /**
+  /*
    * Return a read-only view onto an {@link IMetadataIndex}.
    *
    * @param name The name of the scale-out index.
@@ -200,7 +200,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
     return getMetadataIndexCache().getIndex(name, timestamp);
   }
 
-  /**
+  /*
    * Returns an iterator that will visit the {@link PartitionLocator}s for the specified scale-out
    * index key range.
    *
@@ -342,7 +342,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
     return metadataIndexCache;
   }
 
-  /**
+  /*
    * Await the availability of an {@link IMetadataService} and the specified minimum #of {@link
    * IDataService}s.
    *
@@ -398,8 +398,8 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
       if ((System.currentTimeMillis() - begin) >= timeout
           || (metadataService != null && dataServiceUUIDs.length >= minDataServices)) {
 
-        /*
-         * Either a timeout or we have the MDS and enough DS.
+      /*
+       * Either a timeout or we have the MDS and enough DS.
          *
          * Either way, we are done so break out of the loop.
          */
@@ -448,7 +448,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
             + minDataServices);
   }
 
-  /**
+  /*
    * Force overflow of each data service in the scale-out federation (only scale-out federations
    * support overflow processing). This method is synchronous. It will not return until all {@link
    * DataService}s have initiated and completed overflow processing. Any unused resources (as
@@ -537,7 +537,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
     }
   }
 
-  /**
+  /*
    * Task directs a {@link DataService} to purge any unused resources and to optionally truncate the
    * extent of the live journal.
    *
@@ -574,7 +574,7 @@ public abstract class AbstractScaleOutFederation<T> extends AbstractFederation<T
     }
   }
 
-  /**
+  /*
    * Task forces immediate overflow of the specified data service, returning once both synchronous
    * AND asynchronous overflow are complete.
    *

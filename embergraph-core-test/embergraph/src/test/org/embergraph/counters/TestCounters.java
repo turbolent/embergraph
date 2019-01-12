@@ -28,6 +28,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import javax.xml.parsers.ParserConfigurationException;
@@ -35,8 +36,8 @@ import junit.framework.TestCase;
 import org.embergraph.counters.ICounterSet.IInstrumentFactory;
 import org.xml.sax.SAXException;
 
-/**
- * Unit tests for {@link CounterSet}.
+/*
+* Unit tests for {@link CounterSet}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -166,7 +167,7 @@ public class TestCounters extends TestCase {
     assertTrue(memory == embergraph.getPath("memory"));
   }
 
-  /**
+  /*
    * FIXME Test attach (aka move). Verify move of children when source is a root and otherwise move
    * of the source itself. Verify detection of cycles (cycles indicate an illegal request).
    */
@@ -360,7 +361,7 @@ public class TestCounters extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test of XML (de-)serialization.
    *
    * @throws IOException
@@ -411,7 +412,7 @@ public class TestCounters extends TestCase {
 
     byte[] data = baos.toByteArray();
 
-    Reader r = new InputStreamReader(new ByteArrayInputStream(data), "UTF-8");
+    Reader r = new InputStreamReader(new ByteArrayInputStream(data), StandardCharsets.UTF_8);
 
     StringBuilder sb = new StringBuilder();
 

@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-/**
- * An interface providing a read-only view of a commit record. A commit record is written on each
+/*
+* An interface providing a read-only view of a commit record. A commit record is written on each
  * commit. The basic metadata in the commit record are the root addresses from which various
  * critical resources may be loaded, e.g., data structures for mapping index names to their
  * addresses on the {@link Journal}, etc. The {@link Journal} maintains an {@link
@@ -37,22 +37,22 @@ package org.embergraph.journal;
 public interface ICommitRecord {
 
   /** The #of root ids. Their indices are [0:N-1]. */
-  public static final int MAX_ROOT_ADDRS = 50;
+  int MAX_ROOT_ADDRS = 50;
 
-  /**
+  /*
    * The first root address that may be used for a user-defined object. User defined root addresses
    * begin at index 10. The first 10 root addresses are reserved for use by the embergraph
    * architecture.
    */
-  public static final int FIRST_USER_ROOT = 10;
+  int FIRST_USER_ROOT = 10;
 
-  /**
+  /*
    * The timestamp assigned to this commit record -or- <code>0L</code> iff there is no {@link
    * ICommitRecord} written on the {@link Journal}.
    */
-  public long getTimestamp();
+  long getTimestamp();
 
-  /**
+  /*
    * The commit counter associated with the commit record. This is used by transactions in order to
    * determine whether or not intervening commits have occurred since the transaction start time.
    *
@@ -61,17 +61,17 @@ public interface ICommitRecord {
    *     IRootBlockView} to figure out if this is the same journal on which it started and then the
    *     commitCounter to see if there has been an intervening commit.
    */
-  public long getCommitCounter();
+  long getCommitCounter();
 
   /** The #of allowed root addresses. */
-  public int getRootAddrCount();
+  int getRootAddrCount();
 
-  /**
+  /*
    * The last address stored in the specified root address in this commit record.
    *
    * @param index The index of the root address.
    * @return The address stored at that index.
    * @exception IndexOutOfBoundsException if the index is negative or too large.
    */
-  public long getRootAddr(int index);
+  long getRootAddr(int index);
 }

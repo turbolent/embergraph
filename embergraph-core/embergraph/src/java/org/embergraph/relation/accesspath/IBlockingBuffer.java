@@ -29,8 +29,8 @@ import org.embergraph.relation.IMutableRelation;
 import org.embergraph.relation.IRelation;
 import org.embergraph.striterator.IChunkedIterator;
 
-/**
- * Interface provides an iterator to drain chunks from an {@link IBuffer}.
+/*
+* Interface provides an iterator to drain chunks from an {@link IBuffer}.
  *
  * <h2>CONOPS</h2>
  *
@@ -62,7 +62,7 @@ import org.embergraph.striterator.IChunkedIterator;
  */
 public interface IBlockingBuffer<E> extends IRunnableBuffer<E> {
 
-  /**
+  /*
    * Return an iterator reading from the buffer. It is NOT safe for concurrent processes to consume
    * the iterator. The iterator will visit elements in the order in which they were written on the
    * buffer, but note that the elements may be written onto the {@link IBlockingBuffer} by
@@ -71,17 +71,17 @@ public interface IBlockingBuffer<E> extends IRunnableBuffer<E> {
    *
    * @return The iterator.
    */
-  public IAsynchronousIterator<E> iterator();
+  IAsynchronousIterator<E> iterator();
 
-  /**
+  /*
    * This is a NOP since the {@link #iterator()} is the only way to consume data written on the
    * buffer.
    *
    * @return ZERO (0L)
    */
-  public long flush();
+  long flush();
 
-  /**
+  /*
    * Set the {@link Future} for the source processing writing on the {@link IBlockingBuffer} (the
    * producer).
    *
@@ -96,5 +96,5 @@ public interface IBlockingBuffer<E> extends IRunnableBuffer<E> {
    *     not unblock threads </a>
    * @todo There should be a generic type for this.
    */
-  public void setFuture(Future future);
+  void setFuture(Future future);
 }

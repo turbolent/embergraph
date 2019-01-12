@@ -22,8 +22,8 @@ package org.embergraph.bop.join;
 
 import junit.framework.TestCase2;
 
-/**
- * Test suite the {@link NestedLoopJoinOp}
+/*
+* Test suite the {@link NestedLoopJoinOp}
  *
  * @author thompsonbry
  *     <p>FIXME Test suite! It would be best to refactor the existing hash join test suites, at
@@ -42,7 +42,7 @@ public class TestNestedLoopJoinOp extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Note: There are some tests at the data-driven level.
    *
    * @see org.embergraph.rdf.sparql.ast.eval.TestInclude

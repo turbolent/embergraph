@@ -37,8 +37,8 @@ import org.embergraph.journal.ResourceLockService;
 import org.embergraph.journal.WriteExecutorService;
 import org.embergraph.service.EmbeddedClient.Options;
 
-/**
- * An implementation that uses an embedded database rather than a distributed database. An embedded
+/*
+* An implementation that uses an embedded database rather than a distributed database. An embedded
  * federation runs entirely in process, but uses the same {@link DataService} and {@link
  * MetadataService} implementations as a distributed federation. All services reference the {@link
  * EmbeddedFederation} and use the same thread pool for most operations. However, the {@link
@@ -60,7 +60,7 @@ import org.embergraph.service.EmbeddedClient.Options;
  */
 public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
-  /**
+  /*
    * Text of the warning message used when a file or directory could not be deleted during {@link
    * #destroy()}.
    */
@@ -75,13 +75,13 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
   /** True if the federation is not backed by disk. */
   private final boolean isTransient;
 
-  /**
+  /*
    * The directory in which the data files will reside. Each directory is named for the service
    * {@link UUID} - restart depends on this.
    */
   private final File dataDir;
 
-  /**
+  /*
    * The directory in which the data files will reside. Each directory is named for the service
    * {@link UUID} - restart depends on this.
    */
@@ -99,14 +99,14 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
   /** The (in process) {@link LoadBalancerService}. */
   private final LoadBalancerService loadBalancerService;
 
-  /**
+  /*
    * The (in process) {@link MetadataService}.
    *
    * <p>Note: Not final because not initialized in the constructor.
    */
   private MetadataService metadataService;
 
-  /**
+  /*
    * The (in process) {@link DataService}s.
    *
    * <p>Note: Not final because not initialized in the constructor.
@@ -157,7 +157,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
     return metadataService;
   }
 
-  /**
+  /*
    * Return the (in process) data service given its service UUID.
    *
    * @param serviceUUID
@@ -177,7 +177,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
     return ndataServices;
   }
 
-  /**
+  /*
    * There are {@link #getDataServiceCount()} data services defined in the federation. This returns
    * the data service with that index.
    *
@@ -214,8 +214,8 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
     return getDataService(0);
   }
 
-  //    /**
-  //     * There are no preconditions for a service start.
+  //    /*
+//     * There are no preconditions for a service start.
   //     */
   //    @Override
   //    protected boolean awaitPreconditions(long timeout, TimeUnit unit)
@@ -225,7 +225,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
   //
   //    }
 
-  /**
+  /*
    * Start or restart an embedded embergraph federation.
    *
    * @param client The client.
@@ -427,15 +427,15 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
       if (serviceDirs.length == 0) {
 
-        /*
-         * First time startup.
+      /*
+       * First time startup.
          */
         ndataServices = createFederation(properties, isTransient);
 
       } else {
 
-        /*
-         * Reload services from disk.
+      /*
+       * Reload services from disk.
          */
 
         // expected #of data services.
@@ -449,8 +449,8 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
           final Properties p = new Properties(properties);
 
-          /*
-           * Note: Use DATA_DIR if the metadata service is using a
+        /*
+       * Note: Use DATA_DIR if the metadata service is using a
            * ResourceManager and FILE if it is using a simple Journal.
            */
           p.setProperty(MetadataService.Options.DATA_DIR, serviceDir.toString());
@@ -473,8 +473,8 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
           } else {
 
-            /*
-             * data service.
+          /*
+       * data service.
              */
 
             final DataService dataService = new EmbeddedDataServiceImpl(serviceUUID, p).start();
@@ -533,7 +533,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
     }
   }
 
-  /**
+  /*
    * Create a new federation.
    *
    * @param properties
@@ -576,8 +576,8 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
         serviceDir.mkdirs();
 
-        /*
-         * Create ".mds" file to mark this as the metadata service
+      /*
+       * Create ".mds" file to mark this as the metadata service
          * directory.
          */
         try {
@@ -625,7 +625,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
     return ndataServices;
   }
 
-  /**
+  /*
    * Concrete implementation.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -633,7 +633,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
    */
   protected class EmbeddedDataServiceImpl extends AbstractEmbeddedDataService {
 
-    /**
+    /*
      * @param serviceUUID
      * @param properties
      */
@@ -651,7 +651,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
   protected class EmbeddedLoadBalancerServiceImpl extends AbstractEmbeddedLoadBalancerService {
 
-    /**
+    /*
      * @param serviceUUID
      * @param properties
      */
@@ -669,7 +669,7 @@ public class EmbeddedFederation<T> extends AbstractScaleOutFederation<T> {
 
   protected class EmbeddedTransactionServiceImpl extends AbstractEmbeddedTransactionService {
 
-    /**
+    /*
      * @param serviceUUID
      * @param properties
      */

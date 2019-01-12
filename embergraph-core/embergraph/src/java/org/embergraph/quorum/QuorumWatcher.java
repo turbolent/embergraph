@@ -22,8 +22,8 @@ package org.embergraph.quorum;
 
 import java.rmi.Remote;
 
-/**
- * An interface that watches for changes in the distributed quorum state. An implementation of this
+/*
+* An interface that watches for changes in the distributed quorum state. An implementation of this
  * interface is generally an inner class of the concrete {@link AbstractQuorum} and is responsible
  * for updating the internal state of the {@link AbstractQuorum} as it the distributed quorum state.
  * The quorum internal state always <em>reflects</em> the distributed quorum state.
@@ -51,13 +51,13 @@ import java.rmi.Remote;
  */
 public interface QuorumWatcher<S extends Remote, C extends QuorumClient<S>> {
 
-  //    /**
-  //     * Start asynchronous processing.
+  //    /*
+//     * Start asynchronous processing.
   //     */
   //    public void start();
   //
-  //    /**
-  //     * Terminate asynchronous processing.
+  //    /*
+//     * Terminate asynchronous processing.
   //     */
   //    public void terminate();
 

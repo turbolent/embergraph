@@ -27,7 +27,7 @@ import org.embergraph.util.BytesUtil;
 
 public class HA2PhasePrepareMessage implements IHA2PhasePrepareMessage, Serializable {
 
-  /**
+  /*
    * Note: The original {@link #serialVersionUID} was <code>1L</code> - this version was never
    * release. The {@link #serialVersionUID} was changed to <code>2L</code> when adding the {@link
    * #consensusReleaseTime} and {@link #isGatherService} fields. It is not possible to roll forward
@@ -116,7 +116,7 @@ public class HA2PhasePrepareMessage implements IHA2PhasePrepareMessage, Serializ
     return unit;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns <code>false</code> by default

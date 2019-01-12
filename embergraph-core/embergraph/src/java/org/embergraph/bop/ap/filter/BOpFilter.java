@@ -28,8 +28,8 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.btree.ITupleIterator;
 
-/**
- * Used to filter for objects which satisfy some criteria.
+/*
+* Used to filter for objects which satisfy some criteria.
  *
  * <p><strong>WARNING : DO NOT USE THIS CLASS ON {@link ITupleIterator}s - use {@link
  * BOpTupleFilter} instead.</strong>
@@ -42,14 +42,14 @@ public abstract class BOpFilter extends BOpFilterBase {
   /** */
   private static final long serialVersionUID = 1L;
 
-  //    /**
-  //     * Deserialization.
+  //    /*
+//     * Deserialization.
   //     */
   //    public BOpFilter() {
   //        super();
   //    }
 
-  /**
+  /*
    * Deep copy.
    *
    * @param op
@@ -58,7 +58,7 @@ public abstract class BOpFilter extends BOpFilterBase {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy.
    *
    * @param args
@@ -74,7 +74,7 @@ public abstract class BOpFilter extends BOpFilterBase {
     return new Filterator(src, context, new FilterImpl());
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the object should be accepted.
    *
    * @param obj The object.

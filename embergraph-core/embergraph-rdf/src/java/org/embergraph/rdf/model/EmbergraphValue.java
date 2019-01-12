@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -46,8 +46,8 @@ import org.embergraph.rdf.store.IRawTripleStore;
 import org.embergraph.rdf.store.TempTripleStore;
 import org.openrdf.model.Value;
 
-/**
- * An interface which exposes the internal 64-bit long integer identifiers for {@link Value}s stored
+/*
+* An interface which exposes the internal 64-bit long integer identifiers for {@link Value}s stored
  * within a {@link IRawTripleStore}. Values may also be stored inline inside the statement indices
  * rather than referencing the lexicon. See {@link IV}.
  *
@@ -56,22 +56,22 @@ import org.openrdf.model.Value;
  */
 public interface EmbergraphValue extends Value, IElement { // , Comparable<EmbergraphValue> {
 
-  /**
+  /*
    * Return the factory which produced this object. This is guaranteed to be a singleton (there will
    * only be one {@link EmbergraphValueFactory} instance for on a given JVM for all {@link
    * EmbergraphValue}s associated with a given lexicon relation namespace).
    */
-  public EmbergraphValueFactory getValueFactory();
+  EmbergraphValueFactory getValueFactory();
 
-  /**
+  /*
    * Return the internal value for this value. May be a term identifier or an inline value. The term
    * identifier uniquely identifies a {@link Value} for a database. Sometimes a {@link
    * TempTripleStore} will be used that shares the lexicon with a given database, in which case the
    * same term identifiers will be value for that {@link TempTripleStore}.
    */
-  public IV getIV();
+  IV getIV();
 
-  /**
+  /*
    * Set the internal value for this value.
    *
    * <p>Note: Both {@link IV} and {@link EmbergraphValue} can cache one another. The pattern for
@@ -86,14 +86,14 @@ public interface EmbergraphValue extends Value, IElement { // , Comparable<Ember
    * @throws IllegalStateException if the internal value is already set to a different non-null
    *     value.
    */
-  public void setIV(IV iv);
+  void setIV(IV iv);
 
-  /**
+  /*
    * Return <code>true</code> if the {@link IV} is either is set to a "real" IV. Return <code>false
    * </code> if the {@link IV} is either not set or is set to a "mock" or "dummy" {@link IV}.
    */
-  public boolean isRealIV();
+  boolean isRealIV();
 
   /** Clears the internal value to null. */
-  public void clearInternalValue();
+  void clearInternalValue();
 }

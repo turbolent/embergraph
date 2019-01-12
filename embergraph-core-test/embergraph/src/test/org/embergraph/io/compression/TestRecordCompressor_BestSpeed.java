@@ -23,8 +23,8 @@ package org.embergraph.io.compression;
 
 import java.util.zip.Deflater;
 
-/**
- * Test suite for {@link RecordCompressor}.
+/*
+* Test suite for {@link RecordCompressor}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

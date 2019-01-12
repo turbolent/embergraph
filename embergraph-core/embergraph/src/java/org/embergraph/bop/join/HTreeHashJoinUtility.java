@@ -80,8 +80,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.InnerCause;
 
-/**
- * Utility methods to support hash index builds and hash index joins using a scalable native memory
+/*
+* Utility methods to support hash index builds and hash index joins using a scalable native memory
  * data structures.
  *
  * <h2>Vectoring and IV encoding</h2>
@@ -110,7 +110,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
   private static final transient Logger log = Logger.getLogger(HTreeHashJoinUtility.class);
 
-  /**
+  /*
    * Singleton {@link IHashJoinUtilityFactory} that can be used to create a new {@link
    * HTreeHashJoinUtility}.
    */
@@ -133,7 +133,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
   /** Note: If joinVars is an empty array, then the solutions will all hash to ONE (1). */
   private static final int ONE = 1;
 
-  /**
+  /*
    * Return the hash code which will be used as the key given the ordered as-bound values for the
    * join variables.
    *
@@ -210,15 +210,15 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
   /** <code>true</code> until the state is discarded by {@link #release()}. */
   private final AtomicBoolean open = new AtomicBoolean(true);
 
-  /**
+  /*
    * The operator whose annotations are used to initialize this object.
    *
    * <p>Note: This was added to support the DISTINCT FILTER in {@link #outputSolutions(IBuffer)}.
    */
   private final PipelineOp op;
 
-  //    /**
-  //     * This basically controls the vectoring of the hash join.
+  //    /*
+//     * This basically controls the vectoring of the hash join.
   //     */
   //    private final int chunkSize = 1000;//ChunkedWrappedIterator.DEFAULT_CHUNK_SIZE;
 
@@ -234,8 +234,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
   /** <code>true</code> iff this is a DISTINCT filter. */
   private final boolean filter;
 
-  //    /**
-  //     * The operator which was used to construct the {@link IHashJoinUtility}
+  //    /*
+//     * The operator which was used to construct the {@link IHashJoinUtility}
   //     * state.
   //     * <p>
   //     * Note: This is NOT necessarily the operator which is currently executing.
@@ -262,20 +262,20 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
   /** The backing {@link IRawStore}. */
   private final IRawStore store;
 
-  /**
+  /*
    * The hash index. The keys are int32 hash codes built from the join variables. The values are an
    * {@link IV}[], similar to the encoding in the statement indices. The mapping from the index
    * positions in the {@link IV}s to the variables is managed by the {@link #encoder}.
    */
   private final AtomicReference<HTree> rightSolutions = new AtomicReference<HTree>();
 
-  /**
+  /*
    * The set of distinct source solutions which joined. This set is maintained iff the join is
    * optional and is <code>null</code> otherwise.
    */
   private final AtomicReference<HTree> joinSet = new AtomicReference<HTree>();
 
-  /**
+  /*
    * The maximum #of (left,right) solution joins that will be considered before failing the join.
    * This is used IFF there are no join variables.
    *
@@ -298,7 +298,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     return rightSolutions.get();
   }
 
-  /**
+  /*
    * The set of distinct source solutions which joined. This set is maintained iff the join is
    * optional and is <code>null</code> otherwise.
    */
@@ -307,7 +307,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     return joinSet.get();
   }
 
-  /**
+  /*
    * Human readable representation of the {@link IHashJoinUtility} metadata (but not the solutions
    * themselves).
    */
@@ -451,7 +451,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     return metadata;
   }
 
-  /**
+  /*
    * @param mmgr The IMemoryManager which will back the named solution set.
    * @param op The operator whose annotation will inform construction the hash index. The {@link
    *     HTreeAnnotations} may be specified for this operator and will control the initialization of
@@ -529,7 +529,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     return store;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation checkpoints the {@link HTree} instance(s) used to buffer the source
@@ -552,8 +552,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
   }
 
-  //    /**
-  //     * Checkpoint the join set (used to buffer the optional solutions).
+  //    /*
+//     * Checkpoint the join set (used to buffer the optional solutions).
   //     * <p>
   //     * Note: Since we always output the solutions which did not join from a
   //     * single thread as part of last pass evaluation there is no need to
@@ -733,14 +733,14 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
           // Encode the key.
           final byte[] key = keyBuilder.reset().append(tmp.hashCode).getKey();
 
-          /*
-           * Encode the solution. Do not update the cache since we are
+        /*
+       * Encode the solution. Do not update the cache since we are
            * only encoding so we can probe the hash index.
            */
           final byte[] val = encoder.encodeSolution(tmp.bset, false /* updateCache */);
 
-          /*
-           * Search the hash index for a match.
+        /*
+       * Search the hash index for a match.
            *
            * TODO VECTOR: This does not take explicit advantage of the
            * fact that different source solutions will fall into the
@@ -799,7 +799,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     }
   }
 
-  /**
+  /*
    * Decode a solution from an encoded {@link IV}[].
    *
    * <p>Note: The {@link IVCache} associated are NOT resolved by this method. The resolution step is
@@ -820,7 +820,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     return encoder.decodeSolution(b.array(), 0, b.limit(), false /* resolveCachedValues */);
   }
 
-  /**
+  /*
    * Glue class for hash code and binding set used when the hash code is for just the join variables
    * rather than the entire binding set.
    */
@@ -848,7 +848,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     }
   }
 
-  /**
+  /*
    * Glue class for hash code and encoded binding set used when we already have the binding set
    * encoded.
    */
@@ -968,8 +968,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
         while (fromIndex < n) {
 
-          /*
-           * Figure out how many left solutions in the current chunk
+        /*
+       * Figure out how many left solutions in the current chunk
            * have the same hash code. We will use the same iterator
            * over the right solutions for that hash code against the
            * HTree.
@@ -1000,8 +1000,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     + ", firstLeft="
                     + a[fromIndex]);
 
-          /*
-           * Note: all source solutions in [fromIndex:toIndex) have
+        /*
+       * Note: all source solutions in [fromIndex:toIndex) have
            * the same hash code. They will be vectored together.
            */
           // All solutions which join for that collision bucket
@@ -1023,8 +1023,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
           {
             final byte[] key = keyBuilder.reset().append(hashCode).getKey();
 
-            /**
-             * Visit all source solutions having the same hash code.
+          /*
+       * Visit all source solutions having the same hash code.
              *
              * @see <a href="https://jira.blazegraph.com/browse/BLZG-848">Stochastic results with
              *     Analytic Query Mode) </a>
@@ -1054,8 +1054,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
               final ITuple<?> t = titr.next();
 
-              /*
-               * Note: The map entries must be the full source
+            /*
+       * Note: The map entries must be the full source
                * binding set, not just the join variables, even
                * though the key and equality in the key is defined
                * in terms of just the join variables.
@@ -1153,8 +1153,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     }
                   case Exists:
                     {
-                      /*
-                       * The right solution is output iff there is
+                    /*
+       * The right solution is output iff there is
                        * at least one left solution which joins
                        * with that right solution. Each right
                        * solution is output at most one time. This
@@ -1173,8 +1173,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     }
                   case NotExists:
                     {
-                      /*
-                       * The right solution is output iff there
+                    /*
+       * The right solution is output iff there
                        * does not exist any left solution which
                        * joins with that right solution. This
                        * basically an optional join where the
@@ -1194,8 +1194,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
             } // next rightSolution with the same hash code.
 
             if (joined != null && !joined.isEmpty()) {
-              /*
-               * Vector the inserts into the [joinSet].
+            /*
+       * Vector the inserts into the [joinSet].
                */
               final BS2[] a2 = joined.toArray(new BS2[njoined]);
               Arrays.sort(a2, 0, njoined);
@@ -1222,7 +1222,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     }
   } // handleJoin
 
-  /**
+  /*
    * Vector a chunk of solutions.
    *
    * @param leftSolutions The solutions.
@@ -1299,7 +1299,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     return a;
   }
 
-  /**
+  /*
    * Add to 2nd hash tree of all solutions which join.
    *
    * <p>Note: the hash key is based on the entire solution (not just the join variables). The values
@@ -1396,8 +1396,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
         final ByteArrayBuffer tb = t.getValueBuffer();
 
-        /*
-         * Note: This MUST be treated as effectively immutable since we
+      /*
+       * Note: This MUST be treated as effectively immutable since we
          * may have to output multiple solutions for each rightSolution.
          * Those output solutions MUST NOT side-effect [rightSolutions].
          */
@@ -1438,8 +1438,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
         if (!found) {
 
-          /*
-           * Since the source solution is not in the join set, output
+        /*
+       * Since the source solution is not in the join set, output
            * it as an optional solution.
            */
 
@@ -1593,8 +1593,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
 
         } else if (selectVars != null) {
 
-          /*
-           * FIXME We should be using projectedInVars here since
+        /*
+       * FIXME We should be using projectedInVars here since
            * outputSolutions() is used to stream solutions into
            * the child join group (at least for some kinds of
            * joins, but there might be exceptions for joining with
@@ -1667,7 +1667,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     }
   } // outputJoinSet
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: For the {@link HTree}, the entries are in key order. Those keys are hash codes
@@ -1748,8 +1748,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
           sols0.addFilter(
               new Visitor() {
                 private static final long serialVersionUID = 1L;
-                /**
-                 * Set the tuple for the first source each time it advances.
+              /*
+       * Set the tuple for the first source each time it advances.
                  *
                  * @param obj The tuple.
                  */
@@ -1768,8 +1768,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
             sols0.addFilter(
                 new Expander() {
                   private static final long serialVersionUID = 1L;
-                  /**
-                   * Expansion pattern gives solutions for source @ slot.
+                /*
+       * Expansion pattern gives solutions for source @ slot.
                    *
                    * @param obj The tuple in set[slot-1].
                    */
@@ -1783,15 +1783,15 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
                     final byte[] key2 = ((ITuple<?>) obj).getKey();
                     final ITupleIterator<?> ret = thisTree.lookupAll(key2);
                     if (optional && !ret.hasNext()) {
-                      /*
-                       * Nothing for that key from this source. Return
+                    /*
+       * Nothing for that key from this source. Return
                        * a single marker value so we can proceed to
                        * the remaining sources rather than halting.
                        */
                       return new SingleValueIterator(NULL_VALUE);
                     } else {
-                      /*
-                       * Iterator visiting solutions from this source
+                    /*
+       * Iterator visiting solutions from this source
                        * for the current key in the prior source.
                        */
                       return ret;
@@ -1802,8 +1802,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
             sols0.addFilter(
                 new Visitor() {
                   private static final long serialVersionUID = 1L;
-                  /**
-                   * Assign tuple to set[slot].
+                /*
+       * Assign tuple to set[slot].
                    *
                    * <p>Note: If [obj==NULL_VALUE] then no solutions for that slot.
                    */
@@ -1815,8 +1815,8 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
           }
         } // end of striterator setup.
 
-        /*
-         * This will visit after all expansions. That means that we will
+      /*
+       * This will visit after all expansions. That means that we will
          * observe the cross product of the solutions from the remaining
          * sources having the same hash for each from the first source.
          *
@@ -1873,7 +1873,7 @@ public class HTreeHashJoinUtility implements IHashJoinUtility {
     }
   }
 
-  /**
+  /*
    * Adds metadata about the {@link IHashJoinUtility} state to the stack trace.
    *
    * @param t The thrown error.

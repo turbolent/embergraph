@@ -34,8 +34,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.concurrent.IHaltable;
 
-/**
- * Non-Remote interface exposing a limited set of the state of an executing query.
+/*
+* Non-Remote interface exposing a limited set of the state of an executing query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   @Override
   UUID getQueryId();
 
-  /**
+  /*
    * The {@link IEmbergraphFederation} IFF the operator is being evaluated on an {@link
    * IEmbergraphFederation}. When evaluating operations against an {@link IEmbergraphFederation},
    * this reference provides access to the scale-out view of the indices and to other embergraph
@@ -57,7 +57,7 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
    */
   IEmbergraphFederation<?> getFederation();
 
-  /**
+  /*
    * The <strong>local</strong> {@link IIndexManager}. Query evaluation occurs against the local
    * indices. In scale-out, query evaluation proceeds shard wise and this {@link IIndexManager} MUST
    * be able to read on the {@link ILocalBTreeView}.
@@ -67,7 +67,7 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   /** The query engine class executing the query on this node. */
   QueryEngine getQueryEngine();
 
-  /**
+  /*
    * The client coordinate the evaluation of this query (aka the query controller). For a standalone
    * database, this will be the {@link QueryEngine}.
    *
@@ -78,13 +78,13 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
    */
   IQueryClient getQueryController();
 
-  /**
+  /*
    * Return an unmodifiable index from {@link BOp.Annotations#BOP_ID} to {@link BOp}. This index may
    * contain operators which are not part of the pipeline evaluation, such as {@link IPredicate}s.
    */
   Map<Integer /*bopId*/, BOp> getBOpIndex();
 
-  /**
+  /*
    * Return an unmodifiable map exposing the statistics for the operators in the query and <code>
    * null</code> unless this is the query controller. There will be a single entry in the map for
    * each distinct {@link PipelineOp}. Entries might not appear until that operator has either begun
@@ -99,7 +99,7 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   /** Return statistics associated with the static analysis phase of this query. */
   StaticAnalysisStats getStaticAnalysisStats();
 
-  /**
+  /*
    * Return the query deadline in milliseconds (the time at which it will terminate regardless of
    * its run state).
    *
@@ -114,14 +114,14 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   /** The timestamp (ms) when the query was done and ZERO (0) if the query is not yet done. */
   long getDoneTime();
 
-  /**
+  /*
    * The elapsed time (ms) for the query. This will be updated for each call until the query is done
    * executing.
    */
   long getElapsed();
 
-  //	/**
-  //	 * Return <code>true</code> if there are no operators which could
+  //	/*
+//	 * Return <code>true</code> if there are no operators which could
   //	 * (re-)trigger the specified operator.
   //	 * <p>
   //	 * Note: This is intended to be invoked synchronously from within the
@@ -139,8 +139,8 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   //	 */
   //    boolean isLastInvocation(final int bopId,final int nconsumed);
 
-  //    /**
-  //     * Cancel the running query (normal termination).
+  //    /*
+//     * Cancel the running query (normal termination).
   //     * <p>
   //     * Note: This method provides a means for an operator to indicate that the
   //     * query should halt immediately for reasons other than abnormal
@@ -151,8 +151,8 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   //     */
   //    void halt();
   //
-  //    /**
-  //     * Cancel the query (abnormal termination).
+  //    /*
+//     * Cancel the query (abnormal termination).
   //     *
   //     * @param t
   //     *            The cause.
@@ -164,13 +164,13 @@ public interface IRunningQuery extends IHaltable<Void>, IQueryContext {
   //     */
   //    Throwable halt(final Throwable t);
   //
-  //    /**
-  //     * Return the cause if the query was terminated by an exception.
+  //    /*
+//     * Return the cause if the query was terminated by an exception.
   //     * @return
   //     */
   //    Throwable getCause();
 
-  /**
+  /*
    * Return an iterator which will drain the solutions from the query. The query will be cancelled
    * if the iterator is {@link ICloseableIterator#close() closed}.
    *

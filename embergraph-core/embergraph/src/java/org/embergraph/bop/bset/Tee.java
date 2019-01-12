@@ -31,8 +31,8 @@ import org.embergraph.rdf.rules.TMUtility;
 import org.embergraph.relation.RelationFusedView;
 import org.embergraph.relation.rule.Slice;
 
-/**
- * TEE(op):[sinkRef=X; altSinkRef=Y]
+/*
+* TEE(op):[sinkRef=X; altSinkRef=Y]
  *
  * <p>Pipeline operator copies its source to both sink and altSink. The sink and the altSink must
  * both be ancestors of the operator. The sinkRef MAY be omitted when one of the targets is the
@@ -80,7 +80,7 @@ public class Tee extends CopyOp {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -89,7 +89,7 @@ public class Tee extends CopyOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args

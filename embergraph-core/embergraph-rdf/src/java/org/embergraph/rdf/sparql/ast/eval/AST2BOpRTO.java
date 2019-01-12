@@ -79,8 +79,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.striterator.Dechunkerator;
 import org.embergraph.util.NT;
 
-/**
- * Integration with the Runtime Optimizer (RTO).
+/*
+* Integration with the Runtime Optimizer (RTO).
  *
  * <p>Note: The RTO currently uses bottom-up evaluation to solve the join graph and generate a
  * sub-query plan with an optimized join ordering. It uses left-to-right evaluation to pass pipeline
@@ -101,7 +101,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
 
   public interface Annotations extends AST2BOpJoins.Annotations {
 
-    /**
+    /*
      * Annotation is used to tag the {@link StatementPatternNode}s in a {@link JoinGroupNode} with
      * the identified assigned to the corresponding {@link IPredicate}. This makes it possible to
      * lookup the SPO from the {@link IPredicate} when the RTO hands us back an ordered join path.
@@ -109,7 +109,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
     String PREDICATE_ID = "PredicateId";
   }
 
-  /**
+  /*
    * The RTO is most useful for queries with high latency and a large number of joins. You do not
    * need to apply the RTO if there is only a single triple pattern since there are no joins. You do
    * not need to apply the RTO if there are two triple patterns since we will run the most selective
@@ -126,14 +126,14 @@ public class AST2BOpRTO extends AST2BOpJoins {
    */
   private static final int RTO_MIN_JOINS = 3;
 
-  /**
+  /*
    * When <code>true</code>, the RTO will only accept simple joins into the join graph. Simple joins
    * includes triples-mode joins and filters that do not have materialization requirements.
    * Non-simple joins includes quads-mode joins and filters that have materialization contexts.
    */
   private static final boolean onlySimpleJoins = false;
 
-  /**
+  /*
    * When <code>true</code>, the RTO will not accept OPTIONAL joins into the join graph. Optional
    * joins can not decrease the intermediate cardinality since they can not eliminate solutions, but
    * they can increase the intermediate cardinality by finding multiple bindings in the OPTIONAL
@@ -146,14 +146,14 @@ public class AST2BOpRTO extends AST2BOpJoins {
    */
   private static final boolean onlyRequiredJoins = true;
 
-  /**
+  /*
    * When <code>true</code>, the RTO will only accept statement patterns into the join graph. When
    * <code>false</code>, it will attempt to handle non-SP joins, e.g., sub-query, exists, property
    * paths, etc.
    */
   private static final boolean onlySPs = true;
 
-  /**
+  /*
    * When <code>true</code>, even simple JOINs will run through the code path for the evaluation of
    * complex joins.
    *
@@ -179,7 +179,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
    */
   static final boolean runAllJoinsAsComplexJoins = false;
 
-  /**
+  /*
    * When <code>true</code>, out of order evaluation will cause the RTO to fail. When <code>false
    * </code>, out of order evaluation is silently ignored.
    *
@@ -196,7 +196,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
    */
   private static final boolean failOutOfOrderEvaluation = true;
 
-  /**
+  /*
    * When <code>true</code>, the generated query plans for cutoff evaluation will be checked to
    * verify that the query plans do not permit reordering of solutions.
    *
@@ -204,7 +204,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
    */
   private static final boolean checkQueryPlans = false; // Note: Make [false] in committed code!
 
-  /**
+  /*
    * Inspect the remainder of the join group. If we can isolate a join graph and filters, then we
    * will push them down into an RTO JoinGroup. Since the joins have already been ordered by the
    * static optimizer, we can accept them in sequence along with any attachable filters and (if we
@@ -300,8 +300,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
           getJoinConstraints(attachedConstraints, needsMaterialization);
 
           if (onlySimpleJoins && !needsMaterialization.isEmpty()) {
-            /*
-             * At least one variable requires (or might require)
+          /*
+       * At least one variable requires (or might require)
              * materialization.
              */
             break;
@@ -311,8 +311,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
           sp = (StatementPatternNode) sp.clone(); // TODO Use destructive move.
           rtoJoinGroup.addChild(sp); // add to group.
           naccepted++;
-          /*
-           * Note: This assigns ids to the predicates as a
+        /*
+       * Note: This assigns ids to the predicates as a
            * side-effect. Those ids are assigned by the
            * AST2BOpContext's BOpIdFactory. You can not rely on
            * specific ID values being assigned, so you need to build a
@@ -324,8 +324,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
           // tag the SP with predicate's ID.
           sp.setProperty(Annotations.PREDICATE_ID, pred.getId());
           if (attachedConstraints != null) {
-            /*
-             * The RTO will figure out where to attach these
+          /*
+       * The RTO will figure out where to attach these
              * constraints.
              */
             constraints.addAll(attachedConstraints);
@@ -334,8 +334,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
         } else {
           // Non-SP.
           if (onlySPs) break;
-          /*
-           * TODO Handle non-SPs in the RTO. See convertJoinGroup()
+        /*
+       * TODO Handle non-SPs in the RTO. See convertJoinGroup()
            * for how we handle non-SPs during normal query plan
            * conversion. All of that would also have to be handled
            * here for the RTO to allow in non-SPs.
@@ -392,7 +392,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
     return left;
   }
 
-  /**
+  /*
    * Compile a join graph into a query plan.
    *
    * @param queryEngine The {@link QueryEngine} on which the RTO has been executing and on which the
@@ -496,7 +496,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
     return left;
   }
 
-  /**
+  /*
    * Return an execution context that may be used to execute a cutoff join during sampling or the
    * entire join path once it has been identified.
    *
@@ -529,7 +529,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
     return new AST2BOpContext(astContainer, db);
   }
 
-  /**
+  /*
    * Return a map from the {@link Annotations#PREDICATE_ID} to the corresponding {@link
    * StatementPatternNode}.
    *
@@ -565,8 +565,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
       final Integer id = (Integer) x;
       final BOp conflict = map.put(id, sp);
       if (conflict != null) {
-        /*
-         * BOp appears more than once. This is not allowed for
+      /*
+       * BOp appears more than once. This is not allowed for
          * pipeline operators. If you are getting this exception for
          * a non-pipeline operator, you should remove the bopId.
          */
@@ -577,7 +577,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
     return Collections.unmodifiableMap(map);
   }
 
-  /**
+  /*
    * Cutoff join of the last vertex in the join path.
    *
    * <p><strong>The caller is responsible for protecting against needless re-sampling.</strong> This
@@ -642,8 +642,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
 
       if (!runAllJoinsAsComplexJoins && (query instanceof PipelineJoin) && query.arity() == 0) {
 
-        /*
-         * Simple JOIN.
+      /*
+       * Simple JOIN.
          *
          * Old logic for query execution. Relies on the ability of
          * the PipelineJoin
@@ -652,8 +652,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
 
       } else {
 
-        /*
-         * Complex JOIN involving variable materialization, conditional
+      /*
+       * Complex JOIN involving variable materialization, conditional
          * routing operators, filters, and a SLICE to limit the output.
          */
 
@@ -681,7 +681,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
     }
   }
 
-  /**
+  /*
    * Implementation handles the general case. The general case can result in a physical query plan
    * consisting of multiple operators, including variable materialization requirements, JOINs with
    * remote access paths, etc. The logic for complex joins is handled by {@link AST2BOpJoins} and
@@ -834,7 +834,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
     return left;
   }
 
-  /**
+  /*
    * Debug code checks the query plan for patterns that could cause {@link
    * OutOfOrderEvaluationException}s.
    *
@@ -932,7 +932,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
     }
   }
 
-  /**
+  /*
    * Run a simple cutoff join on the {@link QueryEngine}. This method relies on the ability to
    * control the {@link PipelineJoin} such that it does not reorder the solutions.
    *
@@ -1039,7 +1039,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
         limit, inputCount, outputCount, sumRangeCount, tuplesRead, sourceSample, result);
   }
 
-  /**
+  /*
    * Run a complex cutoff join on the {@link QueryEngine}. This approach is suitable for complex
    * query plans. It tracks each solution in by assigning a row identifier to the source solutions.
    * It then observes the solutions out and figures out how many source solutions were required in
@@ -1121,8 +1121,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
         IBindingSet bset = null;
         // Figure out the #of source samples consumed.
         final Iterator<IBindingSet> itr = new Dechunkerator<IBindingSet>(runningQuery.iterator());
-        /*
-         * Injected row id variable.
+      /*
+       * Injected row id variable.
          *
          * Note: Starts at ZERO in case NO solutions out.
          */
@@ -1132,8 +1132,8 @@ public class AST2BOpRTO extends AST2BOpJoins {
           final int rowid = ((XSDNumericIV) bset.get(rtoVar).get()).intValue();
           // log.warn("rowId="+rowid+",lastRowId="+lastRowId+",bset="+bset);
           if (rowid < lastRowId && failOutOfOrderEvaluation) {
-            /*
-             * Out of order evaluation makes it impossible to
+          /*
+       * Out of order evaluation makes it impossible to
              * accurately determine the estimated cardinality of the
              * join since we can not compute the join hit ratio
              * without knowing the #of solutions in required to
@@ -1206,7 +1206,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
         limit, inputCount, outputCount, sumRangeCount, tuplesRead, sourceSample, result);
   }
 
-  /**
+  /*
    * Create a new {@link EdgeSample} from the cutoff evaluation of some join.
    *
    * @param limit The cutoff evaluation limit.
@@ -1352,7 +1352,7 @@ public class AST2BOpRTO extends AST2BOpJoins {
     return edgeSample;
   }
 
-  /**
+  /*
    * Inject (or replace) an {@link Integer} "rowId" column. This does not have a side-effect on the
    * source {@link IBindingSet}s.
    *

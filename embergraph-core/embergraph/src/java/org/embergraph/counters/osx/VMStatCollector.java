@@ -44,15 +44,15 @@ import org.embergraph.counters.IInstrument;
 import org.embergraph.counters.IRequiredHostCounters;
 import org.embergraph.counters.ProcessReaderHelper;
 
-/**
- * Collects some counters using <code>vmstat</code>.
+/*
+* Collects some counters using <code>vmstat</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class VMStatCollector extends AbstractProcessCollector
     implements ICounterHierarchy, IRequiredHostCounters, IHostCounters {
 
-  /**
+  /*
    * Inner class integrating the current values with the {@link ICounterSet} hierarchy.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -87,7 +87,7 @@ public class VMStatCollector extends AbstractProcessCollector
     }
   }
 
-  /**
+  /*
    * Double precision counter with scaling factor.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -122,7 +122,7 @@ public class VMStatCollector extends AbstractProcessCollector
     }
   }
 
-  /**
+  /*
    * A map from the name of a column to the order of that column in the output (origin ZERO). This
    * mapping was added when the format was changed to make the parser more robust to such changes.
    *
@@ -130,7 +130,7 @@ public class VMStatCollector extends AbstractProcessCollector
    */
   private final Map<String, Integer> keys = new LinkedHashMap<String, Integer>();
 
-  /**
+  /*
    * Map containing the current values for the configured counters. The keys are paths into the
    * {@link CounterSet}. The values are the data most recently read from <code>vmstat</code>.
    */
@@ -203,7 +203,7 @@ public class VMStatCollector extends AbstractProcessCollector
     return new VMStatReader();
   }
 
-  /**
+  /*
    * Sample output for <code>vm_stat 60</code>, where <code>60</code> is the interval. Unlike the
    * linux <code>vmstat</code>, there is no option to suppress the periodic repeat of the header.
    * The header repeats in its entirety every "page" full.
@@ -400,8 +400,8 @@ public class VMStatCollector extends AbstractProcessCollector
             vals.put(IHostCounters.Memory_SwapBytesUsed, swapBytesUsed * pageSize);
           }
 
-          /*
-           * pageout is reported as a total over time. we have to compute a
+        /*
+       * pageout is reported as a total over time. we have to compute a
            * delta, then divide through by the interval to get
            * pages/second.
            */
@@ -421,8 +421,8 @@ public class VMStatCollector extends AbstractProcessCollector
 
         } catch (Exception ex) {
 
-          /*
-           * Issue warning for parsing problems.
+        /*
+       * Issue warning for parsing problems.
            */
 
           log.warn(ex.getMessage() + "\nheader: " + h1 + "\n  data: " + data, ex);
@@ -431,7 +431,7 @@ public class VMStatCollector extends AbstractProcessCollector
     } // readProcess()
   } // class VMStatReader
 
-  /**
+  /*
    * Parse a string which may have a "K" suffix, returning a double. If the "K" suffix is present,
    * then the returned value is scaled by 1000. This handles an OSX specific oddity for <code>
    * vm_stat</code>
@@ -460,7 +460,7 @@ public class VMStatCollector extends AbstractProcessCollector
       throw new RuntimeException("Expecting '" + expected + "', found: '" + fields[0] + "'");
   }
 
-  /**
+  /*
    * If the name of the performance counter appears in {@link #keys} then set the index of that
    * counter on the <i>indexOf</i> field.
    *

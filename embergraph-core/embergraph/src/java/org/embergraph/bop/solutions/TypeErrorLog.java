@@ -25,8 +25,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.engine.BOpStats;
 
-/**
- * A utility class for logging type errors.
+/*
+* A utility class for logging type errors.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -35,7 +35,7 @@ public class TypeErrorLog {
 
   private static final transient Logger log = Logger.getLogger(TypeErrorLog.class);
 
-  /**
+  /*
    * Logs a type error.
    *
    * @param t The cause.

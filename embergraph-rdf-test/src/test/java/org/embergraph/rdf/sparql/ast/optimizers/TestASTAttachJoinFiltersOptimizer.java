@@ -47,8 +47,8 @@ import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Test suite for {@link ASTAttachJoinFiltersOptimizer}.
+/*
+* Test suite for {@link ASTAttachJoinFiltersOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -63,7 +63,7 @@ public class TestASTAttachJoinFiltersOptimizer extends AbstractASTEvaluationTest
     super(name);
   }
 
-  /**
+  /*
    * Unit test for the attachment of the join filters to the required joins in a {@link
    * JoinGroupNode}.
    *
@@ -85,7 +85,7 @@ public class TestASTAttachJoinFiltersOptimizer extends AbstractASTEvaluationTest
 
       given = s.queryRoot;
 
-      /**
+      /*
        * Put the joins into a known order whose correct filter attachments are also known. This
        * order is <code>[5, 3, 1, 0, 2, 4, 6]</code>.
        */
@@ -264,7 +264,7 @@ public class TestASTAttachJoinFiltersOptimizer extends AbstractASTEvaluationTest
                 contextJoinRewriter, new QueryNodeWithBindingSet(qIntermediate, bsetsJoinRewriter))
             .getQueryNode();
 
-    /**
+    /*
      * This is the output we expect QueryType: SELECT SELECT VarNode(s) JoinGroupNode { QueryType:
      * SELECT SELECT VarNode(s) JoinGroupNode { StatementPatternNode(VarNode(s), VarNode(p),
      * VarNode(o)) [scope=DEFAULT_CONTEXTS] } FILTER(

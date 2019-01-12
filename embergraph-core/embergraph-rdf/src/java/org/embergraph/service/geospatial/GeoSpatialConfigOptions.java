@@ -22,8 +22,8 @@ package org.embergraph.service.geospatial;
 
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Class hosting options for geospatial configuration and defaults.
+/*
+* Class hosting options for geospatial configuration and defaults.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public class GeoSpatialConfigOptions {
 
     String DEFAULT_GEO_SPATIAL_INCLUDE_BUILTIN_DATATYPES = "true";
 
-    /**
+    /*
      * Return the geospatial default datatype (if any). The default datatype is the datatype that is
      * queried whenever no datatype is explicitly specified within the query.
      */
@@ -53,14 +53,14 @@ public class GeoSpatialConfigOptions {
 
     String DEFAULT_GEO_SPATIAL_DEFAULT_DATATYPE = null; // none
 
-    /**
+    /*
      * GeoSpatial builtin datatype definitions. Do *NOT* modify these definitions -> doing so will
      * break existing systems that make use of these built-in datatypes.
      */
     String GEO_SPATIAL_DATATYPE_CONFIG =
         AbstractTripleStore.class.getName() + ".geoSpatialDatatypeConfig";
 
-    /**
+    /*
      * ATTENTION: Do NEVER modify the definitions below -> they are important in order to maintain
      * compatibility for geospatial datatypes that we expose as built-in datatypes.
      *
@@ -69,7 +69,7 @@ public class GeoSpatialConfigOptions {
      * constructor of {@link GeoSpatialConfig}, which takes a JSON string -- so you may also have a
      * look at the parsing logics there.
      */
-    final String GEO_SPATIAL_LITERAL_V1_LAT_LON_CONFIG =
+    String GEO_SPATIAL_LITERAL_V1_LAT_LON_CONFIG =
         "{\"config\": "
             + "{ \"uri\": \""
             + GeoSpatial.GEOSPATIAL_LITERAL_V1_LAT_LON
@@ -79,7 +79,7 @@ public class GeoSpatialConfigOptions {
             + "{ \"valueType\": \"DOUBLE\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" } "
             + "]}}";
 
-    final String GEO_SPATIAL_LITERAL_V1_LAT_LON_TIME_CONFIG =
+    String GEO_SPATIAL_LITERAL_V1_LAT_LON_TIME_CONFIG =
         "{\"config\": "
             + "{ \"uri\": \""
             + GeoSpatial.GEOSPATIAL_LITERAL_V1_LAT_LON_TIME

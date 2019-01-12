@@ -29,8 +29,8 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-/**
- * An {@link ICloseableIterator} that may be serialized and sent to a remote JVM for consumption.
+/*
+* An {@link ICloseableIterator} that may be serialized and sent to a remote JVM for consumption.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ public class ThickCloseableIterator<E> implements ICloseableIterator<E>, Seriali
 
   private transient boolean open = true;
 
-  /**
+  /*
    * Index of the last element visited by {@link #next()} and <code>-1</code> if NO elements have
    * been visited.
    */
@@ -54,7 +54,7 @@ public class ThickCloseableIterator<E> implements ICloseableIterator<E>, Seriali
   /** The number of elements to be visited by the iterator. */
   private final int len;
 
-  /**
+  /*
    * Create a thick iterator.
    *
    * @param a The array of elements to be visited by the iterator (may be empty, but may not be
@@ -71,7 +71,7 @@ public class ThickCloseableIterator<E> implements ICloseableIterator<E>, Seriali
     lastIndex = -1;
   }
 
-  /**
+  /*
    * Create a thick iterator.
    *
    * @param a The array of elements to be visited by the iterator (may be empty, but may not be

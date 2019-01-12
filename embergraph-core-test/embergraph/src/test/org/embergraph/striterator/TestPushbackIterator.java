@@ -26,8 +26,8 @@ package org.embergraph.striterator;
 import java.util.Arrays;
 import junit.framework.TestCase2;
 
-/**
- * Unit test for {@link PushbackIterator}.
+/*
+* Unit test for {@link PushbackIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

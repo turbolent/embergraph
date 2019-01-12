@@ -23,8 +23,8 @@ package it.unimi.dsi.bits;
 
 import java.io.Serializable;
 
-/**
- * @deprecated Use {@link TransformationStrategies#utf16()} and {@link
+/*
+* @deprecated Use {@link TransformationStrategies#utf16()} and {@link
  *     TransformationStrategies#prefixFreeUtf16()}.
  */
 @Deprecated
@@ -32,7 +32,7 @@ public class Utf16TransformationStrategy
     implements TransformationStrategy<CharSequence>, Serializable {
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Creates a prefix-free UTF16 transformation strategy. The strategy will map a string to its
    * natural UTF16 bit sequence, and the resulting set of binary words will be made prefix free by
    * adding

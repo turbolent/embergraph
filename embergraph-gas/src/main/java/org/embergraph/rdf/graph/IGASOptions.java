@@ -20,8 +20,8 @@ import org.embergraph.rdf.graph.impl.util.GASRunnerBase;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
-/**
- * Interface for options that are understood by the {@link IGASEngine} and which may be declared by
+/*
+* Interface for options that are understood by the {@link IGASEngine} and which may be declared by
  * the {@link IGASProgram}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -31,7 +31,7 @@ public interface IGASOptions<VS, ES, ST> {
   /** Return the nature of the initial frontier for this algorithm. */
   FrontierEnum getInitialFrontierEnum();
 
-  /**
+  /*
    * Return the type of edges that must exist when sampling the vertices of the graph. If {@link
    * EdgesEnum#InEdges} is specified, then each sampled vertex will have at least one in-edge. If
    * {@link EdgesEnum#OutEdges} is specified, then each sampled vertex will have at least one
@@ -45,7 +45,7 @@ public interface IGASOptions<VS, ES, ST> {
    */
   EdgesEnum getSampleEdgesFilter();
 
-  /**
+  /*
    * Return the set of edges to which the GATHER is applied for a <em>directed</em> graph -or-
    * {@link EdgesEnum#NoEdges} to skip the GATHER phase. This will be interpreted based on the value
    * reported by {@link IGASContext#isDirectedTraversal()}.
@@ -55,14 +55,14 @@ public interface IGASOptions<VS, ES, ST> {
    */
   EdgesEnum getGatherEdges();
 
-  /**
+  /*
    * Return the set of edges to which the SCATTER is applied for a <em>directed</em> graph -or-
    * {@link EdgesEnum#NoEdges} to skip the SCATTER phase. This will be interpreted based on the
    * value reported by {@link IGASContext#isDirectedTraversal()}.
    */
   EdgesEnum getScatterEdges();
 
-  /**
+  /*
    * Return a factory for vertex state objects.
    *
    * <p>Note: A <code>null</code> value may not be allowed in the visited vertex map, so if the
@@ -71,7 +71,7 @@ public interface IGASOptions<VS, ES, ST> {
    */
   Factory<Value, VS> getVertexStateFactory();
 
-  /**
+  /*
    * Return a factory for edge state objects -or- <code>null</code> if the {@link IGASProgram} does
    * not use edge state (in which case the edge state will not be allocated or maintained).
    */

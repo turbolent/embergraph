@@ -3040,7 +3040,7 @@ public class SyntaxTreeBuilderTokenManager implements SyntaxTreeBuilderConstants
           }
         } while (i != startsAt);
       } else {
-        int hiByte = (int) (curChar >> 8);
+        int hiByte = (curChar >> 8);
         int i1 = hiByte >> 6;
         long l1 = 1L << (hiByte & 077);
         int i2 = (curChar & 0xff) >> 6;
@@ -3186,8 +3186,7 @@ public class SyntaxTreeBuilderTokenManager implements SyntaxTreeBuilderConstants
       case 0:
         return ((jjbitVec2[i2] & l2) != 0L);
       default:
-        if ((jjbitVec0[i1] & l1) != 0L) return true;
-        return false;
+        return (jjbitVec0[i1] & l1) != 0L;
     }
   }
 
@@ -3210,8 +3209,7 @@ public class SyntaxTreeBuilderTokenManager implements SyntaxTreeBuilderConstants
       case 255:
         return ((jjbitVec10[i2] & l2) != 0L);
       default:
-        if ((jjbitVec3[i1] & l1) != 0L) return true;
-        return false;
+        return (jjbitVec3[i1] & l1) != 0L;
     }
   }
 
@@ -3234,8 +3232,7 @@ public class SyntaxTreeBuilderTokenManager implements SyntaxTreeBuilderConstants
       case 255:
         return ((jjbitVec10[i2] & l2) != 0L);
       default:
-        if ((jjbitVec3[i1] & l1) != 0L) return true;
-        return false;
+        return (jjbitVec3[i1] & l1) != 0L;
     }
   }
 

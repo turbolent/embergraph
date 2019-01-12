@@ -40,8 +40,8 @@ import org.embergraph.bop.controller.NamedSetAnnotations;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.htree.HTree;
 
-/**
- * Base class for operators that use a hash index.
+/*
+* Base class for operators that use a hash index.
  *
  * @see BLZG-1438
  * @author <a href="http://olafhartig.de">Olaf Hartig</a>
@@ -57,32 +57,32 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
           NamedSetAnnotations,
           ILocatableResourceAnnotations {
 
-    /**
+    /*
      * A mandatory attribute specifying the {@link IHashJoinUtilityFactory} from which this operator
      * obtains a {@link IHashJoinUtility} to be used by this operator. This factory is invoked once,
      * the first time this operator is evaluated. The obtained {@link IHashJoinUtility} reference is
      * attached to the {@link IQueryAttributes} and accessed there on subsequent evaluation passes
      * for this operator.
      */
-    final String HASH_JOIN_UTILITY_FACTORY = HashIndexOpBase.class.getName() + ".utilFactory";
+    String HASH_JOIN_UTILITY_FACTORY = HashIndexOpBase.class.getName() + ".utilFactory";
 
-    /**
+    /*
      * An optional attribute specifying the <em>source</em> named solution set for the index build
      * operation. Normally, the hash index is built from the solutions flowing through the pipeline.
      * When this attribute is specified, the hash index is instead built from the solutions in the
      * specified named solution set. Regardless, the solutions flowing through the pipeline are
      * copied to the sink once the hash index has been built.
      */
-    final String NAMED_SET_SOURCE_REF = "namedSetSourceRef";
+    String NAMED_SET_SOURCE_REF = "namedSetSourceRef";
 
-    /**
+    /*
      * An optional attribute specifying the <em>source</em> IBindingSet[] for the index build
      * operation. Normally, the hash index is built from the solutions flowing through the pipeline.
      * When this attribute is specified, the hash index is instead built from the solutions in the
      * specified IBindingSet[]. Regardless, the solutions flowing through the pipeline are copied to
      * the sink once the hash index has been built.
      */
-    final String BINDING_SETS_SOURCE = "bindingSets";
+    String BINDING_SETS_SOURCE = "bindingSets";
   }
 
   /** Deep copy constructor. */
@@ -90,7 +90,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -174,7 +174,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
 
   protected abstract ChunkTaskBase createChunkTask(final BOpContext<IBindingSet> context);
 
-  /**
+  /*
    * Evaluates the subquery for each source binding set. If the controller operator is interrupted,
    * then the subqueries are cancelled. If a subquery fails, then all subqueries are cancelled.
    */
@@ -191,7 +191,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
     /** <code>true</code> iff this is the first invocation of this operator. */
     protected final boolean first;
 
-    /**
+    /*
      * <code>true</code> iff the hash index will be generated from the intermediate solutions
      * arriving from the pipeline. When <code>false</code>, the {@link
      * HashIndexOpBase.Annotations#NAMED_SET_SOURCE_REF} identifies the source from which the index
@@ -217,15 +217,15 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
 
       {
 
-        /*
-         * First, see if the map already exists.
+      /*
+       * First, see if the map already exists.
          *
          * Note: Since the operator is not thread-safe, we do not need
          * to use a putIfAbsent pattern here.
          */
 
-        /*
-         * Lookup the attributes for the query on which we will hang the
+      /*
+       * Lookup the attributes for the query on which we will hang the
          * solution set. See BLZG-1493 (if queryId is null, use the query
          * attributes for this running query).
          */
@@ -262,7 +262,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
               && (op.getProperty(Annotations.BINDING_SETS_SOURCE) == null);
     }
 
-    /**
+    /*
      * Add solutions to the hash index. The solutions to be indexed will be read either from the
      * pipeline or from an "alternate" source identified by an annotation.
      *
@@ -278,8 +278,8 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
 
       } else if (op.getProperty(Annotations.NAMED_SET_SOURCE_REF) != null) {
 
-        /*
-         * Metadata to identify the optional *source* solution set. When
+      /*
+       * Metadata to identify the optional *source* solution set. When
          * <code>null</code>, the hash index is built from the solutions flowing
          * through the pipeline. When non-<code>null</code>, the hash index is
          * built from the solutions in the identifier solution set.
@@ -291,8 +291,8 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
 
       } else if (op.getProperty(Annotations.BINDING_SETS_SOURCE) != null) {
 
-        /*
-         * The IBindingSet[] is directly given. Just wrap it up as an
+      /*
+       * The IBindingSet[] is directly given. Just wrap it up as an
          * iterator. It will visit a single chunk of solutions.
          */
         final IBindingSet[] bindingSets =
@@ -315,7 +315,7 @@ public abstract class HashIndexOpBase extends PipelineOp implements ISingleThrea
       }
     }
 
-    /**
+    /*
      * Checkpoint and save the solution set.
      *
      * <p>Note: We must checkpoint the solution set before we output anything. Otherwise the chunks

@@ -22,7 +22,7 @@ import java.util.UUID;
 /** Message requesting a root block for a store on a remote service. */
 public interface IHARootBlockRequest extends IHAMessage {
 
-  /**
+  /*
    * The {@link UUID} of the journal whose root block will be returned (optional, defaults to the
    * current Journal).
    *
@@ -31,7 +31,7 @@ public interface IHARootBlockRequest extends IHAMessage {
    */
   UUID getStoreUUID();
 
-  /**
+  /*
    * When <code>true</code> the request should be non-blocking. Otherwise the request should obtain
    * the lock that guards the update of the root block in the commit protocol such that the caller
    * can not observe a root block that has been updated but where the commit protocol is still in

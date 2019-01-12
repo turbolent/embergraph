@@ -51,8 +51,8 @@ import org.embergraph.service.DataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.util.Bytes;
 
-/**
- * Bootstrap test suite for the {@link ResourceManager}.
+/*
+* Bootstrap test suite for the {@link ResourceManager}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -80,7 +80,7 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
     super.tearDown();
   }
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself.
    *
@@ -106,7 +106,7 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
     }
   }
 
-  /**
+  /*
    * Test creation of a new {@link ResourceManager}. This verifies the correct creation of the data
    * directory, the various subdirectories, and the initial journal in the appropriate subdirectory.
    *
@@ -163,7 +163,7 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
     }
   }
 
-  /**
+  /*
    * A test for restart of the {@link ResourceManager}. A directory is created and pre-populated
    * with two {@link Journal}s. The {@link ResourceManager} is started and we verify that it locates
    * the various resources and opens the correct {@link Journal} as its "live" journal.
@@ -328,7 +328,7 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
     }
   }
 
-  /**
+  /*
    * A test for restart of the {@link ResourceManager}. A directory is created and pre-populated
    * with a {@link Journal} and some {@link IndexSegment}s are constructed from data on that {@link
    * Journal}. The {@link ResourceManager} is started and we verify that it locates the various
@@ -467,7 +467,7 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
     }
   }
 
-  /**
+  /*
    * A test for restart of the {@link ResourceManager}. A directory is created and pre-populated
    * with a {@link Journal}. An index is registered on the journal and some data is written on the
    * index. An {@link IndexSegment} constructed from data on that index. The {@link ResourceManager}
@@ -586,8 +586,8 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
                 -1, // not a move.
                 new byte[] {}, // left separator (first valid key)
                 null, // right separator (no upper bound)
-                /*
-                 * Note: The journal gets listed first since it can
+              /*
+       * Note: The journal gets listed first since it can
                  * continue to receive writes and therefore logically
                  * comes before the index segment in the resource
                  * ordering since any writes on the live index on the
@@ -597,8 +597,8 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
                 new IResourceMetadata[] { // resource metadata[].
                   journal.getResourceMetadata(), segmentMetadata
                 },
-                /*
-                 * Note: using fake data here since the resource manager
+              /*
+       * Note: using fake data here since the resource manager
                  * has not been instantiated yet.
                  */
                 new IndexPartitionCause(
@@ -608,8 +608,8 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
                 //                        ,"bootstrap() "// history
                 ));
 
-        /*
-         * Drop the index that we used to build up the data for the
+      /*
+       * Drop the index that we used to build up the data for the
          * index segment.
          */
         journal.dropIndex(indexMetadata.getName());
@@ -617,8 +617,8 @@ public class TestResourceManagerBootstrap extends AbstractResourceManagerBootstr
         //                // commit changes on the journal.
         //                journal.commit();
 
-        /*
-         * Register a new (and empty) index with the same name but with
+      /*
+       * Register a new (and empty) index with the same name but with
          * an index partition definition that includes the index
          * segment.
          */

@@ -27,8 +27,8 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.aggregate.IAggregate;
 
-/**
- * A rewrite of a {@link GroupByState} in which all {@link IAggregate} expressions have been lifted
+/*
+* A rewrite of a {@link GroupByState} in which all {@link IAggregate} expressions have been lifted
  * out in order to (a) minimize redundancy when computing the aggregates; and (b) simplify the logic
  * required to compute the {@link IAggregate}s.
  *
@@ -37,26 +37,26 @@ import org.embergraph.bop.aggregate.IAggregate;
  */
 public interface IGroupByRewriteState {
 
-  /**
+  /*
    * The set of all unique {@link IAggregate} expressions paired with anonymous variables. Any
    * internal {@link IAggregate} have been lifted out and will appear before any {@link IAggregate}s
    * which use them. The {@link IAggregate} MAY have a complex internal {@link IValueExpression},
    * but it WILL NOT have a nested {@link IAggregate}.
    */
-  public LinkedHashMap<IAggregate<?>, IVariable<?>> getAggExpr();
+  LinkedHashMap<IAggregate<?>, IVariable<?>> getAggExpr();
 
-  /**
+  /*
    * A modified version of the original HAVING expression which has the same semantics (and <code>
    * null</code> iff the original was <code>null</code> or empty). However, the modified select
    * expressions DO NOT contain any {@link IAggregate} functions. All {@link IAggregate} functions
    * have been lifted out into {@link #aggExp}.
    */
-  public IConstraint[] getHaving2();
+  IConstraint[] getHaving2();
 
-  /**
+  /*
    * A modified version of the original SELECT expression which has the same semantics. However, the
    * modified select expressions DO NOT contain any {@link IAggregate} functions. All {@link
    * IAggregate} functions have been lifted out into {@link #aggExp}.
    */
-  public IValueExpression<?>[] getSelect2();
+  IValueExpression<?>[] getSelect2();
 }

@@ -77,8 +77,8 @@ import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.httpd.AbstractHTTPD;
 
-/**
- * Base class for {@link ResourceManager} test suites that can use normal startup and shutdown.
+/*
+* Base class for {@link ResourceManager} test suites that can use normal startup and shutdown.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -207,7 +207,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
     super.tearDown();
   }
 
-  /**
+  /*
    * A minimal implementation of {@link IMetadataService} - only those methods actually used by the
    * {@link ResourceManager} are implemented. This avoids conflicts with the {@link ResourceManager}
    * instance whose behavior we are trying to test.
@@ -398,7 +398,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
     }
   }
 
-  /**
+  /*
    * A minimal implementation of only those methods actually utilized by the {@link ResourceManager}
    * during the unit tests.
    *
@@ -635,7 +635,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
     }
   }
 
-  /**
+  /*
    * Utility method to register an index partition on the {@link #resourceManager}.
    *
    * @throws ExecutionException
@@ -670,7 +670,7 @@ public class AbstractResourceManagerTestCase extends AbstractResourceManagerBoot
     }
   }
 
-  /**
+  /*
    * Test helper.
    *
    * @param expected

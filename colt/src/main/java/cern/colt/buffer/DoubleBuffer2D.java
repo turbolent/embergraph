@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.buffer;
 
 import cern.colt.list.DoubleArrayList;
-/**
- * Fixed sized (non resizable) streaming buffer connected to a target
+/*
+* Fixed sized (non resizable) streaming buffer connected to a target
  * <tt>DoubleBuffer2DConsumer</tt> to which data is automatically flushed upon buffer overflow.
  *
  * @author wolfgang.hoschek@cern.ch
@@ -26,7 +26,7 @@ public class DoubleBuffer2D extends cern.colt.PersistentObject implements Double
   protected DoubleArrayList yList;
   protected int capacity;
   protected int size;
-  /**
+  /*
    * Constructs and returns a new buffer with the given target.
    *
    * @param target the target to flush to.
@@ -42,7 +42,7 @@ public class DoubleBuffer2D extends cern.colt.PersistentObject implements Double
     this.yList = new DoubleArrayList(yElements);
     this.size = 0;
   }
-  /**
+  /*
    * Adds the specified point (x,y) to the receiver.
    *
    * @param x the x-coordinate of the point to add.
@@ -53,7 +53,7 @@ public class DoubleBuffer2D extends cern.colt.PersistentObject implements Double
     this.xElements[this.size] = x;
     this.yElements[this.size++] = y;
   }
-  /**
+  /*
    * Adds all specified points (x,y) to the receiver.
    *
    * @param x the x-coordinates of the points to add.
@@ -64,14 +64,14 @@ public class DoubleBuffer2D extends cern.colt.PersistentObject implements Double
     if (this.size + listSize >= this.capacity) flush();
     this.target.addAllOf(x, y);
   }
-  /**
+  /*
    * Sets the receiver's size to zero. In other words, forgets about any internally buffered
    * elements.
    */
   public void clear() {
     this.size = 0;
   }
-  /**
+  /*
    * Adds all internally buffered points to the receiver's target, then resets the current buffer
    * size to zero.
    */

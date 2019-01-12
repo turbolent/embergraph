@@ -26,8 +26,8 @@ package org.embergraph.btree;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Interface for sequential and random-access cursor-based {@link ITuple} operations on an index or
+/*
+* Interface for sequential and random-access cursor-based {@link ITuple} operations on an index or
  * index partition. The interface extends the standard {@link Iterator} for forward sequential scans
  * and also provides symmetric methods for reverse sequential scans using {@link #hasPrior()} and
  * {@link #prior()}. Random access is supported using {@link #seek(byte[])}. This interface is
@@ -49,7 +49,7 @@ public interface ITupleCursor<E> extends ITupleIterator<E> {
   /** The backing index being traversed by the {@link ITupleCursor}. */
   IIndex getIndex();
 
-  /**
+  /*
    * Positions the cursor on the specified key.
    *
    * <p>If there is a corresponding visitable tuple in the index then it is returned.
@@ -72,7 +72,7 @@ public interface ITupleCursor<E> extends ITupleIterator<E> {
    */
   ITuple<E> seek(byte[] key);
 
-  /**
+  /*
    * Variant that first encodes the key using the object returned by {@link
    * IndexMetadata#getTupleSerializer()} for the backing index.
    *
@@ -84,7 +84,7 @@ public interface ITupleCursor<E> extends ITupleIterator<E> {
    */
   ITuple<E> seek(Object key);
 
-  /**
+  /*
    * Return <code>true</code> if there is another tuple that orders after the current cursor
    * position in the natural order of the index and that lies within the optional constraints
    * key-range on the cursor or on the index partition.
@@ -95,7 +95,7 @@ public interface ITupleCursor<E> extends ITupleIterator<E> {
    */
   boolean hasNext();
 
-  /**
+  /*
    * Position the cursor on the next tuple in the natural key order of the index.
    *
    * <p>Note: in order to maintain standard iterator semantics, this method will visit the {@link
@@ -105,7 +105,7 @@ public interface ITupleCursor<E> extends ITupleIterator<E> {
    */
   ITuple<E> next();
 
-  /**
+  /*
    * Return <code>true</code> if there is another tuple that orders before the current cursor
    * position in the natural order of the index and that lies within the optional key-range
    * constraints on the cursor or on the index partition.
@@ -116,7 +116,7 @@ public interface ITupleCursor<E> extends ITupleIterator<E> {
    */
   boolean hasPrior();
 
-  /**
+  /*
    * Position the cursor on the first visitable tuple ordered less than the current cursor position
    * in the natural key order of the index and return that tuple.
    *
@@ -127,7 +127,7 @@ public interface ITupleCursor<E> extends ITupleIterator<E> {
    */
   ITuple<E> prior();
 
-  /**
+  /*
    * Removes the tuple (if any) from the index corresponding to the current cursor position. The
    * cursor position is NOT changed by this method. After removing the current tuple, {@link
    * ITupleCursor2#tuple()} will return <code>null</code> to indicate that there is no tuple in the

@@ -34,7 +34,7 @@ public abstract class PageStats extends BaseIndexStats {
   public long minNodeBytes, maxNodeBytes;
   /** The min/max bytes per leaf. */
   public long minLeafBytes, maxLeafBytes;
-  /**
+  /*
    * Histogram of the allocation slot sizes based on {@link #SLOT_SIZES}. The indices into this
    * array are correlated with the indices into the {@link #SLOT_SIZES} array. If the allocation is
    * larger than the maximum value in {@link #SLOT_SIZES}, then it is recorded in {@link #blobs}
@@ -45,13 +45,13 @@ public abstract class PageStats extends BaseIndexStats {
   public long blobs;
   /** The #of errors encountered during traversal. */
   public long nerrors;
-  /**
+  /*
    * This map is used to report the histogram of pages based on the actual byte count of the user
    * data in the allocation when the backing slot size is not directly available. Allocations
    */
   public static final int[] SLOT_SIZES =
       new int[] {64, 128, 192, 320, 512, 768, 1024, 2048, 3072, 4096, 8192};
-  /**
+  /*
    * The number of raw record allocations and the byte size of those raw record allocations.
    *
    * <p>TODO We could also use a histogram over this information (raw records sizes).
@@ -63,7 +63,7 @@ public abstract class PageStats extends BaseIndexStats {
     histogram = new long[SLOT_SIZES.length];
   }
 
-  /**
+  /*
    * Track the histogram of allocation sizes.
    *
    * @param allocationSize The size of some allocation.
@@ -146,7 +146,7 @@ public abstract class PageStats extends BaseIndexStats {
     return ((int) (100 * d)) / 100d;
   }
 
-  /**
+  /*
    * Return the header row for a table.
    *
    * @return The header row.
@@ -218,7 +218,7 @@ public abstract class PageStats extends BaseIndexStats {
     return sb.toString();
   }
 
-  /**
+  /*
    * Return a row of data for an index as aggregated by this {@link PageStats} object.
    *
    * @see #getHeaderRow()
@@ -291,7 +291,7 @@ public abstract class PageStats extends BaseIndexStats {
     return sb.toString();
   }
 
-  /**
+  /*
    * This computes the recommended branching factor for the index based on an examination of the
    * current branching factor, an assumed nominal page size of 8k, the min, max, and average node
    * and leaf sizes, and the histogram of the allocation sizes for the index.
@@ -305,7 +305,7 @@ public abstract class PageStats extends BaseIndexStats {
    */
   public abstract int getRecommendedBranchingFactor();
 
-  /**
+  /*
    * Visit a node or leaf, updating the {@link PageStats}.
    *
    * <p>Note: This method MUST be extended to capture at least the initialization of the {@link

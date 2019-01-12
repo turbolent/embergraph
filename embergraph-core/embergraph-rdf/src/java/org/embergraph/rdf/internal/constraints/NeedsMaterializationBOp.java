@@ -26,8 +26,8 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.util.InnerCause;
 
-/**
- * Attempts to run a constraint prior to materialization. Returns <code>false</code> if it completes
+/*
+* Attempts to run a constraint prior to materialization. Returns <code>false</code> if it completes
  * successfully without a {@link NotMaterializedException}, <code>true</code> otherwise.
  */
 public class NeedsMaterializationBOp extends XSDBooleanIVValueExpression {

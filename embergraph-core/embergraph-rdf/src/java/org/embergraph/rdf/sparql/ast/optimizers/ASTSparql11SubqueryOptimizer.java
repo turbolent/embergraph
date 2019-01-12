@@ -47,8 +47,8 @@ import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
-/**
- * Lift {@link SubqueryRoot}s into named subqueries when appropriate. This includes the following
+/*
+* Lift {@link SubqueryRoot}s into named subqueries when appropriate. This includes the following
  * cases:
  *
  * <ul>
@@ -134,12 +134,12 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
 
     for (int i = 0; i < arity; i++) {
 
-      final BOp child = (BOp) group.get(i);
+      final BOp child = group.get(i);
 
       if (child instanceof GraphPatternGroup<?>) {
 
-        /*
-         * Note: Do recursion *before* we do the rewrite so we will
+      /*
+       * Note: Do recursion *before* we do the rewrite so we will
          * rewrite Sub-Sub-Selects.
          *
          * FIXME Unit test for sub-sub-select optimization.
@@ -168,8 +168,8 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
 
       if (subqueryRoot.getQueryType() == QueryType.ASK) {
 
-        /*
-         * FIXME Look at what would be involved in lifting an ASK
+      /*
+       * FIXME Look at what would be involved in lifting an ASK
          * sub-query. There are going to be at least two cases. If there
          * is no join variable, then we always want to lift the ASK
          * sub-query as it is completely independent of the parent
@@ -216,7 +216,7 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Returns true iff the subquery needs to be lifted into a named subquery include.
    *
    * @param subqueryRoot
@@ -273,7 +273,7 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
       final AST2BOpContext context, final StaticAnalysis sa, final QueryRoot queryRoot) {
 
     final Striterator itr2 =
-        new Striterator(BOpUtility.postOrderIterator((BOp) queryRoot.getWhereClause()));
+        new Striterator(BOpUtility.postOrderIterator(queryRoot.getWhereClause()));
 
     itr2.addTypeFilter(SubqueryRoot.class);
 
@@ -299,7 +299,7 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
 
     final NamedSubqueryInclude include = new NamedSubqueryInclude(newName);
 
-    /**
+    /*
      * Set query hints from the parent join group.
      *
      * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/791" > Clean up query hints
@@ -307,7 +307,7 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
      */
     include.setQueryHints((Properties) parent.getProperty(ASTBase.Annotations.QUERY_HINTS));
 
-    /**
+    /*
      * Copy across attached join filters.
      *
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/796" >Filter assigned to
@@ -338,25 +338,25 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
     if ((parent instanceof JoinGroupNode)
         && !((JoinGroupNode) parent).isOptional()
         && !((JoinGroupNode) parent).isMinus()
-        && ((BOp) parent).arity() == 1
+        && parent.arity() == 1
         && parent.getParent() != null
         && !((IGroupNode<?>) parent.getParent() instanceof UnionNode)) {
 
       final IGroupNode<IGroupMemberNode> pp = parent.getParent();
 
       // Replace the sub-select with the include.
-      if (((ASTBase) pp).replaceWith((BOp) parent, include) == 0) throw new AssertionError();
+      if (((ASTBase) pp).replaceWith(parent, include) == 0) throw new AssertionError();
 
     } else {
 
       // Replace the sub-select with the include.
-      if (((ASTBase) parent).replaceWith((BOp) subqueryRoot, include) == 0)
+      if (((ASTBase) parent).replaceWith(subqueryRoot, include) == 0)
         throw new AssertionError();
     }
 
     final NamedSubqueryRoot nsr = new NamedSubqueryRoot(subqueryRoot.getQueryType(), newName);
 
-    /**
+    /*
      * Copy across query hints from the original subquery.
      *
      * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/791" > Clean up query hints

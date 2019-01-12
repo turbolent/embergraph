@@ -1,7 +1,7 @@
 package cern.colt.map;
 
-/**
- * Not of interest for users; only for implementors of hashtables. Used to keep hash table
+/*
+* Not of interest for users; only for implementors of hashtables. Used to keep hash table
  * capacities prime numbers.
  *
  * <p>Choosing prime numbers as hash table capacities is a good idea to keep them working fast,
@@ -20,7 +20,7 @@ public class PrimeFinder extends Object {
   /** The largest prime this class can generate; currently equal to <tt>Integer.MAX_VALUE</tt>. */
   public static final int largestPrime = Integer.MAX_VALUE; // yes, it is prime.
 
-  /**
+  /*
    * The prime number list consists of 11 chunks. Each chunk contains prime numbers. A chunk starts
    * with a prime P1. The next element is a prime P2. P2 is the smallest prime for which holds: P2
    * >= 2*P1. The next element is P3, for which the same holds with respect to P2, and so on.
@@ -339,17 +339,17 @@ public class PrimeFinder extends Object {
 
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected PrimeFinder() {}
-  /**
+  /*
    * Tests correctness. Try from=1000, to=10000 from=200, to=1000 from=16, to=1000 from=1000,
    * to=Integer.MAX_VALUE
    */
-  protected static void main(String args[]) {
+  protected static void main(String[] args) {
     int from = Integer.parseInt(args[0]);
     int to = Integer.parseInt(args[1]);
 
     statistics(from, to);
   }
-  /**
+  /*
    * Returns a prime number which is <code>&gt;= desiredCapacity</code> and very close to <code>
    * desiredCapacity</code> (within 11% if <code>desiredCapacity &gt;= 1000</code>).
    *

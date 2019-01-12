@@ -26,8 +26,8 @@ import java.util.Random;
 import java.util.Set;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for bloom filter functionality.
+/*
+* Test suite for bloom filter functionality.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -86,7 +86,7 @@ public class TestBloomFilter extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test that a bloom filter constructed for a given #of keys and maximum error rate respects that
    * maximum error rate in practice.
    */
@@ -221,7 +221,7 @@ public class TestBloomFilter extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * This is not really a unit test. Instead it plots a curve of the space requirements of the
    * filter (bitLength) against the target error rate and filter capacity.
    *
@@ -270,7 +270,7 @@ public class TestBloomFilter extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Generates a table showing the #of index entries that would produce a given error rate for a
    * filter with a specific configuration (target error rate of <code>.02</code> at 1 million index
    * entries). The code uses the given filter and runs through error rates between <code>.02</code>
@@ -327,7 +327,7 @@ public class TestBloomFilter extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test suite for (de-)serialization of the {@link BloomFilter}.
    *
    * @todo write test (this gets tested by the index segment build test suite where the bloom filter

@@ -23,8 +23,8 @@ package it.unimi.dsi.util;
 
 import java.util.Arrays;
 
-/**
- * A circular char buffer, that can be used to implement a sliding window over a text. The buffer
+/*
+* A circular char buffer, that can be used to implement a sliding window over a text. The buffer
  * has a maximum size, fixed at construction time. As new characters are {@linkplain #add(char[],
  * int, int) added}, the oldest ones are discarded if necessary. At all times, the number of
  * available characters present in the buffer is {@link #size()} (it will never be larger than the
@@ -38,14 +38,14 @@ public class CircularCharArrayBuffer {
   private final char[] buffer;
   /** The number of character available in the buffer. */
   private int len;
-  /**
+  /*
    * The index of the first character available in the buffer: hence the available characters are
    * <code>buffer[start]</code>, &hellip;, <code>buffer[(start+len+buffer.length-1)%buffer.length]
    * </code>
    */
   private int start;
 
-  /**
+  /*
    * Creates a new circular buffer.
    *
    * @param maxChar the buffer size.
@@ -55,7 +55,7 @@ public class CircularCharArrayBuffer {
     if (DEBUG) Arrays.fill(buffer, ' ');
   }
 
-  /**
+  /*
    * Adds the characters <code>b[offset]</code>, &hellip; <code>b[offset+length-1]</code> to the
    * buffer (possibly just the last ones, and possibly discarding the oldest characters in the
    * buffer).
@@ -88,7 +88,7 @@ public class CircularCharArrayBuffer {
     len = Math.min(buffer.length, len + toBeCopied);
   }
 
-  /**
+  /*
    * Copies the content of the buffer to an array.
    *
    * @param b the buffer where the content is to be copied.
@@ -103,7 +103,7 @@ public class CircularCharArrayBuffer {
     if (toEnd < t) System.arraycopy(buffer, 0, b, offset + toEnd, t - toEnd);
   }
 
-  /**
+  /*
    * Copies the content of the buffer to an array.
    *
    * @param b the buffer where the content is to be copied.
@@ -112,7 +112,7 @@ public class CircularCharArrayBuffer {
     toCharArray(b, 0, b.length);
   }
 
-  /**
+  /*
    * Returns a new array containing a copy of the buffer content.
    *
    * @return a copy of the buffer content.
@@ -123,7 +123,7 @@ public class CircularCharArrayBuffer {
     return b;
   }
 
-  /**
+  /*
    * The number of characters present in the buffer.
    *
    * @return the number of characters present in the buffer.

@@ -30,8 +30,8 @@ import org.embergraph.btree.raba.MutableValueBuffer;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Implementation maintains Java objects corresponding to the persistent data and defines methods
+/*
+* Implementation maintains Java objects corresponding to the persistent data and defines methods
  * for a variety of mutations on the {@link ILeafData} record which operate by direct manipulation
  * of the Java objects.
  *
@@ -44,7 +44,7 @@ import org.embergraph.rawstore.IRawStore;
  */
 public class MutableLeafData implements ILeafData {
 
-  /**
+  /*
    * A representation of each key in the node or leaf. Each key is a variable length unsigned
    * byte[]. There are various implementations of {@link IRaba} that are optimized for mutable and
    * immutable keys.
@@ -63,7 +63,7 @@ public class MutableLeafData implements ILeafData {
    */
   final MutableKeyBuffer keys;
 
-  /**
+  /*
    * The values of the tree. There is one value per key for a leaf.
    *
    * <p>This array is dimensioned to one more than the maximum capacity so that the value
@@ -72,7 +72,7 @@ public class MutableLeafData implements ILeafData {
    */
   final MutableValueBuffer vals;
 
-  /**
+  /*
    * The deletion markers IFF isolation is supported by the {@link BTree}.
    *
    * @todo {@link BitVector}? The code in {@link Leaf} which makes changes to this array would have
@@ -83,7 +83,7 @@ public class MutableLeafData implements ILeafData {
   /** The version timestamps IFF isolation is supported by the {@link BTree}. */
   final long[] versionTimestamps;
 
-  /**
+  /*
    * The minimum version timestamp.
    *
    * @todo these fields at 16 bytes to each {@link MutableLeafData} object even when we do not use
@@ -94,7 +94,7 @@ public class MutableLeafData implements ILeafData {
 
   long maximumVersionTimestamp;
 
-  /**
+  /*
    * Bit markers indicating whether the value associated with the tuple is a raw record or an inline
    * byte[] stored within {@link #getValues() values raba}.
    *
@@ -103,7 +103,7 @@ public class MutableLeafData implements ILeafData {
    */
   final boolean[] rawRecords;
 
-  /**
+  /*
    * Create an empty data record with internal arrays dimensioned for the specified branching
    * factor.
    *
@@ -133,7 +133,7 @@ public class MutableLeafData implements ILeafData {
     rawRecords = (hasRawRecords ? new boolean[branchingFactor + 1] : null);
   }
 
-  /**
+  /*
    * Copy ctor.
    *
    * @param branchingFactor The branching factor for the owning B+Tree.
@@ -188,7 +188,7 @@ public class MutableLeafData implements ILeafData {
     }
   }
 
-  /**
+  /*
    * Ctor based on just "data" -- used by unit tests.
    *
    * @param keys A representation of the defined keys in the leaf.
@@ -208,15 +208,9 @@ public class MutableLeafData implements ILeafData {
     assert keys != null;
     assert values != null;
     assert keys.capacity() == values.capacity();
-    if (versionTimestamps != null) {
-      assert versionTimestamps.length == keys.capacity();
-    }
-    if (deleteMarkers != null) {
-      assert deleteMarkers.length == keys.capacity();
-    }
-    if (rawRecords != null) {
-      assert rawRecords.length == keys.capacity();
-    }
+    assert versionTimestamps == null || versionTimestamps.length == keys.capacity();
+    assert deleteMarkers == null || deleteMarkers.length == keys.capacity();
+    assert rawRecords == null || rawRecords.length == keys.capacity();
 
     this.keys = keys;
     this.vals = values;
@@ -227,7 +221,7 @@ public class MutableLeafData implements ILeafData {
     if (versionTimestamps != null) recalcMinMaxVersionTimestamp();
   }
 
-  /**
+  /*
    * Range check a tuple index.
    *
    * @param index The index of a tuple in [0:nkeys].
@@ -321,8 +315,8 @@ public class MutableLeafData implements ILeafData {
     return true;
   }
 
-  //    /**
-  //     * For a leaf the #of entries is always the #of keys.
+  //    /*
+//     * For a leaf the #of entries is always the #of keys.
   //     */
   //    final public int getSpannedTupleCount() {
   //
@@ -355,7 +349,7 @@ public class MutableLeafData implements ILeafData {
     return keys.size();
   }
 
-  /**
+  /*
    * No - this class does not support double-linked leaves (only the {@link IndexSegment} actually
    * uses double-linked leaves).
    */
@@ -374,7 +368,7 @@ public class MutableLeafData implements ILeafData {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Recalculate the min/max version timestamp on the leaf. The caller is responsible for
    * propagating the new min/max to the ancestors of the leaf.
    *

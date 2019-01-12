@@ -19,8 +19,8 @@ package org.embergraph.ha.msg;
 
 import java.util.UUID;
 
-/**
- * Message used to request information about the earliest commit point that is pinned on a follower.
+/*
+* Message used to request information about the earliest commit point that is pinned on a follower.
  * This is used by the leader to make a decision about the new release time for the replication
  * cluster. The message causes the follower to send an {@link IHANotifyReleaseTimeRequest} back to
  * the leader. That message is sent from within the thread on the follower that is handling the RMI
@@ -32,24 +32,24 @@ import java.util.UUID;
 public interface IHAGatherReleaseTimeRequest extends IHAMessage {
 
   /** The token for which this request is valid. */
-  public long token();
+  long token();
 
-  /**
+  /*
    * A timestamp on the leader at the start of the protocol used to agree on the new release time
    * (this can be the commitTime that will be assigned by the leader to the new commit point). This
    * is used to detect problems where the clocks are not synchronized on the services.
    */
-  public long getTimestampOnLeader();
+  long getTimestampOnLeader();
 
-  /**
+  /*
    * The UUID of the leader. This may be used to discover the service that is (or was) the leader
    * even if the token has been invalidated.
    */
-  public UUID getLeaderId();
+  UUID getLeaderId();
 
   /** The commit counter that will be assigned to the new commit point. */
-  public long getNewCommitCounter();
+  long getNewCommitCounter();
 
   /** The commit time that will be assigned to the new commit point. */
-  public long getNewCommitTime();
+  long getNewCommitTime();
 }

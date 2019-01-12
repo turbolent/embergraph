@@ -43,8 +43,8 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.BindingImpl;
 
-/**
- * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
+/*
+* @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
  */
 public class TestBOps extends ProxyEmbergraphSailTestCase {
@@ -80,7 +80,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {
@@ -106,8 +106,8 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
         cxn.add(bryan, likes, rdf);
         cxn.add(bryan, RDFS.LABEL, l2);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -146,18 +146,14 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           final Collection<BindingSet> solution = new LinkedList<BindingSet>();
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", mike),
-                    new BindingImpl("likes", rdf),
-                    new BindingImpl("label", l1)
-                  }));
+                  new BindingImpl("s", mike),
+                  new BindingImpl("likes", rdf),
+                  new BindingImpl("label", l1)));
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", bryan),
-                    new BindingImpl("likes", rdf),
-                    new BindingImpl("label", l2)
-                  }));
+                  new BindingImpl("s", bryan),
+                  new BindingImpl("likes", rdf),
+                  new BindingImpl("label", l2)));
 
           compare(result, solution);
         }
@@ -176,7 +172,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {
@@ -208,8 +204,8 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
         cxn.add(jane, age, age2);
         cxn.add(jane, IQ, IQ2);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -250,12 +246,10 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           final Collection<BindingSet> solution = new LinkedList<BindingSet>();
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", jill),
-                    new BindingImpl("age", age1),
-                    new BindingImpl("iq", IQ1),
-                    new BindingImpl("label", l1)
-                  }));
+                  new BindingImpl("s", jill),
+                  new BindingImpl("age", age1),
+                  new BindingImpl("iq", IQ1),
+                  new BindingImpl("label", l1)));
 
           compare(result, solution);
         }
@@ -274,7 +268,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {
@@ -300,8 +294,8 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
         cxn.add(bryan, likes, rdf);
         //            cxn.add(bryan, RDFS.LABEL, l2);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -340,17 +334,14 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           final Collection<BindingSet> solution = new LinkedList<BindingSet>();
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", mike),
-                    new BindingImpl("likes", rdf),
-                    new BindingImpl("label", l1)
-                  }));
+                  new BindingImpl("s", mike),
+                  new BindingImpl("likes", rdf),
+                  new BindingImpl("label", l1)));
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", bryan), new BindingImpl("likes", rdf),
-                    //                    new BindingImpl("label", l2)
-                  }));
+                  new BindingImpl("s", bryan), new BindingImpl("likes", rdf)
+                  //                    new BindingImpl("label", l2)
+              ));
 
           compare(result, solution);
         }
@@ -369,7 +360,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {
@@ -398,8 +389,8 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
         cxn.add(martyn, RDF.TYPE, person);
         cxn.add(martyn, p, l3);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */
@@ -438,18 +429,14 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
           final Collection<BindingSet> solution = new LinkedList<BindingSet>();
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", mike),
-                    new BindingImpl("p", RDFS.LABEL),
-                    new BindingImpl("label", l1)
-                  }));
+                  new BindingImpl("s", mike),
+                  new BindingImpl("p", RDFS.LABEL),
+                  new BindingImpl("label", l1)));
           solution.add(
               createBindingSet(
-                  new Binding[] {
-                    new BindingImpl("s", bryan),
-                    new BindingImpl("p", RDFS.COMMENT),
-                    new BindingImpl("label", l2)
-                  }));
+                  new BindingImpl("s", bryan),
+                  new BindingImpl("p", RDFS.COMMENT),
+                  new BindingImpl("label", l2)));
 
           compare(result, solution);
         }
@@ -468,7 +455,7 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          (EmbergraphSailRepositoryConnection) repo.getConnection();
+          repo.getConnection();
       cxn.setAutoCommit(false);
 
       try {
@@ -507,8 +494,8 @@ public class TestBOps extends ProxyEmbergraphSailTestCase {
         cxn.add(language, plain, foobarPlain);
         cxn.add(language, string, foobarPlain);
 
-        /*
-         * Note: The either flush() or commit() is required to flush the
+      /*
+       * Note: The either flush() or commit() is required to flush the
          * statement buffers to the database before executing any operations
          * that go around the sail.
          */

@@ -41,8 +41,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.service.fts.FTS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTFulltextSearchOptimizer}.
+/*
+* Test suite for {@link ASTFulltextSearchOptimizer}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -105,7 +105,7 @@ public class TestASTFulltextSearchOptimizer extends AbstractASTEvaluationTestCas
 
     final IBindingSet[] bsets = new IBindingSet[] {new ListBindingSet()};
 
-    /**
+    /*
      * The source AST.
      *
      * <pre>
@@ -201,7 +201,7 @@ public class TestASTFulltextSearchOptimizer extends AbstractASTEvaluationTestCas
               Scope.DEFAULT_CONTEXTS));
     }
 
-    /**
+    /*
      * The expected AST after the rewrite
      *
      * <pre>

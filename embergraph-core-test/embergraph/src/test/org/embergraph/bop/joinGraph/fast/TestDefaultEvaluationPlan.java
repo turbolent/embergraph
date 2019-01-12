@@ -66,8 +66,8 @@ import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * Test harness for {@link DefaultEvaluationPlan2}.
+/*
+* Test harness for {@link DefaultEvaluationPlan2}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -82,7 +82,7 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Factory fixture for {@link IEvaluationPlan}s.
    *
    * @param joinNexus Per {@link IEvaluationPlanFactory}
@@ -93,7 +93,7 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
     //        return new DefaultEvaluationPlan(joinNexus,rule);
 
     return new DefaultEvaluationPlan2(joinNexus, rule);
-  };
+  }
 
   /** Based on LUBM query#8 with the U1 dataset. */
   public void test_lubmQuery8() {
@@ -203,8 +203,8 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
   //
   //    }
 
-  //    /**
-  //     * FIXME test all of these rules with some hard coded range counts based on
+  //    /*
+//     * FIXME test all of these rules with some hard coded range counts based on
   //     * some fake data and make sure that we are producing good join orderings in
   //     * each case. Note that some data sets will not have anything for some of
   //     * these rules. In those cases, we should verify that the plan detects that
@@ -338,7 +338,7 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Mock object.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -360,7 +360,7 @@ public class TestDefaultEvaluationPlan extends TestCase2 {
     }
 
     public boolean bind(
-        IPredicate<?> pred, IConstraint constraint[], Object e, IBindingSet bindings) {
+        IPredicate<?> pred, IConstraint[] constraint, Object e, IBindingSet bindings) {
 
       return false;
     }

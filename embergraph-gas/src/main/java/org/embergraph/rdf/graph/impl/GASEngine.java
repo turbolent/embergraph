@@ -36,8 +36,8 @@ import org.embergraph.rdf.graph.impl.frontier.StaticFrontier2;
 import org.embergraph.rdf.graph.impl.scheduler.CHMScheduler;
 import org.openrdf.model.Value;
 
-/**
- * {@link IGASEngine} for dynamic activation of vertices. This implementation maintains a frontier
+/*
+* {@link IGASEngine} for dynamic activation of vertices. This implementation maintains a frontier
  * and lazily initializes the vertex state when the vertex is visited for the first time. This is
  * appropriate for algorithms, such as BFS, that use a dynamic frontier.
  *
@@ -83,7 +83,7 @@ public abstract class GASEngine implements IGASEngine {
     return nthreads;
   }
 
-  /**
+  /*
    * @param indexManager The index manager.
    * @param nthreads The number of threads to use for the SCATTER and GATHER phases.
    */
@@ -123,7 +123,7 @@ public abstract class GASEngine implements IGASEngine {
     }
   }
 
-  /**
+  /*
    * Factory for the parallelism strategy that is used to map a task across the frontier. The
    * returned {@link Callable} should be executed in the caller's thread. The {@link Callable} will
    * schedule tasks that consume the frontier. A variety of frontier strategies are implemented.
@@ -141,7 +141,7 @@ public abstract class GASEngine implements IGASEngine {
     return new ParallelFrontierStrategy(taskFactory, f);
   }
 
-  /**
+  /*
    * Abstract base class for a strategy that will map a task across the frontier.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -156,7 +156,7 @@ public abstract class GASEngine implements IGASEngine {
     }
   }
 
-  /**
+  /*
    * Stategy uses the callers thread to map the task across the frontier.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -188,7 +188,7 @@ public abstract class GASEngine implements IGASEngine {
     }
   }
 
-  /**
+  /*
    * Stategy uses the callers thread to map the task across the frontier.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -197,7 +197,7 @@ public abstract class GASEngine implements IGASEngine {
 
     private final IStaticFrontier f;
 
-    /**
+    /*
      * Used to eliminate duplicates from the frontier at the time that we schedule the tasks. This
      * shifts the duplicate elimination burden from the period between the rounds into the execution
      * of the round. Since we schedule the tasks that consume the frontier from a single thread, we
@@ -299,7 +299,7 @@ public abstract class GASEngine implements IGASEngine {
     }
   }
 
-  /**
+  /*
    * If there is an {@link ExecutorService} for the {@link GASEngine}, then return it (nthreads GT
    * 1).
    *
@@ -324,7 +324,7 @@ public abstract class GASEngine implements IGASEngine {
     return schedulerClassRef.get();
   }
 
-  /**
+  /*
    * Return an {@link IStaticFrontier} - this is the object that models the frontier that is
    * consumed during a given round of evaluation.
    *
@@ -341,9 +341,9 @@ public abstract class GASEngine implements IGASEngine {
 
     try {
 
-      final Constructor<IGASSchedulerImpl> ctor = cls.getConstructor(new Class[] {GASEngine.class});
+      final Constructor<IGASSchedulerImpl> ctor = cls.getConstructor(GASEngine.class);
 
-      final IGASSchedulerImpl sch = ctor.newInstance(new Object[] {this});
+      final IGASSchedulerImpl sch = ctor.newInstance(this);
 
       return sch;
 

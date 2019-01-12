@@ -43,8 +43,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 import org.openrdf.model.Value;
 
-/**
- * Encapsulates key and value formation for the TERMS index. The keys are {@link BlobIV}s. The
+/*
+* Encapsulates key and value formation for the TERMS index. The keys are {@link BlobIV}s. The
  * values are {@link EmbergraphValue}s serialized using the {@link EmbergraphValueSerializer}. Large
  * values are converted to raw records and must be materialized before they can be deserialized.
  *
@@ -59,7 +59,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphV
   /** The namespace of the owning {@link LexiconRelation}. */
   private String namespace;
 
-  /**
+  /*
    * A (de-)serialized backed by a {@link EmbergraphValueFactoryImpl} for the {@link #namespace} of
    * the owning {@link LexiconRelation}.
    */
@@ -67,7 +67,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphV
 
   private static final transient int INITIAL_CAPACITY = 512;
 
-  /**
+  /*
    * Used to serialize RDF {@link Value}s.
    *
    * <p>Note: While this object is not thread-safe, the mutable B+Tree is restricted to a single
@@ -75,7 +75,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphV
    */
   private final transient DataOutputBuffer buf = new DataOutputBuffer(INITIAL_CAPACITY);
 
-  /**
+  /*
    * Used to serialize RDF {@link Value}s.
    *
    * <p>Note: While this object is not thread-safe, the mutable B+Tree is restricted to a single
@@ -91,7 +91,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphV
     super();
   }
 
-  /**
+  /*
    * @param keyBuilderFactory A factory that does not support unicode and has an initialCapacity of
    *     {@value Bytes#SIZEOF_LONG}.
    */
@@ -110,7 +110,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphV
     this.valueSer = this.valueFactory.getValueSerializer();
   }
 
-  /**
+  /*
    * Decodes the key to a {@link BlobIV}.
    *
    * @param key The key for an entry in the TERMS index.
@@ -124,7 +124,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphV
     return IVUtility.decode(key);
   }
 
-  /**
+  /*
    * Return the unsigned byte[] key for a {@link BlobIV}.
    *
    * @param obj The {@link BlobIV}.
@@ -137,7 +137,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphV
     return iv.encode(getKeyBuilder().reset()).getKey();
   }
 
-  /**
+  /*
    * Return the byte[] value, which is the serialization of an RDF {@link Value} using the {@link
    * EmbergraphValueSerializer}.
    *
@@ -149,7 +149,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphV
     return valueSer.serialize(obj, buf.reset(), tbuf);
   }
 
-  /**
+  /*
    * De-serializes the {@link ITuple} as a {@link EmbergraphValue}, including the term identifier
    * extracted from the unsigned byte[] key, and sets the appropriate {@link
    * EmbergraphValueFactoryImpl} reference on that object.
@@ -173,7 +173,7 @@ public class BlobsTupleSerializer extends DefaultTupleSerializer<IV, EmbergraphV
     return tmp;
   }
 
-  /**
+  /*
    *
    *
    * <pre>

@@ -16,7 +16,7 @@ public abstract class AbstractEmbergraphRemoteQuery extends AbstractQuery {
     this.baseURI = baseURI;
   }
 
-  /**
+  /*
    * @see org.openrdf.http.client.HTTPClient#getQueryMethodParameters(QueryLanguage, String, String,
    *     Dataset, boolean, int, Binding...)
    */

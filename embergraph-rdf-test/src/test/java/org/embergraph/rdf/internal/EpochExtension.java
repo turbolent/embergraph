@@ -33,8 +33,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * This implementation of {@link IExtension} implements inlining for literals that represent time in
+/*
+* This implementation of {@link IExtension} implements inlining for literals that represent time in
  * milliseconds since the epoch. The milliseconds are encoded as an inline long.
  */
 public class EpochExtension<V extends EmbergraphValue> implements IExtension<V> {
@@ -56,7 +56,7 @@ public class EpochExtension<V extends EmbergraphValue> implements IExtension<V> 
     return datatypes;
   }
 
-  /**
+  /*
    * Attempts to convert the supplied value into an epoch representation. Tests for a literal value
    * with the correct datatype that can be converted to a positive long integer. Encodes the long in
    * a delegate {@link XSDLongIV}, and returns an {@link LiteralExtensionIV} to wrap the native
@@ -82,7 +82,7 @@ public class EpochExtension<V extends EmbergraphValue> implements IExtension<V> 
     return new LiteralExtensionIV(delegate, epoch.getIV());
   }
 
-  /**
+  /*
    * Use the string value of the {@link LiteralExtensionIV} (which defers to the string value of the
    * native type) to create a literal with the epoch datatype.
    */

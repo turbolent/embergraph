@@ -22,8 +22,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.io;
 
-/**
- * Interface for higher level data objects providing access to their backing {@link
+/*
+* Interface for higher level data objects providing access to their backing {@link
  * IFixedDataRecord}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -31,7 +31,7 @@ package org.embergraph.io;
  */
 public interface IDataRecordAccess {
 
-  /**
+  /*
    * The coded (aka compressed) data.
    *
    * @throws UnsupportedOperationException unless {@link #isCoded()} returns <code>true</code>.

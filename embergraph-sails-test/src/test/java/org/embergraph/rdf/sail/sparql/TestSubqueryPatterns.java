@@ -51,8 +51,8 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for translating queries which use subquery constructions, including {@link
+/*
+* Test suite for translating queries which use subquery constructions, including {@link
  * SubqueryRoot}, {@link NamedSubqueryRoot} and {@link NamedSubqueryInclude} and {@link ExistsNode}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -68,7 +68,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     super(name);
   }
 
-  /**
+  /*
    * Unit test for simple subquery without anything else in the outer join group.
    *
    * <pre>
@@ -128,7 +128,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple optional subquery without anything else in the outer join group.
    *
    * <pre>
@@ -192,7 +192,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple subquery joined with a triple pattern in the outer join group.
    *
    * <pre>
@@ -261,7 +261,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -322,7 +322,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple subquery joined with a bind.
    *
    * <pre>
@@ -394,7 +394,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for sub-SubSelect. There is a top-level query. It uses a subquery. The subquery uses
    * a subquery. The purpose of this is to test for the correct nesting of the generated AST.
    */
@@ -487,7 +487,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for EXISTS.
    *
    * <pre>
@@ -561,7 +561,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for NOT EXISTS.
    *
    * <pre>
@@ -635,7 +635,7 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in the top-level query.
    * For example:
    *
@@ -737,8 +737,8 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
     assertSameAST(sparql, expected, actual);
   }
 
-  //    /**
-  //     * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in
+  //    /*
+//     * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in
   //     * the top-level query. This example tests the use of the JOIN ON query
   //     * hint. For example:
   //     *
@@ -846,8 +846,8 @@ public class TestSubqueryPatterns extends AbstractEmbergraphExprBuilderTestCase 
   //
   //    }
   //
-  //    /**
-  //     * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in
+  //    /*
+//     * Unit test for WITH {subquery} AS "name" and INCLUDE. The WITH must be in
   //     * the top-level query. This example tests the use of the JOIN ON query
   //     * hint, but explicitly specifies an empty join variable list. For example:
   //     *

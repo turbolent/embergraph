@@ -12,8 +12,8 @@ import org.embergraph.btree.KeyOutOfRangeException;
 import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Used to write logic that advances an {@link ITupleCursor} to another key after it visits some
+/*
+* Used to write logic that advances an {@link ITupleCursor} to another key after it visits some
  * element. For example, the "distinct term scan" for the RDF DB is written in this manner.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,7 +33,7 @@ public abstract class Advancer<E> extends FilterBase implements ITupleFilter<E> 
 
   protected Advancer() {}
 
-  /**
+  /*
    * @param src The source iterator (MUST be an {@link ITupleCursor}).
    * @return
    */
@@ -46,7 +46,7 @@ public abstract class Advancer<E> extends FilterBase implements ITupleFilter<E> 
     return new Advancer.Advancerator<E>(this.src, context, this);
   }
 
-  /**
+  /*
    * Hook for one-time initialization invoked before the advancer visits the first tuple. The
    * default implementation simply returns <code>true</code>.
    *
@@ -57,7 +57,7 @@ public abstract class Advancer<E> extends FilterBase implements ITupleFilter<E> 
     return true;
   }
 
-  /**
+  /*
    * Offers an opportunity to advance the source {@link ITupleCursor} to a
    * new key using {@link ITupleCursor#seek(byte[]).
    *
@@ -66,7 +66,7 @@ public abstract class Advancer<E> extends FilterBase implements ITupleFilter<E> 
    */
   protected abstract void advance(ITuple<E> tuple);
 
-  /**
+  /*
    * Implements the {@link Advancer} semantics as a layer iterator.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -83,14 +83,14 @@ public abstract class Advancer<E> extends FilterBase implements ITupleFilter<E> 
     /** Used to invoke {@link Advancer#init()}. */
     private boolean firstTime = true;
 
-    /**
+    /*
      * Set true iff we exceed the bounds on the {@link ITupleCursor}. For example, if we run off the
      * end of an index partition. This is used to simulate the exhaustion of the cursor when you
      * advance past its addressable range.
      */
     private boolean exhausted = false;
 
-    /**
+    /*
      * Used to retain a copy of the last key visited so that {@link #remove()} can issue the request
      * to remove that key from the backing {@link IIndex}. This is necessary since the underlying
      * {@link ITupleCursor} may otherwise have been "advanced" to an arbitrary tuple.
@@ -139,8 +139,8 @@ public abstract class Advancer<E> extends FilterBase implements ITupleFilter<E> 
 
         } catch (KeyOutOfRangeException ex) {
 
-          /*
-           * We have advanced beyond a key range constraint imposed either
+        /*
+       * We have advanced beyond a key range constraint imposed either
            * by the ITupleCursor or by an index partition. In either case
            * we treat the source iterator as if it was exhausted.
            *

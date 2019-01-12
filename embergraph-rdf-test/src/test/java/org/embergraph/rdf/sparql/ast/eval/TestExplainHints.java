@@ -32,8 +32,8 @@ import org.embergraph.rdf.sparql.ast.explainhints.IExplainHint;
 import org.embergraph.rdf.sparql.ast.explainhints.JoinOrderExplainHint;
 import org.embergraph.rdf.sparql.ast.explainhints.UnsatisfiableMinusExplainHint;
 
-/**
- * Test suite for EXPLAIN hints.
+/*
+* Test suite for EXPLAIN hints.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Assert that the explain hint is attached for FILTER scope issues.
    *
    * <p>SELECT ?s ?type WHERE { BIND(<http://example.com/Person> AS ?type) { ?s a ?o
@@ -69,7 +69,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
         container.getOptimizedAST(), BottomUpSemanticsExplainHint.class);
   }
 
-  /**
+  /*
    * Assert that the explain hint is attached for FILTER scope issues.
    *
    * <p>SELECT ?s ?type WHERE { BIND(<http://example.com/Person> AS ?type) { ?s a ?o
@@ -92,7 +92,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
         container.getOptimizedAST(), BottomUpSemanticsExplainHint.class);
   }
 
-  /**
+  /*
    * Assert that the explain hint is attached for BIND scope issues.
    *
    * <p>SELECT ?s ?type WHERE { BIND("http://example.com/" AS ?typeBase) { BIND(?typeBase AS ?type)
@@ -115,7 +115,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
         container.getOptimizedAST(), BottomUpSemanticsExplainHint.class);
   }
 
-  /**
+  /*
    * Assert that the explain hint is attached for BIND scope issues.
    *
    * <p>SELECT ?s ?type WHERE { BIND("http://example.com/" AS ?typeBase) {
@@ -139,7 +139,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
         container.getOptimizedAST(), BottomUpSemanticsExplainHint.class);
   }
 
-  /**
+  /*
    * Assert that the explain hint is attached for VALUES scope issues.
    *
    * <p>SELECT ?s ?type WHERE { { BIND(URI(CONCAT(?typeBase,"Person")) AS ?type) ?s a ?o
@@ -163,7 +163,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
         container.getOptimizedAST(), BottomUpSemanticsExplainHint.class);
   }
 
-  /**
+  /*
    * Assert that the explain hint is not attached, using an example with BIND where no bottom-up
    * semantics issues arise.
    *
@@ -189,7 +189,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
     assertFalse(explainHintAnnotatedBOps.hasNext());
   }
 
-  /**
+  /*
    * Assert that the explain hint is attached for non-reorderable join groups.
    *
    * <p>SELECT * WHERE { OPTIONAL { ?person <http://example.com/image> ?image } . ?person rdf:type
@@ -212,7 +212,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
         container.getOptimizedAST(), JoinOrderExplainHint.class);
   }
 
-  /**
+  /*
    * Assert that the explain hint is not attached for reorderable join groups.
    *
    * <p>SELECT * WHERE { ?person rdf:type <http://example.com/Person> OPTIONAL { ?person
@@ -237,7 +237,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
     assertFalse(explainHintAnnotatedBOps.hasNext());
   }
 
-  /**
+  /*
    * Assert that the explain hint is attached for unsatisfiable MINUS:
    *
    * <p>SELECT * WHERE { ?s ?p ?o MINUS { ?a ?b ?c } }
@@ -259,7 +259,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
         container.getOptimizedAST(), UnsatisfiableMinusExplainHint.class);
   }
 
-  /**
+  /*
    * Assert that the explain hint is not attached for satisfiable MINUS:
    *
    * <p>SELECT * WHERE { ?s ?p ?o MINUS { ?s ?b ?c } }
@@ -283,7 +283,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
     assertFalse(explainHintAnnotatedBOps.hasNext());
   }
 
-  /**
+  /*
    * Explain hint rendering & bottom up rewriting broken for subqueries, see
    * https://jira.blazegraph.com/browse/BLZG-1463.
    *
@@ -305,7 +305,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
     assertTrue(explainHintAnnotatedBOps.hasNext());
   }
 
-  /**
+  /*
    * Explain hint rendering & bottom up rewriting broken for subqueries, see
    * https://jira.blazegraph.com/browse/BLZG-1463.
    *
@@ -327,7 +327,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
     assertTrue(explainHintAnnotatedBOps.hasNext());
   }
 
-  /**
+  /*
    * Explain hint rendering & bottom up rewriting broken for subqueries, see
    * https://jira.blazegraph.com/browse/BLZG-1463.
    *
@@ -349,7 +349,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
     assertFalse(explainHintAnnotatedBOps.hasNext());
   }
 
-  /**
+  /*
    * Variant of testBottomUpSemanticsExplainHint06, motivated by the fix made in
    * https://jira.blazegraph.com/browse/BLZG-1463: the idea is to test a non-complex BIND expression
    * (not containing CONCAT etc.) and whether this is reported correctly.
@@ -372,7 +372,7 @@ public class TestExplainHints extends AbstractDataDrivenSPARQLTestCase {
     assertTrue(explainHintAnnotatedBOps.hasNext());
   }
 
-  /**
+  /*
    * Asserts that the given {@link QueryRoot} carries exactly one explain hint of the specified
    * type.
    *

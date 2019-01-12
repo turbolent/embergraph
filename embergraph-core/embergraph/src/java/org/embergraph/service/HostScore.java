@@ -2,8 +2,8 @@ package org.embergraph.service;
 
 import org.embergraph.service.LoadBalancerService.UpdateTask;
 
-/**
- * Per-host metadata and a score for that host which gets updated periodically by {@link
+/*
+* Per-host metadata and a score for that host which gets updated periodically by {@link
  * UpdateTask}. {@link HostScore}s are a <em>resource utilization</em> measure. They are higher for
  * a host which is more highly utilized. There are several ways to look at the score, including the
  * {@link #rawScore}, the {@link #rank}, and the {@link #drank normalized double-precision rank}.
@@ -30,7 +30,7 @@ public class HostScore implements Comparable<HostScore> {
   /** The normalized double precision rank in [0.0:1.0]. */
   public double drank = -1d;
 
-  /**
+  /*
    * Constructor variant used when you do not have performance counters for the host and could not
    * compute its rawScore.
    *
@@ -41,7 +41,7 @@ public class HostScore implements Comparable<HostScore> {
     this(hostname, 0d);
   }
 
-  /**
+  /*
    * Constructor variant used when you have computed the rawStore.
    *
    * @param hostname
@@ -73,7 +73,7 @@ public class HostScore implements Comparable<HostScore> {
         + "}";
   }
 
-  /**
+  /*
    * Places elements into order by ascending {@link #rawScore} (aka increasing utilization). The
    * {@link #hostname} is used to break any ties.
    */
@@ -91,7 +91,7 @@ public class HostScore implements Comparable<HostScore> {
     return hostname.compareTo(arg0.hostname);
   }
 
-  /**
+  /*
    * Normalizes a raw score in the context of totals for some host.
    *
    * @param rawScore The raw score.

@@ -26,8 +26,8 @@ import org.embergraph.rdf.internal.impl.extensions.USDFloatExtension;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Adds inlining for the <code>http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/USD</code>
+/*
+* Adds inlining for the <code>http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/USD</code>
  * datatype, which is treated as <code>xsd:float</code>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

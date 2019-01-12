@@ -25,8 +25,8 @@ package org.embergraph.relation.rule;
 
 import junit.framework.TestCase2;
 
-/**
- * Unit tests for {@link Slice}.
+/*
+* Unit tests for {@link Slice}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public class TestSlice extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Tests some fence posts for the {@link Slice} ctor, verifies the computation of {@link
    * ISlice#getLast()}, and the reporting of the properties specified to the ctor.
    */

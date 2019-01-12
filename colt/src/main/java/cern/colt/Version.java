@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt;
 
-/**
- * Information about the current release. Use this class to distinguish releases and base runtime
+/*
+* Information about the current release. Use this class to distinguish releases and base runtime
  * decisions upon. Versions are of the form <tt>Major.Minor.Micro.Build</tt>, e.g. <tt>1.0.0.52</tt>
  *
  * <p>You can most easily display version info by running <tt>java cern.colt.Version</tt>.
@@ -65,7 +65,7 @@ public final class Version {
   private static Package getPackage() {
     return Package.getPackage("cern.colt");
   }
-  /**
+  /*
    * Prints <tt>asString</tt> on <tt>System.out</tt>.
    *
    * @param args ignored.

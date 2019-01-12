@@ -26,8 +26,8 @@ import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.concurrent.LockManager;
 import org.embergraph.journal.ConcurrencyManager;
 
-/**
- * Test suite for {@link InsertOp}.
+/*
+* Test suite for {@link InsertOp}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ public class TestInsert extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * TODO Write tests.
    *
    * @todo test writing an index. verify read back after the write.

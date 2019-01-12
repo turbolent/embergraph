@@ -25,8 +25,8 @@ import it.unimi.dsi.fastutil.Hash;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.lang.MutableString;
 
-/**
- * A parsing factory for (X)HTML.
+/*
+* A parsing factory for (X)HTML.
  *
  * <p><strong>Warning:</strong> for maximum flexibility, the methods of this factory do <em>not</em>
  * perform case normalisation. If you are parsing HTML, you are invited to downcase your names

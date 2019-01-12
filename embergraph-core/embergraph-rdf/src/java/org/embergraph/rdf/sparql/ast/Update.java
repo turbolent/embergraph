@@ -31,8 +31,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sail.sparql.ast.ASTDatasetClause;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * A SPARQL Update operation.
+/*
+* A SPARQL Update operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
     /** The {@link UpdateType}. */
     String UPDATE_TYPE = "updateType";
 
-    /**
+    /*
      * The source graph -or- solution set (for operations which have this concept).
      *
      * <p>When the value is a {@link ConstantNode}, then the annotation is the source
@@ -58,7 +58,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
      */
     String SOURCE = "source";
 
-    /**
+    /*
      * The target graph -or- solution set (for operations which have this concept). If there is only
      * one graph (or solution set) on which the operation will have an effect, then it is modeled by
      * this annotation.
@@ -71,7 +71,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
      */
     String TARGET = "target";
 
-    /**
+    /*
      * The "SILENT" option (default <code>false</code>) (for operations which have this concept).
      */
     String SILENT = "silent";
@@ -81,7 +81,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
     /** The {@link Scope} (required for operations which have this concept). */
     String SCOPE = "scope";
 
-    /**
+    /*
      * Reference to ASTDatasetClause list for operations deferred until evaluation stage
      *
      * @see https://jira.blazegraph.com/browse/BLZG-1176
@@ -102,7 +102,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */
@@ -115,7 +115,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
     return (UpdateType) getRequiredProperty(Annotations.UPDATE_TYPE);
   }
 
-  /**
+  /*
    * The {@link ConstantNode} for the source graph (for operations which have this concept).
    *
    * @throws UnsupportedOperationException if this concept is not supported by this type of {@link
@@ -131,7 +131,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * The {@link ConstantNode} for the target graph (for operations which have this concept). If
    * there is only one graph on which the operation will have an effect, then it is modeled by this
    * annotation.
@@ -149,7 +149,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * The "SILENT" option (default <code>false</code>) (for operations which have this concept).
    *
    * @throws UnsupportedOperationException if this concept is not supported by this type of {@link
@@ -177,7 +177,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
     return new LinkedHashSet<IVariable<?>>();
   }
 
-  /**
+  /*
    * Return the {@link ASTDatasetClause} list for operations deferred until evaluation stage.
    *
    * @see Annotations#DATASET_CLAUSES
@@ -188,7 +188,7 @@ public abstract class Update extends GroupMemberNodeBase<IGroupMemberNode> {
     setProperty(Annotations.DATASET_CLAUSES, uc);
   }
 
-  /**
+  /*
    * Return the {@link ASTDatasetClause} list for operations deferred until evaluation stage.
    *
    * @see Annotations#DATASET_CLAUSES

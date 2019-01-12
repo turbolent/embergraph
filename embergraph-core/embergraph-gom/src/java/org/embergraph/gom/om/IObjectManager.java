@@ -37,14 +37,14 @@ import org.openrdf.query.BindingSet;
 /** The object manager is the abstraction for a connection the back end. */
 public interface IObjectManager extends INativeTransaction {
 
-  /**
+  /*
    * @return the UUID that identifies this ObjectManager
    * @deprecated Why do we need this? It should be hidden in how we generate URIs, not part of the
    *     public API.
    */
   UUID getID();
 
-  /**
+  /*
    * Return a canonical {@link IGPO} for the {@link Resource} (canonical within the scope of this
    * object manager) and never <code>null</code>.
    *
@@ -65,7 +65,7 @@ public interface IObjectManager extends INativeTransaction {
 
   IGPO getGPO(Statement stmt);
 
-  /**
+  /*
    * Partially materialize {@link IGPO}s from a stream of {@link Statement}s.
    *
    * @param itr The {@link Statement}s.
@@ -74,7 +74,7 @@ public interface IObjectManager extends INativeTransaction {
    */
   Map<Resource, IGPO> initGPOs(final ICloseableIterator<Statement> itr);
 
-  /**
+  /*
    * An iterator that visits the weak reference values in the running object table. You must test
    * each weak reference in order to determine whether its value has been cleared as of the moment
    * that you request that value. The entries visited by the iterator are not "touched" so the use
@@ -90,7 +90,7 @@ public interface IObjectManager extends INativeTransaction {
   /** Ensure Statements are materialized for gpo's Resource: <code>DESCRIBE ?s</code>. */
   void materialize(IGPO gpo);
 
-  /**
+  /*
    * Close the object manager, which terminates its connection with the backing store. Any open
    * concurrent or nested/native transactions are flushed to the store. The object manager can not
    * be used after it has been closed.
@@ -113,7 +113,7 @@ public interface IObjectManager extends INativeTransaction {
 
   ICloseableIterator<Statement> evaluateGraph(String query);
 
-  /**
+  /*
    * The ObjectManager is able to assign automatic ids for a new object. These will be of the form
    * "gpo:#[genid]"
    *
@@ -121,14 +121,14 @@ public interface IObjectManager extends INativeTransaction {
    */
   IGPO createGPO();
 
-  /**
+  /*
    * Simple save/recall interface that the ObjectManager provides to simplify other pattern
    * implementations. Internally it uses a NameManager GPO
    */
   @Deprecated // Just use the URI directly...
   void save(URI key, Value value);
 
-  /**
+  /*
    * Simple save/recall interface that the ObjectManager provides to simplify other pattern
    * implementations. Internally it uses a NameManager GPO
    */
@@ -137,7 +137,7 @@ public interface IObjectManager extends INativeTransaction {
 
   IGPO recallAsGPO(URI key);
 
-  /**
+  /*
    * Return the list of names that have been used to save references. These are the properties of
    * the internal NameManager.
    */

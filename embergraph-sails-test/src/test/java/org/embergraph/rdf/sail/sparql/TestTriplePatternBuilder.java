@@ -41,8 +41,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for building up triple patterns, including those which are covered by the property
+/*
+* Test suite for building up triple patterns, including those which are covered by the property
  * paths extension in SPARQL 1.1 (a triple pattern which a constant in the predicate position is
  * treated by the sesame SPARQL grammar as a degenerate case of a property path.)
  *
@@ -59,7 +59,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     super(name);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context consisting of three variables.
    *
    * <pre>
@@ -99,7 +99,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context consisting of a constant, a
    * variable, and a variable.
    *
@@ -141,7 +141,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context consisting of a variable, a
    * constant, and a variable.
    *
@@ -183,7 +183,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context consisting of a variable, a
    * variable, and a constant.
    *
@@ -225,7 +225,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context consisting of a constant, a
    * variable, and a constant.
    *
@@ -269,7 +269,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context consisting of a constant, a
    * constant, and a variable.
    *
@@ -313,7 +313,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple triple pattern in the default context consisting of a constant, a
    * variable, and a constant.
    *
@@ -360,7 +360,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for simple join of two triple patterns.
    *
    * <pre>
@@ -406,7 +406,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for a triples block using a predicate list where the predicate is a variable.
    *
    * <pre>
@@ -454,7 +454,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for a triples block using a predicate list where the predicate is a constant (this is
    * interpreted as a property path).
    *
@@ -507,7 +507,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for an object list with variables.
    *
    * <pre>
@@ -563,7 +563,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for an object list with constants.
    *
    * <pre>
@@ -618,7 +618,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for a complex triples block using both a predicate list and an object list.
    *
    * <pre>
@@ -675,7 +675,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for blank node "[]" syntax.
    *
    * <pre>
@@ -730,7 +730,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for blank node "[]" syntax.
    *
    * <pre>
@@ -790,7 +790,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for blank node "[]" syntax.
    *
    * <pre>
@@ -864,7 +864,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for blank node "[]" syntax.
    *
    * <pre>
@@ -939,7 +939,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for blank node "[]" syntax.
    *
    * <pre>
@@ -1033,7 +1033,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    * a bit of a PITA.
    */
 
-  /**
+  /*
    * Unit test for the RDF Collections syntax (from SPARQL 1.1 Last Call Working Draft).
    *
    * <pre>
@@ -1153,7 +1153,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for the RDF Collections syntax (from SPARQL 1.1 Last Call Working Draft).
    *
    * <pre>
@@ -1271,7 +1271,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for the RDF Collections syntax.
    *
    * <pre>
@@ -1380,7 +1380,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1485,7 +1485,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1622,7 +1622,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for BASE declaration.
    *
    * <pre>
@@ -1683,7 +1683,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Base URI resolution appears to be busted per [1]. This static flag is used to disable the base
    * URI resolution tests which fail until the underlying issue is fixed in {@link
    * ParsedURI#resolve(ParsedURI)}.
@@ -1692,7 +1692,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
    */
   private static final boolean baseURIBusted = true;
 
-  /**
+  /*
    * Unit test for BASE declaration.
    *
    * <pre>
@@ -1757,7 +1757,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for BASE declaration.
    *
    * <pre>
@@ -1822,7 +1822,7 @@ public class TestTriplePatternBuilder extends AbstractEmbergraphExprBuilderTestC
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for BASE declaration.
    *
    * <pre>

@@ -62,8 +62,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.util.Bytes;
 import org.openrdf.model.Value;
 
-/**
- * A concrete implementation using scalable {@link BTree}s to store the mapping from an {@link IV}
+/*
+* A concrete implementation using scalable {@link BTree}s to store the mapping from an {@link IV}
  * to the cached RDF {@link Value}. This approach is useful when you will be encoding a LOT of data
  * and you need to get the cached RDF {@link Value} objects off of the JVM heap.
  *
@@ -84,7 +84,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
   /** The namespace of the {@link LexiconRelation} IFF we need to maintain the {@link #ivCache}. */
   private final String namespace;
 
-  /**
+  /*
    * The {@link EmbergraphValueFactory} for the {@link LexiconRelation} IFF we need to maintain the
    * {@link #ivCache}.
    */
@@ -93,14 +93,14 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
   /** The set of variables for which materialized {@link IV}s have been observed. */
   protected final LinkedHashSet<IVariable<?>> ivCacheSchema;
 
-  /**
+  /*
    * A cache mapping from non-inline {@link IV}s ({@link TermId}s and {@link BlobIV}s) whose {@link
    * IVCache} association was set to the corresponding {@link EmbergraphValue}. Used to batch
    * updates into the ID2TERM and BLOBS indices.
    */
   final Map<IV<?, ?>, EmbergraphValue> cache;
 
-  /**
+  /*
    * The {@link IV}:{@link EmbergraphValue} mapping for non-{@link BlobIV}s. This captures any
    * cached EmbergraphValue references encountered on {@link IV}s. This map does not store duplicate
    * entries for the same {@link IV}.
@@ -109,7 +109,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
    */
   private final AtomicReference<BTree> ivCache = new AtomicReference<BTree>();
 
-  /**
+  /*
    * The {@link IV}:{@link EmbergraphValue} mapping for {@link BlobIV}s with cached {@link
    * EmbergraphValue}s. This captures any cached EmbergraphValue references encountered on {@link
    * BlobIV}s. This map does not store duplicate entries for the same {@link IV}.
@@ -118,7 +118,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
    */
   private final AtomicReference<BTree> blobsCache = new AtomicReference<BTree>();
 
-  /**
+  /*
    * The {@link IV}:{@link EmbergraphValue} mapping for {@link LiteralExtensionIV}s with cached
    * {@link EmbergraphValue}s. This captures any cached EmbergraphValue references encountered on
    * {@link LiteralExtensionIV}s. This map does not store duplicate entries for the same {@link IV}.
@@ -177,7 +177,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     return 0L;
   }
 
-  /**
+  /*
    * Setup the {@link IndexMetadata} for {@link #ivCache}.
    *
    * <p>Note: This is basically the same setup as the ID2TERM index.
@@ -228,7 +228,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     return metadata;
   }
 
-  /**
+  /*
    * Setup the {@link IndexMetadata} for {@link #literalExtensionIVCache}.
    *
    * <p>Note: This is basically the same setup as the ID2TERM index.
@@ -279,7 +279,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     return metadata;
   }
 
-  /**
+  /*
    * Setup the {@link IndexMetadata} for {@link #blobsCache}.
    *
    * <p>Note: This is basically the same setup as the BLOBS index.
@@ -321,7 +321,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     return metadata;
   }
 
-  /**
+  /*
    * @param store The backing {@link IRawStore} for the {@link IV} to {@link EmbergraphValue} cache.
    * @param filter <code>true</code> iff this is in support of a DISTINCT filter.
    *     <p>Note: we do not maintain the {@link #ivCacheSchema} for a DISTINCT filter since the
@@ -370,7 +370,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This maintains the {@link IVCache} associations UNLESS <i>filter:=true</code> was specified
@@ -382,7 +382,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     return !filter;
   }
 
-  /**
+  /*
    * Checkpoint the {@link BTree} instance(s) used to buffer the cached {@link IV} to RDF {@link
    * Value} mappings and then re-load the them in a read-only mode from their checkpoint(s). This
    * exposes a view of the {@link BTree} instance(s) which is safe for concurrent readers.
@@ -450,7 +450,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     super.release();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Vectored update of the internal ivCache.
@@ -492,8 +492,8 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
           h = new BlobsIndexHelper();
         }
 
-        /*
-         * Note: The insert logic for the BLOBS index here is different
+      /*
+       * Note: The insert logic for the BLOBS index here is different
          * (and much simpler) because we already have the exact BlobIV
          * and we want to ensure that there is an entry under that key
          * in the [blobsCache].
@@ -515,8 +515,8 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
           blobsCache.insert(key, val);
         }
 
-        /**
-         * BLZG-1899: we also need to encode literal extension IVs: these IVs require
+      /*
+       * BLZG-1899: we also need to encode literal extension IVs: these IVs require
          * materialization although they are inlined, since their interpretation depends on the
          * LexiconConfiguration
          */
@@ -549,7 +549,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
     super.flush();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO If we vectored this operation it would substantially reduce its costs. We would have to
@@ -626,8 +626,8 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
           continue;
         }
 
-        /*
-         * TODO Factor out the buffers used to do the de-serialization
+      /*
+       * TODO Factor out the buffers used to do the de-serialization
          * when we vector the resolution of IVs.
          */
         final EmbergraphValue value = valueFactory.getValueSerializer().deserialize(val);
@@ -672,7 +672,7 @@ public class IVBindingSetEncoderWithIVCache extends IVBindingSetEncoder {
   @Override
   void cacheSchemaAndValue(final IVariable<?> v, final IV<?, ?> iv, final boolean updateCache) {
 
-    /**
+    /*
      * BLZG-1899: we need to materialize all IVs that require materialization; before, this
      * condition was !iv.isInline(), which did not consider cases such as LiteralExtensionIVs that
      * are inline but nevertheless need to be materialized

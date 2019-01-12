@@ -28,8 +28,8 @@ import java.util.Properties;
 import junit.framework.TestCase2;
 import org.embergraph.resources.ResourceManager.Options;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractResourceManagerBootstrapTestCase extends TestCase2 {
@@ -106,7 +106,7 @@ public class AbstractResourceManagerBootstrapTestCase extends TestCase2 {
     tmpDir = null;
   }
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself.
    *

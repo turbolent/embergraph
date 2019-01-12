@@ -39,8 +39,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Helper class provides efficient stand-off serialization of RDF {@link Value} objects.
+/*
+* Helper class provides efficient stand-off serialization of RDF {@link Value} objects.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -51,7 +51,7 @@ public class EmbergraphValueSerializer<V extends Value> {
    * Serialization.
    */
 
-  /**
+  /*
    * Version zero(0) of the serialization format. This version could not write out very large
    * Unicode strings (64k character limit).
    */
@@ -61,13 +61,13 @@ public class EmbergraphValueSerializer<V extends Value> {
   //    * {@link DataOutputBuffer#writeUTF(String)}.
   private static final short VERSION0 = 0x0;
 
-  /**
+  /*
    * Version ONE(1) of the serialization format. This version supports very large Unicode strings
    * using the {@link UnicodeHelper} class.
    */
   private static final short VERSION1 = 0x1;
 
-  /**
+  /*
    * The current serialization version.
    *
    * <p>Note: Changing back to {@link #VERSION0}. It looks like it was significantly more efficient
@@ -99,13 +99,13 @@ public class EmbergraphValueSerializer<V extends Value> {
     }
   }
 
-  /**
+  /*
    * Error message indicates that the version code in the serialized record did not correspond to a
    * known serialization version for an RDF value.
    */
   protected static final String ERR_VERSION = "Bad version";
 
-  /**
+  /*
    * Error message indicates that the term code in the serialized record did not correspond to a
    * known term code for an RDF value of the appropriate type (e.g., a URI code where an Literal
    * code was expected). The codes are defined by {@link ITermIndexCodes}.
@@ -118,7 +118,7 @@ public class EmbergraphValueSerializer<V extends Value> {
   /** Used to compress Unicode strings. */
   private final UnicodeHelper uc;
 
-  /**
+  /*
    * Create an instance that will materialize objects using the caller's factory.
    *
    * @param valueFactory The value factory.
@@ -149,7 +149,7 @@ public class EmbergraphValueSerializer<V extends Value> {
   //		}
   //    }
 
-  /**
+  /*
    * Return the term code as defined by {@link ITermIndexCodes} for this type of term. This is used
    * to places URIs, different types of literals, and bnodes into disjoint parts of the key space
    * for sort orders.
@@ -184,7 +184,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     }
   }
 
-  /**
+  /*
    * Routine for efficient serialization of an RDF {@link Value}.
    *
    * @return The byte[] containing the serialized data record.
@@ -196,7 +196,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     return serialize(val, new DataOutputBuffer(128), null /* lazilyAllocated */);
   }
 
-  /**
+  /*
    * Variant which permits reuse of the same buffer. This has the advantage that the buffer is
    * reused on each invocation and swiftly grows to its maximum extent.
    *
@@ -215,7 +215,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     return out.toByteArray();
   }
 
-  /**
+  /*
    * Variant which permits reuse of the same buffer and avoids copying the data once it has been
    * formated onto the caller's {@link DataOutputBuffer} (core impl).
    *
@@ -240,8 +240,8 @@ public class EmbergraphValueSerializer<V extends Value> {
         case VERSION1:
           {
             if (tmp == null) {
-              /*
-               * Allocate lazily on the code path where it is necessary.
+            /*
+       * Allocate lazily on the code path where it is necessary.
                */
               tmp = new ByteArrayBuffer(128);
             }
@@ -260,7 +260,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     }
   }
 
-  /**
+  /*
    * Routine for efficient de-serialization of an RDF {@link Value}.
    *
    * <p>Note: This automatically uses the {@link EmbergraphValueFactoryImpl} to create the {@link
@@ -277,7 +277,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     return deserialize(new DataInputBuffer(b), new StringBuilder(b.length));
   }
 
-  /**
+  /*
    * Routine for efficient de-serialization of a {@link EmbergraphValue}.
    *
    * <p>Note: This automatically uses the {@link EmbergraphValueFactoryImpl} to create the {@link
@@ -312,7 +312,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     }
   }
 
-  /**
+  /*
    * Implements the serialization of a Literal, URI, or BNode.
    *
    * @param val The {@link Value}.
@@ -349,7 +349,7 @@ public class EmbergraphValueSerializer<V extends Value> {
         {
 
           // Serialize as UTF.
-          out.writeUTF(((URI) val).stringValue());
+          out.writeUTF(val.stringValue());
 
           break;
         }
@@ -361,8 +361,8 @@ public class EmbergraphValueSerializer<V extends Value> {
 
       case ITermIndexCodes.TERM_CODE_LCL:
 
-        /*
-         * Note: This field is ASCII [A-Za-z0-9] and "-". However, this
+      /*
+       * Note: This field is ASCII [A-Za-z0-9] and "-". However, this
          * method writes using UTF-8 so it will generate one byte per
          * character and it is probably more work to write the data
          * directly as ASCII bytes.
@@ -386,7 +386,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     }
   }
 
-  /**
+  /*
    * Implements the de-serialization of a Literal, URI, or BNode.
    *
    * <p>Note: This automatically uses the {@link EmbergraphValueFactoryImpl} to create the {@link
@@ -448,7 +448,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     }
   }
 
-  /**
+  /*
    * Implements the serialization of a Literal, URI, or BNode.
    *
    * @param val The {@link Value}.
@@ -477,7 +477,7 @@ public class EmbergraphValueSerializer<V extends Value> {
         break;
 
       case ITermIndexCodes.TERM_CODE_URI:
-        uc.encode(((URI) val).stringValue(), out, tmp);
+        uc.encode(val.stringValue(), out, tmp);
 
         break;
 
@@ -488,8 +488,8 @@ public class EmbergraphValueSerializer<V extends Value> {
 
       case ITermIndexCodes.TERM_CODE_LCL:
 
-        /*
-         * Note: This field is ASCII [A-Za-z0-9] and "-". However, this
+      /*
+       * Note: This field is ASCII [A-Za-z0-9] and "-". However, this
          * method writes using UTF-8 so it will generate one byte per
          * character and it is probably more work to write the data
          * directly as ASCII bytes.
@@ -513,7 +513,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     }
   }
 
-  /**
+  /*
    * Implements the de-serialization of a Literal, URI, or BNode.
    *
    * <p>Note: This automatically uses the {@link EmbergraphValueFactoryImpl} to create the {@link
@@ -571,7 +571,7 @@ public class EmbergraphValueSerializer<V extends Value> {
     }
   }
 
-  /**
+  /*
    * Return the total #of characters in the RDF {@link Value}.
    *
    * @param v The {@link Value}.
@@ -583,7 +583,7 @@ public class EmbergraphValueSerializer<V extends Value> {
 
     if (v instanceof URI) {
 
-      return ((URI) v).stringValue().length();
+      return v.stringValue().length();
 
     } else if (v instanceof Literal) {
 

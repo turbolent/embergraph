@@ -46,8 +46,8 @@ import org.embergraph.service.Split;
 import org.embergraph.service.ndx.ISplitter;
 import org.embergraph.util.concurrent.AbstractHaltableProcess;
 
-/**
- * Abstract base class for a master task which consumes chunks of elements written onto a {@link
+/*
+* Abstract base class for a master task which consumes chunks of elements written onto a {@link
  * BlockingBuffer} and distributes those chunks to subtasks according to some abstraction which is
  * not defined by this class.
  *
@@ -160,7 +160,7 @@ public abstract class AbstractMasterTask<
   /** The top-level buffer on which the application is writing. */
   protected final BlockingBuffer<E[]> buffer;
 
-  /**
+  /*
    * A unbounded queue of chunks for which a {@link StaleLocatorException} was received. When this
    * buffer is not empty, it is drained by preference over the {@link #buffer}.
    *
@@ -177,7 +177,7 @@ public abstract class AbstractMasterTask<
     return redirectQueue.size();
   }
 
-  /**
+  /*
    * Places a chunk onto the master's redirectQueue.
    *
    * @param chunk The chunk.
@@ -202,7 +202,7 @@ public abstract class AbstractMasterTask<
     return buffer;
   }
 
-  /**
+  /*
    * The iterator draining the {@link #buffer}.
    *
    * <p>Note: DO NOT close this iterator from within {@link #call()} as that would cause this task
@@ -210,13 +210,13 @@ public abstract class AbstractMasterTask<
    */
   protected final IAsynchronousIterator<E[]> src;
 
-  /**
+  /*
    * Map from the index partition identifier to the open subtask handling writes bound for that
    * index partition.
    */
   private final ConcurrentHashMap<L, S> sinks;
 
-  /**
+  /*
    * Maps an operation across the subtasks.
    *
    * @param op The operation, which should be light weight
@@ -244,14 +244,14 @@ public abstract class AbstractMasterTask<
   /** Lock used for sink life cycle events <em>only</em>. */
   private final ReentrantLock lock = new ReentrantLock();
 
-  /**
+  /*
    * Condition is signaled by a subtask when it is finished. This is used by {@link #awaitAll()} to
    * while waiting for subtasks to complete. If all subtasks in {@link #subtasks} are complete when
    * this signal is received then the master may terminate.
    */
   private final Condition subtaskDone = lock.newCondition();
 
-  /**
+  /*
    * A queue of subtasks which have finished running. The master polls this queue in {@link #call()}
    * in order to clear finished sinks from {@link #sinks} in a timely manner during normal
    * operations. {@link #awaitAll()} and {@link #cancelAll(boolean)} both handle this in their own
@@ -259,7 +259,7 @@ public abstract class AbstractMasterTask<
    */
   private final BlockingQueue<S> finishedSubtaskQueue = new LinkedBlockingQueue<S>();
 
-  /**
+  /*
    * Notify the master that a subtask is done. The subtask is placed onto the {@link
    * #finishedSubtaskQueue} queue. The master polls that queue in {@link #call()} and {@link
    * #awaitAll()} and checks the {@link Future} of each finished subtask using {@link
@@ -280,7 +280,7 @@ public abstract class AbstractMasterTask<
     try {
 
       // atomic transfer from [sinks] to [finishedSubtasks].
-      moveSinkToFinishedQueueAtomically((L) subtask.locator, (AbstractSubtask) subtask);
+      moveSinkToFinishedQueueAtomically((L) subtask.locator, subtask);
 
       // signal condition (used by awaitAll()).
       subtaskDone.signalAll();
@@ -302,7 +302,7 @@ public abstract class AbstractMasterTask<
   /** The timeout in nanoseconds before closing an idle output sink. */
   protected final long sinkIdleTimeoutNanos;
 
-  /**
+  /*
    * The time in nanoseconds that the {@link AbstractSubtask sink} will wait inside of the {@link
    * IAsynchronousIterator} when it polls the iterator for a chunk. If this value is too large then
    * the sink will block for noticeable lengths of time and will be less responsive to interrupts.
@@ -310,7 +310,7 @@ public abstract class AbstractMasterTask<
    */
   protected final long sinkPollTimeoutNanos;
 
-  /**
+  /*
    * @param stats Statistics for the master.
    * @param buffer The buffer on which data is written by the application and from which it is
    *     drained by the master.
@@ -398,14 +398,14 @@ public abstract class AbstractMasterTask<
 
           } else {
 
-            /*
-             * Nothing available right now.
+          /*
+       * Nothing available right now.
              */
 
             if (!buffer.isOpen() && buffer.isEmpty()) {
 
-              /*
-               * If the master's input buffer is closed and has
+            /*
+       * If the master's input buffer is closed and has
                * been drained then we stop polling here, but we
                * will continue to drain the redirectQueue in
                * awaitAll().
@@ -456,7 +456,7 @@ public abstract class AbstractMasterTask<
     return stats;
   }
 
-  /**
+  /*
    * Handle the next chunk of elements from the {@link #buffer}.
    *
    * @param chunk A chunk.
@@ -468,7 +468,7 @@ public abstract class AbstractMasterTask<
    */
   protected abstract void handleChunk(E[] chunk, boolean reopen) throws InterruptedException;
 
-  /**
+  /*
    * Extension hook for implementations where the clients accept work for asynchronous processing
    * and notify the master as work items completed successfully or fail. The {@link
    * AbstractMasterTask} will not terminate unless this method returns <code>true</code> when
@@ -494,7 +494,7 @@ public abstract class AbstractMasterTask<
     return true;
   }
 
-  /**
+  /*
    * Extension hook invoked when the master's buffer is exhausted by {@link #awaitAll()}. The
    * default implementation is a NOP.
    */
@@ -504,7 +504,7 @@ public abstract class AbstractMasterTask<
 
   }
 
-  /**
+  /*
    * Await the completion of the writes on each index partition. The master will terminate when
    * there are no active subtasks and the redirect queue is empty. That condition is tested
    * atomically.
@@ -558,8 +558,8 @@ public abstract class AbstractMasterTask<
 
         if (a == null) {
 
-          /*
-           * There is nothing available from the redirect queue.
+        /*
+       * There is nothing available from the redirect queue.
            */
 
           if (finishedSubtaskQueue.isEmpty()
@@ -567,8 +567,8 @@ public abstract class AbstractMasterTask<
               && redirectQueue.isEmpty()
               && nothingPending()) {
 
-            /*
-             * We are done since there are no running sinks, and no
+          /*
+       * We are done since there are no running sinks, and no
              * sinks whose Future we still need to test, and the
              * redirectQueue is empty.
              *
@@ -581,8 +581,8 @@ public abstract class AbstractMasterTask<
             return;
           }
 
-          /*
-           * Check for sinks which have finished.
+        /*
+       * Check for sinks which have finished.
            */
 
           if (log.isDebugEnabled())
@@ -592,8 +592,8 @@ public abstract class AbstractMasterTask<
 
           if (!finishedSubtaskQueue.isEmpty()) {
 
-            /*
-             * Yield the lock and wait up to a timeout for a sink to
+          /*
+       * Yield the lock and wait up to a timeout for a sink to
              * complete. We can not wait that long because we are
              * still polling the redirect queue!
              *
@@ -611,8 +611,8 @@ public abstract class AbstractMasterTask<
 
       if (a != null) {
 
-        /*
-         * Handle a redirected chunk.
+      /*
+       * Handle a redirected chunk.
          *
          * Note: We DO NOT hold the [lock] here!
          */
@@ -622,7 +622,7 @@ public abstract class AbstractMasterTask<
     } // while(true)
   }
 
-  /**
+  /*
    * Cancel all running tasks, discarding any buffered data.
    *
    * <p>Note: This method does not wait on the canceled tasks.
@@ -663,8 +663,8 @@ public abstract class AbstractMasterTask<
       } catch (InterruptedException ex) {
         throw ex;
       } catch (ExecutionException ex) {
-        /*
-         * Ignore exceptions here since we are halting anyway and we can
+      /*
+       * Ignore exceptions here since we are halting anyway and we can
          * expect a bunch of canceled tasks because we just interrupted
          * all of the subtasks.
          */
@@ -682,7 +682,7 @@ public abstract class AbstractMasterTask<
     redirectQueue.clear();
   }
 
-  /**
+  /*
    * Return the sink for the locator. The sink is created if it does not exist using {@link
    * #newSubtaskBuffer()} and {@link #newSubtask(Object, BlockingBuffer)}.
    *
@@ -731,8 +731,8 @@ public abstract class AbstractMasterTask<
         if (log.isInfoEnabled())
           log.info("Reopening sink (was closed): " + this + ", locator=" + locator);
 
-        /*
-         * Note: Instead of waiting for the sink here, the sink will
+      /*
+       * Note: Instead of waiting for the sink here, the sink will
          * notify the master when it is done and be placed onto the
          * [finishedSinks] queue. When it's Future#isDone(), we will
          * drain it from the queue and check it's Future for errors.
@@ -767,8 +767,8 @@ public abstract class AbstractMasterTask<
 
         // if (oldval == null) {
 
-        /**
-         * Start subtask.
+      /*
+       * Start subtask.
          *
          * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">
          *     BlockingBuffer.close() does not unblock threads </a>
@@ -808,7 +808,7 @@ public abstract class AbstractMasterTask<
   /** Factory for a new buffer for a subtask. */
   protected abstract BlockingBuffer<E[]> newSubtaskBuffer();
 
-  /**
+  /*
    * Factory for a new subtask.
    *
    * @param locator The unique key for the subtask.
@@ -817,8 +817,8 @@ public abstract class AbstractMasterTask<
    */
   protected abstract S newSubtask(L locator, BlockingBuffer<E[]> out);
 
-  //    /**
-  //     * Submit the subtask to an {@link Executor}.
+  //    /*
+//     * Submit the subtask to an {@link Executor}.
   //     *
   //     * @param subtask
   //     *            The subtask.
@@ -826,7 +826,7 @@ public abstract class AbstractMasterTask<
   //     * @return The {@link Future}.
   //     */
   //    abstract protected Future<? extends AbstractSubtaskStats> submitSubtask(S subtask);
-  /**
+  /*
    * Submit the subtask to an {@link Executor}.
    *
    * @param subtask The {@link FutureTask} used to execute thee subtask.
@@ -835,7 +835,7 @@ public abstract class AbstractMasterTask<
    */
   protected abstract void submitSubtask(FutureTask<? extends AbstractSubtaskStats> subtask);
 
-  /**
+  /*
    * Drains any {@link Future}s from {@link #finishedSubtaskQueue} which are done and halts the
    * master if there is an error for a {@link Future}.
    *
@@ -891,8 +891,8 @@ public abstract class AbstractMasterTask<
 
       } finally {
 
-        /*
-         * Increment this counter immediately when the subtask is done
+      /*
+       * Increment this counter immediately when the subtask is done
          * regardless of the outcome. This is used by some unit tests to
          * verify idle timeouts and the like.
          */
@@ -903,7 +903,7 @@ public abstract class AbstractMasterTask<
     }
   }
 
-  /**
+  /*
    * Transfer a sink from {@link #sinks} to {@link #finishedSubtaskQueue}. The entry for the locator
    * is removed from {@link #sinks} atomically IFF that map the given <i>sink</i> is associated with
    * the given <i>locator</i> in that map.
@@ -952,7 +952,7 @@ public abstract class AbstractMasterTask<
     }
   }
 
-  /**
+  /*
    * Resolves the output buffer onto which the split must be written and adds the data to that
    * output buffer.
    *
@@ -1001,8 +1001,8 @@ public abstract class AbstractMasterTask<
 
         if (added) {
 
-          /*
-           * Update timestamp of the last chunk written on that sink.
+        /*
+       * Update timestamp of the last chunk written on that sink.
            */
           sink.lastChunkNanos = now;
 
@@ -1019,8 +1019,8 @@ public abstract class AbstractMasterTask<
 
         if (ex.getCause() instanceof StaleLocatorException) {
 
-          /*
-           * Note: The sinks sets the exception when closing the
+        /*
+       * Note: The sinks sets the exception when closing the
            * buffer when handling the stale locator exception and
            * transfers the outstanding and all queued chunks to the
            * redirectQueue.
@@ -1040,8 +1040,8 @@ public abstract class AbstractMasterTask<
         } else if (ex.getCause() instanceof IdleTimeoutException
             || ex.getCause() instanceof MasterExhaustedException) {
 
-          /*
-           * Note: The sinks sets the exception if it closes the input
+        /*
+       * Note: The sinks sets the exception if it closes the input
            * queue by idle timeout or because the master was
            * exhausted.
            *

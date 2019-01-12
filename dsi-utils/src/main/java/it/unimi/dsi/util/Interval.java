@@ -33,8 +33,8 @@ import it.unimi.dsi.fastutil.ints.IntSortedSet;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-/**
- * An interval of integers. An interval is defined by two integers, called its {@link #left} and
+/*
+* An interval of integers. An interval is defined by two integers, called its {@link #left} and
  * {@link #right} extremes, and contains all integers <var>x</var> such that {@link #left} &le; x
  * &le; {@link #right}.
  *
@@ -50,7 +50,7 @@ import java.util.NoSuchElementException;
  */
 public final class Interval extends AbstractIntSortedSet implements IntSortedSet, Serializable {
   private static final long serialVersionUID = 1L;
-  /**
+  /*
    * One-point intervals between 0 (inclusive) and this number (exclusive) are generated from a
    * pre-computed array of instances.
    */
@@ -68,7 +68,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
   /** The right extreme of the interval. */
   public final int right;
 
-  /**
+  /*
    * Builds an interval with given extremes.
    *
    * <p>You cannot generate an empty interval with this constructor. Use {@link
@@ -82,7 +82,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     this.right = right;
   }
 
-  /**
+  /*
    * Returns an interval with given extremes.
    *
    * <p>You cannot obtain an empty interval with this factory method. Use {@link
@@ -100,7 +100,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return new Interval(left, right);
   }
 
-  /**
+  /*
    * Returns a one-point interval.
    *
    * <p>You cannot obtain an empty interval with this factory method. Use {@link
@@ -114,7 +114,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return new Interval(point, point);
   }
 
-  /**
+  /*
    * Returns the interval length, that is, the number of integers contained in the interval.
    *
    * @return the interval length.
@@ -123,7 +123,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return right - left + 1;
   }
 
-  /**
+  /*
    * An alias for {@link #length()}.
    *
    * @return the interval length.
@@ -132,7 +132,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return length();
   }
 
-  /**
+  /*
    * Returns an iterator over the integers in this interval.
    *
    * @return an integer iterator over the elements in this interval.
@@ -143,7 +143,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return IntIterators.fromTo(left, right + 1);
   }
 
-  /**
+  /*
    * Returns an iterator over the integers in this interval larger than or equal to a given integer.
    *
    * @param from the starting integer.
@@ -157,7 +157,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return i;
   }
 
-  /**
+  /*
    * Checks whether this interval contains the specified integer.
    *
    * @param x an integer.
@@ -168,7 +168,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return x >= left && x <= right;
   }
 
-  /**
+  /*
    * Checks whether this interval contains the specified interval.
    *
    * @param interval an interval.
@@ -180,7 +180,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return left <= interval.left && interval.right <= right;
   }
 
-  /**
+  /*
    * Checks whether this interval would contain the specified integer if enlarged in both directions
    * by the specified radius.
    *
@@ -195,7 +195,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return x >= left - radius && x <= right + radius;
   }
 
-  /**
+  /*
    * Checks whether this interval would contain the specified integer if enlarged in each direction
    * with the respective radius. directions by the specified radius.
    *
@@ -212,7 +212,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return x >= left - leftRadius && x <= right + rightRadius;
   }
 
-  /**
+  /*
    * Compares this interval to an integer.
    *
    * @param x an integer.
@@ -228,7 +228,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return 0;
   }
 
-  /**
+  /*
    * Compares this interval to an integer with a specified radius.
    *
    * @param x an integer.
@@ -246,7 +246,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return 0;
   }
 
-  /**
+  /*
    * Compares this interval to an integer with specified left and right radii.
    *
    * @param x an integer.
@@ -312,7 +312,7 @@ public final class Interval extends AbstractIntSortedSet implements IntSortedSet
     return left * 23 + right;
   }
 
-  /**
+  /*
    * Checks whether this interval is equal to another set of integers.
    *
    * @param o an object.

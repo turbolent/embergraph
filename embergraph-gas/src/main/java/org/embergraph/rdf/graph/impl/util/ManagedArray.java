@@ -19,8 +19,8 @@ import cutthecrap.utils.striterators.ArrayIterator;
 import java.util.Iterator;
 import org.apache.log4j.Logger;
 
-/**
- * A view on a mutable int[] that may be extended.
+/*
+* A view on a mutable int[] that may be extended.
  *
  * <p>Note: The backing int[] always has an {@link #off() offset} of ZERO (0) and a {@link #len()
  * length} equal to the capacity of the backing int[].
@@ -40,19 +40,19 @@ public class ManagedArray<T> implements IManagedArray<T> {
   /** The default capacity of the buffer. */
   public static final int DEFAULT_INITIAL_CAPACITY = 128; // 1024;
 
-  /**
+  /*
    * The {@link Class} of the elements of the array. This is required in order to safely allocate
    * new arrays of the same type.
    */
   private final Class<? extends T> elementClass;
 
-  /**
+  /*
    * The backing array. This is re-allocated whenever the capacity of the buffer is too small and
    * reused otherwise.
    */
   private T[] buf;
 
-  /**
+  /*
    * {@inheritDoc} This is re-allocated whenever the capacity of the buffer is too small and reused
    * otherwise.
    */
@@ -62,7 +62,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     return buf;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The offset of the slice into the backing byte[] is always zero.
@@ -73,7 +73,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     return 0;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The length of the slice is always the capacity of the backing byte[].
@@ -84,7 +84,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     return buf.length;
   }
 
-  /**
+  /*
    * Return a new instance of an array of the correct generic type.
    *
    * @param capacity The capacity of the array.
@@ -96,7 +96,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     return (T[]) java.lang.reflect.Array.newInstance(elementClass, capacity);
   }
 
-  /**
+  /*
    * Throws exception unless the value is non-negative.
    *
    * @param msg The exception message.
@@ -111,7 +111,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     return v;
   }
 
-  /**
+  /*
    * Creates a buffer with an initial capacity of {@value #DEFAULT_INITIAL_CAPACITY} bytes. The
    * capacity of the buffer will be automatically extended as required.
    */
@@ -120,7 +120,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     this(elementClass, DEFAULT_INITIAL_CAPACITY);
   }
 
-  /**
+  /*
    * Creates a buffer with the specified initial capacity. The capacity of the buffer will be
    * automatically extended as required.
    *
@@ -135,7 +135,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     this.buf = newArray(assertNonNegative("initialCapacity", initialCapacity));
   }
 
-  /**
+  /*
    * Create a view wrapping the entire array.
    *
    * <p>Note: the caller's reference will be used until and unless the array is grown, at which
@@ -192,7 +192,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     return buf == null ? 0 : buf.length;
   }
 
-  /**
+  /*
    * Return the new capacity for the buffer (default is always large enough and will normally double
    * the buffer capacity each time it overflows).
    *
@@ -276,7 +276,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
     return new SliceImpl(off, len);
   }
 
-  /**
+  /*
    * A slice of the outer {@link ManagedArray}. The slice will always reflect the backing {@link
    * #array()} for the instance of the outer class.
    *
@@ -302,7 +302,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
       return len;
     }
 
-    /**
+    /*
      * Protected constructor used to create a slice. The caller is responsible for verifying that
      * the slice is valid for the backing byte[] buffer.
      *
@@ -336,7 +336,7 @@ public class ManagedArray<T> implements IManagedArray<T> {
      * Absolute get/put operations.
      */
 
-    /**
+    /*
      * Verify that an operation starting at the specified offset into the slice and having the
      * specified length is valid against the slice.
      *
@@ -353,8 +353,8 @@ public class ManagedArray<T> implements IManagedArray<T> {
 
       if ((aoff + alen) > len) {
 
-        /*
-         * The operation run length at that offset would extend beyond
+      /*
+       * The operation run length at that offset would extend beyond
          * the end of the slice.
          */
 

@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.bitvector;
 
-/**
- * Implements quick non polymorphic non bounds checking low level bitvector operations. Includes
+/*
+* Implements quick non polymorphic non bounds checking low level bitvector operations. Includes
  * some operations that interpret sub-bitstrings as long integers.
  *
  * <p><b>WARNING: Methods of this class do not check preconditions.</b> Provided with invalid
@@ -35,7 +35,7 @@ public class QuickBitVector extends Object {
   private static final long[] pows = precomputePows(); // precompute bitmasks for speed
   /** Makes this class non instantiable, but still inheritable. */
   protected QuickBitVector() {}
-  /**
+  /*
    * Returns a bit mask with bits in the specified range set to 1, all the rest set to 0. In other
    * words, returns a bit mask having 0,1,2,3,...,64 bits set. If <tt>to-from+1==0</tt> then returns
    * zero (<tt>0L</tt>). Precondition (not checked): <tt>to-from+1 &gt;= 0 && to-from+1 &lt;=
@@ -53,7 +53,7 @@ public class QuickBitVector extends Object {
     // int width;
     // return (width=to-from+1) == 0 ? 0L : (0xffffffffffffffffL >>> (BITS_PER_UNIT-width)) << from;
   }
-  /**
+  /*
    * Changes the bit with index <tt>bitIndex</tt> in the bitvector <tt>bits</tt> to the "clear"
    * (<tt>false</tt>) state.
    *
@@ -63,7 +63,7 @@ public class QuickBitVector extends Object {
   public static void clear(long[] bits, int bitIndex) {
     bits[bitIndex >> ADDRESS_BITS_PER_UNIT] &= ~(1L << (bitIndex & BIT_INDEX_MASK));
   }
-  /**
+  /*
    * Returns from the bitvector the value of the bit with the specified index. The value is
    * <tt>true</tt> if the bit with the index <tt>bitIndex</tt> is currently set; otherwise, returns
    * <tt>false</tt>.
@@ -75,7 +75,7 @@ public class QuickBitVector extends Object {
   public static boolean get(long[] bits, int bitIndex) {
     return ((bits[bitIndex >> ADDRESS_BITS_PER_UNIT] & (1L << (bitIndex & BIT_INDEX_MASK))) != 0);
   }
-  /**
+  /*
    * Returns a long value representing bits of a bitvector from index <tt>from</tt> to index
    * <tt>to</tt>. Bits are returned as a long value with the return value having bit 0 set to bit
    * <code>from</code>, ..., bit <code>to-from</code> set to bit <code>to</code>. All other bits of
@@ -120,7 +120,7 @@ public class QuickBitVector extends Object {
     // combine
     return x1 | x2;
   }
-  /**
+  /*
    * Returns the index of the least significant bit in state "true". Returns 32 if no bit is in
    * state "true". Examples:
    *
@@ -136,7 +136,7 @@ public class QuickBitVector extends Object {
     while (++i < 32 && (((1 << i) & value)) == 0) ;
     return i;
   }
-  /**
+  /*
    * Constructs a low level bitvector that holds <tt>size</tt> elements, with each element taking
    * <tt>bitsPerElement</tt> bits.
    *
@@ -150,7 +150,7 @@ public class QuickBitVector extends Object {
     long[] bitVector = new long[unitIndex + 1];
     return bitVector;
   }
-  /**
+  /*
    * Returns the index of the most significant bit in state "true". Returns -1 if no bit is in state
    * "true". Examples:
    *
@@ -171,7 +171,7 @@ public class QuickBitVector extends Object {
     return bitIndex & BIT_INDEX_MASK;
     // equivalent to bitIndex%64
   }
-  /**
+  /*
    * Initializes a table with numbers having 1,2,3,...,64 bits set. pows[i] has bits [0..i-1] set.
    * pows[64] == -1L == ~0L == has all 64 bits set --> correct. to speedup calculations in
    * subsequent methods.
@@ -207,7 +207,7 @@ public class QuickBitVector extends Object {
     return pows;
     */
   }
-  /**
+  /*
    * Sets the bit with index <tt>bitIndex</tt> in the bitvector <tt>bits</tt> to the state specified
    * by <tt>value</tt>.
    *
@@ -219,7 +219,7 @@ public class QuickBitVector extends Object {
     if (value) set(bits, bitIndex);
     else clear(bits, bitIndex);
   }
-  /**
+  /*
    * Sets bits of a bitvector from index <code>from</code> to index <code>to</code> to the bits of
    * <code>value</code>. Bit <code>from</code> is set to bit 0 of <code>value</code>, ..., bit
    * <code>to</code> is set to bit <code>to-from</code> of <code>value</code>. All other bits stay
@@ -272,7 +272,7 @@ public class QuickBitVector extends Object {
     mask = bitMaskWithBitsSetFromTo(0, toOffset);
     bits[toIndex] = (bits[toIndex] & (~mask)) | shiftedValue;
   }
-  /**
+  /*
    * Changes the bit with index <tt>bitIndex</tt> in the bitvector <tt>bits</tt> to the "set"
    * (<tt>true</tt>) state.
    *

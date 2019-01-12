@@ -28,8 +28,8 @@ import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.IMutableRelation;
 import org.embergraph.relation.rule.eval.ISolution;
 
-/**
- * A program consists of a set of rules and/or programs. Some programs are executed sequentially
+/*
+* A program consists of a set of rules and/or programs. Some programs are executed sequentially
  * while others are (at least logically) parallel. A program may also specify the transitive closure
  * of its rules.
  *
@@ -44,7 +44,7 @@ import org.embergraph.relation.rule.eval.ISolution;
  */
 public interface IProgram extends IStep {
 
-  /**
+  /*
    * <code>true</code> iff the {@link #steps()} MAY be executed in parallel. When <code>false</code>
    * the steps WILL be executed sequentially and (for mutation) the buffered writes will be flushed
    * after each step.
@@ -56,7 +56,7 @@ public interface IProgram extends IStep {
    */
   boolean isParallel();
 
-  /**
+  /*
    * <code>true</code> iff the fixed point closure of the {@link IProgram} should be computed.
    *
    * <p>Note: Closure is computed in rounds. The rounds continue until the {@link
@@ -72,8 +72,8 @@ public interface IProgram extends IStep {
   Iterator<IStep> steps();
 
   /** The #of steps in the program (non-recursive). */
-  public int stepCount();
+  int stepCount();
 
   /** An array containing the steps in the program (non-recursive). */
-  public IStep[] toArray();
+  IStep[] toArray();
 }

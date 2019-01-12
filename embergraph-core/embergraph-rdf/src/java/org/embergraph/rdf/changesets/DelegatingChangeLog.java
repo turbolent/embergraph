@@ -20,8 +20,8 @@ package org.embergraph.rdf.changesets;
 import java.util.concurrent.CopyOnWriteArraySet;
 import org.apache.log4j.Logger;
 
-/**
- * This delegating change log allows change events to be propagated to multiple delegates through a
+/*
+* This delegating change log allows change events to be propagated to multiple delegates through a
  * listener pattern.
  *
  * @author mike

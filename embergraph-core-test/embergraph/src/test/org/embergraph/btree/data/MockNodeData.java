@@ -3,8 +3,8 @@ package org.embergraph.btree.data;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 
-/**
- * Mock object for {@link INodeData}.
+/*
+* Mock object for {@link INodeData}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -30,7 +30,7 @@ public class MockNodeData extends AbstractMockNodeData implements INodeData {
     return spannedTupleCount;
   }
 
-  /**
+  /*
    * Bounds check.
    *
    * @throws IndexOutOfBoundsException if <i>index</i> is LT ZERO (0)

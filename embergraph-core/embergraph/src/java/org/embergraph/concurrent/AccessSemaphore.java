@@ -21,8 +21,8 @@ package org.embergraph.concurrent;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-/**
- * The AccessSemaphore implements an idiom of exclusive and shared access.
+/*
+* The AccessSemaphore implements an idiom of exclusive and shared access.
  *
  * <p>A typical use-case for exclusive/shared access might be single writer/multiple readers
  *
@@ -79,7 +79,7 @@ public class AccessSemaphore {
   public static final class AccessSemaphoreNotReentrantException extends IllegalStateException {
 
     private static final long serialVersionUID = -234560202749194378L;
-  };
+  }
 
   public final Access acquireExclusive() throws InterruptedException {
 

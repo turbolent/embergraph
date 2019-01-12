@@ -45,8 +45,8 @@ import org.embergraph.relation.AbstractRelation;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.sail.SailException;
 
-/**
- * Test the index supporting the {@link HistoryServiceFactory}.
+/*
+* Test the index supporting the {@link HistoryServiceFactory}.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">History Service</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -73,7 +73,7 @@ public class TestHistoryIndex extends ProxyEmbergraphSailTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Return the pre-existing history index.
    *
    * @param tripleStore The KB.
@@ -128,7 +128,7 @@ public class TestHistoryIndex extends ProxyEmbergraphSailTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test works its way through two commit points, verifying the state changes in the history
    * index in depth. In the first commit point, two statements are added and both should appear in
    * the history index. In the second commit point, one of the statements is removed and an entry
@@ -306,7 +306,7 @@ public class TestHistoryIndex extends ProxyEmbergraphSailTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test works its way through two commit points when the index pruning is set to 1
    * millisecond, verifying the state changes in the history index in depth. In the first commit
    * point, two statements are added and both should appear in the history index. In the second
@@ -463,8 +463,8 @@ public class TestHistoryIndex extends ProxyEmbergraphSailTestCase {
                         }
                       });
 
-          /*
-           * The older entries should have been pruned out.
+        /*
+       * The older entries should have been pruned out.
            */
           final HistoryChangeRecord[] a =
               new HistoryChangeRecord[] {

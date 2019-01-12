@@ -21,8 +21,8 @@ package org.embergraph.rdf.internal.constraints;
 import java.io.Serializable;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * Represents a numerical range of IVs - a lower bound and an upper bound. Useful for constraining
+/*
+* Represents a numerical range of IVs - a lower bound and an upper bound. Useful for constraining
  * predicates to a particular range of values for the object.
  */
 public class Range implements Serializable {
@@ -32,7 +32,7 @@ public class Range implements Serializable {
 
   private final IV from, to;
 
-  /**
+  /*
    * Construct a numerical range using two IVs. The range includes the from and to value (>= from &&
    * <= to). Non-inclusive from and to must be accomplished using a filter. The from must be less
    * than or equal to the to.

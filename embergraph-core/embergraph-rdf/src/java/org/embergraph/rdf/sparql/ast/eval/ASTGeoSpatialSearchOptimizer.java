@@ -29,8 +29,8 @@ import org.embergraph.service.fts.FTS;
 import org.embergraph.service.geospatial.GeoSpatial;
 import org.openrdf.model.URI;
 
-/**
- * Translate {@link FTS#GEOSPATIAL} and related magic predicates into a {@link ServiceNode} which
+/*
+* Translate {@link FTS#GEOSPATIAL} and related magic predicates into a {@link ServiceNode} which
  * will invoke the embergraph geospatial service.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

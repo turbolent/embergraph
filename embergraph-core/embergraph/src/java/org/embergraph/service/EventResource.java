@@ -28,8 +28,8 @@ import java.io.Serializable;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.mdi.LocalPartitionMetadata;
 
-/**
- * Semi-structured representation of the data service on which the event occurred, the name of the
+/*
+* Semi-structured representation of the data service on which the event occurred, the name of the
  * index, and the index partition identifier.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,13 +46,13 @@ public class EventResource implements Serializable {
   /** The index partition identifier and an empty string when not known / available. */
   public final String partitionId;
 
-  /**
+  /*
    * The file when the resource is a component of an index partition view (the journal or index
    * segment file) and an empty string when not known / available.
    */
   public final String file;
 
-  /**
+  /*
    * Formats the resource (indexName, partitionId, and file) in a manner designed to give pleasing
    * results when aggregating {@link Event}s by {@link EventResource}.
    */
@@ -87,7 +87,7 @@ public class EventResource implements Serializable {
     return sb.toString();
   }
 
-  /**
+  /*
    * Ctor when there is no index resource for the event (the service on which the event is generated
    * is always supplied).
    */
@@ -111,7 +111,7 @@ public class EventResource implements Serializable {
     this.file = BLANK;
   }
 
-  /**
+  /*
    * Forgiving ctor that does the right thing when the {@link IndexMetadata} object exists.
    *
    * @param md
@@ -149,7 +149,7 @@ public class EventResource implements Serializable {
     this.file = BLANK;
   }
 
-  /**
+  /*
    * Forgiving ctor does the right thing if the {@link IndexMetadata} exists.
    *
    * @param md Optional.

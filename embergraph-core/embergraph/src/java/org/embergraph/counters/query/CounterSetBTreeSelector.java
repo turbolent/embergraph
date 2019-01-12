@@ -31,8 +31,8 @@ import org.embergraph.counters.ICounter;
 import org.embergraph.counters.PeriodEnum;
 import org.embergraph.counters.store.CounterSetBTree;
 
-/**
- * Reads the relevant performance counter data from the store.
+/*
+* Reads the relevant performance counter data from the store.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

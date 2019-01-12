@@ -22,25 +22,25 @@ import org.eclipse.jetty.client.HttpClient;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.service.fts.FTS.SearchResultType;
 
-/**
- * Abstraction for search interface against external Solr index.
+/*
+* Abstraction for search interface against external Solr index.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
  */
 public interface IFulltextSearch<A extends IFulltextSearchHit> {
 
-  /**
+  /*
    * Submit a search query against the Solr Index
    *
    * @param query The query.
    * @return The result set.
    */
-  public FulltextSearchHiterator<A> search(final FulltextSearchQuery query, HttpClient client);
+  FulltextSearchHiterator<A> search(final FulltextSearchQuery query, HttpClient client);
 
   // public int count(final ExternalSolrSearchQuery query);
 
-  public static class FulltextSearchQuery implements Serializable {
+  class FulltextSearchQuery implements Serializable {
 
     private static final long serialVersionUID = -2509557655519603130L;
 
@@ -174,11 +174,9 @@ public interface IFulltextSearch<A extends IFulltextSearchHit> {
           || (searchTimeout != null && other.searchTimeout == null)
           || !searchTimeout.equals(other.searchTimeout)) return false;
 
-      if ((searchResultType == null && other.searchResultType != null)
-          || (searchResultType != null && other.searchResultType == null)
-          || !searchResultType.equals(other.searchResultType)) return false;
-
-      return true;
+      return (searchResultType != null || other.searchResultType == null)
+          && (searchResultType == null || other.searchResultType != null)
+          && searchResultType.equals(other.searchResultType);
     }
   }
 }

@@ -8,13 +8,13 @@ import org.embergraph.counters.IHistoryEntry;
 import org.embergraph.counters.query.HistoryTable;
 import org.embergraph.counters.query.QueryUtil;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class HTMLHistoryTableRenderer extends HistoryTableRenderer {
 
-  /**
+  /*
    * @param tbl
    * @param pattern Used to identify capturing groups and extract column labels.
    * @param formatter
@@ -24,7 +24,7 @@ public class HTMLHistoryTableRenderer extends HistoryTableRenderer {
     super(tbl, pattern, formatter);
   }
 
-  /**
+  /*
    * Generate the table.
    *
    * <p>The table has one column for each counter having history data. The 1st header row of the
@@ -79,8 +79,8 @@ public class HTMLHistoryTableRenderer extends HistoryTableRenderer {
       //            w.write("  <th>" + cdata(t.units) + "</th\n>");
       w.write("  <th>Timestamp</th>\n");
       for (ICounter counter : t.a) {
-        /*
-         * If the pattern included capturing groups then use the matched
+      /*
+       * If the pattern included capturing groups then use the matched
          * groups as the label for the column.
          */
         final String[] groups = QueryUtil.getCapturedGroups(pattern, counter);

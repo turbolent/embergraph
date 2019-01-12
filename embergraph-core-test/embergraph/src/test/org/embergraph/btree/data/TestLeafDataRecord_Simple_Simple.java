@@ -24,8 +24,8 @@ package org.embergraph.btree.data;
 
 import org.embergraph.btree.raba.codec.SimpleRabaCoder;
 
-/**
- * Test with simple coding for keys and values (no compression).
+/*
+* Test with simple coding for keys and values (no compression).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

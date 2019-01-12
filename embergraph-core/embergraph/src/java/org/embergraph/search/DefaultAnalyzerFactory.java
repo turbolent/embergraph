@@ -40,8 +40,8 @@ import org.apache.lucene.analysis.util.CharArraySet;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 
-/**
- * This is the default implementation but should be regarded as legacy since it fails to use the
+/*
+* This is the default implementation but should be regarded as legacy since it fails to use the
  * correct {@link Analyzer} for almost all languages (other than English). It uses the correct
  * natural language analyzer only for literals tagged with certain three letter ISO 639 codes:
  * "por", "deu", "ger", "zho", "chi", "jpn", "kor", "ces", "cze", "dut", "nld", "gre", "ell", "fra",
@@ -137,7 +137,7 @@ public class DefaultAnalyzerFactory implements IAnalyzerFactory {
     public abstract Analyzer newInstance(final boolean filterStopwords);
   }
 
-  /**
+  /*
    * A map containing instances of the various kinds of analyzers that we know about.
    *
    * <p>Note: There MUST be an entry under the empty string (""). This entry will be requested when
@@ -145,7 +145,7 @@ public class DefaultAnalyzerFactory implements IAnalyzerFactory {
    */
   private Map<String, AnalyzerConstructor> analyzers;
 
-  /**
+  /*
    * Initializes the various kinds of analyzers that we know about.
    *
    * <p>Note: Each {@link Analyzer} is registered under both the 3 letter and the 2 letter language

@@ -43,8 +43,8 @@ import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-/**
- * This operator reports the fast-range count for an as-bound {@link IPredicate} . The cost of this
+/*
+* This operator reports the fast-range count for an as-bound {@link IPredicate} . The cost of this
  * operator is two key probes. Unlike a normal access path, this operator does not bind variables to
  * data in tuples in the underlying index. Instead it binds a pre-identified variable to the
  * aggregate (COUNT) of the tuple range spanned by the {@link IPredicate}.
@@ -60,14 +60,14 @@ public class FastRangeCountOp<E> extends PipelineOp {
 
   public interface Annotations extends AccessPathJoinAnnotations {
 
-    /**
+    /*
      * The name of the variable that will be bound to the fast-range count of the access path
      * associated with the predicate.
      */
     String COUNT_VAR = FastRangeCountOp.class.getName() + ".countVar";
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -77,7 +77,7 @@ public class FastRangeCountOp<E> extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -137,7 +137,7 @@ public class FastRangeCountOp<E> extends PipelineOp {
     return (IPredicate<E>) getRequiredProperty(Annotations.PREDICATE);
   }
 
-  /**
+  /*
    * Return the value of {@link IPredicate#isOptional()} for the {@link IPredicate} associated with
    * this join.
    *
@@ -212,8 +212,8 @@ public class FastRangeCountOp<E> extends PipelineOp {
 
       try {
 
-        /*
-         * TODO If there are multiple left solutions (from the pipeline)
+      /*
+       * TODO If there are multiple left solutions (from the pipeline)
          * then we could generate their fromKeys and order them to
          * improve cache locality.  See PipelineJoin for an example of
          * how this is done.
@@ -227,8 +227,8 @@ public class FastRangeCountOp<E> extends PipelineOp {
 
           if (asBound == null) {
 
-            /*
-             * This can happen for a SIDS mode join if some of the
+          /*
+       * This can happen for a SIDS mode join if some of the
              * (s,p,o,[c]) and SID are bound on entry and they can not
              * be unified. For example, the s position might be
              * inconsistent with the Subject that can be decoded from
@@ -262,8 +262,8 @@ public class FastRangeCountOp<E> extends PipelineOp {
           // New binding set.
           final IBindingSet right = new ListBindingSet();
 
-          /*
-           * Bind the countVar.
+        /*
+       * Bind the countVar.
            *
            * Note: per the spec, SPARQL expects an xsd:integer here.
            */
@@ -304,7 +304,7 @@ public class FastRangeCountOp<E> extends PipelineOp {
     }
 
     protected long determineRangeCount(final IPredicate<E> pred) {
-      /**
+      /*
        * The {@link IAccessPath} corresponding to the asBound {@link IPredicate} for this join
        * dimension. The asBound {@link IPredicate} is {@link IAccessPath#getPredicate()}.
        *

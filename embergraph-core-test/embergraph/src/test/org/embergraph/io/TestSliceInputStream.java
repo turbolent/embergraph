@@ -26,8 +26,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link SliceInputStream}.
+/*
+* Test suite for {@link SliceInputStream}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

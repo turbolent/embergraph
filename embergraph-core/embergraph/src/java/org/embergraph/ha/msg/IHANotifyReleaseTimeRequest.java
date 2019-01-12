@@ -20,8 +20,8 @@ package org.embergraph.ha.msg;
 import java.util.UUID;
 import org.embergraph.journal.ITransactionService;
 
-/**
- * Message from a follower to the leader in which the follower specifies the earliest commit point
+/*
+* Message from a follower to the leader in which the follower specifies the earliest commit point
  * that is pinned on the follower by an active transaction or the minReleaseAge associated with its
  * local {@link ITransactionService}.
  *
@@ -30,32 +30,32 @@ import org.embergraph.journal.ITransactionService;
 public interface IHANotifyReleaseTimeRequest extends IHAMessage {
 
   /** The service that provided this information. */
-  public UUID getServiceUUID();
+  UUID getServiceUUID();
 
   /** The earliest pinned commit time on the follower. */
-  public long getPinnedCommitTime();
+  long getPinnedCommitTime();
 
   /** The earliest pinned commit counter on the follower. */
-  public long getPinnedCommitCounter();
+  long getPinnedCommitCounter();
 
-  //    /**
-  //     * The readsOnCommitTime of the earliest active transaction on the follower.
+  //    /*
+//     * The readsOnCommitTime of the earliest active transaction on the follower.
   //     */
   //    public long getReadsOnCommitTimeForEarliestActiveTx();
   //
-  //    /**
-  //     * The minReleaseAge on the follower (this should be the same on all
+  //    /*
+//     * The minReleaseAge on the follower (this should be the same on all
   //     * services in a quorum).
   //     */
   //    public long getMinReleaseAge();
 
-  /**
+  /*
    * A timestamp taken during the protocol used to agree on the new release time. This is used to
    * detect problems where the clocks are not synchronized on the services.
    */
-  public long getTimestamp();
+  long getTimestamp();
 
-  /**
+  /*
    * Mock responses are used when a follow is unable to provide a correct response (typically
    * because the follower is not yet HAReady and hence is not able to participate in the gather).
    * The mock responses preserves liveness since the GATHER protocol will terminate quickly. By
@@ -67,13 +67,13 @@ public interface IHANotifyReleaseTimeRequest extends IHAMessage {
    * @see <href="https://sourceforge.net/apps/trac/bigdata/ticket/720" > HA3 simultaneous service
    *     start failure </a>
    */
-  public boolean isMock();
+  boolean isMock();
 
-  /**
+  /*
    * The commit counter that will be assigned to the new commit point (as specified by the leader).
    */
-  public long getNewCommitCounter();
+  long getNewCommitCounter();
 
   /** The commit time that will be assigned to the new commit point (as specified by the leader). */
-  public long getNewCommitTime();
+  long getNewCommitTime();
 }

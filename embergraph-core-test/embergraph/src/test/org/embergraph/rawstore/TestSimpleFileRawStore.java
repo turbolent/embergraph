@@ -24,8 +24,8 @@ package org.embergraph.rawstore;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Test suite for {@link SimpleFileRawStore}.
+/*
+* Test suite for {@link SimpleFileRawStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

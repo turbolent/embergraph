@@ -41,8 +41,8 @@ import org.openrdf.model.vocabulary.SESAME;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.MalformedQueryException;
 
-/**
- * Processes the prefix declarations in a SPARQL query model.
+/*
+* Processes the prefix declarations in a SPARQL query model.
  *
  * @author Arjohn Kampman
  * @openrdf
@@ -53,9 +53,9 @@ public class PrefixDeclProcessor {
 
   public static final Map<String, String> defaultDecls = new LinkedHashMap<String, String>();
 
-  public static interface Options {
+  public interface Options {
 
-    /**
+    /*
      * This optional property defines the path to a file containing the prefix declarations.
      *
      * <p>Example file contents are shown below. <code>
@@ -65,7 +65,7 @@ public class PrefixDeclProcessor {
      * -Dorg.embergraph.rdf.sail.sparql.PrefixDeclProcessor.additionalDeclsFile=/path/to/file
      * </code> {@see https://jira.blazegraph.com/browse/BLZG-1773}
      */
-    public static final String ADDITIONAL_DECLS_FILE =
+    String ADDITIONAL_DECLS_FILE =
         PrefixDeclProcessor.class.getName() + ".additionalDeclsFile";
   }
 
@@ -86,7 +86,7 @@ public class PrefixDeclProcessor {
     processAdditionalDecls();
   }
 
-  /**
+  /*
    * Processes prefix declarations in queries. This method collects all prefixes that are declared
    * in the supplied query, verifies that prefixes are not redefined and replaces any {@link
    * ASTQName} nodes in the query with equivalent {@link ASTIRI} nodes.
@@ -289,7 +289,7 @@ public class PrefixDeclProcessor {
     }
   }
 
-  /**
+  /*
    * Static helper method to process the {@link PrefixDeclProcessor.Options.ADDTIONAL_DECLS_FILE}
    * property if present and add the decls. It ignores IO errors, etc. and provides a warning.
    *

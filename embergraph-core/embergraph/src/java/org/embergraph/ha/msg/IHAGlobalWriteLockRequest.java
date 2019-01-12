@@ -19,8 +19,8 @@ package org.embergraph.ha.msg;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Message requesting a global write lock.
+/*
+* Message requesting a global write lock.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see https://sourceforge.net/apps/trac/bigdata/ticket/566 ( Concurrent unisolated operations

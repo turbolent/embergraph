@@ -58,7 +58,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
   /** The graph analytic to be executed. */
   private final IGASProgram<VS, ES, ST> program;
 
-  /**
+  /*
    * Whether or not the edges of the graph will be traversed with directed graph semantics (default
    * is {@link TraversalDirectionEnum#Forward}).
    */
@@ -84,13 +84,13 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
   /** A collection of target vertices for the program to reach. */
   private final Set<Value> targetVertices = Collections.synchronizedSet(new LinkedHashSet<Value>());
 
-  /**
+  /*
    * The maximum number of iterations after the target vertices have been reached. Default behavior
    * is to continue on even after the targets have been reached.
    */
   private final AtomicInteger maxIterationsAfterTargets = new AtomicInteger(Integer.MAX_VALUE);
 
-  /**
+  /*
    * @param namespace The namespace of the graph (KB instance).
    * @param timestamp The timestamp of the graph view (this should be a read-only view for
    *     non-blocking index reads).
@@ -159,8 +159,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
         if (gasState.isVisited(targetVertices)) {
 
-          /*
-           * If we've reached all target vertices then halt the
+        /*
+       * If we've reached all target vertices then halt the
            * program N rounds from now where
            * N = maxIterationsAfterTargets.
            */
@@ -224,7 +224,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
     return total;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO This is an Asynchronous implementation. Further, it does not attempt to race ahead to
@@ -242,7 +242,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
    */
   @Override
   public boolean doRound(final IGASStats stats)
-      throws InterruptedException, ExecutionException, Exception {
+      throws Exception {
 
     // The fontier for this round.
     final IStaticFrontier f = gasState.frontier();
@@ -411,7 +411,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
     return nextRound;
   } // doRound()
 
-  /**
+  /*
    * Do APPLY.
    *
    * @return The #of vertices for which the operation was executed.
@@ -445,7 +445,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
     }
   }
 
-  /**
+  /*
    * Reduce over the frontier (used for apply()).
    *
    * @param f The frontier.
@@ -475,9 +475,9 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
             // Nothing returned by visit().
             return ONE;
-          };
+          }
         };
-      };
+      }
     }
 
     gasEngine.newFrontierStrategy(new ReduceVertexTaskFactory(), f).call();
@@ -488,7 +488,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
   private static final Long ONE = Long.valueOf(1L);
 
-  /**
+  /*
    * @param inEdges when <code>true</code> the GATHER is over the in-edges. Otherwise it is over the
    *     out-edges.
    * @param pushDownApply When <code>true</code>, the APPLY() will be done during the GATHER.
@@ -501,7 +501,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
       final IGASScheduler sch,
       final EdgesEnum scatterEdges,
       final boolean pushDownApply)
-      throws InterruptedException, ExecutionException, Exception {
+      throws Exception {
 
     if (scatterEdges == null) throw new IllegalArgumentException();
 
@@ -530,13 +530,13 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
             return graphAccessor;
           }
         };
-      };
+      }
     }
 
     return gasEngine.newFrontierStrategy(new ScatterVertexTaskFactory(), f).call();
   }
 
-  /**
+  /*
    * @param gatherEdges The edges to be gathered.
    * @param pushDownApply When <code>true</code>, the APPLY() will be done during the GATHER.
    * @throws ExecutionException
@@ -547,7 +547,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
       final IStaticFrontier f, // final IScheduler sch,
       final EdgesEnum gatherEdges,
       final boolean pushDownApply)
-      throws InterruptedException, ExecutionException, Exception {
+      throws Exception {
 
     if (gatherEdges == null) throw new IllegalArgumentException();
 
@@ -566,8 +566,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
             return gatherEdges;
           }
 
-          /**
-           * Note: The API does not permit vertices to be scheduled for execution during the GATHER
+        /*
+       * Note: The API does not permit vertices to be scheduled for execution during the GATHER
            * phase.
            */
           @Override
@@ -580,13 +580,13 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
             return graphAccessor;
           }
         };
-      };
+      }
     }
 
     return gasEngine.newFrontierStrategy(new GatherVertexTaskFactory(), f).call();
   }
 
-  /**
+  /*
    * Base class for SCATTER or GATHER of edges for a vertex.
    *
    * <p>Note: An abstract task pattern is used to factor out parameters that are constants within
@@ -612,7 +612,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
     protected abstract IGASScheduler scheduler();
   }
 
-  /**
+  /*
    * Scatter for the edges of a single vertex.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -624,7 +624,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
       super(u);
     }
 
-    /**
+    /*
      * Execute the scatter for the vertex.
      *
      * @return The #of visited edges.
@@ -636,8 +636,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
       if (pushDownApply()) {
 
-        /*
-         * Run the APPLY as part of the SCATTER.
+      /*
+       * Run the APPLY as part of the SCATTER.
          *
          * TODO This can be done on a thread pool or fork/join pool
          * since we know that there are no duplicates in the frontier.
@@ -686,7 +686,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
     }
   } // ScatterTask
 
-  /**
+  /*
    * Gather for the edges of a single vertex.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -707,8 +707,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
       try {
 
-        /*
-         * Note: since (left,right) may be null, we need to known if
+      /*
+       * Note: since (left,right) may be null, we need to known if
          * left is defined.
          */
         boolean first = true;
@@ -738,8 +738,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
 
         if (pushDownApply()) {
 
-          /*
-           * Run the APPLY as part of the GATHER.
+        /*
+       * Run the APPLY as part of the GATHER.
            *
            * TODO This can be done on a thread pool or fork/join pool
            * since we know that there are no duplicates in the
@@ -851,8 +851,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
     return maxIterationsAfterTargets.get();
   }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     * <p>
   //     * The default implementation only visits the edges.
   //     */
@@ -863,8 +863,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
   //
   //    }
 
-  //    /**
-  //     * Return an {@link IFilter} that will only visit the edges of the graph.
+  //    /*
+//     * Return an {@link IFilter} that will only visit the edges of the graph.
   //     *
   //     * @see IGASState#isEdge(Statement)
   //     */
@@ -874,8 +874,8 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
   //
   //    }
   //
-  //    /**
-  //     * Filter visits only edges (filters out attribute values).
+  //    /*
+//     * Filter visits only edges (filters out attribute values).
   //     * <p>
   //     * Note: This filter is pushed down onto the AP and evaluated close to the
   //     * data.
@@ -892,7 +892,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
   //        }
   //    };
 
-  /**
+  /*
    * Return a filter that only visits the edges of graph that are instances of the specified link
    * attribute type.
    *
@@ -907,7 +907,7 @@ public class GASContext<VS, ES, ST> implements IGASContext<VS, ES, ST> {
     return new LinkAttribFilter(ctx, linkAttribType);
   }
 
-  /**
+  /*
    * Filter visits only edges where the {@link Statement} is an instance of the specified link
    * attribute type. For embergraph, the visited edges can be decoded to recover the original link
    * as well.

@@ -10,8 +10,8 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
-/**
- * ChiSquare distribution; See the <A
+/*
+* ChiSquare distribution; See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node31.html#SECTION000310000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosc.html#Chi-square Distribution">
  * animated definition</A>.
@@ -49,7 +49,7 @@ public class ChiSquare extends AbstractContinousDistribution {
 
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static ChiSquare shared = new ChiSquare(1.0, makeDefaultGenerator());
-  /**
+  /*
    * Constructs a ChiSquare distribution. Example: freedom=1.0.
    *
    * @param freedom degrees of freedom.
@@ -67,13 +67,13 @@ public class ChiSquare extends AbstractContinousDistribution {
   public double nextDouble() {
     return nextDouble(this.freedom);
   }
-  /**
+  /*
    * Returns a random number from the distribution; bypasses the internal state.
    *
    * @param freedom degrees of freedom. It should hold <tt>freedom &lt; 1.0</tt>.
    */
   public double nextDouble(double freedom) {
-    /**
+    /*
      * **************************************************************** * Chi Distribution - Ratio
      * of Uniforms with shift * * *****************************************************************
      * * FUNCTION : - chru samples a random number from the Chi * distribution with parameter a > 1.
@@ -129,7 +129,7 @@ public class ChiSquare extends AbstractContinousDistribution {
     double logGamma = Fun.logGamma(freedom / 2.0);
     return Math.exp((freedom / 2.0 - 1.0) * Math.log(x / 2.0) - x / 2.0 - logGamma) / 2.0;
   }
-  /**
+  /*
    * Sets the distribution parameter.
    *
    * @param freedom degrees of freedom.
@@ -139,7 +139,7 @@ public class ChiSquare extends AbstractContinousDistribution {
     if (freedom < 1.0) throw new IllegalArgumentException();
     this.freedom = freedom;
   }
-  /**
+  /*
    * Returns a random number from the distribution.
    *
    * @param freedom degrees of freedom.
@@ -154,7 +154,7 @@ public class ChiSquare extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + freedom + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

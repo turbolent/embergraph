@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -43,8 +43,8 @@ package org.embergraph.rdf.store;
 import org.embergraph.rdf.lexicon.LexiconRelation;
 import org.embergraph.rdf.spo.SPORelation;
 
-/**
- * Test suite for locating an {@link AbstractTripleStore}, locating the {@link LexiconRelation} and
+/*
+* Test suite for locating an {@link AbstractTripleStore}, locating the {@link LexiconRelation} and
  * {@link SPORelation} from the {@link AbstractTripleStore}, and locating the {@link
  * AbstractTripleStore} from its contained relations.
  *
@@ -79,7 +79,7 @@ public class TestRelationLocator extends AbstractTripleStoreTestCase {
 
       {
         // the located store can find its relations.
-        final SPORelation foundSPORelation = (SPORelation) foundStore.getSPORelation();
+        final SPORelation foundSPORelation = foundStore.getSPORelation();
 
         assertNotNull(foundSPORelation);
 
@@ -95,7 +95,7 @@ public class TestRelationLocator extends AbstractTripleStoreTestCase {
       {
         // the located store can find its relations.
         final LexiconRelation foundLexiconRelation =
-            (LexiconRelation) foundStore.getLexiconRelation();
+            foundStore.getLexiconRelation();
 
         assertNotNull(foundLexiconRelation);
 

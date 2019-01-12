@@ -26,8 +26,8 @@ import org.embergraph.bop.join.FastRangeCountOp;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleGroupByAndCountOptimizer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * SPARQL level test suite for the {@link ASTSimpleGroupByAndCountOptimizer}.
+/*
+* SPARQL level test suite for the {@link ASTSimpleGroupByAndCountOptimizer}.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/1059">GROUP BY optimization using
  *     distinct-term-scan and fast-range-count</a>
@@ -68,7 +68,7 @@ public class TestSimpleGroupByAndCountOptimizer extends AbstractDataDrivenSPARQL
       return properties;
     }
 
-    /**
+    /*
      * Optimization applies to pattern:
      *
      * <pre>
@@ -97,7 +97,7 @@ public class TestSimpleGroupByAndCountOptimizer extends AbstractDataDrivenSPARQL
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * Optimization applies to pattern:
      *
      * <pre>
@@ -126,7 +126,7 @@ public class TestSimpleGroupByAndCountOptimizer extends AbstractDataDrivenSPARQL
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * Optimization applies to pattern:
      *
      * <pre>
@@ -151,7 +151,7 @@ public class TestSimpleGroupByAndCountOptimizer extends AbstractDataDrivenSPARQL
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * Optimization only partially applies to pattern:
      *
      * <pre>
@@ -183,7 +183,7 @@ public class TestSimpleGroupByAndCountOptimizer extends AbstractDataDrivenSPARQL
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      * The optimization must *not* be applied in the presence of delete markers. Delete markers are
      * present in the case of isolatable indices. The query below, which is amenable to optimization
      * in principle, cannot be optimized when this mode is used.
@@ -218,7 +218,7 @@ public class TestSimpleGroupByAndCountOptimizer extends AbstractDataDrivenSPARQL
   /** Quads mode test suite. */
   public static class TestQuadsModeAPs extends TestSimpleGroupByAndCountOptimizer {
 
-    /**
+    /*
      * Optimization applies as in triple mode for fully unbound triple patterns, e.g.:
      *
      * <pre>
@@ -247,7 +247,7 @@ public class TestSimpleGroupByAndCountOptimizer extends AbstractDataDrivenSPARQL
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * The query
      *
      * <pre>
@@ -279,7 +279,7 @@ public class TestSimpleGroupByAndCountOptimizer extends AbstractDataDrivenSPARQL
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * The query
      *
      * <pre>
@@ -311,7 +311,7 @@ public class TestSimpleGroupByAndCountOptimizer extends AbstractDataDrivenSPARQL
           1, BOpUtility.toList(h.getASTContainer().getQueryPlan(), FastRangeCountOp.class).size());
     }
 
-    /**
+    /*
      * The optimization must *not* be applied in the presence of delete markers. Delete markers are
      * present in the case of isolatable indices. The query below, which is amenable to optimization
      * in principle, cannot be optimized when this mode is used.

@@ -105,8 +105,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.config.NicUtil;
 
-/**
- * Class encapsulates logic for managing the store files (journals and index segments), including
+/*
+* Class encapsulates logic for managing the store files (journals and index segments), including
  * the logic to compute the effective release time for the managed resources and to release those
  * resources by deleting them from the file system.
  *
@@ -125,14 +125,14 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** Logger. */
   private static final Logger log = Logger.getLogger(StoreManager.class);
 
-  /**
+  /*
    * Options for the {@link StoreManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface Options extends org.embergraph.journal.Options {
+  public interface Options extends org.embergraph.journal.Options {
 
-    /**
+    /*
      * The property whose value is the name of the directory in which the store files will be
      * created (no default). This property is required unless the instance is transient. If you
      * specify {@link org.embergraph.journal.Options#BUFFER_MODE} as {@link BufferMode#Transient}
@@ -156,7 +156,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
      */
     String DATA_DIR = StoreManager.class.getName() + ".dataDir";
 
-    /**
+    /*
      * The capacity of the LRU cache of open {@link IRawStore}s. The capacity of this cache
      * indirectly controls how many stores will be held open. The main reason for keeping an store
      * open is to reuse its buffers if another request arrives "soon" which would read on that
@@ -181,7 +181,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     /** The default for the {@link #STORE_CACHE_CAPACITY} option. */
     String DEFAULT_STORE_CACHE_CAPACITY = "20";
 
-    /**
+    /*
      * The time in milliseconds before an entry in the store cache will be cleared from the backing
      * {@link HardReferenceQueue} (default {@value #DEFAULT_STORE_CACHE_TIMEOUT}). This property
      * controls how long the store cache will retain an {@link IRawStore} which has not been
@@ -191,7 +191,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
     String DEFAULT_STORE_CACHE_TIMEOUT = "" + (60 * 1000); // One minute.
 
-    /**
+    /*
      * A boolean property whose value determines whether or not startup will complete successfully
      * if bad files are identified during the startup scan (default {@value
      * #DEFAULT_IGNORE_BAD_FILES}). When <code>false</code> the {@link StoreManager} will refuse to
@@ -209,7 +209,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
     String DEFAULT_PURGE_OLD_RESOURCES_DURING_STARTUP = "true";
 
-    /**
+    /*
      * Option specifies the #of bytes under management below which we will accelerate the overflow
      * of the live journal by reducing its maximum extent below the nominal configured maximum
      * extent. The purpose of this option is to promote rapid overflow of a new data service (where
@@ -223,12 +223,12 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     String DEFAULT_ACCELERATE_OVERFLOW_THRESHOLD = "" + (Bytes.gigabyte);
   }
 
-  /**
+  /*
    * Performance counters for the {@link StoreManager}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface IStoreManagerCounters {
+  public interface IStoreManagerCounters {
 
     /** The configured data directory. */
     String DataDir = "DataDir";
@@ -274,7 +274,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     /** The #of bytes in index segments currently under management by the {@link StoreManager}. */
     String SegmentBytesUnderManagement = "Segment Bytes Under Management";
 
-    /**
+    /*
      * The #of bytes in resources that have been deleted by the {@link StoreManager} after they
      * became release free.
      */
@@ -286,20 +286,20 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     /** The #of bytes available on the disk volume on which the temporary directory is located. */
     String TmpDirBytesAvailable = "Temp Volume Bytes Available";
 
-    /**
+    /*
      * The maximum extent of any journal managed by this service as of the time when it was closed
      * out by synchronous overflow processing.
      */
     String MaximumJournalSizeAtOverflow = "Maximum Journal Size At Overflow";
 
-    /**
+    /*
      * The elapsed milliseconds to date required to purge old resources from the file system.
      *
      * @see StoreManager#purgeOldResources()
      */
     String PurgeResourcesMillis = "Purge Resources Millis";
 
-    /**
+    /*
      * The current release time for the {@link StoreManager}.
      *
      * @see StoreManager#getReleaseTime()
@@ -309,7 +309,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     /** The timestamp associated with the last synchronous overflow event. */
     String LastOverflowTime = "Last Overflow Time";
 
-    /**
+    /*
      * The most recent commit time preserved when resources were last purged from the {@link
      * StoreManger}.
      *
@@ -321,7 +321,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     String LastCommitTime = "Last Commit Time";
   }
 
-  /**
+  /*
    * The directory in which the data files reside.
    *
    * <p>Note: It is a hard requirement that each resource is located by the {@link
@@ -338,14 +338,14 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** Directory containing the index segment resources. */
   protected final File segmentsDir;
 
-  /**
+  /*
    * The directory in which the temporary files will reside.
    *
    * @see Options#TMP_DIR
    */
   protected final File tmpDir;
 
-  /**
+  /*
    * The performance counters for the {@link IBufferStrategy} backing the live journal and any
    * historical journals which are concurrently open with the live journal. A single instance of
    * this object is used, and a hard reference to that instance is held here, so that we can track
@@ -355,7 +355,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    */
   private final StoreCounters storeCounters = new StoreCounters();
 
-  /**
+  /*
    * The performance counters for the {@link IBufferStrategy} backing the live journal and any
    * historical journals which are concurrently open with the live journal. A single instance of
    * this object is used, and a hard reference to that instance is held here, so that we can track
@@ -368,7 +368,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return storeCounters;
   }
 
-  /**
+  /*
    * A map over the journal histories. The map is transient and is re-populated from a scan of the
    * file system during startup.
    *
@@ -378,7 +378,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    */
   private final JournalIndex journalIndex;
 
-  /**
+  /*
    * A map over the index segments by ascending createTime and UUID. The map is transient and is
    * re-populated from a scan of the file system during startup.
    *
@@ -392,7 +392,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    */
   private final IndexSegmentIndex segmentIndex;
 
-  /**
+  /*
    * A non-thread-safe collection of {@link UUID}s for {@link IndexSegment}s which have been newly
    * built but not yet incorporated in a re-start safe manner into an index partition view. {@link
    * UUID}s in this collection are excluded from release by {@link #purgeOldResources()}.
@@ -403,7 +403,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    */
   private final Set<UUID> retentionSet = new HashSet<UUID>();
 
-  /**
+  /*
    * Add an {@link IndexSegment} to the set of {@link IndexSegment}s which have been generated but
    * not yet incorporated into an index partition view and hence we must take special cautions to
    * prevent their release.
@@ -425,7 +425,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     }
   }
 
-  /**
+  /*
    * Remove an {@link IndexSegment} from the {@link #retentionSet}. DO NOT invoke this until the
    * {@link IndexSegment} has been incorporated in a restart safe manner into an index partition
    * view (that is, post-commit rather than during the task that incorporates it into the view) or
@@ -442,8 +442,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     synchronized (retentionSet) {
       if (!retentionSet.remove(uuid)) {
 
-        /*
-         * Note: Only a warning since invoked during error handling when
+      /*
+       * Note: Only a warning since invoked during error handling when
          * the resource might have not made it into the retentionSet in
          * the first place.
          */
@@ -453,7 +453,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     }
   }
 
-  /**
+  /*
    * A cache that is used by the to automatically close out unused {@link IndexSegmentStore}s. An
    * {@link IndexSegment} that is no longer used will have its reference cleared when it is swept by
    * the garbage collector and will automatically release all of its buffers (node and leaf cache,
@@ -476,7 +476,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** Provides locks on a per-{resourceUUID} basis for higher concurrency. */
   private final transient NamedLock<UUID> namedLock = new NamedLock<UUID>();
 
-  /**
+  /*
    * The #of entries in the hard reference cache for {@link IRawStore}s, including both {@link
    * ManagedJournal}s and IndexSegment}s. There MAY be more {@link IRawStore}s open than are
    * reported by this method if there are hard references held by the application to those {@link
@@ -491,8 +491,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** <code>true</code> iff {@link BufferMode#Transient} was indicated. */
   private final boolean isTransient;
 
-  //    /**
-  //     * A direct {@link ByteBuffer} that will be used as the write cache for the
+  //    /*
+//     * A direct {@link ByteBuffer} that will be used as the write cache for the
   //     * live journal and which will be handed off from live journal to live
   //     * journal during overflow processing which is allocated iff
   //     * {@link BufferMode#Disk} is chosen.
@@ -513,7 +513,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   protected final AtomicReference<ManagedJournal> liveJournalRef =
       new AtomicReference<ManagedJournal>(null);
 
-  /**
+  /*
    * <code>true</code> initially and remains <code>true</code> until the {@link ResourceManager} is
    * shutdown.
    *
@@ -521,7 +521,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    */
   private final AtomicBoolean open = new AtomicBoolean(true);
 
-  /**
+  /*
    * <code>true</code> initially and until {@link #start()} completes successfully, this is used to
    * disambiguate the startup transient state from the shutdown state.
    *
@@ -529,13 +529,13 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    */
   private final AtomicBoolean starting = new AtomicBoolean(true);
 
-  /**
+  /*
    * The service used to send files to other data services and to exchange NIO {@link ByteBuffer} in
    * support of distributed query processing.
    */
   private ManagedResourceService resourceService;
 
-  /**
+  /*
    * The service used to send files to other data services and to exchange NIO {@link ByteBuffer} in
    * support of distributed query processing.
    */
@@ -546,8 +546,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return resourceService;
   }
 
-  //    /**
-  //     * The port at which you can connect to the {@link ResourceService}. This
+  //    /*
+//     * The port at which you can connect to the {@link ResourceService}. This
   //     * service provides remote access to resources hosted by the owning
   //     * {@link DataService}. This is used for moving resources to other data
   //     * services in the federation, including supporting service failover.
@@ -574,7 +574,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** @see Options#ACCELERATE_OVERFLOW_THRESHOLD */
   protected final long accelerateOverflowThreshold;
 
-  /**
+  /*
    * Used to run the {@link Startup}. @todo defer to init() outside of ctor. Also, defer {@link
    * Startup} until init() outside of ctor.
    */
@@ -582,7 +582,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
       Executors.newSingleThreadExecutor(
           new DaemonThreadFactory(getClass().getName() + ".startupService"));
 
-  /**
+  /*
    * Succeeds if the {@link StoreManager} {@link #isOpen()} and is NOT {@link #isStarting()} (the
    * test itself is NOT atomic).
    *
@@ -595,7 +595,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     if (isStarting()) throw new IllegalStateException("Starting up");
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the {@link StoreManager} is open and startup processing has been
    * completed.
    */
@@ -616,7 +616,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     if (isOpen()) throw new IllegalStateException();
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the {@link StoreManager} is running. If the {@link StoreManager}
    * is currently starting up, then this will await the completion of the {@link Startup} task.
    *
@@ -642,7 +642,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return isRunning();
   }
 
-  /**
+  /*
    * A map from the resource UUID to the absolute {@link File} for that resource.
    *
    * <p>Note: The {@link IResourceMetadata} reported by an {@link AbstractJournal} or {@link
@@ -654,7 +654,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** The properties given to the ctor. */
   private final Properties properties;
 
-  /**
+  /*
    * Release time is zero (0L) until notified otherwise - 0L is ignored.
    *
    * @see #setReleaseTime(long)
@@ -664,19 +664,19 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** The elapsed #of milliseconds in {@link #purgeOldResources()} */
   protected long purgeResourcesMillis = 0L;
 
-  /**
+  /*
    * The last value computed by {@link #getEffectiveReleaseTime()} and ZERO(0) until a value has
    * been calculated.
    */
   protected long lastCommitTimePreserved = 0L;
 
-  /**
+  /*
    * The last commit time corresponding to the last synchronous overflow event and ZERO (0L) until
    * there has been a synchronous overflow event.
    */
   protected long lastOverflowTime = 0L;
 
-  /**
+  /*
    * The observed maximum size of a journal (its length in bytes) as measured at each synchronous
    * overflow event.
    */
@@ -694,7 +694,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** The #of {@link IndexSegmentStore}s that have been deleted to date. */
   protected final AtomicLong segmentStoreDeleteCount = new AtomicLong();
 
-  /**
+  /*
    * The #of bytes currently under management EXCEPT those on the live journal. This is incremented
    * each time a new resource is added using {@link #addResource(IResourceMetadata, File)} and
    * decremented each time a resource is deleted.
@@ -707,7 +707,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** The #of bytes that have been deleted since startup. */
   protected final AtomicLong bytesDeleted = new AtomicLong();
 
-  /**
+  /*
    * The #of bytes currently under management, including those written on the live journal.
    *
    * @throws IllegalStateException during startup or if the {@link StoreManager} is closed.
@@ -719,7 +719,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return bytesUnderManagement.get() + getLiveJournal().getBufferStrategy().getExtent();
   }
 
-  /**
+  /*
    * The #of bytes in {@link ManagedJournal}s, including those written on the live journal.
    *
    * @throws IllegalStateException during startup or if the {@link StoreManager} is closed.
@@ -731,7 +731,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return journalBytesUnderManagement.get() + getLiveJournal().getBufferStrategy().getExtent();
   }
 
-  /**
+  /*
    * The #of bytes in managed {@link IndexSegmentStore}s.
    *
    * @throws IllegalStateException during startup or if the {@link StoreManager} is closed.
@@ -743,7 +743,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return segmentBytesUnderManagement.get();
   }
 
-  /**
+  /*
    * The #of bytes of free space remaining on the volume hosting the {@link #dataDir}.
    *
    * @return The #of bytes of free space remaining -or- <code>-1L</code> if the free space could not
@@ -754,7 +754,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return getFreeSpace(dataDir);
   }
 
-  /**
+  /*
    * The #of bytes of free space remaining on the volume hosting the {@link #tmpDir}.
    *
    * @return The #of bytes of free space remaining -or- <code>-1L</code> if the free space could not
@@ -765,7 +765,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return getFreeSpace(tmpDir);
   }
 
-  /**
+  /*
    * Return the free space in bytes on the volume hosting some directory.
    *
    * @param dir A directory hosted on some volume.
@@ -810,8 +810,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     }
   }
 
-  //    /**
-  //     * Return the free space in bytes on the volume hosting some directory.
+  //    /*
+//     * Return the free space in bytes on the volume hosting some directory.
   //     * <p>
   //     * Note: This uses the apache IO commons {@link FileSystemUtils} to report
   //     * the free space on the volume hosting the directory and then converts kb
@@ -857,7 +857,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return isTransient;
   }
 
-  /**
+  /*
    * Note: This constructor starts an asynchronous thread that scans the data directory for journals
    * and index segments and creates the initial journal if no store files are found.
    *
@@ -968,7 +968,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     // true iff transient journals is requested.
     isTransient =
         BufferMode.valueOf(
-                properties.getProperty(Options.BUFFER_MODE, Options.DEFAULT_BUFFER_MODE.toString()))
+                properties.getProperty(Options.BUFFER_MODE, Options.DEFAULT_BUFFER_MODE))
             == BufferMode.Transient;
 
     /*
@@ -1111,7 +1111,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     startupService.submit(new Startup());
   }
 
-  /**
+  /*
    * Runs a startup scan of the data directory and creates the initial journal if none was found. If
    * the {@link Startup} task fails or is interrupted then the {@link StoreManager} will be {@link
    * StoreManager#shutdownNow()}.
@@ -1150,8 +1150,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       } finally {
 
-        /*
-         * Whether or not startup was successful, we make sure that this
+      /*
+       * Whether or not startup was successful, we make sure that this
          * flag is turned off.
          */
 
@@ -1166,7 +1166,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
       }
     }
 
-    /**
+    /*
      * Starts up the {@link StoreManager}.
      *
      * <p>Note: Implementations of this method MUST be <code>synchronized</code>.
@@ -1205,8 +1205,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
       try {
         final IEmbergraphFederation<?> fed = getFederation();
         if (fed == null) {
-          /*
-           * Some of the unit tests do not start the txs until after
+        /*
+       * Some of the unit tests do not start the txs until after
            * the DataService. For those unit tests getFederation()
            * will return null during startup() of the DataService. To
            * have a common code path, we throw the exception here
@@ -1251,8 +1251,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
           } else {
 
-            /*
-             * Note: This exception will be thrown if we could not
+          /*
+       * Note: This exception will be thrown if we could not
              * get a lock on a journal file (see FileMetadata - the
              * lock error is not reported until we try to read the
              * magic field) or if there is a problem with the data
@@ -1358,8 +1358,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       if (journalIndex.getEntryCount() == 0) {
 
-        /*
-         * There are no existing journal files. Create new journal using
+      /*
+       * There are no existing journal files. Create new journal using
          * a unique filename in the appropriate subdirectory of the data
          * directory.  Since the file is empty, it will be initialized
          * as a new Journal.
@@ -1390,8 +1390,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
           }
         }
 
-        /*
-         * Set the createTime on the new journal resource.
+      /*
+       * Set the createTime on the new journal resource.
          */
         p.setProperty(Options.CREATE_TIME, Long.toString(nextTimestamp()));
 
@@ -1401,8 +1401,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       } else {
 
-        /*
-         * There is at least one pre-existing journal file, so we open
+      /*
+       * There is at least one pre-existing journal file, so we open
          * the one with the largest timestamp - this will be the most
          * current journal and the one that will receive writes until it
          * overflows.
@@ -1452,8 +1452,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
           addResource(tmp.getResourceMetadata(), tmp.getFile());
         }
 
-        /*
-         * Add to set of open stores.
+      /*
+       * Add to set of open stores.
          *
          * Note: single-threaded during startup.
          */
@@ -1465,8 +1465,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         liveJournalRef.set(tmp);
 
-        /*
-         * Subtract out the #of bytes in the live journal.
+      /*
+       * Subtract out the #of bytes in the live journal.
          */
 
         final long extent = -tmp.getBufferStrategy().getExtent();
@@ -1477,8 +1477,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
       }
     }
 
-    //        /**
-    //         * Purge any index partition moves which did not complete successfully
+    //        /*
+//         * Purge any index partition moves which did not complete successfully
     //         * on restart. These index partitions are identified by scanning the
     //         * indices registered on the live journal. If an index has
     //         * <code>sourcePartitionId != -1</code> in its
@@ -1598,7 +1598,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return starting.get();
   }
 
-  /**
+  /*
    * <code>false</code> initially and remains <code>false</code> until {@link #start()} completes
    * successfully. once <code>true</code> this remains <code>true</code> until either {@link
    * #shutdown()} or {@link #shutdownNow()} is invoked.
@@ -1609,8 +1609,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return open.get();
   }
 
-  //    /**
-  //     * Clears any stale entries in the LRU backing the {@link #storeCache}
+  //    /*
+//     * Clears any stale entries in the LRU backing the {@link #storeCache}
   //     */
   //    public void clearStaleCacheEntries() {
   //
@@ -1703,7 +1703,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
   }
 
-  /**
+  /*
    * Helper class gathers statistics about files during a scan.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1741,9 +1741,9 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
           + badFiles
           + "}";
     }
-  };
+  }
 
-  /**
+  /*
    * Recursively scan a directory structure identifying all journal and index segment resources and
    * populating the internal {@link #resourceFiles} map. In addition, all journal files are listed
    * in the {@link #journals} map so that we can find the relevant journal quickly for a given
@@ -1869,8 +1869,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         if (segStore.isOpen()) {
 
-          /*
-           * Note: opening the segment with [load == false] does not
+        /*
+       * Note: opening the segment with [load == false] does not
            * really open anything so you do not need to close the
            * segment afterwards. I've put the conditional logic here
            * just in case that changes.
@@ -1887,8 +1887,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       } else {
 
-        /*
-         * This file is not relevant to the resource manager.
+      /*
+       * This file is not relevant to the resource manager.
          */
 
         log.warn("Ignoring file: " + file);
@@ -1929,7 +1929,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return dataDir;
   }
 
-  /**
+  /*
    * Closes ALL open store files.
    *
    * <p>Note: This is invoked by {@link #shutdown()} and {@link #shutdownNow()}.
@@ -1977,7 +1977,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return segmentIndex.getEntryCount();
   }
 
-  /**
+  /*
    * Notify the resource manager of a new resource. The resource is added to {@link #resourceFiles}
    * and to either {@link #journalIndex} or {@link #segmentIndex} as appropriate. As a
    * post-condition, you can use {@link #openStore(UUID)} to open the resource using the {@link
@@ -2089,7 +2089,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     bytesUnderManagement.addAndGet(extent);
   }
 
-  /**
+  /*
    * Returns a filter that is used to recognize files that are managed by this class. The {@link
    * ResourceManager} will log warnings if it sees an unexpected file and will NOT {@link
    * #deleteResources()} files that it does not recognize.
@@ -2104,7 +2104,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return new ResourceFileFilter(this);
   }
 
-  /**
+  /*
    * The object used to control access to the index resources.
    *
    * @throws IllegalStateException if the object has not been set yet using {@link
@@ -2114,7 +2114,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
   public abstract void setConcurrencyManager(IConcurrencyManager concurrencyManager);
 
-  /**
+  /*
    * The {@link ManagedJournal} provides the backing store used to absorb writes and retain history
    * for the scale-out architecture.
    *
@@ -2125,8 +2125,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    */
   public class ManagedJournal extends AbstractJournal {
 
-    //        /**
-    //         * Note: Each instance of the {@link ManagedJournal} reuses the SAME
+    //        /*
+//         * Note: Each instance of the {@link ManagedJournal} reuses the SAME
     //         * {@link StoreManager#writeCache}. Therefore you MUST close out writes
     //         * on the old journal BEFORE you may allocate a new journal.
     //         *
@@ -2176,7 +2176,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
           + "}";
     }
 
-    /**
+    /*
      * Note: Exposed for the {@link DataService} which needs this for its 2-phase commit protocol.
      */
     @Override
@@ -2185,7 +2185,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
       return super.commitNow(commitTime);
     }
 
-    /**
+    /*
      * Exposed for {@link StoreManger#getResourcesForTimestamp(long)} which requires access to the
      * {@link CommitRecordIndex} for the lastCommitTime on the historical journals.
      *
@@ -2259,7 +2259,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
       return getFederation().getTempStore();
     }
 
-    /**
+    /*
      * Extended to set the {@link IResourceMetadata} to this journal if it is <code>null</code>
      * since a remote caller can not have the correct metadata on hand when they formulate the
      * request.
@@ -2273,16 +2273,16 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       if (pmd == null) {
 
-        /*
-         * Note: This case permits unpartitioned indices for the MDS.
+      /*
+       * Note: This case permits unpartitioned indices for the MDS.
          */
         return;
       }
 
       if (pmd.getResources() == null) {
 
-        /*
-         * A [null] for the resources field is a specific indication
+      /*
+       * A [null] for the resources field is a specific indication
          * that we need to specify the resource metadata for the live
          * journal at the time that the index partition is registered.
          * This indicator is used when the metadata service registers an
@@ -2369,7 +2369,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     }
   } // class ManagedJournal
 
-  /**
+  /*
    * The journal on which writes are made.
    *
    * @throws IllegalStateException if the {@link StoreManager} is not open.
@@ -2399,8 +2399,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return tmp;
   }
 
-  //    /**
-  //     * This lock is used to prevent asynchronous processes such as
+  //    /*
+//     * This lock is used to prevent asynchronous processes such as
   //     * {@link ConcurrencyManager#getIndexCounters()} from acquiring the live
   //     * journal during the period between when we close out the old journal
   //     * against future writes and when the new live journal is in place.
@@ -2410,7 +2410,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   //     */
   //    protected final ReentrantLock liveJournalLock = new ReentrantLock();
 
-  /**
+  /*
    * @throws IllegalStateException if the {@link StoreManager} is not open.
    * @throws IllegalStateException if the {@link StoreManager} is still starting up.
    * @todo write tests for unisolated and read-committed. make sure that there is no fencepost for
@@ -2459,7 +2459,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return (AbstractJournal) openStore(resource.getUUID());
   }
 
-  /**
+  /*
    * Opens an {@link IRawStore}.
    *
    * @param uuid The UUID identifying that store file.
@@ -2512,8 +2512,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
           if (store instanceof IndexSegmentStore) {
 
-            /*
-             * We can simply re-open an index segment's store file.
+          /*
+       * We can simply re-open an index segment's store file.
              */
 
             //                        // Note: relative to the data directory!
@@ -2544,8 +2544,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
           } else {
 
-            /*
-             * Note: Journals should not be closed without also
+          /*
+       * Note: Journals should not be closed without also
              * removing them from the list of open resources. The
              * live journal SHOULD NOT be closed except during
              * shutdown or overflow (when it is replaced by a new
@@ -2561,8 +2561,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       if (store == null) {
 
-        /*
-         * Attempt to open the resource.
+      /*
+       * Attempt to open the resource.
          */
 
         // Lookup filename by resource UUID.
@@ -2570,8 +2570,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         if (file == null) {
 
-          /*
-           * Note: Non-transactional read-historical operations DO NOT
+        /*
+       * Note: Non-transactional read-historical operations DO NOT
            * declare read locks and therefore are unable to prevent
            * resources from being released, which can lead to this
            * exception.
@@ -2589,8 +2589,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         if (file.getName().endsWith(Options.JNL)) {
 
-          /*
-           * Open a historical journal.
+        /*
+       * Open a historical journal.
            *
            * Note: The live journal is never opened by this code path.
            * It is opened when the resource manager is instantiated
@@ -2631,8 +2631,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         } else {
 
-          /*
-           * FIXME Make sure that the segStore either makes it into
+        /*
+       * FIXME Make sure that the segStore either makes it into
            * the cache or is closed even for spurious exceptions.
            * E.g.,
            *
@@ -2652,8 +2652,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
           segmentStoreReopenCount.incrementAndGet();
         }
 
-        /*
-         * Verify the resource UUID.
+      /*
+       * Verify the resource UUID.
          */
         if (!actualUUID.equals(uuid)) {
 
@@ -2718,7 +2718,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     segmentBytesUnderManagement.set(0L);
   }
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself.
    *
@@ -2752,7 +2752,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     }
   }
 
-  /**
+  /*
    * Updates the {@link #releaseTime}.
    *
    * <p>Data services MAY release data for views whose timestamp is less than or equal to the
@@ -2784,7 +2784,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
   /** @see IndexManager#getIndexRetentionTime() */
   protected abstract long getIndexRetentionTime();
 
-  /**
+  /*
    * In order to have atomic semantics and prevent a read-historical operation from starting
    * concurrently that would have access to a view that is being purged, {@link
    * IndexManager#getIndex(String, long)} and {@link StoreManager#purgeOldResources()} MUST contend
@@ -2794,7 +2794,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    */
   protected final ReentrantReadWriteLock indexCacheLock = new ReentrantReadWriteLock();
 
-  /**
+  /*
    * Identify and delete resources no longer required by the index views from the current
    * releaseTime up to the lastCommitTime.
    *
@@ -2870,8 +2870,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       } catch (IOException ex) {
 
-        /*
-         * Since the releaseTime is monotonically increasing, if there
+      /*
+       * Since the releaseTime is monotonically increasing, if there
          * is an RMI problem then we use the last release time that was
          * pushed to us by the txService.
          */
@@ -3023,8 +3023,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
       final long commitTimeToPreserve;
       if (choosenReleaseTime < firstCommitTime) {
 
-        /*
-         * If the computed [releaseTime] is before the first commit
+      /*
+       * If the computed [releaseTime] is before the first commit
          * record on the earliest available journal then there was
          * nothing that could be deleted and we just return immediately.
          */
@@ -3036,8 +3036,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       } else if (choosenReleaseTime >= lastCommitTime) {
 
-        /*
-         * If the computed [releaseTime] GTE the last commit point then
+      /*
+       * If the computed [releaseTime] GTE the last commit point then
          * we choose the [lastCommitTime] instead.
          *
          * Note: If there have been no writes on this data service but
@@ -3056,8 +3056,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       } else {
 
-        /*
-         * Find the timestamp for the commit record that is strictly
+      /*
+       * Find the timestamp for the commit record that is strictly
          * greater than the release time.
          */
 
@@ -3159,7 +3159,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     }
   }
 
-  /**
+  /*
    * Delete unused resources given a set of resources that are still in use. The unused resources
    * are identified by scanning the {@link #journalIndex} and the {@link #segmentIndex}. For each
    * resource found in either of those indices which is NOT found in <i>resourcesInUse</i> and whose
@@ -3226,8 +3226,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         if (createTime >= commitTimeToPreserve) {
 
-          /*
-           * Do NOT delete any resources whose createTime is GTE the
+        /*
+       * Do NOT delete any resources whose createTime is GTE the
            * given commit time.
            */
 
@@ -3301,8 +3301,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         if (createTime >= commitTimeToPreserve) {
 
-          /*
-           * Do NOT delete any resources whose createTime is GTE the
+        /*
+       * Do NOT delete any resources whose createTime is GTE the
            * given commit time.
            */
 
@@ -3356,7 +3356,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
               + " segments");
   }
 
-  /**
+  /*
    * Delete the resource in the file system and remove it from the {@link #storeCache} and {@link
    * #resourceFiles} and either {@link #journalIndex} or {@link #segmentIndex} as appropriate.
    *
@@ -3449,8 +3449,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         } catch (IllegalStateException t) {
 
-          /*
-           * There should not be closed journals in the cache since
+        /*
+       * There should not be closed journals in the cache since
            * they are only closed by the finalizer.
            *
            * However, an IndexSegmentStore will be closed if the
@@ -3481,8 +3481,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       if (file == null) {
 
-        /*
-         * Note: This can happen if you confuse the indexUUID and the
+      /*
+       * Note: This can happen if you confuse the indexUUID and the
          * indexSegment's UUID in the code. The former is on the
          * IndexMetadata while the latter (the one that you want) is on
          * the SegmentMetadata.
@@ -3584,7 +3584,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     }
   }
 
-  /**
+  /*
    * Variant used by {@link #deleteUnusedResources(long, Set)}, which is in turned invoked by {@link
    * #purgeOldResources()}. This implementation is different in that we have the {@link
    * IResourceManager} on hand when we need to delete the resource. I judge it worth the redundency
@@ -3675,8 +3675,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         } catch (IllegalStateException t) {
 
-          /*
-           * There should not be closed journals in the cache since
+        /*
+       * There should not be closed journals in the cache since
            * they are only closed by the finalizer.
            *
            * However, an IndexSegmentStore will be closed if the
@@ -3723,8 +3723,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       if (file == null) {
 
-        /*
-         * Note: This can happen if you confuse the indexUUID and the
+      /*
+       * Note: This can happen if you confuse the indexUUID and the
          * indexSegment's UUID in the code. The former is on the
          * IndexMetadata while the latter (the one that you want) is on
          * the SegmentMetadata.
@@ -3761,7 +3761,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     }
   }
 
-  /**
+  /*
    * Finds the journal spanning the first {@link ICommitRecord} that is strictly greater than the
    * specified timestamp and returns the timestamp of that {@link ICommitRecord}.
    *
@@ -3793,8 +3793,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
       if (closeTime == 0L) {
 
-        /*
-         * Since this journal is not closed then we know that the next
+      /*
+       * Since this journal is not closed then we know that the next
          * commit would be on this journal, but there is no commit for
          * that release time.
          */
@@ -3833,7 +3833,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return commitTime;
   }
 
-  /**
+  /*
    * Finds all resources used by any registered index as of the <i>commitTimeToPreserve</i> up to
    * and including the lastCommitTime for the live journal.
    *
@@ -3896,8 +3896,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
         if (lastCommitTime < commitTimeToPreserve) {
 
-          /*
-           * Ignore this journal since last commit point is strictly
+        /*
+       * Ignore this journal since last commit point is strictly
            * LT our starting [commitTime].
            *
            * Note: Since the index partition views are re-defined on
@@ -3910,8 +3910,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
           continue;
         }
 
-        /*
-         * Scan commit points on that journal.
+      /*
+       * Scan commit points on that journal.
          */
         {
           if (log.isDebugEnabled())
@@ -3923,8 +3923,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
                     + ", uuid="
                     + journal.getRootBlockView().getUUID());
 
-          /*
-           * The index of commit points for the journal, loaded from
+        /*
+       * The index of commit points for the journal, loaded from
            * the last commit point on the journal. This is Ok since we
            * always want to read up to the lastCommitPoint on each
            * journal, including on the live journal.
@@ -3937,8 +3937,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
               journal.getCommitRecordIndex(
                   journal.getRootBlockView().getCommitRecordIndexAddr(), true /*readOnly*/);
 
-          /*
-           * A per-journal hash set of the [checkpointAddr] for the
+        /*
+       * A per-journal hash set of the [checkpointAddr] for the
            * BTree's that we have examined so that we can skip over
            * any BTree whose state has not been changed since the last
            * commit point (if it has the same checkpointAddr in two
@@ -3947,8 +3947,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
            */
           final Set<Long /* checkpointAddr */> addrs = new HashSet<Long>(512);
 
-          /*
-           * In order to scan timestamps from [commitTime] through to
+        /*
+       * In order to scan timestamps from [commitTime] through to
            * the end. For each tuple, fetch the corresponding
            * [commitRecord]. For each commitRecord, fetch the
            * Name2Addr index and visit its Entries.
@@ -3963,8 +3963,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
             final CommitRecordIndex.Entry entry2 = (CommitRecordIndex.Entry) tuple2.getObject();
 
-            /*
-             * For each distinct checkpoint, load the BTree and
+          /*
+       * For each distinct checkpoint, load the BTree and
              * fetch its local partition metadata which specifies
              * its resource dependencies. For each resource, add it
              * to the set of resources that we are collecting. All
@@ -3992,8 +3992,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
               if (addrs.add(checkpointAddr)) {
 
-                /*
-                 * New checkpoint address.
+              /*
+       * New checkpoint address.
                  */
 
                 if (log.isDebugEnabled()) log.debug("index: name=" + entry3.name);
@@ -4010,8 +4010,8 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
 
                 if (pmd == null) {
 
-                  /*
-                   * For scale-out, all indices should be
+                /*
+       * For scale-out, all indices should be
                    * index partitions and should define the
                    * resources required by their view.
                    *
@@ -4050,7 +4050,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return uuids;
   }
 
-  /**
+  /*
    * Munge a name index so that it is suitable for use in a filesystem. In particular, any non-word
    * characters are converted to an underscore character ("_"). This gets rid of all punctuation
    * characters and whitespace in the index name itself, but will not translate unicode characters.
@@ -4076,7 +4076,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
         pmd == null ? -1 : pmd.getPartitionId());
   }
 
-  /**
+  /*
    * Return the file on which a new {@link IndexSegment} should be written. The file will exist but
    * will have zero length. The file is created using the {@link File#createTempFile(String, String,
    * File)} mechanism within the configured {@link #dataDir} in the subdirectory for the specified
@@ -4137,7 +4137,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     return file;
   }
 
-  /**
+  /*
    * This attempts to obtain the exclusive lock for the {@link WriteExecutorService}. If successful,
    * it purges any resources that are no longer required based on {@link
    * StoreManager.Options#MIN_RELEASE_AGE} and optionally truncates the live journal such that no
@@ -4216,7 +4216,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     }
   }
 
-  /**
+  /*
    * When the {@link StoreManager} is relatively new (as measured by the #of bytes under management)
    * we discount the journal extent in order to trigger overflow earlier. Together with the discount
    * applied to the split handler by the {@link AsynchronousOverflowTask}, this helps to break down

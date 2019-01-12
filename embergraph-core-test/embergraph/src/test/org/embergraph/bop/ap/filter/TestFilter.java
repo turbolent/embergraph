@@ -23,8 +23,8 @@ package org.embergraph.bop.ap.filter;
 
 import junit.framework.TestCase2;
 
-/**
- * Unit tests for {@link BOpFilter}.
+/*
+* Unit tests for {@link BOpFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

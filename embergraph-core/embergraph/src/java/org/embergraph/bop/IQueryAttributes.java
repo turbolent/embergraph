@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-/**
- * An interface providing access to named attribute values which may be shared across operators or
+/*
+* An interface providing access to named attribute values which may be shared across operators or
  * across multiple invocations of the same operator. The bindings are scoped to the owning {@link
  * IQueryContext}.
  *
@@ -35,7 +35,7 @@ package org.embergraph.bop;
  */
 public interface IQueryAttributes {
 
-  /**
+  /*
    * Return the attribute value under the key.
    *
    * @param key The key.
@@ -44,7 +44,7 @@ public interface IQueryAttributes {
    */
   Object get(Object key);
 
-  /**
+  /*
    * Bind an attribute under the key.
    *
    * @param key The key.
@@ -54,7 +54,7 @@ public interface IQueryAttributes {
    */
   Object put(Object key, Object val);
 
-  /**
+  /*
    * Atomically bind an attribute value under the key iff the key is not already bound.
    *
    * @param key The key.
@@ -63,7 +63,7 @@ public interface IQueryAttributes {
    */
   Object putIfAbsent(Object key, Object val);
 
-  /**
+  /*
    * Remove the attribute under the key.
    *
    * @param key The key.
@@ -71,7 +71,7 @@ public interface IQueryAttributes {
    */
   Object remove(Object key);
 
-  /**
+  /*
    * Atomically remove the attribute under the key iff it has the given value.
    *
    * @param key The key.

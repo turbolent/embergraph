@@ -26,8 +26,8 @@ package org.embergraph.relation.rule.eval;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.relation.rule.IRule;
 
-/**
- * A solution bundles together any of (a) the materialized element corresponding to the bindings on
+/*
+* A solution bundles together any of (a) the materialized element corresponding to the bindings on
  * the head of an {@link IRule}; (b) the {@link IBindingSet} used to generate that solution; and (c)
  * the {@link IRule} from which those bindings were computed. All data are optional. Which data are
  * included depends on a set of bit flags known to the {@link IJoinNexus} implementation and the
@@ -43,26 +43,26 @@ import org.embergraph.relation.rule.IRule;
  */
 public interface ISolution<E> {
 
-  /**
+  /*
    * Return the element materialized from the head of the rule given a set of {@link IBindingSet
    * bindings} for that rule (optional operation).
    *
    * @return The element -or- <code>null</code> if the element was not requested.
    */
-  public E get();
+  E get();
 
-  /**
+  /*
    * Return the {@link IRule} that generated this solution (optional operation).
    *
    * @return The {@link IRule} -or- <code>null</code> if the rule was not requested.
    */
-  public IRule<E> getRule();
+  IRule<E> getRule();
 
-  /**
+  /*
    * Return the {@link IBindingSet} for this solution (optional operation).
    *
    * @return The {@link IBindingSet}.
    * @return The {@link IBindingSet} -or- <code>null</code> if the binding set was not requested.
    */
-  public IBindingSet getBindingSet();
+  IBindingSet getBindingSet();
 }

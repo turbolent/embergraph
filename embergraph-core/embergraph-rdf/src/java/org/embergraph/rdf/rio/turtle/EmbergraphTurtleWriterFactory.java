@@ -12,8 +12,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterFactory;
 
-/**
- * An RDR-aware {@link RDFWriterFactory} for Turtle writers.
+/*
+* An RDR-aware {@link RDFWriterFactory} for Turtle writers.
  *
  * @author Arjohn Kampman
  * @openrdf
@@ -21,7 +21,7 @@ import org.openrdf.rio.RDFWriterFactory;
  */
 public class EmbergraphTurtleWriterFactory implements RDFWriterFactory {
 
-  /**
+  /*
    * Returns {@link ServiceProviderHook#TURTLE_RDR}.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/1038" >RDR RDF parsers not always discovered

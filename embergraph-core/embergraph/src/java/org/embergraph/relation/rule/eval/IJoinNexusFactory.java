@@ -33,8 +33,8 @@ import org.embergraph.relation.rule.IProgram;
 import org.embergraph.service.DataService;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * A factory for {@link IJoinNexus} instances.
+/*
+* A factory for {@link IJoinNexus} instances.
  *
  * <p>Note: This factory plays a critical role in (re-)constructing a suitable {@link IJoinNexus}
  * instance when an {@link IProgram} is executed on a remote {@link DataService} or when its
@@ -55,7 +55,7 @@ public interface IJoinNexusFactory extends Serializable {
   /** The timestamp for the read view of the relation(s). */
   long getReadTimestamp();
 
-  /**
+  /*
    * Used by fix point closure operations to advance the read timestamp to the {@link
    * IIndexStore#getLastCommitTime()} at the start of each round of closure.
    */
@@ -71,7 +71,7 @@ public interface IJoinNexusFactory extends Serializable {
 
   IRuleTaskFactory getDefaultRuleTaskFactory();
 
-  /**
+  /*
    * Singleton factory for an {@link IJoinNexus} instance for the given <i>indexManager</i>.
    *
    * <p>Note: The use of a singleton pattern helps to reduce the proliferation of distinct {@link

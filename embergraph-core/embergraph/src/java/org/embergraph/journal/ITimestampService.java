@@ -24,15 +24,15 @@ package org.embergraph.journal;
 import java.io.IOException;
 import org.embergraph.service.IService;
 
-/**
- * A service for unique timestamps.
+/*
+* A service for unique timestamps.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ITimestampService extends IService {
 
-  /**
+  /*
    * Return the next unique timestamp. Timestamps must be strictly increasing.
    *
    * <p>Note: This method MUST return strictly increasing values, even when it is invoked by
@@ -43,5 +43,5 @@ public interface ITimestampService extends IService {
    * @throws IOException if there is an RMI problem.
    * @see TimestampServiceUtil#nextTimestamp(ITimestampService)
    */
-  public long nextTimestamp() throws IOException;
+  long nextTimestamp() throws IOException;
 }

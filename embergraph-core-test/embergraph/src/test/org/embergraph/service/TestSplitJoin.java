@@ -44,8 +44,8 @@ import org.embergraph.resources.ResourceManager.Options;
 import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite verifies that inserts eventually split an index and that deletes eventually cause the
+/*
+* Test suite verifies that inserts eventually split an index and that deletes eventually cause the
  * index partitions to be joined.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -62,7 +62,7 @@ public class TestSplitJoin extends AbstractEmbeddedFederationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Overridden to specify the {@link BufferMode#Disk} mode and to lower the threshold at which an
    * overflow operation will be selected.
    */
@@ -116,7 +116,7 @@ public class TestSplitJoin extends AbstractEmbeddedFederationTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Test registers a scale-out index, writes data onto the initial index partition, forces a split,
    * verifies that the scale-out index has been divided into two index partitions, and verifies that
    * a range scan of the scale-out index agrees with the ground truth. The test then goes on to

@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -34,8 +35,8 @@ import org.openrdf.rio.helpers.NTriplesParserSettings;
 import org.openrdf.rio.helpers.RDFParserBase;
 import org.openrdf.rio.ntriples.NTriplesUtil;
 
-/**
- * RDF parser for N-Triples files. A specification of NTriples can be found in <a
+/*
+* RDF parser for N-Triples files. A specification of NTriples can be found in <a
  * href="http://www.w3.org/TR/rdf-testcases/#ntriples">this section</a> of the RDF Test Cases
  * document. This parser is not thread-safe, therefore its public methods are synchronized.
  *
@@ -88,7 +89,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
 
     /** The SID corresponding to the most recently parsed embedded statement. */
     private EmbergraphBNode lastSID;
-  };
+  }
 
   private final Stack<State> stack = new Stack<State>();
 
@@ -104,8 +105,8 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     return stack.peek();
   }
 
-  //	/**
-  //	 * Return a buffer of zero length and non-zero capacity. The same buffer is
+  //	/*
+//	 * Return a buffer of zero length and non-zero capacity. The same buffer is
   //	 * reused for each thing which is parsed. This reduces the heap churn
   //	 * substantially. However, you have to watch out for side-effects and
   //	 * convert the buffer to a {@link String} before the buffer is reused.
@@ -139,7 +140,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
    * Constructors *
    *--------------*/
 
-  /**
+  /*
    * Creates a new NTriplesParser that will use a {@link ValueFactoryImpl} to create object for
    * resources, bNodes and literals.
    */
@@ -150,7 +151,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     super(EmbergraphValueFactoryImpl.getInstance(""));
   }
 
-  /**
+  /*
    * Creates a new NTriplesParser that will use the supplied <tt>ValueFactory</tt> to create RDF
    * model objects.
    *
@@ -165,7 +166,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     this.valueFactory = valueFactory;
   }
 
-  /**
+  /*
    * Return the {@link EmbergraphValueFactory}.
    *
    * @throws ClassCastException if you have not set a {@link EmbergraphValueFactory}.
@@ -183,7 +184,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     return RDFFormat.NTRIPLES;
   }
 
-  /**
+  /*
    * Implementation of the <tt>parse(InputStream, String)</tt> method defined in the RDFParser
    * interface.
    *
@@ -206,14 +207,14 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     // Note: baseURI will be checked in parse(Reader, String)
 
     try {
-      parse(new InputStreamReader(new BOMInputStream(in, false), "US-ASCII"), baseURI);
+      parse(new InputStreamReader(new BOMInputStream(in, false), StandardCharsets.US_ASCII), baseURI);
     } catch (UnsupportedEncodingException e) {
       // Every platform should support the US-ASCII encoding...
       throw new RuntimeException(e);
     }
   }
 
-  /**
+  /*
    * Implementation of the <tt>parse(Reader, String)</tt> method defined in the RDFParser interface.
    *
    * @param reader The Reader from which to read the data, must not be <tt>null</tt>.
@@ -265,7 +266,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     rdfHandler.endRDF();
   }
 
-  /**
+  /*
    * Reads characters from reader until it finds a character that is not a space or tab, and returns
    * this last character. In case the end of the character stream has been reached, -1 is returned.
    */
@@ -290,7 +291,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     return c;
   }
 
-  /**
+  /*
    * Reads characters from reader until the first EOL has been read. The first character after the
    * EOL is returned. In case the end of the character stream has been reached, -1 is returned.
    */
@@ -406,7 +407,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     return c;
   }
 
-  /**
+  /*
    * Return <code>true</code> if the next character is &lt;. This should only be invoked when the
    * current character is known to be &lt;. It provides one character lookahead to differentiate
    * between a URI and a Statement. For example, an embedded Statement in the subject position of
@@ -574,7 +575,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     return c;
   }
 
-  /**
+  /*
    * Checks whether the supplied character is a letter or number according to the N-Triples
    * specification.
    *
@@ -585,7 +586,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     return isLetter(c) || NTriplesUtil.isNumber(c);
   }
 
-  /**
+  /*
    * Checks whether the supplied character is a letter according to the N-Triples specification.
    * N-Triples letters are A - Z and a - z.
    *
@@ -708,7 +709,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     return super.createLiteral(label, lang, dtURI);
   }
 
-  /**
+  /*
    * Overrides {@link RDFParserBase#reportWarning(String)}, adding line number information to the
    * error.
    */
@@ -717,7 +718,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     reportWarning(msg, lineNo, -1);
   }
 
-  /**
+  /*
    * Overrides {@link RDFParserBase#reportError(String)}, adding line number information to the
    * error.
    */
@@ -730,7 +731,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     reportError(e, lineNo, -1, setting);
   }
 
-  /**
+  /*
    * Overrides {@link RDFParserBase#reportFatalError(String)}, adding line number information to the
    * error.
    */
@@ -739,7 +740,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     reportFatalError(msg, lineNo, -1);
   }
 
-  /**
+  /*
    * Overrides {@link RDFParserBase#reportFatalError(Exception)}, adding line number information to
    * the error.
    */
@@ -752,7 +753,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
     throw new RDFParseException("Unexpected end of file");
   }
 
-  /**
+  /*
    * Return a buffer of zero length and non-zero capacity. The same buffer is reused for each thing
    * which is parsed. This reduces the heap churn substantially. However, you have to watch out for
    * side-effects and convert the buffer to a {@link String} before the buffer is reused.
@@ -767,7 +768,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
 
   private final StringBuilder buffer = new StringBuilder(100);
 
-  /**
+  /*
    * Return a buffer for the use of parsing literal language tags. The buffer is of zero length and
    * non-zero capacity. The same buffer is reused for each tag which is parsed. This reduces the
    * heap churn substantially. However, you have to watch out for side-effects and convert the
@@ -783,7 +784,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
 
   private final StringBuilder languageTagBuffer = new StringBuilder(8);
 
-  /**
+  /*
    * Return a buffer for the use of parsing literal datatype URIs. The buffer is of zero length and
    * non-zero capacity. The same buffer is reused for each datatype which is parsed. This reduces
    * the heap churn substantially. However, you have to watch out for side-effects and convert the

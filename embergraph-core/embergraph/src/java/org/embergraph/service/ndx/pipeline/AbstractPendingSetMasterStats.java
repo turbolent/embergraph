@@ -11,8 +11,8 @@ import org.embergraph.counters.Instrument;
 import org.embergraph.service.AbstractFederation;
 import org.embergraph.util.concurrent.MovingAverageTask;
 
-/**
- * Extended to report the moving average of the pending set size for the master and the sinks and to
+/*
+* Extended to report the moving average of the pending set size for the master and the sinks and to
  * report the maximum pending set size for the sinks.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,7 +33,7 @@ public abstract class AbstractPendingSetMasterStats<L, HS extends AbstractSubtas
     return new PendingSetStatisticsTask();
   }
 
-  /**
+  /*
    * Extended to report the average #of operations in the pending set for the master and the sinks.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -41,7 +41,7 @@ public abstract class AbstractPendingSetMasterStats<L, HS extends AbstractSubtas
    */
   protected class PendingSetStatisticsTask extends StatisticsTask {
 
-    /**
+    /*
      * The moving average of the size of the set of pending request (those assigned to clients)
      * across all masters.
      */

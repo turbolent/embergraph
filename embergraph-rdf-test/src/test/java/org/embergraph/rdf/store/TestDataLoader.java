@@ -29,8 +29,8 @@ import org.embergraph.util.InnerCause;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * Test suite for the {@link DataLoader}.
+/*
+* Test suite for the {@link DataLoader}.
  *
  * @author bryan
  *     <p>TODO Tests to verify that data was actually loaded.... (read back from last commit point
@@ -67,7 +67,7 @@ public class TestDataLoader extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test where an error in a source file SHOULD NOT be ignored because we have NOT specified {@link
    * DataLoader.Options#IGNORE_INVALID_FILES}.
    *
@@ -108,7 +108,7 @@ public class TestDataLoader extends AbstractTripleStoreTestCase {
     if (ok) fail("Error should have been reported for " + resource);
   }
 
-  /**
+  /*
    * Test where an error in a source file SHOULD be ignored because we have specified {@link
    * DataLoader.Options#IGNORE_INVALID_FILES}.
    *
@@ -140,7 +140,7 @@ public class TestDataLoader extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test where the load should fail even though we specified {@link
    * DataLoader.Options#IGNORE_INVALID_FILES} because it error was a "resource not found" problem
    * rather than a parser error.

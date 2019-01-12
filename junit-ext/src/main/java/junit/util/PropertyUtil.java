@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
-/**
- * This utility class provides helper methods designed to fuse two configurations in which at least
+/*
+* This utility class provides helper methods designed to fuse two configurations in which at least
  * one of the configuration is represented as a {@link Properties} object, which may have a system
  * of inherited defaults. When a {@link Map} and a {@link Properties} object or two {@link
  * Properties} objects must be combined in a "fused" configuration, it may be necessary to "flatten"
@@ -45,7 +45,7 @@ import java.util.TreeMap;
  */
 public class PropertyUtil {
 
-  /**
+  /*
    * Return a flatten copy of the specified {@link Properties}. The returned object does not share
    * any structure with the source object, but it does share key and value references. Since keys
    * and values are {@link String}s for a {@link Properties} instance this SHOULD NOT be a problem.
@@ -68,7 +68,7 @@ public class PropertyUtil {
     return tmp;
   }
 
-  /**
+  /*
    * Return a Map that provides a flattened view of a Properties object.
    *
    * <p>For each level of the Properties object, visit all keys and then resolve each key against
@@ -126,7 +126,7 @@ public class PropertyUtil {
     return out;
   }
 
-  /**
+  /*
    * Lists all entries defined either directly by a {@link Properties} object or at any level within
    * its defaults hierarchy.
    */
@@ -146,7 +146,7 @@ public class PropertyUtil {
     }
   }
 
-  /**
+  /*
    * Fuses two configurations and ignores any conflicts.
    *
    * @param defaults The default configuration.
@@ -166,7 +166,7 @@ public class PropertyUtil {
     return fuse(defaults, override, ignoreConflicts);
   }
 
-  /**
+  /*
    * Fuses two configurations and optionally reports any conflicts.
    *
    * @param defaults The default configuration.
@@ -277,8 +277,8 @@ public class PropertyUtil {
     return (Properties) defaults;
   }
 
-  //     /**
-  //      * Helper class wraps an existing {@link Properties} object and
+  //     /*
+//      * Helper class wraps an existing {@link Properties} object and
   //      * exposes its {@link Properties#defaults} field.
   //      */
 

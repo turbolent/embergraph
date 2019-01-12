@@ -45,8 +45,8 @@ import org.embergraph.relation.accesspath.IBindingSetAccessPath;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-/**
- * Abstract base class for both JVM and native memory hash join against an {@link IAccessPath}. The
+/*
+* Abstract base class for both JVM and native memory hash join against an {@link IAccessPath}. The
  * source solutions from the pipeline are buffered on a hash index. Depending on the implementation,
  * the hash index may have a threshold that will trigger an evaluation pass of the hash join. If
  * not, then the hash join will run exactly once. When the hash join runs, the access path is
@@ -75,7 +75,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
     this(args, NV.asMap(annotations));
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -115,7 +115,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @see Annotations#PREDICATE
@@ -127,7 +127,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
     return (IPredicate<E>) getRequiredProperty(Annotations.PREDICATE);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the predicate associated with the join is optional.
    *
    * @see IPredicate.Annotations#OPTIONAL
@@ -143,7 +143,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
     return new BaseJoinStats();
   }
 
-  /**
+  /*
    * Return the instance of the {@link IHashJoinUtility} to be used by this operator. This method is
    * invoked once, the first time this operator is evaluated. The returned {@link IHashJoinUtility}
    * reference is attached to the {@link IQueryAttributes} and accessed there on subsequent
@@ -158,7 +158,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
       final INamedSolutionSetRef namedSetRef,
       final JoinTypeEnum joinType);
 
-  /**
+  /*
    * Return <code>true</code> if {@link ChunkTask#doHashJoin()} should be executed in a given
    * operator {@link ChunkTask} invocation.
    *
@@ -210,8 +210,8 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
 
       {
 
-        /*
-         * First, see if the map already exists.
+      /*
+       * First, see if the map already exists.
          *
          * Note: Since the operator is not thread-safe, we do not need
          * to use a putIfAbsent pattern here.
@@ -225,8 +225,8 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
         final INamedSolutionSetRef namedSetRef =
             (INamedSolutionSetRef) op.getRequiredProperty(Annotations.NAMED_SET_REF);
 
-        /*
-         * Lookup the attributes for the query on which we will hang the
+      /*
+       * Lookup the attributes for the query on which we will hang the
          * solution set. See BLZG-1493 (if queryId is null, use the query
          * attributes for this running query).
          */
@@ -271,8 +271,8 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
 
         if (didRun) {
 
-          /*
-           * The state needs to be released each time this operator
+        /*
+       * The state needs to be released each time this operator
            * runs in order to discard the intermediate solutions
            * buffered on the hash index that were just joined against
            * the access path. If we do not discard the state after
@@ -298,7 +298,7 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
       state.acceptSolutions(context.getSource(), stats);
     }
 
-    /**
+    /*
      * Return the access path that to be scanned. Solutions read from this access path will be used
      * to probe the hash index to identify solutions that can join.
      */
@@ -346,15 +346,15 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
 
       switch (state.getJoinType()) {
         case Normal:
-          /*
-           * Nothing to do.
+        /*
+       * Nothing to do.
            */
           break;
         case Optional:
         case NotExists:
           {
-            /*
-             * Output the optional solutions.
+          /*
+       * Output the optional solutions.
              */
 
             // where to write the optional solutions.
@@ -372,8 +372,8 @@ public abstract class HashJoinOp<E> extends PipelineOp implements IShardwisePipe
           }
         case Exists:
           {
-            /*
-             * Output the join set.
+          /*
+       * Output the join set.
              */
             state.outputJoinSet(unsyncBuffer);
             break;

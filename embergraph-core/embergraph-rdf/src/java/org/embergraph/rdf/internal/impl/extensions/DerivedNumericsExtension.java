@@ -39,8 +39,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
-/**
- * This implementation of {@link IExtension} implements inlining for literals that represent the
+/*
+* This implementation of {@link IExtension} implements inlining for literals that represent the
  * derived numeric types:
  *
  * <ul>
@@ -129,7 +129,7 @@ public class DerivedNumericsExtension<V extends EmbergraphValue> implements IExt
     return new LiteralExtensionIV(delegate, resolvedDT.getIV());
   }
 
-  /**
+  /*
    * Use the BigInteger value of the {@link XSDIntegerIV} delegate to create a datatype literal
    * value with the appropriate datatype.
    */

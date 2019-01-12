@@ -23,8 +23,8 @@ package org.embergraph.bop.cost;
 import java.io.Serializable;
 import org.embergraph.btree.IndexSegment;
 
-/**
- * A cost model for a range scan on an {@link IndexSegment}.
+/*
+* A cost model for a range scan on an {@link IndexSegment}.
  *
  * <p>Note: This uses a summary description of the {@link IndexSegment} for the cost model. This
  * makes sense because we generally have 100s of index segments in scale-out and we do not want to
@@ -35,7 +35,7 @@ import org.embergraph.btree.IndexSegment;
  */
 public class IndexSegmentCostModel implements Serializable {
 
-  /**
+  /*
    * @todo should be either Externalizable and explicitly managed versioning or Serializable with a
    *     public interface for versioning.
    */
@@ -51,7 +51,7 @@ public class IndexSegmentCostModel implements Serializable {
     this.diskCostModel = diskCostModel;
   }
 
-  /**
+  /*
    * @param rangeCount The range count for the index scan.
    * @param branchingFactor The branching factor for the index segments for this scale-out index.
    * @param averageBytesPerLeaf The average #of bytes per leaf for this scale-out index.

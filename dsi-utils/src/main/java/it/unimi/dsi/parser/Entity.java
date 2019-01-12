@@ -31,7 +31,7 @@ public final class Entity {
   /** The Unicode character corresponding to this entity. */
   public final char character;
 
-  /**
+  /*
    * Creates a new entity with the specified name and character.
    *
    * @param name the name of the new entity.
@@ -42,7 +42,7 @@ public final class Entity {
     this.character = character;
   }
 
-  /**
+  /*
    * Returns the name of this entity.
    *
    * @return the name of this entity.

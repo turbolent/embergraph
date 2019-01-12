@@ -57,8 +57,8 @@ import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.util.InnerCause;
 
-/**
- * Utility class supporting hash join against a Java hash collection.
+/*
+* Utility class supporting hash join against a Java hash collection.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -67,7 +67,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
   private static final Logger log = Logger.getLogger(JVMHashJoinUtility.class);
 
-  /**
+  /*
    * Singleton {@link IHashJoinUtilityFactory} that can be used to create a new {@link
    * JVMHashJoinUtility}.
    */
@@ -92,18 +92,18 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
   /** The type of join to be performed. */
   protected final JoinTypeEnum joinType;
 
-  //    /**
-  //     * <code>true</code> iff the join is OPTIONAL.
+  //    /*
+//     * <code>true</code> iff the join is OPTIONAL.
   //     */
   //    private final boolean optional;
   //
-  //    /**
-  //     * <code>true</code> iff this is a DISTINCT filter.
+  //    /*
+//     * <code>true</code> iff this is a DISTINCT filter.
   //     */
   //    private final boolean filter;
   //
-  //    /**
-  //     * <code>true</code> iff a solution having an unbound {@link #joinVars}
+  //    /*
+//     * <code>true</code> iff a solution having an unbound {@link #joinVars}
   //     * should be dropped and <code>false</code> if it should be indexed anyway.
   //     */
   //    private final boolean dropSolutionsHavingUnboundJoinVars;
@@ -114,7 +114,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
   /** The join variables. */
   protected final IVariable<?>[] joinVars;
 
-  /**
+  /*
    * The variables to be retained (aka projected out) (optional, all variables are retained if not
    * specified).
    */
@@ -126,7 +126,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
   /** The join constraints (optional). */
   protected final IConstraint[] constraints;
 
-  /**
+  /*
    * The hash index.
    *
    * <p>Note: There is no separate "joinSet". Instead, the {@link SolutionHit} class provides a join
@@ -138,7 +138,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
   /** The #of solutions accepted into the hash index. */
   protected final CAT rightSolutionCount = new CAT();
 
-  /**
+  /*
    * The maximum #of (left,right) solution joins that will be considered before failing the join.
    * This is used IFF there are no join variables.
    */
@@ -153,7 +153,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
   /** The #of solution pairs considered for a join. */
   protected final CAT nJoinsConsidered = new CAT();
 
-  /**
+  /*
    * Human readable representation of the {@link IHashJoinUtility} metadata (but not the solutions
    * themselves).
    */
@@ -187,7 +187,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     return sb.toString();
   }
 
-  /**
+  /*
    * @param op The operator whose annotation will inform construction the hash index. The {@link
    *     HTreeAnnotations} may be specified for this operator and will control the initialization of
    *     the various {@link HTree} instances.
@@ -431,16 +431,16 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
       for (IBindingSet bset : all) {
 
-        /*
-         * Note: For a DISTINCT SOLUTIONS filter, we only consider the
+      /*
+       * Note: For a DISTINCT SOLUTIONS filter, we only consider the
          * variables that are being projected. Further, all variables
          * are used when computing the hash code. Therefore "joinVars"
          * == "selectedVars" for a DISTINCT SOLUTIONS filter.
          */
         bset = bset.copy(joinVars); // only consider the selected variables.
 
-        /*
-         * Note: Solutions are NOT dropped if a variable is not bound in
+      /*
+       * Note: Solutions are NOT dropped if a variable is not bound in
          * a given solution. The variable is simply not used when
          * computing the hash code. Specifying optional:=true here
          * causes makeKey() to have this behavior.
@@ -480,7 +480,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     hashJoin2(leftItr, stats, outputBuffer, constraints);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>For each source solution materialized, the hash table is probed using the as-bound join
@@ -576,8 +576,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
                 }
               case Exists:
                 {
-                  /*
-                   * The right solution is output iff there is at
+                /*
+       * The right solution is output iff there is at
                    * least one left solution which joins with that
                    * right solution. Each right solution is output at
                    * most one time.
@@ -594,8 +594,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
                 }
               case NotExists:
                 {
-                  /*
-                   * The right solution is output iff there does not
+                /*
+       * The right solution is output iff there does not
                    * exist any left solution which joins with that
                    * right solution. This basically an optional join
                    * where the solutions which join are not output.
@@ -624,7 +624,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation is a NOP since the underlying Java collection class is thread-safe for
@@ -637,7 +637,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
   }
 
-  /**
+  /*
    * Output a solution.
    *
    * @param outputBuffer Where to write the solution.
@@ -809,8 +809,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
           if (outputDistinctJVs) {
 
-            /*
-             * Output those solutions that are distinct on the join
+          /*
+       * Output those solutions that are distinct on the join
              * variables. We do this by laying a DISTINCT filter
              * over the solutions drawn from each bucket that we
              * visit. The DISTINCT filter does not need to consider
@@ -838,8 +838,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
 
           } else if (selected != null) {
 
-            /*
-             * FIXME We should be using projectedInVars here since
+          /*
+       * FIXME We should be using projectedInVars here since
              * outputSolutions() is used to stream solutions into
              * the child join group (at least for some kinds of
              * joins, but there might be exceptions for joining with
@@ -913,7 +913,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     }
   }
 
-  /**
+  /*
    * Combine constraints for each source with the given constraints.
    *
    * @param constraints Explicitly given constraints for this join.
@@ -945,7 +945,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     return list.isEmpty() ? null : list.toArray(new IConstraint[list.size()]);
   }
 
-  /**
+  /*
    * Advance each other source to the first hash code GTE the hashCode for the first source.
    *
    * <p>If the source does not have a bucket for the hash code in the first bucket then either (a)
@@ -1085,8 +1085,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
         // Fully materialize the solution set as a Bucket[].
         final Bucket[] t = all[i].getRightSolutions().toArray();
 
-        /*
-         * Sort the array. It's natural sort order is by the hash code
+      /*
+       * Sort the array. It's natural sort order is by the hash code
          * of the join variables.
          */
         Arrays.sort(t);
@@ -1108,8 +1108,8 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     while (sourceIndex[0] < sortedSourceBuckets[0].length) {
 
       if (!optional) {
-        /*
-         * If the join is not optional, then we are done as soon as any
+      /*
+       * If the join is not optional, then we are done as soon as any
          * source is exhausted.
          */
         for (int i = 1; i < sourceIndex.length; i++) {
@@ -1134,7 +1134,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     }
   }
 
-  /**
+  /*
    * MERGE JOIN
    *
    * <p>Join the solution sets from each source. This will consider the full cross product of the
@@ -1257,7 +1257,7 @@ public class JVMHashJoinUtility implements IHashJoinUtility {
     }
   }
 
-  /**
+  /*
    * Adds metadata about the {@link IHashJoinUtility} state to the stack trace.
    *
    * @param t The thrown error.

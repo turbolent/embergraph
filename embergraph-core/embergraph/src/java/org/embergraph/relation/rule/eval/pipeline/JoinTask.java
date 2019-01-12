@@ -56,8 +56,8 @@ import org.embergraph.util.BytesUtil;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
-/**
- * Consumes {@link IBindingSet} chunks from the previous join dimension.
+/*
+* Consumes {@link IBindingSet} chunks from the previous join dimension.
  *
  * <p>Note: Instances of this class MUST be created on the {@link IDataService} that is host to the
  * index partition on the task will read and they MUST run inside of an {@link AbstractTask} on the
@@ -134,13 +134,13 @@ public abstract class JoinTask implements Callable<Void> {
   /** The #of predicates in the tail of that rule. */
   protected final int tailCount;
 
-  /**
+  /*
    * The index partition on which this {@link JoinTask} is reading -or- <code>-1</code> if the
    * deployment does not support key-range partitioned indices.
    */
   protected final int partitionId;
 
-  /**
+  /*
    * The tail index in the rule for the predicate on which we are reading for this join dimension.
    */
   protected final int tailIndex;
@@ -151,7 +151,7 @@ public abstract class JoinTask implements Callable<Void> {
   /** The {@link IRelation} view on which we are reading for this join dimensions. */
   protected final IRelation<?> relation;
 
-  /**
+  /*
    * The index into the evaluation {@link #order} for the predicate on which we are reading for this
    * join dimension.
    */
@@ -165,13 +165,13 @@ public abstract class JoinTask implements Callable<Void> {
 
   protected final UUID masterUUID;
 
-  /**
+  /*
    * A list of variables required for each tail, by tailIndex. Used to filter downstream variable
    * binding sets.
    */
   protected final IVariable<?>[][] requiredVars;
 
-  /**
+  /*
    * The {@link IJoinNexus} for the local {@link IIndexManager}, which will be the live {@link
    * IJournal}. This {@link IJoinNexus} MUST have access to the local index objects, which means
    * that class MUST be run inside of the {@link ConcurrencyManager}. The {@link #joinNexus} is
@@ -179,7 +179,7 @@ public abstract class JoinTask implements Callable<Void> {
    */
   protected IJoinNexus joinNexus;
 
-  /**
+  /*
    * Volatile flag is set <code>true</code> if the {@link JoinTask} (including any tasks executing
    * on its behalf) should halt. This flag is monitored by the {@link BindingSetConsumerTask}, the
    * {@link AccessPathTask}, and the {@link ChunkTask}. It is set by any of those tasks if they are
@@ -191,7 +191,7 @@ public abstract class JoinTask implements Callable<Void> {
    */
   protected volatile boolean halt = false;
 
-  /**
+  /*
    * Set by {@link BindingSetConsumerTask}, {@link AccessPathTask}, and {@link ChunkTask} if they
    * throw an error. Tasks are required to use an {@link AtomicReference#compareAndSet(Object,
    * Object)} and must specify <code>null</code> as the expected value. This ensures that only the
@@ -199,7 +199,7 @@ public abstract class JoinTask implements Callable<Void> {
    */
   protected final AtomicReference<Throwable> firstCause = new AtomicReference<Throwable>(null);
 
-  /**
+  /*
    * Indicate that join processing should halt. This method is written defensively and will not
    * throw anything.
    *
@@ -220,8 +220,8 @@ public abstract class JoinTask implements Callable<Void> {
             && !InnerCause.isInnerCause(cause, RejectedExecutionException.class)
             && !InnerCause.isInnerCause(cause, BufferClosedException.class)) {
 
-          /*
-           * This logs all unexpected causes, not just the first one
+        /*
+       * This logs all unexpected causes, not just the first one
            * to be reported for this join task.
            *
            * Note: The master will log the firstCause that it receives
@@ -247,7 +247,7 @@ public abstract class JoinTask implements Callable<Void> {
       }
   }
 
-  /**
+  /*
    * The evaluation order. {@link #orderIndex} is the index into this array. The {@link #orderIndex}
    * is zero (0) for the first join dimension and is incremented by one for each subsequent join
    * dimension. The value at <code>order[orderIndex]</code> is the index of the tail predicate that
@@ -258,7 +258,7 @@ public abstract class JoinTask implements Callable<Void> {
   /** The statistics for this {@link JoinTask}. */
   final JoinStats stats;
 
-  /**
+  /*
    * A factory pattern for per-thread objects whose life cycle is tied to some container. For
    * example, there may be an instance of this pool for a {@link JoinTask} or an {@link
    * AbstractBTree}. The pool can be torn down when the container is torn down, which prevents its
@@ -278,7 +278,7 @@ public abstract class JoinTask implements Callable<Void> {
     /** The thread-local queues. */
     private final ConcurrentHashMap<Thread, T> map;
 
-    /**
+    /*
      * A list of all objects visible to the caller. This is used to ensure that any objects
      * allocated by the factory are visited.
      *
@@ -304,7 +304,7 @@ public abstract class JoinTask implements Callable<Void> {
       return map.size();
     }
 
-    /**
+    /*
      * Add the element to the thread-local buffer.
      *
      * @param e An element.
@@ -315,7 +315,7 @@ public abstract class JoinTask implements Callable<Void> {
       get().add(e);
     }
 
-    /**
+    /*
      * Return a thread-local buffer
      *
      * @return The thread-local buffer.
@@ -326,8 +326,8 @@ public abstract class JoinTask implements Callable<Void> {
       T tmp = map.get(t);
       if (tmp == null) {
         if (map.put(t, tmp = initialValue()) != null) {
-          /*
-           * Note: Since the key is the thread it is not possible for
+        /*
+       * Note: Since the key is the thread it is not possible for
            * there to be a concurrent put of an entry under the same
            * key so we do not have to use putIfAbsent().
            */
@@ -342,7 +342,7 @@ public abstract class JoinTask implements Callable<Void> {
       return tmp;
     }
 
-    /**
+    /*
      * Flush each of the unsynchronized buffers onto their backing synchronized buffer.
      *
      * @throws RuntimeException if the join is halted.
@@ -365,7 +365,7 @@ public abstract class JoinTask implements Callable<Void> {
       }
     }
 
-    /**
+    /*
      * Reset each of the synchronized buffers, discarding their buffered writes.
      *
      * <p>Note: This method is used during error processing, therefore it DOES NOT check {@link
@@ -385,8 +385,8 @@ public abstract class JoinTask implements Callable<Void> {
       }
     }
 
-    //	    /**
-    //	     * Reset the per-{@link Thread} unsynchronized output buffers (used as
+    //	    /*
+//	     * Reset the per-{@link Thread} unsynchronized output buffers (used as
     //	     * part of error handling for the {@link JoinTask}).
     //	     */
     //	    final protected void resetUnsyncBuffers() throws Exception {
@@ -417,7 +417,7 @@ public abstract class JoinTask implements Callable<Void> {
             }
           };
 
-  /**
+  /*
    * A method used by the {@link #threadLocalBufferFactory} to create new output buffer as required.
    * The output buffer will be used to aggregate {@link IBindingSet}s generated by this {@link
    * JoinTask}.
@@ -429,7 +429,7 @@ public abstract class JoinTask implements Callable<Void> {
    */
   protected abstract AbstractUnsynchronizedArrayBuffer<IBindingSet> newUnsyncOutputBuffer();
 
-  /**
+  /*
    * The buffer on which the last predicate in the evaluation order will write its {@link
    * ISolution}s.
    *
@@ -438,7 +438,7 @@ public abstract class JoinTask implements Callable<Void> {
    */
   protected abstract IBuffer<ISolution[]> getSolutionBuffer();
 
-  /**
+  /*
    * Return the index of the tail predicate to be evaluated at the given index in the evaluation
    * order.
    *
@@ -471,7 +471,7 @@ public abstract class JoinTask implements Callable<Void> {
         + "}";
   }
 
-  /**
+  /*
    * Instances of this class MUST be created in the appropriate execution context of the target
    * {@link DataService} so that the federation and the joinNexus references are both correct and so
    * that it has access to the local index object for the specified index partition.
@@ -525,7 +525,7 @@ public abstract class JoinTask implements Callable<Void> {
     if (DEBUG) log.debug("orderIndex=" + orderIndex + ", partitionId=" + partitionId);
   }
 
-  /**
+  /*
    * Runs the {@link JoinTask}.
    *
    * @return <code>null</code>.
@@ -636,7 +636,7 @@ public abstract class JoinTask implements Callable<Void> {
     }
   }
 
-  /**
+  /*
    * Method is used to log the primary exception thrown by {@link #call()}. The default
    * implementation does nothing and the exception will be logged by the {@link JoinMasterTask}.
    * However, this method is overridden by {@link DistributedJoinTask} so that the exception can be
@@ -649,7 +649,7 @@ public abstract class JoinTask implements Callable<Void> {
    */
   protected void logCallError(Throwable t) {}
 
-  /**
+  /*
    * Method reports {@link JoinStats} to the {@link JoinMasterTask}, but only if they have not
    * already been reported. This "report once" constraint is used to make it safe to invoke during
    * error handling before actions which could cause the source {@link JoinTask}s (and hence the
@@ -677,7 +677,7 @@ public abstract class JoinTask implements Callable<Void> {
 
   //    static private AtomicBoolean firstJoin = new AtomicBoolean(false);
 
-  /**
+  /*
    * Consume {@link IBindingSet} chunks from source(s). The first join dimension always has a single
    * source - the initialBindingSet established by the {@link JoinMasterTask}. Downstream join
    * dimensions read from {@link IAsynchronousIterator}(s) from the upstream join dimension. When
@@ -760,14 +760,14 @@ public abstract class JoinTask implements Callable<Void> {
     }
   }
 
-  /**
+  /*
    * Close any source {@link IAsynchronousIterator}(s). This method is invoked when a {@link
    * JoinTask} fails.
    */
   abstract void closeSources();
 
-  //    /**
-  //     * Flush the per-{@link Thread} unsynchronized output buffers (they
+  //    /*
+//     * Flush the per-{@link Thread} unsynchronized output buffers (they
   //     * write onto the thread-safe output buffer).
   //     */
   //    final protected void flushUnsyncBuffers() throws Exception {
@@ -803,8 +803,8 @@ public abstract class JoinTask implements Callable<Void> {
   //
   //	}
 
-  //    /**
-  //     * Reset the per-{@link Thread} unsynchronized output buffers (used as
+  //    /*
+//     * Reset the per-{@link Thread} unsynchronized output buffers (used as
   //     * part of error handling for the {@link JoinTask}).
   //     */
   //    final protected void resetUnsyncBuffers() throws Exception {
@@ -833,7 +833,7 @@ public abstract class JoinTask implements Callable<Void> {
   //
   //	}
 
-  /**
+  /*
    * Flush and close all output buffers and await sink {@link JoinTask}(s).
    *
    * <p>Note: You MUST close the {@link BlockingBuffer} from which each sink reads <em>before</em>
@@ -850,7 +850,7 @@ public abstract class JoinTask implements Callable<Void> {
   /** Cancel sink {@link JoinTask}(s). */
   protected abstract void cancelSinks();
 
-  /**
+  /*
    * Return a chunk of {@link IBindingSet}s from the {@link IAsynchronousIterator}s. The 1st join
    * dimension is always fed by the {@link JoinMasterTask}. The nth+1 join dimension is always fed
    * by the nth {@link JoinTask}(s).
@@ -860,7 +860,7 @@ public abstract class JoinTask implements Callable<Void> {
    */
   protected abstract IBindingSet[] nextChunk() throws InterruptedException;
 
-  /**
+  /*
    * Class consumes chunks from the source(s) until canceled, interrupted, or all source(s) are
    * exhausted. For each {@link IBindingSet} in each chunk, an {@link AccessPathTask} is created
    * which will consume that {@link IBindingSet}. The {@link AccessPathTask} for a given source
@@ -875,7 +875,7 @@ public abstract class JoinTask implements Callable<Void> {
 
     private final Executor executor;
 
-    /**
+    /*
      * @param executor The service that will execute the generated {@link AccessPathTask}s -or-
      *     <code>null</code> IFF you want the {@link AccessPathTask}s to be executed in the caller's
      *     thread.
@@ -885,7 +885,7 @@ public abstract class JoinTask implements Callable<Void> {
       this.executor = executor;
     }
 
-    /**
+    /*
      * Read chunks from one or more sources until canceled, interrupted, or all sources are
      * exhausted and submits {@link AccessPathTask}s to the caller's {@link ExecutorService} -or-
      * executes those tasks in the caller's thread if no {@link ExecutorService} was provided to the
@@ -911,8 +911,8 @@ public abstract class JoinTask implements Callable<Void> {
 
         while (!halt && (chunk = nextChunk()) != null) {
 
-          /*
-           * @todo ChunkTrace for bindingSet chunks in as well as
+        /*
+       * @todo ChunkTrace for bindingSet chunks in as well as
            * access path chunks consumed.
            */
 
@@ -925,28 +925,28 @@ public abstract class JoinTask implements Callable<Void> {
                     + ", partitionId="
                     + partitionId);
 
-          /*
-           * Aggregate the source bindingSets that license the
+        /*
+       * Aggregate the source bindingSets that license the
            * same asBound predicate.
            */
           final Map<IPredicate<?>, Collection<IBindingSet>> map = combineBindingSets(chunk);
 
-          /*
-           * Generate an AccessPathTask from each distinct
+        /*
+       * Generate an AccessPathTask from each distinct
            * asBound predicate that will consume all of the source
            * bindingSets in the chunk which resulted in the same
            * asBound predicate.
            */
           final AccessPathTask[] tasks = getAccessPathTasks(map);
 
-          /*
-           * Reorder those tasks for better index read
+        /*
+       * Reorder those tasks for better index read
            * performance.
            */
           reorderTasks(tasks);
 
-          /*
-           * Execute the tasks (either in the caller's thread or
+        /*
+       * Execute the tasks (either in the caller's thread or
            * on the supplied service).
            */
           executeTasks(tasks);
@@ -966,7 +966,7 @@ public abstract class JoinTask implements Callable<Void> {
       }
     }
 
-    /**
+    /*
      * Populates a map of asBound predicates paired to a set of bindingSets.
      *
      * <p>Note: The {@link AccessPathTask} will apply each bindingSet to each element visited by the
@@ -996,8 +996,8 @@ public abstract class JoinTask implements Callable<Void> {
 
         if (partitionId != -1) {
 
-          /*
-           * Constrain the predicate to the desired index partition.
+        /*
+       * Constrain the predicate to the desired index partition.
            *
            * Note: we do this for scale-out joins since the access
            * path will be evaluated by a JoinTask dedicated to this
@@ -1014,8 +1014,8 @@ public abstract class JoinTask implements Callable<Void> {
 
         if (values == null) {
 
-          /*
-           * This is the first bindingSet for this asBound
+        /*
+       * This is the first bindingSet for this asBound
            * predicate. We create a collection of bindingSets to
            * be paired with that predicate and put the collection
            * into the map using that predicate as the key.
@@ -1031,8 +1031,8 @@ public abstract class JoinTask implements Callable<Void> {
           stats.accessPathDups++;
         }
 
-        /*
-         * Add the bindingSet to the collection of bindingSets
+      /*
+       * Add the bindingSet to the collection of bindingSets
          * paired with the asBound predicate.
          */
 
@@ -1044,7 +1044,7 @@ public abstract class JoinTask implements Callable<Void> {
       return map;
     }
 
-    /**
+    /*
      * Creates an {@link AccessPathTask} for each {@link IBindingSet} in the given chunk.
      *
      * @param chunk A chunk of {@link IBindingSet}s from one or more source {@link JoinTask}s.
@@ -1077,7 +1077,7 @@ public abstract class JoinTask implements Callable<Void> {
       return tasks;
     }
 
-    /**
+    /*
      * The tasks are ordered based on the <i>fromKey</i> for the associated {@link IAccessPath} as
      * licensed by each {@link IBindingSet}. This order tends to focus the reads on the same parts
      * of the index partitions with a steady progression in the <i>fromKey</i> as we process a chunk
@@ -1095,7 +1095,7 @@ public abstract class JoinTask implements Callable<Void> {
       }
     }
 
-    /**
+    /*
      * Either execute the tasks in the caller's thread or schedule them for execution on the
      * supplied service.
      *
@@ -1106,8 +1106,8 @@ public abstract class JoinTask implements Callable<Void> {
 
       if (executor == null) {
 
-        /*
-         * No Executor, so run each task in the caller's thread.
+      /*
+       * No Executor, so run each task in the caller's thread.
          */
 
         for (AccessPathTask task : tasks) {
@@ -1134,8 +1134,8 @@ public abstract class JoinTask implements Callable<Void> {
 
       try {
 
-        /*
-         * Execute all tasks.
+      /*
+       * Execute all tasks.
          */
         for (FutureTask<Void> ft : futureTasks) {
 
@@ -1145,8 +1145,8 @@ public abstract class JoinTask implements Callable<Void> {
           executor.execute(ft);
         } // next task.
 
-        /*
-         * Wait for each task. If any task throws an exception, then
+      /*
+       * Wait for each task. If any task throws an exception, then
          * [halt] will become true and any running tasks will error out
          * quickly. Once [halt := true], we do not wait for any more
          * tasks, but proceed to cancel all tasks in the finally {}
@@ -1160,8 +1160,8 @@ public abstract class JoinTask implements Callable<Void> {
 
       } finally {
 
-        /*
-         * Ensure that all tasks are cancelled, regardless of whether
+      /*
+       * Ensure that all tasks are cancelled, regardless of whether
          * they were started or have already finished.
          */
         for (FutureTask<Void> ft : futureTasks) {
@@ -1172,7 +1172,7 @@ public abstract class JoinTask implements Callable<Void> {
     }
   }
 
-  /**
+  /*
    * Accepts an asBound {@link IPredicate} and a (non-empty) collection of {@link IBindingSet}s each
    * of which licenses the same asBound predicate for the current join dimension. The task obtains
    * the corresponding {@link IAccessPath} and delegates each chunk visited on that {@link
@@ -1183,7 +1183,7 @@ public abstract class JoinTask implements Callable<Void> {
    */
   protected class AccessPathTask implements Callable<Void>, Comparable<AccessPathTask> {
 
-    /**
+    /*
      * The {@link IBindingSet}s from the source join dimension to be combined with each element
      * visited on the {@link #accessPath}. If there is only a single source {@link IBindingSet} in a
      * given chunk of source {@link IBindingSet}s that results in the same asBound {@link
@@ -1195,13 +1195,13 @@ public abstract class JoinTask implements Callable<Void> {
      */
     private final IBindingSet[] bindingSets;
 
-    /**
+    /*
      * The {@link IAccessPath} corresponding to the asBound {@link IPredicate} for this join
      * dimension. The asBound {@link IPredicate} is {@link IAccessPath#getPredicate()}.
      */
     private final IAccessPath<?> accessPath;
 
-    /**
+    /*
      * Return the <em>fromKey</em> for the {@link IAccessPath} generated from the {@link
      * IBindingSet} for this task.
      *
@@ -1215,7 +1215,7 @@ public abstract class JoinTask implements Callable<Void> {
       return ((AccessPath<?>) accessPath).getFromKey();
     }
 
-    /**
+    /*
      * Return <code>true</code> iff the tasks are equivalent (same as bound predicate). This test
      * may be used to eliminate duplicates that arise when different source {@link JoinTask}s
      * generate the same {@link IBindingSet}.
@@ -1228,7 +1228,7 @@ public abstract class JoinTask implements Callable<Void> {
       return accessPath.getPredicate().equals(o.accessPath.getPredicate());
     }
 
-    /**
+    /*
      * Evaluate an {@link IBindingSet} for the join dimension. When the task runs, it will pair each
      * element visited on the {@link IAccessPath} with the asBound {@link IPredicate}. For each
      * element visited, if the binding is acceptable for the constraints on the asBound {@link
@@ -1290,7 +1290,7 @@ public abstract class JoinTask implements Callable<Void> {
           + "}";
     }
 
-    /**
+    /*
      * Evaluate the {@link #accessPath} against the {@link #bindingSets}. If nothing is accepted and
      * {@link IPredicate#isOptional()} then the {@link #bindingSets} is output anyway (this
      * implements the semantics of OPTIONAL).
@@ -1329,8 +1329,8 @@ public abstract class JoinTask implements Callable<Void> {
 
       try {
 
-        /*
-         * @todo In order to run the chunks on a thread pool, pass in
+      /*
+       * @todo In order to run the chunks on a thread pool, pass in
          * [null] for the unsyncBuffer and each chunk will get its own
          * buffer.
          */
@@ -1355,8 +1355,8 @@ public abstract class JoinTask implements Callable<Void> {
 
         if (nothingAccepted && predicate.isOptional()) {
 
-          /*
-           * Note: when NO binding sets were accepted AND the
+        /*
+       * Note: when NO binding sets were accepted AND the
            * predicate is OPTIONAL then we output the _original_
            * binding set(s) to the sink join task(s).
            */
@@ -1398,22 +1398,22 @@ public abstract class JoinTask implements Callable<Void> {
 
       try {
 
-        /*
-         * Note: The fast range count would give us an upper bound,
+      /*
+       * Note: The fast range count would give us an upper bound,
          * unless expanders are used, in which case there can be more
          * elements visited.
          */
         final Object[] elements;
         {
 
-          /*
-           * First, gather all chunks.
+        /*
+       * First, gather all chunks.
            */
           int nchunks = 0;
           final List<Object[]> chunks = new LinkedList<Object[]>();
           while (itr.hasNext()) {
 
-            final Object[] chunk = (Object[]) itr.nextChunk();
+            final Object[] chunk = itr.nextChunk();
 
             // add to list of chunks.
             chunks.add(chunk);
@@ -1425,8 +1425,8 @@ public abstract class JoinTask implements Callable<Void> {
             nchunks++;
           } // next chunk.
 
-          /*
-           * Now flatten the chunks into a simple array.
+        /*
+       * Now flatten the chunks into a simple array.
            */
           if (nchunks == 0) {
             // No match.
@@ -1476,8 +1476,8 @@ public abstract class JoinTask implements Callable<Void> {
 
               if (constraint.isMatch(e)) {
 
-                /*
-                 * For each match for the constraint, we clone
+              /*
+       * For each match for the constraint, we clone
                  * the old solutions and create a new solutions
                  * that appends the variable bindings from this
                  * match.
@@ -1554,7 +1554,7 @@ public abstract class JoinTask implements Callable<Void> {
       }
     }
 
-    /**
+    /*
      * Imposes an order based on the <em>fromKey</em> for the {@link IAccessPath} associated with
      * the task.
      *
@@ -1567,7 +1567,7 @@ public abstract class JoinTask implements Callable<Void> {
     }
   }
 
-  /**
+  /*
    * Task processes a chunk of elements read from the {@link IAccessPath} for a join dimension. Each
    * element in the chunk in paired with a copy of the given bindings. If that {@link IBindingSet}
    * is accepted by the {@link IRule}, then the {@link IBindingSet} will be output. The {@link
@@ -1582,13 +1582,13 @@ public abstract class JoinTask implements Callable<Void> {
     /** The index of the predicate for the access path that is being consumed. */
     private final int tailIndex;
 
-    /**
+    /*
      * The {@link IBindingSet}s which the each element in the chunk will be paired to create {@link
      * IBindingSet}s for the downstream join dimension.
      */
     private final IBindingSet[] bindingSets;
 
-    /**
+    /*
      * A per-{@link Thread} buffer that is used to collect {@link IBindingSet}s into chunks before
      * handing them off to the next join dimension. The hand-off occurs no later than when the
      * current join dimension finishes consuming its source(s).
@@ -1598,7 +1598,7 @@ public abstract class JoinTask implements Callable<Void> {
     /** A chunk of elements read from the {@link IAccessPath} for the current join dimension. */
     private final Object[] chunk;
 
-    /**
+    /*
      * @param bindingSet The bindings with which the each element in the chunk will be paired to
      *     create the bindings for the downstream join dimension.
      * @param unsyncBuffer A per-{@link Thread} buffer used to accumulate chunks of generated {@link
@@ -1629,7 +1629,7 @@ public abstract class JoinTask implements Callable<Void> {
       this.unsyncBuffer = unsyncBuffer;
     }
 
-    /**
+    /*
      * @return <code>true</code> iff NO elements in the chunk (as read from the access path by the
      *     caller) were accepted when combined with the {@link #bindingSets} from the source {@link
      *     JoinTask}.
@@ -1668,8 +1668,8 @@ public abstract class JoinTask implements Callable<Void> {
               log.info("bset before: " + bset);
             }
 
-            /*
-             * Clone the binding set since it is tested for each
+          /*
+       * Clone the binding set since it is tested for each
              * element visited.
              */
             bset = bset.clone();
@@ -1685,8 +1685,8 @@ public abstract class JoinTask implements Callable<Void> {
 
               bset = bset.copy(variablesToKeep);
 
-              /*
-               * Accept this binding set.
+            /*
+       * Accept this binding set.
                *
                * @todo This is the place to intervene for
                * scale-out default graph queries. Instead of

@@ -25,8 +25,8 @@ Copyright (C) Embergraph contributors 2019. All rights reserved.
 
 package org.embergraph.cache;
 
-/**
- * Interface for a hard reference queue.
+/*
+* Interface for a hard reference queue.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -34,7 +34,7 @@ package org.embergraph.cache;
  */
 public interface IHardReferenceQueue<T> {
 
-  /**
+  /*
    * A reasonable default for the #of references on the head of the queue that should be tested
    * before a reference is appended to the queue.
    */
@@ -46,7 +46,7 @@ public interface IHardReferenceQueue<T> {
   /** The #of references that are tested on append requests. */
   int nscan();
 
-  /**
+  /*
    * The #of references in the cache. Note that there is no guarantee that the references are
    * distinct.
    */
@@ -58,7 +58,7 @@ public interface IHardReferenceQueue<T> {
   /** True iff the cache is full. */
   boolean isFull();
 
-  /**
+  /*
    * Add a reference to the cache. If the reference was recently added to the cache then this is a
    * NOP. Otherwise the reference is appended to the cache. If a reference is appended to the cache
    * and then cache is at capacity, then the LRU reference is first evicted from the cache.
@@ -69,7 +69,7 @@ public interface IHardReferenceQueue<T> {
    */
   boolean add(final T ref);
 
-  /**
+  /*
    * Evict the LRU reference. This is a NOP iff the cache is empty.
    *
    * @return true iff a reference was evicted.
@@ -77,7 +77,7 @@ public interface IHardReferenceQueue<T> {
    */
   boolean evict();
 
-  /**
+  /*
    * Clears the cache (sets the head, tail and count to zero) without generating eviction notices.
    *
    * @param clearRefs When <code>true</code> the references are explicitly set to <code>null</code>
@@ -85,7 +85,7 @@ public interface IHardReferenceQueue<T> {
    */
   void clear(final boolean clearRefs);
 
-  /**
+  /*
    * Evict all references, starting with the LRU reference and proceeding to the MRU reference.
    *
    * @param clearRefs When true, the reference are actually cleared from the cache. This may be
@@ -94,7 +94,7 @@ public interface IHardReferenceQueue<T> {
    */
   void evictAll(boolean clearRefs);
 
-  /**
+  /*
    * The reference at the tail of the queue. This is the next reference that will be evicted from
    * the queue.
    */

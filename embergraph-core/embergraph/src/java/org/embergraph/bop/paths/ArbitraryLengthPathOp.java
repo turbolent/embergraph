@@ -57,7 +57,7 @@ public class ArbitraryLengthPathOp extends PipelineOp {
     /** The right transitivity variable. */
     String TRANSITIVITY_VAR_RIGHT = Annotations.class.getName() + ".transitivityVarRight";
 
-    /**
+    /*
      * The lower bound on the number of rounds to run. Can be zero (0) or one (1). A lower bound of
      * zero is a special kind of path - the Zero Length Path. A zero length path connects a vertex
      * to itself (in graph parlance). In the context of arbitrary length paths it means we bind the
@@ -71,7 +71,7 @@ public class ArbitraryLengthPathOp extends PipelineOp {
     /** The vars projected into this ALP op. */
     String PROJECT_IN_VARS = Annotations.class.getName() + ".projectInVars";
 
-    /**
+    /*
      * The initial capacity of the {@link ConcurrentHashMap} used to impose the distinct filter
      * (required to avoid duplicates).
      *
@@ -81,7 +81,7 @@ public class ArbitraryLengthPathOp extends PipelineOp {
 
     int DEFAULT_INITIAL_CAPACITY = 16;
 
-    /**
+    /*
      * The load factor of the {@link ConcurrentHashMap} used to impose the distinct filter (required
      * to avoid duplicates).
      *
@@ -94,7 +94,7 @@ public class ArbitraryLengthPathOp extends PipelineOp {
     /** The middle term - can be a variable or a constant. Only used when edge var is present. */
     String MIDDLE_TERM = Annotations.class.getName() + ".middleTerm";
 
-    /**
+    /*
      * The edge variable. This is an extension that allows the caller to understand how a node was
      * visited (what was the edge that led to it). If set, this will allow in duplicate solutions in
      * violation of the SPARQL spec (if a node can be reached by more than one path there will be
@@ -104,7 +104,7 @@ public class ArbitraryLengthPathOp extends PipelineOp {
      */
     String EDGE_VAR = Annotations.class.getName() + ".edgeVar";
 
-    /**
+    /*
      * A list of intermediate variables (IVariables) used by the ALP op that should be dropped from
      * the solutions after each round.
      */
@@ -116,7 +116,7 @@ public class ArbitraryLengthPathOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args

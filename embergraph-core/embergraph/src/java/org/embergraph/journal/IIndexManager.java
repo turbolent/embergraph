@@ -24,14 +24,14 @@ package org.embergraph.journal;
 import org.embergraph.btree.IIndex;
 import org.embergraph.counters.ICounterSetAccess;
 
-/**
- * Interface for managing named indices.
+/*
+* Interface for managing named indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IIndexManager extends IIndexStore, IGISTManager, ICounterSetAccess {
 
-  /**
+  /*
    * Return a view of the named index as of the specified timestamp.
    *
    * @param name The index name.
@@ -43,7 +43,7 @@ public interface IIndexManager extends IIndexStore, IGISTManager, ICounterSetAcc
    */
   IIndex getIndex(String name, long timestamp); // non-GIST
 
-  /**
+  /*
    * Return true if the index manager supports group commit semantics.
    *
    * @see #566 (NSS GROUP COMMIT)

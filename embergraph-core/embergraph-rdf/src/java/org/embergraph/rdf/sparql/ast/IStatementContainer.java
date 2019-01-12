@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast;
 
-/**
- * Marker interface for things which either are statements (or statement patterns) or contain
+/*
+* Marker interface for things which either are statements (or statement patterns) or contain
  * statements (or statement pattern). This is used to create an abstraction for {@link QuadData}
  * from which we can then specialize the {@link ConstructNode}
  *

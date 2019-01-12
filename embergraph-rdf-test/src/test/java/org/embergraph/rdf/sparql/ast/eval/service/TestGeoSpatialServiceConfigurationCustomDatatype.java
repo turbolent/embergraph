@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite testing configurability of GeoSpatial service. The few tests in this class
+/*
+* Data driven test suite testing configurability of GeoSpatial service. The few tests in this class
  * replicate examples from {@link TestGeoSpatialServiceConfiguration} with a custom datatype instead
  * of using the built-in datatype.
  *
@@ -178,7 +178,7 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype
         .runTest();
   }
 
-  /**
+  /*
    * Correct rejection test with search query for datatype that is not registered.
    *
    * @throws Exception
@@ -199,7 +199,7 @@ public class TestGeoSpatialServiceConfigurationCustomDatatype
     throw new RuntimeException("Expected to run into exception.");
   }
 
-  /**
+  /*
    * Verify precision handling, which is changed in the configuration to be 6 for the first
    * component and 5 for the second one. See {@link
    * TestGeoSpatialServiceEvaluation#testInRectangleQuery08()} for baseline.

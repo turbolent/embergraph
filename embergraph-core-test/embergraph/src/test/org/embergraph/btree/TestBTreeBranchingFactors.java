@@ -19,8 +19,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree;
 
-/**
- * Unit tests of non-default B+Tree branching factors.
+/*
+* Unit tests of non-default B+Tree branching factors.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -41,7 +41,7 @@ public class TestBTreeBranchingFactors extends AbstractBTreeTestCase {
     assertEquals("branchingFactor", branchingFactor, btree.getBranchingFactor());
   }
 
-  /**
+  /*
    * Unit test replicates an error reported in the ticket below. The root cause of the error was a
    * confusion in the code for the "Node Serializer" classes used by the HTree and the BTree.
    *

@@ -27,8 +27,8 @@ import it.unimi.dsi.parser.BulletParser;
 import it.unimi.dsi.parser.Element;
 import java.util.Map;
 
-/**
- * A callback for the {@linkplain it.unimi.dsi.parser.BulletParser bullet parser}.
+/*
+* A callback for the {@linkplain it.unimi.dsi.parser.BulletParser bullet parser}.
  *
  * <p>This interface is very loosely inspired to the SAX2 interface. However, it strives to be
  * simple, and to be StringFree&trade;.
@@ -42,7 +42,7 @@ public interface Callback {
   /** A singleton empty callback array. */
   Callback[] EMPTY_CALLBACK_ARRAY = new Callback[0];
 
-  /**
+  /*
    * Configure the parser for usage with this callback.
    *
    * <p>When a callback is registered with a parser, it needs to set up the parser so that all data
@@ -52,7 +52,7 @@ public interface Callback {
    */
   void configure(BulletParser parser);
 
-  /**
+  /*
    * Receive notification of the beginning of the document.
    *
    * <p>The callback must use this method to reset its internal state so that it can be resued. It
@@ -60,7 +60,7 @@ public interface Callback {
    */
   void startDocument();
 
-  /**
+  /*
    * Receive notification of the start of an element.
    *
    * <p>For simple elements, this is the only notification that the callback will ever receive.
@@ -71,7 +71,7 @@ public interface Callback {
    */
   boolean startElement(Element element, Map<Attribute, it.unimi.dsi.lang.MutableString> attrMap);
 
-  /**
+  /*
    * Receive notification of the end of an element.
    *
    * <p><strong>Warning</strong>: unless specific decorators are used, in general a callback will
@@ -86,7 +86,7 @@ public interface Callback {
    */
   boolean endElement(Element element);
 
-  /**
+  /*
    * Receive notification of character data inside an element.
    *
    * <p>You must not write into <code>text</code>, as it could be passed around to many callbacks.
@@ -103,7 +103,7 @@ public interface Callback {
    */
   boolean characters(char[] text, int offset, int length, boolean flowBroken);
 
-  /**
+  /*
    * Receive notification of the content of a CDATA section.
    *
    * <p>CDATA sections in an HTML document are the result of meeting a <samp>STYLE</samp> or

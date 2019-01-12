@@ -24,8 +24,8 @@ package org.embergraph.util;
 import java.math.BigInteger;
 import org.apache.log4j.Logger;
 
-/**
- * A timestamp factory using {@link System#currentTimeMillis()} and an internal counter to provide
+/*
+* A timestamp factory using {@link System#currentTimeMillis()} and an internal counter to provide
  * unique timestamps with greater than millisecond resolution.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -37,38 +37,38 @@ public class HybridTimestampFactory {
   /** Logger. */
   public static final Logger log = Logger.getLogger(HybridTimestampFactory.class);
 
-  //    /**
-  //     * Allows up to 1024 distinct timestamps per millisecond.
+  //    /*
+//     * Allows up to 1024 distinct timestamps per millisecond.
   //     */
   //    public static HybridTimestampFactory INSTANCE = new HybridTimestampFactory();
 
   /** The #of low bits in the generated timestamps that are allocated to the internal counter. */
   private final int counterBits;
 
-  /**
+  /*
    * The maximum value of the internal counter before it will rollover. On rollover the factory
    * sleeps until a new time in milliseconds is reported by {@link System#currentTimeMillis()}.
    */
   private final int maxCounter;
 
-  /**
+  /*
    * The milliseconds component of the last generated timestamp (without erasure of the hit bits).
    */
   private long lastTimestamp;
 
-  /**
+  /*
    * The last value of the internal counter used to make a unique timestamp. This is reset each time
    * the time returned by {@link System#currentTimeMillis()} differs from {@link #lastTimestamp}.
    */
   private int counter = 0;
 
-  /**
+  /*
    * The #of times the factory needed to sleep the current thread in order to generate a distinct
    * timestamp.
    */
   private long sleepCounter = 0L;
 
-  /**
+  /*
    * The #of times the factory needed to sleep the current thread in order to generate a distinct
    * timestamp.
    */
@@ -83,7 +83,7 @@ public class HybridTimestampFactory {
     this(10);
   }
 
-  /**
+  /*
    * Allows up to <code>2^counterBits</code> distinct timestamps per millisecond.
    *
    * @param counterBits The #of bits in the long timestamp that are used to represent a counter.

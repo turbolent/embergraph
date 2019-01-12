@@ -23,8 +23,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 
-/**
- * Test suite for {@link IV#getValue()}, which provides a cache on the {@link IV} for a materialized
+/*
+* Test suite for {@link IV#getValue()}, which provides a cache on the {@link IV} for a materialized
  * {@link EmbergraphValue}.
  *
  * @author thompsonbry
@@ -82,7 +82,7 @@ public class TestIVCache extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Variant used *except* for {@link BlobIV}s.
    *
    * @param lex
@@ -93,7 +93,7 @@ public class TestIVCache extends AbstractTripleStoreTestCase {
     doTest(lex, iv, null /*given*/);
   }
 
-  /**
+  /*
    * Core impl.
    *
    * @param lex

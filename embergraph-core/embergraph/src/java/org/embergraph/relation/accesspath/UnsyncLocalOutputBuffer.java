@@ -3,8 +3,8 @@ package org.embergraph.relation.accesspath;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.engine.BOpStats;
 
-/**
- * Wraps the base class to update the caller's {@link BOpStats}.
+/*
+* Wraps the base class to update the caller's {@link BOpStats}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: UnsyncLocalOutputBuffer.java 3448 2010-08-18 20:55:58Z thompsonbry $
@@ -18,7 +18,7 @@ public class UnsyncLocalOutputBuffer<E extends IBindingSet>
 
   //    * @param stats
   //    *            Statistics object
-  /**
+  /*
    * @param capacity The capacity of this buffer.
    * @param syncBuffer The thread-safe buffer onto which this buffer writes when it overflows.
    */
@@ -41,7 +41,7 @@ public class UnsyncLocalOutputBuffer<E extends IBindingSet>
     this.syncBuffer = syncBuffer;
   }
 
-  /**
+  /*
    * Adds the chunk to the {@link #syncBuffer} and updates the {@link BOpStats}.
    *
    * @param chunk A chunk of {@link IBindingSet}s to be output.

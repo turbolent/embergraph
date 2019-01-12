@@ -24,8 +24,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Aggregates tests in dependency order.
+/*
+* Aggregates tests in dependency order.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

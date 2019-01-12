@@ -25,8 +25,8 @@ package org.embergraph.relation.accesspath;
 
 import org.apache.log4j.Logger;
 
-/**
- * An abstract implementation of an unsynchronized buffer backed by a fixed capacity array.
+/*
+* An abstract implementation of an unsynchronized buffer backed by a fixed capacity array.
  *
  * <p><strong>This implementation is NOT thread-safe.</strong>
  *
@@ -45,7 +45,7 @@ public abstract class AbstractUnsynchronizedArrayBuffer<E> implements IBuffer<E>
   /** The capacity of the internal buffer each time it is allocated. */
   private final int capacity;
 
-  /**
+  /*
    * The #of elements in the internal {@link #buffer}. This is reset each time we allocate the
    * {@link #buffer}.
    */
@@ -74,7 +74,7 @@ public abstract class AbstractUnsynchronizedArrayBuffer<E> implements IBuffer<E>
     return size;
   }
 
-  /**
+  /*
    * @param capacity The capacity of the backing buffer.
    * @param cls The component type for the backing array.
    */
@@ -83,7 +83,7 @@ public abstract class AbstractUnsynchronizedArrayBuffer<E> implements IBuffer<E>
     this(capacity, cls, null /* filter */);
   }
 
-  /**
+  /*
    * @param capacity The capacity of the backing buffer.
    * @param cls The component type for the backing array.
    * @param filter Filter to keep elements out of the buffer (optional).
@@ -108,7 +108,7 @@ public abstract class AbstractUnsynchronizedArrayBuffer<E> implements IBuffer<E>
 
   }
 
-  /**
+  /*
    * Applies the optional filter to restrict elements allowed into the buffer. When the optional
    * filter was NOT specified all elements are allowed into the buffer.
    *
@@ -132,7 +132,7 @@ public abstract class AbstractUnsynchronizedArrayBuffer<E> implements IBuffer<E>
     add2(e);
   }
 
-  /**
+  /*
    * Adds an element to the buffer.
    *
    * <p><strong>Not thread-safe.</strong>
@@ -191,7 +191,7 @@ public abstract class AbstractUnsynchronizedArrayBuffer<E> implements IBuffer<E>
     return overflow;
   }
 
-  /**
+  /*
    * Adds all references in the internal buffer to the target buffer, resets the #of elements in the
    * internal buffer to ZERO (0), and clears the internal array - it will be reallocated again on
    * demand.
@@ -241,7 +241,7 @@ public abstract class AbstractUnsynchronizedArrayBuffer<E> implements IBuffer<E>
     }
   }
 
-  /**
+  /*
    * Dispatch a chunk.
    *
    * @param chunk A chunk.

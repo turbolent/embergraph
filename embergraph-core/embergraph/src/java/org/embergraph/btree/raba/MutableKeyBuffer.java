@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import org.embergraph.util.BytesUtil;
 
-/**
- * A flyweight mutable implementation exposing the backing byte[][] and supporting search.
+/*
+* A flyweight mutable implementation exposing the backing byte[][] and supporting search.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -33,12 +33,12 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
   /** The #of defined keys. */
   public int nkeys;
 
-  /**
+  /*
    * An array containing the keys. The size of the array is the maximum capacity of the key buffer.
    */
   public final byte[][] keys;
 
-  /**
+  /*
    * Allocate a mutable key buffer capable of storing <i>capacity</i> keys.
    *
    * @param capacity The capacity of the key buffer.
@@ -50,7 +50,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
     keys = new byte[capacity][];
   }
 
-  /**
+  /*
    * Constructor wraps an existing byte[][].
    *
    * @param nkeys The #of defined keys in the array.
@@ -69,7 +69,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
     this.keys = keys;
   }
 
-  /**
+  /*
    * Creates a new instance using a new array of keys but sharing the key references with the
    * provided {@link MutableKeyBuffer}.
    *
@@ -94,7 +94,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
     }
   }
 
-  /**
+  /*
    * Builds a mutable key buffer.
    *
    * @param capacity The capacity of the new instance (this is based on the branching factor for the
@@ -233,7 +233,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
    * and keys are redistributed.
    */
 
-  /**
+  /*
    * Set the key at the specified index.
    *
    * @param index The index in [0:nkeys-1].
@@ -247,8 +247,8 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
     keys[index] = key;
   }
 
-  //    /**
-  //     * Set the key at the specified index to <code>null</code>. This is used
+  //    /*
+//     * Set the key at the specified index to <code>null</code>. This is used
   //     * to clear elements of {@link #keys} that are no longer defined. The caller
   //     * is responsible for updating {@link #nkeys} when using this method.
   //     *
@@ -305,7 +305,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
     return nkeys;
   }
 
-  /**
+  /*
    * Insert a key into the buffer at the specified index, incrementing the #of keys in the buffer by
    * one and moving down all keys from that index on down by one (towards the end of the array).
    *
@@ -344,7 +344,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
     return ++nkeys;
   }
 
-  /**
+  /*
    * Remove a key in the buffer at the specified index, decrementing the #of keys in the buffer by
    * one and moving up all keys from that index on down by one (towards the start of the array).
    *
@@ -596,7 +596,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
     }
   }
 
-  /**
+  /*
    * Computes the length of the prefix by computed by counting the #of leading bytes that match for
    * the first and last key in the buffer.
    */
@@ -609,7 +609,7 @@ public class MutableKeyBuffer extends AbstractKeyBuffer {
     return BytesUtil.getPrefixLength(keys[0], keys[nkeys - 1]);
   }
 
-  /**
+  /*
    * Computes the #of leading bytes shared by all keys and returns a new byte[] containing those
    * bytes.
    */

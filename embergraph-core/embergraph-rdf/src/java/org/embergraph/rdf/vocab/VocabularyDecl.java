@@ -26,8 +26,8 @@ import org.embergraph.rdf.internal.impl.uri.VocabURIShortIV;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 
-/**
- * A class for declaring a {@link Vocabulary}.
+/*
+* A class for declaring a {@link Vocabulary}.
  *
  * <p>Note: Implementations of a {@link VocabularyDecl} MUST be stable across the life cycle of an
  * {@link AbstractTripleStore}. For this reason it is strongly recommended that new versions of a
@@ -45,8 +45,8 @@ import org.openrdf.model.URI;
  */
 public interface VocabularyDecl {
 
-  /**
+  /*
    * Return an iterator which will visit the declared values. The iterator must not support removal.
    */
-  public Iterator<URI> values();
+  Iterator<URI> values();
 }

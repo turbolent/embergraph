@@ -27,8 +27,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Interface for a set of bindings. The set of variables values is extensible and the bound values
+/*
+* Interface for a set of bindings. The set of variables values is extensible and the bound values
  * are loosely typed.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -36,16 +36,16 @@ import java.util.Map;
  */
 public interface IBindingSet extends Cloneable, Serializable {
 
-  /**
+  /*
    * Return <code>true</code> iff the variable is bound.
    *
    * @param var The variable.
    * @return <code>true</code> if the variable is bound.
    * @throws IllegalArgumentException if <i>var</i> is <code>null</code>.
    */
-  public boolean isBound(IVariable var);
+  boolean isBound(IVariable var);
 
-  /**
+  /*
    * Bind the variable to the value.
    *
    * @param var The variable.
@@ -53,84 +53,84 @@ public interface IBindingSet extends Cloneable, Serializable {
    * @throws IllegalArgumentException if <i>var</i> is <code>null</code>.
    * @throws IllegalArgumentException if <i>val</i> is <code>null</code>.
    */
-  public void set(IVariable var, IConstant val);
+  void set(IVariable var, IConstant val);
 
-  /**
+  /*
    * Return the binding for the variable.
    *
    * @param var The variable.
    * @return the binding for the variable -or- <code>null</code> iff the variable is not bound.
    * @throws IllegalArgumentException if <i>var</i> is <code>null</code>.
    */
-  public IConstant get(IVariable var);
+  IConstant get(IVariable var);
 
-  /**
+  /*
    * Clear any binding for the variable.
    *
    * @param var The variable.
    * @throws IllegalArgumentException if <i>var</i> is <code>null</code>.
    */
-  public void clear(IVariable var);
+  void clear(IVariable var);
 
   /** Clear all bindings. */
-  public void clearAll();
+  void clearAll();
 
   /** <code>true</code> iff there are no variable bindings in the binding set. */
-  public boolean isEmpty();
+  boolean isEmpty();
 
   /** The #of bound variables. */
-  public int size();
+  int size();
 
   /** Visits the bindings. */
-  public Iterator<Map.Entry<IVariable, IConstant>> iterator();
+  Iterator<Map.Entry<IVariable, IConstant>> iterator();
 
-  /**
+  /*
    * Visits the bound variables.
    *
    * @todo The unit tests verify that the implementations do not permit mutation using the iterator,
    *     but that is not actually specified by the API as forbidden.
    */
-  public Iterator<IVariable> vars();
+  Iterator<IVariable> vars();
 
   /** Return a shallow copy of the binding set. */
-  public IBindingSet clone();
+  IBindingSet clone();
 
-  /**
+  /*
    * Return a shallow copy of the binding set, eliminating unnecessary variables.
    *
    * @param variablesToKeep When non-<code>null</code>, only the listed variables are retained.
    */
-  public IBindingSet copy(IVariable[] variablesToKeep);
+  IBindingSet copy(IVariable[] variablesToKeep);
 
-  /**
+  /*
    * Return a shallow copy of the binding set, eliminating unnecessary variables and error values
    * (equal to Constant.errorValueConstant()).
    *
    * @param variablesToKeep When non-<code>null</code>, only the listed variables are retained.
    */
-  public IBindingSet copyMinusErrors(IVariable[] variablesToKeep);
+  IBindingSet copyMinusErrors(IVariable[] variablesToKeep);
 
   /** @return true if this IBindingSet contains an assignment of an error value */
-  public boolean containsErrorValues();
+  boolean containsErrorValues();
 
-  /**
+  /*
    * True iff the variables and their bound values are the same for the two binding sets.
    *
    * @param o Another binding set.
    */
-  public boolean equals(Object o);
+  boolean equals(Object o);
 
-  /**
+  /*
    * The hash code of a binding is defined as the bit-wise XOR of the hash codes of the {@link
    * IConstant}s for its bound variables. Unbound variables are ignored when computing the hash
    * code. Binding sets are unordered collections, therefore the calculated hash code intentionally
    * does not depend on the order in which the bindings are visited. The hash code reflects the
    * current state of the bindings and must be recomputed if the bindings are changed.
    */
-  public int hashCode();
+  int hashCode();
 
-  //	/**
-  //	 * Make a copy of the current symbol table (aka current variable bindings)
+  //	/*
+//	 * Make a copy of the current symbol table (aka current variable bindings)
   //	 * and push it onto onto the stack. Variable bindings will be made against
   //	 * the current symbol table. The symbol table stack is propagated by
   //	 * {@link #clone()} and {@link #copy(IVariable[])}. Symbols tables may be
@@ -146,8 +146,8 @@ public interface IBindingSet extends Cloneable, Serializable {
   //	 */
   //	public void push();
   //
-  //	/**
-  //	 * Pop the current symbol table off of the stack.
+  //	/*
+//	 * Pop the current symbol table off of the stack.
   //	 *
   //	 * @param save
   //	 *            When <code>true</code>, the bindings on the current symbol
@@ -163,8 +163,8 @@ public interface IBindingSet extends Cloneable, Serializable {
   //	 */
   //	public void pop(boolean save);
 
-  //    /**
-  //     * Push the current symbol table, copying the bindings for only the named
+  //    /*
+//     * Push the current symbol table, copying the bindings for only the named
   //     * variables into a new symbol table on the top of the stack. Only the
   //     * bindings in the current symbol table are visible. {@link #iterator()}
   //     * WILL NOT visit bindings unless they are present at the top of the stack.
@@ -192,8 +192,8 @@ public interface IBindingSet extends Cloneable, Serializable {
   //     */
   //    public void push(IVariable[] vars);
   //
-  //    /**
-  //     * Pop the current symbol table off of the stack, copying the bindings for
+  //    /*
+//     * Pop the current symbol table off of the stack, copying the bindings for
   //     * the specified variables into the revealed symbol table.
   //     * <p>
   //     * The variables represent the projection of the subquery. For correct

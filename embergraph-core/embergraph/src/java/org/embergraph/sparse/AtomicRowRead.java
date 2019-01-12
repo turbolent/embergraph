@@ -23,8 +23,8 @@ package org.embergraph.sparse;
 
 import org.embergraph.btree.IIndex;
 
-/**
- * Atomic read of the logical row associated with some {@link Schema} and primary key.
+/*
+* Atomic read of the logical row associated with some {@link Schema} and primary key.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -42,7 +42,7 @@ public class AtomicRowRead extends AbstractAtomicRowReadOrWrite {
   /** De-serialization ctor. */
   public AtomicRowRead() {}
 
-  /**
+  /*
    * Constructor for an atomic read operation.
    *
    * @param schema The schema governing the property set.
@@ -65,7 +65,7 @@ public class AtomicRowRead extends AbstractAtomicRowReadOrWrite {
     super(schema, primaryKey, fromTime, toTime, filter);
   }
 
-  /**
+  /*
    * Atomic read.
    *
    * @return A {@link TPS} instance containing the selected data from the logical row identified by

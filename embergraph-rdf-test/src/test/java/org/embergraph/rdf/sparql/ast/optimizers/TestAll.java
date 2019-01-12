@@ -22,8 +22,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.embergraph.rdf.sparql.ast.QueryHints;
 
-/**
- * Aggregates test suites into increasing dependency order.
+/*
+* Aggregates test suites into increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -153,7 +153,7 @@ public class TestAll extends TestCase {
     // test partitioning utility classes
     suite.addTestSuite(TestASTJoinGroupPartitioning.class);
 
-    /**
+    /*
      * Optimizes SELECT COUNT(*) { triple-pattern } using the fast range count mechanisms when that
      * feature would produce exact results for the KB instance.
      *

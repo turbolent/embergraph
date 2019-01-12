@@ -36,8 +36,8 @@ import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Class manages the encoding and decoding of keys for the full text index. You can override this
+/*
+* Class manages the encoding and decoding of keys for the full text index. You can override this
  * class to change the way in which the keys and/or values of the index are stored. For example, the
  * RDF database does this to use variable length document identifiers.
  *
@@ -60,8 +60,8 @@ public class FullTextIndexTupleSerializer<V extends Comparable<V>>
   //        return doublePrecision;
   //    }
 
-  //    /**
-  //     * Used to serialize the values for the tuples in the index.
+  //    /*
+//     * Used to serialize the values for the tuples in the index.
   //     * <p>
   //     * Note: While this object is not thread-safe, the mutable B+Tree is
   //     * restricted to a single writer so it does not have to be thread-safe.
@@ -71,7 +71,7 @@ public class FullTextIndexTupleSerializer<V extends Comparable<V>>
   /** De-serialization constructor. */
   public FullTextIndexTupleSerializer() {}
 
-  /**
+  /*
    * @param keyBuilderFactory This factory governs the Unicode collation order that will be imposed
    *     on the indexed tokens.
    * @param leafKeysCoder The coder used for the leaf keys (prefix coding is fine).
@@ -127,7 +127,7 @@ public class FullTextIndexTupleSerializer<V extends Comparable<V>>
 
     keyBuilder.append(termWeightCompact);
 
-    keyBuilder.append((V) docId);
+    keyBuilder.append(docId);
 
     if (fieldsEnabled) keyBuilder.append(entry.getFieldId());
 
@@ -213,7 +213,7 @@ public class FullTextIndexTupleSerializer<V extends Comparable<V>>
             - Bytes.SIZEOF_LONG /* docId */
             - (fieldsEnabled ? Bytes.SIZEOF_INT /* fieldId */ : 0);
 
-    final V docId = (V) (Object) Long.valueOf(KeyBuilder.decodeLong(kbuf.array(), docIdOffset));
+    final V docId = (V) Long.valueOf(KeyBuilder.decodeLong(kbuf.array(), docIdOffset));
 
     // Decode field when present
     final int fieldId;

@@ -23,8 +23,8 @@ package org.embergraph.bop.join;
 
 import org.embergraph.bop.HashMapAnnotations;
 
-/**
- * Annotations in common for JVM based hash joins.
+/*
+* Annotations in common for JVM based hash joins.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

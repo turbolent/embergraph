@@ -18,7 +18,7 @@ package org.embergraph.ganglia;
 /** Interface for reporting metrics to a local ganglia service. */
 public interface IGangliaMetricsReporter {
 
-  /**
+  /*
    * Set the value of a metric.
    *
    * @param metricName The metric name (munged such that it is directly usable with ganglia).

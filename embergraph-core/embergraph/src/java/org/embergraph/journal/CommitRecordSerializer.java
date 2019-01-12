@@ -28,8 +28,8 @@ import org.embergraph.io.ByteBufferInputStream;
 import org.embergraph.io.LongPacker;
 import org.embergraph.util.Bytes;
 
-/**
- * A helper class for (de-)serializing the root addresses.
+/*
+* A helper class for (de-)serializing the root addresses.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

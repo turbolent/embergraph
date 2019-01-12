@@ -26,13 +26,13 @@ import it.unimi.dsi.fastutil.chars.Char2IntMap;
 import it.unimi.dsi.fastutil.chars.Char2IntOpenHashMap;
 import java.util.Iterator;
 
-/**
- * A transformation strategy mapping strings to their {@linkplain HuTuckerCodec Hu-Tucker encoding}.
+/*
+* A transformation strategy mapping strings to their {@linkplain HuTuckerCodec Hu-Tucker encoding}.
  * The encoding is guaranteed to preserve lexicographical ordering.
  */
 public class HuTuckerTransformationStrategy extends PrefixCoderTransformationStrategy {
   private static final long serialVersionUID = 1;
-  /**
+  /*
    * Creates a Hu-Tucker transformation strategy for the character sequences returned by the given
    * iterable. The strategy will map a string to its Hu-Tucker encoding.
    *

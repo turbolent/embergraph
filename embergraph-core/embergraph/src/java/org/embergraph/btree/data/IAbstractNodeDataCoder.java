@@ -26,29 +26,29 @@ import java.io.Serializable;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.DataOutputBuffer;
 
-/**
- * Interface for coding (compressing) an {@link INodeData} or {@link ILeafData} onto a byte[].
+/*
+* Interface for coding (compressing) an {@link INodeData} or {@link ILeafData} onto a byte[].
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IAbstractNodeDataCoder<T extends IAbstractNodeData> extends Serializable {
 
-  /**
+  /*
    * Return <code>true</code> if this implementation can code data records for B+Tree nodes.
    *
    * @see INodeData
    */
   boolean isNodeDataCoder();
 
-  /**
+  /*
    * Return <code>true</code> if this implementation can code data records for B+Tree leaves.
    *
    * @see ILeafData
    */
   boolean isLeafDataCoder();
 
-  /**
+  /*
    * Encode the data, returning a slice containing the coded data.
    *
    * <p>Note: Implementations of this method are typically heavy. While it is always valid to {@link
@@ -70,7 +70,7 @@ public interface IAbstractNodeDataCoder<T extends IAbstractNodeData> extends Ser
    */
   AbstractFixedByteArrayBuffer encode(T node, DataOutputBuffer buf);
 
-  /**
+  /*
    * Encode the data, returning a reference to a coded instance of the data.
    *
    * <p>Note: Implementations of this method are typically heavy. While it is always valid to {@link
@@ -93,7 +93,7 @@ public interface IAbstractNodeDataCoder<T extends IAbstractNodeData> extends Ser
    */
   T encodeLive(T node, DataOutputBuffer buf);
 
-  /**
+  /*
    * Return an {@link IAbstractNodeData} instance which can access the coded data.
    *
    * @param data The record containing the coded data.

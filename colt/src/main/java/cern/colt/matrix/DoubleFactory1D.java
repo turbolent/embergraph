@@ -10,8 +10,10 @@ package cern.colt.matrix;
 
 import cern.colt.matrix.impl.DenseDoubleMatrix1D;
 import cern.colt.matrix.impl.SparseDoubleMatrix1D;
-/**
- * Factory for convenient construction of 1-d matrices holding <tt>double</tt> cells. Use idioms
+import cern.jet.math.Functions;
+
+/*
+* Factory for convenient construction of 1-d matrices holding <tt>double</tt> cells. Use idioms
  * like <tt>DoubleFactory1D.dense.make(1000)</tt> to construct dense matrices,
  * <tt>DoubleFactory1D.sparse.make(1000)</tt> to construct sparse matrices.
  *
@@ -41,7 +43,7 @@ public class DoubleFactory1D extends cern.colt.PersistentObject {
   public static final DoubleFactory1D sparse = new DoubleFactory1D();
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected DoubleFactory1D() {}
-  /**
+  /*
    * C = A||B; Constructs a new matrix which is the concatenation of two other matrices. Example:
    * <tt>0 1</tt> append <tt>3 4</tt> --> <tt>0 1 3 4</tt>.
    */
@@ -52,15 +54,15 @@ public class DoubleFactory1D extends cern.colt.PersistentObject {
     matrix.viewPart(A.size(), B.size()).assign(B);
     return matrix;
   }
-  /**
+  /*
    * Constructs a matrix with cells having ascending values. For debugging purposes. Example: <tt>0
    * 1 2</tt>
    */
   public DoubleMatrix1D ascending(int size) {
     cern.jet.math.Functions F = cern.jet.math.Functions.functions;
-    return descending(size).assign(F.chain(F.neg, F.minus(size)));
+    return descending(size).assign(Functions.chain(Functions.neg, Functions.minus(size)));
   }
-  /**
+  /*
    * Constructs a matrix with cells having descending values. For debugging purposes. Example: <tt>2
    * 1 0</tt>
    */
@@ -72,7 +74,7 @@ public class DoubleFactory1D extends cern.colt.PersistentObject {
     }
     return matrix;
   }
-  /**
+  /*
    * Constructs a matrix with the given cell values. The values are copied. So subsequent changes in
    * <tt>values</tt> are not reflected in the matrix, and vice-versa.
    *
@@ -107,7 +109,7 @@ public class DoubleFactory1D extends cern.colt.PersistentObject {
   public DoubleMatrix1D make(int size, double initialValue) {
     return make(size).assign(initialValue);
   }
-  /**
+  /*
    * Constructs a matrix from the values of the given list. The values are copied. So subsequent
    * changes in <tt>values</tt> are not reflected in the matrix, and vice-versa.
    *
@@ -124,7 +126,7 @@ public class DoubleFactory1D extends cern.colt.PersistentObject {
   public DoubleMatrix1D random(int size) {
     return make(size).assign(cern.jet.math.Functions.random());
   }
-  /**
+  /*
    * C = A||A||..||A; Constructs a new matrix which is concatenated <tt>repeat</tt> times. Example:
    *
    * <pre>
@@ -141,7 +143,7 @@ public class DoubleFactory1D extends cern.colt.PersistentObject {
     }
     return matrix;
   }
-  /**
+  /*
    * Constructs a randomly sampled matrix with the given shape. Randomly picks exactly
    * <tt>Math.round(size*nonZeroFraction)</tt> cells and initializes them to <tt>value</tt>, all the
    * rest will be initialized to zero. Note that this is not the same as setting each cell with
@@ -173,7 +175,7 @@ public class DoubleFactory1D extends cern.colt.PersistentObject {
 
     return matrix;
   }
-  /**
+  /*
    * Constructs a list from the given matrix. The values are copied. So subsequent changes in
    * <tt>values</tt> are not reflected in the list, and vice-versa.
    *

@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.buffer;
 
 import cern.colt.list.IntArrayList;
-/**
- * Fixed sized (non resizable) streaming buffer connected to a target <tt>IntBufferConsumer</tt> to
+/*
+* Fixed sized (non resizable) streaming buffer connected to a target <tt>IntBufferConsumer</tt> to
  * which data is automatically flushed upon buffer overflow.
  *
  * @author wolfgang.hoschek@cern.ch
@@ -24,7 +24,7 @@ public class IntBuffer extends cern.colt.PersistentObject implements IntBufferCo
   protected IntArrayList list;
   protected int capacity;
   protected int size;
-  /**
+  /*
    * Constructs and returns a new buffer with the given target.
    *
    * @param target the target to flush to.
@@ -38,7 +38,7 @@ public class IntBuffer extends cern.colt.PersistentObject implements IntBufferCo
     this.list = new IntArrayList(elements);
     this.size = 0;
   }
-  /**
+  /*
    * Adds the specified element to the receiver.
    *
    * @param element the element to add.
@@ -47,7 +47,7 @@ public class IntBuffer extends cern.colt.PersistentObject implements IntBufferCo
     if (this.size == this.capacity) flush();
     this.elements[size++] = element;
   }
-  /**
+  /*
    * Adds all elements of the specified list to the receiver.
    *
    * @param list the list of which all elements shall be added.
@@ -57,14 +57,14 @@ public class IntBuffer extends cern.colt.PersistentObject implements IntBufferCo
     if (this.size + listSize >= this.capacity) flush();
     this.target.addAllOf(list);
   }
-  /**
+  /*
    * Sets the receiver's size to zero. In other words, forgets about any internally buffered
    * elements.
    */
   public void clear() {
     this.size = 0;
   }
-  /**
+  /*
    * Adds all internally buffered elements to the receiver's target, then resets the current buffer
    * size to zero.
    */

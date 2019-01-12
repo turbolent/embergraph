@@ -23,8 +23,8 @@ package org.embergraph.bop.join;
 
 import org.embergraph.bop.PipelineOp;
 
-/**
- * Test suite for the {@link JVMHashJoinUtility}.
+/*
+* Test suite for the {@link JVMHashJoinUtility}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestJVMHashJoinUtility.java 5343 2011-10-17 15:29:02Z thompsonbry $

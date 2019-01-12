@@ -22,8 +22,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Interface exposes access to the VS and ES that is visible during a GATHER or SCATTER operation.
+/*
+* Interface exposes access to the VS and ES that is visible during a GATHER or SCATTER operation.
  *
  * <p>This interface is intended to be restrictive in both its API and the state that the API will
  * expose in order to facilitate scaling in multi-machine environments.
@@ -43,7 +43,7 @@ import org.openrdf.model.Value;
  */
 public interface IGASState<VS, ES, ST> {
 
-  /**
+  /*
    * {@link #reset()} the computation state and populate the initial frontier.
    *
    * @param ctx The execution context.
@@ -52,7 +52,7 @@ public interface IGASState<VS, ES, ST> {
    */
   void setFrontier(IGASContext<VS, ES, ST> ctx, Value... v);
 
-  /**
+  /*
    * Discard computation state (the frontier, vertex state, and edge state) and reset the round
    * counter.
    *
@@ -63,7 +63,7 @@ public interface IGASState<VS, ES, ST> {
   /** Return the current evaluation round (origin ZERO). */
   int round();
 
-  /**
+  /*
    * Get the state for the vertex using the appropriate factory. If this is the first visit for that
    * vertex, then the state is initialized using the factory. Otherwise the existing state is
    * returned.
@@ -74,7 +74,7 @@ public interface IGASState<VS, ES, ST> {
    */
   VS getState(Value v);
 
-  /**
+  /*
    * Get the state for the edge using the appropriate factory. If this is the first visit for that
    * vertex, then the state is initialized using the factory. Otherwise the existing state is
    * returned.
@@ -85,7 +85,7 @@ public interface IGASState<VS, ES, ST> {
    */
   ES getState(Statement e);
 
-  /**
+  /*
    * Return <code>true</code> iff the specified vertex has an associated vertex state object - this
    * is interpreted as meaning that the vertex has been "visited".
    *
@@ -94,7 +94,7 @@ public interface IGASState<VS, ES, ST> {
    */
   boolean isVisited(Value v);
 
-  /**
+  /*
    * Return <code>true</code> iff the specified vertices all have an associated vertex state object
    * - this is interpreted as meaning that the vertex has been "visited".
    *
@@ -109,7 +109,7 @@ public interface IGASState<VS, ES, ST> {
   /** Return the {@link IGASSchedulerImpl}. */
   IGASSchedulerImpl getScheduler();
 
-  /**
+  /*
    * Compute a reduction over the vertex state table (all vertices that have had their vertex state
    * materialized).
    *
@@ -124,7 +124,7 @@ public interface IGASState<VS, ES, ST> {
   /** Conditionally log various interesting information about the state of the computation. */
   void traceState();
 
-  /**
+  /*
    * Return the other end of a link.
    *
    * @param u One end of the link.
@@ -133,7 +133,7 @@ public interface IGASState<VS, ES, ST> {
    */
   Value getOtherVertex(Value u, Statement e);
 
-  /**
+  /*
    * Return the link attribute, if there is one.
    *
    * @param u One end of the link.
@@ -142,7 +142,7 @@ public interface IGASState<VS, ES, ST> {
    */
   Literal getLinkAttr(Value u, Statement e);
 
-  /**
+  /*
    * Return a useful representation of an edge (non-batch API, debug only). This method is only
    * required when the edge objects are internal database objects lacking fully materialized RDF
    * {@link Value}s. In this case, it will materialize the RDF Values and present a pleasant view of
@@ -155,7 +155,7 @@ public interface IGASState<VS, ES, ST> {
    */
   String toString(Statement e);
 
-  /**
+  /*
    * Return <code>true</code> iff the given {@link Statement} models an edge that connects two
    * vertices ({@link Statement}s also model property values).
    *
@@ -164,7 +164,7 @@ public interface IGASState<VS, ES, ST> {
    */
   boolean isEdge(final Statement e);
 
-  /**
+  /*
    * Return <code>true</code> iff the given {@link Statement} models an property value for a vertex
    * of the graph ({@link Statement}s also model edges).
    *
@@ -173,7 +173,7 @@ public interface IGASState<VS, ES, ST> {
    */
   boolean isAttrib(Statement e);
 
-  /**
+  /*
    * Return <code>true</code> iff the statement models a link attribute having the specified link
    * type. When this method returns <code>true</code>, the {@link Statement#getSubject()} may be
    * decoded to obtain the link described by that link attribute using {@link
@@ -186,7 +186,7 @@ public interface IGASState<VS, ES, ST> {
    */
   boolean isLinkAttrib(Statement e, URI linkAttribType);
 
-  /**
+  /*
    * If the vertex is actually an edge, then return the decoded edge.
    *
    * <p>Note: A vertex may be an edge. A link attribute is modeled by treating the link as a vertex
@@ -205,7 +205,7 @@ public interface IGASState<VS, ES, ST> {
    */
   Statement decodeStatement(Value v);
 
-  /**
+  /*
    * Return -1, o, or 1 if <code>u</code> is LT, EQ, or GT <code>v</code>. A number of GAS programs
    * depend on the ability to place an order over the vertex identifiers, as does 2D partitioning.
    * The ordering provided by this method MAY be arbitrary, but it MUST be total and stable across
@@ -216,14 +216,14 @@ public interface IGASState<VS, ES, ST> {
    */
   int compareTo(Value u, Value v);
 
-  /**
+  /*
    * Retain only those vertices in the visited set that are found in the specified collection.
    *
    * @param retainSet The set of vertices to be retained.
    */
   void retainAll(Set<Value> retainSet);
 
-  /**
+  /*
    * Convert a value into an appropriate internal form.
    *
    * @param value The value.

@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test suite for an issue where ill designed patterns consisting of a combination of UNION and
+/*
+* Test suite for an issue where ill designed patterns consisting of a combination of UNION and
  * nested OPTIONAL cause problems.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/1087">Named subquery results not referenced
@@ -32,7 +32,7 @@ public class TestTicket1087 extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Verify correct result for query:
    *
    * <pre>
@@ -60,7 +60,7 @@ public class TestTicket1087 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Verify correct result for query:
    *
    * <pre>

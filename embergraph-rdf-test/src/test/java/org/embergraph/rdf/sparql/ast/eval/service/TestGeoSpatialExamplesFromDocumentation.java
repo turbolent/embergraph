@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite asserting that the examples in the geospatial documentation are running
+/*
+* Data driven test suite asserting that the examples in the geospatial documentation are running
  * through properly.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>

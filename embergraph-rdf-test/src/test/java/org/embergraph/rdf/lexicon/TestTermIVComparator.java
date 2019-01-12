@@ -35,8 +35,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactoryImpl;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
-/**
- * Test suite for {@link TermIVComparator}.
+/*
+* Test suite for {@link TermIVComparator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -94,8 +94,8 @@ public class TestTermIVComparator extends TestCase2 {
       Arrays.sort(keys, UnsignedByteArrayComparator.INSTANCE);
       for (int i = 0; i < actualIds.length; i++) {
         if (log.isInfoEnabled()) log.info(BytesUtil.toString(keys[i]));
-        /*
-         * Decode and verify sorted into the expected order.
+      /*
+       * Decode and verify sorted into the expected order.
          */
         assertEquals(expectedIds[i].getTermId(), KeyBuilder.decodeLong(keys[i], 0));
       }

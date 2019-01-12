@@ -22,8 +22,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import org.apache.log4j.Logger;
 
-/**
- * This is a flyweight utility class to be used as a direct replacement for FutureTask in code where
+/*
+* This is a flyweight utility class to be used as a direct replacement for FutureTask in code where
  * we may need to be able to discover the root cancel request causing an interrupt.
  *
  * @author Martyn Cutcher
@@ -42,7 +42,7 @@ public class FutureTaskMon<T> extends FutureTask<T> {
     super(runnable, result);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Hooked to notice when the task has been started.
@@ -53,7 +53,7 @@ public class FutureTaskMon<T> extends FutureTask<T> {
     super.run();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to conditionally log @ DEBUG if the caller caused the task to be interrupted.

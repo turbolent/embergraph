@@ -24,8 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTJoinGroupFilterExistsInfo;
 
-/**
- * Map from nodes to their respective {@link GroupNodeVarBindingInfo} object, including setup
+/*
+* Map from nodes to their respective {@link GroupNodeVarBindingInfo} object, including setup
  * method.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -35,7 +35,7 @@ public class GroupNodeVarBindingInfoMap {
 
   private final Map<IGroupMemberNode, GroupNodeVarBindingInfo> bindingInfo;
 
-  /**
+  /*
    * Constructor, setting up an object given a list of {@link IGroupMemberNode} objects and the
    * associated {@link StaticAnalysis} object as input.
    *
@@ -53,7 +53,7 @@ public class GroupNodeVarBindingInfoMap {
       bindingInfo.put(node, vbc);
     }
   }
-  /**
+  /*
    * Get the {@link GroupNodeVarBindingInfo} for the given node. Returns null if the node is not
    * registered.
    */

@@ -4,8 +4,8 @@ import org.embergraph.sparse.KeyType;
 import org.embergraph.sparse.Schema;
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * The schema for metadata about file versions stored in the {@link EmbergraphFileSystem}. Some well
+/*
+* The schema for metadata about file versions stored in the {@link EmbergraphFileSystem}. Some well
  * known properties are always defined, but any property may be stored - ideally within their own
  * namespace!
  *
@@ -28,20 +28,20 @@ public class FileMetadataSchema extends Schema {
   /** */
   private static final long serialVersionUID = 2908749650061841935L;
 
-  /**
+  /*
    * The content identifer is an arbitrary Unicode {@link String} whose value is defined by the
    * client. This is generally a pathname, similar to a path in a file system.
    */
   public static final transient String ID = FileMetadataSchema.class.getPackage().getName() + ".Id";
 
-  /**
+  /*
    * The MIME type associated with the content (the same semantics as the HTTP <code>Content-Type
    * </code> header).
    */
   public static final transient String CONTENT_TYPE =
       FileMetadataSchema.class.getPackage().getName() + ".ContentType";
 
-  /**
+  /*
    * The encoding, if any, used to convert the byte[] content to characters.
    *
    * <p>Note: This is typically deduced from an analysis of the MIME Type in <code>Content-Type
@@ -50,7 +50,7 @@ public class FileMetadataSchema extends Schema {
   public static final transient String CONTENT_ENCODING =
       FileMetadataSchema.class.getPackage().getName() + ".ContentEncoding";
 
-  /**
+  /*
    * The file version number. Together the file {@link #ID} and the file {@link #VERSION} form the
    * primary key for the data index. A <code>null</code> value is stored in this field when the file
    * version is deleted.
@@ -58,7 +58,7 @@ public class FileMetadataSchema extends Schema {
   public static final transient String VERSION =
       FileMetadataSchema.class.getPackage().getName() + ".Version";
 
-  /**
+  /*
    * Optional boolean property. When present, the text in the file version will be tokenized and
    * indexed for free text search. Non-text files should not set this property. Instead, a workflow
    * or map/reduce job should be written to generate a text-only variant for the indexer.

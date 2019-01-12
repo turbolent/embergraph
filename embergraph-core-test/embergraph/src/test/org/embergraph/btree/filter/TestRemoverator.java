@@ -36,8 +36,8 @@ import org.embergraph.btree.TestTuple;
 import org.embergraph.btree.Tuple;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for the {@link Removerator}.
+/*
+* Test suite for the {@link Removerator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -52,7 +52,7 @@ public class TestRemoverator extends AbstractTupleCursorTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test verifies that we can remove each tuple as we visit it and that the tuple returned to the
    * caller is not invalidated by that remove().
    */

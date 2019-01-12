@@ -43,8 +43,8 @@ import org.embergraph.rdf.sparql.ast.ValueExpressionNode;
 import org.openrdf.query.algebra.StatementPattern;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * A group graph pattern consisting of (required and optional) tuple expressions, binding
+/*
+* A group graph pattern consisting of (required and optional) tuple expressions, binding
  * assignments and boolean constraints.
  *
  * @author Arjohn Kampman
@@ -73,7 +73,7 @@ class GroupGraphPattern {
   /** Creates a new graph pattern. */
   public GroupGraphPattern() {}
 
-  /**
+  /*
    * Creates a new graph pattern that inherits the context and scope from a parent graph pattern.
    */
   public GroupGraphPattern(final GroupGraphPattern parent) {
@@ -100,8 +100,8 @@ class GroupGraphPattern {
     return context;
   }
 
-  //    /**
-  //     * The #of things in the group.
+  //    /*
+//     * The #of things in the group.
   //     */
   //    public int size() {
   //
@@ -109,8 +109,8 @@ class GroupGraphPattern {
   //
   //    }
   //
-  //    /**
-  //     * Return the child at that index.
+  //    /*
+//     * Return the child at that index.
   //     *
   //     * @param index
   //     *            The index.
@@ -141,7 +141,7 @@ class GroupGraphPattern {
 
     assertValid();
 
-    if (log.isInfoEnabled()) log.info("child=" + BOpUtility.toString((BOp) child));
+    if (log.isInfoEnabled()) log.info("child=" + BOpUtility.toString(child));
 
     children.add(child);
   }
@@ -195,7 +195,7 @@ class GroupGraphPattern {
     children.add(new FilterNode(constraint));
   }
 
-  /**
+  /*
    * Attach the data to the group node.
    *
    * @param groupNode The group node.
@@ -226,8 +226,8 @@ class GroupGraphPattern {
 
         } else if (child instanceof UnionNode) {
 
-          /*
-           * Lift children out of the child UNION.
+        /*
+       * Lift children out of the child UNION.
            */
           final UnionNode childUnion = (UnionNode) child;
 
@@ -248,8 +248,8 @@ class GroupGraphPattern {
 
         if (child instanceof QuadData && groupNode instanceof JoinGroupNode) {
 
-          /*
-           * We need to flatten out the QuadData when it appears
+        /*
+       * We need to flatten out the QuadData when it appears
            * within a WHERE clause for a DELETE WHERE shortcut.
            *
            * @see https://sourceforge.net/apps/trac/bigdata/ticket/568
@@ -266,7 +266,7 @@ class GroupGraphPattern {
           final StatementPatternNode sp = (StatementPatternNode) newGroup.get(0);
 
           // The context for the SPs in that GRAPH group.
-          final TermNode context = (TermNode) sp.get(3);
+          final TermNode context = sp.get(3);
 
           // Must be defined.
           assert context != null;
@@ -290,7 +290,7 @@ class GroupGraphPattern {
     return groupNode;
   }
 
-  /**
+  /*
    * Useful when the caller knows that the children will be a single {@link JoinGroupNode}.
    *
    * @return That {@link JoinGroupNode}.

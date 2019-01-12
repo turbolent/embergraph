@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
-/**
- * Hyperbolic distribution.
+/*
+* Hyperbolic distribution.
  *
  * <p>Valid parameter ranges: <tt>alpha &gt; 0</tt> and <tt>beta &gt; 0</tt>.
  *
@@ -51,7 +51,7 @@ public class Hyperbolic extends AbstractContinousDistribution {
   }
   /** Returns a hyperbolic distributed random number; bypasses the internal state. */
   public double nextDouble(double alpha, double beta) {
-    /**
+    /*
      * **************************************************************** * Hyperbolic Distribution -
      * Non-Universal Rejection * * *****************************************************************
      * * FUNCTION : - hyplc.c samples a random number from the * hyperbolic distribution with shape
@@ -134,7 +134,7 @@ public class Hyperbolic extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + alpha + "," + beta + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

@@ -45,8 +45,8 @@ import org.embergraph.rdf.sparql.ast.UnionNode;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.URI;
 
-/**
- * An extension point for external service calls which produce solution multisets (a SPARQL <code>
+/*
+* An extension point for external service calls which produce solution multisets (a SPARQL <code>
  * SERVICE</code>).
  *
  * <p>TODO It would make the internal APIs significantly easier if we modeled this as a type of
@@ -65,13 +65,13 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
     /** The {@link TermNode} for the SERVICE URI (either a simple variable or a simple constant). */
     String SERVICE_REF = "serviceRef";
 
-    /**
+    /*
      * The namespace of the {@link AbstractTripleStore} instance (not the namespace of the lexicon
      * relation). This resource will be located and made available to the {@link ServiceCall}.
      */
     String NAMESPACE = "namespace";
 
-    /**
+    /*
      * The "SELECT" option.
      *
      * <p>TODO Lift out. This is used for many things in SPARQL UPDATE, not just for SPARQL
@@ -81,16 +81,16 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
 
     boolean DEFAULT_SILENT = false;
 
-    /**
+    /*
      * The timeout in milliseconds before a SERVICE request is failed.
      *
      * @see #DEFAULT_TIMEOUT
      */
     String TIMEOUT = "timeout";
 
-    final long DEFAULT_TIMEOUT = Long.MAX_VALUE;
+    long DEFAULT_TIMEOUT = Long.MAX_VALUE;
 
-    /**
+    /*
      * The text "image" of the original SPARQL SERVICE clause. The "image" of the original graph
      * pattern is what gets sent to a remote SPARQL end point when we evaluate the SERVICE node.
      * Because the original "image" of the graph pattern is being used, we also need to have the
@@ -98,14 +98,14 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
      */
     String EXPR_IMAGE = "exprImage";
 
-    /**
+    /*
      * The prefix declarations for the SPARQL query from which the {@link #EXPR_IMAGE} was taken.
      * This is needed in order to generate a valid SPARQL query for a remote SPARQL end point when
      * we evaluate the SERVICE request.
      */
     String PREFIX_DECLS = "prefixDecls";
 
-    /**
+    /*
      * The set of variables which can flow in/out of the SERVICE.
      *
      * <p>TODO Use the {@link QueryBase.Annotations#PROJECTION} for this?
@@ -125,7 +125,7 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
     super(args, anns);
   }
 
-  /**
+  /*
    * Construct a function node in the AST.
    *
    * @param serviceRef The value expression for the SERVICE URI.
@@ -207,7 +207,7 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
     return (String) getProperty(Annotations.EXPR_IMAGE);
   }
 
-  /**
+  /*
    * Set the text "image" of the SPARQL SERVICE clause. This will be used IFF we generate a SPARQL
    * query for a remote SPARQL end point. You must also specify the prefix declarations for that
    * text "image".
@@ -223,7 +223,7 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
     return (Map) getProperty(Annotations.PREFIX_DECLS);
   }
 
-  /**
+  /*
    * Set the prefix declarations for the group graph pattern. This will be used IFF we generate a
    * SPARQL query for a remote SPARQL end point. You must also specify the text "image".
    */
@@ -232,7 +232,7 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
     setProperty(Annotations.PREFIX_DECLS, prefixDecls);
   }
 
-  /**
+  /*
    * @param projectedVars
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/510">Blank nodes in SERVICE
    *     graph patterns </a>
@@ -254,7 +254,7 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
     setProperty(Annotations.TIMEOUT, timeout);
   }
 
-  /**
+  /*
    * Return the timeout for evaluation of this SERVICE request.
    *
    * @return The timeout -or- {@link Annotations#DEFAULT_TIMEOUT} if the timeout was not explicitly
@@ -350,7 +350,7 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
     return getResponsibleServiceFactory().getDesiredBound(this);
   }
 
-  /**
+  /*
    * Returns the service factory that is responsible for handling this service node.
    *
    * @return the associated {@link ServiceFactory}

@@ -30,8 +30,8 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.embergraph.journal.ICommitter;
 
-/**
- * Base class for managing read/write locks for unisolated {@link ICommitter}s.
+/*
+* Base class for managing read/write locks for unisolated {@link ICommitter}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="http://trac.blazegraph.com/ticket/855">AssertionError: Child does not have
@@ -41,7 +41,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
 
   //    private static final Logger log = Logger.getLogger(ReadWriteLockManager.class);
 
-  /**
+  /*
    * The #of milliseconds that the class will wait for a read or write lock. A (wrapped) {@link
    * InterruptedException} will be thrown if this timeout is exceeded. The default is {@value
    * #LOCK_TIMEOUT_MILLIS} milliseconds. Use {@link Long#MAX_VALUE} for no timeout.
@@ -59,21 +59,21 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
    * Note: This creates a hard reference that defeats the weak keys in the
    * hash map.
    */
-  //    /**
-  //     * The unisolated persistence capable data structure.
+  //    /*
+//     * The unisolated persistence capable data structure.
   //     */
   //    final private ICheckpointProtocol committer;
 
   /** True iff the caller's {@link ICheckpointProtocol} object was read-only. */
   private final boolean readOnly;
 
-  /**
+  /*
    * The {@link Lock} used to permit concurrent readers on an unisolated index while serializing
    * access to that index when a writer must run.
    */
   private final WrappedWriteLock writeLock;
 
-  /**
+  /*
    * The {@link Lock} ensures that any code path that obtains the read lock also maintains the
    * per-thread read-lock counter.
    */
@@ -130,7 +130,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
     return readOnly;
   }
 
-  /**
+  /*
    * {@link WrappedReadLock} is used to intercept lock/unlock calls to the readLock to trigger calls
    * to the logic that tracks the #of reentrant read-locks by read and which can be used to identify
    * whether the readlock is held by the current thread.
@@ -145,7 +145,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
 
     private final Lock delegate;
 
-    /**
+    /*
      * Maintain count of readLocks on by Thread. This is used to avoid having read-only operations
      * protected by an {@link ReadWriteLockManager} causing evictions of dirty nodes and leaves.
      *
@@ -205,8 +205,8 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
     @Override
     public void lock() {
       try {
-        /*
-         * Note: The original UnisolatedReadWriteLock semantics are
+      /*
+       * Note: The original UnisolatedReadWriteLock semantics are
          * always those of a tryLock with a default timeout. Make sure
          * that we keep this in place!
          */
@@ -274,7 +274,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
     }
   } // class WrappedReadLock
 
-  /**
+  /*
    * Wraps the write lock to provide interruptable tryLock() with timeout semantics for all write
    * lock acquisitions.
    *
@@ -296,8 +296,8 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
     @Override
     public void lock() {
       try {
-        /*
-         * Note: The original UnisolatedReadWriteLock semantics are
+      /*
+       * Note: The original UnisolatedReadWriteLock semantics are
          * always those of a tryLock with a default timeout. Make sure
          * that we keep this in place!
          */
@@ -341,7 +341,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
     }
   } // class WrappedWriteLock
 
-  /**
+  /*
    * Class used for read lock for read-only data structures.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -381,7 +381,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
 
   private static final Lock READ_ONLY_LOCK = new ConcurrentReaderLock();
 
-  /**
+  /*
    * Canonicalizing factory for the {@link ReadWriteLock} for an {@link ICommitter}.
    *
    * <p>Note: This method CAN NOT be exposed since that breaks encapsulation for the {@link
@@ -444,7 +444,7 @@ public class ReadWriteLockManager implements IReadWriteLockManager {
        */
       final ReadWriteLock readWriteLock = new ReentrantReadWriteLock(false /* fair */);
 
-      /**
+      /*
        * If the index allows mutation, then wrap with tryLock() and lock-counting semantics. This
        * allows us to test for the #of reentrant locks held by the current thread in
        * AbstractBTree.touch() and is the primary basis for the fix the ticket below.

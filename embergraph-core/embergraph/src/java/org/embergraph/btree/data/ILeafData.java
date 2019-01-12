@@ -25,21 +25,21 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Interface for low-level data access for the leaves of a B+-Tree.
+/*
+* Interface for low-level data access for the leaves of a B+-Tree.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ILeafData extends IAbstractNodeData, IKeysData {
 
-  /**
+  /*
    * The #of values in the leaf (this MUST be equal to the #of keys for a leaf).
    *
    * @return The #of values in the leaf.
    */
-  public int getValueCount();
+  int getValueCount();
 
-  /**
+  /*
    * Return the object storing the logical byte[][] containing the values for the leaf. When the
    * leaf maintains delete markers you MUST check whether or not the tuple is deleted before
    * requesting its value.
@@ -53,9 +53,9 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
    * @see #hasDeleteMarkers()
    * @see #getDeleteMarker(int)
    */
-  public IRaba getValues();
+  IRaba getValues();
 
-  /**
+  /*
    * The version timestamp for the entry at the specified index.
    *
    * @return The version timestamp for the index entry.
@@ -63,17 +63,17 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
    * @throws UnsupportedOperationException if version timestamps are not being maintained (they are
    *     only required for indices on which transaction processing will be used).
    */
-  public long getVersionTimestamp(int index);
+  long getVersionTimestamp(int index);
 
-  /**
+  /*
    * Return <code>true</code> iff the entry at the specified index is marked as deleted.
    *
    * @throws IndexOutOfBoundsException unless index is in [0:ntuples-1].
    * @throws UnsupportedOperationException if delete markers are not being maintained.
    */
-  public boolean getDeleteMarker(int index);
+  boolean getDeleteMarker(int index);
 
-  /**
+  /*
    * Return the address of the raw record on the backing store of the value stored in the tuple
    * having the given index -or- {@link IRawStore#NULL} if the value is the actual <code>byte[]
    * </code> value associated with the key in the leaf. When the value is the address of a raw
@@ -100,38 +100,38 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
 
   /** Return <code>true</code> iff the leaf maintains version timestamps. */
   @Override
-  public boolean hasVersionTimestamps();
+  boolean hasVersionTimestamps();
 
   /** Return <code>true</code> iff the leaf maintains delete markers. */
-  public boolean hasDeleteMarkers();
+  boolean hasDeleteMarkers();
 
-  /**
+  /*
    * Return <code>true</code> iff the leaf promotes large <code>byte[]</code> values to raw records
    * on the backing store.
    */
-  public boolean hasRawRecords();
+  boolean hasRawRecords();
 
-  /**
+  /*
    * Return <code>true</code> if the leaf data record supports encoding of the address of the
    * previous and next leaf in the B+Tree order.
    */
-  public boolean isDoubleLinked();
+  boolean isDoubleLinked();
 
-  /**
+  /*
    * The address of the previous leaf in key order, <code>0L</code> if it is known that there is no
    * previous leaf, and <code>-1L</code> if either: (a) it is not known whether there is a previous
    * leaf; or (b) it is known but the address of that leaf is not known to the caller.
    *
    * @throws UnsupportedOperationException if the leaf data record is not double-linked.
    */
-  public long getPriorAddr();
+  long getPriorAddr();
 
-  /**
+  /*
    * The address of the next leaf in key order, <code>0L</code> if it is known that there is no next
    * leaf, and <code>-1L</code> if either: (a) it is not known whether there is a next leaf; or (b)
    * it is known but the address of that leaf is not known to the caller.
    *
    * @throws UnsupportedOperationException if the leaf data record is not double-linked.
    */
-  public long getNextAddr();
+  long getNextAddr();
 }

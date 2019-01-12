@@ -35,8 +35,8 @@ import org.embergraph.rawstore.IBlock;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for {@link AbstractChunkedTupleIterator} and its concrete {@link
+/*
+* Test suite for {@link AbstractChunkedTupleIterator} and its concrete {@link
  * ChunkedLocalRangeIterator} implementation which depends on the {@link ResultSet}.
  *
  * <p>Note: There are other implementations derived from the same abstract base class so they have a
@@ -297,7 +297,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
     assertNotNull("rset", itr.rset);
   }
 
-  /**
+  /*
    * Test of {@link IRangeQuery#REMOVEALL} using a limit (capacity := 1). This form of the iterator
    * is used to support queue constructs since the delete is performed on the unisolated index. The
    * state of the index is verified afterwards.
@@ -378,7 +378,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link IRangeQuery#REMOVEALL} using a filter. Only the even keys are deleted. The state
    * of the index is verified afterwards.
    */
@@ -422,9 +422,8 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
             final int i = KeyBuilder.decodeInt(key, 0);
 
             // delete only the even keys.
-            if (i % 2 == 0) return true;
+            return i % 2 == 0;
 
-            return false;
           }
         };
 
@@ -486,8 +485,8 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
 
         // verify deleted only the even keys.
         if (0 == (i % 2)) {
-          /*
-           * Found a key that decodes as an even integer.
+        /*
+       * Found a key that decodes as an even integer.
            */
           fail("n=" + n + ", tuple=" + tuple + ", i=" + i);
         }
@@ -505,7 +504,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Test progression of a chunked iterator scan in reverse order. The test verifies that the tuples
    * within the index partitions are also visited in reverse order when more than one chunk must be
    * fetched.
@@ -606,7 +605,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
         1000 /* N */, false /* deleteMarkers */, false /* versionTimestamps */);
   }
 
-  /**
+  /*
    * @param N The #of tuples for the test.
    * @param deleteMarkers if delete markers should be tested.
    * @param versionTimestamps if version timestamps should be tested.
@@ -861,7 +860,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Test helper requests an {@link ITupleIterator} using the specified parameters directly on the
    * {@link BTree} (ground truth for the purposes of this test) and indirectly via an {@link
    * AbstractChunkedTupleIterator}. The {@link AbstractChunkedTupleIterator} is layered in order to
@@ -931,7 +930,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
     return assertSameIterator(itre, itra);
   }
 
-  /**
+  /*
    * Compares the data in the {@link ITuple}s visited by two iterators.
    *
    * @param itre The 'expected' iterator.
@@ -992,8 +991,8 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
 
       {
 
-        /*
-         * Compare objects de-serialized from the tuple. If the
+      /*
+       * Compare objects de-serialized from the tuple. If the
          * operation is not supported for the expected iterator, then it
          * should also be not supported for the actual iterator.
          */
@@ -1034,7 +1033,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
     return i;
   }
 
-  /**
+  /*
    * Helper class pairs an application key and value with the generated sort key for that
    * application key.
    *
@@ -1054,7 +1053,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
     /** The generated sort key (unsigned byte[]). */
     public final byte[] sortKey;
 
-    /**
+    /*
      * @param k The application key.
      * @param v The application value.
      * @param tupleSer Used to generate the sort key and (de-)serialize the application value.
@@ -1068,7 +1067,7 @@ public class TestChunkedIterators extends AbstractBTreeTestCase {
       this.sortKey = tupleSer.serializeKey(k);
     }
 
-    /**
+    /*
      * Places into order by the {@link #sortKey}. This is the same order that the data will be in
      * when they are inserted into the B+Tree, except that the B+Tree does not permit duplicate
      * keys.

@@ -26,8 +26,8 @@ import org.embergraph.counters.CAT;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 
-/**
- * Extended performance counters for the {@link FederatedQueryEngine}.
+/*
+* Extended performance counters for the {@link FederatedQueryEngine}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

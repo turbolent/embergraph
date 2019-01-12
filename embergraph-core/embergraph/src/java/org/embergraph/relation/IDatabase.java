@@ -26,8 +26,8 @@ package org.embergraph.relation;
 import java.util.Iterator;
 import org.embergraph.relation.locator.ILocatableResource;
 
-/**
- * A collection of relations having a unique namespace. The relations within the container have
+/*
+* A collection of relations having a unique namespace. The relations within the container have
  * namespaces within the container's namespace. Relations also know how to find their container.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

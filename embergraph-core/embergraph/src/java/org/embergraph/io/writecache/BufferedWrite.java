@@ -29,8 +29,8 @@ import org.embergraph.io.IBufferAccess;
 import org.embergraph.io.IReopenChannel;
 import org.embergraph.rwstore.RWStore;
 
-/**
- * The BufferedWrite merges/elides sorted scattered writes to minimize IO requests and maximize IO
+/*
+* The BufferedWrite merges/elides sorted scattered writes to minimize IO requests and maximize IO
  * rates. This has a net positive effect on SAS, SATA, and SSD.
  *
  * @author Martyn Cutcher
@@ -42,7 +42,7 @@ import org.embergraph.rwstore.RWStore;
  */
 public class BufferedWrite {
 
-  /**
+  /*
    * Used to determine the size of the allocation slot onto which a record is being written. This is
    * used to pad the size of the IO out to the size of the slot. This can improve the IO efficiency
    * When the slots are sized so as to fall on multiples of sector boundaries.
@@ -53,7 +53,7 @@ public class BufferedWrite {
   //	private final ByteBuffer m_data;
   private final AtomicReference<IBufferAccess> m_data = new AtomicReference<IBufferAccess>();
 
-  /**
+  /*
    * The offset on the backing channel at which the data in {@link #m_data} will be written when it
    * is flushed to the backing channel. This is <code>-1</code> initially (and when reset) as a flag
    * indicating that there is no data in {@link #m_data} and that the next record written by the
@@ -64,7 +64,7 @@ public class BufferedWrite {
    */
   private long m_startAddr = -1;
 
-  /**
+  /*
    * The offset of the backing channel at which the next byte would be written if it were appended
    * to the data already present in {@link #m_data}.
    *
@@ -85,7 +85,7 @@ public class BufferedWrite {
     m_data.set(DirectBufferPool.INSTANCE.acquire());
   }
 
-  /**
+  /*
    * Release the direct buffer associated with this object.
    *
    * @throws InterruptedException
@@ -113,14 +113,14 @@ public class BufferedWrite {
     }
   }
 
-  /**
+  /*
    * Used to zero pad slots in buffered writes.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/721#comment:10">HA1 </a>
    */
   private static final byte[] s_zeros = new byte[256];
 
-  /**
+  /*
    * Buffer a write.
    *
    * @param offset The offset on the backing channel at which the data should be written.
@@ -188,7 +188,7 @@ public class BufferedWrite {
     return nwrites;
   }
 
-  /**
+  /*
    * Flush buffered data to the backing channel.
    *
    * @param opener The object which knows how to re-open the backing channel.
@@ -217,7 +217,7 @@ public class BufferedWrite {
     return nwrites;
   }
 
-  /**
+  /*
    * Reset the buffer position and limit and clear the starting offset on the file to <code>-1
    * </code>.
    */

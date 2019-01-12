@@ -14,8 +14,8 @@ import cern.colt.function.DoubleFunction;
 import cern.colt.function.DoubleProcedure;
 
 // import com.imsl.math.Sfun;
-/**
- * Function objects to be passed to generic methods. Contains the functions of {@link
+/*
+* Function objects to be passed to generic methods. Contains the functions of {@link
  * java.lang.Math} as function objects, as well as a few more basic functions.
  *
  * <p>Function objects conveniently allow to express arbitrary functions in a generic manner.
@@ -163,7 +163,7 @@ import cern.colt.function.DoubleProcedure;
  * @version 1.0, 09/24/99
  */
 public class Functions extends Object {
-  /**
+  /*
    * Little trick to allow for "aliasing", that is, renaming this class. Writing code like
    *
    * <p><tt>Functions.chain(Functions.plus,Functions.sin,Functions.chain(Functions.square,Functions.cos));</tt>
@@ -175,7 +175,7 @@ public class Functions extends Object {
    */
   public static final Functions functions = new Functions();
 
-  /**
+  /*
    * ***************************
    *
    * <H3>Unary functions</H3>
@@ -433,7 +433,7 @@ public class Functions extends Object {
   };
   */
 
-  /**
+  /*
    * ***************************
    *
    * <H3>Binary functions</H3>
@@ -601,7 +601,7 @@ public class Functions extends Object {
       };
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Functions() {}
-  /**
+  /*
    * Constructs a function that returns <tt>(from<=a && a<=to) ? 1 : 0</tt>. <tt>a</tt> is a
    * variable, <tt>from</tt> and <tt>to</tt> are fixed.
    */
@@ -612,7 +612,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a unary function from a binary function with the first operand (argument) fixed to
    * the given constant <tt>c</tt>. The second operand is variable (free).
    *
@@ -626,7 +626,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a unary function from a binary function with the second operand (argument) fixed to
    * the given constant <tt>c</tt>. The first operand is variable (free).
    *
@@ -640,7 +640,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs the function <tt>f( g(a), h(b) )</tt>.
    *
    * @param f a binary function.
@@ -656,7 +656,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs the function <tt>g( h(a,b) )</tt>.
    *
    * @param g a unary function.
@@ -670,7 +670,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs the function <tt>g( h(a) )</tt>.
    *
    * @param g a unary function.
@@ -684,7 +684,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a < b ? -1 : a > b ? 1 : 0</tt>. <tt>a</tt> is a
    * variable, <tt>b</tt> is fixed.
    */
@@ -710,7 +710,7 @@ public class Functions extends Object {
     double b = 0.2;
     double v = Math.sin(a) + Math.pow(Math.cos(b), 2);
     System.out.println(v);
-    DoubleDoubleFunction f = F.chain(F.plus, F.sin, F.chain(F.square, F.cos));
+    DoubleDoubleFunction f = chain(plus, sin, chain(square, cos));
     // DoubleDoubleFunction f = F.chain(plus,sin,F.chain(square,cos));
     System.out.println(f.apply(a, b));
     DoubleDoubleFunction g =
@@ -720,8 +720,8 @@ public class Functions extends Object {
           }
         };
     System.out.println(g.apply(a, b));
-    DoubleFunction m = F.plus(3);
-    DoubleFunction n = F.plus(4);
+    DoubleFunction m = plus(3);
+    DoubleFunction n = plus(4);
     System.out.println(m.apply(0));
     System.out.println(n.apply(0));
   }
@@ -737,7 +737,7 @@ public class Functions extends Object {
     System.out.println(v);
 
     // DoubleDoubleFunction f = F.chain(F.plus,F.identity,F.identity);
-    DoubleDoubleFunction f = F.chain(F.abs, F.chain(F.plus, F.sin, F.chain(F.square, F.cos)));
+    DoubleDoubleFunction f = chain(abs, chain(plus, sin, chain(square, cos)));
     // DoubleDoubleFunction f = F.chain(F.plus,F.sin,F.chain(F.square,F.cos));
     // DoubleDoubleFunction f = F.plus;
 
@@ -804,14 +804,14 @@ public class Functions extends Object {
     System.out.println("evals / sec = " + size / timer.minus(emptyLoop).seconds());
     System.out.println("sum=" + sum);
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a / b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
   public static DoubleFunction div(final double b) {
     return mult(1 / b);
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a == b ? 1 : 0</tt>. <tt>a</tt> is a variable,
    * <tt>b</tt> is fixed.
    */
@@ -822,7 +822,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a > b ? 1 : 0</tt>. <tt>a</tt> is a variable, <tt>b</tt>
    * is fixed.
    */
@@ -833,7 +833,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>Math.IEEEremainder(a,b)</tt>. <tt>a</tt> is a variable,
    * <tt>b</tt> is fixed.
    */
@@ -844,7 +844,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>from<=a && a<=to</tt>. <tt>a</tt> is a variable,
    * <tt>from</tt> and <tt>to</tt> are fixed.
    */
@@ -855,7 +855,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a == b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -866,7 +866,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a > b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -877,7 +877,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a < b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -888,7 +888,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a < b ? 1 : 0</tt>. <tt>a</tt> is a variable, <tt>b</tt>
    * is fixed.
    */
@@ -899,7 +899,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt><tt>Math.log(a) / Math.log(b)</tt></tt>. <tt>a</tt> is a
    * variable, <tt>b</tt> is fixed.
    */
@@ -913,12 +913,12 @@ public class Functions extends Object {
     };
   }
   /** Tests various methods of this class. */
-  protected static void main(String args[]) {
+  protected static void main(String[] args) {
     int size = Integer.parseInt(args[0]);
     demo2(size);
     // demo1();
   }
-  /**
+  /*
    * Constructs a function that returns <tt>Math.max(a,b)</tt>. <tt>a</tt> is a variable, <tt>b</tt>
    * is fixed.
    */
@@ -929,7 +929,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>Math.min(a,b)</tt>. <tt>a</tt> is a variable, <tt>b</tt>
    * is fixed.
    */
@@ -940,21 +940,21 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a - b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
   public static DoubleFunction minus(final double b) {
     return plus(-b);
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a - b*constant</tt>. <tt>a</tt> and <tt>b</tt> are
    * variables, <tt>constant</tt> is fixed.
    */
   public static DoubleDoubleFunction minusMult(final double constant) {
     return plusMult(-constant);
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a % b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -965,7 +965,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a * b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -977,7 +977,7 @@ public class Functions extends Object {
     };
     */
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a + b</tt>. <tt>a</tt> is a variable, <tt>b</tt> is
    * fixed.
    */
@@ -988,7 +988,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>a + b*constant</tt>. <tt>a</tt> and <tt>b</tt> are
    * variables, <tt>constant</tt> is fixed.
    */
@@ -1000,7 +1000,7 @@ public class Functions extends Object {
     };
     */
   }
-  /**
+  /*
    * Constructs a function that returns <tt>Math.pow(a,b)</tt>. <tt>a</tt> is a variable, <tt>b</tt>
    * is fixed.
    */
@@ -1011,7 +1011,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns a new uniform random number in the open unit interval <code>
    * (0.0,1.0)</code> (excluding 0.0 and 1.0). Currently the engine is {@link
    * cern.jet.random.engine.MersenneTwister} and is seeded with the current time.
@@ -1024,7 +1024,7 @@ public class Functions extends Object {
   public static DoubleFunction random() {
     return new cern.jet.random.engine.MersenneTwister(new java.util.Date());
   }
-  /**
+  /*
    * Constructs a function that returns the number rounded to the given precision;
    * <tt>Math.rint(a/precision)*precision</tt>. Examples:
    *
@@ -1040,7 +1040,7 @@ public class Functions extends Object {
       }
     };
   }
-  /**
+  /*
    * Constructs a function that returns <tt>function.apply(b,a)</tt>, i.e. applies the function with
    * the first operand as second operand and the second operand as first operand.
    *

@@ -28,8 +28,8 @@ import java.util.Properties;
 import org.embergraph.btree.keys.KeyBuilder.Options;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Tests for Unicode support in {@link KeyBuilder}.
+/*
+* Tests for Unicode support in {@link KeyBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -64,7 +64,7 @@ public class TestICUUnicodeKeyBuilder extends AbstractUnicodeKeyBuilderTestCase 
     assertEquals(ICUSortKeyGenerator.class, keyBuilder.getSortKeyGenerator().getClass());
   }
 
-  /**
+  /*
    * Test examines the behavior when the {@link SuccessorUtil#successor(String)} of an Unicode
    * string is formed by appending a <code>nul</code> character and reports an error if the
    * resulting byte[] when the key are formed compares as equal to the original string from which
@@ -140,7 +140,7 @@ public class TestICUUnicodeKeyBuilder extends AbstractUnicodeKeyBuilderTestCase 
                                 : "" + minStrength))))));
   }
 
-  /**
+  /*
    * Test whether or not the {@link Collator} will differentiate Unicode strings that differ only in
    * a trailing <code>nul</code> character.
    *

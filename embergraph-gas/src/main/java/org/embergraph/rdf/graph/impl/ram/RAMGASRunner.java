@@ -8,8 +8,8 @@ import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraph;
 import org.embergraph.rdf.graph.impl.ram.RAMGASEngine.RAMGraphAccessor;
 import org.embergraph.rdf.graph.impl.util.GASRunnerBase;
 
-/**
- * Class for running GAS performance tests against the SAIL.
+/*
+* Class for running GAS performance tests against the SAIL.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -27,8 +27,8 @@ public class RAMGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
     public RAMGraph getGraph() {
       synchronized (g) {
-        /*
-         * Note: Synchronization pattern is intended to provide
+      /*
+       * Note: Synchronization pattern is intended to provide
          * visibility for graph traversal following a load of data into
          * the graph.
          */
@@ -47,9 +47,7 @@ public class RAMGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
     @Override
     public boolean handleArg(final AtomicInteger i, final String[] args) {
-      if (super.handleArg(i, args)) {
-        return true;
-      }
+      return super.handleArg(i, args);
       //            final String arg = args[i.get()];
       //            if (arg.equals("-bufferMode")) {
       //                final String s = args[i.incrementAndGet()];
@@ -60,7 +58,6 @@ public class RAMGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
       //            } else {
       //                return false;
       //            }
-      return false;
     }
 
     @Override
@@ -104,7 +101,7 @@ public class RAMGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
     return new RAMGraphAccessor(getOptionData().g);
   }
 
-  /**
+  /*
    * Performance testing harness.
    *
    * @see #GASRunner(String[])

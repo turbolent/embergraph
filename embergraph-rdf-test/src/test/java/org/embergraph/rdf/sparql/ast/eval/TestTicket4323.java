@@ -26,8 +26,8 @@ import org.embergraph.rdf.sparql.ast.NamedSubqueryInclude;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 
-/**
- * @see <a href="https://jira.blazegraph.com/browse/BLZG-4323">hint:runFirst not considered for
+/*
+* @see <a href="https://jira.blazegraph.com/browse/BLZG-4323">hint:runFirst not considered for
  *     Subqueries and Named Subquery Includes</a>
  * @author <a href="mailto:ms@blazegraph.com">Michael Schmidt</a>
  */
@@ -61,7 +61,7 @@ public class TestTicket4323 extends AbstractDataDrivenSPARQLTestCase {
     assertTrue(firstChild instanceof SubqueryRoot);
   }
 
-  /**
+  /*
    * Test case asserting proper treatment of runFirst query hint for complex subquery, which is
    * transformed into a named subquery include. Technically, we just add a LIMIT to the subquery, to
    * make sure it is translated as an NSI.

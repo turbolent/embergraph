@@ -27,8 +27,8 @@ import org.openrdf.query.resultio.BooleanQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Test suite for content negotiation helper class.
+/*
+* Test suite for content negotiation helper class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

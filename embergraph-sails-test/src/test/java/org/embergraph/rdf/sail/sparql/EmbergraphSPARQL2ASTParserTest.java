@@ -26,8 +26,8 @@ import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.parser.QueryParserUtil;
 
-/**
- * Non-manifest driven versions of the manifest driven test suite to facilitate debugging.
+/*
+* Non-manifest driven versions of the manifest driven test suite to facilitate debugging.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -39,7 +39,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
     super(name);
   }
 
-  /**
+  /*
    * PrefixName with backslash-escaped colons.
    *
    * <pre>
@@ -92,7 +92,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
     parseOperation(query);
   }
 
-  /**
+  /*
    * Positive test (originally failed because it was being passed to parseQuery() rather than
    * parseUpdate()).
    */
@@ -151,7 +151,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
     negativeTest(query);
   }
 
-  /**
+  /*
    * Use of an ungrouped variable in a project expression, where the variable appears in a GROUP BY
    * expression
    */
@@ -290,13 +290,13 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
     negativeTest(query);
   }
 
-  /**
+  /*
    * When <code>true</code> use the {@link Embergraph2ASTSPARQLParser} otherwise use the openrdf
    * parser.
    */
   private static final boolean useEmbergraphParser = true;
 
-  /**
+  /*
    * Parse with expectation of failure.
    *
    * @param query The query or update request.
@@ -316,7 +316,7 @@ public class EmbergraphSPARQL2ASTParserTest extends AbstractEmbergraphExprBuilde
     }
   }
 
-  /**
+  /*
    * Parse with expectation of success.
    *
    * @param query The query or update request.

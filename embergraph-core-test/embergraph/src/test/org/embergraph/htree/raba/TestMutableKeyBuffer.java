@@ -28,8 +28,8 @@ import org.embergraph.btree.raba.ReadOnlyValuesRaba;
 import org.embergraph.htree.HTree;
 import org.embergraph.io.DataInputBuffer;
 
-/**
- * Test suite for {@link MutableKeyBuffer}.
+/*
+* Test suite for {@link MutableKeyBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -145,7 +145,7 @@ public class TestMutableKeyBuffer extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test constructor wrapping the caller's data. For this constructor, the new instance should
    * use the same references and the capacity should be the dimension of the source byte[][].
    */
@@ -226,7 +226,7 @@ public class TestMutableKeyBuffer extends TestCase2 {
 
     // capacity must be 2^n where n is positive.
     try {
-      new MutableKeyBuffer(3 /* capacity */, (IRaba) src);
+      new MutableKeyBuffer(3 /* capacity */, src);
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       // ignored.
@@ -234,14 +234,14 @@ public class TestMutableKeyBuffer extends TestCase2 {
 
     // capacity must not be LT the capacity of the raba.
     try {
-      new MutableKeyBuffer(2 /* capacity */, (IRaba) src);
+      new MutableKeyBuffer(2 /* capacity */, src);
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       // ignored.
     }
   }
 
-  /**
+  /*
    * Unit test the constructor variant which accepts an {@link IRaba} and an explicitly given
    * capacity.
    */
@@ -277,7 +277,7 @@ public class TestMutableKeyBuffer extends TestCase2 {
     assertTrue(keys != buf.keys);
   }
 
-  /**
+  /*
    * The keys of the {@link HTree} do not have any of the requirements of the B+Tree keys. The keys
    * in a bucket page may contain duplicates but are now ordered and therefore searchable. Therefore
    * this class reports <code>true</code> for {@link IRaba#isKeys()}.
@@ -292,7 +292,7 @@ public class TestMutableKeyBuffer extends TestCase2 {
     assertTrue(kbuf.isKeys());
   }
 
-  /**
+  /*
    * The various methods "add()" methods are not supported because they do not specify the index of
    * the tuple and we need to have that since the tuples are not dense and the bucket page is
    * divided into buddy bucket regions which must be managed separately.
@@ -328,7 +328,7 @@ public class TestMutableKeyBuffer extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * {@link IRaba#search(byte[])} is now supported because a BucketPage contains ordered keys. Note
    * that there can be duplicate keys within a buddy hash table.
    */

@@ -48,8 +48,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 
-/**
- * Test suite ORDER BY operators when integrated with the query engine. This test suite is designed
+/*
+* Test suite ORDER BY operators when integrated with the query engine. This test suite is designed
  * to examine cases where the ORDER BY operator will have to buffer multiple chunks of solutions
  * before finally placing the buffered solutions into a total order.
  *
@@ -131,8 +131,8 @@ public class TestQueryEngine_SortOp extends TestCase2 {
     doOrderByTest(50000 /* maxInt */, timeout, ntrials, poolSize);
   }
 
-  //    /**
-  //     * Return an {@link IAsynchronousIterator} that will read a single, chunk
+  //    /*
+//     * Return an {@link IAsynchronousIterator} that will read a single, chunk
   //     * containing all of the specified {@link IBindingSet}s.
   //     *
   //     * @param bindingSetChunks
@@ -145,7 +145,7 @@ public class TestQueryEngine_SortOp extends TestCase2 {
   //
   //    }
 
-  /**
+  /*
    * Test helper for ORDER_BY tests. We can judge correctness by ensuring that (a) all solutions are
    * visited (either by probing to verify that each solution defined and visited or using a counter)
    * and by (b) verifying that the solutions are visited in an order for which the comparator never
@@ -203,11 +203,9 @@ public class TestQueryEngine_SortOp extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, startId),
-                  new NV(
-                      MemorySortOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, startId),
+                new NV(
+                    MemorySortOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final ISortOrder[] sortOrder = new ISortOrder[] {new SortOrder(a, true /* ascending */)};
 
@@ -217,18 +215,16 @@ public class TestQueryEngine_SortOp extends TestCase2 {
         new MemorySortOp(
             new BOp[] {startOp},
             NV.asMap(
-                new NV[] {
-                  new NV(SliceOp.Annotations.BOP_ID, sortId),
-                  new NV(MemorySortOp.Annotations.SORT_ORDER, sortOrder),
-                  new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, valueComparator),
-                  new NV(
-                      MemorySortOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(MemorySortOp.Annotations.PIPELINED, true),
-                  new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1), //
-                  //                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
-                  new NV(MemorySortOp.Annotations.LAST_PASS, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                }));
+                new NV(SliceOp.Annotations.BOP_ID, sortId),
+                new NV(MemorySortOp.Annotations.SORT_ORDER, sortOrder),
+                new NV(MemorySortOp.Annotations.VALUE_COMPARATOR, valueComparator),
+                new NV(
+                    MemorySortOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(MemorySortOp.Annotations.PIPELINED, true),
+                new NV(MemorySortOp.Annotations.MAX_PARALLEL, 1), //
+                //                new NV(MemorySortOp.Annotations.SHARED_STATE, true),
+                new NV(MemorySortOp.Annotations.LAST_PASS, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
 
     final UUID queryId = UUID.randomUUID();
     final IRunningQuery q =
@@ -274,7 +270,7 @@ public class TestQueryEngine_SortOp extends TestCase2 {
     q.get();
 
     // Verify stats.
-    final BOpStats stats = (BOpStats) q.getStats().get(sortId);
+    final BOpStats stats = q.getStats().get(sortId);
     if (log.isInfoEnabled()) log.info(getClass().getName() + "." + getName() + " : " + stats);
     assertNotNull(stats);
     assertEquals(ngiven, nsolutions);
@@ -282,8 +278,8 @@ public class TestQueryEngine_SortOp extends TestCase2 {
     assertEquals(ngiven, stats.unitsOut.get());
   }
 
-  //    /**
-  //     * Helper class for comparing solution sets having variables which evaluate
+  //    /*
+//     * Helper class for comparing solution sets having variables which evaluate
   //     * to {@link Integer} values.
   //     */
   //    static private class IntegerComparator implements Comparator<Integer> {

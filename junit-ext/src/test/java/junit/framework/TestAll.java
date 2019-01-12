@@ -21,8 +21,8 @@
  */
 package junit.framework;
 
-/**
- * Runs all tests in this package.
+/*
+* Runs all tests in this package.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

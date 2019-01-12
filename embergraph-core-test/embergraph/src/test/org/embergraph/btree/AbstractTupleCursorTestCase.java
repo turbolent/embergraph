@@ -30,8 +30,8 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.btree.raba.ReadOnlyKeysRaba;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Abstract base class for {@link ITupleCursor} test suites.
+/*
+* Abstract base class for {@link ITupleCursor} test suites.
  *
  * @todo also run tests against the FusedView and the scale-out federation variant (progressive
  *     forward or reverse scan against a partitioned index).
@@ -48,7 +48,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Create an appropriate cursor instance for the given B+Tree.
    *
    * @param btree
@@ -60,7 +60,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
   protected abstract ITupleCursor2<String> newCursor(
       AbstractBTree btree, int flags, byte[] fromKey, byte[] toKey);
 
-  /**
+  /*
    * Create an appropriate cursor instance for the given B+Tree.
    *
    * @param btree
@@ -84,7 +84,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
     return btree;
   }
 
-  /**
+  /*
    * Test helper tests first(), last(), next(), prior(), and seek() given a B+Tree that has been
    * pre-populated with some known tuples.
    *
@@ -467,7 +467,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
     } // end test optional range constraints
   }
 
-  /**
+  /*
    * Return a B+Tree populated with data for {@link #doReverseTraversalTest(AbstractBTree)}.
    *
    * <p>Note: this unit test is setup to create a B+Tree with 2 leaves and a root node. This allows
@@ -502,7 +502,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
     return btree;
   }
 
-  /**
+  /*
    * Verify the data expectations.
    *
    * @todo Is this possible when the {@link IndexSegment} is generated since the plan can assign 3
@@ -516,7 +516,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
     assertEquals("ntuples", 5, btree.getEntryCount());
 
     // The separator key is (30).
-    assertEquals(TestKeyBuilder.asSortKey(30), ((Node) btree.getRoot()).getKeys().get(0));
+    assertEquals(TestKeyBuilder.asSortKey(30), btree.getRoot().getKeys().get(0));
 
     // Verify the expected keys in the 1st leaf.
     AbstractBTreeTestCase.assertKeys(
@@ -537,7 +537,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
         ((Node) btree.getRoot()).getChild(1 /* 2nd leaf */).getKeys());
   }
 
-  /**
+  /*
    * Unit test for reverse traversal under a variety of edge cases. The data is a B+Tree with two
    * leaves
    *
@@ -628,7 +628,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
        * Verify that the separatorKey in the parent is the first tuple we
        * expect to find in the 2nd leaf.
        */
-      assertEquals(TestKeyBuilder.asSortKey(30), ((Node) btree.getRoot()).getKeys().get(0));
+      assertEquals(TestKeyBuilder.asSortKey(30), btree.getRoot().getKeys().get(0));
 
       /*
        * Modify the B+Tree such that (30) is still the separatorKey for
@@ -640,7 +640,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
       // Remove the first tuple in the 2nd leaf.
       btree.remove(30);
       // The separator key has not been changed.
-      assertEquals(((Node) btree.getRoot()).getKeys().get(0), TestKeyBuilder.asSortKey(30));
+      assertEquals(btree.getRoot().getKeys().get(0), TestKeyBuilder.asSortKey(30));
       // The #of leaves has not been changed.
       assertEquals(2, btree.getLeafCount());
       // Verify the expected keys in the 2nd leaf.
@@ -665,7 +665,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test helper tests for fence posts when the index is empty
    *
    * <p>Note: this test can not be written for an {@link IndexSegment} since you can't have an empty
@@ -875,7 +875,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
     return btree;
   }
 
-  /**
+  /*
    * Test helper for fence posts when there is only a single tuple. including when attempting to
    * visit tuples in a key range that does not overlap with the tuple that is actually in the index.
    *
@@ -1176,7 +1176,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Compares two tuples for equality based on their data (flags, keys, values, deleted marker, and
    * version timestamp).
    *

@@ -24,8 +24,8 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Default implementation of a {@link BlueprintsValueFactory} for converting blueprints data to RDF
+/*
+* Default implementation of a {@link BlueprintsValueFactory} for converting blueprints data to RDF
  * and back again. Uses simple namespacing and URL encoding to round trip URIs.
  *
  * @author mikepersonick

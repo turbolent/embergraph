@@ -25,38 +25,38 @@ package org.embergraph.btree;
 
 import org.embergraph.btree.view.FusedView;
 
-/**
- * Interface indicates that the index is local rather than remote. A local index may consistent of
+/*
+* Interface indicates that the index is local rather than remote. A local index may consistent of
  * either an {@link AbstractBTree} or a {@link FusedView} of {@link AbstractBTree}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ILocalBTreeView extends IIndex {
 
-  /**
+  /*
    * The #of {@link AbstractBTree}s sources for the view. This will be ONE (1) if the view is a
    * {@link BTree}.
    */
-  public int getSourceCount();
+  int getSourceCount();
 
-  /**
+  /*
    * An array containing the ordered sources in the view. Changes to the array DO NOT affect the
    * view. If the view is an {@link AbstractBTree} then the array will contain a single element
    * which is that {@link AbstractBTree}.
    */
-  public AbstractBTree[] getSources();
+  AbstractBTree[] getSources();
 
-  /**
+  /*
    * The {@link BTree} that is absorbing writes for the view.
    *
    * @throws UnsupportedOperationException if the index is not mutable.
    */
-  public BTree getMutableBTree();
+  BTree getMutableBTree();
 
-  /**
+  /*
    * Return the bloom filter.
    *
    * @return The bloom filter if one exists and otherwise <code>null</code>.
    */
-  public IBloomFilter getBloomFilter();
+  IBloomFilter getBloomFilter();
 }

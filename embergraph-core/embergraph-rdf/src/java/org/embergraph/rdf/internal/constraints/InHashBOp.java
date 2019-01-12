@@ -28,8 +28,8 @@ import org.embergraph.bop.IValueExpression;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * A constraint that a value expression which may only take on the bindings enumerated by some set
+/*
+* A constraint that a value expression which may only take on the bindings enumerated by some set
  * of constants.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -40,21 +40,21 @@ public class InHashBOp extends InBOp {
   /** */
   private static final long serialVersionUID = 8032412126003678642L;
 
-  /**
+  /*
    * The value expression to be computed for each solution (cached).
    *
    * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
    */
   private transient volatile IValueExpression<IV> valueExpr;
 
-  /**
+  /*
    * The set of constants to be tested (cached).
    *
    * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
    */
   private transient volatile LinkedHashSet<IV> set;
 
-  /**
+  /*
    * <code>true</code> iff this is NOT IN (cached).
    *
    * <p>Note: This cache is not serialized and is compiled on demand when the operator is used.
@@ -72,7 +72,7 @@ public class InHashBOp extends InBOp {
     super(args, annotations);
   }
 
-  /**
+  /*
    * @param x Some variable.
    * @param set A set of legal term identifiers providing a constraint on the allowable values for
    *     that variable.
@@ -86,7 +86,7 @@ public class InHashBOp extends InBOp {
     super(not, var, set);
   }
 
-  /**
+  /*
    * Extends {@link org.embergraph.bop.CoreBaseBOp#mutation() CoreBaseBOp.mutation} method to
    * reflect args changes in cached IVs set.
    */
@@ -147,6 +147,6 @@ public class InHashBOp extends InBOp {
 
     final boolean found = _set.contains(v);
 
-    return not ? !found : found;
+    return not != found;
   }
 }

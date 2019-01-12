@@ -23,24 +23,24 @@ package org.embergraph.rdf.sparql.ast;
 
 import java.util.Map;
 
-/**
- * Interface for prefix declarations.
+/*
+* Interface for prefix declarations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IPrefixDecls {
 
-  public interface Annotations {
+  interface Annotations {
 
-    /**
+    /*
      * The namespace prefix declaration map. This is a {@link Map} with {@link String} keys (prefix)
      * and {@link String} values (the uri associated with that prefix).
      */
     String PREFIX_DECLS = "prefixDecls";
   }
 
-  /**
+  /*
    * The namespace prefix declarations map. This is a {@link Map} with {@link String} keys (prefix)
    * and {@link String} values (the uri associated with that prefix).
    *
@@ -48,9 +48,9 @@ public interface IPrefixDecls {
    *     map will be returned. The returned map is immutable to preserve the general contract for
    *     notification on mutation.
    */
-  public Map<String, String> getPrefixDecls();
+  Map<String, String> getPrefixDecls();
 
-  /**
+  /*
    * Set the namespace prefix declarations map. This is a {@link Map} with {@link String} keys
    * (prefix) and {@link String} values (the uri associated with that prefix).
    */

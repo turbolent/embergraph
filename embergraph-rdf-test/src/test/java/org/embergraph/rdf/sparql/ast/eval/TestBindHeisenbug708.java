@@ -19,8 +19,8 @@ package org.embergraph.rdf.sparql.ast.eval;
 
 import junit.framework.AssertionFailedError;
 
-/**
- * Test suite for a hesienbug involving BIND. Unlike the other issues this sometimes happens, and is
+/*
+* Test suite for a hesienbug involving BIND. Unlike the other issues this sometimes happens, and is
  * sometimes OK, so we run the test in a loop 20 times.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/708">Heisenbug </a>

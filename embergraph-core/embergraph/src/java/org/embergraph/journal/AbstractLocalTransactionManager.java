@@ -10,8 +10,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ITxState;
 
-/**
- * Manages the client side of a transaction either for a standalone {@link Journal} or for an {@link
+/*
+* Manages the client side of a transaction either for a standalone {@link Journal} or for an {@link
  * IDataService} in an {@link IEmbergraphFederation}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -27,7 +27,7 @@ public abstract class AbstractLocalTransactionManager implements ILocalTransacti
    * ILocalTransactionManager
    */
 
-  /**
+  /*
    * A hash map containing all active transactions. A transaction that is preparing will remain in
    * this collection until it has either successfully prepared or aborted.
    *
@@ -42,7 +42,7 @@ public abstract class AbstractLocalTransactionManager implements ILocalTransacti
     return activeTx.values().toArray(new ITxState[] {});
   }
 
-  /**
+  /*
    * Notify the journal that a new transaction is being activated (starting on the journal).
    *
    * @param localState The transaction.
@@ -67,7 +67,7 @@ public abstract class AbstractLocalTransactionManager implements ILocalTransacti
     }
   }
 
-  /**
+  /*
    * Removes the transaction from the local tables.
    *
    * @param localState The transaction.
@@ -97,7 +97,7 @@ public abstract class AbstractLocalTransactionManager implements ILocalTransacti
     }
   }
 
-  /**
+  /*
    * Return the local state for a transaction.
    *
    * @param tx The transaction identifier.
@@ -135,7 +135,7 @@ public abstract class AbstractLocalTransactionManager implements ILocalTransacti
   /** Delay between attempts reach the remote service (ms). */
   final long delay = 10L;
 
-  /**
+  /*
    * #of attempts to reach the remote service.
    *
    * <p>Note: delay*maxtries == 1000ms of trying before we give up, plus however long we are willing
@@ -147,7 +147,7 @@ public abstract class AbstractLocalTransactionManager implements ILocalTransacti
    */
   final int maxtries = 100;
 
-  /**
+  /*
    * Note: The reason for all this retry logic is to work around race conditions during service
    * startup (and possibly during service failover) when the {@link ITimestampService} has not been
    * discovered yet.

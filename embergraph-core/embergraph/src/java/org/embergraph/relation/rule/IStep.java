@@ -27,8 +27,8 @@ package org.embergraph.relation.rule;
 
 import java.io.Serializable;
 
-/**
- * An {@link IStep} is either a single {@link IRule} or a complex {@link IProgram}.
+/*
+* An {@link IStep} is either a single {@link IRule} or a complex {@link IProgram}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -36,17 +36,17 @@ import java.io.Serializable;
 public interface IStep extends Serializable {
 
   /** The name of the program. */
-  public String getName();
+  String getName();
 
-  /**
+  /*
    * <code>true</code> iff the step is an {@link IRule} and <code>false</code> iff the step is an
    * {@link IProgram}.
    */
-  public boolean isRule();
+  boolean isRule();
 
   /** Return additional constraints that must be imposed during query evaluation. */
-  public IQueryOptions getQueryOptions();
+  IQueryOptions getQueryOptions();
 
   /** A human readable representation of the {@link IStep}. */
-  public String toString();
+  String toString();
 }

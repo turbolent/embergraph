@@ -42,8 +42,8 @@ import org.embergraph.btree.keys.StrengthEnum;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for the {@link PrefixFilter}.
+/*
+* Test suite for the {@link PrefixFilter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -58,7 +58,7 @@ public class TestPrefixFilter extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Used to form the prefix keys.
    *
    * <p>Note: The prefix keys are formed with {@link StrengthEnum#Identical}. This is necessary in

@@ -75,8 +75,8 @@ import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Helper class for {@link IV}s.
+/*
+* Helper class for {@link IV}s.
  *
  * @openrdf
  */
@@ -90,7 +90,7 @@ public class IVUtility {
 
   //    private static final transient Logger log = Logger.getLogger(IVUtility.class);
 
-  /**
+  /*
    * When <code>true</code>, we will pack term identifiers using {@link LongPacker}.
    *
    * <p>Note: This option requires that term identifiers are non-negative. That is not currently
@@ -131,7 +131,7 @@ public class IVUtility {
     return iv1.compareTo(iv2);
   }
 
-  /**
+  /*
    * Encode an RDF value into a key for one of the statement indices. Handles null {@link IV}
    * references gracefully.
    *
@@ -153,7 +153,7 @@ public class IVUtility {
     return keyBuilder;
   }
 
-  /**
+  /*
    * Decode an {@link IV} from a byte[].
    *
    * @param key The byte[].
@@ -164,7 +164,7 @@ public class IVUtility {
     return decodeFromOffset(key, 0);
   }
 
-  /**
+  /*
    * Decodes up to numTerms {@link IV}s from a byte[].
    *
    * @param key The byte[].
@@ -176,7 +176,7 @@ public class IVUtility {
     return decode(key, 0 /* offset */, numTerms);
   }
 
-  /**
+  /*
    * Decodes up to numTerms {@link IV}s from a byte[].
    *
    * @param key The byte[].
@@ -206,7 +206,7 @@ public class IVUtility {
     return ivs;
   }
 
-  /**
+  /*
    * Decodes all {@link IV}s from a byte[].
    *
    * @param key The byte[].
@@ -217,7 +217,7 @@ public class IVUtility {
     return decodeAll(key, 0 /* off */, key.length /* len */);
   }
 
-  /**
+  /*
    * Decodes {@link IV}s from a slice of a byte[].
    *
    * @param key The byte[].
@@ -249,7 +249,7 @@ public class IVUtility {
     return ivs.toArray(new IV[ivs.size()]);
   }
 
-  /**
+  /*
    * Decode one {@link IV}.
    *
    * @param key The unsigned byte[] key.
@@ -261,7 +261,7 @@ public class IVUtility {
     return decodeFromOffset(key, offset, true /*nullIsNullRef*/);
   }
 
-  /**
+  /*
    * Decode one {@link IV}.
    *
    * @param key The unsigned byte[] key.
@@ -284,8 +284,8 @@ public class IVUtility {
 
       if (AbstractIV.isExtension(flags)) {
 
-        /*
-         * Handle non-inline URI or Literal.
+      /*
+       * Handle non-inline URI or Literal.
          */
 
         final byte extensionByte = KeyBuilder.decodeByte(key[o++]);
@@ -313,8 +313,8 @@ public class IVUtility {
 
         } else {
 
-          /*
-           * Handle a BlobIV.
+        /*
+       * Handle a BlobIV.
            *
            * Note: This MUST be consistent with
            * TermsIndexHelper#makeKey() and BlobIV.
@@ -335,8 +335,8 @@ public class IVUtility {
 
       } else {
 
-        /*
-         * Handle a TermId, including a NullIV.
+      /*
+       * Handle a TermId, including a NullIV.
          */
 
         // decode the term identifier.
@@ -371,8 +371,8 @@ public class IVUtility {
     switch (vte) {
       case STATEMENT:
         {
-          /*
-           * Handle inline sids.
+        /*
+       * Handle inline sids.
            */
           // spo is directly decodable from key
           final ISPO spo = SPOKeyOrder.SPO.decodeKey(key, o);
@@ -393,7 +393,7 @@ public class IVUtility {
     }
   }
 
-  /**
+  /*
    * Decode an inline blank node from an offset.
    *
    * @param flags The flags.
@@ -437,7 +437,7 @@ public class IVUtility {
     }
   }
 
-  /**
+  /*
    * Decode an inline URI from a byte offset.
    *
    * @param flags The flags byte.
@@ -507,7 +507,7 @@ public class IVUtility {
     }
   }
 
-  /**
+  /*
    * Decode an inline literal from an offset.
    *
    * @param flags The flags byte.
@@ -660,8 +660,8 @@ public class IVUtility {
         }
       case Extension:
         {
-          /*
-           * Handle an extension of the intrinsic data types.
+        /*
+       * Handle an extension of the intrinsic data types.
            *
            * @see BLZG-1507 (Implement support for DTE extension types for URIs)
            * @see BLZG-1595 (DTEExtension for compressed timestamp)
@@ -715,8 +715,8 @@ public class IVUtility {
     }
   }
 
-  //	/**
-  //	 * Handle an extension of the intrinsic data types.
+  //	/*
+//	 * Handle an extension of the intrinsic data types.
   //	 *
   //	 * @see BLZG-1507 (Implement support for DTE extension types for URIs)
   //	 */
@@ -748,7 +748,7 @@ public class IVUtility {
   //		}
   //	}
 
-  /**
+  /*
    * Decode an inline literal which is represented as a one or two compressed Unicode values.
    *
    * @param key The key.
@@ -842,8 +842,8 @@ public class IVUtility {
     return iv;
   }
 
-  //    /**
-  //     * Decode an IV from its string representation as encoded by
+  //    /*
+//     * Decode an IV from its string representation as encoded by
   //     * {@link BlobIV#toString()} and {@link AbstractInlineIV#toString()} (this
   //     * is used by the prototype IRIS integration.)
   //     *

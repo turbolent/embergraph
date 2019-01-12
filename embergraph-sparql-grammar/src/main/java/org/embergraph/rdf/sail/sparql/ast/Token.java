@@ -5,13 +5,13 @@ package org.embergraph.rdf.sail.sparql.ast;
 /** Describes the input token stream. */
 public class Token implements java.io.Serializable {
 
-  /**
+  /*
    * The version identifier for this Serializable class. Increment only if the <i>serialized</i>
    * form of the class changes.
    */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * An integer that describes the kind of this token. This numbering system is determined by
    * JavaCCParser, and a table of these numbers is stored in the file ...Constants.java.
    */
@@ -29,7 +29,7 @@ public class Token implements java.io.Serializable {
   /** The string image of the token. */
   public String image;
 
-  /**
+  /*
    * A reference to the next regular (non-special) token from the input stream. If this is the last
    * token from the input stream, or if the token manager has not read tokens beyond this one, this
    * field is set to null. This is true only if this token is also a regular token. Otherwise, see
@@ -37,7 +37,7 @@ public class Token implements java.io.Serializable {
    */
   public Token next;
 
-  /**
+  /*
    * This field is used to access special tokens that occur prior to this token, but after the
    * immediately preceding regular (non-special) token. If there are no such special tokens, this
    * field is set to null. When there are more than one such special token, this field refers to the
@@ -48,7 +48,7 @@ public class Token implements java.io.Serializable {
    */
   public Token specialToken;
 
-  /**
+  /*
    * An optional attribute value of the Token. Tokens which are not used as syntactic sugar will
    * often contain meaningful values that will be used later on by the compiler or interpreter. This
    * attribute value is often different from the image. Any subclass of Token that actually wants to
@@ -77,7 +77,7 @@ public class Token implements java.io.Serializable {
     return image;
   }
 
-  /**
+  /*
    * Returns a new Token object, by default. However, if you want, you can create and return
    * subclass objects based on the value of ofKind. Simply add the cases to the switch for all those
    * special cases. For example, if you have a subclass of Token called IDToken that you want to

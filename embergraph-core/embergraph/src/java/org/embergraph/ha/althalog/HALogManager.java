@@ -30,8 +30,8 @@ import org.embergraph.io.IBufferAccess;
 import org.embergraph.journal.IRootBlockView;
 import org.embergraph.journal.StoreTypeEnum;
 
-/**
- * Provides the top level control
+/*
+* Provides the top level control
  *
  * @author Martyn Cutcher
  */
@@ -124,7 +124,7 @@ public class HALogManager {
     }
   }
 
-  /**
+  /*
    * Utility to retrieve a File reference to the current open file
    *
    * @return
@@ -155,7 +155,7 @@ public class HALogManager {
     return halog.getReader();
   }
 
-  /**
+  /*
    * Returns the HALogFile for the commitCounter if it exists. It will return either the current or
    * an historical file
    *
@@ -184,7 +184,7 @@ public class HALogManager {
     return new HALogFile(file);
   }
 
-  /**
+  /*
    * Closes and removes the current writer
    *
    * @throws IOException
@@ -204,8 +204,8 @@ public class HALogManager {
    * This logic is handled by the HAJournalServer, which is also aware
    * of the backup integration through zookeeper.
    */
-  //	/**
-  //	 * Disables any current log file, then removes all log files
+  //	/*
+//	 * Disables any current log file, then removes all log files
   //	 * from the directory
   //	 *
   //	 * @throws IOException
@@ -221,8 +221,8 @@ public class HALogManager {
   //		}
   //	}
   //
-  //	/**
-  //	 * Recursively removes all log files from the provided directory
+  //	/*
+//	 * Recursively removes all log files from the provided directory
   //	 * @param dir
   //	 */
   //	private void removeAllLogFiles(final File dir, final File preserve) {
@@ -244,7 +244,7 @@ public class HALogManager {
   //		}
   //	}
 
-  /**
+  /*
    * Utility program will dump log files (or directories containing log files) provided as
    * arguments.
    *

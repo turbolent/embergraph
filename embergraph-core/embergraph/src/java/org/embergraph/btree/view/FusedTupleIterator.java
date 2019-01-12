@@ -28,8 +28,8 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.util.BytesUtil;
 
-/**
- * An aggregate iterator view of the one or more source {@link ITupleIterator}s.
+/*
+* An aggregate iterator view of the one or more source {@link ITupleIterator}s.
  *
  * @see FusedView#rangeIterator(byte[], byte[], int, int,
  *     org.embergraph.btree.filter.IFilterConstructor)
@@ -49,7 +49,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
   /** The flags specified to the ctor. */
   protected final int flags;
 
-  /**
+  /*
    * True iff {@link IRangeQuery#DELETED} semantics will be applied (that is, true if the caller
    * wants to see the deleted tuples).
    */
@@ -61,7 +61,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
   /** The source iterators in the order given to the ctor. */
   protected final I[] sourceIterator;
 
-  /**
+  /*
    * The current {@link ITuple} from each source and <code>null</code> if we need to get another
    * {@link ITuple} from that source. The value for a source iterator that has been exhausted will
    * remain <code>null</code>. When all entries in this array are <code>null</code> there are no
@@ -74,8 +74,8 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
    */
   protected final ITuple<E>[] sourceTuple;
 
-  //    /**
-  //     * <code>true</code> iff {@link IRangeQuery#REVERSE} was specified for the
+  //    /*
+//     * <code>true</code> iff {@link IRangeQuery#REVERSE} was specified for the
   //     * source iterator. When {@link IRangeQuery#REVERSE} was specified then the
   //     * source iterators will all use reverse traversal and we change the sense
   //     * of the comparison for the keys so that we impose a total descending key
@@ -83,19 +83,19 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
   //     */
   //    protected final boolean reverseScan;
 
-  /**
+  /*
    * Index into {@link #sourceIterator} and {@link #sourceTuple} of the iterator whose tuple will be
    * returned next -or- <code>-1</code> if we need to choose the next {@link ITuple} to be visited.
    */
   protected int current = -1;
 
-  /**
+  /*
    * The index into {@link #sourceIterator} of the iterator whose tuple was last returned by {@link
    * #next()}.
    */
   protected int lastVisited = -1;
 
-  /**
+  /*
    * Create an {@link ITupleIterator} reading from an ordered set of source {@link ITupleIterator}s.
    * The order of the source iterators is important. The first matching {@link ITuple} for a key
    * will be the {@link ITuple} that gets returned. Other {@link ITuple}s for the same key will be
@@ -223,8 +223,8 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
             //                        if (reverseScan ? ret > 0 : ret < 0) {
             if (ret < 0) {
 
-              /*
-               * This key orders LT the current key.
+            /*
+       * This key orders LT the current key.
                *
                * Note: This test MUST be strictly LT since LTE
                * would break the precedence in which we are
@@ -245,8 +245,8 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
 
       if (sourceTuple[current].isDeletedVersion() && !deleted) {
 
-        /*
-         * The tuple is marked as "deleted" and the caller did not
+      /*
+       * The tuple is marked as "deleted" and the caller did not
          * request deleted tuples so we skip this key and begin again
          * with the next key visible under the fused iterator view.
          */
@@ -256,8 +256,8 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
           log.info("Skipping deleted: source=" + current + ", tuple=" + sourceTuple[current]);
         }
 
-        /*
-         * Clear tuples from other sources having the same key as the
+      /*
+       * Clear tuples from other sources having the same key as the
          * current tuple.
          */
 
@@ -282,7 +282,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
     return consumeLookaheadTuple();
   }
 
-  /**
+  /*
    * {@link ITuple} revealing a tuple selected from a {@link FusedView} by a {@link
    * FusedTupleIterator}.
    *
@@ -296,7 +296,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
 
     private final long nvisited;
 
-    /**
+    /*
      * Note: Not whether or not this tuple is deleted but rather whether or not the {@link
      * FusedTupleIterator} is visiting deleted tuples.
      *
@@ -319,7 +319,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
       this.deleted = deleted;
     }
 
-    /**
+    /*
      * Turn off the deleted flag unless {@link IRangeQuery#DELETED} was specified for the {@link
      * FusedTupleIterator} view.
      */
@@ -348,7 +348,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
     }
   }
 
-  /**
+  /*
    * Consume the {@link #current} source {@link ITuple}.
    *
    * @return The {@link #current} tuple.
@@ -373,7 +373,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
     return tuple;
   }
 
-  /**
+  /*
    * Clear tuples from other sources having the same key as the current tuple.
    *
    * <p>If any source has the same key then we clear it's tuple since we have already returned a
@@ -425,7 +425,7 @@ public class FusedTupleIterator<I extends ITupleIterator<E>, E> implements ITupl
   /** The #of tuples visited so far. */
   private long nvisited = 0L;
 
-  /**
+  /*
    * Operation is not supported.
    *
    * <p>Note: Remove is not supported at this level. Instead you must use a {@link

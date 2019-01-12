@@ -43,8 +43,8 @@ import org.embergraph.rawstore.IPSOutputStream;
 import org.embergraph.relation.locator.IResourceLocator;
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * {@link IJournal} delegation pattern.
+/*
+* {@link IJournal} delegation pattern.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

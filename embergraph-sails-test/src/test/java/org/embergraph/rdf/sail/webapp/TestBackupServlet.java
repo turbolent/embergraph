@@ -29,8 +29,8 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Proxied test suite for {@link DataLoaderServlet}
+/*
+* Proxied test suite for {@link DataLoaderServlet}
  *
  * @author beebs
  */
@@ -51,7 +51,7 @@ public class TestBackupServlet<S extends IIndexManager> extends AbstractTestNano
         TestBackupServlet.class, "test_backup01", Collections.singleton(BufferMode.DiskRW));
   }
 
-  /**
+  /*
    * Load the test data set.
    *
    * @throws Exception
@@ -64,7 +64,7 @@ public class TestBackupServlet<S extends IIndexManager> extends AbstractTestNano
     loadFile(this.getClass().getResource("sample-data.ttl").getFile(), RDFFormat.TURTLE);
   }
 
-  /**
+  /*
    * Load a file.
    *
    * @param file The file.

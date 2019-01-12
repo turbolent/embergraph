@@ -26,8 +26,8 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConfigurationError;
 
-/**
- * Configuration of a single field/component in a given geospatial (multi-dimensional) custom data
+/*
+* Configuration of a single field/component in a given geospatial (multi-dimensional) custom data
  * type.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -45,7 +45,7 @@ public class GeoSpatialDatatypeFieldConfiguration implements Serializable {
   private static final String JSON_STR_MULTIPLIER = "multiplier";
   private static final String JSON_STR_SERVICEMAPPING = "serviceMapping";
 
-  /**
+  /*
    * We support fields of values LONG and DOUBLE right now. Note that DOUBLE values are internally
    * converted to LONG based on the given precision.
    */
@@ -67,7 +67,7 @@ public class GeoSpatialDatatypeFieldConfiguration implements Serializable {
   /** The valueType of the field. */
   private final ValueType valueType;
 
-  /**
+  /*
    * The minimum value defining a shift in the bits. May be null (meaning there is no minValue
    * defined).
    */
@@ -76,7 +76,7 @@ public class GeoSpatialDatatypeFieldConfiguration implements Serializable {
   /** The multiplier (aka precision). Defaults to 1 (identity element for multiplication). */
   private long multiplier;
 
-  /**
+  /*
    * Mapping to the service. If serviceMapping==CUSTOM, this is a string defined in variable
    * customServiceMapping, otherwise the latter is null.
    */
@@ -88,7 +88,7 @@ public class GeoSpatialDatatypeFieldConfiguration implements Serializable {
   public GeoSpatialDatatypeFieldConfiguration(JSONObject fieldJson)
       throws InvalidGeoSpatialDatatypeConfigurationError {
 
-    /**
+    /*
      * Parse JSON structure such as: { "valueType": "LONG", "multiplier": "1", "minVal" : "0" ,
      * "serviceMapping" : "COORD_SYSTEM" }, where minVal and multiplier are optional, the other two
      * components are mandatory.
@@ -145,7 +145,7 @@ public class GeoSpatialDatatypeFieldConfiguration implements Serializable {
     }
   }
 
-  /**
+  /*
    * Alternative constructor (to ease writing test cases). If used without test cases, please use
    * with care -- this constructor does not implement input validation.
    *

@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-/**
- * An exception thrown when the key is outside of the half-open range constraint for a {@link
+/*
+* An exception thrown when the key is outside of the half-open range constraint for a {@link
  * ITupleCursor} or an index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

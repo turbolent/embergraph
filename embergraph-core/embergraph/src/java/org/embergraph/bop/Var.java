@@ -5,8 +5,8 @@ import java.util.UUID;
 import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.relation.rule.Rule;
 
-/**
- * A variable.
+/*
+* A variable.
  *
  * <p>Note: This implementation provides reference testing for equality. The rest of the package
  * <em>assumes</em> that it can use reference testing for equality when comparing variables.
@@ -58,7 +58,7 @@ public final class Var<E> extends ImmutableBOp implements IVariable<E>, Comparab
     return false;
   }
 
-  /**
+  /*
    * Private constructor - use {@link Rule#var(String)} to obtain an instance.
    *
    * @param name
@@ -73,7 +73,7 @@ public final class Var<E> extends ImmutableBOp implements IVariable<E>, Comparab
     this.name = name;
   }
 
-  /**
+  /*
    * Clone is overridden to prevent variables from becoming aliased (this is part of the
    * canonicalizing mapping). Because we override clone we do not need to provide the deep copy
    * constructor (it is never invoked).
@@ -92,7 +92,7 @@ public final class Var<E> extends ImmutableBOp implements IVariable<E>, Comparab
 
     if (o instanceof IVariable<?>) {
 
-      return name.equals(((IVariable<?>) o).getName());
+      return name.equals(o.getName());
     }
 
     return false;
@@ -160,7 +160,7 @@ public final class Var<E> extends ImmutableBOp implements IVariable<E>, Comparab
     return name;
   }
 
-  /**
+  /*
    * Canonicalizing hash map with weak values for {@link Var}s.
    *
    * @see ConcurrentWeakValueCache
@@ -176,7 +176,7 @@ public final class Var<E> extends ImmutableBOp implements IVariable<E>, Comparab
     return Var.var(UUID.randomUUID().toString());
   }
 
-  /**
+  /*
    * Singleton factory for {@link Var}s.
    *
    * <p>Note: While only a single instance of a variable object will be created for any given

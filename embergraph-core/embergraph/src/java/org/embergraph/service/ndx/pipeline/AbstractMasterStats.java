@@ -35,8 +35,8 @@ import org.embergraph.counters.Instrument;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.resources.StaleLocatorException;
 
-/**
- * Abstract base class providing statistics for the {@link AbstractMasterTask} and a factory for the
+/*
+* Abstract base class providing statistics for the {@link AbstractMasterTask} and a factory for the
  * statistics for the subtasks.
  *
  * <p>Note: Since there are concurrent threads which need to write on the counters on this class the
@@ -57,7 +57,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   /** The #of subtasks which have started. */
   public final AtomicLong subtaskStartCount = new AtomicLong();
 
-  /**
+  /*
    * The #of subtasks which have finished (either the buffer has been closed and all buffered data
    * has been flushed -or- the task was interrupted or otherwise threw an exception).
    */
@@ -66,13 +66,13 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   /** The #of subtasks which were closed due to an idle timeout. */
   public final AtomicLong subtaskIdleTimeoutCount = new AtomicLong();
 
-  /**
+  /*
    * The maximum #of distinct partitions for which the master has caused subtasks to be created at
    * any given time.
    */
   private final AtomicInteger maximumPartitionCount = new AtomicInteger();
 
-  /**
+  /*
    * The maximum #of distinct partitions for which the master has caused subtasks to be created at
    * any given time.
    */
@@ -99,13 +99,13 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   /** The #of elements drained from the {@link BlockingBuffer} by the {@link AbstractMasterTask}. */
   public final AtomicLong elementsIn = new AtomicLong();
 
-  /**
+  /*
    * The #of elements in the output chunks written onto the index partitions (not including any
    * eliminated duplicates).
    */
   public final AtomicLong elementsOut = new AtomicLong();
 
-  /**
+  /*
    * The #of elements on the output sink queues. This is incremented when a chunk of elements is
    * transferred onto an output sink queue and decremented when a chunk of elements is drained from
    * an output sink queue. It does not reflect the #of elements on the master queue, which can be
@@ -115,7 +115,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
    */
   public final AtomicLong elementsOnSinkQueues = new AtomicLong();
 
-  /**
+  /*
    * The #of chunks transferred from the master to the sinks. Where there is more than one index
    * partition, there will be more than one sink and each chunk written on the master will be
    * divided among the sinks based on the key-ranges of the tuples in the chunks. Therefore each
@@ -124,7 +124,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
    */
   public final AtomicLong chunksTransferred = new AtomicLong();
 
-  /**
+  /*
    * The #of elements transferred from the master to the sinks. Where there is more than one index
    * partition, there will be more than one sink and each chunk written on the master will be
    * divided among the sinks based on the key-ranges of the tuples in the chunks. This reduces the
@@ -138,7 +138,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   /** Elapsed nanoseconds the master spends offering a chunk for transfer to a sink. */
   public long elapsedSinkOfferNanos = 0L;
 
-  /**
+  /*
    * Elapsed time across sinks waiting for another chunk to be ready so that it can be written onto
    * the index partition.
    */
@@ -147,7 +147,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   /** Elapsed nanoseconds across sinks writing chunks on an index partition (RMI requests). */
   public long elapsedSinkChunkWritingNanos = 0L;
 
-  /**
+  /*
    * Map for the per-index partition statistics. This ensures that we can report the aggregate
    * statistics in detail. A weak value hash map is used so that the statistics for inactive index
    * partitions can be discarded. The backing hard reference queue is not used since the {@link
@@ -161,13 +161,13 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   protected final ConcurrentWeakValueCache<Integer, AbstractMasterTask> masters =
       new ConcurrentWeakValueCache<Integer, AbstractMasterTask>(0 /* queueCapacity */);
 
-  /**
+  /*
    * The #of master tasks which have been created for the index whose asynchronous write statistics
    * are reported on by this object.
    */
   public final AtomicInteger masterCreateCount = new AtomicInteger();
 
-  /**
+  /*
    * The approximate #of active master tasks. This is based on a weak value hash map. The size of
    * that map is reported.
    */
@@ -180,7 +180,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
     return masters.size();
   }
 
-  /**
+  /*
    * A new master task declares itself to this statistics object using this method. This allows the
    * statistics object to report on the #of master tasks, their queue sizes, and the sizes of their
    * sink queues.
@@ -198,7 +198,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
     }
   }
 
-  /**
+  /*
    * Return the statistics object for the specified index partition and never <code>null</code> (a
    * new instance is created if none exists).
    *
@@ -226,7 +226,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   }
   //    private final List<HS> tmp = new LinkedList<HS>();
 
-  /**
+  /*
    * Factory for the subtask statistics.
    *
    * @param locator The subtask key.
@@ -261,7 +261,7 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
 
   public AbstractMasterStats() {}
 
-  /**
+  /*
    * Return a {@link CounterSet} which may be used to report the statistics on the index write
    * operation. The {@link CounterSet} is NOT placed into any namespace.
    */
@@ -457,8 +457,8 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
     return t;
   }
 
-  //    /**
-  //     * The average #of nanoseconds waiting for a chunk to become ready so that
+  //    /*
+//     * The average #of nanoseconds waiting for a chunk to become ready so that
   //     * it can be written on an output sink.
   //     */
   //    public double getAverageNanosPerWait() {
@@ -468,8 +468,8 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   //
   //    }
   //
-  //    /**
-  //     * The average #of nanoseconds per chunk written on an output sink.
+  //    /*
+//     * The average #of nanoseconds per chunk written on an output sink.
   //     */
   //    public double getAverageNanosPerWrite() {
   //
@@ -478,8 +478,8 @@ public abstract class AbstractMasterStats<L, HS extends AbstractSubtaskStats> {
   //
   //    }
   //
-  //    /**
-  //     * The average #of elements (tuples) per chunk written on an output sink.
+  //    /*
+//     * The average #of elements (tuples) per chunk written on an output sink.
   //     */
   //    public double getAverageElementsPerWrite() {
   //

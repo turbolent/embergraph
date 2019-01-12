@@ -53,8 +53,8 @@ import org.embergraph.service.EventType;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ResourceService;
 
-/**
- * A read-only store backed by a file containing a single {@link IndexSegment}.
+/*
+* A read-only store backed by a file containing a single {@link IndexSegment}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -73,7 +73,7 @@ public class IndexSegmentStore extends AbstractRawStore {
   /** For reporting via {@link #getResourceMetadata()}. */
   private final SegmentMetadata segmentMetadata;
 
-  /**
+  /*
    * Used to correct decode region-based addresses. The {@link IndexSegmentBuilder} encodes
    * region-based addresses using {@link IndexSegmentRegion}. Those addresses are then transparently
    * decoded by this class. The {@link IndexSegment} itself knows nothing about this entire slight
@@ -84,14 +84,14 @@ public class IndexSegmentStore extends AbstractRawStore {
    */
   private final IndexSegmentAddressManager addressManager;
 
-  /**
+  /*
    * Optional store cache for the bloom filter, index metadata, and the B+Tree nodes and leaves (MAY
    * be <code>null</code>).
    */
   //  @see BLZG-1501 (remove LRUNexus)
   @Deprecated private final ConcurrentMap<Long, Object> storeCache;
 
-  /**
+  /*
    * An optional <strong>direct</strong> {@link ByteBuffer} containing a disk image of the nodes in
    * the {@link IndexSegment}.
    *
@@ -103,7 +103,7 @@ public class IndexSegmentStore extends AbstractRawStore {
    */
   private volatile IBufferAccess buf_nodes;
 
-  /**
+  /*
    * The random access file used to read the index segment. This is transparently re-opened if
    * closed by an interrupt during an NIO operation.
    *
@@ -127,7 +127,7 @@ public class IndexSegmentStore extends AbstractRawStore {
 
   /** @see #raf */
 
-  /**
+  /*
    * A read-only view of the checkpoint record for the index segment.
    *
    * <p>Note: Don't deallocate. It is small and holds useful metadata such as the #of index entries
@@ -135,7 +135,7 @@ public class IndexSegmentStore extends AbstractRawStore {
    */
   private final IndexSegmentCheckpoint checkpoint;
 
-  /**
+  /*
    * The metadata record for the index segment.
    *
    * <p>Note: Don't deallocate. Relatively small and it holds some important metadata. By reading
@@ -144,7 +144,7 @@ public class IndexSegmentStore extends AbstractRawStore {
    */
   private final IndexMetadata indexMetadata;
 
-  /**
+  /*
    * Counters specific to the {@link IndexSegmentStore}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -180,7 +180,7 @@ public class IndexSegmentStore extends AbstractRawStore {
   //
   //    }
 
-  /**
+  /*
    * Used to correct decode region-based addresses. The {@link IndexSegmentBuilder} encodes
    * region-based addresses using {@link IndexSegmentRegion}. Those addresses are then transparently
    * decoded by this class. The {@link IndexSegment} itself knows nothing about this entire slight
@@ -202,7 +202,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     return segmentMetadata.getUUID();
   }
 
-  /**
+  /*
    * The {@link IndexMetadata} record for the {@link IndexSegment}.
    *
    * <p>Note: The {@link IndexMetadata#getPartitionMetadata()} always reports that {@link
@@ -224,7 +224,7 @@ public class IndexSegmentStore extends AbstractRawStore {
 
   private volatile Event openCloseEvent;
 
-  /**
+  /*
    * Open a read-only store containing an {@link IndexSegment}, but does not load the {@link
    * IndexSegment} from the store.
    *
@@ -244,7 +244,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     this(file, null /* fed */);
   }
 
-  /**
+  /*
    * Constructor variant that accepts an {@link IEmbergraphFederation} reference and will report out
    * {@link Event}s.
    *
@@ -299,7 +299,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     if (log.isInfoEnabled()) log.info(checkpoint.toString());
   }
 
-  /**
+  /*
    * Closes out the {@link IndexSegmentStore} iff it is still open.
    *
    * <p>Note: The {@link IndexSegment} has hard reference to the {@link IndexSegmentStore} but not
@@ -334,7 +334,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     return segmentMetadata;
   }
 
-  /**
+  /*
    * Re-open a (possibly closed) store. This operation should succeed if the backing file is still
    * accessible.
    *
@@ -350,8 +350,8 @@ public class IndexSegmentStore extends AbstractRawStore {
     try {
 
       if (open) {
-        /*
-         * The store was already open by the time we got the lock.
+      /*
+       * The store was already open by the time we got the lock.
          *
          * Note: IndexSegment#readNodeOrLeaf() does not have a lock
          * before it invokes this method so the backing store can easily
@@ -364,8 +364,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       try {
 
-        /*
-         * Mark as open so that we can use read(long addr) to read other
+      /*
+       * Mark as open so that we can use read(long addr) to read other
          * data (the root node/leaf).
          */
         this.open = true;
@@ -400,7 +400,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     }
   }
 
-  /**
+  /*
    * Load the {@link IndexSegment}. The {@link IndexSegment} (or derived class) MUST provide a
    * public constructor with the following signature: <code>
    *
@@ -451,12 +451,12 @@ public class IndexSegmentStore extends AbstractRawStore {
           final Class cl = Class.forName(indexMetadata.getBTreeClassName());
 
           @SuppressWarnings({"rawtypes", "unchecked"})
-          final Constructor ctor = cl.getConstructor(new Class[] {IndexSegmentStore.class});
+          final Constructor ctor = cl.getConstructor(IndexSegmentStore.class);
 
           seg = (IndexSegment) ctor.newInstance(new Object[] {this});
 
-          /*
-           * Attach the counters maintained by AbstractBTree to those
+        /*
+       * Attach the counters maintained by AbstractBTree to those
            * reported for the IndexSegmentStore.
            *
            * Note: These counters are only allocated when the
@@ -486,7 +486,7 @@ public class IndexSegmentStore extends AbstractRawStore {
       lock.unlock();
     }
   }
-  /**
+  /*
    * A canonicalizing weak reference for the {@link IndexSegment} that can be loaded from this
    * store.
    */
@@ -510,7 +510,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     return true;
   }
 
-  /**
+  /*
    * Return <code>false</code> since the leaves are not fully buffered even if the nodes are fully
    * buffered.
    */
@@ -519,7 +519,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     return false;
   }
 
-  /**
+  /*
    * Return <code>true</code> if the nodes of the {@link IndexSegment} are fully buffered in memory.
    * The result is consistent as of the time that this method examines the state of the {@link
    * IndexSegmentStore}.
@@ -543,7 +543,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     return file;
   }
 
-  /**
+  /*
    * Closes the file and releases the internal buffers. This operation will quietly succeed if the
    * {@link IndexSegmentStore} is already closed. This operation may be reversed by {@link
    * #reopen()} as long as the backing file remains available. A read on a closed {@link
@@ -571,7 +571,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     }
   }
 
-  /**
+  /*
    * Method is safe to invoke whether or not the store is "open" and will always close {@link #raf}
    * (if open), release various buffers, and set {@link #open} to <code>false</code>. All exceptions
    * are trapped, a log message is written, and the exception is NOT re-thrown.
@@ -804,7 +804,7 @@ public class IndexSegmentStore extends AbstractRawStore {
   }
   //    private CounterSet counterSet;
 
-  /**
+  /*
    * Read a record from the {@link IndexSegmentStore}. If the request is in the node region and the
    * nodes have been buffered then this uses a slice on the node buffer. Otherwise this reads
    * through to the backing file.
@@ -891,7 +891,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     }
   }
 
-  /**
+  /*
    * The [addr] addresses a node and the data are buffered. Create and return a read-only view so
    * that concurrent reads do not modify the buffer state.
    *
@@ -995,7 +995,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     }
   }
 
-  /**
+  /*
    * Read from the file into the caller's buffer.
    *
    * <p>Note: This is package private in order to expose it to the {@link
@@ -1026,7 +1026,7 @@ public class IndexSegmentStore extends AbstractRawStore {
         }
       };
 
-  /**
+  /*
    * This method transparently re-opens the channel for the backing file.
    *
    * <p>Since the {@link IndexSegment} is a read-only data structure, all of the in-memory state
@@ -1088,8 +1088,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-        /*
-         * The channel is still open. If you are allowing concurrent reads
+      /*
+       * The channel is still open. If you are allowing concurrent reads
          * on the channel, then this could indicate that two readers each
          * found the channel closed and that one was able to re-open the
          * channel before the other such that the channel was open again by
@@ -1106,15 +1106,15 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       try {
 
-        /*
-         * Request a shared file lock.
+      /*
+       * Request a shared file lock.
          */
         final FileLock fileLock = raf.getChannel().tryLock(0, Long.MAX_VALUE, true /* shared */);
 
         if (fileLock == null) {
 
-          /*
-           * Note: A null return indicates that someone else holds the
+        /*
+       * Note: A null return indicates that someone else holds the
            * lock. This can happen if the platform does not support shared
            * locks or if someone requested an exclusive file lock.
            */
@@ -1130,8 +1130,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
         if (!fileLock.isShared()) {
 
-          /*
-           * DO NOT hold an exclusive lock for an index segment store
+        /*
+       * DO NOT hold an exclusive lock for an index segment store
            * file!
            *
            * Note: On platforms where shared locks are not support the JDK
@@ -1146,8 +1146,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       } catch (OverlappingFileLockException ex) {
 
-        /*
-         * Note: OverlappingFileLockException can be thrown when there are
+      /*
+       * Note: OverlappingFileLockException can be thrown when there are
          * concurrent requests to obtain the same shared lock. I consider
          * this a JDK bug. It should be possible to service both requests
          * without deadlock.
@@ -1164,8 +1164,8 @@ public class IndexSegmentStore extends AbstractRawStore {
 
       } catch (IOException ex) {
 
-        /*
-         * Note: This is true of NFS volumes. This is Ok and should be
+      /*
+       * Note: This is true of NFS volumes. This is Ok and should be
          * ignored. However the backing file is not protected against
          * accidental deletes or overwrites.
          */
@@ -1179,7 +1179,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     }
   }
 
-  /**
+  /*
    * Attempts to read the index nodes into {@link #buf_nodes}.
    *
    * <p>Note: If the nodes could not be buffered then reads against the nodes will read through to
@@ -1311,7 +1311,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     }
   }
 
-  /**
+  /*
    * Reads the bloom filter directly from the file.
    *
    * @return The bloom filter -or- <code>null</code> if the bloom filter was not constructed when
@@ -1376,7 +1376,7 @@ public class IndexSegmentStore extends AbstractRawStore {
     return bloomFilter;
   }
 
-  /**
+  /*
    * Reads the {@link IndexMetadata} record directly from the file (this is invoked by the ctor).
    */
   private final IndexMetadata readMetadata() throws IOException {

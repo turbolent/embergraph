@@ -26,8 +26,8 @@ package org.embergraph.counters;
 import java.util.Random;
 import junit.framework.TestCase2;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  * @todo unit tests when overwrite is disabled.
  */
@@ -36,7 +36,7 @@ public class TestHistoryInstrument extends TestCase2 {
   // 60 seconds.
   private static final long t60 = 60 * 1000;
 
-  /**
+  /*
    * Time zero is an arbitrary time occurring on an exact _hour_ boundary. This constraint is
    * imposed so that we can consistently test overflow behavior. Overflow SHOULD occur immediately
    * _before_ you add the sample which would cause the sample recorded [capacity * period] units ago
@@ -56,7 +56,7 @@ public class TestHistoryInstrument extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Test of {@link History} adds two samples spaced one minute apart and then a 3rd sample that is
    * two minutes later.
    */
@@ -172,8 +172,8 @@ public class TestHistoryInstrument extends TestCase2 {
     assertEquals((12d + 6d) / 2d, h2.getAverage().doubleValue());
   }
 
-  //    /**
-  //     * Test {@link HistoryInstrument}.
+  //    /*
+//     * Test {@link HistoryInstrument}.
   //     */
   //    public void test_001() {
   //

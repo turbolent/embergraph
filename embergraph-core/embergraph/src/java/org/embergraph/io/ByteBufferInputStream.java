@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-/**
- * Reads bytes from a {@link ByteBuffer}. This class IS NOT thread-safe. Caller's MUST {@link
+/*
+* Reads bytes from a {@link ByteBuffer}. This class IS NOT thread-safe. Caller's MUST {@link
  * ByteBuffer#duplicate()} the {@link ByteBuffer} before creating an instance of this class if they
  * wish to avoid side-effects on the position and limit of the original {@link ByteBuffer}.
  *
@@ -45,7 +45,7 @@ public class ByteBufferInputStream extends InputStream {
     this.buf = buf;
   }
 
-  /**
+  /*
    * Read the next byte from the buffer.
    *
    * @return The byte as a value in [0:255].

@@ -25,8 +25,8 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * A name-value pair.
+/*
+ A name-value pair.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -88,7 +88,7 @@ public class NV implements Serializable, Comparable<NV> {
     return name.compareTo(o.name);
   }
 
-  /**
+  /*
    * Combines the two arrays, appending the contents of the 2nd array to the contents of the first
    * array.
    *
@@ -115,7 +115,7 @@ public class NV implements Serializable, Comparable<NV> {
     return c;
   }
 
-  /**
+  /*
    * Wrap a single name and value as a map.
    *
    * @param name The key.
@@ -131,7 +131,7 @@ public class NV implements Serializable, Comparable<NV> {
     return tmp;
   }
 
-  /**
+  /*
    * Wrap name/value pairs as a map.
    *
    * @param nameValuePairs Pairs each being a string followed by an object, being the name value
@@ -152,7 +152,7 @@ public class NV implements Serializable, Comparable<NV> {
     return rslt;
   }
 
-  /**
+  /*
    * Wrap an array name/value pairs as a {@link Map}.
    *
    * @param a The array.

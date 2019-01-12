@@ -25,8 +25,8 @@ import it.unimi.dsi.bits.BitVector;
 import it.unimi.dsi.io.OutputBitStream;
 import java.io.IOException;
 
-/**
- * A fast coder based on a set of codewords of length at most 64.
+/*
+* A fast coder based on a set of codewords of length at most 64.
  *
  * <p>
  *
@@ -41,7 +41,7 @@ public final class Fast64CodeWordCoder extends CodeWordCoder {
   /** A cached array, parallel to {@link #longCodeWord}, of codewords length. */
   private final int[] length;
 
-  /**
+  /*
    * Creates a new codeword-based coder using the given vector of codewords. The coder will be able
    * to encode symbols numbered from 0 to <code>codeWord.length-1</code>, included.
    *
@@ -56,7 +56,7 @@ public final class Fast64CodeWordCoder extends CodeWordCoder {
     for (int i = length.length; i-- != 0; ) length[i] = codeWord[i].size();
   }
 
-  /**
+  /*
    * Creates a new codeword-based coder using the given vector of codewords. The coder will be able
    * to encode symbols numbered from 0 to <code>codeWord.length-1</code>, included.
    *

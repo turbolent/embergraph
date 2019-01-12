@@ -4,8 +4,8 @@ import org.embergraph.rdf.rio.StatementBuffer;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Statement;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class LoadStatementBufferFactory<S extends Statement> implements IStatementBufferFactory<S> {
@@ -14,7 +14,7 @@ public class LoadStatementBufferFactory<S extends Statement> implements IStateme
 
   private final int bufferCapacity;
 
-  /**
+  /*
    * @param db
    * @param bufferCapacity
    */
@@ -32,8 +32,8 @@ public class LoadStatementBufferFactory<S extends Statement> implements IStateme
         null /* statementStore */, db, bufferCapacity, 10 /*queueCapacity*/);
   }
 
-  //    /**
-  //     * Return the {@link ThreadLocal} {@link StatementBuffer} to be used for a
+  //    /*
+//     * Return the {@link ThreadLocal} {@link StatementBuffer} to be used for a
   //     * task.
   //     */
   //    public StatementBuffer<S> newStatementBuffer() {

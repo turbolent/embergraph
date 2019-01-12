@@ -11,8 +11,8 @@ import org.embergraph.service.ndx.IAsynchronousWriteBufferFactory;
 import org.embergraph.service.ndx.pipeline.AbstractMasterTask;
 import org.embergraph.service.ndx.pipeline.AbstractSubtask;
 
-/**
- * Configuration for the asynchronous index write API.
+/*
+* Configuration for the asynchronous index write API.
  *
  * @see IAsynchronousWriteBufferFactory
  * @see AbstractMasterTask
@@ -25,7 +25,7 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
   /** */
   private static final long serialVersionUID = -5142532074728169578L;
 
-  /**
+  /*
    * The capacity of the queue on which the application writes. Chunks are drained from this queue
    * by the {@link AbstractTaskMaster}, broken into splits, and each split is written onto the
    * {@link AbstractSubtask} sink handling writes for the associated index partition.
@@ -51,7 +51,7 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
 
   private int masterChunkSize;
 
-  /**
+  /*
    * The time in nanoseconds that the master will combine smaller chunks so that it can satisfy the
    * desired <i>masterChunkSize</i>.
    */
@@ -65,7 +65,7 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
 
   private long masterChunkTimeoutNanos;
 
-  /**
+  /*
    * The time in nanoseconds after which an idle sink will be closed. Any buffered writes are
    * flushed when the sink is closed. The idle timeout is reset (a) if a chunk is available to be
    * drained by the sink; or (b) if a chunk is drained from the sink. If no chunks become available
@@ -89,7 +89,7 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
 
   private long sinkIdleTimeoutNanos;
 
-  /**
+  /*
    * The time in nanoseconds that the {@link AbstractSubtask sink} will wait inside of the {@link
    * IAsynchronousIterator} when it polls the iterator for a chunk. This value should be relatively
    * small so that the sink remains responsible rather than blocking inside of the {@link
@@ -116,7 +116,7 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
 
   private int sinkQueueCapacity;
 
-  /**
+  /*
    * The desired size of the chunks written that will be written by the {@link AbstractSubtask
    * sink}.
    */
@@ -130,7 +130,7 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
 
   private int sinkChunkSize;
 
-  /**
+  /*
    * The maximum amount of time in nanoseconds that a sink will combine smaller chunks so that it
    * can satisfy the desired <i>sinkChunkSize</i>.
    */
@@ -174,7 +174,7 @@ public class AsynchronousIndexWriteConfiguration implements Externalizable {
   /** <strong>De-serialization ctor</strong> */
   public AsynchronousIndexWriteConfiguration() {}
 
-  /**
+  /*
    * @param masterQueueCapacity The capacity of the queue on which the application writes. Chunks
    *     are drained from this queue by the {@link AbstractTaskMaster}, broken into splits, and each
    *     split is written onto the {@link AbstractSubtask} sink handling writes for the associated

@@ -23,7 +23,7 @@ import java.util.UUID;
 /** A listener for IPreparedQuery evaluate objects. */
 public interface IPreparedQueryListener {
 
-  /**
+  /*
    * Callback method from the query evaluation object (GraphQueryResult, TupleQueryResult,
    * BooleanQueryResult) notifying that the result object has been closed and the query has either
    * completed or been cancelled.

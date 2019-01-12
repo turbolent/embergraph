@@ -28,8 +28,8 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.Semaphore;
 import org.apache.log4j.Logger;
 
-/**
- * A fly weight helper class that runs tasks either sequentially or with limited parallelism against
+/*
+* A fly weight helper class that runs tasks either sequentially or with limited parallelism against
  * some thread pool. Deadlock can arise when limited parallelism is applied if there are
  * dependencies among the tasks. Limited parallelism is enforced using a counting {@link Semaphore}.
  * New tasks can start iff the latch is non-zero. The maximum parallelism is the minimum of the
@@ -53,13 +53,13 @@ public class LatchedExecutor implements Executor {
   /** The delegate executor. */
   private final Executor executor;
 
-  /**
+  /*
    * This is used to limit the concurrency with which tasks submitted to this class may execute on
    * the delegate {@link #executor}.
    */
   private final Semaphore semaphore;
 
-  /**
+  /*
    * A thread-safe blocking queue of pending tasks.
    *
    * @todo The capacity of this queue does not of necessity need to be unbounded.
@@ -91,8 +91,8 @@ public class LatchedExecutor implements Executor {
   public void execute(final Runnable r) {
     if (!queue.offer(
         new Runnable() {
-          /*
-           * Wrap the Runnable in a class that will start the next Runnable
+        /*
+       * Wrap the Runnable in a class that will start the next Runnable
            * from the queue when it completes.
            */
           @Override
@@ -113,7 +113,7 @@ public class LatchedExecutor implements Executor {
     }
   }
 
-  /**
+  /*
    * Schedule the next task if one is available (non-blocking).
    *
    * <p>Pre-condition: The caller has a permit.

@@ -17,8 +17,8 @@ package cutthecrap.utils.striterators;
 
 import java.util.Iterator;
 
-/**
- * Resolver
+/*
+* Resolver
  *
  * <p>Used with Resolverator by Striterator to resolve returned objects.
  *

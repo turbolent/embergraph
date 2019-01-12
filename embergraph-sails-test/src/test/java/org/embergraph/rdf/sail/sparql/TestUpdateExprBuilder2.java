@@ -49,8 +49,8 @@ import org.embergraph.rdf.sparql.ast.hints.QueryHintScope;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for embergraph specific extensions in {@link UpdateExprBuilder}.
+/*
+* Test suite for embergraph specific extensions in {@link UpdateExprBuilder}.
  *
  * @see https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=SPARQL_Update
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -67,7 +67,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
    * Embergraph specific extensions for named solution sets.
    */
 
-  /**
+  /*
    * INSERT INTO named solution set (embergraph extension).
    *
    * <pre>
@@ -165,7 +165,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * DELETE FROM named solution set (embergraph extension).
    *
    * <pre>
@@ -260,7 +260,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -289,7 +289,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -318,7 +318,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Example of a CREATE using a triples block to provision the named solution set.
    *
    * <pre>
@@ -383,15 +383,15 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
       final EmbergraphStatement[] params =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                (EmbergraphResource) hintQuery,
-                (EmbergraphURI) hintEngine,
-                (EmbergraphValue) cache,
+                hintQuery,
+                hintEngine,
+                cache,
                 null, // c
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                (EmbergraphResource) hintQuery,
-                (EmbergraphURI) hintExpireAge,
-                (EmbergraphValue) millis,
+                hintQuery,
+                hintExpireAge,
+                millis,
                 null, // c
                 StatementEnum.Explicit),
           };
@@ -404,7 +404,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -432,7 +432,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -462,7 +462,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -489,7 +489,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -516,7 +516,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -544,7 +544,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -574,7 +574,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -601,7 +601,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>

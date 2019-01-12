@@ -40,8 +40,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.testutil.ExperimentDriver;
 import org.embergraph.util.Bytes;
 
-/**
- * A benchmark that computes the raw platform write rate for pure sequential IO, the journal's write
+/*
+* A benchmark that computes the raw platform write rate for pure sequential IO, the journal's write
  * rate, and both unisolated and isolated index write rates. The overhead of the journal can be
  * estimated by comparing the pure sequential writes on the file system with the write rates when
  * using each of the journal modes. Likewise, the overhead of the index can be estimated in
@@ -116,7 +116,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     return properties;
   }
 
-  /**
+  /*
    * The tests are performed with a record size of 4k, but you can vary the "record size" to be
    * larger or smaller. 4k was choosen as being representative of the expected size of a node or
    * leaf of a btree since that is the primary kind of object that we write on the journal.
@@ -139,7 +139,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     return "benchmark-" + getBufferMode() + "-" + getName() + ".jnl";
   }
 
-  /**
+  /*
    * The branching factor used by the unisolated btree on the journal and by the isolated btree iff
    * a transaction is used to isolated the write set.
    *
@@ -212,7 +212,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     doRawRecordWriteRateTest(getRecordSize());
   }
 
-  /**
+  /*
    * Test the index write rate using an index that does NOT support transactional isolation using 32
    * bit integer keys and 128 byte values for the index entries.
    */
@@ -241,7 +241,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     doIndexWriteRateTest(name, tx, 128);
   }
 
-  /**
+  /*
    * Test the index write rate using an index that supports transactional isolation but without
    * transactional isolation using 32 bit integer keys and 128 byte values for the index entries.
    */
@@ -272,7 +272,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     doIndexWriteRateTest(name, tx, 128);
   }
 
-  /**
+  /*
    * Test the index write rate for a fully isolated transaction using 32 bit integer keys and 128
    * byte values for the index entries.
    */
@@ -303,7 +303,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     doIndexWriteRateTest(name, tx, 128);
   }
 
-  /**
+  /*
    * Writes N records of the given size such that the journal will be filled to capacity using the
    * {@link IRawStore} interface (unisolated raw writes not using an index).
    *
@@ -359,7 +359,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     return elapsed;
   }
 
-  /**
+  /*
    * Writes N records of the given size such that the journal will be filled to "near" capacity
    * using either an isolated or unisolated {@link BTree} to absorb the writes. The records are
    * written in key order, so this is the best cast for sequential key writes. The test ends before
@@ -479,7 +479,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     final long elapsed = System.currentTimeMillis() - begin;
 
     // The unisolated btree on which the data were actually written.
-    final BTree btree = (BTree) journal.getIndex(name);
+    final BTree btree = journal.getIndex(name);
 
     final long nodesWritten = btree.getBtreeCounters().getNodesWritten();
 
@@ -562,7 +562,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Does N writes of M size data blocks on a pre-extended file using pure sequential IO. Small
    * writes may be used to estimate the maximum throughput for large numbers of small writes. Large
    * writes may be used to estimate the absolute maximum throughput for your platform (OS + disk
@@ -577,7 +577,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
    */
   public abstract static class AbstractBenchmarkOptimium extends TestCase2 {
 
-    /**
+    /*
      * The file is named for the test class.
      *
      * <p>Note: contents are not actually a journal.
@@ -641,7 +641,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
       doOptimiumWriteRateTest(getRecordSize());
     }
 
-    /**
+    /*
      * @param recordSize
      * @throws IOException
      */
@@ -697,7 +697,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Writes the same amount of data, using <code>128</code> byte records on a pre-extended file
    * using pure sequential IO. This case should produce the optimium throughput to disk for small
    * IOs.
@@ -714,7 +714,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Writes the same amount of data using large blocks on a pre-extended file using pure sequential
    * IO. This case should produce the "best-case" optimium throughput to disk <i>for block-oriented
    * IO</i>. In order for the journal to approach this best case scenario, you need to be writing
@@ -737,7 +737,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Writes the same amount of data using a single nio "write buffer" operation on a pre-extended
    * file. The buffer is a direct buffer, so it is allocated in the OS memory. The write should be
    * pure sequential IO. This case should produce the "best-case" optimium throughput to disk <i>for
@@ -761,11 +761,11 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     /** The entire extent in one sustained write. */
     public int getRecordSize() {
 
-      return (int) getInitialExtent();
+      return getInitialExtent();
     }
   }
 
-  /**
+  /*
    * Runs the tests that have not been commented out :-)
    *
    * <p>Note: Running all benchmarks together can challange the VM by running low on heap, native
@@ -787,7 +787,7 @@ public abstract class BenchmarkJournalWriteRate extends TestCase2 {
     return suite;
   }
 
-  /**
+  /*
    * Main routine can be used for running the test under a performance analyzer.
    *
    * @param args Not used.

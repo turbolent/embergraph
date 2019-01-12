@@ -25,8 +25,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.openrdf.model.URI;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Generator for globally unique URIs.
+/*
+* Generator for globally unique URIs.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -38,7 +38,7 @@ public class IDGenerator implements IIDGenerator {
 
   private final AtomicInteger nextId = new AtomicInteger(0);
 
-  /**
+  /*
    * @param endpoint The SPARQL endpoint.
    * @param uuid The {@link UUID} for the {@link IObjectManager}. This is used to avoid collisions
    *     between different {@link IObjectManager}s.

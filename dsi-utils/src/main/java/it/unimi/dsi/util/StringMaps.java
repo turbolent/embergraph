@@ -27,8 +27,8 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectLists;
 import java.io.Serializable;
 
-/**
- * A class providing static methods and objects that do useful things with {@linkplain StringMap
+/*
+* A class providing static methods and objects that do useful things with {@linkplain StringMap
  * string maps} and {@linkplain PrefixMap prefix maps}.
  *
  * @see StringMap
@@ -130,7 +130,7 @@ public class StringMaps {
     }
   }
 
-  /**
+  /*
    * Returns a synchronized string map backed by the given string map.
    *
    * @param stringMap the string map to be wrapped in a synchronized map.
@@ -142,7 +142,7 @@ public class StringMaps {
         : new SynchronizedStringMap<T>(stringMap);
   }
 
-  /**
+  /*
    * Returns a synchronized prefix map backed by the given prefix map.
    *
    * @param prefixMap the prefix map to be wrapped in a synchronized map.

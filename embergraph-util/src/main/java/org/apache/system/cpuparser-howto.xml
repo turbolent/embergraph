@@ -53,8 +53,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import org.apache.excalibur.util.CPUParser;
 
-/**
- * Parses the Windows XP environment
+/*
+* Parses the Windows XP environment
  *
  * @author <a href="mailto:bloritsch@apache.org">Berin Loritsch</a>
  * @version CVS $Revision$ $Date$
@@ -64,7 +64,7 @@ public final class WindowsXP implements CPUParser
     private final int m_processors;
     private final String m_cpuInfo;
 
-    /**
+    /*
      * Create this instance of CPUParser and gather information from
      * the Windows XP system.
      */
@@ -95,7 +95,7 @@ public final class WindowsXP implements CPUParser
         m_cpuInfo = info;
     }
 
-    /**
+    /*
      * Return the number of processors available on the machine
      */
     public int numProcessors()
@@ -103,7 +103,7 @@ public final class WindowsXP implements CPUParser
         return m_processors;
     }
 
-    /**
+    /*
      * Return the cpu info for the processors (assuming symetric multiprocessing
      * which means that all CPUs are identical).  The format is:
      *

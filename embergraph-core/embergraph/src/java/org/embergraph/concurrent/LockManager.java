@@ -33,8 +33,8 @@ import org.embergraph.cache.ConcurrentWeakValueCache;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 
-/**
- * This class coordinates a schedule among concurrent operations requiring exclusive access to
+/*
+* This class coordinates a schedule among concurrent operations requiring exclusive access to
  * shared resources. Whenever possible, the result is a concurrent schedule - that is, operations
  * having non-overlapping lock requirements run concurrently while operations that have lock
  * contentions are queued behind operations that currently have locks on the relevant resources. A
@@ -69,7 +69,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
   /** True iff the {@link #log} level is DEBUG or less. */
   protected final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Each resource that can be locked has an associated {@link ResourceQueue}.
    *
    * <p>Note: This is a concurrent collection since new resources may be added while concurrent
@@ -85,14 +85,14 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
   /** The set of locks held by each transaction. */
   private final ConcurrentHashMap<Thread, Collection<ResourceQueue<R, Thread>>> lockedResources;
 
-  /**
+  /*
    * True iff locks MUST be predeclared by the operation - this is a special case of 2PL (two-phrase
    * locking) that allows significant optimizations and avoids the possibility of deadlock
    * altogether.
    */
   private final boolean predeclareLocks;
 
-  /**
+  /*
    * When true, the resources in a lock request are sorted before the lock requests are made to the
    * various resource queues. This option is ONLY turned off for testing purposes as it ALWAYS
    * reduces the chance of deadlocks and eliminates it entirely when locks are also predeclared.
@@ -185,7 +185,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
 
   private CounterSet root;
 
-  /**
+  /*
    * The #of tasks that start execution (enter {@link LockManagerTask#call()}). This counter is
    * incremented BEFORE the task attempts to acquire its resource lock(s).
    */
@@ -197,14 +197,14 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
   /** The #of tasks that had an error condition. */
   final AtomicLong nerror = new AtomicLong(0);
 
-  /**
+  /*
    * The #of tasks that deadlocked when they attempted to acquire their locks. Note that a task MAY
    * retry lock acquisition and this counter will be incremented each time it does so and then
    * deadlocks.
    */
   final AtomicLong ndeadlock = new AtomicLong(0);
 
-  /**
+  /*
    * The #of tasks that timed out when they attempted to acquire their locks. Note that a task MAY
    * retry lock acquisition and this counter will be incremented each time it does so and then times
    * out.
@@ -220,7 +220,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
   /** The maximum observed value of {@link #nrunning}. */
   final AtomicLong maxrunning = new AtomicLong(0);
 
-  /**
+  /*
    * Create a lock manager for resources and concurrent operations.
    *
    * <p>Note that there is no concurrency limit imposed by the {@link LockManager} when
@@ -236,7 +236,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     this(maxConcurrency, predeclareLocks, true /* sortLockRequests */);
   }
 
-  /**
+  /*
    * Create a lock manager for resources and concurrent operations.
    *
    * <p>Note that there is no concurrency limit imposed by the {@link LockManager} when
@@ -313,7 +313,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Add if absent and return a {@link ResourceQueue} for the named resource.
    *
    * @param resource The resource.
@@ -340,7 +340,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     return resourceQueue;
   }
 
-  /**
+  /*
    * Drop a resource.
    *
    * <p>The caller must have lock on the resource. All tasks blocked waiting for that resource will
@@ -374,7 +374,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Lock resource(s).
    *
    * <p>Note: If you can not obtain the required lock(s) then you MUST use {@link #releaseLocks()}
@@ -417,8 +417,8 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
 
       if (resources != null) {
 
-        /*
-         * The operation has already declared some locks. Since
+      /*
+       * The operation has already declared some locks. Since
          * [predeclareLocks] is true it is not permitted to grow the set
          * of declared locks, so we throw an exception.
          */
@@ -469,7 +469,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Obtain a lock on a resource.
    *
    * @param resource The resource to be locked.
@@ -500,7 +500,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     tmp.add(resourceQueue);
   }
 
-  /**
+  /*
    * Release all locks.
    *
    * @param waiting <code>false</code> iff the operation was <strong>known</strong> to be running.
@@ -557,8 +557,8 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
 
         if (!resourceQueues.containsKey(resource)) {
 
-          /*
-           * Note: This would indicate a failure of the mechanisms
+        /*
+       * Note: This would indicate a failure of the mechanisms
            * which keep the resource queues around while there are
            * tasks seeking or holding locks for those queues.
            */
@@ -611,7 +611,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     }
   }
 
-  /**
+  /*
    * Invoked when a task begins to run.
    *
    * @param task
@@ -650,7 +650,7 @@ public class LockManager</*T,*/ R extends Comparable<R>> {
     if (INFO) log.info("Ended: nended=" + nended);
   }
 
-  /**
+  /*
    * Invoke if a task aborted.
    *
    * @param task

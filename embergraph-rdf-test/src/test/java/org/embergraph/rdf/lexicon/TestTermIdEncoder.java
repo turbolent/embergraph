@@ -25,8 +25,8 @@ import java.util.Random;
 import junit.framework.TestCase2;
 import org.embergraph.btree.ICounter;
 
-/**
- * Unit test for unified encoding / decoding for partitioned and unpartitioned long counters as
+/*
+* Unit test for unified encoding / decoding for partitioned and unpartitioned long counters as
  * assigned by the {@link ICounter} for a TERM2ID index or index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -69,7 +69,7 @@ public class TestTermIdEncoder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit tests for correct rejection of encoding when the long counter value contains a partition
    * identifier which is negative or a local counter value which is negative or zero.
    */
@@ -117,7 +117,7 @@ public class TestTermIdEncoder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test of encode/decode when ZERO (0) of the low bits are reversed and placed into the high bits.
    * The encoding should be a NOP in this special case.
    */
@@ -132,7 +132,7 @@ public class TestTermIdEncoder extends TestCase2 {
     doEncodeDecodeTest(encoder, pid, ctr);
   }
 
-  /**
+  /*
    * Stress test using an encoder with NO bits reversed and rotated into the high bits of the long
    * value and random values for the partition identifier and the local counter.
    */
@@ -174,7 +174,7 @@ public class TestTermIdEncoder extends TestCase2 {
         new TermIdEncoder(1), Integer.MAX_VALUE /* pid */, Integer.MAX_VALUE /* ctr */);
   }
 
-  /**
+  /*
    * Unit test with {@link Integer#MIN_VALUE} for pid and 0L for the local counter (this combination
    * should not occur in practice since we increment the local counter before assigning the term
    * identifier rather than after).
@@ -204,7 +204,7 @@ public class TestTermIdEncoder extends TestCase2 {
     doEncodeDecodeTest(new TermIdEncoder(1), 0 /* pid */, Integer.MAX_VALUE /* ctr */);
   }
 
-  /**
+  /*
    * Unit test with {@link Integer#MIN_VALUE} for the pid and {@link Integer#MAX_VALUE} for the
    * local counter.
    */
@@ -214,7 +214,7 @@ public class TestTermIdEncoder extends TestCase2 {
         new TermIdEncoder(1), Integer.MIN_VALUE /* pid */, Integer.MAX_VALUE /* ctr */);
   }
 
-  /**
+  /*
    * Unit test with {@link Integer#MAX_VALUE} for the pid and {@link Integer#MIN_VALUE} for the
    * local counter.
    */
@@ -231,7 +231,7 @@ public class TestTermIdEncoder extends TestCase2 {
         new TermIdEncoder(1), Integer.MIN_VALUE /* pid */, Integer.MIN_VALUE /* ctr */);
   }
 
-  /**
+  /*
    * Stress test using an encoder with a random number of bits reversed and rotated into the high
    * bits of the long value and random values for the partition identifier and the local counter.
    */
@@ -263,7 +263,7 @@ public class TestTermIdEncoder extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Encode/decode test helper.
    *
    * @param encoder The encoder.
@@ -316,7 +316,7 @@ public class TestTermIdEncoder extends TestCase2 {
     fail(msg);
   }
 
-  /**
+  /*
    * Performance test.
    *
    * @param args

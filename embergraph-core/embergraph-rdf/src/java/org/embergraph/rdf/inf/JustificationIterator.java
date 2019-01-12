@@ -34,8 +34,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.util.Bytes;
 
-/**
- * Iterator visits {@link Justification}s reading from the justification index. The iterator
+/*
+* Iterator visits {@link Justification}s reading from the justification index. The iterator
  * optionally supports asynchronous read ahead.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -55,7 +55,7 @@ public class JustificationIterator implements IJustificationIterator {
   /** The actual capacity of the buffer (never zero). */
   private final int capacity;
 
-  /**
+  /*
    * The #of statements that have been read <strong>from the source</strong> and placed into the
    * buffer. All such statements will also have passed the optional {@link IElementFilter}.
    */
@@ -67,7 +67,7 @@ public class JustificationIterator implements IJustificationIterator {
   /** The #of chunks that have been read by the caller. */
   private int nchunks = 0;
 
-  /**
+  /*
    * A buffer holding {@link Justification}s that have not been visited. {@link Justification}s that
    * have been visited are taken from the buffer, making room for new statements which can be filled
    * in asynchronously by the {@link Reader}.
@@ -77,19 +77,19 @@ public class JustificationIterator implements IJustificationIterator {
   /** The source iterator reading on the selected justification index. */
   private ITupleIterator<?> src;
 
-  //    /**
-  //     * The executor service for the {@link Reader} (iff the {@link Reader} runs
+  //    /*
+//     * The executor service for the {@link Reader} (iff the {@link Reader} runs
   //     * asynchronously).
   //     */
   //    private final ExecutorService readService;
 
-  /**
+  /*
    * The future for the {@link Reader} and <code>null</code> if a synchronous read was performed
    * (fully buffered read in the caller's thread).
    */
   private final FutureTask<Object> ft;
 
-  /**
+  /*
    * Set to true iff an asynchronous {@link Reader} is used AND there is nothing more to be read.
    */
   private final AtomicBoolean readerDone = new AtomicBoolean(false);
@@ -97,14 +97,14 @@ public class JustificationIterator implements IJustificationIterator {
   /** The minimum desirable chunk size for {@link #nextChunk()}. */
   private static final int MIN_CHUNK_SIZE = 100;
 
-  //    /**
-  //     * If NO results show up within this timeout then {@link #nextChunk()} will
+  //    /*
+//     * If NO results show up within this timeout then {@link #nextChunk()} will
   //     * throw a {@link RuntimeException} to abort the reader - the probably cause
   //     * is a network outage.
   //     */
   //    static private final long TIMEOUT = Long.MAX_VALUE;
 
-  /**
+  /*
    * Create an iterator reading from the justifications index.
    *
    * @param capacity The maximum #of statements that will be buffered. When ZERO (0) the iterator
@@ -140,8 +140,8 @@ public class JustificationIterator implements IJustificationIterator {
 
       if (capacity > MAXIMUM_CAPACITY || rangeCount > MAXIMUM_CAPACITY) {
 
-        /*
-         * If the capacity would exceed the maximum then we limit
+      /*
+       * If the capacity would exceed the maximum then we limit
          * the capacity to the maximum.
          */
 
@@ -157,8 +157,8 @@ public class JustificationIterator implements IJustificationIterator {
 
       if (capacity > rangeCount) {
 
-        /*
-         * If the caller has over-estimated the actual range count for
+      /*
+       * If the caller has over-estimated the actual range count for
          * the index then reduce the capacity to the real range count.
          * This makes it safe for the caller to request a capacity of 1M
          * SPOs and only a "right-sized" buffer will be allocated.
@@ -169,8 +169,8 @@ public class JustificationIterator implements IJustificationIterator {
 
         capacity = (int) rangeCount;
 
-        /*
-         * Note: If the caller is making a best effort attempt to read
+      /*
+       * Note: If the caller is making a best effort attempt to read
          * everything into memory AND the data will fit within the
          * caller's specified capacity, then we disable asynchronous
          * reads so that they will get everything in one chunk.
@@ -226,7 +226,7 @@ public class JustificationIterator implements IJustificationIterator {
     }
   }
 
-  /**
+  /*
    * Reads from the statement index, filling the {@link #buffer}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -234,7 +234,7 @@ public class JustificationIterator implements IJustificationIterator {
    */
   private class Reader implements Callable<Object> {
 
-    /**
+    /*
      * Runs the {@link Reader}.
      *
      * @return <code>null</code>.
@@ -247,8 +247,8 @@ public class JustificationIterator implements IJustificationIterator {
 
         try {
 
-          /*
-           * Note: This will block if the buffer is at capacity.
+        /*
+       * Note: This will block if the buffer is at capacity.
            */
 
           buffer.put(t);
@@ -269,7 +269,7 @@ public class JustificationIterator implements IJustificationIterator {
     }
   }
 
-  /**
+  /*
    * (Re-)fills the buffer up to its capacity or the exhaustion of the source iterator.
    *
    * @return false if the buffer is still empty.
@@ -343,11 +343,8 @@ public class JustificationIterator implements IJustificationIterator {
         fillBuffer();
       }
 
-      if (buffer.isEmpty()) {
-
-        // the buffer is still empty, so the iterator is exhausted.
-        return false;
-      }
+      // the buffer is still empty, so the iterator is exhausted.
+      return !buffer.isEmpty();
     }
 
     // at least one Justification in the buffer.
@@ -377,7 +374,7 @@ public class JustificationIterator implements IJustificationIterator {
     return t;
   }
 
-  /**
+  /*
    * Returns a chunk whose size is the #of statements currently in the buffer.
    *
    * <p>Note: When asynchronous reads are used, the buffer will be transparently refilled and should
@@ -421,7 +418,7 @@ public class JustificationIterator implements IJustificationIterator {
     return stmts;
   }
 
-  /**
+  /*
    * Await some data from the {@link Reader}.
    *
    * <p>Note: If there is some data available this will continue to wait until at least {@link
@@ -453,8 +450,8 @@ public class JustificationIterator implements IJustificationIterator {
 
       try {
 
-        /*
-         * TODO This uses a Thread.sleep() to avoid a lock ordering
+      /*
+       * TODO This uses a Thread.sleep() to avoid a lock ordering
          * problem because we did not have access to the lock used
          * internally by the blocking queue when this code was written.
          * However, we now have incorporated at least one JSR166

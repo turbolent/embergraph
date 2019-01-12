@@ -24,15 +24,15 @@ package org.embergraph.rdf.sparql.ast.optimizers;
 import org.embergraph.rdf.sparql.ast.QueryNodeWithBindingSet;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Interface for AST rewrites.
+/*
+* Interface for AST rewrites.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IASTOptimizer {
 
-  /**
+  /*
    * Optimize the AST.
    *
    * @param context The evaluation context.

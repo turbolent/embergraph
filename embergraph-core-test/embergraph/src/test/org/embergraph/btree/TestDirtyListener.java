@@ -23,8 +23,8 @@ package org.embergraph.btree;
 
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Test suite for the {@link IDirtyListener} protocol.
+/*
+* Test suite for the {@link IDirtyListener} protocol.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public class TestDirtyListener extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test exercises the various ways in which {@link BTree#fireDirtyEvent()} should and should not
    * be triggered.
    *
@@ -224,7 +224,7 @@ public class TestDirtyListener extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Used to detect correct and incorrect {@link IDirtyListener#dirtyEvent(BTree)} events.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -232,7 +232,7 @@ public class TestDirtyListener extends AbstractBTreeTestCase {
    */
   private static class MyDirtyListener implements IDirtyListener {
 
-    /**
+    /*
      * Note: The flag is initially <code>false</code>. Even through a new BTree will always generate
      * this event, the listener is not registered until after the {@link BTree} has been created so
      * we never see that event.
@@ -242,7 +242,7 @@ public class TestDirtyListener extends AbstractBTreeTestCase {
     /** #of events received by this listener. */
     private int counter = 0;
 
-    /**
+    /*
      * Asserts the #of times the dirty event was sent to this listener.
      *
      * @param expected
@@ -252,7 +252,7 @@ public class TestDirtyListener extends AbstractBTreeTestCase {
       assertEquals("counter", expected, counter);
     }
 
-    /**
+    /*
      * Set the {@link #expected} flag.
      *
      * @param newValue
@@ -262,7 +262,7 @@ public class TestDirtyListener extends AbstractBTreeTestCase {
       this.expected = newValue;
     }
 
-    /**
+    /*
      * Throws an exception unless the event is expected.
      *
      * <p>Note: The {@link #expected} flag is cleared after each invocation.

@@ -27,8 +27,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Utility reads unsigned byte[] keys from stdin and writes their decoded ASCII values on stdout.
+/*
+* Utility reads unsigned byte[] keys from stdin and writes their decoded ASCII values on stdout.
  * This may be used to decode the keys for an index whose keys are encoded ASCII strings. It CAN NOT
  * be used to decode Unicode sort keys.
  *
@@ -40,7 +40,7 @@ public class ASCIIDecoderUtility {
   /** */
   public ASCIIDecoderUtility() {}
 
-  /**
+  /*
    * Reads decimal representations of unsigned bytes representing ASCII characters from stdin,
    * writing their ASCII values on stdout. The following characters are stripped from the input:
    * <code>[]</code>. The values may be delimited by commas or whitespace or both.

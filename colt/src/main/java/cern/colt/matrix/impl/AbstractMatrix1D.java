@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.matrix.impl;
 
-/**
- * Abstract base class for 1-d matrices (aka <i>vectors</i>) holding objects or primitive data types
+/*
+* Abstract base class for 1-d matrices (aka <i>vectors</i>) holding objects or primitive data types
  * such as <code>int</code>, <code>double</code>, etc. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
@@ -29,7 +29,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
   /** the number of indexes between any two elements, i.e. <tt>index(i+1) - index(i)</tt>. */
   protected int stride;
 
-  /**
+  /*
    * Indicates non-flipped state (flip==1) or flipped state (flip==-1). see _setFlip() for further
    * info.
    */
@@ -41,7 +41,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
   // this.isNoView implies: offset==0, stride==1
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected AbstractMatrix1D() {}
-  /**
+  /*
    * Returns the position of the given absolute rank within the (virtual or non-virtual) internal
    * 1-dimensional array. Default implementation. Override, if necessary.
    *
@@ -51,7 +51,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
   protected int _offset(int absRank) {
     return absRank;
   }
-  /**
+  /*
    * Returns the absolute rank of the given relative rank.
    *
    * @param rank the relative rank of the element.
@@ -62,7 +62,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
     // return zero + ((rank+flipMask)^flipMask);
     // return zero + rank*flip; // slower
   }
-  /**
+  /*
    * Sanity check for operations requiring an index to be within bounds.
    *
    * @throws IndexOutOfBoundsException if <tt>index < 0 || index >= size()</tt>.
@@ -72,7 +72,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
       throw new IndexOutOfBoundsException(
           "Attempted to access " + toStringShort() + " at index=" + index);
   }
-  /**
+  /*
    * Checks whether indexes are legal and throws an exception, if necessary.
    *
    * @throws IndexOutOfBoundsException if <tt>! (0 <= indexes[i] < size())</tt> for any
@@ -84,7 +84,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
       if (index < 0 || index >= size) checkIndex(index);
     }
   }
-  /**
+  /*
    * Checks whether the receiver contains the given range and throws an exception, if necessary.
    *
    * @throws IndexOutOfBoundsException if <tt>index<0 || index+width>size()</tt>.
@@ -94,7 +94,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
       throw new IndexOutOfBoundsException(
           "index: " + index + ", width: " + width + ", size=" + size);
   }
-  /**
+  /*
    * Sanity check for operations requiring two matrices with the same size.
    *
    * @throws IllegalArgumentException if <tt>size() != B.size()</tt>.
@@ -104,7 +104,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
       throw new IllegalArgumentException(
           "Incompatible sizes: " + toStringShort() + " and " + B.length);
   }
-  /**
+  /*
    * Sanity check for operations requiring two matrices with the same size.
    *
    * @throws IllegalArgumentException if <tt>size() != B.size()</tt>.
@@ -114,7 +114,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
       throw new IllegalArgumentException(
           "Incompatible sizes: " + toStringShort() + " and " + B.toStringShort());
   }
-  /**
+  /*
    * Returns the position of the element with the given relative rank within the (virtual or
    * non-virtual) internal 1-dimensional array. You may want to override this method for
    * performance.
@@ -124,7 +124,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
   protected int index(int rank) {
     return _offset(_rank(rank));
   }
-  /**
+  /*
    * Sets up a matrix with a given number of cells.
    *
    * @param size the number of cells the matrix shall have.
@@ -133,7 +133,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
   protected void setUp(int size) {
     setUp(size, 0, 1);
   }
-  /**
+  /*
    * Sets up a matrix with the given parameters.
    *
    * @param size the number of elements the matrix shall have.
@@ -154,7 +154,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
   public int size() {
     return size;
   }
-  /**
+  /*
    * Returns the stride of the given dimension (axis, rank).
    *
    * @dimension the index of the dimension.
@@ -171,7 +171,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
   public String toStringShort() {
     return AbstractFormatter.shape(this);
   }
-  /**
+  /*
    * Self modifying version of viewFlip(). What used to be index <tt>0</tt> is now index
    * <tt>size()-1</tt>, ..., what used to be index <tt>size()-1</tt> is now index <tt>0</tt>.
    */
@@ -183,7 +183,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
     }
     return this;
   }
-  /**
+  /*
    * Self modifying version of viewPart().
    *
    * @throws IndexOutOfBoundsException if <tt>index<0 || index+width>size()</tt>.
@@ -195,7 +195,7 @@ public abstract class AbstractMatrix1D extends AbstractMatrix {
     this.isNoView = false;
     return this;
   }
-  /**
+  /*
    * Self modifying version of viewStrides().
    *
    * @throws IndexOutOfBoundsException if <tt>stride <= 0</tt>.

@@ -57,8 +57,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTSparql11SubqueryOptimizer}.
+/*
+* Test suite for {@link ASTSparql11SubqueryOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -73,7 +73,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -257,7 +257,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Unit test verifies that a sub-select involving an aggregation is lifted into a named subquery.
    * This typically provides more efficient evaluation than repeated as-bound evaluation of the
    * sub-select. It also prevents inappropriate sharing of the internal state of the {@link
@@ -328,7 +328,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
                 new FunctionNode(
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE),
+                        AggregateBase.Annotations.DISTINCT, Boolean.TRUE),
                     new VarNode("s"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
@@ -399,7 +399,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
                 new FunctionNode(
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE),
+                        AggregateBase.Annotations.DISTINCT, Boolean.TRUE),
                     new VarNode("s"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
@@ -425,7 +425,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Unit test verifies that a sub-select is not lifted when there is no reason to lift that
    * sub-select.
    *
@@ -566,7 +566,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Unit test verifies that we lift out a {@link SubqueryRoot} which is marked by the {@link
    * SubqueryRoot.Annotations#RUN_ONCE} annotation. This uses the same query as the test above, but
    * the RUN_ONCE annotation is explicitly set on the {@link SubqueryRoot}.
@@ -710,7 +710,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Unit test verifies that we lift out a {@link SubqueryRoot} which does not share any variables
    * with the join group in which it appears. Since there is nothing that will be projected into the
    * sub-select, it needs to be lifted out (or run before the statement pattern join) or it will run

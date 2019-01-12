@@ -31,8 +31,8 @@ import junit.framework.TestCase2;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.io.SerializerUtil;
 
-/**
- * Abstract base class for {@link IRecordCompressor} test suites.
+/*
+* Abstract base class for {@link IRecordCompressor} test suites.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -51,7 +51,7 @@ public abstract class AbstractRecordCompressorTestCase extends TestCase2
     super(name);
   }
 
-  /**
+  /*
    * A bunch of words derived from a stopwords list that are used to generate random strings
    * comprised of a redundant set of terms. This approach was chosen in order to give the
    * compression algorithm some realistic data on which to work.
@@ -633,7 +633,7 @@ public abstract class AbstractRecordCompressorTestCase extends TestCase2
 
   final Random r = new Random();
 
-  /**
+  /*
    * Generate a record comprised of <i>n</i> random terms selected from {@link #words}. The terms
    * are concatenated with whitespace separators and then serialized as a byte[] which is returned
    * to the caller.
@@ -654,8 +654,8 @@ public abstract class AbstractRecordCompressorTestCase extends TestCase2
     return sb.toString().getBytes();
   }
 
-  //    /**
-  //     * Test helper applies the compression algorithm to the data and then
+  //    /*
+//     * Test helper applies the compression algorithm to the data and then
   //     * verifies that the expected data can be recovered by applying the
   //     * decompression algorithm.
   //     *
@@ -691,7 +691,7 @@ public abstract class AbstractRecordCompressorTestCase extends TestCase2
   //
   //    }
 
-  /**
+  /*
    * Test helper applies the compression algorithm to the data and then verifies that the expected
    * data can be recovered by applying the decompression algorithm.
    *

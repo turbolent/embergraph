@@ -35,8 +35,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Page rank assigns weights to the vertices in a graph based by on the relative "importance" as
+/*
+* Page rank assigns weights to the vertices in a graph based by on the relative "importance" as
  * determined by the patterns of directed links in the graph. The algorithm is given stated in terms
  * of a computation that is related until the delta in the computed values for the vertices is
  * within <i>epsilon</i> of ZERO. However, in practice convergence is based on <i>epsilon</i> is
@@ -90,7 +90,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
 
   public static class VS {
 
-    /**
+    /*
      * The current computed value for this vertex.
      *
      * <p>All vertices are initialized to the reset probability. They are then updated in each
@@ -104,7 +104,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     /** The last delta observed for this vertex. */
     private double lastChange = 0d;
 
-    /**
+    /*
      * The current computed value for this vertex.
      *
      * <p>All vertices are initialized to the reset probability. They are then updated in each
@@ -166,7 +166,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     return EdgesEnum.OutEdges;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Each vertex is initialized to the reset probability.
@@ -190,7 +190,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -213,7 +213,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     }
   }
 
-  /**
+  /*
    * SUM
    *
    * <p>{@inheritDoc}
@@ -225,7 +225,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     return left + right;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Compute the new value for this vertex, making a note of the last change for this vertex.
@@ -260,7 +260,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     return us;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns <code>true</code> iff the last change was greater then epsilon.
@@ -273,7 +273,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     return us.lastChange > epsilon;
   }
 
-  /**
+  /*
    * The remote vertex is scheduled for activation unless it has already been visited.
    *
    * <p>Note: We are scattering to out-edges. Therefore, this vertex is {@link
@@ -291,7 +291,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     sch.schedule(v);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Continue unless the iteration limit has been reached.
@@ -302,7 +302,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     return ctx.getGASState().round() < limit;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -336,7 +336,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     return tmp;
   }
 
-  /**
+  /*
    * Additional {@link IBindingExtractor.IBinder}s exposed by {@link PR}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -347,7 +347,7 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
     int RANK = 1;
   }
 
-  /**
+  /*
    * Class reports a map containing the page rank associated with each visited vertex.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -376,8 +376,8 @@ public class PR extends BaseGASProgram<PR.VS, PR.ES, Double> {
           return;
         }
 
-        /*
-         * Only report the larger ranked values.
+      /*
+       * Only report the larger ranked values.
          */
 
         if (log.isDebugEnabled()) log.debug("v=" + u + ", pageRank=" + pageRank);

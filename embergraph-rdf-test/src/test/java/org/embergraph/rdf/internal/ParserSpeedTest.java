@@ -25,8 +25,8 @@ import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-/**
- * Utility to measure the raw speed of the RDF parser.
+/*
+* Utility to measure the raw speed of the RDF parser.
  *
  * <p>Note: The RIO ntriples parser appears to do about 68k tps flat out on BSBM 200M.
  *
@@ -119,7 +119,7 @@ public class ParserSpeedTest {
     if (log.isInfoEnabled()) log.info("Finished parsing: " + f);
   }
 
-  /**
+  /*
    * Task parses a single file.
    *
    * @author thompsonbry
@@ -154,7 +154,7 @@ public class ParserSpeedTest {
 
       parseFile(file);
 
-      return (Void) null;
+      return null;
     }
 
     private void parseFile(final File file)
@@ -241,7 +241,7 @@ public class ParserSpeedTest {
     return ((long) (((double) nstmts.get()) / ((double) elapsed) * 1000d));
   }
 
-  /**
+  /*
    * Parse some data.
    *
    * @param args The file(s) or directory(s) containing the data to be parsed.

@@ -24,8 +24,8 @@ package org.embergraph.rdf.rules;
 
 import org.embergraph.relation.rule.IQueryOptions;
 
-/**
- * Unit tests for {@link IQueryOptions#isDistinct()}.
+/*
+* Unit tests for {@link IQueryOptions#isDistinct()}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public class TestDistinct extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * @todo write unit tests for "distinct".
    * @todo Unit test where there are no results.
    * @todo Unit test where duplicates are correctly dropped.

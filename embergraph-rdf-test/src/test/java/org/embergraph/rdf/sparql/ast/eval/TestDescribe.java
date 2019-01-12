@@ -38,8 +38,8 @@ import org.openrdf.model.Graph;
 import org.openrdf.model.Statement;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Data driven test suite for DESCRIBE queries, including the interaction with the optional DESCRIBE
+/*
+* Data driven test suite for DESCRIBE queries, including the interaction with the optional DESCRIBE
  * cache.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -58,7 +58,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Return the {@link IDescribeCache} iff it is enabled.
    *
    * @return The {@link IDescribeCache} iff enabled and otherwise <code>null</code>.
@@ -88,7 +88,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     return describeCache;
   }
 
-  /**
+  /*
    * Return the expected description of the resource based on the solutions declared for the unit
    * test.
    *
@@ -124,7 +124,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     return graph.isEmpty() ? null : graph;
   }
 
-  /**
+  /*
    * Assert that a resource is described by the cache.
    *
    * @param describedResource The resource
@@ -169,7 +169,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * A simple DESCRIBE query of a constant using the default {@link DescribeModeEnum}.
    *
    * <pre>
@@ -236,7 +236,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     assertNull(h.getASTContainer().getOptimizedAST().getProjection().getDescribeMode());
   }
 
-  /**
+  /*
    * A simple DESCRIBE query of a variable with a where clause.
    *
    * <pre>
@@ -292,7 +292,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * A simple DESCRIBE query of a constant plus a variable with a where clause.
    *
    * <pre>
@@ -349,7 +349,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * DESCRIBE a variable.
    *
    * <pre>
@@ -408,7 +408,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -463,7 +463,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * A simple DESCRIBE query of a constant, but in this test we also verify that the cache entry is
    * invalidated by an update involving that resource.
    *
@@ -551,7 +551,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * A simple DESCRIBE query of a constant using {@link DescribeModeEnum#SymmetricOneStep}.
    *
    * <pre>
@@ -623,7 +623,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         h.getASTContainer().getOptimizedAST().getProjection().getDescribeMode());
   }
 
-  /**
+  /*
    * A simple DESCRIBE query of a constant using {@link DescribeModeEnum#ForwardOneStep}.
    *
    * <pre>
@@ -694,7 +694,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         h.getASTContainer().getOptimizedAST().getProjection().getDescribeMode());
   }
 
-  /**
+  /*
    * This test is used to verify that we compute {@link DescribeModeEnum#CBD} correctly.
    *
    * <pre>
@@ -727,7 +727,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
         h.getASTContainer().getOptimizedAST().getProjection().getDescribeMode());
   }
 
-  /**
+  /*
    * This test is used to verify that we compute {@link DescribeModeEnum#SCBD} correctly.
    *
    * <pre>

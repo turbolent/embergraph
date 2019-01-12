@@ -23,8 +23,8 @@ package org.embergraph.util.httpd;
 
 import org.embergraph.util.NV;
 
-/**
- * A name-value pair.
+/*
+* A name-value pair.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -34,7 +34,7 @@ public class NVPair extends NV {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * @param name
    * @param value
    */

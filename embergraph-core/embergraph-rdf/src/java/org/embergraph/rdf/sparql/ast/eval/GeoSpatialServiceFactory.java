@@ -115,8 +115,8 @@ import org.embergraph.util.concurrent.LatchedExecutor;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-/**
- * A factory for a geospatial service, see {@link GeoSpatial#SEARCH}.
+/*
+* A factory for a geospatial service, see {@link GeoSpatial#SEARCH}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -184,7 +184,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
     validateSearch(searchVar, statementPatterns);
 
-    /**
+    /*
      * Get the service call configuration from annotations (attachable via query hints). Here's how
      * to define the hints: <code>
      * hint:Prior <http://www.embergraph.org/queryHints#maxParallel> "20" .
@@ -240,7 +240,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         createParams.getStats());
   }
 
-  /**
+  /*
    * Validate the search request. This looks for search magic predicates and returns them all. It is
    * an error if anything else is found in the group. All such search patterns are reported back by
    * this method, but the service can only be invoked for one a single search variable at a time.
@@ -272,13 +272,13 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         if (!p.isConstant()) throw new RuntimeException("Expecting geospatial predicate: " + sp);
 
-        final URI uri = (URI) ((ConstantNode) p).getValue();
+        final URI uri = (URI) p.getValue();
 
         if (!uri.stringValue().startsWith(GeoSpatial.NAMESPACE))
           throw new RuntimeException("Expecting search predicate: " + sp);
 
-        /*
-         * Some search predicate.
+      /*
+       * Some search predicate.
          */
 
         if (!ASTGeoSpatialSearchOptimizer.searchUris.contains(uri))
@@ -314,7 +314,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     return tmp;
   }
 
-  /**
+  /*
    * Validate the search. There must be exactly one {@link GeoSpatial#SEARCH} predicate. There
    * should not be duplicates of any of the search predicates for a given searchVar.
    */
@@ -374,7 +374,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
     final TermNode o = sp.o();
 
-    boolean isNotUri = !o.isConstant() || !(((ConstantNode) o).getValue() instanceof URI);
+    boolean isNotUri = !o.isConstant() || !(o.getValue() instanceof URI);
     boolean isNotVariable = !o.isVariable();
 
     if (isNotUri && isNotVariable) {
@@ -387,7 +387,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
     final TermNode o = sp.o();
 
-    boolean isNotLiteral = !o.isConstant() || !(((ConstantNode) o).getValue() instanceof Literal);
+    boolean isNotLiteral = !o.isConstant() || !(o.getValue() instanceof Literal);
     boolean isNotVariable = !o.isVariable();
 
     if (isNotLiteral && isNotVariable) {
@@ -405,7 +405,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Note: This has the {@link AbstractTripleStore} reference attached. This is not a {@link
    * Serializable} object. It MUST run on the query controller.
    */
@@ -426,7 +426,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
     private final BaseJoinStats stats;
 
-    /**
+    /*
      * The service used for executing subtasks (optional).
      *
      * @see #maxParallelChunks
@@ -504,7 +504,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       return serviceOptions;
     }
 
-    /**
+    /*
      * The search function itself, implementing a search request for a single query.
      *
      * @param query the geospatial search query
@@ -557,7 +557,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       return iVar == null ? null : Var.var(iVar.getName());
     }
 
-    /**
+    /*
      * A single serice call request, which may handle a list of {@link GeoSpatialQuery}s.
      *
      * @author msc
@@ -586,14 +586,14 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
       private final BaseJoinStats stats;
 
-      /**
+      /*
        * The list of tasks to execute. Execution of these tasks is carried out in parallel if an
        * executor with parallel execution configuration turned on is provided. Otherwise, the tasks
        * are processed one by one
        */
       private final List<GeoSpatialServiceCallSubRangeTask> tasks;
 
-      /**
+      /*
        * Constructor creating a {@link GeoSpatialServiceCallTask}. Expects a list of normalized
        * queries as input, see {@link IGeoSpatialQuery#isNormalized()}.
        */
@@ -638,7 +638,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         geoSpatialCounters.registerGeoSpatialServiceCallSubRangeTasks(tasks.size());
       }
 
-      /**
+      /*
        * Decomposes the context path into subtasks according to the configuration. Each subtasks is
        * a range scan backed by the buffer.
        */
@@ -753,7 +753,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         return subTasks;
       }
 
-      /**
+      /*
        * Sets up a subtask for the given configuration. The method may return null if it can be
        * statically shown that the subtask produces no result, i.e. if it is trivially not
        * satisfiable. It gets as input information about the outer range (i.e., the search rectangle
@@ -830,8 +830,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         filter.setObjectPos(objectPos); // position of the object in the index
 
-        /**
-         * If the context is provided, we would need a key order such as PCOS or CPOS, but
+      /*
+       * If the context is provided, we would need a key order such as PCOS or CPOS, but
          * unfortunately these key order are not available. As a "workaround", we do not pass in the
          * context into the predicate, but instead set an additional context check in the filter.
          *
@@ -947,20 +947,19 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         final TermNode p = query.getPredicate();
         final VarNode o = new VarNode(oVar);
 
-        /**
-         * We call kb.getPredicate(), which has the nice feature that it returns null if the
+      /*
+       * We call kb.getPredicate(), which has the nice feature that it returns null if the
          * predicate is unsatisfiable (i.e., if the predicate does not appear in the data). This
          * gives us an early exit point for the service (see null check below).
          */
         IPredicate<ISPO> pred =
-            (IPredicate<ISPO>)
-                kb.getPredicate(
-                    (URI) s.getValue(), /* subject */
-                    p == null ? null : (URI) p.getValue(), /* predicate */
-                    o.getValue(), /* object */
-                    null, /* context */
-                    null, /* filter */
-                    rangeBop); /* rangeBop */
+            kb.getPredicate(
+                (URI) s.getValue(), /* subject */
+                p == null ? null : (URI) p.getValue(), /* predicate */
+                o.getValue(), /* object */
+                null, /* context */
+                null, /* filter */
+                rangeBop); /* rangeBop */
 
         if (pred == null) {
           return null;
@@ -989,8 +988,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         // if there's no executor specified or only one subtask, we run the task in process
         if (executor == null || tasks.size() == 1) {
 
-          /*
-           * No Executor, so run each task in the caller's thread.
+        /*
+       * No Executor, so run each task in the caller's thread.
            */
 
           for (GeoSpatialServiceCallSubRangeTask task : tasks) {
@@ -1003,8 +1002,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
           return null;
         }
 
-        /*
-         * Build list of FutureTasks. This list is used to check all
+      /*
+       * Build list of FutureTasks. This list is used to check all
          * tasks for errors and ensure that any running tasks are
          * cancelled.
          */
@@ -1019,8 +1018,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         try {
 
-          /*
-           * Execute all tasks.
+        /*
+       * Execute all tasks.
            */
           for (FutureTask<Void> ft : futureTasks) {
 
@@ -1030,8 +1029,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
             executor.execute(ft);
           } // next task.
 
-          /*
-           * Wait for each task. If any task throws an exception, then
+        /*
+       * Wait for each task. If any task throws an exception, then
            * [halt] will become true and any running tasks will error
            * out quickly. Once [halt := true], we do not wait for any
            * more tasks, but proceed to cancel all tasks in the
@@ -1045,8 +1044,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         } finally {
 
-          /*
-           * Ensure that all tasks are cancelled, regardless of
+        /*
+       * Ensure that all tasks are cancelled, regardless of
            * whether they were started or have already finished.
            */
           for (FutureTask<Void> ft : futureTasks) {
@@ -1125,7 +1124,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
         }
       }
 
-      /**
+      /*
        * Builds a number of partitions over a given geospatial search range, effectively splitting
        * up the search range into fully covering smaller search ranges.
        */
@@ -1137,8 +1136,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
           this.geoSpatialSearchRange = geoSpatialSearchRange;
         }
 
-        /**
-         * Computes the partitions based on the configuration. For now, we always partition along
+      /*
+       * Computes the partitions based on the configuration. For now, we always partition along
          * the last dimension, e.g. for a ternary datatype such as LAT+LON+TIME we would partition
          * on TIME.
          *
@@ -1294,8 +1293,8 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
           return partitions;
         }
 
-        /**
-         * The number of partitions is calculated based on two parameters. First, there is a minumum
+      /*
+       * The number of partitions is calculated based on two parameters. First, there is a minumum
          * number of datapoints per task, which is considered a hard limit. This means, we generate
          * *at most* (totalPointsInRange/minDatapointsPerTask) tasks.
          *
@@ -1589,7 +1588,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Iterates a geospatial search over a set of input bindings. This is done incrementally, in a
    * binding by binding fashion.
    */
@@ -1618,7 +1617,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       init();
     }
 
-    /**
+    /*
      * Checks whether there are more results available.
      *
      * @return
@@ -1714,7 +1713,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Default values for geospatial service, such as unit definitions.
    *
    * @author msc
@@ -1783,7 +1782,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       this.objectPos = objectPos;
     }
 
-    /**
+    /*
      * Return the {@link GeoSpatialLiteralExtension} object associated with this filter.
      *
      * @return the object
@@ -1811,7 +1810,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       return isValid;
     }
 
-    /**
+    /*
      * Check if the context is valid. If no context constraint is imposed (which means, if
      * contextPos or context are null), then the method just returns true.
      */
@@ -1833,7 +1832,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     protected abstract boolean isValidInternal(final ITuple tuple);
   }
 
-  /**
+  /*
    * Filter asserting that a given point lies into a specified square, defined by its lower and
    * upper border, plus time frame.
    */
@@ -1921,7 +1920,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Dummy filter asserting that a point delivered by the advancer lies into a given rectangle.
    * Given the current advancer implementation, there's nothing to do for the filter, since the
    * advancer delivers exactly those points that are actually in this range.
@@ -1947,7 +1946,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Returns the statement patterns contained in the service node.
    *
    * @param serviceNode
@@ -1972,7 +1971,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
   @Override
   public Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode) {
 
-    /**
+    /*
      * This method extracts exactly those variables that are incoming, i.e. must be bound before
      * executing the execution of the service.
      */
@@ -2009,7 +2008,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
     return requiredBound;
   }
 
-  /**
+  /*
    * Wrapper class representing a geospatial service call configuration.
    *
    * @author msc
@@ -2210,7 +2209,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
       }
     }
 
-    /**
+    /*
      * Converts the configuration into a query over the given binding set
      *
      * @param bs

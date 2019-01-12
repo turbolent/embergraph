@@ -42,25 +42,25 @@ public class CompiledSolutionSetStats implements ISolutionSetStats, Serializable
   /** The set of variables which are bound in ALL solutions. */
   private final Set<IVariable<?>> alwaysBound;
 
-  /**
+  /*
    * The set of variables which are NOT bound in at least one solution (e.g., MAYBE bound
    * semantics).
    */
   private final Set<IVariable<?>> notAlwaysBound;
 
-  /**
+  /*
    * The set of variables whose bound value has its {@link IVCache} association set whenever the
    * variable is bound in a solution.
    */
   private final Set<IVariable<?>> materialized;
 
-  /**
+  /*
    * The set of variables which are effective constants (they are bound in every solution and always
    * to the same value) together with their constant bindings.
    */
   private final Map<IVariable<?>, IConstant<?>> constants;
 
-  /**
+  /*
    * Constructor exposes unmodifable versions of its arguments.
    *
    * @param nsolutions The #of solutions.

@@ -26,8 +26,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * An immutable coordinate expressed as degrees and decimal minutes with 3 digits after the decimal.
+/*
+* An immutable coordinate expressed as degrees and decimal minutes with 3 digits after the decimal.
  *
  * <pre>
  *        Degrees and Decimal Minutes
@@ -50,7 +50,7 @@ public class CoordinateDDM implements ICoordinate {
 
   public final int thousandthsOfMinutesEast;
 
-  /**
+  /*
    * @param degreesNorth Degrees north/south.
    * @param thousandthsOfMinutesNorth Decimal minutes north/south expressed as minutes * 1000.
    * @param degreesEast Degrees east/west.
@@ -86,7 +86,7 @@ public class CoordinateDDM implements ICoordinate {
     this.thousandthsOfMinutesEast = thousandthsOfMinutesEast;
   }
 
-  /**
+  /*
    * Representation of the coordinate in degrees and (thousandths of) decimal minutes. For example:
    *
    * <pre>
@@ -112,7 +112,7 @@ public class CoordinateDDM implements ICoordinate {
     return north + " " + east;
   }
 
-  /**
+  /*
    * Formats a value expressing tenths of a second. For example, <code>18385</code> is formatted as
    * <code>18.385</code>.
    *
@@ -127,7 +127,7 @@ public class CoordinateDDM implements ICoordinate {
     return minutes + "." + thousandths;
   }
 
-  /**
+  /*
    * Matches a latitude expressed with any of the formats for expressing degrees and decimal
    * minutes.
    *
@@ -150,7 +150,7 @@ public class CoordinateDDM implements ICoordinate {
           + // north/south
           ")";
 
-  /**
+  /*
    * Matches a longitude expressed with any of the formats for expressing degrees and decimal
    * minutes.
    *
@@ -173,7 +173,7 @@ public class CoordinateDDM implements ICoordinate {
           + // east/west
           ")";
 
-  /**
+  /*
    * Matches any of the formats for degrees and decimal minutes.
    *
    * <dl>
@@ -213,7 +213,7 @@ public class CoordinateDDM implements ICoordinate {
 
   static final int group_eastWest = 11;
 
-  /**
+  /*
    * Some formats that are accepted:
    *
    * <ul>
@@ -269,7 +269,7 @@ public class CoordinateDDM implements ICoordinate {
     return false;
   }
 
-  /**
+  /*
    * Equal if the coordinates are exactly the same (precision to thousandths of a minute).
    *
    * @param o Another coordinate expressed in decimal minutes.

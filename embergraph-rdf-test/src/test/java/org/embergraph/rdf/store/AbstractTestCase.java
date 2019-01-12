@@ -72,8 +72,8 @@ import org.openrdf.model.Value;
 import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-/**
- * Abstract harness for testing under a variety of configurations. In order to test a specific
+/*
+* Abstract harness for testing under a variety of configurations. In order to test a specific
  * configuration, create a concrete instance of this class. The configuration can be described using
  * a mixture of a <code>.properties</code> file of the same name as the test class and custom code.
  *
@@ -144,7 +144,7 @@ public abstract class AbstractTestCase extends TestCase2 {
 
   private Properties m_properties;
 
-  /**
+  /*
    * Returns properties read from a hierarchy of sources. The underlying properties read from those
    * sources are cached, but a new properties object is returned on each invocation (to prevent side
    * effects by the caller).
@@ -188,8 +188,8 @@ public abstract class AbstractTestCase extends TestCase2 {
        */
       if (m_properties.get(Options.FILE) == null) {
 
-        /*
-         * Use a temporary file for the test. Such files are always deleted when
+      /*
+       * Use a temporary file for the test. Such files are always deleted when
          * the journal is closed or the VM exits.
          */
 
@@ -202,7 +202,7 @@ public abstract class AbstractTestCase extends TestCase2 {
     return new Properties(m_properties);
   }
 
-  /**
+  /*
    * This method is invoked from methods that MUST be proxied to this class. {@link
    * GenericProxyTestCase} extends this class, as do the concrete classes that drive the test suite
    * for specific GOM integration test configuration. Many method on this class must be proxied from
@@ -296,8 +296,8 @@ public abstract class AbstractTestCase extends TestCase2 {
 
       } catch (AssertionFailedError ex) {
 
-        /*
-         * Only do the message construction once the assertion is known
+      /*
+       * Only do the message construction once the assertion is known
          * to fail.
          */
 
@@ -306,8 +306,8 @@ public abstract class AbstractTestCase extends TestCase2 {
     }
   }
 
-  //    /**
-  //     * Method verifies that the <i>actual</i> {@link Iterator} produces the
+  //    /*
+//     * Method verifies that the <i>actual</i> {@link Iterator} produces the
   //     * expected objects in the expected order. Objects are compared using
   //     * {@link Object#equals( Object other )}. Errors are reported if too few or
   //     * too many objects are produced, etc.
@@ -369,8 +369,8 @@ public abstract class AbstractTestCase extends TestCase2 {
 
       if (!expected[i].equals(g)) {
 
-        /*
-         * Only do message construction if we know that the assert will
+      /*
+       * Only do message construction if we know that the assert will
          * fail.
          */
         fail(
@@ -398,7 +398,7 @@ public abstract class AbstractTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that the iterator visits the expected {@link ISPO}s in any order without duplicates.
    *
    * @param store Used to resolve term identifiers for messages.
@@ -411,7 +411,7 @@ public abstract class AbstractTestCase extends TestCase2 {
     assertSameSPOsAnyOrder(store, expected, actual, false);
   }
 
-  /**
+  /*
    * Verify that the iterator visits the expected {@link ISPO}s in any order without duplicates,
    * optionally ignoring axioms.
    *
@@ -489,7 +489,7 @@ public abstract class AbstractTestCase extends TestCase2 {
     assertSameStatements("", expected, actual);
   }
 
-  /**
+  /*
    * @todo since there is no way to know the natural order for the statement iterator we can not
    *     sort expected into the same order. therefore this should test for the same statements in
    *     any order
@@ -510,8 +510,8 @@ public abstract class AbstractTestCase extends TestCase2 {
 
       if (!expected[i].equals(g)) {
 
-        /*
-         * Only do message construction if we know that the assert will
+      /*
+       * Only do message construction if we know that the assert will
          * fail.
          */
         fail(
@@ -539,7 +539,7 @@ public abstract class AbstractTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that TERM2ID and ID2TERM have the same range count and that all ID2TERM entries resolve
    * a TERM2ID entry and that each TERM2ID entry leads to an ID2TERM entry.
    *
@@ -594,8 +594,8 @@ public abstract class AbstractTestCase extends TestCase2 {
         }
 
         if (!BytesUtil.bytesEqual(ivAsKey, encodedIV)) {
-          /*
-           * The IV that we got back by round tripping back through
+        /*
+       * The IV that we got back by round tripping back through
            * the TERMS2ID index does not agree with the IV we obtained
            * from the iterator scanning the TERMS2ID index.
            */
@@ -641,8 +641,8 @@ public abstract class AbstractTestCase extends TestCase2 {
         final IV<?, ?> decodedIV = IVUtility.decodeFromOffset(encodedIV, 0 /* offset */);
 
         if (!iv.equals(decodedIV)) {
-          /*
-           * The IV that we got back by round tripping back through
+        /*
+       * The IV that we got back by round tripping back through
            * the TERMS2ID index does not agree with the IV we obtained
            * from the iterator scanning the ID2TERMS index.
            */
@@ -695,7 +695,7 @@ public abstract class AbstractTestCase extends TestCase2 {
     assertEquals(0, nerrs.get());
   }
 
-  /**
+  /*
    * Verify all statements reported by one access path are found on another access path.
    *
    * <p>Note: This is basically a JOIN. If there is an expected tuple that is not found then it is
@@ -739,14 +739,14 @@ public abstract class AbstractTestCase extends TestCase2 {
 
         if (nerrs.get() > 10) throw new RuntimeException("Too many errors");
 
-        /*
-         * This is a chunk of expected statements in the natural order
+      /*
+       * This is a chunk of expected statements in the natural order
          * for the "actual" access path.
          */
         final ISPO[] expectedChunk = itre.nextChunk(keyOrderActual);
 
-        /*
-         * Construct a batch contains test for those statements and
+      /*
+       * Construct a batch contains test for those statements and
          * submit it to the actual index. The aggregator will verify
          * that each expected statement exists in the actual index and
          * report an error for those that were not found.
@@ -786,8 +786,8 @@ public abstract class AbstractTestCase extends TestCase2 {
 
                   } else {
 
-                    /*
-                     * This happens when the statement is not in the
+                  /*
+       * This happens when the statement is not in the
                      * index AND there is no successor of the
                      * statement in the index.
                      */
@@ -826,7 +826,7 @@ public abstract class AbstractTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Helper class verifies that all statements identified by a re-parse of some RDF/XML file are
    * present in the KB.
    *
@@ -842,7 +842,7 @@ public abstract class AbstractTestCase extends TestCase2 {
 
     final IBuffer<Statement> buffer;
 
-    /**
+    /*
      * @param db The database.
      * @param capacity The buffer capacity (the maximum #of statements to be processed in a batch).
      * @param nerrs Used to track and report the #of errors as a side-effect.
@@ -875,7 +875,7 @@ public abstract class AbstractTestCase extends TestCase2 {
           };
     }
 
-    /**
+    /*
      * Report an error.
      *
      * @param msg The error message.
@@ -990,7 +990,7 @@ public abstract class AbstractTestCase extends TestCase2 {
 
           final EmbergraphValue actualTerm = reverseMap.get(iv);
 
-          if (actualTerm == null || !actualTerm.equals(expectedTerm)) {
+          if (!expectedTerm.equals(actualTerm)) {
 
             error(
                 "expectedTerm="
@@ -1022,7 +1022,7 @@ public abstract class AbstractTestCase extends TestCase2 {
 
           final EmbergraphURI p = (EmbergraphURI) db.asValue(termSet.get(stmt.getPredicate()));
 
-          final EmbergraphValue o = (EmbergraphValue) db.asValue(termSet.get(stmt.getObject()));
+          final EmbergraphValue o = db.asValue(termSet.get(stmt.getObject()));
 
           boolean ok = true;
           if (s == null) {
@@ -1080,7 +1080,7 @@ public abstract class AbstractTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself.
    *

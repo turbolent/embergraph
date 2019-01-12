@@ -28,8 +28,8 @@ import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Utility methods for working around some known issues.
+/*
+* Utility methods for working around some known issues.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public class InetAddressUtil {
   private static final Pattern ipv4 =
       Pattern.compile("^([0-9]+)\\.([0-9]+)\\.([0-9]+)\\.([0-9]+)$");
 
-  /**
+  /*
    * There is a bug with reverse DNS lookup in {@link InetAddress#getByName(String)} when presented
    * with a IP address rather than a host name. It will always attempt reverse DNS lookup of the IP
    * address. Therefore if reverse DNS is NOT setup correctly, a significant delay (4-5 seconds on
@@ -71,7 +71,7 @@ public class InetAddressUtil {
     return InetAddress.getByName(s);
   }
 
-  /**
+  /*
    * Converts an unsigned byte into a signed byte.
    *
    * @param v The unsigned byte.
@@ -93,7 +93,7 @@ public class InetAddressUtil {
     return (byte) (i & 0xff);
   }
 
-  /**
+  /*
    * Converts a signed byte into an unsigned byte.
    *
    * @param v The signed byte.

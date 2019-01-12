@@ -38,8 +38,8 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.IEventReceivingService;
 import org.embergraph.service.IService;
 
-/**
- * Servlet for exposing performance counters.
+/*
+* Servlet for exposing performance counters.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO The SPARQL layer needs to be separated from the core embergraph layer, with the
@@ -60,7 +60,7 @@ public class CountersServlet extends EmbergraphServlet {
   /** */
   public CountersServlet() {}
 
-  /**
+  /*
    * Performance counters
    *
    * <pre>
@@ -83,7 +83,7 @@ public class CountersServlet extends EmbergraphServlet {
         ((IEmbergraphFederation<?>) indexManager).reattachDynamicCounters();
       }
 
-      final CounterSet counterSet = ((ICounterSetAccess) indexManager).getCounters();
+      final CounterSet counterSet = indexManager.getCounters();
 
       final CounterSetSelector counterSelector = new CounterSetSelector(counterSet);
 

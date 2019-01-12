@@ -16,8 +16,8 @@ import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 import org.embergraph.rdf.vocab.TestMultiVocabulary;
 import org.embergraph.rdf.vocab.TestNamespaceMultiURIHandler;
 
-/**
- * Test case for multiple InlineURIHandlers at a single namespace.
+/*
+* Test case for multiple InlineURIHandlers at a single namespace.
  *
  * <pre>
  *
@@ -33,7 +33,7 @@ import org.embergraph.rdf.vocab.TestNamespaceMultiURIHandler;
  */
 public class TestMultiInlineURIHandlersSingleNamespace extends AbstractTripleStoreTestCase {
 
-  /**
+  /*
    * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
    * JOURNAL FILE.
    */

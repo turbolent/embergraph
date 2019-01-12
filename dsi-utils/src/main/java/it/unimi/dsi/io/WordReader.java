@@ -26,8 +26,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Serializable;
 
-/**
- * An interface providing methods to break the input from a reader into words.
+/*
+* An interface providing methods to break the input from a reader into words.
  *
  * <p>The intended implementations of this interface should decorate a given reader (see, for
  * instance, {@link it.unimi.dsi.io.FastBufferedReader}). The reader can be changed at any time
@@ -43,7 +43,7 @@ import java.io.Serializable;
  * subclass {@link it.unimi.dsi.io.FastBufferedReader} or provide their own implementation.
  */
 public interface WordReader extends Serializable {
-  /**
+  /*
    * Extracts the next word and non-word.
    *
    * <p>If this method returns true, a new non-empty word, and possibly a new non-word, have been
@@ -56,18 +56,18 @@ public interface WordReader extends Serializable {
    * @return true if a new word was processed, false otherwise (in which case both <code>word</code>
    *     and <code>nonWord</code> are unchanged).
    */
-  public abstract boolean next(MutableString word, MutableString nonWord) throws IOException;
+  boolean next(MutableString word, MutableString nonWord) throws IOException;
 
-  /**
+  /*
    * Resets the internal state of this word reader, which will start again reading from the given
    * reader.
    *
    * @param reader the new reader providing characters.
    * @return this word reader.
    */
-  public abstract WordReader setReader(Reader reader);
+  WordReader setReader(Reader reader);
 
-  /**
+  /*
    * Returns a copy of this word reader.
    *
    * <p>This method must return a word reader with a behaviour that matches exactly that of this
@@ -75,5 +75,5 @@ public interface WordReader extends Serializable {
    *
    * @return a copy of this word reader.
    */
-  public abstract WordReader copy();
+  WordReader copy();
 }

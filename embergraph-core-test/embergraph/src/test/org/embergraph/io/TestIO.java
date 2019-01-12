@@ -31,8 +31,8 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase2;
 
-/**
- * Low level IO performance tests in support of embergraph design options.
+/*
+* Low level IO performance tests in support of embergraph design options.
  *
  * @todo Develop test to compare efficiency of an ordered write to random writes of the same pages.
  *     Use a random sequence of pages. Selection without replacement is an option, but not required.
@@ -92,7 +92,7 @@ public class TestIO extends TestCase2 {
     fpf.setMaximumFractionDigits(2);
   }
 
-  /**
+  /*
    * Formatting useful for integers and floating point values that need to be rounded to integers.
    * If the value is in milliseconds, and you want to write it in seconds then first divide by 1000.
    * If the value is units per millisecond and you want to write units per second, then compute and
@@ -103,7 +103,7 @@ public class TestIO extends TestCase2 {
   /** Formatting useful for floating point values with at most two digits after the decimal. */
   final NumberFormat fpf;
 
-  /**
+  /*
    * Computes units/second given units and nanoseconds.
    *
    * @param units The units, e.g., the #of triples loaded.
@@ -172,7 +172,7 @@ public class TestIO extends TestCase2 {
   private static final int PetaByte = 1024 * 1024 * 1024 * 1024 * 1024;
   private static final int ExaByte = 1024 * 1024 * 1024 * 1024 * 1024 * 1024;
 
-  /**
+  /*
    * Test of raw IO performance for random writes.
    *
    * @throws IOException
@@ -273,8 +273,8 @@ public class TestIO extends TestCase2 {
         final long pos = r.nextInt(maxPages) * (long) pageSize;
         assert pos <= maxOffset;
 
-        /*
-         * Reset position so that the next write will transfer the
+      /*
+       * Reset position so that the next write will transfer the
          * entire buffer contents. If you don't do this then it will
          * only write the buffer the first time through since the
          * position defaults to zero and the limit defaults to the
@@ -342,7 +342,7 @@ public class TestIO extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Low level test of the ability to modify a file a sync it to the underlying storage media. This
    * test is interested in the absolute maximum syncs per second that the hardware can support.
    *

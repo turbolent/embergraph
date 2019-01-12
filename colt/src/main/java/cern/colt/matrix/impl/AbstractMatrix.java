@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.matrix.impl;
 
-/**
- * Abstract base class for arbitrary-dimensional matrices holding objects or primitive data types
+/*
+* Abstract base class for arbitrary-dimensional matrices holding objects or primitive data types
  * such as <code>int</code>, <code>float</code>, etc. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
@@ -24,7 +24,7 @@ public abstract class AbstractMatrix extends cern.colt.PersistentObject {
   // public static boolean debug = true;
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected AbstractMatrix() {}
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of non-zero (non-null) cells
    * without needing to allocate new internal memory. If necessary, allocates new internal memory
    * and increases the capacity of the receiver.
@@ -40,7 +40,7 @@ public abstract class AbstractMatrix extends cern.colt.PersistentObject {
   }
   /** Returns the number of cells. */
   public abstract int size();
-  /**
+  /*
    * Releases any superfluous internal memory. An application can use this operation to minimize the
    * storage of the receiver.
    *

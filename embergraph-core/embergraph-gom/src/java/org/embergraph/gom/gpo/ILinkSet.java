@@ -22,8 +22,8 @@ import java.util.Iterator;
 import java.util.Set;
 import org.openrdf.model.URI;
 
-/**
- * A collection of links into (edges in) or links out of (edges out) of an {@link IGPO}.
+/*
+* A collection of links into (edges in) or links out of (edges out) of an {@link IGPO}.
  *
  * <p>Note that the links out are only intended to be used to represent many-many associations.
  * Standard one-many associations should be represented by linksIn (many links pointing to one
@@ -35,7 +35,7 @@ import org.openrdf.model.URI;
  */
 public interface ILinkSet extends Set<IGPO> {
 
-  /**
+  /*
    * Returns <code>true</code> iff <i>o</i> is the same link set (same link property and same
    * container).
    *
@@ -47,13 +47,13 @@ public interface ILinkSet extends Set<IGPO> {
   /** The generic object that is being pointed at by the members of the link set. */
   IGPO getOwner();
 
-  /**
+  /*
    * The name of the property that the members of the link set use to point to the generic object
    * that is collecting this link set.
    */
   URI getLinkProperty();
 
-  /**
+  /*
    * <code>true</code> iff this link set models the links into the owner (edges in) and <code>false
    * </code> iff this link set models the links out of the owner (edges out).
    */
@@ -64,15 +64,15 @@ public interface ILinkSet extends Set<IGPO> {
 
   long sizeLong();
 
-  //    /**
-  //     * Returns an {@link Iterator} that visits the {@link IGPO} members of
+  //    /*
+//     * Returns an {@link Iterator} that visits the {@link IGPO} members of
   //     * the {@link ILinkSet}. The {@link Iterator} SHOULD support concurrent
   //     * modification of the link set membership. The {@link Iterator} SHOULD
   //     * support {@link Iterator#remove()}.
   //     */
   //    Iterator<T> iterator();
 
-  /**
+  /*
    * Returns an {@link Iterator} that will visit objects that are instances of the specificed class
    * or interface (the backing {@link IGPO} objects are wrapped by a suitable {@link IGenericSkin}).
    *
@@ -83,8 +83,8 @@ public interface ILinkSet extends Set<IGPO> {
 
   <C> Iterator<C> statements();
 
-  //    /**
-  //     * Adds the generic object to the link set by appending it to the end of the
+  //    /*
+//     * Adds the generic object to the link set by appending it to the end of the
   //     * link set. Does nothing if the generic object is already a member of the
   //     * link set. (If you need to move the generic object to the end of the link
   //     * set, you have to first remove it from the link set and then add it back
@@ -105,8 +105,8 @@ public interface ILinkSet extends Set<IGPO> {
   //     */
   //    boolean add(IGenericSkin g);
 
-  //    /**
-  //     * Removes the generic object from the link set.
+  //    /*
+//     * Removes the generic object from the link set.
   //     *
   //     * @return <code>true</code> iff the generic object was a member of the
   //     *         link set. <code>false</code> is returned if the generic object
@@ -115,8 +115,8 @@ public interface ILinkSet extends Set<IGPO> {
   //
   //    boolean remove( IGenericSkin g );
   //
-  //    /**
-  //     * Tests the generic object to determine whether or not it is a
+  //    /*
+//     * Tests the generic object to determine whether or not it is a
   //     * member of the link set (constant time operation).
   //     *
   //     * @return <code>true</code> iff the generic object is a member of
@@ -125,8 +125,8 @@ public interface ILinkSet extends Set<IGPO> {
   //
   //    boolean contains( IGenericSkin g );
 
-  //    /**
-  //     * Clears the link set, which has the effect of clearing the link
+  //    /*
+//     * Clears the link set, which has the effect of clearing the link
   //     * property on each generic object collected by the link set.  This
   //     * method does NOT cause the generic objects in the link set to be
   //     * removed from the store.

@@ -20,8 +20,8 @@ package org.embergraph.journal;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileLock;
 
-/**
- * Memory-mapped journal strategy (this mode is NOT recommended).
+/*
+* Memory-mapped journal strategy (this mode is NOT recommended).
  *
  * <p>Note: the use of {@link FileLock} with a memory-mapped file is NOT recommended by the JDK as
  * this combination is not permitted on some platforms.
@@ -46,7 +46,7 @@ import java.nio.channels.FileLock;
  */
 public class MappedBufferStrategy extends DiskBackedBufferStrategy {
 
-  /**
+  /*
    * A strongly typed reference to the buffer exposing memory-map specific operations.
    *
    * <p>Note: The buffer is mapped onto the user extent from the first byte after the root blocks
@@ -67,7 +67,7 @@ public class MappedBufferStrategy extends DiskBackedBufferStrategy {
     this.mappedBuffer = (MappedByteBuffer) fileMetadata.buffer;
   }
 
-  /**
+  /*
    * Force the data to disk.
    *
    * @see MappedByteBuffer#force()
@@ -80,7 +80,7 @@ public class MappedBufferStrategy extends DiskBackedBufferStrategy {
     super.force(metadata);
   }
 
-  /**
+  /*
    * The file channel is closed, but according to
    * http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4724038 there is no way to guarentee when
    * the mapped file will be released.
@@ -90,7 +90,7 @@ public class MappedBufferStrategy extends DiskBackedBufferStrategy {
     super.close();
   }
 
-  /**
+  /*
    * Overrides the default behavior so that an exception is NOT thrown if the file can not be
    * deleted. Since Java can not provide for synchronous unmap of memory-mapped files, we can not
    * delete the backing file immediately. Instead, we mark the file for "deleteOnExit" and let the
@@ -113,8 +113,8 @@ public class MappedBufferStrategy extends DiskBackedBufferStrategy {
       try {
         file.deleteOnExit();
       } catch (NullPointerException ex) {
-        /*
-         * Ignore NPE caused by a known Sun bug.
+      /*
+       * Ignore NPE caused by a known Sun bug.
          *
          * See http://bugs.sun.com/view_bug.do?bug_id=6526376
          */
@@ -122,7 +122,7 @@ public class MappedBufferStrategy extends DiskBackedBufferStrategy {
     }
   }
 
-  /**
+  /*
    * Note: Extension and truncation of a mapped file are not possible with the JDK since there is no
    * way to guarentee that the mapped file will be unmapped in a timely manner.
    *

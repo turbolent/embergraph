@@ -47,8 +47,8 @@ import org.embergraph.rdf.sparql.ast.eval.ASTDeferredIVResolution;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTDeferredIVResolution}.
+/*
+* Test suite for {@link ASTDeferredIVResolution}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestASTServiceNodeOptimizer.java 6080 2012-03-07 18:38:55Z thompsonbry $
@@ -63,7 +63,7 @@ public class TestASTBatchResolveTermsOptimizer extends AbstractASTEvaluationTest
     super(name);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -180,7 +180,7 @@ public class TestASTBatchResolveTermsOptimizer extends AbstractASTEvaluationTest
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * A variant of the test above where the Constant/2 constructor was used and we need to propagate
    * the variable associated with that constant.
    *

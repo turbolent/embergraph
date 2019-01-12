@@ -31,8 +31,8 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.Update;
 
-/**
- * Test suite for ticket #1518: tests for quad-mode SPARQL features with triplestore not supporting
+/*
+* Test suite for ticket #1518: tests for quad-mode SPARQL features with triplestore not supporting
  * quads
  */
 public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
@@ -73,7 +73,7 @@ public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       cxn.begin();
 
@@ -118,7 +118,7 @@ public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       cxn.begin();
 
@@ -163,7 +163,7 @@ public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       cxn.begin();
 
@@ -203,7 +203,7 @@ public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       cxn.begin();
 

@@ -38,7 +38,7 @@ public class OWLOntologySkin extends BasicSkin implements IGenericSkin {
     return (OWLOntologySkin) ((GPO) owl).getSkin(OWLOntologySkin.class);
   }
 
-  /**
+  /*
    * Returns a list of defined OWLClasses. The classes do not in fact have any reference to the
    * Ontology instance, but the skin supports the fiction.
    */

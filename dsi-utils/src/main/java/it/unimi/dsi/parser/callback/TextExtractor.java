@@ -27,8 +27,8 @@ import it.unimi.dsi.parser.BulletParser;
 import it.unimi.dsi.parser.Element;
 import java.util.Map;
 
-/**
- * A callback extracting text and titles.
+/*
+* A callback extracting text and titles.
  *
  * <p>This callbacks extracts all text in the page, and the title. The resulting text is available
  * through {@link #text}, and the title through {@link #title}.

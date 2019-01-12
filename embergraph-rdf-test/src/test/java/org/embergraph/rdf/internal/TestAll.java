@@ -24,8 +24,8 @@ import junit.framework.TestSuite;
 import org.embergraph.rdf.lexicon.TestTermIVComparator;
 import org.embergraph.rdf.store.TestLocalTripleStore;
 
-/**
- * Aggregates test suites into increasing dependency order.
+/*
+* Aggregates test suites into increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

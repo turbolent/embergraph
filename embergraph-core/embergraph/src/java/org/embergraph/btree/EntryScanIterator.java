@@ -22,8 +22,8 @@ package org.embergraph.btree;
 
 import cutthecrap.utils.striterators.ICloseableIterator;
 
-/**
- * Iterator visits index entries (dereferencing visited tuples to the application objects stored
+/*
+* Iterator visits index entries (dereferencing visited tuples to the application objects stored
  * within those tuples).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

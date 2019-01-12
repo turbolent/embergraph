@@ -25,8 +25,8 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Input stream which reports the #of bytes read from the underlying stream.
+/*
+* Input stream which reports the #of bytes read from the underlying stream.
  *
  * <p>Note: All <em>read</em> methods MUST be overridden if you subclass this filter as it overrides
  * them all for better performance.

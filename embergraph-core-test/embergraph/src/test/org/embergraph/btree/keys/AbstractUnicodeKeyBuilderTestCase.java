@@ -30,8 +30,8 @@ import junit.framework.TestCase2;
 import org.embergraph.btree.keys.KeyBuilder.Options;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Base class for the test suites that examine support for Unicode sort keys in {@link KeyBuilder}.
+/*
+* Base class for the test suites that examine support for Unicode sort keys in {@link KeyBuilder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public abstract class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Test ability to encode unicode data into a variable length byte[] that allows direct
    * byte-by-byte comparisons which maintain the local-specific sort order of the original strings.
    */
@@ -138,7 +138,7 @@ public abstract class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
     assertTrue(BytesUtil.compareBytes(key2, key3) > 0);
   }
 
-  /**
+  /*
    * Test verifies that the trailing <code>nul</code> byte is not part of the key when a unicode
    * string is appended to an {@link IKeyBuilder}.
    *
@@ -161,8 +161,8 @@ public abstract class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
    * Note: This test has been disabled.  The SparseRowStore no longer makes
    * this assumption in order to be compatible with the JDK collator.
    */
-  //    /**
-  //     * Test verifies that the <code>nul</code> byte is not part of the key when
+  //    /*
+//     * Test verifies that the <code>nul</code> byte is not part of the key when
   //     * a unicode string is appended to an {@link IKeyBuilder}.
   //     * <p>
   //     * Note: The {@link SparseRowStore} assumes that Unicode sort keys do not
@@ -198,7 +198,7 @@ public abstract class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
     assertNotSame(keyBuilder.normalizeText("abc"), keyBuilder.normalizeText("   abc      "));
   }
 
-  /**
+  /*
    * Test verifies that very long strings are truncated.
    *
    * @todo verify that trailing whitespace is removed after truncation rather than before
@@ -213,7 +213,7 @@ public abstract class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
     assertEquals(keyBuilder.normalizeText(text), keyBuilder.normalizeText(text + "abc"));
   }
 
-  /**
+  /*
    * Test verifies the order among unicode sort keys, including verifying that the pad byte causes a
    * prefix such as "bro" to sort before a term which extends that prefix, such as "brown".
    */
@@ -242,7 +242,7 @@ public abstract class AbstractUnicodeKeyBuilderTestCase extends TestCase2 {
     assertEquals("brown", a[3].obj);
   }
 
-  /**
+  /*
    * Test that lexiographic order is maintain when a variable length Unicode field is followed by
    * another field. This test works by comparing the original multi-field key with the multi-field
    * key formed from the successor of the Unicode field followed by the other field:

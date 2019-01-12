@@ -46,8 +46,8 @@ import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 import org.embergraph.service.IEmbergraphFederation;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Abstract base class for unit tests involving the RIO integration.
+/*
+* Abstract base class for unit tests involving the RIO integration.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -62,7 +62,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test loads an RDF/XML resource into a database and then verifies by re-parse that all expected
    * statements were made persistent in the database.
    *
@@ -93,7 +93,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Implementation must load the data. Generally, you create an {@link IStatementBufferFactory} and
    * then invoke {@link #doLoad(AbstractTripleStore, String, boolean, IStatementBufferFactory)}
    *
@@ -105,7 +105,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
   protected abstract void doLoad(AbstractTripleStore store, String resource, boolean parallel)
       throws Exception;
 
-  /**
+  /*
    * Load the classpath resource or file / directory.
    *
    * <p>Note: Normally we disable closure for this test, but that is not critical. If you compute
@@ -151,7 +151,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Returns a list containing either a single {@link LoadTask} for a classpath resource or a file
    * or a set of {@link LoadTask} for the files in a directory.
    *
@@ -240,7 +240,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Load a file from the classpath or the file system.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -272,7 +272,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
       return null;
     }
 
-    /**
+    /*
      * Load a resource from the classpath or the file system.
      *
      * @param resource A resource on the class path, a file, or a directory.
@@ -332,8 +332,8 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
           }
         }
 
-        /*
-         * Obtain a buffered reader on the input stream.
+      /*
+       * Obtain a buffered reader on the input stream.
          */
         final Reader reader = new BufferedReader(new InputStreamReader(rdfStream));
 
@@ -366,7 +366,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
                 }
               });
 
-          loader.loadRdf((Reader) reader, baseURI, rdfFormat, baseURI, options);
+          loader.loadRdf(reader, baseURI, rdfFormat, baseURI, options);
 
           if (log.isInfoEnabled()) log.info("Done: " + resource);
           //                    + " : tps="
@@ -401,7 +401,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Verify the KB contains all explicit statements read from the resource.
    *
    * @param store The KB.
@@ -445,7 +445,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Return a list of tasks which will verify the statements contained in the specified classpath
    * resource, file, or directory (recursive) against the KB.
    *
@@ -518,7 +518,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Verify that the contents of a classpath resource or a file were loaded into the KB.
    *
    * <p>What is actually verified is that all statements that are re-parsed are found in the KB,
@@ -555,7 +555,7 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
       return null;
     }
 
-    /**
+    /*
      * Verify that the explicit statements given by the resource are present in the KB.
      *
      * @throws FileNotFoundException
@@ -584,7 +584,6 @@ public abstract class AbstractRIOTestCase extends AbstractTripleStoreTestCase {
         InputStream is = null;
 
         final String baseURI;
-        ;
         if (getClass().getResource(resource) != null) {
 
           baseURI = getClass().getResource(resource).toURI().toString();

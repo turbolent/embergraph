@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-/**
- * Iterator disallows {@link #remove()}.
+/*
+* Iterator disallows {@link #remove()}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public class ReadOnlyEntryIterator<E> implements ITupleIterator<E> {
     return src.hasNext();
   }
 
-  /**
+  /*
    * Disallowed.
    *
    * @throws UnsupportedOperationException always

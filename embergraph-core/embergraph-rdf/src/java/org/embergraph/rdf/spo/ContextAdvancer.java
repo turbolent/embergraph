@@ -31,8 +31,8 @@ import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 
-/**
- * Advancer for a quads index whose last key component is the "context position (such as SPOC or
+/*
+* Advancer for a quads index whose last key component is the "context position (such as SPOC or
  * SOPC). The advancer will skip to first possible key for the next distinct triple for each quad
  * which it visits. This is a cheap way to impose a "DISTINCT" filter using an index scan and works
  * well for both local and scale-out indices.

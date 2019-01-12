@@ -57,8 +57,8 @@ import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * Unit tests of a remote access path.
+/*
+* Unit tests of a remote access path.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -191,7 +191,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
     super.tearDown();
   }
 
-  /**
+  /*
    * Create and populate relation in the {@link #namespace}.
    *
    * @throws IOException
@@ -240,7 +240,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single, empty {@link IBindingSet}.
    *
    * @param bindingSet the binding set.
@@ -258,13 +258,11 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {Var.var("name"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
-                  new NV(Annotations.REMOTE_ACCESS_PATH, true),
-                  // Note: turns off shard-wise parallelism!
-                  new NV(Annotations.FLAGS, IRangeQuery.DEFAULT),
-                }));
+                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
+                new NV(Annotations.REMOTE_ACCESS_PATH, true),
+                // Note: turns off shard-wise parallelism!
+                new NV(Annotations.FLAGS, IRangeQuery.DEFAULT)));
 
     final E[] expected =
         new E[] {
@@ -332,11 +330,9 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("John"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
-                  new NV(Annotations.REMOTE_ACCESS_PATH, true),
-                }));
+                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
+                new NV(Annotations.REMOTE_ACCESS_PATH, true)));
 
     final E[] expected =
         new E[] {
@@ -398,11 +394,9 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
-                  new NV(Annotations.REMOTE_ACCESS_PATH, true),
-                }));
+                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, tx),
+                new NV(Annotations.REMOTE_ACCESS_PATH, true)));
 
     final E[] expected =
         new E[] {
@@ -459,7 +453,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
     }
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single, chunk containing all of the
    * specified {@link IBindingSet}s.
    *
@@ -476,7 +470,7 @@ public class TestRemoteAccessPath extends AbstractEmbeddedFederationTestCase {
     public MockPipelineOp(final BOp[] args, final NV... anns) {
 
       super(args, NV.asMap(anns));
-    };
+    }
 
     private static final long serialVersionUID = 1L;
 

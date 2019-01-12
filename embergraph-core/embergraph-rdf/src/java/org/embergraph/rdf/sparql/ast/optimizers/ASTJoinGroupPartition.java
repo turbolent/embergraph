@@ -32,8 +32,8 @@ import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfo;
 import org.embergraph.rdf.sparql.ast.GroupNodeVarBindingInfoMap;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
-/**
- * Partition of a join group, defined by a (possibly empty) list of non-optional non-minus nodes,
+/*
+* Partition of a join group, defined by a (possibly empty) list of non-optional non-minus nodes,
  * possibly closed by a single optional or minus node. Each partition maintains a set of variables
  * that are definitely bound *after* evaluating the partition. Note that this list is equivalent to
  * the nodes definitely bound *after* evaluating the non-optional non-minus nodes in the partition
@@ -48,7 +48,7 @@ public class ASTJoinGroupPartition {
 
   final LinkedList<IGroupMemberNode> nonOptionalNonMinusNodes;
 
-  /**
+  /*
    * Variables that are bound externally, i.e. from prior parts of the query plan. Note that this
    * does not include variables that are bound by prior partitions (in case this partition is part
    * of an {@link ASTJoinGroupPartitions} object. Once initialized, this should never be changed.
@@ -58,13 +58,13 @@ public class ASTJoinGroupPartition {
   /** The optional of minus node marking the "border" (i.e., last node) of the partition. */
   IGroupMemberNode optionalOrMinus;
 
-  /**
+  /*
    * The variables that are definitely produced by this partition, i.e. can be assumed being bound
    * in subsequent partitions. This includes variables that are externally bound.
    */
   Set<IVariable<?>> definitelyProduced;
 
-  /**
+  /*
    * Constructs a new join group partition.
    *
    * @param nonOptionalOrMinusNodes
@@ -97,7 +97,7 @@ public class ASTJoinGroupPartition {
     return nodeList;
   }
 
-  /**
+  /*
    * Adds a (non-optional non-minus) node to a join group partition and updates the set of
    * definitely produced variables accordingly.
    */
@@ -111,7 +111,7 @@ public class ASTJoinGroupPartition {
     return definitelyProduced;
   }
 
-  /**
+  /*
    * The new ordered list of non-optional non-minus nodes. If recomputedDefinitelyProduced variables
    * is set to false, the definitely produced variables will not be recomputed (this is a
    * performance tweak which can be exploited when reordering the nodes only, for instance).
@@ -147,7 +147,7 @@ public class ASTJoinGroupPartition {
     recomputeDefinitelyProduced();
   }
 
-  /**
+  /*
    * Places the given node at the first position where, for the subsequent child, at least one of
    * the variables bound through the node is used. Also considers the fact that this node must not
    * be placed *before* its first possible position according to the binding requirements.
@@ -162,7 +162,7 @@ public class ASTJoinGroupPartition {
     final Integer firstPossiblePosition =
         getFirstPossiblePosition(node, additionalKnownBound, requiresAllBound);
 
-    /**
+    /*
      * Special case (which simplifies subsequent code, as it asserts that firstPossiblePosition
      * indeed exists; if not, we skip analysis).
      */
@@ -175,7 +175,7 @@ public class ASTJoinGroupPartition {
     final GroupNodeVarBindingInfo bindingInfo = bindingInfoMap.get(node);
     final Set<IVariable<?>> maybeProducedByNode = bindingInfo.getMaybeProduced();
 
-    /**
+    /*
      * If there is some overlap between the known bound variables and the maybe produced variables
      * by this node, than it might be good to place this node right at the beginning, as this
      * implies a join that could restrict the intermediate result set.
@@ -189,7 +189,7 @@ public class ASTJoinGroupPartition {
       return;
     }
 
-    /**
+    /*
      * If this is not the case, we watch out for the first construct using one of the variables that
      * may be produced by this node and place the node right in front of it. This is a heuristics,
      * of course, which may be refined based on experiences that we make over time.
@@ -206,8 +206,8 @@ public class ASTJoinGroupPartition {
       // if no more variables need to be bound, place the node
       if (!intersection.isEmpty()) {
 
-        /**
-         * If the first possible position differs from null and is larger than i, then place it
+      /*
+       * If the first possible position differs from null and is larger than i, then place it
          * there; if it is smaller than i, then i is where we place the node. So we're looking for
          * the maximum of both.
          */
@@ -220,7 +220,7 @@ public class ASTJoinGroupPartition {
     nonOptionalNonMinusNodes.addLast(node);
   }
 
-  /**
+  /*
    * Places the given node at the first possible position in the non-optional non-minus list of the
    * partition, where the first possible position is derived from the binding requirements of the
    * node.
@@ -236,7 +236,7 @@ public class ASTJoinGroupPartition {
     definitelyProduced.addAll(bindingInfoMap.get(node).getDefinitelyProduced());
   }
 
-  /**
+  /*
    * Places the node at the specified position in the list of non-optional non-minus nodes. If the
    * position is null, the node is added at the end (this is, right in front of the bordering
    * optional or minus node).
@@ -250,7 +250,7 @@ public class ASTJoinGroupPartition {
     }
   }
 
-  /**
+  /*
    * Computes for the given node, the first possible position in the partition according to its
    * binding requirements. The first possible position is either the first position where all
    * required variables of the node are known to be bound or where we know that none of its required
@@ -272,7 +272,7 @@ public class ASTJoinGroupPartition {
     /** The binding requirements for the given node */
     final GroupNodeVarBindingInfo bindingInfo = bindingInfoMap.get(node);
 
-    /**
+    /*
      * knownBound is the set of variables that are known to be bound at a certain point in time.
      * Initially, it contains the externallyBound variables plus additionalKnownBound variable which
      * can be passed in. Variables will be added as we iterate over the non-optional non-minus nodes
@@ -281,7 +281,7 @@ public class ASTJoinGroupPartition {
     final HashSet<IVariable<?>> knownBound = new HashSet<IVariable<?>>(externallyBound);
     knownBound.addAll(additionalKnownBound);
 
-    /**
+    /*
      * remainingPossiblyBound is a multi set (where the integer represents the cardinality)
      * initially counting, for each variable, how often it is maybe bound in the partition.
      * Variables counts will be decreased (and entries will be removed once we reach 0) as we
@@ -301,7 +301,7 @@ public class ASTJoinGroupPartition {
       }
     }
 
-    /**
+    /*
      * Now let's iterate over the non-optional and non-minus nodes and try to iterate the first
      * possible position for the node based on its binding requirements. We are allowed to place the
      * node at the first position for which we know that either all of the node's required variables
@@ -351,7 +351,7 @@ public class ASTJoinGroupPartition {
     return null;
   }
 
-  /**
+  /*
    * Internal helper function to check whether a node can be placed at a given position if the
    * passed parameter constellation is satisfied.
    */
@@ -380,9 +380,7 @@ public class ASTJoinGroupPartition {
           break;
         }
       }
-      if (!moreCanBeBound) {
-        return true;
-      }
+      return !moreCanBeBound;
     }
 
     return false;

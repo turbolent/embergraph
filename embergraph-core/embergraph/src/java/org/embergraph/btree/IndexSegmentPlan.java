@@ -20,8 +20,8 @@ package org.embergraph.btree;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.IndexMetadata.Options;
 
-/**
- * A plan for building a B+-Tree based on an input branching factor and #of entries.
+/*
+* A plan for building a B+-Tree based on an input branching factor and #of entries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -30,7 +30,7 @@ public class IndexSegmentPlan {
 
   protected static final transient Logger log = Logger.getLogger(IndexSegmentPlan.class);
 
-  /**
+  /*
    * A summary representation of the index build plan. The branching factor and the #of entries are
    * the inputs. The outputs include the height of the B+Tree that should be generated and the #of
    * nodes and leaves that will exist in that B+Tree.
@@ -54,7 +54,7 @@ public class IndexSegmentPlan {
   /** The branching factor of the output tree (input). */
   public final int m;
 
-  /**
+  /*
    * The minimum #of values that may be placed into non-root leaf (and also the minimum #of children
    * that may be placed into a non-root node). (the minimum capacity).
    */
@@ -63,7 +63,7 @@ public class IndexSegmentPlan {
   /** The #of entries in the btree (input). */
   public final long nentries;
 
-  /**
+  /*
    * The #of leaves that will exist in the output tree. When nleaves == 1 the output tree will
    * consist of a root leaf. In this case we do not open a temporary file for the nodes since there
    * will not be any.
@@ -76,20 +76,20 @@ public class IndexSegmentPlan {
   /** The height of the output tree (#of levels in the output tree). */
   public final int height;
 
-  /**
+  /*
    * The #of entries to place into each leaf. The array is dimensioned to {@link #nleaves}. This is
    * a convenience reference to the last array in {@link #numInNode}.
    */
   public final int[] numInLeaf;
 
-  /**
+  /*
    * The #of nodes at each level of the tree, including the level containing the leaves.
    *
    * @see #nleaves, which is the #of leaves in the output tree.
    */
   public final long[] numInLevel;
 
-  /**
+  /*
    * The #of children / values to place into each node in each level of the output tree. The first
    * index is the level in the tree, starting from level zero which is the root and increasing
    * through level [height+1], which is the level containing the leaves of the output tree.
@@ -98,7 +98,7 @@ public class IndexSegmentPlan {
    */
   public final int[][] numInNode;
 
-  /**
+  /*
    * Create a plan for building a B+-Tree. The plan has only these two inputs. Everything else about
    * the plan is deterministic based on those values.
    *
@@ -209,7 +209,7 @@ public class IndexSegmentPlan {
     this.nnodes = nnodes;
   }
 
-  /**
+  /*
    * Chooses the minimum height for a tree having a specified branching factor and a specified #of
    * leaves.
    *
@@ -234,12 +234,12 @@ public class IndexSegmentPlan {
        * useful feature lets us avoid having to deal with precision issues
        * or write our own integer version of pow (computing m*m h times).
        */
-      final double d = (double) Math.pow(m, h);
+      final double d = Math.pow(m, h);
 
       if (d >= nleaves) {
 
-        /*
-         * h is the smallest height tree of the specified branching
+      /*
+       * h is the smallest height tree of the specified branching
          * factor m capable of addressing the specified #of leaves.
          */
         return h;
@@ -255,7 +255,7 @@ public class IndexSegmentPlan {
             + nleaves);
   }
 
-  /**
+  /*
    * Distributes the keys among the leaves.
    *
    * <p>We want to fill up every leaf, but we have to make sure that the last leaf is not under
@@ -369,7 +369,7 @@ public class IndexSegmentPlan {
     return n;
   }
 
-  /**
+  /*
    * Distributes the children among the nodes of a given level.
    *
    * <p>Note: This is just an alias for {@link #distributeKeys(int, int, long, long)}. The only

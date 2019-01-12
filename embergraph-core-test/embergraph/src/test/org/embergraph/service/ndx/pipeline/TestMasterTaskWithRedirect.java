@@ -41,8 +41,8 @@ import org.embergraph.btree.keys.KVO;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
-/**
- * Test ability to handle a redirect (subtask learns that the target service no longer accepts data
+/*
+* Test ability to handle a redirect (subtask learns that the target service no longer accepts data
  * for some locator and instead must send the data somewhere else).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -56,7 +56,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Mock stale locator exception.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -72,7 +72,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies correct redirect of a write.
    *
    * @throws InterruptedException
@@ -178,7 +178,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies correct redirect of a write arising during awaitAll() in the master and
    * occurring after there has already been a write on the partition which is the target of the
    * redirect. This explores the ability of the master to correctly re-open a sink which had been
@@ -226,8 +226,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
             if (locator.locator == 14) {
 
-              /*
-               * Signal when L(14) is removed. That should happen in
+            /*
+       * Signal when L(14) is removed. That should happen in
                * master.awaitAll() when it closes the output buffers for
                * the existing sinks.
                */
@@ -247,8 +247,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
             if (locator.locator == 13) {
 
-              /*
-               * The L(13) sink will wait until it is signaled before
+            /*
+       * The L(13) sink will wait until it is signaled before
                * issuing an L(13) => L(14) redirect.
                */
 
@@ -369,7 +369,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
       assertNotNull(subtaskStats);
 
-      /**
+      /*
        * Stochastic CI error at the following line:
        *
        * <pre>
@@ -382,7 +382,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
     }
   }
 
-  /**
+  /*
    * Stress test for redirects.
    *
    * <p>Redirects are stored in a map whose key is effectively the first byte of the {@link KVO}
@@ -438,7 +438,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
     // used to halt the redirecter and the producer(s) when the test is done.
     final AtomicBoolean halt = new AtomicBoolean(false);
 
-    /**
+    /*
      * Writes on a master.
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -501,7 +501,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
       }
     }
 
-    /**
+    /*
      * Issues redirects at random intervals of one or more key ranges (based on the first byte) to
      * new locators. The target locators are choosen in a strict sequence.
      *
@@ -519,7 +519,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
       final Random r = new Random();
 
-      /**
+      /*
        * @param master
        * @param times The delay times between redirects. The delay until the next redirect is
        *     choosen randomly from among the specified times.
@@ -565,7 +565,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
         return null;
       }
 
-      /**
+      /*
        * Redirect one or more key ranges (based on the first byte of the key) to one or more new
        * locators. The locators are assigned in strict sequence.
        *
@@ -599,7 +599,7 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
         nextLocator.addAndGet(m);
       }
 
-      /**
+      /*
        * Assign each key range (based on the first byte) to a locator. The locators are choosen from
        * [0:n-1]. The {@link #nextLocator} is set as a post-condition to <i>n</i>.
        *
@@ -681,8 +681,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
       final long begin = System.nanoTime();
       while (true) {
 
-        /*
-         * verify no errors.
+      /*
+       * verify no errors.
          */
 
         // check master.
@@ -705,8 +705,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
           }
         }
 
-        /*
-         * Check termination conditions.
+      /*
+       * Check termination conditions.
          */
 
         final long elapsed = System.nanoTime() - begin;
@@ -730,8 +730,8 @@ public class TestMasterTaskWithRedirect extends AbstractMasterTestCase {
 
       if (!done) {
 
-        /*
-         * Something did not end normally. We will stop all the tasks and
+      /*
+       * Something did not end normally. We will stop all the tasks and
          * check their futures and something will throw an exception.
          */
 

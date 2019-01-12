@@ -26,8 +26,8 @@ import java.util.Random;
 import junit.framework.TestCase;
 import junit.framework.TestCase2;
 
-/**
- * Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
+/*
+* Base class for some <code>assertEquals</code> methods not covered by {@link TestCase} or {@link
  * TestCase2}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -47,7 +47,7 @@ public class TestCase3 extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Helper method verifies that the contents of <i>actual</i> from position() to limit() are
    * consistent with the expected byte[]. A read-only view of <i>actual</i> is used to avoid side
    * effects on the position, mark or limit properties of the buffer.
@@ -91,7 +91,7 @@ public class TestCase3 extends TestCase2 {
     assertEquals(expected, actual);
   }
 
-  /**
+  /*
    * Helper method verifies that the contents of <i>actual</i> from position() to limit() are
    * consistent with the expected byte[]. A read-only view of <i>actual</i> is used to avoid side
    * effects on the position, mark or limit properties of the buffer.
@@ -131,7 +131,7 @@ public class TestCase3 extends TestCase2 {
     assertEquals(expected, actual2);
   }
 
-  /**
+  /*
    * Fill the buffer with a random run length of random data starting at a random offset.
    *
    * @param b The buffer.

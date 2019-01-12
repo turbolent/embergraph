@@ -31,8 +31,8 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.io.IStreamSerializer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 
-/**
- * A helper object that provides the API of {@link IAsynchronousIterator} but whose methods throw
+/*
+* A helper object that provides the API of {@link IAsynchronousIterator} but whose methods throw
  * {@link IOException} and are therefore compatible with {@link Remote} and {@link Exporter}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +45,7 @@ public class RemoteAsynchronousIteratorImpl<E> implements RemoteAsynchronousIter
 
   private final IStreamSerializer<E> serializer;
 
-  /**
+  /*
    * Ctor variant does not support {@link #nextElement()}.
    *
    * @param itr The source iterator (local object).
@@ -55,7 +55,7 @@ public class RemoteAsynchronousIteratorImpl<E> implements RemoteAsynchronousIter
     this(itr, null /* serializer */);
   }
 
-  /**
+  /*
    * Ctor variant optionally supports {@link #nextElement()}.
    *
    * @param itr The source iterator (local object).
@@ -110,7 +110,7 @@ public class RemoteAsynchronousIteratorImpl<E> implements RemoteAsynchronousIter
     itr.remove();
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException if you did not specify an {@link IStreamSerializer} to
    *     the ctor.
    */
@@ -123,7 +123,7 @@ public class RemoteAsynchronousIteratorImpl<E> implements RemoteAsynchronousIter
     return new RemoteElementImpl<E>(e, serializer);
   }
 
-  /**
+  /*
    * {@link RemoteElement} impl.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

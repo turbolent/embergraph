@@ -41,8 +41,8 @@ import org.embergraph.sparse.GlobalRowStoreSchema;
 import org.embergraph.sparse.ITPS;
 import org.embergraph.sparse.SparseRowStore;
 
-/**
- * Test drives inserts on the GRS index partition until the data service is forced to go through an
+/*
+* Test drives inserts on the GRS index partition until the data service is forced to go through an
  * overflow such that an index build is performed for the GRS index (rather than copying the index
  * into the new live journal). We verify that we can scan the GRS index before and after the
  * asynchronous overflow event, and that we are in fact reading on a complex view (both a {@link
@@ -64,7 +64,7 @@ public class TestOverflowGRS extends AbstractEmbeddedFederationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Use a very low threshold for an index build.
    *
    * @see EmbeddedClient.Options#COPY_INDEX_THRESHOLD
@@ -97,7 +97,7 @@ public class TestOverflowGRS extends AbstractEmbeddedFederationTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Sets the forceOverflow flag and then registers a scale-out index. The test verifies that
    * overflow occurred and that the index is still available after the overflow operation.
    *

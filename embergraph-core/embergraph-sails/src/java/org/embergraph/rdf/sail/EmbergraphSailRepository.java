@@ -24,8 +24,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.sail.SailException;
 
-/**
- * Embergraph specific {@link SailRepository} implementation class.
+/*
+* Embergraph specific {@link SailRepository} implementation class.
  *
  * @see EmbergraphSailRepositoryConnection
  */
@@ -54,7 +54,7 @@ public class EmbergraphSailRepository extends SailRepository {
     return (EmbergraphSail) super.getSail();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The correct pattern for obtaining an updatable connection, doing work with that connection,
@@ -95,7 +95,7 @@ public class EmbergraphSailRepository extends SailRepository {
     }
   }
 
-  /**
+  /*
    * Obtain a read-only connection to the database at the last commit point. A read-only connection
    * should be used for all pure-readers, as the connection will not be blocked by concurrent
    * writers.
@@ -108,7 +108,7 @@ public class EmbergraphSailRepository extends SailRepository {
     return new EmbergraphSailRepositoryConnection(this, getSail().getReadOnlyConnection());
   }
 
-  /**
+  /*
    * Obtain a read-only connection to the database from a historical commit point. A read-only
    * connection should be used for all pure-readers, as the connection will not be blocked by
    * concurrent writers.
@@ -122,7 +122,7 @@ public class EmbergraphSailRepository extends SailRepository {
     return new EmbergraphSailRepositoryConnection(this, getSail().getReadOnlyConnection(timestamp));
   }
 
-  /**
+  /*
    * Return a connection backed by a read-write transaction.
    *
    * @throws InterruptedException
@@ -141,7 +141,7 @@ public class EmbergraphSailRepository extends SailRepository {
     }
   }
 
-  /**
+  /*
    * Return an unisolated connection to the database. Only one of these allowed at a time.
    *
    * <p>The correct pattern for obtaining an updatable connection, doing work with that connection,

@@ -28,8 +28,8 @@ import java.io.Serializable;
 import java.util.concurrent.Future;
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 
-/**
- * {@link Serializable} class wraps a {@link RemoteRunnableBuffer} delegating methods through to the
+/*
+* {@link Serializable} class wraps a {@link RemoteRunnableBuffer} delegating methods through to the
  * {@link IRunnableBuffer} on the remote service while masquerading {@link IOException}s so that we
  * can implement the {@link IRunnableBuffer} API.
  *

@@ -23,8 +23,8 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.internal.impl.literal.XSDNumericIV;
 
-/**
- * Simple InlineURIHandler that packs the localName portion of the URI into an appropriately sized
+/*
+* Simple InlineURIHandler that packs the localName portion of the URI into an appropriately sized
  * signed integer.
  */
 public class InlineSignedIntegerURIHandler extends InlineURIHandler {
@@ -40,7 +40,7 @@ public class InlineSignedIntegerURIHandler extends InlineURIHandler {
   @SuppressWarnings("rawtypes")
   protected AbstractLiteralIV createInlineIV(final String localName) {
 
-    /**
+    /*
      * {@link InlineLocalNameIntegerURIHandler#getPackedValueString()} can return a null if there's
      * a number format exception.
      *
@@ -60,7 +60,7 @@ public class InlineSignedIntegerURIHandler extends InlineURIHandler {
     return createInlineIV(value);
   }
 
-  /**
+  /*
    * Create the smallest AbstractLiteralIV that will fit the provided value. Public and static so it
    * can be easily used as a building block for other InlineURIHandlders.
    */
@@ -72,7 +72,7 @@ public class InlineSignedIntegerURIHandler extends InlineURIHandler {
     return createInlineIV(value.longValue());
   }
 
-  /**
+  /*
    * Create the smallest AbstractLiteralIV that will fit the provided value. Public and static so it
    * can be easily used as a building block for other InlineURIHandlders.
    */

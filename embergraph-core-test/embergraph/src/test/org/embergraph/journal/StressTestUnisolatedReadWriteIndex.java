@@ -42,8 +42,8 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.UnisolatedReadWriteIndex;
 import org.embergraph.testutil.ExperimentDriver.Result;
 
-/**
- * Stress tests for concurrent processing of operations on named unisolated indices where the
+/*
+* Stress tests for concurrent processing of operations on named unisolated indices where the
  * concurrency is managed by an {@link UnisolatedReadWriteIndex} rather than the {@link
  * ConcurrencyManager}.
  *
@@ -140,7 +140,7 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * A stress test of concurrent writers on one or more named indices.
    *
    * @param journal The database.
@@ -288,8 +288,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
         if (isInnerCause(ex, InterruptedException.class)
             || isInnerCause(ex, ClosedByInterruptException.class)) {
 
-          /*
-           * Note: Tasks will be interrupted if a timeout occurs when
+        /*
+       * Note: Tasks will be interrupted if a timeout occurs when
            * attempting to run the submitted tasks - this is normal.
            */
 
@@ -397,7 +397,7 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
       return getClass().getName() + "#" + trial;
     }
 
-    /**
+    /*
      * Executes random operation on a named unisolated index.
      *
      * @return null
@@ -414,8 +414,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
 
       try {
 
-        /*
-         * Get the index objects. This will create the ReadWriteLock if
+      /*
+       * Get the index objects. This will create the ReadWriteLock if
          * it does not exist, but it will not acquire either the
          * ReadLock or the WriteLock.
          */
@@ -428,8 +428,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
           indices[i] = new UnisolatedReadWriteIndex(btree);
         }
 
-        /*
-         * Random write operations on the named index(s).
+      /*
+       * Random write operations on the named index(s).
          */
         for (int i = 0; i < nops; i++) {
 
@@ -451,8 +451,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
 
             ndx.remove(key);
           }
-          /**
-           * FIXME Add a probability of a read-only operation, e.g., lookup() or
+        /*
+       * FIXME Add a probability of a read-only operation, e.g., lookup() or
            * rangeIterator(key,val). The latter can also do chunked resolution. This will provide
            * test coverage for the case where the close() of the iterator interrupts the producer.
            * This happens especially in the case where a range iterator is used and the iterator is
@@ -473,8 +473,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
 
         } else if (r.nextDouble() < commitRate) {
 
-          /*
-           * Checkpoint the indices.
+        /*
+       * Checkpoint the indices.
            *
            * Note: writeCheckpoint() will also acquire the writeLock.
            * Thus, it contends with the other operations on the
@@ -488,8 +488,8 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
             btree.writeCheckpoint();
           }
 
-          /*
-           * Note: This can not be safely done since we do not have
+        /*
+       * Note: This can not be safely done since we do not have
            * any protocol to either (a) ensure that the Thread is
            * executing in a WriteTask by the time we do
            * Thread.interrupt() for that thread; (b) ensure that the
@@ -520,7 +520,7 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
     }
   } // class WriteTask
 
-  /**
+  /*
    * Thrown by a {@link Writer} if it is selected for abort based on the {@link
    * TestOptions#FAILURE_RATE}.
    *
@@ -533,45 +533,45 @@ public class StressTestUnisolatedReadWriteIndex extends ProxyTestCase<Journal> {
   }
 
   /** Additional properties understood by this test. */
-  public static interface TestOptions extends ConcurrencyManager.Options {
+  public interface TestOptions extends ConcurrencyManager.Options {
 
     /** The timeout for the test (seconds). */
-    public static final String TIMEOUT = "timeout";
+    String TIMEOUT = "timeout";
 
-    /**
+    /*
      * The #of named resources from which {@link Writer}s may choosen the indices on which they will
      * write.
      */
-    public static final String NRESOURCES = "nresources";
+    String NRESOURCES = "nresources";
 
-    /**
+    /*
      * The minimum #of locks that a writer will obtain (0 or more, but a writer with zero locks will
      * not write on anything).
      */
-    public static final String MIN_LOCKS = "minLocks";
+    String MIN_LOCKS = "minLocks";
 
-    /**
+    /*
      * The maximum #of locks that a writer will obtain (LTE {@link #NRESOURCES}). A writer will
      * write on each resource that it locks.
      */
-    public static final String MAX_LOCKS = "maxLocks";
+    String MAX_LOCKS = "maxLocks";
 
     /** The #of trials (aka transactions) to run. */
-    public static final String NTRIALS = "ntrials";
+    String NTRIALS = "ntrials";
 
-    /**
+    /*
      * The length of the keys used in the test. This directly impacts the likelyhood of a
      * write-write conflict. Shorter keys mean more conflicts. However, note that conflicts are only
      * possible when there are at least two concurrent clients running.
      */
-    public static final String KEYLEN = "keyLen";
+    String KEYLEN = "keyLen";
 
     /** The #of operations in each trial. */
-    public static final String NOPS = "nops";
+    String NOPS = "nops";
 
-    /**
+    /*
      * The failure rate [0.0:1.0]. A {@link Writer} aborts by throwing a {@link SpuriousException}.
      */
-    public static final String FAILURE_RATE = "failureRate";
+    String FAILURE_RATE = "failureRate";
   }
 }

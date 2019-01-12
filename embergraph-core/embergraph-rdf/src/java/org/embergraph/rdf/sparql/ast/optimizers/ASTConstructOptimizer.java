@@ -39,8 +39,8 @@ import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Generates the {@link ProjectionNode} for a CONSTRUCT or DESCRIBE query. It is populated with each
+/*
+* Generates the {@link ProjectionNode} for a CONSTRUCT or DESCRIBE query. It is populated with each
  * variable which appears in the {@link ConstructNode}. The {@link ASTDescribeOptimizer} MUST be run
  * first for a DESCRIBE query.
  *
@@ -86,7 +86,7 @@ public class ASTConstructOptimizer implements IASTOptimizer {
     final ProjectionNode projection;
     if (queryRoot.getProjection() == null) {
 
-      /**
+      /*
        * Set a new projection on the query.
        *
        * <p>Note: This handles both a CONSTRUCT query and a DESCRIBE query when we are NOT
@@ -126,7 +126,7 @@ public class ASTConstructOptimizer implements IASTOptimizer {
 
     if (context.nativeDistinctSPO) {
 
-      /**
+      /*
        * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/579">CONSTRUCT should apply
        *     DISTINCT (s,p,o) filter </a>
        */
@@ -140,8 +140,8 @@ public class ASTConstructOptimizer implements IASTOptimizer {
 
       if (orderBy != null) {
 
-        /**
-         * Clear the ORDER BY clause if unless a SLICE is also given.
+      /*
+       * Clear the ORDER BY clause if unless a SLICE is also given.
          *
          * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/577" > DESCRIBE with
          *     OFFSET/LIMIT must use sub-SELECT </a>
@@ -151,7 +151,7 @@ public class ASTConstructOptimizer implements IASTOptimizer {
 
     } else if (slice != null) {
 
-      /**
+      /*
        * Push the WHERE clause into a sub-SELECT. The SLICE and the ORDER BY (if present) are moved
        * to the sub-SELECT. The sub-SELECT has the same projection as the top-level query.
        *

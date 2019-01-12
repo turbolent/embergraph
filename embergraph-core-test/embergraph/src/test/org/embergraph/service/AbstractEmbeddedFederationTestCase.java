@@ -41,8 +41,8 @@ import org.embergraph.search.FullTextIndex;
 import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 import org.embergraph.util.BytesUtil;
 
-/**
- * An abstract test harness that sets up (and tears down) the metadata and data services required
+/*
+* An abstract test harness that sets up (and tears down) the metadata and data services required
  * for a embergraph federation using in-process services rather than service discovery (which means
  * that there is no network IO).
  *
@@ -102,7 +102,7 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
 
   private File dataDir;
 
-  /**
+  /*
    * Data files are placed into a directory named by the test. If the directory exists, then it is
    * removed before the federation is set up.
    */
@@ -176,7 +176,7 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
     super.tearDown();
   }
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself.
    *
@@ -201,7 +201,7 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
 
   }
 
-  /**
+  /*
    * Verifies that two splits have the same data.
    *
    * @param expected
@@ -215,7 +215,7 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
     assertEquals("ntuples", expected.ntuples, actual.ntuples);
   }
 
-  /**
+  /*
    * Verify that a named index is registered on a specific {@link DataService} with the specified
    * indexUUID.
    *
@@ -233,7 +233,7 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
     assertEquals("indexUUID", indexUUID, metadata.getIndexUUID());
   }
 
-  /**
+  /*
    * Compares two byte[][]s for equality.
    *
    * @param expected
@@ -244,7 +244,7 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
     assertEquals(null, expected, actual);
   }
 
-  /**
+  /*
    * Compares two byte[][]s for equality.
    *
    * @param expected
@@ -280,7 +280,7 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
     }
   }
 
-  /**
+  /*
    * Waits until the asynchronous overflow counter has been incremented, indicating that overflow
    * processing has occurred and that post-processing for the overflow event is complete.
    *
@@ -351,7 +351,7 @@ public abstract class AbstractEmbeddedFederationTestCase extends AbstractBTreeTe
     return newOverflowCounter;
   }
 
-  /**
+  /*
    * Return the #of index partitions in a scale-out index.
    *
    * <p>Note: This uses an key range scan to count only the non-deleted index partition entries (the

@@ -29,8 +29,8 @@ import org.embergraph.ha.msg.IHA2PhaseCommitMessage;
 import org.embergraph.ha.msg.IHA2PhasePrepareMessage;
 import org.embergraph.journal.AbstractJournal;
 
-/**
- * A {@link Remote} interface supporting a 2-phase commit protocol for the members of a highly
+/*
+* A {@link Remote} interface supporting a 2-phase commit protocol for the members of a highly
  * available quorum.
  *
  * @see QuorumCommit
@@ -39,7 +39,7 @@ import org.embergraph.journal.AbstractJournal;
  */
 public interface HACommitGlue extends Remote {
 
-  /**
+  /*
    * Save a reference to the caller's root block, flush writes to the backing channel and
    * acknowledge "yes" if ready to commit. If the node can not prepare for any reason, then it must
    * return "no".
@@ -50,7 +50,7 @@ public interface HACommitGlue extends Remote {
    */
   Future<Boolean> prepare2Phase(IHA2PhasePrepareMessage prepareMessage) throws IOException;
 
-  /**
+  /*
    * Commit using the root block from the corresponding prepare message. It is an error if a commit
    * message is observed without the corresponding prepare message.
    *
@@ -58,7 +58,7 @@ public interface HACommitGlue extends Remote {
    */
   Future<Void> commit2Phase(IHA2PhaseCommitMessage commitMessage) throws IOException;
 
-  /**
+  /*
    * Discard the current write set using {@link AbstractJournal#abort()}, reloading all state from
    * the last root block, etc.
    *

@@ -33,8 +33,8 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for conformance with synchronous IO write requests made on a {@link RandomAccessFile}
+/*
+* Test suite for conformance with synchronous IO write requests made on a {@link RandomAccessFile}
  * opened using <code>rss</code> or <code>rdd</code> mode. A conforming platform will NOT reorder
  * writes and will a request to {@link FileChannel#force(boolean)} will flush data through to stable
  * media before the write operation returns. A write cache in the operating system, device driver,
@@ -70,7 +70,7 @@ public class TestRandomAccessFileSynchronousWrites extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test verifies whether or not the platform appears to perform synchronous IOs when creating a
    * {@link RandomAccessFile} with mode <code>rws</code>.
    */
@@ -84,7 +84,7 @@ public class TestRandomAccessFileSynchronousWrites extends TestCase {
     assertWriteCacheDisabled(rw, rws);
   }
 
-  /**
+  /*
    * Test verifies whether or not the platform appears to perform synchronous IOs when creating a
    * {@link RandomAccessFile} with mode <code>rws</code>.
    */
@@ -98,7 +98,7 @@ public class TestRandomAccessFileSynchronousWrites extends TestCase {
     assertWriteCacheDisabled(rw, rwd);
   }
 
-  /**
+  /*
    * Verify that the request to sync to disk with each IO (<code>rws</code> or <code>rwd</code>) was
    * honored by the underlying platform.
    *
@@ -129,7 +129,7 @@ public class TestRandomAccessFileSynchronousWrites extends TestCase {
     System.out.println(msg);
   }
 
-  /**
+  /*
    * Test helper attempts to detect when a request for synchronous writes is being ignored by the
    * platform.
    *

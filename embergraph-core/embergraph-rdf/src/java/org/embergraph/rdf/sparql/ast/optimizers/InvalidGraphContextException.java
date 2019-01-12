@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.optimizers;
 
-/**
- * An instance of this exception is thrown when a graph context is not well formed. For example, the
+/*
+* An instance of this exception is thrown when a graph context is not well formed. For example, the
  * following is illegal:
  *
  * <pre>
@@ -52,7 +52,7 @@ public class InvalidGraphContextException extends RuntimeException {
     super(cause);
   }
 
-  /**
+  /*
    * @param message
    * @param cause
    */

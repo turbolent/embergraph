@@ -13,8 +13,8 @@ import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 import org.embergraph.mdi.PartitionLocator;
 import org.embergraph.service.ndx.RawDataServiceTupleIterator;
 
-/**
- * An implementation that performs NO caching. All methods read through to the remote metadata
+/*
+* An implementation that performs NO caching. All methods read through to the remote metadata
  * index. Basically, this hides the RMI requests.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -40,7 +40,7 @@ public class NoCacheMetadataIndexView implements IMetadataIndex {
     return fed.getMetadataService();
   }
 
-  /**
+  /*
    * @param name The name of the scale-out index.
    * @param timestamp
    */
@@ -174,7 +174,7 @@ public class NoCacheMetadataIndexView implements IMetadataIndex {
     return rangeIterator(fromKey, toKey, 0 /* capacity */, IRangeQuery.DEFAULT, null /* filter */);
   }
 
-  /**
+  /*
    * Note: Since this view is read-only this method forces the use of {@link ITx#READ_COMMITTED} IFF
    * the timestamp for the view is {@link ITx#UNISOLATED}. This produces the same results on read
    * and reduces contention for the {@link WriteExecutorService}. This is already done automatically

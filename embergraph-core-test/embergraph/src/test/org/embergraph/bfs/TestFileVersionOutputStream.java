@@ -25,8 +25,8 @@ package org.embergraph.bfs;
 
 import java.io.IOException;
 
-/**
- * Tests some specifics of the {@link FileVersionOutputStream}. These behaviors are only observable
+/*
+* Tests some specifics of the {@link FileVersionOutputStream}. These behaviors are only observable
  * to callers that cast {@link EmbergraphFileSystem#outputStream(String, int)} to a {@link
  * FileVersionOutputStream}.
  *
@@ -43,7 +43,7 @@ public class TestFileVersionOutputStream extends AbstractRepositoryTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * A test of the flush semantics (writes a partial block, but never an empty block) and of the
    * counters exposed by the {@link FileVersionOutputStream}.
    *

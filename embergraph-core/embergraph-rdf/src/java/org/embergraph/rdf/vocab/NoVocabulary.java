@@ -22,8 +22,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.vocab;
 
-/**
- * An empty {@link Vocabulary}.
+/*
+* An empty {@link Vocabulary}.
  *
  * <p>Note: The use of this class is no longer recommended. It was used historically when the
  * lexicon should be empty (no pre-declared terms). However, the {@link Vocabulary} now provides a

@@ -10,8 +10,8 @@ import org.embergraph.bop.Constant;
 import org.embergraph.bop.IVariable;
 import org.embergraph.bop.NV;
 
-/**
- * A special kind of AST node that represents the SPARQL 1.1 zero length path operator.
+/*
+* A special kind of AST node that represents the SPARQL 1.1 zero length path operator.
  *
  * @deprecated Does not work - leads to cardinality problems and can be removed. Zero Length Paths
  *     are integrated into the ALP node / ArbitraryLengthPathOp now.
@@ -82,7 +82,7 @@ public class ZeroLengthPathNode extends GroupMemberNodeBase<ZeroLengthPathNode>
     return producedBindings;
   }
 
-  /**
+  /*
    * This handles the special case where we've wrapped a Var with a Constant because we know it's
    * bound, perhaps by the exogenous bindings. If we don't handle this case then we get the join
    * vars wrong.

@@ -21,21 +21,21 @@ import org.embergraph.bop.IVariable;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * An interface that may be used to extract variable bindings for the vertices visited by the
+/*
+* An interface that may be used to extract variable bindings for the vertices visited by the
  * algorithm.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IBinder<VS, ES, ST> {
 
-  /**
+  /*
    * The ordinal index of the variable that is bound by this {@link IBinder}. By convention, index
    * ZERO is the vertex. Indices greater than ZERO are typically aspects of the state of the vertex.
    */
   int getIndex();
 
-  /**
+  /*
    * New multi-binding strategy allows binders to bind multiple values to a given output variable
    * (multiplying the number of solutions by the number of bindings).
    *

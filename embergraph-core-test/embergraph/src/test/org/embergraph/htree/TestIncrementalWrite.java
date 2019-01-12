@@ -38,8 +38,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for the logic performing incremental writes of nodes and leaves onto the store. The
+/*
+* Test suite for the logic performing incremental writes of nodes and leaves onto the store. The
  * actual timing of evictions from the {@link HardReferenceQueue} is essentially unpredictable since
  * evictions are driven by {@link AbstractHTree#touch(AbstractNode)} and nodes and leaves are both
  * touched frequently and in a data and code path dependent manner.
@@ -111,7 +111,7 @@ public class TestIncrementalWrite extends AbstractHTreeTestCase {
     return btree;
   }
 
-  /**
+  /*
    * Custom hard reference queue.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -122,7 +122,7 @@ public class TestIncrementalWrite extends AbstractHTreeTestCase {
 
     abstract int getQueueScan();
 
-    /**
+    /*
      * @param store
      * @param checkpoint
      * @param metadata
@@ -172,15 +172,15 @@ public class TestIncrementalWrite extends AbstractHTreeTestCase {
       assertFalse(a.isPersistent());
       ((HardReferenceQueue<PO>) btree.writeRetentionQueue)
           .getListener()
-          .evicted(((HardReferenceQueue<PO>) btree.writeRetentionQueue), btree.getRoot());
+          .evicted(btree.writeRetentionQueue, btree.getRoot());
       assertTrue(a.isPersistent());
     } finally {
       store.destroy();
     }
   }
 
-  //    /**
-  //     * Test verifies that an incremental write of a leaf may be performed, that
+  //    /*
+//     * Test verifies that an incremental write of a leaf may be performed, that
   //     * identity is assigned to the written leaf, and that the childKey[] on the
   //     * parent node is updated to reflect the identity assigned to the leaf.
   //     */
@@ -291,8 +291,8 @@ public class TestIncrementalWrite extends AbstractHTreeTestCase {
   //    }
   //
   //
-  //    /**
-  //     * Test verifies that an incremental write of a node may be performed, that
+  //    /*
+//     * Test verifies that an incremental write of a node may be performed, that
   //     * identity is assigned to the written node, and that the childKey[] on the
   //     * node are updated to reflect the identity assigned to its children (the
   //     * dirty children are written out when the node is evicted so that the

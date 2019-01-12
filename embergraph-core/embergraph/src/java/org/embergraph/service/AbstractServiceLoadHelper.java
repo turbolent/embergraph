@@ -3,8 +3,8 @@ package org.embergraph.service;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Base class for abstract implementations with integration points for the {@link
+/*
+* Base class for abstract implementations with integration points for the {@link
  * LoadBalancerService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -22,7 +22,7 @@ public abstract class AbstractServiceLoadHelper implements IServiceLoadHelper {
     this.joinTimeout = joinTimeout;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the service is under-utilized.
    *
    * @param score The score for the service.
@@ -31,14 +31,14 @@ public abstract class AbstractServiceLoadHelper implements IServiceLoadHelper {
   protected abstract boolean isUnderUtilizedDataService(
       final ServiceScore score, final ServiceScore[] scores);
 
-  /**
+  /*
    * Return <code>true</code> iff the given serviceUUID identifies an active {@link IDataService}.
    *
    * @param serviceUUID The service UUID.
    */
   protected abstract boolean isActiveDataService(UUID serviceUUID);
 
-  /**
+  /*
    * Await the join of an {@link IDataService}.
    *
    * @param timeout The timeout.
@@ -46,7 +46,7 @@ public abstract class AbstractServiceLoadHelper implements IServiceLoadHelper {
    */
   protected abstract void awaitJoin(long timeout, TimeUnit unit) throws InterruptedException;
 
-  /**
+  /*
    * Return an array of service UUIDs for all of the active {@link IDataService}s that we know about
    * right now (snapshot).
    *

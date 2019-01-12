@@ -24,8 +24,8 @@ package org.embergraph.concurrent;
 import java.util.Properties;
 import org.embergraph.testutil.ExperimentDriver.Result;
 
-/**
- * Stress tests where a {@link TxDag} is used to detect deadlock.
+/*
+* Stress tests where a {@link TxDag} is used to detect deadlock.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ public class StressTestNonBlockingLockManagerWithTxDag
     super(name);
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource (low concurrency condition w/ 5
    * threads). There is no timeout. All tasks should run to completion. Since modestly large number
    * of resources (100) is used and since each task declares a single resource lock, the maximum
@@ -74,7 +74,7 @@ public class StressTestNonBlockingLockManagerWithTxDag
     assertEquals("maxrunning", nthreads, Integer.parseInt(result.get("maxrunning")));
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource using a thread pool with 20 core
    * threads. Since there is no timeout, all tasks should run to completion. The maximum observed
    * concurrency SHOULD be equal to the size of the thread pool.
@@ -106,7 +106,7 @@ public class StressTestNonBlockingLockManagerWithTxDag
     assertEquals("maxrunning", nthreads, Integer.parseInt(result.get("maxrunning")));
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource (high concurrency condition with 100
    * threads).
    */
@@ -144,7 +144,7 @@ public class StressTestNonBlockingLockManagerWithTxDag
         maxrunning >= nthreads / 2);
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource and there is only one resource to be
    * locked so that all operations MUST be serialized.
    */
@@ -175,7 +175,7 @@ public class StressTestNonBlockingLockManagerWithTxDag
     assertEquals("maxrunning", 1, Integer.parseInt(result.get("maxrunning")));
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource and there is only one resource to be
    * locked so that all operations MUST be serialized and where 10% of all tasks die a horrid death.
    */
@@ -235,7 +235,7 @@ public class StressTestNonBlockingLockManagerWithTxDag
     }
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource and there is only one resource to be
    * locked so that all operations MUST be serialized.
    */
@@ -267,7 +267,7 @@ public class StressTestNonBlockingLockManagerWithTxDag
     assertEquals("nsuccess", ntasks, Integer.parseInt(result.get("nsuccess")));
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource and there is only one resource to be
    * locked so that all operations MUST be serialized. The task timeout is non-zero, so long-running
    * tasks will be cancelled. This test stresses the logic in lock() that is responsible for backing
@@ -304,7 +304,7 @@ public class StressTestNonBlockingLockManagerWithTxDag
     assertTrue("No cancelled tasks?", ncancel > 0);
   }
 
-  /**
+  /*
    * Test where each operation locks one or more resources.
    *
    * <p>Note: This condition provides the basis for deadlocks.
@@ -337,7 +337,7 @@ public class StressTestNonBlockingLockManagerWithTxDag
     assertEquals("nsuccess", ntasks, Integer.parseInt(result.get("nsuccess")));
   }
 
-  /**
+  /*
    * Test where each operation locks one or more resources.
    *
    * <p>Note: This condition provides the basis for deadlocks. In fact, since we have 10 resource

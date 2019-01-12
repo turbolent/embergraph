@@ -24,8 +24,8 @@ package org.embergraph.rdf.internal;
 import java.util.List;
 import javax.xml.datatype.DatatypeConfigurationException;
 
-/**
- * Test of encode/decode and especially <em>comparator</em> semantics for mixed {@link IV}s.
+/*
+* Test of encode/decode and especially <em>comparator</em> semantics for mixed {@link IV}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

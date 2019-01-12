@@ -29,8 +29,8 @@ import org.embergraph.rdf.internal.InlinePrefixedSuffixedIntegerURIHandler;
 import org.embergraph.rdf.internal.InlineURIFactory;
 import org.embergraph.rdf.internal.InlineURIHandler;
 
-/**
- * {@link InlineURIFactory} for the {@link PubChemVocabularyDecl} to load the PubChem data from
+/*
+* {@link InlineURIFactory} for the {@link PubChemVocabularyDecl} to load the PubChem data from
  * {@link https://pubchem.ncbi.nlm.nih.gov/rdf/}.
  *
  * <p>Include by adding the line below to your namespace properties. It is intended to be used with

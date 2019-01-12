@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * The DELETE/INSERT operation can be used to remove or add triples from/to the Graph Store based on
+/*
+* The DELETE/INSERT operation can be used to remove or add triples from/to the Graph Store based on
  * bindings for a query pattern specified in a WHERE clause:
  *
  * <pre>
@@ -73,7 +73,7 @@ public class DeleteInsertGraph extends GraphUpdate implements IGraphPatternConta
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */
@@ -82,7 +82,7 @@ public class DeleteInsertGraph extends GraphUpdate implements IGraphPatternConta
     super(args, anns);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The data set can only be specified for the general case of DELETE/INSERT. The data set
@@ -101,7 +101,7 @@ public class DeleteInsertGraph extends GraphUpdate implements IGraphPatternConta
     return (DatasetNode) getProperty(Annotations.DATASET);
   }
 
-  /**
+  /*
    * Return the {@link GraphPatternGroup} for the WHERE clause.
    *
    * @return The WHERE clause -or- <code>null</code>.

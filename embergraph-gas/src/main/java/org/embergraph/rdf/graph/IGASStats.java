@@ -15,8 +15,8 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph;
 
-/**
- * Statistics for GAS algorithms.
+/*
+* Statistics for GAS algorithms.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

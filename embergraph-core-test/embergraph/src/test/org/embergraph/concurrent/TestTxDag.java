@@ -31,8 +31,8 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.embergraph.concurrent.TxDag.Edge;
 
-/**
- * Test suite for online transaction deadlock algorithm.
+/*
+* Test suite for online transaction deadlock algorithm.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -97,7 +97,7 @@ public class TestTxDag extends TestCase {
     new TxDag(2000);
   }
 
-  /**
+  /*
    * Test ability to generate unique transaction identifier used by {@link TxDag}to index into its
    * internal arrays. This test verifies that insert is conditional, that lookup fails if tx was not
    * registered, and that we can insert and then lookup a transaction in the DAG. The test also
@@ -148,7 +148,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test capacity limits. This test verifies that insert fails if capacity the graph (the maximum
    * #of vertices) would be exceeded.
    */
@@ -182,7 +182,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Simple tests of {@link TxDag#addEdge(Object, Object)}, {@link TxDag#hasEdge(Object, Object)}and
    * friends.
    */
@@ -238,7 +238,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test for correct rejection of addEdge() when either parameter is null or when both parameters
    * are the same.
    */
@@ -291,7 +291,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test for correct rejection of addEdge() when either parameter is null, when one of the targets
    * is null, or when one of the targets is given more than once.
    */
@@ -326,7 +326,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Verify that {@link TxDag#lookup(Object, boolean)} does not cause {@link TxDag#getOrder()} to
    * include the new vertex until an edge has been asserted for that vertex.
    *
@@ -382,7 +382,7 @@ public class TestTxDag extends TestCase {
     assertEquals("outbound(tx2)", 1, dag.outbound[tx2_id]);
   }
 
-  /**
+  /*
    * Verifies that <i>actual </i> contains all of the same values as <i>expected </i> in the same
    * order.
    *
@@ -397,7 +397,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Verifies that <i>actual </i> contains all of the same values as <i>expected </i> without regard
    * to order.
    *
@@ -422,7 +422,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Tests of the update to the internal matrix M[u,v]. This matrix maintains the #of distinct paths
    * from u to v based on the edges in the directed graph, W.
    *
@@ -494,7 +494,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * A sequence of tests of the internal state of the {@link TxDag} with a capacity of <code>4
    * </code> after adding an edge.
    */
@@ -676,7 +676,7 @@ public class TestTxDag extends TestCase {
         dag.getPathCountMatrix());
   }
 
-  /**
+  /*
    * Helper class represents the internal state of a {@link TxDag} instance and supports methods to
    * compare the saved state with another {@link TxDag} instance.
    *
@@ -691,7 +691,7 @@ public class TestTxDag extends TestCase {
     public final int[] inbound;
     public final int[] outbound;
     public final Object[] transactions;
-    /**
+    /*
      * Constructor clones the internal state of the {@link TxDag}.
      *
      * @param dag The graph.
@@ -699,9 +699,9 @@ public class TestTxDag extends TestCase {
     public State(final TxDag dag) {
       this.edges = dag.getEdges(false);
       this.M = dag.getPathCountMatrix();
-      this.inbound = (int[]) dag.inbound.clone();
-      this.outbound = (int[]) dag.outbound.clone();
-      this.transactions = (Object[]) dag.transactions.clone();
+      this.inbound = dag.inbound.clone();
+      this.outbound = dag.outbound.clone();
+      this.transactions = dag.transactions.clone();
     }
     /** Verify that <i>dag</i> has a state consistent with this historical state. */
     public void assertSameState(TxDag dag) {
@@ -716,7 +716,7 @@ public class TestTxDag extends TestCase {
     }
   } // class State.
 
-  /**
+  /*
    * Implements the performance test for {@link #testSymmetricOperations()}.
    *
    * <p>Performs random additive operations on the DAG until a deadlock results. The initial state
@@ -765,7 +765,7 @@ public class TestTxDag extends TestCase {
         this.src = null;
         this.tgt = null;
       }
-      /**
+      /*
        * Constructor used for INSERT_VERTEX action.
        *
        * @param action INSERT_VERTEX
@@ -779,7 +779,7 @@ public class TestTxDag extends TestCase {
         this.src = null;
         this.tgt = null;
       }
-      /**
+      /*
        * Constructor used for INSERT_EDGE action.
        *
        * @param action INSERT_EDGE
@@ -794,7 +794,7 @@ public class TestTxDag extends TestCase {
         this.src = src;
         this.tgt = tgt;
       }
-    };
+    }
     // Vector of states for the DAG together with the action which produced that state.
 
     /*
@@ -818,8 +818,8 @@ public class TestTxDag extends TestCase {
       // Random number used to choose the action to take.
       float rand = r.nextFloat();
       if ((size == capacity) || (dag.size() >= 2 && rand < pInsertEdge)) {
-        /*
-         * Insert edge. We always insert an edge if the DAG is at
+      /*
+       * Insert edge. We always insert an edge if the DAG is at
          * capacity (no more vertices may be declared). We never insert
          * an edge unless at least two vertices have been defined.
          *
@@ -842,8 +842,8 @@ public class TestTxDag extends TestCase {
           } while (tgt == src);
           // Add edge.
           try {
-            /*
-             * Attempt to add the edge. This will either succeed or
+          /*
+       * Attempt to add the edge. This will either succeed or
              * fail. There are two failure conditions: (1) the edge
              * would result in a deadlock; and (2) the edge already
              * exists.
@@ -858,8 +858,8 @@ public class TestTxDag extends TestCase {
             log.warn("edge exists: src=" + src + ", tgt=" + tgt);
             continue; // repeat inner loop.
           } catch (DeadlockException ex) {
-            /*
-             * Adding this edge results in a deadlock. Verify that
+          /*
+       * Adding this edge results in a deadlock. Verify that
              * the state of the DAG was NOT modified and then break
              * out of the additive loop so that we can start the
              * subtractive loop.
@@ -872,8 +872,8 @@ public class TestTxDag extends TestCase {
           }
         }
       } else {
-        /*
-         * Insert vertex. We always take this action if there are less
+      /*
+       * Insert vertex. We always take this action if there are less
          * than two vertices since we must have two vertices defined to
          * insert an edge.
          */
@@ -924,7 +924,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Compares two path count matrices for equality.
    *
    * @param expected An int[][] matrix with at least two rows and two columns.
@@ -942,7 +942,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Compares two Edge[]s and verifies that the same edges are defined without regard to order.
    *
    * @param expected The expected Edge[].
@@ -957,7 +957,7 @@ public class TestTxDag extends TestCase {
       fail("actual is null.");
     }
     // clone since we will modify expected[].
-    expected = (Edge[]) expected.clone();
+    expected = expected.clone();
     // verify length.
     assertEquals("length", expected.length, actual.length);
     final int len = expected.length;
@@ -1055,7 +1055,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Verify that we can recycle the internal transaction identifiers when a transaction is removed
    * from the DAG (either through abort or commit actions).
    *
@@ -1078,7 +1078,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Verify that the DAG state is correctly updated when adding a variety of WAITS_FOR relationships
    * that do NOT form cycles.
    */
@@ -1107,7 +1107,7 @@ public class TestTxDag extends TestCase {
         dag.getEdges(false));
   }
 
-  /**
+  /*
    * Verify that the DAG state is correctly updated when adding a variety of WAITS_FOR relationships
    * that do NOT form cycles (using the batch operation to add edges).
    */
@@ -1124,7 +1124,7 @@ public class TestTxDag extends TestCase {
     dag.addEdges(tx4, new Object[] {tx3});
   }
 
-  /**
+  /*
    * The first in a series of simple tests which verify that the DAG is correctly detecting updates
    * when a set of new edges would result in a cycle.
    */
@@ -1207,7 +1207,7 @@ public class TestTxDag extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test adds N random edges to the graph and then removes them and verifies that removal correctly
    * reproduces each intermediate state following an edge addition. Edges are added until a deadlock
    * results. We verify that the deadlock did not update the internal matrix M and then backup state

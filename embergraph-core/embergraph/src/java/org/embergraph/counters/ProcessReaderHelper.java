@@ -36,7 +36,7 @@ public abstract class ProcessReaderHelper extends AbstractProcessReader {
 
   public ProcessReaderHelper() {}
 
-  /**
+  /*
    * Creates a {@link LineNumberReader} from the {@link InputStream}.
    *
    * @param is The input stream from which the output of the process will be read.
@@ -53,7 +53,7 @@ public abstract class ProcessReaderHelper extends AbstractProcessReader {
   /** Override to return the {@link ActiveProcess}. */
   protected abstract ActiveProcess getActiveProcess();
 
-  /**
+  /*
    * Returns the next line and blocks if a line is not available.
    *
    * @return The next line.
@@ -121,7 +121,7 @@ public abstract class ProcessReaderHelper extends AbstractProcessReader {
     }
   }
 
-  /**
+  /*
    * Responsible for reading the data.
    *
    * @throws Exception

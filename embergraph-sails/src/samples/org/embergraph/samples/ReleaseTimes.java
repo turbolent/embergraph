@@ -20,8 +20,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 import org.openrdf.sail.SailException;
 
-/**
- * Example of History retention usage with Sail interface classes.
+/*
+* Example of History retention usage with Sail interface classes.
  *
  * <p>A sequence of commits updates the value of a statement and retains the commit time of each.
  *
@@ -129,7 +129,7 @@ public class ReleaseTimes {
     }
   }
 
-  /**
+  /*
    * Define statement with a URI identifier, type and literal label
    *
    * <p>First ensure that any previous valued statement is removed.
@@ -151,7 +151,7 @@ public class ReleaseTimes {
     return cxn.commit2();
   }
 
-  /**
+  /*
    * To check a specific state we retrieve a readOnlyConnection from the repository for the
    * time/state specified.
    *

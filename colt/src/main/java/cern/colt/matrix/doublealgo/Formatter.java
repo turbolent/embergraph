@@ -16,8 +16,8 @@ import cern.colt.matrix.impl.AbstractMatrix1D;
 import cern.colt.matrix.impl.AbstractMatrix2D;
 import cern.colt.matrix.impl.DenseDoubleMatrix1D;
 import cern.colt.matrix.impl.Former;
-/**
- * Flexible, well human readable matrix print formatting; By default decimal point aligned. Build on
+/*
+* Flexible, well human readable matrix print formatting; By default decimal point aligned. Build on
  * top of the C-like <i>sprintf</i> functionality provided by the {@link corejava.Format} class
  * written by Cay Horstmann. Currenly works on 1-d, 2-d and 3-d matrices. Note that in most cases
  * you will not need to get familiar with this class; just call <tt>matrix.toString()</tt> and be
@@ -277,7 +277,7 @@ public class Formatter extends AbstractFormatter {
   public Formatter() {
     this("%G");
   }
-  /**
+  /*
    * Constructs and returns a matrix formatter.
    *
    * @param format the given format used to convert a single cell value.
@@ -361,7 +361,7 @@ public class Formatter extends AbstractFormatter {
       String format = formats[i];
       strings[i] = new Formatter(format).toString(matrix);
       for (int j = 0; j < matrix.size(); j++) {
-        System.out.println(String.valueOf(matrix.get(j)));
+        System.out.println(matrix.get(j));
       }
     }
 
@@ -605,7 +605,7 @@ public class Formatter extends AbstractFormatter {
     if (alignment.equals(DECIMAL)) return indexOfDecimalPoint(s);
     return super.lead(s);
   }
-  /**
+  /*
    * Returns a string <tt>s</tt> such that <tt>Object[] m = s</tt> is a legal Java statement.
    *
    * @param matrix the matrix to format.
@@ -618,7 +618,7 @@ public class Formatter extends AbstractFormatter {
     String trail = "};";
     return lead + copy.toString(matrix) + trail;
   }
-  /**
+  /*
    * Returns a string <tt>s</tt> such that <tt>Object[] m = s</tt> is a legal Java statement.
    *
    * @param matrix the matrix to format.
@@ -633,7 +633,7 @@ public class Formatter extends AbstractFormatter {
     String trail = "}\n};";
     return lead + copy.toString(matrix) + trail;
   }
-  /**
+  /*
    * Returns a string <tt>s</tt> such that <tt>Object[] m = s</tt> is a legal Java statement.
    *
    * @param matrix the matrix to format.
@@ -650,7 +650,7 @@ public class Formatter extends AbstractFormatter {
     String trail = "}\n" + b3 + "}\n}";
     return lead + copy.toString(matrix) + trail;
   }
-  /**
+  /*
    * Returns a string representation of the given matrix.
    *
    * @param matrix the matrix to convert.
@@ -660,7 +660,7 @@ public class Formatter extends AbstractFormatter {
     easy.viewRow(0).assign(matrix);
     return toString(easy);
   }
-  /**
+  /*
    * Returns a string representation of the given matrix.
    *
    * @param matrix the matrix to convert.
@@ -668,7 +668,7 @@ public class Formatter extends AbstractFormatter {
   public String toString(DoubleMatrix2D matrix) {
     return super.toString(matrix);
   }
-  /**
+  /*
    * Returns a string representation of the given matrix.
    *
    * @param matrix the matrix to convert.
@@ -685,7 +685,7 @@ public class Formatter extends AbstractFormatter {
     if (printShape) buf.insert(0, shape(matrix) + "\n");
     return buf.toString();
   }
-  /**
+  /*
    * Returns a string representation of the given matrix.
    *
    * @param matrix the matrix to convert.
@@ -693,7 +693,7 @@ public class Formatter extends AbstractFormatter {
   protected String toString(AbstractMatrix2D matrix) {
     return this.toString((DoubleMatrix2D) matrix);
   }
-  /**
+  /*
    * Returns a string representation of the given matrix with axis as well as rows and columns
    * labeled. Pass <tt>null</tt> to one or more parameters to indicate that the corresponding
    * decoration element shall not appear in the string converted matrix.
@@ -728,7 +728,7 @@ public class Formatter extends AbstractFormatter {
             columnAxisName,
             title);
   }
-  /**
+  /*
    * Same as <tt>toTitleString</tt> except that additionally statistical aggregates (mean, median,
    * sum, etc.) of rows and columns are printed. Pass <tt>null</tt> to one or more parameters to
    * indicate that the corresponding decoration element shall not appear in the string converted
@@ -819,7 +819,7 @@ public class Formatter extends AbstractFormatter {
   //
   //	return buf.toString();
   // }
-  /**
+  /*
    * Returns a string representation of the given matrix with axis as well as rows and columns
    * labeled. Pass <tt>null</tt> to one or more parameters to indicate that the corresponding
    * decoration element shall not appear in the string converted matrix.
@@ -850,7 +850,7 @@ public class Formatter extends AbstractFormatter {
   //	}
   //	return buf.toString();
   // }
-  /**
+  /*
    * Returns a string representation of the given matrix with axis as well as rows and columns
    * labeled. Pass <tt>null</tt> to one or more parameters to indicate that the corresponding
    * decoration element shall not appear in the string converted matrix.

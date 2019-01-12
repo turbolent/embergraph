@@ -40,8 +40,8 @@ import org.openrdf.query.parser.QueryParserUtil;
 import org.openrdf.query.parser.sparql.manifest.SPARQL11SyntaxTest;
 import org.openrdf.query.parser.sparql.manifest.SPARQLSyntaxTest;
 
-/**
- * Embergraph integration for the {@link SPARQLSyntaxTest}. This appears to be a manifest driven
+/*
+* Embergraph integration for the {@link SPARQLSyntaxTest}. This appears to be a manifest driven
  * test suite for both correct acceptance and correct rejection tests of the SPARQL parser. There is
  * also an Earl report for this test suite which provides a W3C markup for the test results. The
  * Earl report is part of the Sesame compliance packages.
@@ -50,13 +50,13 @@ import org.openrdf.query.parser.sparql.manifest.SPARQLSyntaxTest;
  */
 public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
 
-  /**
+  /*
    * When <code>true</code> use the {@link Embergraph2ASTSPARQLParser} otherwise use the openrdf
    * parser.
    */
   private static final boolean useEmbergraphParser = true;
 
-  /**
+  /*
    * @param testURI
    * @param name
    * @param queryFileURL
@@ -127,7 +127,7 @@ public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
     super.tearDown();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This uses the {@link Embergraph2ASTSPARQLParser}.
@@ -170,7 +170,7 @@ public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
           }
         };
 
-    /**
+    /*
      * Filter out known bad tests.
      *
      * <p>See #1076 Negative parser tests
@@ -203,20 +203,26 @@ public class Embergraph2ASTSPARQL11SyntaxTest extends SPARQL11SyntaxTest {
     return suite2;
   }
 
-  /**
+  /*
    * Tests that are known to fail.
    *
    * @see See #1076 Negative parser tests
    */
   private static final Collection<String> knownBadTests =
       Arrays.asList(
-          new String[] {
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_60", // syntax-BINDscope6.rq
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_61a", // syntax-BINDscope7.rq
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_62a", // syntax-BINDscope8.rq
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_65", // syntax-SELECTscope2.rq
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_25", // syntax-update-25.ru
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_31", // syntax-update-31.ru
-            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_54", // syntax-update-54.ru
-          });
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_60",
+          // syntax-BINDscope6.rq
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_61a",
+          // syntax-BINDscope7.rq
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_62a",
+          // syntax-BINDscope8.rq
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-query/manifest#test_65",
+          // syntax-SELECTscope2.rq
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_25",
+          // syntax-update-25.ru
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_31",
+          // syntax-update-31.ru
+          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/syntax-update-1/manifest#test_54"
+          // syntax-update-54.ru
+      );
 }

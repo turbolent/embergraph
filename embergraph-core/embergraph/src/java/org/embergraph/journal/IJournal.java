@@ -26,8 +26,8 @@ import org.embergraph.quorum.AsynchronousQuorumCloseException;
 import org.embergraph.quorum.Quorum;
 import org.embergraph.rawstore.IMRMW;
 
-/**
- * An persistence capable data structure supporting atomic commit, scalable named indices, and
+/*
+* An persistence capable data structure supporting atomic commit, scalable named indices, and
  * transactions.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -35,27 +35,27 @@ import org.embergraph.rawstore.IMRMW;
 public interface IJournal extends IMRMW, IAtomicStore, IBTreeManager {
 
   /** A copy of the properties used to initialize this journal. */
-  public Properties getProperties();
+  Properties getProperties();
 
-  /**
+  /*
    * Shutdown the journal politely. Scheduled operations will run to completion, but no new
    * operations will be scheduled.
    */
-  public void shutdown();
+  void shutdown();
 
   /** Immediate shutdown. */
-  public void shutdownNow();
+  void shutdownNow();
 
   /** Return the object providing the local transaction manager for this journal. */
-  public ILocalTransactionManager getLocalTransactionManager();
+  ILocalTransactionManager getLocalTransactionManager();
 
-  /**
+  /*
    * The {@link Quorum} for this service -or- <code>null</code> if the service is not running with a
    * quorum.
    */
   Quorum<HAGlue, QuorumService<HAGlue>> getQuorum();
 
-  /**
+  /*
    * Await the service being ready to partitipate in an HA quorum. The preconditions include:
    *
    * <ol>
@@ -72,12 +72,12 @@ public interface IJournal extends IMRMW, IAtomicStore, IBTreeManager {
   long awaitHAReady(final long timeout, final TimeUnit units)
       throws InterruptedException, TimeoutException, AsynchronousQuorumCloseException;
 
-  /**
+  /*
    * Convenience method created in BLZG-1370 to factor out embergraph-jini artifact dependencies.
    *
    * <p>This should return true IFF the underlying journal is org.embergraph.jini.ha.HAJournal.
    *
    * @return
    */
-  public boolean isHAJournal();
+  boolean isHAJournal();
 }

@@ -5,8 +5,8 @@ import org.embergraph.htree.data.IDirectoryData;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Implementation maintains Java objects corresponding to the persistent data and defines methods
+/*
+* Implementation maintains Java objects corresponding to the persistent data and defines methods
  * for a variety of mutations on the {@link IDirectoryData} record which operate by direct
  * manipulation of the Java objects.
  *
@@ -21,7 +21,7 @@ public class MutableDirectoryPageData implements IDirectoryData {
 
   final byte[] overflowKey;
 
-  /**
+  /*
    * The persistent address of each child page (each child may be either a {@link DirectoryPage} or
    * a {@link BucketPage}). The capacity of this array is <code>1&lt;&lt;addressBits</code>. An
    * entry in this array is {@link #NULL} until the child has been persisted. The protocol for
@@ -32,8 +32,8 @@ public class MutableDirectoryPageData implements IDirectoryData {
    */
   final long[] childAddr;
 
-  //	/**
-  //	 * The #of entries spanned by this node. This value should always be equal
+  //	/*
+//	 * The #of entries spanned by this node. This value should always be equal
   //	 * to the sum of the defined values in {@link #childEntryCounts}.
   //	 * <p>
   //	 * When a node is split, the value is updated by subtracting off the counts
@@ -50,8 +50,8 @@ public class MutableDirectoryPageData implements IDirectoryData {
   //	 */
   //	int nentries;
 
-  //	/**
-  //	 * The #of entries spanned by each direct child of this node.
+  //	/*
+//	 * The #of entries spanned by each direct child of this node.
   //	 * <p>
   //	 * The appropriate element in this array is incremented on all ancestor
   //	 * nodes by {@link Leaf#insert(Object, Object)} and decremented on all
@@ -65,19 +65,19 @@ public class MutableDirectoryPageData implements IDirectoryData {
   /** <code>true</code> iff the B+Tree is maintaining per tuple revision timestamps. */
   final boolean hasVersionTimestamps;
 
-  /**
+  /*
    * The minimum tuple revision timestamp for any leaf spanned by this node IFF the B+Tree is
    * maintaining tuple revision timestamps.
    */
   long minimumVersionTimestamp;
 
-  /**
+  /*
    * The maximum tuple revision timestamp for any leaf spanned by this node IFF the B+Tree is
    * maintaining tuple revision timestamps.
    */
   long maximumVersionTimestamp;
 
-  /**
+  /*
    * Create an empty mutable data record.
    *
    * @param addressBits The #of address bits.
@@ -100,7 +100,7 @@ public class MutableDirectoryPageData implements IDirectoryData {
     minimumVersionTimestamp = maximumVersionTimestamp = 0L;
   }
 
-  /**
+  /*
    * Makes a mutable copy of the source data record.
    *
    * @param addressBits The #of address bits owning {@link HTree}. This is used to initialize the
@@ -151,7 +151,7 @@ public class MutableDirectoryPageData implements IDirectoryData {
 
   }
 
-  /**
+  /*
    * Ctor based on just the "data" -- used by unit tests.
    *
    * @param nentries
@@ -208,7 +208,7 @@ public class MutableDirectoryPageData implements IDirectoryData {
     return childAddr[index];
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to report the size of the address space.

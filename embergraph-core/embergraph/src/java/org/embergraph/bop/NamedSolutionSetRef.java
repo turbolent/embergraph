@@ -27,8 +27,8 @@ import org.embergraph.bop.controller.INamedSolutionSetRef;
 import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.journal.ITx;
 
-/**
- * Class models the information which uniquely describes a named solution set. The "name" is
+/*
+* Class models the information which uniquely describes a named solution set. The "name" is
  * comprised of the following components:
  *
  * <dl>
@@ -54,7 +54,7 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * The {@link UUID} of the {@link IRunningQuery} which generated the named solution set. This is
    * where you need to look to find the data.
    *
@@ -82,13 +82,13 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
    */
   private final UUID queryId;
 
-  /**
+  /*
    * The namespace associated with the KB view -or- <code>null</code> if the named solution set is
    * attached to an {@link IRunningQuery}.
    */
   private final String namespace;
 
-  /**
+  /*
    * The timestamp associated with the KB view.
    *
    * <p>Note: This MUST be ignored if {@link #namespace} is <code>null</code>.
@@ -98,7 +98,7 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
   /** The application level name for the named solution set. */
   private final String localName;
 
-  /**
+  /*
    * The ordered set of variables that specifies the ordered set of components in the key for the
    * desired index over the named solution set (required, but may be an empty array).
    */
@@ -136,7 +136,7 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
     return joinVars;
   }
 
-  /**
+  /*
    * @param queryId The {@link UUID} of the {@link IRunningQuery} where you need to look to find the
    *     data (optional - see BLZG-1493).
    * @param namedSet The application level name for the named solution set (required).
@@ -165,7 +165,7 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
     this.joinVars = joinVars;
   }
 
-  /**
+  /*
    * @param namespace The namespace of the KB view.
    * @param timestamp The timestamp associated with the KB view.
    * @param localName The application level name for the named solution set (required).
@@ -256,9 +256,7 @@ public class NamedSolutionSetRef implements INamedSolutionSetRef {
 
     if (!localName.equals(t.localName)) return false;
 
-    if (!Arrays.equals(joinVars, t.joinVars)) return false;
-
-    return true;
+    return Arrays.equals(joinVars, t.joinVars);
   }
 
   @Override

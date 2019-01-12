@@ -28,8 +28,8 @@ import org.embergraph.rdf.sparql.ast.QueryHints;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Sets the maximum #of operator evaluation tasks which can execute concurrently.
+/*
+* Sets the maximum #of operator evaluation tasks which can execute concurrently.
  *
  * <p>Note: "maxParallel" is a general property of the query engine. This query hint does not change
  * the structure of the query plan, but simply serves as a directive to the query engine that it

@@ -31,8 +31,8 @@ import org.embergraph.rdf.model.EmbergraphValueFactory;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-/**
- * Implementation for inline {@link Literal}s. Literals may be plain (just a label), have a datatype
+/*
+* Implementation for inline {@link Literal}s. Literals may be plain (just a label), have a datatype
  * URI, or have a language code. In each case, all information is inlined. This class is mainly
  * targeted at inlining small plain literals and language code literals, but may also be used to
  * fully inline literals in scale-out (which can be an attractive option).
@@ -58,14 +58,14 @@ public class FullyInlineTypedLiteralIV<V extends EmbergraphLiteral>
   /** The Literal's language datatype URI (optional but exclusive with the {@link #language}). */
   private final URI datatype;
 
-  /**
+  /*
    * Indicates what "type" of literal this is.
    *
    * @see ITermIndexCodes
    */
   private final byte termCode;
 
-  /**
+  /*
    * Indicates what literal is temporary and would need additional resolution. /** <code>true</code>
    * iff the {@link IV} represents a <em>temporary</em> {@link IV} reference. <code>Temporary</code>
    * {@link IV}s are somewhat special. They are used while preparing query/update without access to
@@ -187,7 +187,7 @@ public class FullyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     return datatype;
   }
 
-  /**
+  /*
    * Indicates what "type" of literal this is.
    *
    * @see ITermIndexCodes
@@ -238,12 +238,9 @@ public class FullyInlineTypedLiteralIV<V extends EmbergraphLiteral>
 
       return datatype.equals(t.getDatatype());
 
-    } else if (t.getDatatype() != null) {
+    } else
+      return t.getDatatype() == null;
 
-      return false;
-    }
-
-    return true;
   }
 
   /** Return the hash code of the label (per {@link Literal#hashCode()}) */
@@ -284,7 +281,7 @@ public class FullyInlineTypedLiteralIV<V extends EmbergraphLiteral>
     this.byteLength = byteLength;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The ordering here is defined over the datatype or language code followed by the label.

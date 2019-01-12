@@ -26,8 +26,8 @@ import java.io.ObjectStreamException;
 import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.relation.accesspath.IElementFilter;
 
-/**
- * Filter matches only {@link StatementEnum#Inferred} statements.
+/*
+* Filter matches only {@link StatementEnum#Inferred} statements.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -58,7 +58,7 @@ public class InferredSPOFilter<E extends ISPO> extends SPOFilter<ISPO> {
 
   private boolean accept(final ISPO o) {
 
-    final ISPO spo = (ISPO) o;
+    final ISPO spo = o;
 
     return spo.getStatementType() == StatementEnum.Inferred;
   }

@@ -9,8 +9,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-/**
- * Flyweight helper class for building (and decoding to the extent possible) unsigned byte[] keys
+/*
+* Flyweight helper class for building (and decoding to the extent possible) unsigned byte[] keys
  * for RDF {@link Value}s and term identifiers. In general, keys for RDF values are formed by a
  * leading byte that indicates the type of the value (URI, BNode, or some type of Literal), followed
  * by the components of that value type.
@@ -22,7 +22,7 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
 
   public final IKeyBuilder keyBuilder;
 
-  /**
+  /*
    * Normally invoked by {@link Term2IdTupleSerializer#getLexiconKeyBuilder()}
    *
    * @param keyBuilder The {@link IKeyBuilder} that will determine the distinctions and sort order
@@ -37,7 +37,7 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
     this.keyBuilder = keyBuilder;
   }
 
-  /**
+  /*
    * Returns the sort key for the URI.
    *
    * @param uri The URI.
@@ -65,7 +65,7 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
     return keyBuilder.reset().append(TERM_CODE_LIT).append(text).getKey();
   }
 
-  /**
+  /*
    * Note: The language code is serialized as US-ASCII UPPER CASE for the purposes of defining the
    * total key ordering. The character set for the language code is restricted to [A-Za-z0-9] and
    * "-" for separating subtype codes. The RDF store interprets an empty language code as NO
@@ -86,7 +86,7 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
     return keyBuilder.append(text).getKey();
   }
 
-  /**
+  /*
    * Formats a datatype literal sort key. The value is formated according to the datatype URI.
    *
    * @param datatype
@@ -130,8 +130,8 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
     return keyBuilder.getKey();
   }
 
-  // /**
-  // * The key corresponding to the start of the literals section of the
+  // /*
+// * The key corresponding to the start of the literals section of the
   // * terms index.
   // */
   // public byte[] litStartKey() {
@@ -140,8 +140,8 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
   //
   // }
 
-  // /**
-  // * The key corresponding to the first key after the literals section of
+  // /*
+// * The key corresponding to the first key after the literals section of
   // the
   // * terms index.
   // */
@@ -156,7 +156,7 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
     return keyBuilder.reset().append(TERM_CODE_BND).append(id).getKey();
   }
 
-  /**
+  /*
    * Return an unsigned byte[] that locates the value within a total ordering over the RDF value
    * space.
    *
@@ -187,22 +187,22 @@ public class LexiconKeyBuilder implements ITermIndexCodes {
 
       if (languageCode != null) {
 
-        /*
-         * language code literal.
+      /*
+       * language code literal.
          */
         return languageCodeLiteral2key(languageCode, text);
 
       } else if (datatypeUri != null) {
 
-        /*
-         * datatype literal.
+      /*
+       * datatype literal.
          */
         return datatypeLiteral2key(datatypeUri, text);
 
       } else {
 
-        /*
-         * plain literal.
+      /*
+       * plain literal.
          */
         return plainLiteral2key(text);
       }

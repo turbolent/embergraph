@@ -22,8 +22,8 @@ package org.embergraph.io;
 import java.nio.ByteBuffer;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Interface for access to, and release of, a direct {@link ByteBuffer} managed by the {@link
+/*
+* Interface for access to, and release of, a direct {@link ByteBuffer} managed by the {@link
  * DirectBufferPool}. A "direct" buffer is a region from the C heap of the native JVM process. Such
  * buffers can be efficient for NIO. They are also efficient when the application needs to store
  * large amounts of data without putting pressure on the Garbage Collector.
@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
  */
 public interface IBufferAccess {
 
-  /**
+  /*
    * Return the direct {@link ByteBuffer}.
    *
    * <p><strong>Caution:</strong> DO NOT hold onto a reference to the returned {@link ByteBuffer}
@@ -52,18 +52,18 @@ public interface IBufferAccess {
    *
    * @throws IllegalStateException if the buffer has been released.
    */
-  public ByteBuffer buffer();
+  ByteBuffer buffer();
 
-  /**
+  /*
    * Release the {@link ByteBuffer}, returning to owning pool. This method will silently succeed if
    * the buffer has already been released.
    *
    * @throws InterruptedException if an interrupt is noticed while attempting to return the buffer
    *     to the pool.
    */
-  public void release() throws InterruptedException;
+  void release() throws InterruptedException;
 
-  /**
+  /*
    * Release the {@link ByteBuffer}, returning to owning pool. This method will silently succeed if
    * the buffer has already been released.
    *
@@ -72,5 +72,5 @@ public interface IBufferAccess {
    * @throws InterruptedException if an interrupt is noticed while attempting to return the buffer
    *     to the pool.
    */
-  public void release(long timeout, TimeUnit unit) throws InterruptedException;
+  void release(long timeout, TimeUnit unit) throws InterruptedException;
 }

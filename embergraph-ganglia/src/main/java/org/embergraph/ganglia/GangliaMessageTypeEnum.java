@@ -18,8 +18,8 @@ package org.embergraph.ganglia;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Type safe enumeration of the Ganglia 3.1 wire format <code>Ganglia_msg_formats</code> from <code>
+/*
+* Type safe enumeration of the Ganglia 3.1 wire format <code>Ganglia_msg_formats</code> from <code>
  * lib/gm_protocol.h</code> (generated when you build ganglia from the source).
  *
  * <p>Note: The Ganglia 3.1 wire format packets begin at 128 to avoid confusion with the previous
@@ -30,7 +30,7 @@ public enum GangliaMessageTypeEnum {
   /** Ganglia metric metadata declaration record. */
   METADATA(128, false, null /* n/a */, null /* n/a */, null /* n/a */),
 
-  /**
+  /*
    * Ganglia metric record with unsigned short value.
    *
    * <p>This data type is NOT automatically selected for any Java data values. It is only used if
@@ -48,7 +48,7 @@ public enum GangliaMessageTypeEnum {
   /** Ganglia metric record with int32 value. */
   INT32(128 + 3, true, "int32", "%i", new Class[] {Integer.class}),
 
-  /**
+  /*
    * Ganglia metric record with unsigned int32 value.
    *
    * <p>This data type is NOT automatically selected for any Java data values. It is only used if
@@ -72,7 +72,7 @@ public enum GangliaMessageTypeEnum {
   /** Ganglia request record (requests a metadata record for the named metric). */
   REQUEST(128 + 8, false, null /* n/a */, null /* n/a */, null /* n/a */);
 
-  /**
+  /*
    * @param v The byte code for the record type.
    * @param isMetric <code>true</code> iff this record type represents a metric value (versus
    *     metadata about a metric or a request for a metric).
@@ -81,7 +81,7 @@ public enum GangliaMessageTypeEnum {
    * @param javaClasses The Java {@link Number} class(es) which are mapped onto a given ganglia data
    *     type.
    */
-  private GangliaMessageTypeEnum(
+  GangliaMessageTypeEnum(
       final int v,
       final boolean isMetric,
       final String gtype,
@@ -113,7 +113,7 @@ public enum GangliaMessageTypeEnum {
     return isMetric;
   }
 
-  /**
+  /*
    * The ganglia datatype name (uint, etc). This is only defined for record types which correspond
    * to a metric value.
    */
@@ -147,8 +147,8 @@ public enum GangliaMessageTypeEnum {
     }
   }
 
-  //	/**
-  //	 * Return the Java data type which corresponds to the ganglia metric type.
+  //	/*
+//	 * Return the Java data type which corresponds to the ganglia metric type.
   //	 *
   //	 * @return The data type -or- <code>null</code> if this is NOT a metric type
   //	 *         (i.e., return <code>null</code> if it is either a
@@ -158,7 +158,7 @@ public enum GangliaMessageTypeEnum {
   //		return javaClass;
   //	}
 
-  /**
+  /*
    * Return the type safe enum for the record type value.
    *
    * @param v The value.
@@ -189,7 +189,7 @@ public enum GangliaMessageTypeEnum {
     }
   }
 
-  /**
+  /*
    * Translate gtype (uint32, float, string, etc) into type safe enum.
    *
    * @throws IllegalArgumentException if the argument is none of the data types used by ganglia.
@@ -203,7 +203,7 @@ public enum GangliaMessageTypeEnum {
     return e;
   }
 
-  /**
+  /*
    * Return the best match {@link GangliaMessageTypeEnum} for a java data value.
    *
    * <p>Note: This method is intended for dynamic declarations in which a value to be reported is
@@ -242,13 +242,13 @@ public enum GangliaMessageTypeEnum {
     return e;
   }
 
-  /**
+  /*
    * Map used to translate ganglia type strings into the corresponding {@link
    * GangliaMessageTypeEnum}.
    */
   private static final Map<String, GangliaMessageTypeEnum> gtype2Enum;
 
-  /**
+  /*
    * Map used to obtain the best match {@link GangliaMessageTypeEnum} given a natural Java data
    * type.
    */

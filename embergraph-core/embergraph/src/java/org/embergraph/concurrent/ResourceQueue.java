@@ -29,8 +29,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 
-/**
- * Unbounded queue of operations waiting to gain an exclusive lock on a resource. By default, the
+/*
+* Unbounded queue of operations waiting to gain an exclusive lock on a resource. By default, the
  * queue imposes a "fair" schedule for access to the resource. Deadlocks among resources are
  * detected using a <code>WAITS_FOR</code> graph that is shared by all resources and transactions
  * for a given database instance.
@@ -61,7 +61,7 @@ public class ResourceQueue<R, T> {
   /** The resource whose access is controlled by this object. */
   private final R resource;
 
-  /**
+  /*
    * The queue of transactions seeking access to the {@link #resource}. The object at the head of
    * the queue is the transaction with the lock on the resource.
    */
@@ -70,19 +70,19 @@ public class ResourceQueue<R, T> {
   /** Used to restrict access to {@link #queue}. */
   final Lock lock = new ReentrantLock();
 
-  /**
+  /*
    * The next transaction pending in the queue is {@link Condition#signal() signaled} when a
    * transaction releases its lock.
    */
   final Condition available = lock.newCondition();
 
-  /**
+  /*
    * When true the {@link ResourceQueue} will refuse further operations. This set by {@link
    * #clear(Object)}.
    */
   final AtomicBoolean dead = new AtomicBoolean(false);
 
-  /**
+  /*
    * The WAITS_FOR graph shared by all transactions and all resources.
    *
    * <p>Note: This MAY be null. When it is null deadlock detection is <strong>disabled</strong>.
@@ -98,7 +98,7 @@ public class ResourceQueue<R, T> {
     return resource;
   }
 
-  /**
+  /*
    * True iff a lock is granted.
    *
    * @todo method signature may conflict with implicit use of the Thread as the transaction object.
@@ -108,7 +108,7 @@ public class ResourceQueue<R, T> {
     return !queue.isEmpty();
   }
 
-  /**
+  /*
    * The #of pending requests for a lock on the resource.
    *
    * @return
@@ -118,7 +118,7 @@ public class ResourceQueue<R, T> {
     return Math.max(0, queue.size() - 1);
   }
 
-  /**
+  /*
    * Return true if the transaction currently holds the lock.
    *
    * @param tx The transaction.
@@ -144,7 +144,7 @@ public class ResourceQueue<R, T> {
 
   }
 
-  /**
+  /*
    * Note: This uses {@link LinkedBlockingQueue#toString()} to serialize the state of the resource
    * queue so the result will be consistent per the contract of that method and {@link
    * LinkedBlockingQueue#iterator()}.
@@ -159,7 +159,7 @@ public class ResourceQueue<R, T> {
         + "}";
   }
 
-  /**
+  /*
    * Create a queue of lock requests for a resource.
    *
    * @param resource The resource.
@@ -180,7 +180,7 @@ public class ResourceQueue<R, T> {
     this.waitsFor = waitsFor;
   }
 
-  /**
+  /*
    * Return iff the queue is alive.
    *
    * <p>Pre-condition: the caller owns {@link #lock}.
@@ -195,7 +195,7 @@ public class ResourceQueue<R, T> {
     }
   }
 
-  /**
+  /*
    * Return iff the tx currently holds the lock on the resource.
    *
    * <p>Pre-condition: the caller owns {@link #lock}.
@@ -222,7 +222,7 @@ public class ResourceQueue<R, T> {
   //            clear(Thread.currentThread());
   //        }
 
-  /**
+  /*
    * Obtain a lock on the resource.
    *
    * @param tx The transaction.
@@ -235,7 +235,7 @@ public class ResourceQueue<R, T> {
     lock(tx, 0L);
   }
 
-  /**
+  /*
    * Obtain a lock on the resource.
    *
    * @param tx The transaction.
@@ -305,8 +305,8 @@ public class ResourceQueue<R, T> {
 
         try {
 
-          /*
-           * Note: this operation is atomic.  If it fails, then none
+        /*
+       * Note: this operation is atomic.  If it fails, then none
            * of the edges were added.
            */
 
@@ -314,8 +314,8 @@ public class ResourceQueue<R, T> {
 
         } catch (DeadlockException ex) {
 
-          /*
-           * Reject the lock request since it would cause a deadlock.
+        /*
+       * Reject the lock request since it would cause a deadlock.
            */
 
           log.warn("Deadlock: tx=" + tx + ", queue=" + this /*, ex*/);
@@ -364,8 +364,8 @@ public class ResourceQueue<R, T> {
             }
           }
 
-          /*
-           * Note: We can continue here either because the Condition
+        /*
+       * Note: We can continue here either because the Condition
            * that we were awaiting has been signalled -or- because of
            * a timeout (handled above) -or- for no reason.
            */
@@ -379,8 +379,8 @@ public class ResourceQueue<R, T> {
 
           if (queue.peek() == tx) {
 
-            /*
-             * Note: tx is at the head of the queue while it holds
+          /*
+       * Note: tx is at the head of the queue while it holds
              * the lock.
              */
 
@@ -392,8 +392,8 @@ public class ResourceQueue<R, T> {
 
       } catch (Throwable t) {
 
-        /*
-         * At this point there are edges in the WAITS_FOR graph and the
+      /*
+       * At this point there are edges in the WAITS_FOR graph and the
          * tx is on the queue. While we appended it to the end of the
          * queue above it can have "moved" since both due to locks that
          * have been granted to other transactions and due to other
@@ -422,16 +422,16 @@ public class ResourceQueue<R, T> {
 
           synchronized (waitsFor) {
 
-            /*
-             * Note: If the transaction is at the head of the queue
+          /*
+       * Note: If the transaction is at the head of the queue
              * then it is probably NOT waiting. However, this case
              * should be quite rare in lock().
              */
 
             try {
 
-              /*
-               * Note: Assume that tx is waiting on something
+            /*
+       * Note: Assume that tx is waiting on something
                * unless we have absolute proof to the contrary.
                */
 
@@ -466,7 +466,7 @@ public class ResourceQueue<R, T> {
     }
   }
 
-  /**
+  /*
    * Release the lock held by the tx on the resource.
    *
    * @param tx The transaction.
@@ -514,8 +514,8 @@ public class ResourceQueue<R, T> {
 
             } catch (Throwable t) {
 
-              /*
-               * Note: log the error but continue otherwise we
+            /*
+       * Note: log the error but continue otherwise we
                * will deadlock other tasks waiting on this
                * resource since throwing the exception will mean
                * that we do not invoke [available.signalAll()] and
@@ -547,7 +547,7 @@ public class ResourceQueue<R, T> {
     }
   }
 
-  /**
+  /*
    * Causes pending lock requests to abort (the threads that are blocked will throw an {@link
    * InterruptedException}) and releases the lock held by the caller.
    *

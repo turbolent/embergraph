@@ -6,8 +6,8 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
 
-/**
- * A round robin implementation that may be used when there are no scores available. Services are
+/*
+* A round robin implementation that may be used when there are no scores available. Services are
  * selected using a round robin policy. The class will notice service joins and service leaves and
  * will incorporate the new set of services into its decision making while preserving a (mostly)
  * round robin behavior.
@@ -31,7 +31,7 @@ public abstract class AbstractRoundRobinServiceLoadHelper implements IServiceLoa
 
   protected AbstractRoundRobinServiceLoadHelper() {}
 
-  /**
+  /*
    * Await the availability of at least the specified #of {@link IDataService}s.
    *
    * @param minCount The minimum #of data services.
@@ -44,7 +44,7 @@ public abstract class AbstractRoundRobinServiceLoadHelper implements IServiceLoa
   protected abstract UUID[] awaitServices(int minCount, long timeout)
       throws InterruptedException, TimeoutException;
 
-  /**
+  /*
    * Issues {@link UUID}s using a round-robin over those that are joined. For this purpose, the
    * joined {@link DataService}s are appended to an ordered set. The index of the most recently
    * assigned service is maintained in a counter. Services that leave are removed from the set, but

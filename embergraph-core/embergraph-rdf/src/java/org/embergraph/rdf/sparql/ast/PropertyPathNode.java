@@ -11,8 +11,8 @@ import org.embergraph.bop.NV;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTGraphGroupOptimizer;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * A node in the AST representing a triple pattern with a property path. The predicate for this
+/*
+* A node in the AST representing a triple pattern with a property path. The predicate for this
  * triple pattern will be a {@link PathNode} instead of a {@link TermNode} as in a normal statement
  * pattern. This is modeled closely after StatementPatternNode.
  */
@@ -24,7 +24,7 @@ public class PropertyPathNode extends GroupMemberNodeBase<PropertyPathNode>
 
   public interface Annotations extends GroupMemberNodeBase.Annotations {
 
-    /**
+    /*
      * The {@link Scope} (required).
      *
      * @see ASTGraphGroupOptimizer
@@ -44,7 +44,7 @@ public class PropertyPathNode extends GroupMemberNodeBase<PropertyPathNode>
     super(args, anns);
   }
 
-  /**
+  /*
    * A triple pattern. The {@link Scope} will be {@link Scope#DEFAULT_CONTEXTS}, the context will be
    * <code>null</code>.
    *
@@ -58,7 +58,7 @@ public class PropertyPathNode extends GroupMemberNodeBase<PropertyPathNode>
     this(s, p, o, null /* context */, Scope.DEFAULT_CONTEXTS);
   }
 
-  /**
+  /*
    * A quad pattern.
    *
    * <p>Note: When a {@link PropertyPathNode} appears in a WHERE clause, the {@link Scope} should be
@@ -131,7 +131,7 @@ public class PropertyPathNode extends GroupMemberNodeBase<PropertyPathNode>
     this.setArg(3, c);
   }
 
-  /**
+  /*
    * The scope for this statement pattern (either named graphs or default graphs).
    *
    * @see Annotations#SCOPE
@@ -196,7 +196,7 @@ public class PropertyPathNode extends GroupMemberNodeBase<PropertyPathNode>
     return sb.toString();
   }
 
-  /**
+  /*
    * Return the variables used by the predicate - i.e. what this node will attempt to bind when run.
    */
   public Set<IVariable<?>> getProducedBindings() {
@@ -214,7 +214,7 @@ public class PropertyPathNode extends GroupMemberNodeBase<PropertyPathNode>
     return producedBindings;
   }
 
-  /**
+  /*
    * This handles the special case where we've wrapped a Var with a Constant because we know it's
    * bound, perhaps by the exogenous bindings. If we don't handle this case then we get the join
    * vars wrong.

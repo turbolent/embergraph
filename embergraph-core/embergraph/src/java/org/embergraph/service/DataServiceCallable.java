@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service;
 
-/**
- * Base class for {@link IDataServiceCallable}.
+/*
+* Base class for {@link IDataServiceCallable}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public abstract class DataServiceCallable<T> extends FederationCallable<T>
   /** Deserialization ctor. */
   public DataServiceCallable() {}
 
-  /**
+  /*
    * Sets the {@link DataService} reference and the {@link IEmbergraphFederation} reference (if not
    * already set).
    */

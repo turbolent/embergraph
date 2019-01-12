@@ -22,7 +22,7 @@ import org.embergraph.bop.IBindingSet;
 /** A sample of a {@link Vertex} (an access path). */
 public class VertexSample extends SampleBase {
 
-  /**
+  /*
    * Note: For a {@link Vertex}, the estimatedCardinality is the fast range count. This will be the
    * same for each sample taken (assuming a read historical view or even a time scale of query which
    * is significantly faster than update).

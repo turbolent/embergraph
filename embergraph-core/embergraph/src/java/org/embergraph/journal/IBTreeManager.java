@@ -33,8 +33,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.service.IMetadataService;
 import org.embergraph.service.ndx.IClientIndex;
 
-/**
- * Interface for management of local index resources such as {@link BTree}, {@link HTree}, etc.
+/*
+* Interface for management of local index resources such as {@link BTree}, {@link HTree}, etc.
  *
  * <p>TODO GIST This interface was historically only for the local {@link BTree}. The GIST support
  * has been pushed down into the {@link IGISTLocalManager}. The {@link BTree} and {@link IIndex}
@@ -47,7 +47,7 @@ import org.embergraph.service.ndx.IClientIndex;
  */
 public interface IBTreeManager extends IIndexManager, IGISTLocalManager {
 
-  /**
+  /*
    * Register a named index.
    *
    * @param name The name that can be used to recover the index.
@@ -60,7 +60,7 @@ public interface IBTreeManager extends IIndexManager, IGISTLocalManager {
    */
   IIndex registerIndex(String name, BTree btree); // non-GIST
 
-  /**
+  /*
    * Register a named index.
    *
    * <p>This variant allows you to register an index under a name other than the value returned by
@@ -96,7 +96,7 @@ public interface IBTreeManager extends IIndexManager, IGISTLocalManager {
    */
   IIndex registerIndex(String name, IndexMetadata indexMetadata); // non-GIST
 
-  /**
+  /*
    * Return the unisolated view of the named index (the mutable view of the live index object).
    *
    * @param name The name of the index.

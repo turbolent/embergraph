@@ -46,8 +46,8 @@ import org.embergraph.relation.accesspath.AbstractUnsynchronizedArrayBuffer;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-/**
- * Operator joins a solution set modeled as a hash index into the pipeline. The solution set may be
+/*
+* Operator joins a solution set modeled as a hash index into the pipeline. The solution set may be
  * modeled by an {@link HTree} or a JVM {@link HashMap}. While this JOIN requires the RHS hash index
  * to be fully materialized, evaluation of the LHS source solutions is pipelined.
  *
@@ -81,9 +81,9 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
   public interface Annotations extends PipelineOp.Annotations, NamedSetAnnotations {
 
     /** An {@link IConstraint}[] to be applied to solutions when they are joined (optional). */
-    final String CONSTRAINTS = JoinAnnotations.CONSTRAINTS;
+    String CONSTRAINTS = JoinAnnotations.CONSTRAINTS;
 
-    /**
+    /*
      * When <code>true</code> the hash index identified by {@link #NAMED_SET_REF} will be released
      * when this operator is done (default {@value #DEFAULT_RELEASE}).
      *
@@ -101,9 +101,9 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
      * when the {@link IRunningQuery#isDone()}. This only provides a means to release data as soon
      * as it is known that the data will not be referenced again during the query.
      */
-    final String RELEASE = SolutionSetHashJoinOp.class + ".release";
+    String RELEASE = SolutionSetHashJoinOp.class + ".release";
 
-    final boolean DEFAULT_RELEASE = true;
+    boolean DEFAULT_RELEASE = true;
   }
 
   /** Deep copy constructor. */
@@ -112,7 +112,7 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -207,8 +207,8 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
 
       if (!state.getJoinType().isNormal() && !op.isLastPassRequested()) {
 
-        /*
-         * Anything but a Normal join requires that we observe all solutions
+      /*
+       * Anything but a Normal join requires that we observe all solutions
          * and then do some final reporting. This is necessary for Optional,
          * Exists, and NotExists.
          */
@@ -246,8 +246,8 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
 
         if (release && context.isLastInvocation()) {
 
-          /*
-           * Note: It is possible to INCLUDE the named temporary
+        /*
+       * Note: It is possible to INCLUDE the named temporary
            * solution set multiple times within a query. If we want to
            * release() the hash tree then we need to know how many
            * times the temporary solution set is being included and
@@ -286,7 +286,7 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
       sink.flush();
     }
 
-    /**
+    /*
      * This method handles {@link JoinTypeEnum} values other than {@link JoinTypeEnum#Normal}.
      * {@link PipelineOp.Annotations#LAST_PASS} evaluation MUST be requested for any other than a
      * {@link JoinTypeEnum#Normal}.
@@ -295,15 +295,15 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
 
       switch (state.getJoinType()) {
         case Normal:
-          /*
-           * Nothing to do.
+        /*
+       * Nothing to do.
            */
           break;
         case Optional:
         case NotExists:
           {
-            /*
-             * Output the optional solutions.
+          /*
+       * Output the optional solutions.
              */
 
             // where to write the optional solutions.
@@ -321,8 +321,8 @@ public abstract class SolutionSetHashJoinOp extends PipelineOp {
           }
         case Exists:
           {
-            /*
-             * Output the join set.
+          /*
+       * Output the join set.
              *
              * Note: This has special hooks to support (NOT) EXISTS
              * graph patterns, which must bind the "ASK_VAR" depending

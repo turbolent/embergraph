@@ -19,8 +19,8 @@ import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Value;
 
-/**
- * Efficiently resolve term identifiers in Embergraph {@link ISolution}s to RDF {@link
+/*
+* Efficiently resolve term identifiers in Embergraph {@link ISolution}s to RDF {@link
  * EmbergraphValue}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -31,7 +31,7 @@ public class EmbergraphSolutionResolverator
 
   private static final Logger log = Logger.getLogger(EmbergraphSolutionResolverator.class);
 
-  /**
+  /*
    * @param db Used to resolve term identifiers to {@link Value} objects.
    * @param src The source iterator (will be closed when this iterator is closed).
    *     <p>FIXME must accept reverse bnodes map (from term identifier to blank nodes) for
@@ -56,7 +56,7 @@ public class EmbergraphSolutionResolverator
     return (EmbergraphSolutionResolverator) super.start(service);
   }
 
-  /**
+  /*
    * Resolve a chunk of {@link ISolution}s into a chunk of {@link IBindingSet}s in which term
    * identifiers have been resolved to {@link EmbergraphValue}s.
    */
@@ -117,7 +117,7 @@ public class EmbergraphSolutionResolverator
     }
   }
 
-  /**
+  /*
    * Resolve the term identifiers in the {@link ISolution} using the map populated when we fetched
    * the current chunk and return the {@link IBindingSet} for that solution in which term
    * identifiers have been resolved to their corresponding {@link EmbergraphValue}s.

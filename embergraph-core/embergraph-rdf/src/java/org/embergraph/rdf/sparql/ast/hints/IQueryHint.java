@@ -25,8 +25,8 @@ import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Interface for declaring query hints.
+/*
+* Interface for declaring query hints.
  *
  * @param <T> The generic type of the value space for the query hint.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -40,7 +40,7 @@ public interface IQueryHint<T> {
   /** The default value for this query hint (many query hints provide overrides of defaults). */
   T getDefault();
 
-  /**
+  /*
    * Validate the value, returning an object of the appropriate type.
    *
    * @param value The value.
@@ -49,7 +49,7 @@ public interface IQueryHint<T> {
    */
   T validate(String value);
 
-  /**
+  /*
    * Handle the query hint.
    *
    * <p>Note: The name of the query hint is no longer strongly coupled to the name of the

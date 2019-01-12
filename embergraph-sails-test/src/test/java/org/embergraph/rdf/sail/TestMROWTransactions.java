@@ -53,8 +53,8 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.sail.SailException;
 
-/**
- * TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
+/*
+* TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
  *
  * @author Martyn Cutcher
  */
@@ -81,7 +81,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
   //
   //    }
 
-  /**
+  /*
    * @param retentionMillis The retention time (milliseconds).
    * @param nreaderThreads The #of threads running reader tasks. Increase nreaderThreads to increase
    *     chance startup condition and decrement to increase chance of commit point with no open
@@ -128,7 +128,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
       final boolean teardown)
       throws Exception {
 
-    /**
+    /*
      * The most likely problem is related to the session protection in the RWStore. In development
      * we saw problems when concurrent transactions had reduced the open/active transactions to
      * zero, therefore releasing session protection. If the protocol works correctly we should never
@@ -231,8 +231,8 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
           Thread.sleep(250 /* ms */);
         }
         if (failex.get() == null) {
-          /*
-           * Note whether or not there are failures before we
+        /*
+       * Note whether or not there are failures before we
            * interrupt the running tasks.
            */
           success.set(true);
@@ -275,8 +275,8 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
         try {
           sail.__tearDownUnitTest();
         } catch (Throwable t) {
-          /*
-           * FIXME The test helper tear down should not throw anything,
+        /*
+       * FIXME The test helper tear down should not throw anything,
            * but it can do so if a tx has been asynchronously closed. This
            * has to do with the logic that openrdf uses to close open
            * transactions when the sail is shutdown by the caller.
@@ -413,8 +413,8 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
       EmbergraphSailConnection con = null;
       try {
         con = sail.getReadOnlyConnection();
-        /*
-         * Note: This sleep makes it much easier to hit the bug
+      /*
+       * Note: This sleep makes it much easier to hit the bug
          * documented here. However, the sleep can also cause the test
          * to really stretch out. So the sleep is only used until the
          * writers are done.
@@ -425,7 +425,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
 
         for (int i = 0; i < nreads; i++) {
           final CloseableIteration<? extends Statement, SailException> stats =
-              con.getStatements(subs[r.nextInt(nuris)], (URI) null, (Value) null, (Resource) null);
+              con.getStatements(subs[r.nextInt(nuris)], null, null, null);
           try {
             while (stats.hasNext()) {
               stats.next();
@@ -620,7 +620,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
 
     final boolean isQuads = Boolean.valueOf(props.getProperty(Options.QUADS_MODE, "false"));
 
-    /**
+    /*
      * Force override of the BTree on one index to occasionally prompt errors during the test run.
      *
      * @see <a href="http://trac.blazegraph.com/ticket/855">AssertionError: Child does not have
@@ -642,7 +642,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
     }
   }
 
-  /**
+  /*
    * Helper class for force abort of a B+Tree write.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/855">AssertionError: Child does not have
@@ -697,7 +697,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
     return def;
   }
 
-  /**
+  /*
    * Command line variant to allow stress testing without JUnit support
    *
    * <p>Invokes the same domultiple_csem_transaction2 method.
@@ -757,7 +757,7 @@ public abstract class TestMROWTransactions extends ProxyEmbergraphSailTestCase {
       try {
         domultiple_csem_transaction2(
             sail.get(),
-            (int) nreaderThreads,
+            nreaderThreads,
             (int) nwriters,
             (int) nreaders,
             false /*no tear down*/);

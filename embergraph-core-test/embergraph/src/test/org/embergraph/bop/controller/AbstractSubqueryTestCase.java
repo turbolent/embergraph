@@ -5,8 +5,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * Abstract base class for subquery join test suites.
+/*
+* Abstract base class for subquery join test suites.
  *
  * @author thompsonbry
  */
@@ -18,7 +18,7 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single, empty {@link IBindingSet}.
    *
    * @param bindingSet the binding set.
@@ -30,7 +30,7 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
         new IBindingSet[][] {new IBindingSet[] {bindingSet}});
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single, chunk containing all of the
    * specified {@link IBindingSet}s.
    *
@@ -42,7 +42,7 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
     return new ThickAsynchronousIterator<IBindingSet[]>(new IBindingSet[][] {bindingSets});
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single, chunk containing all of the
    * specified {@link IBindingSet}s.
    *
@@ -54,8 +54,8 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
     return new ThickAsynchronousIterator<IBindingSet[]>(bindingSetChunks);
   }
 
-  //    /**
-  //     * Verify the expected solutions.
+  //    /*
+//     * Verify the expected solutions.
   //     *
   //     * @param expected
   //     * @param itr
@@ -88,8 +88,8 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
   //        }
   //    }
   //
-  //    /**
-  //     * Verifies that the iterator visits the specified objects in some arbitrary
+  //    /*
+//     * Verifies that the iterator visits the specified objects in some arbitrary
   //     * ordering and that the iterator is exhausted once all expected objects
   //     * have been visited. The implementation uses a selection without
   //     * replacement "pattern".
@@ -105,8 +105,8 @@ public abstract class AbstractSubqueryTestCase extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * Verifies that the iterator visits the specified objects in some arbitrary
+  //    /*
+//     * Verifies that the iterator visits the specified objects in some arbitrary
   //     * ordering and that the iterator is exhausted once all expected objects
   //     * have been visited. The implementation uses a selection without
   //     * replacement "pattern".

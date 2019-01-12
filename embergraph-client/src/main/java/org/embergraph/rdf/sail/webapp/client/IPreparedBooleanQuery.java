@@ -21,14 +21,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * A prepared boolean query against a {@link RemoteRepository}.
+/*
+* A prepared boolean query against a {@link RemoteRepository}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IPreparedBooleanQuery extends IPreparedQuery {
 
-  /**
+  /*
    * Evaluate the boolean query.
    *
    * @param listener The query listener.
@@ -37,7 +37,7 @@ public interface IPreparedBooleanQuery extends IPreparedQuery {
    */
   boolean evaluate() throws Exception;
 
-  /**
+  /*
    * Evaluate the boolean query, notify the specified listener when complete.
    *
    * @param listener The query listener.

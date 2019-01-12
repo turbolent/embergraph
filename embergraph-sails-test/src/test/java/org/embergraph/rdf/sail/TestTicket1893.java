@@ -61,7 +61,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
 
     super(name);
   }
-  /**
+  /*
    * case 1: {@link Options#INLINE_TEXT_LITERALS} is true {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is true {@link Options#TEXT_INDEX_DATATYPE_LITERALS} is
    * true data loaded from file
@@ -94,7 +94,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 2: INLINE_TEXT_LITERALS is true INLINE_XSD_DATATYPE_LITERALS is true
    * TEXT_INDEX_DATATYPE_LITERALS is true data entered via SPARQL UPDATE
    */
@@ -126,7 +126,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 3: {@link Options#INLINE_TEXT_LITERALS} is false {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is false {@link Options#TEXT_INDEX_DATATYPE_LITERALS} is
    * true data loaded from file
@@ -159,7 +159,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 4: INLINE_TEXT_LITERALS is false INLINE_XSD_DATATYPE_LITERALS is false
    * TEXT_INDEX_DATATYPE_LITERALS is true data entered via SPARQL UPDATE
    */
@@ -191,7 +191,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 5: {@link Options#INLINE_TEXT_LITERALS} is true {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is false {@link Options#TEXT_INDEX_DATATYPE_LITERALS} is
    * true data loaded from file
@@ -224,7 +224,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 6: INLINE_TEXT_LITERALS is true INLINE_XSD_DATATYPE_LITERALS is false
    * TEXT_INDEX_DATATYPE_LITERALS is true data entered via SPARQL UPDATE
    */
@@ -256,7 +256,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 7: {@link Options#INLINE_TEXT_LITERALS} is false {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is true {@link Options#TEXT_INDEX_DATATYPE_LITERALS} is
    * true data loaded from file
@@ -289,7 +289,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 8: INLINE_TEXT_LITERALS is false INLINE_XSD_DATATYPE_LITERALS is true
    * TEXT_INDEX_DATATYPE_LITERALS is true data entered via SPARQL UPDATE
    */
@@ -321,7 +321,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 9: {@link Options#INLINE_TEXT_LITERALS} is true {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is true {@link Options#TEXT_INDEX_DATATYPE_LITERALS} is
    * false data loaded from file
@@ -354,7 +354,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 10: INLINE_TEXT_LITERALS is true INLINE_XSD_DATATYPE_LITERALS is true
    * TEXT_INDEX_DATATYPE_LITERALS is false data entered via SPARQL UPDATE
    */
@@ -386,7 +386,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 11: {@link Options#INLINE_TEXT_LITERALS} is false {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is false {@link Options#TEXT_INDEX_DATATYPE_LITERALS} is
    * false data loaded from file
@@ -421,7 +421,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     }
   }
 
-  /**
+  /*
    * case 12: INLINE_TEXT_LITERALS is false INLINE_XSD_DATATYPE_LITERALS is false
    * TEXT_INDEX_DATATYPE_LITERALS is false data entered via SPARQL UPDATE
    */
@@ -453,7 +453,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 13: {@link Options#INLINE_TEXT_LITERALS} is true {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is false {@link Options#TEXT_INDEX_DATATYPE_LITERALS} is
    * false data loaded from file
@@ -486,7 +486,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 14: INLINE_TEXT_LITERALS is true INLINE_XSD_DATATYPE_LITERALS is false
    * TEXT_INDEX_DATATYPE_LITERALS is false data entered via SPARQL UPDATE
    */
@@ -518,7 +518,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 15: {@link Options#INLINE_TEXT_LITERALS} is false {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is true {@link Options#TEXT_INDEX_DATATYPE_LITERALS} is
    * false data loaded from file
@@ -551,7 +551,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 16: INLINE_TEXT_LITERALS is false INLINE_XSD_DATATYPE_LITERALS is true
    * TEXT_INDEX_DATATYPE_LITERALS is false data entered via SPARQL UPDATE
    */
@@ -585,7 +585,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
 
   ////////////////////
 
-  /**
+  /*
    * case 17: {@link Options#INLINE_TEXT_LITERALS} is true {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is true data loaded from file
    */
@@ -629,7 +629,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 18: INLINE_TEXT_LITERALS is true INLINE_XSD_DATATYPE_LITERALS is true data entered via
    * SPARQL UPDATE
    */
@@ -673,7 +673,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 19: {@link Options#INLINE_TEXT_LITERALS} is false {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is false data loaded from file
    */
@@ -717,7 +717,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 20: INLINE_TEXT_LITERALS is false INLINE_XSD_DATATYPE_LITERALS is false data entered via
    * SPARQL UPDATE
    */
@@ -763,7 +763,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 21: {@link Options#INLINE_TEXT_LITERALS} is true {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is false data loaded from file
    */
@@ -815,7 +815,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 22: INLINE_TEXT_LITERALS is true INLINE_XSD_DATATYPE_LITERALS is false data entered via
    * SPARQL UPDATE
    */
@@ -867,7 +867,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 23: {@link Options#INLINE_TEXT_LITERALS} is false {@link
    * Options#INLINE_XSD_DATATYPE_LITERALS} is true data loaded from file
    */
@@ -911,7 +911,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
     endTest(cxn);
   }
 
-  /**
+  /*
    * case 24: INLINE_TEXT_LITERALS is false INLINE_XSD_DATATYPE_LITERALS is true data entered via
    * SPARQL UPDATE
    */
@@ -1008,7 +1008,7 @@ public class TestTicket1893 extends ProxyEmbergraphSailTestCase {
 
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-    return (EmbergraphSailRepositoryConnection) repo.getConnection();
+    return repo.getConnection();
   }
 
   private void endTest(EmbergraphSailRepositoryConnection cxn) throws Exception {

@@ -32,8 +32,8 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Batch removal of one or more tuples, optionally returning their existing values, the #of tuples
+/*
+* Batch removal of one or more tuples, optionally returning their existing values, the #of tuples
  * that were deleted, or a mask indicating which tuples were deleted (polymorphic return type).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -65,12 +65,12 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
     return false;
   }
 
-  /**
+  /*
    * What to return.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  private static enum ReturnWhatEnum {
+  private enum ReturnWhatEnum {
 
     /** Return the #of tuples that were deleted. */
     MutationCount(0),
@@ -78,7 +78,7 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
     /** Return the old value for each tuple. */
     OldValues(1),
 
-    /**
+    /*
      * Return a {@link ResultBitBuffer}, which is basically a bit mask indicating which of the
      * caller's tuples were deleted.
      */
@@ -86,7 +86,7 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
 
     private final int w;
 
-    private ReturnWhatEnum(final int w) {
+    ReturnWhatEnum(final int w) {
       this.w = w;
     }
 
@@ -106,9 +106,9 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
           throw new IllegalArgumentException();
       }
     }
-  };
+  }
 
-  /**
+  /*
    * Factory for {@link BatchRemove} procedures.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -116,21 +116,21 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
   public static class BatchRemoveConstructor
       extends AbstractKeyArrayIndexProcedureConstructor<BatchRemove> {
 
-    /**
+    /*
      * Singleton requests the return of the values that were removed from the index by the
      * operation.
      */
     public static final BatchRemoveConstructor RETURN_OLD_VALUES =
         new BatchRemoveConstructor(false /* assertFound */, ReturnWhatEnum.OldValues);
 
-    /**
+    /*
      * Singleton does NOT request the return of the values that were removed from the index by the
      * operation. Instead, only the #of deleted tuples is return (the mutationCount).
      */
     public static final BatchRemoveConstructor RETURN_MUTATION_COUNT =
         new BatchRemoveConstructor(false /* assertFound */, ReturnWhatEnum.MutationCount);
 
-    /**
+    /*
      * Singleton requests the return of a {@link ResultBitBuffer} providing a bit mask of the tuples
      * which were removed from the index by this operation (that is, those tuples which were
      * pre-existing in the index in a non-deleted state).
@@ -138,7 +138,7 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
     public static final BatchRemoveConstructor RETURN_BIT_MASK =
         new BatchRemoveConstructor(false /* assertFound */, ReturnWhatEnum.BitMask);
 
-    /**
+    /*
      * Singleton does NOT request the return of the values that were removed from the index by the
      * operation but asserts that each key was in fact present in the index.
      */
@@ -180,7 +180,7 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
   /** De-serialization ctor. */
   public BatchRemove() {}
 
-  /**
+  /*
    * Batch remove operation.
    *
    * @param keys A series of keys paired to values. Each key is an variable length unsigned byte[].
@@ -207,7 +207,7 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
     if (returnWhat == null) throw new IllegalArgumentException();
   }
 
-  /**
+  /*
    * Applies the operation.
    *
    * @param ndx

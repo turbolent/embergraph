@@ -23,8 +23,8 @@ package org.embergraph.config;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Aggregates unit tests into dependency order.
+/*
+* Aggregates unit tests into dependency order.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

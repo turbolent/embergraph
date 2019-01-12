@@ -23,8 +23,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * An immutable coordinate expressed in degrees, minutes and (tenths of) seconds.
+/*
+* An immutable coordinate expressed in degrees, minutes and (tenths of) seconds.
  *
  * <p>Note: When the angle is negative, all components must be negative. For example, 0794731W
  * corresponds to -79 deg 47' 31.111439999999998", but the individual components are actually -79,
@@ -86,7 +86,7 @@ public class CoordinateDMS implements ICoordinate {
     this.tenthsOfSecondsEast = tenthsOfSecondsEast;
   }
 
-  /**
+  /*
    * Representation of the coordinate in degrees, minutes, and (tenths of) seconds. For example:
    *
    * <pre>
@@ -114,7 +114,7 @@ public class CoordinateDMS implements ICoordinate {
     return north + " " + east;
   }
 
-  /**
+  /*
    * Rounds off the coordinate to the nearest seconds.
    *
    * @return A new coordinate that has been rounded off to the nearest seconds.
@@ -132,7 +132,7 @@ public class CoordinateDMS implements ICoordinate {
         degreesNorth, minutesNorth, secondsNorth * 10, degreesEast, minutesEast, secondsEast * 10);
   }
 
-  /**
+  /*
    * Rounds off the coordinate to the nearest minutes (rounds up at 30.0 seconds to the next highest
    * minute).
    *
@@ -157,7 +157,7 @@ public class CoordinateDMS implements ICoordinate {
     return false;
   }
 
-  /**
+  /*
    * True iff the two coordinates are exactly the same (to the tenths of the second).
    *
    * @param o Another coordinate.
@@ -172,7 +172,7 @@ public class CoordinateDMS implements ICoordinate {
         && tenthsOfSecondsEast == o.tenthsOfSecondsEast;
   }
 
-  /**
+  /*
    * Some formats that are accepted:
    *
    * <ul>
@@ -237,7 +237,7 @@ public class CoordinateDMS implements ICoordinate {
     throw new ParseException("Not recognized: " + text, 0);
   }
 
-  /**
+  /*
    * Matches a latitude expressed with any of the formats for expressing degrees, minutes, and
    * (optional) seconds (with optional tenths of seconds). For example <code>32� 18' 23.1" N</code>,
    * <code>32 18 23.1 N</code> or <code>32:18:23N</code>.
@@ -267,7 +267,7 @@ public class CoordinateDMS implements ICoordinate {
           + // north/south
           ")";
 
-  /**
+  /*
    * Matches a longitude expressed with any of the formats for expressing degrees, minutes, and
    * (optional) seconds (with optional tenths of seconds).
    *
@@ -296,7 +296,7 @@ public class CoordinateDMS implements ICoordinate {
           + // east/west
           ")";
 
-  /**
+  /*
    * Matches any of the formats that put separators between degrees, minutes, and seconds.
    *
    * <dl>
@@ -344,7 +344,7 @@ public class CoordinateDMS implements ICoordinate {
 
   static final int group_eastWest = 15;
 
-  /**
+  /*
    * Formats a value expressing tenths of a second. For example, <code>328</code> is formatted as
    * <code>32.8</code>.
    *
@@ -359,7 +359,7 @@ public class CoordinateDMS implements ICoordinate {
     return seconds + "." + tenths;
   }
 
-  /**
+  /*
    * Parses a value representing seconds and optional tenths of a second. For example, <code>32.8
    * </code> is returned as <code>328</code> and <code>32</code> is returned as <code>320</code>.
    *
@@ -390,7 +390,7 @@ public class CoordinateDMS implements ICoordinate {
     return tenthsOfSecond;
   }
 
-  /**
+  /*
    * Convert to decimal degrees.
    *
    * <p>Decimal degrees = whole number of degrees, plus minutes divided by 60, plus seconds divided

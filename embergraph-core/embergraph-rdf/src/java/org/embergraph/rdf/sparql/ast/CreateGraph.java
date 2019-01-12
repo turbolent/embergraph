@@ -25,8 +25,8 @@ import java.util.Map;
 import org.embergraph.bop.BOp;
 import org.embergraph.rdf.model.EmbergraphStatement;
 
-/**
- * This operation creates a graph in the Graph Store (this operation is a NOP for embergraph).
+/*
+* This operation creates a graph in the Graph Store (this operation is a NOP for embergraph).
  *
  * <pre>
  * CREATE ( SILENT )? GRAPH IRIref
@@ -43,7 +43,7 @@ public class CreateGraph extends AbstractOneGraphManagement {
 
   public interface Annotations extends AbstractOneGraphManagement.Annotations {
 
-    /**
+    /*
      * The {@link EmbergraphStatement}[] which provides the provisioning information for the named
      * solution set (optional, even when creating a named solution set).
      */
@@ -61,7 +61,7 @@ public class CreateGraph extends AbstractOneGraphManagement {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

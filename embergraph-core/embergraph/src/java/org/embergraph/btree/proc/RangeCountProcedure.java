@@ -40,7 +40,7 @@ public class RangeCountProcedure extends AbstractKeyRangeIndexProcedure<Long>
     super();
   }
 
-  /**
+  /*
    * Range count using the specified bounds.
    *
    * @param exact iff an exact range count is required.
@@ -80,7 +80,7 @@ public class RangeCountProcedure extends AbstractKeyRangeIndexProcedure<Long>
     return deleted;
   }
 
-  /**
+  /*
    * Range count of entries in a key range for the index.
    *
    * <p>Note: When the index {@link IndexMetadata#getDeleteMarkers()} this method reports the upper

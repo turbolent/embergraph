@@ -108,7 +108,7 @@ public abstract class AbstractDataAndSPARQLTestCase extends AbstractASTEvaluatio
           getName(), "", store, astContainer, queryResult, expectedResult, false, checkOrder);
     }
 
-    /**
+    /*
      * Load data from an input stream.
      *
      * @param is The stream (required).

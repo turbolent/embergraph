@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal;
 
-/**
- * Abstract class that defines the integer packing needed to allow for support of multiple inline
+/*
+* Abstract class that defines the integer packing needed to allow for support of multiple inline
  * integer URI handlers with the same namepace.
  *
  * <p>This is required as once the integer value is inlined it is not possible to determine which
@@ -49,7 +49,7 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
   /** The ID to pack. From 0 to the MAX_IDS */
   protected int packedId = 0;
 
-  /**
+  /*
    * Maximum nubmer of IDs
    *
    * <p>Up to 32 different values for a single URI.
@@ -80,7 +80,7 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
     this.packedId = packedId;
   }
 
-  /**
+  /*
    * Pack the value with the leading 5 bits used to encode the id used for decoding the inline URI
    * handler.
    *
@@ -102,7 +102,7 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
     return packedVal;
   }
 
-  /**
+  /*
    * Convenience method to take an Integer string value, pack it, and convert back to a string.
    *
    * @param intVal
@@ -113,7 +113,7 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
     String longVal = null;
 
     try {
-      longVal = Long.toString(packValue((long) Long.parseLong(intVal)));
+      longVal = Long.toString(packValue(Long.parseLong(intVal)));
     } catch (NumberFormatException nfe) {
       // It is not a valid number
       // Do not inline
@@ -123,27 +123,27 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
     return longVal;
   }
 
-  /**
+  /*
    * Convenience method for unpacking a value from a string.
    *
    * @param s
    * @return
    */
   public String getUnpackedValueString(final String s) {
-    return Long.toString(unpackValue((long) Long.parseLong(s)));
+    return Long.toString(unpackValue(Long.parseLong(s)));
   }
 
-  /**
+  /*
    * Convenience method to unpack a long value from a string.
    *
    * @param s
    * @return
    */
   public long getUnpackedValueFromString(final String s) {
-    return unpackValue((long) Long.parseLong(s));
+    return unpackValue(Long.parseLong(s));
   }
 
-  /**
+  /*
    * Take a packed long and extract the value.
    *
    * @param packedVal
@@ -158,7 +158,7 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
     return unpackedVal;
   }
 
-  /**
+  /*
    * Convenience method to get the packed ID value from an input {@link String}.
    *
    * @param s
@@ -168,7 +168,7 @@ public abstract class InlineLocalNameIntegerURIHandler extends InlineSignedInteg
     return unpackId(Long.parseLong(s));
   }
 
-  /**
+  /*
    * Take a packed long and extract the ID.
    *
    * @param packedVal

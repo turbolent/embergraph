@@ -27,8 +27,8 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.IndexMetadata;
 
-/**
- * Test suite for hierarchical locking of indices based on namespace prefixes. This test suite was
+/*
+* Test suite for hierarchical locking of indices based on namespace prefixes. This test suite was
  * introduced as part of the support for group commit for the RDF database layer in the
  * non-scale-out modes. In order to be able to run RDF operations using job-based concurrency, we
  * need to predeclare the namespace (rather than the individual indices) and then isolate all
@@ -53,7 +53,7 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
     super(name);
   }
 
-  /**
+  /*
    * Test creates several named indices some of which have a shared namespace prefix and verifies
    * that a lock declared for the namespace prefix permits that task to access any index in that
    * namespace. The test also verifies that an index that does not share the namespace prefix may
@@ -131,8 +131,8 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
                     assertNotNull(name, getIndex(name));
                   }
 
-                  /*
-                   * Verify no access to the indices outside of that
+                /*
+       * Verify no access to the indices outside of that
                    * namespace.
                    */
                   for (String name : disallowed_indices) {
@@ -159,7 +159,7 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Unit test for hierarchical locking verifies that we can declared a namespace for a task which
    * then creates multiple indices spanned by that namespace.
    *
@@ -190,8 +190,8 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
 
                       final UUID[] indexUUIDs = new UUID[allowed_indices.length];
 
-                      /*
-                       * Create indices that we should be able to see when
+                    /*
+       * Create indices that we should be able to see when
                        * holding the lock for the namespace.
                        */
                       for (int i = 0; i < allowed_indices.length; i++) {
@@ -254,8 +254,8 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
                 @Override
                 protected Void doTask() throws Exception {
 
-                  /*
-                   * Verify access to the newly created indices.
+                /*
+       * Verify access to the newly created indices.
                    */
                   for (int i = 0; i < allowed_indices.length; i++) {
 
@@ -287,8 +287,8 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
                 @Override
                 protected Void doTask() throws Exception {
 
-                  /*
-                   * Create indices that we should be able to see when
+                /*
+       * Create indices that we should be able to see when
                    * holding the lock for the namespace.
                    */
                   for (int i = 0; i < allowed_indices.length; i++) {
@@ -314,8 +314,8 @@ public class TestHierarchicalLockingTasks extends ProxyTestCase<Journal> {
                 @Override
                 protected Void doTask() throws Exception {
 
-                  /*
-                   * Verify no access to the dropped indices.
+                /*
+       * Verify no access to the dropped indices.
                    */
                   for (int i = 0; i < allowed_indices.length; i++) {
 

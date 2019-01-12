@@ -26,8 +26,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Proxied test suite for the DELETE_BY_ACCESS_PATH method.
+/*
+* Proxied test suite for the DELETE_BY_ACCESS_PATH method.
  *
  * @param <S>
  * @see <a href="http://trac.bigdata.com/ticket/1177">Resource... contexts not encoded/decoded
@@ -283,7 +283,7 @@ public class Test_REST_DELETE_BY_ACCESS_PATH<S extends IIndexManager>
     assertEquals(2, mutationResult);
   }
 
-  /**
+  /*
    * Delete everything in a two named graphs (context) while the data in another named graph is not
    * deleted.
    */

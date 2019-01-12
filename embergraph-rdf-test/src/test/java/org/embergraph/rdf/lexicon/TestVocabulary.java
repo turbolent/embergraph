@@ -35,8 +35,8 @@ import org.embergraph.rdf.vocab.RDFSVocabulary;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for the {@link Vocabulary} implementations in the context of an {@link
+/*
+* Test suite for the {@link Vocabulary} implementations in the context of an {@link
  * AbstractTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

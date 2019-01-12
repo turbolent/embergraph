@@ -37,8 +37,8 @@ import org.embergraph.striterator.EmptyChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Provides backward chaining for reverse property collection on owl:sameAs for the ?PO and ??O
+/*
+* Provides backward chaining for reverse property collection on owl:sameAs for the ?PO and ??O
  * access paths.
  *
  * <p>Note: This is a reverse properties query: we know o and and we want to know all {s,p} tuples
@@ -55,7 +55,7 @@ public class BackchainOwlSameAsPropertiesPOIterator extends BackchainOwlSameAsIt
 
   private boolean canRemove = false;
 
-  /**
+  /*
    * Create an iterator that will visit all statements in the source iterator and also backchain any
    * entailments that would have resulted from owl:sameAs {2,3}.
    *
@@ -160,7 +160,7 @@ public class BackchainOwlSameAsPropertiesPOIterator extends BackchainOwlSameAsIt
     return sameAs2It.hasNext();
   }
 
-  /**
+  /*
    * First iterate the source iterator and then iterate the sameAs{3} iterator, which was fully
    * populated in the ctor. Along the way, collect up the sameAs{2} inferences, which will then be
    * iterated once the first two iterators are complete.
@@ -197,7 +197,7 @@ public class BackchainOwlSameAsPropertiesPOIterator extends BackchainOwlSameAsIt
     return current;
   }
 
-  /**
+  /*
    * Find all the alternate s values for this SPO, which we need to do since s is unbound in this
    * access path.
    *

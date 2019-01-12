@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import org.embergraph.rdf.sparql.ast.Update;
 
-/**
- * An event reflecting progress for some sequence of SPARQL UPDATE operations.
+/*
+* An event reflecting progress for some sequence of SPARQL UPDATE operations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -30,12 +30,12 @@ public class SPARQLUpdateEvent {
 
   private final Update op;
   private final long elapsed;
-  /**
+  /*
    * The time to flush the sail connection before executing the next update operation in an update
    * request.
    */
   private final long connectionFlushNanos;
-  /**
+  /*
    * The time to batch resolve any previously unknown RDF Values to their IVs before executing the
    * next update operation.
    */
@@ -44,7 +44,7 @@ public class SPARQLUpdateEvent {
   private DeleteInsertWhereStats deleteInsertWhereStats;
   private final Throwable cause;
 
-  /**
+  /*
    * Class reports back the time for the WHERE clause, DELETE clause (if any), and INSERT clause (if
    * any) for a DELETE/INSERT WHERE operation.
    *
@@ -57,7 +57,7 @@ public class SPARQLUpdateEvent {
     public final AtomicLong insertNanos = new AtomicLong();
   }
 
-  /**
+  /*
    * @param op The {@link Update} operation.
    * @param elapsed The elapsed time (nanoseconds).
    * @param cause The cause iff an error occurred and otherwise <code>null</code>.
@@ -97,7 +97,7 @@ public class SPARQLUpdateEvent {
     return elapsed;
   }
 
-  /**
+  /*
    * Return the time required to flush the sail connection before executing the corresponding SPARQL
    * UPDATE operation within a SPARQL UPDATE request that has multiple operations (the sail
    * connection is flushed before each operation except the first).
@@ -108,7 +108,7 @@ public class SPARQLUpdateEvent {
     return connectionFlushNanos;
   }
 
-  /**
+  /*
    * Return the time required to batch resolve any unknown RDF Values against the dictionary indices
    * before executing the corresponding SPARQL UPDATE operation within a SPARQL UPDATE request that
    * has multiple operations (batch resolution must be performed before each UPDATE operation in
@@ -127,7 +127,7 @@ public class SPARQLUpdateEvent {
     return cause;
   }
 
-  /**
+  /*
    * Return statistics associated with the processing of a DELETE/INSERT WHERE operation (and
    * otherwise <code>null</code>).
    *
@@ -160,7 +160,7 @@ public class SPARQLUpdateEvent {
       this.done = done;
     }
 
-    /**
+    /*
      * Return the #of statements parsed as of the moment that this event was generated.
      *
      * <p>Note: Statements are incrementally written onto the backing store. Thus, the parser will
@@ -179,7 +179,7 @@ public class SPARQLUpdateEvent {
       return nparsed;
     }
 
-    /**
+    /*
      * Return <code>true</code> iff the LOAD operation has finished parsing the document.
      *
      * <p>Note: This does not mean that the statements have been written through to the disk, just

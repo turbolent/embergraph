@@ -18,8 +18,8 @@ package org.embergraph.ganglia.util;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-/**
- * A thread factory that configures the thread as a daemon thread.
+/*
+* A thread factory that configures the thread as a daemon thread.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: DaemonThreadFactory.java 5824 2011-12-29 20:52:02Z thompsonbry $
@@ -32,7 +32,7 @@ public class DaemonThreadFactory implements ThreadFactory {
 
   private static ThreadFactory _default = new DaemonThreadFactory();
 
-  /**
+  /*
    * Returns an instance based on {@link Executors#defaultThreadFactory()} that configures the
    * thread for daemon mode.
    */
@@ -52,7 +52,7 @@ public class DaemonThreadFactory implements ThreadFactory {
     this(Executors.defaultThreadFactory(), basename);
   }
 
-  /**
+  /*
    * Uses the specified delegate {@link ThreadFactory}.
    *
    * @param delegate The delegate thread factory that is responsible for creating the threads.

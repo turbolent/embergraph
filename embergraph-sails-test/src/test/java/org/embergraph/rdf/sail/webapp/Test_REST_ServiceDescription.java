@@ -24,8 +24,8 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepository;
 import org.openrdf.model.Graph;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Proxied test suite.
+/*
+* Proxied test suite.
  *
  * @param <S>
  */

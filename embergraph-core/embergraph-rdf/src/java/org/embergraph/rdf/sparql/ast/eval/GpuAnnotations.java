@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Annotations for communication with the GPU acceleration module. This should only include those
+/*
+* Annotations for communication with the GPU acceleration module. This should only include those
  * annotations that need to be declared in the embergraph core in order to support the GPU
  * acceleration module.
  *
@@ -26,14 +26,14 @@ package org.embergraph.rdf.sparql.ast.eval;
  */
 public interface GpuAnnotations {
 
-  /**
+  /*
    * When true, attempt to evaluate on the mapgraph runtime.
    *
    * @see #DEFAULT_EVALUATE_ON_GPU
    */
   String EVALUATE_ON_GPU = "evaluateOnGPU";
 
-  /**
+  /*
    * Default is false.
    *
    * @see #EVALUATE_ON_GPU

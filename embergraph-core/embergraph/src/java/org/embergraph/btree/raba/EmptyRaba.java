@@ -9,8 +9,8 @@ import java.io.ObjectOutput;
 import java.io.OutputStream;
 import java.util.Iterator;
 
-/**
- * An immutable, empty {@link IRaba}.
+/*
+* An immutable, empty {@link IRaba}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -23,7 +23,7 @@ public abstract class EmptyRaba implements IRaba, Externalizable {
   /** An empty, immutable B+Tree values {@link IRaba} instance. */
   public static transient IRaba VALUES = new EmptyValuesRaba();
 
-  /**
+  /*
    * An empty, immutable B+Tree keys {@link IRaba}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -44,7 +44,7 @@ public abstract class EmptyRaba implements IRaba, Externalizable {
     }
   }
 
-  /**
+  /*
    * An empty, immutable B+Tree values {@link IRaba}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -25,8 +25,8 @@ import java.util.Properties;
 import junit.extensions.proxy.IProxyTest;
 import junit.framework.Test;
 
-/**
- * This class provides proxy delegation logic for abstract methods declared by {@link
+/*
+* This class provides proxy delegation logic for abstract methods declared by {@link
  * AbstractJournalTestCase} and is used to extend the set of tests that will be applied to all
  * implementations of the generic object model Java API. If you want to test a new implementation,
  * you MUST extend the {@link AbstractJournalTestCase} instead and implement its abstract methods
@@ -66,7 +66,7 @@ public abstract class ProxyTestCase<S extends IIndexManager> extends AbstractInd
     return m_delegate;
   }
 
-  /**
+  /*
    * Returns the delegate after first making sure that it is non-null and extends {@link
    * AbstractJournalTestCase}.
    */
@@ -109,7 +109,7 @@ public abstract class ProxyTestCase<S extends IIndexManager> extends AbstractInd
 
     if (m_delegate instanceof AbstractIndexManagerTestCase) {
 
-      return (AbstractIndexManagerTestCase) m_delegate;
+      return m_delegate;
     }
 
     throw new IllegalStateException(
@@ -187,8 +187,8 @@ public abstract class ProxyTestCase<S extends IIndexManager> extends AbstractInd
 
         if (nremaining > startupActiveThreads) log.error(failMessage);
 
-        /*
-         * Wait up to 2 seconds for threads to die off so the next test
+      /*
+       * Wait up to 2 seconds for threads to die off so the next test
          * will run more cleanly.
          */
         for (int i = 0; i < 20; i++) {
@@ -206,14 +206,14 @@ public abstract class ProxyTestCase<S extends IIndexManager> extends AbstractInd
     return getOurDelegate().getProperties();
   }
 
-  /**
+  /*
    * Open/create an {@link IIndexManager} using the properties reported by {@link #getProperties()}.
    */
   public S getStore() {
     return getOurDelegate().getStore(getProperties());
   }
 
-  /**
+  /*
    * Open/create an {@link IIndexManager} using the given properties.
    *
    * <p>{@inheritDoc}
@@ -223,7 +223,7 @@ public abstract class ProxyTestCase<S extends IIndexManager> extends AbstractInd
     return getOurDelegate().getStore(properties);
   }
 
-  /**
+  /*
    * Close the {@link IIndexManager} and re-open an {@link IIndexManager} backed by the same
    * persistent storage.
    *

@@ -52,8 +52,8 @@ package org.embergraph.rdf.sail.webapp;
 import junit.framework.Test;
 import org.embergraph.journal.IIndexManager;
 
-/**
- * Proxied test suite. We test the behavior reported in trac 731 - the bug resport uses the repo
+/*
+* Proxied test suite. We test the behavior reported in trac 731 - the bug resport uses the repo
  * properties to set up the describe mode, the behavior reproduced just using a query hint.
  */
 public class TestCBD731<S extends IIndexManager> extends AbstractSimpleInsertTest<S> {

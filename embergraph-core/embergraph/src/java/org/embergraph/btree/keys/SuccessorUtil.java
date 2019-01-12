@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.keys;
 
-/**
- * Utility methods for computing the successor of a value for various data types.
+/*
+* Utility methods for computing the successor of a value for various data types.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -39,7 +39,7 @@ public class SuccessorUtil {
    * useful single precision values.
    */
 
-  /**
+  /*
    * Positive zero (+0f).
    *
    * <p>Note: +0f and -0f will compare as _equal_ in the language. This means that you can not write
@@ -47,7 +47,7 @@ public class SuccessorUtil {
    */
   public static final float FPOS_ZERO = Float.intBitsToFloat(0x00000000);
 
-  /**
+  /*
    * Negative zero (-0f).
    *
    * <p>Note: +0f and -0f will compare as _equal_ in the language. This means that you can not write
@@ -76,7 +76,7 @@ public class SuccessorUtil {
   /*
    * useful double precision values.
    */
-  /**
+  /*
    * Positive zero (+0d).
    *
    * <p>Note: +0d and -0d will compare as _equal_ in the language. This means that you can not write
@@ -84,7 +84,7 @@ public class SuccessorUtil {
    */
   public static final double DPOS_ZERO = Double.longBitsToDouble(0x0000000000000000L);
 
-  /**
+  /*
    * Negative zero (-0d).
    *
    * <p>Note: +0d and -0d will compare as _equal_ in the language. This means that you can not write
@@ -114,7 +114,7 @@ public class SuccessorUtil {
    * successor methods.
    */
 
-  /**
+  /*
    * Computes the successor of a <code>byte</code> value.
    *
    * @param n A value
@@ -133,7 +133,7 @@ public class SuccessorUtil {
     }
   }
 
-  /**
+  /*
    * Computes the successor of a <code>char</code> value.
    *
    * @param n A value
@@ -152,7 +152,7 @@ public class SuccessorUtil {
     }
   }
 
-  /**
+  /*
    * Computes the successor of a <code>short</code> value.
    *
    * @param n A value
@@ -171,7 +171,7 @@ public class SuccessorUtil {
     }
   }
 
-  /**
+  /*
    * Computes the successor of an <code>int</code> value.
    *
    * @param n A value
@@ -190,7 +190,7 @@ public class SuccessorUtil {
     }
   }
 
-  /**
+  /*
    * Computes the successor of a <code>long</code> value.
    *
    * @param n A value
@@ -209,7 +209,7 @@ public class SuccessorUtil {
     }
   }
 
-  /**
+  /*
    * Computes the successor of a <code>float</code> value.
    *
    * <p>The IEEE floating point standard provides a means for computing the next larger or smaller
@@ -281,7 +281,7 @@ public class SuccessorUtil {
     return nxt;
   }
 
-  /**
+  /*
    * Computes the successor of a <code>double</code> value.
    *
    * <p>The IEEE floating point standard provides a means for computing the next larger or smaller
@@ -352,7 +352,7 @@ public class SuccessorUtil {
     return nxt;
   }
 
-  /**
+  /*
    * The successor of a string value is formed by appending a <code>nul</code>. The successor of a
    * <code>null</code> string reference is an empty string. The successor of a string value is
    * defined unless the string is too long.
@@ -367,7 +367,7 @@ public class SuccessorUtil {
     return s + "\0";
   }
 
-  /**
+  /*
    * Modifies a byte[] as a side-effect so that it represents its successor when interpreted as a
    * fixed length bit string. The successor is formed by adding ONE (1) to the low byte and handling
    * overflow.
@@ -382,7 +382,7 @@ public class SuccessorUtil {
     return successor(b, 0, b.length);
   }
 
-  /**
+  /*
    * Modifies a byte[] as a side-effect so that it represents its successor when interpreted as a
    * fixed length bit string. The successor is formed by adding ONE (1) to the low byte and handling
    * overflow.

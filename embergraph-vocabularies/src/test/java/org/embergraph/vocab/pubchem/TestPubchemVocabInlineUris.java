@@ -17,7 +17,7 @@ import org.embergraph.rdf.store.AbstractTripleStoreTestCase;
 
 public class TestPubchemVocabInlineUris extends AbstractTripleStoreTestCase {
 
-  /**
+  /*
    * Please set your database properties here, except for your journal file, please DO NOT SPECIFY A
    * JOURNAL FILE.
    */

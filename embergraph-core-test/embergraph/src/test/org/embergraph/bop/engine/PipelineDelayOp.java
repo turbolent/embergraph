@@ -9,8 +9,8 @@ import org.embergraph.bop.BOpContext;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.PipelineOp;
 
-/**
- * Operator blocks evaluation (sleeps) for the specified {@link Annotations#DELAY} and then throws
+/*
+* Operator blocks evaluation (sleeps) for the specified {@link Annotations#DELAY} and then throws
  * an {@link PipelineDelayError}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -27,7 +27,7 @@ public class PipelineDelayOp extends PipelineOp {
     String DELAY = PipelineDelayOp.class.getName() + ".delay";
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param op
@@ -36,7 +36,7 @@ public class PipelineDelayOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args

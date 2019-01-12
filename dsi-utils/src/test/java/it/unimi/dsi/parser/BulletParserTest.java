@@ -16,7 +16,7 @@ public class BulletParserTest extends TestCase {
 
   public void testParser()
       throws InstantiationException, IllegalAccessException, InvocationTargetException,
-          NoSuchMethodException, FileNotFoundException, IOException {
+          NoSuchMethodException, IOException {
     char[] text = IOUtils.toCharArray(this.getClass().getResourceAsStream("test.html"), "UTF-8");
 
     final Callback mockCallback =

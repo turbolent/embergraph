@@ -5,8 +5,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 
-/**
- * Implementation that may be used when service scores are not yet available.
+/*
+* Implementation that may be used when service scores are not yet available.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -26,7 +26,7 @@ public abstract class AbstractServiceLoadHelperWithoutScores extends AbstractSer
     super(joinTimeout);
   }
 
-  /**
+  /*
    * Computes the under-utilized services in the case where where <i>minCount</i> is non-zero and we
    * do not have pre-computed {@link #serviceScores} on hand. If there are also no active services,
    * then this awaits the join of at least one service. Once it has at least one service that is not

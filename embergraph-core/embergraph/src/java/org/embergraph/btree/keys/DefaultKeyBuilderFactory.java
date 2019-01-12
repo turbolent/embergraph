@@ -29,8 +29,8 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.embergraph.btree.keys.KeyBuilder.Options;
 
-/**
- * Default factory for Unicode {@link IKeyBuilder}s. This does NOT generate thread-local instances.
+/*
+* Default factory for Unicode {@link IKeyBuilder}s. This does NOT generate thread-local instances.
  * The factory serializes all properties that were required to generate a configuration so that the
  * same configuration may be materialized on another JVM or host by de-serializing an instance of
  * this factory.
@@ -85,7 +85,7 @@ public class DefaultKeyBuilderFactory implements IKeyBuilderFactory, Serializabl
     return locale;
   }
 
-  /**
+  /*
    * The selected collator strength.
    *
    * @return Either a {@link StrengthEnum}, an {@link Integer}, or <code>null</code> (which means no
@@ -123,7 +123,7 @@ public class DefaultKeyBuilderFactory implements IKeyBuilderFactory, Serializabl
     return sb.toString();
   }
 
-  /**
+  /*
    * Return the property if found in <i>properties</i>. If <i>properties</i> is <code>null</code> or
    * if the value is not found in <i>properties</i>, then return the property if found using {@link
    * System#getProperty(String)}.
@@ -137,7 +137,7 @@ public class DefaultKeyBuilderFactory implements IKeyBuilderFactory, Serializabl
     return getProperty(properties, key, null);
   }
 
-  /**
+  /*
    * Return the property if found in <i>properties</i>. If <i>properties</i> is <code>null</code> or
    * if the value is not found in <i>properties</i>, then return the property if found using {@link
    * System#getProperty(String)}.
@@ -170,7 +170,7 @@ public class DefaultKeyBuilderFactory implements IKeyBuilderFactory, Serializabl
     return val;
   }
 
-  /**
+  /*
    * Create a factory for {@link IKeyBuilder} instances configured according to the specified
    * <i>properties</i>. Any properties NOT explicitly given will be defaulted from {@link
    * System#getProperties()}. The pre-defined properties {@link Options#USER_LANGUAGE}, {@link
@@ -214,8 +214,8 @@ public class DefaultKeyBuilderFactory implements IKeyBuilderFactory, Serializabl
 
       if (!explicitCollatorChoice) {
 
-        /*
-         * Choice was made by default rather than explicitly specified
+      /*
+       * Choice was made by default rather than explicitly specified
          * by a property.
          */
 
@@ -349,7 +349,7 @@ public class DefaultKeyBuilderFactory implements IKeyBuilderFactory, Serializabl
   /** Text of the exception thrown when the ICU library is required but is not available. */
   public static final String ICU_NOT_AVAILABLE = "The ICU library is not available.";
 
-  /**
+  /*
    * Figures out whether or not the ICU library is available.
    *
    * @return <code>true</code> iff the ICU library is available.

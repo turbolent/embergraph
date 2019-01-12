@@ -38,8 +38,8 @@ import org.embergraph.btree.IndexSegment;
 import org.embergraph.io.ByteBufferInputStream;
 import org.embergraph.io.ByteBufferOutputStream;
 
-/**
- * Bulk data (de-)compressor used for leaves in {@link IndexSegment}s. The compression and
+/*
+* Bulk data (de-)compressor used for leaves in {@link IndexSegment}s. The compression and
  * decompression operations of a given {@link RecordCompressor} reuse a shared instance buffer. Any
  * decompression result is valid only until the next compression or decompression operation
  * performed by that {@link RecordCompressor}. When used in a single-threaded context this reduces
@@ -57,7 +57,7 @@ public class RecordCompressor implements Externalizable, IRecordCompressor {
   /** */
   private static final long serialVersionUID = -2028159717578047153L;
 
-  /**
+  /*
    * A huge portion of the cost associated with using {@link Deflater} is the initialization of a
    * new instance. Since this code is designed to operate within a single-threaded environment, we
    * just reuse the same instance for each invocation.
@@ -66,7 +66,7 @@ public class RecordCompressor implements Externalizable, IRecordCompressor {
 
   private final transient Inflater _inflater = new Inflater();
 
-  /**
+  /*
    * Reused on each decompression request and reallocated if buffer size would be exceeded. This
    * will achieve a steady state sufficient to decompress any given input in a single pass.
    */
@@ -80,7 +80,7 @@ public class RecordCompressor implements Externalizable, IRecordCompressor {
     return getClass().getName() + "{level=" + level + "}";
   }
 
-  /**
+  /*
    * Create a record compressor.
    *
    * @param level The compression level.
@@ -216,7 +216,7 @@ public class RecordCompressor implements Externalizable, IRecordCompressor {
     return decompress(iis);
   }
 
-  /**
+  /*
    * This decompresses data into a shared instance byte[]. If the byte[] runs out of capacity then a
    * new byte[] is allocated with twice the capacity, the data is copied into new byte[], and
    * decompression continues. The shared instance byte[] is then returned to the caller. This

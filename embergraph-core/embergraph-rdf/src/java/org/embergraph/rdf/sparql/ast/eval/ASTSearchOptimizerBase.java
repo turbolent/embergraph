@@ -50,8 +50,8 @@ import org.embergraph.service.fts.FTS;
 import org.openrdf.model.URI;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Translate {@link FTS#SEARCH} and related magic predicates into a {@link ServiceNode} which will
+/*
+* Translate {@link FTS#SEARCH} and related magic predicates into a {@link ServiceNode} which will
  * invoke the embergraph search engine.
  *
  * <pre>
@@ -143,7 +143,7 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryRoot, bindingSets);
   }
 
-  /**
+  /*
    * Rewrite search predicates for each distinct <code>searchVar</code>. All such predicates for a
    * given <code>searchVar</code> MUST appear within the same group.
    */
@@ -174,8 +174,8 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
 
           final TermNode p = sp.p();
 
-          /**
-           * This test only allows a binding for the predicate to be a URI.
+        /*
+       * This test only allows a binding for the predicate to be a URI.
            *
            * @see <a href= "https://sourceforge.net/apps/trac/bigdata/ticket/633" >
            *     ClassCastException when binding non-uri values to a variable that occurs in
@@ -183,13 +183,13 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
            */
           if (p.isConstant() && p.getValue() instanceof URI) {
 
-            final URI uri = (URI) ((ConstantNode) p).getValue();
+            final URI uri = (URI) p.getValue();
 
             if (uri != null // Must be a known value.
                 && uri.stringValue().startsWith(namespace)) {
 
-              /*
-               * Some search predicate.
+            /*
+       * Some search predicate.
                */
 
               if (!searchUrisInternal.contains(uri))
@@ -221,8 +221,8 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
 
         } else if (child instanceof GroupNodeBase<?>) {
 
-          /*
-           * Recursion.
+        /*
+       * Recursion.
            */
 
           @SuppressWarnings("unchecked")
@@ -241,13 +241,13 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
 
         final Map<URI, StatementPatternNode> statementPatterns = e.getValue();
 
-        /*
-         * Remove search predicates from the group.
+      /*
+       * Remove search predicates from the group.
          */
         removeSearchPredicates(group, statementPatterns);
 
-        /*
-         * Translate search predicates into a ServiceNode and associated
+      /*
+       * Translate search predicates into a ServiceNode and associated
          * filters.
          */
         final ServiceNode serviceNode =
@@ -263,7 +263,7 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * If there is no join to the subject position for the search variable (?s ?p ?searchVar) and the
    * search is restricted to a subset of the named graphs (either via a dataset declaration or
    * through a GRAPH graph context), then we insert a join to the subject position now. This join
@@ -345,16 +345,16 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
       final DatasetNode datasetNode = queryRoot.getDataset();
 
       if (datasetNode == null) {
-        /*
-         * All graphs are in the default graph so no constraint is
+      /*
+       * All graphs are in the default graph so no constraint is
          * required.
          */
         return;
       }
 
       if (datasetNode.getDefaultGraphs() == null && datasetNode.getDefaultGraphFilter() != null) {
-        /*
-         * All graphs are in the default graph so no constraint is
+      /*
+       * All graphs are in the default graph so no constraint is
          * required. (We have to check for a filter if the default
          * graphs were not specified since the filter can also restrict
          * what is visible.)
@@ -377,7 +377,7 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * @param queryBase
    * @param group
    * @param searchVar
@@ -406,7 +406,7 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
     return new ServiceNode(new ConstantNode(iv), groupNode);
   }
 
-  /**
+  /*
    * Remove each {@link StatementPatternNode} from the group.
    *
    * @param group The group.

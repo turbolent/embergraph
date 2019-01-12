@@ -42,8 +42,8 @@ import org.embergraph.rdf.spo.SPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.decls.DCTermsVocabularyDecl;
 
-/**
- * Reification Done Right test suite.
+/*
+* Reification Done Right test suite.
  *
  * <p>The basic extension is:
  *
@@ -87,7 +87,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
     super(name);
   }
 
-  /**
+  /*
    * Bootstrap test. The data are explicitly entered into the KB by hand. This makes it possible to
    * test evaluation without having to fix the RDF data loader. The query is based on <code>rdf-02
    * </code>.
@@ -155,7 +155,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
     h.runTest();
   }
 
-  /**
+  /*
    * Version of the above where the data are read from a file rather than being built up by hand.
    */
   public void test_reificationDoneRight_00_loadDataFromFile() throws Exception {
@@ -169,7 +169,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Bootstrap test. The data are explicitly entered into the KB by hand. This makes it possible to
    * test evaluation without having to fix the RDF data loader. The query is based on <code>rdf-02a
    * </code>.
@@ -240,7 +240,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Version of the above where the data are read from a file rather than being built up by hand.
    */
   public void test_reificationDoneRight_00a_loadFromFile() throws Exception {
@@ -254,7 +254,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Simple query involving alice, bob, and an information extractor. For this version of the test
    * the data are modeled in the source file using RDF reification.
    *
@@ -277,7 +277,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Simple query involving alice, bob, and an information extractor. For this version of the test
    * the data are modeled in the source file using the RDR syntax.
    *
@@ -300,7 +300,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Same data, but the query uses the BIND() syntax and pulls out some more information.
    *
    * <pre>
@@ -324,7 +324,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Same data, but the query uses the BIND() syntax and pulls out some more information and RDR
    * syntax for the data.
    *
@@ -349,7 +349,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Simple query ("who bought sybase").
    *
    * <pre>
@@ -369,7 +369,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Simple query ("who bought sybase") using RDR syntax for the data.
    *
    * <pre>
@@ -389,7 +389,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Same data, but the query uses the BIND() syntax and pulls out some more information.
    *
    * <pre>
@@ -411,7 +411,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Same data, but the query uses the BIND() syntax and pulls out some more information and RDR
    * syntax for the data.
    *
@@ -434,7 +434,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -472,7 +472,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -510,7 +510,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -531,7 +531,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
 
   // TODO: this test case is actually failing, not sure whether it should
   // succeed or not
-  /**
+  /*
    * Test loading of RDR triples from file ttl file containing standard reification that contains
    * three unordered reified triples, with query specified in Standard RDF Reification.
    *
@@ -551,7 +551,7 @@ public class TestReificationDoneRightEval extends AbstractDataDrivenSPARQLTestCa
         .runTest();
   }
 
-  /**
+  /*
    * Test loading of RDR triples from file ttl file containing standard reification that contains
    * three unordered reified triples, with query specified in RDR.
    *

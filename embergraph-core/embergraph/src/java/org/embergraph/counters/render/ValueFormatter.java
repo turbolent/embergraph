@@ -11,8 +11,8 @@ import org.embergraph.counters.History;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.query.URLQueryModel;
 
-/**
- * Datum specific formatting of {@link ICounter} values (not thread-safe since the {@link Format}
+/*
+* Datum specific formatting of {@link ICounter} values (not thread-safe since the {@link Format}
  * objects are not thread-safe).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -29,7 +29,7 @@ public abstract class ValueFormatter {
   /** Used to format integer and long counter values. */
   protected final NumberFormat integerFormat;
 
-  /**
+  /*
    * Used to format the units of time when expressed as elapsed units since the first sample of a
    * {@link History}.
    */
@@ -51,14 +51,14 @@ public abstract class ValueFormatter {
     this.dateFormat = model.dateFormat;
   }
 
-  /**
+  /*
    * A pattern matching the occurrence of the word "percent" in a counter name. Leading and trailing
    * wildcards are used and the match is case-insensitive.
    */
   protected static final Pattern percent_pattern =
       Pattern.compile(".*percent.*", Pattern.CASE_INSENSITIVE);
 
-  /**
+  /*
    * Formats a counter value as a String.
    *
    * @param counter The counter.
@@ -70,7 +70,7 @@ public abstract class ValueFormatter {
   /** Write the full counter path. */
   public abstract void writeFullPath(Writer w, String path) throws IOException;
 
-  /**
+  /*
    * Write a partial counter path.
    *
    * @param rootDepth The path components will be shown beginning at this depth - ZERO (0) is the
@@ -78,7 +78,7 @@ public abstract class ValueFormatter {
    */
   public abstract void writePath(Writer w, String path, int rootDepth) throws IOException;
 
-  /**
+  /*
    * Format a timestamp as a date.
    *
    * @param timestamp The timestamp value.

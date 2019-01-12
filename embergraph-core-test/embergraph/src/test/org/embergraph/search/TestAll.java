@@ -30,8 +30,8 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.TestEDS;
 import org.embergraph.service.TestJournal;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestAll extends TestCase {
@@ -66,7 +66,7 @@ public class TestAll extends TestCase {
     return suite;
   }
 
-  /**
+  /*
    * Create and populate a {@link ProxyTestSuite} with the unit tests that we will run against any
    * of the {@link IIndexManager} implementations.
    *

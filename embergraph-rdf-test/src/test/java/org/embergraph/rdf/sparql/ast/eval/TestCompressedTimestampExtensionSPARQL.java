@@ -25,8 +25,8 @@ import java.util.Properties;
 import org.embergraph.rdf.internal.impl.extensions.CompressedTimestampExtension;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite {@link CompressedTimestampExtension}, testing real SPARQL queries
+/*
+* Data driven test suite {@link CompressedTimestampExtension}, testing real SPARQL queries
  * including mathematical operations over the extension.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -53,7 +53,7 @@ public class TestCompressedTimestampExtensionSPARQL extends AbstractDataDrivenSP
         .runTest();
   }
 
-  /**
+  /*
    * Simple SELECT query returning data typed with the given timestamp, where we have several
    * FILTERs that should evaluate to true.
    */
@@ -68,7 +68,7 @@ public class TestCompressedTimestampExtensionSPARQL extends AbstractDataDrivenSP
         .runTest();
   }
 
-  /**
+  /*
    * Simple SELECT query returning data typed with the given timestamp, where we have several
    * FILTERs that should evaluate to true.
    */
@@ -83,7 +83,7 @@ public class TestCompressedTimestampExtensionSPARQL extends AbstractDataDrivenSP
         .runTest();
   }
 
-  /**
+  /*
    * Simple SELECT query returning data typed with the given timestamp, where we have several
    * FILTERs that should evaluate to true.
    */
@@ -110,7 +110,7 @@ public class TestCompressedTimestampExtensionSPARQL extends AbstractDataDrivenSP
         .runTest();
   }
 
-  /**
+  /*
    * SELECT query including plus and minus operations on the compressed timestamp datatype plus
    * filters with comparison and mathematical operations.
    */

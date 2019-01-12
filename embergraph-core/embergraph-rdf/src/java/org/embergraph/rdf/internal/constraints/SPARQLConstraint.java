@@ -30,8 +30,8 @@ import org.embergraph.rdf.internal.impl.literal.XSDBooleanIV;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.util.InnerCause;
 
-/**
- * BOpConstraint that wraps a {@link EBVBOp}, which itself computes the effective boolean value of
+/*
+* BOpConstraint that wraps a {@link EBVBOp}, which itself computes the effective boolean value of
  * an {@link IValueExpression}.
  */
 @SuppressWarnings("rawtypes")
@@ -43,7 +43,7 @@ public class SPARQLConstraint<X extends XSDBooleanIV>
 
   private static final transient Logger log = Logger.getLogger(SPARQLConstraint.class);
 
-  /**
+  /*
    * The operand of this operator must evaluate to a boolean. If the operand is not known to
    * evaluate to a boolean, wrap it with an {@link EBVBOp}.
    */
@@ -54,7 +54,7 @@ public class SPARQLConstraint<X extends XSDBooleanIV>
         : new EBVBOp(ve);
   }
 
-  /**
+  /*
    * Construct a SPARQL constraint using the specified value expression. The value expression will
    * be automatically wrapped inside an {@link EBVBOp} if it does not itself evaluate to a boolean.
    */

@@ -39,8 +39,8 @@ import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.RDFWriterFactory;
 import org.openrdf.rio.RDFWriterRegistry;
 
-/**
- * This static class provides a hook which allows the replacement of services registered via the
+/*
+* This static class provides a hook which allows the replacement of services registered via the
  * openrdf {@link ServiceRegistry} pattern which makes use of the same underlying pattern which is
  * disclosed by the {@link ServiceLoader}.
  *
@@ -132,7 +132,7 @@ public class ServiceProviderHook {
     forceLoad();
   }
 
-  /**
+  /*
    * The extension MIME type for RDR data interchange using the RDR extension of TURTLE.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/1038" >RDR RDF parsers not always discovered
@@ -141,7 +141,7 @@ public class ServiceProviderHook {
    */
   public static final RDFFormat TURTLE_RDR;
 
-  /**
+  /*
    * The extension MIME type for RDR data interchange using the RDR extension of N-TRIPLES.
    *
    * @see <a href="http://trac.blazegraph.com/ticket/1038" >RDR RDF parsers not always discovered
@@ -150,13 +150,13 @@ public class ServiceProviderHook {
    */
   public static final RDFFormat NTRIPLES_RDR;
 
-  /**
+  /*
    * The extension MIME type for RDR aware data interchange of RDF and SPARQL result stes using
    * JSON.
    */
   public static final RDFFormat JSON_RDR;
 
-  /**
+  /*
    * This hook may be used to force the load of this class so it can ensure that the embergraph
    * version of a service provider is used instead of the openrdf version. This is NOT optional.
    * Without this hook, we do not have control over which version is resolved last in the processed

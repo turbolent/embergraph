@@ -29,8 +29,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-/**
- * Vocabulary and namespace for {@link XMLSchema}.
+/*
+* Vocabulary and namespace for {@link XMLSchema}.
  *
  * @see http://www.w3.org/2001/XMLSchema#
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -34,8 +34,8 @@ import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Implementation for any kind of RDF {@link Value} when the values is not being inlined. Instances
+/*
+* Implementation for any kind of RDF {@link Value} when the values is not being inlined. Instances
  * of this class can represent {@link URI}s, {@link BNode}s (if they are not being inlined), or
  * {@link Literal}s (including datatype literals if they are not being inlined). Larger RDF {@link
  * Value}s should be represented with {@link BlobIV} instead of this class.
@@ -59,7 +59,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
   /** Singleton for a "null" {@link IV}. */
   public static final transient TermId<?> NullIV = TermId.mockIV(VTE.URI);
 
-  /**
+  /*
    * Create a mock {@link IV} having the indicated {@link VTE} which will report <code>true</code>
    * for {@link #isNullIV()}. This is used by some code patterns where we need to associate a {@link
    * EmbergraphValue} not in the database with an {@link IV} on a temporary basis.
@@ -90,7 +90,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
     return tmp;
   }
 
-  /**
+  /*
    * Constructor for a term identifier when you are decoding and already have the flags.
    *
    * @param flags The flags
@@ -103,7 +103,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
     this.termId = termId;
   }
 
-  /**
+  /*
    * Constructor for a term identifier.
    *
    * @param vte
@@ -120,7 +120,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
     this.termId = termId;
   }
 
-  /**
+  /*
    * Human readable representation includes the term identifier, whether this is a URI, Literal,
    * Blank node, or Statement identifier and the datatype URI if one is assigned. This
    * representation is based solely on the flag bits and the term identifier.
@@ -134,12 +134,12 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
 
     return "TermId("
         + termId
-        + String.valueOf(getVTE().getCharCode())
+        + getVTE().getCharCode()
         + ")"
         + (hasValue() ? "[" + getValue().stringValue() + "]" : "");
   }
 
-  /**
+  /*
    * Decodes the output of {@link #toString()}, returning a new {@link TermId} .
    *
    * @param s The string representation.
@@ -167,7 +167,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
     return termId;
   }
 
-  /**
+  /*
    * {@inheritDoc
    *
    * Note: only the termId matters for equality, unless either is #NULL, in
@@ -193,7 +193,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
     return false;
   }
 
-  /**
+  /*
    * Return the hash code of the long term identifier.
    *
    * @see Long#hashCode()
@@ -245,7 +245,7 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
     return keyBuilder;
   }
 
-  /**
+  /*
    * Overrides {@link BNode#getID()}.
    *
    * <p>Creates a unique blank node ID based on the {@link TermId}'s internal data.
@@ -267,8 +267,8 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
     return NumericIV.numericalDatatypes.contains(((EmbergraphLiteral) value).getDatatype());
   }
 
-  //    /**
-  //     * Override default serialization to send the cached {@link EmbergraphValue}.
+  //    /*
+//     * Override default serialization to send the cached {@link EmbergraphValue}.
   //     *
   //     * @see https://sourceforge.net/apps/trac/bigdata/ticket/337
   //     */
@@ -280,8 +280,8 @@ public class TermId<V extends EmbergraphValue> extends AbstractNonInlineIV<V, Vo
   //
   //	}
   //
-  //	/**
-  //	 * Override default serialization to recover the cached {@link EmbergraphValue}
+  //	/*
+//	 * Override default serialization to recover the cached {@link EmbergraphValue}
   //	 * .
   //	 */
   //	@SuppressWarnings("unchecked")

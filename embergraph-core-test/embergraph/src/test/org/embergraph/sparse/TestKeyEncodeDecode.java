@@ -32,8 +32,8 @@ import org.embergraph.btree.keys.DefaultKeyBuilderFactory;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
 
-/**
- * Test suite for round trip of keys as encoded by {@link
+/*
+* Test suite for round trip of keys as encoded by {@link
  * Schema#fromKey(org.embergraph.btree.keys.IKeyBuilder, Object)}, by {@link AtomicRowWriteRead},
  * and as decoded by the {@link KeyDecoder}.
  *
@@ -52,7 +52,7 @@ public class TestKeyEncodeDecode extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Test for primitive data types where we can round trip the primary key value.
    *
    * <p>FIXME tests for other primitives
@@ -85,7 +85,7 @@ public class TestKeyEncodeDecode extends TestCase2 {
     assertEquals(12L, decoded.getTimestamp());
   }
 
-  /**
+  /*
    * Unit test verifies that we can correctly locate the start of the column name and decode the key
    * when using {@link CollatorEnum#ICU}.
    */
@@ -110,7 +110,7 @@ public class TestKeyEncodeDecode extends TestCase2 {
     //        assertEquals(writeTime, decoded.getTimestamp());
   }
 
-  /**
+  /*
    * Unit test verifies that we can correctly locate the start of the column name and decode the key
    * when using {@link CollatorEnum#ASCII}.
    */
@@ -124,7 +124,7 @@ public class TestKeyEncodeDecode extends TestCase2 {
     doKeyDecodeTest(keyBuilder);
   }
 
-  /**
+  /*
    * Unit test verifies that we can correctly locate the start of the column name and decode the key
    * when using {@link CollatorEnum#JDK}.
    *
@@ -143,7 +143,7 @@ public class TestKeyEncodeDecode extends TestCase2 {
     doKeyDecodeTest(keyBuilder);
   }
 
-  /**
+  /*
    * Test helper verifies that we can correctly locate the start of the column name and decode the
    * key when using a given {@link IKeyBuilder}.
    */

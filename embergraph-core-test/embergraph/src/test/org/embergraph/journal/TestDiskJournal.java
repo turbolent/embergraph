@@ -29,8 +29,8 @@ import junit.framework.Test;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Test suite for {@link BufferMode#Disk} journals.
+/*
+* Test suite for {@link BufferMode#Disk} journals.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -106,7 +106,7 @@ public class TestDiskJournal extends AbstractJournalTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Verify normal operation and basic assumptions when creating a new journal using {@link
    * BufferMode#Disk}.
    *
@@ -143,7 +143,7 @@ public class TestDiskJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that {@link Options#CREATE} may be used to initialize a journal on a newly
    * created empty file.
    *
@@ -173,7 +173,7 @@ public class TestDiskJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractRestartSafeTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -195,7 +195,7 @@ public class TestDiskJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractInterruptsTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -227,7 +227,7 @@ public class TestDiskJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMROWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -259,7 +259,7 @@ public class TestDiskJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMRMWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -312,14 +312,14 @@ public class TestDiskJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Note: The write cache is allocated by the {@link DiskOnlyStrategy} from the {@link
    * DirectBufferPool} and should be released back to that pool as well, so the size of the {@link
    * DirectBufferPool} SHOULD NOT grow as we run these tests. If it does, then there is probably a
    * unit test which is not tearing down its {@link Journal} correctly.
    */
-  //    /**
-  //     * Note: Since the write cache is a direct ByteBuffer we have to make it
+  //    /*
+//     * Note: Since the write cache is a direct ByteBuffer we have to make it
   //     * very small (or disable it entirely) when running the test suite or the
   //     * JVM will run out of memory - this is exactly the same (Sun) bug which
   //     * motivates us to reuse the same ByteBuffer when we overflow a journal

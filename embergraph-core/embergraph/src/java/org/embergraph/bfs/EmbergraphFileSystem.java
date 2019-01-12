@@ -53,8 +53,8 @@ import org.embergraph.sparse.Schema;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.Bytes;
 
-/**
- * A distributed file system with extensible metadata and atomic append implemented using the
+/*
+* A distributed file system with extensible metadata and atomic append implemented using the
  * embergraph scale-out architecture. Files have a client assigned identifier, which is a Unicode
  * string. The file identifier MAY be structured so as to look like a hierarchical file system using
  * any desired convention. Files are versioned and historical versions MAY be accessed until the
@@ -187,13 +187,13 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
   /** True iff the {@link #log} level is DEBUG or less. */
   protected static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Configuration options.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options extends org.embergraph.journal.Options, KeyBuilder.Options {}
+  public interface Options extends org.embergraph.journal.Options, KeyBuilder.Options {}
 
   /** The #of offset bits. */
   private final int offsetBits;
@@ -201,7 +201,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
   /** The size of a file block. */
   private final int blockSize;
 
-  /**
+  /*
    * The #of bits in a 64-bit long integer identifier that are used to encode the byte offset of a
    * record in the store as an unsigned integer.
    *
@@ -213,7 +213,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return offsetBits;
   }
 
-  /**
+  /*
    * The size of a file block. Block identifiers are 64-bit signed integers. The maximum file length
    * is <code>2^63 - 1 </code> blocks ( 536,870,912 Exabytes).
    *
@@ -233,7 +233,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return blockSize;
   }
 
-  /**
+  /*
    * The maximum block identifier that can be assigned to a file version.
    *
    * <p>Note: This is limited to {@value Long#MAX_VALUE}-1 so that we can always form the key
@@ -242,7 +242,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
    */
   protected static final long MAX_BLOCK = Long.MAX_VALUE - 1;
 
-  /**
+  /*
    * The basename of the index in which the file metadata are stored. The fully qualified name of
    * the index uses {@link #getNamespace()} as a prefix.
    *
@@ -250,7 +250,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
    */
   public static final String FILE_METADATA_INDEX_BASENAME = "fileMetadata";
 
-  /**
+  /*
    * The basename of the index in which the file data blocks are stored. The fully qualified name of
    * the index uses {@link #getNamespace()} as a prefix.
    *
@@ -288,7 +288,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     if (!(val instanceof Long)) throw new IllegalArgumentException(name + " must be Long");
   }
 
-  /**
+  /*
    * Ctor specified by {@link DefaultResourceLocator}.
    *
    * @see Options
@@ -355,7 +355,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
   //
   //    }
 
-  /**
+  /*
    * Note: A commit is required in order for a read-committed view to have access to the registered
    * indices. When running against an {@link IEmbergraphFederation}, {@link ITx#UNISOLATED}
    * operations will take care of this for you. Otherwise you must do this yourself.
@@ -385,8 +385,8 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
       // setup metadata index.
       {
 
-        /*
-         * Note: This specifies an split handler that keeps the logical
+      /*
+       * Note: This specifies an split handler that keeps the logical
          * row together. This is a hard requirement. The atomic
          * read/update guarantee depends on this.
          */
@@ -409,8 +409,8 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
       // setup data index.
       {
 
-        /*
-         * @todo specify split handler that tends to keep the blocks for a
+      /*
+       * @todo specify split handler that tends to keep the blocks for a
          * file together (soft requirement).
          */
 
@@ -419,8 +419,8 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
         final IndexMetadata md =
             new IndexMetadata(indexManager, tmp, name, UUID.randomUUID(), IndexTypeEnum.BTree);
 
-        /*
-         * @todo unit tests for correct copying of blobs during overflow.
+      /*
+       * @todo unit tests for correct copying of blobs during overflow.
          * See {@link IOverflowHandler}.
          */
         md.setOverflowHandler(new BlobOverflowHandler());
@@ -458,7 +458,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     }
   }
 
-  /**
+  /*
    * Creates a new file version from the specified metadata. The new file version will not have any
    * blocks. You can use either stream-oriented or block oriented IO to write data on the newly
    * created file version.
@@ -532,7 +532,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return version;
   }
 
-  /**
+  /*
    * Reads the document metadata for the current version of the specified file.
    *
    * @param id The file identifier.
@@ -555,7 +555,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return doc;
   }
 
-  /**
+  /*
    * Return the file metadata for the version of the file associated with the specified timestamp.
    *
    * @param id The file identifier.
@@ -575,7 +575,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
             null /* filter */);
   }
 
-  /**
+  /*
    * Update the metadata for the current file version.
    *
    * @param id The file identifier.
@@ -605,7 +605,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
         .asMap();
   }
 
-  /**
+  /*
    * Create a new file version using the supplied file metadata.
    *
    * <p>Note: This is essentially a delete + create operation. Since the combined operation is NOT
@@ -627,7 +627,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return create(doc);
   }
 
-  /**
+  /*
    * Note: A new file version is marked as deleted and then the file blocks for the old version are
    * deleted from the data index. This sequence means (a) that clients attempting to read on the
    * file using the high level API will not see the file as soon as its metadata is updated; (b)
@@ -731,7 +731,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return blockCount;
   }
 
-  /**
+  /*
    * Return an array describing all non-eradicated versions of a file.
    *
    * <p>This method returns all known version identifiers together with their timestamps, thereby
@@ -829,7 +829,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
             });
   }
 
-  /**
+  /*
    * Efficient delete of file metadata and file data for all files and file versions spanned by the
    * specified file identifiers. File versions are marked "deleted" before the file blocks are
    * deleted so that you can read on historical file version with exactly the same semantics as
@@ -886,7 +886,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return ndeleted;
   }
 
-  /**
+  /*
    * FIXME Integrate with {@link FullTextIndex} to providing indexing and search of file versions.
    * Deleted file versions should be removed from the text index. There should be explicit metadata
    * on the file version in order for it to be indexed. The text indexer will require content type
@@ -927,7 +927,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
    * file data operations (read, atomic append).
    */
 
-  /**
+  /*
    * Returns an iterator that visits all block identifiers for the file version in sequence.
    *
    * <p>Note: This may be used to efficiently distribute blocks among a population of clients, e.g.,
@@ -963,7 +963,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return new BlockIdentifierIterator(id, version, itr);
   }
 
-  /**
+  /*
    * Copies blocks from one file version to another. The data in each block of the source file
    * version is copied into a new block that is appended to the target file version. Empty blocks
    * are copied. Partial blocks are NOT combined. The block identifiers are NOT preserved since
@@ -1000,7 +1000,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return nblocks;
   }
 
-  /**
+  /*
    * Atomic write of a block for a file version.
    *
    * <p>Note: You can write any valid block identifier at any time. If the block exists then its
@@ -1076,7 +1076,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return (Boolean) getFileDataIndex().submit(key, proc);
   }
 
-  /**
+  /*
    * Atomic delete of the first block of the file version.
    *
    * @param id The file identifier.
@@ -1138,7 +1138,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return block;
   }
 
-  /**
+  /*
    * Atomic delete of a block for a file version.
    *
    * @param id The file identifier.
@@ -1182,7 +1182,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return deleted;
   }
 
-  /**
+  /*
    * Atomic read of the first block of the file version.
    *
    * @param id The file identifier.
@@ -1239,7 +1239,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return readBlock(id, version, itr.next());
   }
 
-  /**
+  /*
    * Atomic read of a block for a file version.
    *
    * @param id The file identifier.
@@ -1301,7 +1301,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return readBlock(id, version, itr.next());
   }
 
-  /**
+  /*
    * Helper to read a block from an {@link ITuple}.
    *
    * @param id
@@ -1374,7 +1374,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return data;
   }
 
-  /**
+  /*
    * Atomic append of a block to a file version.
    *
    * @param id The file identifier.
@@ -1438,7 +1438,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return (Long) getFileDataIndex().submit(key, proc);
   }
 
-  /**
+  /*
    * Return the maximum #of blocks in the file version. The return value includes any deleted but
    * not yet eradicated blocks for the specified file version, so it represents an upper bound on
    * the #of blocks that could be read for that file version.
@@ -1477,7 +1477,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return nblocks;
   }
 
-  /**
+  /*
    * Return a {@link Writer} that will <em>append</em> character data on the file version.
    * Characters written on the {@link Writer} will be converted to bytes using the specified
    * encoding. Bytes will be buffered until the block is full and then written on the file version
@@ -1510,7 +1510,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return new OutputStreamWriter(outputStream(id, version), encoding);
   }
 
-  /**
+  /*
    * Read character data from a file version.
    *
    * @param id The file identifier.
@@ -1532,7 +1532,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return new InputStreamReader(inputStream(id, version), encoding);
   }
 
-  /**
+  /*
    * Read data from a file version.
    *
    * <p>Note: The input stream will remain coherent for the file version as of the time that the
@@ -1553,7 +1553,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return inputStream(id, version, ITx.UNISOLATED);
   }
 
-  /**
+  /*
    * Read data from a file version.
    *
    * <p>Some points about consistency and transaction identifiers.
@@ -1677,7 +1677,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return new FileVersionInputStream(id, version, itr);
   }
 
-  /**
+  /*
    * Return an output stream that will <em>append</em> on the file version. Bytes written on the
    * output stream will be buffered until they are full blocks and then written on the file version
    * using an atomic append. An {@link OutputStream#flush()} will force a non-empty partial block to
@@ -1701,7 +1701,7 @@ public class EmbergraphFileSystem extends AbstractResource<IDatabase<EmbergraphF
     return new FileVersionOutputStream(this, id, version);
   }
 
-  /**
+  /*
    * Copies data from the input stream to the file version. The data is buffered into blocks. Each
    * block is written on the file version using an atomic append. Writing an empty stream will cause
    * an empty block to be appended (this ensures that read back will read an empty stream).

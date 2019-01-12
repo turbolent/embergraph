@@ -27,7 +27,7 @@ public class TestHTreeRecycle extends AbstractHTreeTestCase {
 
     private final Set<Long> addrs = new HashSet<Long>();
 
-    /**
+    /*
      * Add an address which should be deleted to the set of such addresses.
      *
      * @param addr An address which should be deleted.

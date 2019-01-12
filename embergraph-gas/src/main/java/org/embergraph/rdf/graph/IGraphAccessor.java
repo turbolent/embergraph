@@ -21,14 +21,14 @@ import org.embergraph.rdf.graph.impl.util.VertexDistribution;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
-/**
- * Interface abstracts access to a backend graph implementation.
+/*
+* Interface abstracts access to a backend graph implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IGraphAccessor {
 
-  /**
+  /*
    * Return the #of edges of the specified type for the given vertex.
    *
    * <p>Note: This is not always a flyweight operation due to the need to filter for only the
@@ -42,7 +42,7 @@ public interface IGraphAccessor {
    */
   long getEdgeCount(IGASContext<?, ?, ?> ctx, Value u, EdgesEnum edges);
 
-  /**
+  /*
    * Return the edges for the given vertex.
    *
    * @param ctx The {@link IGASContext}.
@@ -52,13 +52,13 @@ public interface IGraphAccessor {
    */
   Iterator<Statement> getEdges(IGASContext<?, ?, ?> ctx, Value u, EdgesEnum edges);
 
-  /**
+  /*
    * Hook to advance the view of the graph. This is invoked at the end of each GAS computation round
    * for a given {@link IGASProgram}.
    */
   void advanceView();
 
-  /**
+  /*
    * Obtain a weighted distribution of the vertices in the graph from which samples may then be
    * taken. The weight is the #of in-edges and out-edges in which a given vertex appears. Statements
    * that model property values and statement that model link attributes SHOULD NOT be counted in

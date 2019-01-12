@@ -25,8 +25,8 @@ import org.embergraph.journal.AbstractTask;
 import org.embergraph.journal.IConcurrencyManager;
 import org.embergraph.journal.Journal;
 
-/**
- * Wrapper for a task to be executed on the {@link IConcurrencyManager} of a {@link Journal}.
+/*
+* Wrapper for a task to be executed on the {@link IConcurrencyManager} of a {@link Journal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <T>

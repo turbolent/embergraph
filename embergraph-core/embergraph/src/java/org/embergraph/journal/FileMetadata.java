@@ -40,8 +40,8 @@ import org.embergraph.quorum.Quorum;
 import org.embergraph.rawstore.WormAddressManager;
 import org.embergraph.util.Bytes;
 
-/**
- * Helper object used when opening or creating journal file in any of the file-based modes.
+/*
+* Helper object used when opening or creating journal file in any of the file-based modes.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -64,7 +64,7 @@ public class FileMetadata {
   /** The original journal version number (version 1). */
   public static final int VERSION1 = 0x1;
 
-  /**
+  /*
    * The current journal version number.
    *
    * <p>Note: This could be used to create major versioning changes of the file structure. There is
@@ -81,7 +81,7 @@ public class FileMetadata {
   /** The buffer mode used to open that file. */
   final BufferMode bufferMode;
 
-  /**
+  /*
    * The interface for IO performed on that file.
    *
    * <p>Note: this field is only safe for use during the initial file create/open. It is not safe to
@@ -89,7 +89,7 @@ public class FileMetadata {
    */
   RandomAccessFile raf;
 
-  /**
+  /*
    * The interface for IO performed on that file.
    *
    * <p>Note: this method is only safe for use during the initial file create/open. It is not safe
@@ -99,7 +99,7 @@ public class FileMetadata {
     return raf;
   }
 
-  /**
+  /*
    * The 32-bit magic value at offset 0L in the file.
    *
    * @see #MAGIC
@@ -115,22 +115,22 @@ public class FileMetadata {
   /** The extent of the user data space (everything after the root blocks). */
   final long userExtent;
 
-  /**
+  /*
    * The #of bits out of a 64-bit long integer that are used to encode the byte offset as an
    * unsigned integer. The remaining bits are used to encode the byte count (aka record length) as
    * an unsigned integer.
    */
   final int offsetBits;
 
-  // /**
-  // * The #of records to be buffered in an optional read cache -or- ZERO(0)
+  // /*
+// * The #of records to be buffered in an optional read cache -or- ZERO(0)
   // to
   // * disable the read cache.
   // */
   // final int readCacheCapacity;
   //
-  // /**
-  // * The maximum size of a record that will be allowed into the read cache.
+  // /*
+// * The maximum size of a record that will be allowed into the read cache.
   // */
   // final int readCacheMaxRecordSize;
 
@@ -140,13 +140,13 @@ public class FileMetadata {
   /** The #of write cache buffers to be used if the write cache is enabled. */
   public final int writeCacheBufferCount;
 
-  /**
+  /*
    * <code>true</code> iff record level checksums are enabled. These are used beginning with {@link
    * RootBlockView#VERSION2} and for the {@link RWStrategy} from {@link RootBlockView#VERSION1}.
    */
   final boolean useChecksums;
 
-  /**
+  /*
    * The next offset at which a record would be written on the store. The offset is relative to the
    * start of the user data space. Offset zero(0) addresses the first byte after the root blocks.
    */
@@ -167,13 +167,13 @@ public class FileMetadata {
   /** Offset of the second root block in the file. */
   public static final int OFFSET_ROOT_BLOCK1 = SIZE_MAGIC + SIZE_VERSION + (SIZEOF_ROOT_BLOCK * 1);
 
-  /**
+  /*
    * The size of the journal header, including MAGIC, version, and both root blocks. This is used as
    * an offset when computing the index of a record in the journal.
    */
   public static final int headerSize0 = SIZE_MAGIC + SIZE_VERSION + (SIZEOF_ROOT_BLOCK * 2);
 
-  /**
+  /*
    * Depending on the mode, this will be either a direct buffer, a mapped buffer or [null] if no
    * buffer is being used.
    */
@@ -182,24 +182,24 @@ public class FileMetadata {
   /** True iff the file was pre-existing. */
   final boolean exists;
 
-  //    /**
-  //     * The object used by the journal to compute the checksums of its root
+  //    /*
+//     * The object used by the journal to compute the checksums of its root
   //     * blocks (this object is NOT thread-safe so there is one instance per
   //     * journal).
   //     */
   //    final private ChecksumUtility checker = new ChecksumUtility();
 
-  //    /**
-  //	 * The 1st root block.
+  //    /*
+//	 * The 1st root block.
   //	 */
   //	protected IRootBlockView rootBlock0;
   //
-  //	/**
-  //	 * The 2nd root block.
+  //	/*
+//	 * The 2nd root block.
   //	 */
   //	protected IRootBlockView rootBlock1;
 
-  /**
+  /*
    * The current root block. For a new file, this is "rootBlock0". For an existing file it is based
    * on an examination of both root blocks.
    */
@@ -208,7 +208,7 @@ public class FileMetadata {
   /** Properties used to initialize this FileMetadata object */
   final Properties properties;
 
-  /**
+  /*
    * This constructor handles the case where the file does not exist or exists but is empty
    * (including files created by the temporary file creation mechanism).
    *
@@ -396,8 +396,8 @@ public class FileMetadata {
       // bufferMode != BufferMode.Mapped);
       if (!temporary) {
 
-        /*
-         * Open / create and obtain shared/exclusive lock if possible.
+      /*
+       * Open / create and obtain shared/exclusive lock if possible.
          * Sets [raf] as a side-effect.
          */
         opener.reopenChannel();
@@ -608,8 +608,8 @@ public class FileMetadata {
         try {
           file.deleteOnExit();
         } catch (NullPointerException ex) {
-          /*
-           * Ignore NPE caused by a known Sun bug.
+        /*
+       * Ignore NPE caused by a known Sun bug.
            *
            * See http://bugs.sun.com/view_bug.do?bug_id=6526376
            */
@@ -631,8 +631,8 @@ public class FileMetadata {
       // && bufferMode != BufferMode.Temporary ) {
       if (userExtent > bufferMode.getMaxExtent()) {
 
-        /*
-         * Verify that we can address this many bytes with this
+      /*
+       * Verify that we can address this many bytes with this
          * strategy.
          */
 
@@ -658,15 +658,15 @@ public class FileMetadata {
 
       if (!temporary) {
 
-        /*
-         * Extend the file. We do this eagerly in an attempt to
+      /*
+       * Extend the file. We do this eagerly in an attempt to
          * convince the OS to place the data into a contiguous
          * region on the disk.
          */
         raf.setLength(extent);
 
-        /*
-         * Write the MAGIC and version on the file.
+      /*
+       * Write the MAGIC and version on the file.
          */
         raf.seek(0);
         raf.writeInt(MAGIC);
@@ -725,8 +725,8 @@ public class FileMetadata {
 
           FileChannelUtility.writeAll(opener, rootBlock1.asReadOnlyBuffer(), OFFSET_ROOT_BLOCK1);
 
-          /*
-           * Force the changes to disk. We also force the file
+        /*
+       * Force the changes to disk. We also force the file
            * metadata to disk since we just changed the file size and
            * we do not want to loose track of that.
            */
@@ -739,8 +739,8 @@ public class FileMetadata {
 
       switch (bufferMode) {
         case Direct:
-          /*
-           * Allocate the buffer.
+        /*
+       * Allocate the buffer.
            *
            * Note that we do not read in any data since no user data
            * has been written and the root blocks are not cached in
@@ -752,8 +752,8 @@ public class FileMetadata {
                   : ByteBuffer.allocate((int) userExtent));
           break;
         case Mapped:
-          /*
-           * Map the file starting from the first byte of the user
+        /*
+       * Map the file starting from the first byte of the user
            * space and continuing through the entire user extent.
            */
           if (INFO) log.info("Mapping file=" + file);
@@ -790,7 +790,7 @@ public class FileMetadata {
     }
   }
 
-  /**
+  /*
    * This constructor handles cases where the file exists and is non-empty.
    *
    * @param file The name of the file to be opened.
@@ -886,8 +886,8 @@ public class FileMetadata {
 
       if (this.extent <= headerSize0) {
 
-        /*
-         * By throwing an exception for files that are not large enough
+      /*
+       * By throwing an exception for files that are not large enough
          * to contain the MAGIC, VERSION, and both root blocks we avoid
          * IO errors when trying to read those data and are able to
          * reject files based on whether they have bad magic, version,
@@ -909,8 +909,8 @@ public class FileMetadata {
        */
       raf.seek(0L);
       try {
-        /*
-         * Note: this next line will throw IOException if there is a
+      /*
+       * Note: this next line will throw IOException if there is a
          * file lock contention.
          */
         magic = raf.readInt();
@@ -985,8 +985,8 @@ public class FileMetadata {
 
       if (userExtent > bufferMode.getMaxExtent()) {
 
-        /*
-         * Verify that we can address this many bytes with this
+      /*
+       * Verify that we can address this many bytes with this
          * strategy.
          */
 
@@ -1040,8 +1040,8 @@ public class FileMetadata {
             buffer =
                 opener.reopenChannel().map(FileChannel.MapMode.READ_WRITE, headerSize0, extent);
             if (loadMappedFile) {
-              /*
-               * Load the image into mapped memory. Generally, I would
+            /*
+       * Load the image into mapped memory. Generally, I would
                * think that you are better off NOT loading the image. When
                * you want the image in memory, use the Direct mode
                * instead. It should be MUCH faster and has better control
@@ -1093,7 +1093,7 @@ public class FileMetadata {
         }
       };
 
-  /**
+  /*
    * This method transparently re-opens the channel for the backing file.
    *
    * @throws IllegalStateException if the store is closed.
@@ -1123,16 +1123,16 @@ public class FileMetadata {
 
       try {
 
-        /*
-         * Request a shared file lock.
+      /*
+       * Request a shared file lock.
          */
 
         final boolean readOnly = "r".equals(fileMode);
 
         if (raf.getChannel().tryLock(0, Long.MAX_VALUE, readOnly /* shared */) == null) {
 
-          /*
-           * Note: A null return indicates that someone else holds the
+        /*
+       * Note: A null return indicates that someone else holds the
            * lock. This can happen if the platform does not support
            * shared locks or if someone requested an exclusive file
            * lock.
@@ -1149,8 +1149,8 @@ public class FileMetadata {
 
       } catch (IOException ex) {
 
-        /*
-         * Note: This is true of NFS volumes. This is Ok and should be
+      /*
+       * Note: This is true of NFS volumes. This is Ok and should be
          * ignored. However the backing file is not protected against
          * accidental deletes or overwrites.
          */
@@ -1168,7 +1168,7 @@ public class FileMetadata {
     return raf.getChannel();
   }
 
-  /**
+  /*
    * Record level checksums are enabled for the RW store since {@link RootBlockView#VERSION1} and
    * for the WORM store since {@link RootBlockView#VERSION2}.
    *
@@ -1207,7 +1207,7 @@ public class FileMetadata {
   //					+ ", commitRecordAddr: " + rootBlock.getCommitRecordAddr());
   //	}
 
-  /**
+  /*
    * Prepare a journal file for use by an {@link IBufferStrategy}. The file will be created if
    * necessary as permitted and instructed by the specified {@link Options}. The root blocks will be
    * created or read from the file and verified. A variety of interesting properties are set on the

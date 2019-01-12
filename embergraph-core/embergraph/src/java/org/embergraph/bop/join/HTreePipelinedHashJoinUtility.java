@@ -56,8 +56,8 @@ import org.embergraph.rwstore.sector.IMemoryManager;
 import org.embergraph.rwstore.sector.MemStore;
 import org.embergraph.util.InnerCause;
 
-/**
- * Utility class supporting a pipelined hash join. This is a variant of the {@link
+/*
+* Utility class supporting a pipelined hash join. This is a variant of the {@link
  * HTreeHashJoinUtility}. See {@link PipelinedHashIndexAndSolutionSetJoinOp} for a documentation of
  * this functionality.
  *
@@ -94,7 +94,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
   /** See {@link PipelinedHashIndexAndSolutionSetJoinOp#rightSolutionsWithoutSubqueryResult} */
   private HTree rightSolutionsWithoutSubqueryResult;
 
-  /**
+  /*
    * Set to true if processing binding sets are passed in via Annotations.BINDING_SETS_SOURCE *and*
    * these bindings sets have been added to the hash index. Used to avoid that we add them in twice.
    */
@@ -115,7 +115,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
         HTree.create(new MemStore(mmgr.createAllocationContext()), getIndexMetadata(op));
   }
 
-  /**
+  /*
    * Singleton {@link IHashJoinUtilityFactory} that can be used to create a new {@link
    * HTreePipelinedHashJoinUtility}.
    */
@@ -151,7 +151,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
 
     if (!getOpen().get()) throw new IllegalStateException();
 
-    /**
+    /*
      * The hash index. The keys are int32 hash codes built from the join variables. The values are
      * an {@link IV}[], similar to the encoding in the statement indices. The mapping from the index
      * positions in the {@link IV}s to the variables is managed by the {@link #encoder}.
@@ -190,7 +190,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
 
       final int n = vectorSize.get();
 
-      /**
+      /*
        * if we don't have a subquery but a join against mappings passed in via binding set
        * annotation, these mappings can be processed immediately (the latter,
        * bsFromBindingsSetSource, have been added to the index right in the beginning of this method
@@ -202,8 +202,8 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
           dontRequireSubqueryEvaluation.add(a[i].bset);
         }
 
-        /**
-         * For the subquery case, we watch out for a join partner in the hash index or,
+      /*
+       * For the subquery case, we watch out for a join partner in the hash index or,
          * alternatively, the definite information that no such join partner exists (which is
          * recorded in distinctProjectionsWithoutSubqueryResult.
          */
@@ -238,8 +238,8 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
 
             if (bSetDistinctJoins) {
 
-              /*
-               * Either a match in the bucket or subquery was already
+            /*
+       * Either a match in the bucket or subquery was already
                * computed for this distinct projection but did not produce
                * any results. Either way, it will take a fast path that
                * avoids the subquery.
@@ -346,8 +346,8 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
 
           for (IBindingSet solution : solutions) {
 
-            /*
-             * we remove all mappings that generated at least one
+          /*
+       * we remove all mappings that generated at least one
              * result from distinct set (which will be further
              * processed later on); This is how we discover the set
              * of distinct projections that did not join.
@@ -360,8 +360,8 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
 
         getEncoder().flush(); // update index IV cache
 
-        /**
-         * register the distinct keys for which the subquery did not yield any result as "keys
+      /*
+       * register the distinct keys for which the subquery did not yield any result as "keys
          * without match" at the index; this is an improvement (though not necessarily required) in
          * order to avoid unnecessary re-computation of the subqueries for these keys
          */
@@ -435,7 +435,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
     return naccepted;
   }
 
-  /**
+  /*
    * Checks whether bs joins with rightSolutions or rightSolutionsWithoutSubqueryResult. Returns
    * false if and only if joins neither with the one nor with the other.
    *
@@ -455,7 +455,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
         || joinsWith(bs, keyBuilder, rightSolutionsWithoutSubqueryResult);
   }
 
-  /**
+  /*
    * Checks whether bs joins with the given htree.
    *
    * @param bs
@@ -498,7 +498,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
         || incomingBindingsBuffer.size() >= incomingBindingsBufferThreshold;
   }
 
-  /**
+  /*
    * Adds the binding sets passed in via Annotations.BINDING_SETS_SOURCE to the hash index.
    *
    * @param rightSolutions the hash index
@@ -536,7 +536,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
     }
   }
 
-  /**
+  /*
    * Executes the hash join for the chunk of solutions that is passed in over rightSolutions and
    * outputs the solutions.
    */
@@ -637,15 +637,15 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
 
         long sameHashCodeCount = 0;
 
-        /**
-         * The leftSolutionsWithoutMatch stores the left solutions for which no join partner was
+      /*
+       * The leftSolutionsWithoutMatch stores the left solutions for which no join partner was
          * found. These solutions will be post-processed, to cover non-"Normal" join semantics such
          * as OPTIONAL, NOT EXISTS, and negative EXISTS solutions.
          */
         final Set<IBindingSet> leftSolutionsWithoutMatch = new LinkedHashSet<IBindingSet>();
 
-        /**
-         * The positive EXISTS solutions. We can't output those directly, since this might result in
+      /*
+       * The positive EXISTS solutions. We can't output those directly, since this might result in
          * wrong multiplicities (as we iterate over left multiple times here. Therefore, we delay
          * outputting them by storing them in a hash set and output them in the end.
          */
@@ -666,8 +666,8 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
 
             final ITuple<?> t = titr.next();
 
-            /*
-             * Note: The map entries must be the full source
+          /*
+       * Note: The map entries must be the full source
              * binding set, not just the join variables, even
              * though the key and equality in the key is defined
              * in terms of just the join variables.
@@ -789,8 +789,8 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
               break;
             case Exists:
               {
-                /**
-                 * Semantics of EXISTS is defined as follows: it only takes effect if the ASK var is
+              /*
+       * Semantics of EXISTS is defined as follows: it only takes effect if the ASK var is
                  * not null; in that case, it has the same semantics as OPTIONAL, but binds the
                  * askVar to true or false depending on whether a match exists.
                  */
@@ -818,8 +818,8 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
               break;
             case Exists:
               {
-                /**
-                 * Semantics of EXISTS is defined as follows: it only takes effect if the ASK var is
+              /*
+       * Semantics of EXISTS is defined as follows: it only takes effect if the ASK var is
                  * not null; in that case, it has the same semantics as OPTIONAL, but binds the
                  * askVar to true or false depending on whether a match exists.
                  */
@@ -843,7 +843,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
     }
   }
 
-  /**
+  /*
    * Adds metadata about the {@link IHashJoinUtility} state to the stack trace.
    *
    * @param t The thrown error.
@@ -867,7 +867,7 @@ public class HTreePipelinedHashJoinUtility extends HTreeHashJoinUtility
     return new RuntimeException(msg, t);
   }
 
-  /**
+  /*
    * Human readable representation of the {@link IHashJoinUtility} metadata (but not the solutions
    * themselves).
    */

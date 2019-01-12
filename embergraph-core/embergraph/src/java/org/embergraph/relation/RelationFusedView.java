@@ -17,8 +17,8 @@ import org.embergraph.relation.accesspath.AccessPathFusedView;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * A factory for fused views reading from both of the source {@link IRelation}s.
+/*
+* A factory for fused views reading from both of the source {@link IRelation}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class RelationFusedView<E> implements IRelation<E> {
     return this;
   }
 
-  /**
+  /*
    * @param relation1
    * @param relation2
    */
@@ -64,8 +64,8 @@ public class RelationFusedView<E> implements IRelation<E> {
     this.relation2 = relation2;
   }
 
-  //    /**
-  //     * Note: You can not compute the exact element count for a fused view since
+  //    /*
+//     * Note: You can not compute the exact element count for a fused view since
   //     * there may be duplicate elements in the two source {@link IRelation}s
   //     * (well, you could merge the data in the views into a temporary view but
   //     * that is hardly efficient).
@@ -143,7 +143,7 @@ public class RelationFusedView<E> implements IRelation<E> {
    * Note: These methods can not be implemented for the fused view.
    */
 
-  /**
+  /*
    * Not implemented for a fused view. (The elements of the view can have different timestamps -
    * this is especially true when one is a {@link TemporaryStore}.)
    *
@@ -154,7 +154,7 @@ public class RelationFusedView<E> implements IRelation<E> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Not implemented for a fused view.
    *
    * @throws UnsupportedOperationException always.
@@ -164,7 +164,7 @@ public class RelationFusedView<E> implements IRelation<E> {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Not implemented for a fused view.
    *
    * @throws UnsupportedOperationException always.

@@ -28,8 +28,8 @@ import junit.framework.TestCase2;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for {@link FixedByteArrayBuffer}.
+/*
+* Test suite for {@link FixedByteArrayBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

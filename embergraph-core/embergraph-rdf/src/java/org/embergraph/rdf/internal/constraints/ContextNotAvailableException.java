@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.internal.constraints;
 
-/**
- * This generally indicates a failure to propagate the context wrapper for the binding set to a new
+/*
+* This generally indicates a failure to propagate the context wrapper for the binding set to a new
  * binding set during a copy (projection), bind (join), etc. It could also indicate a failure to
  * wrap binding sets when they are vectored into an operator after being received at a node on a
  * cluster.
@@ -52,7 +52,7 @@ public class ContextNotAvailableException extends UnsupportedOperationException 
     super(cause);
   }
 
-  /**
+  /*
    * @param message
    * @param cause
    */

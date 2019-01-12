@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.jet.random.engine;
 
-/**
- * Benchmarks the performance of the currently provided uniform pseudo-random number generation
+/*
+* Benchmarks the performance of the currently provided uniform pseudo-random number generation
  * engines.
  *
  * <p>All distributions are obtained by using a <b>uniform</b> pseudo-random number generation
@@ -165,7 +165,7 @@ public class Benchmark {
     System.out.println("\nGood bye.\n");
   }
   /** Tests various methods of this class. */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     long from = Long.parseLong(args[0]);
     long to = Long.parseLong(args[1]);
     int times = Integer.parseInt(args[2]);

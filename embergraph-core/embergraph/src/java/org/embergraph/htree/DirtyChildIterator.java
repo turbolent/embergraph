@@ -24,8 +24,8 @@ import java.lang.ref.Reference;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Visits the direct dirty children of a {@link DirectoryPage} in the index ordering. Since dirty
+/*
+* Visits the direct dirty children of a {@link DirectoryPage} in the index ordering. Since dirty
  * nodes are always resident this iterator never forces a child to be loaded from the store.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -41,7 +41,7 @@ class DirtyChildIterator implements Iterator<AbstractPage> {
   /** The index of the last child that was returned to the caller via {@link #next()}. */
   private int lastVisited = -1;
 
-  /**
+  /*
    * The next child to return or null if we need to scan for the next child. We always test to
    * verify that the child is in fact dirty in {@link #next()} since it may have been written out
    * between {@link #hasNext()} and {@link #next()}.
@@ -56,7 +56,7 @@ class DirtyChildIterator implements Iterator<AbstractPage> {
     this.node = node;
   }
 
-  /**
+  /*
    * @return true iff there is a dirty child having a separator key greater than the last visited
    *     dirty child at the moment that this method was invoked. If this method returns <code>true
    *     </code> then an immediate invocation of {@link #next()} will succeed. However, that
@@ -111,8 +111,8 @@ class DirtyChildIterator implements Iterator<AbstractPage> {
       for (; (index + 1) < slotsPerPage; index++) {
 
         if (node.childRefs[index + 1] != childRef) {
-          /*
-           * Skip over all references to the same child until we are
+        /*
+       * Skip over all references to the same child until we are
            * on the last directory slot which a reference to this
            * child. This way, when hasNext() is called again to
            * advance to the next distinct child, the visited child

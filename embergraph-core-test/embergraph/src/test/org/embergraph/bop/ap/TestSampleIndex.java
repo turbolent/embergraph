@@ -42,8 +42,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.Journal;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
-/**
- * Test suite for {@link SampleIndex}.
+/*
+* Test suite for {@link SampleIndex}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestSampleLocalBTree.java 3665 2010-09-28 16:53:22Z thompsonbry $
@@ -81,7 +81,7 @@ public class TestSampleIndex extends TestCase2 {
     jnl = new Journal(getProperties());
   }
 
-  /**
+  /*
    * Create and populate relation in the {@link #namespace}.
    *
    * @return The #of distinct entries.
@@ -156,7 +156,7 @@ public class TestSampleIndex extends TestCase2 {
     rel = null;
   }
 
-  /**
+  /*
    * Stress test for {@link IOffsetSampler}s.
    *
    * <p>TODO Look at the distributions of the different {@link IOffsetSampler}s. They should be
@@ -280,7 +280,7 @@ public class TestSampleIndex extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test verifies some aspects of a sample taken from a local index (primarily that the sample
    * respects the limit).
    *

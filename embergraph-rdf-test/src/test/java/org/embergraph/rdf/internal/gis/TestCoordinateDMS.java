@@ -21,8 +21,8 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Test suite for {@link CoordinateDMS}.
+/*
+* Test suite for {@link CoordinateDMS}.
  *
  * @todo write tests for normalization @ +/-180 east/west.
  * @todo write correct rejection tests for the constructor.
@@ -41,7 +41,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Test the routine that parses text containing seconds and optional tenths of a second.
    *
    * @throws ParseException
@@ -59,7 +59,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     assertEquals("52.5", CoordinateDMS.formatTenthsOfSecond(525));
   }
 
-  /**
+  /*
    * Verify basic constructor and formatter using decimal degrees
    *
    * <pre>
@@ -88,7 +88,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     assertEquals("32 18 23.1N 122 36 52.5W", c.toString());
   }
 
-  /**
+  /*
    * Test of {@link CoordinateDMS#roundSeconds()}
    *
    * @todo test rounding in all quadrants.
@@ -115,7 +115,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     assertEquals(c1, c.roundSeconds());
   }
 
-  /**
+  /*
    * Test of {@link CoordinateDMS#roundMinutes()}.
    *
    * @todo test rounding in all quadrants.
@@ -405,8 +405,8 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     // }
   }
 
-  // /**
-  // * Test for the regular expression {@link
+  // /*
+// * Test for the regular expression {@link
   // CoordinateDMS#regex_latLong_minutes}.
   // */
   // public void test_regex_latLong_minutes() {
@@ -463,8 +463,8 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
 
   // }
   //
-  // /**
-  // * Test for the regular expression {@link
+  // /*
+// * Test for the regular expression {@link
   // CoordinateDMS#regex_latLong_seconds}.
   // */
   // public void test_regex_latLong_seconds() {
@@ -537,7 +537,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     }
   }
 
-  /**
+  /*
    * Test parsing of coordinates represented as degrees, minutes, and seconds.
    *
    * @throws ParseException
@@ -597,7 +597,7 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     assertEquals(c.roundMinutes(), CoordinateDMS.parse("3218N 12237W"));
   }
 
-  /**
+  /*
    * Test conversion to decimal degrees. The source for the ground truth data points is the USGS:
    *
    * <pre>
@@ -620,8 +620,8 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
     assertEquals(36.07250d, round5(dd.northSouth));
     assertEquals(-79.79194d, round5(dd.eastWest));
   }
-  // /**
-  // * Verify that 180W (-18000000) is normalized to 180E by the constructor.
+  // /*
+// * Verify that 180W (-18000000) is normalized to 180E by the constructor.
   // */
   // public void test_ctor_180W() {
 
@@ -631,8 +631,8 @@ public class TestCoordinateDMS extends AbstractCoordinateTestCase {
   //
   // }
 
-  // /**
-  // * Test for correct rejection of decimal degrees that are out of range.
+  // /*
+// * Test for correct rejection of decimal degrees that are out of range.
   // */
   // public void test_ctor_correctRejection() {
 

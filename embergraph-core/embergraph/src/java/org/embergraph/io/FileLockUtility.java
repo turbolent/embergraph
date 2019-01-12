@@ -39,8 +39,8 @@ import org.embergraph.journal.FileMetadata;
 import org.embergraph.journal.Options;
 import org.embergraph.resources.StoreManager;
 
-/**
- * Utility methods for managing exlusive {@link FileLock}s and advisory locks depending on what is
+/*
+* Utility methods for managing exlusive {@link FileLock}s and advisory locks depending on what is
  * supported by the platform, file access mode, and volume on which the file resides.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -54,7 +54,7 @@ public class FileLockUtility {
   protected static final boolean INFO = log.isInfoEnabled();
   protected static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Create/open the file and obtain an exclusive lock.
    *
    * <p>A {@link FileLock} will be used when supported and requested. An advisory lock will be used
@@ -122,8 +122,8 @@ public class FileLockUtility {
 
         } else {
 
-          /*
-           * A null return indicates that someone else holds the lock.
+        /*
+       * A null return indicates that someone else holds the lock.
            */
           try {
 
@@ -135,16 +135,16 @@ public class FileLockUtility {
             log.error(t, t);
           }
 
-          /*
-           * We were not able to get a lock on the file.
+        /*
+       * We were not able to get a lock on the file.
            */
           throw new RuntimeException("Already locked: " + file.getAbsoluteFile());
         }
 
       } catch (IOException ex) {
 
-        /*
-         * The platform does not support FileLock (memory mapped files,
+      /*
+       * The platform does not support FileLock (memory mapped files,
          * read-only files, NFS mounted files all have this problem).
          */
         log.warn("FileLock not supported: file=" + file.getAbsolutePath() + " : " + ex);
@@ -198,7 +198,7 @@ public class FileLockUtility {
     }
   }
 
-  /**
+  /*
    * Close the file and automatically releases the {@link FileLock} (if any) and removes the
    * advisory lock for that file (if any).
    *
@@ -221,8 +221,8 @@ public class FileLockUtility {
 
       if (raf.getChannel().isOpen()) {
 
-        /*
-         * close the file iff open.
+      /*
+       * close the file iff open.
          *
          * Note: a thread that is interrupted during an IO can cause the
          * file to be closed asynchronously. This is handled by the
@@ -241,7 +241,7 @@ public class FileLockUtility {
     }
   }
 
-  /**
+  /*
    * Creates an advisory lock file having the same basename as the given file with a <code>.lock
    * </code> extension.
    *
@@ -314,9 +314,7 @@ public class FileLockUtility {
 
       final String str = r.readLine();
 
-      if (pid.equals(str)) return true;
-
-      return false;
+      return pid.equals(str);
 
     } finally {
 
@@ -324,7 +322,7 @@ public class FileLockUtility {
     }
   }
 
-  /**
+  /*
    * Removes the advisory lock for the file if it exists.
    *
    * @param file The file whose <code>.lock</code> file will be removed.
@@ -350,7 +348,7 @@ public class FileLockUtility {
     }
   }
 
-  /**
+  /*
    * Since Java does not have platform independent PIDs we use a static {@link UUID} to identify
    * this process. This {@link UUID} gets written into all advisory lock files that the process
    * creates. Another process should check the {@link UUID} in the advisory lock file and refuse to

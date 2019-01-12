@@ -28,8 +28,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for owl:hasValue processing.
+/*
+* Test suite for owl:hasValue processing.
  *
  * <pre>
  * (x rdf:type a), (a rdf:type owl:Restriction), (a owl:onProperty p), (a owl:hasValue v) -&gt; (x p v)
@@ -50,7 +50,7 @@ public class TestRuleOwlHasValue extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test where the data satisifies the rule exactly once.
    *
    * <pre>

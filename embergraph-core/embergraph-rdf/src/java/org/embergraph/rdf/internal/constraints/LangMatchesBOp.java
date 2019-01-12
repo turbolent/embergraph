@@ -30,8 +30,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.openrdf.model.Literal;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 
-/**
- * Implements the <a href="http://www.w3.org/TR/sparql11-query/#func-langMatches" >langMatches</a>
+/*
+* Implements the <a href="http://www.w3.org/TR/sparql11-query/#func-langMatches" >langMatches</a>
  * SPARQL operator.
  *
  * @see http://www.w3.org/TR/sparql11-query/#func-langMatches
@@ -42,7 +42,7 @@ public class LangMatchesBOp extends XSDBooleanIVValueExpression implements INeed
   /** */
   private static final long serialVersionUID = 5910711647357240974L;
 
-  /**
+  /*
    * @param tag The language tag.
    * @param range The language range (allows "*", a language range such as "EN" or "DE", or an
    *     extended language range such as "de-DE" or "de-Latn-DE").

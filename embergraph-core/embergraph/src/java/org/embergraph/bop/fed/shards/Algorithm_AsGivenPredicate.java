@@ -4,8 +4,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.accesspath.IBuffer;
 
-/**
- * FIXME Implement {@link Algorithm_AsGivenPredicate}.
+/*
+* FIXME Implement {@link Algorithm_AsGivenPredicate}.
  *
  * <p>This algorithm should be applied if the asBound predicate is known to be either fully unbound
  * (no variables are bound). In this case we know that we will map each source binding set across

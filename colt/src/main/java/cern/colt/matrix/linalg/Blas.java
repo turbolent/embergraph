@@ -10,8 +10,8 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * Subset of the <A HREF="http://netlib2.cs.utk.edu/blas/faq.html">BLAS</A> (Basic Linear Algebra
+/*
+* Subset of the <A HREF="http://netlib2.cs.utk.edu/blas/faq.html">BLAS</A> (Basic Linear Algebra
  * System); High quality "building block" routines for performing basic vector and matrix
  * operations. Because the BLAS are efficient, portable, and widely available, they're commonly used
  * in the development of high quality linear algebra software.
@@ -58,15 +58,15 @@ import cern.colt.matrix.DoubleMatrix2D;
  * @version 0.9, 16/04/2000
  */
 public interface Blas {
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[row,col] = function(x[row,col])</tt>.
    *
    * @param A the matrix to modify.
    * @param function a function object taking as argument the current cell's value.
    * @see cern.jet.math.Functions
    */
-  public void assign(DoubleMatrix2D A, cern.colt.function.DoubleFunction function);
-  /**
+  void assign(DoubleMatrix2D A, cern.colt.function.DoubleFunction function);
+  /*
    * Assigns the result of a function to each cell; <tt>x[row,col] =
    * function(x[row,col],y[row,col])</tt>.
    *
@@ -78,16 +78,16 @@ public interface Blas {
    * @throws IllegalArgumentException if <tt>x.columns() != y.columns() || x.rows() != y.rows()</tt>
    * @see cern.jet.math.Functions
    */
-  public void assign(
+  void assign(
       DoubleMatrix2D x, DoubleMatrix2D y, cern.colt.function.DoubleDoubleFunction function);
-  /**
+  /*
    * Returns the sum of absolute values; <tt>|x[0]| + |x[1]| + ... </tt>. In fact equivalent to
    * <tt>x.aggregate(cern.jet.math.Functions.plus, cern.jet.math.Functions.abs)</tt>.
    *
    * @param x the first vector.
    */
-  public double dasum(DoubleMatrix1D x);
-  /**
+  double dasum(DoubleMatrix1D x);
+  /*
    * Combined vector scaling; <tt>y = y + alpha*x</tt>. In fact equivalent to
    * <tt>y.assign(x,cern.jet.math.Functions.plusMult(alpha))</tt>.
    *
@@ -96,8 +96,8 @@ public interface Blas {
    * @param y the second source vector, this is also the vector where results are stored.
    * @throws IllegalArgumentException <tt>x.size() != y.size()</tt>..
    */
-  public void daxpy(double alpha, DoubleMatrix1D x, DoubleMatrix1D y);
-  /**
+  void daxpy(double alpha, DoubleMatrix1D x, DoubleMatrix1D y);
+  /*
    * Combined matrix scaling; <tt>B = B + alpha*A</tt>. In fact equivalent to
    * <tt>B.assign(A,cern.jet.math.Functions.plusMult(alpha))</tt>.
    *
@@ -107,16 +107,16 @@ public interface Blas {
    * @throws IllegalArgumentException if <tt>A.columns() != B.columns() || A.rows() !=
    *     B.rows()</tt>.
    */
-  public void daxpy(double alpha, DoubleMatrix2D A, DoubleMatrix2D B);
-  /**
+  void daxpy(double alpha, DoubleMatrix2D A, DoubleMatrix2D B);
+  /*
    * Vector assignment (copying); <tt>y = x</tt>. In fact equivalent to <tt>y.assign(x)</tt>.
    *
    * @param x the source vector.
    * @param y the destination vector.
    * @throws IllegalArgumentException <tt>x.size() != y.size()</tt>.
    */
-  public void dcopy(DoubleMatrix1D x, DoubleMatrix1D y);
-  /**
+  void dcopy(DoubleMatrix1D x, DoubleMatrix1D y);
+  /*
    * Matrix assignment (copying); <tt>B = A</tt>. In fact equivalent to <tt>B.assign(A)</tt>.
    *
    * @param A the source matrix.
@@ -124,8 +124,8 @@ public interface Blas {
    * @throws IllegalArgumentException if <tt>A.columns() != B.columns() || A.rows() !=
    *     B.rows()</tt>.
    */
-  public void dcopy(DoubleMatrix2D A, DoubleMatrix2D B);
-  /**
+  void dcopy(DoubleMatrix2D A, DoubleMatrix2D B);
+  /*
    * Returns the dot product of two vectors x and y, which is <tt>Sum(x[i]*y[i])</tt>. In fact
    * equivalent to <tt>x.zDotProduct(y)</tt>.
    *
@@ -134,8 +134,8 @@ public interface Blas {
    * @return the sum of products.
    * @throws IllegalArgumentException if <tt>x.size() != y.size()</tt>.
    */
-  public double ddot(DoubleMatrix1D x, DoubleMatrix1D y);
-  /**
+  double ddot(DoubleMatrix1D x, DoubleMatrix1D y);
+  /*
    * Generalized linear algebraic matrix-matrix multiply; <tt>C = alpha*A*B + beta*C</tt>. In fact
    * equivalent to <tt>A.zMult(B,C,alpha,beta,transposeA,transposeB)</tt>. Note: Matrix shape
    * conformance is checked <i>after</i> potential transpositions.
@@ -152,7 +152,7 @@ public interface Blas {
    *     B.columns()</tt>.
    * @throws IllegalArgumentException if <tt>A == C || B == C</tt>.
    */
-  public void dgemm(
+  void dgemm(
       boolean transposeA,
       boolean transposeB,
       double alpha,
@@ -160,7 +160,7 @@ public interface Blas {
       DoubleMatrix2D B,
       double beta,
       DoubleMatrix2D C);
-  /**
+  /*
    * Generalized linear algebraic matrix-vector multiply; <tt>y = alpha*A*x + beta*y</tt>. In fact
    * equivalent to <tt>A.zMult(x,y,alpha,beta,transposeA)</tt>. Note: Matrix shape conformance is
    * checked <i>after</i> potential transpositions.
@@ -173,14 +173,14 @@ public interface Blas {
    * @param y the second source vector, this is also the vector where results are stored.
    * @throws IllegalArgumentException <tt>A.columns() != x.size() || A.rows() != y.size())</tt>..
    */
-  public void dgemv(
+  void dgemv(
       boolean transposeA,
       double alpha,
       DoubleMatrix2D A,
       DoubleMatrix1D x,
       double beta,
       DoubleMatrix1D y);
-  /**
+  /*
    * Performs a rank 1 update; <tt>A = A + alpha*x*y'</tt>. Example:
    *
    * <pre>
@@ -193,15 +193,15 @@ public interface Blas {
    * @param y an n element vector.
    * @param A an m by n matrix.
    */
-  public void dger(double alpha, DoubleMatrix1D x, DoubleMatrix1D y, DoubleMatrix2D A);
-  /**
+  void dger(double alpha, DoubleMatrix1D x, DoubleMatrix1D y, DoubleMatrix2D A);
+  /*
    * Return the 2-norm; <tt>sqrt(x[0]^2 + x[1]^2 + ...)</tt>. In fact equivalent to
    * <tt>Math.sqrt(Algebra.DEFAULT.norm2(x))</tt>.
    *
    * @param x the vector.
    */
-  public double dnrm2(DoubleMatrix1D x);
-  /**
+  double dnrm2(DoubleMatrix1D x);
+  /*
    * Applies a givens plane rotation to (x,y); <tt>x = c*x + s*y; y = c*y - s*x</tt>.
    *
    * @param x the first vector.
@@ -209,8 +209,8 @@ public interface Blas {
    * @param c the cosine of the angle of rotation.
    * @param s the sine of the angle of rotation.
    */
-  public void drot(DoubleMatrix1D x, DoubleMatrix1D y, double c, double s);
-  /**
+  void drot(DoubleMatrix1D x, DoubleMatrix1D y, double c, double s);
+  /*
    * Constructs a Givens plane rotation for <tt>(a,b)</tt>. Taken from the LINPACK translation from
    * FORTRAN to Java, interface slightly modified. In the LINPACK listing DROTG is attributed to
    * Jack Dongarra
@@ -219,32 +219,32 @@ public interface Blas {
    * @param b rotational elimination parameter b.
    * @param rotvec[] Must be at least of length 4. On output contains the values <tt>{a,b,c,s}</tt>.
    */
-  public void drotg(double a, double b, double rotvec[]);
-  /**
+  void drotg(double a, double b, double[] rotvec);
+  /*
    * Vector scaling; <tt>x = alpha*x</tt>. In fact equivalent to
    * <tt>x.assign(cern.jet.math.Functions.mult(alpha))</tt>.
    *
    * @param alpha a scale factor.
    * @param x the first vector.
    */
-  public void dscal(double alpha, DoubleMatrix1D x);
-  /**
+  void dscal(double alpha, DoubleMatrix1D x);
+  /*
    * Matrix scaling; <tt>A = alpha*A</tt>. In fact equivalent to
    * <tt>A.assign(cern.jet.math.Functions.mult(alpha))</tt>.
    *
    * @param alpha a scale factor.
    * @param A the matrix.
    */
-  public void dscal(double alpha, DoubleMatrix2D A);
-  /**
+  void dscal(double alpha, DoubleMatrix2D A);
+  /*
    * Swaps the elements of two vectors; <tt>y <==> x</tt>. In fact equivalent to <tt>y.swap(x)</tt>.
    *
    * @param x the first vector.
    * @param y the second vector.
    * @throws IllegalArgumentException <tt>x.size() != y.size()</tt>.
    */
-  public void dswap(DoubleMatrix1D x, DoubleMatrix1D y);
-  /**
+  void dswap(DoubleMatrix1D x, DoubleMatrix1D y);
+  /*
    * Swaps the elements of two matrices; <tt>B <==> A</tt>.
    *
    * @param A the first matrix.
@@ -252,8 +252,8 @@ public interface Blas {
    * @throws IllegalArgumentException if <tt>A.columns() != B.columns() || A.rows() !=
    *     B.rows()</tt>.
    */
-  public void dswap(DoubleMatrix2D x, DoubleMatrix2D y);
-  /**
+  void dswap(DoubleMatrix2D x, DoubleMatrix2D y);
+  /*
    * Symmetric matrix-vector multiplication; <tt>y = alpha*A*x + beta*y</tt>. Where alpha and beta
    * are scalars, x and y are n element vectors and A is an n by n symmetric matrix. A can be in
    * upper or lower triangular format.
@@ -265,14 +265,14 @@ public interface Blas {
    * @param beta scaling factor.
    * @param y the second vector holding source and destination.
    */
-  public void dsymv(
+  void dsymv(
       boolean isUpperTriangular,
       double alpha,
       DoubleMatrix2D A,
       DoubleMatrix1D x,
       double beta,
       DoubleMatrix1D y);
-  /**
+  /*
    * Triangular matrix-vector multiplication; <tt>x = A*x</tt> or <tt>x = A'*x</tt>. Where x is an n
    * element vector and A is an n by n unit, or non-unit, upper or lower triangular matrix.
    *
@@ -283,18 +283,18 @@ public interface Blas {
    * @param A the source matrix.
    * @param x the vector holding source and destination.
    */
-  public void dtrmv(
+  void dtrmv(
       boolean isUpperTriangular,
       boolean transposeA,
       boolean isUnitTriangular,
       DoubleMatrix2D A,
       DoubleMatrix1D x);
-  /**
+  /*
    * Returns the index of largest absolute value; <tt>i such that |x[i]| ==
    * max(|x[0]|,|x[1]|,...).</tt>.
    *
    * @param x the vector to search through.
    * @return the index of largest absolute value (-1 if x is empty).
    */
-  public int idamax(DoubleMatrix1D x);
+  int idamax(DoubleMatrix1D x);
 }

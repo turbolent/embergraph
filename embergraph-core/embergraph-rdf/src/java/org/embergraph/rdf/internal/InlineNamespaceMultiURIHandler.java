@@ -22,8 +22,8 @@ import java.util.LinkedList;
 import java.util.List;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 
-/**
- * A container URIHandler that handles multiple inline URI possibilities for a given namespace. The
+/*
+* A container URIHandler that handles multiple inline URI possibilities for a given namespace. The
  * handler searches registered namespaces and finds the a match for a given URI. All of the handlers
  * must have the same namespace prefix.
  *
@@ -65,7 +65,7 @@ public class InlineNamespaceMultiURIHandler extends InlineURIHandler {
     super(namespace);
   }
 
-  /**
+  /*
    * Adds a new {@InlineURIHandler} for the namespace. The namespace of the handler must match that
    * of the instance.
    *
@@ -88,7 +88,7 @@ public class InlineNamespaceMultiURIHandler extends InlineURIHandler {
     }
   }
 
-  /**
+  /*
    * Find the first handler of those register that successfully creates an inline value for the
    * given localName.
    *

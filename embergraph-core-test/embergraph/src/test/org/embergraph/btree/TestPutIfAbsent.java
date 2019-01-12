@@ -26,8 +26,8 @@ package org.embergraph.btree;
 import java.util.UUID;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test of basic btree operations when delete markers are maintained.
+/*
+* Test of basic btree operations when delete markers are maintained.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see BLZG-1539 (putIfAbsent)

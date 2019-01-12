@@ -42,8 +42,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Atomic append of a single block to a file version.
+/*
+* Atomic append of a single block to a file version.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -73,7 +73,7 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
     return false;
   }
 
-  /**
+  /*
    * @param id The file identifier.
    * @param version The file version.
    * @param b The buffer containing the data to be written.
@@ -97,7 +97,7 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
     this.b = b;
   }
 
-  /**
+  /*
    * This procedure runs on the unisolated index. The block identifier is computed as a one up long
    * integer for that file version using locally available state. The raw data for the block is
    * written directly onto the {@link Journal} and an index entry is added for the file, version,
@@ -186,7 +186,7 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
     return block;
   }
 
-  /**
+  /*
    * Find the key for the last block written for this file version. We do this by forming a probe
    * key from the file, version, and the maximum allowed block identifier. This is guarenteed to be
    * after any existing block for that file and version.
@@ -241,7 +241,7 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
     return getNextBlockFromPriorKey(keyBuilder, key);
   }
 
-  /**
+  /*
    * Find the key for the last block written for this file version. We do this by forming a probe
    * key from the file, version, and the maximum allowed block identifier. This is guarenteed to be
    * after any existing block for that file and version.
@@ -331,7 +331,7 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
                 + version);
 
       final byte[] leftSeparator =
-          ((BTree) ndx).getIndexMetadata().getPartitionMetadata().getLeftSeparatorKey();
+          ndx.getIndexMetadata().getPartitionMetadata().getLeftSeparatorKey();
 
       block = getNextBlockFromPriorKey(keyBuilder, leftSeparator);
 
@@ -339,8 +339,8 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
       if (toIndex == entryCount) {
 
-        /*
-         * Insertion point is after all entries in the index.
+      /*
+       * Insertion point is after all entries in the index.
          *
          * Note: In this case we consider the prior key in the
          * index partition. If that key is for the same file
@@ -357,8 +357,8 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
       } else {
 
-        /*
-         * Insertion point is at the toKey.
+      /*
+       * Insertion point is at the toKey.
          *
          * Note: Since the probe key is beyond the last block
          * for the file version we adjust the toIndex so that we
@@ -397,7 +397,7 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
     return block;
   }
 
-  /**
+  /*
    * Decode the block identifier in the key and return the block identifier plus one, which is the
    * block identifier to be used for the atomic append operation. If the key does NOT encode the
    * same file + version then no blocks exist for that file version and the method returns zero (0L)
@@ -454,13 +454,13 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
       if (cmp == 0) {
 
-        /*
-         * The key at the computed toIndex is the same file version.
+      /*
+       * The key at the computed toIndex is the same file version.
          */
         if (prefix.length + Bytes.SIZEOF_LONG == key.length) {
 
-          /*
-           * The given key includes a block identifier so we
+        /*
+       * The given key includes a block identifier so we
            * extract it.
            *
            * Note: When the given key is a leftSeparator for an
@@ -493,8 +493,8 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
         } else {
 
-          /*
-           * This case arises when the leftSeparator encodes the
+        /*
+       * This case arises when the leftSeparator encodes the
            * file version but does not include a block identifier.
            */
 
@@ -503,8 +503,8 @@ public class AtomicBlockAppendProc implements ISimpleIndexProcedure<Object>, Ext
 
       } else {
 
-        /*
-         * Since the key does not compare as equal for the full
+      /*
+       * Since the key does not compare as equal for the full
          * length of the prefix it can not encode the same file
          * version.
          */

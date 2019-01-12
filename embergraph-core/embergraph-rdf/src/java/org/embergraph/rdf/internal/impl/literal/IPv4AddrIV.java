@@ -32,8 +32,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.util.BytesUtil;
 import org.openrdf.model.Literal;
 
-/**
- * Internal value representing an inline IP address. Uses the IPv4Address class to represent the IP
+/*
+* Internal value representing an inline IP address. Uses the IPv4Address class to represent the IP
  * address and perform the translation to and from a <code>byte[]</code>, which is then used
  * directly in the IV key (after the flags).
  *
@@ -92,7 +92,7 @@ public class IPv4AddrIV<V extends EmbergraphLiteral> extends AbstractLiteralIV<V
 
   private static final transient Pattern pattern = Pattern.compile(IPv4_OPTIONAL_CIDR_PATTERN);
 
-  /**
+  /*
    * Ctor with host address specified.
    *
    * @throws UnknownHostException if not parsable as an IPv4 address.

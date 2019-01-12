@@ -43,8 +43,8 @@ import org.embergraph.quorum.MockQuorumFixture.MockQuorum;
 import org.embergraph.quorum.QuorumActor;
 import org.embergraph.rwstore.RWWriteCacheService;
 
-/**
- * Test suite for the {@link WriteCacheService} using scattered writes on a backing file.
+/*
+* Test suite for the {@link WriteCacheService} using scattered writes on a backing file.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestWriteCacheService.java 2866 2010-05-18 18:36:35Z thompsonbry $
@@ -59,8 +59,8 @@ public class TestRWWriteCacheService extends TestCase3 {
     super(name);
   }
 
-  // /**
-  // *
+  // /*
+// *
   // * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
   // Thompson</a>
   // * @version $Id: TestRWWriteCacheService.java 4532 2011-05-20 16:06:11Z
@@ -70,8 +70,8 @@ public class TestRWWriteCacheService extends TestCase3 {
   // static private class MyMockQuorumMember<S extends HAPipelineGlue> extends
   // AbstractQuorumMember<S> {
 
-  // /**
-  // * @param quorum
+  // /*
+// * @param quorum
   // */
   // protected MyMockQuorumMember() {
 
@@ -359,7 +359,7 @@ public class TestRWWriteCacheService extends TestCase3 {
   /** A random number generated - the seed is NOT fixed. */
   protected final Random r = new Random();
 
-  /**
+  /*
    * Returns random data that will fit in N bytes. N is chosen randomly in 1:256.
    *
    * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> of random length and having
@@ -372,7 +372,7 @@ public class TestRWWriteCacheService extends TestCase3 {
     return getRandomData(nbytes);
   }
 
-  /**
+  /*
    * Returns random data that will fit in <i>nbytes</i>.
    *
    * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> having random contents.
@@ -419,7 +419,7 @@ public class TestRWWriteCacheService extends TestCase3 {
       if (!file.delete()) log.warn("Could not delete file: " + file);
     }
 
-    /**
+    /*
      * Read some data out of the file.
      *
      * @param off The offset of the record.
@@ -442,8 +442,8 @@ public class TestRWWriteCacheService extends TestCase3 {
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-        /*
-         * The channel is still open. If you are allowing concurrent
+      /*
+       * The channel is still open. If you are allowing concurrent
          * reads on the channel, then this could indicate that two
          * readers each found the channel closed and that one was able
          * to re-open the channel before the other such that the channel
@@ -460,7 +460,7 @@ public class TestRWWriteCacheService extends TestCase3 {
 
       return raf.getChannel();
     }
-  };
+  }
 
   /*
    * Now generate randomviews, first an ordered view of 10000 random lengths
@@ -483,9 +483,9 @@ public class TestRWWriteCacheService extends TestCase3 {
       buf.mark();
       nbytes = buf.capacity();
     }
-  };
+  }
 
-  /**
+  /*
    * Test simple compaction of WriteCache
    *
    * @throws InterruptedException
@@ -563,7 +563,6 @@ public class TestRWWriteCacheService extends TestCase3 {
 
         addr += 1000;
       }
-      ;
 
       assertTrue(WriteCache.transferTo(src, dst, null, 0));
     } finally {
@@ -597,7 +596,7 @@ public class TestRWWriteCacheService extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * 1) Creates five WriteCaches and writes until four full.
    *
    * <p>2) Randomly removes half the writes.

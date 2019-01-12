@@ -28,8 +28,8 @@ import org.embergraph.quorum.MockQuorumFixture.MockQuorum;
 import org.embergraph.quorum.QuorumActor;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * These tests exercise the lifetime semantics of a WriteCacheService.
+/*
+* These tests exercise the lifetime semantics of a WriteCacheService.
  *
  * <p>Specifically they stress the initialization and shutdown of services, and concurrent
  * interactions.
@@ -57,7 +57,7 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * The first genuine lifetime test, sets 20 concurrent writer tasks to output to the service and a
    * final task to close the service concurrently.
    */
@@ -85,7 +85,7 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
                   for (int i = 0; i < nwrites; i++) {
                     config.service.write(addr.addAndGet(dataSize), data.asReadOnlyBuffer(), chk);
                     config.service.write(addr.addAndGet(dataSize), data.asReadOnlyBuffer(), chk);
-                    Thread.currentThread().sleep(20); // give WriteTask chance to catch up
+                    Thread.sleep(20); // give WriteTask chance to catch up
                   }
                 } catch (Throwable t) {
                   t.printStackTrace();
@@ -98,7 +98,7 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
       tasks.add(
           new Callable<Long>() {
             public Long call() throws Exception {
-              Thread.currentThread().sleep(5000);
+              Thread.sleep(5000);
               config.service.close();
 
               return null;
@@ -250,7 +250,7 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
       if (!file.delete()) log.warn("Could not delete file: " + file);
     }
 
-    /**
+    /*
      * Read some data out of the file.
      *
      * @param off The offset of the record.
@@ -273,8 +273,8 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
 
       if (raf != null && raf.getChannel().isOpen()) {
 
-        /*
-         * The channel is still open. If you are allowing concurrent
+      /*
+       * The channel is still open. If you are allowing concurrent
          * reads on the channel, then this could indicate that two
          * readers each found the channel closed and that one was able
          * to re-open the channel before the other such that the channel
@@ -291,11 +291,11 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
 
       return raf.getChannel();
     }
-  };
+  }
 
   protected final Random r = new Random();
 
-  /**
+  /*
    * Returns random data that will fit in N bytes. N is chosen randomly in 1:256.
    *
    * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> of random length and having
@@ -308,7 +308,7 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
     return getRandomData(nbytes);
   }
 
-  /**
+  /*
    * Returns random data that will fit in <i>nbytes</i>.
    *
    * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> having random contents.

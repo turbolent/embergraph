@@ -31,8 +31,8 @@ import org.embergraph.rawstore.RawStoreDelegate;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for {@link BTree#removeAll()}.
+/*
+* Test suite for {@link BTree#removeAll()}.
  *
  * @see TestRestartSafe#test_restartSafe01()
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -97,7 +97,7 @@ public class TestRemoveAll extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Stress test of {@link BTree#removeAll()} where the btree is flushed {@link
    * BTree#writeCheckpoint()}. This will cause problems unless the cache is also cleared since nodes
    * that have been detached from their parents will be in the cache.
@@ -146,7 +146,7 @@ public class TestRemoveAll extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link BTree#removeAll()} which verifies that the tuples are actually deleted
    * one-by-one and the backing raw records released if the index supports raw records.
    */
@@ -186,7 +186,7 @@ public class TestRemoveAll extends AbstractBTreeTestCase {
     assertEquals(IRawStore.NULL, store.expectDelete);
   }
 
-  /**
+  /*
    * Helper class is used to watch for deletes of raw records from the backing store.
    *
    * @author thompsonbry

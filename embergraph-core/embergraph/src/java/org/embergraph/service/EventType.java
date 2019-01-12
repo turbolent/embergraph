@@ -27,22 +27,22 @@ import org.embergraph.btree.IndexSegment;
 import org.embergraph.journal.Journal;
 import org.embergraph.resources.OverflowManager;
 
-/**
- * Type safe enum for {@link Event}s.
+/*
+* Type safe enum for {@link Event}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public enum EventType {
 
-  /**
+  /*
    * Synchronous overflow is a fast operation that occurs when the live journal is nearly at its
    * maximum capacity. The index partition views are redefined onto a new journal during synchronous
    * overflow, but little or no data is copied off of the old journal.
    */
   SynchronousOverflow,
 
-  /**
+  /*
    * Asynchronous overflow migrates data off of the old journal and onto read-optimized index
    * segments and is responsible for running operation which split, join, or move index partitions.
    */
@@ -52,7 +52,7 @@ public enum EventType {
    * Other kinds of events.
    */
 
-  /**
+  /*
    * Operation that builds an index segment. Builds may either be simple (from the {@link BTree} on
    * a {@link Journal} used to absorb writes for an index partition) or compacting merges (from the
    * full view of the index partition).
@@ -65,10 +65,10 @@ public enum EventType {
   /** An {@link IndexSegment} open-close event (start is open, end is close). */
   IndexSegmentOpenClose,
 
-  /**
+  /*
    * Purge resources.
    *
    * @see OverflowManager#purgeOldResources(long, boolean)
    */
-  PurgeResources;
+  PurgeResources
 }

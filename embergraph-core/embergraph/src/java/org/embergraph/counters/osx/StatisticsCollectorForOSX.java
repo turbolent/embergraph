@@ -7,8 +7,8 @@ import org.embergraph.counters.IHostCounters;
 import org.embergraph.counters.IRequiredHostCounters;
 import org.embergraph.counters.PIDUtil;
 
-/**
- * Collection of host performance data using OSX native utilities (curent vm_stat and iostat).
+/*
+* Collection of host performance data using OSX native utilities (curent vm_stat and iostat).
  *
  * <p>Note: Unfortunately, the OSX command line reporting utilities do NOT provide access to IO Wait
  * and do NOT break down IO into reads and writes. This means that we can not provide reporting for
@@ -42,8 +42,8 @@ public class StatisticsCollectorForOSX extends AbstractStatisticsCollector {
     pid = PIDUtil.getLinuxPIDWithBash();
   }
 
-  //    /**
-  //     * The Linux {@link KernelVersion}.
+  //    /*
+//     * The Linux {@link KernelVersion}.
   //     */
   //    static protected KernelVersion kernelVersion;
   //    static {
@@ -52,25 +52,25 @@ public class StatisticsCollectorForOSX extends AbstractStatisticsCollector {
   //
   //    }
 
-  //    /**
-  //     * The name of the process (or more typically its service {@link UUID})
+  //    /*
+//     * The name of the process (or more typically its service {@link UUID})
   //     * whose per-process performance counters are to be collected.
   //     */
   //    private final String processName;
 
-  /**
+  /*
    * Reports on the host disk and CPU utilization (but not IOWait and does not break out disk read
    * versus write activity).
    */
   private IOStatCollector iostat;
 
-  /**
+  /*
    * <code>vm_stat</code> reports on the host page faults, buffers, etc., but it does NOT report on
    * either CPU stats or IO Wait.
    */
   private VMStatCollector vmstat;
 
-  /**
+  /*
    * TODO Under OSX, <code>top</code> provides more full featured reporting of OS performance
    * counters, including some IO counters and process specific counters. Unfortunately, it does NOT
    * provide IO Wait and it does NOT break out IO by reads and writes. It is also more work to parse
@@ -237,7 +237,7 @@ public class StatisticsCollectorForOSX extends AbstractStatisticsCollector {
     return root;
   }
 
-  /**
+  /*
    * @param interval The interval at which the performance counters will be collected in seconds.
    * @param processName The name of the process (or more typically its service {@link UUID}) whose
    *     per-process performance counters are to be collected.

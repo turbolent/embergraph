@@ -37,8 +37,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for {@link ASTFlattenUnionsOptimizer}.
+/*
+* Test suite for {@link ASTFlattenUnionsOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -54,7 +54,7 @@ public class TestASTFlattenUnionsOptimizer extends AbstractASTEvaluationTestCase
     super(name);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -308,7 +308,7 @@ public class TestASTFlattenUnionsOptimizer extends AbstractASTEvaluationTestCase
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * A unit test which verifies a case where a child union can not be flattened.
    *
    * <pre>

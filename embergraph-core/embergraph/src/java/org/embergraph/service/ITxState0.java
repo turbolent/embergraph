@@ -17,14 +17,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.service;
 
-/**
- * Immutable state for a transaction.
+/*
+* Immutable state for a transaction.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ITxState0 {
 
-  /**
+  /*
    * The start time for the transaction as assigned by a centralized transaction manager service.
    * Transaction start times are unique and also serve as transaction identifiers. Note that this is
    * NOT the time at which a transaction begins executing on a specific journal as the same
@@ -38,7 +38,7 @@ public interface ITxState0 {
    */
   long getStartTimestamp();
 
-  /**
+  /*
    * The timestamp of the commit point against which this transaction is reading.
    *
    * <p>Note: This is not currently available on a cluster. In that context, we wind up with the

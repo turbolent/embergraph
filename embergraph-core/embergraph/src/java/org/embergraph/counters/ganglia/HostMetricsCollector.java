@@ -10,8 +10,8 @@ import org.embergraph.ganglia.GangliaMunge;
 import org.embergraph.ganglia.IGangliaMetricsCollector;
 import org.embergraph.ganglia.IGangliaMetricsReporter;
 
-/**
- * Reflects collected host metrics to ganglia.
+/*
+* Reflects collected host metrics to ganglia.
  *
  * <pre>
  * /192.168.1.10/CPU/% IO Wait=0.0
@@ -32,7 +32,7 @@ import org.embergraph.ganglia.IGangliaMetricsReporter;
  */
 public class HostMetricsCollector implements IGangliaMetricsCollector {
 
-  /**
+  /*
    * Match anything which does NOT include <code>.service.</code> in the counter path.
    *
    * @see <a href="http://www.regular-expressions.info/lookaround.html">Regular Expressions Info

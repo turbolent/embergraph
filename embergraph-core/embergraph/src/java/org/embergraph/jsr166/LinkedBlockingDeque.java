@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * An optionally-bounded {@linkplain BlockingDeque blocking deque} based on linked nodes.
+/*
+* An optionally-bounded {@linkplain BlockingDeque blocking deque} based on linked nodes.
  *
  * <p>The optional capacity bound constructor argument serves as a way to prevent excessive
  * expansion. The capacity, if unspecified, is equal to {@link Integer#MAX_VALUE}. Linked nodes are
@@ -73,13 +73,13 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     /** The item, or null if this node has been removed. */
     E item;
 
-    /**
+    /*
      * One of: - the real predecessor Node - this Node, meaning the predecessor is tail - null,
      * meaning there is no predecessor
      */
     Node<E> prev;
 
-    /**
+    /*
      * One of: - the real successor Node - this Node, meaning the successor is head - null, meaning
      * there is no successor
      */
@@ -90,13 +90,13 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * Pointer to first node. Invariant: (first == null && last == null) || (first.prev == null &&
    * first.item != null)
    */
   transient Node<E> first;
 
-  /**
+  /*
    * Pointer to last node. Invariant: (first == null && last == null) || (last.next == null &&
    * last.item != null)
    */
@@ -122,7 +122,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     this(Integer.MAX_VALUE);
   }
 
-  /**
+  /*
    * Creates a {@code LinkedBlockingDeque} with a capacity of {@link Integer#MAX_VALUE} using the
    * caller's lock.
    */
@@ -130,7 +130,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     this(Integer.MAX_VALUE, lock);
   }
 
-  /**
+  /*
    * Creates a {@code LinkedBlockingDeque} with the given (fixed) capacity.
    *
    * @param capacity the capacity of this deque
@@ -142,7 +142,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     //        this.capacity = capacity;
   }
 
-  /**
+  /*
    * Creates a {@code LinkedBlockingDeque} with the given (fixed) capacity and the caller's {@link
    * ReentrantLock} object.
    *
@@ -166,7 +166,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     this.notFull = lock.newCondition();
   }
 
-  /**
+  /*
    * Creates a {@code LinkedBlockingDeque} with a capacity of {@link Integer#MAX_VALUE}, initially
    * containing the elements of the given collection, added in traversal order of the collection's
    * iterator.
@@ -274,7 +274,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
 
   // BlockingDeque methods
 
-  /**
+  /*
    * @throws IllegalStateException {@inheritDoc}
    * @throws NullPointerException {@inheritDoc}
    */
@@ -282,7 +282,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     if (!offerFirst(e)) throw new IllegalStateException("Deque full");
   }
 
-  /**
+  /*
    * @throws IllegalStateException {@inheritDoc}
    * @throws NullPointerException {@inheritDoc}
    */
@@ -316,7 +316,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * @throws NullPointerException {@inheritDoc}
    * @throws InterruptedException {@inheritDoc}
    */
@@ -332,7 +332,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * @throws NullPointerException {@inheritDoc}
    * @throws InterruptedException {@inheritDoc}
    */
@@ -348,7 +348,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * @throws NullPointerException {@inheritDoc}
    * @throws InterruptedException {@inheritDoc}
    */
@@ -369,7 +369,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * @throws NullPointerException {@inheritDoc}
    * @throws InterruptedException {@inheritDoc}
    */
@@ -550,7 +550,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
 
   // BlockingQueue methods
 
-  /**
+  /*
    * Inserts the specified element at the end of this deque unless it would violate capacity
    * restrictions. When using a capacity-restricted deque, it is generally preferable to use method
    * {@link #offer(Object) offer}.
@@ -571,7 +571,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     return offerLast(e);
   }
 
-  /**
+  /*
    * @throws NullPointerException {@inheritDoc}
    * @throws InterruptedException {@inheritDoc}
    */
@@ -579,7 +579,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     putLast(e);
   }
 
-  /**
+  /*
    * @throws NullPointerException {@inheritDoc}
    * @throws InterruptedException {@inheritDoc}
    */
@@ -587,7 +587,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     return offerLast(e, timeout, unit);
   }
 
-  /**
+  /*
    * Retrieves and removes the head of the queue represented by this deque. This method differs from
    * {@link #poll poll} only in that it throws an exception if this deque is empty.
    *
@@ -612,7 +612,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     return pollFirst(timeout, unit);
   }
 
-  /**
+  /*
    * Retrieves, but does not remove, the head of the queue represented by this deque. This method
    * differs from {@link #peek peek} only in that it throws an exception if this deque is empty.
    *
@@ -629,7 +629,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     return peekFirst();
   }
 
-  /**
+  /*
    * Returns the number of additional elements that this deque can ideally (in the absence of memory
    * or resource constraints) accept without blocking. This is always equal to the initial capacity
    * of this deque less the current {@code size} of this deque.
@@ -648,7 +648,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException {@inheritDoc}
    * @throws ClassCastException {@inheritDoc}
    * @throws NullPointerException {@inheritDoc}
@@ -658,7 +658,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     return drainTo(c, Integer.MAX_VALUE);
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException {@inheritDoc}
    * @throws ClassCastException {@inheritDoc}
    * @throws NullPointerException {@inheritDoc}
@@ -683,7 +683,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
 
   // Stack methods
 
-  /**
+  /*
    * @throws IllegalStateException {@inheritDoc}
    * @throws NullPointerException {@inheritDoc}
    */
@@ -698,7 +698,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
 
   // Collection methods
 
-  /**
+  /*
    * Removes the first occurrence of the specified element from this deque. If the deque does not
    * contain the element, it is unchanged. More formally, removes the first element {@code e} such
    * that {@code o.equals(e)} (if such an element exists). Returns {@code true} if this deque
@@ -714,7 +714,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     return removeFirstOccurrence(o);
   }
 
-  /**
+  /*
    * Returns the number of elements in this deque.
    *
    * @return the number of elements in this deque
@@ -729,7 +729,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * Returns {@code true} if this deque contains the specified element. More formally, returns
    * {@code true} if and only if this deque contains at least one element {@code e} such that {@code
    * o.equals(e)}.
@@ -757,8 +757,8 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
    * collection, especially when count is close to capacity.
    */
 
-  //     /**
-  //      * Adds all of the elements in the specified collection to this
+  //     /*
+//      * Adds all of the elements in the specified collection to this
   //      * queue.  Attempts to addAll of a queue to itself result in
   //      * {@code IllegalArgumentException}. Further, the behavior of
   //      * this operation is undefined if the specified collection is
@@ -790,7 +790,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
   //         }
   //     }
 
-  /**
+  /*
    * Returns an array containing all of the elements in this deque, in proper sequence (from first
    * to last element).
    *
@@ -816,7 +816,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * Returns an array containing all of the elements in this deque, in proper sequence; the runtime
    * type of the returned array is that of the specified array. If the deque fits in the specified
    * array, it is returned therein. Otherwise, a new array is allocated with the runtime type of the
@@ -883,7 +883,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * Atomically removes all of the elements from this deque. The deque will be empty after this call
    * returns.
    */
@@ -906,7 +906,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * Returns an iterator over the elements in this deque in proper sequence. The elements will be
    * returned in order from first (head) to last (tail).
    *
@@ -921,7 +921,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     return new Itr();
   }
 
-  /**
+  /*
    * Returns an iterator over the elements in this deque in reverse sequential order. The elements
    * will be returned in order from last (tail) to first (head).
    *
@@ -941,14 +941,14 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     /** The next node to return in next() */
     Node<E> next;
 
-    /**
+    /*
      * nextItem holds on to item fields because once we claim that an element exists in hasNext(),
      * we must return item read under lock (in advance()) even if it was in the process of being
      * removed when hasNext() was called.
      */
     E nextItem;
 
-    /**
+    /*
      * Node returned by most recent call to next. Needed by remove. Reset to null if this element is
      * deleted by a call to remove.
      */
@@ -1044,7 +1044,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * Save the state of this deque to a stream (that is, serialize it).
    *
    * @serialData The capacity (int), followed by elements (each an {@code Object}) in the proper
@@ -1066,7 +1066,7 @@ public class LinkedBlockingDeque<E> extends AbstractQueue<E>
     }
   }
 
-  /**
+  /*
    * Reconstitute this deque from a stream (that is, deserialize it).
    *
    * @param s the stream

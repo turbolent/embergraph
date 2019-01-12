@@ -44,8 +44,8 @@ import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
-/**
- * Test of the Java client for the REST API using mock objects to verify that the generated http
+/*
+* Test of the Java client for the REST API using mock objects to verify that the generated http
  * request is correct.
  *
  * @author igorkim

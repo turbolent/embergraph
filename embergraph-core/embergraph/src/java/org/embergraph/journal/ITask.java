@@ -31,19 +31,19 @@ import org.embergraph.journal.AbstractTask.InnerWriteServiceCallable;
 import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.util.concurrent.TaskCounters;
 
-/**
- * Interface available to tasks running under the {@link ConcurrencyManager}.
+/*
+* Interface available to tasks running under the {@link ConcurrencyManager}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ITask<T> extends Callable<T> {
 
-  /**
+  /*
    * The object used to manage access to the resources from which views of the indices are created.
    */
   IResourceManager getResourceManager();
 
-  /**
+  /*
    * The journal against which the operation will be carried out.
    *
    * <p>If the task is running against an {@link ITx#UNISOLATED} index, then this will be the {@link
@@ -71,7 +71,7 @@ public interface ITask<T> extends Callable<T> {
   /** Returns a copy of the array of resources declared to the constructor. */
   String[] getResource();
 
-  /**
+  /*
    * Return the only declared resource.
    *
    * @return The declared resource.
@@ -83,7 +83,7 @@ public interface ITask<T> extends Callable<T> {
   @Override
   String toString();
 
-  /**
+  /*
    * Return an appropriate view of the named B+Tree that has the appropriate isolation level for the
    * operation (non-GIST).
    *
@@ -112,7 +112,7 @@ public interface ITask<T> extends Callable<T> {
    */
   IIndex getIndex(String name); // non-GIST
 
-  /**
+  /*
    * Return an appropriate view of the named index for the operation (GIST).
    *
    * <p>This method MUST be used to access non-B+Tree data structures that do not (yet) support

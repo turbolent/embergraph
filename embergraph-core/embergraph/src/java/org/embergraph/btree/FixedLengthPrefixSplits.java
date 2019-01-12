@@ -9,8 +9,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Imposes constraint that the key before the separatorKey must differ in the first N bytes from the
+/*
+* Imposes constraint that the key before the separatorKey must differ in the first N bytes from the
  * key after the separator key.
  */
 public class FixedLengthPrefixSplits implements ISimpleSplitHandler, Serializable, Externalizable {
@@ -29,7 +29,7 @@ public class FixedLengthPrefixSplits implements ISimpleSplitHandler, Serializabl
     this.N = nbytes;
   }
 
-  /**
+  /*
    * Linear search for the first successor of the keyAt(splitAt) which differs in the first N bytes.
    *
    * @todo This will be faster using an {@link ITupleCursor} if we have to leaf the current leaf.
@@ -67,8 +67,8 @@ public class FixedLengthPrefixSplits implements ISimpleSplitHandler, Serializabl
 
       if (cmp < 0) {
 
-        /*
-         * The N byte prefix has changed. Clone the first N bytes of the
+      /*
+       * The N byte prefix has changed. Clone the first N bytes of the
          * current key and return them to the caller. This is the
          * minimum length first successor of the recommended key which
          * can serve as a separator key for an N byte prefix constraint.

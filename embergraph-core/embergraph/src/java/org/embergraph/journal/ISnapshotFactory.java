@@ -20,8 +20,8 @@ package org.embergraph.journal;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Interface allows an application to decide on the file name for the snapshot, whether or not the
+/*
+* Interface allows an application to decide on the file name for the snapshot, whether or not the
  * snapshot will be compressed, etc.
  *
  * @author bryan
@@ -29,7 +29,7 @@ import java.io.IOException;
  */
 public interface ISnapshotFactory {
 
-  /**
+  /*
    * Return the {@link File} on which the snapshot will be written. A common strategy is to label
    * each snapshot with the commit counter from the associated root block and place the snapshots
    * within some directory known to the application. E.g., "snapshots/snapshot-commitCounter.jnl".

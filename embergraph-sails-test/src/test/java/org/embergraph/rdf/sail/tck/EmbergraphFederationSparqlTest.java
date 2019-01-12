@@ -44,8 +44,8 @@ import org.openrdf.query.parser.sparql.manifest.SPARQLQueryTest;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.dataset.DatasetRepository;
 
-/**
- * Runs the SPARQL test suite against a JiniFederation, which must be already deployed. Each test in
+/*
+* Runs the SPARQL test suite against a JiniFederation, which must be already deployed. Each test in
  * the suite is run against a distinct quad store in its own embergraph namespace.
  *
  * <p>To run this test suite, you need to have a deployed federation. You then specify the
@@ -62,7 +62,7 @@ import org.openrdf.repository.dataset.DatasetRepository;
  */
 public class EmbergraphFederationSparqlTest extends SPARQLQueryTest {
 
-  /**
+  /*
    * Skip the dataset tests for now until we can figure out what is wrong with them.
    *
    * <p>FIXME Fix the dataset tests. There is some problem in how the data to be loaded into the
@@ -95,7 +95,7 @@ public class EmbergraphFederationSparqlTest extends SPARQLQueryTest {
 
     //        suite1 = EmbergraphSparqlTest.filterOutTests(suite1, "property-paths");
 
-    /**
+    /*
      * BSBM BI use case query 5
      *
      * <p>bsbm-bi-q5
@@ -254,7 +254,7 @@ public class EmbergraphFederationSparqlTest extends SPARQLQueryTest {
     return "SPARQLTest_" + UUID.randomUUID().toString();
   }
 
-  /**
+  /*
    * Configuration options for the KB instances used to run the SPARQL compliance test suite.
    *
    * <p>Note: These properties can not be cached across tests since they have to be slightly
@@ -352,8 +352,8 @@ public class EmbergraphFederationSparqlTest extends SPARQLQueryTest {
   private ScaleOutTripleStore _ts = null;
   private EmbergraphSail _sail = null;
 
-  //	/**
-  //	 * Dumps the locators for an index of a relation.
+  //	/*
+//	 * Dumps the locators for an index of a relation.
   //	 *
   //	 * @param fed
   //	 * @param namespace

@@ -61,8 +61,8 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 
-/**
- * Test suite for BIGDATA extension to SPARQL UPDATE for NAMED SOLUTION SETS.
+/*
+* Test suite for BIGDATA extension to SPARQL UPDATE for NAMED SOLUTION SETS.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/524">SPARQL Cache </a>
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/531">SPARQL UPDATE Extensions
@@ -86,7 +86,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
   /** The file path name for the package in which the data files are found. */
   protected final String packagePath = "file:src/test/java/org/embergraph/rdf/sail/tck/data/";
 
-  /**
+  /*
    * Note: This field MUST be cleared in tearDown or a hard reference will be retained to the
    * backend until the end of CI!
    */
@@ -199,8 +199,8 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
 
       } catch (MalformedURLException e) {
 
-        /*
-         * Ignore. we will handle the problem below if this was not
+      /*
+       * Ignore. we will handle the problem below if this was not
          * a URL.
          */
 
@@ -215,7 +215,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     return is;
   }
 
-  /**
+  /*
    * Return the contents of the resource.
    *
    * @param resource The resource.
@@ -276,7 +276,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
         );
   }
 
-  /**
+  /*
    * Note: This method may be overridden in order to run the test suite against other variations of
    * the embergraph backend.
    */
@@ -343,7 +343,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     return new EmbergraphSailRepository(sail);
   }
 
-  /**
+  /*
    * LOAD the data set.
    *
    * @param datasetFile The base name of a file.
@@ -359,7 +359,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     con.prepareUpdate(QueryLanguage.SPARQL, updateStr).execute();
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the SPARQL UPDATE for NAMED SOLUTION SETS test should run.
    *
    * <p>FIXME SPARQL UPDATE for NAMED SOLUTION SETS is NOT SUPPORTED for read/write transactions
@@ -386,7 +386,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     return !isolatable;
   }
 
-  /**
+  /*
    * Unit test for <code>INSERT INTO ... SELECT</code>. This loads some data into the end point,
    * creates a named solution set, then verifies that the solutions are present using a query and an
    * INCLUDE join against the named solution set.
@@ -466,7 +466,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for <code>DELETE FROM ... SELECT</code>. This loads some data into the end point,
    * creates a named solution set, then removes some solutions and verifies that they are no longer
    * reported by query as a post-condition.
@@ -538,7 +538,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for <code>DELETE FROM ... SELECT</code>. This loads some data into the end point,
    * creates a named solution set, then removes some solutions and verifies that they are no longer
    * reported by query as a post-condition.
@@ -610,7 +610,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for <code>DELETE FROM ... SELECT</code>. This loads some data into the end point,
    * creates a named solution set, then removes some solutions and verifies that they are no longer
    * reported by query as a post-condition.
@@ -682,7 +682,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test where we are deleting from one solution set and inserting into another.
    *
    * <p>TODO Unit test where we are deleting some solutions from a solution set and inserting other
@@ -813,7 +813,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
   //
   //    }
 
-  /**
+  /*
    * Unit test of CREATE SOLUTIONS.
    *
    * <p>Note: If named solution sets which do not exist are equivalent to empty named solution sets,
@@ -845,7 +845,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     con.prepareUpdate(QueryLanguage.SPARQL, "drop solutions %namedSet1").execute();
   }
 
-  /**
+  /*
    * Unit test of CREATE SILENT SOLUTIONS verifies that an error is reported if SILENT is not
    * specified and the solution set exists and that the error is suppressed if the SILENT keyword is
    * given.
@@ -875,7 +875,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     con.prepareUpdate(QueryLanguage.SPARQL, "create silent solutions %namedSet1").execute();
   }
 
-  /**
+  /*
    * A correct rejection test which verifies that an exception is thrown if the named solution set
    * does not exist.
    */
@@ -897,7 +897,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * A test which verifies that an exception is NOT thrown if the named solution set does not exist
    * and SILENT is specified.
    */
@@ -914,7 +914,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     con.prepareUpdate(QueryLanguage.SPARQL, "drop silent solutions %namedSet1").execute();
   }
 
-  /**
+  /*
    * A correct rejection test which verifies that an exception is thrown if the named solution set
    * does not exist.
    */
@@ -936,7 +936,7 @@ public class EmbergraphSPARQLUpdateTest2 extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * A test which verifies that an exception is NOT thrown if the named solution set does not exist
    * and SILENT is specified.
    */

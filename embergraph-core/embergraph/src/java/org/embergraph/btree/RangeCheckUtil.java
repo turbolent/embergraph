@@ -24,8 +24,8 @@ package org.embergraph.btree;
 import org.embergraph.mdi.ISeparatorKeys;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Utility class to verify that a key lies within a key range.
+/*
+* Utility class to verify that a key lies within a key range.
  *
  * <p>Note: In order to be a useful check on the mapping of predicates across shards, the check
  * needs to verify that the as-bound predicate either lies within or spans the shard, i.e., that the
@@ -38,7 +38,7 @@ import org.embergraph.util.BytesUtil;
  */
 public class RangeCheckUtil {
 
-  /**
+  /*
    * Verify that the key lies within the key range of an index partition.
    *
    * @param key The key.

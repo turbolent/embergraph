@@ -28,8 +28,8 @@ import org.embergraph.rdf.sparql.ast.ConstructNode;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 
-/**
- * Data driven test suite for CONSTRUCT queries.
+/*
+* Data driven test suite for CONSTRUCT queries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestBasicQuery.java 6387 2012-07-21 18:37:51Z thompsonbry $
@@ -44,7 +44,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * A simple CONSTRUCT query.
    *
    * <pre>
@@ -78,7 +78,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
     assertFalse(construct.isNativeDistinct());
   }
 
-  /**
+  /*
    * A simple CONSTRUCT query using a native DISTINCT filter.
    *
    * <pre>
@@ -114,7 +114,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
     assertTrue(construct.isNativeDistinct());
   }
 
-  /**
+  /*
    * A simple CONSTRUCT query using a native DISTINCT filter (enabled via the "analytic" query
    * hint).
    *
@@ -151,7 +151,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
     assertTrue(construct.isNativeDistinct());
   }
 
-  /**
+  /*
    * A CONSTRUCT without a template and having a ground triple in the WHERE clause. For this variant
    * of the test, the triple is not in the KB.
    *
@@ -174,7 +174,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A CONSTRUCT without a template and having a ground triple in the WHERE clause. For this variant
    * of the test, the triple is in the KB and should be in the CONSTRUCT result.
    *
@@ -197,7 +197,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A construct with told triples in the CONSTRUCT clause and no WHERE clause.
    *
    * <pre>
@@ -220,7 +220,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * A CONSTRUCT query where the constructed statements can have blank nodes because a variable
    * becomes bound to a blank node in the data.
    *
@@ -243,7 +243,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Return the non-ground triple pattern templates from the CONSTRUCT node of the query.
    *
    * @param queryRoot The query.
@@ -259,8 +259,8 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
 
       if (!pat.isGround()) {
 
-        /*
-         * A statement pattern that we will process for each solution.
+      /*
+       * A statement pattern that we will process for each solution.
          */
 
         templates.add(pat);
@@ -270,7 +270,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
     return templates;
   }
 
-  /**
+  /*
    * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
    * result in distinct triples without the application of a DISTINCT SPO filter.
    *
@@ -309,7 +309,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
             optimizedQuery.getWhereClause()));
   }
 
-  /**
+  /*
    * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
    * result in distinct triples without the application of a DISTINCT SPO filter.
    *
@@ -344,7 +344,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
             optimizedQuery.getWhereClause()));
   }
 
-  /**
+  /*
    * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
    * result in distinct triples without the application of a DISTINCT SPO filter.
    *
@@ -383,7 +383,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
             optimizedQuery.getWhereClause()));
   }
 
-  /**
+  /*
    * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
    * result in distinct triples without the application of a DISTINCT SPO filter.
    *
@@ -421,7 +421,7 @@ public class TestConstruct extends AbstractDataDrivenSPARQLTestCase {
             optimizedQuery.getWhereClause()));
   }
 
-  /**
+  /*
    * Unit test for method identifying whether a CONSTRUCT template and WHERE clause will obviously
    * result in distinct triples without the application of a DISTINCT SPO filter.
    *

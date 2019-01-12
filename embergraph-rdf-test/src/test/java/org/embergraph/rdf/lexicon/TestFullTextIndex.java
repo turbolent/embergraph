@@ -59,8 +59,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.model.vocabulary.XMLSchema;
 
-/**
- * Test of adding terms with the full text index enabled and of lookup of terms by tokens which
+/*
+* Test of adding terms with the full text index enabled and of lookup of terms by tokens which
  * appear within those terms.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -87,8 +87,8 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
   //
   //    }
 
-  //    /**
-  //     * Test helper verifies that the term is not in the lexicon, adds the term
+  //    /*
+//     * Test helper verifies that the term is not in the lexicon, adds the term
   //     * to the lexicon, verifies that the term can be looked up by its assigned
   //     * term identifier, verifies that the term is now in the lexicon, and
   //     * verifies that adding the term again returns the same term identifier.
@@ -519,7 +519,7 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for indexing fully inline plain, language code, and datatype literals which using a
    * Unicode representation in the {@link IV}.
    */
@@ -763,8 +763,8 @@ public class TestFullTextIndex extends AbstractTripleStoreTestCase {
 
         final IIndex btree = store.getIndexManager().getIndex(name, store.getTimestamp());
 
-        /*
-         * Range delete the keys matching the filter.
+      /*
+       * Range delete the keys matching the filter.
          */
         {
           final ChunkedLocalRangeIterator<?> itr =

@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * AST node for a SLICE (offset/limit).
+/*
+* AST node for a SLICE (offset/limit).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -38,15 +38,15 @@ public class SliceNode extends SolutionModifierBase {
   public interface Annotations extends SolutionModifierBase.Annotations {
 
     /** The first solution to be returned to the caller (origin ZERO). */
-    final String OFFSET = "offset";
+    String OFFSET = "offset";
 
-    final long DEFAULT_OFFSET = 0L;
+    long DEFAULT_OFFSET = 0L;
 
     /** The maximum #of solutions to be returned to the caller (default is all). */
-    final String LIMIT = "limit";
+    String LIMIT = "limit";
 
     /** A value of {@link Long#MAX_VALUE} is used to indicate that there is no limit. */
-    final long DEFAULT_LIMIT = Long.MAX_VALUE;
+    long DEFAULT_LIMIT = Long.MAX_VALUE;
   }
 
   /** Deep copy constructor. */
@@ -61,13 +61,13 @@ public class SliceNode extends SolutionModifierBase {
     super(args, anns);
   }
 
-  /**
+  /*
    * Slice with defaults that do not impose a constraint (offset is ZERO, limit is {@link
    * Long#MAX_VALUE}).
    */
   public SliceNode() {}
 
-  /**
+  /*
    * @param offset The offset (origin ZERO).
    * @param limit The limit (use {@link Long#MAX_VALUE} if there is no limit).
    */
@@ -98,7 +98,7 @@ public class SliceNode extends SolutionModifierBase {
     return getProperty(Annotations.LIMIT, Annotations.DEFAULT_LIMIT);
   }
 
-  /**
+  /*
    * Return <code>true</code> if the slice will impose a constraint ( <code>offset GT ZERO</code> or
    * <code>limit LT {@link Long#MAX_VALUE}</code>).
    */

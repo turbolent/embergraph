@@ -22,8 +22,8 @@ import org.embergraph.rdf.graph.IGraphAccessor;
 import org.embergraph.rdf.graph.impl.sail.AbstractSailGraphTestCase;
 import org.openrdf.sail.SailConnection;
 
-/**
- * Test class for SSP traversal.
+/*
+* Test class for SSP traversal.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -84,7 +84,7 @@ public class TestSSSP extends AbstractSailGraphTestCase {
     }
   }
 
-  /**
+  /*
    * Test using {@link #setupSSSPGraphProblem()}
    *
    * <p>FIXME SSSP: This test needs link weights in the data and to resolve those link weights

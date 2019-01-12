@@ -25,15 +25,15 @@ package org.embergraph.relation;
 
 import org.embergraph.relation.locator.ILocatableResource;
 
-/**
- * Mutation interface
+/*
+* Mutation interface
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IMutableResource<T> extends ILocatableResource<T> {
 
-  /**
+  /*
    * Create any logically contained resources (relations, indices). There is no presumption that
    * {@link #init()} is suitable for invocation from {@link #create()}. Instead, you are responsible
    * for invoking {@link #init()} from this method IFF it is appropriate to reuse its initialization

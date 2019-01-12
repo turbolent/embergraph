@@ -9,8 +9,8 @@ import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorCounters;
 
-/**
- * Class tracks a variety of information about a {@link ThreadPoolExecutor} including the moving
+/*
+* Class tracks a variety of information about a {@link ThreadPoolExecutor} including the moving
  * average of its queue length, queue size, average active count, etc.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -42,7 +42,7 @@ public class ThreadPoolExecutorBaseStatisticsTask implements Runnable {
     this(service, MovingAverageTask.DEFAULT_WEIGHT);
   }
 
-  /**
+  /*
    * Core impl.
    *
    * @param service The service to be monitored.
@@ -104,7 +104,7 @@ public class ThreadPoolExecutorBaseStatisticsTask implements Runnable {
   /** The moving average of {@link Queue#size()} for the {@link ThreadPoolExecutor}'s work queue. */
   private final MovingAverageTask queueSizeTask;
 
-  /**
+  /*
    * The moving average of {@link ThreadPoolExecutor#getActiveCount().
    */
   private final MovingAverageTask activeCountTask;
@@ -115,7 +115,7 @@ public class ThreadPoolExecutorBaseStatisticsTask implements Runnable {
   /** The moving average of {@link ThreadPoolExecutor#getPoolSize()}. */
   private final MovingAverageTask poolSizeTask;
 
-  /**
+  /*
    * This should be invoked once per second to sample various counters in order to turn their values
    * into moving averages.
    *

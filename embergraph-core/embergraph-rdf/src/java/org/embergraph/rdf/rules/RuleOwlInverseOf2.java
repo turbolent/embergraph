@@ -26,8 +26,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.OWL;
 
-/**
- * owl:inverseOf2
+/*
+* owl:inverseOf2
  *
  * <pre>
  *   owl:inverseOf2 : (a owl:inverseOf b), (x a z) -&gt; (z b x).

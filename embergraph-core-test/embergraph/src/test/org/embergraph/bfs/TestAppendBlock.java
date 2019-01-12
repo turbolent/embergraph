@@ -26,8 +26,8 @@ package org.embergraph.bfs;
 import java.io.IOException;
 import java.util.Random;
 
-/**
- * Test atomic append operations on the file data index for the {@link EmbergraphFileSystem}. This
+/*
+* Test atomic append operations on the file data index for the {@link EmbergraphFileSystem}. This
  * also tests the correct assignment of block identifiers, the ability to count the #of blocks in a
  * file version, the ability to visit the block identifiers for a file version, the ability to read
  * a specific block for a file version, and the ability to read all data for a file version from an
@@ -57,7 +57,7 @@ public class TestAppendBlock extends AbstractRepositoryTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Test the ability to write a byte[] onto the index and read it back.
    *
    * @throws IOException
@@ -83,7 +83,7 @@ public class TestAppendBlock extends AbstractRepositoryTestCase {
     assertEquals("inputStream", expected, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Test the ability to write two partial blocks in a row onto a file version and then read them
    * back (test of append semantics).
    *
@@ -126,7 +126,7 @@ public class TestAppendBlock extends AbstractRepositoryTestCase {
     assertEquals("data", new byte[] {1, 2, 3, 4, 5, 6}, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Test the ability to write three partial blocks in a row onto a file version and then read them
    * back (test of append semantics).
    *
@@ -177,7 +177,7 @@ public class TestAppendBlock extends AbstractRepositoryTestCase {
         "data", new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Atomic append of a zero length block.
    *
    * @throws IOException
@@ -201,7 +201,7 @@ public class TestAppendBlock extends AbstractRepositoryTestCase {
     assertEquals("inputStream", expected, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Atomic append of a full block.
    *
    * @throws IOException
@@ -229,7 +229,7 @@ public class TestAppendBlock extends AbstractRepositoryTestCase {
     assertEquals("inputStream", expected, read(repo.inputStream(id, version)));
   }
 
-  /**
+  /*
    * Verify correct rejection: (a) writes that are larger than one block.
    *
    * @todo do more correct rejection tests.
@@ -256,7 +256,7 @@ public class TestAppendBlock extends AbstractRepositoryTestCase {
     }
   }
 
-  /**
+  /*
    * A stress test for writing a partial and full blocks on a file and reading back its data. Each
    * pass writes on a different file.
    *

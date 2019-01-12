@@ -7,15 +7,15 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
 
-/**
- * Base class for classes that provide closure programs.
+/*
+* Base class for classes that provide closure programs.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class BaseClosure {
 
-  /**
+  /*
    * The database whose configuration will determine which entailments are to be maintained and
    * which of those entailments are computed by forward closure vs backchained.
    */
@@ -39,7 +39,7 @@ public abstract class BaseClosure {
   /** Various term identifiers that we need to construct the rules. */
   protected final Vocabulary vocab;
 
-  /**
+  /*
    * @param db The database whose configuration will determine which entailments are to be
    *     maintained and which of those entailments are computed by forward closure vs backchained.
    * @throws IllegalArgumentException if the <i>db</i> is <code>null</code>.
@@ -80,7 +80,7 @@ public abstract class BaseClosure {
         inf.enableOwlFunctionalAndInverseFunctionalProperty;
   }
 
-  /**
+  /*
    * Return the program that will be used to compute the closure of the database.
    *
    * @param database The database whose closure will be updated.
@@ -93,7 +93,7 @@ public abstract class BaseClosure {
    */
   public abstract MappedProgram getProgram(String database, String focusStore);
 
-  /**
+  /*
    * Allow subclasses of the fast and full closure programs to provide a set of custom rules that
    * will be run towards the end of the standard closure program.
    */

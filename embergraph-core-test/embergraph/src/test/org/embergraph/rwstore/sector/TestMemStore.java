@@ -22,8 +22,8 @@ import org.embergraph.rwstore.IRWStrategy;
 import org.embergraph.rwstore.IRawTx;
 import org.embergraph.service.AbstractTransactionService;
 
-/**
- * Test suite for {@link MemStore}.
+/*
+* Test suite for {@link MemStore}.
  *
  * @author thompsonbry
  */
@@ -127,7 +127,7 @@ public class TestMemStore extends AbstractJournalTestCase {
     return suite;
   }
 
-  /**
+  /*
    * Verify normal operation and basic assumptions when creating a new journal using {@link
    * BufferMode#Transient}.
    *
@@ -144,7 +144,7 @@ public class TestMemStore extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractRawStoreTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -170,7 +170,7 @@ public class TestMemStore extends AbstractJournalTestCase {
       return new MemStore(DirectBufferPool.INSTANCE);
     }
 
-    /**
+    /*
      * Can be tested by removing RWStore call to journal.removeCommitRecordEntries in freeDeferrals.
      *
      * <p>final int commitPointsRemoved = journal.removeCommitRecordEntries(fromKey, toKey);
@@ -204,7 +204,7 @@ public class TestMemStore extends AbstractJournalTestCase {
         }
 
         // Age the history (of the deletes!)
-        Thread.currentThread().sleep(400);
+        Thread.sleep(400);
 
         verifyCommitIndex(store, 20);
 
@@ -247,7 +247,7 @@ public class TestMemStore extends AbstractJournalTestCase {
       jrnl.commit();
     }
 
-    /**
+    /*
      * Tests whether tasks are able to access and modify data safely by emulating transactions by
      * calling activateTx and deactivateTx directly.
      */
@@ -436,7 +436,7 @@ public class TestMemStore extends AbstractJournalTestCase {
         store.commit();
 
         // Age the history (of the deletes!)
-        Thread.currentThread().sleep(6000);
+        Thread.sleep(6000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -457,7 +457,7 @@ public class TestMemStore extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMROWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -484,7 +484,7 @@ public class TestMemStore extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMRMWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -26,8 +26,8 @@ import org.embergraph.btree.data.DefaultLeafCoder;
 import org.embergraph.btree.data.ILeafData;
 import org.embergraph.btree.raba.codec.CanonicalHuffmanRabaCoder;
 
-/**
- * Test suite for the HTree {@link ILeafData} records (accessing coded data in place).
+/*
+* Test suite for the HTree {@link ILeafData} records (accessing coded data in place).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -41,8 +41,8 @@ import org.embergraph.rdf.sparql.ast.explainhints.JoinOrderExplainHint;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.sparql.ast.service.ServiceRegistry;
 
-/**
- * This optimizer brings a join group node into a valid order according to the SPARQL 1.1 semantics
+/*
+* This optimizer brings a join group node into a valid order according to the SPARQL 1.1 semantics
  * and optimizes the order of the nodes in the join group using various heuristics.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -58,7 +58,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     this(false);
   }
 
-  /**
+  /*
    * Constructor allowing to run the optimizer in an "assert-correctness-only" mode that makes only
    * minor modifications to the join order.
    */
@@ -72,7 +72,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
 
     final boolean reorderNodes = ASTStaticJoinOptimizer.isStaticOptimizer(ctx, joinGroup);
 
-    /**
+    /*
      * Initialize summary containers with a single pass over the children; they allow for efficient
      * lookup of required information in the following.
      */
@@ -92,7 +92,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     /** Setup helper class for proper placement of FILTER nodes in join group. */
     final ASTFilterPlacer filterPlacer = new ASTFilterPlacer(joinGroup, fExInfo);
 
-    /**
+    /*
      * Set up the partitions, ignoring the FILTER nodes. FILTER nodes apply to the whole join group
      * by semantics, so they are not considered here but will be added in the end.
      */
@@ -100,7 +100,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
         new ASTJoinGroupPartitions(
             filterPlacer.getNonFilterNodes(), bindingInfoMap, externallyIncoming);
 
-    /**
+    /*
      * First, optimize across the partitions, trying to move forward non-optional non-minus patterns
      * wherever possible. It is important to do this first, before reordering within partitions, as
      * it shifts nodes around across them. See
@@ -111,7 +111,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
       optimizeAcrossPartitions(joinGroup, partitions, bindingInfoMap, externallyIncoming);
     }
 
-    /**
+    /*
      * Second, optimize within the individual partitions. This optimization is based on both hard
      * constraints (w.r.t. the placement of nodes that require bindings) and heuristics (e.g. an
      * order based on node types).
@@ -123,25 +123,25 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
       optimizeWithinPartitions(partitions, bindingInfoMap, assertCorrectnessOnly);
     }
 
-    /**
+    /*
      * Third, place the FILTERs at appropriate positions (across partitions). Note that this is
      * required for correctness, and hence done even if reorderNodes is set to false (i.e.,
      * reordering is disabled through the query hint).
      */
     filterPlacer.placeFiltersInPartitions(partitions);
 
-    /**
+    /*
      * Now, flatten the partitions again and replace the children of the join group with the new
      * list.
      */
     final LinkedList<IGroupMemberNode> nodeList =
         partitions.extractNodeList(true /* includeOptionalOrMinusNode */);
     for (int i = 0; i < joinGroup.arity(); i++) {
-      joinGroup.setArg(i, (BOp) nodeList.get(i));
+      joinGroup.setArg(i, nodeList.get(i));
     }
   }
 
-  /**
+  /*
    * Moves the nodes contained in the set as far to the beginning of the join group as possible
    * without violating the semantics. In particular, this function takes care to not "skip" OPTIONAL
    * and MINUS constructs when it would change the outcome of the query.
@@ -156,7 +156,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
 
     final List<ASTJoinGroupPartition> partitionList = partitions.getPartitionList();
 
-    /**
+    /*
      * In the following list, we store the variables that are definitely produced *before*
      * evaluating a partition. We maintain this set for fast lookup.
      */
@@ -175,7 +175,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
       definitelyProducedUpToPartition.add(new HashSet<IVariable<?>>(producedUpToPartition));
     }
 
-    /**
+    /*
      * Having initialized the map now, we iterate over the patterns in the partitions and try to
      * shift them to the first possible partition. My intuition is that the algorithm is optimal in
      * the sense that, after running it, every node is in the firstmost partition where it can be
@@ -194,8 +194,8 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
 
           final ASTJoinGroupPartition candidatePartition = partitionList.get(j);
 
-          /**
-           * Calculate the conflicting vars as the intersection of the maybe vars of the bordering
+        /*
+       * Calculate the conflicting vars as the intersection of the maybe vars of the bordering
            * OPTIONAL or MINUS with the maybe vars of the node to move around, minus the nodes that
            * are known to be bound upfront.
            */
@@ -244,8 +244,8 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
           final ASTJoinGroupPartition partitionToMove = partitionList.get(partitionForCandidate);
           partitionToMove.addNonOptionalNonMinusNodeToPartition(candidate);
 
-          /**
-           * Given that the node has been moved to partitionForCandidate, the
+        /*
+       * Given that the node has been moved to partitionForCandidate, the
            * definitelyProducedUpToPartition needs to be updated for all partitions starting at the
            * partition following the partitionForCandidate, up to the partition i, which contained
            * the node before (later partitions carry this info already).
@@ -272,7 +272,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     }
   }
 
-  /**
+  /*
    * Optimize the order of nodes within the single partitions. The nice thing about partitions is
    * that we can freely reorder the non-optional non-minus nodes within them.
    */
@@ -292,7 +292,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     }
   }
 
-  /**
+  /*
    * Optimize the order of nodes within the given partition. The nice thing about partitions is that
    * we can freely reorder the non-optional non-minus nodes within them.
    */
@@ -311,7 +311,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
               IGroupMemberNode.class /* see condition B */
             });
 
-    /**
+    /*
      * ### Condition A:
      *
      * <p>We only consider special service nodes for placement, all other service nodes are treated
@@ -334,9 +334,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
               }
 
               /** Return true if it is a SPARQL 1.1 SERVICE, but the constant is not bound. */
-              if (!sn.getServiceRef().isConstant()) {
-                return true;
-              }
+              return !sn.getServiceRef().isConstant();
             }
 
             // as a fallback return false
@@ -344,7 +342,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
           }
         });
 
-    /**
+    /*
      * ### Condition B:
      *
      * <p>Additional nodes that have binding requirements (e.g. { BIND ?x AS ?y } UNION { ... } that
@@ -371,7 +369,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
 
     classifier.registerNodes(partition.extractNodeList(false /* includeOptionalOrMinus */));
 
-    /**
+    /*
      * In a first step, we remove service nodes, assignment nodes, and bindings clauses from the
      * partition. They will be handled in a special way.
      */
@@ -382,7 +380,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     toRemove.addAll(classifier.get(IGroupMemberNode.class));
     partition.removeNodesFromPartition(toRemove);
 
-    /**
+    /*
      * The remaining elements will be reordered based on their type. This is only done if
      * optimization was turned on though. Otherwise, this method just asserts correct placement of
      * nodes with binding requirements. This is where the optimization takes place.
@@ -401,7 +399,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     nonValueNodesToBePlaced.addAll(classifier.get(ServiceNode.class));
     nonValueNodesToBePlaced.addAll(classifier.get(IGroupMemberNode.class));
 
-    /**
+    /*
      * Place the VALUES nodes. Generally, it is desirable to place the VALUES clause at the first
      * contributing position. However, in some cases (see e.g.
      * https://jira.blazegraph.com/browse/BLZG-1463) the VALUES clause may introduce variables for
@@ -439,7 +437,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
       }
     }
 
-    /**
+    /*
      * Place the BIND nodes: it is important that we bring them into the right order, e.g. if bind
      * node 1 uses variables bound by bind node 2, then we must insert node 2 first in order to be
      * able to place node 1 after the first bind node.
@@ -475,7 +473,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     knownBoundFromPrevPartitions.addAll(partition.getDefinitelyProduced());
   }
 
-  /**
+  /*
    * Brings the nodes in a correct order according to binding req dependencies that they have. Note
    * that this is a best effort approach, which may fail in cases where we allow for liberate
    * patterns that do not strictly follow the restriction of SPARQL semantics (e.g., for cyclic
@@ -510,8 +508,8 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
         final IGroupMemberNode node = toBePlaced.get(i);
         final GroupNodeVarBindingInfo nodeBindingInfo = bindingInfoMap.get(node);
 
-        /**
-         * The first condition is that the node can be safely placed. The second condition is a
+      /*
+       * The first condition is that the node can be safely placed. The second condition is a
          * fallback, where we randomly pick the last node (even if it does not satisfy the
          * condition).
          */

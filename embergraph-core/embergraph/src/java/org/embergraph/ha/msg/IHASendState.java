@@ -20,27 +20,27 @@ package org.embergraph.ha.msg;
 import java.io.Serializable;
 import java.util.UUID;
 
-/**
- * Interface for the state of the sender of an {@link IHAMessage}.
+/*
+* Interface for the state of the sender of an {@link IHAMessage}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHASendState extends Serializable {
 
-  /**
+  /*
    * A unique (one-up) message sequence identifier for the messages from the sender. This identifier
    * may be used to verify that the bytes available from the replication stream are associated with
    * the designed payload.
    */
   long getMessageId();
 
-  /**
+  /*
    * The {@link UUID} of the originating service. This may be used to verify that a message was
    * sourced the expected quorum leader.
    */
   UUID getOriginalSenderId();
 
-  /**
+  /*
    * The {@link UUID} of the sending service. This may be used to verify that a message was sourced
    * the expected upstream service.
    */
@@ -52,7 +52,7 @@ public interface IHASendState extends Serializable {
   /** The current replication factor on the sender. */
   int getReplicationFactor();
 
-  /**
+  /*
    * A byte[] marker that must prefix the message payload, needed to skip stale data from failed
    * read tasks.
    */

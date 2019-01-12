@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
-/**
- * Flyweight {@link DocumentHeader} implementation.
+/*
+* Flyweight {@link DocumentHeader} implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -23,7 +23,7 @@ public class DocumentHeaderImpl implements DocumentHeader {
     properties = new HashMap<String, Object>();
   }
 
-  /**
+  /*
    * Copy constructor for header information.
    *
    * @param header to copy
@@ -43,7 +43,7 @@ public class DocumentHeaderImpl implements DocumentHeader {
     properties.put(FileMetadataSchema.ID, id);
   }
 
-  /**
+  /*
    * Package private method sets the file version.
    *
    * @param version The file version.
@@ -87,7 +87,7 @@ public class DocumentHeaderImpl implements DocumentHeader {
     return (String) properties.get(FileMetadataSchema.CONTENT_ENCODING);
   }
 
-  /**
+  /*
    * Set an arbitrary property value.
    *
    * @param property The property name.

@@ -29,8 +29,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import junit.framework.AssertionFailedError;
 import org.embergraph.quorum.MockQuorumFixture.MockQuorumMember;
 
-/**
- * Test the quorum semantics for a singleton quorum. This test suite allows us to verify that each
+/*
+* Test the quorum semantics for a singleton quorum. This test suite allows us to verify that each
  * quorum state change is translated into the appropriate methods against the public API of the
  * quorum client or quorum member.
  *
@@ -53,7 +53,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
     super.setUp();
   }
 
-  /**
+  /*
    * Unit test for quorum member add/remove.
    *
    * @throws InterruptedException
@@ -86,7 +86,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
     assertEquals(new UUID[] {}, quorum.getMembers());
   }
 
-  /**
+  /*
    * Unit test for quorum member add followed by the termination of the quorum client. This checks
    * for proper termination of the client, including the clear down of the quorum's internal state.
    *
@@ -144,7 +144,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
     quorum.terminate();
   }
 
-  /**
+  /*
    * Unit test for write pipeline add/remove.
    *
    * @throws InterruptedException
@@ -194,7 +194,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
     assertFalse(client.isMember());
   }
 
-  /**
+  /*
    * Runs a specific unit test a bunch of times looking for instances where the test does not run
    * within the target time period.
    *
@@ -248,7 +248,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
     if (nerr > 0) fail("There were " + nerr + " failures.");
   }
 
-  /**
+  /*
    * Unit test for the voting protocol for a singleton quorum.
    *
    * <p>FIXME For some reason this unit test occasionally takes much longer to run than would
@@ -382,7 +382,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
     if (awaitMeetsAndBreaks) quorum.awaitBreak(100, TimeUnit.MILLISECONDS);
   }
 
-  /**
+  /*
    * Unit test for the protocol up to a service join, which triggers a leader election. Since the
    * singleton quorum has only one member our client will be elected the leader.
    *
@@ -516,7 +516,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
     assertEquals(new UUID[] {}, quorum.getPipeline());
   }
 
-  /**
+  /*
    * Unit test verifying that we clear down the quorum's reflection of the distributed quorum state
    * where we first have a quorum meet and then terminate the quorum client.
    *
@@ -604,7 +604,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
     quorum.terminate();
   }
 
-  /**
+  /*
    * Unit test of timeout in {@link Quorum#awaitQuorum(long, TimeUnit)}. and {@link
    * Quorum#awaitBreak(long, TimeUnit)}.
    *
@@ -761,7 +761,7 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
     }
   }
 
-  /**
+  /*
    * Check all valid quorum transitions with: currentToken, nextToken, isJoined state haReady token.
    *
    * <p>Compare tokens to check Quorum state. Compare tokens with haReady and isJoined to check
@@ -778,24 +778,24 @@ public class TestSingletonQuorumSemantics extends AbstractQuorumTestCase {
    */
   public void testQuorumTransitions() {
     // combinations are possible current/new/haReady - each with a true/false isJoined
-    final long tokens[][] =
-        new long[][] {
-          // current, new, haReady
-          new long[] {-1, -1, -1}, // wasn't met, not met, wasn't joined
-          new long[] {-1, 0, -1}, // met
-          new long[] {0, 0, -1}, // remains met
-          new long[] {0, -1, -1}, // break
-          new long[] {-1, -1, 0}, // notmet, wasJoined
-          new long[] {-1, 0, 0}, // met, wasJoined
-          new long[] {0, 0, 0}, // remains met, wasJoined
-          new long[] {0, -1, 0}, // break, wasJoined
+    final long[][] tokens =
+        new long[][]{
+            // current, new, haReady
+            new long[]{-1, -1, -1}, // wasn't met, not met, wasn't joined
+            new long[]{-1, 0, -1}, // met
+            new long[]{0, 0, -1}, // remains met
+            new long[]{0, -1, -1}, // break
+            new long[]{-1, -1, 0}, // notmet, wasJoined
+            new long[]{-1, 0, 0}, // met, wasJoined
+            new long[]{0, 0, 0}, // remains met, wasJoined
+            new long[]{0, -1, 0}, // break, wasJoined
 
-          // Are these scenarios plausible only as a result of locking problem
-          //	or possibly Zookeeper bounce?
-          //        		new long[] {0, 2, -1}, // token bumped more than one
-          //        		new long[] {0, 2, 0}, // token bumped more than one
-          //        		new long[] {0, 2, 1}, // token bumped more than one
-          //        		new long[] {0, 2, 2}, // token bumped more than one
+            // Are these scenarios plausible only as a result of locking problem
+            //	or possibly Zookeeper bounce?
+            //        		new long[] {0, 2, -1}, // token bumped more than one
+            //        		new long[] {0, 2, 0}, // token bumped more than one
+            //        		new long[] {0, 2, 1}, // token bumped more than one
+            //        		new long[] {0, 2, 2}, // token bumped more than one
         };
 
     for (int i = 0; i < tokens.length; i++) {

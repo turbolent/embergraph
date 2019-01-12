@@ -32,8 +32,8 @@ import org.embergraph.btree.ITupleCursor;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.btree.ITupleSerializer;
 
-/**
- * Lookahead filter for an {@link ITuple}. You can push back a single {@link ITuple} onto the
+/*
+* Lookahead filter for an {@link ITuple}. You can push back a single {@link ITuple} onto the
  * filter.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ public class LookaheadTupleFilter<E> extends FilterBase implements ITupleFilter<
 
   public LookaheadTupleFilter() {}
 
-  /**
+  /*
    * Extends iterator semantics for {@link ITuple} pushback.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -55,7 +55,7 @@ public class LookaheadTupleFilter<E> extends FilterBase implements ITupleFilter<
    */
   public interface ILookaheadTupleIterator<E> extends ITupleIterator<E> {
 
-    /**
+    /*
      * Pushback the last visited tuple. It will be returned by {@link ITupleIterator#next()}.
      *
      * @throws IllegalStateException if no tuple has been read.
@@ -76,7 +76,7 @@ public class LookaheadTupleFilter<E> extends FilterBase implements ITupleFilter<
     return new LookaheadTupleIterator((ITupleIterator) src, context);
   }
 
-  /**
+  /*
    * Implementation based on an underlying {@link ITupleCursor}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -124,7 +124,7 @@ public class LookaheadTupleFilter<E> extends FilterBase implements ITupleFilter<
     }
   }
 
-  /**
+  /*
    * Implementation based on an underlying {@link ITupleIterator}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -136,7 +136,7 @@ public class LookaheadTupleFilter<E> extends FilterBase implements ITupleFilter<
     private final ITupleIterator<E> src;
     private final Object context;
 
-    /**
+    /*
      * <code>true</code> iff pushback is allowed. when <code>true</code>, {@link #tupleBuffer} will
      * containing a copy of the data for the last visited {@link ITuple}. note that we always copy
      * the data for the visited tuples into {@link #tupleBuffer}. pushback itself consists of
@@ -144,7 +144,7 @@ public class LookaheadTupleFilter<E> extends FilterBase implements ITupleFilter<
      */
     private boolean pushbackAllowed = false;
 
-    /**
+    /*
      * when non-<code>null</code> and {@link #pushbackAllowed} is <code>false</code>, then this
      * buffer contains the next tuple to be read.
      */

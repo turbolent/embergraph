@@ -27,8 +27,8 @@ import java.util.Iterator;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * Striterator resolver pattern.
+/*
+* Striterator resolver pattern.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -43,7 +43,7 @@ public abstract class BOpResolver extends BOpFilterBase {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -57,7 +57,7 @@ public abstract class BOpResolver extends BOpFilterBase {
     return new Resolverator(src, context, new ResolverImpl());
   }
 
-  /**
+  /*
    * Resolve the object.
    *
    * @param obj The object.

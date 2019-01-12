@@ -23,8 +23,8 @@ package org.embergraph.rdf.sparql.ast.explainhints;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
-/**
- * Explain hint indicating potential problems caused by the bottom-up evaluation semantics of
+/*
+* Explain hint indicating potential problems caused by the bottom-up evaluation semantics of
  * SPARQL. These could, for instance, be FILTER or BIND expressions referencing variables that are
  * not in scope.
  *

@@ -23,14 +23,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree.proc;
 
-/**
- * Base class has some utility methods.
+/*
+* Base class has some utility methods.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public abstract class AbstractIndexProcedure<T> implements IIndexProcedure<T> {
 
-  /**
+  /*
    * Note: Serialization is not used for durable data, just RMI. However, declaring this field MAY
    * break serialization of {@link IIndexProcedure} instances. Those instances are only used in the
    * scale-out architecture. If there is a problem, you can upgrade the server instances as well as
@@ -41,8 +41,8 @@ public abstract class AbstractIndexProcedure<T> implements IIndexProcedure<T> {
    */
   private static final long serialVersionUID = 1L;
 
-  //   /**
-  //     * Return the thread-local key builder configured for the {@link IIndex}
+  //   /*
+//     * Return the thread-local key builder configured for the {@link IIndex}
   //     *
   //     * @param ndx
   //     *            The index.

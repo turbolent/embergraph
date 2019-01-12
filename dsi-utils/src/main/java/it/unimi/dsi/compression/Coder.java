@@ -27,7 +27,7 @@ import java.io.IOException;
 
 /** Coding methods for a specific compression technique. */
 public interface Coder {
-  /**
+  /*
    * Encodes a symbol.
    *
    * @param symbol a symbol.
@@ -35,7 +35,7 @@ public interface Coder {
    */
   BooleanIterator encode(int symbol);
 
-  /**
+  /*
    * Encodes a symbol.
    *
    * @param symbol a symbol.
@@ -44,7 +44,7 @@ public interface Coder {
    */
   int encode(int symbol, OutputBitStream obs) throws IOException;
 
-  /**
+  /*
    * Flushes the coder.
    *
    * <p><strong>Warning</strong>: this method will <em>not</em> {@link OutputBitStream#flush()
@@ -55,7 +55,7 @@ public interface Coder {
    */
   int flush(OutputBitStream obs);
 
-  /**
+  /*
    * Flushes the coder.
    *
    * @return a boolean iterator returning the bits used to flush this coder.

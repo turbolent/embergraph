@@ -3,8 +3,8 @@ package org.embergraph.resources;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.service.DataService;
 
-/**
- * Abstract base class for results when post-processing a named index partition on the old journal
+/*
+* Abstract base class for results when post-processing a named index partition on the old journal
  * after an overflow operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -24,7 +24,7 @@ public abstract class AbstractResult {
     return this == o;
   }
 
-  /**
+  /*
    * The source index partition for the operation.
    *
    * @see DataService#getIndexPartitionName(String, int)
@@ -34,7 +34,7 @@ public abstract class AbstractResult {
   /** The index metadata object for the source index partition. */
   public final IndexMetadata indexMetadata;
 
-  /**
+  /*
    * @param name The name of the source index partition.
    * @param indexMetadata The index metadata object for the source index partition.
    */

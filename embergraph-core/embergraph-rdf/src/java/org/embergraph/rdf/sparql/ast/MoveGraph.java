@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * The MOVE operation is a shortcut for moving all data from an input graph into a destination
+/*
+* The MOVE operation is a shortcut for moving all data from an input graph into a destination
  * graph. The input graph is removed after insertion and data from the destination graph, if any, is
  * removed before insertion.
  *
@@ -53,7 +53,7 @@ public class MoveGraph extends AbstractFromToGraphManagement {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

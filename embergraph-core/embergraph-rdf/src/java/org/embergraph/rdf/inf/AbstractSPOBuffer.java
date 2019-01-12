@@ -29,8 +29,8 @@ import org.embergraph.relation.accesspath.AbstractArrayBuffer;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.openrdf.model.Value;
 
-/**
- * Abtract base class for buffering {@link SPO}s for some batch api operation.
+/*
+* Abtract base class for buffering {@link SPO}s for some batch api operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -55,7 +55,7 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
     return numStmts == 0;
   }
 
-  /**
+  /*
    * The {@link SPO} at the given index (used by some unit tests).
    *
    * @param i
@@ -71,13 +71,13 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
     return stmts[i];
   }
 
-  /**
+  /*
    * The value provided to the constructor. This is only used to resolve term identifers for log
    * messages.
    */
   private final AbstractTripleStore _db;
 
-  /**
+  /*
    * The database in which the term identifiers are defined - this is exposed ONLY for use in
    * logging messages.
    */
@@ -86,7 +86,7 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
     return _db;
   }
 
-  /**
+  /*
    * An optional filter. When present, statements matched by the filter are NOT retained by the
    * {@link SPOAssertionBuffer}.
    */
@@ -95,7 +95,7 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
   /** The buffer capacity. */
   protected final int capacity;
 
-  /**
+  /*
    * Create a buffer.
    *
    * @param store The database used to resolve term identifiers in log statements (optional).
@@ -117,7 +117,7 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
     stmts = new ISPO[capacity];
   }
 
-  /**
+  /*
    * Returns true iff there is no more space remaining in the buffer. Under those conditions adding
    * another statement to the buffer could cause an overflow.
    *
@@ -125,14 +125,8 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
    */
   protected boolean nearCapacity() {
 
-    if (numStmts < capacity) {
+    return numStmts >= capacity;// would overflow the statement[].
 
-      return false;
-    }
-
-    // would overflow the statement[].
-
-    return true;
   }
 
   public String toString() {
@@ -142,7 +136,7 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
 
   public abstract int flush();
 
-  /**
+  /*
    * Cumulative counter of the #of statements actually written on the database by {@link #flush()}.
    * This is reset by {@link #flush(boolean)} when <code>reset := true</code>
    */
@@ -188,7 +182,7 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
     return true;
   }
 
-  /**
+  /*
    * Dumps the state of the buffer on {@link System#err}.
    *
    * @param store Used to resolve the term identifiers to {@link Value}s.

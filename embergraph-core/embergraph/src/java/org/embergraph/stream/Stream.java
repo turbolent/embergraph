@@ -60,8 +60,8 @@ import org.embergraph.rawstore.IPSOutputStream;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * A persistence capable stream of "index" entries. The stream maintains the order in which the
+/*
+* A persistence capable stream of "index" entries. The stream maintains the order in which the
  * entries were written.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -79,13 +79,13 @@ public abstract class Stream implements ICheckpointProtocol {
   /** The index is already closed. */
   protected static final String ERROR_CLOSED = "Closed";
 
-  // /**
-  // * A parameter was less than zero.
+  // /*
+// * A parameter was less than zero.
   // */
   // protected static final String ERROR_LESS_THAN_ZERO = "Less than zero";
 
-  // /**
-  // * A parameter was too large.
+  // /*
+// * A parameter was too large.
   // */
   // protected static final String ERROR_TOO_LARGE = "Too large";
 
@@ -101,7 +101,7 @@ public abstract class Stream implements ICheckpointProtocol {
   /** <code>true</code> iff the view is read-only. */
   private final boolean readOnly;
 
-  /**
+  /*
    * Hard reference iff the index is mutable (aka unisolated) allows us to avoid patterns that
    * create short life time versions of the object to protect {@link #writeCheckpoint2()} and
    * similar operations.
@@ -116,7 +116,7 @@ public abstract class Stream implements ICheckpointProtocol {
   /** The #of entries in the stream. */
   protected long entryCount;
 
-  /**
+  /*
    * The address from which the stream may be read. This is mutable. On update, it is the address at
    * which the stream was last written. The current value gets propagated into the {@link
    * Checkpoint} record as {@link Checkpoint#getRootAddr()}.
@@ -129,7 +129,7 @@ public abstract class Stream implements ICheckpointProtocol {
     return store;
   }
 
-  /**
+  /*
    * Required constructor. This constructor is used both to create a new named solution set, and to
    * load an existing named solution set from the store using a {@link Checkpoint} record.
    *
@@ -168,10 +168,9 @@ public abstract class Stream implements ICheckpointProtocol {
     this.metadata = (StreamIndexMetadata) metadata;
 
     this.store =
-        (IRawStore)
-            ((store instanceof AbstractJournal)
-                ? ((AbstractJournal) store).getBufferStrategy()
-                : store);
+        (store instanceof AbstractJournal)
+            ? ((AbstractJournal) store).getBufferStrategy()
+            : store;
 
     this.readOnly = readOnly;
 
@@ -180,7 +179,7 @@ public abstract class Stream implements ICheckpointProtocol {
     this.lockManager = ReadWriteLockManager.getLockManager(this);
   }
 
-  /**
+  /*
    * Sets the {@link #checkpoint} and initializes the mutable fields from the checkpoint record. In
    * order for this operation to be atomic, the caller must be synchronized on the {@link BTree} or
    * otherwise guaranteed to have exclusive access, e.g., during the ctor or when the {@link BTree}
@@ -205,17 +204,17 @@ public abstract class Stream implements ICheckpointProtocol {
     this.rootAddr = checkpoint.getRootAddr();
   }
 
-  /**
+  /*
    * The type of compression used on the stream.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static enum CompressionEnum {
+  public enum CompressionEnum {
     None,
-    Zip;
+    Zip
   }
 
-  /**
+  /*
    * Metadata for a named solution set.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -240,7 +239,7 @@ public abstract class Stream implements ICheckpointProtocol {
     /** @see Options#STREAM_COMPRESSION_TYPE; */
     private CompressionEnum streamCompressionType;
 
-    /**
+    /*
      * The name of a class derived from {@link SolutionSetStream} that will be used to re-load the
      * index.
      *
@@ -268,7 +267,7 @@ public abstract class Stream implements ICheckpointProtocol {
       this.streamCompressionType = e;
     }
 
-    /**
+    /*
      * <strong>De-serialization constructor only</strong> - DO NOT use this ctor for creating a new
      * instance! It will result in a thrown exception, typically from {@link #firstCheckpoint()}.
      */
@@ -277,7 +276,7 @@ public abstract class Stream implements ICheckpointProtocol {
       super();
     }
 
-    /**
+    /*
      * Constructor used to configure a new <em>unnamed</em> {@link HTree}. The index UUID is set to
      * the given value and all other fields are defaulted as explained at {@link
      * #HTreeIndexMetadata(Properties, String, UUID)}. Those defaults may be overridden using the
@@ -292,7 +291,7 @@ public abstract class Stream implements ICheckpointProtocol {
       this(null /* name */, indexUUID);
     }
 
-    /**
+    /*
      * Constructor used to configure a new <em>named</em> {@link BTree}. The index UUID is set to
      * the given value and all other fields are defaulted as explained at {@link
      * #IndexMetadata(Properties, String, UUID)}. Those defaults may be overridden using the various
@@ -310,7 +309,7 @@ public abstract class Stream implements ICheckpointProtocol {
       this(null /* name */, System.getProperties(), name, indexUUID);
     }
 
-    /**
+    /*
      * Constructor used to configure a new <em>named</em> B+Tree. The index UUID is set to the given
      * value and all other fields are defaulted as explained at {@link #getProperty(Properties,
      * String, String, String)}. Those defaults may be overridden using the various setter methods.
@@ -410,7 +409,7 @@ public abstract class Stream implements ICheckpointProtocol {
     }
   }
 
-  /**
+  /*
    * Create a new {@link SolutionSetStream} or derived class. This method works by writing the
    * {@link StreamIndexMetadata} record on the store and then loading the {@link SolutionSetStream}
    * from the {@link StreamIndexMetadata} record.
@@ -468,7 +467,7 @@ public abstract class Stream implements ICheckpointProtocol {
     return load(store, firstCheckpoint.getCheckpointAddr(), false /* readOnly */);
   }
 
-  /**
+  /*
    * Load an instance of a {@link HTree} or derived class from the store. The {@link HTree} or
    * derived class MUST declare a constructor with the following signature: <code>
    *
@@ -545,7 +544,7 @@ public abstract class Stream implements ICheckpointProtocol {
       @SuppressWarnings("rawtypes")
       final Constructor ctor =
           cl.getConstructor(
-              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
+              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
 
       final SolutionSetStream solutions =
           (SolutionSetStream)
@@ -576,7 +575,7 @@ public abstract class Stream implements ICheckpointProtocol {
     }
   }
 
-  /**
+  /*
    * Apply the configured {@link CompressionEnum} for the {@link Stream} to the caller's {@link
    * OutputStream}.
    *
@@ -623,7 +622,7 @@ public abstract class Stream implements ICheckpointProtocol {
     return readOnly;
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException if the B+Tree is read-only.
    * @see #isReadOnly()
    */
@@ -637,7 +636,7 @@ public abstract class Stream implements ICheckpointProtocol {
     if (error != null) throw new IndexInconsistentError(ERROR_ERROR_STATE, error);
   }
 
-  /**
+  /*
    * NOP. Implemented for compatibility with the interior APIs of the {@link HTree} and {@link
    * BTree}, but {@link Stream} does not support "transient" data (in the sense of data which is not
    * evicted to a backing store).
@@ -683,7 +682,7 @@ public abstract class Stream implements ICheckpointProtocol {
     return recordVersion;
   }
 
-  /**
+  /*
    * The value of the record version number that will be assigned to the next node or leaf written
    * onto the backing store. This number is incremented each time a node or leaf is written onto the
    * backing store. The initial value is ZERO (0). The first value assigned to a node or leaf will
@@ -691,7 +690,7 @@ public abstract class Stream implements ICheckpointProtocol {
    */
   private long recordVersion;
 
-  /**
+  /*
    * The constructor sets this field initially based on a {@link Checkpoint} record containing the
    * only address of the {@link IndexMetadata} for the index. Thereafter this reference is
    * maintained as the {@link Checkpoint} record last written by {@link #writeCheckpoint()} or read
@@ -752,8 +751,8 @@ public abstract class Stream implements ICheckpointProtocol {
       if (
       /* autoCommit && */ needsCheckpoint()) {
 
-        /*
-         * Flush the btree, write a checkpoint record, and return the
+      /*
+       * Flush the btree, write a checkpoint record, and return the
          * address of that checkpoint record. The [checkpoint] reference
          * is also updated.
          */
@@ -779,7 +778,7 @@ public abstract class Stream implements ICheckpointProtocol {
     }
   }
 
-  /**
+  /*
    * Return true iff changes would be lost unless the {@link Stream} is flushed to the backing store
    * using {@link #writeCheckpoint()}.
    *
@@ -836,12 +835,8 @@ public abstract class Stream implements ICheckpointProtocol {
     //
     //         }
 
-    if (checkpoint.getRootAddr() != rootAddr) {
-
-      // The root node has a different persistent identity.
-
-      return true;
-    }
+    // The root node has a different persistent identity.
+    return checkpoint.getRootAddr() != rootAddr;
 
     //     }
 
@@ -849,8 +844,6 @@ public abstract class Stream implements ICheckpointProtocol {
      * No apparent change in persistent state so we do NOT need to do a
      * checkpoint.
      */
-
-    return false;
 
     //     if (metadata.getMetadataAddr() != 0L &&
     //             (root == null ||
@@ -868,7 +861,7 @@ public abstract class Stream implements ICheckpointProtocol {
 
   }
 
-  /**
+  /*
    * Hook to flush anything which is dirty to the backing store. This is invoked by {@link
    * #_writeCheckpoint2()}.
    */
@@ -876,7 +869,7 @@ public abstract class Stream implements ICheckpointProtocol {
     // NOP
   }
 
-  /**
+  /*
    * Core implementation invoked by {@link #writeCheckpoint2()} while holding the lock - <strong>DO
    * NOT INVOKE THIS METHOD DIRECTLY</strong>.
    *
@@ -939,7 +932,7 @@ public abstract class Stream implements ICheckpointProtocol {
     return checkpoint;
   }
 
-  /**
+  /*
    * Create a {@link Checkpoint} for a {@link Stream}.
    *
    * <p>The caller is responsible for writing the {@link Checkpoint} record onto the store.
@@ -968,7 +961,7 @@ public abstract class Stream implements ICheckpointProtocol {
        */
 
       @SuppressWarnings("rawtypes")
-      final Constructor ctor = cl.getConstructor(new Class[] {Stream.class});
+      final Constructor ctor = cl.getConstructor(Stream.class);
 
       final Checkpoint checkpoint = (Checkpoint) ctor.newInstance(new Object[] {this});
 
@@ -980,7 +973,7 @@ public abstract class Stream implements ICheckpointProtocol {
     }
   }
 
-  /**
+  /*
    * Recycle (aka delete) the allocation. This method also adjusts the #of bytes released in the
    * {@link BTreeCounters}.
    *
@@ -1001,7 +994,7 @@ public abstract class Stream implements ICheckpointProtocol {
     return nbytes;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @return The address from which the solutions may be read.
@@ -1041,7 +1034,7 @@ public abstract class Stream implements ICheckpointProtocol {
 
   private volatile StreamIndexMetadata metadata2;
 
-  /**
+  /*
    * The metadata record for the index. This data rarely changes during the life of the solution
    * set, but it CAN be changed.
    */
@@ -1080,7 +1073,7 @@ public abstract class Stream implements ICheckpointProtocol {
     this.lastCommitTime = lastCommitTime;
   }
 
-  /**
+  /*
    * The lastCommitTime of the {@link Checkpoint} record from which the view was loaded.
    *
    * <p>Note: Made volatile on 8/2/2010 since it is not otherwise obvious what would guarantee
@@ -1150,7 +1143,7 @@ public abstract class Stream implements ICheckpointProtocol {
   @Override
   public abstract ICloseableIterator<?> scan();
 
-  /**
+  /*
    * Write entries onto the stream.
    *
    * @param src An iterator visiting the entries.

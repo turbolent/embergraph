@@ -85,7 +85,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI(":s");
@@ -243,7 +243,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI(":s");
@@ -334,7 +334,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
         }
       }
 
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       {
         final String sparql =
@@ -478,7 +478,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
     }
   }
 
-  /**
+  /*
    * Test whether the RDRHistory can handle statements that are added and removed in the same
    * commit.
    */
@@ -492,7 +492,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI(":s");
@@ -519,7 +519,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
     }
   }
 
-  /**
+  /*
    * Test whether the RDRHistory can handle statements that are added and removed in the same
    * commit.
    */
@@ -533,7 +533,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI(":s");

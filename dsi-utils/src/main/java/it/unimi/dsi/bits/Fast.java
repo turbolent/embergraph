@@ -21,8 +21,8 @@ package it.unimi.dsi.bits;
  *
  */
 
-/**
- * All-purpose optimised bit-fiddling static-method container class.
+/*
+* All-purpose optimised bit-fiddling static-method container class.
  *
  * <p>This class contains static optimised utility methods that are used by all classes manipulating
  * bits. They include:
@@ -64,7 +64,7 @@ public final class Fast {
           | 0x2L << 8
           | 0x1;
 
-  /**
+  /*
    * Maps integers bijectively into natural numbers.
    *
    * <p>This method will map a negative integer <var>x</var> to -2<var>x</var>-1 and a nonnegative
@@ -83,7 +83,7 @@ public final class Fast {
     return x >= 0 ? x << 1 : -((x << 1) + 1);
   }
 
-  /**
+  /*
    * Maps natural numbers bijectively into integers.
    *
    * <p>This method computes the inverse of {@link #int2nat(int)}.
@@ -96,7 +96,7 @@ public final class Fast {
     return x % 2 == 0 ? x >> 1 : -(x >> 1) - 1;
   }
 
-  /**
+  /*
    * Maps longs bijectively into long natural numbers.
    *
    * <p>This method will map a negative long <var>x</var> to -2<var>x</var>-1 and a nonnegative long
@@ -115,7 +115,7 @@ public final class Fast {
     return x >= 0 ? x << 1 : -((x << 1) + 1);
   }
 
-  /**
+  /*
    * Maps long natural numbers bijectively into longs.
    *
    * <p>This method computes the inverse of {@link #int2nat(long)}.
@@ -128,7 +128,7 @@ public final class Fast {
     return x % 2 == 0 ? x >> 1 : -(x >> 1) - 1;
   }
 
-  /**
+  /*
    * Returns the base-two logarithm of the argument.
    *
    * @param x a double.
@@ -140,7 +140,7 @@ public final class Fast {
 
   // TODO: implement ceilLog2 using only and/or/xor/etc.
 
-  /**
+  /*
    * Computes the ceiling of the base-two logarithm of the argument.
    *
    * <p>This method relies of {@link #mostSignificantBit(int)}, and thus is pretty fast.
@@ -153,7 +153,7 @@ public final class Fast {
     return mostSignificantBit(x - 1) + 1;
   }
 
-  /**
+  /*
    * Computes the ceiling of the base-two logarithm of the argument.
    *
    * <p>This method relies of {@link #mostSignificantBit(long)}, and thus is pretty fast.
@@ -166,7 +166,7 @@ public final class Fast {
     return mostSignificantBit(x - 1) + 1;
   }
 
-  /**
+  /*
    * Returns the number of bits that are necessary to encode the argument.
    *
    * @param x an integer.
@@ -176,7 +176,7 @@ public final class Fast {
     return x == 0 ? 1 : mostSignificantBit(x) + 1;
   }
 
-  /**
+  /*
    * Returns the number of bits that are necessary to encode the argument.
    *
    * @param x a long.
@@ -186,7 +186,7 @@ public final class Fast {
     return x == 0 ? 1 : mostSignificantBit(x) + 1;
   }
 
-  /**
+  /*
    * Returns the number of bits set to one in a long.
    *
    * <p>This method implements a classical broadword algorithm.
@@ -201,7 +201,7 @@ public final class Fast {
     return (int) (byteSums * ONES_STEP_8 >>> 56);
   }
 
-  /**
+  /*
    * Returns the position of a bit of given rank.
    *
    * <p>This method implements a new broadword algorithm.
@@ -212,7 +212,7 @@ public final class Fast {
    *     exists, returns 72.
    */
   public static int select(final long x, final int rank) {
-    if (ASSERTS) assert rank < count(x) : rank + " >= " + count(x);
+    assert !ASSERTS || rank < count(x) : rank + " >= " + count(x);
 
     // Phase 1: sums by byte
     long byteSums = x - ((x & 0xa * ONES_STEP_4) >>> 1);
@@ -243,7 +243,7 @@ public final class Fast {
                 >>> 56));
   }
 
-  /**
+  /*
    * Returns the most significant bit of a long.
    *
    * <p>This method implements Gerth Brodal's broadword algorithm. On 64-bit architectures it is an
@@ -284,7 +284,7 @@ public final class Fast {
     return (int) (msb + (t >>> 60));
   }
 
-  /**
+  /*
    * Returns the most significant bit of an integer.
    *
    * @param x an integer.
@@ -360,7 +360,7 @@ public final class Fast {
     7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7
   };
 
-  /**
+  /*
    * Computes the least significant bit of a long integer.
    *
    * @param x a long integer.
@@ -384,7 +384,7 @@ public final class Fast {
     26, 40, 15, 34, 20, 31, 10, 25, 14, 19, 9, 13, 8, 7, 6
   };
 
-  /**
+  /*
    * Returns the least significant bit of a long.
    *
    * @param x a long.
@@ -395,7 +395,7 @@ public final class Fast {
     return LSB_TABLE[(int) (((x & -x) * 0x03f79d71b4ca8b09L) >>> 58)];
   }
 
-  /**
+  /*
    * Returns the least significant bit of a long.
    *
    * <p>This method computes the LSB of <var>x</var> by computing the MSB of <var>x</var> &amp;
@@ -409,7 +409,7 @@ public final class Fast {
     return mostSignificantBit(x & -x);
   }
 
-  public static void main(final String a[]) {
+  public static void main(final String[] a) {
     final long n = Long.parseLong(a[0]);
     final long incr = Long.MAX_VALUE / (n / 2);
 

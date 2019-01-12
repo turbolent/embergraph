@@ -19,8 +19,8 @@ package org.embergraph.ha.msg;
 
 import org.embergraph.ha.HACommitGlue;
 
-/**
- * Message used for commit in 2-phase commit protocol. The receiver should Commit using the root
+/*
+* Message used for commit in 2-phase commit protocol. The receiver should Commit using the root
  * block from the corresponding prepare message. It is an error if a commit message is observed
  * without the corresponding prepare message.
  *
@@ -29,7 +29,7 @@ import org.embergraph.ha.HACommitGlue;
  */
 public interface IHA2PhaseCommitMessage extends IHA2PhaseCommitProtocolMessage {
 
-  /**
+  /*
    * <code>true</code> iff the service was recognized as being joined with the met quorum at the
    * time that the prepare message was prepared.
    *
@@ -43,13 +43,13 @@ public interface IHA2PhaseCommitMessage extends IHA2PhaseCommitProtocolMessage {
   /** The commit time that will be assigned to the new commit point. */
   long getCommitTime();
 
-  /**
+  /*
    * Return <code>true</code> iff all services voted "YES" for PREPARE. When <code>false</code>, not
    * all services will participate in this commit (but the commit will still be performed).
    */
   boolean didAllServicesPrepare();
 
-  /**
+  /*
    * When <code>true</code> the COMMIT message will fail within the commit2Phase implementation. An
    * exception will be thrown immeditely before the new root block is written onto the journal.
    *
@@ -57,7 +57,7 @@ public interface IHA2PhaseCommitMessage extends IHA2PhaseCommitProtocolMessage {
    */
   boolean failCommit_beforeWritingRootBlockOnJournal();
 
-  /**
+  /*
    * When <code>true</code> the COMMIT message will fail within the commit2Phase implementation. An
    * exception will be thrown immeditely before the closing root block is written onto the HALog
    * file.

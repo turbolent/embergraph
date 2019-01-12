@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.error;
 
-/**
- * A SPARQL type error.
+/*
+* A SPARQL type error.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -38,7 +38,7 @@ public class SparqlTypeErrorException extends W3CQueryLanguageException {
   /** Type error used to indicate an unbound variable. */
   public static String SPARQL_TYPE_ERROR_0001 = toURI(1);
 
-  /**
+  /*
    * Generic SPARQL type error.
    *
    * @see #SPARQL_TYPE_ERROR_0000
@@ -59,7 +59,7 @@ public class SparqlTypeErrorException extends W3CQueryLanguageException {
     }
   }
 
-  /**
+  /*
    * @param errorCode The four digit error code.
    * @param uri The uri of the error.
    */

@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * Packing utility for non-negative <code>long</code> values.
+/*
+* Packing utility for non-negative <code>long</code> values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -39,7 +39,7 @@ public class LongPacker {
     super();
   }
 
-  /**
+  /*
    * Packs a non-negative long value into the minimum #of bytes in which the value can be
    * represented and writes those bytes onto the output stream. The first byte determines whether or
    * not the long value was packed and, if packed, how many bytes were required to represent the
@@ -133,7 +133,7 @@ public class LongPacker {
     return nwritten;
   }
 
-  /**
+  /*
    * Packs a non-negative long value into the minimum #of bytes in which the value can be
    * represented and writes those bytes onto the output stream. The first byte determines whether or
    * not the long value was packed and, if packed, how many bytes were required to represent the
@@ -227,13 +227,13 @@ public class LongPacker {
     return nwritten;
   }
 
-  /**
+  /*
    * Narrow interface to support packing against different buffer classes.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
   public interface IByteBuffer {
-    /**
+    /*
      * Relative <i>put</i> method for writing a byte[] on the buffer.
      *
      * @param b The byte[].
@@ -243,7 +243,7 @@ public class LongPacker {
     void put(final byte[] b, final int off, final int len);
   }
 
-  /**
+  /*
    * Packs a non-negative long value into the minimum #of bytes in which the value can be
    * represented and writes those bytes onto the buffer. The first byte determines whether or not
    * the long value was packed and, if packed, how many bytes were required to represent the packed
@@ -363,7 +363,7 @@ public class LongPacker {
     return nwritten;
   }
 
-  /**
+  /*
    * Read a byte from an {@link InputStream} ala {@link DataInput#readByte()}
    *
    * @param is The input stream.
@@ -380,7 +380,7 @@ public class LongPacker {
     return (byte) (v & 0xff);
   }
 
-  /**
+  /*
    * Return the #of non-zero nibbles, counting from the first non-zero nibble in the long value. A
    * value of <code>0L</code> is considered to be one nibble for our purposes.
    *
@@ -396,7 +396,7 @@ public class LongPacker {
     return 1; // value is zero, which is considered to be one nibble for our purposes.
   }
 
-  /**
+  /*
    * Return the #of non-zero bytes in the packed long value.
    *
    * @param v The long value.
@@ -415,7 +415,7 @@ public class LongPacker {
     return nbytes;
   }
 
-  /**
+  /*
    * Unpack a long value from the input stream.
    *
    * @param is The input stream.
@@ -444,7 +444,7 @@ public class LongPacker {
     return l;
   }
 
-  /**
+  /*
    * Unpack a long value from the input stream.
    *
    * @param is The input stream.
@@ -473,7 +473,7 @@ public class LongPacker {
     return l;
   }
 
-  /**
+  /*
    * Unpack a long value from the buffer position.
    *
    * @param buf The buffer
@@ -506,7 +506,7 @@ public class LongPacker {
     return l;
   }
 
-  /**
+  /*
    * Convenience method unpacks long and throws an exception if the value exceeds {@link
    * Integer#MAX_VALUE}.
    *
@@ -523,7 +523,7 @@ public class LongPacker {
     return (int) v;
   }
 
-  /**
+  /*
    * Convenience method unpacks long and throws an exception if the value exceeds {@link
    * Integer#MAX_VALUE}.
    *

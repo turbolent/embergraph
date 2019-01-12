@@ -69,8 +69,8 @@ import org.embergraph.quorum.ServiceLookup;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
-/**
- * {@link QuorumPipeline} implementation.
+/*
+* {@link QuorumPipeline} implementation.
  *
  * <p>The {@link QuorumMember} must pass along the "pipeline" messages, including:
  *
@@ -157,7 +157,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
   private static final transient Logger log = Logger.getLogger(QuorumPipelineImpl.class);
 
-  /**
+  /*
    * The timeout for a sleep before the next retry. These timeouts are designed to allow some
    * asynchronous processes to reconnect the {@link HASendService} and the {@link HAReceiveService}s
    * in write pipeline such that a retransmit can succeed after a service has left the pipeline.
@@ -176,7 +176,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
    */
   private final int RETRY_SLEEP = 30; // 200; // 50; // milliseconds.
 
-  /**
+  /*
    * Once this timeout is elapsed, retrySend() will fail.
    *
    * <p>Note: This gets overridden in the ZK aware version and set to a constant greater than the
@@ -196,7 +196,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
   /** Lock managing the various mutable aspects of the pipeline state. */
   private final ReentrantLock lock = new ReentrantLock();
 
-  /**
+  /*
    * Condition signalled when the write replication pipeline has been changed (either the upstream
    * and/or downstream service was changed).
    */
@@ -221,7 +221,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
   /** One up message identifier. */
   private final AtomicLong messageId = new AtomicLong(0L);
 
-  /**
+  /*
    * Core implementation of the handler for the various events. Always run while holding the {@link
    * #lock}.
    *
@@ -231,7 +231,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
    */
   private final class InnerEventHandler extends QuorumStateChangeListenerBase {
 
-    /**
+    /*
      * A queue of events that can only be handled when a write replication operation owns the {@link
      * QuorumPipelineImpl#lock}.
      *
@@ -243,7 +243,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
     protected InnerEventHandler() {}
 
-    /**
+    /*
      * Enqueue an event.
      *
      * @param e The event.
@@ -255,7 +255,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       queue.add(e);
     }
 
-    /**
+    /*
      * Boolean controls whether or not event elision is used. See below.
      *
      * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/681" > HAJournalServer
@@ -263,7 +263,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
      */
     private static final boolean s_eventElission = true;
 
-    /**
+    /*
      * Event elission endeavours to ensure that events processed represent current state change.
      *
      * <p>This is best explained with an example from its original usage in processing graphic
@@ -352,7 +352,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     }
 
-    /**
+    /*
      * Dispatch to the InnerEventHandler.
      *
      * @param e The event.
@@ -362,8 +362,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
       if (!lock.isHeldByCurrentThread()) {
 
-        /*
-         * The InnerEventHandler should be holding the outer lock.
+      /*
+       * The InnerEventHandler should be holding the outer lock.
          */
 
         throw new IllegalMonitorStateException();
@@ -427,8 +427,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     //      public void serviceJoin() {
     //      }
     //
-    //      /**
-    //      * Extended to setup this service as a leader ({@link #setUpLeader()}),
+    //      /*
+//      * Extended to setup this service as a leader ({@link #setUpLeader()}),
     //      * or a relay ({@link #setUpReceiveAndRelay()}.
     //      */
     //     @Override
@@ -458,7 +458,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     //         }
     //     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>This implementation sets up the {@link HASendService} or the {@link HAReceiveService} as
@@ -497,7 +497,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>This implementation tears down the {@link HASendService} or {@link HAReceiveService}
@@ -515,7 +515,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>This implementation changes the target of the {@link HASendService} for the leader (or the
@@ -534,8 +534,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
         if (oldDownStreamId != null
             && newDownStreamId != null
             && oldDownStreamId.equals(newDownStreamId)) {
-          /*
-           * Nothing to do. The pipeline is already configured
+        /*
+       * Nothing to do. The pipeline is already configured
            * correctly.
            */
           return;
@@ -557,8 +557,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
                   + ", receiveService="
                   + receiveService);
         if (sendService != null) {
-          /*
-           * Terminate the existing connection (we were the first
+        /*
+       * Terminate the existing connection (we were the first
            * service in the pipeline).
            */
           sendService.terminate();
@@ -567,8 +567,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
             sendService.start(addrNext);
           }
         } else if (receiveService != null) {
-          /*
-           * Reconfigure the receive service to change how it is
+        /*
+       * Reconfigure the receive service to change how it is
            * relaying (we were relaying, so the receiveService was
            * running but not the sendService).
            */
@@ -593,8 +593,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       lock.lock();
       try {
         if (receiveService != null) {
-          /*
-           * Make sure that the receiveService closes out its client
+        /*
+       * Make sure that the receiveService closes out its client
            * connection with the old upstream service.
            */
           if (log.isInfoEnabled()) log.info("receiveService=" + receiveService);
@@ -623,7 +623,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     //      public void consensus(long lastCommitTime) {
     //      }
 
-    /**
+    /*
      * Request the {@link InetSocketAddress} of the write pipeline for a service (RMI).
      *
      * @param downStreamId The service.
@@ -647,7 +647,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     }
 
-    /**
+    /*
      * Tear down any state associated with the {@link QuorumPipelineImpl}. This implementation tears
      * down the send/receive service and releases the receive buffer.
      */
@@ -655,8 +655,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       if (log.isInfoEnabled()) log.info("");
       lock.lock();
       try {
-        /*
-         * Leader tear down.
+      /*
+       * Leader tear down.
          */
         {
           if (sendService != null) {
@@ -664,8 +664,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
             sendService = null;
           }
         }
-        /*
-         * Follower tear down.
+      /*
+       * Follower tear down.
          */
         {
           if (receiveService != null) {
@@ -680,8 +680,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
           }
           if (receiveBuffer != null) {
             try {
-              /*
-               * Release the buffer back to the pool.
+            /*
+       * Release the buffer back to the pool.
                */
               receiveBuffer.release();
             } catch (InterruptedException e) {
@@ -700,8 +700,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     }
 
-    //        /**
-    //         * Populate or clear the {@link #pipelineState} cache.
+    //        /*
+//         * Populate or clear the {@link #pipelineState} cache.
     //         * <p>
     //         * Note: The only times we need to populate the {@link #pipelineState} are
     //         * in response to a {@link #pipelineChange(UUID, UUID)} event or in response
@@ -747,8 +747,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       try {
         // Allocate the send service.
         sendService = new HASendService();
-        /*
-         * The service downstream from this service.
+      /*
+       * The service downstream from this service.
          *
          * Note: The downstream service in the pipeline is not available
          * when the first service adds itself to the pipeline. In those
@@ -786,7 +786,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     }
 
-    /**
+    /*
      * Setup the service to receive pipeline writes and to relay them (if there is a downstream
      * service).
      */
@@ -842,8 +842,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
         // Signal pipeline change.
         pipelineChanged.signalAll();
       } catch (Throwable t) {
-        /*
-         * Always tear down if there was a setup problem to avoid leaking
+      /*
+       * Always tear down if there was a setup problem to avoid leaking
          * threads or a native ByteBuffer.
          */
         try {
@@ -858,7 +858,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
         lock.unlock();
       }
     }
-  };
+  }
 
   /** Acquire {@link #lock} and {@link #dispatchEvents()}. */
   private void lock() {
@@ -908,7 +908,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     this.serviceId = member.getServiceId();
   }
 
-  /**
+  /*
    * Extended to invoke {@link #tearDown()} in order to guarantee the eventual release of the {@link
    * #receiveBuffer} and the shutdown of the {@link #sendService} or {@link #receiveService}.
    */
@@ -920,7 +920,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     super.finalize();
   }
 
-  /**
+  /*
    * Return the index at which the given serviceId appears in the array of serviceIds.
    *
    * @param serviceId The {@link UUID} of some quorum member.
@@ -943,7 +943,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     return -1;
   }
 
-  /**
+  /*
    * Return the NIO buffer used to receive payloads written on the HA write pipeline.
    *
    * @return The buffer -or- <code>null</code> if the pipeline has been torn down or if this is the
@@ -961,7 +961,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     return receiveBuffer == null ? null : receiveBuffer.buffer();
   }
 
-  /**
+  /*
    * Return the {@link HAReceiveService} used to receive payloads written on the HA write pipeline.
    *
    * @return The buffer -or- <code>null</code> if the pipeline has been torn down or if this is the
@@ -978,7 +978,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     return receiveService;
   }
 
-  /**
+  /*
    * Return the {@link HASendService} used to write payloads on the HA write pipeline.
    *
    * @return The {@link HASendService} -or- <code>null</code> if the pipeline has been torn down.
@@ -1132,7 +1132,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     return ft;
   }
 
-  /**
+  /*
    * Task resets the pipeline on this service.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1157,7 +1157,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     }
 
-    /**
+    /*
      * If there is an identified problem service and that service is either our upstream or
      * downstream service, then we need to wait until we observe a pipeline change event such that
      * it is no longer our upstream or downstream service. Otherwise we can go ahead and reset our
@@ -1178,9 +1178,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
       if (psid.equals(priorAndNext[0])) return true;
 
-      if (psid.equals(priorAndNext[1])) return true;
+      return psid.equals(priorAndNext[1]);
 
-      return false;
     }
 
     private IHAPipelineResetResponse doRunWithLock() throws Exception {
@@ -1206,8 +1205,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
         if (isProblemServiceOurNeighbor()) {
 
-          /*
-           * Timeout elapsed.
+        /*
+       * Timeout elapsed.
            *
            * Note: This could be a false timeout, e.g., the problem
            * service left and re-entered and is still our neighbor.
@@ -1270,7 +1269,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
   /** Task robustly replicates an {@link IHAWriteMessage} and the associated payload. */
   private class RobustReplicateTask implements Callable<Void> {
 
-    /**
+    /*
      * An historical message is indicated when the {@link IHASyncRequest} is non-<code>null</code>.
      */
     private final IHASyncRequest req;
@@ -1284,7 +1283,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     /** The associated payload. */
     private final ByteBuffer b;
 
-    /**
+    /*
      * The token for the leader. The service that initiates the replication of a message MUST be the
      * leader for this token.
      *
@@ -1328,8 +1327,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
       if (req == null) {
 
-        /*
-         * Live message.
+      /*
+       * Live message.
          *
          * Use the quorum token on the message. It was put there by the
          * WriteCacheService. This allows us to ensure that the qourum
@@ -1344,8 +1343,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
       } else {
 
-        /*
-         * Historical message.
+      /*
+       * Historical message.
          */
 
         // Use the current quorum token.
@@ -1356,7 +1355,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     }
 
-    /**
+    /*
      * This collects the assertion(s) that we make for the service that is attempting to robustly
      * replicate a write into a single method. This was done in order to concentrate any conditional
      * logic and design rationale into a single method.
@@ -1391,7 +1390,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
     }
 
-    /**
+    /*
      * Robust replication of a write cache block along the pipeline.
      *
      * <p>Note: {@link Future} for {@link #call()} is [WCS.remoteWriteFuture].
@@ -1540,7 +1539,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       return null;
     }
 
-    /**
+    /*
      * Replicate from the leader to the first follower. Each non-final follower will
      * receiveAndReplicate the write cache buffer. The last follower will receive the buffer.
      *
@@ -1597,7 +1596,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
     } // call()
 
-    /**
+    /*
      * Robust retransmit of the current cache block. This method is designed to handle several kinds
      * of recoverable errors, including:
      *
@@ -1636,8 +1635,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
         remaining = nanos - (System.nanoTime() - beginNanos);
 
-        /*
-         * Note: Tested OUTSIDE of the try/catch so a quorum break will
+      /*
+       * Note: Tested OUTSIDE of the try/catch so a quorum break will
          * immediately stop the retry behavior.
          */
         assertQuorumState();
@@ -1679,8 +1678,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     } // retrySend()
   } // class RobustReplicateTask
 
-  //    /**
-  //     * The logic needs to support the asynchronous termination of the
+  //    /*
+//     * The logic needs to support the asynchronous termination of the
   //     * {@link Future} that is responsible for replicating the {@link WriteCache}
   //     * block, which is why the API exposes the means to inform the caller about
   //     * that {@link Future}.
@@ -1689,8 +1688,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
   //     *         Thompson</a>
   //     */
   //    public interface IRetrySendCallback {
-  //        /**
-  //         *
+  //        /*
+//         *
   //         * @param remoteFuture
   //         */
   //        void notifyRemoteFuture(final Future<Void> remoteFuture);
@@ -1774,8 +1773,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
           try {
 
-            /*
-             * Await the Futures, but spend more time waiting on the
+          /*
+       * Await the Futures, but spend more time waiting on the
              * local Future and only check the remote Future every
              * second. Timeouts are ignored during this loop - they
              * are used to let us wait longer on the local Future
@@ -1799,8 +1798,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
              * that the [token] remains valid.
              */
             while ((!futLoc.isDone() || !futRmt.isDone())) {
-              /*
-               * Make sure leader's quorum token remains valid for
+            /*
+       * Make sure leader's quorum token remains valid for
                * ALL writes.
                */
               member.assertLeader(token);
@@ -1808,8 +1807,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
                 futLoc.get(500L, TimeUnit.MILLISECONDS);
               } catch (TimeoutException ignore) {
               } catch (ExecutionException ignore) {
-                /*
-                 * Try the other Future with timeout and cancel
+              /*
+       * Try the other Future with timeout and cancel
                  * if not done.
                  */
                 try {
@@ -1819,16 +1818,16 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
                 } finally {
                   futRmt.cancel(true /* mayInterruptIfRunning */);
                 }
-                /*
-                 * Note: Both futures are DONE at this point.
+              /*
+       * Note: Both futures are DONE at this point.
                  */
               }
               try {
                 futRmt.get(500L, TimeUnit.MILLISECONDS);
               } catch (TimeoutException ignore) {
               } catch (ExecutionException ignore) {
-                /*
-                 * Try the other Future with timeout and cancel
+              /*
+       * Try the other Future with timeout and cancel
                  * if not done.
                  */
                 try {
@@ -1838,17 +1837,17 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
                 } finally {
                   futLoc.cancel(true /* mayInterruptIfRunning */);
                 }
-                /*
-                 * Note: Both futures are DONE at this point.
+              /*
+       * Note: Both futures are DONE at this point.
                  */
               }
-              /*
-               * Note: Both futures are DONE at this point.
+            /*
+       * Note: Both futures are DONE at this point.
                */
             }
 
-            /*
-             * Note: We want to check the remote Future for the
+          /*
+       * Note: We want to check the remote Future for the
              * downstream service first in order to accurately
              * report the service that was the source of a pipeline
              * replication problem.
@@ -1873,7 +1872,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     }
   } // class SendBufferTask
 
-  /**
+  /*
    * Launder an exception thrown during pipeline replication.
    *
    * @param isLeader <code>true</code> iff this service is the quorum leader.
@@ -1924,8 +1923,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
       try {
 
-        /*
-         * If we can identify the problem service, then force it out of
+      /*
+       * If we can identify the problem service, then force it out of
          * the pipeline. It can re-enter the pipeline once it
          * transitions through its ERROR state.
          */
@@ -1961,7 +1960,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
         }
       }
 
-      /**
+      /*
        * Reset the pipeline on each service (including the leader). If replication fails, the socket
        * connections both upstream and downstream of the point of failure can be left in an
        * indeterminate state with partially buffered data. In order to bring the pipeline back into
@@ -2002,7 +2001,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     }
   }
 
-  /**
+  /*
    * Issue concurrent requests to each service in the pipeline to reset the pipeline on that
    * service. The request to the leader is executed in the caller's thread so it will own whatever
    * locks the caller already owns - this is done to avoid deadlock.
@@ -2045,8 +2044,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
         final UUID serviceId = pipelineIds[i];
 
-        /*
-         * Submit task on local executor. The task will do an RMI to the
+      /*
+       * Submit task on local executor. The task will do an RMI to the
          * remote service.
          */
         final Future<IHAPipelineResetResponse> rf =
@@ -2057,8 +2056,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       }
 
       {
-        /*
-         * Run the operation on the leader using a local method call
+      /*
+       * Run the operation on the leader using a local method call
          * (non-RMI) in the caller's thread to avoid deadlock.
          */
         member.assertLeader(token);
@@ -2081,8 +2080,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
           log.error(ex, ex);
           causes.add(ex);
         } catch (RuntimeException ex) {
-          /*
-           * Note: ClientFuture.get() can throw a RuntimeException
+        /*
+       * Note: ClientFuture.get() can throw a RuntimeException
            * if there is a problem with the RMI call. In this case
            * we do not know whether the Future is done.
            */
@@ -2129,7 +2128,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     }
   }
 
-  /**
+  /*
    * Lock used to ensure that at most one message is being sent along the write pipeline at a time.
    */
   //    private final Lock sendLock = new ReentrantLock();
@@ -2161,8 +2160,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
       if (receiveBuffer == null) {
 
-        /*
-         * The quorum broke and the receive buffer was cleared or
+      /*
+       * The quorum broke and the receive buffer was cleared or
          * possibly we have become a leader (a distinct test since
          * otherwise we can hit an NPE on the receiveBuffer).
          */
@@ -2182,8 +2181,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
       if (downstream == null) {
 
-        /*
-         * This is the last service in the write pipeline, so just
+      /*
+       * This is the last service in the write pipeline, so just
          * receive the buffer.
          *
          * Note: The receive service is executing this Future locally on
@@ -2213,8 +2212,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
       } else {
 
-        /*
-         * A service in the middle of the write pipeline (not the first
+      /*
+       * A service in the middle of the write pipeline (not the first
          * and not the last).
          */
 
@@ -2243,7 +2242,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     return ft;
   }
 
-  /**
+  /*
    * Task sets up the {@link Future} for the receive on the last follower.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2368,8 +2367,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
 
           try {
 
-            /*
-             * Await the Futures, but spend more time waiting on the
+          /*
+       * Await the Futures, but spend more time waiting on the
              * local Future and only check the remote Future every
              * second. Timeouts are ignored during this loop - they
              * are used to let us wait longer on the local Future
@@ -2386,8 +2385,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
              * that the [token] remains valid.
              */
             while ((!futLoc.isDone() || !futRmt.isDone())) {
-              /*
-               * The token must remain valid, even if this service
+            /*
+       * The token must remain valid, even if this service
                * is not joined with the met quorum. If fact,
                * services MUST replicate writes regardless of
                * whether or not they are joined with the met
@@ -2398,8 +2397,8 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
                 futLoc.get(500L, TimeUnit.MILLISECONDS);
               } catch (TimeoutException ignore) {
               } catch (ExecutionException ignore) {
-                /*
-                 * Try the other Future with timeout and cancel
+              /*
+       * Try the other Future with timeout and cancel
                  * if not done.
                  */
                 try {
@@ -2409,16 +2408,16 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
                 } finally {
                   futRmt.cancel(true /* mayInterruptIfRunning */);
                 }
-                /*
-                 * Note: Both futures are DONE at this point.
+              /*
+       * Note: Both futures are DONE at this point.
                  */
               }
               try {
                 futRmt.get(500L, TimeUnit.MILLISECONDS);
               } catch (TimeoutException ignore) {
               } catch (ExecutionException ignore) {
-                /*
-                 * Try the other Future with timeout and cancel
+              /*
+       * Try the other Future with timeout and cancel
                  * if not done.
                  */
                 try {
@@ -2428,17 +2427,17 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
                 } finally {
                   futLoc.cancel(true /* mayInterruptIfRunning */);
                 }
-                /*
-                 * Note: Both futures are DONE at this point.
+              /*
+       * Note: Both futures are DONE at this point.
                  */
               }
-              /*
-               * Note: Both futures are DONE at this point.
+            /*
+       * Note: Both futures are DONE at this point.
                */
             }
 
-            /*
-             * Note: We want to check the remote Future for the
+          /*
+       * Note: We want to check the remote Future for the
              * downstream service first in order to accurately
              * report the service that was the source of a pipeline
              * replication problem.
@@ -2465,7 +2464,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     }
   }
 
-  /**
+  /*
    * Core implementation handles the message and payload when received on a service.
    *
    * <p>Note: Replication of the message and payload is handled by the caller. The implementation of
@@ -2480,7 +2479,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
   protected abstract void handleReplicatedWrite(
       final IHASyncRequest req, final IHAWriteMessage msg, final ByteBuffer data) throws Exception;
 
-  /**
+  /*
    * Notify that some payload bytes have been incrementally received for an {@link IHAMessage}.
    *
    * @param msg The message.
@@ -2497,7 +2496,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
       final int rem)
       throws Exception;
 
-  /**
+  /*
    * A utility class that bundles together the Internet address and port at which the downstream
    * service will accept and relay cache blocks for the write pipeline and the remote interface
    * which is used to communicate with that service using RMI.
@@ -2509,13 +2508,13 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     /** */
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * The Internet address and port at which the downstream service will accept and relay cache
      * blocks for the write pipeline.
      */
     public InetSocketAddress addr;
 
-    /**
+    /*
      * The remote interface for the downstream service which will accept and relay cache blocks from
      * this service.
      *
@@ -2549,7 +2548,7 @@ public abstract class QuorumPipelineImpl<S extends HAPipelineGlue> /*extends
     }
   }
 
-  /**
+  /*
    * Called from ErrorTask in HAJournalServer to ensure that events are processed before entering
    * SeekConsensus.
    *

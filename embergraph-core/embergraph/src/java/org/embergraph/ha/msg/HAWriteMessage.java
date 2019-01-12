@@ -31,8 +31,8 @@ import org.embergraph.io.compression.CompressorRegistry;
 import org.embergraph.io.compression.IRecordCompressor;
 import org.embergraph.journal.StoreTypeEnum;
 
-/**
- * A message carrying RMI metadata about a payload which will be replicated using a socket-level
+/*
+* A message carrying RMI metadata about a payload which will be replicated using a socket-level
  * transfer facility.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -180,7 +180,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements IHAWriteMessag
   /** De-serialization constructor. */
   public HAWriteMessage() {}
 
-  /**
+  /*
    * @param uuid The {@link UUID} associated with the backing store on the leader. This can be used
    *     to decide whether the message is for a given store, or (conversly) whether the receiver has
    *     already setup its root blocks based on the leader (and hence has the correct {@link UUID}
@@ -226,7 +226,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements IHAWriteMessag
         null /* compressorKey */);
   }
 
-  /**
+  /*
    * @param uuid The {@link UUID} associated with the backing store on the leader. This can be used
    *     to decide whether the message is for a given store, or (conversly) whether the receiver has
    *     already setup its root blocks based on the leader (and hence has the correct {@link UUID}
@@ -288,7 +288,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements IHAWriteMessag
     this.compressorKey = compressorKey;
   }
 
-  /**
+  /*
    * The initial version.
    *
    * <p>Note: We have never done a release with this version number. It should only exist for HALog
@@ -301,13 +301,13 @@ public class HAWriteMessage extends HAWriteMessageBase implements IHAWriteMessag
   /** Adds the {@link #uuid} field. */
   private static final byte VERSION1 = 0x1;
 
-  /**
+  /*
    * Supports optional data compression for the payload (backwards compatible default for {@link
    * #VERSION1} is no compression).
    */
   private static final byte VERSION2 = 0x2;
 
-  /**
+  /*
    * Adds the {@link #replicationFactor} for the quorum leader (decodes as ZERO (0) for older
    * versions).
    */
@@ -319,7 +319,7 @@ public class HAWriteMessage extends HAWriteMessageBase implements IHAWriteMessag
   /** Determine whether message data is compressed */
   private static boolean compressData = true; // default
 
-  /**
+  /*
    * Static method to indicate whether the message will reference compressed data.
    *
    * @return
@@ -421,8 +421,8 @@ public class HAWriteMessage extends HAWriteMessageBase implements IHAWriteMessag
   // CompressorRegistry.fetch(CompressorRegistry.DEFLATE_BEST_SPEED);
   //	static String compressorKey = CompressorRegistry.DEFLATE_BEST_SPEED;
 
-  //	/**
-  //	 * This configuration method has a dual role since if the Deflater is configured
+  //	/*
+//	 * This configuration method has a dual role since if the Deflater is configured
   //	 * with NO_COMPRESSION, the message indicates directly that the buffer is not compressed
   //	 * avoiding the double buffering of the Deflater class.
   //	 *

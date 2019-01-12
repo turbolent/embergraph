@@ -28,8 +28,8 @@ import org.embergraph.rdf.lexicon.BlobsIndexHelper;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Unit tests for {@link BlobIV}.
+/*
+* Unit tests for {@link BlobIV}.
  *
  * @author thompsonbry
  */
@@ -195,7 +195,7 @@ public class TestBlobIV extends TestCase2 {
     doBlobIVTest(vte, hashCode, counter);
   }
 
-  /**
+  /*
    * Unit test for a specific value which was causing problems on a cluster. It turns out that the
    * problem was the serialization of the counter[] when reading from the blobs index. E.g., a
    * cluster specific problem.

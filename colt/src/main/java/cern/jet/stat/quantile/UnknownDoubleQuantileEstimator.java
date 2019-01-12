@@ -12,8 +12,8 @@ import cern.colt.list.DoubleArrayList;
 import cern.colt.list.ObjectArrayList;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.random.sampling.WeightedRandomSampler;
-/**
- * Approximate quantile finding algorithm for unknown <tt>N</tt> requiring only one pass and little
+/*
+* Approximate quantile finding algorithm for unknown <tt>N</tt> requiring only one pass and little
  * main memory; computes quantiles over a sequence of <tt>double</tt> elements. This algorithm
  * requires at most two times the memory of a corresponding approx. quantile finder knowing
  * <tt>N</tt>.
@@ -51,7 +51,7 @@ class UnknownDoubleQuantileEstimator extends DoubleQuantileEstimator {
   protected final int treeHeightStartingSampling;
   protected WeightedRandomSampler sampler;
   protected double precomputeEpsilon;
-  /**
+  /*
    * Constructs an approximate quantile finder with b buffers, each having k elements.
    *
    * @param b the number of buffers
@@ -84,7 +84,7 @@ class UnknownDoubleQuantileEstimator extends DoubleQuantileEstimator {
 
     return bufferSet._getFullOrPartialBuffersWithLevel(minLevel);
   }
-  /**
+  /*
    * Removes all elements from the receiver. The receiver will be empty after this call returns, and
    * its memory requirements will be close to zero.
    */
@@ -93,7 +93,7 @@ class UnknownDoubleQuantileEstimator extends DoubleQuantileEstimator {
     this.currentTreeHeight = 1;
     this.sampler.setWeight(1);
   }
-  /**
+  /*
    * Returns a deep copy of the receiver.
    *
    * @return a deep copy of the receiver.
@@ -120,7 +120,7 @@ class UnknownDoubleQuantileEstimator extends DoubleQuantileEstimator {
       }
     }
   }
-  /**
+  /*
    * Computes the specified quantile elements over the values previously added.
    *
    * @param phis the quantiles for which elements are to be computed. Each phi must be in the

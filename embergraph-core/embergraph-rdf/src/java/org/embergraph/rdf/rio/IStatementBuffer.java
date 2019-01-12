@@ -36,23 +36,23 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * Abstraction for a buffer that loads {@link Statement}s into an {@link AbstractTripleStore}.
+/*
+* Abstraction for a buffer that loads {@link Statement}s into an {@link AbstractTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
 
   /** The optional store into which statements will be inserted when non-<code>null</code>. */
-  public AbstractTripleStore getStatementStore();
+  AbstractTripleStore getStatementStore();
 
-  /**
+  /*
    * The database that will be used to resolve terms. When {@link #getStatementStore()} is <code>
    * null</code>, statements will be written into this store as well.
    */
-  public AbstractTripleStore getDatabase();
+  AbstractTripleStore getDatabase();
 
-  /**
+  /*
    * Add a statement to the buffer.
    *
    * @param stmt The statement. If <i>stmt</i> implements {@link EmbergraphStatement} then the
@@ -60,18 +60,18 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
    *     as axioms) but the term identifiers on the <i>stmt</i>'s values will be ignored.
    */
   @Override
-  public void add(F stmt);
+  void add(F stmt);
 
-  /**
+  /*
    * Add an "explicit" statement to the buffer with a "null" context.
    *
    * @param s The subject.
    * @param p The predicate.
    * @param o The object.
    */
-  public void add(Resource s, URI p, Value o);
+  void add(Resource s, URI p, Value o);
 
-  /**
+  /*
    * Add an "explicit" statement to the buffer.
    *
    * @param s The subject.
@@ -79,9 +79,9 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
    * @param o The object.
    * @param c The context (optional).
    */
-  public void add(Resource s, URI p, Value o, Resource c);
+  void add(Resource s, URI p, Value o, Resource c);
 
-  /**
+  /*
    * Add a statement to the buffer.
    *
    * <p>Note: The context parameter (<i>c</i>) is NOT used. The database at this time is either a
@@ -94,9 +94,9 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
    * @param c The context (optional).
    * @param type The statement type (optional).
    */
-  public void add(Resource s, URI p, Value o, Resource c, StatementEnum type);
+  void add(Resource s, URI p, Value o, Resource c, StatementEnum type);
 
-  /**
+  /*
    * Set the canonicalizing map for blank nodes based on their ID. This allows you to reuse the same
    * map across multiple {@link IStatementBuffer} instances. For example, the {@link EmbergraphSail}
    * does this so that the same bnode map is used throughout the life of a {@link SailConnection}.
@@ -114,5 +114,5 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
    * @throws IllegalArgumentException if the argument is <code>null</code>.
    * @throws IllegalStateException if the map has already been allocated.
    */
-  public void setBNodeMap(Map<String, EmbergraphBNode> bnodes);
+  void setBNodeMap(Map<String, EmbergraphBNode> bnodes);
 }

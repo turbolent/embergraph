@@ -31,8 +31,8 @@ import org.openrdf.model.URI;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.RepositoryResult;
 
-/**
- * Test suite for ticket #1086: when loading quads data into a triples store, there now is a config
+/*
+* Test suite for ticket #1086: when loading quads data into a triples store, there now is a config
  * option EmbergraphSail.Options.REJECT_QUADS_IN_TRIPLE_MODE. When this option is not set, the quads
  * shall be simply loaded will stripping the context away; otherwise, an exception shall be thrown.
  * This test case tests both situations.
@@ -60,7 +60,7 @@ public class TestTicket1086 extends ProxyEmbergraphSailTestCase {
     return props;
   }
 
-  /**
+  /*
    * Returns a configuration where stripping of quads within the loading process is disabled.
    *
    * @return
@@ -92,7 +92,7 @@ public class TestTicket1086 extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI("http://test/s");
@@ -116,7 +116,7 @@ public class TestTicket1086 extends ProxyEmbergraphSailTestCase {
     }
   }
 
-  /**
+  /*
    * When loading quads into a triple store and the EmbergraphSail option
    * REJECT_QUADS_IN_TRIPLE_MODE is set to true, an exception will be thrown.
    */
@@ -131,7 +131,7 @@ public class TestTicket1086 extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI("http://test/s");

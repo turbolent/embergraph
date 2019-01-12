@@ -29,8 +29,8 @@ import java.util.concurrent.ExecutionException;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.mdi.MetadataIndex;
 
-/**
- * Some unit tests for the {@link MetadataIndex} as accessed via the {@link IMetadataService}.
+/*
+* Some unit tests for the {@link MetadataIndex} as accessed via the {@link IMetadataService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class TestMetadataIndex extends AbstractEmbeddedFederationTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Verify that the first index partition is assigned partitionId zero (0) and that subsequent
    * calls to {@link IMetadataService#nextPartitionId(String)} return strictly increasing partition
    * identifiers.

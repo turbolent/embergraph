@@ -26,8 +26,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.NV;
 import org.embergraph.htree.HTree;
 
-/**
- * {@inheritDoc}
+/*
+* {@inheritDoc}
  *
  * <p>{@link HTree} Specific version.
  *
@@ -46,14 +46,14 @@ public class HTreeSolutionSetHashJoinOp extends SolutionSetHashJoinOp {
   //    public interface Annotations extends PipelineOp.Annotations,
   //            NamedSetAnnotations {
   //
-  //        /**
-  //         * An {@link IConstraint}[] to be applied to solutions when they are
+  //        /*
+//         * An {@link IConstraint}[] to be applied to solutions when they are
   //         * joined (optional).
   //         */
   //        final String CONSTRAINTS = JoinAnnotations.CONSTRAINTS;
   //
-  //        /**
-  //         * When <code>true</code> the hash index identified by
+  //        /*
+//         * When <code>true</code> the hash index identified by
   //         * {@link #NAMED_SET_REF} will be released when this operator is done
   //         * (default {@value #DEFAULT_RELEASE}).
   //         * <p>
@@ -75,7 +75,7 @@ public class HTreeSolutionSetHashJoinOp extends SolutionSetHashJoinOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -118,8 +118,8 @@ public class HTreeSolutionSetHashJoinOp extends SolutionSetHashJoinOp {
   //
   //    }
   //
-  //    /**
-  //     * Task executing on the node.
+  //    /*
+//     * Task executing on the node.
   //     */
   //    private static class ChunkTask<E> implements Callable<Void> {
   //
@@ -238,8 +238,8 @@ public class HTreeSolutionSetHashJoinOp extends SolutionSetHashJoinOp {
   //
   //        }
   //
-  //        /**
-  //         * Do a hash join of the buffered solutions with the access path.
+  //        /*
+//         * Do a hash join of the buffered solutions with the access path.
   //         */
   //        private void doHashJoin() {
   //

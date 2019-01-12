@@ -28,8 +28,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTSubGroupJoinVarOptimizer;
 
-/**
- * Join group or union.
+/*
+* Join group or union.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +44,7 @@ public abstract class GraphPatternGroup<E extends IGroupMemberNode> extends Grou
 
   public interface Annotations extends GroupNodeBase.Annotations {
 
-    /**
+    /*
      * An {@link IVariable}[] of the join variables will be definitely bound when we begin to
      * evaluate a sub-group. This information is used to build a hash index on the join variables
      * and to hash join the sub-group's solutions back into the parent group's solutions.
@@ -53,7 +53,7 @@ public abstract class GraphPatternGroup<E extends IGroupMemberNode> extends Grou
      */
     String JOIN_VARS = "joinVars";
 
-    /**
+    /*
      * An {@link IVariable}[] of the variables that are used by the group and that have already
      * appeared in the query up to this point (and thus may be bound and should be projected into
      * the group).
@@ -78,7 +78,7 @@ public abstract class GraphPatternGroup<E extends IGroupMemberNode> extends Grou
   /** */
   public GraphPatternGroup() {}
 
-  /**
+  /*
    * The join variables for the group.
    *
    * @see Annotations#JOIN_VARS
@@ -91,7 +91,7 @@ public abstract class GraphPatternGroup<E extends IGroupMemberNode> extends Grou
     setProperty(Annotations.JOIN_VARS, joinVars);
   }
 
-  /**
+  /*
    * The variables that should be projected into the group.
    *
    * @see Annotations#PROJECT_IN_VARS
@@ -104,7 +104,7 @@ public abstract class GraphPatternGroup<E extends IGroupMemberNode> extends Grou
     setProperty(Annotations.PROJECT_IN_VARS, projectInVars);
   }
 
-  /**
+  /*
    * Return the nodes of the supplied type. Uses isAssignableFrom to determine whether the node is
    * an instance of the supplied type.
    */

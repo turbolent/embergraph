@@ -29,8 +29,8 @@ import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.rdf.spo.ISPO;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Fully buffers and then visits all {@link Justification}s for a given statement.
+/*
+* Fully buffers and then visits all {@link Justification}s for a given statement.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -43,7 +43,7 @@ public class FullyBufferedJustificationIterator implements IJustificationIterato
   /** the statement whose justifications are being visited. */
   private final ISPO head;
 
-  /**
+  /*
    * Private key builder.
    *
    * <p>Note: This capacity estimate is based on N longs per SPO, one head, and 2-3 SPOs in the
@@ -61,7 +61,7 @@ public class FullyBufferedJustificationIterator implements IJustificationIterato
   private int i = 0;
   private Justification current = null;
 
-  /**
+  /*
    * @param db
    * @param head The statement whose justifications will be materialized.
    */
@@ -122,12 +122,7 @@ public class FullyBufferedJustificationIterator implements IJustificationIterato
 
     assert i <= numJustifications;
 
-    if (i == numJustifications) {
-
-      return false;
-    }
-
-    return true;
+    return i != numJustifications;
   }
 
   public Justification next() {

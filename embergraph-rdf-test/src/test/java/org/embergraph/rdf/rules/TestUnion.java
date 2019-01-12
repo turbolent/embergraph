@@ -25,8 +25,8 @@ package org.embergraph.rdf.rules;
 import org.embergraph.relation.rule.IProgram;
 import org.embergraph.relation.rule.IRule;
 
-/**
- * Unit test for processing of queries consisting of {@link IProgram}s comprised of more than one
+/*
+* Unit test for processing of queries consisting of {@link IProgram}s comprised of more than one
  * {@link IRule}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -41,7 +41,7 @@ public class TestUnion extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * @todo write unit tests for "union".
    * @todo write test for union of two rules with parallel execution.
    * @todo write test for union of two rules with stable execution (serialize the program and

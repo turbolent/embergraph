@@ -42,8 +42,8 @@ import java.io.Serializable;
 import java.io.UTFDataFormatException;
 import java.io.Writer;
 
-/**
- * Fast, compact, optimised &amp; versatile mutable strings.
+/*
+* Fast, compact, optimised &amp; versatile mutable strings.
  *
  * <h3>Motivation</h3>
  *
@@ -179,7 +179,7 @@ import java.io.Writer;
  */
 public class MutableString
     implements Serializable, CharSequence, Appendable, Comparable<MutableString>, Cloneable {
-  /**
+  /*
    * A mutable string containing <samp>null</samp>, used for implementing {@link Appendable}'s
    * semantics.
    */
@@ -188,7 +188,7 @@ public class MutableString
   /** The backing array. */
   protected transient char[] array;
 
-  /**
+  /*
    * This mutable string is compact iff this attribute is negative. It the string is compact, the
    * attribute is its hash code (-1 denotes the invalid hash code). If the string is loose, the
    * attribute is the number of characters actually stored in the backing array.
@@ -202,7 +202,7 @@ public class MutableString
     this(2);
   }
 
-  /**
+  /*
    * Creates a new loose empty mutable string with given capacity.
    *
    * @param capacity the required capacity.
@@ -211,7 +211,7 @@ public class MutableString
     array = capacity != 0 ? new char[capacity] : CharArrays.EMPTY_ARRAY;
   }
 
-  /**
+  /*
    * Creates a new compact mutable string with given length.
    *
    * @param length the desired length of the new string.
@@ -221,7 +221,7 @@ public class MutableString
     hashLength = -1;
   }
 
-  /**
+  /*
    * Creates a new compact mutable string copying a given mutable string.
    *
    * @param s the initial contents of the string.
@@ -231,7 +231,7 @@ public class MutableString
     System.arraycopy(s.array, 0, array, 0, array.length);
   }
 
-  /**
+  /*
    * Creates a new compact mutable string copying a given <code>String</code>.
    *
    * @param s the initial contents of the string.
@@ -241,7 +241,7 @@ public class MutableString
     s.getChars(0, array.length, array, 0);
   }
 
-  /**
+  /*
    * Creates a new compact mutable string copying a given <code>CharSequence</code>.
    *
    * @param s the initial contents of the string.
@@ -251,7 +251,7 @@ public class MutableString
     getChars(s, 0, array.length, array, 0);
   }
 
-  /**
+  /*
    * Creates a new compact mutable string copying a given character array.
    *
    * @param a the initial contents of the string.
@@ -261,7 +261,7 @@ public class MutableString
     System.arraycopy(a, 0, array, 0, array.length);
   }
 
-  /**
+  /*
    * Creates a new compact mutable string copying a part of a given character array.
    *
    * @param a a character array.
@@ -273,7 +273,7 @@ public class MutableString
     System.arraycopy(a, offset, array, 0, len);
   }
 
-  /**
+  /*
    * Creates a new compact mutable string by copying this one.
    *
    * @return a compact copy of this mutable string.
@@ -282,7 +282,7 @@ public class MutableString
     return new MutableString(this);
   }
 
-  /**
+  /*
    * Creates a new compact mutable string by copying this one.
    *
    * <p>This method is identical to {@link #copy}, but the latter returns a more specific type.
@@ -293,7 +293,7 @@ public class MutableString
     return new MutableString(this);
   }
 
-  /**
+  /*
    * Commodity static method implementing {@link java.lang.String#getChars(int,int,char[],int)} for
    * a <code>CharSequence</code>s.
    *
@@ -314,7 +314,7 @@ public class MutableString
     while (i < end) dest[j++] = s.charAt(i++);
   }
 
-  /**
+  /*
    * Returns the number of characters in this mutable string.
    *
    * @return the length of this mutable string.
@@ -323,7 +323,7 @@ public class MutableString
     return hashLength >= 0 ? hashLength : array.length;
   }
 
-  /**
+  /*
    * Returns the current length of the backing array.
    *
    * @return the current length of the backing array.
@@ -332,7 +332,7 @@ public class MutableString
     return array.length;
   }
 
-  /**
+  /*
    * Gets the backing array.
    *
    * <p>For fast, repeated access to the characters of this mutable string, you can obtain the
@@ -347,7 +347,7 @@ public class MutableString
     return array;
   }
 
-  /**
+  /*
    * Characters with indices from <code>start</code> (inclusive) to index <code>end</code>
    * (exclusive) are copied from this mutable string into the array <code>dest</code>, starting from
    * index <code>destStart</code>.
@@ -372,7 +372,7 @@ public class MutableString
     System.arraycopy(array, start, dest, destStart, end - start);
   }
 
-  /**
+  /*
    * Ensures that at least the given number of characters can be stored in this mutable string.
    *
    * <p>The new capacity of this string will be <em>exactly</em> equal to the provided argument if
@@ -393,7 +393,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Ensures that at least the given number of characters can be stored in this string.
    *
    * <p>If necessary, enlarges the backing array. If the string is compact, we expand it exactly to
@@ -426,7 +426,7 @@ public class MutableString
     array = newArray;
   }
 
-  /**
+  /*
    * Ensures that <em>exactly</em> the given number of characters can be stored in this string.
    *
    * <p>If necessary, reallocates the backing array. If the new capacity is smaller than the string
@@ -447,7 +447,7 @@ public class MutableString
     array = newArray;
   }
 
-  /**
+  /*
    * Sets the length.
    *
    * <p>If the provided length is greater than that of the current string, the string is padded with
@@ -479,7 +479,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * A nickname for {@link #length(int)}.
    *
    * @param newLength the new length for this mutable string.
@@ -490,7 +490,7 @@ public class MutableString
     return length(newLength);
   }
 
-  /**
+  /*
    * Makes this mutable string compact (see the {@linkplain MutableString class description}).
    *
    * <p>Note that this operation may require reallocating the backing array (of course, with a
@@ -507,7 +507,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Makes this mutable string loose.
    *
    * @return this mutable string.
@@ -518,7 +518,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Returns whether this mutable string is compact (see the {@linkplain MutableString class
    * description}).
    *
@@ -529,7 +529,7 @@ public class MutableString
     return hashLength < 0;
   }
 
-  /**
+  /*
    * Returns whether this mutable string is loose (see the {@linkplain MutableString class
    * description}).
    *
@@ -540,7 +540,7 @@ public class MutableString
     return hashLength >= 0;
   }
 
-  /**
+  /*
    * Invalidates the current cached hash code if this mutable string is compact.
    *
    * <p>You will need to call this method only if you change the backing array of a compact mutable
@@ -553,7 +553,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Wraps a given character array in a compact mutable string.
    *
    * <p>The returned mutable string will be compact and backed by the given character array.
@@ -561,14 +561,14 @@ public class MutableString
    * @param a a character array.
    * @return a compact mutable string backed by the given array.
    */
-  public static MutableString wrap(final char a[]) {
+  public static MutableString wrap(final char[] a) {
     MutableString s = new MutableString(0);
     s.array = a;
     s.hashLength = -1;
     return s;
   }
 
-  /**
+  /*
    * Wraps a given character array for a given length in a loose mutable string.
    *
    * <p>The returned mutable string will be loose and backed by the given character array.
@@ -584,7 +584,7 @@ public class MutableString
     return s;
   }
 
-  /**
+  /*
    * Gets a character.
    *
    * <p>If you end up calling repeatedly this method, you should consider using {@link #array()}
@@ -598,7 +598,7 @@ public class MutableString
     return array[index];
   }
 
-  /**
+  /*
    * A nickname for {@link #charAt(int,char)}.
    *
    * @param index the index of a character.
@@ -611,7 +611,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Sets the character at the given index.
    *
    * <p>If you end up calling repeatedly this method, you should consider using {@link #array()}
@@ -628,7 +628,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Returns the first character of this mutable string.
    *
    * @return the first character.
@@ -639,7 +639,7 @@ public class MutableString
     return array[0];
   }
 
-  /**
+  /*
    * Returns the last character of this mutable string.
    *
    * @return the last character.
@@ -649,7 +649,7 @@ public class MutableString
     return array[length() - 1];
   }
 
-  /**
+  /*
    * Converts this string to a new character array.
    *
    * @return a newly allocated character array with the same length and content of this mutable
@@ -659,7 +659,7 @@ public class MutableString
     return CharArrays.copy(array, 0, length());
   }
 
-  /**
+  /*
    * Returns a substring of this mutable string.
    *
    * <p>The creation of a substring implies the creation of a new backing array. The returned
@@ -674,7 +674,7 @@ public class MutableString
     return new MutableString(array, start, end - start);
   }
 
-  /**
+  /*
    * Returns a substring of this mutable string.
    *
    * @param start first character of the substring (inclusive).
@@ -685,7 +685,7 @@ public class MutableString
     return substring(start, length());
   }
 
-  /**
+  /*
    * A class representing a subsequence.
    *
    * <p>Subsequences represented by this class share the backing array. Equality is content-based;
@@ -713,7 +713,7 @@ public class MutableString
       return new SubSequence(this.from + start, this.from + end);
     }
 
-    /**
+    /*
      * For convenience, the hash code of a subsequence is equal to that of a <code>String</code>
      * with the same content with the 31st bit set.
      *
@@ -743,7 +743,7 @@ public class MutableString
     }
   }
 
-  /**
+  /*
    * Returns a subsequence of this mutable string.
    *
    * <p>Subsequences <em>share the backing array</em>. Thus, you should <em>not</em> use a
@@ -767,7 +767,7 @@ public class MutableString
     return new SubSequence(start, end);
   }
 
-  /**
+  /*
    * Appends the given mutable string to this mutable string.
    *
    * @param s the mutable string to append.
@@ -785,7 +785,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends the given <code>String</code> to this mutable string.
    *
    * @param s a <code>String</code> (<code>null</code> is not allowed).
@@ -804,7 +804,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends the given <code>CharSequence</code> to this mutable string.
    *
    * @param s a <code>CharSequence</code> or <code>null</code>.
@@ -823,7 +823,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends a subsequence of the given <code>CharSequence</code> to this mutable string.
    *
    * <p><strong>Warning</strong>: the semantics of this method of that of {@link #append(char[],
@@ -855,7 +855,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends the given character sequences to this mutable string using the given separator.
    *
    * @param a an array.
@@ -892,7 +892,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends the given character sequences to this mutable string using the given separator.
    *
    * @param a an array.
@@ -903,7 +903,7 @@ public class MutableString
     return append(a, 0, a.length, separator);
   }
 
-  /**
+  /*
    * Appends the string representations of the given objects to this mutable string using the given
    * separator.
    *
@@ -916,12 +916,12 @@ public class MutableString
    */
   public final MutableString append(
       final Object[] a, final int offset, final int length, final CharSequence separator) {
-    String s[] = new String[a.length];
+    String[] s = new String[a.length];
     for (int i = 0; i < length; i++) s[i] = a[offset + i].toString();
     return append(s, offset, length, separator);
   }
 
-  /**
+  /*
    * Appends the string representations of the given objects to this mutable string using the given
    * separator.
    *
@@ -934,13 +934,13 @@ public class MutableString
     return append(a, 0, a.length, separator);
   }
 
-  /**
+  /*
    * Appends the given character array to this mutable string.
    *
    * @param a an array to append.
    * @return this mutable string.
    */
-  public final MutableString append(final char a[]) {
+  public final MutableString append(final char[] a) {
     final int l = a.length;
     if (l == 0) return this;
 
@@ -951,7 +951,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends a part of the given character array to this mutable string.
    *
    * <p><strong>Warning</strong>: the semantics of this method of that of {@link
@@ -976,7 +976,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends the given character list to this mutable string.
    *
    * @param list the list to append.
@@ -993,7 +993,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends a part of the given character list to this mutable string.
    *
    * <p><strong>Warning</strong>: the semantics of this method of that of {@link
@@ -1018,7 +1018,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends a boolean to this mutable string.
    *
    * @param b the boolean to be appended.
@@ -1028,7 +1028,7 @@ public class MutableString
     return append(String.valueOf(b));
   }
 
-  /**
+  /*
    * Appends a character to this mutable string.
    *
    * <p>Note that this method <em>will reallocate the backing array of a compact mutable string for
@@ -1045,7 +1045,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Appends an integer to this mutable string.
    *
    * @param i the integer to be appended.
@@ -1055,7 +1055,7 @@ public class MutableString
     return append(String.valueOf(i));
   }
 
-  /**
+  /*
    * Appends a long to this mutable string.
    *
    * @param l the long to be appended.
@@ -1065,7 +1065,7 @@ public class MutableString
     return append(String.valueOf(l));
   }
 
-  /**
+  /*
    * Appends a float to this mutable string.
    *
    * @param f the float to be appended.
@@ -1075,7 +1075,7 @@ public class MutableString
     return append(String.valueOf(f));
   }
 
-  /**
+  /*
    * Appends a double to this mutable string.
    *
    * @param d the double to be appended.
@@ -1085,7 +1085,7 @@ public class MutableString
     return append(String.valueOf(d));
   }
 
-  /**
+  /*
    * Appends the string representation of an object to this mutable string.
    *
    * @param o the object to append.
@@ -1095,7 +1095,7 @@ public class MutableString
     return append(String.valueOf(o));
   }
 
-  /**
+  /*
    * Inserts a mutable string in this mutable string, starting from index <code>index</code>.
    *
    * @param index position at which to insert the <code>String</code>.
@@ -1119,7 +1119,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Inserts a <code>String</code> in this mutable string, starting from index <code>index</code>.
    *
    * @param index position at which to insert the <code>String</code>.
@@ -1143,7 +1143,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Inserts a <code>CharSequence</code> in this mutable string, starting from index <code>index
    * </code>.
    *
@@ -1168,7 +1168,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Inserts characters in this mutable string. All of the characters of the array <code>c</code>
    * are inserted in this mutable string, and the first inserted character is going to have index
    * <code>index</code>.
@@ -1194,7 +1194,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Inserts characters in this mutable string. <code>len</code> characters of the array <code>c
    * </code>, with indices starting from <code>offset</code>, are inserted in this mutable string,
    * and the first inserted character is going to have index <code>index</code>.
@@ -1225,7 +1225,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Inserts a boolean in this mutable string, starting from index <code>index</code>.
    *
    * @param index position at which to insert the <code>String</code>.
@@ -1238,7 +1238,7 @@ public class MutableString
     return insert(index, String.valueOf(b));
   }
 
-  /**
+  /*
    * Inserts a char in this mutable string, starting from index <code>index</code>.
    *
    * <p>Note that this method <em>will not expand the capacity of a compact mutable string by more
@@ -1254,7 +1254,7 @@ public class MutableString
     return insert(index, String.valueOf(c));
   }
 
-  /**
+  /*
    * Inserts a double in this mutable string, starting from index <code>index</code>.
    *
    * @param index position at which to insert the <code>String</code>.
@@ -1267,7 +1267,7 @@ public class MutableString
     return insert(index, String.valueOf(d));
   }
 
-  /**
+  /*
    * Inserts a float in this mutable string, starting from index <code>index</code>.
    *
    * @param index position at which to insert the <code>String</code>.
@@ -1280,7 +1280,7 @@ public class MutableString
     return insert(index, String.valueOf(f));
   }
 
-  /**
+  /*
    * Inserts an int in this mutable string, starting from index <code>index</code>.
    *
    * @param index position at which to insert the <code>String</code>.
@@ -1293,7 +1293,7 @@ public class MutableString
     return insert(index, String.valueOf(x));
   }
 
-  /**
+  /*
    * Inserts a long in this mutable string, starting from index <code>index</code>.
    *
    * @param index position at which to insert the <code>String</code>.
@@ -1306,7 +1306,7 @@ public class MutableString
     return insert(index, String.valueOf(l));
   }
 
-  /**
+  /*
    * Inserts the string representation of an object in this mutable string, starting from index
    * <code>index</code>.
    *
@@ -1320,7 +1320,7 @@ public class MutableString
     return insert(index, String.valueOf(o));
   }
 
-  /**
+  /*
    * Removes the characters of this mutable string with indices in the range from <code>start</code>
    * (inclusive) to <code>end</code> (exclusive). If <code>end</code> is greater than or equal to
    * the length of this mutable string, all characters with indices greater than or equal to <code>
@@ -1348,7 +1348,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Removes the character at the given index.
    *
    * <p>Note that this method <em>will reallocate the backing array of a compact mutable string for
@@ -1372,7 +1372,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Removes all occurrences of the given character.
    *
    * @param c the character to remove.
@@ -1394,7 +1394,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Removes all occurrences of the given characters.
    *
    * @param s the set of characters to remove.
@@ -1416,7 +1416,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Removes all occurrences of the given characters.
    *
    * @param c an array containing the characters to remove.
@@ -1452,7 +1452,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces the characters with indices ranging from <code>start</code> (inclusive) to <code>end
    * </code> (exclusive) with the given mutable string.
    *
@@ -1488,7 +1488,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces the characters with indices ranging from <code>start</code> (inclusive) to <code>end
    * </code> (exclusive) with the given <code>String</code>.
    *
@@ -1525,7 +1525,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces the characters with indices ranging from <code>start</code> (inclusive) to <code>end
    * </code> (exclusive) with the given <code>CharSequence</code>.
    *
@@ -1561,7 +1561,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces the characters with indices ranging from <code>start</code> (inclusive) to <code>end
    * </code> (exclusive) with the given character.
    *
@@ -1597,7 +1597,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces the content of this mutable string with the given mutable string.
    *
    * @param s the mutable string whose content will replace the present one.
@@ -1607,7 +1607,7 @@ public class MutableString
     return replace(0, Integer.MAX_VALUE, s);
   }
 
-  /**
+  /*
    * Replaces the content of this mutable string with the given string.
    *
    * @param s the string whose content will replace the present one.
@@ -1617,7 +1617,7 @@ public class MutableString
     return replace(0, Integer.MAX_VALUE, s);
   }
 
-  /**
+  /*
    * Replaces the content of this mutable string with the given character sequence.
    *
    * @param s the character sequence whose content will replace the present one.
@@ -1627,7 +1627,7 @@ public class MutableString
     return replace(0, Integer.MAX_VALUE, s);
   }
 
-  /**
+  /*
    * Replaces the content of this mutable string with the given character.
    *
    * @param c the character whose content will replace the present content.
@@ -1637,7 +1637,7 @@ public class MutableString
     return replace(0, Integer.MAX_VALUE, c);
   }
 
-  /**
+  /*
    * Replaces each occurrence of a set of characters with a corresponding mutable string.
    *
    * <p>Each occurrences of the character <code>c[i]</code> in this mutable string will be replaced
@@ -1711,7 +1711,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a set of characters with a corresponding string.
    *
    * <p>Each occurrences of the character <code>c[i]</code> in this mutable string will be replaced
@@ -1785,7 +1785,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a set of characters with a corresponding character sequence.
    *
    * <p>Each occurrences of the character <code>c[i]</code> in this mutable string will be replaced
@@ -1859,7 +1859,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a set characters with a corresponding character.
    *
    * <p>Each occurrences of the character <code>c[i]</code> in this mutable string will be replaced
@@ -1897,7 +1897,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces characters following a replacement map.
    *
    * <p>Each occurrence of a key of <code>m</code> will be substituted with the corresponding value.
@@ -1920,7 +1920,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a character with a corresponding mutable string.
    *
    * <p>Each occurrences of the character <code>c</code> in this mutable string will be replaced by
@@ -1969,7 +1969,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a character with a corresponding string.
    *
    * <p>Each occurrences of the character <code>c</code> in this mutable string will be replaced by
@@ -2018,7 +2018,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a character with a corresponding character sequence.
    *
    * <p>Each occurrences of the character <code>c</code> in this mutable string will be replaced by
@@ -2067,7 +2067,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a character with a corresponding character.
    *
    * @param c a character to be replaced.
@@ -2083,7 +2083,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a mutable string with a corresponding mutable string.
    *
    * <p>Each occurrences of the mutable string <code>s</code> in this mutable string will be
@@ -2173,7 +2173,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a string with a corresponding string.
    *
    * <p>Each occurrences of the string <code>s</code> in this mutable string will be replaced by
@@ -2256,7 +2256,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Replaces each occurrence of a character sequence with a corresponding character sequence.
    *
    * <p>Each occurrences of the string <code>s</code> in this mutable string will be replaced by
@@ -2340,7 +2340,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified character.
    *
    * @param c the character to look for.
@@ -2351,7 +2351,7 @@ public class MutableString
     return indexOf(c, 0);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified character, starting at the specified
    * index.
    *
@@ -2368,7 +2368,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Computes a Bloom filter for the given character array using the given number of characters.
    *
    * @param s a character array.
@@ -2381,7 +2381,7 @@ public class MutableString
     return bloomFilter;
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified pattern, starting at the specified
    * index.
    *
@@ -2423,7 +2423,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified mutable string, starting at the
    * specified index.
    *
@@ -2453,7 +2453,7 @@ public class MutableString
     return indexOf(pattern.array, n, from, buildFilter(pattern.array, n));
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified mutable string.
    *
    * @param pattern the mutable string to look for.
@@ -2465,7 +2465,7 @@ public class MutableString
     return indexOf(pattern, 0);
   }
 
-  /**
+  /*
    * Computes a Bloom filter for the given character sequence using the given number of characters.
    *
    * @param s a character sequence.
@@ -2478,7 +2478,7 @@ public class MutableString
     return bloomFilter;
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified character sequence, starting at the
    * specified index.
    *
@@ -2521,7 +2521,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified character sequence, starting at the
    * specified index.
    *
@@ -2545,7 +2545,7 @@ public class MutableString
     return indexOf(pattern, n, from, buildFilter(pattern, n));
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified character sequence.
    *
    * @param pattern the character sequence to look for.
@@ -2557,7 +2557,7 @@ public class MutableString
     return indexOf(pattern, 0);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified text pattern, starting at the
    * specified index.
    *
@@ -2573,7 +2573,7 @@ public class MutableString
     return pattern.search(array(), from);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of the specified text pattern, starting at the
    * specified index.
    *
@@ -2586,7 +2586,7 @@ public class MutableString
     return indexOf(pattern, 0);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any of the specified characters, starting at the
    * specified index.
    *
@@ -2611,7 +2611,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any of the specified characters.
    *
    * @param s a set of characters to be searched for.
@@ -2623,7 +2623,7 @@ public class MutableString
     return indexOfAnyOf(s, 0);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any of the specified characters, starting at the
    * specified index.
    *
@@ -2656,7 +2656,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any of the specified characters, starting at the
    * specified index.
    *
@@ -2678,7 +2678,7 @@ public class MutableString
     return indexOfAnyOf(c, n, from, buildFilter(c, n));
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any of the specified characters.
    *
    * @param c an array of characters to be searched for.
@@ -2690,7 +2690,7 @@ public class MutableString
     return indexOfAnyOf(c, 0);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any character, except those specified, starting at
    * the specified index.
    *
@@ -2711,7 +2711,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any character, except those specified.
    *
    * @param s a set of characters to be searched for.
@@ -2723,7 +2723,7 @@ public class MutableString
     return indexOfAnyOf(s, 0);
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any character, except those specified, starting at
    * the specified index.
    *
@@ -2757,7 +2757,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any character, except those specified, starting at
    * the specified index.
    *
@@ -2776,7 +2776,7 @@ public class MutableString
     return indexOfAnyBut(c, n, from < 0 ? 0 : from, buildFilter(c, n));
   }
 
-  /**
+  /*
    * Returns the index of the first occurrence of any character, except those specified.
    *
    * @param c an array of characters to be searched for.
@@ -2788,7 +2788,7 @@ public class MutableString
     return indexOfAnyOf(c, 0);
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of the specified character.
    *
    * @param c the character to look for.
@@ -2802,7 +2802,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of the specified character, searching backward
    * starting at the specified index.
    *
@@ -2821,7 +2821,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of the specified pattern, searching backward starting
    * at the specified index.
    *
@@ -2865,7 +2865,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of the specified mutable string, searching backward
    * starting at the specified index.
    *
@@ -2884,7 +2884,7 @@ public class MutableString
     return lastIndexOf(pattern.array, n, from, buildFilter(pattern.array, n));
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of the specified mutable string.
    *
    * @param pattern the mutable string to look for.
@@ -2896,7 +2896,7 @@ public class MutableString
     return lastIndexOf(pattern, length());
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of the specified pattern, searching backward starting
    * at the specified index.
    *
@@ -2940,7 +2940,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of the specified character sequence, searching
    * backward starting at the specified index.
    *
@@ -2960,7 +2960,7 @@ public class MutableString
     return lastIndexOf(pattern, n, from, buildFilter(pattern, n));
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of the specified character sequence.
    *
    * @param pattern the character sequence to look for.
@@ -2972,7 +2972,7 @@ public class MutableString
     return lastIndexOf(pattern, length());
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any of the specified characters, searching
    * backwards starting at the specified index.
    *
@@ -3003,7 +3003,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any of the specified characters.
    *
    * @param s a set of characters to be searched for.
@@ -3015,7 +3015,7 @@ public class MutableString
     return lastIndexOfAnyOf(s, length());
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any of the specified characters, searching
    * backwards starting at the specified index.
    *
@@ -3049,7 +3049,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any of the specified characters, searching
    * backwards starting at the specified index.
    *
@@ -3073,7 +3073,7 @@ public class MutableString
     return lastIndexOfAnyOf(c, n, from, buildFilter(c, n));
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any of the specified characters.
    *
    * @param c an array of characters to be searched for.
@@ -3085,7 +3085,7 @@ public class MutableString
     return lastIndexOfAnyOf(c, length());
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any character, except those specified, starting at
    * the specified index.
    *
@@ -3112,7 +3112,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any character, except those specified.
    *
    * @param s a set of characters to be searched for.
@@ -3124,7 +3124,7 @@ public class MutableString
     return lastIndexOfAnyBut(s, length());
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any character, except those specified, starting at
    * the specified index.
    *
@@ -3159,7 +3159,7 @@ public class MutableString
     return -1;
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any character, except those specified, starting at
    * the specified index.
    *
@@ -3178,7 +3178,7 @@ public class MutableString
     return lastIndexOfAnyBut(c, n, from, buildFilter(c, n));
   }
 
-  /**
+  /*
    * Returns the index of the last occurrence of any character, except those specified.
    *
    * @param c an array of characters to be searched for.
@@ -3190,7 +3190,7 @@ public class MutableString
     return lastIndexOfAnyBut(c, 0);
   }
 
-  /**
+  /*
    * Spans a segment of this mutable string made of the specified characters.
    *
    * @param s a set of characters.
@@ -3212,7 +3212,7 @@ public class MutableString
     return i - from;
   }
 
-  /**
+  /*
    * Spans the initial segment of this mutable string made of the specified characters.
    *
    * @param s a set of characters.
@@ -3224,7 +3224,7 @@ public class MutableString
     return span(s, 0);
   }
 
-  /**
+  /*
    * Spans a segment of this mutable string made of the specified characters.
    *
    * <p>This method uses a Bloom filter to avoid repeated linear scans of the array <code>c</code>;
@@ -3257,7 +3257,7 @@ public class MutableString
     return i - from;
   }
 
-  /**
+  /*
    * Spans the initial segment of this mutable string made of the specified characters.
    *
    * @param c an array of characters.
@@ -3269,7 +3269,7 @@ public class MutableString
     return span(c, 0);
   }
 
-  /**
+  /*
    * Spans a segment of this mutable string made of the complement of the specified characters.
    *
    * @param s a set of characters.
@@ -3291,7 +3291,7 @@ public class MutableString
     return i - from;
   }
 
-  /**
+  /*
    * Spans the initial segment of this mutable string made of the complement of the specified
    * characters.
    *
@@ -3304,7 +3304,7 @@ public class MutableString
     return cospan(s, 0);
   }
 
-  /**
+  /*
    * Spans a segment of this mutable string made of the complement of the specified characters.
    *
    * <p>This method uses a Bloom filter to avoid repeated linear scans of the array <code>c</code>;
@@ -3337,7 +3337,7 @@ public class MutableString
     return i - from;
   }
 
-  /**
+  /*
    * Spans the initial segment of this mutable string made of the complement of the specified
    * characters.
    *
@@ -3350,7 +3350,7 @@ public class MutableString
     return cospan(c, 0);
   }
 
-  /**
+  /*
    * Returns whether this mutable string starts with the given mutable string.
    *
    * @param prefix a mutable string.
@@ -3366,7 +3366,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string starts with the given string.
    *
    * @param prefix a string.
@@ -3381,7 +3381,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string starts with the given character sequence.
    *
    * @param prefix a character sequence.
@@ -3396,7 +3396,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string starts with the given mutable string disregarding case.
    *
    * @param prefix a mutable string.
@@ -3417,7 +3417,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string starts with the given string disregarding case.
    *
    * @param prefix a string.
@@ -3437,7 +3437,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string starts with the given character sequence disregarding case.
    *
    * @param prefix a character sequence.
@@ -3457,7 +3457,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string ends with the given mutable string.
    *
    * @param suffix a mutable string.
@@ -3474,7 +3474,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string ends with the given string.
    *
    * @param suffix a string.
@@ -3490,7 +3490,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string ends with the given character sequence.
    *
    * @param suffix a character sequence.
@@ -3506,7 +3506,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string ends with the given mutable string disregarding case.
    *
    * @param suffix a mutable string.
@@ -3528,7 +3528,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string ends with the given string disregarding case.
    *
    * @param suffix a string.
@@ -3549,7 +3549,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Returns whether this mutable string ends with the given character sequence disregarding case.
    *
    * @param suffix a character sequence.
@@ -3570,7 +3570,7 @@ public class MutableString
     return true;
   }
 
-  /**
+  /*
    * Converts all of the characters in this mutable string to lower case using the rules of the
    * default locale.
    *
@@ -3584,7 +3584,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Converts all of the characters in this mutable string to upper case using the rules of the
    * default locale.
    *
@@ -3598,7 +3598,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Trims all leading and trailing whitespace from this string. <em>Whitespace</em> here is any
    * character smaller than <samp>'\u0020'</samp> (the ASCII space).
    *
@@ -3637,7 +3637,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Trims all leading whitespace from this string. <em>Whitespace</em> here is any character
    * smaller than <samp>'\u0020'</samp> (the ASCII space).
    *
@@ -3673,7 +3673,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Trims all trailing whitespace from this string. <em>Whitespace</em> here is any character
    * smaller than <samp>'\u0020'</samp> (the ASCII space).
    *
@@ -3700,7 +3700,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Squeezes and normalises spaces in this mutable string. All subsequences of consecutive
    * characters satisfying {@link Character#isSpaceChar(char)} (or {@link
    * Character#isWhitespace(char)} if <code>squeezeOnlyWhitespace</code> is true) will be
@@ -3717,7 +3717,7 @@ public class MutableString
 
     int i = 0, j = 0;
     while (i < length) {
-      if (!(squeezeOnlyWhitespace ? Character.isWhitespace(a[i]) : Character.isSpaceChar(a[i])))
+      if (squeezeOnlyWhitespace ? !Character.isWhitespace(a[i]) : !Character.isSpaceChar(a[i]))
         a[j++] = a[i++];
       else {
         a[j++] = ' ';
@@ -3737,7 +3737,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Squeezes and normalises whitespace in this mutable string. All subsequences of consecutive
    * characters satisfying {@link Character#isWhitespace(char)} will be transformed into a single
    * space.
@@ -3749,7 +3749,7 @@ public class MutableString
     return squeezeSpaces(true);
   }
 
-  /**
+  /*
    * Squeezes and normalises spaces in this mutable string. All subsequences of consecutive
    * characters satisfying {@link Character#isSpaceChar(char)} will be transformed into a single
    * space.
@@ -3761,7 +3761,7 @@ public class MutableString
     return squeezeSpaces(false);
   }
 
-  /**
+  /*
    * The characters in this mutable string get reversed.
    *
    * @return this mutable string.
@@ -3782,7 +3782,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Writes this mutable string to a {@link Writer}.
    *
    * @param w a {@link Writer}.
@@ -3793,7 +3793,7 @@ public class MutableString
     else w.write(array, 0, hashLength);
   }
 
-  /**
+  /*
    * Reads a mutable string that has been written by {@link #write(Writer)} from a {@link Reader}.
    *
    * <p>If <code>length</code> is smaller than the current capacity or the number of characters
@@ -3815,7 +3815,7 @@ public class MutableString
     return result;
   }
 
-  /**
+  /*
    * Prints this mutable string to a {@link PrintWriter}.
    *
    * @param w a {@link PrintWriter}.
@@ -3825,7 +3825,7 @@ public class MutableString
     else w.write(array, 0, hashLength);
   }
 
-  /**
+  /*
    * Prints this mutable string to a {@link PrintWriter} and then terminates the line.
    *
    * @param w a {@link PrintWriter}.
@@ -3835,7 +3835,7 @@ public class MutableString
     w.println();
   }
 
-  /**
+  /*
    * Prints this mutable string to a {@link PrintStream}.
    *
    * @param s a {@link PrintStream}.
@@ -3845,7 +3845,7 @@ public class MutableString
     else s.print(toString());
   }
 
-  /**
+  /*
    * Prints this mutable string to a {@link PrintStream} and then terminates the line.
    *
    * @param s a {@link PrintStream}.
@@ -3855,7 +3855,7 @@ public class MutableString
     s.println();
   }
 
-  /**
+  /*
    * Writes this mutable string in UTF-8 encoding.
    *
    * <p>The string is coded <em>in UTF-8</em>, not in the {@linkplain DataOutput#writeUTF(String)
@@ -3872,7 +3872,7 @@ public class MutableString
     writeUTF8(s, length());
   }
 
-  /**
+  /*
    * Writes this mutable string in UTF-8 encoding.
    *
    * <p>This method is not particularly efficient; in particular, it does not do any buffering (it
@@ -3901,7 +3901,7 @@ public class MutableString
     }
   }
 
-  /**
+  /*
    * Reads a mutable string in UTF-8 encoding.
    *
    * <p>This method does not try to do any read-ahead (in particular, it does not create any
@@ -3960,7 +3960,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Writes this mutable string to a {@link DataOutput} as a length followed by a UTF-8 encoding.
    *
    * <p>The purpose of this method and of {@link #readSelfDelimUTF8(DataInput)} is to provide a
@@ -4007,7 +4007,7 @@ public class MutableString
     writeUTF8(s, length);
   }
 
-  /**
+  /*
    * Reads a mutable string that has been written by {@link #writeSelfDelimUTF8(DataOutput)
    * writeSelfDelimUTF8()} from a {@link DataInput}.
    *
@@ -4030,7 +4030,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Writes this mutable string in UTF-8 encoding.
    *
    * @param s an output stream.
@@ -4041,7 +4041,7 @@ public class MutableString
     writeUTF8(s, length());
   }
 
-  /**
+  /*
    * Writes this mutable string in UTF-8 encoding.
    *
    * @param s an output stream.
@@ -4067,7 +4067,7 @@ public class MutableString
     }
   }
 
-  /**
+  /*
    * Skips a string encoded by {@link #writeSelfDelimUTF8(OutputStream)}.
    *
    * @param s an input stream.
@@ -4122,7 +4122,7 @@ public class MutableString
     return length;
   }
 
-  /**
+  /*
    * Reads a mutable string in UTF-8 encoding.
    *
    * @param s an input stream.
@@ -4178,7 +4178,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Writes this mutable string to an {@link OutputStream} as a length followed by a UTF-8 encoding.
    *
    * @param s an output stream.
@@ -4212,7 +4212,7 @@ public class MutableString
     writeUTF8(s, length);
   }
 
-  /**
+  /*
    * Reads a mutable string that has been written by {@link #writeSelfDelimUTF8(OutputStream)
    * writeSelfDelimUTF8()} from an {@link InputStream}.
    *
@@ -4239,7 +4239,7 @@ public class MutableString
     return this;
   }
 
-  /**
+  /*
    * Compares this mutable string to another object.
    *
    * <p>This method will return <code>true</code> iff its argument is a <code>CharSequence</code>
@@ -4260,7 +4260,7 @@ public class MutableString
     return false;
   }
 
-  /**
+  /*
    * Type-specific version of {@link #equals(Object) equals()}. This version of the {@link
    * #equals(Object)} method will be called on mutable strings.
    *
@@ -4280,7 +4280,7 @@ public class MutableString
     return false;
   }
 
-  /**
+  /*
    * Type-specific version of {@link #equals(Object) equals()}.
    *
    * <p>This version of the {@link #equals(Object)} method will be called on <code>String</code>s.
@@ -4308,7 +4308,7 @@ public class MutableString
     return false;
   }
 
-  /**
+  /*
    * Type-specific version of {@link #equals(Object) equals()}.
    *
    * <p>This version of the {@link #equals(Object)} method will be called on character sequences. It
@@ -4330,7 +4330,7 @@ public class MutableString
     return false;
   }
 
-  /**
+  /*
    * Checks two mutable strings for equality ignoring case.
    *
    * @param s a mutable string.
@@ -4355,7 +4355,7 @@ public class MutableString
     return false;
   }
 
-  /**
+  /*
    * Type-specific version of {@link #equalsIgnoreCase(MutableString) equalsIgnoreCase()}.
    *
    * @param s a string.
@@ -4379,7 +4379,7 @@ public class MutableString
     return false;
   }
 
-  /**
+  /*
    * Type-specific version of {@link #equalsIgnoreCase(MutableString) equalsIgnoreCase()}.
    *
    * @param s a character sequence.
@@ -4404,7 +4404,7 @@ public class MutableString
     return false;
   }
 
-  /**
+  /*
    * Compares this mutable string to another mutable string performing a lexicographical comparison.
    *
    * @param s a mutable string.
@@ -4423,7 +4423,7 @@ public class MutableString
     return l1 - l2;
   }
 
-  /**
+  /*
    * Compares this mutable string to a string performing a lexicographical comparison.
    *
    * @param s a <code>String</code>.
@@ -4441,7 +4441,7 @@ public class MutableString
     return l1 - l2;
   }
 
-  /**
+  /*
    * Compares this mutable string to a character sequence performing a lexicographical comparison.
    *
    * @param s a character sequence.
@@ -4459,7 +4459,7 @@ public class MutableString
     return l1 - l2;
   }
 
-  /**
+  /*
    * Compares this mutable string to another object disregarding case. If the argument is a
    * character sequence, this method performs a lexicographical comparison; otherwise, it throws a
    * <code>ClassCastException</code>.
@@ -4490,7 +4490,7 @@ public class MutableString
     return l1 - l2;
   }
 
-  /**
+  /*
    * Type-specific version of {@link #compareToIgnoreCase(MutableString) compareToIgnoreCase()}.
    *
    * @param s a mutable string.
@@ -4514,7 +4514,7 @@ public class MutableString
     return l1 - l2;
   }
 
-  /**
+  /*
    * Type-specific version of {@link #compareToIgnoreCase(MutableString) compareToIgnoreCase()}.
    *
    * @param s a mutable string.
@@ -4539,7 +4539,7 @@ public class MutableString
     return l1 - l2;
   }
 
-  /**
+  /*
    * Returns a hash code for this mutable string.
    *
    * <p>The hash code of a mutable string is the same as that of a <code>String</code> with the same
@@ -4567,7 +4567,7 @@ public class MutableString
     return new String(array, 0, length());
   }
 
-  /**
+  /*
    * Writes a mutable string in serialised form.
    *
    * <p>The serialised version of a mutable string is made of its length followed by its characters
@@ -4587,7 +4587,7 @@ public class MutableString
     for (int i = 0; i < length; i++) s.writeChar(a[i]);
   }
 
-  /**
+  /*
    * Reads a mutable string in serialised form.
    *
    * <p>Mutable strings produced by this method are always compact; this seems reasonable, as stored

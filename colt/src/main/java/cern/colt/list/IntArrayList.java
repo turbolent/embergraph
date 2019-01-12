@@ -9,13 +9,13 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt.list;
 
 import cern.colt.function.IntProcedure;
-/**
- * Resizable list holding <code>int</code> elements; implemented with arrays. First see the <a
+/*
+* Resizable list holding <code>int</code> elements; implemented with arrays. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  */
 public class IntArrayList extends AbstractIntList {
-  /**
+  /*
    * The array buffer into which the elements of the list are stored. The capacity of the list is
    * the length of this array buffer.
    *
@@ -26,7 +26,7 @@ public class IntArrayList extends AbstractIntList {
   public IntArrayList() {
     this(10);
   }
-  /**
+  /*
    * Constructs a list containing the specified elements. The initial size and capacity of the list
    * is the length of the array.
    *
@@ -39,7 +39,7 @@ public class IntArrayList extends AbstractIntList {
   public IntArrayList(int[] elements) {
     elements(elements);
   }
-  /**
+  /*
    * Constructs an empty list with the specified initial capacity.
    *
    * @param initialCapacity the number of elements the receiver can hold without auto-expanding
@@ -49,7 +49,7 @@ public class IntArrayList extends AbstractIntList {
     this(new int[initialCapacity]);
     setSizeRaw(0);
   }
-  /**
+  /*
    * Appends the specified element to the end of this list.
    *
    * @param element element to be appended to this list.
@@ -61,7 +61,7 @@ public class IntArrayList extends AbstractIntList {
     }
     elements[size++] = element;
   }
-  /**
+  /*
    * Inserts the specified element before the specified position into the receiver. Shifts the
    * element currently at that position (if any) and any subsequent elements to the right.
    *
@@ -83,7 +83,7 @@ public class IntArrayList extends AbstractIntList {
     elements[index] = element;
     size++;
   }
-  /**
+  /*
    * Searches the receiver for the specified value using the binary search algorithm. The receiver
    * must <strong>must</strong> be sorted (as by the sort method) prior to making this call. If it
    * is not sorted, the results are undefined: in particular, the call may enter an infinite loop.
@@ -105,18 +105,18 @@ public class IntArrayList extends AbstractIntList {
   public int binarySearchFromTo(int key, int from, int to) {
     return cern.colt.Sorting.binarySearchFromTo(this.elements, key, from, to);
   }
-  /**
+  /*
    * Returns a deep copy of the receiver.
    *
    * @return a deep copy of the receiver.
    */
   public Object clone() {
     // overridden for performance only.
-    IntArrayList clone = new IntArrayList((int[]) elements.clone());
+    IntArrayList clone = new IntArrayList(elements.clone());
     clone.setSizeRaw(size);
     return clone;
   }
-  /**
+  /*
    * Returns a deep copy of the receiver; uses <code>clone()</code> and casts the result.
    *
    * @return a deep copy of the receiver.
@@ -124,7 +124,7 @@ public class IntArrayList extends AbstractIntList {
   public IntArrayList copy() {
     return (IntArrayList) clone();
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending numerical order.
    *
    * <p>The sorting algorithm is a count sort. This algorithm offers guaranteed
@@ -143,11 +143,11 @@ public class IntArrayList extends AbstractIntList {
     if (size == 0) return;
     checkRangeFromTo(from, to, size);
 
-    final int width = (int) (max - min + 1);
+    final int width = (max - min + 1);
 
     int[] counts = new int[width];
     int[] theElements = elements;
-    for (int i = from; i <= to; ) counts[(int) (theElements[i++] - min)]++;
+    for (int i = from; i <= to; ) counts[theElements[i++] - min]++;
 
     int fromIndex = from;
     int val = min;
@@ -163,7 +163,7 @@ public class IntArrayList extends AbstractIntList {
       }
     }
   }
-  /**
+  /*
    * Returns the elements currently stored, including invalid elements between size and capacity, if
    * any.
    *
@@ -176,7 +176,7 @@ public class IntArrayList extends AbstractIntList {
   public int[] elements() {
     return elements;
   }
-  /**
+  /*
    * Sets the receiver's elements to be the specified array (not a copy of it).
    *
    * <p>The size and capacity of the list is the length of the array. <b>WARNING:</b> For efficiency
@@ -191,7 +191,7 @@ public class IntArrayList extends AbstractIntList {
     this.size = elements.length;
     return this;
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of elements without needing to
    * allocate new internal memory. If necessary, allocates new internal memory and increases the
    * capacity of the receiver.
@@ -201,7 +201,7 @@ public class IntArrayList extends AbstractIntList {
   public void ensureCapacity(int minCapacity) {
     elements = cern.colt.Arrays.ensureCapacity(elements, minCapacity);
   }
-  /**
+  /*
    * Compares the specified Object with the receiver. Returns true if and only if the specified
    * Object is also an ArrayList of the same type, both Lists have the same size, and all
    * corresponding pairs of elements in the two Lists are identical. In other words, two Lists are
@@ -225,7 +225,7 @@ public class IntArrayList extends AbstractIntList {
     }
     return true;
   }
-  /**
+  /*
    * Applies a procedure to each element of the receiver, if any. Starts at index 0, moving
    * rightwards.
    *
@@ -242,7 +242,7 @@ public class IntArrayList extends AbstractIntList {
     for (int i = 0; i < theSize; ) if (!procedure.apply(theElements[i++])) return false;
     return true;
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver.
    *
    * @param index index of element to return.
@@ -255,7 +255,7 @@ public class IntArrayList extends AbstractIntList {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     return elements[index];
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver; <b>WARNING:</b> Does not check
    * preconditions. Provided with invalid parameters this method may return invalid elements without
    * throwing any exception! <b>You should only use this method when you are absolutely sure that
@@ -267,7 +267,7 @@ public class IntArrayList extends AbstractIntList {
   public int getQuick(int index) {
     return elements[index];
   }
-  /**
+  /*
    * Returns the index of the first occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element. Searches between <code>from</code>, inclusive and
    * <code>to</code>, inclusive. Tests for identity.
@@ -293,7 +293,7 @@ public class IntArrayList extends AbstractIntList {
     }
     return -1; // not found
   }
-  /**
+  /*
    * Returns the index of the last occurrence of the specified element. Returns <code>-1</code> if
    * the receiver does not contain this element. Searches beginning at <code>to</code>, inclusive
    * until <code>from</code>, inclusive. Tests for identity.
@@ -319,7 +319,7 @@ public class IntArrayList extends AbstractIntList {
     }
     return -1; // not found
   }
-  /**
+  /*
    * Returns a new list of the part of the receiver between <code>from</code>, inclusive, and <code>
    * to</code>, inclusive.
    *
@@ -338,7 +338,7 @@ public class IntArrayList extends AbstractIntList {
     System.arraycopy(elements, from, part, 0, to - from + 1);
     return new IntArrayList(part);
   }
-  /**
+  /*
    * Removes from the receiver all elements that are contained in the specified list. Tests for
    * identity.
    *
@@ -389,7 +389,7 @@ public class IntArrayList extends AbstractIntList {
     setSize(j);
     return modified;
   }
-  /**
+  /*
    * Replaces a number of elements in the receiver with the same number of elements of another list.
    * Replaces elements in the receiver, between <code>from</code> (inclusive) and <code>to</code>
    * (inclusive), with elements of <code>other</code>, starting from <code>otherFrom</code>
@@ -414,7 +414,7 @@ public class IntArrayList extends AbstractIntList {
       System.arraycopy(((IntArrayList) other).elements, otherFrom, elements, from, length);
     }
   }
-  /**
+  /*
    * Retains (keeps) only the elements in the receiver that are contained in the specified other
    * list. In other words, removes from the receiver all of its elements that are not contained in
    * the specified other list.
@@ -463,7 +463,7 @@ public class IntArrayList extends AbstractIntList {
     setSize(j);
     return modified;
   }
-  /**
+  /*
    * Reverses the elements of the receiver. Last becomes first, second last becomes second first,
    * and so on.
    */
@@ -480,7 +480,7 @@ public class IntArrayList extends AbstractIntList {
       theElements[j--] = tmp;
     }
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element.
    *
    * @param index index of element to replace.
@@ -494,7 +494,7 @@ public class IntArrayList extends AbstractIntList {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     elements[index] = element;
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element;
    * <b>WARNING:</b> Does not check preconditions. Provided with invalid parameters this method may
    * access invalid indexes without throwing any exception! <b>You should only use this method when
@@ -507,7 +507,7 @@ public class IntArrayList extends AbstractIntList {
   public void setQuick(int index, int element) {
     elements[index] = element;
   }
-  /**
+  /*
    * Randomly permutes the part of the receiver between <code>from</code> (inclusive) and <code>to
    * </code> (inclusive).
    *
@@ -537,7 +537,7 @@ public class IntArrayList extends AbstractIntList {
       theElements[i] = tmpElement;
     }
   }
-  /**
+  /*
    * Sorts the specified range of the receiver into ascending order.
    *
    * <p>The sorting algorithm is dynamically chosen according to the characteristics of the data
@@ -590,7 +590,7 @@ public class IntArrayList extends AbstractIntList {
       quickSortFromTo(from, to);
     }
   }
-  /**
+  /*
    * Trims the capacity of the receiver to be the receiver's current size. Releases any superfluous
    * internal memory. An application can use this operation to minimize the storage of the receiver.
    */

@@ -28,8 +28,8 @@ import junit.framework.TestCase2;
 import org.apache.log4j.Level;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestLeafSplitShortestSeparatorKey extends TestCase2 {
@@ -42,7 +42,7 @@ public class TestLeafSplitShortestSeparatorKey extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * On reflection, I suspect that this is an edge case which is simply not covered by the code. I
    * think that I can construct a unit test which will demonstrate the failure and then work out the
    * logic for the edge case.
@@ -98,32 +98,32 @@ public class TestLeafSplitShortestSeparatorKey extends TestCase2 {
 
     final BTree btree = BTree.create(new SimpleMemoryRawStore(), metadata);
 
-    btree.insert(new byte[] {1}, (byte[]) null);
+    btree.insert(new byte[] {1}, null);
     // System.out.println("----------------------");
     // assert btree.dump(Level.DEBUG,System.out);
 
-    btree.insert(new byte[] {10}, (byte[]) null);
+    btree.insert(new byte[] {10}, null);
     // System.out.println("----------------------");
     // assert btree.dump(Level.DEBUG,System.out);
 
-    btree.insert(new byte[] {20, 10}, (byte[]) null);
+    btree.insert(new byte[] {20, 10}, null);
     // System.out.println("----------------------");
     // assert btree.dump(Level.DEBUG,System.out);
 
     // causes split.
-    btree.insert(new byte[] {20}, (byte[]) null);
+    btree.insert(new byte[] {20}, null);
     System.out.println("----------------------");
     assertTrue(btree.dump(Level.DEBUG, System.out));
 
     // add to right edge of right sibling
-    btree.insert(new byte[] {20, 20}, (byte[]) null);
+    btree.insert(new byte[] {20, 20}, null);
     // remove left edge of right sibling (EQ to separator key).
     btree.remove(new byte[] {20});
     System.out.println("----------------------");
     assertTrue(btree.dump(Level.DEBUG, System.out));
 
     // insert deleted key -- causes split for existing separator key.
-    btree.insert(new byte[] {20}, (byte[]) null);
+    btree.insert(new byte[] {20}, null);
     System.out.println("----------------------");
     assertTrue(btree.dump(Level.DEBUG, System.out));
   }

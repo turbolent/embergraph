@@ -59,8 +59,8 @@ import org.apache.commons.io.input.ReaderInputStream;
 import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesParser;
 
-/**
- * An {@link PropertiesParser} for {@link Properties} objects in XML.
+/*
+* An {@link PropertiesParser} for {@link Properties} objects in XML.
  *
  * @author Bryan THompson
  */

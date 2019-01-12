@@ -31,7 +31,7 @@ public class XSDBooleanIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * DO NOT ALLOW THIS REFERENCE TO ESCAPE. SIDE EFFECTS ON ITS [cache] CAUSE PROBLEMS!
    *
    * @see BLZG-2052 XSDBooleanIV MUST NOT share the (true|false) instances as constants
@@ -39,7 +39,7 @@ public class XSDBooleanIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
   private static final transient XSDBooleanIV<EmbergraphLiteral> TRUE =
       new XSDBooleanIV<EmbergraphLiteral>(true);
 
-  /**
+  /*
    * DO NOT ALLOW THIS REFERENCE TO ESCAPE. SIDE EFFECTS ON ITS [cache] CAUSE PROBLEMS!
    *
    * @see BLZG-2052 XSDBooleanIV MUST NOT share the (true|false) instances as constants
@@ -47,7 +47,7 @@ public class XSDBooleanIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
   private static final transient XSDBooleanIV<EmbergraphLiteral> FALSE =
       new XSDBooleanIV<EmbergraphLiteral>(false);
 
-  /**
+  /*
    * Return a <strong>strong</strong> new instance of an {@link XSDBooleanIV} whose <code>cache
    * </code> is not set. This prevents the cache reference from being passed through a side-effect
    * on instances associate with different namespaces or with the headless namespace.
@@ -130,7 +130,7 @@ public class XSDBooleanIV<V extends EmbergraphLiteral> extends AbstractLiteralIV
     return false;
   }
 
-  /**
+  /*
    * Return the hash code of the byte value.
    *
    * @see Boolean#hashCode()

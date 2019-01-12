@@ -44,8 +44,8 @@ import org.embergraph.service.geospatial.IGeoSpatialQuery;
 import org.embergraph.service.geospatial.impl.GeoSpatialUtility.PointLatLon;
 import org.openrdf.model.URI;
 
-/**
- * Implementation of the {@link IGeoSpatialQuery} interface.
+/*
+* Implementation of the {@link IGeoSpatialQuery} interface.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -154,7 +154,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
     computeLowerAndUpperBoundingBoxIfNotSet();
   }
 
-  /**
+  /*
    * Private constructor, used for implementing the cloning logics. It is not safe to expose this
    * constructor to the outside: it does not calculate the boundingBoxNorthWestWithTime and
    * boundingBoxSouthEastWithTime, but expects appropriate values here as input.
@@ -219,7 +219,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
     this.upperBoundingBox = upperBoundingBox;
   }
 
-  /**
+  /*
    * Constructs a validated custom fields constraints from the parsed user input. Throws an
    * exception if the input arity does not match or is invalid (i.e., a lower bound is specified to
    * be larger than an upper bound).
@@ -398,7 +398,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
     final Object[] lowerBound = new Object[numDimensions];
     final Object[] upperBound = new Object[numDimensions];
 
-    /**
+    /*
      * In the following loop, we initialize everything but latitude and longitude, which require
      * special handling. For the latter, we just remember the indices.
      */
@@ -490,7 +490,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
       return new ArrayList<IGeoSpatialQuery>();
     }
 
-    /**
+    /*
      * From here: the query can definitely be normalized -> the next request decides whether
      * normalization is required
      */
@@ -498,7 +498,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
         && upperBoundingBox != null
         && lowerBoundingBox.eastWest > upperBoundingBox.eastWest) {
 
-      /**
+      /*
        * This case is actually valid. For instance, we may have a search range from 160 to -160,
        * which we interpret as two search ranges, namely from ]-180;-160] and [160;180].
        */
@@ -595,9 +595,8 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
         return false; // not normalized (but normalizable)
       }
 
-      if (lowerBoundingBox.northSouth > upperBoundingBox.northSouth) {
-        return false; // not normalized (actually unsatisfiable)
-      }
+      // not normalized (actually unsatisfiable)
+      return !(lowerBoundingBox.northSouth > upperBoundingBox.northSouth);
     }
 
     return true; // no violation of normalization detected, all fine
@@ -900,7 +899,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
     return datatypeConfig;
   }
 
-  /**
+  /*
    * Set the query's internal bounding box, if required. The bounding box that we compute does not
    * necessarily represent a valid query, i.e. the query in the general case requires normalization
    * in order to give valid z-order search strings later on.
@@ -970,7 +969,7 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
     } // else: no geospatial component
   }
 
-  /**
+  /*
    * Compare two values of either type Double or Long using greater-than Throws an {@link
    * GeoSpatialSearchException} if not both are of type Double or if they are not both of type Long.
    */

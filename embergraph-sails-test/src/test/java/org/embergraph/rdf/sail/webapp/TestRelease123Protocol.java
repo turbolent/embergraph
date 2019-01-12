@@ -22,8 +22,8 @@ import junit.framework.Test;
 import org.apache.http.Header;
 import org.apache.http.message.BasicHeader;
 
-/**
- * This test class exercises protocol issues (mimetypes, parameters etc) as at release 1.2.3; prior
+/*
+* This test class exercises protocol issues (mimetypes, parameters etc) as at release 1.2.3; prior
  * to addressing protocol related trac items such as 704, 697, 711
  *
  * @author jeremycarroll

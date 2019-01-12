@@ -23,8 +23,8 @@ package org.embergraph.counters.ganglia;
 
 import junit.framework.TestCase;
 
-/**
- * Unit tests for {@link HostMetricsCollector}.
+/*
+* Unit tests for {@link HostMetricsCollector}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

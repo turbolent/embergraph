@@ -22,8 +22,8 @@ package org.embergraph.rdf.sparql.ast.explainhints;
 
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
-/**
- * Explain hint indicating potential problems caused by the join order within a given join group,
+/*
+* Explain hint indicating potential problems caused by the join order within a given join group,
  * such as non-optional non-minus nodes that could not be moved in front of optionals. Such
  * constructs are often undesired and may cause performance bottlenecks.
  *

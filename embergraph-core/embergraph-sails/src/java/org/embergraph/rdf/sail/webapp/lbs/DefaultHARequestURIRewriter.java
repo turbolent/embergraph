@@ -22,14 +22,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import org.embergraph.journal.IIndexManager;
 
-/**
- * Default implementation.
+/*
+* Default implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class DefaultHARequestURIRewriter implements IHARequestURIRewriter {
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation is a NOP.
@@ -38,7 +38,7 @@ public class DefaultHARequestURIRewriter implements IHARequestURIRewriter {
   public void init(ServletConfig servletConfig, IIndexManager indexManager)
       throws ServletException {}
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation is a NOP.

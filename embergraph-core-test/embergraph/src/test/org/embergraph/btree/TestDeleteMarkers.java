@@ -27,8 +27,8 @@ import java.util.UUID;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test of basic btree operations when delete markers are maintained.
+/*
+* Test of basic btree operations when delete markers are maintained.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -174,7 +174,7 @@ public class TestDeleteMarkers extends AbstractBTreeTestCase {
             null /* filter */));
   }
 
-  /**
+  /*
    * Test that {@link BTree#remove(byte[],ITuple)} is disabled when delete markers are enabled.
    *
    * @todo test the semantics of {@link BTree#remove(byte[])}, which should be equivalent to an
@@ -204,7 +204,7 @@ public class TestDeleteMarkers extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Test verifies that {@link BTree#removeAll()} causes deletion markers to be written for each
    * undeleted entry in the B+Tree.
    *

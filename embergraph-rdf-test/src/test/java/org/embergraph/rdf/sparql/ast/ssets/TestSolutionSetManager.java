@@ -56,8 +56,8 @@ import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.embergraph.striterator.CloseableIteratorWrapper;
 import org.embergraph.striterator.Dechunkerator;
 
-/**
- * Test suite for managing named solution sets.
+/*
+* Test suite for managing named solution sets.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -146,16 +146,16 @@ public class TestSolutionSetManager extends TestCase2 {
     blobIV.setValue(valueFactory.createLiteral("bigfoo"));
 
     mockIV1 = (TermId) TermId.mockIV(VTE.LITERAL);
-    mockIV1.setValue((EmbergraphValue) valueFactory.createLiteral("red"));
+    mockIV1.setValue(valueFactory.createLiteral("red"));
 
     mockIV2 = (TermId) TermId.mockIV(VTE.LITERAL);
-    mockIV2.setValue((EmbergraphValue) valueFactory.createLiteral("blue"));
+    mockIV2.setValue(valueFactory.createLiteral("blue"));
 
     mockIV3 = (TermId) TermId.mockIV(VTE.LITERAL);
-    mockIV3.setValue((EmbergraphValue) valueFactory.createLiteral("green"));
+    mockIV3.setValue(valueFactory.createLiteral("green"));
 
     inlineIV = new XSDIntegerIV<EmbergraphLiteral>(BigInteger.valueOf(100));
-    inlineIV.setValue((EmbergraphLiteral) valueFactory.createLiteral("100", XSD.INTEGER));
+    inlineIV.setValue(valueFactory.createLiteral("100", XSD.INTEGER));
 
     inlineIV2 = XSDBooleanIV.valueOf(true);
   }
@@ -233,7 +233,7 @@ public class TestSolutionSetManager extends TestCase2 {
     assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
   }
 
-  /**
+  /*
    * Unit test for saving a two empty solutions into a named solution set and then reading it back.
    */
   public void test_putGet2() {
@@ -277,7 +277,7 @@ public class TestSolutionSetManager extends TestCase2 {
     assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
   }
 
-  /**
+  /*
    * Unit test for saving some non-empty solutions into a named solution set and then reading it
    * back.
    */
@@ -332,7 +332,7 @@ public class TestSolutionSetManager extends TestCase2 {
     assertSameSolutionsAnyOrder(flatten(in.iterator()), out);
   }
 
-  /**
+  /*
    * Unit test for saving some non-empty solutions in multiple chunks into a named solution set and
    * then reading it back.
    */
@@ -585,7 +585,7 @@ public class TestSolutionSetManager extends TestCase2 {
     assertFalse(solutionSetsManager.existsSolutions(solutionSet2));
   }
 
-  /**
+  /*
    * Flatten out the iterator into a single chunk.
    *
    * @param itr An iterator visiting solution chunks.

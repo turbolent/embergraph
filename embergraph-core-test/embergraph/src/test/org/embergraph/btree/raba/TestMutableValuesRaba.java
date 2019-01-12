@@ -25,8 +25,8 @@ package org.embergraph.btree.raba;
 import junit.framework.TestCase2;
 import org.embergraph.btree.Leaf;
 
-/**
- * Test suite for {@link MutableValuesRaba}.
+/*
+* Test suite for {@link MutableValuesRaba}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

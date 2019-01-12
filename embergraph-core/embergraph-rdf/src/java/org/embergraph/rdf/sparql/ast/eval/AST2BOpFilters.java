@@ -61,8 +61,8 @@ import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.rdf.sparql.ast.IJoinNode;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 
-/**
- * Class handles the materialization pattern for filters by adding a series of materialization steps
+/*
+* Class handles the materialization pattern for filters by adding a series of materialization steps
  * to materialize terms needed downstream.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -81,8 +81,8 @@ public class AST2BOpFilters extends AST2BOpBase {
    * and removed this method. The documentation on the general approach has
    * been moved to the delegate method (immediate below). bbt.
    */
-  //    /**
-  //     * Adds a series of materialization steps to materialize terms needed
+  //    /*
+//     * Adds a series of materialization steps to materialize terms needed
   //     * downstream.
   //     *
   //     * To materialize the variable ?term, the pipeline looks as follows:
@@ -141,7 +141,7 @@ public class AST2BOpFilters extends AST2BOpBase {
   //
   //    }
 
-  /**
+  /*
    * If the value expression that needs the materialized variables can run without a {@link
    * NotMaterializedException} then just route to the <i>rightId</i> (around the rest of the
    * materialization pipeline steps). This happens in the case of a value expression that only
@@ -206,7 +206,7 @@ public class AST2BOpFilters extends AST2BOpBase {
     return addMaterializationSteps2(left, rightId, vars, queryHints, ctx);
   }
 
-  /**
+  /*
    * Adds a series of materialization steps to materialize terms needed downstream. To materialize
    * the variable <code>?term</code>, the pipeline looks as follows:
    *
@@ -305,8 +305,8 @@ public class AST2BOpFilters extends AST2BOpBase {
 
       if (!it.hasNext()) {
 
-        /*
-         * If there are no more terms to materialize, the terminus of
+      /*
+       * If there are no more terms to materialize, the terminus of
          * this materialization pipeline is the "right" (downstream)
          * operator that was passed in.
          */
@@ -314,8 +314,8 @@ public class AST2BOpFilters extends AST2BOpBase {
 
       } else {
 
-        /*
-         * If there are more terms, the terminus of this materialization
+      /*
+       * If there are more terms, the terminus of this materialization
          * pipeline is the 1st operator of the next materialization
          * pipeline.
          */
@@ -363,8 +363,8 @@ public class AST2BOpFilters extends AST2BOpBase {
       final Predicate lexPred;
       {
 
-        /*
-         * An anonymous variable whose name is based on the variable in
+      /*
+       * An anonymous variable whose name is based on the variable in
          * the query whose Value we are trying to materialize from the
          * IV.
          */
@@ -432,7 +432,7 @@ public class AST2BOpFilters extends AST2BOpBase {
     return left;
   }
 
-  /**
+  /*
    * Use a pipeline operator which uses the chunked materialization pattern for solution sets. This
    * is similar to the pattern which is used when the IVs in the final solutions are materialized as
    * RDF Values.
@@ -476,34 +476,33 @@ public class AST2BOpFilters extends AST2BOpBase {
 
     // disable reordering of solutions for cutoff joins.
     final boolean reorderSolutions =
-        (cutoffLimit != null) ? false : PipelineJoin.Annotations.DEFAULT_REORDER_SOLUTIONS;
+        (cutoffLimit == null) && PipelineJoin.Annotations.DEFAULT_REORDER_SOLUTIONS;
 
     // disable operator parallelism for cutoff joins.
     final int maxParallel = cutoffLimit != null ? 1 : PipelineOp.Annotations.DEFAULT_MAX_PARALLEL;
 
-    return (PipelineOp)
-        applyQueryHints(
-            new ChunkedMaterializationOp(
-                leftOrEmpty(left),
-                new NV(
-                    ChunkedMaterializationOp.Annotations.VARS, vars.toArray(new IVariable[nvars])),
-                new NV(ChunkedMaterializationOp.Annotations.RELATION_NAME, new String[] {ns}),
-                new NV(ChunkedMaterializationOp.Annotations.TIMESTAMP, timestamp),
-                new NV(
-                    ChunkedMaterializationOp.Annotations.MATERIALIZE_INLINE_IVS,
-                    materializeInlineIvs),
-                new NV(
-                    PipelineOp.Annotations.SHARED_STATE,
-                    !ctx.isCluster()), // live stats, but not on the cluster.
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, reorderSolutions),
-                new NV(PipelineOp.Annotations.MAX_PARALLEL, maxParallel),
-                new NV(BOp.Annotations.BOP_ID, ctx.nextId())),
-            queryHints,
-            ctx);
+    return applyQueryHints(
+        new ChunkedMaterializationOp(
+            leftOrEmpty(left),
+            new NV(
+                ChunkedMaterializationOp.Annotations.VARS, vars.toArray(new IVariable[nvars])),
+            new NV(ChunkedMaterializationOp.Annotations.RELATION_NAME, new String[] {ns}),
+            new NV(ChunkedMaterializationOp.Annotations.TIMESTAMP, timestamp),
+            new NV(
+                ChunkedMaterializationOp.Annotations.MATERIALIZE_INLINE_IVS,
+                materializeInlineIvs),
+            new NV(
+                PipelineOp.Annotations.SHARED_STATE,
+                !ctx.isCluster()), // live stats, but not on the cluster.
+            new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, reorderSolutions),
+            new NV(PipelineOp.Annotations.MAX_PARALLEL, maxParallel),
+            new NV(BOp.Annotations.BOP_ID, ctx.nextId())),
+        queryHints,
+        ctx);
   }
 
-  //    /**
-  //     * Wrapper for handling the {@link AST2BOpContext} / {@link BOpContextBase}
+  //    /*
+//     * Wrapper for handling the {@link AST2BOpContext} / {@link BOpContextBase}
   //     * API mismatch.
   //     *
   //     * @param left
@@ -524,7 +523,7 @@ public class AST2BOpFilters extends AST2BOpBase {
   //
   //    }
 
-  /**
+  /*
    * For each filter which requires materialization steps, add the materializations steps to the
    * pipeline and then add the filter to the pipeline.
    *
@@ -610,7 +609,7 @@ public class AST2BOpFilters extends AST2BOpBase {
     return left;
   }
 
-  /**
+  /*
    * The RTO requires that we do not reorder solutions. This means that it must use an
    * un-conditional approach to variable materialization for constraints with SOMETIMES
    * materialization requirements. This has two practical impacts:
@@ -688,7 +687,7 @@ public class AST2BOpFilters extends AST2BOpBase {
     return left;
   }
 
-  /**
+  /*
    * Partition the constraints for a join into those which can (or might) be able to run attached to
    * that join and those which must (or might) need to materialize some variables before they can be
    * evaluated. Constraints which might be able to run attached to a join actually wind up both
@@ -715,7 +714,7 @@ public class AST2BOpFilters extends AST2BOpBase {
     return getJoinConstraints2(constraints, needsMaterialization, true /* conditionalRouting */);
   }
 
-  /**
+  /*
    * Partition the constraints for a join into those which can (or might) be able to run attached to
    * that join and those which must (or might) need to materialize some variables before they can be
    * evaluated. Constraints which might be able to run attached to a join actually wind up both
@@ -809,7 +808,7 @@ public class AST2BOpFilters extends AST2BOpBase {
     return joinConstraints.toArray(new IConstraint[joinConstraints.size()]);
   }
 
-  /**
+  /*
    * Convert the attached join filters into a list of {@link IConstraint}s.
    *
    * @param joinNode The {@link IJoinNode}.

@@ -26,8 +26,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Random;
 
-/**
- * Test case for {@link TestCase2}.
+/*
+* Test case for {@link TestCase2}.
  *
  * <p>Note: These tests are not very through.
  *
@@ -263,7 +263,7 @@ public class TestCase2TestCase extends TestCase2 {
     assertNull(getInnerCause(t, IOException.class));
   }
 
-  /**
+  /*
    * Does not find cause when it is on top of the stack trace and not either the desired type or a
    * subclass of the desired type.
    */
@@ -304,7 +304,7 @@ public class TestCase2TestCase extends TestCase2 {
     assertNull(getInnerCause(t, IOException.class));
   }
 
-  /**
+  /*
    * Does not find an inner cause that is neither the specified type nor a subtype of the specified
    * type.
    */
@@ -317,7 +317,7 @@ public class TestCase2TestCase extends TestCase2 {
     assertNull(getInnerCause(t, IOException.class));
   }
 
-  /**
+  /*
    * Test helper generates the binary entity read by one of the test cases above.
    *
    * @param args

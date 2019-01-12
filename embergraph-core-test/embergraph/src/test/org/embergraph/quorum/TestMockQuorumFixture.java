@@ -27,8 +27,8 @@ import org.embergraph.quorum.MockQuorumFixture.MockQuorum;
 import org.embergraph.quorum.MockQuorumFixture.MockQuorum.MockQuorumActor;
 import org.embergraph.quorum.MockQuorumFixture.MockQuorumMember;
 
-/**
- * Test suite for the {@link MockQuorumFixture}. This class is responsible for accepting quorum
+/*
+* Test suite for the {@link MockQuorumFixture}. This class is responsible for accepting quorum
  * state changes from a unit test, noting them in its internal state, and then distributing those
  * state change messages to the registered {@link MockQuorum}s for that fixture. This simulates the
  * effect of a shared {@link Quorum} state under program control.
@@ -103,7 +103,7 @@ public class TestMockQuorumFixture extends TestCase2 {
     fixture.terminate();
   }
 
-  /**
+  /*
    * A simple quorum run.
    *
    * @throws InterruptedException

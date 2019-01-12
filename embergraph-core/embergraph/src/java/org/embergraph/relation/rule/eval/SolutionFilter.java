@@ -2,8 +2,8 @@ package org.embergraph.relation.rule.eval;
 
 import org.embergraph.relation.accesspath.IElementFilter;
 
-/**
- * Resolves an {@link ISolution} to its element and delegates the filter test to an {@link
+/*
+* Resolves an {@link ISolution} to its element and delegates the filter test to an {@link
  * IElementFilter} suitable for the expected element type.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -46,8 +46,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Test suite for the {@link IChangeLog} feature.
+/*
+* Test suite for the {@link IChangeLog} feature.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  * @version $Id$
@@ -110,7 +110,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -194,7 +194,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test with a full read/write transaction.
    *
    * @throws Exception
@@ -213,7 +213,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -304,7 +304,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
     try {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -392,7 +392,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
     try {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
       cxn.setAutoCommit(false);
 
       final InMemChangeLog changeLog = new InMemChangeLog();
@@ -507,7 +507,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -618,7 +618,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
     try {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -743,7 +743,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
+      cxn = repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 

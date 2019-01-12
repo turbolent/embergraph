@@ -27,8 +27,8 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.MutableKeyBuffer;
 import org.embergraph.io.AbstractFixedByteArrayBuffer;
 
-/**
- * Implementation maintains Java objects corresponding to the persistent data and defines methods
+/*
+* Implementation maintains Java objects corresponding to the persistent data and defines methods
  * for a variety of mutations on the {@link INodeData} record which operate by direct manipulation
  * of the Java objects.
  *
@@ -40,7 +40,7 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
  */
 public class MutableNodeData implements INodeData {
 
-  /**
+  /*
    * A representation of each key in the node. Each key is a variable length unsigned byte[].
    *
    * <p>The #of keys depends on whether this is a {@link Node} or a {@link Leaf}. A leaf has one key
@@ -58,7 +58,7 @@ public class MutableNodeData implements INodeData {
    */
   final MutableKeyBuffer keys;
 
-  /**
+  /*
    * The persistent address of each child node (may be nodes or leaves). The capacity of this array
    * is m, where m is the {@link #branchingFactor}. Valid indices are in [0:nkeys+1] since nchildren
    * := nkeys+1 for a {@link Node}. The key is {@link #NULL} until the child has been persisted. The
@@ -75,7 +75,7 @@ public class MutableNodeData implements INodeData {
    */
   final long[] childAddr;
 
-  /**
+  /*
    * The #of entries spanned by this node. This value should always be equal to the sum of the
    * defined values in {@link #childEntryCounts}.
    *
@@ -92,7 +92,7 @@ public class MutableNodeData implements INodeData {
    */
   long nentries;
 
-  /**
+  /*
    * The #of entries spanned by each direct child of this node.
    *
    * <p>The appropriate element in this array is incremented on all ancestor nodes by {@link
@@ -106,19 +106,19 @@ public class MutableNodeData implements INodeData {
   /** <code>true</code> iff the B+Tree is maintaining per tuple revision timestamps. */
   final boolean hasVersionTimestamps;
 
-  /**
+  /*
    * The minimum tuple revision timestamp for any leaf spanned by this node IFF the B+Tree is
    * maintaining tuple revision timestamps.
    */
   long minimumVersionTimestamp;
 
-  /**
+  /*
    * The maximum tuple revision timestamp for any leaf spanned by this node IFF the B+Tree is
    * maintaining tuple revision timestamps.
    */
   long maximumVersionTimestamp;
 
-  /**
+  /*
    * Create an empty mutable data record.
    *
    * @param branchingFactor The branching factor for the owning B+Tree. This is used to initialize
@@ -141,7 +141,7 @@ public class MutableNodeData implements INodeData {
     minimumVersionTimestamp = maximumVersionTimestamp = 0L;
   }
 
-  /**
+  /*
    * Makes a mutable copy of the source data record.
    *
    * @param branchingFactor The branching factor for the owning B+Tree. This is used to initialize
@@ -189,7 +189,7 @@ public class MutableNodeData implements INodeData {
     if (sum != nentries) throw new RuntimeException();
   }
 
-  /**
+  /*
    * Ctor based on just the "data" -- used by unit tests.
    *
    * @param nentries
@@ -249,7 +249,7 @@ public class MutableNodeData implements INodeData {
     return nentries;
   }
 
-  /**
+  /*
    * Range check a child index.
    *
    * @param index The index of a child in [0:nkeys+1].

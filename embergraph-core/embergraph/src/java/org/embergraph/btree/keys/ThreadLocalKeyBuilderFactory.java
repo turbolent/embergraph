@@ -25,8 +25,8 @@ package org.embergraph.btree.keys;
 
 import org.embergraph.btree.IIndex;
 
-/**
- * A thread-local implementation.
+/*
+* A thread-local implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -41,7 +41,7 @@ public class ThreadLocalKeyBuilderFactory implements IKeyBuilderFactory {
     this.delegate = delegate;
   }
 
-  /**
+  /*
    * A {@link ThreadLocal} variable providing access to thread-specific instances of a {@link
    * IKeyBuilder} as configured by the delegate {@link IKeyBuilderFactory}.
    *
@@ -59,7 +59,7 @@ public class ThreadLocalKeyBuilderFactory implements IKeyBuilderFactory {
         }
       };
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Return a {@link ThreadLocal} {@link IKeyBuilder} instance configured using the {@link
@@ -81,7 +81,7 @@ public class ThreadLocalKeyBuilderFactory implements IKeyBuilderFactory {
         }
       };
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Return a {@link ThreadLocal} {@link IKeyBuilder} instance configured using the {@link

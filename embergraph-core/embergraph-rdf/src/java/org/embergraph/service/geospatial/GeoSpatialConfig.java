@@ -33,8 +33,8 @@ import org.embergraph.rdf.internal.impl.extensions.InvalidGeoSpatialDatatypeConf
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Class providing access to the GeoSpatial index configuration, including datatype definition and
+/*
+* Class providing access to the GeoSpatial index configuration, including datatype definition and
  * default datatype for querying. Initialized and used only if geospatial subsytem is used.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -91,7 +91,7 @@ public class GeoSpatialConfig implements Serializable {
 
     if (geoSpatialDatatypeConfigs == null) return; // nothing to be done
 
-    /**
+    /*
      * We expect a JSON config string of the following format (example):
      *
      * <p>{"config": { "uri": "http://my.custom.datatype2.uri", "literalSerializer":

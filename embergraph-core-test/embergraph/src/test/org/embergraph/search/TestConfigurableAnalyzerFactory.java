@@ -27,8 +27,8 @@ import org.apache.lucene.analysis.de.GermanAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.embergraph.search.ConfigurableAnalyzerFactory.AnalyzerOptions;
 
-/**
- * Unit tests for {@link ConfigurableAnalyzerFactory}. We use the same setup, as defined in {@link
+/*
+* Unit tests for {@link ConfigurableAnalyzerFactory}. We use the same setup, as defined in {@link
  * #getExtraProperties()} for all the tests. Some of the tests check whether bad combinations of
  * options are detected and reported correctly. Others check that some input, in a particular
  * language is tokenized as expected.
@@ -90,7 +90,7 @@ public class TestConfigurableAnalyzerFactory extends AbstractAnalyzerFactoryTest
 
   private void badCombo(String errorMessage, String... props) {
     // Check that some combination of properties on a language create an error
-    String myProps[] = new String[props.length + 4];
+    String[] myProps = new String[props.length + 4];
     int i = 0;
     for (; i < props.length; i += 2) {
       myProps[i] = ConfigurableAnalyzerFactory.Options.ANALYZER + "x-testme." + props[i];

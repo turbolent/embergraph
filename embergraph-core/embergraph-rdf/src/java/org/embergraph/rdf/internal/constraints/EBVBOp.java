@@ -31,8 +31,8 @@ import org.openrdf.model.Value;
 import org.openrdf.query.algebra.evaluation.ValueExprEvaluationException;
 import org.openrdf.query.algebra.evaluation.util.QueryEvaluationUtil;
 
-/**
- * Calculates the "effective boolean value" of an IValueExpression. See the SPARQL spec for details.
+/*
+* Calculates the "effective boolean value" of an IValueExpression. See the SPARQL spec for details.
  */
 public class EBVBOp extends XSDBooleanIVValueExpression implements INeedsMaterialization {
 
@@ -59,7 +59,7 @@ public class EBVBOp extends XSDBooleanIVValueExpression implements INeedsMateria
     super(op);
   }
 
-  /**
+  /*
    * 11.2.2 Effective Boolean Value (EBV)
    *
    * <p>Effective boolean value is used to calculate the arguments to the logical functions
@@ -99,7 +99,7 @@ public class EBVBOp extends XSDBooleanIVValueExpression implements INeedsMateria
       return ((XSDBooleanIV) iv).booleanValue();
     }
 
-    final Value val = super.asValue(iv);
+    final Value val = asValue(iv);
 
     try {
 
@@ -111,7 +111,7 @@ public class EBVBOp extends XSDBooleanIVValueExpression implements INeedsMateria
     }
   }
 
-  /**
+  /*
    * The {@link EBVBOp} only needs materialization if its internal value expression does not
    * evaluate to an {@link XSDBooleanIV}.
    */

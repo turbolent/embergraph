@@ -36,8 +36,8 @@ import org.embergraph.service.EmbeddedClient;
 import org.embergraph.service.EmbeddedFederation;
 import org.openrdf.rio.RDFFormat;
 
-/**
- *
+/*
+*
  *
  * <pre>
  * -server -Xmx1000m
@@ -52,7 +52,7 @@ import org.openrdf.rio.RDFFormat;
  */
 public class EDSAsyncLoader {
 
-  /**
+  /*
    * Harness may be used to load data into a {@link EmbeddedFederation} described by a property
    * file.
    *
@@ -143,7 +143,7 @@ public class EDSAsyncLoader {
 
       final AsynchronousStatementBufferFactory<EmbergraphStatement, File> statementBufferFactory =
           new AsynchronousStatementBufferFactory<EmbergraphStatement, File>(
-              (ScaleOutTripleStore) tripleStore,
+              tripleStore,
               producerChunkSize,
               valuesInitialCapacity,
               bnodesInitialCapacity,

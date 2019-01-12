@@ -28,14 +28,14 @@ import org.embergraph.counters.HistoryInstrument;
 import org.embergraph.counters.ICounter;
 import org.embergraph.counters.PeriodEnum;
 
-/**
- * Interface for selecting counters.
+/*
+* Interface for selecting counters.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface ICounterSelector {
 
-  /**
+  /*
    * Selects and returns a collection of performance counters with history.
    *
    * @param depth When GT ZERO, this specifies a constraint on the maximum depth for a counter may

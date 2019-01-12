@@ -24,8 +24,8 @@ package org.embergraph.btree.keys;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * An extension interface for encoding and decoding unsigned byte[] keys.
+/*
+* An extension interface for encoding and decoding unsigned byte[] keys.
  *
  * <p>Note: This was developed to provide backwards compatibility for the full text index with the
  * change of term identifiers from simple <code>long</code> values to variable length {@link IV}s.
@@ -38,7 +38,7 @@ import org.embergraph.striterator.IKeyOrder;
  */
 public interface IKeyBuilderExtension<V> {
 
-  /**
+  /*
    * Decode an object from an unsigned byte[] key.
    *
    * @param key The key.
@@ -47,7 +47,7 @@ public interface IKeyBuilderExtension<V> {
    */
   V decode(byte[] key, int off);
 
-  /**
+  /*
    * Return as-encoded byte length of an object.
    *
    * @param obj The object.
@@ -55,7 +55,7 @@ public interface IKeyBuilderExtension<V> {
    */
   int byteLength(V obj);
 
-  /**
+  /*
    * Encode the object.
    *
    * @param keyBuilder The object being used to encode the key.

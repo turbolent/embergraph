@@ -6,8 +6,8 @@ import org.embergraph.rdf.inf.Justification;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.striterator.IChunkedIterator;
 
-/**
- * Writes {@link Justification}s on the justification index.
+/*
+* Writes {@link Justification}s on the justification index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -23,7 +23,7 @@ public class JustificationWriter implements Callable<Long> {
   /** The #of justifications that were written on the justifications index. */
   private final AtomicLong nwritten;
 
-  /**
+  /*
    * @param dst The database on which the statements will be written.
    * @param src The source iterator.
    * @param nwritten Incremented as a side-effect for each justification actually written on the
@@ -41,7 +41,7 @@ public class JustificationWriter implements Callable<Long> {
     this.nwritten = nwritten;
   }
 
-  /**
+  /*
    * Write justifications on the justifications index.
    *
    * @return The elapsed time.

@@ -36,8 +36,8 @@ import org.embergraph.rawstore.IPSOutputStream;
 import org.embergraph.rwstore.IRawTx;
 import org.embergraph.rwstore.PSOutputStream;
 
-/**
- * The {@link AllocationContext} is used to maintain a handle on allocations made within some
+/*
+* The {@link AllocationContext} is used to maintain a handle on allocations made within some
  * specific environment (context).
  *
  * <p>In this way, clearing a context will return all allocations to the more general pool.
@@ -67,7 +67,7 @@ public class AllocationContext implements IAllocationContext, IMemoryManager { /
   /** The parent {@link IMemoryManager}. */
   private final IMemoryManager m_parent;
 
-  /**
+  /*
    * The lock used to serialize all all allocation/deallocation requests. This is shared by the
    * top-level {@link MemoryManager} to avoid lock ordering problems.
    */
@@ -75,7 +75,7 @@ public class AllocationContext implements IAllocationContext, IMemoryManager { /
 
   private final Lock readLock;
 
-  /**
+  /*
    * All addresses allocated either directly by this {@link AllocationContext} or recursively by any
    * {@link AllocationContext} created within this {@link AllocationContext}.
    */
@@ -468,8 +468,8 @@ public class AllocationContext implements IAllocationContext, IMemoryManager { /
 
   //	private SectorAllocation m_head = null;
   //
-  //	/**
-  //	 * Return the index of {@link SectorAllocator} for the given address.
+  //	/*
+//	 * Return the index of {@link SectorAllocator} for the given address.
   //	 *
   //	 * @param addr
   //	 *            The given address.
@@ -481,8 +481,8 @@ public class AllocationContext implements IAllocationContext, IMemoryManager { /
   //		return SectorAllocator.getSectorIndex(rwaddr);
   //	}
   //
-  //	/**
-  //	 * Return the bit offset into the bit map of {@link SectorAllocator} for the
+  //	/*
+//	 * Return the bit offset into the bit map of {@link SectorAllocator} for the
   //	 * given address.
   //	 *
   //	 * @param addr

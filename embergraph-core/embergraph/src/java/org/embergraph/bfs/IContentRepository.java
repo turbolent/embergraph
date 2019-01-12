@@ -2,8 +2,8 @@ package org.embergraph.bfs;
 
 import java.util.Iterator;
 
-/**
- * Document-centric interface for the {@link EmbergraphFileSystem}.
+/*
+* Document-centric interface for the {@link EmbergraphFileSystem}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -11,7 +11,7 @@ import java.util.Iterator;
  */
 public interface IContentRepository {
 
-  /**
+  /*
    * Fetch a single document object based on a URI.
    *
    * @param id the identifier of the document to fetch
@@ -19,7 +19,7 @@ public interface IContentRepository {
    */
   Document read(String id);
 
-  /**
+  /*
    * Create a new persistent document in this repository based on the metadata and content in the
    * supplied document object.
    *
@@ -28,7 +28,7 @@ public interface IContentRepository {
    */
   int create(Document document);
 
-  /**
+  /*
    * Update an existing persistent document in this repository based on the metadata and content in
    * the supplied document object. The document to be updated will be identified by the {@link
    * DocumentHeader#getId()} method.
@@ -38,7 +38,7 @@ public interface IContentRepository {
    */
   int update(Document document);
 
-  /**
+  /*
    * Delete a single document.
    *
    * @param id the identifier of the document to delete
@@ -46,7 +46,7 @@ public interface IContentRepository {
    */
   long delete(String id);
 
-  /**
+  /*
    * Delete all documents in the identified key range.
    *
    * <p>Note: If you assign identifiers using a namespace then you can use this method to rapidly
@@ -60,7 +60,7 @@ public interface IContentRepository {
    */
   long deleteAll(String fromId, String toId);
 
-  /**
+  /*
    * Return a listing of the documents and metadata about them in this repository.
    *
    * <p>Note: If you assign identifiers using a namespace then you can use this method to
@@ -74,7 +74,7 @@ public interface IContentRepository {
    */
   Iterator<? extends DocumentHeader> getDocumentHeaders(String fromId, String toId);
 
-  /**
+  /*
    * Full text search against the indexed documents.
    *
    * @param query A query.

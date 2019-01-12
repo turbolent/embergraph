@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt;
 
-/**
- * Generically reorders (permutes) arbitrary shaped data (for example, an array, three arrays, a 2-d
+/*
+* Generically reorders (permutes) arbitrary shaped data (for example, an array, three arrays, a 2-d
  * matrix, two linked lists) using an <i>in-place</i> swapping algorithm. Imagine having a couple of
  * apples. For some reason you decide to reorder them. The green one before the red one. The pale
  * one after the shiny one, etc. This class helps to do the job.
@@ -96,7 +96,7 @@ package cern.colt;
 public class GenericPermuting extends Object {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected GenericPermuting() {}
-  /**
+  /*
    * Returns the <tt>p</tt>-th permutation of the sequence <tt>[0,1,...,N-1]</tt>. A small but smart
    * and efficient routine, ported from <A
    * HREF="http://www.hep.net/wwwmirrors/cernlib/CNASDOC/shortwrups_html3/node255.html">
@@ -187,15 +187,15 @@ public class GenericPermuting extends Object {
     for (int i = N; --i >= 0; ) permutation[i] = permutation[i] - 1;
     return permutation;
   }
-  /**
+  /*
    * A non-generic variant of reordering, specialized for <tt>int[]</tt>, same semantics. Quicker
    * than generic reordering. Also for convenience (forget about the Swapper object).
    */
   public static void permute(int[] list, int[] indexes) {
-    int[] copy = (int[]) list.clone();
+    int[] copy = list.clone();
     for (int i = list.length; --i >= 0; ) list[i] = copy[indexes[i]];
   }
-  /**
+  /*
    * Deprecated. Generically reorders arbitrary shaped generic data <tt>g</tt> such that <tt>g[i] ==
    * g[indexes[i]]</tt>. (The generic data may be one array, a 2-d matrix, two linked lists or
    * whatever). This class swaps elements around, in a way that avoids stumbling over its own feet.
@@ -225,7 +225,7 @@ public class GenericPermuting extends Object {
   public static void permute(int[] indexes, cern.colt.Swapper swapper, int[] work) {
     permute(indexes, swapper, work, null);
   }
-  /**
+  /*
    * Generically reorders arbitrary shaped generic data <tt>g</tt> such that <tt>g[i] ==
    * g[indexes[i]]</tt>. (The generic data may be one array, a 2-d matrix, two linked lists or
    * whatever). This class swaps elements around, in a way that avoids stumbling over its own feet.
@@ -286,12 +286,12 @@ public class GenericPermuting extends Object {
       }
     }
   }
-  /**
+  /*
    * A non-generic variant of reordering, specialized for <tt>Object[]</tt>, same semantics. Quicker
    * than generic reordering. Also for convenience (forget about the Swapper object).
    */
   public static void permute(Object[] list, int[] indexes) {
-    Object[] copy = (Object[]) list.clone();
+    Object[] copy = list.clone();
     for (int i = list.length; --i >= 0; ) list[i] = copy[indexes[i]];
   }
 }

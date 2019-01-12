@@ -23,8 +23,8 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 
-/**
- * A {@link TupleQueryResultParserFactory} for parsers of SPARQL-1.1 JSON Tuple Query Results.
+/*
+* A {@link TupleQueryResultParserFactory} for parsers of SPARQL-1.1 JSON Tuple Query Results.
  *
  * @author Peter Ansell
  */

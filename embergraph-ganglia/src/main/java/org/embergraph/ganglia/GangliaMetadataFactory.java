@@ -40,7 +40,7 @@ public class GangliaMetadataFactory implements IGangliaMetadataFactory {
     list.add(factory);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to try each registered delegate first and then the fallback delegate specified in

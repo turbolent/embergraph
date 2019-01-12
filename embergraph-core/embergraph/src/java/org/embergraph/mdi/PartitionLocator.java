@@ -27,8 +27,8 @@ import org.embergraph.io.ShortPacker;
 import org.embergraph.service.ndx.ClientIndexView;
 import org.embergraph.util.BytesUtil;
 
-/**
- * An immutable object that may be used to locate an index partition. Instances of this class are
+/*
+* An immutable object that may be used to locate an index partition. Instances of this class are
  * stored as the values in the {@link MetadataIndex}.
  *
  * <p>Note: The {@link ISeparatorKeys#getLeftSeparatorKey()} is always equal to the key under which
@@ -69,7 +69,7 @@ public class PartitionLocator implements IPartitionMetadata, Externalizable {
   /** De-serialization constructor. */
   public PartitionLocator() {}
 
-  /**
+  /*
    * @param partitionId The unique partition identifier assigned by the {@link MetadataIndex}.
    * @param logicalDataServiceUUID The ordered array of data service identifiers on which data for
    *     this partition will be written and from which data for this partition may be read.
@@ -165,9 +165,7 @@ public class PartitionLocator implements IPartitionMetadata, Externalizable {
 
     if (rightSeparatorKey == null && o2.rightSeparatorKey != null) return false;
 
-    if (!BytesUtil.bytesEqual(rightSeparatorKey, o2.rightSeparatorKey)) return false;
-
-    return true;
+    return BytesUtil.bytesEqual(rightSeparatorKey, o2.rightSeparatorKey);
   }
 
   public String toString() {

@@ -8,12 +8,12 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.matrix;
 
-/**
- * Interface that represents a condition or procedure object: takes a single argument and returns a
+/*
+* Interface that represents a condition or procedure object: takes a single argument and returns a
  * boolean value.
  */
 public interface ObjectMatrix3DProcedure {
-  /**
+  /*
    * Applies a procedure to an argument. Optionally can return a boolean flag to inform the object
    * calling the procedure.
    *
@@ -25,8 +25,8 @@ public interface ObjectMatrix3DProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public abstract boolean apply(DoubleMatrix3D element);
-  /**
+  boolean apply(DoubleMatrix3D element);
+  /*
    * Applies a procedure to an argument. Optionally can return a boolean flag to inform the object
    * calling the procedure.
    *
@@ -38,5 +38,5 @@ public interface ObjectMatrix3DProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  public abstract boolean apply(ObjectMatrix3D element);
+  boolean apply(ObjectMatrix3D element);
 }

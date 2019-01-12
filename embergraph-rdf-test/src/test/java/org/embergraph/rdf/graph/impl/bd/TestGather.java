@@ -36,8 +36,8 @@ import org.embergraph.rdf.spo.SPO;
 import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 
-/**
- * Test class for GATHER.
+/*
+* Test class for GATHER.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -50,7 +50,7 @@ public class TestGather extends AbstractEmbergraphGraphTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Mock gather class uses a UNION for SUM to test the GATHER semantics. The gathered edge set is
    * then APPLYed to the vertex and becomes the state of that vertex.
    *
@@ -180,7 +180,7 @@ public class TestGather extends AbstractEmbergraphGraphTestCase {
 
       return true;
     }
-  };
+  }
 
   public void testGather_inEdges() throws Exception {
 
@@ -209,10 +209,8 @@ public class TestGather extends AbstractEmbergraphGraphTestCase {
     {
       final Set<Statement> expected =
           set(
-              (Statement)
-                  new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(), StatementEnum.Explicit),
-              (Statement)
-                  new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(), StatementEnum.Explicit));
+              new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(), StatementEnum.Explicit),
+              new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(), StatementEnum.Explicit));
 
       doGatherTest(EdgesEnum.OutEdges, expected, p.getMike() /* startingVertex */);
     }
@@ -221,18 +219,15 @@ public class TestGather extends AbstractEmbergraphGraphTestCase {
     {
       final Set<Statement> expected =
           set(
-              (Statement)
-                  new SPO(p.getBryan(), p.getFoafKnows(), p.getMike(), StatementEnum.Explicit),
-              (Statement)
-                  new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(), StatementEnum.Explicit),
-              (Statement)
-                  new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(), StatementEnum.Explicit));
+              new SPO(p.getBryan(), p.getFoafKnows(), p.getMike(), StatementEnum.Explicit),
+              new SPO(p.getMike(), p.getRdfType(), p.getFoafPerson(), StatementEnum.Explicit),
+              new SPO(p.getMike(), p.getFoafKnows(), p.getBryan(), StatementEnum.Explicit));
 
       doGatherTest(EdgesEnum.AllEdges, expected, p.getMike() /* startingVertex */);
     }
   }
 
-  /**
+  /*
    * Start on a known vertex. Do one iteration. Verify that the GATHER populated the data structures
    * on the mock object with the appropriate collections.
    *

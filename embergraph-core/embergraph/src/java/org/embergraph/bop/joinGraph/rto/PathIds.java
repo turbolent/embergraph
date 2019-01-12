@@ -23,8 +23,8 @@ package org.embergraph.bop.joinGraph.rto;
 
 import java.util.Arrays;
 
-/**
- * An ordered array of bop identifiers which can be used as a signature for a join path segment.
+/*
+* An ordered array of bop identifiers which can be used as a signature for a join path segment.
  * Unlike an <code>int[]</code>, instances of this class may be used safely in a hash map.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -40,7 +40,7 @@ public class PathIds {
     return ids.length;
   }
 
-  /**
+  /*
    * Convenience constructor.
    *
    * @param p A path.
@@ -50,7 +50,7 @@ public class PathIds {
     this(p.getVertexIds());
   }
 
-  /**
+  /*
    * Core constructor.
    *
    * @param ids The ordered set of vertex identifiers for some join path segment.
@@ -75,7 +75,7 @@ public class PathIds {
     return Arrays.equals(ids, ((PathIds) o).ids);
   }
 
-  /**
+  /*
    * The hash code of an edge is the hash code of the vertex with the smaller hash code X 31 plus
    * the hash code of the vertex with the larger hash code. This definition compensates for the
    * arbitrary order in which the vertices may be expressed and also recognizes that the vertex hash

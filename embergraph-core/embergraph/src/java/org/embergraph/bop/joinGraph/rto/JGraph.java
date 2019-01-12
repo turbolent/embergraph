@@ -48,8 +48,8 @@ import org.embergraph.bop.rdf.join.DataSetJoin;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpRTO;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
-/**
- * A runtime optimizer for a join graph. The {@link JoinGraph} bears some similarity to ROX (Runtime
+/*
+* A runtime optimizer for a join graph. The {@link JoinGraph} bears some similarity to ROX (Runtime
  * Optimizer for XQuery), but has several significant differences:
  *
  * <ol>
@@ -170,7 +170,7 @@ public class JGraph {
 
   private static final transient Logger log = Logger.getLogger(JGraph.class);
 
-  /**
+  /*
    * The pipeline operator for executing the RTO. This provides additional context from the AST
    * model that is necessary to handle some kinds of FILTERs (e.g., those which require conditional
    * routing patterns for chunked materialization).
@@ -180,7 +180,7 @@ public class JGraph {
   /** Vertices of the join graph. */
   private final Vertex[] V;
 
-  /**
+  /*
    * Constraints on the join graph. A constraint is applied once all variables referenced by a
    * constraint are known to be bound.
    */
@@ -209,7 +209,7 @@ public class JGraph {
     return sb.toString();
   }
 
-  /**
+  /*
    * @param joinGraph The pipeline operator that is executing the RTO. This defines the join graph
    *     (vertices, edges, and constraints) and also provides access to the AST and related metadata
    *     required to execute the join graph.
@@ -271,8 +271,8 @@ public class JGraph {
     this.sampleType = sampleType;
   }
 
-  //    /**
-  //     * Find a good join path in the data given the join graph. The join path is
+  //    /*
+//     * Find a good join path in the data given the join graph. The join path is
   //     * not guaranteed to be the best join path (the search performed by the
   //     * runtime optimizer is not exhaustive) but it should always be a "good"
   //     * join path and may often be the "best" join path.
@@ -317,7 +317,7 @@ public class JGraph {
   //
   //    }
 
-  /**
+  /*
    * Find a good join path in the data given the join graph. The join path is not guaranteed to be
    * the best join path (the search performed by the runtime optimizer is not exhaustive) but it
    * should always be a "good" join path and may often be the "best" join path.
@@ -435,8 +435,8 @@ public class JGraph {
           break;
         }
 
-        /*
-         * Show information about the paths and the paths that are
+      /*
+       * Show information about the paths and the paths that are
          * experiencing cardinality underflow.
          */
 
@@ -505,8 +505,8 @@ public class JGraph {
 
         if (p.edgeSample.isUnderflow()) {
 
-          /*
-           * Skip paths with cardinality estimate underflow. They are
+        /*
+       * Skip paths with cardinality estimate underflow. They are
            * not fully tested in the data since no solutions have made
            * it through all of the joins.
            */
@@ -549,7 +549,7 @@ public class JGraph {
     return selectedPath;
   }
 
-  /**
+  /*
    * Return a permutation vector which may be used to reorder the given {@link IPredicate}[] into
    * the evaluation order selected by the runtime query optimizer.
    *
@@ -588,7 +588,7 @@ public class JGraph {
     return order;
   }
 
-  /**
+  /*
    * Choose the starting vertices.
    *
    * @param nedges The maximum #of edges to choose.
@@ -611,7 +611,7 @@ public class JGraph {
     return tmp.toArray(new Path[tmp.size()]);
   }
 
-  /**
+  /*
    * Choose up to <i>nedges</i> edges to be the starting point. For each of the <i>nedges</i> lowest
    * cardinality edges, the starting vertex will be the vertex with the lowest cardinality for that
    * edge.
@@ -705,7 +705,7 @@ public class JGraph {
     return paths_t0;
   }
 
-  /**
+  /*
    * Resample the initial vertices for the specified join paths and then resample the cutoff join
    * for each given join path in path order.
    *
@@ -826,7 +826,7 @@ public class JGraph {
     return nunderflow;
   }
 
-  /**
+  /*
    * Resample the edges along a join path. Edges are resampled based on the desired cutoff limit and
    * only as necessary.
    *
@@ -883,8 +883,8 @@ public class JGraph {
 
         if (priorEdgeSample == null) {
 
-          /*
-           * This is the first edge in the path.
+        /*
+       * This is the first edge in the path.
            *
            * Test our local table of join path segment estimates to
            * see if we have already re-sampled that edge. If not, then
@@ -895,8 +895,8 @@ public class JGraph {
 
           if (edgeSample == null) {
 
-            /*
-             * Re-sample the 1st edge in the join path, updating the
+          /*
+       * Re-sample the 1st edge in the join path, updating the
              * sample on the edge as a side-effect. The cutoff
              * sample is based on the vertex sample for the minimum
              * cardinality vertex.
@@ -922,15 +922,15 @@ public class JGraph {
 
         } else {
 
-          /*
-           * The path segment is at least 3 vertices long.
+        /*
+       * The path segment is at least 3 vertices long.
            */
           assert ids.length() >= 3;
 
           if (edgeSample == null) {
 
-            /*
-             * This is some N-step edge in the path, where N is
+          /*
+       * This is some N-step edge in the path, where N is
              * greater than ONE (1). The source vertex is the vertex
              * which already appears in the prior edges of this join
              * path. The target vertex is the next vertex which is
@@ -976,7 +976,7 @@ public class JGraph {
     }
   }
 
-  /**
+  /*
    * Do one breadth first expansion. In each breadth first expansion we extend each of the active
    * join paths by one vertex for each remaining vertex which enjoys a constrained join with that
    * join path. In the event that there are no remaining constrained joins, we will extend the join
@@ -1097,7 +1097,7 @@ public class JGraph {
     return paths_tp1_pruned;
   }
 
-  /**
+  /*
    * Task expands a path by one edge into one or more new paths.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1106,7 +1106,7 @@ public class JGraph {
 
     private final QueryEngine queryEngine;
     private final Path x;
-    /**
+    /*
      * Note: The collection provided by the caller MUST be thread-safe since this task will be run
      * by parallel threads over the different join paths from the last round. There will not be any
      * conflict over writes on this map since each {@link PathIds} instance resulting from the
@@ -1177,8 +1177,8 @@ public class JGraph {
             tVertex.pred, // vertex
             C // constraints
             )) {
-          /*
-           * Vertex does not share variables either directly
+        /*
+       * Vertex does not share variables either directly
            * or indirectly.
            */
           if (log.isTraceEnabled())
@@ -1215,16 +1215,16 @@ public class JGraph {
 
       if (tmp.isEmpty()) {
 
-        /*
-         * No constrained joins were identified as extensions of this
+      /*
+       * No constrained joins were identified as extensions of this
          * join path, so we must consider edges which represent fully
          * unconstrained joins.
          */
 
         assert !nothingShared.isEmpty();
 
-        /*
-         * Choose any vertex from the set of those which do
+      /*
+       * Choose any vertex from the set of those which do
          * not share any variables with the join path. Since
          * all of these are fully unconstrained joins we do
          * not want to expand the join path along multiple
@@ -1256,7 +1256,7 @@ public class JGraph {
     }
   }
 
-  /**
+  /*
    * Return the {@link Vertex} whose {@link IPredicate} is associated with the given {@link
    * BOp.Annotations#BOP_ID}.
    *
@@ -1270,7 +1270,7 @@ public class JGraph {
     return null;
   }
 
-  /**
+  /*
    * Obtain a sample and estimated cardinality (fast range count) for each vertex.
    *
    * @param queryEngine The query engine.
@@ -1298,7 +1298,7 @@ public class JGraph {
     sampleVertices(queryEngine, vertexLimit);
   }
 
-  /**
+  /*
    * (Re-)sample a set of vertices. Sampling is done in parallel.
    *
    * <p>Note: A request to re-sample a vertex is a NOP unless the limit has been increased since the
@@ -1359,7 +1359,7 @@ public class JGraph {
     }
   }
 
-  /**
+  /*
    * Task to sample a vertex.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1392,7 +1392,7 @@ public class JGraph {
     }
   }
 
-  /**
+  /*
    * Estimate the cardinality of each edge. This is only invoked by {@link #round0(QueryEngine, int,
    * int)} when it is trying to select the minimum cardinality edges which it will use to create the
    * initial set of join paths from which the exploration will begin.
@@ -1430,8 +1430,8 @@ public class JGraph {
 
       if (v1.sample == null) {
 
-        /*
-         * We can only estimate the cardinality of edges connecting
+      /*
+       * We can only estimate the cardinality of edges connecting
          * vertices for which samples were obtained.
          */
 
@@ -1444,16 +1444,16 @@ public class JGraph {
 
         if (v2.sample == null) {
 
-          /*
-           * We can only estimate the cardinality of edges connecting
+        /*
+       * We can only estimate the cardinality of edges connecting
            * vertices for which samples were obtained.
            */
 
           continue;
         }
 
-        /*
-         * Figure out which vertex has the smaller cardinality. The sample
+      /*
+       * Figure out which vertex has the smaller cardinality. The sample
          * of that vertex is used since it is more representative than the
          * sample of the other vertex.
          */
@@ -1469,8 +1469,8 @@ public class JGraph {
 
         if (!PartitionedJoinGroup.canJoinUsingConstraints(new IPredicate[] {v.pred}, vp.pred, C)) {
 
-          /*
-           * If there are no shared variables, either directly or
+        /*
+       * If there are no shared variables, either directly or
            * indirectly via the constraints, then we can not use this
            * as an initial edge.
            *
@@ -1519,7 +1519,7 @@ public class JGraph {
     return paths.toArray(new Path[paths.size()]);
   }
 
-  /**
+  /*
    * Cutoff sample an initial join path consisting of two vertices.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1569,7 +1569,7 @@ public class JGraph {
     }
   }
 
-  /**
+  /*
    * Prune paths which are dominated by other paths. Paths are extended in each round. Paths from
    * previous rounds are always pruned. Of the new paths in each round, the following rule is
    * applied to prune the search to just those paths which are known to dominate the other paths
@@ -1604,8 +1604,8 @@ public class JGraph {
       final Path Pi = a[i];
       if (Pi.edgeSample == null) throw new RuntimeException("Not sampled: " + Pi);
       if (Pi.vertices.length < maxPathLen) {
-        /*
-         * Only the most recently generated set of paths survive to
+      /*
+       * Only the most recently generated set of paths survive to
          * the next round.
          */
         pruned.add(Pi);
@@ -1703,8 +1703,8 @@ public class JGraph {
 
         if (!found) {
 
-          /*
-           * Clear sample no longer in use.
+        /*
+       * Clear sample no longer in use.
            *
            * Note: In fact, holding onto the sample metadata is
            * relatively cheap if there was a reason to do so (it only
@@ -1731,7 +1731,7 @@ public class JGraph {
     return b;
   }
 
-  /**
+  /*
    * Comma delimited table showing the estimated join hit ratio, the estimated cardinality, and the
    * set of vertices for each of the specified join paths.
    *
@@ -1743,7 +1743,7 @@ public class JGraph {
     return showTable(a, null /* pruned */);
   }
 
-  /**
+  /*
    * Return a comma delimited table showing the estimated join hit ratio, the estimated cardinality,
    * and the set of vertices for each of the specified join paths.
    *
@@ -1757,7 +1757,7 @@ public class JGraph {
     return showTable(a, pruned, null /* edgeSamples */);
   }
 
-  /**
+  /*
    * Return a comma delimited table showing the estimated join hit ratio, the estimated cardinality,
    * and the set of vertices for each of the specified join paths.
    *
@@ -1867,7 +1867,7 @@ public class JGraph {
     return sb.toString();
   }
 
-  /**
+  /*
    * Show the details of a join path, including the estimated cardinality and join hit ratio for
    * each step in the path.
    *
@@ -1930,8 +1930,8 @@ public class JGraph {
                                                                                           // %10s",
               predId, NA, "", NA, NA, NA, NA, NA, NA, NA, NA, NA, "", NA, NA); // ,NA,NA);
         } else if (sample instanceof VertexSample) {
-          /*
-           * Show the vertex sample for the initial vertex.
+        /*
+       * Show the vertex sample for the initial vertex.
            *
            * Note: we do not store all fields for a vertex sample
            * which are stored for an edge sample because so many of

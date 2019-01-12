@@ -15,29 +15,29 @@ Copyright (C) SYSTAP, LLC 2006-2012.  All rights reserved.
 */
 package org.embergraph.rdf.graph;
 
-/**
- * Typesafe enumeration of manner in which an RDF graph will be traversed by an {@link IGASProgram}
+/*
+* Typesafe enumeration of manner in which an RDF graph will be traversed by an {@link IGASProgram}
  * based on its {@link EdgesEnum}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public enum TraversalDirectionEnum {
 
-  /**
+  /*
    * Directed traversal along the natural direction of the RDF statements (from Subject to Object).
    */
   Forward,
-  /**
+  /*
    * Directed traversal along the reverse direction of the RDF statements (from Object to Subject).
    */
   Reverse,
-  /**
+  /*
    * Undirected traversal - edges are explored in both the {@link #Forward} and the {@link #Reverse}
    * direction.
    */
   Undirected;
 
-  /**
+  /*
    * Interpret the given {@link EdgesEnum}, returning the effective value required to impose the
    * semantics of this {@link TraversalDirectionEnum}.
    *

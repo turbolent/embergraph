@@ -54,22 +54,22 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriterRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
-/**
- * Demonstrate how to use embergraph. You are free to use this code for whatever purpose without
+/*
+* Demonstrate how to use embergraph. You are free to use this code for whatever purpose without
  * restriction.
  *
  * @author mikep
  */
 public class SampleCode {
 
-  /**
+  /*
    * Do you have log4j set up correctly? Embergraph turns its logging level way down by default
    * (WARN). You should not be seeing INFO or DEBUG log statements from embergraph - if you are,
    * then this will severely impact performance.
    */
   protected static final Logger log = Logger.getLogger(SampleCode.class);
 
-  /**
+  /*
    * Load a Properties object from a file.
    *
    * @param resource
@@ -83,7 +83,7 @@ public class SampleCode {
     return p;
   }
 
-  /**
+  /*
    * Add a statement to a repository.
    *
    * @param repo
@@ -109,7 +109,7 @@ public class SampleCode {
     }
   }
 
-  /**
+  /*
    * Load a document into a repository.
    *
    * @param repo
@@ -138,7 +138,7 @@ public class SampleCode {
     }
   }
 
-  /**
+  /*
    * Read some statements from a repository.
    *
    * @param repo
@@ -189,7 +189,7 @@ public class SampleCode {
     }
   }
 
-  /**
+  /*
    * Execute a "select" query.
    *
    * @param repo
@@ -228,7 +228,7 @@ public class SampleCode {
     }
   }
 
-  /**
+  /*
    * Execute a "construct" query.
    *
    * @param repo
@@ -269,7 +269,7 @@ public class SampleCode {
     }
   }
 
-  /**
+  /*
    * Demonstrate execution of a free-text query.
    *
    * @param repo
@@ -309,7 +309,7 @@ public class SampleCode {
     return true;
   }
 
-  /**
+  /*
    * Demonstrate execution of statement level provenance.
    *
    * @param repo
@@ -388,7 +388,7 @@ public class SampleCode {
     return true;
   }
 
-  /**
+  /*
    * Demonstrate execution of historical query using a read-only transaction.
    *
    * <p>Note: Embergraph preserves historical commit points until their release age expires. This
@@ -485,7 +485,7 @@ public class SampleCode {
     }
   }
 
-  /**
+  /*
    * Run a simple LUBM load and query benchmark.
    *
    * @param lubmResource the ZIP file containing the LUBM data files
@@ -640,7 +640,7 @@ public class SampleCode {
     return new InputStreamReader(new BufferedInputStream(is));
   }
 
-  /**
+  /*
    * Are you running with the -server JVM option? You should be. Also, try increasing heap size with
    * -Xmx512m or even -Xmx1024m if you have enough RAM.
    *
@@ -661,8 +661,8 @@ public class SampleCode {
       final Properties properties = sampleCode.loadProperties(propertiesFile);
 
       if (properties.getProperty(org.embergraph.journal.Options.FILE) == null) {
-        /*
-         * Create a backing file iff none was specified in the
+      /*
+       * Create a backing file iff none was specified in the
          * properties file.
          */
         final File journal = File.createTempFile("embergraph", ".jnl");

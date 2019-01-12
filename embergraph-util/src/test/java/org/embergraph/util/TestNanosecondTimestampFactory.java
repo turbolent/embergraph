@@ -23,8 +23,8 @@ package org.embergraph.util;
 
 import junit.framework.TestCase;
 
-/**
- * Test suite for {@link NanosecondTimestampFactory}.
+/*
+* Test suite for {@link NanosecondTimestampFactory}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -38,7 +38,7 @@ public class TestNanosecondTimestampFactory extends TestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Test determines whether nano times are always distinct from the last generated nanos time (as
    * assigned by {@link System#nanoTime()}.
    *
@@ -79,7 +79,7 @@ public class TestNanosecondTimestampFactory extends TestCase {
     System.err.println("Minimum difference in nanos is " + minDiff + " over " + limit + " trials");
   }
 
-  /**
+  /*
    * Test verifies that nano times are always distinct from the last generated nanos time (as
    * assigned by {@link NanosecondTimestampFactory#nextNanoTime()}.
    */

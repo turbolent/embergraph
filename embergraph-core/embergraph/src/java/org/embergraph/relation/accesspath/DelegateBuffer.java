@@ -23,8 +23,8 @@ package org.embergraph.relation.accesspath;
 
 import java.util.concurrent.Future;
 
-/**
- * A delegation pattern which does not pass on the {@link #close()} method.
+/*
+* A delegation pattern which does not pass on the {@link #close()} method.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

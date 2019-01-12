@@ -45,8 +45,8 @@ import org.embergraph.relation.rule.IQueryOptions;
 import org.embergraph.relation.rule.IRule;
 import org.embergraph.util.InnerCause;
 
-/**
- * A buffer that will block when it is full. You write elements on the buffer and they can be read
+/*
+* A buffer that will block when it is full. You write elements on the buffer and they can be read
  * using {@link #iterator()}. This class is safe for concurrent writes (multiple threads can use
  * {@link #add(Object)}) but the {@link #iterator()} is not thread-safe (it assumes a single
  * reader).
@@ -72,21 +72,21 @@ import org.embergraph.util.InnerCause;
  */
 public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
-  /**
+  /*
    * Warning messages are emitted if either the producer or the consumer is stalled. When {@link
    * Logger#isInfoEnabled()} is <code>true</code>, those log messages will be include stack traces
    * which can help to identify the the consumer or producer.
    */
   protected static final Logger log = Logger.getLogger(BlockingBuffer.class);
 
-  /**
+  /*
    * The initial delay before we will log a warning for {@link #add(Object)} and {@link
    * BlockingBuffer.BlockingIterator#hasNext(long, TimeUnit)}.
    */
   private static final long initialLogTimeout =
       TimeUnit.NANOSECONDS.convert(2000L, TimeUnit.MILLISECONDS);
 
-  /**
+  /*
    * The maximum timeout before we log the next warning for {@link #add(Object)} and {@link
    * BlockingBuffer.BlockingIterator#hasNext(long, TimeUnit)}. The log timeout will double after
    * each warning logged up to this maximum.
@@ -94,7 +94,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
   private static final long maxLogTimeout =
       TimeUnit.NANOSECONDS.convert(10000L, TimeUnit.MILLISECONDS);
 
-  /**
+  /*
    * The #of times that we will use {@link BlockingQueue#offer(Object)} or before converting to the
    * variant of that method which accept a timeout. The timeouts are used to reduce the contention
    * for the queue if either the consumer is lagging.
@@ -102,7 +102,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
   private static final int NSPIN_ADD =
       Integer.valueOf(System.getProperty(BlockingBuffer.class.getName() + ".NSPIN.ADD", "100"));
 
-  /**
+  /*
    * The #of times that we will use {@link Queue#poll()} before converting to the variant of that
    * method which accept a timeout. The timeouts are used to reduce the contention for the queue if
    * either the producer is lagging.
@@ -110,7 +110,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
   private static final int NSPIN_READ =
       Integer.valueOf(System.getProperty(BlockingBuffer.class.getName() + ".NSPIN.READ", "100"));
 
-  /**
+  /*
    * The timeout for offer() or poll() as a function of the #of tries that have already been made to
    * {@link #add(Object)} or read a chunk.
    *
@@ -125,7 +125,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
   /** <code>true</code> until the buffer is {@link #close()}ed. */
   private volatile boolean open = true;
 
-  /**
+  /*
    * Lock used to make {@link BlockingIterator#_hasNext(long)} atomic with respect to {@link
    * #add(Object, long, TimeUnit)} when the buffer has been closed.
    */
@@ -140,7 +140,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
   /** The singleton for the iterator used to read from this buffer. */
   private final IAsynchronousIterator<E> iterator;
 
-  /**
+  /*
    * The default capacity for the internal {@link Queue} on which elements (or chunks of elements)
    * are buffered.
    */
@@ -149,7 +149,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
   /** The default minimum chunk size for the chunk combiner. */
   public static final transient int DEFAULT_MINIMUM_CHUNK_SIZE = 100; // 10000;
 
-  /**
+  /*
    * The default timeout in milliseconds during which chunks of elements may be combined in order to
    * satisfy the desired minimum chunk size.
    */
@@ -159,14 +159,14 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
   public static final transient TimeUnit DEFAULT_CONSUMER_CHUNK_TIMEOUT_UNIT =
       TimeUnit.MILLISECONDS;
 
-  /**
+  /*
    * The desired minimum chunk size for the chunk combiner.
    *
    * @see #DEFAULT_MINIMUM_CHUNK_SIZE
    */
   private final int minimumChunkSize;
 
-  /**
+  /*
    * The desired minimum chunk size for the chunk combiner.
    *
    * @see #DEFAULT_MINIMUM_CHUNK_SIZE
@@ -176,7 +176,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return minimumChunkSize;
   }
 
-  /**
+  /*
    * The maximum time to wait in nanoseconds for another chunk to come along so that we can combine
    * it with the current chunk for {@link #next()}. A value of ZERO(0) disables chunk combiner.
    *
@@ -184,7 +184,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
    */
   private final long chunkTimeout;
 
-  /**
+  /*
    * The maximum time to wait in nanoseconds for another chunk to come along so that we can combine
    * it with the current chunk for {@link #next()}. A value of ZERO(0) disables chunk combiner.
    *
@@ -195,7 +195,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return chunkTimeout;
   }
 
-  /**
+  /*
    * <code>true</code> iff the data in the buffered are chunks of elements presented in their
    * natural sort order. When <code>true</code>, the {@link BlockingIterator} will apply a merge
    * sort if it combines chunks so that the combined chunk remains in the natural order for the
@@ -218,7 +218,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     }
   }
 
-  /**
+  /*
    * The {@link Future} of the producer feeding the {@link BlockingBuffer}.
    *
    * @return The {@link Future} -or- <code>null</code> if no {@link Future} has been set.
@@ -240,7 +240,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     this(DEFAULT_PRODUCER_QUEUE_CAPACITY);
   }
 
-  /**
+  /*
    * Ctor automatically provisions an appropriate {@link BlockingQueue}.
    *
    * @param capacity The capacity of the buffer. When the generic type <i>&lt;E&gt;</i> is an array
@@ -257,7 +257,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
         DEFAULT_CONSUMER_CHUNK_TIMEOUT_UNIT);
   }
 
-  /**
+  /*
    * @param capacity The capacity of the buffer. When the generic type <i>&lt;E&gt;</i> is an array
    *     type, then this is the <i>chunkOfChunksCapacity</i> and small chunks will be automatically
    *     combined based on availability and latency. When zero (0) a {@link SynchronousQueue} will
@@ -289,7 +289,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
         );
   }
 
-  /**
+  /*
    * Core ctor.
    *
    * @param queue The queue on which elements will be buffered. Elements will be {@link #add(Object)
@@ -364,7 +364,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     }
   }
 
-  /**
+  /*
    * When <code>true</code>, this will issue some annoying warnings that can be used to identify
    * slow consumers or fast producers.
    *
@@ -373,7 +373,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
    */
   private static final boolean producerConsumerWarnings = false;
 
-  /**
+  /*
    * Label for messages displaying the stack frame within which the {@link BlockingBuffer} was
    * allocated.
    *
@@ -382,7 +382,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
   private static final transient String MSG_ALLOCATION_STACK_FRAME =
       "Buffer Allocation Stack Frame";
 
-  /**
+  /*
    * Label for messages displaying the stack frame within which the {@link BlockingBuffer} was
    * {@link #close() closed}.
    *
@@ -390,25 +390,25 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
    */
   private static final transient String MSG_CLOSED_STACK_FRAME = "Buffer Closed Stack Frame";
 
-  /**
+  /*
    * Label for messages displaying the stack frame of the producer writing on the {@link
    * BlockingBuffer} using {@link #add(Object)}.
    */
   private static final transient String MSG_PRODUCER_STACK_FRAME = "Buffer Producer Stack Frame";
 
-  /**
+  /*
    * Label for messages displaying the stack frame of the consumer draining the {@link
    * BlockingBuffer} using the {@link BlockingIterator}.
    */
   private static final transient String MSG_CONSUMER_STACK_FRAME = "Buffer Consumer Stack Frame";
 
-  /**
+  /*
    * Stack frame where the buffer was allocated. This is allocated iff {@link
    * Logger#isInfoEnabled()} is <code>true</code> for {@link #log}.
    */
   private RuntimeException openStackFrame;
 
-  /**
+  /*
    * Stack frame where the buffer was closed. This is allocated iff {@link Logger#isInfoEnabled()}
    * is <code>true</code> for {@link #log}.
    */
@@ -453,7 +453,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return sb.toString();
   }
 
-  /**
+  /*
    * @throws BufferClosedException if the buffer is not open. The cause will be set if {@link
    *     #abort(Throwable)} was used.
    */
@@ -463,16 +463,16 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
       if (openStackFrame != null) {
 
-        /*
-         * Purely for debugging.
+      /*
+       * Purely for debugging.
          */
 
         log.warn(openStackFrame);
       }
       if (closeStackFrame != null) {
 
-        /*
-         * Purely for debugging.
+      /*
+       * Purely for debugging.
          */
 
         log.warn(closeStackFrame);
@@ -492,7 +492,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return queue.isEmpty();
   }
 
-  /**
+  /*
    * This reports the #of items in the queue.
    *
    * @see #getElementsOnQueueCount()
@@ -512,7 +512,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return ordered;
   }
 
-  /**
+  /*
    * Closes the {@link BlockingBuffer} such that it will not accept new
    * elements (this is a NOP if unless the buffer is open). Once the buffer is
    * closed, the {@link BlockingIterator} will drain any elements remaining in
@@ -558,7 +558,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     }
   }
 
-  /**
+  /*
    * Clear the backing queue.
    *
    * @throws IllegalStateException If the buffer is open.
@@ -594,20 +594,20 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     }
   }
 
-  /**
+  /*
    * The #of chunks {@link #add(Object)ed} to the buffer. This will be ZERO unless the generic type
    * of the buffer is an array type.
    */
   private long chunksAddedCount = 0L;
 
-  /**
+  /*
    * The #of elements {@link #add(Object)ed} to the buffer. When the generic type of the buffer is
    * an array type, this will be the sum of the length of the arrays {@link #add(Object)ed} to the
    * buffer.
    */
   private long elementsAddedCount = 0L;
 
-  /**
+  /*
    * The #of elements on the queue. When the queue uses a scalar element type this will track the
    * {@link #size()} very closely. However, when the queue uses an array element type, this will be
    * the sum of the #of elements across all arrays on the queue.
@@ -620,7 +620,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
   /** The #of elements read so far from the iterator (aka drained from the buffer). */
   private long elementsDrainedCount = 0L;
 
-  /**
+  /*
    * The #of chunks {@link #add(Object)ed} to the buffer. This will be ZERO unless the generic type
    * of the buffer is an array type.
    */
@@ -629,7 +629,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return chunksAddedCount;
   }
 
-  /**
+  /*
    * The #of elements {@link #add(Object)ed} to the buffer. When the generic type of the buffer is
    * an array type, this will be the sum of the length of the arrays {@link #add(Object)ed} to the
    * buffer.
@@ -639,7 +639,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return elementsAddedCount;
   }
 
-  /**
+  /*
    * The #of elements on the queue. When the queue uses a scalar element type this will track the
    * {@link #size()} very closely. However, when the queue uses an array element type, this will be
    * the sum of the #of elements across all arrays on the queue.
@@ -649,7 +649,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return elementsOnQueueCount.get();
   }
 
-  /**
+  /*
    * @throws BufferClosedException if the buffer has been {@link #close()}d.
    * @throws RuntimeException if the caller's {@link Thread} is interrupted. The {@link
    *     RuntimeException} will wrap the {@link InterruptedException} as its cause.
@@ -660,8 +660,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
       if (!add(e, Long.MAX_VALUE, TimeUnit.NANOSECONDS)) {
 
-        /*
-         * Note: with an infinite timeout, the add should always
+      /*
+       * Note: with an infinite timeout, the add should always
          * succeed. A false return indicates a problem.
          */
 
@@ -674,7 +674,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     }
   }
 
-  /**
+  /*
    * This method provides a non-blocking feature to combine chunks when they are added to an
    * internal {@link BlockingDeque}. The feature is enabled iff the elements are an array type
    * (chunks) and a {@link BlockingDeque} was specified via the constructor. The purpose of this is
@@ -744,8 +744,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         if (((Object[]) t).length + ((Object[]) e).length <= minimumChunkSize) {
 
-          /*
-           * Combine chunks.
+        /*
+       * Combine chunks.
            *
            * Note: The order of the elements in the resulting array
            * maintains their queuing order. Since [t] was on the
@@ -754,8 +754,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
           t = combineChunks(t, e);
 
           if (ordered) {
-            /*
-             * Maintain the natural order within the
+          /*
+       * Maintain the natural order within the
              * combined chunk using an in place merge
              * sort.
              */
@@ -796,7 +796,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return false;
   }
 
-  /**
+  /*
    * Add element to the buffer.
    *
    * @param e The element.
@@ -857,16 +857,16 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         try {
 
-          /*
-           * Note: This is done inside of the loop so that we will
+        /*
+       * Note: This is done inside of the loop so that we will
            * notice if the buffer is closed asynchronously. Otherwise
            * we would just spin forever once we made it past the guard
            * the first time.
            */
           assertOpen();
 
-          /*
-           * Consider combining with the last element on the queue
+        /*
+       * Consider combining with the last element on the queue
            * only the first time through. If it does not work, then
            * trying again will only waste CPU.
            */
@@ -885,8 +885,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
             didCombine = true;
           } // not a dequeue or not an array type (fall through).
 
-          /*
-           * Note: This is basically a spin lock, though offer(e) does
+        /*
+       * Note: This is basically a spin lock, though offer(e) does
            * acquire a lock internally. If we have spun enough times,
            * then we will use staged timeouts for subsequent offer()s.
            * This allows the consumer to catch up with less contention
@@ -949,8 +949,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
                         + this;
 
                 if (log.isInfoEnabled() && logTimeout > maxLogTimeout) {
-                  /*
-                   * Issue warning with stack trace showing who is
+                /*
+       * Issue warning with stack trace showing who is
                    * blocked.
                    */
                   log.warn(msg, new RuntimeException(MSG_PRODUCER_STACK_FRAME));
@@ -1006,7 +1006,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
   }
 
-  /**
+  /*
    * The iterator is NOT thread-safe and does NOT support remove().
    *
    * <p>Note: If the {@link IAsynchronousIterator} is {@link ICloseableIterator#close()}d before the
@@ -1032,7 +1032,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     return iterator;
   }
 
-  /**
+  /*
    * An inner class that reads from the buffer. This is not thread-safe - it makes no attempt to be
    * atomic in its operations in {@link #hasNext()} or {@link #next()}.
    *
@@ -1041,7 +1041,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
    */
   protected class BlockingIterator implements IAsynchronousIterator<E> {
 
-    /**
+    /*
      * <code>true</code> iff this iterator is open - it is closed when the thread consuming the
      * iterator decides that it is done with the iterator.
      *
@@ -1057,7 +1057,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
      */
     private boolean open = true;
 
-    /**
+    /*
      * The next element to be returned (from the head of the queue).
      *
      * <p>Note: We use {@link #nextE} because {@link BlockingQueue} does not offer a method in which
@@ -1092,8 +1092,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       if (log.isInfoEnabled()) log.info("Starting iterator.");
     }
 
-    //        /**
-    //         * @throws IllegalStateException
+    //        /*
+//         * @throws IllegalStateException
     //         *             if the {@link BlockingBuffer#abort(Throwable)} was
     //         *             invoked asynchronously.
     //         */
@@ -1117,7 +1117,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       open = false;
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * @see BlockingBuffer#iterator()
@@ -1128,8 +1128,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
       if (future == null) {
 
-        /*
-         * Note: The future is not always set. For example, when a Join
+      /*
+       * Note: The future is not always set. For example, when a Join
          * Task creates a BlockingBuffer for each sink there is an
          * inversion of control. The JoinTask is populating the
          * BlockingBuffer in its own thread(s) while the sink is
@@ -1141,8 +1141,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         if (log.isInfoEnabled()) {
 
-          /*
-           * Purely for debugging.
+        /*
+       * Purely for debugging.
            */
 
           final String msg = "Future not set: " + this;
@@ -1159,14 +1159,14 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         if (log.isInfoEnabled()) {
 
-          /*
-           * Log @ WARN with a stack trace so that you can see who
+        /*
+       * Log @ WARN with a stack trace so that you can see who
            * closed the iterator.
            */
           log.warn(this, new RuntimeException("Cancelling future: " + future));
 
-          /*
-           * Note: I have taken out this warning message since it is a
+        /*
+       * Note: I have taken out this warning message since it is a
            * common enough event and nothing to be concerned about. It
            * is just the relative timing and source of the buffer
            * close event. If the Iterator (consumer) is closed first,
@@ -1188,8 +1188,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         }
 
-        /*
-         * Note: Cancelling the Future may cause a
+      /*
+       * Note: Cancelling the Future may cause a
          * ClosedByInterruptException to be thrown. That will be noticed
          * by checkFuture(), which logs this @ INFO..
          */
@@ -1197,8 +1197,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       }
     }
 
-    //        /**
-    //         * <code>true</code> iff the {@link Future} has been set and
+    //        /*
+//         * <code>true</code> iff the {@link Future} has been set and
     //         * {@link Future#isDone()} returns <code>true</code>.
     //         */
     //        public boolean isFutureDone() {
@@ -1207,7 +1207,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     //
     //        }
 
-    /**
+    /*
      * Checks the {@link BlockingBuffer#future} to see if it (a) is done; and (b) has completed
      * successfully. The first time this method checks the {@link Future} and discovers that {@link
      * Future#isDone()} returns <code>true</code> it {@link BlockingBuffer#close()}s the {@link
@@ -1235,8 +1235,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
         // don't re-execute this code.
         futureIsDone = true;
 
-        /*
-         * Make sure the buffer is closed. In fact, the caller probably
+      /*
+       * Make sure the buffer is closed. In fact, the caller probably
          * does not need to close the buffer since we do it here when
          * their task completes.
          */
@@ -1258,8 +1258,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
           if (InnerCause.isInnerCause(e, QueryTimeoutException.class)) {
 
-            /**
-             * Closed by query deadline expiration.
+          /*
+       * Closed by query deadline expiration.
              *
              * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/772">Query timeout
              *     only checked at operator start/stop. </a>
@@ -1276,8 +1276,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
           if (InnerCause.isInnerCause(e, ClosedByInterruptException.class)
               || InnerCause.isInnerCause(e, InterruptedException.class)) {
 
-            /*
-             * Note: ClosedByInterruptException indicates that the
+          /*
+       * Note: ClosedByInterruptException indicates that the
              * producer was interrupted. This occurs any time the
              * iterator is closed prematurely. For example, if there
              * is a LIMIT on a query then the join will be broken
@@ -1313,17 +1313,13 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
     public boolean isExhausted() {
 
-      if (!BlockingBuffer.this.open && nextE == null && queue.isEmpty()) {
-
-        // iterator is known to be exhausted.
-        return true;
-      }
+      // iterator is known to be exhausted.
+      return !BlockingBuffer.this.open && nextE == null && queue.isEmpty();
 
       // iterator might visit more elements (might not also).
-      return false;
     }
 
-    /**
+    /*
      * Return <code>true</code> iff there is at least one element that can be visited (blocking). If
      * the buffer is empty then this will block until: (a) an element appears in the buffer; or (b)
      * the buffer is {@link BlockingBuffer#close()}ed.
@@ -1351,8 +1347,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         if (log.isDebugEnabled()) log.info("Interrupted: " + this, ex);
         else if (log.isInfoEnabled()) log.info("Interrupted: " + this);
-        /**
-         * Note: Propagating the interrupt appears to be necessary here in order to have timely
+      /*
+       * Note: Propagating the interrupt appears to be necessary here in order to have timely
          * termination of nested subqueries.
          *
          * @see https://sourceforge.net/apps/trac/bigdata/ticket/707 (BlockingBuffer.close() does
@@ -1397,7 +1393,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       return _hasNext(nanos);
     }
 
-    /**
+    /*
      * @param nanos The number of nanoseconds remaining until timeout. This value is decremented
      *     until LTE ZERO (0L), at which point {@link #_hasNext(long)} will timeout.
      * @return iff an element is available before the timeout has expired.
@@ -1452,8 +1448,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       while (true) {
 
         if (nextE == null && !BlockingBuffer.this.open) {
-          /*
-           * Note: The lock is used to make the decision that the
+        /*
+       * Note: The lock is used to make the decision that the
            * buffer is exhausted atomic with respect to the close of
            * the buffer and add(E,timeout). Without the lock it is
            * possible that add(E,timeout) passed the assertOpen()
@@ -1504,8 +1500,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         if (nextE == null) {
 
-          /*
-           * Non-blocking test. This covers the case when the buffer
+        /*
+       * Non-blocking test. This covers the case when the buffer
            * is still open so we would not have polled the queue in
            * the while() condition above. Since we did not poll above
            * we will do it now before testing against the timeout. If
@@ -1520,8 +1516,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         if (nextE != null) {
 
-          /*
-           * Either nextE was already bound or the queue was not empty
+        /*
+       * Either nextE was already bound or the queue was not empty
            * and we took the head of the queue using the non-blocking
            * poll().
            *
@@ -1535,8 +1531,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
           return true;
         }
 
-        /*
-         * Perform some checks to decide whether the iterator is still
+      /*
+       * Perform some checks to decide whether the iterator is still
          * valid.
          */
 
@@ -1553,8 +1549,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
         // Note: tests volatile field.
         if (cause != null) throw new IllegalStateException(cause);
 
-        /*
-         * Now that we have those checks out of the way, update the time
+      /*
+       * Now that we have those checks out of the way, update the time
          * remaining and see if we have a timeout.
          */
 
@@ -1573,8 +1569,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
           return false;
         }
 
-        /*
-         * Poll the queue.
+      /*
+       * Poll the queue.
          *
          * Note: DO NOT sleep() here. Polling will use a Condition to
          * wake up when there is something in the queue. If you sleep()
@@ -1592,8 +1588,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         if (ntries < NSPIN_READ) {
 
-          /*
-           * This is basically a spin lock (it can spin without
+        /*
+       * This is basically a spin lock (it can spin without
            * yielding if there is no contention for the queue because
            * the producer is lagging).
            */
@@ -1607,8 +1603,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         } else {
 
-          /*
-           * Here we are willing to be put to sleep for a bit. This
+        /*
+       * Here we are willing to be put to sleep for a bit. This
            * can free a CPU that was otherwise caught in a spin on
            * poll() to run the producer so that we have something to
            * read.
@@ -1651,8 +1647,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         }
 
-        /*
-         * Nothing available yet on the queue.
+      /*
+       * Nothing available yet on the queue.
          */
 
         assert nextE == null;
@@ -1663,8 +1659,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         if (elapsedNanos >= logTimeout) {
 
-          /*
-           * This could be a variety of things such as waiting on a
+        /*
+       * This could be a variety of things such as waiting on a
            * mutex that is already held, e.g., an index lock, that
            * results in a deadlock between the process writing on the
            * buffer and the process reading from the buffer. If you
@@ -1677,8 +1673,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
           if (future == null) {
 
-            /*
-             * This can arise if you fail to set the future on the
+          /*
+       * This can arise if you fail to set the future on the
              * buffer such that the iterator can not monitor it. If
              * the future completes (esp. with an error) then the
              * iterator can keep looking for another element but the
@@ -1697,8 +1693,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
           } else {
 
-            /*
-             * check future : if there is an error in the producer
+          /*
+       * check future : if there is an error in the producer
              * task and the producer fails to close() the blocking
              * buffer then the iterator will appear to be stalled.
              */
@@ -1727,8 +1723,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
                 }
 
                 if (logOnce) {
-                  /*
-                   * Do not log the stack traces again during this
+                /*
+       * Do not log the stack traces again during this
                    * invocation.
                    */
                   loggedStackTraces = true;
@@ -1784,8 +1780,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
         if (nanos <= 0) {
 
-          /*
-           * Since the timeout was exceeded we can not know whether
+        /*
+       * Since the timeout was exceeded we can not know whether
            * or not the buffer was exhausted,
            */
 
@@ -1799,8 +1795,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
       if (e.getClass().getComponentType() != null) {
 
-        /*
-         * Combine chunk(s)?
+      /*
+       * Combine chunk(s)?
          */
 
         final long now = System.nanoTime();
@@ -1817,7 +1813,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       return e;
     }
 
-    /**
+    /*
      * Return the next element. If the element is an array type, then the optional chunk combiner
      * may be applied to aggregate chunks. When the chunk combiner is applied, this method will
      * block until either a chunk of sufficient size has been accumulated -or- the chunk combiner
@@ -1835,16 +1831,16 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
       if (chunkTimeout > 0 && e.getClass().getComponentType() != null) {
 
-        /*
-         * Combine chunk(s).
+      /*
+       * Combine chunk(s).
          */
 
         final E chunk = combineChunks(e, 1 /* nchunks */, System.nanoTime(), chunkTimeout);
 
         if (ordered) {
 
-          /*
-           * The data in the source chunk(s) are ordered so we apply a
+        /*
+       * The data in the source chunk(s) are ordered so we apply a
            * merge sort IFF two or more chunks were combined together
            * such that the resulting chunk will remain ordered.
            *
@@ -1880,7 +1876,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       return e;
     }
 
-    /**
+    /*
      * Returns the next element (non-blocking).
      *
      * @throws NoSuchElementException if {@link #nextE} is <code>null</code> (there is no element
@@ -1910,7 +1906,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       return e;
     }
 
-    /**
+    /*
      * Method is invoked IFF <code>E</code> is an array type (a chunk). The method examines the size
      * of E compared to a desired minimum chunk size. If we would rather have a larger chunk and the
      * buffer is not empty, then we immediately take the next chunk and combine it with the current
@@ -1943,8 +1939,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       if (chunk.length < minimumChunkSize && !isTimeout) {
         try {
           if (hasNext(nanos, TimeUnit.NANOSECONDS)) {
-            /*
-             * Note: hasNext() will block until either (a) we have
+          /*
+       * Note: hasNext() will block until either (a) we have
              * another chunk; (b) the timeout has expired; (c) until
              * the iterator is known to be exhausted; or (d) the
              * current thread is interrupted.
@@ -1959,8 +1955,8 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
       if (chunk.length < minimumChunkSize && !isTimeout && !isInterrupt && !queue.isEmpty()) {
 
-        /*
-         * Non-blocking case. Once we have satisfied the minimum chunk
+      /*
+       * Non-blocking case. Once we have satisfied the minimum chunk
          * size we will only combine chunks that are already waiting in
          * the queue.
          *
@@ -1995,7 +1991,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
       return e;
     }
 
-    /**
+    /*
      * Combines this chunk with the {@link #_next()} one.
      *
      * @param e A chunk that we already have on hand.
@@ -2004,7 +2000,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     //        @SuppressWarnings("unchecked")
     private E combineNextChunk(final E e) {
 
-      return BlockingBuffer.this.combineChunks(e, _next());
+      return BlockingBuffer.combineChunks(e, _next());
 
       //            final Object[] e1 = (Object[]) e;
       //
@@ -2041,7 +2037,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     }
   }
 
-  /**
+  /*
    * Combines two chunks in the order given (DOES NOT apply a merge sort).
    *
    * @param chunk1 The first chunk.

@@ -28,8 +28,8 @@ import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * Test suite for {@link IVBindingSetEncoder}.
+/*
+* Test suite for {@link IVBindingSetEncoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -69,7 +69,7 @@ public class TestIVBindingSetEncoder extends AbstractBindingSetEncoderTestCase {
   //
   //    }
 
-  /**
+  /*
    * https://jira.blazegraph.com/browse/BLZG-4476: Assert that encoding does not change when schema
    * changes incrementally
    */
@@ -104,7 +104,7 @@ public class TestIVBindingSetEncoder extends AbstractBindingSetEncoderTestCase {
     assertEquals(bs1, decoded1);
   }
 
-  /**
+  /*
    * https://jira.blazegraph.com/browse/BLZG-4476: Assert that encoding does not change when schema
    * changes incrementally
    */

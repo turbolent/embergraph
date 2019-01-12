@@ -10,8 +10,8 @@ import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.util.Bytes;
 
-/**
- * Iterator using a {@link BTree} filter out duplicate (s,p,o) tuples.
+/*
+* Iterator using a {@link BTree} filter out duplicate (s,p,o) tuples.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: DistinctSPOIterator.java 3472 2010-08-31 16:21:47Z thompsonbry $
@@ -23,7 +23,7 @@ import org.embergraph.util.Bytes;
  */
 public class DistinctSPOIterator implements ICloseableIterator<ISPO> {
 
-  /**
+  /*
    * The backing relation, which is only used to obtain the {@link BTree} instance in {@link
    * #overflowToBTree(Set)}.
    */
@@ -32,20 +32,20 @@ public class DistinctSPOIterator implements ICloseableIterator<ISPO> {
   /** The source iterator. */
   private ICloseableIterator<ISPO> src;
 
-  /**
+  /*
    * Hash set is allocated when the first {@link ISPO} is visited and is used until the {@link
    * #MAX_HASH_SET_CAPACITY} is reached, at which point the {@link #btreeSet} is allocated.
    */
   private Set<ISPO> hashSet;
 
-  /**
+  /*
    * B+Tree is used once the {@link #MAX_HASH_SET_CAPACITY} is reached. The B+Tree is slowed than
    * the {@link #hashSet}, but can spill onto the disk and is appropriate for very large distinct
    * sets.
    */
   private BTree btreeSet;
 
-  /**
+  /*
    * Buffer reused for each (s,p,o) key. The buffer is allocated to the exact size when the {@link
    * #btreeSet} is allocated.
    */
@@ -66,7 +66,7 @@ public class DistinctSPOIterator implements ICloseableIterator<ISPO> {
   /** The #of {@link ISPO}s read from the {@link #src} iterator. */
   private int nscanned = 0;
 
-  /**
+  /*
    * After this many entries we create the {@link #btreeSet} which can spill out onto the disk.
    *
    * @todo configuration parameter (via the constructor). Low memory JVMs might want to use a
@@ -120,7 +120,7 @@ public class DistinctSPOIterator implements ICloseableIterator<ISPO> {
     keyBuilder = null;
   }
 
-  /**
+  /*
    * Returns immediately if there is an element waiting. Otherwise, scans ahead until it finds an
    * element which has not already been visited. It then add the element to the set of elements
    * already seen and saves a reference to that element to be returned by {@link #next()}.
@@ -173,7 +173,7 @@ public class DistinctSPOIterator implements ICloseableIterator<ISPO> {
     return _hasNext();
   }
 
-  /**
+  /*
    * Scan for the next distinct {@link ISPO} from the src iterator and set it on {@link #next}.
    *
    * @return <code>true</code> if another distinct {@link ISPO} was found.

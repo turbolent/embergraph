@@ -27,8 +27,8 @@ import java.util.Set;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 
-/**
- * Any of the operations which has a FROM and/or TO graph.
+/*
+* Any of the operations which has a FROM and/or TO graph.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public abstract class AbstractFromToGraphManagement extends GraphManagement {
     super(op);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */
@@ -58,7 +58,7 @@ public abstract class AbstractFromToGraphManagement extends GraphManagement {
     super(args, anns);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @return The source graph -or- <code>null</code> if the source is the "default" graph.
@@ -77,7 +77,7 @@ public abstract class AbstractFromToGraphManagement extends GraphManagement {
     setProperty(Annotations.SOURCE, sourceGraph);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @return The target graph -or- <code>null</code> if the target is the "default" graph.

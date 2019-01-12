@@ -11,8 +11,8 @@ package cern.jet.random;
 import cern.jet.math.Arithmetic;
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
-/**
- * Poisson distribution (quick); See the <A
+/*
+* Poisson distribution (quick); See the <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node208.html#SECTION0002080000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosp.html#Poisson Distribution">
  * animated definition</A>.
@@ -82,7 +82,7 @@ public class Poisson extends AbstractDiscreteDistribution {
   public double cdf(int k) {
     return Probability.poisson(k, this.mean);
   }
-  /**
+  /*
    * Returns a deep copy of the receiver; the copy will produce identical sequences. After this call
    * has returned, the copy and the receiver have equal but separate state.
    *
@@ -90,7 +90,7 @@ public class Poisson extends AbstractDiscreteDistribution {
    */
   public Object clone() {
     Poisson copy = (Poisson) super.clone();
-    if (this.pp != null) copy.pp = (double[]) this.pp.clone();
+    if (this.pp != null) copy.pp = this.pp.clone();
     return copy;
   }
 
@@ -103,7 +103,7 @@ public class Poisson extends AbstractDiscreteDistribution {
   }
   /** Returns a random number from the distribution; bypasses the internal state. */
   public int nextInt(double theMean) {
-    /**
+    /*
      * **************************************************************** * Poisson Distribution -
      * Patchwork Rejection/Inversion * *
      * ***************************************************************** * For parameter my < 10
@@ -304,7 +304,7 @@ public class Poisson extends AbstractDiscreteDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + mean + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

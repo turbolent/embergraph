@@ -35,8 +35,8 @@ import org.embergraph.ha.msg.HASendState;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.Haltable;
 
-/**
- * A service for sending raw {@link ByteBuffer}s across a socket. This service supports the HA write
+/*
+* A service for sending raw {@link ByteBuffer}s across a socket. This service supports the HA write
  * pipeline. This service is designed to be paired with an {@link HAReceiveService}, which typically
  * is running on a different host. The {@link HASendService} provides only an efficient raw data
  * transfer. The HA write pipeline coordinates the transfer of data using RMI messages which tell
@@ -91,7 +91,7 @@ public class HASendService {
     return super.toString() + "{addrNext=" + addrNext + "}";
   }
 
-  /**
+  /*
    * Return the current address to which this service will send data.
    *
    * @return The current address -or- <code>null</code> if no address is set at this time.
@@ -102,7 +102,7 @@ public class HASendService {
     return addrNext.get();
   }
 
-  /**
+  /*
    * Designated constructor (flyweight initialization).
    *
    * @see #start(InetSocketAddress)
@@ -112,7 +112,7 @@ public class HASendService {
     this(true /* blocking */);
   }
 
-  /**
+  /*
    * Note: This constructor is not exposed yet. We need to figure out whether to allow the
    * configuration of the socket options and how to support that.
    *
@@ -123,7 +123,7 @@ public class HASendService {
     this.blocking = blocking;
   }
 
-  /**
+  /*
    * <code>true</code> iff the client socket will be setup in a blocking mode. This is the
    * historical behavior until at least Dec 10, 2013.
    */
@@ -144,8 +144,8 @@ public class HASendService {
     return executorRef.get() != null;
   }
 
-  //    /**
-  //     * Return the address of the receiving service (may be <code>null</code>).
+  //    /*
+//     * Return the address of the receiving service (may be <code>null</code>).
   //     */
   //    InetSocketAddress getAddrNext() {
   //
@@ -153,7 +153,7 @@ public class HASendService {
   //
   //    }
 
-  /**
+  /*
    * Starts a thread which will transfer data to a service listening at the specified {@link
    * InetSocketAddress}. A {@link SocketChannel} will be opened to the specified the connection to
    * the socket specified in the constructor and start the thread pool on which the payloads will be
@@ -193,7 +193,7 @@ public class HASendService {
     if (log.isInfoEnabled()) log.info(toString() + " : running.");
   }
 
-  /**
+  /*
    * Immediate shutdown. Any transfer in process will be interrupted. It is safe to invoke this
    * method whether or not the service is running.
    *
@@ -218,8 +218,8 @@ public class HASendService {
     }
   }
 
-  //    /**
-  //     * Close the {@link SocketChannel} to the downsteam service (blocking).
+  //    /*
+//     * Close the {@link SocketChannel} to the downsteam service (blocking).
   //     */
   //    public void closeChannel() {
   //        synchronized (this.socketChannel) {
@@ -242,7 +242,7 @@ public class HASendService {
     }
   }
 
-  /**
+  /*
    * Send the bytes {@link ByteBuffer#remaining()} in the buffer to the configured {@link
    * InetSocketAddress}.
    *
@@ -292,7 +292,7 @@ public class HASendService {
     }
   }
 
-  /**
+  /*
    * Test the {@link Throwable} for its root cause and distinguish between a root cause with
    * immediate downstream replication, normal termination through {@link InterruptedException},
    * {@link CancellationException}, and nested {@link AbstractPipelineException}s thrown by a
@@ -332,7 +332,7 @@ public class HASendService {
   /** A series of timeouts used when we need to re-open the {@link SocketChannel}. */
   private static final long[] retryMillis = new long[] {1, 5, 10, 50, 100, 250, 250, 250, 250};
 
-  /**
+  /*
    * (Re-)open the {@link SocketChannel} if it is closed and this service is still running.
    *
    * @return The {@link SocketChannel}.
@@ -352,8 +352,8 @@ public class HASendService {
 
         try {
 
-          /*
-           * (Re-)open the SocketChannel.
+        /*
+       * (Re-)open the SocketChannel.
            *
            * TODO we may have to retry or play with the timeout for
            * the socket connect request since the downstream node may
@@ -411,7 +411,7 @@ public class HASendService {
     } // synchronized(socketChannel)
   } // reopenChannel()
 
-  /**
+  /*
    * Factory for the {@link SendTask}.
    *
    * @param buffer The buffer whose data are to be sent.
@@ -425,7 +425,7 @@ public class HASendService {
     return new IncSendTask(buffer, marker);
   }
 
-  /**
+  /*
    * Open a blocking mode socket channel to the specified socket address.
    *
    * @param addr The socket address.
@@ -463,7 +463,7 @@ public class HASendService {
     return socketChannel;
   }
 
-  /**
+  /*
    * This task implements the raw data transfer. Each instance of this task sends the {@link
    * ByteBuffer#remaining()} bytes in a single {@link ByteBuffer} to the receiving service on a
    * specified {@link InetSocketAddress}.
@@ -490,8 +490,8 @@ public class HASendService {
 
       } catch (Throwable t) {
 
-        /*
-         * Log anything thrown out of this task. We check the Future of
+      /*
+       * Log anything thrown out of this task. We check the Future of
          * this task, but that does not tell us what exception is thrown
          * in the Thread executing the task when the Future is cancelled
          * and that thread is interrupted. In particular, we are looking
@@ -551,8 +551,8 @@ public class HASendService {
             continue;
           }
 
-          /*
-           * Write the data. Depending on the channel, will either
+        /*
+       * Write the data. Depending on the channel, will either
            * block or write as many bytes as can be written
            * immediately (this latter is true for socket channels in a
            * non-blocking mode). IF it blocks, should block until
@@ -583,8 +583,8 @@ public class HASendService {
 
           final int nbytes;
           if (false || log.isDebugEnabled()) {
-            /*
-             * Debug only code. This breaks down the payload into
+          /*
+       * Debug only code. This breaks down the payload into
              * small packets and adds some latency between them as
              * well. This models what is otherwise a less common,
              * but more stressful, pattern.

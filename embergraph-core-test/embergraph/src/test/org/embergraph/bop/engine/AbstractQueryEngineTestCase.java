@@ -83,8 +83,8 @@ import org.openrdf.query.QueryResultUtil;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.MutableTupleQueryResult;
 
-/**
- * Base class adds some static methods used with unit tests of the {@link QueryEngine}.
+/*
+* Base class adds some static methods used with unit tests of the {@link QueryEngine}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -101,7 +101,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Verify the expected solutions.
    *
    * @param expected
@@ -133,7 +133,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify the expected solutions.
    *
    * @param expected The expected solutions.
@@ -144,7 +144,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     assertSameSolutions(expected, runningQuery.iterator(), runningQuery);
   }
 
-  /**
+  /*
    * Verify the expected solutions.
    *
    * @param expected The expected solutions.
@@ -185,7 +185,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -201,7 +201,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     assertSameSolutionsAnyOrder("", expected, actual);
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -284,7 +284,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -299,7 +299,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     assertSameSolutionsAnyOrder("", expected, runningQuery);
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -412,7 +412,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Throw an exception for the first operator having a ground difference (different Class,
    * different arity, or different annotation). When both operators have the same named annotation
    * but the annotation values differ and they are both bop valued annotations, then the difference
@@ -627,7 +627,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Utility method compares expected and actual solutions and reports on any discrepancies.
    *
    * @param name The name of the test.
@@ -831,7 +831,7 @@ public abstract class AbstractQueryEngineTestCase extends TestCase2 {
     */
   }
 
-  /**
+  /*
    * Compare the expected and actual query results for a graph query.
    *
    * @param name The name of the test.

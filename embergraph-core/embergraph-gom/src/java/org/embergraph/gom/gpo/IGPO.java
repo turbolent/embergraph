@@ -28,8 +28,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 
-/**
- * A generic object has identity and an extensible, loosely-typed property set. When the value of a
+/*
+* A generic object has identity and an extensible, loosely-typed property set. When the value of a
  * property is another generic object, the property models a directed many-to-one association.
  * Many-to-many linking patterns are modeled using intermediate objects and a convenience API.
  * Reverse navigation for associations is automatically aggregated by the association target within
@@ -62,7 +62,7 @@ public interface IGPO extends IGenericSkin // @todo , INativeTransaction?
   /** Returns the persistent identity of the generic object. */
   EmbergraphResource getId();
 
-  /**
+  /*
    * Returns true iff <i>other</i> has the same identity as <i>this</i> generic object and is in the
    * same {@link IObjectManager} scope (this is just <code>this == other</code> since the {@link
    * IObjectManager} guarantees that {@link IGPO}s are canonical for a given {@link Resource} within
@@ -70,7 +70,7 @@ public interface IGPO extends IGenericSkin // @todo , INativeTransaction?
    */
   boolean equals(Object other);
 
-  /**
+  /*
    * Return the hash code of the identity of the generic object. (The hash code is NOT based on the
    * internal state of the generic object.)
    */
@@ -133,7 +133,7 @@ public interface IGPO extends IGenericSkin // @todo , INativeTransaction?
   /** Exists (self,p,?y). */
   boolean isBound(URI property);
 
-  /**
+  /*
    * Return a map giving the range count for each reverse link property.
    *
    * <pre>
@@ -142,7 +142,7 @@ public interface IGPO extends IGenericSkin // @todo , INativeTransaction?
    */
   Map<URI, Long> getReverseLinkProperties();
 
-  /**
+  /*
    * Removes the persistent object. Any links to this generic object are also removed. Any link sets
    * collected by this generic object are removed.
    *
@@ -156,7 +156,7 @@ public interface IGPO extends IGenericSkin // @todo , INativeTransaction?
    */
   void remove();
 
-  /**
+  /*
    * Returns an transient object that wraps the same persistent object but exposes the behavior
    * identified by the identified interface. The interface effectively names the behavior that will
    * be wrapped around the persistent data. If the current object already implements the desired
@@ -179,7 +179,7 @@ public interface IGPO extends IGenericSkin // @todo , INativeTransaction?
    */
   IGenericSkin asClass(Class theClassOrInterface);
 
-  /**
+  /*
    * Force the full materialization of the {@link IGPO}.
    *
    * @return This {@link IGPO}.
@@ -189,7 +189,7 @@ public interface IGPO extends IGenericSkin // @todo , INativeTransaction?
   /** @return a pretty printed representation of the GPO */
   String pp();
 
-  /**
+  /*
    * FIXME: this method will be moved to an as yet unnamed derived class that will become the
    * superclass for alchemist generated subclasses.
    */

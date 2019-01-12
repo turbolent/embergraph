@@ -24,8 +24,8 @@ import junit.framework.TestCase2;
 import org.embergraph.EmbergraphStatics;
 import org.embergraph.util.httpd.Config;
 
-/**
- * Test suite for the basic stochastic load balancing mechanism for LBS policies based on actual
+/*
+* Test suite for the basic stochastic load balancing mechanism for LBS policies based on actual
  * host workloads regardless of how those workload metrics are obtained.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -54,7 +54,7 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * This test covers the case where there is only one host and it is running one or more services.
    */
   public void test_lbs_host_policy() {
@@ -337,7 +337,7 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Verify that two references are the same reference (<code>==</code>).
    *
    * @param expected The expected reference.
@@ -351,7 +351,7 @@ public class TestAbstractHostLBSPolicy extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Hacks together a Request-URI for a service.
    *
    * @param hostname

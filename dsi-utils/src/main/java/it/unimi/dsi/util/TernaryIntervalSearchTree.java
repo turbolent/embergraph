@@ -40,8 +40,8 @@ import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Iterator;
 
-/**
- * Ternary interval search trees.
+/*
+* Ternary interval search trees.
  *
  * <p><em>Ternary search trees</em> are a data structure used to store words over an alphabet; they
  * are a useful alternatives to tries when the alphabet is large.
@@ -73,13 +73,13 @@ public class TernaryIntervalSearchTree extends AbstractPrefixMap implements Seri
     public char[] path;
     /** Whether this node represents a word. */
     public boolean isWord;
-    /**
+    /*
      * The number of words covered by this node (including the word possibly represented by this
      * node).
      */
     public int numNodes;
 
-    /**
+    /*
      * Creates a new node containing a path specified by a character-sequence fragment.
      *
      * @param s a character sequence contaning the path of the node.
@@ -100,7 +100,7 @@ public class TernaryIntervalSearchTree extends AbstractPrefixMap implements Seri
       this.numNodes = numNodes;
     }
 
-    /**
+    /*
      * Creates a new node containing a path specified by a character-array fragment.
      *
      * @param a a character array contaning the path of the node.
@@ -121,7 +121,7 @@ public class TernaryIntervalSearchTree extends AbstractPrefixMap implements Seri
       this.numNodes = numNodes;
     }
 
-    /**
+    /*
      * Removes a prefix from the path of this node.
      *
      * @param length the length of the prefix to be removed
@@ -144,7 +144,7 @@ public class TernaryIntervalSearchTree extends AbstractPrefixMap implements Seri
     defRetValue = -1;
   }
 
-  /**
+  /*
    * Creates a new empty ternary search tree and populates it with a given collection of character
    * sequences.
    *
@@ -337,7 +337,7 @@ public class TernaryIntervalSearchTree extends AbstractPrefixMap implements Seri
     return modified;
   }
 
-  /**
+  /*
    * Inserts the given character sequence, starting at the given position, in the given subtree.
    *
    * @param s the character sequence containing the characters to be inserted.
@@ -415,7 +415,7 @@ public class TernaryIntervalSearchTree extends AbstractPrefixMap implements Seri
     c = s.charAt(offset + i);
 
     if (c < path[i]) {
-      /**
+      /*
        * We fork on the left. The number of words under this node will increase only if the
        * structure is modified.
        */

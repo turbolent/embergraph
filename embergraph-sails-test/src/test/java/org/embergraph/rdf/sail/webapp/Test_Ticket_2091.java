@@ -28,8 +28,8 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQueryResult;
 
-/**
- * This test checks if constants in projection expressions are properly resolved.
+/*
+* This test checks if constants in projection expressions are properly resolved.
  *
  * @see https://jira.blazegraph.com/browse/BLZG-2091
  */
@@ -73,9 +73,9 @@ public class Test_Ticket_2091 extends AbstractProtocolTest {
           + "{\r\n"
           + "	?s wdt:P31 wd:Q3917681\r\n"
           + "	OPTIONAL {?s wdt:P17 ?host }\r\n"
-          + "} ";;
+          + "} ";
 
-  /**
+  /*
    * Execute a query including constants in projection expression. The test succeeeds if the query
    * successfully evaluates with QUERY_ENGINE_CHUNK_HANDLER set to NativeHeapStandloneChunkHandler,
    * as it requires results to be encoded in respect to namespace of value factory, which fails if

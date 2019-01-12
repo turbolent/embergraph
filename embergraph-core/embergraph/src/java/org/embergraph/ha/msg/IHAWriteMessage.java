@@ -22,8 +22,8 @@ import java.util.UUID;
 import org.embergraph.io.compression.IRecordCompressor;
 import org.embergraph.journal.StoreTypeEnum;
 
-/**
- * A message carrying RMI metadata about a payload which will be replicated using a socket-level
+/*
+* A message carrying RMI metadata about a payload which will be replicated using a socket-level
  * transfer facility.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,7 +33,7 @@ public interface IHAWriteMessage extends IHAWriteMessageBase {
   /** The {@link UUID} of the store to which this message belongs. */
   UUID getUUID();
 
-  /**
+  /*
    * The commit counter for the opening root block associated with the write set for this message.
    */
   long getCommitCounter();
@@ -41,7 +41,7 @@ public interface IHAWriteMessage extends IHAWriteMessageBase {
   /** The commit time associated with this message. */
   long getLastCommitTime();
 
-  /**
+  /*
    * The write cache buffer sequence number (reset to ZERO (0) for the first message after each
    * commit and incremented for each buffer sent by the leader).
    */

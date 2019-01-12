@@ -21,8 +21,8 @@ import java.util.Stack;
 import junit.framework.AssertionFailedError;
 import org.embergraph.cache.HardReferenceQueue;
 
-/**
- * Extends {@link DefaultEvictionListener} to explicitly control when an eviction notice is expected
+/*
+* Extends {@link DefaultEvictionListener} to explicitly control when an eviction notice is expected
  * and to verify that eviction notices are received as expected.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -30,7 +30,7 @@ import org.embergraph.cache.HardReferenceQueue;
  */
 public class MyEvictionListener extends DefaultEvictionListener {
 
-  /**
+  /*
    * Set the next N expected references for eviction notices. You can only do this when nothing is
    * currently expected.
    *
@@ -62,7 +62,7 @@ public class MyEvictionListener extends DefaultEvictionListener {
 
   Stack<PO> expectedRefs = new Stack<PO>();
 
-  /**
+  /*
    * Set the expected reference for the next eviction notice. The listener will thrown an exception
    * if there is a cache eviction unless you first invoke this method.
    *
@@ -78,7 +78,7 @@ public class MyEvictionListener extends DefaultEvictionListener {
 
   private PO expectedRef = null;
 
-  /**
+  /*
    * Test for an eviction event.
    *
    * @exception AssertionFailedError if nothing was evicted since the last time an expected eviction
@@ -94,7 +94,7 @@ public class MyEvictionListener extends DefaultEvictionListener {
 
   private boolean evicted = false;
 
-  /**
+  /*
    * Test for the expected #of eviction notices to date.
    *
    * @param expected
@@ -111,7 +111,7 @@ public class MyEvictionListener extends DefaultEvictionListener {
 
   private int nevicted = 0;
 
-  /**
+  /*
    * @throws AssertionFailedError if the evicted reference is not the next expected eviction
    *     reference or if no eviction is expected.
    */

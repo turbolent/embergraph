@@ -39,8 +39,8 @@ import junit.util.PropertyUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-/**
- * Extension of {@link TestCase} that supports logging, loading test resources, and hierarchical
+/*
+* Extension of {@link TestCase} that supports logging, loading test resources, and hierarchical
  * properties.
  *
  * <p>Note: When using Maven (or Ant), you need to be aware that that your <code>project.xml</code>
@@ -65,7 +65,7 @@ public abstract class TestCase2 extends TestCase {
   /** The default {@link Logger} for this class, which is named "junit.framework.Test". */
   protected static final Logger log = Logger.getLogger(junit.framework.Test.class);
 
-  /**
+  /*
    * This convenience method provides a version of {@link #fail( String Message )} that also excepts
    * a {@link Throwable} cause for the test failure.
    *
@@ -120,8 +120,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-        /*
-         * Only do message construction if we know that the assert will
+      /*
+       * Only do message construction if we know that the assert will
          * fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -129,7 +129,7 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  /**
+  /*
    * Compares byte[]s by value (not reference).
    *
    * <p>Note: This method will only be invoked if both arguments can be typed as byte[] by the
@@ -144,7 +144,7 @@ public abstract class TestCase2 extends TestCase {
     assertEquals(null, expected, actual);
   }
 
-  /**
+  /*
    * Compares byte[]s by value (not reference).
    *
    * <p>Note: This method will only be invoked if both arguments can be typed as byte[] by the
@@ -189,8 +189,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-        /*
-         * Only do the message construction if we know that the assert
+      /*
+       * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -236,8 +236,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-        /*
-         * Only do the message construction if we know that the assert
+      /*
+       * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -283,8 +283,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-        /*
-         * Only do the message construction if we know that the assert
+      /*
+       * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -331,8 +331,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-        /*
-         * Only do the message construction if we know that the assert
+      /*
+       * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -378,8 +378,8 @@ public abstract class TestCase2 extends TestCase {
     for (int i = 0; i < expected.length; i++) {
 
       if (expected[i] != actual[i]) {
-        /*
-         * Only do the message construction if we know that the assert
+      /*
+       * Only do the message construction if we know that the assert
          * will fail.
          */
         assertEquals(msg + "values differ: index=" + i, expected[i], actual[i]);
@@ -391,7 +391,7 @@ public abstract class TestCase2 extends TestCase {
     assertEquals(null, expected, actual);
   }
 
-  /**
+  /*
    * TODO Use smarter floating point comparison and offer parameter for controlling the floating
    * point comparison.
    */
@@ -436,8 +436,8 @@ public abstract class TestCase2 extends TestCase {
 
       } catch (AssertionFailedError ex) {
 
-        /*
-         * Only do the message construction once the assertion is known
+      /*
+       * Only do the message construction once the assertion is known
          * to fail.
          */
         fail(msg + "values differ: index=" + i, ex);
@@ -449,7 +449,7 @@ public abstract class TestCase2 extends TestCase {
     assertEquals(null, expected, actual);
   }
 
-  /**
+  /*
    * TODO Use smarter floating point comparison and offer parameter for controlling the floating
    * point comparison.
    */
@@ -494,8 +494,8 @@ public abstract class TestCase2 extends TestCase {
 
       } catch (AssertionFailedError ex) {
 
-        /*
-         * Only do the message construction once the assertion is known
+      /*
+       * Only do the message construction once the assertion is known
          * to fail.
          */
         fail(msg + "values differ: index=" + i, ex);
@@ -507,7 +507,7 @@ public abstract class TestCase2 extends TestCase {
     assertEquals(null, expected, actual);
   }
 
-  /**
+  /*
    * Compares arrays of {@link Object}s. The length of the arrays must agree, and each array element
    * must agree. However the class of the arrays does NOT need to agree, e.g., an Object[] MAY
    * compare as equals with a String[].
@@ -551,8 +551,8 @@ public abstract class TestCase2 extends TestCase {
 
       } catch (AssertionFailedError ex) {
 
-        /*
-         * Only do the message construction once the assertion is known
+      /*
+       * Only do the message construction once the assertion is known
          * to fail.
          */
 
@@ -565,7 +565,7 @@ public abstract class TestCase2 extends TestCase {
   // ************************************************************
   // ************************************************************
 
-  /**
+  /*
    * Test helper that can correctly compare arrays of primitives and arrays of objects as well as
    * primitives and objects.
    */
@@ -573,7 +573,7 @@ public abstract class TestCase2 extends TestCase {
     assertSameValue(null, expected, actual);
   }
 
-  /**
+  /*
    * Test helper that can correctly compare arrays of primitives and arrays of objects as well as
    * primitives and objects.
    *
@@ -640,7 +640,7 @@ public abstract class TestCase2 extends TestCase {
   // ************************************************************
   // ************************************************************
 
-  /**
+  /*
    * Method verifies that the <i>actual</i> {@link Iterator} produces the expected objects in the
    * expected order. Objects are compared using {@link Object#equals( Object other )}. Errors are
    * reported if too few or too many objects are produced, etc.
@@ -650,7 +650,7 @@ public abstract class TestCase2 extends TestCase {
     assertSameIterator("", expected, actual);
   }
 
-  /**
+  /*
    * Method verifies that the <i>actual</i> {@link Iterator} produces the expected objects in the
    * expected order. Objects are compared using {@link Object#equals( Object other )}. Errors are
    * reported if too few or too many objects are produced, etc.
@@ -672,8 +672,8 @@ public abstract class TestCase2 extends TestCase {
       try {
         assertSameValue(expected[i], g);
       } catch (AssertionFailedError ex) {
-        /*
-         * Only do message construction if we know that the assert will
+      /*
+       * Only do message construction if we know that the assert will
          * fail.
          */
         fail(
@@ -701,7 +701,7 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -712,7 +712,7 @@ public abstract class TestCase2 extends TestCase {
     assertSameIteratorAnyOrder("", expected, actual);
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -757,8 +757,8 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  //    /**
-  //     * Verifies that the iterator visits the specified objects in some
+  //    /*
+//     * Verifies that the iterator visits the specified objects in some
   //     * arbitrary ordering and that the iterator is exhausted once all
   //     * expected objects have been visited.  The implementation uses a
   //     * selection without replacement "pattern".
@@ -778,8 +778,8 @@ public abstract class TestCase2 extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Verifies that the iterator visits the specified objects in some
+  //    /*
+//     * Verifies that the iterator visits the specified objects in some
   //     * arbitrary ordering and that the iterator is exhausted once all
   //     * expected objects have been visited.  The implementation uses a
   //     * selection without replacement "pattern".
@@ -852,7 +852,7 @@ public abstract class TestCase2 extends TestCase {
   // ************************************************************
   // ************************************************************
 
-  /**
+  /*
    * Test helper produces a random sequence of indices in the range [0:n-1] suitable for visiting
    * the elements of an array of n elements in a random order. This is useful when you want to
    * randomize the presentation of elements from two or more arrays. For example, known keys and
@@ -871,7 +871,7 @@ public abstract class TestCase2 extends TestCase {
 
       public int compareTo(final Pair other) {
         if (this == other) return 0;
-        if (this.r < ((Pair) other).r) return -1;
+        if (this.r < other.r) return -1;
         else return 1;
       }
     }
@@ -885,7 +885,7 @@ public abstract class TestCase2 extends TestCase {
 
     java.util.Arrays.sort(pairs);
 
-    int order[] = new int[n];
+    int[] order = new int[n];
 
     for (int i = 0; i < n; i++) {
 
@@ -940,7 +940,7 @@ public abstract class TestCase2 extends TestCase {
 
   }
 
-  /**
+  /*
    * Returns a random but unique string of Unicode characters with a maximum length of len and a
    * minimum length. Only alphanumeric characters are present in the string so you can form a unique
    * string by appending a delimiter and an one-up counter.
@@ -979,7 +979,7 @@ public abstract class TestCase2 extends TestCase {
     return sb.toString();
   }
 
-  /**
+  /*
    * Used to create objects of random type.
    *
    * <p>TODO support generation of random array types and dates.
@@ -1036,7 +1036,7 @@ public abstract class TestCase2 extends TestCase {
           //            NULL // Note: null at end to make easy to exclude.
         };
 
-    /**
+    /*
      * Return the type code for the specified class.
      *
      * @param cls A class.
@@ -1069,7 +1069,7 @@ public abstract class TestCase2 extends TestCase {
     private static final String alphabet =
         "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
 
-    /**
+    /*
      * Returns an object with a random type and random value.
      *
      * @param rnd The random# generator to use.
@@ -1089,7 +1089,7 @@ public abstract class TestCase2 extends TestCase {
       return nextObject(rnd, type, allowNull);
     }
 
-    /**
+    /*
      * Return an instance of the specified type with a random value.
      *
      * @param rnd The random number generator.
@@ -1112,7 +1112,7 @@ public abstract class TestCase2 extends TestCase {
       }
     }
 
-    /**
+    /*
      * Return an instance of the specified type with a random value.
      *
      * @param rnd The random number generator.
@@ -1200,7 +1200,7 @@ public abstract class TestCase2 extends TestCase {
 
   protected RandomType _randomType = new RandomType();
 
-  /**
+  /*
    * Returns an object with a random type and random value.
    *
    * @param allowNull When true, a null object reference may be returned.
@@ -1211,7 +1211,7 @@ public abstract class TestCase2 extends TestCase {
     return _randomType.nextObject(m_random, allowNull);
   }
 
-  /**
+  /*
    * Returns an object with a random type and random value.
    *
    * @param rnd The random generator.
@@ -1227,7 +1227,7 @@ public abstract class TestCase2 extends TestCase {
   // ****************** Loading Test Resources ******************
   // ************************************************************
 
-  /**
+  /*
    * Returns an {@link InputStream} that may be used to read from a test resource found along the
    * CLASSPATH.
    *
@@ -1283,7 +1283,7 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  /**
+  /*
    * Read a test character resource from along the CLASSPATH.
    *
    * <p>
@@ -1347,7 +1347,7 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  /**
+  /*
    * Convenience method for {@link #getTestResource( String resourceName, String encoding )} that
    * uses the platform specific default encoding, which is NOT recommended since it is non-portable.
    */
@@ -1360,7 +1360,7 @@ public abstract class TestCase2 extends TestCase {
   // ********************** Properties **************************
   // ************************************************************
 
-  /**
+  /*
    * Reads in the configuration properties for the test from a variety of resources and returns a
    * properties hierarchy. If a property name is not bound at the top-level of the returned {@link
    * Properties} object, then the lower levels of the hierarchy are recursively searched.
@@ -1556,9 +1556,7 @@ public abstract class TestCase2 extends TestCase {
 
         ex.printStackTrace();
 
-        RuntimeException ex2 = new RuntimeException("Could not load properties.");
-
-        ex2.initCause(ex);
+        RuntimeException ex2 = new RuntimeException("Could not load properties.", ex);
 
         throw ex2;
       }
@@ -1569,7 +1567,7 @@ public abstract class TestCase2 extends TestCase {
 
   //    MyProperties m_properties;
 
-  /**
+  /*
    * Helper class gives us access to the default {@link Properties}. We use this class exclusively
    * when loading properties so that we can correctly report what properties are bound at what level
    * and what resource or file the properties were loaded from.
@@ -1605,7 +1603,7 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  /**
+  /*
    * Recursively logs properties together with the resource or file in which they were defined at
    * the DEBUG level. The properties at a given level are presented in alpha ordering in order to
    * make it easier to locate a specific binding.
@@ -1672,10 +1670,10 @@ public abstract class TestCase2 extends TestCase {
       sb.append(s);
     }
 
-    return s.toString();
+    return s;
   }
 
-  /**
+  /*
    * Returns the project build directory, even in a multiproject build. This is normally the
    * <i>target</i> subdirectory beneath the project root directory.
    *
@@ -1717,7 +1715,7 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  /**
+  /*
    * Utility method returns true iff the effective logger level is DEBUG or less. This may be used
    * to make logging requiring significant formatting conditional on the logging level (so that the
    * formatting is not done if the message would not be logged).
@@ -1730,7 +1728,7 @@ public abstract class TestCase2 extends TestCase {
     return log.getEffectiveLevel().toInt() <= Level.DEBUG.toInt();
   }
 
-  /**
+  /*
    * Utility method returns true iff the effective logger level is INFO or less. This may be used to
    * make logging requiring significant formatting conditional on the logging level (so that the
    * formatting is not done if the message would not be logged).
@@ -1757,7 +1755,7 @@ public abstract class TestCase2 extends TestCase {
   // ************************************************************
   // ************************************************************
 
-  /**
+  /*
    * Derived from <a
    * href="http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm">Comparing
    * floating point numbers </a> by Bruce Dawson.
@@ -1800,7 +1798,7 @@ public abstract class TestCase2 extends TestCase {
     return intDiff;
   }
 
-  /**
+  /*
    * Derived from <a
    * href="http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm">Comparing
    * floating point numbers </a> by Bruce Dawson.
@@ -1843,7 +1841,7 @@ public abstract class TestCase2 extends TestCase {
     return longDiff;
   }
 
-  /**
+  /*
    * Verify zero ULPs difference between the values.
    *
    * @param f1
@@ -1859,7 +1857,7 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  /**
+  /*
    * Verify zero ULPs difference between the values.
    *
    * @param d1
@@ -1875,8 +1873,8 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  //    /**
-  //     * Derived from <a
+  //    /*
+//     * Derived from <a
   //     * href="http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm">
   //     * Comparing floating point numbers </a> by Bruce Dawson.
   //     *
@@ -1950,8 +1948,8 @@ public abstract class TestCase2 extends TestCase {
   //
   //    }
   //
-  //    /**
-  //     * Derived from <a
+  //    /*
+//     * Derived from <a
   //     * href="http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm">
   //     * Comparing floating point numbers </a> by Bruce Dawson.
   //     *
@@ -2029,7 +2027,7 @@ public abstract class TestCase2 extends TestCase {
   //
   //    }
 
-  /**
+  /*
    * Provides a proper basis for comparing floating point numbers (the values must be within 10 ulps
    * of one another).
    *
@@ -2039,7 +2037,7 @@ public abstract class TestCase2 extends TestCase {
     assertEquals("", expected, actual);
   }
 
-  /**
+  /*
    * Provides a proper basis for comparing floating point numbers (the values must be within 10 ulps
    * of one another).
    *
@@ -2069,7 +2067,7 @@ public abstract class TestCase2 extends TestCase {
             + ulps);
   }
 
-  /**
+  /*
    * Provides a proper basis for comparing floating point numbers (the values must be within 10 ulps
    * of one another).
    *
@@ -2081,7 +2079,7 @@ public abstract class TestCase2 extends TestCase {
     assertEquals("", expected, actual);
   }
 
-  /**
+  /*
    * Provides a proper basis for comparing floating point numbers (the values must be within 10 ulps
    * of one another).
    *
@@ -2094,7 +2092,7 @@ public abstract class TestCase2 extends TestCase {
     assertEqualsWithinUlps(message, expected, actual, 10 /*maxUlps*/);
   }
 
-  /**
+  /*
    * Provides a proper basis for comparing floating point numbers (the values must be within
    * <i>maxUlps</i> of one another).
    *
@@ -2136,7 +2134,7 @@ public abstract class TestCase2 extends TestCase {
     assertTrue(message + ": expected " + expected + ", not " + actual, expected.equals(actual));
   }
 
-  /**
+  /*
    * This uses {@link BigDecimal#compareTo( Object other )}, which considers that two {@link
    * BigDecimal}s that are equal in <i>value</i> but have a different <i>scale</i> are the same.
    * (This is NOT true of {@link BigDecimal#equals( Object other )}, which also requires the values
@@ -2147,7 +2145,7 @@ public abstract class TestCase2 extends TestCase {
     assertEquals("", expected, actual);
   }
 
-  /**
+  /*
    * This uses {@link BigDecimal#compareTo( Object other )}, which considers that two {@link
    * BigDecimal}s that are equal in <i>value</i> but have a different <i>scale</i> are the same.
    * (This is NOT true of {@link BigDecimal#equals( Object other )}, which also requires the values
@@ -2159,7 +2157,7 @@ public abstract class TestCase2 extends TestCase {
         message + ": expected " + expected + ", not " + actual, expected.compareTo(actual) == 0);
   }
 
-  /**
+  /*
    * Helper method verifies that the arrays are consistent in length and that their elements are
    * consistent under {@link Object#equals( Object other )}.
    */
@@ -2167,7 +2165,7 @@ public abstract class TestCase2 extends TestCase {
     assertSameArray("", expected, actual);
   }
 
-  /**
+  /*
    * Helper method verifies that the arrays are consistent in length and that their elements are
    * consistent under {@link Object#equals( Object other )}.
    */
@@ -2221,7 +2219,7 @@ public abstract class TestCase2 extends TestCase {
     }
   }
 
-  /**
+  /*
    * Examines a stack trace for an instance of the specified cause nested to any level within that
    * stack trace.
    *
@@ -2254,7 +2252,7 @@ public abstract class TestCase2 extends TestCase {
     return getInnerCause(t, cls);
   }
 
-  /**
+  /*
    * Examines a stack trace for an instance of the specified cause nested to any level within that
    * stack trace.
    *

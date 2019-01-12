@@ -27,8 +27,8 @@ import org.embergraph.rdf.sparql.ast.IQueryNode;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * The maximum #of chunks that can be buffered before an the producer would block (default {@value
+/*
+* The maximum #of chunks that can be buffered before an the producer would block (default {@value
  * BufferAnnotations#DEFAULT_CHUNK_OF_CHUNKS_CAPACITY}). Note that partial chunks may be combined
  * into full chunks whose nominal capacity is specified by {@link BufferAnnotations#CHUNK_CAPACITY}.
  *

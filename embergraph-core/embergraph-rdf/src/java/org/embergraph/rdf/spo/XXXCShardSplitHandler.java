@@ -32,8 +32,8 @@ import org.embergraph.btree.keys.SuccessorUtil;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 
-/**
- * A split handler for the xxxC quads indices which ensures that all quads for the same "triple" are
+/*
+* A split handler for the xxxC quads indices which ensures that all quads for the same "triple" are
  * in the same shard. The use of this split handler allows optimizations for default graph queries
  * in scale-out. Since all quads for a given triple are known to be on the same shard, we can use
  * the {@link ContextAdvancer} to skip to the next possible triple without imposing a "DISTINCT"
@@ -49,7 +49,7 @@ public class XXXCShardSplitHandler implements ISimpleSplitHandler, Serializable 
 
   private static final transient Logger log = Logger.getLogger(XXXCShardSplitHandler.class);
 
-  /**
+  /*
    * Return a separator key which does not split quads for the same triple prefix.
    *
    * <p>A "quad" key is formed by an <code>IV[4]</code> array. For an index whose last key component

@@ -34,8 +34,8 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 
-/**
- * AST optimizer recognizes datatype and/or value range constraints and applies them to as range
+/*
+* AST optimizer recognizes datatype and/or value range constraints and applies them to as range
  * constraints to {@link StatementPatternNode}s.
  *
  * <p>Datatype constraints on a variable always bind on the Object position of a statement as it is

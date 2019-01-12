@@ -27,7 +27,7 @@ public class HARootBlockRequest implements IHARootBlockRequest, Serializable {
   private final UUID storeUUID;
   private final boolean isNonBlocking;
 
-  /**
+  /*
    * Create a non-blocking request (this is the historical behavior).
    *
    * @param storeUUID The store UUID (optional).
@@ -37,7 +37,7 @@ public class HARootBlockRequest implements IHARootBlockRequest, Serializable {
     this(storeUUID, true /* isNonBlocking */);
   }
 
-  /**
+  /*
    * @param storeUUID The store UUID (optional).
    * @param isNonBlocking <code>true</code> iff the request should be non-blocking.
    */

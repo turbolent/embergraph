@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test suite for FILTER evaluation.
+/*
+* Test suite for FILTER evaluation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -59,7 +59,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("filters_or_equals").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -83,7 +83,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("filters_and_equals").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -102,7 +102,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("filters_and_nequals").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -121,7 +121,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("filter_literals").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -140,7 +140,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("filter_regex").runTest();
   }
 
-  /**
+  /*
    * Test correct behavior of redundant filters (fix of issue #972)
    *
    * <pre>

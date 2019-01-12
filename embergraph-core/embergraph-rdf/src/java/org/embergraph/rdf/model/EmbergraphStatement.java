@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -43,8 +43,8 @@ package org.embergraph.rdf.model;
 import org.embergraph.rdf.spo.ISPO;
 import org.openrdf.model.Statement;
 
-/**
- * Also reports whether the statement is explicit, inferred or an axiom.
+/*
+* Also reports whether the statement is explicit, inferred or an axiom.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -52,28 +52,28 @@ import org.openrdf.model.Statement;
 public interface EmbergraphStatement extends Statement, ISPO {
 
   /** Specialized return type. */
-  public EmbergraphResource getSubject();
+  EmbergraphResource getSubject();
 
   /** Specialized return type. */
-  public EmbergraphURI getPredicate();
+  EmbergraphURI getPredicate();
 
   /** Specialized return type. */
-  public EmbergraphValue getObject();
+  EmbergraphValue getObject();
 
   /** Specialized return type. */
-  public EmbergraphResource getContext();
+  EmbergraphResource getContext();
 
-  /**
+  /*
    * <code>true</code> if the statement is an axiom that is not present as an explicit assertion.
    */
-  public boolean isAxiom();
+  boolean isAxiom();
 
-  /**
+  /*
    * <code>true</code> if the statement is an inference that is not present as an explicit assertion
    * or an axiom.
    */
-  public boolean isInferred();
+  boolean isInferred();
 
   /** <code>true</code> if the statement is an explicit assertion. */
-  public boolean isExplicit();
+  boolean isExplicit();
 }

@@ -20,8 +20,8 @@ package org.embergraph.rdf.internal;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * Utility IV to generate IVs for URIs in the form of http://example.org/value/0000513 where the
+/*
+* Utility IV to generate IVs for URIs in the form of http://example.org/value/0000513 where the
  * localName is in integer printed with fixed width padding.
  *
  * <p>You should extend this class with implementation for specific instances of URIs that follow

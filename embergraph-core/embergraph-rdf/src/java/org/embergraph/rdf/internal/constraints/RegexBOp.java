@@ -47,7 +47,7 @@ public class RegexBOp extends XSDBooleanIVValueExpression implements INeedsMater
 
   private static final boolean info = log.isInfoEnabled();
 
-  /**
+  /*
    * Local member to implement {@link QueryHints.REGEX_MATCH_NON_STRING}
    *
    * <p>{@link BLZG-1780}
@@ -57,7 +57,7 @@ public class RegexBOp extends XSDBooleanIVValueExpression implements INeedsMater
   public interface Annotations extends XSDBooleanIVValueExpression.Annotations {
 
     /** The cached regex pattern. */
-    public String PATTERN = RegexBOp.class.getName() + ".pattern";
+    String PATTERN = RegexBOp.class.getName() + ".pattern";
   }
 
   private static Map<String, Object> anns(
@@ -148,7 +148,7 @@ public class RegexBOp extends XSDBooleanIVValueExpression implements INeedsMater
     return accept(var, pattern.getValue(), flags != null ? flags.getValue() : null);
   }
 
-  /**
+  /*
    * Lifted directly from Sesame's EvaluationStrategyImpl.
    *
    * <p>FIXME The Pattern should be cached if the pattern argument and flags are constants.
@@ -201,8 +201,8 @@ public class RegexBOp extends XSDBooleanIVValueExpression implements INeedsMater
 
         if (Thread.interrupted()) {
 
-          /*
-           * Eagerly notice if the operator is interrupted.
+        /*
+       * Eagerly notice if the operator is interrupted.
            *
            * Note: Regex can be a high latency operation for a large
            * RDF Literal. Therefore we want to check for an interrupt
@@ -259,8 +259,8 @@ public class RegexBOp extends XSDBooleanIVValueExpression implements INeedsMater
             break;
           case 'i':
             {
-              /*
-               * The SPARQL REGEX operator is based on the XQuery REGEX
+            /*
+       * The SPARQL REGEX operator is based on the XQuery REGEX
                * operator. That operator should be Unicode clean by
                * default. Therefore, when case-folding is specified, we
                * also need to include the UNICODE_CASE option.

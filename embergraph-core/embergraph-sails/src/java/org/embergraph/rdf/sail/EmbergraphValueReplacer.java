@@ -41,8 +41,8 @@ import org.openrdf.query.impl.BindingImpl;
 import org.openrdf.query.impl.DatasetImpl;
 import org.openrdf.query.impl.MapBindingSet;
 
-/**
- * Utility class to manage the efficient translation of openrdf {@link Value}s in a {@link
+/*
+* Utility class to manage the efficient translation of openrdf {@link Value}s in a {@link
  * BindingSet} into the {@link EmbergraphValue}s used internally by embergraph.
  *
  * @see EmbergraphOpenRDFBindingSetsResolverator
@@ -62,7 +62,7 @@ public class EmbergraphValueReplacer {
     this.database = database;
   }
 
-  /**
+  /*
    * Batch resolve and replace all {@link Value} objects stored in variables or in the {@link
    * Dataset} with {@link EmbergraphValue} objects, which have access to the 64-bit internal term
    * identifier associated with each value in the database.
@@ -141,15 +141,15 @@ public class EmbergraphValueReplacer {
 
         if (iv == null) {
 
-          /*
-           * Since the term identifier is NULL this value is not known
+        /*
+       * Since the term identifier is NULL this value is not known
            * to the kb.
            */
 
           if (log.isInfoEnabled()) log.info("Not in knowledge base: " + term);
 
-          /*
-           * Create a dummy iv and cache the unknown value on it so
+        /*
+       * Create a dummy iv and cache the unknown value on it so
            * that it can be used during query evalution.
            */
           @SuppressWarnings("rawtypes")
@@ -180,8 +180,8 @@ public class EmbergraphValueReplacer {
       // Generate each output solution from each source solution.
       for (int i = 0; i < bindingSets.length; i++) {
 
-        /*
-         * Replace the bindings with one's which have their IV set.
+      /*
+       * Replace the bindings with one's which have their IV set.
          */
 
         final MapBindingSet bindings2 = new MapBindingSet();
@@ -194,8 +194,8 @@ public class EmbergraphValueReplacer {
 
           final BindingImpl binding = (BindingImpl) it.next();
 
-          /*
-           * Note: We can not do this. The Sesame APIs let bindings
+        /*
+       * Note: We can not do this. The Sesame APIs let bindings
            * flow through the query even if they are not projected by
            * the query.
            */
@@ -232,8 +232,8 @@ public class EmbergraphValueReplacer {
           //
           //                }
 
-          /*
-           * This is no good. We need to create a mock IV and also cache
+        /*
+       * This is no good. We need to create a mock IV and also cache
            * the unknown value on it so that it can be used in filter
            * evaluation. I took care of this above.
            */

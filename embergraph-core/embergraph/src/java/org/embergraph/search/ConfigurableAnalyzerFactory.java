@@ -26,8 +26,8 @@ import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.util.Version;
 
-/**
- * This class can be used with the embergraph properties file to specify which {@link Analyzer}s are
+/*
+* This class can be used with the embergraph properties file to specify which {@link Analyzer}s are
  * used for which languages. Languages are specified by the language tag on RDF literals, which
  * conform with <a href="http://www.rfc-editor.org/rfc/rfc5646.txt">RFC 5646</a>. Within embergraph
  * plain literals are assigned to the default locale's language.
@@ -106,7 +106,7 @@ public class ConfigurableAnalyzerFactory implements IAnalyzerFactory {
 
   /** Options understood by the {@link ConfigurableAnalyzerFactory}. */
   public interface Options {
-    /**
+    /*
      * By setting this option to true, then all the known Lucene Analyzers for natural languages are
      * used for a range of language tags. These settings may then be overridden by the settings of
      * the user. Specifically the following properties are loaded, prior to loading the user's
@@ -151,12 +151,12 @@ public class ConfigurableAnalyzerFactory implements IAnalyzerFactory {
 
     String DEFAULT_NATURAL_LANGUAGE_SUPPORT = "false";
   }
-  /**
+  /*
    * Options understood by analyzers created by {@link ConfigurableAnalyzerFactory}. These options
    * are appended to the RFC 4647 language range
    */
   public interface AnalyzerOptions {
-    /**
+    /*
      * If specified this is the fully qualified name of a subclass of {@link Analyzer} that has
      * appropriate constructors. This is set implicitly if some of the options below are selected
      * (for example {@link #PATTERN}). For each configured language range, if it is not set, either
@@ -164,7 +164,7 @@ public class ConfigurableAnalyzerFactory implements IAnalyzerFactory {
      */
     String ANALYZER_CLASS = "analyzerClass";
 
-    /**
+    /*
      * The value of this property is a language range, for which an analyzer is defined. Treat this
      * language range in the same way as the specified language range.
      *
@@ -174,7 +174,7 @@ public class ConfigurableAnalyzerFactory implements IAnalyzerFactory {
      */
     String LIKE = "like";
 
-    /**
+    /*
      * The value of this property is one of:
      *
      * <dl>
@@ -197,34 +197,34 @@ public class ConfigurableAnalyzerFactory implements IAnalyzerFactory {
     String STOPWORDS_VALUE_DEFAULT = "default";
 
     String STOPWORDS_VALUE_NONE = "none";
-    /**
+    /*
      * The value of the pattern parameter to {@link PatternAnalyzer#PatternAnalyzer(Version,
      * Pattern, boolean, Set)} (Note the {@link Pattern#UNICODE_CHARACTER_CLASS} flag is enabled).
      * It is an error if a different analyzer class is specified.
      */
     String PATTERN = "pattern";
-    /**
+    /*
      * The value of the wordBoundary parameter to {@link
      * TermCompletionAnalyzer#TermCompletionAnalyzer(Pattern, Pattern, Pattern, boolean)} (Note the
      * {@link Pattern#UNICODE_CHARACTER_CLASS} flag is enabled). It is an error if a different
      * analyzer class is specified.
      */
     String WORD_BOUNDARY = "wordBoundary";
-    /**
+    /*
      * The value of the subWordBoundary parameter to {@link
      * TermCompletionAnalyzer#TermCompletionAnalyzer(Pattern, Pattern, Pattern, boolean)} (Note the
      * {@link Pattern#UNICODE_CHARACTER_CLASS} flag is enabled). It is an error if a different
      * analyzer class is specified.
      */
     String SUB_WORD_BOUNDARY = "subWordBoundary";
-    /**
+    /*
      * The value of the softHyphens parameter to {@link
      * TermCompletionAnalyzer#TermCompletionAnalyzer(Pattern, Pattern, Pattern, boolean)} (Note the
      * {@link Pattern#UNICODE_CHARACTER_CLASS} flag is enabled). It is an error if a different
      * analyzer class is specified.
      */
     String SOFT_HYPHENS = "softHyphens";
-    /**
+    /*
      * The value of the alwaysRemoveSoftHypens parameter to {@link
      * TermCompletionAnalyzer#TermCompletionAnalyzer(Pattern, Pattern, Pattern, boolean)} (Note the
      * {@link Pattern#UNICODE_CHARACTER_CLASS} flag is enabled). It is an error if a different
@@ -234,14 +234,14 @@ public class ConfigurableAnalyzerFactory implements IAnalyzerFactory {
 
     boolean DEFAULT_ALWAYS_REMOVE_SOFT_HYPHENS = false;
 
-    /**
+    /*
      * The default sub-word boundary is a pattern that never matches, i.e. there are no sub-word
      * boundaries.
      */
     Pattern DEFAULT_SUB_WORD_BOUNDARY = Pattern.compile("(?!)");
   }
 
-  /**
+  /*
    * Initialization is a little tricky, because on the very first call to the constructor with a new
    * namespace or a new journal the fullTextIndex is not ready for use. Therefore we delegate to an
    * unconfigured object which on the first call to {@link
@@ -250,7 +250,7 @@ public class ConfigurableAnalyzerFactory implements IAnalyzerFactory {
    */
   IAnalyzerFactory delegate;
 
-  /**
+  /*
    * Builds a new ConfigurableAnalyzerFactory.
    *
    * @param fullTextIndex

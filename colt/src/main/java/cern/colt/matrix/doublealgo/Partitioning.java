@@ -12,8 +12,8 @@ import cern.colt.Swapper;
 import cern.colt.function.IntComparator;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * Given some interval boundaries, partitions matrices such that cell values falling into an
+/*
+* Given some interval boundaries, partitions matrices such that cell values falling into an
  * interval are placed next to each other.
  *
  * <p><b>Performance</b>
@@ -28,7 +28,7 @@ import cern.colt.matrix.DoubleMatrix2D;
 public class Partitioning extends Object {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Partitioning() {}
-  /**
+  /*
    * Same as {@link cern.colt.Partitioning#partition(int[],int,int,int[],int,int,int[])} except that
    * it <i>synchronously</i> partitions the rows of the given matrix by the values of the given
    * matrix column; This is essentially the same as partitioning a list of composite objects by some
@@ -166,7 +166,7 @@ public class Partitioning extends Object {
     cern.colt.Partitioning.genericPartition(
         rowFrom, rowTo, splitFrom, splitTo, splitIndexes, comp, comp2, comp3, swapper);
   }
-  /**
+  /*
    * Same as {@link cern.colt.Partitioning#partition(int[],int,int,int[],int,int,int[])} except that
    * it <i>synchronously</i> partitions the rows of the given matrix by the values of the given
    * matrix column; This is essentially the same as partitioning a list of composite objects by some
@@ -246,7 +246,7 @@ public class Partitioning extends Object {
     // view the matrix according to the reordered row indexes
     return matrix.viewSelection(rowIndexes, columnIndexes);
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int[],int,int,int[])} except that it
    * <i>synchronously</i> partitions the rows of the given matrix by the values of the given matrix
    * column; This is essentially the same as partitioning a list of composite objects by some
@@ -382,7 +382,7 @@ public class Partitioning extends Object {
     }
     */
   }
-  /**
+  /*
    * Same as {@link #partition(int[],int,int,int)} except that it <i>synchronously</i> partitions
    * the rows of the given matrix by the values of the given matrix column; This is essentially the
    * same as partitioning a list of composite objects by some instance variable; In other words, two

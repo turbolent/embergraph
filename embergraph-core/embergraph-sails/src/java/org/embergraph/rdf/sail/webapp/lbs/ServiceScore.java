@@ -29,27 +29,27 @@ import org.embergraph.quorum.Quorum;
 /** Helper class caches metadata about an {@link HAGlue} service. */
 public class ServiceScore {
 
-  /**
+  /*
    * The service {@link UUID} for the remote service.
    *
    * @see HAGlue#getServiceUUID()
    */
   private final UUID serviceUUID;
 
-  /**
+  /*
    * The hostname for the remote service.
    *
    * @see HAGlue#getHostname()
    */
   private String hostname;
 
-  /**
+  /*
    * The constructed <code>Request-URI</code> for the root of the servlet context for the NSS on the
    * remote service -or- <code>null</code> if anything goes wrong.
    */
   private String requestURI;
 
-  /**
+  /*
    * The service {@link UUID} for the remote service.
    *
    * @see HAGlue#getServiceUUID()
@@ -59,7 +59,7 @@ public class ServiceScore {
     return serviceUUID;
   }
 
-  /**
+  /*
    * The hostname for the remote service -or- <code>null</code> if something goes wrong.
    *
    * @see HAGlue#getHostname()
@@ -69,7 +69,7 @@ public class ServiceScore {
     return hostname;
   }
 
-  /**
+  /*
    * The <code>Request-URI</code> for the root of the web application on the target host. This is
    * assigned IFF everything succeeds. This is what we will use to proxy a request to the service
    * having the {@link UUID} given to the constructor.
@@ -114,7 +114,7 @@ public class ServiceScore {
         + "}";
   }
 
-  /**
+  /*
    * @param serviceUUID The {@link UUID} for the service.
    * @param hostname The hostname of the host on which the service is running.
    * @param requestURI The Request-URI for the service.
@@ -135,7 +135,7 @@ public class ServiceScore {
     this.requestURI = requestURI;
   }
 
-  /**
+  /*
    * Factory for {@link ServiceScore} instances.
    *
    * @param indexManager The index manager (required).
@@ -182,7 +182,7 @@ public class ServiceScore {
     {
       QuorumService<HAGlue> t;
       try {
-        t = (QuorumService<HAGlue>) quorum.getClient();
+        t = quorum.getClient();
       } catch (IllegalStateException ex) {
         // Note: Not available (quorum.start() not called).
         throw ex;

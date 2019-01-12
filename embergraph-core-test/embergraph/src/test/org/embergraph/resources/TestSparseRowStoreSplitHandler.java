@@ -41,8 +41,8 @@ import org.embergraph.sparse.Schema;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Tetst suite for {@link LogicalRowSplitHandler}.
+/*
+* Tetst suite for {@link LogicalRowSplitHandler}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -60,7 +60,7 @@ public class TestSparseRowStoreSplitHandler extends AbstractTestSegSplitter {
   /** A {@link SparseRowStore} schema used by some unit tests. */
   private static final Schema schema = new Schema("Employee", "Id", KeyType.Long);
 
-  /**
+  /*
    * Register a {@link BTree} against the journal, generate some data and commit the data.
    *
    * <p>Note: This is a bit slow since it does a commit after each logical row inserted into the
@@ -129,7 +129,7 @@ public class TestSparseRowStoreSplitHandler extends AbstractTestSegSplitter {
     return (BTree) store.getIndex(name);
   }
 
-  /**
+  /*
    * Note: The {@link SparseRowStore} constraint is also easy. We just need to find/create a
    * separator key which is equal to some {schema+primaryKey}. The same concerns about the
    * left/right separator keys apply. Again, it is very unlikely to have 200MB of data for a
@@ -229,8 +229,8 @@ public class TestSparseRowStoreSplitHandler extends AbstractTestSegSplitter {
         assertNotNull(prefix);
         assertNotSame("prefix length", 0, prefix.length);
 
-        /*
-         * Lookup the indexOf the prefix in the source B+Tree. For this
+      /*
+       * Lookup the indexOf the prefix in the source B+Tree. For this
          * unit test it will be an insertion point (there is no
          * columnName or timestamp in the prefix so it is not a complete
          * key for the sparse row store). Convert that to an index and
@@ -270,8 +270,8 @@ public class TestSparseRowStoreSplitHandler extends AbstractTestSegSplitter {
         // The 1st key prefix must be strictly LT the 2nd key prefix.
         assertTrue(cmp < 0);
 
-        /*
-         * Look at the 1st logical row before and after the separator
+      /*
+       * Look at the 1st logical row before and after the separator
          * key. These logical rows must have distinct primary key
          * values.  (Because of how the data are generated, they will
          * in fact be separated by ONE (1).)

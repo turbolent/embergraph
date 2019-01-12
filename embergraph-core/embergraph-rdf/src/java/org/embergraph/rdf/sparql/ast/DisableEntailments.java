@@ -24,8 +24,8 @@ package org.embergraph.rdf.sparql.ast;
 import java.util.Map;
 import org.embergraph.bop.BOp;
 
-/**
- * The DISABLE ENTAILMENTS operation disable incremental truth maintenance.
+/*
+* The DISABLE ENTAILMENTS operation disable incremental truth maintenance.
  *
  * <pre>
  * DISABLE ENTAILMENTS
@@ -44,7 +44,7 @@ public class DisableEntailments extends GraphUpdate {
     super(UpdateType.DisableEntailments);
   }
 
-  /**
+  /*
    * @param args
    * @param anns
    */

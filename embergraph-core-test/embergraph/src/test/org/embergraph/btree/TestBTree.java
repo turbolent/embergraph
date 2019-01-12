@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.btree;
 
-/**
- * Stress tests for basic tree operations (insert, lookup, and remove) without causing node or leaf
+/*
+* Stress tests for basic tree operations (insert, lookup, and remove) without causing node or leaf
  * evictions (IO is disabled).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -55,7 +55,7 @@ public class TestBTree extends AbstractBTreeTestCase {
     doRemoveStructureStressTest(5, nkeys);
   }
 
-  /**
+  /*
    * Stress test of insert, removal and lookup of keys in the tree (allows splitting of the root
    * leaf).
    *
@@ -76,7 +76,7 @@ public class TestBTree extends AbstractBTreeTestCase {
     doInsertLookupRemoveStressTest(16, 10000, ntrials);
   }
 
-  /**
+  /*
    * Note: This error was actually a fence post in {@link Node#dump(java.io.PrintStream, int,
    * boolean))}. That method was incorrectly reporting an error when nkeys was zero after a split of
    * a node.
@@ -90,7 +90,7 @@ public class TestBTree extends AbstractBTreeTestCase {
     doKnownKeySequenceTest(getBTree(m), order, 3);
   }
 
-  /**
+  /*
    * A stress test for sequential key insertion that runs with a variety of branching factors and
    * #of keys to insert.
    */
@@ -112,7 +112,7 @@ public class TestBTree extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * A stress test for sequential decreasing key insertions that runs with a variety of branching
    * factors and #of keys to insert.
    */
@@ -134,7 +134,7 @@ public class TestBTree extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Stress test inserts random permutations of keys into btrees of order m for several different
    * btrees, #of keys to be inserted, and permutations of keys.
    */
@@ -147,7 +147,7 @@ public class TestBTree extends AbstractBTreeTestCase {
     doSplitTest(5, 0);
   }
 
-  /**
+  /*
    * A stress test for random key insertion using a that runs with a variety of branching factors
    * and #of keys to insert.
    */
@@ -169,8 +169,8 @@ public class TestBTree extends AbstractBTreeTestCase {
     }
   }
 
-  //    /**
-  //     * The branching factors that will be used in the stress tests. The larger
+  //    /*
+//     * The branching factors that will be used in the stress tests. The larger
   //     * the branching factor, the longer the run for these tests. The very small
   //     * branching factors (3, 4) test the btree code more fully since they will
   //     * exercise the fence posts on the invariants for nodes and leaves on pretty
@@ -178,8 +178,8 @@ public class TestBTree extends AbstractBTreeTestCase {
   //     */
   //    int[] branchingFactors = new int[]{3,4};//,5,10,20,64};//,128};//,512};
   //
-  //    /**
-  //     * A stress test for sequential key insertion that runs with a variety of
+  //    /*
+//     * A stress test for sequential key insertion that runs with a variety of
   //     * branching factors and #of keys to insert.
   //     */
   //    public void test_splitRootLeaf_increasingKeySequence() {
@@ -268,8 +268,8 @@ public class TestBTree extends AbstractBTreeTestCase {
   //
   //    }
   //
-  //    /**
-  //     * A stress test for sequential decreasing key insertions that runs with a
+  //    /*
+//     * A stress test for sequential decreasing key insertions that runs with a
   //     * variety of branching factors and #of keys to insert.
   //     */
   //    public void test_splitRootLeaf_decreasingKeySequence() {
@@ -358,8 +358,8 @@ public class TestBTree extends AbstractBTreeTestCase {
   //
   //    }
   //
-  //    /**
-  //     * A stress test for random key insertion that runs with a variety of
+  //    /*
+//     * A stress test for random key insertion that runs with a variety of
   //     * branching factors and #of keys to insert.
   //     */
   //    public void test_splitRootLeaf_randomKeySequence() {
@@ -432,8 +432,8 @@ public class TestBTree extends AbstractBTreeTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Stress test inserts random permutations of keys into btrees of order m
+  //    /*
+//     * Stress test inserts random permutations of keys into btrees of order m
   //     * for several different btrees, #of keys to be inserted, and permutations
   //     * of keys.
   //     */
@@ -449,8 +449,8 @@ public class TestBTree extends AbstractBTreeTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Stress test of insert, removal and lookup of keys in the tree (allows
+  //    /*
+//     * Stress test of insert, removal and lookup of keys in the tree (allows
   //     * splitting of the root leaf).
   //     */
   //    public void test_insertLookupRemoveKeyTreeStressTest() {
@@ -469,8 +469,8 @@ public class TestBTree extends AbstractBTreeTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Stress test for building up a tree and then removing all keys in a random
+  //    /*
+//     * Stress test for building up a tree and then removing all keys in a random
   //     * order.
   //     */
   //    public void test_stress_removeStructure() {

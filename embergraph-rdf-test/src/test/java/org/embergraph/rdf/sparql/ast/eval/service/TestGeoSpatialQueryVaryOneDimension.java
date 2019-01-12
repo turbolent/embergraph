@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite for querying of (i) our built-in datatypes and (ii) a comprehensive custom
+/*
+* Data driven test suite for querying of (i) our built-in datatypes and (ii) a comprehensive custom
  * datatype where we restrict only one of the existing dimensions, in order to make sure that the
  * constraints for all dimensions are properly considered.
  *

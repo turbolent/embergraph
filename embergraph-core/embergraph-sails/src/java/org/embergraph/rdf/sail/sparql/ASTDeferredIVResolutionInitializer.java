@@ -81,8 +81,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.MalformedQueryException;
 
-/**
- * Visits the AST model and builds a map from each RDF {@link Value} to {@link EmbergraphValue}
+/*
+* Visits the AST model and builds a map from each RDF {@link Value} to {@link EmbergraphValue}
  * objects that have mock IVs assigned to them.
  *
  * <p>Note: The {@link PrefixDeclProcessor} will rewrite {@link ASTQName} nodes as {@link ASTIRI}
@@ -119,7 +119,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
 
   private final LinkedHashMap<ASTRDFValue, EmbergraphValue> nodes;
 
-  /**
+  /*
    * Return a map from openrdf {@link Value} objects to the corresponding {@link EmbergraphValue}
    * objects for all {@link Value}s that appear in the parse tree.
    */
@@ -143,7 +143,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
     this.vocab = new LinkedHashMap<>();
   }
 
-  /**
+  /*
    * Visit the parse tree, locating and collecting references to all {@link ASTRDFValue} nodes
    * (including blank nodes iff we are in a told bnodes mode). The {@link ASTRDFValue}s are
    * collected in a {@link Map} which associates each one with a {@link EmbergraphValue} object
@@ -323,7 +323,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
     }
   }
 
-  /**
+  /*
    * Reconstructs EmbergraphValue out of IV, creating literals if needed
    *
    * <p>{@link IVUtility#decode(String, String)} is used by {@link
@@ -380,11 +380,11 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
         case XSDString:
           embergraphValue =
               valueFactory.createLiteral(
-                  ((AbstractLiteralIV) iv).stringValue(), dte.getDatatypeURI());
+                  iv.stringValue(), dte.getDatatypeURI());
           break;
         case XSDInteger:
           embergraphValue =
-              valueFactory.createLiteral(((AbstractLiteralIV) iv).stringValue(), XMLSchema.INTEGER);
+              valueFactory.createLiteral(iv.stringValue(), XMLSchema.INTEGER);
           break;
         case XSDDecimal:
           embergraphValue =
@@ -417,7 +417,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
     return embergraphValue;
   }
 
-  /**
+  /*
    * FIXME Should this be using the {@link LexiconConfiguration} to create appropriate inline {@link
    * IV}s when and where appropriate?
    */
@@ -429,7 +429,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
       throw new VisitorException("QNames must be resolved before resolving RDF Values");
     }
 
-    /**
+    /*
      * Note: Blank nodes within a QUERY are treated as anonymous variables, even when we are in a
      * told bnodes mode.
      */
@@ -531,7 +531,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
     }
   }
 
-  /**
+  /*
    * Decode an IV from its string representation and type, provided in as ASTRDFLiteral node in AST
    * model.
    *
@@ -614,7 +614,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
         }
       case XSDUnsignedInt:
         {
-          return new XSDUnsignedIntIV((int) (Integer.valueOf(val) + Integer.MIN_VALUE));
+          return new XSDUnsignedIntIV((Integer.valueOf(val) + Integer.MIN_VALUE));
         }
       case XSDUnsignedLong:
         {

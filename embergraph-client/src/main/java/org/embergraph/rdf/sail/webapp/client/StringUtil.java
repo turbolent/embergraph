@@ -23,8 +23,8 @@
  */
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * Fast String Utilities.
+/*
+* Fast String Utilities.
  *
  * <p>These string utilities provide both convenience methods and performance improvements over most
  * standard library versions. The main aim of the optimizations is to avoid object creation unless
@@ -32,7 +32,7 @@ package org.embergraph.rdf.sail.webapp.client;
  */
 public class StringUtil {
 
-  /**
+  /*
    * Convert String to an long. Parses up to the first non-numeric character. If no number is found
    * an IllegalArgumentException is thrown
    *

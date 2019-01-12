@@ -30,8 +30,8 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Proxied test suite for the <code>HASSTMT</code> REST API method.
+/*
+* Proxied test suite for the <code>HASSTMT</code> REST API method.
  *
  * @param <S>
  * @see <a href="http://trac.bigdata.com/ticket/1109" >hasStatements can overestimate and ignores
@@ -210,7 +210,7 @@ public class Test_REST_HASSTMT<S extends IIndexManager> extends AbstractTestNano
             ));
   }
 
-  /**
+  /*
    * Adds test coverage using read/write tx and verifies that the behavior is correct after we
    * delete statements (that is, it is not relying on a fast range count for read/write tx
    * namespaces).
@@ -239,7 +239,7 @@ public class Test_REST_HASSTMT<S extends IIndexManager> extends AbstractTestNano
       return p;
     }
 
-    /**
+    /*
      * Test the HASSTMT method when statements have been added, committed, and then removed from a
      * namespace that supports fully isolated read/write transactions.
      */
@@ -282,7 +282,7 @@ public class Test_REST_HASSTMT<S extends IIndexManager> extends AbstractTestNano
     }
   }
 
-  /**
+  /*
    * Test suite for the semantics of includeInferred (this requires setting up a namespace with
    * truth maintenance).
    */
@@ -297,7 +297,7 @@ public class Test_REST_HASSTMT<S extends IIndexManager> extends AbstractTestNano
           );
     }
 
-    /**
+    /*
      * Overlay the properties configuration for triples plus incremental truth maintenance.
      *
      * <p>Note: You still only want to run this test suite when the test mode is triples or sids. It

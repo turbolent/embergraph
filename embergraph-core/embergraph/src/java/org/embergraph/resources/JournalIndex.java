@@ -37,8 +37,8 @@ import org.embergraph.mdi.JournalMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.Bytes;
 
-/**
- * {@link BTree} mapping {@link IJournal} <em>createTimes</em> (long integers) to {@link
+/*
+* {@link BTree} mapping {@link IJournal} <em>createTimes</em> (long integers) to {@link
  * JournalMetadata} records describing the {@link IJournal}.
  *
  * <p>Note: Access to this object MUST be synchronized.
@@ -51,7 +51,7 @@ public class JournalIndex extends BTree {
   /** Instance used to encode the timestamp into the key. */
   private final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
 
-  /**
+  /*
    * Create a transient instance.
    *
    * @return The new instance.
@@ -67,7 +67,7 @@ public class JournalIndex extends BTree {
     return (JournalIndex) BTree.createTransient(/*store, */ metadata);
   }
 
-  /**
+  /*
    * Load from the store.
    *
    * @param store The backing store.
@@ -83,7 +83,7 @@ public class JournalIndex extends BTree {
     super(store, checkpoint, metadata, readOnly);
   }
 
-  /**
+  /*
    * Encodes the commit time into a key.
    *
    * @param commitTime The commit time.
@@ -96,7 +96,7 @@ public class JournalIndex extends BTree {
     return keyBuilder.reset().append(commitTime).getKey();
   }
 
-  /**
+  /*
    * Return the {@link JournalMetadata} identifying the journal having the largest createTime that
    * is less than or equal to the given timestamp. This is used primarily to locate the commit
    * record that will serve as the ground state for a transaction having <i>timestamp</i> as its
@@ -138,7 +138,7 @@ public class JournalIndex extends BTree {
     return entry;
   }
 
-  /**
+  /*
    * Find the first journal whose <em>createTime</em> is strictly greater than the timestamp.
    *
    * @param timestamp The timestamp. A value of ZERO (0) may be used to find the first journal.
@@ -166,7 +166,7 @@ public class JournalIndex extends BTree {
     return valueAtIndex(index);
   }
 
-  /**
+  /*
    * Find the index of the {@link ICommitRecord} having the largest timestamp that is less than or
    * equal to the given timestamp.
    *
@@ -210,7 +210,7 @@ public class JournalIndex extends BTree {
     }
   }
 
-  /**
+  /*
    * Add an entry under the commitTime associated with the {@link JournalMetadata} record.
    *
    * @param resourceMetadata The {@link JournalMetadata} record.
@@ -240,7 +240,7 @@ public class JournalIndex extends BTree {
     super.insert(key, SerializerUtil.serialize(resourceMetadata));
   }
 
-  /**
+  /*
    * Encapsulates key and value formation.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -257,7 +257,7 @@ public class JournalIndex extends BTree {
       super();
     }
 
-    /**
+    /*
      * Ctor when creating a new instance.
      *
      * @param keyBuilderFactory

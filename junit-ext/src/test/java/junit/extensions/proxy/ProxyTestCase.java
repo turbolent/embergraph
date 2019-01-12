@@ -49,7 +49,7 @@ public class ProxyTestCase extends TestCase implements IProxyTest {
   // ********************** Delegated Methods *******************
   // ************************************************************
 
-  /**
+  /*
    * This method succeeds on the delegate and it writes a message on {@link System#err}. The
    * implementation on the proxy throws an exception so if the proxy is not setup correctly, you
    * will see that thrown exception.
@@ -72,7 +72,7 @@ public class ProxyTestCase extends TestCase implements IProxyTest {
   // ************************** tests ***************************
   // ************************************************************
 
-  /**
+  /*
    * This test will fail unless the delegate has been correctly configured.
    *
    * <p>Note: If this test fails, then it can also be a symptom of attempting to directly execute

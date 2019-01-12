@@ -26,8 +26,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/**
- * A class providing static methods and objects that do useful things with bit vectors.
+/*
+* A class providing static methods and objects that do useful things with bit vectors.
  *
  * @see BitVector
  */
@@ -128,7 +128,7 @@ public class BitVectors {
         }
       };
 
-  /**
+  /*
    * Writes quickly a bit vector to a {@link DataOutputStream}.
    *
    * <p>This method writes a bit vector in a simple format: first, a long representing the length.
@@ -151,7 +151,7 @@ public class BitVectors {
     if (i < length) dos.writeLong(v.getLong(i, length));
   }
 
-  /**
+  /*
    * Reads quickly a bit vector from a {@link DataInputStream}.
    *
    * <p>This method is the dual of {@link #writeFast(BitVector, DataOutputStream)}. If you need to
@@ -166,13 +166,13 @@ public class BitVectors {
    */
   public static LongArrayBitVector readFast(DataInputStream dis) throws IOException {
     final long length = dis.readLong();
-    final long bits[] = new long[LongArrayBitVector.numWords(length)];
+    final long[] bits = new long[LongArrayBitVector.numWords(length)];
     final int l = bits.length;
     for (int i = 0; i < l; i++) bits[i] = dis.readLong();
     return LongArrayBitVector.wrap(bits, length);
   }
 
-  /**
+  /*
    * Reads quickly a bit vector from a {@link DataInputStream}.
    *
    * <p>This method is similar in purpose to {@link #readFast(DataInputStream)}, but it allows reuse
@@ -206,7 +206,7 @@ public class BitVectors {
     }
   }
 
-  /**
+  /*
    * A serializer for {@link LongArrayBitVector} instances that can be used with {@link
    * it.unimi.dsi.io.OfflineIterable}. It can serialize any implementation of {@link BitVector}, and
    * requires at construction time an instance of {@link LongArrayBitVector} that will be used to

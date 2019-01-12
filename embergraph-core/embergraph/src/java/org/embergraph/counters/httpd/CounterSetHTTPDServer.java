@@ -43,8 +43,8 @@ import org.embergraph.util.httpd.AbstractHTTPD;
 import org.embergraph.util.httpd.Config;
 import org.embergraph.util.httpd.NanoHTTPD;
 
-/**
- * An httpd server exposing a {@link CounterSet}. This may be used either for testing the {@link
+/*
+* An httpd server exposing a {@link CounterSet}. This may be used either for testing the {@link
  * CounterSetHTTPD} class or for post-mortem analysis of a saved {@link CounterSet}.
  *
  * @see #main(String[])
@@ -55,7 +55,7 @@ public class CounterSetHTTPDServer implements Runnable {
 
   protected static final transient Logger log = Logger.getLogger(NanoHTTPD.class);
 
-  /**
+  /*
    * Runs the httpd server. When the optional file(s) are given, they will be read into a {@link
    * CounterSet} on startup. This is useful for post-mortem analysis. The usage is
    *
@@ -145,8 +145,8 @@ public class CounterSetHTTPDServer implements Runnable {
             Logger.getLogger(NanoHTTPD.class).setLevel(level);
 
           } catch (Throwable t) {
-            /*
-             * Note: The SLF4J logging bridge can cause a
+          /*
+       * Note: The SLF4J logging bridge can cause a
              * NoSuchMethodException to be thrown here.
              *
              * @see https://sourceforge.net/apps/trac/bigdata/ticket/362
@@ -180,14 +180,14 @@ public class CounterSetHTTPDServer implements Runnable {
 
       } else {
 
-        /*
-         * Compute the optional filter to be applied when reading this
+      /*
+       * Compute the optional filter to be applied when reading this
          * file.
          */
         final Pattern pattern = QueryUtil.getPattern(filter, regex);
 
-        /*
-         * Read counters accepted by the optional filter into the
+      /*
+       * Read counters accepted by the optional filter into the
          * counter set to be served.
          */
         QueryUtil.readCountersFromFile(new File(arg), counterSet, pattern, unitsToRetain, unit);
@@ -255,7 +255,7 @@ public class CounterSetHTTPDServer implements Runnable {
     if (log.isInfoEnabled()) log.info("done");
   }
 
-  /**
+  /*
    * Runs {@link #shutdownNow()}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -278,8 +278,8 @@ public class CounterSetHTTPDServer implements Runnable {
 
         if (log.isInfoEnabled()) log.info("Running shutdown.");
 
-        /*
-         * Note: This is the "server" shutdown.
+      /*
+       * Note: This is the "server" shutdown.
          */
 
         server.shutdownNow();

@@ -28,8 +28,8 @@ import org.embergraph.io.LongPacker;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * HTree specific implementation.
+/*
+* HTree specific implementation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -43,7 +43,7 @@ public class HTreeIndexMetadata extends IndexMetadata {
     /** The name of a class derived from {@link HTree} that will be used to re-load the index. */
     String HTREE_CLASS_NAME = HTree.class.getName() + ".className";
 
-    /**
+    /*
      * The name of an optional property whose value specifies the number of address bits for an
      * {@link HTree} (default {@value #DEFAULT_HTREE_ADDRESS_BITS}).
      *
@@ -59,7 +59,7 @@ public class HTreeIndexMetadata extends IndexMetadata {
 
     String DEFAULT_HTREE_ADDRESS_BITS = "10";
 
-    /**
+    /*
      * The name of an optional property whose value specifies the fixed by length of the keys in the
      * {@link HTree} -or- ZERO (0) if the key length is unconstrained, in which case variable length
      * keys may be used (default {@value #DEFAULT_HTREE_KEY_LEN}). This may be used in combination
@@ -82,7 +82,7 @@ public class HTreeIndexMetadata extends IndexMetadata {
   /** @see Options#HTREE_KEY_LEN */
   private int keyLen;
 
-  /**
+  /*
    * The name of a class derived from {@link HTree} that will be used to re-load the index.
    *
    * @see Options#HTREE_CLASS_NAME
@@ -119,7 +119,7 @@ public class HTreeIndexMetadata extends IndexMetadata {
     this.keyLen = keyLen;
   }
 
-  /**
+  /*
    * <strong>De-serialization constructor only</strong> - DO NOT use this ctor for creating a new
    * instance! It will result in a thrown exception, typically from {@link #firstCheckpoint()}.
    */
@@ -128,7 +128,7 @@ public class HTreeIndexMetadata extends IndexMetadata {
     super();
   }
 
-  /**
+  /*
    * Constructor used to configure a new <em>unnamed</em> {@link HTree}. The index UUID is set to
    * the given value and all other fields are defaulted as explained at {@link
    * #HTreeIndexMetadata(Properties, String, UUID)}. Those defaults may be overridden using the
@@ -142,7 +142,7 @@ public class HTreeIndexMetadata extends IndexMetadata {
     this(null /* name */, indexUUID);
   }
 
-  /**
+  /*
    * Constructor used to configure a new <em>named</em> {@link BTree}. The index UUID is set to the
    * given value and all other fields are defaulted as explained at {@link
    * #IndexMetadata(Properties, String, UUID)}. Those defaults may be overridden using the various
@@ -160,7 +160,7 @@ public class HTreeIndexMetadata extends IndexMetadata {
     this(null /* name */, System.getProperties(), name, indexUUID);
   }
 
-  /**
+  /*
    * Constructor used to configure a new <em>named</em> B+Tree. The index UUID is set to the given
    * value and all other fields are defaulted as explained at {@link #getProperty(Properties,
    * String, String, String)}. Those defaults may be overridden using the various setter methods.

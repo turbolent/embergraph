@@ -68,8 +68,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.PseudoRandom;
 
-/**
- * Test suite for {@link BufferMode#DiskRW} journals.
+/*
+* Test suite for {@link BufferMode#DiskRW} journals.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -198,7 +198,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
   //    	log.info("fib 37: " + (t2-t1) + "ms, fib 40: " + (t3-t2) + "ms");
   //    }
 
-  /**
+  /*
    * The RWStore relies on several bit manipulation methods to manage both FixedAllocators and meta
    * allocations.
    *
@@ -236,7 +236,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     assertTrue(-1 == RWStore.fndBit(bits, bSize));
   }
 
-  /**
+  /*
    * Verify normal operation and basic assumptions when creating a new journal using {@link
    * BufferMode#DiskRW}.
    *
@@ -279,7 +279,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     if (file != null && file.exists()) fail("Did not delete the backing file: " + file);
   }
 
-  /**
+  /*
    * Unit test verifies that {@link Options#CREATE} may be used to initialize a journal on a newly
    * created empty file.
    *
@@ -309,7 +309,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Unit tests for optimization when using the {@link RWStore} but not using delete markers. In
    * this case, a post-order traversal is used to efficiently delete the nodes and leaves and the
    * root leaf is then replaced.
@@ -388,7 +388,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for an issue where the {@link RWStore} did not discard the logged delete blocks in
    * {@link RWStore#reset()}.
    *
@@ -536,7 +536,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractRestartSafeTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -649,8 +649,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
       return getStore(properties);
     }
 
-    // /**
-    // * Test that allocate() pre-extends the store when a record is
+    // /*
+// * Test that allocate() pre-extends the store when a record is
     // allocated
     // * which would overflow the current user extent.
     // */
@@ -705,14 +705,14 @@ public class TestRWJournal extends AbstractJournalTestCase {
     //
     // }
 
-    /**
+    /*
      * Test allocate()+read() where the record was never written (the data are undefined unless
      * written so there is nothing really to test here except for exceptions which might be through
      * for this condition).
      */
     public void test_allocate_then_read() {}
 
-    /**
+    /*
      * Reallocates the same object several times, then commits and tests read back.
      *
      * <p>Has been amended to exercise different cache read paths.
@@ -775,8 +775,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    //		/**
-    //		 * Test write of a record and then update of a slice of that record.
+    //		/*
+//		 * Test write of a record and then update of a slice of that record.
     //		 * <p>
     //		 * Note: Since the record was written but not flushed it will be found
     //		 * in the write cache by update().
@@ -784,7 +784,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     //		public void test_write_plus_update() {
     //		}
 
-    /**
+    /*
      * Ensures the allocation of unique addresses by mapping allocated address with uniqueness
      * assertion against physical address.
      */
@@ -822,7 +822,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Ensures the allocation of unique addresses by mapping allocated address with uniqueness
      * assertion against physical address.
      */
@@ -865,7 +865,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Tests the recycling of small slot alloctors and outputs statistics related to contiguous
      * allocations indicative of reduced IOPS.
      */
@@ -925,7 +925,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * At scale the small slot handling can lead to large amounts of store waste, tending to the
      * small slot allocation thresholds of 50%, dependent on use case.
      *
@@ -1003,7 +1003,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Basic allocation test to ensure the FixedAllocators are operating efficiently.
      *
      * <p>A 90 byte allocation is expected to fit in a 128byte block. If we only allocate this fixed
@@ -1045,7 +1045,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Not so much a test as a code coverage exercise.
      *
      * <p>The output from showAllocReserve confirms the relative merits of optimizing for space vs
@@ -1124,7 +1124,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       return retaddrs;
     }
 
-    /**
+    /*
      * Reallocation tests the freeing of allocated address and the re-use within a transaction.
      *
      * <p>The repeated runs with full reopening of the store check the initialization of the
@@ -1314,14 +1314,14 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * This tests whether AllocationContexts efficiently recycle transient allocations.
      *
      * <p>To do this it will allocate and free 1 million 50 byte regions, in batches of 10K.
      */
     public void testStressAllocationContextRecycling() {
 
-      final Journal store = (Journal) getStore(1);
+      final Journal store = getStore(1);
 
       try {
 
@@ -1362,7 +1362,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * This tests whether AllocationContexts efficiently recycle transient allocations with an
      * Unisolated AllocationContext.
      *
@@ -1370,7 +1370,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      */
     public void testStressUnisolatedAllocationContextRecycling() {
 
-      final Journal store = (Journal) getStore(1);
+      final Journal store = getStore(1);
 
       try {
 
@@ -1415,7 +1415,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       return (-rwaddr) >>> 13;
     }
 
-    /**
+    /*
      * Need to test the handling of aborted Unisolated connections and specifically the logic behind
      * freed addresses.
      *
@@ -1426,7 +1426,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      */
     public void testUnisolatedAllocationContextRecycling() {
 
-      final Journal store = (Journal) getStore(0);
+      final Journal store = getStore(0);
 
       try {
 
@@ -1577,7 +1577,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
     public void testSimpleUnisolatedAllocationContextRecycling() {
 
-      final Journal store = (Journal) getStore(0);
+      final Journal store = getStore(0);
 
       try {
 
@@ -1800,7 +1800,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Test to determine that allocation performance does not degrade at scale.
      *
      * <p>The idea is to first create 128K allocations, and measure recycling performance.
@@ -1818,7 +1818,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       // we want lots of allocators, but avoid a large file
       properties.setProperty(RWStore.Options.ALLOCATION_SIZES, "1,2,3,4,5,6,7,8"); // 512 max
 
-      final Journal store = (Journal) getStore(properties);
+      final Journal store = getStore(properties);
 
       try {
 
@@ -1896,7 +1896,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Test of blob allocation and read-back, firstly from cache and then from disk.
      *
      * @throws InterruptedException
@@ -1953,7 +1953,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Test of blob allocation and read-back, firstly from cache and then from disk.
      *
      * @throws InterruptedException
@@ -2014,8 +2014,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         if (rw.getHistoryRetention() != 0) {
           assertEquals(pa, bs.getPhysicalAddress(faddr));
 
-          /*
-           * Commit before testing for deferred frees. Since there is a
+        /*
+       * Commit before testing for deferred frees. Since there is a
            * prior commit point, we are not allowed to immediately free
            * any record from that commit point in order to preserve the
            * consistency of the last commit point, so we have to commit
@@ -2025,7 +2025,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
           store.commit();
 
-          Thread.currentThread().sleep(10); // to force deferredFrees
+          Thread.sleep(10); // to force deferredFrees
 
           // Request release of deferred frees.
           rw.checkDeferredFrees(/*true freeNow */ store);
@@ -2070,7 +2070,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Ttest write() + flush() + update() - for this case the data have been flushed from the write
      * cache so the update will be a random write on the file rather than being buffered by the
      * write cache.
@@ -2097,8 +2097,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // Note: This will result flush the write cache.
         store.commit();
 
-        /*
-         * Read back the record and verify the update is visible.
+      /*
+       * Read back the record and verify the update is visible.
          */
         {
           final ByteBuffer b = bufferStrategy.read(addr);
@@ -2160,7 +2160,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * From a RWStore, creates multiple AllocationContexts to isolate updates, re-allocate storage
      * and protect against by concurrent Contexts. This is the core functionality required to
      * support Transactions.
@@ -2249,21 +2249,21 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_stressCommit() {
-      Journal journal = (Journal) getStore(0); // remember no history!
+      Journal journal = getStore(0); // remember no history!
 
       for (int i = 0; i < 1000; i++) commitSomeData(journal);
     }
 
     public int doStressCommitIndex(final long retention, final int runs) {
-      final Journal journal = (Journal) getStore(retention); // remember no history!
+      final Journal journal = getStore(retention); // remember no history!
       try {
         final int cRuns = runs;
         for (int i = 0; i < cRuns; i++) commitSomeData(journal);
 
         final ITupleIterator<CommitRecordIndex.Entry> commitRecords;
         {
-          /*
-           * Commit can be called prior to Journal initialisation, in which
+        /*
+       * Commit can be called prior to Journal initialisation, in which
            * case the commitRecordIndex will not be set.
            */
           final IIndex commitRecordIndex = journal.getReadOnlyCommitRecordIndex();
@@ -2337,7 +2337,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_snapshotData() throws IOException {
-      final Journal journal = (Journal) getStore(0); // remember no history!
+      final Journal journal = getStore(0); // remember no history!
 
       try {
         for (int i = 0; i < 100; i++) commitSomeData(journal);
@@ -2355,7 +2355,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Tests whether tasks are able to access and modify data safely by emulating transactions by
      * calling activateTx and deactivateTx directly.
      */
@@ -2393,7 +2393,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * To stress the session protection, we will allocate a batch of addresses, then free half with
      * protection. Then reallocate half again after releasing the session. This should result in all
      * the original batch being allocated, exercising both session protection and write cache
@@ -2519,7 +2519,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       return reserved;
     }
 
-    /**
+    /*
      * Test low level RWStore add/removeAddress methods as used in HA WriteCache replication to
      * ensure Allocation consistency
      *
@@ -2553,7 +2553,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       rw2.addAddress(addr1, 123);
     }
 
-    /**
+    /*
      * Test low level RWStore add/removeAddress methods as used in HA WriteCache replication to
      * ensure Allocation consistency
      *
@@ -2583,7 +2583,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * The pureAlloc test is to test the allocation aspect of the memory management rather than
      * worrying about writing the data
      */
@@ -2645,7 +2645,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
 
       final RWStore rw = bs.getStore();
-      final int freeAddr[] = new int[512];
+      final int[] freeAddr = new int[512];
       int freeCurs = 0;
       for (int i = 0; i < grp; i++) {
         final int alloc = min + r.nextInt(sze - min);
@@ -2665,13 +2665,13 @@ public class TestRWJournal extends AbstractJournalTestCase {
       return 0L;
     }
 
-    /**
+    /*
      * Simple state tests.
      *
      * <p>These are written to confirm the allocation bit states for a number of scenarios.
      */
 
-    /**
+    /*
      * State1
      *
      * <p>Allocate - Commit - Free
@@ -2696,7 +2696,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Verify that we correctly restore the RWStore commit state if {@link RWStore#commit()} is
      * followed by {@link RWStore#reset()} rather than {@link RWStore#postCommit()}.
      *
@@ -2732,7 +2732,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Test verifies that a failure to retain the commit state in {@link RWStore#commit()} will
      * cause problems if the write set is discarded by {@link RWStore#reset()} such that subsequent
      * write sets run into persistent addressing errors.
@@ -2753,8 +2753,8 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // do first half of the RWStore protocol.
         rws.commit();
 
-        /*
-         * remove the commit state such that subsequent abort()/reset()
+      /*
+       * remove the commit state such that subsequent abort()/reset()
          * will fail to correctly restore the pre-commit state.
          */
         rws.clearCommitStateRef();
@@ -2782,7 +2782,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Verify that a double-commit causes an illegal state exception. Further verify that an {@link
      * RWStore#reset()} allwos us to then apply and commit new write sets.
      *
@@ -2821,7 +2821,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_allocCommitFreeWithHistory() {
-      final Journal store = (Journal) getStore(4);
+      final Journal store = getStore(4);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -2843,7 +2843,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       doBlobDeferredFrees(4000); // standard
     }
 
-    /**
+    /*
      * This is the test that was able to reproduce the recycler failure for BLZG-1236 when run with
      * 10M deferred frees.
      *
@@ -2861,7 +2861,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
       properties.setProperty(RWStore.Options.ALLOCATION_SIZES, "1,2,3,5,8,12,16"); // 1K
 
-      final Journal store = (Journal) getStore(properties);
+      final Journal store = getStore(properties);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -2884,7 +2884,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         store.commit();
 
         // Age the history (of the deletes!)
-        Thread.currentThread().sleep(6000);
+        Thread.sleep(6000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -2904,7 +2904,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * This test releases over a blobs worth of deferred frees where the blob requires a blob
      * header.
      *
@@ -2932,7 +2932,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
       final int nallocs = threshold << 3; // 8 times greater than allocation threshold
 
-      Journal store = (Journal) getStore(properties);
+      Journal store = getStore(properties);
       try {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -2955,7 +2955,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         store.commit();
 
         // Age the history (of the deletes!)
-        Thread.currentThread().sleep(6000);
+        Thread.sleep(6000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -2992,7 +2992,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
       final int nallocs = threshold << 3; // 8 times greater than allocation threshold
 
-      Journal store = (Journal) getStore(properties);
+      Journal store = getStore(properties);
       try {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3015,7 +3015,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         store.commit();
 
         // Age the history (of the deletes!)
-        Thread.currentThread().sleep(6000);
+        Thread.sleep(6000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -3035,7 +3035,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Can be tested by removing RWStore call to journal.removeCommitRecordEntries in freeDeferrals.
      *
      * <p>final int commitPointsRemoved = journal.removeCommitRecordEntries(fromKey, toKey);
@@ -3049,7 +3049,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
       properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "100");
 
-      final Journal store = (Journal) getStore(properties);
+      final Journal store = getStore(properties);
       try {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3068,7 +3068,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
           store.commit();
 
           // Age the history (of the deletes!)
-          Thread.currentThread().sleep(200);
+          Thread.sleep(200);
         }
 
         final String fname = bs.getStore().getStoreFile().getAbsolutePath();
@@ -3086,7 +3086,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     public void testResetHARootBlock() {
       final Properties properties = new Properties(getProperties());
 
-      final Journal store = (Journal) getStore(properties);
+      final Journal store = getStore(properties);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3123,7 +3123,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     public void testSimpleReset() {
       final Properties properties = new Properties(getProperties());
 
-      final Journal store = (Journal) getStore(properties);
+      final Journal store = getStore(properties);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3151,7 +3151,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       return new Journal(props);
     }
 
-    /**
+    /*
      * State2
      *
      * <p>Allocate - Commit - Free - Commit
@@ -3180,7 +3180,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * In order to see deferred recycling we need to make two commits (with modifications) after the
      * retention period has expired.
      *
@@ -3188,7 +3188,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      * be re-allocated, so a different size allocation is requested.
      */
     public void test_allocCommitFreeCommitWithHistory() {
-      Journal store = (Journal) getStore(4);
+      Journal store = getStore(4);
       try {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3206,7 +3206,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // delete is deferred
         assertTrue(bs.isCommitted(addr));
 
-        Thread.currentThread().sleep(5000);
+        Thread.sleep(5000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -3227,7 +3227,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_allocBlobCommitFreeCommitWithHistory() {
-      Journal store = (Journal) getStore(4000);
+      Journal store = getStore(4000);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3245,7 +3245,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // delete is deferred
         assertTrue(bs.isCommitted(addr));
 
-        Thread.currentThread().sleep(5000);
+        Thread.sleep(5000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -3266,7 +3266,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_allocBlobBoundariesCommitFreeCommitWithHistory() {
-      final Journal store = (Journal) getStore(5);
+      final Journal store = getStore(5);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3297,7 +3297,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // delete is deferred
         assertTrue(bs.isCommitted(addr));
 
-        Thread.currentThread().sleep(5000);
+        Thread.sleep(5000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -3317,7 +3317,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * State3
      *
      * <p>Allocate - Commit - Free - Commit
@@ -3354,7 +3354,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_allocCommitFreeCommitWriteCacheWithHistory() {
-      final Journal store = (Journal) getStore(5);
+      final Journal store = getStore(5);
       try {
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
 
@@ -3381,7 +3381,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * State4
      *
      * <p>Allocate - Commit - Free - Commit
@@ -3424,7 +3424,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * State5
      *
      * <p>Allocate - Commit - Free - Commit
@@ -3477,7 +3477,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Tests semantics of a simple reset
      *
      * <p>Commit some data Delete committed and allocate new data Reset Test that deletion and new
@@ -3518,7 +3518,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Tests semantics of a simple reset after reopen to emulate an HAJournal reopen
      *
      * <p>As for simple reset but also re-open, then write and abort.
@@ -3577,7 +3577,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Tests semantics of a simple isolated reset
      *
      * <p>Commit some data UnIsolated: Delete committed and allocate new data Isolated: Delete
@@ -3630,7 +3630,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Tests semantics of a more complex isolated reset
      *
      * <p>Primarily the same as the simple isolated but ensuring more unisolated interactions after
@@ -3704,7 +3704,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       }
     }
 
-    /**
+    /*
      * Concurrent readers should no longer be an issue now that reset() is not re-initializing from
      * the root block.
      *
@@ -3809,7 +3809,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMROWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -3841,7 +3841,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMRMWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -3873,7 +3873,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractInterruptsTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -3907,7 +3907,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Note: Since the write cache is a direct ByteBuffer we have to make it very small (or disable it
    * entirely) when running the test suite or the JVM will run out of memory - this is exactly the
    * same (Sun) bug which motivates us to reuse the same ByteBuffer when we overflow a journal using

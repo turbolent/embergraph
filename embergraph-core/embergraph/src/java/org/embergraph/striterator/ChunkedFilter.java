@@ -26,8 +26,8 @@ package org.embergraph.striterator;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-/**
- * Chunk-at-a-time filter.
+/*
+* Chunk-at-a-time filter.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
   /** Caller's object. */
   protected Object state;
 
-  /**
+  /*
    * The natural order of the filtered chunks. This field is set iff specified explicitly to the
    * ctor and is otherwise <code>null</code>. When <code>null</code> the filtered iterator is
    * <strong>assumed to be unordered</strong>. This assumption is made since chunk-at-a-time
@@ -65,7 +65,7 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
     this(state, null /* keyOrder */);
   }
 
-  /**
+  /*
    * @param state Application state (optional).
    * @param keyOrder The natural sort order for the filtered iterator (optional).
    */
@@ -76,7 +76,7 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
     this.keyOrder = keyOrder;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: There was a historical compiler problem with this method when generics were not
@@ -89,8 +89,8 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
     return new ChunkedFilteringIterator<I, E, F>(src, this);
   }
 
-  //    /**
-  //     * TODO The need for this variant is worrysome - it is required if you do
+  //    /*
+//     * TODO The need for this variant is worrysome - it is required if you do
   //     * NOT specify the generic types and then try to use this class. It is now
   //     * an error with Java 7.  I have taken this variant out.  Hopefully it is
   //     * no longer required by recent Java 6 compilers....
@@ -104,7 +104,7 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
   //
   //    }
 
-  /**
+  /*
    * Process a chunk of elements, returning another chunk of elements.
    *
    * @param chunk A chunk of elements from the source iterator.
@@ -113,7 +113,7 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
    */
   protected abstract F[] filterChunk(E[] chunk);
 
-  /**
+  /*
    * Implementation.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -131,21 +131,21 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
     /** The chunk-at-a-time filter. */
     private final ChunkedFilter<I, E, F> filter;
 
-    /**
+    /*
      * A chunk of filtered elements (initially <code>null</code>). If this chunk is <code>null
      * </code> or is exhausted and the source iterator is also exhausted then the filtered iterator
      * is exhausted.
      */
     private F[] chunk = null;
 
-    /**
+    /*
      * The index of the next element to be visited in {@link #chunk}. This is initially ZERO (0). It
      * is incremented each time {@link #next()} is called. The current {@link #chunk} is exhausted
      * when {@link #index} equals the <code>chunk.length</code>.
      */
     private int index = 0;
 
-    /**
+    /*
      * @param src
      * @param filter
      */
@@ -167,13 +167,8 @@ public abstract class ChunkedFilter<I extends IChunkedIterator<E>, E, F>
         index = 0;
       }
 
-      if (chunk == null || index == chunk.length) {
-
-        // nothing left.
-        return false;
-      }
-
-      return true;
+      // nothing left.
+      return chunk != null && index != chunk.length;
     }
 
     public F next() {

@@ -25,8 +25,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * rdfs7:
+/*
+* rdfs7:
  *
  * <pre>
  *       triple(?u,?b,?y) :-

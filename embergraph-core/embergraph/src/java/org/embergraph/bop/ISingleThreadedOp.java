@@ -22,8 +22,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.bop;
 
-/**
- * Marker interface for an operator whose instances do not support concurrent execution.
+/*
+* Marker interface for an operator whose instances do not support concurrent execution.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see PipelineOp.Annotations#MAX_PARALLEL

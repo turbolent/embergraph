@@ -19,8 +19,8 @@ package org.embergraph.rdf.sail.model;
 
 import java.util.UUID;
 
-/**
- * Metadata about running {@link
+/*
+* Metadata about running {@link
  * org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask}s (this includes both
  * queries and update requests).
  *
@@ -28,13 +28,13 @@ import java.util.UUID;
  */
 public class RunningQuery {
 
-  /**
+  /*
    * The unique identifier for this query as assigned by the Embedded Graph implementation end point
    * (rather than the {@link org.embergraph.bop.engine.QueryEngine}).
    */
   private String extQueryId;
 
-  /**
+  /*
    * The unique identifier for this query for the {@link org.embergraph.bop.engine.QueryEngine}
    * (non-<code>null</code>).
    *

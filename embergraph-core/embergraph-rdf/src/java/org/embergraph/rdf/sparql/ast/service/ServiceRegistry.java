@@ -48,8 +48,8 @@ import org.embergraph.service.geospatial.GeoSpatial;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Registry for service calls.
+/*
+* Registry for service calls.
  *
  * @see <a href="https://sourceforge.net/apps/mediawiki/bigdata/index.php?title=FederatedQuery">
  *     Federated Query and Custom Services</a>
@@ -70,13 +70,13 @@ public class ServiceRegistry {
   /** Aliases for registered {@link ServiceFactory}s. */
   private final ConcurrentMap<URI /* from */, URI /* to */> aliases;
 
-  /**
+  /*
    * The set of registered {@link ServiceFactory}s is also maintained here for fast, safe iteration
    * by {@link #services()}.
    */
   private final CopyOnWriteArrayList<CustomServiceFactory> customServices;
 
-  /**
+  /*
    * The default {@link ServiceFactory} used for REMOTE SPARQL SERVICE end points which are not
    * otherwise registered.
    */
@@ -128,7 +128,7 @@ public class ServiceRegistry {
 
     if (true) {
 
-      /**
+      /*
        * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">HISTORY SERVICE </a>
        */
       add(new URIImpl(BD.NAMESPACE + "history"), new HistoryServiceFactory());
@@ -141,7 +141,7 @@ public class ServiceRegistry {
     add(GASService.Options.SERVICE_KEY, new GASService());
   }
 
-  /**
+  /*
    * Set the default {@link ServiceFactory}. This will be used when the serviceURI is not associated
    * with an explicitly registered service. For example, you can use this to control whether or not
    * the service end point is assumed to support <code>SPARQL 1.0</code> or <code>SPARQL 1.1</code>.
@@ -161,7 +161,7 @@ public class ServiceRegistry {
     return defaultServiceFactoryRef.get();
   }
 
-  /**
+  /*
    * Register a service.
    *
    * @param serviceURI The service URI.
@@ -187,7 +187,7 @@ public class ServiceRegistry {
     }
   }
 
-  /**
+  /*
    * Remove a service from the registry and/or set of known aliases.
    *
    * @param serviceURI The URI of the service -or- the URI of an alias registered using {@link
@@ -222,7 +222,7 @@ public class ServiceRegistry {
     return modified;
   }
 
-  /**
+  /*
    * Register one URI as an alias for another.
    *
    * @param serviceURI The URI of a service. It is expressly permitted to register an alias for a
@@ -273,7 +273,7 @@ public class ServiceRegistry {
     }
   }
 
-  /**
+  /*
    * Add URL to service whitelist
    *
    * @param URL the URL to add
@@ -282,7 +282,7 @@ public class ServiceRegistry {
     serviceWhitelist.add(URL);
   }
 
-  /**
+  /*
    * Remove URL to service whitelist
    *
    * @param URL the URL to remove
@@ -291,7 +291,7 @@ public class ServiceRegistry {
     serviceWhitelist.remove(URL);
   }
 
-  /**
+  /*
    * Set whitelist status.
    *
    * @param enable true if enabled, false if disabled
@@ -305,7 +305,7 @@ public class ServiceRegistry {
     return whitelistEnabled;
   }
 
-  /**
+  /*
    * Return an {@link Iterator} providing a read-only view of the registered {@link
    * CustomServiceFactory}s.
    */
@@ -319,7 +319,7 @@ public class ServiceRegistry {
     return new ReadOnlyIterator<CustomServiceFactory>(customServices.iterator());
   }
 
-  /**
+  /*
    * Return the {@link ServiceFactory} for that URI. If the {@link URI} is a known alias, then it is
    * resolved before looking up the {@link ServiceFactory}.
    *
@@ -344,7 +344,7 @@ public class ServiceRegistry {
     return services.get(serviceURI);
   }
 
-  /**
+  /*
    * Resolve a {@link ServiceCall} for a service {@link URI}. If a {@link ServiceFactory} was
    * registered for that <i>serviceURI</i>, then it will be returned. Otherwise {@link
    * #getDefaultServiceFactory()} is used to obtain the {@link ServiceFactory} that will be used to
@@ -401,7 +401,7 @@ public class ServiceRegistry {
 
   }
 
-  /**
+  /*
    * Maps a URI to a service factory. If the URI is null or there is no custom service, the default
    * service factory (SPARQL 1.1 service) is returned.
    *

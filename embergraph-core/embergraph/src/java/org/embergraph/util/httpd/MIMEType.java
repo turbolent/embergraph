@@ -32,8 +32,8 @@ import java.util.regex.PatternSyntaxException;
 import org.apache.log4j.Logger;
 import org.embergraph.util.CaseInsensitiveStringComparator;
 
-/**
- * Parser for MIME type data. MIME type, subtype, and MIME parameter names are case-insensitive.
+/*
+* Parser for MIME type data. MIME type, subtype, and MIME parameter names are case-insensitive.
  * Parameters values are treated as case-sensitive by this class, but subclasses may override the
  * comparison logic for parameters, e.g., the "q" parameter in {@link AcceptMIMEType} has a default
  * value and its values are compared after conversion into a floating point number.
@@ -61,7 +61,7 @@ import org.embergraph.util.CaseInsensitiveStringComparator;
  */
 public class MIMEType {
 
-  /**
+  /*
    * The {@link Logger} for {@link MIMEType} operations. The {@link Logger} is named for this class.
    */
   protected static final Logger log = Logger.getLogger(MIMEType.class);
@@ -88,7 +88,7 @@ public class MIMEType {
   /** An empty NVPair[] used by the parser when there are no MIME parameters. */
   static final NVPair[] EMPTY = new NVPair[] {};
 
-  /**
+  /*
    * Pattern used to match the type/subtype of a MIME expression. The matched groups are numbered by
    * the opening parentheses in the pattern. The different matching groups are:
    *
@@ -101,7 +101,7 @@ public class MIMEType {
    */
   protected static Pattern m_p1 = null;
 
-  /**
+  /*
    * Pattern used to match the optional parameters of a MIME expression. The matched groups are
    * numbered by the opening parentheses in the pattern. The source for the pattern is the
    * parameters as identified by {@link #m_p1}. The different matching groups are:
@@ -142,15 +142,13 @@ public class MIMEType {
        * should not be propagated.
        */
 
-      AssertionError err = new AssertionError("Could not compile regex patterns.");
-
-      err.initCause(ex);
+      AssertionError err = new AssertionError("Could not compile regex patterns.", ex);
 
       throw err;
     }
   }
 
-  /**
+  /*
    * Returns the names of all default parameters recognized by this class for the MIME type and
    * subtype represented by this {@link MIMEType} instances.
    *
@@ -163,7 +161,7 @@ public class MIMEType {
     return new String[] {};
   }
 
-  /**
+  /*
    * Returns true iff the named parameter should be ignored by the <code>spans</code> logic for MIME
    * type and subtype represented by this {@link MIMEType} instance.
    *
@@ -182,7 +180,7 @@ public class MIMEType {
     this(mt.toString());
   }
 
-  /**
+  /*
    * Constructs a {@link MIMEType} object from its component parts. The {@link MIMEType} will not
    * have any MIME attributes.
    */
@@ -190,7 +188,7 @@ public class MIMEType {
     this(type, subtype, EMPTY);
   }
 
-  /**
+  /*
    * Constructs a {@link MIMEType} object from its component parts.
    *
    * <p>
@@ -241,7 +239,7 @@ public class MIMEType {
     }
   }
 
-  /**
+  /*
    * Constructor parses the string as a MIME Internet Type expression. The results of the parse are
    * available from the various methods on the constructed object.
    *
@@ -390,7 +388,7 @@ public class MIMEType {
     return getType().equals("*");
   }
 
-  /**
+  /*
    * Returns true iff the MIME subtype is "*", indicating a MIME wildcard.
    *
    * @deprecated Use {@link #isSubtypeWildcard()} instead.
@@ -404,7 +402,7 @@ public class MIMEType {
     return getSubtype().equals("*");
   }
 
-  /**
+  /*
    * Returns the MIME type and subtype as "type/subtype", but does not format in any MIME
    * parameters.
    *
@@ -417,7 +415,7 @@ public class MIMEType {
     return getType() + "/" + getSubtype();
   }
 
-  /**
+  /*
    * Convenience method for {@link #matches( MIMEType mimeType, boolean matchParams )} that does NOT
    * compare the MIME type parameters.
    */
@@ -440,7 +438,7 @@ public class MIMEType {
     return matches(new MIMEType(mimeType), false);
   }
 
-  /**
+  /*
    * Convenience method for {@link #matches( MIMEType mimeType, boolean matchParams )} that does NOT
    * compare the MIME type parameters.
    */
@@ -461,7 +459,7 @@ public class MIMEType {
     return isExactMatch(new MIMEType(otherType), true);
   }
 
-  /**
+  /*
    * Returns true IFF the two MIME type expressions have the same meaning. I.e., they impose the
    * same type and subtype constraint and, optionally, they impose the same MIME type parameter
    * constraints (if any). The MIME type and subtype and MIME parameter names are compared using
@@ -502,18 +500,10 @@ public class MIMEType {
        * conclude that A == B IFF A-spans-B and B-spans-A.
        */
 
-      if (this.spans(t, true) && t.spans(this, true)) {
-
-        /* @todo Should we explictly test the isIgnoredParams
-         * here?
-         */
-
-        return true;
-
-      } else {
-
-        return false;
-      }
+      /* @todo Should we explictly test the isIgnoredParams
+       * here?
+       */
+      return this.spans(t, true) && t.spans(this, true);
 
     } else {
 
@@ -567,7 +557,7 @@ public class MIMEType {
 
   }
 
-  /**
+  /*
    * Returns true IFF this {@link MIMEType} has the specified parameter value. This method is
    * exposed to account for any MIME type specific case-sensitivity for the parameter name or
    * parameter value and any default MIME type parameters.
@@ -604,7 +594,7 @@ public class MIMEType {
         (otherValue);
   }
 
-  /**
+  /*
    * This method may be extended to produce a specific represensation of the value of the indicated
    * parameter. The representation returned will still be quoted iff necessary for HTTP by {@link
    * #toString()} when serializing the entire header value.
@@ -618,7 +608,7 @@ public class MIMEType {
   // ************************************************************
   // ************************************************************
 
-  /**
+  /*
    * Returns the intersection of the this media-range and the given media-range. The resulting
    * {@link MIMEType} MAY be a fully determined media type, but it MAY be undetermined, e.g., has a
    * type or subtype wildcard, does not specify a content encoding, language family, etc. If this is
@@ -830,7 +820,7 @@ public class MIMEType {
     return spans(new MIMEType(other), compareParams);
   }
 
-  /**
+  /*
    * Returns true IFF this {@link MIMEType} expresses a constraint that spans the <i>other</i>
    * {@link MIMEType}. The semantics of "spans" are that the <i>other</i> may be either the same
    * {@link MIMEType} or may be a more constrained (aka specific) {@link MIMEType}.
@@ -935,7 +925,7 @@ public class MIMEType {
     return false;
   }
 
-  /**
+  /*
    * Convenience method for <code>new MIMEType( other ).spans( this,
    * true );</code>
    */
@@ -956,7 +946,7 @@ public class MIMEType {
     return other.spans(this, compareParams);
   }
 
-  /**
+  /*
    * Matches if this {@link MIMEType} has the same type and subtype or if the types match and
    * <i>this</i> {@link MIMEType} is a wildcard that covers the given <i>mimeType</i>. The
    * parameters are optionally compared by this method.
@@ -988,7 +978,7 @@ public class MIMEType {
 
   }
 
-  /**
+  /*
    * Returns true iff the MIME type, MIME subtype and any MIME parameters are all the same as
    * determined by {@link #isExactMatch( MIMEType other, boolean compareParams )} when
    * <i>compareParams</i> is <code>true</code>.
@@ -1015,8 +1005,8 @@ public class MIMEType {
     return isExactMatch(t, true);
   }
 
-  //     /**
-  //      * Returns an immutable {@link Iterator} that visits the MIME
+  //     /*
+//      * Returns an immutable {@link Iterator} that visits the MIME
   //      * parameters, each of which is a name-value pair represented
   //      * using an {@link NVPair} instance.<p>
   //      *
@@ -1034,7 +1024,7 @@ public class MIMEType {
 
   //     }
 
-  /**
+  /*
    * An array of the explicitly declared MIME type parameters. Default parameters are NOT
    * represented in the returned array.
    *
@@ -1057,7 +1047,7 @@ public class MIMEType {
     return m_params.length;
   }
 
-  /**
+  /*
    * Returns the value for the indicated name and <code>null</code> if there is no MIME parameter
    * with that name.
    *
@@ -1089,7 +1079,7 @@ public class MIMEType {
     return null;
   }
 
-  /**
+  /*
    * Generates a MIME type string from the parsed data. If any parameter value is not a valid HTTP
    * <code>token</code> then it is serialized as an HTTP <code>quoted-string</code>.
    *

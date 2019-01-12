@@ -26,8 +26,8 @@ import java.util.Random;
 import java.util.zip.Adler32;
 import junit.framework.TestCase;
 
-/**
- * Test suite for {@link ChecksumUtility}.
+/*
+* Test suite for {@link ChecksumUtility}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -118,7 +118,7 @@ public class TestChecksumUtility extends TestCase {
     assertEquals(9, buf.position());
   }
 
-  /**
+  /*
    * Verify that the computed checksum is the same whether the buffer is backed by an array or not.
    */
   public void test_checksum04() {
@@ -153,7 +153,7 @@ public class TestChecksumUtility extends TestCase {
     assertEquals(expectedChecksum, chk.checksum(direct, 0, data.length));
   }
 
-  /**
+  /*
    * Verify that the computed checksum is the same whether the buffer is backed by an array or not
    * when the checksum is computed for only a region of the buffer (java heap buffer version).
    */
@@ -173,7 +173,7 @@ public class TestChecksumUtility extends TestCase {
     assertEquals(expectedChecksum, chk.checksum(direct, 20, data.length - 10));
   }
 
-  /**
+  /*
    * Verify that the computed checksum is the same whether the buffer is backed by an array or not
    * when the checksum is computed for only a region of the buffer (native heap buffer version).
    */

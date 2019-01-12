@@ -25,8 +25,8 @@ import java.util.Stack;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 
-/**
- * Unit tests for {@link HardReferenceQueue}.
+/*
+* Unit tests for {@link HardReferenceQueue}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -88,7 +88,7 @@ public class TestHardReferenceQueue extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test verifies that we can add distinct references until the cache is full and that a subsequent
    * add causes an eviction notice. While the cache is full, we then explicitly evict the LRU
    * reference and verify that the cache state correctly reflects the eviction. Finally, we test
@@ -240,7 +240,7 @@ public class TestHardReferenceQueue extends TestCase2 {
     assertEquals("order", new String[] {}, cache.toArray(new String[0]));
   }
 
-  /**
+  /*
    * Test verifies scan of the last N references when adding a reference to the cache. When the test
    * starts the tail is at index 0, but eventually we wrap the cache around and continue testing to
    * make sure that scans function correctly with a head index of 0 (this requires continuing the
@@ -379,7 +379,7 @@ public class TestHardReferenceQueue extends TestCase2 {
         "order", new String[] {ref2, ref0, ref1, ref2, ref0}, cache.toArray(new String[0]));
   }
 
-  /**
+  /*
    * Helper class for testing correct behavior of the cache and the listener interface.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -390,7 +390,7 @@ public class TestHardReferenceQueue extends TestCase2 {
     /** Constructor. */
     public MyListener() {}
 
-    /**
+    /*
      * Set the next N expected references for eviction notices. You can only do this when nothing is
      * currently expected.
      *
@@ -422,7 +422,7 @@ public class TestHardReferenceQueue extends TestCase2 {
 
     Stack<T> expectedRefs = new Stack<T>();
 
-    /**
+    /*
      * Set the expected reference for the next eviction notice. The listener will thrown an
      * exception if there is a cache eviction unless you first invoke this method.
      *
@@ -438,7 +438,7 @@ public class TestHardReferenceQueue extends TestCase2 {
 
     private T expectedRef = null;
 
-    /**
+    /*
      * Test for an eviction event.
      *
      * @exception AssertionFailedError if nothing was evicted since the last time an expected
@@ -454,7 +454,7 @@ public class TestHardReferenceQueue extends TestCase2 {
 
     private boolean evicted = false;
 
-    /**
+    /*
      * Test for the expected #of eviction notices to date.
      *
      * @param expected
@@ -470,7 +470,7 @@ public class TestHardReferenceQueue extends TestCase2 {
 
     private int nevicted = 0;
 
-    /**
+    /*
      * @throws AssertionFailedError if the evicted reference is not the next expected eviction
      *     reference or if no eviction is expected.
      */
@@ -481,8 +481,8 @@ public class TestHardReferenceQueue extends TestCase2 {
 
       if (expectedRef == null && expectedRefs.size() > 0) {
 
-        /*
-         * There is no current expectation, but there is one on the
+      /*
+       * There is no current expectation, but there is one on the
          * stack, so we pop it off the stack and continue.
          *
          * Note: We pop the expectation off of the stack lazily so that

@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rawstore;
 
-/**
- * An interface that encapsulates operations on opaque identifiers used to locate data within an
+/*
+* An interface that encapsulates operations on opaque identifiers used to locate data within an
  * {@link IRawStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -30,15 +30,15 @@ package org.embergraph.rawstore;
  */
 public interface IAddressManager {
 
-  /**
+  /*
    * A null reference (0L).
    *
    * <p>Note: It is a requirement that all implementations understand the value <code>0L</code> as a
    * null reference.
    */
-  public static final long NULL = 0L;
+  long NULL = 0L;
 
-  /**
+  /*
    * Converts a byte count and offset into a long integer.
    *
    * @param nbytes The byte count.
@@ -49,18 +49,18 @@ public interface IAddressManager {
    * @exception IllegalArgumentException if the byte offset is larger than can be represented by the
    *     address manager.
    */
-  public long toAddr(int nbytes, long offset);
+  long toAddr(int nbytes, long offset);
 
-  /**
+  /*
    * The offset on the store at which the datum is stored. While this is often the offset of a byte
    * into a file on disk, implementations MAY assign offsets using other strategies.
    *
    * @param addr The opaque identifier that is the within store locator for some datum.
    * @return The offset of that datum.
    */
-  public long getOffset(long addr);
+  long getOffset(long addr);
 
-  /**
+  /*
    * The length of the datum in bytes. This must be the actual length of the record on the disk, not
    * the length of the caller's byte[]. This is necessary in order to support transparent checksums
    * and/or compression for records in the {@link IRawStore}.
@@ -68,10 +68,10 @@ public interface IAddressManager {
    * @param addr The opaque identifier that is the within store locator for some datum.
    * @return The offset of that datum.
    */
-  public int getByteCount(long addr);
+  int getByteCount(long addr);
 
-  //    /**
-  //     * Pack the address onto the output stream.
+  //    /*
+//     * Pack the address onto the output stream.
   //     *
   //     * @param out
   //     *            The output stream.
@@ -91,8 +91,8 @@ public interface IAddressManager {
   //     */
   //    public void packAddr(DataOutput out, long addr) throws IOException;
   //
-  //    /**
-  //     * Unpack the address from the input stream.
+  //    /*
+//     * Unpack the address from the input stream.
   //     *
   //     * @param in
   //     *            The input stream.
@@ -111,19 +111,19 @@ public interface IAddressManager {
   //     */
   //    public long unpackAddr(DataInput in) throws IOException;
 
-  /**
+  /*
    * A human readable representation of the address.
    *
    * @param addr The opaque identifier that is the within store locator for some datum.
    * @return A human readable representation.
    */
-  public String toString(long addr);
+  String toString(long addr);
 
-  /**
+  /*
    * Determine the unencoded physical address
    *
    * @param addr The encoded address
    * @return an unencoded address offset
    */
-  public long getPhysicalAddress(long addr);
+  long getPhysicalAddress(long addr);
 }

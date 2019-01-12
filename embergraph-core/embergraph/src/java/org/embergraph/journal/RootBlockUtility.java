@@ -32,8 +32,8 @@ import org.embergraph.io.ChecksumUtility;
 import org.embergraph.io.FileChannelUtility;
 import org.embergraph.io.IReopenChannel;
 
-/**
- * Utility class will read both root blocks of a file and indicate which one is current.
+/*
+* Utility class will read both root blocks of a file and indicate which one is current.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,13 +48,13 @@ public class RootBlockUtility {
   /** The 2nd root block. */
   public final IRootBlockView rootBlock1;
 
-  /**
+  /*
    * The current root block. For a new file, this is "rootBlock0". For an existing file it is based
    * on an examination of both root blocks.
    */
   public final IRootBlockView rootBlock;
 
-  /**
+  /*
    * @param opener
    * @param file
    * @param validateChecksum
@@ -115,7 +115,7 @@ public class RootBlockUtility {
             rootBlock0, rootBlock1, false /* ignoreBadRootBlock */, false /* alternateRootBlock */);
   }
 
-  /**
+  /*
    * Return the chosen root block. The root block having the greater {@link
    * IRootBlockView#getCommitCounter() commit counter} is chosen by default.
    *
@@ -134,7 +134,7 @@ public class RootBlockUtility {
         rootBlock0, rootBlock1, false /* alternateRootBlock */, false /* ignoreBadRootBlock */);
   }
 
-  /**
+  /*
    * Return the chosen root block. The root block having the greater {@link
    * IRootBlockView#getCommitCounter() commit counter} is chosen by default.
    *
@@ -150,7 +150,7 @@ public class RootBlockUtility {
         rootBlock0, rootBlock1, false /* alternateRootBlock */, false /* ignoreBadRootBlock */);
   }
 
-  /**
+  /*
    * Return the chosen root block. The root block having the greater {@link
    * IRootBlockView#getCommitCounter() commit counter} is chosen by default.
    *
@@ -194,8 +194,8 @@ public class RootBlockUtility {
 
       if (rootBlock0 == null || rootBlock1 == null) {
 
-        /*
-         * Note: The [alternateRootBlock] flag only makes sense when you
+      /*
+       * Note: The [alternateRootBlock] flag only makes sense when you
          * have two root blocks to choose from and you want to choose
          * the other one.
          */
@@ -259,7 +259,7 @@ public class RootBlockUtility {
     return rootBlock;
   }
 
-  /**
+  /*
    * Generate the root blocks. They are for all practical purposes identical.
    *
    * @param bufferMode
@@ -348,7 +348,7 @@ public class RootBlockUtility {
     this.rootBlock = rootBlock0;
   }
 
-  /**
+  /*
    * Dumps the root blocks for the specified file.
    *
    * @param args <code>filename</code>
@@ -390,8 +390,8 @@ public class RootBlockUtility {
 
             if (raf != null && raf.getChannel().isOpen()) {
 
-              /*
-               * The channel is still open. If you are allowing concurrent reads
+            /*
+       * The channel is still open. If you are allowing concurrent reads
                * on the channel, then this could indicate that two readers each
                * found the channel closed and that one was able to re-open the
                * channel before the other such that the channel was open again by

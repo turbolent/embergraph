@@ -13,8 +13,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 
-/**
- * A (forward or reverse) link set.
+/*
+* A (forward or reverse) link set.
  *
  * @author <a href="mailto:martyncutcher@users.sourceforge.net">Martyn Cutcher</a>
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -33,7 +33,7 @@ public class LinkSet implements ILinkSet {
   /** <code>true</code> iff this is a reverse link set. */
   private final boolean m_linksIn;
 
-  /**
+  /*
    * @param owner The {@link IGPO} that is the head of the link set.
    * @param linkProperty The predicate that collects this link set.
    * @param linksIn <code>true</code> iff this is a reverse link set.
@@ -144,7 +144,7 @@ public class LinkSet implements ILinkSet {
     return size() == 0;
   }
 
-  /**
+  /*
    * Encode a URL, Literal, or blank node for inclusion in a SPARQL query to be sent to the remote
    * service.
    *

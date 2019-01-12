@@ -25,19 +25,19 @@ package org.embergraph.service.master;
 import java.io.Serializable;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
-/**
- * Factory for AbstractResourceScanner implementations.
+/*
+* Factory for AbstractResourceScanner implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface IResourceScannerFactory<V> extends Serializable {
 
-  /**
+  /*
    * Return a new scanner instance.
    *
    * @param buffer The buffer on which the scanner will place resources to be processed.
    * @return The scanner.
    */
-  public AbstractResourceScanner<V> newScanner(BlockingBuffer<V[]> buffer);
+  AbstractResourceScanner<V> newScanner(BlockingBuffer<V[]> buffer);
 }

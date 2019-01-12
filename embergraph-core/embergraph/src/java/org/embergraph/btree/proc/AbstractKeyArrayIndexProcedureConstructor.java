@@ -7,21 +7,21 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.service.IDataService;
 
-/**
- * A factory for {@link IKeyArrayIndexProcedure}s so that their data may be key range partitions and
+/*
+* A factory for {@link IKeyArrayIndexProcedure}s so that their data may be key range partitions and
  * mapped against each relevant index partition.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public abstract class AbstractKeyArrayIndexProcedureConstructor<T extends IKeyArrayIndexProcedure> {
 
-  /**
+  /*
    * Return <code>true</code> if the procedure requires values paired with the keys (otherwise the
    * caller should specify <code>null</code> for the values byte[]).
    */
   public abstract boolean sendValues();
 
-  /**
+  /*
    * Uses the {@link ITupleSerializer} reported by {@link IndexMetadata} for the {@link IIndex}.
    *
    * @param ndx The index - this is used to determine the serializers for the keys and/or values to
@@ -44,7 +44,7 @@ public abstract class AbstractKeyArrayIndexProcedureConstructor<T extends IKeyAr
     return newInstance(ndx.getIndexMetadata(), fromIndex, toIndex, keys, vals);
   }
 
-  /**
+  /*
    * Uses the {@link ITupleSerializer} reported by {@link IndexMetadata}.
    *
    * @param indexMetadata
@@ -67,7 +67,7 @@ public abstract class AbstractKeyArrayIndexProcedureConstructor<T extends IKeyAr
         tupleSer.getLeafKeysCoder(), tupleSer.getLeafValuesCoder(), fromIndex, toIndex, keys, vals);
   }
 
-  /**
+  /*
    * Uses the default {@link IRabaCoder}s for coding.
    *
    * @param fromIndex
@@ -90,7 +90,7 @@ public abstract class AbstractKeyArrayIndexProcedureConstructor<T extends IKeyAr
         vals);
   }
 
-  /**
+  /*
    * Uses the specified {@link IRabaCoder}s.
    *
    * @param keysCoder

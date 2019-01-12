@@ -34,8 +34,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.AbstractTransactionService.TxState;
 import org.embergraph.util.Bytes;
 
-/**
- * {@link BTree} whose keys are the absolute value of the txIds and whose values are {@link
+/*
+* {@link BTree} whose keys are the absolute value of the txIds and whose values are {@link
  * ITxState0} tuples for the transaction.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ public class TxId2CommitTimeIndex extends BTree {
   /** Instance used to encode the timestamp into the key. */
   private final IKeyBuilder keyBuilder = new KeyBuilder(Bytes.SIZEOF_LONG);
 
-  /**
+  /*
    * Create a transient instance.
    *
    * @return The new instance.
@@ -63,7 +63,7 @@ public class TxId2CommitTimeIndex extends BTree {
     return (TxId2CommitTimeIndex) BTree.createTransient(/* store, */ metadata);
   }
 
-  /**
+  /*
    * Load from the store.
    *
    * @param store The backing store.
@@ -79,7 +79,7 @@ public class TxId2CommitTimeIndex extends BTree {
     super(store, checkpoint, metadata, readOnly);
   }
 
-  /**
+  /*
    * Encodes the txId into a key.
    *
    * @param txId The transaction start time (may be negative).
@@ -123,7 +123,7 @@ public class TxId2CommitTimeIndex extends BTree {
     }
   }
 
-  /**
+  /*
    * Return the largest key that is less than or equal to the given timestamp. This is used
    * primarily to locate the commit point that will serve as the ground state for a transaction
    * having <i>timestamp</i> as its start time. In this context the LTE search identifies the most
@@ -151,7 +151,7 @@ public class TxId2CommitTimeIndex extends BTree {
     return decodeKey(keyAt(index));
   }
 
-  /**
+  /*
    * Find the first commit time strictly greater than the timestamp.
    *
    * @param timestamp The timestamp. A value of ZERO (0) may be used to find the first commit time.
@@ -179,7 +179,7 @@ public class TxId2CommitTimeIndex extends BTree {
     return decodeKey(keyAt(index));
   }
 
-  /**
+  /*
    * Find the index having the largest timestamp that is less than or equal to the given timestamp.
    *
    * @return The index having the largest timestamp that is less than or equal to the given
@@ -221,7 +221,7 @@ public class TxId2CommitTimeIndex extends BTree {
     }
   }
 
-  /**
+  /*
    * Add an entry.
    *
    * @param txState The transaction object.
@@ -255,7 +255,7 @@ public class TxId2CommitTimeIndex extends BTree {
     super.insert(key, val);
   }
 
-  /**
+  /*
    * Encapsulates key and value formation.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -271,7 +271,7 @@ public class TxId2CommitTimeIndex extends BTree {
       super();
     }
 
-    /**
+    /*
      * Ctor when creating a new instance.
      *
      * @param keyBuilderFactory

@@ -51,8 +51,8 @@ import org.embergraph.rdf.rules.RejectAnythingSameAsItself;
 import org.embergraph.rdf.spo.SPOPredicate;
 import org.embergraph.rdf.spo.SPOStarJoin;
 
-/**
- * Unit tests for the existence of the required deep copy semantics for {@link BOp}s.
+/*
+* Unit tests for the existence of the required deep copy semantics for {@link BOp}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -65,7 +65,7 @@ public class TestDeepCopy extends TestCase2 {
 
   private static final String cause_deep = "No deep copy constructor";
 
-  /**
+  /*
    * A list of all classes and interfaces which implement BOp.
    *
    * <p>Note: The only way to enumerate the implementations of a class is to scan through the jars
@@ -109,17 +109,15 @@ public class TestDeepCopy extends TestCase2 {
   static final Set<Class<?>> noDeepCopy =
       new LinkedHashSet<Class<?>>(
           Arrays.asList(
-              new Class<?>[] {
-                  /**
-                   * {@link Var} does not have deep copy semantics since it imposes a canonizaling
-                   * mapping from names to object references.
-                   */
-                Var.class,
-              }));
+            /*
+       * {@link Var} does not have deep copy semantics since it imposes a canonizaling
+               * mapping from names to object references.
+               */
+              Var.class));
 
   /** Exclusion list for classes which do not support shallow copy semantics. */
   static final Set<Class<?>> noShallowCopy =
-      new LinkedHashSet<Class<?>>(Arrays.asList(new Class<?>[] {Var.class, Constant.class}));
+      new LinkedHashSet<Class<?>>(Arrays.asList(Var.class, Constant.class));
 
   /** */
   public TestDeepCopy() {}
@@ -129,7 +127,7 @@ public class TestDeepCopy extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Visits the {@link BOp} hierarchy and verify that all {@link BOp}s declare the required public
    * constructors (shallow copy and deep copy). A list of all bad {@link BOp}s is collected. If that
    * list is not empty, then the list is reported as a test failure.
@@ -167,7 +165,7 @@ public class TestDeepCopy extends TestCase2 {
       // test for shallow copy constructor.
       if (!noShallowCopy.contains(cls)) {
         try {
-          cls.getConstructor(new Class[] {BOp[].class, Map.class});
+          cls.getConstructor(BOp[].class, Map.class);
         } catch (NoSuchMethodException e) {
           bad.put(cls, cause_shallow);
           log.error(cause_shallow + " : " + cls); // , e);
@@ -177,7 +175,7 @@ public class TestDeepCopy extends TestCase2 {
       // test for deep copy constructor.
       if (!noDeepCopy.contains(cls)) {
         try {
-          cls.getConstructor(new Class[] {cls});
+          cls.getConstructor(cls);
         } catch (NoSuchMethodException e) {
           bad.put(cls, cause_deep);
           log.error(cause_deep + " : " + cls); // , e);

@@ -20,8 +20,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTStaticJoinOptimizer.Annotations;
 
-/**
- * This is the old static optimizer code, taken directly from {@link DefaultEvaluationPlan2}, but
+/*
+* This is the old static optimizer code, taken directly from {@link DefaultEvaluationPlan2}, but
  * lined up with the AST API instead of the Rule and IPredicate API.
  */
 public final class StaticOptimizer {
@@ -43,7 +43,7 @@ public final class StaticOptimizer {
 
   private static final long NO_SHARED_VARS = Long.MAX_VALUE - 3;
 
-  /**
+  /*
    * The computed evaluation order. The elements in this array are the order in which each tail
    * predicate will be evaluated. The index into the array is the index of the tail predicate whose
    * evaluation order you want. So <code>[2,0,1]</code> says that the predicates will be evaluated
@@ -66,7 +66,7 @@ public final class StaticOptimizer {
     return order;
   }
 
-  /**
+  /*
    * Cache of the computed range counts for the predicates in the tail. The elements of this array
    * are initialized to -1L, which indicates that the range count has NOT been computed. Range
    * counts are computed on demand and MAY be zero. Only an approximate range count is obtained.
@@ -285,7 +285,7 @@ public final class StaticOptimizer {
     return cardinality;
   }
 
-  /**
+  /*
    * Start by looking at every possible initial join. Take every tail and match it with every other
    * tail to find the lowest possible cardinality. See {@link
    * #computeJoinCardinality(org.embergraph.bop.joinGraph.fast.DefaultEvaluationPlan2.IJoinDimension,
@@ -410,7 +410,7 @@ public final class StaticOptimizer {
     return tail[tailIndex];
   }
 
-  /**
+  /*
    * Similar to {@link #getFirstJoin()}, but we have one join dimension already calculated.
    *
    * @param d1 the first join dimension
@@ -495,7 +495,7 @@ public final class StaticOptimizer {
     return new Join(d1, minTail, minJoinCardinality, vars);
   }
 
-  /**
+  /*
    * Return the range count for the predicate, ignoring any bindings. The range count for the tail
    * predicate is cached the first time it is requested and returned from the cache thereafter. The
    * range counts are requested using the "non-exact" range count query, so the range counts are
@@ -509,7 +509,7 @@ public final class StaticOptimizer {
 
     if (rangeCount[tailIndex] == -1L) {
 
-      final long rangeCount = (long) nodes.get(tailIndex).getEstimatedCardinality(this);
+      final long rangeCount = nodes.get(tailIndex).getEstimatedCardinality(this);
 
       this.rangeCount[tailIndex] = rangeCount;
     }
@@ -517,7 +517,7 @@ public final class StaticOptimizer {
     return rangeCount[tailIndex];
   }
 
-  /**
+  /*
    * Return the cardinality of a particular tail, which is the range count if not optional and
    * infinite if optional.
    */
@@ -529,7 +529,7 @@ public final class StaticOptimizer {
     return Arrays.toString(getOrder());
   }
 
-  /**
+  /*
    * This is the secret sauce. There are three possibilities for computing the join cardinality,
    * which we are defining as the upper-bound for solutions for a particular join. First, if there
    * are no shared variables then the cardinality will just be the simple product of the cardinality
@@ -567,8 +567,8 @@ public final class StaticOptimizer {
         joinCardinality = Math.min(d1.getCardinality(), d2.getCardinality());
       } else {
         // shared vars and unshared vars - take the max
-        /*
-         * This modification to the join planner results in
+      /*
+       * This modification to the join planner results in
          * significantly faster queries for the bsbm benchmark (3x - 5x
          * overall). It takes a more optimistic perspective on the
          * intersection of two statement patterns, predicting that this
@@ -625,7 +625,7 @@ public final class StaticOptimizer {
     return joinCardinality;
   }
 
-  /**
+  /*
    * Get the named variables for a given tail. Is there a better way to do this?
    *
    * @param tail the tail
@@ -651,7 +651,7 @@ public final class StaticOptimizer {
     return varNames;
   }
 
-  /**
+  /*
    * Look for shared variables.
    *
    * @param d1 the first join dimension
@@ -677,7 +677,7 @@ public final class StaticOptimizer {
     return !Collections.disjoint(ancestryVars, tailVars);
   }
 
-  /**
+  /*
    * Get the next tail (unused, non-optional) that shares a var with the ancestry. If there are
    * many, choose the one with the lowest cardinality. Return -1 if none are found.
    */
@@ -704,8 +704,8 @@ public final class StaticOptimizer {
       }
 
       if (sharesVarsWithAncestry(i)) {
-        /*
-         * We have a shared var with the ancestry.
+      /*
+       * We have a shared var with the ancestry.
          */
         final long tailCardinality = cardinality(i);
         if (tailCardinality < minCardinality) {
@@ -718,7 +718,7 @@ public final class StaticOptimizer {
     return nextTail;
   }
 
-  /**
+  /*
    * Look for unshared variables.
    *
    * @param d1 the first join dimension
@@ -739,7 +739,7 @@ public final class StaticOptimizer {
     return false;
   }
 
-  /**
+  /*
    * A join dimension can be either a tail, or a previous join. Either way we need to know its
    * cardinality, its variables, and its tails.
    */
@@ -752,7 +752,7 @@ public final class StaticOptimizer {
     // boolean isOptional();
   }
 
-  /**
+  /*
    * A join implementation of a join dimension. The join can consist of two tails, or one tail and
    * another join. Theoretically it could be two joins as well, which might be a future optimization
    * worth thinking about.

@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
 
-/**
- * A decoder that follows 0/1 labelled paths in a tree.
+/*
+* A decoder that follows 0/1 labelled paths in a tree.
  *
  * <p>Additional, the {@link #buildCodes()} method returns a vector of codewords corresponding to
  * the paths of an instance of this class. Conversely, the {@linkplain #TreeDecoder(BitVector[],
@@ -52,7 +52,7 @@ public final class TreeDecoder implements Decoder, Serializable {
     private static final long serialVersionUID = 1L;
     public final int symbol;
 
-    /**
+    /*
      * Creates a leaf node.
      *
      * @param symbol the symbol for this node.
@@ -67,7 +67,7 @@ public final class TreeDecoder implements Decoder, Serializable {
   /** The number of symbolds in this decoder. */
   private final int n;
 
-  /**
+  /*
    * Creates a new codeword-based decoder using the given tree. It is responsability of the caller
    * that the tree is well-formed, that is, that all internal nodes are instances of {@link
    * TreeDecoder.Node} and all leaf nodes are instances of {@link TreeDecoder.LeafNode}.
@@ -80,7 +80,7 @@ public final class TreeDecoder implements Decoder, Serializable {
     this.n = n;
   }
 
-  /**
+  /*
    * Creates a new codeword-based decoder starting from a set of complete, lexicographically ordered
    * codewords. It is responsability of the caller that the tree is well-formed, that is, that the
    * provided codewords are exactly the root-to-leaf paths of such a tree.
@@ -95,7 +95,7 @@ public final class TreeDecoder implements Decoder, Serializable {
   }
 
   private static Node buildTree(
-      BitVector lexSortedCodeWords[], final int[] symbol, int prefix, int offset, int length) {
+      BitVector[] lexSortedCodeWords, final int[] symbol, int prefix, int offset, int length) {
     if (DEBUG) {
       System.err.println("****** " + offset + " " + length);
       System.err.println(Arrays.toString(lexSortedCodeWords));
@@ -133,7 +133,7 @@ public final class TreeDecoder implements Decoder, Serializable {
     return ((LeafNode) n).symbol;
   }
 
-  /**
+  /*
    * Populates the codeword vector by scanning recursively the decoding tree.
    *
    * @param node a subtree of the decoding tree.
@@ -158,7 +158,7 @@ public final class TreeDecoder implements Decoder, Serializable {
     buildCodes(codeWord, node.right, bitVector);
   }
 
-  /**
+  /*
    * Generate the codewords corresponding to this tree decoder.
    *
    * @return a vector of codewords for this decoder.

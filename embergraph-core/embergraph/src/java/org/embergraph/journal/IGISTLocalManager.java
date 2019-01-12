@@ -27,15 +27,15 @@ import org.embergraph.btree.ILocalBTreeView;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Interface for managing local (non-distributed) generalized search trees (GiST).
+/*
+* Interface for managing local (non-distributed) generalized search trees (GiST).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/585" > GIST </a>
  */
 public interface IGISTLocalManager extends IGISTManager {
 
-  /**
+  /*
    * Method creates and registers a named persistence capable data structure.
    *
    * @param name The name of the index.
@@ -46,7 +46,7 @@ public interface IGISTLocalManager extends IGISTManager {
    */
   ICheckpointProtocol register(String name, IndexMetadata metadata); // GIST
 
-  /**
+  /*
    * Return the mutable view of the named persistence capable data structure (aka the "live" or
    * {@link ITx#UNISOLATED} view).
    *
@@ -59,7 +59,7 @@ public interface IGISTLocalManager extends IGISTManager {
    */
   ICheckpointProtocol getUnisolatedIndex(String name); // GIST
 
-  /**
+  /*
    * Core implementation for access to historical index views.
    *
    * <p>Note: Transactions should pass in the timestamp against which they are reading rather than

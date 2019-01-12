@@ -2,8 +2,8 @@ package org.embergraph.bop.fed;
 
 import java.util.UUID;
 
-/**
- * An allocation context which is shared by all operators running in the same query which target the
+/*
+* An allocation context which is shared by all operators running in the same query which target the
  * same service.
  */
 class ServiceContext extends AllocationContextKey {
@@ -27,8 +27,7 @@ class ServiceContext extends AllocationContextKey {
     if (this == o) return true;
     if (!(o instanceof ServiceContext)) return false;
     if (!queryId.equals(((ServiceContext) o).queryId)) return false;
-    if (!serviceUUID.equals(((ServiceContext) o).serviceUUID)) return false;
-    return true;
+    return serviceUUID.equals(((ServiceContext) o).serviceUUID);
   }
 
   @Override

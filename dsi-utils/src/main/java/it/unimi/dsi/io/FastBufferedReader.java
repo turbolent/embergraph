@@ -31,8 +31,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Reader;
 
-/**
- * A lightweight, unsynchronised buffered reader based on {@linkplain
+/*
+* A lightweight, unsynchronised buffered reader based on {@linkplain
  * it.unimi.dsi.lang.MutableString mutable strings}.
  *
  * <p>This class provides buffering for readers, but it does so with purposes and an internal logic
@@ -77,7 +77,7 @@ public class FastBufferedReader extends Reader implements WordReader {
   /** The buffer size (must be equal to {@link #buffer buffer.length}). */
   protected final int bufferSize;
 
-  /**
+  /*
    * A set of additional characters that will be considered as word constituents, beside those
    * accepted by {@link Character#isLetterOrDigit(int)}.
    */
@@ -95,7 +95,7 @@ public class FastBufferedReader extends Reader implements WordReader {
   /** The underlying reader. */
   protected transient Reader reader;
 
-  /**
+  /*
    * Creates a new fast buffered reader with a given buffer size. The wrapped reader will have to be
    * set later using {@link #setReader(Reader)}.
    *
@@ -105,7 +105,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(bufferSize, CharSets.EMPTY_SET);
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader with a given buffer size and set of additional word
    * constituents. The wrapped reader will have to be set later using {@link #setReader(Reader)}.
    *
@@ -117,7 +117,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this.wordConstituents = wordConstituents;
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader with a buffer of {@link #DEFAULT_BUFFER_SIZE} characters.
    * The wrapped reader will have to be set later using {@link #setReader(Reader)}.
    */
@@ -125,7 +125,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(DEFAULT_BUFFER_SIZE);
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader with a buffer of {@link #DEFAULT_BUFFER_SIZE} characters and
    * given set of additional word constituents. The wrapped reader will have to be set later using
    * {@link #setReader(Reader)}.
@@ -136,7 +136,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(DEFAULT_BUFFER_SIZE, wordConstituents);
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader with a buffer of {@link #DEFAULT_BUFFER_SIZE} characters and
    * a set of additional word constituents specified by a string.
    *
@@ -146,7 +146,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(new CharOpenHashSet(wordConstituents.toCharArray(), Hash.VERY_FAST_LOAD_FACTOR));
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader with a given buffer size and a set of additional word
    * constituents, both specified by strings.
    *
@@ -159,7 +159,7 @@ public class FastBufferedReader extends Reader implements WordReader {
         new CharOpenHashSet(wordConstituents.toCharArray(), Hash.VERY_FAST_LOAD_FACTOR));
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given reader with a given buffer size.
    *
    * @param r a reader to wrap.
@@ -170,7 +170,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this.reader = r;
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given reader with a given buffer size and
    * using a set of additional word constituents.
    *
@@ -183,7 +183,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this.reader = r;
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given reader with a buffer of {@link
    * #DEFAULT_BUFFER_SIZE} characters.
    *
@@ -193,7 +193,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(r, DEFAULT_BUFFER_SIZE);
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given reader with a buffer of {@link
    * #DEFAULT_BUFFER_SIZE} characters and using a set of additional word constituents.
    *
@@ -204,7 +204,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(r, DEFAULT_BUFFER_SIZE, wordConstituents);
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given fragment of a character array and using
    * a set of additional word constituents.
    *
@@ -227,7 +227,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this.wordConstituents = wordConstituents;
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given fragment of a character array.
    *
    * <p>The effect of {@link #setReader(Reader)} on a buffer created with this constructor is
@@ -241,7 +241,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(array, offset, length, CharSets.EMPTY_SET);
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given character array and using a set of
    * additional word constituents.
    *
@@ -255,7 +255,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(array, 0, array.length, wordConstituents);
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given character array.
    *
    * <p>The effect of {@link #setReader(Reader)} on a buffer created with this constructor is
@@ -267,7 +267,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(array, 0, array.length);
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given mutable string and using a set of
    * additional word constituents.
    *
@@ -281,7 +281,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     this(s.array(), 0, s.length(), wordConstituents);
   }
 
-  /**
+  /*
    * Creates a new fast buffered reader by wrapping a given mutable string.
    *
    * <p>The effect of {@link #setReader(Reader)} on a buffer created with this constructor is
@@ -297,7 +297,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     return new FastBufferedReader(bufferSize, wordConstituents);
   }
 
-  /**
+  /*
    * Checks whether no more characters will be returned.
    *
    * @return true if there are no characters in the internal buffer and the underlying reader is
@@ -343,7 +343,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     return result < 0 ? (head != 0 ? head : -1) : result + head;
   }
 
-  /**
+  /*
    * Reads a line into the given mutable string.
    *
    * <p>The next line of input (defined as in {@link java.io.BufferedReader#readLine()}) will be
@@ -394,7 +394,7 @@ public class FastBufferedReader extends Reader implements WordReader {
     }
   }
 
-  /**
+  /*
    * Returns whether the given character is a word constituent.
    *
    * <p>The behaviour of this {@link FastBufferedReader} as a {@link WordReader} can be radically
@@ -409,7 +409,7 @@ public class FastBufferedReader extends Reader implements WordReader {
 
   public boolean next(final MutableString word, final MutableString nonWord) throws IOException {
     int i;
-    final char buffer[] = this.buffer;
+    final char[] buffer = this.buffer;
 
     if (noMoreCharacters()) return false;
 

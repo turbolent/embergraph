@@ -25,8 +25,8 @@ import java.util.UUID;
 import org.embergraph.htree.HTree;
 import org.embergraph.rwstore.sector.IMemoryManager;
 
-/**
- * Context for the evaluation of a query pipeline.
+/*
+* Context for the evaluation of a query pipeline.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -35,7 +35,7 @@ public interface IQueryContext {
   /** The unique identifier for the query. */
   UUID getQueryId();
 
-  /**
+  /*
    * Return the {@link IMemoryManager} which may be used to buffer data on high level data
    * structures, such as the {@link HTree}, for this query. Each operator in the query should in
    * general create its own child {@link IMemoryManager}. While the overall {@link IMemoryManager}
@@ -45,7 +45,7 @@ public interface IQueryContext {
    */
   IMemoryManager getMemoryManager();
 
-  /**
+  /*
    * Return an interface which allows attribute values to be associated with an {@link
    * IQueryContext}.
    */

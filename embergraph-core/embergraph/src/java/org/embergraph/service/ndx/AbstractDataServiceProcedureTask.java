@@ -17,8 +17,8 @@ import org.embergraph.service.Split;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.concurrent.TaskCounters;
 
-/**
- * Helper class for submitting an {@link IIndexProcedure} to run on an {@link IDataService}. The
+/*
+* Helper class for submitting an {@link IIndexProcedure} to run on an {@link IDataService}. The
  * class traps {@link StaleLocatorException}s and handles the redirection of requests to the
  * appropriate {@link IDataService}. When necessary, the data for an {@link IKeyArrayIndexProcedure}
  * will be re-split in order to distribute the requests to the new index partitions following a
@@ -40,7 +40,7 @@ import org.embergraph.util.concurrent.TaskCounters;
  */
 abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
 
-  /**
+  /*
    * Note: Invocations of the non-batch API are logged at the WARN level since they result in an
    * application that can not scale-out efficiently.
    */
@@ -52,7 +52,7 @@ abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
 
   protected final IScaleOutClientIndex ndx;
 
-  /**
+  /*
    * The timestamp for the operation. This will be the timestamp for the view (the outer class)
    * unless the operation is read-only, in which case a different timestamp may be chosen either to
    * improve concurrency or to provide globally read-consistent operations (in the latter cases this
@@ -80,7 +80,7 @@ abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
 
   private long nanoTime_finishedWork;
 
-  /**
+  /*
    * If the task fails then this will be populated with an ordered list of the exceptions. There
    * will be one exception per-retry of the task. For some kinds of failure this list MAY remain
    * unbound.
@@ -100,13 +100,13 @@ abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
         + split;
   }
 
-  /**
+  /*
    * Return the #of elements in the operation. This is used to update {@link
    * IndexSyncRPCCounters#elementsOut}.
    */
   protected abstract int getElementCount();
 
-  /**
+  /*
    * Variant used for procedures that are NOT instances of {@link IKeyArrayIndexProcedure}.
    *
    * @param ts
@@ -234,7 +234,7 @@ abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
     return null;
   }
 
-  /**
+  /*
    * Submit the procedure to the {@link IDataService} identified by the locator.
    *
    * @param locator An index partition locator.
@@ -288,7 +288,7 @@ abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
     }
   }
 
-  /**
+  /*
    * Submit the procedure to the {@link IDataService} and aggregate the result with the caller's
    * {@link IResultHandler} (if specified).
    *
@@ -316,7 +316,7 @@ abstract class AbstractDataServiceProcedureTask implements Callable<Void> {
     }
   }
 
-  /**
+  /*
    * Invoked when {@link StaleLocatorException} was thrown. Since the procedure was being run
    * against an index partition of some scale-out index this exception indicates that the index
    * partition locator was stale. We re-cache the locator(s) for the same key range as the index

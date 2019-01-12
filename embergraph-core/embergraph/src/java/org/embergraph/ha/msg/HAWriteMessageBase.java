@@ -25,8 +25,8 @@ import java.io.ObjectOutput;
 import org.embergraph.ha.pipeline.HAReceiveService;
 import org.embergraph.ha.pipeline.HASendService;
 
-/**
- * Base class for RMI messages used to communicate metadata about a raw data transfer occurring on a
+/*
+* Base class for RMI messages used to communicate metadata about a raw data transfer occurring on a
  * socket channel.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +45,7 @@ public class HAWriteMessageBase implements Externalizable, IHAWriteMessageBase {
   /** The Alder32 checksum of the bytes to be transfered. */
   private int chk;
 
-  /**
+  /*
    * @param sze The #of bytes of data to be transfered.
    * @param chk The Alder32 checksum of the bytes to be transfered.
    */

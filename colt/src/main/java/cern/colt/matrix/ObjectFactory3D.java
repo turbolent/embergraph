@@ -10,8 +10,8 @@ package cern.colt.matrix;
 
 import cern.colt.matrix.impl.DenseObjectMatrix3D;
 import cern.colt.matrix.impl.SparseObjectMatrix3D;
-/**
- * Factory for convenient construction of 3-d matrices holding <tt>Object</tt> cells. Use idioms
+/*
+* Factory for convenient construction of 3-d matrices holding <tt>Object</tt> cells. Use idioms
  * like <tt>ObjectFactory3D.dense.make(4,4,4)</tt> to construct dense matrices,
  * <tt>ObjectFactory3D.sparse.make(4,4,4)</tt> to construct sparse matrices.
  *
@@ -39,7 +39,7 @@ public class ObjectFactory3D extends cern.colt.PersistentObject {
   public static final ObjectFactory3D sparse = new ObjectFactory3D();
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected ObjectFactory3D() {}
-  /**
+  /*
    * Constructs a matrix with the given cell values. <tt>values</tt> is required to have the form
    * <tt>values[slice][row][column]</tt> and have exactly the same number of slices, rows and
    * columns as the receiver.

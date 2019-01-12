@@ -46,7 +46,7 @@ public class DefaultMetadataFactory implements IGangliaMetadataFactory {
     this.defaultDMax = defaultDMax;
   }
 
-  /**
+  /*
    * Note: If the metric name contains a <code>.</code> then the metric will be placed into a group
    * named by everything in the metricName up to that <code>.</code> character.
    */

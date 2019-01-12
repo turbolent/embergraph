@@ -45,8 +45,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Unit tests for {@link ASTWildcardProjectionOptimizer}.
+/*
+* Unit tests for {@link ASTWildcardProjectionOptimizer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -60,7 +60,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -165,7 +165,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -271,7 +271,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -377,7 +377,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -493,7 +493,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given the query:
    *
    * <pre>
@@ -567,7 +567,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
      */
     final IBindingSet[] bsets = new IBindingSet[] {};
 
-    /**
+    /*
      * The source AST.
      *
      * <pre>
@@ -596,7 +596,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
     final QueryRoot given = new QueryRoot(QueryType.SELECT);
     {
 
-      /**
+      /*
        * Top level query.
        *
        * <pre>
@@ -618,7 +618,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
 
         final FunctionNode countNode =
             new FunctionNode(
-                FunctionRegistry.COUNT, Collections.<String, Object>emptyMap(), new VarNode("*"));
+                FunctionRegistry.COUNT, Collections.emptyMap(), new VarNode("*"));
 
         final ProjectionNode countProjection = new ProjectionNode();
         given.setProjection(countProjection);
@@ -632,7 +632,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
         childJoinGroup.addChild(sliceQuery);
       }
 
-      /**
+      /*
        *
        *
        * <pre>
@@ -661,7 +661,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
         sliceQuery.setSlice(new SliceNode(0L /* offset */, 21L /* limit */));
       }
 
-      /**
+      /*
        *
        *
        * <pre>
@@ -701,7 +701,7 @@ public class TestASTWildcardProjectionOptimizer extends AbstractASTEvaluationTes
 
         final FunctionNode countNode =
             new FunctionNode(
-                FunctionRegistry.COUNT, Collections.<String, Object>emptyMap(), new VarNode("*"));
+                FunctionRegistry.COUNT, Collections.emptyMap(), new VarNode("*"));
 
         final ProjectionNode countProjection = new ProjectionNode();
         expected.setProjection(countProjection);

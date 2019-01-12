@@ -70,8 +70,8 @@ import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.impl.MapBindingSet;
 
-/**
- * Test suite for SPARQL queries with embedded query hints.
+/*
+* Test suite for SPARQL queries with embedded query hints.
  *
  * @see ASTQueryHintOptimizer
  * @see TestASTQueryHintOptimizer
@@ -98,7 +98,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Return all {@link BOp}s in which the specified property name appears either as a direct
    * annotation of that {@link BOp} or as a property in the query hints properties object for that
    * {@link BOp}.
@@ -153,7 +153,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
             });
   }
 
-  /**
+  /*
    * Return the number of {@link BOp}s for which the specified property name appears either as a
    * direct annotation of that {@link BOp} or as a property in the query hints properties object for
    * that {@link BOp}.
@@ -172,7 +172,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     return n;
   }
 
-  /**
+  /*
    * A simple SELECT query with some query hints. This verifies that the query hints are correctly
    * applied to the AST and/or the generated query plan.
    *
@@ -296,8 +296,8 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
                 sp.getQueryHint(
                     BufferAnnotations.CHUNK_OF_CHUNKS_CAPACITY, "-1" /* defaultValue */)));
 
-        /*
-         * The join order optimizer query hint is not be on the SPs (it
+      /*
+       * The join order optimizer query hint is not be on the SPs (it
          * is only applied to JoinGroupNode instances).
          */
         assertNull(sp.getProperty(QueryHints.OPTIMIZER));
@@ -320,8 +320,8 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
                 sp.getQueryHint(
                     BufferAnnotations.CHUNK_OF_CHUNKS_CAPACITY, "-1" /* defaultValue */)));
 
-        /*
-         * The join order optimizer query hint is not be on the SPs (it
+      /*
+       * The join order optimizer query hint is not be on the SPs (it
          * is only applied to JoinGroupNode instances).
          */
         assertNull(sp.getProperty(QueryHints.OPTIMIZER));
@@ -371,8 +371,8 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
 
         assertEquals(20, join.getChunkOfChunksCapacity());
 
-        /*
-         * Verify that the annotations were also applied to the
+      /*
+       * Verify that the annotations were also applied to the
          * Predicate associated with the PipelineJoin operator. This is
          * necessary for the AccessPath class to override its defaults
          * for vectoring based on the query hints for the
@@ -404,8 +404,8 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
 
         assertEquals(20, join.getChunkOfChunksCapacity());
 
-        /*
-         * Verify that the annotations were also applied to the
+      /*
+       * Verify that the annotations were also applied to the
          * Predicate associated with the PipelineJoin operator. This is
          * necessary for the AccessPath class to override its defaults
          * for vectoring based on the query hints for the
@@ -450,7 +450,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies the correct handling {@link QueryHints#QUERYID}.
    *
    * <pre>
@@ -496,7 +496,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
             .getProperty(org.embergraph.bop.engine.QueryEngine.Annotations.QUERY_ID));
   }
 
-  /**
+  /*
    * Unit test for correct rejection of an unknown query hint.
    *
    * <pre>
@@ -529,7 +529,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Part one of a two part unit test which verifies that we lift out a {@link SubqueryRoot} which
    * is marked the {@link QueryHints#RUN_ONCE} query hint. In this version of the test, the query
    * hint is not present and we verify that the sub-select is NOT lifted out.
@@ -556,7 +556,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     assertNull(namedSubqueries);
   }
 
-  /**
+  /*
    * Part one of a two part unit test which verifies that we lift out a {@link SubqueryRoot} which
    * is marked the {@link QueryHints#RUN_ONCE} query hint. In this version of the test, the query
    * hint is present and we verify that the sub-select is lifted out.
@@ -572,7 +572,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     assertEquals(1, namedSubqueries.arity());
   }
 
-  /**
+  /*
    * Unit test for the query hints {@link AST2BOpBase.Annotations#HASH_JOIN} and {@link
    * IPredicate.Annotations#KEY_ORDER}.
    *
@@ -687,7 +687,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for the {@link IPredicate.Annotations#KEY_ORDER} query hint on a pipeline join
    * (versus a hash join).
    *
@@ -783,7 +783,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link QueryHints#CHUNK_SIZE}.
    *
    * <pre>
@@ -895,7 +895,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
       assertNotNull(queryRootSP.getQueryHint(PipelineOp.Annotations.CHUNK_CAPACITY));
       assertNotNull(queryRoot.getSlice().getQueryHint(PipelineOp.Annotations.CHUNK_CAPACITY));
 
-      /**
+      /*
        * Note: The ASTSparql11SubqueryOptimizer runs *after* the ASTQueryHintOptimizer. It needs to
        * explicitly copy over the query hints from the original subquery.
        *
@@ -1024,8 +1024,8 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
 
         assertEquals(5, queryRootProjectionOp.getChunkCapacity());
 
-        /*
-         * Note: The ASTSparql11SubqueryOptimizer needs to explicitly
+      /*
+       * Note: The ASTSparql11SubqueryOptimizer needs to explicitly
          * copy across the query hints to the new named subquery root in
          * order for the query hints to show up on the subquery's
          * ProjectionNode.
@@ -1050,7 +1050,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link QueryHints#AT_ONCE} when applied to a {@link PipelineJoin}.
    *
    * <pre>
@@ -1115,7 +1115,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link QueryHints#AT_ONCE} when applied to a SERVICE node.
    *
    * <pre>
@@ -1184,7 +1184,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link QueryHints#AT_ONCE} when applied to a SERVICE node. This verifies that we
    * can turn off "at-once" evaluation for a SERVICE.
    *
@@ -1254,7 +1254,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link QueryHints#CHUNK_SIZE} when applied to a SERVICE node.
    *
    * <pre>
@@ -1317,7 +1317,7 @@ public class TestQueryHints extends AbstractDataDrivenSPARQLTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link QueryHints#MAX_PARALLEL} when applied to a SERVICE node.
    *
    * <pre>

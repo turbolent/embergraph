@@ -48,7 +48,7 @@ public class Test_Ticket_605<S extends IIndexManager> extends AbstractTestNanoSp
         );
   }
 
-  /**
+  /*
    * A Java version of the scala example.
    *
    * @throws Exception

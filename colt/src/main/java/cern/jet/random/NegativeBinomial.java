@@ -10,8 +10,8 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
-/**
- * Negative Binomial distribution; See the <A
+/*
+* Negative Binomial distribution; See the <A
  * HREF="http://www.statlets.com/usermanual/glossary2.htm"> math definition</A>.
  *
  * <p>Instance methods operate on a user supplied uniform random number generator; they are
@@ -38,7 +38,7 @@ public class NegativeBinomial extends AbstractDiscreteDistribution {
 
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static NegativeBinomial shared = new NegativeBinomial(1, 0.5, makeDefaultGenerator());
-  /**
+  /*
    * Constructs a Negative Binomial distribution. Example: n=1, p=0.5.
    *
    * @param n the number of trials.
@@ -55,7 +55,7 @@ public class NegativeBinomial extends AbstractDiscreteDistribution {
   public double cdf(int k) {
     return Probability.negativeBinomial(k, n, p);
   }
-  /**
+  /*
    * Returns a deep copy of the receiver; the copy will produce identical sequences. After this call
    * has returned, the copy and the receiver have equal but separate state.
    *
@@ -75,7 +75,7 @@ public class NegativeBinomial extends AbstractDiscreteDistribution {
   }
   /** Returns a random number from the distribution; bypasses the internal state. */
   public int nextInt(int n, double p) {
-    /**
+    /*
      * **************************************************************** * Negative Binomial
      * Distribution - Compound method * *
      * ***************************************************************** * FUNCTION: - nbp samples a
@@ -98,7 +98,7 @@ public class NegativeBinomial extends AbstractDiscreteDistribution {
     if (k > n) throw new IllegalArgumentException();
     return cern.jet.math.Arithmetic.binomial(n, k) * Math.pow(p, k) * Math.pow(1.0 - p, n - k);
   }
-  /**
+  /*
    * Sets the parameters number of trials and the probability of success.
    *
    * @param n the number of trials
@@ -108,7 +108,7 @@ public class NegativeBinomial extends AbstractDiscreteDistribution {
     this.n = n;
     this.p = p;
   }
-  /**
+  /*
    * Returns a random number from the distribution with the given parameters n and p.
    *
    * @param n the number of trials
@@ -123,7 +123,7 @@ public class NegativeBinomial extends AbstractDiscreteDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + n + "," + p + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

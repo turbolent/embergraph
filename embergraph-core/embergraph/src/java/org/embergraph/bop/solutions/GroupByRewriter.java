@@ -38,8 +38,8 @@ import org.embergraph.bop.IVariableOrConstant;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.aggregate.IAggregate;
 
-/**
- * Utility class simplifies an aggregation operator through a rewrite.
+/*
+* Utility class simplifies an aggregation operator through a rewrite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -51,7 +51,7 @@ import org.embergraph.bop.aggregate.IAggregate;
  */
 public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, Serializable {
 
-  /**
+  /*
    * Note: This class must be serializable so we may distribute it with the parallel decomposition
    * of an aggregation operator on a cluster, otherwise each time an operator computes the rewrite
    * it will assign new variables and we will be unable to combine the decomposed aggregation
@@ -75,7 +75,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
     return sb.toString();
   }
 
-  /**
+  /*
    * The set of all unique {@link IAggregate} expressions with {@link Bind}s onto anonymous
    * variables. Any internal {@link IAggregate} have been lifted out and will appear before any
    * {@link IAggregate}s which use them.
@@ -84,7 +84,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
     return aggExpr;
   }
 
-  /**
+  /*
    * A modified version of the original SELECT expression which has the same semantics. However, the
    * modified select expressions DO NOT contain any {@link IAggregate} functions. All {@link
    * IAggregate} functions have been lifted out into {@link #aggExpr}.
@@ -94,7 +94,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
     return select2;
   }
 
-  /**
+  /*
    * A modified version of the original HAVING expression which has the same semantics (and <code>
    * null</code> iff the original was <code>null</code> or empty). However, the modified select
    * expressions DO NOT contain any {@link IAggregate} functions. All {@link IAggregate} functions
@@ -105,21 +105,21 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
     return having2;
   }
 
-  //    /**
-  //     * Metadata flags reporting whether the column projection of a value
+  //    /*
+//     * Metadata flags reporting whether the column projection of a value
   //     * expression will include all values or only the distinct values. If both
   //     * flags are set, then both the projection of all values and the projection
   //     * of all distinct values are required.
   //     */
   //    public static class ProjectionType {
   //
-  //        /**
-  //         * The column projection of the all observed values is required.
+  //        /*
+//         * The column projection of the all observed values is required.
   //         */
   //        static final int AllValues = 1 << 0;
   //
-  //        /**
-  //         * The column projection of the observed distinct values is required.
+  //        /*
+//         * The column projection of the observed distinct values is required.
   //         */
   //        static final int DistinctValues = 1 << 1;
   //
@@ -157,8 +157,8 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
   //
   //    }
   //
-  //    /**
-  //     * The distinct {@link IValueExpression}s whose column projections are used
+  //    /*
+//     * The distinct {@link IValueExpression}s whose column projections are used
   //     * by the {@link #getAggExpr() aggregate expressions}. The variables appear
   //     * in the order in which they are first used by the aggregate expressions.
   //     * For example, given
@@ -179,7 +179,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
   //        return columnProjections;
   //    }
 
-  /**
+  /*
    * Special construct creates a distinct instance of each {@link IAggregate} in order to avoid
    * side-effects in the internal state of the {@link IAggregate} functions when evaluated in
    * different contexts (e.g., a pipelined aggregation subquery).
@@ -243,7 +243,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
 
         final IConstraint e = having[i];
 
-        having2[i] = (IConstraint) rewrite(e, this, aggExpr);
+        having2[i] = rewrite(e, this, aggExpr);
       }
     }
 
@@ -277,7 +277,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
 
   }
 
-  /**
+  /*
    * Rewrite an {@link IConstraint}.
    *
    * <p>Note: Rewriting a constraint require us to effectively clone the original constraint. I've
@@ -305,7 +305,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
     return (IConstraint) ((BOpBase) e).setArg(0, newInnerExpr);
   }
 
-  /**
+  /*
    * Rewrite an {@link IValueExpression} from a SELECT or HAVING clause. If a rewrite is performed,
    * then the modified expression is returned. Otherwise the original expression is returned. If an
    * aggregation expression is lifted out by the rewrite, then it is added to <i>aggExpr</i>.
@@ -344,7 +344,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
     return rewrite2(e, f, aggExpr);
   }
 
-  /**
+  /*
    * Depth first recursion replaces any {@link IAggregate}s. Depth first recursion is used to lift
    * any embedded {@link IAggregate}s out first.
    *
@@ -409,8 +409,8 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
 
       if (anonVar == null) {
 
-        /*
-         * This is the first time we have encountered this aggregate
+      /*
+       * This is the first time we have encountered this aggregate
          * expression.
          */
 
@@ -428,7 +428,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
     return expr;
   }
 
-  /**
+  /*
    * Return a new anonymous variable (this is overridden by some unit tests in order to have
    * predictable variable names).
    */

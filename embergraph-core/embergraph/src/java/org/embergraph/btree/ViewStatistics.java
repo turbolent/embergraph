@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -42,8 +42,8 @@ package org.embergraph.btree;
 
 import org.embergraph.mdi.LocalPartitionMetadata;
 
-/**
- * Helper class collects some statistics about an {@link ILocalBTreeView}.
+/*
+* Helper class collects some statistics about an {@link ILocalBTreeView}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -62,7 +62,7 @@ public class ViewStatistics {
   /** The sum of the size on disk across the index segments in the view. */
   public final long sumSegBytes;
 
-  /**
+  /*
    * Collects some statistics about the view.
    *
    * <p>Note: If the view is assembled solely from the {@link BTree} on a journal rather than from
@@ -106,8 +106,8 @@ public class ViewStatistics {
       for (AbstractBTree btree : sources) {
         if (btree instanceof IndexSegment) {
           sourceSegmentCount++;
-          /*
-           * Note: This uses the index segment size as self-reported
+        /*
+       * Note: This uses the index segment size as self-reported
            * by the segStore since the IResourceMetadata#getFile()
            * object can not be safely resolved to the backing file in
            * the file system (it is not an absolute file path).

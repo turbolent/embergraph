@@ -70,7 +70,7 @@ public class AbstractEmbergraphGraphTestCase extends AbstractGraphTestCase {
     return (EmbergraphGraphFixture) super.getGraphFixture();
   }
 
-  /**
+  /*
    * A small FOAF data set relating some of the project contributors (triples mode data).
    *
    * @see {@value #smallGraph}
@@ -160,7 +160,7 @@ public class AbstractEmbergraphGraphTestCase extends AbstractGraphTestCase {
     return new SmallGraphProblem();
   }
 
-  /**
+  /*
    * A small weighted graph data set.
    *
    * @see {@value #smallWeightedGraph}

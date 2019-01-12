@@ -132,7 +132,7 @@ public abstract class AbstractKeyRangeIndexProcedure<T> extends AbstractIndexPro
     }
   }
 
-  /**
+  /*
    * Constrain the fromKey to lie within the index partition.
    *
    * @param fromKey The fromKey.
@@ -172,7 +172,7 @@ public abstract class AbstractKeyRangeIndexProcedure<T> extends AbstractIndexPro
     return fromKey;
   }
 
-  /**
+  /*
    * Constrain the toKey to lie within the index partition.
    *
    * @param toKey The toKey.
@@ -188,8 +188,8 @@ public abstract class AbstractKeyRangeIndexProcedure<T> extends AbstractIndexPro
 
       if (pmd.getRightSeparatorKey() != null) {
 
-        /*
-         * Choose the right separator key if the toKey is strictly
+      /*
+       * Choose the right separator key if the toKey is strictly
          * greater than the right separator key. This has the effect of
          * constraining the toKey to be within the index partition key
          * range.

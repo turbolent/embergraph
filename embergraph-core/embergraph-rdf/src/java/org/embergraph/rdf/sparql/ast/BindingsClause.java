@@ -32,8 +32,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 
-/**
- * The solutions declared by a BINDINGS clause.
+/*
+* The solutions declared by a BINDINGS clause.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public class BindingsClause extends GroupMemberNodeBase<BindingsClause>
 
   public interface Annotations extends ASTBase.Annotations, IJoinNode.Annotations {
 
-    /**
+    /*
      * The ordered set of declared variables for which there MIGHT be a binding in any given
      * solution.
      */
@@ -56,7 +56,7 @@ public class BindingsClause extends GroupMemberNodeBase<BindingsClause>
     String BINDING_SETS = "bindingSets";
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param bindings
@@ -71,7 +71,7 @@ public class BindingsClause extends GroupMemberNodeBase<BindingsClause>
     super(args, anns);
   }
 
-  /**
+  /*
    * @param declaredVars The ordered set of declared variables.
    * @param bindingSets The set of solutions.
    */
@@ -95,7 +95,7 @@ public class BindingsClause extends GroupMemberNodeBase<BindingsClause>
     return getDeclaredVariables().size();
   }
 
-  /**
+  /*
    * Return the ordered set of declared variables for the BINDINGS clause. The declared variables
    * MIGHT have a binding in any given solution, but there is no guarantee that any given variable
    * is ever bound within a solution.

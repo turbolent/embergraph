@@ -12,8 +12,8 @@ import cern.colt.map.AbstractIntDoubleMap;
 import cern.colt.map.OpenIntDoubleHashMap;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * Sparse hashed 1-d matrix (aka <i>vector</i>) holding <tt>double</tt> elements. First see the <a
+/*
+* Sparse hashed 1-d matrix (aka <i>vector</i>) holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -58,7 +58,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
    * The elements of the matrix.
    */
   protected AbstractIntDoubleMap elements;
-  /**
+  /*
    * Constructs a matrix with a copy of the given values. The values are copied. So subsequent
    * changes in <tt>values</tt> are not reflected in the matrix, and vice-versa.
    *
@@ -68,7 +68,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
     this(values.length);
     assign(values);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of cells. All entries are initially <tt>0</tt>.
    *
    * @param size the number of cells the matrix shall have.
@@ -77,7 +77,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
   public SparseDoubleMatrix1D(int size) {
     this(size, size / 1000, 0.2, 0.5);
   }
-  /**
+  /*
    * Constructs a matrix with a given number of parameters. All entries are initially <tt>0</tt>.
    * For details related to memory usage see {@link cern.colt.map.OpenIntDoubleHashMap}.
    *
@@ -96,7 +96,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
     setUp(size);
     this.elements = new OpenIntDoubleHashMap(initialCapacity, minLoadFactor, maxLoadFactor);
   }
-  /**
+  /*
    * Constructs a matrix view with a given number of parameters.
    *
    * @param size the number of cells the matrix shall have.
@@ -111,7 +111,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
     this.elements = elements;
     this.isNoView = false;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>value</tt>.
    *
    * @param value the value to be filled into the cells.
@@ -128,7 +128,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
     if (this.isNoView) return this.elements.size();
     else return super.cardinality();
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of non-zero cells without
    * needing to allocate new internal memory. If necessary, allocates new internal memory and
    * increases the capacity of the receiver.
@@ -143,7 +143,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
   public void ensureCapacity(int minCapacity) {
     this.elements.ensureCapacity(minCapacity);
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>index</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -170,7 +170,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
     }
     return false;
   }
-  /**
+  /*
    * Returns the position of the element with the given relative rank within the (virtual or
    * non-virtual) internal 1-dimensional array. You may want to override this method for
    * performance.
@@ -182,7 +182,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
     // return _offset(_rank(rank));
     return zero + rank * stride;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified size. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix1D</tt> the new matrix must also be of type <tt>DenseDoubleMatrix1D</tt>,
@@ -196,7 +196,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
   public DoubleMatrix1D like(int size) {
     return new SparseDoubleMatrix1D(size);
   }
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix1D</tt> the new matrix must be of type <tt>DenseDoubleMatrix2D</tt>, if
@@ -210,7 +210,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
   public DoubleMatrix2D like2D(int rows, int columns) {
     return new SparseDoubleMatrix2D(rows, columns);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>index</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -228,7 +228,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
     if (value == 0) this.elements.removeKey(i);
     else this.elements.put(i, value);
   }
-  /**
+  /*
    * Releases any superfluous memory created by explicitly putting zero values into cells formerly
    * having non-zero values; An application can use this operation to minimize the storage of the
    * receiver.
@@ -253,7 +253,7 @@ public class SparseDoubleMatrix1D extends DoubleMatrix1D {
   public void trimToSize() {
     this.elements.trimToSize();
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param offsets the offsets of the visible elements.

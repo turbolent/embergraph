@@ -27,8 +27,8 @@ import java.util.Properties;
 import org.embergraph.mdi.IMetadataIndex;
 import org.embergraph.mdi.PartitionLocator;
 
-/**
- * Client class for {@link AbstractScaleOutFederation}s.
+/*
+* Client class for {@link AbstractScaleOutFederation}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ public abstract class AbstractScaleOutClient<T> extends AbstractClient<T> {
     super(properties);
   }
 
-  /**
+  /*
    * Options understood by the {@link AbstractScaleOutClient}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -50,7 +50,7 @@ public abstract class AbstractScaleOutClient<T> extends AbstractClient<T> {
    */
   public interface Options extends IEmbergraphClient.Options {
 
-    /**
+    /*
      * Option selects the policy that will be used to cache {@link PartitionLocator}s from an {@link
      * IMetadataIndex} on the client.
      *
@@ -62,7 +62,7 @@ public abstract class AbstractScaleOutClient<T> extends AbstractClient<T> {
     String DEFAULT_METADATA_INDEX_CACHE_POLICY = MetadataIndexCachePolicy.CacheAll.toString();
   }
 
-  /**
+  /*
    * Policy options for caching {@link PartitionLocator}s for an {@link IMetadataIndex}.
    *
    * <p><strong>Warning: This feature is expected to evolve.</strong>
@@ -70,12 +70,12 @@ public abstract class AbstractScaleOutClient<T> extends AbstractClient<T> {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static enum MetadataIndexCachePolicy {
+  public enum MetadataIndexCachePolicy {
 
     /** Cache the entire {@link IMetadataIndex}. */
     CacheAll,
 
     /** Do not cache anything. */
-    NoCache;
+    NoCache
   }
 }

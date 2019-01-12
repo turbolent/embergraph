@@ -17,8 +17,8 @@ import org.embergraph.rdf.sail.sparql.ast.ASTUnparsedQuadDataBlock;
 import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.openrdf.query.MalformedQueryException;
 
-/**
- * Resolves relative URIs in a query model using either an external base URI or using the base URI
+/*
+* Resolves relative URIs in a query model using either an external base URI or using the base URI
  * specified in the query model itself. The former takes precedence over the latter.
  *
  * @author Arjohn Kampman
@@ -26,7 +26,7 @@ import org.openrdf.query.MalformedQueryException;
  */
 public class BaseDeclProcessor {
 
-  /**
+  /*
    * Resolves relative URIs in the supplied query model using either the specified
    * <tt>externalBaseURI</tt> or, if this parameter is <tt>null</tt>, the base URI specified in the
    * query model itself.

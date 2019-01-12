@@ -28,8 +28,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.apache.log4j.Logger;
 
-/**
- * Overrides some methods on {@link NanoHTTPD} to (a) prevent serving files from the local file
+/*
+* Overrides some methods on {@link NanoHTTPD} to (a) prevent serving files from the local file
  * system; and (b) to expose methods for handling GET, PUT, POST, and DELETE requests - these
  * methods all return a {@link NanoHTTPD#HTTP_METHOD_NOT_ALLOWED} {@link Response} by default.
  *
@@ -96,7 +96,7 @@ public abstract class AbstractHTTPD extends NanoHTTPD implements HTTPGetHandler 
     }
   }
 
-  /**
+  /*
    * Handle a GET request.
    *
    * @param req The request
@@ -108,7 +108,7 @@ public abstract class AbstractHTTPD extends NanoHTTPD implements HTTPGetHandler 
     return new Response(HTTP_METHOD_NOT_ALLOWED, MIME_TEXT_PLAIN, req.method);
   }
 
-  /**
+  /*
    * Handle a POST request.
    *
    * @param req The request
@@ -120,7 +120,7 @@ public abstract class AbstractHTTPD extends NanoHTTPD implements HTTPGetHandler 
     return new Response(HTTP_METHOD_NOT_ALLOWED, MIME_TEXT_PLAIN, req.method);
   }
 
-  /**
+  /*
    * Handle a PUT request.
    *
    * @param req The request
@@ -132,7 +132,7 @@ public abstract class AbstractHTTPD extends NanoHTTPD implements HTTPGetHandler 
     return new Response(HTTP_METHOD_NOT_ALLOWED, MIME_TEXT_PLAIN, req.method);
   }
 
-  /**
+  /*
    * Handle a DELETE request.
    *
    * @param req The request

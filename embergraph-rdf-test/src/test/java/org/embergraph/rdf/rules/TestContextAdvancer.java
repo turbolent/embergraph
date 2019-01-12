@@ -48,8 +48,8 @@ import org.embergraph.rdf.store.LocalTripleStore;
 import org.embergraph.relation.accesspath.IAccessPath;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for the {@link ContextAdvancer}.
+/*
+* Test suite for the {@link ContextAdvancer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -137,11 +137,9 @@ public class TestContextAdvancer extends TestCase2 {
           new SPOPredicate(
               new BOp[] {Var.var("s"), Var.var("p"), Var.var("o"), Var.var("c")},
               NV.asMap(
-                  new NV[] {
-                    //                            new NV(Predicate.Annotations.KEY_ORDER,
-                    //                                    SPOKeyOrder.SPOC),
-                    new NV(Annotations.TIMESTAMP, ITx.UNISOLATED),
-                  }));
+                  //                            new NV(Predicate.Annotations.KEY_ORDER,
+                  //                                    SPOKeyOrder.SPOC),
+                  new NV(Annotations.TIMESTAMP, ITx.UNISOLATED)));
 
       //            final BOpContextBase context = new BOpContextBase(null/* fed */,
       //                    store/* indexManager */);

@@ -7,8 +7,8 @@ import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.embergraph.rdf.model.EmbergraphValue;
 
-/**
- * Class <strong>always</strong> has the <em>extension</em> bit set but is NOT 100% "inline". An
+/*
+* Class <strong>always</strong> has the <em>extension</em> bit set but is NOT 100% "inline". An
  * instance of this class bundles together an value of some primitive data type declared by {@link
  * DTE} with the "extension" {@link IV}.
  *
@@ -80,7 +80,7 @@ public abstract class AbstractNonInlineExtensionIVWithDelegateIV<V extends Ember
     return delegate._compareTo(((AbstractNonInlineExtensionIVWithDelegateIV) o).delegate);
   }
 
-  /**
+  /*
    * Return one (for the flags) plus the length of the extension IV plus the length of the delegate
    * IV.
    */

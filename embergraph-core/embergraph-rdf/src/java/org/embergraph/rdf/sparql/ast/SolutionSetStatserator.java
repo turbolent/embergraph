@@ -36,8 +36,8 @@ import org.embergraph.rdf.internal.IVCache;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 
-/**
- * Class populates an {@link ISolutionSetStats} object from a stream of solutions. The summary is
+/*
+* Class populates an {@link ISolutionSetStats} object from a stream of solutions. The summary is
  * available from {@link #getStats()} once the source solutions have been fully consumed.
  *
  * <p>TODO Compute the distinct values for each variable for which we have a binding, or at least
@@ -65,19 +65,19 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
   /** The set of variables observed across all solutions. */
   protected final Set<IVariable<?>> usedVars = new HashSet<IVariable<?>>();
 
-  /**
+  /*
    * The set of variables which are NOT bound in at least one solution (e.g., MAYBE bound
    * semantics).
    */
   protected final Set<IVariable<?>> notAlwaysBound = new HashSet<IVariable<?>>();
 
-  /**
+  /*
    * The set of variables whose {@link IVCache} association is NOT set is at least one solution in
    * which the variable is bound.
    */
   protected final Set<IVariable<?>> notMaterialized = new HashSet<IVariable<?>>();
 
-  /**
+  /*
    * A map from the variable to the first bound value for that variable. This is used to identify
    * variables which are effective constants (they are bound in the first solution and in each
    * solution thereafter and always to the same value).
@@ -85,7 +85,7 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
   protected final Map<IVariable<?>, IConstant<?>> firstBoundValue =
       new HashMap<IVariable<?>, IConstant<?>>();
 
-  /**
+  /*
    * The set of variables which have been proven to not be effective constants. In order to be an
    * effective constant, the variable must be bound in all solutions and it must be bound to the
    * same value in each solution.
@@ -95,7 +95,7 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
   protected final Set<IVariable<?>> currentVars = new HashSet<IVariable<?>>();
   protected final Set<IVariable<?>> notBoundThisSolution = new HashSet<IVariable<?>>();
 
-  /**
+  /*
    * Convenience method.
    *
    * @param bindingSets The source solutions.
@@ -149,8 +149,8 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
 
           if (usedVars.add(v) && nsolutions > 1) {
 
-            /*
-             * This variable was not used in solutions prior to this
+          /*
+       * This variable was not used in solutions prior to this
              * one.
              */
 
@@ -165,8 +165,8 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
 
           if (nsolutions == 1) {
 
-            /*
-             * Record the binding for each variable in the first
+          /*
+       * Record the binding for each variable in the first
              * solution. This is used to identify variables which
              * are effective constants (they are bound to the same
              * value in all solutions).
@@ -176,8 +176,8 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
 
           } else {
 
-            /*
-             * Look at the first bound value for this variable. If
+          /*
+       * Look at the first bound value for this variable. If
              * it was not bound or if the variable was not bound to
              * the same constant, then this variable is not an
              * effective constant for this set of solutions.
@@ -194,16 +194,16 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
             }
           }
 
-          /*
-           * Check for a variable which has a bound value but the
+        /*
+       * Check for a variable which has a bound value but the
            * bound value is not materialized.
            */
           if (!notMaterialized.contains(v)) {
 
             if (c != null) {
 
-              /*
-               * Note: ClassCastException if bound value is not an
+            /*
+       * Note: ClassCastException if bound value is not an
                * IV.
                */
               final IV<?, ?> iv = c.get();
@@ -230,7 +230,7 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
     }
   }
 
-  /**
+  /*
    * Compile the statistics collected from the observed solutions.
    *
    * @return The compiled statistics.
@@ -269,7 +269,7 @@ public class SolutionSetStatserator implements ICloseableIterator<IBindingSet[]>
         nsolutions, usedVars, alwaysBound, notAlwaysBound, materialized, constants);
   }
 
-  /**
+  /*
    * Return the compiled statistics.
    *
    * @return The compiled statistics.

@@ -39,8 +39,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.counters.AbstractStatisticsCollector;
 import org.embergraph.journal.ITransactionService;
 
-/**
- * An event. Events are queued by the {@link IEmbergraphClient} and self-reported periodically to
+/*
+* An event. Events are queued by the {@link IEmbergraphClient} and self-reported periodically to
  * the {@link ILoadBalancerService}. The event is assigned a {@link UUID} when it is created and the
  * {@link ILoadBalancerService} assigned start and end event times based on its local clock as the
  * events are received (this helps to reduce the demand on the {@link ITransactionService} for
@@ -77,7 +77,7 @@ public class Event implements Serializable {
   /** The {@link UUID} for the service which generated that event. */
   public final UUID serviceUUID;
 
-  /**
+  /*
    * The resource for which the event is reported (store file, index name, etc). Note that the
    * {@link #serviceUUID} will also be reported.
    */
@@ -98,7 +98,7 @@ public class Event implements Serializable {
     return details;
   }
 
-  /**
+  /*
    * Add details.
    *
    * @param details
@@ -120,7 +120,7 @@ public class Event implements Serializable {
     return this;
   }
 
-  /**
+  /*
    * Factory for the details hash map. This is a synchronized collection since the event can be
    * serialized concurrent with {@link #end()} which would otherwise lead to a {@link
    * ConcurrentModificationException}. It can not be a {@link ConcurrentHashMap} since that class
@@ -131,7 +131,7 @@ public class Event implements Serializable {
     return Collections.synchronizedMap(new HashMap<String, Object>());
   }
 
-  /**
+  /*
    * Add a detail.
    *
    * @param name
@@ -154,19 +154,19 @@ public class Event implements Serializable {
     return this;
   }
 
-  /**
+  /*
    * The event start time. Assigned locally. The recipient may use [endTime - startTime] to adjust
    * the event to its local clock.
    */
   protected long startTime;
 
-  /**
+  /*
    * The event end time. Assigned locally. The recipient may use [endTime - startTime] to adjust the
    * event to its local clock.
    */
   protected long endTime;
 
-  /**
+  /*
    * The time when the event was received. The recipient may use [endTime - startTime] to adjust the
    * event to its local clock.
    */
@@ -201,10 +201,10 @@ public class Event implements Serializable {
   public Event(
       final IEmbergraphFederation fed, final EventResource resource, final Object majorEventType) {
 
-    this(fed, resource, majorEventType, (Map<String, Object>) null /* details */);
+    this(fed, resource, majorEventType, null /* details */);
   }
 
-  /**
+  /*
    * Event ctor.
    *
    * @param fed The federation object (used to send the event to an aggregator).
@@ -221,7 +221,7 @@ public class Event implements Serializable {
     this(fed, resource, majorEventType, "" /* minorEventType */, details);
   }
 
-  /**
+  /*
    * Sub-event ctor.
    *
    * @param fed The federation object (used to send the event to an aggregator).
@@ -284,7 +284,7 @@ public class Event implements Serializable {
 
   }
 
-  /**
+  /*
    * A child event (major type is the type of the parent).
    *
    * @param minorEventType
@@ -295,7 +295,7 @@ public class Event implements Serializable {
     return new Event(fed, this.resource, this.majorEventType, minorEventType, this.details);
   }
 
-  /**
+  /*
    * A child event (major type is the type of the parent).
    *
    * @param minorEventType
@@ -329,7 +329,7 @@ public class Event implements Serializable {
     return e;
   }
 
-  /**
+  /*
    * Send the start event.
    *
    * <p>Note: If you want to report an event with a duration then you MUST use {@link #start()} when
@@ -356,7 +356,7 @@ public class Event implements Serializable {
     return this;
   }
 
-  /**
+  /*
    * Sends the end event.
    *
    * <p>Note: You can use this method for "instantaneous" events.
@@ -425,7 +425,7 @@ public class Event implements Serializable {
         + "\n";
   }
 
-  /**
+  /*
    * Tab-delimited format (with newline). The details columns are written in a dense format where
    * each (name,value) pair is expressed as <code>name=value</code>, so only the non-null columns
    * are written out.
@@ -490,8 +490,8 @@ public class Event implements Serializable {
     return sb.toString();
   }
 
-  //    /**
-  //     * A class that knows how to render events in a stable tab-delimited format.
+  //    /*
+//     * A class that knows how to render events in a stable tab-delimited format.
   //     * Known detail columns are predeclared and will be written out in the order
   //     * in which they were declared. Additional detail columns are recognized the
   //     * first time they are used and will always be written out at the column
@@ -512,8 +512,8 @@ public class Event implements Serializable {
   //
   //    }
   //
-  //    /**
-  //     * Class which parses events written by the {@link EventRenderer}.
+  //    /*
+//     * Class which parses events written by the {@link EventRenderer}.
   //     *
   //     * @todo we can't really reverse the {@link EventRenderer} when there are
   //     *       columns that are not predeclared since their values will never be
@@ -530,7 +530,7 @@ public class Event implements Serializable {
   //
   //    }
 
-  /**
+  /*
    * Construct an event from the tab-delimited serialization produced from {@link #toString()}.
    *
    * @param s the tab delimited serialization
@@ -606,7 +606,7 @@ public class Event implements Serializable {
         final String t = st.nextToken();
         final int pos = t.indexOf('=');
         final String name = t.substring(0, pos);
-        final String value = t.substring(pos + 1, t.length());
+        final String value = t.substring(pos + 1);
         this.details.put(name, value);
       }
     } catch (Throwable t) {
@@ -615,7 +615,7 @@ public class Event implements Serializable {
     }
   }
 
-  /**
+  /*
    * Reconstruct an event object from a string. Useful for post-mortem analysis.
    *
    * @param s the tab-delimited format create by {@link #toString()}.
@@ -626,7 +626,7 @@ public class Event implements Serializable {
     return new Event(s);
   }
 
-  /**
+  /*
    * Dissimilar from the regular StringTokenizer, which is cannot handle empty fields.
    *
    * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>

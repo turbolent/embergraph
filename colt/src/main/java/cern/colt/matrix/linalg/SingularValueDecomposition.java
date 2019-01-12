@@ -10,8 +10,8 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the singular value decomposition is
+/*
+* For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the singular value decomposition is
  * an <tt>m x n</tt> orthogonal matrix <tt>U</tt>, an <tt>n x n</tt> diagonal matrix <tt>S</tt>, and
  * an <tt>n x n</tt> orthogonal matrix <tt>V</tt> so that <tt>A = U*S*V'</tt>.
  *
@@ -23,7 +23,7 @@ import cern.colt.matrix.DoubleMatrix2D;
  */
 public class SingularValueDecomposition implements java.io.Serializable {
   static final long serialVersionUID = 1020;
-  /**
+  /*
    * Arrays for internal storage of U and V.
    *
    * @serial internal storage of U.
@@ -31,21 +31,21 @@ public class SingularValueDecomposition implements java.io.Serializable {
    */
   private double[][] U, V;
 
-  /**
+  /*
    * Array for internal storage of singular values.
    *
    * @serial internal storage of singular values.
    */
   private double[] s;
 
-  /**
+  /*
    * Row and column dimensions.
    *
    * @serial row dimension.
    * @serial column dimension.
    */
   private int m, n;
-  /**
+  /*
    * Constructs and returns a new singular value decomposition object; The decomposed matrices can
    * be retrieved via instance methods of the returned decomposition object.
    *
@@ -482,7 +482,7 @@ public class SingularValueDecomposition implements java.io.Serializable {
   public double cond() {
     return s[0] / s[Math.min(m, n) - 1];
   }
-  /**
+  /*
    * Returns the diagonal matrix of singular values.
    *
    * @return S
@@ -497,7 +497,7 @@ public class SingularValueDecomposition implements java.io.Serializable {
     }
     return DoubleFactory2D.dense.make(S);
   }
-  /**
+  /*
    * Returns the diagonal of <tt>S</tt>, which is a one-dimensional array of singular values
    *
    * @return diagonal of <tt>S</tt>.
@@ -505,7 +505,7 @@ public class SingularValueDecomposition implements java.io.Serializable {
   public double[] getSingularValues() {
     return s;
   }
-  /**
+  /*
    * Returns the left singular vectors <tt>U</tt>.
    *
    * @return <tt>U</tt>
@@ -514,7 +514,7 @@ public class SingularValueDecomposition implements java.io.Serializable {
     // return new DoubleMatrix2D(U,m,Math.min(m+1,n));
     return DoubleFactory2D.dense.make(U).viewPart(0, 0, m, Math.min(m + 1, n));
   }
-  /**
+  /*
    * Returns the right singular vectors <tt>V</tt>.
    *
    * @return <tt>V</tt>
@@ -526,7 +526,7 @@ public class SingularValueDecomposition implements java.io.Serializable {
   public double norm2() {
     return s[0];
   }
-  /**
+  /*
    * Returns the effective numerical matrix rank, which is the number of nonnegligible singular
    * values.
    */
@@ -541,7 +541,7 @@ public class SingularValueDecomposition implements java.io.Serializable {
     }
     return r;
   }
-  /**
+  /*
    * Returns a String with (propertyName, propertyValue) pairs. Useful for debugging or to quickly
    * get the rough picture. For example,
    *
@@ -560,42 +560,42 @@ public class SingularValueDecomposition implements java.io.Serializable {
 
     buf.append("cond = ");
     try {
-      buf.append(String.valueOf(this.cond()));
+      buf.append(this.cond());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\nrank = ");
     try {
-      buf.append(String.valueOf(this.rank()));
+      buf.append(this.rank());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\nnorm2 = ");
     try {
-      buf.append(String.valueOf(this.norm2()));
+      buf.append(this.norm2());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nU = ");
     try {
-      buf.append(String.valueOf(this.getU()));
+      buf.append(this.getU());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nS = ");
     try {
-      buf.append(String.valueOf(this.getS()));
+      buf.append(this.getS());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nV = ");
     try {
-      buf.append(String.valueOf(this.getV()));
+      buf.append(this.getV());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

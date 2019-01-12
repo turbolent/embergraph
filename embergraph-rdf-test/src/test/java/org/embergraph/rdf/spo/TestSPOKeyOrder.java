@@ -40,8 +40,8 @@ import org.embergraph.test.MockTermIdFactory;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test suite for {@link SPOKeyOrder}.
+/*
+* Test suite for {@link SPOKeyOrder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -78,7 +78,7 @@ public class TestSPOKeyOrder extends TestCase2 {
     return factory.newTermId(VTE.URI);
   }
 
-  /**
+  /*
    * Writes the serialized size of an instance on stdout. It is an amazing 61 bytes. You can
    * serialize just the {@link SPOKeyOrder#index()} byte value for an amazing 60 byte savings per
    * instance.
@@ -89,7 +89,7 @@ public class TestSPOKeyOrder extends TestCase2 {
       log.info("serializedSize=" + SerializerUtil.serialize(SPOKeyOrder.SPO).length + " bytes");
   }
 
-  /**
+  /*
    * Unit tests verifies all of the triple key encoding orders. It encodes a known key in each order
    * in turn and verifies by decoding using the SPO key order and checking against the expected
    * permutation of the (s,p,o) values.
@@ -115,7 +115,7 @@ public class TestSPOKeyOrder extends TestCase2 {
         SPOKeyOrder.SPO.decodeKey(SPOKeyOrder.OSP.encodeKey(keyBuilder, expected)));
   }
 
-  /**
+  /*
    * Unit tests verifies all of the quad key encoding orders. It encodes a known key in each order
    * in turn and verifies by decoding using the SPOC key order and checking against the expected
    * permutation of the (s,p,o,c) values.
@@ -164,7 +164,7 @@ public class TestSPOKeyOrder extends TestCase2 {
     assertEquals("c", e.c(), a.c());
   }
 
-  /**
+  /*
    * Verify that {@link SPOKeyOrder#encodeKey(org.embergraph.btree.keys.IKeyBuilder, ISPO)} and
    * {@link SPOKeyOrder#decodeKey(byte[])} round trip correctly.
    */
@@ -301,7 +301,7 @@ public class TestSPOKeyOrder extends TestCase2 {
         SPOKeyOrder.quadStoreKeyOrderIterator());
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".
@@ -312,7 +312,7 @@ public class TestSPOKeyOrder extends TestCase2 {
     assertSameIteratorAnyOrder("", expected, actual);
   }
 
-  /**
+  /*
    * Verifies that the iterator visits the specified objects in some arbitrary ordering and that the
    * iterator is exhausted once all expected objects have been visited. The implementation uses a
    * selection without replacement "pattern".

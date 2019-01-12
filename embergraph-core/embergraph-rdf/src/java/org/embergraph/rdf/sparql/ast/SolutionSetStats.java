@@ -33,8 +33,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVCache;
 
-/**
- * A set of interesting statistics on a solution set.
+/*
+* A set of interesting statistics on a solution set.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public class SolutionSetStats implements ISolutionSetStats {
   /** The set of variables observed across all solutions. */
   private final Set<IVariable<?>> usedVars;
 
-  /**
+  /*
    * The set of variables which are NOT bound in at least one solution (e.g., MAYBE bound
    * semantics).
    */
@@ -58,19 +58,19 @@ public class SolutionSetStats implements ISolutionSetStats {
   /** The set of variables which are bound in ALL solutions. */
   private final Set<IVariable<?>> alwaysBound;
 
-  /**
+  /*
    * The set of variables whose {@link IVCache} association is always present when the variable is
    * bound in a solution.
    */
   private final Set<IVariable<?>> materialized;
 
-  /**
+  /*
    * The set of variables which are effective constants (they are bound in every solution and always
    * to the same value) together with their constant bindings.
    */
   private final Map<IVariable<?>, IConstant<?>> constants;
 
-  /**
+  /*
    * @param bindingSets The exogenous solutions flowing into the query.
    * @throws IllegalArgumentException if the argument is <code>null</code>
    * @throws IllegalArgumentException if any element of the source solution array is <code>null
@@ -106,8 +106,8 @@ public class SolutionSetStats implements ISolutionSetStats {
 
           if (usedVars.add(v) && nsolutions > 1) {
 
-            /*
-             * This variable was not used in solutions prior to this
+          /*
+       * This variable was not used in solutions prior to this
              * one.
              */
 
@@ -116,8 +116,8 @@ public class SolutionSetStats implements ISolutionSetStats {
 
           currentVars.add(v);
 
-          /*
-           * Check for a variable which has a bound value but the
+        /*
+       * Check for a variable which has a bound value but the
            * bound value is not materialized.
            */
           if (!notMaterialized.contains(v)) {
@@ -127,8 +127,8 @@ public class SolutionSetStats implements ISolutionSetStats {
 
             if (c != null) {
 
-              /*
-               * Note: ClassCastException if bound value is not an
+            /*
+       * Note: ClassCastException if bound value is not an
                * IV.
                */
               final IV<?, ?> iv = c.get();

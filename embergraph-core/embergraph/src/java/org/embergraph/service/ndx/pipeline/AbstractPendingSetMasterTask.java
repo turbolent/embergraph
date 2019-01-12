@@ -35,8 +35,8 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.service.AbstractDistributedFederation;
 import org.embergraph.service.master.INotifyOutcome;
 
-/**
- * Extends the master task to track outstanding asynchronous operations on work items.
+/*
+* Extends the master task to track outstanding asynchronous operations on work items.
  *
  * <p>The clients notify the {@link AbstractPendingSetSubtask} as each operation completes. The
  * subtask notifies the master, which then clears the entry from its {@link #pendingMap} and also
@@ -55,7 +55,7 @@ public abstract class AbstractPendingSetMasterTask<
         L>
     extends AbstractMasterTask<H, E, S, L> implements INotifyOutcome<E, L> {
 
-  /**
+  /*
    * Log may be used to see just success/error reporting for the master without the log information
    * from the base class.
    */
@@ -75,14 +75,14 @@ public abstract class AbstractPendingSetMasterTask<
   /** A proxy for this class which is used by the client task to send asynchronous notifications. */
   protected final INotifyOutcome<E, L> masterProxy;
 
-  /**
+  /*
    * Return the pending map. The pending map reflects the resources which are in process. Resources
    * are added to this collection when they are posted to a client for processing and are removed
    * when the client asynchronously reports success or failure for the resource.
    */
   protected abstract Map<E, Collection<L>> getPendingMap();
 
-  /**
+  /*
    * @param stats
    * @param buffer
    * @param sinkIdleTimeoutNanos
@@ -101,7 +101,7 @@ public abstract class AbstractPendingSetMasterTask<
 
     this.fed = fed;
 
-    this.masterProxy = (INotifyOutcome<E, L>) fed.getProxy(this, true /* enableDGC */);
+    this.masterProxy = fed.getProxy(this, true /* enableDGC */);
   }
 
   protected final boolean nothingPending() {
@@ -122,7 +122,7 @@ public abstract class AbstractPendingSetMasterTask<
     }
   }
 
-  /**
+  /*
    * Add a work item to the pending set.
    *
    * <p>Note: This method is written such that a {@link EmbergraphMap} could be used as the
@@ -177,7 +177,7 @@ public abstract class AbstractPendingSetMasterTask<
     }
   }
 
-  /**
+  /*
    * Remove a work item from the pending set.
    *
    * <p>Note: This method is written such that a {@link EmbergraphMap} could be used as the
@@ -201,13 +201,13 @@ public abstract class AbstractPendingSetMasterTask<
     lock.lock();
     try {
       if (cause == null) {
-        /*
-         * Successful completion.
+      /*
+       * Successful completion.
          */
         final Collection<L> locators = getPendingMap().remove(e);
         if (locators == null) {
-          /*
-           * Presume already successful since not in the map. Return
+        /*
+       * Presume already successful since not in the map. Return
            * false since map was not modified.
            */
           return false;
@@ -234,8 +234,8 @@ public abstract class AbstractPendingSetMasterTask<
        */
       final Collection<L> locators = getPendingMap().get(e);
       if (locators == null) {
-        /*
-         * Presume already successful since not in the map. Return false
+      /*
+       * Presume already successful since not in the map. Return false
          * since map was not modified.
          */
         return false;
@@ -297,14 +297,14 @@ public abstract class AbstractPendingSetMasterTask<
     }
   }
 
-  /**
+  /*
    * Return a new pending map instance. The size of this collection places a machine limit on the
    * #of resources which may be processed concurrently. A {@link EmbergraphMap} may be used if
    * sufficient RAM is not available.
    */
   protected abstract Map<E, Collection<L>> newPendingMap();
 
-  /**
+  /*
    * The resource is removed from the {@link #pendingMap} and the pending set for each sink for
    * which there is an outstanding request for that resource. {@link #didSucceed(Object)} will be
    * invoked the first time a request succeeds for that resource.
@@ -314,7 +314,7 @@ public abstract class AbstractPendingSetMasterTask<
     removePending(e, locator, null /* cause */);
   }
 
-  /**
+  /*
    * The resource is removed from the pending set for the sink associated with that locator. If
    * there are no more outstanding requests for that resource in the {@link #pendingMap} then the
    * resource is removed from the pending map as well. {@link #didFail(Object, Throwable)} will be
@@ -332,7 +332,7 @@ public abstract class AbstractPendingSetMasterTask<
 
   }
 
-  /**
+  /*
    * Hook provides notification the first time work for the resource has been successfully completed
    * for any set of concurrent outstanding work requests and may be <em>extended</em> if necessary.
    * The final outcome for each resource is not retained. Therefore if the same resource is
@@ -348,7 +348,7 @@ public abstract class AbstractPendingSetMasterTask<
     }
   }
 
-  /**
+  /*
    * Hook provides notification if all outstanding work requests for the resource have failed. There
    * may be more than one request to perform the same work. This method is not invoked until all
    * such requests have failed and is not invoked if any of those requests succeed. Note that work

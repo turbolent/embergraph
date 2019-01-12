@@ -48,8 +48,8 @@ import org.embergraph.relation.IMutableRelationIndexWriteProcedure;
 import org.embergraph.service.Split;
 import org.openrdf.model.Value;
 
-/**
- * This unisolated operation inserts {@link Value}s into the
+/*
+* This unisolated operation inserts {@link Value}s into the
  * <em>{termCode,hash(Value),counter}:Value</em> index, assigning {@link IV}s to {@link Value}s as a
  * side-effect.
  *
@@ -68,7 +68,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Serialized as extended metadata. When <code>true</code> unknown terms are NOT added to the
    * database.
    */
@@ -80,7 +80,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     return readOnly;
   }
 
-  /**
+  /*
    * Serialized as extended metadata. When <code>true</code> blank nodes are stored in the lexicon's
    * forward index.
    */
@@ -146,7 +146,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     }
   } // class BlobsWriteProcConstructor
 
-  /**
+  /*
    * For each term whose serialized key is mapped to the current index partition, lookup the term in
    * the <em>terms</em> index. If it is there then wrap its key as its {@link IV}. Otherwise, note
    * the of terms in the collision bucket, and insert {hash(term),counter},term} entry into the
@@ -205,8 +205,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
       final int counter;
       if (!toldBNodes && vte == VTE.BNODE) {
 
-        /*
-         * Do not enter blank nodes into the TERMS index.
+      /*
+       * Do not enter blank nodes into the TERMS index.
          *
          * For this case, we just assign a term identifier and leave it
          * at that. If two different documents by some chance happen to
@@ -223,8 +223,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
           // blank nodes can not be resolved by the index.
           counter = BlobsIndexHelper.NOT_FOUND;
 
-          /*
-           * FIXME Use this to track down people who pass in a blank
+        /*
+       * FIXME Use this to track down people who pass in a blank
            * node on a read-only request when we are not using told
            * bnodes. Under these conditions we can not unify the blank
            * node with the TERMS index so the node should not have
@@ -234,8 +234,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
         } else {
 
-          /*
-           * We are not in a told bnode mode and this is not a
+        /*
+       * We are not in a told bnode mode and this is not a
            * read-only request. The TERMS index will be used to assign
            * a unique counter to complete the blank node's key. That
            * counter is just the current size of the collision bucket
@@ -250,8 +250,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       } else {
 
-        /*
-         * The serialized EmbergraphValue object.
+      /*
+       * The serialized EmbergraphValue object.
          *
          * TODO Avoid materialization of this, preferring to operate on
          * streams in the source IRaba. We will need to compare it with
@@ -272,8 +272,8 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
 
       if (counter != BlobsIndexHelper.NOT_FOUND) {
 
-        /*
-         * TODO This does not update the bucketSize when the Value was
+      /*
+       * TODO This does not update the bucketSize when the Value was
          * not found in the index. We could do this by changing the
          * return value of resolveOrAddValue() to -rangeCount and
          * casting to an (int). The (-rangeCount) could then be
@@ -300,7 +300,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     readOnly = in.readBoolean();
   }
 
-  /**
+  /*
    * Writes metadata (not the keys or values, but just other metadata used by the procedure).
    *
    * <p>The default implementation writes <code>toIndex - fromIndex</code>, which is the #of keys.
@@ -316,7 +316,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     out.writeBoolean(readOnly);
   }
 
-  /**
+  /*
    * Object encapsulates the discovered / assigned {@link IV}s and provides efficient serialization
    * for communication of those data to the client.
    *
@@ -324,7 +324,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
    */
   public static class Result implements Externalizable {
 
-    /**
+    /*
      * The total size of the hash collision buckets examined across all {@link Value}s in the
      * request. Each time a {@link Value} is resolved to a hash collision bucket, the size of that
      * bucket is incremented against this field. Thus it will double count a bucket if the same
@@ -332,13 +332,13 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
      */
     public long totalBucketSize;
 
-    /**
+    /*
      * The size of the largest hash collision bucket examined across all the {@link Value}s in the
      * request.
      */
     public int maxBucketSize;
 
-    /**
+    /*
      * The counters assigned to each {@link Value} in the request. The indices of this array are
      * correlated with the indices of the array provided to the request.
      *
@@ -354,7 +354,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     /** De-serialization constructor. */
     public Result() {}
 
-    /**
+    /*
      * @param totalBucketSize The total bucket size across all buckets examined.
      * @param maxBucketSize The size of the largest collision bucket examined.
      * @param ivs The assigned/resolved collision counters.
@@ -435,7 +435,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     }
   } // class Result
 
-  /**
+  /*
    * {@link Split}-wise aggregation followed by combining the results across those splits in order
    * to return an aggregated result whose counters[] is 1:1 with the original keys[][].
    */
@@ -445,7 +445,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
     return new BlobResultAggregator(getKeys().size());
   }
 
-  /**
+  /*
    * Aggregator collects the individual results in an internal ordered map and assembles the final
    * result when it is requested from the individual results. With this approach there is no
    * overhead or contention when the results are being produced in parallel and they can be combined
@@ -455,7 +455,7 @@ public class BlobsWriteProc extends AbstractKeyArrayIndexProcedure<Result>
    */
   private class BlobResultAggregator extends AbstractLocalSplitResultAggregator<Result> {
 
-    /**
+    /*
      * @param size The #of elements in the request (which is the same as the cardinality of the
      *     aggregated result).
      */

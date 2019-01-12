@@ -33,8 +33,8 @@ import org.embergraph.relation.rule.eval.IJoinNexus;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractRuleTestCase extends AbstractInferenceEngineTestCase {
@@ -54,7 +54,7 @@ public abstract class AbstractRuleTestCase extends AbstractInferenceEngineTestCa
     applyRule(db, rule, null /* filter */, expectedSolutionCount, expectedMutationCount);
   }
 
-  /**
+  /*
    * Applies the rule, copies the new entailments into the store and checks the expected #of
    * inferences computed and new statements copied into the store.
    *
@@ -154,7 +154,7 @@ public abstract class AbstractRuleTestCase extends AbstractInferenceEngineTestCa
     if (log.isInfoEnabled()) log.info("\ndatabase(after)::\n" + db.dumpStore());
   }
 
-  /**
+  /*
    * Verifies the the iterator visits {@link ISolution}s have the expected {@link IBindingSet}s when
    * those bindings may occur in any order.
    *
@@ -197,7 +197,7 @@ public abstract class AbstractRuleTestCase extends AbstractInferenceEngineTestCa
     }
   }
 
-  /**
+  /*
    * Locates an {@link IBindingSet} equal to the given one in the array, clears that entry from the
    * array, and returns <code>true</code>. If none is found, then returns <code>false</code>.
    *

@@ -22,8 +22,8 @@ package org.embergraph.ha;
 
 import cern.colt.Arrays;
 
-/**
- * The 2-phase prepare outcome as coordinated by the leader.
+/*
+* The 2-phase prepare outcome as coordinated by the leader.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -44,7 +44,7 @@ public class PrepareResponse {
     return nyes;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the transaction will commit based on the responses to the prepare
    * requests.
    */
@@ -57,7 +57,7 @@ public class PrepareResponse {
     return votes[index];
   }
 
-  /**
+  /*
    * @param k The replication factor for the quorum.
    * @param nyes The #of YES votes.
    * @param willCommit <code>true</code> iff the transaction will commit based on the responses to

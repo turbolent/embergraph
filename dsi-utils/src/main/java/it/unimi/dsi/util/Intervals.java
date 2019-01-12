@@ -23,8 +23,8 @@ package it.unimi.dsi.util;
 
 import java.util.Comparator;
 
-/**
- * A class providing static methods and objects that do useful things with intervals.
+/*
+* A class providing static methods and objects that do useful things with intervals.
  *
  * @see Interval
  */
@@ -40,7 +40,7 @@ public class Intervals {
   /** A singleton located at &minus;&infty;. */
   public static final Interval MINUS_INFINITY = new Interval(Integer.MIN_VALUE, Integer.MIN_VALUE);
 
-  /**
+  /*
    * A comparator between intervals defined as follows: [<var>a</var>..<var>b</var>] is less than
    * [<var>a</var>'..<var>b</var>'] iff the first interval starts before or prolongs the second one,
    * that is, iff <var>a</var> &lt; <var>a</var>' or <var>a</var>=<var>a</var>' and <var>b</var>'
@@ -55,7 +55,7 @@ public class Intervals {
         }
       };
 
-  /**
+  /*
    * A comparator between intervals defined as follows: [<var>a</var>..<var>b</var>] is less than
    * [<var>a</var>'..<var>b</var>'] iff the first interval ends before or is a suffix of the second
    * one, that is, iff <var>b</var> &lt; <var>b</var>' or <var>b</var>=<var>b</var>' and
@@ -70,7 +70,7 @@ public class Intervals {
         }
       };
 
-  /**
+  /*
    * A comparator between intervals defined as follows: [<var>a</var>..<var>b</var>] is less than
    * [<var>a</var>'..<var>b</var>'] iff the first interval starts <em>after</em> the second one,
    * that is, iff <var>a</var>' &lt; <var>a</var>.
@@ -83,7 +83,7 @@ public class Intervals {
         }
       };
 
-  /**
+  /*
    * A comparator between intervals defined as follows: [<var>a</var>..<var>b</var>] is less than
    * [<var>a</var>'..<var>b</var>'] iff the first interval starts <em>before</em> the second one,
    * that is, iff <var>a</var>' &gt; <var>a</var>.
@@ -96,7 +96,7 @@ public class Intervals {
         }
       };
 
-  /**
+  /*
    * A comparator between intervals defined as follows: [<var>a</var>..<var>b</var>] is less than
    * [<var>a</var>'..<var>b</var>'] iff the first interval ends <em>after</em> the second one, that
    * is, iff <var>b</var>' &lt; <var>b</var>.
@@ -109,7 +109,7 @@ public class Intervals {
         }
       };
 
-  /**
+  /*
    * A comparator between intervals defined as follows: [<var>a</var>..<var>b</var>] is less than
    * [<var>a</var>'..<var>b</var>'] iff the first interval ends <em>before</em> the second one, that
    * is, iff <var>b</var>' &gt; <var>b</var>.

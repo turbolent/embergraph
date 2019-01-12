@@ -12,8 +12,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.model.Graph;
 import org.openrdf.query.GraphQueryResult;
 
-/**
- * An interface providing a maintained DESCRIBE cache for some {@link AbstractTripleStore}.
+/*
+* An interface providing a maintained DESCRIBE cache for some {@link AbstractTripleStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>FIXME MVCC VIEWS: The same integration issue also needs to be addressed for the {@link
@@ -26,7 +26,7 @@ public class DescribeCache implements IDescribeCache {
 
   private static final transient Logger log = Logger.getLogger(CacheConnectionImpl.class);
 
-  /**
+  /*
    * The cache. The keys are {@link IV}s. The values are the {@link Graph} s describing those {@link
    * IV}s.
    */
@@ -55,7 +55,7 @@ public class DescribeCache implements IDescribeCache {
     return map.getIndexMetadata().getKeyBuilder();
   }
 
-  /**
+  /*
    * Returns the sort key for the URI.
    *
    * @param uri The URI.
@@ -72,7 +72,7 @@ public class DescribeCache implements IDescribeCache {
     return iv.encode(keyBuilder).getKey();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO Compute the sketch and use an efficient representation for the describe graph. The
@@ -120,7 +120,7 @@ public class DescribeCache implements IDescribeCache {
     return x;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO Invalidation should probably for lastCommitTime+1 (that is, anything after the most

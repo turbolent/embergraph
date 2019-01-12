@@ -8,8 +8,8 @@ import cern.jet.random.engine.DRand;
 import java.text.DecimalFormat;
 import java.util.Date;
 
-/**
- * A class to test the QuantileBin1D code. The command line is "java Quantile1Test numExamples N"
+/*
+* A class to test the QuantileBin1D code. The command line is "java Quantile1Test numExamples N"
  * where numExamples is the number of random (Gaussian) numbers to be presented to the
  * QuantileBin1D.add method, and N is the absolute maximum number of examples the QuantileBin1D is
  * setup to receive in the constructor. N can be set to "L", which will use Long.MAX_VALUE, or to

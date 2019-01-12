@@ -55,8 +55,8 @@ import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
-/**
- * Unit test for reading on an access path using a {@link Predicate}. This unit test works through
+/*
+* Unit test for reading on an access path using a {@link Predicate}. This unit test works through
  * the create and population of a test relation with some data and verifies the ability to access
  * that data using some different access paths. This sets the ground for testing the evaluation of
  * {@link Predicate}s with various constraints, filters, etc.
@@ -148,7 +148,7 @@ public class TestPredicateAccessPath extends TestCase2 {
     SerializerUtil.serialize(R.primaryKeyOrder);
   }
 
-  /**
+  /*
    * Using a predicate with nothing bound, verify that we get the right range count on the relation
    * and that we read the correct elements from the relation.
    */
@@ -189,7 +189,7 @@ public class TestPredicateAccessPath extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Using a predicate which binds the [name] position, verify that we get the right range count on
    * the relation and verify the actual element pulled back from the access path.
    */
@@ -235,11 +235,9 @@ public class TestPredicateAccessPath extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                  new NV(Annotations.REMOTE_ACCESS_PATH, false),
-                }));
+                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                new NV(Annotations.REMOTE_ACCESS_PATH, false)));
 
     final E[] expected =
         new E[] {
@@ -293,7 +291,7 @@ public class TestPredicateAccessPath extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for an {@link IPredicate.Annotations#INDEX_LOCAL_FILTER}.
    *
    * @todo test with synchronous and asynchronous iterators.
@@ -325,11 +323,9 @@ public class TestPredicateAccessPath extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                  new NV(Annotations.INDEX_LOCAL_FILTER, filter),
-                }));
+                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                new NV(Annotations.INDEX_LOCAL_FILTER, filter)));
 
     final E[] expected =
         new E[] {
@@ -401,7 +397,7 @@ public class TestPredicateAccessPath extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for an {@link IPredicate.Annotations#ACCESS_PATH_FILTER}.
    *
    * @todo test with synchronous and asynchronous iterators.
@@ -434,11 +430,9 @@ public class TestPredicateAccessPath extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                  new NV(Annotations.ACCESS_PATH_FILTER, distinctFilter),
-                }));
+                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                new NV(Annotations.ACCESS_PATH_FILTER, distinctFilter)));
 
     // the distinct values from the name column in index order.
     final E[] expected =
@@ -495,7 +489,7 @@ public class TestPredicateAccessPath extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read the source {@link IBindingSet}s.
    *
    * @param bsets The source binding sets.
@@ -511,7 +505,7 @@ public class TestPredicateAccessPath extends TestCase2 {
     public MockPipelineOp(final BOp[] args, final NV... anns) {
 
       super(args, NV.asMap(anns));
-    };
+    }
 
     private static final long serialVersionUID = 1L;
 

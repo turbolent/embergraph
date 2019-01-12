@@ -27,8 +27,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.quorum.AsynchronousQuorumCloseException;
 
-/**
- * Proxy class / factory pattern to break embergraph-jini dependency. See BLZG-1370.
+/*
+* Proxy class / factory pattern to break embergraph-jini dependency. See BLZG-1370.
  *
  * @author beebs
  */
@@ -44,7 +44,7 @@ public class HAStatusServletUtilProxy {
 
   protected HAStatusServletUtilProxy(IIndexManager indexManager) {}
 
-  /**
+  /*
    * Show the interesting things about the quorum.
    *
    * <ol>
@@ -64,7 +64,7 @@ public class HAStatusServletUtilProxy {
     }
   }
 
-  /**
+  /*
    * Special reporting request for HA status.
    *
    * @param req
@@ -80,7 +80,7 @@ public class HAStatusServletUtilProxy {
     }
   }
 
-  /**
+  /*
    * Basic server health info
    *
    * @param req

@@ -29,8 +29,8 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.sparql.ast.optimizers.ASTOptimizerList;
 import org.openrdf.model.Value;
 
-/**
- * Statistics associated with the Static Analysis phase, such as runtime for the parser, given
+/*
+* Statistics associated with the Static Analysis phase, such as runtime for the parser, given
  * optimizers, etc.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -55,7 +55,7 @@ public class StaticAnalysisStats implements Serializable {
   /** Map for the statistics of the individual (non-loop). */
   private final Map<String, StaticAnalysisStat> optimizerStats;
 
-  /**
+  /*
    * Create a new, initially empty stats object.
    *
    * @param staticAnalysisParseTimeElapsed time needed for parsing (ignored if left null)
@@ -70,7 +70,7 @@ public class StaticAnalysisStats implements Serializable {
     optimizerLoopStat = new StaticAnalysisStat("Optimizers");
   }
 
-  /**
+  /*
    * Registers a call of the parser.
    *
    * @param elapsed the elapsed time for the parsing phase.
@@ -94,7 +94,7 @@ public class StaticAnalysisStats implements Serializable {
     }
   }
 
-  /**
+  /*
    * Registers a call for the key optimizer loop in {@link ASTOptimizerList}.
    *
    * @param optimizerName the name of the optimizer
@@ -112,7 +112,7 @@ public class StaticAnalysisStats implements Serializable {
     rangeCountStat.addElapsed(elapsedNanoSec);
   }
 
-  /**
+  /*
    * Registers a call to a specific AST optimizer (different the main loop).
    *
    * @param optimizerName the name of the optimizer

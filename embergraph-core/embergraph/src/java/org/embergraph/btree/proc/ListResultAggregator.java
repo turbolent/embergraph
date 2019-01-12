@@ -25,8 +25,8 @@ import java.util.LinkedList;
 import java.util.List;
 import org.embergraph.service.Split;
 
-/**
- * Aggregates result into a list of results.
+/*
+* Aggregates result into a list of results.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @param <R>

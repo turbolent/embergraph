@@ -27,8 +27,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import junit.framework.TestCase;
 
-/**
- * Unit test for shutdown of the {@link GangliaListener}.
+/*
+* Unit test for shutdown of the {@link GangliaListener}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -43,7 +43,7 @@ public class TestGangliaServiceShutdown extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test verifies correct shutdown of the {@link GangliaService} ASSUMING that the {@link
    * GangliaListener} shuts down correctly.
    *
@@ -129,7 +129,7 @@ public class TestGangliaServiceShutdown extends TestCase {
               defaultDMax,
               metadataFactory);
 
-      ft = new FutureTask<Void>(service, (Void) null);
+      ft = new FutureTask<Void>(service, null);
 
       /*
        * Run the ganglia service.

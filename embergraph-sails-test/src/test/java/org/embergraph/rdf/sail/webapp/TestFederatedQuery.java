@@ -58,6 +58,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -111,8 +112,8 @@ import org.openrdf.rio.RDFParser.DatatypeHandling;
 import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.StatementCollector;
 
-/**
- * Proxied test suite for SPARQL 1.1 Federated Query. In general, each test loads some data into the
+/*
+* Proxied test suite for SPARQL 1.1 Federated Query. In general, each test loads some data into the
  * KB and then issues a federated query. The core tests are W3C tests and have the pattern <code>
  * serviceXX</code>. There are also tests developed for openrdf.
  *
@@ -176,7 +177,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     return namespace + "_" + i;
   }
 
-  /**
+  /*
    * Get the repository url, initialized repositories are called
    *
    * <p>endpoint1 endpoint2 .. endpoint%MAX_ENDPOINTS%
@@ -194,7 +195,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     return m_serviceURL + "/namespace/" + namespace + "_";
   }
 
-  /**
+  /*
    * Get the repository, initialized repositories are called
    *
    * <pre>
@@ -235,7 +236,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     return m_mgr.getRepositoryForNamespace(ns);
   }
 
-  /**
+  /*
    * Prepare a particular test, and load the specified data.
    *
    * <p>Note: the repositories are cleared before loading data
@@ -275,7 +276,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     }
   }
 
-  /**
+  /*
    * Load a dataset.
    *
    * @param rep
@@ -466,7 +467,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
   //  @Test
   public void test7() throws Exception { //     fail("FIXME RESTORE");// FIXME RESTORE
     // clears the repository and adds new data + execute
-    prepareTest("data07.ttl", Collections.<String>emptyList());
+    prepareTest("data07.ttl", Collections.emptyList());
     execute("service07.rq", "service07.srx", false);
   }
 
@@ -484,7 +485,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     execute("service09.rq", "service09.srx", false);
   }
 
-  /**
+  /*
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/510">Blank nodes in SERVICE
    *     graph patterns </a>
    */
@@ -495,7 +496,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     execute("service10.rq", "service10.srx", false);
   }
 
-  /**
+  /*
    * A variant of {@link #test10()} in which the blank node within the SERVICE graph pattern is
    * replaced by a variable. This query runs fine.
    *
@@ -516,7 +517,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     execute("service11.rq", "service11.srx", false);
   }
 
-  /**
+  /*
    * This is a manual test to see the Fallback in action. Query asks DBpedia, which does not support
    * BINDINGS
    *
@@ -549,8 +550,8 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
    * FIXME I have disabled this test. For now, just workaround the problem by
    * having correlated joins.  It is not too much to ask!
    */
-  //    /**
-  //     * This test is failing due to an uncorrelated join between two SERVICE
+  //    /*
+//     * This test is failing due to an uncorrelated join between two SERVICE
   //     * calls. Those SERVICE calls do not share any variables. The join is a full
   //     * cross product. The problem is not that we fail to do the cross product.
   //     * It is that we are doing it twice -- once for each empty solution flowing
@@ -566,7 +567,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
   //        execute("service13.rq", "service13.srx", false);
   //    }
 
-  /**
+  /*
    * Variant of {@link #test13()} which demonstrates a workaround for the uncorrelated SERVICE joins
    * by lifting the SERVICE calls into named subqueries.
    *
@@ -585,7 +586,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     execute("service14.rq", "service14.srx", false);
   }
 
-  /**
+  /*
    * Execute a testcase, both queryFile and expectedResultFile must be files located on the class
    * path.
    *
@@ -671,7 +672,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     }
   }
 
-  /**
+  /*
    * Read the query string from the specified resource
    *
    * @param queryResource
@@ -684,13 +685,13 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     final InputStream stream =
         TestFederatedQuery.class.getResourceAsStream(TEST_RESOURCE_PATH + queryResource);
     try {
-      return IOUtil.readString(new InputStreamReader(stream, "UTF-8"));
+      return IOUtil.readString(new InputStreamReader(stream, StandardCharsets.UTF_8));
     } finally {
       stream.close();
     }
   }
 
-  /**
+  /*
    * Read the expected tuple query result from the specified resource
    *
    * @param queryResource
@@ -722,7 +723,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     }
   }
 
-  /**
+  /*
    * Read the expected graph query result from the specified resource
    *
    * @param resultFile
@@ -755,7 +756,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     }
   }
 
-  /**
+  /*
    * Compare two tuple query results
    *
    * @param queryResult
@@ -898,7 +899,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends AbstractTestNan
     */
   }
 
-  /**
+  /*
    * Compare two graphs
    *
    * @param queryResult

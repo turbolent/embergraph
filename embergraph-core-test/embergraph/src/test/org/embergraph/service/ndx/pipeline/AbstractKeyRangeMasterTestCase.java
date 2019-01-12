@@ -50,8 +50,8 @@ import org.embergraph.service.ndx.AbstractSplitter;
 import org.embergraph.service.ndx.ISplitter;
 import org.embergraph.util.DaemonThreadFactory;
 
-/**
- * Abstract base class for test suites for the {@link AbstractMasterTask} and friends using {@link
+/*
+* Abstract base class for test suites for the {@link AbstractMasterTask} and friends using {@link
  * IPartitionMetadata} locators.
  *
  * <p>Note: There are a bunch of inner classes which have the same names as the generic types used
@@ -71,7 +71,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Mock stale locator exception.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -100,7 +100,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     return a[r.nextInt(a.length)];
   }
 
-  /**
+  /*
    * A mock "data service". This class may be overridden to control the latency of the writes.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -111,7 +111,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     /** The UUID for this data service. */
     protected final UUID uuid;
 
-    /**
+    /*
      * A collection of index partition identifiers which are no longer located on this data service.
      *
      * <p>Note: Explicit synchronization is required across accesses to {@link #staleLocators},
@@ -127,7 +127,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
       this.uuid = uuid;
     }
 
-    /**
+    /*
      * Write a chunk onto the data service.
      *
      * @param locator Identifies the index partition to which the write request is directed.
@@ -151,7 +151,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
       acceptWrite(locator, chunk);
     }
 
-    /**
+    /*
      * Accept a write (NOP). This may be overridden to impose latency. The caller has already
      * determined that the chunk may be written on this data service for the given locator.
      *
@@ -160,7 +160,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
      */
     protected void acceptWrite(L locator, KVO<O>[] chunk) {}
 
-    /**
+    /*
      * Notify the data service that an index partition is now located on that data service.
      *
      * @param locator Identifies the index partition which is located on that data service.
@@ -175,7 +175,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * Notify the data service that an index partition is no longer located on that data service.
      *
      * @param locator The locator of the index partition which has been split, moved, or joined.
@@ -191,7 +191,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * The locator maps an unsigned byte[] key-range onto a {@link UUID} which identifies a "data
    * service" and an index partition identifier. The index partition is presumed to be located on
    * that data service.
@@ -204,7 +204,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     /** De-serialization ctor. */
     public L() {}
 
-    /**
+    /*
      * Core ctor impl.
      *
      * @param partitionId
@@ -235,7 +235,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Concrete master impl w/o generic types.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -253,7 +253,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     final MetadataIndex mdi =
         MetadataIndex.create(new SimpleMemoryRawStore(), UUID.randomUUID(), managedIndexMetadata);
 
-    /**
+    /*
      * Lock used to provide atomic views on MDI for read (finding splits) and write (updating the
      * split definitions).
      */
@@ -266,7 +266,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
           protected IMetadataIndex getMetadataIndex(long ts) {
 
             return mdi;
-          };
+          }
 
           @Override
           public LinkedList<Split> splitKeys(
@@ -303,7 +303,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
       this.executorService = executorService;
     }
 
-    /**
+    /*
      * Overrides the subtask to write data on the "data service". The data service may be overridden
      * to control the latency of the operation.
      */
@@ -319,8 +319,8 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
       };
     }
 
-    //        /**
-    //         * Handle a stale locator per {@link IndexWriteTask}.
+    //        /*
+//         * Handle a stale locator per {@link IndexWriteTask}.
     //         *
     //         * @deprecated by the use of the redirect queue.
     //         */
@@ -379,7 +379,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     //
     //        }
 
-    /**
+    /*
      * Identifies splits using the {@link IMetadataIndex} and assigns those splits to the
      * appropriate output sinks.
      */
@@ -406,7 +406,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * This applies {@link #keyRangePartition(KVO[])} to map the chunk across the output buffers for
      * the subtasks.
      */
@@ -424,7 +424,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Concrete subtask impl w/o generic types.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -437,7 +437,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
       super(master, locator, buffer);
     }
 
-    /**
+    /*
      * This method may be overridden to simulate the latency of the write operation. The default is
      * a NOP.
      */
@@ -493,7 +493,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
     executorService.shutdownNow();
   }
 
-  /**
+  /*
    * Sleep up to the timeout or until the chunksOut takes on the specified value.
    *
    * @param master

@@ -45,8 +45,8 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.util.Bytes;
 import org.openrdf.model.Value;
 
-/**
- * Encapsulates key and value formation for the reverse lexicon index.
+/*
+* Encapsulates key and value formation for the reverse lexicon index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -59,7 +59,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
   /** The namespace of the owning {@link LexiconRelation}. */
   private String namespace;
 
-  /**
+  /*
    * A (de-)serialized backed by a {@link EmbergraphValueFactoryImpl} for the {@link #namespace} of
    * the owning {@link LexiconRelation}.
    */
@@ -67,7 +67,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
 
   private static final transient int INITIAL_CAPACITY = 128;
 
-  /**
+  /*
    * Used to serialize RDF {@link Value}s.
    *
    * <p>Note: While this object is not thread-safe, the mutable B+Tree is restricted to a single
@@ -75,7 +75,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
    */
   private final transient DataOutputBuffer buf = new DataOutputBuffer(INITIAL_CAPACITY);
 
-  /**
+  /*
    * Used to serialize RDF {@link Value}s.
    *
    * <p>Note: While this object is not thread-safe, the mutable B+Tree is restricted to a single
@@ -91,7 +91,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
     super();
   }
 
-  /**
+  /*
    * @param keyBuilderFactory A factory that does not support unicode and has an initialCapacity of
    *     {@value Bytes#SIZEOF_LONG}.
    */
@@ -124,7 +124,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
     this.valueSer = this.valueFactory.getValueSerializer();
   }
 
-  /**
+  /*
    * Generates an unsigned byte[] key from a {@link TermId}.
    *
    * <p>Note: The code that handles efficient batch insertion of terms into the database replicates
@@ -139,7 +139,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
     return tid.encode(getKeyBuilder().reset()).getKey();
   }
 
-  /**
+  /*
    * Decodes the term identifier key to a term identifier.
    *
    * @param key The key for an entry in the id:term index.
@@ -152,7 +152,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
     return IVUtility.decode(key);
   }
 
-  /**
+  /*
    * Return the unsigned byte[] key for a term identifier.
    *
    * @param obj The term identifier as a {@link TermId}.
@@ -162,7 +162,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
     return id2key((TermId<?>) obj);
   }
 
-  /**
+  /*
    * Return the <code>byte[]</code> value, which is the serialization of an RDF {@link Value}.
    *
    * @param obj An RDF {@link Value}.
@@ -172,7 +172,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
     return valueSer.serialize(obj, buf.reset(), tbuf);
   }
 
-  /**
+  /*
    * De-serializes the {@link ITuple} as a {@link EmbergraphValue}, including the term identifier
    * extracted from the unsigned byte[] key, and sets the appropriate {@link
    * EmbergraphValueFactoryImpl} reference on that object.
@@ -188,7 +188,7 @@ public class Id2TermTupleSerializer extends DefaultTupleSerializer<IV, Embergrap
     return tmp;
   }
 
-  /**
+  /*
    *
    *
    * <pre>

@@ -27,8 +27,8 @@ import org.embergraph.io.ByteArrayBuffer;
 import org.embergraph.io.DataInputBuffer;
 import org.embergraph.rawstore.IBlock;
 
-/**
- * An {@link ITuple} wrapping a delegate that may be used to override some of the methods on the
+/*
+* An {@link ITuple} wrapping a delegate that may be used to override some of the methods on the
  * delegate object.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

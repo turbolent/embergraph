@@ -26,8 +26,8 @@ package org.embergraph.striterator;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Arrays;
 
-/**
- * Converts the type of the source iterator using {@link #resolve(Object)}.
+/*
+* Converts the type of the source iterator using {@link #resolve(Object)}.
  *
  * <p>Note: This class correctly passes {@link ICloseableIterator#close()} through to the source
  * iterator.
@@ -43,7 +43,7 @@ public abstract class ChunkedResolvingIterator<E, S> implements IChunkedOrderedI
 
   private final IKeyOrder<E> keyOrder;
 
-  /**
+  /*
    * Ctor variant when resolving changes the sort order such that the resolved elements would need
    * to be sorted to put them into a known order.
    *
@@ -54,7 +54,7 @@ public abstract class ChunkedResolvingIterator<E, S> implements IChunkedOrderedI
     this(src, null /* keyOrder */);
   }
 
-  /**
+  /*
    * Ctor variant when (a) you KNOW the sort order for the source iterator and (b) the source
    * elements and the resolved elements have the same natural sort order (so the sort order is
    * naturally preserved when the elements are resolved).
@@ -104,8 +104,8 @@ public abstract class ChunkedResolvingIterator<E, S> implements IChunkedOrderedI
 
       if (b == null) {
 
-        /*
-         * Dynamically instantiation an array of the same component type
+      /*
+       * Dynamically instantiation an array of the same component type
          * as the objects that we are visiting.
          */
 
@@ -147,7 +147,7 @@ public abstract class ChunkedResolvingIterator<E, S> implements IChunkedOrderedI
     src.close();
   }
 
-  /**
+  /*
    * Resolve an element visited by the source iterator into an element of the type visitable by this
    * iterator.
    *

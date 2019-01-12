@@ -23,26 +23,26 @@ package org.embergraph.bop.join;
 
 import org.embergraph.bop.IPredicate;
 
-/**
- * A type safe enumeration of the different flavors of hash index "joins".
+/*
+* A type safe enumeration of the different flavors of hash index "joins".
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public enum JoinTypeEnum {
 
-  /**
+  /*
    * A normal join. The output is the combination of the left and right hand solutions. Only
    * solutions which join are output.
    */
   Normal,
-  /**
+  /*
    * An optional join. The output is the combination of the left and right hand solutions. Solutions
    * which join are output, plus any left solutions which did not join. Constraints on the join ARE
    * NOT applied to the "optional" path.
    */
   Optional,
-  /**
+  /*
    * A join where the left solution is output iff there exists at least one right solution which
    * joins with that left solution. For each left solution, that solution is output either zero or
    * one times. In order to enforce this cardinality constraint, the hash join logic winds up
@@ -50,7 +50,7 @@ public enum JoinTypeEnum {
    * identified.
    */
   Exists,
-  /**
+  /*
    * A join where the left solution is output iff there is no right solution which joins with that
    * left solution. This basically an optional join where the solutions which join are not output.
    *
@@ -58,14 +58,14 @@ public enum JoinTypeEnum {
    * "MINUS" deals with the scope of the variables.
    */
   NotExists,
-  /**
+  /*
    * A distinct filter (not a join). Only the distinct left solutions are output. Various
    * annotations pertaining to JOIN processing are ignored when the hash index is used as a DISTINCT
    * filter.
    */
   Filter;
 
-  /**
+  /*
    * Return <code>true</code> iff this is a DISTINCT SOLUTIONS filter.
    *
    * @see #Filter
@@ -75,7 +75,7 @@ public enum JoinTypeEnum {
     return this == Filter;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff this is a JOIN with OPTIONAL semantics.
    *
    * @see #Optional

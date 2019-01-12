@@ -38,8 +38,8 @@ import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * A read-only fused view of two access paths obtained for the same {@link IPredicate} constraint in
+/*
+* A read-only fused view of two access paths obtained for the same {@link IPredicate} constraint in
  * two different databases (this is used for truth maintenance when reading on the union of a focus
  * store and the database).
  *
@@ -106,7 +106,7 @@ public class AccessPathFusedView<E> implements IAccessPath<E> {
     return path1.isEmpty() && path2.isEmpty();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: You can not get an exact range count for a view.
@@ -131,7 +131,7 @@ public class AccessPathFusedView<E> implements IAccessPath<E> {
 
   // final private int flags;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @throws UnsupportedOperationException always.
@@ -176,7 +176,7 @@ public class AccessPathFusedView<E> implements IAccessPath<E> {
   //
   //    }
 
-  /**
+  /*
    * FIXME write tests for optimizations for point tests and small limits. See
    * {@link AccessPath#iterator(long, long, int) for impl details.
    *

@@ -49,8 +49,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for the {@link ASTFilterNormalizationOptimizer} class and associated utility methods
+/*
+* Test suite for the {@link ASTFilterNormalizationOptimizer} class and associated utility methods
  * in {@link StaticAnalysis}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -64,7 +64,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     super(name);
   }
 
-  /**
+  /*
    * Test the {@link ASTFilterNormalizationOptimizer#extractToplevelConjuncts(
    * org.embergraph.rdf.sparql.ast.IValueExpressionNode, List)} method.
    */
@@ -73,30 +73,30 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     // conjunct 1
     final FunctionNode bound1 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+            FunctionRegistry.BOUND, null, new VarNode("s1"));
 
     // conjunct 2
     final FunctionNode bound2 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+            FunctionRegistry.BOUND, null, new VarNode("s2"));
     final FunctionNode not1 = FunctionNode.NOT(bound2);
 
     // conjunct 3
     final FunctionNode bound3 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+            FunctionRegistry.BOUND, null, new VarNode("s3"));
     final FunctionNode bound4 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+            FunctionRegistry.BOUND, null, new VarNode("s4"));
     final FunctionNode bound5 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+            FunctionRegistry.BOUND, null, new VarNode("s5"));
     final FunctionNode or1 = FunctionNode.OR(FunctionNode.AND(bound3, bound4), bound5);
 
     // conjunct 4
     final FunctionNode bound6 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s6")});
+            FunctionRegistry.BOUND, null, new VarNode("s6"));
 
     final FunctionNode toCheck =
         FunctionNode.AND(bound1, FunctionNode.AND(not1, FunctionNode.AND(or1, bound6)));
@@ -112,7 +112,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     assertEquals(actual.get(3), bound6);
   }
 
-  /**
+  /*
    * Test the {@link ASTFilterNormalizationOptimizer#constructFiltersForValueExpressionNode(
    * IValueExpressionNode, List)} method.
    */
@@ -121,30 +121,30 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     // conjunct 1
     final FunctionNode bound3 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+            FunctionRegistry.BOUND, null, new VarNode("s3"));
     final FunctionNode bound4 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+            FunctionRegistry.BOUND, null, new VarNode("s4"));
     final FunctionNode bound5 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+            FunctionRegistry.BOUND, null, new VarNode("s5"));
     final FunctionNode or1 = FunctionNode.OR(FunctionNode.AND(bound3, bound4), bound5);
 
     // conjunct 2
     final FunctionNode bound2 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+            FunctionRegistry.BOUND, null, new VarNode("s2"));
     final FunctionNode not1 = FunctionNode.NOT(bound2);
 
     // conjunct 3
     final FunctionNode bound6 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s6")});
+            FunctionRegistry.BOUND, null, new VarNode("s6"));
 
     // conjunct 4
     final FunctionNode bound1 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+            FunctionRegistry.BOUND, null, new VarNode("s1"));
 
     final FunctionNode base =
         FunctionNode.AND(FunctionNode.AND(or1, FunctionNode.AND(not1, bound6)), bound1);
@@ -168,30 +168,30 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     // conjunct 1
     final FunctionNode bound1 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+            FunctionRegistry.BOUND, null, new VarNode("s1"));
 
     // conjunct 2
     final FunctionNode bound2 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+            FunctionRegistry.BOUND, null, new VarNode("s2"));
     final FunctionNode not1 = FunctionNode.NOT(bound2);
 
     // conjunct 3
     final FunctionNode bound3 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+            FunctionRegistry.BOUND, null, new VarNode("s3"));
     final FunctionNode bound4 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+            FunctionRegistry.BOUND, null, new VarNode("s4"));
     final FunctionNode bound5 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+            FunctionRegistry.BOUND, null, new VarNode("s5"));
     final FunctionNode or1 = FunctionNode.OR(FunctionNode.AND(bound3, bound4), bound5);
 
     // conjunct 4
     final FunctionNode bound6 =
         new FunctionNode(
-            FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s6")});
+            FunctionRegistry.BOUND, null, new VarNode("s6"));
 
     final List<IValueExpressionNode> baseConjuncts = new ArrayList<IValueExpressionNode>();
     baseConjuncts.add(bound1);
@@ -208,7 +208,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     assertEquals(expected, actual);
   }
 
-  /**
+  /*
    * The FILTER
    *
    * <pre>
@@ -279,7 +279,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * The FILTER
    *
    * <pre>
@@ -369,7 +369,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * The FILTER
    *
    * <pre>
@@ -410,7 +410,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
                       new FunctionNode(
                           FunctionRegistry.BOUND,
                           null,
-                          new ValueExpressionNode[] {new VarNode("o")}))));
+                          new VarNode("o")))));
       assertFalse(StaticAnalysis.isCNF(filterNode));
       whereClause.addChild(filterNode);
 
@@ -446,7 +446,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
                   new FunctionNode(
                       FunctionRegistry.BOUND,
                       null,
-                      new ValueExpressionNode[] {new VarNode("o")}))));
+                      new VarNode("o")))));
     }
 
     final AST2BOpContext context = new AST2BOpContext(new ASTContainer(given), store);
@@ -533,7 +533,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Test rewriting of negated leaves, such as !(?x=?y) -> ?x!=?y, !(?a<?b) -> ?a>=?b, etc. (differs
    * from v01 in tree shape).
    */
@@ -636,7 +636,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
       final FunctionNode filterANot1 =
           FunctionNode.NOT(
               new FunctionNode(
-                  FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("o")}));
+                  FunctionRegistry.BOUND, null, new VarNode("o")));
       final FunctionNode filterANot2 = FunctionNode.NOT(filterANot1);
       final FunctionNode filterANot3 = FunctionNode.NOT(filterANot2);
 
@@ -645,7 +645,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
               new FunctionNode(
                   FunctionRegistry.EQ,
                   null,
-                  new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")}));
+                  new VarNode("s"), new VarNode("o")));
       final FunctionNode filterBNot2 = FunctionNode.NOT(filterBNot1);
       final FunctionNode filterBNot3 = FunctionNode.NOT(filterBNot2);
       final FunctionNode filterBNot4 = FunctionNode.NOT(filterBNot3);
@@ -670,13 +670,13 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
 
       final FunctionNode bound =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("o")});
+              FunctionRegistry.BOUND, null, new VarNode("o"));
 
       final FunctionNode neq =
           new FunctionNode(
               FunctionRegistry.NE,
               null,
-              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
+              new VarNode("s"), new VarNode("o"));
 
       FilterNode filterNode = new FilterNode(FunctionNode.OR(bound, neq));
       assertTrue(StaticAnalysis.isCNF(filterNode));
@@ -717,7 +717,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
       final FunctionNode filterANot1 =
           FunctionNode.NOT(
               new FunctionNode(
-                  FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("o")}));
+                  FunctionRegistry.BOUND, null, new VarNode("o")));
       final FunctionNode filterANot2 = FunctionNode.NOT(filterANot1);
       final FunctionNode filterANot3 = FunctionNode.NOT(filterANot2);
 
@@ -726,7 +726,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
               new FunctionNode(
                   FunctionRegistry.EQ,
                   null,
-                  new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")}));
+                  new VarNode("s"), new VarNode("o")));
       final FunctionNode filterBNot2 = FunctionNode.NOT(filterBNot1);
       final FunctionNode filterBNot3 = FunctionNode.NOT(filterBNot2);
       final FunctionNode filterBNot4 = FunctionNode.NOT(filterBNot3);
@@ -751,13 +751,13 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
 
       final FunctionNode bound =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("o")});
+              FunctionRegistry.BOUND, null, new VarNode("o"));
 
       final FunctionNode neq =
           new FunctionNode(
               FunctionRegistry.NE,
               null,
-              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
+              new VarNode("s"), new VarNode("o"));
 
       whereClause.addChild(new FilterNode(bound));
       whereClause.addChild(new FilterNode(neq));
@@ -799,19 +799,19 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
 
       final FunctionNode bound1 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+              FunctionRegistry.BOUND, null, new VarNode("s1"));
       final FunctionNode bound2 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+              FunctionRegistry.BOUND, null, new VarNode("s2"));
       final FunctionNode bound3 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+              FunctionRegistry.BOUND, null, new VarNode("s3"));
       final FunctionNode bound4 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+              FunctionRegistry.BOUND, null, new VarNode("s4"));
       final FunctionNode bound5 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+              FunctionRegistry.BOUND, null, new VarNode("s5"));
 
       final FilterNode filterNode =
           new FilterNode(
@@ -841,19 +841,19 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
 
       final FunctionNode bound1 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+              FunctionRegistry.BOUND, null, new VarNode("s1"));
       final FunctionNode bound2 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+              FunctionRegistry.BOUND, null, new VarNode("s2"));
       final FunctionNode bound3 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+              FunctionRegistry.BOUND, null, new VarNode("s3"));
       final FunctionNode bound4 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+              FunctionRegistry.BOUND, null, new VarNode("s4"));
       final FunctionNode bound5 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+              FunctionRegistry.BOUND, null, new VarNode("s5"));
 
       final FunctionNode and1 = FunctionNode.OR(bound1, bound3);
       final FunctionNode and2 = FunctionNode.OR(bound1, bound4);
@@ -908,23 +908,23 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
       final FunctionNode notBound1 =
           FunctionNode.NOT(
               new FunctionNode(
-                  FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")}));
+                  FunctionRegistry.BOUND, null, new VarNode("s1")));
       final FunctionNode notBound2 =
           FunctionNode.NOT(
               new FunctionNode(
-                  FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")}));
+                  FunctionRegistry.BOUND, null, new VarNode("s2")));
       final FunctionNode notBound3 =
           FunctionNode.NOT(
               new FunctionNode(
-                  FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")}));
+                  FunctionRegistry.BOUND, null, new VarNode("s3")));
       final FunctionNode notBound4 =
           FunctionNode.NOT(
               new FunctionNode(
-                  FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")}));
+                  FunctionRegistry.BOUND, null, new VarNode("s4")));
       final FunctionNode notBound5 =
           FunctionNode.NOT(
               new FunctionNode(
-                  FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")}));
+                  FunctionRegistry.BOUND, null, new VarNode("s5")));
 
       final FilterNode filterNode =
           new FilterNode(
@@ -956,19 +956,19 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
 
       final FunctionNode bound1 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+              FunctionRegistry.BOUND, null, new VarNode("s1"));
       final FunctionNode bound2 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+              FunctionRegistry.BOUND, null, new VarNode("s2"));
       final FunctionNode bound3 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+              FunctionRegistry.BOUND, null, new VarNode("s3"));
       final FunctionNode bound4 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+              FunctionRegistry.BOUND, null, new VarNode("s4"));
       final FunctionNode bound5 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+              FunctionRegistry.BOUND, null, new VarNode("s5"));
 
       final FunctionNode or1 = FunctionNode.OR(bound1, bound3);
       final FunctionNode or2 = FunctionNode.OR(bound1, bound4);
@@ -1023,52 +1023,52 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
 
       final FunctionNode bound1 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+              FunctionRegistry.BOUND, null, new VarNode("s1"));
       final FunctionNode bound2 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+              FunctionRegistry.BOUND, null, new VarNode("s2"));
       final FunctionNode bound3 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+              FunctionRegistry.BOUND, null, new VarNode("s3"));
       final FunctionNode bound4 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+              FunctionRegistry.BOUND, null, new VarNode("s4"));
       final FunctionNode bound5 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+              FunctionRegistry.BOUND, null, new VarNode("s5"));
       final FunctionNode bound6 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s6")});
+              FunctionRegistry.BOUND, null, new VarNode("s6"));
       final FunctionNode bound7 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s7")});
+              FunctionRegistry.BOUND, null, new VarNode("s7"));
       final FunctionNode bound8 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s8")});
+              FunctionRegistry.BOUND, null, new VarNode("s8"));
       final FunctionNode bound9 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s9")});
+              FunctionRegistry.BOUND, null, new VarNode("s9"));
       final FunctionNode bound10 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s10")});
+              FunctionRegistry.BOUND, null, new VarNode("s10"));
       final FunctionNode bound11 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s11")});
+              FunctionRegistry.BOUND, null, new VarNode("s11"));
       final FunctionNode bound12 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s12")});
+              FunctionRegistry.BOUND, null, new VarNode("s12"));
       final FunctionNode bound13 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s13")});
+              FunctionRegistry.BOUND, null, new VarNode("s13"));
       final FunctionNode bound14 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s14")});
+              FunctionRegistry.BOUND, null, new VarNode("s14"));
       final FunctionNode bound15 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s15")});
+              FunctionRegistry.BOUND, null, new VarNode("s15"));
       final FunctionNode bound16 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s16")});
+              FunctionRegistry.BOUND, null, new VarNode("s16"));
 
       final FilterNode filterNode =
           new FilterNode(
@@ -1108,54 +1108,54 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
 
       final FunctionNode bound1 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+              FunctionRegistry.BOUND, null, new VarNode("s1"));
       final FunctionNode bound2 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+              FunctionRegistry.BOUND, null, new VarNode("s2"));
       final FunctionNode bound3 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+              FunctionRegistry.BOUND, null, new VarNode("s3"));
       final FunctionNode bound4 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+              FunctionRegistry.BOUND, null, new VarNode("s4"));
       final FunctionNode bound5 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+              FunctionRegistry.BOUND, null, new VarNode("s5"));
       final FunctionNode bound6 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s6")});
+              FunctionRegistry.BOUND, null, new VarNode("s6"));
       final FunctionNode bound7 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s7")});
+              FunctionRegistry.BOUND, null, new VarNode("s7"));
       final FunctionNode bound8 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s8")});
+              FunctionRegistry.BOUND, null, new VarNode("s8"));
       final FunctionNode bound9 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s9")});
+              FunctionRegistry.BOUND, null, new VarNode("s9"));
       final FunctionNode bound10 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s10")});
+              FunctionRegistry.BOUND, null, new VarNode("s10"));
       final FunctionNode bound11 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s11")});
+              FunctionRegistry.BOUND, null, new VarNode("s11"));
       final FunctionNode bound12 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s12")});
+              FunctionRegistry.BOUND, null, new VarNode("s12"));
       final FunctionNode bound13 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s13")});
+              FunctionRegistry.BOUND, null, new VarNode("s13"));
       final FunctionNode bound14 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s14")});
+              FunctionRegistry.BOUND, null, new VarNode("s14"));
       final FunctionNode bound15 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s15")});
+              FunctionRegistry.BOUND, null, new VarNode("s15"));
       final FunctionNode bound16 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s16")});
+              FunctionRegistry.BOUND, null, new VarNode("s16"));
 
-      /**
+      /*
        * Sketch of intended rewriting process (bottom-up)
        *
        * <p>### STEP 1: for the four leaf nodes we get the following.
@@ -1252,28 +1252,28 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
 
       final FunctionNode bound1 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+              FunctionRegistry.BOUND, null, new VarNode("s1"));
       final FunctionNode bound2 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+              FunctionRegistry.BOUND, null, new VarNode("s2"));
       final FunctionNode bound3 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+              FunctionRegistry.BOUND, null, new VarNode("s3"));
       final FunctionNode bound4 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+              FunctionRegistry.BOUND, null, new VarNode("s4"));
       final FunctionNode bound5 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+              FunctionRegistry.BOUND, null, new VarNode("s5"));
       final FunctionNode bound6 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s6")});
+              FunctionRegistry.BOUND, null, new VarNode("s6"));
       final FunctionNode bound7 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s7")});
+              FunctionRegistry.BOUND, null, new VarNode("s7"));
       final FunctionNode bound8 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s8")});
+              FunctionRegistry.BOUND, null, new VarNode("s8"));
 
       final FilterNode filterNode =
           new FilterNode(
@@ -1305,30 +1305,30 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
 
       final FunctionNode bound1 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s1")});
+              FunctionRegistry.BOUND, null, new VarNode("s1"));
       final FunctionNode bound2 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s2")});
+              FunctionRegistry.BOUND, null, new VarNode("s2"));
       final FunctionNode bound3 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s3")});
+              FunctionRegistry.BOUND, null, new VarNode("s3"));
       final FunctionNode bound4 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s4")});
+              FunctionRegistry.BOUND, null, new VarNode("s4"));
       final FunctionNode bound5 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s5")});
+              FunctionRegistry.BOUND, null, new VarNode("s5"));
       final FunctionNode bound6 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s6")});
+              FunctionRegistry.BOUND, null, new VarNode("s6"));
       final FunctionNode bound7 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s7")});
+              FunctionRegistry.BOUND, null, new VarNode("s7"));
       final FunctionNode bound8 =
           new FunctionNode(
-              FunctionRegistry.BOUND, null, new ValueExpressionNode[] {new VarNode("s8")});
+              FunctionRegistry.BOUND, null, new VarNode("s8"));
 
-      /**
+      /*
        * ### STEP 1: generates to OR connected leafs in CNF
        *
        * <p>FunctionNode.OR( FunctionNode.AND( FunctionNode.AND( FunctionNode.OR(bound1, bound3),
@@ -1414,7 +1414,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
                   new FunctionNode(
                       FunctionRegistry.BOUND,
                       null,
-                      new ValueExpressionNode[] {new VarNode("s1")})));
+                      new VarNode("s1"))));
       final FunctionNode complexFunctionNode2 =
           FunctionNode.OR(
               FunctionNode.NE(new VarNode("s1"), new VarNode("s2")),
@@ -1422,7 +1422,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
                   new FunctionNode(
                       FunctionRegistry.BOUND,
                       null,
-                      new ValueExpressionNode[] {new VarNode("s1")})));
+                      new VarNode("s1"))));
       final FunctionNode complexFunctionNode3 =
           FunctionNode.OR(
               FunctionNode.NE(new VarNode("s1"), new VarNode("s2")),
@@ -1430,7 +1430,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
                   new FunctionNode(
                       FunctionRegistry.BOUND,
                       null,
-                      new ValueExpressionNode[] {new VarNode("s1")})));
+                      new VarNode("s1"))));
 
       whereClause.addChild(new FilterNode(simpleFunctionNode1));
       whereClause.addChild(new FilterNode(simpleFunctionNode2));
@@ -1484,7 +1484,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
                   new FunctionNode(
                       FunctionRegistry.BOUND,
                       null,
-                      new ValueExpressionNode[] {new VarNode("s1")})));
+                      new VarNode("s1"))));
 
       whereClause.addChild(new FilterNode(simpleFunctionNode));
 
@@ -1510,7 +1510,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Test removal of duplicate filter, where the duplicate is introduced through the CNF based
    * decomposition process. This is a variant of test {@link
    * TestASTFilterNormalizationOptimizer#testSimpleConjunctiveFilter()}, where we just add a
@@ -1597,7 +1597,7 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Test removal of unsatisfiable filters. More precisely, the query
    *
    * <p>SELECT ?s WHERE { ?s ?p ?o1 . { ?s ?p ?o2 } OPTIONAL { ?s ?p ?o3 }
@@ -1670,47 +1670,47 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
           new FunctionNode(
               FunctionRegistry.BOUND,
               null /* scalarValues */,
-              new ValueExpressionNode[] {new VarNode("o1")});
+              new VarNode("o1"));
 
       final FunctionNode filterBound2 =
           new FunctionNode(
               FunctionRegistry.BOUND,
               null /* scalarValues */,
-              new ValueExpressionNode[] {new VarNode("o2")});
+              new VarNode("o2"));
 
       final FunctionNode filterBound3 =
           new FunctionNode(
               FunctionRegistry.BOUND,
               null /* scalarValues */,
-              new ValueExpressionNode[] {new VarNode("o3")});
+              new VarNode("o3"));
 
       final FunctionNode filterNotBound1 =
           FunctionNode.NOT(
               new FunctionNode(
                   FunctionRegistry.BOUND,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("o1")}));
+                  new VarNode("o1")));
 
       final FunctionNode filterNotBound2 =
           FunctionNode.NOT(
               new FunctionNode(
                   FunctionRegistry.BOUND,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("o2")}));
+                  new VarNode("o2")));
 
       final FunctionNode filterNotBound3 =
           FunctionNode.NOT(
               new FunctionNode(
                   FunctionRegistry.BOUND,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("o3")}));
+                  new VarNode("o3")));
 
       final FunctionNode filterNotBound4 =
           FunctionNode.NOT(
               new FunctionNode(
                   FunctionRegistry.BOUND,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("o4")}));
+                  new VarNode("o4")));
 
       whereClause.addChild(new FilterNode(filterBound1));
       whereClause.addChild(new FilterNode(filterBound2));
@@ -1770,28 +1770,28 @@ public class TestASTFilterNormalizationOptimizer extends AbstractASTEvaluationTe
           new FunctionNode(
               FunctionRegistry.BOUND,
               null /* scalarValues */,
-              new ValueExpressionNode[] {new VarNode("o3")});
+              new VarNode("o3"));
 
       final FunctionNode filterNotBound1 =
           FunctionNode.NOT(
               new FunctionNode(
                   FunctionRegistry.BOUND,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("o1")}));
+                  new VarNode("o1")));
 
       final FunctionNode filterNotBound2 =
           FunctionNode.NOT(
               new FunctionNode(
                   FunctionRegistry.BOUND,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("o2")}));
+                  new VarNode("o2")));
 
       final FunctionNode filterNotBound3 =
           FunctionNode.NOT(
               new FunctionNode(
                   FunctionRegistry.BOUND,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("o3")}));
+                  new VarNode("o3")));
 
       whereClause.addChild(new FilterNode(filterBound3));
       whereClause.addChild(new FilterNode(filterNotBound1));

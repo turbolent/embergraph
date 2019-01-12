@@ -28,8 +28,8 @@ import org.embergraph.bop.IConstraint;
 import org.embergraph.rdf.internal.NotMaterializedException;
 import org.embergraph.util.InnerCause;
 
-/**
- * This is useful when a solution can be filtered out before it goes through the materialization
+/*
+* This is useful when a solution can be filtered out before it goes through the materialization
  * pipeline. Note that if a solution passes, it will still enter the materialization pipeline. It is
  * up to the first step in the pipeline to ensure that the solution gets routed around the
  * materialization steps. See {@link IsMaterializedBOp}.
@@ -61,7 +61,7 @@ public class TryBeforeMaterializationConstraint extends BOpBase implements ICons
     super(op);
   }
 
-  /**
+  /*
    * This is useful when a solution can be filtered out before it goes through the materialization
    * pipeline. Note that if a solution passes, it will still enter the materialization pipeline. It
    * is up to the first step in the pipeline to ensure that the solution gets routed around the

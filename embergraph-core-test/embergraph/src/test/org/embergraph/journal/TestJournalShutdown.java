@@ -29,8 +29,8 @@ import junit.framework.TestCase2;
 import org.embergraph.btree.IndexMetadata;
 import org.embergraph.util.Bytes;
 
-/**
- * Stress test for correct shutdown of journals based on weak reference semantics.
+/*
+* Stress test for correct shutdown of journals based on weak reference semantics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -94,8 +94,8 @@ public class TestJournalShutdown extends TestCase2 {
 
         if (grp.activeCount() != startupActiveThreads) log.error(failMessage);
 
-        /*
-         * Wait up to 2 seconds for threads to die off so the next test
+      /*
+       * Wait up to 2 seconds for threads to die off so the next test
          * will run more cleanly.
          */
         for (int i = 0; i < 20; i++) {
@@ -108,7 +108,7 @@ public class TestJournalShutdown extends TestCase2 {
     super.tearDown();
   }
 
-  /**
+  /*
    * Look for a memory leak when the test calls {@link Journal#close()} explicitly.
    *
    * @throws InterruptedException
@@ -118,7 +118,7 @@ public class TestJournalShutdown extends TestCase2 {
     doMemoryLeakTest(true);
   }
 
-  /**
+  /*
    * Look for a memory leak when the test DOES NOT call {@link Journal#close()} explicitly and
    * instead relies on the JVM to invoke finalized() on the {@link Journal}.
    *
@@ -138,7 +138,7 @@ public class TestJournalShutdown extends TestCase2 {
     doMemoryLeakTest(false);
   }
 
-  /**
+  /*
    * Test helper looks for a memory leak in the {@link Journal}.
    *
    * @param closeJournal when <code>true</code> the test will close each {@link Journal} that it
@@ -195,8 +195,8 @@ public class TestJournalShutdown extends TestCase2 {
           nunfinalized.incrementAndGet();
           ncreated.incrementAndGet();
 
-          /**
-           * FIXME If we submit a task which registers an index on the new journal then we once
+        /*
+       * FIXME If we submit a task which registers an index on the new journal then we once
            * again have a memory leak in the condition where we do not issue an explicit close
            * against the Journal. [Actually, submitting a read-only task which does not cause an
            * index to be retained does not cause a memory leak.]
@@ -206,15 +206,15 @@ public class TestJournalShutdown extends TestCase2 {
           // force the use of the LockManager.
           try {
 
-            /*
-             * Task does not create an index, but does use the
+          /*
+       * Task does not create an index, but does use the
              * LockManager and the WriteExecutorService.
              */
             final AbstractTask task1 =
                 new NOpTask(jnl.getConcurrencyManager(), ITx.UNISOLATED, "name");
 
-            /*
-             * Task does not create an index. Since it accesses a
+          /*
+       * Task does not create an index. Since it accesses a
              * historical view, it does not use the LockManager or
              * the WriteExecutorService.
              *
@@ -226,8 +226,8 @@ public class TestJournalShutdown extends TestCase2 {
             final AbstractTask task1b =
                 new NOpTask(jnl.getConcurrencyManager(), ITx.READ_COMMITTED, "name");
 
-            /*
-             * Task uses the LockManager and the
+          /*
+       * Task uses the LockManager and the
              * WriteExecutorService and creates an index. A hard
              * reference to that index will make it into the
              * journal's index cache.
@@ -238,8 +238,8 @@ public class TestJournalShutdown extends TestCase2 {
                     "name",
                     new IndexMetadata("name", UUID.randomUUID()));
 
-            /*
-             * Submit one of the tasks and *wait* for its Future.
+          /*
+       * Submit one of the tasks and *wait* for its Future.
              */
             jnl.getConcurrencyManager().submit(task1).get();
             jnl.getConcurrencyManager().submit(task1b).get();
@@ -250,8 +250,8 @@ public class TestJournalShutdown extends TestCase2 {
           }
 
           if (closeJournal) {
-            /*
-             * Exercise each of the ways in which we can close the
+          /*
+       * Exercise each of the ways in which we can close the
              * journal.
              *
              * Note: The Journal will not be finalized() unless it
@@ -356,7 +356,7 @@ public class TestJournalShutdown extends TestCase2 {
   /** A task which does nothing, but which will wait for its locks anyway. */
   private static class NOpTask extends AbstractTask<Void> {
 
-    /**
+    /*
      * @param concurrencyManager
      * @param timestamp
      * @param resource

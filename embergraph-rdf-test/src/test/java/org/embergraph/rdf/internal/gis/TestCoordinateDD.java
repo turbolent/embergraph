@@ -22,8 +22,8 @@ package org.embergraph.rdf.internal.gis;
 
 import java.text.ParseException;
 
-/**
- * Test suite for {@link CoordinateDD}.
+/*
+* Test suite for {@link CoordinateDD}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -75,7 +75,7 @@ public class TestCoordinateDD extends AbstractCoordinateTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite for parsing coordinates expressed in decimal degrees.
    *
    * @throws ParseException

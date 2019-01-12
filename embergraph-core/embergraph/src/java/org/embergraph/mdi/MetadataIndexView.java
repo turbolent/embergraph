@@ -34,8 +34,8 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.cache.LRUCache;
 import org.embergraph.mdi.MetadataIndex.MetadataIndexMetadata;
 
-/**
- * The extension semantics for the {@link IMetadataIndex} are implemented by this class.
+/*
+* The extension semantics for the {@link IMetadataIndex} are implemented by this class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
 
   private final AbstractBTree delegate;
 
-  /**
+  /*
    * <code>true</code> iff this is a read-only view. this is used to conditionally enable caching of
    * de-serialized objects in {@link #getLocatorAtIndex(int)}. We can't cache those objects if the
    * view is mutable!
@@ -85,7 +85,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
     return (PartitionLocator) delegate.lookup((Object) key);
   }
 
-  /**
+  /*
    * The method is used to discover the locator for the index partition within which the <i>key</i>
    * would be found.
    */
@@ -96,7 +96,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
 
   }
 
-  /**
+  /*
    * The implementation uses an iterator with a capacity of ONE (1) and a {@link
    * IRangeQuery#REVERSE} scan. This approach can be used with a key-range partitioned metadata
    * index.
@@ -131,7 +131,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
     return itr.next().getObject();
   }
 
-  /**
+  /*
    * This implementation depends on the {@link ILinearList} API and therefore can not be used with a
    * key-range partitioned metadata index.
    */
@@ -159,7 +159,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
     else return getLocatorAtIndex(index);
   }
 
-  /**
+  /*
    * Uses a cache to reduce {@link PartitionLocator} de-serialization costs.
    *
    * @param index
@@ -183,7 +183,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
     }
   }
 
-  /**
+  /*
    * {@link #find(byte[])} was a hot spot with the costs being primarily the the de-serialization of
    * the {@link PartitionLocator} from the {@link ITuple} so I setup this {@link LRUCache}. The keys
    * are the index position in the B+Tree. The values are de-serialized {@link PartitionLocator}s.
@@ -197,7 +197,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
   private LRUCache<Integer, PartitionLocator> locatorCache =
       new LRUCache<Integer, PartitionLocator>(1000);
 
-  /**
+  /*
    * Remove the locator from the {@link #locatorCache}. It will be re-read on demand from the {@link
    * #delegate}.
    */
@@ -206,7 +206,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
     locatorCache.remove(locator.getPartitionId());
   }
 
-  /**
+  /*
    * Looks up and de-serializes the {@link PartitionLocator} at the given index.
    *
    * @param index
@@ -219,7 +219,7 @@ public class MetadataIndexView extends DelegateIndex implements IMetadataIndex {
     return tuple.getObject();
   }
 
-  /**
+  /*
    * Find the index of the partition spanning the given key. It is only used by {@link
    * #find_with_indexOf(byte[])} and does not scale-out because of a dependency on the {@link
    * ILinearList} API.

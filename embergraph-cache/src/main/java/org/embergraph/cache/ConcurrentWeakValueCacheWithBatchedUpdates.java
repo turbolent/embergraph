@@ -9,8 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 import org.embergraph.EmbergraphStatics;
 
-/**
- * A low-contention/high concurrency weak value cache. This class can offer substantially less lock
+/*
+* A low-contention/high concurrency weak value cache. This class can offer substantially less lock
  * contention and hence greater performance than the {@link WeakValueCache}. The class batches
  * touches using a thread-local queue in order to improve throughput over the {@link
  * ConcurrentWeakValueCache}. Because of the thread-local queues, which must have 64 to 128 elements
@@ -48,7 +48,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
   /** A concurrency-savvy map. */
   private final ConcurrentHashMap<K, WeakReference<V>> map;
 
-  /**
+  /*
    * Used to ensure that the [cacheCapacity] MRU weak references are not finalized (optional).
    *
    * <p>Note: Unlike the {@link ConcurrentWeakValueCache}, the {@link #queue} in this implementation
@@ -57,13 +57,13 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
    */
   private final HardReferenceQueueWithBatchingUpdates<V> queue;
 
-  /**
+  /*
    * Reference queue for weak references in entered into the cache. A weak reference will appear on
    * this queue once the reference has been cleared.
    */
   private final ReferenceQueue<V> referenceQueue;
 
-  /**
+  /*
    * Return <code>true</code> iff a {@link ReferenceQueue} is being maintained and entries will be
    * removed from the map once the corresponding {@link WeakReference} has been cleared. This
    * behavior is controlled by a constructor option.
@@ -73,7 +73,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     return referenceQueue != null;
   }
 
-  /**
+  /*
    * Returns the approximate number of keys in the map. Cleared references are removed before
    * reporting the size of the map, but the return value is still approximate as garbage collection
    * by the JVM can cause references to be cleared at any time.
@@ -91,7 +91,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     return queue.capacity();
   }
 
-  /**
+  /*
    * Note: This operation IS NOT atomic. It can not be made atomic without synchronizing all updates
    * on the backing queue, which would defeat the purpose of this class.
    */
@@ -130,7 +130,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     this(16 /* queueCapacity */);
   }
 
-  /**
+  /*
    * Uses the default load factor (0.75) and concurrency level (16).
    *
    * @param queueCapacity The {@link IHardReferenceQueue} capacity. When ZERO (0), there will not be
@@ -141,7 +141,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     this(queueCapacity, 0.75f /* loadFactor */, 16 /* concurrencyLevel */);
   }
 
-  /**
+  /*
    * Uses the specified values.
    *
    * @param queueCapacity The {@link IHardReferenceQueue} capacity.
@@ -154,7 +154,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     this(queueCapacity, loadFactor, concurrencyLevel, true /* removeClearedReferences */);
   }
 
-  /**
+  /*
    * Uses the specified values and creates a {@link HardReferenceQueue} without a timeout.
    *
    * @param queueCapacity The {@link HardReferenceQueue} capacity.
@@ -176,7 +176,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
         removeClearedReferences);
   }
 
-  /**
+  /*
    * Defaults the initial capacity of the map based on the capacity of the {@link
    * IHardReferenceQueue}.
    *
@@ -208,7 +208,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
         removeClearedReferences);
   }
 
-  /**
+  /*
    * Uses the specified values.
    *
    * @param queue The backing {@link IHardReferenceQueue}. This will be wrapped with a {@link
@@ -237,8 +237,8 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
             64, // threadLocalQueueCapacity
             32, // threadLocalTryLockSize
             new IBatchedUpdateListener<V>() {
-              /**
-               * Since processing the ReferenceQueue requires a lock, we let the thread which
+            /*
+       * Since processing the ReferenceQueue requires a lock, we let the thread which
                * batches the access order updates remove entries for cleared references.
                * [Historically this task was handled by the thread modifying the map in put() and
                * putIfAbsent(), which caused contention for the lock inside of the ReferenceQueue.]
@@ -266,7 +266,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     }
   }
 
-  /**
+  /*
    * Returns the value for the key.
    *
    * @param k The key.
@@ -289,8 +289,8 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
 
       if (v != null) {
 
-        /*
-         * The reference paired with the key has not been cleared so we
+      /*
+       * The reference paired with the key has not been cleared so we
          * append it to the queue so that the reference will be retained
          * longer (a touch).
          */
@@ -315,7 +315,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     return null;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the map contains an entry for the key whose weak reference has not
    * been cleared.
    *
@@ -338,8 +338,8 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
 
       if (v != null) {
 
-        /*
-         * The reference paired with the key has not been cleared so we
+      /*
+       * The reference paired with the key has not been cleared so we
          * append it to the queue so that the reference will be retained
          * longer (a touch).
          */
@@ -364,7 +364,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     return false;
   }
 
-  /**
+  /*
    * Adds the key-value mapping to the cache.
    *
    * @param k The key.
@@ -414,7 +414,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
 
   }
 
-  /**
+  /*
    * Adds the key-value mapping to the cache iff there is no entry for that key. Note that a cleared
    * reference under a key is treated in exactly the same manner as if there were no entry under the
    * key (the entry under the key is replaced atomically).
@@ -515,7 +515,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
 
   }
 
-  /**
+  /*
    * Notification method is invoked if a map entry is inserted or updated by {@link #put(Object,
    * Object)} or {@link #putIfAbsent(Object, Object)}. This method IS NOT invoked if {@link
    * #putIfAbsent(Object, Object)} did not update the map.
@@ -557,7 +557,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
 
   }
 
-  /**
+  /*
    * Remove any entries whose weak reference has been cleared from the {@link #map}. This method
    * polls the {@link ReferenceQueue}, but the {@link ReferenceQueue} uses an internal lock so this
    * does impose synchronization on the callers. For that reason, this method is now invoked from an
@@ -604,7 +604,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     }
   }
 
-  /**
+  /*
    * Invoked when a reference needs to be removed from the map.
    *
    * @param k The key.
@@ -614,7 +614,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     return map.remove(k);
   }
 
-  /**
+  /*
    * An iterator that visits the weak reference values in the map. You must test each weak reference
    * in order to determine whether its value has been cleared as of the moment that you request that
    * value. The entries visited by the iterator are not "touched" so the use of the iterator will
@@ -625,7 +625,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     return map.values().iterator();
   }
 
-  /**
+  /*
    * An iterator that visits the entries in the map. You must test the weak reference for each entry
    * in order to determine whether its value has been cleared as of the moment that you request that
    * value. The entries visited by the iterator are not "touched" so the use of the iterator will
@@ -636,8 +636,8 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     return map.entrySet().iterator();
   }
 
-  //    /**
-  //     * Clears stale references from the backing {@link HardReferenceQueue}.
+  //    /*
+//     * Clears stale references from the backing {@link HardReferenceQueue}.
   //     * <p>
   //     * Note: Evictions from the backing hard reference queue are driven by
   //     * touches (get, put, remove). This means that the LRU entries in the map
@@ -666,7 +666,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
   //
   //    }
 
-  /**
+  /*
    * Factory for new weak references. The default implementation uses a {@link WeakReference} unless
    * <code>referenceQueue!=null</code>, in which case it uses {@link WeakRef} to pair the key with
    * the {@link WeakReference}. This may be extended if you need to track additional information in
@@ -690,7 +690,7 @@ public class ConcurrentWeakValueCacheWithBatchedUpdates<K, V>
     return new WeakRef<K, V>(k, v, referenceQueue);
   }
 
-  /**
+  /*
    * Adds the key to the weak reference.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

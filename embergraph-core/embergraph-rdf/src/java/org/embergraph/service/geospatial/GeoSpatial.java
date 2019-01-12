@@ -24,8 +24,8 @@ import org.embergraph.rdf.internal.gis.ICoordinate.UNITS;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * A vocabulary for geospatial extension querying, designed to operate over the default index
+/*
+* A vocabulary for geospatial extension querying, designed to operate over the default index
  * configuration (lat, lon, time).
  *
  * <p>Example: find all points in the rectangle spanned from (0.00001, 0.00002) to (0.00003,
@@ -65,10 +65,10 @@ import org.openrdf.model.impl.URIImpl;
  */
 public interface GeoSpatial {
 
-  public static String CUSTOM_FIELDS_SEPARATOR = "#";
+  String CUSTOM_FIELDS_SEPARATOR = "#";
 
   /** Enum for implemented geo functions. */
-  public static enum GeoFunction {
+  enum GeoFunction {
     IN_CIRCLE("inCircle"),
     IN_RECTANGLE("inRectangle"),
     UNDEFINED("undefined");
@@ -95,15 +95,15 @@ public interface GeoSpatial {
     private String name;
   }
 
-  public interface Options {
+  interface Options {
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link GeoSpatial#SEARCH}, to be used in geo
      * service. Defaults to {@link GeoFunction#IN_CIRCLE}.
      */
     String GEO_FUNCTION = GeoSpatial.class.getName() + ".defaultGeoFunction";
 
-    /**
+    /*
      * Option that may be set to specify a default for {@link GeoSpatial#SPATIAL_DISTANCE_UNIT}, to
      * be used in geo service. Defaults to meters.
      */
@@ -112,134 +112,135 @@ public interface GeoSpatial {
     UNITS DEFAULT_GEO_SPATIAL_UNIT = UNITS.Kilometers;
   }
 
-  /**
+  /*
    * **********************************************************************************************
    * META DECLARATIONS *
    * **********************************************************************************************
    */
 
   /** The namespace used for magic search predicates. */
-  final String NAMESPACE = "http://www.embergraph.org/rdf/geospatial#";
+  String NAMESPACE = "http://www.embergraph.org/rdf/geospatial#";
 
   // do not use anymore -- need to be retained because it is linked by old vocabulary class
-  @Deprecated final URI DEFAULT_DATATYPE = new URIImpl(NAMESPACE + "geoSpatialLiteral");
+  @Deprecated
+  URI DEFAULT_DATATYPE = new URIImpl(NAMESPACE + "geoSpatialLiteral");
 
   /** The default datatype to be used for GeoSpatial literals. */
-  final String GEOSPATIAL_LITERAL_PREFIX_V1 =
+  String GEOSPATIAL_LITERAL_PREFIX_V1 =
       "http://www.embergraph.org/rdf/geospatial/literals/v1#";
 
-  final String GEOSPATIAL_LITERAL_V1_LAT_LON = GEOSPATIAL_LITERAL_PREFIX_V1 + "lat-lon";
-  final String GEOSPATIAL_LITERAL_V1_LAT_LON_TIME = GEOSPATIAL_LITERAL_PREFIX_V1 + "lat-lon-time";
+  String GEOSPATIAL_LITERAL_V1_LAT_LON = GEOSPATIAL_LITERAL_PREFIX_V1 + "lat-lon";
+  String GEOSPATIAL_LITERAL_V1_LAT_LON_TIME = GEOSPATIAL_LITERAL_PREFIX_V1 + "lat-lon-time";
 
-  final URI DEFAULT_DATATYPE_LAT_LON = new URIImpl(GEOSPATIAL_LITERAL_V1_LAT_LON);
-  final URI DEFAULT_DATATYPE_LAT_LON_TIME = new URIImpl(GEOSPATIAL_LITERAL_V1_LAT_LON_TIME);
+  URI DEFAULT_DATATYPE_LAT_LON = new URIImpl(GEOSPATIAL_LITERAL_V1_LAT_LON);
+  URI DEFAULT_DATATYPE_LAT_LON_TIME = new URIImpl(GEOSPATIAL_LITERAL_V1_LAT_LON_TIME);
 
-  /**
+  /*
    * **********************************************************************************************
    * MAGIC PREDICATES *
    * **********************************************************************************************
    */
 
   /** The name of the search function, pointing to a {@link GeoFunction}. */
-  final URI SEARCH = new URIImpl(NAMESPACE + "search");
+  URI SEARCH = new URIImpl(NAMESPACE + "search");
 
-  /**
+  /*
    * The datatype for literals we're interested in. If not specified, defaults to DEFAULT_DATATYPE.
    */
-  final URI SEARCH_DATATYPE = new URIImpl(NAMESPACE + "searchDatatype");
+  URI SEARCH_DATATYPE = new URIImpl(NAMESPACE + "searchDatatype");
 
   /** Pointer to the predicate used in scanned triples. */
-  final URI PREDICATE = new URIImpl(NAMESPACE + "predicate");
+  URI PREDICATE = new URIImpl(NAMESPACE + "predicate");
 
   /** Pointer to the context used in scanned triples. */
-  final URI CONTEXT = new URIImpl(NAMESPACE + "context");
+  URI CONTEXT = new URIImpl(NAMESPACE + "context");
 
   /** In case of a {@link GeoFunction#IN_CIRCLE} query only: center point of the bounding circle. */
-  final URI SPATIAL_CIRCLE_CENTER = new URIImpl(NAMESPACE + "spatialCircleCenter");
+  URI SPATIAL_CIRCLE_CENTER = new URIImpl(NAMESPACE + "spatialCircleCenter");
 
-  /**
+  /*
    * In case of a {@link GeoFunction#IN_CIRCLE} query only: radius of the bounding circle, specified
    * in SPATIAL_UNIT.
    */
-  final URI SPATIAL_CIRCLE_RADIUS = new URIImpl(NAMESPACE + "spatialCircleRadius");
+  URI SPATIAL_CIRCLE_RADIUS = new URIImpl(NAMESPACE + "spatialCircleRadius");
 
-  /**
+  /*
    * In case of a {@link GeoFunction#IN_RECTANGLE} query only: south west border point of the
    * bounding rectangle.
    */
-  final URI SPATIAL_RECTANGLE_SOUTH_WEST = new URIImpl(NAMESPACE + "spatialRectangleSouthWest");
+  URI SPATIAL_RECTANGLE_SOUTH_WEST = new URIImpl(NAMESPACE + "spatialRectangleSouthWest");
 
-  /**
+  /*
    * In case of a {@link GeoFunction#IN_RECTANGLE} query only: north east border point of the
    * bounding rectangle.
    */
-  final URI SPATIAL_RECTANGLE_NORTH_EAST = new URIImpl(NAMESPACE + "spatialRectangleNorthEast");
+  URI SPATIAL_RECTANGLE_NORTH_EAST = new URIImpl(NAMESPACE + "spatialRectangleNorthEast");
 
   /** The spatial unit used for distances specified in the geospatial search request. */
-  final URI SPATIAL_UNIT = new URIImpl(NAMESPACE + "spatialUnit");
+  URI SPATIAL_UNIT = new URIImpl(NAMESPACE + "spatialUnit");
 
-  /**
+  /*
    * Output variable, supported for "inCircle" query type only. If specified, the variable will, for
    * each solution, be bound to its distance towards the geospatial circle center.
    */
-  final URI DISTANCE_VALUE = new URIImpl(NAMESPACE + "distanceValue");
+  URI DISTANCE_VALUE = new URIImpl(NAMESPACE + "distanceValue");
 
   /** Start time of the time interval to scan for. */
-  final URI TIME_START = new URIImpl(NAMESPACE + "timeStart");
+  URI TIME_START = new URIImpl(NAMESPACE + "timeStart");
 
   /** End time of the time interval to scan for. */
-  final URI TIME_END = new URIImpl(NAMESPACE + "timeEnd");
+  URI TIME_END = new URIImpl(NAMESPACE + "timeEnd");
 
   /** End time of the time interval to scan for. */
-  final URI COORD_SYSTEM = new URIImpl(NAMESPACE + "coordSystem");
+  URI COORD_SYSTEM = new URIImpl(NAMESPACE + "coordSystem");
 
   /** #-separated list of custom fields to be queries, e.g. myField1#myField2 */
-  final URI CUSTOM_FIELDS = new URIImpl(NAMESPACE + "customFields");
+  URI CUSTOM_FIELDS = new URIImpl(NAMESPACE + "customFields");
 
   /** Lower bounds for custom fields, e.g. 10#20 */
-  final URI CUSTOM_FIELDS_LOWER_BOUNDS = new URIImpl(NAMESPACE + "customFieldsLowerBounds");
+  URI CUSTOM_FIELDS_LOWER_BOUNDS = new URIImpl(NAMESPACE + "customFieldsLowerBounds");
 
   /** Upper bounds for custom fields, e.g. 11#5000 */
-  final URI CUSTOM_FIELDS_UPPER_BOUNDS = new URIImpl(NAMESPACE + "customFieldsUpperBounds");
+  URI CUSTOM_FIELDS_UPPER_BOUNDS = new URIImpl(NAMESPACE + "customFieldsUpperBounds");
 
-  /**
+  /*
    * Output variable; if set, this variable is bound to the locations component of the search
    * result.
    */
-  final URI LOCATION_VALUE = new URIImpl(NAMESPACE + "locationValue");
+  URI LOCATION_VALUE = new URIImpl(NAMESPACE + "locationValue");
 
   /** Output variable; if set, this variable is bound to the time component of the search result. */
-  final URI TIME_VALUE = new URIImpl(NAMESPACE + "timeValue");
+  URI TIME_VALUE = new URIImpl(NAMESPACE + "timeValue");
 
   /** Output variable; if set, this variable is bound to the literal component "as is". */
-  final URI LITERAL_VALUE = new URIImpl(NAMESPACE + "literalValue");
+  URI LITERAL_VALUE = new URIImpl(NAMESPACE + "literalValue");
 
-  /**
+  /*
    * Output variable; if set, this variable is bound to the latitude component of the search result.
    */
-  final URI LAT_VALUE = new URIImpl(NAMESPACE + "latValue");
+  URI LAT_VALUE = new URIImpl(NAMESPACE + "latValue");
 
-  /**
+  /*
    * Output variable; if set, this variable is bound to the longitude component of the search
    * result.
    */
-  final URI LON_VALUE = new URIImpl(NAMESPACE + "lonValue");
+  URI LON_VALUE = new URIImpl(NAMESPACE + "lonValue");
 
-  /**
+  /*
    * Output variable; if set, this variable is bound to the longitude component of the search
    * result.
    */
-  final URI COORD_SYSTEM_VALUE = new URIImpl(NAMESPACE + "coordSystemValue");
+  URI COORD_SYSTEM_VALUE = new URIImpl(NAMESPACE + "coordSystemValue");
 
-  /**
+  /*
    * Output variable; if set, this variable is bound to the values for the custom fields, separated
    * by CUSTOM_FIELDS_SEPARATOR (in case there are multiple custom fields)
    */
-  final URI CUSTOM_FIELDS_VALUES = new URIImpl(NAMESPACE + "customFieldsValues");
+  URI CUSTOM_FIELDS_VALUES = new URIImpl(NAMESPACE + "customFieldsValues");
 
-  /**
+  /*
    * Output variable; if set, this variable is bound to a combined representation of the locations +
    * time component of the search result, separated through the CUSTOM_FIELDS_SEPARATOR.
    */
-  final URI LOCATION_AND_TIME_VALUE = new URIImpl(NAMESPACE + "locationAndTimeValue");
+  URI LOCATION_AND_TIME_VALUE = new URIImpl(NAMESPACE + "locationAndTimeValue");
 }

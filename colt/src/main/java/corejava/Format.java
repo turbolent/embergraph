@@ -19,8 +19,8 @@
 
 package corejava;
 
-/**
- * A class for formatting numbers that follows <tt>printf</tt> conventions.
+/*
+* A class for formatting numbers that follows <tt>printf</tt> conventions.
  *
  * <p>Also implements C-like <tt>atoi</tt> and <tt>atof</tt> functions
  *
@@ -39,7 +39,7 @@ package corejava;
  *     package com.horstmann.format; licensed under LGPL
  */
 public class Format {
-  /**
+  /*
    * Formats the number following <tt>printf</tt> conventions. Main limitation: Can only handle one
    * format parameter at a time Use multiple Format objects to format more than one number
    *
@@ -163,7 +163,7 @@ public class Format {
     if (i < length) post = s.substring(i, length);
   }
 
-  /**
+  /*
    * prints a formatted number following printf conventions
    *
    * @param fmt the format string
@@ -173,7 +173,7 @@ public class Format {
     System.out.print(new Format(fmt).format(x));
   }
 
-  /**
+  /*
    * prints a formatted number following printf conventions
    *
    * @param fmt the format string
@@ -183,7 +183,7 @@ public class Format {
     System.out.print(new Format(fmt).format(x));
   }
 
-  /**
+  /*
    * prints a formatted number following printf conventions
    *
    * @param fmt the format string
@@ -193,7 +193,7 @@ public class Format {
     System.out.print(new Format(fmt).format(x));
   }
 
-  /**
+  /*
    * prints a formatted number following printf conventions
    *
    * @param fmt the format string
@@ -203,7 +203,7 @@ public class Format {
     System.out.print(new Format(fmt).format(x));
   }
 
-  /**
+  /*
    * prints a formatted number following printf conventions
    *
    * @param fmt the format string
@@ -213,7 +213,7 @@ public class Format {
     System.out.print(new Format(fmt).format(x));
   }
 
-  /**
+  /*
    * Converts a string of digits (decimal, octal or hex) to an integer
    *
    * @param s a string
@@ -223,7 +223,7 @@ public class Format {
     return (int) atol(s);
   }
 
-  /**
+  /*
    * Converts a string of digits (decimal, octal or hex) to a long integer
    *
    * @param s a string
@@ -263,7 +263,7 @@ public class Format {
     return r * sign;
   }
 
-  /**
+  /*
    * Converts a string of digits to a <tt>double</tt>
    *
    * @param s a string
@@ -303,7 +303,7 @@ public class Format {
     return sign * r;
   }
 
-  /**
+  /*
    * Formats a <tt>double</tt> into a string (like sprintf in C)
    *
    * @param x the number to format
@@ -327,7 +327,7 @@ public class Format {
     return pad(sign(s, r));
   }
 
-  /**
+  /*
    * Formats an integer into a string (like sprintf in C)
    *
    * @param x the number to format
@@ -339,7 +339,7 @@ public class Format {
     return format(lx);
   }
 
-  /**
+  /*
    * Formats a long integer into a string (like sprintf in C)
    *
    * @param x the number to format
@@ -364,7 +364,7 @@ public class Format {
     return pad(sign(s, r));
   }
 
-  /**
+  /*
    * Formats a character into a string (like sprintf in C)
    *
    * @param x the value to format
@@ -377,7 +377,7 @@ public class Format {
     return pad(r);
   }
 
-  /**
+  /*
    * Formats a string into a larger string (like sprintf in C)
    *
    * @param x the value to format
@@ -538,7 +538,7 @@ public class Format {
     } // CSH 10-25-97
 
     String z = leadingZeroes + l;
-    z = "." + z.substring(z.length() - precision, z.length());
+    z = "." + z.substring(z.length() - precision);
 
     if (removeTrailing) {
       int t = z.length() - 1;
@@ -584,7 +584,7 @@ public class Format {
       p = p + (-e);
     }
 
-    return f + p.substring(p.length() - 3, p.length());
+    return f + p.substring(p.length() - 3);
   }
 
   private int width;

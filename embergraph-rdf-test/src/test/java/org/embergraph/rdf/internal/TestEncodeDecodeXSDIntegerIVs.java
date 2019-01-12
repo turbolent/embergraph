@@ -28,8 +28,8 @@ import java.util.Random;
 import org.embergraph.rdf.internal.impl.literal.XSDIntegerIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * Unit tests for {@link XSDIntegerIV}.
+/*
+* Unit tests for {@link XSDIntegerIV}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -60,7 +60,7 @@ public class TestEncodeDecodeXSDIntegerIVs extends AbstractEncodeDecodeKeysTestC
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for {@link XSDIntegerIV} with positive and negative {@link BigInteger}s having a
    * common prefix with varying digits after the prefix.
    */

@@ -28,8 +28,8 @@ import junit.framework.Test;
 import org.embergraph.btree.BTree;
 import org.embergraph.journal.Options;
 
-/**
- * Proxy test suite for {@link LocalTripleStore} when the backing indices are {@link BTree}s. This
+/*
+* Proxy test suite for {@link LocalTripleStore} when the backing indices are {@link BTree}s. This
  * configuration does NOT support transactions since the various indices are NOT isolatable.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -109,7 +109,7 @@ public class TestLocalTripleStore extends AbstractTestCase {
     return LocalTripleStore.getInstance(properties);
   }
 
-  /**
+  /*
    * Re-open the same backing store.
    *
    * @param store the existing store.

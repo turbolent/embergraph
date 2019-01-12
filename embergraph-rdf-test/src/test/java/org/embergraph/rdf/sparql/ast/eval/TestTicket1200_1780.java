@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test case for https://jira.blazegraph.com/browse/BLZG-1200: REGEX does not use SPARQL spec for
+/*
+* Test case for https://jira.blazegraph.com/browse/BLZG-1200: REGEX does not use SPARQL spec for
  * conversion of literals with a language type
  *
  * @author <a href="mailto:beebs@blazegraph.com">Brad Bebee</a>
@@ -31,7 +31,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test for REGEX on a non-string literal (Inline IPv4)
    *
    * <p>{@link BLZG-1780}
@@ -63,7 +63,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Test that the query without the query hint fails.
    *
    * <p>{@See BLZG-1780}
@@ -87,7 +87,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Test for REGEX on a string literal
    *
    * <pre>
@@ -117,7 +117,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Test for REGEX on a non-string literal (Inline IPv4) with conversion
    *
    * <pre>
@@ -147,7 +147,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Test for REGEX on a string literal with language annotation
    *
    * <pre>
@@ -177,7 +177,7 @@ public class TestTicket1200_1780 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Test for REGEX on a string literal with language annotation
    *
    * <pre>

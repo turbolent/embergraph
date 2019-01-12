@@ -17,14 +17,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.ha.msg;
 
-/**
- * Interface for a response from a failover read on a remote service.
+/*
+* Interface for a response from a failover read on a remote service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public interface IHAReadResponse extends IHAMessage {
 
-  /**
+  /*
    * The record read from the remote service.
    *
    * @return The record and never <code>null</code>.

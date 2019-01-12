@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.apache.log4j.Logger;
 
-/**
- * A fly weight helper class that runs tasks either sequentially or with limited parallelism against
+/*
+* A fly weight helper class that runs tasks either sequentially or with limited parallelism against
  * some thread pool. Deadlock can arise when limited parallelism is applied if there are
  * dependencies among the tasks. Limited parallelism is enforced by running chunks of tasks in
  * sequence. Higher concurrency is possible when using a dedicated thread pool having the desired
@@ -43,7 +43,7 @@ public class MappedTaskExecutor {
     return service;
   }
 
-  /**
+  /*
    * Runs a set of tasks, checking their futures. When maxParallel is GT ONE (1), tasks are run in
    * chunks of up to maxParallel tasks at once. New chunks are not submitted until all tasks in the
    * existing chunk are complete. Higher concurrency limited parallelism may be obtained with a

@@ -27,13 +27,13 @@ import org.embergraph.rdf.sparql.ast.IQueryNode;
 import org.embergraph.rdf.sparql.ast.QueryRoot;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractChunkSizeHint extends AbstractIntQueryHint {
 
-  /**
+  /*
    * @param name
    * @param defaultValue
    */

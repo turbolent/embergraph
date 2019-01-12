@@ -29,8 +29,8 @@ import junit.framework.Test;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Test suite for {@link WORMStrategy} journal.
+/*
+* Test suite for {@link WORMStrategy} journal.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @see TestWORMStrategyNoCache
@@ -107,7 +107,7 @@ public class TestWORMStrategy extends AbstractJournalTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Verify normal operation and basic assumptions when creating a new journal using {@link
    * BufferMode#DiskWORM}.
    *
@@ -144,7 +144,7 @@ public class TestWORMStrategy extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that {@link Options#CREATE} may be used to initialize a journal on a newly
    * created empty file.
    *
@@ -174,7 +174,7 @@ public class TestWORMStrategy extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractRestartSafeTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -196,7 +196,7 @@ public class TestWORMStrategy extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractInterruptsTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -230,7 +230,7 @@ public class TestWORMStrategy extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMROWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -262,7 +262,7 @@ public class TestWORMStrategy extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMRMWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -315,7 +315,7 @@ public class TestWORMStrategy extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * The write cache is enabled for this version of the test suite and the default #of write cache
    * buffers will be used as specified by {@link Options#DEFAULT_WRITE_CACHE_BUFFER_COUNT}.
    */

@@ -27,8 +27,8 @@ import org.embergraph.rdf.sparql.ast.optimizers.ASTDistinctTermScanOptimizer;
 import org.embergraph.rdf.spo.SPOKeyOrder;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * SPARQL level test suite for the {@link ASTDistinctTermScanOptimizer} and its physical operator
+/*
+* SPARQL level test suite for the {@link ASTDistinctTermScanOptimizer} and its physical operator
  * {@link DistinctTermScanOp}.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/1035" > DISTINCT PREDICATEs query is slow </a>
@@ -71,7 +71,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
       return properties;
     }
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -96,7 +96,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -121,7 +121,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -146,7 +146,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      * Correct rejection test where a variable in the triple pattern appears more than once. We have
      * to actually run the key-range scan in order to handle the correlated variable binding.
      *
@@ -172,7 +172,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      *
      *
      * <pre>
@@ -210,7 +210,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
     }
   }
 
-  /**
+  /*
    * Note: For quads we need to test all of the combinations of default and named graph modes and
    * both with and without the GRAPH {} wrapping the triple pattern. These tests can be run both
    * with and without the optimizer if we define a query hint to disable it. Or you can just disable
@@ -233,7 +233,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
    */
   public static class TestQuadsModeAPs extends TestDistinctTermScanOptimizer {
 
-    /**
+    /*
      * Default graph query on all named graphs. The distinct-term-scan is used and the index is
      * Pxxx.
      *
@@ -259,7 +259,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      * Default graph query on all named graphs. The distinct-term-scan is used and the index is
      * Sxxx.
      *
@@ -285,7 +285,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      * Default graph query on all named graphs. The distinct-term-scan is used and the index is
      * Oxxx.
      *
@@ -311,7 +311,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      * Named graph query on all named graphs. The distinct-term-scan is used and the index is Pxxx.
      *
      * <pre>
@@ -336,7 +336,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      * Correct rejection test. The named graph is bound. We do not have an index that allows us to
      * to a distinct-term-scan on <code>:g ?p</code> (it would require a CPxx index, but our only
      * index starting with C is CSPO).
@@ -363,7 +363,7 @@ public class TestDistinctTermScanOptimizer extends AbstractDataDrivenSPARQLTestC
           BOpUtility.toList(h.getASTContainer().getQueryPlan(), DistinctTermScanOp.class).size());
     }
 
-    /**
+    /*
      * Test verifying that the query
      *
      * <pre>

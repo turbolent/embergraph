@@ -30,8 +30,8 @@ import org.embergraph.io.IByteArrayBuffer;
 import org.embergraph.journal.AbstractJournal;
 import org.embergraph.mdi.IResourceMetadata;
 
-/**
- * A low-level interface for reading and writing data. This interface is not isolated and operations
+/*
+* A low-level interface for reading and writing data. This interface is not isolated and operations
  * do not possess ACID semantics. Implementations may or may not be durable. All operations are
  * expressed in terms of long integers that are often called "addresses" but which should be
  * understood as opaque identifiers.
@@ -65,7 +65,7 @@ import org.embergraph.mdi.IResourceMetadata;
  */
 public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamStore {
 
-  /**
+  /*
    * Write the data (unisolated).
    *
    * @param data The data. The bytes from the current {@link ByteBuffer#position()} to the {@link
@@ -84,10 +84,10 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    *     offset from the start of the file to the start of the data region (in the case of the
    *     Journal it is used to hold the root blocks).
    */
-  public long write(ByteBuffer data);
+  long write(ByteBuffer data);
 
-  // 	/**
-  //     *
+  // 	/*
+//     *
   //     * @param data
   //     *            The data. The bytes from the current
   //     *            {@link ByteBuffer#position()} to the
@@ -105,7 +105,7 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
   //     */
   //    public long write(ByteBuffer data, long oldAddr);
 
-  /**
+  /*
    * Delete the data (unisolated).
    *
    * <p>After this operation subsequent reads on the address MAY fail and the caller MUST NOT depend
@@ -121,9 +121,9 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    *     <p>However, with a Read-Write store it is a requirement, and a void implementation is
    *     provided for other stores.
    */
-  public void delete(long addr);
+  void delete(long addr);
 
-  /**
+  /*
    * Read the data (unisolated).
    *
    * @param addr A long integer that encodes both the offset from which the data will be read and
@@ -134,66 +134,66 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    *     deleted). Note that the address 0L is always invalid.
    * @throws IllegalStateException if the store is not open.
    */
-  public ByteBuffer read(long addr);
+  ByteBuffer read(long addr);
 
-  /**
+  /*
    * <code>true</code> iff the store is open.
    *
    * @return <code>true</code> iff the store is open.
    */
-  public boolean isOpen();
+  boolean isOpen();
 
-  /**
+  /*
    * <code>true</code> iff the store does not allow writes.
    *
    * @throws IllegalStateException if the store is not open.
    */
-  public boolean isReadOnly();
+  boolean isReadOnly();
 
-  /**
+  /*
    * Close the store immediately.
    *
    * @exception IllegalStateException if the store is not open.
    */
-  public void close();
+  void close();
 
-  /**
+  /*
    * Deletes the backing file(s) (if any).
    *
    * @exception IllegalStateException if the store is open.
    * @exception RuntimeException if the backing file exists and could not be deleted.
    */
-  public void deleteResources();
+  void deleteResources();
 
-  /**
+  /*
    * Closes the store immediately (if open) and deletes its persistent resources. Does NOT throw an
    * {@link IllegalStateException} if the store is already closed, but still deletes the backing
    * resources.
    *
    * @see #deleteResources()
    */
-  public void destroy();
+  void destroy();
 
   /** The backing file -or- <code>null</code> if there is no backing file for the store. */
-  public File getFile();
+  File getFile();
 
-  /**
+  /*
    * Return the {@link UUID} which identifies this {@link IRawStore}. This supports {@link
    * #getResourceMetadata()}.
    */
-  public UUID getUUID();
+  UUID getUUID();
 
   /** A description of this store in support of the scale-out architecture. */
-  public IResourceMetadata getResourceMetadata();
+  IResourceMetadata getResourceMetadata();
 
-  /**
+  /*
    * True iff backed by stable storage.
    *
    * @exception IllegalStateException if the store is not open.
    */
-  public boolean isStable();
+  boolean isStable();
 
-  /**
+  /*
    * True iff the store is fully buffered (all reads are against memory). Implementations MAY change
    * the value returned by this method over the life cycle of the store, e.g., to conserve memory a
    * store may drop or decrease its buffer if it is backed by disk.
@@ -202,25 +202,25 @@ public interface IRawStore extends IAddressManager, ICounterSetAccess, IStreamSt
    *
    * @exception IllegalStateException if the store is not open.
    */
-  public boolean isFullyBuffered();
+  boolean isFullyBuffered();
 
-  /**
+  /*
    * Force the data to stable storage. While this is NOT sufficient to guarantee an atomic commit,
    * the data must be forced to disk as part of an atomic commit protocol.
    *
    * @param metadata If true, then force both the file contents and the file metadata to disk.
    * @exception IllegalStateException if the store is not open.
    */
-  public void force(boolean metadata);
+  void force(boolean metadata);
 
-  /**
+  /*
    * The #of application data bytes written on the store (does not count any headers or root blocks
    * that may exist for the store).
    */
-  public long size();
+  long size();
 
-  //    /**
-  //     * Reports performance counters.
+  //    /*
+//     * Reports performance counters.
   //     */
   //    public CounterSet getCounters();
 

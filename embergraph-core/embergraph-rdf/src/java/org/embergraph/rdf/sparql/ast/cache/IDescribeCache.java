@@ -5,8 +5,8 @@ import org.embergraph.rdf.internal.IV;
 import org.openrdf.model.Graph;
 import org.openrdf.query.GraphQueryResult;
 
-/**
- * A maintained cache for the DESCRIBE of RDF resources.
+/*
+* A maintained cache for the DESCRIBE of RDF resources.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO When has partitioned, each NSS instance (or DESCRIBE cache partition) should directly
@@ -17,14 +17,14 @@ public interface IDescribeCache {
   /** Destroy the cache. */
   void destroy();
 
-  /**
+  /*
    * Invalidate the identified cache entries.
    *
    * @param ivs The {@link IV}s for the cache entries to be invalidated.
    */
   void invalidate(final Set<IV<?, ?>> ivs);
 
-  /**
+  /*
    * Lookup and return the cache entry.
    *
    * @param iv The {@link IV}.
@@ -38,7 +38,7 @@ public interface IDescribeCache {
    */
   Graph lookup(final IV<?, ?> iv);
 
-  /**
+  /*
    * Insert/update the cache entry for an {@link IV}.
    *
    * @param iv The {@link IV}.

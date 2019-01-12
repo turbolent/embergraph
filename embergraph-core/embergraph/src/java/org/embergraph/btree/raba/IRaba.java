@@ -30,8 +30,8 @@ import org.embergraph.btree.ResultSet;
 import org.embergraph.btree.proc.IIndexProcedure;
 import org.embergraph.io.ByteArrayBuffer;
 
-/**
- * Interface for random access to a logical byte[][]s. This is primarily used for B+Tree keys and
+/*
+* Interface for random access to a logical byte[][]s. This is primarily used for B+Tree keys and
  * values, but is also used when serializing keys and values for {@link IIndexProcedure}s. The
  * interface defines optional operations for mutation. If mutation is supported, then {@link
  * #isReadOnly()} will return <code>false</code>. An {@link IRaba} instance either stores B+Tree
@@ -64,7 +64,7 @@ public interface IRaba extends Iterable<byte[]> {
   /** Return <code>true</code> if this implementation is read-only. */
   boolean isReadOnly();
 
-  /**
+  /*
    * When <code>true</code> the {@link IRaba} supports search and elements are interpreted as <code>
    * unsigned byte[]</code>s (B+Tree keys). For this case the application MUST ensure that the
    * elements are maintained in <code>unsigned byte[]</code> order and that duplicates byte[]s are
@@ -83,15 +83,15 @@ public interface IRaba extends Iterable<byte[]> {
    * that do / do not support duplicate keys.  The ones used with the HTree do.
    * The rest do not.
    */
-  //    /**
-  //     * When <code>true</code>, then {@link IRaba} supports duplicate keys.
+  //    /*
+//     * When <code>true</code>, then {@link IRaba} supports duplicate keys.
   //     *
   //     * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/763" >
   //     *      Stochastic Results With Analytic Query Mode </a>
   //     */
   //    boolean isDuplicateKeys();
 
-  /**
+  /*
    * The capacity of the logical byte[][].
    *
    * @todo Coded rabas generally impose <code>capacity == size</code> while only mutable rabas have
@@ -100,18 +100,18 @@ public interface IRaba extends Iterable<byte[]> {
    *     mutable IRaba implementations we would uncover those assumptions and clean things up a bit
    *     more.
    */
-  public int capacity();
+  int capacity();
 
   /** The #of entries in the logical byte[][]. */
-  public int size();
+  int size();
 
   /** True iff the logical byte[][] is empty. */
-  public boolean isEmpty();
+  boolean isEmpty();
 
   /** True iff the logical byte[][] is full. */
-  public boolean isFull();
+  boolean isFull();
 
-  /**
+  /*
    * Return <code>true</code> iff the byte[] at that index is <code>null</code>. If {@link
    * IRaba#isKeys()} would return <code>true</code> then this method MUST return <code>false</code>
    * since <code>null</code>s are not permitted for B+Tree keys.
@@ -119,9 +119,9 @@ public interface IRaba extends Iterable<byte[]> {
    * @param index The index in [0:{@link #size()}-1].
    * @throws IndexOutOfBoundsException unless index is in [0:{@link #size()}-1].
    */
-  public boolean isNull(int index);
+  boolean isNull(int index);
 
-  /**
+  /*
    * The length of the byte[] at that index.
    *
    * @param index The index in [0:{@link #size()}-1].
@@ -129,9 +129,9 @@ public interface IRaba extends Iterable<byte[]> {
    * @throws NullPointerException if the key at that index is <code>null</code>.
    * @throws IndexOutOfBoundsException unless index is in [0:{@link #size()}-1].
    */
-  public int length(int index);
+  int length(int index);
 
-  /**
+  /*
    * Return the byte[] at the specified index. For greater efficiency, implementations MAY return a
    * reference to an internal the byte[].
    *
@@ -140,9 +140,9 @@ public interface IRaba extends Iterable<byte[]> {
    *     stored at that index.
    * @throws IndexOutOfBoundsException unless index is in [0:{@link #size()}-1].
    */
-  public byte[] get(int index);
+  byte[] get(int index);
 
-  /**
+  /*
    * Copy the value at the specified index onto the output stream. This is often used with an {@link
    * ByteArrayBuffer} so that the same backing byte[] can be overwritten by each visited key.
    *
@@ -155,20 +155,20 @@ public interface IRaba extends Iterable<byte[]> {
    *     the {@link OutputStream} is writing onto a byte[] so it is more convenient to masquerade
    *     this exception).
    */
-  public int copy(int index, OutputStream os);
+  int copy(int index, OutputStream os);
 
-  /**
+  /*
    * Iterator visits the byte[] elements in the view order. If an element is <code>null</code>, then
    * the iterator will report a <code>null</code> for that element.
    */
   @Override
-  public Iterator<byte[]> iterator();
+  Iterator<byte[]> iterator();
 
   /*
    * Mutation operations (optional).
    */
 
-  /**
+  /*
    * Set the byte[] value at the specified index (optional operation).
    *
    * @param index The index in [0:{@link #size()}-1].
@@ -177,9 +177,9 @@ public interface IRaba extends Iterable<byte[]> {
    * @throws IllegalArgumentException if the value is <code>null</code> and null values are not
    *     supported by this implementation.
    */
-  public void set(int index, byte[] a);
+  void set(int index, byte[] a);
 
-  /**
+  /*
    * Append a byte[] value to the end of the logical byte[][] (optional operation).
    *
    * @param a A value.
@@ -187,9 +187,9 @@ public interface IRaba extends Iterable<byte[]> {
    * @throws IllegalArgumentException if the value is <code>null</code> and null values are not
    *     supported by this implementation.
    */
-  public int add(byte[] a);
+  int add(byte[] a);
 
-  /**
+  /*
    * Append a byte[] value to the end of the logical byte[][] (optional operation).
    *
    * @param value A value
@@ -198,9 +198,9 @@ public interface IRaba extends Iterable<byte[]> {
    * @return The #of values in the logical byte[][] (postcondition).
    * @throws IllegalArgumentException if the value is <code>null</code>.
    */
-  public int add(byte[] value, int off, int len);
+  int add(byte[] value, int off, int len);
 
-  /**
+  /*
    * Append a byte[] value to the end of the logical byte[][] (optional operation).
    *
    * @param in The input stream from which the byte[] will be read.
@@ -209,13 +209,13 @@ public interface IRaba extends Iterable<byte[]> {
    * @throws IllegalArgumentException if <i>in</i> is <code>null</code>.
    * @todo also define variant of {@link #set(int, byte[])} that copies bytes from an input stream?
    */
-  public int add(DataInput in, int len) throws IOException;
+  int add(DataInput in, int len) throws IOException;
 
   /*
    * Search (optional).
    */
 
-  /**
+  /*
    * Search for the given <i>searchKey</i> in the key buffer (optional operation). Whether or not
    * search is supported depends on whether the logical byte[][] is <em>ordered</em>. However, the
    * efficiency of search, where supported, depends on the implementation. Some implementations

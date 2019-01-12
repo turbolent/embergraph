@@ -23,8 +23,8 @@ package org.embergraph.quorum;
 
 import java.util.UUID;
 
-/**
- * An interface for informational quorum events. These events are intended for clients interested in
+/*
+* An interface for informational quorum events. These events are intended for clients interested in
  * quorum state changes. Services that are HA aware use a more intimate API to handle the state
  * changes.
  *
@@ -43,13 +43,13 @@ public interface QuorumEvent {
   /** The current quorum token at the time the event was generated. */
   long token();
 
-  /**
+  /*
    * The service identifier associated with the event, if any. For example, when a service joins or
    * leaves the quorum, this will be the {@link UUID} of that service.
    */
   UUID getServiceId();
 
-  /**
+  /*
    * The lastCommitTime for which a vote was cast.
    *
    * @return The lastCommitTime for which the vote was cast.

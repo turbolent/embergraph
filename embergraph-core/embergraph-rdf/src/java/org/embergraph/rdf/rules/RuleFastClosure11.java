@@ -27,8 +27,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Rule for step 11 of {@link InferenceEngine#fastForwardClosure()}.
+/*
+* Rule for step 11 of {@link InferenceEngine#fastForwardClosure()}.
  *
  * <pre>
  * (?x, rdf:type, ?b) :-

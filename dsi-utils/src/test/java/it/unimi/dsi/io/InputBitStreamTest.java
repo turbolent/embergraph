@@ -23,7 +23,7 @@ public class InputBitStreamTest extends TestCase {
     ibs.readInt(0);
   }
 
-  /**
+  /*
    * Test operations on a byte[].
    *
    * @throws IOException
@@ -67,7 +67,7 @@ public class InputBitStreamTest extends TestCase {
     }
   }
 
-  /**
+  /*
    * Test operations on a slice of a byte[].
    *
    * @throws IOException

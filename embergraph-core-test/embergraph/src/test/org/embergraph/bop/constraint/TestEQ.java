@@ -29,8 +29,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.bindingSet.ListBindingSet;
 
-/**
- * Test suite for {@link EQ}.
+/*
+* Test suite for {@link EQ}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -47,7 +47,7 @@ public class TestEQ extends TestCase2 {
 
   public void test_ctor() {
     try {
-      new EQ((IVariable<?>) null /*x*/, (IVariable<?>) null /*y*/);
+      new EQ((IVariable<?>) null /*x*/, null /*y*/);
       fail("Excepting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

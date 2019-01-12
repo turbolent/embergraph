@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -50,13 +50,13 @@ import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 import org.embergraph.relation.rule.eval.ISolution;
 import org.embergraph.relation.rule.eval.IStepTask;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractRuleFastClosure_5_6_7_9 extends AbstractRuleFastClosure_3_5_6_7_9 {
 
-  /**
+  /*
    * @param name
    * @param database
    * @param rdfsSubPropertyOf

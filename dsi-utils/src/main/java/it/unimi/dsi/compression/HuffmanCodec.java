@@ -28,8 +28,8 @@ import it.unimi.dsi.bits.LongArrayBitVector;
 import java.io.Serializable;
 import java.util.Arrays;
 
-/**
- * An implementation of Huffman optimal prefix-free coding.
+/*
+* An implementation of Huffman optimal prefix-free coding.
  *
  * <p>A Huffman coder is built starting from an array of frequencies corresponding to each symbol.
  * Frequency 0 symbols are allowed, but they will degrade the resulting code.
@@ -76,7 +76,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
   /** A cached singleton instance of the decoder of this codec. */
   private final CanonicalFast64CodeWordDecoder decoder;
 
-  /**
+  /*
    * Class encapsulates the data necessary to reconstruct a {@link CanonicalFast64CodeWordDecoder}
    * or recreate the code.
    *
@@ -86,16 +86,16 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
   public static class DecoderInputs {
 
     private BitVector shortestCodeWord;
-    private int symbol[];
-    private int length[];
+    private int[] symbol;
+    private int[] length;
 
-    /**
+    /*
      * Ctor may be passed to {@link HuffmanCodec} to obtain the assigned length[] and symbol[] data
      * and the shortest code word.
      */
     public DecoderInputs() {}
 
-    /**
+    /*
      * Ctor may be used to explicitly populate an instance with the caller's data.
      *
      * @param shortestCodeWord
@@ -113,7 +113,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
       this.symbol = symbol;
     }
 
-    /**
+    /*
      * The shortest code word. Note that canonical huffman codes can be recreated from just
      * length[0] and the shortest code word.
      */
@@ -121,7 +121,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
       return shortestCodeWord;
     }
 
-    /**
+    /*
      * Return the symbol[] in the permuted order used to construct the {@link
      * CanonicalFast64CodeWordDecoder}. This information is <em>transient</em>.
      */
@@ -129,7 +129,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
       return symbol;
     }
 
-    /**
+    /*
      * Return the codeWord bit lengths in the non-decreasing order used to construct the {@link
      * CanonicalFast64CodeWordDecoder}. This information is <em>transient</em>.
      */
@@ -138,7 +138,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
     }
   }
 
-  /**
+  /*
    * Creates a new Huffman codec using the given vector of frequencies.
    *
    * @param frequency a vector of nonnnegative frequencies.
@@ -148,7 +148,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
     this(frequency, new DecoderInputs());
   }
 
-  /**
+  /*
    * Creates a new Huffman codec using the given vector of frequencies.
    *
    * @param frequency a vector of non-negative frequencies.
@@ -252,7 +252,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
       else {
         value++;
         value <<= length[i] - l;
-        if (ASSERTS) assert length[i] > l;
+        assert !ASSERTS || length[i] > l;
         l = length[i];
       }
       v = LongArrayBitVector.getInstance().length(l);
@@ -307,7 +307,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
     return coder.codeWords();
   }
 
-  /**
+  /*
    * (Re-)constructs the canonical huffman code from the shortest code word, the non-decreasing bit
    * lengths of each code word, and the permutation of the symbols corresponding to those bit
    * lengths. This information is necessary and sufficient to reconstruct a canonical huffman code.
@@ -324,7 +324,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
         decoderInputs.getSymbols());
   }
 
-  /**
+  /*
    * (Re-)constructs the canonical huffman code from the shortest code word, the non-decreasing bit
    * lengths of each code word, and the permutation of the symbols corresponding to those bit
    * lengths. This information is necessary and sufficient to reconstruct a canonical huffman code.
@@ -362,7 +362,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
       else {
         value++;
         value <<= length[i] - l;
-        if (ASSERTS) assert length[i] > l;
+        assert !ASSERTS || length[i] > l;
         l = length[i];
       }
       v = LongArrayBitVector.getInstance().length(l);

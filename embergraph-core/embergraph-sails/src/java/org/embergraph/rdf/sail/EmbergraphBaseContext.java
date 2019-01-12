@@ -20,8 +20,8 @@ package org.embergraph.rdf.sail;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * Context object provides access to the {@link IIndexManager}.
+/*
+* Context object provides access to the {@link IIndexManager}.
  *
  * @author Martyn Cutcher
  */
@@ -43,7 +43,7 @@ public class EmbergraphBaseContext {
     return m_indexManager;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the {@link IIndexManager} is an {@link IEmbergraphFederation} and
    * {@link IEmbergraphFederation#isScaleOut()} reports <code>true</code>.
    */

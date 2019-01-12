@@ -61,8 +61,8 @@ import org.embergraph.striterator.ChunkedArrayIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.test.MockTermIdFactory;
 
-/**
- * Test ability to insert, update, or remove elements from a relation and the ability to select the
+/*
+* Test ability to insert, update, or remove elements from a relation and the ability to select the
  * right access path given a predicate for that relation and query for those elements (we have to
  * test all this stuff together since testing query requires us to have some data in the relation).
  *
@@ -118,8 +118,8 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
     super.tearDown();
   }
 
-  //    /**
-  //     * This method was introduced to make the assigned identifiers conform with
+  //    /*
+//     * This method was introduced to make the assigned identifiers conform with
   //     * the expectations for identifiers as assigned by the lexicon. This was
   //     * necessitated by the change to {@link ISPO#hasStatementIdentifier()} to
   //     * test the term id bits.
@@ -157,7 +157,7 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
   //    protected final static Constant<IV> rdfProperty = new Constant<IV>(
   //            uriId(5L));
 
-  /**
+  /*
    * this is rdfs9:
    *
    * <pre>
@@ -196,7 +196,7 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
       super(op);
     }
 
-    /**
+    /*
      * @param relation
      * @param s
      * @param p
@@ -212,7 +212,7 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability to obtain the correct {@link IAccessPath} given a {@link IPredicate} and an
    * empty {@link SPORelation}. The choice of the {@link IAccessPath} is made first based on the
    * binding pattern and only ties are broken based on range counts. This allows us to test the
@@ -339,7 +339,7 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * Test the ability insert data into a relation and pull back that data using a variety of access
    * paths. The test also checks the the correct evaluation orders are computed based on the data
    * actually in the relation and that those evaluation orders change as we add data to the
@@ -499,8 +499,8 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
 
         assertTrue(rule.isFullyBound(0, bindings));
 
-        /*
-         * Now bind the last variable.
+      /*
+       * Now bind the last variable.
          */
         bindings.set(Var.var("v"), V1);
 
@@ -530,7 +530,7 @@ public class TestSPORelation extends AbstractTripleStoreTestCase {
     }
   }
 
-  /**
+  /*
    * A simple test of rule execution, including query against an empty kb, insert of some elements
    * into the kb, query to verify that the data is in the kb, insert driven by a rule set, and query
    * to verify that insert.

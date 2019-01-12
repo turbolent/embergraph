@@ -25,8 +25,8 @@ import junit.framework.TestCase2;
 import org.embergraph.counters.CounterSet;
 import org.embergraph.counters.Instrument;
 
-/**
- * Unit tests for {@link StripedCounters}.
+/*
+* Unit tests for {@link StripedCounters}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public class TestStripedCounters extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Sample implementation used for the unit tests.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -112,7 +112,7 @@ public class TestStripedCounters extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * A basic unit test verifies that a child "strip" is accessed by acquire() and that the updates
    * are only pushed to the parent counters object every batchSize release()s.
    *
@@ -126,7 +126,7 @@ public class TestStripedCounters extends TestCase2 {
 
     // do batchSize-1 updates and verify no change in the outer instance.
     for (int i = 1; i < batchSize; i++) {
-      final StoreCounters<?> t = (StoreCounters<?>) c.acquire();
+      final StoreCounters<?> t = c.acquire();
       if (t == c) fail("returned the parent instead of the child.");
       t.nreads++;
       t.release();
@@ -136,7 +136,7 @@ public class TestStripedCounters extends TestCase2 {
 
     // do one more update and verify outer instance has changed.
     {
-      final StoreCounters<?> t = (StoreCounters<?>) c.acquire();
+      final StoreCounters<?> t = c.acquire();
       t.nreads++;
       t.release();
       if (log.isInfoEnabled()) log.info("pass=" + batchSize + ", value=" + c.nreads);
@@ -148,7 +148,7 @@ public class TestStripedCounters extends TestCase2 {
     if (log.isInfoEnabled()) log.info("-----------------");
     final long lastValue = c.nreads;
     for (int i = 1; i < batchSize; i++) {
-      final StoreCounters<?> t = (StoreCounters<?>) c.acquire();
+      final StoreCounters<?> t = c.acquire();
       if (t == c) fail("returned the parent instead of the child.");
       t.nreads++;
       t.release();
@@ -158,7 +158,7 @@ public class TestStripedCounters extends TestCase2 {
 
     // do one more update and verify outer instance has changed.
     {
-      final StoreCounters<?> t = (StoreCounters<?>) c.acquire();
+      final StoreCounters<?> t = c.acquire();
       t.nreads++;
       t.release();
       if (log.isInfoEnabled()) log.info("pass=" + batchSize + ", value=" + c.nreads);

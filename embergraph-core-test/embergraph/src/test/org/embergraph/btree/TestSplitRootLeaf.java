@@ -24,8 +24,8 @@ package org.embergraph.btree;
 import org.apache.log4j.Level;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
-/**
- * Test split of the root leaf.
+/*
+* Test split of the root leaf.
  *
  * @see src/architecture/btree.xls for the examples used in this suite.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -41,7 +41,7 @@ public class TestSplitRootLeaf extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * A series of tests split with the key below, at, and above the low key in the right sibling.
    * This verifies that the insert logic looks at the separator key in the parent when determining
    * which leaf receives the insert key after a split and NOT at the low key in the rightSibling.

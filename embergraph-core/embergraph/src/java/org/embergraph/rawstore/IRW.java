@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rawstore;
 
-/**
- * A marker interface for a store that supports Read-Write operations. This implies that the store
+/*
+* A marker interface for a store that supports Read-Write operations. This implies that the store
  * can recycle allocated space once records have been deleted. This is in contract to a read-only
  * store or a Write Once Read Many ( {@link IWORM}) store.
  *

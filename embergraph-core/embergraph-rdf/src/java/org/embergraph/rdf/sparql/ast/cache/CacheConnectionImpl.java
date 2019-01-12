@@ -49,8 +49,8 @@ import org.embergraph.service.IDataService;
 import org.embergraph.sparse.SparseRowStore;
 import org.embergraph.util.Bytes;
 
-/**
- * A connection to a local, remote, or distributed caching layer.
+/*
+* A connection to a local, remote, or distributed caching layer.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -62,8 +62,8 @@ public class CacheConnectionImpl implements ICacheConnection {
 
   //    public interface Options {
   //
-  //        /**
-  //         * The maximum amount of native memory which will be used to cache
+  //        /*
+//         * The maximum amount of native memory which will be used to cache
   //         * solution sets (default is 1/2 of the value reported by
   //         * {@link Runtime#maxMemory()}).
   //         * <p>
@@ -88,7 +88,7 @@ public class CacheConnectionImpl implements ICacheConnection {
   /** */
   private boolean enableDescribeCache;
 
-  /**
+  /*
    * Boolean determines whether or not the main database is used for the cache. When the main
    * database is used, the cache winds up being durable. A dedicated cache journal could also be
    * durable, depending on how it was configured, as long is it is not destroyed by {@link
@@ -115,7 +115,7 @@ public class CacheConnectionImpl implements ICacheConnection {
 
   }
 
-  /**
+  /*
    * Note: A distributed cache fabric could be accessed from any node in a cluster. That means that
    * this could be the {@link Journal} -or- the {@link IndexManager} inside the {@link IDataService}
    * and provides direct access to {@link FusedView}s (aka shards).
@@ -213,7 +213,7 @@ public class CacheConnectionImpl implements ICacheConnection {
     }
   }
 
-  /**
+  /*
    * {@link CacheConnectionImpl} is used with a singleton pattern managed by the {@link
    * CacheConnectionFactory}. It will be torn down automatically it is no longer reachable. This
    * behavior depends on not having any hard references back to the {@link QueryEngine}.
@@ -226,7 +226,7 @@ public class CacheConnectionImpl implements ICacheConnection {
     super.finalize();
   }
 
-  /**
+  /*
    * @return The DESCRIBE cache for that view -or- <code>null</code> if the DESCRIBE cache is not
    *     enabled.
    * @see QueryHints#DESCRIBE_CACHE
@@ -339,8 +339,8 @@ public class CacheConnectionImpl implements ICacheConnection {
           + "}";
     }
 
-    //        /**
-    //         * Note: Exposed for the {@link DataService} which needs this for its
+    //        /*
+//         * Note: Exposed for the {@link DataService} which needs this for its
     //         * 2-phase commit protocol.
     //         */
     //        public long commitNow(final long commitTime) {
@@ -349,8 +349,8 @@ public class CacheConnectionImpl implements ICacheConnection {
     //
     //        }
 
-    //        /**
-    //         * Exposed for {@link StoreManger#getResourcesForTimestamp(long)} which
+    //        /*
+//         * Exposed for {@link StoreManger#getResourcesForTimestamp(long)} which
     //         * requires access to the {@link CommitRecordIndex} for the
     //         * lastCommitTime on the historical journals.
     //         * <p>

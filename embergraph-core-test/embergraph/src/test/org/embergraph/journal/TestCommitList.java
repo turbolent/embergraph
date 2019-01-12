@@ -26,8 +26,8 @@ import org.embergraph.btree.BTree;
 import org.embergraph.btree.IIndex;
 import org.embergraph.btree.IndexMetadata;
 
-/**
- * Test suite for restart-safety of {@link BTree}s backed by an {@link IJournal}.
+/*
+* Test suite for restart-safety of {@link BTree}s backed by an {@link IJournal}.
  *
  * @todo explore flushing the indexCache as if a GC had occurred after a commit?
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -65,8 +65,8 @@ public class TestCommitList extends ProxyTestCase<Journal> {
   //
   //    private Properties properties;
 
-  //    /**
-  //     * Re-open the same backing store.
+  //    /*
+//     * Re-open the same backing store.
   //     *
   //     * @param store
   //     *            the existing store.
@@ -99,7 +99,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
   //
   //    }
 
-  /**
+  /*
    * Return a btree backed by a journal with the indicated branching factor.
    *
    * @param branchingFactor The branching factor.
@@ -119,7 +119,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
     return btree;
   }
 
-  /**
+  /*
    * Test verifies that a named index is found on the commit list when (a) it is newly created; and
    * (b) when an entry is written on the index.
    *
@@ -173,7 +173,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
       assertFalse(journal._getName2Addr().willCommit(name));
 
       // verify entry written by the commit.
-      assertEquals(new byte[] {1, 2, 3}, (byte[]) ndx.lookup(new byte[] {1, 2, 3}));
+      assertEquals(new byte[] {1, 2, 3}, ndx.lookup(new byte[] {1, 2, 3}));
 
       // still not on the commit list.
       assertFalse(journal._getName2Addr().willCommit(name));
@@ -184,7 +184,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * A variant of {@link #test_commitList_001()} in which we re-open the store after each commit and
    * verify that the record written can be read so that we know that the commit was made restart
    * safe.
@@ -247,7 +247,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
         assertFalse(journal._getName2Addr().willCommit(name));
 
         // verify entry written by the commit.
-        assertEquals(new byte[] {1, 2, 3}, (byte[]) ndx.lookup(new byte[] {1, 2, 3}));
+        assertEquals(new byte[] {1, 2, 3}, ndx.lookup(new byte[] {1, 2, 3}));
 
         // still not on the commit list.
         assertFalse(journal._getName2Addr().willCommit(name));
@@ -259,7 +259,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test creates an index, writes an entry on the index, and then commits the index (so writing on
    * the index immediately after it is created without an intervening commit). The test then
    * re-opens the store and verifies that the data are restart safe.
@@ -306,7 +306,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
         assertFalse(journal._getName2Addr().willCommit(name));
 
         // verify entry written by the commit.
-        assertEquals(new byte[] {1, 2, 3}, (byte[]) ndx.lookup(new byte[] {1, 2, 3}));
+        assertEquals(new byte[] {1, 2, 3}, ndx.lookup(new byte[] {1, 2, 3}));
 
         // still not on the commit list.
         assertFalse(journal._getName2Addr().willCommit(name));

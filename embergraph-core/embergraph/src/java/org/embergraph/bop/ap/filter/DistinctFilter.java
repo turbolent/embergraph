@@ -13,8 +13,8 @@ import org.embergraph.rdf.spo.SPO;
 import org.embergraph.striterator.IChunkConverter;
 import org.embergraph.striterator.MergeFilter;
 
-/**
- * A DISTINCT operator based for elements in a relation. The operator is based on an in-memory hash
+/*
+* A DISTINCT operator based for elements in a relation. The operator is based on an in-memory hash
  * table.
  *
  * <p>Note: This is used for the in-memory {@link SPO} distinct filter, but it is more general and
@@ -52,8 +52,8 @@ public class DistinctFilter extends BOpFilterBase {
     super(args, annotations);
   }
 
-  //    /**
-  //     * @see Annotations#INITIAL_CAPACITY
+  //    /*
+//     * @see Annotations#INITIAL_CAPACITY
   //     */
   //    public int getInitialCapacity() {
   //
@@ -62,8 +62,8 @@ public class DistinctFilter extends BOpFilterBase {
   //
   //    }
   //
-  //    /**
-  //     * @see Annotations#LOAD_FACTOR
+  //    /*
+//     * @see Annotations#LOAD_FACTOR
   //     */
   //    public float getLoadFactor() {
   //
@@ -78,7 +78,7 @@ public class DistinctFilter extends BOpFilterBase {
     return new Filterator(src, context, new DistinctFilterImpl(this));
   }
 
-  /**
+  /*
    * DISTINCT filter based on Java heap data structures.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -87,7 +87,7 @@ public class DistinctFilter extends BOpFilterBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * Note: Iterators are single threaded so we do not need to use a {@link ConcurrentHashMap}
      * here.
      */
@@ -105,7 +105,7 @@ public class DistinctFilter extends BOpFilterBase {
       return defaultValue;
     }
 
-    /**
+    /*
      * DISTINCT filter based on Java heap data structures.
      *
      * @param propertySet Used to configured the DISTINCT filter.

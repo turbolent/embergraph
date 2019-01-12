@@ -31,8 +31,8 @@ import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link FileLockUtility}.
+/*
+* Test suite for {@link FileLockUtility}.
  *
  * @todo this test suite could be developed further.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -49,7 +49,7 @@ public class TestFileLockUtility extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Test verifies creation of an exclusive lock, that an advisory lock was NOT created, and that
    * the {@link FileChannel} is correctly closed.
    *
@@ -98,7 +98,7 @@ public class TestFileLockUtility extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test creation of an advisory lock, that {@link FileLockUtility#openFile(File, String, boolean)}
    * will not grant an exclusive {@link FileLock} if an advisory lock exists for a file, and that
    * the advisory lock is removed when the file is closed using {@link
@@ -159,8 +159,8 @@ public class TestFileLockUtility extends TestCase2 {
 
       try {
 
-        /*
-         * verify that we notice an existing advisory lock when
+      /*
+       * verify that we notice an existing advisory lock when
          * requsting an exclusive lock for the same file.
          */
         FileLockUtility.openFile(file, "rw", true /* useFileLock */);

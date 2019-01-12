@@ -27,8 +27,8 @@ import org.embergraph.rdf.graph.impl.sail.AbstractSailGraphTestCase;
 import org.openrdf.model.Value;
 import org.openrdf.sail.SailConnection;
 
-/**
- * Test class for Breadth First Search (BFS) traversal.
+/*
+* Test class for Breadth First Search (BFS) traversal.
  *
  * @see BFS
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -74,8 +74,8 @@ public class TestCC extends AbstractSailGraphTestCase {
 
         if (log.isInfoEnabled()) log.info(stats);
 
-        /*
-         * Check the #of connected components that are self-reported and
+      /*
+       * Check the #of connected components that are self-reported and
          * the #of vertices in each connected component. This helps to
          * detect vertices that should have been visited but were not
          * due to the initial frontier. E.g., "DC" will not be reported
@@ -104,8 +104,8 @@ public class TestCC extends AbstractSailGraphTestCase {
         }
 
         if (false) {
-          /*
-           * The size of the connected component for this vertex.
+        /*
+       * The size of the connected component for this vertex.
            *
            * Note: The vertex sampling code ignores self-loops and
            * ignores vertices that do not have ANY edges. Thus "DC" is
@@ -115,8 +115,8 @@ public class TestCC extends AbstractSailGraphTestCase {
 
           assertNotNull(label);
 
-          /*
-           * If DC was not put into the initial frontier, then it will
+        /*
+       * If DC was not put into the initial frontier, then it will
            * be missing here.
            */
           assertNotNull(labels.get(label));
@@ -127,8 +127,8 @@ public class TestCC extends AbstractSailGraphTestCase {
         // the #of connected components.
         assertEquals(2, labels.size());
 
-        /*
-         * Most vertices in problem1 have the same label (the exception
+      /*
+       * Most vertices in problem1 have the same label (the exception
          * is DC, which is it its own connected component).
          */
         Value label1 = null;
@@ -139,8 +139,8 @@ public class TestCC extends AbstractSailGraphTestCase {
           if (log.isInfoEnabled()) log.info("v=" + v + ", label=" + vs.getLabel());
 
           if (v.equals(p1.getDC())) {
-            /*
-             * This vertex is in its own connected component and is
+          /*
+       * This vertex is in its own connected component and is
              * therefore labeled by itself.
              */
             assertEquals("vertex=" + v, v, vs.getLabel());

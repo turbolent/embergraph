@@ -28,8 +28,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 
-/**
- * Interface for the factory pattern to create a {@link IHashJoinUtility}.
+/*
+* Interface for the factory pattern to create a {@link IHashJoinUtility}.
  *
  * @see BLZG-1438 (by using such a factory as an annotation of {@link HashIndexOpBase} it becomes
  *     possible to get rid of the two earlier subclasses of {@link HashIndexOp} (namely,
@@ -39,7 +39,7 @@ import org.embergraph.bop.controller.INamedSolutionSetRef;
  */
 public interface IHashJoinUtilityFactory extends Serializable {
 
-  /**
+  /*
    * Return an instance of the {@link IHashJoinUtility}.
    *
    * @param context The {@link BOpEvaluationContext}

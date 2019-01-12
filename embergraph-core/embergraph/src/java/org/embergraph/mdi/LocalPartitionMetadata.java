@@ -35,8 +35,8 @@ import org.embergraph.journal.Journal;
 import org.embergraph.service.DataService;
 import org.embergraph.util.BytesUtil;
 
-/**
- * An immutable object providing metadata about a local index partition, including the partition
+/*
+* An immutable object providing metadata about a local index partition, including the partition
  * identifier, the left and right separator keys defining the half-open key range of the index
  * partition, and optionally defining the {@link IResourceMetadata}[] required to materialize a view
  * of that index partition.
@@ -49,7 +49,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
   /** */
   private static final long serialVersionUID = -1511361004851335936L;
 
-  /**
+  /*
    * The maximum length of the history string (4kb).
    *
    * <p>Note: The history is written each time the {@link IndexMetadata} is written and is read each
@@ -62,7 +62,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
   /** The unique partition identifier. */
   private int partitionId;
 
-  /**
+  /*
    * @see #getSourcePartitionId()
    * @deprecated MoveTask manages without this field (it was required by the previous MOVE
    *     implementation).
@@ -74,7 +74,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
 
   private byte[] rightSeparatorKey;
 
-  /**
+  /*
    * Description of the resources required to materialize a view of the index partition (optional -
    * not stored when the partition metadata is stored on an {@link IndexSegmentStore}).
    *
@@ -87,14 +87,14 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
    */
   private IResourceMetadata[] resources;
 
-  /**
+  /*
    * The reason why an index partition was created together with some metadata about when it was
    * created.
    */
   private IndexPartitionCause cause;
 
-  //    /**
-  //     * A history of operations giving rise to the current partition metadata.
+  //    /*
+//     * A history of operations giving rise to the current partition metadata.
   //     * E.g., register(timestamp), copyOnOverflow(timestamp), split(timestamp),
   //     * join(partitionId,partitionId,timestamp), etc. This is truncated when
   //     * serialized to keep it from growing without bound.
@@ -103,8 +103,8 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
   //     */
   //    private String history;
   //
-  //    /**
-  //     * If the history string exceeds {@link #MAX_HISTORY_LENGTH} characters then
+  //    /*
+//     * If the history string exceeds {@link #MAX_HISTORY_LENGTH} characters then
   //     * truncates it to the last {@link #MAX_HISTORY_LENGTH}-3 characters,
   //     * prepends "...", and returns the result. Otherwise returns the entire
   //     * history string.
@@ -142,7 +142,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
   /** De-serialization constructor. */
   public LocalPartitionMetadata() {}
 
-  /**
+  /*
    * @param partitionId The unique partition identifier assigned by the {@link MetadataIndex}.
    * @param sourcePartitionId <code>-1</code> unless this index partition is the target for a move,
    *     in which case this is the partition identifier of the source index partition.
@@ -313,7 +313,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
     return partitionId;
   }
 
-  /**
+  /*
    * <code>-1</code> unless this index partition is the target for a move, in which case this is the
    * partition identifier of the source index partition and the move operation has not been
    * completed. This property is used to prevent the target data service from de-defining the index
@@ -339,7 +339,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
     return rightSeparatorKey;
   }
 
-  /**
+  /*
    * Description of the resources required to materialize a view of the index partition (optional,
    * but required for a {@link BTree}).
    *
@@ -365,7 +365,7 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
     return resources;
   }
 
-  /**
+  /*
    * The reason why an index partition was created together with some metadata about when it was
    * created.
    */
@@ -374,8 +374,8 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
     return cause;
   }
 
-  //    /**
-  //     * A history of the changes to the index partition.
+  //    /*
+//     * A history of the changes to the index partition.
   //     *
   //     * @deprecated I've essentially disabled the history (it is always empty
   //     *             when it is persisted). I found it nearly impossible to read.
@@ -458,13 +458,13 @@ public class LocalPartitionMetadata implements IPartitionMetadata, Externalizabl
 
   private static final transient short VERSION0 = 0x0;
 
-  /**
+  /*
    * This version adds support for {@link IResourceMetadata#getCommitTime()}, but that field is only
    * serialized for a journal.
    */
   private static final transient short VERSION1 = 0x1;
 
-  /**
+  /*
    * This version serializes the {@link #partitionId} as 32-bits clean and gets rid of the <code>
    * history</code> field.
    */

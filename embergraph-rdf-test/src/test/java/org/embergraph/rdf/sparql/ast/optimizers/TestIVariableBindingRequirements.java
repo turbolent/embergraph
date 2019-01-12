@@ -61,8 +61,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.BDS;
 import org.embergraph.service.fts.FTS;
 
-/**
- * Test implementation of {@link IVariableBindingRequirements} interface.
+/*
+* Test implementation of {@link IVariableBindingRequirements} interface.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
@@ -77,7 +77,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
   @Override
   IASTOptimizer newOptimizer() {
 
-    /**
+    /*
      * This test case is not optimizer specific, but we want to reuse the Helper factory methods
      * here and that's the (only) reason why we extend the AbstractOptimizerTestCase class.
      */
@@ -500,7 +500,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
         };
     final Set<IVariable<?>> desiredBound = new HashSet<IVariable<?>>();
 
-    /**
+    /*
      * We need to convert the filter node. Usually (in the optimization chain) this is done through
      * the ASTSetValueExpressionOptimizer.
      */
@@ -562,7 +562,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
         };
     final Set<IVariable<?>> desiredBound = new HashSet<IVariable<?>>();
 
-    /**
+    /*
      * We need to convert the filter nodes. Usually (in the optimization chain) this is done through
      * the ASTSetValueExpressionOptimizer.
      */
@@ -695,7 +695,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
     assertEquals(desiredBound, jgn.getDesiredBound(sa));
   }
 
-  /**
+  /*
    * Test interface implementation for SPARQL 1.1 SERVICE with constant specifying service endpoint.
    */
   @SuppressWarnings({"rawtypes", "serial"})
@@ -736,7 +736,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
     assertEquals(desiredBound, serviceNode.getDesiredBound(sa));
   }
 
-  /**
+  /*
    * Test interface implementation for SPARQL 1.1 SERVICE with variable specifying service endpoint.
    */
   @SuppressWarnings("serial")
@@ -775,7 +775,7 @@ public class TestIVariableBindingRequirements extends AbstractOptimizerTestCase 
     assertEquals(desiredBound, serviceNode.getDesiredBound(sa));
   }
 
-  /**
+  /*
    * Test interface implementation for internal {@link BDS} service. Note that, at the time being,
    * the BDS service does not allow the injection of variables (in contrast to, e.g., the FTS
    * service). Therefore, this service imposes only a not bound constraint on the outgoing variable.

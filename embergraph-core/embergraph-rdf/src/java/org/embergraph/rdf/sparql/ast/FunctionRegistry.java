@@ -84,8 +84,8 @@ import org.openrdf.model.vocabulary.FN;
 import org.openrdf.model.vocabulary.XMLSchema;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
-/**
- * Registry for built-in and external SPARQL functions.
+/*
+* Registry for built-in and external SPARQL functions.
  *
  * <p>Note: Use an alternative namespace for functions which do not have official namespaces.
  *
@@ -174,25 +174,25 @@ public class FunctionRegistry {
   public static final URI STR_BEFORE = FN.SUBSTRING_BEFORE; // FIXME implement. See StrBefore
   public static final URI REPLACE = FN.REPLACE; // FIXME implement. See Replace.
 
-  /**
+  /*
    * The IRI function, as defined in <a href="http://www.w3.org/TR/sparql11-query/#SparqlOps">SPARQL
    * 1.1 Query Language for RDF</a>.
    */
   public static final URI IRI = new URIImpl(SPARQL11_UNDEFINED_FUNCTIONS + "iri");
 
-  /**
+  /*
    * The BNODE()/BNODE(Literal) function as defined in <a
    * href="http://www.w3.org/TR/sparql11-query/#SparqlOps">SPARQL 1.1 Query Language for RDF</a>.
    */
   public static final URI BNODE = new URIImpl(SPARQL11_UNDEFINED_FUNCTIONS + "bnode");
 
-  /**
+  /*
    * The EXISTS(graphPattern) function as defined in <a
    * href="http://www.w3.org/TR/sparql11-query/#SparqlOps">SPARQL 1.1 Query Language for RDF</a>.
    */
   public static final URI EXISTS = new URIImpl(SPARQL11_UNDEFINED_FUNCTIONS + "exists");
 
-  /**
+  /*
    * The NOT EXISTS(graphPattern) function as defined in <a
    * href="http://www.w3.org/TR/sparql11-query/#SparqlOps">SPARQL 1.1 Query Language for RDF</a>.
    */
@@ -287,7 +287,7 @@ public class FunctionRegistry {
 
             checkArgs(args, ValueExpressionNode.class);
 
-            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
+            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -306,7 +306,7 @@ public class FunctionRegistry {
 
             checkArgs(args, ValueExpressionNode.class);
 
-            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
+            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -343,7 +343,7 @@ public class FunctionRegistry {
 
             checkArgs(args, ValueExpressionNode.class);
 
-            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
+            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -655,7 +655,7 @@ public class FunctionRegistry {
               final ValueExpressionNode... args) {
 
             checkArgs(args, ValueExpressionNode.class);
-            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
+            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -672,7 +672,7 @@ public class FunctionRegistry {
               final ValueExpressionNode... args) {
 
             checkArgs(args, ValueExpressionNode.class);
-            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
+            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -1219,7 +1219,7 @@ public class FunctionRegistry {
     return f != null && f instanceof AggregateFactory;
   }
 
-  /**
+  /*
    * Verify type constraints.
    *
    * @param args The arguments to some function.
@@ -1243,7 +1243,7 @@ public class FunctionRegistry {
     }
   }
 
-  /**
+  /*
    * Convert a {@link FunctionNode} into an {@link IValueExpression}.
    *
    * @param globals The global annotations, including the lexicon namespace.
@@ -1290,7 +1290,7 @@ public class FunctionRegistry {
     return f.create(context, globals, scalarValues, args);
   }
 
-  /**
+  /*
    * Register a factory for a function.
    *
    * @param functionURI The function URI.
@@ -1306,7 +1306,7 @@ public class FunctionRegistry {
     }
   }
 
-  /**
+  /*
    * Register an alias for a functionURI which has already been declared.
    *
    * @param functionURI The function URI.
@@ -1327,7 +1327,7 @@ public class FunctionRegistry {
     }
   }
 
-  /**
+  /*
    * Remove a registered function {@link Factory}.
    *
    * @param functionURI The {@link URI} of the function.
@@ -1340,9 +1340,9 @@ public class FunctionRegistry {
   }
 
   /** An interface for creating {@link IValueExpression}s from a function URI and its arguments. */
-  public static interface Factory {
+  public interface Factory {
 
-    /**
+    /*
      * Create an {@link IValueExpression} instance.
      *
      * @param context The {@link BOpContextBase} required to evaluate {@link IValueExpression}s.
@@ -1364,12 +1364,12 @@ public class FunctionRegistry {
         final ValueExpressionNode... args);
   }
 
-  /**
+  /*
    * Marker interface for aggregate functions.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public static interface AggregateFactory extends Factory {}
+  public interface AggregateFactory extends Factory {}
 
   public static class CompareFactory implements Factory {
 
@@ -1595,7 +1595,7 @@ public class FunctionRegistry {
     }
   }
 
-  /**
+  /*
    * <code>NumericExpression IN ArgList</code> is an infix operator. The left argument in the syntax
    * must be provided as the first argument to this factory. The ArgList must be provided as the
    * [1...nargs] arguments to the factory.
@@ -1608,9 +1608,9 @@ public class FunctionRegistry {
    */
   public static class InFactory implements Factory {
 
-    public static interface Annotations {
+    public interface Annotations {
 
-      /**
+      /*
        * Literals are not allowed in an IN clause in SPARQL, but sometimes this operator is used as
        * part of an optimized re-write where literals should be allowed.
        *
@@ -1634,8 +1634,8 @@ public class FunctionRegistry {
         final ValueExpressionNode... args) {
 
       if (args.length == 0) {
-        /*
-         * The first argument is the left hand side of the infix IN
+      /*
+       * The first argument is the left hand side of the infix IN
          * operator.
          */
         throw new IllegalArgumentException();
@@ -1643,8 +1643,8 @@ public class FunctionRegistry {
 
       if (args.length == 1) {
 
-        /*
-         * "foo IN()" is always false.
+      /*
+       * "foo IN()" is always false.
          *
          * "foo NOT IN()" is always true.
          */
@@ -1663,8 +1663,8 @@ public class FunctionRegistry {
 
       if (args.length == 2) {
 
-        /*
-         * "foo IN(bar)" is SameTerm(foo,bar) if bar is a URI, otherwise CompareBOp.
+      /*
+       * "foo IN(bar)" is SameTerm(foo,bar) if bar is a URI, otherwise CompareBOp.
          */
 
         //            	final IValueExpression<? extends IV> val =
@@ -1673,8 +1673,8 @@ public class FunctionRegistry {
         //                final IValueExpression ret = SameTermFactory.INSTANCE.create(
         //                        globals, scalarValues, args);
 
-        /*
-         * MP: Changed this to check for allowLiterals.  When we are allowing
+      /*
+       * MP: Changed this to check for allowLiterals.  When we are allowing
          * literals, chances are we want to bypass the CompareOp logic
          * for literal comparison.
          */
@@ -1699,8 +1699,8 @@ public class FunctionRegistry {
 
       try {
 
-        /*
-         * First, attempt to use an optimized variant. The args MUST be
+      /*
+       * First, attempt to use an optimized variant. The args MUST be
          * [var,constant(s)].
          */
 
@@ -1708,7 +1708,7 @@ public class FunctionRegistry {
 
         final IValueExpression<? extends IV> arg = AST2BOpUtility.toVE(context, globals, args[0]);
 
-        final IConstant<? extends IV> set[] = new IConstant[args.length - 1];
+        final IConstant<? extends IV>[] set = new IConstant[args.length - 1];
 
         try {
 
@@ -1752,8 +1752,8 @@ public class FunctionRegistry {
 
       } catch (IllegalArgumentException iae) {
 
-        /*
-         * Use a variant which handles value expressions for the members
+      /*
+       * Use a variant which handles value expressions for the members
          * of the set. The first member of the list is taken to be the
          * valueExpr which is then tested against each other member of
          * the list.
@@ -1761,7 +1761,7 @@ public class FunctionRegistry {
 
         checkArgs(args, ValueExpressionNode.class, ValueExpressionNode.class);
 
-        final IValueExpression<? extends IV> set[] = new IValueExpression[args.length];
+        final IValueExpression<? extends IV>[] set = new IValueExpression[args.length];
 
         for (int i = 0; i < args.length; i++) {
 
@@ -1773,7 +1773,7 @@ public class FunctionRegistry {
     }
   }
 
-  /**
+  /*
    * Factory for EXISTS() and NOT EXISTS(). The EXISTS() node in the AST must be marked with the
    * group graph pattern as an annotation. The {@link FunctionNode} will be a simple test of an
    * anonymous variable. EXISTS tests the variable for <code>true</code>. Not exists tests the
@@ -1842,7 +1842,7 @@ public class FunctionRegistry {
       this(BOp.NOARGS, NV.asMap(FUNCTION_URI, functionURI));
     }
 
-    /**
+    /*
      * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
      *
      * @param op
@@ -1852,7 +1852,7 @@ public class FunctionRegistry {
       super(op);
     }
 
-    /**
+    /*
      * Required shallow copy constructor.
      *
      * @param args The operands.

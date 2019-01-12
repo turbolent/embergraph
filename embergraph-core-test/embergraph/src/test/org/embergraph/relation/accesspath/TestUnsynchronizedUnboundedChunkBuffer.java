@@ -26,8 +26,8 @@ package org.embergraph.relation.accesspath;
 import junit.framework.TestCase2;
 import org.embergraph.striterator.IChunkedIterator;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TestUnsynchronizedUnboundedChunkBuffer extends TestCase2 {
@@ -50,7 +50,7 @@ public class TestUnsynchronizedUnboundedChunkBuffer extends TestCase2 {
     assertFalse(buffer.iterator().hasNext());
   }
 
-  /**
+  /*
    * Verify that elements are flushed when an iterator is requested so that they will be visited by
    * the iterator.
    */
@@ -99,7 +99,7 @@ public class TestUnsynchronizedUnboundedChunkBuffer extends TestCase2 {
         new String[][] {new String[] {"a"}, new String[] {"b", "c"}}, buffer.iterator());
   }
 
-  /**
+  /*
    * Test class of chunks created by the iterator (the array class should be taken from the first
    * visited chunk's class).
    */
@@ -121,7 +121,7 @@ public class TestUnsynchronizedUnboundedChunkBuffer extends TestCase2 {
         new String[][] {new String[] {"a"}, new String[] {"b", "c"}}, buffer.iterator());
   }
 
-  /**
+  /*
    * Verify that the iterator visits the expected chunks in the expected order.
    *
    * @param <E>

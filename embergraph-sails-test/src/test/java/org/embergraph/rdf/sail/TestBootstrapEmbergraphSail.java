@@ -53,8 +53,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
-/**
- * Bootstrap test case for bringing up the {@link EmbergraphSail}.
+/*
+* Bootstrap test case for bringing up the {@link EmbergraphSail}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -68,7 +68,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
     super(arg0);
   }
 
-  /**
+  /*
    * Test create and shutdown of the default store.
    *
    * @throws SailException
@@ -105,7 +105,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test create and shutdown of a named store.
    *
    * @throws SailException
@@ -148,7 +148,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test creates a database, obtains a writable connection on the database, and then closes the
    * connection and shutdown the database.
    *
@@ -178,7 +178,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that a thread may not obtain more than one instance of the unisolated
    * connection at a time from the {@link EmbergraphSail} via a reentrant invocation. The reentrant
    * request should immediately throw an exception to prevent an unbreakable deadlock (a thread can
@@ -230,7 +230,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
                     if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
                   }
 
-                  return (Void) null;
+                  return null;
 
                 } finally {
 
@@ -267,7 +267,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that a thread may not obtain more than one instance of the unisolated
    * connection at a time from the {@link EmbergraphSail} using two threads. The second thread
    * should block until the first thread releases the connection, at which point the second thread
@@ -321,7 +321,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
                   } finally {
                     lock.unlock();
                   }
-                  return (Void) null;
+                  return null;
                 } finally {
                   if (conn1 != null) conn1.close();
                 }
@@ -336,15 +336,15 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
                   log.info("Requesting 2nd unisolated connection.");
                   conn2 = sail.getUnisolatedConnection();
                   log.info("Have 2nd unisolated connection");
-                  return (Void) null;
+                  return null;
                 } finally {
                   if (conn2 != null) conn2.close();
                 }
               }
             };
 
-        /*
-         * Run task. It should obtain the unisolated connection and THEN
+      /*
+       * Run task. It should obtain the unisolated connection and THEN
          * block wait on our signal.
          */
         f = service.submit(task1);
@@ -391,7 +391,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test verifies exactly one unisolated connection for two different {@link EmbergraphSail}
    * instances for the same {@link AbstractTripleStore} on the same {@link Journal}.
    *
@@ -442,7 +442,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
 
                   fail("Not expecting a 2nd unisolated connection");
 
-                  return (Void) null;
+                  return null;
 
                 } finally {
 
@@ -465,8 +465,8 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
       } catch (ExecutionException e) {
 
         if (InnerCause.isInnerCause(e, AccessSemaphoreNotReentrantException.class)) {
-          /*
-           * This is the expected outcome.
+        /*
+       * This is the expected outcome.
            */
           log.info(e);
         } else {
@@ -495,7 +495,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test verifying that exactly one unisolated connection is allowed at a time for two sails
    * wrapping different {@link AbstractTripleStore} instances. (This guarantee is needed to preserve
    * ACID semantics for the unisolated connection when there is more than one {@link
@@ -566,8 +566,8 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
         try {
           f2.get(250, TimeUnit.MILLISECONDS);
         } catch (TimeoutException e) {
-          /*
-           * This is the expected outcome.
+        /*
+       * This is the expected outcome.
            */
           log.info("timeout");
         }
@@ -598,7 +598,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test creates a database, obtains a writable connection, writes some data on the store, verifies
    * that the data can be read back from within the connection but that it is not visible in a
    * read-committed view, commits the write set, and verifies that the data is now visible in a
@@ -738,8 +738,8 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
     }
   }
 
-  //	/**
-  //	 * Unit test verifies that we can mix read/write transactions and the use
+  //	/*
+//	 * Unit test verifies that we can mix read/write transactions and the use
   //	 * of the unisolated connection.
   //	 */
   //	public void test_readWriteTxAndUnisolatedConnection() {

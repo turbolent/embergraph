@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-/**
- * Abstraction models either a constant or an unbound variable.
+/*
+* Abstraction models either a constant or an unbound variable.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,20 +37,20 @@ public interface IVariableOrConstant<E> extends IValueExpression<E> {
   /** Return <code>true</code> iff this is a constant. */
   boolean isConstant();
 
-  /**
+  /*
    * Return <code>true</code> if this is the same variable or if both values are {@link Constant}
    * whose values are the same.
    */
   boolean equals(IVariableOrConstant<E> o);
 
-  /**
+  /*
    * Return the bound value.
    *
    * @throws UnsupportedOperationException if this is a variable.
    */
   E get();
 
-  /**
+  /*
    * Return the name of a variable.
    *
    * @throws UnsupportedOperationException if this is not a variable.

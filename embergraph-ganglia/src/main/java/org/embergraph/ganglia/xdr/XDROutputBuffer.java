@@ -15,8 +15,8 @@
 */
 package org.embergraph.ganglia.xdr;
 
-/**
- * A class for writing XDR data onto an internal buffer.
+/*
+* A class for writing XDR data onto an internal buffer.
  *
  * @see <a href="http://www.ietf.org/rfc/rfc4506.txt">RDF 4506</a>
  */
@@ -54,7 +54,7 @@ public class XDROutputBuffer {
     return offset;
   }
 
-  /**
+  /*
    * Puts a string into the buffer by first writing the size of the string as an int, followed by
    * the bytes of the string, padded if necessary to a multiple of 4.
    */
@@ -67,7 +67,7 @@ public class XDROutputBuffer {
     pad();
   }
 
-  /**
+  /*
    * Pads the buffer with zero bytes up to the nearest multiple of 4 (all XDR fields must be padded
    * out to the nearest multiple of four bytes if they do not fall on a 4 byte boundary).
    *
@@ -80,15 +80,15 @@ public class XDROutputBuffer {
     }
   }
 
-  //	/**
-  //	 * Puts a byte into the buffer.
+  //	/*
+//	 * Puts a byte into the buffer.
   //	 */
   //	public void writeByte(final byte i) {
   //		buffer[offset++] = (byte) (i & 0xff);
   //		pad();
   //	}
 
-  /**
+  /*
    * Puts a short integer into the buffer as 2 bytes, big-endian but w/ leading zeros (e.g., as if
    * an int32 value). This is based on looking at ganglia data as received on the wire. For example,
    * <code>cpu_num</code> is reported as ushort.

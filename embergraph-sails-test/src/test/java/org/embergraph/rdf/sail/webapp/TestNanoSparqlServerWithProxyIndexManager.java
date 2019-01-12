@@ -43,8 +43,8 @@ import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.service.ScaleOutClientFactory;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for {@link RESTServlet} (SPARQL end point and REST API for RDF data).
+/*
+* Test suite for {@link RESTServlet} (SPARQL end point and REST API for RDF data).
  *
  * <p>TODO Add unit tests which exercise the full text index.
  *
@@ -61,7 +61,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
     ProxySuiteHelper.proxyIndexManagerTestingHasStarted = true;
   }
 
-  /**
+  /*
    * The {@link IIndexManager} for the backing persistence engine (may be a {@link Journal} or
    * JiniFederation).
    */
@@ -119,7 +119,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
     return jnl;
   }
 
-  /**
+  /*
    * Run test suite against an embedded {@link NanoSparqlServer} instance, which is in turn running
    * against the caller's {@link IIndexManager}.
    *
@@ -271,8 +271,8 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
       }
 
       if (testMode == TestMode.quads) {
-        /*
-         * Tests that require quads mode.
+      /*
+       * Tests that require quads mode.
          *
          * TODO The SPARQL UPDATE test suite is quads-mode only at this
          * time.
@@ -338,7 +338,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
     return testMode.getProperties();
   }
 
-  /**
+  /*
    * Open the {@link IIndexManager} identified by the property file.
    *
    * @param propertyFile The property file (for a standalone embergraph instance) or the jini
@@ -376,8 +376,8 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
 
       if (isJini) {
 
-        /*
-         * A embergraph federation.
+      /*
+       * A embergraph federation.
          */
 
         @SuppressWarnings("rawtypes")
@@ -388,8 +388,8 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
 
       } else {
 
-        /*
-         * Note: we only need to specify the FILE when re-opening a
+      /*
+       * Note: we only need to specify the FILE when re-opening a
          * journal containing a pre-existing KB.
          */
         final Properties properties = new Properties();
@@ -427,7 +427,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
     return indexManager;
   }
 
-  /**
+  /*
    * Runs the test suite against an {@link IEmbergraphFederation} or a {@link Journal}. The
    * federation must already be up and running. An embedded {@link NanoSparqlServer} instance will
    * be created for each test run. Each test will run against a distinct KB instance within a unique
@@ -511,7 +511,7 @@ public class TestNanoSparqlServerWithProxyIndexManager<S extends IIndexManager>
         ((AbstractDistributedFederation<?>) indexManager).shutdownNow();
       } else {
         // destroy journal.
-        ((Journal) indexManager).destroy();
+        indexManager.destroy();
       }
     }
 

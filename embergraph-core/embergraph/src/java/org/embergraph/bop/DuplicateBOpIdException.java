@@ -1,7 +1,7 @@
 package org.embergraph.bop;
 
-/**
- * Exception thrown when a {@link BOp.Annotations#BOP_ID} appears more than once in an operator tree
+/*
+* Exception thrown when a {@link BOp.Annotations#BOP_ID} appears more than once in an operator tree
  * with the same value (the bop identifiers must be distinct).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

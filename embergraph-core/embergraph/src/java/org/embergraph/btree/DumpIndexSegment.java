@@ -33,8 +33,8 @@ import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.util.InnerCause;
 
-/**
- * Utility to examine the context of an {@link IndexSegmentStore}.
+/*
+* Utility to examine the context of an {@link IndexSegmentStore}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -55,7 +55,7 @@ public class DumpIndexSegment {
     System.err.println(" -d level: set the logger level");
   }
 
-  /**
+  /*
    * Dump one or more {@link IndexSegment}s.
    *
    * <p>Note: The <code>-nodeState</code> and <code>-leafState</code> options also require you to
@@ -113,8 +113,8 @@ public class DumpIndexSegment {
           try {
             AbstractBTree.dumpLog.setLevel(level);
           } catch (Throwable t) {
-            /*
-             * Note: The SLF4J logging bridge can cause a
+          /*
+       * Note: The SLF4J logging bridge can cause a
              * NoSuchMethodException to be thrown here.
              *
              * @see https://sourceforge.net/apps/trac/bigdata/ticket/362
@@ -231,7 +231,7 @@ public class DumpIndexSegment {
                 : "N/A"));
   }
 
-  /**
+  /*
    * Dumps nodes (but not leaves) using a low-level approach.
    *
    * @param store
@@ -259,7 +259,7 @@ public class DumpIndexSegment {
     }
   }
 
-  /**
+  /*
    * Low-level routine descends the left-most path from the root and returns the address of the
    * left-most leaf.
    *
@@ -287,7 +287,7 @@ public class DumpIndexSegment {
     return addr;
   }
 
-  /**
+  /*
    * Convenience method used by {@link DumpIndexSegment} does not track the decode time, etc. It
    * also does not set the parent reference on the node/leaf.
    *
@@ -301,7 +301,7 @@ public class DumpIndexSegment {
     return btree.nodeSer.wrap(btree, addr, btree.nodeSer.decode(buf));
   }
 
-  /**
+  /*
    * Low-level routine descends the left-most path from the root and returns the address of the
    * left-most leaf.
    *
@@ -329,7 +329,7 @@ public class DumpIndexSegment {
     return addr;
   }
 
-  /**
+  /*
    * Dump leaves by direct record scan from first leaf offset until end of leaves region.
    *
    * <p>Note: While this could be rewritten for cleaner code to use {@link
@@ -389,7 +389,7 @@ public class DumpIndexSegment {
 
       nscanned++;
 
-      final long priorAddr = ((ImmutableLeaf) leaf).getPriorAddr();
+      final long priorAddr = leaf.getPriorAddr();
 
       if (priorAddr == -1L) {
 
@@ -430,7 +430,7 @@ public class DumpIndexSegment {
         "Visited " + nscanned + " leaves using fast reverse scan in " + elapsed + " ms");
   }
 
-  /**
+  /*
    * Dump leaves by direct record scan from first leaf offset until end of leaves region.
    *
    * <p>Note: While this could be rewritten for cleaner code to use {@link
@@ -490,7 +490,7 @@ public class DumpIndexSegment {
 
       nscanned++;
 
-      final long nextAddr = ((ImmutableLeaf) leaf).getNextAddr();
+      final long nextAddr = leaf.getNextAddr();
 
       if (nextAddr == -1L) {
 
@@ -530,7 +530,7 @@ public class DumpIndexSegment {
         "Visited " + nscanned + " leaves using fast forward scan in " + elapsed + " ms");
   }
 
-  /**
+  /*
    * Dump leaves using the {@link IndexSegmentMultiBlockIterator}.
    *
    * @param store

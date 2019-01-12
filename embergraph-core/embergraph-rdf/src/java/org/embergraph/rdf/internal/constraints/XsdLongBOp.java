@@ -37,8 +37,8 @@ import org.embergraph.rdf.sparql.ast.GlobalAnnotations;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
-/**
- * Convert the {@link IV} to a <code>xsd:long</code>. Note that this is a non-standard extension.
+/*
+* Convert the {@link IV} to a <code>xsd:long</code>. Note that this is a non-standard extension.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */

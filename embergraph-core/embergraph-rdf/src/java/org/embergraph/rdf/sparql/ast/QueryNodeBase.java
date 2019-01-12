@@ -29,7 +29,7 @@ public abstract class QueryNodeBase extends ASTBase implements IQueryNode {
     super(args, anns);
   }
 
-  /**
+  /*
    * Return the query hints for this AST node.
    *
    * @return The query hints -or- <code>null</code> if none have been declared.

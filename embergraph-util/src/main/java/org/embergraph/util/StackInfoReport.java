@@ -19,8 +19,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.util;
 
-/**
- * An exception class whose sole purpose is to provide information during debugging concerning the
+/*
+* An exception class whose sole purpose is to provide information during debugging concerning the
  * context in which some method is invoked. Instances of this exception ARE NOT errors. They are
  * only informative and are used in patterns such as:
  *

@@ -61,8 +61,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Unit tests for encoding and decoding compound keys (such as are used by the statement indices) in
+/*
+* Unit tests for encoding and decoding compound keys (such as are used by the statement indices) in
  * which some of the key components are inline values having variable component lengths while others
  * are term identifiers.
  *
@@ -111,8 +111,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
               @Override
               public boolean equals(Object o) {
-                if (this == o) return true;
-                return false;
+                return this == o;
               }
 
               @Override
@@ -239,11 +238,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
   public void test_encodeDecode_XSDByte() {
 
     final IV<?, ?>[] e = {
-      new XSDNumericIV<EmbergraphLiteral>((byte) Byte.MIN_VALUE),
+      new XSDNumericIV<EmbergraphLiteral>(Byte.MIN_VALUE),
       new XSDNumericIV<EmbergraphLiteral>((byte) -1),
       new XSDNumericIV<EmbergraphLiteral>((byte) 0),
       new XSDNumericIV<EmbergraphLiteral>((byte) 1),
-      new XSDNumericIV<EmbergraphLiteral>((byte) Byte.MAX_VALUE),
+      new XSDNumericIV<EmbergraphLiteral>(Byte.MAX_VALUE),
     };
 
     doEncodeDecodeTest(e);
@@ -258,8 +257,8 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
       new XSDNumericIV<EmbergraphLiteral>((short) -1),
       new XSDNumericIV<EmbergraphLiteral>((short) 0),
       new XSDNumericIV<EmbergraphLiteral>((short) 1),
-      new XSDNumericIV<EmbergraphLiteral>((short) Short.MIN_VALUE),
-      new XSDNumericIV<EmbergraphLiteral>((short) Short.MAX_VALUE),
+      new XSDNumericIV<EmbergraphLiteral>(Short.MIN_VALUE),
+      new XSDNumericIV<EmbergraphLiteral>(Short.MAX_VALUE),
     };
 
     doEncodeDecodeTest(e);
@@ -364,7 +363,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for {@link UUIDBNodeIV}, which provides support for inlining a told blank node whose
    * <code>ID</code> can be parsed as a {@link UUID}.
    */
@@ -382,7 +381,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for {@link NumericBNodeIV}, which provides support for inlining a told blank node
    * whose <code>ID</code> can be parsed as an {@link Integer}.
    */
@@ -436,7 +435,6 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
 
       e[i] = iv;
     }
-    ;
 
     doEncodeDecodeTest(e);
 
@@ -523,7 +521,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test verifies that the inline xsd:dateTime representation preserves the milliseconds
    * units. However, precision beyond milliseconds is NOT preserved by the inline representation,
    * which is based on milliseconds since the epoch.
@@ -797,7 +795,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for a fully inlined representation of a URI based on a <code>byte</code> code. The
    * flags byte looks like: <code>VTE=URI, inline=true, extension=false,
    * DTE=XSDByte</code>. It is followed by a <code>unsigned byte</code> value which is the index of
@@ -806,11 +804,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
   public void test_encodeDecode_URIByteIV() {
 
     final IV<?, ?>[] e = {
-      new VocabURIByteIV<EmbergraphURI>((byte) Byte.MIN_VALUE),
+      new VocabURIByteIV<EmbergraphURI>(Byte.MIN_VALUE),
       new VocabURIByteIV<EmbergraphURI>((byte) -1),
       new VocabURIByteIV<EmbergraphURI>((byte) 0),
       new VocabURIByteIV<EmbergraphURI>((byte) 1),
-      new VocabURIByteIV<EmbergraphURI>((byte) Byte.MAX_VALUE),
+      new VocabURIByteIV<EmbergraphURI>(Byte.MAX_VALUE),
     };
 
     doEncodeDecodeTest(e);
@@ -818,7 +816,7 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for a fully inlined representation of a URI based on a <code>short</code> code. The
    * flags byte looks like: <code>VTE=URI, inline=true, extension=false,
    * DTE=XSDShort</code>. It is followed by an <code>unsigned short</code> value which is the index
@@ -827,11 +825,11 @@ public class TestEncodeDecodeKeys extends AbstractEncodeDecodeKeysTestCase {
   public void test_encodeDecode_URIShortIV() {
 
     final IV<?, ?>[] e = {
-      new VocabURIShortIV<EmbergraphURI>((short) Short.MIN_VALUE),
+      new VocabURIShortIV<EmbergraphURI>(Short.MIN_VALUE),
       new VocabURIShortIV<EmbergraphURI>((short) -1),
       new VocabURIShortIV<EmbergraphURI>((short) 0),
       new VocabURIShortIV<EmbergraphURI>((short) 1),
-      new VocabURIShortIV<EmbergraphURI>((short) Short.MAX_VALUE),
+      new VocabURIShortIV<EmbergraphURI>(Short.MAX_VALUE),
     };
 
     doEncodeDecodeTest(e);

@@ -2,8 +2,8 @@ package org.embergraph.rdf.sparql.ast.eval.service;
 
 import org.embergraph.service.geospatial.GeoSpatialDefaultLiteralSerializer;
 
-/**
- * Serializer class for BLZG-1943 test case. Sample code provided via
+/*
+* Serializer class for BLZG-1943 test case. Sample code provided via
  * https://jira.blazegraph.com/browse/BLZG-1943 by Mark Hale.
  *
  * @author msc

@@ -46,8 +46,8 @@ import org.openrdf.model.Value;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 
-/**
- * Efficiently resolve openrdf {@link BindingSet}s to embergraph {@link IBindingSet}s (this is a
+/*
+* Efficiently resolve openrdf {@link BindingSet}s to embergraph {@link IBindingSet}s (this is a
  * streaming API).
  *
  * @see EmbergraphValueReplacer
@@ -61,7 +61,7 @@ public class EmbergraphOpenRDFBindingSetsResolverator
   private static final Logger log =
       Logger.getLogger(EmbergraphOpenRDFBindingSetsResolverator.class);
 
-  /**
+  /*
    * @param db Used to resolve RDF {@link Value}s to {@link IV}s.
    * @param src The source iterator (will be closed when this iterator is closed).
    *     <p>FIXME must accept reverse bnodes map (from term identifier to blank nodes) for
@@ -87,7 +87,7 @@ public class EmbergraphOpenRDFBindingSetsResolverator
     return (EmbergraphOpenRDFBindingSetsResolverator) super.start(service);
   }
 
-  /**
+  /*
    * Resolve a chunk of {@link BindingSet}s into a chunk of {@link IBindingSet}s in which RDF {@link
    * Value}s have been resolved to {@link IV}s.
    */
@@ -96,7 +96,7 @@ public class EmbergraphOpenRDFBindingSetsResolverator
     return resolveChunk(state.getLexiconRelation(), chunk);
   }
 
-  /**
+  /*
    * Resolve a chunk of {@link BindingSet}s into a chunk of {@link IBindingSet}s in which RDF {@link
    * Value}s have been resolved to {@link IV}s.
    */
@@ -176,7 +176,7 @@ public class EmbergraphOpenRDFBindingSetsResolverator
     }
   }
 
-  /**
+  /*
    * Resolve the RDF {@link Value}s in the {@link BindingSet} using the map populated when we
    * fetched the current chunk and return the {@link IBindingSet} for that solution in which term
    * identifiers have been resolved to their corresponding {@link EmbergraphValue}s.

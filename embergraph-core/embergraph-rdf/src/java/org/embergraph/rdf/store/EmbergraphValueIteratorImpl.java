@@ -1,5 +1,5 @@
-/**
- * The Notice below must appear in each file of the Source Code of any copy you distribute of the
+/*
+* The Notice below must appear in each file of the Source Code of any copy you distribute of the
  * Licensed Product. Contributors to any Modifications may add their own copyright notices to
  * identify their own contributions.
  *
@@ -50,8 +50,8 @@ import org.embergraph.rdf.model.EmbergraphValue;
 import org.embergraph.striterator.IChunkedIterator;
 import org.openrdf.model.Value;
 
-/**
- * Wraps an iterator that visits term identifiers and exposes each visited term identifier as a
+/*
+* Wraps an iterator that visits term identifiers and exposes each visited term identifier as a
  * {@link EmbergraphValue} (batch API).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -67,7 +67,7 @@ public class EmbergraphValueIteratorImpl implements EmbergraphValueIterator {
   /** The source iterator. */
   private final IChunkedIterator<IV> src;
 
-  /**
+  /*
    * The index of the last entry returned in the current {@link #chunk} and <code>-1</code> until
    * the first entry is returned.
    */
@@ -76,13 +76,13 @@ public class EmbergraphValueIteratorImpl implements EmbergraphValueIterator {
   /** The current chunk from the source iterator and initially <code>null</code>. */
   private IV<?, ?>[] chunk = null;
 
-  /**
+  /*
    * The map that will be used to resolve term identifiers to terms for the current {@link #chunk}
    * and initially <code>null</code>.
    */
   private Map<IV<?, ?>, EmbergraphValue> terms = null;
 
-  /**
+  /*
    * @param db Used to resolve term identifiers to {@link Value} objects.
    * @param src The source iterator.
    */
@@ -177,7 +177,7 @@ public class EmbergraphValueIteratorImpl implements EmbergraphValueIterator {
     return val;
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException
    * @todo this could be implemented if we saved the last term identifier visited.
    */

@@ -34,8 +34,8 @@ import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.service.proxy.RemoteBuffer;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
-/**
- * Implementation for distributed join execution.
+/*
+* Implementation for distributed join execution.
  *
  * <p>Note: For query, this object MUST be executed locally on the client. This ensures that all
  * data flows back to the client directly. For mutation, it is possible to submit this object to any
@@ -53,7 +53,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
   /** The proxy for this {@link DistributedJoinMasterTask}. */
   private final IJoinMaster masterProxy;
 
-  /**
+  /*
    * The proxy for the solution buffer (query only).
    *
    * <p>Note: The query buffer is always an {@link IBlockingBuffer}. The client has the {@link
@@ -66,7 +66,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
    */
   private final IBuffer<ISolution[]> solutionBufferProxy;
 
-  /**
+  /*
    * For queries, the master MUST execute locally to the client. If the master were to be executed
    * on a remote {@link DataService} then that would cause the {@link #getSolutionBuffer()} to be
    * created on the remote service and all query results would be forced through that remote JVM
@@ -88,7 +88,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
     out.defaultWriteObject();
   }
 
-  /**
+  /*
    * @param rule
    * @param joinNexus
    * @param buffer The buffer on which the last {@link DistributedJoinTask} will write query {@link
@@ -130,8 +130,8 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
 
       if (!TimestampUtility.isReadOnly(joinNexus.getReadTimestamp())) {
 
-        /*
-         * Must use a read-consistent view and advance the
+      /*
+       * Must use a read-consistent view and advance the
          * readTimestamp before each mutation operation.
          */
 
@@ -142,8 +142,8 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
 
       if (joinNexus.getReadTimestamp() == ITx.UNISOLATED) {
 
-        /*
-         * Note: While you probably can run a query against the
+      /*
+       * Note: While you probably can run a query against the
          * unisolated indices it will prevent overflow processing
          * since there will exclusive locks and is a bad idea.
          */
@@ -207,7 +207,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
     return solutionBufferProxy;
   }
 
-  /**
+  /*
    * Create and run the {@link JoinTask}(s) that will evaluate the first join dimension.
    *
    * <p>A {@link JoinTask} is created on the {@link DataService} for each index partition that is
@@ -242,7 +242,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
     return joinTaskFutures;
   }
 
-  /**
+  /*
    * Map the given {@link IBindingSet} over the {@link JoinTask}(s) for the index partition(s) the
    * span the {@link IAccessPath} for that {@link IBindingSet} in parallel.
    *
@@ -339,7 +339,7 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
     return futures;
   }
 
-  /**
+  /*
    * Await the {@link JoinTaskFactoryTask} {@link Future}s.
    *
    * <p>Note: the result for a {@link JoinTaskFactoryTask} {@link Future} is a {@link
@@ -404,8 +404,8 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
 
         if (!causes.isEmpty()) {
 
-          /*
-           * We have to abort, so cancel the factory task in case
+        /*
+       * We have to abort, so cancel the factory task in case
            * it is still running but fall through and try to get
            * its future in case it has already created the join
            * task.
@@ -422,8 +422,8 @@ public class DistributedJoinMasterTask extends JoinMasterTask implements Seriali
 
         causes.add(ex);
 
-        /*
-         * Note: This is here because the ExecutionExceptions that
+      /*
+       * Note: This is here because the ExecutionExceptions that
          * we throw does not print out all of its stack traces.
          *
          * @todo log iff unexpected exception class or get all

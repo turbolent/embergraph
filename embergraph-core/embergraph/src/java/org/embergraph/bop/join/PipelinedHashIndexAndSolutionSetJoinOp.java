@@ -38,8 +38,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpUtility;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-/**
- * Operator for pipelined hash index construction and subsequent join. Note that this operator needs
+/*
+* Operator for pipelined hash index construction and subsequent join. Note that this operator needs
  * not to be combined with a solution set hash join, but instead gets the subquery/subgroup passed
  * as a parameter and thus can be considered as an "all-in-one" build-hash-index-and-join operation.
  *
@@ -171,7 +171,7 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
 
   public interface Annotations extends HashIndexOp.Annotations, SubqueryAnnotations {
 
-    /**
+    /*
      * The variables that is projected into the inner subgroup. Typically, this is identical to the
      * join variables. There are, however, exceptions where we need to project in a superset. For
      * instance, for the query
@@ -185,7 +185,7 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
     String PROJECT_IN_VARS =
         PipelinedHashIndexAndSolutionSetJoinOp.class.getName() + ".projectInVars";
 
-    /**
+    /*
      * The threshold defining when to release the distinctProjectionBuffer. Note that releasing this
      * buffer means releasing the distinctProjectionBuffer at the same time.
      */
@@ -196,7 +196,7 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
     // set default to have a default's chunk size default
     int DEFAULT_DISTINCT_PROJECTION_BUFFER_THRESHOLD = 50;
 
-    /**
+    /*
      * The threshold defining when to release the incomingBindingsBuffer. Note that releasing this
      * buffer means releasing the distinctProjectionBuffer at the same time.
      */
@@ -219,7 +219,7 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
       throw new IllegalArgumentException(Annotations.MAX_PARALLEL + "=" + getMaxParallel());
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -243,7 +243,7 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
   @Override
   protected ChunkTaskBase createChunkTask(final BOpContext<IBindingSet> context) {
 
-    /**
+    /*
      * The operator offers two ways to generate the hash index of the input stream, either via
      * subquery or via binding set that is passed in. Exactly one of both *must* be provided.
      */
@@ -368,8 +368,8 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
 
       } else if (op.getProperty(Annotations.NAMED_SET_SOURCE_REF) != null) {
 
-        /*
-         * Metadata to identify the optional *source* solution set. When
+      /*
+       * Metadata to identify the optional *source* solution set. When
          * <code>null</code>, the hash index is built from the solutions flowing
          * through the pipeline. When non-<code>null</code>, the hash index is
          * built from the solutions in the identifier solution set.
@@ -381,8 +381,8 @@ public class PipelinedHashIndexAndSolutionSetJoinOp extends HashIndexOp {
 
       } else if (bsFromBindingsSetSource != null) {
 
-        /**
-         * We handle the BINDINGS_SETS_SOURCE case as follows: the binding sets on the source are
+      /*
+       * We handle the BINDINGS_SETS_SOURCE case as follows: the binding sets on the source are
          * treated as input. Given that in this case no inner query is set, we consider the
          * BINDINGS_SETS_SOURCE as the result of the query instead. It is extracted here and passed
          * in as a parameter.

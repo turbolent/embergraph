@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-/**
- * Extended interface.
+/*
+* Extended interface.
  *
  * <p>When {@link #first()}, {@link #last()}, or {@link ITupleCursor#seek(byte[])} return <code>null
  * </code> it is an indication that there is no visitable tuple in the index corresponding to that
@@ -43,7 +43,7 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
   /** The optional exclusive upper bound imposed by the {@link ITupleCursor}. */
   byte[] getToKey();
 
-  /**
+  /*
    * Return <code>true</code> if the cursor is willing to visit deleted tuples. In order to observe
    * deleted tuples the index must have been provisioned with support for delete markers enabled.
    *
@@ -53,9 +53,9 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
    *
    * @see IndexMetadata#getDeleteMarkers()
    */
-  public boolean isDeletedTupleVisitor();
+  boolean isDeletedTupleVisitor();
 
-  /**
+  /*
    * Return <code>true</code> if the cursor position is defined.
    *
    * <p>Note: Use {@link #currentKey()} to obtain the key corresponding to the current cursor
@@ -64,7 +64,7 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
    */
   boolean isCursorPositionDefined();
 
-  /**
+  /*
    * Return the key corresponding to the current cursor position (even if there is no tuple in the
    * index for that key).
    *
@@ -73,7 +73,7 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
    */
   byte[] currentKey();
 
-  /**
+  /*
    * Position the cursor on the first visitable tuple in the natural index order for the index or
    * index partition over which the cursor is defined. If there are no visitable tuples then the
    * cursor position will be undefined.
@@ -83,7 +83,7 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
    */
   ITuple<E> first();
 
-  /**
+  /*
    * Position the cursor on the last visitable tuple in the natural index order for the index or
    * index partition over which the cursor is defined. If there are no visitable tuples then the
    * cursor position will be undefined.
@@ -92,7 +92,7 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
    */
   ITuple<E> last();
 
-  /**
+  /*
    * The tuple reflecting the data in the index at the current cursor position.
    *
    * @return The tuple associated with the current cursor position -or- <code>null</code> either if
@@ -101,7 +101,7 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
    */
   ITuple<E> tuple();
 
-  /**
+  /*
    * Position the cursor on the first visitable tuple ordered greater than the current cursor
    * position in the natural key order of the index and return that tuple.
    *
@@ -109,7 +109,7 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
    */
   ITuple<E> nextTuple();
 
-  /**
+  /*
    * Position the cursor on the first visitable tuple ordered less than the current cursor position
    * in the natural key order of the index and return that tuple.
    *
@@ -117,8 +117,8 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
    */
   ITuple<E> priorTuple();
 
-  //  /**
-  //  * Change the half-open range for the cursor. This can be useful if you want
+  //  /*
+//  * Change the half-open range for the cursor. This can be useful if you want
   //  * to perform a series of key-range scans. If the {@link #currentKey()} is
   //  * no longer within the bounds for the cursor it will not be on a visitable
   //  * tuple after invoking this method and you must {@link #seek(byte[])} to a

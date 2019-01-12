@@ -29,8 +29,8 @@ import junit.framework.Test;
 import org.embergraph.io.DirectBufferPool;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Test suite for {@link WORMStrategy} journal with the write cache disabled. The purpose of this
+/*
+* Test suite for {@link WORMStrategy} journal with the write cache disabled. The purpose of this
  * version of the test suite is to look for problems related to operation when caching is disabled.
  *
  * <p>Note: The HA journal requires that cache be enabled. However, the HA journal is tested by a
@@ -104,7 +104,7 @@ public class TestWORMStrategyNoCache extends AbstractJournalTestCase {
     return properties;
   }
 
-  /**
+  /*
    * Verify normal operation and basic assumptions when creating a new journal using {@link
    * BufferMode#DiskWORM}.
    *
@@ -141,7 +141,7 @@ public class TestWORMStrategyNoCache extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that {@link Options#CREATE} may be used to initialize a journal on a newly
    * created empty file.
    *
@@ -171,7 +171,7 @@ public class TestWORMStrategyNoCache extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractRestartSafeTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -193,7 +193,7 @@ public class TestWORMStrategyNoCache extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractInterruptsTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -225,7 +225,7 @@ public class TestWORMStrategyNoCache extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMROWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -257,7 +257,7 @@ public class TestWORMStrategyNoCache extends AbstractJournalTestCase {
     }
   }
 
-  /**
+  /*
    * Test suite integration for {@link AbstractMRMWTestCase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

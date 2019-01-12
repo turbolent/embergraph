@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.map;
 
-/**
- * Status: Experimental; Do not use for production yet. Hash map holding (key,value) associations of
+/*
+* Status: Experimental; Do not use for production yet. Hash map holding (key,value) associations of
  * type <tt>(int-->int)</tt>; Automatically grows and shrinks as needed; Implemented using open
  * addressing with double hashing. First see the <a href="package-summary.html">package summary</a>
  * and javadoc <a href="package-tree.html">tree view</a> to get the broad picture.
@@ -29,7 +29,7 @@ class QuickOpenIntIntHashMap extends OpenIntIntHashMap {
   public QuickOpenIntIntHashMap() {
     this(defaultCapacity);
   }
-  /**
+  /*
    * Constructs an empty map with the specified initial capacity and default load factors.
    *
    * @param initialCapacity the initial capacity of the map.
@@ -38,7 +38,7 @@ class QuickOpenIntIntHashMap extends OpenIntIntHashMap {
   public QuickOpenIntIntHashMap(int initialCapacity) {
     this(initialCapacity, defaultMinLoadFactor, defaultMaxLoadFactor);
   }
-  /**
+  /*
    * Constructs an empty map with the specified initial capacity and the specified minimum and
    * maximum load factor.
    *
@@ -52,7 +52,7 @@ class QuickOpenIntIntHashMap extends OpenIntIntHashMap {
   public QuickOpenIntIntHashMap(int initialCapacity, double minLoadFactor, double maxLoadFactor) {
     setUp(initialCapacity, minLoadFactor, maxLoadFactor);
   }
-  /**
+  /*
    * Associates the given key with the given value. Replaces any old <tt>(key,someOtherValue)</tt>
    * association, if existing.
    *
@@ -77,8 +77,8 @@ class QuickOpenIntIntHashMap extends OpenIntIntHashMap {
     */
 
     int key0;
-    final int tab[] = table;
-    final byte stat[] = state;
+    final int[] tab = table;
+    final byte[] stat = state;
     final int length = tab.length;
 
     int hash = HashFunctions.hash(key) & 0x7FFFFFFF;
@@ -172,7 +172,7 @@ class QuickOpenIntIntHashMap extends OpenIntIntHashMap {
 
     return true;
   }
-  /**
+  /*
    * Rehashes the contents of the receiver into a new table with a smaller or larger capacity. This
    * method is called automatically when the number of keys in the receiver exceeds the high water
    * mark or falls below the low water mark.
@@ -181,13 +181,13 @@ class QuickOpenIntIntHashMap extends OpenIntIntHashMap {
     int oldCapacity = table.length;
     // if (oldCapacity == newCapacity) return;
 
-    int oldTable[] = table;
-    int oldValues[] = values;
-    byte oldState[] = state;
+    int[] oldTable = table;
+    int[] oldValues = values;
+    byte[] oldState = state;
 
-    int newTable[] = new int[newCapacity];
-    int newValues[] = new int[newCapacity];
-    byte newState[] = new byte[newCapacity];
+    int[] newTable = new int[newCapacity];
+    int[] newValues = new int[newCapacity];
+    byte[] newState = new byte[newCapacity];
 
     this.lowWaterMark = chooseLowWaterMark(newCapacity, this.minLoadFactor);
     this.highWaterMark = chooseHighWaterMark(newCapacity, this.maxLoadFactor);

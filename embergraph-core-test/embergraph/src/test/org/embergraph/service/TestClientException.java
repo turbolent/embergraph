@@ -27,8 +27,8 @@ import java.util.Arrays;
 import junit.framework.TestCase;
 import org.embergraph.service.ndx.ClientException;
 
-/**
- * Class written to verify the stack trace printing behavior of {@link ClientException}.
+/*
+* Class written to verify the stack trace printing behavior of {@link ClientException}.
  *
  * <p>Note: You have to inspect the test results by hand.
  *
@@ -53,7 +53,7 @@ public class TestClientException extends TestCase {
     throw new RuntimeException("ex2");
   }
 
-  /**
+  /*
    * This "test" throws an exception which should print out two "causes". Those causes are
    * exceptions thrown by {@link #ex1()} and {@link #ex2()}.
    */
@@ -73,6 +73,6 @@ public class TestClientException extends TestCase {
       t2 = t;
     }
 
-    throw new ClientException("test", Arrays.asList(new Throwable[] {t1, t2}));
+    throw new ClientException("test", Arrays.asList(t1, t2));
   }
 }

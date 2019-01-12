@@ -21,8 +21,8 @@ import org.openrdf.query.resultio.TupleQueryResultFormat;
 import org.openrdf.query.resultio.TupleQueryResultWriter;
 import org.openrdf.query.resultio.TupleQueryResultWriterFactory;
 
-/**
- * A {@link TupleQueryResultWriterFactory} for writers of SPARQL/JSON query results.
+/*
+* A {@link TupleQueryResultWriterFactory} for writers of SPARQL/JSON query results.
  *
  * @author Arjohn Kampman
  */

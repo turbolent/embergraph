@@ -2,8 +2,8 @@ package org.embergraph.htree;
 
 import org.embergraph.btree.ICounter;
 
-/**
- * Mutable counter.
+/*
+* Mutable counter.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */

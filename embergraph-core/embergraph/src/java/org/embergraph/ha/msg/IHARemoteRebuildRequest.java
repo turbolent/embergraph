@@ -19,8 +19,8 @@ package org.embergraph.ha.msg;
 
 import org.embergraph.ha.HAGlue;
 
-/**
- * Message requesting disaster recovery of the service from the quorum leader. This message is sent
+/*
+* Message requesting disaster recovery of the service from the quorum leader. This message is sent
  * to the service that must be recovered. The service will then message the leader to send its
  * backing state.
  *

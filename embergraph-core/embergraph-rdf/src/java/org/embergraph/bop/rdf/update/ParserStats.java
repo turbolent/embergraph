@@ -24,8 +24,8 @@ package org.embergraph.bop.rdf.update;
 import org.embergraph.bop.engine.BOpStats;
 import org.embergraph.counters.CAT;
 
-/**
- * Extends {@link BOpStats} to report RDF parser specific statistics.
+/*
+* Extends {@link BOpStats} to report RDF parser specific statistics.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

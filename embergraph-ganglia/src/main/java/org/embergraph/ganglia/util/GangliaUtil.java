@@ -19,15 +19,15 @@ import java.net.InetSocketAddress;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Utility class.
+/*
+* Utility class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class GangliaUtil {
 
-  /**
+  /*
    * Parses a space and/or comma separated sequence of server specifications of the form
    * <i>hostname</i> or <i>hostname:port</i>. If the specs string is null, defaults to
    * <i>localhost</i>:<i>defaultPort</i>.

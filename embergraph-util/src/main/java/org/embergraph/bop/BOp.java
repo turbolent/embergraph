@@ -28,8 +28,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * An operator, such as a constant, variable, join, sort, filter, etc. Abstract operations, such as
+/*
+* An operator, such as a constant, variable, join, sort, filter, etc. Abstract operations, such as
  * the AST, are also described with this data structure.
  *
  * <p>Operators are organized in a tree of operators. The <i>arity</i> of an operator is the number
@@ -56,7 +56,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
   /** The #of arguments to the operation. */
   int arity();
 
-  /**
+  /*
    * Return an argument to the operation.
    *
    * @param index The argument index in [0:{@link #arity()}-1].
@@ -73,7 +73,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
   /** A shallow copy of the operator's arguments. */
   BOp[] toArray();
 
-  /**
+  /*
    * A shallow copy of the operator's arguments using the generic type of the caller's array. If the
    * array has sufficient room, then the arguments are copied into the caller's array. If there is
    * space remaining, a <code>null</code> is appended to mark the end of the data.
@@ -83,7 +83,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
   /** The operator's annotations. */
   Map<String, Object> annotations();
 
-  /**
+  /*
    * Return the value of the named annotation.
    *
    * @param name The name of the annotation.
@@ -93,7 +93,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
    */
   <T> T getProperty(final String name, final T defaultValue);
 
-  /**
+  /*
    * Unconditionally sets the property.
    *
    * @param name The name.
@@ -102,7 +102,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
    */
   BOp setProperty(final String name, final Object value);
 
-  /**
+  /*
    * Return the value of the named annotation.
    *
    * @param name The name of the annotation.
@@ -110,8 +110,8 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
    */
   // <T> T getProperty(final String name);
 
-  //    /**
-  //     * Return the value of the named annotation.
+  //    /*
+//     * Return the value of the named annotation.
   //     *
   //     * @param name
   //     *            The name of the annotation.
@@ -123,7 +123,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
   //     */
   //    <T> T getRequiredProperty(final String name);
 
-  /**
+  /*
    * Return the value of the named annotation.
    *
    * @param name The name of the annotation.
@@ -132,7 +132,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
    * @todo Note: This variant without generics is required for some java compiler versions.
    * @see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6302954
    */
-  public Object getRequiredProperty(final String name);
+  Object getRequiredProperty(final String name);
 
   /** Deep copy clone of the operator. */
   BOp clone();
@@ -140,34 +140,34 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
   /** Return a short (non-recursive) representation of the {@link BOp}. */
   String toShortString();
 
-  /**
+  /*
    * Return a
    *
    * @return
    */
   String toString();
 
-  /**
+  /*
    * Return the {@link Annotations#BOP_ID}.
    *
    * @throws IllegalStateException if that annotation is not bound.
    */
   int getId();
 
-  /**
+  /*
    * Return the evaluation context for the operator as specified by {@link
    * Annotations#EVALUATION_CONTEXT}.
    */
   BOpEvaluationContext getEvaluationContext();
 
-  /**
+  /*
    * Return <code>true</code> iff this operator is a controller.
    *
    * @see Annotations#CONTROLLER
    */
   boolean isController();
 
-  /**
+  /*
    * The contract of this method at this level is under-specified. Sub-classes may choose between:
    *
    * <p>- return a string representation of the object, similar to the use of {@link #toString()}
@@ -184,22 +184,22 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
    */
   String toString(final int indent);
 
-  /**
+  /*
    * Interface declaring well known annotations.
    *
    * <p>Note: Annotation names should be {@link String#intern() interned} in order to avoid having
    * duplicate values for those strings on the heap.
    */
-  public interface Annotations {
+  interface Annotations {
 
-    /**
+    /*
      * The unique identifier within a query for a specific {@link BOp}. The {@link #QUERY_ID} and
      * the {@link #BOP_ID} together provide a unique identifier for the {@link BOp} within the
      * context of its owning query.
      */
     String BOP_ID = BOp.class.getName() + ".bopId";
 
-    /**
+    /*
      * The timeout for the operator evaluation (milliseconds).
      *
      * @see #DEFAULT_TIMEOUT
@@ -214,7 +214,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
     /** The default timeout for operator evaluation. */
     long DEFAULT_TIMEOUT = Long.MAX_VALUE;
 
-    /**
+    /*
      * This annotation determines where an operator will be evaluated (default {@value
      * #DEFAULT_EVALUATION_CONTEXT}).
      *
@@ -224,7 +224,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
 
     BOpEvaluationContext DEFAULT_EVALUATION_CONTEXT = BOpEvaluationContext.ANY;
 
-    /**
+    /*
      * A boolean annotation whose value indicates whether or not this is a control operator (default
      * {@value #DEFAULT_CONTROLLER}). A control operator is an operator which will issue subqueries
      * for its arguments. Thus control operators mark a boundary in pipelined evaluation. Some

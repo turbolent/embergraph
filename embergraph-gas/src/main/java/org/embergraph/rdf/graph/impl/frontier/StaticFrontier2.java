@@ -23,8 +23,8 @@ import org.embergraph.rdf.graph.impl.util.IManagedArray;
 import org.embergraph.rdf.graph.impl.util.ManagedArray;
 import org.openrdf.model.Value;
 
-/**
- * An implementation of a "static" frontier that grows and reuses the backing vertex array.
+/*
+* An implementation of a "static" frontier that grows and reuses the backing vertex array.
  *
  * <p>Note: This implementation has package private methods that permit certain kinds of mutation.
  *
@@ -35,7 +35,7 @@ public class StaticFrontier2 implements IStaticFrontier {
   /** The backing structure. */
   private final IManagedArray<Value> backing;
 
-  /**
+  /*
    * A slice onto the {@link #backing} structure for the current frontier. This gets replaced when
    * the frontier is changed.
    */
@@ -86,7 +86,7 @@ public class StaticFrontier2 implements IStaticFrontier {
     return vertices.iterator();
   }
 
-  /**
+  /*
    * Grow the backing array iff necessary. Regardless, the entries from end of the current view to
    * the first non-<code>null</code> are cleared. This is done to faciltiate GC by clearing
    * references that would otherwise remain if/when the frontier contracted.
@@ -120,7 +120,7 @@ public class StaticFrontier2 implements IStaticFrontier {
     this.vertices = backing.slice(0 /* off */, minCapacity /* len */);
   }
 
-  /**
+  /*
    * Copy a slice into the backing array. This method is intended for use by parallel threads. The
    * backing array MUST have sufficient capacity. The threads MUST write to offsets that are known
    * to not overlap. NO checking is done to ensure that the concurrent copy of these slices will not
@@ -153,7 +153,7 @@ public class StaticFrontier2 implements IStaticFrontier {
     }
   }
 
-  /**
+  /*
    * Copy the data from the iterator into the backing array and update the slice which provides our
    * exposed view of the backing array.
    *

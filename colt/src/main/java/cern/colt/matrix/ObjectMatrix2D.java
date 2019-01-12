@@ -11,8 +11,8 @@ package cern.colt.matrix;
 import cern.colt.list.IntArrayList;
 import cern.colt.list.ObjectArrayList;
 import cern.colt.matrix.impl.AbstractMatrix2D;
-/**
- * Abstract base class for 2-d matrices holding <tt>Object</tt> elements. First see the <a
+/*
+* Abstract base class for 2-d matrices holding <tt>Object</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -30,7 +30,7 @@ import cern.colt.matrix.impl.AbstractMatrix2D;
 public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected ObjectMatrix2D() {}
-  /**
+  /*
    * Applies a function to each cell and aggregates the results. Returns a value <tt>v</tt> such
    * that <tt>v==a(size())</tt> where <tt>a(i) == aggr( a(i-1), f(get(row,column)) )</tt> and
    * terminators are <tt>a(1) == f(get(0,0)), a(0)==null</tt>.
@@ -69,7 +69,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     }
     return a;
   }
-  /**
+  /*
    * Applies a function to each corresponding cell of two matrices and aggregates the results.
    * Returns a value <tt>v</tt> such that <tt>v==a(size())</tt> where <tt>a(i) == aggr( a(i-1),
    * f(get(row,column),other.get(row,column)) )</tt> and terminators are <tt>a(1) ==
@@ -122,7 +122,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     }
     return a;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>values</tt>. <tt>values</tt> is required to have
    * the form <tt>values[row][column]</tt> and have exactly the same number of rows and columns as
    * the receiver.
@@ -153,7 +153,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[row,col] = function(x[row,col])</tt>.
    *
    * <p><b>Example:</b>
@@ -185,7 +185,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Replaces all cell values of the receiver with the values of another matrix. Both matrices must
    * have the same number of rows and columns. If both matrices share the same cells (as is the case
    * if they are views derived from the same matrix) and intersect in an ambiguous way, then
@@ -208,7 +208,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[row,col] =
    * function(x[row,col],y[row,col])</tt>.
    *
@@ -250,7 +250,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>value</tt>.
    *
    * @param value the value to be filled into the cells.
@@ -274,7 +274,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     }
     return cardinality;
   }
-  /**
+  /*
    * Constructs and returns a deep copy of the receiver.
    *
    * <p><b>Note that the returned matrix is an independent deep copy.</b> The returned matrix is not
@@ -286,7 +286,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public ObjectMatrix2D copy() {
     return like().assign(this);
   }
-  /**
+  /*
    * Compares the specified Object with the receiver for equality. Equivalent to
    * <tt>equals(otherObj,true)</tt>.
    *
@@ -296,7 +296,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public boolean equals(Object otherObj) { // delta
     return equals(otherObj, true);
   }
-  /**
+  /*
    * Compares the specified Object with the receiver for equality. Returns true if and only if the
    * specified Object is also at least an ObjectMatrix2D, both matrices have the same size, and all
    * corresponding pairs of cells in the two matrices are the same. In other words, two matrices are
@@ -328,16 +328,15 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     } else {
       for (int row = rows; --row >= 0; ) {
         for (int column = columns; --column >= 0; ) {
-          if (!(getQuick(row, column) == null
-              ? other.getQuick(row, column) == null
-              : getQuick(row, column).equals(other.getQuick(row, column)))) return false;
+          if (getQuick(row, column) == null ? other.getQuick(row, column) != null
+              : !getQuick(row, column).equals(other.getQuick(row, column))) return false;
         }
       }
     }
 
     return true;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[row,column]</tt>.
    *
    * @param row the index of the row-coordinate.
@@ -351,14 +350,14 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
       throw new IndexOutOfBoundsException("row:" + row + ", column:" + column);
     return getQuick(row, column);
   }
-  /**
+  /*
    * Returns the content of this matrix if it is a wrapper; or <tt>this</tt> otherwise. Override
    * this method in wrappers.
    */
   protected ObjectMatrix2D getContent() {
     return this;
   }
-  /**
+  /*
    * Fills the coordinates and values of cells having non-zero values into the specified lists.
    * Fills into the lists, starting at index 0. After this call returns the specified lists all have
    * a new size, the number of non-zero values.
@@ -404,7 +403,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
       }
     }
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -427,7 +426,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   protected boolean haveSharedCellsRaw(ObjectMatrix2D other) {
     return false;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the same number of rows and columns. For example, if the receiver is an instance of type
    * <tt>DenseObjectMatrix2D</tt> the new matrix must also be of type <tt>DenseObjectMatrix2D</tt>,
@@ -440,7 +439,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public ObjectMatrix2D like() {
     return like(rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of rows and columns. For example, if the receiver is an instance of
    * type <tt>DenseObjectMatrix2D</tt> the new matrix must also be of type
@@ -454,7 +453,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
    * @return a new empty matrix of the same dynamic type.
    */
   public abstract ObjectMatrix2D like(int rows, int columns);
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseObjectMatrix2D</tt> the new matrix must be of type <tt>DenseObjectMatrix1D</tt>, if
@@ -465,7 +464,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
    * @return a new matrix of the corresponding dynamic type.
    */
   public abstract ObjectMatrix1D like1D(int size);
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, sharing the
    * same cells. For example, if the receiver is an instance of type <tt>DenseObjectMatrix2D</tt>
    * the new matrix must be of type <tt>DenseObjectMatrix1D</tt>, if the receiver is an instance of
@@ -479,7 +478,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
    * @return a new matrix of the corresponding dynamic type.
    */
   protected abstract ObjectMatrix1D like1D(int size, int zero, int stride);
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.
    *
    * @param row the index of the row-coordinate.
@@ -493,7 +492,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
       throw new IndexOutOfBoundsException("row:" + row + ", column:" + column);
     setQuick(row, column, value);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -506,7 +505,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
    * @param value the value to be filled into the specified cell.
    */
   public abstract void setQuick(int row, int column, Object value);
-  /**
+  /*
    * Constructs and returns a 2-dimensional array containing the cell values. The returned array
    * <tt>values</tt> has the form <tt>values[row][column]</tt> and has the same number of rows and
    * columns as the receiver.
@@ -526,7 +525,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     }
     return values;
   }
-  /**
+  /*
    * Returns a string representation using default formatting.
    *
    * @see cern.colt.matrix.objectalgo.Formatter
@@ -534,7 +533,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public String toString() {
     return new cern.colt.matrix.objectalgo.Formatter().toString(this);
   }
-  /**
+  /*
    * Constructs and returns a new view equal to the receiver. The view is a shallow clone. Calls
    * <code>clone()</code> and casts the result.
    *
@@ -548,7 +547,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   protected ObjectMatrix2D view() {
     return (ObjectMatrix2D) clone();
   }
-  /**
+  /*
    * Constructs and returns a new <i>slice view</i> representing the rows of the given column. The
    * returned view is backed by this matrix, so changes in the returned view are reflected in this
    * matrix, and vice-versa. To obtain a slice view on subranges, construct a sub-ranging view
@@ -579,7 +578,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     int viewStride = this.rowStride;
     return like1D(viewSize, viewZero, viewStride);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i> along the column axis. What used to be column
    * <tt>0</tt> is now column <tt>columns()-1</tt>, ..., what used to be column <tt>columns()-1</tt>
    * is now column <tt>0</tt>. The returned view is backed by this matrix, so changes in the
@@ -609,7 +608,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public ObjectMatrix2D viewColumnFlip() {
     return (ObjectMatrix2D) (view().vColumnFlip());
   }
-  /**
+  /*
    * Constructs and returns a new <i>dice (transposition) view</i>; Swaps axes; example: 3 x 4
    * matrix --> 4 x 3 matrix. The view has both dimensions exchanged; what used to be columns become
    * rows, what used to be rows become columns. In other words:
@@ -642,7 +641,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public ObjectMatrix2D viewDice() {
     return (ObjectMatrix2D) (view().vDice());
   }
-  /**
+  /*
    * Constructs and returns a new <i>sub-range view</i> that is a <tt>height x width</tt> sub matrix
    * starting at <tt>[row,column]</tt>.
    *
@@ -671,7 +670,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public ObjectMatrix2D viewPart(int row, int column, int height, int width) {
     return (ObjectMatrix2D) (view().vPart(row, column, height, width));
   }
-  /**
+  /*
    * Constructs and returns a new <i>slice view</i> representing the columns of the given row. The
    * returned view is backed by this matrix, so changes in the returned view are reflected in this
    * matrix, and vice-versa. To obtain a slice view on subranges, construct a sub-ranging view
@@ -702,7 +701,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     int viewStride = this.columnStride;
     return like1D(viewSize, viewZero, viewStride);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i> along the row axis. What used to be row
    * <tt>0</tt> is now row <tt>rows()-1</tt>, ..., what used to be row <tt>rows()-1</tt> is now row
    * <tt>0</tt>. The returned view is backed by this matrix, so changes in the returned view are
@@ -732,7 +731,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public ObjectMatrix2D viewRowFlip() {
     return (ObjectMatrix2D) (view().vRowFlip());
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding the indicated
    * cells. There holds <tt>view.rows() == rowIndexes.length, view.columns() ==
    * columnIndexes.length</tt> and <tt>view.get(i,j) ==
@@ -793,7 +792,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     }
     return viewSelectionLike(rowOffsets, columnOffsets);
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding all <b>rows</b>
    * matching the given condition. Applies the condition to each row and takes only those row where
    * <tt>condition.apply(viewRow(i))</tt> yields <tt>true</tt>. To match columns, use a dice view.
@@ -836,7 +835,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
     matches.trimToSize();
     return viewSelection(matches.elements(), null); // take all columns
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param rowOffsets the offsets of the visible elements.
@@ -844,7 +843,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
    * @return a new view.
    */
   protected abstract ObjectMatrix2D viewSelectionLike(int[] rowOffsets, int[] columnOffsets);
-  /**
+  /*
    * Sorts the matrix rows into ascending order, according to the <i>natural ordering</i> of the
    * matrix values in the given column. This sort is guaranteed to be <i>stable</i>. For further
    * information, see {@link cern.colt.matrix.objectalgo.Sorting#sort(ObjectMatrix2D,int)}. For more
@@ -856,7 +855,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public ObjectMatrix2D viewSorted(int column) {
     return cern.colt.matrix.objectalgo.Sorting.mergeSort.sort(this, column);
   }
-  /**
+  /*
    * Constructs and returns a new <i>stride view</i> which is a sub matrix consisting of every i-th
    * cell. More specifically, the view has <tt>this.rows()/rowStride</tt> rows and
    * <tt>this.columns()/columnStride</tt> columns holding cells
@@ -872,7 +871,7 @@ public abstract class ObjectMatrix2D extends AbstractMatrix2D {
   public ObjectMatrix2D viewStrides(int rowStride, int columnStride) {
     return (ObjectMatrix2D) (view().vStrides(rowStride, columnStride));
   }
-  /**
+  /*
    * Applies a procedure to each cell's value. Iterates downwards from
    * <tt>[rows()-1,columns()-1]</tt> to <tt>[0,0]</tt>, as demonstrated by this snippet:
    *

@@ -24,8 +24,8 @@ import java.util.Properties;
 import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 
-/**
- * The top-level Query.
+/*
+* The top-level Query.
  *
  * @see DatasetNode
  * @see IGroupNode
@@ -47,7 +47,7 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
     String NAMED_SUBQUERIES = "namedSubqueries";
   }
 
-  /**
+  /*
    * Deep copy constructor.
    *
    * @param queryRoot
@@ -67,7 +67,7 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
     super(queryType);
   }
 
-  /**
+  /*
    * This is a root node. It may not be attached as a child of another node.
    *
    * @throws UnsupportedOperationException
@@ -95,8 +95,8 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
     setProperty(Annotations.PREFIX_DECLS, prefixDecls);
   }
 
-  //    /**
-  //     * Return the optional query hints.
+  //    /*
+//     * Return the optional query hints.
   //     *
   //     * @see QueryHints
   //     */
@@ -106,8 +106,8 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
   //
   //    }
   //
-  //    /**
-  //     * Set the query hints.
+  //    /*
+//     * Set the query hints.
   //     *
   //     * @param queryHints
   //     *            The query hints (may be <code>null</code>).
@@ -132,7 +132,7 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
     return (DatasetNode) getProperty(Annotations.DATASET);
   }
 
-  /**
+  /*
    * Return the node for the named subqueries -or- <code>null</code> if it does not exist.
    *
    * @see #getNamedSubqueriesNotNull()
@@ -142,7 +142,7 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
     return (NamedSubqueriesNode) getProperty(Annotations.NAMED_SUBQUERIES);
   }
 
-  /**
+  /*
    * Return the node for the named subqueries. If the node does not exist then it is created, set on
    * the {@link QueryRoot} and returned. This helps out with what is otherwise an awkward
    * conditional construction pattern.
@@ -161,7 +161,7 @@ public class QueryRoot extends QueryBase implements IPrefixDecls, IDataSetNode {
     return tmp;
   }
 
-  /**
+  /*
    * Set or clear the named subqueries node.
    *
    * @param namedSubqueries The named subqueries not (may be <code>null</code>).

@@ -71,8 +71,8 @@ import org.embergraph.service.Split;
 import org.embergraph.service.ndx.IClientIndex;
 import org.embergraph.service.ndx.NopAggregator;
 
-/**
- * Abstract base class supports compact serialization and compression for remote {@link
+/*
+* Abstract base class supports compact serialization and compression for remote {@link
  * IKeyArrayIndexProcedure} execution (procedures may be executed on a local index, but they are
  * only (de-)serialized when executed on a remote index).
  *
@@ -99,7 +99,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
    * has a lot on write).
    */
 
-  /**
+  /*
    * The index procedure will be read by at most this many reader tasks. Parallelizing this index
    * reads let's us speed up the overall operation significantly. Set to ZERO (0) to always run in
    * the caller's thread (this is the historical behavior).
@@ -108,7 +108,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
       Integer.parseInt(
           System.getProperty(AbstractKeyArrayIndexProcedure.class.getName() + ".maxReaders", "0"));
 
-  /**
+  /*
    * How many keys to skip over in the reader threads.
    *
    * <p>Note: This also sets the minimum number of keys in a batch that we hand off to the writer.
@@ -117,7 +117,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
       Integer.parseInt(
           System.getProperty(AbstractKeyArrayIndexProcedure.class.getName() + ".skipCount", "256"));
 
-  /**
+  /*
    * This is multiplied by the branching factor of the index (when ZERO, the branching factor is
    * multiplied by itself) to determine how many tuples must lie between the first key to enter a
    * batch and the last key that may enter a batch before a reader evicts a batch to the queue.
@@ -128,9 +128,9 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
   private static final transient int spannedRangeMultiplier =
       Integer.parseInt(
           System.getProperty(
-              AbstractKeyArrayIndexProcedure.class.getName() + ".spannedRangeMultiplier", "10"));;
+              AbstractKeyArrayIndexProcedure.class.getName() + ".spannedRangeMultiplier", "10"));
 
-  /**
+  /*
    * The size of a sub-key-range that will be handed off by a reader to a queue. A writer will drain
    * these key ranges and apply the index procedure to each sub-key-range in turn. This separation
    * makes it possible to ensure that pages on in memory and that the writer only does work on pages
@@ -148,7 +148,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
           System.getProperty(
               AbstractKeyArrayIndexProcedure.class.getName() + ".batchSize", "10240"));
 
-  /**
+  /*
    * The maximum depth of the queue -or- ZERO (0) to use <code>maxReaders * 2</code> (note that this
    * is based on maxReaders, not the actual number of readers). This should be at least equal to the
    * #of readers and could be a small multiple of that number.
@@ -156,11 +156,11 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
   private static final transient int queueCapacity =
       Integer.parseInt(
           System.getProperty(
-              AbstractKeyArrayIndexProcedure.class.getName() + ".queueCapacity", "0"));;
+              AbstractKeyArrayIndexProcedure.class.getName() + ".queueCapacity", "0"));
 
   private static class Stats {
 
-    /**
+    /*
      * The #of reader batches that were assigned for the parallel execution of the index procedure.
      */
     private final AtomicLong readerBatchCount = new AtomicLong();
@@ -205,7 +205,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     return vals;
   }
 
-  /**
+  /*
    * Return an {@link IResultHandler} that will be used to combine the results if the index
    * procedure is parallelized against a local index (including a scale-out shard). If a <code>null
    * </code> is returned, then the index procedure WILL NOT be parallelized against the local index.
@@ -225,7 +225,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
   /** De-serialization constructor. */
   protected AbstractKeyArrayIndexProcedure() {}
 
-  /**
+  /*
    * @param keysCoder The object used to serialize the <i>keys</i>.
    * @param valsCoder The object used to serialize the <i>vals</i> (optional IFF <i>vals</i> is
    *     <code>null</code>).
@@ -274,7 +274,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     this.vals = (vals == null ? null : new ReadOnlyValuesRaba(fromIndex, toIndex, vals));
   }
 
-  /**
+  /*
    * Applies the logic of the procedure.
    *
    * <p>Note: For invocations where the {@link IRaba#size()} of the {@link #getKeys() keys} is
@@ -410,8 +410,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
 
       if (isReadOnly()) {
 
-        /*
-         * Simpler code path for parallelizing read-only operations. We
+      /*
+       * Simpler code path for parallelizing read-only operations. We
          * just split up the keys among N readers. All work is done by a
          * ReadOnlyTask for its own key-range and the results are
          * aggregated. No locking is required since no mutation is
@@ -436,7 +436,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
   }
 
-  /**
+  /*
    * Read-only version with concurrent readers.
    *
    * @param ndx
@@ -475,8 +475,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
       while (!done) {
         toIndex = fromIndex + readerSize;
         if (toIndex > keysSize) {
-          /*
-           * This will be the last reader.
+        /*
+       * This will be the last reader.
            *
            * Note: toIndex is an exclusive upper bound. Allowable
            * values are in 0:rangeCount-1. Setting toIndex to nstmts
@@ -532,7 +532,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     return resultHandler.getResult();
   }
 
-  /**
+  /*
    * Task for a read-only index procedure. No locking is required. Each task just handles its
    * sub-key-range of the original keys raba.
    *
@@ -545,7 +545,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     private final IResultHandler<T, T> resultHandler;
     private final Stats stats;
 
-    /**
+    /*
      * @param view The index against which the procedure will be applied.
      * @param resultHandler Used to combine the intermediate results from the application of the
      *     index procedure to each {@link Batch}.
@@ -588,7 +588,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
   }
 
-  /**
+  /*
    * MROW version (multiple readers, one writer).
    *
    * @param ndx A local index (any of {@link UnisolatedReadWriteIndex}, {@link BTree}, or {@link
@@ -613,7 +613,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
      * SPO) before building the indices.
      */
 
-    /**
+    /*
      * Note: When this method is invoked for an {@link UnisolatedReadWriteIndex} , that class method
      * hands off the inner {@link BTree} object. Since the invoking thread at the top-level owns the
      * read or write lock for the {@link UnisolatedReadWriteIndex} (depending on whether the
@@ -630,8 +630,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     final int effectiveQueueCapacity;
     {
       if (queueCapacity <= 0) {
-        /*
-         * Note: This is MAX readers, not the actual number of readers.
+      /*
+       * Note: This is MAX readers, not the actual number of readers.
          * We need to create the queue before we create the readers.
          */
         effectiveQueueCapacity = maxReaders * 2;
@@ -668,8 +668,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
       while (!done) {
         toIndex = fromIndex + readerSize;
         if (toIndex > keysSize) {
-          /*
-           * This will be the last reader.
+        /*
+       * This will be the last reader.
            *
            * Note: toIndex is an exclusive upper bound. Allowable
            * values are in 0:rangeCount-1. Setting toIndex to nstmts
@@ -758,20 +758,20 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
   }
 
-  /**
+  /*
    * A key-range of the caller's keys (and optionally values) to be operated on.
    *
    * @author bryan
    */
   private static class Batch extends Split {
 
-    /**
+    /*
      * The original keys and values. Code using a {@link Batch} MUST respect the {@link
      * Split#fromIndex} when indexing into these data.
      */
     private final IRaba keys, vals;
 
-    /**
+    /*
      * @param fromIndex The inclusive lower bound index into the original {@link IRaba}s (offset).
      * @param toIndex The exclusive upper bound index into the original {@link IRaba}s.
      * @param keys The original {@link IRaba} for the keys.
@@ -795,7 +795,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     private static final Batch POISON_PILL = new Batch();
   }
 
-  /**
+  /*
    * Task applies the index procedure to a specific key range.
    *
    * @author bryan
@@ -808,7 +808,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     private final IResultHandler<T, T> resultHandler;
     private final Stats stats;
 
-    /**
+    /*
      * @param lock Lock used to allow concurrent readers on the index or a single thread that
      *     applies mutation to the index.
      * @param queue Queue used to hand off work to the writer.
@@ -860,8 +860,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
         if (batch == Batch.POISON_PILL) break;
         if (batch.ntuples == 0) throw new AssertionError("Empty batch");
 
-        /*
-         * Setup sub-range for keys and values and invoke the index
+      /*
+       * Setup sub-range for keys and values and invoke the index
          * procedure on that sub-range.
          */
 
@@ -872,8 +872,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
                 ? null
                 : new SubRangeRaba(batch.vals, batch.fromIndex, batch.toIndex);
 
-        /*
-         * Acquire write lock to avoid concurrent mutation errors in the
+      /*
+       * Acquire write lock to avoid concurrent mutation errors in the
          * B+Tree.
          */
         final T aResult;
@@ -900,7 +900,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
   }
 
-  /**
+  /*
    * Read a key-range of the SPO index into a sequence of {s,p,o} tuple {@link Batch}es and drop
    * each one in turn onto the caller's queue.
    *
@@ -915,7 +915,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     private final IIndex view;
     private final Batch batch;
 
-    /**
+    /*
      * @param lock Lock used to allow concurrent readers on the index or a single thread that
      *     applies mutation to the index.
      * @param queue Queue used to hand off work to the writer.
@@ -977,7 +977,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
       return null;
     }
 
-    /**
+    /*
      * This is the complex case. The index is not a single B+Tree, but some sort of fused ordered
      * view of 2 or more B+Tree objects. For this case we do not have access to the {@link
      * ILinearList} API.
@@ -1037,7 +1037,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
       throw new UnsupportedOperationException();
     }
 
-    /**
+    /*
      * This is the simple case. We have either an {@link UnisolatedReadWriteIndex} or an {@link
      * AbstractBTree}.
      *
@@ -1090,8 +1090,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
 
         final byte[] currentKey = batch.keys.get(currentRabaIndex);
 
-        /*
-         * Advance index to the next caller's key.
+      /*
+       * Advance index to the next caller's key.
          *
          * Note: the return is an insert position. It will be negative
          * if the key is not found in the index. If it is negative it is
@@ -1102,8 +1102,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
         lock.readLock().lock();
         try {
           if (writerFuture.isDone()) {
-            /*
-             * If the writer hits an error condition, then the index
+          /*
+       * If the writer hits an error condition, then the index
              * can be left is an inconsistent state. At this point
              * we MUST NOT read on the index.
              */
@@ -1126,8 +1126,8 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
           firstIndex = indexOf;
         }
 
-        /*
-         * The #of tuples that lie between the first key accepted and
+      /*
+       * The #of tuples that lie between the first key accepted and
          * the current key (or the insert position for the current key).
          */
         final long spannedRange = indexOf - firstIndex;
@@ -1151,7 +1151,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
       }
     }
 
-    /**
+    /*
      * Evict a batch (blocking put, but spins to look for an error in the writer {@link Future}).
      *
      * @param batch A batch.
@@ -1163,7 +1163,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
   } // ReaderTask
 
-  /**
+  /*
    * Evict a batch (blocking put, but spins to look for an error in the <i>writerFuture</i> to avoid
    * a deadlock if the writer fails).
    *
@@ -1193,7 +1193,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
   }
 
-  /**
+  /*
    * Apply the procedure to the specified key range of the index.
    *
    * @param ndx The index.
@@ -1290,7 +1290,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     }
   }
 
-  /**
+  /*
    * Reads metadata written by {@link #writeMetadata(ObjectOutput)}.
    *
    * @param in
@@ -1317,7 +1317,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     valsCoder = (IRabaCoder) in.readObject();
   }
 
-  /**
+  /*
    * Writes metadata (not the keys or values, but just other metadata used by the procedure).
    *
    * <p>The default implementation writes out the {@link #getKeysCoder()} and the {@link
@@ -1341,7 +1341,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
 
   private static final byte VERSION0 = 0x00;
 
-  /**
+  /*
    * A class useful for sending some kinds of data back from a remote procedure call (those readily
    * expressed as a <code>byte[][]</code>).
    *
@@ -1359,7 +1359,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     /** De-serialization ctor. */
     public ResultBuffer() {}
 
-    /**
+    /*
      * @param n #of values in <i>a</i> containing data.
      * @param a The data.
      * @param valSer The data are serialized using using this object. Typically this is the value
@@ -1453,7 +1453,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     private static final byte VERSION0 = 0x00;
   }
 
-  /**
+  /*
    * A class useful for sending a logical <code>boolean[]</code> back from a remote procedure call.
    *
    * @todo provide run-length coding for bits?
@@ -1467,7 +1467,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
 
     private int n;
 
-    /**
+    /*
      * @todo represent using a {@link BitVector}. {@link LongArrayBitVector} when allocating.
      *     Directly write the long[] backing bits (getBits()) onto the output stream. Reconstruct
      *     from backing long[] when reading. Hide the boolean[] from the API by modifying {@link
@@ -1482,7 +1482,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     /** De-serialization ctor. */
     public ResultBitBuffer() {}
 
-    /**
+    /*
      * @param n #of values in <i>a</i> containing data.
      * @param a The data.
      * @param onCount The #of bits which were on in the array.
@@ -1549,7 +1549,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
 
       for (int i = 0; i < n; i++) {
 
-        final boolean bit = ibs.readBit() == 1 ? true : false;
+        final boolean bit = ibs.readBit() == 1;
         //                a.set(i, bit);
 
         if (a[i] = bit) onCount++;
@@ -1584,7 +1584,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
     private static final transient byte VERSION = VERSION0;
   }
 
-  /**
+  /*
    * Knows how to aggregate {@link ResultBuffer} objects.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1626,7 +1626,7 @@ public abstract class AbstractKeyArrayIndexProcedure<T> extends AbstractIndexPro
 
     private final boolean[] results;
 
-    /**
+    /*
      * I added this so I could encode information about tuple modification that takes more than one
      * boolean to encode. For example, SPOs can be: INSERTED, REMOVED, UPDATED, NO_OP (2 bits).
      */

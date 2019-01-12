@@ -37,7 +37,7 @@ public class IPv4Address implements Serializable, Comparable<IPv4Address> {
     this.address = ip.getBytes();
   }
 
-  /**
+  /*
    * Returns the byte array representation of the address
    *
    * @return
@@ -67,7 +67,7 @@ public class IPv4Address implements Serializable, Comparable<IPv4Address> {
     return byteArrayToIPString(address);
   }
 
-  /**
+  /*
    * Converts the byte array to an IP string with option CIDR representation
    *
    * @param addr

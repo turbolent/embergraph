@@ -15,8 +15,8 @@ import org.embergraph.counters.Instrument;
 import org.embergraph.service.AbstractFederation;
 import org.embergraph.util.concurrent.MovingAverageTask;
 
-/**
- * Statistics for the consumer, including several moving averages based on sampled data.
+/*
+* Statistics for the consumer, including several moving averages based on sampled data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -30,19 +30,19 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
   /** The #of duplicates which were filtered out. */
   public final AtomicLong duplicateCount = new AtomicLong();
 
-  /**
+  /*
    * The #of chunks that have passed through {@link
    * IndexWriteTask#handleChunk(org.embergraph.btree.keys.KVO[], boolean)} .
    */
   public final AtomicLong handledChunkCount = new AtomicLong();
 
-  /**
+  /*
    * Elapsed nanoseconds in {@link IndexWriteTask#handleChunk(org.embergraph.btree.keys.KVO[],
    * boolean)} required to split a chunk drained from the master.
    */
   public long elapsedSplitChunkNanos = 0L;
 
-  /**
+  /*
    * Elapsed nanoseconds in {@link IndexWriteTask#handleChunk(org.embergraph.btree.keys.KVO[],
    * boolean)} .
    */
@@ -64,7 +64,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
         statisticsTask, 1000 /* initialDelay */, 1000 /* delay */, TimeUnit.MILLISECONDS);
   }
 
-  /**
+  /*
    * Return the {@link StatisticsTask} that will sample various counters of interest and convert
    * them into moving averages. This be overridden to extend the sampled counters. However, you MUST
    * also override {@link #getCounterSet()} to report any additional data.
@@ -74,7 +74,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     return new StatisticsTask();
   }
 
-  /**
+  /*
    * Task samples various counters of interest and convert them into moving averages.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -84,7 +84,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
 
     protected final transient Logger log = Logger.getLogger(StatisticsTask.class);
 
-    /**
+    /*
      * The moving average of the #of elements on the master queues. This does not count the #of
      * elements which have been drained from a master queue and are being transferred to a sink
      * queue.
@@ -105,7 +105,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the nanoseconds the master spends handling a chunk which it has drained
      * from its input queue.
      */
@@ -119,7 +119,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the nanoseconds the master spends splitting a chunk which it has
      * drained from its input queue.
      */
@@ -133,7 +133,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the nanoseconds the master spends offering a chunk for transfer to a
      * sink.
      */
@@ -147,7 +147,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the chunks size when chunks drained from the master queue are split and
      * the splits transferred to the appropriate output sink(s).
      */
@@ -161,7 +161,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of nanoseconds waiting for a chunk to become ready so that it can be
      * written on an index partition.
      */
@@ -175,7 +175,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the maximum #of nanoseconds a sink waits for a chunk to become ready so
      * that it can be written onto an index partition. If there are no index partitions for some
      * index (that is, if the asynchronous write API is not in use for that index) then this will
@@ -214,7 +214,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of nanoseconds per write for chunks written on an index partition by an
      * output sink.
      */
@@ -228,7 +228,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the maximum #of nanoseconds per write for chunks written on an index
      * partition by an output sink. If there are no index partitions for some index (that is, if the
      * asynchronous write API is not in use for that index) then this will report ZERO (0).
@@ -277,7 +277,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the #of chunks on the master's input queue for all masters for this
      * index.
      */
@@ -297,7 +297,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the #of chunks on the master's redirect queue for all masters for this
      * index.
      */
@@ -317,7 +317,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the #of chunks on the input queue for each sink for all masters for
      * this index. If there are no index partitions for some index (that is, if the asynchronous
      * write API is not in use for that index) then this will report ZERO (0.0).
@@ -363,7 +363,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The standard deviation of the moving average of the #of chunks on the input queue for each
      * sink for all masters for this index. If there are no index partitions for some index (that
      * is, if the asynchronous write API is not in use for that index) then this will report ZERO
@@ -411,8 +411,8 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                   return 0d;
                 }
                 final double mean = n.get() / (double) m.get(); // partitionCount;
-                /*
-                 * To calculate the standard deviation, we compute the
+              /*
+       * To calculate the standard deviation, we compute the
                  * difference of each data point from the mean, and
                  * square the result.  We keep the running sum of those
                  * squares to compute the average, below.
@@ -422,8 +422,8 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                   final double delta = (mean - queueSize.doubleValue());
                   sse += delta * delta;
                 }
-                /*
-                 * Next we average these values and take the square
+              /*
+       * Next we average these values and take the square
                  * root, which gives the standard deviation.
                  */
                 final double stdev = Math.sqrt(sse / m.get());
@@ -431,7 +431,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the maximum #of chunks on the input queue for each sink for all masters
      * for this index. If there are no index partitions for some index (that is, if the asynchronous
      * write API is not in use for that index) then this will report ZERO (0).
@@ -470,7 +470,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
               }
             });
 
-    /**
+    /*
      * The moving average of the #of elements on the sink queues. This does not count the #of
      * elements on the master queues nor does it count the #of elements which have been drained from
      * a sink queue and are either being prepared for or awaiting completion of a write on an index
@@ -513,7 +513,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
   protected static final double scalingFactor =
       1d / TimeUnit.NANOSECONDS.convert(1, TimeUnit.MILLISECONDS);
 
-  /**
+  /*
    * Return a {@link CounterSet} which may be used to report the statistics on the index write
    * operation. The {@link CounterSet} is NOT placed into any namespace.
    */
@@ -862,8 +862,8 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
                 break;
               }
             }
-            /*
-             * Now format the performance counter message.
+          /*
+       * Now format the performance counter message.
              */
             int n = 0;
             final StringBuilder sb = new StringBuilder();
@@ -879,7 +879,7 @@ public class AbstractRunnableMasterStats<L, HS extends AbstractSubtaskStats>
     return t;
   }
 
-  /**
+  /*
    * Places the sinks into descending order by queue length.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

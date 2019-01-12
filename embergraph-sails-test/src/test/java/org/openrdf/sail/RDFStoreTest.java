@@ -58,8 +58,8 @@ import org.openrdf.query.impl.MapBindingSet;
 import org.openrdf.query.parser.ParsedTupleQuery;
 import org.openrdf.query.parser.QueryParserUtil;
 
-/**
- * A JUnit test for testing Sail implementations that store RDF data. This is purely a test for data
+/*
+* A JUnit test for testing Sail implementations that store RDF data. This is purely a test for data
  * storage and retrieval which assumes that no inferencing or whatsoever is performed. This is an
  * abstract class that should be extended for specific Sail implementations.
  */
@@ -130,7 +130,7 @@ public abstract class RDFStoreTest extends TestCase {
    * Methods *
    *---------*/
 
-  /**
+  /*
    * Gets an instance of the Sail that should be tested. The returned repository should already have
    * been initialized.
    *
@@ -1022,11 +1022,11 @@ public abstract class RDFStoreTest extends TestCase {
     return null;
   }
 
-  protected int countContext1Elements() throws Exception, SailException {
+  protected int countContext1Elements() throws Exception {
     return countElements(con.getStatements(null, null, null, false, context1));
   }
 
-  protected int countAllElements() throws Exception, SailException {
+  protected int countAllElements() throws Exception {
     return countElements(con.getStatements(null, null, null, false));
   }
 

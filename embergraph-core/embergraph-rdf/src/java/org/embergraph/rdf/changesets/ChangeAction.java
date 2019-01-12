@@ -2,14 +2,14 @@ package org.embergraph.rdf.changesets;
 
 import org.embergraph.rdf.model.StatementEnum;
 
-/**
- * Attempting to add or remove statements can have a number of different effects. This enum captures
+/*
+* Attempting to add or remove statements can have a number of different effects. This enum captures
  * the different actions that can take place as a result of trying to add or remove a statement from
  * the database.
  */
 public enum ChangeAction {
 
-  /**
+  /*
    * The focus statement was not in the database before and will be in the database after the
    * commit. This can be the result of either explicit addStatement() operations on the SAIL
    * connection, or from new inferences being generated via truth maintenance when the database has
@@ -19,7 +19,7 @@ public enum ChangeAction {
    */
   INSERTED,
 
-  /**
+  /*
    * The focus statement was in the database before and will not be in the database after the
    * commit. When the database has inference and truth maintenance enabled, the statement that is
    * the focus of this change record was either an explicit statement that was the subject of a
@@ -33,7 +33,7 @@ public enum ChangeAction {
    */
   REMOVED,
 
-  /**
+  /*
    * This change action can only occur when inference and truth maintenance are enabled on the
    * database. Sometimes an attempt at statement addition or removal via an addStatement() or
    * removeStatements() operation on the connection will result in a type change rather than an
@@ -54,8 +54,8 @@ public enum ChangeAction {
    */
   UPDATED,
 
-  //        /**
-  //         * This change action can occur for one of two reasons:
+  //        /*
+//         * This change action can occur for one of two reasons:
   //         * <p>
   //         * <ul>
   //         * <li> A statement is asserted, but already exists in the database as

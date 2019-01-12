@@ -15,7 +15,7 @@ public abstract class ASTOperation extends SimpleNode {
     super(id);
   }
 
-  /**
+  /*
    * @param p
    * @param id
    */

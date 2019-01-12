@@ -25,8 +25,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IBindingSet;
 import org.embergraph.rdf.error.SparqlTypeErrorException;
 
-/**
- * This class implements 'AS' in a projection as found in both subselects and bind, e.g.
+/*
+* This class implements 'AS' in a projection as found in both subselects and bind, e.g.
  *
  * <pre>
  *    { SUBSELECT (Foo(?x) AS ?y) ...

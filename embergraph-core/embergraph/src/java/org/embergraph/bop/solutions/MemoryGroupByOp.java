@@ -52,8 +52,8 @@ import org.embergraph.rdf.sparql.ast.FilterNode;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.util.InnerCause;
 
-/**
- * An in-memory at-once generalized aggregation operator.
+/*
+* An in-memory at-once generalized aggregation operator.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: DistinctElementFilter.java 3466 2010-08-27 14:28:04Z thompsonbry $
@@ -67,7 +67,7 @@ public class MemoryGroupByOp extends GroupByOp {
 
   public interface Annotations extends GroupByOp.Annotations, HashMapAnnotations {}
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns <code>false</code>. This is a generalized aggregation operator and may be used to
@@ -128,7 +128,7 @@ public class MemoryGroupByOp extends GroupByOp {
     /** The hash code for {@link #vals}. */
     private final int hash;
 
-    /**
+    /*
      * The computed values for the groupBy value expressions in the order in which they were
      * declared.
      */
@@ -139,7 +139,7 @@ public class MemoryGroupByOp extends GroupByOp {
       return super.toString() + "{group=" + Arrays.toString(vals) + "}";
     }
 
-    /**
+    /*
      * Return a new {@link SolutionGroup} given the value expressions and the binding set.
      *
      * @param groupBy The value expressions to be computed.
@@ -158,8 +158,8 @@ public class MemoryGroupByOp extends GroupByOp {
         Object exprValue;
 
         try {
-          /*
-           * Note: This has a side-effect on the solution, which means
+        /*
+       * Note: This has a side-effect on the solution, which means
            * that it needs to be mutable and we have to store the
            * modified solution. However, it might be nicer to NOT have
            * a side effect on the incoming solution. That means that
@@ -233,7 +233,7 @@ public class MemoryGroupByOp extends GroupByOp {
 
     private final BOpContext<IBindingSet> context;
 
-    /**
+    /*
      * A map whose keys are the computed bindings on the GROUP_BY expressions and whose values are
      * the solution multisets which fall into a given group.
      */
@@ -267,7 +267,7 @@ public class MemoryGroupByOp extends GroupByOp {
                   op.getInitialCapacity(), op.getLoadFactor());
     }
 
-    /**
+    /*
      * Add the solution to the multiset for the appropriate group. If we can not compute the
      * GROUP_BY value expressions for a solution, then the solution is dropped.
      *
@@ -310,8 +310,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
         if (groupBy == null) {
 
-          /*
-           * Combine all solutions into a single multiset.
+        /*
+       * Combine all solutions into a single multiset.
            */
           final SolutionMultiSet m = new SolutionMultiSet();
 
@@ -346,8 +346,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
         } else {
 
-          /*
-           * Group the solutions.
+        /*
+       * Group the solutions.
            */
 
           while (itr.hasNext()) {
@@ -389,8 +389,8 @@ public class MemoryGroupByOp extends GroupByOp {
           map.clear();
         }
 
-        /*
-         * Output the aggregated bindings for the accepted solutions.
+      /*
+       * Output the aggregated bindings for the accepted solutions.
          */
         if (naccepted > 0) {
 
@@ -411,14 +411,14 @@ public class MemoryGroupByOp extends GroupByOp {
       }
     } // call()
 
-    /**
+    /*
      * Compute the aggregate solution for a solution multiset (aka a group).
      *
      * @return The aggregate solution -or- <code>null</code> if the solution for the group was
      *     dropped (type error or violated HAVING constraint).
      */
     private IBindingSet aggregate(final Iterable<IBindingSet> solutions) {
-      /**
+      /*
        * The intermediate solution with all bindings produced when evaluating this solution group.
        * Evaluation begins by binding any bare variables or BINDs in the GROUP_BY clause, followed
        * by evaluating all aggregates, and then finally evaluating the (rewritten) SELECT
@@ -438,8 +438,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
           if (expr instanceof IVariable<?>) {
 
-            /**
-             * Propagate bare variable used in GROUP_BY clause to [aggregates].
+          /*
+       * Propagate bare variable used in GROUP_BY clause to [aggregates].
              *
              * <pre>
              * GROUP BY ?x
@@ -457,15 +457,14 @@ public class MemoryGroupByOp extends GroupByOp {
             } else {
               val = new Constant(varValue.getClass().cast(varValue));
             }
-            ;
 
             // Bind on [aggregates].
             aggregates.set(var, val);
 
           } else if (expr instanceof IBind<?>) {
 
-            /**
-             * Propagate BIND declared by GROUP_BY clause to [aggregates].
+          /*
+       * Propagate BIND declared by GROUP_BY clause to [aggregates].
              *
              * <pre>
              * GROUP BY (2*?y as ?x)
@@ -496,7 +495,7 @@ public class MemoryGroupByOp extends GroupByOp {
         } // next GROUP_BY value expression
       } // if(groupBy != null)
 
-      /**
+      /*
        * Compute the aggregates.
        *
        * <p>TODO This can be further optimized by computing the column projections of the different
@@ -535,8 +534,8 @@ public class MemoryGroupByOp extends GroupByOp {
           TypeErrorLog.handleTypeError(ex, expr, stats);
           continue;
         } catch (IllegalArgumentException ex) {
-          /*
-           * Note: This is a hack turning an IllegalArgumentException
+        /*
+       * Note: This is a hack turning an IllegalArgumentException
            * which we presume is coming out of new Constant(null) into
            * an (implicit) SPARQL type error so we can drop the
            * binding for this SELECT expression. (Note that we are not
@@ -557,12 +556,8 @@ public class MemoryGroupByOp extends GroupByOp {
       {
         final boolean drop;
         final IConstraint[] having2 = rewrite.getHaving2();
-        if (having2 != null && !BOpUtility.isConsistent(having2, aggregates)) {
-          // drop this solution.
-          drop = true;
-        } else {
-          drop = false;
-        }
+        // drop this solution.
+        drop = having2 != null && !BOpUtility.isConsistent(having2, aggregates);
 
         if (log.isInfoEnabled()) log.info((drop ? "drop" : "keep") + " : " + aggregates);
 
@@ -595,7 +590,7 @@ public class MemoryGroupByOp extends GroupByOp {
     }
   } // GroupByTask
 
-  /**
+  /*
    * Apply the value expression to each solution in the group.
    *
    * @param expr The {@link IAggregate} to be evaluated.
@@ -622,8 +617,8 @@ public class MemoryGroupByOp extends GroupByOp {
       IConstant<?> c = null;
 
       if (expr.isWildcard() && expr.isDistinct()) {
-        /**
-         * For a wildcard we basically need to operate on solution multisets. For example, COUNT(*)
+      /*
+       * For a wildcard we basically need to operate on solution multisets. For example, COUNT(*)
          * is the size of the solution multiset (aka group).
          *
          * <p>Note: It is possible to optimize COUNT(*) and COUNT(DISTINCT *) as the cardinality of
@@ -656,8 +651,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
       } else if (expr.isDistinct()) {
 
-        /*
-         * Apply aggregate function only to the distinct values which
+      /*
+       * Apply aggregate function only to the distinct values which
          * it's inner value expression takes on.
          */
 
@@ -668,7 +663,7 @@ public class MemoryGroupByOp extends GroupByOp {
 
         for (IBindingSet bset : solutions) {
 
-          final Object constants[] = new Object[expr.arity()];
+          final Object[] constants = new Object[expr.arity()];
 
           for (int i = 0; i < expr.arity(); i++) {
 
@@ -693,8 +688,8 @@ public class MemoryGroupByOp extends GroupByOp {
 
       } else {
 
-        /*
-         * Apply aggregate function to all solutions in the multiset.
+      /*
+       * Apply aggregate function to all solutions in the multiset.
          */
 
         expr.reset();
@@ -733,7 +728,7 @@ public class MemoryGroupByOp extends GroupByOp {
     }
   }
 
-  /**
+  /*
    * Propagate the bound values for any aggregates to the incoming solution in order to make those
    * bindings available when there is a dependency among the aggregate expressions.
    *
@@ -754,7 +749,7 @@ public class MemoryGroupByOp extends GroupByOp {
       bset.set(e.getKey(), e.getValue());
     }
   }
-  /**
+  /*
    * Wrapper used for as bound solutions in the {@link HTree}.
    *
    * <p>Note: A similar class appears in different operators which use the {@link HTree}. However,
@@ -775,7 +770,7 @@ public class MemoryGroupByOp extends GroupByOp {
 
     private final Object[] vals;
 
-    /**
+    /*
      * Solution whose hash code is the hash code of the {@link IConstant}[].
      *
      * @param vals The values.

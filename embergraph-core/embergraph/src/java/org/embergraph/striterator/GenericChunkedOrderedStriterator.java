@@ -25,8 +25,8 @@ package org.embergraph.striterator;
 
 import java.util.Iterator;
 
-/**
- * Chunked ordered streaming iterator class that supresses generic types. Striterator patterns are
+/*
+* Chunked ordered streaming iterator class that supresses generic types. Striterator patterns are
  * often used to convert the type of the elements visited by the underlying iterator. That and the
  * covarying generics combine to make code using generics and striterators rather ugly.
  *
@@ -43,7 +43,7 @@ public class GenericChunkedOrderedStriterator<E>
     super(src);
   }
 
-  /**
+  /*
    * @param chunkSize
    * @param src
    */

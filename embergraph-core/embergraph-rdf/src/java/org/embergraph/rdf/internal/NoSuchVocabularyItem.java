@@ -24,8 +24,8 @@ package org.embergraph.rdf.internal;
 import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 
-/**
- * An exception thrown when a request is made for a {@link URI} which was not declared in the {@link
+/*
+* An exception thrown when a request is made for a {@link URI} which was not declared in the {@link
  * Vocabulary}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -28,8 +28,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import org.embergraph.journal.Name2Addr;
 
-/**
- * Persistent record in which we store the version metadata for the ICU dependency in use when the
+/*
+* Persistent record in which we store the version metadata for the ICU dependency in use when the
  * journal was created. embergraph uses Unicode sort keys for various indices, including {@link
  * Name2Addr}. A change in the ICU version can result in sort keys which are NOT compatible. Binary
  * compatibility for Unicode sort keys is an absolute requirement for embergraph. The purpose of
@@ -54,7 +54,7 @@ public class ICUVersionRecord implements Externalizable {
   private VersionInfo ucolBuilderVersion;
   private VersionInfo ucolTailoringsVersion;
 
-  /**
+  /*
    * The ICU software version number.
    *
    * @see VersionInfo#ICU_VERSION
@@ -63,7 +63,7 @@ public class ICUVersionRecord implements Externalizable {
     return icuVersion;
   }
 
-  /**
+  /*
    * If this version number changes, then the sort keys for the same Unicode string could be
    * different.
    *
@@ -73,7 +73,7 @@ public class ICUVersionRecord implements Externalizable {
     return ucolRuntimeVersion;
   }
 
-  /**
+  /*
    * If this version number changes, then the same tailoring might result in assigning different
    * collation elements to code points (which could break binary compatibility on sort keys).
    *
@@ -83,7 +83,7 @@ public class ICUVersionRecord implements Externalizable {
     return ucolBuilderVersion;
   }
 
-  /**
+  /*
    * The version of the collation tailorings.
    *
    * @see VersionInfo#UCOL_TAILORINGS_VERSION
@@ -92,7 +92,7 @@ public class ICUVersionRecord implements Externalizable {
     return ucolTailoringsVersion;
   }
 
-  /**
+  /*
    * Factory returns a record reporting on the ICU dependency as currently linked with the code
    * base.
    */
@@ -197,11 +197,10 @@ public class ICUVersionRecord implements Externalizable {
     if (!icuVersion.equals(r.icuVersion)) return false;
     if (!ucolRuntimeVersion.equals(r.ucolRuntimeVersion)) return false;
     if (!ucolBuilderVersion.equals(r.ucolBuilderVersion)) return false;
-    if (!ucolTailoringsVersion.equals(r.ucolTailoringsVersion)) return false;
-    return true;
+    return ucolTailoringsVersion.equals(r.ucolTailoringsVersion);
   }
 
-  /**
+  /*
    * Writes out the {@link ICUVersionRecord} for the current classpath.
    *
    * @param args Ignored.

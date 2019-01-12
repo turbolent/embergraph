@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.jet.random.engine;
 
-/**
- * (Seemingly gigantic) table of good seeds for pseudo-random number generators.
+/*
+* (Seemingly gigantic) table of good seeds for pseudo-random number generators.
  *
  * <p><b>Implementation:</b>
  * <dt>This is a port of <tt>SeedTable.h</tt> used in <A
@@ -465,7 +465,7 @@ public class RandomSeedTable {
   protected RandomSeedTable() {
     throw new RuntimeException("Non instantiable");
   }
-  /**
+  /*
    * Returns a deterministic seed from a (seemingly gigantic) matrix of predefined seeds.
    *
    * @param row should (but need not) be in [0,Integer.MAX_VALUE].
@@ -489,7 +489,7 @@ public class RandomSeedTable {
 
     return seed;
   }
-  /**
+  /*
    * Not yet commented.
    *
    * @return int

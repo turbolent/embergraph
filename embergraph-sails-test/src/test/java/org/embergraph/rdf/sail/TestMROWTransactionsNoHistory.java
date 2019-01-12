@@ -22,8 +22,8 @@ package org.embergraph.rdf.sail;
 
 import java.util.Random;
 
-/**
- * TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
+/*
+* TestCase to test single writer/mutiple transaction committed readers with SAIL interface.
  *
  * @author Martyn Cutcher
  */
@@ -45,7 +45,7 @@ public class TestMROWTransactionsNoHistory extends TestMROWTransactions {
     super.tearDown();
   }
 
-  /**
+  /*
    * I do observe problems with the "no-history" version of this test. The RWStore has known issues
    * and a minimum retention time of zero is not supported at this time.
    *

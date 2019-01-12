@@ -20,8 +20,8 @@ import org.embergraph.rdf.sail.sparql.ast.SyntaxTreeBuilderTreeConstants;
 import org.embergraph.rdf.sail.sparql.ast.VisitorException;
 import org.openrdf.query.MalformedQueryException;
 
-/**
- * Processes blank nodes in the query body, replacing them with variables while retaining scope.
+/*
+* Processes blank nodes in the query body, replacing them with variables while retaining scope.
  *
  * @author Arjohn Kampman
  * @openrdf

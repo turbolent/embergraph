@@ -32,8 +32,8 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.util.InnerCause;
 
-/**
- * Atomic write on a logical row. All property values written will have the same timestamp. An
+/*
+* Atomic write on a logical row. All property values written will have the same timestamp. An
  * atomic read is performed as part of the procedure so that the caller may obtain a consistent view
  * of the post-update state of the logical row. The server-assigned timestamp written may be
  * obtained from the returned {@link ITPS} object.
@@ -62,7 +62,7 @@ public class AtomicRowWriteRead extends AbstractAtomicRowReadOrWrite {
   /** De-serialization ctor. */
   public AtomicRowWriteRead() {}
 
-  /**
+  /*
    * Constructor for an atomic write/read operation.
    *
    * @param schema The schema governing the property set.
@@ -103,7 +103,7 @@ public class AtomicRowWriteRead extends AbstractAtomicRowReadOrWrite {
     this.propertySet = propertySet;
   }
 
-  /**
+  /*
    * If a property set was specified then do an atomic write of the property set. Regardless, an
    * atomic read of the property set is then performed and the results of that atomic read are
    * returned to the caller.
@@ -239,7 +239,7 @@ public class AtomicRowWriteRead extends AbstractAtomicRowReadOrWrite {
     }
   }
 
-  /**
+  /*
    * Return the increment of the named property value. Note that auto-increment is only defined for
    * {@link ValueType#Integer} and {@link ValueType#Long}.
    *

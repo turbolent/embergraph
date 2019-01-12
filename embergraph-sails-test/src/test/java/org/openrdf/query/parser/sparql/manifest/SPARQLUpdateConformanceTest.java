@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
@@ -51,8 +52,8 @@ import org.openrdf.sail.memory.MemoryStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * A SPARQL 1.1 Update test, created by reading in a W3C working-group style manifest.
+/*
+* A SPARQL 1.1 Update test, created by reading in a W3C working-group style manifest.
  *
  * @author Jeen Broekstra
  */
@@ -288,7 +289,7 @@ public abstract class SPARQLUpdateConformanceTest extends TestCase {
   protected String readUpdateString() throws IOException {
     InputStream stream = new URL(requestFileURL).openStream();
     try {
-      return IOUtil.readString(new InputStreamReader(stream, "UTF-8"));
+      return IOUtil.readString(new InputStreamReader(stream, StandardCharsets.UTF_8));
     } finally {
       stream.close();
     }

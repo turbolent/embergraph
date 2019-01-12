@@ -33,8 +33,8 @@ import java.util.concurrent.TimeUnit;
 import org.embergraph.counters.ICounterSetAccess;
 import org.embergraph.service.IServiceShutdown;
 
-/**
- * Interface for managing concurrent access to resources (indices).
+/*
+* Interface for managing concurrent access to resources (indices).
  *
  * @see AbstractTask, Base class for tasks to be executed with concurrency control.
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -42,33 +42,33 @@ import org.embergraph.service.IServiceShutdown;
 public interface IConcurrencyManager extends IServiceShutdown, ICounterSetAccess {
 
   /** The client side of the transaction manager. */
-  public ILocalTransactionManager getTransactionManager();
+  ILocalTransactionManager getTransactionManager();
 
-  //    /**
-  //     * The server side of the transaction manager.
+  //    /*
+//     * The server side of the transaction manager.
   //     */
   //    public ITransactionManager getTransactionService();
 
   /** The object used to manage local resources. */
-  public IResourceManager getResourceManager();
+  IResourceManager getResourceManager();
 
-  /**
+  /*
    * Normal shutdown - running tasks will run to completion, but no new tasks will start.
    *
    * @see #shutdownNow()
    */
   @Override
-  public void shutdown();
+  void shutdown();
 
-  /**
+  /*
    * Immediate shutdown - running tasks are cancelled rather than being permitted to complete.
    *
    * @see #shutdown()
    */
   @Override
-  public void shutdownNow();
+  void shutdownNow();
 
-  /**
+  /*
    * Submit a task (asynchronous). Tasks will execute asynchronously in the appropriate thread pool
    * with as much concurrency as possible.
    *
@@ -113,9 +113,9 @@ public interface IConcurrencyManager extends IServiceShutdown, ICounterSetAccess
    *     queue has a limited capacity and is full)
    * @exception NullPointerException if task is <code>null</code>
    */
-  public <T> FutureTask<T> submit(AbstractTask<T> task);
+  <T> FutureTask<T> submit(AbstractTask<T> task);
 
-  /**
+  /*
    * Executes the given tasks, returning a list of Futures holding their status and results when all
    * complete. Note that a completed task could have terminated either normally or by throwing an
    * exception. The results of this method are undefined if the given collection is modified while
@@ -130,10 +130,10 @@ public interface IConcurrencyManager extends IServiceShutdown, ICounterSetAccess
    * @exception NullPointerException if tasks or any of its elements are null
    * @exception RejectedExecutionException if any task cannot be scheduled for execution
    */
-  public <T> List<Future<T>> invokeAll(Collection<? extends AbstractTask<T>> tasks)
+  <T> List<Future<T>> invokeAll(Collection<? extends AbstractTask<T>> tasks)
       throws InterruptedException;
 
-  /**
+  /*
    * Executes the given tasks, returning a list of Futures holding their status and results when all
    * complete or the timeout expires, whichever happens first. Note that a completed task could have
    * terminated either normally or by throwing an exception. The results of this method are
@@ -150,10 +150,10 @@ public interface IConcurrencyManager extends IServiceShutdown, ICounterSetAccess
    * @exception NullPointerException if tasks or any of its elements are null
    * @exception RejectedExecutionException if any task cannot be scheduled for execution
    */
-  public <T> List<Future<T>> invokeAll(
+  <T> List<Future<T>> invokeAll(
       Collection<? extends AbstractTask<T>> tasks, long timeout, TimeUnit unit)
       throws InterruptedException;
 
   /** The service on which read-write tasks are executed. */
-  public WriteExecutorService getWriteService();
+  WriteExecutorService getWriteService();
 }

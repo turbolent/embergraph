@@ -40,8 +40,8 @@ import org.embergraph.mdi.IndexPartitionCause;
 import org.embergraph.mdi.LocalPartitionMetadata;
 import org.embergraph.util.Bytes;
 
-/**
- * Basic tests for {@link ResourceManager#overflow(boolean, boolean)}
+/*
+* Basic tests for {@link ResourceManager#overflow(boolean, boolean)}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -58,8 +58,8 @@ public class TestOverflow extends AbstractResourceManagerTestCase {
     super(arg0);
   }
 
-  //    /**
-  //     * Forces the use of persistent journals so that we can do overflow
+  //    /*
+//     * Forces the use of persistent journals so that we can do overflow
   //     * operations and the like.
   //     */
   //    public Properties getProperties() {
@@ -74,7 +74,7 @@ public class TestOverflow extends AbstractResourceManagerTestCase {
   //
   //    }
 
-  /**
+  /*
    * A test for overflow of the {@link ResourceManager}. We begin with a blank slate, so the {@link
    * ResourceManager} creates an initial {@link Journal} for us and then puts it into play. The test
    * then registers an initial partition of scale-out index on that journal and some data is written

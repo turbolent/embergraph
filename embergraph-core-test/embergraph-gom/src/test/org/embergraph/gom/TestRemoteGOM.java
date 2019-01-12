@@ -62,8 +62,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * Similar to TestGOM but is setup to connect to the NanoSparqlServer using a RemoteRepository
+/*
+* Similar to TestGOM but is setup to connect to the NanoSparqlServer using a RemoteRepository
  *
  * @author Martyn Cutcher
  */
@@ -289,7 +289,7 @@ public class TestRemoteGOM extends TestCase {
     }
 
     // clear cached data
-    ((ObjectMgrModel) om).clearCache();
+    om.clearCache();
 
     IGPO gpo = om.getGPO(id); // reads from backing journal
 
@@ -398,7 +398,7 @@ public class TestRemoteGOM extends TestCase {
     }
 
     // clear cached data
-    ((ObjectMgrModel) om).clearCache();
+    om.clearCache();
 
     IGPO gpo = om.getGPO(id); // reads from backing journal
 

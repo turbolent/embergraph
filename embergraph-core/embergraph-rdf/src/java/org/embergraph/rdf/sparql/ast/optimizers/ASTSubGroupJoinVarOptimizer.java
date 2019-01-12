@@ -43,8 +43,8 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.StaticAnalysis;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Optimizer assigns join variables to sub-groups.
+/*
+* Optimizer assigns join variables to sub-groups.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -82,7 +82,7 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryRoot, bindingSets);
   }
 
-  /**
+  /*
    * Assign the join variable(s) to the group. The join variables are those variables which are
    * definitely bound by the time the group runs, so this depends on the order of the nodes in the
    * parent group. There may be zero or more join variables. Child groups are processed recursively.
@@ -109,7 +109,7 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
        */
       final Set<IVariable<?>> incomingBindings =
           sa.getDefinitelyIncomingBindings(
-              (GraphPatternGroup<?>) group, new LinkedHashSet<IVariable<?>>());
+              group, new LinkedHashSet<IVariable<?>>());
 
       /*
        * This is only those variables which are bound on entry into the group
@@ -135,9 +135,9 @@ public class ASTSubGroupJoinVarOptimizer implements IASTOptimizer {
        */
       final Set<IVariable<?>> maybeIncomingBindings =
           sa.getMaybeIncomingBindings(
-              (GraphPatternGroup<?>) group, new LinkedHashSet<IVariable<?>>());
+              group, new LinkedHashSet<IVariable<?>>());
 
-      /**
+      /*
        * Add the variables that are used inside filters in the OPTIONAL, since the SPARQL 1.1
        * semantics lifts these filters to the upper level in case the join succeeds.
        *

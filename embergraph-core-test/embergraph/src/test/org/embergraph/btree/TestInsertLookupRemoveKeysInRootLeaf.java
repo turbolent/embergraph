@@ -32,8 +32,8 @@ import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.io.SerializerUtil;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Test insert, lookup, and value scan for leaves.
+/*
+* Test insert, lookup, and value scan for leaves.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -49,7 +49,7 @@ public class TestInsertLookupRemoveKeysInRootLeaf extends AbstractBTreeTestCase 
     super(name);
   }
 
-  /**
+  /*
    * Test ability to insert entries into a leaf. Random (legal) external keys are inserted into a
    * leaf until the leaf would overflow. The random keys are then sorted and compared with the
    * actual keys in the leaf. If the keys were inserted correctly into the leaf then the two arrays
@@ -78,8 +78,8 @@ public class TestInsertLookupRemoveKeysInRootLeaf extends AbstractBTreeTestCase 
 
       if (index >= 0) {
 
-        /*
-         * The key is already present in the leaf.
+      /*
+       * The key is already present in the leaf.
          */
 
         continue;
@@ -117,7 +117,7 @@ public class TestInsertLookupRemoveKeysInRootLeaf extends AbstractBTreeTestCase 
     assertKeys(expectedKeys, root);
   }
 
-  /**
+  /*
    * Test ability to insert entries into a leaf. Random (legal) external keys are inserted into a
    * leaf until the leaf would overflow. The random keys are then sorted and compared with the
    * actual keys in the leaf. If the keys were inserted correctly into the leaf then the two arrays
@@ -176,7 +176,7 @@ public class TestInsertLookupRemoveKeysInRootLeaf extends AbstractBTreeTestCase 
     assertKeys(expectedKeys, root);
   }
 
-  /**
+  /*
    * Test ability to insert entries into a leaf. Known keys and values are generated and inserted
    * into the leaf in a random order. The sequence of keys and values in the leaf is then compared
    * with the pre-generated sequences known to the unit test. The correct behavior of the {@link
@@ -394,8 +394,8 @@ public class TestInsertLookupRemoveKeysInRootLeaf extends AbstractBTreeTestCase 
 
       if (i % 100 == 0) {
 
-        /*
-         * Validate the keys and entries.
+      /*
+       * Validate the keys and entries.
          */
 
         assertEquals("#entries", expected.size(), btree.getEntryCount());

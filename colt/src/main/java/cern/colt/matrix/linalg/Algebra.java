@@ -11,15 +11,15 @@ package cern.colt.matrix.linalg;
 import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * Linear algebraic matrix operations operating on {@link DoubleMatrix2D}; concentrates most
+/*
+* Linear algebraic matrix operations operating on {@link DoubleMatrix2D}; concentrates most
  * functionality of this package.
  *
  * @author wolfgang.hoschek@cern.ch
  * @version 1.0, 09/24/99
  */
 public class Algebra extends cern.colt.PersistentObject {
-  /**
+  /*
    * A default Algebra object; has {@link Property#DEFAULT} attached for tolerance. Allows ommiting
    * to construct an Algebra object time and again.
    *
@@ -29,7 +29,7 @@ public class Algebra extends cern.colt.PersistentObject {
    */
   public static final Algebra DEFAULT;
 
-  /**
+  /*
    * A default Algebra object; has {@link Property#ZERO} attached for tolerance. Allows ommiting to
    * construct an Algebra object time and again.
    *
@@ -51,14 +51,14 @@ public class Algebra extends cern.colt.PersistentObject {
     ZERO = new Algebra();
     ZERO.property = Property.ZERO; // immutable property object
   }
-  /**
+  /*
    * Constructs a new instance with an equality tolerance given by
    * <tt>Property.DEFAULT.tolerance()</tt>.
    */
   public Algebra() {
     this(Property.DEFAULT.tolerance());
   }
-  /**
+  /*
    * Constructs a new instance with the given equality tolerance.
    *
    * @param tolerance the tolerance to be used for equality operations.
@@ -70,7 +70,7 @@ public class Algebra extends cern.colt.PersistentObject {
   private CholeskyDecomposition chol(DoubleMatrix2D matrix) {
     return new CholeskyDecomposition(matrix);
   }
-  /**
+  /*
    * Returns a copy of the receiver. The attached property object is also copied. Hence, the
    * property object of the copy is mutable.
    *
@@ -79,14 +79,14 @@ public class Algebra extends cern.colt.PersistentObject {
   public Object clone() {
     return new Algebra(property.tolerance());
   }
-  /**
+  /*
    * Returns the condition of matrix <tt>A</tt>, which is the ratio of largest to smallest singular
    * value.
    */
   public double cond(DoubleMatrix2D A) {
     return svd(A).cond();
   }
-  /**
+  /*
    * Returns the determinant of matrix <tt>A</tt>.
    *
    * @return the determinant.
@@ -120,7 +120,7 @@ public class Algebra extends cern.colt.PersistentObject {
       }
     };
   }
-  /**
+  /*
    * Returns the inverse or pseudo-inverse of matrix <tt>A</tt>.
    *
    * @return a new independent matrix; inverse(matrix) if the matrix is square, pseudoinverse
@@ -139,7 +139,7 @@ public class Algebra extends cern.colt.PersistentObject {
   private LUDecomposition lu(DoubleMatrix2D matrix) {
     return new LUDecomposition(matrix);
   }
-  /**
+  /*
    * Inner product of two vectors; <tt>Sum(x[i] * y[i])</tt>. Also known as dot product. <br>
    * Equivalent to <tt>x.zDotProduct(y)</tt>.
    *
@@ -151,7 +151,7 @@ public class Algebra extends cern.colt.PersistentObject {
   public double mult(DoubleMatrix1D x, DoubleMatrix1D y) {
     return x.zDotProduct(y);
   }
-  /**
+  /*
    * Linear algebraic matrix-vector multiplication; <tt>z = A * y</tt>. <tt>z[i] = Sum(A[i,j] *
    * y[j]), i=0..A.rows()-1, j=0..y.size()-1</tt>.
    *
@@ -163,7 +163,7 @@ public class Algebra extends cern.colt.PersistentObject {
   public DoubleMatrix1D mult(DoubleMatrix2D A, DoubleMatrix1D y) {
     return A.zMult(y, null);
   }
-  /**
+  /*
    * Linear algebraic matrix-matrix multiplication; <tt>C = A x B</tt>. <tt>C[i,j] = Sum(A[i,k] *
    * B[k,j]), k=0..n-1</tt>. <br>
    * Matrix shapes: <tt>A(m x n), B(n x p), C(m x p)</tt>.
@@ -177,7 +177,7 @@ public class Algebra extends cern.colt.PersistentObject {
   public DoubleMatrix2D mult(DoubleMatrix2D A, DoubleMatrix2D B) {
     return A.zMult(B, null);
   }
-  /**
+  /*
    * Outer product of two vectors; Sets <tt>A[i,j] = x[i] * y[j]</tt>.
    *
    * @param x the first source vector.
@@ -212,21 +212,21 @@ public class Algebra extends cern.colt.PersistentObject {
     }
     return max;
   }
-  /**
+  /*
    * Returns the two-norm (aka <i>euclidean norm</i>) of vector <tt>x</tt>; equivalent to
    * <tt>mult(x,x)</tt>.
    */
   public double norm2(DoubleMatrix1D x) {
     return mult(x, x);
   }
-  /**
+  /*
    * Returns the two-norm of matrix <tt>A</tt>, which is the maximum singular value; obtained from
    * SVD.
    */
   public double norm2(DoubleMatrix2D A) {
     return svd(A).norm2();
   }
-  /**
+  /*
    * Returns the Frobenius norm of matrix <tt>A</tt>, which is
    * <tt>Sqrt(Sum(A[i,j]<sup>2</sup>))</tt>.
    */
@@ -256,7 +256,7 @@ public class Algebra extends cern.colt.PersistentObject {
     }
     return max;
   }
-  /**
+  /*
    * Modifies the given vector <tt>A</tt> such that it is permuted as specified; Useful for
    * pivoting. Cell <tt>A[i]</tt> will go into cell <tt>A[indexes[i]]</tt>.
    *
@@ -302,7 +302,7 @@ public class Algebra extends cern.colt.PersistentObject {
     for (int i = size; --i >= 0; ) A.setQuick(i, work[indexes[i]]);
     return A;
   }
-  /**
+  /*
    * Constructs and returns a new row and column permuted <i>selection view</i> of matrix
    * <tt>A</tt>; equivalent to {@link DoubleMatrix2D#viewSelection(int[],int[])}. The returned
    * matrix is backed by this matrix, so changes in the returned matrix are reflected in this
@@ -314,7 +314,7 @@ public class Algebra extends cern.colt.PersistentObject {
   public DoubleMatrix2D permute(DoubleMatrix2D A, int[] rowIndexes, int[] columnIndexes) {
     return A.viewSelection(rowIndexes, columnIndexes);
   }
-  /**
+  /*
    * Modifies the given matrix <tt>A</tt> such that it's columns are permuted as specified; Useful
    * for pivoting. Column <tt>A[i]</tt> will go into column <tt>A[indexes[i]]</tt>. Equivalent to
    * <tt>permuteRows(transpose(A), indexes, work)</tt>.
@@ -330,7 +330,7 @@ public class Algebra extends cern.colt.PersistentObject {
   public DoubleMatrix2D permuteColumns(DoubleMatrix2D A, int[] indexes, int[] work) {
     return permuteRows(A.viewDice(), indexes, work);
   }
-  /**
+  /*
    * Modifies the given matrix <tt>A</tt> such that it's rows are permuted as specified; Useful for
    * pivoting. Row <tt>A[i]</tt> will go into row <tt>A[indexes[i]]</tt>.
    *
@@ -385,7 +385,7 @@ public class Algebra extends cern.colt.PersistentObject {
     cern.colt.GenericPermuting.permute(indexes, swapper, work, null);
     return A;
   }
-  /**
+  /*
    * Linear algebraic matrix power; <tt>B = A<sup>k</sup> <==> B = A*A*...*A</tt>.
    *
    * <ul>
@@ -467,7 +467,7 @@ public class Algebra extends cern.colt.PersistentObject {
     // timer.stop().display();
     return B;
   }
-  /**
+  /*
    * Returns the property object attached to this Algebra, defining tolerance.
    *
    * @return the Property object.
@@ -480,14 +480,14 @@ public class Algebra extends cern.colt.PersistentObject {
   private QRDecomposition qr(DoubleMatrix2D matrix) {
     return new QRDecomposition(matrix);
   }
-  /**
+  /*
    * Returns the effective numerical rank of matrix <tt>A</tt>, obtained from Singular Value
    * Decomposition.
    */
   public int rank(DoubleMatrix2D A) {
     return svd(A).rank();
   }
-  /**
+  /*
    * Attaches the given property object to this Algebra, defining tolerance.
    *
    * @param the Property object to be attached.
@@ -504,7 +504,7 @@ public class Algebra extends cern.colt.PersistentObject {
       throw new IllegalArgumentException("Attempted to modify immutable object.");
     this.property = property;
   }
-  /**
+  /*
    * Solves A*X = B.
    *
    * @return X; a new independent matrix; solution if A is square, least squares solution otherwise.
@@ -512,7 +512,7 @@ public class Algebra extends cern.colt.PersistentObject {
   public DoubleMatrix2D solve(DoubleMatrix2D A, DoubleMatrix2D B) {
     return (A.rows() == A.columns() ? (lu(A).solve(B)) : (qr(A).solve(B)));
   }
-  /**
+  /*
    * Solves X*A = B, which is also A'*X' = B'.
    *
    * @return X; a new independent matrix; solution if A is square, least squares solution otherwise.
@@ -520,7 +520,7 @@ public class Algebra extends cern.colt.PersistentObject {
   public DoubleMatrix2D solveTranspose(DoubleMatrix2D A, DoubleMatrix2D B) {
     return solve(transpose(A), transpose(B));
   }
-  /**
+  /*
    * Copies the columns of the indicated rows into a new sub matrix.
    * <tt>sub[0..rowIndexes.length-1,0..columnTo-columnFrom] =
    * A[rowIndexes(:),columnFrom..columnTo]</tt>; The returned matrix is <i>not backed</i> by this
@@ -551,7 +551,7 @@ public class Algebra extends cern.colt.PersistentObject {
     }
     return sub;
   }
-  /**
+  /*
    * Copies the rows of the indicated columns into a new sub matrix.
    * <tt>sub[0..rowTo-rowFrom,0..columnIndexes.length-1] = A[rowFrom..rowTo,columnIndexes(:)]</tt>;
    * The returned matrix is <i>not backed</i> by this matrix, so changes in the returned matrix are
@@ -581,7 +581,7 @@ public class Algebra extends cern.colt.PersistentObject {
     }
     return sub;
   }
-  /**
+  /*
    * Constructs and returns a new <i>sub-range view</i> which is the sub matrix
    * <tt>A[fromRow..toRow,fromColumn..toColumn]</tt>. The returned matrix is backed by this matrix,
    * so changes in the returned matrix are reflected in this matrix, and vice-versa. Use idioms like
@@ -604,7 +604,7 @@ public class Algebra extends cern.colt.PersistentObject {
   private SingularValueDecomposition svd(DoubleMatrix2D matrix) {
     return new SingularValueDecomposition(matrix);
   }
-  /**
+  /*
    * Returns a String with (propertyName, propertyValue) pairs. Useful for debugging or to quickly
    * get the rough picture. For example,
    *
@@ -722,7 +722,7 @@ public class Algebra extends cern.colt.PersistentObject {
 
     return buf.toString();
   }
-  /**
+  /*
    * Returns the results of <tt>toString(A)</tt> and additionally the results of all sorts of
    * decompositions applied to the given matrix. Useful for debugging or to quickly get the rough
    * picture. For example,
@@ -940,7 +940,7 @@ public class Algebra extends cern.colt.PersistentObject {
     }
     return sum;
   }
-  /**
+  /*
    * Constructs and returns a new view which is the transposition of the given matrix <tt>A</tt>.
    * Equivalent to {@link DoubleMatrix2D#viewDice A.viewDice()}. This is a zero-copy transposition,
    * taking O(1), i.e. constant time. The returned view is backed by this matrix, so changes in the
@@ -971,7 +971,7 @@ public class Algebra extends cern.colt.PersistentObject {
   public DoubleMatrix2D transpose(DoubleMatrix2D A) {
     return A.viewDice();
   }
-  /**
+  /*
    * Modifies the matrix to be a lower trapezoidal matrix.
    *
    * @return <tt>A</tt> (for convenience only).
@@ -987,7 +987,7 @@ public class Algebra extends cern.colt.PersistentObject {
     }
     return A;
   }
-  /**
+  /*
    * Outer product of two vectors; Returns a matrix with <tt>A[i,j] = x[i] * y[j]</tt>.
    *
    * @param x the first source vector.
@@ -999,7 +999,7 @@ public class Algebra extends cern.colt.PersistentObject {
     multOuter(x, y, A);
     return A;
   }
-  /**
+  /*
    * Linear algebraic matrix power; <tt>B = A<sup>k</sup> <==> B = A*A*...*A</tt>.
    *
    * @param A the source matrix; must be square.

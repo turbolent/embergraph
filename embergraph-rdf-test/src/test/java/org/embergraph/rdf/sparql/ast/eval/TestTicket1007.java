@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Various tests covering different constellations where values are constructed using BIND and
+/*
+* Various tests covering different constellations where values are constructed using BIND and
  * reused in other parts of the query, such as
  *
  * <p>- testing inlined vs. non-inlined configuration - using BIND prior to vs. after
@@ -37,13 +37,13 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * ************************************************************************ **********************
    * ORIGINAL TICKET TESTS ****************************
    * ************************************************************************
    */
 
-  /**
+  /*
    * Original query as defined in bug report, reusing a URI constructed in a BIND clause in a join:
    * <code>
    * PREFIX : <http://www.interition.net/ref/>
@@ -75,7 +75,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Modified query with join "on top", enforced through outer VALUES clause. <code>
    * PREFIX : <http://www.interition.net/ref/>
    *
@@ -104,14 +104,14 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * ************************************************************************
    * **************************** CUSTOM TESTS *******************************
    * ************************************************************************
    */
 
   /*
-  *  Dataset (trig) used in the tests defined in this section:
+   *  Dataset (trig) used in the tests defined in this section:
   *
     <code>
     @prefix : <http://www.embergraph.org/> .
@@ -133,7 +133,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
   *
   */
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -154,7 +154,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * {
@@ -174,7 +174,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * {
@@ -194,7 +194,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * {
@@ -214,7 +214,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * {
@@ -234,7 +234,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * {
@@ -255,7 +255,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -276,7 +276,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -297,7 +297,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -318,7 +318,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -345,7 +345,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -365,7 +365,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -386,7 +386,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -407,7 +407,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT DISTINCT ?z
    * WHERE
@@ -428,7 +428,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -449,7 +449,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * <code>
    * SELECT ?o
    * WHERE
@@ -470,7 +470,7 @@ public class TestTicket1007 extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Test problems with BIND inside and reuse of variable outside of subquery. <code>
    * SELECT DISTINCT *
    * {

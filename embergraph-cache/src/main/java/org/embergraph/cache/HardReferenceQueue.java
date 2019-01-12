@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.cache;
 
-/**
- * A cache for hard references using an LRU policy. References are simply cached, but objects are
+/*
+* A cache for hard references using an LRU policy. References are simply cached, but objects are
  * not recoverable from their reference. In order to make an object recoverable, this cache must be
  * wrapped by a weak reference cache that implements a hash map for discovery of objects using their
  * persistent identifier. The {@link HardReferenceQueue} has a capacity that determines the #of hard
@@ -53,13 +53,13 @@ public class HardReferenceQueue<T> extends RingBuffer<T> implements IHardReferen
   /** The listener to which cache eviction notices are reported. */
   private final HardReferenceQueueEvictionListener<T> listener;
 
-  /**
+  /*
    * The #of references to scan backwards from the LRU position when testing for whether or not a
    * reference is already in the cache.
    */
   protected final int nscan;
 
-  /**
+  /*
    * Uses the default #of references to scan on append requests.
    *
    * @param listener The listener on which cache evictions are reported.
@@ -72,7 +72,7 @@ public class HardReferenceQueue<T> extends RingBuffer<T> implements IHardReferen
     this(listener, capacity, Math.min(capacity, DEFAULT_NSCAN));
   }
 
-  /**
+  /*
    * Fully specified ctor.
    *
    * @param listener The listener on which cache evictions are reported (optional).
@@ -110,7 +110,7 @@ public class HardReferenceQueue<T> extends RingBuffer<T> implements IHardReferen
     return nscan;
   }
 
-  /**
+  /*
    * Add a reference to the cache. If the reference was recently added to the cache then this is a
    * NOP. Otherwise the reference is appended to the cache. If a reference is appended to the cache
    * and then cache is at capacity, then the LRU reference is first evicted from the cache.
@@ -140,7 +140,7 @@ public class HardReferenceQueue<T> extends RingBuffer<T> implements IHardReferen
     return true;
   }
 
-  /**
+  /*
    * Extended to evict the element at the tail of the buffer iff the buffer is full.
    *
    * <p>Note: This hook is further extended to realize the stale reference protocol in {@link
@@ -160,7 +160,7 @@ public class HardReferenceQueue<T> extends RingBuffer<T> implements IHardReferen
     }
   }
 
-  /**
+  /*
    * Evict the LRU reference. This is a NOP iff the cache is empty.
    *
    * @return true iff a reference was evicted.
@@ -185,7 +185,7 @@ public class HardReferenceQueue<T> extends RingBuffer<T> implements IHardReferen
     return true;
   }
 
-  /**
+  /*
    * Evict all references, starting with the LRU reference and proceeding to the MRU reference.
    *
    * @param clearRefs When true, the reference are actually cleared from the cache. This may be

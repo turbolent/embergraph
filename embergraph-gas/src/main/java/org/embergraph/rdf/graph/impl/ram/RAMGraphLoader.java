@@ -22,8 +22,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.rio.RDFHandlerException;
 
-/**
- * TODO Blank nodes have global scope. We should have a bnode resolution scope to the source
+/*
+* TODO Blank nodes have global scope. We should have a bnode resolution scope to the source
  * document to be consistent with RDF semantics. This could be imposed through the {@link
  * RAMStatementHandler}.
  *

@@ -26,8 +26,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.rdf.internal.impl.literal.AbstractLiteralIV;
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * Utility to provide a map of multiple inline URI handlers for a single namespace. This is used in
+/*
+* Utility to provide a map of multiple inline URI handlers for a single namespace. This is used in
  * conjunction with the {@link InlineLocalNameIntegerURIHandler}.
  *
  * <p>Currently, up to 32 different URI handlers are supported for a given namespace.
@@ -76,7 +76,7 @@ public class InlineIntegerURIHandlerMap extends InlineLocalNameIntegerURIHandler
     handlersByLocalName.put(getKeyForHandler(handler), handler);
   }
 
-  /**
+  /*
    * Unpack the inline value into the localName portion of the uri.
    *
    * <p>unpack the ID encoded in the value and select the correct handler to use.

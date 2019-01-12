@@ -64,8 +64,8 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
     TestHelper.checkJournalsClosed(testCase, this);
   }
 
-  //    /**
-  //     * A random number generated - the seed is NOT fixed.
+  //    /*
+//     * A random number generated - the seed is NOT fixed.
   //     *
   //     * This is not required. The problem was that the base class field
   //     * of the same name was winding up not initialized because nobody was.
@@ -102,7 +102,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   /** Open/create an {@link IIndexManager} using the given properties. */
   protected abstract S getStore(Properties properties);
 
-  /**
+  /*
    * Close and then re-open an {@link IIndexManager} backed by the same persistent data.
    *
    * @param store the existing store.
@@ -112,7 +112,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
    */
   protected abstract S reopenStore(S store);
 
-  /**
+  /*
    * This method is invoked from methods that MUST be proxied to this class. {@link
    * GenericProxyTestCase} extends this class, as do the concrete classes that drive the test suite
    * for specific GOM integration test configuration. Many methods on this class must be proxied
@@ -137,7 +137,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
 
   // Test helpers.
 
-  /**
+  /*
    * // *
    *
    * <p>// * Return the name of a journal file to be used for a unit test. The file is // * created
@@ -194,8 +194,8 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //
   //    }
   //
-  //    /**
-  //     * Version of {@link #deleteTestJournalFile(String)} that obtains the name
+  //    /*
+//     * Version of {@link #deleteTestJournalFile(String)} that obtains the name
   //     * of the journal file from the {@link Options#FILE} property (if any) on
   //     * {@link #getProperties()}.
   //     */
@@ -211,8 +211,8 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //
   //    }
   //
-  //    /**
-  //     * Delete the test file (if any). Note that test files are NOT created when
+  //    /*
+//     * Delete the test file (if any). Note that test files are NOT created when
   //     * testing the {@link BufferMode#Transient} journal. A warning message that
   //     * the file could not be deleted generally means that you forgot to close
   //     * the journal in your test.
@@ -241,8 +241,8 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //        }
   //
   //    }
-  //    /**
-  //     * Helper method verifies that the contents of <i>actual</i> from
+  //    /*
+//     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.
@@ -284,8 +284,8 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //        assertEquals(expected,actual2);
   //
   //    }
-  //    /**
-  //     * Helper method verifies that the contents of <i>actual</i> from
+  //    /*
+//     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.
@@ -324,7 +324,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //
   //    }
 
-  /**
+  /*
    * Returns random data that will fit in N bytes. N is chosen randomly in 1:1024.
    *
    * @return A new {@link ByteBuffer} wrapping a new <code>byte[]</code> of random length and having
@@ -341,7 +341,7 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
     return ByteBuffer.wrap(bytes);
   }
 
-  /**
+  /*
    * Test helper evaluates a {@link Callable} and fails unless the expected exception is thrown.
    * This is typically used to perform correct rejection tests for methods.
    *
@@ -376,8 +376,8 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
     fail("Expecting: " + expected);
   }
 
-  //    /**
-  //     * Helper method verifies that the contents of <i>actual</i> from
+  //    /*
+//     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.
@@ -426,8 +426,8 @@ public abstract class AbstractIndexManagerTestCase<S extends IIndexManager> exte
   //
   //    }
   //
-  //    /**
-  //     * Helper method verifies that the contents of <i>actual</i> from
+  //    /*
+//     * Helper method verifies that the contents of <i>actual</i> from
   //     * position() to limit() are consistent with the expected byte[]. A
   //     * read-only view of <i>actual</i> is used to avoid side effects on the
   //     * position, mark or limit properties of the buffer.

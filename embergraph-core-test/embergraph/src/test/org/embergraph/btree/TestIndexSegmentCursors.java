@@ -27,8 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import org.embergraph.btree.IndexSegment.IndexSegmentTupleCursor;
 
-/**
- * Test suite for {@link IndexSegmentTupleCursor}.
+/*
+* Test suite for {@link IndexSegmentTupleCursor}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -75,7 +75,7 @@ public class TestIndexSegmentCursors extends AbstractTupleCursorTestCase {
     }
   }
 
-  /**
+  /*
    * Builds an {@link IndexSegment} from a {@link BTree}.
    *
    * @param btree
@@ -113,7 +113,7 @@ public class TestIndexSegmentCursors extends AbstractTupleCursorTestCase {
         (IndexSegment) btree, new Tuple<String>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
   }
 
-  public void test_oneTuple() throws IOException, Exception {
+  public void test_oneTuple() throws Exception {
 
     final BTree btree = getOneTupleBTree();
 
@@ -147,7 +147,7 @@ public class TestIndexSegmentCursors extends AbstractTupleCursorTestCase {
     }
   }
 
-  /**
+  /*
    * A test for first(), last(), next(), prior(), and seek() given a B+Tree that has been
    * pre-populated with a few tuples.
    *

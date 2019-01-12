@@ -34,8 +34,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-/**
- * An immutable implementation of binary tries.
+/*
+* An immutable implementation of binary tries.
  *
  * <p>Instance of this class are built starting from a lexicographically ordered list of {@link
  * BitVector}s representing binary words. Each word is assigned its position (starting from 0) in
@@ -59,7 +59,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
   protected static class Node implements Serializable {
     private static final long serialVersionUID = 1L;
     public Node left, right;
-    /**
+    /*
      * An array containing the path compacted in this node (<code>null</code> if there is no
      * compaction at this node).
      */
@@ -69,7 +69,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     /** If nonnegative, this node represent the <code>word</code>-th word. */
     public final int word;
 
-    /**
+    /*
      * Creates a node representing a word.
      *
      * <p>Note that the long array contained in <code>path</code> will be stored inside the node.
@@ -88,7 +88,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
       this.word = word;
     }
 
-    /**
+    /*
      * Creates a node that does not represent a word.
      *
      * @param path the path compacted in this node, or <code>null</code> for the empty path.
@@ -97,7 +97,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
       this(path, -1);
     }
 
-    /**
+    /*
      * Returns true if this node is a leaf.
      *
      * @return true if this node is a leaf.
@@ -118,7 +118,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
 
   private final TransformationStrategy<? super T> transformationStrategy;
 
-  /**
+  /*
    * Creates a trie from a set of elements.
    *
    * @param elements a set of elements
@@ -152,7 +152,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     root = buildTrie(words, 0);
   }
 
-  /**
+  /*
    * Builds a trie recursively.
    *
    * <p>The trie will contain the suffixes of words in <code>words</code> starting at <code>pos
@@ -217,7 +217,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     return n;
   }
 
-  /**
+  /*
    * Returns the number of binary words in this trie.
    *
    * @return the number of binary words in this trie.
@@ -267,7 +267,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     return getIndex(element) != -1;
   }
 
-  /**
+  /*
    * Return the index of the word returned by the given iterator, or -1 if the word is not this
    * trie.
    *
@@ -304,7 +304,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     return -1;
   }
 
-  /**
+  /*
    * Returns an interval given by the smallest and the largest word in the trie starting with the
    * specified word.
    *
@@ -357,7 +357,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     return Interval.valueOf(l.word, n.word);
   }
 
-  /**
+  /*
    * Returns an interval given by the smallest and the largest word in the trie starting with the
    * word returned by the given iterator.
    *
@@ -406,7 +406,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     return Interval.valueOf(l.word, n.word);
   }
 
-  /**
+  /*
    * Returns an approximated interval around the specified word.
    *
    * <p>Given a word <var>w</var>, the corresponding approximated interval is defined as follows: if
@@ -467,7 +467,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
 
         // Completely contained in the current path
         if (pos == length) {
-          if (ASSERTS) assert n.pathLength == maxLength;
+          assert !ASSERTS || n.pathLength == maxLength;
           if (i == n.pathLength && n.word >= 0) exactMatch = true;
           break;
         }
@@ -513,7 +513,7 @@ public class ImmutableBinaryTrie<T> extends AbstractObject2LongFunction<T> imple
     return Interval.valueOf(l.word, n.word);
   }
 
-  /**
+  /*
    * Returns an approximated prefix interval around the word returned by the specified iterator.
    *
    * @param iterator an iterator.

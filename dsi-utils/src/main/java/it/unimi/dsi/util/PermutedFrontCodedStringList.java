@@ -38,8 +38,8 @@ import it.unimi.dsi.lang.MutableString;
 import java.io.IOException;
 import java.io.Serializable;
 
-/**
- * A {@link it.unimi.dsi.util.FrontCodedStringList} whose indices are permuted.
+/*
+* A {@link it.unimi.dsi.util.FrontCodedStringList} whose indices are permuted.
  *
  * <p>It may happen that a list of strings compresses very well using front coding, but
  * unfortunately alphabetical order is <em>not</em> the right order for the strings in the list.
@@ -57,7 +57,7 @@ public class PermutedFrontCodedStringList extends AbstractObjectList<CharSequenc
   /** The permutation. */
   protected final int[] permutation;
 
-  /**
+  /*
    * Creates a new permuted front-coded string list using a given front-coded string list and
    * permutation.
    *
@@ -74,7 +74,7 @@ public class PermutedFrontCodedStringList extends AbstractObjectList<CharSequenc
     return frontCodedStringList.get(permutation[index]);
   }
 
-  /**
+  /*
    * Returns the element at the specified position in this front-coded list by storing it in a
    * mutable string.
    *

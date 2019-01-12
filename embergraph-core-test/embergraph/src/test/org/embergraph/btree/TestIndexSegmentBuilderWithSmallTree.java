@@ -24,8 +24,8 @@ import org.embergraph.btree.IndexSegment.ImmutableLeafCursor;
 import org.embergraph.btree.IndexSegment.ImmutableNodeFactory.ImmutableLeaf;
 import org.embergraph.btree.keys.TestKeyBuilder;
 
-/**
- * Test suite based on a small btree with known keys and values.
+/*
+* Test suite based on a small btree with known keys and values.
  *
  * @see src/architecture/btree.xls, which has the detailed examples.
  */
@@ -78,7 +78,7 @@ public class TestIndexSegmentBuilderWithSmallTree extends AbstractIndexSegmentTe
    * problem1
    */
 
-  /**
+  /*
    * Create, populate, and return a btree with a branching factor of (3) and ten sequential keys
    * [1:10]. The values are {@link SimpleEntry} objects whose state is the same as the corresponding
    * key.
@@ -185,7 +185,7 @@ public class TestIndexSegmentBuilderWithSmallTree extends AbstractIndexSegmentTe
     }
   }
 
-  /**
+  /*
    * This case results in a root node and two leaves. Each leaf is at its minimum capacity (5). This
    * tests an edge case for the algorithm that distributes the keys among the leaves when there
    * would otherwise be an underflow in the last leaf.
@@ -317,7 +317,7 @@ public class TestIndexSegmentBuilderWithSmallTree extends AbstractIndexSegmentTe
     }
   }
 
-  /**
+  /*
    * This case results in a single root leaf filled to capacity.
    *
    * @throws IOException
@@ -393,7 +393,7 @@ public class TestIndexSegmentBuilderWithSmallTree extends AbstractIndexSegmentTe
    * Examples based on an input tree with 9 entries.
    */
 
-  /**
+  /*
    * Create, populate, and return a btree with a branching factor of (3) and nine sequential keys
    * [1:9]. The values are {@link SimpleEntry} objects whose state is the same as the corresponding
    * key.
@@ -414,7 +414,7 @@ public class TestIndexSegmentBuilderWithSmallTree extends AbstractIndexSegmentTe
     return btree;
   }
 
-  /**
+  /*
    * This case results in a single root leaf filled to capacity.
    *
    * @throws IOException
@@ -489,7 +489,7 @@ public class TestIndexSegmentBuilderWithSmallTree extends AbstractIndexSegmentTe
    * problem3
    */
 
-  /**
+  /*
    * Create, populate, and return a btree with a branching factor of (3) and 20 sequential keys
    * [1:20]. The resulting tree has a height of (3). The values are {@link SimpleEntry} objects
    * whose state is the same as the corresponding key.
@@ -510,7 +510,7 @@ public class TestIndexSegmentBuilderWithSmallTree extends AbstractIndexSegmentTe
     return btree;
   }
 
-  /**
+  /*
    * Note: This problem requires us to short a node in the level above the leaves so that the last
    * node in that level does not underflow.
    *
@@ -602,7 +602,7 @@ public class TestIndexSegmentBuilderWithSmallTree extends AbstractIndexSegmentTe
   }
 
   protected IndexSegmentCheckpoint doBuildAndDiscardCache(final BTree btree, final int m)
-      throws IOException, Exception {
+      throws Exception {
 
     final long commitTime = System.currentTimeMillis();
 

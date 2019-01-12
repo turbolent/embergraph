@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test suite for OPTIONAL groups. Unlike the TCK, this test suite is focused on the semantics of
+/*
+* Test suite for OPTIONAL groups. Unlike the TCK, this test suite is focused on the semantics of
  * well-formed OPTIONAL groups.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -35,7 +35,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for a simple optional (one where the statement pattern can be lifted into the parent
    * group).
    */
@@ -50,7 +50,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unit test for an optional which is too complex to be handled as a simple optional (it uses a
    * filter which can not be lifted since it requires a materialized variable).
    */
@@ -65,7 +65,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * The FILTER will always fail. This means that the OPTIONAL group will never produce any
    * solutions. Thus only the original solutions from the statement pattern outside of the optional
    * will be reported as solutions for the query. This tests the correct eventual triggering of the
@@ -87,7 +87,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unit test for an optional which is too complex to be handled as a simple optional (it involves
    * more than one statement pattern).
    *
@@ -119,7 +119,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unit test for <a href="http://sourceforge.net/apps/trac/bigdata/ticket/712">trac 712</a>
    *
    * <pre>
@@ -144,7 +144,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unit test for <a href="http://sourceforge.net/apps/trac/bigdata/ticket/712">trac 712</a>
    *
    * <pre>
@@ -169,7 +169,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
             )
         .runTest();
   }
-  /**
+  /*
    *
    *
    * <pre>
@@ -192,7 +192,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("prune_groups").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -216,7 +216,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
    * Tests ported from org.embergraph.rdf.sail.TestOptionals.
    */
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -235,7 +235,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("optionals_simplest").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -255,7 +255,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("optionals_simplestWithFilter").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -275,7 +275,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("optionals_simplestWithConditional").runTest();
   }
 
-  /**
+  /*
    * Test case for issue #1079.
    *
    * <pre>

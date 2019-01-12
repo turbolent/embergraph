@@ -20,8 +20,8 @@ package org.embergraph.ha;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Interface providing an atomic snapshot of the services that are joined with a met quorum (and the
+/*
+* Interface providing an atomic snapshot of the services that are joined with a met quorum (and the
  * services that are not joined with a met quorum) as of some point in the GATHER or PREPARE
  * protocol.
  *
@@ -30,8 +30,8 @@ import java.util.UUID;
 public interface IJoinedAndNonJoinedServices {
 
   /** The services joined with the met quorum, in their join order. */
-  public UUID[] getJoinedServiceIds();
+  UUID[] getJoinedServiceIds();
 
   /** The services in the write pipeline (in any order). */
-  public Set<UUID> getNonJoinedPipelineServiceIds();
+  Set<UUID> getNonJoinedPipelineServiceIds();
 }

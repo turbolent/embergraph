@@ -22,8 +22,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.service;
 
-/**
- * Non-remote interface exposing a transient property set associated with a service.
+/*
+* Non-remote interface exposing a transient property set associated with a service.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -31,5 +31,5 @@ package org.embergraph.service;
 public interface ISession {
 
   /** A transient and dynamic property set (aka session). */
-  public Session getSession();
+  Session getSession();
 }

@@ -31,8 +31,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
-/**
- * Abstract base class for RDF datatype literals adds primitive data type value access methods.
+/*
+* Abstract base class for RDF datatype literals adds primitive data type value access methods.
  *
  * <p>{@inheritDoc}
  *
@@ -51,7 +51,7 @@ public abstract class AbstractLiteralIV<V extends EmbergraphLiteral, T>
     super(VTE.LITERAL, dte);
   }
 
-  /**
+  /*
    * Implement {@link IV#needsMaterialization()}. Materialization not required to answer the {@link
    * Literal} interface methods.
    */
@@ -152,8 +152,8 @@ public abstract class AbstractLiteralIV<V extends EmbergraphLiteral, T>
   //    /** Return the <code>boolean</code> value of <i>this</i> value. */
   //    abstract public boolean booleanValue();
   //
-  //    /**
-  //     * Return the <code>byte</code> value of <i>this</i> value.
+  //    /*
+//     * Return the <code>byte</code> value of <i>this</i> value.
   //     * <p>
   //     * Note: Java lacks unsigned data types. For safety, operations on
   //     * unsigned XSD data types should be conducted after a widening
@@ -162,8 +162,8 @@ public abstract class AbstractLiteralIV<V extends EmbergraphLiteral, T>
   //     */
   //    abstract public byte byteValue();
   //
-  //    /**
-  //     * Return the <code>short</code> value of <i>this</i> value.
+  //    /*
+//     * Return the <code>short</code> value of <i>this</i> value.
   //     * <p>
   //     * Note: Java lacks unsigned data types. For safety, operations on
   //     * unsigned XSD data types should be conducted after a widening
@@ -172,8 +172,8 @@ public abstract class AbstractLiteralIV<V extends EmbergraphLiteral, T>
   //     */
   //    abstract public short shortValue();
   //
-  //    /**
-  //     * Return the <code>int</code> value of <i>this</i> value.
+  //    /*
+//     * Return the <code>int</code> value of <i>this</i> value.
   //     * <p>
   //     * Note: Java lacks unsigned data types. For safety, operations on
   //     * unsigned XSD data types should be conducted after a widening
@@ -182,8 +182,8 @@ public abstract class AbstractLiteralIV<V extends EmbergraphLiteral, T>
   //     */
   //    abstract public int intValue();
   //
-  //    /**
-  //     * Return the <code>long</code> value of <i>this</i> value.
+  //    /*
+//     * Return the <code>long</code> value of <i>this</i> value.
   //     * <p>
   //     * Note: Java lacks unsigned data types. For safety, operations on
   //     * unsigned XSD data types should be conducted after a widening

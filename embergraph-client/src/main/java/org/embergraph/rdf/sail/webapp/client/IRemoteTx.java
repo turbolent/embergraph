@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * Interface for embergraph transactions on the client.
+/*
+* Interface for embergraph transactions on the client.
  *
  * @author bryan
  * @see <a href="http://trac.bigdata.com/ticket/1156">Support read/write transactions in the REST
@@ -26,7 +26,7 @@ package org.embergraph.rdf.sail.webapp.client;
  */
 public interface IRemoteTx extends IRemoteTxState0 {
 
-  /**
+  /*
    * Return <code>true</code> iff the client believes that transaction is active (it exists and has
    * not been aborted nor committed). Note that the transaction may have been aborted on the server,
    * in which case the client will not know this until it tries to {@link #prepare()}, {@link
@@ -34,7 +34,7 @@ public interface IRemoteTx extends IRemoteTxState0 {
    */
   boolean isActive();
 
-  /**
+  /*
    * Return true if the write set of the transaction passes validation at the time that the server
    * processes this request. If a transaction fails validation then {@link #commit()} will fail for
    * that transaction. If it passes validation, then {@link #commit()} is not known to fail at this
@@ -48,7 +48,7 @@ public interface IRemoteTx extends IRemoteTxState0 {
    */
   boolean prepare() throws RemoteTransactionNotFoundException;
 
-  /**
+  /*
    * Aborts a read/write transaction (discarding its write set) -or- deactivates a read-only
    * transaction.
    *
@@ -59,7 +59,7 @@ public interface IRemoteTx extends IRemoteTxState0 {
    */
   void abort() throws RemoteTransactionNotFoundException;
 
-  /**
+  /*
    * Prepares and commits a read/write transaction -or- deactivates a read-only transaction.
    *
    * <p>Note: You MUST always either {@link #abort()} or {@link #commit()} a read-only transaction

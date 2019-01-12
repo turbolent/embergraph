@@ -71,8 +71,8 @@ import org.embergraph.service.fts.impl.SolrFulltextSearchImpl;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-/**
- * A factory for an external fulltext search services (such as Solr). It accepts a group consisting
+/*
+* A factory for an external fulltext search services (such as Solr). It accepts a group consisting
  * of external Solr search magic predicates.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -150,7 +150,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
         : null;
   }
 
-  /**
+  /*
    * Validate the search request. This looks for external search magic predicates and returns them
    * all. It is an error if anything else is found in the group. All such search patterns are
    * reported back by this method, but the service can only be invoked for one a single search
@@ -182,13 +182,13 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
 
         if (!p.isConstant()) throw new FulltextSearchException("Expecting search predicate: " + sp);
 
-        final URI uri = (URI) ((ConstantNode) p).getValue();
+        final URI uri = (URI) p.getValue();
 
         if (!uri.stringValue().startsWith(FTS.NAMESPACE))
           throw new FulltextSearchException("Expecting search predicate: " + sp);
 
-        /*
-         * Some search predicate.
+      /*
+       * Some search predicate.
          */
 
         if (!ASTFulltextSearchOptimizer.searchUris.contains(uri))
@@ -223,7 +223,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
     return tmp;
   }
 
-  /**
+  /*
    * Validate the search. There must be exactly one {@link FTS#SEARCH} predicate. There should not
    * be duplicates of any of the search predicates for a given searchVar.
    */
@@ -277,7 +277,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
 
     final TermNode o = sp.o();
 
-    boolean isNotLiterale = !o.isConstant() || !(((ConstantNode) o).getValue() instanceof Literal);
+    boolean isNotLiterale = !o.isConstant() || !(o.getValue() instanceof Literal);
     boolean isNotVariable = !o.isVariable();
 
     if (isNotLiterale && isNotVariable) {
@@ -296,7 +296,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Note: This has the {@link AbstractTripleStore} reference attached. This is not a {@link
    * Serializable} object. It MUST run on the query controller.
    */
@@ -536,7 +536,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
           bs.set(
               vars[2],
               new Constant(
-                  new Constant(DummyConstantNode.toDummyIV((EmbergraphValue) litSnippet))));
+                  new Constant(DummyConstantNode.toDummyIV(litSnippet))));
         }
 
         final IBindingSet baseBs = hit.getIncomingBindings();
@@ -589,7 +589,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Wrapper around {@link FulltextSearchHiterator}, delegating requests for multiple binding sets
    * to the latter one.
    */
@@ -644,7 +644,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
       init();
     }
 
-    /**
+    /*
      * Checks whether there are more results available.
      *
      * @return
@@ -748,7 +748,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
       return new SolrFulltextSearchImpl();
     }
 
-    /**
+    /*
      * Resolve search class to implementation. If no suitable one is found, return
      * SolrFulltextSearchImpl
      *
@@ -870,7 +870,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
       return paramStr == null || paramStr.isEmpty() ? FTS.Options.DEFAULT_PARAMS : paramStr;
     }
 
-    /**
+    /*
      * Resolves the endpoint type, which is either a constant or a variable to be looked up in the
      * binding set.
      *
@@ -911,7 +911,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
       return null; // fallback to default
     }
 
-    /**
+    /*
      * Resolves the endpoint, which is either a constant or a variable to be looked up in the
      * binding set.
      */
@@ -934,7 +934,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
       }
     }
 
-    /**
+    /*
      * Resolves the search field, which is either a constant or a variable to be looked up in the
      * binding set.
      */
@@ -952,7 +952,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
           : searchFieldStr;
     }
 
-    /**
+    /*
      * Resolves the search field, which is either a constant or a variable to be looked up in the
      * binding set.
      */
@@ -970,7 +970,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
           : scoreFieldStr;
     }
 
-    /**
+    /*
      * Resolves the search field, which is either a constant or a variable to be looked up in the
      * binding set.
      */
@@ -1023,7 +1023,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
     }
   }
 
-  /**
+  /*
    * Default values for external fulltext search, as defined in configuration
    *
    * @author msc
@@ -1094,7 +1094,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
   @Override
   public Set<IVariable<?>> getRequiredBound(final ServiceNode serviceNode) {
 
-    /**
+    /*
      * This method extracts exactly those variables that are incoming, i.e. must be bound before
      * executing the execution of the service.
      */
@@ -1125,7 +1125,7 @@ public class FulltextSearchServiceFactory extends AbstractServiceFactoryBase {
     return requiredBound;
   }
 
-  /**
+  /*
    * Returns the statement patterns contained in the service node.
    *
    * @param serviceNode

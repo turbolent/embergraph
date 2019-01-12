@@ -27,8 +27,8 @@ import java.util.UUID;
 import junit.framework.TestCase;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for {@link EmbergraphSet}.
+/*
+* Test suite for {@link EmbergraphSet}.
  *
  * <p>Note: The behavior of the sub-set methods is determined by the behavior of the sub-map methods
  * on {@link EmbergraphMap}. Write your tests there.
@@ -47,7 +47,7 @@ public class TestEmbergraphSet extends TestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * The test fixture - this is backed by a temporary store in order to make the unit test cleanup
    * simple.
    */

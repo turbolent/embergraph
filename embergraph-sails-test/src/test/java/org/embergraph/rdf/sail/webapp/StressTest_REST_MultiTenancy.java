@@ -40,8 +40,8 @@ import org.openrdf.model.impl.StatementImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.QueryEvaluationException;
 
-/**
- * Proxied test suite providing a stress test of the multi-tenancy API.
+/*
+* Proxied test suite providing a stress test of the multi-tenancy API.
  *
  * @param <S>
  * @see {@link StressTestConcurrentRestApiRequests} which provides full coverage of the REST API
@@ -69,7 +69,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager>
         );
   }
 
-  /**
+  /*
    * This is based on a customer stress test that was able to reliably replicate the issue with the
    * apache http components library. The test combines concurrent processes that
    *
@@ -93,7 +93,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager>
 
   }
 
-  /**
+  /*
    * We are seeing a problem where multiple namespaces are used and an aborted operation on one
    * namespace causes problems with another.
    *
@@ -187,7 +187,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager>
     rr.prepareUpdate("DROP GRAPH <" + namespace + ">").evaluate();
   }
 
-  private void simpleQuery(final String namespace) throws QueryEvaluationException, Exception {
+  private void simpleQuery(final String namespace) throws Exception {
     log.warn(String.format("Execute SPARQL on %s namespace...", namespace));
     m_mgr
         .getRepositoryForNamespace(namespace)
@@ -197,7 +197,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager>
     log.warn(String.format("Execute SPARQL on %s namespace done", namespace));
   }
 
-  /**
+  /*
    * Runs the stress test for an hour. This is the minimum required to have confidence that the
    * problem is not demonstrated. Multiple hour runs are better.
    *
@@ -210,7 +210,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager>
     doMultiTenancyStressTest(TimeUnit.HOURS.toMillis(1));
   }
 
-  /**
+  /*
    * Note: I have reduced the intervals between operations by 1/2 (10s => 5s; 2s => 1s). This makes
    * it possible to get something interesting done in a shorter run (15s or so).
    *

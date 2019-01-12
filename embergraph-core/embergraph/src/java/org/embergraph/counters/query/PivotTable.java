@@ -11,8 +11,8 @@ import org.embergraph.counters.ICounter;
 import org.embergraph.counters.ICounterNode;
 import org.embergraph.counters.IHistoryEntry;
 
-/**
- * Aggregates data from a table by grouping the cells in the table into sets ({@link CSet}s) of
+/*
+* Aggregates data from a table by grouping the cells in the table into sets ({@link CSet}s) of
  * category columns. The values for cells belonging to the same {@link CSet} are aggregated for each
  * distinct {@link ICounterNode#getName()}.
  */
@@ -26,18 +26,18 @@ public class PivotTable {
   /** The selected counters (redundant reference to {@link HistoryTable#a}. */
   public final ICounter[] a;
 
-  /**
+  /*
    * The ordered set of distinct counter names. The order of the selected counters is preserved here
    * (minus duplicate counter names) due to the virtues of the linked hash set.
    */
   public final LinkedHashSet<String> vcols;
 
-  /**
+  /*
    * Aggregation of the selected counters ({@link #a}) into sets sharing the same category values.
    */
   public final List<CSet> csets;
 
-  /**
+  /*
    * An array of category column names. The names can be specified using URL query parameters. When
    * they are not specified or when there are not enough specified parameters then we use some
    * generated names.
@@ -46,7 +46,7 @@ public class PivotTable {
    */
   public final String[] cnames;
 
-  /**
+  /*
    * @param pattern The pattern used to specify the counters of interest and the capturing groups
    *     which determined how the counters will be aggregated.
    *     <p>If a capturing group is used for the counter name then that capturing group will be
@@ -141,8 +141,8 @@ public class PivotTable {
                 + "category names: "
                 + Arrays.toString(cnames);
 
-        /*
-         * Aggregate values for counters in this cset having a value for
+      /*
+       * Aggregate values for counters in this cset having a value for
          * each value column in turn.
          *
          * If none of the counters in the cset have a value for the row
@@ -200,8 +200,8 @@ public class PivotTable {
 
               valueCountForColumn++;
 
-              /*
-               * The counter appears just once in the data table
+            /*
+       * The counter appears just once in the data table
                * so we can stop once we find its index.
                */
               break;
@@ -210,8 +210,8 @@ public class PivotTable {
 
           if (valueCountForColumn > 0) {
 
-            /*
-             * There was at least one sample for the current value
+          /*
+       * There was at least one sample for the current value
              * column.
              */
 
@@ -250,7 +250,7 @@ public class PivotTable {
     } // next row.
   }
 
-  /**
+  /*
    * A row in a {@link PivotTable}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -259,7 +259,7 @@ public class PivotTable {
    */
   class PivotRow {
 
-    /**
+    /*
      * The row of the source {@link HistoryTable} whose aggregated values are captured by the row of
      * the pivot table.
      */
@@ -268,20 +268,20 @@ public class PivotTable {
     /** The timestamp associated with the data in the row. */
     final long timestamp;
 
-    /**
+    /*
      * The category set for this row. The values for the category columns in the row are {@link
      * CSet#cats}.
      */
     final CSet cset;
 
-    /**
+    /*
      * The value columns for the row. There is one element in the array for each element in {@link
      * PivotTable#vcols}. The element MAY be <code>null</code> in which case there was no data for
      * that counter for this row.
      */
     final Double[] values;
 
-    /**
+    /*
      * @param row The row of the source {@link HistoryTable} whose aggregated values are captured by
      *     the row of the pivot table.
      * @param timestamp The timestamp associated with the data in the row.
@@ -311,7 +311,7 @@ public class PivotTable {
     }
   }
 
-  /**
+  /*
    * The set of distinct ordered matched sets of category values in the current row of the history
    * table paired with the {@link ICounter}s matched up on those category values.
    *
@@ -347,8 +347,8 @@ public class PivotTable {
 
       if (n > 0 && c.getName().equals(groups[n - 1])) {
 
-        /*
-         * We drop the last capturing group since it captures the
+      /*
+       * We drop the last capturing group since it captures the
          * counter name. This is a common query design when building a
          * normal table view, but using a capturing group for the
          * counter name for a pivot table will result in a single

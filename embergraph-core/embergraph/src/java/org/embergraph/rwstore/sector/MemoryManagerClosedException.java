@@ -1,7 +1,7 @@
 package org.embergraph.rwstore.sector;
 
-/**
- * Thrown the {@link MemoryManager} has been closed.
+/*
+* Thrown the {@link MemoryManager} has been closed.
  *
  * @author thompsonbry
  */

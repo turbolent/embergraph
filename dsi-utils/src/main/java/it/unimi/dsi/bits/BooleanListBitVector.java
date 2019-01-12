@@ -25,8 +25,8 @@ import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
 import it.unimi.dsi.fastutil.booleans.BooleanList;
 import java.io.Serializable;
 
-/**
- * A boolean-list based implementation of {@link BitVector}.
+/*
+* A boolean-list based implementation of {@link BitVector}.
  *
  * <p>This implementation of a bit vector is based on a backing list of booleans. It is rather
  * inefficient, but useful for wrapping purposes, for covering completely the code in {@link

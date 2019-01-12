@@ -33,8 +33,8 @@ import org.embergraph.btree.SimpleEntry;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.WormAddressManager;
 
-/**
- * Test suite for restart-safety of {@link BTree}s backed by an {@link IJournal}.
+/*
+* Test suite for restart-safety of {@link BTree}s backed by an {@link IJournal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -71,8 +71,8 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
   //
   //    private Properties properties;
 
-  //    /**
-  //     * Re-open the same backing store.
+  //    /*
+//     * Re-open the same backing store.
   //     *
   //     * @param store
   //     *            the existing store.
@@ -105,7 +105,7 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
   //
   //    }
 
-  /**
+  /*
    * Return a btree backed by a journal with the indicated branching factor. The serializer requires
    * that values in leaves are {@link SimpleEntry} objects.
    *
@@ -126,7 +126,7 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
     return btree;
   }
 
-  /**
+  /*
    * Test basic btree is restart safe, including a test of {@link BTree#removeAll()}
    *
    * @throws IOException
@@ -212,8 +212,8 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
           journal.commit();
         }
 
-        /*
-         * restart, re-opening the same file.
+      /*
+       * restart, re-opening the same file.
          */
         {
           journal = reopenStore(journal);
@@ -232,7 +232,7 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test verifies that the journal can be correctly reopened when using a non-default value for
    * <code>offsetBits</code>. The data on the {@link BTree} is verified in order to force reads from
    * the last commit point on the journal after it is reopened.
@@ -328,8 +328,8 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
           journal.commit();
         }
 
-        /*
-         * restart, re-opening the same file.
+      /*
+       * restart, re-opening the same file.
          */
         {
           journal = reopenStore(journal);
@@ -389,7 +389,7 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test verifies that classes which extend {@link BTree} are correctly restored by {@link
    * BTree#load(IRawStore, long, boolean)}.
    */
@@ -480,7 +480,7 @@ public class TestRestartSafe extends ProxyTestCase<Journal> {
 
   public static class MyBTree extends BTree {
 
-    /**
+    /*
      * @param store
      * @param checkpoint
      * @param metadata

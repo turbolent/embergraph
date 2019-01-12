@@ -26,8 +26,8 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.log4j.Logger;
 
-/**
- * Base class for {@link QuorumClient}s.
+/*
+* Base class for {@link QuorumClient}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -46,7 +46,7 @@ public abstract class AbstractQuorumClient<S extends Remote> implements QuorumCl
     return logicalServiceZPath;
   }
 
-  /**
+  /*
    * @param logicalServiceZPath the fully qualified logical service identifier (for zookeeper, this
    *     is the logicalServiceZPath).
    */
@@ -57,7 +57,7 @@ public abstract class AbstractQuorumClient<S extends Remote> implements QuorumCl
     this.logicalServiceZPath = logicalServiceZPath;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -91,7 +91,7 @@ public abstract class AbstractQuorumClient<S extends Remote> implements QuorumCl
     this.quorum.set(null);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The default implementation is a NOP.

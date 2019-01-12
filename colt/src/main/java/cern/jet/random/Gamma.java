@@ -10,8 +10,8 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
-/**
- * Gamma distribution; <A HREF="http://wwwinfo.cern.ch/asdoc/shortwrupsdir/g106/top.html"> math
+/*
+* Gamma distribution; <A HREF="http://wwwinfo.cern.ch/asdoc/shortwrupsdir/g106/top.html"> math
  * definition</A>, <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node96.html#SECTION000960000000000000000"> definition of
  * gamma function</A> and <A HREF="http://www.statsoft.com/textbook/glosf.html#Gamma Distribution">
@@ -59,7 +59,7 @@ public class Gamma extends AbstractContinousDistribution {
 
   // The uniform random number generated shared by all <b>static</b> methods.
   protected static Gamma shared = new Gamma(1.0, 1.0, makeDefaultGenerator());
-  /**
+  /*
    * Constructs a Gamma distribution. Example: alpha=1.0, lambda=1.0.
    *
    * @throws IllegalArgumentException if <tt>alpha &lt;= 0.0 || lambda &lt;= 0.0</tt>.
@@ -78,7 +78,7 @@ public class Gamma extends AbstractContinousDistribution {
   }
   /** Returns a random number from the distribution; bypasses the internal state. */
   public double nextDouble(double alpha, double lambda) {
-    /**
+    /*
      * **************************************************************** * Gamma Distribution -
      * Acceptance Rejection combined with * Acceptance Complement * *
      * ***************************************************************** * FUNCTION: - gds samples a
@@ -261,7 +261,7 @@ public class Gamma extends AbstractContinousDistribution {
     return Math.exp((alpha - 1.0) * Math.log(x / lambda) - x / lambda - Fun.logGamma(alpha))
         / lambda;
   }
-  /**
+  /*
    * Sets the mean and variance.
    *
    * @throws IllegalArgumentException if <tt>alpha &lt;= 0.0 || lambda &lt;= 0.0</tt>.
@@ -272,7 +272,7 @@ public class Gamma extends AbstractContinousDistribution {
     this.alpha = alpha;
     this.lambda = lambda;
   }
-  /**
+  /*
    * Returns a random number from the distribution.
    *
    * @throws IllegalArgumentException if <tt>alpha &lt;= 0.0 || lambda &lt;= 0.0</tt>.
@@ -286,7 +286,7 @@ public class Gamma extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + alpha + "," + lambda + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

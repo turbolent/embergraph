@@ -23,14 +23,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.journal;
 
-/**
- * Some static helper methods for timestamps.
+/*
+* Some static helper methods for timestamps.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class TimestampUtility {
 
-  /**
+  /*
    * Formats the timestamp as a String.
    *
    * @param timestamp
@@ -47,7 +47,7 @@ public class TimestampUtility {
     return "readOnly(" + timestamp + ")";
   }
 
-  /**
+  /*
    * True iff the timestamp is a possible commit time (GT ZERO).
    *
    * <p>Note: Both read-only transactions are commit times are positive. The transition identifier
@@ -63,7 +63,7 @@ public class TimestampUtility {
     return timestamp > 0;
   }
 
-  /**
+  /*
    * True iff the timestamp is a possible commit time (GT ZERO) -OR- a {@link ITx#READ_COMMITTED}
    * request.
    *
@@ -77,7 +77,7 @@ public class TimestampUtility {
     return timestamp > 0 || timestamp == ITx.READ_COMMITTED;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the timestamp is a possible read-write transaction identifier (LT
    * ZERO).
    *
@@ -115,7 +115,7 @@ public class TimestampUtility {
     return timestamp == ITx.UNISOLATED;
   }
 
-  /**
+  /*
    * Accepts a commitTime and returns a timestamp that will be interpreted as a historical read
    * (this is a NOP).
    *

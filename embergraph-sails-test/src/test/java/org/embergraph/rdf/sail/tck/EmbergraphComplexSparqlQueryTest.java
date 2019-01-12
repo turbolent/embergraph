@@ -47,8 +47,8 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
-/**
- * Embergraph integration for the {@link ComplexSPARQLQueryTest}.
+/*
+* Embergraph integration for the {@link ComplexSPARQLQueryTest}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -60,7 +60,7 @@ public class EmbergraphComplexSparqlQueryTest extends ComplexSPARQLQueryTest {
   /** */
   public EmbergraphComplexSparqlQueryTest() {}
 
-  /**
+  /*
    * Note: This field MUST be cleared in tearDown or a hard reference will be retained to the
    * backend until the end of CI!
    */
@@ -91,7 +91,7 @@ public class EmbergraphComplexSparqlQueryTest extends ComplexSPARQLQueryTest {
     backend.destroy();
   }
 
-  /**
+  /*
    * Note: This method may be overridden in order to run the test suite against other variations of
    * the embergraph backend.
    *

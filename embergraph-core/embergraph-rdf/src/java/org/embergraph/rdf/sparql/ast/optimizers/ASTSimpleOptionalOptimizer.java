@@ -54,8 +54,8 @@ import org.embergraph.rdf.sparql.ast.service.ServiceCallUtility;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 import org.embergraph.rdf.store.BDS;
 
-/**
- * A "simple optional" is an optional sub-group that contains only one statement pattern, no
+/*
+* A "simple optional" is an optional sub-group that contains only one statement pattern, no
  * sub-groups of its own, and no filters that require materialized variables based on the optional
  * statement pattern. We can lift these "simple optionals" into the parent group where the join
  * evaluation will be less expensive.
@@ -141,7 +141,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryNode, bindingSets);
   }
 
-  /**
+  /*
    * Collect the optional groups.
    *
    * <p>Note: This will NOT visit stuff inside of SERVICE calls. If those graph patterns get
@@ -177,8 +177,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
         if (!BDS.SEARCH.equals(serviceURI)) {
 
-          /*
-           * Do NOT translate SERVICE nodes (unless they are a well
+        /*
+       * Do NOT translate SERVICE nodes (unless they are a well
            * known embergraph service).
            */
 
@@ -196,7 +196,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * If the {@link JoinGroupNode} qualifies as a simple optional then lift the statement pattern
    * node and and filters into the parent group and mark the statement pattern node as "optional".
    */
@@ -245,8 +245,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
           if (req.getRequirement() == INeedsMaterialization.Requirement.NEVER) {
 
-            /*
-             * The filter does not have any materialization requirements
+          /*
+       * The filter does not have any materialization requirements
              * so it can definitely be lifted with the statement
              * pattern.
              */
@@ -256,8 +256,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
           if (req instanceof ComputedMaterializationRequirement) {
 
-            /*
-             * We can lift a filter which only depends on variables
+          /*
+       * We can lift a filter which only depends on variables
              * which are "incoming bound" into the parent.
              *
              * Note: In order to do this, the parent join group must
@@ -287,8 +287,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
         } else {
 
-          /*
-           * This would indicate an error in the logic to identify
+        /*
+       * This would indicate an error in the logic to identify
            * which join groups qualify as "simple" optionals.
            */
 
@@ -316,7 +316,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
     /*
      * Replace the group with the statement pattern node.
      */
-    p.replaceWith((BOp) group, (BOp) sp);
+    p.replaceWith(group, sp);
 
     /*
      * Add any mock filters used to impose materialization requirements on
@@ -328,7 +328,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the <i>group</i> is a "simple optional".
    *
    * @param p The parent {@link JoinGroupNode} (never <code>null</code>).
@@ -354,8 +354,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
       if (node instanceof StatementPatternNode) {
 
         if (sp != null) {
-          /*
-           * We already have one statement pattern so this is not a
+        /*
+       * We already have one statement pattern so this is not a
            * simple optional.
            */
           return false;
@@ -365,8 +365,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
       } else if (node instanceof FilterNode) {
 
-        /*
-         * The filter must be attached to the optional join for the
+      /*
+       * The filter must be attached to the optional join for the
          * statement pattern if the statement pattern is lifted into the
          * parent group. Therefore we have to examine the
          * materialization requirements for the filter.
@@ -378,8 +378,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
         if (req.getRequirement() == INeedsMaterialization.Requirement.NEVER) {
 
-          /*
-           * The filter does not have any materialization requirements
+        /*
+       * The filter does not have any materialization requirements
            * so it can definitely be lifted with the statement
            * pattern.
            */
@@ -387,8 +387,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
           continue;
         }
 
-        /*
-         * Note: This is disabled. I am having trouble getting the query
+      /*
+       * Note: This is disabled. I am having trouble getting the query
          * plan to generate the correct materialization operations with
          * the mock filter node and its mock requirements. Talk this
          * over with MikeP or wait until I get further into how the
@@ -406,8 +406,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
         if (false && req instanceof ComputedMaterializationRequirement) {
 
-          /*
-           * We can lift a filter which only depends on variables
+        /*
+       * We can lift a filter which only depends on variables
            * which are "incoming bound" into the parent.
            *
            * Note: In order to do this, the parent join group must
@@ -434,8 +434,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
           }
         }
 
-        /*
-         * There is at least one required variable for this filter which
+      /*
+       * There is at least one required variable for this filter which
          * is not incoming bound to the optional group and hence would
          * not be definitely bound if the optional statement pattern
          * were evaluated in the parent group.
@@ -445,8 +445,8 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
       } else {
 
-        /*
-         * Anything else will queer the deal.
+      /*
+       * Anything else will queer the deal.
          */
 
         return false;
@@ -461,7 +461,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
     return sp != null;
   }
 
-  /**
+  /*
    * Used to impose additional materialization requirements on the required join group in the parent
    * when lifting a filter whose materialization requirements could be satisfied against the parent
    * group.
@@ -472,7 +472,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
 
     interface Annotations extends FilterNode.Annotations {
 
-      /**
+      /*
        * The {@link ComputedMaterializationRequirement} for the filter which was lifted onto the
        * optional statement pattern from the simple optional group.
        */
@@ -500,7 +500,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
       setProperty(Annotations.REQUIREMENT, req);
     }
 
-    /**
+    /*
      * Report any variables that are part of the materialization requirement for the original
      * filter.
      */

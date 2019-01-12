@@ -40,8 +40,8 @@ import org.embergraph.bop.engine.IRunningQuery;
 import org.embergraph.bop.engine.QueryEngine;
 import org.embergraph.util.concurrent.LatchedExecutor;
 
-/**
- * Executes each of the operands as a subquery. The operands are evaluated in the order given and
+/*
+* Executes each of the operands as a subquery. The operands are evaluated in the order given and
  * with the annotated parallelism. Each subquery is run as a separate query but is linked to the
  * parent query in the operator is being evaluated. The subqueries receive bindings from the
  * pipeline and may be executed independently. By default, the subqueries are run with unlimited
@@ -77,13 +77,13 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
 
   public interface Annotations extends PipelineOp.Annotations {
 
-    /**
+    /*
      * The ordered {@link BOp}[] of subqueries to be evaluated for each binding set presented
      * (required).
      */
     String SUBQUERIES = AbstractSubqueryOp.class.getName() + ".subqueries";
 
-    /**
+    /*
      * The maximum parallelism with which the subqueries will be evaluated (default is unlimited).
      */
     String MAX_PARALLEL_SUBQUERIES = AbstractSubqueryOp.class.getName() + ".maxParallelSubqueries";
@@ -102,7 +102,7 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
     super(op);
   }
 
-  /**
+  /*
    * Shallow copy constructor.
    *
    * @param args
@@ -144,7 +144,7 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
     return new FutureTask<Void>(new ControllerTask(this, context));
   }
 
-  /**
+  /*
    * Evaluates the arguments of the operator as subqueries. The arguments are evaluated in order. An
    * {@link Executor} with limited parallelism to evaluate the arguments. If the controller operator
    * is interrupted, then the subqueries are cancelled. If a subquery fails, then all subqueries are
@@ -222,22 +222,22 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
 
         final CountDownLatch latch = new CountDownLatch(subqueries.length);
 
-        /*
-         * Create FutureTasks for each subquery. The futures are not
+      /*
+       * Create FutureTasks for each subquery. The futures are not
          * submitted to the Executor yet. That happens in call(). By
          * deferring the evaluation until call() we gain the ability to
          * cancel all subqueries if any subquery fails.
          */
         for (BOp op : subqueries) {
 
-          /*
-           * Task runs subquery and cancels all subqueries in [tasks]
+        /*
+       * Task runs subquery and cancels all subqueries in [tasks]
            * if it fails.
            */
           tasks.add(
               new FutureTask<IRunningQuery>(new SubqueryTask(op, context, bset)) {
-                /*
-                 * Hook future to count down the latch when the task is
+              /*
+       * Hook future to count down the latch when the task is
                  * done.
                  */
                 public void run() {
@@ -250,20 +250,20 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
               });
         }
 
-        /*
-         * Run subqueries with limited parallelism.
+      /*
+       * Run subqueries with limited parallelism.
          */
         for (FutureTask<IRunningQuery> ft : tasks) {
           executor.execute(ft);
         }
 
-        /*
-         * Wait for all subqueries to complete.
+      /*
+       * Wait for all subqueries to complete.
          */
         latch.await();
 
-        /*
-         * Get the futures, throwing out any errors.
+      /*
+       * Get the futures, throwing out any errors.
          */
         for (FutureTask<IRunningQuery> ft : tasks) ft.get();
 
@@ -274,7 +274,7 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
       }
     }
 
-    /**
+    /*
      * Run a subquery.
      *
      * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -333,8 +333,8 @@ public abstract class AbstractSubqueryOp extends PipelineOp {
         } catch (Throwable t) {
 
           if (runningSubquery == null || runningSubquery.getCause() != null) {
-            /*
-             * If things fail before we start the subquery, or if a
+          /*
+       * If things fail before we start the subquery, or if a
              * subquery fails (due to abnormal termination), then
              * propagate the error to the parent and rethrow the
              * first cause error out of the subquery.

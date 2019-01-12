@@ -48,8 +48,8 @@ import org.embergraph.rdf.sparql.ast.ISolutionSetStats;
 import org.embergraph.stream.Stream;
 import org.embergraph.striterator.Chunkerator;
 
-/**
- * A persistence capable solution set stored using a stream oriented API. The order of the solutions
+/*
+* A persistence capable solution set stored using a stream oriented API. The order of the solutions
  * on playback is their write order. This data structure provides fast read/write performance, but
  * does not provide key-based access into the solution sets.
  *
@@ -60,7 +60,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
 
   private static final Logger log = Logger.getLogger(SolutionSetStream.class);
 
-  /**
+  /*
    * Encapsulates the address and the data.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -106,7 +106,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
     }
   }
 
-  /**
+  /*
    * The {@link ISolutionSetStats} are collected when the solution are written by {@link
    * #put(ICloseableIterator)}.
    *
@@ -120,7 +120,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
    */
   private MySolutionSetStats solutionSetStats;
 
-  /**
+  /*
    * Required constructor. This constructor is used both to create a new named solution set, and to
    * load an existing named solution set from the store using a {@link Checkpoint} record.
    *
@@ -145,7 +145,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
 
   }
 
-  /**
+  /*
    * Create a stream for an ordered solution set.
    *
    * <p>{@inheritDoc}
@@ -168,7 +168,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
     return Stream.create(store, metadata);
   }
 
-  /**
+  /*
    * Return the {@link ISolutionSetStats} for the saved solution set.
    *
    * @return The {@link ISolutionSetStats}.
@@ -183,7 +183,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
     return solutionSetStats;
   }
 
-  /**
+  /*
    * Return the address of the {@link ISolutionSetStats} to be written into the next {@link
    * Checkpoint} record. The caller must have {@link #flush()} the {@link SolutionSetStream} as a
    * pre-condition (to ensure that the stats have been written out). If the {@link
@@ -342,13 +342,9 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
       return true;
     }
 
-    if (solutionSetStats == null && getCheckpoint().getBloomFilterAddr() != IRawStore.NULL) {
+    // The statistics field was cleared.
+    return solutionSetStats == null && getCheckpoint().getBloomFilterAddr() != IRawStore.NULL;
 
-      // The statistics field was cleared.
-      return true;
-    }
-
-    return false;
   }
 
   @Override
@@ -370,7 +366,7 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Extended to persist the {@link ISolutionSetStats}.
@@ -424,8 +420,8 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
    * this code might be useful in the future.
    */
 
-  //    /**
-  //     * Return an access path that can be used to scan the solutions.
+  //    /*
+//     * Return an access path that can be used to scan the solutions.
   //     *
   //     * @param pred
   //     *            ignored.
@@ -445,8 +441,8 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
   //
   //    }
   //
-  //    /**
-  //     * Class provides basic access path suitable for full scans.
+  //    /*
+//     * Class provides basic access path suitable for full scans.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
   //     *         Thompson</a>
@@ -525,8 +521,8 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
   //
   //    }
   //
-  //    /**
-  //     * A predicate that can be used with an {@link ISolutionSet} without having
+  //    /*
+//     * A predicate that can be used with an {@link ISolutionSet} without having
   //     * to resolve the {@link ISolutionSet} as an {@link IRelation}.
   //     *
   //     * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan
@@ -536,8 +532,8 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
   //    public static class SolutionSetStreamPredicate<E extends IBindingSet> extends
   //            Predicate<E> {
   //
-  //        /**
-  //         *
+  //        /*
+//         *
   //         */
   //        private static final long serialVersionUID = 1L;
   //
@@ -554,8 +550,8 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
   //            super(op);
   //        }
   //
-  //        /**
-  //         *
+  //        /*
+//         *
   //         * @param attributeName
   //         *            The name of the query attribute that will be used to
   //         *            resolve this solution set.

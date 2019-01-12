@@ -43,8 +43,8 @@ import org.embergraph.service.Split;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.concurrent.ExecutionExceptions;
 
-/**
- * Utility methods for {@link ISimpleSplitHandler}s and friends.
+/*
+* Utility methods for {@link ISimpleSplitHandler}s and friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -53,7 +53,7 @@ public class SplitUtility {
 
   private static final Logger log = Logger.getLogger(SplitUtility.class);
 
-  /**
+  /*
    * Dynamic sharding operations are not currently supported for indices with more than MAX_INT
    * tuples. It is not really a use case for scale-out, and that is what the SplitUtility is
    * designed to support. Various methods in this class therefore will cast to an int32 value.
@@ -70,7 +70,7 @@ public class SplitUtility {
     return (int) entryCount;
   }
 
-  /**
+  /*
    * Validate splits, including: that the separator keys are strictly
    * ascending, that the separator keys perfectly cover the source key range
    * without overlap, that the rightSeparator for each split is the
@@ -101,7 +101,7 @@ public class SplitUtility {
     validateSplits(pmd, splits, true /* checkFromToIndex */);
   }
 
-  /**
+  /*
    * Validate splits, including: that the separator keys are strictly ascending, that the separator
    * keys perfectly cover the source key range without overlap, that the rightSeparator for each
    * split is the leftSeparator for the prior split, that the fromIndex offsets are strictly
@@ -174,8 +174,8 @@ public class SplitUtility {
 
         if (i + 1 == nsplits && split.toIndex == 0) {
 
-          /*
-           * Note: This is allowed in case the index partition has
+        /*
+       * Note: This is allowed in case the index partition has
            * more than int32 entries in which case the toIndex of the
            * last split can not be defined and will be zero.
            */
@@ -217,7 +217,7 @@ public class SplitUtility {
 
       // right separator for the last split.
       final byte[] rightSeparator =
-          ((LocalPartitionMetadata) splits[splits.length - 1].pmd).getRightSeparatorKey();
+          splits[splits.length - 1].pmd.getRightSeparatorKey();
 
       if (rightSeparator == null) {
 
@@ -241,7 +241,7 @@ public class SplitUtility {
     }
   }
 
-  /**
+  /*
    * Identifies the splits for an index with heavy write append behavior.
    *
    * <p>The split point is chosen by locating the right-most non-leaf node. The key range which
@@ -354,12 +354,12 @@ public class SplitUtility {
               -1, // Note: split not allowed during move.
               fromKey,
               separatorKey,
-              /*
-               * Note: no resources for an index segment
+            /*
+       * Note: no resources for an index segment
                */
               null,
-              /*
-               * Note: cause will be set by the atomic update task.
+            /*
+       * Note: cause will be set by the atomic update task.
                */
               null
               //                    , oldpmd.getHistory()
@@ -391,12 +391,12 @@ public class SplitUtility {
               -1, // Note: split not allowed during move.
               separatorKey,
               toKey,
-              /*
-               * Note: no resources for an index segment
+            /*
+       * Note: no resources for an index segment
                */
               null,
-              /*
-               * Note: Cause will be set by the atomic update for the
+            /*
+       * Note: Cause will be set by the atomic update for the
                * split task.
                */
               null
@@ -419,7 +419,7 @@ public class SplitUtility {
     return splits;
   }
 
-  /**
+  /*
    * Build N index segments based on those split points.
    *
    * <p>Note: This is done in parallel to minimize latency.
@@ -522,7 +522,7 @@ public class SplitUtility {
     return result;
   }
 
-  /**
+  /*
    * Task used to build an {@link IndexSegment} from a restricted key-range of an index during a
    * {@link SplitIndexPartitionTask}. This is a compacting merge since we want as much of the data
    * for the index as possible in a single {@link IndexSegment}.
@@ -537,7 +537,7 @@ public class SplitUtility {
     private final Split split;
     private final Event parentEvent;
 
-    /**
+    /*
      * Builds an {@link IndexSegment} from the lastCommitTime of the old journal.
      *
      * @param vmd
@@ -557,7 +557,7 @@ public class SplitUtility {
       this.parentEvent = parentEvent;
     }
 
-    /**
+    /*
      * Note: The generated {@link IndexSegment} is on the retentionSet and MUST be removed from that
      * set once it has been incorporated in a restart safe manner into an index partition view or
      * once the task fails.
@@ -571,7 +571,7 @@ public class SplitUtility {
 
       final String name = getOnlyResource();
 
-      final ILocalBTreeView src = (ILocalBTreeView) getIndex(name);
+      final ILocalBTreeView src = getIndex(name);
 
       if (log.isInfoEnabled()) {
 
@@ -595,8 +595,8 @@ public class SplitUtility {
 
       if (fromKey == null && toKey == null) {
 
-        /*
-         * Note: This is not legal because it implies that we are
+      /*
+       * Note: This is not legal because it implies that we are
          * building the index segment from the entire source key range -
          * hence not a split at all!
          */
@@ -620,7 +620,7 @@ public class SplitUtility {
     }
   }
 
-  /**
+  /*
    * Choose a set of splits which may be reasonably expected to divide the {@link IndexSegment} into
    * extents each of which is approximately 50% full. The first split MUST use the leftSeparator of
    * the index view as its leftSeparator. The last split MUST use the rightSeparator of the index
@@ -764,8 +764,8 @@ public class SplitUtility {
        */
       if (remainingSplits == 1) {
 
-        /*
-         * This is the last split: always use the rightSeparator.
+      /*
+       * This is the last split: always use the rightSeparator.
          */
 
         toKey = oldpmd.getRightSeparatorKey();
@@ -781,12 +781,11 @@ public class SplitUtility {
 
         assert splitAt > low && splitAt <= high
             : "low=" + low + ", high=" + high + ", splitAt=" + splitAt;
-        ;
 
         if (splitHandler != null) {
 
-          /*
-           * Allow override of the recommended separator.
+        /*
+       * Allow override of the recommended separator.
            *
            * Note: we receive a separatorKey from the override so we
            * can create a separation not represented by any key
@@ -803,8 +802,8 @@ public class SplitUtility {
 
           if (chosenKey == null) {
 
-            /*
-             * No separator key could be identified. The rest of the
+          /*
+       * No separator key could be identified. The rest of the
              * data in the segment will all go into this split.
              */
 
@@ -812,8 +811,8 @@ public class SplitUtility {
 
             if (splits.isEmpty() && overextension > 2d) {
 
-              /*
-               * Log, but keep going.
+            /*
+       * Log, but keep going.
                *
                * Note: An application with poorly written override
                * logic could cause an index segment to fail to
@@ -834,8 +833,8 @@ public class SplitUtility {
 
             if (splits.isEmpty()) {
 
-              /*
-               * Since no splits have been chosen we can not
+            /*
+       * Since no splits have been chosen we can not
                * return everything in a single split. Instead we
                * return null and the source WILL NOT be split.
                */
@@ -843,8 +842,8 @@ public class SplitUtility {
               return null;
             }
 
-            /*
-             * Everything remaining goes into this split.
+          /*
+       * Everything remaining goes into this split.
              */
 
             toKey = oldpmd.getRightSeparatorKey();
@@ -863,8 +862,8 @@ public class SplitUtility {
 
             if (toIndex < low || toIndex > high) {
 
-              /*
-               * The override did not return a separator key
+            /*
+       * The override did not return a separator key
                * within the key range which we instructed it to
                * use. This is a bug in the application's override
                * code.
@@ -885,8 +884,8 @@ public class SplitUtility {
 
             if (toIndex == high) {
 
-              /*
-               * If they choose the last allowed index then all
+            /*
+       * If they choose the last allowed index then all
                * tuples have been consumed and we are done. In
                * this case we use the rightSeparator rather than
                * the chosen key in order to enforce the constraint
@@ -909,8 +908,8 @@ public class SplitUtility {
 
           if (splitAt == high) {
 
-            /*
-             * Enforce the constraint that the last split has the
+          /*
+       * Enforce the constraint that the last split has the
              * same rightSeparator as the source index segment.
              */
             toKey = oldpmd.getRightSeparatorKey();
@@ -919,8 +918,8 @@ public class SplitUtility {
 
           } else {
 
-            /*
-             * Take whatever key is at the recommended split index and
+          /*
+       * Take whatever key is at the recommended split index and
              * use that as the separator key for this split.
              */
             toKey = seg.keyAt(splitAt);
@@ -955,16 +954,16 @@ public class SplitUtility {
       // Create Split description.
       {
 
-        /*
-         * Get the next partition identifier for the named scale-out
+      /*
+       * Get the next partition identifier for the named scale-out
          * index.
          *
          * Note: This is a RMI.
          */
         final int partitionId = partitionIdFactory.nextPartitionId(scaleOutIndexName);
 
-        /*
-         * Describe the partition metadata for the new split.
+      /*
+       * Describe the partition metadata for the new split.
          */
         final LocalPartitionMetadata newpmd =
             new LocalPartitionMetadata(
@@ -972,12 +971,12 @@ public class SplitUtility {
                 -1, // Note: split not allowed during move.
                 fromKey, // leftSeparatorKey
                 toKey, // rightSeparatorKey
-                /*
-                 * Note: no resources for an index segment.
+              /*
+       * Note: no resources for an index segment.
                  */
                 null,
-                /*
-                 * Note: cause will be set by the atomic update task.
+              /*
+       * Note: cause will be set by the atomic update task.
                  */
                 null
                 //                        , oldpmd.getHistory()

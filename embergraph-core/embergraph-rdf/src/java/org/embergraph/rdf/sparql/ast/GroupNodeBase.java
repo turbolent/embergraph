@@ -48,8 +48,8 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
     super(args, anns);
   }
 
-  //    /**
-  //     * Note: Uses the default for the "optional" annotation.
+  //    /*
+//     * Note: Uses the default for the "optional" annotation.
   //     */
   protected GroupNodeBase() {}
 
@@ -71,8 +71,8 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
     return (List) args();
   }
 
-  //	/**
-  //	 * {@inheritDoc}
+  //	/*
+//	 * {@inheritDoc}
   //	 * <p>
   //	 * Force the maintenance of the parent reference on the children.
   //	 */
@@ -86,7 +86,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
   //        }
   //    }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to set the parent reference on the child.
@@ -102,7 +102,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
     return this;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to set the parent reference on the child
@@ -116,7 +116,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
     ((E) newArg).setParent((IGroupNode<IGroupMemberNode>) this);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to set the parent reference on the child
@@ -130,7 +130,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
     ((E) newArg).setParent((IGroupNode<IGroupMemberNode>) this);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to clear the parent reference on the child.
@@ -152,7 +152,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
   @Override
   public IGroupNode<E> addChild(final E child) {
 
-    addArg((BOp) child);
+    addArg(child);
 
     //        assert child.getParent() == this;
 
@@ -162,7 +162,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
   @Override
   public IGroupNode<E> removeChild(final E child) {
 
-    removeArg((BOp) child);
+    removeArg(child);
 
     //        assert child.getParent() == null;
 
@@ -199,7 +199,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
     setProperty(Annotations.FILTERS, filters);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to also clone the children and then set the parent reference on the cloned
@@ -219,7 +219,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
 
       aChild = (IGroupMemberNode) ((ASTBase) aChild).clone();
 
-      tmp.setArg(i, (ASTBase) aChild);
+      tmp.setArg(i, aChild);
     }
 
     return tmp;
@@ -280,8 +280,8 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
     for (IQueryNode n : this) {
 
       if (n instanceof AssignmentNode) {
-        /*
-         * Note: Otherwise no newline before an AssignmentNode since
+      /*
+       * Note: Otherwise no newline before an AssignmentNode since
          * also used in a ProjectionNode.
          */
         sb.append("\n");
@@ -349,7 +349,7 @@ public abstract class GroupNodeBase<E extends IGroupMemberNode> extends GroupMem
     return sb.toString();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Overridden to set the parent reference on the new child and clear the parent reference on

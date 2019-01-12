@@ -28,8 +28,8 @@ import org.embergraph.rdf.model.EmbergraphLiteral;
 import org.openrdf.model.Literal;
 import org.openrdf.model.URI;
 
-/**
- * Superclass for the inline numerics - {@link XSDNumericIV}, {@link XSDIntegerIV}, and {@link
+/*
+* Superclass for the inline numerics - {@link XSDNumericIV}, {@link XSDIntegerIV}, and {@link
  * XSDDecimalIV}.
  */
 public abstract class NumericIV<V extends EmbergraphLiteral, T> extends AbstractLiteralIV<V, T>
@@ -38,7 +38,7 @@ public abstract class NumericIV<V extends EmbergraphLiteral, T> extends Abstract
   /** */
   private static final long serialVersionUID = -2878889877313783890L;
 
-  /**
+  /*
    * Definition of numeric datatypes according to
    * http://www.w3.org/TR/sparql11-query/#operandDataTypes: "numeric denotes typed literals with
    * datatypes xsd:integer, xsd:decimal, xsd:float, and xsd:double."

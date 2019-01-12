@@ -2,8 +2,8 @@ package org.embergraph.bop.engine;
 
 import java.lang.ref.WeakReference;
 
-/**
- * Class pairs together the immutable deadline associated with a query and the {@link
+/*
+* Class pairs together the immutable deadline associated with a query and the {@link
  * AbstractRunningQuery}. The natural ordering places instances of this class into ascending
  * deadline order. The deadline is simply the timestamp at which the query deadline is expired.
  * Therefore, the instances are simply ordered by the time when their deadline will expire. The
@@ -19,7 +19,7 @@ class QueryDeadline implements Comparable<QueryDeadline> {
   /** The deadline for this query (in nanoseconds). */
   final long deadlineNanos;
 
-  /**
+  /*
    * A reference to the query.
    *
    * <p>Note: A {@link WeakReference} is used to avoid having the deadline queue pin the {@link
@@ -27,7 +27,7 @@ class QueryDeadline implements Comparable<QueryDeadline> {
    */
   private final WeakReference<AbstractRunningQuery> queryRef;
 
-  /**
+  /*
    * @param deadlineNanos The deadline for this query (in nanoseconds).
    * @param query The query.
    */
@@ -38,7 +38,7 @@ class QueryDeadline implements Comparable<QueryDeadline> {
     this.queryRef = new WeakReference<AbstractRunningQuery>(query);
   }
 
-  /**
+  /*
    * Comparator orders the queries based on increasing deadline. The query with the soonest deadline
    * will be ordered first. The query with the greatest deadline will be ordered last. Queries that
    * do not have an explicit deadline are assigned a deadline of {@link Long#MAX_VALUE} and will be
@@ -59,7 +59,7 @@ class QueryDeadline implements Comparable<QueryDeadline> {
     return 0;
   }
 
-  /**
+  /*
    * Check the deadline on the query. If the query is not terminated and the deadline has expired,
    * then the query is terminated as a side-effect.
    *

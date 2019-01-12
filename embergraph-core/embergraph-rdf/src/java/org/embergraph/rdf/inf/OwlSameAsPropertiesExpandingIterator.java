@@ -239,7 +239,7 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
     if (log.isInfoEnabled()) {
       final IEvaluationPlan plan = planFactory.newPlan(joinNexus, rule);
       StringBuilder sb = new StringBuilder();
-      int order[] = plan.getOrder();
+      int[] order = plan.getOrder();
       for (int i = 0; i < order.length; i++) {
         sb.append(order[i]);
         if (i < order.length - 1) {
@@ -360,7 +360,7 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
     public IAccessPath<ISPO> getAccessPath(final IAccessPath<ISPO> accessPath) {
       return new SameAsSelfAccessPath(accessPath);
     }
-  };
+  }
 
   private class SameAsSelfAccessPath implements IAccessPath<ISPO> {
     private IAccessPath<ISPO> accessPath;
@@ -382,8 +382,8 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
         throw new UnsupportedOperationException("s and o cannot both be variables");
       }
       if (s.isConstant() && o.isConstant() && s.get().equals(o.get()) == false) {
-        /*
-         * if s and o are both constants, then there is nothing for this
+      /*
+       * if s and o are both constants, then there is nothing for this
          * appender to append, unless they are equal to each other, in
          * which case we can append that solution
          */
@@ -497,7 +497,7 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
     public long removeAll() {
       throw new UnsupportedOperationException();
     }
-  };
+  }
 
   private class RejectSameAsSelf extends BOpBase implements BooleanValueExpression {
 
@@ -520,10 +520,7 @@ public class OwlSameAsPropertiesExpandingIterator implements IChunkedOrderedIter
       if (sVal == null || pVal == null || oVal == null) {
         return true;
       }
-      if (IVUtility.equals(pVal, sameAs) && IVUtility.equals(sVal, oVal)) {
-        return false;
-      }
-      return true;
+      return !IVUtility.equals(pVal, sameAs) || !IVUtility.equals(sVal, oVal);
     }
 
     private IV getValue(final IVariableOrConstant<IV> _x, final IBindingSet bindings) {

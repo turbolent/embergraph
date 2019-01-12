@@ -18,8 +18,8 @@ package cutthecrap.utils.striterators;
 import java.util.Comparator;
 import java.util.Iterator;
 
-/**
- * Used with Sorterator by Striterator to sort iterations.
+/*
+* Used with Sorterator by Striterator to sort iterations.
  *
  * <p>Cannot be instantiated directly since an implementation of the compare method is required.
  *
@@ -29,8 +29,8 @@ import java.util.Iterator;
  */
 public abstract class Sorter extends FilterBase implements Comparator {
 
-  //    /**
-  //     * Annotation giving the {@link Comparator} to be applied.
+  //    /*
+//     * Annotation giving the {@link Comparator} to be applied.
   //     */
   //    static final public String COMPARATOR = Sorter.class.getName()
   //            + ".comparator";

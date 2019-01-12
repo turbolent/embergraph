@@ -10,8 +10,8 @@ package cern.jet.stat.quantile;
 
 import cern.colt.list.DoubleArrayList;
 import cern.colt.list.ObjectArrayList;
-/**
- * The abstract base class for approximate quantile finders computing quantiles over a sequence of
+/*
+* The abstract base class for approximate quantile finders computing quantiles over a sequence of
  * <tt>double</tt> elements.
  */
 // abstract class ApproximateDoubleQuantileFinder extends Object implements DoubleQuantileFinder {
@@ -22,7 +22,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
   protected int totalElementsFilled;
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected DoubleQuantileEstimator() {}
-  /**
+  /*
    * Adds a value to the receiver.
    *
    * @param value the value to add.
@@ -41,7 +41,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
     currentBufferToFill.add(value);
     if (currentBufferToFill.isFull()) currentBufferToFill = null;
   }
-  /**
+  /*
    * Adds all values of the specified list to the receiver.
    *
    * @param values the list of which all values shall be added.
@@ -49,7 +49,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
   public void addAllOf(DoubleArrayList values) {
     addAllOfFromTo(values, 0, values.size() - 1);
   }
-  /**
+  /*
    * Adds the part of the specified list between indexes <tt>from</tt> (inclusive) and <tt>to</tt>
    * (inclusive) to the receiver.
    *
@@ -103,7 +103,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
     int minLevel = bufferSet._getMinLevelOfFullOrPartialBuffers();
     return bufferSet._getFullOrPartialBuffersWithLevel(minLevel);
   }
-  /**
+  /*
    * Removes all elements from the receiver. The receiver will be empty after this call returns, and
    * its memory requirements will be close to zero.
    */
@@ -112,7 +112,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
     this.currentBufferToFill = null;
     this.bufferSet.clear();
   }
-  /**
+  /*
    * Returns a deep copy of the receiver.
    *
    * @return a deep copy of the receiver.
@@ -143,7 +143,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
   public boolean contains(double element) {
     return bufferSet.contains(element);
   }
-  /**
+  /*
    * Applies a procedure to each element of the receiver, if any. Iterates over the receiver in no
    * particular order.
    *
@@ -155,7 +155,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
   public boolean forEach(cern.colt.function.DoubleProcedure procedure) {
     return this.bufferSet.forEach(procedure);
   }
-  /**
+  /*
    * Returns the number of elements currently needed to store all contained elements. This number
    * usually differs from the results of method <tt>size()</tt>, according to the underlying
    * datastructure.
@@ -165,7 +165,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
   }
   /** Not yet commented. */
   protected abstract void newBuffer();
-  /**
+  /*
    * Returns how many percent of the elements contained in the receiver are <tt>&lt;= element</tt>.
    * Does linear interpolation if the element is not contained but lies in between two contained
    * elements.
@@ -183,7 +183,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
   protected DoubleArrayList preProcessPhis(DoubleArrayList phis) {
     return phis;
   }
-  /**
+  /*
    * Computes the specified quantile elements over the values previously added.
    *
    * @param phis the quantiles for which elements are to be computed. Each phi must be in the
@@ -230,7 +230,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
     this.bufferSet = new DoubleBufferSet(b, k);
     this.clear();
   }
-  /**
+  /*
    * Returns the number of elements currently contained in the receiver (identical to the number of
    * values added so far).
    */
@@ -256,7 +256,7 @@ abstract class DoubleQuantileEstimator extends cern.colt.PersistentObject
         + this.bufferSet.totalSize()
         + ")";
   }
-  /**
+  /*
    * Returns the number of elements currently needed to store all contained elements. This number
    * usually differs from the results of method <tt>size()</tt>, according to the underlying
    * datastructure.

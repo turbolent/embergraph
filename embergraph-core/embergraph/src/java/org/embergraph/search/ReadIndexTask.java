@@ -9,8 +9,8 @@ import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleIterator;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Procedure reads on the terms index, aggregating data on a per-{@link Hit} basis.
+/*
+* Procedure reads on the terms index, aggregating data on a per-{@link Hit} basis.
  *
  * <p>The procedure uses an {@link IRangeQuery#rangeIterator(byte[], byte[])} to perform a key range
  * scan for a specific term. The range iterator will automatically issue queries, obtaining a
@@ -33,7 +33,7 @@ public class ReadIndexTask<V extends Comparable<V>> extends AbstractIndexTask<V>
   private final IHitCollector<V> hits;
   private final ITupleIterator<?> itr;
 
-  /**
+  /*
    * This instance is reused until it is consumed by a successful insertion into {@link #hits} using
    * {@link ConcurrentHashMap#putIfAbsent(Object, Object)}. Once successfully inserted, the {@link
    * Hit#setDocId(long) docId} is set on the {@link Hit} and a new instance is assigned to {@link
@@ -41,7 +41,7 @@ public class ReadIndexTask<V extends Comparable<V>> extends AbstractIndexTask<V>
    */
   private Hit<V> tmp; // = new Hit<V>();
 
-  /**
+  /*
    * Setup a task that will perform a range scan for entries matching the search term.
    *
    * @param termText The term text for the search term.
@@ -185,7 +185,7 @@ public class ReadIndexTask<V extends Comparable<V>> extends AbstractIndexTask<V>
     return nhits;
   }
 
-  /**
+  /*
    * Log an error and wrap the exception iff necessary.
    *
    * @param t The thrown error.

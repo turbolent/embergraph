@@ -34,7 +34,7 @@ public class CodeWordCoder implements PrefixCoder, Serializable {
   /** The array of codewords of this coder. */
   protected final BitVector[] codeWord;
 
-  /**
+  /*
    * Creates a new codeword-based coder using the given vector of codewords. The coder will be able
    * to encode symbols numbered from 0 to <code>codeWord.length-1</code>, included.
    *

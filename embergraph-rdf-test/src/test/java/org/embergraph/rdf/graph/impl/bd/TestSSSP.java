@@ -24,8 +24,8 @@ import org.embergraph.rdf.graph.IGraphAccessor;
 import org.embergraph.rdf.graph.analytics.SSSP;
 import org.openrdf.model.URI;
 
-/**
- * Test class for SSP traversal.
+/*
+* Test class for SSP traversal.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -72,7 +72,7 @@ public class TestSSSP extends AbstractEmbergraphGraphTestCase {
     }
   }
 
-  /**
+  /*
    * A unit test based on graph with link weights - in this version of the test we constrain the
    * link type but do not specify the link attribute type. Hence it ignores the link weights. This
    * provides a test of the optimized access path when just the link type constraint is specified.
@@ -118,7 +118,7 @@ public class TestSSSP extends AbstractEmbergraphGraphTestCase {
     }
   }
 
-  /**
+  /*
    * A unit test based on graph with link weights.
    *
    * <p>FIXME Test with just the linkAttributeType constraint and with both a linkType and

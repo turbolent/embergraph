@@ -26,8 +26,8 @@ import org.embergraph.bop.IElement;
 import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 
-/**
- * Abstract base class for {@link EmbergraphValue} implementations.
+/*
+* Abstract base class for {@link EmbergraphValue} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -48,8 +48,8 @@ public abstract class EmbergraphValueImpl implements EmbergraphValue {
   }
 
   //    Note: unused.
-  //    /**
-  //     *
+  //    /*
+//     *
   //     * @param valueFactory
   //     *
   //     * @throws IllegalArgumentException
@@ -70,7 +70,7 @@ public abstract class EmbergraphValueImpl implements EmbergraphValue {
   //
   //    }
 
-  /**
+  /*
    * @param valueFactory The value factory that created this object (optional).
    * @param iv The internal value (optional).
    */
@@ -94,9 +94,7 @@ public abstract class EmbergraphValueImpl implements EmbergraphValue {
 
     if (iv == null) return false;
 
-    if (iv.isNullIV()) return false;
-
-    return true;
+    return !iv.isNullIV();
   }
 
   @Override
@@ -122,7 +120,7 @@ public abstract class EmbergraphValueImpl implements EmbergraphValue {
     this.iv = iv;
   }
 
-  /**
+  /*
    * Extends the serialization format to include the namespace of the lexicon so we can recover the
    * {@link EmbergraphValueFactory} singleton reference for that namespace when the value is
    * deserialized.
@@ -131,10 +129,10 @@ public abstract class EmbergraphValueImpl implements EmbergraphValue {
 
     out.defaultWriteObject();
 
-    out.writeUTF(((EmbergraphValueFactoryImpl) valueFactory).getNamespace());
+    out.writeUTF(valueFactory.getNamespace());
   }
 
-  /**
+  /*
    * Imposes the canonicalizing mapping on the non-Serializable EmbergraphValueFactory during object
    * de-serialization.
    */
@@ -148,7 +146,7 @@ public abstract class EmbergraphValueImpl implements EmbergraphValue {
     valueFactory = EmbergraphValueFactoryImpl.getInstance(namespace);
   }
 
-  /**
+  /*
    * Implements {@link IElement}. EmbergraphValue acts as a lexicon element, with the term in the
    * 0th index position and the IV in the 1st index position.
    */

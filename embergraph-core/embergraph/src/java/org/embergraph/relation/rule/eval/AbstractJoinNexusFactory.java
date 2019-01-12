@@ -35,8 +35,8 @@ import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.accesspath.IElementFilter;
 import org.embergraph.relation.rule.IRule;
 
-/**
- * Base implementation for {@link IJoinNexusFactory}.
+/*
+* Base implementation for {@link IJoinNexusFactory}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -92,14 +92,14 @@ public abstract class AbstractJoinNexusFactory implements IJoinNexusFactory {
     return sb.toString();
   }
 
-  /**
+  /*
    * Allows extension of {@link #toString()} by derived classes.
    *
    * @param sb
    */
   protected void toString(final StringBuilder sb) {}
 
-  /**
+  /*
    * @param action Indicates whether this is a Query, Insert, or Delete operation.
    * @param writeTimestamp The timestamp of the relation view(s) using to write on the {@link
    *     IMutableRelation}s (ignored if you are not execution mutation programs).
@@ -168,7 +168,7 @@ public abstract class AbstractJoinNexusFactory implements IJoinNexusFactory {
     }
   }
 
-  /**
+  /*
    * Factory for {@link IJoinNexus} instances used by {@link #newInstance(IIndexManager)} as past of
    * its singleton pattern.
    */

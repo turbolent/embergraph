@@ -18,8 +18,8 @@
  */
 package org.apache.system;
 
-/**
- * This interface is for CPUParser objects that are automagically loaded, and perform architecture
+/*
+* This interface is for CPUParser objects that are automagically loaded, and perform architecture
  * dependant processing for determining the number of CPUs, and the generic infomation about them.
  *
  * @author <a href="mailto:dev@avalon.apache.org">Avalon Development Team</a>
@@ -29,7 +29,7 @@ public interface CPUParser {
   /** Return the number of processors available on the machine */
   int numProcessors();
 
-  /**
+  /*
    * Return the cpu info for the processors (assuming symetric multiprocessing which means that all
    * CPUs are identical). The format is:
    *

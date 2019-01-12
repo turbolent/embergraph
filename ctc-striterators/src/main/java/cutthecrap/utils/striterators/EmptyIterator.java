@@ -17,8 +17,8 @@ package cutthecrap.utils.striterators;
 
 import java.util.Iterator;
 
-/**
- * *************************************************************************
+/*
+* *************************************************************************
  *
  * <p>Need to return an iterator to indicate that there's nothing there? Here's one ready made.
  *

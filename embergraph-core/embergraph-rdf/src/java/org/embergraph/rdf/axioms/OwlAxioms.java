@@ -27,8 +27,8 @@ import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * The axioms for RDF Schema plus a few axioms to support owl:sameAs, owl:equivalentProperty, and
+/*
+* The axioms for RDF Schema plus a few axioms to support owl:sameAs, owl:equivalentProperty, and
  * owl:equivalentClass.
  *
  * @author personickm

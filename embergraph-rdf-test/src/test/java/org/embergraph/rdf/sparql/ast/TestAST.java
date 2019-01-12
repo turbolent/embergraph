@@ -36,8 +36,8 @@ import org.embergraph.rdf.internal.constraints.XSDBooleanIVValueExpression;
 import org.embergraph.rdf.internal.impl.TermId;
 import org.openrdf.query.algebra.Compare.CompareOp;
 
-/**
- * TODO This does not really "test" much, just exercises some basic aspects of the API. You need to
+/*
+* TODO This does not really "test" much, just exercises some basic aspects of the API. You need to
  * verify the "pretty print" of the AST by hand. It is just written onto the log.
  *
  * @author <a href="mailto:mpersonick@users.sourceforge.net">Mike Personick</a>
@@ -131,7 +131,7 @@ public class TestAST extends TestCase {
     if (log.isInfoEnabled()) log.info("\n" + query.toString());
   }
 
-  /**
+  /*
    * select * where { predicate1 . filter2 . { predicate3 . predicate4 . } union { predicate5 .
    * predicate6 . } }
    */
@@ -208,7 +208,7 @@ public class TestAST extends TestCase {
 
     if (log.isInfoEnabled()) log.info("\n" + query.toString());
 
-    /**
+    /*
      * Now build up a subquery and add it to the query.
      *
      * <pre>
@@ -268,7 +268,7 @@ public class TestAST extends TestCase {
 
     return new Filter(id);
   }
-  /**
+  /*
    * @deprecated This was just for compatibility with SOp2ASTUtility. It is only used by the test
    *     suite now.
    */

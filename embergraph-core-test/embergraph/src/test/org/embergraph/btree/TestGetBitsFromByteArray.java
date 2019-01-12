@@ -28,8 +28,8 @@ import junit.framework.TestCase2;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Unit tests for {@link BytesUtil#getBits(byte[], int, int)}
+/*
+* Unit tests for {@link BytesUtil#getBits(byte[], int, int)}
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -88,7 +88,7 @@ public class TestGetBitsFromByteArray extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * length may address all bits (32) in 4 bytes, but not 33 bits since the return value would be
    * larger than an int32.
    */
@@ -103,7 +103,7 @@ public class TestGetBitsFromByteArray extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * length may address (32) bits in 5 bytes, but not 33 bits since the return value would be larger
    * than an int32.
    */
@@ -171,7 +171,7 @@ public class TestGetBitsFromByteArray extends TestCase2 {
     assertEquals(0x08000000, getBits(b, 0 /* off */, 29 /* len */));
   }
 
-  /**
+  /*
    * byte[4] (32-bits) with MSB ONE (this test case is the mostly likely to run a foul of a sign bit
    * extension).
    */
@@ -235,7 +235,7 @@ public class TestGetBitsFromByteArray extends TestCase2 {
     assertEquals(0x00000000, getBits(b, 15 /* off */, 4 /* len */));
   }
 
-  /**
+  /*
    * byte[2] (16-bits)
    *
    * @todo test slices from arrays with more than 4 bytes
@@ -330,7 +330,7 @@ public class TestGetBitsFromByteArray extends TestCase2 {
     return ret;
   }
 
-  /**
+  /*
    * A stress test for compatibility with {@link InputBitStream}. An array is filled with random
    * bits and the behavior of {@link InputBitStream} and {@link BytesUtil#getBits(byte[], int, int)}
    * is compared on a number of randomly selected bit slices.

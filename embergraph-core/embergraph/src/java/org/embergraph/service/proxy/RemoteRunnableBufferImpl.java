@@ -29,8 +29,8 @@ import java.util.concurrent.Future;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IRunnableBuffer;
 
-/**
- * A helper object that provides the API of {@link IBlockingBuffer} but whose methods throw {@link
+/*
+* A helper object that provides the API of {@link IBlockingBuffer} but whose methods throw {@link
  * IOException} and are therefore compatible with {@link Remote} and Exporter.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -44,7 +44,7 @@ public class RemoteRunnableBufferImpl<E, V> extends RemoteBufferImpl<E>
   private final IRunnableBuffer<E> localBuffer;
   private final Future<V> futureProxy;
 
-  /**
+  /*
    * @param localBuffer
    * @param futureProxy
    */

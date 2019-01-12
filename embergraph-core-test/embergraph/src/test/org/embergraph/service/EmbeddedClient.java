@@ -23,8 +23,8 @@ package org.embergraph.service;
 
 import java.util.Properties;
 
-/**
- * A client for an embedded federation (the client and the data services all run in the same
+/*
+* A client for an embedded federation (the client and the data services all run in the same
  * process).
  *
  * @see EmbeddedFederation
@@ -84,25 +84,25 @@ public class EmbeddedClient<T> extends AbstractScaleOutClient<T> {
     return fed;
   }
 
-  /**
+  /*
    * Options for the embedded (in process) federation. Service instances will share the same
    * configuration properties except for the name of the backing store file.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options extends IEmbergraphClient.Options, MetadataService.Options {
+  public interface Options extends IEmbergraphClient.Options, MetadataService.Options {
 
-    /**
+    /*
      * The name of the optional property whose value is the #of data services that will be
      * (re-)started.
      */
-    public static String NDATA_SERVICES = EmbeddedFederation.class.getName() + ".ndataServices";
+    String NDATA_SERVICES = EmbeddedFederation.class.getName() + ".ndataServices";
 
     /** The default is two (2). */
-    public static String DEFAULT_NDATA_SERVICES = "2";
+    String DEFAULT_NDATA_SERVICES = "2";
 
-    /**
+    /*
      * The name of the required property whose value is the name of the directory under which each
      * metadata and data service will store their state (their journals and index segments).
      *
@@ -116,6 +116,6 @@ public class EmbeddedClient<T> extends AbstractScaleOutClient<T> {
      * to give each embedded federation its own data directory. Otherwise a new federation starting
      * up with another federation's data directory will attempt to re-start that federation.
      */
-    public static final String DATA_DIR = EmbeddedFederation.class.getName() + ".dataDir";
+    String DATA_DIR = EmbeddedFederation.class.getName() + ".dataDir";
   }
 }

@@ -9,8 +9,8 @@ import org.embergraph.counters.query.CSet;
 import org.embergraph.counters.query.HistoryTable;
 import org.embergraph.counters.query.PivotTable;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class TabDelimitedPivotTableRenderer extends PivotTableRenderer {
@@ -81,8 +81,8 @@ public class TabDelimitedPivotTableRenderer extends PivotTableRenderer {
                 + "category names: "
                 + Arrays.toString(pt.cnames);
 
-        /*
-         * Aggregate values for counters in this cset having a value for
+      /*
+       * Aggregate values for counters in this cset having a value for
          * each value column in turn.
          *
          * If none of the counters in the cset have a value for the row
@@ -140,8 +140,8 @@ public class TabDelimitedPivotTableRenderer extends PivotTableRenderer {
 
               valueCountForColumn++;
 
-              /*
-               * The counter appears just once in the data table
+            /*
+       * The counter appears just once in the data table
                * so we can stop once we find its index.
                */
               break;
@@ -150,8 +150,8 @@ public class TabDelimitedPivotTableRenderer extends PivotTableRenderer {
 
           if (valueCountForColumn > 0) {
 
-            /*
-             * There was at least one sample for the current value
+          /*
+       * There was at least one sample for the current value
              * column.
              */
 

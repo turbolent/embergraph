@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rawstore;
 
-/**
- * An abstract base class for {@link IRawStore} implementations that use an append only (Write Once,
+/*
+* An abstract base class for {@link IRawStore} implementations that use an append only (Write Once,
  * Read Many) strategy. The {@link IAddressManager} interface is delegated to an {@link
  * WormAddressManager} allowing flexible configuration of the use of bits to represent the byte
  * offset of a record in the store and the bits used to represent the size of a record in the store.
@@ -42,7 +42,7 @@ public abstract class AbstractRawWormStore extends AbstractRawStore implements I
     return am;
   }
 
-  /**
+  /*
    * The #of bits out of a 64-bit long integer that are used to encode the byte offset as an
    * unsigned integer. The remaining bits are used to encode the byte count (aka record length) as
    * an unsigned integer.
@@ -52,7 +52,7 @@ public abstract class AbstractRawWormStore extends AbstractRawStore implements I
     return am.offsetBits;
   }
 
-  /**
+  /*
    * @param offsetBits The #of bits that will be used to represent the byte offset in the 64-bit
    *     long integer addresses for the store. See {@link WormAddressManager}.
    */

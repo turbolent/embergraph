@@ -51,8 +51,8 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserFactory;
 import org.openrdf.rio.RDFParserRegistry;
 
-/**
- * Handler for NanoSparqlServer REST API UPDATE operations (PUT, not SPARQL UPDATE).
+/*
+* Handler for NanoSparqlServer REST API UPDATE operations (PUT, not SPARQL UPDATE).
  *
  * @author martyncutcher
  */
@@ -98,7 +98,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
     doUpdateWithQuery(req, resp);
   }
 
-  /**
+  /*
    * Delete all statements materialized by a DESCRIBE or CONSTRUCT query and then insert all
    * statements in the request body.
    *
@@ -136,7 +136,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
 
     if (log.isInfoEnabled()) log.info("Request body: " + contentType);
 
-    /**
+    /*
      * <a href="https://sourceforge.net/apps/trac/bigdata/ticket/620">UpdateServlet fails to parse
      * MIMEType when doing conneg. </a>
      */
@@ -267,7 +267,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * Streaming version is more scalable but is not compatible with group commit. The underlying
    * issue is the serializability of the mutation operations. This task reads from the last commit
    * time and writes on the unisolated indices. It holds the lock on the unisolated indices while
@@ -286,7 +286,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
     private final Resource[] defaultContextInsert;
     private final Map<String, Value> bindings;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      * @param baseURI The base URI for the operation.
@@ -365,8 +365,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
           final EmbergraphRDFContext context =
               EmbergraphServlet.getEmbergraphRDFContext(req.getServletContext());
 
-          /*
-           * Note: pipe is drained by this thread to consume the query
+        /*
+       * Note: pipe is drained by this thread to consume the query
            * results, which are the statements to be deleted.
            */
           final PipedOutputStream os = new PipedOutputStream();
@@ -442,8 +442,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
             // Run INSERT
             {
 
-              /*
-               * There is a request body, so let's try and parse
+            /*
+       * There is a request body, so let's try and parse
                * it.
                */
 
@@ -460,8 +460,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
               rdfParser.setRDFHandler(
                   new AddStatementHandler(conn, nmodified, defaultContextInsert));
 
-              /*
-               * Run the parser, which will cause statements to be
+            /*
+       * Run the parser, which will cause statements to be
                * inserted.
                */
               rdfParser.parse(req.getInputStream(), baseURI);
@@ -508,7 +508,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
     }
   } // class UpdateWithQueryStreamingTask
 
-  /**
+  /*
    * This version runs the query against the unisolated connection, fully buffers the statements to
    * be removed, and then removes them. Since both the read and the write are on the unisolated
    * connection, it see all mutations that have been applied since the last group commit and
@@ -526,7 +526,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
     private final Resource[] defaultContextInsert;
     private final Map<String, Value> bindings;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      * @param baseURI The base URI for the operation.
@@ -613,8 +613,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
             final EmbergraphRDFContext context =
                 EmbergraphServlet.getEmbergraphRDFContext(req.getServletContext());
 
-            /*
-             * Note: pipe is drained by this thread to consume the query
+          /*
+       * Note: pipe is drained by this thread to consume the query
              * results, which are the statements to be deleted.
              */
             final PipedOutputStream os = new PipedOutputStream();
@@ -690,8 +690,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
             // Run INSERT
             {
 
-              /*
-               * There is a request body, so let's try and parse it.
+            /*
+       * There is a request body, so let's try and parse it.
                */
 
               final RDFParser rdfParser = parserFactory.getParser();
@@ -707,8 +707,8 @@ public class UpdateServlet extends EmbergraphRDFServlet {
               rdfParser.setRDFHandler(
                   new AddStatementHandler(conn, nmodified, defaultContextInsert));
 
-              /*
-               * Run the parser, which will cause statements to be inserted.
+            /*
+       * Run the parser, which will cause statements to be inserted.
                */
               rdfParser.parse(req.getInputStream(), baseURI);
             }
@@ -773,7 +773,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * UPDATE request with a request body containing the statements to be removed and added as a
    * multi-part mime request.
    */
@@ -905,7 +905,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
     private final Resource[] defaultContextDelete;
     private final Resource[] defaultContextInsert;
 
-    /**
+    /*
      * @param namespace The namespace of the target KB instance.
      * @param timestamp The timestamp used to obtain a mutable connection.
      * @param baseURI The base URI for the operation.
@@ -1024,7 +1024,7 @@ public class UpdateServlet extends EmbergraphRDFServlet {
         final String baseURI)
         throws Exception {
 
-      /**
+      /*
        * Note: The request was already validated.
        *
        * <p><a href="https://sourceforge.net/apps/trac/bigdata/ticket/620">UpdateServlet fails to

@@ -51,8 +51,8 @@ import org.embergraph.relation.rule.IAccessPathExpander;
 import org.embergraph.striterator.IKeyOrder;
 import org.embergraph.util.Bytes;
 
-/**
- * Sampling operator for the {@link IAccessPath} implied by an {@link IPredicate}.
+/*
+* Sampling operator for the {@link IAccessPath} implied by an {@link IPredicate}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: AbstractSampleIndex.java 3672 2010-09-28 23:39:42Z thompsonbry $
@@ -68,7 +68,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * Typesafe enumeration of different kinds of index sampling strategies.
    *
    * @todo It is much more efficient to take clusters of samples when you can accept the bias.
@@ -76,8 +76,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
    *     index, e.g., using {@link ILeafCursor}. Taking all tuples from a few leaves in each sample
    *     might produce a faster estimation of the correlation when sampling join paths.
    */
-  public static enum SampleType {
-    /**
+  public enum SampleType {
+    /*
      * Samples are taken at even space offsets. This produces a sample without any random effects.
      * Re-sampling an index having the same data with the same key-range and the limit will always
      * return the same results. This is useful to make unit test repeatable.
@@ -85,11 +85,11 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     EVEN,
     /** Sample offsets are computed randomly. */
     RANDOM,
-    /**
+    /*
      * The samples will be dense and may bave a front bias. This mode emphasizes the locality of the
      * samples on the index pages and minimizes the IO associated with sampling.
      */
-    DENSE;
+    DENSE
   }
 
   /** Known annotations. */
@@ -100,7 +100,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
 
     int DEFAULT_LIMIT = 100;
 
-    /**
+    /*
      * The random number generator seed -or- ZERO (0L) for a random seed (default {@value
      * #DEFAULT_SEED}). A non-zero value may be used to create a repeatable sample.
      */
@@ -162,7 +162,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
   }
 
-  /**
+  /*
    * Sample an {@link IAccessPath}.
    *
    * <p>FIXME This needs to handle each of the following conditions:
@@ -211,7 +211,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       return sample(limit(), getSampleType(), getPredicate()).getSample();
     }
 
-    /**
+    /*
      * Return a sample from the access path.
      *
      * @param limit
@@ -229,8 +229,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
 
       if (limit >= rangeCount) {
 
-        /*
-         * The sample will contain everything in the access path.
+      /*
+       * The sample will contain everything in the access path.
          */
         return new AccessPathSample<E>(limit, accessPath);
       }
@@ -276,7 +276,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
   }
 
-  /**
+  /*
    * Dense samples in key order (simple index scan).
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -292,7 +292,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
   }
 
-  /**
+  /*
    * An advancer pattern which is designed to take evenly distributed samples from an index. The
    * caller specifies the #of tuples to be sampled. This class estimates the range count of the
    * access path and then computes the #of samples to be skipped after each tuple visited.
@@ -369,8 +369,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
 
       if (skipCount > 0) {
 
-        /*
-         * If the skip count is positive, then skip over N tuples.
+      /*
+       * If the skip count is positive, then skip over N tuples.
          */
 
         final long nextIndex = Math.min(ndx.getEntryCount() - 1, currentIndex + skipCount);
@@ -380,7 +380,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
   } // class EvenSampleAdvancer
 
-  /**
+  /*
    * An advancer pattern which is designed to take randomly distributed samples from an index. The
    * caller specifies the #of tuples to be sampled. This class estimates the range count of the
    * access path and then computes a set of random offsets into the access path from which it will
@@ -465,8 +465,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
 
       if (nread < offsets.length - 1) {
 
-        /*
-         * Skip to the next tuple.
+      /*
+       * Skip to the next tuple.
          */
 
         final long nextIndex = offsets[nread];
@@ -483,7 +483,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
   } // class RandomSampleAdvancer
 
-  /**
+  /*
    * A sample from an access path.
    *
    * @param <E> The generic type of the elements visited by that access path.
@@ -498,7 +498,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     private final int limit;
     private final E[] sample;
 
-    /**
+    /*
      * Constructor populates the sample using the caller's {@link IAccessPath#iterator()}. The
      * caller is responsible for setting up the {@link IAccessPath} such that it provides an
      * efficient sample of the access path with the appropriate constraints.
@@ -553,7 +553,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       return limit;
     }
 
-    /**
+    /*
      * The sample.
      *
      * @return The sample -or- <code>null</code> if the sample was empty.
@@ -563,14 +563,14 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
   } // AccessPathSample
 
-  /**
+  /*
    * Interface for obtaining an array of tuple offsets to be sampled.
    *
    * @author thompsonbry
    */
   public interface IOffsetSampler {
 
-    /**
+    /*
      * Return an array of tuple indices which may be used to sample a key range of some index.
      *
      * <p>Note: The caller must stop when it runs out of offsets, not when the limit is satisfied,
@@ -592,7 +592,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     long[] getOffsets(long seed, int limit, long fromIndex, long toIndex);
   }
 
-  /**
+  /*
    * A smart implementation which uses whichever implementation is most efficient for the limit and
    * key range to be sampled.
    *
@@ -611,8 +611,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       final long rangeCount = (toIndex - fromIndex);
 
       if (limit > rangeCount) {
-        /*
-         * Note: cast valid since limit is int32 and limit LT rangeCount
+      /*
+       * Note: cast valid since limit is int32 and limit LT rangeCount
          * so rangeCount may be cast to int32.
          */
         limit = (int) rangeCount;
@@ -660,13 +660,13 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
   }
 
-  /**
+  /*
    * Returns all offsets in the half-open range, but may only be used when the limit GTE the range
    * count.
    */
   public static class EntireRangeOffsetSampler implements IOffsetSampler {
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * @throws UnsupportedOperationException if <i>limit!=rangeCount</i> (after adjusting for limits
@@ -682,8 +682,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       final long rangeCount = (toIndex - fromIndex);
 
       if (limit > rangeCount) {
-        /*
-         * Note: cast valid since limit is int32 and limit LT rangeCount
+      /*
+       * Note: cast valid since limit is int32 and limit LT rangeCount
          * so rangeCount may be cast to int32.
          */
         limit = (int) rangeCount;
@@ -703,7 +703,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
   }
 
-  /**
+  /*
    * Return a randomly selected ordered array of offsets in the given half-open range.
    *
    * <p>This approach is based on a bit vector. If the bit is already marked, then the offset has
@@ -716,7 +716,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
    */
   public static class BitVectorOffsetSampler implements IOffsetSampler {
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Note: The utility of this class is limited to smaller range counts (32k is fine, 2x or 4k
@@ -734,8 +734,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       final long rangeCount2 = (toIndex - fromIndex);
 
       if (rangeCount2 > Integer.MAX_VALUE) {
-        /*
-         * The utility of this class is limited to smaller range counts
+      /*
+       * The utility of this class is limited to smaller range counts
          * so it will reject anything with a very large range count.
          */
         throw new UnsupportedOperationException();
@@ -763,8 +763,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       // Choose random tuple indices for the remaining tuples.
       for (int i = 0; i < limit; i++) {
 
-        /*
-         * Look for an unused bit starting at this index. If necessary,
+      /*
+       * Look for an unused bit starting at this index. If necessary,
          * this will wrap around to zero.
          */
 
@@ -808,7 +808,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
     }
   }
 
-  /**
+  /*
    * An implementation based on an acceptance set of offsets which have been accepted. This
    * implementation is a good choice when the limit moderate (~100k) and the rangeCount is
    * significantly greater than the limit. The memory demand is the O(limit).
@@ -817,7 +817,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
    */
   public static class AcceptanceSetOffsetSampler implements IOffsetSampler {
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>Note: The utility of this class is limited to moderate range counts (~100k) so it will
@@ -857,8 +857,8 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
       // Choose random tuple indices for the remaining tuples.
       for (int i = 0; i < limit; i++) {
 
-        /*
-         * Look for an unused bit starting at this index. If necessary,
+      /*
+       * Look for an unused bit starting at this index. If necessary,
          * this will wrap around to zero.
          */
 

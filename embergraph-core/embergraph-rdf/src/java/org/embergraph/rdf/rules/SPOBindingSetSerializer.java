@@ -31,8 +31,8 @@ import org.embergraph.io.SerializerUtil;
 import org.embergraph.rdf.spo.SPO;
 import org.embergraph.relation.rule.eval.ISolution;
 
-/**
- * A class that provides (relatively) compact serialization for a chunk of {@link IBindingSet}s.
+/*
+* A class that provides (relatively) compact serialization for a chunk of {@link IBindingSet}s.
  *
  * <p>FIXME This implementation is not complete and is not tested.
  *
@@ -192,8 +192,8 @@ public class SPOBindingSetSerializer implements IStreamSerializer<IBindingSet[]>
     SerializerUtil.STREAMS.serialize(out, obj);
   }
 
-  //    /**
-  //     * The natural log of 2.
+  //    /*
+//     * The natural log of 2.
   //     */
   //    final static transient private double LOG2 = Math.log(2);
 

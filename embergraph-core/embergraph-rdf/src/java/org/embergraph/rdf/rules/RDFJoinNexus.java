@@ -77,8 +77,8 @@ import org.embergraph.striterator.IChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * {@link IProgram} execution support for the RDF DB.
+/*
+* {@link IProgram} execution support for the RDF DB.
  *
  * <p>The rules have potential parallelism when performing closure. Each join has potential
  * parallelism as well for subqueries. We could even define a PARALLEL iterator flag and have
@@ -134,8 +134,8 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
           return new RDFRuleStats(null, getReadTimestamp(), ruleState);
         }
 
-        //        /**
-        //         * Factory will resolve term identifiers in {@link IPredicate}s in the
+        //        /*
+//         * Factory will resolve term identifiers in {@link IPredicate}s in the
         //         * tail of the {@link IRule} to {@link EmbergraphValue}s unless the
         //         * {@link IIndexManager} is an {@link IEmbergraphFederation}.
         //         *
@@ -157,7 +157,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
 
       };
 
-  /**
+  /*
    * Extends {@link RuleStats}s to translate the tail predicates back into RDF by resolving the term
    * identifiers to {@link EmbergraphValue}s.
    */
@@ -175,7 +175,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
       timestamp = 0L; // ignored.
     }
 
-    /**
+    /*
      * @param indexManager When non-<code>null</code>, this is used to resolve the term identifiers
      *     in the {@link IPredicate}s in the tail of the rule to {@link EmbergraphValue}s.
      * @param ruleState
@@ -230,8 +230,8 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
         }
       } catch (Throwable t) {
 
-        /*
-         * @todo It appears that someone is interrupting the thread in
+      /*
+       * @todo It appears that someone is interrupting the thread in
          * which the logging data is being generated. You can see this
          * if you enable translation of term identifiers above in the
          * factory that produces instances of this class.
@@ -253,7 +253,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
     }
   }
 
-  /**
+  /*
    * @param joinNexusFactory The object used to create this instance and which can be used to create
    *     other instances as necessary for distributed rule execution.
    * @param indexManager The object used to resolve indices, relations, etc.
@@ -276,7 +276,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
     return ruleStatisticsFactory;
   }
 
-  /**
+  /*
    * When {@link #backchain} is <code>true</code> and the tail predicate is reading on the {@link
    * SPORelation}, then the {@link IAccessPath} is wrapped so that the iterator will visit the
    * backchained inferences as well. On the other hand, if {@link IPredicate#getPartitionId()} is
@@ -429,7 +429,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
   private static final transient IConstant<IV> fakeTermId =
       new Constant<IV>(TermId.mockIV(VTE.URI));
 
-  /**
+  /*
    * FIXME unit tests for DISTINCT with a head and ELEMENT, with bindings and a head, with bindings
    * but no head, and with a head but no bindings (error). See {@link #runQuery(IStep)}
    *
@@ -476,7 +476,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
     return new SPOSortKeyBuilder(head.arity());
   }
 
-  /**
+  /*
    * Buffer writes on {@link IMutableRelation#insert(IChunkedIterator)} when it is {@link #flush()
    * flushed}.
    *
@@ -486,7 +486,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
    */
   public static class InsertSPOAndJustificationBuffer<E> extends AbstractSolutionBuffer<E> {
 
-    /**
+    /*
      * @param capacity
      * @param relation
      */
@@ -500,8 +500,8 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
 
       try {
 
-        /*
-         * The mutation count is the #of SPOs written (there is one
+      /*
+       * The mutation count is the #of SPOs written (there is one
          * justification written per solution generated, but the
          * mutation count does not reflect duplicate justifications -
          * only duplicate statements).
@@ -554,7 +554,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
         b[i] = new Justification(solution);
       }
 
-      final SPORelation r = (SPORelation) (IMutableRelation) getRelation();
+      final SPORelation r = (SPORelation) getRelation();
 
       /*
        * Use a thread pool to write out the statement and the
@@ -618,7 +618,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
     }
   }
 
-  /**
+  /*
    * Overridden to handle justifications when using truth maintenance.
    *
    * <p>{@inheritDoc}

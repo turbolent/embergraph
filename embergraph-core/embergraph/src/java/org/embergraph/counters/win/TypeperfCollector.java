@@ -49,8 +49,8 @@ import org.embergraph.util.CSVReader;
 import org.embergraph.util.CSVReader.Header;
 import org.embergraph.util.InnerCause;
 
-/**
- * Collects per-host performance counters on a Windows platform using <code>typeperf</code> and
+/*
+* Collects per-host performance counters on a Windows platform using <code>typeperf</code> and
  * aligns them with those declared by {@link IRequiredHostCounters}.
  *
  * <p>Note: The names of counters under Windows are NOT case-sensitive.
@@ -64,24 +64,24 @@ public class TypeperfCollector extends AbstractProcessCollector {
 
   private static final Logger log = Logger.getLogger(TypeperfCollector.class);
 
-  //    /**
-  //     * True iff the {@link #log} level is INFO or less.
+  //    /*
+//     * True iff the {@link #log} level is INFO or less.
   //     */
   //    final protected static boolean INFO = log.isInfoEnabled();
   //
-  //    /**
-  //     * True iff the {@link #log} level is DEBUG or less.
+  //    /*
+//     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    final protected static boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Updated each time a new row of data is read from the process and reported as the last modified
    * time for counters based on that process and defaulted to the time that we begin to collect
    * performance data.
    */
   private long lastModified = System.currentTimeMillis();
 
-  /**
+  /*
    * Map containing the current values for the configured counters. The keys are paths into the
    * {@link CounterSet}. The values are the data most recently read from <code>typeperf</code>.
    *
@@ -98,7 +98,7 @@ public class TypeperfCollector extends AbstractProcessCollector {
     super(interval);
   }
 
-  /**
+  /*
    * An {@link IInstrument} for a performance counter on a Windows platform. Each declaration knows
    * both the name of the performance counter on the Windows platform and how to report that counter
    * under the appropriate name for our {@link ICounterSet}s.
@@ -120,7 +120,7 @@ public class TypeperfCollector extends AbstractProcessCollector {
       return counterNameForWindows;
     }
 
-    /**
+    /*
      * The path for the {@link ICounter}.
      *
      * @see IRequiredHostCounters
@@ -130,7 +130,7 @@ public class TypeperfCollector extends AbstractProcessCollector {
       return path;
     }
 
-    /**
+    /*
      * Declare a performance counter for the Windows platform.
      *
      * @param counterNameForWindows The name of the performance counter to be collected.
@@ -180,7 +180,7 @@ public class TypeperfCollector extends AbstractProcessCollector {
     }
   }
 
-  /**
+  /*
    * Generate command to write performance counters on the console.
    *
    * <p>The sample interval format is -si [hh:[mm:]]ss.
@@ -229,7 +229,7 @@ public class TypeperfCollector extends AbstractProcessCollector {
     return new ProcessReader();
   }
 
-  /**
+  /*
    * Class reads the CSV output of <code>typeperf</code>.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -430,104 +430,102 @@ public class TypeperfCollector extends AbstractProcessCollector {
 
     decls =
         Arrays.asList(
-            new InstrumentForWPC[] {
-              new InstrumentForWPC(
-                  "\\Memory\\Pages/Sec", p + IRequiredHostCounters.Memory_majorFaultsPerSecond, 1d),
-              new InstrumentForWPC(
-                  "\\Processor(_Total)\\% Processor Time",
-                  p + IRequiredHostCounters.CPU_PercentProcessorTime, .01d),
-              new InstrumentForWPC(
-                  "\\LogicalDisk(_Total)\\% Free Space",
-                  p + IRequiredHostCounters.LogicalDisk_PercentFreeSpace, .01d),
+            new InstrumentForWPC(
+                "\\Memory\\Pages/Sec", p + IRequiredHostCounters.Memory_majorFaultsPerSecond, 1d),
+            new InstrumentForWPC(
+                "\\Processor(_Total)\\% Processor Time",
+                p + IRequiredHostCounters.CPU_PercentProcessorTime, .01d),
+            new InstrumentForWPC(
+                "\\LogicalDisk(_Total)\\% Free Space",
+                p + IRequiredHostCounters.LogicalDisk_PercentFreeSpace, .01d),
 
-              /*
-               * These are system wide counters for the network interface.
-               * There are also counters for the network queue length, packets
-               * discarded, and packet errors that might be interesting. (I
-               * can't find _Total versions declared for these counters so I
-               * am not including them but the counters for the specific
-               * interfaces could be enabled and then aggregated, eg:
-               *
-               * \NetworkInterface(*)\Bytes Send/Sec
-               */
-              // "\\Network Interface(_Total)\\Bytes
-              // Received/Sec",
-              // "\\Network Interface(_Total)\\Bytes Sent/Sec",
-              // "\\Network Interface(_Total)\\Bytes Total/Sec",
+          /*
+       * These are system wide counters for the network interface.
+             * There are also counters for the network queue length, packets
+             * discarded, and packet errors that might be interesting. (I
+             * can't find _Total versions declared for these counters so I
+             * am not including them but the counters for the specific
+             * interfaces could be enabled and then aggregated, eg:
+             *
+             * \NetworkInterface(*)\Bytes Send/Sec
+             */
+            // "\\Network Interface(_Total)\\Bytes
+            // Received/Sec",
+            // "\\Network Interface(_Total)\\Bytes Sent/Sec",
+            // "\\Network Interface(_Total)\\Bytes Total/Sec",
 
-              /*
-               * System wide counters for DISK IO.
-               */
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length",
-                  p
-                      + IRequiredHostCounters.PhysicalDisk
-                      + ICounterSet.pathSeparator
-                      + "Avg. Disk Queue Length",
-                  1d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\% Idle Time",
-                  p
-                      + IRequiredHostCounters.PhysicalDisk
-                      + ICounterSet.pathSeparator
-                      + "% Idle Time",
-                  .01d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\% Disk Time",
-                  p
-                      + IRequiredHostCounters.PhysicalDisk
-                      + ICounterSet.pathSeparator
-                      + "% Disk Time",
-                  .01d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\% Disk Read Time",
-                  p
-                      + IRequiredHostCounters.PhysicalDisk
-                      + ICounterSet.pathSeparator
-                      + "% Disk Read Time",
-                  .01d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\% Disk Write Time",
-                  p
-                      + IRequiredHostCounters.PhysicalDisk
-                      + ICounterSet.pathSeparator
-                      + "% Disk Write Time",
-                  .01d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\Disk Read Bytes/Sec",
-                  p + IRequiredHostCounters.PhysicalDisk_BytesReadPerSec,
-                  1d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\Disk Write Bytes/Sec",
-                  p + IRequiredHostCounters.PhysicalDisk_BytesWrittenPerSec,
-                  1d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\Disk Reads/Sec",
-                  p + IHostCounters.PhysicalDisk_ReadsPerSec,
-                  1d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\Disk Writes/Sec",
-                  p + IHostCounters.PhysicalDisk_WritesPerSec,
-                  1d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Read",
-                  p
-                      + IRequiredHostCounters.PhysicalDisk
-                      + ICounterSet.pathSeparator
-                      + "Avg. Disk Bytes per Read",
-                  1d),
-              new InstrumentForWPC(
-                  "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Write",
-                  p
-                      + IRequiredHostCounters.PhysicalDisk
-                      + ICounterSet.pathSeparator
-                      + "Avg. Disk Bytes per Write",
-                  1d),
-              // "\\PhysicalDisk(_Total)\\Disk Writes/sec",
-              // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Read",
-              // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Write",
-
-            });
+          /*
+       * System wide counters for DISK IO.
+             */
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length",
+                p
+                    + IRequiredHostCounters.PhysicalDisk
+                    + ICounterSet.pathSeparator
+                    + "Avg. Disk Queue Length",
+                1d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\% Idle Time",
+                p
+                    + IRequiredHostCounters.PhysicalDisk
+                    + ICounterSet.pathSeparator
+                    + "% Idle Time",
+                .01d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\% Disk Time",
+                p
+                    + IRequiredHostCounters.PhysicalDisk
+                    + ICounterSet.pathSeparator
+                    + "% Disk Time",
+                .01d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\% Disk Read Time",
+                p
+                    + IRequiredHostCounters.PhysicalDisk
+                    + ICounterSet.pathSeparator
+                    + "% Disk Read Time",
+                .01d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\% Disk Write Time",
+                p
+                    + IRequiredHostCounters.PhysicalDisk
+                    + ICounterSet.pathSeparator
+                    + "% Disk Write Time",
+                .01d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\Disk Read Bytes/Sec",
+                p + IRequiredHostCounters.PhysicalDisk_BytesReadPerSec,
+                1d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\Disk Write Bytes/Sec",
+                p + IRequiredHostCounters.PhysicalDisk_BytesWrittenPerSec,
+                1d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\Disk Reads/Sec",
+                p + IHostCounters.PhysicalDisk_ReadsPerSec,
+                1d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\Disk Writes/Sec",
+                p + IHostCounters.PhysicalDisk_WritesPerSec,
+                1d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Read",
+                p
+                    + IRequiredHostCounters.PhysicalDisk
+                    + ICounterSet.pathSeparator
+                    + "Avg. Disk Bytes per Read",
+                1d),
+            new InstrumentForWPC(
+                "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Write",
+                p
+                    + IRequiredHostCounters.PhysicalDisk
+                    + ICounterSet.pathSeparator
+                    + "Avg. Disk Bytes per Write",
+                1d)
+            // "\\PhysicalDisk(_Total)\\Disk Writes/sec",
+            // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Read",
+            // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Write",
+        );
 
     for (InstrumentForWPC inst : decls) {
 
@@ -541,7 +539,7 @@ public class TypeperfCollector extends AbstractProcessCollector {
 
   //    private CounterSet root;
 
-  /**
+  /*
    * List of performance counters that we will be collecting.
    *
    * @see #getCounters(), which sets up this list.

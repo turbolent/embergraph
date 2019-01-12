@@ -9,8 +9,8 @@ It is provided "as is" without expressed or implied warranty.
 package cern.colt;
 
 import cern.colt.function.IntComparator;
-/**
- * Generically sorts arbitrary shaped data (for example multiple arrays, 1,2 or 3-d matrices, and so
+/*
+* Generically sorts arbitrary shaped data (for example multiple arrays, 1,2 or 3-d matrices, and so
  * on) using a quicksort or mergesort. This class addresses two problems, namely
  *
  * <ul>
@@ -157,7 +157,7 @@ public class GenericSorting extends Object {
   private static final int MEDIUM = 40;
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected GenericSorting() {}
-  /**
+  /*
    * Transforms two consecutive sorted ranges into a single sorted range. The initial ranges are
    * <code>[first, middle)</code> and <code>[middle, last)</code>, and the resulting range is <code>
    * [first, last)</code>. Elements in the first input range will precede equal elements in the
@@ -207,7 +207,7 @@ public class GenericSorting extends Object {
     inplace_merge(first, firstCut, middle, comp, swapper);
     inplace_merge(middle, secondCut, last, comp, swapper);
   }
-  /**
+  /*
    * Performs a binary search on an already-sorted range: finds the first position where an element
    * can be inserted without violating the ordering. Sorting is by a user-supplied comparison
    * function.
@@ -245,7 +245,7 @@ public class GenericSorting extends Object {
     int bc = comp.compare(b, c);
     return (ab < 0 ? (bc < 0 ? b : ac < 0 ? c : a) : (bc > 0 ? b : ac > 0 ? c : a));
   }
-  /**
+  /*
    * Sorts the specified range of elements according to the order induced by the specified
    * comparator. All elements in the range must be <i>mutually comparable</i> by the specified
    * comparator (that is, <tt>c.compare(a, b)</tt> must not throw an exception for any indexes
@@ -297,7 +297,7 @@ public class GenericSorting extends Object {
     // Merge sorted halves
     inplace_merge(fromIndex, mid, toIndex, c, swapper);
   }
-  /**
+  /*
    * Sorts the specified range of elements according to the order induced by the specified
    * comparator. All elements in the range must be <i>mutually comparable</i> by the specified
    * comparator (that is, <tt>c.compare(a, b)</tt> must not throw an exception for any indexes
@@ -381,7 +381,7 @@ public class GenericSorting extends Object {
     if ((s = b - a) > 1) quickSort1(off, s, comp, swapper);
     if ((s = d - c) > 1) quickSort1(n - s, s, comp, swapper);
   }
-  /**
+  /*
    * Reverses a sequence of elements.
    *
    * @param array Array containing the sequence
@@ -395,7 +395,7 @@ public class GenericSorting extends Object {
       swapper.swap(first++, last);
     }
   }
-  /**
+  /*
    * Rotate a range in place: <code>array[middle]</code> is put in <code>array[first]</code>, <code>
    * array[middle+1]</code> is put in <code>array[first+1]</code>, etc. Generally, the element in
    * position <code>i</code> is put into position <code>(i + (last-middle)) % (last-first)</code>.
@@ -413,7 +413,7 @@ public class GenericSorting extends Object {
       reverse(first, last, swapper);
     }
   }
-  /**
+  /*
    * Performs a binary search on an already-sorted range: finds the last position where an element
    * can be inserted without violating the ordering. Sorting is by a user-supplied comparison
    * function.

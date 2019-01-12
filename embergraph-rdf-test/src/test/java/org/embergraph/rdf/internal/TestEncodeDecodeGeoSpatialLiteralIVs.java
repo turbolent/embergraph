@@ -41,8 +41,8 @@ import org.embergraph.service.geospatial.GeoSpatialDefaultLiteralSerializer;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Unit tests for {@link GeoSpatialLiteralExtension}.
+/*
+* Unit tests for {@link GeoSpatialLiteralExtension}.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  * @version $Id$
@@ -91,7 +91,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
         vf, getDummyGeospatialLiteralsLatLon(vf, URI_DATATYPE_LAT_LON_DOUBLE), ext);
   }
 
-  /**
+  /*
    * Unit test asserting correct rejectance (error message) when passing in literals that are
    * incompatible with the datatype.
    */
@@ -142,7 +142,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     }
   }
 
-  /**
+  /*
    * Test z-order string construction by means of a simple, two dimensional index with positive
    * integer values.
    */
@@ -156,7 +156,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     zIndexOrderingPositiveBase(vf, litExt, URI_DATATYPE_LAT_LON_LONG);
   }
 
-  /**
+  /*
    * Test z-order string construction by means of a simple, two dimensional index with positive
    * integer values, with range adjustment encoded in the datatype.
    */
@@ -171,7 +171,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     zIndexOrderingPositiveBase(vf, litExt, URI_DATATYPE_LAT_LON_LONG_MIN);
   }
 
-  /**
+  /*
    * Test z-order string construction by means of a simple, two dimensional index with mixed
    * negative and positive integer values.
    */
@@ -186,7 +186,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     zIndexOrderingMixedBase(vf, litExt, URI_DATATYPE_LAT_LON_LONG);
   }
 
-  /**
+  /*
    * Test z-order string construction by means of a simple, two dimensional index with mixed
    * negative and positive integer values, with range adjustment encoded in the datatype.
    */
@@ -201,7 +201,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     zIndexOrderingMixedBase(vf, litExt, URI_DATATYPE_LAT_LON_LONG_MIN);
   }
 
-  /**
+  /*
    * Helper method to test encoding and decoding / roundtrips of GeoSpatial literals for a given
    * value factory vf, list of literals dt, and a {@link GeoSpatialLiteralExtension} ext. Note that
    * the extension must have been initialized to match the specific structure of the datatype (see
@@ -246,7 +246,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
       final GeoSpatialLiteralExtension<EmbergraphValue> litExt,
       final URI datatype) {
 
-    /**
+    /*
      * Scenario description: assume we have integers 0 .. 7 for each of the index components.
      *
      * <p>0 -> 000 1 -> 001 2 -> 010 3 -> 011 4 -> 100 5 -> 101 6 -> 110 7 -> 111
@@ -438,7 +438,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     System.out.println("Executed " + ctr + " comparisons. All good, in z-order");
   }
 
-  /**
+  /*
    * Generates a list of about 600 dummy lat+lon GeoSpatial literals. These literals include both
    * positive and negative values of different orders of magnitude.
    *
@@ -454,7 +454,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
   protected final EmbergraphLiteral[] getDummyGeospatialLiteralsLatLon(
       final EmbergraphValueFactory vf, final URI datatype) {
 
-    /**
+    /*
      * The basic schema is a three-component datatype string made up from the following three
      * components:
      *
@@ -510,7 +510,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     return dt;
   }
 
-  /**
+  /*
    * Generates a list of about 20k dummy lat+lon GeoSpatial literals. These literals include both
    * positive and negative values of different orders of magnitude.
    *
@@ -605,7 +605,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     return dt;
   }
 
-  /**
+  /*
    * Generates the combination of all literals in the given range. E.g., passing in 0 as from and 2
    * as to, we get 0#0, 0#1, 0#2, 1#0, 1#1, 1#2, 2#0, 2#1, and 2#2.
    *
@@ -685,7 +685,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     return getGSLiteralExtension(vf, config);
   }
 
-  /**
+  /*
    * Get simple lat lon schema description, where lat and lon correspong to long values (rather than
    * 5 precise doubles).
    */
@@ -712,7 +712,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     return getGSLiteralExtension(vf, config);
   }
 
-  /**
+  /*
    * Get simple lat lon schema description, where lat and lon correspong to long values (rather than
    * 5 precise doubles).
    */
@@ -739,7 +739,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
     return getGSLiteralExtension(vf, config);
   }
 
-  /**
+  /*
    * Get a {@link GeoSpatialLiteralExtension} object processing literals of the schema specified in
    * the {@link SchemaDescription} object.
    */
@@ -757,7 +757,7 @@ public class TestEncodeDecodeGeoSpatialLiteralIVs extends AbstractEncodeDecodeKe
         datatypeConfig);
   }
 
-  /**
+  /*
    * Asserts that the two {@link EmbergraphValue}s that are passed in are {@link EmbergraphLiteral}
    * of the same type and that the actual values value, interpreted as numerical value, are
    * identical.

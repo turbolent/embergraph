@@ -23,8 +23,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
 import org.embergraph.io.compression.IRecordCompressor;
 
-/**
- * Utility class to handle Compression and Checksums on a ByteArraySlice
+/*
+* Utility class to handle Compression and Checksums on a ByteArraySlice
  *
  * <p>The idea is that it would be used as a "state-aware" buffer that could be saved/restored
  * to/from an IDiskStrategy.

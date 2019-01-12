@@ -11,8 +11,8 @@ package cern.colt.matrix;
 import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 import cern.colt.matrix.impl.AbstractMatrix1D;
-/**
- * Abstract base class for 1-d matrices (aka <i>vectors</i>) holding <tt>double</tt> elements. First
+/*
+* Abstract base class for 1-d matrices (aka <i>vectors</i>) holding <tt>double</tt> elements. First
  * see the <a href="package-summary.html">package summary</a> and javadoc <a
  * href="package-tree.html">tree view</a> to get the broad picture.
  *
@@ -27,7 +27,7 @@ import cern.colt.matrix.impl.AbstractMatrix1D;
 public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected DoubleMatrix1D() {}
-  /**
+  /*
    * Applies a function to each cell and aggregates the results. Returns a value <tt>v</tt> such
    * that <tt>v==a(size())</tt> where <tt>a(i) == aggr( a(i-1), f(get(i)) )</tt> and terminators are
    * <tt>a(1) == f(get(0)), a(0)==Double.NaN</tt>.
@@ -60,7 +60,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return a;
   }
-  /**
+  /*
    * Applies a function to each corresponding cell of two matrices and aggregates the results.
    * Returns a value <tt>v</tt> such that <tt>v==a(size())</tt> where <tt>a(i) == aggr( a(i-1),
    * f(get(i),other.get(i)) )</tt> and terminators are <tt>a(1) == f(get(0),other.get(0)),
@@ -103,7 +103,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return a;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>values</tt>. <tt>values</tt> is required to have
    * the same number of cells as the receiver.
    *
@@ -123,7 +123,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return this;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>value</tt>.
    *
    * @param value the value to be filled into the cells.
@@ -135,7 +135,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[i] = function(x[i])</tt>. (Iterates
    * downwards from <tt>[size()-1]</tt> to <tt>[0]</tt>).
    *
@@ -161,7 +161,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return this;
   }
-  /**
+  /*
    * Replaces all cell values of the receiver with the values of another matrix. Both matrices must
    * have the same size. If both matrices share the same cells (as is the case if they are views
    * derived from the same matrix) and intersect in an ambiguous way, then replaces <i>as if</i>
@@ -181,7 +181,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[i] = function(x[i],y[i])</tt>.
    *
    * <p><b>Example:</b>
@@ -211,7 +211,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[i] = function(x[i],y[i])</tt>. (Iterates
    * downwards from <tt>[size()-1]</tt> to <tt>[0]</tt>).
    *
@@ -291,7 +291,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return cardinality;
   }
-  /**
+  /*
    * Returns the number of cells having non-zero values, but at most maxCardinality; ignores
    * tolerance.
    */
@@ -303,7 +303,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return cardinality;
   }
-  /**
+  /*
    * Constructs and returns a deep copy of the receiver.
    *
    * <p><b>Note that the returned matrix is an independent deep copy.</b> The returned matrix is not
@@ -317,7 +317,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     copy.assign(this);
     return copy;
   }
-  /**
+  /*
    * Returns whether all cells are equal to the given value.
    *
    * @param value the value to test against.
@@ -326,7 +326,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   public boolean equals(double value) {
     return cern.colt.matrix.linalg.Property.DEFAULT.equals(this, value);
   }
-  /**
+  /*
    * Compares this object against the specified object. The result is <code>true</code> if and only
    * if the argument is not <code>null</code> and is at least a <code>DoubleMatrix1D</code> object
    * that has the same sizes as the receiver and has exactly the same values at the same indexes.
@@ -341,7 +341,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
 
     return cern.colt.matrix.linalg.Property.DEFAULT.equals(this, (DoubleMatrix1D) obj);
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>index</tt>.
    *
    * @param index the index of the cell.
@@ -352,14 +352,14 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     if (index < 0 || index >= size) checkIndex(index);
     return getQuick(index);
   }
-  /**
+  /*
    * Returns the content of this matrix if it is a wrapper; or <tt>this</tt> otherwise. Override
    * this method in wrappers.
    */
   protected DoubleMatrix1D getContent() {
     return this;
   }
-  /**
+  /*
    * Fills the coordinates and values of cells having non-zero values into the specified lists.
    * Fills into the lists, starting at index 0. After this call returns the specified lists all have
    * a new size, the number of non-zero values.
@@ -397,7 +397,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
       }
     }
   }
-  /**
+  /*
    * Fills the coordinates and values of cells having non-zero values into the specified lists.
    * Fills into the lists, starting at index 0. After this call returns the specified lists all have
    * a new size, the number of non-zero values.
@@ -440,7 +440,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
       }
     }
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>index</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -461,7 +461,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   protected boolean haveSharedCellsRaw(DoubleMatrix1D other) {
     return false;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the same size. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix1D</tt> the new matrix must also be of type <tt>DenseDoubleMatrix1D</tt>,
@@ -474,7 +474,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   public DoubleMatrix1D like() {
     return like(size);
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified size. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix1D</tt> the new matrix must also be of type <tt>DenseDoubleMatrix1D</tt>,
@@ -486,7 +486,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
    * @return a new empty matrix of the same dynamic type.
    */
   public abstract DoubleMatrix1D like(int size);
-  /**
+  /*
    * Construct and returns a new 2-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix1D</tt> the new matrix must be of type <tt>DenseDoubleMatrix2D</tt>, if
@@ -498,7 +498,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
    * @return a new matrix of the corresponding dynamic type.
    */
   public abstract DoubleMatrix2D like2D(int rows, int columns);
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>index</tt> to the specified value.
    *
    * @param index the index of the cell.
@@ -509,7 +509,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     if (index < 0 || index >= size) checkIndex(index);
     setQuick(index, value);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>index</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -520,7 +520,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
    * @param value the value to be filled into the specified cell.
    */
   public abstract void setQuick(int index, double value);
-  /**
+  /*
    * Swaps each element <tt>this[i]</tt> with <tt>other[i]</tt>.
    *
    * @throws IllegalArgumentException if <tt>size() != other.size()</tt>.
@@ -534,7 +534,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return;
   }
-  /**
+  /*
    * Constructs and returns a 1-dimensional array containing the cell values. The values are copied.
    * So subsequent changes in <tt>values</tt> are not reflected in the matrix, and vice-versa. The
    * returned array <tt>values</tt> has the form <br>
@@ -547,7 +547,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     toArray(values);
     return values;
   }
-  /**
+  /*
    * Fills the cell values into the specified 1-dimensional array. The values are copied. So
    * subsequent changes in <tt>values</tt> are not reflected in the matrix, and vice-versa. After
    * this call returns the array <tt>values</tt> has the form <br>
@@ -561,7 +561,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
       values[i] = getQuick(i);
     }
   }
-  /**
+  /*
    * Returns a string representation using default formatting.
    *
    * @see cern.colt.matrix.doublealgo.Formatter
@@ -569,7 +569,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   public String toString() {
     return new cern.colt.matrix.doublealgo.Formatter().toString(this);
   }
-  /**
+  /*
    * Constructs and returns a new view equal to the receiver. The view is a shallow clone. Calls
    * <code>clone()</code> and casts the result.
    *
@@ -583,7 +583,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   protected DoubleMatrix1D view() {
     return (DoubleMatrix1D) clone();
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i>. What used to be index <tt>0</tt> is now index
    * <tt>size()-1</tt>, ..., what used to be index <tt>size()-1</tt> is now index <tt>0</tt>. The
    * returned view is backed by this matrix, so changes in the returned view are reflected in this
@@ -594,7 +594,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   public DoubleMatrix1D viewFlip() {
     return (DoubleMatrix1D) (view().vFlip());
   }
-  /**
+  /*
    * Constructs and returns a new <i>sub-range view</i> that is a <tt>width</tt> sub matrix starting
    * at <tt>index</tt>.
    *
@@ -617,7 +617,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   public DoubleMatrix1D viewPart(int index, int width) {
     return (DoubleMatrix1D) (view().vPart(index, width));
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding the indicated
    * cells. There holds <tt>view.size() == indexes.length</tt> and <tt>view.get(i) ==
    * this.get(indexes[i])</tt>. Indexes can occur multiple times and can be in arbitrary order.
@@ -655,7 +655,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return viewSelectionLike(offsets);
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding the cells matching
    * the given condition. Applies the condition to each cell and takes only those cells where
    * <tt>condition.apply(get(i))</tt> yields <tt>true</tt>.
@@ -689,14 +689,14 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     matches.trimToSize();
     return viewSelection(matches.elements());
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param offsets the offsets of the visible elements.
    * @return a new view.
    */
   protected abstract DoubleMatrix1D viewSelectionLike(int[] offsets);
-  /**
+  /*
    * Sorts the vector into ascending order, according to the <i>natural ordering</i>. This sort is
    * guaranteed to be <i>stable</i>. For further information, see {@link
    * cern.colt.matrix.doublealgo.Sorting#sort(DoubleMatrix1D)}. For more advanced sorting
@@ -707,7 +707,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   public DoubleMatrix1D viewSorted() {
     return cern.colt.matrix.doublealgo.Sorting.mergeSort.sort(this);
   }
-  /**
+  /*
    * Constructs and returns a new <i>stride view</i> which is a sub matrix consisting of every i-th
    * cell. More specifically, the view has size <tt>this.size()/stride</tt> holding cells
    * <tt>this.get(i*stride)</tt> for all <tt>i = 0..size()/stride - 1</tt>.
@@ -719,7 +719,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   public DoubleMatrix1D viewStrides(int stride) {
     return (DoubleMatrix1D) (view().vStrides(stride));
   }
-  /**
+  /*
    * Applies a procedure to each cell's value. Iterates downwards from <tt>[size()-1]</tt> to
    * <tt>[0]</tt>, as demonstrated by this snippet:
    *
@@ -744,7 +744,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return true;
   }
-  /**
+  /*
    * Returns the dot product of two vectors x and y, which is <tt>Sum(x[i]*y[i])</tt>. Where <tt>x
    * == this</tt>. Operates on cells at indexes <tt>0 .. Math.min(size(),y.size())</tt>.
    *
@@ -754,7 +754,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
   public double zDotProduct(DoubleMatrix1D y) {
     return zDotProduct(y, 0, size);
   }
-  /**
+  /*
    * Returns the dot product of two vectors x and y, which is <tt>Sum(x[i]*y[i])</tt>. Where <tt>x
    * == this</tt>. Operates on cells at indexes <tt>from .. Min(size(),y.size(),from+length)-1</tt>.
    *
@@ -778,7 +778,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     }
     return sum;
   }
-  /**
+  /*
    * Returns the dot product of two vectors x and y, which is <tt>Sum(x[i]*y[i])</tt>. Where <tt>x
    * == this</tt>.
    *
@@ -814,7 +814,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
 
     return sum;
   }
-  /**
+  /*
    * Returns the dot product of two vectors x and y, which is <tt>Sum(x[i]*y[i])</tt>. Where <tt>x
    * == this</tt>.
    *
@@ -834,7 +834,7 @@ public abstract class DoubleMatrix1D extends AbstractMatrix1D {
     return sum;
     */
   }
-  /**
+  /*
    * Returns the sum of all cells; <tt>Sum( x[i] )</tt>.
    *
    * @return the sum.

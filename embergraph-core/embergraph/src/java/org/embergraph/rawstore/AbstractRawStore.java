@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-/**
- * Abstract base class for {@link IRawStore} implementations. This class uses a delegation pattern
+/*
+* Abstract base class for {@link IRawStore} implementations. This class uses a delegation pattern
  * for the {@link IStoreSerializer} interface and does not implement either the methods defined
  * directly by the {@link IRawStore} interface nor the methods of the {@link IAddressManager}
  * interface. As such it may be used as an abstract base class by any {@link IRawStore}
@@ -39,7 +39,7 @@ import java.nio.ByteBuffer;
  */
 public abstract class AbstractRawStore implements IRawStore {
 
-  /**
+  /*
    * Return the delegate object that provides the {@link IAddressManager} implementation for this
    * {@link IRawStore}.
    *
@@ -53,8 +53,8 @@ public abstract class AbstractRawStore implements IRawStore {
   /** The designated constructor. */
   public AbstractRawStore() {}
 
-  //    /**
-  //     * The default implementation delegates to {@link #write(ByteBuffer)}.
+  //    /*
+//     * The default implementation delegates to {@link #write(ByteBuffer)}.
   //     */
   //    @Override
   //    public long write(ByteBuffer data, long oldAddr) {
@@ -82,7 +82,7 @@ public abstract class AbstractRawStore implements IRawStore {
   // WORM_STREAM_BUFFER_SIZE as used by Output and Input streams
   static final int WORM_STREAM_BUFFER_SIZE = 16 * 1024;
 
-  /**
+  /*
    * WORMOutputStream
    *
    * <p>This implements a buffered allocation that may be split across muliple smaller allocations,
@@ -168,12 +168,12 @@ public abstract class AbstractRawStore implements IRawStore {
       m_buffer[m_cursor++] = (byte) b;
     }
 
-    /**
+    /*
      * ************************************************************** write byte array to the buffer
      *
      * <p>we need to be able to efficiently handle large arrays beyond size of the blobThreshold, so
      */
-    public void write(final byte b[], final int off, final int len) throws IOException {
+    public void write(final byte[] b, final int off, final int len) throws IOException {
 
       if (!m_open) {
         throw new IllegalStateException("Already written");
@@ -250,7 +250,7 @@ public abstract class AbstractRawStore implements IRawStore {
       return 0xFF & m_bb.get();
     }
 
-    public synchronized int read(final byte dst[], final int off, final int len)
+    public synchronized int read(final byte[] dst, final int off, final int len)
         throws IOException {
       if (m_bb.remaining() >= len) {
         m_bb.get(dst, off, len);

@@ -35,8 +35,8 @@ import org.openrdf.model.Statement;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * Breadth First Search (BFS) is an iterative graph traversal primitive. The frontier is expanded
+/*
+* Breadth First Search (BFS) is an iterative graph traversal primitive. The frontier is expanded
  * iteratively until no new vertices are discovered. Each visited vertex is marked with the round
  * (origin ZERO) in which it was visited. This is its distance from the initial frontier.
  *
@@ -49,7 +49,7 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
 
   public static class VS {
 
-    /**
+    /*
      * <code>-1</code> until visited. When visited, set to the current round in order to assign each
      * vertex its traversal depth.
      *
@@ -64,7 +64,7 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
     /** The predecessor is the first source vertex to visit a given target vertex. */
     private final AtomicReference<Value> predecessor = new AtomicReference<Value>();
 
-    /**
+    /*
      * The depth at which this vertex was first visited (origin ZERO) and <code>-1</code> if the
      * vertex has not been visited.
      */
@@ -80,7 +80,7 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
       return predecessor.get();
     }
 
-    /**
+    /*
      * Note: This marks the vertex at the current traversal depth.
      *
      * @return <code>true</code> if the vertex was visited for the first time in this round and the
@@ -190,7 +190,7 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
     return true;
   }
 
-  /**
+  /*
    * The remote vertex is scheduled for activation unless it has already been visited.
    *
    * <p>Note: We are scattering to out-edges. Therefore, this vertex is {@link
@@ -226,7 +226,7 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
     return true;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>
@@ -278,7 +278,7 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
     return tmp;
   }
 
-  /**
+  /*
    * Additional {@link IBindingExtractor.IBinder}s exposed by {@link BFS}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -292,8 +292,8 @@ public class BFS extends BaseGASProgram<BFS.VS, BFS.ES, Void>
     int PREDECESSOR = 2;
   }
 
-  //    /**
-  //     * Reduce the active vertex state, returning a histogram reporting the #of
+  //    /*
+//     * Reduce the active vertex state, returning a histogram reporting the #of
   //     * vertices at each distance from the starting vertex. There will always be
   //     * one vertex at depth zero - this is the starting vertex. For each
   //     * successive depth, the #of vertices that were labeled at that depth is

@@ -50,8 +50,8 @@ import java.util.Iterator;
 import java.util.zip.GZIPInputStream;
 import org.apache.log4j.Logger;
 
-/**
- * A string map based on a minimal perfect hash signed using Shift-Add-Xor hashes.
+/*
+* A string map based on a minimal perfect hash signed using Shift-Add-Xor hashes.
  *
  * <p>A minimal perfect hash function maps a set of string to an initial segment of the natural
  * numbers, but will actually map <em>any</em> string to that segment. By signing each output value
@@ -81,7 +81,7 @@ public class ShiftAddXorSignedStringMap extends AbstractObject2LongFunction<Char
   /** The mask to get only {@link #width} nonzero bits. */
   protected final long mask;
 
-  /**
+  /*
    * Creates a new shift-add-xor signed string map using a given hash map and 32-bit signatures.
    *
    * @param iterator an iterator enumerating a set of strings.
@@ -94,7 +94,7 @@ public class ShiftAddXorSignedStringMap extends AbstractObject2LongFunction<Char
     this(iterator, map, 32);
   }
 
-  /**
+  /*
    * Creates a new shift-add-xor signed string map using a given hash map.
    *
    * @param iterator an iterator enumerating a set of strings.

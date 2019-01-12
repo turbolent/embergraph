@@ -44,8 +44,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.sparql.ast.eval.IEvaluationContext;
 import org.embergraph.rdf.sparql.ast.service.ServiceNode;
 
-/**
- * Rewrites join groups having one or more joins which would involve a full cross product as hash
+/*
+* Rewrites join groups having one or more joins which would involve a full cross product as hash
  * joins of sub-groups where there is a constraint imposed indirectly via a FILTER operating across
  * the variables bound by the joins. This handles queries such as BSBM Q5.
  *
@@ -87,7 +87,7 @@ public class ASTHashJoinOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryRoot, bindingSets);
   }
 
-  /**
+  /*
    * Identify sets of joins which share variables only indirectly through a constraint (FILTER).
    * Such joins are pushed down into a sub-group along with the constraint. The sub-group can be
    * efficiently joined back to the parent group (using a hash join) as long as there is a shared
@@ -103,12 +103,12 @@ public class ASTHashJoinOptimizer implements IASTOptimizer {
 
     for (int i = 0; i < arity; i++) {
 
-      final BOp child = (BOp) group.get(i);
+      final BOp child = group.get(i);
 
       if (child instanceof GraphPatternGroup<?>) {
 
-        /*
-         * Note: Do recursion *before* we do the rewrite.
+      /*
+       * Note: Do recursion *before* we do the rewrite.
          */
         optimizeJoinGroups(context, sa, ((GraphPatternGroup<IGroupMemberNode>) child));
 
@@ -199,8 +199,8 @@ public class ASTHashJoinOptimizer implements IASTOptimizer {
             }
 
             if (sa.isFullyBound(f, joinvars)) {
-              /*
-               * This join filter does not run with either of
+            /*
+       * This join filter does not run with either of
                * those join sets which considered by themselves,
                * but it can run when we consider those join sets
                * together. Thus the filter implicitly shares some

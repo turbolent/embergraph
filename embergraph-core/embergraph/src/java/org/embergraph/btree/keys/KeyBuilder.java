@@ -24,6 +24,7 @@ package org.embergraph.btree.keys;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.text.Collator;
 import java.util.Locale;
 import java.util.Properties;
@@ -34,8 +35,8 @@ import org.embergraph.btree.ITupleSerializer;
 import org.embergraph.io.LongPacker;
 import org.embergraph.util.BytesUtil;
 
-/**
- * A class that may be used to form multi-component keys but which does not support Unicode. An
+/*
+* A class that may be used to form multi-component keys but which does not support Unicode. An
  * instance of this class is quite light-weight and SHOULD be used when Unicode support is not
  * required.
  *
@@ -58,19 +59,19 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
   /** The default capacity of the key buffer. */
   public static final transient int DEFAULT_INITIAL_CAPACITY = 1024;
 
-  /**
+  /*
    * A non-negative integer specifying the #of bytes of data in the buffer that contain valid data
    * starting from position zero(0).
    */
   private int len;
 
-  /**
+  /*
    * The key buffer. This is re-allocated whenever the capacity of the buffer is too small and
    * reused otherwise.
    */
   private byte[] buf;
 
-  /**
+  /*
    * The object used to generate sort keys from Unicode strings (optional).
    *
    * <p>Note: When <code>null</code> the IKeyBuilder does NOT support Unicode and the optional
@@ -84,7 +85,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     this(DEFAULT_INITIAL_CAPACITY);
   }
 
-  /**
+  /*
    * Creates a key builder with the specified initial buffer capacity.
    *
    * @param initialCapacity The initial capacity of the internal byte[] used to construct keys. When
@@ -95,7 +96,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     this(0, createBuffer(initialCapacity));
   }
 
-  /**
+  /*
    * Create a buffer of the specified initial capacity.
    *
    * @param initialCapacity The initial size of the buffer.
@@ -114,7 +115,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return new byte[capacity];
   }
 
-  /**
+  /*
    * Creates a key builder using an existing buffer with some data.
    *
    * @param len The #of bytes of data in the provided buffer.
@@ -126,7 +127,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     this(null /* no unicode support*/, len, buf);
   }
 
-  /**
+  /*
    * Creates a key builder using an existing buffer with some data (designated constructor).
    *
    * @param sortKeyGenerator The object used to generate sort keys from Unicode strings (when <code>
@@ -249,8 +250,8 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
    * buffer but the btree (at least when used as part of a local api) requires
    * that we donate the key buffer to the btree.
    */
-  //    /**
-  //     * Copy the key from the internal buffer into the supplied buffer.
+  //    /*
+//     * Copy the key from the internal buffer into the supplied buffer.
   //     *
   //     * @param b
   //     *            A byte[].
@@ -277,12 +278,10 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
 
   public final boolean isUnicodeSupported() {
 
-    if (sortKeyGenerator == null) return false;
-
-    return true;
+    return sortKeyGenerator != null;
   }
 
-  /**
+  /*
    * The object responsible for generating sort keys from Unicode strings.
    *
    * <p>The {@link UnicodeSortKeyGenerator} -or- <code>null</code> if Unicode is not supported by
@@ -353,7 +352,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return this;
   }
 
-  /**
+  /*
    * Decodes an ASCII string from a key.
    *
    * @param key The key.
@@ -373,17 +372,11 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
       b[i] = decodeByte(b[i]);
     }
 
-    try {
+    return new String(b, StandardCharsets.US_ASCII);
 
-      return new String(b, "US-ASCII");
-
-    } catch (UnsupportedEncodingException e) {
-
-      throw new RuntimeException(e);
-    }
   }
 
-  /**
+  /*
    * The default pad character (a space).
    *
    * <p>Note: Any character may be chosen as the pad character as long as it has a one byte
@@ -397,7 +390,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
    */
   public final byte pad = 0x20;
 
-  /**
+  /*
    * Normalize the text by truncating to no more than {@link #maxlen} characters and then stripping
    * off trailing {@link #pad} characters.
    */
@@ -477,8 +470,8 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
 
       if (encoded_len == 0) {
 
-        /*
-         * Note: The successor of an empty string is not defined since
+      /*
+       * Note: The successor of an empty string is not defined since
          * it maps to an empty byte[] (an empty value space). However an
          * empty string is semantically equivalent to all pad characters
          * so we use the successor of a string containing a single pad
@@ -492,8 +485,8 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
 
       } else {
 
-        /*
-         * Note: This generates the successor of the encoded text by
+      /*
+       * Note: This generates the successor of the encoded text by
          * treading the encoded byte[] as a fixed length bit string and
          * finding the successor of that bit-string. The bytes in the
          * buffer are modified as a side-effect. A runtime exception is
@@ -639,7 +632,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return this;
   }
 
-  /**
+  /*
    * Packs a non-negative long value into the minimum #of bytes in which the value can be
    * represented and writes those bytes onto the buffer. The first byte determines whether or not
    * the long value was packed and, if packed, how many bytes were required to represent the packed
@@ -680,7 +673,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return this;
   }
 
-  /**
+  /*
    * Relative <i>put</i> method for writing a byte[] on the buffer.
    *
    * @param b The byte[].
@@ -700,8 +693,8 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
   /** Private buffer for packing long integers. */
   private final byte[] pbuf = new byte[8];
 
-  //    /**
-  //     * Unpack a long value from the current buffer position.
+  //    /*
+//     * Unpack a long value from the current buffer position.
   //     *
   //     * @param buf
   //     *            The buffer containing the data to be decoded.
@@ -719,7 +712,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
   //
   //    }
 
-  /**
+  /*
    * Return the value that will impose the lexiographic ordering as an unsigned long integer.
    *
    * @param v The signed long integer.
@@ -817,7 +810,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     if (len + 1 > buf.length) ensureCapacity(len + 1);
     // ensureFree(1);
 
-    buf[len++] = (byte) v;
+    buf[len++] = v;
 
     return this;
   }
@@ -846,8 +839,8 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return this;
   }
 
-  //    /**
-  //     * Return the value that will impose the lexiographic ordering as an
+  //    /*
+//     * Return the value that will impose the lexiographic ordering as an
   //     * unsigned byte.
   //     *
   //     * @param v
@@ -905,7 +898,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return this;
   }
 
-  /**
+  /*
    * Return the #of bytes in the unsigned byte[] representation of the {@link BigInteger} value.
    *
    * @param value The {@link BigInteger} value.
@@ -916,7 +909,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return 2 /* runLength */ + (value.bitLength() / 8 + 1) /* data */;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: Precision is NOT preserved by this encoding. Thus <code>0.0</code> and <code>0</code>
@@ -980,12 +973,12 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     }
     appendASCII(unscaledStr); // the unscaled BigInteger representation
     // Note: uses unsigned 255 if negative and unsigned 0 if positive.
-    appendSigned(sign == -1 ? (byte) Byte.MAX_VALUE : (byte) 0);
+    appendSigned(sign == -1 ? Byte.MAX_VALUE : (byte) 0);
 
     return this;
   }
 
-  /**
+  /*
    * Return the #of bytes in the unsigned byte[] representation of the {@link BigDecimal} value.
    *
    * @param value The {@link BigDecimal} value.
@@ -1083,7 +1076,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return this;
   }
 
-  /**
+  /*
    * Converts a signed byte into an unsigned byte.
    *
    * @param v The signed byte.
@@ -1105,7 +1098,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return (byte) (i & 0xff);
   }
 
-  /**
+  /*
    * Converts an unsigned byte into a signed byte.
    *
    * @param v The unsigned byte.
@@ -1127,7 +1120,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return (byte) (i & 0xff);
   }
 
-  /**
+  /*
    * Encodes a double precision floating point value as an int64 value that has the same total
    * ordering (you can compare two doubles encoded by this method and the long values will have the
    * same ordering as the double values). The method works by converting the double to the IEEE 754
@@ -1152,7 +1145,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return aLong;
   }
 
-  /**
+  /*
    * Encodes a floating point value as an int32 value that has the same total ordering (you can
    * compare two floats encoded by this method and the int values will have the same ordering as the
    * float values). The method works by converting the float to the IEEE 754 floating-point "single
@@ -1177,7 +1170,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return aInt;
   }
 
-  /**
+  /*
    * Decodes a signed long value as encoded by {@link #append(long)}.
    *
    * @param buf The buffer containing the encoded key.
@@ -1210,7 +1203,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return v;
   }
 
-  /**
+  /*
    * Decode a {@link UUID} as encoded by {@link #append(UUID)}.
    *
    * @param buf The buffer containing the encoded key.
@@ -1228,7 +1221,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return new UUID(msb, lsb);
   }
 
-  /**
+  /*
    * Decodes a signed int value as encoded by {@link #append(int)}.
    *
    * @param buf The buffer containing the encoded key.
@@ -1257,7 +1250,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return v;
   }
 
-  /**
+  /*
    * Decodes a signed short value as encoded by {@link #append(short)}.
    *
    * @param buf The buffer containing the encoded key.
@@ -1284,7 +1277,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return (short) v;
   }
 
-  /**
+  /*
    * Convert an unsigned byte[] into a {@link BigInteger}.
    *
    * @param key The bytes.
@@ -1295,7 +1288,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return new BigInteger(decodeBigInteger2(offset, key));
   }
 
-  /**
+  /*
    * Decodes a {@link BigInteger} key, returning a byte[] which may be used to
    * construct a {@link BigInteger} having the decoded value. The number of
    * bytes consumed by the key component is <code>2 + runLength</2>. The
@@ -1330,7 +1323,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return b;
   }
 
-  /**
+  /*
    * Decodes a {@link BigDecimal} key, returning a byte[] which may be used to
    * construct a {@link BigDecimal} having the decoded value.
    *
@@ -1392,7 +1385,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
 
   private static final char[] flipMap = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-  /**
+  /*
    * Flip numbers such that <code>0/9,1/8,2/7,3/6,4/5</code> - this is the equivalent of a
    * two-complement representation for the base 10 character digits.
    */
@@ -1408,7 +1401,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return new String(chrs);
   }
 
-  /**
+  /*
    * Create an instance for ASCII keys.
    *
    * @return The new instance.
@@ -1418,7 +1411,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return newInstance(DEFAULT_INITIAL_CAPACITY);
   }
 
-  /**
+  /*
    * Create an instance for ASCII keys with the specified initial capacity.
    *
    * @param initialCapacity The initial capacity.
@@ -1434,7 +1427,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
         null /* decomposition mode */);
   }
 
-  /**
+  /*
    * Configuration options for {@link DefaultKeyBuilderFactory} and the {@link KeyBuilder} factory
    * methods. <strong>The use of {@link DefaultKeyBuilderFactory} is highly recommended as it will
    * cause the configuration to be serialized. In combination with the use of an {@link
@@ -1444,9 +1437,9 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public static interface Options {
+  public interface Options {
 
-    /**
+    /*
      * Optional property specifies the library that will be used to generate sort keys from Unicode
      * data. The ICU library is the default. You may explicitly specify the library choice using one
      * of the {@link CollatorEnum} values. The {@link CollatorEnum#ASCII} value may be used to
@@ -1455,9 +1448,9 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
      *
      * @see CollatorEnum
      */
-    public String COLLATOR = KeyBuilder.class.getName() + ".collator";
+    String COLLATOR = KeyBuilder.class.getName() + ".collator";
 
-    /**
+    /*
      * Optional string -or- integer property whose value is the strength to be set on the collator.
      * When specified, the value must be either one of the type-safe {@link StrengthEnum}s -or- one
      * of those supported by the ICU or JDK library, as appropriate. The following values are shared
@@ -1482,18 +1475,18 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
      * While both libraries define <strong>IDENTICAL</strong> they use different values for this
      * strength, hence the use of the type safe enums is recommended.
      */
-    public String STRENGTH = KeyBuilder.class.getName() + ".collator.strength";
+    String STRENGTH = KeyBuilder.class.getName() + ".collator.strength";
 
-    /**
+    /*
      * Optional string property whose value is one of the type safe {@link DecompositionEnum}s. The
      * default decomposition mode will be overridden on the collator one is explicitly specified
      * using this property.
      *
      * @see DecompositionEnum
      */
-    public String DECOMPOSITION = KeyBuilder.class.getName() + ".collator.decomposition";
+    String DECOMPOSITION = KeyBuilder.class.getName() + ".collator.decomposition";
 
-    /**
+    /*
      * The pre-defined System property {@value #USER_LANGUAGE} determines the <em>language</em> for
      * the default {@link Locale}.
      *
@@ -1501,28 +1494,28 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
      * @see <a
      *     href="http://java.sun.com/developer/technicalArticles/J2SE/locale/">http://java.sun.com/developer/technicalArticles/J2SE/locale/</a>
      */
-    public String USER_LANGUAGE = "user.language";
+    String USER_LANGUAGE = "user.language";
 
-    /**
+    /*
      * The pre-defined System property {@value #USER_COUNTRY} determines the <em>country</em> for
      * the default {@link Locale}.
      *
      * @see <a
      *     href="http://java.sun.com/developer/technicalArticles/J2SE/locale/">http://java.sun.com/developer/technicalArticles/J2SE/locale/</a>
      */
-    public String USER_COUNTRY = "user.country";
+    String USER_COUNTRY = "user.country";
 
-    /**
+    /*
      * The pre-defined System property {@value #USER_VARIANT} determines the <em>variant</em> for
      * the default {@link Locale}.
      *
      * @see <a
      *     href="http://java.sun.com/developer/technicalArticles/J2SE/locale/">http://java.sun.com/developer/technicalArticles/J2SE/locale/</a>
      */
-    public String USER_VARIANT = "user.variant";
+    String USER_VARIANT = "user.variant";
   }
 
-  /**
+  /*
    * Create a factory for {@link IKeyBuilder} instances configured using the system properties. The
    * factory will support Unicode unless {@link CollatorEnum#ASCII} is explicitly specified for the
    * {@link Options#COLLATOR} property.
@@ -1541,7 +1534,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return new DefaultKeyBuilderFactory(null /* properties */).getKeyBuilder();
   }
 
-  /**
+  /*
    * Create a factory for {@link IKeyBuilder} instances configured according to the specified
    * <i>properties</i>. Any properties NOT explicitly given will be defaulted from {@link
    * System#getProperties()}. The pre-defined properties {@link Options#USER_LANGUAGE}, {@link
@@ -1563,7 +1556,7 @@ public class KeyBuilder implements IKeyBuilder, LongPacker.IByteBuffer {
     return new DefaultKeyBuilderFactory(properties).getKeyBuilder();
   }
 
-  /**
+  /*
    * Create a new instance that optionally supports Unicode sort keys.
    *
    * @param capacity The initial capacity of the buffer. When zero (0) the {@link

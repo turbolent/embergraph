@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.sparse;
 
-/**
- * Filter for a specific column name.
+/*
+* Filter for a specific column name.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -35,7 +35,7 @@ public class SingleColumnFilter implements INameFilter {
 
   private final String name;
 
-  /**
+  /*
    * @param name The column name that you want.
    * @throws IllegalArgumentException if <i>name</i> is <code>null</code>.
    */

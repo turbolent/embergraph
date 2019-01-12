@@ -1,7 +1,7 @@
 package cern.colt.matrix.impl;
 
-/**
- * Factory producing implementations of {@link cern.colt.matrix.impl.Former} via method create();
+/*
+* Factory producing implementations of {@link cern.colt.matrix.impl.Former} via method create();
  * Implementations of can use existing libraries such as corejava.PrintfFormat or corejava.Format or
  * other. Serves to isolate the interface of String formatting from the actual implementation. If
  * you want to plug in a different String formatting implementation, simply replace this class with
@@ -11,7 +11,7 @@ package cern.colt.matrix.impl;
  * @version 1.0, 21/07/00
  */
 public class FormerFactory {
-  /**
+  /*
    * Constructs and returns a new format instance.
    *
    * @param s the format string following printf conventions. The string has a prefix, a format code

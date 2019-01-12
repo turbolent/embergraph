@@ -26,8 +26,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.ganglia.util.BytesUtil;
 import org.embergraph.ganglia.util.DaemonThreadFactory;
 
-/**
- * Class listens in to the Ganglia UDP protocol, decodes received messages, and dispatches them to
+/*
+* Class listens in to the Ganglia UDP protocol, decodes received messages, and dispatches them to
  * an {@link IGangliaMessageHandler}.
  *
  * <p>The decoded messages are reported without any additional translation. The receiver may need to
@@ -60,7 +60,7 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
     return listening;
   }
 
-  /**
+  /*
    * Listen at the default multicast group address and port.
    *
    * @param handler The interface to receive the ganglia messages.
@@ -74,7 +74,7 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
         InetAddress.getByName(DEFAULT_GROUP), DEFAULT_PORT, new GangliaMessageDecoder31(), handler);
   }
 
-  /**
+  /*
    * Listen at the specified multicast group address and port.
    *
    * @param group The multicast address used by ganglia for hosts to join.
@@ -105,7 +105,7 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
     this.handler = handler;
   }
 
-  /**
+  /*
    * Listens for ganglia messages. Each message is decoded as as it is received. Bad packets are
    * dropped. Valid messages are dispatched using a second thread to avoid latency in the thread
    * which is listening to the ganglia protocol.
@@ -151,14 +151,15 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
           new DatagramPacket(buffer, 0 /* off */, buffer.length /* len */);
 
       listening = true;
-
+      /*
+       *
       // Listen for messages.
       while (true) {
 
         try {
 
-          /*
-           * Note: This BLOCKS and does NOT notice an interrupt().
+        /*
+       * Note: This BLOCKS and does NOT notice an interrupt().
            *
            * Note: In Java 6 you can not have both multicast and
            * non-blocking receive.
@@ -166,8 +167,8 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
           datagramSocket.receive(packet);
 
           if (Thread.interrupted()) {
-            /*
-             * Stop listening if we are interrupted.
+          /*
+       * Stop listening if we are interrupted.
              */
             break;
           }
@@ -187,7 +188,7 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
         }
       }
 
-      return (Void) null;
+      return null;
 
     } finally {
 
@@ -205,7 +206,7 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
     }
   }
 
-  /**
+  /*
    * Decode a Ganglia message from the datagram packet.
    *
    * @param data The packet data.
@@ -247,11 +248,11 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
         log.warn(msg, t);
       }
 
-      return (Void) null;
+      return null;
     }
   }
 
-  /**
+  /*
    * Listens to ganglia services on the default multicast address and port and writes out the
    * messages that it observes on stdout.
    *

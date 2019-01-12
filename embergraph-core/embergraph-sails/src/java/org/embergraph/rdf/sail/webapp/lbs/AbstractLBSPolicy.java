@@ -41,8 +41,8 @@ import org.embergraph.quorum.QuorumListener;
 import org.embergraph.rdf.sail.webapp.EmbergraphServlet;
 import org.embergraph.rdf.sail.webapp.HALoadBalancerServlet;
 
-/**
- * Abstract base class establishes a listener for quorum events, tracks the services that are
+/*
+* Abstract base class establishes a listener for quorum events, tracks the services that are
  * members of the quorum, and caches metadata about those services (especially the requestURL at
  * which they will respond).
  *
@@ -58,7 +58,7 @@ public abstract class AbstractLBSPolicy
 
   public interface InitParams {}
 
-  /**
+  /*
    * The {@link ServletContext#getContextPath()} is cached in {@link #init(ServletConfig,
    * IIndexManager)}.
    */
@@ -71,7 +71,7 @@ public abstract class AbstractLBSPolicy
   /** The {@link UUID} of the HAJournalServer. */
   protected final AtomicReference<UUID> serviceIDRef = new AtomicReference<UUID>();
 
-  /**
+  /*
    * This is the table of known services. We can scan the table for a service {@link UUID} and then
    * forward a request to the pre-computed requestURL associated with that {@link UUID}. If the
    * requestURL is <code>null</code> then we do not know how to reach that service and can not proxy
@@ -106,14 +106,14 @@ public abstract class AbstractLBSPolicy
     return sb.toString();
   }
 
-  /**
+  /*
    * Extension hook for {@link #toString()} - implementation MUST NOT block.
    *
    * @param sb Buffer where you can write additional state.
    */
   protected void toString(final StringBuilder sb) {}
 
-  /**
+  /*
    * Return the cached reference to the {@link HAJournal}.
    *
    * @return The reference or <code>null</code> iff the reference has been cleared or has not yet
@@ -182,7 +182,7 @@ public abstract class AbstractLBSPolicy
       if (quorum != null) {
         try {
           // Note: This is the *local* HAGlueService.
-          quorumService = (QuorumService<HAGlue>) quorum.getClient();
+          quorumService = quorum.getClient();
           token = quorum.token();
           isLeader = quorumService.isLeader(token);
           isQuorumMet = token != Quorum.NO_QUORUM;
@@ -222,18 +222,15 @@ public abstract class AbstractLBSPolicy
        * Provide an opportunity to forward a read request to the local
        * service.
        */
-      if (conditionallyForwardReadRequest(servlet, request, response)) {
-
-        // Handled.
-        return true;
-      }
+      // Handled.
+      return conditionallyForwardReadRequest(servlet, request, response);
     }
 
     // request was not handled.
     return false;
   }
 
-  /**
+  /*
    * Hook provides the {@link IHALoadBalancerPolicy} with an opportunity to forward a read-request
    * to the local service rather than proxying the request to a service selected by the load
    * balancer (a local forward has less overhead than proxying to either the local host or a remote
@@ -251,7 +248,7 @@ public abstract class AbstractLBSPolicy
     return false;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This implementation rewrites the requestURL such that the request will be proxied to the
@@ -301,7 +298,7 @@ public abstract class AbstractLBSPolicy
     return null;
   }
 
-  /**
+  /*
    * Return the {@link ServiceScore} for the {@link HAGlue} service running on this host within this
    * webapp.
    */
@@ -328,7 +325,7 @@ public abstract class AbstractLBSPolicy
     return null;
   }
 
-  /**
+  /*
    * Return the first service found for the indicated host.
    *
    * @param hostname The hostname.
@@ -359,7 +356,7 @@ public abstract class AbstractLBSPolicy
     return null;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The services table is updated if a services joins or leaves the quorum.
@@ -386,8 +383,8 @@ public abstract class AbstractLBSPolicy
     switch (e.getEventType()) {
       case SERVICE_JOIN:
       case SERVICE_LEAVE:
-        /*
-         * Note: We do not want to run any blocking code in the ZK event
+      /*
+       * Note: We do not want to run any blocking code in the ZK event
          * thread!
          */
         getJournal()
@@ -400,7 +397,7 @@ public abstract class AbstractLBSPolicy
                         updateServiceTable();
                       }
                     },
-                    (Void) null /* result */));
+                    null /* result */));
         break;
     }
   }
@@ -430,7 +427,7 @@ public abstract class AbstractLBSPolicy
     }
   }
 
-  /**
+  /*
    * Update the per-service table.
    *
    * @see #serviceTableRef

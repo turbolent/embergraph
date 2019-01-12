@@ -44,8 +44,8 @@ import org.embergraph.testutil.ExperimentDriver.Result;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.NV;
 
-/**
- * Suite of stress tests of the concurrency control mechanisms (without the database implementation)
+/*
+* Suite of stress tests of the concurrency control mechanisms (without the database implementation)
  * - See {@link LockManager}.
  *
  * <p>Goals:
@@ -81,7 +81,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     super(name);
   }
 
-  /**
+  /*
    * Waits 10ms once it acquires its locks.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -107,7 +107,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     }
   }
 
-  /**
+  /*
    * Dies once it acquires its locks by throwing {@link HorridTaskDeath}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -122,7 +122,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     }
   }
 
-  /**
+  /*
    * Test driver.
    *
    * <p>Note: A "resource" is a named index (partition), so set nresources based on your
@@ -363,7 +363,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     return result;
   }
 
-  /**
+  /*
    * Options for {@link TestLockManager#doComparisonTest(Properties)}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -377,7 +377,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     public static final String NTHREADS = "nthreads";
     /** Total #of tasks to execute. */
     public static final String NTASKS = "ntasks";
-    /**
+    /*
      * The percentage of tasks that will die a {@link HorridTaskDeath} in [0.0:1.0] (default is
      * 0.0). This is used to stress the error handling mechanisms.
      */
@@ -388,12 +388,12 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     public static final String MIN_LOCKS = "minLocks";
     /** The maximum #of locks that a task will seek to acquire. */
     public static final String MAX_LOCKS = "maxLocks";
-    /**
+    /*
      * The timeout when attempting to acquire a lock (milliseconds) -or- <code>0</code> iff no
      * timeout will be used.
      */
     public static final String LOCK_TIMEOUT = "lockTimeout";
-    /**
+    /*
      * The maximum #of times that a task will attempt to acquire its locks before failing. Temporary
      * failures may occur due to deadlock or timeout during lock acquisition. Such failures may be
      * retried. The minimum value is ONE (1) since that means that we make only one attempt to
@@ -401,7 +401,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
      */
     public static final String MAX_LOCK_TRIES = "maxLockTries";
 
-    /**
+    /*
      * When true, operations MUST pre-declare their locks (default true).
      *
      * <p>Note: The {@link LockManager} uses this information to avoid deadlocks by the simple
@@ -411,7 +411,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
      */
     public static final String PREDECLARE_LOCKS = "predeclareLocks";
 
-    /**
+    /*
      * When true, the resources in a lock request are sorted before the lock requests are issued
      * (default true). This option is ONLY turned off for testing purposes. Since predeclaration
      * plus sorting makes deadlocks impossible, this option MAY be turned off in order to exercise
@@ -464,7 +464,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     assertTrue(Integer.parseInt(result.get("maxrunning")) == 5);
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource (low concurrency condition w/ 5
    * threads).
    */
@@ -515,7 +515,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     doComparisonTest(properties);
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource and there is only one resource to be
    * locked so that all operations MUST be serialized.
    */
@@ -534,7 +534,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     doComparisonTest(properties);
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource and there is only one resource to be
    * locked so that all operations MUST be serialized.
    */
@@ -556,7 +556,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     doComparisonTest(properties);
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource and there is only one resource to be
    * locked so that all operations MUST be serialized and where 10% of all tasks die a horrid death.
    */
@@ -580,7 +580,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     doComparisonTest(properties);
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource and there is only one resource to be
    * locked so that all operations MUST be serialized.
    */
@@ -601,7 +601,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     doComparisonTest(properties);
   }
 
-  /**
+  /*
    * Test where each operation locks only a single resource and there is only one resource to be
    * locked so that all operations MUST be serialized with a non-zero lock timeout. This test
    * stresses the logic in lock() that is responsible for backing out a lock request on timeout.
@@ -628,7 +628,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     assertEquals("ndeadlock", "0", result.get("ndeadlock"));
   }
 
-  /**
+  /*
    * Test where each operation locks one or more resources.
    *
    * <p>Note: This condition provides the basis for deadlocks.
@@ -651,7 +651,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     doComparisonTest(properties);
   }
 
-  /**
+  /*
    * Test where each operation locks one or more resources.
    *
    * <p>Note: This condition provides the basis for deadlocks. In fact, since we have 10 resource
@@ -685,7 +685,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     assertEquals("ndeadlock", "0", result.get("ndeadlock"));
   }
 
-  /**
+  /*
    * Test where each operation locks one or more resources.
    *
    * <p>Note: This condition provides the basis for deadlocks. In fact, since we have 10 resource
@@ -718,7 +718,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
     doComparisonTest(properties);
   }
 
-  /**
+  /*
    * Generates an XML file that can be used to (re-)run the concurrency control tests. The outputs
    * are appended to a file so you can see how performance and collected counters change from run to
    * run.
@@ -733,7 +733,7 @@ public class TestLockManager extends TestCase implements IComparisonTest {
    */
   public static class Generate extends ExperimentDriver {
 
-    /**
+    /*
      * Generates an XML file that can be run by {@link ExperimentDriver}.
      *
      * @param args

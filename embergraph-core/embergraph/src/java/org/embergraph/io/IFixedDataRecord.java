@@ -27,8 +27,8 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * Interface adds some methods for stream-based access to {@link IDataRecord}.
+/*
+* Interface adds some methods for stream-based access to {@link IDataRecord}.
  *
  * <p>Note: These methods are isolated on this interface to prevent confusion with the stream-based
  * semantics of the {@link ByteArrayBuffer}.
@@ -39,18 +39,18 @@ import java.io.OutputStream;
 public interface IFixedDataRecord extends IDataRecord {
 
   /** Return an input stream that will read from the slice. */
-  public DataInputBuffer getDataInput();
+  DataInputBuffer getDataInput();
 
-  /**
+  /*
    * Return a bit stream that will read from the slice.
    *
    * <p>Note: You DO NOT need to close this stream since it is backed by a byte[]. In fact, {@link
    * InputBitStream#close()} when backed by a byte[] appears to have relatively high overhead, which
    * is weird.
    */
-  public InputBitStream getInputBitStream();
+  InputBitStream getInputBitStream();
 
-  /**
+  /*
    * Write the slice on the output stream.
    *
    * @param os The output stream.
@@ -58,7 +58,7 @@ public interface IFixedDataRecord extends IDataRecord {
    */
   void writeOn(final OutputStream os) throws IOException;
 
-  /**
+  /*
    * Write the slice on the output stream.
    *
    * @param os The output stream.
@@ -66,7 +66,7 @@ public interface IFixedDataRecord extends IDataRecord {
    */
   void writeOn(final DataOutput out) throws IOException;
 
-  /**
+  /*
    * Write part of the slice on the output stream.
    *
    * @param os The output stream.

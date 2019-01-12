@@ -26,7 +26,7 @@ import org.openrdf.model.ValueFactory;
 /** A base class for IBinders. */
 public abstract class BinderBase<VS, ES, ST> implements IBinder<VS, ES, ST> {
 
-  /**
+  /*
    * The ordinal index of the variable that is bound by this {@link BinderBase}. By convention,
    * index ZERO is the vertex. Indices greater than ZERO are typically aspects of the state of the
    * vertex.
@@ -55,7 +55,7 @@ public abstract class BinderBase<VS, ES, ST> implements IBinder<VS, ES, ST> {
 
     } else {
 
-      return Arrays.asList(new Value[] {val});
+      return Arrays.asList(val);
     }
   }
 }

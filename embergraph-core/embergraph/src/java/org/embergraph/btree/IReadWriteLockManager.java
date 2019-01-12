@@ -19,15 +19,15 @@ package org.embergraph.btree;
 
 import java.util.concurrent.locks.Lock;
 
-/**
- * Interface for managing read/write locks on persistence capable data structures.
+/*
+* Interface for managing read/write locks on persistence capable data structures.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/855">AssertionError: Child does not have
  *     persistent identity </a>
  */
 public interface IReadWriteLockManager {
 
-  /**
+  /*
    * Return a {@link Lock} that may be used to obtain a shared read lock which is used (in the
    * absence of other concurrency control mechanisms) to permit concurrent readers on an unisolated
    * index while serializing access to that index when a writer must run. This is exposed for
@@ -41,7 +41,7 @@ public interface IReadWriteLockManager {
    */
   Lock readLock();
 
-  /**
+  /*
    * Return a {@link Lock} that may be used to obtain an exclusive write lock which is used (in the
    * absence of other concurrency control mechanisms) to serialize all processes accessing an
    * unisolated index when a writer must run. This is exposed for processes which need to obtain the
@@ -52,7 +52,7 @@ public interface IReadWriteLockManager {
    */
   Lock writeLock();
 
-  /**
+  /*
    * Return the #of read-locks held by the current thread for a mutable index view.
    *
    * @return The #of reentrant read locks held by the current thread -or- ZERO if the index is

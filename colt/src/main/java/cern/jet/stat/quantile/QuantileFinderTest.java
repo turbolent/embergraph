@@ -13,7 +13,7 @@ import cern.colt.list.DoubleArrayList;
 import cern.colt.list.IntArrayList;
 /** A class holding test cases for exact and approximate quantile finders. */
 class QuantileFinderTest {
-  /**
+  /*
    * Finds the first and last indexes of a specific element within a sorted list.
    *
    * @return int[]
@@ -59,7 +59,7 @@ class QuantileFinderTest {
     // testQuantileCalculation(args);
     // testCollapse();
   }
-  /**
+  /*
    * This method was created in VisualAge.
    *
    * @return double[]
@@ -92,7 +92,7 @@ class QuantileFinderTest {
     double epsilon = (double) distance / (double) N;
     return epsilon;
   }
-  /**
+  /*
    * This method was created in VisualAge.
    *
    * @return double[]
@@ -202,8 +202,7 @@ class QuantileFinderTest {
             double delta = deltas[d];
             for (int knownCounter = 0; knownCounter < 2; knownCounter++) {
               boolean known_N;
-              if (knownCounter == 0) known_N = true;
-              else known_N = false;
+              known_N = knownCounter == 0;
 
               DoubleQuantileFinder finder =
                   QuantileFinderFactory.newDoubleQuantileFinder(

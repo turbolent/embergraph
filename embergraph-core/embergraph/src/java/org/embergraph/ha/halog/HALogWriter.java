@@ -42,8 +42,8 @@ import org.embergraph.journal.StoreTypeEnum;
 import org.embergraph.util.Bytes;
 import org.embergraph.util.StackInfoReport;
 
-/**
- * Wrapper class to handle process log creation and output for HA.
+/*
+* Wrapper class to handle process log creation and output for HA.
  *
  * <p>The process log stores the {@link HAWriteMessage} and buffers to support reading and
  * reprocessing as part of the HA synchronization protocol.
@@ -75,7 +75,7 @@ public class HALogWriter implements IHALogWriter {
   /** Offset of the second root block in the file. */
   static final int OFFSET_ROOT_BLOCK1 = SIZE_MAGIC + SIZE_VERSION + (SIZEOF_ROOT_BLOCK * 1);
 
-  /**
+  /*
    * The size of the file header, including MAGIC, version, and both root blocks. The data starts at
    * this offset.
    */
@@ -90,7 +90,7 @@ public class HALogWriter implements IHALogWriter {
   /** HA log directory. */
   private final File m_haLogDir;
 
-  /**
+  /*
    * When <code>true</code>, the HALog is flushed to the disk before the closing root block is
    * written and then once again after the closing root block is written. When <code>false</code>,
    * the HALog is flushed only once, after the closing root block is written.
@@ -174,7 +174,7 @@ public class HALogWriter implements IHALogWriter {
     }
   }
 
-  /**
+  /*
    * Return the HALog file associated with the commit counter.
    *
    * @param dir The HALog directory.
@@ -223,7 +223,7 @@ public class HALogWriter implements IHALogWriter {
         : "commitCounter=" + tmp.getCommitCounter() + ",nextSequence=" + seq + "}";
   }
 
-  /**
+  /*
    * @param logDir The directory in which the HALog files reside.
    * @param doubleSync When <code>true</code>, the HALog is flushed to the disk before the closing
    *     root block is written and then once again after the closing root block is written. When
@@ -241,7 +241,7 @@ public class HALogWriter implements IHALogWriter {
     this.doubleSync = doubleSync;
   }
 
-  /**
+  /*
    * @param logDir
    * @deprecated This is ony used by the test suite.
    */
@@ -250,7 +250,7 @@ public class HALogWriter implements IHALogWriter {
     this(logDir, true /* doubleSync */);
   }
 
-  /**
+  /*
    * Open an HA log file for the write set starting with the given root block.
    *
    * @param rootBlock The root block.
@@ -360,7 +360,7 @@ public class HALogWriter implements IHALogWriter {
         }
       };
 
-  /**
+  /*
    * Write the final root block on the HA log and close the file. This "seals" the file, which now
    * represents the entire write set associated with the commit point in the given root block.
    *
@@ -368,7 +368,7 @@ public class HALogWriter implements IHALogWriter {
    * @throws IOException
    */
   @Override
-  public void closeHALog(final IRootBlockView rootBlock) throws FileNotFoundException, IOException {
+  public void closeHALog(final IRootBlockView rootBlock) throws IOException {
 
     final Lock lock = m_stateLock.writeLock();
     lock.lock();
@@ -405,8 +405,8 @@ public class HALogWriter implements IHALogWriter {
       }
 
       if (doubleSync) {
-        /**
-         * Flush the HALog records to the disk.
+      /*
+       * Flush the HALog records to the disk.
          *
          * <p>Note: This is intended to avoid the possibility that the writes might be reordered
          * such that closing root block was written to the disk before the HALog records were
@@ -432,7 +432,7 @@ public class HALogWriter implements IHALogWriter {
        */
       writeRootBlock(rootBlock.isRootBlock0(), rootBlock);
 
-      /**
+      /*
        * Flush the backing channel.
        *
        * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/738#comment:13" >Longevity
@@ -461,7 +461,7 @@ public class HALogWriter implements IHALogWriter {
     if (haLog.isDebugEnabled()) haLog.debug("wrote root block: " + rootBlock);
   }
 
-  /**
+  /*
    * Write the message and the data on the live HALog.
    *
    * @param msg The message.
@@ -518,8 +518,8 @@ public class HALogWriter implements IHALogWriter {
         case WORM:
         case RW:
           {
-            /*
-             * Write the WriteCache block on the channel.
+          /*
+       * Write the WriteCache block on the channel.
              */
             final int nbytes = msg.getSize();
             assert data.position() == 0;
@@ -541,7 +541,7 @@ public class HALogWriter implements IHALogWriter {
     }
   }
 
-  /**
+  /*
    * Utility to return a ByteBuffer containing the external version of the object.
    *
    * @return The {@link ByteBuffer}. The position will be zero. The limit will be the #of bytes in
@@ -587,7 +587,7 @@ public class HALogWriter implements IHALogWriter {
     }
   }
 
-  /**
+  /*
    * On various error conditions we may need to remove the log
    *
    * @throws IOException
@@ -602,8 +602,8 @@ public class HALogWriter implements IHALogWriter {
 
       if (m_state != null) {
 
-        /*
-         * Conditional remove iff file is open. Will not remove
+      /*
+       * Conditional remove iff file is open. Will not remove
          * something that has been closed.
          */
         final boolean isCommitted = m_state.isCommitted();
@@ -620,8 +620,8 @@ public class HALogWriter implements IHALogWriter {
 
         if (m_state.m_haLogFile.exists() && !m_state.m_haLogFile.delete()) {
 
-          /*
-           * It is a problem if a file exists and we can not delete
+        /*
+       * It is a problem if a file exists and we can not delete
            * it. We need to be able to remove the file and replace it
            * with a new file when we log the write set for this commit
            * point.
@@ -651,7 +651,7 @@ public class HALogWriter implements IHALogWriter {
     remove();
   }
 
-  /**
+  /*
    * Return the {@link IHALogReader} for the specified commit counter. If the request identifies the
    * HALog that is currently being written, then an {@link IHALogReader} will be returned that will
    * "see" newly written entries on the HALog. If the request identifies a historical HALog that has
@@ -665,7 +665,7 @@ public class HALogWriter implements IHALogWriter {
    *     not be read.
    */
   public IHALogReader getReader(final long commitCounter)
-      throws FileNotFoundException, IOException {
+      throws IOException {
 
     final File logFile = // new File(m_haLogDir,
         HALogWriter.getHALogFileName(m_haLogDir, commitCounter);
@@ -682,8 +682,8 @@ public class HALogWriter implements IHALogWriter {
 
       if (m_state != null && m_rootBlock.getCommitCounter() + 1 == commitCounter) {
 
-        /*
-         * This is the live HALog file.
+      /*
+       * This is the live HALog file.
          */
 
         if (haLog.isDebugEnabled()) haLog.debug("Opening live HALog: file=" + m_state.m_haLogFile);
@@ -713,7 +713,7 @@ public class HALogWriter implements IHALogWriter {
      */
     /** The #of messages written onto the live HALog file. */
     private long m_records = 0;
-    /**
+    /*
      * <code>false</code> until the live HALog file has been committed (by writing the closing root
      * block).
      */
@@ -741,7 +741,7 @@ public class HALogWriter implements IHALogWriter {
       m_accessors = 1; // the writer is a reader also
     }
 
-    /**
+    /*
      * Force an actual close of the backing file (used when we will remove a file).
      *
      * <p>Note: Any readers on the closed file will notice the close and fail if they are blocking
@@ -761,8 +761,8 @@ public class HALogWriter implements IHALogWriter {
       synchronized (this) {
         try {
           if (m_accessors == 0) {
-            /*
-             * Already at zero. Do not decrement further.
+          /*
+       * Already at zero. Do not decrement further.
              */
             throw new IllegalStateException();
           }
@@ -770,8 +770,8 @@ public class HALogWriter implements IHALogWriter {
           --m_accessors;
           if (m_accessors == 0) {
             if (haLog.isInfoEnabled()) haLog.info("Closing file", new StackInfoReport());
-            /*
-             * Note: Close the RandomAccessFile rather than the
+          /*
+       * Note: Close the RandomAccessFile rather than the
              * FileChannel. Potential fix for leaking open file
              * handles.
              */
@@ -811,7 +811,7 @@ public class HALogWriter implements IHALogWriter {
       }
     }
 
-    /**
+    /*
      * FIXME The API states that IHALogReader.isEmpty() reports true until the closing root block is
      * laid down. However, this isEmpty() implementation does not adhere to those semantics. Review
      * how (and if) isEmpty() is used for the live HALog and then fix either the API or this method.
@@ -926,8 +926,8 @@ public class HALogWriter implements IHALogWriter {
 
       synchronized (m_state) {
 
-        /*
-         * Note: synchronized(FileState) makes these decisions atomic.
+      /*
+       * Note: synchronized(FileState) makes these decisions atomic.
          */
 
         if (!m_state.isOpen()) return false;
@@ -981,14 +981,14 @@ public class HALogWriter implements IHALogWriter {
       // Note: this pattern prevents a double-close of a reader.
       if (open.compareAndSet(true /* expected */, false /* newValue */)) {
 
-        /*
-         * Close an open reader.
+      /*
+       * Close an open reader.
          */
         synchronized (m_state) {
           if (m_state.m_accessors == 0) {
 
-            /**
-             * TODO This is a bit of a hack. The problem is that disableHALog() can force the close
+          /*
+       * TODO This is a bit of a hack. The problem is that disableHALog() can force the close
              * of all open readers. This is noticed by the FileState, but the OpenHALogReader itself
              * does not know that it is "closed" (it's open flag has not been cleared). We could
              * "fix" this by keeping an explicit set of the open readers for the live HALog and then

@@ -21,15 +21,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.search;
 
-/**
- * Interface for the key associated with an entry in the full text index.
+/*
+* Interface for the key associated with an entry in the full text index.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ITermDocKey<V extends Comparable<V>> {
 
-  /**
+  /*
    * The token text.
    *
    * @throws UnsupportedOperationException The sort key for the token text is not decodable.
@@ -37,7 +37,7 @@ public interface ITermDocKey<V extends Comparable<V>> {
    */
   String getToken() throws UnsupportedOperationException;
 
-  /**
+  /*
    * The normalized local term weight for the token and document in the associated entry of the full
    * text search index.
    */
@@ -46,7 +46,7 @@ public interface ITermDocKey<V extends Comparable<V>> {
   /** The document identifier. */
   V getDocId();
 
-  /**
+  /*
    * The field identifier.
    *
    * @return The field identifier.

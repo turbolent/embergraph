@@ -24,8 +24,8 @@ package org.embergraph.bop.constraint;
 import org.embergraph.bop.IConstant;
 import org.embergraph.bop.IVariable;
 
-/**
- * Unit tests for {@link INHashMap}.
+/*
+* Unit tests for {@link INHashMap}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -40,7 +40,7 @@ public class TestInHashMap extends TestINConstraint {
   }
 
   @Override
-  protected INConstraint newINConstraint(IVariable<?> var, IConstant<?> vals[]) {
+  protected INConstraint newINConstraint(IVariable<?> var, IConstant<?>[] vals) {
     return new INHashMap(var, vals);
   }
 }

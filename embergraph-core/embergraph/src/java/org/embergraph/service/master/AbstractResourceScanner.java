@@ -30,8 +30,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 import org.embergraph.relation.accesspath.BlockingBuffer;
 
-/**
- * Abstract base class for the scanner for a mapped master job. The {@link Callable} should return
+/*
+* Abstract base class for the scanner for a mapped master job. The {@link Callable} should return
  * the #of resources which were accepted for processing.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -44,7 +44,7 @@ public abstract class AbstractResourceScanner<V> implements Callable<Long> {
   /** The master buffer onto which the scanner drops chunks of resources for processing. */
   private final BlockingBuffer<V[]> buffer;
 
-  /**
+  /*
    * A queue used to combine the individual resources reported to {@link #accept(Object)} into
    * chunks before they are added to the {@link #buffer}.
    */
@@ -75,7 +75,7 @@ public abstract class AbstractResourceScanner<V> implements Callable<Long> {
     this.queue = new ArrayBlockingQueue<V>(2 * buffer.getMinimumChunkSize());
   }
 
-  /**
+  /*
    * Invokes {@link #runScanner()}, queuing and transferring chunks of resources to the {@link
    * BlockingBuffer} specified to the ctor. When {@link #runScanner()} completes normally, the
    * remaining resources are transferred from the internal queue to the {@link BlockingBuffer}.
@@ -94,14 +94,14 @@ public abstract class AbstractResourceScanner<V> implements Callable<Long> {
     return acceptCount.get();
   }
 
-  /**
+  /*
    * Run the scanner.
    *
    * @throws Exception
    */
   protected abstract void runScanner() throws Exception;
 
-  /**
+  /*
    * Accept a resource for processing.
    *
    * @param resource The resource.
@@ -179,7 +179,7 @@ public abstract class AbstractResourceScanner<V> implements Callable<Long> {
     chunkCount.incrementAndGet();
   }
 
-  /**
+  /*
    * Drain anything left in the queue, transferring it in chunks to the buffer (blocks if the buffer
    * is full).
    */

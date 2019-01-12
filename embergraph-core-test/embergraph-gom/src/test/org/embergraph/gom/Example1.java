@@ -16,8 +16,8 @@ import org.embergraph.util.httpd.Config;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
 
-/**
- * Simple graph program constructs a local graph using a SPARQL query that extracts edges of
+/*
+* Simple graph program constructs a local graph using a SPARQL query that extracts edges of
  * interest from the SPARQL server.
  *
  * <p>To get started, start the NanoSparqlServer. Then LOAD the data set into the server using
@@ -76,7 +76,7 @@ public class Example1 implements Callable<Void> {
     final String serviceURL =
         "http://localhost:" + Config.HTTP_PORT + "/" + EmbergraphStatics.getContextPath();
 
-    /**
+    /*
      * The namespace of the KB instance that you want to connect to on that server. The default
      * namespace is "kb".
      */

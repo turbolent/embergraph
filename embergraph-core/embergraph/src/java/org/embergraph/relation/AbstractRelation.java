@@ -49,8 +49,8 @@ import org.embergraph.relation.rule.IAccessPathExpander;
 import org.embergraph.service.IEmbergraphFederation;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Base class for {@link IRelation} and {@link IMutableRelation} impls.
+/*
+* Base class for {@link IRelation} and {@link IMutableRelation} impls.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -69,7 +69,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     this(null /* container */, indexManager, namespace, timestamp, properties);
   }
 
-  /**
+  /*
    * Alternative version used when a resource exists within some container. The additional
    * <i>container</i> argument provides access to the container before the container has been
    * written to the global row store.
@@ -84,7 +84,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     super(container, indexManager, namespace, timestamp, properties);
   }
 
-  /**
+  /*
    * The fully qualified name of the index.
    *
    * @param keyOrder The natural index order.
@@ -96,7 +96,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     return getFQN(this, keyOrder);
   }
 
-  /**
+  /*
    * The fully qualified name of the index.
    *
    * @param relation The relation.
@@ -109,7 +109,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     return getFQN(relation, keyOrder.getIndexName());
   }
 
-  /**
+  /*
    * The fully qualified name of the index.
    *
    * @param relation The relation.
@@ -129,7 +129,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     return (relation.getNamespace() + "." + localName).intern();
   }
 
-  /**
+  /*
    * Return the index for the {@link IKeyOrder} the timestamp for this view of the relation.
    *
    * @param keyOrder The natural index order.
@@ -146,7 +146,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     return getIndex(getFQN(keyOrder));
   }
 
-  /**
+  /*
    * Return the named index using the timestamp for this view of the relation.
    *
    * @param fqn The fully qualified name of the index.
@@ -169,7 +169,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     return getIndex(indexManager, fqn, timestamp);
   }
 
-  /**
+  /*
    * Return the named index using the timestamp for this view of the relation.
    *
    * <p>While both the {@link IEmbergraphFederation} imposes the {@link ConcurrencyManager} on all
@@ -196,7 +196,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
 
     IIndex ndx = indexManager.getIndex(fqn, timestamp);
 
-    /**
+    /*
      * Note: We need to wrap any unisolated index on the Journal (included the IsolatedActionJournal
      * managed by the AbstractTask).
      *
@@ -217,7 +217,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     return ndx;
   }
 
-  /**
+  /*
    * Default factory for {@link IndexMetadata}.
    *
    * @param name The fully qualified index name.
@@ -232,7 +232,7 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     return metadata;
   }
 
-  /**
+  /*
    * {@link IAccessPath} factory.
    *
    * @param localIndexManager The local index manager (optional, except when there is a request for
@@ -310,8 +310,8 @@ public abstract class AbstractRelation<E> extends AbstractResource<IRelation<E>>
     return accessPath;
   }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     * <p>
   //     * Note: Since the relation may materialize the index views for its various
   //     * access paths, and since we are restricted to a single index partition and

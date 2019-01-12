@@ -18,8 +18,8 @@ package org.embergraph.rdf.spo;
 import java.util.HashSet;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * "IN" filter for the context position based on a native long hash set containing the acceptable
+/*
+* "IN" filter for the context position based on a native long hash set containing the acceptable
  * graph identifiers. While evaluation of the access path will be ordered, the filter does not
  * maintain evolving state so a hash set will likely beat a binary search.
  *
@@ -67,7 +67,7 @@ public final class InGraphHashSetFilter<E extends ISPO> extends SPOFilter<E> {
 
   private boolean accept(final ISPO o) {
 
-    final ISPO spo = (ISPO) o;
+    final ISPO spo = o;
 
     return contextSet.contains(spo.c());
   }

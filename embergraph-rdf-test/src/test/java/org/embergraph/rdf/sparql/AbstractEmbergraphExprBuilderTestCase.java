@@ -57,8 +57,8 @@ import org.embergraph.rdf.store.LocalTripleStore;
 import org.embergraph.rdf.vocab.NoVocabulary;
 import org.openrdf.query.MalformedQueryException;
 
-/**
- * Abstract base class for tests of the {@link EmbergraphExprBuilder} and friends.
+/*
+* Abstract base class for tests of the {@link EmbergraphExprBuilder} and friends.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -113,7 +113,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
     valueFactory = null;
   }
 
-  /**
+  /*
    * Return an anonymous variable having exactly the given variable name.
    *
    * <p>Note: This avoids a side-effect on the counter, which is part of the {@link
@@ -131,7 +131,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
     return var;
   }
 
-  /**
+  /*
    * Note: makeIV() in the tests can leave the IV as a MockIV since we will never have anything in
    * the database (unless there is a Vocabulary or it is otherwise inline, in which case this code
    * is sufficient to resolve the inline IV).
@@ -144,7 +144,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
 
     if (iv == null) {
 
-      iv = (IV<EmbergraphValue, ?>) TermId.mockIV(VTE.valueOf(value));
+      iv = TermId.mockIV(VTE.valueOf(value));
 
       iv.setValue(value);
     }
@@ -152,7 +152,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
     return iv;
   }
 
-  /**
+  /*
    * Marks the variable as anonymous.
    *
    * @param v The variable.
@@ -269,16 +269,16 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
       //            ((QueryRoot) actual).setParseTree(null);
 
       if (((QueryRoot) expected).getQueryHints() == null) {
-        /*
-         * Note: Discard the query hints since the unit tests are not
+      /*
+       * Note: Discard the query hints since the unit tests are not
          * building those up from the AST at this time.
          */
         ((QueryRoot) actual).setQueryHints(null);
       }
 
       if (((QueryRoot) expected).getDataset() == null) {
-        /*
-         * Note: Discard the data set since the unit tests are not
+      /*
+       * Note: Discard the data set since the unit tests are not
          * building those up from the AST at this time.
          */
         ((QueryRoot) actual).setDataset(null);
@@ -307,7 +307,7 @@ public class AbstractEmbergraphExprBuilderTestCase extends TestCase {
       log.error("\nexpected:\n" + expected);
       log.error("\nactual:\n" + actual);
 
-      AbstractQueryEngineTestCase.diff((BOp) expected, (BOp) actual);
+      AbstractQueryEngineTestCase.diff(expected, actual);
 
       // No difference was detected?
       throw new AssertionError();

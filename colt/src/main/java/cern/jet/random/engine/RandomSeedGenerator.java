@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.jet.random.engine;
 
-/**
- * Deterministic seed generator for pseudo-random number generators. The sole purpose of this class
+/*
+* Deterministic seed generator for pseudo-random number generators. The sole purpose of this class
  * is to decorrelate seeds and uniform random number generators. (If a generator would be used to
  * generate seeds for itself, the result could be correlations.)
  *
@@ -31,7 +31,7 @@ public class RandomSeedGenerator extends cern.colt.PersistentObject {
   public RandomSeedGenerator() {
     this(0, 0);
   }
-  /**
+  /*
    * Constructs and returns a new seed generator; you normally won't need to use this method.
    *
    * <p>The position <tt>[row,column]</tt> indicates the iteration starting point within a (virtual)
@@ -49,7 +49,7 @@ public class RandomSeedGenerator extends cern.colt.PersistentObject {
     this.column = column;
   }
   /** Prints the generated seeds for the given input parameters. */
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     int row = Integer.parseInt(args[0]);
     int column = Integer.parseInt(args[1]);
     int size = Integer.parseInt(args[2]);

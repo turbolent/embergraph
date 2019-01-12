@@ -29,8 +29,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.service.IDataService;
 import org.embergraph.service.IMetadataService;
 
-/**
- * Abstract base class for tasks run during post-processing of a journal by the {@link
+/*
+* Abstract base class for tasks run during post-processing of a journal by the {@link
  * ResourceManager}. These tasks are designed with a historical read that handles history up to some
  * specified commitTime and the submits an {@link ITx#UNISOLATED} task that brings things up to date
  * and coordinates an atomic update between the {@link IDataService}(s) and the {@link
@@ -60,7 +60,7 @@ public abstract class AbstractResourceManagerTask<T> extends AbstractTask<T> {
 
   protected final ResourceManager resourceManager;
 
-  /**
+  /*
    * @param resourceManager
    * @param timestamp
    * @param resource
@@ -73,7 +73,7 @@ public abstract class AbstractResourceManagerTask<T> extends AbstractTask<T> {
     this.resourceManager = resourceManager;
   }
 
-  /**
+  /*
    * @param resourceManager
    * @param timestamp
    * @param resource
@@ -86,7 +86,7 @@ public abstract class AbstractResourceManagerTask<T> extends AbstractTask<T> {
     this.resourceManager = resourceManager;
   }
 
-  /**
+  /*
    * Pretty print a resource metadata array or other array of objects with long string
    * representations by framing the output to have one line for each element of the array.
    *

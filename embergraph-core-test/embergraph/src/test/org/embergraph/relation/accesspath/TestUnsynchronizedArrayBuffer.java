@@ -25,8 +25,8 @@ package org.embergraph.relation.accesspath;
 
 import junit.framework.TestCase2;
 
-/**
- * Test suite for the {@link UnsynchronizedArrayBuffer}.
+/*
+* Test suite for the {@link UnsynchronizedArrayBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -62,7 +62,7 @@ public class TestUnsynchronizedArrayBuffer extends TestCase2 {
     super.tearDown();
   }
 
-  /**
+  /*
    * Helper class exposes the backing buffer.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -84,7 +84,7 @@ public class TestUnsynchronizedArrayBuffer extends TestCase2 {
       return 0;
     }
 
-    /**
+    /*
      * Return the chunk by reference at the given index.
      *
      * @param index The index into the internal buffer.
@@ -99,7 +99,7 @@ public class TestUnsynchronizedArrayBuffer extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test verifies state of both the {@link UnsynchronizedArrayBuffer} and the target {@link
    * IBuffer} before and after an element is added to the {@link UnsynchronizedArrayBuffer} and
    * after it is {@link UnsynchronizedArrayBuffer#flush() flushed} to target {@link IBuffer}.

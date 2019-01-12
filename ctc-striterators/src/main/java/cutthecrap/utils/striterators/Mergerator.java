@@ -19,8 +19,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Merges two sorted lists removing equal objects. For example, two sorted lists of Strings to
+/*
+* Merges two sorted lists removing equal objects. For example, two sorted lists of Strings to
  * create a single list with no duplicates.
  */
 public class Mergerator implements Iterator {

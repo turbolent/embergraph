@@ -8,14 +8,14 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.jet.stat.quantile;
 
-/**
- * A set of buffers holding <tt>double</tt> elements; internally used for computing approximate
+/*
+* A set of buffers holding <tt>double</tt> elements; internally used for computing approximate
  * quantiles.
  */
 class DoubleBufferSet extends BufferSet {
   protected DoubleBuffer[] buffers;
   private boolean nextTriggerCalculationState; // tmp var only
-  /**
+  /*
    * Constructs a buffer set with b buffers, each having k elements
    *
    * @param b the number of buffers
@@ -25,7 +25,7 @@ class DoubleBufferSet extends BufferSet {
     this.buffers = new DoubleBuffer[b];
     this.clear(k);
   }
-  /**
+  /*
    * Returns an empty buffer if at least one exists. Preferably returns a buffer which has already
    * been used, i.e. a buffer which has already been allocated.
    */
@@ -59,7 +59,7 @@ class DoubleBufferSet extends BufferSet {
 
     return collectedBuffers;
   }
-  /**
+  /*
    * Determines all full buffers having the specified level.
    *
    * @return all full buffers having the specified level
@@ -116,14 +116,14 @@ class DoubleBufferSet extends BufferSet {
   public int b() {
     return buffers.length;
   }
-  /**
+  /*
    * Removes all elements from the receiver. The receiver will be empty after this call returns, and
    * its memory requirements will be close to zero.
    */
   public void clear() {
     clear(k());
   }
-  /**
+  /*
    * Removes all elements from the receiver. The receiver will be empty after this call returns, and
    * its memory requirements will be close to zero.
    */
@@ -131,7 +131,7 @@ class DoubleBufferSet extends BufferSet {
     for (int i = b(); --i >= 0; ) this.buffers[i] = new DoubleBuffer(k);
     this.nextTriggerCalculationState = true;
   }
-  /**
+  /*
    * Returns a deep copy of the receiver.
    *
    * @return a deep copy of the receiver.
@@ -139,13 +139,13 @@ class DoubleBufferSet extends BufferSet {
   public Object clone() {
     DoubleBufferSet copy = (DoubleBufferSet) super.clone();
 
-    copy.buffers = (DoubleBuffer[]) copy.buffers.clone();
+    copy.buffers = copy.buffers.clone();
     for (int i = buffers.length; --i >= 0; ) {
       copy.buffers[i] = (DoubleBuffer) copy.buffers[i].clone();
     }
     return copy;
   }
-  /**
+  /*
    * Collapses the specified full buffers (must not include partial buffer).
    *
    * @return a full buffer containing the collapsed values. The buffer has accumulated weight.
@@ -187,7 +187,7 @@ class DoubleBufferSet extends BufferSet {
 
     return false;
   }
-  /**
+  /*
    * Applies a procedure to each element of the receiver, if any. Iterates over the receiver in no
    * particular order.
    *
@@ -202,7 +202,7 @@ class DoubleBufferSet extends BufferSet {
     }
     return true;
   }
-  /**
+  /*
    * Determines all values of the specified buffers positioned at the specified triggerPositions
    * within the sorted sequence and fills them into outputValues.
    *
@@ -317,7 +317,7 @@ class DoubleBufferSet extends BufferSet {
     }
     return memory;
   }
-  /**
+  /*
    * Computes the next triggerPosition for collapse
    *
    * @return the next triggerPosition for collapse
@@ -340,7 +340,7 @@ class DoubleBufferSet extends BufferSet {
 
     return nextTriggerPosition;
   }
-  /**
+  /*
    * Returns how many percent of the elements contained in the receiver are <tt>&lt;= element</tt>.
    * Does linear interpolation if the element is not contained but lies in between two contained
    * elements.

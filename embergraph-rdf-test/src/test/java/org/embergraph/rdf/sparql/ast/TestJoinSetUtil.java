@@ -26,8 +26,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.Var;
 import org.embergraph.rdf.sparql.ast.JoinSetUtil.VertexJoinSet;
 
-/**
- * Test suite for {@link JoinSetUtil}.
+/*
+* Test suite for {@link JoinSetUtil}.
  *
  * <p>TODO Expand the test suite. This will be easier to do if we refactor the state of the {@link
  * JoinSetUtil} into an interface so we can have a mock object with the expected state.
@@ -102,15 +102,15 @@ public class TestJoinSetUtil extends AbstractASTEvaluationTestCase {
     }
 
     // Verify the canJoin matrix (upper diagonal).
-    final int canJoin[][] =
-        new int[][] {
-          new int[] {0, 0, 1, 0, 1, 0, 1},
-          new int[] {0, 0, 1, 0, 0, 0, 0},
-          new int[] {0, 0, 0, 0, 1, 0, 1},
-          new int[] {0, 0, 0, 0, 0, 0, 0},
-          new int[] {0, 0, 0, 0, 0, 0, 1},
-          new int[] {0, 0, 0, 0, 0, 0, 0},
-          new int[] {0, 0, 0, 0, 0, 0, 0},
+    final int[][] canJoin =
+        new int[][]{
+            new int[]{0, 0, 1, 0, 1, 0, 1},
+            new int[]{0, 0, 1, 0, 0, 0, 0},
+            new int[]{0, 0, 0, 0, 1, 0, 1},
+            new int[]{0, 0, 0, 0, 0, 0, 0},
+            new int[]{0, 0, 0, 0, 0, 0, 1},
+            new int[]{0, 0, 0, 0, 0, 0, 0},
+            new int[]{0, 0, 0, 0, 0, 0, 0},
         };
     for (int i = 0; i < fixture.requiredJoinCount; i++) {
       assertEquals("row=" + i, canJoin[i], fixture.canJoin[i]);

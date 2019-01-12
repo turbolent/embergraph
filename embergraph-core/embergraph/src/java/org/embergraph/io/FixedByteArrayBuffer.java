@@ -27,8 +27,8 @@ package org.embergraph.io;
 
 import org.embergraph.util.BytesUtil;
 
-/**
- * Efficient absolute get/put operations on a slice of a byte[]. This class is not thread-safe under
+/*
+* Efficient absolute get/put operations on a slice of a byte[]. This class is not thread-safe under
  * mutation because the operations are not atomic. Concurrent operations on the same region of the
  * slice can reveal partial updates.
  *
@@ -49,7 +49,7 @@ public class FixedByteArrayBuffer extends AbstractFixedByteArrayBuffer {
     return buf;
   }
 
-  /**
+  /*
    * Create an instance backed by a fixed capacity byte[].
    *
    * @param capacity The capacity of the backing byte[].
@@ -61,7 +61,7 @@ public class FixedByteArrayBuffer extends AbstractFixedByteArrayBuffer {
     this.buf = new byte[capacity];
   }
 
-  /**
+  /*
    * Create a slice of a byte[].
    *
    * @param buf The byte[].

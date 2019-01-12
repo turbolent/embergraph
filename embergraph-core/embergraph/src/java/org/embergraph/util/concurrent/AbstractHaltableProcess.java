@@ -32,8 +32,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.relation.accesspath.BufferClosedException;
 import org.embergraph.util.InnerCause;
 
-/**
- * Abstract base class for tasks whose processing may be halted asynchronously.
+/*
+* Abstract base class for tasks whose processing may be halted asynchronously.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -45,7 +45,7 @@ public abstract class AbstractHaltableProcess {
   /** Volatile flag is set <code>true</code> if the process should halt. */
   private transient volatile boolean halt = false;
 
-  /**
+  /*
    * The first cause as set by {@link #halt(Throwable)}.
    *
    * <p>Note: {@link #halt} uses {@link AtomicReference#compareAndSet(Object, Object)} and specifies
@@ -55,7 +55,7 @@ public abstract class AbstractHaltableProcess {
   private final transient AtomicReference<Throwable> firstCause =
       new AtomicReference<Throwable>(null);
 
-  /**
+  /*
    * Return unless processing has been halted.
    *
    * @throws RuntimeException wrapping the {@link #firstCause} iff processing has been halted.
@@ -69,7 +69,7 @@ public abstract class AbstractHaltableProcess {
     }
   }
 
-  /**
+  /*
    * Indicate that processing should halt. This method is written defensively and will not throw
    * anything.
    *
@@ -93,8 +93,8 @@ public abstract class AbstractHaltableProcess {
             && !InnerCause.isInnerCause(cause, RejectedExecutionException.class)
             && !InnerCause.isInnerCause(cause, BufferClosedException.class)) {
 
-          /*
-           * This logs all unexpected causes, not just the first one
+        /*
+       * This logs all unexpected causes, not just the first one
            * to be reported for this join task.
            *
            * Note: The master will log the firstCause that it receives

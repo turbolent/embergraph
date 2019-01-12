@@ -26,8 +26,8 @@ import junit.framework.AssertionFailedError;
 import junit.framework.TestCase2;
 import org.embergraph.cache.SynchronizedHardReferenceQueueWithTimeout.IRef;
 
-/**
- * Test suite for {@link SynchronizedHardReferenceQueueWithTimeout}.
+/*
+* Test suite for {@link SynchronizedHardReferenceQueueWithTimeout}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -116,7 +116,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Verify that the indirected references on the innerQueue are the same as the given references.
    *
    * @param expected The expected references in the expected order.
@@ -138,7 +138,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
     assertEquals("order", expected, actual2);
   }
 
-  /**
+  /*
    * Test verifies that we can add distinct references until the cache is full and that a subsequent
    * add causes an eviction notice. While the cache is full, we then explicitly evict the LRU
    * reference and verify that the cache state correctly reflects the eviction. Finally, we test
@@ -313,7 +313,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Test verifies scan of the last N references when adding a reference to the cache. When the test
    * starts the tail is at index 0, but eventually we wrap the cache around and continue testing to
    * make sure that scans function correctly with a head index of 0 (this requires continuing the
@@ -481,7 +481,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
 
   }
 
-  /**
+  /*
    * Helper class for testing correct behavior of the cache and the listener interface.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -492,7 +492,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
     /** Constructor. */
     public MyListener() {}
 
-    /**
+    /*
      * Set the next N expected references for eviction notices. You can only do this when nothing is
      * currently expected.
      *
@@ -524,7 +524,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
 
     private Stack<G> expectedRefs = new Stack<G>();
 
-    /**
+    /*
      * Set the expected reference for the next eviction notice. The listener will thrown an
      * exception if there is a cache eviction unless you first invoke this method.
      *
@@ -540,7 +540,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
 
     private G expectedRef = null;
 
-    /**
+    /*
      * Test for an eviction event.
      *
      * @exception AssertionFailedError if nothing was evicted since the last time an expected
@@ -556,7 +556,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
 
     private boolean evicted = false;
 
-    /**
+    /*
      * Test for the expected #of eviction notices to date.
      *
      * @param expected
@@ -574,7 +574,7 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
 
     private int nevicted = 0;
 
-    /**
+    /*
      * @throws AssertionFailedError if the evicted reference is not the next expected eviction
      *     reference or if no eviction is expected.
      */
@@ -585,8 +585,8 @@ public class TestSynchronizedHardReferenceQueueWithTimeout extends TestCase2 {
 
       if (expectedRef == null && expectedRefs.size() > 0) {
 
-        /*
-         * There is no current expectation, but there is one on the
+      /*
+       * There is no current expectation, but there is one on the
          * stack, so we pop it off the stack and continue.
          *
          * Note: We pop the expectation off of the stack lazily so that

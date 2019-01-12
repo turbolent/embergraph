@@ -44,7 +44,7 @@ public class RAMGASEngine extends GASEngine {
     super(nthreads);
   }
 
-  /**
+  /*
    * Returns <code>false</code>. There is no intrinsic ordering that can improve access for this
    * implementation.
    */
@@ -53,7 +53,7 @@ public class RAMGASEngine extends GASEngine {
     return false;
   }
 
-  /**
+  /*
    * A simple RDF graph model suitable for graph mining algorithms.
    *
    * <p>TODO This model does not support link weights. It was developed to provide an implementation
@@ -70,7 +70,7 @@ public class RAMGASEngine extends GASEngine {
       return vf;
     }
 
-    /**
+    /*
      * From a vertex, we can visit the in-edges, out-edges, or attribute values. These things are
      * organized into three sets of statements. A non-thread-safe collection is used to provide the
      * distinct semantics for those sets and fast traversal. This design precludes the ability to
@@ -80,21 +80,21 @@ public class RAMGASEngine extends GASEngine {
 
       /** The {@link Value} for that {@link Vertex}. */
       private final Value v;
-      /**
+      /*
        * The distinct set of in-edges for this {@link Vertex}.
        *
        * <p>The {@link Statement#getObject()} for each {@link Statement} in this collection will be
        * the {@link #v}.
        */
       private Set<Statement> inEdges = null;
-      /**
+      /*
        * The distinct set of out-edges for this {@link Vertex}.
        *
        * <p>The {@link Statement#getSubject()} for each {@link Statement} in this collection will be
        * the {@link #v}.
        */
       private Set<Statement> outEdges = null;
-      /**
+      /*
        * The distinct set of property values for this {@link Vertex}.
        *
        * <p>The {@link Statement#getSubject()} for each {@link Statement} in this collection will be
@@ -182,7 +182,7 @@ public class RAMGASEngine extends GASEngine {
       vf = new ValueFactoryImpl();
     }
 
-    /**
+    /*
      * Lookup / create a vertex.
      *
      * @param x The {@link Value}.
@@ -306,10 +306,10 @@ public class RAMGASEngine extends GASEngine {
     private IStriterator getEdges(
         final boolean inEdges, final IGASContext<?, ?, ?> ctx, final Value u) throws SailException {
 
-      final URI linkTypeIV = (URI) ctx.getLinkType();
+      final URI linkTypeIV = ctx.getLinkType();
       if (linkTypeIV != null) {
-        /*
-         * FIXME RDR: We need to use a union of access paths for link
+      /*
+       * FIXME RDR: We need to use a union of access paths for link
          * attributes for the generic SAIL since it does not have the
          * concept of statements about statements. This will require
          * applying the access paths that will visit the appropriate
@@ -344,8 +344,8 @@ public class RAMGASEngine extends GASEngine {
 
         if (v instanceof Resource) {
 
-          /*
-           * FIXME This is not ignoring self-loops. Realistically, we
+        /*
+       * FIXME This is not ignoring self-loops. Realistically, we
            * want to include them in the data since they are part of
            * the data, but we do not want to consider them in samples
            * since they do not actually go anywhere. The SAIL and BD

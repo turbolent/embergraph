@@ -31,8 +31,8 @@ import java.io.Writer;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public abstract class AbstractCounterSet implements ICounterSet {
@@ -261,7 +261,7 @@ public abstract class AbstractCounterSet implements ICounterSet {
     return false;
   }
 
-  /**
+  /*
    * Uses a post-order iteration to visit the {@link CounterSet}s and for each {@link CounterSet}
    * writes the current value of each {@link Counter}.
    *
@@ -300,7 +300,7 @@ public abstract class AbstractCounterSet implements ICounterSet {
     asXML(w, encoding, filter);
   }
 
-  /**
+  /*
    * Alternative, but you are still required to specify the character set encoding in use by the
    * writer.
    *

@@ -20,8 +20,8 @@ package org.embergraph.bop;
 import java.util.Collections;
 import org.embergraph.rdf.sparql.ast.FilterNode;
 
-/**
- * A constant.
+/*
+* A constant.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -30,7 +30,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
   /** */
   private static final long serialVersionUID = -2967861242470442497L;
 
-  /**
+  /*
    * Unique (for all E) Constant representing the error value as in
    * https://www.w3.org/TR/sparql11-query/#aggregateAlgebra . This allows efficient checking if a
    * value is an error value by using the reference equality (val == Constant.ERROR_VALUE).
@@ -38,7 +38,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
   @SuppressWarnings("rawtypes")
   private static final Constant ERROR_VALUE = new Constant();
 
-  /**
+  /*
    * value == null indicates this == errorValue, representing an error value as in
    * https://www.w3.org/TR/sparql11-query/#aggregateAlgebra
    */
@@ -46,7 +46,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
 
   public interface Annotations extends ImmutableBOp.Annotations {
 
-    /**
+    /*
      * The {@link IVariable} which is bound to that constant value (optional).
      *
      * <p>{@link BOpContext#bind(IPredicate, IConstraint[], Object, IBindingSet)} takes care of
@@ -71,8 +71,8 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
     return true;
   }
 
-  //    /**
-  //     * Required shallow copy constructor.
+  //    /*
+//     * Required shallow copy constructor.
   //     *
   //     * @param op
   //     */
@@ -81,7 +81,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
   //        this.value = null;
   //    }
 
-  /**
+  /*
    * Constructor required for {@link org.embergraph.bop.BOpUtility#deepCopy(FilterNode)}.
    *
    * @param op != Constant.ERROR_VALUE
@@ -95,7 +95,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
     this.value = op.value;
   }
 
-  /**
+  /*
    * Create a constant which models a variable bound to that constant. This may be used when a
    * variable has an external binding, such as when a single binding set is provided as input to a
    * query. By pairing the {@link Constant} with the {@link IVariable} and handling this case when
@@ -119,7 +119,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
    */
   public Constant(final IVariable<E> var, final E value) {
 
-    super(BOp.NOARGS, Collections.singletonMap(Annotations.VAR, (Object) var));
+    super(BOp.NOARGS, Collections.singletonMap(Annotations.VAR, var));
     //        NV.asMap(new NV(Annotations.VAR, var)));
 
     if (var == null) throw new IllegalArgumentException();
@@ -134,7 +134,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
     this.value = value;
   }
 
-  /**
+  /*
    * Create a constant for the value.
    *
    * @param value The value (may not be <code>null</code>).
@@ -159,7 +159,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
     value = null;
   }
 
-  /**
+  /*
    * Always returns the same constant representing the error value as in
    * https://www.w3.org/TR/sparql11-query/#aggregateAlgebra . Copies of this Constant cannot be
    * created, so comparison of reference is enough for equality checks.
@@ -239,9 +239,8 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
     if (value == null) return false;
 
     // compares non-null value with the other value.
-    if (value.equals(otherValue)) return true;
+    return value.equals(otherValue);
 
-    return false;
   }
 
   @Override
@@ -255,7 +254,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
     return value.hashCode();
   }
 
-  /**
+  /*
    * @return possibly null if this Constant represents an error value as in
    *     https://www.w3.org/TR/sparql11-query/#aggregateAlgebra
    */
@@ -265,7 +264,7 @@ public final class Constant<E> extends ImmutableBOp implements IConstant<E> {
     return value;
   }
 
-  /**
+  /*
    * @return possibly null if this Constant represents an error value as in
    *     https://www.w3.org/TR/sparql11-query/#aggregateAlgebra
    */

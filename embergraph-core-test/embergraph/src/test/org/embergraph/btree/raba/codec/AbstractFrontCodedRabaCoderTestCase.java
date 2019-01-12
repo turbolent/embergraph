@@ -24,12 +24,13 @@ package org.embergraph.btree.raba.codec;
 
 import it.unimi.dsi.fastutil.bytes.custom.CustomByteArrayFrontCodedList;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.ReadOnlyKeysRaba;
 
-/**
- * Test suite for the {@link FrontCodedRabaCoder}.
+/*
+* Test suite for the {@link FrontCodedRabaCoder}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -44,7 +45,7 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
     super(name);
   }
 
-  /**
+  /*
    * Unit test demonstrates and verifies front coding of a well known example with a ratio of 4.
    *
    * @throws UnsupportedEncodingException
@@ -52,10 +53,10 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
   public void test_example_ratio4() throws UnsupportedEncodingException {
 
     final byte[][] a = new byte[4][];
-    a[0] = "foo".getBytes("US-ASCII");
-    a[1] = "foobar".getBytes("US-ASCII");
-    a[2] = "fool".getBytes("US-ASCII");
-    a[3] = "football".getBytes("US-ASCII");
+    a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
+    a[1] = "foobar".getBytes(StandardCharsets.US_ASCII);
+    a[2] = "fool".getBytes(StandardCharsets.US_ASCII);
+    a[3] = "football".getBytes(StandardCharsets.US_ASCII);
 
     final IRaba expected = new ReadOnlyKeysRaba(a);
 
@@ -83,7 +84,7 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
     }
   }
 
-  /**
+  /*
    * Unit test demonstrates and verifies front coding of a well known example with a ratio of 3.
    *
    * @throws UnsupportedEncodingException
@@ -91,10 +92,10 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
   public void test_example_ratio3() throws UnsupportedEncodingException {
 
     final byte[][] a = new byte[4][];
-    a[0] = "foo".getBytes("US-ASCII");
-    a[1] = "foobar".getBytes("US-ASCII");
-    a[2] = "fool".getBytes("US-ASCII");
-    a[3] = "football".getBytes("US-ASCII");
+    a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
+    a[1] = "foobar".getBytes(StandardCharsets.US_ASCII);
+    a[2] = "fool".getBytes(StandardCharsets.US_ASCII);
+    a[3] = "football".getBytes(StandardCharsets.US_ASCII);
 
     final IRaba expected = new ReadOnlyKeysRaba(a);
 
@@ -124,7 +125,7 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
     }
   }
 
-  /**
+  /*
    * Unit test demonstrates and verifies front coding of a well known example using a ratio of 2.
    *
    * @throws UnsupportedEncodingException
@@ -132,10 +133,10 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
   public void test_example1_ratio2() throws UnsupportedEncodingException {
 
     final byte[][] a = new byte[4][];
-    a[0] = "foo".getBytes("US-ASCII");
-    a[1] = "foobar".getBytes("US-ASCII");
-    a[2] = "fool".getBytes("US-ASCII");
-    a[3] = "football".getBytes("US-ASCII");
+    a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
+    a[1] = "foobar".getBytes(StandardCharsets.US_ASCII);
+    a[2] = "fool".getBytes(StandardCharsets.US_ASCII);
+    a[3] = "football".getBytes(StandardCharsets.US_ASCII);
 
     final IRaba expected = new ReadOnlyKeysRaba(a);
 
@@ -163,7 +164,7 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
     }
   }
 
-  /**
+  /*
    * Unit test demonstrates and verifies front coding of a well known example using a ratio of 1 (no
    * compression).
    *
@@ -172,10 +173,10 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
   public void test_example1_ratio1() throws UnsupportedEncodingException {
 
     final byte[][] a = new byte[4][];
-    a[0] = "foo".getBytes("US-ASCII");
-    a[1] = "foobar".getBytes("US-ASCII");
-    a[2] = "fool".getBytes("US-ASCII");
-    a[3] = "football".getBytes("US-ASCII");
+    a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
+    a[1] = "foobar".getBytes(StandardCharsets.US_ASCII);
+    a[2] = "fool".getBytes(StandardCharsets.US_ASCII);
+    a[3] = "football".getBytes(StandardCharsets.US_ASCII);
 
     final IRaba expected = new ReadOnlyKeysRaba(a);
 

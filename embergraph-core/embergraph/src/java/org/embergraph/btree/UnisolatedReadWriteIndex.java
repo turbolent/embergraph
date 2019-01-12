@@ -42,8 +42,8 @@ import org.embergraph.mdi.IResourceMetadata;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.Split;
 
-/**
- * A view onto an unisolated index partition which enforces the constraint that either concurrent
+/*
+* A view onto an unisolated index partition which enforces the constraint that either concurrent
  * readers -or- a single writer may have access to the unisolated index at any given time. This
  * provides the maximum possible concurrency for an unisolated index using an internal {@link
  * ReadWriteLock} to coordinate threads.
@@ -117,7 +117,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
     return lockManager.isReadOnly();
   }
 
-  /**
+  /*
    * Return the appropriate lock depending on whether or not the procedure asserts that it is
    * read-only.
    *
@@ -144,19 +144,19 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
   /** The unisolated index partition. This is either a {@link BTree} or a {@link FusedView}. */
   private final BTree ndx;
 
-  /**
+  /*
    * The default capacity for iterator reads against the underlying index. The main purpose of the
    * capacity is to reduce the contention for the {@link ReadWriteLock}.
    */
   private final int defaultCapacity;
 
-  /**
+  /*
    * The default capacity for iterator reads against the underlying index. The main purpose of the
    * capacity is to reduce the contention for the {@link ReadWriteLock}.
    */
   protected static final int DEFAULT_CAPACITY = 1000; // 10000;
 
-  /**
+  /*
    * Creates a view of an unisolated index that will enforce the concurrency constraints of the
    * {@link BTree} class, but only among other instances of this class for the same underlying
    * index.
@@ -169,7 +169,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
     this(ndx, DEFAULT_CAPACITY);
   }
 
-  /**
+  /*
    * Creates a view of an unisolated index that will enforce the concurrency constraints of the
    * {@link BTree} class, but only among other instances of this class for the same underlying
    * index.
@@ -217,7 +217,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
     return ndx.getCounters();
   }
 
-  /**
+  /*
    * This throws an exception. If you need access to the {@link ICounter} for the index partition,
    * then write and submit an {@link IIndexProcedure}.
    *
@@ -438,7 +438,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
     return rangeIterator(fromKey, toKey, 0 /* capacity */, IRangeQuery.DEFAULT, null /* filter */);
   }
 
-  /**
+  /*
    * The iterator will read on the underlying index in chunks, buffering tuples as it goes. The
    * buffer capacity is as specified by the caller and will default to the capacity specified to the
    * ctor. The iterator acquires and releases the appropriate lock (either the shared read lock or
@@ -480,7 +480,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
     return new ChunkedIterator(this.ndx, fromKey, toKey, capacity, flags, filter);
   }
 
-  /**
+  /*
    * Inner class provides a buffered iterator reading against the underlying unisolated index. The
    * class coordinates reads (and writes) with the outer class using the appropriate {@link Lock}.
    * Buffering means that the iterator will read a chunk of tuples at a time, which reduces
@@ -533,7 +533,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
       }
     }
 
-    /**
+    /*
      * Extended to acquire the shared read lock (or the exclusive write lock if {@link
      * IRangeQuery#REMOVEALL} was specified for the iterator).
      */
@@ -642,7 +642,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
     }
   }
 
-  /**
+  /*
    * Estimate the cost of a range scan.
    *
    * @param diskCostModel The disk cost model.
@@ -652,7 +652,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
   public ScanCostReport estimateCost(final DiskCostModel diskCostModel, final long rangeCount) {
 
     // BTree is its own statistics view.
-    final IBTreeStatistics stats = (BTree) ndx;
+    final IBTreeStatistics stats = ndx;
 
     // Estimate cost based on random seek per node/leaf.
     final double cost =
@@ -713,8 +713,8 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
   //		return ndx.getSourceCount();
   //	}
   //
-  //	/**
-  //	 * @throws UnsupportedOperationException
+  //	/*
+//	 * @throws UnsupportedOperationException
   //	 *             It is not possible to return the backing indices without
   //	 *             breaking the thread-safety pattern imposed by the
   //	 *             {@link UnisolatedReadWriteIndex}.
@@ -725,8 +725,8 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
   //		throw new UnsupportedOperationException();
   //	}
   //
-  //	/**
-  //	 * @throws UnsupportedOperationException
+  //	/*
+//	 * @throws UnsupportedOperationException
   //	 *             It is not possible to return the backing index without
   //	 *             breaking the thread-safety pattern imposed by the
   //	 *             {@link UnisolatedReadWriteIndex}.

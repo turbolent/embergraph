@@ -24,8 +24,8 @@ package org.embergraph.journal;
 import java.nio.ByteBuffer;
 import org.embergraph.io.ChecksumUtility;
 
-/**
- * Test the ability to rollback a commit.
+/*
+* Test the ability to rollback a commit.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @deprecated Along with {@link AbstractJournal#rollback()}
@@ -118,8 +118,8 @@ public class TestRollbackCommit extends ProxyTestCase<Journal> {
       try {
         sb.append(", actual=" + new RootBlockView(isRootBlock0, expected, null /* checker */));
       } catch (Throwable t) {
-        /*
-         * Show the error if we can't decode the root block.
+      /*
+       * Show the error if we can't decode the root block.
          */
         fail(sb.toString(), t);
       }

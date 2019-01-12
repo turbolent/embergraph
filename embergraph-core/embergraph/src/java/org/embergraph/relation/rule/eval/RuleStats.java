@@ -38,8 +38,8 @@ import org.embergraph.relation.rule.Rule;
 import org.embergraph.service.ILoadBalancerService;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Statistics about what an {@link IStep} did when it was executed.
+/*
+* Statistics about what an {@link IStep} did when it was executed.
  *
  * <p>Program execution has the general form of either a set of {@link IStep}s executed, at least
  * logically, in parallel, or a sequence of {@link IStep}s executed in sequence. An {@link IStep}
@@ -62,7 +62,7 @@ public class RuleStats {
   /** Delimiter string used for output. */
   private static final transient String sep = ", "; // "\t";//", ";
 
-  /**
+  /*
    * Initializes statistics for an {@link IStep}.
    *
    * <p>Note: This form is used when statistics will be aggregated across the execution of multiple
@@ -121,7 +121,7 @@ public class RuleStats {
     this.aggregation = true;
   }
 
-  /**
+  /*
    * Initializes statistics from an {@link iRule} and its {@link IEvaluationPlan}.
    *
    * <p>Note: This ctor variant makes available the order of execution and range count metadata from
@@ -189,12 +189,12 @@ public class RuleStats {
   /** The {@link IStep} that was executed. */
   public final IStep rule;
 
-  /**
+  /*
    * The round is zero unless this is a closure operations and then it is an integer in [1:nrounds].
    */
   public int closureRound = 0;
 
-  /**
+  /*
    * The #of {@link ISolution}s computed by the rule regardless of whether or not they are written
    * onto an {@link IMutableRelation} and regardless of whether or not they duplicate a solution
    * already computed.
@@ -208,7 +208,7 @@ public class RuleStats {
    */
   public AtomicLong solutionCount = new AtomicLong();
 
-  /**
+  /*
    * The #of elements that were actually added to (or removed from) the relation indices. This is
    * updated based on the {@link IMutableRelation} API. Correct reporting by that API and correct
    * aggregation here are critical to the correct termination of the fix point of some rule set.
@@ -228,7 +228,7 @@ public class RuleStats {
    */
   public AtomicLong mutationCount = new AtomicLong();
 
-  /**
+  /*
    * The start time for the rule execution. This is approximate (it is initialized when the {@link
    * RuleStats} instance is created). The startTime is mainly intended for use when correlating
    * collected performance counters with query execution.
@@ -242,14 +242,14 @@ public class RuleStats {
    * The following are only available for the execution of a single rule.
    */
 
-  /**
+  /*
    * The #of unbound variables for the predicates in the tail of the {@link Rule} (only available at
    * the detail level of a single rule instance execution). The array is correlated with the
    * predicates index in the tail of the rule NOT with its evaluation order.
    */
   public final int[] nvars;
 
-  /**
+  /*
    * The order of execution of the predicates in the body of a rule (only available at the detail
    * level of a single rule instance execution). When aggregated, the {@link #evalOrder} will always
    * contain zeros since it can not be meaningfully combined across executions of either the same or
@@ -257,7 +257,7 @@ public class RuleStats {
    */
   public final int[] evalOrder;
 
-  /**
+  /*
    * The permutation of the tail predicate index order for an {@link IRule} (only available when the
    * {@link IStep} is an {@link IRule}) that corresponds to the evaluation order of the tail
    * predicate in the {@link IRule}. <code>permutation[i]</code> is the sequence in the evaluation
@@ -265,14 +265,14 @@ public class RuleStats {
    */
   public final int[] permutation;
 
-  /**
+  /*
    * An array of the {@link IKeyOrder} that was used for each predicate in the tail of the rule. The
    * array is correlated with the predicates index in the tail of the rule NOT with its evaluation
    * order.
    */
   public final IKeyOrder[] keyOrder;
 
-  /**
+  /*
    * The predicated range counts for each predicate in the body of the rule (in the order in which
    * they were declared, not the order in which they were evaluated) as reported by the {@link
    * IRangeCountFactory}. The range counts are used by the {@link IEvaluationPlan}. You can compare
@@ -281,19 +281,19 @@ public class RuleStats {
    */
   public final long[] rangeCount;
 
-  /**
+  /*
    * The #of chunks materialized for each predicate in the body of the rule (in the order in which
    * they were declared, not the order in which they were evaluated).
    */
   public final long[] chunkCount;
 
-  /**
+  /*
    * The #of elements considered for each predicate in the body of the rule (in the order in which
    * they were declared, not the order in which they were evaluated).
    */
   public final long[] elementCount;
 
-  /**
+  /*
    * The #of subqueries examined for each predicate in the rule (in the order in which they were
    * declared, not the order in which they were evaluated). While there are N indices for a rule
    * with N predicates, we only evaluate a subquery for N-1 predicates so at least one index will
@@ -301,7 +301,7 @@ public class RuleStats {
    */
   public final int[] subqueryCount;
 
-  /**
+  /*
    * Returns the headings.
    *
    * <p>The following are present for every record.
@@ -403,7 +403,7 @@ public class RuleStats {
         + "tailPredicate";
   }
 
-  /**
+  /*
    * Reports just the data for this record.
    *
    * @param depth The depth at which the record was encountered within some top-level aggregation.
@@ -519,7 +519,7 @@ public class RuleStats {
     return sb.toString();
   }
 
-  /**
+  /*
    * When <code>true</code> {@link #toStringSimple(int, boolean, boolean)} will show the table view
    * with the predicates in evaluation order rather than the given order. This view is easier to
    * read when you are examining the join performance but you have to indirect through the tail
@@ -528,7 +528,7 @@ public class RuleStats {
    */
   private static final boolean showInEvalOrder = true;
 
-  /**
+  /*
    * Return a human readable representation of the predicate. Subclasses may be created that know
    * how to externalize the predicate correctly for its relation. It is a good idea to strip commas
    * from the representation so that the table can be more readily imported into worksheets that
@@ -605,14 +605,14 @@ public class RuleStats {
     return toString(0L /* minElapsed */, true /* joinDetails */);
   }
 
-  /**
+  /*
    * Set this to [true] if you want a single rule to be formatted in a table, just like a set of
    * rules. Set it to [false] if you want a single rule all on one line using [title=value] for each
    * column.
    */
   private static final boolean showSingleRuleInTable = true;
 
-  /**
+  /*
    * @param minElapsed The minimum elapsed time for which details will be shown.
    * @param joinDetails When <code>true</code>, also presents a tabular display of the details for
    *     each JOIN in each {@link IRule}.
@@ -653,7 +653,7 @@ public class RuleStats {
     // detail level.
     for (int i = 0; i < a.length; i++) {
 
-      final RuleStats x = (RuleStats) a[i];
+      final RuleStats x = a[i];
 
       if (x.elapsed >= minElapsed) {
 
@@ -670,13 +670,13 @@ public class RuleStats {
     return sb;
   }
 
-  /**
+  /*
    * When execution {@link RuleState}s are being aggregated, this will contain the individual {@link
    * RuleStats} for each execution {@link RuleState}.
    */
   public List<RuleStats> detailStats = new Vector<RuleStats>();
 
-  /**
+  /*
    * Aggregates statistics.
    *
    * <p>Note: since the mutation count as reported by each buffer is cumulative we DO NOT aggregate

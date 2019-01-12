@@ -47,8 +47,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
-/**
- * This implementation of {@link IExtension} implements inlining for literals that represent
+/*
+* This implementation of {@link IExtension} implements inlining for literals that represent
  * xsd:dateTime literals. These literals will be stored as time in milliseconds since the epoch. The
  * milliseconds are encoded as an inline long.
  */
@@ -92,7 +92,7 @@ public class DateTimeExtension<V extends EmbergraphValue> implements IExtension<
     return new LinkedHashSet<EmbergraphURI>(datatypes.values());
   }
 
-  /**
+  /*
    * Attempts to convert the supplied value into an epoch representation. Tests for a literal value
    * with the correct datatype that can be converted to a positive long integer. Encodes the long in
    * a delegate {@link XSDLongIV}, and returns an {@link LiteralExtensionIV} to wrap the native
@@ -169,7 +169,7 @@ public class DateTimeExtension<V extends EmbergraphValue> implements IExtension<
     return new LiteralExtensionIV(delegate, resolvedDT.getIV());
   }
 
-  /**
+  /*
    * Use the long value of the {@link XSDLongIV} delegate (which represents milliseconds since the
    * epoch) to create a an XMLGregorianCalendar object (GMT timezone). Use the XMLGregorianCalendar
    * to create a datatype literal value with the appropriate datatype.
@@ -248,7 +248,7 @@ public class DateTimeExtension<V extends EmbergraphValue> implements IExtension<
   /** Singleton. */
   public static final DatatypeFactory datatypeFactorySingleton;
 
-  /**
+  /*
    * Singleton caching pattern for the Datatype factory reference.
    *
    * @see <a href="http://sourceforge.net/apps/trac/bigdata/ticket/802">Optimize DatatypeFactory
@@ -269,7 +269,7 @@ public class DateTimeExtension<V extends EmbergraphValue> implements IExtension<
     datatypeFactorySingleton = f;
   }
 
-  /**
+  /*
    * This conditionally enables some logic for xsd:dateTime compatibility with BSBM.
    *
    * @see http://sourceforge.net/apps/trac/bigdata/ticket/277

@@ -34,8 +34,8 @@ import org.embergraph.io.AbstractFixedByteArrayBuffer;
 import org.embergraph.io.IDataRecord;
 import org.embergraph.rawstore.IRawStore;
 
-/**
- * Implementation maintains Java objects corresponding to the persistent data and defines methods
+/*
+* Implementation maintains Java objects corresponding to the persistent data and defines methods
  * for a variety of mutations on the {@link ILeafData} record which operate by direct manipulation
  * of the Java objects. The bucket page is logically divided into buddy hash buckets. Unlike a
  * B+Tree, the tuples are neither ordered nor dense and the same key MAY appear multiple times
@@ -75,31 +75,31 @@ import org.embergraph.rawstore.IRawStore;
  */
 public class MutableBucketData implements ILeafData {
 
-  /**
+  /*
    * A keys associated with each tuple in the bucket page. Each key is a variable length unsigned
    * byte[]. The keys are neither ordered nor dense.
    */
   final MutableKeyBuffer keys;
 
-  /**
+  /*
    * The values associated with each tuple in the bucket page. Each value is a variable length
    * byte[].The indices into the values are correlated with the indices into the {@link #keys}.
    */
   final MutableValueBuffer vals;
 
-  /**
+  /*
    * The deletion markers IFF isolation is supported by the index. The indices into the delete
    * markers are correlated with the indices into the {@link #keys}.
    */
   final boolean[] deleteMarkers;
 
-  /**
+  /*
    * The version timestamps IFF isolation is supported by the index. The indices into the version
    * timestamps are correlated with the indices into the {@link #keys} .
    */
   final long[] versionTimestamps;
 
-  /**
+  /*
    * The minimum version timestamp.
    *
    * @todo these fields at 16 bytes to each {@link MutableBucketData} object even when we do not use
@@ -110,13 +110,13 @@ public class MutableBucketData implements ILeafData {
 
   long maximumVersionTimestamp;
 
-  /**
+  /*
    * Bit markers indicating whether the value associated with the tuple is a raw record or an inline
    * byte[] stored within {@link #getValues() values raba}.
    */
   final boolean[] rawRecords;
 
-  /**
+  /*
    * Create an empty data record with internal arrays dimensioned for the specified branching
    * factor.
    *
@@ -146,7 +146,7 @@ public class MutableBucketData implements ILeafData {
     rawRecords = (hasRawRecords ? new boolean[branchingFactor /*+ 1*/] : null);
   }
 
-  /**
+  /*
    * Copy ctor.
    *
    * @param branchingFactor The branching factor for the owning B+Tree.
@@ -204,7 +204,7 @@ public class MutableBucketData implements ILeafData {
     }
   }
 
-  /**
+  /*
    * Ctor based on just "data" -- used by unit tests.
    *
    * @param keys A representation of the defined keys in the leaf.
@@ -224,15 +224,9 @@ public class MutableBucketData implements ILeafData {
     assert keys != null;
     assert values != null;
     assert keys.capacity() == values.capacity();
-    if (versionTimestamps != null) {
-      assert versionTimestamps.length == keys.capacity();
-    }
-    if (deleteMarkers != null) {
-      assert deleteMarkers.length == keys.capacity();
-    }
-    if (rawRecords != null) {
-      assert rawRecords.length == keys.capacity();
-    }
+    assert versionTimestamps == null || versionTimestamps.length == keys.capacity();
+    assert deleteMarkers == null || deleteMarkers.length == keys.capacity();
+    assert rawRecords == null || rawRecords.length == keys.capacity();
 
     this.keys = keys;
     this.vals = values;
@@ -249,7 +243,7 @@ public class MutableBucketData implements ILeafData {
     return keys.capacity();
   }
 
-  /**
+  /*
    * Range check a tuple index.
    *
    * @param index The index of a tuple in [0:#capacity()-1].
@@ -343,8 +337,8 @@ public class MutableBucketData implements ILeafData {
     return true;
   }
 
-  //    /**
-  //     * For a leaf the #of entries is always the #of keys.
+  //    /*
+//     * For a leaf the #of entries is always the #of keys.
   //     */
   //    final public int getSpannedTupleCount() {
   //
@@ -377,7 +371,7 @@ public class MutableBucketData implements ILeafData {
     return keys.size();
   }
 
-  /**
+  /*
    * No - this class does not support double-linked leaves (only the {@link IndexSegment} actually
    * uses double-linked leaves).
    */
@@ -396,7 +390,7 @@ public class MutableBucketData implements ILeafData {
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * Recalculate the min/max version timestamp on the leaf. The caller is responsible for
    * propagating the new min/max to the ancestors of the leaf.
    *
@@ -426,7 +420,7 @@ public class MutableBucketData implements ILeafData {
     maximumVersionTimestamp = max;
   }
 
-  /**
+  /*
    * Inserts a new index/value, maintaining version timestamps and delete markers when necessary
    *
    * @param insIndex

@@ -21,8 +21,8 @@ import java.io.File;
 import java.util.UUID;
 import org.embergraph.btree.IndexSegment;
 
-/**
- * Metadata for a single {@link IndexSegment}.
+/*
+* Metadata for a single {@link IndexSegment}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

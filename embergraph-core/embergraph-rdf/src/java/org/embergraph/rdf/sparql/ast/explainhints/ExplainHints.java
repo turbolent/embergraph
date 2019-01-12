@@ -34,8 +34,8 @@ import org.embergraph.bop.BOpUtility;
 import org.embergraph.rdf.sparql.ast.ASTBase;
 import org.embergraph.rdf.sparql.ast.ASTBase.Annotations;
 
-/**
- * A list of {@link IExplainHint}s, to be attached as an annotation to an {@link ASTBase} node. See
+/*
+* A list of {@link IExplainHint}s, to be attached as an annotation to an {@link ASTBase} node. See
  * {@link IExplainHint} interface for description of explain hints. This class is merely a wrapper
  * allowing to add a set of explain hints to a single node.
  *
@@ -57,7 +57,7 @@ public class ExplainHints implements Iterable<IExplainHint> {
     explainHints.add(explainHint);
   }
 
-  /**
+  /*
    * Utility function to remove explain hint annotations from a BOp. For use in test case to ease
    * comparison. Be careful, since this modifies the argument.
    *
@@ -79,7 +79,7 @@ public class ExplainHints implements Iterable<IExplainHint> {
     }
   }
 
-  /**
+  /*
    * Returns all {@link BOp}s that are annotated with {@link ExplainHints}.
    *
    * @param op An operator.

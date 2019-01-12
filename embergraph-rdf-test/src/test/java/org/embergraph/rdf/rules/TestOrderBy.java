@@ -24,8 +24,8 @@ package org.embergraph.rdf.rules;
 
 import org.embergraph.relation.rule.IQueryOptions;
 
-/**
- * Unit tests for {@link IQueryOptions#getOrderBy()}.
+/*
+* Unit tests for {@link IQueryOptions#getOrderBy()}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -40,7 +40,7 @@ public class TestOrderBy extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * @todo write unit tests for "orderBy".
    * @todo unit test where empty result set.
    * @todo unit test where duplicate records exit and verify that duplicates are retained.

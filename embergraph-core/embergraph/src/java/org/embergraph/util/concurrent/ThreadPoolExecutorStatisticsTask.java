@@ -14,8 +14,8 @@ import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorCounters
 import org.embergraph.util.concurrent.IQueueCounters.IThreadPoolExecutorTaskCounters;
 import org.embergraph.util.concurrent.IQueueCounters.IWriteServiceExecutorCounters;
 
-/**
- * Class tracks a variety of information about a {@link ThreadPoolExecutor} including the moving
+/*
+* Class tracks a variety of information about a {@link ThreadPoolExecutor} including the moving
  * average of its queue length, queuing times, etc.
  *
  * @todo refactor to layer {@link QueueSizeMovingAverageTask} then {@link
@@ -48,8 +48,8 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
     return service;
   }
 
-  //    /**
-  //     * The time when we started to collect data about the {@link #service} (set by the ctor).
+  //    /*
+//     * The time when we started to collect data about the {@link #service} (set by the ctor).
   //     */
   //    private final long startNanos;
 
@@ -130,7 +130,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
   /** The recommended default weight. */
   public static final double DEFAULT_WEIGHT = .2d;
 
-  /**
+  /*
    * Ctor variant when the {@link ThreadPoolExecutor} does not have hooks for an {@link
    * AbstractTask} and therefore does not update {@link TaskCounters}s.
    *
@@ -143,7 +143,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
     this(serviceName, service, null /* taskCounters */, DEFAULT_WEIGHT);
   }
 
-  /**
+  /*
    * Ctor variant when the {@link ThreadPoolExecutor} has hooks for an {@link AbstractTask} and
    * updates the given {@link TaskCounters}s.
    *
@@ -158,7 +158,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
     this(serviceName, service, taskCounters, DEFAULT_WEIGHT);
   }
 
-  /**
+  /*
    * Core impl.
    *
    * @param serviceName The label for the service.
@@ -195,7 +195,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
     this.w = w;
   }
 
-  /**
+  /*
    * Compute a moving average: <code>(1 - w) * avg + w * q</code>
    *
    * @param avg The previous average and initially zero (0.0).
@@ -219,7 +219,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
             }
           });
 
-  /**
+  /*
    * The moving average of the change in the total inter-arrival time.
    *
    * @see TaskCounters#interArrivalNanoTime
@@ -233,7 +233,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
             }
           });
 
-  /**
+  /*
    * The moving average of the change in the total task service time.
    *
    * @see TaskCounters#serviceNanoTime
@@ -247,7 +247,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
             }
           });
 
-  /**
+  /*
    * This should be invoked once per second to sample various counters in order to turn their values
    * into moving averages.
    *
@@ -285,8 +285,8 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
         // to a worker thread).
         averageActiveCount = getMovingAverage(averageActiveCount, activeCount, w);
 
-        /*
-         * Note: this is the primary average of interest - it includes
+      /*
+       * Note: this is the primary average of interest - it includes
          * both the tasks waiting to be run and those that are currently
          * running in the definition of the "queue length".
          */
@@ -295,8 +295,8 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
 
       if (service instanceof WriteExecutorService) {
 
-        /*
-         * Note: For the WriteExecutorService we compute a variant of
+      /*
+       * Note: For the WriteExecutorService we compute a variant of
          * [activeCount] the which only counts tasks that are currently
          * holding their exclusive resource lock(s). This is the real
          * concurrency of the write service since tasks without locks
@@ -313,8 +313,8 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
 
       if (taskCounters != null) {
 
-        /*
-         * Compute some latency data that relies on the task counters.
+      /*
+       * Compute some latency data that relies on the task counters.
          */
 
         // #of tasks that have been submitted so far.
@@ -322,8 +322,8 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
 
         if (taskCount > 0) {
 
-          /*
-           * Time waiting on the queue to begin execution.
+        /*
+       * Time waiting on the queue to begin execution.
            */
           {
             final long newValue = taskCounters.queueWaitingNanoTime.get();
@@ -341,8 +341,8 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
                     w);
           }
 
-          /*
-           * Time waiting on resource lock(s).
+        /*
+       * Time waiting on resource lock(s).
            */
           if (service instanceof WriteExecutorService) {
 
@@ -361,8 +361,8 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
                     w);
           }
 
-          /*
-           * Time that the task is being serviced (after its obtained
+        /*
+       * Time that the task is being serviced (after its obtained
            * any locks).
            */
           {
@@ -381,20 +381,20 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
                     w);
           }
 
-          /*
-           * The moving average of the change in the cumulative
+        /*
+       * The moving average of the change in the cumulative
            * inter-arrival time.
            */
           interArrivalNanoTimeTask.run();
 
-          /*
-           * The moving average of the change in the total task
+        /*
+       * The moving average of the change in the total task
            * service time.
            */
           serviceNanoTimeTask.run();
 
-          /*
-           * Time that the task is busy checkpoint its indices (this
+        /*
+       * Time that the task is busy checkpoint its indices (this
            * is already reported as part of the service time but which
            * is broken out here as a detail).
            */
@@ -414,8 +414,8 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
                     w);
           }
 
-          /*
-           * Queuing time (elapsed time from submit until completion).
+        /*
+       * Queuing time (elapsed time from submit until completion).
            */
           {
             final long newValue = taskCounters.queuingNanoTime.get();
@@ -497,7 +497,7 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
     }
   }
 
-  /**
+  /*
    * Adds counters for all innate variables defined for a {@link ThreadPoolExecutor} and for each of
    * the variables computed by this class. Note that some variables (e.g., the lock waiting time)
    * are only available when the <i>service</i> specified to the ctor is a {@link
@@ -564,8 +564,8 @@ public class ThreadPoolExecutorStatisticsTask implements Runnable {
       if (service != null) {
         if (taskCounters == null) {
 
-          /*
-           * Report iff not being reported via the TaskCounters.
+        /*
+       * Report iff not being reported via the TaskCounters.
            */
 
           counterSet.addCounter(

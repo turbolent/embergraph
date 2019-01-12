@@ -34,8 +34,8 @@ import org.embergraph.service.ITxState;
 import org.embergraph.util.InnerCause;
 import org.embergraph.util.NV;
 
-/**
- * Servlet provides a REST interface for managing stand-off read/write transaction. Given a
+/*
+* Servlet provides a REST interface for managing stand-off read/write transaction. Given a
  * namespace that is provisioned for read/write transactions, a client can create a transaction
  * (obtaining an identifier for that transaction), do work with that transaction (including mutation
  * and query), prepare the transaction, and finally commit or abort the transaction.
@@ -309,8 +309,8 @@ public class TxServlet extends EmbergraphRDFServlet {
 
       if (InnerCause.isInnerCause(t, IllegalStateException.class)) {
 
-        /*
-         * TODO This is pretty diagnostic for the Journal. For scale-out
+      /*
+       * TODO This is pretty diagnostic for the Journal. For scale-out
          * there could be other root causes that might throw the same
          * exception. We could make this 100% diagnostic by subclassing
          * IllegalStateException and throwing a typed
@@ -395,8 +395,8 @@ public class TxServlet extends EmbergraphRDFServlet {
 
       if (InnerCause.isInnerCause(e, ValidationError.class)) {
 
-        /*
-         * The transaction could not be validated. The client needs to redo
+      /*
+       * The transaction could not be validated. The client needs to redo
          * the transaction.
          *
          * Note: The 409 (CONFLICT) status code does deal with cases of
@@ -429,8 +429,8 @@ public class TxServlet extends EmbergraphRDFServlet {
 
       } else if (InnerCause.isInnerCause(e, IllegalStateException.class)) {
 
-        /*
-         * TODO This is pretty diagnostic for the Journal. For scale-out
+      /*
+       * TODO This is pretty diagnostic for the Journal. For scale-out
          * there could be other root causes that might throw the same
          * exception. We could make this 100% diagnostic by subclassing
          * IllegalStateException and throwing a typed
@@ -452,7 +452,7 @@ public class TxServlet extends EmbergraphRDFServlet {
     }
   }
 
-  /**
+  /*
    * <code>PREPARE-TX(txId)</code> FIXME Test suite for this at the Journal level. Make sure that
    * there are no undesired side-effects from validation. For example, the writeSet of the tx is
    * modified by validation if a conflict is resolved. Is that modification Ok if we do not go ahead
@@ -527,8 +527,8 @@ public class TxServlet extends EmbergraphRDFServlet {
 
       if (InnerCause.isInnerCause(t, IllegalStateException.class)) {
 
-        /*
-         * TODO This is pretty diagnostic for the Journal. For scale-out
+      /*
+       * TODO This is pretty diagnostic for the Journal. For scale-out
          * there could be other root causes that might throw the same
          * exception. We could make this 100% diagnostic by subclassing
          * IllegalStateException and throwing a typed
@@ -564,8 +564,8 @@ public class TxServlet extends EmbergraphRDFServlet {
 
       if (getIndexManager() instanceof IEmbergraphFederation) {
 
-        /*
-         * Scale-out does not let us resolve the transaction status.
+      /*
+       * Scale-out does not let us resolve the transaction status.
          *
          * TODO This could be exposed on the ITransactionService easily
          * enough.
@@ -624,8 +624,8 @@ public class TxServlet extends EmbergraphRDFServlet {
 
       if (InnerCause.isInnerCause(t, IllegalStateException.class)) {
 
-        /*
-         * TODO This is pretty diagnostic for the Journal. For scale-out
+      /*
+       * TODO This is pretty diagnostic for the Journal. For scale-out
          * there could be other root causes that might throw the same
          * exception. We could make this 100% diagnostic by subclassing
          * IllegalStateException and throwing a typed
@@ -686,8 +686,8 @@ public class TxServlet extends EmbergraphRDFServlet {
         w.toString(),
         // disable caching.
         new NV("Cache-Control", "no-cache")
-        /*
-         * Sets the cache behavior -- the data should be good for up to 60
+      /*
+       * Sets the cache behavior -- the data should be good for up to 60
          * seconds unless you change the query parameters. These cache
          * control parameters SHOULD indicate that the response is valid for
          * 60 seconds, that the client must revalidate, and that the
@@ -697,7 +697,7 @@ public class TxServlet extends EmbergraphRDFServlet {
         );
   }
 
-  /**
+  /*
    * Return <code>true</code> iff a transaction identifier was parsed from the request and otherwise
    * commit a {@link HttpServletResponse#SC_BAD_REQUEST} response.
    *
@@ -758,7 +758,7 @@ public class TxServlet extends EmbergraphRDFServlet {
     return true;
   }
 
-  /**
+  /*
    * Return the readsOnCommitTime associated with a transaction -or- <code>null</code> if the
    * transaction is no longer active or if the backend is the scale-out architecture.
    *
@@ -827,8 +827,8 @@ public class TxServlet extends EmbergraphRDFServlet {
     t.close();
   }
 
-  //   /**
-  //    * Report a tuple containing the transaction identifier, a boolean response,
+  //   /*
+//    * Report a tuple containing the transaction identifier, a boolean response,
   //    * and elapsed time back to the user agent. The response is an XML document
   //    * as follows.
   //    *

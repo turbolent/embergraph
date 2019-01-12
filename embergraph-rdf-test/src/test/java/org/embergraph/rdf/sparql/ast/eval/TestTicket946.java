@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test suite for an issue where an empty projection causes an {@link IllegalArgumentException}.
+/*
+* Test suite for an issue where an empty projection causes an {@link IllegalArgumentException}.
  *
  * @see <a href="http://trac.blazegraph.com/ticket/946">Empty PROJECTION causes
  *     IllegalArgumentException</a>
@@ -31,7 +31,7 @@ public class TestTicket946 extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>

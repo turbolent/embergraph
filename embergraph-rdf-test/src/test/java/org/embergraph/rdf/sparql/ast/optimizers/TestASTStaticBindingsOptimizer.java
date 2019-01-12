@@ -64,8 +64,8 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for the {@link ASTStaticBindingsOptimizer} class.
+/*
+* Test suite for the {@link ASTStaticBindingsOptimizer} class.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */
@@ -78,7 +78,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     super(name);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -141,7 +141,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant((IVariable) Var.var("p"), mockIV)),
+              new ConstantNode(new Constant(Var.var("p"), mockIV)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -158,7 +158,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -225,9 +225,9 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       final JoinGroupNode whereClause = new JoinGroupNode();
       whereClause.addChild(
           new StatementPatternNode(
-              new ConstantNode(new Constant((IVariable) Var.var("s"), c12)),
+              new ConstantNode(new Constant(Var.var("s"), c12)),
               new VarNode("p"),
-              new ConstantNode(new Constant((IVariable) Var.var("s"), c12)),
+              new ConstantNode(new Constant(Var.var("s"), c12)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
       expected.setWhereClause(whereClause);
@@ -243,7 +243,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from BIND clause, including the removal of
    * the clause and putting the values into the exogeneous mapping set.
    *
@@ -307,7 +307,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
+              new ConstantNode(new Constant(Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -330,7 +330,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from BIND clause, including the removal of
    * the clause and putting the values into the exogeneous mapping set in a nested setting.
    *
@@ -399,7 +399,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       jgn.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
+              new ConstantNode(new Constant(Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -422,7 +422,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from BIND clause, including the removal of
    * the clause and putting the values into the exogeneous mapping set in a nested setting.
    *
@@ -491,7 +491,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
+              new ConstantNode(new Constant(Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -514,7 +514,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from top-level VALUES clause, including the
    * removal of the clause and putting the values into the exogeneous mapping set.
    *
@@ -589,7 +589,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
+              new ConstantNode(new Constant(Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -612,7 +612,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from top-level VALUES clause, including the
    * removal of the clause and putting the values into the exogeneous mapping set.
    *
@@ -686,7 +686,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
+              new ConstantNode(new Constant(Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -709,7 +709,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from top-level VALUES clause, including the
    * removal of the clause and putting the values into the exogeneous mapping set.
    *
@@ -789,7 +789,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
   public void testMergeWithComplexExogeneousMapping() {}
 
-  /**
+  /*
    * Assert that even for complex exogeneous mappings, variables that map to the same value in all
    * cases are inlined properly.
    *
@@ -846,7 +846,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
         };
     store.getLexiconRelation().addTerms(values, values.length, false /* readOnly */);
 
-    /**
+    /*
      * Construct in mapping set: { { ?a -> "a1", ?c -> "c1" }, { ?a -> "a2", ?c -> "c2" }, { ?a ->
      * "a3", ?c -> "c3" } }
      */
@@ -958,7 +958,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1033,14 +1033,14 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new StatementPatternNode(
               new VarNode("s"),
               new VarNode("p"),
-              new ConstantNode(new Constant((IVariable) Var.var("o"), c12)),
+              new ConstantNode(new Constant(Var.var("o"), c12)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
       whereClause.addChild(
           new FilterNode(
               FunctionNode.sameTerm(
-                  new ConstantNode(new Constant((IVariable) Var.var("o"), c12)),
+                  new ConstantNode(new Constant(Var.var("o"), c12)),
                   new ConstantNode(c12))));
     }
 
@@ -1054,7 +1054,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1124,14 +1124,14 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new StatementPatternNode(
               new VarNode("s"),
               new VarNode("p"),
-              new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
+              new ConstantNode(new Constant(Var.var("o"), foo)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
       whereClause.addChild(
           new FilterNode(
               FunctionNode.EQ(
-                  new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
+                  new ConstantNode(new Constant(Var.var("o"), foo)),
                   new ConstantNode(foo))));
     }
 
@@ -1144,7 +1144,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1201,7 +1201,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
               new FunctionNode(
                   FunctionRegistry.IN,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {new VarNode("o"), new ConstantNode(foo)})));
+                  new VarNode("o"), new ConstantNode(foo))));
     }
 
     // The expected AST after the rewrite.
@@ -1219,7 +1219,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new StatementPatternNode(
               new VarNode("s"),
               new VarNode("p"),
-              new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
+              new ConstantNode(new Constant(Var.var("o"), foo)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
       whereClause.addChild(
@@ -1227,10 +1227,8 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
               new FunctionNode(
                   FunctionRegistry.IN,
                   null /* scalarValues */,
-                  new ValueExpressionNode[] {
-                    new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
-                    new ConstantNode(foo)
-                  })));
+                  new ConstantNode(new Constant(Var.var("o"), foo)),
+                  new ConstantNode(foo))));
     }
 
     final IASTOptimizer rewriter = new ASTStaticBindingsOptimizer();
@@ -1293,7 +1291,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new StatementPatternNode(
               new VarNode("s"),
               new VarNode("p"),
-              new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
+              new ConstantNode(new Constant(Var.var("o"), foo)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
@@ -1301,7 +1299,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new FilterNode(
               FunctionNode.EQ(
                   new ConstantNode(foo),
-                  new ConstantNode(new Constant((IVariable) Var.var("o"), foo)))));
+                  new ConstantNode(new Constant(Var.var("o"), foo)))));
     }
 
     final IASTOptimizer rewriter = new ASTStaticBindingsOptimizer();
@@ -1313,7 +1311,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1467,7 +1465,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, actual);
   }
 
-  /**
+  /*
    * Given
    *
    * <pre>
@@ -1484,7 +1482,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
    */
   public void testFilterAndBindInlinedBindAddedToExogeneous() {}
 
-  /**
+  /*
    * Assert that even for complex exogeneous mappings, variables that map to the same value in all
    * cases are inlined properly.
    *
@@ -1545,7 +1543,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
         };
     store.getLexiconRelation().addTerms(values, values.length, false /* readOnly */);
 
-    /**
+    /*
      * Construct in mapping set: { { ?a -> "a1", ?c -> "c1" }, { ?a -> "a2", ?c -> "c2" }, { ?a ->
      * "a3", ?c -> "c3" } }
      */
@@ -1657,7 +1655,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from BIND clause, including the removal of
    * the clause and putting the values into the exogeneous mapping set.
    *
@@ -1736,7 +1734,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from BIND clause, including the removal of
    * the clause and putting the values into the exogeneous mapping set.
    *
@@ -1824,7 +1822,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from BIND clause, including the removal of
    * the clause and putting the values into the exogeneous mapping set.
    *
@@ -1924,7 +1922,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
+              new ConstantNode(new Constant(Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -1936,7 +1934,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       sqWhereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest2)),
+              new ConstantNode(new Constant(Var.var("p"), cTest2)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -1973,7 +1971,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause of static bindings from BIND clause, including the removal of
    * the clause and putting the values into the exogeneous mapping set.
    *
@@ -2083,7 +2081,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
       whereClause.addChild(
           new StatementPatternNode(
-              new ConstantNode(new Constant((IVariable) Var.var("s"), c3)),
+              new ConstantNode(new Constant(Var.var("s"), c3)),
               new VarNode("p"),
               new VarNode("o"),
               null /* c */,
@@ -2141,7 +2139,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Tests rewriting of a modified form of ticket #653 (i.e., the corresponding SELECT query). In
    * particular, verify that the query
    *
@@ -2242,7 +2240,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
       whereClause.addChild(
           new StatementPatternNode(
-              new ConstantNode(new Constant((IVariable) Var.var("uri"), cTest)),
+              new ConstantNode(new Constant(Var.var("uri"), cTest)),
               new VarNode("p"),
               new VarNode("type"),
               null /* c */,
@@ -2284,7 +2282,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
     assertSameAST(expected, res.getQueryNode());
   }
 
-  /**
+  /*
    * Test inlining from BIND clause into property paths, inspired by the case reported in
    * https://jira.blazegraph.com/browse/BLZG-2042.
    *
@@ -2332,7 +2330,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
       whereClause.addChild(new AssignmentNode(new VarNode("o"), new ConstantNode(cTest)));
 
-      final PathElt elements[] = new PathElt[2];
+      final PathElt[] elements = new PathElt[2];
       elements[0] = new PathElt(new ConstantNode(iv1), false, PathMod.ZERO_OR_MORE);
       elements[1] = new PathElt(new ConstantNode(iv2), false, PathMod.ZERO_OR_MORE);
 
@@ -2350,7 +2348,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
       final JoinGroupNode whereClause = new JoinGroupNode();
 
-      final PathElt elements[] = new PathElt[2];
+      final PathElt[] elements = new PathElt[2];
       elements[0] = new PathElt(new ConstantNode(iv1), false, PathMod.ZERO_OR_MORE);
       elements[1] = new PathElt(new ConstantNode(iv2), false, PathMod.ZERO_OR_MORE);
 
@@ -2359,7 +2357,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new PropertyPathNode(
               new VarNode("s"),
               pn,
-              new ConstantNode(new Constant((IVariable) Var.var("o"), cTest)) /* o inlined! */));
+              new ConstantNode(new Constant(Var.var("o"), cTest)) /* o inlined! */));
 
       expected.setWhereClause(whereClause);
     }

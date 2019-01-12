@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.relation.accesspath;
 
-/**
- * A thread-safe buffer backed by a fixed capacity array. Concrete implementations must empty the
+/*
+* A thread-safe buffer backed by a fixed capacity array. Concrete implementations must empty the
  * buffer in {@link #flush(int, Object[])}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -50,7 +50,7 @@ public abstract class AbstractArrayBuffer<E> implements IBuffer<E> {
   protected int size;
   protected E[] buffer;
 
-  /**
+  /*
    * @param capacity The capacity of the backing buffer.
    * @param cls Array instances of this component type will be allocated.
    * @param filter An optional filter for keeping elements out of the buffer.
@@ -81,7 +81,7 @@ public abstract class AbstractArrayBuffer<E> implements IBuffer<E> {
     return size;
   }
 
-  /**
+  /*
    * Filters elements allowed into the buffer.
    *
    * @param e Some element.
@@ -91,18 +91,13 @@ public abstract class AbstractArrayBuffer<E> implements IBuffer<E> {
 
     if (filter != null) {
 
-      if (!filter.isValid(e)) {
-
-        // rejected by the filter.
-
-        //                if(DEBUG) {
-        //
-        //                    log.debug("rejected: element="+e+", filter="+filter);
-        //
-        //                }
-
-        return false;
-      }
+      // rejected by the filter.
+      //                if(DEBUG) {
+      //
+      //                    log.debug("rejected: element="+e+", filter="+filter);
+      //
+      //                }
+      return filter.isValid(e);
     }
 
     return true;
@@ -204,7 +199,7 @@ public abstract class AbstractArrayBuffer<E> implements IBuffer<E> {
     size = 0;
   }
 
-  /**
+  /*
    * This method is automatically invoked if the buffer is flushed and it is non-empty. The
    * implementation is required to dispose of the contents of the buffer. The caller is already
    * synchronized on <i>this</i> so no further synchronization is necessary. It is assumed that the

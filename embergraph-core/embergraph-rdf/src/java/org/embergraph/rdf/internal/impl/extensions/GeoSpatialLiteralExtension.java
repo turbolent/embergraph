@@ -44,8 +44,8 @@ import org.embergraph.service.geospatial.IGeoSpatialLiteralSerializer;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 
-/**
- * Special encoding for GeoSpatial datatypes. We encode literals of the form <int_i>#...#<int_n> as
+/*
+* Special encoding for GeoSpatial datatypes. We encode literals of the form <int_i>#...#<int_n> as
  * BigInteger using the xsd:integer type. The conversion into BigInteger is based on a calculation
  * of the z-order string for the n components.
  *
@@ -76,7 +76,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
   // Factory for thread local key builder
   private final IKeyBuilderFactory kbfactory;
 
-  /**
+  /*
    * Constructor setting up an instance with a default schema description.
    *
    * @param resolver
@@ -102,7 +102,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return datatypes;
   }
 
-  /**
+  /*
    * ************************************************************************** DIRECTION "DOWN":
    * ----------------- The following methods implement either the full or parts of the "down"
    * direction. For the down, direction, conversion works as follows:
@@ -133,7 +133,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
    * ************************************************************************
    */
 
-  /**
+  /*
    * Create an IV from a given value (where the value must be a Literal). Implements transformation
    * A->G.
    */
@@ -148,7 +148,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return createIV(litSerializer.toComponents(value.stringValue()));
   }
 
-  /**
+  /*
    * Create an IV from a given value (where the value must be a Literal). Implements transformation
    * B->F.
    */
@@ -185,7 +185,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return padLeadingZero(zOrderByteArray);
   }
 
-  /**
+  /*
    * Create an IV from a two's complement byte array
    *
    * <p>Implements transformation E->F
@@ -204,7 +204,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return new LiteralExtensionIV(delegate, datatype.getIV());
   }
 
-  /**
+  /*
    * Convert the components into a long array. The array is passed as an Object[], in order to allow
    * for unparsed strings as well as Long or Double's (or any convertable) as input. The array must
    * have the same size as the number of dimensions, otherwise a runtime exception is thrown.
@@ -284,7 +284,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return ret;
   }
 
-  /**
+  /*
    * Converts a long array representing the components to a z-order byte array. Thereby, a range
    * shift is performed, if specified.
    *
@@ -313,7 +313,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return kb.toZOrder(datatypeConfig.getNumDimensions());
   }
 
-  /**
+  /*
    * Shift values according to the minValue, making sure that we encode the lowest value in the
    * range as the lowest value 00000000... when encoded as byte array.
    *
@@ -332,7 +332,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return Long.MIN_VALUE + (val - minValue);
   }
 
-  /**
+  /*
    * Pads a leading zero byte to the byte array. This changes the value (which does not harm order,
    * if we do it consistently for all zOrder strings prior to saving them) and makes sure that the
    * array represents an unsigned value, for which the two's complement representation does not
@@ -351,14 +351,14 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return ret;
   }
 
-  /**
+  /*
    * ************************************************************************** DIRECTION "UP":
    * ----------------- The following methods implement either the full or parts of the "up"
    * direction (which is the inverse of the down direction discussed in detail above.
    * *************************************************************************
    */
 
-  /**
+  /*
    * Decodes an xsd:integer into an n-dimensional string of the form <int_1>#...#<int_n>.
    *
    * <p>Implements transformation G->A.
@@ -381,7 +381,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return (V) vf.createLiteral(litStr, datatype);
   }
 
-  /**
+  /*
    * Decodes an xsd:integer into the long values of the z-order components represented through the
    * xsd:integer.
    *
@@ -417,7 +417,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return longArrAsComponentArr(longArr);
   }
 
-  /**
+  /*
    * Decodes a BigInteger into a zOrder byte[] (without leading zero).
    *
    * <p>Implements transformation F->E.
@@ -447,7 +447,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return bigIntAsByteArrUnsigned;
   }
 
-  /**
+  /*
    * Converts an IV to a zOrderByte array (without leading zero). Entry point for query service,
    * somewhat outside the pipeline described above.
    */
@@ -460,7 +460,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return toZOrderByteArray(literalIV.integerValue());
   }
 
-  /**
+  /*
    * Converts a z-order byte array to a long array representing the components. As part of this
    * transformation, a possible range shift is reverted.
    *
@@ -499,7 +499,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return val - Long.MIN_VALUE + minValue;
   }
 
-  /**
+  /*
    * Converts a a Long[] reflecting the long values of the individual components back into a
    * component array representing the literal.
    *
@@ -534,7 +534,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return componentArr;
   }
 
-  /**
+  /*
    * Reverts method {{@link #padLeadingZero(byte[])}.
    *
    * <p>Implements step E->D.
@@ -550,7 +550,7 @@ public class GeoSpatialLiteralExtension<V extends EmbergraphValue> implements IE
     return ret;
   }
 
-  /**
+  /*
    * Return the number of dimensions of the literal
    *
    * @return

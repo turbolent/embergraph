@@ -61,8 +61,8 @@ import org.embergraph.relation.accesspath.AccessPath;
 import org.embergraph.service.MetadataService;
 import org.embergraph.service.Split;
 
-/**
- * A fused view providing read-write operations on multiple B+-Trees mapping variable length
+/*
+* A fused view providing read-write operations on multiple B+-Trees mapping variable length
  * unsigned byte[] keys to arbitrary values. The sources MUST support deletion markers. The order of
  * the sources MUST correspond to the recency of their data. Writes will be directed to the first
  * source in the sequence (the most recent source). Deletion markers are used to prevent a miss on a
@@ -81,14 +81,14 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
 
   protected static final Logger log = Logger.getLogger(FusedView.class);
 
-  /**
+  /*
    * Error message if the view has more than {@link Long#MAX_VALUE} elements and you requested an
    * exact range count.
    */
   protected static final transient String ERR_RANGE_COUNT_EXCEEDS_MAX_LONG =
       "The range count can not be expressed as a 64-bit signed integer";
 
-  /**
+  /*
    * Encapsulates the sources.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -96,20 +96,20 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
   private interface ISources extends Iterable<AbstractBTree> {
 
     /** The mutable {@link BTree} for the view. */
-    public BTree getMutableBTree();
+    BTree getMutableBTree();
 
     /** The #of sources in the view. */
-    public int getSourceCount();
+    int getSourceCount();
 
     /** Visits the sources in order. */
     @Override
-    public Iterator<AbstractBTree> iterator();
+    Iterator<AbstractBTree> iterator();
 
     /** Cloned copy of the sources objects. */
-    public AbstractBTree[] getSources();
+    AbstractBTree[] getSources();
   }
 
-  /**
+  /*
    * Implementation based on a hard reference array which directly captures the {@link
    * AbstractBTree}[].
    *
@@ -117,7 +117,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
    */
   private static class HardRefSources implements ISources {
 
-    /**
+    /*
      * A hard reference to the mutable {@link BTree} from index zero of the sources specified to the
      * ctor.
      */
@@ -139,7 +139,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
       return Arrays.asList(srcs).iterator();
     }
 
-    /**
+    /*
      * Holds the various btrees that are the sources for the view.
      *
      * <p>FIXME Change this to assemble the AbstractBTree[] dynamically from the {@link #btree} hard
@@ -166,7 +166,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     }
   }
 
-  /**
+  /*
    * Implementation using a hard reference for the mutable {@link BTree} and any other {@link
    * BTree}s in the view and hard references to the {@link IndexSegmentStore}s for the non-{@link
    * BTree} sources in the view. and hard. The {@link IndexSegmentStore} internally uses a {@link
@@ -179,19 +179,19 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     /** The #of sources. */
     private final int count;
 
-    /**
+    /*
      * A hard reference to the mutable {@link BTree} from index zero of the sources specified to the
      * ctor.
      */
     private final BTree btree;
 
-    /**
+    /*
      * A hard reference to any source which was a {@link BTree} with <code>null</code>s in the other
      * elements of the array.
      */
     private final BTree[] btreeSources;
 
-    /**
+    /*
      * A hard reference to the {@link IndexSegmentStore} for any source that was an {@link
      * IndexSegment} with <code>null</code>s in the other elements of the array.
      */
@@ -220,8 +220,8 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
 
         } else {
 
-          /*
-           * Note: This provides a canonicalizing mapping using a weak
+        /*
+       * Note: This provides a canonicalizing mapping using a weak
            * reference and thereby decouples the FusedView from a hard
            * reference to the IndexSegment.
            */
@@ -285,8 +285,8 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return sources.getMutableBTree();
   }
 
-  //    /**
-  //     * A {@link ThreadLocal} {@link Tuple} that is used to copy the value
+  //    /*
+//     * A {@link ThreadLocal} {@link Tuple} that is used to copy the value
   //     * associated with a key out of the btree during lookup operations.
   //     * <p>
   //     * Note: This field is NOT static. This limits the scope of the
@@ -304,8 +304,8 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
   //
   //    };
   //
-  //    /**
-  //     * A {@link ThreadLocal} {@link Tuple} that is used for contains() tests.
+  //    /*
+//     * A {@link ThreadLocal} {@link Tuple} that is used for contains() tests.
   //     * The tuple does not copy either the keys or the values. Contains is
   //     * implemented as a lookup operation that either return this tuple or
   //     * <code>null</code>. When isolation is supported, the version metadata
@@ -374,7 +374,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     this(new AbstractBTree[] {src1, src2});
   }
 
-  /**
+  /*
    * @param srcs The ordered sources for the fused view. The order of the elements in this array
    *     determines which value will be selected for a given key by lookup() and which value is
    *     retained by rangeQuery().
@@ -404,7 +404,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     }
   }
 
-  /**
+  /*
    * Checks the sources to make sure that they all support delete markers (required for views), all
    * non-null, and all have the same index UUID.
    *
@@ -518,7 +518,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return getMutableBTree().getCounter();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Resolves the old value against the view and then directs the write to the first of the
@@ -534,7 +534,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return oldval;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This case is a bit tricky. Since it is possible for the value stored under a key to be null,
@@ -588,7 +588,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return tuple.getObject();
   }
 
-  /**
+  /*
    * Resolves the old value against the view and then directs the write to the first of the sources
    * specified to the ctor. The remove is in fact treated as writing a deleted marker into the
    * index.
@@ -648,7 +648,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return tuple.getObject();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Return the first value for the key in an ordered search of the trees in the view.
@@ -689,7 +689,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return tuple.getObject();
   }
 
-  /**
+  /*
    * Per {@link AbstractBTree#lookup(byte[], Tuple)} but0 processes the {@link AbstractBTree}s in
    * the view in their declared sequence and stops when it finds the first index entry for the key,
    * even it the entry is marked as deleted for that key.
@@ -703,7 +703,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return lookup(0, key, tuple);
   }
 
-  /**
+  /*
    * Core implementation processes the {@link AbstractBTree}s in the view in their declared sequence
    * and stops when it finds the first index entry for the key, even it the entry is marked as
    * deleted for that key.
@@ -735,7 +735,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return null;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Processes the {@link AbstractBTree}s in the view in sequence and returns true iff the first
@@ -746,16 +746,10 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
 
     final Tuple tuple = lookup(key, getMutableBTree().getContainsTuple());
 
-    if (tuple == null || tuple.isDeletedVersion()) {
-
-      /*
-       * Interpret a deletion marker as "not found".
-       */
-
-      return false;
-    }
-
-    return true;
+    /*
+     * Interpret a deletion marker as "not found".
+     */
+    return tuple != null && !tuple.isDeletedVersion();
   }
 
   @Override
@@ -771,7 +765,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return getIndexMetadata().getTupleSerializer();
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns the sum of the range count on each index in the view. This is the maximum #of
@@ -784,7 +778,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return rangeCount(null /* fromKey */, null /* toKey */);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns the sum of the range count on each index in the view. This is the maximum #of
@@ -848,7 +842,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return count;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The exact range count is obtained using a key-range scan over the view.
@@ -901,7 +895,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return n;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>An exact range count that includes any deleted tuples. This is obtained using a key-range
@@ -965,7 +959,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return rangeIterator(null, null);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Returns an iterator that visits the distinct entries. When an entry appears in more than one
@@ -978,7 +972,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     return rangeIterator(fromKey, toKey, 0 /* capacity */, DEFAULT /* flags */, null /* filter */);
   }
 
-  /**
+  /*
    * Core implementation.
    *
    * <p>Note: The {@link FusedView}'s iterator first obtains an ordered array of iterators for each
@@ -1254,7 +1248,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
     }
   }
 
-  /**
+  /*
    * Inner class providing a fused view of the optional bloom filters associated with each of the
    * source indices.
    *
@@ -1262,7 +1256,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
    */
   protected class FusedBloomFilter implements IBloomFilter {
 
-    /**
+    /*
      * Unsupported operation.
      *
      * @throws UnsupportedOperationException always.
@@ -1272,7 +1266,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
       throw new UnsupportedOperationException();
     }
 
-    /**
+    /*
      * Applies the {@link IBloomFilter} for each source index in turn and returns <code>true</code>
      * if ANY of the component index filters return <code>true</code> (if any filters say that their
      * index has data for that key then you need to read the index). If a filter does not exist (or
@@ -1296,8 +1290,8 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
             && src instanceof BTree
             && srcs[i + 1].getBloomFilter() != null) {
 
-          /*
-           * Do a real point test when we have a FusedView and the 1st
+        /*
+       * Do a real point test when we have a FusedView and the 1st
            * or 2nd component of the view is a BTree and there are
            * additional components in the view and they have a bloom
            * filter enabled. This covers the case where the BTree is
@@ -1329,8 +1323,8 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
 
         if (filter == null || filter.contains(key)) {
 
-          /*
-           * Either no filter, a disabled filter, or the filter exists
+        /*
+       * Either no filter, a disabled filter, or the filter exists
            * and reports that it has seen the key. At the worst, this
            * is a false positive and we will be forced to check the
            * index.
@@ -1344,7 +1338,7 @@ public class FusedView implements IIndex, ILocalBTreeView { // , IValueAge {
       return false;
     }
 
-    /**
+    /*
      * This implementation notifies the bloom filter for the first source index (if it exists).
      * Normally false positives will be reported directly to the specific bloom filter instance by
      * the contains() or lookup() method for that index. However, the {@link AccessPath} also tests

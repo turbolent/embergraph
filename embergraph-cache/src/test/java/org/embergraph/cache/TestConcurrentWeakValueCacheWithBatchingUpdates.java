@@ -29,8 +29,8 @@ import java.util.Random;
 import junit.framework.TestCase2;
 import org.embergraph.util.Bytes;
 
-/**
- * Test suite for {@link ConcurrentWeakValueCacheWithBatchedUpdates}.
+/*
+* Test suite for {@link ConcurrentWeakValueCacheWithBatchedUpdates}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

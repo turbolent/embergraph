@@ -140,8 +140,8 @@ import org.openrdf.model.Value;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParser;
 
-/**
- * Factory object for high-volume RDF data load.
+/*
+* Factory object for high-volume RDF data load.
  *
  * <p>The asynchronous statement buffer w/o SIDs is much simpler that w/. If we require that the
  * document is fully buffered in memory, then we can simplify this to just:
@@ -322,7 +322,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   /** The initial capacity of the canonicalizing mapping for RDF {@link BNode}s. */
   private final int bnodesInitialCapacity;
 
-  /**
+  /*
    * The chunk size used by the producer to break the terms and statements into chunks before
    * writing them onto the {@link BlockingBuffer} for the master.
    */
@@ -331,7 +331,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   /** The default {@link RDFFormat}. */
   private final RDFFormat defaultFormat;
 
-  /**
+  /*
    * The value that will be used for the graph/context co-ordinate when loading data represented in
    * a triple format into a quad store.
    */
@@ -355,7 +355,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     return defaultFormat;
   }
 
-  /**
+  /*
    * When <code>true</code> and the full text index is enabled, then also index datatype literals.
    */
   private final boolean indexDatatypeLiterals;
@@ -372,7 +372,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   /** A map containing an entry for each statement index on which this class will write. */
   private final Map<SPOKeyOrder, IRunnableBuffer<KVO<ISPO>[]>> buffer_stmts;
 
-  /**
+  /*
    * Counts statements written on the database (applied only to the SPO index so we do not double
    * count).
    */
@@ -381,19 +381,19 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   /** Counts tuples written on the full text index. */
   private final LongAggregator textResultHandler = new LongAggregator();
 
-  /**
+  /*
    * The timestamp set when {@link #notifyStart()} is invoked. This is done when the factory is
    * created.
    */
   private volatile long startTime;
 
-  /**
+  /*
    * The timestamp set when {@link #notifyEnd()} is invoked. This is done when the factory is {@link
    * #close()}d or when execution is {@link #cancelAll(boolean) cancelled}.
    */
   private long endTime;
 
-  /**
+  /*
    * Notify that the factory will begin running tasks. This sets the {@link #startTime} used by
    * {@link #getElapsedMillis()} to report the run time of the tasks.
    */
@@ -413,7 +413,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Notify that the factory is done running tasks (for now). This places a cap on the time reported
    * by {@link #elapsed()}.
    */
@@ -435,7 +435,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * The elapsed milliseconds, counting only the time between {@link #notifyStart()} and {@link
    * #notifyEnd()}.
    */
@@ -462,7 +462,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   /** The #of documents whose TIDs have been assigned (cumulative total). */
   private final AtomicLong documentTIDsReadyCount = new AtomicLong(0L);
 
-  /**
+  /*
    * The #of documents that are waiting on their TIDs (current value). The counter is incremented
    * when a document begins to buffer writes on the TERM2ID/BLOBS indices. The counter is
    * decremented as soon as those writes are restart safe.
@@ -478,7 +478,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final AtomicLong documentTIDsWaitingCount = new AtomicLong(0L);
 
-  /**
+  /*
    * The #of told triples parsed from documents using this factory and made restart safe on the
    * database. This is incremented each time a document has been made restart safe by the #of
    * distinct told triples parsed from that document.
@@ -489,7 +489,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final AtomicLong toldTriplesRestartSafeCount = new AtomicLong();
 
-  /**
+  /*
    * The #of documents which have been fully processed and are restart-safe on the database
    * (cumulative total).
    */
@@ -503,7 +503,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    * be protected by the lock.
    */
 
-  /**
+  /*
    * The {@link #lock} is used to makes the observable state changes for the factory atomic and
    * guards the termination conditions in {@link #close()}. You MUST own the {@link #lock} when
    * incrementing or decrementing any of the {@link Latch}s. The {@link Latch} transitions must be
@@ -521,13 +521,13 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final ReentrantLock lock = new ReentrantLock();
 
-  /**
+  /*
    * A global {@link Latch} guarding all documents which have been accepted for processing and have
    * not yet reached an absorbing state (either an error state or been made restart safe).
    */
   private final Latch workflowLatch_document = new Latch("document", lock);
 
-  /**
+  /*
    * A {@link Latch} guarding documents which have been accepted for parsing but have not been
    * transferred to the {@link #workflowLatch_bufferTids}.
    *
@@ -536,13 +536,13 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final Latch workflowLatch_parser = new Latch("parser", lock);
 
-  /**
+  /*
    * A {@link Latch} guarding documents that have begun to buffering their writes on the
    * TERM2ID/BLOBS indices but have not been transferred to the {@link #workflowLatch_bufferOther}.
    */
   private final Latch workflowLatch_bufferTids = new Latch("bufferTids", lock);
 
-  /**
+  /*
    * A {@link Latch} guarding documents that have begun to buffer their writes on the other indices
    * but have not yet completed their processing.
    */
@@ -559,7 +559,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    * or idle timeout (if any) causes the buffers to be flushed!
    */
 
-  /**
+  /*
    * {@link Latch} guarding tasks until they have buffered their writes on the TERM2ID/BLOBS
    * indices. This latch is decremented as soon as the writes for a given document have been
    * buffered. This is used to close the TERM2ID/BLOBS buffers in a timely manner in {@link
@@ -567,7 +567,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final Latch guardLatch_term2Id = new Latch("guard_term2Id", lock);
 
-  /**
+  /*
    * {@link Latch} guarding tasks until they have buffered their writes on the remaining index
    * buffers. This latch is decremented as soon as the writes for a given document have been
    * buffered. This is used to close the other buffers in a timely manner in {@link #close()}.
@@ -581,7 +581,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    * Parser service pause/resume.
    */
 
-  /**
+  /*
    * New parser tasks submitted to the {@link #parserService} will block when the {@link
    * #unbufferedStatementCount} is GT this value. This is used to control the RAM demand of the
    * parsed (but not yet buffered) statements. The RAM demand of the buffered statements is
@@ -595,7 +595,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final long pauseParserPoolStatementThreshold;
 
-  /**
+  /*
    * The #of statements which have been parsed but not yet written onto the asynchronous index write
    * buffers. This is incremented when all statements for a given document have been parsed by the
    * #of distinct statements in that document. This is decremented when all statements for that
@@ -605,7 +605,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final AtomicLong unbufferedStatementCount = new AtomicLong();
 
-  /**
+  /*
    * The #of RDF {@link Statement}s that have been parsed but which are not yet restart safe on the
    * database. This is incremented when all statements for a given document have been parsed by the
    * #of distinct statements in that document. This is decremented when all writes for that document
@@ -615,14 +615,14 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final AtomicLong outstandingStatementCount = new AtomicLong();
 
-  /**
+  /*
    * In order to prevent runaway demand on RAM, new parser tasks must await this {@link Condition}
    * if the #of parsed but not yet buffered statements is GTE the configured {@link
    * #pauseParserPoolStatementThreshold} threshold.
    */
   private Condition unpaused = lock.newCondition();
 
-  /**
+  /*
    * The #of threads which are currently paused awaiting the {@link #unpaused} {@link Condition}.
    */
   private AtomicLong pausedThreadCount = new AtomicLong();
@@ -630,7 +630,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   /** The #of times the {@link #parserService} has been paused. */
   private AtomicLong poolPausedCount = new AtomicLong();
 
-  /**
+  /*
    * Verify counters for latches which must sum atomically to the {@link #workflowLatch_document}.
    */
   private void assertSumOfLatchs() {
@@ -655,7 +655,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Bounded thread pool using a bounded work queue to run the parser tasks. If a backlog develops,
    * then the thread pool is <em>paused</em>, and new tasks will not start until the backlog is
    * cleared. This will cause the work queue to fill up, and the threads feeding that work queue to
@@ -663,14 +663,14 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final ParserThreadPoolExecutor parserService;
 
-  /**
+  /*
    * Bounded thread pool using an unbounded work queue to buffer writes for the TERM2ID/BLOBS
    * indices (these are the indices which assign tids). Tasks are added to the work queue by the
    * parser task in {@link AsynchronousStatementBufferImpl#flush()}.
    */
   private final ThreadPoolExecutor tidsWriterService;
 
-  /**
+  /*
    * Bounded thread pool using an unbounded work queue to run {@link BufferOtherWritesTask}s. Tasks
    * are added to the work queue by the "TIDs Ready" {@link KVOLatch}. Once the index writes have
    * been buffered, the statement buffer is placed onto the {@link #docsWaitingQueue}. This {@link
@@ -679,7 +679,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private final ThreadPoolExecutor otherWriterService;
 
-  /**
+  /*
    * Bounded thread pool with an unbounded work queue used process per file success or failure
    * notices.
    */
@@ -688,7 +688,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   /** {@link Runnable} collects performance counters on services used by the factory. */
   private final ServiceStatisticsTask serviceStatisticsTask;
 
-  /**
+  /*
    * Return an estimate of the #of statements written on the indices.
    *
    * <p>This value is aggregated across any {@link IStatementBuffer} obtained from {@link
@@ -718,7 +718,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     return documentRestartSafeCount.get();
   }
 
-  /**
+  /*
    * Note: do not invoke this directly. It does not know how to set the resource identifier on the
    * statement buffer impl.
    */
@@ -732,7 +732,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     return new AsynchronousStatementBufferImpl(resource);
   }
 
-  /**
+  /*
    * Submit a resource for processing.
    *
    * @param resource The resource (file or URL, but not a directory).
@@ -755,7 +755,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Inner method allows the caller to allocate the task once when the caller will retry if there is
    * a {@link RejectedExecutionException}.
    *
@@ -789,8 +789,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       try {
 
-        /*
-         * Submit resource for parsing.
+      /*
+       * Submit resource for parsing.
          *
          * @todo it would be nice to return a Future here that tracked the
          * document through the workflow.
@@ -800,8 +800,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       } catch (RejectedExecutionException ex) {
 
-        /*
-         * Back out the document since the task was not accepted for
+      /*
+       * Back out the document since the task was not accepted for
          * execution.
          */
 
@@ -824,7 +824,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Submit a resource for processing.
    *
    * @param resource The resource (file or URL, but not a directory).
@@ -835,7 +835,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    * @throws RejectedExecutionException if the service is shutdown -or- the retryMillis is ZERO(0L).
    */
   public void submitOne(final R resource, final long retryMillis)
-      throws InterruptedException, Exception {
+      throws Exception {
 
     if (resource == null) throw new IllegalArgumentException();
 
@@ -908,7 +908,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Submit all files in a directory for processing via {@link #submitOne(String)}.
    *
    * @param fileOrDir The file or directory.
@@ -925,7 +925,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     return new RunnableFileSystemLoader(fileOrDir, filter, retryMillis).call();
   }
 
-  /**
+  /*
    * Open an buffered input stream reading from the resource. If the resource ends with <code>.gz
    * </code> or <code>.zip</code> then the appropriate decompression will be applied.
    *
@@ -969,7 +969,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     return is;
   }
 
-  /**
+  /*
    * Return a task to parse the document. The task should allocate an {@link
    * AsynchronousStatementBufferImpl} for the document. When that buffer is flushed, the document
    * will be queued for further processing.
@@ -1004,7 +1004,6 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
     // Convert the resource identifier to a URL.
     final String baseURI;
-    ;
     if (getClass().getResource(resourceStr) != null) {
 
       baseURI = getClass().getResource(resourceStr).toURI().toString();
@@ -1017,7 +1016,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     return new ParserTask(resource, baseURI, rdfFormat);
   }
 
-  /**
+  /*
    * Tasks either loads a RDF resource or verifies that the told triples found in that resource are
    * present in the database. The difference between data load and data verify is just the behavior
    * of the {@link IStatementBuffer}.
@@ -1035,7 +1034,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     /** The RDF interchange syntax that the file uses. */
     private final RDFFormat rdfFormat;
 
-    /**
+    /*
      * @param resource The resource to be loaded (a plain file or URL, but not a directory).
      * @param baseURL The base URL for that resource.
      * @param rdfFormat The RDF interchange syntax that the file uses.
@@ -1131,7 +1130,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     return super.toString() + "::" + getCounters();
   }
 
-  /**
+  /*
    * @param tripleStore
    * @param producerChunkSize The chunk size used when writing chunks onto the master for the
    *     asynchronous index write API. If this value is on the order of the #of terms or statements
@@ -1276,8 +1275,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       {
         if (lexiconRelation.isTextIndex()) {
 
-          /*
-           * FIXME Must hook in once the tids are available so we can
+        /*
+       * FIXME Must hook in once the tids are available so we can
            * tokenize the RDF Literals (Note: only the literals, and
            * only those literals that will be indexed) and write out
            * the tuples on the text index.
@@ -1450,7 +1449,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
         (fed == null ? null : new ServiceStatisticsTask(fed.getScheduledExecutorService()));
   } // ctor
 
-  /**
+  /*
    * Note: If there is a large sink idle timeout on the TERM2ID index then the sink will not flush
    * itself automatically once its master is no longer pushing data. This situation can occur any
    * time the parser pool is paused. A low sink idle timeout is required for the TERM2ID sink to
@@ -1569,9 +1568,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       if (otherWriterService.isTerminated()) return true;
 
-      if (notifyService != null && notifyService.isTerminated()) return true;
-
-      return false;
+      return notifyService != null && notifyService.isTerminated();
 
     } finally {
 
@@ -1601,7 +1598,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     notifyEnd();
   }
 
-  /**
+  /*
    * Awaits a signal that all documents which have queued writes are finished and then closes the
    * remaining buffers.
    */
@@ -1620,8 +1617,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
         assertSumOfLatchs();
 
-        /*
-         * No more tasks will request TIDs, so close the TERM2ID and
+      /*
+       * No more tasks will request TIDs, so close the TERM2ID and
          * BLOBS masters. It will flush its writes.
          */
         guardLatch_term2Id.await();
@@ -1651,8 +1648,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           assertSumOfLatchs();
         }
 
-        /*
-         * No new index write tasks may start (and all should have
+      /*
+       * No new index write tasks may start (and all should have
          * terminated by now).
          */
         guardLatch_other.await();
@@ -1742,7 +1739,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     if (log.isInfoEnabled()) log.info("Done.");
   }
 
-  /**
+  /*
    * Invoked after a document has become restart safe. If {@link #newSuccessTask(Object)} returns a
    * {@link Runnable} then that will be executed on the {@link #notifyService}.
    *
@@ -1805,7 +1802,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Invoked after a document has failed. If {@link #newFailureTask(Object, Throwable)} returns a
    * {@link Runnable} then that will be executed on the {@link #notifyService}.
    *
@@ -1877,7 +1874,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Return the optional task to be executed for a resource which has been successfully processed
    * and whose assertions are now restart safe on the database. The task, if any, will be run on the
    * {@link #notifyService}.
@@ -1901,7 +1898,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     return null;
   }
 
-  /**
+  /*
    * Return the optional task to be executed for a resource for which processing has failed. The
    * task, if any, will be run on the {@link #notifyService}.
    *
@@ -1922,7 +1919,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     };
   }
 
-  /**
+  /*
    * Task deletes a resource from the local file system.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1944,7 +1941,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Delete a file whose data have been made restart safe on the database from the local file system
    * (this must be overridden to handle resources which are not {@link File}s).
    *
@@ -1985,7 +1982,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           }
         });
 
-    /**
+    /*
      * The #of documents whose TERM2ID/BLOBS writes have begun to be buffered but are not yet
      * restart-safe on the database.
      */
@@ -2008,7 +2005,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           }
         });
 
-    /**
+    /*
      * The #of tuples written on the full text index (this does not count triples that were already
      * present on the index).
      */
@@ -2021,7 +2018,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           }
         });
 
-    /**
+    /*
      * The #of triples written on the SPO index (this does not count triples that were already
      * present on the index).
      */
@@ -2034,7 +2031,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           }
         });
 
-    /**
+    /*
      * The #of told triples parsed from documents using this factory and made restart safe on the
      * database. This is incremented each time a document has been made restart safe by the #of
      * distinct told triples parsed from that document.
@@ -2052,7 +2049,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           }
         });
 
-    /**
+    /*
      * The told triples per second rate which have been made restart safe by this factory object.
      * When you are loading using multiple clients, then the total told triples per second rate is
      * the aggregation across all of those instances.
@@ -2073,7 +2070,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           }
         });
 
-    /**
+    /*
      * The #of documents which have been processed by this client and are restart safe on the
      * database by this client.
      */
@@ -2255,7 +2252,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     return counterSet;
   }
 
-  /**
+  /*
    * {@link Runnable} class applies the factory to either a single file or to all files within a
    * directory.
    */
@@ -2273,7 +2270,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
     final long retryMillis;
 
-    /**
+    /*
      * @param fileOrDir The file or directory to be loaded.
      * @param filter An optional filter on files that will be accepted when processing a directory.
      * @param retryMillis The number of milliseconds to wait between retrys when the parser service
@@ -2294,7 +2291,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       this.retryMillis = retryMillis;
     }
 
-    /**
+    /*
      * Creates a task using the {@link #taskFactory}, submits it to the {@link #loader} and and
      * waits for the task to complete. Errors are logged, but not thrown.
      *
@@ -2307,7 +2304,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       return count;
     }
 
-    /**
+    /*
      * Scans file(s) recursively starting with the named file, and, for each file that passes the
      * filter, submits the task.
      *
@@ -2336,8 +2333,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       } else {
 
-        /*
-         * Processing a standard file.
+      /*
+       * Processing a standard file.
          */
 
         if (log.isInfoEnabled()) log.info("Will load: " + file);
@@ -2362,7 +2359,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Class applies the term identifiers assigned by the {@link Term2IdWriteProc} to the {@link
    * EmbergraphValue} references in the {@link KVO} correlated with each {@link Split} of data
    * processed by that procedure.
@@ -2386,14 +2383,14 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       this.readOnly = readOnly;
     }
 
-    /**
+    /*
      * NOP
      *
      * @see #aggregateAsync(KVO[], org.embergraph.rdf.lexicon.Term2IdWriteProc.Result, Split)
      */
     public void aggregate(final Term2IdWriteProc.Result result, final Split split) {}
 
-    /**
+    /*
      * Copy the assigned / discovered term identifiers onto the corresponding elements of the
      * terms[].
      */
@@ -2440,7 +2437,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Class applies the term identifiers assigned by the {@link BlobsWriteProc} to the {@link
    * EmbergraphValue} references in the {@link KVO} correlated with each {@link Split} of data
    * processed by that procedure.
@@ -2464,14 +2461,14 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       this.readOnly = readOnly;
     }
 
-    /**
+    /*
      * NOP
      *
      * @see #aggregateAsync(KVO[], org.embergraph.rdf.lexicon.BlobsWriteProc.Result, Split)
      */
     public void aggregate(final BlobsWriteProc.Result result, final Split split) {}
 
-    /**
+    /*
      * Copy the assigned / discovered term identifiers onto the corresponding elements of the
      * terms[].
      */
@@ -2522,7 +2519,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Wrap a {@link EmbergraphValue}[] with a chunked iterator.
    *
    * <p>Note: This resolves inline {@link IV}s and filters them out of the visited {@link
@@ -2541,8 +2538,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                   @Override
                   public boolean isValid(final Object obj) {
-                    /*
-                     * Assigns the IV as a side effect iff the RDF Value can
+                  /*
+       * Assigns the IV as a side effect iff the RDF Value can
                      * be inlined according to the governing lexicon
                      * configuration and returns true iff the value CAN NOT
                      * be inlined. Thus, inlining is done as a side effect
@@ -2556,7 +2553,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
         EmbergraphValue.class);
   }
 
-  /**
+  /*
    * Wrap a {@link EmbergraphValue}[] with a chunked iterator which filters out blank nodes and
    * blobs (neither of which is written onto the reverse index).
    */
@@ -2571,8 +2568,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                   private static final long serialVersionUID = 1L;
 
-                  /*
-                   * Filter hides blank nodes since we do not write them onto
+                /*
+       * Filter hides blank nodes since we do not write them onto
                    * the reverse index.
                    *
                    * Filter does not visit blobs since we do not want to write
@@ -2585,16 +2582,14 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                     if (v instanceof BNode) return false;
 
-                    if (r.isBlob(v)) return false;
-
-                    return true;
+                    return !r.isBlob(v);
                   }
                 }),
         chunkSize,
         EmbergraphValue.class);
   }
 
-  /**
+  /*
    * Return iterator visiting only the {@link EmbergraphLiteral}s that we want to write on the full
    * text index.
    *
@@ -2617,8 +2612,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                   private static final long serialVersionUID = 1L;
 
-                  /*
-                   * Filter hides blank nodes since we do not write them onto
+                /*
+       * Filter hides blank nodes since we do not write them onto
                    * the TEXT index.
                    */
                   @Override
@@ -2631,19 +2626,15 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                     final EmbergraphLiteral lit = (EmbergraphLiteral) obj;
 
-                    if (!indexDatatypeLiterals && lit.getDatatype() != null) {
-                      // Ignore datatype literals.
-                      return false;
-                    }
-
-                    return true;
+                    // Ignore datatype literals.
+                    return indexDatatypeLiterals || lit.getDatatype() == null;
                   }
                 }),
         chunkSize,
         EmbergraphValue.class);
   }
 
-  /**
+  /*
    * Asynchronous writes on the TERM2ID index.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2666,7 +2657,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     private final IRunnableBuffer<KVO<EmbergraphValue>[]> bufferTerm2Id;
     private final IRunnableBuffer<KVO<EmbergraphValue>[]> bufferBlobs;
 
-    /**
+    /*
      * @param latch
      * @param r
      * @param src The visits chunks of distinct {@link Value}s.
@@ -2705,7 +2696,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       this.bufferBlobs = bufferBlobs;
     }
 
-    /**
+    /*
      * Return <code>true</code> if the {@link EmbergraphValue} will be stored against the BLOBS
      * index.
      */
@@ -2714,8 +2705,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       return lexiconRelation.isBlob(v);
     }
 
-    //        /**
-    //         * Return <code>true</code> iff the {@link EmbergraphValue} is fully inline
+    //        /*
+//         * Return <code>true</code> iff the {@link EmbergraphValue} is fully inline
     //         * (in which case the {@link IV} is set as a side-effect on the
     //         * {@link EmbergraphValue}).
     //         */
@@ -2725,7 +2716,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     //
     //        }
 
-    /**
+    /*
      * Reshapes the {@link #src} into {@link KVOC}[]s a chunk at a time and submits each chunk to
      * the write buffer for the TERM2ID index.
      */
@@ -2759,8 +2750,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
           for (EmbergraphValue v : chunkIn) {
 
-            /*
-             * Note: The iterator we are visiting has already had
+          /*
+       * Note: The iterator we are visiting has already had
              * the IVs for fully inline Values resolved and set as a
              * side-effect and the inline Values have been filtered
              * out. We will only see non-inline values here, but
@@ -2848,7 +2839,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Asynchronous writes on the ID2TERM index.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2866,7 +2857,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
     private final IRunnableBuffer<KVO<EmbergraphValue>[]> buffer;
 
-    /**
+    /*
      * @param src The visits chunks of distinct {@link Value}s with their TIDs assigned. Blank nodes
      *     will automatically be filtered out.
      */
@@ -2942,10 +2933,10 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             final byte[] key = v.getIV().encode(tmp.reset()).getKey();
 
             // Serialize the term.
-            final byte[] val = ser.serialize((EmbergraphValueImpl) v, out.reset(), tbuf);
+            final byte[] val = ser.serialize(v, out.reset(), tbuf);
 
-            /*
-             * Note: The EmbergraphValue instance is NOT supplied to
+          /*
+       * Note: The EmbergraphValue instance is NOT supplied to
              * the KVO since we do not want it to be retained and
              * since there is no side-effect on the EmbergraphValue for
              * writes on ID2TERM (unlike the writes on TERM2ID).
@@ -2956,8 +2947,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           // make dense.
           final KVO<EmbergraphValue>[] dense = KVO.dense(chunkOut, i);
 
-          /*
-           * Put into key order in preparation for writing on the
+        /*
+       * Put into key order in preparation for writing on the
            * reverse index.
            */
           Arrays.sort(dense);
@@ -2976,7 +2967,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Asynchronous writes on the TEXT index.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -2993,7 +2984,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
     private final IRunnableBuffer<KVO<EmbergraphValue>[]> buffer;
 
-    /**
+    /*
      * @param src The visits chunks of distinct {@link EmbergraphLiteral}s with their TIDs assigned.
      *     Anything which should not be indexed has already been filtered out.
      */
@@ -3020,7 +3011,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       this.buffer = buffer;
     }
 
-    /**
+    /*
      * FIXME This will on the full text index using the {@link EmbergraphValueCentricFullTextIndex}
      * class. That class will wind up doing gathered batch inserts in chunks of up to the capacity
      * set inline in the method below. However, it will use Sync RPC rather than the ASYNC
@@ -3035,8 +3026,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       try {
 
-        /*
-         * TODO capacity for the full text index writes.
+      /*
+       * TODO capacity for the full text index writes.
          */
         final int capacity = 100000;
 
@@ -3052,7 +3043,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Writes the statement chunks onto the specified statement index using the asynchronous write
    * API.
    *
@@ -3139,8 +3130,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             // generate value for the index.
             final byte[] val = tupleSer.serializeVal(spo);
 
-            /*
-             * Note: The SPO is deliberately not provided to the KVO
+          /*
+       * Note: The SPO is deliberately not provided to the KVO
              * instance since it is not required (there is nothing
              * being passed back from the write via a side-effect on
              * the EmbergraphStatementImpl) and since it otherwise will
@@ -3193,7 +3184,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Inner class provides the statement buffer.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -3209,13 +3200,13 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
     private final EmbergraphValueFactory valueFactory;
 
-    /**
+    /*
      * A canonicalizing map for RDF {@link Value}s. The use of this map provides a ~40% performance
      * gain.
      */
     private LinkedHashMap<Value, EmbergraphValue> values;
 
-    /**
+    /*
      * A canonicalizing map for blank nodes. This map MUST be cleared before you begin to add
      * statements to the buffer from a new "source" otherwise it will co-reference blank nodes from
      * distinct sources. The life cycle of the map is the life cycle of the document being loaded,
@@ -3225,7 +3216,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     private final AtomicReference<Map<String, EmbergraphBNode>> bnodes =
         new AtomicReference<Map<String, EmbergraphBNode>>();
 
-    /**
+    /*
      * The total #of parsed statements so far.
      *
      * <p>{@link IBuffer}
@@ -3240,7 +3231,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       return database;
     }
 
-    /**
+    /*
      * Returns <code>null</code>.
      *
      * <p>Note: This implementation does not support the concept of a focusStore so it can not be
@@ -3277,7 +3268,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       this.valueFactory = database.getValueFactory();
     }
 
-    /**
+    /*
      * Note: this implementation always returns ZERO (0).
      *
      * @see ParserTask
@@ -3287,7 +3278,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       return 0L;
     }
 
-    /**
+    /*
      * Clears all buffered data, including the canonicalizing mapping for blank nodes and deferred
      * provenance statements.
      */
@@ -3319,7 +3310,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       }
     }
 
-    /**
+    /*
      * Add an "explicit" statement to the buffer (flushes on overflow, no context).
      *
      * @param s
@@ -3331,7 +3322,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       add(s, p, o, null, StatementEnum.Explicit);
     }
 
-    /**
+    /*
      * Add an "explicit" statement to the buffer (flushes on overflow).
      *
      * @param s
@@ -3359,10 +3350,10 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           e.getPredicate(),
           e.getObject(),
           e.getContext(),
-          (e instanceof EmbergraphStatement ? ((EmbergraphStatement) e).getStatementType() : null));
+          (e instanceof EmbergraphStatement ? e.getStatementType() : null));
     }
 
-    /**
+    /*
      * Canonicalizing mapping for blank nodes.
      *
      * <p>Note: This map MUST stay in effect while reading from a given source and MUST be cleared
@@ -3376,8 +3367,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       Map<String, EmbergraphBNode> bnodes = this.bnodes.get();
       if (bnodes == null) {
 
-        /*
-         * Allocate a canonicalizing map for blank nodes. Since this
+      /*
+       * Allocate a canonicalizing map for blank nodes. Since this
          * will be a private map it does not need to be thread-safe.
          */
         setBNodeMap(new HashMap<String, EmbergraphBNode>(bnodesInitialCapacity));
@@ -3394,7 +3385,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       if (bnodes instanceof ConcurrentHashMap) {
 
         final EmbergraphBNode tmp =
-            ((ConcurrentHashMap<String, EmbergraphBNode>) bnodes).putIfAbsent(id, bnode);
+            bnodes.putIfAbsent(id, bnode);
 
         if (tmp != null) {
 
@@ -3430,7 +3421,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       } // synchronized
     }
 
-    /**
+    /*
      * Canonicalizing mapping for a term.
      *
      * <p>Note: Blank nodes are made canonical with the scope of the source from which the data are
@@ -3456,8 +3447,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
         // impose canonicalizing mapping for blank nodes.
         term = getCanonicalBNode((EmbergraphBNodeImpl) term0);
 
-        /*
-         * Fall through.
+      /*
+       * Fall through.
          *
          * Note: This also records the blank node in the values map so
          * that we can process the values map without having to consider
@@ -3472,8 +3463,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       if (values == null) {
 
-        /*
-         * Create a private (non-thread safe) canonicalizing mapping for
+      /*
+       * Create a private (non-thread safe) canonicalizing mapping for
          * RDF Values.
          *
          * Note: A linked hash map is used to make the iterator faster.
@@ -3506,7 +3497,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       return term;
     }
 
-    /**
+    /*
      * Adds the values and the statement into the buffer.
      *
      * @param s The subject.
@@ -3521,14 +3512,14 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
         final Resource s, final URI p, final Value o, final Resource c, final StatementEnum type) {
 
       _handleStatement(
-          (Resource) getCanonicalValue((EmbergraphResource) valueFactory.asValue(s)),
-          (URI) getCanonicalValue((EmbergraphURI) valueFactory.asValue(p)),
-          (Value) getCanonicalValue((EmbergraphValue) valueFactory.asValue(o)),
-          (Resource) getCanonicalValue((EmbergraphResource) valueFactory.asValue(c)),
+          (Resource) getCanonicalValue(valueFactory.asValue(s)),
+          (URI) getCanonicalValue(valueFactory.asValue(p)),
+          getCanonicalValue(valueFactory.asValue(o)),
+          (Resource) getCanonicalValue(valueFactory.asValue(c)),
           type);
     }
 
-    /**
+    /*
      * Form the EmbergraphStatement object using the valueFactory now that we bindings which were
      * (a) allocated by the valueFactory and (b) are canonical for the scope of this document.
      */
@@ -3538,10 +3529,10 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       final EmbergraphStatement stmt =
           valueFactory.createStatement(
-              (EmbergraphResource) s,
-              (EmbergraphURI) p,
-              (EmbergraphValue) o,
-              (EmbergraphResource) c,
+              s,
+              p,
+              o,
+              c,
               type);
 
       if (statements == null) {
@@ -3559,7 +3550,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       if (log.isTraceEnabled()) log.trace("n=" + statementCount + ", added: " + stmt);
     }
 
-    /**
+    /*
      * Buffers the asynchronous writes on the TERM2ID and BLOBS indices. Those indices will assign
      * tids. If {@link EmbergraphValue} is fully inline, then its {@link IV} is resolved
      * immediately. If the {@link EmbergraphValue} will be stored as a BLOB, then it is written onto
@@ -3622,8 +3613,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             protected void signal() throws InterruptedException {
 
               super.signal();
-              /*
-               * Note: There is no requirement for an atomic state
+            /*
+       * Note: There is no requirement for an atomic state
                * transition for these two counters so there is no reason
                * to take the lock here.
                */
@@ -3664,8 +3655,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       } finally {
 
-        /*
-         * Decrement now that all chunks have been queued for
+      /*
+       * Decrement now that all chunks have been queued for
          * asynchronous writes.
          */
 
@@ -3678,8 +3669,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
     }
 
-    //        /**
-    //         * Buffers the asynchronous writes on the BLOBS index.
+    //        /*
+//         * Buffers the asynchronous writes on the BLOBS index.
     //         *
     //         * @throws Exception
     //         */
@@ -3793,7 +3784,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     //
     //        }
 
-    /**
+    /*
      * Buffers write requests for the remaining indices (everything except TERM2ID/BLOBS indices).
      *
      * @throws InterruptedException
@@ -3954,8 +3945,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       try {
 
-        /*
-         * Make sure that no errors were reported by those tasks.
+      /*
+       * Make sure that no errors were reported by those tasks.
          */
         for (Object f : futures) {
 
@@ -3964,8 +3955,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       } finally {
 
-        /*
-         * At this point all writes have been buffered. We now discard
+      /*
+       * At this point all writes have been buffered. We now discard
          * the buffered data (RDF Values and statements) since it will
          * no longer be used.
          */
@@ -4044,8 +4035,8 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  //    /**
-  //     * Task buffers the asynchronous writes on the BLOBS index.
+  //    /*
+//     * Task buffers the asynchronous writes on the BLOBS index.
   //     */
   //    private class BufferBlobsWrites implements Callable<Void> {
   //
@@ -4112,7 +4103,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
   //
   //    }
 
-  /**
+  /*
    * Task which buffers index writes for the remaining indices (everything other than TERM2ID).
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -4174,7 +4165,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
     }
   }
 
-  /**
+  /*
    * Thread pool with pause/resume semantics based on the amount of buffered state for the outer
    * class.
    *
@@ -4182,7 +4173,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    */
   private class ParserThreadPoolExecutor extends ThreadPoolExecutor {
 
-    /**
+    /*
      * @param corePoolSize
      * @param maximumPoolSize
      * @param keepAliveTime
@@ -4207,7 +4198,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       return unbufferedStatementCount.get() > pauseParserPoolStatementThreshold;
     }
 
-    /**
+    /*
      * Overridden to have worker threads pause if {@link #isPaused()} returns true.
      *
      * @param t The thread that will run the task.

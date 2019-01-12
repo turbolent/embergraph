@@ -58,8 +58,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.rio.RDFFormat;
 
-/**
- * Test suite for {@link TruthMaintenance}.
+/*
+* Test suite for {@link TruthMaintenance}.
  *
  * @todo add a stress test where we assert random statements and then back out those assertions
  *     verifying that we recover the original closure?
@@ -81,7 +81,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
   private final Random r = new Random();
 
-  /**
+  /*
    * Test for {@link TruthMaintenance#applyExistingStatements(AbstractTripleStore,
    * AbstractTripleStore, IElementFilter filter)}.
    */
@@ -156,8 +156,8 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
               new SPO(z3, y2, z3, StatementEnum.Explicit),
             };
 
-        /*
-         * add statement to the focusStore and do NOT use the focusStore
+      /*
+       * add statement to the focusStore and do NOT use the focusStore
          * lexicon (it does not exist) to assign sids to the statements.
          */
         store.addStatements(
@@ -209,7 +209,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     }
   }
 
-  /**
+  /*
    * A simple test of {@link TruthMaintenance} in which some statements are asserted and their
    * closure is computed and aspects of that closure are verified (this is based on rdfs11).
    */
@@ -271,7 +271,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     }
   }
 
-  /**
+  /*
    * A simple test of {@link TruthMaintenance} in which some statements are asserted, their closure
    * is computed and aspects of that closure are verified, and then an explicit statement is removed
    * and the closure is updated and we verify that an entailment known to depend on the remove
@@ -407,7 +407,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     }
   }
 
-  /**
+  /*
    * A simple test of {@link TruthMaintenance} in which some statements are asserted, including one
    * statement which is also produced as an inference, and their closure is computed and aspects of
    * that closure are verified (this is based on rdfs11). After we verify the closure, we retract
@@ -444,8 +444,8 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
           assertionBuffer.add(U, rdfsSubClassOf, V);
           assertionBuffer.add(V, rdfsSubClassOf, X);
 
-          /*
-           * Note: this statement is entailed by the other two, but we
+        /*
+       * Note: this statement is entailed by the other two, but we
            * represent it explicitly as well in order to test the
            * downgrade mechanism.
            */
@@ -492,8 +492,8 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
 
           assertTrue(tempStore == retractionBuffer.getStatementStore());
 
-          /*
-           * Retract this statement. It is explicitly present in the
+        /*
+       * Retract this statement. It is explicitly present in the
            * DB. However, note that it is also inferred. Therefore, it
            * MUST be downgraded to an inference.
            */
@@ -534,7 +534,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Given three explicit statements:
    *
    * <pre>
@@ -598,7 +598,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
         // verify that stmt c is marked as explicit in the kb.
 
         final EmbergraphStatement stmtC =
-            (EmbergraphStatement) store.getStatement(foo, rdftype, graph);
+            store.getStatement(foo, rdftype, graph);
 
         assertNotNull(stmtC);
 
@@ -635,7 +635,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
         // verify that stmt c is marked as explicit in the kb.
 
         final EmbergraphStatement stmtC =
-            (EmbergraphStatement) store.getStatement(foo, rdftype, graph);
+            store.getStatement(foo, rdftype, graph);
 
         assertNotNull(stmtC);
 
@@ -648,7 +648,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     }
   }
 
-  /**
+  /*
    * This test demonstrates TM incorrectness (since fixed of course). I add two statements into
    * store A, then remove one of them. Then I add the the statement that remain in store A into
    * store B and compare the closure of the stores. They should be the same, right? Well,
@@ -838,7 +838,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     }
   }
 
-  /**
+  /*
    * This is a stress test for truth maintenance. It verifies that retraction and assertion are
    * symmetric by randomly retracting and then asserting statements while using truth maintenance
    * and verifying that the initial conditions are always recovered. It does NOT prove the
@@ -948,7 +948,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     }
   }
 
-  /**
+  /*
    * A stress test for truth maintenance using an arbitrary data set. The test scans the statement
    * indices in some order, selecting N explicit statement to retract. It then retracts them,
    * updates the closure, and then re-asserts them and verifies that original closure was restored.
@@ -1002,7 +1002,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     }
   }
 
-  /**
+  /*
    * At each level of recursion up to N explicit statements are selected randomly from the database,
    * retracted, and closure is updated. The method then calls itself recursively, thereby building
    * up a series of updates to the graph. When the recursion bottoms out, the retracted statements
@@ -1098,7 +1098,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     }
   }
 
-  /**
+  /*
    * Select N explicit statements from the graph at random.
    *
    * @param db The graph.
@@ -1210,7 +1210,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     return stmts.toArray(new SPO[stmts.size()]);
   }
 
-  /**
+  /*
    * This is a specialized test for equality in the graphs that simply compare scans on the SPO
    * index.
    *
@@ -1322,7 +1322,7 @@ public class TestTruthMaintenance extends AbstractInferenceEngineTestCase {
     assertEquals("statementCount", nexpected, nactual);
   }
 
-  /**
+  /*
    * Consumes up to max elements from the iterator and returns a {@link String} representation of
    * those elements. This is used to show the additional elements that would be visited by an
    * iterator when the other iterator is exhausted.

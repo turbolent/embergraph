@@ -7,8 +7,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 
-/**
- * The BasicSkin provides standard type wrappers to help with conversions
+/*
+* The BasicSkin provides standard type wrappers to help with conversions
  *
  * @author Martyn Cutcher
  */
@@ -105,7 +105,7 @@ public class BasicSkin implements IGenericSkin {
     final Value v = m_gpo.getValue(key);
 
     if (v instanceof Literal) {
-      return ((Literal) v).stringValue();
+      return v.stringValue();
     } else {
       return null;
     }

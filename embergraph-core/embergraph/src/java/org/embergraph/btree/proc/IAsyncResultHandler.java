@@ -28,8 +28,8 @@ import org.embergraph.service.Split;
 import org.embergraph.service.ndx.IAsynchronousWriteBufferFactory;
 import org.embergraph.service.ndx.pipeline.IndexPartitionWriteTask;
 
-/**
- * Interface for chunk-at-a-time result processing for asynchronous index writes.
+/*
+* Interface for chunk-at-a-time result processing for asynchronous index writes.
  *
  * <p>Note: For backward compatibility both {@link #aggregate(KVO[], Object, Split)} and {@link
  * IResultHandler#aggregate(Object, Split)} will be invoked by the {@link IndexPartitionWriteTask}.
@@ -44,7 +44,7 @@ public interface IAsyncResultHandler<
         R extends Object, A extends Object, O extends Object, X extends KVO<O>>
     extends IResultHandler<R, A> {
 
-  /**
+  /*
    * Method is invoked for each result and is responsible for combining the results in whatever
    * manner is meaningful for the procedure. Implementations of this method MUST be
    * <strong>thread-safe</strong> since the procedure MAY be applied in parallel when it spans more
@@ -54,5 +54,5 @@ public interface IAsyncResultHandler<
    * @param result The result from applying the procedure to a single index partition.
    * @param split The {@link Split} that generated that result.
    */
-  public void aggregateAsync(X[] chunk, R result, Split split);
+  void aggregateAsync(X[] chunk, R result, Split split);
 }

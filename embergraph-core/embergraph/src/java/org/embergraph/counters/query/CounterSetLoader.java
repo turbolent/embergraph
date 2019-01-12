@@ -37,8 +37,8 @@ import org.embergraph.counters.store.CounterSetBTree;
 import org.embergraph.journal.Journal;
 import org.xml.sax.SAXException;
 
-/**
- * Utility class to load data from XML representations of counter sets into a {@link
+/*
+* Utility class to load data from XML representations of counter sets into a {@link
  * CounterSetBTree} on a {@link Journal}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -46,7 +46,7 @@ import org.xml.sax.SAXException;
  */
 public class CounterSetLoader {
 
-  /**
+  /*
    * Reads counters from XML files into a Journal.
    *
    * @param args

@@ -25,8 +25,8 @@ import org.embergraph.journal.ITx;
 import org.embergraph.journal.TimestampUtility;
 import org.embergraph.util.httpd.Config;
 
-/**
- * Utility class provides a simple SPARQL end point with a REST API. It is intended to be used for
+/*
+* Utility class provides a simple SPARQL end point with a REST API. It is intended to be used for
  * simple deployment via an executable jar file.
  *
  * @author beebs

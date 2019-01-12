@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sail.webapp.client;
 
-/**
- * Exception indicating that GPU acceleration is not available.
+/*
+* Exception indicating that GPU acceleration is not available.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
  */

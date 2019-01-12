@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.quorum;
 
-/**
- * A type-safe enumeration for informational quorum events.
+/*
+* A type-safe enumeration for informational quorum events.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public enum QuorumEventEnum {
   CAST_VOTE,
   /** Vote for some lastCommitTime was withdrawn by a service. */
   WITHDRAW_VOTE,
-  /**
+  /*
    * A consensus has been achieved with <code>(k+1)/2</code> services voting for some
    * lastCommitTime. This event will typically be associated with an invalid quorum token since the
    * quorum token is assigned when the leader is elected and this event generally becomes visible
@@ -52,29 +52,29 @@ public enum QuorumEventEnum {
   SERVICE_JOIN,
   /** Event generated when a service leaves a quorum. */
   SERVICE_LEAVE,
-  //    /**
-  //     * Event generated when a service joins a quorum as a follower.
+  //    /*
+//     * Event generated when a service joins a quorum as a follower.
   //     */
   //    ELECTED_FOLLOWER,
-  //    /**
-  //     * Event generated when a new leader is elected, including when a quorum
+  //    /*
+//     * Event generated when a new leader is elected, including when a quorum
   //     * meets.
   //     */
   //    ELECTED_LEADER,
-  //    /**
-  //     * Event generated when the (lastValidToken,token) are atomically updated.
+  //    /*
+//     * Event generated when the (lastValidToken,token) are atomically updated.
   //     */
   //    SET_LAST_VALID_TOKEN,
-  /**
+  /*
    * Event generated when a quorum meets (aka when the lastValidToken and token are updated
    * atomically).
    */
   QUORUM_MEET,
   /** Event generated when a quorum breaks (aka when the token is cleared). */
   QUORUM_BROKE,
-  /**
+  /*
    * Event generated when a service becomes disconnected from a remote quorum (such as a zookeeper
    * ensemble).
    */
-  QUORUM_DISCONNECTED;
+  QUORUM_DISCONNECTED
 }

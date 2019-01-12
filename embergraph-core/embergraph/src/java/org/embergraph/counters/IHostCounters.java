@@ -23,8 +23,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.counters;
 
-/**
- * Additional counters that hosts can report.
+/*
+* Additional counters that hosts can report.
  *
  * @todo pageFaultsPerSec (majflt/s)
  * @todo os diskCache (dis|en)abled
@@ -50,19 +50,19 @@ public interface IHostCounters extends IRequiredHostCounters {
    * CPU
    */
 
-  /**
+  /*
    * Percentage of the time the processor is not idle that it is executing at the user level in
    * [0:1] (normalized to 100% in single CPU and SMP environments).
    */
   String CPU_PercentUserTime = CPU + ps + "% User Time";
 
-  /**
+  /*
    * Percentage of the time the processor is not idle that it is executing at the system (aka
    * kernel) level in [0:1] (normalized to 100% in single CPU and SMP environments).
    */
   String CPU_PercentSystemTime = CPU + ps + "% System Time";
 
-  /**
+  /*
    * Percentage of the time the CPU(s) were idle while the system had an outstanding IO in [0:1].
    *
    * <p>Note: The Windows platform does not appear to be able to report this counter. If it did I
@@ -75,35 +75,35 @@ public interface IHostCounters extends IRequiredHostCounters {
    * Memory
    */
 
-  /**
+  /*
    * The total amount of memory available to the host.
    *
    * @todo not collected or windows or linux.
    */
   String Memory_Bytes_Available = Memory + ps + "Bytes available";
 
-  /**
+  /*
    * The #of bytes of idle memory (vmstat, /proc/meminfo/MemFree).
    *
    * @todo not collected for windows.
    */
   String Memory_Bytes_Free = Memory + ps + "Bytes Free";
 
-  /**
+  /*
    * The #of bytes of swap space that are in available (/proc/meminfo/SwapTotal).
    *
    * @todo not collected for windows or linux.
    */
   String Memory_SwapBytesAvailable = Memory + ps + "Swap Bytes Available";
 
-  /**
+  /*
    * The #of bytes of swap space that are in use (vmstat or /proc/meminfo/SwapFree).
    *
    * @todo not collected for windows.
    */
   String Memory_SwapBytesUsed = Memory + ps + "Swap Bytes Used";
 
-  /**
+  /*
    * Faults that did not require loading a page from disk.
    *
    * @see IRequiredHostCounters#Memory_majorFaultsPerSecond
@@ -120,13 +120,13 @@ public interface IHostCounters extends IRequiredHostCounters {
   /** #of disk write operations per second. */
   String PhysicalDisk_WritesPerSec = PhysicalDisk + ps + "Writes Per Second";
 
-  /**
+  /*
    * Disk bytes per second for the host (total of bytes read per second and bytes written per
    * second).
    */
   String PhysicalDisk_BytesPerSec = PhysicalDisk + ps + "Bytes Per Second";
 
-  /**
+  /*
    * Disk operations per second for the host (total of disk reads per second and disk writes per
    * second).
    */

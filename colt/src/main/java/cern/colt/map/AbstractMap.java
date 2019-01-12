@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.map;
 
-/**
- * Abstract base class for hash maps holding objects or primitive data types such as <code>int
+/*
+* Abstract base class for hash maps holding objects or primitive data types such as <code>int
  * </code>, <code>float</code>, etc. as keys and/or values. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
@@ -26,7 +26,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
   /** The number of distinct associations in the map; its "size()". */
   protected int distinct;
 
-  /**
+  /*
    * The table capacity c=table.length always satisfies the invariant <tt>c * minLoadFactor <= s <=
    * c * maxLoadFactor</tt>, where s=size() is the number of associations currently contained. The
    * term "c * minLoadFactor" is called the "lowWaterMark", "c * maxLoadFactor" is called the
@@ -49,7 +49,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
   protected static final double defaultMaxLoadFactor = 0.5;
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected AbstractMap() {}
-  /**
+  /*
    * Chooses a new prime table capacity optimized for growing that (approximately) satisfies the
    * invariant <tt>c * minLoadFactor <= size <= c * maxLoadFactor</tt> and has at least one FREE
    * slot for the given size.
@@ -57,7 +57,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
   protected int chooseGrowCapacity(int size, double minLoad, double maxLoad) {
     return nextPrime(Math.max(size + 1, (int) ((4 * size / (3 * minLoad + maxLoad)))));
   }
-  /**
+  /*
    * Returns new high water mark threshold based on current capacity and maxLoadFactor.
    *
    * @return int the new threshold.
@@ -67,7 +67,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
         capacity - 2,
         (int) (capacity * maxLoad)); // makes sure there is always at least one FREE slot
   }
-  /**
+  /*
    * Returns new low water mark threshold based on current capacity and minLoadFactor.
    *
    * @return int the new threshold.
@@ -75,7 +75,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
   protected int chooseLowWaterMark(int capacity, double minLoad) {
     return (int) (capacity * minLoad);
   }
-  /**
+  /*
    * Chooses a new prime table capacity neither favoring shrinking nor growing, that (approximately)
    * satisfies the invariant <tt>c * minLoadFactor <= size <= c * maxLoadFactor</tt> and has at
    * least one FREE slot for the given size.
@@ -83,7 +83,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
   protected int chooseMeanCapacity(int size, double minLoad, double maxLoad) {
     return nextPrime(Math.max(size + 1, (int) ((2 * size / (minLoad + maxLoad)))));
   }
-  /**
+  /*
    * Chooses a new prime table capacity optimized for shrinking that (approximately) satisfies the
    * invariant <tt>c * minLoadFactor <= size <= c * maxLoadFactor</tt> and has at least one FREE
    * slot for the given size.
@@ -93,7 +93,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
   }
   /** Removes all (key,value) associations from the receiver. */
   public abstract void clear();
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of elements without needing to
    * allocate new internal memory. If necessary, allocates new internal memory and increases the
    * capacity of the receiver.
@@ -107,7 +107,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
    * @param minCapacity the desired minimum capacity.
    */
   public void ensureCapacity(int minCapacity) {}
-  /**
+  /*
    * Returns <tt>true</tt> if the receiver contains no (key,value) associations.
    *
    * @return <tt>true</tt> if the receiver contains no (key,value) associations.
@@ -115,7 +115,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
   public boolean isEmpty() {
     return distinct == 0;
   }
-  /**
+  /*
    * Returns a prime number which is <code>&gt;= desiredCapacity</code> and very close to <code>
    * desiredCapacity</code> (within 11% if <code>desiredCapacity &gt;= 1000</code>).
    *
@@ -125,7 +125,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
   protected int nextPrime(int desiredCapacity) {
     return PrimeFinder.nextPrime(desiredCapacity);
   }
-  /**
+  /*
    * Initializes the receiver. You will almost certainly need to override this method in subclasses
    * to initialize the hash table.
    *
@@ -148,7 +148,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
       throw new IllegalArgumentException(
           "Illegal minLoadFactor: " + minLoadFactor + " and maxLoadFactor: " + maxLoadFactor);
   }
-  /**
+  /*
    * Returns the number of (key,value) associations currently contained.
    *
    * @return the number of (key,value) associations currently contained.
@@ -156,7 +156,7 @@ public abstract class AbstractMap extends cern.colt.PersistentObject {
   public int size() {
     return distinct;
   }
-  /**
+  /*
    * Trims the capacity of the receiver to be the receiver's current size. Releases any superfluous
    * internal memory. An application can use this operation to minimize the storage of the receiver.
    *

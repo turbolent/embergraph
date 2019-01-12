@@ -49,8 +49,8 @@ import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.IBuffer;
 import org.embergraph.relation.rule.eval.pipeline.DistributedJoinTask;
 
-/**
- * The base class is extended to organize the output from one operator so in order to make it
+/*
+* The base class is extended to organize the output from one operator so in order to make it
  * available to another operator running on a different node. There are several cases which have to
  * be handled and which are identified by the {@link BOp#getEvaluationContext()}. In addition, we
  * need to handle low latency and high data volume queries somewhat differently. Except for {@link
@@ -69,7 +69,7 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
 
   private static final Logger log = Logger.getLogger(FederationChunkHandler.class);
 
-  /**
+  /*
    * FIXME Debug the NIO chunk message materialization logic (it is currently disabled by the
    * setting of the nioThreshold parameter to the constructor).
    *
@@ -82,7 +82,7 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
   public static final IChunkHandler INSTANCE =
       new FederationChunkHandler(Integer.MAX_VALUE /* nioThreshold */, false /*usePOJO*/);
 
-  /**
+  /*
    * Instance used by some test suites to avoid a dependency on the RDF data model. All messages
    * will use {@link LocalChunkMessage} which uses POJO serialization.
    */
@@ -90,7 +90,7 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
   public static final IChunkHandler TEST_INSTANCE =
       new FederationChunkHandler(Integer.MAX_VALUE /* nioThreshold */, true /*usePOJO*/);
 
-  /**
+  /*
    * The threshold above which the intermediate solutions are shipped using NIO rather than RMI.
    *
    * @see ThickChunkMessage
@@ -100,13 +100,13 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
    */
   private final int nioThreshold;
 
-  /**
+  /*
    * When <code>true</code>, the {@link LocalChunkMessage} will be used for all messages. This
    * allows the test cases to avoid RDF specific logic in the {@link IChunkMessage} serialization.
    */
   private final boolean usePOJO;
 
-  /**
+  /*
    * @param nioThreshold The threshold above which the intermediate solutions are shipped using NIO
    *     rather than RMI. This is ignored if <code>usePOJO:=true</code>.
    * @param usePOJO When <code>true</code>, the {@link LocalChunkMessage} will be used for all
@@ -126,7 +126,7 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
     this.usePOJO = usePOJO;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @todo Figure out how (or if) we will combine binding set streams emerging from concurrent tasks
@@ -157,15 +157,15 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
     switch (targetOp.getEvaluationContext()) {
       case ANY:
         {
-          /*
-           * This operator may be evaluated anywhere.
+        /*
+       * This operator may be evaluated anywhere.
            */
           return super.handleChunk(query, bopId, sinkId, chunk);
         }
       case HASHED:
         {
-          /*
-           * @todo The sink must use annotations to describe the nodes over
+        /*
+       * @todo The sink must use annotations to describe the nodes over
            * which the binding sets will be mapped and the hash function to be
            * applied. Look up those annotations and apply them to distribute
            * the binding sets across the nodes.
@@ -174,8 +174,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
         }
       case SHARDED:
         {
-          /*
-           * The sink must read or write on a shard so we map the binding sets
+        /*
+       * The sink must read or write on a shard so we map the binding sets
            * across the access path for the sink.
            *
            * @todo Set the capacity of the the "map" buffer to the size of the
@@ -210,8 +210,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
                       BlockingBuffer.DEFAULT_CONSUMER_CHUNK_TIMEOUT_UNIT);
                 }
               };
-          /*
-           * Map the binding sets over shards.
+        /*
+       * Map the binding sets over shards.
            */
           {
             //                final IAsynchronousIterator<IBindingSet[]> itr = sink
@@ -232,8 +232,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
             }
             mapper.flush();
           }
-          /*
-           * The allocation context.
+        /*
+       * The allocation context.
            *
            * @todo use (queryId, serviceId, sinkId) when the target bop is
            * high volume operator (this requires annotation by the query
@@ -242,8 +242,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
           final IAllocationContext allocationContext =
               q.getAllocationContext(new QueryContext(q.getQueryId()));
 
-          /*
-           * Generate the output chunks and notify the receivers.
+        /*
+       * Generate the output chunks and notify the receivers.
            *
            * FIXME If the output buffer has a bounded capacity then this can
            * deadlock when the buffer fills up because we are not draining the
@@ -264,8 +264,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
 
             final PartitionLocator locator = e.getKey();
 
-            /*
-             * Note: newBuffer() above creates an BlockingBuffer so this
+          /*
+       * Note: newBuffer() above creates an BlockingBuffer so this
              * cast is safe.
              */
             final IBlockingBuffer<IBindingSet[]> shardSink =
@@ -304,8 +304,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
 
             if (a.length > 0) {
 
-              /*
-               * Send message.
+            /*
+       * Send message.
                *
                * Note: This avoids sending empty chunks.
                *
@@ -332,8 +332,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
       case CONTROLLER:
         {
 
-          /*
-           * Format the binding sets onto a ByteBuffer and publish that
+        /*
+       * Format the binding sets onto a ByteBuffer and publish that
            * ByteBuffer as a manager resource for the query and notify the
            * query controller that data is available for it.
            */
@@ -351,7 +351,7 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
     }
   }
 
-  /**
+  /*
    * Create and send an {@link IChunkMessage} from some intermediate results. Various optimizations
    * are employed depending on the amount of data to be moved and whether or not the target is this
    * service.
@@ -471,8 +471,8 @@ public class FederationChunkHandler<E> extends StandaloneChunkHandler {
 
       } else {
 
-        /*
-         * Marshall the data onto direct ByteBuffer(s) and send a thin
+      /*
+       * Marshall the data onto direct ByteBuffer(s) and send a thin
          * message by RMI. The receiver will retrieve the data using NIO
          * against the ResourceService.
          */

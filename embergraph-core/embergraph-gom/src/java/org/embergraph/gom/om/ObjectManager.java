@@ -50,8 +50,8 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryException;
 
-/**
- * An {@link IObjectManager} for use with an embedded database, including JSP pages running in the
+/*
+* An {@link IObjectManager} for use with an embedded database, including JSP pages running in the
  * same webapp as the NanoSparqlServer and applications that do not expose a public web interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -64,7 +64,7 @@ public class ObjectManager extends ObjectMgrModel {
   private final boolean readOnly;
   private final IDescribeCache m_describeCache;
 
-  /**
+  /*
    * @param endpoint A SPARQL endpoint that may be used to communicate with the database.
    * @param cxn A connection to the database.
    * @throws RepositoryException
@@ -114,15 +114,15 @@ public class ObjectManager extends ObjectMgrModel {
      * because this class does not (and MUST NOT) hold the UNISOLATED
      * connection across its life cycle.
      */
-    //        /**
-    //         * Local ObjectManager can flush incrementally from the dirty list
+    //        /*
+//         * Local ObjectManager can flush incrementally from the dirty list
     //         *
     //         * A maximum size of 4000 dirty objects is a sensible default.
     //         */
     //        m_maxDirtyListSize = 4000;
   }
 
-  /**
+  /*
    * This may be used to break ACID and perform incremental eviction of dirty objects to the backing
    * store. However, the use of this method is NOT recommended as the updates will become durable
    * incrementally rather than atomically.
@@ -281,7 +281,7 @@ public class ObjectManager extends ObjectMgrModel {
     super.materializeWithDescribe(gpo);
   }
 
-  /**
+  /*
    * Attempt to add/resolve the {@link IV} for the {@link IGPO}.
    *
    * @param gpo The {@link IGPO}.
@@ -385,7 +385,7 @@ public class ObjectManager extends ObjectMgrModel {
     }
   }
 
-  /**
+  /*
    * Return an updatable connection.
    *
    * @throws RepositoryException
@@ -399,7 +399,7 @@ public class ObjectManager extends ObjectMgrModel {
     return c;
   }
 
-  /**
+  /*
    * Return a read-only connection.
    *
    * @throws RepositoryException

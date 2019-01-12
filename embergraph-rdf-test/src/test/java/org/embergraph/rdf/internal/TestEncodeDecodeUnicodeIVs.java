@@ -43,8 +43,8 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Unit tests for {@link IV}s which inline Unicode data.
+/*
+* Unit tests for {@link IV}s which inline Unicode data.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -59,7 +59,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     super(name);
   }
 
-  /**
+  /*
    * Unit test for the {@link XSDStringExtension} support for inlining <code>xsd:string</code>. This
    * approach is more efficient since the datatypeURI is implicit in the {@link IExtension} handler
    * than being explicitly represented in the inline data.
@@ -101,7 +101,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for inlining an entire URI using {@link FullyInlineURIIV}. The URI is inlined as a
    * Unicode component using {@link DTE#XSDString}. The extension bit is NOT set since we are not
    * factoring out the namespace component of the URI.
@@ -121,7 +121,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for inlining an entire URI using {@link URIExtensionIV}. The URI is inlined as a
    * combination of a {@link Vocabulary} item and a Unicode component using {@link DTE#XSDString}.
    * The extension bit is set since we are factoring out the namespace component of the URI.
@@ -164,7 +164,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for {@link FullyInlineTypedLiteralIV}. That class provides inlining of any kind of
    * {@link Literal}. However, while that class is willing to inline <code>xsd:string</code> it is
    * more efficient to handle inlining for <code>xsd:string</code> using the {@link
@@ -196,7 +196,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for {@link FullyInlineTypedLiteralIV}. That class provides inlining of any kind of
    * {@link Literal}. However, while that class is willing to inline <code>xsd:string</code> it is
    * more efficient to handle inlining for <code>xsd:string</code> using the {@link
@@ -258,7 +258,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for {@link FullyInlineTypedLiteralIV}. That class provides inlining of any kind of
    * {@link Literal}. However, while that class is willing to inline <code>xsd:string</code> it is
    * more efficient to handle inlining for <code>xsd:string</code> using the {@link
@@ -300,7 +300,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * A unit test for {@link FullyInlineTypedLiteralIV} in which we mix plain literals, language code
    * literals, and datatype literals. This verifies that they encode and decode correctly but also
    * that the unsigned byte[] ordering of the encoded keys is preserved across the different types
@@ -364,7 +364,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for {@link FullyInlineTypedLiteralIV}. That class provides inlining of any kind of
    * {@link Literal}. However, while that class is willing to inline <code>xsd:string</code> it is
    * more efficient to handle inlining for <code>xsd:string</code> using the {@link
@@ -390,7 +390,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Test for a URI broken down into namespace and local name components. The namespace component is
    * coded by setting the extension bit and placing the IV of the namespace into the extension IV
    * field. The local name is inlined as a Unicode component using {@link DTE#XSDString}.
@@ -417,7 +417,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Test for a literal broken down into datatype IV and an inline label. The datatype IV is coded
    * by setting the extension bit and placing the IV of the namespace into the extension IV field.
    * The local name is inlined as a Unicode component using {@link DTE#XSDString}.
@@ -467,7 +467,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for a fully inline representation of a URI based on a namespaceIV represented by a
    * {@link VocabURIShortIV} and a Unicode localName.
    */
@@ -521,7 +521,7 @@ public class TestEncodeDecodeUnicodeIVs extends AbstractEncodeDecodeKeysTestCase
     doComparatorTest(e);
   }
 
-  /**
+  /*
    * Unit test for a fully inline representation of a datatype Literal based on a datatypeIV
    * represented by a {@link VocabURIShortIV} and a Unicode localName.
    */

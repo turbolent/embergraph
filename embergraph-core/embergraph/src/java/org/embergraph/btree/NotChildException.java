@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.btree;
 
-/**
- * An instance of this exception is thrown when a node or leaf is not a child (or self) for some
+/*
+* An instance of this exception is thrown when a node or leaf is not a child (or self) for some
  * other node or leaf.
  *
  * @author bryan

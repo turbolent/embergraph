@@ -32,8 +32,8 @@ import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 import org.embergraph.service.ndx.NopAggregator;
 
-/**
- * Batch insert operation.
+/*
+* Batch insert operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -57,7 +57,7 @@ public class BatchInsert extends AbstractKeyArrayIndexProcedure<ResultBuffer>
     return false;
   }
 
-  /**
+  /*
    * Factory for {@link BatchInsert} procedures.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -65,13 +65,13 @@ public class BatchInsert extends AbstractKeyArrayIndexProcedure<ResultBuffer>
   public static class BatchInsertConstructor
       extends AbstractKeyArrayIndexProcedureConstructor<BatchInsert> {
 
-    /**
+    /*
      * Singleton requests the return of the old values that were overwritten in the index by the
      * operation.
      */
     public static final BatchInsertConstructor RETURN_OLD_VALUES = new BatchInsertConstructor(true);
 
-    /**
+    /*
      * Singleton does NOT request the return of the old values that were overwritten in the index by
      * the operation.
      */
@@ -107,7 +107,7 @@ public class BatchInsert extends AbstractKeyArrayIndexProcedure<ResultBuffer>
   /** De-serialization ctor. */
   public BatchInsert() {}
 
-  /**
+  /*
    * Create a batch insert operation.
    *
    * <p>Batch insert operation of N tuples presented in sorted order. This operation can be very
@@ -136,7 +136,7 @@ public class BatchInsert extends AbstractKeyArrayIndexProcedure<ResultBuffer>
     this.returnOldValues = returnOldValues;
   }
 
-  /**
+  /*
    * Applies the operator using {@link ISimpleBTree#insert(Object, Object)}
    *
    * @param ndx
@@ -160,7 +160,7 @@ public class BatchInsert extends AbstractKeyArrayIndexProcedure<ResultBuffer>
 
       final byte[] val = vals.get(i);
 
-      final byte[] old = (byte[]) ndx.insert(key, val);
+      final byte[] old = ndx.insert(key, val);
 
       if (returnOldValues) {
 

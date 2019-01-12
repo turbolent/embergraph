@@ -3,8 +3,8 @@ package org.embergraph.util.concurrent;
 import java.util.concurrent.Callable;
 import org.apache.log4j.Logger;
 
-/**
- * Class tracks a the moving average of some sampled datum.
+/*
+* Class tracks a the moving average of some sampled datum.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -34,8 +34,8 @@ public class MovingAverageTask implements Runnable {
     return average;
   }
 
-  //    /**
-  //     * Scaling factor converts nanoseconds to milliseconds.
+  //    /*
+//     * Scaling factor converts nanoseconds to milliseconds.
   //     */
   //    static protected final double scalingFactor = 1d / TimeUnit.NANOSECONDS
   //            .convert(1, TimeUnit.MILLISECONDS);
@@ -55,7 +55,7 @@ public class MovingAverageTask implements Runnable {
   /** The recommended default weight. */
   public static final double DEFAULT_WEIGHT = .2d;
 
-  /**
+  /*
    * @param name The label for log messages.
    * @param sampleTask Task that returns a sampled value.
    */
@@ -64,7 +64,7 @@ public class MovingAverageTask implements Runnable {
     this(name, sampleTask, DEFAULT_WEIGHT);
   }
 
-  /**
+  /*
    * Core impl.
    *
    * @param name The label for log messages.
@@ -87,7 +87,7 @@ public class MovingAverageTask implements Runnable {
     this.w = w;
   }
 
-  /**
+  /*
    * Compute a moving average: <code>(1 - w) * avg + w * q</code>
    *
    * @param avg The previous average and initially zero (0.0).

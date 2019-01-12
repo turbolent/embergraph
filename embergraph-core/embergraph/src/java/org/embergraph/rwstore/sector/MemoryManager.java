@@ -56,8 +56,8 @@ import org.embergraph.rwstore.IRawTx;
 import org.embergraph.rwstore.PSOutputStream;
 import org.embergraph.service.AbstractTransactionService;
 
-/**
- * The MemoryManager manages an off-heap Direct {@link ByteBuffer}. It uses the new SectorAllocator
+/*
+* The MemoryManager manages an off-heap Direct {@link ByteBuffer}. It uses the new SectorAllocator
  * to allocate slots within the address range.
  *
  * <p>The interface is designed to support efficient transfer between NIO buffers.
@@ -81,14 +81,14 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
   private int m_debugCurs = 0;
 
-  /**
+  /*
    * true iff the {@link MemoryManager} is open.
    *
    * @see BLZG-1658 MemoryManager should know when it has been closed
    */
   private final AtomicBoolean open = new AtomicBoolean(true);
 
-  /**
+  /*
    * Assert that the {@link MemoryManager} is open.
    *
    * @throws MemoryManagerClosedException unless the {@link MemoryManager} is open.
@@ -98,19 +98,19 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     if (!open.get()) throw new MemoryManagerClosedException();
   }
 
-  /**
+  /*
    * The backing pool from which direct {@link ByteBuffer}s are recruited as necessary and returned
    * when possible.
    */
   private final DirectBufferPool m_pool;
 
-  /**
+  /*
    * The set of direct {@link ByteBuffer} which are currently being managed by this {@link
    * MemoryManager} instance.
    */
   private final ArrayList<IBufferAccess> m_resources;
 
-  /**
+  /*
    * The lock used to serialize all allocation/deallocation requests. This is shared across all
    * allocation contexts to avoid lock ordering problems.
    *
@@ -129,7 +129,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
   /** The maximum #of sectors that may be allocated. */
   private final int m_maxSectors;
 
-  /**
+  /*
    * When <code>true</code> allocations will block if the memory pool is exhausted. Otherwise an
    * allocation request that occurs when there is no memory available within the pool will
    * immediately throw a {@link MemoryManagerOutOfMemory} exception.
@@ -156,7 +156,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
   /** The #of slot bytes in current allocations. */
   private final AtomicLong m_slotBytes = new AtomicLong();
 
-  /**
+  /*
    * The #of open transactions (read-only or read-write).
    *
    * <p>This is guarded by the {@link #m_allocationLock}.
@@ -165,7 +165,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
   private final PSOutputStream m_deferredFreeOut;
 
-  /**
+  /*
    * Create a new {@link MemoryManager}.
    *
    * <p>The backing {@link DirectBufferPool} may be either bounded or (effectively) unbounded. The
@@ -198,7 +198,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     this(pool, Integer.MAX_VALUE);
   }
 
-  /**
+  /*
    * Create a new {@link MemoryManager}.
    *
    * <p>The backing {@link DirectBufferPool} may be either bounded or (effectively) unbounded. The
@@ -237,7 +237,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     this(pool, sectors, true /* blocking */, null /* properties */);
   }
 
-  /**
+  /*
    * Create a new {@link MemoryManager}.
    *
    * <p>The backing {@link DirectBufferPool} may be either bounded or (effectively) unbounded. The
@@ -317,7 +317,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     releaseDirectBuffers();
   }
 
-  /**
+  /*
    * Releases the backing direct buffers.
    *
    * <p>Note: Other than {@link #finalize()}, the caller MUST hold the {@link #m_allocationLock}.
@@ -347,7 +347,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     return m_maxSectors;
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the default policy of this {@link MemoryManager} instance is to
    * block if an allocation can not be made (due to exhaustion of the maximum number of backing
    * buffers for the {@link MemoryManager} instance). Return <code>false</code> iff the allocation
@@ -373,7 +373,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     }
   }
 
-  /**
+  /*
    * The size in bytes of the backing sector. This is the upper bound on the #of bytes which may be
    * stored against a single sector.
    */
@@ -430,7 +430,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     }
   }
 
-  /**
+  /*
    * Copy the data from the source buffer to the target buffers.
    *
    * <p>Note: Per the API (and for consistency with the IRawStore API), this method has a
@@ -455,7 +455,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     return allocate(nbytes, m_blocks);
   }
 
-  /**
+  /*
    * Scan the sectors not on the free list and see if we can locate one which could service this
    * allocation request.
    */
@@ -476,7 +476,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     return null;
   }
 
-  /**
+  /*
    * Either create a new sector and drop it on the free list, find a sector with free space which
    * could be used to make the specified allocation, or block and wait for a sector to become
    * available on the free list.
@@ -494,8 +494,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
           return sector;
         }
 
-        /*
-         * We are under capacity, so allocate a new sector and add it to
+      /*
+       * We are under capacity, so allocate a new sector and add it to
          * the free list.
          */
 
@@ -532,8 +532,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
         if (blocks) {
 
-          /*
-           * We are at the maximum #of sectors.
+        /*
+       * We are at the maximum #of sectors.
            */
 
           SectorAllocator sector = scanForSectorWithFreeSpace(nbytes);
@@ -543,8 +543,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
             return sector;
           }
 
-          /*
-           * Wait for something to get freed. Once enough data is
+        /*
+       * Wait for something to get freed. Once enough data is
            * freed from some sector, that sector will be placed back
            * onto the free list.
            */
@@ -620,8 +620,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
       } else {
 
-        /**
-         * For Blob allocation call the normal allocate and retrieve the allocation address to store
+      /*
+       * For Blob allocation call the normal allocate and retrieve the allocation address to store
          * in the blob header.
          */
         int nblocks = 0;
@@ -637,8 +637,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
             final int pos = SectorAllocator.BLOB_SIZE * i;
             final int bsize = i < (nblocks - 1) ? SectorAllocator.BLOB_SIZE : nbytes - pos;
 
-            /*
-             * BLOB RECURSION
+          /*
+       * BLOB RECURSION
              */
             final long bpaddr = allocate(bsize, blocks);
             final int bprwaddr = getAllocationAddress(bpaddr);
@@ -704,16 +704,16 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
       if (size <= SectorAllocator.BLOB_SIZE) {
 
-        /*
-         * This is a simple allocation.
+      /*
+       * This is a simple allocation.
          */
 
         return new ByteBuffer[] {getBuffer(rwaddr, size)};
 
       } else {
 
-        /*
-         * This will be a BLOB, so retrieve the header, then parse to
+      /*
+       * This will be a BLOB, so retrieve the header, then parse to
          * retrieve components and assign to ByteBuffer[].
          */
 
@@ -749,7 +749,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     return MemoryManager.read(this, addr);
   }
 
-  /**
+  /*
    * Utility method to read and return the application data stored at a given address.
    *
    * @param mmgr The allocation context.
@@ -775,7 +775,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     return a;
   }
 
-  /**
+  /*
    * Given an address of a blob, determine the size of the header and create an address to support
    * direct retrieval of the header.
    *
@@ -809,7 +809,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     return out.toString();
   }
 
-  /**
+  /*
    * Return a mutable view of the user allocation.
    *
    * @param rwaddr The address.
@@ -862,7 +862,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     }
   }
 
-  /**
+  /*
    * Return the sector for the address.
    *
    * @param rwaddr The address.
@@ -888,7 +888,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     return (int) (addr >> 32L);
   }
 
-  /**
+  /*
    * Return the size of the application data for the allocation with the given address.
    *
    * @param addr The address.
@@ -953,8 +953,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
         m_userBytes.addAndGet(-size);
         m_slotBytes.addAndGet(-sector.getPhysicalSize(offset));
 
-        /*
-         * TODO if the sector is empty, release it back to the pool.
+      /*
+       * TODO if the sector is empty, release it back to the pool.
          *
          * Note: Sectors can have allocator metadata so they may not be
          * empty in terms of slot bytes even though no user data is
@@ -996,8 +996,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
 
           final long mkaddr = makeAddr(hdrbuf[hdrIndex].getInt(), blockSize);
 
-          /*
-           * BLOB RECURSION
+        /*
+       * BLOB RECURSION
            */
 
           immediateFree(mkaddr);
@@ -1281,8 +1281,8 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
   //	private long m_lastReleaseTime;
 
   private long m_lastDeferredReleaseTime = 0;
-  //	/**
-  //	 * Call made from AbstractJournal to register the cache used.  This can then
+  //	/*
+//	 * Call made from AbstractJournal to register the cache used.  This can then
   //	 * be accessed to clear entries when storage is made availabel for re-cycling.
   //	 *
   //	 * It is not safe to clear at the point of the delete request since the data
@@ -1306,7 +1306,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     }
   }
 
-  /**
+  /*
    * We need to remove entries from the historicalIndexCache for checkpoint records when the
    * allocations associated with those checkpoint records are freed.
    *
@@ -1400,7 +1400,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     return freeDeferrals(journal, m_lastDeferredReleaseTime + 1, latestReleasableTime);
   }
 
-  /**
+  /*
    * Provided with the address of a block of addresses to be freed
    *
    * @param blockAddr
@@ -1453,7 +1453,7 @@ public class MemoryManager implements IMemoryManager, ISectorManager {
     return totalFreed;
   }
 
-  /**
+  /*
    * Provided with an iterator of CommitRecords, process each and free any deferred deletes
    * associated with each.
    *

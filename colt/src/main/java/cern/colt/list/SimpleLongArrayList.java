@@ -8,14 +8,14 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.list;
 
-/**
- * Resizable list holding <code>long</code> elements; implemented with arrays; not efficient; just
+/*
+* Resizable list holding <code>long</code> elements; implemented with arrays; not efficient; just
  * to demonstrate which methods you must override to implement a fully functional list. First see
  * the <a href="package-summary.html">package summary</a> and javadoc <a
  * href="package-tree.html">tree view</a> to get the broad picture.
  */
 public class SimpleLongArrayList extends AbstractLongList {
-  /**
+  /*
    * The array buffer into which the elements of the list are stored. The capacity of the list is
    * the length of this array buffer.
    *
@@ -23,7 +23,7 @@ public class SimpleLongArrayList extends AbstractLongList {
    */
   protected long[] elements;
 
-  /**
+  /*
    * The size of the list.
    *
    * @serial
@@ -33,7 +33,7 @@ public class SimpleLongArrayList extends AbstractLongList {
   public SimpleLongArrayList() {
     this(10);
   }
-  /**
+  /*
    * Constructs a list containing the specified elements. The initial size and capacity of the list
    * is the length of the array.
    *
@@ -46,7 +46,7 @@ public class SimpleLongArrayList extends AbstractLongList {
   public SimpleLongArrayList(long[] elements) {
     elements(elements);
   }
-  /**
+  /*
    * Constructs an empty list with the specified initial capacity.
    *
    * @param initialCapacity the number of elements the receiver can hold without auto-expanding
@@ -60,7 +60,7 @@ public class SimpleLongArrayList extends AbstractLongList {
     this.elements(new long[initialCapacity]);
     size = 0;
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of elements without needing to
    * allocate new internal memory. If necessary, allocates new internal memory and increases the
    * capacity of the receiver.
@@ -70,7 +70,7 @@ public class SimpleLongArrayList extends AbstractLongList {
   public void ensureCapacity(int minCapacity) {
     elements = cern.colt.Arrays.ensureCapacity(elements, minCapacity);
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver; <b>WARNING:</b> Does not check
    * preconditions. Provided with invalid parameters this method may return invalid elements without
    * throwing any exception! <b>You should only use this method when you are absolutely sure that
@@ -82,7 +82,7 @@ public class SimpleLongArrayList extends AbstractLongList {
   protected long getQuick(int index) {
     return elements[index];
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element;
    * <b>WARNING:</b> Does not check preconditions. Provided with invalid parameters this method may
    * access invalid indexes without throwing any exception! <b>You should only use this method when
@@ -95,7 +95,7 @@ public class SimpleLongArrayList extends AbstractLongList {
   protected void setQuick(int index, long element) {
     elements[index] = element;
   }
-  /**
+  /*
    * Trims the capacity of the receiver to be the receiver's current size. An application can use
    * this operation to minimize the storage of the receiver.
    */

@@ -17,8 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test for trac725
+/*
+* Test for trac725
  *
  * <pre>
  * #select *
@@ -64,7 +64,7 @@ public class TestSubSelectFilterExist725 extends AbstractDataDrivenSPARQLTestCas
         .runTest();
   }
 
-  /**
+  /*
    * I fear that this test may not be in the right logical location. The test case was filed with
    * defect trac725, which is why the test is here; bit it seems more related to other issues.
    *

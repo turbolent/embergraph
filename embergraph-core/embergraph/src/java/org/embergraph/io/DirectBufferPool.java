@@ -20,8 +20,8 @@ import org.embergraph.journal.TemporaryRawStore;
 import org.embergraph.journal.TransientBufferStrategy;
 import org.embergraph.util.Bytes;
 
-/**
- * An instance of this class manages a JVM-wide pool of direct (aka native) {@link ByteBuffer}s.
+/*
+* An instance of this class manages a JVM-wide pool of direct (aka native) {@link ByteBuffer}s.
  * Methods are provided to acquire a {@link ByteBuffer} from the pool and to release a {@link
  * ByteBuffer} back to the pool.
  *
@@ -53,7 +53,7 @@ public class DirectBufferPool {
 
   private static final Logger log = Logger.getLogger(DirectBufferPool.class);
 
-  /**
+  /*
    * Object tracking state for allocated buffer instances. This is used to reject double-release of
    * a buffer back to the pool, which is critical.
    *
@@ -61,7 +61,7 @@ public class DirectBufferPool {
    */
   private class BufferState implements IBufferAccess {
 
-    /**
+    /*
      * The buffer instance. This is guarded by the monitor of the buffer state object (changes to
      * this field are made while holding the monitor of the {@link BufferState} object). However,
      * the field is marked as <code>volatile</code> so we can peek at it without holding the
@@ -69,19 +69,19 @@ public class DirectBufferPool {
      */
     private volatile ByteBuffer buf;
 
-    /**
+    /*
      * The stack trace where the {@link ByteBuffer} was acquired IFF DEBUG and otherwise <code>null
      * </code>.
      */
     private final Throwable allocationStack;
 
-    /**
+    /*
      * The stack trace where the {@link ByteBuffer} was released IFF DEBUG and otherwise <code>null
      * </code>. This is guarded by the monitor of the {@link BufferState} object.
      */
     private Throwable releaseStack;
 
-    /**
+    /*
      * This is set to <code>true</code> iff the buffer is released by {@link #finalize()}. In this
      * case, we do not treat an invocation of {@link #release(long, TimeUnit)} <i>after</i> the
      * finalizer has run as a double-release. (Yes, this situation can arise...).
@@ -97,7 +97,7 @@ public class DirectBufferPool {
       this.allocationStack = (DEBUG ? new RuntimeException("Allocation") : null);
     }
 
-    /**
+    /*
      * The hash code depends only on the object id (NOT the buffer's data).
      *
      * <p>Note: {@link ByteBuffer#hashCode()} is a very heavy operator whose result depends on the
@@ -108,7 +108,7 @@ public class DirectBufferPool {
       return super.hashCode();
     }
 
-    /**
+    /*
      * Equality depends only on a reference checks.
      *
      * <p>Note: {@link ByteBuffer#equals(Object)} is very heavy operator whose result depends on the
@@ -123,8 +123,8 @@ public class DirectBufferPool {
         return false;
       }
       if (this.buf == ((BufferState) o).buf) {
-        /*
-         * We have two distinct BufferState references for the same
+      /*
+       * We have two distinct BufferState references for the same
          * ByteBuffer reference. This is an error. There should be a
          * one-to-one correspondence.
          */
@@ -170,8 +170,8 @@ public class DirectBufferPool {
       synchronized (this) {
         if (buf == null) {
           if (releasedByFinalizer) {
-            /*
-             * This situation can arise.  Just return quietly.
+          /*
+       * This situation can arise.  Just return quietly.
              */
             return;
           }
@@ -187,8 +187,8 @@ public class DirectBufferPool {
         DirectBufferPool.this.release(buf, timeout, units);
         buf = null;
         if (DEBUG) {
-          /*
-           * The stack frame where the ByteBuffer was released.
+        /*
+       * The stack frame where the ByteBuffer was released.
            */
           releaseStack = new RuntimeException("ReleaseTrace");
         }
@@ -243,8 +243,8 @@ public class DirectBufferPool {
       }
       if (buf == null) return;
       if (DEBUG) {
-        /*
-         * Note: This code path WILL NOT return the buffer to the pool.
+      /*
+       * Note: This code path WILL NOT return the buffer to the pool.
          * This is deliberate. When DEBUG is true we do not permit a
          * buffer which was not correctly release to be reused.
          *
@@ -272,8 +272,8 @@ public class DirectBufferPool {
             allocationStack);
       } else {
         //                log.error("Buffer release on finalize."); // NB: NOT an error.
-        /*
-         * TODO We do not currently set this.buf = buf if we are
+      /*
+       * TODO We do not currently set this.buf = buf if we are
          * interrupted in release(buf) here, so this is not acid. But
          * maybe we should accept the memory leak on that code path?
          */
@@ -285,14 +285,14 @@ public class DirectBufferPool {
   /** The name of the buffer pool. */
   private final String name;
 
-  /**
+  /*
    * A pool of direct {@link ByteBuffer}s which may be acquired.
    *
    * <p>Note: This is NOT a weak reference collection since the JVM will leak native memory.
    */
   private final BlockingQueue<ByteBuffer> pool;
 
-  /**
+  /*
    * The number {@link ByteBuffer}s allocated (must use {@link #lock} for updates or reads to be
    * atomic). This counter is incremented each time a buffer is allocated. Since we do not free
    * buffers when they are released (to prevent an effective JVM memory leak) this counter is never
@@ -300,14 +300,14 @@ public class DirectBufferPool {
    */
   private int size = 0;
 
-  /**
+  /*
    * The #of {@link ByteBuffer}s which are currently acquired (must use {@link #lock} for updates or
    * reads to be atomic). This counter is incremented when a buffer is acquired and decremented when
    * a buffer is released.
    */
   private int acquired = 0;
 
-  /**
+  /*
    * The #of buffers leaked out of {@link BufferState#finalize()} when {@link #DEBUG} is <code>true
    * </code>.
    */
@@ -325,7 +325,7 @@ public class DirectBufferPool {
   /** Condition used to await a buffer release. */
   private final Condition bufferRelease = lock.newCondition();
 
-  /**
+  /*
    * Package private counter of the total #of acquired buffers in all pools. This is used to check
    * for memory leaks in the test suites. The value is reset before/after each test.
    */
@@ -338,7 +338,7 @@ public class DirectBufferPool {
     return name;
   }
 
-  /**
+  /*
    * The #of {@link ByteBuffer}s which are currently acquired. This counter is incremented when a
    * buffer is acquired and decremented when a buffer is released.
    */
@@ -356,7 +356,7 @@ public class DirectBufferPool {
     }
   }
 
-  /**
+  /*
    * The maximum capacity in buffers of the {@link DirectBufferPool} as specified to the
    * constructor.
    */
@@ -380,7 +380,7 @@ public class DirectBufferPool {
     }
   }
 
-  /**
+  /*
    * The capacity in bytes of the {@link ByteBuffer}s managed by this pool as specified to the
    * constructor.
    */
@@ -389,7 +389,7 @@ public class DirectBufferPool {
     return bufferCapacity;
   }
 
-  /**
+  /*
    * Options for provisioning the <em>static</em> instance of the {@link DirectBufferPool}.
    *
    * <p>Note: Since the {@link DirectBufferPool#INSTANCE} is static all of these options MUST be
@@ -403,7 +403,7 @@ public class DirectBufferPool {
    */
   public interface Options {
 
-    /**
+    /*
      * The capacity of the {@link DirectBufferPool} is the maximum #of direct {@link ByteBuffer}
      * instances that may reside in the pool (default {@value #DEFAULT_POOL_CAPACITY}).
      *
@@ -416,7 +416,7 @@ public class DirectBufferPool {
     /** The default pool capacity (no limit). */
     String DEFAULT_POOL_CAPACITY = "" + Integer.MAX_VALUE;
 
-    /**
+    /*
      * The capacity in bytes of the direct {@link ByteBuffer} instances allocated and managed by the
      * {@link DirectBufferPool} ({@link #DEFAULT_BUFFER_CAPACITY}).
      */
@@ -425,7 +425,7 @@ public class DirectBufferPool {
     /** The default capacity of the allocated buffers. */
     String DEFAULT_BUFFER_CAPACITY = "" + Bytes.megabyte32 * 1;
 
-    /**
+    /*
      * Option to use conservative assumptions about buffer release and to report allocation stack
      * traces for undesired events (double-release, never released, etc).
      */
@@ -437,7 +437,7 @@ public class DirectBufferPool {
   /** @see Options#DEBUG */
   private static final boolean DEBUG;
 
-  /**
+  /*
    * A JVM-wide pool of direct {@link ByteBuffer}s used for a variety of purposes with a default
    * {@link Options#BUFFER_CAPACITY} of <code>1 MB</code>.
    *
@@ -446,8 +446,8 @@ public class DirectBufferPool {
    */
   public static final DirectBufferPool INSTANCE;
 
-  //    /**
-  //     * A JVM-wide pool of direct {@link ByteBuffer}s with a default
+  //    /*
+//     * A JVM-wide pool of direct {@link ByteBuffer}s with a default
   //     * {@link Options#BUFFER_CAPACITY} of <code>10 MB</code>. The main use case
   //     * for the 10M buffers are multi-block IOs for the {@link IndexSegment}s.
   //     */
@@ -502,7 +502,7 @@ public class DirectBufferPool {
 
   }
 
-  /**
+  /*
    * Create a direct {@link ByteBuffer} pool.
    *
    * <p>Note: When the <i>poolSize</i> is bounded then {@link #acquire()} MAY block. This can
@@ -534,7 +534,7 @@ public class DirectBufferPool {
     pools.add(this);
   }
 
-  /**
+  /*
    * Return an {@link IBufferAccess} wrapping a direct {@link ByteBuffer}. The capacity of the
    * buffer is determined by the configuration of this pool. The position will be equal to zero, the
    * limit will be equal to the capacity, and the mark will not be set.
@@ -562,7 +562,7 @@ public class DirectBufferPool {
     }
   }
 
-  /**
+  /*
    * Return an {@link IBufferAccess} wrapping a direct {@link ByteBuffer}. The capacity of the
    * buffer is determined by the configuration of this pool. The position will be equal to zero, the
    * limit will be equal to the capacity, and the mark will not be set.
@@ -617,7 +617,7 @@ public class DirectBufferPool {
     }
   }
 
-  /**
+  /*
    * Release a direct {@link ByteBuffer} allocated by this pool back to the pool.
    *
    * @param b The buffer.
@@ -634,7 +634,7 @@ public class DirectBufferPool {
     }
   }
 
-  /**
+  /*
    * Release a direct {@link ByteBuffer} allocated by this pool back to the pool.
    *
    * @param b The buffer.
@@ -690,7 +690,7 @@ public class DirectBufferPool {
     }
   }
 
-  /**
+  /*
    * Attempts to allocate another direct {@link ByteBuffer}. If successful then it will add the
    * buffer to the {@link #pool}.
    *
@@ -708,8 +708,8 @@ public class DirectBufferPool {
 
       if (size >= poolCapacity) {
 
-        /*
-         * Wait for a free buffer since the pool is at its capacity.
+      /*
+       * Wait for a free buffer since the pool is at its capacity.
          */
 
         log.error("Pool is at capacity - waiting for a free buffer");
@@ -774,7 +774,7 @@ public class DirectBufferPool {
     return;
   }
 
-  /**
+  /*
    * Return the {@link CounterSet} for the {@link DirectBufferPool}.
    *
    * <dl>

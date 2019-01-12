@@ -16,8 +16,8 @@ import org.openrdf.sail.SailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * SailBase is an abstract Sail implementation that takes care of common sail tasks, including
+/*
+* SailBase is an abstract Sail implementation that takes care of common sail tasks, including
  * proper closing of active connections and a grace period for active connections during shutdown of
  * the store.
  *
@@ -63,13 +63,13 @@ public abstract class SailBase implements Sail {
   /** Directory to store information related to this sail in (if any). */
   private volatile File dataDir;
 
-  /**
+  /*
    * Flag indicating whether the Sail has been initialized. Sails are initialized from {@link
    * #initialize() initialization} until {@link #shutDown() shutdown}.
    */
   private volatile boolean initialized = false;
 
-  /**
+  /*
    * Lock used to synchronize the initialization state of a sail.
    *
    * <ul>
@@ -92,7 +92,7 @@ public abstract class SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Map used to track active connections and where these were acquired. The Throwable value may be
    * null in case debugging was disable at the time the connection was acquired.
    */
@@ -135,7 +135,7 @@ public abstract class SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Checks whether the Sail has been initialized. Sails are initialized from {@link #initialize()
    * initialization} until {@link #shutDown() shutdown}.
    *
@@ -160,7 +160,7 @@ public abstract class SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Do store-specific operations to initialize the store. The default implementation of this method
    * does nothing.
    */
@@ -244,14 +244,14 @@ public abstract class SailBase implements Sail {
     }
   }
 
-  /**
+  /*
    * Returns a store-specific SailConnection object.
    *
    * @return A connection to the store.
    */
   protected abstract SailConnection getConnectionInternal() throws SailException;
 
-  /**
+  /*
    * Signals to the store that the supplied connection has been closed; called by {@link
    * SailConnectionBase#close()}.
    *

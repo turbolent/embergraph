@@ -38,8 +38,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Unit tests for {@link HTree}.
+/*
+* Unit tests for {@link HTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  *     <p>TODO Work through a detailed example in which we have an elided bucket page or directory
@@ -55,7 +55,7 @@ public class TestHTree extends AbstractHTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test of basic operations using a TWO (2) bit address space inserting the key sequence
    * {1,2,3,4}.
    *
@@ -99,13 +99,13 @@ public class TestHTree extends AbstractHTreeTestCase {
       final DirectoryPage root = htree.getRoot();
       assertEquals(4, root.childRefs.length);
       final BucketPage a = (BucketPage) root.childRefs[0].get();
-      assertTrue(a == (BucketPage) root.childRefs[1].get());
-      assertTrue(a == (BucketPage) root.childRefs[2].get());
-      assertTrue(a == (BucketPage) root.childRefs[3].get());
+      assertTrue(a == root.childRefs[1].get());
+      assertTrue(a == root.childRefs[2].get());
+      assertTrue(a == root.childRefs[3].get());
       assertEquals(2, root.getGlobalDepth()); // starts at max.
       assertEquals(0, a.getGlobalDepth()); // starts at min.
 
-      /**
+      /*
        * verify preconditions.
        *
        * <pre>
@@ -141,7 +141,7 @@ public class TestHTree extends AbstractHTreeTestCase {
       AbstractBTreeTestCase.assertSameIterator(new byte[][] {}, htree.lookupAll(k1));
       AbstractBTreeTestCase.assertSameIterator(new byte[][] {}, htree.lookupAll(unused));
 
-      /**
+      /*
        * 1. Insert a tuple (0x01) and verify post-conditions. The tuple goes into an empty buddy
        * bucket with a capacity of one.
        *
@@ -182,7 +182,7 @@ public class TestHTree extends AbstractHTreeTestCase {
       // iterators.
       assertSameIterator(new byte[][] {v1}, htree.values());
 
-      /**
+      /*
        * 2. Insert a tuple (0x02). Since the root directory is only paying attention to the 2 MSB
        * bits, this will be hashed into the same buddy hash bucket as the first key. Since the
        * localDepth of the bucket page is zero, each buddy bucket on the page can only accept one
@@ -204,8 +204,8 @@ public class TestHTree extends AbstractHTreeTestCase {
       // htree.dump(Level.ALL, System.err, true/* materialize */);
       assertTrue(root == htree.getRoot());
       assertEquals(4, root.childRefs.length);
-      assertTrue(a == (BucketPage) root.childRefs[0].get());
-      assertTrue(a == (BucketPage) root.childRefs[3].get());
+      assertTrue(a == root.childRefs[0].get());
+      assertTrue(a == root.childRefs[3].get());
       assertEquals(2, root.getGlobalDepth());
       assertEquals(0, a.getGlobalDepth()); // localDepth has increased.
       assertEquals(2, a.getKeyCount());
@@ -234,7 +234,7 @@ public class TestHTree extends AbstractHTreeTestCase {
       AbstractBTreeTestCase.assertSameIterator(new byte[][] {}, htree.lookupAll(unused));
       assertSameIterator(new byte[][] {v1, v2}, htree.values());
 
-      /**
+      /*
        * 3. Insert 0x03. This forces another split.
        *
        * <pre>
@@ -250,8 +250,8 @@ public class TestHTree extends AbstractHTreeTestCase {
       assertTrue(root == htree.getRoot());
       assertEquals(4, root.childRefs.length);
       final BucketPage c = (BucketPage) root.childRefs[1].get();
-      assertTrue(a == (BucketPage) root.childRefs[0].get());
-      assertTrue(a == (BucketPage) root.childRefs[3].get());
+      assertTrue(a == root.childRefs[0].get());
+      assertTrue(a == root.childRefs[3].get());
       assertEquals(2, root.getGlobalDepth());
       assertEquals(0, a.getGlobalDepth()); // localDepth has increased.
       assertEquals(0, c.getGlobalDepth()); // localDepth is same as [a].
@@ -283,7 +283,7 @@ public class TestHTree extends AbstractHTreeTestCase {
       AbstractBTreeTestCase.assertSameIterator(new byte[][] {}, htree.lookupAll(unused));
       assertSameIterator(new byte[][] {v1, v2, v3}, htree.values());
 
-      /**
+      /*
        * 4. Insert 0x04. This goes into the same buddy bucket. The buddy bucket is now full again.
        * It is only the only buddy bucket on the page, e.g., global depth == local depth.
        *
@@ -304,7 +304,7 @@ public class TestHTree extends AbstractHTreeTestCase {
       // htree.dump(Level.ALL, System.err, true/* materialize */);
       assertTrue(root == htree.getRoot());
       assertEquals(4, root.childRefs.length);
-      assertTrue(a == (BucketPage) root.childRefs[0].get());
+      assertTrue(a == root.childRefs[0].get());
       assertEquals(2, root.getGlobalDepth());
       assertEquals(0, a.getGlobalDepth()); // localDepth has increased.
       assertEquals(4, a.getKeyCount());
@@ -345,8 +345,8 @@ public class TestHTree extends AbstractHTreeTestCase {
     }
   }
 
-  //    /**
-  //     * Unit test for
+  //    /*
+//     * Unit test for
   //     * {@link HTree#addLevel(DirectoryPage, int, int, org.embergraph.htree.HTree.AbstractPage)}
   //     * .
   //     */
@@ -441,8 +441,8 @@ public class TestHTree extends AbstractHTreeTestCase {
   //
   //    }
   //
-  //    /**
-  //     * Unit test for
+  //    /*
+//     * Unit test for
   //     * {@link HTree#addLevel(DirectoryPage, int, int, org.embergraph.htree.HTree.AbstractPage)}
   //     * .
   //     */
@@ -537,7 +537,7 @@ public class TestHTree extends AbstractHTreeTestCase {
   //
   //    }
 
-  /**
+  /*
    * A unit test which continues the scenario begun above (insert 1,2,3,4), working through the
    * structural changes required until we can finally insert the key (5) into the {@link HTree}.
    * This test uses high level insert operations when they do not cause structural changes and low
@@ -595,7 +595,7 @@ public class TestHTree extends AbstractHTreeTestCase {
 
       final DirectoryPage root = htree.getRoot();
 
-      /**
+      /*
        * Insert a series of keys to bring us to the starting point for this test. The post-condition
        * of this insert sequence is:
        *
@@ -642,7 +642,7 @@ public class TestHTree extends AbstractHTreeTestCase {
       // verify that [a] will not accept an insert.
       assertFalse(a.insert(k5, v5)); // , root/* parent */, 0/* buddyOffset */));
 
-      /**
+      /*
        * Add a directory level.
        *
        * <p>Note: Since depth(root) EQ depth(a) we can not split (a). Instead, we have to add a
@@ -667,7 +667,7 @@ public class TestHTree extends AbstractHTreeTestCase {
 
       if (log.isInfoEnabled()) log.info("after addLevel(): \n" + htree.PP());
 
-      /**
+      /*
        * FIXME Validation here is failing because the tree has actually split the new bucket page
        * (e) twice after the addLevel() in order to get all of the tuples back into the buddy
        * bucket. After all that, the tree once again has a full bucket page for (e). The test can be
@@ -720,7 +720,7 @@ public class TestHTree extends AbstractHTreeTestCase {
     }
   }
 
-  /**
+  /*
    * FIXME Write a unit test in which we insert duplicate tuples forcing the overflow of a bucket
    * page. This condition is currently detected and will cause an {@link
    * UnsupportedOperationException} to be thrown. The test will be used to work through the handling
@@ -867,7 +867,7 @@ public class TestHTree extends AbstractHTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Insert data into the BTRee, making sure that data previously inserted is found in later stages
    * when looking it up.
    */
@@ -931,7 +931,7 @@ public class TestHTree extends AbstractHTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Randomly either expends the keyValuePairs list by an element and returns the index of the last
    * list position OR returns an index of a known position (i.e., a duplicate). Duplicates will be
    * returned about every 10th call.

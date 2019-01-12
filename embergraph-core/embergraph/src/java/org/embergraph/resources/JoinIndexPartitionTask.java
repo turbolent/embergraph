@@ -42,8 +42,8 @@ import org.embergraph.service.Event;
 import org.embergraph.service.EventResource;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Task joins one or more index partitions and should be invoked when their is strong evidence that
+/*
+* Task joins one or more index partitions and should be invoked when their is strong evidence that
  * the index partitions have shrunk enough to warrant their being combined into a single index
  * partition. The index partitions MUST be partitions of the same scale-out index, MUST be siblings
  * (their left and right separators must cover a continuous interval), and MUST reside on the same
@@ -62,7 +62,7 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
 
   protected final ViewMetadata[] vmd;
 
-  /**
+  /*
    * @param resourceManager
    * @param lastCommitTime
    * @param resource The names of the index partitions to be joined. These names MUST be given in
@@ -133,8 +133,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
                   + newMetadata.getPartitionMetadata().getSourcePartitionId());
         }
 
-        /*
-         * Make a note of the expected left separator for the next
+      /*
+       * Make a note of the expected left separator for the next
          * partition. The first time through the loop this is just the
          * left separator for the 1st index partition that to be joined.
          *
@@ -142,15 +142,15 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
          */
         byte[] leftSeparator = newMetadata.getPartitionMetadata().getLeftSeparatorKey();
 
-        /*
-         * clear the partition metadata before we create the index so
+      /*
+       * clear the partition metadata before we create the index so
          * that it will not report range check errors on the data that
          * we copy in.
          */
         newMetadata.setPartitionMetadata(null);
 
-        /*
-         * Create B+Tree on which all data will be merged. This B+Tree
+      /*
+       * Create B+Tree on which all data will be merged. This B+Tree
          * is created on the _live_ journal. It will be inaccessible to
          * anyone until it is registered. Until then we will just pass
          * along the checkpoint address (obtained below).
@@ -172,8 +172,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
 
           final IIndex src = getIndex(name);
 
-          /*
-           * Validate partition of same index
+        /*
+       * Validate partition of same index
            */
 
           final IndexMetadata sourceIndexMetadata = src.getIndexMetadata();
@@ -191,8 +191,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
             throw new RuntimeException("Not an index partition: " + resources[i]);
           }
 
-          /*
-           * Validate that this is a rightSibling by checking the left
+        /*
+       * Validate that this is a rightSibling by checking the left
            * separator of the index partition to be joined against the
            * expected left separator.
            */
@@ -209,8 +209,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
 
           oldpmd[i] = pmd;
 
-          /*
-           * Copy all data into the new btree. Since we are copying
+        /*
+       * Copy all data into the new btree. Since we are copying
            * from the old journal onto the new journal [overflow :=
            * true] so that any referenced raw records are copied as
            * well.
@@ -224,8 +224,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
           leftSeparator = pmd.getRightSeparatorKey();
         }
 
-        /*
-         * Set index partition.
+      /*
+       * Set index partition.
          *
          * Note: A new index partitionId is assigned by the metadata
          * server.
@@ -263,15 +263,15 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
                 //                        , summary+" "
                 ));
 
-        /*
-         * Set the updated index metadata on the btree (required for it
+      /*
+       * Set the updated index metadata on the btree (required for it
          * to be available on reload).
          */
 
         btree.setIndexMetadata(newMetadata.clone());
 
-        /*
-         * Explicitly checkpoint the B+Tree.
+      /*
+       * Explicitly checkpoint the B+Tree.
          *
          * Note: The atomic update task will re-load the BTree from this
          * checkpoint address. This is necessary since the BTree is NOT
@@ -288,8 +288,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
 
       } finally {
 
-        /*
-         * Now that the JOIN is done we can clear our references for the
+      /*
+       * Now that the JOIN is done we can clear our references for the
          * source index partitions views.
          */
 
@@ -298,8 +298,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
 
       {
 
-        /*
-         * The array of index names on which we will need an exclusive
+      /*
+       * The array of index names on which we will need an exclusive
          * lock.
          *
          * Note: We pass in the name of the new index partition (while
@@ -319,8 +319,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
 
         System.arraycopy(result.oldnames, 0, names2, 1, result.oldnames.length);
 
-        /*
-         * The task to make the atomic updates on the live journal and the
+      /*
+       * The task to make the atomic updates on the live journal and the
          * metadata index.
          */
         final AbstractTask<Void> task =
@@ -339,7 +339,7 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
     }
   }
 
-  /**
+  /*
    * Task performs an atomic update of the index partition view definitions on the live journal and
    * the {@link MetadataIndex}, thereby putting into effect the changes made by a {@link
    * JoinIndexPartitionTask}.
@@ -359,7 +359,7 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
 
     private final Event updateEvent;
 
-    /**
+    /*
      * @param resourceManager
      * @param startTime
      * @param resource All resources (both the new index partition arising from the join and the old
@@ -390,8 +390,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
 
         if (resourceManager.isOverflowAllowed()) throw new IllegalStateException();
 
-        /*
-         * Load the btree from the live journal that already contains
+      /*
+       * Load the btree from the live journal that already contains
          * all data from the source index partitions to the merge as of
          * the lastCommitTime of the old journal.
          *
@@ -444,8 +444,8 @@ public class JoinIndexPartitionTask extends AbstractPrepareTask<JoinResult> {
                   pmd.getLeftSeparatorKey(),
                   pmd.getRightSeparatorKey());
 
-          /*
-           * Copy in all data.
+        /*
+       * Copy in all data.
            *
            * Note: [overflow := false] since the btrees are on the
            * same backing store.

@@ -43,8 +43,8 @@ import org.embergraph.resources.StaleLocatorException;
 import org.embergraph.service.AbstractScaleOutFederation;
 import org.embergraph.service.Split;
 
-/**
- * Abstract class encapsulating MOST of the logic for executing tasks corresponding to client index
+/*
+* Abstract class encapsulating MOST of the logic for executing tasks corresponding to client index
  * operations. {@link StaleLocatorException}s are handled by the recursive application of the
  * various <code>submit()</code> methods.
  *
@@ -54,7 +54,7 @@ import org.embergraph.service.Split;
  */
 public abstract class AbstractScaleOutClientIndexView2 extends AbstractScaleOutClientIndexView {
 
-  /**
+  /*
    * Create a view on a scale-out index.
    *
    * @param fed The federation containing the index.
@@ -87,7 +87,7 @@ public abstract class AbstractScaleOutClientIndexView2 extends AbstractScaleOutC
     return recursionDepth.get();
   }
 
-  /**
+  /*
    * Runs set of tasks.
    *
    * @param parallel <code>true</code> iff the tasks MAY be run in parallel.
@@ -96,7 +96,7 @@ public abstract class AbstractScaleOutClientIndexView2 extends AbstractScaleOutC
   protected abstract void runTasks(
       final boolean parallel, final ArrayList<AbstractDataServiceProcedureTask> tasks);
 
-  /**
+  /*
    * Variant uses the caller's timestamp.
    *
    * @param ts
@@ -140,7 +140,7 @@ public abstract class AbstractScaleOutClientIndexView2 extends AbstractScaleOutC
     }
   }
 
-  /**
+  /*
    * Variant uses the caller's timestamp.
    *
    * @param ts
@@ -166,7 +166,7 @@ public abstract class AbstractScaleOutClientIndexView2 extends AbstractScaleOutC
               + " will be mapped across index partitions in "
               + (parallel ? "parallel" : "sequence"));
 
-    final int poolSize = ((ThreadPoolExecutor) getThreadPool()).getCorePoolSize();
+    final int poolSize = getThreadPool().getCorePoolSize();
 
     final int maxTasksPerRequest = fed.getClient().getMaxParallelTasksPerRequest();
 
@@ -236,7 +236,7 @@ public abstract class AbstractScaleOutClientIndexView2 extends AbstractScaleOutC
               + (parallel ? "parallel" : "sequence"));
   }
 
-  /**
+  /*
    * Variant uses the caller's timestamp.
    *
    * @param ts

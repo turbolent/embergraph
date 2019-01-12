@@ -26,8 +26,8 @@ import org.openrdf.query.algebra.evaluation.QueryBindingSet;
 import org.openrdf.query.parser.ParsedUpdate;
 import org.openrdf.repository.sail.SailUpdate;
 
-/**
- * Extension API for embergraph.
+/*
+* Extension API for embergraph.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -69,8 +69,8 @@ public class EmbergraphSailUpdate extends SailUpdate implements EmbergraphSailOp
     return ((EmbergraphSailRepositoryConnection) getConnection()).getTripleStore();
   }
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     * <p>
   //     * The openrdf API here is somewhat at odds with the current LCWD for SPARQL
   //     * UPDATE. In order to align them, setting the {@link Dataset} here causes
@@ -94,8 +94,8 @@ public class EmbergraphSailUpdate extends SailUpdate implements EmbergraphSailOp
   //
   //    }
   //
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     *
   //     * @see <a href="http://www.openrdf.org/issues/browse/SES-963"> Dataset
   //     *      assignment in update sequences not properly scoped </a>
@@ -117,7 +117,7 @@ public class EmbergraphSailUpdate extends SailUpdate implements EmbergraphSailOp
     execute2();
   }
 
-  /**
+  /*
    * Execute a SPARQL UPDATE request.
    *
    * @return The timestamp of the commit point for that UPDATE.

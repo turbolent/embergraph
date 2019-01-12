@@ -27,8 +27,8 @@ import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sparql.ast.eval.AbstractDataDrivenSPARQLTestCase;
 import org.embergraph.rdf.store.AbstractTripleStore;
 
-/**
- * Data driven test suite for GeoSpatial service feature, GeoSpatial in triples vs. quads mode,
+/*
+* Data driven test suite for GeoSpatial service feature, GeoSpatial in triples vs. quads mode,
  * testing of different service configurations, as well as correctness of the GeoSpatial service
  * itself.
  *
@@ -45,7 +45,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
     super(name);
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -71,7 +71,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
         .runTest();
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -99,7 +99,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
         .runTest();
   }
 
-  /**
+  /*
    * Verify rectangle search with simple query:
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -127,7 +127,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
         .runTest();
   }
 
-  /**
+  /*
    * Test query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -155,7 +155,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
         .runTest();
   }
 
-  /**
+  /*
    * Test query
    *
    * <p>PREFIX geo: <http://www.embergraph.org/rdf/geospatial#>
@@ -184,7 +184,7 @@ public class TestGeoSpatialServiceEvaluationQuads extends AbstractDataDrivenSPAR
         .runTest();
   }
 
-  /**
+  /*
    * Test extraction of index dimensions in quads mode:
    *
    * <p>SELECT * WHERE { SERVICE geo:search { ?res geo:search "inCircle" . ?res geo:predicate

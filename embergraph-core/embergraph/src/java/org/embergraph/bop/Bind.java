@@ -2,8 +2,8 @@ package org.embergraph.bop;
 
 import java.util.Map;
 
-/**
- * Operator causes a variable to be bound to the result of its evaluation as a side-effect.
+/*
+* Operator causes a variable to be bound to the result of its evaluation as a side-effect.
  *
  * @author thompsonbry
  */
@@ -17,7 +17,7 @@ public class Bind<E> extends ImmutableBOp implements IValueExpression<E>, IBind<
     super(op);
   }
 
-  /**
+  /*
    * @param var The {@link IVariable} which will be bound to the result of evaluating the associated
    *     value expression.
    * @param expr The {@link IValueExpression} to be evaluated.
@@ -27,7 +27,7 @@ public class Bind<E> extends ImmutableBOp implements IValueExpression<E>, IBind<
     this(new BOp[] {var, expr}, null /* annotations */);
   }
 
-  /**
+  /*
    * Required shallow copy constructor.
    *
    * @param args
@@ -37,7 +37,7 @@ public class Bind<E> extends ImmutableBOp implements IValueExpression<E>, IBind<
     super(args, annotations);
   }
 
-  /**
+  /*
    * Return the variable which will be bound to the result of evaluating the associated value
    * expression.
    */

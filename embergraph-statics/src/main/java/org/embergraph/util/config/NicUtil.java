@@ -34,8 +34,8 @@ import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Level;
 
-/**
- * Utility class that provides a set of static convenience methods related to processing information
+/*
+* Utility class that provides a set of static convenience methods related to processing information
  * about the current node's Network Interface Card(s) (NICs) and associated IP address(es) and
  * hostname. Although useful in general, the methods in this utility class may be particularly
  * useful when employed from within a Jini configuration file.
@@ -57,7 +57,7 @@ public class NicUtil {
     throw new AssertionError("org.embergraph.util.NicUtil cannot be instantiated");
   }
 
-  /**
+  /*
    * Method that searches for and returns the network interface having the specified <code>name
    * </code>.
    *
@@ -85,7 +85,7 @@ public class NicUtil {
     return nic;
   }
 
-  /**
+  /*
    * Method that returns a <code>Map</code> in which the key component of each element is one of the
    * addresses of one of the network interface cards (nics) installed on the current node, and the
    * corresponding value component is the name of the associated nic to which that address is
@@ -114,7 +114,7 @@ public class NicUtil {
     return retMap;
   }
 
-  /**
+  /*
    * Method that searches for and returns an array whose elements are all the network interface(s)
    * that correspond to the specified <code>name</code>.
    *
@@ -152,7 +152,7 @@ public class NicUtil {
     return nics;
   }
 
-  /**
+  /*
    * Returns the instance of <code>InetAddress</code> that represents the i-th IP address assigned
    * to the network interface having the given <code>name</code> (where i is specified by the value
    * of the <code>index</code> parameter).
@@ -272,7 +272,7 @@ public class NicUtil {
     return fallback;
   }
 
-  /**
+  /*
    * Method that returns the <i>Media Access Control (MAC)</i> address assigned to the network
    * interface having the given <code>name</code>; returning the address as a <code>String</code> in
    * a human-readable format that consists of six groups of two hexadecimal digits, separated by
@@ -309,8 +309,8 @@ public class NicUtil {
     return macAddr;
   }
 
-  //    /**
-  //     * Three-argument version of <code>getInetAddress</code> that retrieves
+  //    /*
+//     * Three-argument version of <code>getInetAddress</code> that retrieves
   //     * the desired interface name from the given <code>Configuration</code>
   //     * parameter.
   //     */
@@ -341,7 +341,7 @@ public class NicUtil {
   // What follows are a number of versions of the getIpAddress method
   // provided for convenience.
 
-  /**
+  /*
    * Returns the <code>String</code> value of the 0-th IP address assigned to the network interface
    * or host having the given <code>name</code>, or <code>null</code> if that IP address cannot be
    * retrieved.
@@ -406,7 +406,7 @@ public class NicUtil {
     return null;
   }
 
-  /**
+  /*
    * Special-purpose convenience method that returns a <code>String</code> value representing the ip
    * address of the current node.
    *
@@ -450,7 +450,7 @@ public class NicUtil {
    */
   public static String getIpAddress(
       String systemPropertyName, String defaultNic, boolean loopbackOk)
-      throws SocketException, IOException {
+      throws IOException {
     if (systemPropertyName != null) { // system property takes precedence
       String nicName = System.getProperty(systemPropertyName);
       boolean propSet = true;
@@ -490,7 +490,7 @@ public class NicUtil {
     }
   }
 
-  /**
+  /*
    * Examines each address associated with each network interface card (nic) installed on the
    * current node, and returns the <code>String</code> value of the first such address that is
    * determined to be both <i>reachable</i> and an address type that represents an <i>IPv4</i>
@@ -625,7 +625,7 @@ public class NicUtil {
 
   private static long cacheTimeout = 60 * 1000; // ms
 
-  /**
+  /*
    * A simple cache with an expiration time and refresh on read.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -636,7 +636,7 @@ public class NicUtil {
 
     private volatile long timestamp = 0L;
 
-    /**
+    /*
      * Return the address from the cache iff one exists in the cache and the cache has not expired.
      * If the cache is expired, then it is cleared and <code>null</code> is returned. If the cache
      * is empty, then <code>null</code> is returned. If the cache is not expired and has an address,
@@ -668,7 +668,7 @@ public class NicUtil {
   private static AddrCache<String> loopbackCache = new AddrCache<String>();
   private static AddrCache<String> nonLoopbackCache = new AddrCache<String>();
 
-  public static String getDefaultIpv4Address() throws SocketException, IOException {
+  public static String getDefaultIpv4Address() throws IOException {
     return getDefaultIpv4Address(false); // localhost NOT ok
   }
 

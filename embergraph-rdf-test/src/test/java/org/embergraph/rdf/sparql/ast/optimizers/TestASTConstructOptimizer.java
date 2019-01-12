@@ -53,8 +53,8 @@ import org.openrdf.model.vocabulary.RDF;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for the {@link ASTConstructOptimizer}. This is applied for both DESCRIBE and CONSTRUCT
+/*
+* Test suite for the {@link ASTConstructOptimizer}. This is applied for both DESCRIBE and CONSTRUCT
  * queries. It generates the {@link ProjectionNode}, populating it with all of the variables in the
  * {@link ConstructNode}.
  *
@@ -71,7 +71,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for the AST rewrite of a CONSTRUCT query based on the hand-coded rewrite of a simple
    * DESCRIBE query involving an IRI and a variable bound by a WHERE clause. The IRI in this case
    * was chosen such that it would not be selected by the WHERE clause.
@@ -361,7 +361,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test for a CONSTRUCT query with NO solution modifiers. This is the base case for the next
    * several unit tests.
    *
@@ -567,7 +567,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that a CONSTRUCT query (DESCRIBE is rewritten as CONSTRUCT) with an
    * OFFSET/LIMIT pushes the original WHERE clause and the OFFSET/LIMIT into a sub-SELECT. This is
    * necessary in order for the slice to be applied to the WHERE clause rather than the triples in
@@ -773,13 +773,13 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                 null /* c */,
                 Scope.DEFAULT_CONTEXTS));
 
-        /*
-         * The OFFSET/LIMIT.
+      /*
+       * The OFFSET/LIMIT.
          */
         subqueryRoot.setSlice(new SliceNode(1L /* offset */, 1L /* limit */));
 
-        /*
-         * Projection for the sub-SELECT is the same as for the
+      /*
+       * Projection for the sub-SELECT is the same as for the
          * top-level query.
          */
         {
@@ -834,7 +834,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Unit test verifies that a CONSTRUCT query (DESCRIBE is rewritten as CONSTRUCT) with an
    * OFFSET/LIMIT and an ORDER BY pushes the original WHERE clause, the OFFSET/LIMIT, and the ORDER
    * BY into a sub-SELECT. This is necessary in order for the SLICE and the ORDER BY to be applied
@@ -1053,13 +1053,13 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
                 null /* c */,
                 Scope.DEFAULT_CONTEXTS));
 
-        /*
-         * The OFFSET/LIMIT.
+      /*
+       * The OFFSET/LIMIT.
          */
         subqueryRoot.setSlice(new SliceNode(1L /* offset */, 1L /* limit */));
 
-        /*
-         * The ORDER_BY clause.
+      /*
+       * The ORDER_BY clause.
          */
         {
           final OrderByNode orderBy = new OrderByNode();
@@ -1069,8 +1069,8 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
           subqueryRoot.setOrderBy(orderBy);
         }
 
-        /*
-         * Projection for the sub-SELECT is the same as for the
+      /*
+       * Projection for the sub-SELECT is the same as for the
          * top-level query.
          */
         {
@@ -1125,7 +1125,7 @@ public class TestASTConstructOptimizer extends AbstractASTEvaluationTestCase {
     }
   }
 
-  /**
+  /*
    * Variant on the test above verifies that a CONSTRUCT query (DESCRIBE is rewritten as CONSTRUCT)
    * with an ORDER_BY clause drops the ORDER_BY clause when OFFSET/LIMIT are not present.
    *

@@ -8,8 +8,8 @@ It is provided "as is" without expressed or implied warranty.
 */
 package cern.colt.list;
 
-/**
- * Resizable compressed list holding numbers; based on the fact that a number from a large list with
+/*
+* Resizable compressed list holding numbers; based on the fact that a number from a large list with
  * few distinct values need not take more than <tt>log(distinctValues)</tt> bits; implemented with a
  * <tt>MinMaxNumberList</tt>. First see the <a href="package-summary.html">package summary</a> and
  * javadoc <a href="package-tree.html">tree view</a> to get the broad picture.
@@ -64,7 +64,7 @@ package cern.colt.list;
 public class DistinctNumberList extends cern.colt.list.AbstractLongList {
   protected long[] distinctValues;
   protected MinMaxNumberList elements;
-  /**
+  /*
    * Constructs an empty list with the specified initial capacity and the specified distinct values
    * allowed to be hold in this list.
    *
@@ -76,7 +76,7 @@ public class DistinctNumberList extends cern.colt.list.AbstractLongList {
   public DistinctNumberList(long[] distinctValues, int initialCapacity) {
     setUp(distinctValues, initialCapacity);
   }
-  /**
+  /*
    * Appends the specified element to the end of this list.
    *
    * @param element element to be appended to this list.
@@ -94,7 +94,7 @@ public class DistinctNumberList extends cern.colt.list.AbstractLongList {
           "Element=" + element + " not contained in distinct elements.");
     return index;
   }
-  /**
+  /*
    * Ensures that the receiver can hold at least the specified number of elements without needing to
    * allocate new internal memory. If necessary, allocates new internal memory and increases the
    * capacity of the receiver.
@@ -104,7 +104,7 @@ public class DistinctNumberList extends cern.colt.list.AbstractLongList {
   public void ensureCapacity(int minCapacity) {
     elements.ensureCapacity(minCapacity);
   }
-  /**
+  /*
    * Returns the element at the specified position in the receiver; <b>WARNING:</b> Does not check
    * preconditions. Provided with invalid parameters this method may return invalid elements without
    * throwing any exception! <b>You should only use this method when you are absolutely sure that
@@ -116,7 +116,7 @@ public class DistinctNumberList extends cern.colt.list.AbstractLongList {
   public long getQuick(int index) {
     return distinctValues[(int) (elements.getQuick(index))];
   }
-  /**
+  /*
    * Removes from the receiver all elements whose index is between <code>from</code>, inclusive and
    * <code>to</code>, inclusive. Shifts any succeeding elements to the left (reduces their index).
    * This call shortens the list by <tt>(to - from + 1)</tt> elements.
@@ -130,7 +130,7 @@ public class DistinctNumberList extends cern.colt.list.AbstractLongList {
     elements.removeFromTo(from, to);
     size -= to - from + 1;
   }
-  /**
+  /*
    * Replaces the element at the specified position in the receiver with the specified element;
    * <b>WARNING:</b> Does not check preconditions. Provided with invalid parameters this method may
    * access invalid indexes without throwing any exception! <b>You should only use this method when
@@ -143,7 +143,7 @@ public class DistinctNumberList extends cern.colt.list.AbstractLongList {
   public void setQuick(int index, long element) {
     elements.setQuick(index, codeOf(element));
   }
-  /**
+  /*
    * Sets the size of the receiver without modifying it otherwise. This method should not release or
    * allocate new memory but simply set some instance variable like <tt>size</tt>.
    */
@@ -151,7 +151,7 @@ public class DistinctNumberList extends cern.colt.list.AbstractLongList {
     super.setSizeRaw(newSize);
     elements.setSizeRaw(newSize);
   }
-  /**
+  /*
    * Sets the receiver to an empty list with the specified initial capacity and the specified
    * distinct values allowed to be hold in this list.
    *
@@ -165,7 +165,7 @@ public class DistinctNumberList extends cern.colt.list.AbstractLongList {
     // java.util.Arrays.sort(this.distinctElements);
     this.elements = new MinMaxNumberList(0, distinctValues.length - 1, initialCapacity);
   }
-  /**
+  /*
    * Trims the capacity of the receiver to be the receiver's current size. An application can use
    * this operation to minimize the storage of the receiver.
    */

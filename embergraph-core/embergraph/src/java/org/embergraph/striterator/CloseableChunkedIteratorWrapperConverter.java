@@ -26,8 +26,8 @@ import cutthecrap.utils.striterators.ICloseable;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.Iterator;
 
-/**
- * A fly weight conversion that wraps a normal {@link IChunkedIterator} as an {@link
+/*
+* A fly weight conversion that wraps a normal {@link IChunkedIterator} as an {@link
  * ICloseableIterator} visiting the source iterator's chunks, i.e., this converts between an {@link
  * IChunkedIterator} and an {@link Iterator} visiting chunks.
  *

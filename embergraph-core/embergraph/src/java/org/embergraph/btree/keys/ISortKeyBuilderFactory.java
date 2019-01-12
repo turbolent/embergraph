@@ -25,8 +25,8 @@ package org.embergraph.btree.keys;
 
 import java.io.Serializable;
 
-/**
- * A factory for objects that generate unsigned byte[] sort keys.
+/*
+* A factory for objects that generate unsigned byte[] sort keys.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -35,5 +35,5 @@ import java.io.Serializable;
 public interface ISortKeyBuilderFactory<E> extends Serializable {
 
   /** Return a thread-local instance (safe for use by a single thread only). */
-  public ISortKeyBuilder<E> newInstance();
+  ISortKeyBuilder<E> newInstance();
 }

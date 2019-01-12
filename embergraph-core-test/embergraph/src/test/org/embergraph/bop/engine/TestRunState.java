@@ -50,8 +50,8 @@ import org.embergraph.bop.solutions.SliceOp;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.relation.accesspath.ThickAsynchronousIterator;
 
-/**
- * Test suite for {@link RunState}.
+/*
+* Test suite for {@link RunState}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -76,7 +76,7 @@ public class TestRunState extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Return an {@link IAsynchronousIterator} that will read a single, empty {@link IBindingSet}.
    *
    * @param bindingSet the binding set.
@@ -88,7 +88,7 @@ public class TestRunState extends TestCase2 {
         new IBindingSet[][] {new IBindingSet[] {bindingSet}});
   }
 
-  /**
+  /*
    * Turn an array into a {@link Set}.
    *
    * @param a The array.
@@ -106,7 +106,7 @@ public class TestRunState extends TestCase2 {
     return s;
   }
 
-  /**
+  /*
    * Turn an array into a {@link Set}.
    *
    * @param a The array.
@@ -124,7 +124,7 @@ public class TestRunState extends TestCase2 {
     return s;
   }
 
-  /**
+  /*
    * Turn two correlated arrays into a {@link Map}.
    *
    * @param ids The keys.
@@ -145,7 +145,7 @@ public class TestRunState extends TestCase2 {
     return m;
   }
 
-  /**
+  /*
    * Turn two correlated arrays into a {@link Map}.
    *
    * @param ids The keys.
@@ -166,7 +166,7 @@ public class TestRunState extends TestCase2 {
     return m;
   }
 
-  /**
+  /*
    * Turn two correlated arrays into a {@link Map} associating {@link Integer} keys with {@link
    * Set}s. The 2nd array is two dimension and specifies the set of values for each entry in the
    * {@link Map}.
@@ -245,10 +245,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query = startOp;
 
@@ -278,10 +276,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query = startOp;
 
@@ -340,10 +336,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(PipelineOp.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(PipelineOp.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp join1Op =
         new MockPipelineOp(new BOp[] {startOp}, new NV(PipelineOp.Annotations.BOP_ID, joinId1));
@@ -481,7 +475,7 @@ public class TestRunState extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link RunState#getOperatorRunState(int)} when some operators specify the {@link
    * PipelineOp.Annotations#LAST_PASS} annotation.
    *
@@ -499,10 +493,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(PipelineOp.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(PipelineOp.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp join1Op =
         new MockPipelineOp(new BOp[] {startOp}, new NV(PipelineOp.Annotations.BOP_ID, joinId1));
@@ -732,7 +724,7 @@ public class TestRunState extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for {@link RunState#getOperatorRunState(int)} when some operators require at-once
    * evaluation.
    *
@@ -750,10 +742,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(PipelineOp.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(PipelineOp.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp join1Op =
         new MockPipelineOp(new BOp[] {startOp}, new NV(PipelineOp.Annotations.BOP_ID, joinId1));
@@ -983,7 +973,7 @@ public class TestRunState extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Very simple unit test for the {@link RunState} API. A query with a single {@link StartOp}
    * operator is created and the {@link RunState} for that query is directly manipulated in
    * accordance with a simple evaluation schedule for the query (startQuery, startOp, haltOp,
@@ -1005,10 +995,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query = startOp;
 
@@ -1089,7 +1077,7 @@ public class TestRunState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Run a two operator query where the first operator produces a single output message and the
    * second operator consumes that message.
    *
@@ -1109,19 +1097,15 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp otherOp =
         new StartOp(
             new BOp[] {startOp},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, otherId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, otherId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query = otherOp;
 
@@ -1243,7 +1227,7 @@ public class TestRunState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test verifies that attempting to start a query twice is an error.
    *
    * @throws TimeoutException
@@ -1263,10 +1247,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query = startOp;
 
@@ -1313,7 +1295,7 @@ public class TestRunState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test for correct interpretation of a deadline. There are a series of deadline tests which
    * verify that the deadline is detected by the various action methods (startQuery, startOp,
    * haltOp). For this test, the deadline should be recognized by {@link
@@ -1336,10 +1318,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query = startOp;
 
@@ -1391,7 +1371,7 @@ public class TestRunState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test for correct interpretation of a deadline. There are a series of deadline tests which
    * verify that the deadline is detected by the various action methods (startQuery, startOp,
    * haltOp). For this test, the deadline should be recognized by {@link
@@ -1414,10 +1394,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query = startOp;
 
@@ -1477,7 +1455,7 @@ public class TestRunState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit test for correct interpretation of a deadline. There are a series of deadline tests which
    * verify that the deadline is detected by the various action methods (startQuery, startOp,
    * haltOp). For this test, the deadline should recognized by {@link
@@ -1500,10 +1478,8 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query = startOp;
 
@@ -1591,7 +1567,7 @@ public class TestRunState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  /**
+  /*
    * Unit tests for an operator which requests a final evaluation pass.
    *
    * @see PipelineOp.Annotations#LAST_PASS
@@ -1611,30 +1587,24 @@ public class TestRunState extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp otherOp =
         new StartOp(
             new BOp[] {startOp},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, otherId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, otherId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp orderOp =
         new StartOp(
             new BOp[] {otherOp},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, orderId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.LAST_PASS, true),
-                  new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, orderId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.LAST_PASS, true),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1)));
 
     final PipelineOp query = orderOp;
 
@@ -1869,8 +1839,8 @@ public class TestRunState extends TestCase2 {
     assertSameState(expected, actual);
   }
 
-  //    /**
-  //     * Unit tests for an operator which requests a final evaluation pass but
+  //    /*
+//     * Unit tests for an operator which requests a final evaluation pass but
   //     * which was never triggered during normal evaluation. The final evaluation
   //     * pass is still triggered for such cases.
   //     *
@@ -2089,8 +2059,8 @@ public class TestRunState extends TestCase2 {
   //
   //    }
   //
-  //    /**
-  //     * FIXME Write unit tests for the last pass invocation on a cluster for
+  //    /*
+//     * FIXME Write unit tests for the last pass invocation on a cluster for
   //     * sharded or hash partitioned operators. These tests need to verify that
   //     * the {@link RunState} expects the correct number of last pass invocations
   //     * (on for each shard or service on which the query was started).
@@ -2160,7 +2130,7 @@ public class TestRunState extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Compare two maps whose keys are {@link Integer}s and whose values are {@link AtomicLong}s.
    *
    * @param expected
@@ -2172,7 +2142,7 @@ public class TestRunState extends TestCase2 {
     assertEquals("", expected, actual);
   }
 
-  /**
+  /*
    * Compare two maps whose keys are {@link Integer}s and whose values are {@link AtomicLong}s.
    *
    * @param expected
@@ -2219,7 +2189,7 @@ public class TestRunState extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Compare two maps whose keys are {@link Integer}s.
    *
    * @param expected
@@ -2230,7 +2200,7 @@ public class TestRunState extends TestCase2 {
     assertEquals("", expected, actual);
   }
 
-  /**
+  /*
    * Compare two maps whose keys are {@link Integer}s.
    *
    * @param expected

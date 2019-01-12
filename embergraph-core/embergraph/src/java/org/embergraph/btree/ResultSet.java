@@ -51,8 +51,8 @@ import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.IDataService;
 import org.embergraph.util.BytesUtil;
 
-/**
- * An object used to stream key scan results back to the client.
+/*
+* An object used to stream key scan results back to the client.
  *
  * <p>Note: The {@link IRangeQuery} bit flags may be used to indicate which data and metadata are
  * returned. If the corresponding data was not requested then the access methods for that data will
@@ -101,7 +101,7 @@ public class ResultSet implements ILeafData, Externalizable {
   private long minimumVersionTimestamp;
   private long maximumVersionTimestamp;
 
-  /**
+  /*
    * <code>null</code> unless delete markers were enabled for the source index. When non-<code>null
    * </code>, a ONE (1) means that the corresponding tuple was deleted while a ZERO (0) means that
    * the corresponding tuple was NOT deleted.
@@ -118,7 +118,7 @@ public class ResultSet implements ILeafData, Externalizable {
 
   private long commitTime;
 
-  /**
+  /*
    * Set automatically based on the first visited {@link ITuple}. By setting this value lazily, the
    * {@link ITupleSerializer} can be overridden by an {@link ITupleFilter} chain. For example, the
    * logical row scan for the SparseRowStore does this when it converts between the sparse row
@@ -136,7 +136,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return ntuples;
   }
 
-  /**
+  /*
    * True iff the iterator exhausted the available keys such that no more results would be available
    * if you formed the successor of the {@link #lastKey}.
    */
@@ -145,7 +145,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return exhausted;
   }
 
-  /**
+  /*
    * The last key visited by the iterator <em>regardless</em> of the filter imposed -or- <code>null
    * </code> iff no keys were visited by the iterator for the specified key range.
    *
@@ -156,8 +156,8 @@ public class ResultSet implements ILeafData, Externalizable {
     return lastKey;
   }
 
-  //    /**
-  //     * The next key that should be used to retrieve keys and/or values starting
+  //    /*
+//     * The next key that should be used to retrieve keys and/or values starting
   //     * from the first possible successor of the {@link #getLastKey()} visited by
   //     * the iterator in this operation (the successor is formed by appending a
   //     * <code>nul</code> byte to the {@link #getLastKey()}).
@@ -178,7 +178,7 @@ public class ResultSet implements ILeafData, Externalizable {
   //
   //    }
 
-  /**
+  /*
    * The {@link ITupleSerializer} that should be used to de-serialize the tuples in the {@link
    * ResultSet}.
    */
@@ -187,7 +187,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return tupleSerializer;
   }
 
-  /**
+  /*
    * Return the keys.
    *
    * @throws UnsupportedOperationException if the keys were not retrieved.
@@ -199,7 +199,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return keys;
   }
 
-  /**
+  /*
    * Return the values.
    *
    * @throws UnsupportedOperationException if the values were not retrieved.
@@ -224,7 +224,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return sourceIndices[index];
   }
 
-  /**
+  /*
    * Return the commitTime of the index view from which this result set was read. This may be used
    * to force a {@link ITx#UNISOLATED} or {@link ITx#READ_COMMITTED} chunked iterator to produce a
    * consistent view by issuing continuation queries for the commitTime that was returned by the
@@ -237,7 +237,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return commitTime;
   }
 
-  /**
+  /*
    * Return the ordered array of sources from which the iterator read and the {@link ResultSet} was
    * populated.
    *
@@ -250,7 +250,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return sources;
   }
 
-  /**
+  /*
    * The value of the <i>limit</i> specified to the ctor. This is the dimension of the internal
    * arrays used to buffer the data for the tuples.
    *
@@ -263,14 +263,14 @@ public class ResultSet implements ILeafData, Externalizable {
 
   private transient int limit;
 
-  /**
+  /*
    * The {@link IndexMetadata}.
    *
    * <p>Note: This field is transient - it does not get (de-)serialized.
    */
   private transient IndexMetadata indexMetadata;
 
-  /**
+  /*
    * Setup the internal buffers.
    *
    * @param limit The maximum #of tuples that will be materialized. Use (-limit) for a soft limit.
@@ -328,9 +328,9 @@ public class ResultSet implements ILeafData, Externalizable {
               + ", sendVals="
               + sendVals
               + ", deleteMarkers="
-              + (deleteMarkers != null ? true : false)
+              + (deleteMarkers != null)
               + ", timestamps="
-              + (versionTimestamps != null ? true : false)
+              + (versionTimestamps != null)
               + ", #sources="
               + sources.length);
     }
@@ -393,7 +393,7 @@ public class ResultSet implements ILeafData, Externalizable {
     }
   }
 
-  /**
+  /*
    * Notify that the iterator is done and communicate metadata back to the client about whether or
    * not a continuation query should be issued against this index partition.
    *
@@ -453,9 +453,9 @@ public class ResultSet implements ILeafData, Externalizable {
               + ", sendVals="
               + sendVals
               + ", deleteMarkers="
-              + (deleteMarkers != null ? true : false)
+              + (deleteMarkers != null)
               + ", timestamps="
-              + (versionTimestamps != null ? true : false)
+              + (versionTimestamps != null)
               + ", commitTime="
               + commitTime
               + ", lastKey="
@@ -470,7 +470,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return ntuples >= limit;
   }
 
-  /**
+  /*
    * Copies the data from the tuple into the internal buffers.
    *
    * @param tuple The tuple.
@@ -521,7 +521,7 @@ public class ResultSet implements ILeafData, Externalizable {
     ntuples++;
   }
 
-  /**
+  /*
    * <code>true</code> once {@link #init(int)} has been called and until {@link #done(byte[])} is
    * called.
    */
@@ -593,8 +593,8 @@ public class ResultSet implements ILeafData, Externalizable {
 
       } else {
 
-        /*
-         * Wrap the coded the keys.
+      /*
+       * Wrap the coded the keys.
          */
 
         // the byte length of the coded keys.
@@ -635,8 +635,8 @@ public class ResultSet implements ILeafData, Externalizable {
 
       } else {
 
-        /*
-         * Wrap the coded the values.
+      /*
+       * Wrap the coded the values.
          */
 
         // the byte length of the coded values.
@@ -886,7 +886,7 @@ public class ResultSet implements ILeafData, Externalizable {
   /** Deserialization constructor. */
   public ResultSet() {}
 
-  /**
+  /*
    * The basic approach is:
    *
    * <ol>
@@ -922,7 +922,7 @@ public class ResultSet implements ILeafData, Externalizable {
 
   }
 
-  /**
+  /*
    * Constructor used to populate the {@link ResultSet} directly from an iterator.
    *
    * <p>Note: The <i>itr</i> provided to this method MUST be created with {@link IRangeQuery#KEYS}
@@ -953,8 +953,8 @@ public class ResultSet implements ILeafData, Externalizable {
 
       if (tupleSerializer == null) {
 
-        /*
-         * Set lazily in case the ITupleSerializer was overridden by a
+      /*
+       * Set lazily in case the ITupleSerializer was overridden by a
          * filter chain that converts the object type of the elements
          * serialized within the tuple. For example, the logical row
          * scan for the SparseRowStore does this when it converts
@@ -1030,7 +1030,7 @@ public class ResultSet implements ILeafData, Externalizable {
 
     assert rangeCheckIndex(index);
 
-    return deleteMarkers[index] == 0 ? false : true;
+    return deleteMarkers[index] != 0;
   }
 
   public final int getKeyCount() {
@@ -1043,8 +1043,8 @@ public class ResultSet implements ILeafData, Externalizable {
     return ntuples;
   }
 
-  //    /**
-  //     * The #of tuples visited by the iterator.
+  //    /*
+//     * The #of tuples visited by the iterator.
   //     * <p>
   //     * Note: This is is the same as the values returned by
   //     * {@link #getKeyCount()} or {@link #getValueCount()}. It DOES NOT report
@@ -1057,7 +1057,7 @@ public class ResultSet implements ILeafData, Externalizable {
   //
   //    }
 
-  /**
+  /*
    * Yes (this data structure logically corresponds to a leaf since it implements the {@link
    * ILeafData} API).
    */
@@ -1072,7 +1072,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return true;
   }
 
-  /**
+  /*
    * @todo The {@link ResultSet} is not coded while it is being generated, but it is coded when it
    *     is deserialized (at present, only the keys and values remain coded during deserialization).
    */
@@ -1081,7 +1081,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return false;
   }
 
-  /**
+  /*
    * FIXME If we extend {@link DefaultLeafCoder} or implement "ResultSetCoder" then we can really
    * adhere to these semantics.
    */
@@ -1122,7 +1122,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return maximumVersionTimestamp;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This implementation always returns {@link IRawStore#NULL} since raw records have
@@ -1132,7 +1132,7 @@ public class ResultSet implements ILeafData, Externalizable {
     return IRawStore.NULL;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: This implementation always returns <code>false</code> since raw records have already
@@ -1143,8 +1143,8 @@ public class ResultSet implements ILeafData, Externalizable {
     return false;
   }
 
-  //    /**
-  //     * FIXME Remove. This is for debugging.
+  //    /*
+//     * FIXME Remove. This is for debugging.
   //     */
   //    private static final boolean writebits = false;
 

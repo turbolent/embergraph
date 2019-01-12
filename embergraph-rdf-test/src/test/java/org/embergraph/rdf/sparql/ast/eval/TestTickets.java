@@ -34,8 +34,8 @@ import org.embergraph.rdf.sparql.ast.StatementPatternNode;
 import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 
-/**
- * Test suite for tickets at <href a="http://sourceforge.net/apps/trac/embergraph"> trac </a>.
+/*
+* Test suite for tickets at <href a="http://sourceforge.net/apps/trac/embergraph"> trac </a>.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -491,7 +491,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
   }
   */
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -682,7 +682,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
             )
         .runTest();
   }
-  /**
+  /*
    *
    *
    * <pre>
@@ -779,7 +779,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/806>Incorrect AST generated for
    *     OPTIONAL { SELECT }</a>
    */
@@ -806,7 +806,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Original test case associated with ticket 832.
    *
    * @throws Exception
@@ -821,7 +821,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Propagation of named graph specification inside subqueries, simple one level propagation.
    *
    * @throws Exception
@@ -836,7 +836,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Propagation of named graph specifications inside subqueries, advanced two-level propagation.
    *
    * @throws Exception
@@ -851,7 +851,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Propagation of named graph specifications inside FILTER NOT EXISTS clauses, as reported in bug
    * #792/#888
    *
@@ -867,7 +867,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Propagation of named graph specifications inside FILTER NOT EXISTS clauses, as reported in bug
    * #792/#888 (inverse test)
    *
@@ -883,7 +883,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Propagation of named graph specifications inside FILTER EXISTS clauses, as reported in bug
    * #792/#888 (associated test)
    *
@@ -899,7 +899,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Propagation of named graph specifications inside FILTER EXISTS clauses, as reported in bug
    * #792/#888 (associated test)
    *
@@ -915,7 +915,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BIND + UNION + OPTIONAL combination fails, as reported in bug #1071 (associated test)
    *
    * @throws Exception
@@ -930,7 +930,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BIND + UNION + OPTIONAL combination fails, as reported in bug #1071 (associated test)
    *
    * @throws Exception
@@ -945,7 +945,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BIND + UNION + OPTIONAL combination fails, as reported in bug #1071 (associated test)
    *
    * @throws Exception
@@ -960,7 +960,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BIND + UNION + OPTIONAL combination fails, as reported in bug #1071 (associated test)
    *
    * @throws Exception
@@ -975,7 +975,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BIND + UNION + OPTIONAL combination fails, as reported in bug #1071 (associated test)
    *
    * @throws Exception
@@ -990,7 +990,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BIND + UNION + OPTIONAL combination fails, as reported in bug #1071 (associated test)
    *
    * @throws Exception
@@ -1005,7 +1005,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BIND + UNION + OPTIONAL combination fails, as reported in bug #1071 (associated test)
    *
    * @throws Exception
@@ -1020,7 +1020,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BIND + UNION + OPTIONAL combination fails, as reported in bug #1071 (associated test)
    *
    * @throws Exception
@@ -1035,7 +1035,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BIND + UNION + OPTIONAL combination fails, as reported in bug #1071 (associated test)
    *
    * @throws Exception
@@ -1050,7 +1050,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/835">Query solutions are
    *     duplicated and increase by adding graph patterns</a>
    */
@@ -1064,7 +1064,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/835">Query solutions are
    *     duplicated and increase by adding graph patterns</a>
    */
@@ -1078,7 +1078,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/835">Query solutions are
    *     duplicated and increase by adding graph patterns</a>
    */
@@ -1092,7 +1092,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/835">Query solutions are
    *     duplicated and increase by adding graph patterns</a>. Related test case using a complex
    *     join group instead of subquery.
@@ -1107,7 +1107,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Covering GRAPH ?x {}
    *
    * @see <a href="http://trac.bigdata.com/ticket/709">select ?g { Graph ?g {} } incorrect</a>
@@ -1124,7 +1124,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Covering GRAPH <uri> {} with in dictionary existing and matching URI
    *
    * @see <a href="http://trac.bigdata.com/ticket/429">Optimization for GRAPH uri {} and GRAPH ?foo
@@ -1141,7 +1141,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
     //       ).runTest();
   }
 
-  /**
+  /*
    * Covering GRAPH <uri> {} with non-existing and (thus) non-matching URI
    *
    * @see <a href="http://trac.bigdata.com/ticket/429">Optimization for GRAPH uri {} and GRAPH ?foo
@@ -1157,7 +1157,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Covering GRAPH <uri> {} with in dictionary existing but non-matching URI
    *
    * @see <a href="http://trac.bigdata.com/ticket/429">Optimization for GRAPH uri {} and GRAPH ?foo
@@ -1173,7 +1173,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Nested OPTIONAL-BIND construct
    *
    * @throws Exception
@@ -1188,7 +1188,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Nested OPTIONAL-BIND construct, advanced
    *
    * @throws Exception
@@ -1203,7 +1203,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Similiar to 933a, but with statement patterns instead of BIND clause.
    *
    * @throws Exception
@@ -1218,7 +1218,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Similiar to 933b, but with statement patterns instead of BIND clause.
    *
    * @throws Exception
@@ -1233,7 +1233,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Optional translation approach issues mentioned in ticket #933.
    *
    * @see <a href="http://trac.bigdata.com/ticket/801">Adding Optional removes solutions</a>.
@@ -1248,7 +1248,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * {@link NotMaterializedException} in combination with LET expressions.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1331">Duplicate LET expression leading to
@@ -1264,7 +1264,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * {@link NotMaterializedException} in combination with LET expressions.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1331">Duplicate LET expression leading to
@@ -1280,7 +1280,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Double nesting of FILTER NOT EXISTS.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1281">FILTER FILTER != not working</a>
@@ -1295,7 +1295,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Double nesting of FILTER NOT EXISTS.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1281">FILTER FILTER != not working</a>
@@ -1310,7 +1310,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * DistinctTermScanOp is not retrieving all data.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1346">DistinctTermScanOp is not retrieving
@@ -1327,7 +1327,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * DistinctTermScanOp is not retrieving all data.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1346">DistinctTermScanOp is not retrieving
@@ -1344,7 +1344,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * DistinctTermScanOp is not retrieving all data.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1346">DistinctTermScanOp is not retrieving
@@ -1361,7 +1361,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * DistinctTermScanOp is not retrieving all data.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1346">DistinctTermScanOp is not retrieving
@@ -1378,7 +1378,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * DistinctTermScanOp is not retrieving all data.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1346">DistinctTermScanOp is not retrieving
@@ -1395,7 +1395,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * DistinctTermScanOp is not retrieving all data.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1346">DistinctTermScanOp is not retrieving
@@ -1412,7 +1412,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Placement of filters in presence of other FILTER NOT EXISTS clauses.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1284">optional / filter ! bound
@@ -1428,7 +1428,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Placement of filters in presence of other FILTER NOT EXISTS clauses.
    *
    * @see <a href="http://jira.blazegraph.com/browse/BLZG-1284">optional / filter ! bound
@@ -1444,7 +1444,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unsound translation of FILTER (NOT) EXISTS.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1460,7 +1460,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unsound translation of FILTER (NOT) EXISTS.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1476,7 +1476,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unsound translation of FILTER (NOT) EXISTS.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1492,7 +1492,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Unsound translation of FILTER (NOT) EXISTS.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1508,7 +1508,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Translation of complex FILTER expressions.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1524,7 +1524,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Translation of complex FILTER expressions.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1540,7 +1540,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Translation of complex FILTER expressions.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1556,7 +1556,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Translation of complex FILTER expressions.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1572,7 +1572,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Translation of complex FILTER expressions.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1588,7 +1588,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Translation of complex FILTER expressions.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1604,7 +1604,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Translation of complex FILTER expressions.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1620,7 +1620,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Translation of complex FILTER expressions.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1021">optimizer = None and FILTER EXISTS
@@ -1636,7 +1636,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Filter Not Exists RC1 Broken.
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1380">Filter Not Exists RC1 Broken</a>
@@ -1651,7 +1651,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1300">SUM(DISTINCT $a) does not take
    *     DISTINCT into account</a>
    */
@@ -1665,7 +1665,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * * does not include var only set in values
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1113">* does not include var only set in
@@ -1681,7 +1681,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * * does not include var only set in values
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1113">* does not include var only set in
@@ -1697,7 +1697,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * * does not include var only set in values
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1113">* does not include var only set in
@@ -1713,7 +1713,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * * does not include var only set in values
    *
    * @see <a href="https://jira.blazegraph.com/browse/BLZG-1113">* does not include var only set in
@@ -1849,7 +1849,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Query having *no* bottom-up issues.
    *
    * @throws Exception
@@ -1864,7 +1864,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Query having bottom-up issues.
    *
    * @throws Exception
@@ -1879,7 +1879,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Same as 1463a, just nested into subquery.
    *
    * @throws Exception
@@ -1894,7 +1894,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Same as 1463b, just nested into subquery.
    *
    * @throws Exception
@@ -1909,7 +1909,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1627: minus fails when preceded by property path.
    *
    * @throws Exception
@@ -1924,7 +1924,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1627b: minus fails when preceded by property path. Variant of the query where MINUS is
    * indeed eliminated.
    *
@@ -1940,7 +1940,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1627c: minus fails when preceded by property path - variant of 1627a with different
    * style of property path.
    *
@@ -1956,7 +1956,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1627d: minus fails when preceded by property path - variant of 1627d with different
    * style of property path.
    *
@@ -1972,7 +1972,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1498: Query hint optimizer:None ignored for property path queries. This is related to
    * ticket 1627, caused by appending property path decompositions at the end. It has been fixed
    * along the lines with the previous one.
@@ -1990,7 +1990,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
                 )
             .runTest();
 
-    /**
+    /*
      * We assert that, in the optimized AST and given the input
      *
      * <p>SELECT (count(*) as ?c) WHERE { hint:Query hint:optimizer "None" . ?s
@@ -2015,7 +2015,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
     assertTrue(obj.isConstant());
   }
 
-  /**
+  /*
    * Ticket 1648: proper handling of join constraints in merge join.
    *
    * @throws Exception
@@ -2030,7 +2030,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1648: proper handling of join constraints in merge join.
    *
    * @throws Exception
@@ -2060,7 +2060,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1524: MINUS being ignored. Analogous test case for OPTIONAL case.
    *
    * @throws Exception
@@ -2075,7 +2075,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (analytic mode).
    *
    * @throws Exception
@@ -2090,7 +2090,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (non-analytic equivalent).
    *
    * @throws Exception
@@ -2105,7 +2105,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (non-analytic equivalent).
    *
    * @throws Exception
@@ -2120,7 +2120,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (analytic mode).
    *
    * @throws Exception
@@ -2135,7 +2135,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (non-analytic equivalent).
    *
    * @throws Exception
@@ -2150,7 +2150,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (analytic mode).
    *
    * @throws Exception
@@ -2165,7 +2165,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (non-analytic equivalent).
    *
    * @throws Exception
@@ -2180,7 +2180,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (analytic mode).
    *
    * @throws Exception
@@ -2195,7 +2195,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (non-analytic equivalent).
    *
    * @throws Exception
@@ -2210,7 +2210,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 611: Mock IV / TermId hashCode()/equals() problems (analytic mode).
    *
    * @throws Exception
@@ -2225,7 +2225,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service with literal in object
    * position (analytic version). Related to BLZG-611.
    *
@@ -2241,7 +2241,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service, with literal in
    * object position (non-analytic equivalent). Related to BLZG-611.
    *
@@ -2256,7 +2256,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
             )
         .runTest();
   }
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service with URI in object
    * position (analytic version). Related to BLZG-611.
    *
@@ -2272,7 +2272,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service, with URI in object
    * position (non-analytic equivalent). Related to BLZG-611.
    *
@@ -2288,7 +2288,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (analytic mode).
    * Version with MINUS. Related to BLZG-611.
    *
@@ -2304,7 +2304,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (non-analytic
    * equivalent). Version with MINUS. Related to BLZG-611.
    *
@@ -2320,7 +2320,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (analytic mode).
    * Version with URI where FILTER removes element. Related to BLZG-611.
    *
@@ -2336,7 +2336,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (non-analytic
    * equivalent). Version with URI where FILTER removes element. Related to BLZG-611.
    *
@@ -2352,7 +2352,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (analytic mode).
    * Version with literal where FILTER removes element. Related to BLZG-611.
    *
@@ -2368,7 +2368,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (non-analytic
    * equivalent). Version with literal where FILTER removes element. Related to BLZG-611.
    *
@@ -2384,7 +2384,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (analytic
    * mode).Version with literal where FILTER does not apply because of datatype in literal. Related
    * to BLZG-611.
@@ -2401,7 +2401,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (non-analytic
    * equivalent). Version with literal where FILTER does not apply because of datatype in literal.
    * Related to BLZG-611.
@@ -2418,7 +2418,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (analytic
    * mode).Version with literal where FILTER applies because of datatype in literal. Related to
    * BLZG-611.
@@ -2435,7 +2435,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket 1643: DELETE does not delete properly with Wikidata Query service (non-analytic
    * equivalent). Version with literal where FILTER applies because of datatype in literal. Related
    * to BLZG-611.
@@ -2452,7 +2452,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1683: Required property relationName for HTreeDistinctBindingSetsOp (analytic version).
    */
   public void test_ticket_1683a() throws Exception {
@@ -2465,7 +2465,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1683: Required property relationName for HTreeDistinctBindingSetsOp (non-analytic
    * version).
    */
@@ -2539,7 +2539,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1267a: Unable to bind result of EXISTS operator -> query with exists evaluating to true
    */
   public void test_ticket_1267a() throws Exception {
@@ -2553,7 +2553,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1267b: Unable to bind result of EXISTS operator -> query with exists evaluating to false
    */
   public void test_ticket_1267b() throws Exception {
@@ -2567,7 +2567,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1267c: Unable to bind result of EXISTS operator -> query with two EXISTS that compare
    * equal
    */
@@ -2582,7 +2582,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1267d: Unable to bind result of EXISTS operator -> query with two NOT EXISTS that compare
    * unequal
    */
@@ -2597,7 +2597,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1395: Multiple OPTIONAL statements in a UNION fail to retrieve results ->
    * https://jira.blazegraph.com/browse/BLZG-1395
    */
@@ -2612,7 +2612,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1395: Multiple OPTIONAL statements in a UNION fail to retrieve results ->
    * https://jira.blazegraph.com/browse/BLZG-1395
    */
@@ -2627,7 +2627,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1395: Multiple OPTIONAL statements in a UNION fail to retrieve results ->
    * https://jira.blazegraph.com/browse/BLZG-1395
    */
@@ -2715,7 +2715,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * BLZG-1763: Wildcard projection was not rewritten -> original example without data, producing
    * the empty result
    */
@@ -2742,7 +2742,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket: https://jira.blazegraph.com/browse/BLZG-2066 AssertionError in path query with MINUS =>
    * testing a variant of the query given in the test case
    */
@@ -2793,7 +2793,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Ticket: https://github.com/SYSTAP/bigdata-gpu/issues/368 ClassCast Exception when Loading LUBM:
    * org.embergraph.rdf.internal.impl.literal.XSDBooleanIV cannot be cast to
    * org.embergraph.rdf.internal.impl.literal.NumericIV
@@ -2809,7 +2809,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Tickets: https://jira.blazegraph.com/browse/BLZG-2079 (duplicate of
    * https://jira.blazegraph.com/browse/BLZG-2085) => property path pred+ always delivering results
    * even though there is no matching data
@@ -2825,7 +2825,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Tickets: https://jira.blazegraph.com/browse/BLZG-2085 (duplicate of
    * https://jira.blazegraph.com/browse/BLZG-2079) => property path pred+ always delivering results
    * even though there is no matching data
@@ -2841,7 +2841,7 @@ public class TestTickets extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * https://jira.blazegraph.com/browse/BLZG-2082: one-argument substr produces NPE when combined
    * with GROUP By
    *

@@ -28,8 +28,8 @@ import org.embergraph.btree.data.IAbstractNodeData;
 import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Persistence capable abstract base class for HTree pages.
+/*
+* Persistence capable abstract base class for HTree pages.
  *
  * @author thompsonbry
  */
@@ -54,7 +54,7 @@ abstract class AbstractPage extends PO
     return super.toShortString() + "{d=" + globalDepth + "}";
   }
 
-  /**
+  /*
    * The HTree.
    *
    * <p>Note: This field MUST be patched when the node is read from the store. This requires a
@@ -62,7 +62,7 @@ abstract class AbstractPage extends PO
    */
   protected final transient AbstractHTree htree;
 
-  /**
+  /*
    * The parent of this node. This is null for the root node. The parent is required in order to set
    * the persistent identity of a newly persisted child node on its parent. The reference to the
    * parent will remain strongly reachable as long as the parent is either a root (held by the
@@ -76,7 +76,7 @@ abstract class AbstractPage extends PO
    */
   protected transient Reference<DirectoryPage> parent = null;
 
-  /**
+  /*
    * A {@link Reference} to this {@link AbstractPage}. This is created when the node is created and
    * is reused by a children of the node as the {@link Reference} to their parent. This results in
    * few {@link Reference} objects in use by the HTree since it effectively provides a canonical
@@ -84,7 +84,7 @@ abstract class AbstractPage extends PO
    */
   protected final transient Reference<? extends AbstractPage> self;
 
-  /**
+  /*
    * The #of times that this node is present on the {@link HardReferenceQueue} . This value is
    * incremented each time the node is added to the queue and is decremented each time the node is
    * evicted from the queue. On eviction, if the counter is zero(0) after it is decremented then the
@@ -103,7 +103,7 @@ abstract class AbstractPage extends PO
    */
   protected transient int referenceCount = 0;
 
-  /**
+  /*
    * The size of the address space (in bits) for each buddy hash table on a directory page. The
    * global depth of a node is defined recursively as the local depth of that node within its
    * parent. The global/local depth are not stored explicitly. Instead, the local depth is computed
@@ -113,7 +113,7 @@ abstract class AbstractPage extends PO
    */
   protected int globalDepth;
 
-  /**
+  /*
    * The size of the address space (in bits) for each buddy hash table on a directory page. The
    * legal range is <code>[0:addressBits-1]</code>.
    *
@@ -132,7 +132,7 @@ abstract class AbstractPage extends PO
     return globalDepth;
   }
 
-  /**
+  /*
    * The #of buddy tables (buckets) on a directory (bucket) page. This depends solely on
    * <i>addressBits</i> (a constant) and <i>globalDepth</i> and is given by <code>
    * (2^addressBits) / (2^globalBits)</code>.
@@ -142,7 +142,7 @@ abstract class AbstractPage extends PO
     return nbuddies;
   }
 
-  /**
+  /*
    * The #of directory entries in a buddy hash table for this directory page. This depends solely on
    * the <i>globalDepth</i> of this directory page and is given by <code>2^globalDepth</code>.
    */
@@ -151,7 +151,7 @@ abstract class AbstractPage extends PO
     return slotsPerBuddy;
   }
 
-  /**
+  /*
    * Return the prefix length of the page (the #of bits of the key which have been consumed by the
    * parent directory pages before reaching this page).
    */
@@ -171,7 +171,7 @@ abstract class AbstractPage extends PO
     return ret;
   }
 
-  /**
+  /*
    * Computed by recursing to the root and counting the levels. The root is at depth ZERO (0).
    *
    * @return The level in the {@link HTree}.
@@ -192,7 +192,7 @@ abstract class AbstractPage extends PO
     return ret;
   }
 
-  /**
+  /*
    * Return the bits from the key which are relevant to the current directory page (variant for
    * unsigned byte[] keys). This depends on the <i>prefixLength</i> to be ignored, the
    * <i>globalDepth</i> of this directory page, and the key.
@@ -227,7 +227,7 @@ abstract class AbstractPage extends PO
     }
   }
 
-  /**
+  /*
    * Return the bits from the key which are relevant to the current directory page (variant for
    * int32 keys). This depends on the <i>prefixLength</i> to be ignored, the <i>globalDepth</i> of
    * this directory page, and the key.
@@ -254,7 +254,7 @@ abstract class AbstractPage extends PO
     throw new UnsupportedOperationException();
   }
 
-  /**
+  /*
    * All constructors delegate to this constructor to set the htree reference and core metadata.
    *
    * @param htree The {@link HTree} to which the page belongs.
@@ -301,7 +301,7 @@ abstract class AbstractPage extends PO
     htree.touch(this);
   }
 
-  /**
+  /*
    * Copy constructor.
    *
    * <p>Note: The copy constructor steals the state of the source node, creating a new node with the
@@ -430,7 +430,7 @@ abstract class AbstractPage extends PO
     deleted = true;
   }
 
-  /**
+  /*
    * Dump the data onto the {@link PrintStream}.
    *
    * @param level The logging level.
@@ -448,7 +448,7 @@ abstract class AbstractPage extends PO
   /** Pretty print the tree from this level on down. */
   abstract void PP(StringBuilder sb, boolean showBinary);
 
-  /**
+  /*
    * Return a very short id used by {@link #PP()}. The prefix "B" or "D" indicates whether the page
    * is a {@link BucketPage} or a {@link DirectoryPage}. The suffix "*" indicates a dirty page.
    */
@@ -470,7 +470,7 @@ abstract class AbstractPage extends PO
     return postOrderNodeIterator(false /* dirtyNodesOnly */, false /* nodesOnly */);
   }
 
-  /**
+  /*
    * Post-order traversal of nodes and leaves in the tree. For any given node, its children are
    * always visited before the node itself (hence the node occurs in the post-order position in the
    * traversal). The iterator is NOT safe for concurrent modification.
@@ -483,7 +483,7 @@ abstract class AbstractPage extends PO
     return postOrderNodeIterator(dirtyNodesOnly, false /* nodesOnly */);
   }
 
-  /**
+  /*
    * Post-order traversal of nodes and leaves in the tree. For any given node, its children are
    * always visited before the node itself (hence the node occurs in the post-order position in the
    * traversal). The iterator is NOT safe for concurrent modification.
@@ -495,7 +495,7 @@ abstract class AbstractPage extends PO
   public abstract Iterator<AbstractPage> postOrderNodeIterator(
       final boolean dirtyNodesOnly, final boolean nodesOnly);
 
-  /**
+  /*
    * Return this leaf iff it is dirty (aka mutable) and otherwise return a copy of this leaf. If a
    * copy is made of the leaf, then a copy will also be made of each immutable parent up to the
    * first mutable parent or the root of the tree, which ever comes first. If the root is copied,
@@ -519,7 +519,7 @@ abstract class AbstractPage extends PO
     return copyOnWrite(NULL);
   }
 
-  /**
+  /*
    * Return this node or leaf iff it is dirty (aka mutable) and otherwise return a copy of this node
    * or leaf. If a copy is made of the node, then a copy will also be made of each immutable parent
    * up to the first mutable parent or the root of the tree, which ever comes first. If the root is
@@ -615,8 +615,8 @@ abstract class AbstractPage extends PO
 
       if (!parent.isDirty()) {
 
-        /*
-         * Note: pass up the identity of the old child since we want
+      /*
+       * Note: pass up the identity of the old child since we want
          * to avoid having its parent reference reset.
          */
         parent = (DirectoryPage) parent.copyOnWrite(oldId);
@@ -645,7 +645,7 @@ abstract class AbstractPage extends PO
     return true;
   }
 
-  /**
+  /*
    * The purpose of this class is to protect nodes against eviction during cascading mutations which
    * can be triggered when we split a bucket page and redistribute tuples into the {@link HTree}
    * using insert-raw-tuples. Those raw tuples are inserted back in through the top of the {@link

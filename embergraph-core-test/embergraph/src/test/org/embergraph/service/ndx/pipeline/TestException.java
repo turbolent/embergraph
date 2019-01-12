@@ -1,7 +1,7 @@
 package org.embergraph.service.ndx.pipeline;
 
-/**
- * Instances of this class are thrown from within the fixture under test in order to provoke various
+/*
+* Instances of this class are thrown from within the fixture under test in order to provoke various
  * kinds of error handling.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

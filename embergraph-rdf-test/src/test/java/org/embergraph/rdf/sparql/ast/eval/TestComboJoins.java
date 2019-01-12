@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Data driven test suite.
+/*
+* Data driven test suite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public class TestComboJoins extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -55,7 +55,7 @@ public class TestComboJoins extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("join-combo-1").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -72,7 +72,7 @@ public class TestComboJoins extends AbstractDataDrivenSPARQLTestCase {
     new TestHelper("join-combo-2").runTest();
   }
 
-  /**
+  /*
    *
    *
    * <pre>

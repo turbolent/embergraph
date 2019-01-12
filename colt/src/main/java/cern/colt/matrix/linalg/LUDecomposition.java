@@ -10,8 +10,8 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleMatrix2D;
 // import cern.colt.matrix.DenseDoubleMatrix1D;
-/**
- * For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the LU decomposition is an <tt>m x
+/*
+* For an <tt>m x n</tt> matrix <tt>A</tt> with <tt>m >= n</tt>, the LU decomposition is an <tt>m x
  * n</tt> unit lower triangular matrix <tt>L</tt>, an <tt>n x n</tt> upper triangular matrix
  * <tt>U</tt>, and a permutation vector <tt>piv</tt> of length <tt>m</tt> so that <tt>A(piv,:) =
  * L*U</tt>; If <tt>m < n</tt>, then <tt>L</tt> is <tt>m x m</tt> and <tt>U</tt> is <tt>m x n</tt>.
@@ -24,7 +24,7 @@ import cern.colt.matrix.DoubleMatrix2D;
 public class LUDecomposition implements java.io.Serializable {
   static final long serialVersionUID = 1020;
   protected LUDecompositionQuick quick;
-  /**
+  /*
    * Constructs and returns a new LU Decomposition object; The decomposed matrices can be retrieved
    * via instance methods of the returned decomposition object.
    *
@@ -35,7 +35,7 @@ public class LUDecomposition implements java.io.Serializable {
     quick = new LUDecompositionQuick(0); // zero tolerance for compatibility with Jama
     quick.decompose(A.copy());
   }
-  /**
+  /*
    * Returns the determinant, <tt>det(A)</tt>.
    *
    * @exception IllegalArgumentException Matrix must be square
@@ -43,7 +43,7 @@ public class LUDecomposition implements java.io.Serializable {
   public double det() {
     return quick.det();
   }
-  /**
+  /*
    * Returns pivot permutation vector as a one-dimensional double array
    *
    * @return (double) piv
@@ -51,7 +51,7 @@ public class LUDecomposition implements java.io.Serializable {
   private double[] getDoublePivot() {
     return quick.getDoublePivot();
   }
-  /**
+  /*
    * Returns the lower triangular factor, <tt>L</tt>.
    *
    * @return <tt>L</tt>
@@ -59,15 +59,15 @@ public class LUDecomposition implements java.io.Serializable {
   public DoubleMatrix2D getL() {
     return quick.getL();
   }
-  /**
+  /*
    * Returns a copy of the pivot permutation vector.
    *
    * @return piv
    */
   public int[] getPivot() {
-    return (int[]) quick.getPivot().clone();
+    return quick.getPivot().clone();
   }
-  /**
+  /*
    * Returns the upper triangular factor, <tt>U</tt>.
    *
    * @return <tt>U</tt>
@@ -75,7 +75,7 @@ public class LUDecomposition implements java.io.Serializable {
   public DoubleMatrix2D getU() {
     return quick.getU();
   }
-  /**
+  /*
    * Returns whether the matrix is nonsingular (has an inverse).
    *
    * @return true if <tt>U</tt>, and hence <tt>A</tt>, is nonsingular; false otherwise.
@@ -83,7 +83,7 @@ public class LUDecomposition implements java.io.Serializable {
   public boolean isNonsingular() {
     return quick.isNonsingular();
   }
-  /**
+  /*
    * Solves <tt>A*X = B</tt>.
    *
    * @param B A matrix with as many rows as <tt>A</tt> and any number of columns.
@@ -98,7 +98,7 @@ public class LUDecomposition implements java.io.Serializable {
     quick.solve(X);
     return X;
   }
-  /**
+  /*
    * Returns a String with (propertyName, propertyValue) pairs. Useful for debugging or to quickly
    * get the rough picture. For example,
    *

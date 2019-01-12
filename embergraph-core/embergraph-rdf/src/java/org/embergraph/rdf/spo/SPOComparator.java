@@ -20,8 +20,8 @@ package org.embergraph.rdf.spo;
 import java.util.Comparator;
 import org.embergraph.rdf.model.StatementEnum;
 
-/**
- * Imposes s:p:o ordering based on termIds only (ignores {@link StatementEnum}).
+/*
+* Imposes s:p:o ordering based on termIds only (ignores {@link StatementEnum}).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

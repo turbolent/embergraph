@@ -27,8 +27,8 @@ import org.embergraph.btree.proc.AbstractKeyArrayIndexProcedure.ResultBuffer;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.codec.IRabaCoder;
 
-/**
- * Batch lookup operation.
+/*
+* Batch lookup operation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -38,7 +38,7 @@ public class BatchLookup extends AbstractKeyArrayIndexProcedure<ResultBuffer>
   /** */
   private static final long serialVersionUID = 8102720738892338403L;
 
-  /**
+  /*
    * Factory for {@link BatchLookup} procedures.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -75,7 +75,7 @@ public class BatchLookup extends AbstractKeyArrayIndexProcedure<ResultBuffer>
   /** De-serialization ctor. */
   public BatchLookup() {}
 
-  /**
+  /*
    * Create a batch lookup operation.
    *
    * @param keys The array of keys (one key per tuple).

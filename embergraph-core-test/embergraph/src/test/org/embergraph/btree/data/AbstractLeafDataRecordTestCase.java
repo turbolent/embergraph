@@ -27,8 +27,8 @@ import org.embergraph.btree.raba.ReadOnlyKeysRaba;
 import org.embergraph.btree.raba.ReadOnlyValuesRaba;
 import org.embergraph.io.DataOutputBuffer;
 
-/**
- * Test suite for the B+Tree {@link ILeafData} records (accessing coded data in place).
+/*
+* Test suite for the B+Tree {@link ILeafData} records (accessing coded data in place).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

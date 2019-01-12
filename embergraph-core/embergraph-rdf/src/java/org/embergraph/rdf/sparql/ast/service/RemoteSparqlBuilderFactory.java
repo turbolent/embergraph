@@ -28,8 +28,8 @@ import org.openrdf.model.Value;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 
-/**
- * Factory encapsulates the logic required to decide on the manner in which solutions will be
+/*
+* Factory encapsulates the logic required to decide on the manner in which solutions will be
  * vectored into the remote service end point and in which the solutions flowing back from that
  * service will be interpreted.
  *
@@ -93,7 +93,7 @@ import org.openrdf.query.BindingSet;
  */
 public class RemoteSparqlBuilderFactory {
 
-  /**
+  /*
    * @param serviceOptions The configuration options for the service.
    * @param serviceNode The SERVICE clause.
    * @param bindingSets The source solutions. These will be used to create a BINDINGS clause for the
@@ -135,7 +135,7 @@ public class RemoteSparqlBuilderFactory {
     return new RemoteSparql11QueryBuilder(serviceNode);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff (a) there is more than one solution; and (b) any of the solutions
    * has a blank node which is bound for more than one variable. We need to use a different strategy
    * for vectoring the solutions to the remote service when this is true.
@@ -161,8 +161,8 @@ public class RemoteSparqlBuilderFactory {
         if (bnodes == null) bnodes = new HashSet<BNode>();
         final BNode t = (BNode) v;
         if (bnodes.add(t)) {
-          /*
-           * This solution has at least two variable bindings for the
+        /*
+       * This solution has at least two variable bindings for the
            * same blank node.
            */
           return true;

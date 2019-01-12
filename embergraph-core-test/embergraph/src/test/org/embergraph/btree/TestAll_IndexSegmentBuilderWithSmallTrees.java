@@ -25,8 +25,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Stress test suite for {@link TestIndexSegmentBuilderWithSmallTree}.
+/*
+* Stress test suite for {@link TestIndexSegmentBuilderWithSmallTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -41,7 +41,7 @@ public class TestAll_IndexSegmentBuilderWithSmallTrees extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Return a test suite which will run each of the unit tests for
    * TestIndexSegmentBuilderWithSmallTrees a number of times. This will exercise some random
    * perturbations in things like whether or not rawRecords are enabled or whether or not we are

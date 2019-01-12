@@ -34,8 +34,8 @@ import org.embergraph.rdf.sail.webapp.client.HttpException;
 import org.embergraph.rdf.sail.webapp.client.JettyResponseListener;
 import org.embergraph.util.config.NicUtil;
 
-/**
- * Proxied test suite for bootstrap and basic structure tests for the REST API.
+/*
+* Proxied test suite for bootstrap and basic structure tests for the REST API.
  *
  * @param <S>
  */
@@ -115,7 +115,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
   /** A marker placed into index.html so we can recognize when that page is served. */
   private static final String JUNIT_TEST_MARKER_INDEX_HTML = "junit test marker: index.html";
 
-  /**
+  /*
    * bare URL of the server
    *
    * <pre>
@@ -136,7 +136,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
     assertTrue(content.contains(JUNIT_TEST_MARKER_INDEX_HTML));
   }
 
-  /**
+  /*
    * URL with correct context path
    *
    * <pre>
@@ -153,7 +153,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
     assertTrue(content.contains(JUNIT_TEST_MARKER_INDEX_HTML));
   }
 
-  /**
+  /*
    * URL with context path and index.html reference
    *
    * <pre>
@@ -174,7 +174,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
     }
   }
 
-  /**
+  /*
    * The <code>favicon.ico</code> file.
    *
    * @see <a href="http://www.w3.org/2005/10/howto-favicon">How to add a favicon </a>
@@ -196,8 +196,8 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
     doGET(m_serviceURL + "/counters");
   }
 
-  // /**
-  // * The <code>/namespace/</code> servlet responds (multi-tenancy API).
+  // /*
+// * The <code>/namespace/</code> servlet responds (multi-tenancy API).
   // */
   // public void test_webapp_structure_namespace() throws Exception {
 
@@ -205,7 +205,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
 
   // }
 
-  /**
+  /*
    * The fully qualified URL for <code>index.html</code>
    *
    * <pre>
@@ -241,7 +241,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
     }
   }
 
-  /**
+  /*
    * Throw an exception if the status code does not indicate success.
    *
    * @param response The response.
@@ -277,7 +277,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends AbstractTestNa
     return response;
   }
 
-  /**
+  /*
    * Connect to a SPARQL end point (GET or POST query only).
    *
    * @param opts The connection options.

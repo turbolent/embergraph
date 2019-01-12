@@ -41,8 +41,8 @@ import org.embergraph.rdf.model.StatementEnum;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpBase;
 import org.embergraph.striterator.AbstractKeyOrder;
 
-/**
- * Represents the key order used by an index for a triple relation.
+/*
+* Represents the key order used by an index for a triple relation.
  *
  * @serial The serialization of the class is quite small since the only instance field is {@link
  *     #index()}. All other data are static. However, it is still MUCH more efficient to only
@@ -60,7 +60,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
 
   private static final boolean DEBUG = log.isDebugEnabled();
 
-  /**
+  /*
    * Enables or disables the index locality optimization.
    *
    * @see #getKeyOrder(IPredicate, int)
@@ -191,7 +191,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     this.index = (byte) index;
   }
 
-  /**
+  /*
    * Return <code>true</code> if this is the primary index for the relation.
    *
    * @return <code>true</code> for {@link #SPO} or {@link #SPOC}. Those are the natural orders
@@ -203,7 +203,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return this == SPO || this == SPOC;
   }
 
-  /**
+  /*
    * Returns the singleton corresponding to the <i>index</i>.
    *
    * @param index The index.
@@ -227,7 +227,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
 
   }
 
-  /**
+  /*
    * Covert a name of an {@link SPOKeyOrder} into an {@link SPOKeyOrder}.
    *
    * @param name The name.
@@ -257,7 +257,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return names[index];
   }
 
-  /**
+  /*
    * Return either 3 or 4 depending on the #of components in the key for this natural key ordering.
    */
   @Override
@@ -280,7 +280,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     }
   }
 
-  /**
+  /*
    * Return the index of the slot in the {@link ISPO} tuple which appears at the specified position
    * in the key.
    *
@@ -293,7 +293,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return orders[index][keyPos];
   }
 
-  /**
+  /*
    * Returns the position of the given spoIdentifier in the index. For instance, if the index is POS
    * and spoIdentfier==0 (representing the subject, then 2 is returned (since the subject shows up
    * in index position 2 in POS).
@@ -313,7 +313,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return -1; // fallback: not found
   }
 
-  /**
+  /*
    * The integer used to represent the {@link SPOKeyOrder}. For a triple store, this is one of the
    * constants: {@link #_SPO}, {@link #POS}, or {@link #OSP}. For a quad store, this is one of the
    * constants {@link #_SPOC}, {@link #_POCS}, {@link _OCSP}, {@link #_CSPO}, {@link #_PCSO}, {@link
@@ -324,7 +324,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return index;
   }
 
-  /**
+  /*
    * Return the comparator that places {@link ISPO}s into the natural order for the associated
    * index.
    */
@@ -389,8 +389,8 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     }
   }
 
-  //    /**
-  //     * Return the from key for this particular set of known terms that will
+  //    /*
+//     * Return the from key for this particular set of known terms that will
   //     * allow us to read everything about those terms from the index.  For
   //     * example, if this happens to be the SPO key order and the size of known
   //     * terms is 2, this method will provide a from key that will allow the
@@ -416,8 +416,8 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
   //
   //    }
   //
-  //    /**
-  //     * Return the to key for this particular set of known terms that will
+  //    /*
+//     * Return the to key for this particular set of known terms that will
   //     * allow us to read everything about those terms from the index.  For
   //     * example, if this happens to be the SPO key order and the size of known
   //     * terms is 2, this method will provide a to key that will allow the
@@ -440,8 +440,8 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
   //
   //    }
 
-  //    /**
-  //     * Return the inclusive lower bound which would be used for a query against
+  //    /*
+//     * Return the inclusive lower bound which would be used for a query against
   //     * this {@link IKeyOrder} for the given {@link IPredicate}.
   //     *
   //     * @todo This method should be declared by {@link IKeyOrder}.
@@ -475,7 +475,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
   //
   //    }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO I think that we should just rely on the correct attachment of the range constraint
@@ -513,8 +513,8 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
 
       if (term == null || term.isVar()) {
         if (index == 2 && range != null && range.isFromBound()) {
-          /*
-           * We are on the O term, it's a variable, and we have a
+        /*
+       * We are on the O term, it's a variable, and we have a
            * lower bound for it.
            */
           final IConstant<IV> c = (IConstant<IV>) range.from();
@@ -566,7 +566,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     }
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>TODO See my notes on getFromKey(). The issue is exactly the same for the toKey and fromKey.
@@ -596,8 +596,8 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
       // Note: term MAY be null for the context position.
       if (term == null || term.isVar()) {
         if (index == 2 && range != null && range.isToBound()) {
-          /*
-           * We are on the O term, it's a variable, and we have an
+        /*
+       * We are on the O term, it's a variable, and we have an
            * upper bound for it.
            */
           final IConstant<IV> c = (IConstant<IV>) range.to();
@@ -633,8 +633,8 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
 
   }
 
-  //    /**
-  //     * Return the exclusive upper bound which would be used for a query against
+  //    /*
+//     * Return the exclusive upper bound which would be used for a query against
   //     * this {@link IKeyOrder} for the given {@link IPredicate}.
   //     *
   //     * @todo This method should be declared by {@link IKeyOrder}.
@@ -648,7 +648,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
   //
   //    }
 
-  /**
+  /*
    * Forms the key for a given index order (the {@link SPOTupleSerializer} delegates its behavior to
    * this method).
    *
@@ -668,7 +668,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return keyBuilder.getKey();
   }
 
-  /**
+  /*
    * Appends the key for a given index order into the {@link IKeyBuilder}.
    *
    * <p>Note: The {@link IKeyBuilder} is NOT {@link IKeyBuilder#reset()} by this method.
@@ -690,7 +690,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return keyBuilder;
   }
 
-  /**
+  /*
    * Decode the key into an {@link SPO}. The {@link StatementEnum} and the optional SID will not be
    * decoded, since it is carried in the B+Tree value. However, if the {@link SPOKeyOrder} is a quad
    * order then the {@link SPO#c()} will be bound.
@@ -703,7 +703,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return decodeKey(key, 0 /* offset */);
   }
 
-  /**
+  /*
    * Decode the key into an {@link SPO}. The {@link StatementEnum} and the optional SID will not be
    * decoded, since it is carried in the B+Tree value. However, if the {@link SPOKeyOrder} is a quad
    * order then the {@link SPO#c()} will be bound.
@@ -745,8 +745,8 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
 
     switch (index) {
 
-        /*
-         * Triples
+      /*
+       * Triples
          *
          * [c] will be NULL for triples, but the SID may be read from the value
          * associated with the key below and set on the SPO object.
@@ -773,8 +773,8 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
         c = null;
         break;
 
-        /*
-         * Quads
+      /*
+       * Quads
          */
 
       case SPOKeyOrder._SPOC:
@@ -826,7 +826,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return new SPO(s, p, o, c);
   }
 
-  /**
+  /*
    * Imposes the canonicalizing mapping during object de-serialization.
    *
    * <p>Note: implementing {@link Externalizable} drops the serialized size from 61 bytes per
@@ -842,7 +842,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return SPOKeyOrder.valueOf(index);
   }
 
-  /**
+  /*
    * Return the {@link SPOKeyOrder} for the given predicate.
    *
    * @param predicate The predicate.
@@ -882,8 +882,8 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
 
       if (s && p && o) {
 
-        /*
-         * If the access path is all bound, then we want to use the
+      /*
+       * If the access path is all bound, then we want to use the
          * index associated with the original predicate (which typically
          * had variables in one or more positions). This index will have
          * better locality since it will naturally group the index
@@ -973,7 +973,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     }
   }
 
-  /**
+  /*
    * Iterator visits {@link #SPO}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1000,7 +1000,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     }
   }
 
-  /**
+  /*
    * Iterator visits {@link #SPOC}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -1035,7 +1035,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     SPOC, POCS, OCSP, CSPO, PCSO, SOPC
   };
 
-  /**
+  /*
    * Return an iterator which visits the triple store indices ({@link #SPO}, {@link #POS}, {@link
    * #OSP}).
    */
@@ -1044,7 +1044,7 @@ public class SPOKeyOrder extends AbstractKeyOrder<ISPO> implements Serializable 
     return Arrays.asList(tripleStoreIndices).iterator();
   }
 
-  /**
+  /*
    * Return an iterator which visits the quad store indices ({@link #SPOC}, {@link #POCS}, {@link
    * #OCSP}, {@link #CSPO}, {@link #PCSO}, {@link #SOPC} ).
    */

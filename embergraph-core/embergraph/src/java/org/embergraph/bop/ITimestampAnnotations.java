@@ -21,15 +21,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.bop;
 
-/**
- * Annotation for the timestamp of a resource view.
+/*
+* Annotation for the timestamp of a resource view.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public interface ITimestampAnnotations {
 
-  /**
+  /*
    * The timestamp (or transaction identifier) used by this operator if it reads or writes on the
    * database (no default).
    */

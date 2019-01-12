@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.gom.om;
 
-/**
- * This interface defines a protocol for native transactions. Native transactions may be used to
+/*
+* This interface defines a protocol for native transactions. Native transactions may be used to
  * buffering updates and perform an implicit commit when the transaction counter reaches zero.
  * Operations outside of a transaction context are NOT buffered and are immediately committed.
  *
@@ -30,7 +30,7 @@ package org.embergraph.gom.om;
  */
 public interface INativeTransaction {
 
-  /**
+  /*
    * Increments the native transaction counter. When this counter reaches zero, the transaction will
    * be committed.
    *
@@ -39,9 +39,9 @@ public interface INativeTransaction {
    * @return The new value of the native transaction counter, i.e., <em>after</em> it was
    *     incremented.
    */
-  public int beginNativeTransaction();
+  int beginNativeTransaction();
 
-  /**
+  /*
    * The native transaction is committed when the counter reaches zero. This method accepts the
    * value returned by {@link #beginNativeTransaction()} and throws an exception if
    * <i>expectedCounter</i> is not equal to the internal counter. This provides an eager search for
@@ -52,15 +52,15 @@ public interface INativeTransaction {
    * @exception if the <i>expectedCounter</i> is not equal to the internal counter <em>before</em>
    *     the latter is decremented.
    */
-  public int commitNativeTransaction(int expectedCounter);
+  int commitNativeTransaction(int expectedCounter);
 
   /** Rollback all changes since the last time the native transaction counter was zero. */
-  public void rollbackNativeTransaction();
+  void rollbackNativeTransaction();
 
-  /**
+  /*
    * The current value of the native transaction counter.
    *
    * <p>
    */
-  public int getNativeTransactionCounter();
+  int getNativeTransactionCounter();
 }

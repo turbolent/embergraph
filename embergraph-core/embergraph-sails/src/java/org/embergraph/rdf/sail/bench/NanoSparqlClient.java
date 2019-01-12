@@ -64,8 +64,8 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
-/**
- * A flyweight utility for issuing queries to an http SPARQL endpoint.
+/*
+* A flyweight utility for issuing queries to an http SPARQL endpoint.
  *
  * @author thompsonbry@users.sourceforge.net
  */
@@ -81,8 +81,8 @@ public class NanoSparqlClient {
   /** The default connection timeout (ms). A value of ZERO (0) means NO timeout. */
   private static final int DEFAULT_TIMEOUT = 0;
 
-  //	/**
-  //	 * Helper class to figure out the type of a query.
+  //	/*
+//	 * Helper class to figure out the type of a query.
   //	 */
   //	private static enum QueryType {
   //
@@ -112,8 +112,8 @@ public class NanoSparqlClient {
   //			}
   //		}
   //
-  //		/**
-  //		 * Used to note the offset at which a keyword was found.
+  //		/*
+//		 * Used to note the offset at which a keyword was found.
   //		 */
   //		static private class P implements Comparable<P> {
   //
@@ -130,8 +130,8 @@ public class NanoSparqlClient {
   //			}
   //		}
   //
-  //		/**
-  //		 * Hack returns the query type based on the first occurrence of the
+  //		/*
+//		 * Hack returns the query type based on the first occurrence of the
   //		 * keyword for any known query type in the query.
   //		 *
   //		 * @param queryStr
@@ -258,8 +258,8 @@ public class NanoSparqlClient {
       HttpURLConnection conn = null;
       try {
 
-        /*
-         * Setup connection properties.
+      /*
+       * Setup connection properties.
          *
          * Note:In general GET caches but is more transparent while POST
          * does not cache.
@@ -270,8 +270,8 @@ public class NanoSparqlClient {
         conn.setUseCaches(opts.useCaches);
         conn.setReadTimeout(opts.timeout);
 
-        /*
-                         * Set an appropriate Accept header for the query.
+      /*
+       * Set an appropriate Accept header for the query.
         //                 *
         //                 * Note: We have to parse the query to really get this right.
         //                 *
@@ -328,8 +328,8 @@ public class NanoSparqlClient {
         }
 
         if (log.isDebugEnabled()) {
-          /*
-           * write out the response headers
+        /*
+       * write out the response headers
            *
            * @todo options to show the headers (in/out),
            */
@@ -347,8 +347,8 @@ public class NanoSparqlClient {
 
         } else {
 
-          /*
-           * Write the #of solutions onto stdout.
+        /*
+       * Write the #of solutions onto stdout.
            */
           final long nresults;
           switch (queryType) {
@@ -367,7 +367,7 @@ public class NanoSparqlClient {
           opts.nresults = nresults;
         }
 
-        return (Void) null;
+        return null;
 
       } finally {
 
@@ -379,7 +379,7 @@ public class NanoSparqlClient {
       }
     } // call()
 
-    /**
+    /*
      * Write the response body on stdout.
      *
      * @param conn The connection.
@@ -403,7 +403,7 @@ public class NanoSparqlClient {
       }
     }
 
-    /**
+    /*
      * Counts the #of results in a SPARQL result set.
      *
      * @param conn The connection from which to read the results.
@@ -453,7 +453,7 @@ public class NanoSparqlClient {
       }
     } // countResults
 
-    /**
+    /*
      * Builds a graph from an RDF result set (statements, not binding sets).
      *
      * @param conn The connection from which to read the results.
@@ -492,7 +492,7 @@ public class NanoSparqlClient {
     } // buildGraph
   } // class Query
 
-  /**
+  /*
    * Read the contents of a file.
    *
    * <p>Note: This makes default platform assumptions about the encoding of the file.
@@ -527,7 +527,7 @@ public class NanoSparqlClient {
     }
   }
 
-  /**
+  /*
    * Read from stdin.
    *
    * <p>Note: This makes default platform assumptions about the encoding of the data being read.
@@ -559,7 +559,7 @@ public class NanoSparqlClient {
     }
   }
 
-  /**
+  /*
    * Populate the list with the plain text files (recursive search of a file or directory).
    *
    * @param fileOrDir The file or directory.
@@ -589,7 +589,7 @@ public class NanoSparqlClient {
     }
   }
 
-  /**
+  /*
    * Read queries from each file in the given list.
    *
    * @param fileList The list of files.
@@ -641,7 +641,7 @@ public class NanoSparqlClient {
     return map;
   }
 
-  /**
+  /*
    * Helper produces a random sequence of indices in the range [0:n-1] suitable for visiting the
    * elements of an array of n elements in a random order. This is useful when you want to randomize
    * the presentation of elements from two or more arrays. For example, known keys and values can be
@@ -676,7 +676,7 @@ public class NanoSparqlClient {
 
     java.util.Arrays.sort(pairs);
 
-    final int order[] = new int[n];
+    final int[] order = new int[n];
 
     for (int i = 0; i < n; i++) {
 
@@ -689,7 +689,7 @@ public class NanoSparqlClient {
   /** Options for the query. */
   public static class QueryOptions implements Cloneable {
 
-    /**
+    /*
      * Temp KB provided to the parser. This KB is empty, but the parser needs one to resolve RDF
      * Values to IVs. So, we need one to parse even though we are not going to do any resolution.
      */
@@ -710,7 +710,7 @@ public class NanoSparqlClient {
     public String defaultGraphUri = null;
     /** When true, request an explanation for the query. */
     public boolean explain = false;
-    /**
+    /*
      * When non-<code>null</code>, either enable or disable the analytic query package for the
      * request.
      */
@@ -744,7 +744,7 @@ public class NanoSparqlClient {
       this(null /* serviceURL */, null /* queryStr */);
     }
 
-    /**
+    /*
      * @param serviceURL The SPARQL end point URL.
      * @param queryStr The SPARQL query.
      */
@@ -769,7 +769,7 @@ public class NanoSparqlClient {
     }
   }
 
-  /**
+  /*
    * Metadata about a single presentation of a SPARQL query.
    *
    * @author thompsonbry
@@ -793,7 +793,7 @@ public class NanoSparqlClient {
     }
   }
 
-  /**
+  /*
    * A SPARQL query together with its {@link Score}s and utility methods to submit the query,
    * aggregate across its {@link Score}s, and report on the aggregated query performance.
    *
@@ -879,7 +879,7 @@ public class NanoSparqlClient {
     }
   }
 
-  /**
+  /*
    * Return the order in which the queries will be evaluated. The order in which those queries will
    * be executed is determined by the <code>seed</code>. When non-zero, the queries evaluation order
    * will be randomized. Otherwise the queries are evaluated in the given order. The elements of the
@@ -925,8 +925,8 @@ public class NanoSparqlClient {
     return order;
   }
 
-  //	/**
-  //	 * Runs the queries in the evaluation order.
+  //	/*
+//	 * Runs the queries in the evaluation order.
   //	 *
   //	 * @param order
   //	 *            The evaluation order. This is an array of indices into the
@@ -962,7 +962,7 @@ public class NanoSparqlClient {
     private final QueryOptions opts;
     private final AtomicLong nerrors;
 
-    /**
+    /*
      * @param query The query.
      * @param opts The configured query options (will be cloned).
      * @param nerrors The #of errors is reported via this variable as a side effect.
@@ -1028,7 +1028,7 @@ public class NanoSparqlClient {
     }
   } // RunQueryTask
 
-  /**
+  /*
    * Return the {@link Score}s for a collection of queries.
    *
    * @param queries The queries (after they have been evaluated).
@@ -1048,7 +1048,7 @@ public class NanoSparqlClient {
     return a;
   }
 
-  /**
+  /*
    * Report the average running time for each query on <code>stdout</code>.
    *
    * @param a The query scores.
@@ -1077,7 +1077,7 @@ public class NanoSparqlClient {
     System.err.println("usage: (option)* [serviceURL] (query)");
   }
 
-  /**
+  /*
    * Issue a query against a SPARQL endpoint. By default, the client will read from stdin. It will
    * write on stdout.
    *
@@ -1447,7 +1447,7 @@ public class NanoSparqlClient {
             new Callable<Void>() {
               public Void call() throws Exception {
                 runnable.run();
-                return (Void) null;
+                return null;
               }
             });
       }
@@ -1499,7 +1499,7 @@ public class NanoSparqlClient {
     System.exit(0);
   }
 
-  /**
+  /*
    * Create a temporary kb instance for use by the query parser. Since the temporary store is backed
    * by a buffer until that buffer overflows, there will not be a backing disk file unless someone
    * starts writing on this.
@@ -1530,8 +1530,8 @@ public class NanoSparqlClient {
     return new TempTripleStore(tempStore, p, null /* db */);
   }
 
-  //	/**
-  //	 * A model of the query workload to be imposed on the SPARQL end point. The
+  //	/*
+//	 * A model of the query workload to be imposed on the SPARQL end point. The
   //	 * model allows you to group queries from the same "source" into a batch, to
   //	 * specify the latency between queries within a batch, and to specify the
   //	 * latency between one batch and the next. You can also specify the number

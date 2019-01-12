@@ -12,8 +12,10 @@ import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleFactory3D;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
-/**
- * Configurable matrix benchmark. Runs the operations defined in main(args) or in the file specified
+import java.io.StreamTokenizer;
+
+/*
+* Configurable matrix benchmark. Runs the operations defined in main(args) or in the file specified
  * by args. To get <a href="doc-files/usage.txt">this overall help</a> on usage type <tt>java
  * cern.colt.matrix.bench.BenchmarkMatrix -help</tt>. To get help on usage of a given command, type
  * <tt>java cern.colt.matrix.bench.BenchmarkMatrix -help &lt;command&gt;</tt>. Here is the <a
@@ -765,7 +767,7 @@ public class BenchmarkMatrix {
     }
     return success;
   }
-  /**
+  /*
    * Runs the matrix benchmark operations defined in args or in the file specified by args0. To get
    * detailed help on usage type java cern.colt.matrix.bench.BenchmarkMatrix -help
    */
@@ -817,8 +819,8 @@ public class BenchmarkMatrix {
       try {
         cern.colt.list.ObjectArrayList words = new cern.colt.list.ObjectArrayList();
         int token;
-        while ((token = stream.nextToken()) != stream.TT_EOF) { // while not end of file
-          if (token == stream.TT_EOL) { // execute a command line at a time
+        while ((token = stream.nextToken()) != StreamTokenizer.TT_EOF) { // while not end of file
+          if (token == StreamTokenizer.TT_EOL) { // execute a command line at a time
             // System.out.println(words);
             if (words.size() > 0) { // ignore emty lines
               String[] params = new String[words.size()];
@@ -834,7 +836,7 @@ public class BenchmarkMatrix {
             cern.colt.matrix.impl.Former formatter =
                 new cern.colt.matrix.impl.FormerFactory().create("%G");
             // ok: 2.0 -> 2   wrong: 2.0 -> 2.0 (kills Integer.parseInt())
-            if (token == stream.TT_NUMBER) word = formatter.form(stream.nval);
+            if (token == StreamTokenizer.TT_NUMBER) word = formatter.form(stream.nval);
             else word = stream.sval;
             if (word != null) words.add(word);
           }

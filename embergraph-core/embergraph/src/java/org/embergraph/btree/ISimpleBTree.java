@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-/**
- * Interface for non-batch operations on a B+-Tree mapping non-null variable length unsigned byte[]
+/*
+* Interface for non-batch operations on a B+-Tree mapping non-null variable length unsigned byte[]
  * keys to arbitrary values.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -31,7 +31,7 @@ package org.embergraph.btree;
  */
 public interface ISimpleBTree {
 
-  /**
+  /*
    * Insert or update a value under the key.
    *
    * @param key The key.
@@ -39,9 +39,9 @@ public interface ISimpleBTree {
    * @return The previous value under that key or <code>null</code> if the key was not found or if
    *     the previous entry for that key was marked as deleted.
    */
-  public byte[] insert(byte[] key, byte[] value);
+  byte[] insert(byte[] key, byte[] value);
 
-  /**
+  /*
    * Insert or update a value under the key iff there is no entry for that key in the index. This is
    * equivalent to
    *
@@ -66,17 +66,17 @@ public interface ISimpleBTree {
    *     NOT applied.
    * @see BLZG-1539 (putIfAbsent)
    */
-  public byte[] putIfAbsent(byte[] key, byte[] value);
+  byte[] putIfAbsent(byte[] key, byte[] value);
 
-  /**
+  /*
    * Lookup a value for a key.
    *
    * @return The value stored under that key or <code>null</code> if there is no entry for that key
    *     or if the entry under that key is marked as deleted.
    */
-  public byte[] lookup(byte[] key);
+  byte[] lookup(byte[] key);
 
-  /**
+  /*
    * Return <code>true</code> iff there is a (non-deleted) index entry for the key. An index entry
    * with a <code>null</code> value will cause this method to return <code>true</code>. A deleted
    * index entry will cause this method to return <code>false</code>.
@@ -84,14 +84,14 @@ public interface ISimpleBTree {
    * @param key The key.
    * @return <code>true</code> if the index contains an (un-deleted) entry for that key.
    */
-  public boolean contains(byte[] key);
+  boolean contains(byte[] key);
 
-  /**
+  /*
    * Remove the key and its associated value.
    *
    * @param key The key.
    * @return The value stored under that key or <code>null</code> if the key was not found or if the
    *     previous entry under that key was marked as deleted.
    */
-  public byte[] remove(byte[] key);
+  byte[] remove(byte[] key);
 }

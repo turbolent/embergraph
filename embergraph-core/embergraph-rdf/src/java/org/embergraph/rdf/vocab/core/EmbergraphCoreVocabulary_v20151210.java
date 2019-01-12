@@ -25,8 +25,8 @@ import org.embergraph.rdf.vocab.BaseVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.GeoSpatialVocabularyDecl;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Core Embergraph vocabulary.
+/*
+* Core Embergraph vocabulary.
  *
  * <p>Note: Do not modify this class. Create an entirely new vocabulary that extends this one and
  * edit {@link AbstractTripleStore.Options#DEFAULT_VOCABULARY_CLASS}.
@@ -39,7 +39,7 @@ public class EmbergraphCoreVocabulary_v20151210 extends EmbergraphCoreVocabulary
     super();
   }
 
-  /**
+  /*
    * Used by {@link AbstractTripleStore#create()}.
    *
    * @param namespace The namespace of the KB instance.

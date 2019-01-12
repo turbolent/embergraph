@@ -10,8 +10,8 @@ package cern.jet.random;
 
 import cern.jet.random.engine.RandomEngine;
 import cern.jet.stat.Probability;
-/**
- * Beta distribution; <A
+/*
+* Beta distribution; <A
  * HREF="http://www.cern.ch/RD11/rkb/AN16pp/node15.html#SECTION000150000000000000000"> math
  * definition</A> and <A HREF="http://www.statsoft.com/textbook/glosb.html#Beta Distribution">
  * animated definition</A>.
@@ -296,7 +296,7 @@ public class Beta extends AbstractContinousDistribution {
   }
   /** Returns a beta distributed random number; bypasses the internal state. */
   public double nextDouble(double alpha, double beta) {
-    /**
+    /*
      * **************************************************************** * Beta Distribution -
      * Stratified Rejection/Patchwork Rejection * *
      * ***************************************************************** For parameters a < 1 , b <
@@ -366,7 +366,7 @@ public class Beta extends AbstractContinousDistribution {
   public String toString() {
     return this.getClass().getName() + "(" + alpha + "," + beta + ")";
   }
-  /**
+  /*
    * Sets the uniform random number generated shared by all <b>static</b> methods.
    *
    * @param randomGenerator the new uniform random number generator to be shared.

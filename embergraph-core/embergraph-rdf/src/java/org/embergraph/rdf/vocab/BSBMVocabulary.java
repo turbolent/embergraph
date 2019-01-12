@@ -28,8 +28,8 @@ import org.embergraph.rdf.vocab.decls.RDFSVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.RDFVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.XMLSchemaVocabularyDecl;
 
-/**
- * A {@link Vocabulary} covering the ontologies used by LUBM.
+/*
+* A {@link Vocabulary} covering the ontologies used by LUBM.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -42,7 +42,7 @@ public class BSBMVocabulary extends BaseVocabulary {
     super();
   }
 
-  /**
+  /*
    * Used by {@link AbstractTripleStore#create()}.
    *
    * @param namespace The namespace of the KB instance.

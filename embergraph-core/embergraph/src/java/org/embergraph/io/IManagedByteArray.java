@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.io;
 
-/**
- * An interface for a managed byte[]. Implementations of this interface may permit transparent
+/*
+* An interface for a managed byte[]. Implementations of this interface may permit transparent
  * extension of the managed byte[].
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -30,14 +30,14 @@ package org.embergraph.io;
  */
 public interface IManagedByteArray extends IByteArraySlice {
 
-  /**
+  /*
    * Reset the buffer length to zero.
    *
    * @return <i>this</i>.
    */
   IManagedByteArray reset();
 
-  /**
+  /*
    * Append a byte into the managed byte[]. The backing buffer will be automatically extended if
    * necessary.
    *
@@ -45,7 +45,7 @@ public interface IManagedByteArray extends IByteArraySlice {
    */
   IManagedByteArray append(byte b);
 
-  /**
+  /*
    * Append data into the managed byte[]. The backing buffer will be automatically extended if
    * necessary.
    *
@@ -53,7 +53,7 @@ public interface IManagedByteArray extends IByteArraySlice {
    */
   IManagedByteArray append(byte[] a);
 
-  /**
+  /*
    * Append data into the managed byte[]. The backing buffer will be automatically extended if
    * necessary.
    *
@@ -66,7 +66,7 @@ public interface IManagedByteArray extends IByteArraySlice {
   /** Return the capacity of the backing buffer. */
   int capacity();
 
-  /**
+  /*
    * Ensure that at least <i>len</i> bytes are free in the buffer. The buffer may be grown by this
    * operation but it will not be truncated.
    *
@@ -82,7 +82,7 @@ public interface IManagedByteArray extends IByteArraySlice {
    */
   void ensureFree(int len);
 
-  /**
+  /*
    * Ensure that the buffer capacity is a least <i>capacity</i> total bytes. The buffer may be grown
    * by this operation but it will not be truncated.
    *

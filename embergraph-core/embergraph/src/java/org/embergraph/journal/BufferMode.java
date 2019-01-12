@@ -22,8 +22,8 @@ import org.embergraph.btree.BTree;
 import org.embergraph.rwstore.RWStore;
 import org.embergraph.rwstore.sector.MemoryManager;
 
-/**
- * The buffer mode in which the journal is opened.
+/*
+* The buffer mode in which the journal is opened.
  *
  * <p>The {@link #Direct} and {@link #Mapped} options may not be used for files exceeding {@link
  * Integer#MAX_VALUE} bytes in length since a {@link ByteBuffer} is indexed with an <code>int</code>
@@ -35,7 +35,7 @@ import org.embergraph.rwstore.sector.MemoryManager;
  */
 public enum BufferMode {
 
-  /**
+  /*
    * A variant on the {@link #Direct} mode that is not restart-safe. This mode is useful for
    * temporary stores which can reside entirely in memory and do not require disk. It can be used in
    * environments, such as an applet, where you can not access the disk (however, you can also use a
@@ -47,7 +47,7 @@ public enum BufferMode {
   Transient(
       false /* stable */, true /* fullyBuffered */, Options.MEM_MAX_EXTENT, StoreTypeEnum.WORM),
 
-  /**
+  /*
    * <strong>This mode is not being actively developed and should not be used outside of unit
    * tests.</strong>
    *
@@ -65,7 +65,7 @@ public enum BufferMode {
    */
   Direct(true /* stable */, true /* fullyBuffered */, Options.MEM_MAX_EXTENT, StoreTypeEnum.WORM),
 
-  /**
+  /*
    * <strong>This mode is not being actively developed and should not be used outside of unit tests.
    * Memory mapped IO has the fatal weakness under Java that you can not reliably close or extend
    * the backing file.</strong>
@@ -85,14 +85,14 @@ public enum BufferMode {
   Mapped(
       true /* stable */, false /* fullyBuffered */, Options.OTHER_MAX_EXTENT, StoreTypeEnum.WORM),
 
-  /**
+  /*
    * This is a synonym for {@link #DiskWORM}.
    *
    * @see WORMStrategy
    */
   Disk(true /* stable */, false /* fullyBuffered */, Options.OTHER_MAX_EXTENT, StoreTypeEnum.WORM),
 
-  /**
+  /*
    * The journal is managed on disk. This option may be used with files of more than {@link
    * Integer#MAX_VALUE} bytes in extent. Journal performance for large files should be fair on
    * write, but performance will degrade as the journal is NOT optimized for random reads (poor
@@ -103,7 +103,7 @@ public enum BufferMode {
   DiskWORM(
       true /* stable */, false /* fullyBuffered */, Options.OTHER_MAX_EXTENT, StoreTypeEnum.WORM),
 
-  /**
+  /*
    * The journal is managed on disk. This option may be used with files of more than {@link
    * Integer#MAX_VALUE} bytes in extent. RW indicates that it is not a WORM with append only
    * semantics but rather a disk alloc/realloc mechanism that supports updates to values. In general
@@ -114,7 +114,7 @@ public enum BufferMode {
    */
   DiskRW(true /* stable */, false /* fullyBuffered */, Options.RW_MAX_EXTENT, StoreTypeEnum.RW),
 
-  /**
+  /*
    * A variant on the DiskRW backed by a temporary file. Options enable part of the store to be held
    * with Direct ByteBuffers. A significant use case would be an in-memory store but with disk
    * overflow if required.
@@ -124,7 +124,7 @@ public enum BufferMode {
   TemporaryRW(
       false /* stable */, false /* fullyBuffered */, Options.RW_MAX_EXTENT, StoreTypeEnum.RW),
 
-  /**
+  /*
    * A variant on the {@link #Disk} mode that is not restart-safe. This mode is useful for all
    * manners of temporary data with full concurrency control and scales-up to very large temporary
    * files. The backing file (if any) is always destroyed when the store is closed. This is much
@@ -135,7 +135,7 @@ public enum BufferMode {
   Temporary(
       false /* stable */, false /* fullyBuffered */, Options.OTHER_MAX_EXTENT, StoreTypeEnum.WORM),
 
-  /**
+  /*
    * A transient buffer mode backed by the {@link MemoryManager}, which is similar to the {@link
    * RWStore} but optimized for main memory. This can scale up to 4TB of main memory.
    */
@@ -147,7 +147,7 @@ public enum BufferMode {
 
   private final StoreTypeEnum storeType;
 
-  private BufferMode(
+  BufferMode(
       final boolean stable,
       final boolean fullyBuffered,
       final long maxExtent,
@@ -180,7 +180,7 @@ public enum BufferMode {
     return maxExtent;
   }
 
-  /**
+  /*
    * The kind of persistence store (RW or WORM).
    *
    * @see StoreTypeEnum

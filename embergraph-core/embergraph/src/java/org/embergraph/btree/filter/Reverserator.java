@@ -4,8 +4,8 @@ import org.embergraph.btree.IIndex;
 import org.embergraph.btree.ITuple;
 import org.embergraph.btree.ITupleCursor;
 
-/**
- * Return an iterator that traverses the tuples in the reverse of the natural index order. The
+/*
+* Return an iterator that traverses the tuples in the reverse of the natural index order. The
  * iterator is backed by the {@link ITupleCursor} and operations on the iterator effect the state of
  * the cursor and visa versa.
  *

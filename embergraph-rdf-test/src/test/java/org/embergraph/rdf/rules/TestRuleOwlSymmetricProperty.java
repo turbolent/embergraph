@@ -28,8 +28,8 @@ import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for owl:SymmetricProperty processing.
+/*
+* Test suite for owl:SymmetricProperty processing.
  *
  * <pre>
  * (x rdf:type owl:SymmetricProperty), (a x b) -&gt; (b x a)

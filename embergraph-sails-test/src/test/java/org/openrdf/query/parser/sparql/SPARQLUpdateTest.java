@@ -52,8 +52,8 @@ import org.openrdf.rio.RDFParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Tests for SPARQL 1.1 Update functionality.
+/*
+* Tests for SPARQL 1.1 Update functionality.
  *
  * @author Jeen Broekstra
  */
@@ -471,7 +471,7 @@ public abstract class SPARQLUpdateTest extends TestCase {
     assertFalse(con.hasStatement(bob, age, inCorrectAgeValue, true));
   }
 
-  /**
+  /*
    * This test fails for two reasons.
    *
    * <p>(1) It appears that openrdf does not imply a commit() when execute() is invoked on a
@@ -1559,7 +1559,7 @@ public abstract class SPARQLUpdateTest extends TestCase {
     logger.debug("dataset loaded.");
   }
 
-  /**
+  /*
    * Get a set of useful namespace prefix declarations.
    *
    * @return namespace prefix declarations for rdf, rdfs, dc, foaf and ex.
@@ -1578,7 +1578,7 @@ public abstract class SPARQLUpdateTest extends TestCase {
     return declarations.toString();
   }
 
-  /**
+  /*
    * Creates, initializes and clears a repository.
    *
    * @return an initialized empty repository.
@@ -1594,7 +1594,7 @@ public abstract class SPARQLUpdateTest extends TestCase {
     return repository;
   }
 
-  /**
+  /*
    * Create a new Repository object. Subclasses are expected to implement this method to supply the
    * test case with a specific Repository type and configuration.
    *

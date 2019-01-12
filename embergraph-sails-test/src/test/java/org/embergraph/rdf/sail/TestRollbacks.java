@@ -43,8 +43,8 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 
-/**
- * This is a stress test for abort/rollback semantics.
+/*
+* This is a stress test for abort/rollback semantics.
  *
  * <p>This test case will delegate to an underlying backing store. You can specify this store via a
  * JVM property as follows: <code>-DtestClass=org.embergraph.rdf.sail.TestEmbergraphSailWithQuads
@@ -106,7 +106,7 @@ public class TestRollbacks extends QuadsTestCase {
   /** The thrown exception which is the first cause of failure. */
   private AtomicReference<Throwable> firstCause;
 
-  /**
+  /*
    * Service used to run the individual tasks. This makes it possible to interrupt them as soon as
    * one of the tasks fails.
    */
@@ -131,7 +131,7 @@ public class TestRollbacks extends QuadsTestCase {
     super.tearDown();
   }
 
-  /**
+  /*
    * Stress test for abort/rollback semantics consisting of many short runs of the basic test.
    *
    * @throws Exception
@@ -144,7 +144,7 @@ public class TestRollbacks extends QuadsTestCase {
     }
   }
 
-  /**
+  /*
    * Stress test for abort/rollback semantics consisting of one moderate duration run of the basic
    * test.
    *
@@ -157,7 +157,7 @@ public class TestRollbacks extends QuadsTestCase {
 
   private static final AtomicInteger runCount = new AtomicInteger();
 
-  private void doTest(final int maxCounter) throws InterruptedException, Exception {
+  private void doTest(final int maxCounter) throws Exception {
 
     /*
      * Note: Each run needs to be in a distinct namespace since we otherwise
@@ -194,7 +194,7 @@ public class TestRollbacks extends QuadsTestCase {
   }
 
   private void runConcurrentStuff(final SailRepository repo, final int maxCounter)
-      throws Exception, InterruptedException {
+      throws Exception {
     try {
       final List<Callable<Void>> tasks = new LinkedList<Callable<Void>>();
       tasks.add(new DoStuff(repo, true /*writer*/, maxCounter));
@@ -223,7 +223,7 @@ public class TestRollbacks extends QuadsTestCase {
     private final int maxCounter;
     int counter = 0;
 
-    /**
+    /*
      * @param repo The repository.
      * @param writer <code>true</code> iff this is a writer.
      * @param maxCounter Sets a limit on the length of the stress test. A value of 1000 results in a
@@ -250,8 +250,8 @@ public class TestRollbacks extends QuadsTestCase {
         while (firstCause.get() == null && counter < maxCounter) {
           if (writer) writer(conn);
           else reader(conn);
-          /*
-           * Note: If connection obtained/closed within the loop then
+        /*
+       * Note: If connection obtained/closed within the loop then
            * the query is more likely to have some data to visit
            * within its tx view.
            */
@@ -264,7 +264,7 @@ public class TestRollbacks extends QuadsTestCase {
           //                    conn.setAutoCommit(false);
           //                    conn.close();
         }
-        return (Void) null;
+        return null;
       } catch (Throwable t) {
         firstCause.compareAndSet(null /* expect */, t);
         throw new RuntimeException(t);

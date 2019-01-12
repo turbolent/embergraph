@@ -68,7 +68,7 @@ public class BlobsIndexHelper {
   /** The size of a prefix key (a key without a hash collision counter). */
   public static final transient int SIZEOF_PREFIX_KEY = OFFSET_COUNTER;
 
-  /**
+  /*
    * The size of a key in the TERMS index.
    *
    * <p>Note: The key is size is ONE (1) byte for the [flags] byte, ONE (1) for the extension byte
@@ -95,7 +95,7 @@ public class BlobsIndexHelper {
    */
   public static final transient int TERMS_INDEX_KEY_SIZE = 1 + 1 + SIZEOF_HASH + SIZEOF_COUNTER;
 
-  /**
+  /*
    * Arbitrary threshold for the collision counter for a given hash code at which we will log @
    * WARN. This provides notice when there are large hash collision buckets which can effect
    * performance.
@@ -105,7 +105,7 @@ public class BlobsIndexHelper {
   /** Used to signal that the {@link Value} was not found on a read-only request. */
   public static final transient int NOT_FOUND = Integer.MIN_VALUE;
 
-  /**
+  /*
    * Generate the sort keys for {@link EmbergraphValue}s to be represented as {@link BlobIV}s. The
    * sort key is formed from the {@link VTE} of the {@link EmbergraphValue} followed by the hashCode
    * of the {@link EmbergraphValue} . Note that the sort key formed in this manner is only a prefix
@@ -156,8 +156,8 @@ public class BlobsIndexHelper {
     } finally {
 
       try {
-        /*
-         * Note: Both the outer and inner try/catch are just to please
+      /*
+       * Note: Both the outer and inner try/catch are just to please
          * find bugs. DataOutputStream.close() is a NOP.
          */
         out.close();
@@ -169,7 +169,7 @@ public class BlobsIndexHelper {
     return a;
   }
 
-  /**
+  /*
    * Resolve an existing record in the TERMS index and insert the record if none is found.
    *
    * @param termsIndex The TERMS index.
@@ -371,7 +371,7 @@ public class BlobsIndexHelper {
     return (int) rangeCount;
   }
 
-  /**
+  /*
    * Add an entry for a {@link BNode} to the TERMS index (do NOT use when told blank node semantics
    * apply).
    *
@@ -446,7 +446,7 @@ public class BlobsIndexHelper {
     return (int) rangeCount;
   }
 
-  /**
+  /*
    * Return the value associated with the {@link BlobIV} in the TERMS index.
    *
    * <p>Note: The returned <code>byte[]</code> may be decoded using the {@link
@@ -466,7 +466,7 @@ public class BlobsIndexHelper {
     return ndx.lookup(key);
   }
 
-  /**
+  /*
    * Create a fully formed key for the TERMS index from a baseKey and a hash collision counter.
    *
    * @param keyBuilder The caller is responsible for resetting the buffer as required.
@@ -483,7 +483,7 @@ public class BlobsIndexHelper {
     return key;
   }
 
-  /**
+  /*
    * Create a fully formed key for the TERMS index from the {@link VTE}, the hashCode of the {@link
    * EmbergraphValue}, and the hash collision counter.
    *
@@ -516,7 +516,7 @@ public class BlobsIndexHelper {
     return key;
   }
 
-  /**
+  /*
    * Create a prefix key for the TERMS index from the {@link VTE} and hashCode of the {@link
    * EmbergraphValue}.
    *
@@ -547,7 +547,7 @@ public class BlobsIndexHelper {
     return prefixKey;
   }
 
-  /**
+  /*
    * Create a prefix key for the TERMS index from the {@link EmbergraphValue}.
    *
    * @param keyBuilder The caller is responsible for resetting the buffer as required.
@@ -561,7 +561,7 @@ public class BlobsIndexHelper {
     return makePrefixKey(keyBuilder, vte, value.hashCode());
   }
 
-  /**
+  /*
    * Generate the successor of the fromKey.
    *
    * @param fromKey The fromKey.
@@ -599,7 +599,7 @@ public class BlobsIndexHelper {
     return tmp;
   }
 
-  /**
+  /*
    * Return a new {@link IKeyBuilder} suitable for formatting keys for the TERMS index.
    *
    * @return The {@link IKeyBuilder}.
@@ -609,7 +609,7 @@ public class BlobsIndexHelper {
     return new KeyBuilder(TERMS_INDEX_KEY_SIZE);
   }
 
-  /**
+  /*
    * Exception thrown if the maximum size of the collision bucket would be exceeded for some {@link
    * EmbergraphValue}.
    *

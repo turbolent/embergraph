@@ -15,8 +15,8 @@ import org.embergraph.striterator.ChunkedWrappedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.openrdf.model.Value;
 
-/**
- * {@link IChangeLog} implementation reports inferences as RDF {@link Statement} s. You install this
+/*
+* {@link IChangeLog} implementation reports inferences as RDF {@link Statement} s. You install this
  * change listener before writing on the sail connection. After the commit, you use {@link
  * #addedIterator()} ( {@link #removedIterator()}) to visit the inferences that were added to
  * (removed from) the KB by the transaction. If the transaction is aborted, simply discard the
@@ -49,7 +49,7 @@ public class InferenceChangeLogReporter implements IChangeLog {
     this.kb = kb;
   }
 
-  /**
+  /*
    * Clear the internal state. This may be used to reset the listener if multiple commits are used
    * for the same connection.
    *

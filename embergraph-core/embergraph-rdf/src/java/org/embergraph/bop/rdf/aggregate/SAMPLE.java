@@ -27,8 +27,8 @@ import org.embergraph.rdf.internal.constraints.INeedsMaterialization;
 import org.embergraph.rdf.internal.constraints.INeedsMaterialization.Requirement;
 import org.embergraph.rdf.internal.constraints.IPassesMaterialization;
 
-/**
- * Operator reports an arbitrary value from presented binding sets for the given variable. Missing
+/*
+* Operator reports an arbitrary value from presented binding sets for the given variable. Missing
  * values are not chosen when non-missing values are available.
  *
  * @author thompsonbry
@@ -50,7 +50,7 @@ public class SAMPLE extends AggregateBase<IV> implements IPassesMaterialization 
     super(/*FunctionCode.SAMPLE,*/ distinct, expr);
   }
 
-  /**
+  /*
    * The sampled value and initially <code>null</code>.
    *
    * <p>Note: This field is guarded by the monitor on the {@link SAMPLE} instance.

@@ -32,8 +32,8 @@ import org.embergraph.journal.AbstractJournal;
 import org.embergraph.rawstore.IRawStore;
 import org.embergraph.service.AbstractTransactionService;
 
-/**
- * Test release (aka purge) of old resources.
+/*
+* Test release (aka purge) of old resources.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -66,8 +66,8 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
   //
   //    }
 
-  //    /**
-  //     * A unit test for the logic which determines which resources are "release
+  //    /*
+//     * A unit test for the logic which determines which resources are "release
   //     * free" as of a given commit time to be preserved (aka, resource which are
   //     * not required for views based on any commit point from the timestamp to be
   //     * preserved up to and including the unisolated views).
@@ -78,14 +78,14 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
   //    static public class TestReleaseFree extends TestReleaseResources {
   //
   //
-  //        /**
-  //         *
+  //        /*
+//         *
   //         */
   //        public TestReleaseFree() {
   //        }
   //
-  //        /**
-  //         * @param arg0
+  //        /*
+//         * @param arg0
   //         */
   //        public TestReleaseFree(String arg0) {
   //            super(arg0);
@@ -107,8 +107,8 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
   //
   //        }
   //
-  //        /**
-  //         * Test creates a sequence of view declarations for an index and
+  //        /*
+//         * Test creates a sequence of view declarations for an index and
   //         * verifies that the correct set of resources are identified as being
   //         * in-use for a variety of timestamps.
   //         *
@@ -125,7 +125,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
   //
   //    }
 
-  /**
+  /*
    * Test where the index view is copied in its entirety onto the new journal but the {@link
    * ResourceManager} is not permitted to release old resources (it is configured as an immortal
    * store).
@@ -155,7 +155,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
       return properties;
     }
 
-    /**
+    /*
      * Test creates an index whose view is initially defined by the initial journal on the {@link
      * ResourceManager}. An overflow of the journal is then forced, which re-defines the view on the
      * new journal. Since the index is very small (it is empty), it is "copied" onto the new journal
@@ -256,7 +256,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
     }
   }
 
-  /**
+  /*
    * Test where the index view is copied in its entirety onto the new journal and the
    * [minReleaseAge] is ZERO(0). In this case we have no dependencies on the old journal and it is
    * released during overflow processing.
@@ -284,7 +284,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
       return properties;
     }
 
-    /**
+    /*
      * Test creates an index whose view is initially defined by the initial journal on the sole data
      * service. An overflow of the journal is then forced, which re-defines the view on the new
      * journal. Since the index is very small (it is empty), it is "copied" onto the new journal
@@ -396,7 +396,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
     }
   }
 
-  /**
+  /*
    * Test where the indices are copied during synchronous overflow processing and where a non-zero
    * [minReleaseAge] was specified.
    *
@@ -414,7 +414,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
       super(arg0);
     }
 
-    /**
+    /*
      * This is the minimum release time that will be used for the test.
      *
      * <p>Note: 2000 is 2 seconds. This is what you SHOULD use for the test (it can be a little
@@ -435,7 +435,7 @@ public class TestReleaseResources extends AbstractResourceManagerTestCase {
       return properties;
     }
 
-    /**
+    /*
      * Test where the index view is copied in its entirety onto the new journal and the
      * [minReleaseAge] is 2 seconds. In this case we have no dependencies on the old journal, but
      * the [minReleaseAge] is not satisfied immediately so no resources are released during

@@ -25,7 +25,7 @@ public class HASnapshotRequest implements IHASnapshotRequest, Serializable {
 
   private final int percentLogSize;
 
-  /**
+  /*
    * @param percentLogSize If the size on the disk of the HALog files is less than this percentage
    *     of the size on the disk of the journal, then the snapshot will not be taken.
    */

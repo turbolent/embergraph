@@ -5,7 +5,7 @@ package org.embergraph.rdf.sail.sparql.ast;
 /** Token Manager Error. */
 public class TokenMgrError extends Error {
 
-  /**
+  /*
    * The version identifier for this Serializable class. Increment only if the <i>serialized</i>
    * form of the class changes.
    */
@@ -30,7 +30,7 @@ public class TokenMgrError extends Error {
   /** Indicates the reason why the exception is thrown. It will have one of the above 4 values. */
   int errorCode;
 
-  /**
+  /*
    * Replaces unprintable characters by their escaped (or unicode escaped) equivalents in the given
    * string
    */
@@ -68,7 +68,7 @@ public class TokenMgrError extends Error {
         default:
           if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
             String s = "0000" + Integer.toString(ch, 16);
-            retval.append("\\u" + s.substring(s.length() - 4, s.length()));
+            retval.append("\\u" + s.substring(s.length() - 4));
           } else {
             retval.append(ch);
           }
@@ -78,7 +78,7 @@ public class TokenMgrError extends Error {
     return retval.toString();
   }
 
-  /**
+  /*
    * Returns a detailed message for the Error when it is thrown by the token manager to indicate a
    * lexical error. Parameters : EOFSeen : indicates if EOF caused the lexical error curLexState :
    * lexical state in which this error occurred errorLine : line number when the error occurred
@@ -106,7 +106,7 @@ public class TokenMgrError extends Error {
         + "\"");
   }
 
-  /**
+  /*
    * You can also modify the body of this method to customize your error messages. For example,
    * cases like LOOP_DETECTED and INVALID_LEXICAL_STATE are not of end-users concern, so you can
    * return something like :

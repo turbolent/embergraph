@@ -6,7 +6,7 @@ import org.embergraph.btree.ITupleSerializer;
 /** A key-value pair used to facilitate some iterator constructs. */
 class Tuple<E> extends AbstractTuple<E> {
 
-  /**
+  /*
    * @param htree
    * @param flags
    */

@@ -6,8 +6,8 @@ import org.embergraph.io.IStreamSerializer;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Wrapper for an {@link IAsynchronousIterator} exposing an interface suitable for export as a proxy
+/*
+* Wrapper for an {@link IAsynchronousIterator} exposing an interface suitable for export as a proxy
  * object using RMI to communicate back with itself and pull data efficiently from the source
  * iterator.
  *
@@ -31,7 +31,7 @@ public class RemoteChunkedIterator<E> implements IRemoteChunkedIterator<E> {
 
   transient volatile boolean open = true;
 
-  /**
+  /*
    * @param sourceIterator The source iterator.
    * @param serializer The object that will be used to (de-)serialize the elements.
    * @param keyOrder The natural order of the visited elements if known and otherwise <code>null
@@ -63,8 +63,8 @@ public class RemoteChunkedIterator<E> implements IRemoteChunkedIterator<E> {
    * problems, and we create a LOT of instances of this method.
    */
   //
-  //    /**
-  //     * Note: since [keepAlive := false], this appears to be sufficient to force
+  //    /*
+//     * Note: since [keepAlive := false], this appears to be sufficient to force
   //     * the proxy to be unexported and force the source iterator to be closed.
   //     */
   //    protected void finalize() throws Throwable {
@@ -102,7 +102,7 @@ public class RemoteChunkedIterator<E> implements IRemoteChunkedIterator<E> {
     }
   }
 
-  /**
+  /*
    * Return the next {@link IRemoteChunk} from the source iterator. If it is exhausted then return
    * an {@link IRemoteChunk} which indicates that no more results are available.
    */

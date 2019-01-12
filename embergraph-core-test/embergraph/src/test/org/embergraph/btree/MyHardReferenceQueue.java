@@ -20,8 +20,8 @@ package org.embergraph.btree;
 import org.embergraph.cache.HardReferenceQueue;
 import org.embergraph.cache.HardReferenceQueueEvictionListener;
 
-/**
- * Wraps the basic implementation and exposes a protected method that we need to write the tests in
+/*
+* Wraps the basic implementation and exposes a protected method that we need to write the tests in
  * this suite.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

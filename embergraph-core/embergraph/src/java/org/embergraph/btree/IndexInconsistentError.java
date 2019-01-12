@@ -20,8 +20,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.btree;
 
-/**
- * Error marks an mutable index as in an inconsistent state. The index MUST be reloaded from the
+/*
+* Error marks an mutable index as in an inconsistent state. The index MUST be reloaded from the
  * current checkpoint record.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

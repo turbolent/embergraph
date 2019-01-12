@@ -2,8 +2,8 @@ package org.embergraph.search;
 
 import java.util.Locale;
 
-/**
- * This is an implementation of RFC 4647 language range, targetted at the specific needs within
+/*
+* This is an implementation of RFC 4647 language range, targetted at the specific needs within
  * embergraph, and only supporting the extended filtering specified in section 3.3.2
  *
  * <p>Language ranges are comparable so that sorting an array and then matching a language tag
@@ -14,9 +14,9 @@ import java.util.Locale;
  */
 public class LanguageRange implements Comparable<LanguageRange> {
 
-  private final String range[];
+  private final String[] range;
   final String full;
-  /**
+  /*
    * Note range must be in lower case, this is not verified.
    *
    * @param range
@@ -65,7 +65,7 @@ public class LanguageRange implements Comparable<LanguageRange> {
     return full.hashCode();
   }
 
-  /**
+  /*
    * This implements the algoirthm of section 3.3.2 of RFC 4647 as modified with the observation
    * about private use tags in <a
    * href="http://lists.w3.org/Archives/Public/www-international/2014AprJun/0084">this message</a>.

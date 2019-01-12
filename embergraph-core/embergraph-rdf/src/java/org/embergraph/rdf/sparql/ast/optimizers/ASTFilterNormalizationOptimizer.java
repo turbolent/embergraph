@@ -42,8 +42,8 @@ import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.openrdf.model.URI;
 
-/**
- * The {@link ASTFilterNormalizationOptimizer} is responsible for the static decomposition and
+/*
+* The {@link ASTFilterNormalizationOptimizer} is responsible for the static decomposition and
  * optimization of filter expressions. In it's first version, it decomposes conjunctive FILTER
  * expressions, enabling (i) a more precise placement of filter expressions in join groups and (ii)
  * clears the way for static binding analysis through the {@link ASTStaticBindingsOptimizer}.
@@ -77,7 +77,7 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
     removeDuplicatesAndTautologies(ctx, sa, bSets, group);
   }
 
-  /**
+  /*
    * Bring all FILTERs into CNF and split them at top-level to contain simpler FILTER expressions.
    */
   protected void normalizeAndDecomposeFilters(
@@ -191,7 +191,7 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
     }
   }
 
-  /**
+  /*
    * Checks whether the given filter node is trivially satisfied
    *
    * @param filterNode
@@ -213,7 +213,7 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
     return alwaysSatisifed;
   }
 
-  /**
+  /*
    * Checks whether the value expression node vexp is of the form <tt>bound(?var)</tt> where ?var is
    * contained in the definite vars, meaning that we encountered a bound expression that is always
    * true.
@@ -245,7 +245,7 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
     return false; // pattern not matched
   }
 
-  /**
+  /*
    * Checks whether the value expression node vexp is of the form <tt>not(bound(?var))</tt> where
    * ?var is not contained in the maybe vars, meaning that we encountered a not bound expression
    * that is always true.
@@ -289,7 +289,7 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
     return false; // pattern not matched
   }
 
-  /**
+  /*
    * Checks if there might be potential for decomposing the filter (overestimation).
    *
    * @param filterNode
@@ -321,7 +321,7 @@ public class ASTFilterNormalizationOptimizer extends AbstractJoinGroupOptimizer 
     return false;
   }
 
-  /**
+  /*
    * Construct FILTERs for the given value expression node, exploiting AND nodes at the top to split
    * the node into multiple filters (if possible). Particularly useful to get filter expressions for
    * all conjuncts when given a {@link ValueExpressionNode} in CNF as input.

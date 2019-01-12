@@ -24,8 +24,8 @@ import java.nio.channels.ClosedChannelException;
 import java.util.concurrent.ExecutorService;
 import org.embergraph.io.FileChannelUtility;
 
-/**
- * Direct buffer strategy uses a direct {@link ByteBuffer} as a write through cache and writes
+/*
+* Direct buffer strategy uses a direct {@link ByteBuffer} as a write through cache and writes
  * through to disk for persistence.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -48,7 +48,7 @@ public class DirectBufferStrategy extends DiskBackedBufferStrategy {
     return true;
   }
 
-  /**
+  /*
    * Extends the basic behavior to write through to the backing file.
    *
    * <p>Note: {@link ClosedChannelException} can be thrown out of this method. This exception is an

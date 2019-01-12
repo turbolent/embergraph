@@ -42,7 +42,7 @@ public class AbstractConnectOptions implements IMimeTypes {
   /** The Request Header value */
   public static final transient String ACCEPT_HEADER = "Accept";
 
-  /**
+  /*
    * When <code>true</code>, the request is a non-idempotent operation (an UPDATE request or some
    * kind) and must be directed to the leader for HA. When <code>false</code>, the request is an
    * idempotent operation and should be load balanced over the available service for HA. This option
@@ -59,19 +59,19 @@ public class AbstractConnectOptions implements IMimeTypes {
   /** Used for {@link BooleanQueryResultFormat} responses. */
   public static final String DEFAULT_BOOLEAN_ACCEPT_HEADER;
 
-  //    /**
-  //     * Used for NSS mutation operation responses.
+  //    /*
+//     * Used for NSS mutation operation responses.
   //     */
   //    public static final String MIME_APPLICATION_XML = "application/xml";
 
-  //    /**
-  //     * Used to interchange {@link Properties} objects.
+  //    /*
+//     * Used to interchange {@link Properties} objects.
   //     */
   //    public static final String MIME_PROPERTIES_XML = "application/xml";
 
   static {
 
-    /**
+    /*
      * Note: This has been commented out. If it is included, then a lot of the total code base gets
      * dragged into the embergraph-client JAR. If this creates a problem for clients, then we will
      * need to examine the embergraph RDF model and embergraph RDF parser packages carefully and
@@ -186,7 +186,7 @@ public class AbstractConnectOptions implements IMimeTypes {
     return requestHeaders.get(name);
   }
 
-  /**
+  /*
    * Add any URL query parameters (for a GET request).
    *
    * @see #1097 (Extension REST API does not support multiple context values)
@@ -216,7 +216,7 @@ public class AbstractConnectOptions implements IMimeTypes {
     } // next Map.Entry
   }
 
-  /**
+  /*
    * Variant of {@link #addQueryParams(StringBuilder, Map)} that returns an entity for a POST
    * request.
    *
@@ -249,7 +249,7 @@ public class AbstractConnectOptions implements IMimeTypes {
     return new UrlEncodedFormEntity(formparams, RemoteRepository.UTF8);
   }
 
-  /**
+  /*
    * Apply a UTF8 encoding to a component of a URL.
    *
    * @param in The text to be encoded.

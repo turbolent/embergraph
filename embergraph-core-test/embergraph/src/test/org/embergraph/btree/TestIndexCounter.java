@@ -24,8 +24,8 @@ package org.embergraph.btree;
 import org.embergraph.btree.BTree.PartitionedCounter;
 import org.embergraph.rdf.lexicon.TermIdEncoder;
 
-/**
- * Test suite for the {@link IIndex#getCounter()} interface.
+/*
+* Test suite for the {@link IIndex#getCounter()} interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -59,7 +59,7 @@ public class TestIndexCounter extends AbstractBTreeTestCase {
     assertEquals(2, counter.incrementAndGet());
   }
 
-  /**
+  /*
    * Unit test for overflow conditions at the int32 and int64 boundary for {@link BTree.Counter}.
    */
   public void test_counter_overflow() {
@@ -189,7 +189,7 @@ public class TestIndexCounter extends AbstractBTreeTestCase {
     }
   }
 
-  /**
+  /*
    * Unit tests for {@link PartitionedCounter} when the partition identifier is {@link
    * Integer#MAX_VALUE}.
    */
@@ -198,7 +198,7 @@ public class TestIndexCounter extends AbstractBTreeTestCase {
     doPartitionedCounterTest(Integer.MAX_VALUE);
   }
 
-  /**
+  /*
    * Unit tests for {@link PartitionedCounter} when the partition identifier is {@link
    * Integer#MIN_VALUE}.
    */

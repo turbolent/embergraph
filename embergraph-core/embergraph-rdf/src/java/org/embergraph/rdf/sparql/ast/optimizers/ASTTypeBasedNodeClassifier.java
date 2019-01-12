@@ -26,8 +26,8 @@ import java.util.List;
 import java.util.Map;
 import org.embergraph.rdf.sparql.ast.IGroupMemberNode;
 
-/**
- * Classification of {@link IGroupMemberNode}s along a set of specified types. For nodes matching a
+/*
+* Classification of {@link IGroupMemberNode}s along a set of specified types. For nodes matching a
  * given type, lookup is possible (returning an ordered list of nodes), all other nodes are stored
  * in a dedicated list.
  *
@@ -47,7 +47,7 @@ class ASTTypeBasedNodeClassifier {
 
   Map<Class<?>, List<IGroupMemberNode>> classifiedNodes;
 
-  /**
+  /*
    * Constructor, receiving as an argument a list of types based on which classification is done.
    *
    * @param types
@@ -60,7 +60,7 @@ class ASTTypeBasedNodeClassifier {
     clazzConstraints = new HashMap<Class<?>, ASTTypeBasedNodeClassifierConstraint>();
   }
 
-  /**
+  /*
    * Constructor, receiving as an argument a list of types based on which classification is done,
    * and a list of nodes to be classified.
    *
@@ -73,7 +73,7 @@ class ASTTypeBasedNodeClassifier {
     registerNodes(nodeList);
   }
 
-  /**
+  /*
    * Register the set of nodes to the classifier, making them available for lookup.
    *
    * @param nodeList
@@ -114,14 +114,14 @@ class ASTTypeBasedNodeClassifier {
     return unclassifiedNodes;
   }
 
-  /**
+  /*
    * Returns the list of nodes that are classified with the given type. If the type was passed when
    * constructing the object, the result is the (possibly empty) list of nodes with the given type.
    * If the type was not provided, null is returned.
    */
   @SuppressWarnings("unchecked")
   public <T> List<T> get(Class<T> clazz) {
-    return (List<T>) (List<?>) classifiedNodes.get(clazz);
+    return (List<T>) classifiedNodes.get(clazz);
   }
 
   public void addConstraintForType(

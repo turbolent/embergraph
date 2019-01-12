@@ -39,8 +39,8 @@ import org.embergraph.btree.TestTuple;
 import org.embergraph.btree.Tuple;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for the {@link Reverserator}.
+/*
+* Test suite for the {@link Reverserator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -62,7 +62,7 @@ public class TestReverserator extends AbstractTupleCursorTestCase {
         (BTree) btree, new Tuple<String>(btree, IRangeQuery.DEFAULT), fromKey, toKey);
   }
 
-  /**
+  /*
    * @todo add tests for the rest of the {@link ITupleCursor} API since the {@link Reverserator}
    *     implements the full {@link ITupleCursor} API.
    */
@@ -122,7 +122,7 @@ public class TestReverserator extends AbstractTupleCursorTestCase {
     }
   }
 
-  /**
+  /*
    * Stress test written in an attempt to find a spin lock in the reverse cursor traversal.
    *
    * <p>Note: This test was in the jetty branch. I have picked it up and copied it into the master.

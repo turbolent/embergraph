@@ -93,7 +93,7 @@ public class XSDUnsignedIntIV<V extends EmbergraphLiteral> extends AbstractLiter
 
   @Override
   public final long longValue() {
-    return (long) promote();
+    return promote();
   }
 
   /*
@@ -104,7 +104,7 @@ public class XSDUnsignedIntIV<V extends EmbergraphLiteral> extends AbstractLiter
   @Override
   public boolean booleanValue() {
 
-    return value != UNSIGNED_ZERO ? true : false;
+    return value != UNSIGNED_ZERO;
   }
 
   //    static private final int UNSIGNED_ZERO = ((int) Integer.MAX_VALUE) + 1;
@@ -158,13 +158,13 @@ public class XSDUnsignedIntIV<V extends EmbergraphLiteral> extends AbstractLiter
     return false;
   }
 
-  /**
+  /*
    * Return the hash code of the int value.
    *
    * @see Integer#hashCode()
    */
   public int hashCode() {
-    return (int) value;
+    return value;
   }
 
   public int byteLength() {

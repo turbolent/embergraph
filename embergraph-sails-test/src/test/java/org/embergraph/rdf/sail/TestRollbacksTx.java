@@ -19,8 +19,8 @@ package org.embergraph.rdf.sail;
 
 import java.util.Properties;
 
-/**
- * Concrete instance of {@link TestRollbacks} which overrides the properties to enable full
+/*
+* Concrete instance of {@link TestRollbacks} which overrides the properties to enable full
  * transaction support in the SAIL.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

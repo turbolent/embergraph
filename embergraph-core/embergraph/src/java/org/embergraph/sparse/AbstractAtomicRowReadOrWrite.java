@@ -39,8 +39,8 @@ import org.embergraph.btree.proc.AbstractIndexProcedure;
 import org.embergraph.btree.proc.ISimpleIndexProcedure;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Abstract class implements the atomic read operation. However, it does NOT declare itself to be a
+/*
+* Abstract class implements the atomic read operation. However, it does NOT declare itself to be a
  * read-only operation since this class is extended by both {@link AtomicRowRead} and {@link
  * AtomicRowWriteRead}.
  *
@@ -51,13 +51,13 @@ public abstract class AbstractAtomicRowReadOrWrite extends AbstractIndexProcedur
 
   private static final Logger log = Logger.getLogger(AbstractAtomicRowReadOrWrite.class);
 
-  //    /**
-  //     * True iff the {@link #log} level is INFO or less.
+  //    /*
+//     * True iff the {@link #log} level is INFO or less.
   //     */
   //    protected final static boolean INFO = log.isInfoEnabled();
   //
-  //    /**
-  //     * True iff the {@link #log} level is DEBUG or less.
+  //    /*
+//     * True iff the {@link #log} level is DEBUG or less.
   //     */
   //    protected final static boolean DEBUG = log.isDebugEnabled();
 
@@ -73,7 +73,7 @@ public abstract class AbstractAtomicRowReadOrWrite extends AbstractIndexProcedur
     super();
   }
 
-  /**
+  /*
    * Constructor for an atomic write/read operation.
    *
    * @param schema The schema governing the property set.
@@ -104,7 +104,7 @@ public abstract class AbstractAtomicRowReadOrWrite extends AbstractIndexProcedur
     this.filter = filter;
   }
 
-  /**
+  /*
    * Atomic read on the index.
    *
    * @param ndx The index on which the data are stored.
@@ -143,7 +143,7 @@ public abstract class AbstractAtomicRowReadOrWrite extends AbstractIndexProcedur
     return tps;
   }
 
-  /**
+  /*
    * Alternative form useful when you have the raw key (unsigned byte[]) rather than a primary key
    * (application object).
    *
@@ -357,7 +357,7 @@ public abstract class AbstractAtomicRowReadOrWrite extends AbstractIndexProcedur
     return tps;
   }
 
-  /**
+  /*
    * Return the current binding for the named property.
    *
    * @param schema The schema.

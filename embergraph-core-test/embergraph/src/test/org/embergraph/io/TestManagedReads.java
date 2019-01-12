@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.Random;
 import junit.framework.TestCase;
 
-/**
- * Investigates the benefits (if any) of managed concurrent reads with the aim of developing metrics
+/*
+* Investigates the benefits (if any) of managed concurrent reads with the aim of developing metrics
  * on which to base a ConcurrentReadManager for use by the Disk based strategies.
  *
  * <p>At present this does not test any BigData components so should not be included in the test
@@ -39,14 +39,14 @@ public class TestManagedReads extends TestCase {
     }
     //		@Override
     public int compareTo(Record o) {
-      return pos < ((Record) o).pos ? -1 : 1;
+      return pos < o.pos ? -1 : 1;
     }
   }
 
   ArrayList<Record> m_records = new ArrayList<Record>(20000); // capacity for 20000 record entries
   Random r = new Random();
 
-  /**
+  /*
    * Generates file of filesize composed of a number of records between min and max size. Write
    * random data to file.
    *

@@ -19,8 +19,8 @@ package org.embergraph.btree.raba;
 
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link SubRangeRaba}.
+/*
+* Test suite for {@link SubRangeRaba}.
  *
  * @author bryan
  * @see BLZG-1537 (Schedule more IOs when loading data)

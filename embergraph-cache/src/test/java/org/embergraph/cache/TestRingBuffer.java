@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import junit.framework.TestCase2;
 
-/**
- * Test suite for {@link RingBuffer}.
+/*
+* Test suite for {@link RingBuffer}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -91,7 +91,7 @@ public class TestRingBuffer extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Tests the basic functionality of the ring buffer by incrementally populating and then draining
    * the buffer, including the case where the ring buffer wraps around.
    *
@@ -250,7 +250,7 @@ public class TestRingBuffer extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Unit test for the ability to remove an element at any (valid) index in the ring buffer. This
    * operation requires us to close up the hole in the ring buffer and adjust the tail (the next
    * element to be read). Those behaviors are tested here. Note that all of the random access remove
@@ -300,7 +300,7 @@ public class TestRingBuffer extends TestCase2 {
     assertEquals("refs", new String[] {a, b, c}, buffer.toArray(new String[0]));
   }
 
-  /**
+  /*
    * Unit test for the iterator. This iterator IS NOT thread-safe. It visits elements in the order
    * in which they will be read from the buffer (LRU to MRU).
    */
@@ -340,7 +340,7 @@ public class TestRingBuffer extends TestCase2 {
     assertSameIterator(new String[] {}, buffer.iterator());
   }
 
-  /**
+  /*
    * Unit test for Iterator#remove.
    *
    * <p>We tested the ability to remove elements in {@link #test_removeNth()} so all we have to

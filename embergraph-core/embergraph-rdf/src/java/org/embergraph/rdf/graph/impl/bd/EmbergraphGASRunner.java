@@ -26,8 +26,8 @@ import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.sail.SailConnection;
 
-/**
- * Base class for running performance tests against the embergraph backend.
+/*
+* Base class for running performance tests against the embergraph backend.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -35,7 +35,7 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
   private static final Logger log = Logger.getLogger(EmbergraphGASRunner.class);
 
-  /**
+  /*
    * Configured options for the {@link GASRunnerBase}.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -51,13 +51,13 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
     /** The as-configured {@link Properties} for the {@link Journal}. */
     private Properties properties;
 
-    /**
+    /*
      * The effective KB name. This is set by consulting {@link #namespaceOverride} and the as
      * configured {@link #properties}.
      */
     private String namespace;
 
-    /**
+    /*
      * The backend.
      *
      * <p>TODO Could start NSS and use SPARQL UPDATE "LOAD" to load the data. That exposes the
@@ -67,13 +67,13 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
      */
     private Journal jnl;
 
-    /**
+    /*
      * <code>true</code> iff the backend is temporary (created on a temporary backing file).
      * Temporary backends are destroyed in {@link #shutdown()}.
      */
     private boolean isTemporary;
 
-    /**
+    /*
      * Set to <code>true</code> iff we determine that the data needs to be loaded (e.g., the KB was
      * empty, so we have to load the data sets).
      *
@@ -82,7 +82,7 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
      */
     private boolean newKB = false;
 
-    /**
+    /*
      * The #of edges in the KB instance and <code>-1</code> until set by {@link
      * EmbergraphGASRunner#loadFiles()}.
      */
@@ -120,8 +120,8 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
           }
         }
 
-        /*
-         * Obtain a buffered reader on the input stream.
+      /*
+       * Obtain a buffered reader on the input stream.
          */
 
         final Properties properties = new Properties();
@@ -144,8 +144,8 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
           }
         }
 
-        /*
-         * Allow override of select options from the command line.
+      /*
+       * Allow override of select options from the command line.
          */
         {
           final String[] overrides =
@@ -225,8 +225,8 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
         if (fileStr == null) {
 
-          /*
-           * We will use a temporary file that we create here. The journal
+        /*
+       * We will use a temporary file that we create here. The journal
            * will be destroyed below.
            */
           isTemporary = true;
@@ -308,7 +308,7 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
       super.shutdown();
     }
 
-    /**
+    /*
      * Return <code>true</code>iff one or more arguments can be parsed starting at the specified
      * index.
      *
@@ -334,7 +334,7 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
       return true;
     }
 
-    /**
+    /*
      * {@inheritDoc}
      *
      * <p>TODO report #of vertices (DISTINCT UNION (?s, ?o)
@@ -386,7 +386,7 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
     return (EmbergraphOptionData) super.getOptionData();
   }
 
-  /**
+  /*
    * Run a GAS analytic against some data set.
    *
    * @param args USAGE:<br>
@@ -420,9 +420,9 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
     try {
 
-      final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor(new Class[] {});
+      final Constructor<IGASProgram<VS, ES, ST>> ctor = cls.getConstructor();
 
-      final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance(new Object[] {});
+      final IGASProgram<VS, ES, ST> gasProgram = ctor.newInstance();
 
       return gasProgram;
 
@@ -480,7 +480,7 @@ public class EmbergraphGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
     }
   }
 
-  /**
+  /*
    * Performance testing harness.
    *
    * @see #GASRunner(String[])

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Random;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Rather than run in a JUnit, the performance tests are best run standalone.
+/*
+* Rather than run in a JUnit, the performance tests are best run standalone.
  *
  * @author Martyn Cutcher
  */

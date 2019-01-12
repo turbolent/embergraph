@@ -21,35 +21,35 @@ package org.embergraph.io.compression;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.zip.Deflater;
 
-/**
- * Registration pattern for {@link IRecordCompressor} implementations.
+/*
+* Registration pattern for {@link IRecordCompressor} implementations.
  *
  * @author Martyn Cutcher
  */
 public class CompressorRegistry {
 
-  /**
+  /*
    * Key for {@link Deflater} compression with BEST SPEED.
    *
    * @see RecordCompressor
    */
   public static final String DEFLATE_BEST_SPEED = "DBS";
 
-  /**
+  /*
    * Key for {@link Deflater} compression with BEST COMPRESSION.
    *
    * @see RecordCompressor
    */
   public static final String DEFLATE_BEST_COMPRESSION = "DBC";
 
-  /**
+  /*
    * Key for GZIP compression.
    *
    * @see GZipCompressor
    */
   public static final String GZIP = "GZIP";
 
-  /**
+  /*
    * Key for no compression.
    *
    * <p>Note: <code>null</code> is more efficient than the {@link NOPRecordCompressor} since it
@@ -76,7 +76,7 @@ public class CompressorRegistry {
     add(NOP, new NOPRecordCompressor());
   }
 
-  /**
+  /*
    * Global hook to allow customized compression strategies
    *
    * @param key
@@ -90,7 +90,7 @@ public class CompressorRegistry {
     }
   }
 
-  /**
+  /*
    * Return the {@link IRecordCompressor} registered under that key (if any).
    *
    * @param key The key (optional - may be <code>null</code>).

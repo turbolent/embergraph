@@ -68,8 +68,8 @@ import org.apache.commons.io.IOUtils;
 
 // TODO: implement interfaces correctly (e.g., using the iterator)
 
-/**
- * An immutable prefix map mostly stored in external memory.
+/*
+* An immutable prefix map mostly stored in external memory.
  *
  * <p>An {@link it.unimi.dsi.util.ImmutableExternalPrefixMap} compresses words using a {@link
  * it.unimi.dsi.compression.HuTuckerCodec} and approximates intervals using an {@link
@@ -139,11 +139,11 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
   protected final Char2IntOpenHashMap char2symbol;
   /** The number of terms in this map. */
   protected final int size;
-  /**
+  /*
    * The index of the first word in each block, plus an additional entry containing {@link #size}.
    */
   protected final int[] blockStart;
-  /**
+  /*
    * An array parallel to {@link #blockStart} giving the offset in blocks in the dump file of the
    * corresponding word in {@link #blockStart}. If there are no overflows, this will just be an
    * initial segment of the natural numbers, but overflows cause jumps.
@@ -151,16 +151,16 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
   protected final int[] blockOffset;
   /** Whether this map is self-contained. */
   protected final boolean selfContained;
-  /**
+  /*
    * The length in bytes of the dump stream, both for serialisation purposes and for minimal checks.
    */
   private final long dumpStreamLength;
-  /**
+  /*
    * The filename of the temporary dump stream, or of the dump stream created by the constructor or
    * by readObject().
    */
   private transient String tempDumpStreamFilename;
-  /**
+  /*
    * If true, the creation of the last <code>DumpStreamIterator</code> was not followed by a call to
    * any get method.
    */
@@ -168,7 +168,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
   /** A reference to the dump stream. */
   protected transient InputBitStream dumpStream;
 
-  /**
+  /*
    * map external map.
    *
    * <p>This constructor does not assume that strings returned by <code>terms.iterator()</code> will
@@ -315,7 +315,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
               "Aligning away " + (blockSize - output.writtenBits() % blockSize) + " bits...");
         for (int j = (int) (blockSize - output.writtenBits() % blockSize); j-- != 0; )
           output.writeBit(0);
-        if (ASSERTS) assert output.writtenBits() % blockSize == 0;
+        assert !ASSERTS || output.writtenBits() % blockSize == 0;
       }
 
       if (output.writtenBits() % blockSize == 0) {
@@ -368,7 +368,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     dumpStream = new InputBitStream(tempDumpStreamFilename, blockSizeInBytes);
   }
 
-  /**
+  /*
    * Creates an external map with block size {@link #STD_BLOCK_SIZE} and specified dump stream.
    *
    * <p>This constructor does not assume that strings returned by <code>terms.iterator()</code> will
@@ -385,7 +385,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     this(terms, STD_BLOCK_SIZE, dumpStreamFilename);
   }
 
-  /**
+  /*
    * Creates an external map with specified block size.
    *
    * <p>This constructor does not assume that strings returned by <code>terms.iterator()</code> will
@@ -400,7 +400,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     this(terms, blockSizeInBytes, null);
   }
 
-  /**
+  /*
    * Creates an external prefix map with block size {@link #STD_BLOCK_SIZE}.
    *
    * <p>This constructor does not assume that strings returned by <code>terms.iterator()</code> will
@@ -432,7 +432,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     return true;
   }
 
-  /**
+  /*
    * Sets the dump stream of this external prefix map to a given filename.
    *
    * <p>This method sets the dump file used by this map, and should be only called after
@@ -459,7 +459,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     dumpStream = new InputBitStream(dumpStreamFilename.toString(), (int) (blockSize / 8));
   }
 
-  /**
+  /*
    * Sets the dump stream of this external prefix map to a given input bit stream.
    *
    * <p>This method sets the dump file used by this map, and should be only called after
@@ -645,7 +645,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     return result == -1 ? defRetValue : result;
   }
 
-  /**
+  /*
    * An iterator over the dump stream. It does not use the interval approximator&mdash;it just scans
    * the file.
    */
@@ -697,7 +697,7 @@ public class ImmutableExternalPrefixMap extends AbstractPrefixMap implements Ser
     }
   }
 
-  /**
+  /*
    * Returns an iterator over the map.
    *
    * <p>The iterator returned by this method scans directly the dump stream.

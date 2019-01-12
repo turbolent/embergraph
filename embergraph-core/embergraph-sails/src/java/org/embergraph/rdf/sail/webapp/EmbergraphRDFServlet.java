@@ -61,8 +61,8 @@ import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.RDFWriterFactory;
 import org.openrdf.rio.RDFWriterRegistry;
 
-/**
- * Abstract base class for {@link Servlet}s which interact with the embergraph RDF data and/or
+/*
+* Abstract base class for {@link Servlet}s which interact with the embergraph RDF data and/or
  * SPARQL query layers.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -79,14 +79,14 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
 
   protected static final String NA = "N/A";
 
-  /**
+  /*
    * A SPARQL results set in XML.
    *
    * @see http://www.w3.org/TR/rdf-sparql-XMLres/
    */
   public static final transient String MIME_SPARQL_RESULTS_XML = "application/sparql-results+xml";
 
-  /**
+  /*
    * A SPARQL results set in JSON.
    *
    * @see http://www.w3.org/TR/rdf-sparql-json-res/
@@ -124,8 +124,8 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
   /** */
   public EmbergraphRDFServlet() {}
 
-  //    /**
-  //     * {@inheritDoc}
+  //    /*
+//     * {@inheritDoc}
   //     * <p>
   //     * Note: Overridden to support read-only deployments.
   //     *
@@ -150,7 +150,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
   //
   //    }
 
-  /**
+  /*
    * Best effort to write the stack trace onto the output stream so it will show up in the HTTP
    * response. This code path should be used iff we have already begun writing the response.
    * Otherwise, an HTTP error status should be used instead. REST API methods that have defined HTTP
@@ -195,21 +195,21 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
        * headers written.
        */
       if (InnerCause.isInnerCause(t, DatasetNotFoundException.class)) {
-        /*
-         * The addressed KB does not exist.
+      /*
+       * The addressed KB does not exist.
          */
         resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         resp.setContentType(MIME_TEXT_PLAIN);
       } else if (InnerCause.isInnerCause(t, ConstraintViolationException.class)) {
-        /*
-         * A constraint violation is a bad request (the data violates
+      /*
+       * A constraint violation is a bad request (the data violates
          * the rules) not a server error.
          */
         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         resp.setContentType(MIME_TEXT_PLAIN);
       } else if (InnerCause.isInnerCause(t, MalformedQueryException.class)) {
-        /*
-         * Send back a BAD REQUEST (400) along with the text of the
+      /*
+       * Send back a BAD REQUEST (400) along with the text of the
          * syntax error message.
          *
          * TODO Write unit test for 400 response for bad client request.
@@ -217,8 +217,8 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         resp.setContentType(MIME_TEXT_PLAIN);
       } else if (InnerCause.isInnerCause(t, QuadsOperationInTriplesModeException.class)) {
-        /*
-         * Nice error when attempting to use quads data in a triples only
+      /*
+       * Nice error when attempting to use quads data in a triples only
          * mode.
          *
          * @see #1086 Loading quads data into a triple store should strip
@@ -227,8 +227,8 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         resp.setContentType(MIME_TEXT_PLAIN);
       } else if (InnerCause.isInnerCause(t, HttpOperationException.class)) {
-        /*
-         * An AbstractRestApiTask failed and throw out a typed exception to
+      /*
+       * An AbstractRestApiTask failed and throw out a typed exception to
          * avoid joining a commit group.
          *
          * TODO The queryStr is ignored on this code path. Review the places
@@ -282,14 +282,14 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
           w = resp.getWriter();
         }
         if (queryStr != null) {
-          /*
-           * Write the query onto the output stream.
+        /*
+       * Write the query onto the output stream.
            */
           w.write(queryStr);
           w.write("\n");
         }
-        /*
-         * Write the stack trace onto the output stream.
+      /*
+       * Write the stack trace onto the output stream.
          */
         t.printStackTrace(w);
         w.flush(); // flush the writer.
@@ -323,7 +323,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
      */
   }
 
-  /**
+  /*
    * Return the timestamp which will be used to execute the query. The uri query parameter <code>
    * timestamp</code> may be used to communicate the desired commit time against which the query
    * will be issued. If that uri query parameter is not given then the default configured commit
@@ -344,7 +344,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
     return Long.valueOf(timestamp);
   }
 
-  /**
+  /*
    * Return the namespace which will be used to execute the query. The namespace is represented by
    * the first component of the URI. If there is no namespace, then return the configured default
    * namespace.
@@ -403,7 +403,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
      * This will not affect a user explicitly using the namespace named
      * undefined. beebs@users.sourceforge.net
      */
-    if (this.UNDEFINED_WORKBENCH_NAMESPACE.equals(namespace)) {
+    if (UNDEFINED_WORKBENCH_NAMESPACE.equals(namespace)) {
       namespace = getConfig(getServletContext()).namespace;
     }
 
@@ -417,7 +417,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
     return new PipedInputStream(os);
   }
 
-  /**
+  /*
    * Report that a namespace is not found. The namespace is extracted from the {@link
    * HttpServletRequest}.
    */
@@ -433,7 +433,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
         );
   }
 
-  /**
+  /*
    * Report an access path range count and elapsed time back to the user agent.
    *
    * @param resp The response.
@@ -454,7 +454,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
     buildAndCommitResponse(resp, HTTP_OK, MIME_APPLICATION_XML, w.toString());
   }
 
-  /**
+  /*
    * Report an boolean response and elapsed time back to the user agent. The response is an XML
    * document as follows.
    *
@@ -482,7 +482,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
     buildAndCommitResponse(resp, HttpServletResponse.SC_OK, MIME_APPLICATION_XML, w.toString());
   }
 
-  /**
+  /*
    * Send an RDF Graph as a response using content negotiation.
    *
    * @param req
@@ -553,7 +553,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
     }
   }
 
-  /**
+  /*
    * Send a properties file as a response using content negotiation.
    *
    * @param req
@@ -593,7 +593,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
     }
   }
 
-  /**
+  /*
    * Return <code>true</code> if the <code>Content-disposition</code> header should be set to
    * indicate that the response body should be handled as an attachment rather than presented
    * inline. This is just a hint to the user agent. How the user agent handles this hint is up to
@@ -609,10 +609,8 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
       return false;
     } else if (mimeType.equals(MIME_SPARQL_RESULTS_JSON)) {
       return false;
-    } else if (mimeType.equals(MIME_APPLICATION_XML)) {
-      return false;
-    }
-    return true;
+    } else
+      return !mimeType.equals(MIME_APPLICATION_XML);
   }
 
   /** Convert an array of URI strings to an array of URIs. */
@@ -632,7 +630,7 @@ public abstract class EmbergraphRDFServlet extends EmbergraphServlet {
     return uris;
   }
 
-  /**
+  /*
    * Parses query parameter bindings for validity to provide client with meaningful response.
    *
    * @param req

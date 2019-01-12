@@ -44,8 +44,8 @@ import org.embergraph.service.ResourceService.ReadBufferTask;
 import org.embergraph.util.DaemonThreadFactory;
 import org.embergraph.util.config.NicUtil;
 
-/**
- * Test verifies the ability to transmit a file using the {@link ResourceService}.
+/*
+* Test verifies the ability to transmit a file using the {@link ResourceService}.
  *
  * @version $Id$
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson </a>
@@ -61,7 +61,7 @@ public class TestReceiveBuffer extends TestCase3 {
     super(name);
   }
 
-  /**
+  /*
    * Test the ability to receive a {@link ByteBuffer}.
    *
    * @throws Exception
@@ -131,15 +131,15 @@ public class TestReceiveBuffer extends TestCase3 {
         final ByteBuffer received =
             new ReadBufferTask(service.getAddr(), allowedUUID, receiveBuffer).call();
 
-        /*
-         * Verify that the position and limit were not modified by the
+      /*
+       * Verify that the position and limit were not modified by the
          * transfer.
          */
         assertEquals(pos, allowedBuffer.position());
         assertEquals(limit, allowedBuffer.limit());
 
-        /*
-         * Verify that the returned buffer has the same data (the
+      /*
+       * Verify that the returned buffer has the same data (the
          * position of the data in the buffer may be different).
          */
         assertEquals(allowedBuffer, received);
@@ -164,7 +164,7 @@ public class TestReceiveBuffer extends TestCase3 {
     }
   }
 
-  /**
+  /*
    * Stress test for concurrent receive of buffers.
    *
    * @throws IOException
@@ -242,8 +242,8 @@ public class TestReceiveBuffer extends TestCase3 {
                   final ByteBuffer actual =
                       new ReadBufferTask(service.getAddr(), uuid, tmp.buffer()).call();
 
-                  /*
-                   * Verify that the returned buffer has the same data
+                /*
+       * Verify that the returned buffer has the same data
                    * (the position of the data in the buffer may be
                    * different).
                    */

@@ -34,8 +34,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.IVUtility;
 import org.embergraph.relation.rule.IStarJoin;
 
-/**
- * Implementation of a star join for SPOs. See {@link IStarJoin}.
+/*
+* Implementation of a star join for SPOs. See {@link IStarJoin}.
  *
  * @author <a href="mailto:mrpersonick@users.sourceforge.net">Mike Personick</a>
  */
@@ -46,7 +46,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
 
   public interface Annotations extends SPOPredicate.Annotations {}
 
-  /**
+  /*
    * The star constraints for this star join.
    *
    * @todo {@link IStarConstraint} should probably be a {@link BOp} and this should probably be an
@@ -65,7 +65,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
     super(op);
   }
 
-  /**
+  /*
    * Construct an SPO star join from a normal SPO predicate. The star join will have a triple
    * pattern of (S,?,?) instead of the (S,P,O) from the original SPO predicate. This way all SPOs
    * for the common subject are considered. SPO star constraints must be added later to make this
@@ -91,8 +91,8 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
 
   }
 
-  //    /**
-  //     * Create an SPO star join over the given relation for the given subject.
+  //    /*
+//     * Create an SPO star join over the given relation for the given subject.
   //     *
   //     * @param relationName
   //     *          the name of the SPO relation to use
@@ -114,8 +114,8 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
   //
   //    }
 
-  //    /**
-  //     * Fully specified ctor.
+  //    /*
+//     * Fully specified ctor.
   //     *
   //     * @param relationName
   //     * @param partitionId
@@ -183,7 +183,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
     return vars.iterator();
   }
 
-  /**
+  /*
    * Return an as-bound version of this star join and its star contraints using the supplied binding
    * set.
    */
@@ -214,7 +214,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
     return sb.toString();
   }
 
-  /**
+  /*
    * Implementation of a star constraint for SPOs. Constraint will specify a P and O (variable or
    * constant) and whether the constraint is optional or non-optional.
    */
@@ -232,7 +232,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
     /** Is the constraint optional or non-optional. */
     protected final boolean optional;
 
-    /**
+    /*
      * Construct a non-optional SPO star constraint using the supplied P and O.
      *
      * @param p
@@ -243,7 +243,7 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
       this(p, o, false /* optional */);
     }
 
-    /**
+    /*
      * Fully specified ctor.
      *
      * @param p
@@ -358,8 +358,8 @@ public class SPOStarJoin extends SPOPredicate implements IStarJoin<ISPO>, Serial
 
       if (optional) {
 
-        /*
-         * Something special, so do all this stuff.
+      /*
+       * Something special, so do all this stuff.
          */
 
         sb.append("[");

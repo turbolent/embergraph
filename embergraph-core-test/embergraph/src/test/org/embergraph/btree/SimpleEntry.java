@@ -23,8 +23,8 @@ package org.embergraph.btree;
 import java.io.Serializable;
 import org.embergraph.io.SerializerUtil;
 
-/**
- * Test helper provides an entry (aka value) for a {@link Leaf}.
+/*
+* Test helper provides an entry (aka value) for a {@link Leaf}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -59,7 +59,7 @@ public class SimpleEntry implements Serializable {
     return "" + id;
   }
 
-  /**
+  /*
    * Note: <code>equals</code> has been overriden to transparently de-serialize the given object
    * when it is a <code>byte[]</code>. This is a hack that provides backwards compatibility for some
    * of the unit tests when assume that objects (and not byte[]s) are stored in the B+Tree and

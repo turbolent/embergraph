@@ -10,12 +10,12 @@ package cern.jet.math;
 
 /** Bessel and Airy functions. */
 public class Bessel extends Constants {
-  /**
+  /*
    * ************************************** COEFFICIENTS FOR METHODS i0, i0e *
    * **************************************
    */
 
-  /**
+  /*
    * Chebyshev coefficients for exp(-x) I0(x) in the interval [0,8].
    *
    * <p>lim(x->0){ exp(-x) I0(x) } = 1.
@@ -38,7 +38,7 @@ public class Bessel extends Constants {
     -3.04682672343198398683E-1, 6.76795274409476084995E-1
   };
 
-  /**
+  /*
    * Chebyshev coefficients for exp(-x) sqrt(x) I0(x) in the inverted interval [8,infinity].
    *
    * <p>lim(x->inf){ exp(-x) sqrt(x) I0(x) } = 1/sqrt(2pi).
@@ -71,11 +71,11 @@ public class Bessel extends Constants {
     8.04490411014108831608E-1
   };
 
-  /**
+  /*
    * ************************************** COEFFICIENTS FOR METHODS i1, i1e *
    * **************************************
    */
-  /**
+  /*
    * Chebyshev coefficients for exp(-x) I1(x) / x in the interval [0,8].
    *
    * <p>lim(x->0){ exp(-x) I1(x) / x } = 1/2.
@@ -146,7 +146,7 @@ public class Bessel extends Constants {
     7.78576235018280120474E-1
   };
 
-  /**
+  /*
    * ************************************** COEFFICIENTS FOR METHODS k0, k0e *
    * **************************************
    */
@@ -202,7 +202,7 @@ public class Bessel extends Constants {
     2.44030308206595545468E0
   };
 
-  /**
+  /*
    * ************************************** COEFFICIENTS FOR METHODS k1, k1e *
    * **************************************
    */
@@ -260,7 +260,7 @@ public class Bessel extends Constants {
 
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected Bessel() {}
-  /**
+  /*
    * Returns the modified Bessel function of order 0 of the argument.
    *
    * <p>The function is defined as <tt>i0(x) = j0( ix )</tt>.
@@ -280,7 +280,7 @@ public class Bessel extends Constants {
 
     return (Math.exp(x) * Arithmetic.chbevl(32.0 / x - 2.0, B_i0, 25) / Math.sqrt(x));
   }
-  /**
+  /*
    * Returns the exponentially scaled modified Bessel function of order 0 of the argument.
    *
    * <p>The function is defined as <tt>i0e(x) = exp(-|x|) j0( ix )</tt>.
@@ -298,7 +298,7 @@ public class Bessel extends Constants {
 
     return (Arithmetic.chbevl(32.0 / x - 2.0, B_i0, 25) / Math.sqrt(x));
   }
-  /**
+  /*
    * Returns the modified Bessel function of order 1 of the argument.
    *
    * <p>The function is defined as <tt>i1(x) = -i j1( ix )</tt>.
@@ -321,7 +321,7 @@ public class Bessel extends Constants {
     if (x < 0.0) z = -z;
     return (z);
   }
-  /**
+  /*
    * Returns the exponentially scaled modified Bessel function of order 1 of the argument.
    *
    * <p>The function is defined as <tt>i1(x) = -i exp(-|x|) j1( ix )</tt>.
@@ -341,7 +341,7 @@ public class Bessel extends Constants {
     if (x < 0.0) z = -z;
     return (z);
   }
-  /**
+  /*
    * Returns the Bessel function of the first kind of order 0 of the argument.
    *
    * @param x the value to compute the bessel function of.
@@ -384,7 +384,7 @@ public class Bessel extends Constants {
       return Math.sqrt(0.636619772 / ax) * (Math.cos(xx) * ans1 - z * Math.sin(xx) * ans2);
     }
   }
-  /**
+  /*
    * Returns the Bessel function of the first kind of order 1 of the argument.
    *
    * @param x the value to compute the bessel function of.
@@ -430,7 +430,7 @@ public class Bessel extends Constants {
       return ans;
     }
   }
-  /**
+  /*
    * Returns the Bessel function of the first kind of order <tt>n</tt> of the argument.
    *
    * @param n the order of the Bessel function.
@@ -486,7 +486,7 @@ public class Bessel extends Constants {
     }
     return x < 0.0 && n % 2 == 1 ? -ans : ans;
   }
-  /**
+  /*
    * Returns the modified Bessel function of the third kind of order 0 of the argument.
    *
    * <p>The range is partitioned into the two intervals [0,8] and (8, infinity). Chebyshev
@@ -508,7 +508,7 @@ public class Bessel extends Constants {
     y = Math.exp(-x) * Arithmetic.chbevl(z, B_k0, 25) / Math.sqrt(x);
     return (y);
   }
-  /**
+  /*
    * Returns the exponentially scaled modified Bessel function of the third kind of order 0 of the
    * argument.
    *
@@ -527,7 +527,7 @@ public class Bessel extends Constants {
     y = Arithmetic.chbevl(8.0 / x - 2.0, B_k0, 25) / Math.sqrt(x);
     return (y);
   }
-  /**
+  /*
    * Returns the modified Bessel function of the third kind of order 1 of the argument.
    *
    * <p>The range is partitioned into the two intervals [0,2] and (2, infinity). Chebyshev
@@ -548,7 +548,7 @@ public class Bessel extends Constants {
 
     return (Math.exp(-x) * Arithmetic.chbevl(8.0 / x - 2.0, B_k1, 25) / Math.sqrt(x));
   }
-  /**
+  /*
    * Returns the exponentially scaled modified Bessel function of the third kind of order 1 of the
    * argument.
    *
@@ -568,7 +568,7 @@ public class Bessel extends Constants {
 
     return (Arithmetic.chbevl(8.0 / x - 2.0, B_k1, 25) / Math.sqrt(x));
   }
-  /**
+  /*
    * Returns the modified Bessel function of the third kind of order <tt>nn</tt> of the argument.
    *
    * <p>The range is partitioned into the two intervals [0,9.55] and (9.55, infinity). An ascending
@@ -728,7 +728,7 @@ public class Bessel extends Constants {
     ans = Math.exp(-x) * Math.sqrt(Math.PI / (2.0 * x)) * s;
     return (ans);
   }
-  /**
+  /*
    * Returns the Bessel function of the second kind of order 0 of the argument.
    *
    * @param x the value to compute the bessel function of.
@@ -768,7 +768,7 @@ public class Bessel extends Constants {
       return Math.sqrt(0.636619772 / x) * (Math.sin(xx) * ans1 + z * Math.cos(xx) * ans2);
     }
   }
-  /**
+  /*
    * Returns the Bessel function of the second kind of order 1 of the argument.
    *
    * @param x the value to compute the bessel function of.
@@ -813,7 +813,7 @@ public class Bessel extends Constants {
       return Math.sqrt(0.636619772 / x) * (Math.sin(xx) * ans1 + z * Math.cos(xx) * ans2);
     }
   }
-  /**
+  /*
    * Returns the Bessel function of the second kind of order <tt>n</tt> of the argument.
    *
    * @param n the order of the Bessel function.

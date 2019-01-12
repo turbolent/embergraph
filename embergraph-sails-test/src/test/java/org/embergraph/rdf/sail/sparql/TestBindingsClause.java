@@ -48,8 +48,8 @@ import org.embergraph.util.InnerCause;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * Test suite for the BINDINGS clause.
+/*
+* Test suite for the BINDINGS clause.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id: TestEmbergraphExprBuilder.java 5073 2011-08-23 00:33:54Z thompsonbry $
@@ -64,7 +64,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for the SPARQL 1.1 BINDINGS clause with one binding set having one binding.
    *
    * <pre>
@@ -152,7 +152,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for the SPARQL 1.1 BINDINGS clause with an UNDEF binding.
    *
    * <pre>
@@ -240,7 +240,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for the SPARQL 1.1 BINDINGS clause with two binding sets, one of which has no bound
    * values.
    *
@@ -335,7 +335,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for the SPARQL 1.1 BINDINGS clause with two binding sets, one of which does not bind
    * all variables.
    *
@@ -436,7 +436,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Unit test for the SPARQL 1.1 BINDINGS clause with NO variables and NO binding sets (the spec
    * allows this).
    *
@@ -523,7 +523,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     assertSameAST(sparql, expected, actual);
   }
 
-  /**
+  /*
    * Correct rejection test for the SPARQL 1.1 BINDINGS clause with no variables and a non-empty
    * binding set.
    *
@@ -566,7 +566,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     }
   }
 
-  /**
+  /*
    * Correct rejection test for the SPARQL 1.1 BINDINGS clause with duplicate variables and a
    * non-empty set of binding sets.
    *
@@ -609,7 +609,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     }
   }
 
-  /**
+  /*
    * Correct rejection test for the SPARQL 1.1 BINDINGS clause with duplicate variables and an empty
    * set of binding sets.
    *
@@ -650,7 +650,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     }
   }
 
-  /**
+  /*
    * Correct rejection test for the SPARQL 1.1 BINDINGS clause with too many bindings in one binding
    * set.
    *
@@ -695,7 +695,7 @@ public class TestBindingsClause extends AbstractEmbergraphExprBuilderTestCase {
     }
   }
 
-  /**
+  /*
    * Correct rejection test for the SPARQL 1.1 BINDINGS clause with too few bindings in one binding
    * set.
    *

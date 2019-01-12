@@ -28,8 +28,8 @@ import org.embergraph.bop.IVariable;
 import org.embergraph.bop.PipelineOp;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-/**
- * Special interface for pipelines hash join implementations, offering a method that combines
+/*
+* Special interface for pipelines hash join implementations, offering a method that combines
  * acceptance and outputting of solutions.
  *
  * @author <a href="mailto:ms@metaphacts.com">Michael Schmidt</a>
@@ -37,12 +37,12 @@ import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
  */
 public interface PipelinedHashJoinUtility {
 
-  /**
+  /*
    * AcceptAndOutputSolutions is a special method for building the hash index of the {@link
    * JVMPipelinedHashIndex}, which accepts and immediately forwards relevant solutions (non-blocking
    * index).
    */
-  public long acceptAndOutputSolutions(
+  long acceptAndOutputSolutions(
       final UnsyncLocalOutputBuffer<IBindingSet> out,
       final ICloseableIterator<IBindingSet[]> itr,
       final NamedSolutionSetStats stats,

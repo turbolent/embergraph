@@ -32,8 +32,8 @@ import org.embergraph.bop.PipelineOp;
 import org.embergraph.bop.Var;
 import org.embergraph.bop.controller.INamedSolutionSetRef;
 
-/**
- * Test suite for {@link HashIndexOp} that uses a {@link HTreeHashJoinUtility}.
+/*
+* Test suite for {@link HashIndexOp} that uses a {@link HTreeHashJoinUtility}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -73,7 +73,7 @@ public class TestHTreeHashIndexOp extends HashIndexOpTestCase {
     return new HTreeSolutionSetHashJoinOp(args, anns);
   }
 
-  /**
+  /*
    * Correct rejection tests for the constructor (must run on the controller, parallelism is not
    * allowed since the solutions must be written onto an HTree and that is not thread safe for
    * mutation, join variables may be empty but not null, selected may be null, solution set name

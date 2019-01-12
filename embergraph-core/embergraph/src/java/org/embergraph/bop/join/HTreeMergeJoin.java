@@ -36,8 +36,8 @@ import org.embergraph.htree.HTree;
 import org.embergraph.relation.accesspath.IBlockingBuffer;
 import org.embergraph.relation.accesspath.UnsyncLocalOutputBuffer;
 
-/**
- * An N-way merge join based on the {@link HTree}.
+/*
+* An N-way merge join based on the {@link HTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -50,13 +50,13 @@ public class HTreeMergeJoin extends AbstractMergeJoin {
   public interface Annotations
       extends AccessPathJoinAnnotations, HTreeHashJoinAnnotations, NamedSetAnnotations {
 
-    /**
+    /*
      * Constraints to be applied by the join (in addition to any associated with the {@link
      * HTreeHashJoinUtility} state in the {@link #NAMED_SET_REF}).
      */
     String CONSTRAINTS = JoinAnnotations.CONSTRAINTS;
 
-    /**
+    /*
      * Only {@link JoinTypeEnum#Normal} and {@link JoinTypeEnum#Optional} merge joins are supported.
      *
      * @see JoinAnnotations#JOIN_TYPE
@@ -66,7 +66,7 @@ public class HTreeMergeJoin extends AbstractMergeJoin {
     //
     //        boolean DEFAULT_OPTIONAL = JoinAnnotations.DEFAULT_OPTIONAL;
 
-    /**
+    /*
      * When <code>true</code> the hash index identified by {@link #NAMED_SET_REF} will be released
      * when this operator is done (default {@value #DEFAULT_RELEASE}).
      *
@@ -80,12 +80,12 @@ public class HTreeMergeJoin extends AbstractMergeJoin {
      * HTreeHashJoinUtility} state, in which case it would only be set as an annotation on the
      * operator which generates the hash index.
      */
-    final String RELEASE = HTreeSolutionSetHashJoinOp.class + ".release";
+    String RELEASE = HTreeSolutionSetHashJoinOp.class + ".release";
 
-    final boolean DEFAULT_RELEASE = true;
+    boolean DEFAULT_RELEASE = true;
   }
 
-  /**
+  /*
    * @param args
    * @param annotations
    */
@@ -200,8 +200,8 @@ public class HTreeMergeJoin extends AbstractMergeJoin {
 
         if (state[i] == null) {
 
-          /**
-           * The solution set was not found!
+        /*
+       * The solution set was not found!
            *
            * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/534#comment:2">BSBM BI
            *     Q5 Error when using MERGE JOIN </a>
@@ -242,8 +242,8 @@ public class HTreeMergeJoin extends AbstractMergeJoin {
 
         if (release && context.isLastInvocation()) {
 
-          /*
-           * Note: It is possible to INCLUDE the named temporary
+        /*
+       * Note: It is possible to INCLUDE the named temporary
            * solution set multiple times within a query. If we want to
            * release() the hash tree then we need to know how many
            * times the temporary solution set is being included and

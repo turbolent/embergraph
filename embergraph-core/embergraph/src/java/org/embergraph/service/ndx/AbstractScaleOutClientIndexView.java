@@ -81,8 +81,8 @@ import org.embergraph.service.ndx.pipeline.IDuplicateRemover;
 import org.embergraph.service.ndx.pipeline.IndexWriteTask;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Abstract base class for the {@link IScaleOutClientIndex} implementation(s).
+/*
+* Abstract base class for the {@link IScaleOutClientIndex} implementation(s).
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -103,7 +103,7 @@ import org.embergraph.util.BytesUtil;
  */
 public abstract class AbstractScaleOutClientIndexView implements IScaleOutClientIndex {
 
-  /**
+  /*
    * Note: Invocations of the non-batch API are logged at the WARN level since they result in an
    * application that can not scale-out efficiently.
    */
@@ -113,14 +113,14 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
   /** True iff the {@link #log} level is WARN or less. */
   protected final boolean WARN = log.getEffectiveLevel().toInt() <= Level.WARN.toInt();
 
-  /**
+  /*
    * Error message used if we were unable to start a new transaction in order to provide
    * read-consistent semantics for an {@link ITx#READ_COMMITTED} view or for a read-only operation
    * on an {@link ITx#UNISOLATED} view.
    */
   protected static final transient String ERR_NEW_TX = "Could not start transaction";
 
-  /**
+  /*
    * Error message used if we were unable to abort a transaction that we started in order to provide
    * read-consistent semantics for an {@link ITx#READ_COMMITTED} view or for a read-only operation
    * on an {@link ITx#UNISOLATED} view.
@@ -140,7 +140,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return (ThreadPoolExecutor) fed.getExecutorService();
   }
 
-  /**
+  /*
    * The timeout in milliseconds for tasks run on an {@link IDataService}.
    *
    * @see Options#CLIENT_TASK_TIMEOUT
@@ -150,7 +150,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
   /** */
   protected static final String NON_BATCH_API = "Non-batch API";
 
-  /**
+  /*
    * This may be used to disable the non-batch API, which is quite convenient for locating code that
    * needs to be re-written to use {@link IIndexProcedure}s.
    */
@@ -177,7 +177,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return name;
   }
 
-  /**
+  /*
    * The {@link IMetadataIndex} for this scale-out index.
    *
    * @todo This is a bit dangerous since most of the time when you want the metadata index you may
@@ -186,13 +186,13 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
    */
   private final IMetadataIndex metadataIndex;
 
-  /**
+  /*
    * The {@link IndexMetadata} for the {@link MetadataIndex} that manages the scale-out index. The
    * metadata template for the managed scale-out index is available as a field on this object.
    */
   private final MetadataIndexMetadata metadataIndexMetadata;
 
-  /**
+  /*
    * Obtain the proxy for a metadata service. if this instance fails, then we can always ask for a
    * new instance for the same federation (failover).
    */
@@ -201,7 +201,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return fed.getMetadataService();
   }
 
-  /**
+  /*
    * Return a view of the metadata index for the scale-out index as of the timestamp associated with
    * this index view.
    *
@@ -236,7 +236,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return sb.toString();
   }
 
-  /**
+  /*
    * Create a view on a scale-out index.
    *
    * @param fed The federation containing the index.
@@ -287,7 +287,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return metadataIndexMetadata;
   }
 
-  /**
+  /*
    * The metadata for the managed scale-out index. Among other things, this gets used to determine
    * how we serialize keys and values for {@link IKeyArrayIndexProcedure}s when we serialize a
    * procedure to be sent to a remote {@link IDataService}.
@@ -312,7 +312,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return fed.locatorScan(name, ts, fromKey, toKey, reverseScan);
   }
 
-  /**
+  /*
    * This operation is not supported - the resource description of a scale-out index would include
    * all "live" resources in the corresponding {@link MetadataIndex}.
    */
@@ -522,7 +522,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return handler.getResult();
   }
 
-  /**
+  /*
    * The exact range count is obtained by mapping a key-range scan over the index partitions. The
    * operation is parallelized.
    */
@@ -539,7 +539,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return handler.getResult();
   }
 
-  /**
+  /*
    * The exact range count of deleted and undeleted tuples is obtained by mapping a key-range scan
    * over the index partitions. The operation is parallelized.
    */
@@ -562,7 +562,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return rangeIterator(null, null);
   }
 
-  /**
+  /*
    * An {@link ITupleIterator} that kinds the use of a series of {@link ResultSet}s to cover all
    * index partitions spanned by the key range.
    */
@@ -573,7 +573,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
         fromKey, toKey, capacity, IRangeQuery.DEFAULT /* flags */, null /* filter */);
   }
 
-  /**
+  /*
    * Identifies the index partition(s) that are spanned by the key range query and maps an iterator
    * across each index partition. The iterator buffers responses up to the specified capacity and a
    * follow up iterator request is automatically issued if the iterator has not exhausted the key
@@ -635,7 +635,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
         this, ts, isReadConsistentTx, fromKey, toKey, capacity, flags, filter);
   }
 
-  /**
+  /*
    * Utility method to split a set of ordered keys into partitions based the index partitions
    * defined for a scale-out index.
    *
@@ -707,8 +707,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
       if (rightSeparatorKey == null) {
 
-        /*
-         * The last index partition does not have an upper bound and
+      /*
+       * The last index partition does not have an upper bound and
          * will absorb any keys that order GTE to its left separator
          * key.
          */
@@ -722,8 +722,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
       } else {
 
-        /*
-         * Otherwise this partition has an upper bound, so figure out
+      /*
+       * Otherwise this partition has an upper bound, so figure out
          * the index of the last key that would go into this partition.
          *
          * We do this by searching for the rightSeparator of the index
@@ -735,8 +735,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
         if (pos >= 0) {
 
-          /*
-           * There is a hit on the rightSeparator key. The index
+        /*
+       * There is a hit on the rightSeparator key. The index
            * returned by the binarySearch is the exclusive upper bound
            * for the split. The key at that index is excluded from the
            * split - it will be the first key in the next split.
@@ -777,8 +777,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
         } else if (pos < 0) {
 
-          /*
-           * There is a miss on the rightSeparator key (it is not
+        /*
+       * There is a miss on the rightSeparator key (it is not
            * present in the keys that are being split). In this case
            * the binary search returns the insertion point. We then
            * compute the exclusive upper bound from the insertion
@@ -791,8 +791,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
               : "Expected pos in [" + currentIndex + ":" + toIndex + ") but pos=" + pos;
         }
 
-        /*
-         * Note: this test can be enabled if you are having problems
+      /*
+       * Note: this test can be enabled if you are having problems
          * with KeyAfterPartition or KeyBeforePartition. It will go
          * through more effort to validate the constraints on the split.
          * However, due to the additional byte[] comparisons, this
@@ -827,7 +827,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return splitKeys(ts, fromIndex, toIndex, keys);
   }
 
-  /**
+  /*
    * Paranoia testing for generated splits.
    *
    * @param locator
@@ -964,7 +964,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     }
   }
 
-  /**
+  /*
    * Maps an {@link IIndexProcedure} across a key range by breaking it down into one task per index
    * partition spanned by that key range.
    *
@@ -1028,7 +1028,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     }
   }
 
-  /**
+  /*
    * The procedure will be transparently broken down and executed against each index partitions
    * spanned by its keys. If the <i>ctor</i> creates instances of {@link
    * IParallelizableIndexProcedure} then the procedure will be mapped in parallel against the
@@ -1075,8 +1075,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
           && proc.isReadOnly()
           && TimestampUtility.isReadCommittedOrUnisolated(getTimestamp())) {
 
-        /*
-         * Create a read-historical transaction from the last commit
+      /*
+       * Create a read-historical transaction from the last commit
          * point of the federation in order to provide consistent
          * reads for the mapped procedure.
          */
@@ -1115,8 +1115,8 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
 
         } catch (IOException e) {
 
-          /*
-           * log error but do not rethrow since operation is over
+        /*
+       * log error but do not rethrow since operation is over
            * anyway.
            */
 
@@ -1126,7 +1126,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     }
   }
 
-  /**
+  /*
    * Variant uses the caller's timestamp.
    *
    * @param ts
@@ -1137,7 +1137,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
   protected abstract Object submit(
       final long ts, final byte[] key, final ISimpleIndexProcedure proc);
 
-  /**
+  /*
    * Variant uses the caller's timestamp.
    *
    * @param ts
@@ -1153,7 +1153,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
       final IKeyRangeIndexProcedure proc,
       final IResultHandler resultHandler);
 
-  /**
+  /*
    * Variant uses the caller's timestamp.
    *
    * @param ts
@@ -1205,7 +1205,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
             fed.getIndexCounters(name).asynchronousStats,
             writeBuffer);
 
-    /**
+    /*
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/707">BlockingBuffer.close()
      *     does not unblock threads </a>
      */
@@ -1223,7 +1223,7 @@ public abstract class AbstractScaleOutClientIndexView implements IScaleOutClient
     return task.getBuffer();
   }
 
-  /**
+  /*
    * Return a new {@link CounterSet} backed by the {@link ScaleOutIndexCounters} for this scale-out
    * index.
    */

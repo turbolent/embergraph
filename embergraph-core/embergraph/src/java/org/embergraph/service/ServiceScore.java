@@ -3,8 +3,8 @@ package org.embergraph.service;
 import java.util.UUID;
 import org.embergraph.service.LoadBalancerService.UpdateTask;
 
-/**
- * Per-service metadata and a score for that service which gets updated periodically by the {@link
+/*
+* Per-service metadata and a score for that service which gets updated periodically by the {@link
  * UpdateTask}. {@link ServiceScore}s are a <em>resource utilization</em> measure. They are higher
  * for a service which is more highly utilized. There are several ways to look at the score,
  * including the {@link #rawScore}, the {@link #rank}, and the {@link #drank normalized
@@ -35,7 +35,7 @@ public class ServiceScore implements Comparable<ServiceScore> {
   /** The normalized double precision rank in [0.0:1.0]. */
   public double drank = -1d;
 
-  /**
+  /*
    * Constructor variant used when you do not have performance counters for the service and could
    * not compute its rawScore.
    *
@@ -47,7 +47,7 @@ public class ServiceScore implements Comparable<ServiceScore> {
     this(hostname, serviceUUID, serviceName, 0d);
   }
 
-  /**
+  /*
    * Constructor variant used when you have computed the rawStore.
    *
    * @param hostname
@@ -90,7 +90,7 @@ public class ServiceScore implements Comparable<ServiceScore> {
         + "}";
   }
 
-  /**
+  /*
    * Places elements into order by ascending {@link #rawScore}. The {@link #serviceUUID} is used to
    * break any ties.
    */
@@ -108,7 +108,7 @@ public class ServiceScore implements Comparable<ServiceScore> {
     return serviceUUID.compareTo(arg0.serviceUUID);
   }
 
-  /**
+  /*
    * Normalizes a raw score in the context of totals for some service.
    *
    * @param rawScore The raw score.

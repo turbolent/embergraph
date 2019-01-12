@@ -2,8 +2,8 @@ package org.embergraph.util;
 
 import java.io.Serializable;
 
-/**
- * A name-value pair.
+/*
+* A name-value pair.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -65,7 +65,7 @@ public class NV implements Serializable, Comparable<NV> {
     return name.compareTo(o.name);
   }
 
-  /**
+  /*
    * Combines the two arrays, appending the contents of the 2nd array to the contents of the first
    * array.
    *

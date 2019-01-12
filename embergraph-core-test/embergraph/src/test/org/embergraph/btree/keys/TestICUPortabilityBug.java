@@ -31,8 +31,8 @@ import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
-/**
- * This is a unit test for a possible ICU portability bug.
+/*
+* This is a unit test for a possible ICU portability bug.
  *
  * <p>Note: This issue has been resolved. The problem was that someone had substituted a difference
  * version of ICU on the classpath in the deployed system.
@@ -53,7 +53,7 @@ public class TestICUPortabilityBug extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * Unit test for ICU generation of Unicode sort keys.
    *
    * <pre>

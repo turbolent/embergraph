@@ -27,8 +27,8 @@ import java.util.Iterator;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Dublin Core terms.
+/*
+* Dublin Core terms.
  *
  * @see http://purl.org/dc/terms/
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

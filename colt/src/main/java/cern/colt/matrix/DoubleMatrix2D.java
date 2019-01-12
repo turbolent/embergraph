@@ -13,8 +13,8 @@ import cern.colt.list.IntArrayList;
 import cern.colt.matrix.impl.AbstractMatrix2D;
 import cern.colt.matrix.impl.DenseDoubleMatrix1D;
 import cern.colt.matrix.impl.DenseDoubleMatrix2D;
-/**
- * Abstract base class for 2-d matrices holding <tt>double</tt> elements. First see the <a
+/*
+* Abstract base class for 2-d matrices holding <tt>double</tt> elements. First see the <a
  * href="package-summary.html">package summary</a> and javadoc <a href="package-tree.html">tree
  * view</a> to get the broad picture.
  *
@@ -32,7 +32,7 @@ import cern.colt.matrix.impl.DenseDoubleMatrix2D;
 public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   /** Makes this class non instantiable, but still let's others inherit from it. */
   protected DoubleMatrix2D() {}
-  /**
+  /*
    * Applies a function to each cell and aggregates the results. Returns a value <tt>v</tt> such
    * that <tt>v==a(size())</tt> where <tt>a(i) == aggr( a(i-1), f(get(row,column)) )</tt> and
    * terminators are <tt>a(1) == f(get(0,0)), a(0)==Double.NaN</tt>.
@@ -71,7 +71,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return a;
   }
-  /**
+  /*
    * Applies a function to each corresponding cell of two matrices and aggregates the results.
    * Returns a value <tt>v</tt> such that <tt>v==a(size())</tt> where <tt>a(i) == aggr( a(i-1),
    * f(get(row,column),other.get(row,column)) )</tt> and terminators are <tt>a(1) ==
@@ -124,7 +124,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return a;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>values</tt>. <tt>values</tt> is required to have
    * the form <tt>values[row][column]</tt> and have exactly the same number of rows and columns as
    * the receiver.
@@ -155,7 +155,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Sets all cells to the state specified by <tt>value</tt>.
    *
    * @param value the value to be filled into the cells.
@@ -173,7 +173,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[row,col] = function(x[row,col])</tt>.
    *
    * <p><b>Example:</b>
@@ -205,7 +205,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Replaces all cell values of the receiver with the values of another matrix. Both matrices must
    * have the same number of rows and columns. If both matrices share the same cells (as is the case
    * if they are views derived from the same matrix) and intersect in an ambiguous way, then
@@ -230,7 +230,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Assigns the result of a function to each cell; <tt>x[row,col] =
    * function(x[row,col],y[row,col])</tt>.
    *
@@ -282,7 +282,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return cardinality;
   }
-  /**
+  /*
    * Constructs and returns a deep copy of the receiver.
    *
    * <p><b>Note that the returned matrix is an independent deep copy.</b> The returned matrix is not
@@ -294,7 +294,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public DoubleMatrix2D copy() {
     return like().assign(this);
   }
-  /**
+  /*
    * Returns whether all cells are equal to the given value.
    *
    * @param value the value to test against.
@@ -303,7 +303,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public boolean equals(double value) {
     return cern.colt.matrix.linalg.Property.DEFAULT.equals(this, value);
   }
-  /**
+  /*
    * Compares this object against the specified object. The result is <code>true</code> if and only
    * if the argument is not <code>null</code> and is at least a <code>DoubleMatrix2D</code> object
    * that has the same number of columns and rows as the receiver and has exactly the same values at
@@ -319,7 +319,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
 
     return cern.colt.matrix.linalg.Property.DEFAULT.equals(this, (DoubleMatrix2D) obj);
   }
-  /**
+  /*
    * Assigns the result of a function to each <i>non-zero</i> cell; <tt>x[row,col] =
    * function(x[row,col])</tt>. Use this method for fast special-purpose iteration. If you want to
    * modify another matrix instead of <tt>this</tt> (i.e. work in read-only mode), simply return the
@@ -344,7 +344,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return this;
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[row,column]</tt>.
    *
    * @param row the index of the row-coordinate.
@@ -358,14 +358,14 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
       throw new IndexOutOfBoundsException("row:" + row + ", column:" + column);
     return getQuick(row, column);
   }
-  /**
+  /*
    * Returns the content of this matrix if it is a wrapper; or <tt>this</tt> otherwise. Override
    * this method in wrappers.
    */
   protected DoubleMatrix2D getContent() {
     return this;
   }
-  /**
+  /*
    * Fills the coordinates and values of cells having non-zero values into the specified lists.
    * Fills into the lists, starting at index 0. After this call returns the specified lists all have
    * a new size, the number of non-zero values.
@@ -411,7 +411,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
       }
     }
   }
-  /**
+  /*
    * Returns the matrix cell value at coordinate <tt>[row,column]</tt>.
    *
    * <p>Provided with invalid parameters this method may return invalid objects without throwing any
@@ -434,7 +434,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   protected boolean haveSharedCellsRaw(DoubleMatrix2D other) {
     return false;
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the same number of rows and columns. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix2D</tt> the new matrix must also be of type <tt>DenseDoubleMatrix2D</tt>,
@@ -447,7 +447,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public DoubleMatrix2D like() {
     return like(rows, columns);
   }
-  /**
+  /*
    * Construct and returns a new empty matrix <i>of the same dynamic type</i> as the receiver,
    * having the specified number of rows and columns. For example, if the receiver is an instance of
    * type <tt>DenseDoubleMatrix2D</tt> the new matrix must also be of type
@@ -461,7 +461,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
    * @return a new empty matrix of the same dynamic type.
    */
   public abstract DoubleMatrix2D like(int rows, int columns);
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, entirelly
    * independent of the receiver. For example, if the receiver is an instance of type
    * <tt>DenseDoubleMatrix2D</tt> the new matrix must be of type <tt>DenseDoubleMatrix1D</tt>, if
@@ -472,7 +472,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
    * @return a new matrix of the corresponding dynamic type.
    */
   public abstract DoubleMatrix1D like1D(int size);
-  /**
+  /*
    * Construct and returns a new 1-d matrix <i>of the corresponding dynamic type</i>, sharing the
    * same cells. For example, if the receiver is an instance of type <tt>DenseDoubleMatrix2D</tt>
    * the new matrix must be of type <tt>DenseDoubleMatrix1D</tt>, if the receiver is an instance of
@@ -486,7 +486,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
    * @return a new matrix of the corresponding dynamic type.
    */
   protected abstract DoubleMatrix1D like1D(int size, int zero, int stride);
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.
    *
    * @param row the index of the row-coordinate.
@@ -500,7 +500,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
       throw new IndexOutOfBoundsException("row:" + row + ", column:" + column);
     setQuick(row, column, value);
   }
-  /**
+  /*
    * Sets the matrix cell at coordinate <tt>[row,column]</tt> to the specified value.
    *
    * <p>Provided with invalid parameters this method may access illegal indexes without throwing any
@@ -513,7 +513,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
    * @param value the value to be filled into the specified cell.
    */
   public abstract void setQuick(int row, int column, double value);
-  /**
+  /*
    * Constructs and returns a 2-dimensional array containing the cell values. The returned array
    * <tt>values</tt> has the form <tt>values[row][column]</tt> and has the same number of rows and
    * columns as the receiver.
@@ -533,7 +533,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return values;
   }
-  /**
+  /*
    * Returns a string representation using default formatting.
    *
    * @see cern.colt.matrix.doublealgo.Formatter
@@ -541,7 +541,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public String toString() {
     return new cern.colt.matrix.doublealgo.Formatter().toString(this);
   }
-  /**
+  /*
    * Constructs and returns a new view equal to the receiver. The view is a shallow clone. Calls
    * <code>clone()</code> and casts the result.
    *
@@ -555,7 +555,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   protected DoubleMatrix2D view() {
     return (DoubleMatrix2D) clone();
   }
-  /**
+  /*
    * Constructs and returns a new <i>slice view</i> representing the rows of the given column. The
    * returned view is backed by this matrix, so changes in the returned view are reflected in this
    * matrix, and vice-versa. To obtain a slice view on subranges, construct a sub-ranging view
@@ -586,7 +586,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     int viewStride = this.rowStride;
     return like1D(viewSize, viewZero, viewStride);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i> along the column axis. What used to be column
    * <tt>0</tt> is now column <tt>columns()-1</tt>, ..., what used to be column <tt>columns()-1</tt>
    * is now column <tt>0</tt>. The returned view is backed by this matrix, so changes in the
@@ -616,7 +616,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public DoubleMatrix2D viewColumnFlip() {
     return (DoubleMatrix2D) (view().vColumnFlip());
   }
-  /**
+  /*
    * Constructs and returns a new <i>dice (transposition) view</i>; Swaps axes; example: 3 x 4
    * matrix --> 4 x 3 matrix. The view has both dimensions exchanged; what used to be columns become
    * rows, what used to be rows become columns. In other words:
@@ -649,7 +649,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public DoubleMatrix2D viewDice() {
     return (DoubleMatrix2D) (view().vDice());
   }
-  /**
+  /*
    * Constructs and returns a new <i>sub-range view</i> that is a <tt>height x width</tt> sub matrix
    * starting at <tt>[row,column]</tt>.
    *
@@ -678,7 +678,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public DoubleMatrix2D viewPart(int row, int column, int height, int width) {
     return (DoubleMatrix2D) (view().vPart(row, column, height, width));
   }
-  /**
+  /*
    * Constructs and returns a new <i>slice view</i> representing the columns of the given row. The
    * returned view is backed by this matrix, so changes in the returned view are reflected in this
    * matrix, and vice-versa. To obtain a slice view on subranges, construct a sub-ranging view
@@ -709,7 +709,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     int viewStride = this.columnStride;
     return like1D(viewSize, viewZero, viewStride);
   }
-  /**
+  /*
    * Constructs and returns a new <i>flip view</i> along the row axis. What used to be row
    * <tt>0</tt> is now row <tt>rows()-1</tt>, ..., what used to be row <tt>rows()-1</tt> is now row
    * <tt>0</tt>. The returned view is backed by this matrix, so changes in the returned view are
@@ -739,7 +739,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public DoubleMatrix2D viewRowFlip() {
     return (DoubleMatrix2D) (view().vRowFlip());
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding the indicated
    * cells. There holds <tt>view.rows() == rowIndexes.length, view.columns() ==
    * columnIndexes.length</tt> and <tt>view.get(i,j) ==
@@ -800,7 +800,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return viewSelectionLike(rowOffsets, columnOffsets);
   }
-  /**
+  /*
    * Constructs and returns a new <i>selection view</i> that is a matrix holding all <b>rows</b>
    * matching the given condition. Applies the condition to each row and takes only those row where
    * <tt>condition.apply(viewRow(i))</tt> yields <tt>true</tt>. To match columns, use a dice view.
@@ -843,7 +843,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     matches.trimToSize();
     return viewSelection(matches.elements(), null); // take all columns
   }
-  /**
+  /*
    * Construct and returns a new selection view.
    *
    * @param rowOffsets the offsets of the visible elements.
@@ -851,7 +851,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
    * @return a new view.
    */
   protected abstract DoubleMatrix2D viewSelectionLike(int[] rowOffsets, int[] columnOffsets);
-  /**
+  /*
    * Sorts the matrix rows into ascending order, according to the <i>natural ordering</i> of the
    * matrix values in the given column. This sort is guaranteed to be <i>stable</i>. For further
    * information, see {@link cern.colt.matrix.doublealgo.Sorting#sort(DoubleMatrix2D,int)}. For more
@@ -863,7 +863,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public DoubleMatrix2D viewSorted(int column) {
     return cern.colt.matrix.doublealgo.Sorting.mergeSort.sort(this, column);
   }
-  /**
+  /*
    * Constructs and returns a new <i>stride view</i> which is a sub matrix consisting of every i-th
    * cell. More specifically, the view has <tt>this.rows()/rowStride</tt> rows and
    * <tt>this.columns()/columnStride</tt> columns holding cells
@@ -879,7 +879,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
   public DoubleMatrix2D viewStrides(int rowStride, int columnStride) {
     return (DoubleMatrix2D) (view().vStrides(rowStride, columnStride));
   }
-  /**
+  /*
    * Applies a procedure to each cell's value. Iterates downwards from
    * <tt>[rows()-1,columns()-1]</tt> to <tt>[0,0]</tt>, as demonstrated by this snippet:
    *
@@ -908,7 +908,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return true;
   }
-  /**
+  /*
    * 8 neighbor stencil transformation. For efficient finite difference operations. Applies a
    * function to a moving <tt>3 x 3</tt> window. Does nothing if <tt>rows() < 3 || columns() <
    * 3</tt>.
@@ -1001,14 +1001,14 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
       }
     }
   }
-  /**
+  /*
    * Linear algebraic matrix-vector multiplication; <tt>z = A * y</tt>; Equivalent to <tt>return
    * A.zMult(y,z,1,0);</tt>
    */
   public DoubleMatrix1D zMult(DoubleMatrix1D y, DoubleMatrix1D z) {
     return zMult(y, z, 1, (z == null ? 1 : 0), false);
   }
-  /**
+  /*
    * Linear algebraic matrix-vector multiplication; <tt>z = alpha * A * y + beta*z</tt>. <tt>z[i] =
    * alpha*Sum(A[i,j] * y[j]) + beta*z[i], i=0..A.rows()-1, j=0..y.size()-1</tt>. Where <tt>A ==
    * this</tt>. <br>
@@ -1043,14 +1043,14 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return z;
   }
-  /**
+  /*
    * Linear algebraic matrix-matrix multiplication; <tt>C = A x B</tt>; Equivalent to
    * <tt>A.zMult(B,C,1,0,false,false)</tt>.
    */
   public DoubleMatrix2D zMult(DoubleMatrix2D B, DoubleMatrix2D C) {
     return zMult(B, C, 1, (C == null ? 1 : 0), false, false);
   }
-  /**
+  /*
    * Linear algebraic matrix-matrix multiplication; <tt>C = alpha * A x B + beta*C</tt>. <tt>C[i,j]
    * = alpha*Sum(A[i,k] * B[k,j]) + beta*C[i,j], k=0..n-1</tt>. <br>
    * Matrix shapes: <tt>A(m x n), B(n x p), C(m x p)</tt>. <br>
@@ -1104,7 +1104,7 @@ public abstract class DoubleMatrix2D extends AbstractMatrix2D {
     }
     return C;
   }
-  /**
+  /*
    * Returns the sum of all cells; <tt>Sum( x[i,j] )</tt>.
    *
    * @return the sum.

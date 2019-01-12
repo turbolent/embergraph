@@ -33,8 +33,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.io.ByteCountInputStream;
 import org.embergraph.io.ByteCountOutputStream;
 
-/**
- * SCSU version.
+/*
+* SCSU version.
  *
  * @see http://userguide.icu-project.org/conversion/compression
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

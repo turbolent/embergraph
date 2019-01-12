@@ -57,8 +57,8 @@ import org.embergraph.util.Bytes;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.InnerCause;
 
-/**
- * A utility class that opens the journal in a read-only mode and dumps the root blocks and metadata
+/*
+* A utility class that opens the journal in a read-only mode and dumps the root blocks and metadata
  * about the indices on a journal file.
  *
  * <p>TODO add an option to dump only as of a specified commitTime?
@@ -72,14 +72,14 @@ public class DumpJournal {
 
   private static final Logger log = Logger.getLogger(DumpJournal.class);
 
-  /**
+  /*
    * Dump out the Global Row Store.
    *
    * <p>TODO Raise as parameter, put on main(), and clean up the code.
    */
   private static final boolean dumpGRS = false;
 
-  /**
+  /*
    * Validate the delete blocks (RWStore only). If there are double- deletes in the delete blocks,
    * then log out more information about those addresses.
    *
@@ -91,7 +91,7 @@ public class DumpJournal {
   //
   //    }
 
-  /**
+  /*
    * Dump one or more journal files:
    *
    * <pre>
@@ -197,8 +197,8 @@ public class DumpJournal {
 
       try {
 
-        /*
-         * Stat the file and report on its size, etc.
+      /*
+       * Stat the file and report on its size, etc.
          */
         {
           System.out.println("File: " + file);
@@ -291,7 +291,7 @@ public class DumpJournal {
     System.out.println("Normal completion");
   }
 
-  /**
+  /*
    * @param dumpHistory Dump metadata for indices in all commit records (default only dumps the
    *     metadata for the indices as of the most current committed state).
    * @param dumpPages Dump the pages of the indices and reports some information on the page size.
@@ -319,7 +319,7 @@ public class DumpJournal {
     }
   }
 
-  /**
+  /*
    * @param out Where to write the output.
    * @param namespaces When non-empty and non-<code>null</code>, dump only those indices having any
    *     of the specified namespaces.
@@ -338,8 +338,8 @@ public class DumpJournal {
       final boolean showTuples) {
 
     //        Note: This does not fix the issue.
-    //        /**
-    //         * Start a transaction. This will bracket all index access and protect
+    //        /*
+//         * Start a transaction. This will bracket all index access and protect
     //         * the data on the journal from concurrent recycling.
     //         *
     //         * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/762">
@@ -602,7 +602,7 @@ public class DumpJournal {
     }
   }
 
-  /**
+  /*
    * Dump metadata about each named index as of the specified commit record.
    *
    * @param dumpPages When <code>true</code>, the index pages will be recursively scanned to collect
@@ -659,8 +659,8 @@ public class DumpJournal {
 
         if (InnerCause.isInnerCause(t, ClassNotFoundException.class)) {
 
-          /*
-           * This is typically a tuple serializer that has a
+        /*
+       * This is typically a tuple serializer that has a
            * dependency on an application class that is not present in
            * the CLASSPATH. Add the necessary dependency(s) and you
            * should no longer see this message.
@@ -700,8 +700,8 @@ public class DumpJournal {
 
           if (ndx instanceof AbstractBTree) {
 
-            /*
-             * TODO GIST : dumpTuples for HTree.
+          /*
+       * TODO GIST : dumpTuples for HTree.
              */
 
             DumpIndex.dumpIndex((AbstractBTree) ndx, showTuples);
@@ -762,7 +762,7 @@ public class DumpJournal {
 
   } // dumpNamedIndicesMetadata
 
-  /**
+  /*
    * Utility method dumps the data associated with an address on the backing store. A variety of
    * methods are attempted.
    *
@@ -772,7 +772,7 @@ public class DumpJournal {
   private String dumpRawRecord(final long addr) {
 
     if (journal.getBufferStrategy() instanceof IRWStrategy) {
-      /**
+      /*
        * TODO When we address this issue, do this test for all stores.
        *
        * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/555">Support
@@ -824,7 +824,7 @@ public class DumpJournal {
     }
   }
 
-  /**
+  /*
    * Attempt to decode data read from some address using a variety of mechanisms.
    *
    * @param b The data.
@@ -840,7 +840,7 @@ public class DumpJournal {
      */
 
     try {
-      /**
+      /*
        * Note: This handles a lot of cases, including:
        *
        * <p>Checkpoint, IndexMetadata
@@ -915,8 +915,8 @@ public class DumpJournal {
           case Stream:
             @SuppressWarnings("unused")
             final Stream stream = (Stream) ndx;
-            /*
-             * Note: We can't do anything here with a Stream, but we do
+          /*
+       * Note: We can't do anything here with a Stream, but we do
              * try to read on the address as a stream in the caller.
              */
             continue;

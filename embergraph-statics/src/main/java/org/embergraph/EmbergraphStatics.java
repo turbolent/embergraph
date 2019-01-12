@@ -30,21 +30,21 @@ import java.util.Map;
 import java.util.TreeMap;
 import org.embergraph.ganglia.GangliaService;
 
-/**
- * A class for those few statics that it makes sense to reference from other places.
+/*
+* A class for those few statics that it makes sense to reference from other places.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
 public class EmbergraphStatics {
 
-  /**
+  /*
    * A flag used for a variety of purposes during performance tuning. The use of the flag makes it
    * easier to figure out where those {@link System#err} messages are coming from. This should
    * always be off in the trunk.
    */
   public static final boolean debug = Boolean.getBoolean("org.embergraph.debug");
 
-  /**
+  /*
    * The name of an environment variable whose value will be used as the canonical host name for the
    * host running this JVM. This information is used by the {@link
    * org.embergraph.counters.AbstractStatisticsCollector}, which is responsible for obtaining and
@@ -58,7 +58,7 @@ public class EmbergraphStatics {
    */
   public static final String HOSTNAME = "org.embergraph.hostname";
 
-  /**
+  /*
    * The #of lines of output from a child process which will be echoed onto {@link System#out} when
    * that child process is executed. This makes it easy to track down why a child process dies
    * during service start. If you want to see all output from the child process, then you should set
@@ -71,7 +71,7 @@ public class EmbergraphStatics {
    */
   public static int echoProcessStartupLineCount = 30; // Integer.MAX_VALUE;//100
 
-  /**
+  /*
    * Global switch controlling whether true thread local buffers or striped locks are used for some
    * things.
    *
@@ -82,7 +82,7 @@ public class EmbergraphStatics {
   public static final boolean threadLocalBuffers =
       Boolean.getBoolean("org.embergraph.threadLocalBuffers");
 
-  /**
+  /*
    * Used to ignore tests in CI that are known to fail. This helps make CI green for people while
    * still leaving us a trail for the tests that exist to mark problems that should be fixed at some
    * point.
@@ -90,7 +90,7 @@ public class EmbergraphStatics {
   public static final boolean runKnownBadTests =
       Boolean.getBoolean("org.embergraph.runKnownBadTests");
 
-  /**
+  /*
    * Return the web application context path for the default deployment of the embergraph web
    * application.
    *
@@ -102,7 +102,7 @@ public class EmbergraphStatics {
     return "/embergraph";
   }
 
-  /**
+  /*
    * Write a thread dump onto the caller's object.
    *
    * <p>Note: This code should not obtain any locks. This is necessary in order for the code to run

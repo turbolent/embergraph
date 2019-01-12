@@ -34,8 +34,8 @@ import org.embergraph.relation.accesspath.BlockingBuffer;
 import org.embergraph.relation.accesspath.ChunkMergeSortHelper;
 import org.embergraph.relation.accesspath.IAsynchronousIterator;
 
-/**
- * Abstract implementation of a subtask for the {@link AbstractMasterTask} handles the protocol for
+/*
+* Abstract implementation of a subtask for the {@link AbstractMasterTask} handles the protocol for
  * startup and termination of the subtask. A concrete implementation must handle the chunks of
  * elements being drained from the subtask's {@link #buffer} via {@link #handleChunk(Object[])}.
  *
@@ -67,7 +67,7 @@ public abstract class AbstractSubtask<
   /** The buffer on which the {@link #master} is writing. */
   protected final BlockingBuffer<E[]> buffer;
 
-  /**
+  /*
    * The iterator draining the {@link #buffer}.
    *
    * <p>Note: DO NOT close this iterator from within {@link #call()} as that would cause this task
@@ -78,14 +78,14 @@ public abstract class AbstractSubtask<
   /** The statistics used by this task. */
   protected final HS stats;
 
-  /**
+  /*
    * The timestamp at which a chunk was last written on the buffer for this sink by the master. This
    * is used to help determine whether or not a sink has become idle. A sink on which a master has
    * recently written a chunk is not idle even if the sink has not read any chunks from its buffer.
    */
   protected volatile long lastChunkNanos = System.nanoTime();
 
-  /**
+  /*
    * The timestamp at {@link IAsynchronousIterator#hasNext(long, TimeUnit)} last returned true when
    * queried with a timeout of {@link AbstractMasterTask#sinkPollTimeoutNanos} nanoseconds. This
    * tests whether or not a chunk is available and is used to help decide if the sink has become
@@ -114,7 +114,7 @@ public abstract class AbstractSubtask<
 
     this.src = buffer.iterator();
 
-    this.stats = (HS) master.stats.getSubtaskStats(locator);
+    this.stats = master.stats.getSubtaskStats(locator);
   }
 
   public HS call() throws Exception {
@@ -208,7 +208,7 @@ public abstract class AbstractSubtask<
     }
   }
 
-  /**
+  /*
    * Wait until any asynchronous processing for the subtask is done. This is an extension hook which
    * is used if the remote task accepts chunks for processing and uses an asynchronous notification
    * mechanism to indicate the success or failure of elements. The default implementation is a NOP.
@@ -219,7 +219,7 @@ public abstract class AbstractSubtask<
 
   }
 
-  /**
+  /*
    * Cancel the remote task. This is an extension hook which is used if the remote task accepts
    * chunks for processing and uses an asynchronous notification mechanism to indicate the success
    * or failure of elements. The default implementation is a NOP.
@@ -232,7 +232,7 @@ public abstract class AbstractSubtask<
 
   }
 
-  /**
+  /*
    * Inner class is responsible for combining chunks as they become available from the {@link
    * IAsynchronousIterator} while maintaining liveness. It works with the {@link
    * IAsynchronousIterator} API internally and polls the {@link AbstractSubtask#src}. If a chunk is
@@ -317,8 +317,8 @@ public abstract class AbstractSubtask<
 
         if ((idle || master.src.isExhausted()) && buffer.isOpen()) {
           if (buffer.isEmpty()) {
-            /*
-             * Close out buffer. Since the buffer is empty the
+          /*
+       * Close out buffer. Since the buffer is empty the
              * iterator will be quickly be exhausted (it is possible
              * there is one chunk waiting in the iterator) and the
              * subtask will quit the next time through the loop.
@@ -328,15 +328,15 @@ public abstract class AbstractSubtask<
              */
             if (log.isInfoEnabled()) log.info("Closing buffer: idle=" + idle + " : " + this);
             if (idle) {
-              /*
-               * An idle timeout is a conditional close and the
+            /*
+       * An idle timeout is a conditional close and the
                * sink MAY be reopened.
                */
               buffer.abort(new IdleTimeoutException());
               master.stats.subtaskIdleTimeoutCount.incrementAndGet();
             } else {
-              /*
-               * Since redirects of outstanding writes can cause
+            /*
+       * Since redirects of outstanding writes can cause
                * the master to (re-)process redirected chunks,
                * this is treated as a conditional close and the
                * sink MAY be reopened.
@@ -344,8 +344,8 @@ public abstract class AbstractSubtask<
               buffer.abort(new MasterExhaustedException());
             }
             if (chunkSize == 0 && !src.hasNext()) {
-              /*
-               * The iterator is already exhausted so we break out
+            /*
+       * The iterator is already exhausted so we break out
                * of the loop now.
                */
               if (log.isInfoEnabled()) log.info("No more data: " + this);
@@ -355,8 +355,8 @@ public abstract class AbstractSubtask<
         }
 
         if (chunkSize >= buffer.getMinimumChunkSize()) {
-          /*
-           * We have a full chunk worth of data so do not wait longer.
+        /*
+       * We have a full chunk worth of data so do not wait longer.
            */
           if (log.isInfoEnabled())
             log.info(
@@ -372,8 +372,8 @@ public abstract class AbstractSubtask<
         if (chunkSize > 0
             && ((elapsedNanos > buffer.getChunkTimeout())
                 || (!buffer.isOpen() && !src.hasNext()))) {
-          /*
-           * We have SOME data and either (a) the chunk timeout has
+        /*
+       * We have SOME data and either (a) the chunk timeout has
            * expired -or- (b) the buffer is closed and there is
            * nothing more to be read from the iterator. Note that the
            * sink was closed above if the master's buffer was closed.
@@ -393,8 +393,8 @@ public abstract class AbstractSubtask<
           return true;
         }
 
-        /*
-         * Poll the source iterator for another chunk.
+      /*
+       * Poll the source iterator for another chunk.
          *
          * @todo I need to review the logic for choosing a short poll
          * duration here. I believe that this choice is leading to high
@@ -424,8 +424,8 @@ public abstract class AbstractSubtask<
          */
         if (src.hasNext(master.sinkPollTimeoutNanos, TimeUnit.NANOSECONDS)) {
 
-          /*
-           * Take whatever is already buffered but do not allow the
+        /*
+       * Take whatever is already buffered but do not allow the
            * source iterator to combine chunks since that would
            * increase our blocking time by whatever the chunkTimeout
            * is.
@@ -471,7 +471,7 @@ public abstract class AbstractSubtask<
       } // while(true)
     }
 
-    /**
+    /*
      * Return the buffered chunk(s) as a single combined chunk. If more than one chunk is combined
      * to produce the returned chunk and {@link BlockingBuffer#isOrdered()}, then a merge sort is
      * applied to the the elements of the chunk before it is returned to the caller in order to keep
@@ -527,7 +527,7 @@ public abstract class AbstractSubtask<
     }
   }
 
-  /**
+  /*
    * This method MUST be invoked if a sink receives a "stale locator exception" within {@link
    * #handleChunk(Object[])}.
    *
@@ -584,14 +584,14 @@ public abstract class AbstractSubtask<
     }
   }
 
-  /**
+  /*
    * Process a chunk from the buffer.
    *
    * @return <code>true</code> iff the task should exit immediately.
    */
   protected abstract boolean handleChunk(E[] chunk) throws Exception;
 
-  /**
+  /*
    * Notify the client that the locator is stale.
    *
    * @param locator The locator.

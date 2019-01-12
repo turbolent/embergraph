@@ -27,8 +27,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.Serializable;
 
-/**
- * An abstraction for serializing and de-serializing objects on streams.
+/*
+* An abstraction for serializing and de-serializing objects on streams.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -38,7 +38,7 @@ import java.io.Serializable;
  */
 public interface IStreamSerializer<T> extends Serializable {
 
-  /**
+  /*
    * Serialize an object.
    *
    * <p>Note: All state required to de-serialize the object must be written onto the stream. That
@@ -52,7 +52,7 @@ public interface IStreamSerializer<T> extends Serializable {
    */
   void serialize(ObjectOutput out, T obj);
 
-  /**
+  /*
    * De-serialize an object.
    *
    * @param in The stream from which the object's state will be read.

@@ -22,8 +22,8 @@ package org.embergraph.bop.cost;
 
 import java.io.Serializable;
 
-/**
- * A cost model of the disk.
+/*
+* A cost model of the disk.
  *
  * @todo Develop disk models for SAS,SATA,SSD and various RAID configurations, including the #of
  *     spindles in the RAID array.
@@ -35,7 +35,7 @@ import java.io.Serializable;
  */
 public class DiskCostModel implements Serializable {
 
-  /**
+  /*
    * @todo should be either Externalizable and explicitly managed versioning or Serializable with a
    *     public interface for versioning.
    */
@@ -49,7 +49,7 @@ public class DiskCostModel implements Serializable {
   /** The average disk transfer rate (megabytes per second). */
   public final double transferRate;
 
-  /**
+  /*
    * @param seekTime The average disk seek time (milliseconds).
    * @param transferRate The average disk transfer rate (megabytes per second).
    */

@@ -27,8 +27,8 @@ import junit.framework.TestCase;
 import org.embergraph.service.EmbeddedClient;
 import org.embergraph.service.IEmbergraphClient;
 
-/**
- * An abstract test harness that sets up (and tears down) the metadata and data services required
+/*
+* An abstract test harness that sets up (and tears down) the metadata and data services required
  * for a embergraph federation using in-process services rather than service discovery (which means
  * that there is no network IO).
  *
@@ -54,7 +54,7 @@ public abstract class AbstractEmbeddedEmbergraphFederationTestCase extends TestC
 
   IEmbergraphClient client;
 
-  /**
+  /*
    * Data files are placed into a directory named by the test. If the directory exists, then it is
    * removed before the federation is set up.
    */
@@ -93,7 +93,7 @@ public abstract class AbstractEmbeddedEmbergraphFederationTestCase extends TestC
     }
   }
 
-  /**
+  /*
    * Recursively removes any files and subdirectories and then removes the file (or directory)
    * itself.
    *

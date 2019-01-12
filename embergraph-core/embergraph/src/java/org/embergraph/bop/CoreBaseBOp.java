@@ -29,8 +29,8 @@ import java.util.Map;
 import org.embergraph.btree.Tuple;
 import org.embergraph.rdf.sparql.ast.IValueExpressionNode;
 
-/**
- * Base class with some common methods for mutable and copy-on-write {@link BOp} s.
+/*
+* Base class with some common methods for mutable and copy-on-write {@link BOp} s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -40,14 +40,14 @@ public abstract class CoreBaseBOp implements BOp {
   /** */
   private static final long serialVersionUID = 1L;
 
-  /**
+  /*
    * The default initial capacity used for an empty annotation map -- empty maps use the minimum
    * initial capacity to avoid waste since we create a large number of {@link BOp}s during query
    * evaluation.
    */
   protected static final transient int DEFAULT_INITIAL_CAPACITY = 2;
 
-  /**
+  /*
    * Check the operator argument.
    *
    * @param args The arguments.
@@ -55,7 +55,7 @@ public abstract class CoreBaseBOp implements BOp {
    */
   protected void checkArgs(final BOp[] args) {}
 
-  /**
+  /*
    * Deep copy clone semantics.
    *
    * <p>{@inheritDoc}
@@ -65,8 +65,8 @@ public abstract class CoreBaseBOp implements BOp {
     final Class<? extends CoreBaseBOp> cls = getClass();
     final Constructor<? extends CoreBaseBOp> ctor;
     try {
-      ctor = cls.getConstructor(new Class[] {cls});
-      return ctor.newInstance(new Object[] {this});
+      ctor = cls.getConstructor(cls);
+      return ctor.newInstance(this);
     } catch (SecurityException e) {
       throw new RuntimeException(e);
     } catch (NoSuchMethodException e) {
@@ -104,7 +104,7 @@ public abstract class CoreBaseBOp implements BOp {
     }
   }
 
-  /**
+  /*
    * Return a non-recursive representation of the arguments and annotations for this {@link BOp}.
    */
   @Override
@@ -135,7 +135,7 @@ public abstract class CoreBaseBOp implements BOp {
     return sb.toString();
   }
 
-  /**
+  /*
    * Append a name to a string buffer, possibly shortening the name. The current algorithm for name
    * shortening is to take the end of the name after the pen-ultimate '.'.
    *
@@ -152,7 +152,7 @@ public abstract class CoreBaseBOp implements BOp {
     sb.append(longishName);
   }
 
-  /**
+  /*
    * Add a string representation of annotations into a string builder. By default this is a
    * non-recursive operation, however subclasses may override {@link
    * #annotationValueToString(StringBuilder, BOp, int)} in order to make this recursive.
@@ -163,7 +163,7 @@ public abstract class CoreBaseBOp implements BOp {
     annotationsToString(sb, 0);
   }
 
-  /**
+  /*
    * Add a string representation of annotations into a string builder. By default this is a
    * non-recursive operation, however subclasses may override {@link
    * #annotationValueToString(StringBuilder, BOp, int)} in order to make this recursive.
@@ -197,7 +197,7 @@ public abstract class CoreBaseBOp implements BOp {
     }
   }
 
-  /**
+  /*
    * Add a string representation of a BOp annotation value into a string builder. By default this is
    * a non-recursive operation, however subclasses may override and give a recursive definition,
    * which should respect the given indent.
@@ -308,7 +308,7 @@ public abstract class CoreBaseBOp implements BOp {
     return annotationsEqual(o);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the annotations of this {@link BOp} and the other {@link BOp} are
    * equals.
    *
@@ -326,7 +326,7 @@ public abstract class CoreBaseBOp implements BOp {
     return annotationsEqual(m1, m2);
   }
 
-  /**
+  /*
    * Compares two maps. If the value under a key is an array, then uses {@link
    * Arrays#equals(Object[], Object[])} to compare the values rather than {@link
    * Object#equals(Object)}. Without this, two bops having array annotation values which have the
@@ -402,7 +402,7 @@ public abstract class CoreBaseBOp implements BOp {
   /** Caches the hash code. */
   private int hash = 0;
 
-  /**
+  /*
    * Returns a string that may be used to indent a dump of the nodes in the tree.
    *
    * <p>Note: The string is capped out after a maximum supported depth.
@@ -420,7 +420,7 @@ public abstract class CoreBaseBOp implements BOp {
     return ws.substring(0, Math.min(ws.length(), depth * 2));
   }
 
-  /**
+  /*
    * The contract of this method at this level is under-specified. Sub-classes may choose between:
    *
    * <p>- return a string representation of the object, similar to the use of {@link #toString()}
@@ -442,7 +442,7 @@ public abstract class CoreBaseBOp implements BOp {
   private static final transient String ws =
       "                                                                                                                                                                                                                                                                                                                                                                                                                                    ";
 
-  /**
+  /*
    * Invoked automatically any time a mutation operation occurs. The default implementation is a
    * NOP.
    */

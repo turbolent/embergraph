@@ -73,8 +73,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.query.algebra.StatementPattern.Scope;
 
-/**
- * A helper class that can make it easier to write {@link IASTOptimizer} tests.
+/*
+* A helper class that can make it easier to write {@link IASTOptimizer} tests.
  *
  * @author jeremycarroll
  */
@@ -87,7 +87,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
           org.embergraph.rdf.sparql.ast.StatementPatternNode.Annotations {}
 
   public interface ApplyAnnotation {
-    public void apply(ASTBase target);
+    void apply(ASTBase target);
   }
 
   enum HelperFlag {
@@ -126,7 +126,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
     OPTIONAL {
       @Override
       public void apply(ASTBase sp) {
-        ((ModifiableBOpBase) sp).setProperty(Annotations.OPTIONAL, true);
+        sp.setProperty(Annotations.OPTIONAL, true);
       }
     },
     DISTINCT {
@@ -161,7 +161,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       }
     };
 
-    /**
+    /*
      * @param target
      * @throws ClassCastException If there is a mismatch between the flag and its usage.
      */
@@ -171,7 +171,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       alp.setProperty(Annotations.LOWER_BOUND, mod == PathMod.ONE_OR_MORE ? 1L : 0L);
       alp.setProperty(Annotations.UPPER_BOUND, mod == PathMod.ZERO_OR_ONE ? 1L : Long.MAX_VALUE);
     }
-  };
+  }
 
   protected AbstractOptimizerTestCase(final String name) {
     super(name);
@@ -181,14 +181,14 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
     super();
   }
 
-  /**
+  /*
    * Return the {@link IASTOptimizer} to be evaluated by the {@link Helper}. This may be an {@link
    * ASTOptimizerList} if you need to chain multiple optimizers together in order to evaluate their
    * behavior.
    */
   abstract IASTOptimizer newOptimizer();
 
-  /**
+  /*
    * The purpose of this class is to make the tests look like the old comments. The first example
    * {@link TestASTStaticJoinOptimizer#test_simpleOptional01A()} is based on the comments of {@link
    * TestASTStaticJoinOptimizer#test_simpleOptional01()} and demonstrates that the comment is out of
@@ -256,7 +256,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
 
     private GlobalAnnotations globals = new GlobalAnnotations(getName(), ITx.READ_COMMITTED);
 
-    /**
+    /*
      * Execute the test comparing the rewrite of the {@link #given} AST by the {@link IASTOptimizer}
      * with the {@link #expected} AST.
      */
@@ -278,7 +278,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return new AST2BOpContext(new ASTContainer(given), store);
     }
 
-    /**
+    /*
      * Execute the test comparing the rewrite of the {@link #given} AST by the {@link IASTOptimizer}
      * with the {@link #expected} AST. Thereby, explain hints attached to the computed AST are
      * ignored when comparing the ASTs.
@@ -309,7 +309,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return varNode("*");
     }
 
-    /**
+    /*
      * Create a top-level SELECT query.
      *
      * @param varNodes The projected variables.
@@ -330,7 +330,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return rslt;
     }
 
-    /**
+    /*
      * @param varNodes The variables that will appear in the projection.
      * @param where The top-level WHERE clause.
      * @param flags Zero or more flags that are applied to the operations.
@@ -361,7 +361,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
 
     }
 
-    /**
+    /*
      * Return a PROJECTION node.
      *
      * @param varNodes The variables that will appear in the projection.
@@ -375,7 +375,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return projection;
     }
 
-    /**
+    /*
      * Return a PROJECTION node.
      *
      * @param assignmentNodes The BIND()s that will appear in the projection.
@@ -389,7 +389,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return projection;
     }
 
-    /**
+    /*
      * @param projection The projection.
      * @param where The top-level WHERE clause.
      * @param flags Zero or more flags that are applied to the operations.
@@ -439,7 +439,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return select;
     }
 
-    /**
+    /*
      * Return an ASK subquery.
      *
      * @param varNode The "ASK" variable. See {@link SubqueryRoot.Annotations#ASK_VAR}.
@@ -462,7 +462,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return rslt;
     }
 
-    /**
+    /*
      * Return a named subquery.
      *
      * @param name The name associated with the named subquery result.
@@ -533,7 +533,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
     }
 
     protected VarNode[] varNodes(String... names) {
-      VarNode rslt[] = new VarNode[names.length];
+      VarNode[] rslt = new VarNode[names.length];
       for (int i = 0; i < names.length; i++) rslt[i] = varNode(names[i]);
       return rslt;
     }
@@ -555,7 +555,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return new PropertyPathNode(s, pathNode(pattern), o);
     }
 
-    /**
+    /*
      * This method is only implemented in part. The issue is what patterns are supported. The
      * desired support as of the intended contract of this method is that pattern can be any sparql
      * property path expression without any whitespace, and where every property in the path is
@@ -568,8 +568,8 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
      * @return
      */
     protected PathNode pathNode(String pattern) {
-      final String seq[] = pattern.split("/");
-      final PathElt elements[] = new PathElt[seq.length];
+      final String[] seq = pattern.split("/");
+      final PathElt[] elements = new PathElt[seq.length];
       PathMod mod = null;
       for (int i = 0; i < seq.length; i++) {
         final String s = seq[i];
@@ -595,7 +595,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return new StatementPatternProperty(name, value);
     }
 
-    /**
+    /*
      * Create a statement pattern node. The additional arguments after the s, p, o, are:
      *
      * <ol>
@@ -649,7 +649,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return rslt;
     }
 
-    /**
+    /*
      * Return a graph join group.
      *
      * @param context The graph (named graph variable or IRI).
@@ -665,7 +665,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return rslt;
     }
 
-    /**
+    /*
      * Wrap the arguments in a {@link JoinGroupNode} and apply any inter-mixed {@link HelperFlag}s.
      *
      * @param statements The arguments (group group members or {@link HelperFlag}s)
@@ -676,7 +676,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return initGraphPatternGroup(new JoinGroupNode(), statements);
     }
 
-    /**
+    /*
      * Wrap the triple patterns in a WHERE clause (aka join group).
      *
      * @param statements The triple patterns.
@@ -699,7 +699,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
     protected FunctionNode bound(final VarNode varNode) {
 
       final FunctionNode rslt =
-          new FunctionNode(FunctionRegistry.BOUND, null, new ValueExpressionNode[] {varNode});
+          new FunctionNode(FunctionRegistry.BOUND, null, varNode);
 
       rslt.setValueExpression(new IsBoundBOp(varNode.getValueExpression()));
 
@@ -722,7 +722,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return new FilterNode(f);
     }
 
-    /**
+    /*
      * Return a {@link FunctionNode}
      *
      * @param uri the function URI. see {@link FunctionRegistry}
@@ -737,7 +737,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return functionNode(new URIImpl(uri), args);
     }
 
-    /**
+    /*
      * Return a {@link FunctionNode}
      *
      * @param uri the function URI. see {@link FunctionRegistry}
@@ -757,7 +757,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       return new ServiceNode(serviceRef, groupNode);
     }
 
-    /**
+    /*
      * <code>BIND(expression AS variable)</code>
      *
      * @param valueNode The expression
@@ -856,7 +856,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
     return newStatementPatternNode(s, p, o, cardinality, false);
   }
 
-  /**
+  /*
    * Return a new triple pattern.
    *
    * @param s The subject.

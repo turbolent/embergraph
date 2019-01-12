@@ -25,8 +25,8 @@ import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.util.zip.Adler32;
 
-/**
- * Utility class for computing the {@link Adler32} checksum of a buffer. This class is NOT
+/*
+* Utility class for computing the {@link Adler32} checksum of a buffer. This class is NOT
  * thread-safe.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -45,7 +45,7 @@ public class ChecksumUtility {
         }
       };
 
-  /**
+  /*
    * static access to a ThreadLocal Checksum utility
    *
    * @return the ChecksumUtility
@@ -62,13 +62,13 @@ public class ChecksumUtility {
     //		return chk;
   }
 
-  /**
+  /*
    * Used to compute the checksums. Exposed to subclasses so they can update the checksum for
    * additional fields.
    */
   protected final Adler32 chk = new Adler32();
 
-  /**
+  /*
    * Compute the {@link Adler32} checksum of the buffer. The position, mark, and limit are unchanged
    * by this operation. The operation is optimized when the buffer is backed by an array.
    *
@@ -80,7 +80,7 @@ public class ChecksumUtility {
     return checksum(buf, buf.position(), buf.limit());
   }
 
-  /**
+  /*
    * Compute the {@link Adler32} checksum of the buffer. The position, mark, and limit are unchanged
    * by this operation. The operation is optimized when the buffer is backed by an array.
    *
@@ -122,7 +122,7 @@ public class ChecksumUtility {
     return (int) chk.getValue();
   }
 
-  /**
+  /*
    * Updates the {@link Adler32} checksum from the data in the buffer. The position, mark, and limit
    * are unchanged by this operation. The operation is optimized when the buffer is backed by an
    * array.
@@ -134,7 +134,7 @@ public class ChecksumUtility {
     update(buf, buf.position(), buf.limit());
   }
 
-  /**
+  /*
    * Core implementation updates the {@link Adler32} checksum from the data in the buffer. The
    * position, mark, and limit are unchanged by this operation. The operation is optimized when the
    * buffer is backed by an array.
@@ -217,7 +217,7 @@ public class ChecksumUtility {
     }
   }
 
-  /**
+  /*
    * Private buffer used to incrementally compute the checksum of the data as it is received. The
    * purpose of this buffer is to take advantage of more efficient bulk copy operations from the NIO
    * buffer into a local byte[] on the Java heap against which we then track the evolving checksum

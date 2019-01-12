@@ -29,8 +29,8 @@ import org.embergraph.btree.BTree.Stack;
 import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.rawstore.SimpleMemoryRawStore;
 
-/**
- * Test suite for the {@link BTree}'s {@link ILeafCursor} implementation. The most critical thing
+/*
+* Test suite for the {@link BTree}'s {@link ILeafCursor} implementation. The most critical thing
  * about this test suite is that it validates the cursor's ability to correctly maintain the {@link
  * Stack} of {@link Node}s over the current cursor position, especially for {@link
  * ILeafCursor#prior()} and {@link ILeafCursor#next()}. These tests have to be conducted at a {@link
@@ -202,7 +202,7 @@ public class TestBTreeLeafCursors extends TestCase2 {
     assertEquals(TestKeyBuilder.asSortKey(1), cursor.prior().getKeys().get(0));
   }
 
-  /**
+  /*
    * Create, populate, and return a btree with a branching factor of (3) and ten sequential keys
    * [1:10]. The values are {@link String}s objects formed using "v+"+i, where i is the integer from
    * which the key was formed.

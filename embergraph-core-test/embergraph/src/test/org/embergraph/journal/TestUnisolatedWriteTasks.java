@@ -30,8 +30,8 @@ import org.embergraph.btree.IndexMetadata;
 import org.embergraph.btree.keys.KeyBuilder;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
-/**
- * Correctness test suite for unisolated writes on one or more indices. The tests in this suite
+/*
+* Correctness test suite for unisolated writes on one or more indices. The tests in this suite
  * validate that the unisolated writes result in a commit and that the committed data may be read
  * back by an unisolated read task. Some tests write on more than one index in order to verify that
  * the writes and reads are performed against the expected index. The stress test additionally
@@ -52,7 +52,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
     super(name);
   }
 
-  /**
+  /*
    * Test creates a named index and writes a set of entries on that index using an unisolated write
    * task. We verify that a commit occured and then verify that the written data may be read back
    * using an unisolated read task.
@@ -165,8 +165,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
                     System.err.println("Ignoring expected exception: " + ex);
                   }
 
-                  /*
-                   * verify the written data from the prior task.
+                /*
+       * verify the written data from the prior task.
                    */
 
                   //                        byte[][] actualValues = new byte[ninserts][];
@@ -182,7 +182,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
 
                     assertNotNull(vals[i]);
 
-                    byte[] actualValue = (byte[]) ndx.lookup(keys[i]);
+                    byte[] actualValue = ndx.lookup(keys[i]);
 
                     assertEquals("i=" + i, vals[i], actualValue);
                   }
@@ -202,7 +202,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * Test creates two named indices and writes a set of distinct entries on each index using a
    * single unisolated write task to write on both indices. We verify that a commit occured and then
    * verify that the written data may be read back using a single unisolated read task to read from
@@ -315,8 +315,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
                       System.err.println("Ignoring expected exception: " + ex);
                     }
 
-                    /*
-                     * verify the written data from the prior task.
+                  /*
+       * verify the written data from the prior task.
                      */
 
                     //                            byte[][] actualValues = new byte[ninserts][];
@@ -332,7 +332,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
 
                       assertNotNull(vals1[i]);
 
-                      byte[] actualValue = (byte[]) ndx.lookup(keys1[i]);
+                      byte[] actualValue = ndx.lookup(keys1[i]);
 
                       assertEquals("i=" + i, vals1[i], actualValue);
                     }
@@ -351,8 +351,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
                       System.err.println("Ignoring expected exception: " + ex);
                     }
 
-                    /*
-                     * verify the written data from the prior task.
+                  /*
+       * verify the written data from the prior task.
                      */
                     //
                     //                            byte[][] actualValues = new byte[ninserts][];
@@ -368,7 +368,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
 
                       assertNotNull(vals2[i]);
 
-                      byte[] actualValue = (byte[]) ndx.lookup(keys2[i]);
+                      byte[] actualValue = ndx.lookup(keys2[i]);
 
                       assertEquals("i=" + i, vals2[i], actualValue);
                     }
@@ -389,7 +389,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
     }
   }
 
-  /**
+  /*
    * This is an N index stress test designed to verify that all indices receive their writes in a
    * large commit group. N SHOULD be choosen to be larger than the #of indices in the LRU cache
    * maintained by {@link Name2Addr}.
@@ -526,8 +526,8 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
                     assertEquals(
                         "indexUUID", stuff.indexUUID, ndx.getIndexMetadata().getIndexUUID());
 
-                    /*
-                     * verify the written data from the prior task.
+                  /*
+       * verify the written data from the prior task.
                      */
 
                     //                            byte[][] actualValues = new
@@ -541,7 +541,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
 
                     for (int j = 0; j < stuff.ninserts; j++) {
 
-                      byte[] actualValue = (byte[]) ndx.lookup(stuff.keys[j]);
+                      byte[] actualValue = ndx.lookup(stuff.keys[j]);
 
                       assertEquals("j=" + j, stuff.vals[j], actualValue);
                     }

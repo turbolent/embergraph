@@ -19,8 +19,8 @@ package org.embergraph.rdf.internal;
 
 import org.embergraph.rdf.model.EmbergraphLiteral;
 
-/**
- * Common root interface for AbstractLiteralIV and LiteralExtensionIV, the two inline literal IV
+/*
+* Common root interface for AbstractLiteralIV and LiteralExtensionIV, the two inline literal IV
  * class roots. Used by LiteralArrayIV.
  *
  * @author mikepersonick

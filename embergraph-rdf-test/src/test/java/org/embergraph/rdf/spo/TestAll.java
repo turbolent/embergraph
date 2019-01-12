@@ -21,8 +21,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Aggregates test suites into increasing dependency order.
+/*
+* Aggregates test suites into increasing dependency order.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -38,7 +38,7 @@ public class TestAll extends TestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Returns a test that will run each of the implementation specific test suites in turn.
    *
    * <p>Note: Much of the testing of the {@link SPORelation} is performed by the tests in the

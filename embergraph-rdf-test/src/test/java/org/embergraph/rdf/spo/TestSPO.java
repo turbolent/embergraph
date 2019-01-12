@@ -30,8 +30,8 @@ import org.embergraph.rdf.internal.impl.TermId;
 import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.model.StatementEnum;
 
-/**
- * Test suite for the {@link SPO} class.
+/*
+* Test suite for the {@link SPO} class.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

@@ -26,8 +26,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 import org.embergraph.rdf.spo.ISPO;
 
-/**
- * A template for the construction of one or more graphs based on the solutions projected by a
+/*
+* A template for the construction of one or more graphs based on the solutions projected by a
  * query.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -42,7 +42,7 @@ public class ConstructNode extends AbstractStatementContainer<StatementPatternNo
 
   public interface Annotations extends AbstractStatementContainer.Annotations {
 
-    /**
+    /*
      * Boolean property (default {@value #DEFAULT_NATIVE_DISTINCT}) which is <code>true</code> iff a
      * native DISTINCT {@link ISPO} filter should be applied (large cardinality is expected for the
      * constructed graph). When <code>false</code>, a JVM based DISTINCT {@link ISPO} filter will be
@@ -56,7 +56,7 @@ public class ConstructNode extends AbstractStatementContainer<StatementPatternNo
      */
     String NATIVE_DISTINCT = "nativeDistinct";
 
-    /**
+    /*
      * Internal boolean property (default {@value #DEFAULT_DISTINCT_QUDS}) which is <code>true
      * </code> when used internally for constructing sets of quads rather than sets of triples.
      *
@@ -115,7 +115,7 @@ public class ConstructNode extends AbstractStatementContainer<StatementPatternNo
     return this;
   }
 
-  /**
+  /*
    * When <code>true</code>, a native DISTINCT {@link ISPO} filter will be applied to the
    * constructed graph, otherwise a Java Heap based DISTINCT {@link ISPO} filter will be applied.
    *

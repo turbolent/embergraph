@@ -26,8 +26,8 @@ import org.embergraph.bop.IBindingSet;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.internal.IV;
 
-/**
- * Service invocation interface for an external (non-embergraph) service. Data interchange with the
+/*
+* Service invocation interface for an external (non-embergraph) service. Data interchange with the
  * external service uses the internal {@link IBindingSet} abstraction and it is up to the
  * implementing service to do any conversion of external entities. More precisely, the service must
  * return internal values with mocked IVs, which will be automatically resolved against the
@@ -45,12 +45,12 @@ import org.embergraph.rdf.internal.IV;
  */
 public interface MockIVReturningServiceCall extends ServiceCall<IBindingSet> {
 
-  /**
+  /*
    * Returns the set of variables that are internally bound. As this service is not operating on the
    * internal data model, these are the variables that are pointing to mock IVs (which need to be
    * resovled later on).
    *
    * @return
    */
-  public List<IVariable<IV>> getMockVariables();
+  List<IVariable<IV>> getMockVariables();
 }

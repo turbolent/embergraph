@@ -24,15 +24,15 @@ package org.embergraph.htree;
 import it.unimi.dsi.bits.Fast;
 import org.embergraph.util.BytesUtil;
 
-/**
- * Static utility methods and data for an {@link HTree}.
+/*
+* Static utility methods and data for an {@link HTree}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class HTreeUtil {
 
-  /**
+  /*
    * Find the first power of two which is GTE the given value. This is used to compute the size of
    * the address space (in bits) which is required to address a hash table with slots for that many
    * buckets.
@@ -48,7 +48,7 @@ public class HTreeUtil {
     return i;
   }
 
-  /**
+  /*
    * Return <code>2^n</code>.
    *
    * @param n The exponent.
@@ -60,7 +60,7 @@ public class HTreeUtil {
     return 1 << n;
   }
 
-  /**
+  /*
    * Return <code>true</code> if the argument is a power of TWO (2).
    *
    * @param v The argument.
@@ -71,7 +71,7 @@ public class HTreeUtil {
     return ((v & -v) == v);
   }
 
-  /**
+  /*
    * Return the #of entries in the address map for a page having the given local depth. This is
    * <code>2^(globalHashBits - localHashBits)</code>. The following table shows the relationship
    * between the global hash bits (gb), the local hash bits (lb) for a page, and the #of directory
@@ -115,7 +115,7 @@ public class HTreeUtil {
     return numSlotsForPage;
   }
 
-  /**
+  /*
    * Return the local depth of a child page having <i>npointers</i> to that page in the parent node.
    * This method is based on the relationship <code>2^(n-i) = npointers</code> where <i>n</i> is the
    * global depth of the parent and <i>i</i> is the local depth of the child. The value of <i>i</i>
@@ -183,7 +183,7 @@ public class HTreeUtil {
     return i;
   }
 
-  /**
+  /*
    * Find the offset of the buddy hash table or buddy bucket in the child. Each page of the hash
    * tree is logically an ordered array of "buddies" sharing the same physical page. When the page
    * is a directory page, the buddies are buddy hash tables. When the page is a bucket page, the

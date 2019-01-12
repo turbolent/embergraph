@@ -26,8 +26,8 @@ package org.embergraph.relation.rule;
 import java.util.Arrays;
 import org.embergraph.bop.solutions.ISortOrder;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class QueryOptions implements IQueryOptions {
@@ -48,7 +48,7 @@ public class QueryOptions implements IQueryOptions {
       new QueryOptions(
           false /* distinct */, false /* stable */, null /* orderBy */, null /* Slice */);
 
-  /**
+  /*
    * An instance specifying <code>distinct := true</code> but none of the other {@link
    * IQueryOptions}.
    */
@@ -56,7 +56,7 @@ public class QueryOptions implements IQueryOptions {
       new QueryOptions(
           true /* distinct */, false /* stable */, null /* orderBy */, null /* querySlice */);
 
-  /**
+  /*
    * @param distinct
    * @param stable
    * @param orderBy

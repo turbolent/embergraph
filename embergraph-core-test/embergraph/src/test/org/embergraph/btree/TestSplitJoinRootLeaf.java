@@ -25,8 +25,8 @@ import org.apache.log4j.Level;
 import org.embergraph.btree.keys.TestKeyBuilder;
 import org.embergraph.io.SerializerUtil;
 
-/**
- * Test split and join of the root leaf (the tree never has more than two levels).
+/*
+* Test split and join of the root leaf (the tree never has more than two levels).
  *
  * @see src/architecture/btree.xls for examples for split().
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -42,7 +42,7 @@ public class TestSplitJoinRootLeaf extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * A series of tests of the mechanisms for splitting and joining a leaf with a branching factor of
    * three (3). Each tests uses the same initial conditions but forces removes a different key to
    * trigger the join to test the various edge conditions.
@@ -327,7 +327,7 @@ public class TestSplitJoinRootLeaf extends AbstractBTreeTestCase {
     assertEquals("#entries", 3, btree.nentries);
   }
 
-  /**
+  /*
    * Note: with a branching factor greater than (3) it is possible for {@link Leaf#join()} to
    * trigger {@link Leaf#redistributeKeys(Leaf)} rather than {@link Leaf#merge(Leaf)}. Since we
    * tested {@link Leaf#merge(Leaf)} for m := 3, we focus on testing {@link

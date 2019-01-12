@@ -11,21 +11,21 @@ import org.embergraph.rdf.sail.webapp.EmbergraphRDFServlet;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.openrdf.repository.RepositoryException;
 
-/**
- * A simple utility class that can be initialized with a ServletRequest and used to simplify dynamic
+/*
+* A simple utility class that can be initialized with a ServletRequest and used to simplify dynamic
  * web pages.
  *
  * @author Martyn Cutcher
  */
 public class GOMWebUtil {
 
-  /**
+  /*
    * The name of the request attribute to which we attach the {@link ObjectManager} scoped to that
    * request.
    */
   private static final String ATTRIBUTE_OM = ObjectManager.class.getName();
 
-  /**
+  /*
    * Return an {@link ITx#UNISOLATED} {@link ObjectManager} instance that is scoped to the <code>
    * request</code>. The same {@link ObjectManager} instance will be returned each time this method
    * is invoked for the same <code>request</code>. A distinct {@link ObjectManager} instance is
@@ -40,7 +40,7 @@ public class GOMWebUtil {
     return newObjectManager(request, ITx.UNISOLATED);
   }
 
-  /**
+  /*
    * Return an {@link ObjectManager} instance that is scoped to the <code>request</code>. The same
    * {@link ObjectManager} instance will be returned each time this method is invoked for the same
    * <code>request</code>. A distinct {@link ObjectManager} instance is returned for each distinct

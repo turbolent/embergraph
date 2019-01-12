@@ -32,8 +32,8 @@ import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Example of how to do a custom enum and map that enum over a byte using a native inline {@link
+/*
+* Example of how to do a custom enum and map that enum over a byte using a native inline {@link
  * XSDByteIV}.
  */
 public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtension<V> {
@@ -55,7 +55,7 @@ public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtensio
     return datatypes;
   }
 
-  /**
+  /*
    * Attempts to convert the supplied RDF value into a colors enum representation. Tests for a
    * literal value with the correct datatype that can be converted to one of the colors in the
    * {@link Color} enum based on the string value of the literal's label. Each {@link Color} in the
@@ -86,7 +86,7 @@ public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtensio
     return new LiteralExtensionIV(delegate, color.getIV());
   }
 
-  /**
+  /*
    * Attempt to convert the {@link AbstractLiteralIV#byteValue()} back into a {@link Color}, and
    * then use the string value of the {@link Color} to create an RDF literal.
    */
@@ -101,11 +101,11 @@ public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtensio
     return (V) vf.createLiteral(c.toString(), color);
   }
 
-  /**
+  /*
    * Simple demonstration enum for some common colors. Can fit up to 256 enum values into an enum
    * projected onto a byte.
    */
-  public static enum Color {
+  public enum Color {
     Red((byte) 0),
     Blue((byte) 1),
     Green((byte) 2),
@@ -116,7 +116,7 @@ public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtensio
     White((byte) 7),
     Brown((byte) 8);
 
-    private Color(final byte b) {
+    Color(final byte b) {
       this.b = b;
     }
 

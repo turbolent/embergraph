@@ -26,8 +26,8 @@ import java.util.LinkedHashSet;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * A factory for skins which may be used to multiplex writes against a shared {@link BlockingBuffer}
+/*
+* A factory for skins which may be used to multiplex writes against a shared {@link BlockingBuffer}
  * instance. Each skin writes through to the backing {@link BlockingBuffer} but may be closed
  * independently of the backing {@link BlockingBuffer}. This allows multiple produces to share a
  * single {@link BlockingBuffer} as long as they use a subset of the {@link IBlockingBuffer} API
@@ -61,7 +61,7 @@ public class MultiplexBlockingBuffer<E> {
     return b.isOpen();
   }
 
-  /**
+  /*
    * Create a new skin for the shared buffer, incrementing the count of the #of open skins that
    * buffer. The shared buffer will be closed atomically once all open skins have been closed.
    */
@@ -100,7 +100,7 @@ public class MultiplexBlockingBuffer<E> {
     return b;
   }
 
-  /**
+  /*
    * Inner "skin" writes through to the backing buffer shared by all skins.
    *
    * <p>Note: This inner class does not support several of the {@link IBlockingBuffer} methods whose
@@ -141,8 +141,8 @@ public class MultiplexBlockingBuffer<E> {
         if (!set.remove(this)) throw new AssertionError();
         counter--;
         if (counter == 0) {
-          /*
-           * Note: We flush the backing buffer before we close it in
+        /*
+       * Note: We flush the backing buffer before we close it in
            * case it has anything buffered. This covers the normal,
            * which is where the caller has already invoked flush() on
            * this skin and should not create any harm otherwise.

@@ -27,8 +27,8 @@ import org.embergraph.relation.IDatabase;
 import org.embergraph.relation.IRelation;
 import org.embergraph.service.IEmbergraphFederation;
 
-/**
- * An object that knows how to resolve a resource identifier (aka namespace) to an {@link
+/*
+* An object that knows how to resolve a resource identifier (aka namespace) to an {@link
  * ILocatableResource} instance. "Locating" a relation means (a) resolving the namespace for the
  * resource to the resource declaration as of some timestamp; and (b) materializing (often from
  * cache) an {@link ILocatableResource} for that resource. Locatable resources are essentially
@@ -46,7 +46,7 @@ import org.embergraph.service.IEmbergraphFederation;
  */
 public interface IResourceLocator<T extends ILocatableResource> {
 
-  /**
+  /*
    * Locate.
    *
    * @param namespace The resource namespace.
@@ -54,9 +54,9 @@ public interface IResourceLocator<T extends ILocatableResource> {
    * @return A view of the resource iff it exists (specifically, if the declaration for the resource
    *     can be resolved) -or- <code>null</code> if the resource declaration could not be resolved.
    */
-  public T locate(String namespace, long timestamp);
+  T locate(String namespace, long timestamp);
 
-  /**
+  /*
    * Resources that hold hard references to local index objects MUST be discarded during abort
    * processing. Otherwise the same resource objects will be returned from the cache and buffered
    * writes on the indices for those relations (if they are local index objects) will still be
@@ -67,12 +67,12 @@ public interface IResourceLocator<T extends ILocatableResource> {
    *     read-committed and unisolated views must also be discarded even if they do not correspond
    *     to the <i>instance</i>.
    */
-  public void discard(final ILocatableResource<T> instance, boolean destroyed);
+  void discard(final ILocatableResource<T> instance, boolean destroyed);
 
-  /**
+  /*
    * Discard unisolated resource views from the locator cache.
    *
    * @see BLZG-2023, BLZG-2041.
    */
-  public void clearUnisolatedCache();
+  void clearUnisolatedCache();
 }

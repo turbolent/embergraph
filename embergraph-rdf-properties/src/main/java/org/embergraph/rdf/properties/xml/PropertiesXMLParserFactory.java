@@ -56,8 +56,8 @@ import org.embergraph.rdf.properties.PropertiesFormat;
 import org.embergraph.rdf.properties.PropertiesParser;
 import org.embergraph.rdf.properties.PropertiesParserFactory;
 
-/**
- * An {@link PropertiesParserFactory} for {@link Properties} objects in XML.
+/*
+* An {@link PropertiesParserFactory} for {@link Properties} objects in XML.
  *
  * @author Bryan THompson
  */

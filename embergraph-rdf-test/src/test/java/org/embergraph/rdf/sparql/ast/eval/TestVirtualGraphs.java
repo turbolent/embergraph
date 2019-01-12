@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.rdf.sparql.ast.eval;
 
-/**
- * Test suite for VIRTUAL GRAPHS support.
+/*
+* Test suite for VIRTUAL GRAPHS support.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public class TestVirtualGraphs extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * This test was developed from <code>default-graphs-01f</code>. The same
    * solutions exist as for that query. Rather than using two FROM clauses,
    * this test declares a virtual graph in the data and then queries that
@@ -84,7 +84,7 @@ public class TestVirtualGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * This test is a named graphs variant on the test above.
    *
    * <pre>

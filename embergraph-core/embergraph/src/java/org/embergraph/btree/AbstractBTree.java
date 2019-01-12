@@ -93,8 +93,8 @@ import org.embergraph.util.concurrent.Computable;
 import org.embergraph.util.concurrent.LatchedExecutor;
 import org.embergraph.util.concurrent.Memoizer;
 
-/**
- * Base class for mutable and immutable B+-Tree implementations.
+/*
+* Base class for mutable and immutable B+-Tree implementations.
  *
  * <p>The B+-Tree implementation supports variable length unsigned byte[] keys and provides a {@link
  * IKeyBuilder} utilities designed to make it possible to generate keys from any combination of
@@ -144,13 +144,13 @@ public abstract class AbstractBTree
   /** The index is read-only but a mutation operation was requested. */
   protected static final String ERROR_READ_ONLY = "Read-only";
 
-  /**
+  /*
    * The index is transient (not backed by persistent storage) but an operation that requires
    * persistence was requested.
    */
   protected static final String ERROR_TRANSIENT = "Transient";
 
-  /**
+  /*
    * An unisolated index view is in an error state. It must be discarded and reloaded from the
    * current checkpoint record.
    *
@@ -171,13 +171,13 @@ public abstract class AbstractBTree
   /** Log for {@link BTree#dump(PrintStream)} and friends. */
   public static final Logger dumpLog = Logger.getLogger(BTree.class.getName() + "#dump");
 
-  /**
+  /*
    * Flag turns on the use of {@link AbstractNode#assertInvariants()} and is automatically enabled
    * when the {@link #log logger} is set to {@link Level#DEBUG}.
    */
   protected final boolean debug = DEBUG;
 
-  /**
+  /*
    * Counters tracking various aspects of the btree.
    *
    * <p>Note: This is <code>volatile</code> to avoid the need for synchronization in order for
@@ -191,7 +191,7 @@ public abstract class AbstractBTree
     return btreeCounters;
   }
 
-  /**
+  /*
    * Replace the {@link BTreeCounters}.
    *
    * <p>Note: This is used by the {@link IndexManager} to ensure that an index loaded from its
@@ -218,7 +218,7 @@ public abstract class AbstractBTree
   /** When <code>true</code> the {@link AbstractBTree} does not permit mutation. */
   protected final boolean readOnly;
 
-  /**
+  /*
    * Optional cache for {@link INodeData} and {@link ILeafData} instances and always <code>null
    * </code> if the B+Tree is transient.
    */
@@ -231,7 +231,7 @@ public abstract class AbstractBTree
    */
   @Deprecated protected final ConcurrentMap<Long, Object> storeCache;
 
-  /**
+  /*
    * Hard reference iff the index is mutable (aka unisolated) allows us to avoid patterns that
    * create short life time versions of the object to protect {@link
    * ICheckpointProtocol#writeCheckpoint2()} and similar operations.
@@ -241,7 +241,7 @@ public abstract class AbstractBTree
   /** The branching factor for the btree. */
   protected final int branchingFactor;
 
-  /**
+  /*
    * Helper class models a request to load a child node.
    *
    * <p>Note: This class must implement equals() and hashCode() since it is used within the {@link
@@ -257,7 +257,7 @@ public abstract class AbstractBTree
     /** The child index. */
     final int index;
 
-    /**
+    /*
      * @param parent The parent node.
      * @param index The child index.
      */
@@ -278,7 +278,7 @@ public abstract class AbstractBTree
       return parent == r.parent && index == r.index;
     }
 
-    /**
+    /*
      * The hashCode() implementation assumes that the parent's hashCode() is well distributed and
      * just adds in the index to that value to improve the chance of a distinct hash value.
      */
@@ -288,15 +288,15 @@ public abstract class AbstractBTree
     }
   }
 
-  /**
+  /*
    * Helper loads a child node from the specified address by delegating to {@link
    * Node#_getChild(int)}.
    */
   private static final Computable<LoadChildRequest, AbstractNode<?>> loadChild =
       new Computable<LoadChildRequest, AbstractNode<?>>() {
 
-        /**
-         * Loads a child node from the specified address.
+      /*
+       * Loads a child node from the specified address.
          *
          * @return A hard reference to that child node.
          * @throws IllegalArgumentException if addr is <code>null</code>.
@@ -333,7 +333,7 @@ public abstract class AbstractBTree
         }
       };
 
-  /**
+  /*
    * A {@link Memoizer} subclass which exposes an additional method to remove a {@link FutureTask}
    * from the internal cache. This is used as part of an explicit protocol in {@link
    * Node#_getChild(int)} to clear out cache entries once the child reference has been set on {@link
@@ -351,8 +351,8 @@ public abstract class AbstractBTree
       super(c);
     }
 
-    //        /**
-    //         * The approximate size of the cache (used solely for debugging to
+    //        /*
+//         * The approximate size of the cache (used solely for debugging to
     //         * detect cache leaks).
     //         */
     //        int size() {
@@ -361,7 +361,7 @@ public abstract class AbstractBTree
     //
     //        }
 
-    /**
+    /*
      * Called by the thread which atomically sets the {@link Node#childRefs} element to the computed
      * {@link AbstractNode}. At that point a reference exists to the child on the parent.
      *
@@ -375,8 +375,8 @@ public abstract class AbstractBTree
       }
     }
 
-    //        /**
-    //         * Called from {@link AbstractBTree#close()}.
+    //        /*
+//         * Called from {@link AbstractBTree#close()}.
     //         *
     //         * @todo should we do this?  There should not be any reads against the
     //         * the B+Tree when it is close()d.  Therefore I do not believe there
@@ -388,9 +388,9 @@ public abstract class AbstractBTree
     //
     //        }
 
-  };
+  }
 
-  /**
+  /*
    * Used to materialize children without causing concurrent threads passing through the same parent
    * node to wait on the IO for the child. This is <code>null</code> for a mutable B+Tree since
    * concurrent requests are not permitted for the mutable B+Tree.
@@ -399,7 +399,7 @@ public abstract class AbstractBTree
    */
   final ChildMemoizer memo;
 
-  /**
+  /*
    * {@link Memoizer} pattern for non-blocking concurrent reads of child nodes. This is package
    * private. Use {@link Node#getChild(int)} instead.
    *
@@ -459,8 +459,8 @@ public abstract class AbstractBTree
 
       } catch (InterruptedException e) {
 
-        /*
-         * Note: This exception will be thrown iff interrupted while
+      /*
+       * Note: This exception will be thrown iff interrupted while
          * awaiting the FutureTask inside of the Memoizer.
          */
 
@@ -469,7 +469,7 @@ public abstract class AbstractBTree
     }
   }
 
-  /**
+  /*
    * The root of the btree. This is initially a leaf until the leaf is split, at which point it is
    * replaced by a node. The root is also replaced each time copy-on-write triggers a cascade of
    * updates.
@@ -489,7 +489,7 @@ public abstract class AbstractBTree
    */
   protected volatile AbstractNode<?> root;
 
-  /**
+  /*
    * This field is set if an error is encountered that renders an unisolated index object unusable.
    * For example, this can occur if an error was detected during incremental eviction of dirty nodes
    * for a mutable index view since that means that there are partly serialized (and possibly
@@ -502,7 +502,7 @@ public abstract class AbstractBTree
    */
   protected volatile Throwable error;
 
-  /**
+  /*
    * An optional bloom filter that will be used to filter point tests against <i>this</i> {@link
    * AbstractBTree}. A bloom filter provides a strong guarantee when it reports that a key was not
    * found, but only a weak guarantee when it reports that a key was found. Therefore a positive
@@ -522,7 +522,7 @@ public abstract class AbstractBTree
    */
   /*private*/ volatile BloomFilter bloomFilter;
 
-  /**
+  /*
    * Return the optional {@link IBloomFilter}, transparently {@link #reopen()}ing the index if
    * necessary.
    *
@@ -532,8 +532,8 @@ public abstract class AbstractBTree
    */
   public abstract BloomFilter getBloomFilter();
 
-  //    /**
-  //     * The finger is a trial feature. The purpose is to remember the last
+  //    /*
+//     * The finger is a trial feature. The purpose is to remember the last
   //     * leaf(s) in the tree that was visited by a search operation and to
   //     * pre-test that those leaf(s) on the next search operation.
   //     * <p>
@@ -560,8 +560,8 @@ public abstract class AbstractBTree
   /** Used to serialize and de-serialize the nodes and leaves of the tree. */
   protected final NodeSerializer nodeSer;
 
-  //    /**
-  //     * Count of the #of times that a reference to this {@link AbstractBTree}
+  //    /*
+//     * Count of the #of times that a reference to this {@link AbstractBTree}
   //     * occurs on a {@link HardReferenceQueue}. This field will remain zero(0)
   //     * unless the {@link AbstractBTree} is placed onto a
   //     * {@link HardReferenceQueue} maintained by the application.
@@ -573,7 +573,7 @@ public abstract class AbstractBTree
   //     */
   //    public int referenceCount = 0;
 
-  /**
+  /*
    * Nodes (that is nodes or leaves) are added to a hard reference queue when they are created or
    * read from the store. On eviction from the queue a dirty node is serialized by a listener
    * against the {@link IRawStore}. The nodes and leaves refer to their parent with a {@link
@@ -628,7 +628,7 @@ public abstract class AbstractBTree
   /** The #of distinct nodes and leaves on the {@link #writeRetentionQueue}. */
   protected int ndistinctOnWriteRetentionQueue;
 
-  /**
+  /*
    * The maximum number of threads to apply when evicting a level set of nodes or leaves in
    * parallel. When ONE (1), parallel eviction will be disabled for the index.
    *
@@ -638,7 +638,7 @@ public abstract class AbstractBTree
    */
   private final int maxParallelEvictThreads;
 
-  /**
+  /*
    * The minimum number of threads to apply when evicting a level set of nodes or leaves in parallel
    * (GTE ONE(2)). When TWO (2), parallel eviction will be used even if there are only two nodes /
    * leaves in a given level set. A higher value may be used to ensure that parallelism is only
@@ -651,8 +651,8 @@ public abstract class AbstractBTree
    */
   private final int minDirtyListSizeForParallelEvict;
 
-  //    /**
-  //     * The {@link #readRetentionQueue} reduces reads through to the backing
+  //    /*
+//     * The {@link #readRetentionQueue} reduces reads through to the backing
   //     * store in order to prevent disk reads and reduces de-serialization costs
   //     * for nodes by maintaining them as materialized objects.
   //     * <p>
@@ -681,12 +681,12 @@ public abstract class AbstractBTree
   //     */
   //    final protected RingBuffer<PO> readRetentionQueue;
 
-  /**
+  /*
    * Interface declaring namespaces for performance counters collected for a B+Tree.
    *
    * @see AbstractBTree#getCounters()
    */
-  public static interface IBTreeCounters {
+  public interface IBTreeCounters {
 
     /** Counters for the {@link IBTreeStatistics} interface. */
     String Statistics = "Statistics";
@@ -709,7 +709,7 @@ public abstract class AbstractBTree
 
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Return some "statistics" about the btree including both the static {@link CounterSet} and
@@ -831,7 +831,7 @@ public abstract class AbstractBTree
     return counterSet;
   }
 
-  /**
+  /*
    * @param store The persistence store.
    * @param nodeFactory Object that provides a factory for node and leaf objects.
    * @param readOnly <code>true</code> IFF it is <em>known</em> that the {@link AbstractBTree} is
@@ -1038,8 +1038,8 @@ public abstract class AbstractBTree
         metadata.getWriteRetentionQueueScan());
   }
 
-  //    /**
-  //     * Note: Method is package private so that it may be overridden for unit
+  //    /*
+//     * Note: Method is package private so that it may be overridden for unit
   //     * tests.
   //     */
   //    final protected RingBuffer<PO> newReadRetentionQueue() {
@@ -1059,19 +1059,19 @@ public abstract class AbstractBTree
   //
   //    }
 
-  //    /**
-  //     * The capacity for the {@link #readRetentionQueue} (may differ for
+  //    /*
+//     * The capacity for the {@link #readRetentionQueue} (may differ for
   //     * {@link BTree} and {@link IndexSegment}).
   //     */
   //    abstract protected int getReadRetentionQueueCapacity();
   //
-  //    /**
-  //     * The capacity for the {@link #readRetentionQueue} (may differ for
+  //    /*
+//     * The capacity for the {@link #readRetentionQueue} (may differ for
   //     * {@link BTree} and {@link IndexSegment}).
   //     */
   //    abstract protected int getReadRetentionQueueScan();
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: CLOSING A TRANSIENT INDEX WILL DISCARD ALL DATA!
@@ -1153,7 +1153,7 @@ public abstract class AbstractBTree
     bloomFilter = null;
   }
 
-  /**
+  /*
    * {@inheritDoc}.
    *
    * <p>This method delegates to {@link #_reopen()} if double-checked locking demonstrates that the
@@ -1187,7 +1187,7 @@ public abstract class AbstractBTree
     }
   }
 
-  /**
+  /*
    * This method is responsible for setting up the root leaf (either new or read from the store),
    * the bloom filter, etc. It is invoked by {@link #reopen()} once {@link #root} has been show to
    * be <code>null</code> with double-checked locking. When invoked in this context, the caller is
@@ -1221,7 +1221,7 @@ public abstract class AbstractBTree
     return readOnly;
   }
 
-  /**
+  /*
    * @throws UnsupportedOperationException if the B+Tree is read-only.
    * @see #isReadOnly()
    */
@@ -1238,7 +1238,7 @@ public abstract class AbstractBTree
           error);
   }
 
-  /**
+  /*
    * The timestamp associated with the last {@link IAtomicStore#commit()} in which writes buffered
    * by this index were made restart-safe on the backing store. The lastCommitTime is set when the
    * index is loaded from the backing store and updated after each commit. It is ZERO (0L) when
@@ -1251,7 +1251,7 @@ public abstract class AbstractBTree
    */
   public abstract long getLastCommitTime();
 
-  /**
+  /*
    * The timestamp associated with unisolated writes on this index. This timestamp is designed to
    * allow the interleaving of full transactions (whose revision timestamp is assigned by the
    * transaction service) with unisolated operations on the same indices.
@@ -1299,7 +1299,7 @@ public abstract class AbstractBTree
     return new IResourceMetadata[] {store.getResourceMetadata()};
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: If the B+Tree is read-only then the metadata object will be cloned to avoid potential
@@ -1335,7 +1335,7 @@ public abstract class AbstractBTree
 
   private volatile IndexMetadata metadata2;
 
-  /**
+  /*
    * The metadata record for the index. This data rarely changes during the life of the {@link
    * BTree} object, but it CAN be changed.
    */
@@ -1421,8 +1421,8 @@ public abstract class AbstractBTree
               || InnerCause.isInnerCause(t, InterruptedException.class)) {
             throw new RuntimeException(t);
           }
-          /*
-           * Log the error and track the #of errors, but keep scanning
+        /*
+       * Log the error and track the #of errors, but keep scanning
            * the index.
            */
           stats.nerrors++;
@@ -1433,7 +1433,7 @@ public abstract class AbstractBTree
     }
   }
 
-  /**
+  /*
    * Iff the B+Tree is an index partition then verify that the key lies within the key range of an
    * index partition.
    *
@@ -1491,7 +1491,7 @@ public abstract class AbstractBTree
     return branchingFactor;
   }
 
-  /**
+  /*
    * The minimum #of children (for a node) or the minimum #of values (for a leaf). This is computed
    * in the same manner for nodes and leaves.
    *
@@ -1501,7 +1501,7 @@ public abstract class AbstractBTree
    */
   final int minChildren;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * @return <code>true</code> since a B+Tree is a balanced tree.
@@ -1537,7 +1537,7 @@ public abstract class AbstractBTree
     return nodeSer;
   }
 
-  /**
+  /*
    * The root of the btree. This is initially a leaf until the leaf is split, at which point it is
    * replaced by a node. The root is also replaced each time copy-on-write triggers a cascade of
    * updates.
@@ -1553,7 +1553,7 @@ public abstract class AbstractBTree
     return root;
   }
 
-  /**
+  /*
    * Returns the node or leaf to be used for search. This implementation is aware of the {@link
    * #finger} and will return it if the key lies within the finger.
    *
@@ -1632,8 +1632,8 @@ public abstract class AbstractBTree
   //     * bloom filter support.
   //     */
   //
-  //    /**
-  //     * Returns true if the optional bloom filter reports that the key exists.
+  //    /*
+//     * Returns true if the optional bloom filter reports that the key exists.
   //     *
   //     * @param key
   //     *            The key.
@@ -1650,7 +1650,7 @@ public abstract class AbstractBTree
   //
   //    }
 
-  /**
+  /*
    * Private instance used for mutation operations (insert, remove) which are single threaded. Both
    * {@link IRangeQuery#KEYS} and {@link IRangeQuery#VALS} are requested so that indices which
    * encode part of the application object within the key can recover the application object in
@@ -1664,13 +1664,13 @@ public abstract class AbstractBTree
     return writeTuple;
   }
 
-  /**
+  /*
    * Note: This field is NOT static. This limits the scope of the {@link Tuple} to the containing
    * {@link AbstractBTree} instance.
    */
   private final Tuple writeTuple;
 
-  /**
+  /*
    * Return a {@link Tuple} that may be used to copy the value associated with a key out of the
    * {@link AbstractBTree}.
    *
@@ -1698,9 +1698,9 @@ public abstract class AbstractBTree
     //        return tuple;
 
     return lookupTuple.get();
-  };
+  }
 
-  /**
+  /*
    * Return a {@link Tuple} that may be used to test for the existence of tuples having a given key
    * within the {@link AbstractBTree}.
    *
@@ -1733,7 +1733,7 @@ public abstract class AbstractBTree
     //        return tuple;
 
     return containsTuple.get();
-  };
+  }
 
   //    private final ThreadLocal<WeakReference<Tuple>> lookupTupleRef = new
   // ThreadLocal<WeakReference<Tuple>>() {
@@ -1759,7 +1759,7 @@ public abstract class AbstractBTree
   //
   //    };
 
-  /**
+  /*
    * A {@link ThreadLocal} {@link Tuple} that is used to copy the value associated with a key out of
    * the btree during lookup operations.
    *
@@ -1776,7 +1776,7 @@ public abstract class AbstractBTree
         }
       };
 
-  /**
+  /*
    * A {@link ThreadLocal} {@link Tuple} that is used for contains() tests. The tuple does not copy
    * either the keys or the values. Contains is implemented as a lookup operation that either return
    * this tuple or <code>null</code>. When isolation is supported, the version metadata is examined
@@ -1858,7 +1858,7 @@ public abstract class AbstractBTree
     return tuple == null || tuple.isDeletedVersion() ? null : tuple.getValue();
   }
 
-  /**
+  /*
    * Core method for inserting or updating a value under a key.
    *
    * @param key The variable length unsigned byte[] key.
@@ -1912,8 +1912,8 @@ public abstract class AbstractBTree
 
         if (getEntryCount() > filter.getMaxN()) {
 
-          /*
-           * Disable the filter since the index has exceeded the
+        /*
+       * Disable the filter since the index has exceeded the
            * maximum #of index entries for which the bloom filter will
            * have an acceptable error rate.
            */
@@ -1941,8 +1941,8 @@ public abstract class AbstractBTree
 
         } else {
 
-          /*
-           * Add the key to the bloom filter.
+        /*
+       * Add the key to the bloom filter.
            *
            * Note: While this will be invoked when the sequence is
            * insert(key), remove(key), followed by insert(key) again,
@@ -2012,7 +2012,7 @@ public abstract class AbstractBTree
     return tuple == null || tuple.isDeletedVersion() ? null : tuple.getValue();
   }
 
-  /**
+  /*
    * Core method for deleting a value under a key. If there is an entry under the key then it is
    * removed from the index. It is an error to use this method if delete markers are being
    * maintained. {@link #remove(byte[])} uses {@link #insert(byte[], byte[], boolean, long, Tuple)}
@@ -2055,7 +2055,7 @@ public abstract class AbstractBTree
     return getRootOrFinger(key).remove(key, tuple);
   }
 
-  /**
+  /*
    * Remove all entries in the B+Tree.
    *
    * <p>Note: The {@link IIndexManager} defines methods for registering (adding) and dropping
@@ -2089,7 +2089,7 @@ public abstract class AbstractBTree
     return tuple == null || tuple.isDeletedVersion() ? null : tuple.getValue();
   }
 
-  /**
+  /*
    * Core method for retrieving a value under a key. This method allows you to differentiate an
    * index entry whose value is <code>null</code> from a missing index entry or (when delete markers
    * are enabled) from a deleted index entry. Applies the optional bloom filter if it exists. If the
@@ -2163,7 +2163,7 @@ public abstract class AbstractBTree
     return contains((byte[]) key);
   }
 
-  /**
+  /*
    * Core method to decide whether the index has a (non-deleted) entry under a key. Applies the
    * optional bloom filter if it exists. If the bloom filter reports <code>true</code>, then
    * verifies that the key does in fact exist in the index.
@@ -2314,7 +2314,7 @@ public abstract class AbstractBTree
     return rangeCount(null, null);
   }
 
-  /**
+  /*
    * Variant implicitly converts the optional application keys into unsigned byte[]s.
    *
    * @param fromKey
@@ -2330,7 +2330,7 @@ public abstract class AbstractBTree
     return rangeCount((byte[]) fromKey, (byte[]) toKey);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>This method computes the #of entries in the half-open range using {@link
@@ -2360,9 +2360,9 @@ public abstract class AbstractBTree
 
     // conditional range check on the key.
 
-    if (fromKey != null) assert rangeCheck(fromKey, false);
+    assert fromKey == null || rangeCheck(fromKey, false);
 
-    if (toKey != null) assert rangeCheck(toKey, true);
+    assert toKey == null || rangeCheck(toKey, true);
 
     long fromIndex = (fromKey == null ? 0 : root.indexOf(fromKey));
 
@@ -2382,7 +2382,7 @@ public abstract class AbstractBTree
     return (toIndex - fromIndex);
   }
 
-  /**
+  /*
    * Note: {@link #rangeCount(byte[], byte[])} already reports deleted tuples for an {@link
    * AbstractBTree} so this method is just delegated to that one. However, {@link
    * FusedView#rangeCountExactWithDeleted(byte[], byte[])} treats this case differently since it
@@ -2439,7 +2439,7 @@ public abstract class AbstractBTree
     return rangeIterator(null, null);
   }
 
-  /**
+  /*
    * Variant implicitly converts the optional application keys into unsigned byte[]s.
    *
    * @param fromKey
@@ -2462,8 +2462,8 @@ public abstract class AbstractBTree
         fromKey, toKey, 0 /* capacity */, KEYS | VALS /* flags */, null /* filter */);
   }
 
-  //    /**
-  //     * Return an iterator based on the post-order {@link Striterator}. This
+  //    /*
+//     * Return an iterator based on the post-order {@link Striterator}. This
   //     * iterator does not support random seeks, reverse scans, or concurrent
   //     * modification during traversal but it is <em>faster</em> than the
   //     * {@link AbstractBTreeTupleCursor} when all you need is a forward
@@ -2498,7 +2498,7 @@ public abstract class AbstractBTree
   //
   //    }
 
-  /**
+  /*
    * Variant implicitly converts the optional application keys into unsigned byte[]s.
    *
    * @param fromKey
@@ -2515,7 +2515,7 @@ public abstract class AbstractBTree
     return rangeIterator((byte[]) fromKey, (byte[]) toKey, capacity, flags, filter);
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Core implementation.
@@ -2632,8 +2632,8 @@ public abstract class AbstractBTree
 
         final IndexSegment seg = (IndexSegment) this;
 
-        /*
-         * @todo we could scan the list of pools and chose the best fit
+      /*
+       * @todo we could scan the list of pools and chose the best fit
          * pool and then allocate a buffer from that pool. Best fit
          * would mean either the byte range fits without "too much" slop
          * or the #of reads will have to perform is not too large. We
@@ -2678,8 +2678,8 @@ public abstract class AbstractBTree
 
       if ((flags & REVERSE) != 0) {
 
-        /*
-         * Reverse scan iterator.
+      /*
+       * Reverse scan iterator.
          *
          * Note: The reverse scan MUST be layered directly over the
          * ITupleCursor. Most critically, REMOVEALL combined with a
@@ -2725,7 +2725,7 @@ public abstract class AbstractBTree
     return src;
   }
 
-  /**
+  /*
    * Copy all data, including deleted index entry markers and timestamps iff supported by the source
    * and target. The goal is an exact copy of the data in the source btree.
    *
@@ -2798,8 +2798,8 @@ public abstract class AbstractBTree
 
         if (overflowHandler != null) {
 
-          /*
-           * Provide the handler with the opportunity to copy the
+        /*
+       * Provide the handler with the opportunity to copy the
            * blob's data onto the backing store for this index and
            * re-write the value, which is presumably the blob
            * reference.
@@ -2852,7 +2852,7 @@ public abstract class AbstractBTree
   public <T> T submit(final byte[] key, final ISimpleIndexProcedure<T> proc) {
 
     // conditional range check on the key.
-    if (key != null) assert rangeCheck(key, false);
+    assert key == null || rangeCheck(key, false);
 
     return proc.apply(this);
   }
@@ -2866,9 +2866,9 @@ public abstract class AbstractBTree
       final IResultHandler handler) {
 
     // conditional range check on the key.
-    if (fromKey != null) assert rangeCheck(fromKey, false);
+    assert fromKey == null || rangeCheck(fromKey, false);
 
-    if (toKey != null) assert rangeCheck(toKey, true);
+    assert toKey == null || rangeCheck(toKey, true);
 
     final Object result = proc.apply(this);
 
@@ -2896,7 +2896,7 @@ public abstract class AbstractBTree
     }
   }
 
-  /**
+  /*
    * Utility method returns the right-most node in the B+Tree.
    *
    * @param nodesOnly when <code>true</code> the search will halt at the right-most non-leaf.
@@ -2916,13 +2916,13 @@ public abstract class AbstractBTree
     return ((Node) root).getRightMostChild(nodesOnly);
   }
 
-  /**
+  /*
    * Return a cursor that may be used to efficiently locate and scan the leaves in the B+Tree. The
    * cursor will be initially positioned on the leaf identified by the symbolic constant.
    */
   public abstract ILeafCursor newLeafCursor(SeekEnum where);
 
-  /**
+  /*
    * Return a cursor that may be used to efficiently locate and scan the leaves in the B+Tree. The
    * cursor will be initially positioned on the leaf that spans the given <i>key</i>.
    *
@@ -2931,8 +2931,8 @@ public abstract class AbstractBTree
    */
   public abstract ILeafCursor newLeafCursor(byte[] key);
 
-  //    /**
-  //     * Clone the caller's cursor.
+  //    /*
+//     * Clone the caller's cursor.
   //     *
   //     * @param leafCursor
   //     *            Another leaf cursor.
@@ -2947,7 +2947,7 @@ public abstract class AbstractBTree
   //     */
   //    abstract public ILeafCursor newLeafCursor(ILeafCursor leafCursor);
 
-  /**
+  /*
    * Recursive dump of the tree.
    *
    * @param out The dump is written on this stream.
@@ -3004,7 +3004,7 @@ public abstract class AbstractBTree
     } else return true;
   }
 
-  /**
+  /*
    * Return the level of <i>t</i> below the root node or leaf.
    *
    * @param t A node or leaf that belongs to this B+Tree.
@@ -3019,7 +3019,7 @@ public abstract class AbstractBTree
     return getLevel(t, getRoot());
   }
 
-  /**
+  /*
    * Return the level of <i>t</i> below the given node or leaf.
    *
    * @param t A node or leaf that belongs to this B+Tree.
@@ -3051,7 +3051,7 @@ public abstract class AbstractBTree
     return level;
   }
 
-  /**
+  /*
    * Return the level of [t] beneath [node], ZERO (0) iff t==node, and -1 if [t] is not dominated by
    * [node].
    *
@@ -3093,7 +3093,7 @@ public abstract class AbstractBTree
     return _getLevel(p, node, level + 1);
   }
 
-  /**
+  /*
    * This method is responsible for putting the node or leaf onto the ring buffer which controls (a)
    * how long we retain a hard reference to the node or leaf; and (b) for writes, when the node or
    * leaf is evicted with a zero reference count and made persistent (along with all dirty
@@ -3163,7 +3163,7 @@ public abstract class AbstractBTree
       return;
     }
 
-    /**
+    /*
      * At this point we know that the B+Tree object is a mutable data structure (!readOnly). If we
      * can prove that the current thread is conducting a read-only operation on the B+Tree, then we
      * DO NOT touch the node in order to prevent having read-only operations drive evictions. This
@@ -3219,7 +3219,7 @@ public abstract class AbstractBTree
     }
   }
 
-  /**
+  /*
    * Note: Synchronization is necessary for the mutable {@link BTree}. The underlying reason is the
    * {@link UnisolatedReadWriteIndex} permits concurrent readers. Reads drive evictions so
    * concurrent calls of {@link #touch()} are possible. When the B+Tree is mutable, those calls must
@@ -3328,7 +3328,7 @@ public abstract class AbstractBTree
 
   }
 
-  /**
+  /*
    * Write a dirty node and its children using a post-order traversal that first writes any dirty
    * leaves and then (recursively) their parent nodes. The parent nodes are guaranteed to be dirty
    * if there is a dirty child so this never triggers copy-on-write. This is used as part of the
@@ -3362,7 +3362,7 @@ public abstract class AbstractBTree
     }
   }
 
-  /**
+  /*
    * This is the historical implementation and runs entirely in the caller's thread.
    *
    * @param node
@@ -3411,8 +3411,8 @@ public abstract class AbstractBTree
 
       if (t != root) {
 
-        /*
-         * The parent MUST be defined unless this is the root node.
+      /*
+       * The parent MUST be defined unless this is the root node.
          */
 
         assert t.parent != null;
@@ -3469,7 +3469,7 @@ public abstract class AbstractBTree
 
   }
 
-  /**
+  /*
    * Writes the dirty nodes and leaves in level sets (one level at a time) with up to one thread per
    * dirty node/leave in a given level. This can reduce the latency of {@link #writeCheckpoint()} or
    * for a {@link Node} evicted from the {@link #writeRetentionQueue}. Whether this is driven by
@@ -3548,8 +3548,8 @@ public abstract class AbstractBTree
 
       if (t != root) {
 
-        /*
-         * The parent MUST be defined unless this is
+      /*
+       * The parent MUST be defined unless this is
          * the root node.
          */
 
@@ -3632,8 +3632,8 @@ public abstract class AbstractBTree
 
       if (dirtyListSize < minDirtyListSizeForParallelEvict) {
 
-        /*
-         * Avoid parallelism when only a few nodes or leaves will be
+      /*
+       * Avoid parallelism when only a few nodes or leaves will be
          * evicted.
          */
         for (AbstractNode t : dirtyList) {
@@ -3670,8 +3670,8 @@ public abstract class AbstractBTree
 
                         if (u != root) {
 
-                          /*
-                           * The parent MUST be defined unless this is
+                        /*
+       * The parent MUST be defined unless this is
                            * the root node.
                            */
 
@@ -3746,7 +3746,7 @@ public abstract class AbstractBTree
   //    	throw new AssertionError("ReadOnly and identity: " + node.identity);
   //    }
 
-  /**
+  /*
    * Codes the node and writes the coded record on the store (non-recursive). The node MUST be
    * dirty. If the node has a parent, then the parent is notified of the persistent identity
    * assigned to the node by the store. This method is NOT recursive and dirty children of a node
@@ -3775,7 +3775,7 @@ public abstract class AbstractBTree
     assert node.dirty;
     assert !node.deleted;
     assert !node.isPersistent();
-    /**
+    /*
      * Occasional CI errors on this assert for have been observed for
      * StressTestUnisolatedReadWriteIndex. This has been traced to a test error. The test was
      * interrupting the tasks, but the tasks were not being cancelled simultaneously. This meant
@@ -3859,10 +3859,9 @@ public abstract class AbstractBTree
         ((Leaf) node).data = nodeSer.encodeLive(((Leaf) node).data);
 
         // slice onto the coded data record.
-        slice = ((Leaf) node).data();
+        slice = node.data();
 
         btreeCounters.leavesWritten.increment();
-        ;
 
       } else {
 
@@ -3870,10 +3869,9 @@ public abstract class AbstractBTree
         ((Node) node).data = nodeSer.encodeLive(((Node) node).data);
 
         // slice onto the coded data record.
-        slice = ((Node) node).data();
+        slice = node.data();
 
         btreeCounters.nodesWritten.increment();
-        ;
       }
 
       btreeCounters.serializeNanos.add(System.nanoTime() - beginNanos);
@@ -3968,8 +3966,8 @@ public abstract class AbstractBTree
        */
       if (null != storeCache.putIfAbsent(addr, node.getDelegate())) {
 
-        /*
-         * Note: For a WORM store, the address is always new so there
+      /*
+       * Note: For a WORM store, the address is always new so there
          * will not be an entry in the cache for that address.
          *
          * Note: For a RW store, the addresses can be reused and the
@@ -3993,7 +3991,7 @@ public abstract class AbstractBTree
     return addr;
   }
 
-  /**
+  /*
    * Read a node or leaf from the store.
    *
    * <p>Note: Callers SHOULD be synchronized in order to ensure that only one thread will read the
@@ -4086,7 +4084,7 @@ public abstract class AbstractBTree
     }
   }
 
-  /**
+  /*
    * Create the reference that will be used by a {@link Node} to refer to its children (nodes or
    * leaves).
    *
@@ -4130,7 +4128,7 @@ public abstract class AbstractBTree
     }
   }
 
-  /**
+  /*
    * A class that provides hard reference semantics for use with transient {@link BTree}s. While the
    * class extends {@link WeakReference}, it internally holds a hard reference and thereby prevents
    * the reference from being cleared. This approach is necessitated on the one hand by the use of
@@ -4174,8 +4172,8 @@ public abstract class AbstractBTree
   //     * caches. This helps us to better manage RAM.
   //     */
   //
-  //    /**
-  //     * Note: DO NOT invoke this method from hot code such as
+  //    /*
+//     * Note: DO NOT invoke this method from hot code such as
   //     * {@link #touch(AbstractNode)} as that will impose a huge performance
   //     * penalty! It is sufficient to let the
   //     * {@link SynchronizedHardReferenceQueueWithTimeout} invoke this method
@@ -4195,7 +4193,7 @@ public abstract class AbstractBTree
   //
   //    private long timestamp = System.nanoTime();
 
-  /**
+  /*
    * Encode a raw record address into a byte[] suitable for storing in the value associated with a
    * tuple and decoding using {@link #decodeRecordAddr(byte[])}
    *
@@ -4210,7 +4208,7 @@ public abstract class AbstractBTree
     return recordAddrBuf.toByteArray();
   }
 
-  /**
+  /*
    * Decodes a signed long value as encoded by {@link #appendSigned(long)}.
    *
    * @param buf The buffer containing the encoded record address.
@@ -4233,7 +4231,7 @@ public abstract class AbstractBTree
     return v;
   }
 
-  /**
+  /*
    * The maximum length of a <code>byte[]</code> value stored within a leaf for this {@link BTree}.
    * This value only applies when raw record support has been enabled for the {@link BTree}. Values
    * greater than this in length will be written as raw records on the backing persistence store.
@@ -4246,7 +4244,7 @@ public abstract class AbstractBTree
     return metadata.getMaxRecLen();
   }
 
-  /**
+  /*
    * Read the raw record from the backing store.
    *
    * <p>Note: This does not cache the record. In general, the file system cache should do a good job
@@ -4270,7 +4268,7 @@ public abstract class AbstractBTree
     return b;
   }
 
-  /**
+  /*
    * Write a raw record on the backing store.
    *
    * @param b The data.
@@ -4287,14 +4285,13 @@ public abstract class AbstractBTree
     final int nbytes = b.length;
 
     btreeCounters.rawRecordsWritten.increment();
-    ;
     btreeCounters.rawRecordsBytesWritten.add(nbytes);
     btreeCounters.bytesOnStore_rawRecords.addAndGet(nbytes);
 
     return addr;
   }
 
-  /**
+  /*
    * Delete a raw record from the backing store.
    *
    * @param addr The address of the record.
@@ -4306,7 +4303,7 @@ public abstract class AbstractBTree
     btreeCounters.bytesOnStore_rawRecords.addAndGet(-recycle(addr));
   }
 
-  /**
+  /*
    * Delete a node or leaf from the backing store, updating various performance counters.
    *
    * @param addr The address of the node or leaf.
@@ -4323,8 +4320,8 @@ public abstract class AbstractBTree
 
       if (((BTree) this).getCheckpoint().getRootAddr() == addr) {
 
-        /*
-         * TODO This is a bit of a hack.  It is designed to prevent
+      /*
+       * TODO This is a bit of a hack.  It is designed to prevent
          * the double-delete of the last committed root node or leaf.
          * This should be cleaned up as part of addressing [1].
          *
@@ -4338,7 +4335,7 @@ public abstract class AbstractBTree
     btreeCounters.bytesOnStore_nodesAndLeaves.addAndGet(-recycle(addr));
   }
 
-  /**
+  /*
    * Recycle (aka delete) the allocation. This method also adjusts the #of bytes released in the
    * {@link BTreeCounters}.
    *

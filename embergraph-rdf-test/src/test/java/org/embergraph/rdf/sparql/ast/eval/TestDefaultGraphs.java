@@ -29,8 +29,8 @@ import org.embergraph.bop.rdf.filter.NativeDistinctFilter;
 import org.embergraph.rdf.sparql.ast.ASTContainer;
 import org.embergraph.rdf.spo.SPOPredicate;
 
-/**
- * Unit tests for default graph semantics ported from the old TestDefaultGraphAccessPath class. The
+/*
+* Unit tests for default graph semantics ported from the old TestDefaultGraphAccessPath class. The
  * data set for these tests is:
  *
  * <pre>
@@ -58,7 +58,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
     super(name);
   }
 
-  /**
+  /*
    * No graphs in the defaultGraphs set (none of the specified graphs in the default graph exist in
    * the database).
    *
@@ -83,7 +83,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * One graph in the defaultGraphs set.
    *
    * <p>Note: This case gets handled specially.
@@ -115,7 +115,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Two graphs in the defaultGraphs set, but the query uses a more restricted bindings (john is
    * bound as the subject).
    */
@@ -132,7 +132,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Two graphs in the defaultGraphs set, but the query uses a more restricted bindings (mary is
    * bound as the subject).
    */
@@ -149,7 +149,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Two graphs in the defaultGraphs set, but the query uses a more restricted bindings (mary is
    * bound as the object).
    */
@@ -166,7 +166,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Query with more restricted bindings (john is bound as the subject and paul is bound as the
    * object, so there are no solutions).
    */
@@ -183,7 +183,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Default graph is null (that is, it is not specified at the SPARQL level or at the protocol
    * level and therefore defaults to addressing ALL graphs in the kb instance).
    *
@@ -202,7 +202,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
         .runTest();
   }
 
-  /**
+  /*
    * Default graph is null (that is, it is not specified at the SPARQL level or at the protocol
    * level and therefore defaults to addressing ALL graphs in the kb instance). In addition, we have
    * a query hint disabling the default graph access filter.
@@ -234,7 +234,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
     assertFalse(filter instanceof NativeDistinctFilter);
   }
 
-  /**
+  /*
    * We add another, duplicate triple to the dataset, namely: :c5 { :paul :loves :sam . } (which
    * already occurs in :c4) and submit a simple query extracting all triples (without query hint).
    * This test ensures that, in the standard configuration, the distinct filter is applied and our
@@ -264,7 +264,7 @@ public class TestDefaultGraphs extends AbstractDataDrivenSPARQLTestCase {
     assertTrue(filter.toString().contains("DistinctFilter()"));
   }
 
-  /**
+  /*
    * We add another, duplicate triple to the dataset, namely: :c5 { :paul :loves :sam . } (which
    * already occurs in :c4) and submit a simple query extracting all triples with query hint
    * disabling the default path access filter. Consequently, we get the wrong result, with the

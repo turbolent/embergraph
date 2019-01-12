@@ -10,8 +10,8 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-/**
- * A low level version of {@link LUDecomposition}, avoiding unnecessary memory allocation and
+/*
+* A low level version of {@link LUDecomposition}, avoiding unnecessary memory allocation and
  * copying. The input to <tt>decompose</tt> methods is overriden with the result (LU). The input to
  * <tt>solve</tt> methods is overriden with the result (X). In addition to <tt>LUDecomposition</tt>,
  * this class also includes a faster variant of the decomposition, specialized for tridiagonal (and
@@ -44,21 +44,21 @@ import cern.colt.matrix.DoubleMatrix2D;
  */
 public class LUDecompositionQuick implements java.io.Serializable {
   static final long serialVersionUID = 1020;
-  /**
+  /*
    * Array for internal storage of decomposition.
    *
    * @serial internal array storage.
    */
   protected DoubleMatrix2D LU;
 
-  /**
+  /*
    * pivot sign.
    *
    * @serial pivot sign.
    */
   protected int pivsign;
 
-  /**
+  /*
    * Internal storage of pivot vector.
    *
    * @serial pivot vector.
@@ -73,21 +73,21 @@ public class LUDecompositionQuick implements java.io.Serializable {
   protected transient int[] work1;
   protected transient int[] work2;
 
-  /**
+  /*
    * Constructs and returns a new LU Decomposition object with default tolerance <tt>1.0E-9</tt> for
    * singularity detection.
    */
   public LUDecompositionQuick() {
     this(Property.DEFAULT.tolerance());
   }
-  /**
+  /*
    * Constructs and returns a new LU Decomposition object which uses the given tolerance for
    * singularity detection;
    */
   public LUDecompositionQuick(double tolerance) {
     this.algebra = new Algebra(tolerance);
   }
-  /**
+  /*
    * Decomposes matrix <tt>A</tt> into <tt>L</tt> and <tt>U</tt> (in-place). Upon return <tt>A</tt>
    * is overridden with the result <tt>LU</tt>, such that <tt>L*U = A</tt>. Uses a "left-looking",
    * dot-product, Crout/Doolittle algorithm.
@@ -184,7 +184,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
     }
     setLU(LU);
   }
-  /**
+  /*
    * Decomposes the banded and square matrix <tt>A</tt> into <tt>L</tt> and <tt>U</tt> (in-place).
    * Upon return <tt>A</tt> is overridden with the result <tt>LU</tt>, such that <tt>L*U = A</tt>.
    * Currently supports diagonal and tridiagonal matrices, all other cases fall through to {@link
@@ -226,7 +226,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
     }
     setLU(A);
   }
-  /**
+  /*
    * Returns the determinant, <tt>det(A)</tt>.
    *
    * @exception IllegalArgumentException if <tt>A.rows() != A.columns()</tt> (Matrix must be
@@ -245,7 +245,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
     }
     return det;
   }
-  /**
+  /*
    * Returns pivot permutation vector as a one-dimensional double array
    *
    * @return (double) piv
@@ -258,7 +258,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
     }
     return vals;
   }
-  /**
+  /*
    * Returns the lower triangular factor, <tt>L</tt>.
    *
    * @return <tt>L</tt>
@@ -266,7 +266,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
   public DoubleMatrix2D getL() {
     return lowerTriangular(LU.copy());
   }
-  /**
+  /*
    * Returns a copy of the combined lower and upper triangular factor, <tt>LU</tt>.
    *
    * @return <tt>LU</tt>
@@ -274,7 +274,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
   public DoubleMatrix2D getLU() {
     return LU.copy();
   }
-  /**
+  /*
    * Returns the pivot permutation vector (not a copy of it).
    *
    * @return piv
@@ -282,7 +282,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
   public int[] getPivot() {
     return piv;
   }
-  /**
+  /*
    * Returns the upper triangular factor, <tt>U</tt>.
    *
    * @return <tt>U</tt>
@@ -290,7 +290,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
   public DoubleMatrix2D getU() {
     return upperTriangular(LU.copy());
   }
-  /**
+  /*
    * Returns whether the matrix is nonsingular (has an inverse).
    *
    * @return true if <tt>U</tt>, and hence <tt>A</tt>, is nonsingular; false otherwise.
@@ -298,7 +298,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
   public boolean isNonsingular() {
     return isNonSingular;
   }
-  /**
+  /*
    * Returns whether the matrix is nonsingular.
    *
    * @return true if <tt>matrix</tt> is nonsingular; false otherwise.
@@ -313,7 +313,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
     }
     return true;
   }
-  /**
+  /*
    * Modifies the matrix to be a lower triangular matrix.
    *
    * <p><b>Examples:</b>
@@ -402,7 +402,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
   protected int n() {
     return LU.columns();
   }
-  /**
+  /*
    * Sets the combined lower and upper triangular factor, <tt>LU</tt>. The parameter is not checked;
    * make sure it is indeed a proper LU decomposition.
    */
@@ -410,7 +410,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
     this.LU = LU;
     this.isNonSingular = isNonsingular(LU);
   }
-  /**
+  /*
    * Solves the system of equations <tt>A*X = B</tt> (in-place). Upon return <tt>B</tt> is
    * overridden with the result <tt>X</tt>, such that <tt>L*U*X = B(piv)</tt>.
    *
@@ -459,7 +459,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
       }
     }
   }
-  /**
+  /*
    * Solves the system of equations <tt>A*X = B</tt> (in-place). Upon return <tt>B</tt> is
    * overridden with the result <tt>X</tt>, such that <tt>L*U*X = B(piv,:)</tt>.
    *
@@ -557,7 +557,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
       }
     }
   }
-  /**
+  /*
    * Solves <tt>A*X = B</tt>.
    *
    * @param B A matrix with as many rows as <tt>A</tt> and any number of columns.
@@ -613,7 +613,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
       }
     }
   }
-  /**
+  /*
    * Returns a String with (propertyName, propertyValue) pairs. Useful for debugging or to quickly
    * get the rough picture. For example,
    *
@@ -632,35 +632,35 @@ public class LUDecompositionQuick implements java.io.Serializable {
 
     buf.append("isNonSingular = ");
     try {
-      buf.append(String.valueOf(this.isNonsingular()));
+      buf.append(this.isNonsingular());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\ndet = ");
     try {
-      buf.append(String.valueOf(this.det()));
+      buf.append(this.det());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\npivot = ");
     try {
-      buf.append(String.valueOf(new cern.colt.list.IntArrayList(this.getPivot())));
+      buf.append(new cern.colt.list.IntArrayList(this.getPivot()));
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nL = ");
     try {
-      buf.append(String.valueOf(this.getL()));
+      buf.append(this.getL());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nU = ");
     try {
-      buf.append(String.valueOf(this.getU()));
+      buf.append(this.getU());
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
@@ -669,14 +669,14 @@ public class LUDecompositionQuick implements java.io.Serializable {
     DoubleMatrix2D identity = cern.colt.matrix.DoubleFactory2D.dense.identity(LU.rows());
     try {
       this.solve(identity);
-      buf.append(String.valueOf(identity));
+      buf.append(identity);
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     return buf.toString();
   }
-  /**
+  /*
    * Modifies the matrix to be an upper triangular matrix.
    *
    * @return <tt>A</tt> (for convenience only).
@@ -695,7 +695,7 @@ public class LUDecompositionQuick implements java.io.Serializable {
 
     return A;
   }
-  /**
+  /*
    * Returns pivot permutation vector as a one-dimensional double array
    *
    * @return (double) piv

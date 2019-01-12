@@ -31,8 +31,8 @@ import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicLong;
 import junit.framework.TestCase;
 
-/**
- * Unit tests for random block IO include read, write, overwrite (aka update), and delete. There are
+/*
+* Unit tests for random block IO include read, write, overwrite (aka update), and delete. There are
  * also some unit tests for atomic append after random write since random writes can leave "holes"
  * in files.
  *
@@ -49,7 +49,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
     super(arg0);
   }
 
-  /**
+  /*
    * Tests random write of a block, read back of the data, overwrite of the same block, atomic
    * append after the random write, and random delete.
    *
@@ -150,7 +150,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
     assertFalse("delete", repo.deleteBlock(id, version, block_12));
   }
 
-  /**
+  /*
    * Unit test where a block is written using a random write, replaced with an empty block, and then
    * replaced with a non-empty block. The test verifies that the empty block in fact replaces the
    * block (rather than being interpreted as a delete of the block).
@@ -308,7 +308,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
     new StressTest(repo, 100 /*limit*/, gen);
   }
 
-  /**
+  /*
    * Helper class generates a random sequence of operation codes obeying the probability
    * distribution described in the constuctor call.
    *
@@ -396,7 +396,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
       }
     }
 
-    /**
+    /*
      * Return the name of the operator.
      *
      * @param op
@@ -424,7 +424,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
       }
     }
 
-    /**
+    /*
      * An array of normalized probabilities assigned to each operator. The array may be indexed by
      * the operator, e.g., dist[{@link #fetch}] would be the probability of a fetch operation.
      *
@@ -434,7 +434,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
       return _dist;
     }
 
-    /**
+    /*
      * Generate a random operator according to the distribution described to to the constructor.
      *
      * @return A declared operator selected according to a probability distribution.
@@ -452,7 +452,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
     }
   }
 
-  /**
+  /*
    * Tests of the {@link Op} test helper class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -531,7 +531,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
     }
   }
 
-  /**
+  /*
    * Class provides total ordering over {file,version,blockId} tuples.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -592,7 +592,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
     }
   }
 
-  /**
+  /*
    * Stress test helper class.
    *
    * @todo add create and delete of file versions.
@@ -659,8 +659,8 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
         switch (op) {
           case Op.append:
             {
-              /*
-               * @todo make empty, near empty, full, and near full blocks
+            /*
+       * @todo make empty, near empty, full, and near full blocks
                * relatively likely while also exercising the offset and
                * length parameters. The same changes should be applied to
                * the writeBlock() case below.
@@ -680,8 +680,8 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
             {
               final long block = getRandomBlock(id, version);
               if (block == -1L) {
-                /*
-                 * Since there are no blocks try deleting one at random
+              /*
+       * Since there are no blocks try deleting one at random
                  * and verify that it was not deleted.
                  */
                 assertFalse(
@@ -760,7 +760,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
       }
     }
 
-    /**
+    /*
      * Return a copy of those the bytes between <i>off</i> (inclusive) and <i>off+len</i>
      * (exclusive).
      *
@@ -778,7 +778,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
       return x;
     }
 
-    /**
+    /*
      * Return the first non-deleted block identifier for the given file version.
      *
      * @param id The file identifier.
@@ -795,7 +795,7 @@ public class TestRandomBlockOps extends AbstractRepositoryTestCase {
       return itr.next().getBlockId();
     }
 
-    /**
+    /*
      * Return a randomly selected block identifier from among the non-deleted blocks for the given
      * file version.
      *

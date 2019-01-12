@@ -45,8 +45,8 @@ import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.query.algebra.evaluation.iterator.CollectionIteration;
 
-/**
- * Utility class for computing the Concise Bounded Description.
+/*
+* Utility class for computing the Concise Bounded Description.
  *
  * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/578">Concise Bounded Description
  *     </a>
@@ -66,31 +66,31 @@ public class CBD {
   /** The {@link DescribeModeEnum} specifying how to evaluate the top-level DESCRIBE query. */
   private final DescribeModeEnum describeMode;
 
-  /**
+  /*
    * The limit on the #of iterations (iff the statement limit is also reached) -or- ZERO (0) for no
    * limit.
    */
   private final int describeIterationLimit;
 
-  /**
+  /*
    * The limit on the #of statements (iff the iteration limit is also reached) -or- ZERO (0) for no
    * limit.
    */
   private final int describeStatementLimit;
 
-  /**
+  /*
    * The {@link DescribeModeEnum} specifying how to evaluate each expansion round of the DESCRIBE
    * query.
    */
   private final DescribeModeEnum describeExpansionMode;
 
-  /**
+  /*
    * A mapping that is used to preserve a consistent assignment from blank node IDs to {@link
    * EmbergraphBNode}s scoped to the subgraph reported by the top-level DESCRIBE query.
    */
   private final Map<String, EmbergraphBNode> bnodes;
 
-  /**
+  /*
    * @param store The {@link AbstractTripleStore}.
    * @param describeMode The {@link DescribeModeEnum} specifying how to evaluate the DESCRIBE query.
    * @param describeIterationLimit The limit on the #of iterations (iff the statement limit is also
@@ -148,7 +148,7 @@ public class CBD {
     }
   }
 
-  /**
+  /*
    * The description of the original resource(s) is expanded for each blank node encountered in the
    * constructed statements until no new blank nodes are encountered. The resulting set of
    * statements is then reported as the description for the resources identified either as constants
@@ -257,7 +257,7 @@ public class CBD {
     return new CollectionIteration<EmbergraphStatement, QueryEvaluationException>(stmts);
   }
 
-  /**
+  /*
    * Return <code>true</code> iff the DESCRIBE query should be cutoff because the limits have been
    * exceeded.
    *
@@ -282,7 +282,7 @@ public class CBD {
     return cutoffRounds && cutoffStatements;
   }
 
-  /**
+  /*
    * Log the statements and bnode {@link IV}s @ DEBUG.
    *
    * @param stmts The statements.
@@ -325,7 +325,7 @@ public class CBD {
     }
   }
 
-  /**
+  /*
    * Consume statements from the source iterator, adding new statements into a collection and adding
    * new blank node {@link IV}s into another collection.
    *
@@ -362,8 +362,8 @@ public class CBD {
 
         if (stmts.add(stmt)) {
 
-          /*
-           * New blank node IVs can only be encountered for new
+        /*
+       * New blank node IVs can only be encountered for new
            * statements.
            *
            * TODO Consider using an ISPO => EmbergraphStatement map for
@@ -388,7 +388,7 @@ public class CBD {
     }
   }
 
-  /**
+  /*
    * Create a new DESCRIBE query to describe each new blank node identifier in the previous round.
    * We need to tunnel the evaluation of the DESCRIBE query in order to: (a) ensure that the blank
    * node {@link IV}s are attached to the blank nodes in the DESCRIBE clause; and (b) avoid the
@@ -451,7 +451,7 @@ public class CBD {
     return src;
   }
 
-  /**
+  /*
    * Generate a DESCRIBE query for one of the expansion rounds.
    *
    * @param bnodeIVs The blank nodes that need to be described.
@@ -499,7 +499,7 @@ public class CBD {
     return new ASTContainer(queryRoot);
   }
 
-  /**
+  /*
    * Collect blank nodes {@link IV}s not already declared in a previous round.
    *
    * @param bnodes_tm1 The blank node {@link IV}s already declared in the previous round(s).
@@ -524,7 +524,7 @@ public class CBD {
     newBnodes.add(bNodeIV);
   }
 
-  /**
+  /*
    * If the value is a blank node, then return the IV for that blank node and otherwise return
    * <code>null</code>.
    *

@@ -24,8 +24,8 @@ package it.unimi.dsi.util;
 import it.unimi.dsi.fastutil.longs.LongList;
 import java.util.List;
 
-/**
- * A list of longs with long indices.
+/*
+* A list of longs with long indices.
  *
  * <p>Unfortunately, {@link List} is limited to positions smaller than or equal to {@link
  * Integer#MAX_VALUE}. Since bits in a not-so-large array need to be indexed with longs, the
@@ -35,25 +35,25 @@ import java.util.List;
  * extends {@link LongList}).
  */
 public interface LongBigList extends LongList {
-  /**
+  /*
    * Returns the long at the given position.
    *
    * @param index a position in the list.
    * @return the corresponding long value.
    * @see List#get(int)
    */
-  public long getLong(long index);
+  long getLong(long index);
 
-  /**
+  /*
    * Removes the long at the given position.
    *
    * @param index a position in the list.
    * @return the long previously at the specified position.
    * @see List#remove(int)
    */
-  public long removeLong(long index);
+  long removeLong(long index);
 
-  /**
+  /*
    * Sets the long at the given position.
    *
    * @param index a position in the list.
@@ -61,34 +61,34 @@ public interface LongBigList extends LongList {
    * @return the previous value.
    * @see List#set(int,Object)
    */
-  public long set(long index, long value);
+  long set(long index, long value);
 
-  /**
+  /*
    * Adds the long at the given position.
    *
    * @param index a position in the list.
    * @param value a long value.
    * @see List#add(int,Object)
    */
-  public void add(long index, long value);
+  void add(long index, long value);
 
-  /**
+  /*
    * The number of elements in this big list.
    *
    * @return the number of elements in this big list.
    * @see List#size()
    */
-  public long length();
+  long length();
 
-  /**
+  /*
    * Sets the number of elements in this big list.
    *
    * @return this big list.
    * @see LongList#size(int)
    */
-  public LongBigList length(long newLength);
+  LongBigList length(long newLength);
 
-  /**
+  /*
    * Returns a big sublist view of this big list.
    *
    * @param from the starting element (inclusive).
@@ -96,5 +96,5 @@ public interface LongBigList extends LongList {
    * @return a big sublist view of this big list.
    * @see List#subList(int, int)
    */
-  public LongBigList subList(long from, long to);
+  LongBigList subList(long from, long to);
 }

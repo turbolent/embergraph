@@ -39,8 +39,8 @@ import org.openrdf.model.impl.LiteralImpl;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * Test suite for the {@link BlobsWriteTask}.
+/*
+* Test suite for the {@link BlobsWriteTask}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -93,7 +93,7 @@ public class TestBlobsWriteTask extends TestCase2 {
     doAddTermsTest(valuesIn, true /* toldBNodes */);
   }
 
-  /**
+  /*
    * Note: Blank nodes are NOT included in this test since the test helper is not smart enough to
    * verify the blank nodes will not be unified when using standard bnode semantics. However, {@link
    * TestBlobsIndex} does verify both standard and told bnode semantics.
@@ -161,8 +161,8 @@ public class TestBlobsWriteTask extends TestCase2 {
        */
       {
 
-        /*
-         * Convert to EmbergraphValues so IVs will be assigned as a
+      /*
+       * Convert to EmbergraphValues so IVs will be assigned as a
          * side-effect by the TermsWriteTask.
          */
         final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
@@ -172,8 +172,8 @@ public class TestBlobsWriteTask extends TestCase2 {
           values[i] = vf.asValue(valuesIn[i]);
         }
 
-        /*
-         * Invoke the task in a read-only mode to unify with the
+      /*
+       * Invoke the task in a read-only mode to unify with the
          * existing entries in the TERMS index.
          */
         final WriteTaskStats stats = addValues(vf, ndx, true /* readOnly */, toldBNodes, values);
@@ -192,8 +192,8 @@ public class TestBlobsWriteTask extends TestCase2 {
       final IV[] expectedIVs = new IV[valuesIn.length];
       {
 
-        /*
-         * Convert to EmbergraphValues so IVs will be assigned as a
+      /*
+       * Convert to EmbergraphValues so IVs will be assigned as a
          * side-effect by the TermsWriteTask.
          */
         final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
@@ -203,8 +203,8 @@ public class TestBlobsWriteTask extends TestCase2 {
           values[i] = vf.asValue(valuesIn[i]);
         }
 
-        /*
-         * Write on the TERMS index, unifying with the existing values
+      /*
+       * Write on the TERMS index, unifying with the existing values
          * in the index and assigning IVs to new values.
          */
         final WriteTaskStats stats = addValues(vf, ndx, false /* readOnly */, toldBNodes, values);
@@ -229,8 +229,8 @@ public class TestBlobsWriteTask extends TestCase2 {
        */
       {
 
-        /*
-         * Convert to EmbergraphValues so IVs will be assigned as a
+      /*
+       * Convert to EmbergraphValues so IVs will be assigned as a
          * side-effect by the TermsWriteTask.
          */
         final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
@@ -240,8 +240,8 @@ public class TestBlobsWriteTask extends TestCase2 {
           values[i] = vf.asValue(valuesIn[i]);
         }
 
-        /*
-         * Invoke the task in a read-only mode to unify with the
+      /*
+       * Invoke the task in a read-only mode to unify with the
          * existing entries in the TERMS index.
          */
         final WriteTaskStats stats = addValues(vf, ndx, true /* readOnly */, toldBNodes, values);
@@ -283,7 +283,7 @@ public class TestBlobsWriteTask extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test helper similar to {@link LexiconRelation#getIV(Value)} (point lookup).
    *
    * @param value
@@ -330,7 +330,7 @@ public class TestBlobsWriteTask extends TestCase2 {
     return iv;
   }
 
-  /**
+  /*
    * Thin wrapper for the {@link BlobsWriteTask} as invoked by the {@link LexiconRelation}. This can
    * be used to unify the {@link IV}s for the caller's {@link EmbergraphValue} with those in the
    * TERMS index and (optionally) to assign new {@link IV}s (when read-only is <code>false</code>).

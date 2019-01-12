@@ -36,8 +36,8 @@ import org.embergraph.rdf.sparql.ast.SubqueryFunctionNodeBase;
 import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.VarNode;
 
-/**
- * Information about FILTER (NOT) EXISTS patterns within a given join group. A FILTER (NOT) EXIST
+/*
+* Information about FILTER (NOT) EXISTS patterns within a given join group. A FILTER (NOT) EXIST
  * pattern is internally represented through an ASK subquery (testing the inner statement pattern
  * and binding a variable --exists-i) and a subsequent FILTER expression guaranteeing that the
  * variable is true (FILTER EXISTS) or false (FILTER NOT EXISTS).
@@ -95,7 +95,7 @@ public class ASTJoinGroupFilterExistsInfo {
     }
   }
 
-  /**
+  /*
    * Checks whether the SubqueryRoot at hand is contained in the FilterExistsInfo, i.e. whether it
    * is part of a FILTER (NOT) EXISTS.
    */
@@ -103,7 +103,7 @@ public class ASTJoinGroupFilterExistsInfo {
     return filterMap.keySet().contains(sqr);
   }
 
-  /**
+  /*
    * Checks whether the Filter at hand is contained in the FilterExistsInfo, i.e. whether it is part
    * of a FILTER (NOT) EXISTS.
    */

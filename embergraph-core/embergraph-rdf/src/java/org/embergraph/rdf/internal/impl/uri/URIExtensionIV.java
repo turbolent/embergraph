@@ -14,8 +14,8 @@ import org.embergraph.rdf.vocab.Vocabulary;
 import org.openrdf.model.URI;
 import org.openrdf.model.impl.URIImpl;
 
-/**
- * Class provides support for fully inline {@link URI}s for which a {@link Vocabulary} item was
+/*
+* Class provides support for fully inline {@link URI}s for which a {@link Vocabulary} item was
  * registered for the {@link URI} <em>namespace</em> . An {@link URIExtensionIV}
  * <strong>always</strong> has the <em>inline</em> and <em>extension</em> bits set. {@link
  * URIExtensionIV} are fully inline since the <code>namespace</code> can be materialized from the
@@ -36,7 +36,7 @@ public class URIExtensionIV<V extends EmbergraphURI> extends AbstractInlineExten
   /** The localName. */
   private final AbstractLiteralIV<EmbergraphLiteral, ?> delegateIV;
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>Note: The extensionIV and delegateIV are NOT cloned. The rationale is that we are only
@@ -57,7 +57,7 @@ public class URIExtensionIV<V extends EmbergraphURI> extends AbstractInlineExten
     return tmp;
   }
 
-  /**
+  /*
    * @param delegateIV The {@link IV} which represents the localName.
    * @param namespaceIV The {@link IV} which represents the namespace. This MUST be a fully inline
    *     {@link IV} declared by the {@link Vocabulary}.
@@ -81,7 +81,7 @@ public class URIExtensionIV<V extends EmbergraphURI> extends AbstractInlineExten
     this.namespaceIV = (AbstractInlineIV<EmbergraphURI, ?>) namespaceIV;
   }
 
-  /**
+  /*
    * The namespace IV does need materialization, although it will not need to go to the index to get
    * the value (it just needs access to the lexicon's vocabulary).
    */
@@ -169,7 +169,7 @@ public class URIExtensionIV<V extends EmbergraphURI> extends AbstractInlineExten
     return 1 /* flags */ + namespaceIV.byteLength() + delegateIV.byteLength();
   }
 
-  /**
+  /*
    * Defer to the {@link ILexiconConfiguration} which has specific knowledge of how to generate an
    * RDF value from this general purpose extension IV.
    *

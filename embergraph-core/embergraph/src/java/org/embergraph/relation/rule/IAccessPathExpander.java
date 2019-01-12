@@ -27,8 +27,8 @@ import java.io.Serializable;
 import org.embergraph.bop.IPredicate;
 import org.embergraph.relation.accesspath.IAccessPath;
 
-/**
- * An interface for expander patterns for an {@link IPredicate} when it appears in the right-hand
+/*
+* An interface for expander patterns for an {@link IPredicate} when it appears in the right-hand
  * position of a JOIN.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -36,7 +36,7 @@ import org.embergraph.relation.accesspath.IAccessPath;
  */
 public interface IAccessPathExpander<E> extends Serializable {
 
-  /**
+  /*
    * Return the {@link IAccessPath} that will be used to evaluate the {@link IPredicate}.
    *
    * @param accessPath The {@link IAccessPath} that will be used by default.
@@ -46,7 +46,7 @@ public interface IAccessPathExpander<E> extends Serializable {
    */
   IAccessPath<E> getAccessPath(IAccessPath<E> accessPath);
 
-  /**
+  /*
    * Add the backchainer on top of the expander.
    *
    * @return true if the backchainer should run
@@ -56,7 +56,7 @@ public interface IAccessPathExpander<E> extends Serializable {
    */
   boolean backchain();
 
-  /**
+  /*
    * If true, the predicate for this expander will be given priority in the join order.
    *
    * @return true if the predicate should be run first

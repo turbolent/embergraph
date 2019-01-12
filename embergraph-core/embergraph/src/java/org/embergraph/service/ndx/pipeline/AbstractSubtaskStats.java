@@ -25,13 +25,13 @@ package org.embergraph.service.ndx.pipeline;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
+/*
+* @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
  */
 public class AbstractSubtaskStats {
 
-  /**
+  /*
    * The #of elements in the output chunks (not including any eliminated duplicates).
    *
    * <p>Note: The {@link AtomicLong} provides an atomic update guarantee which some of the unit
@@ -39,7 +39,7 @@ public class AbstractSubtaskStats {
    */
   public final AtomicLong elementsOut = new AtomicLong(0);
 
-  /**
+  /*
    * The #of chunks written onto the index partition using RMI.
    *
    * <p>Note: The {@link AtomicLong} provides an atomic update guarantee which some of the unit
@@ -47,7 +47,7 @@ public class AbstractSubtaskStats {
    */
   public final AtomicLong chunksOut = new AtomicLong();
 
-  /**
+  /*
    * Elapsed time waiting for another chunk to be ready so that it can be written onto the index
    * partition.
    */
@@ -56,7 +56,7 @@ public class AbstractSubtaskStats {
   /** Elapsed nanoseconds writing chunks on an index partition (RMI request). */
   public long elapsedChunkWritingNanos = 0L;
 
-  /**
+  /*
    * The average #of nanoseconds for a chunk to become ready so that it can be written on the sink
    * (this is an average of the totals to date, not a moving average).
    */
@@ -67,7 +67,7 @@ public class AbstractSubtaskStats {
     return (chunksOut == 0L ? 0 : elapsedChunkWaitingNanos / (double) chunksOut);
   }
 
-  /**
+  /*
    * The average #of nanoseconds per chunk written on the sink (this is an average of the totals to
    * date, not a moving average).
    */
@@ -78,7 +78,7 @@ public class AbstractSubtaskStats {
     return (chunksOut == 0L ? 0 : elapsedChunkWritingNanos / (double) chunksOut);
   }
 
-  /**
+  /*
    * The average #of elements (tuples) per chunk written on the sink (this is an average of the
    * totals to date, not a moving average).
    */

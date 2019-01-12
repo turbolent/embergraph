@@ -24,8 +24,8 @@ package org.embergraph.quorum;
 import java.rmi.Remote;
 import java.util.UUID;
 
-/**
- * A non-remote interface for a client which monitors the state of a quorum. This interface adds the
+/*
+* A non-remote interface for a client which monitors the state of a quorum. This interface adds the
  * ability to receive notice of quorum state changes and resolve the {@link Remote} interface for
  * the member services of the quorum.
  *
@@ -35,7 +35,7 @@ import java.util.UUID;
  */
 public interface QuorumClient<S extends Remote> extends QuorumListener, ServiceLookup<S> {
 
-  /**
+  /*
    * The fully qualified identifier of the logical service whose quorum state
    * will be monitored (for zookeeper, this is the logicalServiceZPath). A
    * highly available service is comprised of multiple physical services which
@@ -53,7 +53,7 @@ public interface QuorumClient<S extends Remote> extends QuorumListener, ServiceL
    */
   String getLogicalServiceZPath();
 
-  /**
+  /*
    * Life cycle message sent when the client will begin to receive messages from the {@link Quorum}.
    * At a minimum, the client should save a reference to the {@link Quorum}.
    *
@@ -62,7 +62,7 @@ public interface QuorumClient<S extends Remote> extends QuorumListener, ServiceL
    */
   void start(Quorum<?, ?> quorum);
 
-  /**
+  /*
    * Life cycle message send when the client will no longer receive messages from the {@link
    * Quorum}.
    *
@@ -70,7 +70,7 @@ public interface QuorumClient<S extends Remote> extends QuorumListener, ServiceL
    */
   void terminate();
 
-  /**
+  /*
    * The client has become disconnected from the quorum (for zookeeper this is only generated if the
    * session has expired rather than if there is a transient disconnect that can be cured). This
    * callback provides a hook to take any local actions that are required when the client can not
@@ -79,7 +79,7 @@ public interface QuorumClient<S extends Remote> extends QuorumListener, ServiceL
    */
   void disconnected();
 
-  /**
+  /*
    * The quorum that is being monitored.
    *
    * @throws QuorumException if the client is not running with the quorum.
@@ -87,7 +87,7 @@ public interface QuorumClient<S extends Remote> extends QuorumListener, ServiceL
    */
   Quorum<?, ?> getQuorum();
 
-  /**
+  /*
    * Return the remote interface used to perform HA operations on a member of quorum.
    *
    * @param serviceId The {@link UUID} associated with the service.
@@ -97,7 +97,7 @@ public interface QuorumClient<S extends Remote> extends QuorumListener, ServiceL
    */
   S getService(UUID serviceId);
 
-  /**
+  /*
    * Return the remote interface used to perform HA operations on the quorum leader.
    *
    * @param token The quorum token for which the request was made.

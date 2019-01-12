@@ -1,7 +1,7 @@
 package org.embergraph.btree;
 
-/**
- * Leaf cursor interface.
+/*
+* Leaf cursor interface.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -20,7 +20,7 @@ public interface ILeafCursor<L extends Leaf> extends Cloneable {
   /** Return the last leaf. */
   L last();
 
-  /**
+  /*
    * Find the leaf that would span the key.
    *
    * @param key The key
@@ -29,7 +29,7 @@ public interface ILeafCursor<L extends Leaf> extends Cloneable {
    */
   L seek(byte[] key);
 
-  /**
+  /*
    * Position this cursor on the same leaf as the given cursor.
    *
    * @param src A cursor.
@@ -43,7 +43,7 @@ public interface ILeafCursor<L extends Leaf> extends Cloneable {
   /** Clone the cursor. */
   ILeafCursor<L> clone();
 
-  /**
+  /*
    * Return the previous leaf in the natural order of the B+Tree. The cursor position is unchanged
    * if there is no prececessor.
    *
@@ -51,7 +51,7 @@ public interface ILeafCursor<L extends Leaf> extends Cloneable {
    */
   L prior();
 
-  /**
+  /*
    * Return the next leaf in the natural order of the B+Tree. The cursor position is unchanged if
    * there is no successor.
    *

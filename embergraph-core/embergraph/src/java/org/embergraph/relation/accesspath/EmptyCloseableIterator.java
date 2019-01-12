@@ -24,8 +24,8 @@ package org.embergraph.relation.accesspath;
 import cutthecrap.utils.striterators.ICloseableIterator;
 import java.util.NoSuchElementException;
 
-/**
- * An empty {@link ICloseableIterator}.
+/*
+* An empty {@link ICloseableIterator}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

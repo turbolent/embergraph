@@ -44,8 +44,8 @@ import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.URIImpl;
 import org.openrdf.model.vocabulary.RDF;
 
-/**
- * SPARQL 1.1 Service Description vocabulary class.
+/*
+* SPARQL 1.1 Service Description vocabulary class.
  *
  * @see <a href="http://www.w3.org/TR/sparql11-service-description/">SPARQL 1.1 Service Description
  *     </a>
@@ -61,7 +61,7 @@ public class SD {
 
   public static final URI endpoint = new URIImpl(NS + "endpoint");
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -76,7 +76,7 @@ public class SD {
 
   public static final URI SPARQL11Update = new URIImpl(NS + "SPARQL11Update");
 
-  /**
+  /*
    * Relates an instance of {@link #Service} to a format that is supported for serializing query
    * results. URIs for commonly used serialization formats are defined by Unique URIs for File
    * Formats. For formats that do not have an existing URI, the <a
@@ -92,7 +92,7 @@ public class SD {
   //   * </pre>
   public static final URI resultFormat = new URIImpl(NS + "resultFormat");
 
-  /**
+  /*
    * Relates an instance of sd:Service to a format that is supported for parsing RDF input; for
    * example, via a SPARQL 1.1 Update LOAD statement, or when URIs are dereferenced in FROM/FROM
    * NAMED/USING/USING NAMED clauses (see also sd:DereferencesURIs below).
@@ -107,7 +107,7 @@ public class SD {
    */
   public static final URI inputFormat = new URIImpl(NS + "inputFormat");
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -147,7 +147,7 @@ public class SD {
 
   public static final URI IsolatableIndices = new URIImpl(BDFNS + "KB/IsolatableIndices");
 
-  /**
+  /*
    * A highly available deployment - this feature refers to the presence of the {@link HAGlue}
    * interface, the capability for online backups, and the existence of a targer {@link
    * #ReplicationFactor}. You must consult the target {@link #ReplicationFactor} in order to
@@ -157,7 +157,7 @@ public class SD {
    */
   public static final URI HighlyAvailable = new URIImpl(BDFNS + "HighlyAvailable");
 
-  /**
+  /*
    * The value of this feature is the target replication factor for the database expressed as an
    * <code>xsd:int</code>. If this is ONE (1), then the database is setup with a quorum and has the
    * capability for online backup, but it is not replicated. TWO (2) indicates mirroring, but is not
@@ -168,7 +168,7 @@ public class SD {
   /** An {@link IEmbergraphFederation}. */
   public static final URI ScaleOut = new URIImpl(BDFNS + "ScaleOut");
 
-  /**
+  /*
    * This indicates that the namespace is compatible with mapgraph (aka GPU) acceleration, but this
    * does not indicate whether or not the namespace is currently loaded in the mapgraph-runtime.
    */
@@ -177,13 +177,13 @@ public class SD {
   /** This indicates that the namespace is currently loaded within the mapgraph-runtime. */
   public static final URI MapgraphAcceleration = new URIImpl(BDFNS + "MapgraphAcceleration");
 
-  /**
+  /*
    * The <code>namespace</code> for this KB instance as configured by the {@link
    * EmbergraphSail.Options#NAMESPACE} property.
    */
   public static final URI KB_NAMESPACE = new URIImpl(BDFNS + "KB/Namespace");
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -212,21 +212,21 @@ public class SD {
    * Entailment regimes.
    */
 
-  /**
+  /*
    * Simple Entailment
    *
    * @see http://www.w3.org/ns/entailment/Simple
    */
   public static final URI simpleEntailment = new URIImpl("http://www.w3.org/ns/entailment/Simple");
 
-  /**
+  /*
    * RDF Entailment
    *
    * @see http://www.w3.org/ns/entailment/RDF
    */
   public static final URI rdfEntailment = new URIImpl("http://www.w3.org/ns/entailment/RDF");
 
-  /**
+  /*
    * RDFS Entailment
    *
    * @see http://www.w3.org/ns/entailment/RDFS
@@ -248,21 +248,21 @@ public class SD {
    * TODO RDFa: http://www.w3.org/ns/formats/RDFa
    */
 
-  /**
+  /*
    * Unique URI for RDF/XML
    *
    * @see http://www.w3.org/ns/formats/
    */
   public static final URI RDFXML = new URIImpl("http://www.w3.org/ns/formats/RDF_XML");
 
-  /**
+  /*
    * Unique URI for NTRIPLES
    *
    * @see http://www.w3.org/ns/formats/
    */
   public static final URI NTRIPLES = new URIImpl("http://www.w3.org/ns/formats/N-Triples");
 
-  /**
+  /*
    * Unique URI for TURTLE
    *
    * @see http://www.w3.org/ns/formats/
@@ -273,15 +273,15 @@ public class SD {
   public static final URI TURTLE_RDR =
       new URIImpl("http://www.embergraph.org/ns/formats/Turtle-RDR");
 
-  /**
+  /*
    * Unique URI for N3.
    *
    * @see http://www.w3.org/ns/formats/
    */
   public static final URI N3 = new URIImpl("http://www.w3.org/ns/formats/N3");
 
-  // /**
-  // * TODO The TriX file format.
+  // /*
+// * TODO The TriX file format.
   // */
   // public static final RDFFormat TRIX = new RDFFormat("TriX",
   // "application/trix", Charset.forName("UTF-8"),
@@ -291,8 +291,8 @@ public class SD {
   public static final URI TRIG =
       new URIImpl("http://www.wiwiss.fu-berlin.de/suhl/bizer/TriG/Spec/");
 
-  // /**
-  // * TODO A binary RDF format (openrdf)
+  // /*
+// * TODO A binary RDF format (openrdf)
   // *
   // * @see http://www.openrdf.org/issues/browse/RIO-79 (Request for unique
   // URI)
@@ -301,7 +301,7 @@ public class SD {
   // "application/x-binary-rdf", null,
   // "brf", true, true);
 
-  /**
+  /*
    * The URI that identifies the N-Quads syntax is <code>http://sw.deri.org/2008/07/n-quads/#n-quads
    * </code>.
    *
@@ -317,7 +317,7 @@ public class SD {
    * SPARQL results
    */
 
-  /**
+  /*
    * Unique URI for SPARQL Results in XML
    *
    * @see http://www.w3.org/ns/formats/
@@ -325,7 +325,7 @@ public class SD {
   public static final URI SPARQL_RESULTS_XML =
       new URIImpl("http://www.w3.org/ns/formats/SPARQL_Results_XML");
 
-  /**
+  /*
    * Unique URI for SPARQL Results in JSON
    *
    * @see http://www.w3.org/ns/formats/
@@ -334,7 +334,7 @@ public class SD {
   public static final URI SPARQL_RESULTS_JSON =
       new URIImpl("http://www.w3.org/ns/formats/SPARQL_Results_JSON");
 
-  /**
+  /*
    * Unique URI for SPARQL Results in CSV
    *
    * @see http://www.w3.org/ns/formats/
@@ -342,7 +342,7 @@ public class SD {
   public static final URI SPARQL_RESULTS_CSV =
       new URIImpl("http://www.w3.org/ns/formats/SPARQL_Results_CSV");
 
-  /**
+  /*
    * Unique URI for SPARQL Results in TSV
    *
    * @see http://www.w3.org/ns/formats/
@@ -351,8 +351,8 @@ public class SD {
       new URIImpl("http://www.w3.org/ns/formats/SPARQL_Results_TSV");
 
   // TODO openrdf binary format.
-  //    /**
-  //     * Unique URI for SPARQL Results in TSV
+  //    /*
+//     * Unique URI for SPARQL Results in TSV
   //     *
   //     * @see TupleQueryResultFormat#BINARY
   //     *
@@ -379,13 +379,13 @@ public class SD {
   /** The resource which models the default data set for the service. */
   protected final BNode aDefaultDataset;
 
-  //    /**
-  //     * The resource which models the default graph in the default data set for
+  //    /*
+//     * The resource which models the default graph in the default data set for
   //     * the service.
   //     */
   //    protected final BNode aDefaultGraph;
 
-  /**
+  /*
    * @param g Where to assemble the description.
    * @param tripleStore The KB instance to be described.
    * @param serviceURIs One or more service end points for that KB instance.
@@ -416,7 +416,7 @@ public class SD {
     aDefaultDataset = f.createBNode("defaultDataset");
   }
 
-  /**
+  /*
    * Collect various information, building up a service description graph.
    *
    * @param describeStatistics When <code>true</code>, the VoID description will include the {@link
@@ -460,7 +460,7 @@ public class SD {
     }
   }
 
-  /**
+  /*
    * Describe the service end point(s).
    *
    * @see #endpoint
@@ -483,7 +483,7 @@ public class SD {
     g.add(aService, SD.supportedLanguage, SD.SPARQL11Update);
   }
 
-  /**
+  /*
    * Describe the supported input formats.
    *
    * @see http://www.openrdf.org/issues/browse/RIO-79 (Request for unique URIs)
@@ -512,7 +512,7 @@ public class SD {
 
   }
 
-  /**
+  /*
    * Describe the supported result formats.
    *
    * @see #resultFormat
@@ -538,7 +538,7 @@ public class SD {
 
   }
 
-  /**
+  /*
    * Describe non-language features.
    *
    * <p>Note: Do NOT report the backing store type (Journal, TemporaryStore, Federation), the
@@ -634,7 +634,7 @@ public class SD {
     }
   }
 
-  /**
+  /*
    * Describe the entailment regime.
    *
    * <p>TODO The Axioms interface could self-report this.
@@ -659,7 +659,7 @@ public class SD {
     if (entailmentRegime != null) g.add(aService, SD.entailmentRegime, entailmentRegime);
   }
 
-  /**
+  /*
    * Return true iff the namespace is compatible with mapgraph acceleration.
    *
    * @see https://github.com/SYSTAP/bigdata-gpu/issues/134 (Need means to publish/update/drop graph
@@ -680,7 +680,7 @@ public class SD {
     return obj.isSupported(tripleStore);
   }
 
-  /**
+  /*
    * Return true iff the namespace is currently loaded in the mapgraph runtime.
    *
    * @see https://github.com/SYSTAP/bigdata-gpu/issues/134 (Need means to publish/update/drop graph

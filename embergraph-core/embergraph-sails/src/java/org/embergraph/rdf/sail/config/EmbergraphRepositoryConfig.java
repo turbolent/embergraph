@@ -41,7 +41,7 @@ public class EmbergraphRepositoryConfig extends RepositoryImplConfigBase {
     this.propertiesFile = propertiesFile;
   }
 
-  public Properties getProperties() throws FileNotFoundException, IOException {
+  public Properties getProperties() throws IOException {
 
     if (propertiesFile == null) {
       return new Properties();

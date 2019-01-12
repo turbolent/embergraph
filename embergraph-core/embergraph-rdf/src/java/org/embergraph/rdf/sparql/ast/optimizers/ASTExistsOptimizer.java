@@ -49,8 +49,8 @@ import org.embergraph.rdf.sparql.ast.SubqueryRoot;
 import org.embergraph.rdf.sparql.ast.VarNode;
 import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
 
-/**
- * Optimizer identifies value expressions using EXISTS or NOT EXISTS and rewrites them in a form
+/*
+* Optimizer identifies value expressions using EXISTS or NOT EXISTS and rewrites them in a form
  * suitable for evaluation by the query engine. The main problem with (NOT) EXIST is that the query
  * engine is not written to evaluate graph patterns within value expressions. Therefore the graph
  * pattern is extracted into a subquery which must be evaluated before the FILTER may be evaluated.
@@ -129,7 +129,7 @@ public class ASTExistsOptimizer implements IASTOptimizer {
     return new QueryNodeWithBindingSet(queryRoot, bindingSets);
   }
 
-  /**
+  /*
    * Look for FILTER.
    *
    * @param p The parent.
@@ -151,8 +151,8 @@ public class ASTExistsOptimizer implements IASTOptimizer {
 
         final FilterNode filter = (FilterNode) child;
 
-        /**
-         * BLZG-1475: there are cases where we have nested FILTER EXISTS or FILTER NOT EXISTS
+      /*
+       * BLZG-1475: there are cases where we have nested FILTER EXISTS or FILTER NOT EXISTS
          * expressions; in such cases, we rewrite the inner expressions first
          */
         final IValueExpressionNode vexp = filter.getValueExpressionNode();
@@ -181,15 +181,15 @@ public class ASTExistsOptimizer implements IASTOptimizer {
         rewrite(sa, exogenousVars, subquery, subquery.getWhereClause());
       }
 
-      /**
+      /*
        * https://jira.blazegraph.com/browse/BLZG-1267: Unable to bind result of EXISTS operator ->
        * we also need to setup subqueries for value expression nodes in assignment nodes.
        */
       if (child instanceof AssignmentNode) {
 
         final AssignmentNode bind = (AssignmentNode) child;
-        /**
-         * BLZG-1475: there are cases where we have nested FILTER EXISTS or FILTER NOT EXISTS
+      /*
+       * BLZG-1475: there are cases where we have nested FILTER EXISTS or FILTER NOT EXISTS
          * expressions; in such cases, we rewrite the inner expressions first
          */
         final IValueExpressionNode vexp = bind.getValueExpressionNode();
@@ -206,7 +206,7 @@ public class ASTExistsOptimizer implements IASTOptimizer {
     }
   }
 
-  /**
+  /*
    * Look for {@link ExistsNode} or {@link NotExistsNode} in FILTER. If we find such a node, we lift
    * its group graph pattern onto the parent.
    *
@@ -236,8 +236,8 @@ public class ASTExistsOptimizer implements IASTOptimizer {
 
           final SubqueryRoot subquery = new SubqueryRoot(QueryType.ASK);
 
-          /**
-           * Propagate the FILTER EXISTS mode query hint to the ASK subquery.
+        /*
+       * Propagate the FILTER EXISTS mode query hint to the ASK subquery.
            *
            * @see <a href="http://trac.blazegraph.com/ticket/988">bad performance for FILTER EXISTS
            *     </a>
@@ -254,16 +254,16 @@ public class ASTExistsOptimizer implements IASTOptimizer {
           final ProjectionNode projection = new ProjectionNode();
           subquery.setProjection(projection);
 
-          /*
-           * The anonymous variable used to communicate the outcome of
+        /*
+       * The anonymous variable used to communicate the outcome of
            * the graph pattern.
            */
           final VarNode anonVar = (VarNode) subqueryFunction.get(0);
           subquery.setAskVar(anonVar.getValueExpression());
           // projection.addProjectionVar((VarNode) subqueryFunction.get(0));
 
-          /*
-           * Anything which is visible in the scope in which the
+        /*
+       * Anything which is visible in the scope in which the
            * FILTER appears. All we need to know is anything
            * exogenous, plus anything MAYBE incoming, plus anything
            * MAYBE bound in the graphPattern, retaining anything used
@@ -295,8 +295,8 @@ public class ASTExistsOptimizer implements IASTOptimizer {
             projection.addProjectionVar(new VarNode(var.getName()));
           }
 
-          /*
-           * Note: This makes the anonymous variable appear as if it
+        /*
+       * Note: This makes the anonymous variable appear as if it
            * is used by the ASK subquery. That is important for the
            * bottom up analysis, which will otherwise identify the
            * anonymous variable as one which is provably not bound in

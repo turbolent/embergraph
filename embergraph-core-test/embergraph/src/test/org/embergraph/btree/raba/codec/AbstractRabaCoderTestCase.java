@@ -26,6 +26,7 @@ import it.unimi.dsi.compression.CanonicalFast64CodeWordDecoder;
 import it.unimi.dsi.compression.HuffmanCodec;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -47,8 +48,8 @@ import org.embergraph.io.SerializerUtil;
 import org.embergraph.util.BytesUtil;
 import org.embergraph.util.BytesUtil.UnsignedByteArrayComparator;
 
-/**
- * Abstract test suite for {@link IRabaCoder} implementations.
+/*
+* Abstract test suite for {@link IRabaCoder} implementations.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -63,7 +64,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     super(name);
   }
 
-  /**
+  /*
    * Return <code>true</code> if the {@link IRabaCoder} only handles fixed length values (the
    * default always returns <code>false</code>). This is used to skip tests which have variable
    * length byte[]s when testing the {@link FixedLengthValueRabaCoder}.
@@ -73,7 +74,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     return false;
   }
 
-  /**
+  /*
    * The fixture under test. This will be <code>null</code> unless you explicitly set it in {@link
    * #setUp()}.
    */
@@ -85,8 +86,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     if (isFixedLength()) return;
 
     final byte[][] a = new byte[2][];
-    a[0] = "mike".getBytes("US-ASCII");
-    a[1] = "personick".getBytes("US-ASCII");
+    a[0] = "mike".getBytes(StandardCharsets.US_ASCII);
+    a[1] = "personick".getBytes(StandardCharsets.US_ASCII);
 
     if (rabaCoder.isValueCoder()) {
 
@@ -100,8 +101,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
       doRoundTripTest(rabaCoder, expected);
 
       {
-        /*
-         * Spot check the correct computation of the insertion point for
+      /*
+       * Spot check the correct computation of the insertion point for
          * a variety of search keys.
          */
 
@@ -117,14 +118,14 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
 
         assertEquals(-2, actual.search(new byte[] {'m', 'i', 'k', 'e', 's'}));
 
-        assertEquals(-2, actual.search("personic".getBytes("US-ASCII")));
+        assertEquals(-2, actual.search("personic".getBytes(StandardCharsets.US_ASCII)));
 
-        assertEquals(-3, actual.search("personicks".getBytes("US-ASCII")));
+        assertEquals(-3, actual.search("personicks".getBytes(StandardCharsets.US_ASCII)));
       }
     }
   }
 
-  /**
+  /*
    * Test with byte values which are negative values when interpreted as as signed 8 bit integers.
    */
   public void test_negativeByteValues() throws UnsupportedEncodingException {
@@ -146,7 +147,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test with an empty byte[] element.
    *
    * @throws UnsupportedEncodingException
@@ -157,8 +158,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
 
     final byte[][] a = new byte[3][];
     a[0] = new byte[0];
-    a[1] = "mike".getBytes("US-ASCII");
-    a[2] = "personick".getBytes("US-ASCII");
+    a[1] = "mike".getBytes(StandardCharsets.US_ASCII);
+    a[2] = "personick".getBytes(StandardCharsets.US_ASCII);
 
     if (rabaCoder.isKeyCoder()) {
 
@@ -171,7 +172,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test with a single byte value (nsymbols:=1). This test was written to a known bug in {@link
    * HuffmanCodec} and {@link CanonicalFast64CodeWordDecoder}. A workaround for that bug has been
    * implemented in the {@link CanonicalHuffmanRabaCoder}.
@@ -194,7 +195,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test with a single byte value (nsymbols=1) and some nulls. This test was written to a known bug
    * in {@link HuffmanCodec} and {@link CanonicalFast64CodeWordDecoder}. A workaround for that bug
    * has been implemented in the {@link CanonicalHuffmanRabaCoder}.
@@ -214,7 +215,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test with a null value.
    *
    * @throws UnsupportedEncodingException
@@ -237,7 +238,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     doRoundTripTest(rabaCoder, expected);
   }
 
-  /**
+  /*
    * Test with a single value, which is null.
    *
    * <p>FIXME Due to a bug in the {@link CanonicalFast64CodeWordDecoder} ctor there is a problem
@@ -339,7 +340,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * This test case was developed for the {@link CanonicalHuffmanRabaCoder}.
    *
    * <pre>
@@ -417,7 +418,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Test using a sequence of random URIs (formed with successive prefixes).
    *
    * @throws Exception
@@ -453,7 +454,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Return a random byte array. The byte array will also have a random length in [0:512] unless the
    * {@link IRabaCoder} is a {@link FixedLengthValueRabaCoder}, in which case a byte[] having the
    * appropriate length will be returned.
@@ -480,7 +481,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     return a;
   }
 
-  /**
+  /*
    * Generates a random byte[][] and verifies round-trip encoding and decoding.
    *
    * <p>Note: This uses a uniform random distribution. Therefore the huffman codes tend to occupy
@@ -601,8 +602,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
 
       {
 
-        /*
-         * Verify that we can read the byte[] out of [data]. This is
+      /*
+       * Verify that we can read the byte[] out of [data]. This is
          * really a test of the data.getDataInput() and the returned
          * DataInputBuffer.
          */
@@ -692,7 +693,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Performance stress test for keys. Performance tuning should give more weight to coded raba
    * access times, including search and key retrieval or copy, than coding times since most use will
    * be access on the coded data. Those costs are not factored apart in the stress test times. They
@@ -812,7 +813,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * A test designed to measure the performance of an {@link IRabaCoder} for operations on B+Tree
    * keys, including search.
    */
@@ -847,7 +848,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     doRabaCoderPerformanceTest(expected, rabaCoder, size, nops, r, op);
   }
 
-  /**
+  /*
    * Do a performance stress test consisting of random operations on a randomly generated B+Tree
    * keys {@link IRaba}. The operations will be checked against ground truth.
    *
@@ -933,8 +934,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
           }
         case Op.COPY:
           {
-            /*
-             * Note: We reuse the same output buffer all the time for this.
+          /*
+       * Note: We reuse the same output buffer all the time for this.
              * This is not a problem since we are not overwriting the data
              * backing the raba.
              */
@@ -958,8 +959,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
           }
         case Op.SEARCH:
           {
-            /*
-             * Search with a key chosen randomly from the original data.
+          /*
+       * Search with a key chosen randomly from the original data.
              */
             if (!expected.isKeys()) {
               // method not defined for values.
@@ -1020,8 +1021,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
         case Op.RECODE:
           {
 
-            /*
-             * Note: this uses a new buffer instance so we do not stomp on
+          /*
+       * Note: this uses a new buffer instance so we do not stomp on
              * the existing coded representation backing the raba. The
              * backing array for the buffer is preallocated to a modest size
              * and filled with random data. When we setup the buffer, we
@@ -1036,8 +1037,8 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
             // fill it with random data.
             r.nextBytes(tmp);
 
-            /*
-             * Start at random (but small) offset into the buffer with a
+          /*
+       * Start at random (but small) offset into the buffer with a
              * bias to start at zero.
              *
              * Note: A lot of re-coding errors are linked to a non-zero
@@ -1113,7 +1114,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     return originalData.length;
   }
 
-  /**
+  /*
    * Verify same byte[] iterators.
    *
    * @param eitr The expected iterator.
@@ -1140,7 +1141,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
   protected static final double scalingFactor =
       1d / TimeUnit.NANOSECONDS.convert(1, TimeUnit.MILLISECONDS);
 
-  /**
+  /*
    * Helper class generates a random sequence of operation codes obeying the probability
    * distribution described in the constructor call.
    *
@@ -1224,7 +1225,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * Return the name of the operator.
      *
      * @param op
@@ -1257,7 +1258,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
       }
     }
 
-    /**
+    /*
      * An array of normalized probabilities assigned to each operator. The array may be indexed by
      * the operator, e.g., dist[{@link #fetch}] would be the probability of a fetch operation.
      *
@@ -1267,7 +1268,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
       return _dist;
     }
 
-    /**
+    /*
      * Generate a random operator according to the distribution described to to the constructor.
      *
      * @return A declared operator selected according to a probability distribution.
@@ -1285,7 +1286,7 @@ public abstract class AbstractRabaCoderTestCase extends TestCase2 {
     }
   }
 
-  /**
+  /*
    * Tests of the {@link Op} test helper class.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

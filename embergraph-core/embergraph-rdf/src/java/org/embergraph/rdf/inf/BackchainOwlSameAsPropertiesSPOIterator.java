@@ -37,8 +37,8 @@ import org.embergraph.striterator.EmptyChunkedIterator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Provides backward chaining for property collection and reverse property collection on owl:sameAs
+/*
+* Provides backward chaining for property collection and reverse property collection on owl:sameAs
  * for the SPO and S?O access paths.
  *
  * <p>Note: This is a relatively straightforward access path because both values of interest for
@@ -57,7 +57,7 @@ public class BackchainOwlSameAsPropertiesSPOIterator extends BackchainOwlSameAsI
 
   private boolean canRemove = false;
 
-  /**
+  /*
    * Create an iterator that will visit all statements in the source iterator and also backchain any
    * entailments that would have resulted from owl:sameAs {2,3}.
    *

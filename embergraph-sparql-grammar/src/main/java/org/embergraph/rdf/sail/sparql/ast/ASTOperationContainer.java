@@ -7,8 +7,8 @@ package org.embergraph.rdf.sail.sparql.ast;
 
 import java.util.List;
 
-/**
- * Abstract supertype of {@link ASTQueryContainer} and {@link ASTUpdateContainer}
+/*
+* Abstract supertype of {@link ASTQueryContainer} and {@link ASTUpdateContainer}
  *
  * @author Jeen Broekstra
  */

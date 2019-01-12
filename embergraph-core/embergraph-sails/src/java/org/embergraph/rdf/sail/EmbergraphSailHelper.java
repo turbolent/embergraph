@@ -37,8 +37,8 @@ import org.embergraph.service.ScaleOutClientFactory;
 import org.embergraph.util.Bytes;
 import org.openrdf.sail.SailException;
 
-/**
- * Class provides guidance on parameter setup a data set and queries.
+/*
+* Class provides guidance on parameter setup a data set and queries.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @deprecated The workbench provides configuration guidance. This class also provides some support
@@ -51,7 +51,7 @@ import org.openrdf.sail.SailException;
  */
 public class EmbergraphSailHelper {
 
-  /**
+  /*
    * (Re-)open a SAIL backed by persistent data stored in an {@link IEmbergraphFederation}.
    *
    * @param fed The federation.
@@ -87,7 +87,7 @@ public class EmbergraphSailHelper {
     return new EmbergraphSail(tripleStore);
   }
 
-  /**
+  /*
    * (Re-)open a SAIL backed by persistent data stored on a {@link Journal}.
    *
    * @param filename The name of the backing file for the {@link Journal}.
@@ -132,7 +132,7 @@ public class EmbergraphSailHelper {
     return new EmbergraphSail(tripleStore);
   }
 
-  /**
+  /*
    * Return the {@link Properties} that will be used to configure a new {@link AbstractTripleStore}
    * instance. The {@link AbstractTripleStore} will remember the properties with which it was
    * created and use those values each time it is re-opened. The properties are stored in the global
@@ -253,7 +253,7 @@ public class EmbergraphSailHelper {
     return properties;
   }
 
-  /**
+  /*
    * Return the properties associated with the {@link AbstractTripleStore} backing the {@link
    * EmbergraphSail}.
    *
@@ -265,7 +265,7 @@ public class EmbergraphSailHelper {
     return getProperties(sail.getIndexManager(), sail.getNamespace());
   }
 
-  /**
+  /*
    * Return the properties associated with the given namespace.
    *
    * @param indexManager Use {@link EmbergraphSail#getDatabase()} and then {@link
@@ -286,7 +286,7 @@ public class EmbergraphSailHelper {
     return properties;
   }
 
-  /**
+  /*
    * Update properties for the SAIL. This will overwrite any properties having the same name with
    * their new values. Properties that are not overwritten will remain visible. A property can be
    * deleted by specifying a <code>null</code> value.
@@ -309,7 +309,7 @@ public class EmbergraphSailHelper {
     return setProperties(sail.getIndexManager(), sail.getNamespace(), properties);
   }
 
-  /**
+  /*
    * @param indexManager
    * @param namespace
    * @param properties
@@ -375,7 +375,7 @@ public class EmbergraphSailHelper {
     }
   }
 
-  /**
+  /*
    * Shows some interesting details about the terms index.
    *
    * @param cxn The connection.
@@ -390,7 +390,7 @@ public class EmbergraphSailHelper {
     System.out.println(md.getTupleSerializer().toString());
   }
 
-  /**
+  /*
    * Shows some interesting details about the primary index for the {@link SPORelation}.
    *
    * @param cxn The connection.
@@ -408,20 +408,20 @@ public class EmbergraphSailHelper {
     System.out.println(md.getTupleSerializer().toString());
   }
 
-  /**
+  /*
    * Typesafe enumeration of the deployment models.
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  private static enum FederationEnum {
+  private enum FederationEnum {
     LTS,
     //        LDS,
     //        EDS,
-    JDS;
+    JDS
   }
 
-  /**
+  /*
    * Utility class.
    *
    * <p>Note: The LTS (local triple store) mode is inferred when the filename is a <code>.properties

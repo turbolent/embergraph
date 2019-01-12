@@ -62,8 +62,8 @@ import org.embergraph.service.EmbeddedClient;
 import org.embergraph.service.EmbeddedFederation;
 import org.embergraph.striterator.ChunkedArrayIterator;
 
-/**
- * Unit tests for {@link FederatedQueryEngine} running against an {@link EmbeddedFederation} having
+/*
+* Unit tests for {@link FederatedQueryEngine} running against an {@link EmbeddedFederation} having
  * a single {@link DataService}. The data may be partitioned, but the partitions will live on the
  * same {@link DataService}.
  *
@@ -157,7 +157,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     super.tearDown();
   }
 
-  /**
+  /*
    * Create and populate relation in the {@link #namespace}.
    *
    * @throws IOException
@@ -206,7 +206,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     }
   }
 
-  /**
+  /*
    * Starts and stops the {@link QueryEngine}, but does not validate the semantics of shutdown()
    * versus shutdownNow() since we need to be evaluating query mixes in order to verify the
    * semantics of those operations.
@@ -219,7 +219,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
 
   }
 
-  /**
+  /*
    * Test the ability to run a query which does nothing and produces no solutions.
    *
    * @throws Exception
@@ -231,12 +231,10 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE)));
 
     final UUID queryId = UUID.randomUUID();
     final IRunningQuery runningQuery = queryEngine.eval(queryId, query, new ListBindingSet());
@@ -273,7 +271,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     }
   }
 
-  /**
+  /*
    * Unit test uses a {@link StartOp} to copy some binding sets through a {@link SliceOp} without
    * involving any joins or access path reads. For this test, the binding sets never leave the query
    * controller.
@@ -289,24 +287,20 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final PipelineOp query =
         new SliceOp(
             new BOp[] {startOp},
             // slice annotations
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE)));
 
     // the expected solutions (order is not reliable due to concurrency).
     final IBindingSet[] expected =
@@ -361,7 +355,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     }
   }
 
-  /**
+  /*
    * Test the ability run a simple join which is mapped across two index partitions. There are three
    * operators. One feeds an empty binding set[] into the join, another is the predicate for the
    * access path on which the join will read (no variables are bound so it will read everything),
@@ -383,23 +377,19 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     // access path has has no constants and no constraint.
     final Predicate<E> predOp =
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                  // Note: local access path!
-                  new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                // Note: local access path!
+                new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false)));
 
     final PipelineJoin<E> joinOp =
         new PipelineJoin<E>(
@@ -414,14 +404,12 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
             new BOp[] {joinOp},
             // slice annotations
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE)));
 
     // the expected solutions (order is not reliable due to concurrency).
     final IBindingSet[] expected =
@@ -507,7 +495,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     }
   }
 
-  /**
+  /*
    * Test the ability run a simple join which is mapped across two index partitions. The join is
    * constrained to filter for only solutions in which [y==Paul].
    */
@@ -525,10 +513,8 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     /*
      * Note: Since the index on which this reads is formed as (column1 +
@@ -540,13 +526,11 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                  // Note: local access path!
-                  new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                // Note: local access path!
+                new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false)));
 
     final PipelineJoin<E> joinOp =
         new PipelineJoin<E>(
@@ -567,14 +551,12 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
             new BOp[] {joinOp},
             // slice annotations
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE)));
 
     // the expected solutions (order is not reliable due to concurrency).
     final IBindingSet[] expected =
@@ -662,7 +644,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     }
   }
 
-  /**
+  /*
    * Test the ability to run a simple join reading on a single shard. There are three operators. One
    * feeds an empty binding set[] into the join, another is the predicate for the access path on
    * which the join will read (it probes the index once for "Mary" and binds "Paul" and "John" when
@@ -680,23 +662,19 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     // Note: tuples with "Mary" in the 1st column are on partition1.
     final Predicate<E> predOp =
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  // Note: local access path!
-                  new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
-                  new NV(Predicate.Annotations.BOP_ID, predId),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                // Note: local access path!
+                new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
+                new NV(Predicate.Annotations.BOP_ID, predId),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineJoin<E> joinOp =
         new PipelineJoin<E>(
@@ -711,14 +689,12 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
             new BOp[] {joinOp},
             // slice annotations
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE)));
 
     // the expected solutions (order is not reliable due to concurrency).
     final IBindingSet[] expected =
@@ -786,7 +762,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     }
   }
 
-  /**
+  /*
    * Test the ability run a query requiring two joins.
    *
    * @todo Verify join constraints (e.g., x == y or x != y).
@@ -805,34 +781,28 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<?> pred1Op =
         new Predicate<E>(
             new IVariableOrConstant[] {Var.var("x"), Var.var("y")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId1),
-                  // Note: local access path!
-                  new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId1),
+                // Note: local access path!
+                new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred2Op =
         new Predicate<E>(
             new IVariableOrConstant[] {Var.var("y"), Var.var("z")},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  new NV(Predicate.Annotations.BOP_ID, predId2),
-                  // Note: local access path!
-                  new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                new NV(Predicate.Annotations.BOP_ID, predId2),
+                // Note: local access path!
+                new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp join1Op =
         new PipelineJoin<E>(
@@ -854,14 +824,12 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new SliceOp(
             new BOp[] {join2Op},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, sliceId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, sliceId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE)));
 
     // start the query.
     final UUID queryId = UUID.randomUUID();
@@ -970,7 +938,7 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
     }
   }
 
-  /**
+  /*
    * Unit test for optional join. Two joins are used and target a {@link SliceOp}. The 2nd join is
    * marked as optional. Intermediate results which do not succeed on the optional join are
    * forwarded to the {@link SliceOp} which is the target specified by the {@link
@@ -999,36 +967,30 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.BOP_ID, startId),
-                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                }));
+                new NV(Predicate.Annotations.BOP_ID, startId),
+                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
 
     final Predicate<?> pred1Op =
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  // Note: local access path!
-                  new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
-                  new NV(Predicate.Annotations.BOP_ID, predId1),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                // Note: local access path!
+                new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
+                new NV(Predicate.Annotations.BOP_ID, predId1),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final Predicate<?> pred2Op =
         new Predicate<E>(
             new IVariableOrConstant[] {y, z},
             NV.asMap(
-                new NV[] {
-                  new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
-                  // Note: local access path!
-                  new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
-                  // join is optional.
-                  new NV(Predicate.Annotations.OPTIONAL, true),
-                  new NV(Predicate.Annotations.BOP_ID, predId2),
-                  new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                }));
+                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace}),
+                // Note: local access path!
+                new NV(Predicate.Annotations.REMOTE_ACCESS_PATH, false),
+                // join is optional.
+                new NV(Predicate.Annotations.OPTIONAL, true),
+                new NV(Predicate.Annotations.BOP_ID, predId2),
+                new NV(Annotations.TIMESTAMP, ITx.READ_COMMITTED)));
 
     final PipelineOp join1Op =
         new PipelineJoin<E>(
@@ -1062,14 +1024,12 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
         new SliceOp(
             new BOp[] {condOp},
             NV.asMap(
-                new NV[] {
-                  new NV(BOp.Annotations.BOP_ID, sliceId),
-                  new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                  new NV(PipelineOp.Annotations.SHARED_STATE, true),
-                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
-                  new NV(
-                      QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE),
-                }));
+                new NV(BOp.Annotations.BOP_ID, sliceId),
+                new NV(BOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                new NV(
+                    QueryEngine.Annotations.CHUNK_HANDLER, FederationChunkHandler.TEST_INSTANCE)));
 
     final PipelineOp query = sliceOp;
 
@@ -1124,8 +1084,8 @@ public class TestFederatedQueryEngine extends AbstractEmbeddedFederationTestCase
                   new Constant<String>("Leon"),
                   new Constant<String>("Paul")
                 }),
-            /*
-                         * No. The CONSTRAINT on the 2nd join [x == y] filters all
+          /*
+       * No. The CONSTRAINT on the 2nd join [x == y] filters all
                          * solutions. For solutions where the optional join fails, [y] is
                          * not bound. Since [y] is part of the constraint on that join we DO
                          * NOT observe those solutions which only join on the first access

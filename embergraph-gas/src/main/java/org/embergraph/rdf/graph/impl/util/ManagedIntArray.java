@@ -17,8 +17,8 @@ package org.embergraph.rdf.graph.impl.util;
 
 import org.apache.log4j.Logger;
 
-/**
- * A view on a mutable int[] that may be extended.
+/*
+* A view on a mutable int[] that may be extended.
  *
  * <p>Note: The backing int[] always has an {@link #off() offset} of ZERO (0) and a {@link #len()
  * length} equal to the capacity of the backing int[].
@@ -37,13 +37,13 @@ public class ManagedIntArray implements IManagedIntArray {
   /** The default capacity of the buffer. */
   public static final int DEFAULT_INITIAL_CAPACITY = 128; // 1024;
 
-  /**
+  /*
    * The backing array. This is re-allocated whenever the capacity of the buffer is too small and
    * reused otherwise.
    */
   private int[] buf;
 
-  /**
+  /*
    * {@inheritDoc} This is re-allocated whenever the capacity of the buffer is too small and reused
    * otherwise.
    */
@@ -53,7 +53,7 @@ public class ManagedIntArray implements IManagedIntArray {
     return buf;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The offset of the slice into the backing byte[] is always zero.
@@ -64,7 +64,7 @@ public class ManagedIntArray implements IManagedIntArray {
     return 0;
   }
 
-  /**
+  /*
    * {@inheritDoc}
    *
    * <p>The length of the slice is always the capacity of the backing byte[].
@@ -75,7 +75,7 @@ public class ManagedIntArray implements IManagedIntArray {
     return buf.length;
   }
 
-  /**
+  /*
    * Throws exception unless the value is non-negative.
    *
    * @param msg The exception message.
@@ -90,7 +90,7 @@ public class ManagedIntArray implements IManagedIntArray {
     return v;
   }
 
-  /**
+  /*
    * Creates a buffer with an initial capacity of {@value #DEFAULT_INITIAL_CAPACITY} bytes. The
    * capacity of the buffer will be automatically extended as required.
    */
@@ -99,7 +99,7 @@ public class ManagedIntArray implements IManagedIntArray {
     this(DEFAULT_INITIAL_CAPACITY);
   }
 
-  /**
+  /*
    * Creates a buffer with the specified initial capacity. The capacity of the buffer will be
    * automatically extended as required.
    *
@@ -110,7 +110,7 @@ public class ManagedIntArray implements IManagedIntArray {
     this.buf = new int[assertNonNegative("initialCapacity", initialCapacity)];
   }
 
-  /**
+  /*
    * Create a view wrapping the entire array.
    *
    * <p>Note: the caller's reference will be used until and unless the array is grown, at which
@@ -157,7 +157,7 @@ public class ManagedIntArray implements IManagedIntArray {
     return buf == null ? 0 : buf.length;
   }
 
-  /**
+  /*
    * Return the new capacity for the buffer (default is always large enough and will normally double
    * the buffer capacity each time it overflows).
    *
@@ -235,7 +235,7 @@ public class ManagedIntArray implements IManagedIntArray {
     return new SliceImpl(off, len);
   }
 
-  /**
+  /*
    * A slice of the outer {@link ManagedArray}. The slice will always reflect the backing {@link
    * #array()} for the instance of the outer class.
    *
@@ -261,7 +261,7 @@ public class ManagedIntArray implements IManagedIntArray {
       return len;
     }
 
-    /**
+    /*
      * Protected constructor used to create a slice. The caller is responsible for verifying that
      * the slice is valid for the backing byte[] buffer.
      *
@@ -295,7 +295,7 @@ public class ManagedIntArray implements IManagedIntArray {
      * Absolute get/put operations.
      */
 
-    /**
+    /*
      * Verify that an operation starting at the specified offset into the slice and having the
      * specified length is valid against the slice.
      *
@@ -312,8 +312,8 @@ public class ManagedIntArray implements IManagedIntArray {
 
       if ((aoff + alen) > len) {
 
-        /*
-         * The operation run length at that offset would extend beyond
+      /*
+       * The operation run length at that offset would extend beyond
          * the end of the slice.
          */
 

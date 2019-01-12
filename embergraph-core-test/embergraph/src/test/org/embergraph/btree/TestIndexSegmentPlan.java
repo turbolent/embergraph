@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 package org.embergraph.btree;
 
-/**
- * Test suite for efficient post-order rebuild of an index in an external index segment.
+/*
+* Test suite for efficient post-order rebuild of an index in an external index segment.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -37,7 +37,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test {@link IndexSegmentBuilder#getMinimumHeight(int, int)}. This routine is responsible for
    * determining the minimum height of a tree given a branching factor and a #of index entries.
    */
@@ -55,7 +55,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals(3, IndexSegmentPlan.getMinimumHeight(3, 10));
   }
 
-  /**
+  /*
    * A series of tests for {@link IndexSegmentBuilder#distributeKeys(int m, int m/2, int nleaves,
    * int nentries)}.
    *
@@ -106,7 +106,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals(new int[] {10}, IndexSegmentPlan.distributeKeys(10, (10 + 1) / 2, 1, 10));
   }
 
-  /**
+  /*
    * Test where the root leaf has fewer than (m+1)/2 entries. The root is never under capacity, so
    * this tests that the function to distribute the keys accepts a root leaf under these
    * circumstances.
@@ -120,7 +120,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
    *
    */
 
-  /**
+  /*
    * An application of the routine to distribute children among nodes - the logic is identical to
    * distributing keys among leaves except that the result must be interpreted as the #of children
    * NOT the #of keys. An alias is provided to help clarify this distinction.
@@ -133,7 +133,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals(new int[] {2, 2, 2, 2, 2}, IndexSegmentPlan.distributeKeys(3, (3 + 1) / 2, 5, 10));
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=3) and (n=10) entries.
    */
   public void test_plan_m3_n10() {
@@ -154,7 +154,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals("numInNode[2][]", new int[] {3, 3, 2, 2}, plan.numInNode[2]);
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=4) and (n=10) entries.
    */
   public void test_plan_m4_n10() {
@@ -174,7 +174,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals("numInNode[1][]", new int[] {4, 4, 2}, plan.numInNode[1]);
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=5) and (n=10) entries.
    */
   public void test_plan_m5_n10() {
@@ -194,7 +194,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals("numInNode[1][]", new int[] {5, 5}, plan.numInNode[1]);
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=6) and (n=10) entries.
    */
   public void test_plan_m6_n10() {
@@ -214,7 +214,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals("numInNode[1][]", new int[] {6, 4}, plan.numInNode[1]);
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=7) and (n=10) entries.
    */
   public void test_plan_m7_n10() {
@@ -234,7 +234,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals("numInNode[1][]", new int[] {6, 4}, plan.numInNode[1]);
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=8) and (n=10) entries.
    */
   public void test_plan_m8_n10() {
@@ -254,7 +254,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals("numInNode[1][]", new int[] {6, 4}, plan.numInNode[1]);
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=9) and (n=10) entries.
    */
   public void test_plan_m9_n10() {
@@ -274,7 +274,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals("numInNode[1][]", new int[] {5, 5}, plan.numInNode[1]);
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=10) and (n=10) entries
    * (everything fits into the root leaf)
    */
@@ -294,7 +294,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals("numInNode[0][]", new int[] {10}, plan.numInNode[0]);
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=3) and (n=0) entries.
    */
   public void test_plan_m3_n0_emptyRootLeaf() {
@@ -313,7 +313,7 @@ public class TestIndexSegmentPlan extends AbstractBTreeTestCase {
     assertEquals("numInNode[0][]", new int[] {0}, plan.numInNode[0]);
   }
 
-  /**
+  /*
    * Tests {@link IndexSegmentPlan} for a tree with a branching factor of (m=3) and (n=20) entries.
    */
   public void test_plan_m3_n20() {

@@ -8,8 +8,8 @@ import org.embergraph.bop.BOp;
 import org.embergraph.bop.IVariable;
 import org.embergraph.rdf.sparql.ast.optimizers.StaticOptimizer;
 
-/**
- * A special kind of group {@link IGroupNode} that represents the sparql union operator.
+/*
+* A special kind of group {@link IGroupNode} that represents the sparql union operator.
  *
  * <p>Note: This node only accepts {@link JoinGroupNode}s as children.
  */
@@ -35,8 +35,8 @@ public class UnionNode extends GraphPatternGroup<JoinGroupNode> implements IReor
     }
   }
 
-  //    /**
-  //     * Construct a non-optional union.
+  //    /*
+//     * Construct a non-optional union.
   //     */
   public UnionNode() {}
 
@@ -49,7 +49,7 @@ public class UnionNode extends GraphPatternGroup<JoinGroupNode> implements IReor
   @Override
   public UnionNode addChild(final JoinGroupNode child) {
 
-    final JoinGroupNode group = (JoinGroupNode) child;
+    final JoinGroupNode group = child;
 
     // can only add non-optional join groups as children to union
     if (group.isOptional()) {
@@ -86,8 +86,8 @@ public class UnionNode extends GraphPatternGroup<JoinGroupNode> implements IReor
   public boolean isReorderable() {
     for (JoinGroupNode child : this) {
       for (IGroupMemberNode grandchild : child) {
-        /*
-         * Even though a FilterNode is not itself re-orderable doesn't
+      /*
+       * Even though a FilterNode is not itself re-orderable doesn't
          * mean we can't re-order the UnionNode.  I was getting some
          * horrible join orders from the static optimizer for simple
          * UnionNodes that were just statement patterns + filters.

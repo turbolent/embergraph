@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -74,8 +75,8 @@ import org.openrdf.sail.memory.MemoryStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * A SPARQL query test suite, created by reading in a W3C working-group style manifest.
+/*
+* A SPARQL query test suite, created by reading in a W3C working-group style manifest.
  *
  * @author Jeen Broekstra
  */
@@ -507,7 +508,7 @@ public abstract class SPARQLQueryTest extends TestCase {
   protected final String readQueryString() throws IOException {
     InputStream stream = new URL(queryFileURL).openStream();
     try {
-      return IOUtil.readString(new InputStreamReader(stream, "UTF-8"));
+      return IOUtil.readString(new InputStreamReader(stream, StandardCharsets.UTF_8));
     } finally {
       stream.close();
     }

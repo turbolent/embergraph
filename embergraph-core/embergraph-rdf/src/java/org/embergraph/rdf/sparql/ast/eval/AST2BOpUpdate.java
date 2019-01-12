@@ -128,8 +128,8 @@ import org.openrdf.sail.SailException;
 
 // import org.openrdf.query.impl.MutableTupleQueryResult;
 
-/**
- * Class handles SPARQL update query plan generation.
+/*
+* Class handles SPARQL update query plan generation.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -138,7 +138,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
   private static final Logger log = Logger.getLogger(AST2BOpUpdate.class);
 
-  /**
+  /*
    * When <code>true</code>, convert the SPARQL UPDATE into a physical operator plan and execute it
    * on the query engine. When <code>false</code> , the UPDATE is executed using the {@link
    * EmbergraphSail} API.
@@ -163,7 +163,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
       o = Var.var("o"),
       c = Var.var("c");
 
-  /**
+  /*
    * Convert the query
    *
    * <p>Note: This is currently a NOP.
@@ -194,7 +194,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
   }
 
-  /**
+  /*
    * Convert and/or execute the update request.
    *
    * @throws Exception
@@ -232,12 +232,12 @@ public class AST2BOpUpdate extends AST2BOpUtility {
       long batchResolveNanos = 0L;
       if (updateIndex > 0) {
 
-        /*
-         * There is more than one update operation in this request.
+      /*
+       * There is more than one update operation in this request.
          */
 
-        /*
-         * Note: We need to flush the assertion / retraction buffers if
+      /*
+       * Note: We need to flush the assertion / retraction buffers if
          * the Sail is local since some of the code paths supporting
          * UPDATEs do not go through the EmbergraphSail and would otherwise
          * not have their updates flushed until the commit (which does
@@ -250,8 +250,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
         final long t2 = System.nanoTime();
         connectionFlushNanos = t2 - t1;
 
-        /*
-         * We need to re-resolve any RDF Values appearing in this UPDATE
+      /*
+       * We need to re-resolve any RDF Values appearing in this UPDATE
          * operation which have a 0L term identifier in case they have
          * become defined through the previous update(s).
          *
@@ -325,7 +325,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return left;
   }
 
-  /**
+  /*
    * MP: Make SPARQL Update an auto-commit operation by default.
    *
    * <p>TODO: Make this private once merged down.
@@ -333,7 +333,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
   public static boolean AUTO_COMMIT =
       Boolean.parseBoolean(System.getProperty(AST2BOpBase.Annotations.AUTO_COMMIT, "true"));
 
-  /**
+  /*
    * Commit.
    *
    * <p>Note: Not required on cluster (Shard-wise ACID updates).
@@ -380,7 +380,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return left;
   }
 
-  /**
+  /*
    * Method provides the <code>switch()</code> for handling the different {@link UpdateType}s.
    *
    * @param left
@@ -471,7 +471,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return left;
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -566,8 +566,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       if (insertClause == null && op.getDeleteClause() == null) {
 
-        /*
-         * DELETE WHERE QuadPattern
+      /*
+       * DELETE WHERE QuadPattern
          *
          * We need to build the appropriate CONSTRUCT clause from the
          * WHERE clause.
@@ -622,8 +622,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       if (isDeleteInsert) {
 
-        /*
-         * DELETE + INSERT.
+      /*
+       * DELETE + INSERT.
          *
          * Note: The semantics of DELETE + INSERT are that the WHERE
          * clause is executed once. The solutions to that need to be fed
@@ -654,8 +654,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         final int chunkSize = 100; // TODO configure.
 
-        /*
-         * Run as a SELECT query.
+      /*
+       * Run as a SELECT query.
          *
          * Note: This *MUST* use the view of the tripleStore which is
          * associated with the SailConnection in case the view is
@@ -698,8 +698,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
             if (isSolutionSet) {
 
-              /*
-               * Target is solution set.
+            /*
+       * Target is solution set.
                *
                * @see
                * https://sourceforge.net/apps/trac/bigdata/ticket
@@ -740,8 +740,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
               try {
 
-                /*
-                 * Replace WHERE clause with an join group
+              /*
+       * Replace WHERE clause with an join group
                  * containing an INCLUDE for the solutions to be
                  * removed.
                  *
@@ -774,8 +774,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
                 // Set the projection node.
                 queryRoot.setProjection(deleteClause.getProjection());
 
-                /*
-                 * Run as a SELECT query : Do NOT materialize
+              /*
+       * Run as a SELECT query : Do NOT materialize
                  * IVs.
                  *
                  * Note: This *MUST* use the view of the
@@ -802,8 +802,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
               } finally {
 
-                /*
-                 * Make sure that we do not leave this hanging
+              /*
+       * Make sure that we do not leave this hanging
                  * around.
                  */
 
@@ -812,8 +812,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
             } else {
 
-              /*
-               * DELETE triples/quads constructed from the
+            /*
+       * DELETE triples/quads constructed from the
                * solutions.
                */
 
@@ -859,8 +859,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
             if (isSolutionSet) {
 
-              /*
-               * Target is solution set.
+            /*
+       * Target is solution set.
                *
                * @see
                * https://sourceforge.net/apps/trac/bigdata/ticket
@@ -889,8 +889,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
             } else {
 
-              /*
-               * INSERT triples/quads CONSTRUCTed from solutions.
+            /*
+       * INSERT triples/quads CONSTRUCTed from solutions.
                */
 
               final ConstructNode template =
@@ -930,8 +930,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       } else {
 
-        /*
-         * DELETE/INSERT.
+      /*
+       * DELETE/INSERT.
          *
          * Note: For this code path, only the INSERT clause -or- the
          * DELETE clause was specified. We handle the case where BOTH
@@ -952,8 +952,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         if (isSolutionSet) {
 
-          /*
-           * Target is solution set.
+        /*
+       * Target is solution set.
            *
            * @see https://sourceforge.net/apps/trac/bigdata/ticket/524
            * (SPARQL Cache)
@@ -967,15 +967,15 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
           if (!isInsert) {
 
-            /*
-             * Re-write the AST to handle DELETE solutions.
+          /*
+       * Re-write the AST to handle DELETE solutions.
              */
 
             convertQueryForDeleteSolutions(queryRoot, solutionSet);
           }
 
-          /*
-           * Run as a SELECT query : Do NOT materialize IVs.
+        /*
+       * Run as a SELECT query : Do NOT materialize IVs.
            *
            * Note: This *MUST* use the view of the tripleStore which
            * is associated with the SailConnection in case the view is
@@ -1000,8 +1000,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
         } else {
 
-          /*
-           * Target is graph.
+        /*
+       * Target is graph.
            */
 
           final QuadData quadData =
@@ -1016,8 +1016,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
           // Set the CONSTRUCT template (quads patterns).
           queryRoot.setConstruct(template);
 
-          /*
-           * Run as a CONSTRUCT query
+        /*
+       * Run as a CONSTRUCT query
            *
            * FIXME Can we avoid IV materialization for this code path?
            * Note that we have to do Truth Maintenance. However, I
@@ -1056,7 +1056,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return null;
   }
 
-  /**
+  /*
    * Efficiently resolve openrdf {@link BindingSet} into a chunked embergraph {@link IBindingSet}[]
    * iterator. The closeable semantics of the iteration pattern are preserved.
    *
@@ -1099,7 +1099,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return sitr;
   }
 
-  /**
+  /*
    * We need to find and remove the matching solutions. We handle this by transforming the WHERE
    * clause with a MINUS joining against the target solution set via an INCLUDE. The solutions which
    * are produced by the query can then be written directly onto the named solution set. That way,
@@ -1145,7 +1145,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
   }
 
-  /**
+  /*
    * Copy all statements from source to target.
    *
    * @param left
@@ -1171,7 +1171,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return null;
   }
 
-  /**
+  /*
    * Copy all statements from the sourceGraph to the targetGraph.
    *
    * <p>Note: The SILENT keyword for ADD, COPY, and MOVE indicates that the implementation
@@ -1209,7 +1209,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     }
   }
 
-  /**
+  /*
    * Drop() target, Add(source,target), Drop(source).
    *
    * @param left
@@ -1252,7 +1252,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return null;
   }
 
-  /**
+  /*
    * Drop() target, then Add().
    *
    * @param left
@@ -1293,7 +1293,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return null;
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -1442,7 +1442,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return null;
   }
 
-  /**
+  /*
    * Utility method to get the {@link RDFFormat} for filename.
    *
    * <p>It checks for compressed endings and is provided as a utility.
@@ -1473,7 +1473,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return fmt;
   }
 
-  /**
+  /*
    * Parse and load a document.
    *
    * @param conn
@@ -1526,7 +1526,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
       // BLZG-1929
       final String n = sourceURL.getPath();
 
-      /**
+      /*
        * Attempt to obtain the format from the Content-Type.
        *
        * <p><a href="https://sourceforge.net/apps/trac/bigdata/ticket/620">UpdateServlet fails to
@@ -1570,8 +1570,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       try {
 
-        /*
-         * Setup decompression.
+      /*
+       * Setup decompression.
          */
 
         if (n.endsWith(".gz")) {
@@ -1612,8 +1612,8 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     } finally {
 
       if (hconn instanceof HttpURLConnection) {
-        /*
-         * Disconnect, but only after we have loaded all the
+      /*
+       * Disconnect, but only after we have loaded all the
          * URLs. Disconnect is optional for java.net. It is a
          * hint that you will not be accessing more resources on
          * the connected host. By disconnecting only after all
@@ -1693,7 +1693,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     }
   }
 
-  /**
+  /*
    * Note: Embergraph does not support empty graphs, so {@link UpdateType#Clear} and {@link
    * UpdateType#Drop} have the same semantics.
    *
@@ -1731,7 +1731,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return left;
   }
 
-  /**
+  /*
    * Clear one graph (SILENT).
    *
    * @param targetGraph The graph to be cleared -or- <code>null</code> if no target graph was named.
@@ -1752,7 +1752,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
         context);
   }
 
-  /**
+  /*
    * Clear one or more graphs and/or solution sets.
    *
    * @param silent When <code>true</code>, some kinds of problems will not be reported to the
@@ -1810,15 +1810,15 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
       if (scope == Scope.DEFAULT_CONTEXTS) {
 
-        /*
-         * Addressing the defaultGraph (Sesame nullGraph).
+      /*
+       * Addressing the defaultGraph (Sesame nullGraph).
          */
         sailConn.removeStatements(null /* s */, null /* p */, null /* o */, BD.NULL_GRAPH);
 
       } else {
 
-        /*
-         * Addressing ALL NAMED GRAPHS.
+      /*
+       * Addressing ALL NAMED GRAPHS.
          *
          * Note: This is everything EXCEPT the nullGraph.
          */
@@ -1953,7 +1953,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return left;
   }
 
-  /**
+  /*
    * GRAPHS : If the graph already exists (context has at least one statement), then this is an
    * error (unless SILENT). Otherwise it is a NOP.
    *
@@ -1988,7 +1988,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 
     } else {
 
-      final EmbergraphURI c = (EmbergraphURI) ((CreateGraph) op).getTargetGraph().getValue();
+      final EmbergraphURI c = (EmbergraphURI) op.getTargetGraph().getValue();
 
       if (log.isDebugEnabled()) log.debug("targetGraph=" + c);
 
@@ -2001,7 +2001,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return left;
   }
 
-  /**
+  /*
    *
    *
    * <pre>
@@ -2089,7 +2089,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return null;
   }
 
-  /**
+  /*
    * Insert or remove a statement.
    *
    * @param conn The connection on which to write the mutation.
@@ -2102,11 +2102,11 @@ public class AST2BOpUpdate extends AST2BOpUtility {
       final EmbergraphSailConnection conn, final EmbergraphStatement spo, final boolean insert)
       throws SailException {
 
-    final Resource s = (Resource) spo.getSubject();
+    final Resource s = spo.getSubject();
 
-    final URI p = (URI) spo.getPredicate();
+    final URI p = spo.getPredicate();
 
-    final Value o = (Value) spo.getObject();
+    final Value o = spo.getObject();
 
     /*
      * If [c] is not bound, then using an empty Resource[] for the contexts.
@@ -2117,9 +2117,9 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      * contexts (on remove it is interpreted as a wildcard).
      */
 
-    final Resource c = (Resource) (spo.getContext() == null ? null : spo.getContext());
+    final Resource c = (spo.getContext());
 
-    final Resource[] contexts = (Resource[]) (c == null ? NO_CONTEXTS : new Resource[] {c});
+    final Resource[] contexts = (c == null ? NO_CONTEXTS : new Resource[] {c});
 
     if (log.isTraceEnabled())
       log.trace(
@@ -2150,7 +2150,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
       //
       //            conn.removeStatements(s1, p, o1, contexts);
 
-      /**
+      /*
        * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/571">DELETE/INSERT WHERE
        *     handling of blank nodes </a>
        */
@@ -2158,7 +2158,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     }
   }
 
-  /**
+  /*
    * Insert or remove a statement (INSERT DATA or DELETE DATA).
    *
    * @param conn The connection on which to write the mutation.
@@ -2192,9 +2192,9 @@ public class AST2BOpUpdate extends AST2BOpUtility {
      * contexts (on remove it is interpreted as a wildcard).
      */
 
-    final Resource c = (Resource) (stmt.getContext() == null ? null : stmt.getContext());
+    final Resource c = (stmt.getContext());
 
-    final Resource[] contexts = (Resource[]) (c == null ? NO_CONTEXTS : new Resource[] {c});
+    final Resource[] contexts = (c == null ? NO_CONTEXTS : new Resource[] {c});
 
     if (log.isTraceEnabled())
       log.trace(
@@ -2218,7 +2218,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     }
   }
 
-  /**
+  /*
    * @param left
    * @param b
    * @param context
@@ -2281,7 +2281,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return left;
   }
 
-  /**
+  /*
    * Convert an {@link ISPO}[] into an {@link IBindingSet}[].
    *
    * @param data The {@link ISPO}[].
@@ -2335,7 +2335,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     return bsets;
   }
 
-  /**
+  /*
    * Execute the update plan.
    *
    * @param left
@@ -2376,7 +2376,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     }
   }
 
-  /**
+  /*
    * Throw an exception if the graph is empty.
    *
    * @throws GraphEmptyException if the graph does not exist and/or is empty.
@@ -2414,7 +2414,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     }
   }
 
-  /**
+  /*
    * Throw an exception unless the graph is non-empty.
    *
    * <p>Note: This *MUST* use the view of the tripleStore which is associated with the

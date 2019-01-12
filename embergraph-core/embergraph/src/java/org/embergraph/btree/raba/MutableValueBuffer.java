@@ -23,8 +23,8 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * A flyweight mutable implementation exposing the backing byte[][], permitting <code>null</code>s
+/*
+* A flyweight mutable implementation exposing the backing byte[][], permitting <code>null</code>s
  * and not supporting search. It is assumed that caller maintains a dense byte[][] in the sense that
  * all entries in [0:nvalues] are defined, even if some of entries are null. The implementation is
  * NOT thread-safe for mutation.
@@ -53,7 +53,7 @@ public class MutableValueBuffer implements IRaba {
     return false;
   }
 
-  /**
+  /*
    * Create a new, empty byte[][] of the specified capacity.
    *
    * @param nvalues The capacity of the byte[][].
@@ -63,7 +63,7 @@ public class MutableValueBuffer implements IRaba {
     this(0 /* size */, new byte[nvalues][]);
   }
 
-  /**
+  /*
    * Create a view of a byte[][]. All elements in the array are visible in the view.
    *
    * @param nvalues The #of entries in the array with valid data.
@@ -80,7 +80,7 @@ public class MutableValueBuffer implements IRaba {
     this.values = values;
   }
 
-  /**
+  /*
    * Builds a mutable value buffer.
    *
    * @param capacity The capacity of the new instance (this is based on the branching factor for the

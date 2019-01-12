@@ -28,8 +28,8 @@ import java.util.concurrent.FutureTask;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
-/**
- * Unit test for shutdown of the {@link GangliaService}.
+/*
+* Unit test for shutdown of the {@link GangliaService}.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -45,7 +45,7 @@ public class TestGangliaListenerShutdown extends TestCase {
     super(name);
   }
 
-  /**
+  /*
    * The {@link GangliaListener} can block awaiting a datagram packet. If no packet arrives, then it
    * could hang there since {@link DatagramSocket#receive(java.net.DatagramPacket)} does not notice
    * an interrupt. NIO for multicast is not available in JDK 6 (it was added in JDK 7). This test
@@ -90,7 +90,7 @@ public class TestGangliaListenerShutdown extends TestCase {
 
       Thread.sleep(1000 /* ms */);
 
-      /**
+      /*
        * FIXME This assertion can not be made with Java 6 per the notes on this test and on the
        * GangliaListener implementation. Java 6 does not support non-blocking IO and multicast, so
        * the IO is blocking and the interrupt is not noticed. I have modified the test by disabling

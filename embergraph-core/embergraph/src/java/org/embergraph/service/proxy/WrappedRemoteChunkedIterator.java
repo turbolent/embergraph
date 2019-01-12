@@ -30,8 +30,8 @@ import org.apache.log4j.Logger;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 import org.embergraph.striterator.IKeyOrder;
 
-/**
- * Wraps an {@link IRemoteChunkedIterator} so that it looks like an {@link IChunkedOrderedIterator}
+/*
+* Wraps an {@link IRemoteChunkedIterator} so that it looks like an {@link IChunkedOrderedIterator}
  * again.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -47,7 +47,7 @@ public class WrappedRemoteChunkedIterator<E> implements IChunkedOrderedIterator<
   /** The #of {@link IRemoteChunk}s read from the source so far. */
   private long nchunks = 0L;
 
-  /**
+  /*
    * If the source will not return any _more_ chunks. There will still be data in the current chunk
    * if {@link #a} is non-null and {@link #index} is less than the #of elements in {@link #a}.
    */
@@ -104,7 +104,7 @@ public class WrappedRemoteChunkedIterator<E> implements IChunkedOrderedIterator<
     return keyOrder;
   }
 
-  /**
+  /*
    * Reads a chunk from the source.
    *
    * @throws IOException If there is an RMI problem.

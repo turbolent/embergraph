@@ -26,8 +26,8 @@ import org.embergraph.rdf.internal.IV;
 import org.embergraph.rdf.internal.VTE;
 import org.embergraph.rdf.internal.impl.TermId;
 
-/**
- * A factory for mock {@link IV}s.
+/*
+* A factory for mock {@link IV}s.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$
@@ -105,7 +105,7 @@ public class MockTermIdFactory {
     return newTermId(vte);
   }
 
-  /**
+  /*
    * {@link TermId} having the termId. This is useful when you want to control the distribution of
    * the {@link IV}s. There is no guarantee that the {@link TermIV} is unique.
    *

@@ -22,8 +22,8 @@ package org.embergraph.btree;
 
 import org.embergraph.htree.HTree;
 
-/**
- * Extended interface for tree-structured indices.
+/*
+* Extended interface for tree-structured indices.
  *
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  */
@@ -38,7 +38,7 @@ public interface ISimpleTreeIndexAccess extends ISimpleIndexAccess {
   /** The #of tuples in the tree. */
   long getEntryCount();
 
-  /**
+  /*
    * Return <code>true</code> iff the tree is balanced.
    *
    * <p>Note: Not all tree-structured indices are balanced. For example, the {@link BTree} is
@@ -47,7 +47,7 @@ public interface ISimpleTreeIndexAccess extends ISimpleIndexAccess {
    */
   boolean isBalanced();
 
-  /**
+  /*
    * The height of the tree. The height is the #of levels minus one. A tree with only a root leaf
    * has <code>height := 0</code>. A tree with a root node and one level of leaves under it has
    * <code>height := 1</code>.

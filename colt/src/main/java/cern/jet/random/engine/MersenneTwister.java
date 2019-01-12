@@ -9,8 +9,8 @@ CERN makes no representations about the suitability of this software for any pur
 It is provided "as is" without expressed or implied warranty.
 */
 import java.util.Date;
-/**
- * MersenneTwister (MT19937) is one of the strongest uniform pseudo-random number generators known
+/*
+* MersenneTwister (MT19937) is one of the strongest uniform pseudo-random number generators known
  * so far; at the same time it is quick. Produces uniformly distributed <tt>int</tt>'s and
  * <tt>long</tt>'s in the closed intervals <tt>[Integer.MIN_VALUE,Integer.MAX_VALUE]</tt> and
  * <tt>[Long.MIN_VALUE,Long.MAX_VALUE]</tt>, respectively, as well as <tt>float</tt>'s and
@@ -151,7 +151,7 @@ public class MersenneTwister extends RandomEngine {
   /* mag01[x] = x * MATRIX_A  for x=0,1 */
 
   public static final int DEFAULT_SEED = 4357;
-  /**
+  /*
    * Constructs and returns a random number generator with a default seed, which is a
    * <b>constant</b>. Thus using this constructor will yield generators that always produce exactly
    * the same sequence. This method is mainly intended to ease testing and debugging.
@@ -163,7 +163,7 @@ public class MersenneTwister extends RandomEngine {
   public MersenneTwister(int seed) {
     setSeed(seed);
   }
-  /**
+  /*
    * Constructs and returns a random number generator seeded with the given date.
    *
    * @param d typically <tt>new java.util.Date()</tt>
@@ -171,7 +171,7 @@ public class MersenneTwister extends RandomEngine {
   public MersenneTwister(Date d) {
     this((int) d.getTime());
   }
-  /**
+  /*
    * Returns a copy of the receiver; the copy will produce identical sequences. After this call has
    * returned, the copy and the receiver have equal but separate state.
    *
@@ -179,7 +179,7 @@ public class MersenneTwister extends RandomEngine {
    */
   public Object clone() {
     MersenneTwister clone = (MersenneTwister) super.clone();
-    clone.mt = (int[]) this.mt.clone();
+    clone.mt = this.mt.clone();
     return clone;
   }
   /** Generates N words at one time. */
@@ -227,7 +227,7 @@ public class MersenneTwister extends RandomEngine {
 
     this.mti = 0;
   }
-  /**
+  /*
    * Returns a 32 bit uniformly distributed random number in the closed interval
    * <tt>[Integer.MIN_VALUE,Integer.MAX_VALUE]</tt> (including <tt>Integer.MIN_VALUE</tt> and
    * <tt>Integer.MAX_VALUE</tt>).

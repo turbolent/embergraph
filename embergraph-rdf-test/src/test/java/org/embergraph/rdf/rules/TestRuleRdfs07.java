@@ -29,8 +29,8 @@ import org.embergraph.relation.rule.Rule;
 import org.openrdf.model.URI;
 import org.openrdf.model.vocabulary.RDFS;
 
-/**
- * Note: rdfs 2, 3, 7, and 9 use the same base class.
+/*
+* Note: rdfs 2, 3, 7, and 9 use the same base class.
  *
  * @see RuleRdfs02
  * @see RuleRdfs03
@@ -49,7 +49,7 @@ public class TestRuleRdfs07 extends AbstractRuleTestCase {
     super(name);
   }
 
-  /**
+  /*
    * Test of {@link RuleRdfs07} where the data satisifies the rule exactly once.
    *
    * <pre>
@@ -114,7 +114,7 @@ public class TestRuleRdfs07 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link RuleRdfs07} where the data satisifies the rule twice -- there are two matches in
    * the subquery for the same binding on "?a". Only one subquery is made since there is only one
    * match for the first triple pattern.
@@ -188,7 +188,7 @@ public class TestRuleRdfs07 extends AbstractRuleTestCase {
     }
   }
 
-  /**
+  /*
    * Test of {@link RuleRdfs07} where the data satisifies the rule twice -- there are two matches on
    * the first triple pattern that have the same subject. However, only one subquery is made since
    * both matches on the first triple pattern have the same subject.
