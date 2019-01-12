@@ -55,7 +55,7 @@ public class DestroyKBTask extends AbstractApiTask<Void> {
 
   /** @throws DatasetNotFoundException if the namespace does not exist. */
   @Override
-  public Void call() throws Exception {
+  public Void call() throws Exception, DatasetNotFoundException {
 
     boolean ok = false;
 

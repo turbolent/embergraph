@@ -167,9 +167,15 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
     //        if (tuple.getBTree() != btree)
     //            throw new IllegalArgumentException();
 
-    assert fromKey == null || btree.rangeCheck(fromKey, false /* allowUpperBound */);
+    if (fromKey != null) {
 
-    assert toKey == null || btree.rangeCheck(toKey, true /* allowUpperBound */);
+      assert btree.rangeCheck(fromKey, false /* allowUpperBound */);
+    }
+
+    if (toKey != null) {
+
+      assert btree.rangeCheck(toKey, true /* allowUpperBound */);
+    }
 
     if (fromKey != null && toKey != null) {
 
@@ -1050,23 +1056,23 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
    * @param <L> The generic type for the leaves of the B+Tree.
    * @param <E> The generic type for objects de-serialized from the values in the index.
    */
-  interface ICursorPosition<L extends Leaf, E> {
+  static interface ICursorPosition<L extends Leaf, E> {
 
     /** The cursor that owns this cursor position. */
-    ITupleCursor<E> getCursor();
+    public ITupleCursor<E> getCursor();
 
     /** The cursor used to navigate the leaves of the B+Tree. */
-    ILeafCursor<L> getLeafCursor();
+    public ILeafCursor<L> getLeafCursor();
 
     /** The index of the current tuple in the current leaf. */
-    int getIndex();
+    public int getIndex();
 
     /**
      * Return the key corresponding to the cursor position.
      *
      * @return The key.
      */
-    byte[] getKey();
+    public byte[] getKey();
 
     /**
      * Copy the data from the tuple at the {@link ICursorPosition} into the caller's buffer.
@@ -1080,7 +1086,7 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
      * @return The caller's buffer -or- <code>null</code> if the {@link ICursorPosition} is not on a
      *     visitable tuple.
      */
-    Tuple<E> get(Tuple<E> tuple);
+    public Tuple<E> get(Tuple<E> tuple);
 
     /**
      * Return <code>true</code> iff the tuple corresponding to the cursor position is visitable. A
@@ -1090,7 +1096,7 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
      *
      * @return <code>true</code> iff the cursor position corresponds to a visitable tuple.
      */
-    boolean isVisitableTuple();
+    public boolean isVisitableTuple();
 
     /**
      * Scan forward to the next visitable tuple from the current position.
@@ -1101,7 +1107,7 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
      *     successor of the cursor position exists but must not change the cursor position.
      * @return <code>true</code> if a visitable tuple was found.
      */
-    boolean forwardScan(boolean skipCurrent, boolean testOnly);
+    public boolean forwardScan(boolean skipCurrent, boolean testOnly);
 
     /**
      * Scan backward to the previous visitable tuple from the current position.
@@ -1112,7 +1118,7 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
      *     predecessor of the cursor position exists but must not change the cursor position.
      * @return <code>true</code> if a visitable tuple was found.
      */
-    boolean reverseScan(boolean skipCurrent, boolean testOnly);
+    public boolean reverseScan(boolean skipCurrent, boolean testOnly);
   }
 
   /**
@@ -1316,8 +1322,12 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
      */
     protected boolean isOnTuple() {
 
-      return index >= 0 && index < leafCursor.leaf().getKeyCount();
+      if (index >= 0 && index < leafCursor.leaf().getKeyCount()) {
 
+        return true;
+      }
+
+      return false;
     }
 
     public boolean isVisitableTuple() {
@@ -1474,8 +1484,10 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
           // key is LT then the optional inclusive lower bound.
           return false;
         }
-        // key is GTE the optional exclusive upper bound
-        return toKey == null || BytesUtil.compareBytes(key, toKey) < 0;
+        if (toKey != null && BytesUtil.compareBytes(key, toKey) >= 0) {
+          // key is GTE the optional exclusive upper bound
+          return false;
+        }
 
       } else {
 
@@ -1529,6 +1541,7 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
           }
         }
       }
+      return true;
     }
     /** Buffer used to range check the current key before it is copied into #kbuf. */
     private DataOutputBuffer tbuf;
@@ -1917,7 +1930,14 @@ public abstract class AbstractBTreeTupleCursor<I extends AbstractBTree, L extend
 
       final boolean tupleDeleted;
 
-      tupleDeleted = index < 0;
+      if (index < 0) {
+
+        tupleDeleted = true;
+
+      } else {
+
+        tupleDeleted = false;
+      }
 
       leafValid = true;
 

@@ -36,13 +36,13 @@ import org.embergraph.relation.accesspath.IBuffer;
  */
 public interface RemoteBuffer<E> extends Remote {
 
-  int size() throws IOException;
+  public int size() throws IOException;
 
-  boolean isEmpty() throws IOException;
+  public boolean isEmpty() throws IOException;
 
-  void add(E e) throws IOException;
+  public void add(E e) throws IOException;
 
-  long flush() throws IOException;
+  public long flush() throws IOException;
 
-  void reset() throws IOException;
+  public void reset() throws IOException;
 }

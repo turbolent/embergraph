@@ -538,7 +538,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * returns true. It will be removed when it has no free space remaining. It will be added back to
    * the free list when its free slots exceeds a configured threshold.
    */
-  private ArrayList<FixedAllocator>[] m_freeFixed;
+  private ArrayList<FixedAllocator> m_freeFixed[];
 
   //  /** lists of free blob allocators. */
   // private final ArrayList<BlobAllocator> m_freeBlobs;
@@ -812,7 +812,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       // No longer valid
       // RWStore.this.removeAddress(latchedAddr);
     }
-  }
+  };
 
   /**
    * The ALLOC_SIZES must be initialized from either the file or the properties associated with the
@@ -1638,7 +1638,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   private void syncMetaTransients() {
     if (m_metaTransientBits == null || m_metaTransientBits.length != m_metaBits.length) {
-      m_metaTransientBits = m_metaBits.clone();
+      m_metaTransientBits = (int[]) m_metaBits.clone();
     } else {
       System.arraycopy(m_metaBits, 0, m_metaTransientBits, 0, m_metaTransientBits.length);
     }
@@ -1752,7 +1752,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   }
 
   private FixedAllocator readAllocator(final long addr) throws IOException {
-    final byte[] buf = new byte[ALLOC_BLOCK_SIZE];
+    final byte buf[] = new byte[ALLOC_BLOCK_SIZE];
 
     FileChannelUtility.readAll(m_reopener, ByteBuffer.wrap(buf), addr);
 
@@ -1995,7 +1995,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     try {
       // must allow for checksum
       if (sze > (m_maxFixedAlloc - 4) || m_writeCacheService == null) {
-        final byte[] buf = new byte[sze + 4]; // 4 bytes for checksum
+        final byte buf[] = new byte[sze + 4]; // 4 bytes for checksum
 
         getData(rwaddr, buf, 0, sze + 4);
 
@@ -2039,7 +2039,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * <p>If it is a BlobAllocation, then the BlobAllocation address points to the address of the
    * BlobHeader record.
    */
-  public void getData(final long addr, final byte[] buf) {
+  public void getData(final long addr, final byte buf[]) {
 
     getData(addr, buf, 0, buf.length);
   }
@@ -2055,7 +2055,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   private final boolean m_readBlobsAsync;
 
-  public void getData(final long addr, final byte[] buf, final int offset, final int length) {
+  public void getData(final long addr, final byte buf[], final int offset, final int length) {
 
     assertOpen();
 
@@ -2993,7 +2993,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * <p>TODO: Instead of using PSOutputStream, manage allocations written to the WriteCacheService,
    * building BlobHeader as you go.
    */
-  public long alloc(final byte[] buf, final int size, final IAllocationContext context) {
+  public long alloc(final byte buf[], final int size, final IAllocationContext context) {
 
     m_allocationWriteLock.lock();
     try {
@@ -3314,7 +3314,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * @throws IOException
    */
   private void writeMetaBits() throws IOException {
-    final byte[] buf = genMetabitsData();
+    final byte buf[] = genMetabitsData();
 
     /*
      * Note: this address is set by commit() prior to calling
@@ -3355,7 +3355,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     // the cDefaultMetaBitsSize is also written since this can now be
     //  parameterized.
     final int len = 4 * (cMetaHdrFields + m_allocSizes.length + m_metaBits.length);
-    final byte[] buf = new byte[len];
+    final byte buf[] = new byte[len];
 
     final FixedOutputStream str = new FixedOutputStream(buf);
     try {
@@ -3515,7 +3515,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
           // Call immediateFree - no need to defer freeof metaBits, this
           //  has to stop somewhere!
           // No more allocations must be made
-          immediateFree(m_metaBitsAddr, oldMetaBitsSize);
+          immediateFree((int) m_metaBitsAddr, oldMetaBitsSize);
         }
 
         m_metaBitsAddr = nmbaddr;
@@ -3549,7 +3549,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       if (log.isDebugEnabled()) {
         final long mbaddr;
         if (m_metaBitsAddr < 0) {
-          mbaddr = physicalAddress(m_metaBitsAddr);
+          mbaddr = physicalAddress((int) m_metaBitsAddr);
         } else {
           mbaddr = convertAddr(-m_metaBitsAddr); // maximum 48 bit address range
         }
@@ -3919,12 +3919,10 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   int cSmallSlotWasteCheckAllocators = 100; // @see from Options#SMALL_SLOT_WASTE_CHECK_ALLOCATORS
   float cSmallSlotHighWaste = 0.2f; // @see from Options#SMALL_SLOT_HIGH_WASTE
 
-  /**
-   * Each "metaBit" is a file region
-   */
-  private int[] m_metaBits;
+  /** Each "metaBit" is a file region */
+  private int m_metaBits[];
 
-  private int[] m_metaTransientBits;
+  private int m_metaTransientBits[];
   // volatile private int m_metaStartAddr;
   private volatile int m_metaBitsAddr;
   // @todo javadoc please.
@@ -4293,7 +4291,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     final int index = bitnum / 32;
     final int bit = bitnum % 32;
 
-    bits[index] |= 1 << bit;
+    bits[(int) index] |= 1 << bit;
   }
 
   static boolean tstBit(final int[] bits, final int bitnum) {
@@ -4304,7 +4302,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       throw new IllegalArgumentException(
           "Accessing bit index: " + index + " of array length: " + bits.length);
 
-    return (bits[index] & 1 << bit) != 0;
+    return (bits[(int) index] & 1 << bit) != 0;
   }
 
   static void clrBit(final int[] bits, final int bitnum) {
@@ -4583,7 +4581,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     long ret = 0;
 
     if (m_metaBitsAddr < 0) {
-      ret = physicalAddress(m_metaBitsAddr);
+      ret = physicalAddress((int) m_metaBitsAddr);
     } else {
       // long ret = physicalAddress((int) m_metaBitsAddr);
       ret = convertAddr(-m_metaBitsAddr); // maximum 48 bit address range
@@ -4612,7 +4610,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   /** @return the address of the metaBits */
   public long getMetaBitsStoreAddress() {
     if (m_metaBitsAddr < 0) {
-      return physicalAddress(m_metaBitsAddr);
+      return physicalAddress((int) m_metaBitsAddr);
     } else {
       return convertAddr(-m_metaBitsAddr); // maximum 48 bit address range
     }
@@ -4757,7 +4755,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   //    }
 
   public Allocator getAllocator(final int i) {
-    return m_allocs.get(i);
+    return (Allocator) m_allocs.get(i);
   }
 
   /** Simple implementation for a {@link RandomAccessFile} to handle the direct backing store. */
@@ -4776,7 +4774,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
 
     private volatile AsynchronousFileChannel asyncChannel;
 
-    private int asyncChannelOpenCount = 0;
+    private int asyncChannelOpenCount = 0;;
 
     public ReopenFileChannel(final File file, final RandomAccessFile raf, final boolean readOnly)
         throws IOException {
@@ -4960,7 +4958,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
       final Iterator<FixedAllocator> allocs = m_allocs.iterator();
       while (allocs.hasNext()) {
         final FixedAllocator alloc = allocs.next();
-        allocated += alloc.getFileStorage();
+        allocated += ((FixedAllocator) alloc).getFileStorage();
       }
       return allocated;
     } finally {
@@ -5351,7 +5349,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    */
   static class ContextAllocation {
     private final RWStore m_store;
-    private final ArrayList<FixedAllocator>[] m_freeFixed;
+    private final ArrayList<FixedAllocator> m_freeFixed[];
 
     private final ArrayList<FixedAllocator> m_allFixed;
 
@@ -5404,7 +5402,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
      * association.
      */
     void release() {
-      final ArrayList<FixedAllocator>[] freeFixed =
+      final ArrayList<FixedAllocator> freeFixed[] =
           m_parent != null ? m_parent.m_freeFixed : m_store.m_freeFixed;
 
       final IAllocationContext pcontext = m_parent == null ? null : m_parent.m_context;
@@ -5443,7 +5441,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
     }
 
     void abort() {
-      final ArrayList<FixedAllocator>[] freeFixed =
+      final ArrayList<FixedAllocator> freeFixed[] =
           m_parent != null ? m_parent.m_freeFixed : m_store.m_freeFixed;
 
       final IAllocationContext pcontext = m_parent == null ? null : m_parent.m_context;
@@ -7099,7 +7097,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
    * DumpJournal.
    */
   public static class DeleteBlockStats {
-    private int m_commitRecords = 0;
+    private int m_commitRecords = 0;;
     private int m_addresses = 0;
     private int m_blobs = 0;
     private int m_badAddresses = 0;
@@ -7723,7 +7721,7 @@ public class RWStore implements IStore, IBufferedWriter, IBackingReader {
   public void snapshotMetabits(final ISnapshotData tm) throws IOException {
     final long mba;
     if (m_metaBitsAddr < 0) {
-      mba = physicalAddress(m_metaBitsAddr);
+      mba = physicalAddress((int) m_metaBitsAddr);
     } else {
       // long ret = physicalAddress((int) m_metaBitsAddr);
       mba = convertAddr(-m_metaBitsAddr); // maximum 48 bit address range

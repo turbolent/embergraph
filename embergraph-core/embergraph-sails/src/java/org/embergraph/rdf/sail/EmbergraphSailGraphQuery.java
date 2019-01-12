@@ -87,7 +87,7 @@ public class EmbergraphSailGraphQuery extends SailGraphQuery implements Embergra
 
   public QueryRoot optimize() throws QueryEvaluationException {
 
-    return optimize(null);
+    return optimize((BindingsClause) null);
   }
 
   public QueryRoot optimize(final BindingsClause bc) throws QueryEvaluationException {

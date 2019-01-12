@@ -29,5 +29,5 @@ package org.embergraph.counters;
 public interface ICounterSetAccess {
 
   /** Return performance counters. */
-  CounterSet getCounters();
+  public CounterSet getCounters();
 }

@@ -516,7 +516,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
     assertEquals("ntuples", 5, btree.getEntryCount());
 
     // The separator key is (30).
-    assertEquals(TestKeyBuilder.asSortKey(30), btree.getRoot().getKeys().get(0));
+    assertEquals(TestKeyBuilder.asSortKey(30), ((Node) btree.getRoot()).getKeys().get(0));
 
     // Verify the expected keys in the 1st leaf.
     AbstractBTreeTestCase.assertKeys(
@@ -628,7 +628,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
        * Verify that the separatorKey in the parent is the first tuple we
        * expect to find in the 2nd leaf.
        */
-      assertEquals(TestKeyBuilder.asSortKey(30), btree.getRoot().getKeys().get(0));
+      assertEquals(TestKeyBuilder.asSortKey(30), ((Node) btree.getRoot()).getKeys().get(0));
 
       /*
        * Modify the B+Tree such that (30) is still the separatorKey for
@@ -640,7 +640,7 @@ public abstract class AbstractTupleCursorTestCase extends TestCase2 {
       // Remove the first tuple in the 2nd leaf.
       btree.remove(30);
       // The separator key has not been changed.
-      assertEquals(btree.getRoot().getKeys().get(0), TestKeyBuilder.asSortKey(30));
+      assertEquals(((Node) btree.getRoot()).getKeys().get(0), TestKeyBuilder.asSortKey(30));
       // The #of leaves has not been changed.
       assertEquals(2, btree.getLeafCount());
       // Verify the expected keys in the 2nd leaf.

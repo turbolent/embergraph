@@ -200,8 +200,8 @@ public class TestBind extends TestCase2 {
     final IConstant<?> val1 = new Constant(iv1);
     final IConstant<?> val2 = new Constant(iv2);
     final IConstant<?> val3 = new Constant(iv3);
-    iv1.setValue(lit);
-    iv3.setValue(lit);
+    iv1.setValue((EmbergraphValue) lit);
+    iv3.setValue((EmbergraphValue) lit);
 
     final ListBindingSet expected = new ListBindingSet();
     expected.set(x, val3);
@@ -242,8 +242,8 @@ public class TestBind extends TestCase2 {
     final IConstant<?> val1 = new Constant(iv1);
     final IConstant<?> val2 = new Constant(iv2);
     final IConstant<?> val3 = new Constant(iv3);
-    iv2.setValue(lit);
-    iv3.setValue(lit);
+    iv2.setValue((EmbergraphValue) lit);
+    iv3.setValue((EmbergraphValue) lit);
 
     final ListBindingSet expected = new ListBindingSet();
     expected.set(x, val3);
@@ -284,8 +284,8 @@ public class TestBind extends TestCase2 {
     final IConstant<?> val1 = new Constant(iv1);
     final IConstant<?> val2 = new Constant(iv2);
     final IConstant<?> val3 = new Constant(iv3);
-    iv2.setValue(lit);
-    iv3.setValue(lit);
+    iv2.setValue((EmbergraphValue) lit);
+    iv3.setValue((EmbergraphValue) lit);
 
     final ListBindingSet expected = new ListBindingSet();
     expected.set(x, val3);

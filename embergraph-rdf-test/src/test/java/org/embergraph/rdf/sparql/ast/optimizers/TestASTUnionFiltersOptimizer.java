@@ -113,14 +113,16 @@ public class TestASTUnionFiltersOptimizer extends AbstractOptimizerTestCase {
                   new FunctionNode(
                       FunctionRegistry.OR,
                       null /*scalarValues*/,
-                      new FunctionNode(
-                          FunctionRegistry.SAME_TERM,
-                          null /*scalarValues*/,
-                          new VarNode("type"), new ConstantNode(t1)),
-                      new FunctionNode(
-                          FunctionRegistry.SAME_TERM,
-                          null /*scalarValues*/,
-                          new VarNode("type"), new ConstantNode(t2))))));
+                      new ValueExpressionNode[] {
+                        new FunctionNode(
+                            FunctionRegistry.SAME_TERM,
+                            null /*scalarValues*/,
+                            new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t1)}),
+                        new FunctionNode(
+                            FunctionRegistry.SAME_TERM,
+                            null /*scalarValues*/,
+                            new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t2)})
+                      }))));
 
       given.setProjection(projection);
       given.setWhereClause(where);
@@ -149,14 +151,16 @@ public class TestASTUnionFiltersOptimizer extends AbstractOptimizerTestCase {
               new FunctionNode(
                   FunctionRegistry.OR,
                   null /*scalarValues*/,
-                  new FunctionNode(
-                      FunctionRegistry.SAME_TERM,
-                      null /*scalarValues*/,
-                      new VarNode("type"), new ConstantNode(t1)),
-                  new FunctionNode(
-                      FunctionRegistry.SAME_TERM,
-                      null /*scalarValues*/,
-                      new VarNode("type"), new ConstantNode(t2)))));
+                  new ValueExpressionNode[] {
+                    new FunctionNode(
+                        FunctionRegistry.SAME_TERM,
+                        null /*scalarValues*/,
+                        new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t1)}),
+                    new FunctionNode(
+                        FunctionRegistry.SAME_TERM,
+                        null /*scalarValues*/,
+                        new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t2)})
+                  })));
 
       final JoinGroupNode right = new JoinGroupNode();
       right.addChild(
@@ -170,14 +174,16 @@ public class TestASTUnionFiltersOptimizer extends AbstractOptimizerTestCase {
               new FunctionNode(
                   FunctionRegistry.OR,
                   null /*scalarValues*/,
-                  new FunctionNode(
-                      FunctionRegistry.SAME_TERM,
-                      null /*scalarValues*/,
-                      new VarNode("type"), new ConstantNode(t1)),
-                  new FunctionNode(
-                      FunctionRegistry.SAME_TERM,
-                      null /*scalarValues*/,
-                      new VarNode("type"), new ConstantNode(t2)))));
+                  new ValueExpressionNode[] {
+                    new FunctionNode(
+                        FunctionRegistry.SAME_TERM,
+                        null /*scalarValues*/,
+                        new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t1)}),
+                    new FunctionNode(
+                        FunctionRegistry.SAME_TERM,
+                        null /*scalarValues*/,
+                        new ValueExpressionNode[] {new VarNode("type"), new ConstantNode(t2)})
+                  })));
 
       union.addChild(left);
       union.addChild(right);

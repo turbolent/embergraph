@@ -23,5 +23,5 @@ public interface IGangliaMessageHandler {
    *
    * @param msg The message.
    */
-  void accept(IGangliaMessage msg);
+  public void accept(IGangliaMessage msg);
 }

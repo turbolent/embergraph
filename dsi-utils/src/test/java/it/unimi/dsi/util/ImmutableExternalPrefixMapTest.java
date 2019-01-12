@@ -52,7 +52,7 @@ public class ImmutableExternalPrefixMapTest extends TestCase {
     final Iterator<CharSequence> k = d.iterator();
     for (final Iterator<String> i = p.iterator(); i.hasNext(); ) {
       assertEquals(i.hasNext(), k.hasNext());
-      assertEquals(i.next(), k.next().toString());
+      assertEquals(i.next().toString(), k.next().toString());
     }
 
     // Test negatives

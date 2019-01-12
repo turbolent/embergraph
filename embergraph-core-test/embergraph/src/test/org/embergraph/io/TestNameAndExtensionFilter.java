@@ -152,7 +152,7 @@ public class TestNameAndExtensionFilter extends TestCase {
         v.add(logFile);
       }
 
-      final File[] expectedFiles = v.toArray(new File[] {});
+      final File[] expectedFiles = (File[]) v.toArray(new File[] {});
 
       assertSameFiles(expectedFiles, logFilter.getFiles());
 

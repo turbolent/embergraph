@@ -652,7 +652,7 @@ public class UnisolatedReadWriteIndex implements IIndex, ILinearList, IReadWrite
   public ScanCostReport estimateCost(final DiskCostModel diskCostModel, final long rangeCount) {
 
     // BTree is its own statistics view.
-    final IBTreeStatistics stats = ndx;
+    final IBTreeStatistics stats = (BTree) ndx;
 
     // Estimate cost based on random seek per node/leaf.
     final double cost =

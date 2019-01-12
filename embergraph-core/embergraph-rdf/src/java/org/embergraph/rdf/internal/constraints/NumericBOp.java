@@ -48,7 +48,7 @@ public class NumericBOp extends IVValueExpression<IV> implements INeedsMateriali
     ABS,
     ROUND,
     CEIL,
-    FLOOR
+    FLOOR;
   }
 
   @Override

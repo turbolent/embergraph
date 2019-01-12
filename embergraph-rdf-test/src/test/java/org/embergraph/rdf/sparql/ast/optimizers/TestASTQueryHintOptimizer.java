@@ -201,8 +201,8 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     FunctionRegistry.SAMPLE,
                     Collections.singletonMap(
                         AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
-                    new VarNode("_var9"))));
+                        (Object) Boolean.FALSE) /* scalarValues */,
+                    new ValueExpressionNode[] {new VarNode("_var9")})));
         projection.addProjectionVar(new VarNode("_var2"));
         projection.addProjectionVar(new VarNode("_var3"));
 
@@ -311,8 +311,8 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                   FunctionRegistry.SAMPLE,
                   Collections.singletonMap(
                       AggregateBase.Annotations.DISTINCT,
-                      Boolean.FALSE) /* scalarValues */,
-                  new VarNode("_var9"))));
+                      (Object) Boolean.FALSE) /* scalarValues */,
+                  new ValueExpressionNode[] {new VarNode("_var9")})));
       projection.addProjectionVar(new VarNode("_var2"));
       projection.addProjectionVar(new VarNode("_var3"));
 
@@ -438,8 +438,8 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
                         AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
-                    new VarNode("_var3"))));
+                        (Object) Boolean.FALSE) /* scalarValues */,
+                    new ValueExpressionNode[] {new VarNode("_var3")})));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
         given.setWhereClause(whereClause);
@@ -510,8 +510,8 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
                         AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
-                    new VarNode("_var3"))));
+                        (Object) Boolean.FALSE) /* scalarValues */,
+                    new ValueExpressionNode[] {new VarNode("_var3")})));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
         expected.setWhereClause(whereClause);
@@ -610,8 +610,8 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
                         AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
-                    new VarNode("_var3"))));
+                        (Object) Boolean.FALSE) /* scalarValues */,
+                    new ValueExpressionNode[] {new VarNode("_var3")})));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
         given.setWhereClause(whereClause);
@@ -657,8 +657,8 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
                         AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
-                    new VarNode("_var3"))));
+                        (Object) Boolean.FALSE) /* scalarValues */,
+                    new ValueExpressionNode[] {new VarNode("_var3")})));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
         expected.setWhereClause(whereClause);
@@ -759,8 +759,8 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
                         AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
-                    new VarNode("_var3"))));
+                        (Object) Boolean.FALSE) /* scalarValues */,
+                    new ValueExpressionNode[] {new VarNode("_var3")})));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
         given.setWhereClause(whereClause);
@@ -822,8 +822,8 @@ public class TestASTQueryHintOptimizer extends AbstractASTEvaluationTestCase {
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
                         AggregateBase.Annotations.DISTINCT,
-                        Boolean.FALSE) /* scalarValues */,
-                    new VarNode("_var3"))));
+                        (Object) Boolean.FALSE) /* scalarValues */,
+                    new ValueExpressionNode[] {new VarNode("_var3")})));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
         expected.setWhereClause(whereClause);

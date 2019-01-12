@@ -84,10 +84,10 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
     if (p2 == null) throw new IllegalArgumentException();
 
     final Set<IVariable<?>> set1 =
-        getSpannedVariables(p1, false /* filters */, new LinkedHashSet<IVariable<?>>());
+        getSpannedVariables((BOp) p1, false /* filters */, new LinkedHashSet<IVariable<?>>());
 
     final Set<IVariable<?>> set2 =
-        getSpannedVariables(p2, false /* filters */, new LinkedHashSet<IVariable<?>>());
+        getSpannedVariables((BOp) p2, false /* filters */, new LinkedHashSet<IVariable<?>>());
 
     // The difference gives us the shared variables.
     set1.retainAll(set2);
@@ -166,7 +166,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
     {
       for (IJoinNode p : path) {
 
-        getSpannedVariables(p, false /* filters */, knownBound);
+        getSpannedVariables((BOp) p, false /* filters */, knownBound);
       }
     }
 
@@ -176,7 +176,7 @@ public abstract class StaticAnalysis_CanJoin extends StaticAnalysisBase {
      */
     {
       final Set<IVariable<?>> vset =
-          getSpannedVariables(vertex, new LinkedHashSet<IVariable<?>>());
+          getSpannedVariables((BOp) vertex, new LinkedHashSet<IVariable<?>>());
 
       vset.retainAll(knownBound);
 

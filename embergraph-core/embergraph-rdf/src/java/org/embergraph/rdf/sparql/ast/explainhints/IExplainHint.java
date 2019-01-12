@@ -34,38 +34,38 @@ import org.embergraph.bop.BOp;
 public interface IExplainHint {
 
   /** Enum datatype specifing the severity of a given explain hint */
-  enum ExplainHintSeverity {
+  public enum ExplainHintSeverity {
     SEVERE, /* could well/likely be a severe problem */
     MODERATE, /* could be a problem, but not critical */
     INFO /* informative explain hint */
   }
 
   /** Enum datatype categorizing an explain hint */
-  enum ExplainHintCategory {
+  public enum ExplainHintCategory {
     CORRECTNESS, /* hint regarding the correctness of a query construct */
     PERFORMANCE, /* hint indicating performance related issues */
     OTHER /* anything unclassified */
   }
 
   /** @return textual representation of the explain hint type */
-  String getExplainHintType();
+  public String getExplainHintType();
 
   /** @return severity of an explain hint */
-  ExplainHintSeverity getExplainHintSeverity();
+  public ExplainHintSeverity getExplainHintSeverity();
 
   /** @return category of an explain hint */
-  ExplainHintCategory getExplainHintCategory();
+  public ExplainHintCategory getExplainHintCategory();
 
   /** @return a detailed description, representing the content of the hint */
-  String getExplainHintDescription();
+  public String getExplainHintDescription();
 
   /**
    * @return the node affected by the explain node; note that we attach this node explicitly, since
    *     the node to which the hint is attached is not always the affected node, for instance if the
    *     affected node has been optimized away
    */
-  BOp getExplainHintNode();
+  public BOp getExplainHintNode();
 
   /** @return a link to an external help page. */
-  String getHelpLink();
+  public String getHelpLink();
 }

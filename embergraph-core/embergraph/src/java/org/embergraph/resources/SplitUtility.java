@@ -217,7 +217,7 @@ public class SplitUtility {
 
       // right separator for the last split.
       final byte[] rightSeparator =
-          splits[splits.length - 1].pmd.getRightSeparatorKey();
+          ((LocalPartitionMetadata) splits[splits.length - 1].pmd).getRightSeparatorKey();
 
       if (rightSeparator == null) {
 
@@ -571,7 +571,7 @@ public class SplitUtility {
 
       final String name = getOnlyResource();
 
-      final ILocalBTreeView src = getIndex(name);
+      final ILocalBTreeView src = (ILocalBTreeView) getIndex(name);
 
       if (log.isInfoEnabled()) {
 
@@ -781,6 +781,7 @@ public class SplitUtility {
 
         assert splitAt > low && splitAt <= high
             : "low=" + low + ", high=" + high + ", splitAt=" + splitAt;
+        ;
 
         if (splitHandler != null) {
 

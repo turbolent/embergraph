@@ -53,7 +53,7 @@ public enum ForceEnum {
 
   private String name;
 
-  ForceEnum(String name) {
+  private ForceEnum(String name) {
     this.name = name;
   }
 

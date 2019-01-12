@@ -15,9 +15,9 @@ public class QuadsOperationInTriplesModeException extends RuntimeException {
 
   public QuadsOperationInTriplesModeException() {
     super();
-  }
+  };
 
   public QuadsOperationInTriplesModeException(String msg) {
     super(msg);
-  }
+  };
 }

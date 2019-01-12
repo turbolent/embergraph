@@ -10,8 +10,6 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-import cern.jet.math.Functions;
-
 /**
  * For a symmetric, positive definite matrix <tt>A</tt>, the Cholesky decomposition is a lower
  * triangular matrix <tt>L</tt> so that <tt>A = L*L'</tt>; If the matrix is not symmetric or
@@ -176,17 +174,17 @@ public class CholeskyDecomposition implements java.io.Serializable {
     for (int k = 0; k < n; k++) {
       for (int i = k + 1; i < n; i++) {
         // X[i,j] -= X[k,j]*L[i,k]
-        Xrows[i].assign(Xrows[k], Functions.minusMult(L.getQuick(i, k)));
+        Xrows[i].assign(Xrows[k], F.minusMult(L.getQuick(i, k)));
       }
-      Xrows[k].assign(Functions.div(L.getQuick(k, k)));
+      Xrows[k].assign(F.div(L.getQuick(k, k)));
     }
 
     // Solve L'*X = Y;
     for (int k = n - 1; k >= 0; k--) {
-      Xrows[k].assign(Functions.div(L.getQuick(k, k)));
+      Xrows[k].assign(F.div(L.getQuick(k, k)));
       for (int i = 0; i < k; i++) {
         // X[i,j] -= X[k,j]*L[k,i]
-        Xrows[i].assign(Xrows[k], Functions.minusMult(L.getQuick(k, i)));
+        Xrows[i].assign(Xrows[k], F.minusMult(L.getQuick(k, i)));
       }
     }
     return X;
@@ -211,14 +209,14 @@ public class CholeskyDecomposition implements java.io.Serializable {
 
     buf.append("isSymmetricPositiveDefinite = ");
     try {
-      buf.append(this.isSymmetricPositiveDefinite());
+      buf.append(String.valueOf(this.isSymmetricPositiveDefinite()));
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
 
     buf.append("\n\nL = ");
     try {
-      buf.append(this.getL());
+      buf.append(String.valueOf(this.getL()));
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }
@@ -226,7 +224,7 @@ public class CholeskyDecomposition implements java.io.Serializable {
     buf.append("\n\ninverse(A) = ");
     try {
       buf.append(
-          this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(L.rows())));
+          String.valueOf(this.solve(cern.colt.matrix.DoubleFactory2D.dense.identity(L.rows()))));
     } catch (IllegalArgumentException exc) {
       buf.append(unknown + exc.getMessage());
     }

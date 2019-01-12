@@ -70,7 +70,7 @@ public class XSDIntegerIV<V extends EmbergraphLiteral> extends NumericIV<V, BigI
 
   @Override
   public boolean booleanValue() {
-    return !value.equals(BigInteger.ZERO);
+    return value.equals(BigInteger.ZERO) ? false : true;
   }
 
   @Override

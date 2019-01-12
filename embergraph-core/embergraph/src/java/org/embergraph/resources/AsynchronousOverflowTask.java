@@ -1082,14 +1082,15 @@ public class AsynchronousOverflowTask implements Callable<Object> {
         final ResultBuffer resultBuffer;
         try {
           resultBuffer =
-              resourceManager
-                  .getFederation()
-                  .getMetadataService()
-                  .submit(
-                      TimestampUtility.asHistoricalRead(lastCommitTime),
-                      MetadataService.getMetadataIndexName(scaleOutIndexName),
-                      op)
-                  .get();
+              (ResultBuffer)
+                  resourceManager
+                      .getFederation()
+                      .getMetadataService()
+                      .submit(
+                          TimestampUtility.asHistoricalRead(lastCommitTime),
+                          MetadataService.getMetadataIndexName(scaleOutIndexName),
+                          op)
+                      .get();
         } catch (Exception e) {
 
           log.error("Could not locate rightSiblings: index=" + scaleOutIndexName, e);
@@ -3173,7 +3174,7 @@ public class AsynchronousOverflowTask implements Callable<Object> {
       return true;
     }
 
-    return !resourceManager.isRunning()
+    if (!resourceManager.isRunning()
         || !resourceManager.getConcurrencyManager().isOpen()
         || InnerCause.isInnerCause(t, InterruptedException.class)
         // Note: cancelled indicates that overflow was timed out.
@@ -3181,8 +3182,12 @@ public class AsynchronousOverflowTask implements Callable<Object> {
         //                        CancellationException.class)
         || InnerCause.isInnerCause(t, ClosedByInterruptException.class)
         || InnerCause.isInnerCause(t, ClosedChannelException.class)
-        || InnerCause.isInnerCause(t, AsynchronousCloseException.class);
+        || InnerCause.isInnerCause(t, AsynchronousCloseException.class)) {
 
+      return true;
+    }
+
+    return false;
   }
 
   @SuppressWarnings("unchecked")

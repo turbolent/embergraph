@@ -245,7 +245,7 @@ public class SegmentedInputStream extends MeasurableInputStream {
     return r;
   }
 
-  public int read(final byte[] b, final int off, final int len) throws IOException {
+  public int read(final byte b[], final int off, final int len) throws IOException {
     ensureNotClosed();
     ByteArrays.ensureOffsetLength(b, off, len);
     if (len == 0) return 0; // Requested by InputStream.

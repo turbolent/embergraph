@@ -101,7 +101,7 @@ public abstract class AbstractPendingSetMasterTask<
 
     this.fed = fed;
 
-    this.masterProxy = fed.getProxy(this, true /* enableDGC */);
+    this.masterProxy = (INotifyOutcome<E, L>) fed.getProxy(this, true /* enableDGC */);
   }
 
   protected final boolean nothingPending() {

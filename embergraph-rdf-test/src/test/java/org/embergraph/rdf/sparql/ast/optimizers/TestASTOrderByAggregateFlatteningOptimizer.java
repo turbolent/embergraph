@@ -163,8 +163,8 @@ public class TestASTOrderByAggregateFlatteningOptimizer extends AbstractASTEvalu
 
     final IValueExpression<IV> expr2 = ((Bind) assignments[1]).getExpr();
     assertTrue(expr2 instanceof COUNT);
-    assertTrue(expr2.get(0) instanceof Var);
-    assertEquals("s", ((Var) expr2.get(0)).getName());
+    assertTrue(((COUNT) expr2).get(0) instanceof Var);
+    assertEquals("s", ((Var) ((COUNT) expr2).get(0)).getName());
 
     // Check
     // group by VarNode(o)
@@ -351,8 +351,8 @@ public class TestASTOrderByAggregateFlatteningOptimizer extends AbstractASTEvalu
 
     final IValueExpression<IV> expr3 = ((Bind) assignments[2]).getExpr();
     assertTrue(expr3 instanceof MAX);
-    assertTrue(expr3.get(0) instanceof Var);
-    assertEquals("z", ((Var) expr3.get(0)).getName());
+    assertTrue(((MAX) expr3).get(0) instanceof Var);
+    assertEquals("z", ((Var) ((MAX) expr3).get(0)).getName());
 
     //       Check ( org.embergraph.rdf.sparql.ast.FunctionNode(VarNode(z))[
     // FunctionNode.scalarVals=null,
@@ -371,8 +371,8 @@ public class TestASTOrderByAggregateFlatteningOptimizer extends AbstractASTEvalu
 
     final IValueExpression<IV> expr4 = ((Bind) assignments[3]).getExpr();
     assertTrue(expr4 instanceof COUNT);
-    assertTrue(expr4.get(0) instanceof Var);
-    assertEquals("z", ((Var) expr4.get(0)).getName());
+    assertTrue(((COUNT) expr4).get(0) instanceof Var);
+    assertEquals("z", ((Var) ((COUNT) expr4).get(0)).getName());
 
     // Check
     // group by VarNode(x) VarNode(y)

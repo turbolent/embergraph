@@ -110,7 +110,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -213,7 +213,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -304,7 +304,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
     try {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -392,7 +392,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
     try {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
       cxn.setAutoCommit(false);
 
       final InMemChangeLog changeLog = new InMemChangeLog();
@@ -507,7 +507,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -618,7 +618,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
     try {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 
@@ -743,7 +743,7 @@ public class TestChangeSets extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
       cxn.setAutoCommit(false);
       final AbstractTripleStore tripleStore = cxn.getTripleStore();
 

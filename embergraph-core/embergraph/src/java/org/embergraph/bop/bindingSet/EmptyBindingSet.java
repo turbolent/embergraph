@@ -108,8 +108,9 @@ public final class EmptyBindingSet implements IBindingSet, Serializable {
 
     final IBindingSet o = (IBindingSet) t;
 
-    return o.size() == 0;
+    if (o.size() == 0) return true;
 
+    return false;
   }
 
   /** The hash code of an empty binding set is always zero. */

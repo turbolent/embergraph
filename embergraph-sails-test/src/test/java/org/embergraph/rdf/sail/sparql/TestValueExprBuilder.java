@@ -101,9 +101,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.ADD,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"), new VarNode("o"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("o")
+                  })));
       expected.setProjection(projection);
     }
 
@@ -132,9 +133,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.LT,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"), new VarNode("o"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("o")
+                  })));
       expected.setProjection(projection);
     }
 
@@ -264,9 +266,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.COUNT,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s")
+                  })));
       expected.setProjection(projection);
     }
 
@@ -296,10 +299,11 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.COUNT,
                   Collections.singletonMap(
-                      AggregateBase.Annotations.DISTINCT, Boolean.TRUE) // scalar
+                      AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE), // scalar
                   // values.
-                  // args
-                  new VarNode("s"))));
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s")
+                  })));
       expected.setProjection(projection);
     }
 
@@ -328,9 +332,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.COUNT,
-                  null // scalarValues
-                  // args
-                  new VarNode("*"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("*")
+                  })));
       expected.setProjection(projection);
     }
 
@@ -360,10 +365,11 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new FunctionNode(
                   FunctionRegistry.COUNT,
                   Collections.singletonMap(
-                      AggregateBase.Annotations.DISTINCT, Boolean.TRUE) // scalar
+                      AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE), // scalar
                   // values.
-                  // args
-                  new VarNode("*"))));
+                  new ValueExpressionNode[] { // args
+                    new VarNode("*")
+                  })));
       expected.setProjection(projection);
     }
 
@@ -392,9 +398,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.ADD,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"), new VarNode("o"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("o")
+                  })));
       expected.setProjection(projection);
     }
 
@@ -422,9 +429,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.COALESCE,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"), new VarNode("p"), new VarNode("o"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("p"), new VarNode("o")
+                  })));
       expected.setProjection(projection);
     }
 
@@ -453,9 +461,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.IF,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"), new VarNode("p"), new VarNode("o"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("p"), new VarNode("o")
+                  })));
       expected.setProjection(projection);
     }
 
@@ -483,9 +492,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.REGEX,
-                  null // scalarValues
-                  // args
-                  new VarNode("o"), new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("o"), new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
+                  })));
       expected.setProjection(projection);
     }
 
@@ -514,11 +524,12 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.REGEX,
-                  null // scalarValues
-                  // args
-                  new VarNode("o"),
-                  new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
-                  new ConstantNode(makeIV(valueFactory.createLiteral("i"))))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("o"),
+                    new ConstantNode(makeIV(valueFactory.createLiteral("^ali"))),
+                    new ConstantNode(makeIV(valueFactory.createLiteral("i"))),
+                  })));
       expected.setProjection(projection);
     }
 
@@ -549,9 +560,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.IN,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"),
+                  })));
       expected.setProjection(projection);
     }
 
@@ -582,9 +594,10 @@ public class TestValueExprBuilder extends AbstractEmbergraphExprBuilderTestCase 
               new VarNode("x"),
               new FunctionNode(
                   FunctionRegistry.IN,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"), new VarNode("p"), new VarNode("o"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), new VarNode("p"), new VarNode("o")
+                  })));
       expected.setProjection(projection);
     }
 

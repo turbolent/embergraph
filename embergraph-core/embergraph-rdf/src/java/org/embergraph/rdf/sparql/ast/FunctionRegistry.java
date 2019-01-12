@@ -287,7 +287,7 @@ public class FunctionRegistry {
 
             checkArgs(args, ValueExpressionNode.class);
 
-            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
+            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -306,7 +306,7 @@ public class FunctionRegistry {
 
             checkArgs(args, ValueExpressionNode.class);
 
-            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
+            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -343,7 +343,7 @@ public class FunctionRegistry {
 
             checkArgs(args, ValueExpressionNode.class);
 
-            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
+            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -655,7 +655,7 @@ public class FunctionRegistry {
               final ValueExpressionNode... args) {
 
             checkArgs(args, ValueExpressionNode.class);
-            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
+            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -672,7 +672,7 @@ public class FunctionRegistry {
               final ValueExpressionNode... args) {
 
             checkArgs(args, ValueExpressionNode.class);
-            IValueExpression<? extends IV>[] expressions = new IValueExpression[args.length];
+            IValueExpression<? extends IV> expressions[] = new IValueExpression[args.length];
             for (int i = 0; i < args.length; i++) {
               expressions[i] = AST2BOpUtility.toVE(context, globals, args[i]);
             }
@@ -1340,7 +1340,7 @@ public class FunctionRegistry {
   }
 
   /** An interface for creating {@link IValueExpression}s from a function URI and its arguments. */
-  public interface Factory {
+  public static interface Factory {
 
     /**
      * Create an {@link IValueExpression} instance.
@@ -1369,7 +1369,7 @@ public class FunctionRegistry {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public interface AggregateFactory extends Factory {}
+  public static interface AggregateFactory extends Factory {}
 
   public static class CompareFactory implements Factory {
 
@@ -1608,7 +1608,7 @@ public class FunctionRegistry {
    */
   public static class InFactory implements Factory {
 
-    public interface Annotations {
+    public static interface Annotations {
 
       /**
        * Literals are not allowed in an IN clause in SPARQL, but sometimes this operator is used as
@@ -1708,7 +1708,7 @@ public class FunctionRegistry {
 
         final IValueExpression<? extends IV> arg = AST2BOpUtility.toVE(context, globals, args[0]);
 
-        final IConstant<? extends IV>[] set = new IConstant[args.length - 1];
+        final IConstant<? extends IV> set[] = new IConstant[args.length - 1];
 
         try {
 
@@ -1761,7 +1761,7 @@ public class FunctionRegistry {
 
         checkArgs(args, ValueExpressionNode.class, ValueExpressionNode.class);
 
-        final IValueExpression<? extends IV>[] set = new IValueExpression[args.length];
+        final IValueExpression<? extends IV> set[] = new IValueExpression[args.length];
 
         for (int i = 0; i < args.length; i++) {
 

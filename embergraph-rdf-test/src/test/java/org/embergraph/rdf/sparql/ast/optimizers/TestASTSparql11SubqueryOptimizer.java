@@ -328,7 +328,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
                 new FunctionNode(
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT, Boolean.TRUE),
+                        AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE),
                     new VarNode("s"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();
@@ -399,7 +399,7 @@ public class TestASTSparql11SubqueryOptimizer extends AbstractASTEvaluationTestC
                 new FunctionNode(
                     FunctionRegistry.COUNT,
                     Collections.singletonMap(
-                        AggregateBase.Annotations.DISTINCT, Boolean.TRUE),
+                        AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE),
                     new VarNode("s"))));
 
         final JoinGroupNode whereClause = new JoinGroupNode();

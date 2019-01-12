@@ -46,7 +46,7 @@ public class SPOPredicate extends Predicate<ISPO> {
   /** */
   private static final long serialVersionUID = 3517916629931687107L;
 
-  public interface Annotations extends Predicate.Annotations {
+  public static interface Annotations extends Predicate.Annotations {
 
     /** The SID {@link IVariable} (optional). */
     String SID = SPOPredicate.class.getName() + ".sid";

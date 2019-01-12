@@ -92,7 +92,7 @@ public interface IHashJoinUtility {
    * delivered by {{@link #getSelectVars()} will be ignored, might even be uninitialized). See
    * {@link HashJoinAnnotations#OUTPUT_DISTINCT_JVs}.
    */
-  boolean isOutputDistinctJoinVars();
+  public boolean isOutputDistinctJoinVars();
 
   /**
    * The join constraints (optional).

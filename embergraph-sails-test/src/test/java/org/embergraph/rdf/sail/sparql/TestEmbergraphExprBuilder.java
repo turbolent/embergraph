@@ -282,7 +282,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
       final GroupByNode groupBy = new GroupByNode();
       expected.setGroupBy(groupBy);
       groupBy.addExpr(
-          new AssignmentNode(new VarNode("z"), new VarNode("o")));
+          new AssignmentNode(new VarNode("z"), (IValueExpressionNode) new VarNode("o")));
     }
 
     /*
@@ -338,7 +338,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
           new FunctionNode(
               FunctionRegistry.STR,
               null /* scalarValues */,
-              new VarNode("o"));
+              new ValueExpressionNode[] {new VarNode("o")});
       // Note: anonymous variable.
       final VarNode anonvar1 = new VarNode("-groupBy-1");
       anonvar1.setAnonymous(true);
@@ -396,9 +396,10 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
       having.addExpr(
           new FunctionNode(
               FunctionRegistry.GT,
-              null // scalarValues
-              // args
-              new VarNode("o"), new VarNode("s")));
+              null, // scalarValues
+              new ValueExpressionNode[] { // args
+                new VarNode("o"), new VarNode("s")
+              }));
     }
 
     /*
@@ -495,7 +496,7 @@ public class TestEmbergraphExprBuilder extends AbstractEmbergraphExprBuilderTest
           new FunctionNode(
               FunctionRegistry.STR,
               null /* scalarValues */,
-              new VarNode("s"));
+              new ValueExpressionNode[] {new VarNode("s")});
       orderBy.addExpr(new OrderByExpr(funct, false /* ascending */));
     }
 

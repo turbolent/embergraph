@@ -65,8 +65,8 @@ public abstract class CoreBaseBOp implements BOp {
     final Class<? extends CoreBaseBOp> cls = getClass();
     final Constructor<? extends CoreBaseBOp> ctor;
     try {
-      ctor = cls.getConstructor(cls);
-      return ctor.newInstance(this);
+      ctor = cls.getConstructor(new Class[] {cls});
+      return ctor.newInstance(new Object[] {this});
     } catch (SecurityException e) {
       throw new RuntimeException(e);
     } catch (NoSuchMethodException e) {

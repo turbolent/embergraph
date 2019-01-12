@@ -79,7 +79,7 @@ public class XSDDecimalIV<V extends EmbergraphLiteral> extends NumericIV<V, BigD
 
   @Override
   public boolean booleanValue() {
-    return !value.equals(BigDecimal.ZERO);
+    return value.equals(BigDecimal.ZERO) ? false : true;
   }
 
   @Override

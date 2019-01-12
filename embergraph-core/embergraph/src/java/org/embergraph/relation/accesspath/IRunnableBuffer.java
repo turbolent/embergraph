@@ -43,16 +43,16 @@ public interface IRunnableBuffer<E> extends IBuffer<E> {
    * @param e The element
    * @throws BufferClosedException if the buffer has been {@link #close()}d.
    */
-  void add(E e);
+  public void add(E e);
 
   /** Return <code>true</code> if the buffer is open. */
-  boolean isOpen();
+  public boolean isOpen();
 
   /**
    * Signal that no more data will be written on this buffer (this is required in order for the
    * iterator to know when no more data will be made available).
    */
-  void close();
+  public void close();
 
   /**
    * Signal abnormal termination of the process writing on the buffer. The buffer will be closed.
@@ -61,7 +61,7 @@ public interface IRunnableBuffer<E> extends IBuffer<E> {
    *
    * @param cause The exception thrown by the processing writing on the buffer.
    */
-  void abort(Throwable cause);
+  public void abort(Throwable cause);
 
   /**
    * The {@link Future} for the worker task.
@@ -69,5 +69,5 @@ public interface IRunnableBuffer<E> extends IBuffer<E> {
    * @return The {@link Future} -or- <code>null</code> if no {@link Future} has been set.
    * @todo There should be a generic type for this.
    */
-  Future getFuture();
+  public Future getFuture();
 }

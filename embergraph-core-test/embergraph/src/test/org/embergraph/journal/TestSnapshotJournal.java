@@ -72,7 +72,7 @@ public class TestSnapshotJournal extends ProxyTestCase<Journal> {
     public boolean getCompress() {
       return compressed;
     }
-  }
+  };
 
   /**
    * Open a journal snapshot.

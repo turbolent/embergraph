@@ -29,20 +29,20 @@ package org.embergraph.btree;
 public interface IIdentityAccess {
 
   /** Null reference for the store (zero). */
-  long NULL = 0L;
+  public final long NULL = 0L;
 
   /**
    * The persistent identity.
    *
    * @exception IllegalStateException if the object is not persistent.
    */
-  long getIdentity() throws IllegalStateException;
+  public long getIdentity() throws IllegalStateException;
 
   /** True iff the object is persistent. */
-  boolean isPersistent();
+  public boolean isPersistent();
 
   /** True iff an object has been logically deleted. */
-  boolean isDeleted();
+  public boolean isDeleted();
 
   /**
    * Deletes the persistence capable object. Both transient and persistent objects may be logically
@@ -50,5 +50,5 @@ public interface IIdentityAccess {
    *
    * @throws IllegalStateException if the object is already deleted.
    */
-  void delete() throws IllegalStateException;
+  public void delete() throws IllegalStateException;
 }

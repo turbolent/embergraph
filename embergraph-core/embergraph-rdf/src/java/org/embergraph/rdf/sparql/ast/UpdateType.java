@@ -189,12 +189,12 @@ public enum UpdateType {
   /** The ENABLE ENTAILMENTS operation can be used to enable incremental truth maintenance. */
   EnableEntailments(false /* graphUpdate */);
 
-  UpdateType(final boolean graphUpdate) {
+  private UpdateType(final boolean graphUpdate) {
 
     this(graphUpdate, false /* dataOnly */);
   }
 
-  UpdateType(final boolean graphUpdate, final boolean dataOnly) {
+  private UpdateType(final boolean graphUpdate, final boolean dataOnly) {
 
     this.graphUpdate = graphUpdate;
 

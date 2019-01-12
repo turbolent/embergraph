@@ -19,7 +19,7 @@ public enum TxServiceRunState {
   /** When halted. */
   Halted(4);
 
-  TxServiceRunState(int val) {
+  private TxServiceRunState(int val) {
 
     this.val = val;
   }
@@ -37,23 +37,23 @@ public enum TxServiceRunState {
 
       if (newval == Running) return true;
 
-      return newval == Halted;
+      if (newval == Halted) return true;
 
     } else if (this == Running) {
 
       if (newval == Shutdown) return true;
 
-      return newval == ShutdownNow;
+      if (newval == ShutdownNow) return true;
 
     } else if (this == Shutdown) {
 
       if (newval == ShutdownNow) return true;
 
-      return newval == Halted;
+      if (newval == Halted) return true;
 
     } else if (this == ShutdownNow) {
 
-      return newval == Halted;
+      if (newval == Halted) return true;
     }
 
     return false;

@@ -127,7 +127,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
       return annotationsEqual(annotations, ((ModifiableBOpBase) o).annotations);
     }
 
-    return annotationsEqual(annotations, o.annotations());
+    return super.annotationsEqual(annotations, o.annotations());
   }
 
   public BOp get(final int index) {
@@ -283,7 +283,7 @@ public class ModifiableBOpBase extends CoreBaseBOp {
 
       if (child == oldChild) {
 
-        p.setArg(i, newChild);
+        ((ModifiableBOpBase) p).setArg(i, newChild);
 
         nmods++;
       }

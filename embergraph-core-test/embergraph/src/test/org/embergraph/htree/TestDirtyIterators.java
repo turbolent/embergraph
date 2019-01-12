@@ -133,7 +133,7 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
         final DirectoryPage a = (DirectoryPage) htree.root.getChild(0);
         final BucketPage b = (BucketPage) htree.root.getChild(1);
         final BucketPage c = (BucketPage) htree.root.getChild(2);
-        assertTrue(c == htree.root.getChild(3));
+        assertTrue(c == (BucketPage) htree.root.getChild(3));
 
         assertSameIterator(
             new AbstractPage[] {a, b, c}, htree.root.childIterator(false /* onlyDirty */));
@@ -207,19 +207,19 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
         assertEquals("nleaves", 2, htree.getLeafCount());
         assertEquals("nentries", 5, htree.getEntryCount());
 
-        final DirectoryPage root = htree.root;
+        final DirectoryPage root = (DirectoryPage) htree.root;
         final DirectoryPage a = (DirectoryPage) htree.root.getChild(0);
         final BucketPage b = (BucketPage) htree.root.getChild(1);
         final BucketPage c = (BucketPage) htree.root.getChild(2);
-        assertTrue(c == htree.root.getChild(3));
+        assertTrue(c == (BucketPage) htree.root.getChild(3));
         final DirectoryPage d = (DirectoryPage) a.getChild(0);
         final BucketPage e = (BucketPage) a.getChild(1);
         final BucketPage f = (BucketPage) a.getChild(2);
-        assertTrue(f == a.getChild(3));
+        assertTrue(f == (BucketPage) a.getChild(3));
         final BucketPage g = (BucketPage) d.getChild(0);
         final BucketPage h = (BucketPage) d.getChild(1);
         final BucketPage i = (BucketPage) d.getChild(2);
-        assertTrue(i == d.getChild(3));
+        assertTrue(i == (BucketPage) d.getChild(3));
 
         /*
          * Verify that iterator visits all direct children (all direct
@@ -392,15 +392,15 @@ public class TestDirtyIterators extends AbstractHTreeTestCase {
         final DirectoryPage a = (DirectoryPage) htree.root.getChild(0);
         final BucketPage b = (BucketPage) htree.root.getChild(1);
         final BucketPage c = (BucketPage) htree.root.getChild(2);
-        assertTrue(c == htree.root.getChild(3));
+        assertTrue(c == (BucketPage) htree.root.getChild(3));
         final DirectoryPage d = (DirectoryPage) a.getChild(0);
         final BucketPage e = (BucketPage) a.getChild(1);
         final BucketPage f = (BucketPage) a.getChild(2);
-        assertTrue(f == a.getChild(3));
+        assertTrue(f == (BucketPage) a.getChild(3));
         final BucketPage g = (BucketPage) d.getChild(0);
         final BucketPage h = (BucketPage) d.getChild(1);
         final BucketPage i = (BucketPage) d.getChild(2);
-        assertTrue(i == d.getChild(3));
+        assertTrue(i == (BucketPage) d.getChild(3));
 
         assertTrue(d.isDirty());
         assertFalse(d.isPersistent());

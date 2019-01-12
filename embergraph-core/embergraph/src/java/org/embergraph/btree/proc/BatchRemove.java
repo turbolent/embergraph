@@ -70,7 +70,7 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  private enum ReturnWhatEnum {
+  private static enum ReturnWhatEnum {
 
     /** Return the #of tuples that were deleted. */
     MutationCount(0),
@@ -86,7 +86,7 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
 
     private final int w;
 
-    ReturnWhatEnum(final int w) {
+    private ReturnWhatEnum(final int w) {
       this.w = w;
     }
 
@@ -106,7 +106,7 @@ public class BatchRemove extends AbstractKeyArrayIndexProcedure<Object>
           throw new IllegalArgumentException();
       }
     }
-  }
+  };
 
   /**
    * Factory for {@link BatchRemove} procedures.

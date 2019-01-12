@@ -162,6 +162,6 @@ public class InBinaryBOp extends InBOp {
     // true iff the bound value was found in the set.
     final boolean found = pos >= 0;
 
-    return not != found;
+    return not ? !found : found;
   }
 }

@@ -34,5 +34,5 @@ public enum CollatorEnum {
    * is considered). This option can be useful when you know that your data is not actually Unicode
    * and offers a substantial performance benefit in such cases.
    */
-  ASCII
+  ASCII;
 }

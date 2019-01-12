@@ -498,10 +498,10 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
       try {
 
         final Constructor<? extends IAnalyzerFactory> ctor =
-            cls.getConstructor(FullTextIndex.class);
+            cls.getConstructor(new Class[] {FullTextIndex.class});
 
         // save reference.
-        analyzerFactory = ctor.newInstance(this);
+        analyzerFactory = ctor.newInstance(new Object[] {this});
 
       } catch (Exception ex) {
 

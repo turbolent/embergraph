@@ -207,13 +207,13 @@ public class VocabBuilder {
 
         if (o instanceof URI) {
 
-          UriFrequency typeFrequency = types.get(o);
+          UriFrequency typeFrequency = types.get((URI) o);
 
           if (typeFrequency == null) {
 
             types.put((URI) o, typeFrequency = new UriFrequency((URI) o));
 
-            if (log.isDebugEnabled()) log.debug("New " + o + " : total=" + types.size());
+            if (log.isDebugEnabled()) log.debug("New " + (URI) o + " : total=" + types.size());
           }
 
           typeFrequency.cnt++;
@@ -391,8 +391,13 @@ public class VocabBuilder {
 
           if (new File(dir, name).isDirectory()) {
 
-            // Skip hidden files.
-            return !dir.isHidden();//                if(dir.getName().equals(".svn")) {
+            if (dir.isHidden()) {
+
+              // Skip hidden files.
+              return false;
+            }
+
+            //                if(dir.getName().equals(".svn")) {
             //
             //                    // Skip .svn files.
             //                    return false;
@@ -400,6 +405,7 @@ public class VocabBuilder {
             //                }
 
             // visit subdirectories.
+            return true;
           }
 
           // if recognizable as RDF.

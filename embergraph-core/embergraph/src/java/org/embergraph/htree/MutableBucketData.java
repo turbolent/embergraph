@@ -224,9 +224,15 @@ public class MutableBucketData implements ILeafData {
     assert keys != null;
     assert values != null;
     assert keys.capacity() == values.capacity();
-    assert versionTimestamps == null || versionTimestamps.length == keys.capacity();
-    assert deleteMarkers == null || deleteMarkers.length == keys.capacity();
-    assert rawRecords == null || rawRecords.length == keys.capacity();
+    if (versionTimestamps != null) {
+      assert versionTimestamps.length == keys.capacity();
+    }
+    if (deleteMarkers != null) {
+      assert deleteMarkers.length == keys.capacity();
+    }
+    if (rawRecords != null) {
+      assert rawRecords.length == keys.capacity();
+    }
 
     this.keys = keys;
     this.vals = values;

@@ -50,7 +50,7 @@ public class SPARQLUtil {
     StringBuilder sb = new StringBuilder(sLength);
 
     while (backSlashIdx != -1) {
-      sb.append(s, startIdx, backSlashIdx);
+      sb.append(s.substring(startIdx, backSlashIdx));
 
       if (backSlashIdx + 1 >= sLength) {
         throw new IllegalArgumentException("Unescaped backslash in: " + s);

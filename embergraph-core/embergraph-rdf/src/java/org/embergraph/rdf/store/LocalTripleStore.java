@@ -139,7 +139,7 @@ public class LocalTripleStore extends AbstractLocalTripleStore {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public interface Options extends AbstractTripleStore.Options {}
+  public static interface Options extends AbstractTripleStore.Options {}
 
   /**
    * Ctor specified by {@link DefaultResourceLocator}.

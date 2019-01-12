@@ -684,7 +684,7 @@ public class TestFileChannelUtility extends TestCase {
 
     private volatile AsynchronousFileChannel asyncChannel;
 
-    private int asyncChannelOpenCount = 0;
+    private int asyncChannelOpenCount = 0;;
 
     public ReopenFileChannel(final File file, final RandomAccessFile raf, final String mode)
         throws IOException {

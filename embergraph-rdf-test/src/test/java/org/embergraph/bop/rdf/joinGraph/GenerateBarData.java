@@ -85,16 +85,16 @@ public class GenerateBarData {
       final URI orderItems = factory.createURI("http://test/bar#orderItems");
       final URI beverage = factory.createURI("http://test/bar#beverageType");
 
-      final Literal[] drinks =
-          new Literal[]{
-              factory.createLiteral("Beer"),
-              factory.createLiteral("Wine"),
-              factory.createLiteral("Water"),
-              factory.createLiteral("Soda"),
-              factory.createLiteral("DietSoda"),
-              factory.createLiteral("Juice")
+      final Literal drinks[] =
+          new Literal[] {
+            factory.createLiteral("Beer"),
+            factory.createLiteral("Wine"),
+            factory.createLiteral("Water"),
+            factory.createLiteral("Soda"),
+            factory.createLiteral("DietSoda"),
+            factory.createLiteral("Juice")
           };
-      final URI[] employees = new URI[totalServers];
+      final URI employees[] = new URI[totalServers];
       for (int s = 0; s < totalServers; s++) {
         employees[s] = factory.createURI("http://test/bar#employee_" + s);
         writer.handleStatement(

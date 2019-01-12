@@ -199,7 +199,7 @@ public abstract class AbstractBitVector extends AbstractBooleanList implements B
     BitVectors.ensureFromTo(length(), from, to);
     final long length = to - from;
     final long l = length - length % Long.SIZE;
-    final long[] bits = new long[(int) ((length + Long.SIZE - 1) / Long.SIZE)];
+    final long bits[] = new long[(int) ((length + Long.SIZE - 1) / Long.SIZE)];
     int i;
     for (i = 0; i < l; i += Long.SIZE)
       bits[i / Long.SIZE] = getLong(from + i, from + i + Long.SIZE);

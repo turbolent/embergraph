@@ -280,7 +280,7 @@ public abstract class AbstractMasterTask<
     try {
 
       // atomic transfer from [sinks] to [finishedSubtasks].
-      moveSinkToFinishedQueueAtomically((L) subtask.locator, subtask);
+      moveSinkToFinishedQueueAtomically((L) subtask.locator, (AbstractSubtask) subtask);
 
       // signal condition (used by awaitAll()).
       subtaskDone.signalAll();

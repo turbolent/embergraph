@@ -194,10 +194,10 @@ public class DirectBufferPoolAllocator {
   public interface IAllocation {
 
     /** The allocation identifier. */
-    UUID getId();
+    public UUID getId();
 
     /** The allocated {@link ByteBuffer#slice()}. */
-    ByteBuffer getSlice();
+    public ByteBuffer getSlice();
 
     /**
      * Release this allocation.
@@ -213,7 +213,7 @@ public class DirectBufferPoolAllocator {
      *
      * @throws InterruptedException
      */
-    void release() throws InterruptedException;
+    public void release() throws InterruptedException;
   }
 
   /** An allocation against a direct {@link ByteBuffer}. */

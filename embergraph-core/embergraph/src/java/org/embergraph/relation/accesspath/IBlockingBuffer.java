@@ -71,7 +71,7 @@ public interface IBlockingBuffer<E> extends IRunnableBuffer<E> {
    *
    * @return The iterator.
    */
-  IAsynchronousIterator<E> iterator();
+  public IAsynchronousIterator<E> iterator();
 
   /**
    * This is a NOP since the {@link #iterator()} is the only way to consume data written on the
@@ -79,7 +79,7 @@ public interface IBlockingBuffer<E> extends IRunnableBuffer<E> {
    *
    * @return ZERO (0L)
    */
-  long flush();
+  public long flush();
 
   /**
    * Set the {@link Future} for the source processing writing on the {@link IBlockingBuffer} (the
@@ -96,5 +96,5 @@ public interface IBlockingBuffer<E> extends IRunnableBuffer<E> {
    *     not unblock threads </a>
    * @todo There should be a generic type for this.
    */
-  void setFuture(Future future);
+  public void setFuture(Future future);
 }

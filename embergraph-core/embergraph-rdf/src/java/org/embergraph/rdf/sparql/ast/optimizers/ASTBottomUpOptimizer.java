@@ -293,7 +293,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
       final List<JoinGroupNode> badlyDesignedLeftJoins) {
 
     // Check all join groups.
-    final Iterator<JoinGroupNode> itr = BOpUtility.visitAll(whereClause, JoinGroupNode.class);
+    final Iterator<JoinGroupNode> itr = BOpUtility.visitAll((BOp) whereClause, JoinGroupNode.class);
 
     while (itr.hasNext()) {
 
@@ -617,7 +617,7 @@ public class ASTBottomUpOptimizer implements IASTOptimizer {
       final IBindingSet[] bindingSets) {
 
     final Set<IVariable<?>> globallyScopedVars =
-        context == null ? Collections.emptySet() : context.getGloballyScopedVariables();
+        context == null ? (Set) Collections.emptySet() : context.getGloballyScopedVariables();
 
     // Map for renamed variables.
     final Map<IVariable<?> /* old */, IVariable<?> /* new */> map =

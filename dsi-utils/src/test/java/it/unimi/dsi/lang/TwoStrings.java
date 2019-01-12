@@ -56,9 +56,9 @@ public class TwoStrings {
       if (other.b != null) return false;
     } else if (!b.equals(other.b)) return false;
     if (context == null) {
-      return other.context == null;
-    } else
-      return context.equals(other.context);
+      if (other.context != null) return false;
+    } else if (!context.equals(other.context)) return false;
+    return true;
   }
 
   public String toString() {

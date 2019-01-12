@@ -32,7 +32,7 @@ package org.embergraph.service;
 public interface IServiceShutdown {
 
   /** Return <code>true</code> iff the service is running. */
-  boolean isOpen();
+  public boolean isOpen();
 
   /**
    * The service will no longer accept new requests, but existing requests will be processed
@@ -41,7 +41,7 @@ public interface IServiceShutdown {
    * <strong>synchronized</strong>. If the service is aleady shutdown, then this method should be a
    * NOP.
    */
-  void shutdown();
+  public void shutdown();
 
   /**
    * The service will no longer accept new requests and will make a best effort attempt to terminate
@@ -50,7 +50,7 @@ public interface IServiceShutdown {
    * <strong>synchronized</strong>. If the service is aleady shutdown, then this method should be a
    * NOP.
    */
-  void shutdownNow();
+  public void shutdownNow();
 
   /**
    * Options for {@link IServiceShutdown} implementations.
@@ -58,7 +58,7 @@ public interface IServiceShutdown {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  interface Options {
+  public interface Options {
 
     /**
      * The maximum time in milliseconds that {@link #shutdown()} should wait termination of the

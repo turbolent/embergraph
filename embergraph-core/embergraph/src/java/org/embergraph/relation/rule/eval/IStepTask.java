@@ -37,5 +37,5 @@ import org.embergraph.relation.rule.IStep;
 public interface IStepTask extends Callable<RuleStats> {
 
   /** Evaluate the rule. */
-  RuleStats call() throws Exception;
+  public RuleStats call() throws Exception;
 }

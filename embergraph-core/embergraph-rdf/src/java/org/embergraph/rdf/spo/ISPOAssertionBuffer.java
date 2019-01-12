@@ -44,12 +44,12 @@ public interface ISPOAssertionBuffer extends ISPOBuffer {
    *
    * @deprecated not used.
    */
-  int getJustificationCount();
+  public int getJustificationCount();
 
   /**
    * Add a statement and an optional justification to the buffer.
    *
    * @deprecated by {@link ISolution}s in an {@link IBuffer}.
    */
-  boolean add(SPO stmt, Justification justification);
+  public boolean add(SPO stmt, Justification justification);
 }

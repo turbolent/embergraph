@@ -39,7 +39,7 @@ public interface ISimpleBTree {
    * @return The previous value under that key or <code>null</code> if the key was not found or if
    *     the previous entry for that key was marked as deleted.
    */
-  byte[] insert(byte[] key, byte[] value);
+  public byte[] insert(byte[] key, byte[] value);
 
   /**
    * Insert or update a value under the key iff there is no entry for that key in the index. This is
@@ -66,7 +66,7 @@ public interface ISimpleBTree {
    *     NOT applied.
    * @see BLZG-1539 (putIfAbsent)
    */
-  byte[] putIfAbsent(byte[] key, byte[] value);
+  public byte[] putIfAbsent(byte[] key, byte[] value);
 
   /**
    * Lookup a value for a key.
@@ -74,7 +74,7 @@ public interface ISimpleBTree {
    * @return The value stored under that key or <code>null</code> if there is no entry for that key
    *     or if the entry under that key is marked as deleted.
    */
-  byte[] lookup(byte[] key);
+  public byte[] lookup(byte[] key);
 
   /**
    * Return <code>true</code> iff there is a (non-deleted) index entry for the key. An index entry
@@ -84,7 +84,7 @@ public interface ISimpleBTree {
    * @param key The key.
    * @return <code>true</code> if the index contains an (un-deleted) entry for that key.
    */
-  boolean contains(byte[] key);
+  public boolean contains(byte[] key);
 
   /**
    * Remove the key and its associated value.
@@ -93,5 +93,5 @@ public interface ISimpleBTree {
    * @return The value stored under that key or <code>null</code> if the key was not found or if the
    *     previous entry under that key was marked as deleted.
    */
-  byte[] remove(byte[] key);
+  public byte[] remove(byte[] key);
 }

@@ -183,7 +183,7 @@ public abstract class ASTSearchOptimizerBase implements IASTOptimizer {
            */
           if (p.isConstant() && p.getValue() instanceof URI) {
 
-            final URI uri = (URI) p.getValue();
+            final URI uri = (URI) ((ConstantNode) p).getValue();
 
             if (uri != null // Must be a known value.
                 && uri.stringValue().startsWith(namespace)) {

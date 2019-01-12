@@ -79,7 +79,7 @@ public class AccessSemaphore {
   public static final class AccessSemaphoreNotReentrantException extends IllegalStateException {
 
     private static final long serialVersionUID = -234560202749194378L;
-  }
+  };
 
   public final Access acquireExclusive() throws InterruptedException {
 

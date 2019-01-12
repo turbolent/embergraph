@@ -306,7 +306,7 @@ public class RAMGASEngine extends GASEngine {
     private IStriterator getEdges(
         final boolean inEdges, final IGASContext<?, ?, ?> ctx, final Value u) throws SailException {
 
-      final URI linkTypeIV = ctx.getLinkType();
+      final URI linkTypeIV = (URI) ctx.getLinkType();
       if (linkTypeIV != null) {
         /*
          * FIXME RDR: We need to use a union of access paths for link

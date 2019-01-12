@@ -151,7 +151,7 @@ public class SidIV<V extends EmbergraphBNode> extends AbstractInlineIV<V, ISPO>
               .createStatement(
                   (EmbergraphResource) spo.s().asValue(lex),
                   (EmbergraphURI) spo.p().asValue(lex),
-                  spo.o().asValue(lex),
+                  (EmbergraphValue) spo.o().asValue(lex),
                   c));
     }
     return bnode;

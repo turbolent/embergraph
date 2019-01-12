@@ -179,7 +179,7 @@ public class MersenneTwister extends RandomEngine {
    */
   public Object clone() {
     MersenneTwister clone = (MersenneTwister) super.clone();
-    clone.mt = this.mt.clone();
+    clone.mt = (int[]) this.mt.clone();
     return clone;
   }
   /** Generates N words at one time. */

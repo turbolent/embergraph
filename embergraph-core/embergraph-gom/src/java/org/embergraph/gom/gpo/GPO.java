@@ -1030,7 +1030,7 @@ public class GPO implements IGPO {
 
       m_clean = false;
 
-      m_om.addToDirtyList(this);
+      ((ObjectMgrModel) m_om).addToDirtyList(this);
     }
   }
 
@@ -1165,7 +1165,7 @@ public class GPO implements IGPO {
     //		final Lock readLock = m_lock.readLock();
     //		readLock.lock();
     //		try {
-    final ObjectMgrModel oom = m_om;
+    final ObjectMgrModel oom = (ObjectMgrModel) m_om;
     final ValueFactory f = oom.getValueFactory();
     GPOEntry entry = m_headEntry;
     while (entry != null) {

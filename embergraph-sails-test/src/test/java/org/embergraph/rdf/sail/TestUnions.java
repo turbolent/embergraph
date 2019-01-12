@@ -86,7 +86,7 @@ public class TestUnions extends QuadsTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+        (EmbergraphSailRepositoryConnection) repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -113,7 +113,7 @@ public class TestUnions extends QuadsTestCase {
 
       /**/
       if (log.isInfoEnabled()) {
-        log.info(cxn.getTripleStore().dumpStore());
+        log.info(((EmbergraphSailRepositoryConnection) cxn).getTripleStore().dumpStore());
       }
 
       {
@@ -171,7 +171,7 @@ public class TestUnions extends QuadsTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+        (EmbergraphSailRepositoryConnection) repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {

@@ -236,7 +236,7 @@ public class ASTServiceNodeOptimizer implements IASTOptimizer {
 
         final Set<IVariable<?>> varSet =
             sa.getSpannedVariables(
-                serviceNode.getGraphPattern(), new LinkedHashSet<IVariable<?>>());
+                (BOp) serviceNode.getGraphPattern(), new LinkedHashSet<IVariable<?>>());
 
         for (IVariable<?> var : varSet) {
 

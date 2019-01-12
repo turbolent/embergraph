@@ -46,8 +46,8 @@ public interface IResultHandler<R extends Object, A extends Object> {
    * @param result The result from applying the procedure to a single index partition.
    * @param split The {@link Split} that generated that result.
    */
-  void aggregate(R result, Split split);
+  public void aggregate(R result, Split split);
 
   /** Return the aggregated results as an implementation dependent object. */
-  A getResult();
+  public A getResult();
 }

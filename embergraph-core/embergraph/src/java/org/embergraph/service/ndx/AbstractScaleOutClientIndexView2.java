@@ -166,7 +166,7 @@ public abstract class AbstractScaleOutClientIndexView2 extends AbstractScaleOutC
               + " will be mapped across index partitions in "
               + (parallel ? "parallel" : "sequence"));
 
-    final int poolSize = getThreadPool().getCorePoolSize();
+    final int poolSize = ((ThreadPoolExecutor) getThreadPool()).getCorePoolSize();
 
     final int maxTasksPerRequest = fed.getClient().getMaxParallelTasksPerRequest();
 

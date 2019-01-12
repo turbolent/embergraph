@@ -39,5 +39,5 @@ public interface IResourceScannerFactory<V> extends Serializable {
    * @param buffer The buffer on which the scanner will place resources to be processed.
    * @return The scanner.
    */
-  AbstractResourceScanner<V> newScanner(BlockingBuffer<V[]> buffer);
+  public AbstractResourceScanner<V> newScanner(BlockingBuffer<V[]> buffer);
 }

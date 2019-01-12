@@ -10,8 +10,6 @@ package cern.colt.matrix.linalg;
 
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
-import cern.jet.math.Functions;
-
 /**
  * Sequential implementation of the Basic Linear Algebra System.
  *
@@ -46,15 +44,15 @@ public class SeqBlas implements Blas {
   }
 
   public double dasum(DoubleMatrix1D x) {
-    return x.aggregate(Functions.plus, Functions.abs);
+    return x.aggregate(F.plus, F.abs);
   }
 
   public void daxpy(double alpha, DoubleMatrix1D x, DoubleMatrix1D y) {
-    y.assign(x, Functions.plusMult(alpha));
+    y.assign(x, F.plusMult(alpha));
   }
 
   public void daxpy(double alpha, DoubleMatrix2D A, DoubleMatrix2D B) {
-    B.assign(A, Functions.plusMult(alpha));
+    B.assign(A, F.plusMult(alpha));
   }
 
   public void dcopy(DoubleMatrix1D x, DoubleMatrix1D y) {
@@ -106,14 +104,14 @@ public class SeqBlas implements Blas {
     x.checkSize(y);
     DoubleMatrix1D tmp = x.copy();
 
-    x.assign(Functions.mult(c));
-    x.assign(y, Functions.plusMult(s));
+    x.assign(F.mult(c));
+    x.assign(y, F.plusMult(s));
 
-    y.assign(Functions.mult(c));
-    y.assign(tmp, Functions.minusMult(s));
+    y.assign(F.mult(c));
+    y.assign(tmp, F.minusMult(s));
   }
 
-  public void drotg(double a, double b, double[] rotvec) {
+  public void drotg(double a, double b, double rotvec[]) {
     double c, s, roe, scale, r, z, ra, rb;
 
     roe = b;
@@ -152,11 +150,11 @@ public class SeqBlas implements Blas {
   }
 
   public void dscal(double alpha, DoubleMatrix1D x) {
-    x.assign(Functions.mult(alpha));
+    x.assign(F.mult(alpha));
   }
 
   public void dscal(double alpha, DoubleMatrix2D A) {
-    A.assign(Functions.mult(alpha));
+    A.assign(F.mult(alpha));
   }
 
   public void dswap(DoubleMatrix1D x, DoubleMatrix1D y) {

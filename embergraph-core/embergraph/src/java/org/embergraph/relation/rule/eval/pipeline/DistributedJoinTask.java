@@ -1100,7 +1100,7 @@ public class DistributedJoinTask extends JoinTask {
     //
     //        }
 
-  }
+  };
 
   /**
    * Used to materialize {@link JoinTaskSink}s without causing concurrent requests for different

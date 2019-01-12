@@ -66,7 +66,7 @@ public class EmbergraphSPARQLResultsJSONWriterForConstruct implements RDFWriter 
       writer.startDocument();
       writer.startHeader();
       writer.startQueryResult(
-          Arrays.asList("subject", "predicate", "object", "context"));
+          Arrays.asList(new String[] {"subject", "predicate", "object", "context"}));
       writer.endHeader();
     } catch (QueryResultHandlerException e) {
       throw new RDFHandlerException(e);

@@ -361,7 +361,7 @@ public abstract class OverflowManager extends IndexManager {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface Options extends IndexManager.Options, IServiceShutdown.Options {
+  public static interface Options extends IndexManager.Options, IServiceShutdown.Options {
 
     /**
      * Boolean property determines whether or not {@link IResourceManager#overflow()} processing is
@@ -822,7 +822,7 @@ public abstract class OverflowManager extends IndexManager {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface IOverflowManagerCounters {
+  public static interface IOverflowManagerCounters {
 
     /** <code>true</code> iff overflow processing is enabled as a configuration option. */
     String OverflowEnabled = "Overflow Enabled";
@@ -875,7 +875,7 @@ public abstract class OverflowManager extends IndexManager {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface IIndexPartitionTaskCounters {
+  public static interface IIndexPartitionTaskCounters {
 
     /** The #of index partition build operations which have completed successfully. */
     String BuildCount = "Build Count";
@@ -1605,7 +1605,14 @@ public abstract class OverflowManager extends IndexManager {
     {
       nextOffset = journal.getRootBlockView().getNextOffset();
 
-      shouldOverflow = nextOffset > overflowThreshold * journal.getMaximumExtent();
+      if (nextOffset > overflowThreshold * journal.getMaximumExtent()) {
+
+        shouldOverflow = true;
+
+      } else {
+
+        shouldOverflow = false;
+      }
 
       if (!shouldOverflow && log.isDebugEnabled()) {
 

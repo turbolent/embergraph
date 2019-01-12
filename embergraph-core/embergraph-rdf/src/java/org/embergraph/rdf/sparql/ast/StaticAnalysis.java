@@ -1385,7 +1385,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
            */
           final Set<IVariable<?>> usedVars =
               getSpannedVariables(
-                  bind.getValueExpression(), new LinkedHashSet<IVariable<?>>());
+                  (BOp) bind.getValueExpression(), new LinkedHashSet<IVariable<?>>());
 
           usedVars.removeAll(definitelyBound);
 
@@ -1454,7 +1454,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
 
     final GraphPatternGroup<IGroupMemberNode> graphPattern =
-        node.getGraphPattern();
+        (GraphPatternGroup<IGroupMemberNode>) node.getGraphPattern();
 
     if (graphPattern != null) {
 
@@ -1475,7 +1475,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
     final Set<IVariable<?>> vars = new LinkedHashSet<IVariable<?>>();
 
     final GraphPatternGroup<IGroupMemberNode> graphPattern =
-        node.getGraphPattern();
+        (GraphPatternGroup<IGroupMemberNode>) node.getGraphPattern();
 
     if (graphPattern != null) {
 
@@ -2101,7 +2101,7 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
       if (found) {
 
         // Add in any variables referenced after this proxy node.
-        getSpannedVariables(c, true /* filters */, vars);
+        getSpannedVariables((BOp) c, true /* filters */, vars);
       }
 
       if (c == node) {
@@ -2272,13 +2272,17 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
          */
         final FunctionNode functionNode = (FunctionNode) exprNode;
 
-        return FunctionRegistry.isAggregate(functionNode.getFunctionURI());
+        if (FunctionRegistry.isAggregate(functionNode.getFunctionURI())) return true;
       }
 
       return false;
     }
 
-    return isObviousAggregate(expr);
+    if (isObviousAggregate(expr)) {
+
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -2405,8 +2409,14 @@ public class StaticAnalysis extends StaticAnalysis_CanJoin {
 
       return isCNFDisjunct;
 
-    } else
-      return !functionURI.equals(FunctionRegistry.AND);
+    } else if (functionURI.equals(FunctionRegistry.AND)) {
+
+      return false; // not allowed
+
+    } else {
+
+      return true; // everything else is a terminal
+    }
   }
 
   /**

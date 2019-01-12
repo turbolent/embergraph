@@ -109,15 +109,17 @@ public class TestDeepCopy extends TestCase2 {
   static final Set<Class<?>> noDeepCopy =
       new LinkedHashSet<Class<?>>(
           Arrays.asList(
-              /**
-               * {@link Var} does not have deep copy semantics since it imposes a canonizaling
-               * mapping from names to object references.
-               */
-              Var.class));
+              new Class<?>[] {
+                  /**
+                   * {@link Var} does not have deep copy semantics since it imposes a canonizaling
+                   * mapping from names to object references.
+                   */
+                Var.class,
+              }));
 
   /** Exclusion list for classes which do not support shallow copy semantics. */
   static final Set<Class<?>> noShallowCopy =
-      new LinkedHashSet<Class<?>>(Arrays.asList(Var.class, Constant.class));
+      new LinkedHashSet<Class<?>>(Arrays.asList(new Class<?>[] {Var.class, Constant.class}));
 
   /** */
   public TestDeepCopy() {}
@@ -165,7 +167,7 @@ public class TestDeepCopy extends TestCase2 {
       // test for shallow copy constructor.
       if (!noShallowCopy.contains(cls)) {
         try {
-          cls.getConstructor(BOp[].class, Map.class);
+          cls.getConstructor(new Class[] {BOp[].class, Map.class});
         } catch (NoSuchMethodException e) {
           bad.put(cls, cause_shallow);
           log.error(cause_shallow + " : " + cls); // , e);
@@ -175,7 +177,7 @@ public class TestDeepCopy extends TestCase2 {
       // test for deep copy constructor.
       if (!noDeepCopy.contains(cls)) {
         try {
-          cls.getConstructor(cls);
+          cls.getConstructor(new Class[] {cls});
         } catch (NoSuchMethodException e) {
           bad.put(cls, cause_deep);
           log.error(cause_deep + " : " + cls); // , e);

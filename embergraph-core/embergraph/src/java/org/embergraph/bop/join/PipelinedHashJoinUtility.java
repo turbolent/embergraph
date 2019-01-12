@@ -42,7 +42,7 @@ public interface PipelinedHashJoinUtility {
    * JVMPipelinedHashIndex}, which accepts and immediately forwards relevant solutions (non-blocking
    * index).
    */
-  long acceptAndOutputSolutions(
+  public long acceptAndOutputSolutions(
       final UnsyncLocalOutputBuffer<IBindingSet> out,
       final ICloseableIterator<IBindingSet[]> itr,
       final NamedSolutionSetStats stats,

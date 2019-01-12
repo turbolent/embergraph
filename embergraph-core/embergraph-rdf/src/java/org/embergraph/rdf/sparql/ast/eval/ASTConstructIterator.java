@@ -402,7 +402,7 @@ public class ASTConstructIterator
      * path.
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
-    final SPOKeyOrder indexKeyOrder = SPOKeyOrder.getKeyOrder(pred, 3 /* keyArity */);
+    final SPOKeyOrder indexKeyOrder = SPOKeyOrder.getKeyOrder((IPredicate) pred, 3 /* keyArity */);
 
     construct.setProperty(NativeDistinctFilter.Annotations.KEY_ORDER, indexKeyOrder);
 
@@ -518,15 +518,22 @@ public class ASTConstructIterator
      *
      * @see https://jira.blazegraph.com/browse/BLZG-1341 (do not de-dup for very large graphs)
      */
+    if (quads && sp2.c() == null && sp2.getScope() == Scope.NAMED_CONTEXTS) {
+
+      /*
+       * Multiple named graphs could be visited, so the statement pattern
+       * in the CONSTRUCT could produce duplicate triples.
+       */
+
+      return false;
+    }
+
     /*
-     * Multiple named graphs could be visited, so the statement pattern
-     * in the CONSTRUCT could produce duplicate triples.
-     */
-    return !quads || sp2.c() != null || sp2.getScope() != Scope.NAMED_CONTEXTS;/*
      * The construct should produce distinct triples without our having to
      * add a DISTINCT filter.
      */
 
+    return true;
   }
 
   @Override
@@ -737,7 +744,7 @@ public class ASTConstructIterator
     if (c != null && !(c instanceof Resource)) return null;
 
     // return the statement
-    return f.createStatement((Resource) s, (URI) p, o, (Resource) c);
+    return f.createStatement((Resource) s, (URI) p, (Value) o, (Resource) c);
   }
 
   /**

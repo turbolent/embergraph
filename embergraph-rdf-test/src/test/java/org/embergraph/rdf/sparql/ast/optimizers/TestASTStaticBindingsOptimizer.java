@@ -141,7 +141,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant(Var.var("p"), mockIV)),
+              new ConstantNode(new Constant((IVariable) Var.var("p"), mockIV)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -225,9 +225,9 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       final JoinGroupNode whereClause = new JoinGroupNode();
       whereClause.addChild(
           new StatementPatternNode(
-              new ConstantNode(new Constant(Var.var("s"), c12)),
+              new ConstantNode(new Constant((IVariable) Var.var("s"), c12)),
               new VarNode("p"),
-              new ConstantNode(new Constant(Var.var("s"), c12)),
+              new ConstantNode(new Constant((IVariable) Var.var("s"), c12)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
       expected.setWhereClause(whereClause);
@@ -307,7 +307,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant(Var.var("p"), cTest)),
+              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -399,7 +399,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       jgn.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant(Var.var("p"), cTest)),
+              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -491,7 +491,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant(Var.var("p"), cTest)),
+              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -589,7 +589,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant(Var.var("p"), cTest)),
+              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -686,7 +686,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant(Var.var("p"), cTest)),
+              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -1033,14 +1033,14 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new StatementPatternNode(
               new VarNode("s"),
               new VarNode("p"),
-              new ConstantNode(new Constant(Var.var("o"), c12)),
+              new ConstantNode(new Constant((IVariable) Var.var("o"), c12)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
       whereClause.addChild(
           new FilterNode(
               FunctionNode.sameTerm(
-                  new ConstantNode(new Constant(Var.var("o"), c12)),
+                  new ConstantNode(new Constant((IVariable) Var.var("o"), c12)),
                   new ConstantNode(c12))));
     }
 
@@ -1124,14 +1124,14 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new StatementPatternNode(
               new VarNode("s"),
               new VarNode("p"),
-              new ConstantNode(new Constant(Var.var("o"), foo)),
+              new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
       whereClause.addChild(
           new FilterNode(
               FunctionNode.EQ(
-                  new ConstantNode(new Constant(Var.var("o"), foo)),
+                  new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
                   new ConstantNode(foo))));
     }
 
@@ -1201,7 +1201,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
               new FunctionNode(
                   FunctionRegistry.IN,
                   null /* scalarValues */,
-                  new VarNode("o"), new ConstantNode(foo))));
+                  new ValueExpressionNode[] {new VarNode("o"), new ConstantNode(foo)})));
     }
 
     // The expected AST after the rewrite.
@@ -1219,7 +1219,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new StatementPatternNode(
               new VarNode("s"),
               new VarNode("p"),
-              new ConstantNode(new Constant(Var.var("o"), foo)),
+              new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
       whereClause.addChild(
@@ -1227,8 +1227,10 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
               new FunctionNode(
                   FunctionRegistry.IN,
                   null /* scalarValues */,
-                  new ConstantNode(new Constant(Var.var("o"), foo)),
-                  new ConstantNode(foo))));
+                  new ValueExpressionNode[] {
+                    new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
+                    new ConstantNode(foo)
+                  })));
     }
 
     final IASTOptimizer rewriter = new ASTStaticBindingsOptimizer();
@@ -1291,7 +1293,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new StatementPatternNode(
               new VarNode("s"),
               new VarNode("p"),
-              new ConstantNode(new Constant(Var.var("o"), foo)),
+              new ConstantNode(new Constant((IVariable) Var.var("o"), foo)),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
 
@@ -1299,7 +1301,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new FilterNode(
               FunctionNode.EQ(
                   new ConstantNode(foo),
-                  new ConstantNode(new Constant(Var.var("o"), foo)))));
+                  new ConstantNode(new Constant((IVariable) Var.var("o"), foo)))));
     }
 
     final IASTOptimizer rewriter = new ASTStaticBindingsOptimizer();
@@ -1922,7 +1924,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       whereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant(Var.var("p"), cTest)),
+              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -1934,7 +1936,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
       sqWhereClause.addChild(
           new StatementPatternNode(
               new VarNode("s"),
-              new ConstantNode(new Constant(Var.var("p"), cTest2)),
+              new ConstantNode(new Constant((IVariable) Var.var("p"), cTest2)),
               new VarNode("o"),
               null /* c */,
               Scope.DEFAULT_CONTEXTS));
@@ -2081,7 +2083,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
       whereClause.addChild(
           new StatementPatternNode(
-              new ConstantNode(new Constant(Var.var("s"), c3)),
+              new ConstantNode(new Constant((IVariable) Var.var("s"), c3)),
               new VarNode("p"),
               new VarNode("o"),
               null /* c */,
@@ -2240,7 +2242,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
       whereClause.addChild(
           new StatementPatternNode(
-              new ConstantNode(new Constant(Var.var("uri"), cTest)),
+              new ConstantNode(new Constant((IVariable) Var.var("uri"), cTest)),
               new VarNode("p"),
               new VarNode("type"),
               null /* c */,
@@ -2330,7 +2332,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
       whereClause.addChild(new AssignmentNode(new VarNode("o"), new ConstantNode(cTest)));
 
-      final PathElt[] elements = new PathElt[2];
+      final PathElt elements[] = new PathElt[2];
       elements[0] = new PathElt(new ConstantNode(iv1), false, PathMod.ZERO_OR_MORE);
       elements[1] = new PathElt(new ConstantNode(iv2), false, PathMod.ZERO_OR_MORE);
 
@@ -2348,7 +2350,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
 
       final JoinGroupNode whereClause = new JoinGroupNode();
 
-      final PathElt[] elements = new PathElt[2];
+      final PathElt elements[] = new PathElt[2];
       elements[0] = new PathElt(new ConstantNode(iv1), false, PathMod.ZERO_OR_MORE);
       elements[1] = new PathElt(new ConstantNode(iv2), false, PathMod.ZERO_OR_MORE);
 
@@ -2357,7 +2359,7 @@ public class TestASTStaticBindingsOptimizer extends AbstractASTEvaluationTestCas
           new PropertyPathNode(
               new VarNode("s"),
               pn,
-              new ConstantNode(new Constant(Var.var("o"), cTest)) /* o inlined! */));
+              new ConstantNode(new Constant((IVariable) Var.var("o"), cTest)) /* o inlined! */));
 
       expected.setWhereClause(whereClause);
     }

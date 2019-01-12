@@ -24,7 +24,6 @@ package org.embergraph.btree.raba.codec;
 
 import it.unimi.dsi.fastutil.bytes.custom.CustomByteArrayFrontCodedList;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.embergraph.btree.raba.IRaba;
 import org.embergraph.btree.raba.ReadOnlyKeysRaba;
@@ -53,10 +52,10 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
   public void test_example_ratio4() throws UnsupportedEncodingException {
 
     final byte[][] a = new byte[4][];
-    a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
-    a[1] = "foobar".getBytes(StandardCharsets.US_ASCII);
-    a[2] = "fool".getBytes(StandardCharsets.US_ASCII);
-    a[3] = "football".getBytes(StandardCharsets.US_ASCII);
+    a[0] = "foo".getBytes("US-ASCII");
+    a[1] = "foobar".getBytes("US-ASCII");
+    a[2] = "fool".getBytes("US-ASCII");
+    a[3] = "football".getBytes("US-ASCII");
 
     final IRaba expected = new ReadOnlyKeysRaba(a);
 
@@ -92,10 +91,10 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
   public void test_example_ratio3() throws UnsupportedEncodingException {
 
     final byte[][] a = new byte[4][];
-    a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
-    a[1] = "foobar".getBytes(StandardCharsets.US_ASCII);
-    a[2] = "fool".getBytes(StandardCharsets.US_ASCII);
-    a[3] = "football".getBytes(StandardCharsets.US_ASCII);
+    a[0] = "foo".getBytes("US-ASCII");
+    a[1] = "foobar".getBytes("US-ASCII");
+    a[2] = "fool".getBytes("US-ASCII");
+    a[3] = "football".getBytes("US-ASCII");
 
     final IRaba expected = new ReadOnlyKeysRaba(a);
 
@@ -133,10 +132,10 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
   public void test_example1_ratio2() throws UnsupportedEncodingException {
 
     final byte[][] a = new byte[4][];
-    a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
-    a[1] = "foobar".getBytes(StandardCharsets.US_ASCII);
-    a[2] = "fool".getBytes(StandardCharsets.US_ASCII);
-    a[3] = "football".getBytes(StandardCharsets.US_ASCII);
+    a[0] = "foo".getBytes("US-ASCII");
+    a[1] = "foobar".getBytes("US-ASCII");
+    a[2] = "fool".getBytes("US-ASCII");
+    a[3] = "football".getBytes("US-ASCII");
 
     final IRaba expected = new ReadOnlyKeysRaba(a);
 
@@ -173,10 +172,10 @@ public class AbstractFrontCodedRabaCoderTestCase extends AbstractRabaCoderTestCa
   public void test_example1_ratio1() throws UnsupportedEncodingException {
 
     final byte[][] a = new byte[4][];
-    a[0] = "foo".getBytes(StandardCharsets.US_ASCII);
-    a[1] = "foobar".getBytes(StandardCharsets.US_ASCII);
-    a[2] = "fool".getBytes(StandardCharsets.US_ASCII);
-    a[3] = "football".getBytes(StandardCharsets.US_ASCII);
+    a[0] = "foo".getBytes("US-ASCII");
+    a[1] = "foobar".getBytes("US-ASCII");
+    a[2] = "fool".getBytes("US-ASCII");
+    a[3] = "football".getBytes("US-ASCII");
 
     final IRaba expected = new ReadOnlyKeysRaba(a);
 

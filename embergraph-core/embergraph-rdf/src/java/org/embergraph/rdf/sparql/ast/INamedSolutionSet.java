@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast;
  */
 public interface INamedSolutionSet {
 
-  interface Annotations {
+  public interface Annotations {
 
     /** The name of solution set. */
     String NAMED_SET = "namedSet";

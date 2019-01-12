@@ -32,5 +32,5 @@ package org.embergraph.striterator;
 public interface IChunkedOrderedStriterator<I extends IChunkedOrderedIterator<E>, E>
     extends IChunkedStriterator<I, E>, IChunkedOrderedIterator<E> {
 
-  IChunkedOrderedStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
+  public IChunkedOrderedStriterator<I, E> addFilter(IFilter<I, ?, E> filter);
 }

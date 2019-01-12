@@ -2334,7 +2334,7 @@ public class DiskOnlyStrategy extends AbstractBufferStrategy implements IDiskBas
 
     flushWriteCache();
 
-    return transferFromDiskTo(this, out);
+    return super.transferFromDiskTo(this, out);
   }
 
   /**

@@ -36,7 +36,7 @@ public interface PrefixCodec extends Codec {
    *
    * @return the vector of prefix-free codewords used by this prefix coder.
    */
-  BitVector[] codeWords();
+  public BitVector[] codeWords();
 
-  PrefixCoder coder();
+  public PrefixCoder coder();
 }

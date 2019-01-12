@@ -35,7 +35,7 @@ public enum EdgesEnum {
   /** The phase is applied to all edges (both in-edges and out-edges). */
   AllEdges(true /* inEdges */, true /* outEdges */);
 
-  EdgesEnum(final boolean inEdges, final boolean outEdges) {
+  private EdgesEnum(final boolean inEdges, final boolean outEdges) {
     this.inEdges = inEdges;
     this.outEdges = outEdges;
   }

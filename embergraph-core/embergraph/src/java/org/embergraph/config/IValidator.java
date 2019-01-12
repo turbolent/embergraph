@@ -16,7 +16,7 @@ public interface IValidator<E> {
    * @param val The value.
    * @return The converted value.
    */
-  E parse(String key, String val);
+  public E parse(String key, String val);
 
   /**
    * @param key The key under which the value was discovered.
@@ -24,5 +24,5 @@ public interface IValidator<E> {
    * @param arg The parsed value.
    * @throws ConfigurationException
    */
-  void accept(String key, String val, E arg) throws ConfigurationException;
+  public void accept(String key, String val, E arg) throws ConfigurationException;
 }

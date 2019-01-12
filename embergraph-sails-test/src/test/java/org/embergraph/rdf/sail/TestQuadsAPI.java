@@ -87,7 +87,7 @@ public class TestQuadsAPI extends QuadsTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+        (EmbergraphSailRepositoryConnection) repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -146,7 +146,7 @@ public class TestQuadsAPI extends QuadsTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+        (EmbergraphSailRepositoryConnection) repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {

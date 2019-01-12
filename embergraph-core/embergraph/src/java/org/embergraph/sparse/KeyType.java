@@ -48,7 +48,7 @@ public enum KeyType {
 //    UnsignedBytes(7, 0/* variable length */)
 ;
 
-  KeyType(int b, int encodedLength) {
+  private KeyType(int b, int encodedLength) {
 
     this.b = (byte) b;
 

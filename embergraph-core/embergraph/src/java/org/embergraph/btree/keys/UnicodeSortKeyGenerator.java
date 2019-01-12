@@ -12,7 +12,7 @@ import java.util.Locale;
 public interface UnicodeSortKeyGenerator {
 
   /** The {@link Locale} used to configure this object. */
-  Locale getLocale();
+  public Locale getLocale();
 
   /**
    * Append a Unicode sort key to the {@link KeyBuilder}.
@@ -20,5 +20,5 @@ public interface UnicodeSortKeyGenerator {
    * @param keyBuilder The {@link KeyBuilder}.
    * @param s The Unicode string.
    */
-  void appendSortKey(KeyBuilder keyBuilder, String s);
+  public void appendSortKey(KeyBuilder keyBuilder, String s);
 }

@@ -280,7 +280,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
   interface EvictionPolicy<K, V> {
 
-    int MAX_BATCH_SIZE = 64;
+    public static final int MAX_BATCH_SIZE = 64;
 
     /**
      * Invokes eviction policy algorithm and returns set of evicted entries.
@@ -721,7 +721,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
       loadFactor = lf;
       eviction = es.make(this, cap, lf);
       evictionListener = listener;
-      setTable(HashEntry.newArray(cap));
+      setTable(HashEntry.<K, V>newArray(cap));
     }
 
     @SuppressWarnings("unchecked")
@@ -793,7 +793,7 @@ public class BufferedConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
     private Set<HashEntry<K, V>> attemptEviction(boolean lockedAlready) {
       Set<HashEntry<K, V>> evicted = null;
-      boolean obtainedLock = lockedAlready || tryLock();
+      boolean obtainedLock = !lockedAlready ? tryLock() : true;
       if (!obtainedLock && eviction.thresholdExpired()) {
         lock();
         obtainedLock = true;

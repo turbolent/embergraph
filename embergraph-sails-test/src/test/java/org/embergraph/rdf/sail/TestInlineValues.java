@@ -71,7 +71,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+        (EmbergraphSailRepositoryConnection) repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -121,7 +121,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
 
         Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
-            createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
+            createBindingSet(new Binding[] {new BindingImpl("s", A), new BindingImpl("age", _25)}));
 
         compare(result, solution);
       }
@@ -138,7 +138,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+        (EmbergraphSailRepositoryConnection) repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -188,7 +188,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
 
         Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
-            createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
+            createBindingSet(new Binding[] {new BindingImpl("s", B), new BindingImpl("age", _45)}));
 
         compare(result, solution);
       }
@@ -205,7 +205,7 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+        (EmbergraphSailRepositoryConnection) repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {
@@ -267,9 +267,9 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
 
         Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
-            createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
+            createBindingSet(new Binding[] {new BindingImpl("s", A), new BindingImpl("age", _25)}));
         solution.add(
-            createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
+            createBindingSet(new Binding[] {new BindingImpl("s", B), new BindingImpl("age", _45)}));
 
         compare(result, solution);
       }
@@ -308,9 +308,9 @@ public class TestInlineValues extends ProxyEmbergraphSailTestCase {
 
         Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
-            createBindingSet(new BindingImpl("s", A), new BindingImpl("age", _25)));
+            createBindingSet(new Binding[] {new BindingImpl("s", A), new BindingImpl("age", _25)}));
         solution.add(
-            createBindingSet(new BindingImpl("s", B), new BindingImpl("age", _45)));
+            createBindingSet(new Binding[] {new BindingImpl("s", B), new BindingImpl("age", _45)}));
 
         compare(result, solution);
       }

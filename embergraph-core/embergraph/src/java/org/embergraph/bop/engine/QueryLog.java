@@ -355,7 +355,7 @@ public class QueryLog {
       sb.append('\t');
       sb.append(bop.getProperty(BOp.Annotations.CONTROLLER, BOp.Annotations.DEFAULT_CONTROLLER));
       sb.append('\t');
-      sb.append(bopId);
+      sb.append(Integer.toString(bopId));
     }
 
     sb.append('\t');
@@ -572,9 +572,9 @@ public class QueryLog {
     sb.append('\t');
     sb.append(stats.opCount.get());
     sb.append('\t');
-    sb.append(numRunning);
+    sb.append(Long.toString(numRunning));
     sb.append('\t');
-    sb.append(fanOut);
+    sb.append(Integer.toString(fanOut));
     {
       final QueueStats tmp = queueStats == null ? null : queueStats.get(bopId);
       if (tmp != null) {
@@ -595,13 +595,13 @@ public class QueryLog {
     sb.append('\t');
     sb.append(stats.unitsIn.get());
     sb.append('\t');
-    sb.append(avg(stats.unitsIn.get(), stats.chunksIn.get()));
+    sb.append(Double.toString(avg(stats.unitsIn.get(), stats.chunksIn.get())));
     sb.append('\t');
     sb.append(stats.chunksOut.get());
     sb.append('\t');
     sb.append(stats.unitsOut.get());
     sb.append('\t');
-    sb.append(avg(stats.unitsOut.get(), stats.chunksOut.get()));
+    sb.append(Double.toString(avg(stats.unitsOut.get(), stats.chunksOut.get())));
     sb.append('\t');
     sb.append(stats.mutationCount.get());
     sb.append('\t');

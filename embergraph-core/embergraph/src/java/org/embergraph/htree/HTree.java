@@ -259,8 +259,12 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
         return true;
       }
 
-      // The root node has a different persistent identity.
-      return checkpoint.getRootAddr() != root.getIdentity();
+      if (checkpoint.getRootAddr() != root.getIdentity()) {
+
+        // The root node has a different persistent identity.
+
+        return true;
+      }
     }
 
     /*
@@ -976,7 +980,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
        */
 
       @SuppressWarnings("rawtypes")
-      final Constructor ctor = cl.getConstructor(HTree.class);
+      final Constructor ctor = cl.getConstructor(new Class[] {HTree.class});
 
       final Checkpoint checkpoint = (Checkpoint) ctor.newInstance(new Object[] {this});
 
@@ -1075,7 +1079,10 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
          * Found the bucket page, update it.
          */
         final BucketPage bucketPage = (BucketPage) child;
-        return bucketPage.contains(key, buddyOffset);
+        if (!bucketPage.contains(key, buddyOffset)) {
+          return false;
+        }
+        return true;
       }
       /*
        * Recursive descent into a child directory page. We have to update
@@ -1265,7 +1272,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
           final DirectoryPage pd = current.getParentDirectory();
 
           assert !pd.isOverflowDirectory();
-          assert !pd.isReadOnly() || current.isReadOnly();
+          assert pd.isReadOnly() ? current.isReadOnly() : true;
 
           current = pd._addLevelForOverflow(current);
           // we need to fix this since we have introduced a new level
@@ -1657,7 +1664,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
        */
       final Constructor ctor =
           cl.getConstructor(
-              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
+              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
 
       final HTree htree =
           (HTree)
@@ -1755,7 +1762,7 @@ public class HTree extends AbstractHTree implements IIndexLocalCounter
        */
       final Constructor ctor =
           cl.getConstructor(
-              IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE);
+              new Class[] {IRawStore.class, Checkpoint.class, IndexMetadata.class, Boolean.TYPE});
 
       final HTree htree =
           (HTree) ctor.newInstance(new Object[] {store, checkpoint, metadata, readOnly});

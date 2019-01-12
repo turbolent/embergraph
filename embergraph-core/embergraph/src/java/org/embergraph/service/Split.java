@@ -118,7 +118,9 @@ public class Split {
 
     if (ntuples != o.ntuples) return false;
 
-    return pmd.equals(o.pmd);
+    if (!pmd.equals(o.pmd)) return false;
+
+    return true;
   }
 
   /** Human friendly representation. */

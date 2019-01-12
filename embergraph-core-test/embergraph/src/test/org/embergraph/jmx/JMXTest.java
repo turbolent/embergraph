@@ -70,11 +70,11 @@ public class JMXTest {
    */
   public interface IFoo {
 
-    int getFoo();
+    public int getFoo();
 
-    int setFoo(int foo);
+    public int setFoo(int foo);
 
-    String getBar();
+    public String getBar();
   }
 
   /**
@@ -108,7 +108,7 @@ public class JMXTest {
 
   public interface IClock {
 
-    long getTime();
+    public long getTime();
   }
 
   public static class Clock extends Thread implements IClock {
@@ -203,10 +203,10 @@ public class JMXTest {
 
       cmon.setGranularityPeriod(1000 /* ms */);
 
-      cmon.setInitThreshold(System.currentTimeMillis());
+      cmon.setInitThreshold((Long) System.currentTimeMillis());
 
       // offset after event trigger for retrigger.
-      cmon.setOffset(5000L /* ms since clock is also time */);
+      cmon.setOffset((Long) 5000L /* ms since clock is also time */);
 
       // set the difference mode ?!?
       cmon.setDifferenceMode(false);

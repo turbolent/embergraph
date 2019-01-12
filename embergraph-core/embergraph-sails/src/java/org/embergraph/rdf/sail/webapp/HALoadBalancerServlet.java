@@ -669,7 +669,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
       throw new IllegalArgumentException(name + ":: " + s + " must extend " + iface.getName());
 
     try {
-      t = cls.newInstance();
+      t = (T) cls.newInstance();
     } catch (InstantiationException e) {
       throw new ServletException(e);
     } catch (IllegalAccessException e) {

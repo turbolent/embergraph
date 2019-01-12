@@ -42,7 +42,7 @@ public class HTreePageStats extends PageStats {
      * tree.
      */
 
-    height = Math.max(node.getLevel(), height);
+    height = Math.max(((AbstractPage) node).getLevel(), height);
 
     super.visit(htree, node);
   }

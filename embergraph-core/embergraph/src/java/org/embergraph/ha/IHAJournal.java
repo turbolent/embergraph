@@ -31,10 +31,10 @@ public interface IHAJournal extends IJournal {
   /**
    * Convenience method created in BLZG-1370 to factor out embergraph-jini artifact dependencies.
    */
-  UUID getServiceID();
+  public UUID getServiceID();
 
   /**
    * Convenience method created in BLZG-1370 to factor out embergraph-jini artifact dependencies.
    */
-  Object getHALogNexus();
+  public Object getHALogNexus();
 }

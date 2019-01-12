@@ -199,7 +199,7 @@ public class ASTGraphGroupOptimizer implements IASTOptimizer {
          */
 
         assertGraphInNamedDataset(
-            (EmbergraphURI) innerGraphContext.getValue(), dataSet);
+            (EmbergraphURI) ((TermNode) innerGraphContext).getValue(), dataSet);
       }
 
       if (graphContext == null) {

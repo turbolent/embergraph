@@ -367,7 +367,7 @@ public class NanoSparqlClient {
           opts.nresults = nresults;
         }
 
-        return null;
+        return (Void) null;
 
       } finally {
 
@@ -676,7 +676,7 @@ public class NanoSparqlClient {
 
     java.util.Arrays.sort(pairs);
 
-    final int[] order = new int[n];
+    final int order[] = new int[n];
 
     for (int i = 0; i < n; i++) {
 
@@ -1447,7 +1447,7 @@ public class NanoSparqlClient {
             new Callable<Void>() {
               public Void call() throws Exception {
                 runnable.run();
-                return null;
+                return (Void) null;
               }
             });
       }

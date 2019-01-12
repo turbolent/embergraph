@@ -59,7 +59,7 @@ public class TestRawRecords extends AbstractHTreeTestCase {
       assertEquals(1, htree.getLeafCount());
 
       // examine the root.
-      final DirectoryPage root = htree.getRoot();
+      final DirectoryPage root = (DirectoryPage) htree.getRoot();
 
       // all references should be to the same bucket page.
       final BucketPage bucket = (BucketPage) root.childRefs[0].get();

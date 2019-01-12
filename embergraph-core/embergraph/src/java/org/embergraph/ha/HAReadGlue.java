@@ -51,5 +51,5 @@ public interface HAReadGlue extends Remote {
    * @return The {@link Future} of an operation which evaluated to the desired record.
    * @see QuorumRead#readFromQuorum(UUID, long)
    */
-  Future<IHAReadResponse> readFromDisk(IHAReadRequest readMessage) throws IOException;
+  public Future<IHAReadResponse> readFromDisk(IHAReadRequest readMessage) throws IOException;
 }

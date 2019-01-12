@@ -21,7 +21,7 @@ public interface IRemoteChunk<E> extends Serializable {
    * The elements in the current chunk -or- <code>null</code> iff there are NO elements in the
    * chunk.
    */
-  E[] getChunk();
+  public E[] getChunk();
 
   /**
    * The natural sort orded of the elements in this chunk -or- <code>null</code> if the elements are
@@ -31,5 +31,5 @@ public interface IRemoteChunk<E> extends Serializable {
    * here so that we can avoid an RMI for this property and the expense of serializing the value
    * with each chunk.
    */
-  IKeyOrder<E> getKeyOrder();
+  public IKeyOrder<E> getKeyOrder();
 }

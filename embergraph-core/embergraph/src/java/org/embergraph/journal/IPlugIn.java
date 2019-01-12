@@ -32,18 +32,18 @@ public interface IPlugIn<M extends IIndexManager, S> {
    *
    * @param indexManager
    */
-  void startService(M indexManager);
+  public void startService(M indexManager);
 
   /**
    * Stop the service.
    *
    * @param immediateShutdown <code>true</code> if the service should be stopped immediately.
    */
-  void stopService(boolean immediateShutdown);
+  public void stopService(boolean immediateShutdown);
 
   /** Return the service. */
-  S getService();
+  public S getService();
 
   /** Return true iff the service is running. */
-  boolean isRunning();
+  public boolean isRunning();
 }

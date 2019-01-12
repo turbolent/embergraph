@@ -80,7 +80,7 @@ public class TestIndexSegmentBuilderWithBlobCapacity extends AbstractIndexSegmen
   }
 
   protected IndexSegmentCheckpoint doBuildAndDiscardCache(final BTree btree, final int m)
-      throws Exception {
+      throws IOException, Exception {
 
     final long commitTime = System.currentTimeMillis();
 

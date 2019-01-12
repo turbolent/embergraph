@@ -424,7 +424,9 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
 
     if (f == null) return false;
 
-    return !f.isDone();
+    if (f.isDone()) return false;
+
+    return true;
   }
 
   /** Run the ganglia service. */
@@ -802,7 +804,7 @@ public class GangliaService implements Runnable, IGangliaMetricsReporter {
         tmp.sendMessage(tmp.xdr);
       }
 
-      return null;
+      return (Void) null;
     }
   }
 

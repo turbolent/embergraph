@@ -752,6 +752,6 @@ public class GroupGraphPatternBuilder extends TriplePatternExprBuilder {
 
     graphPattern.add(serviceNode);
 
-    return null;
+    return (Void) null;
   }
 }

@@ -595,8 +595,9 @@ public class GeoSpatialQuery implements IGeoSpatialQuery {
         return false; // not normalized (but normalizable)
       }
 
-      // not normalized (actually unsatisfiable)
-      return !(lowerBoundingBox.northSouth > upperBoundingBox.northSouth);
+      if (lowerBoundingBox.northSouth > upperBoundingBox.northSouth) {
+        return false; // not normalized (actually unsatisfiable)
+      }
     }
 
     return true; // no violation of normalization detected, all fine

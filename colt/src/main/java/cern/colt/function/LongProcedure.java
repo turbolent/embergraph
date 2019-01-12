@@ -25,5 +25,5 @@ public interface LongProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  boolean apply(long element);
+  public abstract boolean apply(long element);
 }

@@ -73,7 +73,7 @@ public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       cxn.begin();
 
@@ -118,7 +118,7 @@ public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       cxn.begin();
 
@@ -163,7 +163,7 @@ public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       cxn.begin();
 
@@ -203,7 +203,7 @@ public class TestTicket1518 extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       cxn.begin();
 

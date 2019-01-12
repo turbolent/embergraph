@@ -66,5 +66,5 @@ public interface IAbstractAccessPath<R> {
    *
    * @return The #of elements that were removed.
    */
-  long removeAll();
+  public long removeAll();
 }

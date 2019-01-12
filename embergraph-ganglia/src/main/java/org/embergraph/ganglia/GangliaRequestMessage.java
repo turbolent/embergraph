@@ -90,7 +90,9 @@ public class GangliaRequestMessage extends AbstractGangliaMessage
 
     if (!getMetricName().equals(t.getMetricName())) return false;
 
-    return isSpoof() == t.isSpoof();
+    if (isSpoof() != t.isSpoof()) return false;
+
+    return true;
   }
 
   @Override

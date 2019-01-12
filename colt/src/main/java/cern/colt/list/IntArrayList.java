@@ -112,7 +112,7 @@ public class IntArrayList extends AbstractIntList {
    */
   public Object clone() {
     // overridden for performance only.
-    IntArrayList clone = new IntArrayList(elements.clone());
+    IntArrayList clone = new IntArrayList((int[]) elements.clone());
     clone.setSizeRaw(size);
     return clone;
   }
@@ -143,11 +143,11 @@ public class IntArrayList extends AbstractIntList {
     if (size == 0) return;
     checkRangeFromTo(from, to, size);
 
-    final int width = (max - min + 1);
+    final int width = (int) (max - min + 1);
 
     int[] counts = new int[width];
     int[] theElements = elements;
-    for (int i = from; i <= to; ) counts[theElements[i++] - min]++;
+    for (int i = from; i <= to; ) counts[(int) (theElements[i++] - min)]++;
 
     int fromIndex = from;
     int val = min;

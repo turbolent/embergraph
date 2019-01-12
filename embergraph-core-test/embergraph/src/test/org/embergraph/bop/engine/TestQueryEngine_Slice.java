@@ -168,20 +168,24 @@ public class TestQueryEngine_Slice extends TestCase2 {
         new StartOp(
             new BOp[] {},
             NV.asMap(
-                new NV(SliceOp.Annotations.BOP_ID, startId),
-                new NV(
-                    MemorySortOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER)));
+                new NV[] {
+                  new NV(SliceOp.Annotations.BOP_ID, startId),
+                  new NV(
+                      MemorySortOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                }));
 
     final SliceOp query =
         new SliceOp(
             new BOp[] {startOp},
             NV.asMap(
-                new NV(SliceOp.Annotations.BOP_ID, sliceId),
-                new NV(SliceOp.Annotations.SHARED_STATE, true),
-                new NV(SliceOp.Annotations.OFFSET, offset),
-                new NV(SliceOp.Annotations.LIMIT, limit),
-                new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-                new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false)));
+                new NV[] {
+                  new NV(SliceOp.Annotations.BOP_ID, sliceId),
+                  new NV(SliceOp.Annotations.SHARED_STATE, true),
+                  new NV(SliceOp.Annotations.OFFSET, offset),
+                  new NV(SliceOp.Annotations.LIMIT, limit),
+                  new NV(SliceOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                  new NV(PipelineOp.Annotations.REORDER_SOLUTIONS, false),
+                }));
 
     final UUID queryId = UUID.randomUUID();
     final IRunningQuery q =

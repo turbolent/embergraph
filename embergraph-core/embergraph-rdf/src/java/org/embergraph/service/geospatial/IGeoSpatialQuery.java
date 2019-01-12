@@ -43,81 +43,81 @@ import org.openrdf.model.URI;
 public interface IGeoSpatialQuery {
 
   /** @return the search function underlying the query */
-  GeoFunction getSearchFunction();
+  public GeoFunction getSearchFunction();
 
   /** @return the datatype of literals we're searching for */
-  URI getSearchDatatype();
+  public URI getSearchDatatype();
 
   /** @return the constant representing the search subject */
-  IConstant<?> getSubject();
+  public IConstant<?> getSubject();
 
   /** @return the term node representing the search predicate */
-  TermNode getPredicate();
+  public TermNode getPredicate();
 
   /** @return the term node representing the search context (named graph) */
-  TermNode getContext();
+  public TermNode getContext();
 
   /** @return the spatial circle center, in case this is a {@link GeoFunction#IN_CIRCLE} query */
-  PointLatLon getSpatialCircleCenter();
+  public PointLatLon getSpatialCircleCenter();
 
   /** @return the spatial circle radius, in case this is a {@link GeoFunction#IN_CIRCLE} query */
-  Double getSpatialCircleRadius();
+  public Double getSpatialCircleRadius();
 
   /** @return the boundary box'es south-west border point. */
-  PointLatLon getSpatialRectangleSouthWest();
+  public PointLatLon getSpatialRectangleSouthWest();
 
   /** @return the boundary box'es north-east border point. */
-  PointLatLon getSpatialRectangleNorthEast();
+  public PointLatLon getSpatialRectangleNorthEast();
 
   /** @return the spatial unit underlying the query */
-  UNITS getSpatialUnit();
+  public UNITS getSpatialUnit();
 
   /** @return the start timestamp */
-  Long getTimeStart();
+  public Long getTimeStart();
 
   /** @return the end timestamp */
-  Long getTimeEnd();
+  public Long getTimeEnd();
 
   /** @return the coordinate system ID */
-  Long getCoordSystem();
+  public Long getCoordSystem();
 
   /** @return the custom fields */
-  Map<String, LowerAndUpperValue> getCustomFieldsConstraints();
+  public Map<String, LowerAndUpperValue> getCustomFieldsConstraints();
 
   /** @return the variable to which the location will be bound (if defined) */
-  IVariable<?> getLocationVar();
+  public IVariable<?> getLocationVar();
 
   /** @return the variable to which the time will be bound (if defined) */
-  IVariable<?> getTimeVar();
+  public IVariable<?> getTimeVar();
 
   /** @return the variable to which the latitude will be bound (if defined) */
-  IVariable<?> getLatVar();
+  public IVariable<?> getLatVar();
 
   /** @return the variable to which the longitude will be bound (if defined) */
-  IVariable<?> getLonVar();
+  public IVariable<?> getLonVar();
 
   /** @return the variable to which the coordinate system component will be bound (if defined) */
-  IVariable<?> getCoordSystemVar();
+  public IVariable<?> getCoordSystemVar();
 
   /** @return the variable to which the custom fields will be bound (if defined) */
-  IVariable<?> getCustomFieldsVar();
+  public IVariable<?> getCustomFieldsVar();
 
   /** @return the variable to which the location+time will be bound (if defined) */
-  IVariable<?> getLocationAndTimeVar();
+  public IVariable<?> getLocationAndTimeVar();
 
   /** @return the variable to which the literal value will be bound */
-  IVariable<?> getLiteralVar();
+  public IVariable<?> getLiteralVar();
 
   /** @return the variable to which the distance value will be bound */
-  IVariable<?> getDistanceVar();
+  public IVariable<?> getDistanceVar();
 
   /** @return the incoming bindings to join with */
-  IBindingSet getIncomingBindings();
+  public IBindingSet getIncomingBindings();
 
   /**
    * @return a structure containing the lower and upper bound component object defined by this query
    */
-  LowerAndUpperBound getLowerAndUpperBound();
+  public LowerAndUpperBound getLowerAndUpperBound();
 
   /**
    * Normalizes a GeoSpatial query by converting it into an list of GeoSpatial queries that are
@@ -126,16 +126,16 @@ public interface IGeoSpatialQuery {
    * note that a latitude range from [10;0] will be interpreted as "everything not in the interval
    * ]0;10[.
    */
-  List<IGeoSpatialQuery> normalize();
+  public List<IGeoSpatialQuery> normalize();
 
   /** @return true if the query is normalized. See */
-  boolean isNormalized();
+  public boolean isNormalized();
 
   /** @return true if the query is satisfiable */
-  boolean isSatisfiable();
+  public boolean isSatisfiable();
 
   /** @return the datatype configuration associated with the query */
-  GeoSpatialDatatypeConfiguration getDatatypeConfig();
+  public GeoSpatialDatatypeConfiguration getDatatypeConfig();
 
   /**
    * Helper class encapsulating both the lower and upper bound as implied by the query, for the
@@ -143,7 +143,7 @@ public interface IGeoSpatialQuery {
    *
    * @author msc
    */
-  class LowerAndUpperBound {
+  public static class LowerAndUpperBound {
     private final Object[] lowerBound;
     private final Object[] upperBound;
 
@@ -161,7 +161,7 @@ public interface IGeoSpatialQuery {
     }
   }
 
-  class LowerAndUpperValue {
+  public static class LowerAndUpperValue {
     public final Object lowerValue;
     public final Object upperValue;
 

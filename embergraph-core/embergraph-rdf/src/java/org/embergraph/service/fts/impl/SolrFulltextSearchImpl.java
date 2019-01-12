@@ -87,7 +87,7 @@ public class SolrFulltextSearchImpl implements IFulltextSearch<FulltextSearchHit
       final String[] params = searchParams.split("&");
       for (int i = 0; i < params.length; i++) {
         if (params[i] != null) {
-          String[] kv = params[i].split("=");
+          String kv[] = params[i].split("=");
           if (kv.length == 2 && kv[0] != null && !(kv[0].isEmpty())) {
             if (!(kv[0].equals("wt"))) {
               try {

@@ -29,5 +29,5 @@ public interface IPrefixedURIHandler {
    *
    * @return
    */
-  String getPrefix();
+  public String getPrefix();
 }

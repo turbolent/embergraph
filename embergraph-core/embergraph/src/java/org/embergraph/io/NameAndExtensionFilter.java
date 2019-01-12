@@ -71,7 +71,10 @@ public class NameAndExtensionFilter implements FileFilter {
 
     if (ext.length() == 0 || actualName.endsWith(ext)) {
 
-      return actualName.startsWith(expectedName);
+      if (actualName.startsWith(expectedName)) {
+
+        return true;
+      }
     }
 
     return false;

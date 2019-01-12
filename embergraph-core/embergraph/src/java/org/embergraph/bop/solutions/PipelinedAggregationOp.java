@@ -301,6 +301,7 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
           } else {
             val = new Constant(varValue.getClass().cast(varValue));
           }
+          ;
 
           // Bind on [aggregates].
           aggregates.set(var, val);
@@ -623,8 +624,12 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
             // Verify optional HAVING constraint(s)
             final boolean drop;
             final IConstraint[] having2 = rewrite.getHaving2();
-            // drop this solution.
-            drop = having2 != null && !BOpUtility.isConsistent(having2, aggregates);
+            if (having2 != null && !BOpUtility.isConsistent(having2, aggregates)) {
+              // drop this solution.
+              drop = true;
+            } else {
+              drop = false;
+            }
 
             if (log.isInfoEnabled()) log.info((drop ? "drop" : "keep") + " : " + aggregates);
 
@@ -683,8 +688,12 @@ public class PipelinedAggregationOp extends GroupByOp implements ISingleThreaded
               // Verify optional HAVING constraint(s)
               final boolean drop;
               final IConstraint[] having2 = rewrite.getHaving2();
-              // drop this solution.
-              drop = having2 != null && !BOpUtility.isConsistent(having2, aggregates);
+              if (having2 != null && !BOpUtility.isConsistent(having2, aggregates)) {
+                // drop this solution.
+                drop = true;
+              } else {
+                drop = false;
+              }
 
               if (log.isInfoEnabled()) log.info((drop ? "drop" : "keep") + " : " + aggregates);
 

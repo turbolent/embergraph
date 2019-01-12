@@ -180,7 +180,7 @@ public abstract class AbstractResource<E> implements IMutableResource<E> {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface Options {
+  public static interface Options {
 
     /**
      * Set the maximum #of chunks from concurrent producers that can be buffered before an {@link

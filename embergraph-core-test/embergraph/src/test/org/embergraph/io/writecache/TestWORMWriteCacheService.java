@@ -2291,7 +2291,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
        */
       if (storeType == StoreTypeEnum.RW) {
 
-        final int[] order = getRandomOrder(nrecs);
+        final int order[] = getRandomOrder(nrecs);
 
         final MockRecord[] tmp = new MockRecord[nrecs];
 
@@ -2791,7 +2791,7 @@ public class TestWORMWriteCacheService extends TestCase3 {
 
       return raf.getChannel();
     }
-  }
+  };
 
   /*
    * HA pipeline tests.

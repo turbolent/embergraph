@@ -40,7 +40,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -367,7 +366,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
         new InputStreamReader(
             RepositoryConnectionTest.class.getResourceAsStream(
                 TEST_DIR_PREFIX + "default-graph.ttl"),
-            StandardCharsets.UTF_8);
+            "UTF-8");
     testCon.add(defaultGraph, "", RDFFormat.TURTLE);
     defaultGraph.close();
     assertTrue(NEWLY_ADDED, testCon.hasStatement(null, publisher, nameBob, false));
@@ -376,14 +375,14 @@ public abstract class RepositoryConnectionTest extends TestCase {
     // add file graph1.ttl to context1
     InputStream graph1Stream =
         RepositoryConnectionTest.class.getResourceAsStream(TEST_DIR_PREFIX + "graph1.ttl");
-    Reader graph1 = new InputStreamReader(graph1Stream, StandardCharsets.UTF_8);
+    Reader graph1 = new InputStreamReader(graph1Stream, "UTF-8");
     testCon.add(graph1, "", RDFFormat.TURTLE, context1);
     graph1.close();
 
     // add file graph2.ttl to context2
     InputStream graph2Stream =
         RepositoryConnectionTest.class.getResourceAsStream(TEST_DIR_PREFIX + "graph2.ttl");
-    Reader graph2 = new InputStreamReader(graph2Stream, StandardCharsets.UTF_8);
+    Reader graph2 = new InputStreamReader(graph2Stream, "UTF-8");
     testCon.add(graph2, "", RDFFormat.TURTLE, context2);
     graph2.close();
     assertTrue(
@@ -560,8 +559,8 @@ public abstract class RepositoryConnectionTest extends TestCase {
         assertThat(solution.hasBinding(MBOX), is(equalTo(true)));
         Value nameResult = solution.getValue(NAME);
         Value mboxResult = solution.getValue(MBOX);
-        assertThat(nameResult, anyOf(is(equalTo(nameAlice)), is(equalTo(nameBob))));
-        assertThat(mboxResult, anyOf(is(equalTo(mboxAlice)), is(equalTo(mboxBob))));
+        assertThat(nameResult, anyOf(is(equalTo((Value) nameAlice)), is(equalTo((Value) nameBob))));
+        assertThat(mboxResult, anyOf(is(equalTo((Value) mboxAlice)), is(equalTo((Value) mboxBob))));
       }
     } finally {
       result.close();
@@ -691,11 +690,11 @@ public abstract class RepositoryConnectionTest extends TestCase {
         Statement st = result.next();
         if (name.equals(st.getPredicate())) {
           assertThat(
-              st.getObject(), anyOf(is(equalTo(nameAlice)), is(equalTo(nameBob))));
+              st.getObject(), anyOf(is(equalTo((Value) nameAlice)), is(equalTo((Value) nameBob))));
         } else {
           assertThat(st.getPredicate(), is(equalTo(mbox)));
           assertThat(
-              st.getObject(), anyOf(is(equalTo(mboxAlice)), is(equalTo(mboxBob))));
+              st.getObject(), anyOf(is(equalTo((Value) mboxAlice)), is(equalTo((Value) mboxBob))));
         }
       }
     } finally {
@@ -929,10 +928,10 @@ public abstract class RepositoryConnectionTest extends TestCase {
     try {
       while (result.hasNext()) {
         Statement st = result.next();
-        assertThat(st.getSubject(), is(equalTo(bob)));
+        assertThat(st.getSubject(), is(equalTo((Resource) bob)));
         assertThat(st.getPredicate(), is(equalTo(name)));
-        assertThat(st.getObject(), is(equalTo(nameBob)));
-        assertThat(st.getContext(), is(equalTo(context1)));
+        assertThat(st.getObject(), is(equalTo((Value) nameBob)));
+        assertThat(st.getContext(), is(equalTo((Resource) context1)));
       }
     } finally {
       result.close();
@@ -943,7 +942,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
     try {
       while (result.hasNext()) {
         Statement st = result.next();
-        assertThat(st.getContext(), is(equalTo(context1)));
+        assertThat(st.getContext(), is(equalTo((Resource) context1)));
       }
     } finally {
       result.close();
@@ -986,7 +985,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
         Statement st = iter.next();
         assertThat(
             st.getContext(),
-            anyOf(is(nullValue(Resource.class)), is(equalTo(context2))));
+            anyOf(is(nullValue(Resource.class)), is(equalTo((Resource) context2))));
       }
 
       assertEquals("there should be three statements", 3, count);
@@ -1006,7 +1005,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
         count++;
         Statement st = iter.next();
         // we should have _only_ statements from context2
-        assertThat(st.getContext(), is(equalTo(context2)));
+        assertThat(st.getContext(), is(equalTo((Resource) context2)));
       }
       assertEquals("there should be two statements", 2, count);
     } finally {
@@ -1022,7 +1021,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
         count++;
         Statement st = iter.next();
         // we should have _only_ statements from context2
-        assertThat(st.getContext(), is(equalTo(context2)));
+        assertThat(st.getContext(), is(equalTo((Resource) context2)));
       }
       assertEquals("there should be two statements", 2, count);
     } finally {
@@ -1055,7 +1054,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
         // context
         assertThat(
             st.getContext(),
-            anyOf(is(nullValue(Resource.class)), is(equalTo(context2))));
+            anyOf(is(nullValue(Resource.class)), is(equalTo((Resource) context2))));
       }
       assertEquals("there should be four statements", 4, count);
     } finally {
@@ -1072,7 +1071,7 @@ public abstract class RepositoryConnectionTest extends TestCase {
         Statement st = iter.next();
         assertThat(
             st.getContext(),
-            anyOf(is(equalTo(context1)), is(equalTo(context2))));
+            anyOf(is(equalTo((Resource) context1)), is(equalTo((Resource) context2))));
       }
       assertEquals("there should be four statements", 4, count);
     } finally {

@@ -28,7 +28,7 @@ import java.util.Iterator;
 public interface IAbstractNode {
 
   /** Traversal of index values in key order. */
-  ITupleIterator entryIterator();
+  public ITupleIterator entryIterator();
 
   /**
    * Post-order traveral of nodes and leaves in the tree. For any given node, its children are
@@ -37,5 +37,5 @@ public interface IAbstractNode {
    *
    * @return Iterator visiting {@link IAbstractNode}s.
    */
-  Iterator<AbstractNode> postOrderNodeIterator();
+  public Iterator<AbstractNode> postOrderNodeIterator();
 }

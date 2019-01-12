@@ -33,7 +33,7 @@ import org.embergraph.rdf.sparql.ast.optimizers.ASTSimpleOptionalOptimizer;
  */
 public interface IJoinNode extends IBindingProducerNode {
 
-  interface Annotations {
+  public interface Annotations {
 
     /**
      * A {@link List} of {@link FilterNode}s for constraints which MUST run <em>with</em> the JOIN.

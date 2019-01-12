@@ -59,8 +59,7 @@ public class ProxySuiteHelper {
   }
 
   private static class MultiModeTestSuite extends TestSuite {
-
-    private final ProxyTestSuite[] subs;
+    private final ProxyTestSuite subs[];
 
     public MultiModeTestSuite(
         final String name, final Set<BufferMode> bufferModes, final TestMode... testModes) {

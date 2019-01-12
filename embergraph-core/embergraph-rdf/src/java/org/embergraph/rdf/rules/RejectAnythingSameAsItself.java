@@ -79,7 +79,13 @@ public class RejectAnythingSameAsItself extends BOpBase implements BooleanValueE
 
     if (o == null) return true; // not yet bound.
 
-    // reject this case.
-    return !s.equals(o) || !p.equals(get(3) /* owlSameAs */);
+    if (s.equals(o) && p.equals(get(3) /* owlSameAs */)) {
+
+      // reject this case.
+
+      return false;
+    }
+
+    return true;
   }
 }

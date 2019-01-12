@@ -29,5 +29,5 @@ public interface ISuffixedURIHandler {
    *
    * @return
    */
-  String getSuffix();
+  public String getSuffix();
 }

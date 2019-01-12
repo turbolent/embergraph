@@ -95,6 +95,6 @@ public class ComputedIN extends XSDBooleanIVValueExpression {
       }
     }
 
-    return not != found;
+    return not ? !found : found;
   }
 }

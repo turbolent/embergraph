@@ -40,7 +40,7 @@ public class W3CQueryLanguageException extends RuntimeException {
   private static final long serialVersionUID = 1L;
 
   /** Language family for errors. */
-  public enum LanguageFamily {
+  public static enum LanguageFamily {
     /** XQuery */
     XQ,
     /** XPath */
@@ -50,14 +50,14 @@ public class W3CQueryLanguageException extends RuntimeException {
   }
 
   /** Error category. */
-  public enum ErrorCategory {
+  public static enum ErrorCategory {
     /** Static analysis error. */
     ST,
     /** Dynamic (runtime) error. */
     DY,
     /** Type error. */
     TY
-  }
+  };
 
   /** The {@link LanguageFamily}. */
   public final LanguageFamily languageFamily;

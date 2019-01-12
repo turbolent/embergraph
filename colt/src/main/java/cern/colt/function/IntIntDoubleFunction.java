@@ -18,5 +18,5 @@ public interface IntIntDoubleFunction {
    * @param third third argument passed to the function.
    * @return the result of the function.
    */
-  double apply(int first, int second, double third);
+  public abstract double apply(int first, int second, double third);
 }

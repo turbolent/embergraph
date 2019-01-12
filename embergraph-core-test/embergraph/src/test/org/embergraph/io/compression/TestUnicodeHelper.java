@@ -132,7 +132,7 @@ public class TestUnicodeHelper extends TestCase2 {
         new UnicodeHelper(getUnicodeCompressor()), new String[] {"en", "embergraph"});
   }
 
-  private void doEncodeDecodeTest(final UnicodeHelper un, final String[] expected)
+  private void doEncodeDecodeTest(final UnicodeHelper un, final String expected[])
       throws IOException {
 
     // buffer for encode result.

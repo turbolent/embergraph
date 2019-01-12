@@ -23,7 +23,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -173,7 +172,7 @@ public class JettyResponseListener extends InputStreamResponseListener {
          * its subsets MUST be labeled with an appropriate charset value. See section 3.4.1 for
          * compatibility problems.
          */
-        r = new InputStreamReader(getInputStream(), StandardCharsets.ISO_8859_1);
+        r = new InputStreamReader(getInputStream(), ISO_8859_1);
       } else {
         /*
          * Also per that section, no default otherwise.

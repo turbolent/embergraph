@@ -57,7 +57,7 @@ public class Benchmark extends cern.colt.PersistentObject {
    * @param args[1] <tt>true</tt> prints each generated number, <tt>false</tt> does not print
    *     generated numbers (use this setting for benchmarking).
    */
-  public static void main(String[] args) {
+  public static void main(String args[]) {
     int size = Integer.parseInt(args[0]);
     boolean print = new Boolean(args[1]).booleanValue();
     double mean = new Double(args[2]).doubleValue();

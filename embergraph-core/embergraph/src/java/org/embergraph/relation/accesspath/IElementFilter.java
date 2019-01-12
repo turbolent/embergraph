@@ -54,5 +54,5 @@ public interface IElementFilter<E> extends IFilterTest, Serializable {
    * @param o An object of some type.
    * @return <code>true</code> if the element can be inspected by this filter.
    */
-  boolean canAccept(Object o);
+  public boolean canAccept(Object o);
 }

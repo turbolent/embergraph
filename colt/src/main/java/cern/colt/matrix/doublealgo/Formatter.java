@@ -361,7 +361,7 @@ public class Formatter extends AbstractFormatter {
       String format = formats[i];
       strings[i] = new Formatter(format).toString(matrix);
       for (int j = 0; j < matrix.size(); j++) {
-        System.out.println(matrix.get(j));
+        System.out.println(String.valueOf(matrix.get(j)));
       }
     }
 

@@ -38,12 +38,12 @@ package org.embergraph.cache;
 public interface ICacheEntry<K, T> extends IWeakRefCacheEntry<K, T> {
 
   /** Return true iff the object associated with this entry is dirty. */
-  boolean isDirty();
+  public boolean isDirty();
 
   /**
    * Set the dirty flag.
    *
    * @param dirty true iff the object associated with this entry is dirty.
    */
-  void setDirty(boolean dirty);
+  public void setDirty(boolean dirty);
 }

@@ -14,7 +14,7 @@ import java.util.Locale;
  */
 public class LanguageRange implements Comparable<LanguageRange> {
 
-  private final String[] range;
+  private final String range[];
   final String full;
   /**
    * Note range must be in lower case, this is not verified.

@@ -42,7 +42,7 @@ public interface IChunkedOrderedIterator<R> extends IChunkedIterator<R> {
    * @return The natural order in which the elements are being visited -or- <code>null</code> if not
    *     known.
    */
-  IKeyOrder<R> getKeyOrder();
+  public IKeyOrder<R> getKeyOrder();
 
   /**
    * Return the next "chunk" of elements. The elements will be in the specified order. If {@link
@@ -56,5 +56,5 @@ public interface IChunkedOrderedIterator<R> extends IChunkedIterator<R> {
    * @throws NoSuchElementException if the iterator is exhausted.
    * @throws IllegalArgumentException if the <i>keyOrder</i> is <code>null</code>.
    */
-  R[] nextChunk(IKeyOrder<R> keyOrder);
+  public R[] nextChunk(IKeyOrder<R> keyOrder);
 }

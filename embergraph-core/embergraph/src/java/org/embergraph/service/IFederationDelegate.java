@@ -41,7 +41,7 @@ import org.embergraph.util.httpd.AbstractHTTPD;
 public interface IFederationDelegate<T> {
 
   /** Return the client or service. */
-  T getService();
+  public T getService();
 
   /**
    * Return a name for the service. It is up to administrators to ensure that service names are
@@ -49,7 +49,7 @@ public interface IFederationDelegate<T> {
    *
    * @return A name for the service.
    */
-  String getServiceName();
+  public String getServiceName();
 
   /**
    * Return the class or interface that is the most interesting facet of the client and which will
@@ -58,14 +58,14 @@ public interface IFederationDelegate<T> {
    *
    * @return The class or interface and never <code>null</code>.
    */
-  Class getServiceIface();
+  public Class getServiceIface();
 
   /**
    * The {@link UUID} assigned to the {@link IEmbergraphClient} or {@link AbstractService}.
    *
    * @see AbstractService#setServiceUUID(UUID)
    */
-  UUID getServiceUUID();
+  public UUID getServiceUUID();
 
   /**
    * Offers the service an opportunity to dynamically detach and re-attach performance counters.
@@ -81,16 +81,16 @@ public interface IFederationDelegate<T> {
    * <p>However, there are still some counters which need to be dynamically reattached. For example,
    * any counter set which is dynamic in its structure, such as the DirectBufferPool.
    */
-  void reattachDynamicCounters();
+  public void reattachDynamicCounters();
 
   /** Return <code>true</code> iff the service is ready to start. */
-  boolean isServiceReady();
+  public boolean isServiceReady();
 
   /**
    * Invoked by the {@link AbstractFederation} once the deferred startup tasks are executed.
    * Services may use this event to perform additional initialization.
    */
-  void didStart();
+  public void didStart();
 
   /**
    * Notice that the service has been discovered. This notice will be generated the first time the
@@ -99,7 +99,7 @@ public interface IFederationDelegate<T> {
    * @param service The service.
    * @param serviceUUID The service {@link UUID}.
    */
-  void serviceJoin(IService service, UUID serviceUUID);
+  public void serviceJoin(IService service, UUID serviceUUID);
 
   /**
    * Notice that the service is no longer available. This notice will be generated once for a given
@@ -108,7 +108,7 @@ public interface IFederationDelegate<T> {
    *
    * @param serviceUUID The service {@link UUID}.
    */
-  void serviceLeave(UUID serviceUUID);
+  public void serviceLeave(UUID serviceUUID);
 
   /**
    * Create a new {@link AbstractHTTPD} instance.
@@ -118,6 +118,6 @@ public interface IFederationDelegate<T> {
    * @return The httpd daemon.
    * @throws IOException
    */
-  AbstractHTTPD newHttpd(final int httpdPort, final ICounterSetAccess access)
+  public AbstractHTTPD newHttpd(final int httpdPort, final ICounterSetAccess access)
       throws IOException;
 }

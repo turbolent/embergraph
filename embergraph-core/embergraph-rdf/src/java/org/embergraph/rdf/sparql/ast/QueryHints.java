@@ -720,8 +720,8 @@ public interface QueryHints {
    * i.e. start out with the subject - reverse: choose backward gearing, i.e. start out with the
    * object
    */
-  String GEARING = "gearing";
+  final String GEARING = "gearing";
 
-  String GEARING_FORWARD = "forward";
-  String GEARING_REVERSE = "reverse";
+  static final String GEARING_FORWARD = "forward";
+  static final String GEARING_REVERSE = "reverse";
 }

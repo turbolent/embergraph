@@ -119,7 +119,7 @@ public class AbstractTestSegSplitter extends TestCase2 {
       // Otherwise accept the recommended separator key.
       return a;
     }
-  }
+  };
 
   /**
    * Generate an {@link IndexSegment} from the given BTree.

@@ -318,7 +318,12 @@ public class XMLBuilder {
      */
     private boolean isSimpleEndTagForHTML() {
 
-      return !"form".equalsIgnoreCase(m_tag);
+      if ("form".equalsIgnoreCase(m_tag)) {
+
+        return false;
+      }
+
+      return true;
     }
 
     /**

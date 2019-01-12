@@ -116,7 +116,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
       ZETA_3 = new int[256 * 256],
       SHIFTED_GAMMA = new int[256 * 256];
 
-  static void fillArrayFromResource(final String resource, final int[] array) throws IOException {
+  static void fillArrayFromResource(final String resource, final int array[]) throws IOException {
     final String resouceFullPath = "/it/unimi/dsi/io/" + resource;
     final InputStream ris = InputBitStream.class.getResourceAsStream(resouceFullPath);
     if (ris == null) throw new IOException("Cannot open resource " + resouceFullPath);
@@ -485,7 +485,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    * @return {@link #fill}.
    */
   private final int refill() throws IOException {
-    assert !ASSERTS || fill < 16;
+    if (ASSERTS) assert fill < 16;
 
     if (avail > 1) {
       // If there is a byte in the buffer, we use it directly.
@@ -534,7 +534,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
       fill = 8;
     }
 
-    assert !ASSERTS || len <= fill : len + " bit(s) requested, " + fill + " available";
+    if (ASSERTS) assert len <= fill : len + " bit(s) requested, " + fill + " available";
 
     readBits += len;
 
@@ -563,7 +563,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    * @param len the number of bits to read.
    */
   public void read(final byte[] bits, int len) throws IOException {
-    assert !ASSERTS || fill < 32 : fill + " >= " + 32;
+    if (ASSERTS) assert fill < 32 : fill + " >= " + 32;
 
     if (len <= fill) {
       if (len <= 8) {
@@ -904,7 +904,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    * @see OutputBitStream#writeUnary(int)
    */
   public int readUnary() throws IOException {
-    assert !ASSERTS || fill < 32 : fill + " >= " + 32;
+    if (ASSERTS) assert fill < 32 : fill + " >= " + 32;
     int x;
 
     if (fill < 16) refill();
@@ -942,7 +942,7 @@ public class InputBitStream extends AbstractBooleanIterator implements Flushable
    * @see OutputBitStream#writeUnary(int)
    */
   public long readLongUnary() throws IOException {
-    assert !ASSERTS || fill < 32 : fill + " >= " + 32;
+    if (ASSERTS) assert fill < 32 : fill + " >= " + 32;
 
     // Clean up current and check whether it is nonzero
     if ((current & (1 << fill) - 1) != 0) return readUnary();

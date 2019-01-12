@@ -835,7 +835,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
    * @throws RejectedExecutionException if the service is shutdown -or- the retryMillis is ZERO(0L).
    */
   public void submitOne(final R resource, final long retryMillis)
-      throws Exception {
+      throws InterruptedException, Exception {
 
     if (resource == null) throw new IllegalArgumentException();
 
@@ -1004,6 +1004,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
     // Convert the resource identifier to a URL.
     final String baseURI;
+    ;
     if (getClass().getResource(resourceStr) != null) {
 
       baseURI = getClass().getResource(resourceStr).toURI().toString();
@@ -1568,7 +1569,9 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       if (otherWriterService.isTerminated()) return true;
 
-      return notifyService != null && notifyService.isTerminated();
+      if (notifyService != null && notifyService.isTerminated()) return true;
+
+      return false;
 
     } finally {
 
@@ -2582,7 +2585,9 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                     if (v instanceof BNode) return false;
 
-                    return !r.isBlob(v);
+                    if (r.isBlob(v)) return false;
+
+                    return true;
                   }
                 }),
         chunkSize,
@@ -2626,8 +2631,12 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
                     final EmbergraphLiteral lit = (EmbergraphLiteral) obj;
 
-                    // Ignore datatype literals.
-                    return indexDatatypeLiterals || lit.getDatatype() == null;
+                    if (!indexDatatypeLiterals && lit.getDatatype() != null) {
+                      // Ignore datatype literals.
+                      return false;
+                    }
+
+                    return true;
                   }
                 }),
         chunkSize,
@@ -2933,7 +2942,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             final byte[] key = v.getIV().encode(tmp.reset()).getKey();
 
             // Serialize the term.
-            final byte[] val = ser.serialize(v, out.reset(), tbuf);
+            final byte[] val = ser.serialize((EmbergraphValueImpl) v, out.reset(), tbuf);
 
             /*
              * Note: The EmbergraphValue instance is NOT supplied to
@@ -3350,7 +3359,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
           e.getPredicate(),
           e.getObject(),
           e.getContext(),
-          (e instanceof EmbergraphStatement ? e.getStatementType() : null));
+          (e instanceof EmbergraphStatement ? ((EmbergraphStatement) e).getStatementType() : null));
     }
 
     /**
@@ -3385,7 +3394,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
       if (bnodes instanceof ConcurrentHashMap) {
 
         final EmbergraphBNode tmp =
-            bnodes.putIfAbsent(id, bnode);
+            ((ConcurrentHashMap<String, EmbergraphBNode>) bnodes).putIfAbsent(id, bnode);
 
         if (tmp != null) {
 
@@ -3512,10 +3521,10 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
         final Resource s, final URI p, final Value o, final Resource c, final StatementEnum type) {
 
       _handleStatement(
-          (Resource) getCanonicalValue(valueFactory.asValue(s)),
-          (URI) getCanonicalValue(valueFactory.asValue(p)),
-          getCanonicalValue(valueFactory.asValue(o)),
-          (Resource) getCanonicalValue(valueFactory.asValue(c)),
+          (Resource) getCanonicalValue((EmbergraphResource) valueFactory.asValue(s)),
+          (URI) getCanonicalValue((EmbergraphURI) valueFactory.asValue(p)),
+          (Value) getCanonicalValue((EmbergraphValue) valueFactory.asValue(o)),
+          (Resource) getCanonicalValue((EmbergraphResource) valueFactory.asValue(c)),
           type);
     }
 
@@ -3529,10 +3538,10 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 
       final EmbergraphStatement stmt =
           valueFactory.createStatement(
-              s,
-              p,
-              o,
-              c,
+              (EmbergraphResource) s,
+              (EmbergraphURI) p,
+              (EmbergraphValue) o,
+              (EmbergraphResource) c,
               type);
 
       if (statements == null) {

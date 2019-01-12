@@ -141,7 +141,7 @@ class GroupGraphPattern {
 
     assertValid();
 
-    if (log.isInfoEnabled()) log.info("child=" + BOpUtility.toString(child));
+    if (log.isInfoEnabled()) log.info("child=" + BOpUtility.toString((BOp) child));
 
     children.add(child);
   }
@@ -266,7 +266,7 @@ class GroupGraphPattern {
           final StatementPatternNode sp = (StatementPatternNode) newGroup.get(0);
 
           // The context for the SPs in that GRAPH group.
-          final TermNode context = sp.get(3);
+          final TermNode context = (TermNode) sp.get(3);
 
           // Must be defined.
           assert context != null;

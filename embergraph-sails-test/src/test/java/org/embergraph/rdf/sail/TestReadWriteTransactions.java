@@ -89,7 +89,7 @@ public class TestReadWriteTransactions extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection isolated =
-          repo.getReadWriteConnection();
+          (EmbergraphSailRepositoryConnection) repo.getReadWriteConnection();
       isolated.setAutoCommit(false);
       //        final EmbergraphSailRepositoryConnection unisolated =
       //            (EmbergraphSailRepositoryConnection) repo.getUnisolatedConnection();
@@ -98,7 +98,7 @@ public class TestReadWriteTransactions extends ProxyEmbergraphSailTestCase {
       // read-committed view of the same database.
       // final AbstractTripleStore view = store.asReadCommittedView();
       RepositoryConnection readView =
-          repo.getReadOnlyConnection();
+          (EmbergraphSailRepositoryConnection) repo.getReadOnlyConnection();
 
       try {
 

@@ -35,19 +35,19 @@ import org.embergraph.rawstore.IMRMW;
 public interface IJournal extends IMRMW, IAtomicStore, IBTreeManager {
 
   /** A copy of the properties used to initialize this journal. */
-  Properties getProperties();
+  public Properties getProperties();
 
   /**
    * Shutdown the journal politely. Scheduled operations will run to completion, but no new
    * operations will be scheduled.
    */
-  void shutdown();
+  public void shutdown();
 
   /** Immediate shutdown. */
-  void shutdownNow();
+  public void shutdownNow();
 
   /** Return the object providing the local transaction manager for this journal. */
-  ILocalTransactionManager getLocalTransactionManager();
+  public ILocalTransactionManager getLocalTransactionManager();
 
   /**
    * The {@link Quorum} for this service -or- <code>null</code> if the service is not running with a
@@ -79,5 +79,5 @@ public interface IJournal extends IMRMW, IAtomicStore, IBTreeManager {
    *
    * @return
    */
-  boolean isHAJournal();
+  public boolean isHAJournal();
 }

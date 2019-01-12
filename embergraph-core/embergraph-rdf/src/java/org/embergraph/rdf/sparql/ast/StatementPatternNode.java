@@ -268,25 +268,25 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
   /** The variable or constant for the subject position (required). */
   public final TermNode s() {
 
-    return get(0);
+    return (TermNode) get(0);
   }
 
   /** The variable or constant for the predicate position (required). */
   public final TermNode p() {
 
-    return get(1);
+    return (TermNode) get(1);
   }
 
   /** The variable or constant for the object position (required). */
   public final TermNode o() {
 
-    return get(2);
+    return (TermNode) get(2);
   }
 
   /** The variable or constant for the context position (required iff in quads mode). */
   public final TermNode c() {
 
-    return get(3);
+    return (TermNode) get(3);
   }
 
   /** Strengthen return type. */
@@ -456,7 +456,9 @@ public class StatementPatternNode extends GroupMemberNodeBase<StatementPatternNo
 
     if (o() instanceof VarNode) return false;
 
-    return !(c() instanceof VarNode);
+    if (c() instanceof VarNode) return false;
+
+    return true;
   }
 
   /**

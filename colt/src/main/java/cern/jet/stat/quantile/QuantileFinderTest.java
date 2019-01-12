@@ -202,7 +202,8 @@ class QuantileFinderTest {
             double delta = deltas[d];
             for (int knownCounter = 0; knownCounter < 2; knownCounter++) {
               boolean known_N;
-              known_N = knownCounter == 0;
+              if (knownCounter == 0) known_N = true;
+              else known_N = false;
 
               DoubleQuantileFinder finder =
                   QuantileFinderFactory.newDoubleQuantileFinder(

@@ -70,7 +70,7 @@ public class RandomSamplingAssistant extends cern.colt.PersistentObject {
     return this.sampler.my_RandomGenerator;
   }
   /** Tests random sampling. */
-  public static void main(String[] args) {
+  public static void main(String args[]) {
     long n = Long.parseLong(args[0]);
     long N = Long.parseLong(args[1]);
     // test(n,N);

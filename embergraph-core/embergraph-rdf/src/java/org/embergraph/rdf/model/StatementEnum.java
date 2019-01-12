@@ -46,7 +46,7 @@ public enum StatementEnum {
 
   private final byte code;
 
-  StatementEnum(final byte code) {
+  private StatementEnum(final byte code) {
 
     this.code = code;
   }

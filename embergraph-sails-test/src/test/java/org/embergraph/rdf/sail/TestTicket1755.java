@@ -175,7 +175,7 @@ public class TestTicket1755 extends QuadsTestCase {
       EmbergraphValue value = ((ConstantNode) bop).getValue();
       if (value instanceof EmbergraphLiteral
           && XMLSchema.DATE.equals(((EmbergraphLiteral) value).getDatatype())) {
-        assertFalse(value.getIV().isNullIV());
+        assertFalse(((EmbergraphLiteral) value).getIV().isNullIV());
         assertTrue(value.getIV() instanceof LiteralExtensionIV);
         cnt++;
       }

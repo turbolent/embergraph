@@ -56,7 +56,7 @@ public class ChunkTrace {
 
     if (col >= 0) {
 
-      final String s = orderIndex + "[" + chunk.length + "]";
+      final String s = Integer.toString(orderIndex) + "[" + Integer.toString(chunk.length) + "]";
 
       System.err.print(s);
 

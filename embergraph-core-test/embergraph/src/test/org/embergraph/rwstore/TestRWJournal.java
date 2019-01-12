@@ -1321,7 +1321,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      */
     public void testStressAllocationContextRecycling() {
 
-      final Journal store = getStore(1);
+      final Journal store = (Journal) getStore(1);
 
       try {
 
@@ -1370,7 +1370,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      */
     public void testStressUnisolatedAllocationContextRecycling() {
 
-      final Journal store = getStore(1);
+      final Journal store = (Journal) getStore(1);
 
       try {
 
@@ -1426,7 +1426,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      */
     public void testUnisolatedAllocationContextRecycling() {
 
-      final Journal store = getStore(0);
+      final Journal store = (Journal) getStore(0);
 
       try {
 
@@ -1577,7 +1577,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
     public void testSimpleUnisolatedAllocationContextRecycling() {
 
-      final Journal store = getStore(0);
+      final Journal store = (Journal) getStore(0);
 
       try {
 
@@ -1818,7 +1818,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       // we want lots of allocators, but avoid a large file
       properties.setProperty(RWStore.Options.ALLOCATION_SIZES, "1,2,3,4,5,6,7,8"); // 512 max
 
-      final Journal store = getStore(properties);
+      final Journal store = (Journal) getStore(properties);
 
       try {
 
@@ -2025,7 +2025,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
           store.commit();
 
-          Thread.sleep(10); // to force deferredFrees
+          Thread.currentThread().sleep(10); // to force deferredFrees
 
           // Request release of deferred frees.
           rw.checkDeferredFrees(/*true freeNow */ store);
@@ -2249,13 +2249,13 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_stressCommit() {
-      Journal journal = getStore(0); // remember no history!
+      Journal journal = (Journal) getStore(0); // remember no history!
 
       for (int i = 0; i < 1000; i++) commitSomeData(journal);
     }
 
     public int doStressCommitIndex(final long retention, final int runs) {
-      final Journal journal = getStore(retention); // remember no history!
+      final Journal journal = (Journal) getStore(retention); // remember no history!
       try {
         final int cRuns = runs;
         for (int i = 0; i < cRuns; i++) commitSomeData(journal);
@@ -2337,7 +2337,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_snapshotData() throws IOException {
-      final Journal journal = getStore(0); // remember no history!
+      final Journal journal = (Journal) getStore(0); // remember no history!
 
       try {
         for (int i = 0; i < 100; i++) commitSomeData(journal);
@@ -2645,7 +2645,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
       final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
 
       final RWStore rw = bs.getStore();
-      final int[] freeAddr = new int[512];
+      final int freeAddr[] = new int[512];
       int freeCurs = 0;
       for (int i = 0; i < grp; i++) {
         final int alloc = min + r.nextInt(sze - min);
@@ -2821,7 +2821,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_allocCommitFreeWithHistory() {
-      final Journal store = getStore(4);
+      final Journal store = (Journal) getStore(4);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -2861,7 +2861,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
       properties.setProperty(RWStore.Options.ALLOCATION_SIZES, "1,2,3,5,8,12,16"); // 1K
 
-      final Journal store = getStore(properties);
+      final Journal store = (Journal) getStore(properties);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -2884,7 +2884,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         store.commit();
 
         // Age the history (of the deletes!)
-        Thread.sleep(6000);
+        Thread.currentThread().sleep(6000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -2932,7 +2932,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
       final int nallocs = threshold << 3; // 8 times greater than allocation threshold
 
-      Journal store = getStore(properties);
+      Journal store = (Journal) getStore(properties);
       try {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -2955,7 +2955,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         store.commit();
 
         // Age the history (of the deletes!)
-        Thread.sleep(6000);
+        Thread.currentThread().sleep(6000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -2992,7 +2992,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
       final int nallocs = threshold << 3; // 8 times greater than allocation threshold
 
-      Journal store = getStore(properties);
+      Journal store = (Journal) getStore(properties);
       try {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3015,7 +3015,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         store.commit();
 
         // Age the history (of the deletes!)
-        Thread.sleep(6000);
+        Thread.currentThread().sleep(6000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -3049,7 +3049,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
 
       properties.setProperty(AbstractTransactionService.Options.MIN_RELEASE_AGE, "100");
 
-      final Journal store = getStore(properties);
+      final Journal store = (Journal) getStore(properties);
       try {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3068,7 +3068,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
           store.commit();
 
           // Age the history (of the deletes!)
-          Thread.sleep(200);
+          Thread.currentThread().sleep(200);
         }
 
         final String fname = bs.getStore().getStoreFile().getAbsolutePath();
@@ -3086,7 +3086,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     public void testResetHARootBlock() {
       final Properties properties = new Properties(getProperties());
 
-      final Journal store = getStore(properties);
+      final Journal store = (Journal) getStore(properties);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3123,7 +3123,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     public void testSimpleReset() {
       final Properties properties = new Properties(getProperties());
 
-      final Journal store = getStore(properties);
+      final Journal store = (Journal) getStore(properties);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3188,7 +3188,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
      * be re-allocated, so a different size allocation is requested.
      */
     public void test_allocCommitFreeCommitWithHistory() {
-      Journal store = getStore(4);
+      Journal store = (Journal) getStore(4);
       try {
 
         RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3206,7 +3206,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // delete is deferred
         assertTrue(bs.isCommitted(addr));
 
-        Thread.sleep(5000);
+        Thread.currentThread().sleep(5000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -3227,7 +3227,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_allocBlobCommitFreeCommitWithHistory() {
-      Journal store = getStore(4000);
+      Journal store = (Journal) getStore(4000);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3245,7 +3245,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // delete is deferred
         assertTrue(bs.isCommitted(addr));
 
-        Thread.sleep(5000);
+        Thread.currentThread().sleep(5000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -3266,7 +3266,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_allocBlobBoundariesCommitFreeCommitWithHistory() {
-      final Journal store = getStore(5);
+      final Journal store = (Journal) getStore(5);
       try {
 
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
@@ -3297,7 +3297,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
         // delete is deferred
         assertTrue(bs.isCommitted(addr));
 
-        Thread.sleep(5000);
+        Thread.currentThread().sleep(5000);
 
         // modify store but do not allocate similar size block
         // as that we want to see has been removed
@@ -3354,7 +3354,7 @@ public class TestRWJournal extends AbstractJournalTestCase {
     }
 
     public void test_allocCommitFreeCommitWriteCacheWithHistory() {
-      final Journal store = getStore(5);
+      final Journal store = (Journal) getStore(5);
       try {
         final RWStrategy bs = (RWStrategy) store.getBufferStrategy();
 

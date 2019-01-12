@@ -125,9 +125,11 @@ public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
           new SPOStarJoin(
               new BOp[] {Var.var("frameClass"), Var.var(), Var.var()}, // , null /* c */},
               NV.asMap(
-                  new NV(
-                      SPOStarJoin.Annotations.RELATION_NAME,
-                      new String[] {store.getSPORelation().getNamespace()})));
+                  new NV[] {
+                    new NV(
+                        SPOStarJoin.Annotations.RELATION_NAME,
+                        new String[] {store.getSPORelation().getNamespace()})
+                  }));
       //            final SPOStarJoin starJoin = new SPOStarJoin(
       //                    store.getSPORelation().getNamespace(),
       //                    Var.var("frameClass")
@@ -280,9 +282,11 @@ public class TestSPOStarJoin extends AbstractTripleStoreTestCase {
           new SPOStarJoin(
               new BOp[] {Var.var("frameProperty"), Var.var(), Var.var()}, // , null /* c */},
               NV.asMap(
-                  new NV(
-                      SPOStarJoin.Annotations.RELATION_NAME,
-                      new String[] {store.getSPORelation().getNamespace()})));
+                  new NV[] {
+                    new NV(
+                        SPOStarJoin.Annotations.RELATION_NAME,
+                        new String[] {store.getSPORelation().getNamespace()})
+                  }));
 
       //            final SPOStarJoin starJoin = new SPOStarJoin(
       //                    store.getSPORelation().getNamespace(),

@@ -430,102 +430,104 @@ public class TypeperfCollector extends AbstractProcessCollector {
 
     decls =
         Arrays.asList(
-            new InstrumentForWPC(
-                "\\Memory\\Pages/Sec", p + IRequiredHostCounters.Memory_majorFaultsPerSecond, 1d),
-            new InstrumentForWPC(
-                "\\Processor(_Total)\\% Processor Time",
-                p + IRequiredHostCounters.CPU_PercentProcessorTime, .01d),
-            new InstrumentForWPC(
-                "\\LogicalDisk(_Total)\\% Free Space",
-                p + IRequiredHostCounters.LogicalDisk_PercentFreeSpace, .01d),
+            new InstrumentForWPC[] {
+              new InstrumentForWPC(
+                  "\\Memory\\Pages/Sec", p + IRequiredHostCounters.Memory_majorFaultsPerSecond, 1d),
+              new InstrumentForWPC(
+                  "\\Processor(_Total)\\% Processor Time",
+                  p + IRequiredHostCounters.CPU_PercentProcessorTime, .01d),
+              new InstrumentForWPC(
+                  "\\LogicalDisk(_Total)\\% Free Space",
+                  p + IRequiredHostCounters.LogicalDisk_PercentFreeSpace, .01d),
 
-            /*
-             * These are system wide counters for the network interface.
-             * There are also counters for the network queue length, packets
-             * discarded, and packet errors that might be interesting. (I
-             * can't find _Total versions declared for these counters so I
-             * am not including them but the counters for the specific
-             * interfaces could be enabled and then aggregated, eg:
-             *
-             * \NetworkInterface(*)\Bytes Send/Sec
-             */
-            // "\\Network Interface(_Total)\\Bytes
-            // Received/Sec",
-            // "\\Network Interface(_Total)\\Bytes Sent/Sec",
-            // "\\Network Interface(_Total)\\Bytes Total/Sec",
+              /*
+               * These are system wide counters for the network interface.
+               * There are also counters for the network queue length, packets
+               * discarded, and packet errors that might be interesting. (I
+               * can't find _Total versions declared for these counters so I
+               * am not including them but the counters for the specific
+               * interfaces could be enabled and then aggregated, eg:
+               *
+               * \NetworkInterface(*)\Bytes Send/Sec
+               */
+              // "\\Network Interface(_Total)\\Bytes
+              // Received/Sec",
+              // "\\Network Interface(_Total)\\Bytes Sent/Sec",
+              // "\\Network Interface(_Total)\\Bytes Total/Sec",
 
-            /*
-             * System wide counters for DISK IO.
-             */
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length",
-                p
-                    + IRequiredHostCounters.PhysicalDisk
-                    + ICounterSet.pathSeparator
-                    + "Avg. Disk Queue Length",
-                1d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\% Idle Time",
-                p
-                    + IRequiredHostCounters.PhysicalDisk
-                    + ICounterSet.pathSeparator
-                    + "% Idle Time",
-                .01d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\% Disk Time",
-                p
-                    + IRequiredHostCounters.PhysicalDisk
-                    + ICounterSet.pathSeparator
-                    + "% Disk Time",
-                .01d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\% Disk Read Time",
-                p
-                    + IRequiredHostCounters.PhysicalDisk
-                    + ICounterSet.pathSeparator
-                    + "% Disk Read Time",
-                .01d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\% Disk Write Time",
-                p
-                    + IRequiredHostCounters.PhysicalDisk
-                    + ICounterSet.pathSeparator
-                    + "% Disk Write Time",
-                .01d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\Disk Read Bytes/Sec",
-                p + IRequiredHostCounters.PhysicalDisk_BytesReadPerSec,
-                1d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\Disk Write Bytes/Sec",
-                p + IRequiredHostCounters.PhysicalDisk_BytesWrittenPerSec,
-                1d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\Disk Reads/Sec",
-                p + IHostCounters.PhysicalDisk_ReadsPerSec,
-                1d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\Disk Writes/Sec",
-                p + IHostCounters.PhysicalDisk_WritesPerSec,
-                1d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Read",
-                p
-                    + IRequiredHostCounters.PhysicalDisk
-                    + ICounterSet.pathSeparator
-                    + "Avg. Disk Bytes per Read",
-                1d),
-            new InstrumentForWPC(
-                "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Write",
-                p
-                    + IRequiredHostCounters.PhysicalDisk
-                    + ICounterSet.pathSeparator
-                    + "Avg. Disk Bytes per Write",
-                1d),
-            // "\\PhysicalDisk(_Total)\\Disk Writes/sec",
-            // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Read",
-            // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Write",
-        );
+              /*
+               * System wide counters for DISK IO.
+               */
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length",
+                  p
+                      + IRequiredHostCounters.PhysicalDisk
+                      + ICounterSet.pathSeparator
+                      + "Avg. Disk Queue Length",
+                  1d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\% Idle Time",
+                  p
+                      + IRequiredHostCounters.PhysicalDisk
+                      + ICounterSet.pathSeparator
+                      + "% Idle Time",
+                  .01d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\% Disk Time",
+                  p
+                      + IRequiredHostCounters.PhysicalDisk
+                      + ICounterSet.pathSeparator
+                      + "% Disk Time",
+                  .01d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\% Disk Read Time",
+                  p
+                      + IRequiredHostCounters.PhysicalDisk
+                      + ICounterSet.pathSeparator
+                      + "% Disk Read Time",
+                  .01d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\% Disk Write Time",
+                  p
+                      + IRequiredHostCounters.PhysicalDisk
+                      + ICounterSet.pathSeparator
+                      + "% Disk Write Time",
+                  .01d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\Disk Read Bytes/Sec",
+                  p + IRequiredHostCounters.PhysicalDisk_BytesReadPerSec,
+                  1d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\Disk Write Bytes/Sec",
+                  p + IRequiredHostCounters.PhysicalDisk_BytesWrittenPerSec,
+                  1d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\Disk Reads/Sec",
+                  p + IHostCounters.PhysicalDisk_ReadsPerSec,
+                  1d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\Disk Writes/Sec",
+                  p + IHostCounters.PhysicalDisk_WritesPerSec,
+                  1d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Read",
+                  p
+                      + IRequiredHostCounters.PhysicalDisk
+                      + ICounterSet.pathSeparator
+                      + "Avg. Disk Bytes per Read",
+                  1d),
+              new InstrumentForWPC(
+                  "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Write",
+                  p
+                      + IRequiredHostCounters.PhysicalDisk
+                      + ICounterSet.pathSeparator
+                      + "Avg. Disk Bytes per Write",
+                  1d),
+              // "\\PhysicalDisk(_Total)\\Disk Writes/sec",
+              // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Read",
+              // "\\PhysicalDisk(_Total)\\Avg. Disk Bytes/Write",
+
+            });
 
     for (InstrumentForWPC inst : decls) {
 

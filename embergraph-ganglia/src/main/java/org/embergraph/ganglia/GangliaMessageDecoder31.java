@@ -69,7 +69,7 @@ public class GangliaMessageDecoder31 implements IGangliaMessageDecoder {
 
     final String metricName = xdr.readString();
 
-    final boolean spoof = xdr.readInt() != 0;
+    final boolean spoof = xdr.readInt() == 0 ? false : true;
 
     switch (recordType) {
       case METADATA:

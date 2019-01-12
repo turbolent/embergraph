@@ -1098,7 +1098,7 @@ public class TestKeyBuilder extends TestCase2 {
         this.val = val;
         this.key = key;
       }
-    }
+    };
     /** imposes ordering based on {@link X#val}. */
     class XComp implements Comparator<X> {
       public int compare(X o1, X o2) {
@@ -1107,7 +1107,7 @@ public class TestKeyBuilder extends TestCase2 {
         if (ret > 0) return 1;
         return 0;
       }
-    }
+    };
     //        final float[] vals = new float[limit];
     //        final byte[][] keys = new byte[limit][];
     Set<Float> set = new HashSet<Float>(limit);
@@ -1235,7 +1235,7 @@ public class TestKeyBuilder extends TestCase2 {
         this.val = val;
         this.key = key;
       }
-    }
+    };
     /** imposes ordering based on {@link X#val}. */
     class XComp implements Comparator<X> {
       public int compare(X o1, X o2) {
@@ -1244,7 +1244,7 @@ public class TestKeyBuilder extends TestCase2 {
         if (ret > 0) return 1;
         return 0;
       }
-    }
+    };
     Set<Double> set = new HashSet<Double>(limit);
     final X[] data = new X[limit];
     IKeyBuilder keyBuilder = new KeyBuilder();
@@ -2428,7 +2428,7 @@ public class TestKeyBuilder extends TestCase2 {
     EQ(0),
     GT(1);
 
-    CompareEnum(final int ret) {
+    private CompareEnum(final int ret) {
       this.ret = ret;
     }
 

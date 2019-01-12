@@ -119,7 +119,7 @@ public abstract class AbstractAddRemoveStatementsOp extends PipelineOp {
 
       if (itr instanceof ICloseableIterator<?>) {
 
-        itr.close();
+        ((ICloseableIterator<?>) itr).close();
       }
     }
   }
@@ -165,7 +165,7 @@ public abstract class AbstractAddRemoveStatementsOp extends PipelineOp {
       return null;
     }
 
-    final IV _s = constant.get();
+    final IV _s = (IV) constant.get();
 
     return _s;
   }

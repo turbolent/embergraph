@@ -74,7 +74,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
 
     Document actual = repo.read(id);
 
-    assertEquals("version", 0, actual.getVersion());
+    assertEquals("version", 0, ((RepositoryDocumentImpl) actual).getVersion());
 
     assertEquals("user property", "bar", actual.getProperty("foo"));
 
@@ -114,7 +114,7 @@ public class TestFileMetadataIndex extends AbstractRepositoryTestCase {
 
     Document actual = repo.read(id);
 
-    assertEquals("version", 0, actual.getVersion());
+    assertEquals("version", 0, ((RepositoryDocumentImpl) actual).getVersion());
 
     assertEquals("Content-Type", mimeType, actual.getContentType());
 

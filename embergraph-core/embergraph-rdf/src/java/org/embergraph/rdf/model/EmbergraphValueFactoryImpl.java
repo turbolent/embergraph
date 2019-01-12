@@ -572,10 +572,10 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
       Resource s, URI p, Value o, Resource c, StatementEnum type, final boolean userFlag) {
 
     return new EmbergraphStatementImpl(
-        asValue(s),
-        asValue(p),
-        asValue(o),
-        asValue(c), // optional
+        (EmbergraphResource) asValue(s),
+        (EmbergraphURI) asValue(p),
+        (EmbergraphValue) asValue(o),
+        (EmbergraphResource) asValue(c), // optional
         type, // the statement type (optional).
         userFlag // the user flag (optional)
         );
@@ -611,7 +611,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
 
     } else if (v instanceof URI) {
 
-      return createURI(v.stringValue());
+      return createURI(((URI) v).stringValue());
 
     } else if (v instanceof EmbergraphBNode && ((EmbergraphBNode) v).isStatementIdentifier()) {
 
@@ -619,7 +619,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
 
     } else if (v instanceof BNode) {
 
-      return createBNode(v.stringValue());
+      return createBNode(((BNode) v).stringValue());
 
     } else if (v instanceof Literal) {
 
@@ -635,7 +635,7 @@ public class EmbergraphValueFactoryImpl implements EmbergraphValueFactory {
           this, // Note: Passing in this factory!
           label,
           language,
-          asValue(datatype));
+          (EmbergraphURI) asValue(datatype));
 
     } else {
 

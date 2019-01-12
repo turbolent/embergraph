@@ -806,7 +806,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
             // notice the current key length.
             final int pos0 = keyBuilder.len();
             // append the term code.
-            keyBuilder.append(iv.getTermCode());
+            keyBuilder.append((byte) iv.getTermCode());
             // handle language code or datatype URI.
             if (iv.getLanguage() != null) {
               // language code
@@ -828,7 +828,7 @@ public abstract class AbstractIV<V extends EmbergraphValue, T> implements IV<V, 
            * ExternalIV.
            */
           // append the term code (note: plain literal!!!)
-          keyBuilder.append(ITermIndexCodes.TERM_CODE_LIT);
+          keyBuilder.append((byte) ITermIndexCodes.TERM_CODE_LIT);
           final byte[] b = IVUnicode.encode1((String) t.getInlineValue());
           keyBuilder.append(b);
           ((IInlineUnicode) t).setByteLength(1 /* flags */ + 1 /* termCode */ + b.length);

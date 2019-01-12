@@ -94,7 +94,9 @@ public abstract class EmbergraphValueImpl implements EmbergraphValue {
 
     if (iv == null) return false;
 
-    return !iv.isNullIV();
+    if (iv.isNullIV()) return false;
+
+    return true;
   }
 
   @Override
@@ -129,7 +131,7 @@ public abstract class EmbergraphValueImpl implements EmbergraphValue {
 
     out.defaultWriteObject();
 
-    out.writeUTF(valueFactory.getNamespace());
+    out.writeUTF(((EmbergraphValueFactoryImpl) valueFactory).getNamespace());
   }
 
   /**

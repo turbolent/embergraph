@@ -534,7 +534,7 @@ class RunState {
      * that the query terminates normally).
      *
      * @see https://sourceforge.net/apps/trac/bigdata/ticket/377#comment:12
-     * @see <a href="http://trac.blazegraph.com/ticket/868">http://trac.blazegraph.com/ticket/868</a>
+     * @see http://trac.blazegraph.com/ticket/868
      */
     final UUID controllerId = msg.getQueryControllerId();
     {
@@ -659,7 +659,7 @@ class RunState {
    * {@link IHaltOpMessage}. This information is maintained by the query controller in the {@link
    * RunState} for the {@link IRunningQuery}.
    */
-  enum RunStateEnum {
+  static enum RunStateEnum {
 
     /**
      * The operator can be re-triggered either by upstream operators in the pipeline which are not
@@ -681,7 +681,7 @@ class RunState {
      * No instance of the operator is running and optional last evaluation pass either has been
      * executed or will not run. Any resources associated with that operator should be released.
      */
-    AllDone
+    AllDone;
   } // RunStateEnum
 
   /**
@@ -1267,7 +1267,9 @@ class RunState {
 
     // if it is halt for at-once operator than we need to remove it from
     // the set of at-once operators that we still need to run
-    innerState.atOnceRequired.remove(bopId);
+    if (innerState.atOnceRequired.contains(bopId)) {
+      innerState.atOnceRequired.remove(bopId);
+    }
 
     /*
      * If we are processing our doneSet, then handle that first so the
@@ -1468,12 +1470,12 @@ class RunState {
     sb.append('\t');
     sb.append(elapsed);
     sb.append('\t');
-    sb.append(innerState.stepCount.get());
+    sb.append(Long.toString(innerState.stepCount.get()));
     sb.append('\t');
     sb.append(label);
 
     sb.append('\t');
-    sb.append(bopId);
+    sb.append(Integer.toString(bopId));
 
     // the serviceId : will be null unless scale-out.
     sb.append('\t');
@@ -1507,17 +1509,17 @@ class RunState {
     }
 
     sb.append('\t');
-    sb.append(shardId);
+    sb.append(Integer.toString(shardId));
     sb.append('\t');
-    sb.append(fanIO);
+    sb.append(Integer.toString(fanIO));
     sb.append('\t');
     sb.append(innerState.serviceIds.size());
     sb.append('\t');
-    sb.append(innerState.totalAvailableCount.get());
+    sb.append(Long.toString(innerState.totalAvailableCount.get()));
     sb.append('\t');
-    sb.append(innerState.totalRunningCount.get());
+    sb.append(Long.toString(innerState.totalRunningCount.get()));
     sb.append('\t');
-    sb.append(innerState.totalLastPassRemainingCount.get());
+    sb.append(Long.toString(innerState.totalLastPassRemainingCount.get()));
     sb.append('\t');
     sb.append(innerState.allDone.get());
 

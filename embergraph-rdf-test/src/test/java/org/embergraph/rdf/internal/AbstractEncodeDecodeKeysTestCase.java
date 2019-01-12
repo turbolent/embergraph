@@ -102,7 +102,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "values differ @ index="
-                  + i
+                  + Integer.toString(i)
                   + " : expected="
                   + expected
                   + ", actual="
@@ -113,7 +113,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "hashCodes differ @ index="
-                  + i
+                  + Integer.toString(i)
                   + " : expected="
                   + expected
                   + "(hash="
@@ -149,7 +149,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "hashCodes differ @ index="
-                  + i
+                  + Integer.toString(i)
                   + " : expected="
                   + expected
                   + "(hash="
@@ -183,7 +183,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "hashCodes differ @ index="
-                  + i
+                  + Integer.toString(i)
                   + " : expected="
                   + expected
                   + "(hash="
@@ -217,7 +217,7 @@ public abstract class AbstractEncodeDecodeKeysTestCase extends TestCase2 {
 
           fail(
               "hashCodes differ @ index="
-                  + i
+                  + Integer.toString(i)
                   + " : expected="
                   + expected
                   + "(hash="

@@ -226,7 +226,7 @@ public class TestMutableValueBuffer extends TestCase2 {
 
     // capacity must be 2^n where n is positive.
     try {
-      new MutableValueBuffer(3 /* capacity */, src);
+      new MutableValueBuffer(3 /* capacity */, (IRaba) src);
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       // ignored.
@@ -234,7 +234,7 @@ public class TestMutableValueBuffer extends TestCase2 {
 
     // capacity must not be LT the capacity of the raba.
     try {
-      new MutableValueBuffer(2 /* capacity */, src);
+      new MutableValueBuffer(2 /* capacity */, (IRaba) src);
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       // ignored.

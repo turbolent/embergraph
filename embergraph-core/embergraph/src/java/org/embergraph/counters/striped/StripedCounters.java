@@ -176,7 +176,7 @@ public class StripedCounters<T extends StripedCounters<T>> {
 
     try {
 
-      final Constructor<?> ctor = getClass().getConstructor();
+      final Constructor<?> ctor = getClass().getConstructor(new Class[] {});
 
       return (T) ctor.newInstance(new Object[] {});
 

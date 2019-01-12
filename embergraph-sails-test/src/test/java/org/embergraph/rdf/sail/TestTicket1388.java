@@ -84,7 +84,7 @@ public class TestTicket1388 extends ProxyEmbergraphSailTestCase {
 
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       cxn.begin();
 
@@ -126,12 +126,16 @@ public class TestTicket1388 extends ProxyEmbergraphSailTestCase {
       // [myDate="2014-05-29"^^<http://www.w3.org/2001/XMLSchema#date>;countDoc="2"^^<http://www.w3.org/2001/XMLSchema#integer>]
       solution.add(
           createBindingSet(
-              new BindingImpl("myDate", new LiteralImpl("2014-04-11", XMLSchema.DATE)),
-              new BindingImpl("countDoc", new LiteralImpl(Integer.toString(3), XMLSchema.INTEGER))));
+              new Binding[] {
+                new BindingImpl("myDate", new LiteralImpl("2014-04-11", XMLSchema.DATE)),
+                new BindingImpl("countDoc", new LiteralImpl(Integer.toString(3), XMLSchema.INTEGER))
+              }));
       solution.add(
           createBindingSet(
-              new BindingImpl("myDate", new LiteralImpl("2014-05-29", XMLSchema.DATE)),
-              new BindingImpl("countDoc", new LiteralImpl(Integer.toString(2), XMLSchema.INTEGER))));
+              new Binding[] {
+                new BindingImpl("myDate", new LiteralImpl("2014-05-29", XMLSchema.DATE)),
+                new BindingImpl("countDoc", new LiteralImpl(Integer.toString(2), XMLSchema.INTEGER))
+              }));
 
       compare(tqr, solution);
 

@@ -52,7 +52,9 @@ public class FileVersionDeleter extends TupleUpdater<TPV> {
 
     final String name = keyDecoder.getColumnName();
 
-    return name.equals(FileMetadataSchema.VERSION);
+    if (!name.equals(FileMetadataSchema.VERSION)) return false;
+
+    return true;
   }
 
   /**

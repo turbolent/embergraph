@@ -36,7 +36,7 @@ public enum EstimateEnum {
   Underflow("U"),
   ;
 
-  EstimateEnum(final String code) {
+  private EstimateEnum(final String code) {
 
     this.code = code;
   }

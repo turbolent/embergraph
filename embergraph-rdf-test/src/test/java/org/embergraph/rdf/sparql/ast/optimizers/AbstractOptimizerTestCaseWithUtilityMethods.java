@@ -551,7 +551,8 @@ public abstract class AbstractOptimizerTestCaseWithUtilityMethods
 
                     if (obj instanceof IValueExpressionNodeContainer) return true;
                     if (obj instanceof HavingNode) return true;
-                    return obj instanceof StatementPatternNode;
+                    if (obj instanceof StatementPatternNode) return true;
+                    return false;
                   }
                 });
 

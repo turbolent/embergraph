@@ -91,13 +91,18 @@ public abstract class AbstractArrayBuffer<E> implements IBuffer<E> {
 
     if (filter != null) {
 
-      // rejected by the filter.
-      //                if(DEBUG) {
-      //
-      //                    log.debug("rejected: element="+e+", filter="+filter);
-      //
-      //                }
-      return filter.isValid(e);
+      if (!filter.isValid(e)) {
+
+        // rejected by the filter.
+
+        //                if(DEBUG) {
+        //
+        //                    log.debug("rejected: element="+e+", filter="+filter);
+        //
+        //                }
+
+        return false;
+      }
     }
 
     return true;

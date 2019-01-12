@@ -36,7 +36,7 @@ public interface IAddressManager {
    * <p>Note: It is a requirement that all implementations understand the value <code>0L</code> as a
    * null reference.
    */
-  long NULL = 0L;
+  public static final long NULL = 0L;
 
   /**
    * Converts a byte count and offset into a long integer.
@@ -49,7 +49,7 @@ public interface IAddressManager {
    * @exception IllegalArgumentException if the byte offset is larger than can be represented by the
    *     address manager.
    */
-  long toAddr(int nbytes, long offset);
+  public long toAddr(int nbytes, long offset);
 
   /**
    * The offset on the store at which the datum is stored. While this is often the offset of a byte
@@ -58,7 +58,7 @@ public interface IAddressManager {
    * @param addr The opaque identifier that is the within store locator for some datum.
    * @return The offset of that datum.
    */
-  long getOffset(long addr);
+  public long getOffset(long addr);
 
   /**
    * The length of the datum in bytes. This must be the actual length of the record on the disk, not
@@ -68,7 +68,7 @@ public interface IAddressManager {
    * @param addr The opaque identifier that is the within store locator for some datum.
    * @return The offset of that datum.
    */
-  int getByteCount(long addr);
+  public int getByteCount(long addr);
 
   //    /**
   //     * Pack the address onto the output stream.
@@ -117,7 +117,7 @@ public interface IAddressManager {
    * @param addr The opaque identifier that is the within store locator for some datum.
    * @return A human readable representation.
    */
-  String toString(long addr);
+  public String toString(long addr);
 
   /**
    * Determine the unencoded physical address
@@ -125,5 +125,5 @@ public interface IAddressManager {
    * @param addr The encoded address
    * @return an unencoded address offset
    */
-  long getPhysicalAddress(long addr);
+  public long getPhysicalAddress(long addr);
 }

@@ -133,7 +133,7 @@ public class GeoSpatialDatatypeConfiguration implements Serializable {
       try {
 
         // { "valueType": "double", "multiplier": "100000", "serviceMapping": "latitude" }
-        JSONObject fieldJson = fieldsJson.getJSONObject(i);
+        JSONObject fieldJson = (JSONObject) fieldsJson.getJSONObject(i);
 
         fields.add(new GeoSpatialDatatypeFieldConfiguration(fieldJson));
 

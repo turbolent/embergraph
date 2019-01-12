@@ -93,6 +93,8 @@ public class ComputedMaterializationRequirement implements INeedsMaterialization
 
     if (requirement != t.requirement) return false;
 
-    return varsToMaterialize.equals(t.varsToMaterialize);
+    if (!varsToMaterialize.equals(t.varsToMaterialize)) return false;
+
+    return true;
   }
 }

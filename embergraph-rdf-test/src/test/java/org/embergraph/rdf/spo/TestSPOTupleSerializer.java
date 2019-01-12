@@ -232,5 +232,5 @@ public class TestSPOTupleSerializer extends TestCase2 {
 
       super.copyTuple(key, val);
     }
-  }
+  };
 }

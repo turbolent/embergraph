@@ -195,7 +195,7 @@ public class TestStrBOp extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        sail.__tearDownUnitTest(); // shutDown();
+        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -323,7 +323,7 @@ public class TestStrBOp extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        sail.__tearDownUnitTest(); // shutDown();
+        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -460,7 +460,7 @@ public class TestStrBOp extends QuadsTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        sail.__tearDownUnitTest(); // shutDown();
+        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
     }
   }
 }

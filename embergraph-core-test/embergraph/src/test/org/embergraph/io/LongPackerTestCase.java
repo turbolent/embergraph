@@ -285,7 +285,7 @@ public class LongPackerTestCase extends TestCase {
   }
 
   private interface LongGenerator {
-    long nextLong();
+    public long nextLong();
   }
 
   /**

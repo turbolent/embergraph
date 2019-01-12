@@ -60,7 +60,7 @@ public class TestCustomByteArrayFrontCodedList extends TestCase {
     return true;
   }
 
-  private int[] l;
+  private int l[];
   private byte[][] a;
 
   private void _test(final int n) {

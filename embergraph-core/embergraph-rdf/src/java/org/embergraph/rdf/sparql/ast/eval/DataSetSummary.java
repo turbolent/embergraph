@@ -186,7 +186,7 @@ public class DataSetSummary {
    */
   public Set<IV> getGraphs() {
 
-    return graphs != null ? graphs : Collections.emptySet();
+    return graphs != null ? graphs : Collections.<IV>emptySet();
   }
 
   /**
@@ -269,6 +269,8 @@ public class DataSetSummary {
 
     final DataSetSummary t = (DataSetSummary) o;
 
-    return graphs.equals(t.graphs);
+    if (!graphs.equals(t.graphs)) return false;
+
+    return true;
   }
 }

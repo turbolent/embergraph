@@ -33,7 +33,7 @@ public interface ITx extends ITxState {
    * The value of this constant is ZERO (0L) -- this value corresponds to <code>
    * Wed Dec 31 19:00:00 EST 1969</code> when interpreted as a {@link Date}.
    */
-  long UNISOLATED = 0L;
+  public static final long UNISOLATED = 0L;
 
   /**
    * A constant that SHOULD used as the timestamp for <em>read-committed</em> (non-transactional
@@ -61,7 +61,7 @@ public interface ITx extends ITxState {
    * (and unisolated) operations. For this reason, it is often better to specify "read-consistent"
    * semantics by giving the lastCommitTime for the {@link IIndexStore}.
    */
-  long READ_COMMITTED = -1L;
+  public static final long READ_COMMITTED = -1L;
 
   /** When true, the transaction has an empty write set. */
   boolean isEmptyWriteSet();

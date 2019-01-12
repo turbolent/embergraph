@@ -33,7 +33,7 @@ public enum IndexSegmentRegion {
 
   private final int code;
 
-  IndexSegmentRegion(int code) {
+  private IndexSegmentRegion(int code) {
     this.code = code;
   }
 

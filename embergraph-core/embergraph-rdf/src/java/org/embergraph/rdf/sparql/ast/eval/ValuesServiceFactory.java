@@ -62,7 +62,7 @@ public class ValuesServiceFactory extends AbstractServiceFactory {
   public static final URI SERVICE_KEY = new URIImpl(BD.NAMESPACE + "values");
 
   /** The service params for this service. */
-  public interface ValuesParams {
+  public static interface ValuesParams {
 
     /** The limit on the sample. */
     URI VAR = new URIImpl(SERVICE_KEY.stringValue() + ".var");

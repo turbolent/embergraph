@@ -68,8 +68,10 @@ public class TestTicket610 extends ProxyEmbergraphSailTestCase {
     final Model data =
         new LinkedHashModel(
             Arrays.asList(
-                new StatementImpl(a, RDF.TYPE, OWL.TRANSITIVEPROPERTY),
-                new StatementImpl(b, RDFS.SUBPROPERTYOF, a)));
+                new StatementImpl[] {
+                  new StatementImpl(a, RDF.TYPE, OWL.TRANSITIVEPROPERTY),
+                  new StatementImpl(b, RDFS.SUBPROPERTYOF, a),
+                }));
 
     /*
      * The embergraph store, backed by a temporary journal file.

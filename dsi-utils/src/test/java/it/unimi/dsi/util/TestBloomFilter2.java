@@ -164,7 +164,9 @@ public class TestBloomFilter2 extends TestCase {
 
     } catch (Exception ex) {
 
-      IOException ex2 = new IOException("Could not read bloom filter: " + ex, ex);
+      IOException ex2 = new IOException("Could not read bloom filter: " + ex);
+
+      ex2.initCause(ex);
 
       throw ex2;
     }

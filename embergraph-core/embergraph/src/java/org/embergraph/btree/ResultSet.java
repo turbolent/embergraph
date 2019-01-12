@@ -328,9 +328,9 @@ public class ResultSet implements ILeafData, Externalizable {
               + ", sendVals="
               + sendVals
               + ", deleteMarkers="
-              + (deleteMarkers != null)
+              + (deleteMarkers != null ? true : false)
               + ", timestamps="
-              + (versionTimestamps != null)
+              + (versionTimestamps != null ? true : false)
               + ", #sources="
               + sources.length);
     }
@@ -453,9 +453,9 @@ public class ResultSet implements ILeafData, Externalizable {
               + ", sendVals="
               + sendVals
               + ", deleteMarkers="
-              + (deleteMarkers != null)
+              + (deleteMarkers != null ? true : false)
               + ", timestamps="
-              + (versionTimestamps != null)
+              + (versionTimestamps != null ? true : false)
               + ", commitTime="
               + commitTime
               + ", lastKey="
@@ -1030,7 +1030,7 @@ public class ResultSet implements ILeafData, Externalizable {
 
     assert rangeCheckIndex(index);
 
-    return deleteMarkers[index] != 0;
+    return deleteMarkers[index] == 0 ? false : true;
   }
 
   public final int getKeyCount() {

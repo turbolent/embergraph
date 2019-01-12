@@ -539,8 +539,9 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
             final int i = KeyBuilder.decodeInt(key, 0);
 
             // delete only the even keys.
-            return i % 2 == 0;
+            if (i % 2 == 0) return true;
 
+            return false;
           }
         };
 
@@ -812,7 +813,8 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
           @Override
           protected boolean isValid(ITuple tuple) {
             final byte[] key = tuple.getKey();
-            return key[0] < 7 || key[0] >= 10;
+            if (key[0] >= 7 && key[0] < 10) return false;
+            return true;
           }
         };
 
@@ -1213,6 +1215,8 @@ public class TestRangeQuery extends AbstractEmbeddedFederationTestCase {
 
     if (expected.isDeletedVersion() != actual.isDeletedVersion()) return false;
 
-    return expected.getVersionTimestamp() == actual.getVersionTimestamp();
+    if (expected.getVersionTimestamp() != actual.getVersionTimestamp()) return false;
+
+    return true;
   }
 }

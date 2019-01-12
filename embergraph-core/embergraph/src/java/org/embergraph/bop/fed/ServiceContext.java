@@ -27,7 +27,8 @@ class ServiceContext extends AllocationContextKey {
     if (this == o) return true;
     if (!(o instanceof ServiceContext)) return false;
     if (!queryId.equals(((ServiceContext) o).queryId)) return false;
-    return serviceUUID.equals(((ServiceContext) o).serviceUUID);
+    if (!serviceUUID.equals(((ServiceContext) o).serviceUUID)) return false;
+    return true;
   }
 
   @Override

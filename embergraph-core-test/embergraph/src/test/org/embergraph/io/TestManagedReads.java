@@ -39,7 +39,7 @@ public class TestManagedReads extends TestCase {
     }
     //		@Override
     public int compareTo(Record o) {
-      return pos < o.pos ? -1 : 1;
+      return pos < ((Record) o).pos ? -1 : 1;
     }
   }
 

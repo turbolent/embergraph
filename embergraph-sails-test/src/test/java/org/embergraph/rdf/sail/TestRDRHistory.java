@@ -85,7 +85,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI(":s");
@@ -243,7 +243,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI(":s");
@@ -334,7 +334,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
         }
       }
 
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       {
         final String sparql =
@@ -492,7 +492,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI(":s");
@@ -533,7 +533,7 @@ public class TestRDRHistory extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       final EmbergraphValueFactory vf = (EmbergraphValueFactory) sail.getValueFactory();
       final URI s = vf.createURI(":s");

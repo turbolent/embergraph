@@ -28,5 +28,5 @@ package org.embergraph.bop;
 public interface IValueExpressionConstraint<X> extends IConstraint {
 
   /** Return the {@link IValueExpression} which is evaluated by the {@link IConstraint}. */
-  IValueExpression<X> getValueExpression();
+  public IValueExpression<X> getValueExpression();
 }

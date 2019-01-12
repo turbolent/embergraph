@@ -90,9 +90,9 @@ public class JVMMergeJoin extends AbstractMergeJoin {
      * HTreeHashJoinUtility} state, in which case it would only be set as an annotation on the
      * operator which generates the hash index.
      */
-    String RELEASE = HTreeSolutionSetHashJoinOp.class + ".release";
+    final String RELEASE = HTreeSolutionSetHashJoinOp.class + ".release";
 
-    boolean DEFAULT_RELEASE = true;
+    final boolean DEFAULT_RELEASE = true;
   }
 
   /**

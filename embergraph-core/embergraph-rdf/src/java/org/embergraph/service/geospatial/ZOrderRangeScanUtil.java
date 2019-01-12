@@ -79,8 +79,8 @@ public class ZOrderRangeScanUtil {
    */
   public boolean isInSearchRange(final byte[] dividingRecord) {
 
-    final boolean[] dimShownToBeLargerThanMin = new boolean[numDimensions];
-    final boolean[] dimShownToBeSmallerThanMax = new boolean[numDimensions];
+    final boolean dimShownToBeLargerThanMin[] = new boolean[numDimensions];
+    final boolean dimShownToBeSmallerThanMax[] = new boolean[numDimensions];
 
     // get first byte in which the values differ
     int firstDifferingByte = 0;
@@ -254,8 +254,8 @@ public class ZOrderRangeScanUtil {
       final boolean setFirst, final int position, final byte[] arr, final int numDimensions) {
 
     // set the trailing bit
-    if (setFirst) arr[position / Byte.SIZE] |= 1 << 7 - (position % 8);
-    else arr[position / Byte.SIZE] &= ~(1 << 7 - (position % 8));
+    if (setFirst) arr[(int) (position / Byte.SIZE)] |= 1 << 7 - (position % 8);
+    else arr[(int) (position / Byte.SIZE)] &= ~(1 << 7 - (position % 8));
 
     // set the remaining bits (inverted)
     for (int i = position + numDimensions; i < arr.length * Byte.SIZE; i += numDimensions) {
@@ -270,8 +270,8 @@ public class ZOrderRangeScanUtil {
         i += numDimensions; // corresponds to one time skip of outer loop
       }
 
-      if (setFirst) arr[i / Byte.SIZE] &= ~mask;
-      else arr[i / Byte.SIZE] |= mask;
+      if (setFirst) arr[(int) (i / Byte.SIZE)] &= ~mask;
+      else arr[(int) (i / Byte.SIZE)] |= mask;
     }
   }
 }

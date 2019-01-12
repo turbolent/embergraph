@@ -33,7 +33,7 @@ import org.embergraph.rawstore.IRawStore;
 public interface ISimpleIndexAccess {
 
   /** The backing store. */
-  IRawStore getStore();
+  public IRawStore getStore();
 
   /**
    * Return the #of entries in the index.
@@ -45,14 +45,14 @@ public interface ISimpleIndexAccess {
    * @return The #of tuples in the index.
    * @see IRangeQuery#rangeCount()
    */
-  long rangeCount();
+  public long rangeCount();
 
   /**
    * Visit all entries in the index in the natural order of the index (dereferencing visited tuples
    * to the application objects stored within those tuples).
    */
-  ICloseableIterator<?> scan();
+  public ICloseableIterator<?> scan();
 
   /** Remove all entries in the index. */
-  void removeAll();
+  public void removeAll();
 }

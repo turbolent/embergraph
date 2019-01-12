@@ -198,14 +198,14 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
      * geospatial feature (see BLZG-1478), but this might be implemented more generally for the
      * pipelined join in the future
      */
-    String MIN_DATAPOINTS_PER_TASK =
+    public String MIN_DATAPOINTS_PER_TASK =
         (PipelineJoin.class.getName() + ".minDatapointsPerTask").intern();
 
     // note: the default might be a bit high, it is used for the GeoSpatial stuff only, where
     //       we effectively only investigate a small part of the range; we may decrease for
     //       normal access paths and, in turn, add an adjustment factor for usage in the geospatial
     //       context
-    int DEFAULT_MIN_DATAPOINTS_PER_TASK = 100000;
+    public int DEFAULT_MIN_DATAPOINTS_PER_TASK = 100000;
 
     /**
      * Desired number of access path tasks generated per thread in case the range is large enough.
@@ -224,10 +224,10 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
      *
      * <p>Must be a value >= 1.
      */
-    String NUM_TASKS_PER_THREAD =
+    public String NUM_TASKS_PER_THREAD =
         (PipelineJoin.class.getName() + ".numTasksPerThread").intern();
 
-    int DEFAULT_NUM_TASKS_PER_THREAD = 1;
+    public int DEFAULT_NUM_TASKS_PER_THREAD = 1;
   }
 
   /**
@@ -1760,7 +1760,7 @@ public class PipelineJoin<E> extends PipelineOp implements IShardwisePipelineOp<
             final List<Object[]> chunks = new LinkedList<Object[]>();
             while (itr.hasNext()) {
 
-              final Object[] chunk = itr.nextChunk();
+              final Object[] chunk = (Object[]) itr.nextChunk();
 
               // add to list of chunks.
               chunks.add(chunk);

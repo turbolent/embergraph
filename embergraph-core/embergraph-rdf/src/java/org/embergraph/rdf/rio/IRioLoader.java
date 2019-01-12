@@ -34,25 +34,25 @@ import org.openrdf.rio.RDFParser;
  */
 public interface IRioLoader {
 
-  long getStatementsAdded();
+  public long getStatementsAdded();
 
-  long getInsertTime();
+  public long getInsertTime();
 
-  long getInsertRate();
+  public long getInsertRate();
 
   /**
    * Register a listener.
    *
    * @param l The listener.
    */
-  void addRioLoaderListener(RioLoaderListener l);
+  public void addRioLoaderListener(RioLoaderListener l);
 
   /**
    * Remove a listener.
    *
    * @param l The listener.
    */
-  void removeRioLoaderListener(RioLoaderListener l);
+  public void removeRioLoaderListener(RioLoaderListener l);
 
   /**
    * Parse RDF data.
@@ -64,7 +64,7 @@ public interface IRioLoader {
    * @param options Options to be applied to the {@link RDFParser}.
    * @throws Exception
    */
-  void loadRdf(
+  public void loadRdf(
       Reader reader,
       String baseURL,
       RDFFormat rdfFormat,
@@ -82,7 +82,7 @@ public interface IRioLoader {
    * @param options Options to be applied to the {@link RDFParser}.
    * @throws Exception
    */
-  void loadRdf(
+  public void loadRdf(
       InputStream is,
       String baseURI,
       RDFFormat rdfFormat,

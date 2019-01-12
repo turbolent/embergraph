@@ -34,8 +34,8 @@ package org.embergraph.btree;
 public interface ICounter {
 
   /** The current value of the counter (initially zero). */
-  long get();
+  public long get();
 
   /** Increment the current value of the counter and then return its value (atomic). */
-  long incrementAndGet();
+  public long incrementAndGet();
 }

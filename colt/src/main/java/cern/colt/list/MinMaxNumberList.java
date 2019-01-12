@@ -280,7 +280,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
    * @param initialCapacity int
    */
   protected void setUpBitsPerEntry(long minimum, long maximum) {
-    this.bitsPerElement = bitsPerElement(minimum, maximum);
+    this.bitsPerElement = this.bitsPerElement(minimum, maximum);
     if (this.bitsPerElement != 64) {
       this.minValue = minimum;
       // overflow or underflow in calculating "1+maxValue-minValue"
@@ -290,6 +290,7 @@ public class MinMaxNumberList extends cern.colt.list.AbstractLongList {
     } else {
       this.minValue = 0;
     }
+    ;
   }
   /**
    * Returns the receiver seen as bitvector. WARNING: The bitvector and the receiver share the

@@ -52,7 +52,7 @@ public enum ActionEnum {
 
   private final boolean mutation;
 
-  ActionEnum(final boolean mutation) {
+  private ActionEnum(final boolean mutation) {
 
     this.mutation = mutation;
   }

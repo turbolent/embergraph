@@ -33,7 +33,7 @@ import org.embergraph.rawstore.IRawStore;
 public interface IAtomicStore extends IRawStore {
 
   /** Abandon the current write set (synchronous). */
-  void abort();
+  public void abort();
 
   /**
    * Atomic commit (synchronous).
@@ -46,7 +46,7 @@ public interface IAtomicStore extends IRawStore {
    * @exception IllegalStateException if the store is not open.
    * @exception IllegalStateException if the store is not writable.
    */
-  long commit();
+  public long commit();
 
   /**
    * Return <code>true</code> if the store has been modified since the last {@link #commit()} or
@@ -54,7 +54,7 @@ public interface IAtomicStore extends IRawStore {
    *
    * @return true if store has been modified since last {@link #commit()} or {@link #abort()}.
    */
-  boolean isDirty();
+  public boolean isDirty();
 
   /**
    * Set a persistence capable data structure for callback during the commit protocol.
@@ -65,7 +65,7 @@ public interface IAtomicStore extends IRawStore {
    *     recorded.
    * @param committer The committer.
    */
-  void setCommitter(int index, ICommitter committer);
+  public void setCommitter(int index, ICommitter committer);
 
   /**
    * The last address stored in the specified root slot as of the last committed state of the store.
@@ -74,14 +74,14 @@ public interface IAtomicStore extends IRawStore {
    * @return The address stored at that index.
    * @exception IndexOutOfBoundsException if the index is negative or too large.
    */
-  long getRootAddr(int index);
+  public long getRootAddr(int index);
 
   /**
    * Return a read-only view of the current root block.
    *
    * @return The current root block.
    */
-  IRootBlockView getRootBlockView();
+  public IRootBlockView getRootBlockView();
 
   /**
    * Return the {@link ICommitRecord} for the most recent committed state whose commit timestamp is
@@ -93,7 +93,7 @@ public interface IAtomicStore extends IRawStore {
    *     less than or equal to <i>timestamp</i> -or- <code>null</code> iff there are no {@link
    *     ICommitRecord}s that satisfy the probe.
    */
-  ICommitRecord getCommitRecord(long timestamp);
+  public ICommitRecord getCommitRecord(long timestamp);
 
   /*
    * These methods have been removed from the public interface. They were only

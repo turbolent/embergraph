@@ -32,17 +32,17 @@ import org.embergraph.service.fts.FTS.SearchResultType;
 public interface IFulltextSearchHit<V extends Comparable<V>> {
 
   /** The result of the search (values contained in projected columns). */
-  String getRes();
+  public String getRes();
 
   /** The score associated with the search result. */
-  Double getScore();
+  public Double getScore();
 
   /** The search snippet associated with the result. */
-  String getSnippet();
+  public String getSnippet();
 
   /** Get the set of incoming bindings for the search hit */
-  IBindingSet getIncomingBindings();
+  public IBindingSet getIncomingBindings();
 
   /** Get the conversion target type for the search hit */
-  SearchResultType getSearchResultType();
+  public SearchResultType getSearchResultType();
 }

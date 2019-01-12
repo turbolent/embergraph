@@ -49,11 +49,16 @@ public class RdfTypeRdfsResourceFilter<E extends ISPO> extends SPOFilter<E>
 
   private boolean accept(final ISPO spo) {
 
-    // reject (?x, rdf:type, rdfs:Resource )
-    return spo.p().equals(rdfType) && spo.o().equals(rdfsResource);
+    if (spo.p().equals(rdfType) && spo.o().equals(rdfsResource)) {
+
+      // reject (?x, rdf:type, rdfs:Resource )
+
+      return true;
+    }
 
     // Accept everything else.
 
+    return false;
   }
 
   /** The initial version. */

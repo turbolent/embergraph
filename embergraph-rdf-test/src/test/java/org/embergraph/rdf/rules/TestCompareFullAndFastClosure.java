@@ -88,7 +88,7 @@ public class TestCompareFullAndFastClosure extends AbstractRuleTestCase {
    * @throws IOException
    */
   protected void doCompareEntailments(
-      final String[] resource, final String[] baseURL, final RDFFormat[] format) throws Exception {
+      final String resource[], final String baseURL[], final RDFFormat[] format) throws Exception {
 
     final Properties properties = new Properties(getProperties());
 

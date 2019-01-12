@@ -120,11 +120,12 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
           "test.*", // normal
           new LinkedHashSet<BufferMode>(
               Arrays.asList(
-                  // BufferMode.Transient,
-                  // BufferMode.DiskWORM,
-                  BufferMode.MemStore,
-                  //                             BufferMode.DiskRW,
-              )),
+                  new BufferMode[] {
+                    // BufferMode.Transient,
+                    // BufferMode.DiskWORM,
+                    BufferMode.MemStore,
+                    //                             BufferMode.DiskRW,
+                  })),
           TestMode.quads);
 
     } else if (true) {
@@ -135,7 +136,9 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
           "stressTest_concurrentClients_10Minutes", // 10m
           new LinkedHashSet<BufferMode>(
               Arrays.asList(
-                  BufferMode.DiskRW)),
+                  new BufferMode[] {
+                    BufferMode.DiskRW,
+                  })),
           TestMode.quads);
     } else {
 
@@ -144,7 +147,9 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
           "stressTest_concurrentClients_24Hours", // 24 hours!
           new LinkedHashSet<BufferMode>(
               Arrays.asList(
-                  BufferMode.DiskRW)),
+                  new BufferMode[] {
+                    BufferMode.DiskRW,
+                  })),
           TestMode.quads);
     }
   }
@@ -963,7 +968,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         try {
           sharedTestState.nrunning.incrementAndGet();
           doApply(rmgr, uuid);
-          return null;
+          return (Void) null;
         } catch (Throwable t) {
           /*
            * Note: The stack traces here are from the *client*. Any
@@ -1024,8 +1029,9 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
         if (InnerCause.isInnerCause(cause, CancellationException.class)) return true;
         if (InnerCause.isInnerCause(cause, ClosedByInterruptException.class)) return true;
         if (InnerCause.isInnerCause(cause, BufferClosedException.class)) return true;
-        return InnerCause.isInnerCause(cause, QueryTimeoutException.class);
+        if (InnerCause.isInnerCause(cause, QueryTimeoutException.class)) return true;
 
+        return false;
       }
     }
 
@@ -1400,7 +1406,7 @@ public class StressTestConcurrentRestApiRequests<S extends IIndexManager>
           final BindingSet bset = result.next();
           final Resource s = (Resource) bset.getBinding("s").getValue();
           final URI p = (URI) bset.getBinding("p").getValue();
-          final Value o = bset.getBinding("o").getValue();
+          final Value o = (Value) bset.getBinding("o").getValue();
           final Resource g = (Resource) (quads ? bset.getBinding("g").getValue() : null);
           final Statement stmt =
               quads ? vf.createStatement(s, p, o, g) : vf.createStatement(s, p, o);

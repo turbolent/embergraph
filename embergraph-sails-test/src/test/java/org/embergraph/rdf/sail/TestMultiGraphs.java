@@ -176,13 +176,19 @@ public class TestMultiGraphs extends ProxyEmbergraphSailTestCase {
         final Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
             createBindingSet(
-                new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person)));
+                new Binding[] {
+                  new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person),
+                }));
         solution.add(
             createBindingSet(
-                new BindingImpl("p", likes), new BindingImpl("o", rdf)));
+                new Binding[] {
+                  new BindingImpl("p", likes), new BindingImpl("o", rdf),
+                }));
         solution.add(
             createBindingSet(
-                new BindingImpl("p", RDFS.LABEL), new BindingImpl("o", l1)));
+                new Binding[] {
+                  new BindingImpl("p", RDFS.LABEL), new BindingImpl("o", l1),
+                }));
 
         compare(result, solution);
       }
@@ -219,13 +225,19 @@ public class TestMultiGraphs extends ProxyEmbergraphSailTestCase {
         final Collection<BindingSet> solution = new LinkedList<BindingSet>();
         solution.add(
             createBindingSet(
-                new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person)));
+                new Binding[] {
+                  new BindingImpl("p", RDF.TYPE), new BindingImpl("o", person),
+                }));
         solution.add(
             createBindingSet(
-                new BindingImpl("p", likes), new BindingImpl("o", rdf)));
+                new Binding[] {
+                  new BindingImpl("p", likes), new BindingImpl("o", rdf),
+                }));
         solution.add(
             createBindingSet(
-                new BindingImpl("p", RDFS.LABEL), new BindingImpl("o", l1)));
+                new Binding[] {
+                  new BindingImpl("p", RDFS.LABEL), new BindingImpl("o", l1),
+                }));
 
         compare(result, solution);
       }

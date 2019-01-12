@@ -54,7 +54,7 @@ public interface IResourceLocator<T extends ILocatableResource> {
    * @return A view of the resource iff it exists (specifically, if the declaration for the resource
    *     can be resolved) -or- <code>null</code> if the resource declaration could not be resolved.
    */
-  T locate(String namespace, long timestamp);
+  public T locate(String namespace, long timestamp);
 
   /**
    * Resources that hold hard references to local index objects MUST be discarded during abort
@@ -67,12 +67,12 @@ public interface IResourceLocator<T extends ILocatableResource> {
    *     read-committed and unisolated views must also be discarded even if they do not correspond
    *     to the <i>instance</i>.
    */
-  void discard(final ILocatableResource<T> instance, boolean destroyed);
+  public void discard(final ILocatableResource<T> instance, boolean destroyed);
 
   /**
    * Discard unisolated resource views from the locator cache.
    *
    * @see BLZG-2023, BLZG-2041.
    */
-  void clearUnisolatedCache();
+  public void clearUnisolatedCache();
 }

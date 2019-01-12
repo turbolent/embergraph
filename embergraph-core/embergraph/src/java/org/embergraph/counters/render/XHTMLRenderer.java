@@ -1657,7 +1657,7 @@ public class XHTMLRenderer implements IRenderer {
     // attributes.
     w.write(" <tr\n>");
     w.write("  <th align=\"left\">hostname</th>");
-    w.write("  <td colspan=\"2\">" + cdata(e.hostname) + "</td>");
+    w.write("  <td colspan=\"2\">" + cdata(e.hostname.toString()) + "</td>");
     w.write(" </tr\n>");
 
     w.write(" <tr\n>");
@@ -1667,7 +1667,7 @@ public class XHTMLRenderer implements IRenderer {
 
     w.write(" <tr\n>");
     w.write("  <th align=\"left\">serviceName</th>");
-    w.write("  <td colspan=\"2\">" + cdata(e.serviceName) + "</td>");
+    w.write("  <td colspan=\"2\">" + cdata(e.serviceName.toString()) + "</td>");
     w.write(" </tr\n>");
 
     w.write(" <tr\n>");

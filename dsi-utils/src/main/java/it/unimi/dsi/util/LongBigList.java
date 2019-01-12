@@ -42,7 +42,7 @@ public interface LongBigList extends LongList {
    * @return the corresponding long value.
    * @see List#get(int)
    */
-  long getLong(long index);
+  public long getLong(long index);
 
   /**
    * Removes the long at the given position.
@@ -51,7 +51,7 @@ public interface LongBigList extends LongList {
    * @return the long previously at the specified position.
    * @see List#remove(int)
    */
-  long removeLong(long index);
+  public long removeLong(long index);
 
   /**
    * Sets the long at the given position.
@@ -61,7 +61,7 @@ public interface LongBigList extends LongList {
    * @return the previous value.
    * @see List#set(int,Object)
    */
-  long set(long index, long value);
+  public long set(long index, long value);
 
   /**
    * Adds the long at the given position.
@@ -70,7 +70,7 @@ public interface LongBigList extends LongList {
    * @param value a long value.
    * @see List#add(int,Object)
    */
-  void add(long index, long value);
+  public void add(long index, long value);
 
   /**
    * The number of elements in this big list.
@@ -78,7 +78,7 @@ public interface LongBigList extends LongList {
    * @return the number of elements in this big list.
    * @see List#size()
    */
-  long length();
+  public long length();
 
   /**
    * Sets the number of elements in this big list.
@@ -86,7 +86,7 @@ public interface LongBigList extends LongList {
    * @return this big list.
    * @see LongList#size(int)
    */
-  LongBigList length(long newLength);
+  public LongBigList length(long newLength);
 
   /**
    * Returns a big sublist view of this big list.
@@ -96,5 +96,5 @@ public interface LongBigList extends LongList {
    * @return a big sublist view of this big list.
    * @see List#subList(int, int)
    */
-  LongBigList subList(long from, long to);
+  public LongBigList subList(long from, long to);
 }

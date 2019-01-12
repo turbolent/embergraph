@@ -36,7 +36,7 @@ import java.util.Map;
 public interface ITPS {
 
   /** The {@link Schema} name. */
-  Schema getSchema();
+  public Schema getSchema();
 
   /**
    * The value of the primary key.
@@ -44,7 +44,7 @@ public interface ITPS {
    * @return The value of the primary key -or- <code>null</code> if there is no property value bound
    *     for the property named by {@link Schema#getName()}.
    */
-  Object getPrimaryKey();
+  public Object getPrimaryKey();
 
   /**
    * The timestamp assigned by an atomic write operation (for atomic readback only).
@@ -52,10 +52,10 @@ public interface ITPS {
    * @return The timestamp.
    * @throws IllegalStateException if no timestamp has been assigned.
    */
-  long getWriteTimestamp();
+  public long getWriteTimestamp();
 
   /** The #of tuples - each tuple is an {@link ITPV}. */
-  int size();
+  public int size();
 
   /**
    * Return the most recent value for the named property whose timestamp is not greater than the
@@ -66,7 +66,7 @@ public interface ITPS {
    * @return An object representing value of the property as of the indicated timestamp and never
    *     <code>null</code>.
    */
-  ITPV get(String name, long timestamp);
+  public ITPV get(String name, long timestamp);
 
   /**
    * Return the most recent value for the named property.
@@ -77,13 +77,13 @@ public interface ITPS {
    *     ITPV#getValue()} will return <code>null</code> and {@link ITPV#getTimestamp()} will return
    *     <code>0L</code>.
    */
-  ITPV get(String name);
+  public ITPV get(String name);
 
   /** Visits all tuples in order by <em>ascending timestamp</em>. */
-  Iterator<ITPV> iterator();
+  public Iterator<ITPV> iterator();
 
   /** Return a copy of the tuples showing only the most recent value for each property. */
-  Map<String, Object> asMap();
+  public Map<String, Object> asMap();
 
   /**
    * Return a copy of the tuples showing only the most recent value for each property whose
@@ -94,7 +94,7 @@ public interface ITPS {
    * @return A map containing a copy of the selected property values. A deleted property will not be
    *     contained in the map.
    */
-  Map<String, Object> asMap(long timestamp);
+  public Map<String, Object> asMap(long timestamp);
 
   /**
    * Return a copy of the tuples showing only the most recent value for each property whose
@@ -106,5 +106,5 @@ public interface ITPS {
    * @return A map containing a copy of the selected property values. A deleted property will not be
    *     contained in the map.
    */
-  Map<String, Object> asMap(long timestamp, INameFilter filter);
+  public Map<String, Object> asMap(long timestamp, INameFilter filter);
 }

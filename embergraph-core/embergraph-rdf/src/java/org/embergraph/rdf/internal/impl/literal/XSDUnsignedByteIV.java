@@ -110,7 +110,7 @@ public class XSDUnsignedByteIV<V extends EmbergraphLiteral> extends AbstractLite
   @Override
   public boolean booleanValue() {
 
-    return value != UNSIGNED_ZERO;
+    return value != UNSIGNED_ZERO ? true : false;
   }
 
   private static final byte UNSIGNED_ZERO = (byte) 0x80; // (byte) -128;
@@ -137,7 +137,7 @@ public class XSDUnsignedByteIV<V extends EmbergraphLiteral> extends AbstractLite
 
   @Override
   public short shortValue() {
-    return promote();
+    return (short) promote();
   }
 
   @Override

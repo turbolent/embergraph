@@ -30,5 +30,5 @@ import java.io.ObjectOutput;
  */
 public interface IStoreObjectOutputStream extends DataOutput, ObjectOutput {
 
-  IRawStore getStore();
+  public IRawStore getStore();
 }

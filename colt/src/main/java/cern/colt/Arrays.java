@@ -419,7 +419,7 @@ public class Arrays extends Object {
    */
   public static byte[] trimToCapacity(byte[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      byte[] oldArray = array;
+      byte oldArray[] = array;
       array = new byte[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
@@ -437,7 +437,7 @@ public class Arrays extends Object {
    */
   public static char[] trimToCapacity(char[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      char[] oldArray = array;
+      char oldArray[] = array;
       array = new char[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
@@ -455,7 +455,7 @@ public class Arrays extends Object {
    */
   public static double[] trimToCapacity(double[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      double[] oldArray = array;
+      double oldArray[] = array;
       array = new double[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
@@ -473,7 +473,7 @@ public class Arrays extends Object {
    */
   public static float[] trimToCapacity(float[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      float[] oldArray = array;
+      float oldArray[] = array;
       array = new float[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
@@ -491,7 +491,7 @@ public class Arrays extends Object {
    */
   public static int[] trimToCapacity(int[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      int[] oldArray = array;
+      int oldArray[] = array;
       array = new int[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
@@ -509,7 +509,7 @@ public class Arrays extends Object {
    */
   public static long[] trimToCapacity(long[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      long[] oldArray = array;
+      long oldArray[] = array;
       array = new long[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
@@ -527,7 +527,7 @@ public class Arrays extends Object {
    */
   public static Object[] trimToCapacity(Object[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      Object[] oldArray = array;
+      Object oldArray[] = array;
       array = new Object[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
@@ -545,7 +545,7 @@ public class Arrays extends Object {
    */
   public static short[] trimToCapacity(short[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      short[] oldArray = array;
+      short oldArray[] = array;
       array = new short[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }
@@ -563,7 +563,7 @@ public class Arrays extends Object {
    */
   public static boolean[] trimToCapacity(boolean[] array, int maxCapacity) {
     if (array.length > maxCapacity) {
-      boolean[] oldArray = array;
+      boolean oldArray[] = array;
       array = new boolean[maxCapacity];
       System.arraycopy(oldArray, 0, array, 0, maxCapacity);
     }

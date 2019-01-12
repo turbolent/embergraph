@@ -36,7 +36,7 @@ public interface IHistoryEntry<T> {
    * The timestamp of the last sample to fall into this period. This timestamp will always be GTE
    * {@link #getStartOfSamplePeriod()} and LE {@link #getEndOfSamplePeriod()}.
    */
-  long lastModified();
+  public long lastModified();
 
   //    /**
   //     * The earliest possible timestamp for which a sample would be reported
@@ -51,11 +51,11 @@ public interface IHistoryEntry<T> {
   //    public long getEndOfSamplePeriod();
 
   /** The average of the samples in this period. */
-  T getValue();
+  public T getValue();
 
   /** The #of samples in this period. */
-  int getCount();
+  public int getCount();
 
   /** The total of the samples in this period. */
-  T getTotal();
+  public T getTotal();
 }

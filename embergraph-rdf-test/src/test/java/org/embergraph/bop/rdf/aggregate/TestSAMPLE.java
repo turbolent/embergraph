@@ -85,20 +85,20 @@ public class TestSAMPLE extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet[] data =
-        new IBindingSet[]{
-            new ListBindingSet(
-                new IVariable<?>[]{org, auth, book, lprice},
-                new IConstant[]{org1, auth1, book1, price9}),
-            new ListBindingSet(
-                new IVariable<?>[]{org, auth, book, lprice},
-                new IConstant[]{org1, auth1, book2, price5}),
-            new ListBindingSet(
-                new IVariable<?>[]{org, auth, book, lprice},
-                new IConstant[]{org1, auth2, book3, price7}),
-            new ListBindingSet(
-                new IVariable<?>[]{org, auth, book, lprice},
-                new IConstant[]{org2, auth3, book4, price7})
+    final IBindingSet data[] =
+        new IBindingSet[] {
+          new ListBindingSet(
+              new IVariable<?>[] {org, auth, book, lprice},
+              new IConstant[] {org1, auth1, book1, price9}),
+          new ListBindingSet(
+              new IVariable<?>[] {org, auth, book, lprice},
+              new IConstant[] {org1, auth1, book2, price5}),
+          new ListBindingSet(
+              new IVariable<?>[] {org, auth, book, lprice},
+              new IConstant[] {org1, auth2, book3, price7}),
+          new ListBindingSet(
+              new IVariable<?>[] {org, auth, book, lprice},
+              new IConstant[] {org2, auth3, book4, price7})
         };
 
     final IValueExpression<IV> expr = lprice;
@@ -158,28 +158,28 @@ public class TestSAMPLE extends TestCase2 {
        * org2  auth3  book4  7
        * </pre>
        */
-      final IBindingSet[] data =
-          new IBindingSet[]{
-              new ContextBindingSet(
-                  context,
-                  new ListBindingSet(
-                      new IVariable<?>[]{org, auth, book, lprice},
-                      new IConstant[]{org1, auth1, book1, price9})),
-              new ContextBindingSet(
-                  context,
-                  new ListBindingSet(
-                      new IVariable<?>[]{org, auth, book, lprice},
-                      new IConstant[]{org1, auth1, book2, price5})),
-              new ContextBindingSet(
-                  context,
-                  new ListBindingSet(
-                      new IVariable<?>[]{org, auth, book, lprice},
-                      new IConstant[]{org1, auth2, book3, price7})),
-              new ContextBindingSet(
-                  context,
-                  new ListBindingSet(
-                      new IVariable<?>[]{org, auth, book, lprice},
-                      new IConstant[]{org2, auth3, book4, price7}))
+      final IBindingSet data[] =
+          new IBindingSet[] {
+            new ContextBindingSet(
+                context,
+                new ListBindingSet(
+                    new IVariable<?>[] {org, auth, book, lprice},
+                    new IConstant[] {org1, auth1, book1, price9})),
+            new ContextBindingSet(
+                context,
+                new ListBindingSet(
+                    new IVariable<?>[] {org, auth, book, lprice},
+                    new IConstant[] {org1, auth1, book2, price5})),
+            new ContextBindingSet(
+                context,
+                new ListBindingSet(
+                    new IVariable<?>[] {org, auth, book, lprice},
+                    new IConstant[] {org1, auth2, book3, price7})),
+            new ContextBindingSet(
+                context,
+                new ListBindingSet(
+                    new IVariable<?>[] {org, auth, book, lprice},
+                    new IConstant[] {org2, auth3, book4, price7}))
           };
 
       final IValueExpression<IV> expr =
@@ -244,24 +244,24 @@ public class TestSAMPLE extends TestCase2 {
      * org2  auth3  book4  7
      * </pre>
      */
-    final IBindingSet[] data =
-        new IBindingSet[]{
-            new ListBindingSet(
-                new IVariable<?>[]{org, auth, book, lprice},
-                new IConstant[]{org1, auth1, book1, price9}),
-            new ListBindingSet(
-                new IVariable<?>[]{
-                    org, auth, book,
-                },
-                new IConstant[]{
-                    org1, auth1, book2,
-                }),
-            new ListBindingSet(
-                new IVariable<?>[]{org, auth, book, lprice},
-                new IConstant[]{org1, auth2, book3, price7}),
-            new ListBindingSet(
-                new IVariable<?>[]{org, auth, book, lprice},
-                new IConstant[]{org2, auth3, book4, price7})
+    final IBindingSet data[] =
+        new IBindingSet[] {
+          new ListBindingSet(
+              new IVariable<?>[] {org, auth, book, lprice},
+              new IConstant[] {org1, auth1, book1, price9}),
+          new ListBindingSet(
+              new IVariable<?>[] {
+                org, auth, book,
+              },
+              new IConstant[] {
+                org1, auth1, book2,
+              }),
+          new ListBindingSet(
+              new IVariable<?>[] {org, auth, book, lprice},
+              new IConstant[] {org1, auth2, book3, price7}),
+          new ListBindingSet(
+              new IVariable<?>[] {org, auth, book, lprice},
+              new IConstant[] {org2, auth3, book4, price7})
         };
 
     final IValueExpression<IV> expr = lprice;

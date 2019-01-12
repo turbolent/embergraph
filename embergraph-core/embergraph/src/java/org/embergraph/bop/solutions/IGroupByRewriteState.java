@@ -43,7 +43,7 @@ public interface IGroupByRewriteState {
    * which use them. The {@link IAggregate} MAY have a complex internal {@link IValueExpression},
    * but it WILL NOT have a nested {@link IAggregate}.
    */
-  LinkedHashMap<IAggregate<?>, IVariable<?>> getAggExpr();
+  public LinkedHashMap<IAggregate<?>, IVariable<?>> getAggExpr();
 
   /**
    * A modified version of the original HAVING expression which has the same semantics (and <code>
@@ -51,12 +51,12 @@ public interface IGroupByRewriteState {
    * expressions DO NOT contain any {@link IAggregate} functions. All {@link IAggregate} functions
    * have been lifted out into {@link #aggExp}.
    */
-  IConstraint[] getHaving2();
+  public IConstraint[] getHaving2();
 
   /**
    * A modified version of the original SELECT expression which has the same semantics. However, the
    * modified select expressions DO NOT contain any {@link IAggregate} functions. All {@link
    * IAggregate} functions have been lifted out into {@link #aggExp}.
    */
-  IValueExpression<?>[] getSelect2();
+  public IValueExpression<?>[] getSelect2();
 }

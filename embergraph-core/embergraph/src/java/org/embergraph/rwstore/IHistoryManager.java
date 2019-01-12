@@ -37,7 +37,7 @@ public interface IHistoryManager {
    * counter within the {@link IStore}. As long as a transaction is active we can not release data
    * which is currently marked as freed but was committed at the point the session started.
    */
-  IRawTx newTx();
+  public IRawTx newTx();
 
   /**
    * Saves the current list of delete blocks, returning the address allocated. This can be used
@@ -51,7 +51,7 @@ public interface IHistoryManager {
    * @return the address of the deferred addresses saved on the store, or zero if none.
    * @see DeleteBlockCommitter
    */
-  long saveDeferrals();
+  public long saveDeferrals();
 
   /**
    * This method is invoked during the commit protocol and gives the backing store an opportunity to
@@ -62,7 +62,7 @@ public interface IHistoryManager {
    * @return number of addresses freed
    * @see AbstractJournal#commitNow()
    */
-  int checkDeferredFrees(AbstractJournal abstractJournal);
+  public int checkDeferredFrees(AbstractJournal abstractJournal);
 
   /**
    * Call made from AbstractJournal to register the cache used. This can then be accessed to clear
@@ -75,7 +75,7 @@ public interface IHistoryManager {
    * @param externalCache - used by the Journal to cache historical BTree references
    * @param dataSize - the size of the checkpoint data (fixed for any version)
    */
-  void registerExternalCache(
+  public void registerExternalCache(
       ConcurrentWeakValueCache<Long, ICommitter> historicalIndexCache, int byteCount);
 
   /**
@@ -84,5 +84,5 @@ public interface IHistoryManager {
    *
    * @return latest data release time
    */
-  long getLastReleaseTime();
+  public long getLastReleaseTime();
 }

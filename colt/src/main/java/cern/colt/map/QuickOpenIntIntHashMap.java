@@ -77,8 +77,8 @@ class QuickOpenIntIntHashMap extends OpenIntIntHashMap {
     */
 
     int key0;
-    final int[] tab = table;
-    final byte[] stat = state;
+    final int tab[] = table;
+    final byte stat[] = state;
     final int length = tab.length;
 
     int hash = HashFunctions.hash(key) & 0x7FFFFFFF;
@@ -181,13 +181,13 @@ class QuickOpenIntIntHashMap extends OpenIntIntHashMap {
     int oldCapacity = table.length;
     // if (oldCapacity == newCapacity) return;
 
-    int[] oldTable = table;
-    int[] oldValues = values;
-    byte[] oldState = state;
+    int oldTable[] = table;
+    int oldValues[] = values;
+    byte oldState[] = state;
 
-    int[] newTable = new int[newCapacity];
-    int[] newValues = new int[newCapacity];
-    byte[] newState = new byte[newCapacity];
+    int newTable[] = new int[newCapacity];
+    int newValues[] = new int[newCapacity];
+    byte newState[] = new byte[newCapacity];
 
     this.lowWaterMark = chooseLowWaterMark(newCapacity, this.minLoadFactor);
     this.highWaterMark = chooseHighWaterMark(newCapacity, this.maxLoadFactor);

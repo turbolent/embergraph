@@ -450,7 +450,7 @@ public class NicUtil {
    */
   public static String getIpAddress(
       String systemPropertyName, String defaultNic, boolean loopbackOk)
-      throws IOException {
+      throws SocketException, IOException {
     if (systemPropertyName != null) { // system property takes precedence
       String nicName = System.getProperty(systemPropertyName);
       boolean propSet = true;
@@ -668,7 +668,7 @@ public class NicUtil {
   private static AddrCache<String> loopbackCache = new AddrCache<String>();
   private static AddrCache<String> nonLoopbackCache = new AddrCache<String>();
 
-  public static String getDefaultIpv4Address() throws IOException {
+  public static String getDefaultIpv4Address() throws SocketException, IOException {
     return getDefaultIpv4Address(false); // localhost NOT ok
   }
 

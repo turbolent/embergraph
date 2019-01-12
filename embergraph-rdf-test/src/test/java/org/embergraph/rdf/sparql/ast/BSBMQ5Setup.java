@@ -279,27 +279,35 @@ public class BSBMQ5Setup {
           new FunctionNode(
               FunctionRegistry.LT,
               null /* scalarArgs */,
-              new VarNode("simProperty1"),
-              new FunctionNode(
-                  FunctionRegistry.ADD,
-                  null /* scalarArgs */,
-                  new VarNode("origProperty1"), new ConstantNode(_120.getIV())));
+              new ValueExpressionNode[] {
+                new VarNode("simProperty1"),
+                new FunctionNode(
+                    FunctionRegistry.ADD,
+                    null /* scalarArgs */,
+                    new ValueExpressionNode[] {
+                      new VarNode("origProperty1"), new ConstantNode(_120.getIV())
+                    })
+              });
 
       final ValueExpressionNode right =
           new FunctionNode(
               FunctionRegistry.GT,
               null /* scalarArgs */,
-              new VarNode("simProperty1"),
-              new FunctionNode(
-                  FunctionRegistry.SUBTRACT,
-                  null /* scalarArgs */,
-                  new VarNode("origProperty1"), new ConstantNode(_120.getIV())));
+              new ValueExpressionNode[] {
+                new VarNode("simProperty1"),
+                new FunctionNode(
+                    FunctionRegistry.SUBTRACT,
+                    null /* scalarArgs */,
+                    new ValueExpressionNode[] {
+                      new VarNode("origProperty1"), new ConstantNode(_120.getIV())
+                    })
+              });
 
       final ValueExpressionNode expr =
           new FunctionNode(
               FunctionRegistry.AND,
               null /* scalarValues */,
-              left, right);
+              new ValueExpressionNode[] {left, right});
 
       c1 = new FilterNode(expr);
 
@@ -313,27 +321,35 @@ public class BSBMQ5Setup {
           new FunctionNode(
               FunctionRegistry.LT,
               null /* scalarArgs */,
-              new VarNode("simProperty2"),
-              new FunctionNode(
-                  FunctionRegistry.ADD,
-                  null /* scalarArgs */,
-                  new VarNode("origProperty2"), new ConstantNode(_170.getIV())));
+              new ValueExpressionNode[] {
+                new VarNode("simProperty2"),
+                new FunctionNode(
+                    FunctionRegistry.ADD,
+                    null /* scalarArgs */,
+                    new ValueExpressionNode[] {
+                      new VarNode("origProperty2"), new ConstantNode(_170.getIV())
+                    })
+              });
 
       final ValueExpressionNode right =
           new FunctionNode(
               FunctionRegistry.GT,
               null /* scalarArgs */,
-              new VarNode("simProperty2"),
-              new FunctionNode(
-                  FunctionRegistry.SUBTRACT,
-                  null /* scalarArgs */,
-                  new VarNode("origProperty2"), new ConstantNode(_170.getIV())));
+              new ValueExpressionNode[] {
+                new VarNode("simProperty2"),
+                new FunctionNode(
+                    FunctionRegistry.SUBTRACT,
+                    null /* scalarArgs */,
+                    new ValueExpressionNode[] {
+                      new VarNode("origProperty2"), new ConstantNode(_170.getIV())
+                    })
+              });
 
       final ValueExpressionNode expr =
           new FunctionNode(
               FunctionRegistry.AND,
               null /* scalarValues */,
-              left, right);
+              new ValueExpressionNode[] {left, right});
 
       c2 = new FilterNode(expr);
 

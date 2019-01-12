@@ -180,7 +180,7 @@ public interface ISPO extends IElement, Statement {
    *
    * @param override the new value.
    */
-  void setOverride(boolean override);
+  public void setOverride(boolean override);
 
   /**
    * When <code>true</code> the statement will be written onto the database with exactly its current
@@ -192,7 +192,7 @@ public interface ISPO extends IElement, Statement {
    * {@link StatementEnum} in the database without first deleting the statement (which would also
    * delete its justifications).
    */
-  boolean isOverride();
+  public boolean isOverride();
 
   /**
    * Set a transient flag indicating whether or not the persistent state of the statement was
@@ -200,7 +200,7 @@ public interface ISPO extends IElement, Statement {
    * statement was inserted, retracted, or had its associated {@link StatementEnum} in the database
    * updated.
    */
-  void setModified(ModifiedEnum modified);
+  public void setModified(ModifiedEnum modified);
 
   /**
    * Return the state of the transient <i>modified</i> flag. This flag indicates whether or not the
@@ -218,14 +218,14 @@ public interface ISPO extends IElement, Statement {
    *     <p>Because this information is set at a low-level it can not currently be used in
    *     combination with truth maintenance mechanisms.
    */
-  ModifiedEnum getModified();
+  public ModifiedEnum getModified();
 
-  boolean isModified();
+  public boolean isModified();
 
   /**
    * Method may be used to externalize the {@link EmbergraphValue}s in the {@link ISPO}.
    *
    * @param db The database whose lexicon will be used.
    */
-  String toString(IRawTripleStore db);
+  public String toString(IRawTripleStore db);
 }

@@ -538,7 +538,7 @@ public class Format {
     } // CSH 10-25-97
 
     String z = leadingZeroes + l;
-    z = "." + z.substring(z.length() - precision);
+    z = "." + z.substring(z.length() - precision, z.length());
 
     if (removeTrailing) {
       int t = z.length() - 1;
@@ -584,7 +584,7 @@ public class Format {
       p = p + (-e);
     }
 
-    return f + p.substring(p.length() - 3);
+    return f + p.substring(p.length() - 3, p.length());
   }
 
   private int width;

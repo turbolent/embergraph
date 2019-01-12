@@ -335,20 +335,20 @@ public class StressTestGroupCommit extends ProxyTestCase<Journal> implements ICo
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public interface TestOptions extends Options {
+  public static interface TestOptions extends Options {
 
     /** The timeout for the test (seconds). */
-    String TIMEOUT = "timeout";
+    public static final String TIMEOUT = "timeout";
 
     /** The #of tasks to submit. */
-    String NTASKS = "ntasks";
+    public static final String NTASKS = "ntasks";
 
     /**
      * The #of records to insert into the index -or- ZERO (0) to only create the index (default 0).
      */
-    String NINSERT = "NINSERT";
+    public static final String NINSERT = "NINSERT";
 
-    String DEFAULT_NINSERT = "0";
+    public static final String DEFAULT_NINSERT = "0";
   }
 
   @Override

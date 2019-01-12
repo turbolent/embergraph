@@ -383,15 +383,15 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
       final EmbergraphStatement[] params =
           new EmbergraphStatement[] {
             valueFactory.createStatement(
-                hintQuery,
-                hintEngine,
-                cache,
+                (EmbergraphResource) hintQuery,
+                (EmbergraphURI) hintEngine,
+                (EmbergraphValue) cache,
                 null, // c
                 StatementEnum.Explicit),
             valueFactory.createStatement(
-                hintQuery,
-                hintExpireAge,
-                millis,
+                (EmbergraphResource) hintQuery,
+                (EmbergraphURI) hintExpireAge,
+                (EmbergraphValue) millis,
                 null, // c
                 StatementEnum.Explicit),
           };

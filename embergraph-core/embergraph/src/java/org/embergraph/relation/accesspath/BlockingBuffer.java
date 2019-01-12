@@ -1313,10 +1313,14 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
 
     public boolean isExhausted() {
 
-      // iterator is known to be exhausted.
-      return !BlockingBuffer.this.open && nextE == null && queue.isEmpty();
+      if (!BlockingBuffer.this.open && nextE == null && queue.isEmpty()) {
+
+        // iterator is known to be exhausted.
+        return true;
+      }
 
       // iterator might visit more elements (might not also).
+      return false;
     }
 
     /**
@@ -2000,7 +2004,7 @@ public class BlockingBuffer<E> implements IBlockingBuffer<E> {
     //        @SuppressWarnings("unchecked")
     private E combineNextChunk(final E e) {
 
-      return BlockingBuffer.combineChunks(e, _next());
+      return BlockingBuffer.this.combineChunks(e, _next());
 
       //            final Object[] e1 = (Object[]) e;
       //

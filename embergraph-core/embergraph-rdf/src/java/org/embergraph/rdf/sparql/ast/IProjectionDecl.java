@@ -32,7 +32,7 @@ import org.embergraph.bop.IVariable;
  */
 public interface IProjectionDecl {
 
-  interface Annotations {
+  public interface Annotations {
 
     /**
      * The {@link ProjectionNode} (optional). This is also used for DESCRIBE queries to capture the

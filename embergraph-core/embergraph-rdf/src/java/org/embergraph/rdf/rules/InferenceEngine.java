@@ -80,7 +80,7 @@ public class InferenceEngine {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface Options {
+  public static interface Options {
 
     /**
      * When <code>true</code> (default {@value #DEFAULT_FORWARD_RDF_TYPE_RDFS_RESOURCE}) <code>

@@ -229,7 +229,7 @@ class BenchmarkMatrix2D {
     for (int i = 0; i < runs; i++) {
       matrix.assign(0);
       matrix.ensureCapacity(initialCapacity);
-      if (kind.equals("sparse")) matrix.ensureCapacity(initialCapacity);
+      if (kind.equals("sparse")) ((SparseDoubleMatrix2D) matrix).ensureCapacity(initialCapacity);
       timer1.start();
       int value = 0;
       for (int row = 0; row < rows; row++) {
@@ -245,9 +245,10 @@ class BenchmarkMatrix2D {
 
     Runtime.getRuntime().gc(); // invite gc
     try {
-      Thread.sleep(1000);
+      Thread.currentThread().sleep(1000);
     } catch (InterruptedException exc) {
     }
+    ;
     long after = Runtime.getRuntime().freeMemory();
     System.out.println("KB needed=" + (before - after) / 1024);
     System.out.println(
@@ -326,9 +327,10 @@ class BenchmarkMatrix2D {
     System.out.println(size / timer3.minus(emptyLoop).seconds() + " elements / sec");
     Runtime.getRuntime().gc(); // invite gc
     try {
-      Thread.sleep(1000);
+      Thread.currentThread().sleep(1000);
     } catch (InterruptedException exc) {
     }
+    ;
     after = Runtime.getRuntime().freeMemory();
     System.out.println("KB needed=" + (before - after) / 1024);
     System.out.println("KB free=" + (after / 1024));
@@ -470,9 +472,10 @@ class BenchmarkMatrix2D {
 
     Runtime.getRuntime().gc(); // invite gc
     try {
-      Thread.sleep(1000);
+      Thread.currentThread().sleep(1000);
     } catch (InterruptedException exc) {
     }
+    ;
     long after = Runtime.getRuntime().freeMemory();
     System.out.println("KB needed=" + (before - after) / 1024);
     if (print) {
@@ -525,9 +528,10 @@ class BenchmarkMatrix2D {
     System.out.println(size / timer3.minus(emptyLoop).seconds() + " elements / sec");
     Runtime.getRuntime().gc(); // invite gc
     try {
-      Thread.sleep(1000);
+      Thread.currentThread().sleep(1000);
     } catch (InterruptedException exc) {
     }
+    ;
     after = Runtime.getRuntime().freeMemory();
     System.out.println("KB needed=" + (before - after) / 1024);
     System.out.println("KB free=" + (after / 1024));
@@ -601,9 +605,10 @@ class BenchmarkMatrix2D {
 
     Runtime.getRuntime().gc(); // invite gc
     try {
-      Thread.sleep(1000);
+      Thread.currentThread().sleep(1000);
     } catch (InterruptedException exc) {
     }
+    ;
     long after = Runtime.getRuntime().freeMemory();
     System.out.println("KB needed=" + (before - after) / 1024);
     if (print) {
@@ -652,9 +657,10 @@ class BenchmarkMatrix2D {
     System.out.println(size / timer3.minus(emptyLoop).seconds() + " elements / sec");
     Runtime.getRuntime().gc(); // invite gc
     try {
-      Thread.sleep(1000);
+      Thread.currentThread().sleep(1000);
     } catch (InterruptedException exc) {
     }
+    ;
     after = Runtime.getRuntime().freeMemory();
     System.out.println("KB needed=" + (before - after) / 1024);
     System.out.println("KB free=" + (after / 1024));
@@ -1049,7 +1055,7 @@ class BenchmarkMatrix2D {
     */
   }
   /** Benchmarks various methods of this class. */
-  public static void main(String[] args) {
+  public static void main(String args[]) {
     int runs = Integer.parseInt(args[0]);
     int rows = Integer.parseInt(args[1]);
     int columns = Integer.parseInt(args[2]);

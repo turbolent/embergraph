@@ -36,17 +36,17 @@ import java.io.Serializable;
 public interface IStep extends Serializable {
 
   /** The name of the program. */
-  String getName();
+  public String getName();
 
   /**
    * <code>true</code> iff the step is an {@link IRule} and <code>false</code> iff the step is an
    * {@link IProgram}.
    */
-  boolean isRule();
+  public boolean isRule();
 
   /** Return additional constraints that must be imposed during query evaluation. */
-  IQueryOptions getQueryOptions();
+  public IQueryOptions getQueryOptions();
 
   /** A human readable representation of the {@link IStep}. */
-  String toString();
+  public String toString();
 }

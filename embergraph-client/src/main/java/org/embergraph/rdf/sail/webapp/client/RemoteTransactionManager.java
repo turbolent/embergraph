@@ -322,7 +322,7 @@ public class RemoteTransactionManager {
   public IRemoteTxState0 statusTx(final long txId) throws RemoteTransactionNotFoundException {
 
     final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
+        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + Long.toString(txId));
 
     opts.method = "POST";
 
@@ -372,7 +372,7 @@ public class RemoteTransactionManager {
     }
 
     final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
+        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + Long.toString(txId));
 
     opts.method = "POST";
 
@@ -424,7 +424,7 @@ public class RemoteTransactionManager {
   private void abortTx(final long txId) throws RemoteTransactionNotFoundException {
 
     final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
+        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + Long.toString(txId));
 
     opts.method = "POST";
 
@@ -477,7 +477,7 @@ public class RemoteTransactionManager {
       throws RemoteTransactionNotFoundException, RemoteTransactionValidationException {
 
     final ConnectOptions opts =
-        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + txId);
+        new ConnectOptions(mgr.getBaseServiceURL() + "/tx/" + Long.toString(txId));
 
     opts.method = "POST";
 

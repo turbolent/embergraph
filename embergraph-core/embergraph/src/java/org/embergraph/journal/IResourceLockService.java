@@ -62,7 +62,7 @@ public interface IResourceLockService {
    * @return The lock.
    * @throws RuntimeException wrapping {@link InterruptedException} or {@link TimeoutException}
    */
-  IResourceLock acquireLock(String namespace);
+  public IResourceLock acquireLock(String namespace);
 
   /**
    * Acquire an exclusive lock the named resource. The request will block until the lock is
@@ -75,6 +75,6 @@ public interface IResourceLockService {
    * @throws TimeoutException
    * @throws InterruptedException
    */
-  IResourceLock acquireLock(String namespace, long timeout)
+  public IResourceLock acquireLock(String namespace, long timeout)
       throws InterruptedException, TimeoutException;
 }

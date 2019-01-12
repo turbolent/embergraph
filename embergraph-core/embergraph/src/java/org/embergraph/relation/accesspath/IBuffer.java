@@ -40,17 +40,17 @@ import org.embergraph.relation.IRelation;
 public interface IBuffer<E> {
 
   /** The #of elements currently in the buffer. */
-  int size();
+  public int size();
 
   /** True iff there are no elements in the buffer. */
-  boolean isEmpty();
+  public boolean isEmpty();
 
   /**
    * Add an element to the buffer.
    *
    * @param e The element
    */
-  void add(E e);
+  public void add(E e);
 
   /**
    * Flush the buffer and return the #of elements written on the backing {@link IRelation} since the
@@ -61,11 +61,11 @@ public interface IBuffer<E> {
    * @return The #of elements written on the backing {@link IRelation}.
    *     <p>See {@link IMutableRelation}
    */
-  long flush();
+  public long flush();
 
   /**
    * Reset the state of the buffer, including the counter whose value is reported by {@link
    * #flush()}. Any data in the buffer will be discarded.
    */
-  void reset();
+  public void reset();
 }

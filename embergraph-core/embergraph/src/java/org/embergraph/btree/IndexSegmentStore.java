@@ -451,7 +451,7 @@ public class IndexSegmentStore extends AbstractRawStore {
           final Class cl = Class.forName(indexMetadata.getBTreeClassName());
 
           @SuppressWarnings({"rawtypes", "unchecked"})
-          final Constructor ctor = cl.getConstructor(IndexSegmentStore.class);
+          final Constructor ctor = cl.getConstructor(new Class[] {IndexSegmentStore.class});
 
           seg = (IndexSegment) ctor.newInstance(new Object[] {this});
 

@@ -178,8 +178,9 @@ public class TestTupleFilters extends AbstractBTreeTestCase {
             final int i = KeyBuilder.decodeInt(key, 0);
 
             // delete only the even keys.
-            return i % 2 == 0;
+            if (i % 2 == 0) return true;
 
+            return false;
           }
         };
 

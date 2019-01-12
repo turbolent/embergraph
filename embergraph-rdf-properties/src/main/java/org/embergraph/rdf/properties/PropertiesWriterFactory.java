@@ -63,19 +63,19 @@ import java.io.Writer;
 public interface PropertiesWriterFactory {
 
   /** Returns the PropertiesFactory for this factory. */
-  PropertiesFormat getRDFFormat();
+  public PropertiesFormat getRDFFormat();
 
   /**
    * Returns an {@link PropertiesWriter} instance that will write to the supplied output stream.
    *
    * @param out The OutputStream to write the RDF to.
    */
-  PropertiesWriter getWriter(OutputStream out);
+  public PropertiesWriter getWriter(OutputStream out);
 
   /**
    * Returns an {@link PropertiesWriter} instance that will write to the supplied writer.
    *
    * @param writer The Writer to write the RDF to.
    */
-  PropertiesWriter getWriter(Writer writer);
+  public PropertiesWriter getWriter(Writer writer);
 }

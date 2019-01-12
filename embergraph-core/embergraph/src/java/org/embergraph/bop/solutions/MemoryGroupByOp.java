@@ -457,6 +457,7 @@ public class MemoryGroupByOp extends GroupByOp {
             } else {
               val = new Constant(varValue.getClass().cast(varValue));
             }
+            ;
 
             // Bind on [aggregates].
             aggregates.set(var, val);
@@ -556,8 +557,12 @@ public class MemoryGroupByOp extends GroupByOp {
       {
         final boolean drop;
         final IConstraint[] having2 = rewrite.getHaving2();
-        // drop this solution.
-        drop = having2 != null && !BOpUtility.isConsistent(having2, aggregates);
+        if (having2 != null && !BOpUtility.isConsistent(having2, aggregates)) {
+          // drop this solution.
+          drop = true;
+        } else {
+          drop = false;
+        }
 
         if (log.isInfoEnabled()) log.info((drop ? "drop" : "keep") + " : " + aggregates);
 
@@ -663,7 +668,7 @@ public class MemoryGroupByOp extends GroupByOp {
 
         for (IBindingSet bset : solutions) {
 
-          final Object[] constants = new Object[expr.arity()];
+          final Object constants[] = new Object[expr.arity()];
 
           for (int i = 0; i < expr.arity(); i++) {
 

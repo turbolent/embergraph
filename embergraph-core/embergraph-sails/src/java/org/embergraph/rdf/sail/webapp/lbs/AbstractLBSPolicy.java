@@ -182,7 +182,7 @@ public abstract class AbstractLBSPolicy
       if (quorum != null) {
         try {
           // Note: This is the *local* HAGlueService.
-          quorumService = quorum.getClient();
+          quorumService = (QuorumService<HAGlue>) quorum.getClient();
           token = quorum.token();
           isLeader = quorumService.isLeader(token);
           isQuorumMet = token != Quorum.NO_QUORUM;
@@ -222,8 +222,11 @@ public abstract class AbstractLBSPolicy
        * Provide an opportunity to forward a read request to the local
        * service.
        */
-      // Handled.
-      return conditionallyForwardReadRequest(servlet, request, response);
+      if (conditionallyForwardReadRequest(servlet, request, response)) {
+
+        // Handled.
+        return true;
+      }
     }
 
     // request was not handled.
@@ -376,7 +379,7 @@ public abstract class AbstractLBSPolicy
    * it make more sense to have a 2nd Quorum object for this purpose - one that is not started and
    * stopped by the HAJournalServer?
    *
-   * @see <a href="http://trac.blazegraph.com/ticket/775">http://trac.blazegraph.com/ticket/775</a> (HAJournal start() delay)
+   * @see http://trac.blazegraph.com/ticket/775 (HAJournal start() delay)
    */
   @Override
   public void notify(final QuorumEvent e) {
@@ -397,7 +400,7 @@ public abstract class AbstractLBSPolicy
                         updateServiceTable();
                       }
                     },
-                    null /* result */));
+                    (Void) null /* result */));
         break;
     }
   }

@@ -61,7 +61,7 @@ public interface EmbergraphValue extends Value, IElement { // , Comparable<Ember
    * only be one {@link EmbergraphValueFactory} instance for on a given JVM for all {@link
    * EmbergraphValue}s associated with a given lexicon relation namespace).
    */
-  EmbergraphValueFactory getValueFactory();
+  public EmbergraphValueFactory getValueFactory();
 
   /**
    * Return the internal value for this value. May be a term identifier or an inline value. The term
@@ -69,7 +69,7 @@ public interface EmbergraphValue extends Value, IElement { // , Comparable<Ember
    * TempTripleStore} will be used that shares the lexicon with a given database, in which case the
    * same term identifiers will be value for that {@link TempTripleStore}.
    */
-  IV getIV();
+  public IV getIV();
 
   /**
    * Set the internal value for this value.
@@ -86,14 +86,14 @@ public interface EmbergraphValue extends Value, IElement { // , Comparable<Ember
    * @throws IllegalStateException if the internal value is already set to a different non-null
    *     value.
    */
-  void setIV(IV iv);
+  public void setIV(IV iv);
 
   /**
    * Return <code>true</code> if the {@link IV} is either is set to a "real" IV. Return <code>false
    * </code> if the {@link IV} is either not set or is set to a "mock" or "dummy" {@link IV}.
    */
-  boolean isRealIV();
+  public boolean isRealIV();
 
   /** Clears the internal value to null. */
-  void clearInternalValue();
+  public void clearInternalValue();
 }

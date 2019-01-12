@@ -414,7 +414,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
   /** Verify all data accessible from {@link ILeafData}. */
   public static void assertSameLeafData(final ILeafData n1, final ILeafData n2) {
 
-    assertSameAbstractNodeData(n1, n2);
+    assertSameAbstractNodeData((IAbstractNodeData) n1, (IAbstractNodeData) n2);
 
     assertEquals("#keys!=#vals", n1.getKeyCount(), n1.getValueCount());
 
@@ -877,7 +877,7 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     // override the BTree class.
     metadata.setBTreeClassName(NoEvictionBTree.class.getName());
 
-    return BTree.create(store, metadata);
+    return (NoEvictionBTree) BTree.create(store, metadata);
   }
 
   /**
@@ -1356,9 +1356,9 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
      * generate keys.  the keys are a dense monotonic sequence.
      */
 
-    final int[] keys = new int[ninserts];
+    final int keys[] = new int[ninserts];
 
-    final SimpleEntry[] entries = new SimpleEntry[ninserts];
+    final SimpleEntry entries[] = new SimpleEntry[ninserts];
 
     for (int i = 0; i < ninserts; i++) {
 
@@ -1385,9 +1385,9 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
     /*
      * generate random keys. the keys are a sparse monotonic sequence.
      */
-    final int[] keys = new int[ninserts];
+    final int keys[] = new int[ninserts];
 
-    final SimpleEntry[] entries = new SimpleEntry[ninserts];
+    final SimpleEntry entries[] = new SimpleEntry[ninserts];
 
     final Random r = new Random();
 
@@ -1434,9 +1434,9 @@ public abstract class AbstractBTreeTestCase extends TestCase2 {
 
     final int ninserts = order.length;
 
-    final int[] keys = new int[ninserts];
+    final int keys[] = new int[ninserts];
 
-    final SimpleEntry[] entries = new SimpleEntry[ninserts];
+    final SimpleEntry entries[] = new SimpleEntry[ninserts];
 
     for (int i = 0; i < ninserts; i++) {
 

@@ -26,23 +26,23 @@ package org.embergraph.ganglia;
 public interface ITimestampMetricValue {
 
   /** The metadata declaration for this metric. */
-  IGangliaMetadataMessage getMetadata();
+  public IGangliaMetadataMessage getMetadata();
 
   /**
    * The timestamp of the last reported/received value (milliseconds).
    *
    * <p>Note: Tmax is expressed in seconds, so be sure to do the conversion when necessary.
    */
-  long getTimestamp();
+  public long getTimestamp();
 
   /**
    * The age in seconds of the last reported/received value (this reports seconds for compatibility
    * with tmax and dmax, both of which also use seconds).
    */
-  int getAge();
+  public int getAge();
 
   /**
    * The last reported/received value and <code>null</code> if no value has been reported/received.
    */
-  Object getValue();
+  public Object getValue();
 }

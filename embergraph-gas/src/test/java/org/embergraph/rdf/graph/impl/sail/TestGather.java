@@ -177,7 +177,7 @@ public class TestGather extends AbstractSailGraphTestCase {
 
       return true;
     }
-  }
+  };
 
   public void testGather_inEdges() throws Exception {
 

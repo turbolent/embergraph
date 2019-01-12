@@ -93,7 +93,7 @@ public class TestTicket422 extends ProxyEmbergraphSailTestCase {
             try {
 
               final CloseableIteration<? extends Statement, SailException> itr =
-                  con.getStatements(null, null, null, null);
+                  con.getStatements((Resource) null, (URI) null, (Value) null, (Resource) null);
 
               try {
 

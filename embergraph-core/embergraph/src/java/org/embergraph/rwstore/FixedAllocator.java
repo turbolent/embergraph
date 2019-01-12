@@ -78,7 +78,7 @@ public class FixedAllocator implements Allocator {
   boolean m_smallSlotHighWaste = false;
 
   public void setIndex(final int index) {
-    final AllocBlock fb = m_allocBlocks.get(0);
+    final AllocBlock fb = (AllocBlock) m_allocBlocks.get(0);
 
     if (s_islogDebug)
       log.debug(
@@ -161,7 +161,7 @@ public class FixedAllocator implements Allocator {
     offset -= 3;
 
     // The AllocBlock that manages that bit.
-    final AllocBlock block = m_allocBlocks.get(offset / allocBlockRange);
+    final AllocBlock block = (AllocBlock) m_allocBlocks.get(offset / allocBlockRange);
 
     // The bit offset into the AllocBlock.
     final int bit = offset % allocBlockRange;
@@ -463,8 +463,8 @@ public class FixedAllocator implements Allocator {
           } // else full so no freebits
         }
 
-        block.m_transients = block.m_live.clone();
-        block.m_commit = block.m_live.clone();
+        block.m_transients = (int[]) block.m_live.clone();
+        block.m_commit = (int[]) block.m_live.clone();
 
         if (m_startAddr == 0) {
           m_startAddr = block.m_addr;
@@ -764,7 +764,7 @@ public class FixedAllocator implements Allocator {
       try {
         if (s_islogDebug) checkBits();
 
-        if (m_allocBlocks.get(block)
+        if (((AllocBlock) m_allocBlocks.get(block))
             .freeBit(offset % nbits, m_sessionActive && !overideSession)) { // bit adjust
 
           m_freeBits++;
@@ -773,7 +773,9 @@ public class FixedAllocator implements Allocator {
 
         } else {
           m_freeTransients++;
-          assert !m_sessionActive || checkSessionFrees();
+          if (m_sessionActive) {
+            assert checkSessionFrees();
+          }
         }
 
         if (m_statsBucket != null) {
@@ -1162,7 +1164,7 @@ public class FixedAllocator implements Allocator {
 
     final int allocBlockRange = 32 * m_bitSize;
 
-    final AllocBlock block = m_allocBlocks.get(offset / allocBlockRange);
+    final AllocBlock block = (AllocBlock) m_allocBlocks.get(offset / allocBlockRange);
 
     final int bit = offset % allocBlockRange;
 
@@ -1174,7 +1176,7 @@ public class FixedAllocator implements Allocator {
 
     final int allocBlockRange = 32 * m_bitSize;
 
-    final AllocBlock block = m_allocBlocks.get(offset / allocBlockRange);
+    final AllocBlock block = (AllocBlock) m_allocBlocks.get(offset / allocBlockRange);
 
     final int bit = offset % allocBlockRange;
 
@@ -1186,7 +1188,7 @@ public class FixedAllocator implements Allocator {
 
     final int allocBlockRange = 32 * m_bitSize;
 
-    return m_allocBlocks.get(offset / allocBlockRange);
+    return (AllocBlock) m_allocBlocks.get(offset / allocBlockRange);
   }
 
   /**

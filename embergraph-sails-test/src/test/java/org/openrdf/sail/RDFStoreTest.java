@@ -1022,11 +1022,11 @@ public abstract class RDFStoreTest extends TestCase {
     return null;
   }
 
-  protected int countContext1Elements() throws Exception {
+  protected int countContext1Elements() throws Exception, SailException {
     return countElements(con.getStatements(null, null, null, false, context1));
   }
 
-  protected int countAllElements() throws Exception {
+  protected int countAllElements() throws Exception, SailException {
     return countElements(con.getStatements(null, null, null, false));
   }
 

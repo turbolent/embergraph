@@ -82,10 +82,10 @@ public class TestALPPinTrac773 extends AbstractOptimizerTestCase {
        * have precedence over unbounded path expressions. See
        * https://jira.blazegraph.com/browse/BLZG-858 / trac #733.
        */
-      final GroupMemberNodeBase<?>[] gmn =
+      final GroupMemberNodeBase<?> gmn[] =
           (sym.equals("?"))
-              ? new GroupMemberNodeBase[]{alpp1, spn1, alpp2, spn2}
-              : new GroupMemberNodeBase[]{spn2, alpp2, spn1, alpp1};
+              ? new GroupMemberNodeBase[] {alpp1, spn1, alpp2, spn2}
+              : new GroupMemberNodeBase[] {spn2, alpp2, spn1, alpp1};
 
       expected = select(varNode(z), where(gmn));
       varCount = 0;
@@ -152,10 +152,10 @@ public class TestALPPinTrac773 extends AbstractOptimizerTestCase {
        * have precedence over unbounded path expressions. See
        * https://jira.blazegraph.com/browse/BLZG-858 / trac #733.
        */
-      final GroupMemberNodeBase<?>[] gmn =
+      final GroupMemberNodeBase<?> gmn[] =
           (sym.equals("?"))
-              ? new GroupMemberNodeBase[]{alpp1, spn1, alpp2, spn2}
-              : new GroupMemberNodeBase[]{spn2, alpp2, spn1, alpp1};
+              ? new GroupMemberNodeBase[] {alpp1, spn1, alpp2, spn2}
+              : new GroupMemberNodeBase[] {spn2, alpp2, spn1, alpp1};
 
       expected = select(varNode(z), where(gmn));
       varCount = 0;

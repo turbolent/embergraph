@@ -871,7 +871,7 @@ public abstract class TestCase2 extends TestCase {
 
       public int compareTo(final Pair other) {
         if (this == other) return 0;
-        if (this.r < other.r) return -1;
+        if (this.r < ((Pair) other).r) return -1;
         else return 1;
       }
     }
@@ -885,7 +885,7 @@ public abstract class TestCase2 extends TestCase {
 
     java.util.Arrays.sort(pairs);
 
-    int[] order = new int[n];
+    int order[] = new int[n];
 
     for (int i = 0; i < n; i++) {
 
@@ -1556,7 +1556,9 @@ public abstract class TestCase2 extends TestCase {
 
         ex.printStackTrace();
 
-        RuntimeException ex2 = new RuntimeException("Could not load properties.", ex);
+        RuntimeException ex2 = new RuntimeException("Could not load properties.");
+
+        ex2.initCause(ex);
 
         throw ex2;
       }
@@ -1670,7 +1672,7 @@ public abstract class TestCase2 extends TestCase {
       sb.append(s);
     }
 
-    return s;
+    return s.toString();
   }
 
   /**

@@ -513,7 +513,7 @@ public class TemporaryRawStore extends AbstractRawWormStore implements IMRMW {
   /** The maximum length of a record that may be written on the store. */
   public final int getMaxRecordSize() {
 
-    return buf.getAddressManager().getMaxByteCount();
+    return ((AbstractRawWormStore) buf).getAddressManager().getMaxByteCount();
   }
 
   @Override

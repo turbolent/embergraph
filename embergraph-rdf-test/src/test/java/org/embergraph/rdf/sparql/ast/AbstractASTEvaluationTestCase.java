@@ -181,10 +181,10 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
     if (!expected.equals(actual)) {
 
-      log.error("expected: " + BOpUtility.toString(expected));
-      log.error("actual  : " + BOpUtility.toString(actual));
+      log.error("expected: " + BOpUtility.toString((BOp) expected));
+      log.error("actual  : " + BOpUtility.toString((BOp) actual));
 
-      AbstractQueryEngineTestCase.diff(expected, actual);
+      AbstractQueryEngineTestCase.diff((BOp) expected, (BOp) actual);
 
       // No difference was detected?
       throw new AssertionError();
@@ -193,7 +193,7 @@ public class AbstractASTEvaluationTestCase extends AbstractQueryEngineTestCase {
 
     } else if (log.isInfoEnabled()) {
 
-      log.info(BOpUtility.toString(expected));
+      log.info(BOpUtility.toString((BOp) expected));
     }
   }
 

@@ -342,9 +342,13 @@ public final class SolutionSetStream extends Stream implements ISolutionSet {
       return true;
     }
 
-    // The statistics field was cleared.
-    return solutionSetStats == null && getCheckpoint().getBloomFilterAddr() != IRawStore.NULL;
+    if (solutionSetStats == null && getCheckpoint().getBloomFilterAddr() != IRawStore.NULL) {
 
+      // The statistics field was cleared.
+      return true;
+    }
+
+    return false;
   }
 
   @Override

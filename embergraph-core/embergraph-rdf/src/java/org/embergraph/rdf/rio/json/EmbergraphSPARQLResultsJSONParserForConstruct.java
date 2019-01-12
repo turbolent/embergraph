@@ -125,7 +125,7 @@ public class EmbergraphSPARQLResultsJSONParserForConstruct extends RDFParserBase
 
     final Resource s = (Resource) bs.getValue("subject");
     final URI p = (URI) bs.getValue("predicate");
-    final Value o = bs.getValue("object");
+    final Value o = (Value) bs.getValue("object");
     final Resource c = bs.hasBinding("context") ? (Resource) bs.getValue("context") : null;
 
     final Statement stmt = valueFactory.createStatement(s, p, o, c);

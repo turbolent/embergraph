@@ -72,8 +72,8 @@ public interface IProgram extends IStep {
   Iterator<IStep> steps();
 
   /** The #of steps in the program (non-recursive). */
-  int stepCount();
+  public int stepCount();
 
   /** An array containing the steps in the program (non-recursive). */
-  IStep[] toArray();
+  public IStep[] toArray();
 }

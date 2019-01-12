@@ -38,11 +38,11 @@ import org.embergraph.rdf.internal.impl.uri.PartlyInlineURIIV;
 public interface INonInlineExtensionCodes {
 
   /** @see BlobIV */
-  byte BlobIV = 0;
+  final byte BlobIV = 0;
 
   /** @see PartlyInlineURIIV */
-  byte URINamespaceIV = -1;
+  final byte URINamespaceIV = -1;
 
   /** @see PartlyInlineTypedLiteralIV */
-  byte LiteralDatatypeIV = -2;
+  final byte LiteralDatatypeIV = -2;
 }

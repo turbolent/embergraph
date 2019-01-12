@@ -294,24 +294,24 @@ public class JoinStats implements Serializable {
 
       sb.append(dateFormat.format(s.startTime).replace(sep, " ") + sep);
       sb.append(ruleNameStr + sep);
-      sb.append(s.orderIndex + sep);
+      sb.append(Integer.toString(s.orderIndex) + sep);
       //            sb.append(Integer.toString(s.partitionId)+sep); // always -1 when aggregated.
       sb.append(ruleState.getKeyOrder()[tailIndex].toString().replace(sep, " ") + sep);
       sb.append(ruleState.getNVars()[tailIndex] + sep);
       sb.append(ruleState.getPlan().rangeCount(tailIndex) + sep);
-      sb.append(s.fanIn + sep);
-      sb.append(s.fanOut + sep);
-      sb.append(s.partitionCount + sep);
-      sb.append(s.bindingSetChunksIn + sep);
-      sb.append(s.bindingSetsIn + sep);
-      sb.append(s.accessPathCount + sep);
-      sb.append(s.accessPathDups + sep);
-      sb.append(s.chunkCount + sep);
-      sb.append(s.elementCount + sep);
-      sb.append(s.bindingSetsOut + sep);
-      sb.append(s.bindingSetChunksOut + sep);
-      sb.append(s.mutationCount.get() + sep);
-      sb.append(tailIndex + sep);
+      sb.append(Integer.toString(s.fanIn) + sep);
+      sb.append(Integer.toString(s.fanOut) + sep);
+      sb.append(Integer.toString(s.partitionCount) + sep);
+      sb.append(Long.toString(s.bindingSetChunksIn) + sep);
+      sb.append(Long.toString(s.bindingSetsIn) + sep);
+      sb.append(Long.toString(s.accessPathCount) + sep);
+      sb.append(Long.toString(s.accessPathDups) + sep);
+      sb.append(Long.toString(s.chunkCount) + sep);
+      sb.append(Long.toString(s.elementCount) + sep);
+      sb.append(Long.toString(s.bindingSetsOut) + sep);
+      sb.append(Long.toString(s.bindingSetChunksOut) + sep);
+      sb.append(Long.toString(s.mutationCount.get()) + sep);
+      sb.append(Integer.toString(tailIndex) + sep);
       sb.append(rule.getTail(tailIndex).toString().replace(sep, " ") + "\n");
     }
 

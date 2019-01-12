@@ -137,7 +137,7 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
     final LinkedList<IGroupMemberNode> nodeList =
         partitions.extractNodeList(true /* includeOptionalOrMinusNode */);
     for (int i = 0; i < joinGroup.arity(); i++) {
-      joinGroup.setArg(i, nodeList.get(i));
+      joinGroup.setArg(i, (BOp) nodeList.get(i));
     }
   }
 
@@ -334,7 +334,9 @@ public class ASTJoinGroupOrderOptimizer extends AbstractJoinGroupOptimizer
               }
 
               /** Return true if it is a SPARQL 1.1 SERVICE, but the constant is not bound. */
-              return !sn.getServiceRef().isConstant();
+              if (!sn.getServiceRef().isConstant()) {
+                return true;
+              }
             }
 
             // as a fallback return false

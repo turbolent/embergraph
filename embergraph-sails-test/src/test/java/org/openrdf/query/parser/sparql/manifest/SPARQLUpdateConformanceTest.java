@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
@@ -289,7 +288,7 @@ public abstract class SPARQLUpdateConformanceTest extends TestCase {
   protected String readUpdateString() throws IOException {
     InputStream stream = new URL(requestFileURL).openStream();
     try {
-      return IOUtil.readString(new InputStreamReader(stream, StandardCharsets.UTF_8));
+      return IOUtil.readString(new InputStreamReader(stream, "UTF-8"));
     } finally {
       stream.close();
     }

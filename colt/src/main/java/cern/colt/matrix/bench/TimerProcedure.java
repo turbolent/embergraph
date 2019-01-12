@@ -25,7 +25,7 @@ interface TimerProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  void apply(cern.colt.Timer element);
+  public void apply(cern.colt.Timer element);
   /** Prepare parameters before calling apply() */
-  void init();
+  public void init();
 }

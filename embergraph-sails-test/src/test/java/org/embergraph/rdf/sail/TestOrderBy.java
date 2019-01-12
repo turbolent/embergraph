@@ -65,7 +65,7 @@ public class TestOrderBy extends ProxyEmbergraphSailTestCase {
     sail.initialize();
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection cxn =
-        repo.getConnection();
+        (EmbergraphSailRepositoryConnection) repo.getConnection();
     cxn.setAutoCommit(false);
 
     try {

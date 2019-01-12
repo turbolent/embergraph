@@ -316,7 +316,7 @@ public class ASTSimpleOptionalOptimizer implements IASTOptimizer {
     /*
      * Replace the group with the statement pattern node.
      */
-    p.replaceWith(group, sp);
+    p.replaceWith((BOp) group, (BOp) sp);
 
     /*
      * Add any mock filters used to impose materialization requirements on

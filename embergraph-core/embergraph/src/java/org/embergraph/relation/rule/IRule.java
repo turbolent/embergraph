@@ -48,16 +48,16 @@ import org.embergraph.relation.rule.eval.IRuleTaskFactory;
 public interface IRule<E> extends IStep {
 
   /** The #of distinct variables declared by the rule. */
-  int getVariableCount();
+  public int getVariableCount();
 
   /** The variables declared by the rule in no particular order. */
-  Iterator<IVariable> getVariables();
+  public Iterator<IVariable> getVariables();
 
   /** The #of distinct required variables declared by the rule. */
-  int getRequiredVariableCount();
+  public int getRequiredVariableCount();
 
   /** The required variables declared by the rule in no particular order. */
-  Iterator<IVariable> getRequiredVariables();
+  public Iterator<IVariable> getRequiredVariables();
 
   /**
    * The head of the rule -or- <code>null</code> iff there is no head for this rule. Note that rules
@@ -67,13 +67,13 @@ public interface IRule<E> extends IStep {
    *
    * @see ActionEnum
    */
-  IPredicate getHead();
+  public IPredicate getHead();
 
   /** The #of {@link IPredicate}s in the body (aka tail) of the rule. */
-  int getTailCount();
+  public int getTailCount();
 
   /** Iterator visits the {@link IPredicate}s in the body (ala tail) of the rule. */
-  Iterator<IPredicate> getTail();
+  public Iterator<IPredicate> getTail();
 
   /**
    * Return the predicate at the given index from the tail of the rule.
@@ -82,13 +82,13 @@ public interface IRule<E> extends IStep {
    * @return The predicate at that index.
    * @throws IndexOutOfBoundsException
    */
-  IPredicate getTail(int index);
+  public IPredicate getTail(int index);
 
   /** The #of constraints on the legal states for bindings of the variables declared by rule. */
-  int getConstraintCount();
+  public int getConstraintCount();
 
   /** The optional constraints. */
-  Iterator<IConstraint> getConstraints();
+  public Iterator<IConstraint> getConstraints();
 
   /**
    * Return the constraint at the given index.
@@ -97,13 +97,13 @@ public interface IRule<E> extends IStep {
    * @return The constraint.
    * @throws IndexOutOfBoundsException
    */
-  IConstraint getConstraint(int index);
+  public IConstraint getConstraint(int index);
 
   /** The name of the rule. */
-  String getName();
+  public String getName();
 
   /** Externalizes the rule displaying variable names and constants. */
-  String toString();
+  public String toString();
 
   /**
    * Externalizes the rule displaying variable names, their bindings, and constants.
@@ -111,7 +111,7 @@ public interface IRule<E> extends IStep {
    * @param bindingSet When non-<code>null</code>, the current variable bindings will be displayed.
    *     Otherwise, the names of variables will be displayed rather than their bindings.
    */
-  String toString(IBindingSet bindingSet);
+  public String toString(IBindingSet bindingSet);
 
   /**
    * Specialize a rule - the name of the new rule will be derived from the name of the old rule with
@@ -124,7 +124,7 @@ public interface IRule<E> extends IStep {
    * @return The specialized rule.
    * @throws IllegalArgumentException if <i>bindingSet</i> is <code>null</code>.
    */
-  IRule<E> specialize(IBindingSet bindingSet, IConstraint[] constraints);
+  public IRule<E> specialize(IBindingSet bindingSet, IConstraint[] constraints);
 
   /**
    * Specialize a rule by binding zero or more variables and adding zero or more constraints.
@@ -137,7 +137,7 @@ public interface IRule<E> extends IStep {
    * @exception IllegalArgumentException if <i>name</i> is <code>null</code>.
    * @exception IllegalArgumentException if <i>bindingSet</i> is <code>null</code>.
    */
-  IRule<E> specialize(String name, IBindingSet bindingSet, IConstraint[] constraints);
+  public IRule<E> specialize(String name, IBindingSet bindingSet, IConstraint[] constraints);
 
   /**
    * Returns any variables that were bound to constants when an {@link IRule} was {@link
@@ -148,7 +148,7 @@ public interface IRule<E> extends IStep {
    *
    * @return The bound constants.
    */
-  IBindingSet getConstants();
+  public IBindingSet getConstants();
 
   /**
    * Return the variables in common for two {@link IPredicate}s.
@@ -159,7 +159,7 @@ public interface IRule<E> extends IStep {
    * @throws IllegalArgumentException if the two predicate indices are the same.
    * @throws IndexOutOfBoundsException if either index is out of bounds.
    */
-  Set<IVariable<?>> getSharedVars(int index1, int index2);
+  public Set<IVariable<?>> getSharedVars(int index1, int index2);
 
   /**
    * Return true iff the selected predicate is fully bound.
@@ -171,7 +171,7 @@ public interface IRule<E> extends IStep {
    * @throws IndexOutOfBoundsException if the <i>index</i> is out of bounds.
    * @throws IllegalArgumentException if <i>bindingSet</i> is <code>null</code>.
    */
-  boolean isFullyBound(int index, IBindingSet bindingSet);
+  public boolean isFullyBound(int index, IBindingSet bindingSet);
 
   /**
    * If the rule is fully bound for the given bindings.
@@ -179,7 +179,7 @@ public interface IRule<E> extends IStep {
    * @param bindingSet The bindings.
    * @return true if there are no unbound variables in the rule given those bindings.
    */
-  boolean isFullyBound(IBindingSet bindingSet);
+  public boolean isFullyBound(IBindingSet bindingSet);
 
   /**
    * The #of arguments in the selected predicate that are variables (vs constants) with the given
@@ -191,7 +191,7 @@ public interface IRule<E> extends IStep {
    *     in the predicate that are bound in the binding set will be treated as constants for the
    *     purposes of this method).
    */
-  int getVariableCount(int index, IBindingSet bindingSet);
+  public int getVariableCount(int index, IBindingSet bindingSet);
 
   /**
    * Return <code>true</code> unless the {@link IBindingSet} violates a {@link IConstraint} declared
@@ -200,7 +200,7 @@ public interface IRule<E> extends IStep {
    * @param bindingSet The binding set.
    * @return <code>true</code> unless a constraint is violated by the bindings.
    */
-  boolean isConsistent(IBindingSet bindingSet);
+  public boolean isConsistent(IBindingSet bindingSet);
 
   /**
    * Return <code>true</code> iff the rule declares this variable.
@@ -209,7 +209,7 @@ public interface IRule<E> extends IStep {
    * @return True if the rule declares that variable.
    * @throws IllegalArgumentException if <i>var</i> is <code>null</code>.
    */
-  boolean isDeclared(IVariable var);
+  public boolean isDeclared(IVariable var);
 
   /*
    * Behavior override.
@@ -221,5 +221,5 @@ public interface IRule<E> extends IStep {
    *
    * @return <code>null</code> unless custom evaluation is desired.
    */
-  IRuleTaskFactory getTaskFactory();
+  public IRuleTaskFactory getTaskFactory();
 }

@@ -26,7 +26,7 @@ public class IndexPartitionCause implements Externalizable {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public enum CauseEnum {
+  public static enum CauseEnum {
 
     /** The initial registration of a scale-out index. */
     Register((byte) 0),
@@ -40,7 +40,7 @@ public class IndexPartitionCause implements Externalizable {
     /** An index partition was moved to another data service. */
     Move((byte) 3);
 
-    CauseEnum(final byte code) {
+    private CauseEnum(final byte code) {
       this.code = code;
     }
 

@@ -154,7 +154,7 @@ public class ParserSpeedTest {
 
       parseFile(file);
 
-      return null;
+      return (Void) null;
     }
 
     private void parseFile(final File file)

@@ -105,7 +105,7 @@ public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtensio
    * Simple demonstration enum for some common colors. Can fit up to 256 enum values into an enum
    * projected onto a byte.
    */
-  public enum Color {
+  public static enum Color {
     Red((byte) 0),
     Blue((byte) 1),
     Green((byte) 2),
@@ -116,7 +116,7 @@ public class ColorsEnumExtension<V extends EmbergraphValue> implements IExtensio
     White((byte) 7),
     Brown((byte) 8);
 
-    Color(final byte b) {
+    private Color(final byte b) {
       this.b = b;
     }
 

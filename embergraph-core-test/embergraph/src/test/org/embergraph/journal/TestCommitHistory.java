@@ -496,7 +496,7 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
       assertTrue(liveIndex != historicalIndex0);
 
       // re-request is still the same object.
-      assertTrue(historicalIndex0 == journal.getIndexWithCommitRecord(name, commitRecord0));
+      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord0));
 
       /*
        * The re-load address for the live index as of that commit record.
@@ -538,13 +538,13 @@ public class TestCommitHistory extends ProxyTestCase<Journal> {
        * commit record since the index state was not changed and it will
        * be reloaded from the same address.
        */
-      assertTrue(historicalIndex0 == journal.getIndexWithCommitRecord(name, commitRecord1));
+      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord1));
 
       // re-request is still the same object.
-      assertTrue(historicalIndex0 == journal.getIndexWithCommitRecord(name, commitRecord0));
+      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord0));
 
       // re-request is still the same object.
-      assertTrue(historicalIndex0 == journal.getIndexWithCommitRecord(name, commitRecord1));
+      assertTrue(historicalIndex0 == (BTree) journal.getIndexWithCommitRecord(name, commitRecord1));
 
       /*
        * Now write on the live index and commit. verify that there is a

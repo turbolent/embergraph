@@ -10,5 +10,5 @@ package org.embergraph.rwstore;
 public interface IRawTx {
 
   /** Close the transaction. */
-  void close();
+  public void close();
 }

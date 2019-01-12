@@ -27,7 +27,6 @@ import info.aduna.iteration.Iterations;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -95,48 +94,52 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
    */
   protected static final Collection<String> cannotInlineTests =
       Arrays.asList(
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-01",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-03",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-04",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-str-1",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-str-2",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-datatype-1",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-simple",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-eq",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-not-eq",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-equals/manifest#eq-graph-1",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-equals/manifest#eq-graph-2",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/distinct/manifest#no-distinct-1",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/distinct/manifest#distinct-1",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/distinct/manifest#no-distinct-9",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/distinct/manifest#distinct-9",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#date-2",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#date-3",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#date-4",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-exists-05",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-exists-06",
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#hours",
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#timezone",
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#tz");
+          new String[] {
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-01",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-03",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#open-eq-04",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-str-1",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-str-2",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-datatype-1",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-simple",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-eq",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#sameTerm-not-eq",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-equals/manifest#eq-graph-1",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-equals/manifest#eq-graph-2",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/distinct/manifest#no-distinct-1",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/distinct/manifest#distinct-1",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/distinct/manifest#no-distinct-9",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/distinct/manifest#distinct-9",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#date-2",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#date-3",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/open-world/manifest#date-4",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-exists-05",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-exists-06",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#hours",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#timezone",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#tz",
+          });
 
   /** The tests test things that are no longer in the spec or that use an illegal syntax. */
   public static final Collection<String> badTests =
       Arrays.asList(
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-04",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-05",
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-06",
+          new String[] {
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-04",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-05",
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sequence-06",
 
-          /*
-           * These use illegal URIs in the query (missing a ":").
-           */
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/property-path/manifest#pp35",
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/exists/manifest#exists03",
+            /*
+             * These use illegal URIs in the query (missing a ":").
+             */
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/property-path/manifest#pp35",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/exists/manifest#exists03",
 
-          /*
-           * This one fails because our bnode() function uses a different bnode
-           * id naming scheme than the sesame one.  Not technically a failure.
-           */
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#bnode01");
+            /*
+             * This one fails because our bnode() function uses a different bnode
+             * id naming scheme than the sesame one.  Not technically a failure.
+             */
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/functions/manifest#bnode01",
+          });
 
   /**
    * These tests fail but should not. They are conditionally disabled based on {@link
@@ -144,27 +147,28 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
    */
   public static final Collection<String> knownBadTests =
       Arrays.asList(
-          //
-          // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-datatype-2",
+          new String[] {
+            //
+            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/expr-builtin/manifest#dawg-datatype-2",
 
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-04",
-          // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-subquery-04", // BLZG-618
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-wildcard-cycles-04",
+            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-subquery-04", // BLZG-618
 
-          /* This query currently works: */
-          // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-subquery-06",
+            /* This query currently works: */
+            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-subquery-06",
 
-          // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-order-02", // BLZG-618
-          // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-order-03", // BLZG-618
+            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-order-02", // BLZG-618
+            // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-order-03", // BLZG-618
 
-          /* This test actually produces correct result (see TestTCK.test_sparql11_sum_02())
-           * which is deemed incorrect because sparql11-sum-02.srx in
-           * the Sesame Test Suite v2.7.12 is wrong: it specifies {totalPrice=0}
-           * as the correct result (see TestTCK.test_sparql11_sum_02()). Note that
-           * the latest release sesame-sparql-testsuite 4.1.1 still contains
-           * the wrong result file.
-           * See https://openrdf.atlassian.net/browse/SES-884
-           */
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sum-02",
+            /* This test actually produces correct result (see TestTCK.test_sparql11_sum_02())
+             * which is deemed incorrect because sparql11-sum-02.srx in
+             * the Sesame Test Suite v2.7.12 is wrong: it specifies {totalPrice=0}
+             * as the correct result (see TestTCK.test_sparql11_sum_02()). Note that
+             * the latest release sesame-sparql-testsuite 4.1.1 still contains
+             * the wrong result file.
+             * See https://openrdf.atlassian.net/browse/SES-884
+             */
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/syntax-sparql1/manifest#sparql11-sum-02",
 
             /*
                      * This test produces no result instead of an empty result.
@@ -190,7 +194,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
 
             =========================================
                      */
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg-empty-group2",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg-empty-group2",
 
             /*
                      * This test produces some extra results.
@@ -250,7 +254,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
                      * though Bob doesn't know :b, that knows is optional.  Alice doesn't
                      * know :b either, and she gets a solution.  How do we differentiate?
                      */
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values7",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/bindings/manifest#values7",
 
             /*
             =========================================
@@ -273,7 +277,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
 
             =========================================
                      */
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/construct/manifest#constructwhere04",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/construct/manifest#constructwhere04",
 
             /*
             =========================================
@@ -303,7 +307,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
                         This query currently works correctly.
 
                      */
-          // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/exists/manifest#exists04",
+            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/exists/manifest#exists04",
 
             /*
                      * These two are the same problem.  We drop solutions that do not have
@@ -338,14 +342,14 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
             :s2 :p 2 .
             =========================================
                      */
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/grouping/manifest#group03",
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/grouping/manifest#group05",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/grouping/manifest#group03",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/grouping/manifest#group05",
 
-          /*
-           * Complex negation tests.
-           */
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/negation/manifest#partial-minuend",
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/negation/manifest#full-minuend",
+            /*
+             * Complex negation tests.
+             */
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/negation/manifest#partial-minuend",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/negation/manifest#full-minuend",
 
             /*
                      * Really weird zero-length path failure.
@@ -376,7 +380,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
             :a foaf:homepage :h .
             =========================================
                      */
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/property-path/manifest#pp16",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/property-path/manifest#pp16",
 
             /*
                      * All five of these appear to be the same problem - subquery nested
@@ -398,11 +402,11 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
             *         Currently (Apr 13, 2016) only subquery03 fails.
             *
                      */
-          // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery01",
-          // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery02",
-          "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery03",
-          // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery04",
-          // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery05",
+            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery01",
+            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery02",
+            "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery03",
+            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery04",
+            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/subquery/manifest#subquery05",
 
             /*
             The following two are covered by: https://jira.blazegraph.com/browse/BLZG-1721
@@ -411,9 +415,9 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
                            after the completion of https://jira.blazegraph.com/browse/BLZG-618
 
                      */
-          // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg03",
-          // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg07",
-      );
+            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg03",
+            // "http://www.w3.org/2009/sparql/docs/tests/data-sparql11/aggregates/manifest#agg07",
+          });
 
   /**
    * The following tests require Unicode configuration for identical comparisons. This appears to
@@ -421,7 +425,9 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
    */
   protected static final Collection<String> unicodeStrengthIdentical =
       Arrays.asList(
-          "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/i18n/manifest#normalization-1");
+          new String[] {
+            "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/i18n/manifest#normalization-1"
+          });
 
   //    private static String datasetTests =
   // "http://www.w3.org/2001/sw/DataAccess/tests/data-r2/dataset";
@@ -1178,7 +1184,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
     IIndexManager backend = null;
 
     Repository delegate =
-        dataRep; // ((DatasetRepository) dataRep).getDelegate();
+        dataRep == null ? null : dataRep; // ((DatasetRepository) dataRep).getDelegate();
 
     if (delegate != null && delegate instanceof EmbergraphSailRepository) {
 
@@ -1301,7 +1307,7 @@ public class EmbergraphSparqlTest extends SPARQLQueryTest // Sesame TupleExpr ba
     if (queryString == null) {
       InputStream stream = new URL(queryFileURL).openStream();
       try {
-        return IOUtil.readString(new InputStreamReader(stream, StandardCharsets.UTF_8));
+        return IOUtil.readString(new InputStreamReader(stream, "UTF-8"));
       } finally {
         stream.close();
       }

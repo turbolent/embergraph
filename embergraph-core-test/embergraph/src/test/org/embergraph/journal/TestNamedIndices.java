@@ -87,7 +87,7 @@ public class TestNamedIndices extends ProxyTestCase<Journal> {
          */
         journal = reopenStore(journal);
 
-        btree = journal.getIndex(name);
+        btree = (BTree) journal.getIndex(name);
 
         assertNotNull("btree", btree);
         assertEquals("indexUUID", indexUUID, btree.getIndexMetadata().getIndexUUID());

@@ -64,7 +64,7 @@ import java.util.Properties;
 public interface PropertiesParser {
 
   /** Gets the {@link PropertiesFormat} that this {@link PropertiesParser} uses. */
-  PropertiesFormat getFormat();
+  public PropertiesFormat getFormat();
 
   /**
    * Parses the data from the supplied {@link InputStream}.
@@ -72,7 +72,7 @@ public interface PropertiesParser {
    * @param in The InputStream from which to read the data.
    * @throws IOException If an I/O error occurred while data was read from the InputStream.
    */
-  Properties parse(InputStream in) throws IOException;
+  public Properties parse(InputStream in) throws IOException;
 
   /**
    * Parses the data from the supplied {@link Reader}.
@@ -80,5 +80,5 @@ public interface PropertiesParser {
    * @param reader The Reader from which to read the data.
    * @throws IOException If an I/O error occurred while data was read from the InputStream.
    */
-  Properties parse(Reader reader) throws IOException;
+  public Properties parse(Reader reader) throws IOException;
 }

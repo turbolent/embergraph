@@ -243,7 +243,7 @@ public class GroupByRewriter implements IGroupByRewriteState, IVariableFactory, 
 
         final IConstraint e = having[i];
 
-        having2[i] = rewrite(e, this, aggExpr);
+        having2[i] = (IConstraint) rewrite(e, this, aggExpr);
       }
     }
 

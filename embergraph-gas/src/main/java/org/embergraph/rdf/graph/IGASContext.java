@@ -176,7 +176,7 @@ public interface IGASContext<VS, ES, ST> extends Callable<IGASStats> {
    * @param stats Used to report statistics about the execution of the algorithm.
    * @return true iff the new frontier is empty.
    */
-  boolean doRound(IGASStats stats) throws Exception;
+  boolean doRound(IGASStats stats) throws Exception, ExecutionException, InterruptedException;
 
   /** Execute the associated {@link IGASProgram}. */
   @Override

@@ -37,14 +37,14 @@ public interface IResourceMetadata extends Serializable, Cloneable {
    * True iff this resource is an {@link IndexSegment}. Each {@link IndexSegment} contains
    * historical read-only data for exactly one partition of a scale-out index.
    */
-  boolean isIndexSegment();
+  public boolean isIndexSegment();
 
   /**
    * True iff this resource is a {@link Journal}. When the resource is a {@link Journal}, there will
    * be a named mutable btree on the journal that is absorbing writes for one or more index
    * partition of a scale-out index.
    */
-  boolean isJournal();
+  public boolean isJournal();
 
   /**
    * The name of the file containing the resource (this is always relative to some local data
@@ -54,7 +54,7 @@ public interface IResourceMetadata extends Serializable, Cloneable {
    * ResourceManager}. Instead, the {@link ResourceManager} builds up the mapping from resource
    * {@link UUID} to local filename during startup.
    */
-  String getFile();
+  public String getFile();
 
   /*
    * Note: size() was removed since (a) required a new instance of the
@@ -74,7 +74,7 @@ public interface IResourceMetadata extends Serializable, Cloneable {
    * @see IRootBlockView#getUUID(), the UUID for an {@link AbstractJournal}.
    * @see IndexSegmentCheckpoint#segmentUUID, the UUID for an {@link IndexSegment}.
    */
-  UUID getUUID();
+  public UUID getUUID();
 
   /**
    * The commit time associated with the creation of this resource. When the index is an {@link
@@ -83,7 +83,7 @@ public interface IResourceMetadata extends Serializable, Cloneable {
    * associated with the journal creation, which is generally an overflow operation. Regardless, the
    * create time MUST be assigned by the same time source that is used to assign commit timestamps.
    */
-  long getCreateTime();
+  public long getCreateTime();
 
   /**
    * The commit time of the view from which the caller should read. For an {@link IndexSegment},
@@ -95,10 +95,10 @@ public interface IResourceMetadata extends Serializable, Cloneable {
    *
    * @see IndexManager
    */
-  long getCommitTime();
+  public long getCommitTime();
 
   /** The hash code of the {@link #getUUID() resource UUID}. */
-  int hashCode();
+  public int hashCode();
 
   /**
    * Compares two resource metadata objects for consistent state.
@@ -106,5 +106,5 @@ public interface IResourceMetadata extends Serializable, Cloneable {
    * @param o
    * @return
    */
-  boolean equals(IResourceMetadata o);
+  public boolean equals(IResourceMetadata o);
 }

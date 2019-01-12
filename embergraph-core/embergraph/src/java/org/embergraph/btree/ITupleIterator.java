@@ -46,5 +46,5 @@ public interface ITupleIterator<E> extends Iterator<ITuple<E>> {
    * @throws NoSuchElementException if there is no next entry.
    */
   @Override
-  ITuple<E> next();
+  public ITuple<E> next();
 }

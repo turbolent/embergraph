@@ -85,7 +85,7 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
                   for (int i = 0; i < nwrites; i++) {
                     config.service.write(addr.addAndGet(dataSize), data.asReadOnlyBuffer(), chk);
                     config.service.write(addr.addAndGet(dataSize), data.asReadOnlyBuffer(), chk);
-                    Thread.sleep(20); // give WriteTask chance to catch up
+                    Thread.currentThread().sleep(20); // give WriteTask chance to catch up
                   }
                 } catch (Throwable t) {
                   t.printStackTrace();
@@ -98,7 +98,7 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
       tasks.add(
           new Callable<Long>() {
             public Long call() throws Exception {
-              Thread.sleep(5000);
+              Thread.currentThread().sleep(5000);
               config.service.close();
 
               return null;
@@ -291,7 +291,7 @@ public class TestWriteCacheServiceLifetime extends TestCase3 {
 
       return raf.getChannel();
     }
-  }
+  };
 
   protected final Random r = new Random();
 

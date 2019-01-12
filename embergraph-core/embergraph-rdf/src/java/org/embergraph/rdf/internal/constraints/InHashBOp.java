@@ -147,6 +147,6 @@ public class InHashBOp extends InBOp {
 
     final boolean found = _set.contains(v);
 
-    return not != found;
+    return not ? !found : found;
   }
 }

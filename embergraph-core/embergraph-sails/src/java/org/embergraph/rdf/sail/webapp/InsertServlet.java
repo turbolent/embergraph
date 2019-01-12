@@ -292,7 +292,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
 
         reportModifiedCount(nmodified.get(), elapsed);
 
-        return null;
+        return (Void) null;
 
       } finally {
 
@@ -588,7 +588,8 @@ public class InsertServlet extends EmbergraphRDFServlet {
     public void handleStatement(final Statement stmt) throws RDFHandlerException {
 
       final Resource[] c =
-          (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
+          (Resource[])
+              (stmt.getContext() == null ? defaultContext : new Resource[] {stmt.getContext()});
 
       try {
 

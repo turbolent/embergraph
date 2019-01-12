@@ -566,7 +566,7 @@ public class ParseOp extends PipelineOp {
 
           final URL url = new URL(uriStr);
 
-          conn = url.openConnection();
+          conn = (URLConnection) url.openConnection();
 
           final HttpURLConnection conn2 =
               (conn instanceof HttpURLConnection) ? (HttpURLConnection) conn : null;

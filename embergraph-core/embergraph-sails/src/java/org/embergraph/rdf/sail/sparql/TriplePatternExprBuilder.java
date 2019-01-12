@@ -1041,7 +1041,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
     if (s instanceof ConstantNode) {
 
-      final EmbergraphValue v = s.getValue();
+      final EmbergraphValue v = ((ConstantNode) s).getValue();
 
       if (v instanceof Literal) {
 
@@ -1069,7 +1069,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
     if (p instanceof ConstantNode) {
 
-      final EmbergraphValue v = p.getValue();
+      final EmbergraphValue v = ((ConstantNode) p).getValue();
 
       if (!(v instanceof URI)) {
 
@@ -1083,7 +1083,7 @@ public class TriplePatternExprBuilder extends ValueExprBuilder {
 
     if (o instanceof ConstantNode) {
 
-      final EmbergraphValue v = o.getValue();
+      final EmbergraphValue v = ((ConstantNode) o).getValue();
 
       // See https://jira.blazegraph.com/browse/BLZG-1229
       // To support SPARQL* syntax in CONSTRUCT clauses with nested TRef values,

@@ -181,7 +181,7 @@ class Benchmark {
     return a;
   }
   /** Benchmarks various matrix methods. */
-  public static void main(String[] args) {
+  public static void main(String args[]) {
     int runs = Integer.parseInt(args[0]);
     int rows = Integer.parseInt(args[1]);
     int columns = Integer.parseInt(args[2]);

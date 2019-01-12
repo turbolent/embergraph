@@ -52,28 +52,28 @@ import org.openrdf.model.Statement;
 public interface EmbergraphStatement extends Statement, ISPO {
 
   /** Specialized return type. */
-  EmbergraphResource getSubject();
+  public EmbergraphResource getSubject();
 
   /** Specialized return type. */
-  EmbergraphURI getPredicate();
+  public EmbergraphURI getPredicate();
 
   /** Specialized return type. */
-  EmbergraphValue getObject();
+  public EmbergraphValue getObject();
 
   /** Specialized return type. */
-  EmbergraphResource getContext();
+  public EmbergraphResource getContext();
 
   /**
    * <code>true</code> if the statement is an axiom that is not present as an explicit assertion.
    */
-  boolean isAxiom();
+  public boolean isAxiom();
 
   /**
    * <code>true</code> if the statement is an inference that is not present as an explicit assertion
    * or an axiom.
    */
-  boolean isInferred();
+  public boolean isInferred();
 
   /** <code>true</code> if the statement is an explicit assertion. */
-  boolean isExplicit();
+  public boolean isExplicit();
 }

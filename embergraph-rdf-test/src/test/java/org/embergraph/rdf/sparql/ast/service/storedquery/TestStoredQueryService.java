@@ -222,7 +222,8 @@ public class TestStoredQueryService extends AbstractDataDrivenSPARQLTestCase {
         final String baseURI = createParams.getServiceURI().stringValue();
 
         final EmbergraphSailTupleQuery query =
-            cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
+            (EmbergraphSailTupleQuery)
+                cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
 
         return query.evaluate();
       }

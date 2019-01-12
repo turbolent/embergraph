@@ -54,5 +54,5 @@ public interface IAsyncResultHandler<
    * @param result The result from applying the procedure to a single index partition.
    * @param split The {@link Split} that generated that result.
    */
-  void aggregateAsync(X[] chunk, R result, Split split);
+  public void aggregateAsync(X[] chunk, R result, Split split);
 }

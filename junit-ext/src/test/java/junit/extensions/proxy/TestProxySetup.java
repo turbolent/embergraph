@@ -57,7 +57,7 @@ public class TestProxySetup extends TestCase {
   public void test_ctor() {
 
     // local fixtures.
-    final class MyTestCase extends TestCase {}
+    final class MyTestCase extends TestCase {};
     final Test delegate = new TestCase() {};
     final Class testClass = MyTestCase.class;
     final String name = "name";
@@ -111,7 +111,7 @@ public class TestProxySetup extends TestCase {
 
     // ctor(Test delegate,Class testClass,String name): name is _optional_
     try {
-      new ProxyTestSuite(null, null, null);
+      new ProxyTestSuite(null, null, (String) null);
       assertFalse("Expected exception", true);
     } catch (IllegalArgumentException ex) {
       System.err.println("Ignoring expected exception: " + ex);

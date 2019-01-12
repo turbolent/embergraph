@@ -402,7 +402,7 @@ public abstract class AbstractRestartSafeTestCase extends AbstractBufferStrategy
 
       final int nrecs = 1000;
       final ByteBuffer[] recs = new ByteBuffer[nrecs];
-      final long[] addrs = new long[nrecs];
+      final long addrs[] = new long[nrecs];
 
       // Write a bunch of data onto the store.
       for (int i = 0; i < nrecs; i++) {

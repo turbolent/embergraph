@@ -228,18 +228,25 @@ public class ModelUtil {
 
       if (mappedBNode != null) {
         // bNode 'obj1' was already mapped to some other bNode
-        // 'obj1' and 'obj2' do not match
-        return obj2.equals(mappedBNode);
+        if (!obj2.equals(mappedBNode)) {
+          // 'obj1' and 'obj2' do not match
+          return false;
+        }
       } else {
         // 'obj1' was not yet mapped. we need to check if 'obj2' is a
         // possible mapping candidate
-        // 'obj2' is already mapped to some other value.
-        return !bNodeMapping.containsValue(obj2);
+        if (bNodeMapping.containsValue(obj2)) {
+          // 'obj2' is already mapped to some other value.
+          return false;
+        }
       }
     } else {
       // objects are not (both) bNodes
-      return obj1.equals(obj2);
+      if (!obj1.equals(obj2)) {
+        return false;
+      }
     }
 
+    return true;
   }
 }

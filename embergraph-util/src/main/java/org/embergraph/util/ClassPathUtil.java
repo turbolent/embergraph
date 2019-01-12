@@ -162,7 +162,7 @@ public class ClassPathUtil {
       cache.put(requestConfig, defaultClass);
 
       // Return an instance of the default class.
-      return defaultClass.newInstance();
+      return (T) defaultClass.newInstance();
 
     } catch (InstantiationException | IllegalAccessException e) {
 

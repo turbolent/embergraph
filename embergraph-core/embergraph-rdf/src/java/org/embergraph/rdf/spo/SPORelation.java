@@ -297,7 +297,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
           set.add(getFQN(SPOKeyOrder.SPO));
 
           keyOrders =
-              Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPO));
+              Collections.unmodifiableList(Arrays.asList(new SPOKeyOrder[] {SPOKeyOrder.SPO}));
 
         } else {
 
@@ -310,7 +310,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
           keyOrders =
               Collections.unmodifiableList(
                   Arrays.asList(
-                      SPOKeyOrder.SPO, SPOKeyOrder.POS, SPOKeyOrder.OSP));
+                      new SPOKeyOrder[] {SPOKeyOrder.SPO, SPOKeyOrder.POS, SPOKeyOrder.OSP}));
         }
 
       } else {
@@ -323,7 +323,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
           set.add(getFQN(SPOKeyOrder.SPOC));
 
           keyOrders =
-              Collections.unmodifiableList(Arrays.asList(SPOKeyOrder.SPOC));
+              Collections.unmodifiableList(Arrays.asList(new SPOKeyOrder[] {SPOKeyOrder.SPOC}));
 
         } else {
 
@@ -880,9 +880,13 @@ public class SPORelation extends AbstractRelation<ISPO> {
       //
       //            }
 
-      //                System.err.println("Resolved add/add conflict");
-      // add/add is not a conflict.
-      return !txTuple.isDeletedVersion() && !currentTuple.isDeletedVersion();
+      if (!txTuple.isDeletedVersion() && !currentTuple.isDeletedVersion()) {
+
+        //                System.err.println("Resolved add/add conflict");
+
+        // add/add is not a conflict.
+        return true;
+      }
 
       /*
        * Note: We don't need to materialize the SPOs to resolve the
@@ -893,6 +897,7 @@ public class SPORelation extends AbstractRelation<ISPO> {
       // final ISPO currentSPO = (ISPO) txTuple.getObject();
 
       // either delete/add or add/delete is a conflict.
+      return false;
     }
   }
 
@@ -2529,10 +2534,11 @@ public class SPORelation extends AbstractRelation<ISPO> {
                   Var.var("s"), Var.var("p"), Var.var("o"),
                 },
             NV.asMap(
-                new NV(IPredicate.Annotations.RELATION_NAME, new String[] {getNamespace()}),
-                //                        new NV(IPredicate.Annotations.KEY_ORDER,
-                //                                keyOrder),
-            ));
+                new NV[] {
+                  new NV(IPredicate.Annotations.RELATION_NAME, new String[] {getNamespace()}),
+                  //                        new NV(IPredicate.Annotations.KEY_ORDER,
+                  //                                keyOrder),
+                }));
     //        final IPredicate<ISPO> pred = new SPOPredicate(
     //                new String[] { getNamespace() }, -1, // partitionId
     //                Var.var("s"),

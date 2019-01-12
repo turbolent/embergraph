@@ -667,7 +667,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+          (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       try {
 
@@ -2149,7 +2149,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+          (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       try {
 
@@ -2537,7 +2537,7 @@ public class TestSearchQuery extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+          (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       try {
 

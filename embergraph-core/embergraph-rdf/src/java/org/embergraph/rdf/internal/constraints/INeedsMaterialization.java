@@ -25,7 +25,7 @@ package org.embergraph.rdf.internal.constraints;
  */
 public interface INeedsMaterialization {
 
-  enum Requirement {
+  public enum Requirement {
 
     /** Always needs materialization. */
     ALWAYS,
@@ -35,7 +35,7 @@ public interface INeedsMaterialization {
 
     /** Never needs materialization. */
     NEVER
-  }
+  };
 
   /**
    * Does the bop always need materialized variables, or can it sometimes operate on inline terms

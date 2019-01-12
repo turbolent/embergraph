@@ -167,7 +167,7 @@ public class BOpBase extends CoreBaseBOp {
       return annotationsEqual(annotations, ((BOpBase) o).annotations);
     }
 
-    return annotationsEqual(annotations, o.annotations());
+    return super.annotationsEqual(annotations, o.annotations());
   }
 
   /** A copy of the args[] array. */

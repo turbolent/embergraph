@@ -55,7 +55,7 @@ public interface ILinearList {
    * @see #keyAt(long)
    * @see #valueAt(long)
    */
-  long indexOf(byte[] key);
+  public long indexOf(byte[] key);
 
   /**
    * Return the key for the identified entry. This performs an efficient search whose cost is
@@ -68,7 +68,7 @@ public interface ILinearList {
    * @see #indexOf(byte[])
    * @see #valueAt(long)
    */
-  byte[] keyAt(long index);
+  public byte[] keyAt(long index);
 
   /**
    * Return the value for the identified entry. This performs an efficient search whose cost is
@@ -82,5 +82,5 @@ public interface ILinearList {
    * @see #indexOf(byte[])
    * @see #keyAt(long)
    */
-  byte[] valueAt(long index);
+  public byte[] valueAt(long index);
 }

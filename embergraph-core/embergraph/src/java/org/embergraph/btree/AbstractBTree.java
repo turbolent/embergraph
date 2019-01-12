@@ -388,7 +388,7 @@ public abstract class AbstractBTree
     //
     //        }
 
-  }
+  };
 
   /**
    * Used to materialize children without causing concurrent threads passing through the same parent
@@ -686,7 +686,7 @@ public abstract class AbstractBTree
    *
    * @see AbstractBTree#getCounters()
    */
-  public interface IBTreeCounters {
+  public static interface IBTreeCounters {
 
     /** Counters for the {@link IBTreeStatistics} interface. */
     String Statistics = "Statistics";
@@ -1698,7 +1698,7 @@ public abstract class AbstractBTree
     //        return tuple;
 
     return lookupTuple.get();
-  }
+  };
 
   /**
    * Return a {@link Tuple} that may be used to test for the existence of tuples having a given key
@@ -1733,7 +1733,7 @@ public abstract class AbstractBTree
     //        return tuple;
 
     return containsTuple.get();
-  }
+  };
 
   //    private final ThreadLocal<WeakReference<Tuple>> lookupTupleRef = new
   // ThreadLocal<WeakReference<Tuple>>() {
@@ -2360,9 +2360,9 @@ public abstract class AbstractBTree
 
     // conditional range check on the key.
 
-    assert fromKey == null || rangeCheck(fromKey, false);
+    if (fromKey != null) assert rangeCheck(fromKey, false);
 
-    assert toKey == null || rangeCheck(toKey, true);
+    if (toKey != null) assert rangeCheck(toKey, true);
 
     long fromIndex = (fromKey == null ? 0 : root.indexOf(fromKey));
 
@@ -2852,7 +2852,7 @@ public abstract class AbstractBTree
   public <T> T submit(final byte[] key, final ISimpleIndexProcedure<T> proc) {
 
     // conditional range check on the key.
-    assert key == null || rangeCheck(key, false);
+    if (key != null) assert rangeCheck(key, false);
 
     return proc.apply(this);
   }
@@ -2866,9 +2866,9 @@ public abstract class AbstractBTree
       final IResultHandler handler) {
 
     // conditional range check on the key.
-    assert fromKey == null || rangeCheck(fromKey, false);
+    if (fromKey != null) assert rangeCheck(fromKey, false);
 
-    assert toKey == null || rangeCheck(toKey, true);
+    if (toKey != null) assert rangeCheck(toKey, true);
 
     final Object result = proc.apply(this);
 
@@ -3859,9 +3859,10 @@ public abstract class AbstractBTree
         ((Leaf) node).data = nodeSer.encodeLive(((Leaf) node).data);
 
         // slice onto the coded data record.
-        slice = node.data();
+        slice = ((Leaf) node).data();
 
         btreeCounters.leavesWritten.increment();
+        ;
 
       } else {
 
@@ -3869,9 +3870,10 @@ public abstract class AbstractBTree
         ((Node) node).data = nodeSer.encodeLive(((Node) node).data);
 
         // slice onto the coded data record.
-        slice = node.data();
+        slice = ((Node) node).data();
 
         btreeCounters.nodesWritten.increment();
+        ;
       }
 
       btreeCounters.serializeNanos.add(System.nanoTime() - beginNanos);
@@ -4285,6 +4287,7 @@ public abstract class AbstractBTree
     final int nbytes = b.length;
 
     btreeCounters.rawRecordsWritten.increment();
+    ;
     btreeCounters.rawRecordsBytesWritten.add(nbytes);
     btreeCounters.bytesOnStore_rawRecords.addAndGet(nbytes);
 

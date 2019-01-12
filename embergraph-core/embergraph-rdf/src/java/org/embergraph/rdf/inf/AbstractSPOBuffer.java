@@ -125,8 +125,14 @@ public abstract class AbstractSPOBuffer implements ISPOBuffer {
    */
   protected boolean nearCapacity() {
 
-    return numStmts >= capacity;// would overflow the statement[].
+    if (numStmts < capacity) {
 
+      return false;
+    }
+
+    // would overflow the statement[].
+
+    return true;
   }
 
   public String toString() {

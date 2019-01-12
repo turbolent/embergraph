@@ -1069,7 +1069,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
        * on this leaf _before_ the split.
        */
 
-      p = new Node(btree, this, nentriesBeforeSplit);
+      p = new Node((BTree) btree, this, nentriesBeforeSplit);
 
     } else {
 
@@ -1368,9 +1368,9 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
     // children of the same node.
     assert s.getParent() == p
         : "this.parent="
-            + (p)
+            + (p == null ? null : p)
             + " != s.parent="
-            + (s.getParent());
+            + (s.getParent() == null ? null : s.getParent());
 
     if (DEBUG) {
       log.debug("this=" + this + ", sibling=" + sibling + ", rightSibling=" + isRightSibling);
@@ -2089,7 +2089,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
    *     there was a desire for pre- or post-processing for each tuple. This might be useful for
    *     introducing triggers.
    */
-  public interface ILeafListener {
+  public static interface ILeafListener {
 
     /**
      * Notice that the leaf state has changed and that the listener must not assume: (a) that a
@@ -2097,7 +2097,7 @@ public class Leaf extends AbstractNode<Leaf> implements ILeafData, IRawRecordAcc
      * leaf or it may be in another leaf altogether as a result of underflow or overflow); (b) that
      * the leaf is still in use (it may have been discarded by a copy-on-write operation).
      */
-    void invalidateLeaf();
+    public void invalidateLeaf();
 
     //        /**
     //         * Notice that the state of a tuple in the leaf has been changed (the

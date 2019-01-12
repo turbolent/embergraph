@@ -51,41 +51,41 @@ public interface IEmbergraphFederation<T>
    *
    * @throws IllegalStateException if the client disconnected and this object is no longer valid.
    */
-  IEmbergraphClient<T> getClient();
+  public IEmbergraphClient<T> getClient();
 
   /**
    * The URL that may be used to access the local httpd service for this client or service.
    *
    * @return The URL -or- <code>null</code> if the httpd service is not running.
    */
-  String getHttpdURL();
+  public String getHttpdURL();
 
   /**
    * Return the {@link ITransactionService} (or a proxy for that service).
    *
    * @return The service -or- <code>null</code> if the service has not been discovered.
    */
-  ITransactionService getTransactionService();
+  public ITransactionService getTransactionService();
 
   /**
    * Return the load balancer service (or a proxy for that service).
    *
    * @return The service -or- <code>null</code> if the service has not been discovered.
    */
-  ILoadBalancerService getLoadBalancerService();
+  public ILoadBalancerService getLoadBalancerService();
 
   /**
    * Return the metadata service (or a proxy for the metadata service).
    *
    * @return The service -or- <code>null</code> if the service has not been discovered.
    */
-  IMetadataService getMetadataService();
+  public IMetadataService getMetadataService();
 
   /**
    * A thread pool that may be used by clients to parallelize operations against the federation.
    * This thread pool is automatically used by the {@link ClientIndexView}.
    */
-  ExecutorService getExecutorService();
+  public ExecutorService getExecutorService();
 
   /**
    * The {@link CounterSet} which the client will use report its statistics to the {@link
@@ -98,19 +98,19 @@ public interface IEmbergraphFederation<T>
    * @see #getServiceCounterSet()
    * @see #getServiceCounterPathPrefix()
    */
-  CounterSet getCounters();
+  public CounterSet getCounters();
 
   /**
    * The node in {@link #getCounters()} corresponding to the root of the host on which the client or
    * service is executing.
    */
-  CounterSet getHostCounterSet();
+  public CounterSet getHostCounterSet();
 
   /**
    * The node in {@link #getCounters()} corresponding to the root of the client or service connected
    * using this federation.
    */
-  CounterSet getServiceCounterSet();
+  public CounterSet getServiceCounterSet();
 
   /**
    * The path prefix under which all of the client or service's counters are located. The returned
@@ -118,7 +118,7 @@ public interface IEmbergraphFederation<T>
    *
    * @see #getServiceCounterSet()
    */
-  String getServiceCounterPathPrefix();
+  public String getServiceCounterPathPrefix();
 
   /**
    * Return an array UUIDs for {@link IDataService}s.
@@ -127,7 +127,7 @@ public interface IEmbergraphFederation<T>
    *     UUID for all known data services will be returned.
    * @return An array of {@link UUID}s for data services.
    */
-  UUID[] getDataServiceUUIDs(int maxCount);
+  public UUID[] getDataServiceUUIDs(int maxCount);
 
   /**
    * Return an array of {@link IDataService} references that is correlated with the given array of
@@ -138,7 +138,7 @@ public interface IEmbergraphFederation<T>
    * @param uuids The (meta)data service UUIDs.
    * @return The (meta)data service proxies.
    */
-  IDataService[] getDataServices(UUID[] uuid);
+  public IDataService[] getDataServices(UUID[] uuid);
 
   /**
    * Resolve the service identifier to an {@link IDataService}.
@@ -150,7 +150,7 @@ public interface IEmbergraphFederation<T>
    * @return The {@link IDataService} or <code>null</code> iff the {@link IDataService} could not be
    *     discovered from its identifier.
    */
-  IDataService getDataService(UUID serviceUUID);
+  public IDataService getDataService(UUID serviceUUID);
 
   /**
    * Return ANY {@link IDataService} which has been (or could be) discovered and which is part of
@@ -161,7 +161,7 @@ public interface IEmbergraphFederation<T>
    *
    * @return <code>null</code> if there are NO known {@link IDataService}s.
    */
-  IDataService getAnyDataService();
+  public IDataService getAnyDataService();
 
   /**
    * Return an {@link IDataService} joined with this {@link IEmbergraphFederation} and having the
@@ -177,7 +177,7 @@ public interface IEmbergraphFederation<T>
    *     IEmbergraphFederation} at this time.
    * @throws IllegalArgumentException if <i>name</i> is <code>null</code>.
    */
-  IDataService getDataServiceByName(String name);
+  public IDataService getDataServiceByName(String name);
 
   /**
    * Return a read-only view of the index partitions for the named scale-out index.
@@ -186,7 +186,7 @@ public interface IEmbergraphFederation<T>
    * @return The {@link IMetadataIndex} for the named scale-out index -or- <code>null</code> iff
    *     there is no such scale-out index.
    */
-  IMetadataIndex getMetadataIndex(String name, long timestamp);
+  public IMetadataIndex getMetadataIndex(String name, long timestamp);
 
   /**
    * Register a scale-out index.
@@ -196,7 +196,7 @@ public interface IEmbergraphFederation<T>
    * @todo compare the throws behavior of the federation with {@link
    *     AbstractJournal#registerIndex(IndexMetadata)}
    */
-  void registerIndex(IndexMetadata metadata);
+  public void registerIndex(IndexMetadata metadata);
 
   /**
    * Register a scale-out index and assign the initial index partition to the specified data
@@ -213,7 +213,7 @@ public interface IEmbergraphFederation<T>
    * @see IndexMetadata.Options#INITIAL_DATA_SERVICE
    * @todo change to void return
    */
-  UUID registerIndex(IndexMetadata metadata, UUID dataServiceUUID);
+  public UUID registerIndex(IndexMetadata metadata, UUID dataServiceUUID);
 
   /**
    * Register and statically partition a scale-out index.
@@ -231,7 +231,7 @@ public interface IEmbergraphFederation<T>
    * @return The UUID of the scale-out index.
    * @todo change to void return
    */
-  UUID registerIndex(
+  public UUID registerIndex(
       IndexMetadata metadata, byte[][] separatorKeys, UUID[] dataServiceUUIDs);
 
   /**
@@ -239,7 +239,7 @@ public interface IEmbergraphFederation<T>
    *
    * @param name The index name.
    */
-  void dropIndex(String name);
+  public void dropIndex(String name);
 
   /**
    * Obtain a view on a partitioned index.
@@ -250,7 +250,7 @@ public interface IEmbergraphFederation<T>
    *     than the specified timestamp.
    * @return The index or <code>null</code> if the index does not exist.
    */
-  IClientIndex getIndex(String name, long timestamp);
+  public IClientIndex getIndex(String name, long timestamp);
 
   /**
    * Return <code>true</code> iff the federation supports scale-out indices (supports key-range
@@ -261,13 +261,13 @@ public interface IEmbergraphFederation<T>
    *
    * @see IndexMetadata
    */
-  boolean isScaleOut();
+  public boolean isScaleOut();
 
   /**
    * Return <code>true</code> iff the federation is distributed (uses RMI and is running, at least
    * in principle, across more than one host/JVM).
    */
-  boolean isDistributed();
+  public boolean isDistributed();
 
   /**
    * Return <code>true</code> iff the federation is backed by "stable" (vs transient) storage. Most
@@ -276,7 +276,7 @@ public interface IEmbergraphFederation<T>
    * here. This is most typically done for testing purposes using a {@link
    * LocalDataServiceFederation} or an {@link EmbeddedFederation}.
    */
-  boolean isStable();
+  public boolean isStable();
 
   //    /**
   //     * Return the global {@link SparseRowStore} used to store named property
@@ -290,7 +290,7 @@ public interface IEmbergraphFederation<T>
    * Destroys all discovered services belonging to the federation and their persistent data and
    * disconnects from the federation.
    */
-  void destroy();
+  public void destroy();
 
   /**
    * Return the last commit time for the federation (the timestamp of the most recent commit point
@@ -300,7 +300,7 @@ public interface IEmbergraphFederation<T>
    * timestamp across a series of {@link DataService}s or a series of requests against a single
    * {@link DataService} that must use a consistent view.
    */
-  long getLastCommitTime();
+  public long getLastCommitTime();
 
   /**
    * Convenience method to return whether the Federation is a Jini Federation. Created in BLZG-1370
@@ -311,5 +311,5 @@ public interface IEmbergraphFederation<T>
    *
    * @return
    */
-  boolean isJiniFederation();
+  public boolean isJiniFederation();
 }

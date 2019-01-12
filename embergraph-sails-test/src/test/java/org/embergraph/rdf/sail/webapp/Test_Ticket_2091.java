@@ -73,7 +73,7 @@ public class Test_Ticket_2091 extends AbstractProtocolTest {
           + "{\r\n"
           + "	?s wdt:P31 wd:Q3917681\r\n"
           + "	OPTIONAL {?s wdt:P17 ?host }\r\n"
-          + "} ";
+          + "} ";;
 
   /**
    * Execute a query including constants in projection expression. The test succeeeds if the query

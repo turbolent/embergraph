@@ -908,7 +908,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
 
       this.queryBuffer = queryBuffer;
 
-      final int poolSize = getThreadPool().getCorePoolSize();
+      final int poolSize = ((ThreadPoolExecutor) getThreadPool()).getCorePoolSize();
 
       final int maxTasksPerRequest = fed.getClient().getMaxParallelTasksPerRequest();
 
@@ -1281,7 +1281,7 @@ public class ClientIndexView implements IScaleOutClientIndex {
               + " will be mapped across index partitions in "
               + (parallel ? "parallel" : "sequence"));
 
-    final int poolSize = getThreadPool().getCorePoolSize();
+    final int poolSize = ((ThreadPoolExecutor) getThreadPool()).getCorePoolSize();
 
     final int maxTasksPerRequest = fed.getClient().getMaxParallelTasksPerRequest();
 

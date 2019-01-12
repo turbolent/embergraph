@@ -33,14 +33,14 @@ import org.embergraph.journal.WORMStrategy;
 public interface IHALogReader {
 
   /** The filename extension used for the HALog files. */
-  String HA_LOG_EXT = ".ha-log";
+  public static final String HA_LOG_EXT = ".ha-log";
 
   /**
    * A {@link FileFilter} that visits all files ending with the {@link #HA_LOG_EXT} and the names of
    * all direct child directories. This {@link FileFilter} may be used to establish recursive scans
    * of the HALog directory.
    */
-  FileFilter HALOG_FILTER =
+  public static final FileFilter HALOG_FILTER =
       new FileFilter() {
 
         @Override

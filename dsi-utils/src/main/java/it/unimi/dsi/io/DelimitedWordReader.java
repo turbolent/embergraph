@@ -183,7 +183,7 @@ public class DelimitedWordReader extends FastBufferedReader {
 
   public String toString() {
     final String className = getClass().getName();
-    CharOpenHashSet additionalDelimiters = delimiters.clone();
+    CharOpenHashSet additionalDelimiters = (CharOpenHashSet) delimiters.clone();
     additionalDelimiters.remove('\n');
     additionalDelimiters.remove('\r');
     String delimiters = new String(additionalDelimiters.toCharArray());

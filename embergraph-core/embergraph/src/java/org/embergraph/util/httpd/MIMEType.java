@@ -142,7 +142,9 @@ public class MIMEType {
        * should not be propagated.
        */
 
-      AssertionError err = new AssertionError("Could not compile regex patterns.", ex);
+      AssertionError err = new AssertionError("Could not compile regex patterns.");
+
+      err.initCause(ex);
 
       throw err;
     }
@@ -500,10 +502,18 @@ public class MIMEType {
        * conclude that A == B IFF A-spans-B and B-spans-A.
        */
 
-      /* @todo Should we explictly test the isIgnoredParams
-       * here?
-       */
-      return this.spans(t, true) && t.spans(this, true);
+      if (this.spans(t, true) && t.spans(this, true)) {
+
+        /* @todo Should we explictly test the isIgnoredParams
+         * here?
+         */
+
+        return true;
+
+      } else {
+
+        return false;
+      }
 
     } else {
 

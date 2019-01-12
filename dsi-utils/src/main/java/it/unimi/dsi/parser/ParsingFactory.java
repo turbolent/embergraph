@@ -52,7 +52,7 @@ public interface ParsingFactory {
    * @param name the name of an element type.
    * @return the corresponding interned {@link Element} object.
    */
-  Element getElement(final MutableString name);
+  public Element getElement(final MutableString name);
 
   /**
    * Returns the {@link it.unimi.dsi.parser.Attribute} associated to a name.
@@ -60,7 +60,7 @@ public interface ParsingFactory {
    * @param name the name of an attribute.
    * @return the corresponding interned {@link Attribute} object.
    */
-  Attribute getAttribute(final MutableString name);
+  public Attribute getAttribute(final MutableString name);
 
   /**
    * Returns the {@link it.unimi.dsi.parser.Entity} associated to a name.
@@ -68,5 +68,5 @@ public interface ParsingFactory {
    * @param name the name of an entity.
    * @return the corresponding interned {@link Entity} object.
    */
-  Entity getEntity(final MutableString name);
+  public Entity getEntity(final MutableString name);
 }

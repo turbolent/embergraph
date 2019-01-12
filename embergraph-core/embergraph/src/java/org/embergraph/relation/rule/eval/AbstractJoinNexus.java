@@ -702,7 +702,7 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
     final IChunkedOrderedIterator<ISolution> itr =
         (IChunkedOrderedIterator<ISolution>) runProgram(ActionEnum.Query, step);
 
-    if (step.isRule() && step.getQueryOptions().isDistinct()) {
+    if (step.isRule() && ((IRule) step).getQueryOptions().isDistinct()) {
 
       /*
        * Impose a DISTINCT constraint based on the variable bindings
@@ -801,8 +801,12 @@ public abstract class AbstractJoinNexus implements IJoinNexus {
    */
   protected final boolean isEmptyProgram(final IStep step) {
 
-    return !step.isRule() && ((IProgram) step).stepCount() == 0;
+    if (!step.isRule() && ((IProgram) step).stepCount() == 0) {
 
+      return true;
+    }
+
+    return false;
   }
 
   /**

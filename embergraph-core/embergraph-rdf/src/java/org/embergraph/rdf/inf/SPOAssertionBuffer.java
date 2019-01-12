@@ -162,9 +162,14 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
 
     if (super.nearCapacity()) return true;
 
-    // would overflow the justification[].
-    return numJustifications + 1 > capacity;
+    if (numJustifications + 1 > capacity) {
 
+      // would overflow the justification[].
+
+      return true;
+    }
+
+    return false;
   }
 
   public int flush() {
@@ -333,7 +338,7 @@ public class SPOAssertionBuffer extends AbstractSPOBuffer implements ISPOAsserti
      * justification.
      */
 
-    assert justify == (justification != null);
+    assert justify ? justification != null : justification == null;
 
     if (justify) {
 

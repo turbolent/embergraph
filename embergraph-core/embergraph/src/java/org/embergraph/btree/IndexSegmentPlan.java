@@ -234,7 +234,7 @@ public class IndexSegmentPlan {
        * useful feature lets us avoid having to deal with precision issues
        * or write our own integer version of pow (computing m*m h times).
        */
-      final double d = Math.pow(m, h);
+      final double d = (double) Math.pow(m, h);
 
       if (d >= nleaves) {
 

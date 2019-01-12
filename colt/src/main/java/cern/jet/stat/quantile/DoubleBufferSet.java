@@ -139,7 +139,7 @@ class DoubleBufferSet extends BufferSet {
   public Object clone() {
     DoubleBufferSet copy = (DoubleBufferSet) super.clone();
 
-    copy.buffers = copy.buffers.clone();
+    copy.buffers = (DoubleBuffer[]) copy.buffers.clone();
     for (int i = buffers.length; --i >= 0; ) {
       copy.buffers[i] = (DoubleBuffer) copy.buffers[i].clone();
     }

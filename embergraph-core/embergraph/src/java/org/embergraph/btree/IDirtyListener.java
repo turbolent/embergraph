@@ -41,5 +41,5 @@ public interface IDirtyListener {
    *
    * @param btree The btree.
    */
-  void dirtyEvent(ICheckpointProtocol btree);
+  public void dirtyEvent(ICheckpointProtocol btree);
 }

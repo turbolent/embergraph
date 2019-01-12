@@ -20,7 +20,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 package org.embergraph.sparse;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import org.embergraph.btree.keys.IKeyBuilder;
 import org.embergraph.btree.keys.KeyBuilder;
@@ -311,7 +310,18 @@ public class KeyDecoder {
           if (SparseRowStore.primaryKeyUnicodeClean) {
             final byte[] bytes = new byte[primaryKeyLength];
             System.arraycopy(key, primaryKeyOffset, bytes, 0, primaryKeyLength);
-            primaryKey = new String(bytes, StandardCharsets.UTF_8);
+            try {
+              primaryKey = new String(bytes, SparseRowStore.UTF8);
+            } catch (UnsupportedEncodingException ex) {
+              throw new RuntimeException(
+                  "Could not decode the primary key"
+                      + ": primaryKeyOffset="
+                      + primaryKeyOffset
+                      + ", primaryKeyLength="
+                      + primaryKeyLength
+                      + ", key="
+                      + BytesUtil.toString(key));
+            }
           } else {
             /*
              * Note: Decode is not possible for this case.
@@ -381,8 +391,22 @@ public class KeyDecoder {
 
       System.arraycopy(key, columnNameOffset, bytes, 0, columnNameLength);
 
-      col = new String(bytes, StandardCharsets.UTF_8);
+      try {
 
+        col = new String(bytes, SparseRowStore.UTF8);
+
+      } catch (UnsupportedEncodingException ex) {
+
+        throw new RuntimeException(
+            "Could not decode the column name: keyType="
+                + primaryKeyType
+                + ", columnNameOffset="
+                + columnNameOffset
+                + ", columnNameLength="
+                + columnNameLength
+                + ", key="
+                + BytesUtil.toString(key));
+      }
     }
 
     /*

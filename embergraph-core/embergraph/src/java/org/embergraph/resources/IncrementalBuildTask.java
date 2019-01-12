@@ -511,7 +511,7 @@ public class IncrementalBuildTask extends AbstractPrepareTask<BuildResult> {
             newView.add(currentResources[i]);
           }
 
-          newResources = newView.toArray(new IResourceMetadata[] {});
+          newResources = (IResourceMetadata[]) newView.toArray(new IResourceMetadata[] {});
         }
 
         // describe the index partition.

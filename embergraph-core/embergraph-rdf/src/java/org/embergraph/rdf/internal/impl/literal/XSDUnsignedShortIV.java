@@ -103,7 +103,7 @@ public class XSDUnsignedShortIV<V extends EmbergraphLiteral> extends AbstractLit
    */
   @Override
   public boolean booleanValue() {
-    return value != UNSIGNED_ZERO;
+    return value != UNSIGNED_ZERO ? true : false;
   }
 
   private static final short UNSIGNED_ZERO = (short) 0x8000; // (short) -32768;
@@ -125,7 +125,7 @@ public class XSDUnsignedShortIV<V extends EmbergraphLiteral> extends AbstractLit
 
   @Override
   public int intValue() {
-    return promote();
+    return (int) promote();
   }
 
   @Override

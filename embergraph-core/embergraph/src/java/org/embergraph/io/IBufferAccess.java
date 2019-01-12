@@ -52,7 +52,7 @@ public interface IBufferAccess {
    *
    * @throws IllegalStateException if the buffer has been released.
    */
-  ByteBuffer buffer();
+  public ByteBuffer buffer();
 
   /**
    * Release the {@link ByteBuffer}, returning to owning pool. This method will silently succeed if
@@ -61,7 +61,7 @@ public interface IBufferAccess {
    * @throws InterruptedException if an interrupt is noticed while attempting to return the buffer
    *     to the pool.
    */
-  void release() throws InterruptedException;
+  public void release() throws InterruptedException;
 
   /**
    * Release the {@link ByteBuffer}, returning to owning pool. This method will silently succeed if
@@ -72,5 +72,5 @@ public interface IBufferAccess {
    * @throws InterruptedException if an interrupt is noticed while attempting to return the buffer
    *     to the pool.
    */
-  void release(long timeout, TimeUnit unit) throws InterruptedException;
+  public void release(long timeout, TimeUnit unit) throws InterruptedException;
 }

@@ -48,7 +48,7 @@ public class PartlyInlineTypedLiteralIV<V extends EmbergraphLiteral>
 
     return "Literal(datatypeIV="
         + getExtensionIV()
-        + getVTE().getCharCode()
+        + String.valueOf(getVTE().getCharCode())
         + ", localName="
         + getDelegate()
         + ")";

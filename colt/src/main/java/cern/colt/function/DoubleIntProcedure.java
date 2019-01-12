@@ -26,5 +26,5 @@ public interface DoubleIntProcedure {
    * @param second second argument passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  boolean apply(double first, int second);
+  public abstract boolean apply(double first, int second);
 }

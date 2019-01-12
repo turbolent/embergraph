@@ -59,7 +59,7 @@ public interface IWriteCache {
    *     provide special handling for such large records. For example, they can be written directly
    *     onto the backing channel.
    */
-  boolean write(final long offset, final ByteBuffer data, final int chk)
+  public boolean write(final long offset, final ByteBuffer data, final int chk)
       throws InterruptedException;
 
   /**
@@ -77,7 +77,7 @@ public interface IWriteCache {
    * @throws ChecksumError if checksums are enabled and the checksum for the record could not be
    *     validated.
    */
-  ByteBuffer read(final long offset, final int nbytes)
+  public ByteBuffer read(final long offset, final int nbytes)
       throws InterruptedException, ChecksumError;
 
   /**
@@ -89,7 +89,7 @@ public interface IWriteCache {
    * @throws InterruptedException
    *     <p>FIXME The [force] parameter is ignored and will be removed shortly.
    */
-  void flush(final boolean force) throws IOException, InterruptedException;
+  public void flush(final boolean force) throws IOException, InterruptedException;
 
   /**
    * Flush the writes to the backing channel but does not force anything to the backing channel. The
@@ -101,7 +101,7 @@ public interface IWriteCache {
    * @throws InterruptedException
    *     <p>FIXME The [force] parameter is ignored and will be removed shortly.
    */
-  boolean flush(final boolean force, final long timeout, final TimeUnit unit)
+  public boolean flush(final boolean force, final long timeout, final TimeUnit unit)
       throws IOException, TimeoutException, InterruptedException;
 
   /**
@@ -114,7 +114,7 @@ public interface IWriteCache {
    *
    * @throws InterruptedException
    */
-  void reset() throws InterruptedException;
+  public void reset() throws InterruptedException;
 
   /**
    * Permanently take the {@link IWriteCache} out of service. Dirty records are discarded, not
@@ -122,5 +122,5 @@ public interface IWriteCache {
    *
    * @throws InterruptedException
    */
-  void close() throws InterruptedException;
+  public void close() throws InterruptedException;
 }

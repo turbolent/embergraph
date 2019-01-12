@@ -794,9 +794,9 @@ public class UpdateExprBuilder extends EmbergraphExprBuilder {
 
       final EmbergraphStatement spo =
           context.valueFactory.createStatement(
-              s,
+              (EmbergraphResource) s,
               (EmbergraphURI) sp.p().getValue(),
-              o,
+              (EmbergraphValue) o,
               (EmbergraphResource) (sp.c() != null ? sp.c().getValue() : null),
               StatementEnum.Explicit);
       //            final ISPO spo = new SPO(

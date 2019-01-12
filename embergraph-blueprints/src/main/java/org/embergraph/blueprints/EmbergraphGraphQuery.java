@@ -40,7 +40,7 @@ public class EmbergraphGraphQuery implements GraphQuery {
 
   /** These are the only Predicate implementations we handle currently. */
   protected static List<Class> knownPredicates =
-      Arrays.asList(
+      Arrays.<Class>asList(
           EmbergraphPredicate.class,
           com.tinkerpop.blueprints.Query.Compare.class,
           com.tinkerpop.blueprints.Contains.class,

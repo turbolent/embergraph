@@ -58,7 +58,7 @@ public class BackgroundTupleResult extends TupleQueryResultImpl
       final QueueCursor<BindingSet> queue,
       final TupleQueryResultParser parser,
       final InputStream in) {
-    super(Collections.emptyList(), queue);
+    super(Collections.<String>emptyList(), queue);
     this.queue = queue;
     this.parser = parser;
     this.in = in;

@@ -64,8 +64,8 @@ public class TestHashBindingSet extends TestIBindingSet {
     Var<?> var2 = Var.var("b");
     Constant<Integer> val1 = new Constant<Integer>(1);
     Constant<Integer> val2 = new Constant<Integer>(2);
-    IVariable<?>[] vars = new IVariable[]{var1, var2};
-    IConstant<?>[] vals = new IConstant[]{val1, val2};
+    IVariable<?> vars[] = new IVariable[] {var1, var2};
+    IConstant<?> vals[] = new IConstant[] {val1, val2};
 
     assertEqual(new HashBindingSet(new HashBindingSet(vars, vals)), vars, vals);
   }
@@ -81,8 +81,8 @@ public class TestHashBindingSet extends TestIBindingSet {
     Var<?> var2 = Var.var("b");
     Constant<Integer> val1 = new Constant<Integer>(1);
     Constant<Integer> val2 = new Constant<Integer>(2);
-    IVariable<?>[] vars = new IVariable[]{var1, var2};
-    IConstant<?>[] vals = new IConstant[]{val1, val2};
+    IVariable<?> vars[] = new IVariable[] {var1, var2};
+    IConstant<?> vals[] = new IConstant[] {val1, val2};
 
     assertEqual(new HashBindingSet(new ListBindingSet(vars, vals)), vars, vals);
   }
@@ -93,8 +93,8 @@ public class TestHashBindingSet extends TestIBindingSet {
     Var<?> var2 = Var.var("b");
     Constant<Integer> val1 = new Constant<Integer>(1);
     Constant<Integer> val2 = new Constant<Integer>(2);
-    IVariable<?>[] vars = new IVariable[]{var1, var2};
-    IConstant<?>[] vals = new IConstant[]{val1, val2};
+    IVariable<?> vars[] = new IVariable[] {var1, var2};
+    IConstant<?> vals[] = new IConstant[] {val1, val2};
 
     try {
       assertTrue(null != new HashBindingSet(null, vals));
@@ -118,7 +118,7 @@ public class TestHashBindingSet extends TestIBindingSet {
   }
 
   @Override
-  protected IBindingSet newBindingSet(IVariable<?>[] vars, IConstant<?>[] vals) {
+  protected IBindingSet newBindingSet(IVariable<?> vars[], IConstant<?> vals[]) {
     return new HashBindingSet(vars, vals);
   }
 

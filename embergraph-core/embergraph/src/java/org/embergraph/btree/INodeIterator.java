@@ -36,12 +36,12 @@ public interface INodeIterator extends Iterator<AbstractNode> {
    *
    * @exception IllegalStateException if no entries have been visited.
    */
-  Object getKey();
+  public Object getKey();
 
   /**
    * The value associated with the last node or leaf visited by {@link Iterator#next()}.
    *
    * @exception IllegalStateException if no entries have been visited.
    */
-  AbstractNode getNode();
+  public AbstractNode getNode();
 }

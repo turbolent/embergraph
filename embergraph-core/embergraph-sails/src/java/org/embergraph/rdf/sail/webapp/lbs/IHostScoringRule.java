@@ -25,7 +25,7 @@ package org.embergraph.rdf.sail.webapp.lbs;
 public interface IHostScoringRule {
 
   /** Return the set of metric names that are used by this scoring rule. */
-  String[] getMetricNames();
+  public String[] getMetricNames();
 
   /**
    * Return a score for the given {@link IHostMetrics}.
@@ -33,5 +33,5 @@ public interface IHostScoringRule {
    * @param metrics The {@link IHostMetrics}.
    * @return The score.
    */
-  double getScore(final IHostMetrics metrics);
+  public double getScore(final IHostMetrics metrics);
 }

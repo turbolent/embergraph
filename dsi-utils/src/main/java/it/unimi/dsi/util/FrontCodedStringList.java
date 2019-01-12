@@ -46,7 +46,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.zip.GZIPInputStream;
@@ -107,7 +106,11 @@ public class FrontCodedStringList extends AbstractObjectList<MutableString>
                 }
 
                 public byte[] next() {
-                  return words.next().toString().getBytes(StandardCharsets.UTF_8);
+                  try {
+                    return words.next().toString().getBytes("UTF-8");
+                  } catch (java.io.UnsupportedEncodingException cantHappen) {
+                    return null;
+                  }
                 }
               },
               ratio);

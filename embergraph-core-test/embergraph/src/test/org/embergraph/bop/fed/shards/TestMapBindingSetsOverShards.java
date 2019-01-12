@@ -228,31 +228,33 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
     // partition0
     assertEquals(
         2L,
-        dataService0
-            .submit(
-                ITx.UNISOLATED,
-                DataService.getIndexPartitionName(name, 0 /* partitionId */),
-                new RangeCountProcedure(
-                    true /* exact */,
-                    false /* deleted */,
-                    null /* fromKey */,
-                    null /* toKey */))
-            .get()
+        ((Long)
+                dataService0
+                    .submit(
+                        ITx.UNISOLATED,
+                        DataService.getIndexPartitionName(name, 0 /* partitionId */),
+                        new RangeCountProcedure(
+                            true /* exact */,
+                            false /* deleted */,
+                            null /* fromKey */,
+                            null /* toKey */))
+                    .get())
             .longValue());
 
     // partition1
     assertEquals(
         3L,
-        dataService1
-            .submit(
-                ITx.UNISOLATED,
-                DataService.getIndexPartitionName(name, 1 /* partitionId */),
-                new RangeCountProcedure(
-                    true /* exact */,
-                    false /* deleted */,
-                    null /* fromKey */,
-                    null /* toKey */))
-            .get()
+        ((Long)
+                dataService1
+                    .submit(
+                        ITx.UNISOLATED,
+                        DataService.getIndexPartitionName(name, 1 /* partitionId */),
+                        new RangeCountProcedure(
+                            true /* exact */,
+                            false /* deleted */,
+                            null /* fromKey */,
+                            null /* toKey */))
+                    .get())
             .longValue());
 
     //        {
@@ -355,7 +357,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
         new Predicate<E>(
             new BOp[] {x, y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+                new NV[] {new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})}));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
@@ -495,7 +497,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
         new Predicate<E>(
             new BOp[] {x, y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+                new NV[] {new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})}));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 
@@ -600,7 +602,7 @@ public class TestMapBindingSetsOverShards extends AbstractEmbeddedFederationTest
         new Predicate<E>(
             new BOp[] {x, y},
             NV.asMap(
-                new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})));
+                new NV[] {new NV(Predicate.Annotations.RELATION_NAME, new String[] {namespace})}));
 
     final long tx = fed.getTransactionService().newTx(ITx.READ_COMMITTED);
 

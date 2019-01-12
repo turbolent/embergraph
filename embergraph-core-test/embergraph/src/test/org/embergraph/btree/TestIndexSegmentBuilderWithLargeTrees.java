@@ -257,26 +257,26 @@ public class TestIndexSegmentBuilderWithLargeTrees extends AbstractIndexSegmentT
 
     try {
       // branching factors used for the index segment.
-      final int[] branchingFactors =
-          new int[]{
-              /*
-               * This is the minimum branching factor (maximum depth, lots of edge
-               * conditions).
-               */
-              3,
-              /*
-               * This is the caller's branching factor, whatever that might be.
-               */
-              btree.getBranchingFactor(),
-              /*
-               * Various large branching factors, at least one of which should be
-               * odd to exercise the fence posts involved in handling odd
-               * branching factors.
-               */
-              257,
-              512,
-              4196,
-              8196
+      final int branchingFactors[] =
+          new int[] {
+            /*
+             * This is the minimum branching factor (maximum depth, lots of edge
+             * conditions).
+             */
+            3,
+            /*
+             * This is the caller's branching factor, whatever that might be.
+             */
+            btree.getBranchingFactor(),
+            /*
+             * Various large branching factors, at least one of which should be
+             * odd to exercise the fence posts involved in handling odd
+             * branching factors.
+             */
+            257,
+            512,
+            4196,
+            8196
           };
 
       for (int i = 0; i < branchingFactors.length; i++) {

@@ -209,7 +209,7 @@ public class TripleStoreUtility {
      * The source access path is a full scan of the SPO index.
      */
     final IAccessPath<ISPO> expectedAccessPath =
-        expected.getAccessPath(null, null, null);
+        expected.getAccessPath((IV) null, (IV) null, (IV) null);
 
     /*
      * Efficiently convert SPOs to EmbergraphStatements (externalizes

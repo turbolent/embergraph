@@ -29,7 +29,7 @@ package org.embergraph.rdf.sparql.ast;
  */
 public interface IGraphPatternContainer {
 
-  interface Annotations {
+  public interface Annotations {
 
     /** The {@link GraphPatternGroup} annotation. */
     String GRAPH_PATTERN = "graphPattern";

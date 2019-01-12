@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 public class TextExtractorTest extends TestCase {
 
   public void testBRBreaksFlow() {
-    char[] a = "ciao<BR>mamma<BR>".toCharArray();
+    char a[] = "ciao<BR>mamma<BR>".toCharArray();
     BulletParser bulletParser = new BulletParser();
     TextExtractor textExtractor = new TextExtractor();
     bulletParser.setCallback(textExtractor);

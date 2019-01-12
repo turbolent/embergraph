@@ -111,9 +111,9 @@ class DoubleBuffer extends Buffer {
     return "k="
         + this.k
         + ", w="
-        + weight()
+        + Long.toString(weight())
         + ", l="
-        + level()
+        + Integer.toString(level())
         + ", size="
         + values.size();
     // ", v=" + values.toString();

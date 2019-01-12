@@ -36,7 +36,7 @@ public interface INodeFactory {
    * @param data The node data record.
    * @return A node initialized from those data.
    */
-  Node allocNode(AbstractBTree btree, long addr, INodeData data);
+  public Node allocNode(AbstractBTree btree, long addr, INodeData data);
 
   /**
    * Create a leaf.
@@ -46,5 +46,5 @@ public interface INodeFactory {
    * @param data The leaf data record.
    * @return A leaf initialized from those data.
    */
-  Leaf allocLeaf(AbstractBTree btree, long addr, ILeafData data);
+  public Leaf allocLeaf(AbstractBTree btree, long addr, ILeafData data);
 }

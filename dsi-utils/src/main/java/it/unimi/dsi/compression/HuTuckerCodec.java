@@ -69,7 +69,7 @@ public class HuTuckerCodec implements PrefixCodec, Serializable {
     }
   }
 
-  private static long[] intArray2LongArray(final int[] a) {
+  private static long[] intArray2LongArray(final int a[]) {
     final long[] b = new long[a.length];
     for (int i = a.length; i-- != 0; ) b[i] = a[i];
     return b;

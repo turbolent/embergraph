@@ -81,7 +81,7 @@ public enum GangliaMessageTypeEnum {
    * @param javaClasses The Java {@link Number} class(es) which are mapped onto a given ganglia data
    *     type.
    */
-  GangliaMessageTypeEnum(
+  private GangliaMessageTypeEnum(
       final int v,
       final boolean isMetric,
       final String gtype,

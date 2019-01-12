@@ -60,7 +60,7 @@ public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
    *     false</code> return does NOT imply that the iterator will visit more elements, only that it
    *     MIGHT visit more elements.
    */
-  boolean isExhausted();
+  public boolean isExhausted();
 
   /**
    * Return <code>true</code> iff there is at least one element that can be visited. If the buffer
@@ -78,7 +78,7 @@ public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
    * @throws InterruptedException if the current thread is interrupted while waiting another
    *     element.
    */
-  boolean hasNext(final long timeout, final TimeUnit unit) throws InterruptedException;
+  public boolean hasNext(final long timeout, final TimeUnit unit) throws InterruptedException;
 
   /**
    * Waits up to the <i>timeout</i> to return the next element. When the generic type of the
@@ -97,7 +97,7 @@ public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
    * @throws InterruptedException if the current thread is interrupted while waiting for another
    *     element.
    */
-  E next(long timeout, TimeUnit unit) throws InterruptedException;
+  public E next(long timeout, TimeUnit unit) throws InterruptedException;
 
   /**
    * Notes that the iterator is closed and hence may no longer be read. It is safe to invoke this
@@ -112,5 +112,5 @@ public interface IAsynchronousIterator<E> extends ICloseableIterator<E> {
    * limit has been satisfied. However, the preferred way to treat LIMIT is using {@link IRule} with
    * an {@link IQueryOptions} that specifies a LIMIT.
    */
-  void close();
+  public void close();
 }

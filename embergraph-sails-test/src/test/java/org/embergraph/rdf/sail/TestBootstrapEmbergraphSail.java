@@ -230,7 +230,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
                     if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
                   }
 
-                  return null;
+                  return (Void) null;
 
                 } finally {
 
@@ -321,7 +321,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
                   } finally {
                     lock.unlock();
                   }
-                  return null;
+                  return (Void) null;
                 } finally {
                   if (conn1 != null) conn1.close();
                 }
@@ -336,7 +336,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
                   log.info("Requesting 2nd unisolated connection.");
                   conn2 = sail.getUnisolatedConnection();
                   log.info("Have 2nd unisolated connection");
-                  return null;
+                  return (Void) null;
                 } finally {
                   if (conn2 != null) conn2.close();
                 }
@@ -442,7 +442,7 @@ public class TestBootstrapEmbergraphSail extends TestCase2 {
 
                   fail("Not expecting a 2nd unisolated connection");
 
-                  return null;
+                  return (Void) null;
 
                 } finally {
 

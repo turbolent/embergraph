@@ -19,20 +19,20 @@ package org.embergraph.ganglia;
 public interface IGangliaMessage {
 
   /** The code for the type of message. */
-  GangliaMessageTypeEnum getRecordType();
+  public GangliaMessageTypeEnum getRecordType();
 
   /**
    * The name of the host for which the metric was reported.
    *
    * <p>Note: When {@link #isSpoof()} reports <code>true</code> this will be <code>ip:host</code>.
    */
-  String getHostName();
+  public String getHostName();
 
   /**
    * The name of the metric (this needs to be clean for use in a file system so the application name
    * of the metric needs to be munged before it is saved here).
    */
-  String getMetricName();
+  public String getMetricName();
 
   /**
    * Return <code>true</code> iff this message contains the metadata for a metric (the metric
@@ -40,17 +40,17 @@ public interface IGangliaMessage {
    *
    * @see GangliaMessageTypeEnum#METADATA
    */
-  boolean isMetricMetadata();
+  public boolean isMetricMetadata();
 
   /**
    * Return <code>true</code> iff this message is a request for a metric.
    *
    * @see GangliaMessageTypeEnum#REQUEST
    */
-  boolean isMetricRequest();
+  public boolean isMetricRequest();
 
   /** Return <code>true</code> if this message represents a metric value. */
-  boolean isMetricValue();
+  public boolean isMetricValue();
 
   /**
    * <code>true</code> iff this is a spoofed message.
@@ -58,5 +58,5 @@ public interface IGangliaMessage {
    * <p>Note: Spoof messages format {@link #getHostName()} as <code>ip:host</code> and provide a
    * means to fake metrics for a host which is down (or which is not running ganglia).
    */
-  boolean isSpoof();
+  public boolean isSpoof();
 }

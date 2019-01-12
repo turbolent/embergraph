@@ -299,7 +299,7 @@ public class TestLongPacker extends TestCase {
   }
 
   private interface LongGenerator {
-    long nextLong();
+    public long nextLong();
   }
 
   /**

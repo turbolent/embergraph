@@ -53,7 +53,7 @@ public interface ITupleCursor2<E> extends ITupleCursor<E> {
    *
    * @see IndexMetadata#getDeleteMarkers()
    */
-  boolean isDeletedTupleVisitor();
+  public boolean isDeletedTupleVisitor();
 
   /**
    * Return <code>true</code> if the cursor position is defined.

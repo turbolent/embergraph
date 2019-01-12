@@ -197,7 +197,8 @@ public class ICUVersionRecord implements Externalizable {
     if (!icuVersion.equals(r.icuVersion)) return false;
     if (!ucolRuntimeVersion.equals(r.ucolRuntimeVersion)) return false;
     if (!ucolBuilderVersion.equals(r.ucolBuilderVersion)) return false;
-    return ucolTailoringsVersion.equals(r.ucolTailoringsVersion);
+    if (!ucolTailoringsVersion.equals(r.ucolTailoringsVersion)) return false;
+    return true;
   }
 
   /**

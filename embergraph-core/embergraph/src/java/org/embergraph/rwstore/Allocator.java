@@ -25,47 +25,47 @@ import org.embergraph.rawstore.IAllocationContext;
 import org.embergraph.rwstore.RWStore.AllocationStats;
 
 public interface Allocator extends Comparable {
-  int getBlockSize();
+  public int getBlockSize();
 
-  void setIndex(int index);
+  public void setIndex(int index);
 
-  boolean verify(int addr);
+  public boolean verify(int addr);
 
-  long getStartAddr();
+  public long getStartAddr();
 
-  boolean addressInRange(int addr);
+  public boolean addressInRange(int addr);
 
-  boolean free(int addr, int size);
+  public boolean free(int addr, int size);
 
-  int alloc(RWStore store, int size, IAllocationContext context);
+  public int alloc(RWStore store, int size, IAllocationContext context);
 
-  int getDiskAddr();
+  public int getDiskAddr();
 
-  void setDiskAddr(int addr);
+  public void setDiskAddr(int addr);
 
-  long getPhysicalAddress(int offset);
+  public long getPhysicalAddress(int offset);
 
-  boolean isAllocated(int offset);
+  public boolean isAllocated(int offset);
 
-  int getPhysicalSize(int offset);
+  public int getPhysicalSize(int offset);
 
-  byte[] write();
+  public byte[] write();
 
-  void read(DataInputStream str);
+  public void read(DataInputStream str);
 
-  boolean hasFree();
+  public boolean hasFree();
 
-  void setFreeList(ArrayList list);
+  public void setFreeList(ArrayList list);
 
-  String getStats(AtomicLong counter);
+  public String getStats(AtomicLong counter);
 
-  void addAddresses(ArrayList addrs);
+  public void addAddresses(ArrayList addrs);
 
-  int getRawStartAddr();
+  public int getRawStartAddr();
 
-  int getIndex();
+  public int getIndex();
 
-  void appendShortStats(StringBuilder str, AllocationStats[] stats);
+  public void appendShortStats(StringBuilder str, AllocationStats[] stats);
 
-  boolean canImmediatelyFree(int addr, int size, IAllocationContext context);
+  public boolean canImmediatelyFree(int addr, int size, IAllocationContext context);
 }

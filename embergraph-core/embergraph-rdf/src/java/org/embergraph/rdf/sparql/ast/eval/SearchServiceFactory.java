@@ -173,7 +173,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
 
         if (!p.isConstant()) throw new RuntimeException("Expecting search predicate: " + sp);
 
-        final URI uri = (URI) p.getValue();
+        final URI uri = (URI) ((ConstantNode) p).getValue();
 
         if (!uri.stringValue().startsWith(BDS.NAMESPACE))
           throw new RuntimeException("Expecting search predicate: " + sp);
@@ -291,7 +291,7 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
 
     final TermNode o = sp.o();
 
-    if (!o.isConstant() || !(o.getValue() instanceof Literal)) {
+    if (!o.isConstant() || !(((ConstantNode) o).getValue() instanceof Literal)) {
 
       throw new IllegalArgumentException("Object is not literal: " + sp);
     }
@@ -402,23 +402,23 @@ public class SearchServiceFactory extends AbstractServiceFactoryBase {
         } else if (BDS.RANGE_COUNT.equals(p)) {
           rangeCountVar = oVar;
         } else if (BDS.MIN_RANK.equals(p)) {
-          minRank = oVal;
+          minRank = (Literal) oVal;
         } else if (BDS.MAX_RANK.equals(p)) {
-          maxRank = oVal;
+          maxRank = (Literal) oVal;
         } else if (BDS.MIN_RELEVANCE.equals(p)) {
-          minRelevance = oVal;
+          minRelevance = (Literal) oVal;
         } else if (BDS.MAX_RELEVANCE.equals(p)) {
-          maxRelevance = oVal;
+          maxRelevance = (Literal) oVal;
         } else if (BDS.MATCH_ALL_TERMS.equals(p)) {
-          matchAllTerms = oVal.booleanValue();
+          matchAllTerms = ((Literal) oVal).booleanValue();
         } else if (BDS.MATCH_EXACT.equals(p)) {
-          matchExact = oVal.booleanValue();
+          matchExact = ((Literal) oVal).booleanValue();
         } else if (BDS.SUBJECT_SEARCH.equals(p)) {
-          subjectSearch = oVal.booleanValue();
+          subjectSearch = ((Literal) oVal).booleanValue();
         } else if (BDS.SEARCH_TIMEOUT.equals(p)) {
-          searchTimeout = oVal;
+          searchTimeout = (Literal) oVal;
         } else if (BDS.MATCH_REGEX.equals(p)) {
-          matchRegex = oVal;
+          matchRegex = (Literal) oVal;
         }
       }
 

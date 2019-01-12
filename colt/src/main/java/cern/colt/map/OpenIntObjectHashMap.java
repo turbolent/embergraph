@@ -26,27 +26,26 @@ import cern.colt.list.ObjectArrayList;
  * @see java.util.HashMap
  */
 public class OpenIntObjectHashMap extends AbstractIntObjectMap {
-
   /**
    * The hash table keys.
    *
    * @serial
    */
-  protected int[] table;
+  protected int table[];
 
   /**
    * The hash table values.
    *
    * @serial
    */
-  protected Object[] values;
+  protected Object values[];
 
   /**
    * The state of each hash table entry (FREE, FULL, REMOVED).
    *
    * @serial
    */
-  protected byte[] state;
+  protected byte state[];
 
   /**
    * The number of table entries in state==FREE.
@@ -104,9 +103,9 @@ public class OpenIntObjectHashMap extends AbstractIntObjectMap {
    */
   public Object clone() {
     OpenIntObjectHashMap copy = (OpenIntObjectHashMap) super.clone();
-    copy.table = copy.table.clone();
-    copy.values = copy.values.clone();
-    copy.state = copy.state.clone();
+    copy.table = (int[]) copy.table.clone();
+    copy.values = (Object[]) copy.values.clone();
+    copy.state = (byte[]) copy.state.clone();
     return copy;
   }
   /**
@@ -199,8 +198,8 @@ public class OpenIntObjectHashMap extends AbstractIntObjectMap {
    *     it is NOT already contained and should be inserted at slot index.
    */
   protected int indexOfInsertion(int key) {
-    final int[] tab = table;
-    final byte[] stat = state;
+    final int tab[] = table;
+    final byte stat[] = state;
     final int length = tab.length;
 
     final int hash = HashFunctions.hash(key) & 0x7FFFFFFF;
@@ -249,8 +248,8 @@ public class OpenIntObjectHashMap extends AbstractIntObjectMap {
    *     found.
    */
   protected int indexOfKey(int key) {
-    final int[] tab = table;
-    final byte[] stat = state;
+    final int tab[] = table;
+    final byte stat[] = state;
     final int length = tab.length;
 
     final int hash = HashFunctions.hash(key) & 0x7FFFFFFF;
@@ -280,8 +279,8 @@ public class OpenIntObjectHashMap extends AbstractIntObjectMap {
    *     found.
    */
   protected int indexOfValue(Object value) {
-    final Object[] val = values;
-    final byte[] stat = state;
+    final Object val[] = values;
+    final byte stat[] = state;
 
     for (int i = stat.length; --i >= 0; ) {
       if (stat[i] == FULL && val[i] == value) return i;
@@ -409,13 +408,13 @@ public class OpenIntObjectHashMap extends AbstractIntObjectMap {
     int oldCapacity = table.length;
     // if (oldCapacity == newCapacity) return;
 
-    int[] oldTable = table;
-    Object[] oldValues = values;
-    byte[] oldState = state;
+    int oldTable[] = table;
+    Object oldValues[] = values;
+    byte oldState[] = state;
 
-    int[] newTable = new int[newCapacity];
-    Object[] newValues = new Object[newCapacity];
-    byte[] newState = new byte[newCapacity];
+    int newTable[] = new int[newCapacity];
+    Object newValues[] = new Object[newCapacity];
+    byte newState[] = new byte[newCapacity];
 
     this.lowWaterMark = chooseLowWaterMark(newCapacity, this.minLoadFactor);
     this.highWaterMark = chooseHighWaterMark(newCapacity, this.maxLoadFactor);

@@ -102,8 +102,8 @@ public class EmbergraphTriplePattern {
       if (other.p != null) return false;
     } else if (!p.equals(other.p)) return false;
     if (s == null) {
-      return other.s == null;
-    } else
-      return s.equals(other.s);
+      if (other.s != null) return false;
+    } else if (!s.equals(other.s)) return false;
+    return true;
   }
 }

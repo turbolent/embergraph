@@ -41,7 +41,7 @@ public class EmbergraphSailConfig extends SailImplConfigBase {
     this.propertiesFile = propertiesFile;
   }
 
-  public Properties getProperties() throws IOException {
+  public Properties getProperties() throws FileNotFoundException, IOException {
 
     if (propertiesFile == null) {
       return new Properties();

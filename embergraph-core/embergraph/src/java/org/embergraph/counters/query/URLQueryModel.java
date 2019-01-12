@@ -557,7 +557,7 @@ public class URLQueryModel {
         }
 
         // the name of the event column.
-        final String col = name.substring(pos + 1);
+        final String col = name.substring(pos + 1, name.length());
 
         final Field fld;
         try {

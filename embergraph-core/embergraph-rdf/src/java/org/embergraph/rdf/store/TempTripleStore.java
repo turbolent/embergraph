@@ -159,7 +159,7 @@ public class TempTripleStore extends AbstractLocalTripleStore {
    * @todo define options for {@link TemporaryStore} and then extend them here.
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public interface Options
+  public static interface Options
       extends AbstractTripleStore.Options { // , TemporaryStore.Options {
   }
 

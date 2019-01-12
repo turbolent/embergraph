@@ -84,7 +84,7 @@ public class SampleServiceFactory extends AbstractServiceFactory implements Serv
   public static final URI SERVICE_KEY = new URIImpl(BD.NAMESPACE + "sample");
 
   /** The service params for this service. */
-  public interface SampleParams {
+  public static interface SampleParams {
 
     /** The limit on the sample. */
     URI LIMIT = new URIImpl(SERVICE_KEY.stringValue() + ".limit");
@@ -257,11 +257,12 @@ public class SampleServiceFactory extends AbstractServiceFactory implements Serv
 
       @SuppressWarnings("unchecked")
       IPredicate<ISPO> pred =
-          db.getPredicate(
-              sp.s() != null && sp.s().isConstant() ? (Resource) sp.s().getValue() : null,
-              sp.p() != null && sp.p().isConstant() ? (URI) sp.p().getValue() : null,
-              sp.o() != null && sp.o().isConstant() ? sp.o().getValue() : null,
-              sp.c() != null && sp.c().isConstant() ? (Resource) sp.c().getValue() : null);
+          (IPredicate<ISPO>)
+              db.getPredicate(
+                  sp.s() != null && sp.s().isConstant() ? (Resource) sp.s().getValue() : null,
+                  sp.p() != null && sp.p().isConstant() ? (URI) sp.p().getValue() : null,
+                  sp.o() != null && sp.o().isConstant() ? (Value) sp.o().getValue() : null,
+                  sp.c() != null && sp.c().isConstant() ? (Resource) sp.c().getValue() : null);
 
       if (pred == null) {
 

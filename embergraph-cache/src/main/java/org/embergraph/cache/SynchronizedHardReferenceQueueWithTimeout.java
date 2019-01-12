@@ -460,7 +460,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
            * reference.
            */
           synchronized (queue) {
-            ncleared += queue.queue.evictStaleRefs();
+            ncleared += ((InnerHardReferenceQueue) queue.queue).evictStaleRefs();
           }
 
           nqueues++;
@@ -482,7 +482,7 @@ public class SynchronizedHardReferenceQueueWithTimeout<T> implements IHardRefere
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @param <T>
    */
-  public interface IRef<T> {
+  public static interface IRef<T> {
     T get();
   }
 

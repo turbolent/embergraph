@@ -277,34 +277,36 @@ public class TestBasicIndexStuff extends AbstractEmbeddedFederationTestCase {
     // verify correct value in the index on the correct data service.
     assertEquals(
         new byte[] {1},
-        dataService0
-            .submit(
-                ITx.UNISOLATED,
-                DataService.getIndexPartitionName(name, partitionId0),
-                BatchLookupConstructor.INSTANCE.newInstance(
-                    metadata,
-                    0, // fromIndex
-                    1, // toIndex
-                    new byte[][] {new byte[] {1}}, // keys
-                    null // vals
-                    ))
-            .get()
+        ((ResultBuffer)
+                dataService0
+                    .submit(
+                        ITx.UNISOLATED,
+                        DataService.getIndexPartitionName(name, partitionId0),
+                        BatchLookupConstructor.INSTANCE.newInstance(
+                            metadata,
+                            0, // fromIndex
+                            1, // toIndex
+                            new byte[][] {new byte[] {1}}, // keys
+                            null // vals
+                            ))
+                    .get())
             .getResult(0));
 
     assertEquals(
         new byte[] {5},
-        dataService1
-            .submit(
-                ITx.UNISOLATED,
-                DataService.getIndexPartitionName(name, partitionId1),
-                BatchLookupConstructor.INSTANCE.newInstance(
-                    metadata,
-                    0, // fromIndex
-                    1, // toIndex
-                    new byte[][] {new byte[] {5}}, // keys
-                    null // vals
-                    ))
-            .get()
+        ((ResultBuffer)
+                dataService1
+                    .submit(
+                        ITx.UNISOLATED,
+                        DataService.getIndexPartitionName(name, partitionId1),
+                        BatchLookupConstructor.INSTANCE.newInstance(
+                            metadata,
+                            0, // fromIndex
+                            1, // toIndex
+                            new byte[][] {new byte[] {5}}, // keys
+                            null // vals
+                            ))
+                    .get())
             .getResult(0));
 
     // verify some range counts.
@@ -370,13 +372,13 @@ public class TestBasicIndexStuff extends AbstractEmbeddedFederationTestCase {
     assertSameIterator(new byte[][] {new byte[] {5}}, ndx.rangeIterator(null, null));
 
     // remove the other index entry.
-    assertEquals(new byte[] {5}, ndx.remove(new byte[] {5}));
+    assertEquals(new byte[] {5}, (byte[]) ndx.remove(new byte[] {5}));
 
     // verify that this entry is gone (actually it is marked as deleted).
     assertFalse(ndx.contains(new byte[] {5}));
 
     // the key is not in the index.
-    assertEquals(null, ndx.lookup(new byte[] {5}));
+    assertEquals(null, (byte[]) ndx.lookup(new byte[] {5}));
 
     /*
      * verify some range counts -- they are unchanged since the deleted keys

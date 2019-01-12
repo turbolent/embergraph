@@ -171,17 +171,22 @@ public class TimestampMetricValue implements ITimestampMetricValue {
 
     final boolean changed = oldValue == null || decl.isChanged(oldValue, newValue);
 
-    /*
-     * Either the value has changed or the last reported value is old
-     * enough that we need to retransmit it now.
-     *
-     * Note: Tmax is divided by two to help avoid timeouts in which
-     * metrics which we have on hand would otherwise appear as stale to
-     * other ganglia clients.
-     */
-    return changed || getAge() >= decl.getTMax() / 2;
+    if (changed || getAge() >= decl.getTMax() / 2) {
+
+      /*
+       * Either the value has changed or the last reported value is old
+       * enough that we need to retransmit it now.
+       *
+       * Note: Tmax is divided by two to help avoid timeouts in which
+       * metrics which we have on hand would otherwise appear as stale to
+       * other ganglia clients.
+       */
+
+      return true;
+    }
 
     // Do not retransmit this metric.
+    return false;
   }
 
   /** Update the timestamp. */

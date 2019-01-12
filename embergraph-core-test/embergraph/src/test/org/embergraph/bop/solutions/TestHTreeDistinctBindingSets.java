@@ -60,14 +60,16 @@ public class TestHTreeDistinctBindingSets extends AbstractDistinctSolutionsTestC
       new HTreeDistinctBindingSetsOp(
           new BOp[] {},
           NV.asMap(
-              new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
-              new NV(
-                  HTreeDistinctBindingSetsOp.Annotations.NAMED_SET_REF,
-                  NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),
-              //                    new NV(DistinctBindingSetOp.Annotations.VARIABLES,new
-              // IVariable[]{x}),
-              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1)));
+              new NV[] {
+                new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
+                new NV(
+                    HTreeDistinctBindingSetsOp.Annotations.NAMED_SET_REF,
+                    NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),
+                //                    new NV(DistinctBindingSetOp.Annotations.VARIABLES,new
+                // IVariable[]{x}),
+                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+              }));
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -78,13 +80,15 @@ public class TestHTreeDistinctBindingSets extends AbstractDistinctSolutionsTestC
       new HTreeDistinctBindingSetsOp(
           new BOp[] {},
           NV.asMap(
-              new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
-              new NV(
-                  HTreeDistinctBindingSetsOp.Annotations.NAMED_SET_REF,
-                  NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),
-              new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, new IVariable[] {x}),
-              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.ANY),
-              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1)));
+              new NV[] {
+                new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
+                new NV(
+                    HTreeDistinctBindingSetsOp.Annotations.NAMED_SET_REF,
+                    NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),
+                new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, new IVariable[] {x}),
+                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.ANY),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+              }));
       fail("Expecting: " + UnsupportedOperationException.class);
     } catch (UnsupportedOperationException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -95,14 +99,16 @@ public class TestHTreeDistinctBindingSets extends AbstractDistinctSolutionsTestC
       new HTreeDistinctBindingSetsOp(
           new BOp[] {},
           NV.asMap(
-              new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
-              new NV(
-                  HTreeDistinctBindingSetsOp.Annotations.NAMED_SET_REF,
-                  NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),
-              new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, new IVariable[] {x}),
-              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.SHARDED),
-              new NV(PipelineOp.Annotations.SHARED_STATE, true),
-              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1)));
+              new NV[] {
+                new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
+                new NV(
+                    HTreeDistinctBindingSetsOp.Annotations.NAMED_SET_REF,
+                    NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),
+                new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, new IVariable[] {x}),
+                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.SHARDED),
+                new NV(PipelineOp.Annotations.SHARED_STATE, true),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+              }));
       fail("Expecting: " + UnsupportedOperationException.class);
     } catch (UnsupportedOperationException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -113,13 +119,15 @@ public class TestHTreeDistinctBindingSets extends AbstractDistinctSolutionsTestC
       new HTreeDistinctBindingSetsOp(
           new BOp[] {},
           NV.asMap(
-              new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
-              //                    new
-              // NV(DistinctBindingSetsWithHTreeOp.Annotations.NAMED_SET_REF,
-              //                            new NamedSolutionSetRef(queryId, getName(), vars)),
-              new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, new IVariable[] {x}),
-              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-              new NV(PipelineOp.Annotations.MAX_PARALLEL, 1)));
+              new NV[] {
+                new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
+                //                    new
+                // NV(DistinctBindingSetsWithHTreeOp.Annotations.NAMED_SET_REF,
+                //                            new NamedSolutionSetRef(queryId, getName(), vars)),
+                new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, new IVariable[] {x}),
+                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                new NV(PipelineOp.Annotations.MAX_PARALLEL, 1),
+              }));
       fail("Expecting: " + IllegalStateException.class);
     } catch (IllegalStateException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);
@@ -130,15 +138,16 @@ public class TestHTreeDistinctBindingSets extends AbstractDistinctSolutionsTestC
       new HTreeDistinctBindingSetsOp(
           new BOp[] {},
           NV.asMap(
-              new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
-              new NV(
-                  HTreeDistinctBindingSetsOp.Annotations.NAMED_SET_REF,
-                  NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),
-              new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, new IVariable[] {x}),
-              new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
-              //                    new NV(PipelineOp.Annotations.MAX_PARALLEL,
-              //                            1),
-          ));
+              new NV[] {
+                new NV(JVMDistinctBindingSetsOp.Annotations.BOP_ID, distinctId),
+                new NV(
+                    HTreeDistinctBindingSetsOp.Annotations.NAMED_SET_REF,
+                    NamedSolutionSetRefUtility.newInstance(queryId, getName(), vars)),
+                new NV(JVMDistinctBindingSetsOp.Annotations.VARIABLES, new IVariable[] {x}),
+                new NV(PipelineOp.Annotations.EVALUATION_CONTEXT, BOpEvaluationContext.CONTROLLER),
+                //                    new NV(PipelineOp.Annotations.MAX_PARALLEL,
+                //                            1),
+              }));
       fail("Expecting: " + IllegalArgumentException.class);
     } catch (IllegalArgumentException ex) {
       if (log.isInfoEnabled()) log.info("Ignoring expected exception: " + ex);

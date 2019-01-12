@@ -147,7 +147,8 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
     // Flag record as leaf or linked-leaf (vs node).
     final boolean doubleLinked = leaf.isDoubleLinked();
     buf.putByte(
-        (doubleLinked ? AbstractReadOnlyNodeData.LINKED_LEAF : AbstractReadOnlyNodeData.LEAF));
+        (byte)
+            (doubleLinked ? AbstractReadOnlyNodeData.LINKED_LEAF : AbstractReadOnlyNodeData.LEAF));
 
     if (doubleLinked) {
 
@@ -258,7 +259,7 @@ public class DefaultLeafCoder implements IAbstractNodeDataCoder<ILeafData>, Exte
       final byte versionTimestampBits = (byte) (Fast.mostSignificantBit(max - min) + 1);
 
       // one byte.
-      buf.putByte(versionTimestampBits);
+      buf.putByte((byte) versionTimestampBits);
 
       // offset of minVersionTimestamp.
       //            O_versionTimestamps = buf.pos();

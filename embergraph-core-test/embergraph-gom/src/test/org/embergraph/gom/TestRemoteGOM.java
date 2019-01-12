@@ -289,7 +289,7 @@ public class TestRemoteGOM extends TestCase {
     }
 
     // clear cached data
-    om.clearCache();
+    ((ObjectMgrModel) om).clearCache();
 
     IGPO gpo = om.getGPO(id); // reads from backing journal
 
@@ -398,7 +398,7 @@ public class TestRemoteGOM extends TestCase {
     }
 
     // clear cached data
-    om.clearCache();
+    ((ObjectMgrModel) om).clearCache();
 
     IGPO gpo = om.getGPO(id); // reads from backing journal
 

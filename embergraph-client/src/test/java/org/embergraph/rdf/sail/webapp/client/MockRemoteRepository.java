@@ -51,7 +51,7 @@ public class MockRemoteRepository extends RemoteRepository {
                       @Override
                       public int getStatus() {
                         return 200;
-                      }
+                      };
                     };
                 String requestMimeType = request.getHeaders().get(HttpHeader.ACCEPT).split(";")[0];
                 TupleQueryResultFormat tupleQueryMimeType =

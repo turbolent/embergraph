@@ -32,5 +32,5 @@ package org.embergraph.counters;
  */
 public interface ICounter<T> extends ICounterNode, IInstrument<T> {
 
-  IInstrument<T> getInstrument();
+  public IInstrument<T> getInstrument();
 }

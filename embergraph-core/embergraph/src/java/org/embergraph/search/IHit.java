@@ -35,11 +35,11 @@ package org.embergraph.search;
 public interface IHit<V extends Comparable<V>> {
 
   /** The computed relevance score. */
-  double getCosine();
+  public double getCosine();
 
   /** The document identifier associated with the search result. */
-  V getDocId();
+  public V getDocId();
 
   /** The rank of this hit within the context of the search. */
-  int getRank();
+  public int getRank();
 }

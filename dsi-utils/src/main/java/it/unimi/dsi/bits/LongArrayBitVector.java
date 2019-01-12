@@ -101,7 +101,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
    * @return the number of words that are necessary to hold the given number of bits.
    */
   protected static final int numWords(final long size) {
-    assert !ASSERTS || (size + WORD_MASK) >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
+    if (ASSERTS) assert (size + WORD_MASK) >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
     return (int) ((size + WORD_MASK) >>> LOG2_BITS_PER_WORD);
   }
 
@@ -113,7 +113,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
    *     -1.
    */
   protected static final int word(final long index) {
-    assert !ASSERTS || index >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
+    if (ASSERTS) assert index >>> LOG2_BITS_PER_WORD <= Integer.MAX_VALUE;
     return (int) (index >> LOG2_BITS_PER_WORD);
   }
 
@@ -680,7 +680,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
     long h = 0x9e3779b97f4a7c13L ^ length;
     final int numWords = numWords(length);
     for (int i = 0; i < numWords; i++) h ^= (h << 5) + bits[i] + (h >>> 2);
-    assert !ASSERTS || (int) ((h >>> 32) ^ h) == super.hashCode();
+    if (ASSERTS) assert (int) ((h >>> 32) ^ h) == super.hashCode();
     return (int) ((h >>> 32) ^ h);
   }
 
@@ -724,7 +724,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
       if (width == 0) return 0;
       if (width != Long.SIZE && value > fullMask)
         throw new IllegalArgumentException("Value too large: " + value);
-      final long[] bits = bitVector.bits;
+      final long bits[] = bitVector.bits;
       final long start = index * width;
       final int startWord = word(start);
       final int endWord = word(start + width - 1);
@@ -735,7 +735,7 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
         oldValue = bits[startWord] >>> startBit & fullMask;
         bits[startWord] &= ~(fullMask << startBit);
         bits[startWord] |= value << startBit;
-        assert !ASSERTS || value == (bits[startWord] >>> startBit & fullMask);
+        if (ASSERTS) assert value == (bits[startWord] >>> startBit & fullMask);
       } else {
         // Here startBit > 0.
         oldValue =
@@ -745,9 +745,10 @@ public class LongArrayBitVector extends AbstractBitVector implements Cloneable, 
         bits[endWord] &= -(1L << width - BITS_PER_WORD + startBit);
         bits[endWord] |= value >>> BITS_PER_WORD - startBit;
 
-        assert !ASSERTS || value
-            == (bits[startWord] >>> startBit
-            | bits[endWord] << (BITS_PER_WORD - startBit) & fullMask);
+        if (ASSERTS)
+          assert value
+              == (bits[startWord] >>> startBit
+                  | bits[endWord] << (BITS_PER_WORD - startBit) & fullMask);
       }
       return oldValue;
     }

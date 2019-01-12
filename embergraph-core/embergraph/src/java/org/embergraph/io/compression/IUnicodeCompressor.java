@@ -40,7 +40,7 @@ public interface IUnicodeCompressor {
    * @param out Where to write the encoded data.
    * @return The #of bytes written onto the output stream
    */
-  int encode(CharSequence in, OutputStream out);
+  public int encode(CharSequence in, OutputStream out);
 
   /**
    * Decode a Unicode character sequence from the input stream. The run length of the encoded
@@ -51,5 +51,5 @@ public interface IUnicodeCompressor {
    * @param out The decoded data (Unicode characters) are appended to this object.
    * @return The #of bytes that were consumed.
    */
-  int decode(InputStream in, Appendable out);
+  public int decode(InputStream in, Appendable out);
 }

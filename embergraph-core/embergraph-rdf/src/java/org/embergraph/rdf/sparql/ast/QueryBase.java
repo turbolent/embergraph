@@ -304,9 +304,10 @@ public abstract class QueryBase extends QueryNodeBase
 
     if (slice.getLimit() != SliceNode.Annotations.DEFAULT_LIMIT) return true;
 
-    return slice.getOffset() != SliceNode.Annotations.DEFAULT_OFFSET;
+    if (slice.getOffset() != SliceNode.Annotations.DEFAULT_OFFSET) return true;
 
     // The SLICE does not specify either LIMIT or OFFSET.
+    return false;
   }
 
   /** Return the order by clause -or- <code>null</code> if there is no order by. */

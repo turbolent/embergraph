@@ -50,5 +50,5 @@ public interface IDuplicateRemover<O> {
    *     duplicates are eliminated by the {@link IndexPartitionWriteTask} within a single-threaded
    *     context.
    */
-  KVO<O>[] filter(KVO<O>[] a);
+  public KVO<O>[] filter(KVO<O>[] a);
 }

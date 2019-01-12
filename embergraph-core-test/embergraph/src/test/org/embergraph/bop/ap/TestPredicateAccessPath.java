@@ -235,9 +235,11 @@ public class TestPredicateAccessPath extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {new Constant<String>("Mary"), Var.var("value")},
             NV.asMap(
-                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                new NV(Annotations.REMOTE_ACCESS_PATH, false)));
+                new NV[] {
+                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                  new NV(Annotations.REMOTE_ACCESS_PATH, false),
+                }));
 
     final E[] expected =
         new E[] {
@@ -323,9 +325,11 @@ public class TestPredicateAccessPath extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                new NV(Annotations.INDEX_LOCAL_FILTER, filter)));
+                new NV[] {
+                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                  new NV(Annotations.INDEX_LOCAL_FILTER, filter),
+                }));
 
     final E[] expected =
         new E[] {
@@ -430,9 +434,11 @@ public class TestPredicateAccessPath extends TestCase2 {
         new Predicate<E>(
             new IVariableOrConstant[] {x, y},
             NV.asMap(
-                new NV(Annotations.RELATION_NAME, new String[] {namespace}),
-                new NV(IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
-                new NV(Annotations.ACCESS_PATH_FILTER, distinctFilter)));
+                new NV[] {
+                  new NV(Annotations.RELATION_NAME, new String[] {namespace}),
+                  new NV(org.embergraph.bop.IPredicate.Annotations.TIMESTAMP, ITx.READ_COMMITTED),
+                  new NV(Annotations.ACCESS_PATH_FILTER, distinctFilter),
+                }));
 
     // the distinct values from the name column in index order.
     final E[] expected =
@@ -505,7 +511,7 @@ public class TestPredicateAccessPath extends TestCase2 {
     public MockPipelineOp(final BOp[] args, final NV... anns) {
 
       super(args, NV.asMap(anns));
-    }
+    };
 
     private static final long serialVersionUID = 1L;
 

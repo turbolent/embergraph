@@ -282,7 +282,7 @@ public class TestMove extends AbstractEmbeddedFederationTestCase {
 
       final AbstractEmbeddedLoadBalancerService lbs =
           ((AbstractEmbeddedLoadBalancerService)
-              fed.getLoadBalancerService());
+              ((EmbeddedFederation) fed).getLoadBalancerService());
 
       final ServiceScore[] fakeServiceScores = new ServiceScore[2];
 

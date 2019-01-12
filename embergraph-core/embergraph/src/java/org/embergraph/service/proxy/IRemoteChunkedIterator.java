@@ -43,12 +43,12 @@ public interface IRemoteChunkedIterator<E> extends Remote {
    *
    * @throws IOException
    */
-  void close() throws IOException;
+  public void close() throws IOException;
 
   /**
    * Return the next "chunk" from the iterator.
    *
    * @return The next {@link IRemoteChunk}.
    */
-  IRemoteChunk<E> nextChunk() throws IOException;
+  public IRemoteChunk<E> nextChunk() throws IOException;
 }

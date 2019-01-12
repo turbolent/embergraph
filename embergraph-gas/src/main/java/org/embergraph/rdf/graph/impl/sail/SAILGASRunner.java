@@ -97,7 +97,9 @@ public class SAILGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
 
     @Override
     public boolean handleArg(final AtomicInteger i, final String[] args) {
-      return super.handleArg(i, args);
+      if (super.handleArg(i, args)) {
+        return true;
+      }
       //            final String arg = args[i.get()];
       //            if (arg.equals("-bufferMode")) {
       //                final String s = args[i.incrementAndGet()];
@@ -108,6 +110,7 @@ public class SAILGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
       //            } else {
       //                return false;
       //            }
+      return false;
     }
 
     @Override
@@ -161,7 +164,7 @@ public class SAILGASRunner<VS, ES, ST> extends GASRunnerBase<VS, ES, ST> {
   protected IGraphAccessor newGraphAccessor() {
 
     return new SAILGraphAccessor(
-        getOptionData().cxn, false /* includeInferred */  /* defaultContext */);
+        getOptionData().cxn, false /* includeInferred */, new Resource[0] /* defaultContext */);
   }
 
   /**

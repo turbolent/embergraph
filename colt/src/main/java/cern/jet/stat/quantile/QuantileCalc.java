@@ -162,7 +162,7 @@ class QuantileCalc extends Object {
     int minB = -1;
     for (int b = 2; b <= maxBuffers; b++) {
       if (kMinimums[b - 2] < Long.MAX_VALUE) {
-        long mult = ((long) b) * kMinimums[b - 2];
+        long mult = ((long) b) * ((long) kMinimums[b - 2]);
         if (mult < multMin) {
           multMin = mult;
           minB = b;

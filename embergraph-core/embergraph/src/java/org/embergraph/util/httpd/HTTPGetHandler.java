@@ -45,5 +45,5 @@ public interface HTTPGetHandler {
    * @return HTTP response
    * @see Response
    */
-  Response doGet(final Request req) throws Exception;
+  public Response doGet(final Request req) throws Exception;
 }

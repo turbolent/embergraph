@@ -55,7 +55,7 @@ public abstract class BinderBase<VS, ES, ST> implements IBinder<VS, ES, ST> {
 
     } else {
 
-      return Arrays.asList(val);
+      return Arrays.asList(new Value[] {val});
     }
   }
 }

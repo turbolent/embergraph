@@ -35,7 +35,7 @@ public enum GangliaSlopeEnum {
    */
   unspecified(4);
 
-  GangliaSlopeEnum(final int v) {
+  private GangliaSlopeEnum(final int v) {
     this.v = v;
   }
 

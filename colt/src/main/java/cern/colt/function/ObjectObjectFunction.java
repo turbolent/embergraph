@@ -20,5 +20,5 @@ public interface ObjectObjectFunction {
    * @param y the second argument passed to the function.
    * @return the result of the function.
    */
-  Object apply(Object x, Object y);
+  public abstract Object apply(Object x, Object y);
 }

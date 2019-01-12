@@ -25,5 +25,5 @@ public interface ObjectProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  boolean apply(Object element);
+  public abstract boolean apply(Object element);
 }

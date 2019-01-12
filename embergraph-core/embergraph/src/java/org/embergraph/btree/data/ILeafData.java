@@ -37,7 +37,7 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
    *
    * @return The #of values in the leaf.
    */
-  int getValueCount();
+  public int getValueCount();
 
   /**
    * Return the object storing the logical byte[][] containing the values for the leaf. When the
@@ -53,7 +53,7 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
    * @see #hasDeleteMarkers()
    * @see #getDeleteMarker(int)
    */
-  IRaba getValues();
+  public IRaba getValues();
 
   /**
    * The version timestamp for the entry at the specified index.
@@ -63,7 +63,7 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
    * @throws UnsupportedOperationException if version timestamps are not being maintained (they are
    *     only required for indices on which transaction processing will be used).
    */
-  long getVersionTimestamp(int index);
+  public long getVersionTimestamp(int index);
 
   /**
    * Return <code>true</code> iff the entry at the specified index is marked as deleted.
@@ -71,7 +71,7 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
    * @throws IndexOutOfBoundsException unless index is in [0:ntuples-1].
    * @throws UnsupportedOperationException if delete markers are not being maintained.
    */
-  boolean getDeleteMarker(int index);
+  public boolean getDeleteMarker(int index);
 
   /**
    * Return the address of the raw record on the backing store of the value stored in the tuple
@@ -100,22 +100,22 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
 
   /** Return <code>true</code> iff the leaf maintains version timestamps. */
   @Override
-  boolean hasVersionTimestamps();
+  public boolean hasVersionTimestamps();
 
   /** Return <code>true</code> iff the leaf maintains delete markers. */
-  boolean hasDeleteMarkers();
+  public boolean hasDeleteMarkers();
 
   /**
    * Return <code>true</code> iff the leaf promotes large <code>byte[]</code> values to raw records
    * on the backing store.
    */
-  boolean hasRawRecords();
+  public boolean hasRawRecords();
 
   /**
    * Return <code>true</code> if the leaf data record supports encoding of the address of the
    * previous and next leaf in the B+Tree order.
    */
-  boolean isDoubleLinked();
+  public boolean isDoubleLinked();
 
   /**
    * The address of the previous leaf in key order, <code>0L</code> if it is known that there is no
@@ -124,7 +124,7 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
    *
    * @throws UnsupportedOperationException if the leaf data record is not double-linked.
    */
-  long getPriorAddr();
+  public long getPriorAddr();
 
   /**
    * The address of the next leaf in key order, <code>0L</code> if it is known that there is no next
@@ -133,5 +133,5 @@ public interface ILeafData extends IAbstractNodeData, IKeysData {
    *
    * @throws UnsupportedOperationException if the leaf data record is not double-linked.
    */
-  long getNextAddr();
+  public long getNextAddr();
 }

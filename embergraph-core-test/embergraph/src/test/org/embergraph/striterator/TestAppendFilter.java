@@ -45,12 +45,13 @@ public class TestAppendFilter extends TestCase2 {
   public void test_filter() {
 
     final IChunkedIterator<Long> actual =
-        new ChunkedStriterator<IChunkedIterator<Long>, Long>(
-                Arrays.asList(new Long[] {1L, 3L, 5L}).iterator())
-            .addFilter(
-                new Appender<IChunkedIterator<Long>, Long>(
-                    new ChunkedWrappedIterator<Long>(
-                        Arrays.asList(new Long[] {2L, 3L, 4L}).iterator())));
+        (IChunkedIterator<Long>)
+            new ChunkedStriterator<IChunkedIterator<Long>, Long>(
+                    Arrays.asList(new Long[] {1L, 3L, 5L}).iterator())
+                .addFilter(
+                    new Appender<IChunkedIterator<Long>, Long>(
+                        new ChunkedWrappedIterator<Long>(
+                            Arrays.asList(new Long[] {2L, 3L, 4L}).iterator())));
 
     assertEquals(
         new Long[] {

@@ -69,7 +69,7 @@ public interface IStarJoin<E> extends IPredicate<E> {
    * a particular element matches the constraint, and will create variable bindings for that
    * elements.
    */
-  interface IStarConstraint<E> {
+  public static interface IStarConstraint<E> {
 
     /**
      * Return an as-bound version of this star constraint.

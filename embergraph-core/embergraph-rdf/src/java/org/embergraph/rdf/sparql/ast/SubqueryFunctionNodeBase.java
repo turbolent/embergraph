@@ -75,7 +75,7 @@ public abstract class SubqueryFunctionNodeBase extends FunctionNode
       final VarNode anonvar,
       final GraphPatternGroup<IGroupMemberNode> graphPattern) {
 
-    super(functionURI, null /* scalarValues */, anonvar);
+    super(functionURI, null /* scalarValues */, new ValueExpressionNode[] {anonvar});
 
     if (anonvar == null) throw new IllegalArgumentException();
 

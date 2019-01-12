@@ -54,7 +54,7 @@ public interface IMutableRelation<E> extends IRelation<E>, IMutableResource<IRel
    * @param itr An iterator visiting the elements to be written.
    * @return The #of elements that were actually written on the relation.
    */
-  long insert(IChunkedOrderedIterator<E> itr);
+  public long insert(IChunkedOrderedIterator<E> itr);
 
   /**
    * Remove elements from the relation.
@@ -64,5 +64,5 @@ public interface IMutableRelation<E> extends IRelation<E>, IMutableResource<IRel
    *     relation.
    * @return The #of elements that were actually removed from the relation.
    */
-  long delete(IChunkedOrderedIterator<E> itr);
+  public long delete(IChunkedOrderedIterator<E> itr);
 }

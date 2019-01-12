@@ -71,7 +71,7 @@ public class ByteBufferOutputStream extends OutputStream {
    * @param len the number of bytes to write.
    * @exception EOFException if the buffer would overflow.
    */
-  public void write(byte[] b, int off, int len) throws IOException {
+  public void write(byte b[], int off, int len) throws IOException {
 
     if (buf.remaining() < len) {
 

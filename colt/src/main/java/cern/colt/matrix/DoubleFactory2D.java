@@ -11,8 +11,6 @@ package cern.colt.matrix;
 import cern.colt.matrix.impl.DenseDoubleMatrix2D;
 import cern.colt.matrix.impl.RCDoubleMatrix2D;
 import cern.colt.matrix.impl.SparseDoubleMatrix2D;
-import cern.jet.math.Functions;
-
 /**
 Factory for convenient construction of 2-d matrices holding <tt>double</tt> 
   cells. Also provides convenient methods to compose (concatenate) and decompose 
@@ -169,7 +167,7 @@ Example:
 */
 public DoubleMatrix2D ascending(int rows, int columns) {
 	cern.jet.math.Functions F = cern.jet.math.Functions.functions;
-	return descending(rows,columns).assign(Functions.chain(Functions.neg, Functions.minus(columns*rows)));
+	return descending(rows,columns).assign(F.chain(F.neg,F.minus(columns*rows)));
 }
 /**
 Checks whether the given array is rectangular, that is, whether all rows have the same number of columns.
@@ -729,7 +727,7 @@ The values are copied.
 @param rows  the number of rows.
 @exception  IllegalArgumentException <tt>values.length</tt> must be a multiple of <tt>rows</tt>.
 */
-public DoubleMatrix2D make(double[] values, int rows) {
+public DoubleMatrix2D make(double values[], int rows) {
 	int columns = (rows != 0 ? values.length/rows : 0);
 	if (rows*columns != values.length) 
 		throw new IllegalArgumentException("Array length must be a multiple of m.");
@@ -832,8 +830,8 @@ public DoubleMatrix2D sample(DoubleMatrix2D matrix, double value, double nonZero
 	cern.jet.random.sampling.RandomSamplingAssistant sampler = new cern.jet.random.sampling.RandomSamplingAssistant(n,size,new cern.jet.random.engine.MersenneTwister());
 	for (int i=0; i < size; i++) {
 		if (sampler.sampleNextElement()) {
-			int row = (i/columns);
-			int column = (i%columns);
+			int row = (int) (i/columns);
+			int column = (int) (i%columns);
 			matrix.set(row,column, value);
 		}
 	}

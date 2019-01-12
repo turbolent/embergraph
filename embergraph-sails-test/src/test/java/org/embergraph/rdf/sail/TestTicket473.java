@@ -128,9 +128,10 @@ public class TestTicket473 extends TestCase {
 
     final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
     final EmbergraphSailRepositoryConnection conn =
-        repo
-            //                .getReadWriteConnection();
-            .getUnisolatedConnection();
+        (EmbergraphSailRepositoryConnection)
+            repo
+                //                .getReadWriteConnection();
+                .getUnisolatedConnection();
     conn.setAutoCommit(false);
 
     try {

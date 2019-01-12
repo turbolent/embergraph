@@ -79,7 +79,7 @@ public class TestRelationLocator extends AbstractTripleStoreTestCase {
 
       {
         // the located store can find its relations.
-        final SPORelation foundSPORelation = foundStore.getSPORelation();
+        final SPORelation foundSPORelation = (SPORelation) foundStore.getSPORelation();
 
         assertNotNull(foundSPORelation);
 
@@ -95,7 +95,7 @@ public class TestRelationLocator extends AbstractTripleStoreTestCase {
       {
         // the located store can find its relations.
         final LexiconRelation foundLexiconRelation =
-            foundStore.getLexiconRelation();
+            (LexiconRelation) foundStore.getLexiconRelation();
 
         assertNotNull(foundLexiconRelation);
 

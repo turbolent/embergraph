@@ -19,5 +19,5 @@ public interface IntFunction {
    * @param argument argument passed to the function.
    * @return the result of the function.
    */
-  int apply(int argument);
+  public abstract int apply(int argument);
 }

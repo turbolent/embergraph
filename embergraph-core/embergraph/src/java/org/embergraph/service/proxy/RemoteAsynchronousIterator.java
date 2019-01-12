@@ -94,6 +94,6 @@ public interface RemoteAsynchronousIterator<E> extends Remote {
      *
      * @return The de-serialized element.
      */
-    E get();
+    public E get();
   }
 }

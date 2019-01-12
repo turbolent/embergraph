@@ -39,7 +39,7 @@ public interface ISlice extends Serializable {
    * The first solution to be returned to the caller. A value of ZERO (0) indicates that all
    * solutions should be returned.
    */
-  long getOffset();
+  public long getOffset();
 
   /**
    * The maximum #of solutions to be returned to the caller. A value of {@link Long#MAX_VALUE}
@@ -49,11 +49,11 @@ public interface ISlice extends Serializable {
    *     of ZERO (0L) is interpreted as NO limit and a limit of {@link Long#MAX_VALUE} is
    *     interpreted as ZERO (0L) (that is, also no limit).
    */
-  long getLimit();
+  public long getLimit();
 
   /**
    * The index of the last solution that we will generate (OFFSET + LIMIT). If OFFSET + LIMIT would
    * be greater than {@link Long#MAX_VALUE}, then use {@link Long#MAX_VALUE} instead.
    */
-  long getLast();
+  public long getLast();
 }

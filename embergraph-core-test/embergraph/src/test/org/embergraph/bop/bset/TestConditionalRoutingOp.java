@@ -133,10 +133,12 @@ public class TestConditionalRoutingOp extends TestCase2 {
         new ConditionalRoutingOp(
             new BOp[] {},
             NV.asMap(
-                new NV(BOp.Annotations.BOP_ID, bopId),
-                new NV(
-                    ConditionalRoutingOp.Annotations.CONDITION,
-                    Constraint.wrap(new EQConstant(x, new Constant<String>("Mary"))))));
+                new NV[] {
+                  new NV(BOp.Annotations.BOP_ID, bopId),
+                  new NV(
+                      ConditionalRoutingOp.Annotations.CONDITION,
+                      Constraint.wrap(new EQConstant(x, new Constant<String>("Mary")))),
+                }));
 
     // the expected solutions (default sink).
     final IBindingSet[] expected =

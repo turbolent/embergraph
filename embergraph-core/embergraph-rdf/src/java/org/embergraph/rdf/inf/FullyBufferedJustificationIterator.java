@@ -122,7 +122,12 @@ public class FullyBufferedJustificationIterator implements IJustificationIterato
 
     assert i <= numJustifications;
 
-    return i != numJustifications;
+    if (i == numJustifications) {
+
+      return false;
+    }
+
+    return true;
   }
 
   public Justification next() {

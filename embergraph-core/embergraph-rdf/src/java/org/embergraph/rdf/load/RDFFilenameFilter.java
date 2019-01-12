@@ -63,8 +63,10 @@ public class RDFFilenameFilter implements FilenameFilter, Serializable {
 
     if (name.endsWith(".zip")) {
       final String s = name.substring(0, name.length() - 4);
-      // recognizable as gzip'd RDF.
-      return RDFFormat.forFileName(s) != null;
+      if (RDFFormat.forFileName(s) != null) {
+        // recognizable as gzip'd RDF.
+        return true;
+      }
     }
 
     return false;

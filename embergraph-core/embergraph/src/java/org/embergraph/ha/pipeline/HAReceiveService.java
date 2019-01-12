@@ -118,13 +118,13 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  private enum RunState {
+  private static enum RunState {
     Start(0),
     Running(1),
     ShuttingDown(2),
     Shutdown(3);
 
-    RunState(final int level) {
+    private RunState(final int level) {
 
       this.level = level;
     }
@@ -808,7 +808,7 @@ public class HAReceiveService<M extends HAMessageWrapper> extends Thread {
 
           while (iter.hasNext()) {
 
-            final SelectionKey key = iter.next();
+            final SelectionKey key = (SelectionKey) iter.next();
 
             iter.remove();
 

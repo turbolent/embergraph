@@ -62,7 +62,7 @@ public class InlinePrefixedFixedWidthIntegerURIHandler extends InlineLocalNameIn
     }
 
     final String intValue =
-        getPackedValueString(localName.substring(this.prefix.length()));
+        getPackedValueString(localName.substring(this.prefix.length(), localName.length()));
 
     return super.createInlineIV(intValue);
   }

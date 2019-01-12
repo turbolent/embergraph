@@ -64,5 +64,5 @@ public enum OverflowActionEnum {
    * where the left-sibling has most of the key range and the right-sibling has the tail of the key
    * range.
    */
-  TailSplit
+  TailSplit;
 }

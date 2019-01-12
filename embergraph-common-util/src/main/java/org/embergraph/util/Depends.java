@@ -44,7 +44,7 @@ public class Depends {
 
     /** The license URL. */
     String licenseURL();
-  }
+  };
 
   private static class OrderByName implements Comparator<Dependency> {
 

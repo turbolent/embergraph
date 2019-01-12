@@ -34,19 +34,19 @@ public interface TransformationStrategy<T> extends Serializable {
    * @param object the object to be turned into bit representation.
    * @return a bit vector representation of <code>object</code>.
    */
-  BitVector toBitVector(T object);
+  public BitVector toBitVector(T object);
 
   /**
    * The (approximate) number of bits occupied by this transformation.
    *
    * @return the (approximate) number of bits occupied by this transformation.
    */
-  long numBits();
+  public long numBits();
 
   /**
    * Returns a copy of this transformation strategy.
    *
    * @return a copy of this transformation strategy.
    */
-  TransformationStrategy<T> copy();
+  public TransformationStrategy<T> copy();
 }

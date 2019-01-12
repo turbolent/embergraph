@@ -113,7 +113,9 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
         //				"testInsertWhereGraph",
         new LinkedHashSet<BufferMode>(
             Arrays.asList(
-                BufferMode.Transient, BufferMode.DiskWORM, BufferMode.MemStore, BufferMode.DiskRW)),
+                new BufferMode[] {
+                  BufferMode.Transient, BufferMode.DiskWORM, BufferMode.MemStore, BufferMode.DiskRW,
+                })),
         TestMode.quads);
   }
 
@@ -1234,7 +1236,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update).evaluate();
+    m_repo.prepareUpdate(update.toString()).evaluate();
 
     assertFalse(hasStatement(null, null, null, false));
   }
@@ -1266,7 +1268,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update).evaluate();
+    m_repo.prepareUpdate(update.toString()).evaluate();
 
     assertFalse(hasStatement(null, null, null, false, graph1));
     assertFalse(hasStatement(null, null, null, false, graph2));
@@ -1290,7 +1292,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //        System.err.println(dumpStore());
 
     //        operation.execute();
-    m_repo.prepareUpdate(update).evaluate();
+    m_repo.prepareUpdate(update.toString()).evaluate();
 
     assertTrue(hasStatement(null, null, null, false, graph1));
     assertTrue(hasStatement(null, null, null, false, graph2));
@@ -1309,7 +1311,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update).evaluate();
+    m_repo.prepareUpdate(update.toString()).evaluate();
 
     assertFalse(hasStatement(null, null, null, false));
   }
@@ -1342,7 +1344,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     //
     //        operation.execute();
 
-    m_repo.prepareUpdate(update).evaluate();
+    m_repo.prepareUpdate(update.toString()).evaluate();
 
     assertFalse(hasStatement(null, null, null, false, graph1));
     assertFalse(hasStatement(null, null, null, false, graph2));
@@ -1365,7 +1367,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
 
     //        operation.execute();
 
-    m_repo.prepareUpdate(update).evaluate();
+    m_repo.prepareUpdate(update.toString()).evaluate();
 
     assertTrue(hasStatement(null, null, null, false, graph1));
     assertTrue(hasStatement(null, null, null, false, graph2));
@@ -1785,8 +1787,7 @@ public class TestSparqlUpdate<S extends IIndexManager> extends AbstractTestNanoS
     Update,
     DropAll,
     LoadFile
-  }
-
+  };
   /** A stress test written to look for stochastic behaviors in SPARQL UPDATE for GROUP COMMIT. */
   public void testStressInsertWhereGraph() throws Exception {
 

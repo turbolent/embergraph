@@ -175,7 +175,7 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  private enum OpCode {
+  private static enum OpCode {
 
     /**
      * Scatter-split an index partition (takes one index partition and produces N index partitions,
@@ -191,8 +191,8 @@ public class TestMasterTaskWithSplits extends AbstractKeyRangeMasterTestCase {
     /**
      * This is not an index partition operation but rather is used to signal the end of the test.
      */
-    Done
-  }
+    Done;
+  };
 
   /**
    * Class models an operation and the delay until it occurs. A sequence of such operations forms a

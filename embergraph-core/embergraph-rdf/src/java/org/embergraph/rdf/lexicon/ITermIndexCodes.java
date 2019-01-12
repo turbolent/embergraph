@@ -41,19 +41,19 @@ package org.embergraph.rdf.lexicon;
 public interface ITermIndexCodes {
 
   /** indicates a URI. */
-  byte TERM_CODE_URI = 0x01;
+  public static final byte TERM_CODE_URI = 0x01;
 
   /** indicates a plain literal. */
-  byte TERM_CODE_LIT = 0x02;
+  public static final byte TERM_CODE_LIT = 0x02;
 
   /** indicates a literal with a language code. */
-  byte TERM_CODE_LCL = 0x03;
+  public static final byte TERM_CODE_LCL = 0x03;
 
   /** indicates a literal with a data type URI. */
-  byte TERM_CODE_DTL = 0x04;
+  public static final byte TERM_CODE_DTL = 0x04;
 
   /** indicates a blank node. */
-  byte TERM_CODE_BND = 0x05;
+  public static final byte TERM_CODE_BND = 0x05;
 
   //    /**
   //     * Indicates a statement identifier (used for statements about statements

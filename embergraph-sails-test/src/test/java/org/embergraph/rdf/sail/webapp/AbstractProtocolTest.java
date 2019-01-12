@@ -59,7 +59,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
 
   protected interface RequestFactory {
     HttpUriRequest createRequest(String... params);
-  }
+  };
 
   protected static final String SELECT = "SELECT (1 as ?one){}";
   protected static final String ASK = "ASK WHERE {}";
@@ -176,7 +176,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
    *
    * @param argv
    */
-  public static void main(String[] argv) {
+  public static void main(String argv[]) {
     for (final String t :
         new String[] {
           "text/html ; charset=iso-8856-1",
@@ -283,7 +283,7 @@ public abstract class AbstractProtocolTest extends AbstractTestNanoSparqlClient<
         params.put(key, new String[] {value});
       } else {
         // horridly inefficient, never called?
-        final String[] nval = new String[val.length + 1];
+        final String nval[] = new String[val.length + 1];
         System.arraycopy(val, 0, nval, 0, val.length);
         nval[val.length] = value;
         params.put(key, nval);

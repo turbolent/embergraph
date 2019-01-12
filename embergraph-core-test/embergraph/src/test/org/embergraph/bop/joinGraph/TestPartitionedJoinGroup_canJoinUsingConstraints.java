@@ -420,12 +420,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
                   new BOp[] {
                     simProperty1, new MathBOp(origProperty1, new Constant<Integer>(120), PLUS)
                   },
-                  NV.asMap(new NV(OP, LT))),
+                  NV.asMap(new NV[] {new NV(OP, LT)})),
               new MyCompareOp(
                   new BOp[] {
                     simProperty1, new MathBOp(origProperty1, new Constant<Integer>(120), MINUS)
                   },
-                  NV.asMap(new NV(OP, GT)))));
+                  NV.asMap(new NV[] {new NV(OP, GT)}))));
 
   /**
    * FILTER (?simProperty2 < (?origProperty2 + 170) && ?simProperty2 > (?origProperty2 - 170))
@@ -441,12 +441,12 @@ public class TestPartitionedJoinGroup_canJoinUsingConstraints extends TestCase2 
                   new BOp[] {
                     simProperty2, new MathBOp(origProperty2, new Constant<Integer>(170), PLUS)
                   },
-                  NV.asMap(new NV(OP, LT))),
+                  NV.asMap(new NV[] {new NV(OP, LT)})),
               new MyCompareOp(
                   new BOp[] {
                     simProperty2, new MathBOp(origProperty2, new Constant<Integer>(170), MINUS)
                   },
-                  NV.asMap(new NV(OP, GT)))));
+                  NV.asMap(new NV[] {new NV(OP, GT)}))));
 
   /** The constraints on the join graph. */
   final IConstraint[] constraints = new IConstraint[] {c0, c1, c2};

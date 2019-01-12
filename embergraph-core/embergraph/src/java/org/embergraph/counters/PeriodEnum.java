@@ -18,7 +18,7 @@ public enum PeriodEnum {
   /** */
   Days(24 * 60 * 60 * 1000L);
 
-  PeriodEnum(final long basePeriodMillis) {
+  private PeriodEnum(final long basePeriodMillis) {
 
     this.basePeriodMillis = basePeriodMillis;
   }

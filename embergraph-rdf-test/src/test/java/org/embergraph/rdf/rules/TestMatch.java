@@ -204,13 +204,13 @@ public class TestMatch extends AbstractTripleStoreTestCase {
             }
 
             assertEquals(
-                "s", expectedBindingSet.get("s"), actualBindingSet.get(Var.var("s")).get());
+                "s", expectedBindingSet.get("s"), (Value) actualBindingSet.get(Var.var("s")).get());
 
             assertEquals(
-                "t", expectedBindingSet.get("t"), actualBindingSet.get(Var.var("t")).get());
+                "t", expectedBindingSet.get("t"), (Value) actualBindingSet.get(Var.var("t")).get());
 
             assertEquals(
-                "p", expectedBindingSet.get("p"), actualBindingSet.get(Var.var("p")).get());
+                "p", expectedBindingSet.get("p"), (Value) actualBindingSet.get(Var.var("p")).get());
           }
 
           if (!expected.isEmpty()) {

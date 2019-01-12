@@ -114,7 +114,7 @@ public abstract class AbstractSubtask<
 
     this.src = buffer.iterator();
 
-    this.stats = master.stats.getSubtaskStats(locator);
+    this.stats = (HS) master.stats.getSubtaskStats(locator);
   }
 
   public HS call() throws Exception {

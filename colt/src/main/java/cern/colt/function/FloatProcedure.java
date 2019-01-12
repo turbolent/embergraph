@@ -25,5 +25,5 @@ public interface FloatProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  boolean apply(float element);
+  public abstract boolean apply(float element);
 }

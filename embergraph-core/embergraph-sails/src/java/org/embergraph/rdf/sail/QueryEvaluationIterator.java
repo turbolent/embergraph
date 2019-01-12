@@ -52,7 +52,7 @@ public class QueryEvaluationIterator<T> implements CloseableIteration<T, QueryEv
 
     try {
 
-      return src.next();
+      return (T) src.next();
 
     } catch (SailException ex) {
 

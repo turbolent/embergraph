@@ -332,7 +332,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean contains(final CharSequence s) {
     int i = d, l = s.length();
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     while (i-- != 0) if (!get(bits, hash(s, l, i))) return false;
     return true;
   }
@@ -347,7 +347,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean contains(final byte[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
@@ -362,7 +362,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean contains(final short[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
@@ -377,7 +377,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean contains(final char[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
@@ -392,7 +392,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean contains(final int[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
@@ -407,7 +407,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean contains(final long[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
@@ -422,7 +422,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean contains(final float[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
@@ -437,7 +437,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean contains(final double[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     while (i-- != 0) if (!get(bits, hash(a, l, i))) return false;
     return true;
   }
@@ -451,7 +451,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean add(final CharSequence s) {
     int i = d, l = s.length();
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(s, l, i));
     if (!alreadySet) size++;
@@ -467,7 +467,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean add(final byte[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
@@ -483,7 +483,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean add(final short[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
@@ -499,7 +499,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean add(final char[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
@@ -515,7 +515,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean add(final int[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
@@ -531,7 +531,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean add(final long[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
@@ -547,7 +547,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean add(final float[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;
@@ -563,7 +563,7 @@ public class BloomFilter implements Serializable {
    */
   public boolean add(final double[] a) {
     int i = d, l = a.length;
-    long[] bits = this.bits;
+    long bits[] = this.bits;
     boolean alreadySet = true;
     while (i-- != 0) alreadySet &= set(bits, hash(a, l, i));
     if (!alreadySet) size++;

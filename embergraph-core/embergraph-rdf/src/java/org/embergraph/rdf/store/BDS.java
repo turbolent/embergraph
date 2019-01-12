@@ -52,7 +52,7 @@ public interface BDS {
    * @see #RANK
    * @see #NUM_MATCHED_TOKENS
    */
-  String NAMESPACE = "http://www.embergraph.org/rdf/search#";
+  final String NAMESPACE = "http://www.embergraph.org/rdf/search#";
 
   /**
    * The name of a magic predicate recognized in SPARQL queries when it occurs in statement patterns
@@ -76,7 +76,7 @@ public interface BDS {
    *
    * <p>Note: The context position should be unbound when using statement identifiers.
    */
-  URI SEARCH = new URIImpl(NAMESPACE + "search");
+  final URI SEARCH = new URIImpl(NAMESPACE + "search");
 
   /**
    * Magic predicate used to query for free text search metadata, reporting the relevance of the
@@ -101,7 +101,7 @@ public interface BDS {
    * @see #MIN_RELEVANCE
    * @see #MAX_RELEVANCE
    */
-  URI RELEVANCE = new URIImpl(NAMESPACE + "relevance");
+  final URI RELEVANCE = new URIImpl(NAMESPACE + "relevance");
 
   /**
    * Magic predicate used to query for free text search metadata, reporting the rank (origin ONE
@@ -125,7 +125,7 @@ public interface BDS {
    * @see #MIN_RANK
    * @see #MAX_RANK
    */
-  URI RANK = new URIImpl(NAMESPACE + "rank");
+  final URI RANK = new URIImpl(NAMESPACE + "rank");
 
   /**
    * Magic predicate used to limit the maximum rank of the free text search results to the specified
@@ -150,10 +150,10 @@ public interface BDS {
    * next "page" of free text results by changing the values for the {@link #MIN_RANK} AND {@link
    * #MAX_RANK} query hints.
    */
-  URI MAX_RANK = new URIImpl(NAMESPACE + "maxRank");
+  final URI MAX_RANK = new URIImpl(NAMESPACE + "maxRank");
 
   /** The default for {@link #MAX_RANK}. */
-  int DEFAULT_MAX_RANK = Integer.MAX_VALUE;
+  final int DEFAULT_MAX_RANK = Integer.MAX_VALUE;
 
   /**
    * Magic predicate used to limit the minimum rank of the free text search results to the specified
@@ -173,13 +173,13 @@ public interface BDS {
    *
    * The default is {@value #DEFAULT_MIN_RANK}.
    */
-  URI MIN_RANK = new URIImpl(NAMESPACE + "minRank");
+  final URI MIN_RANK = new URIImpl(NAMESPACE + "minRank");
 
   /**
    * The default for {@link #MIN_RANK} is 1, full text search results will start with the #1 most
    * relevant hit by default.
    */
-  int DEFAULT_MIN_RANK = 1;
+  final int DEFAULT_MIN_RANK = 1;
 
   /**
    * Magic predicate used to query for free text search metadata. Use in conjunction with {@link
@@ -202,9 +202,9 @@ public interface BDS {
    * this can drag in way too many unrelated results. The default is {@value
    * #DEFAULT_MIN_RELEVANCE}.
    */
-  URI MIN_RELEVANCE = new URIImpl(NAMESPACE + "minRelevance");
+  final URI MIN_RELEVANCE = new URIImpl(NAMESPACE + "minRelevance");
 
-  double DEFAULT_MIN_RELEVANCE = 0.0d;
+  final double DEFAULT_MIN_RELEVANCE = 0.0d;
 
   /**
    * Magic predicate used to query for free text search metadata. Use in conjunction with {@link
@@ -227,10 +227,10 @@ public interface BDS {
    * this can drag in way too many unrelated results. The default maximum relevance is {@value
    * #DEFAULT_MAX_RELEVANCE}.
    */
-  URI MAX_RELEVANCE = new URIImpl(NAMESPACE + "maxRelevance");
+  final URI MAX_RELEVANCE = new URIImpl(NAMESPACE + "maxRelevance");
 
   /** The default value for {@link #MAX_RELEVANCE} unless overridden. */
-  double DEFAULT_MAX_RELEVANCE = 1.0d;
+  final double DEFAULT_MAX_RELEVANCE = 1.0d;
 
   /**
    * Magic predicate used to query for free text search metadata indicates that all terms in the
@@ -250,9 +250,9 @@ public interface BDS {
    *
    * </pre>
    */
-  URI MATCH_ALL_TERMS = new URIImpl(NAMESPACE + "matchAllTerms");
+  final URI MATCH_ALL_TERMS = new URIImpl(NAMESPACE + "matchAllTerms");
 
-  boolean DEFAULT_MATCH_ALL_TERMS = false;
+  final boolean DEFAULT_MATCH_ALL_TERMS = false;
 
   /**
    * Magic predicate used to query for free text search metadata indicates that only exact string
@@ -274,9 +274,9 @@ public interface BDS {
    * <p>This operation will be rather expensive as it will require materializing all the hits to
    * check their values.
    */
-  URI MATCH_EXACT = new URIImpl(NAMESPACE + "matchExact");
+  final URI MATCH_EXACT = new URIImpl(NAMESPACE + "matchExact");
 
-  boolean DEFAULT_MATCH_EXACT = false;
+  final boolean DEFAULT_MATCH_EXACT = false;
 
   /**
    * Magic predicate used to query for free text search metadata indicates that only search results
@@ -298,9 +298,9 @@ public interface BDS {
    * <p>This operation will be rather expensive as it will require materializing all the hits to
    * check their values.
    */
-  URI MATCH_REGEX = new URIImpl(NAMESPACE + "matchRegex");
+  final URI MATCH_REGEX = new URIImpl(NAMESPACE + "matchRegex");
 
-  String DEFAULT_MATCH_REGEX = null;
+  final String DEFAULT_MATCH_REGEX = null;
 
   /**
    * <strong>Prefix matching is now indicated using a wildcard</strong>
@@ -340,11 +340,10 @@ public interface BDS {
    * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/803" > prefixMatch does not work
    *     in full text search </a>
    */
-  @Deprecated
-  URI PREFIX_MATCH = new URIImpl(NAMESPACE + "prefixMatch");
+  @Deprecated final URI PREFIX_MATCH = new URIImpl(NAMESPACE + "prefixMatch");
 
   /** @deprecated This option is now invoked using a wildcard. */
-  boolean DEFAULT_PREFIX_MATCH = false;
+  final boolean DEFAULT_PREFIX_MATCH = false;
 
   /**
    * Magic predicate used to query for free text search metadata. Use in conjunction with {@link
@@ -367,17 +366,15 @@ public interface BDS {
    *
    * @deprecated Feature was never completed due to scalability issues. See BZLG-1548, BLZG-563.
    */
-  @Deprecated
-  URI SUBJECT_SEARCH = new URIImpl(NAMESPACE + "subjectSearch");
+  @Deprecated final URI SUBJECT_SEARCH = new URIImpl(NAMESPACE + "subjectSearch");
 
-  @Deprecated
-  boolean DEFAULT_SUBJECT_SEARCH = false;
+  @Deprecated final boolean DEFAULT_SUBJECT_SEARCH = false;
 
   /**
    * Magic predicate used for the "search in search" service. Also serves as the identifier for the
    * service itself.
    */
-  URI SEARCH_IN_SEARCH = new URIImpl(NAMESPACE + "searchInSearch");
+  final URI SEARCH_IN_SEARCH = new URIImpl(NAMESPACE + "searchInSearch");
 
   /**
    * Magic predicate used to query for free text search metadata to set a deadline in milliseconds
@@ -398,10 +395,10 @@ public interface BDS {
    *
    * <p>Timeout specified in milliseconds.
    */
-  URI SEARCH_TIMEOUT = new URIImpl(NAMESPACE + "searchTimeout");
+  final URI SEARCH_TIMEOUT = new URIImpl(NAMESPACE + "searchTimeout");
 
   /** The default timeout for a free text search (milliseconds). */
-  long DEFAULT_TIMEOUT = Long.MAX_VALUE;
+  final long DEFAULT_TIMEOUT = Long.MAX_VALUE;
 
   /**
    * Magic predicate to specify that we want a range count done on the search. Bind the range count
@@ -409,5 +406,5 @@ public interface BDS {
    * rather than materializing the hits into an array. This is only possible if matchExact == false
    * and matchRegex == null.
    */
-  URI RANGE_COUNT = new URIImpl(NAMESPACE + "rangeCount");
+  final URI RANGE_COUNT = new URIImpl(NAMESPACE + "rangeCount");
 }

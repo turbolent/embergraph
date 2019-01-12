@@ -141,7 +141,7 @@ public class StaticAnalysisBase {
 
     } else if (op instanceof ServiceNode) {
 
-      // @see <a href="http://trac.blazegraph.com/ticket/816">http://trac.blazegraph.com/ticket/816</a>
+      // @see http://trac.blazegraph.com/ticket/816
       final ServiceNode serviceNode = (ServiceNode) op;
 
       // Look for the SERVICE URI, it might be a variable as well.
@@ -331,7 +331,7 @@ public class StaticAnalysisBase {
    */
   protected void addAll(final Set<IVariable<?>> bindings, final IGroupMemberNode op) {
 
-    final Iterator<IVariable<?>> it = BOpUtility.getSpannedVariables(op);
+    final Iterator<IVariable<?>> it = BOpUtility.getSpannedVariables((BOp) op);
 
     while (it.hasNext()) {
 
@@ -381,12 +381,17 @@ public class StaticAnalysisBase {
 
     fvars.removeAll(vars);
 
-    /*
-     * The variables for this filter are all present in the given set of
-     * variables.
-     */
-    return fvars.isEmpty();
+    if (fvars.isEmpty()) {
 
+      /*
+       * The variables for this filter are all present in the given set of
+       * variables.
+       */
+
+      return true;
+    }
+
+    return false;
   }
 
   /**
@@ -402,7 +407,7 @@ public class StaticAnalysisBase {
 
     for (int i = 0; i < 3; i++) {
 
-      final TermNode tmp = sp.get(0);
+      final TermNode tmp = (TermNode) sp.get(0);
 
       if (tmp.isVariable()) {
 

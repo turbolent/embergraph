@@ -41,7 +41,7 @@ public class TestMultipartContent extends TestCase {
 
     final ContentProvider content = new EntityContentProvider(entity);
 
-    System.out.println(entity.getContentType().toString());
+    System.out.println(new String(entity.getContentType().toString()));
   }
 
   private HttpEntity getUpdateEntity() {

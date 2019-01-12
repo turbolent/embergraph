@@ -18,7 +18,7 @@ public interface Double9Function {
    *
    * @return the result of the function.
    */
-  double apply(
+  public abstract double apply(
       double a00,
       double a01,
       double a02,

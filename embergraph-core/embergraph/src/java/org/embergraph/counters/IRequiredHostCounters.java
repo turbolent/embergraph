@@ -104,4 +104,4 @@ public interface IRequiredHostCounters extends ICounterHierarchy {
 
   /** Disk bytes written per second for the host (vmstat). */
   String PhysicalDisk_BytesWrittenPerSec = PhysicalDisk + ps + "Bytes Written Per Second";
-}
+};

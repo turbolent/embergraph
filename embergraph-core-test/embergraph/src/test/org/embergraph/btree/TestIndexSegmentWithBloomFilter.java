@@ -320,7 +320,7 @@ public class TestIndexSegmentWithBloomFilter extends AbstractBTreeTestCase {
       }
 
       // branching factors used for the index segment.
-      final int[] branchingFactors = new int[]{3, 4, 5, 10, 20, 60, 100, 256, 1024, 4096, 8192};
+      final int branchingFactors[] = new int[] {3, 4, 5, 10, 20, 60, 100, 256, 1024, 4096, 8192};
 
       for (int i = 0; i < branchingFactors.length; i++) {
 

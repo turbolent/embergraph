@@ -56,7 +56,7 @@ public interface WordReader extends Serializable {
    * @return true if a new word was processed, false otherwise (in which case both <code>word</code>
    *     and <code>nonWord</code> are unchanged).
    */
-  boolean next(MutableString word, MutableString nonWord) throws IOException;
+  public abstract boolean next(MutableString word, MutableString nonWord) throws IOException;
 
   /**
    * Resets the internal state of this word reader, which will start again reading from the given
@@ -65,7 +65,7 @@ public interface WordReader extends Serializable {
    * @param reader the new reader providing characters.
    * @return this word reader.
    */
-  WordReader setReader(Reader reader);
+  public abstract WordReader setReader(Reader reader);
 
   /**
    * Returns a copy of this word reader.
@@ -75,5 +75,5 @@ public interface WordReader extends Serializable {
    *
    * @return a copy of this word reader.
    */
-  WordReader copy();
+  public abstract WordReader copy();
 }

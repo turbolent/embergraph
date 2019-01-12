@@ -38,15 +38,15 @@ public class SliceNode extends SolutionModifierBase {
   public interface Annotations extends SolutionModifierBase.Annotations {
 
     /** The first solution to be returned to the caller (origin ZERO). */
-    String OFFSET = "offset";
+    final String OFFSET = "offset";
 
-    long DEFAULT_OFFSET = 0L;
+    final long DEFAULT_OFFSET = 0L;
 
     /** The maximum #of solutions to be returned to the caller (default is all). */
-    String LIMIT = "limit";
+    final String LIMIT = "limit";
 
     /** A value of {@link Long#MAX_VALUE} is used to indicate that there is no limit. */
-    long DEFAULT_LIMIT = Long.MAX_VALUE;
+    final long DEFAULT_LIMIT = Long.MAX_VALUE;
   }
 
   /** Deep copy constructor. */

@@ -25,5 +25,5 @@ public interface ObjectMatrix2DProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  boolean apply(ObjectMatrix2D element);
+  public abstract boolean apply(ObjectMatrix2D element);
 }

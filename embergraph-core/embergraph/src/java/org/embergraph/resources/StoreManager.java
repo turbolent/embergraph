@@ -130,7 +130,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public interface Options extends org.embergraph.journal.Options {
+  public static interface Options extends org.embergraph.journal.Options {
 
     /**
      * The property whose value is the name of the directory in which the store files will be
@@ -228,7 +228,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public interface IStoreManagerCounters {
+  public static interface IStoreManagerCounters {
 
     /** The configured data directory. */
     String DataDir = "DataDir";
@@ -968,7 +968,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
     // true iff transient journals is requested.
     isTransient =
         BufferMode.valueOf(
-                properties.getProperty(Options.BUFFER_MODE, Options.DEFAULT_BUFFER_MODE))
+                properties.getProperty(Options.BUFFER_MODE, Options.DEFAULT_BUFFER_MODE.toString()))
             == BufferMode.Transient;
 
     /*
@@ -1741,7 +1741,7 @@ public abstract class StoreManager extends ResourceEvents implements IResourceMa
           + badFiles
           + "}";
     }
-  }
+  };
 
   /**
    * Recursively scan a directory structure identifying all journal and index segment resources and

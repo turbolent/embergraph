@@ -134,7 +134,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
    * @param expected Array of expected cache entry objects in expected order.
    * @param actual Iterator visiting {@link ICacheEntry}objects.
    */
-  public void assertSameEntryOrdering(String msg, ICacheEntry[] expected, Iterator actual) {
+  public void assertSameEntryOrdering(String msg, ICacheEntry expected[], Iterator actual) {
 
     int i = 0;
 
@@ -243,7 +243,7 @@ public abstract class AbstractCachePolicyTest extends TestCase2 {
       if (events.size() == 0) {
         throw new IllegalStateException("No expected events: " + entry);
       }
-      Event e = events.remove(0); // pop off next event.
+      Event e = (Event) events.remove(0); // pop off next event.
       assertEquals("oid", e.expectedOid, entry.getKey());
       assertTrue("obj", e.expectedObj == entry.getObject()); // compare by reference not equals().
       assertEquals("dirty", e.expectedDirty, entry.isDirty());

@@ -314,7 +314,9 @@ public class FileLockUtility {
 
       final String str = r.readLine();
 
-      return pid.equals(str);
+      if (pid.equals(str)) return true;
+
+      return false;
 
     } finally {
 

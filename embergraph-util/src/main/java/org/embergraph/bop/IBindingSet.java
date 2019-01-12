@@ -43,7 +43,7 @@ public interface IBindingSet extends Cloneable, Serializable {
    * @return <code>true</code> if the variable is bound.
    * @throws IllegalArgumentException if <i>var</i> is <code>null</code>.
    */
-  boolean isBound(IVariable var);
+  public boolean isBound(IVariable var);
 
   /**
    * Bind the variable to the value.
@@ -53,7 +53,7 @@ public interface IBindingSet extends Cloneable, Serializable {
    * @throws IllegalArgumentException if <i>var</i> is <code>null</code>.
    * @throws IllegalArgumentException if <i>val</i> is <code>null</code>.
    */
-  void set(IVariable var, IConstant val);
+  public void set(IVariable var, IConstant val);
 
   /**
    * Return the binding for the variable.
@@ -62,7 +62,7 @@ public interface IBindingSet extends Cloneable, Serializable {
    * @return the binding for the variable -or- <code>null</code> iff the variable is not bound.
    * @throws IllegalArgumentException if <i>var</i> is <code>null</code>.
    */
-  IConstant get(IVariable var);
+  public IConstant get(IVariable var);
 
   /**
    * Clear any binding for the variable.
@@ -70,19 +70,19 @@ public interface IBindingSet extends Cloneable, Serializable {
    * @param var The variable.
    * @throws IllegalArgumentException if <i>var</i> is <code>null</code>.
    */
-  void clear(IVariable var);
+  public void clear(IVariable var);
 
   /** Clear all bindings. */
-  void clearAll();
+  public void clearAll();
 
   /** <code>true</code> iff there are no variable bindings in the binding set. */
-  boolean isEmpty();
+  public boolean isEmpty();
 
   /** The #of bound variables. */
-  int size();
+  public int size();
 
   /** Visits the bindings. */
-  Iterator<Map.Entry<IVariable, IConstant>> iterator();
+  public Iterator<Map.Entry<IVariable, IConstant>> iterator();
 
   /**
    * Visits the bound variables.
@@ -90,17 +90,17 @@ public interface IBindingSet extends Cloneable, Serializable {
    * @todo The unit tests verify that the implementations do not permit mutation using the iterator,
    *     but that is not actually specified by the API as forbidden.
    */
-  Iterator<IVariable> vars();
+  public Iterator<IVariable> vars();
 
   /** Return a shallow copy of the binding set. */
-  IBindingSet clone();
+  public IBindingSet clone();
 
   /**
    * Return a shallow copy of the binding set, eliminating unnecessary variables.
    *
    * @param variablesToKeep When non-<code>null</code>, only the listed variables are retained.
    */
-  IBindingSet copy(IVariable[] variablesToKeep);
+  public IBindingSet copy(IVariable[] variablesToKeep);
 
   /**
    * Return a shallow copy of the binding set, eliminating unnecessary variables and error values
@@ -108,17 +108,17 @@ public interface IBindingSet extends Cloneable, Serializable {
    *
    * @param variablesToKeep When non-<code>null</code>, only the listed variables are retained.
    */
-  IBindingSet copyMinusErrors(IVariable[] variablesToKeep);
+  public IBindingSet copyMinusErrors(IVariable[] variablesToKeep);
 
   /** @return true if this IBindingSet contains an assignment of an error value */
-  boolean containsErrorValues();
+  public boolean containsErrorValues();
 
   /**
    * True iff the variables and their bound values are the same for the two binding sets.
    *
    * @param o Another binding set.
    */
-  boolean equals(Object o);
+  public boolean equals(Object o);
 
   /**
    * The hash code of a binding is defined as the bit-wise XOR of the hash codes of the {@link
@@ -127,7 +127,7 @@ public interface IBindingSet extends Cloneable, Serializable {
    * does not depend on the order in which the bindings are visited. The hash code reflects the
    * current state of the bindings and must be recomputed if the bindings are changed.
    */
-  int hashCode();
+  public int hashCode();
 
   //	/**
   //	 * Make a copy of the current symbol table (aka current variable bindings)

@@ -15,7 +15,6 @@ import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix1D;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.DoubleMatrix3D;
-import cern.jet.math.Functions;
 import cern.jet.random.engine.RandomEngine;
 /**
  * Basic statistics operations on matrices. Computation of covariance, correlation, distance matrix.
@@ -64,8 +63,7 @@ public class Statistic extends Object {
   public static final VectorVectorFunction EUCLID =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return Math.sqrt(a.aggregate(b,
-              Functions.plus, Functions.chain(Functions.square, Functions.minus)));
+          return Math.sqrt(a.aggregate(b, F.plus, F.chain(F.square, F.minus)));
         }
       };
 
@@ -73,8 +71,7 @@ public class Statistic extends Object {
   public static final VectorVectorFunction BRAY_CURTIS =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus)) / a.aggregate(b, Functions.plus,
-              Functions.plus);
+          return a.aggregate(b, F.plus, F.chain(F.abs, F.minus)) / a.aggregate(b, F.plus, F.plus);
         }
       };
 
@@ -89,7 +86,7 @@ public class Statistic extends Object {
             };
 
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, Functions.plus, fun);
+          return a.aggregate(b, F.plus, fun);
         }
       };
 
@@ -97,7 +94,7 @@ public class Statistic extends Object {
   public static final VectorVectorFunction MAXIMUM =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, Functions.max, Functions.chain(Functions.abs, Functions.minus));
+          return a.aggregate(b, F.max, F.chain(F.abs, F.minus));
         }
       };
 
@@ -105,7 +102,7 @@ public class Statistic extends Object {
   public static final VectorVectorFunction MANHATTAN =
       new VectorVectorFunction() {
         public final double apply(DoubleMatrix1D a, DoubleMatrix1D b) {
-          return a.aggregate(b, Functions.plus, Functions.chain(Functions.abs, Functions.minus));
+          return a.aggregate(b, F.plus, F.chain(F.abs, F.minus));
         }
       };
 
@@ -121,7 +118,7 @@ public class Statistic extends Object {
      * @param y the second argument vector passed to the function.
      * @return the result of the function.
      */
-    double apply(
+    public abstract double apply(
         cern.colt.matrix.DoubleMatrix1D x, cern.colt.matrix.DoubleMatrix1D y);
   }
 

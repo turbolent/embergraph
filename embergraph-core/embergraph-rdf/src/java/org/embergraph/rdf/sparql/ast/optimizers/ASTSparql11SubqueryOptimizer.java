@@ -134,7 +134,7 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
 
     for (int i = 0; i < arity; i++) {
 
-      final BOp child = group.get(i);
+      final BOp child = (BOp) group.get(i);
 
       if (child instanceof GraphPatternGroup<?>) {
 
@@ -273,7 +273,7 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
       final AST2BOpContext context, final StaticAnalysis sa, final QueryRoot queryRoot) {
 
     final Striterator itr2 =
-        new Striterator(BOpUtility.postOrderIterator(queryRoot.getWhereClause()));
+        new Striterator(BOpUtility.postOrderIterator((BOp) queryRoot.getWhereClause()));
 
     itr2.addTypeFilter(SubqueryRoot.class);
 
@@ -338,19 +338,19 @@ public class ASTSparql11SubqueryOptimizer implements IASTOptimizer {
     if ((parent instanceof JoinGroupNode)
         && !((JoinGroupNode) parent).isOptional()
         && !((JoinGroupNode) parent).isMinus()
-        && parent.arity() == 1
+        && ((BOp) parent).arity() == 1
         && parent.getParent() != null
         && !((IGroupNode<?>) parent.getParent() instanceof UnionNode)) {
 
       final IGroupNode<IGroupMemberNode> pp = parent.getParent();
 
       // Replace the sub-select with the include.
-      if (((ASTBase) pp).replaceWith(parent, include) == 0) throw new AssertionError();
+      if (((ASTBase) pp).replaceWith((BOp) parent, include) == 0) throw new AssertionError();
 
     } else {
 
       // Replace the sub-select with the include.
-      if (((ASTBase) parent).replaceWith(subqueryRoot, include) == 0)
+      if (((ASTBase) parent).replaceWith((BOp) subqueryRoot, include) == 0)
         throw new AssertionError();
     }
 

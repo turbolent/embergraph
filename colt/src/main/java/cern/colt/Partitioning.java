@@ -448,19 +448,19 @@ public class Partitioning extends Object {
     return from - 1;
   }
   /** Returns the index of the median of the three indexed elements. */
-  private static int med3(double[] x, int a, int b, int c) {
+  private static int med3(double x[], int a, int b, int c) {
     return (x[a] < x[b]
         ? (x[b] < x[c] ? b : x[a] < x[c] ? c : a)
         : (x[b] > x[c] ? b : x[a] > x[c] ? c : a));
   }
   /** Returns the index of the median of the three indexed elements. */
-  private static int med3(int[] x, int a, int b, int c) {
+  private static int med3(int x[], int a, int b, int c) {
     return (x[a] < x[b]
         ? (x[b] < x[c] ? b : x[a] < x[c] ? c : a)
         : (x[b] > x[c] ? b : x[a] > x[c] ? c : a));
   }
   /** Returns the index of the median of the three indexed chars. */
-  private static int med3(Object[] x, int a, int b, int c, java.util.Comparator comp) {
+  private static int med3(Object x[], int a, int b, int c, java.util.Comparator comp) {
     int ab = comp.compare(x[a], x[b]);
     int ac = comp.compare(x[a], x[c]);
     int bc = comp.compare(x[b], x[c]);

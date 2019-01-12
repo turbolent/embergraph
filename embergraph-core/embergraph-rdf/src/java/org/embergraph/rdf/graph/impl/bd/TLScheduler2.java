@@ -217,7 +217,7 @@ public class TLScheduler2 implements IGASSchedulerImpl {
                 final IArraySlice<Value> orderedSegment =
                     GASImplUtil.compactAndSort(t.getVertices(), t.tmp);
                 f2.copyIntoResetFrontier(off[index], orderedSegment);
-                return null;
+                return (Void) null;
               }
             });
       }

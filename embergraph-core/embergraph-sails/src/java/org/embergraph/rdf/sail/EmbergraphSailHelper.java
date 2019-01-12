@@ -414,11 +414,11 @@ public class EmbergraphSailHelper {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  private enum FederationEnum {
+  private static enum FederationEnum {
     LTS,
     //        LDS,
     //        EDS,
-    JDS
+    JDS;
   }
 
   /**

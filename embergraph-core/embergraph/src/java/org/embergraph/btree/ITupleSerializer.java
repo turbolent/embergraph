@@ -93,7 +93,7 @@ public interface ITupleSerializer<K extends Object, V extends Object>
    * locally configured {@link IKeyBuilder} then your Unicode keys will be encoded based on the
    * {@link Locale} configured for the JVM NOT the factory specified for <i>this</i> index.
    */
-  IKeyBuilder getKeyBuilder();
+  public IKeyBuilder getKeyBuilder();
 
   /**
    * Serialize a facet of an object's state that places the object into the total sort order for the

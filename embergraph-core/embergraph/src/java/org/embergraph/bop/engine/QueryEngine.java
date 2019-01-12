@@ -799,7 +799,7 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
   public void init() {
 
     final FutureTask<Void> ft =
-        new FutureTaskMon<Void>(new QueryEngineTask(priorityQueue, deadlineQueue), null);
+        new FutureTaskMon<Void>(new QueryEngineTask(priorityQueue, deadlineQueue), (Void) null);
 
     if (engineFuture.compareAndSet(null /* expect */, ft)) {
 
@@ -1916,17 +1916,19 @@ public class QueryEngine implements IQueryPeer, IQueryClient, ICounterSetAccess 
 
       final Constructor<? extends IRunningQuery> ctor =
           cls.getConstructor(
-              QueryEngine.class,
-              UUID.class,
-              Boolean.TYPE,
-              IQueryClient.class,
-              PipelineOp.class,
-              IChunkMessage.class);
+              new Class[] {
+                QueryEngine.class,
+                UUID.class,
+                Boolean.TYPE,
+                IQueryClient.class,
+                PipelineOp.class,
+                IChunkMessage.class
+              });
 
       // save reference.
       runningQuery =
           ctor.newInstance(
-              this, queryId, controller, clientProxy, query, realSource);
+              new Object[] {this, queryId, controller, clientProxy, query, realSource});
 
     } catch (Exception ex) {
 

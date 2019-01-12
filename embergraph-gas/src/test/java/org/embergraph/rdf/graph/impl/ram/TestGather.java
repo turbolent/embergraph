@@ -178,7 +178,7 @@ public class TestGather extends AbstractRAMGraphTestCase {
 
       return true;
     }
-  }
+  };
 
   public void testGather_inEdges() throws Exception {
 

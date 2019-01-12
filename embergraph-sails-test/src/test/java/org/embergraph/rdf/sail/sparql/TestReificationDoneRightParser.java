@@ -844,13 +844,13 @@ public class TestReificationDoneRightParser extends AbstractEmbergraphExprBuilde
       // SP(:s :p d) as ?sid1) .
       final EmbergraphStatement s1 =
           valueFactory.createStatement(
-              s, p, d);
+              (EmbergraphResource) s, (EmbergraphURI) p, (EmbergraphValue) d);
       final EmbergraphBNode sid1 = valueFactory.createBNode(s1);
 
       // SP(?sid, :p, 5).
       final EmbergraphStatement s2 =
           valueFactory.createStatement(
-              sid1, order, five);
+              (Resource) sid1, (EmbergraphURI) order, (EmbergraphValue) five);
       final EmbergraphStatement[] data = new EmbergraphStatement[] {s1, s2};
       op.setData(data);
     }

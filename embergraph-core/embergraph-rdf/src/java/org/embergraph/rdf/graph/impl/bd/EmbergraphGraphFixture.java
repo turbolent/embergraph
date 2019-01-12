@@ -46,7 +46,7 @@ public class EmbergraphGraphFixture extends AbstractGraphFixture {
 
     if (sail instanceof EmbergraphSail) {
 
-      sail.__tearDownUnitTest();
+      ((EmbergraphSail) sail).__tearDownUnitTest();
     }
   }
 

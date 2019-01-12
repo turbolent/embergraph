@@ -445,7 +445,7 @@ public class ChunkedMaterializationOp extends PipelineOp {
           continue;
         }
 
-        final IV<?, ?> iv = c.get();
+        final IV<?, ?> iv = (IV<?, ?>) c.get();
 
         if (iv == null) {
 

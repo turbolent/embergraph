@@ -86,8 +86,8 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
   public static class DecoderInputs {
 
     private BitVector shortestCodeWord;
-    private int[] symbol;
-    private int[] length;
+    private int symbol[];
+    private int length[];
 
     /**
      * Ctor may be passed to {@link HuffmanCodec} to obtain the assigned length[] and symbol[] data
@@ -252,7 +252,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
       else {
         value++;
         value <<= length[i] - l;
-        assert !ASSERTS || length[i] > l;
+        if (ASSERTS) assert length[i] > l;
         l = length[i];
       }
       v = LongArrayBitVector.getInstance().length(l);
@@ -362,7 +362,7 @@ public class HuffmanCodec implements PrefixCodec, Serializable {
       else {
         value++;
         value <<= length[i] - l;
-        assert !ASSERTS || length[i] > l;
+        if (ASSERTS) assert length[i] > l;
         l = length[i];
       }
       v = LongArrayBitVector.getInstance().length(l);

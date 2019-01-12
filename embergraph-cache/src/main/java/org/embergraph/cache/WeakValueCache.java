@@ -147,7 +147,7 @@ public final class WeakValueCache<K, T> implements ICachePolicy<K, T> {
    */
   public interface IClearReferenceListener<K> {
 
-    void cleared(K key);
+    public void cleared(K key);
   }
 
   public WeakValueCache(ICachePolicy<K, T> delegate) {

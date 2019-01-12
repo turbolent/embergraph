@@ -307,7 +307,7 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
       // inherit query hints
       copyQueryHintsAndRequiredAnnotations(op.get(0), op.getQueryHints(), op.annotations());
 
-      ((GroupNodeBase<?>) op.getParent()).replaceWith(op, op.get(0));
+      ((GroupNodeBase<?>) op.getParent()).replaceWith(op, (BOp) op.get(0));
     }
 
     //        if (op instanceof GraphPatternGroup<?>) {
@@ -324,7 +324,8 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
    * @param op The operator.
    */
   private static boolean isUnion(final IGroupNode<?> op) {
-    return op instanceof UnionNode;
+    if (op instanceof UnionNode) return true;
+    return false;
   }
 
   /**
@@ -335,7 +336,7 @@ public class ASTEmptyGroupOptimizer implements IASTOptimizer {
   private static boolean isMinus(final IGroupNode<?> op) {
     if (op instanceof IJoinNode) {
       final IJoinNode g = (IJoinNode) op;
-      return g.isMinus();
+      if (g.isMinus()) return true;
     }
     return false;
   }

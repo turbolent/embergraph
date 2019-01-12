@@ -146,9 +146,9 @@ public class KVOList<O> extends KVO<O> {
    * @version $Id$
    * @param <O>
    */
-  public interface Op<O> {
+  public static interface Op<O> {
 
-    void apply(KVO<O> o);
+    public void apply(KVO<O> o);
   }
 
   /**

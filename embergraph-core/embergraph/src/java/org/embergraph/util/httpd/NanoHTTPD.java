@@ -14,7 +14,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -314,15 +313,17 @@ public class NanoHTTPD implements IServiceShutdown {
     if (requestServicePoolSize == 0) {
 
       requestService =
-          Executors.newCachedThreadPool(
-              new DaemonThreadFactory(getClass().getName() + ".requestService"));
+          (ThreadPoolExecutor)
+              Executors.newCachedThreadPool(
+                  new DaemonThreadFactory(getClass().getName() + ".requestService"));
 
     } else {
 
       requestService =
-          Executors.newFixedThreadPool(
-              requestServicePoolSize,
-              new DaemonThreadFactory(getClass().getName() + ".requestService"));
+          (ThreadPoolExecutor)
+              Executors.newFixedThreadPool(
+                  requestServicePoolSize,
+                  new DaemonThreadFactory(getClass().getName() + ".requestService"));
     }
 
     /*
@@ -495,6 +496,7 @@ public class NanoHTTPD implements IServiceShutdown {
       System.in.read();
     } catch (Throwable t) {
     }
+    ;
   }
 
   /**
@@ -735,8 +737,7 @@ public class NanoHTTPD implements IServiceShutdown {
            * TODO This should explicitly use the appropriate encoding
            * for HTTP headers and the HTTP request line. What is that?
            */
-          final String s = new String(_baos.toByteArray(), 0 /* off */, nread /* len */,
-              StandardCharsets.UTF_8);
+          final String s = new String(_baos.toByteArray(), 0 /* off */, nread /* len */, UTF8);
 
           if (log.isTraceEnabled()) log.trace("[" + s + "]");
 
@@ -814,7 +815,7 @@ public class NanoHTTPD implements IServiceShutdown {
 
         if (header != null) {
           for (Map.Entry<String, String> e : header.entrySet()) {
-            final String key = e.getKey();
+            final String key = (String) e.getKey();
             final String value = e.getValue();
             pw.print(key);
             pw.print(": ");
@@ -863,7 +864,7 @@ public class NanoHTTPD implements IServiceShutdown {
         }
       }
     }
-  }
+  };
 
   /** A http request. */
   public static class Request {
@@ -999,7 +1000,7 @@ public class NanoHTTPD implements IServiceShutdown {
   /** URL-encodes everything between "/"-characters. Encodes spaces as '%20' instead of '+'. */
   private static String encodeUri(final String uri) {
     final StringTokenizer st = new StringTokenizer(uri, "/ ", true);
-    final StringBuilder newUri = new StringBuilder();
+    final StringBuilder newUri = new StringBuilder("");
     while (st.hasMoreTokens()) {
       final String tok = st.nextToken();
       if (tok.equals("/")) newUri.append("/");
@@ -1134,7 +1135,7 @@ public class NanoHTTPD implements IServiceShutdown {
       String mime = null;
       final int dot = f.getCanonicalPath().lastIndexOf('.');
       if (dot >= 0)
-        mime = theMimeTypes.get(f.getCanonicalPath().substring(dot + 1).toLowerCase());
+        mime = (String) theMimeTypes.get(f.getCanonicalPath().substring(dot + 1).toLowerCase());
       if (mime == null) mime = MIME_DEFAULT_BINARY;
 
       // Support (simple) skipping:

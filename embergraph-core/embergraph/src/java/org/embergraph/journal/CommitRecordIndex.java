@@ -531,7 +531,7 @@ public class CommitRecordIndex extends BTree {
     @Override
     public byte[] serializeKey(Object obj) {
 
-      return getKeyBuilder().reset().append(obj).getKey();
+      return getKeyBuilder().reset().append((Long) obj).getKey();
     }
 
     /**

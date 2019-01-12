@@ -181,7 +181,7 @@ class BuildViewMetadata {
 
       if (naccepted == 1) {
 
-        acceptedView = accepted.get(0);
+        acceptedView = (BTree) accepted.get(0);
 
       } else {
 

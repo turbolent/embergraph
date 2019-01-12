@@ -32,10 +32,10 @@ package org.embergraph.counters;
 public interface IInstrument<T> {
 
   /** Obtain a sample. */
-  T getValue();
+  public T getValue();
 
   /** Obtain the timestamp for the last collected sample. */
-  long lastModified();
+  public long lastModified();
 
   /**
    * Set the current value.
@@ -44,5 +44,5 @@ public interface IInstrument<T> {
    * @param timestamp The timestamp for that sample.
    * @throws UnsupportedOperationException if this operation is not allowed.
    */
-  void setValue(T value, long timestamp);
+  public void setValue(T value, long timestamp);
 }

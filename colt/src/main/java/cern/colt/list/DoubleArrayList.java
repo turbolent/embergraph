@@ -110,7 +110,7 @@ public class DoubleArrayList extends AbstractDoubleList {
    */
   public Object clone() {
     // overridden for performance only.
-    DoubleArrayList clone = new DoubleArrayList(elements.clone());
+    DoubleArrayList clone = new DoubleArrayList((double[]) elements.clone());
     clone.setSizeRaw(size);
     return clone;
   }

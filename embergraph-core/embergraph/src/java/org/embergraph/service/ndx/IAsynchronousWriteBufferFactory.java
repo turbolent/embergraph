@@ -106,7 +106,7 @@ public interface IAsynchronousWriteBufferFactory {
    *     parameter, then this method signature could be used for both local and scale-out index
    *     views. This method could then be moved to an IAsynchronousIndexWriter interface.
    */
-  <T extends IKeyArrayIndexProcedure, O, R, A> IRunnableBuffer<KVO<O>[]> newWriteBuffer(
+  public <T extends IKeyArrayIndexProcedure, O, R, A> IRunnableBuffer<KVO<O>[]> newWriteBuffer(
       final IResultHandler<R, A> resultHandler,
       final IDuplicateRemover<O> duplicateRemover,
       final AbstractKeyArrayIndexProcedureConstructor<T> ctor);

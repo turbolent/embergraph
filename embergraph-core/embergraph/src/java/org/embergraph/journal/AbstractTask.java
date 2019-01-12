@@ -483,7 +483,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
    * IJournal#getIndex(String)} on that journal, which is simply delegated to this method. See
    * {@link IsolatedActionJournal}.
    *
-   * @see <a href="http://trac.blazegraph.com/ticket/585">http://trac.blazegraph.com/ticket/585</a> (GIST)
+   * @see http://trac.blazegraph.com/ticket/585 (GIST)
    */
   @Override
   public final synchronized ILocalBTreeView getIndex(final String name) {
@@ -685,7 +685,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
     final ILocalBTreeView view;
     if (sources.length == 1) {
 
-      view = sources[0];
+      view = (BTree) sources[0];
 
     } else {
 
@@ -801,7 +801,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
      * if nothing else gets written on that BTree.
      */
 
-    btree.getDirtyListener().dirtyEvent(btree);
+    ((DirtyListener) btree.getDirtyListener()).dirtyEvent(btree);
 
     return view;
   }
@@ -1046,7 +1046,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
 
           if (log.isInfoEnabled()) log.info("Registering index on Name2Addr: " + entry.name);
 
-          name2Addr.registerIndex(entry.name, commitList.get(entry.name).ndx);
+          name2Addr.registerIndex(entry.name, (BTree) commitList.get(entry.name).ndx);
 
         } else {
 
@@ -1268,7 +1268,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
          */
 
         // UUID of the dataService on which the tx will run.
-        final UUID dataServiceUUID = resourceManager.getDataServiceUUID();
+        final UUID dataServiceUUID = ((ResourceManager) resourceManager).getDataServiceUUID();
 
         try {
 
@@ -1317,7 +1317,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
            * below. While we COULD tunnel this when running tasks on a Journal, we tend not to do
            * that. Tasks tend to be submitted primarily for the clustered database deployment.
            *
-           * @see <a href="http://trac.blazegraph.com/ticket/266">http://trac.blazegraph.com/ticket/266</a> (refactor native long tx id to thin object)
+           * @see http://trac.blazegraph.com/ticket/266 (refactor native long tx id to thin object)
            * @see <a href="http://trac.blazegraph.com/ticket/546" > Add cache for access to
            *     historical index views on the Journal by name and commitTime. </a>
            */
@@ -2245,7 +2245,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
        * FIXME GIST : Support registration of index types other than BTree
        * (HTree, Stream, etc).
        *
-       * @see <a href="http://trac.blazegraph.com/ticket/585">http://trac.blazegraph.com/ticket/585</a> (GIST)
+       * @see http://trac.blazegraph.com/ticket/585 (GIST)
        */
 
       throw new UnsupportedOperationException();
@@ -2285,7 +2285,7 @@ public abstract class AbstractTask<T> implements Callable<T>, ITask<T> {
          * FIXME GIST. This will throw a ClassCastException if the
          * returned index is an ILocalBTreeView.
          *
-         * @see <a href="http://trac.blazegraph.com/ticket/585">http://trac.blazegraph.com/ticket/585</a> (GIST)
+         * @see http://trac.blazegraph.com/ticket/585 (GIST)
          */
 
         return (ICheckpointProtocol) AbstractTask.this.getIndex(name);

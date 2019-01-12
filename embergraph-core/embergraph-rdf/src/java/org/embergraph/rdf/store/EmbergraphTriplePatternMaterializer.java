@@ -223,9 +223,10 @@ public class EmbergraphTriplePatternMaterializer
        * database.getAccessPath(s, p, o, c).iterator());
        */
       final IAccessPath<ISPO> ap =
-          state.getAccessPath(
-              stmt.getSubject(), stmt.getPredicate(),
-              stmt.getObject(), stmt.getContext());
+          (IAccessPath<ISPO>)
+              state.getAccessPath(
+                  stmt.getSubject(), stmt.getPredicate(),
+                  stmt.getObject(), stmt.getContext());
 
       //            if(ap.isFullyBoundForKey()) {
       //                /*

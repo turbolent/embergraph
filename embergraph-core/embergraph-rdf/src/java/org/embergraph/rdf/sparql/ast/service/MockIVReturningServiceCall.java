@@ -52,5 +52,5 @@ public interface MockIVReturningServiceCall extends ServiceCall<IBindingSet> {
    *
    * @return
    */
-  List<IVariable<IV>> getMockVariables();
+  public List<IVariable<IV>> getMockVariables();
 }

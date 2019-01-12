@@ -123,7 +123,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
   private static NamedSubqueryInclude[] findAllIncludes(final QueryRoot queryRoot) {
 
     final Striterator itr =
-        new Striterator(BOpUtility.postOrderIterator(queryRoot.getWhereClause()));
+        new Striterator(BOpUtility.postOrderIterator((BOp) queryRoot.getWhereClause()));
 
     itr.addTypeFilter(NamedSubqueryInclude.class);
 
@@ -135,7 +135,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
     }
 
     final Striterator itr2 =
-        new Striterator(BOpUtility.postOrderIterator(queryRoot.getWhereClause()));
+        new Striterator(BOpUtility.postOrderIterator((BOp) queryRoot.getWhereClause()));
 
     itr2.addTypeFilter(SubqueryRoot.class);
 
@@ -164,7 +164,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
   private static List<NamedSubqueryInclude> findSubqueryIncludes(final SubqueryBase queryRoot) {
 
     final Striterator itr =
-        new Striterator(BOpUtility.postOrderIterator(queryRoot.getWhereClause()));
+        new Striterator(BOpUtility.postOrderIterator((BOp) queryRoot.getWhereClause()));
 
     itr.addTypeFilter(NamedSubqueryInclude.class);
 
@@ -176,7 +176,7 @@ public class ASTNamedSubqueryOptimizer implements IASTOptimizer {
     }
 
     final Striterator itr2 =
-        new Striterator(BOpUtility.postOrderIterator(queryRoot.getWhereClause()));
+        new Striterator(BOpUtility.postOrderIterator((BOp) queryRoot.getWhereClause()));
 
     itr2.addTypeFilter(SubqueryRoot.class);
 

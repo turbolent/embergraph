@@ -18,7 +18,7 @@ public interface Double27Function {
    *
    * @return the result of the function.
    */
-  double apply(
+  public abstract double apply(
       double a000,
       double a001,
       double a002,

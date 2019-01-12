@@ -86,7 +86,7 @@ public class BooleanArrayList extends AbstractBooleanList {
    */
   public Object clone() {
     // overridden for performance only.
-    BooleanArrayList clone = new BooleanArrayList(elements.clone());
+    BooleanArrayList clone = new BooleanArrayList((boolean[]) elements.clone());
     clone.setSizeRaw(size);
     return clone;
   }

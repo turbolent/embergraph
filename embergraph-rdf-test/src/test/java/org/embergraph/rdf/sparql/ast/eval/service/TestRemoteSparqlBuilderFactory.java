@@ -900,13 +900,14 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
     final String actualQueryStrVersion_10 = queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
 
     final String expectedSparqlVersion_10 =
-        ("SELECT  ?s "
-            + "WHERE { "
-            + "FILTER ( sameTerm( ?p, <p:p1>) ). "
-            + "FILTER ( sameTerm( ?o, \"\\\"lit1\\\"\") ). "
-            + " ?s ?p ?o "
-            + //
-            "} ")
+        new String(
+                "SELECT  ?s "
+                    + "WHERE { "
+                    + "FILTER ( sameTerm( ?p, <p:p1>) ). "
+                    + "FILTER ( sameTerm( ?o, \"\\\"lit1\\\"\") ). "
+                    + " ?s ?p ?o "
+                    + //
+                    "} ")
             .replaceAll("\\s+", " ");
 
     assertEquals(expectedSparqlVersion_10, actualQueryStrVersion_10);
@@ -918,14 +919,15 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
     final String actualQueryStrVersion_11 = queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
 
     final String expectedSparqlVersion_11 =
-        ("SELECT  ?s "
-            + "WHERE {"
-            + " ?s ?p ?o "
-            + //
-            "} "
-            + "VALUES ( ?p ?o) { "
-            + "( <p:p1> \"\\\"lit1\\\"\" ) "
-            + "} ")
+        new String(
+                "SELECT  ?s "
+                    + "WHERE {"
+                    + " ?s ?p ?o "
+                    + //
+                    "} "
+                    + "VALUES ( ?p ?o) { "
+                    + "( <p:p1> \"\\\"lit1\\\"\" ) "
+                    + "} ")
             .replaceAll("\\s+", " ");
 
     assertEquals(expectedSparqlVersion_11, actualQueryStrVersion_11);
@@ -938,14 +940,15 @@ public class TestRemoteSparqlBuilderFactory extends AbstractEmbergraphExprBuilde
         queryBuilder.getSparqlQuery(a).replaceAll("\\s+", " ");
 
     final String expectedSparqlVersion_11_DRAFT_BINDINGS =
-        ("SELECT  ?s "
-            + "WHERE {"
-            + " ?s ?p ?o "
-            + //
-            "} "
-            + "BINDINGS ?p ?o { "
-            + "( <p:p1> \"\\\"lit1\\\"\" ) "
-            + "} ")
+        new String(
+                "SELECT  ?s "
+                    + "WHERE {"
+                    + " ?s ?p ?o "
+                    + //
+                    "} "
+                    + "BINDINGS ?p ?o { "
+                    + "( <p:p1> \"\\\"lit1\\\"\" ) "
+                    + "} ")
             .replaceAll("\\s+", " ");
 
     assertEquals(actualQueryStrVersion_11_DRAFT_BINDINGS, expectedSparqlVersion_11_DRAFT_BINDINGS);

@@ -88,7 +88,7 @@ public class ServiceNode extends GroupMemberNodeBase<IGroupMemberNode>
      */
     String TIMEOUT = "timeout";
 
-    long DEFAULT_TIMEOUT = Long.MAX_VALUE;
+    final long DEFAULT_TIMEOUT = Long.MAX_VALUE;
 
     /**
      * The text "image" of the original SPARQL SERVICE clause. The "image" of the original graph

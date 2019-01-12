@@ -49,14 +49,14 @@ public interface ISolution<E> {
    *
    * @return The element -or- <code>null</code> if the element was not requested.
    */
-  E get();
+  public E get();
 
   /**
    * Return the {@link IRule} that generated this solution (optional operation).
    *
    * @return The {@link IRule} -or- <code>null</code> if the rule was not requested.
    */
-  IRule<E> getRule();
+  public IRule<E> getRule();
 
   /**
    * Return the {@link IBindingSet} for this solution (optional operation).
@@ -64,5 +64,5 @@ public interface ISolution<E> {
    * @return The {@link IBindingSet}.
    * @return The {@link IBindingSet} -or- <code>null</code> if the binding set was not requested.
    */
-  IBindingSet getBindingSet();
+  public IBindingSet getBindingSet();
 }

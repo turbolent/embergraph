@@ -76,7 +76,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
    *     index, e.g., using {@link ILeafCursor}. Taking all tuples from a few leaves in each sample
    *     might produce a faster estimation of the correlation when sampling join paths.
    */
-  public enum SampleType {
+  public static enum SampleType {
     /**
      * Samples are taken at even space offsets. This produces a sample without any random effects.
      * Re-sampling an index having the same data with the same key-range and the limit will always
@@ -89,7 +89,7 @@ public class SampleIndex<E> extends AbstractAccessPathOp<E> {
      * The samples will be dense and may bave a front bias. This mode emphasizes the locality of the
      * samples on the index pages and minimizes the IO associated with sampling.
      */
-    DENSE
+    DENSE;
   }
 
   /** Known annotations. */

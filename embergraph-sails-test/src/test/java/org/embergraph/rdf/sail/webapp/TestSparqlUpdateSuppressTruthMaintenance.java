@@ -73,7 +73,9 @@ public class TestSparqlUpdateSuppressTruthMaintenance<S extends IIndexManager>
         "test.*",
         new LinkedHashSet<BufferMode>(
             Arrays.asList(
-                BufferMode.MemStore)),
+                new BufferMode[] {
+                  BufferMode.MemStore,
+                })),
         TestMode.triplesPlusTruthMaintenance);
   }
 

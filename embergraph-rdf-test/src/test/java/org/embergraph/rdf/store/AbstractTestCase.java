@@ -1022,7 +1022,7 @@ public abstract class AbstractTestCase extends TestCase2 {
 
           final EmbergraphURI p = (EmbergraphURI) db.asValue(termSet.get(stmt.getPredicate()));
 
-          final EmbergraphValue o = db.asValue(termSet.get(stmt.getObject()));
+          final EmbergraphValue o = (EmbergraphValue) db.asValue(termSet.get(stmt.getObject()));
 
           boolean ok = true;
           if (s == null) {

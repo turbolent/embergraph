@@ -22,11 +22,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class FixedOutputStream extends OutputStream {
-
-  private final byte[] m_buf;
+  private final byte m_buf[];
   private int m_count = 0;
 
-  public FixedOutputStream(final byte[] buf) {
+  public FixedOutputStream(final byte buf[]) {
     m_buf = buf;
   }
 
@@ -44,7 +43,7 @@ public class FixedOutputStream extends OutputStream {
     m_buf[m_count++] = (byte) b;
   }
 
-  public void write(final byte[] b, final int off, final int len) throws IOException {
+  public void write(final byte b[], final int off, final int len) throws IOException {
     System.arraycopy(b, off, m_buf, m_count, len);
 
     m_count += len;

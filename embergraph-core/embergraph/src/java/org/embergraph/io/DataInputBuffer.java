@@ -178,7 +178,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
 
     if (off >= limit) throw new EOFException();
 
-    return buf[off++] != 0;
+    return buf[off++] == 0 ? false : true;
   }
 
   @Override
@@ -439,7 +439,7 @@ public class DataInputBuffer extends InputStream implements DataInput, Repositio
       // high bit is clear.
       v = b; // interpret the byte as a short value.
     }
-    return v;
+    return (short) v;
   }
 
   /*

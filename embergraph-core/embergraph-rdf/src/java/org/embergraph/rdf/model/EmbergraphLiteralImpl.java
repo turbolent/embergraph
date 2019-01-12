@@ -177,9 +177,12 @@ public class EmbergraphLiteralImpl extends EmbergraphValueImpl implements Emberg
 
       return datatype.equals(o.getDatatype());
 
-    } else
-      return o.getDatatype() == null;
+    } else if (o.getDatatype() != null) {
 
+      return false;
+    }
+
+    return true;
   }
 
   /*

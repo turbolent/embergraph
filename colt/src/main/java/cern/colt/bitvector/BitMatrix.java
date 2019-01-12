@@ -49,7 +49,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
    * columnOf(bitIndex)==bitIndex%columns
    * rowOf(bitIndex)==bitIndex/columns
    */
-  protected long[] bits;
+  protected long bits[];
   /**
    * Constructs a bit matrix with a given number of columns and rows. All bits are initially
    * <tt>false</tt>.
@@ -121,7 +121,7 @@ public class BitMatrix extends cern.colt.PersistentObject {
    */
   public Object clone() {
     BitMatrix clone = (BitMatrix) super.clone();
-    if (this.bits != null) clone.bits = this.bits.clone();
+    if (this.bits != null) clone.bits = (long[]) this.bits.clone();
     return clone;
   }
   /** Returns the number of columns of the receiver. */

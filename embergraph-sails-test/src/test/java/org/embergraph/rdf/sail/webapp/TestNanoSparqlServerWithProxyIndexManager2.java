@@ -393,7 +393,7 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
         ((AbstractDistributedFederation<?>) indexManager).shutdownNow();
       } else {
         // destroy journal.
-        indexManager.destroy();
+        ((Journal) indexManager).destroy();
       }
     }
 

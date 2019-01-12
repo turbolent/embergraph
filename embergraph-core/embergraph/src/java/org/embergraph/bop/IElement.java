@@ -43,5 +43,5 @@ public interface IElement {
    * @throws IllegalArgumentException if the index is less than zero or GTE the #of fields defined
    *     for the element.
    */
-  Object get(int index);
+  public Object get(int index);
 }

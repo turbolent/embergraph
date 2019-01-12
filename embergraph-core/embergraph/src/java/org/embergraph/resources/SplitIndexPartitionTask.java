@@ -688,7 +688,7 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
          * the buffered writes onto the B+Trees buffering writes for the
          * new index partitions created by the split.
          */
-        final BTree src = getIndex(name).getMutableBTree();
+        final BTree src = ((ILocalBTreeView) getIndex(name)).getMutableBTree();
 
         assertSameIndex(indexUUID, src);
 
@@ -713,7 +713,7 @@ public class SplitIndexPartitionTask extends AbstractPrepareTask<AbstractResult>
          */
 
         final LocalPartitionMetadata oldpmd =
-            src.getIndexMetadata().getPartitionMetadata();
+            (LocalPartitionMetadata) src.getIndexMetadata().getPartitionMetadata();
 
         if (oldpmd.getSourcePartitionId() != -1) {
 

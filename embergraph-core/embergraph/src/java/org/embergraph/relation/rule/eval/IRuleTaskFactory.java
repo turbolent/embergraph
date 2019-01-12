@@ -46,5 +46,5 @@ public interface IRuleTaskFactory extends Serializable {
    *     must be written.
    * @return <code>null</code> unless custom evaluation is desired.
    */
-  IStepTask newTask(IRule rule, IJoinNexus joinNexus, IBuffer<ISolution[]> buffer);
+  public IStepTask newTask(IRule rule, IJoinNexus joinNexus, IBuffer<ISolution[]> buffer);
 }

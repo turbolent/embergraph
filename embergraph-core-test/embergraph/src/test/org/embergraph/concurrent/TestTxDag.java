@@ -699,9 +699,9 @@ public class TestTxDag extends TestCase {
     public State(final TxDag dag) {
       this.edges = dag.getEdges(false);
       this.M = dag.getPathCountMatrix();
-      this.inbound = dag.inbound.clone();
-      this.outbound = dag.outbound.clone();
-      this.transactions = dag.transactions.clone();
+      this.inbound = (int[]) dag.inbound.clone();
+      this.outbound = (int[]) dag.outbound.clone();
+      this.transactions = (Object[]) dag.transactions.clone();
     }
     /** Verify that <i>dag</i> has a state consistent with this historical state. */
     public void assertSameState(TxDag dag) {
@@ -794,7 +794,7 @@ public class TestTxDag extends TestCase {
         this.src = src;
         this.tgt = tgt;
       }
-    }
+    };
     // Vector of states for the DAG together with the action which produced that state.
 
     /*
@@ -957,7 +957,7 @@ public class TestTxDag extends TestCase {
       fail("actual is null.");
     }
     // clone since we will modify expected[].
-    expected = expected.clone();
+    expected = (Edge[]) expected.clone();
     // verify length.
     assertEquals("length", expected.length, actual.length);
     final int len = expected.length;

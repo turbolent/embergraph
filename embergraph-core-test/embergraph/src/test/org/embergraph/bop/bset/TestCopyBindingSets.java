@@ -127,7 +127,9 @@ public class TestCopyBindingSets extends TestCase2 {
         new CopyOp(
             new BOp[] {},
             NV.asMap(
-                new NV(BOp.Annotations.BOP_ID, bopId)));
+                new NV[] {
+                  new NV(BOp.Annotations.BOP_ID, bopId),
+                }));
 
     // the expected solutions (default sink).
     final IBindingSet[] expected = data.toArray(new IBindingSet[0]);
@@ -181,7 +183,9 @@ public class TestCopyBindingSets extends TestCase2 {
         new Tee(
             new BOp[] {},
             NV.asMap(
-                new NV(BOp.Annotations.BOP_ID, bopId), new NV(CopyOp.Annotations.ALT_SINK_REF, 2)));
+                new NV[] {
+                  new NV(BOp.Annotations.BOP_ID, bopId), new NV(CopyOp.Annotations.ALT_SINK_REF, 2),
+                }));
 
     // the expected solutions (default sink).
     final IBindingSet[] expected = data.toArray(new IBindingSet[0]);
@@ -242,12 +246,14 @@ public class TestCopyBindingSets extends TestCase2 {
         new CopyOp(
             new BOp[] {},
             NV.asMap(
-                new NV(BOp.Annotations.BOP_ID, bopId),
-                new NV(
-                    CopyOp.Annotations.CONSTRAINTS,
-                    new IConstraint[] {
-                      Constraint.wrap(new EQConstant(x, new Constant<String>("Mary")))
-                    })));
+                new NV[] {
+                  new NV(BOp.Annotations.BOP_ID, bopId),
+                  new NV(
+                      CopyOp.Annotations.CONSTRAINTS,
+                      new IConstraint[] {
+                        Constraint.wrap(new EQConstant(x, new Constant<String>("Mary")))
+                      }),
+                }));
 
     // the expected solutions (default sink).
     final List<IBindingSet> expected = new LinkedList<IBindingSet>();

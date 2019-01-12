@@ -34,14 +34,14 @@ import java.nio.channels.FileChannel;
 public interface IDiskBasedStrategy extends IBufferStrategy {
 
   /** The size of the file header in bytes. */
-  int getHeaderSize();
+  public int getHeaderSize();
 
   /** The backing file. */
-  File getFile();
+  public File getFile();
 
   /** The object used to read and write on that file. */
-  RandomAccessFile getRandomAccessFile();
+  public RandomAccessFile getRandomAccessFile();
 
   /** The channel used to read and write on the file. */
-  FileChannel getChannel();
+  public FileChannel getChannel();
 }

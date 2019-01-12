@@ -13,7 +13,7 @@ public interface IEventReportingService {
   /**
    * Visits completed events that <i>start</i> in the given interval in order by their start time.
    */
-  Iterator<Event> rangeIterator(long fromTime, long toTime);
+  public Iterator<Event> rangeIterator(long fromTime, long toTime);
 
   /**
    * Reports the #of completed events that <i>start</i> in the given interval.
@@ -22,5 +22,5 @@ public interface IEventReportingService {
    * @param toTime The first start time to be excluded.
    * @return The #of events whose start time is in that interval.
    */
-  long rangeCount(long fromTime, long toTime);
+  public long rangeCount(long fromTime, long toTime);
 }

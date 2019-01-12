@@ -158,8 +158,14 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
       return false;
     }
 
-    // Skip value expressions.
-    return !(op instanceof IValueExpression);// Visit anything else.
+    if (op instanceof IValueExpression) {
+
+      // Skip value expressions.
+      return false;
+    }
+
+    // Visit anything else.
+    return true;
   }
 
   /**
@@ -471,7 +477,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     if (!(sp.p() instanceof ConstantNode)) return false;
 
-    final EmbergraphValue p = sp.p().getValue();
+    final EmbergraphValue p = ((ConstantNode) sp.p()).getValue();
 
     if (!(p instanceof URI)) return false;
 
@@ -479,9 +485,13 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     final String str = u.stringValue();
 
-    // A possible query hint.
-    return str.startsWith(QueryHints.NAMESPACE);
+    if (str.startsWith(QueryHints.NAMESPACE)) {
 
+      // A possible query hint.
+      return true;
+    }
+
+    return false;
   }
 
   /**
@@ -497,7 +507,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
     if (!(t instanceof ConstantNode))
       throw new RuntimeException("Subject position of query hint must be a constant.");
 
-    final EmbergraphValue v = t.getValue();
+    final EmbergraphValue v = ((ConstantNode) t).getValue();
 
     if (!(v instanceof EmbergraphURI)) throw new RuntimeException("Query hint scope is not a URI.");
 
@@ -518,7 +528,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
       throw new RuntimeException("Predicate position of query hint must be a constant.");
     }
 
-    final EmbergraphValue v = t.getValue();
+    final EmbergraphValue v = ((ConstantNode) t).getValue();
 
     if (!(v instanceof EmbergraphURI))
       throw new RuntimeException("Predicate position of query hint is not a URI.");
@@ -550,7 +560,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
       return '?' + ((VarNode) t).getValueExpression().getName();
     }
 
-    final EmbergraphValue v = t.getValue();
+    final EmbergraphValue v = ((ConstantNode) t).getValue();
 
     if (!(v instanceof Literal))
       throw new RuntimeException("Object position of query hint is not a Literal.");
@@ -658,7 +668,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     //        if (isNodeAcceptingQueryHints(queryBase)) {
 
-    _applyQueryHint(context, queryRoot, scope, queryBase, name, value);
+    _applyQueryHint(context, queryRoot, scope, (ASTBase) queryBase, name, value);
 
     //        }
 
@@ -750,7 +760,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     //        if(isNodeAcceptingQueryHints(group)) {
 
-    _applyQueryHint(context, queryRoot, scope, group, name, value);
+    _applyQueryHint(context, queryRoot, scope, (ASTBase) group, name, value);
 
     //        }
 
@@ -778,7 +788,7 @@ public class ASTQueryHintOptimizer implements IASTOptimizer {
 
     //        if (isNodeAcceptingQueryHints(group)) {
 
-    _applyQueryHint(context, queryRoot, scope, group, name, value);
+    _applyQueryHint(context, queryRoot, scope, (ASTBase) group, name, value);
 
     //        }
 

@@ -69,7 +69,7 @@ public class GeoSpatialConfigOptions {
      * constructor of {@link GeoSpatialConfig}, which takes a JSON string -- so you may also have a
      * look at the parsing logics there.
      */
-    String GEO_SPATIAL_LITERAL_V1_LAT_LON_CONFIG =
+    final String GEO_SPATIAL_LITERAL_V1_LAT_LON_CONFIG =
         "{\"config\": "
             + "{ \"uri\": \""
             + GeoSpatial.GEOSPATIAL_LITERAL_V1_LAT_LON
@@ -79,7 +79,7 @@ public class GeoSpatialConfigOptions {
             + "{ \"valueType\": \"DOUBLE\", \"multiplier\": \"100000\", \"serviceMapping\": \"LONGITUDE\" } "
             + "]}}";
 
-    String GEO_SPATIAL_LITERAL_V1_LAT_LON_TIME_CONFIG =
+    final String GEO_SPATIAL_LITERAL_V1_LAT_LON_TIME_CONFIG =
         "{\"config\": "
             + "{ \"uri\": \""
             + GeoSpatial.GEOSPATIAL_LITERAL_V1_LAT_LON_TIME

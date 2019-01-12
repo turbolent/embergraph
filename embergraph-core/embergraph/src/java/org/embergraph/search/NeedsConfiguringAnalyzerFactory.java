@@ -146,7 +146,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
     }
 
     private static Object[] useEmptyStopWordSet(Object[] params) {
-      Object[] rslt = new Object[params.length];
+      Object rslt[] = new Object[params.length];
       for (int i = 0; i < params.length; i++) {
         if (params[i] instanceof Set) {
           rslt[i] = CharArraySet.EMPTY_SET;
@@ -609,7 +609,7 @@ class NeedsConfiguringAnalyzerFactory implements IAnalyzerFactory {
       String prop = (String) en.nextElement();
       if (prop.equals(Options.NATURAL_LANGUAGE_SUPPORT)) continue;
       if (prop.startsWith(Options.ANALYZER)) {
-        String[] languageRangeAndProperty =
+        String languageRangeAndProperty[] =
             prop.substring(Options.ANALYZER.length()).replaceAll("_", "*").split("[.]");
         if (languageRangeAndProperty.length == 2) {
 

@@ -69,7 +69,7 @@ public class BitVector extends cern.colt.PersistentObject {
    *
    * @serial
    */
-  protected long[] bits;
+  protected long bits[];
 
   protected int nbits; // the size
 
@@ -204,7 +204,7 @@ public class BitVector extends cern.colt.PersistentObject {
    */
   public Object clone() {
     BitVector clone = (BitVector) super.clone();
-    if (this.bits != null) clone.bits = this.bits.clone();
+    if (this.bits != null) clone.bits = (long[]) this.bits.clone();
     return clone;
   }
   /**

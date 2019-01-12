@@ -25,5 +25,5 @@ public interface ByteProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  boolean apply(byte element);
+  public abstract boolean apply(byte element);
 }

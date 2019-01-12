@@ -49,7 +49,7 @@ public class RandomSeedGenerator extends cern.colt.PersistentObject {
     this.column = column;
   }
   /** Prints the generated seeds for the given input parameters. */
-  public static void main(String[] args) {
+  public static void main(String args[]) {
     int row = Integer.parseInt(args[0]);
     int column = Integer.parseInt(args[1]);
     int size = Integer.parseInt(args[2]);

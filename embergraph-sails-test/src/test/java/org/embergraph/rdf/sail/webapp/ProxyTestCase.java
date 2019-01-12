@@ -111,7 +111,7 @@ public abstract class ProxyTestCase<S extends IIndexManager> extends AbstractInd
 
     if (m_delegate instanceof AbstractIndexManagerTestCase) {
 
-      return m_delegate;
+      return (AbstractIndexManagerTestCase<S>) m_delegate;
     }
 
     throw new IllegalStateException(

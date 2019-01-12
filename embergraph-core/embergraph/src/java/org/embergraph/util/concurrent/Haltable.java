@@ -350,7 +350,8 @@ public class Haltable<V> implements IHaltable<V> {
    */
   protected boolean isNormalTerminationCause(final Throwable cause) {
     if (isTerminationByInterrupt(cause)) return true;
-    return InnerCause.isInnerCause(cause, RejectedExecutionException.class);
+    if (InnerCause.isInnerCause(cause, RejectedExecutionException.class)) return true;
+    return false;
   }
 
   /**
@@ -363,7 +364,10 @@ public class Haltable<V> implements IHaltable<V> {
    *     at operator start/stop. </a>
    */
   protected boolean isDeadlineTerminationCause(final Throwable cause) {
-    return InnerCause.isInnerCause(cause, QueryTimeoutException.class);
+    if (InnerCause.isInnerCause(cause, QueryTimeoutException.class)) {
+      return true;
+    }
+    return false;
   }
 
   public static boolean isTerminationByInterrupt(final Throwable cause) {
@@ -371,7 +375,7 @@ public class Haltable<V> implements IHaltable<V> {
     if (InnerCause.isInnerCause(cause, InterruptedException.class)) return true;
     if (InnerCause.isInnerCause(cause, CancellationException.class)) return true;
     if (InnerCause.isInnerCause(cause, ClosedByInterruptException.class)) return true;
-    return InnerCause.isInnerCause(cause, BufferClosedException.class);
+    if (InnerCause.isInnerCause(cause, BufferClosedException.class)) return true;
     /*
      * Note: We can not treat this as normal termination or the query will
      * fail to report out the openrdf QueryInterruptedException.
@@ -379,6 +383,7 @@ public class Haltable<V> implements IHaltable<V> {
     //        if (InnerCause.isInnerCause(cause, QueryTimeoutException.class))
     //            return true;
 
+    return false;
   }
 
   /**

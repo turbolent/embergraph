@@ -54,5 +54,5 @@ public enum FilterExistsModeEnum {
    * sub-queries is modest because there are not that many source solution that need to flow into
    * the FILTER.
    */
-  SubQueryLimitOne
+  SubQueryLimitOne;
 }

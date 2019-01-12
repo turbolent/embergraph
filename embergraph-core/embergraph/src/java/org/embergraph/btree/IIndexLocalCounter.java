@@ -10,5 +10,5 @@ public interface IIndexLocalCounter {
    * identifier is used as the high int32 bits of the counter, and the low int32 of the counter has
    * an initial value of zero (0) in each index partition.
    */
-  ICounter getCounter();
+  public ICounter getCounter();
 }

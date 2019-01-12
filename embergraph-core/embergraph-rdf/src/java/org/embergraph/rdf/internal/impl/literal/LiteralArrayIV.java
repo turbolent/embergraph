@@ -128,7 +128,8 @@ public class LiteralArrayIV extends AbstractLiteralIV<EmbergraphLiteral, Object[
     if (obj == null) return false;
     if (getClass() != obj.getClass()) return false;
     LiteralArrayIV other = (LiteralArrayIV) obj;
-    return Arrays.equals(ivs, other.ivs);
+    if (!Arrays.equals(ivs, other.ivs)) return false;
+    return true;
   }
 
   /** Implement {@link Literal#getLabel()} for logging. Superclass uses inline value. */

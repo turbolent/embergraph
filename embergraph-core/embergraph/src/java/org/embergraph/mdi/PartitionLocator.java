@@ -165,7 +165,9 @@ public class PartitionLocator implements IPartitionMetadata, Externalizable {
 
     if (rightSeparatorKey == null && o2.rightSeparatorKey != null) return false;
 
-    return BytesUtil.bytesEqual(rightSeparatorKey, o2.rightSeparatorKey);
+    if (!BytesUtil.bytesEqual(rightSeparatorKey, o2.rightSeparatorKey)) return false;
+
+    return true;
   }
 
   public String toString() {

@@ -34,5 +34,5 @@ import java.util.Map;
 public interface Params {
 
   /** Return the fields of interest as an set of (name,value) pairs. */
-  Map<String, Object> getParams();
+  public Map<String, Object> getParams();
 }

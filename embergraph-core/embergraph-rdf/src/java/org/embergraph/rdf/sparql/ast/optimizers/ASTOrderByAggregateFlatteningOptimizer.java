@@ -204,7 +204,7 @@ public class ASTOrderByAggregateFlatteningOptimizer implements IASTOptimizer {
 
     for (int i = 0; i < arity; i++) {
 
-      final BOp child = group.get(i);
+      final BOp child = (BOp) group.get(i);
 
       if (child instanceof GraphPatternGroup<?>) {
 

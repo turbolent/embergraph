@@ -141,7 +141,7 @@ public class TestIndexSegmentBuilder_EmptyIndex extends AbstractIndexSegmentTest
   }
 
   protected IndexSegmentCheckpoint doBuildAndDiscardCache(final BTree btree, final int m)
-      throws Exception {
+      throws IOException, Exception {
 
     final long commitTime = System.currentTimeMillis();
 

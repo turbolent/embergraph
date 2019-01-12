@@ -201,7 +201,7 @@ public class Event implements Serializable {
   public Event(
       final IEmbergraphFederation fed, final EventResource resource, final Object majorEventType) {
 
-    this(fed, resource, majorEventType, null /* details */);
+    this(fed, resource, majorEventType, (Map<String, Object>) null /* details */);
   }
 
   /**
@@ -606,7 +606,7 @@ public class Event implements Serializable {
         final String t = st.nextToken();
         final int pos = t.indexOf('=');
         final String name = t.substring(0, pos);
-        final String value = t.substring(pos + 1);
+        final String value = t.substring(pos + 1, t.length());
         this.details.put(name, value);
       }
     } catch (Throwable t) {

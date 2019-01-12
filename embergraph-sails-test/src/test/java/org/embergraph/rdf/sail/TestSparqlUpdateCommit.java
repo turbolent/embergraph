@@ -50,7 +50,7 @@ public class TestSparqlUpdateCommit extends ProxyEmbergraphSailTestCase {
 
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
-      cxn = repo.getConnection();
+      cxn = (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       final CommitCounter counter = new CommitCounter();
       cxn.addChangeLog(counter);

@@ -132,7 +132,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
    * @todo Note: This variant without generics is required for some java compiler versions.
    * @see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6302954
    */
-  Object getRequiredProperty(final String name);
+  public Object getRequiredProperty(final String name);
 
   /** Deep copy clone of the operator. */
   BOp clone();
@@ -190,7 +190,7 @@ public interface BOp extends Cloneable, Serializable, IPropertySet {
    * <p>Note: Annotation names should be {@link String#intern() interned} in order to avoid having
    * duplicate values for those strings on the heap.
    */
-  interface Annotations {
+  public interface Annotations {
 
     /**
      * The unique identifier within a query for a specific {@link BOp}. The {@link #QUERY_ID} and

@@ -366,7 +366,7 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
 
   /** New method added to support Embergraph Sid extension. */
   protected Value parseValue(final String bindingStr, final JsonParser jp)
-      throws QueryResultParseException, IOException {
+      throws QueryResultParseException, JsonParseException, IOException {
 
     String lang = null;
     String type = null;

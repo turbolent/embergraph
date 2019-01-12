@@ -187,7 +187,7 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
         }
       }
 
-      return null;
+      return (Void) null;
 
     } finally {
 
@@ -247,7 +247,7 @@ public class GangliaListener implements Callable<Void>, IGangliaDefaults {
         log.warn(msg, t);
       }
 
-      return null;
+      return (Void) null;
     }
   }
 

@@ -100,16 +100,16 @@ public interface IRaba extends Iterable<byte[]> {
    *     mutable IRaba implementations we would uncover those assumptions and clean things up a bit
    *     more.
    */
-  int capacity();
+  public int capacity();
 
   /** The #of entries in the logical byte[][]. */
-  int size();
+  public int size();
 
   /** True iff the logical byte[][] is empty. */
-  boolean isEmpty();
+  public boolean isEmpty();
 
   /** True iff the logical byte[][] is full. */
-  boolean isFull();
+  public boolean isFull();
 
   /**
    * Return <code>true</code> iff the byte[] at that index is <code>null</code>. If {@link
@@ -119,7 +119,7 @@ public interface IRaba extends Iterable<byte[]> {
    * @param index The index in [0:{@link #size()}-1].
    * @throws IndexOutOfBoundsException unless index is in [0:{@link #size()}-1].
    */
-  boolean isNull(int index);
+  public boolean isNull(int index);
 
   /**
    * The length of the byte[] at that index.
@@ -129,7 +129,7 @@ public interface IRaba extends Iterable<byte[]> {
    * @throws NullPointerException if the key at that index is <code>null</code>.
    * @throws IndexOutOfBoundsException unless index is in [0:{@link #size()}-1].
    */
-  int length(int index);
+  public int length(int index);
 
   /**
    * Return the byte[] at the specified index. For greater efficiency, implementations MAY return a
@@ -140,7 +140,7 @@ public interface IRaba extends Iterable<byte[]> {
    *     stored at that index.
    * @throws IndexOutOfBoundsException unless index is in [0:{@link #size()}-1].
    */
-  byte[] get(int index);
+  public byte[] get(int index);
 
   /**
    * Copy the value at the specified index onto the output stream. This is often used with an {@link
@@ -155,14 +155,14 @@ public interface IRaba extends Iterable<byte[]> {
    *     the {@link OutputStream} is writing onto a byte[] so it is more convenient to masquerade
    *     this exception).
    */
-  int copy(int index, OutputStream os);
+  public int copy(int index, OutputStream os);
 
   /**
    * Iterator visits the byte[] elements in the view order. If an element is <code>null</code>, then
    * the iterator will report a <code>null</code> for that element.
    */
   @Override
-  Iterator<byte[]> iterator();
+  public Iterator<byte[]> iterator();
 
   /*
    * Mutation operations (optional).
@@ -177,7 +177,7 @@ public interface IRaba extends Iterable<byte[]> {
    * @throws IllegalArgumentException if the value is <code>null</code> and null values are not
    *     supported by this implementation.
    */
-  void set(int index, byte[] a);
+  public void set(int index, byte[] a);
 
   /**
    * Append a byte[] value to the end of the logical byte[][] (optional operation).
@@ -187,7 +187,7 @@ public interface IRaba extends Iterable<byte[]> {
    * @throws IllegalArgumentException if the value is <code>null</code> and null values are not
    *     supported by this implementation.
    */
-  int add(byte[] a);
+  public int add(byte[] a);
 
   /**
    * Append a byte[] value to the end of the logical byte[][] (optional operation).
@@ -198,7 +198,7 @@ public interface IRaba extends Iterable<byte[]> {
    * @return The #of values in the logical byte[][] (postcondition).
    * @throws IllegalArgumentException if the value is <code>null</code>.
    */
-  int add(byte[] value, int off, int len);
+  public int add(byte[] value, int off, int len);
 
   /**
    * Append a byte[] value to the end of the logical byte[][] (optional operation).
@@ -209,7 +209,7 @@ public interface IRaba extends Iterable<byte[]> {
    * @throws IllegalArgumentException if <i>in</i> is <code>null</code>.
    * @todo also define variant of {@link #set(int, byte[])} that copies bytes from an input stream?
    */
-  int add(DataInput in, int len) throws IOException;
+  public int add(DataInput in, int len) throws IOException;
 
   /*
    * Search (optional).

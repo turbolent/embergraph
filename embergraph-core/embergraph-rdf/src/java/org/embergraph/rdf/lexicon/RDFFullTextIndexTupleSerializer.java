@@ -151,7 +151,7 @@ public class RDFFullTextIndexTupleSerializer
   @Override
   public byte[] serializeVal(final ITermDocVal obj) {
 
-    final ITermDocVal val = obj;
+    final ITermDocVal val = (ITermDocVal) obj;
 
     if (log.isDebugEnabled()) {
       log.debug(val);
@@ -216,7 +216,7 @@ public class RDFFullTextIndexTupleSerializer
     final int docIdOffset = kbuf.limit() - byteLength;
 
     // Decode the IV.
-    final IV docId = IVUtility.decodeFromOffset(kbuf.array(), docIdOffset);
+    final IV docId = (IV) IVUtility.decodeFromOffset(kbuf.array(), docIdOffset);
 
     final int termWeightOffset = docIdOffset - Bytes.SIZEOF_BYTE;
 

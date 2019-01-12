@@ -708,14 +708,15 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
     try {
 
       resultBuffer =
-          resourceManager
-              .getFederation()
-              .getMetadataService()
-              .submit(
-                  TimestampUtility.asHistoricalRead(lastCommitTime),
-                  MetadataService.getMetadataIndexName(scaleOutIndexName),
-                  op)
-              .get();
+          (ResultBuffer)
+              resourceManager
+                  .getFederation()
+                  .getMetadataService()
+                  .submit(
+                      TimestampUtility.asHistoricalRead(lastCommitTime),
+                      MetadataService.getMetadataIndexName(scaleOutIndexName),
+                      op)
+                  .get();
 
     } catch (Exception e) {
 
@@ -978,7 +979,7 @@ public class CompactingMergeTask extends AbstractPrepareTask<BuildResult> {
          * BTree and cause it to be checkpointed if this task succeeds
          * normally.
          */
-        final ILocalBTreeView view = getIndex(getOnlyResource());
+        final ILocalBTreeView view = (ILocalBTreeView) getIndex(getOnlyResource());
 
         // make sure that this is the same scale-out index.
         assertSameIndex(indexUUID, view.getMutableBTree());

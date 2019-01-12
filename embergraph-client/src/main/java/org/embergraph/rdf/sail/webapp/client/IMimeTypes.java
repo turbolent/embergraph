@@ -20,7 +20,7 @@ package org.embergraph.rdf.sail.webapp.client;
 /** Common MIME types for dynamic content. */
 public interface IMimeTypes {
 
-  String MIME_TEXT_PLAIN = "text/plain",
+  public String MIME_TEXT_PLAIN = "text/plain",
       MIME_TEXT_HTML = "text/html",
       //      MIME_TEXT_XML = "text/xml",
       /** General purpose binary <code>application/octet-stream</code>. */

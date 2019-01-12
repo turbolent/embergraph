@@ -21,7 +21,7 @@ import java.util.Map;
 public interface IGangliaMetadataMessage extends IGangliaMessage {
 
   /** The data type declaration for the metric. */
-  GangliaMessageTypeEnum getMetricType();
+  public GangliaMessageTypeEnum getMetricType();
 
   /**
    * The metric name (this is represented twice in the Ganglia 3.1 wire format: once in the
@@ -29,29 +29,29 @@ public interface IGangliaMetadataMessage extends IGangliaMessage {
    *
    * @see #getMetricName()
    */
-  String getMetricName2();
+  public String getMetricName2();
 
   /** The units in which the metric values are expressed. */
-  String getUnits();
+  public String getUnits();
 
   /** Hint for rrdtool visualization of metric values. */
-  GangliaSlopeEnum getSlope();
+  public GangliaSlopeEnum getSlope();
 
   /**
    * The maximum advisory delay in seconds before a metric value would become stale. For the metric
    * sending, this is also the maximum delay before it should retransmit a metric value which is
    * unchanged from its last reported value.
    */
-  int getTMax();
+  public int getTMax();
 
   /** The maximum age in seconds before a metric will be deleted (aka Delete Max). */
-  int getDMax();
+  public int getDMax();
 
   /**
    * Zero or more additional name-value[] pairs serialized with this message. This may be used to
    * group metrics, add nice titles, provide in-band descriptions of metrics, etc.
    */
-  Map<String, String[]> getExtraValues();
+  public Map<String, String[]> getExtraValues();
 
   /**
    * Return the first value for the given key from the {@link #getExtraValues()}.
@@ -60,14 +60,14 @@ public interface IGangliaMetadataMessage extends IGangliaMessage {
    * @return The first value for that key -or- <code>null</code> if there are no values for that
    *     key.
    */
-  String getFirstValue(String key);
+  public String getFirstValue(String key);
 
   /**
    * Return the value of the well-known attribute {@link IGangliaAttributes#ATTR_TITLE}.
    *
    * @return The value of the TITLE attribute if present and otherwise <code>null</code>.
    */
-  String[] getGroups();
+  public String[] getGroups();
 
   /**
    * Return the value of the well-known attribute {@link IGangliaAttributes#ATTR_TITLE}.
@@ -75,7 +75,7 @@ public interface IGangliaMetadataMessage extends IGangliaMessage {
    * @return The value of the {@link IGangliaAttributes#ATTR_TITLE} attribute if present and
    *     otherwise <code>null</code>.
    */
-  String getTitle();
+  public String getTitle();
 
   /**
    * Return the value of the well-known attribute {@link IGangliaAttributes#ATTR_DESC}.
@@ -83,7 +83,7 @@ public interface IGangliaMetadataMessage extends IGangliaMessage {
    * @return The value of the {@link IGangliaAttributes#ATTR_DESC} attribute if present and
    *     otherwise <code>null</code>.
    */
-  String getDescription();
+  public String getDescription();
 
   /**
    * Return a value which may have been scaled and/or offset in order to align the value with the
@@ -94,7 +94,7 @@ public interface IGangliaMetadataMessage extends IGangliaMessage {
    * @param value The value.
    * @return The translated value.
    */
-  Object translateValue(Object value);
+  public Object translateValue(Object value);
 
   /**
    * Return <code>true</code> iff the newValue differs significantly from the old value.
@@ -103,5 +103,5 @@ public interface IGangliaMetadataMessage extends IGangliaMessage {
    * @param newValue The new value and never <code>null</code>.
    * @return <code>true</code> iff there is a significant difference.
    */
-  boolean isChanged(final Object oldValue, final Object newValue);
+  public boolean isChanged(final Object oldValue, final Object newValue);
 }

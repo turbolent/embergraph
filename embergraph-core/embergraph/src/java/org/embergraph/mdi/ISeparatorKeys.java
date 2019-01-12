@@ -37,12 +37,12 @@ public interface ISeparatorKeys {
    * index is always an empty <code>byte[]</code> since that is the smallest key that may be
    * defined.
    */
-  byte[] getLeftSeparatorKey();
+  public byte[] getLeftSeparatorKey();
 
   /**
    * The separator key that defines the right edge of that index partition or <code>null</code> iff
    * the index partition does not have a right sibling (a <code>null</code> has the semantics of
    * having no upper bound).
    */
-  byte[] getRightSeparatorKey();
+  public byte[] getRightSeparatorKey();
 }

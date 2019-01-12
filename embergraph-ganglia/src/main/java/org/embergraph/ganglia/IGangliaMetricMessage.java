@@ -19,24 +19,24 @@ package org.embergraph.ganglia;
 public interface IGangliaMetricMessage extends IGangliaMessage {
 
   /** The printf format string associated with the metric value. */
-  String getFormat();
+  public String getFormat();
 
   /**
    * Return <code>true</code> if the metric value is a numeric, in which case it can be cast to a
    * {@link Number}.
    */
-  boolean isNumeric();
+  public boolean isNumeric();
 
   /** Return the metric value (non-<code>null</code>). */
-  Object getValue();
+  public Object getValue();
 
   /** Return a String representation of the metric value (always succeeds). */
-  String getStringValue();
+  public String getStringValue();
 
   /**
    * Return the {@link Number} for the metric value.
    *
    * @throws UnsupportedOperationException if the metric value is not numeric.
    */
-  Number getNumericValue();
+  public Number getNumericValue();
 }

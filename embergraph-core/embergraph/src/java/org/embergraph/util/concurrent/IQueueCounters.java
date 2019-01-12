@@ -32,7 +32,7 @@ public interface IQueueCounters extends ICounterHierarchy {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  interface ITaskCounters {
+  public interface ITaskCounters {
 
     /** Count of all tasks completed by the service (failed + success). */
     String TaskCompleteCount = "Task Complete Count";
@@ -90,7 +90,7 @@ public interface IQueueCounters extends ICounterHierarchy {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  interface IThreadPoolExecutorCounters extends IQueueCounters {
+  public interface IThreadPoolExecutorCounters extends IQueueCounters {
 
     /**
      * Count of all tasks completed by the service (failed + success).
@@ -134,7 +134,7 @@ public interface IQueueCounters extends ICounterHierarchy {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  interface IThreadPoolExecutorTaskCounters extends IQueueCounters {
+  public interface IThreadPoolExecutorTaskCounters extends IQueueCounters {
 
     /**
      * Count of all tasks submitted to the service.
@@ -211,7 +211,7 @@ public interface IQueueCounters extends ICounterHierarchy {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  interface IWriteServiceExecutorCounters extends IThreadPoolExecutorTaskCounters {
+  public interface IWriteServiceExecutorCounters extends IThreadPoolExecutorTaskCounters {
 
     /**
      * The #of tasks that are currently running <strong>with locks held</strong> (moving average)

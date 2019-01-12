@@ -54,7 +54,7 @@ public interface IChunkedIterator<E> extends ICloseableIterator<E> {
    * @throws NoSuchElementException if the iterator is exhausted.
    */
   @Override
-  E next();
+  public E next();
 
   /**
    * Return the next "chunk" from the iterator.
@@ -62,7 +62,7 @@ public interface IChunkedIterator<E> extends ICloseableIterator<E> {
    * @return The next chunk.
    * @throws NoSuchElementException if the iterator is exhausted.
    */
-  E[] nextChunk();
+  public E[] nextChunk();
 
   /**
    * Removes the last element visited by {@link #next()} (optional operation).
@@ -75,5 +75,5 @@ public interface IChunkedIterator<E> extends ICloseableIterator<E> {
    * index as they are visited.
    */
   @Override
-  void remove();
+  public void remove();
 }

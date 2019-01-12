@@ -147,12 +147,12 @@ public interface IEvaluationContext {
    *
    * @return
    */
-  Set<IVariable<?>> getGloballyScopedVariables();
+  public Set<IVariable<?>> getGloballyScopedVariables();
 
   /**
    * Sets the variables with global scope. This basically serves the purpose of identifying
    *
    * @param globallyScopedVariables
    */
-  void setGloballyScopedVariables(final Set<IVariable<?>> globallyScopedVariables);
+  public void setGloballyScopedVariables(final Set<IVariable<?>> globallyScopedVariables);
 }

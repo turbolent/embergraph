@@ -266,7 +266,7 @@ public class AbstractKeyRangeMasterTestCase extends TestCase2 {
           protected IMetadataIndex getMetadataIndex(long ts) {
 
             return mdi;
-          }
+          };
 
           @Override
           public LinkedList<Split> splitKeys(

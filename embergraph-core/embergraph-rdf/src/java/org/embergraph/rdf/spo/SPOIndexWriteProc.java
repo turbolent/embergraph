@@ -163,7 +163,7 @@ public class SPOIndexWriteProc extends AbstractKeyArrayIndexProcedure<Object>
         (SPOTupleSerializer) ndx.getIndexMetadata().getTupleSerializer();
 
     // true iff logging is enabled and this is the primary (SPO/SPOC) index.
-    final boolean isPrimaryIndex = INFO && tupleSer.getKeyOrder().isPrimaryIndex();
+    final boolean isPrimaryIndex = INFO ? tupleSer.getKeyOrder().isPrimaryIndex() : false;
 
     // Array used to report by which statements were modified by this operation.
     final ModifiedEnum[] modified = reportMutation ? new ModifiedEnum[n] : null;

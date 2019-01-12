@@ -186,7 +186,7 @@ public class TestHALogWriter extends TestCase2 {
   }
 
   /** Simple writelog test, open file, write data and commit. */
-  public void testSimpleRWWriter() throws IOException, InterruptedException {
+  public void testSimpleRWWriter() throws FileNotFoundException, IOException, InterruptedException {
 
     final HALogWriter writer = new HALogWriter(logdir);
 
@@ -232,7 +232,7 @@ public class TestHALogWriter extends TestCase2 {
 
   /** Simple WriteReader, no concurrency, confirms non-delayed responses. */
   public void testSimpleRWWriterReader()
-      throws IOException, InterruptedException {
+      throws FileNotFoundException, IOException, InterruptedException {
 
     final HALogWriter writer = new HALogWriter(logdir);
 
@@ -701,7 +701,7 @@ public class TestHALogWriter extends TestCase2 {
                     // should block until writer is closed.
                     assertFalse(reader.hasMoreBuffers());
                     // done - success.
-                    return null;
+                    return (Void) null;
                   }
                 });
 
@@ -790,7 +790,7 @@ public class TestHALogWriter extends TestCase2 {
                     // should block until writer is closed.
                     assertFalse(reader.hasMoreBuffers());
                     // done - success.
-                    return null;
+                    return (Void) null;
                   }
                 });
 

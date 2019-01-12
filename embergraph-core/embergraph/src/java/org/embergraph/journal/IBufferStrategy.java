@@ -39,17 +39,17 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    * The next offset at which a data item would be written on the store as an offset into the
    * <em>user extent</em>.
    */
-  long getNextOffset();
+  public long getNextOffset();
 
   /**
    * The buffer mode supported by the implementation
    *
    * @return The implemented buffer mode.
    */
-  BufferMode getBufferMode();
+  public BufferMode getBufferMode();
 
   /** The initial extent. */
-  long getInitialExtent();
+  public long getInitialExtent();
 
   /**
    * The maximum extent allowable before a buffer overflow operation will be rejected.
@@ -65,14 +65,14 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    * @return The maximum extent permitted for the buffer -or- <code>0L</code> iff no limit is
    *     imposed.
    */
-  long getMaximumExtent();
+  public long getMaximumExtent();
 
   /**
    * The current size of the journal in bytes. When the journal is backed by a disk file this is the
    * actual size on disk of that file. The initial value for this property is set by {@link
    * Options#INITIAL_EXTENT}.
    */
-  long getExtent();
+  public long getExtent();
 
   /**
    * The size of the user data extent in bytes.
@@ -81,7 +81,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    * {@link #getExtent()} since the latter also reports the space allocated to the journal header
    * and root blocks.
    */
-  long getUserExtent();
+  public long getUserExtent();
 
   /**
    * The size of the journal header, including MAGIC, version, and both root blocks. This is used as
@@ -89,7 +89,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    * modes that are not backed by a file (e.g., transient) or that are memory mapped (since the map
    * is setup to skip over the header)
    */
-  int getHeaderSize();
+  public int getHeaderSize();
 
   /**
    * Either truncates or extends the journal.
@@ -102,7 +102,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    * @exception IllegalArgumentException The user extent MAY NOT be increased beyond the maximum
    *     offset for which the journal was provisioned by {@link Options#OFFSET_BITS}.
    */
-  void truncate(long extent);
+  public void truncate(long extent);
 
   /**
    * Write the root block onto stable storage (ie, flush it through to disk).
@@ -113,7 +113,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    *     or not the file metadata for the journal is forced to stable storage. See {@link
    *     Options#FORCE_ON_COMMIT}.
    */
-  void writeRootBlock(IRootBlockView rootBlock, ForceEnum forceOnCommitEnum);
+  public void writeRootBlock(IRootBlockView rootBlock, ForceEnum forceOnCommitEnum);
 
   //    /**
   //     * Rolls back the store to the prior commit point by restoring the last
@@ -133,7 +133,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
   //    public void rollback();
 
   /** Read the specified root block from the backing file. */
-  ByteBuffer readRootBlock(boolean rootBlock0);
+  public ByteBuffer readRootBlock(boolean rootBlock0);
 
   /**
    * A block operation that transfers the serialized records (aka the written on portion of the user
@@ -148,7 +148,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    * @return The #of bytes written.
    * @throws IOException
    */
-  long transferTo(RandomAccessFile out) throws IOException;
+  public long transferTo(RandomAccessFile out) throws IOException;
 
   /**
    * Seals the store against further writes and discards any write caches since they will no longer
@@ -159,12 +159,12 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    * @throws IllegalStateException if the store is closed.
    * @throws IllegalStateException if the store is read-only.
    */
-  void closeForWrites();
+  public void closeForWrites();
 
   /** Return the performance counter hierarchy. */
-  CounterSet getCounters();
+  public CounterSet getCounters();
 
-  IAddressManager getAddressManager();
+  public IAddressManager getAddressManager();
 
   /**
    * A method that removes assumptions of how a specific strategy determines whether a transaction
@@ -174,7 +174,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    *     Strategy
    * @return whether any modification has occurred.
    */
-  boolean requiresCommit(IRootBlockView block);
+  public boolean requiresCommit(IRootBlockView block);
 
   /**
    * A method that removes assumptions of how a specific strategy commits data. For most strategies
@@ -183,13 +183,13 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    * this is the method that triggers that management. The caller MUST provide appropriate
    * synchronization.
    */
-  void commit();
+  public void commit();
 
   /**
    * A method that requires the implementation to discard its buffered write set (if any). The
    * caller is responsible for any necessary synchronization as part of the abort protocol.
    */
-  void abort();
+  public void abort();
 
   /**
    * Return <code>true</code> if the store has been modified since the last {@link #commit()} or
@@ -197,7 +197,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    *
    * @return true if store has been modified since last {@link #commit()} or {@link #abort()}.
    */
-  boolean isDirty();
+  public boolean isDirty();
 
   /**
    * The RWStrategy requires meta allocation info in the root block, this method is the hook to
@@ -206,7 +206,7 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    *
    * @return the metaStartAddr for the root block if any
    */
-  long getMetaStartAddr();
+  public long getMetaStartAddr();
 
   /**
    * The RWStrategy requires meta allocation info in the root block, this method is the hook to
@@ -215,20 +215,20 @@ public interface IBufferStrategy extends IRawStore, IMRMW {
    *
    * @return the metaBitsAddr for the root block if any
    */
-  long getMetaBitsAddr();
+  public long getMetaBitsAddr();
 
   /** @return the number of bits available in the address to define offset */
-  int getOffsetBits();
+  public int getOffsetBits();
 
   /** @return the maximum record size supported by this strategy */
-  int getMaxRecordSize();
+  public int getMaxRecordSize();
 
   /**
    * Return <code>true</code> if the store uses per-record checksums. When <code>true</code>, an
    * additional 4 bytes are written after the record on the disk. Those bytes contain the checksum
    * of the record.
    */
-  boolean useChecksums();
+  public boolean useChecksums();
 
   //    /**
   //     * Determines whether there are outstanding writes to the underlying store

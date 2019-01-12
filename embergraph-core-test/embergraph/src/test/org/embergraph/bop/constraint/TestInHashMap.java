@@ -40,7 +40,7 @@ public class TestInHashMap extends TestINConstraint {
   }
 
   @Override
-  protected INConstraint newINConstraint(IVariable<?> var, IConstant<?>[] vals) {
+  protected INConstraint newINConstraint(IVariable<?> var, IConstant<?> vals[]) {
     return new INHashMap(var, vals);
   }
 }

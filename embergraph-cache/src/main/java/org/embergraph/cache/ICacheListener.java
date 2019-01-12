@@ -35,5 +35,5 @@ public interface ICacheListener<K, T> {
    * @param entry The cache entry for the object that is being evicted. The entry is no longer valid
    *     once this method returns and MAY be reused by the {@link ICachePolicy} implementation.
    */
-  void objectEvicted(ICacheEntry<K, T> entry);
+  public void objectEvicted(ICacheEntry<K, T> entry);
 }

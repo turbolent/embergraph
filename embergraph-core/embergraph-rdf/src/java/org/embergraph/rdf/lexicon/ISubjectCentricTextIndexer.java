@@ -53,5 +53,5 @@ public interface ISubjectCentricTextIndexer<A extends IHit> extends ITextIndexer
    * @todo allow registeration of datatype specific tokenizers (we already have language family
    *     based lookup).
    */
-  void index(IV<?, ?> subject, Iterator<EmbergraphValue> valuesIterator);
+  public void index(IV<?, ?> subject, Iterator<EmbergraphValue> valuesIterator);
 }

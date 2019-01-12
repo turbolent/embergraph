@@ -162,7 +162,7 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
   protected FunctionNode noneary(final SimpleNode node, final URI functionURI)
       throws VisitorException {
 
-    return new FunctionNode(functionURI, null /* scalarValues */);
+    return new FunctionNode(functionURI, null /* scalarValues */, new ValueExpressionNode[] {});
   }
 
   /** Handle a simple unary function (the child of the node is the argument to the function). */
@@ -170,7 +170,7 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
       throws VisitorException {
 
     return new FunctionNode(
-        functionURI, null /* scalarValues */, left(node));
+        functionURI, null /* scalarValues */, new ValueExpressionNode[] {left(node)});
   }
 
   /** Handle a simple binary function (both children of the node are arguments to the function). */
@@ -178,7 +178,7 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
       throws VisitorException {
 
     return new FunctionNode(
-        functionURI, null /* scalarValues */, left(node), right(node));
+        functionURI, null /* scalarValues */, new ValueExpressionNode[] {left(node), right(node)});
   }
 
   /**
@@ -191,7 +191,9 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
     return new FunctionNode(
         functionURI,
         null /* scalarValues */,
-        left(node), right(node), (ValueExpressionNode) node.jjtGetChild(2).jjtAccept(this, null));
+        new ValueExpressionNode[] {
+          left(node), right(node), (ValueExpressionNode) node.jjtGetChild(2).jjtAccept(this, null)
+        });
   }
 
   /**
@@ -204,10 +206,12 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
     return new FunctionNode(
         functionURI,
         null /* scalarValues */,
-        left(node),
-        right(node),
-        (ValueExpressionNode) node.jjtGetChild(2).jjtAccept(this, null),
-        (ValueExpressionNode) node.jjtGetChild(3).jjtAccept(this, null));
+        new ValueExpressionNode[] {
+          left(node),
+          right(node),
+          (ValueExpressionNode) node.jjtGetChild(2).jjtAccept(this, null),
+          (ValueExpressionNode) node.jjtGetChild(3).jjtAccept(this, null)
+        });
   }
 
   /** Handle a simple nary function (all children of the node are arguments to the function). */
@@ -251,7 +255,7 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
     if (node.isDistinct()) {
 
       scalarValues =
-          Collections.singletonMap(AggregateBase.Annotations.DISTINCT, Boolean.TRUE);
+          Collections.singletonMap(AggregateBase.Annotations.DISTINCT, (Object) Boolean.TRUE);
     }
 
     if (node instanceof ASTCount && ((ASTCount) node).isWildcard()) {
@@ -261,10 +265,10 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
        */
 
       return new FunctionNode(
-          functionURI, scalarValues, new VarNode("*"));
+          functionURI, scalarValues, new ValueExpressionNode[] {new VarNode("*")});
     }
 
-    return new FunctionNode(functionURI, scalarValues, left(node));
+    return new FunctionNode(functionURI, scalarValues, new ValueExpressionNode[] {left(node)});
   }
 
   //    @Override
@@ -561,8 +565,8 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
     return new FunctionNode(
         FunctionRegistry.IRI,
         //                null/* scalarValues */,
-        Collections.singletonMap(IriBOp.Annotations.BASE_URI, node.getBaseURI()),
-        left(node));
+        Collections.singletonMap(IriBOp.Annotations.BASE_URI, (Object) node.getBaseURI()),
+        new ValueExpressionNode[] {left(node)});
 
     //        return unary(node, FunctionRegistry.IRI);
     /*
@@ -873,7 +877,7 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
     if (ve instanceof VarNode) {
 
       // Assign to self.
-      return new AssignmentNode((VarNode) ve, ve);
+      return new AssignmentNode((VarNode) ve, (VarNode) ve);
     }
 
     // Wrap with assignment to an anonymous variable.
@@ -938,6 +942,6 @@ public class ValueExprBuilder extends EmbergraphASTVisitorBase {
     }
 
     return new FunctionNode(
-        FunctionRegistry.GROUP_CONCAT, scalarValues, left(node));
+        FunctionRegistry.GROUP_CONCAT, scalarValues, new ValueExpressionNode[] {left(node)});
   }
 }

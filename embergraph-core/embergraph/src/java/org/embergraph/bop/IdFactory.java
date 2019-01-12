@@ -21,5 +21,5 @@ package org.embergraph.bop;
 public interface IdFactory {
 
   /** Issue the next bop identifier. */
-  int nextId();
+  public int nextId();
 }

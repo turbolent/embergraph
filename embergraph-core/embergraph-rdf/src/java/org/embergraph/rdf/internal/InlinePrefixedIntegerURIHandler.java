@@ -61,7 +61,7 @@ public class InlinePrefixedIntegerURIHandler extends InlineLocalNameIntegerURIHa
     }
 
     final String intValue =
-        getPackedValueString(localName.substring(this.prefix.length()));
+        getPackedValueString(localName.substring(this.prefix.length(), localName.length()));
 
     return super.createInlineIV(intValue);
   }

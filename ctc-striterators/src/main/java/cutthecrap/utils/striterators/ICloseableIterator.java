@@ -40,5 +40,5 @@ public interface ICloseableIterator<E> extends Iterator<E>, ICloseable {
    * statement. Instead they MUST wait for an explicit {@link #close()} by the application.
    */
   @Override
-  void close();
+  public void close();
 }

@@ -55,7 +55,7 @@ public class NoAxiomFilter<E extends ISPO> extends SPOFilter<E> {
 
   private boolean accept(final ISPO o) {
 
-    final ISPO spo = o;
+    final ISPO spo = (ISPO) o;
 
     return spo.getStatementType() != StatementEnum.Axiom;
   }

@@ -77,7 +77,7 @@ public class TestPruneBindingSets extends ProxyEmbergraphSailTestCase {
       sail.initialize();
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
       final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+          (EmbergraphSailRepositoryConnection) repo.getConnection();
       try {
         cxn.setAutoCommit(false);
 
@@ -131,7 +131,7 @@ public class TestPruneBindingSets extends ProxyEmbergraphSailTestCase {
           TupleQueryResult result = tupleQuery.evaluate();
 
           Collection<BindingSet> solution = new LinkedList<BindingSet>();
-          solution.add(createBindingSet(new BindingImpl("a", a)));
+          solution.add(createBindingSet(new Binding[] {new BindingImpl("a", a)}));
 
           compare(result, solution);
         }

@@ -480,7 +480,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     // #of entries from the old root _after_ the split.
     data.childEntryCounts[0] =
         (oldRoot.isLeaf()
-            ? oldRoot.getKeyCount()
+            ? ((Leaf) oldRoot).getKeyCount()
             : ((Node) oldRoot).getSpannedTupleCount());
 
     // dirtyChildren.add(oldRoot);
@@ -1796,7 +1796,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
     data.childAddr[childIndex + 1] = NULL;
 
     final long childEntryCount = // child.getSpannedTupleCount();
-        (child.isLeaf() ? child.getKeyCount() : ((Node) child).getSpannedTupleCount());
+        (child.isLeaf() ? ((Leaf) child).getKeyCount() : ((Node) child).getSpannedTupleCount());
 
     data.childEntryCounts[childIndex + 1] = childEntryCount;
 
@@ -3303,7 +3303,7 @@ public class Node extends AbstractNode<Node> implements INodeData {
 
           final long childSpannedEntryCount =
               (child.isLeaf()
-                  ? child.getKeyCount()
+                  ? ((Leaf) child).getKeyCount()
                   : ((Node) child).getSpannedTupleCount());
 
           if (getChildEntryCount(i) != childSpannedEntryCount) {

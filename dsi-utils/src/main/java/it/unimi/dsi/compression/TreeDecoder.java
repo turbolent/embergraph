@@ -95,7 +95,7 @@ public final class TreeDecoder implements Decoder, Serializable {
   }
 
   private static Node buildTree(
-      BitVector[] lexSortedCodeWords, final int[] symbol, int prefix, int offset, int length) {
+      BitVector lexSortedCodeWords[], final int[] symbol, int prefix, int offset, int length) {
     if (DEBUG) {
       System.err.println("****** " + offset + " " + length);
       System.err.println(Arrays.toString(lexSortedCodeWords));

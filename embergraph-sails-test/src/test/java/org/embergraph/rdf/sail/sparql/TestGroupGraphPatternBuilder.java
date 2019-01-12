@@ -809,7 +809,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.EQ,
               null /* scalarValues */,
-              new VarNode("s"), new VarNode("o"));
+              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
 
       whereClause.addChild(new FilterNode(ve));
     }
@@ -857,9 +857,11 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.GE,
               null /* scalarValues */,
-              new VarNode("a"),
-              new ConstantNode(
-                  lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG))));
+              new ValueExpressionNode[] {
+                new VarNode("a"),
+                new ConstantNode(
+                    lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG)))
+              });
 
       whereClause.addChild(new FilterNode(ve1));
 
@@ -867,9 +869,11 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.GE,
               null /* scalarValues */,
-              new VarNode("b"),
-              new ConstantNode(
-                  lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG))));
+              new ValueExpressionNode[] {
+                new VarNode("b"),
+                new ConstantNode(
+                    lexiconConfiguration.createInlineIV(new LiteralImpl("1", XSD.UNSIGNED_LONG)))
+              });
 
       whereClause.addChild(new FilterNode(ve2));
     }
@@ -920,7 +924,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.EQ,
               null /* scalarValues */,
-              new VarNode("s"), new VarNode("o"));
+              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
 
       whereClause.addChild(new FilterNode(ve));
     }
@@ -972,7 +976,7 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FunctionNode(
               FunctionRegistry.EQ,
               null /* scalarValues */,
-              new VarNode("s"), new VarNode("o"));
+              new ValueExpressionNode[] {new VarNode("s"), new VarNode("o")});
 
       whereClause.addChild(new FilterNode(ve));
     }
@@ -1021,9 +1025,10 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FilterNode(
               new FunctionNode(
                   FunctionRegistry.IN,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s")
+                  })));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);
@@ -1071,11 +1076,11 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FilterNode(
               new FunctionNode(
                   FunctionRegistry.IN,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"), // variable
-                  new VarNode("o") // other arg
-              )));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), // variable
+                    new VarNode("o") // other arg
+                  })));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);
@@ -1123,12 +1128,12 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FilterNode(
               new FunctionNode(
                   FunctionRegistry.IN,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"), // // variable
-                  new VarNode("p"),
-                  new VarNode("o") // other args.
-              )));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), // // variable
+                    new VarNode("p"),
+                    new VarNode("o") // other args.
+                  })));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);
@@ -1176,12 +1181,13 @@ public class TestGroupGraphPatternBuilder extends AbstractEmbergraphExprBuilderT
           new FilterNode(
               new FunctionNode(
                   FunctionRegistry.IN,
-                  null // scalarValues
-                  // args
-                  new VarNode("s"), // var
-                  // other args to IN()
-                  new ConstantNode(makeIV(valueFactory.createLiteral("1", XSD.INTEGER))),
-                  new ConstantNode(makeIV(valueFactory.createLiteral("2", XSD.INTEGER))))));
+                  null, // scalarValues
+                  new ValueExpressionNode[] { // args
+                    new VarNode("s"), // var
+                    // other args to IN()
+                    new ConstantNode(makeIV(valueFactory.createLiteral("1", XSD.INTEGER))),
+                    new ConstantNode(makeIV(valueFactory.createLiteral("2", XSD.INTEGER)))
+                  })));
     }
 
     final QueryRoot actual = parse(sparql, baseURI);

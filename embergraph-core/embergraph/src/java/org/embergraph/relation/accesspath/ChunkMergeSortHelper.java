@@ -53,7 +53,7 @@ public class ChunkMergeSortHelper {
         0, // fromIndex
         chunk.length, // toIndex
         new MyIntComparator((Comparable[]) chunk),
-        new MySwapper(chunk));
+        new MySwapper((Object[]) chunk));
 
     return;
   }

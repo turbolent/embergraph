@@ -129,7 +129,7 @@ public class TestIVUnicode extends TestCase2 {
     doEncodeDecodeTest(new String[] {"en", "embergraph"});
   }
 
-  private void doEncodeDecodeTest(final String[] expected) throws IOException {
+  private void doEncodeDecodeTest(final String expected[]) throws IOException {
 
     // buffer for encode result.
     final DataOutputBuffer out = new DataOutputBuffer();

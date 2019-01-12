@@ -158,7 +158,7 @@ public class TestIncrementalWrite extends AbstractBTreeTestCase {
     assertFalse(a.isPersistent());
     ((HardReferenceQueue<PO>) btree.writeRetentionQueue)
         .getListener()
-        .evicted(btree.writeRetentionQueue, btree.getRoot());
+        .evicted(((HardReferenceQueue<PO>) btree.writeRetentionQueue), btree.getRoot());
     assertTrue(a.isPersistent());
   }
 
@@ -238,7 +238,7 @@ public class TestIncrementalWrite extends AbstractBTreeTestCase {
 
     ((HardReferenceQueue<PO>) btree.writeRetentionQueue)
         .getListener()
-        .evicted(btree.writeRetentionQueue, b);
+        .evicted(((HardReferenceQueue<PO>) btree.writeRetentionQueue), b);
 
     // verify that b is now persistent.
     assertTrue(b.isPersistent());
@@ -325,7 +325,7 @@ public class TestIncrementalWrite extends AbstractBTreeTestCase {
 
     ((HardReferenceQueue<PO>) btree.writeRetentionQueue)
         .getListener()
-        .evicted(btree.writeRetentionQueue, c);
+        .evicted(((HardReferenceQueue<PO>) btree.writeRetentionQueue), c);
 
     // verify that c and its children (a,b) are now persistent.
     assertTrue(c.isPersistent());

@@ -554,7 +554,7 @@ public class RDFJoinNexus extends AbstractJoinNexus implements IJoinNexus {
         b[i] = new Justification(solution);
       }
 
-      final SPORelation r = (SPORelation) getRelation();
+      final SPORelation r = (SPORelation) (IMutableRelation) getRelation();
 
       /*
        * Use a thread pool to write out the statement and the

@@ -249,7 +249,7 @@ public class PSOutputStream extends IPSOutputStream {
    *
    * <p>we need to be able to efficiently handle large arrays beyond size of the blobThreshold, so
    */
-  public void write(final byte[] b, final int off, final int len) throws IOException {
+  public void write(final byte b[], final int off, final int len) throws IOException {
     if (m_store == null) {
       throw new IllegalStateException(ERR_NO_STORE);
     }
@@ -283,7 +283,7 @@ public class PSOutputStream extends IPSOutputStream {
       throw new IllegalStateException(ERR_ALREADY_SAVED);
     }
 
-    final byte[] b = new byte[512];
+    final byte b[] = new byte[512];
 
     int r = instr.read(b);
     while (r == 512) {

@@ -212,7 +212,7 @@ public final class Fast {
    *     exists, returns 72.
    */
   public static int select(final long x, final int rank) {
-    assert !ASSERTS || rank < count(x) : rank + " >= " + count(x);
+    if (ASSERTS) assert rank < count(x) : rank + " >= " + count(x);
 
     // Phase 1: sums by byte
     long byteSums = x - ((x & 0xa * ONES_STEP_4) >>> 1);
@@ -409,7 +409,7 @@ public final class Fast {
     return mostSignificantBit(x & -x);
   }
 
-  public static void main(final String[] a) {
+  public static void main(final String a[]) {
     final long n = Long.parseLong(a[0]);
     final long incr = Long.MAX_VALUE / (n / 2);
 

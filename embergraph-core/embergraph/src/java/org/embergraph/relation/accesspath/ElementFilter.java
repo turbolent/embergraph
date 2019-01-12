@@ -109,7 +109,7 @@ public class ElementFilter<R> extends TupleFilter<R> {
   @Override
   public boolean isValid(final ITuple<R> tuple) {
 
-    final R obj = tuple.getObject();
+    final R obj = (R) tuple.getObject();
 
     return test.isValid(obj);
   }

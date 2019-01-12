@@ -223,7 +223,7 @@ public abstract class AbstractApiTask<T> implements IApiTask<T>, IReadOnly {
 
     if (TimestampUtility.isReadOnly(timestamp)) {
 
-      return repo.getReadOnlyConnection(timestamp);
+      return (EmbergraphSailRepositoryConnection) repo.getReadOnlyConnection(timestamp);
     }
 
     // Read-write connection.

@@ -25,5 +25,5 @@ public interface BooleanProcedure {
    * @param element element passed to the procedure.
    * @return a flag to inform the object calling the procedure.
    */
-  boolean apply(boolean element);
+  public abstract boolean apply(boolean element);
 }

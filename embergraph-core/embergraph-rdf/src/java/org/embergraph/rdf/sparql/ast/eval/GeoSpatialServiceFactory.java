@@ -272,7 +272,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
         if (!p.isConstant()) throw new RuntimeException("Expecting geospatial predicate: " + sp);
 
-        final URI uri = (URI) p.getValue();
+        final URI uri = (URI) ((ConstantNode) p).getValue();
 
         if (!uri.stringValue().startsWith(GeoSpatial.NAMESPACE))
           throw new RuntimeException("Expecting search predicate: " + sp);
@@ -374,7 +374,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
     final TermNode o = sp.o();
 
-    boolean isNotUri = !o.isConstant() || !(o.getValue() instanceof URI);
+    boolean isNotUri = !o.isConstant() || !(((ConstantNode) o).getValue() instanceof URI);
     boolean isNotVariable = !o.isVariable();
 
     if (isNotUri && isNotVariable) {
@@ -387,7 +387,7 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
 
     final TermNode o = sp.o();
 
-    boolean isNotLiteral = !o.isConstant() || !(o.getValue() instanceof Literal);
+    boolean isNotLiteral = !o.isConstant() || !(((ConstantNode) o).getValue() instanceof Literal);
     boolean isNotVariable = !o.isVariable();
 
     if (isNotLiteral && isNotVariable) {
@@ -953,13 +953,14 @@ public class GeoSpatialServiceFactory extends AbstractServiceFactoryBase {
          * gives us an early exit point for the service (see null check below).
          */
         IPredicate<ISPO> pred =
-            kb.getPredicate(
-                (URI) s.getValue(), /* subject */
-                p == null ? null : (URI) p.getValue(), /* predicate */
-                o.getValue(), /* object */
-                null, /* context */
-                null, /* filter */
-                rangeBop); /* rangeBop */
+            (IPredicate<ISPO>)
+                kb.getPredicate(
+                    (URI) s.getValue(), /* subject */
+                    p == null ? null : (URI) p.getValue(), /* predicate */
+                    o.getValue(), /* object */
+                    null, /* context */
+                    null, /* filter */
+                    rangeBop); /* rangeBop */
 
         if (pred == null) {
           return null;

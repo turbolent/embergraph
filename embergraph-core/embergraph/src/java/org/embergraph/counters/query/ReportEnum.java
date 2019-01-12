@@ -25,5 +25,5 @@ public enum ReportEnum {
   pivot,
 
   /** Plot a timeline of events. */
-  events
+  events;
 }

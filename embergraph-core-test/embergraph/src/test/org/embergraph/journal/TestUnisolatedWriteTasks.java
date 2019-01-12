@@ -182,7 +182,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
 
                     assertNotNull(vals[i]);
 
-                    byte[] actualValue = ndx.lookup(keys[i]);
+                    byte[] actualValue = (byte[]) ndx.lookup(keys[i]);
 
                     assertEquals("i=" + i, vals[i], actualValue);
                   }
@@ -332,7 +332,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
 
                       assertNotNull(vals1[i]);
 
-                      byte[] actualValue = ndx.lookup(keys1[i]);
+                      byte[] actualValue = (byte[]) ndx.lookup(keys1[i]);
 
                       assertEquals("i=" + i, vals1[i], actualValue);
                     }
@@ -368,7 +368,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
 
                       assertNotNull(vals2[i]);
 
-                      byte[] actualValue = ndx.lookup(keys2[i]);
+                      byte[] actualValue = (byte[]) ndx.lookup(keys2[i]);
 
                       assertEquals("i=" + i, vals2[i], actualValue);
                     }
@@ -541,7 +541,7 @@ public class TestUnisolatedWriteTasks extends ProxyTestCase<Journal> {
 
                     for (int j = 0; j < stuff.ninserts; j++) {
 
-                      byte[] actualValue = ndx.lookup(stuff.keys[j]);
+                      byte[] actualValue = (byte[]) ndx.lookup(stuff.keys[j]);
 
                       assertEquals("j=" + j, stuff.vals[j], actualValue);
                     }

@@ -258,7 +258,7 @@ public class DefaultNodeCoder implements IAbstractNodeDataCoder<INodeData>, Exte
       final byte nbits = (byte) (Fast.mostSignificantBit(delta) + 1);
 
       // one byte.
-      buf.putByte(nbits);
+      buf.putByte((byte) nbits);
 
       // offset of minVersionTimestamp.
       //            O_versionTimestamps = buf.pos();

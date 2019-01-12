@@ -52,7 +52,7 @@ public class InlineHexUUIDURIHandler extends InlineURIHandler {
     }
 
     try {
-      final byte[] uuid = DatatypeConverter.parseHexBinary(localName);
+      final byte uuid[] = DatatypeConverter.parseHexBinary(localName);
       return new UUIDLiteralIV(asUuid(uuid));
     } catch (IllegalArgumentException ex) {
       /*

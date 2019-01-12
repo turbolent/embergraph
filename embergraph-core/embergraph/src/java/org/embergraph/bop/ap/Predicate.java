@@ -132,12 +132,14 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
     this(
         values,
         NV.asMap(
-            new NV(Annotations.RELATION_NAME, new String[] {relationName}),
-            new NV(Annotations.PARTITION_ID, partitionId),
-            new NV(Annotations.OPTIONAL, optional),
-            new NV(Annotations.INDEX_LOCAL_FILTER, ElementFilter.newInstance(constraint)),
-            new NV(Annotations.ACCESS_PATH_EXPANDER, expander),
-            new NV(Annotations.TIMESTAMP, timestamp)));
+            new NV[] {
+              new NV(Annotations.RELATION_NAME, new String[] {relationName}),
+              new NV(Annotations.PARTITION_ID, partitionId),
+              new NV(Annotations.OPTIONAL, optional),
+              new NV(Annotations.INDEX_LOCAL_FILTER, ElementFilter.newInstance(constraint)),
+              new NV(Annotations.ACCESS_PATH_EXPANDER, expander),
+              new NV(Annotations.TIMESTAMP, timestamp)
+            }));
 
     if (relationName == null) throw new IllegalArgumentException();
 
@@ -184,7 +186,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
 
   public int getPartitionId() {
 
-    return getProperty(Annotations.PARTITION_ID, Annotations.DEFAULT_PARTITION_ID);
+    return (Integer) getProperty(Annotations.PARTITION_ID, Annotations.DEFAULT_PARTITION_ID);
   }
 
   @SuppressWarnings("rawtypes")
@@ -201,7 +203,7 @@ public class Predicate<E> extends AbstractAccessPathOp<E> implements IPredicate<
 
   public final boolean isOptional() {
 
-    return getProperty(Annotations.OPTIONAL, Annotations.DEFAULT_OPTIONAL);
+    return (Boolean) getProperty(Annotations.OPTIONAL, Annotations.DEFAULT_OPTIONAL);
   }
 
   //    /**

@@ -34,5 +34,5 @@ public interface IPredecessor<VS, ES, ST> {
    * @param targetVertices An array of zero or more target vertices.
    * @throws IllegalArgumentException if either argument is <code>null</code>.
    */
-  void prunePaths(final IGASContext<VS, ES, ST> ctx, final Value[] targetVertices);
+  public void prunePaths(final IGASContext<VS, ES, ST> ctx, final Value[] targetVertices);
 }

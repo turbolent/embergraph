@@ -87,7 +87,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
           org.embergraph.rdf.sparql.ast.StatementPatternNode.Annotations {}
 
   public interface ApplyAnnotation {
-    void apply(ASTBase target);
+    public void apply(ASTBase target);
   }
 
   enum HelperFlag {
@@ -126,7 +126,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
     OPTIONAL {
       @Override
       public void apply(ASTBase sp) {
-        sp.setProperty(Annotations.OPTIONAL, true);
+        ((ModifiableBOpBase) sp).setProperty(Annotations.OPTIONAL, true);
       }
     },
     DISTINCT {
@@ -171,7 +171,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
       alp.setProperty(Annotations.LOWER_BOUND, mod == PathMod.ONE_OR_MORE ? 1L : 0L);
       alp.setProperty(Annotations.UPPER_BOUND, mod == PathMod.ZERO_OR_ONE ? 1L : Long.MAX_VALUE);
     }
-  }
+  };
 
   protected AbstractOptimizerTestCase(final String name) {
     super(name);
@@ -533,7 +533,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
     }
 
     protected VarNode[] varNodes(String... names) {
-      VarNode[] rslt = new VarNode[names.length];
+      VarNode rslt[] = new VarNode[names.length];
       for (int i = 0; i < names.length; i++) rslt[i] = varNode(names[i]);
       return rslt;
     }
@@ -568,8 +568,8 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
      * @return
      */
     protected PathNode pathNode(String pattern) {
-      final String[] seq = pattern.split("/");
-      final PathElt[] elements = new PathElt[seq.length];
+      final String seq[] = pattern.split("/");
+      final PathElt elements[] = new PathElt[seq.length];
       PathMod mod = null;
       for (int i = 0; i < seq.length; i++) {
         final String s = seq[i];
@@ -699,7 +699,7 @@ public abstract class AbstractOptimizerTestCase extends AbstractASTEvaluationTes
     protected FunctionNode bound(final VarNode varNode) {
 
       final FunctionNode rslt =
-          new FunctionNode(FunctionRegistry.BOUND, null, varNode);
+          new FunctionNode(FunctionRegistry.BOUND, null, new ValueExpressionNode[] {varNode});
 
       rslt.setValueExpression(new IsBoundBOp(varNode.getValueExpression()));
 

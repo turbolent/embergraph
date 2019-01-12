@@ -387,9 +387,9 @@ public abstract class AbstractDoubleIntMap extends AbstractMap {
     int maxIndex = theKeys.size() - 1;
     for (int i = 0; i <= maxIndex; i++) {
       double key = theKeys.get(i);
-      buf.append(key);
+      buf.append(String.valueOf(key));
       buf.append("->");
-      buf.append(get(key));
+      buf.append(String.valueOf(get(key)));
       if (i < maxIndex) buf.append(", ");
     }
     buf.append("]");
@@ -408,9 +408,9 @@ public abstract class AbstractDoubleIntMap extends AbstractMap {
     int maxIndex = theKeys.size() - 1;
     for (int i = 0; i <= maxIndex; i++) {
       double key = theKeys.get(i);
-      buf.append(key);
+      buf.append(String.valueOf(key));
       buf.append("->");
-      buf.append(get(key));
+      buf.append(String.valueOf(get(key)));
       if (i < maxIndex) buf.append(", ");
     }
     buf.append("]");

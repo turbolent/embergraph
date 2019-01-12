@@ -42,5 +42,5 @@ public interface IProgramTask extends Callable<Object> {
    * @return
    * @throws Exception
    */
-  Object call() throws Exception;
+  public Object call() throws Exception;
 }

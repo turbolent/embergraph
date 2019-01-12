@@ -92,7 +92,7 @@ public abstract class IndexManager extends StoreManager {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public interface Options extends StoreManager.Options {
+  public static interface Options extends StoreManager.Options {
 
     /**
      * The capacity of the LRU cache of open {@link IIndex}s. The capacity of this cache indirectly
@@ -180,7 +180,7 @@ public abstract class IndexManager extends StoreManager {
    *
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    */
-  public interface IIndexManagerCounters {
+  public static interface IIndexManagerCounters {
 
     /** The parent under which the per-index partition performance counters are listed. */
     String Indices = "indices";
@@ -667,7 +667,7 @@ public abstract class IndexManager extends StoreManager {
        */
 
       // MAY be null.
-      btree = journal.getIndex(name);
+      btree = (BTree) journal.getIndex(name);
 
     } else if (timestamp == ITx.READ_COMMITTED) {
 
@@ -692,7 +692,10 @@ public abstract class IndexManager extends StoreManager {
       // MAY be null.
       btree = (BTree) journal.getIndexWithCommitRecord(name, commitRecord);
 
-      assert btree == null || btree.getLastCommitTime() != 0;
+      if (btree != null) {
+
+        assert ((BTree) btree).getLastCommitTime() != 0;
+      }
 
     } else {
 
@@ -735,7 +738,10 @@ public abstract class IndexManager extends StoreManager {
                 + ", ds="
                 + getDataServiceUUID());
 
-      assert btree == null || btree.getLastCommitTime() != 0;
+      if (btree != null) {
+
+        assert ((BTree) btree).getLastCommitTime() != 0;
+      }
     }
 
     // MAY be null.
@@ -1200,7 +1206,7 @@ public abstract class IndexManager extends StoreManager {
 
             if (sources.length == 1) {
 
-              tmp = sources[0];
+              tmp = (BTree) sources[0];
 
             } else {
 
@@ -1277,7 +1283,7 @@ public abstract class IndexManager extends StoreManager {
 
             if (sources.length == 1) {
 
-              tmp = sources[0];
+              tmp = (BTree) sources[0];
 
             } else {
 

@@ -114,7 +114,7 @@ public class DoNotAddFilter<E extends ISPO> extends SPOFilter<E> {
 
   private boolean accept(final ISPO o) {
 
-    final ISPO spo = o;
+    final ISPO spo = (ISPO) o;
 
     if (spo.s().isLiteral()) {
 
@@ -157,10 +157,17 @@ public class DoNotAddFilter<E extends ISPO> extends SPOFilter<E> {
       return false;
     }
 
-    // reject (?x, rdf:type, rdfs:Resource )
-    return forwardChainRdfTypeRdfsResource
-        || !IVUtility.equals(spo.p(), rdfType)
-        || !IVUtility.equals(spo.o(), rdfsResource);// Accept everything else.
+    if (!forwardChainRdfTypeRdfsResource
+        && IVUtility.equals(spo.p(), rdfType)
+        && IVUtility.equals(spo.o(), rdfsResource)) {
 
+      // reject (?x, rdf:type, rdfs:Resource )
+
+      return false;
+    }
+
+    // Accept everything else.
+
+    return true;
   }
 }

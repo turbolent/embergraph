@@ -150,7 +150,7 @@ public class ShortPackerTestCase extends TestCase {
   }
 
   private interface ShortGenerator {
-    short nextShort();
+    public short nextShort();
   }
 
   /**

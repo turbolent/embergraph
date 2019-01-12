@@ -187,7 +187,7 @@ public class StressTest_REST_MultiTenancy<S extends IIndexManager>
     rr.prepareUpdate("DROP GRAPH <" + namespace + ">").evaluate();
   }
 
-  private void simpleQuery(final String namespace) throws Exception {
+  private void simpleQuery(final String namespace) throws QueryEvaluationException, Exception {
     log.warn(String.format("Execute SPARQL on %s namespace...", namespace));
     m_mgr
         .getRepositoryForNamespace(namespace)

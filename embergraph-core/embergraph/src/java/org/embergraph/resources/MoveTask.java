@@ -694,10 +694,11 @@ public class MoveTask extends AbstractPrepareTask<MoveResult> {
          * but we lack its Future.
          */
         final IndexMetadata tmp =
-            targetDataService
-                .submit(
-                    ITx.UNISOLATED, targetIndexName, new IsIndexRegistered_UsingWriteService())
-                .get();
+            (IndexMetadata)
+                targetDataService
+                    .submit(
+                        ITx.UNISOLATED, targetIndexName, new IsIndexRegistered_UsingWriteService())
+                    .get();
 
         if (tmp == null) {
 

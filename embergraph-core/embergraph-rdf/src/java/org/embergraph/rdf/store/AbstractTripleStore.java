@@ -327,7 +327,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     try {
 
       final Constructor<? extends BaseClosure> ctor =
-          closureClass.getConstructor(AbstractTripleStore.class);
+          closureClass.getConstructor(new Class[] {AbstractTripleStore.class});
 
       return ctor.newInstance(this);
 
@@ -347,7 +347,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     try {
 
       final Constructor<? extends RDRHistory> ctor =
-          rdrHistoryClass.getConstructor(AbstractTripleStore.class);
+          rdrHistoryClass.getConstructor(new Class[] {AbstractTripleStore.class});
 
       return ctor.newInstance(this);
 
@@ -451,7 +451,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
   public Iterator<IRelation> relations() {
 
     return Collections.unmodifiableList(
-            Arrays.asList(getSPORelation(), getLexiconRelation()))
+            Arrays.asList(new IRelation[] {getSPORelation(), getLexiconRelation()}))
         .iterator();
   }
 
@@ -461,7 +461,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface Options
+  public static interface Options
       extends AbstractResource.Options,
           InferenceEngine.Options,
           org.embergraph.journal.Options,
@@ -1117,29 +1117,29 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      *
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/607">HISTORY SERVICE </a>
      */
-    String HISTORY_SERVICE = AbstractTripleStore.class.getName() + ".historyService";
+    public static String HISTORY_SERVICE = AbstractTripleStore.class.getName() + ".historyService";
 
-    String DEFAULT_HISTORY_SERVICE = "false";
+    public static String DEFAULT_HISTORY_SERVICE = "false";
 
     /**
      * The minimum amount of history (in milliseconds) that will be retained by the {@link
      * #HISTORY_SERVICE} (default {@value #DEFAULT_HISTORY_SERVICE_MIN_RELEASE_AGE}). The head of
      * the index will be pruned during update to remove tuples associated with older commit points.
      */
-    String HISTORY_SERVICE_MIN_RELEASE_AGE =
+    public static String HISTORY_SERVICE_MIN_RELEASE_AGE =
         AbstractTripleStore.class.getName() + ".historyService.minReleaseAge";
 
-    String DEFAULT_HISTORY_SERVICE_MIN_RELEASE_AGE = Long.toString(Long.MAX_VALUE);
+    public static String DEFAULT_HISTORY_SERVICE_MIN_RELEASE_AGE = Long.toString(Long.MAX_VALUE);
 
     /**
      * If this option is set to false, turn off the ASTBottomUpOptimizer.
      *
      * @see {@link ASTBottomUpOptimizer}
      */
-    String BOTTOM_UP_EVALUATION =
+    public static String BOTTOM_UP_EVALUATION =
         AbstractTripleStore.class.getName() + ".bottomUpEvaluation";
 
-    String DEFAULT_BOTTOM_UP_EVALUATION = "true";
+    public static String DEFAULT_BOTTOM_UP_EVALUATION = "true";
 
     /**
      * The name of the {@link IInlineURIFactory} class.
@@ -1154,19 +1154,19 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
     String RDR_HISTORY_CLASS = AbstractTripleStore.class.getName() + ".rdrHistoryClass";
 
     /** If this option is set to false, do not compute closure for sids. */
-    String COMPUTE_CLOSURE_FOR_SIDS =
+    public static String COMPUTE_CLOSURE_FOR_SIDS =
         AbstractTripleStore.class.getName() + ".computeClosureForSids";
 
-    String DEFAULT_COMPUTE_CLOSURE_FOR_SIDS = "true";
+    public static String DEFAULT_COMPUTE_CLOSURE_FOR_SIDS = "true";
 
     /**
      * If this option is set to false, turn off using raw records to store the lexical forms of the
      * RDF Values.
      */
-    String ENABLE_RAW_RECORDS_SUPPORT =
+    public static String ENABLE_RAW_RECORDS_SUPPORT =
         AbstractTripleStore.class.getName() + ".enableRawRecordsSupport";
 
-    String DEFAULT_ENABLE_RAW_RECORDS_SUPPORT = "true";
+    public static String DEFAULT_ENABLE_RAW_RECORDS_SUPPORT = "true";
   }
 
   protected Class determineAxiomClass() {
@@ -1551,10 +1551,10 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           try {
 
             final Constructor<? extends BaseVocabulary> ctor =
-                vocabularyClass.getConstructor(String.class);
+                vocabularyClass.getConstructor(new Class[] {String.class});
 
             // save reference.
-            vocabRef.set(ctor.newInstance(LEXICON_NAMESPACE));
+            vocabRef.set(ctor.newInstance(new Object[] {LEXICON_NAMESPACE}));
 
           } catch (Exception ex) {
 
@@ -1683,10 +1683,10 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           try {
 
             final Constructor<? extends BaseAxioms> ctor =
-                axiomClass.getConstructor(String.class);
+                axiomClass.getConstructor(new Class[] {String.class});
 
             // save reference.
-            axioms = ctor.newInstance(LEXICON_NAMESPACE);
+            axioms = ctor.newInstance(new Object[] {LEXICON_NAMESPACE});
 
           } catch (Exception ex) {
 
@@ -2618,9 +2618,9 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
      */
     final EmbergraphValueFactory valueFactory = getValueFactory();
 
-    s = valueFactory.asValue(s);
+    s = (Resource) valueFactory.asValue(s);
 
-    p = valueFactory.asValue(p);
+    p = (URI) valueFactory.asValue(p);
 
     o = valueFactory.asValue(o);
 
@@ -2797,7 +2797,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
         .createStatement(
             (EmbergraphResource) terms.get(spo.s()),
             (EmbergraphURI) terms.get(spo.p()),
-            terms.get(spo.o()),
+            (EmbergraphValue) terms.get(spo.o()),
             (EmbergraphResource) (c != null ? terms.get(c) : null),
             spo.getStatementType(),
             spo.getUserFlag());
@@ -3087,12 +3087,14 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
                   Var.var("s"), Var.var("p"), Var.var("o"),
                 },
             NV.asMap(
-                new NV(IPredicate.Annotations.RELATION_NAME, new String[] {r.getNamespace()}),
-                //                        new NV(IPredicate.Annotations.KEY_ORDER,
-                //                                keyOrder),
-                new NV(
-                    IPredicate.Annotations.INDEX_LOCAL_FILTER, ElementFilter.newInstance(filter)),
-                new NV(SPOPredicate.Annotations.INCLUDE_HISTORY, true)));
+                new NV[] {
+                  new NV(IPredicate.Annotations.RELATION_NAME, new String[] {r.getNamespace()}),
+                  //                        new NV(IPredicate.Annotations.KEY_ORDER,
+                  //                                keyOrder),
+                  new NV(
+                      IPredicate.Annotations.INDEX_LOCAL_FILTER, ElementFilter.newInstance(filter)),
+                  new NV(SPOPredicate.Annotations.INCLUDE_HISTORY, true),
+                }));
     //        final SPOPredicate p = new SPOPredicate(
     //                new String[] { r.getNamespace() },
     //                -1, // partitionId
@@ -3512,7 +3514,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
 
       while (itrj.hasNext()) {
 
-        final Justification jst = itrj.next().getObject();
+        final Justification jst = (Justification) itrj.next().getObject();
 
         sb.append(
             "#"
@@ -4146,7 +4148,7 @@ public abstract class AbstractTripleStore extends AbstractResource<IDatabase<Abs
           tempStore.addStatements(
               tempStore,
               true /*copyOnly*/,
-              db.getAccessPath(null, null, sid).iterator(),
+              db.getAccessPath((IV) null, (IV) null, (IV) sid).iterator(),
               null /* filter */);
 
           // finished with this sid.

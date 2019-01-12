@@ -141,7 +141,7 @@ public enum DescribeModeEnum {
   private final boolean reifiedStatements;
   private final boolean recursive;
 
-  DescribeModeEnum(
+  private DescribeModeEnum(
       final boolean forward,
       final boolean reverse,
       final boolean reifiedStatements,

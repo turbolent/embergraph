@@ -103,7 +103,7 @@ public class Striterator<I extends Iterator<E>, E> implements IStriterator<I, E>
   @SuppressWarnings("unchecked")
   public IStriterator<I, E> addFilter(final IFilter<I, ?, E> filter) {
 
-    src = (I) filter.filter(src);
+    src = (I) filter.filter((I) src);
 
     return this;
   }

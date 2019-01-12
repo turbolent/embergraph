@@ -37,5 +37,5 @@ import java.util.concurrent.Callable;
 public interface LockCallable<R extends Comparable, T> extends Callable<T> {
 
   /** The declared locks. */
-  R[] getResource();
+  public R[] getResource();
 }

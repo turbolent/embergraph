@@ -418,8 +418,8 @@ public class LRUCache<K, T> implements ICachePolicy<K, T> {
   /** Lazily allocated and eagerly freed. */
   private CopyOnWriteArraySet<ICacheOrderChangeListener<K, T>> _cacheOrderChangeListeners = null;
 
-  protected interface ICacheOrderChangeListener<K, T> {
-    void willRemove(ICacheEntry<K, T> entry);
+  protected static interface ICacheOrderChangeListener<K, T> {
+    public void willRemove(ICacheEntry<K, T> entry);
     //    	public void didAdd(ICacheEntryEntry);
   }
 

@@ -17,5 +17,5 @@ public enum DecompositionEnum {
   /** See {@link Collator#FULL_DECOMPOSITION}. */
   Full,
   /** See {@link Collator#CANONICAL_DECOMPOSITION}. */
-  Canonical
+  Canonical;
 }

@@ -134,11 +134,15 @@ public abstract class AbstractResourceMetadata
 
     // Note: compares UUIDs first.
 
-    return uuid.equals(o.getUUID())
+    if (uuid.equals(o.getUUID())
         && filename.equals(o.getFile())
         //                && nbytes == o.size()
-        && createTime == o.getCreateTime();
+        && createTime == o.getCreateTime()) {
 
+      return true;
+    }
+
+    return false;
   }
 
   public final String getFile() {

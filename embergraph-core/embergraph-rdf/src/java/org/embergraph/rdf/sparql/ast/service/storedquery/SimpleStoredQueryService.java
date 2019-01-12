@@ -52,7 +52,7 @@ public abstract class SimpleStoredQueryService extends StoredQueryService {
     final String baseURI = createParams.getServiceURI().stringValue();
 
     final EmbergraphSailTupleQuery query =
-        cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
+        (EmbergraphSailTupleQuery) cxn.prepareTupleQuery(QueryLanguage.SPARQL, queryStr, baseURI);
 
     return query.evaluate();
   }

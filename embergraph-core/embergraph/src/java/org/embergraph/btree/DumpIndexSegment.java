@@ -389,7 +389,7 @@ public class DumpIndexSegment {
 
       nscanned++;
 
-      final long priorAddr = leaf.getPriorAddr();
+      final long priorAddr = ((ImmutableLeaf) leaf).getPriorAddr();
 
       if (priorAddr == -1L) {
 
@@ -490,7 +490,7 @@ public class DumpIndexSegment {
 
       nscanned++;
 
-      final long nextAddr = leaf.getNextAddr();
+      final long nextAddr = ((ImmutableLeaf) leaf).getNextAddr();
 
       if (nextAddr == -1L) {
 

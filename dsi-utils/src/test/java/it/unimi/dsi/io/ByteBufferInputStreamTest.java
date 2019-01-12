@@ -15,7 +15,7 @@ public class ByteBufferInputStreamTest extends TestCase {
 
   private static final boolean DEBUG = false;
 
-  public void testStream() throws IOException {
+  public void testStream() throws FileNotFoundException, IOException {
     File f = File.createTempFile(ByteBufferInputStreamTest.class.getName(), "tmp");
     f.deleteOnExit();
     final int l = 100000;
@@ -34,8 +34,8 @@ public class ByteBufferInputStreamTest extends TestCase {
       FileInputStream test = new FileInputStream(f);
       FileChannel fc = test.getChannel();
       int a1, a2, off, len, pos;
-      byte[] b1 = new byte[32768];
-      byte[] b2 = new byte[32768];
+      byte b1[] = new byte[32768];
+      byte b2[] = new byte[32768];
 
       for (int k = 0; k < l / 10; k++) {
 

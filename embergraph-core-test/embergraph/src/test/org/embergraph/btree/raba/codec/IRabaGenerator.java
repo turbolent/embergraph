@@ -12,10 +12,10 @@ import org.embergraph.btree.raba.IRaba;
 public interface IRabaGenerator {
 
   /** If the generator can generate B+Tree keys. */
-  boolean isKeysGenerator();
+  public boolean isKeysGenerator();
 
   /** If the generator can generate B+Tree values. */
-  boolean isValuesGenerator();
+  public boolean isValuesGenerator();
 
   /**
    * Generate B+Tree keys (no <code>null</code>, no duplicates, data are fully ordered based on
@@ -25,7 +25,7 @@ public interface IRabaGenerator {
    * @return The keys.
    * @throws UnsupportedOperationException if the generator can not generate B+Tree keys.
    */
-  byte[][] generateKeys(int size);
+  public byte[][] generateKeys(int size);
 
   /**
    * Generate B+Tree values (may include <code>null</code>s).
@@ -34,5 +34,5 @@ public interface IRabaGenerator {
    * @return The values.
    * @throws UnsupportedOperationException if the generator can not generate B+Tree values.
    */
-  byte[][] generateValues(int size);
+  public byte[][] generateValues(int size);
 }

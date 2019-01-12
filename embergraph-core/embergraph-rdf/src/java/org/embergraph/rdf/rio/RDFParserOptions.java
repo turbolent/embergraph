@@ -45,7 +45,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
   /** */
   private static final long serialVersionUID = 1L;
 
-  public interface Options {
+  public static interface Options {
 
     /**
      * Optional boolean property may be used to turn on data verification in the RIO parser (default
@@ -60,10 +60,10 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
      * RDFParserBase#setPreserveBNodeIDs(boolean)} (default is {@value
      * #DEFAULT_PRESERVE_BNODE_IDS}).
      */
-    String PRESERVE_BNODE_IDS =
+    public static final String PRESERVE_BNODE_IDS =
         RDFParserOptions.class.getName() + ".preserveBNodeIDs";
 
-    String DEFAULT_PRESERVE_BNODE_IDS = "false";
+    public static final String DEFAULT_PRESERVE_BNODE_IDS = "false";
 
     /**
      * Optional boolean property may be used to set {@link
@@ -72,7 +72,7 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
      */
     String STOP_AT_FIRST_ERROR = RDFParserOptions.class.getName() + ".stopAtFirstError";
 
-    // @see <a href="http://trac.blazegraph.com/ticket/1055">http://trac.blazegraph.com/ticket/1055</a> (Change RDFParser configuration to use
+    // @see http://trac.blazegraph.com/ticket/1055 (Change RDFParser configuration to use
     // BasicaParserSettings)
     String DEFAULT_STOP_AT_FIRST_ERROR = "false";
 
@@ -83,12 +83,12 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
      */
     String DATATYPE_HANDLING = RDFParserOptions.class.getName() + ".datatypeHandling";
 
-    // @see <a href="http://trac.blazegraph.com/ticket/1055">http://trac.blazegraph.com/ticket/1055</a> (Change RDFParser configuration to use
+    // @see http://trac.blazegraph.com/ticket/1055 (Change RDFParser configuration to use
     // BasicaParserSettings)
     String DEFAULT_DATATYPE_HANDLING = DatatypeHandling.IGNORE.toString();
   }
 
-  // @see <a href="http://trac.blazegraph.com/ticket/1055">http://trac.blazegraph.com/ticket/1055</a> (Change RDFParser configuration to use
+  // @see http://trac.blazegraph.com/ticket/1055 (Change RDFParser configuration to use
   // BasicaParserSettings)
   private DatatypeHandling datatypeHandling = DatatypeHandling.IGNORE;
 
@@ -265,6 +265,8 @@ public class RDFParserOptions implements Serializable, IRDFParserOptions {
 
     if (stopAtFirstError != t.getStopAtFirstError()) return false;
 
-    return datatypeHandling.equals(getDatatypeHandling());
+    if (!datatypeHandling.equals(getDatatypeHandling())) return false;
+
+    return true;
   }
 }

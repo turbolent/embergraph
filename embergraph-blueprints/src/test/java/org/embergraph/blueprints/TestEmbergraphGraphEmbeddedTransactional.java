@@ -153,8 +153,10 @@ public class TestEmbergraphGraphEmbeddedTransactional extends AbstractTestEmberg
 
     private List<String> exclude =
         Arrays.asList(
-            // this one creates a deadlock, no way around it
-            "testTransactionIsolationCommitCheck");
+            new String[] {
+              // this one creates a deadlock, no way around it
+              "testTransactionIsolationCommitCheck"
+            });
 
     @Override
     public void doTestSuite(TestSuite testSuite) throws Exception {
@@ -239,7 +241,7 @@ public class TestEmbergraphGraphEmbeddedTransactional extends AbstractTestEmberg
 
     public void shutdown() {
       for (EmbergraphGraphEmbedded sail : testGraphs.values()) {
-        sail.repo.getSail().__tearDownUnitTest();
+        ((EmbergraphSail) sail.repo.getSail()).__tearDownUnitTest();
       }
       testGraphs.clear();
     }

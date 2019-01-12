@@ -173,7 +173,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
       assertFalse(journal._getName2Addr().willCommit(name));
 
       // verify entry written by the commit.
-      assertEquals(new byte[] {1, 2, 3}, ndx.lookup(new byte[] {1, 2, 3}));
+      assertEquals(new byte[] {1, 2, 3}, (byte[]) ndx.lookup(new byte[] {1, 2, 3}));
 
       // still not on the commit list.
       assertFalse(journal._getName2Addr().willCommit(name));
@@ -247,7 +247,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
         assertFalse(journal._getName2Addr().willCommit(name));
 
         // verify entry written by the commit.
-        assertEquals(new byte[] {1, 2, 3}, ndx.lookup(new byte[] {1, 2, 3}));
+        assertEquals(new byte[] {1, 2, 3}, (byte[]) ndx.lookup(new byte[] {1, 2, 3}));
 
         // still not on the commit list.
         assertFalse(journal._getName2Addr().willCommit(name));
@@ -306,7 +306,7 @@ public class TestCommitList extends ProxyTestCase<Journal> {
         assertFalse(journal._getName2Addr().willCommit(name));
 
         // verify entry written by the commit.
-        assertEquals(new byte[] {1, 2, 3}, ndx.lookup(new byte[] {1, 2, 3}));
+        assertEquals(new byte[] {1, 2, 3}, (byte[]) ndx.lookup(new byte[] {1, 2, 3}));
 
         // still not on the commit list.
         assertFalse(journal._getName2Addr().willCommit(name));

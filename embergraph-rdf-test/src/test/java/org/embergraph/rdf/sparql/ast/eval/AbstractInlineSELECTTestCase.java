@@ -55,7 +55,6 @@ package org.embergraph.rdf.sparql.ast.eval;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -137,7 +136,7 @@ public abstract class AbstractInlineSELECTTestCase extends AbstractDataAndSPARQL
 
       data = ttlPrefixes() + data;
 
-      byte[] utf8Data = data.getBytes(StandardCharsets.UTF_8);
+      byte utf8Data[] = data.getBytes("utf-8");
       final InputStream is = new ByteArrayInputStream(utf8Data);
       String uri = FILL_IN_URI;
 

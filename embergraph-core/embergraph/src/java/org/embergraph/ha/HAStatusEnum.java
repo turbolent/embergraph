@@ -29,5 +29,5 @@ public enum HAStatusEnum {
   /** Ready to handle requests as a quorum follower. */
   Follower,
   /** Not ready to handle HA read/write requests. */
-  NotReady
+  NotReady;
 }

@@ -35,5 +35,5 @@ import java.io.Serializable;
 public interface ISortKeyBuilderFactory<E> extends Serializable {
 
   /** Return a thread-local instance (safe for use by a single thread only). */
-  ISortKeyBuilder<E> newInstance();
+  public ISortKeyBuilder<E> newInstance();
 }

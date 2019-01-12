@@ -83,7 +83,7 @@ public class CountersServlet extends EmbergraphServlet {
         ((IEmbergraphFederation<?>) indexManager).reattachDynamicCounters();
       }
 
-      final CounterSet counterSet = indexManager.getCounters();
+      final CounterSet counterSet = ((ICounterSetAccess) indexManager).getCounters();
 
       final CounterSetSelector counterSelector = new CounterSetSelector(counterSet);
 

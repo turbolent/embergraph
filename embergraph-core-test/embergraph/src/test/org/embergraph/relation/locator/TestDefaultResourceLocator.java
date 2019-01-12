@@ -115,7 +115,7 @@ public class TestDefaultResourceLocator extends TestCase2 {
 
         // a request for the unisolated view gives us the same instance.
         assertTrue(
-            store.getResourceLocator().locate(namespace, ITx.UNISOLATED)
+            ((MockRelation) store.getResourceLocator().locate(namespace, ITx.UNISOLATED))
                 == mockRelation);
 
         /*
@@ -129,7 +129,7 @@ public class TestDefaultResourceLocator extends TestCase2 {
         // a request for the read committed view is not the same
         // instance as the unisolated view.
         assertTrue(
-            store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED)
+            ((MockRelation) store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED))
                 != mockRelation);
       }
 
@@ -143,7 +143,7 @@ public class TestDefaultResourceLocator extends TestCase2 {
 
         // a request for the unisolated view gives us the same instance.
         assertTrue(
-            store.getResourceLocator().locate(namespace, ITx.UNISOLATED)
+            ((MockRelation) store.getResourceLocator().locate(namespace, ITx.UNISOLATED))
                 == mockRelation);
 
         /*
@@ -154,7 +154,7 @@ public class TestDefaultResourceLocator extends TestCase2 {
         if (false) {
 
           assertNull(
-              store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED));
+              ((MockRelation) store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED)));
 
           final MockRelation readCommittedView1 =
               (MockRelation) store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED);
@@ -162,7 +162,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
           // same view before a commit.
           assertTrue(
               readCommittedView1
-                  == store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED));
+                  == (MockRelation)
+                      store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED));
 
           // commit
           store.commit();
@@ -190,7 +191,8 @@ public class TestDefaultResourceLocator extends TestCase2 {
           // another request gives us the same view
           assertTrue(
               readCommittedView2
-                  == store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED));
+                  == (MockRelation)
+                      store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED));
         }
       }
 
@@ -317,7 +319,7 @@ public class TestDefaultResourceLocator extends TestCase2 {
          * unisolated view.
          */
         assertTrue(
-            store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED)
+            ((MockRelation) store.getResourceLocator().locate(namespace, ITx.READ_COMMITTED))
                 != mockRelation);
       }
 

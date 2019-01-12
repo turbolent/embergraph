@@ -409,7 +409,7 @@ public class FastBufferedReader extends Reader implements WordReader {
 
   public boolean next(final MutableString word, final MutableString nonWord) throws IOException {
     int i;
-    final char[] buffer = this.buffer;
+    final char buffer[] = this.buffer;
 
     if (noMoreCharacters()) return false;
 

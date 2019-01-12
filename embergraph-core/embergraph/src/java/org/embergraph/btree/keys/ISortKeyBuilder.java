@@ -38,5 +38,5 @@ public interface ISortKeyBuilder<E> {
    * @param e Some object (required).
    * @return The unsigned byte[] sort key.
    */
-  byte[] getSortKey(E e);
+  public byte[] getSortKey(E e);
 }

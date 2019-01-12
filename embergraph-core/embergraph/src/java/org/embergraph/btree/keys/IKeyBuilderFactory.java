@@ -31,7 +31,7 @@ package org.embergraph.btree.keys;
 public interface IKeyBuilderFactory {
 
   /** Return an instance of the configured {@link IKeyBuilder}. */
-  IKeyBuilder getKeyBuilder();
+  public IKeyBuilder getKeyBuilder();
 
   /**
    * Return an instance of the configured {@link IKeyBuilder} that has been overridden to have
@@ -42,5 +42,5 @@ public interface IKeyBuilderFactory {
    * @see <a href="http://trac.blazegraph.com/ticket/974" > Name2Addr.indexNameScan(prefix) uses
    *     scan + filter </a>
    */
-  IKeyBuilder getPrimaryKeyBuilder();
+  public IKeyBuilder getPrimaryKeyBuilder();
 }

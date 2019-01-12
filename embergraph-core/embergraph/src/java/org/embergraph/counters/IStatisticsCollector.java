@@ -34,7 +34,7 @@ package org.embergraph.counters;
 public interface IStatisticsCollector extends ICounterSetAccess {
 
   /** The interval in seconds at which the counter values are sampled. */
-  int getInterval();
+  public int getInterval();
 
   //    /**
   //     * Return the counter hierarchy.
@@ -42,8 +42,8 @@ public interface IStatisticsCollector extends ICounterSetAccess {
   //    public CounterSet getCounters();
 
   /** Start collecting performance data. */
-  void start();
+  public void start();
 
   /** Stop collecting performance data. */
-  void stop();
+  public void stop();
 }

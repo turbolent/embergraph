@@ -40,13 +40,13 @@ import org.embergraph.relation.accesspath.IRunnableBuffer;
  */
 public interface RemoteRunnableBuffer<E, V> extends RemoteBuffer<E> {
 
-  void add(E e) throws IOException;
+  public void add(E e) throws IOException;
 
-  boolean isOpen() throws IOException;
+  public boolean isOpen() throws IOException;
 
-  void close() throws IOException;
+  public void close() throws IOException;
 
-  void abort(Throwable cause) throws IOException;
+  public void abort(Throwable cause) throws IOException;
 
-  Future<V> getFuture() throws IOException;
+  public Future<V> getFuture() throws IOException;
 }

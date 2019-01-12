@@ -25,16 +25,16 @@ package org.embergraph.journal;
 public interface ICommitTimeEntry {
 
   /** Return the bytes on the disk for the snapshot file. */
-  long sizeOnDisk();
+  public long sizeOnDisk();
 
   /** The commit counter associated with the index entry. */
-  long getCommitCounter();
+  public long getCommitCounter();
 
   /** The commit time associated with the index entry. */
-  long getCommitTime();
+  public long getCommitTime();
 
   /** Return the {@link IRootBlockView} of the snapshot. */
-  IRootBlockView getRootBlock();
+  public IRootBlockView getRootBlock();
 
   // public static class SnapshotRecord implements ISnapshotRecord,
   //        Externalizable {

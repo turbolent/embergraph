@@ -130,7 +130,7 @@ public class DebugOutputBitStream extends OutputBitStream {
     return s.length(len).reverse();
   }
 
-  public long write(final byte[] bits, final long len) throws IOException {
+  public long write(final byte bits[], final long len) throws IOException {
     if (len > Integer.MAX_VALUE) throw new IllegalArgumentException();
     MutableString s = new MutableString(" {");
     for (int i = 0; i < bits.length; i++) s.append(byte2Binary(bits[i]));

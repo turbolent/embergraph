@@ -317,7 +317,7 @@ public class HTreeNamedSubqueryOp extends PipelineOp
 
           final QueryEngine queryEngine = parentContext.getRunningQuery().getQueryEngine();
 
-          runningSubquery = queryEngine.eval(subQueryOp, bindingSets);
+          runningSubquery = queryEngine.eval((PipelineOp) subQueryOp, bindingSets);
 
           try {
 

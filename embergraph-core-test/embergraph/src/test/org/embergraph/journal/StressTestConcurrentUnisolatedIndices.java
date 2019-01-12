@@ -572,46 +572,46 @@ public class StressTestConcurrentUnisolatedIndices extends ProxyTestCase<Journal
   }
 
   /** Additional properties understood by this test. */
-  public interface TestOptions extends ConcurrencyManager.Options {
+  public static interface TestOptions extends ConcurrencyManager.Options {
 
     /** The timeout for the test (seconds). */
-    String TIMEOUT = "timeout";
+    public static final String TIMEOUT = "timeout";
 
     /**
      * The #of named resources from which {@link Writer}s may choosen the indices on which they will
      * write.
      */
-    String NRESOURCES = "nresources";
+    public static final String NRESOURCES = "nresources";
 
     /**
      * The minimum #of locks that a writer will obtain (0 or more, but a writer with zero locks will
      * not write on anything).
      */
-    String MIN_LOCKS = "minLocks";
+    public static final String MIN_LOCKS = "minLocks";
 
     /**
      * The maximum #of locks that a writer will obtain (LTE {@link #NRESOURCES}). A writer will
      * write on each resource that it locks.
      */
-    String MAX_LOCKS = "maxLocks";
+    public static final String MAX_LOCKS = "maxLocks";
 
     /** The #of trials (aka transactions) to run. */
-    String NTRIALS = "ntrials";
+    public static final String NTRIALS = "ntrials";
 
     /**
      * The length of the keys used in the test. This directly impacts the likelyhood of a
      * write-write conflict. Shorter keys mean more conflicts. However, note that conflicts are only
      * possible when there are at least two concurrent clients running.
      */
-    String KEYLEN = "keyLen";
+    public static final String KEYLEN = "keyLen";
 
     /** The #of operations in each trial. */
-    String NOPS = "nops";
+    public static final String NOPS = "nops";
 
     /**
      * The failure rate [0.0:1.0]. A {@link Writer} aborts by throwing a {@link SpuriousException}.
      */
-    String FAILURE_RATE = "failureRate";
+    public static final String FAILURE_RATE = "failureRate";
   }
 
   /**

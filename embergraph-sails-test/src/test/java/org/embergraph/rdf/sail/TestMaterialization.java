@@ -129,7 +129,7 @@ public class TestMaterialization extends ProxyEmbergraphSailTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        sail.__tearDownUnitTest(); // shutDown();
+        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -210,7 +210,7 @@ public class TestMaterialization extends ProxyEmbergraphSailTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        sail.__tearDownUnitTest(); // shutDown();
+        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
     }
   }
 
@@ -293,7 +293,7 @@ public class TestMaterialization extends ProxyEmbergraphSailTestCase {
       }
     } finally {
       if (sail instanceof EmbergraphSail)
-        sail.__tearDownUnitTest(); // shutDown();
+        ((EmbergraphSail) sail).__tearDownUnitTest(); // shutDown();
     }
   }
 }

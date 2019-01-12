@@ -59,7 +59,7 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    *     backing buffer pool has a bounded capacity and whether the {@link IMemoryManager} using
    *     that pool has a bounded capacity.
    */
-  long allocate(ByteBuffer data, boolean blocks);
+  public long allocate(ByteBuffer data, boolean blocks);
 
   /**
    * Version of {@link #allocate(ByteBuffer, boolean)} which is either blocking or non-blocking
@@ -74,7 +74,7 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    *     backing buffer pool has a bounded capacity and whether the {@link IMemoryManager} using
    *     that pool has a bounded capacity.
    */
-  long allocate(ByteBuffer data);
+  public long allocate(ByteBuffer data);
 
   /**
    * Return the address of a new allocation sufficient to store the specified number of bytes of
@@ -90,7 +90,7 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    *     backing buffer pool has a bounded capacity and whether the {@link IMemoryManager} using
    *     that pool has a bounded capacity.
    */
-  long allocate(int nbytes, boolean blocks);
+  public long allocate(int nbytes, boolean blocks);
 
   /**
    * Return the address of a new allocation sufficient to store the specified number of bytes of
@@ -106,9 +106,9 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    *     backing buffer pool has a bounded capacity and whether the {@link IMemoryManager} using
    *     that pool has a bounded capacity.
    */
-  long allocate(int nbytes);
+  public long allocate(int nbytes);
 
-  long allocate(ByteBuffer data, IAllocationContext context);
+  public long allocate(ByteBuffer data, IAllocationContext context);
 
   /**
    * Return an array of {@link ByteBuffer}s providing an updatable view onto the backing allocation.
@@ -136,7 +136,7 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    * @param addr An previously allocated address.
    * @return array of ByteBuffers
    */
-  ByteBuffer[] get(long addr);
+  public ByteBuffer[] get(long addr);
 
   /**
    * Return a copy of the data stored at that address. This method is intended for use with patterns
@@ -145,7 +145,7 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    * @param addr The address.
    * @return A copy of the data stored at that address.
    */
-  byte[] read(long addr);
+  public byte[] read(long addr);
 
   /**
    * Frees the address and makes available for recycling
@@ -155,9 +155,9 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    *     deleted). Note that the address 0L is always invalid as is any address which encodes a 0
    *     byte length.
    */
-  void free(long addr);
+  public void free(long addr);
 
-  void free(long addr, IAllocationContext context);
+  public void free(long addr, IAllocationContext context);
 
   /**
    * Clears all current allocations. Clearing an allocation context makes the backing heap storage
@@ -169,7 +169,7 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    * access to that allocation context have either been terminated or released their reference to
    * that allocation context. </strong>
    */
-  void clear();
+  public void clear();
 
   //  public void close();
   //
@@ -182,7 +182,7 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    * IMemoryManager} not extend {@link IAllocationContext} ). Also, note that {@link #commit()} is
    * similar to {@link IAllocationManager#detachContext(IAllocationContext)}.
    */
-  IMemoryManager createAllocationContext();
+  public IMemoryManager createAllocationContext();
 
   /**
    * Return the size of the application data for the allocation with the given address.
@@ -190,26 +190,26 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    * @param addr The address.
    * @return The #of bytes of in the applications allocation request.
    */
-  int allocationSize(long addr);
+  public int allocationSize(long addr);
 
   /**
    * The #of allocation spanned by this allocation context (including any any child allocation
    * contexts).
    */
-  long getAllocationCount();
+  public long getAllocationCount();
 
   /**
    * Return the #of bytes of application data allocated against this {@link IMemoryManager}
    * (including any child allocation contexts). Due to the overhead of the storage allocation
    * scheme, this value may be smaller than {@link #getSlotBytes()}.
    */
-  long getUserBytes();
+  public long getUserBytes();
 
   /**
    * Return the #of bytes of consumed by allocation slots allocated against this {@link
    * IMemoryManager} (including any child allocation contexts).
    */
-  long getSlotBytes();
+  public long getSlotBytes();
 
   //	/**
   //	 * @return an outputstream to stream data to the memory manager and to retrieve
@@ -231,17 +231,17 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
   //	public InputStream getInputStream(long addr);
 
   /** The size of a backing buffer in bytes. */
-  int getSectorSize();
+  public int getSectorSize();
 
   /** The #of backing buffers in use. */
-  int getSectorCount();
+  public int getSectorCount();
 
   /**
    * The maximum number of backing buffers which may be allocated by the {@link IMemoryManager} and
    * {@link Integer#MAX_VALUE} if there is no effective limit on the #of backing buffers which may
    * be allocated.
    */
-  int getMaxSectors();
+  public int getMaxSectors();
 
   //	public long saveDeferrals();
 
@@ -263,7 +263,7 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    * @param addr The address.
    * @return <code>true</code> iff the address is currently committed.
    */
-  boolean isCommitted(long addr);
+  public boolean isCommitted(long addr);
 
   /**
    * Determine the unencoded physical address
@@ -271,5 +271,5 @@ public interface IMemoryManager extends IStore, ICounterSetAccess, IAllocationMa
    * @param addr The encoded address
    * @return an unencoded address offset
    */
-  long getPhysicalAddress(long addr);
+  public long getPhysicalAddress(long addr);
 }

@@ -59,5 +59,5 @@ public interface IAllocationManagerStore extends IStreamStore {
    * @return an output stream to stream data to and to retrieve an address to later stream the data
    *     back.
    */
-  IPSOutputStream getOutputStream(final IAllocationContext context);
+  public IPSOutputStream getOutputStream(final IAllocationContext context);
 }

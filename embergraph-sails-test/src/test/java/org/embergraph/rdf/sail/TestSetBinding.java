@@ -80,7 +80,7 @@ public class TestSetBinding extends ProxyEmbergraphSailTestCase {
       final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 
       final EmbergraphSailRepositoryConnection cxn =
-          repo.getConnection();
+          (EmbergraphSailRepositoryConnection) repo.getConnection();
 
       try {
 
@@ -99,7 +99,7 @@ public class TestSetBinding extends ProxyEmbergraphSailTestCase {
 
         if (log.isInfoEnabled()) log.info("Loading data");
 
-        cxn.add(new StringReader(data), "", RDFFormat.TURTLE);
+        cxn.add(new StringReader(data), "", RDFFormat.TURTLE, new Resource[0]);
 
         cxn.commit();
 

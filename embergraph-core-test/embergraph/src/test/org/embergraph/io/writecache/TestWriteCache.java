@@ -538,7 +538,7 @@ public class TestWriteCache extends TestCase3 {
      * Note: For the scattered writes we need a non-sequential order to mimic the
      * allocation of the RWStore.
      */
-    long[] _addr = {4096, 1024, 3072, 8192};
+    long _addr[] = {4096, 1024, 3072, 8192};
 
     final File file = File.createTempFile(getName(), ".tmp");
 
@@ -1029,7 +1029,7 @@ public class TestWriteCache extends TestCase3 {
       buf.mark();
       nbytes = buf.capacity();
     }
-  }
+  };
 
   /**
    * Generate large number of scattered writes to force flushing
@@ -1286,7 +1286,7 @@ public class TestWriteCache extends TestCase3 {
 
       return raf.getChannel();
     }
-  }
+  };
 
   /** A random number generated - the seed is NOT fixed. */
   protected final Random r = new Random();

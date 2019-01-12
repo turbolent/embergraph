@@ -23,5 +23,5 @@ public interface IntBuffer3DConsumer {
    * @param y the y-coordinates of the points to be added.
    * @param z the z-coordinates of the points to be added.
    */
-  void addAllOf(IntArrayList x, IntArrayList y, IntArrayList z);
+  public void addAllOf(IntArrayList x, IntArrayList y, IntArrayList z);
 }

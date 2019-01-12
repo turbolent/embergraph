@@ -91,16 +91,16 @@ public class EmbeddedClient<T> extends AbstractScaleOutClient<T> {
    * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
    * @version $Id$
    */
-  public interface Options extends IEmbergraphClient.Options, MetadataService.Options {
+  public static interface Options extends IEmbergraphClient.Options, MetadataService.Options {
 
     /**
      * The name of the optional property whose value is the #of data services that will be
      * (re-)started.
      */
-    String NDATA_SERVICES = EmbeddedFederation.class.getName() + ".ndataServices";
+    public static String NDATA_SERVICES = EmbeddedFederation.class.getName() + ".ndataServices";
 
     /** The default is two (2). */
-    String DEFAULT_NDATA_SERVICES = "2";
+    public static String DEFAULT_NDATA_SERVICES = "2";
 
     /**
      * The name of the required property whose value is the name of the directory under which each
@@ -116,6 +116,6 @@ public class EmbeddedClient<T> extends AbstractScaleOutClient<T> {
      * to give each embedded federation its own data directory. Otherwise a new federation starting
      * up with another federation's data directory will attempt to re-start that federation.
      */
-    String DATA_DIR = EmbeddedFederation.class.getName() + ".dataDir";
+    public static final String DATA_DIR = EmbeddedFederation.class.getName() + ".dataDir";
   }
 }

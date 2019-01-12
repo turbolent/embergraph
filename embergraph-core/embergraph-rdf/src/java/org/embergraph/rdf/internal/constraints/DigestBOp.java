@@ -17,7 +17,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 package org.embergraph.rdf.internal.constraints;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Map;
 import org.embergraph.bop.BOp;
@@ -56,7 +55,7 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
     SHA224,
     SHA256,
     SHA384,
-    SHA512
+    SHA512;
   }
 
   /**
@@ -156,7 +155,7 @@ public class DigestBOp extends IVValueExpression<IV> implements INeedsMaterializ
           default:
             throw new UnsupportedOperationException();
         }
-        byte[] bytes = label.getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = label.getBytes("UTF-8");
         md.update(bytes);
         byte[] digest = md.digest();
         final EmbergraphLiteral str = getValueFactory().createLiteral(toHexString(digest));

@@ -77,7 +77,9 @@ public class NT implements Serializable {
 
     if (this.timestamp != o.timestamp) return false;
 
-    return this.name.equals(o.name);
+    if (!this.name.equals(o.name)) return false;
+
+    return true;
   }
 
   @Override
