@@ -7,7 +7,7 @@
 #
 # org.embergraph.service.jini.util.ListServices.repeatCount=0
 
-source `dirname $0`/bigdataenv
+source `dirname $0`/embergraphenv
 
 java ${JAVA_OPTS} \
 	-cp ${CLASSPATH} \

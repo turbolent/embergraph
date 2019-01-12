@@ -54,8 +54,8 @@ if node['embergraph'][:install_flavor] == "tomcat"
 		#
 		# Install the WAR file:
 		#
-		remote_file "#{node['tomcat'][:webapp_dir]}/bigdata.war" do
-			source	"file:///#{node['embergraph'][:source_dir]}/ant-build/bigdata.war"
+		remote_file "#{node['tomcat'][:webapp_dir]}/embergraph.war" do
+			source	"file:///#{node['embergraph'][:source_dir]}/ant-build/embergraph.war"
 			owner	node['tomcat'][:user]
 			group	node['tomcat'][:group]
 		end
@@ -64,7 +64,7 @@ if node['embergraph'][:install_flavor] == "tomcat"
 		#
 		# Install the WAR file from the SourceForge URL:
 		#
-		remote_file "#{node['tomcat'][:webapp_dir]}/bigdata.war" do
+		remote_file "#{node['tomcat'][:webapp_dir]}/embergraph.war" do
 			source	node['embergraph'][:url]
 			owner	node['tomcat'][:user]
 			group	node['tomcat'][:group]
@@ -140,7 +140,7 @@ if node['embergraph'][:install_flavor] == "tomcat"
 		#
 		execute "set absolute path for RWStore.properties" do
 			cwd	"#{node['embergraph'][:web_home]}/WEB-INF"
-			command	"sed -i 's|<param-value>../webapps/bigdata/WEB-INF/RWStore.properties|<param-value>#{node['embergraph'][:home]}/RWStore.properties|' web.xml"
+			command	"sed -i 's|<param-value>../webapps/embergraph/WEB-INF/RWStore.properties|<param-value>#{node['embergraph'][:home]}/RWStore.properties|' web.xml"
 		end
 
 		#
@@ -155,7 +155,7 @@ if node['embergraph'][:install_flavor] == "tomcat"
 		#
 		execute "set absolute path for RWStore.properties" do
 			cwd	"#{node['embergraph'][:web_home]}/WEB-INF"
-			command	"sed -i 's|<param-value>../webapps/bigdata/RWStore.properties|<param-value>#{node['embergraph'][:home]}/RWStore.properties|' web.xml"
+			command	"sed -i 's|<param-value>../webapps/embergraph/RWStore.properties|<param-value>#{node['embergraph'][:home]}/RWStore.properties|' web.xml"
 		end
 
 		#

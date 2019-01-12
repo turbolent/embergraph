@@ -1,4 +1,4 @@
-GRAPH_DIR = ../../bigdata-rdf/src/resources/data
+GRAPH_DIR = ../../embergraph-rdf/src/resources/data
 
 GRAPHS = foaf lehigh barData bsbm
 #ak2010 belgium_osm delaunay_n13 coAuthorsDBLP delaunay_n21 kron_g500-logn21 soc-LiveJournal1 webbase-1M

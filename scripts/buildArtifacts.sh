@@ -113,8 +113,8 @@ done
 VERSION=`cat ${BASE_DIR}/version.properties | grep VERSION | cut -d= -f2 | sed -e 's/\./_/g'`
 RELEASE_NOTES="RELEASE_${VERSION}.txt"
 
-if [ -f "${BASE_DIR}/../bigdata/src/releases/${RELEASE_NOTES}" ] ; then
-	cp -f "${BASE_DIR}/../bigdata/src/releases/$RELEASE_NOTES" "${ARTIFACT_DIR}/README.txt"
+if [ -f "${BASE_DIR}/../embergraph/src/releases/${RELEASE_NOTES}" ] ; then
+	cp -f "${BASE_DIR}/../embergraph/src/releases/$RELEASE_NOTES" "${ARTIFACT_DIR}/README.txt"
 fi
 
 echo "Copied the deployers to ${ARTIFACT_DIR}."

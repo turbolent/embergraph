@@ -60,7 +60,7 @@ if [ -z "${GROUPS}" ]; then
     export GROUPS="$FEDNAME"
 fi
 if [ -z "${LOCATORS}" ]; then
-#  export LOCATORS="jini://bigdata15/,jini://bigdata16/,jini://bigdata17/"
+#  export LOCATORS="jini://embergraph15/,jini://embergraph16/,jini://embergraph17/"
    echo "Must specify: LOCATORS"
    exit 1
 fi

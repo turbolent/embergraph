@@ -4,7 +4,7 @@
 # parameters for the data set to be generated are read from
 # @BIGDATA_CONFIG@
 
-source `dirname $0`/bigdataenv
+source `dirname $0`/embergraphenv
 
 # Start the master.  This does not need much RAM (unless you keep the
 # pending sets in RAM).  It will distribute the work to be performed

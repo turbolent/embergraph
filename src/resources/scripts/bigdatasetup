@@ -6,7 +6,7 @@
 
 # Setup the environment.
 cd `dirname $0`
-source ./bigdataenv
+source ./embergraphenv
 
 ##############################
 # Turn down swappiness on linux kernel (presumes that embergraph is a long

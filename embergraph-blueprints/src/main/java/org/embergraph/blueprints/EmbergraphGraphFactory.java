@@ -47,7 +47,7 @@ public class EmbergraphGraphFactory {
    public static EmbergraphGraph connect(final String host, final int port) {
 
 	  //Assume the default KB to make the SPARQL Endpoint
-	  //FIXME:  the /bigdata reference should be parameterized
+	  //FIXME:  the /embergraph reference should be parameterized
       return connect("http://" + host + ":" + port + "/embergraph" + "/sparql");
 
     }

@@ -6,7 +6,7 @@
 
 # Setup the environment.
 cd `dirname $0`
-source ./bigdataenv
+source ./embergraphenv
 
 # Verify critical environment variables.
 if [ -z "$lockFile" ]; then

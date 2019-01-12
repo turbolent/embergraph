@@ -773,7 +773,7 @@ public class TxServlet extends EmbergraphRDFServlet {
      
       /*
        * The path info follows the servlet and starts with /. So for
-       * "/bigdata/tx/559" this will be "/559". We strip of the leading "/" and
+       * "/embergraph/tx/559" this will be "/559". We strip of the leading "/" and
        * the rest is the transaction identifier.
        */
       final String pathInfo = req.getPathInfo();

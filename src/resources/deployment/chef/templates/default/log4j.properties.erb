@@ -28,7 +28,7 @@ log4j.logger.org.embergraph.resources.AsynchronousOverflowTask=INFO
 
 # file
 log4j.appender.file=org.apache.log4j.RollingFileAppender
-log4j.appender.file.File=<%= node['embergraph'][:log_dir] %>/bigdata.log
+log4j.appender.file.File=<%= node['embergraph'][:log_dir] %>/embergraph.log
 log4j.appender.file.MaxFileSize=4MB
 log4j.appender.file.MaxBackupIndex=10
 log4j.appender.file.layout=org.apache.log4j.PatternLayout

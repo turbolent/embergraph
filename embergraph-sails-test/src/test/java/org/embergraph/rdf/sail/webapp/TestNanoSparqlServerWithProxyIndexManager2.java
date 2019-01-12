@@ -378,7 +378,7 @@ public class TestNanoSparqlServerWithProxyIndexManager2<S extends IIndexManager>
 	 * <p>
 	 * When run for CI, this can be executed as:
 	 * <pre>
-	 * ... -Djava.security.policy=policy.all TestNanoSparqlServerWithProxyIndexManager triples /nas/bigdata/benchmark/config/bigdataStandalone.config
+	 * ... -Djava.security.policy=policy.all TestNanoSparqlServerWithProxyIndexManager triples /nas/embergraph/benchmark/config/embergraphStandalone.config
 	 * </pre>
 	 * 
 	 * @param args

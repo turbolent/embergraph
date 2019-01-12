@@ -92,7 +92,7 @@ public class TestNSSHealthCheck extends TestCase2 {
 	 * ContextPath).
 	 * 
 	 * <pre>
-	 * http://localhost:9999/bigdata -- webapp URL (includes "/bigdata" context path.
+	 * http://localhost:9999/embergraph -- webapp URL (includes "/embergraph" context path.
 	 * </pre>
 	 */
 	protected String m_serviceURL;
@@ -391,7 +391,7 @@ public class TestNSSHealthCheck extends TestCase2 {
 	 * URL with correct context path
 	 * 
 	 * <pre>
-	 * http://localhost:9999/bigdata
+	 * http://localhost:9999/embergraph
 	 * </pre>
 	 * 
 	 * The response is should be <code>index.html</code>, which is specified
@@ -408,7 +408,7 @@ public class TestNSSHealthCheck extends TestCase2 {
 	 * URL with context path and index.html reference
 	 * 
 	 * <pre>
-	 * http://localhost:9999/bigdata/index.html
+	 * http://localhost:9999/embergraph/index.html
 	 * </pre>
 	 * 
 	 * This URL does NOT get mapped to anything (404).
@@ -470,7 +470,7 @@ public class TestNSSHealthCheck extends TestCase2 {
 	 * The fully qualified URL for <code>index.html</code>
 	 * 
 	 * <pre>
-	 * http://localhost:9999/bigdata/html/index.html
+	 * http://localhost:9999/embergraph/html/index.html
 	 * </pre>
 	 * 
 	 * The response is should be <code>index.html</code>, which is specified

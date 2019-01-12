@@ -15,7 +15,7 @@ service embergraph start
 
 This will start a Embergraph instance running on port 9999 on localhost host.
 
-You may then navigate http://localhost:9999/bigdata/ to access Embergraph.
+You may then navigate http://localhost:9999/embergraph/ to access Embergraph.
 
 
 Changing the configuration

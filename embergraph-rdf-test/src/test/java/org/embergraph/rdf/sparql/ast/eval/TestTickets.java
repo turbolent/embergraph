@@ -36,7 +36,7 @@ import org.embergraph.rdf.sparql.ast.TermNode;
 import org.embergraph.rdf.sparql.ast.VarNode;
 
 /**
- * Test suite for tickets at <href a="http://sourceforge.net/apps/trac/bigdata">
+ * Test suite for tickets at <href a="http://sourceforge.net/apps/trac/embergraph">
  * trac </a>.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

@@ -158,7 +158,7 @@ public class ServiceScore {
      * @param indexManager
      *            The index manager (required).
      * @param contextPath
-     *            The Context-Path of the web application (/bigdata).
+     *            The Context-Path of the web application (/embergraph).
      * @param serviceUUID
      *            The {@link UUID} of the service.
      * 

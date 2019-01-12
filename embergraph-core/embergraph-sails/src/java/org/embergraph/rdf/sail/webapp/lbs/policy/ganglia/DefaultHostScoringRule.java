@@ -39,7 +39,7 @@ import org.embergraph.rdf.sail.webapp.lbs.IHostScoringRule;
  *      ganglia plug in if it is setup to self-report that data. And it
  *      may not report it correctly if there is more than one
  *      {@link HAJournalService} per host. It is also available from the
- *      <code>/bigdata/counters</code> and could be exposed as a JMX MBean.
+ *      <code>/embergraph/counters</code> and could be exposed as a JMX MBean.
  */
 public class DefaultHostScoringRule implements IHostScoringRule {
 

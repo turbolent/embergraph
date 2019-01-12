@@ -53,7 +53,7 @@ Sample Session
 % cp Vagrantfile.aws.tomcat Vagrantfile
 % vagrant up
 
-# The embergraph server is now found at the public IP address of the instance: http://<public-ip>:9999/bigdata
+# The embergraph server is now found at the public IP address of the instance: http://<public-ip>:9999/embergraph
 
 # to login to the host:
 % vagrant ssh

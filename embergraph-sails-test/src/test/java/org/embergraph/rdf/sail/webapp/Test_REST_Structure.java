@@ -119,7 +119,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends
     * by default and we do not test to ensure that this option is disabled.
     * E.g.
     * 
-    * http://172.16.0.185:8090/bigdata/html/
+    * http://172.16.0.185:8090/embergraph/html/
     * 
     * might list the directory contents.
     */
@@ -158,7 +158,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends
     * URL with correct context path
     * 
     * <pre>
-    * http://localhost:9999/bigdata
+    * http://localhost:9999/embergraph
     * </pre>
     * 
     * The response is should be <code>index.html</code>, which is specified
@@ -175,7 +175,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends
     * URL with context path and index.html reference
     * 
     * <pre>
-    * http://localhost:9999/bigdata/index.html
+    * http://localhost:9999/embergraph/index.html
     * </pre>
     * 
     * This URL does NOT get mapped to anything (404).
@@ -237,7 +237,7 @@ public class Test_REST_Structure<S extends IIndexManager> extends
     * The fully qualified URL for <code>index.html</code>
     * 
     * <pre>
-    * http://localhost:9999/bigdata/html/index.html
+    * http://localhost:9999/embergraph/html/index.html
     * </pre>
     * 
     * The response is should be <code>index.html</code>, which is specified

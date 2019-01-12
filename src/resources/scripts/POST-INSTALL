@@ -4,7 +4,7 @@ the 'ant install' target.
 In order to manage the embergraph run state you need to modify crontab
 so that it will automatically execute:
 
-@BIN_DIR@/bigdata
+@BIN_DIR@/embergraph
 
 once per minute, reading the desired run state from:
 

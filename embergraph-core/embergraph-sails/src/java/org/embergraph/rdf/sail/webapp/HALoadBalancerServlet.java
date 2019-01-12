@@ -54,7 +54,7 @@ import org.embergraph.util.StackInfoReport;
  * balancer) to the root of the web application.
  * <p>
  * When successfully deployed, requests having prefix corresponding to the URL
- * pattern for the load balancer (typically, "/bigdata/LBS/*") are automatically
+ * pattern for the load balancer (typically, "/embergraph/LBS/*") are automatically
  * redirected to a joined service in the met quorum based on the configured load
  * balancer policy.
  * <p>
@@ -88,8 +88,8 @@ public class HALoadBalancerServlet extends ProxyServlet {
     public interface InitParams {
 
         /*
-         * Note: /bigdata/LBS is now a base prefix. There are fully qualified
-         * prefix values of /bigdata/LBS/leader and /bigdata/LBS/read. This is
+         * Note: /embergraph/LBS is now a base prefix. There are fully qualified
+         * prefix values of /embergraph/LBS/leader and /embergraph/LBS/read. This is
          * why the PREFIX init-param has been commented out.  It no longer maps
          * directly into a simple concept within the LBS servlet.
          */
@@ -98,7 +98,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
 //         * less any wildcard). This is typically
 //         * 
 //         * <pre>
-//         * /bigdata/LBS
+//         * /embergraph/LBS
 //         * </pre>
 //         * 
 //         * but the actual value depends on the servlet mappined established in
@@ -947,7 +947,7 @@ public class HALoadBalancerServlet extends ProxyServlet {
      * @param isLeaderRequest
      *            <code>true</code> iff this is a leader request.
      * @param prefix
-     *            the base prefix (typically <code>/bigdata/LBS</code>)
+     *            the base prefix (typically <code>/embergraph/LBS</code>)
      * 
      * @return The full prefix.
      * 

@@ -299,15 +299,15 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
      * the typical form
      * 
      * <pre>
-     * http://host:port/bigdata
+     * http://host:port/embergraph
      * </pre>
      * 
      * The serviceURL can be used to obtain sparql end point URLs for:
      * <dl>
      * <dt>The default namespace</dt>
-     * <dd>http://host:port/bigdata/sparql</dd>
+     * <dd>http://host:port/embergraph/sparql</dd>
      * <dt>The XYZ namespace</dt>
-     * <dd>http://host:port/bigdata/namespace/XYZ/sparql</dd>
+     * <dd>http://host:port/embergraph/namespace/XYZ/sparql</dd>
      * </dl>
      * 
      * The serviceURL can also be used to access the multi-tenancy API and the

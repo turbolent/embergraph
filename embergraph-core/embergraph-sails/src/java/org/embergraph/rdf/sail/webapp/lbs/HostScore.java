@@ -135,7 +135,7 @@ public class HostScore {
 
     /**
      * Orders by hostname. This provides a stable way of viewing the data in
-     * <code>/bigdata/status</code>.
+     * <code>/embergraph/status</code>.
      */
     public final static Comparator<HostScore> COMPARE_BY_HOSTNAME = new Comparator<HostScore>() {
 

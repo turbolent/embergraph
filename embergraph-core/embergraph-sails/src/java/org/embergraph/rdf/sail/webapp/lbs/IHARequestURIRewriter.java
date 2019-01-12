@@ -43,11 +43,11 @@ public interface IHARequestURIRewriter extends IHAPolicyLifeCycle {
      * will be proxied. For example:
      * 
      * <pre>
-     *        full_prefix:                            /bigdata/LBS/leader
-     * -or-   full_prefix:                            /bigdata/LBS/read
-     * originalRequestURI: http://ha1.example.com:8090/bigdata/LBS/read/sparql
-     *  proxyToRequestURI: http://ha3.example.com:8090/bigdata/
-     *             return: http://ha2.example.com:8090/bigdata/LBS/read/sparql
+     *        full_prefix:                            /embergraph/LBS/leader
+     * -or-   full_prefix:                            /embergraph/LBS/read
+     * originalRequestURI: http://ha1.example.com:8090/embergraph/LBS/read/sparql
+     *  proxyToRequestURI: http://ha3.example.com:8090/embergraph/
+     *             return: http://ha2.example.com:8090/embergraph/LBS/read/sparql
      * </pre>
      * <p>
      * Note: this method is only invoked if we will proxy to another service.

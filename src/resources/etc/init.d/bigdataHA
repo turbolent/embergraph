@@ -49,7 +49,7 @@ cd `dirname $0`
 #/sbin/sysctl -w vm.swappiness=0
 
 # Setup the environment.
-source /etc/default/bigdataHA
+source /etc/default/embergraphHA
 
 if [ -z "$binDir" ]; then
    echo $"$0 : environment not setup: binDir is undefined."
@@ -95,7 +95,7 @@ case "$1" in
 	    fi
 	fi
 	if [ ! -f "$pidFile" ]; then
-		action $"`date` : `hostname` : bringing up services: " sudo -u $BD_USER -g $BD_GROUP bash -c "source /etc/default/bigdataHA ; $binDir/startHAServices > /dev/null 2>&1 &"
+		action $"`date` : `hostname` : bringing up services: " sudo -u $BD_USER -g $BD_GROUP bash -c "source /etc/default/embergraphHA ; $binDir/startHAServices > /dev/null 2>&1 &"
 	else
             echo $"`date` : `hostname` : running as $pid"
 	fi 

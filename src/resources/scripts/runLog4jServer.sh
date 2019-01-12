@@ -15,7 +15,7 @@
 # Note: JAVA_OPTS is ignored since it specifies the log4j configuration
 # and we do not want to use that here.
 
-source `dirname $0`/bigdataenv
+source `dirname $0`/embergraphenv
 
 java -cp ${CLASSPATH} \
     org.apache.log4j.net.SimpleSocketServer \

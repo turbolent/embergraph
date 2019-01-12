@@ -137,7 +137,7 @@ public class NanoSparqlServer {
          * file path and jar name and version:
          * 
          * <pre>
-         * jar:file:../lib/bigdata-1.3.0.jar!/bigdata-war/src
+         * jar:file:../lib/embergraph-1.3.0.jar!/embergraph-war/src
          * </pre>
          * 
          * The use of absolute file paths are recommended for reliable
@@ -820,7 +820,7 @@ public class NanoSparqlServer {
 
 		// See BLZG-1447
 		// Check if it is running as a test suite in Eclipse or Maven.
-		// If it is running as maven surefire execution the target/bigdata.war
+		// If it is running as maven surefire execution the target/embergraph.war
 		// will exist.
 
 		final File warFile = new File("target/embergraph.war");
@@ -941,7 +941,7 @@ public class NanoSparqlServer {
 //                            src = "WEB-INF/web.xml");
 //                if (tmp == null)
 //                    tmp = classLoader // JAR class path.
-//                            .getResource(src = "/bigdata-war/src/WEB-INF/web.xml");
+//                            .getResource(src = "/embergraph-war/src/WEB-INF/web.xml");
                 if (tmp == null) {
                     /**
                      * JAR class path (system class loader).
@@ -951,7 +951,7 @@ public class NanoSparqlServer {
                      * will be something like:
                      * 
                      * <pre>
-                     * jar:file:/Users/bryan/Documents/workspace/BIGDATA_RELEASE_1_3_0_NEW_SVN/ant-build/lib/bigdata-1.3.0-20140517.jar!/bigdata-war/src/WEB-INF/web.xml
+                     * jar:file:/Users/bryan/Documents/workspace/BIGDATA_RELEASE_1_3_0_NEW_SVN/ant-build/lib/embergraph-1.3.0-20140517.jar!/embergraph-war/src/WEB-INF/web.xml
                      * </pre>
                      */
                     tmp = ClassLoader.getSystemClassLoader().getResource(

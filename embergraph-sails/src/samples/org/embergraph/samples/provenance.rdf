@@ -19,11 +19,11 @@
 </rdf:Description>
   
 <rdf:Description rdf:nodeID="_S1" >
-    <embergraph:source>www.systap.com</bigdata:source>
+    <embergraph:source>www.systap.com</embergraph:source>
 </rdf:Description>
   
 <rdf:Description rdf:nodeID="_S2" >
-    <embergraph:source>www.systap.com</bigdata:source>
+    <embergraph:source>www.systap.com</embergraph:source>
 </rdf:Description>
   
 </rdf:RDF>

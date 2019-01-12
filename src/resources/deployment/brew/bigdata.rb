@@ -2,17 +2,17 @@ require "formula"
 
 class Embergraph < Formula
   homepage "http://bigdata.com/"
-  url "http://bigdata.com/deploy/bigdata-1.3.1.tgz"
+  url "http://bigdata.com/deploy/embergraph-1.3.1.tgz"
   sha1 "bcfacd08b1e1c7429d3ca31b8632a20cdff1fb79"
 
   def install
     prefix.install "doc", "var", "bin"
     libexec.install Dir["lib/*.jar"]
 
-    File.rename "#{bin}/bigdataNSS", "#{bin}/bigdata"
+    File.rename "#{bin}/embergraphNSS", "#{bin}/embergraph"
 
     # Set the installation path as the root for the bin scripts:
-    inreplace "#{bin}/bigdata" do |s|
+    inreplace "#{bin}/embergraph" do |s|
       s.sub! "<%= BD_HOME %>", prefix
       s.sub! "<%= INSTALL_TYPE %>", "BREW"
     end
@@ -35,7 +35,7 @@ class Embergraph < Formula
         <key>Label</key>
         <string>#{plist_name}</string>
         <key>Program</key>
-        <string>#{bin}/bigdata</string>
+        <string>#{bin}/embergraph</string>
         <key>RunAtLoad</key>
         <true/>
         <key>WorkingDirectory</key>

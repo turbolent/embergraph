@@ -70,7 +70,7 @@ if node['embergraph'][:install_flavor] == "nss"
 		#
 		# Retrieve the package prepared for Brew:
 		#
-		remote_file "/tmp/bigdata.tgz" do
+		remote_file "/tmp/embergraph.tgz" do
 			owner	node['embergraph'][:user]
 			group	node['embergraph'][:group]
 			source	node['embergraph'][:url]
@@ -83,29 +83,29 @@ if node['embergraph'][:install_flavor] == "nss"
 			user	node['embergraph'][:user]
  			group	node['embergraph'][:group]
 			cwd	"#{node['embergraph'][:home]}/.."
-			command	"tar xvf /tmp/bigdata.tgz"
+			command	"tar xvf /tmp/embergraph.tgz"
 		end
 	end
 
 	#
-	# Create a symbolic link of the bin/bigdataNSS script to /etc/init.d/bigdataNSS:
+	# Create a symbolic link of the bin/embergraphNSS script to /etc/init.d/embergraphNSS:
 	#
-	link "/etc/init.d/bigdataNSS" do
-		to "#{node['embergraph'][:home]}/bin/bigdataNSS"
+	link "/etc/init.d/embergraphNSS" do
+		to "#{node['embergraph'][:home]}/bin/embergraphNSS"
 	end
 
 	#
-	# Set the install type in the bin/bigdataNSS script:
+	# Set the install type in the bin/embergraphNSS script:
 	#
-	execute "set the INSTALL_TYPE in bin/bigdata" do
+	execute "set the INSTALL_TYPE in bin/embergraph" do
 		cwd	"#{node['embergraph'][:home]}/bin"
 		command	"sed -i 's|<%= INSTALL_TYPE %>|#{node['embergraph'][:install_flavor]}|' embergraphNSS"
 	end
 
 	#
-	# Set the Embergraph home directory in the bin/bigdataNSS file:
+	# Set the Embergraph home directory in the bin/embergraphNSS file:
 	#
-	execute "set the BD_HOME in bin/bigdata" do
+	execute "set the BD_HOME in bin/embergraph" do
 		cwd	"#{node['embergraph'][:home]}/bin"
 		command	"sed -i 's|<%= BD_HOME %>|#{node['embergraph'][:home]}|' embergraphNSS"
 	end
@@ -131,7 +131,7 @@ if node['embergraph'][:install_flavor] == "nss"
 	#
 	service "embergraphNSS" do
 		#
-		# Reenable this when the bin/bigdata script is updated to return a "1" for a successful status:
+		# Reenable this when the bin/embergraph script is updated to return a "1" for a successful status:
 		#
 		#   See:  http://comments.gmane.org/gmane.comp.sysutils.chef.user/2723
 		#

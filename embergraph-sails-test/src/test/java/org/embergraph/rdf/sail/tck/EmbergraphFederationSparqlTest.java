@@ -57,7 +57,7 @@ import org.embergraph.service.ScaleOutClientFactory;
  * location, then it is convenient (but not necessary) to also specify its path. For
  * example:
  * <pre>
- * -Dembergraph.configuration=/nas/bigdata/benchmark/config/bigdataStandalone.config
+ * -Dembergraph.configuration=/nas/embergraph/benchmark/config/embergraphStandalone.config
  * -Dorg.embergraph.counters.linux.sysstat.path=/usr/local/bin
  * </pre>
  * 

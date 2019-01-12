@@ -44,11 +44,11 @@ export FEDNAME=embergraphInstallTest
 export LOGICAL_SERVICE_ID=HAJournalServer-1
 
 # Local directory where the service will store its state.
-export FED_DIR=/var/bigdata/${FEDNAME}
+export FED_DIR=/var/embergraph/${FEDNAME}
 
 # Apache River - NO default for "LOCATORS".
 export GROUPS="$FEDNAME"
-#export LOCATORS="jini://bigdata15/,jini://bigdata16/,jini://bigdata17/"
+#export LOCATORS="jini://embergraph15/,jini://embergraph16/,jini://embergraph17/"
 
 # Apache ZooKeeper - NO default.
 #export ZK_SERVERS="embergraph15:2081,embergraph16:2081,embergraph17:2081";

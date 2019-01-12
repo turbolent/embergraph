@@ -19,7 +19,7 @@ if [ -z "$1" ]; then
 fi
 
 BINDIR=`dirname $0`
-source $BINDIR/bigdataenv
+source $BINDIR/embergraphenv
 
 targetDir=$1
 

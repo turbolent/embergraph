@@ -97,7 +97,7 @@
             <properties>
 <!--
                 <type>embedded</type>
-                <file>/tmp/bigdata.jnl</file>
+                <file>/tmp/embergraph.jnl</file>
 -->    
                 <type>remote</type>
                 <host>localhost</host>

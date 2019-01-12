@@ -19,9 +19,9 @@ Attributes
 
 ### General Attributes
 
-`node['embergraph'][:home]` - The root directory for embergraph contents (Default: `/var/lib/bigdata`)
+`node['embergraph'][:home]` - The root directory for embergraph contents (Default: `/var/lib/embergraph`)
 
-`node['embergraph'][:url]` - Where to download the embergraph package file from. (Defaults: Tomcat: http://softlayer-dal.dl.sourceforge.net/project/bigdata/bigdata/1.3.1/bigdata.war / NSS: http://bigdata.com/deploy/bigdata-1.3.1.tgz)
+`node['embergraph'][:url]` - Where to download the embergraph package file from. (Defaults: Tomcat: http://softlayer-dal.dl.sourceforge.net/project/embergraph/embergraph/1.3.1/embergraph.war / NSS: http://bigdata.com/deploy/embergraph-1.3.1.tgz)
 
 `node['embergraph'][:data_dir]`
  - Where the embergraph.jnl resides. Discussed in <a href="http://sourceforge.net/apps/mediawiki/bigdata/index.php?title=NanoSparqlServer#Common_Startup_Problems">Common Startup Problmems</a>
@@ -31,7 +31,7 @@ Attributes
 
 `node['embergraph'][:properties]` - File path to the Embergraph properties file.  (Default: `node['embergraph'][:home]`/RWStore.properties)
 
-`node['embergraph'][:svn_branch]` - The Subversion branch to retrieve source files from.  (Default: Tomcat: https://svn.code.sf.net/p/bigdata/code/branches/BIGDATA\_RELEASE\_1\_3\_0 / NSS: https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT\_BRANCH\_1\_3\_1)
+`node['embergraph'][:svn_branch]` - The Subversion branch to retrieve source files from.  (Default: Tomcat: https://svn.code.sf.net/p/embergraph/code/branches/BIGDATA\_RELEASE\_1\_3\_0 / NSS: https://svn.code.sf.net/p/embergraph/code/branches/DEPLOYMENT\_BRANCH\_1\_3\_1)
 
 `node['embergraph'][:source]` - The directory to retrieve Subversion contents into.  (Default: embergraph-code)
 
@@ -65,7 +65,7 @@ Attributes
 
 ### Attributes for Tomcat Based Install
 
-`node['embergraph'][:web_home]` - The web application root directory for embergraph.  (Default `node['tomcat'][:webapp_dir]`/bigdata)
+`node['embergraph'][:web_home]` - The web application root directory for embergraph.  (Default `node['tomcat'][:webapp_dir]`/embergraph)
 
 `node['embergraph'][:log4j_properties]` - File path to the log4j properties file.  (Default `node['embergraph'][:web_home]`/WEB-INF/classes/log4j.properties)
 
@@ -115,7 +115,7 @@ Usage
 
 ### Vagrant Context
 
-Sample Vagrant configurations are available in the Embergraph Subversion source tree under [embergraph/src/resources/deployment/vagrant](http://sourceforge.net/p/bigdata/code/HEAD/tree/branches/DEPLOYMENT_BRANCH_1_3_1/bigdata/src/resources/deployment/vagrant/). 
+Sample Vagrant configurations are available in the Embergraph Subversion source tree under [embergraph/src/resources/deployment/vagrant](http://sourceforge.net/p/embergraph/code/HEAD/tree/branches/DEPLOYMENT_BRANCH_1_3_1/embergraph/src/resources/deployment/vagrant/). 
 
 #### Tomcat Example
 
@@ -124,7 +124,7 @@ Sample Vagrant configurations are available in the Embergraph Subversion source 
         :embergraph => {
                 :install_flavor => "tomcat",
                 :build_from_svn => true,
-                :svn_branch => "https://svn.code.sf.net/p/bigdata/code/branches/BTREE_BUFFER_BRANCH/"
+                :svn_branch => "https://svn.code.sf.net/p/embergraph/code/branches/BTREE_BUFFER_BRANCH/"
         },
         :java => {
                 :install_flavor => "oracle",
@@ -173,7 +173,7 @@ When errors occur in the Vagrant context, it is most typically during the instal
 	
 	% vagrant provision
 
-Which should get past any intermit ant network issues.  For assistance with installation and other issues, please visit the [Embergraph Support Forum](http://sourceforge.net/p/bigdata/discussion/676946).
+Which should get past any intermit ant network issues.  For assistance with installation and other issues, please visit the [Embergraph Support Forum](http://sourceforge.net/p/embergraph/discussion/676946).
 
 
 License and Authors

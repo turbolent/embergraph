@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
 		#
 		# Uncomment the below and set a desired Subversion URL to override the setting in attributes/default.rb
 		#
-		# :svn_branch = "https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT_BRANCH_1_3_1"
+		# :svn_branch = "https://svn.code.sf.net/p/embergraph/code/branches/DEPLOYMENT_BRANCH_1_3_1"
 	},
 	:java => {
 		:install_flavor => "oracle",

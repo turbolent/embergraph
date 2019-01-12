@@ -40,7 +40,7 @@ Options:
         and config files will be found.
 
 Useful properties:
-    log4j.primary.configuration=/path/to/bigdata.logging
+    log4j.primary.configuration=/path/to/embergraph.logging
         The path to the log4j configuration file.
 
     java.util.logging.config.file=/path/to/jini.logging

@@ -2,7 +2,7 @@
 # Sets the environment variables required to run the other scripts in
 # this directory.
 # 
-# Run as "source ./bigdataenv"
+# Run as "source ./embergraphenv"
 #
 # Note: The original form of this script is a template containing parameters
 # of the form @XXX@ - the value for those parameters are substituted in when

@@ -23,7 +23,7 @@ target=$2
 
 # Setup the environment.
 cd `dirname $0`
-source ./bigdataenv
+source ./embergraphenv
 
 # Verify critical environment variables.
 if [ -z "$JAVA_OPTS" ]; then

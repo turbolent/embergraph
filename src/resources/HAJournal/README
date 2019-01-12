@@ -46,13 +46,13 @@ Embergraph Highly Available Replication Cluster
 
 ========== KEY FILES ==========
 
-/etc/init.d/bigdataHA
+/etc/init.d/embergraphHA
 
    An init.d script to start/stop of embergraph HA.
 
-/etc/bigdata/bigdataHA.conf - configuration for the HA installation.
+/etc/embergraph/embergraphHA.conf - configuration for the HA installation.
 
-   This script is sourced by /etc/init.d/bigdataHA and provides the
+   This script is sourced by /etc/init.d/embergraphHA and provides the
    critical configuration variables for your installation.  The
    environment variables set in this script are passed through into
    startHAServices and from there into the HAJournal.config file.  You
@@ -98,7 +98,7 @@ var/config/startHAServices.config
       register themselves. The service registrar is also used by the
       embergraph services to discover one another. The set of locators is
       defined using the LOCATORS environment variable in
-      /etc/bigdata/bigdataHA.config; and
+      /etc/embergraph/embergraphHA.config; and
 
     - HAJournalServer : This is the highly available embergraph graph
       database engine and RDF/SPARQL end point.  The service process
@@ -108,7 +108,7 @@ var/config/startHAServices.config
       directory include:
 
 	serviceDir/service.id     - the assigned ServiceID for this service.
-	serviceDir/bigdata-ha.jnl - the journal data file.
+	serviceDir/embergraph-ha.jnl - the journal data file.
    	serviceDir/HALog/*        - the transaction log files.
 	serviceDir/snapshot       - full backups of the journal.
 
@@ -120,7 +120,7 @@ var/config/HAJournal.config
   whether it is in triples mode or quads mode.  The configuration
   parameters for the journal are also specified in this file.  Many,
   but not all, parameters can be overridden through environment
-  variables defined in /etc/bigdata/bigdataHA.config. This file is
+  variables defined in /etc/embergraph/embergraphHA.config. This file is
   also used to configure the online backup policy (snapshotPolicy) and
   point in time restore window (restorePolicy).
 

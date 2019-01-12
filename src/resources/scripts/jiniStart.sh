@@ -3,7 +3,7 @@
 # Starts the jini services (normally done automatically by the
 # embergraph script).
 
-source `dirname $0`/bigdataenv
+source `dirname $0`/embergraphenv
 
 # Start the jini services and put the JVM in the background.
 java ${JAVA_OPTS} \

@@ -5,7 +5,7 @@
 #
 # usage: configFile
 
-source `dirname $0`/bigdataenv
+source `dirname $0`/embergraphenv
 
 java ${JAVA_OPTS} \
     -cp ${CLASSPATH} \

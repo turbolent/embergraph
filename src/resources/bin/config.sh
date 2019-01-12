@@ -10,7 +10,7 @@ fi
 # Path for local storage for this federation of services.
 
 if [ -z "${FED_DIR}" ]; then
-	export FED_DIR=/opt/bigdata-current/data
+	export FED_DIR=/opt/embergraph-current/data
 fi
 
 # Name of the replication cluster to which this HAJournalServer will belong.
@@ -25,7 +25,7 @@ if [ -z "${LOCATORS}" ]; then
 	#Use for a HA1+ configuration
 	export LOCATORS="jini://localhost/"
 	#HA3 example
-	#export LOCATORS="jini://bigdata15/,jini://bigdata16/,jini://bigdata17/"
+	#export LOCATORS="jini://embergraph15/,jini://embergraph16/,jini://embergraph17/"
 fi
 
 # Where to find the Apache Zookeeper ensemble.

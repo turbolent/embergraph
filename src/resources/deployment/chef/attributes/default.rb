@@ -1,7 +1,7 @@
 #
 # Where embergraph resource files will be installed:
 #
-default['embergraph'][:home] = "/var/lib/bigdata"
+default['embergraph'][:home] = "/var/lib/embergraph"
 
 #
 # Who runs embergraph? This is applicable to NSS and HA installs only:
@@ -13,7 +13,7 @@ default['embergraph'][:base_version] = "1.3.1"
 #
 # When "build_from_svn" is "true", code retrieved from subversion will be downloaded to the "source_dir" directory:
 #
-default['embergraph'][:source_dir] = "/home/ubuntu/bigdata-code"
+default['embergraph'][:source_dir] = "/home/ubuntu/embergraph-code"
 
 # Where the RWStore.properties file can be found:
 default['embergraph'][:properties] = node['embergraph'][:home] + "/RWStore.properties"
@@ -21,7 +21,7 @@ default['embergraph'][:properties] = node['embergraph'][:home] + "/RWStore.prope
 case node['embergraph'][:install_flavor]
 when "nss"
 	# The URL to the embergraph-nss bundle.  The following is the same bundle used by the Embergraph Brew installer:
-	default['embergraph'][:url] = "http://bigdata.com/deploy/bigdata-#{node['embergraph'][:base_version]}.tgz"
+	default['embergraph'][:url] = "http://bigdata.com/deploy/embergraph-#{node['embergraph'][:base_version]}.tgz"
 
 	# Where the jetty resourceBase is defined:
 	default['embergraph'][:jetty_dir]  = node['embergraph'][:home] + "/var/jetty"
@@ -34,7 +34,7 @@ when "nss"
 
 	# The subversion branch to use when building from source:
 	if node['embergraph'][:build_from_svn]
-		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT_BRANCH_1_3_1"
+		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/embergraph/code/branches/DEPLOYMENT_BRANCH_1_3_1"
 	end
 when "tomcat"
 	# The Tomcat version to install.  The Embergraph Chef cookbook has only been tested with Version 7:
@@ -44,10 +44,10 @@ when "tomcat"
 	default['tomcat'][:java_options] = "-Djava.awt.headless=true -server -Xmx4G -XX:+UseG1GC"
 
 	# A SourceForge URL to use for downloading the embergraph.war file:
-	default['embergraph'][:url]  = "http://hivelocity.dl.sourceforge.net/project/bigdata/bigdata/#{node['embergraph'][:base_version]}/bigdata.war"
+	default['embergraph'][:url]  = "http://hivelocity.dl.sourceforge.net/project/embergraph/embergraph/#{node['embergraph'][:base_version]}/embergraph.war"
 
 	# Where the embergraph contents reside under Tomcat:
-	default['embergraph'][:web_home] = node['tomcat'][:webapp_dir] + "/bigdata"
+	default['embergraph'][:web_home] = node['tomcat'][:webapp_dir] + "/embergraph"
 
 	# Where the log4j.properites file can be found:
 	default['embergraph'][:log4j_properties] = default['embergraph'][:web_home] + "/WEB-INF/classes/log4j.properties"
@@ -60,16 +60,16 @@ when "tomcat"
 
 	# The subversion branch to use when building from source:
 	if node['embergraph'][:build_from_svn]
-		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/BIGDATA_RELEASE_1_3_0"
+		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/embergraph/code/branches/BIGDATA_RELEASE_1_3_0"
 	end
 when "ha"
 	# The URL to the embergraphHA release bundle.
-	default['embergraph'][:url] = "http://softlayer-dal.dl.sourceforge.net/project/bigdata/bigdata/#{node['embergraph'][:base_version]}/REL.embergraph-#{node['embergraph'][:base_version]}.tgz"
+	default['embergraph'][:url] = "http://softlayer-dal.dl.sourceforge.net/project/embergraph/embergraph/#{node['embergraph'][:base_version]}/REL.embergraph-#{node['embergraph'][:base_version]}.tgz"
 
 	# The subversion branch to use when building from source:
 	if node['embergraph'][:build_from_svn]
-		# default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/BIGDATA_RELEASE_1_3_0"
-		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT_BRANCH_1_3_1"
+		# default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/embergraph/code/branches/BIGDATA_RELEASE_1_3_0"
+		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/embergraph/code/branches/DEPLOYMENT_BRANCH_1_3_1"
 	end
 
 	# Where the embergraph-ha.jnl file will live:

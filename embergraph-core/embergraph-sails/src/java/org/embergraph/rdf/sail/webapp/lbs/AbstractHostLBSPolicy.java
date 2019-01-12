@@ -700,7 +700,7 @@ public abstract class AbstractHostLBSPolicy extends AbstractLBSPolicy {
 //        }
 
         /*
-         * Sort into order by hostname (useful for /bigdata/status view).
+         * Sort into order by hostname (useful for /embergraph/status view).
          * 
          * Note: The ordering is not really material to anything. Stochastic
          * load balancing decisions are made without regard to this ordering.

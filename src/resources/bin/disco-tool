@@ -134,7 +134,7 @@ class Paths:
 
 app_paths = Paths(
     classpath = [
-        "lib/bigdata.jar",
+        "lib/embergraph.jar",
         "lib/jsk-platform.jar",
         "lib/jsk-lib.jar",
         "lib/log4j.jar"],

@@ -74,7 +74,7 @@ public class EmbergraphSailNSSWrapper {
      * 
      * <pre>
      * http://localhost:9999 -- root URL
-     * http://localhost:9999/bigdata -- webapp URL (includes "/bigdata" context path.
+     * http://localhost:9999/embergraph -- webapp URL (includes "/embergraph" context path.
      * </pre>
      */
     protected String m_rootURL;

@@ -110,15 +110,15 @@ See https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.h
             <include>org/embergraph/sparse/TestAll.java</include>
             <include>org/embergraph/search/TestAll.java</include>
             <!-- not suppported yet/
-            <include>com/bigdata/bfs/TestAll.java</include>
+            <include>com/embergraph/bfs/TestAll.java</include>
             -->
             <!-- Moved into embergraph-rdf-test
-            <include>com/bigdata/rdf/TestAll.java</include>
-            <include>com/bigdata/rdf/internal/gis/TestAll.java</include>
+            <include>com/embergraph/rdf/TestAll.java</include>
+            <include>com/embergraph/rdf/internal/gis/TestAll.java</include>
 -->
             <!-- Moved into embergraph-sails-test
-            <include>com/bigdata/rdf/sail/TestAll.java</include>
-            <include>com/bigdata/rdf/sail/webapp/TestAll.java</include>
+            <include>com/embergraph/rdf/sail/TestAll.java</include>
+            <include>com/embergraph/rdf/sail/webapp/TestAll.java</include>
 -->
             <include>org/embergraph/gom/TestAll.java</include>
             <include>org/embergraph/util/httpd/TestAll.java</include>

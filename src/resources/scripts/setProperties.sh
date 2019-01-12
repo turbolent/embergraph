@@ -6,7 +6,7 @@
 #
 
 # Setup the environment.
-source `dirname $0`/bigdataenv
+source `dirname $0`/embergraphenv
 
 if [ -z "$1" ]; then
     echo "usage: $0 namespace"

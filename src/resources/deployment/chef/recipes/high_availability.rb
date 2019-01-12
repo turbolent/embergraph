@@ -81,7 +81,7 @@ if node['embergraph'][:install_flavor] == "ha"
 		#
 		# Retrieve the package prepared for Brew:
 		#
-		remote_file "/tmp/bigdata.tgz" do
+		remote_file "/tmp/embergraph.tgz" do
 			owner	node['embergraph'][:user]
 			group	node['embergraph'][:group]
 			source	node['embergraph'][:url]
@@ -95,7 +95,7 @@ if node['embergraph'][:install_flavor] == "ha"
 			user	node['embergraph'][:user]
  			group	node['embergraph'][:group]
 			cwd	"#{node['embergraph'][:home]}/.."
-			command	"tar xvf /tmp/bigdata.tgz"
+			command	"tar xvf /tmp/embergraph.tgz"
 		end
 
 		#
@@ -135,11 +135,11 @@ if node['embergraph'][:install_flavor] == "ha"
 	#
 	# Install hte embergraphHA service file:
 	#
-	execute "copy over the /etc/init.d/bigdataHA file" do
+	execute "copy over the /etc/init.d/embergraphHA file" do
 		user	'root'
 		group	'root'
 		cwd	"#{node['embergraph'][:home]}/etc/init.d"
-		command	"cp embergraphHA /etc/init.d/bigdataHA; chmod 00755 /etc/init.d/bigdataHA"
+		command	"cp embergraphHA /etc/init.d/embergraphHA; chmod 00755 /etc/init.d/embergraphHA"
 	end
 
 	#
@@ -181,10 +181,10 @@ if node['embergraph'][:install_flavor] == "ha"
 	end
 
 	#
-	# Copy the /etc/default/bigdataHA template:
+	# Copy the /etc/default/embergraphHA template:
 	#
-	template "/etc/default/bigdataHA" do
-		source	"etc/default/bigdataHA.erb"
+	template "/etc/default/embergraphHA" do
+		source	"etc/default/embergraphHA.erb"
  		user	'root'
  		group	'root'
 		mode	00644

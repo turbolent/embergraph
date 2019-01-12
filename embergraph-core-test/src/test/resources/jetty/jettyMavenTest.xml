@@ -128,7 +128,7 @@
              <New id="Contexts" class="org.eclipse.jetty.server.handler.ContextHandlerCollection">
                    <Call name="addHandler">
                       <Arg>
-                        <!-- This is the redirect from root to /bigdata -->
+                        <!-- This is the redirect from root to /embergraph -->
                         <New id="moved" class="org.eclipse.jetty.server.handler.MovedContextHandler">
               <Set name="contextPath">/</Set>
               <Set name="newContextURL">/embergraph</Set>

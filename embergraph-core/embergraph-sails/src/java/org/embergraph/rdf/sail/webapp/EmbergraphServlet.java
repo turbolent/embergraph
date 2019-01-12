@@ -454,11 +454,11 @@ abstract public class EmbergraphServlet extends HttpServlet implements IMimeType
          * service URI. This will be a load balanced version of the serviceURI
          * that we obtained above. We are trying to go from
          * 
-         * http://localhost:9999/bigdata/sparql
+         * http://localhost:9999/embergraph/sparql
          * 
          * to
          * 
-         * http://localhost:9999/bigdata/LBS/sparql
+         * http://localhost:9999/embergraph/LBS/sparql
          * 
          * where LBS is the prefix of the load balancer servlet.
          */
