@@ -22,9 +22,9 @@ import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.RDFParserRegistry;
 import org.openrdf.rio.helpers.StatementCollector;
 
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 
 /**
 * @author Alexander De Leon
@@ -37,10 +37,10 @@ public class LoadPdb {
 		File file = new File("tmp-1Y26.jnl");
 
 		Properties properties = new Properties();
-		properties.setProperty(BigdataSail.Options.FILE, file.getAbsolutePath());
+		properties.setProperty(EmbergraphSail.Options.FILE, file.getAbsolutePath());
 
-		BigdataSail sail = new BigdataSail(properties);
-		Repository repo = new BigdataSailRepository(sail);
+		EmbergraphSail sail = new EmbergraphSail(properties);
+		Repository repo = new EmbergraphSailRepository(sail);
 		repo.initialize();
 
         if(false) {
@@ -110,8 +110,8 @@ public class LoadPdb {
 				// do something with the statement
 				LOG.info(stmt);
 
-				// cast to BigdataStatement to get at additional information
-				BigdataStatement bdStmt = (BigdataStatement) stmt;
+				// cast to EmbergraphStatement to get at additional information
+				EmbergraphStatement bdStmt = (EmbergraphStatement) stmt;
 				if (bdStmt.isExplicit()) {
 					// do one thing
 				} else if (bdStmt.isInferred()) {

@@ -48,7 +48,7 @@ public class TestAll extends TestCase {
      */
     public static Test suite() {
 
-        final TestSuite suite = new TestSuite("Bigdata NTriples Support");
+        final TestSuite suite = new TestSuite("Embergraph NTriples Support");
 
         suite.addTestSuite(EmbergraphNTriplesParserTest.class);
 

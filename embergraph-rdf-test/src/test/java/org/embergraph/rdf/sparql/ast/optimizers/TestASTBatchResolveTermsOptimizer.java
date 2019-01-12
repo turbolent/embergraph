@@ -94,7 +94,7 @@ public class TestASTBatchResolveTermsOptimizer extends AbstractASTEvaluationTest
         /*
 		 * Note: DO NOT share structures in this test!!!!
 		 * 
-		 * Note: This test depends on having multiple BigdataURIs for the
+		 * Note: This test depends on having multiple EmbergraphURIs for the
 		 * unknown term. In one case the IV is known and in the other case it is
 		 * not known.
 		 */
@@ -207,7 +207,7 @@ public class TestASTBatchResolveTermsOptimizer extends AbstractASTEvaluationTest
         /*
 		 * Note: DO NOT share structures in this test!!!!
 		 * 
-		 * Note: This test depends on having multiple BigdataURIs for the
+		 * Note: This test depends on having multiple EmbergraphURIs for the
 		 * unknown term. In one case the IV is known and in the other case it is
 		 * not known.
 		 */

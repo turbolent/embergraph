@@ -404,7 +404,7 @@ public class CBD {
                      * 
                      * TODO Consider using an ISPO => EmbergraphStatement map for
                      * the statements so we can avoid duplicate entries for
-                     * BigdataStatements having different blank nodes but the
+                     * EmbergraphStatements having different blank nodes but the
                      * same IVs for those blank nodes.
                      */
                     
@@ -509,7 +509,7 @@ public class CBD {
 
         /*
          * Ensure that the bnode IVs are resolved to the corresponding
-         * BigdataBlankNode objects and that the valueCache relation is set on
+         * EmbergraphBlankNode objects and that the valueCache relation is set on
          * those bnode IVs.
          */
         final Map<IV<?, ?>, EmbergraphValue> terms = store.getLexiconRelation()

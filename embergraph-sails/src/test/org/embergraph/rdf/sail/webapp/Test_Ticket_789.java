@@ -36,8 +36,8 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.query.impl.DatasetImpl;
 
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepository;
-import org.embergraph.rdf.sail.remote.BigdataSailRemoteRepositoryConnection;
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepository;
+import org.embergraph.rdf.sail.remote.EmbergraphSailRemoteRepositoryConnection;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
 
 /**
@@ -45,10 +45,10 @@ import org.embergraph.rdf.sail.webapp.client.RemoteRepository.AddOp;
  * 
  *  @author igorkim
  *  
- * @see <a href="http://jira.blazegraph.com/browse/BLZG-789" > BigdataSailRemoteRepositoryConnection should implement interface methods </a>
- * @see <a href="http://jira.blazegraph.com/browse/BLZG-753"> Result of BigdataSailRemoteRepositoryConnection.getStatements() and export() do not preserve statement context.
- * @see <a href="http://jira.blazegraph.com/browse/BLZG-1325"> BigdataSailRemoteRepositoryConnection must support setBinding(), getBindings(), clearBindings(), and removeBinding()
- * @see <a href="http://jira.blazegraph.com/browse/BLZG-1326"> BigdataSailRemoteRepositoryConnection must support setDataset(), getDataset()
+ * @see <a href="http://jira.blazegraph.com/browse/BLZG-789" > EmbergraphSailRemoteRepositoryConnection should implement interface methods </a>
+ * @see <a href="http://jira.blazegraph.com/browse/BLZG-753"> Result of EmbergraphSailRemoteRepositoryConnection.getStatements() and export() do not preserve statement context.
+ * @see <a href="http://jira.blazegraph.com/browse/BLZG-1325"> EmbergraphSailRemoteRepositoryConnection must support setBinding(), getBindings(), clearBindings(), and removeBinding()
+ * @see <a href="http://jira.blazegraph.com/browse/BLZG-1326"> EmbergraphSailRemoteRepositoryConnection must support setDataset(), getDataset()
  */
 public class Test_Ticket_789<S extends IIndexManager> extends
 		AbstractTestNanoSparqlClient<S> {
@@ -125,8 +125,8 @@ public class Test_Ticket_789<S extends IIndexManager> extends
 	public void test_ticket_1325_bindings() throws Exception {
 		populate();
 		
-		BigdataSailRemoteRepository sailRepo = m_repo.getBigdataSailRemoteRepository();
-		BigdataSailRemoteRepositoryConnection con = sailRepo.getConnection();
+		EmbergraphSailRemoteRepository sailRepo = m_repo.getEmbergraphSailRemoteRepository();
+		EmbergraphSailRemoteRepositoryConnection con = sailRepo.getConnection();
 		
 		final TupleQuery tq = con.prepareTupleQuery(QueryLanguage.SPARQL, "select * where {?s ?p ?o}");
 		tq.setBinding("s", s);
@@ -154,8 +154,8 @@ public class Test_Ticket_789<S extends IIndexManager> extends
 	public void test_ticket_1326_dataset() throws Exception {
 		populate();
 		
-		BigdataSailRemoteRepository sailRepo = m_repo.getBigdataSailRemoteRepository();
-		BigdataSailRemoteRepositoryConnection con = sailRepo.getConnection();
+		EmbergraphSailRemoteRepository sailRepo = m_repo.getEmbergraphSailRemoteRepository();
+		EmbergraphSailRemoteRepositoryConnection con = sailRepo.getConnection();
 		final TupleQuery tq = con.prepareTupleQuery(QueryLanguage.SPARQL, "select * where {?s ?p ?o}");
 
 		final DatasetImpl dataset = new DatasetImpl();

@@ -52,7 +52,7 @@ public class TestComboJoins extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * Note: This is a port of
-     * TestBigdataSailEvaluationStrategyImpl#test_join_combo_1()
+     * TestEmbergraphSailEvaluationStrategyImpl#test_join_combo_1()
      */
     public void test_join_combo_1() throws Exception {
         
@@ -69,7 +69,7 @@ public class TestComboJoins extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * Note: This is a port of
-     * TestBigdataSailEvaluationStrategyImpl#test_join_combo_1()
+     * TestEmbergraphSailEvaluationStrategyImpl#test_join_combo_1()
      */
     public void test_join_combo_2() throws Exception {
         
@@ -86,7 +86,7 @@ public class TestComboJoins extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * Note: This is a port of
-     * TestBigdataSailEvaluationStrategyImpl#test_join_combo_1()
+     * TestEmbergraphSailEvaluationStrategyImpl#test_join_combo_1()
      */
     public void test_join_combo_3() throws Exception {
         

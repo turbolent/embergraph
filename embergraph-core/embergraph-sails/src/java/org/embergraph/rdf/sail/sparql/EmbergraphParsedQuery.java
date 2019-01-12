@@ -33,7 +33,7 @@ import org.embergraph.rdf.sparql.ast.ASTContainer;
  * but DOES NOT support ANY aspect of the {@link QueryParser} API. All data
  * pertaining to the parsed query is reported by {@link #getASTContainer()}.
  * There is NO {@link TupleExpr} associated with the {@link EmbergraphParsedQuery}.
- * Bigdata uses an entirely different model to represent the parsed query,
+ * Embergraph uses an entirely different model to represent the parsed query,
  * different optimizers to rewrite the parsed query, and different operations to
  * evaluate the {@link ParsedQuery}.
  * 

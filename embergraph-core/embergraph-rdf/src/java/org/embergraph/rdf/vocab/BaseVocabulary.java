@@ -214,7 +214,7 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 //        if (value == null)
 //            throw new IllegalArgumentException();
 //        
-//        // convert to BigdataValues when adding to the collection.
+//        // convert to EmbergraphValues when adding to the collection.
 //        val2iv.add(valueFactory.asValue(value));
 //
 //    }
@@ -230,7 +230,7 @@ abstract public class BaseVocabulary implements Vocabulary, Externalizable {
 
             while (itr.hasNext()) {
 
-                // Convert to BigdataValues when adding to the collection.
+                // Convert to EmbergraphValues when adding to the collection.
                 final EmbergraphValue value = valueFactory.asValue(itr.next());
 
                 // Add to the collection.

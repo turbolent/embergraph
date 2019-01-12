@@ -37,7 +37,7 @@ public class JoinOrderExplainHint extends ExplainHint {
    
    public static final String ACROSS_PARTITION_REORDERING_PROBLEM = 
       "The referenced AST node cannot be moved in front of an " +
-      "OPTIONAL or MINUS expression. Blazegraph tries to do " +
+      "OPTIONAL or MINUS expression. Embergraph tries to do " +
       "so in order to assert best performance, but in this " +
       "it seems like query semantics might change if we move " +
       "the node. Please review your query and move the node to " +

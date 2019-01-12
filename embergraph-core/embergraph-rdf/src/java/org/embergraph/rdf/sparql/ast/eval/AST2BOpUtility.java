@@ -1057,7 +1057,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
              * true IFF this is a registered embergraph aware service running in
              * the same JVM.
              */
-            final boolean isBigdata = serviceCall.getServiceOptions()
+            final boolean isEmbergraph = serviceCall.getServiceOptions()
                     .isEmbergraphNativeService();
 
             /*
@@ -1066,7 +1066,7 @@ public class AST2BOpUtility extends AST2BOpRTO {
              * we may need to use variable bindings inside, so materialization
              * might be required here as well.
              */
-            isMaterialize = !isBigdata ||
+            isMaterialize = !isEmbergraph ||
                 !serviceCall.getServiceOptions().isRunFirst() ||
                 !serviceNode.getProperty(QueryHints.RUN_FIRST, false);
             

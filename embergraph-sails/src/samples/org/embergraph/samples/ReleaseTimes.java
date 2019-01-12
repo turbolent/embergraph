@@ -16,9 +16,9 @@ import org.openrdf.sail.SailException;
 import org.embergraph.journal.BufferMode;
 import org.embergraph.journal.ITx;
 import org.embergraph.journal.Options;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.store.BD;
 import org.embergraph.service.AbstractTransactionService;
 
@@ -45,10 +45,10 @@ public class ReleaseTimes {
 			/**
 			 * First create a new repository with 5000ms (5 second) retention
 			 */
-			BigdataSail sail = new BigdataSail(getProperties("5000"));
+			EmbergraphSail sail = new EmbergraphSail(getProperties("5000"));
 			sail.initialize();
-			BigdataSailRepository repo = new BigdataSailRepository(sail);
-	    	final BigdataSailRepositoryConnection cxn = repo.getConnection();
+			EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
+	    	final EmbergraphSailRepositoryConnection cxn = repo.getConnection();
 	        cxn.setAutoCommit(false);
 				        
             final ValueFactory vf = sail.getValueFactory();
@@ -83,10 +83,10 @@ public class ReleaseTimes {
 	        sail.shutDown();
 	        	        
 	        // Reopen with sufficient retention time to cover previous states
-			sail = new BigdataSail(getProperties("5000"));
+			sail = new EmbergraphSail(getProperties("5000"));
 			sail.initialize();
-			repo = new BigdataSailRepository(sail);
-	    	final BigdataSailRepositoryConnection cxn2 = repo.getConnection();
+			repo = new EmbergraphSailRepository(sail);
+	    	final EmbergraphSailRepositoryConnection cxn2 = repo.getConnection();
 	        cxn2.setAutoCommit(false);
             System.out.println("Reopened");
 	        
@@ -141,7 +141,7 @@ public class ReleaseTimes {
 		 * 
 		 * Commit, and return the store state.
 		 */
-		private static long assertStatement(BigdataSailRepositoryConnection cxn, URI id,
+		private static long assertStatement(EmbergraphSailRepositoryConnection cxn, URI id,
 				URI pred, Literal label) throws RepositoryException
 		{
 			cxn.remove(id, pred, null);
@@ -166,11 +166,11 @@ public class ReleaseTimes {
 		 * We then retrieve statements from the connection, checking that only
 		 * the requested statement is present.
 		 */
-		static boolean checkState(final BigdataSailRepository repo, final long state,  
+		static boolean checkState(final EmbergraphSailRepository repo, final long state,
 				final URI id, final URI pred, final Literal label )
 		{
 			try {
-				final BigdataSailRepositoryConnection cxn;
+				final EmbergraphSailRepositoryConnection cxn;
 				try {
 					cxn = repo.getReadOnlyConnection(state);
 				} catch (IllegalStateException e) {

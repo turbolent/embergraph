@@ -30,7 +30,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  * {@link ICloseableIterator}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: Bigdata2SesameIteration.java 2265 2009-10-26 12:51:06Z
+ * @version $Id: Embergraph2SesameIteration.java 2265 2009-10-26 12:51:06Z
  *          thompsonbry $
  * @param <T>
  *            The generic type of the visited elements.

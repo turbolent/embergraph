@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# Vagrantfile.dual-provider.tomcat - Install Bigdata under Tomcat with an either a VirtualBox (Default) or AWS Provider
+# Vagrantfile.dual-provider.tomcat - Install Embergraph under Tomcat with an either a VirtualBox (Default) or AWS Provider
 #
 # The launch synopsis for this Vagrantfile:
 #

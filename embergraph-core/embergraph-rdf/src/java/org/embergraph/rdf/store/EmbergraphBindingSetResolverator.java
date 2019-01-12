@@ -30,7 +30,7 @@ import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
- * Efficiently resolve term identifiers in Bigdata {@link IBindingSet}s to RDF
+ * Efficiently resolve term identifiers in Embergraph {@link IBindingSet}s to RDF
  * {@link EmbergraphValue}s.
  * 
  * @see ChunkedMaterializationOp

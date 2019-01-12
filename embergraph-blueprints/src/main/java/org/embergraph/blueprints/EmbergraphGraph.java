@@ -1153,7 +1153,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
 
     /**
-     * Translate a collection of Bigdata statements into an iteration of
+     * Translate a collection of Embergraph statements into an iteration of
      * Blueprints vertices.
      *  
      * @author mikepersonick
@@ -1221,7 +1221,7 @@ public abstract class EmbergraphGraph implements Graph {
     }
 
     /**
-     * Translate a collection of Bigdata statements into an iteration of
+     * Translate a collection of Embergraph statements into an iteration of
      * Blueprints edges.
      *  
      * @author mikepersonick

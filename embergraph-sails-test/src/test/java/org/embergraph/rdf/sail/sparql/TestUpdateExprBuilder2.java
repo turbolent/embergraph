@@ -67,7 +67,7 @@ public class TestUpdateExprBuilder2 extends AbstractEmbergraphExprBuilderTestCas
     }
 
     /*
-     * Bigdata specific extensions for named solution sets.
+     * Embergraph specific extensions for named solution sets.
      */
     
     /**

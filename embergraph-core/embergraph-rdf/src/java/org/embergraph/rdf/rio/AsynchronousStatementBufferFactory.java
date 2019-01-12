@@ -4085,7 +4085,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
             /*
              * Latch notifies us when all writes for _this_ document on TERM2ID
              * are complete such that we have the assigned term identifiers for
-             * all BigdataValues appearing in the document. This event is used
+             * all EmbergraphValues appearing in the document. This event is used
              * to transfer the document to another queue.
              */
             final KVOLatch tidsLatch = new KVOLatch() {
@@ -4201,7 +4201,7 @@ public class AsynchronousStatementBufferFactory<S extends EmbergraphStatement, R
 //            /*
 //             * Latch notifies us when all writes for _this_ document on TERMS
 //             * are complete such that we have the assigned term identifiers for
-//             * all BigdataValues appearing in the document. This event is used
+//             * all EmbergraphValues appearing in the document. This event is used
 //             * to transfer the document to another queue.
 //             */
 //            final KVOLatch tidsLatch = new KVOLatch() {

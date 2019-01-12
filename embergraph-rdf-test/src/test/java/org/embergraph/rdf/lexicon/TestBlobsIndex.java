@@ -2,11 +2,7 @@
 Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved.
 Copyright (C) Embergraph contributors 2019. All rights reserved.
 
- Contact:
- SYSTAP, LLC DBA Blazegraph
- 2501 Calvert ST NW #106
- Washington, DC 20008
- licenses@blazegraph.com
+
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -491,7 +487,7 @@ public class TestBlobsIndex extends TestCase2 {
 					final EmbergraphValue actual = vf.getValueSerializer()
 							.deserialize(val);
 				
-					// Verify BigdataValues are equal()
+					// Verify EmbergraphValues are equal()
 					if (!expected.equals(actual)) {
 					
 						log.error(DumpLexicon.dumpBlobs(namespace, ndx));
@@ -515,7 +511,7 @@ public class TestBlobsIndex extends TestCase2 {
 				 * on the EmbergraphValue objects.
 				 * 
 				 * Note: Since we can not clear the IV once it has been set, this
-				 * replaces the BigdataValues in the array with new values having
+				 * replaces the EmbergraphValues in the array with new values having
 				 * the same data.
 				 */
 				final IV[] expected = new IV[a.length];
@@ -927,7 +923,7 @@ public class TestBlobsIndex extends TestCase2 {
 //					final EmbergraphValue actual = vf.getValueSerializer()
 //							.deserialize(val);
 //
-//					// Verify BigdataValues are equal()
+//					// Verify EmbergraphValues are equal()
 //					assertEquals(expectedValue, actual);
 //					
 //					if (log.isInfoEnabled())
@@ -1003,7 +999,7 @@ public class TestBlobsIndex extends TestCase2 {
 
             /*
              * Write on the TERMS index, setting IVs as side-effect on
-             * BigdataValues.
+             * EmbergraphValues.
              */
             {
 

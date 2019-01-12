@@ -6,7 +6,7 @@
 #
 
 #
-# Only do the following for Bigdata NSS install
+# Only do the following for Embergraph NSS install
 #
 if node['embergraph'][:install_flavor] == "nss"
 
@@ -38,7 +38,7 @@ if node['embergraph'][:install_flavor] == "nss"
 		include_recipe	"subversion::client"
 
 		#
-		# Retrieve the Bigdata source from the specified subversion branch:
+		# Retrieve the Embergraph source from the specified subversion branch:
 		#
 		execute "checkout embergraph from svn repo" do
 			user	'ubuntu'
@@ -58,7 +58,7 @@ if node['embergraph'][:install_flavor] == "nss"
 		end
 
 		#
-		# Extract the just built release package, thus installing it in the Bigdata home directory:
+		# Extract the just built release package, thus installing it in the Embergraph home directory:
 		#
 		execute "Extract and relocate the embergraph archive" do
 			user	node['embergraph'][:user]
@@ -77,7 +77,7 @@ if node['embergraph'][:install_flavor] == "nss"
 		end
 
 		#
-		# Extract the just retrieved release package, thus installing it in the Bigdata home directory:
+		# Extract the just retrieved release package, thus installing it in the Embergraph home directory:
 		#
 		execute "Extract and relocate the embergraph archive" do
 			user	node['embergraph'][:user]
@@ -103,7 +103,7 @@ if node['embergraph'][:install_flavor] == "nss"
 	end
 
 	#
-	# Set the Bigdata home directory in the bin/bigdataNSS file:
+	# Set the Embergraph home directory in the bin/bigdataNSS file:
 	#
 	execute "set the BD_HOME in bin/bigdata" do
 		cwd	"#{node['embergraph'][:home]}/bin"
@@ -119,7 +119,7 @@ if node['embergraph'][:install_flavor] == "nss"
 	end
 
 	#
-	# Set the Bigdata home directory in the log4j.properties file to set the path for the log files:
+	# Set the Embergraph home directory in the log4j.properties file to set the path for the log files:
 	#
 	execute "set the BD_HOME in log4j.properties" do
 		cwd	"#{node['embergraph'][:jetty_dir]}/WEB-INF/classes"

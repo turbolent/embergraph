@@ -47,7 +47,7 @@ import org.embergraph.service.IService;
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * 
  *          TODO The SPARQL layer needs to be separated from the core embergraph
- *          layer, with the BigdataContext moving into a servlet package in the
+ *          layer, with the EmbergraphContext moving into a servlet package in the
  *          embergraph module and the CountersServlet moving into a servlet package
  *          in the org.embergraph.counters package namespace.
  *          <p>

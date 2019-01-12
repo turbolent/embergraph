@@ -235,7 +235,7 @@ public class TripleStoreUtility {
                 (IV) null, (IV) null, (IV) null);
 
         /*
-         * Efficiently convert SPOs to BigdataStatements (externalizes
+         * Efficiently convert SPOs to EmbergraphStatements (externalizes
          * statements).
          */
         final EmbergraphStatementIterator itr2 = expected

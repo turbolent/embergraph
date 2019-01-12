@@ -66,7 +66,7 @@ public class TestAll extends TestCase {
         // basic test suite for TermIV.
         suite.addTestSuite(TestTermIV.class);
 
-        // test suite for putting BigdataValues in TermIV order.
+        // test suite for putting EmbergraphValues in TermIV order.
         suite.addTestSuite(TestTermIVComparator.class);
 
         // basic test suite for BlobIV.

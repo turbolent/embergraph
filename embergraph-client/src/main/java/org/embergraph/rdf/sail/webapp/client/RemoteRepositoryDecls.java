@@ -102,7 +102,7 @@ public class RemoteRepositoryDecls {
     * The name of the property whose value is the namespace of the KB to be
     * created.
     * <p>
-    * Note: This string is identicial to one defined by the BigdataSail
+    * Note: This string is identicial to one defined by the EmbergraphSail
     * options, but the client API must not include a dependency on the Sail so
     * it is given by value again here in a package local scope.
     * 
@@ -145,28 +145,28 @@ public class RemoteRepositoryDecls {
    /**
     * URL query parameter used to specify a URI in the default graph for SPARQL
     * query (but not for SPARQL update).
-    * @see org.embergraph.rdf.sail.webapp.BigdataRDFContext.DEFAULT_GRAPH_URI
+    * @see org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.DEFAULT_GRAPH_URI
     */
    public static final String DEFAULT_GRAPH_URI = "default-graph-uri";
 
    /**
     * URL query parameter used to specify a URI in the set of named graphs for
     * SPARQL query (but not for SPARQL update).
-    * @see org.embergraph.rdf.sail.webapp.BigdataRDFContext.NAMED_GRAPH_URI
+    * @see org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.NAMED_GRAPH_URI
     */
    public static final String NAMED_GRAPH_URI = "named-graph-uri";
    
    /**
     * URL query parameter used to specify a URI in the default graph for SPARQL
     * UPDATE.
-    * @see org.embergraph.rdf.sail.webapp.BigdataRDFContext.USING_GRAPH_URI
+    * @see org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.USING_GRAPH_URI
     */
    public static final String USING_GRAPH_URI = "using-graph-uri";
 
    /**
     * URL query parameter used to specify a URI in the set of named graphs for
     * SPARQL UPDATE.
-    * @see org.embergraph.rdf.sail.webapp.BigdataRDFContext.USING_NAMED_GRAPH_URI
+    * @see org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.USING_NAMED_GRAPH_URI
     */
    public static final String USING_NAMED_GRAPH_URI = "using-named-graph-uri";
 

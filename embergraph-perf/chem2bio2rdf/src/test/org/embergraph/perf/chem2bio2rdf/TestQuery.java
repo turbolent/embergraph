@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import org.openrdf.query.GraphQueryResult;
 import org.openrdf.query.TupleQueryResult;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.util.httpd.Config;
 import org.embergraph.rdf.sail.webapp.client.DefaultClientConnectionManagerFactory;
 import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
@@ -61,7 +61,7 @@ public class TestQuery {
 	public static void main(String[] args) throws Exception {
 		
         final String serviceURL = "http://localhost:" + Config.HTTP_PORT
-                + BigdataStatics.getContextPath() + "/sparql";
+                + EmbergraphStatics.getContextPath() + "/sparql";
 
 		final HttpClient httpClient = 
 			new DefaultHttpClient(DefaultClientConnectionManagerFactory.getInstance().newInstance());

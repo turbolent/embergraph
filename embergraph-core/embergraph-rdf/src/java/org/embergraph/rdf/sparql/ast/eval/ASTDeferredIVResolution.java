@@ -1208,7 +1208,7 @@ public class ASTDeferredIVResolution {
                          * the issue only shows up with embedded SPARQL query
                          * use.
                          * 
-                         * @see org.embergraph.rdf.sail.TestBigdataValueReplacer.test_dropUnusedBindings()
+                         * @see org.embergraph.rdf.sail.TestEmbergraphValueReplacer.test_dropUnusedBindings()
                          * @see TestRollbacks
                          */
                         final String label = ((Literal) v).getLabel();

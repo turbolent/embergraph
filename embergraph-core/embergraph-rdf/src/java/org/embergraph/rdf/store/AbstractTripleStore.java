@@ -2,11 +2,7 @@
 Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved.
 Copyright (C) Embergraph contributors 2019. All rights reserved.
 
- Contact:
- SYSTAP, LLC DBA Blazegraph
- 2501 Calvert ST NW #106
- Washington, DC 20008
- licenses@blazegraph.com
+
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -3912,7 +3908,7 @@ abstract public class AbstractTripleStore extends
 
         {
 
-            // Full SPO scan efficiently resolving SPOs to BigdataStatements.
+            // Full SPO scan efficiently resolving SPOs to EmbergraphStatements.
             final EmbergraphStatementIterator itr = resolveTerms
                     .asStatementIterator(getAccessPath(keyOrder)
                             .iterator());
@@ -5060,7 +5056,7 @@ abstract public class AbstractTripleStore extends
             throw new IllegalArgumentException();
         
         /*
-         * Batch resolve BigdataValues with their associated term identifiers
+         * Batch resolve EmbergraphValues with their associated term identifiers
          * for the given predicates and cls.
          */
         final EmbergraphValue[] terms = new EmbergraphValue[preds.length + 1/* cls */];
@@ -5144,7 +5140,7 @@ abstract public class AbstractTripleStore extends
 
         /*
          * Resolve ISolutions to their binding sets and efficiently resolves
-         * term identifiers in those binding sets to BigdataValues.
+         * term identifiers in those binding sets to EmbergraphValues.
          */
         try {
         

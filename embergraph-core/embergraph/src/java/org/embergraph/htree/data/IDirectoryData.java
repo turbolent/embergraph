@@ -52,7 +52,7 @@ import org.embergraph.rawstore.IRawStore;
  * entries.
  * <p>
  * By far the largest storage cost associated with a directory page are the
- * addresses of the child pages. Bigdata uses <code>long</code> addresses for
+ * addresses of the child pages. Embergraph uses <code>long</code> addresses for
  * the {@link IRawStore} interface. However, it is possible to get by with int32
  * addresses when using the RWStore.
  * <p>

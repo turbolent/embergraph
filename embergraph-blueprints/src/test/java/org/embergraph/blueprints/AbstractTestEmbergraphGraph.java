@@ -194,9 +194,9 @@ public abstract class AbstractTestEmbergraphGraph extends TestCase2 {
 //    }
 //
 //    public void testGraphQueryForHasOR() throws Exception {
-//        final BigdataGraphTest test = newEmbergraphGraphTest();
+//        final EmbergraphGraphTest test = newEmbergraphGraphTest();
 //        test.stopWatch();
-//        final BigdataTestSuite testSuite = new BigdataTestSuite(test);
+//        final EmbergraphTestSuite testSuite = new EmbergraphTestSuite(test);
 //        try {
 //            testSuite.testGraphQueryForHasOR();
 //        } finally {
@@ -205,16 +205,16 @@ public abstract class AbstractTestEmbergraphGraph extends TestCase2 {
 //        
 //    }
     
-//    private static class BigdataTestSuite extends TestSuite {
+//    private static class EmbergraphTestSuite extends TestSuite {
 //        
-//        public BigdataTestSuite(final GraphTest graphTest) {
+//        public EmbergraphTestSuite(final GraphTest graphTest) {
 //            super(graphTest);
 //        }
 //
 //    }
 //    
 //    
-//    private class BigdataGraphTest extends GraphTest {
+//    private class EmbergraphGraphTest extends GraphTest {
 //
 //		@Override
 //		public void doTestSuite(TestSuite testSuite) throws Exception {

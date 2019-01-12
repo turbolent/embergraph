@@ -50,7 +50,7 @@ import org.embergraph.journal.IIndexManager;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /**
- * Bigdata integration for the {@link ComplexSPARQLQueryTest}.
+ * Embergraph integration for the {@link ComplexSPARQLQueryTest}.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
  * @version $Id$

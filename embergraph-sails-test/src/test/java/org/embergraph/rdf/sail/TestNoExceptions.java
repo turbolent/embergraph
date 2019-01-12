@@ -192,7 +192,7 @@ WHERE {
 
 	void optimizeQuery(final String queryfile) throws Exception {
 		final String sparql = IOUtils.toString(getClass().getResourceAsStream(queryfile+".rq"));
-		// try with Bigdata:
+		// try with Embergraph:
 		final EmbergraphSail sail = getSail();
 		try {
 			executeQuery(new EmbergraphSailRepository(sail),sparql);

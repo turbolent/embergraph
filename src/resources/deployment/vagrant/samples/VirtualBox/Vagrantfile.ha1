@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# Vagraant.ha1 - Install the Bigdata High Availability Server with 1 node with a VirtualBox Provider
+# Vagraant.ha1 - Install the Embergraph High Availability Server with 1 node with a VirtualBox Provider
 #
 # The launch synopsis for this Vagrantfile:
 #

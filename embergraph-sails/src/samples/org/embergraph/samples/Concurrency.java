@@ -26,8 +26,8 @@ import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.RDFFormat;
 
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 
 /**
  * This class demonstrates concurrent reading and writing with the U10 data set
@@ -74,20 +74,20 @@ public class Concurrency {
             log.info(journal.getAbsolutePath());
             journal.deleteOnExit();
             properties.setProperty(
-                BigdataSail.Options.FILE, 
+                EmbergraphSail.Options.FILE,
                 journal.getAbsolutePath()
                 );
 
             // create the sail and the repository
-            BigdataSail sail = new BigdataSail(properties);
-            BigdataSailRepository repo = new BigdataSailRepository(sail);
+            EmbergraphSail sail = new EmbergraphSail(properties);
+            EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
             repo.initialize();
 
             // create the writer and readers
-            BigdataWriter writer = new BigdataWriter(repo);
-            Collection<BigdataReader> readers = new LinkedList<BigdataReader>();
+            EmbergraphWriter writer = new EmbergraphWriter(repo);
+            Collection<EmbergraphReader> readers = new LinkedList<EmbergraphReader>();
             for (int i = 0; i < numReaders; i++) {
-                readers.add(new BigdataReader(repo));
+                readers.add(new EmbergraphReader(repo));
             }
             
             // launch the threads and get their futures
@@ -95,7 +95,7 @@ public class Concurrency {
             ExecutorService executor = Executors.newCachedThreadPool();
             Future writerFuture = executor.submit(writer);
             Collection<Future> readerFutures = new LinkedList<Future>();
-            for (BigdataReader reader : readers) {
+            for (EmbergraphReader reader : readers) {
                 readerFutures.add(executor.submit(reader));
             }
             
@@ -103,7 +103,7 @@ public class Concurrency {
             writerFuture.get();
             
             // kill the readers
-            for (BigdataReader reader : readers) {
+            for (EmbergraphReader reader : readers) {
                 reader.kill();
             }
             
@@ -138,8 +138,8 @@ public class Concurrency {
             final AbstractTripleStore tripleStore = 
                 openTripleStore(fed, transactionId);
             
-            final BigdataSail sail = new BigdataSail(tripleStore);
-            final Repository repo = new BigdataSailRepository(sail);
+            final EmbergraphSail sail = new EmbergraphSail(tripleStore);
+            final Repository repo = new EmbergraphSailRepository(sail);
             repo.initialize();
             
             RepositoryConnection cxn = repo.getConnection();
@@ -181,19 +181,19 @@ public class Concurrency {
     /**
      * A writer task to load the U10 data set.
      */
-    private static class BigdataWriter implements Runnable {
+    private static class EmbergraphWriter implements Runnable {
         
         /**
          * The embergraph repository
          */
-        private BigdataSailRepository repo;
+        private EmbergraphSailRepository repo;
         
         /**
          * Construct the writer task.
          * 
          * @param fed the embergraph repository
          */
-        public BigdataWriter(BigdataSailRepository repo) {
+        public EmbergraphWriter(EmbergraphSailRepository repo) {
             
             this.repo = repo;
             
@@ -233,7 +233,7 @@ public class Concurrency {
             
             try {
                 // fast range count!
-                long stmtsBefore = ((BigdataSailRepository)repo).getDatabase().getStatementCount();
+                long stmtsBefore = ((EmbergraphSailRepository)repo).getDatabase().getStatementCount();
 //                // full index scan!
 //                long stmtsBefore = cxn.size();
                 log.info("statements before: " + stmtsBefore);
@@ -280,7 +280,7 @@ public class Concurrency {
                 // gather statistics
                 long elapsed = System.currentTimeMillis() - start;
                 // fast range count!
-                long stmtsAfter = ((BigdataSailRepository)repo).getDatabase().getStatementCount();
+                long stmtsAfter = ((EmbergraphSailRepository)repo).getDatabase().getStatementCount();
 //                long stmtsAfter = cxn.size();
                 long stmtsAdded = stmtsAfter - stmtsBefore;
                 int throughput =
@@ -305,12 +305,12 @@ public class Concurrency {
      * A reader task to issue concurrent queries.  Asks for the # of full
      * professors every three seconds.
      */
-    private static class BigdataReader implements Runnable {
+    private static class EmbergraphReader implements Runnable {
         
         /**
          * The embergraph repository
          */
-        private BigdataSailRepository repo;
+        private EmbergraphSailRepository repo;
         
         /**
          * Allows the reader to be stopped gracefully.
@@ -322,7 +322,7 @@ public class Concurrency {
          * 
          * @param fed the embergraph repository
          */
-        public BigdataReader(BigdataSailRepository repo) {
+        public EmbergraphReader(EmbergraphSailRepository repo) {
             
             this.repo = repo;
             

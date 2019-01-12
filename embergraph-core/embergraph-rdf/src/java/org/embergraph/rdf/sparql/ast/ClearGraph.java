@@ -33,7 +33,7 @@ import org.embergraph.bop.BOp;
  * CLEAR ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL | GRAPHS | SOLUTIONS | SOLUTIONS %VARNAME)
  * </pre>
  * 
- * Note: Bigdata does not support empty graphs, so DROP and CLEAR have identical
+ * Note: Embergraph does not support empty graphs, so DROP and CLEAR have identical
  * semantics.
  * 
  * @see http://www.w3.org/TR/sparql11-update/#clear

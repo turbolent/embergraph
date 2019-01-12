@@ -114,7 +114,7 @@ public class ServiceRegistry {
         defaultServiceFactoryRef = new AtomicReference<ServiceFactory>(
                 new RemoteServiceFactoryImpl(SPARQLVersion.SPARQL_11));
 
-        // Add the Bigdata search service.
+        // Add the Embergraph search service.
         add(BDS.SEARCH, new SearchServiceFactory());
         
         // Add the Geospatial search service.
@@ -123,7 +123,7 @@ public class ServiceRegistry {
         // Add the external Solr search service
         add(FTS.SEARCH, new FulltextSearchServiceFactory());
 
-        // Add the Bigdata search in search service.
+        // Add the Embergraph search in search service.
         add(BDS.SEARCH_IN_SEARCH, new SearchInSearchServiceFactory());
         
         // Add the sample index service.

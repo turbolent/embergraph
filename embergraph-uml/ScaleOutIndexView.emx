@@ -5409,7 +5409,7 @@
         </edges>
       </contents>
     </eAnnotations>
-    <ownedMember xmi:type="uml:Interface" xmi:id="_LTl14B3_Ed6BSe4b3C_q6g" name="IBigdataClient" clientDependency="_IPtYsB4AEd6BSe4b3C_q6g">
+    <ownedMember xmi:type="uml:Interface" xmi:id="_LTl14B3_Ed6BSe4b3C_q6g" name="IEmbergraphClient" clientDependency="_IPtYsB4AEd6BSe4b3C_q6g">
       <ownedAttribute xmi:id="_dxe4ER4AEd6BSe4b3C_q6g" name="java.util.properties" visibility="private" type="_Yhm54B4AEd6BSe4b3C_q6g" association="_dxe4EB4AEd6BSe4b3C_q6g">
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dxe4FB4AEd6BSe4b3C_q6g" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dxe4Ex4AEd6BSe4b3C_q6g" value="1"/>
@@ -5431,7 +5431,7 @@
         <returnResult xmi:id="_apzVcB4AEd6BSe4b3C_q6g" name="ReturnResult" direction="return"/>
       </ownedOperation>
     </ownedMember>
-    <ownedMember xmi:type="uml:Interface" xmi:id="_L4ZzIB3_Ed6BSe4b3C_q6g" name="IBigdataFederation" clientDependency="_GaSIIB4AEd6BSe4b3C_q6g">
+    <ownedMember xmi:type="uml:Interface" xmi:id="_L4ZzIB3_Ed6BSe4b3C_q6g" name="IEmbergraphFederation" clientDependency="_GaSIIB4AEd6BSe4b3C_q6g">
       <ownedAttribute xmi:id="_Dt2FIR4CEd6BSe4b3C_q6g" name="java.util.concurrent.executorservice" visibility="private" type="_yLfBoB4BEd6BSe4b3C_q6g" association="_Dt2FIB4CEd6BSe4b3C_q6g">
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Dt2FJB4CEd6BSe4b3C_q6g" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Dt2FIx4CEd6BSe4b3C_q6g" value="1"/>

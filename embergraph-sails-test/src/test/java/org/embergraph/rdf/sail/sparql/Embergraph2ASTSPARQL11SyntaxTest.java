@@ -44,7 +44,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.LocalTripleStore;
 
 /**
- * Bigdata integration for the {@link SPARQLSyntaxTest}. This appears to be a
+ * Embergraph integration for the {@link SPARQLSyntaxTest}. This appears to be a
  * manifest driven test suite for both correct acceptance and correct rejection
  * tests of the SPARQL parser.  There is also an Earl report for this test suite
  * which provides a W3C markup for the test results. The Earl report is part of

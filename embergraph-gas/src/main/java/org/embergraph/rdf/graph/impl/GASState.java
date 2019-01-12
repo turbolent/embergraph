@@ -424,7 +424,7 @@ public class GASState<VS, ES, ST> implements IGASState<VS, ES, ST> {
     }
     
     /**
-     * This will only work for the BigdataGASState.
+     * This will only work for the EmbergraphGASState.
      */
     @Override
     public Literal getLinkAttr(final Value u, final Statement e) {

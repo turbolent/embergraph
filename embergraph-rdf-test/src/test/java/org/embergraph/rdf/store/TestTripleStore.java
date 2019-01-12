@@ -708,7 +708,7 @@ public class TestTripleStore extends AbstractTripleStoreTestCase {
             };
 
             /*
-             * Create a variant array of BigdataValues whose IVs are set as a
+             * Create a variant array of EmbergraphValues whose IVs are set as a
              * side-effect.
              */
             final EmbergraphValue[] terms = new EmbergraphValue[values.length];

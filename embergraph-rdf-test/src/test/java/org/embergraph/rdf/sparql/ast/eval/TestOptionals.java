@@ -188,7 +188,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * Note: This test was ported from
-     * TestBigdataSailEvaluationStrategyImpl#test_prune_groups()
+     * TestEmbergraphSailEvaluationStrategyImpl#test_prune_groups()
      */
     public void test_prune_groups() throws Exception {
         
@@ -208,7 +208,7 @@ public class TestOptionals extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * Note: This test was ported from
-     * TestBigdataSailEvaluationStrategyImpl#test_prune_groups()
+     * TestEmbergraphSailEvaluationStrategyImpl#test_prune_groups()
      */
     public void test_nested_optionals() throws Exception {
         

@@ -344,7 +344,7 @@ public class MockTermResolverOp extends PipelineOp {
 
       /**
        * In order to make lex.addTerms take effect, we need to clear the mocked
-       * internal values of the mocked BigdataValues that we want to resolve.
+       * internal values of the mocked EmbergraphValues that we want to resolve.
        */
       final Collection<EmbergraphValue> ivVals = ivMap.values();
       
@@ -365,7 +365,7 @@ public class MockTermResolverOp extends PipelineOp {
       }      
       
       /**
-       * Join with the dictionary and cache the resolved BigdataValues on IVs
+       * Join with the dictionary and cache the resolved EmbergraphValues on IVs
        */
       lex.addTerms(ivValsArr, ivValsArr.length, true);
       for (EmbergraphValue ivVal : ivValsArr) {

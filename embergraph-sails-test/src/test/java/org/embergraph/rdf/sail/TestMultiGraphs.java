@@ -89,7 +89,7 @@ public class TestMultiGraphs extends ProxyEmbergraphSailTestCase {
         final SailRepositoryConnection cxn;
         
         /*
-         * You'll get the same answer whether you run with Bigdata or Sesame. 
+         * You'll get the same answer whether you run with Embergraph or Sesame.
          */
         if (true) {
             

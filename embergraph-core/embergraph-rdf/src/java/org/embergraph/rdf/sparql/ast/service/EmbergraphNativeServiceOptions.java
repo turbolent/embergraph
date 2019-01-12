@@ -30,7 +30,7 @@ import org.embergraph.rdf.internal.IV;
  * {@link IV}s are NOT guaranteed to be materialized.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
- * @version $Id: BigdataServiceOptions.java 6077 2012-03-06 20:58:36Z
+ * @version $Id: EmbergraphServiceOptions.java 6077 2012-03-06 20:58:36Z
  *          thompsonbry $
  */
 public class EmbergraphNativeServiceOptions extends ServiceOptionsBase implements

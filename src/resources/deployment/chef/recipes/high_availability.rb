@@ -6,7 +6,7 @@
 #
 
 #
-# Only do the following for Bigdata HA install
+# Only do the following for Embergraph HA install
 #
 if node['embergraph'][:install_flavor] == "ha"
 
@@ -35,7 +35,7 @@ if node['embergraph'][:install_flavor] == "ha"
 	end
 
 	#
-	# Make sure the Bigdata home directory is owned by the embergraph user and group:
+	# Make sure the Embergraph home directory is owned by the embergraph user and group:
 	#
 	execute "change the ownership of the embergraph home directory to embergraph, which strangely is not" do
  		user	"root"
@@ -48,7 +48,7 @@ if node['embergraph'][:install_flavor] == "ha"
 		include_recipe "ant"
 		include_recipe "subversion::client"
 		#
-		# Retrieve the Bigdata source from the specified subversion branch:
+		# Retrieve the Embergraph source from the specified subversion branch:
 		#
 		execute "checkout embergraph from svn repo" do
 			user	'ubuntu'
@@ -68,7 +68,7 @@ if node['embergraph'][:install_flavor] == "ha"
 		end
 
 		#
-		# Extract the just built release package, thus installing it in the Bigdata home directory:
+		# Extract the just built release package, thus installing it in the Embergraph home directory:
 		#
 		execute "deflate REL tar" do
 			user	node['embergraph'][:user]
@@ -88,7 +88,7 @@ if node['embergraph'][:install_flavor] == "ha"
 		end
 
 		#
-		# Extract the just retrieved release package, thus installing it in the Bigdata home directory:
+		# Extract the just retrieved release package, thus installing it in the Embergraph home directory:
 		#
 
 		execute "Extract and relocate the embergraph archive" do

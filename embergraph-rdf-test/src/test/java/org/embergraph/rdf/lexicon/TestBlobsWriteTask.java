@@ -189,7 +189,7 @@ public class TestBlobsWriteTask extends TestCase2 {
             {
 
                 /*
-                 * Convert to BigdataValues so IVs will be assigned as a
+                 * Convert to EmbergraphValues so IVs will be assigned as a
                  * side-effect by the TermsWriteTask.
                  */
                 final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
@@ -225,7 +225,7 @@ public class TestBlobsWriteTask extends TestCase2 {
             {
 
                 /*
-                 * Convert to BigdataValues so IVs will be assigned as a
+                 * Convert to EmbergraphValues so IVs will be assigned as a
                  * side-effect by the TermsWriteTask.
                  */
                 final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];
@@ -267,7 +267,7 @@ public class TestBlobsWriteTask extends TestCase2 {
             {
 
                 /*
-                 * Convert to BigdataValues so IVs will be assigned as a
+                 * Convert to EmbergraphValues so IVs will be assigned as a
                  * side-effect by the TermsWriteTask.
                  */
                 final EmbergraphValue[] values = new EmbergraphValue[valuesIn.length];

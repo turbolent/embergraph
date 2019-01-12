@@ -65,7 +65,7 @@ Copyright 2010 by TalkingTrends (Amsterdam, The Netherlands)
     </plugins>
   </reporting>
   <modules>
-    <!-- Blazegraph artifacts -->
+    <!-- Embergraph artifacts -->
     <module>../embergraph-war</module>
     <module>../embergraph-jar</module>
     <module>../embergraph-deb</module>

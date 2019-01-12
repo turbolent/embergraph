@@ -27,7 +27,7 @@ import org.embergraph.rdf.vocab.BaseVocabularyDecl;
 import org.embergraph.rdf.vocab.decls.GeoSpatialVocabularyDecl;
 
 /**
- * Core Bigdata vocabulary.
+ * Core Embergraph vocabulary.
  *  
  * Note: Do not modify this class.  Create an entirely new vocabulary that
  * extends this one and edit
@@ -66,8 +66,8 @@ public class EmbergraphCoreVocabulary_v20151210 extends EmbergraphCoreVocabulary
          * Some new URIs for graph and RDR management.
          */
 		addDecl(new BaseVocabularyDecl(
-				new URIImpl(BD.NAMESPACE + "Vertex"), // BigdataRDFFactory.VERTEX,
-				new URIImpl(BD.NAMESPACE + "Edge"), // BigdataRDFFactory.EDGE,
+				new URIImpl(BD.NAMESPACE + "Vertex"), // EmbergraphRDFFactory.VERTEX,
+				new URIImpl(BD.NAMESPACE + "Edge"), // EmbergraphRDFFactory.EDGE,
 				new URIImpl("attr:/type"), // GPO.tid,
 				BD.SID,
 				BD.STATEMENT_TYPE,

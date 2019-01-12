@@ -29,7 +29,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Utility class that provides a set of static convenience methods
- * related to configuration and deployment of the Bigdata services.
+ * related to configuration and deployment of the Embergraph services.
  * Although useful in general, the methods in this utility class may be
  * particularly useful when employed from within a Jini configuration
  * file.

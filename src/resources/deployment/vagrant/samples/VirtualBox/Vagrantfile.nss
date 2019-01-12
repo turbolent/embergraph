@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# Vagrantfile.nss - Install Bigdata NanoSparqlServer with a VirtualBox (Default) Provider
+# Vagrantfile.nss - Install Embergraph NanoSparqlServer with a VirtualBox (Default) Provider
 #
 # The launch synopsis for this Vagrantfile:
 #

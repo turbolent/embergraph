@@ -56,7 +56,7 @@ import org.embergraph.journal.Journal;
 import org.embergraph.rdf.sail.EmbergraphSail.Options;
 
 /**
- * Bigdata uses snapshot isolation for transactions while openrdf assumes that
+ * Embergraph uses snapshot isolation for transactions while openrdf assumes that
  * any writes committed by a transaction become immediately visible to
  * transactions which are already running. Several unit tests from the base
  * class have to be overridden embergraph has stronger semantics for transactional

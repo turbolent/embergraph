@@ -143,7 +143,7 @@ public class EmbergraphValueReplacer {
         }
 
         /*
-         * Batch resolve term identifiers for those BigdataValues.
+         * Batch resolve term identifiers for those EmbergraphValues.
          * 
          * Note: If any value does not exist in the lexicon then its term
          * identifier will be ZERO (0L).
@@ -156,7 +156,7 @@ public class EmbergraphValueReplacer {
 			database.getLexiconRelation()
 					.addTerms(terms, terms.length, true/* readOnly */);
 
-			// cache the BigdataValues on the IVs for later
+			// cache the EmbergraphValues on the IVs for later
 			for (EmbergraphValue term : terms) {
 
 				@SuppressWarnings("rawtypes")

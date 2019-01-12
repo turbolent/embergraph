@@ -1098,7 +1098,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
 		final Striterator sitr = new Striterator(
 				// Chunk up the openrdf solutions.
 				new Chunkerator<BindingSet>(
-						// Convert the Sesame iteration into a Bigdata iterator.
+						// Convert the Sesame iteration into a Embergraph iterator.
 						new Sesame2EmbergraphIterator<BindingSet, QueryEvaluationException>(
 								result), chunkSize));
 
@@ -1738,7 +1738,7 @@ public class AST2BOpUpdate extends AST2BOpUtility {
     }
 
     /**
-     * Note: Bigdata does not support empty graphs, so {@link UpdateType#Clear}
+     * Note: Embergraph does not support empty graphs, so {@link UpdateType#Clear}
      * and {@link UpdateType#Drop} have the same semantics.
      * 
      * <pre>

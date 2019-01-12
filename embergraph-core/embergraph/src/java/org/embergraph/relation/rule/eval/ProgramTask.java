@@ -70,7 +70,7 @@ import cutthecrap.utils.striterators.ICloseableIterator;
  *       When the sets are large then they may need a backing store, e.g.,
  *       EmbergraphSet<Long> (specialized so that it does not store anything under
  *       the key since we can decode the Long from the key - do utility versions
- *       BigdataLongSet(), but the same code can serve float, double, and int as
+ *       EmbergraphLongSet(), but the same code can serve float, double, and int as
  *       well. Avoid override for duplicate keys to reduce IO.
  * 
  * @todo it should be possible to have a different action associated with each

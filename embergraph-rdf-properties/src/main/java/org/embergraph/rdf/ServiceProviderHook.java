@@ -79,18 +79,18 @@ public class ServiceProviderHook {
 
 	private static final Logger log = Logger.getLogger(ServiceProviderHook.class);
 	
-	public static final String NTRIPLES_PARSER_FACTORY = "org.embergraph.rdf.rio.ntriples.BigdataNTriplesParserFactory";
+	public static final String NTRIPLES_PARSER_FACTORY = "org.embergraph.rdf.rio.ntriples.EmbergraphNTriplesParserFactory";
 
-	public static final String TURTLE_PARSER_FACTORY = "org.embergraph.rdf.rio.turtle.BigdataTurtleParserFactory";
+	public static final String TURTLE_PARSER_FACTORY = "org.embergraph.rdf.rio.turtle.EmbergraphTurtleParserFactory";
 
-	public static final String TURTLE_WRITER_FACTORY = "org.embergraph.rdf.rio.turtle.BigdataTurtleWriterFactory";
+	public static final String TURTLE_WRITER_FACTORY = "org.embergraph.rdf.rio.turtle.EmbergraphTurtleWriterFactory";
 	
-	public static final String JSON_WRITER_FACTORY = "org.embergraph.rdf.rio.json.BigdataSPARQLResultsJSONWriterFactory";
+	public static final String JSON_WRITER_FACTORY = "org.embergraph.rdf.rio.json.EmbergraphSPARQLResultsJSONWriterFactory";
 	
-	public static final String JSON_CONSTRUCT_WRITER_FACTORY = "org.embergraph.rdf.rio.json.BigdataSPARQLResultsJSONWriterForConstructFactory";
+	public static final String JSON_CONSTRUCT_WRITER_FACTORY = "org.embergraph.rdf.rio.json.EmbergraphSPARQLResultsJSONWriterForConstructFactory";
 	
-	public static final String JSON_RESULT_PARSER_FACTORY = "org.embergraph.rdf.rio.json.BigdataSPARQLResultsJSONParserFactory";
-	public static final String JSON_CONSTRUCT_PARSER_FACTORY = "org.embergraph.rdf.rio.json.BigdataSPARQLResultsJSONParserForConstructFactory";
+	public static final String JSON_RESULT_PARSER_FACTORY = "org.embergraph.rdf.rio.json.EmbergraphSPARQLResultsJSONParserFactory";
+	public static final String JSON_CONSTRUCT_PARSER_FACTORY = "org.embergraph.rdf.rio.json.EmbergraphSPARQLResultsJSONParserForConstructFactory";
 	
 	
 	
@@ -257,7 +257,7 @@ public class ServiceProviderHook {
         {
             final RDFWriterRegistry r = RDFWriterRegistry.getInstance();
 
-//            r.add(new BigdataRDFXMLWriterFactory());
+//            r.add(new EmbergraphRDFXMLWriterFactory());
             
             // RDR-enabled
 			r.add((RDFWriterFactory) getInstanceForClass(TURTLE_WRITER_FACTORY));

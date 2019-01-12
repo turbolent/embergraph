@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
 	group_name = "BDHA " + str( datetime.utcnow() )
 
-	group = ec2conn.create_security_group( group_name, "BigdataHA Security Group" )
+	group = ec2conn.create_security_group( group_name, "EmbergraphHA Security Group" )
  
 	envFile = open( ".aws_security_group", "w" ) 
 	envFile.write( 'export AWS_SECURITY_GROUP_PRIVATE="' + group_name + '"')

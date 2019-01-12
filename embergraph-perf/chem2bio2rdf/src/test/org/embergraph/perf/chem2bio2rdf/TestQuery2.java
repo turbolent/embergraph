@@ -10,9 +10,9 @@ import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 
 import org.embergraph.journal.Journal;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.sail.webapp.client.IPreparedGraphQuery;
 
 public class TestQuery2 {
@@ -76,11 +76,11 @@ public class TestQuery2 {
 		
 		props.setProperty(Journal.Options.FILE, journal); 
 
-		final BigdataSail sail = new BigdataSail(props);
-		final BigdataSailRepository repo = new BigdataSailRepository(sail);
+		final EmbergraphSail sail = new EmbergraphSail(props);
+		final EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
 		repo.initialize();
 		
-		BigdataSailRepositoryConnection cxn = null;
+		EmbergraphSailRepositoryConnection cxn = null;
 		try {
 			
 			cxn = repo.getReadOnlyConnection();

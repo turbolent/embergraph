@@ -94,7 +94,7 @@ public class ASTContainer extends ASTBase {
         
         /**
 		 * The time to batch resolve RDF {@link Value}s in the query to
-		 * {@link BigdataValue}s in the database (nanoseconds).
+		 * {@link EmbergraphValue}s in the database (nanoseconds).
 		 */
         String RESOLVE_VALUES_TIME = "resolveValuesTime";
 

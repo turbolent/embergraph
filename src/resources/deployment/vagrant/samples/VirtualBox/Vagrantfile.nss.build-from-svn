@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# Vagrantfile.aws.nss.build-from-svn - Build and Install Bigdata NanoSparqlServer from a Source Branch with a VirtualBox (Default) Provider
+# Vagrantfile.aws.nss.build-from-svn - Build and Install Embergraph NanoSparqlServer from a Source Branch with a VirtualBox (Default) Provider
 #
 # The launch synopsis for this Vagrantfile:
 #

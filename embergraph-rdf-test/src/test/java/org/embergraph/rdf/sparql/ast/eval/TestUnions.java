@@ -75,7 +75,7 @@ public class TestUnions extends AbstractDataDrivenSPARQLTestCase {
      * } }
      * </pre>
      * 
-     * Note: This is a port of TestBigdataEvaluationStrategyImpl#test_union().
+     * Note: This is a port of TestEmbergraphEvaluationStrategyImpl#test_union().
      * 
      * @throws Exception
      */

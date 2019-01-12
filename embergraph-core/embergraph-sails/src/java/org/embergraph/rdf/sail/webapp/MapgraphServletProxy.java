@@ -47,28 +47,13 @@ public class MapgraphServletProxy extends EmbergraphRDFServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Set to true when the first warning has been logged.
-	 */
-	private static boolean hasWarnedGpu = false;
-	
-	public void doPostRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException
-	{
-		//The workbench makes this call even in non-GPU mode. 
-		//throw new RuntimeException("Running without the Mapgraph package.");
-		if( !hasWarnedGpu ) {
-			log.warn("Running without GPU Acceleration.   See https://www.embergraph.org/product/gpu-accelerated/.");
-			hasWarnedGpu = true;
-		}
-		
+
+	public void doPostRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.sendError(HTTP_NOTIMPLEMENTED /* not implemented */);
 	}
 	
 	public static String getDefaultProvider() {
-		
 		return DEFAULT_PROVIDER;
-		
 	}
 	
 	/**

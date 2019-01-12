@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# Vagrantfile.aws.tomcat.build-from-svn - Build and Install Bigdata under Tomcat from a Source Branch with an AWS Provider
+# Vagrantfile.aws.tomcat.build-from-svn - Build and Install Embergraph under Tomcat from a Source Branch with an AWS Provider
 #
 # The launch synopsis for this Vagrantfile:
 #

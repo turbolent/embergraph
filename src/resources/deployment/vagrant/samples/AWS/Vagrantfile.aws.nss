@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# Vagrantfile.aws.nss - Install Bigdata NanoSparqlServer with an AWS Provider
+# Vagrantfile.aws.nss - Install Embergraph NanoSparqlServer with an AWS Provider
 #
 # The launch synopsis for this Vagrantfile:
 #

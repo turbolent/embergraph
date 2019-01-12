@@ -318,7 +318,7 @@ TOKEN [IGNORE_CASE] :
 |   <SHA512: "sha512">
 }
 
-TOKEN [IGNORE_CASE] :   // Bigdata extension specific tokens
+TOKEN [IGNORE_CASE] :   // Embergraph extension specific tokens
 {
     <INCLUDE: "include">
 |   <LET: "let">

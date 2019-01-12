@@ -88,7 +88,7 @@ import org.embergraph.rdf.sparql.ast.QueryRoot;
  */
 public class EmbergraphSparqlTest
 extends SPARQLQueryTest // Sesame TupleExpr based evaluation 
-//extends SPARQLASTQueryTest // Bigdata native AST based evaluation
+//extends SPARQLASTQueryTest // Embergraph native AST based evaluation
 {
 
 //    static private final Logger log = Logger.getLogger(EmbergraphSparqlTest.class);
@@ -185,7 +185,7 @@ extends SPARQLQueryTest // Sesame TupleExpr based evaluation
 Expected results: 
 []
 =========================================
-Bigdata results: 
+Embergraph results:
 =========================================
 Missing results: 
 []
@@ -216,7 +216,7 @@ Expected results:
 [s=http://example.org/c;o1="alice@example.org";o2=http://example.org/b]
 [s=http://example.org/c;o1="Alice";o2=http://example.org/b]
 =========================================
-Bigdata results: 
+Embergraph results:
 [o2=http://example.org/b;s=http://example.org/a;o1=http://example.org/b]
 [o2=http://example.org/b;s=http://example.org/a;o1="alan@example.org"]
 [o2=http://example.org/b;s=http://example.org/a;o1="Alan"]
@@ -274,7 +274,7 @@ Expected results:
 <http://example.org/s1, http://example.org/p, http://example.org/o1>
 <http://example.org/s3, http://example.org/p, http://example.org/o3>
 =========================================
-Bigdata results: 
+Embergraph results:
 =========================================
 Query:
 PREFIX : <http://example.org/>
@@ -294,7 +294,7 @@ Data:
 Expected results: 
 [s=http://www.example.org/s;p=http://www.example.org/p]
 =========================================
-Bigdata results: 
+Embergraph results:
 =========================================
 Missing results: 
 [s=http://www.example.org/s;p=http://www.example.org/p]
@@ -328,7 +328,7 @@ Expected results:
 [w="9"^^<http://www.w3.org/2001/XMLSchema#integer>;S="1"^^<http://www.w3.org/2001/XMLSchema#integer>]
 [S="2"^^<http://www.w3.org/2001/XMLSchema#integer>]
 =========================================
-Bigdata results: 
+Embergraph results:
 [w="9"^^<http://www.w3.org/2001/XMLSchema#integer>;S="1"^^<http://www.w3.org/2001/XMLSchema#integer>]
 =========================================
 Missing results: 
@@ -1336,7 +1336,7 @@ The following two are covered by: https://jira.blazegraph.com/browse/BLZG-1721
                 }
                 message.append("=========================================\n");
 
-                message.append("Bigdata results: \n");
+                message.append("Embergraph results: \n");
                 for (BindingSet bs : queryBindings) {
                     printBindingSet(message, bs);
                     message.append("\n");
@@ -1497,7 +1497,7 @@ The following two are covered by: https://jira.blazegraph.com/browse/BLZG-1721
                 }
                 message.append("=========================================\n");
 
-                message.append("Bigdata results: \n");
+                message.append("Embergraph results: \n");
                 for (Statement bs : queryResult) {
                     message.append(bs);
                     message.append("\n");

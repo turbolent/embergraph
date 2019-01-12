@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 
 import org.embergraph.journal.IIndexManager;
-import org.embergraph.rdf.sail.BigdataSail;
+import org.embergraph.rdf.sail.EmbergraphSail;
 import org.embergraph.rdf.sail.webapp.NanoSparqlServer;
 
 /**
@@ -104,7 +104,7 @@ public class NSSEmbeddedExample implements Runnable {
          * configuration properties. There are other constructors that allow you
          * to take more control over this process.
          */
-        final BigdataSail sail = new BigdataSail();
+        final EmbergraphSail sail = new EmbergraphSail();
 
         sail.initialize();
 

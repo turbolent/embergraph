@@ -278,7 +278,7 @@ public class SPARQLUpdateTestv2 extends TestCase {
         
         // make sure we are using a unique namespace in every run to avoid 
         // possible interference of value factories floating around
-        props.setProperty(Options.NAMESPACE, "BigdataSPARQLUpdate-"+UUID.randomUUID());
+        props.setProperty(Options.NAMESPACE, "EmbergraphSPARQLUpdate-"+UUID.randomUUID());
         
         return props;
         

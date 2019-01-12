@@ -173,7 +173,7 @@ public class TestDescribe extends AbstractDataDrivenSPARQLTestCase {
 
         for(Statement stmt : actualGraph) {
             
-            // Verify that we are getting back BigdataStatements.
+            // Verify that we are getting back EmbergraphStatements.
             assertTrue(stmt instanceof EmbergraphStatement);
             
             // Verify that the IVs are set on those statements.

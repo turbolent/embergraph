@@ -1,4 +1,4 @@
-Bigdata Highly Available Replication Cluster
+Embergraph Highly Available Replication Cluster
 
 *** See the HAJournalServer on the wiki for more information ***
 
@@ -18,7 +18,7 @@ Bigdata Highly Available Replication Cluster
    need to be running at least 3 ZooKeeper nodes.  Consult the
    ZooKeeper documentation for more information.
 
-   Bigdata does NOT start/stop Apache ZooKeeper. ZooKeeper is
+   Embergraph does NOT start/stop Apache ZooKeeper. ZooKeeper is
    generally administered separately.  If you are not already using
    Apache ZooKeeper, then you should install three VMs with Apache
    ZooKeeper onto machines with fixed IP addresses.
@@ -27,7 +27,7 @@ Bigdata Highly Available Replication Cluster
    WILL NOT be able to automatically migrate to a highly available
    configuration without stopping your standalone ZooKeeper instance.
    Your life will be significantly easier if you begin with a highly
-   available ZooKeeper instance.  Bigdata does not put a heavy load on
+   available ZooKeeper instance.  Embergraph does not put a heavy load on
    ZooKeeper, but running embergraph and ZooKeeper on the same instances
    will make it more complex to administer your environment since
    stopping a single node will reduce availability for both ZooKeeper
@@ -93,7 +93,7 @@ var/config/startHAServices.config
       directory required to run Reggie.  An instance of this service
       is started on every node.
 
-    - Reggie : This is the Apache River service registrar.  Bigdata
+    - Reggie : This is the Apache River service registrar.  Embergraph
       services discover service registrars using locators and then
       register themselves. The service registrar is also used by the
       embergraph services to discover one another. The set of locators is

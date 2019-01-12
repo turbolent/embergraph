@@ -70,7 +70,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
  * 
  * <pre>
  * 
- * TODO From BigdataEvaluationStrategyImpl3#945
+ * TODO From EmbergraphEvaluationStrategyImpl3#945
  * 
  * Prunes the sop tree of optional join groups containing values
  * not in the lexicon.
@@ -109,7 +109,7 @@ import org.embergraph.rdf.sparql.ast.eval.AST2BOpContext;
  * appears in an optional, then prune the optional. if it appears in union, the
  * prune that part of the union. if it appears at the top-level then there are
  * no solutions for that query. This is part of what
- * BigdataEvaluationStrategyImpl3#toPredicate(final StatementPattern
+ * EmbergraphEvaluationStrategyImpl3#toPredicate(final StatementPattern
  * stmtPattern) is doing. Note that toVE() as called from that method will throw
  * an UnknownValueException if the term is not known to the database.
  * 

@@ -261,7 +261,7 @@ public class ServiceCallUtility {
 
             }
 
-            // Note: MUST already be BigdataValues.
+            // Note: MUST already be EmbergraphValues.
             final EmbergraphValue value = (EmbergraphValue) e.getValue();
 
             // Note: IVs MUST already be resolved.
@@ -312,7 +312,7 @@ public class ServiceCallUtility {
     }
     
     /**
-     * Batch resolve BigdataValues to IVs. This is necessary in order to have
+     * Batch resolve EmbergraphValues to IVs. This is necessary in order to have
      * subsequent JOINs succeed when they join on variables which are bound to
      * terms which are in the lexicon.
      * <p>

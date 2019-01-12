@@ -1,5 +1,5 @@
 // General-purpose policy file that can be used for all
-// Bigdata services when run in a configuration that does
+// Embergraph services when run in a configuration that does
 // not employ distributed security (JSSE, Kerberos)
 
 grant codebase "file:${appHome}/lib/*" {

@@ -1,5 +1,5 @@
 This directory contains a collection of Vagrantfile samples that demonstrate how
-to launch an EC2 instance and configure it with a Bigdata server or MapGraph
+to launch an EC2 instance and configure it with a Embergraph server or MapGraph
 under several useful scenarios.
 
 The Vagrantfiles are named with a descriptive extension, and must be copied to 
@@ -24,19 +24,19 @@ Vagrantfile.aws.mapgraph - Builds the MapGraph project from its Subversion archi
                       on an Amazon Linux AMI with NVIDIA GRID GPU Driver.
 
 Vagrantfile.aws.tomcat - Creates an EC2 instance (Ubuntu 12.04 by default) and installs
-                      Tomcat 7 and deploys the Bigdata WAR file as a service.
+                      Tomcat 7 and deploys the Embergraph WAR file as a service.
 
-Vagrantfile.aws.tomcat.build-from-svn - Like Vagrantfile.aws.tomcat but the Bigdata WAR
+Vagrantfile.aws.tomcat.build-from-svn - Like Vagrantfile.aws.tomcat but the Embergraph WAR
                       file will be built from a specified subversion repository branch.
 
 Vagrantfile.aws.nss - Creates an EC2 instance (Ubuntu 12.04 by default) and installs
-                      and starts a Bigdata NanoSparqlServer (NSS) Jetty server instance.
+                      and starts a Embergraph NanoSparqlServer (NSS) Jetty server instance.
 
-Vagrantfile.aws.nss.build-from-svn - Like Vagrantfile.aws.nss but the Bigdata NSS server
+Vagrantfile.aws.nss.build-from-svn - Like Vagrantfile.aws.nss but the Embergraph NSS server
                       will be built from a specified subversion repository branch.
 
 Vagrantfile.dual-provider.tomcat - An example file for defining two providers within the
-                      same Vagrantfile that will deploy Tomcat and the Bigdata WAR file
+                      same Vagrantfile that will deploy Tomcat and the Embergraph WAR file
                       to the virtual machine instance.  By default the file will create
                       a VirtualBox instance.  To launch an EC2 instance, specify the
                       AWS provider as per:

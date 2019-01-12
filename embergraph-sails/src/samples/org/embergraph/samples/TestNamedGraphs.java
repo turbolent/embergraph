@@ -34,8 +34,8 @@ import org.openrdf.query.impl.DatasetImpl;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryResult;
 
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 
 /**
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -54,8 +54,8 @@ public class TestNamedGraphs extends SampleCode {
 
         final Properties properties = loadProperties("quads.properties");
 
-        BigdataSail sail = new BigdataSail(properties);
-        BigdataSailRepository repo = new BigdataSailRepository(sail);
+        EmbergraphSail sail = new EmbergraphSail(properties);
+        EmbergraphSailRepository repo = new EmbergraphSailRepository(sail);
         repo.initialize();
 
         try {

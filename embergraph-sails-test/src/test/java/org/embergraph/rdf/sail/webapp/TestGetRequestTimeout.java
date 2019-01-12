@@ -51,14 +51,14 @@ public class TestGetRequestTimeout extends TestCase2 {
 	
 	public void testGetRequestTimeout() throws Exception {
 		
-		final String httpHeaderBigdataMaxQueryMillis = "1000";
+		final String httpHeaderEmbergraphMaxQueryMillis = "1000";
 		final String maxQuryTimeMillis = "1000";
 		final String timeout = "1"; 
 		long configTimeout = 1;
 		
 		
 		final HttpServletRequest req = new MockRequest(
-				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
+				httpHeaderEmbergraphMaxQueryMillis, maxQuryTimeMillis, timeout);
         
         long actual = EmbergraphRDFContext.getQueryTimeout(req, configTimeout);
         
@@ -70,17 +70,17 @@ public class TestGetRequestTimeout extends TestCase2 {
 	
 	public void testGetRequestTimeout1() throws Exception {
 		
-		final String httpHeaderBigdataMaxQueryMillis = "1";
+		final String httpHeaderEmbergraphMaxQueryMillis = "1";
 		final String maxQuryTimeMillis = "1000";
 		final String timeout = "1"; 
 		long configTimeout = 1000;
 		
 		final HttpServletRequest req = new MockRequest(
-				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
+				httpHeaderEmbergraphMaxQueryMillis, maxQuryTimeMillis, timeout);
         
         final long actual = EmbergraphRDFContext.getQueryTimeout(req, configTimeout);
         
-        final long expected = Long.parseLong(httpHeaderBigdataMaxQueryMillis);
+        final long expected = Long.parseLong(httpHeaderEmbergraphMaxQueryMillis);
        	
 		assertEquals(expected , actual);
        
@@ -89,14 +89,14 @@ public class TestGetRequestTimeout extends TestCase2 {
 	
 	public void testGetRequestTimeout2() throws Exception {
 		 
-		final String httpHeaderBigdataMaxQueryMillis = "1000";
+		final String httpHeaderEmbergraphMaxQueryMillis = "1000";
 		final String maxQuryTimeMillis = "1";
 		final String timeout = "1"; 
 		long configTimeout = 1000;
 		
 		
 		final HttpServletRequest req = new MockRequest(
-				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
+				httpHeaderEmbergraphMaxQueryMillis, maxQuryTimeMillis, timeout);
         
         final long actual = EmbergraphRDFContext.getQueryTimeout(req, configTimeout);
         
@@ -109,14 +109,14 @@ public class TestGetRequestTimeout extends TestCase2 {
 	
 	public void testGetRequestTimeout3() throws Exception {
 		
-		final String httpHeaderBigdataMaxQueryMillis = "10000";
+		final String httpHeaderEmbergraphMaxQueryMillis = "10000";
 		final String maxQuryTimeMillis = "10000";
 		final String timeout = "1"; 
 		long configTimeout = 10000;
 		
 		
 		final HttpServletRequest req = new MockRequest(
-				httpHeaderBigdataMaxQueryMillis, maxQuryTimeMillis, timeout);
+				httpHeaderEmbergraphMaxQueryMillis, maxQuryTimeMillis, timeout);
         
         final long actual = EmbergraphRDFContext.getQueryTimeout(req, configTimeout);
         

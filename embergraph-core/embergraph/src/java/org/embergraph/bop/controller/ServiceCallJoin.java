@@ -846,7 +846,7 @@ public class ServiceCallJoin extends PipelineOp {
                 }
                 
                 /*
-                 * Batch resolve BigdataValues to IVs. This is necessary in
+                 * Batch resolve EmbergraphValues to IVs. This is necessary in
                  * order to have subsequent JOINs succeed when they join on
                  * variables which are bound to terms which are in the
                  * lexicon.

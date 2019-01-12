@@ -34,7 +34,7 @@ import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.vocab.NoVocabulary;
 
 /**
- * Test suite for BLZG-2056 BigdataSailConnections not always closed by
+ * Test suite for BLZG-2056 EmbergraphSailConnections not always closed by
  * EmbergraphSail.shutdown()
  * 
  * @see https://jira.blazegraph.com/browse/BLZG-2056

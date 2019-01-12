@@ -191,7 +191,7 @@ public class TestRDROperations<S extends IIndexManager> extends
 
 	/**
 	 * FIXME We need to verify export for this case. It relies on access to a
-	 * Bigdata specific ValueFactoryImpl to handle the RDR mode statements.
+	 * Embergraph specific ValueFactoryImpl to handle the RDR mode statements.
 	 */
 	public void test_EXPORT_TURTLE_RDR() throws Exception {
 

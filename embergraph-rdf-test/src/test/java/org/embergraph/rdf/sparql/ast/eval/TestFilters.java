@@ -56,7 +56,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * Note: This is a port of
-     * TestBigdataEvaluationStrategyImpl#test_or_equals()
+     * TestEmbergraphEvaluationStrategyImpl#test_or_equals()
      */
     public void test_filters_or_equals() throws Exception {
     
@@ -80,7 +80,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
      * complex filter was probably to bypass that.
      * <p>
      * Note: This is a port of
-     * TestBigdataEvaluationStrategyImpl#test_and_equals()
+     * TestEmbergraphEvaluationStrategyImpl#test_and_equals()
      */
     public void test_and_equals() throws Exception {
         
@@ -99,7 +99,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * Note: This is a port of
-     * TestBigdataEvaluationStrategyImpl#test_and_nequals()
+     * TestEmbergraphEvaluationStrategyImpl#test_and_nequals()
      */
     public void test_and_nequals() throws Exception {
     
@@ -118,7 +118,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * Note: This is a port of
-     * TestBigdataEvaluationStrategyImpl#test_filter_literals()
+     * TestEmbergraphEvaluationStrategyImpl#test_filter_literals()
      */
     public void test_filter_literals() throws Exception {
         
@@ -137,7 +137,7 @@ public class TestFilters extends AbstractDataDrivenSPARQLTestCase {
      * </pre>
      * 
      * Note: This is a port of
-     * TestBigdataEvaluationStrategyImpl#test_filter_literals()
+     * TestEmbergraphEvaluationStrategyImpl#test_filter_literals()
      */
     public void test_filter_regex() throws Exception {
         

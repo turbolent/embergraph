@@ -47,11 +47,11 @@ import org.openrdf.rio.helpers.StatementCollector;
 import org.embergraph.journal.IIndexManager;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.StoreTypeEnum;
-import org.embergraph.rdf.model.BigdataStatement;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSail.BigdataSailConnection;
-import org.embergraph.rdf.sail.BigdataSailRepository;
-import org.embergraph.rdf.sail.BigdataSailRepositoryConnection;
+import org.embergraph.rdf.model.EmbergraphStatement;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSail.EmbergraphSailConnection;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSailRepositoryConnection;
 import org.embergraph.rdf.store.BD;
 import org.embergraph.rdf.store.BDS;
 import org.embergraph.service.AbstractTransactionService;
@@ -65,7 +65,7 @@ import org.embergraph.service.AbstractTransactionService;
 public class SampleCode {
     
     /**
-     * Do you have log4j set up correctly?  Bigdata turns its logging level way
+     * Do you have log4j set up correctly?  Embergraph turns its logging level way
      * down by default (WARN).  You should not be seeing INFO or DEBUG log 
      * statements from embergraph - if you are, then this will severely impact
      * performance.
@@ -155,12 +155,12 @@ public class SampleCode {
         
         /*
          * With MVCC, you read from a historical state to avoid blocking and
-         * being blocked by writers.  BigdataSailRepository.getQueryConnection
+         * being blocked by writers.  EmbergraphSailRepository.getQueryConnection
          * gives you a view of the repository at the last commit point.
          */
         RepositoryConnection cxn;
-        if (repo instanceof BigdataSailRepository) { 
-            cxn = ((BigdataSailRepository) repo).getReadOnlyConnection();
+        if (repo instanceof EmbergraphSailRepository) {
+            cxn = ((EmbergraphSailRepository) repo).getReadOnlyConnection();
         } else {
             cxn = repo.getConnection();
         }
@@ -177,8 +177,8 @@ public class SampleCode {
                 // do something with the statement
                 log.info(stmt);
                 
-                // cast to BigdataStatement to get at additional information
-                BigdataStatement bdStmt = (BigdataStatement) stmt;
+                // cast to EmbergraphStatement to get at additional information
+                EmbergraphStatement bdStmt = (EmbergraphStatement) stmt;
                 if (bdStmt.isExplicit()) {
                     // do one thing
                 } else if (bdStmt.isInferred()) {
@@ -209,12 +209,12 @@ public class SampleCode {
         
         /*
          * With MVCC, you read from a historical state to avoid blocking and
-         * being blocked by writers.  BigdataSailRepository.getQueryConnection
+         * being blocked by writers.  EmbergraphSailRepository.getQueryConnection
          * gives you a view of the repository at the last commit point.
          */
         RepositoryConnection cxn;
-        if (repo instanceof BigdataSailRepository) { 
-            cxn = ((BigdataSailRepository) repo).getReadOnlyConnection();
+        if (repo instanceof EmbergraphSailRepository) {
+            cxn = ((EmbergraphSailRepository) repo).getReadOnlyConnection();
         } else {
             cxn = repo.getConnection();
         }
@@ -250,12 +250,12 @@ public class SampleCode {
         
         /*
          * With MVCC, you read from a historical state to avoid blocking and
-         * being blocked by writers.  BigdataSailRepository.getQueryConnection
+         * being blocked by writers.  EmbergraphSailRepository.getQueryConnection
          * gives you a view of the repository at the last commit point.
          */
         RepositoryConnection cxn;
-        if (repo instanceof BigdataSailRepository) { 
-            cxn = ((BigdataSailRepository) repo).getReadOnlyConnection();
+        if (repo instanceof EmbergraphSailRepository) {
+            cxn = ((EmbergraphSailRepository) repo).getReadOnlyConnection();
         } else {
             cxn = repo.getConnection();
         }
@@ -286,7 +286,7 @@ public class SampleCode {
      * @throws Exception
      */
     public boolean executeFreeTextQuery(Repository repo) throws Exception {
-        if (((BigdataSailRepository) repo).getDatabase().getLexiconRelation()
+        if (((EmbergraphSailRepository) repo).getDatabase().getLexiconRelation()
                 .getSearchEngine() == null) {
             /*
              * Only if the free text index exists.
@@ -327,7 +327,7 @@ public class SampleCode {
      */
     public boolean executeProvenanceQuery(Repository repo) throws Exception {
         
-        if(!((BigdataSailRepository)repo).getDatabase().isStatementIdentifiers()) {
+        if(!((EmbergraphSailRepository)repo).getDatabase().isStatementIdentifiers()) {
             // IFF the KB is using the provenance mode,
             return false;
         }
@@ -357,11 +357,11 @@ public class SampleCode {
 
         /*
          * With MVCC, you read from a historical state to avoid blocking and
-         * being blocked by writers.  BigdataSailRepository.getQueryConnection
+         * being blocked by writers.  EmbergraphSailRepository.getQueryConnection
          * gives you a view of the repository at the last commit point.
          */
-        if (repo instanceof BigdataSailRepository) { 
-            cxn = ((BigdataSailRepository) repo).getReadOnlyConnection();
+        if (repo instanceof EmbergraphSailRepository) {
+            cxn = ((EmbergraphSailRepository) repo).getReadOnlyConnection();
         } else {
             cxn = repo.getConnection();
         }
@@ -399,7 +399,7 @@ public class SampleCode {
     /**
      * Demonstrate execution of historical query using a read-only transaction.
      * <p>
-     * Note: Bigdata preserves historical commit points until their release age
+     * Note: Embergraph preserves historical commit points until their release age
      * expires. This behavior is controlled by the deployment mode (RW, WORM, or
      * cluster) and by
      * {@link AbstractTransactionService.Options#MIN_RELEASE_AGE}. Except for
@@ -417,11 +417,11 @@ public class SampleCode {
      */
     public void executeHistoricalQuery(final Repository repo) throws Exception {
 
-        if (!(repo instanceof BigdataSailRepository)) {
+        if (!(repo instanceof EmbergraphSailRepository)) {
             return;
         }
         
-        final IIndexManager indexManager = ((BigdataSailRepository) repo)
+        final IIndexManager indexManager = ((EmbergraphSailRepository) repo)
                 .getDatabase().getIndexManager();
         
         final boolean isJournal = indexManager instanceof Journal;
@@ -448,7 +448,7 @@ public class SampleCode {
             
             // Need a readLock connection if not a Worm store
             final RepositoryConnection readLock = isWorm ? null :
-                ((BigdataSailRepository) repo).getReadOnlyConnection();
+                ((EmbergraphSailRepository) repo).getReadOnlyConnection();
             
             final RepositoryConnection history;
             try {
@@ -458,7 +458,7 @@ public class SampleCode {
                 cxn.add(BRYAN, RDF.TYPE, PERSON);
                 cxn.commit();
 
-                history = ((BigdataSailRepository) repo)
+                history = ((EmbergraphSailRepository) repo)
                         .getReadOnlyConnection(time);
 
             } finally {
@@ -534,13 +534,13 @@ public class SampleCode {
              */
             final File journal = File.createTempFile("embergraph", ".jnl");
             journal.deleteOnExit();
-            properties.setProperty(BigdataSail.Options.FILE, journal
+            properties.setProperty(EmbergraphSail.Options.FILE, journal
                     .getAbsolutePath());
         }
         
         // instantiate a sail
-        BigdataSail sail = new BigdataSail(properties);
-        Repository repo = new BigdataSailRepository(sail);
+        EmbergraphSail sail = new EmbergraphSail(properties);
+        Repository repo = new EmbergraphSailRepository(sail);
         repo.initialize();
 
         RepositoryConnection cxn = repo.getConnection();
@@ -588,15 +588,15 @@ public class SampleCode {
             // when we are in "fast load" mode there is no automatic inference
             // as statements are loaded.  we therefore must invoke the inference
             // engine ourselves when we are done loading data.
-            BigdataSailConnection sailCxn = (BigdataSailConnection)
-                ((BigdataSailRepositoryConnection) cxn).getSailConnection();
+            EmbergraphSailConnection sailCxn = (EmbergraphSailConnection)
+                ((EmbergraphSailRepositoryConnection) cxn).getSailConnection();
             sailCxn.computeClosure();
             sailCxn.getTripleStore().commit();
 
             // gather statistics
             long elapsed = System.currentTimeMillis() - start;
             // fast range count!
-            long stmtsAfter = ((BigdataSailRepository)repo).getDatabase().getStatementCount();
+            long stmtsAfter = ((EmbergraphSailRepository)repo).getDatabase().getStatementCount();
 //            // full index scan!
 //            long stmtsAfter = cxn.size();
             long stmtsAdded = stmtsAfter - stmtsBefore;
@@ -696,7 +696,7 @@ public class SampleCode {
                  */
                 final File journal = File.createTempFile("embergraph", ".jnl");
                 log.info(journal.getAbsolutePath());
-                properties.setProperty(BigdataSail.Options.FILE, journal
+                properties.setProperty(EmbergraphSail.Options.FILE, journal
                         .getAbsolutePath());
             }
             if (properties
@@ -708,8 +708,8 @@ public class SampleCode {
             }
             
             // instantiate a sail
-            final BigdataSail sail = new BigdataSail(properties);
-            final Repository repo = new BigdataSailRepository(sail);
+            final EmbergraphSail sail = new EmbergraphSail(properties);
+            final Repository repo = new EmbergraphSailRepository(sail);
             try {
             
                 repo.initialize();

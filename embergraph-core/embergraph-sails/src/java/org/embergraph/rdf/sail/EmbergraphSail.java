@@ -487,7 +487,7 @@ public class EmbergraphSail extends SailBase implements Sail {
     final private IIndexManager indexManager;
 
     /**
-     * The as-configured Blazegraph namespace for the {@link EmbergraphSail}.
+     * The as-configured Embergraph namespace for the {@link EmbergraphSail}.
      * 
      * @see Options#NAMESPACE
      * 
@@ -4379,14 +4379,14 @@ public class EmbergraphSail extends SailBase implements Sail {
             }
 
             /*
-             * Resolve SPOs containing term identifiers to BigdataStatementImpls
+             * Resolve SPOs containing term identifiers to EmbergraphStatementImpls
              * containing EmbergraphValue objects. The blank node term identifiers
              * will be recognized if they have been seen in the context of this
              * session and will be resolved to the corresponding blank node
              * object in order to preserve their blank node IDs across the scope
              * of the connection.
              * 
-             * FIXME bnodes : Also fix in BigdataConstructIterator.
+             * FIXME bnodes : Also fix in EmbergraphConstructIterator.
              * 
              * FIXME bnodes : Consider simplifying by passing along the desired
              * valueFactory with the forward and reverse bnode mappings into
@@ -4588,7 +4588,7 @@ public class EmbergraphSail extends SailBase implements Sail {
          */
         
 //        /**
-//         * Bigdata now uses an internal query model which differs significantly
+//         * Embergraph now uses an internal query model which differs significantly
 //         * from the Sesame query model. Support is not provided for
 //         * {@link UpdateExpr} evaluation. SPARQL UPDATE requests must be
 //         * prepared and evaluated using a
@@ -4614,7 +4614,7 @@ public class EmbergraphSail extends SailBase implements Sail {
          */
 
         /**
-         * Bigdata now uses an internal query model which differs significantly
+         * Embergraph now uses an internal query model which differs significantly
          * from the Sesame query model. Support is no longer provided for
          * {@link TupleExpr} evaluation. SPARQL queries must be prepared and
          * evaluated using a {@link EmbergraphSailRepositoryConnection}.
@@ -4816,14 +4816,14 @@ public class EmbergraphSail extends SailBase implements Sail {
         }
 
         /*
-		 * These methods are new with openrdf 2.7. Bigdata uses either
+		 * These methods are new with openrdf 2.7. Embergraph uses either
 		 * MVCC(full read-write tx) or simply a single writer on the live
 		 * indices (unisolated). The latter has more throughput.
 		 * 
 		 * FIXME Use the MVCC semantics in embergraph do use a prepare()/commit()
 		 * pattern and have the notion of active and inactive transactions. This
 		 * transaction statement metadata could be exposed to the SailConnection
-		 * for the EmbergraphSailReadOnlyConnection and BigdataSailRWConnection,
+		 * for the EmbergraphSailReadOnlyConnection and EmbergraphSailRWConnection,
 		 * but not for the EmbergraphSailConnection (unisolated connection).
 		 * 
 		 * BBT - 11/15/2015
@@ -4858,7 +4858,7 @@ public class EmbergraphSail extends SailBase implements Sail {
         /**
 		 * Always returns <code>true</code>.
 		 * <p>
-		 * Note: Bigdata does not expose its internal transaction state to the
+		 * Note: Embergraph does not expose its internal transaction state to the
 		 * sail (the concept of active and inactive transactions exists for full
 		 * read/write transactions and but those semantics are not exposed to
 		 * the sail).
@@ -4887,7 +4887,7 @@ public class EmbergraphSail extends SailBase implements Sail {
         }
 
         /*
-		 * This API is new with openrdf 2.7. It is not supported. Bigdata has a
+		 * This API is new with openrdf 2.7. It is not supported. Embergraph has a
 		 * different logical operator model from openrdf. The UpdateContext is
 		 * expressed in terms of the openrdf logical operator model
 		 * (UpdateExpr). Therefore it can not be used with embergraph.
@@ -5177,7 +5177,7 @@ public class EmbergraphSail extends SailBase implements Sail {
             
         }
         
-    } // class BigdataSailReadWriteTxConnection
+    } // class EmbergraphSailReadWriteTxConnection
     
     private class EmbergraphSailReadOnlyConnection extends EmbergraphSailConnection {
 

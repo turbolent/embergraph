@@ -28,7 +28,7 @@ import org.embergraph.rdf.model.EmbergraphURI;
 
 /**
  * IExtensionFactories are responsible for enumerating what extensions are
- * supported for a particular database configuration.  Bigdata comes packaged
+ * supported for a particular database configuration.  Embergraph comes packaged
  * with a {@link SampleExtensionFactory} that supplies two starter extensions -
  * the {@link EpochExtension} (for representing time since the epoch as a long
  * integer) and the {@link ColorsEnumExtension} (a sample extension for how to

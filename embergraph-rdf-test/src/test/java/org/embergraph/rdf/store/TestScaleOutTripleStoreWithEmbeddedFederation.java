@@ -108,7 +108,7 @@ public class TestScaleOutTripleStoreWithEmbeddedFederation extends AbstractTestC
         final Properties properties = new Properties( super.getProperties() );
 
 //         Note: this reduces the disk usage at the expense of memory usage.
-//        properties.setProperty(EmbeddedBigdataFederation.Options.BUFFER_MODE,
+//        properties.setProperty(EmbeddedEmbergraphFederation.Options.BUFFER_MODE,
 //                BufferMode.Transient.toString());
 
 //        properties.setProperty(Options.BUFFER_MODE, BufferMode.Disk.toString());

@@ -28,5 +28,5 @@ data/   #data directory.  The journal properties must be configured to use this.
 lib/    #Java libraries
 log/    #Log file.  The default is embergraph.out
 pid/    #pid file
-war/    #web application sources for the Blazegraph Workbench
+war/    #web application sources for the Embergraph Workbench
 ```

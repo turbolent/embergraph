@@ -15,12 +15,12 @@ import org.openrdf.model.Value;
 import org.openrdf.model.vocabulary.RDFS;
 import org.openrdf.query.BindingSet;
 
-import org.embergraph.BigdataStatics;
+import org.embergraph.EmbergraphStatics;
 import org.embergraph.gom.gpo.IGPO;
 import org.embergraph.gom.gpo.ILinkSet;
 import org.embergraph.gom.om.IObjectManager;
 import org.embergraph.gom.om.NanoSparqlObjectManager;
-import org.embergraph.rdf.model.BigdataURI;
+import org.embergraph.rdf.model.EmbergraphURI;
 import org.embergraph.rdf.sail.webapp.client.AutoCloseHttpClient;
 import org.embergraph.rdf.sail.webapp.client.HttpClientConfigurator;
 import org.embergraph.rdf.sail.webapp.client.RemoteRepositoryManager;
@@ -142,13 +142,13 @@ public class Example2 implements Callable<Void> {
         /*
          * URI used to recommend possible connections.
          */
-        final BigdataURI connectTo = om.getValueFactory().createURI(
+        final EmbergraphURI connectTo = om.getValueFactory().createURI(
                 "http://example.org/connectTo");
 
         /*
          * URI used for the connection count (link weight).
          */
-        final BigdataURI weightProperty = om.getValueFactory().createURI(
+        final EmbergraphURI weightProperty = om.getValueFactory().createURI(
                 "http://example.org/connectionCount");
 
         final ICloseableIterator<BindingSet> itr = om
@@ -289,7 +289,7 @@ public class Example2 implements Callable<Void> {
          * The top-level SPARQL end point for a NanoSparqlServer instance.
          */
         final String serviceURL = "http://localhost:" + Config.HTTP_PORT + "/"
-                + BigdataStatics.getContextPath();
+                + EmbergraphStatics.getContextPath();
 
         /**
          * The namespace of the KB instance that you want to connect to on that

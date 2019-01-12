@@ -94,7 +94,7 @@ public class StressTest_ClosedByInterrupt_RW extends TestCase {
         props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.statementIdentifiers", "false");
         props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.quadsMode", "true");
         props.setProperty("org.embergraph.journal.AbstractJournal.maximumExtent", "209715200");
-        props.setProperty("org.embergraph.service.IBigdataClient.collectPlatformStatistics", "false");
+        props.setProperty("org.embergraph.service.IEmbergraphClient.collectPlatformStatistics", "false");
         props.setProperty("org.embergraph.service.IEmbergraphClient.httpdPort", "-1");
         props.setProperty("org.embergraph.rdf.sail.bufferCapacity", "100000");
         props.setProperty("org.embergraph.rdf.store.AbstractTripleStore.bloomFilter", "false");

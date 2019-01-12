@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# Vagraant.aws.ha3 - Install the Bigdata High Availability Server with 3 Nodes with an AWS Provider
+# Vagraant.aws.ha3 - Install the Embergraph High Availability Server with 3 Nodes with an AWS Provider
 #
 # This vagrant file is meant to be launched by the bin/createCluster.sh script.
 #

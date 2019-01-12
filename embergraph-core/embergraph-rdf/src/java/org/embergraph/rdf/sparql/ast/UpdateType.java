@@ -53,7 +53,7 @@ public enum UpdateType {
      * DROP  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
      * </pre>
      * 
-     * Note: Bigdata does not support empty graphs, so {@link #Clear} and
+     * Note: Embergraph does not support empty graphs, so {@link #Clear} and
      * {@link #Drop} have the same semantics.
      * 
      * @see http://www.w3.org/TR/sparql11-update/#drop
@@ -170,7 +170,7 @@ public enum UpdateType {
      * CLEAR  ( SILENT )? (GRAPH IRIref | DEFAULT | NAMED | ALL )
      * </pre>
      * 
-     * Note: Bigdata does not support empty graphs, so {@link #Clear} and
+     * Note: Embergraph does not support empty graphs, so {@link #Clear} and
      * {@link #Drop} have the same semantics.
      * 
      * @see http://www.w3.org/TR/sparql11-update/#clear

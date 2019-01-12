@@ -153,7 +153,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
     /**
      * Parse a SPARQL 1.1 UPDATE request.
      * 
-     * @return The Bigdata AST model for that request.
+     * @return The Embergraph AST model for that request.
      * 
      * @see <a href="https://sourceforge.net/apps/trac/bigdata/ticket/448">
      *      SPARQL 1.1 Update </a>
@@ -258,7 +258,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
                 BlankNodeVarProcessor.process(uc);
 
                 /*
-                 * Prepare deferred batch IV resolution of ASTRDFValue to BigdataValues.
+                 * Prepare deferred batch IV resolution of ASTRDFValue to EmbergraphValues.
                  * @see https://jira.blazegraph.com/browse/BLZG-1176
                  * 
                  * Note: IV resolution must proceed separately (or be
@@ -341,7 +341,7 @@ public class Embergraph2ASTSPARQLParser implements QueryParser {
             BlankNodeVarProcessor.process(qc);
 
             /*
-             * Prepare deferred batch IV resolution of ASTRDFValue to BigdataValues.
+             * Prepare deferred batch IV resolution of ASTRDFValue to EmbergraphValues.
              * @see https://jira.blazegraph.com/browse/BLZG-1176
              */
             final ASTDeferredIVResolutionInitializer resolver = new ASTDeferredIVResolutionInitializer();

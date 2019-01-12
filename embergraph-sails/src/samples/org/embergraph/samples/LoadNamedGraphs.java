@@ -44,12 +44,12 @@ import org.openrdf.rio.RDFFormat;
 import org.embergraph.journal.Journal;
 import org.embergraph.journal.RWStrategy;
 import org.embergraph.rdf.load.RDFFilenameFilter;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.embergraph.rdf.store.DataLoader;
 
 /**
- * Sample code for loading RDF data using the {@link BigdataSail} and the
+ * Sample code for loading RDF data using the {@link EmbergraphSail} and the
  * openrdf API.
  * 
  * @see DataLoader
@@ -79,7 +79,7 @@ public class LoadNamedGraphs extends SampleCode {
 //        final File journalFile = new File("c:/bigdata.jnl");
 ////        final File journalFile = File.createTempFile("embergraph", ".jnl");
 ////        journalFile.deleteOnExit();
-//        properties.setProperty(BigdataSail.Options.FILE, journalFile
+//        properties.setProperty(EmbergraphSail.Options.FILE, journalFile
 //                .getAbsolutePath());
 
         // You can do the overrides in the property file.
@@ -96,9 +96,9 @@ public class LoadNamedGraphs extends SampleCode {
 //                "64");
 
         // instantiate a sail
-        final BigdataSail sail = new BigdataSail(properties);
+        final EmbergraphSail sail = new EmbergraphSail(properties);
         try {
-        final Repository repo = new BigdataSailRepository(sail);
+        final Repository repo = new EmbergraphSailRepository(sail);
         repo.initialize();
 
         final RepositoryConnection cxn = repo.getConnection();
@@ -285,7 +285,7 @@ public class LoadNamedGraphs extends SampleCode {
 
     }
 
-    private void logCounters(final BigdataSail sail) {
+    private void logCounters(final EmbergraphSail sail) {
 
     	if (!(sail.getDatabase().getIndexManager() instanceof Journal))
 			return;

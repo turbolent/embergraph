@@ -1,6 +1,6 @@
 This directory contains a collection of Vagrantfile samples that demonstrate how
 to launch a VirtualBox instance (the vagrant default) and configure it with a
-Bigdata server or MapGraph under several useful scenarios.
+Embergraph server or MapGraph under several useful scenarios.
 
 The Vagrantfiles are named with a descriptive extension, and must be copied to 
 the generic "Vagrantfile" to be read by the vagrant program.
@@ -10,15 +10,15 @@ Relevant files:
 ---------------
 
 Vagrantfile.tomcat - Creates aa VirtualBox instance (Ubuntu 12.04 by default) and installs
-                     Tomcat 7 and deploys the Bigdata WAR file as a service.
+                     Tomcat 7 and deploys the Embergraph WAR file as a service.
 
-Vagrantfile.tomcat.build-from-svn - Like Vagrantfile.tomcat but the Bigdata WAR
+Vagrantfile.tomcat.build-from-svn - Like Vagrantfile.tomcat but the Embergraph WAR
                      file will be built from a specified subversion repository branch.
 
 Vagrantfile.nss - Creates an VirtualBox instance (Ubuntu 12.04 by default) and installs
-                     and starts a Bigdata NanoSparqlServer (NSS) Jetty server instance.
+                     and starts a Embergraph NanoSparqlServer (NSS) Jetty server instance.
 
-Vagrantfile.nss.build-from-svn - Like Vagrantfile.nss but the Bigdata NSS server
+Vagrantfile.nss.build-from-svn - Like Vagrantfile.nss but the Embergraph NSS server
                      will be built from a specified subversion repository branch.
 
 

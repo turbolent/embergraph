@@ -104,7 +104,7 @@ public class TestTicket353 extends QuadsTestCase {
 		// try with Sesame MemoryStore:
 		executeQuery(new SailRepository(new MemoryStore()));
 
-		// try with Bigdata:
+		// try with Embergraph:
 		final EmbergraphSail sail = getSail();
 		try {
 			executeQuery(new EmbergraphSailRepository(sail));

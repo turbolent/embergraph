@@ -374,7 +374,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph implements Transact
      * Turn a change record into a graph edit and notify the graph listeners.
      * 
      * @param record
-     *          Bigdata change record.
+     *          Embergraph change record.
      */
     protected void notify(final IChangeRecord record) {
         final EmbergraphGraphEdit edit = toGraphEdit(record);
@@ -389,7 +389,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph implements Transact
      * Turn a embergraph change record into a graph edit.
      * 
      * @param record
-     *          Bigdata change record
+     *          Embergraph change record
      * @return
      *          graph edit
      */
@@ -417,7 +417,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph implements Transact
      * Materialize a batch of change records.
      * 
      * @param records
-     *          Bigdata change records
+     *          Embergraph change records
      * @return
      *          Same records with materialized values
      */
@@ -436,7 +436,7 @@ public class EmbergraphGraphEmbedded extends EmbergraphGraph implements Transact
                 spos[i++] = rec.getStatement();
             }
 
-            // use the database to resolve them into BigdataStatements
+            // use the database to resolve them into EmbergraphStatements
             final EmbergraphStatementIterator it = db
                     .asStatementIterator(new ChunkedArrayIterator<ISPO>(i,
                             spos, null/* keyOrder */));

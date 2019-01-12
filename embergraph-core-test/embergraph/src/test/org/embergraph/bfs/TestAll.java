@@ -52,7 +52,7 @@ public class TestAll extends TestCase {
     public static Test suite()
     {
 
-        TestSuite suite = new TestSuite("Bigdata File System");
+        TestSuite suite = new TestSuite("Embergraph File System");
  
         /*
          * Low-level block IO operations for file versions.

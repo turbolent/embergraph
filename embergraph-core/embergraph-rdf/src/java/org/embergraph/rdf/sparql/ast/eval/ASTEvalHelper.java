@@ -456,7 +456,7 @@ public class ASTEvalHelper {
         
         /*
          * A mapping that is used to preserve a consistent assignment from blank
-         * node IDs to BigdataBNodes scoped to the subgraph reported by the
+         * node IDs to EmbergraphBNodes scoped to the subgraph reported by the
          * top-level DESCRIBE query.
          */
         final Map<String, EmbergraphBNode> bnodes = (isDescribe ? new LinkedHashMap<String, EmbergraphBNode>()
@@ -615,7 +615,7 @@ public class ASTEvalHelper {
              * Wrap the Statement iteration with logic that will update the
              * DESCRIBE cache.
              * 
-             * Note: [describedResources] is the set of BigdataValues that were
+             * Note: [describedResources] is the set of EmbergraphValues that were
              * "described" by the query and will have an entry asserted in the
              * cache.
              * 
@@ -837,7 +837,7 @@ public class ASTEvalHelper {
          * 
          * The basic API alignment problem is that the IRunningQuery#iterator()
          * visits IBindingSet[] chunks while the EmbergraphBindingSetResolverator
-         * and Bigdata2SesameBindingSetIterator are IChunked(Ordered)Iterators.
+         * and Embergraph2SesameBindingSetIterator are IChunked(Ordered)Iterators.
          * That is, they implement #nextChunk(). A very simple class could be
          * used to align an IBindingSet[] returned by next() with nextChunk(). I
          * would be surprised if this class did not already exist (in fact, the
@@ -877,7 +877,7 @@ public class ASTEvalHelper {
             /*
              * The projection of the query is being materialized by the query
              * plan. All we have to do here is convert embergraph IBindingSets
-             * consisting of IVs having cached BigdataValues to Sesame
+             * consisting of IVs having cached EmbergraphValues to Sesame
              * BindingSets.
              */
             

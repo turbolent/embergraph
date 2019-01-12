@@ -57,7 +57,7 @@ public class EmbergraphBindingSet implements Iterable<Map.Entry<String,Object>> 
 
     @Override
     public String toString() {
-        return "BigdataBindings [vals=" + vals + "]";
+        return "EmbergraphBindings [vals=" + vals + "]";
     }
     
 }

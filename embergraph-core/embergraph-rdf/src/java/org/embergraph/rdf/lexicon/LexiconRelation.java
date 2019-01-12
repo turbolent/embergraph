@@ -3,11 +3,7 @@
 Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved.
 Copyright (C) Embergraph contributors 2019. All rights reserved.
 
- Contact:
- SYSTAP, LLC DBA Blazegraph
- 2501 Calvert ST NW #106
- Washington, DC 20008
- licenses@blazegraph.com
+
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -1775,7 +1771,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
          * collections of Values which will be resolved against the
          * TERM2ID/ID2TERM index and a collection of Values which will be
          * resolved against the BLOBS index. Duplicates are filtered out and
-         * post-processed once the distinct BigdataValues have been resolved.
+         * post-processed once the distinct EmbergraphValues have been resolved.
          */
 
         // Will be resolved against TERM2ID/ID2TERM.
@@ -2973,7 +2969,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
     
     /**
-     * We need to cache the BigdataValues on the IV components within the
+     * We need to cache the EmbergraphValues on the IV components within the
      * SidIV so that the SidIV can materialize itself into a EmbergraphBNode
      * properly.
      */
@@ -2998,7 +2994,7 @@ public class LexiconRelation extends AbstractRelation<EmbergraphValue>
     }
     
     /**
-     * We need to cache the BigdataValues on the IV components within the
+     * We need to cache the EmbergraphValues on the IV components within the
      * SidIV so that the SidIV can materialize itself into a EmbergraphBNode
      * properly.
      */

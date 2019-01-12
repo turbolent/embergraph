@@ -149,7 +149,7 @@ abstract public class AbstractChunkedResolverator<E,F,S> implements ICloseableIt
 
         /*
          * This class will read resolved chunks from the [resolvedItr] and then
-         * hand out BigdataStatements from the current [chunk].
+         * hand out EmbergraphStatements from the current [chunk].
          */
         resolvedItr = buffer.iterator();
         
@@ -371,7 +371,7 @@ abstract public class AbstractChunkedResolverator<E,F,S> implements ICloseableIt
 
         if (lastIndex == -1 || chunk != null && lastIndex + 1 == chunk.length) {
 
-            // get the next chunk of resolved BigdataStatements.
+            // get the next chunk of resolved EmbergraphStatements.
             chunk = resolvedItr.next();
             
             // reset the index.

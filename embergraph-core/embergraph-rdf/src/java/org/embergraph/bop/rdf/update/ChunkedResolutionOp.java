@@ -218,7 +218,7 @@ public class ChunkedResolutionOp extends PipelineOp {
             }
 
             /*
-             * Batch resolve term identifiers for those BigdataValues.
+             * Batch resolve term identifiers for those EmbergraphValues.
              * 
              * Note: If any value does not exist in the lexicon then its term
              * identifier will be ZERO (0L).
@@ -238,7 +238,7 @@ public class ChunkedResolutionOp extends PipelineOp {
                     mutationCount = 0;
                 }
 
-                // cache the BigdataValues on the IVs for later
+                // cache the EmbergraphValues on the IVs for later
                 for (EmbergraphValue term : terms) {
 
                     final IV iv = term.getIV();

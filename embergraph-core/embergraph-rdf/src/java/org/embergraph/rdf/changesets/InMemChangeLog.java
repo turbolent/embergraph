@@ -130,7 +130,7 @@ public class InMemChangeLog implements IChangeLog {
     
     /**
      * Return the change set as of the last commmit point, using the supplied
-     * database to resolve ISPOs to BigdataStatements.
+     * database to resolve ISPOs to EmbergraphStatements.
      * 
      * @return
      *          a collection of {@link IChangeRecord}s as of the last commit
@@ -144,8 +144,8 @@ public class InMemChangeLog implements IChangeLog {
     
     /**
      * Use the supplied database to turn a set of ISPO change records into
-     * EmbergraphStatement change records.  BigdataStatements also implement
-     * ISPO, the difference being that BigdataStatements also contain
+     * EmbergraphStatement change records.  EmbergraphStatements also implement
+     * ISPO, the difference being that EmbergraphStatements also contain
      * materialized RDF terms for the 3 (or 4) positions, in addition to just
      * the internal identifiers (IVs) for those terms.
      * 
@@ -171,7 +171,7 @@ public class InMemChangeLog implements IChangeLog {
             spos[i++] = rec.getStatement();
         }
         
-        // use the database to resolve them into BigdataStatements
+        // use the database to resolve them into EmbergraphStatements
         final EmbergraphStatementIterator it =
             db.asStatementIterator(
                     new ChunkedArrayIterator<ISPO>(i, spos, null/* keyOrder */));

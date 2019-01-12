@@ -6,7 +6,7 @@
 #
 
 #
-# Only do the following for Bigdata Tomcat install
+# Only do the following for Embergraph Tomcat install
 #
 if node['embergraph'][:install_flavor] == "tomcat"
 
@@ -32,7 +32,7 @@ if node['embergraph'][:install_flavor] == "tomcat"
 		include_recipe	"subversion::client"
 
 		#
-		# Retrieve the Bigdata source from the specified subversion branch:
+		# Retrieve the Embergraph source from the specified subversion branch:
 		#
 		execute "checkout embergraph from svn repo" do
 			user 	'ubuntu'
@@ -84,7 +84,7 @@ if node['embergraph'][:install_flavor] == "tomcat"
 
 
 	#
-	# Create the Bigdata log home
+	# Create the Embergraph log home
 	#
 	directory node['embergraph'][:log_dir] do
 		owner	node['tomcat'][:user]

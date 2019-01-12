@@ -1167,7 +1167,7 @@
   <ownedMember xmi:type="uml:Association" xmi:id="_2SvnAM0lEd2u45QNMGmXTQ" memberEnd="_2SvnAc0lEd2u45QNMGmXTQ _2SvnAs0lEd2u45QNMGmXTQ">
     <ownedEnd xmi:id="_2SvnAs0lEd2u45QNMGmXTQ" visibility="private" type="_dojM4M0fEd2u45QNMGmXTQ" association="_2SvnAM0lEd2u45QNMGmXTQ"/>
   </ownedMember>
-  <ownedMember xmi:type="uml:Interface" xmi:id="_8rMW0M0lEd2u45QNMGmXTQ" name="IBigdataFederation">
+  <ownedMember xmi:type="uml:Interface" xmi:id="_8rMW0M0lEd2u45QNMGmXTQ" name="IEmbergraphFederation">
     <ownedAttribute xmi:id="_xBKjMc0mEd2u45QNMGmXTQ" name="itransactionservice" visibility="private" type="_V1euoM0eEd2u45QNMGmXTQ" association="_xBKjMM0mEd2u45QNMGmXTQ">
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xBKjNM0mEd2u45QNMGmXTQ" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xBKjM80mEd2u45QNMGmXTQ"/>

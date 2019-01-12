@@ -22,7 +22,7 @@ import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
- * Efficiently resolve term identifiers in Bigdata {@link ISolution}s to RDF
+ * Efficiently resolve term identifiers in Embergraph {@link ISolution}s to RDF
  * {@link EmbergraphValue}s.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>

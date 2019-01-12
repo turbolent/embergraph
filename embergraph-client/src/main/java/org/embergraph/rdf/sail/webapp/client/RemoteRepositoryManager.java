@@ -84,7 +84,7 @@ public class RemoteRepositoryManager extends RemoteRepositoryBase implements Aut
     private static final transient Logger log = Logger.getLogger(RemoteRepositoryManager.class);
 
     final static String EXCEPTION_MSG = "Class not found for service provider hook. " +
-            "Blazegraph specific parser extensions will not be available.";
+            "Embergraph specific parser extensions will not be available.";
 
     /**
      * The path to the root of the web application (without the trailing "/").

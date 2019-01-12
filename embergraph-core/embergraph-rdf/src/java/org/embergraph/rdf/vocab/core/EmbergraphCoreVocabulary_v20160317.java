@@ -23,7 +23,7 @@ import org.embergraph.rdf.vocab.BaseVocabularyDecl;
 import org.embergraph.service.geospatial.GeoSpatial;
 
 /**
- * Core Bigdata vocabulary.
+ * Core Embergraph vocabulary.
  *  
  * Note: Do not modify this class.  Create an entirely new vocabulary that
  * extends this one and edit

@@ -184,7 +184,7 @@ public class ASTJoinOrderByTypeOptimizer extends AbstractJoinGroupOptimizer
      * 
      *    Required joins:
      *    
-     *   3. Some Service calls (e.g. Bigdata SEARCH)
+     *   3. Some Service calls (e.g. Embergraph SEARCH)
      *   4. Subquery-includes
      *   5. Statement patterns
      *   7. Sparql11 subqueries

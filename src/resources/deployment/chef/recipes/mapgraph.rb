@@ -12,7 +12,7 @@ include_recipe "java"
 
 
 #
-# Make sure the Bigdata home directory is owned by the embergraph user and group:
+# Make sure the Embergraph home directory is owned by the embergraph user and group:
 #
 execute "pull mapgraph from svn repo" do
 	user	'ec2-user'

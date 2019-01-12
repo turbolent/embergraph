@@ -113,7 +113,7 @@ public class InlineMaterializeOp<E> extends PipelineOp {
     }
 
     /**
-     * Copy the source to the sink after materializing the BigdataValues.
+     * Copy the source to the sink after materializing the EmbergraphValues.
      */
     static private class MaterializeTask implements Callable<Void> {
 

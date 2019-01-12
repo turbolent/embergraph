@@ -9,12 +9,12 @@
 
 [] a rep:Repository ;
    rep:repositoryID "{%Repository ID|embergraph%}" ;
-   rdfs:label "{%Repository title|Bigdata store%}" ;
+   rdfs:label "{%Repository title|Embergraph store%}" ;
    rep:repositoryImpl [
-      rep:repositoryType "embergraph:BigdataRepository" ;
+      rep:repositoryType "embergraph:EmbergraphRepository" ;
       ns:properties "{%Properties%}"
 #      sr:sailImpl [
-#         sail:sailType "embergraph:BigdataSail" ;
+#         sail:sailType "embergraph:EmbergraphSail" ;
 #         ns:properties "{%Properties%}"
 #      ]
    ].

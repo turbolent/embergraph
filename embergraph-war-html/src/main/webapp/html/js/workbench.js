@@ -83,7 +83,7 @@ var NAMESPACE_PARAMS = {
 };
 
 var NAMESPACE_SHORTCUTS = {
-   'Bigdata': {
+   'Embergraph': {
       'bd': 'http://www.embergraph.org/rdf#',
       'bds': 'http://www.embergraph.org/rdf/search#',
       'gas': 'http://www.embergraph.org/rdf/gas#',

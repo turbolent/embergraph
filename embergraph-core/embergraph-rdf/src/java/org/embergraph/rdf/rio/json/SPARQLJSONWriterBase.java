@@ -48,7 +48,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
  * An abstract class to implement the base functionality for both
  * SPARQLBooleanJSONWriter and SPARQLResultsJSONWriter.
  * <p>
- * Bigdata Changes:
+ * Embergraph Changes:
  * <ul>
  * <li>Changed the visibility of JsonGenerator jg from private to protected so
  * we can use it in a subclass.</li>

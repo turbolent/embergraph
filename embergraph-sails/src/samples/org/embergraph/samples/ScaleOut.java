@@ -25,8 +25,8 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.rio.RDFFormat;
 
 import org.embergraph.journal.ITx;
-import org.embergraph.rdf.sail.BigdataSail;
-import org.embergraph.rdf.sail.BigdataSailRepository;
+import org.embergraph.rdf.sail.EmbergraphSail;
+import org.embergraph.rdf.sail.EmbergraphSailRepository;
 import org.embergraph.rdf.store.AbstractTripleStore;
 import org.embergraph.rdf.store.ScaleOutTripleStore;
 import org.embergraph.service.jini.JiniClient;
@@ -86,8 +86,8 @@ public class ScaleOut {
             createTripleStore(fed);
 
             // create the writer and reader
-            BigdataWriter writer = new BigdataWriter(fed);
-            BigdataReader reader = new BigdataReader(fed);
+            EmbergraphWriter writer = new EmbergraphWriter(fed);
+            EmbergraphReader reader = new EmbergraphReader(fed);
             
             // launch the threads and get their futures
             // embergraph has an executor service but any executor service will do
@@ -196,8 +196,8 @@ public class ScaleOut {
             final AbstractTripleStore tripleStore = 
                 openTripleStore(fed, transactionId);
             
-            final BigdataSail sail = new BigdataSail(tripleStore);
-            final Repository repo = new BigdataSailRepository(sail);
+            final EmbergraphSail sail = new EmbergraphSail(tripleStore);
+            final Repository repo = new EmbergraphSailRepository(sail);
             repo.initialize();
             
             RepositoryConnection cxn = repo.getConnection();
@@ -239,7 +239,7 @@ public class ScaleOut {
     /**
      * A writer task to load the U10 data set.
      */
-    private static class BigdataWriter implements Runnable {
+    private static class EmbergraphWriter implements Runnable {
         
         /**
          * The jini federation.
@@ -251,7 +251,7 @@ public class ScaleOut {
          * 
          * @param fed the jini federation
          */
-        public BigdataWriter(JiniFederation fed) {
+        public EmbergraphWriter(JiniFederation fed) {
             
             this.fed = fed;
             
@@ -271,8 +271,8 @@ public class ScaleOut {
                     openTripleStore(fed, ITx.UNISOLATED);
 
                 // wrap the triple store in a Sesame SAIL
-                final BigdataSail sail = new BigdataSail(tripleStore);
-                final Repository repo = new BigdataSailRepository(sail);
+                final EmbergraphSail sail = new EmbergraphSail(tripleStore);
+                final Repository repo = new EmbergraphSailRepository(sail);
                 repo.initialize();
                 
                 // load the data
@@ -303,7 +303,7 @@ public class ScaleOut {
             
             try {
                 // fast range count!
-                long stmtsBefore = ((BigdataSailRepository)repo).getDatabase().getStatementCount();
+                long stmtsBefore = ((EmbergraphSailRepository)repo).getDatabase().getStatementCount();
                 // full index scan!
 //                long stmtsBefore = cxn.size();
                 log.info("statements before: " + stmtsBefore);
@@ -350,7 +350,7 @@ public class ScaleOut {
                 // gather statistics
                 long elapsed = System.currentTimeMillis() - start;
                 // fast range count!
-                long stmtsAfter = ((BigdataSailRepository)repo).getDatabase().getStatementCount();
+                long stmtsAfter = ((EmbergraphSailRepository)repo).getDatabase().getStatementCount();
 //                // full index scan!
 //                long stmtsAfter = cxn.size();
                 long stmtsAdded = stmtsAfter - stmtsBefore;
@@ -376,7 +376,7 @@ public class ScaleOut {
      * A reader task to issue concurrent queries.  Asks for the # of full
      * professors every three seconds.
      */
-    private static class BigdataReader implements Runnable {
+    private static class EmbergraphReader implements Runnable {
         
         /**
          * The jini federation.
@@ -393,7 +393,7 @@ public class ScaleOut {
          * 
          * @param fed the jini federation
          */
-        public BigdataReader(JiniFederation fed) {
+        public EmbergraphReader(JiniFederation fed) {
             
             this.fed = fed;
             
@@ -452,8 +452,8 @@ public class ScaleOut {
                     openTripleStore(fed, transactionId);
                 
                 // wrap it in a Sesame SAIL
-                final BigdataSail sail = new BigdataSail(tripleStore);
-                final Repository repo = new BigdataSailRepository(sail);
+                final EmbergraphSail sail = new EmbergraphSail(tripleStore);
+                final Repository repo = new EmbergraphSailRepository(sail);
                 repo.initialize();
                 
                 RepositoryConnection cxn = repo.getConnection();

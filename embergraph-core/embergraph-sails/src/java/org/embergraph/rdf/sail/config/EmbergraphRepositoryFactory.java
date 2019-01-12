@@ -18,7 +18,7 @@ public class EmbergraphRepositoryFactory implements RepositoryFactory {
 	/**
 	 * The type of repositories that are created by this factory.
 	 */
-	public static final String TYPE = "embergraph:BigdataRepository";
+	public static final String TYPE = "embergraph:EmbergraphRepository";
 
 	public String getRepositoryType() {
 		return TYPE;

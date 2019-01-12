@@ -410,7 +410,7 @@ public class EmbergraphSPARQLUpdateConformanceTest extends
             }
             message.append("=========================================\n");
 
-            message.append("Bigdata results: \n");
+            message.append("Embergraph results: \n");
             for (Statement bs : actual) {
                 message.append(bs);
                 message.append("\n");

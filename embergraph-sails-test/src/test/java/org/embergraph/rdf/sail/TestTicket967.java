@@ -38,7 +38,7 @@ public class TestTicket967 extends QuadsTestCase {
 		// try with Sesame MemoryStore:
 		executeTest(new SailRepository(new MemoryStore()));
 
-		// try with Bigdata:
+		// try with Embergraph:
 		try {
 			executeTest(new EmbergraphSailRepository(getSail()));
 		} finally {
@@ -65,7 +65,7 @@ public class TestTicket967 extends QuadsTestCase {
 		        	// materialize the newly added statement.
 		        	stats.next();
 		        } catch (RuntimeException e) {
-		        	fail(e.getLocalizedMessage(), e); // With Bigdata this fails
+		        	fail(e.getLocalizedMessage(), e); // With Embergraph this fails
 		        } finally {
 		        	stats.close();
 		        }

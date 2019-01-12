@@ -557,7 +557,7 @@ public class TestFederatedQuery<S extends IIndexManager> extends
      * This is a manual test to see the Fallback in action. Query asks DBpedia,
      * which does not support BINDINGS
      * <p>
-     * Note: Bigdata is not doing automatic fallback. You have to explicitly
+     * Note: Embergraph is not doing automatic fallback. You have to explicitly
      * make a note of services which do not support SPARQL 1.1. Note: I have
      * taken this query out of CI. We are not doing fallback, so there is no
      * reason to issue the query. Also, the virtuoso cluster for dbpedia falls

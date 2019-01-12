@@ -70,7 +70,7 @@ public class TestEmbergraphGraphClientInMemorySail extends AbstractTestEmbergrap
 //    public void testAddVertexProperties() throws Exception {
 //        final EmbergraphGraphTest test = new EmbergraphGraphTest();
 //        test.stopWatch();
-//        final BigdataTestSuite testSuite = new BigdataTestSuite(test);
+//        final EmbergraphTestSuite testSuite = new EmbergraphTestSuite(test);
 //        try {
 //            testSuite.testVertexEquality();
 //        } finally {
@@ -79,9 +79,9 @@ public class TestEmbergraphGraphClientInMemorySail extends AbstractTestEmbergrap
 //
 //    }
 //
-//    private static class BigdataTestSuite extends TestSuite {
+//    private static class EmbergraphTestSuite extends TestSuite {
 //        
-//        public BigdataTestSuite(final EmbergraphGraphTest graphTest) {
+//        public EmbergraphTestSuite(final EmbergraphGraphTest graphTest) {
 //            super(graphTest);
 //        }
 //        

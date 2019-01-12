@@ -93,7 +93,7 @@ class Params:
         self.startCodebaseHttpd = True
 
 
-class BigdataServiceBase:
+class EmbergraphServiceBase:
     def __init__(self, serviceName, params):
         # Keep a reference the the service parameters
         self.params = params
@@ -258,7 +258,7 @@ class BigdataServiceBase:
         os.execvp(argList[0], argList)
 
 
-class GenericBigdataService(BigdataServiceBase):
+class GenericEmbergraphService(EmbergraphServiceBase):
     """This starts a generically implemented service that adheres to the
        following rules:
          * The implementation Jar file is named "${appHome}/lib/<service>.jar"
@@ -269,7 +269,7 @@ class GenericBigdataService(BigdataServiceBase):
            "${appHome}/bin/config/<service>.config"
     """
     def __init__(self, serviceName, params):
-        BigdataServiceBase.__init__(self, serviceName, params)
+        EmbergraphServiceBase.__init__(self, serviceName, params)
 
         # Use the generic service template and fill in the fields
         self.properties['entityType'] = self.serviceName
@@ -287,9 +287,9 @@ class GenericBigdataService(BigdataServiceBase):
              "bin", "config", "serviceStarterOne.config")
 
 
-class BigdataService(BigdataServiceBase):
+class EmbergraphService(EmbergraphServiceBase):
     def __init__(self, serviceName, params):
-        BigdataServiceBase.__init__(self, serviceName, params)
+        EmbergraphServiceBase.__init__(self, serviceName, params)
         self.properties['config'] = os.path.join(self.appHome, 
             "bin", "config", "serviceStarter.config")
 
@@ -320,7 +320,7 @@ class BigdataService(BigdataServiceBase):
                     "new ServiceDescriptor[] { " + serviceName + "Descriptor }" ]
 
     def setGroupProperties(self):
-        BigdataServiceBase.setGroupProperties(self)
+        EmbergraphServiceBase.setGroupProperties(self)
         if sys.platform == "win32":
             if len(params.mGroups) > 0:
                 self.properties['memberGroups'] = \
@@ -341,9 +341,9 @@ class BigdataService(BigdataServiceBase):
                 self.properties['memberGroups'] = "{}"
 
 
-class BigdataMetaservice(BigdataService):
+class EmbergraphMetaservice(EmbergraphService):
     def __init__(self, serviceName, params):
-        BigdataService.__init__(self, serviceName, params)
+        EmbergraphService.__init__(self, serviceName, params)
         if serviceName == "all":
             services = [ "httpd", "reggie", "zookeeper", "dataserver",
                          "metadataserver", "loadbalancer", "txnserver" ]
@@ -384,15 +384,15 @@ class BigdataMetaservice(BigdataService):
                 "Descriptor, ".join(services) + "Descriptor}" ]
 
 
-class BigdataServiceOldLog(BigdataService):
+class EmbergraphServiceOldLog(EmbergraphService):
     def __init__(self, serviceName, params):
-        BigdataService.__init__(self, serviceName, params)
+        EmbergraphService.__init__(self, serviceName, params)
         del self.properties['log4j.primary.configuration']
         del self.properties['java.util.logging.config.file']
 
-class JiniBrowser(BigdataService):
+class JiniBrowser(EmbergraphService):
     def __init__(self, serviceName, params):
-        BigdataService.__init__(self, serviceName, params)
+        EmbergraphService.__init__(self, serviceName, params)
         self.properties['log4j.primary.configuration'] = os.path.join( \
             self.appHome, "var", "config", "logging", \
             "browser-logging.properties")
@@ -406,21 +406,21 @@ class JiniBrowser(BigdataService):
 #       "servicename" : (ClassName, codebasePort, exportPort)
 #
 # An entry in this map is not required. If one is not found, the default
-# 'GenericBigdataService' class will be used with the default codebase port
+# 'GenericEmbergraphService' class will be used with the default codebase port
 # and default export port
 embergraphServiceMap = {
-    'jini'              : (BigdataMetaservice,      9010, 20010),
-    'reggie'            : (BigdataMetaservice,      9010, 20010),
-    'httpd'             : (BigdataServiceOldLog,    9010),
+    'jini'              : (EmbergraphMetaservice,      9010, 20010),
+    'reggie'            : (EmbergraphMetaservice,      9010, 20010),
+    'httpd'             : (EmbergraphServiceOldLog,    9010),
     'browser'           : (JiniBrowser,             9020),
-    'zookeeper'         : (BigdataService,          9333, 20333),
-    'dataserver'        : (BigdataService,          9250, 21050),
-    'metadataserver'    : (BigdataService,          9251, 21051),
-    'loadbalancer'      : (BigdataService,          9252, 21052),
-    'txnserver'         : (BigdataService,          9253, 21053),
-    'clientserver'      : (BigdataService,          9254, 21054),
+    'zookeeper'         : (EmbergraphService,          9333, 20333),
+    'dataserver'        : (EmbergraphService,          9250, 21050),
+    'metadataserver'    : (EmbergraphService,          9251, 21051),
+    'loadbalancer'      : (EmbergraphService,          9252, 21052),
+    'txnserver'         : (EmbergraphService,          9253, 21053),
+    'clientserver'      : (EmbergraphService,          9254, 21054),
 
-    'all'               : (BigdataMetaservice,      9010, 20010),
+    'all'               : (EmbergraphMetaservice,      9010, 20010),
 }
 
 
@@ -475,7 +475,7 @@ if __name__ == '__main__':
     try:
         serviceTuple = embergraphServiceMap[serviceName]
     except KeyError:
-        serviceTuple = (GenericBigdataService,)
+        serviceTuple = (GenericEmbergraphService,)
 
     # Create the service object
     service = serviceTuple[0](serviceName, params)

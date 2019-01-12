@@ -49,7 +49,7 @@ import org.embergraph.util.ClassPathUtil;
  * // only need to optimize the join order this way if we are not
  * // using native joins
  * if (nativeJoins == false) {
- *     optimizerList.add(new QueryJoinOptimizer(new BigdataEvaluationStatistics(
+ *     optimizerList.add(new QueryJoinOptimizer(new EmbergraphEvaluationStatistics(
  *             this)));
  * }
  * optimizerList.add(new FilterOptimizer());
@@ -384,7 +384,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
          * 
          * <pre>
          * 
-         * TODO From BigdataEvaluationStrategyImpl3#945
+         * TODO From EmbergraphEvaluationStrategyImpl3#945
          * 
          * Prunes the sop tree of optional join groups containing values
          * not in the lexicon.
@@ -424,7 +424,7 @@ public class DefaultOptimizerList extends ASTOptimizerList {
          * optional. if it appears in union, the prune that part of the union.
          * if it appears at the top-level then there are no solutions for that
          * query. This is part of what
-         * BigdataEvaluationStrategyImpl3#toPredicate(final StatementPattern
+         * EmbergraphEvaluationStrategyImpl3#toPredicate(final StatementPattern
          * stmtPattern) is doing. Note that toVE() as called from that method
          * will throw an UnknownValueException if the term is not known to the
          * database.

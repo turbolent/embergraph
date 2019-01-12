@@ -27,7 +27,7 @@
 			    <!-- Sesame expects 
 				<literal datatype="http://www.w3.org/2001/XMLSchema#decimal">10.0</literal>
 				-->
-				<!-- Bigdata produces -->
+				<!-- Embergraph produces -->
 				<literal datatype="http://www.w3.org/2001/XMLSchema#decimal">10</literal>
 			</binding>
 		</result>

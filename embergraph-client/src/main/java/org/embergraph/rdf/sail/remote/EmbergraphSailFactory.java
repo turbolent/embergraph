@@ -45,7 +45,7 @@ public class EmbergraphSailFactory {
 	/**
 	 * The default embergraph SAIL_PROVIDER.
 	 */
-	public static final String EMBERGRAPH_SAIL_INSTANCE = "org.embergraph.rdf.sail.BigdataSail";
+	public static final String EMBERGRAPH_SAIL_INSTANCE = "org.embergraph.rdf.sail.EmbergraphSail";
 	
 	/**
 	 * The name of the property to set with the class that will provide the Sail.
@@ -311,7 +311,7 @@ public class EmbergraphSailFactory {
     public static Sail createSail(final String file, 
             final Option... args) {
     
-    	//Ticket #1185: BigdataGraphFactory create not working. 
+    	//Ticket #1185: EmbergraphGraphFactory create not working.
     	
         return createSail(new Properties(), file, args);
         
@@ -332,29 +332,29 @@ public class EmbergraphSailFactory {
        //FIXME:  Changed these to String Values to remove package / artifact dependency
        /* 
         if (file != null) {
-            props.setProperty(BigdataSail.Options.FILE, file);
+            props.setProperty(EmbergraphSail.Options.FILE, file);
             props.setProperty(Journal.Options.BUFFER_MODE, BufferMode.DiskRW.toString());
         } else {
             props.setProperty(Journal.Options.BUFFER_MODE, BufferMode.MemStore.toString());
         }
         
         if (options.contains(Option.Inference)) {
-            props.setProperty(BigdataSail.Options.AXIOMS_CLASS, OwlAxioms.class.getName());
-            props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "true");
-            props.setProperty(BigdataSail.Options.JUSTIFY, "true");
+            props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, OwlAxioms.class.getName());
+            props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "true");
+            props.setProperty(EmbergraphSail.Options.JUSTIFY, "true");
         } else {
-            props.setProperty(BigdataSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
-            props.setProperty(BigdataSail.Options.TRUTH_MAINTENANCE, "false");
-            props.setProperty(BigdataSail.Options.JUSTIFY, "false");
+            props.setProperty(EmbergraphSail.Options.AXIOMS_CLASS, NoAxioms.class.getName());
+            props.setProperty(EmbergraphSail.Options.TRUTH_MAINTENANCE, "false");
+            props.setProperty(EmbergraphSail.Options.JUSTIFY, "false");
         }
         
-        props.setProperty(BigdataSail.Options.TEXT_INDEX, 
+        props.setProperty(EmbergraphSail.Options.TEXT_INDEX,
                 String.valueOf(options.contains(Option.TextIndex)));
         
-        props.setProperty(BigdataSail.Options.STATEMENT_IDENTIFIERS, 
+        props.setProperty(EmbergraphSail.Options.STATEMENT_IDENTIFIERS,
                 String.valueOf(options.contains(Option.RDR)));
         
-        props.setProperty(BigdataSail.Options.QUADS, 
+        props.setProperty(EmbergraphSail.Options.QUADS,
                 String.valueOf(options.contains(Option.Quads)));
         */
 

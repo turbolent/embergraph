@@ -1,11 +1,11 @@
-Bigdata Cookbook
+Embergraph Cookbook
 ================
-The Bigdata cookbook provides the [embergraph v1.3.1](http://www.bigdata.com/) opensource triplestore/graph database.  The cookbook provides recipes to install the Bigdata server as a web application under Tomcat, with its own embedded Jetty server (NSS - the NanoSparqlServer).  The recipes will install pre-configured packages by node and optionally may build and install the server directly from source archive.
+The Embergraph cookbook provides the [embergraph v1.3.1](http://www.bigdata.com/) opensource triplestore/graph database.  The cookbook provides recipes to install the Embergraph server as a web application under Tomcat, with its own embedded Jetty server (NSS - the NanoSparqlServer).  The recipes will install pre-configured packages by node and optionally may build and install the server directly from source archive.
 
-For more info on Bigdata please visit:
+For more info on Embergraph please visit:
 
-* Bigdata Homepage: [http://www.bigdata.com/](http://www.bigdata.com/)
-* Bigdata SourceForge Page: [http://sourceforge.net/projects/bigdata/](http://sourceforge.net/projects/bigdata/)
+* Embergraph Homepage: [http://www.bigdata.com/](http://www.bigdata.com/)
+* Embergraph SourceForge Page: [http://sourceforge.net/projects/bigdata/](http://sourceforge.net/projects/bigdata/)
 
 Requirements
 ------------
@@ -29,7 +29,7 @@ Attributes
 
 `node['embergraph'][:log_dir]` - Where embergraph log files should reside (i.e. queryLog.csv, rules.log, queryRunStateLog.csv).  (Default: Tomcat: `node['embergraph'][:home]`/var/log / NSS: `node['embergraph'][:home]`/var/log)
 
-`node['embergraph'][:properties]` - File path to the Bigdata properties file.  (Default: `node['embergraph'][:home]`/RWStore.properties)
+`node['embergraph'][:properties]` - File path to the Embergraph properties file.  (Default: `node['embergraph'][:home]`/RWStore.properties)
 
 `node['embergraph'][:svn_branch]` - The Subversion branch to retrieve source files from.  (Default: Tomcat: https://svn.code.sf.net/p/bigdata/code/branches/BIGDATA\_RELEASE\_1\_3\_0 / NSS: https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT\_BRANCH\_1\_3\_1)
 
@@ -87,20 +87,20 @@ Attributes
 Recipes
 -------
 
-A node recipe is not provided by the Bigdata cookbook.  The user is given the option to install the Bigdata server under Tomcat or as a Jetty application.  Under both options, Bigdata may optinally be built directly from the a Subversion source code branch.
+A node recipe is not provided by the Embergraph cookbook.  The user is given the option to install the Embergraph server under Tomcat or as a Jetty application.  Under both options, Embergraph may optinally be built directly from the a Subversion source code branch.
 
 ### tomcat
 
-Installs the [Tomcat](http://tomcat.apache.org/) server and then embergraph as a web application. Bigdata will be configured according to the attributes. If no attributes are given, Bigdata will be installed with the systems nodes.
+Installs the [Tomcat](http://tomcat.apache.org/) server and then embergraph as a web application. Embergraph will be configured according to the attributes. If no attributes are given, Embergraph will be installed with the systems nodes.
 
-If the `build_from_svn` attribute is set to `true` Bigdata will be build from the Subversion repository given in the `svn_branch` attribute.
+If the `build_from_svn` attribute is set to `true` Embergraph will be build from the Subversion repository given in the `svn_branch` attribute.
 
 ### nss
 
-Installs the Bigdata server to run in the [NanoSparqlServer](http://wiki.blazegraph.com/wiki/index.php/NanoSparqlServer) (Jetty) mode.
+Installs the Embergraph server to run in the [NanoSparqlServer](http://wiki.blazegraph.com/wiki/index.php/NanoSparqlServer) (Jetty) mode.
 
 
-If the `build_from_svn` attribute is set to `true` Bigdata will be build from the Subversion repository given in the `svn_branch` attribute.
+If the `build_from_svn` attribute is set to `true` Embergraph will be build from the Subversion repository given in the `svn_branch` attribute.
 
 
 ### mapgraph
@@ -115,7 +115,7 @@ Usage
 
 ### Vagrant Context
 
-Sample Vagrant configurations are available in the Bigdata Subversion source tree under [embergraph/src/resources/deployment/vagrant](http://sourceforge.net/p/bigdata/code/HEAD/tree/branches/DEPLOYMENT_BRANCH_1_3_1/bigdata/src/resources/deployment/vagrant/). 
+Sample Vagrant configurations are available in the Embergraph Subversion source tree under [embergraph/src/resources/deployment/vagrant](http://sourceforge.net/p/bigdata/code/HEAD/tree/branches/DEPLOYMENT_BRANCH_1_3_1/bigdata/src/resources/deployment/vagrant/). 
 
 #### Tomcat Example
 
@@ -173,7 +173,7 @@ When errors occur in the Vagrant context, it is most typically during the instal
 	
 	% vagrant provision
 
-Which should get past any intermit ant network issues.  For assistance with installation and other issues, please visit the [Bigdata Support Forum](http://sourceforge.net/p/bigdata/discussion/676946).
+Which should get past any intermit ant network issues.  For assistance with installation and other issues, please visit the [Embergraph Support Forum](http://sourceforge.net/p/bigdata/discussion/676946).
 
 
 License and Authors
@@ -181,6 +181,6 @@ License and Authors
 Author:: Daniel Mekonnen [daniel&lt;no-spam-at&gt;systap.com]
 
 
-GNU GPLv2 - This pakcage may be resiributed under the same terms and conditions as the Bigdata project that it is a part of.
+GNU GPLv2 - This pakcage may be resiributed under the same terms and conditions as the Embergraph project that it is a part of.
 
 	http://www.gnu.org/licenses/gpl-2.0.html

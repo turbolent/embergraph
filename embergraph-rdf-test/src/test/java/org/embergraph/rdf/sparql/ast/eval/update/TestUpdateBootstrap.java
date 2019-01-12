@@ -143,7 +143,7 @@ public class TestUpdateBootstrap extends AbstractASTEvaluationTestCase {
             /*
              * FIXME Finish this test up (again). It is running into a conflict
              * with the Value to IV resolution.  It seems that it should be using
-             * BigdataValues here since the lexicon add/resolve step has not yet
+             * EmbergraphValues here since the lexicon add/resolve step has not yet
              * been executed (it runs below). Note that this code is old. It was
              * a mock up for the evaluation of SPARQL UPDATE on the query engine.
              * We do not evaluate SPARQL update that way, so this class could just

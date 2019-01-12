@@ -866,7 +866,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //	// "CONSTRUCT { bd:Bryan bd:likes bd:RDFS }" +
 //	// "{}";
 //
-//	// new BigdataSPARQLParser().parseQuery(deleteQueryStr,
+//	// new EmbergraphSPARQLParser().parseQuery(deleteQueryStr,
 //	// "http://www.bigdata.com");
 //
 //	// }
@@ -903,7 +903,7 @@ public class TestNanoSparqlClient<S extends IIndexManager> extends
 //				"CONSTRUCT { bd:Bryan bd:likes bd:RDFS }" +
 //				"{ }";
 //
-//		// new BigdataSPARQLParser().parseQuery(deleteQueryStr,
+//		// new EmbergraphSPARQLParser().parseQuery(deleteQueryStr,
 //		// "http://www.bigdata.com");
 //
 //		/*

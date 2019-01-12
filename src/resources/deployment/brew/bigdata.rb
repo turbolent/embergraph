@@ -1,6 +1,6 @@
 require "formula"
 
-class Bigdata < Formula
+class Embergraph < Formula
   homepage "http://bigdata.com/"
   url "http://bigdata.com/deploy/bigdata-1.3.1.tgz"
   sha1 "bcfacd08b1e1c7429d3ca31b8632a20cdff1fb79"

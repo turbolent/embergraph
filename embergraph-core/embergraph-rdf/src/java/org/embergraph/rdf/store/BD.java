@@ -110,7 +110,7 @@ public interface BD {
     * actually inserted into this "null" graph. If SPARQL <code>DATASET</code>
     * is not specified, then all contexts are queried and you will see
     * statements from the "null" graph as well as from any other context.
-    * {@link org.embergraph.rdf.sail.BigdataSailConnection#getStatements(Resource, URI, Value, boolean, Resource...)}
+    * {@link org.embergraph.rdf.sail.EmbergraphSailConnection#getStatements(Resource, URI, Value, boolean, Resource...)}
     * will return statements from the "null" graph if the context is either
     * unbound or is an array whose sole element is <code>null</code>.
     * <p>
@@ -144,9 +144,9 @@ public interface BD {
     * @see <a href="http://trac.bigdata.com/ticket/1177"> Resource... contexts
     *      not encoded/decoded according to openrdf semantics (REST API) </a>
     * 
-    * @see org.embergraph.rdf.sail.BigdataSailConnection#addStatement(Resource,
+    * @see org.embergraph.rdf.sail.EmbergraphSailConnection#addStatement(Resource,
     *      URI, Value, Resource...)
-    * @see org.embergraph.rdf.sail.BigdataSailConnection#getStatements(Resource,
+    * @see org.embergraph.rdf.sail.EmbergraphSailConnection#getStatements(Resource,
     *      URI, Value, boolean, Resource...)
     * @see SESAME#NIL
     */

@@ -152,7 +152,7 @@ import org.embergraph.rdf.spo.SPOKeyOrder;
  * this practice.
  * 
  * TODO Integrate code to attach RangeBOps to predicates. (This code is from the
- * old BigdataEvaluationStrategyImpl3 class. It should be moved into an
+ * old EmbergraphEvaluationStrategyImpl3 class. It should be moved into an
  * IASTOptimizer for recognizing range constraints.)
  * 
  * TODO Ranges can be just upper or lower. They do not need to be both. They can

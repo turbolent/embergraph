@@ -49,7 +49,7 @@ public class TestAll extends TestCase {
     public static Test suite()
     {
 
-        final TestSuite suite = new TestSuite("Bigdata Graph Engine");
+        final TestSuite suite = new TestSuite("Embergraph Graph Engine");
         
         /*
          * Some basic correctness tests against the embergraph backend.

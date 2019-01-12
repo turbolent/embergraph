@@ -96,7 +96,7 @@ public class InsertServlet extends EmbergraphRDFServlet {
 	 * Where <code>URI</code> identifies a resource whose RDF content will be
 	 * inserted into the database. The <code>uri</code> query parameter may
 	 * occur multiple times. All identified resources will be loaded within a
-	 * single native transaction. Bigdata provides snapshot isolation so you can
+	 * single native transaction. Embergraph provides snapshot isolation so you can
 	 * continue to execute queries against the last commit point while this
 	 * operation is executed.
 	 * </p>

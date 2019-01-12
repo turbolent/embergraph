@@ -210,7 +210,7 @@ public class EmbergraphStoreTest extends RDFStoreTest {
     }
     
 	/**
-	 * Bigdata uses snapshot isolation for transactions while openrdf assumes
+	 * Embergraph uses snapshot isolation for transactions while openrdf assumes
 	 * that any writes committed by a transaction become immediately visible to
 	 * transactions which are already running. This unit test from the base
 	 * class has been overridden since embergraph has stronger semantics for

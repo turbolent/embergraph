@@ -441,11 +441,11 @@ public class EmbergraphRDFServletContextListener implements
 
         rdfContext = new EmbergraphRDFContext(config, indexManager);
 
-        // Used by BigdataBaseServlet
+        // Used by EmbergraphBaseServlet
         context.setAttribute(EmbergraphServlet.ATTRIBUTE_INDEX_MANAGER,
                 indexManager);
 
-        // Used by BigdataRDFBaseServlet
+        // Used by EmbergraphRDFBaseServlet
         context.setAttribute(EmbergraphRDFServlet.ATTRIBUTE_RDF_CONTEXT,
                 rdfContext);
 

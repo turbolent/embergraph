@@ -55,7 +55,7 @@ import org.openrdf.query.algebra.evaluation.QueryBindingSet;
  * this class and write test methods.
  * </p>
  * 
- * @see AbstractBigdataTestCase
+ * @see AbstractEmbergraphTestCase
  */
 public abstract class ProxyEmbergraphSailTestCase
     extends AbstractEmbergraphSailTestCase
@@ -87,7 +87,7 @@ public abstract class ProxyEmbergraphSailTestCase
 
     /**
      * Returns the delegate after first making sure that it is non-null and
-     * extends {@link AbstractBigdataTestCase}.
+     * extends {@link AbstractEmbergraphTestCase}.
      */
     public AbstractEmbergraphSailTestCase getOurDelegate() {
 

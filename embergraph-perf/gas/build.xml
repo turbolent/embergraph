@@ -28,7 +28,7 @@
 	</target>
 	
    <target name="run-gas-engine"
-          description="Run a Bigdata GAS Engine performance test.">
+          description="Run a Embergraph GAS Engine performance test.">
       <java classname="org.embergraph.rdf.graph.impl.bd.EmbergraphGASRunner"
             fork="true" failonerror="true"
             >

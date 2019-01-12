@@ -154,7 +154,7 @@ public class EmbergraphNTriplesParser extends RDFParserBase {
 	 * create object for resources, bNodes and literals.
 	 */
 	public EmbergraphNTriplesParser() {
-		// We are providing Bigdata-specific value factory to support parsing of RDR,
+		// We are providing Embergraph-specific value factory to support parsing of RDR,
 		// which require EmbergraphValueFactory instead of default Sesame implementation
 		// See https://jira.blazegraph.com/browse/BLZG-1322
 		super(EmbergraphValueFactoryImpl.getInstance(""));

@@ -340,7 +340,7 @@ public class ASTDeferredIVResolutionInitializer extends ASTVisitorBase {
      * {@link IVUtility#decode(String, String)} is used by
      * {@link ASTDeferredIVResolutionInitializer} to convert parsed AST
      * objects (ASTRDFLiteral and ASTNumericalLiteral) to IVs wrapped up as
-     * BigdataValues, which are required on later stages of processing.
+     * EmbergraphValues, which are required on later stages of processing.
      * <p>
      * There's no LexiconRelation available at this point, so all values
      * converted in inlined mode. {@link ASTDeferredIVResolution} converts these

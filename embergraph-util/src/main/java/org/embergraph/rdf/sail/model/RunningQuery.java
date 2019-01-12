@@ -20,7 +20,7 @@ package org.embergraph.rdf.sail.model;
 import java.util.UUID;
 
 /**
- * Metadata about running {@link org.embergraph.rdf.sail.webapp.BigdataRDFContext.AbstractQueryTask}s (this includes both
+ * Metadata about running {@link org.embergraph.rdf.sail.webapp.EmbergraphRDFContext.AbstractQueryTask}s (this includes both
  * queries and update requests).
  * 
  * Used to serialize the results for the REST interface in JSON, XML, etc.

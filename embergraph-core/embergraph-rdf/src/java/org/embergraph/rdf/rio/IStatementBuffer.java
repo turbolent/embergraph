@@ -120,7 +120,7 @@ public interface IStatementBuffer<F extends Statement> extends IBuffer<F> {
     /**
      * Set the canonicalizing map for blank nodes based on their ID. This allows
      * you to reuse the same map across multiple {@link IStatementBuffer}
-     * instances. For example, the {@link BigdataSail} does this so that the
+     * instances. For example, the {@link EmbergraphSail} does this so that the
      * same bnode map is used throughout the life of a {@link SailConnection}.
      * While RIO provides blank node correlation within a given source, it does
      * NOT provide blank node correlation across sources. You need to use this

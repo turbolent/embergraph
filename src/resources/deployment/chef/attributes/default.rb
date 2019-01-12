@@ -20,7 +20,7 @@ default['embergraph'][:properties] = node['embergraph'][:home] + "/RWStore.prope
 
 case node['embergraph'][:install_flavor]
 when "nss"
-	# The URL to the embergraph-nss bundle.  The following is the same bundle used by the Bigdata Brew installer:
+	# The URL to the embergraph-nss bundle.  The following is the same bundle used by the Embergraph Brew installer:
 	default['embergraph'][:url] = "http://bigdata.com/deploy/bigdata-#{node['embergraph'][:base_version]}.tgz"
 
 	# Where the jetty resourceBase is defined:
@@ -37,7 +37,7 @@ when "nss"
 		default['embergraph'][:svn_branch] = "https://svn.code.sf.net/p/bigdata/code/branches/DEPLOYMENT_BRANCH_1_3_1"
 	end
 when "tomcat"
-	# The Tomcat version to install.  The Bigdata Chef cookbook has only been tested with Version 7:
+	# The Tomcat version to install.  The Embergraph Chef cookbook has only been tested with Version 7:
 	default['tomcat'][:base_version] = 7
 
 	# JRE options options to set for Tomcat, the following is strongly recommended:
@@ -143,7 +143,7 @@ default['embergraph']['namespace.kb.spo.org.embergraph.btree.BTree.branchingFact
 default['embergraph']['rdf.sail.bufferCapacity'] = "100000"
 
 #
-# Bigdata supports over a hundred properties and only the most commonly configured
+# Embergraph supports over a hundred properties and only the most commonly configured
 # are set here as Chef attributes.  Any number of additional properties may be
 # configured by Chef. To do so, add the desired property in this (attributes/default.rb)
 # file as well as in the templates/default/RWStore.properties.erb file.  The

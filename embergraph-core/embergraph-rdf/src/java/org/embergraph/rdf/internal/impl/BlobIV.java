@@ -86,7 +86,7 @@ public class BlobIV<V extends EmbergraphValue> extends
 ////     * @see LangBOp
 ////     * @see DatatypeBOp
 ////     * @see FuncBOp
-////     * @see BigdataEvaluationStrategyImpl3
+////     * @see EmbergraphEvaluationStrategyImpl3
 ////     */
 ////    @Override
 //	final public boolean isNullIV() {

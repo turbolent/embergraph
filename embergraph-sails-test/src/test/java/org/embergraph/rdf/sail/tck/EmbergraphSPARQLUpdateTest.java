@@ -68,7 +68,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
     public EmbergraphSPARQLUpdateTest() {
     }
 
-//    public BigdataSparqlUpdateTest(String name) {
+//    public EmbergraphSparqlUpdateTest(String name) {
 //        super(name);
 //    }
     
@@ -154,7 +154,7 @@ public class EmbergraphSPARQLUpdateTest extends SPARQLUpdateTest {
         
         // make sure we are using a unique namespace in every run to avoid 
         // possible interference of value factories floating around
-        props.setProperty(Options.NAMESPACE, "BigdataSPARQLUpdate-"+UUID.randomUUID());
+        props.setProperty(Options.NAMESPACE, "EmbergraphSPARQLUpdate-"+UUID.randomUUID());
         
         return props;
         

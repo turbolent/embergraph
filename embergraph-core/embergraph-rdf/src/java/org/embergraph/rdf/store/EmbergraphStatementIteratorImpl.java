@@ -24,7 +24,7 @@ import org.embergraph.striterator.AbstractChunkedResolverator;
 import org.embergraph.striterator.IChunkedOrderedIterator;
 
 /**
- * Efficiently resolve term identifiers in Bigdata {@link ISPO}s to RDF
+ * Efficiently resolve term identifiers in Embergraph {@link ISPO}s to RDF
  * {@link EmbergraphValue}s.
  * 
  * @author <a href="mailto:thompsonbry@users.sourceforge.net">Bryan Thompson</a>
@@ -162,7 +162,7 @@ public class EmbergraphStatementIteratorImpl
             log.debug("Resolving " + ivs.size() + " term identifiers");
         
         /*
-         * Batch resolve term identifiers to BigdataValues, obtaining the
+         * Batch resolve term identifiers to EmbergraphValues, obtaining the
          * map that will be used to resolve term identifiers to terms for
          * this chunk.
          */

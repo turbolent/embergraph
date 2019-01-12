@@ -43,7 +43,7 @@ import com.fasterxml.jackson.core.JsonToken;
  * Abstract base class for SPARQL Results JSON Parsers. Provides a common
  * implementation of both boolean and tuple parsing.
  * <p>
- * Bigdata Changes:
+ * Embergraph Changes:
  * <ul>
  * <li>Changed the visibility of the method parseValue() from private to
  * protected so we could override it.</li>
@@ -257,7 +257,7 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
 								}
 
 /*
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Start Bigdata Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~								
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Start Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 								final Value value = parseValue(bindingStr, jp);
 								
@@ -304,7 +304,7 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
 //								nextBindingSet.addBinding(bindingStr, parseValue(type, value, lang, datatype));
 								
 /*
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Bigdata Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Embergraph Changes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
 							}
@@ -359,7 +359,7 @@ public abstract class SPARQLJSONParserBase extends QueryResultParserBase {
 	}
 
 	/**
-	 * New method added to support Bigdata Sid extension.
+	 * New method added to support Embergraph Sid extension.
 	 */
 	protected Value parseValue(final String bindingStr, final JsonParser jp) 
 	        throws QueryResultParseException, JsonParseException, IOException {

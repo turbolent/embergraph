@@ -620,7 +620,7 @@ public class FullTextIndex<V extends Comparable<V>> extends AbstractRelation {
      *       {@link #acquireExclusiveLock()} is not reentrant for zookeeper.
      */
     /*
-     * Note: BigdataRDFFullTextIndex overrides this method to setup IV support.
+     * Note: EmbergraphRDFFullTextIndex overrides this method to setup IV support.
      */
     @Override
     public void create() {

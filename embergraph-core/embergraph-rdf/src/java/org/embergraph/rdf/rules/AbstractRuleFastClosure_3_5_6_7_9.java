@@ -3,11 +3,7 @@
  Copyright (C) SYSTAP, LLC DBA Blazegraph 2006-2018. All rights reserved.
 Copyright (C) Embergraph contributors 2019. All rights reserved.
 
- Contact:
- SYSTAP, LLC DBA Blazegraph
- 2501 Calvert ST NW #106
- Washington, DC 20008
- licenses@blazegraph.com
+
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -280,7 +276,7 @@ public abstract class AbstractRuleFastClosure_3_5_6_7_9 extends Rule {
              * chunk into ascending Long[] order. However the methods that
              * compute {P} are a custom closure operator and they fix point {P}
              * in memory. To generalize with a chunked iterator there would need
-             * to be a backing BigdataLongSet and that will be less efficient
+             * to be a backing EmbergraphLongSet and that will be less efficient
              * unless the property hierarchy scale is very large.
              */
             final IV[] a = getSortedArray(getSet());
